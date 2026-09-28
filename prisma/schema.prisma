@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senhaHash String?
+  createdAt DateTime @default(now())
+
+  disciplinas   Disciplina[]
+  questoes      Questao[]
+  respostas     Resposta[]
+  flashcards    Flashcard[]
+  movimentacoes Movimentacao[]
+}
+
+model Disciplina {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  createdAt DateTime @default(now())
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  questoes Questao[]
+}
+
+model Questao {
+  id           Int      @id @default(autoincrement())
+  enunciado    String
+  explicacao   String?
+  tema         String?
+  dificuldade  String?
+  createdAt    DateTime @default(now())
+
+  usuarioId    Int
+  usuario      Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  disciplinaId Int
+  disciplina   Disciplina @relation(fields: [disciplinaId], references: [id], onDelete: Cascade)
+
+  alternativas Alternativa[]
+  respostas    Resposta[]
+}
+
+model Alternativa {
+  id        Int     @id @default(autoincrement())
+  texto     String
+  correta   Boolean @default(false)
+
+  questaoId Int
+  questao   Questao @relation(fields: [questaoId], references: [id], onDelete: Cascade)
+}
+
+model Resposta {
+  id           Int      @id @default(autoincrement())
+  correta      Boolean
+  respondidaAt DateTime @default(now())
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  questaoId Int
+  questao   Questao @relation(fields: [questaoId], references: [id], onDelete: Cascade)
+}
+
+model Flashcard {
+  id        Int      @id @default(autoincrement())
+  frente    String
+  verso     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+}
+
+model Movimentacao {
+  id        Int      @id @default(autoincrement())
+  descricao String
+  valor     Decimal  @db.Decimal(10, 2)
+  tipo      TipoMovimentacao
+  data      DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  usuarioId Int
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+}
+
+enum TipoMovimentacao {
+  RECEITA
+  DESPESA
+}
