@@ -396,7 +396,11 @@ export const ModelName = {
   Alternativa: 'Alternativa',
   Resposta: 'Resposta',
   Flashcard: 'Flashcard',
-  Movimentacao: 'Movimentacao'
+  Movimentacao: 'Movimentacao',
+  CasoClinico: 'CasoClinico',
+  ExameCaso: 'ExameCaso',
+  InvestigacaoCaso: 'InvestigacaoCaso',
+  RegistroInvestigacao: 'RegistroInvestigacao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "usuario" | "disciplina" | "questao" | "alternativa" | "resposta" | "flashcard" | "movimentacao"
+    modelProps: "usuario" | "disciplina" | "questao" | "alternativa" | "resposta" | "flashcard" | "movimentacao" | "casoClinico" | "exameCaso" | "investigacaoCaso" | "registroInvestigacao"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -934,6 +938,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CasoClinico: {
+      payload: Prisma.$CasoClinicoPayload<ExtArgs>
+      fields: Prisma.CasoClinicoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CasoClinicoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CasoClinicoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>
+        }
+        findFirst: {
+          args: Prisma.CasoClinicoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CasoClinicoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>
+        }
+        findMany: {
+          args: Prisma.CasoClinicoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>[]
+        }
+        create: {
+          args: Prisma.CasoClinicoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>
+        }
+        createMany: {
+          args: Prisma.CasoClinicoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CasoClinicoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>[]
+        }
+        delete: {
+          args: Prisma.CasoClinicoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>
+        }
+        update: {
+          args: Prisma.CasoClinicoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>
+        }
+        deleteMany: {
+          args: Prisma.CasoClinicoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CasoClinicoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CasoClinicoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>[]
+        }
+        upsert: {
+          args: Prisma.CasoClinicoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasoClinicoPayload>
+        }
+        aggregate: {
+          args: Prisma.CasoClinicoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCasoClinico>
+        }
+        groupBy: {
+          args: Prisma.CasoClinicoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CasoClinicoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CasoClinicoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CasoClinicoCountAggregateOutputType> | number
+        }
+      }
+    }
+    ExameCaso: {
+      payload: Prisma.$ExameCasoPayload<ExtArgs>
+      fields: Prisma.ExameCasoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ExameCasoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ExameCasoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>
+        }
+        findFirst: {
+          args: Prisma.ExameCasoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ExameCasoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>
+        }
+        findMany: {
+          args: Prisma.ExameCasoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>[]
+        }
+        create: {
+          args: Prisma.ExameCasoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>
+        }
+        createMany: {
+          args: Prisma.ExameCasoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ExameCasoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>[]
+        }
+        delete: {
+          args: Prisma.ExameCasoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>
+        }
+        update: {
+          args: Prisma.ExameCasoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ExameCasoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ExameCasoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ExameCasoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ExameCasoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ExameCasoPayload>
+        }
+        aggregate: {
+          args: Prisma.ExameCasoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateExameCaso>
+        }
+        groupBy: {
+          args: Prisma.ExameCasoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExameCasoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ExameCasoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ExameCasoCountAggregateOutputType> | number
+        }
+      }
+    }
+    InvestigacaoCaso: {
+      payload: Prisma.$InvestigacaoCasoPayload<ExtArgs>
+      fields: Prisma.InvestigacaoCasoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InvestigacaoCasoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InvestigacaoCasoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>
+        }
+        findFirst: {
+          args: Prisma.InvestigacaoCasoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InvestigacaoCasoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>
+        }
+        findMany: {
+          args: Prisma.InvestigacaoCasoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>[]
+        }
+        create: {
+          args: Prisma.InvestigacaoCasoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>
+        }
+        createMany: {
+          args: Prisma.InvestigacaoCasoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InvestigacaoCasoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>[]
+        }
+        delete: {
+          args: Prisma.InvestigacaoCasoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>
+        }
+        update: {
+          args: Prisma.InvestigacaoCasoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>
+        }
+        deleteMany: {
+          args: Prisma.InvestigacaoCasoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InvestigacaoCasoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InvestigacaoCasoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>[]
+        }
+        upsert: {
+          args: Prisma.InvestigacaoCasoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvestigacaoCasoPayload>
+        }
+        aggregate: {
+          args: Prisma.InvestigacaoCasoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInvestigacaoCaso>
+        }
+        groupBy: {
+          args: Prisma.InvestigacaoCasoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvestigacaoCasoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InvestigacaoCasoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvestigacaoCasoCountAggregateOutputType> | number
+        }
+      }
+    }
+    RegistroInvestigacao: {
+      payload: Prisma.$RegistroInvestigacaoPayload<ExtArgs>
+      fields: Prisma.RegistroInvestigacaoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RegistroInvestigacaoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RegistroInvestigacaoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>
+        }
+        findFirst: {
+          args: Prisma.RegistroInvestigacaoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RegistroInvestigacaoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>
+        }
+        findMany: {
+          args: Prisma.RegistroInvestigacaoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>[]
+        }
+        create: {
+          args: Prisma.RegistroInvestigacaoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>
+        }
+        createMany: {
+          args: Prisma.RegistroInvestigacaoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RegistroInvestigacaoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>[]
+        }
+        delete: {
+          args: Prisma.RegistroInvestigacaoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>
+        }
+        update: {
+          args: Prisma.RegistroInvestigacaoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>
+        }
+        deleteMany: {
+          args: Prisma.RegistroInvestigacaoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RegistroInvestigacaoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RegistroInvestigacaoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>[]
+        }
+        upsert: {
+          args: Prisma.RegistroInvestigacaoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistroInvestigacaoPayload>
+        }
+        aggregate: {
+          args: Prisma.RegistroInvestigacaoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRegistroInvestigacao>
+        }
+        groupBy: {
+          args: Prisma.RegistroInvestigacaoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RegistroInvestigacaoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RegistroInvestigacaoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RegistroInvestigacaoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1054,12 +1354,101 @@ export const MovimentacaoScalarFieldEnum = {
 export type MovimentacaoScalarFieldEnum = (typeof MovimentacaoScalarFieldEnum)[keyof typeof MovimentacaoScalarFieldEnum]
 
 
+export const CasoClinicoScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  area: 'area',
+  especialidade: 'especialidade',
+  dificuldade: 'dificuldade',
+  cenario: 'cenario',
+  queixaInicial: 'queixaInicial',
+  dadosIniciais: 'dadosIniciais',
+  anamnese: 'anamnese',
+  exameFisico: 'exameFisico',
+  sinaisVitais: 'sinaisVitais',
+  exames: 'exames',
+  evolucao: 'evolucao',
+  diagnosticoFinal: 'diagnosticoFinal',
+  explicacaoDiagnostico: 'explicacaoDiagnostico',
+  diagnosticosDiferenciais: 'diagnosticosDiferenciais',
+  pontosChave: 'pontosChave',
+  publicado: 'publicado',
+  geradoPorIA: 'geradoPorIA',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  autorId: 'autorId'
+} as const
+
+export type CasoClinicoScalarFieldEnum = (typeof CasoClinicoScalarFieldEnum)[keyof typeof CasoClinicoScalarFieldEnum]
+
+
+export const ExameCasoScalarFieldEnum = {
+  id: 'id',
+  casoId: 'casoId',
+  nome: 'nome',
+  categoria: 'categoria',
+  resultado: 'resultado',
+  interpretacao: 'interpretacao',
+  disponivel: 'disponivel',
+  ordem: 'ordem',
+  createdAt: 'createdAt'
+} as const
+
+export type ExameCasoScalarFieldEnum = (typeof ExameCasoScalarFieldEnum)[keyof typeof ExameCasoScalarFieldEnum]
+
+
+export const InvestigacaoCasoScalarFieldEnum = {
+  id: 'id',
+  casoId: 'casoId',
+  usuarioId: 'usuarioId',
+  status: 'status',
+  informacoesColetadas: 'informacoesColetadas',
+  hipotese: 'hipotese',
+  justificativa: 'justificativa',
+  avaliacao: 'avaliacao',
+  finalizado: 'finalizado',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvestigacaoCasoScalarFieldEnum = (typeof InvestigacaoCasoScalarFieldEnum)[keyof typeof InvestigacaoCasoScalarFieldEnum]
+
+
+export const RegistroInvestigacaoScalarFieldEnum = {
+  id: 'id',
+  investigacaoId: 'investigacaoId',
+  tipo: 'tipo',
+  titulo: 'titulo',
+  pergunta: 'pergunta',
+  resposta: 'resposta',
+  ordem: 'ordem',
+  createdAt: 'createdAt'
+} as const
+
+export type RegistroInvestigacaoScalarFieldEnum = (typeof RegistroInvestigacaoScalarFieldEnum)[keyof typeof RegistroInvestigacaoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -1076,6 +1465,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -1158,6 +1556,20 @@ export type EnumTipoMovimentacaoFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'TipoMovimentacao[]'
  */
 export type ListEnumTipoMovimentacaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoMovimentacao[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1268,6 +1680,10 @@ export type GlobalOmitConfig = {
   resposta?: Prisma.RespostaOmit
   flashcard?: Prisma.FlashcardOmit
   movimentacao?: Prisma.MovimentacaoOmit
+  casoClinico?: Prisma.CasoClinicoOmit
+  exameCaso?: Prisma.ExameCasoOmit
+  investigacaoCaso?: Prisma.InvestigacaoCasoOmit
+  registroInvestigacao?: Prisma.RegistroInvestigacaoOmit
 }
 
 /* Types for Logging */

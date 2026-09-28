@@ -55,7 +55,11 @@ export const ModelName = {
   Alternativa: 'Alternativa',
   Resposta: 'Resposta',
   Flashcard: 'Flashcard',
-  Movimentacao: 'Movimentacao'
+  Movimentacao: 'Movimentacao',
+  CasoClinico: 'CasoClinico',
+  ExameCaso: 'ExameCaso',
+  InvestigacaoCaso: 'InvestigacaoCaso',
+  RegistroInvestigacao: 'RegistroInvestigacao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -155,12 +159,101 @@ export const MovimentacaoScalarFieldEnum = {
 export type MovimentacaoScalarFieldEnum = (typeof MovimentacaoScalarFieldEnum)[keyof typeof MovimentacaoScalarFieldEnum]
 
 
+export const CasoClinicoScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  area: 'area',
+  especialidade: 'especialidade',
+  dificuldade: 'dificuldade',
+  cenario: 'cenario',
+  queixaInicial: 'queixaInicial',
+  dadosIniciais: 'dadosIniciais',
+  anamnese: 'anamnese',
+  exameFisico: 'exameFisico',
+  sinaisVitais: 'sinaisVitais',
+  exames: 'exames',
+  evolucao: 'evolucao',
+  diagnosticoFinal: 'diagnosticoFinal',
+  explicacaoDiagnostico: 'explicacaoDiagnostico',
+  diagnosticosDiferenciais: 'diagnosticosDiferenciais',
+  pontosChave: 'pontosChave',
+  publicado: 'publicado',
+  geradoPorIA: 'geradoPorIA',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  autorId: 'autorId'
+} as const
+
+export type CasoClinicoScalarFieldEnum = (typeof CasoClinicoScalarFieldEnum)[keyof typeof CasoClinicoScalarFieldEnum]
+
+
+export const ExameCasoScalarFieldEnum = {
+  id: 'id',
+  casoId: 'casoId',
+  nome: 'nome',
+  categoria: 'categoria',
+  resultado: 'resultado',
+  interpretacao: 'interpretacao',
+  disponivel: 'disponivel',
+  ordem: 'ordem',
+  createdAt: 'createdAt'
+} as const
+
+export type ExameCasoScalarFieldEnum = (typeof ExameCasoScalarFieldEnum)[keyof typeof ExameCasoScalarFieldEnum]
+
+
+export const InvestigacaoCasoScalarFieldEnum = {
+  id: 'id',
+  casoId: 'casoId',
+  usuarioId: 'usuarioId',
+  status: 'status',
+  informacoesColetadas: 'informacoesColetadas',
+  hipotese: 'hipotese',
+  justificativa: 'justificativa',
+  avaliacao: 'avaliacao',
+  finalizado: 'finalizado',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvestigacaoCasoScalarFieldEnum = (typeof InvestigacaoCasoScalarFieldEnum)[keyof typeof InvestigacaoCasoScalarFieldEnum]
+
+
+export const RegistroInvestigacaoScalarFieldEnum = {
+  id: 'id',
+  investigacaoId: 'investigacaoId',
+  tipo: 'tipo',
+  titulo: 'titulo',
+  pergunta: 'pergunta',
+  resposta: 'resposta',
+  ordem: 'ordem',
+  createdAt: 'createdAt'
+} as const
+
+export type RegistroInvestigacaoScalarFieldEnum = (typeof RegistroInvestigacaoScalarFieldEnum)[keyof typeof RegistroInvestigacaoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -177,4 +270,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

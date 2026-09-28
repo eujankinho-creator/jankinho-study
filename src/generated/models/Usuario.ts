@@ -221,6 +221,8 @@ export type UsuarioWhereInput = {
   respostas?: Prisma.RespostaListRelationFilter
   flashcards?: Prisma.FlashcardListRelationFilter
   movimentacoes?: Prisma.MovimentacaoListRelationFilter
+  casosCriados?: Prisma.CasoClinicoListRelationFilter
+  investigacoes?: Prisma.InvestigacaoCasoListRelationFilter
 }
 
 export type UsuarioOrderByWithRelationInput = {
@@ -234,6 +236,8 @@ export type UsuarioOrderByWithRelationInput = {
   respostas?: Prisma.RespostaOrderByRelationAggregateInput
   flashcards?: Prisma.FlashcardOrderByRelationAggregateInput
   movimentacoes?: Prisma.MovimentacaoOrderByRelationAggregateInput
+  casosCriados?: Prisma.CasoClinicoOrderByRelationAggregateInput
+  investigacoes?: Prisma.InvestigacaoCasoOrderByRelationAggregateInput
 }
 
 export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -250,6 +254,8 @@ export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
   respostas?: Prisma.RespostaListRelationFilter
   flashcards?: Prisma.FlashcardListRelationFilter
   movimentacoes?: Prisma.MovimentacaoListRelationFilter
+  casosCriados?: Prisma.CasoClinicoListRelationFilter
+  investigacoes?: Prisma.InvestigacaoCasoListRelationFilter
 }, "id" | "email">
 
 export type UsuarioOrderByWithAggregationInput = {
@@ -286,6 +292,8 @@ export type UsuarioCreateInput = {
   respostas?: Prisma.RespostaCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateInput = {
@@ -299,6 +307,8 @@ export type UsuarioUncheckedCreateInput = {
   respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoUncheckedCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUpdateInput = {
@@ -311,6 +321,8 @@ export type UsuarioUpdateInput = {
   respostas?: Prisma.RespostaUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateInput = {
@@ -324,6 +336,8 @@ export type UsuarioUncheckedUpdateInput = {
   respostas?: Prisma.RespostaUncheckedUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUncheckedUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateManyInput = {
@@ -476,6 +490,34 @@ export type UsuarioUpdateOneRequiredWithoutMovimentacoesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutMovimentacoesInput, Prisma.UsuarioUpdateWithoutMovimentacoesInput>, Prisma.UsuarioUncheckedUpdateWithoutMovimentacoesInput>
 }
 
+export type UsuarioCreateNestedOneWithoutCasosCriadosInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutCasosCriadosInput, Prisma.UsuarioUncheckedCreateWithoutCasosCriadosInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutCasosCriadosInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutCasosCriadosNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutCasosCriadosInput, Prisma.UsuarioUncheckedCreateWithoutCasosCriadosInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutCasosCriadosInput
+  upsert?: Prisma.UsuarioUpsertWithoutCasosCriadosInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutCasosCriadosInput, Prisma.UsuarioUpdateWithoutCasosCriadosInput>, Prisma.UsuarioUncheckedUpdateWithoutCasosCriadosInput>
+}
+
+export type UsuarioCreateNestedOneWithoutInvestigacoesInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInvestigacoesInput, Prisma.UsuarioUncheckedCreateWithoutInvestigacoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInvestigacoesInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+}
+
+export type UsuarioUpdateOneRequiredWithoutInvestigacoesNestedInput = {
+  create?: Prisma.XOR<Prisma.UsuarioCreateWithoutInvestigacoesInput, Prisma.UsuarioUncheckedCreateWithoutInvestigacoesInput>
+  connectOrCreate?: Prisma.UsuarioCreateOrConnectWithoutInvestigacoesInput
+  upsert?: Prisma.UsuarioUpsertWithoutInvestigacoesInput
+  connect?: Prisma.UsuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsuarioUpdateToOneWithWhereWithoutInvestigacoesInput, Prisma.UsuarioUpdateWithoutInvestigacoesInput>, Prisma.UsuarioUncheckedUpdateWithoutInvestigacoesInput>
+}
+
 export type UsuarioCreateWithoutDisciplinasInput = {
   nome: string
   email: string
@@ -485,6 +527,8 @@ export type UsuarioCreateWithoutDisciplinasInput = {
   respostas?: Prisma.RespostaCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutDisciplinasInput = {
@@ -497,6 +541,8 @@ export type UsuarioUncheckedCreateWithoutDisciplinasInput = {
   respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoUncheckedCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutDisciplinasInput = {
@@ -524,6 +570,8 @@ export type UsuarioUpdateWithoutDisciplinasInput = {
   respostas?: Prisma.RespostaUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutDisciplinasInput = {
@@ -536,6 +584,8 @@ export type UsuarioUncheckedUpdateWithoutDisciplinasInput = {
   respostas?: Prisma.RespostaUncheckedUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUncheckedUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutQuestoesInput = {
@@ -547,6 +597,8 @@ export type UsuarioCreateWithoutQuestoesInput = {
   respostas?: Prisma.RespostaCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutQuestoesInput = {
@@ -559,6 +611,8 @@ export type UsuarioUncheckedCreateWithoutQuestoesInput = {
   respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoUncheckedCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutQuestoesInput = {
@@ -586,6 +640,8 @@ export type UsuarioUpdateWithoutQuestoesInput = {
   respostas?: Prisma.RespostaUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutQuestoesInput = {
@@ -598,6 +654,8 @@ export type UsuarioUncheckedUpdateWithoutQuestoesInput = {
   respostas?: Prisma.RespostaUncheckedUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUncheckedUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutRespostasInput = {
@@ -609,6 +667,8 @@ export type UsuarioCreateWithoutRespostasInput = {
   questoes?: Prisma.QuestaoCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutRespostasInput = {
@@ -621,6 +681,8 @@ export type UsuarioUncheckedCreateWithoutRespostasInput = {
   questoes?: Prisma.QuestaoUncheckedCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoUncheckedCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutRespostasInput = {
@@ -648,6 +710,8 @@ export type UsuarioUpdateWithoutRespostasInput = {
   questoes?: Prisma.QuestaoUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutRespostasInput = {
@@ -660,6 +724,8 @@ export type UsuarioUncheckedUpdateWithoutRespostasInput = {
   questoes?: Prisma.QuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUncheckedUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutFlashcardsInput = {
@@ -671,6 +737,8 @@ export type UsuarioCreateWithoutFlashcardsInput = {
   questoes?: Prisma.QuestaoCreateNestedManyWithoutUsuarioInput
   respostas?: Prisma.RespostaCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutFlashcardsInput = {
@@ -683,6 +751,8 @@ export type UsuarioUncheckedCreateWithoutFlashcardsInput = {
   questoes?: Prisma.QuestaoUncheckedCreateNestedManyWithoutUsuarioInput
   respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutUsuarioInput
   movimentacoes?: Prisma.MovimentacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoUncheckedCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutFlashcardsInput = {
@@ -710,6 +780,8 @@ export type UsuarioUpdateWithoutFlashcardsInput = {
   questoes?: Prisma.QuestaoUpdateManyWithoutUsuarioNestedInput
   respostas?: Prisma.RespostaUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutFlashcardsInput = {
@@ -722,6 +794,8 @@ export type UsuarioUncheckedUpdateWithoutFlashcardsInput = {
   questoes?: Prisma.QuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
   respostas?: Prisma.RespostaUncheckedUpdateManyWithoutUsuarioNestedInput
   movimentacoes?: Prisma.MovimentacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUncheckedUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioCreateWithoutMovimentacoesInput = {
@@ -733,6 +807,8 @@ export type UsuarioCreateWithoutMovimentacoesInput = {
   questoes?: Prisma.QuestaoCreateNestedManyWithoutUsuarioInput
   respostas?: Prisma.RespostaCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioUncheckedCreateWithoutMovimentacoesInput = {
@@ -745,6 +821,8 @@ export type UsuarioUncheckedCreateWithoutMovimentacoesInput = {
   questoes?: Prisma.QuestaoUncheckedCreateNestedManyWithoutUsuarioInput
   respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutUsuarioInput
   flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoUncheckedCreateNestedManyWithoutAutorInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UsuarioCreateOrConnectWithoutMovimentacoesInput = {
@@ -772,6 +850,8 @@ export type UsuarioUpdateWithoutMovimentacoesInput = {
   questoes?: Prisma.QuestaoUpdateManyWithoutUsuarioNestedInput
   respostas?: Prisma.RespostaUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UsuarioUncheckedUpdateWithoutMovimentacoesInput = {
@@ -784,6 +864,148 @@ export type UsuarioUncheckedUpdateWithoutMovimentacoesInput = {
   questoes?: Prisma.QuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
   respostas?: Prisma.RespostaUncheckedUpdateManyWithoutUsuarioNestedInput
   flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUncheckedUpdateManyWithoutAutorNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutCasosCriadosInput = {
+  nome: string
+  email: string
+  senhaHash?: string | null
+  createdAt?: Date | string
+  disciplinas?: Prisma.DisciplinaCreateNestedManyWithoutUsuarioInput
+  questoes?: Prisma.QuestaoCreateNestedManyWithoutUsuarioInput
+  respostas?: Prisma.RespostaCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoCreateNestedManyWithoutUsuarioInput
+  investigacoes?: Prisma.InvestigacaoCasoCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioUncheckedCreateWithoutCasosCriadosInput = {
+  id?: number
+  nome: string
+  email: string
+  senhaHash?: string | null
+  createdAt?: Date | string
+  disciplinas?: Prisma.DisciplinaUncheckedCreateNestedManyWithoutUsuarioInput
+  questoes?: Prisma.QuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedCreateNestedManyWithoutUsuarioInput
+}
+
+export type UsuarioCreateOrConnectWithoutCasosCriadosInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutCasosCriadosInput, Prisma.UsuarioUncheckedCreateWithoutCasosCriadosInput>
+}
+
+export type UsuarioUpsertWithoutCasosCriadosInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutCasosCriadosInput, Prisma.UsuarioUncheckedUpdateWithoutCasosCriadosInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutCasosCriadosInput, Prisma.UsuarioUncheckedCreateWithoutCasosCriadosInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutCasosCriadosInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutCasosCriadosInput, Prisma.UsuarioUncheckedUpdateWithoutCasosCriadosInput>
+}
+
+export type UsuarioUpdateWithoutCasosCriadosInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disciplinas?: Prisma.DisciplinaUpdateManyWithoutUsuarioNestedInput
+  questoes?: Prisma.QuestaoUpdateManyWithoutUsuarioNestedInput
+  respostas?: Prisma.RespostaUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoUpdateManyWithoutUsuarioNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutCasosCriadosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disciplinas?: Prisma.DisciplinaUncheckedUpdateManyWithoutUsuarioNestedInput
+  questoes?: Prisma.QuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  respostas?: Prisma.RespostaUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  investigacoes?: Prisma.InvestigacaoCasoUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UsuarioCreateWithoutInvestigacoesInput = {
+  nome: string
+  email: string
+  senhaHash?: string | null
+  createdAt?: Date | string
+  disciplinas?: Prisma.DisciplinaCreateNestedManyWithoutUsuarioInput
+  questoes?: Prisma.QuestaoCreateNestedManyWithoutUsuarioInput
+  respostas?: Prisma.RespostaCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoCreateNestedManyWithoutAutorInput
+}
+
+export type UsuarioUncheckedCreateWithoutInvestigacoesInput = {
+  id?: number
+  nome: string
+  email: string
+  senhaHash?: string | null
+  createdAt?: Date | string
+  disciplinas?: Prisma.DisciplinaUncheckedCreateNestedManyWithoutUsuarioInput
+  questoes?: Prisma.QuestaoUncheckedCreateNestedManyWithoutUsuarioInput
+  respostas?: Prisma.RespostaUncheckedCreateNestedManyWithoutUsuarioInput
+  flashcards?: Prisma.FlashcardUncheckedCreateNestedManyWithoutUsuarioInput
+  movimentacoes?: Prisma.MovimentacaoUncheckedCreateNestedManyWithoutUsuarioInput
+  casosCriados?: Prisma.CasoClinicoUncheckedCreateNestedManyWithoutAutorInput
+}
+
+export type UsuarioCreateOrConnectWithoutInvestigacoesInput = {
+  where: Prisma.UsuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInvestigacoesInput, Prisma.UsuarioUncheckedCreateWithoutInvestigacoesInput>
+}
+
+export type UsuarioUpsertWithoutInvestigacoesInput = {
+  update: Prisma.XOR<Prisma.UsuarioUpdateWithoutInvestigacoesInput, Prisma.UsuarioUncheckedUpdateWithoutInvestigacoesInput>
+  create: Prisma.XOR<Prisma.UsuarioCreateWithoutInvestigacoesInput, Prisma.UsuarioUncheckedCreateWithoutInvestigacoesInput>
+  where?: Prisma.UsuarioWhereInput
+}
+
+export type UsuarioUpdateToOneWithWhereWithoutInvestigacoesInput = {
+  where?: Prisma.UsuarioWhereInput
+  data: Prisma.XOR<Prisma.UsuarioUpdateWithoutInvestigacoesInput, Prisma.UsuarioUncheckedUpdateWithoutInvestigacoesInput>
+}
+
+export type UsuarioUpdateWithoutInvestigacoesInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disciplinas?: Prisma.DisciplinaUpdateManyWithoutUsuarioNestedInput
+  questoes?: Prisma.QuestaoUpdateManyWithoutUsuarioNestedInput
+  respostas?: Prisma.RespostaUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUpdateManyWithoutAutorNestedInput
+}
+
+export type UsuarioUncheckedUpdateWithoutInvestigacoesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  disciplinas?: Prisma.DisciplinaUncheckedUpdateManyWithoutUsuarioNestedInput
+  questoes?: Prisma.QuestaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  respostas?: Prisma.RespostaUncheckedUpdateManyWithoutUsuarioNestedInput
+  flashcards?: Prisma.FlashcardUncheckedUpdateManyWithoutUsuarioNestedInput
+  movimentacoes?: Prisma.MovimentacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  casosCriados?: Prisma.CasoClinicoUncheckedUpdateManyWithoutAutorNestedInput
 }
 
 
@@ -797,6 +1019,8 @@ export type UsuarioCountOutputType = {
   respostas: number
   flashcards: number
   movimentacoes: number
+  casosCriados: number
+  investigacoes: number
 }
 
 export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -805,6 +1029,8 @@ export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   respostas?: boolean | UsuarioCountOutputTypeCountRespostasArgs
   flashcards?: boolean | UsuarioCountOutputTypeCountFlashcardsArgs
   movimentacoes?: boolean | UsuarioCountOutputTypeCountMovimentacoesArgs
+  casosCriados?: boolean | UsuarioCountOutputTypeCountCasosCriadosArgs
+  investigacoes?: boolean | UsuarioCountOutputTypeCountInvestigacoesArgs
 }
 
 /**
@@ -852,6 +1078,20 @@ export type UsuarioCountOutputTypeCountMovimentacoesArgs<ExtArgs extends runtime
   where?: Prisma.MovimentacaoWhereInput
 }
 
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountCasosCriadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CasoClinicoWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountInvestigacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvestigacaoCasoWhereInput
+}
+
 
 export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -864,6 +1104,8 @@ export type UsuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   respostas?: boolean | Prisma.Usuario$respostasArgs<ExtArgs>
   flashcards?: boolean | Prisma.Usuario$flashcardsArgs<ExtArgs>
   movimentacoes?: boolean | Prisma.Usuario$movimentacoesArgs<ExtArgs>
+  casosCriados?: boolean | Prisma.Usuario$casosCriadosArgs<ExtArgs>
+  investigacoes?: boolean | Prisma.Usuario$investigacoesArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
 
@@ -898,6 +1140,8 @@ export type UsuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   respostas?: boolean | Prisma.Usuario$respostasArgs<ExtArgs>
   flashcards?: boolean | Prisma.Usuario$flashcardsArgs<ExtArgs>
   movimentacoes?: boolean | Prisma.Usuario$movimentacoesArgs<ExtArgs>
+  casosCriados?: boolean | Prisma.Usuario$casosCriadosArgs<ExtArgs>
+  investigacoes?: boolean | Prisma.Usuario$investigacoesArgs<ExtArgs>
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -911,6 +1155,8 @@ export type $UsuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     respostas: Prisma.$RespostaPayload<ExtArgs>[]
     flashcards: Prisma.$FlashcardPayload<ExtArgs>[]
     movimentacoes: Prisma.$MovimentacaoPayload<ExtArgs>[]
+    casosCriados: Prisma.$CasoClinicoPayload<ExtArgs>[]
+    investigacoes: Prisma.$InvestigacaoCasoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1317,6 +1563,8 @@ export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends runtime.
   respostas<T extends Prisma.Usuario$respostasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$respostasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RespostaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   flashcards<T extends Prisma.Usuario$flashcardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$flashcardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FlashcardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   movimentacoes<T extends Prisma.Usuario$movimentacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$movimentacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovimentacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  casosCriados<T extends Prisma.Usuario$casosCriadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$casosCriadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasoClinicoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  investigacoes<T extends Prisma.Usuario$investigacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Usuario$investigacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvestigacaoCasoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1856,6 +2104,54 @@ export type Usuario$movimentacoesArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.MovimentacaoScalarFieldEnum | Prisma.MovimentacaoScalarFieldEnum[]
+}
+
+/**
+ * Usuario.casosCriados
+ */
+export type Usuario$casosCriadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasoClinico
+   */
+  select?: Prisma.CasoClinicoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasoClinico
+   */
+  omit?: Prisma.CasoClinicoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasoClinicoInclude<ExtArgs> | null
+  where?: Prisma.CasoClinicoWhereInput
+  orderBy?: Prisma.CasoClinicoOrderByWithRelationInput | Prisma.CasoClinicoOrderByWithRelationInput[]
+  cursor?: Prisma.CasoClinicoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CasoClinicoScalarFieldEnum | Prisma.CasoClinicoScalarFieldEnum[]
+}
+
+/**
+ * Usuario.investigacoes
+ */
+export type Usuario$investigacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InvestigacaoCaso
+   */
+  select?: Prisma.InvestigacaoCasoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InvestigacaoCaso
+   */
+  omit?: Prisma.InvestigacaoCasoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvestigacaoCasoInclude<ExtArgs> | null
+  where?: Prisma.InvestigacaoCasoWhereInput
+  orderBy?: Prisma.InvestigacaoCasoOrderByWithRelationInput | Prisma.InvestigacaoCasoOrderByWithRelationInput[]
+  cursor?: Prisma.InvestigacaoCasoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvestigacaoCasoScalarFieldEnum | Prisma.InvestigacaoCasoScalarFieldEnum[]
 }
 
 /**

@@ -52,3 +52,23 @@ export type Flashcard = Prisma.FlashcardModel
  * 
  */
 export type Movimentacao = Prisma.MovimentacaoModel
+/**
+ * Model CasoClinico
+ * 
+ */
+export type CasoClinico = Prisma.CasoClinicoModel
+/**
+ * Model ExameCaso
+ * 
+ */
+export type ExameCaso = Prisma.ExameCasoModel
+/**
+ * Model InvestigacaoCaso
+ * 
+ */
+export type InvestigacaoCaso = Prisma.InvestigacaoCasoModel
+/**
+ * Model RegistroInvestigacao
+ * 
+ */
+export type RegistroInvestigacao = Prisma.RegistroInvestigacaoModel
