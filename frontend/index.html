@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -8,219 +8,889 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Jankinho Study</title>
+  <title>Dashboard | Jankinho Study</title>
 
   <link
     rel="stylesheet"
-    href="/css/auth.css"
+    href="/css/app.css"
   >
 </head>
 
 <body>
 
-  <main class="auth-page">
+  <!-- SIDEBAR DESKTOP -->
 
-    <div class="glow glow-top"></div>
-    <div class="glow glow-bottom"></div>
+  <aside class="sidebar">
 
-    <section class="auth-container">
+    <a
+      href="/"
+      class="sidebar-logo"
+    >
 
-      <div class="brand">
+      <div class="logo-box">
+        J
+      </div>
 
-        <div class="logo">
-          J
+      <div>
+        <strong>
+          Jankinho
+        </strong>
+
+        <span>
+          Study
+        </span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
         </div>
 
-        <h1>
-          Jankinho Study
-        </h1>
+        <a
+          href="/"
+          class="menu-item active"
+        >
+          <span>⌂</span>
+          Dashboard
+        </a>
 
-        <p>
-          Seu espa&ccedil;o para estudar melhor.
-        </p>
+        <a
+          href="/questoes"
+          class="menu-item"
+        >
+          <span>▣</span>
+          Questões
+        </a>
+
+        <a
+          href="/flashcards"
+          class="menu-item"
+        >
+          <span>▤</span>
+          Flashcards
+        </a>
+
+        <a
+          href="/casos"
+          class="menu-item"
+        >
+          <span>⚕</span>
+          Casos Clínicos
+        </a>
+
+        <a
+          href="/laboratorio"
+          class="menu-item"
+        >
+          <span>⚗</span>
+          Laboratório
+        </a>
+
+        <a
+          href="/anatomia"
+          class="menu-item"
+        >
+          <span>🧬</span>
+          Anatomia 3D
+        </a>
+
+        <a
+          href="/evolucao"
+          class="menu-item"
+        >
+          <span>✎</span>
+          Evolução
+        </a>
 
       </div>
 
 
-      <div class="card">
+      <div class="menu-group">
 
-        <div class="card-content">
+        <div class="menu-title">
+          Análise
+        </div>
 
-          <span class="badge">
-            Migra&ccedil;&atilde;o
+        <a
+          href="/desempenho"
+          class="menu-item"
+        >
+          <span>◒</span>
+          Desempenho
+        </a>
+
+        <a
+          href="/ranking"
+          class="menu-item"
+        >
+          <span>♛</span>
+          Ranking
+        </a>
+
+        <a
+          href="/relatorios"
+          class="menu-item"
+        >
+          <span>▥</span>
+          Relatórios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a
+          href="/financas"
+          class="menu-item"
+        >
+          <span>R$</span>
+          Finanças
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        title="Sair"
+      >
+        ↪
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MENU MOBILE -->
+
+  <div
+    id="mobileOverlay"
+    class="mobile-overlay"
+  >
+
+    <button
+      id="fecharOverlay"
+      class="overlay-background"
+      aria-label="Fechar menu"
+    ></button>
+
+    <aside class="mobile-sidebar">
+
+      <div class="mobile-logo-row">
+
+        <a
+          href="/"
+          class="sidebar-logo"
+        >
+
+          <div class="logo-box">
+            J
+          </div>
+
+          <div>
+            <strong>
+              Jankinho
+            </strong>
+
+            <span>
+              Study
+            </span>
+          </div>
+
+        </a>
+
+        <button
+          id="fecharMenu"
+          class="mobile-close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="sidebar-menu">
+
+        <div class="menu-group">
+
+          <div class="menu-title">
+            Estudo
+          </div>
+
+          <a href="/" class="menu-item active">
+            <span>⌂</span>
+            Dashboard
+          </a>
+
+          <a href="/questoes" class="menu-item">
+            <span>▣</span>
+            Questões
+          </a>
+
+          <a href="/flashcards" class="menu-item">
+            <span>▤</span>
+            Flashcards
+          </a>
+
+          <a href="/casos" class="menu-item">
+            <span>⚕</span>
+            Casos Clínicos
+          </a>
+
+          <a href="/laboratorio" class="menu-item">
+            <span>⚗</span>
+            Laboratório
+          </a>
+
+          <a href="/anatomia" class="menu-item">
+            <span>🧬</span>
+            Anatomia 3D
+          </a>
+
+          <a href="/evolucao" class="menu-item">
+            <span>✎</span>
+            Evolução
+          </a>
+
+        </div>
+
+
+        <div class="menu-group">
+
+          <div class="menu-title">
+            Análise
+          </div>
+
+          <a href="/desempenho" class="menu-item">
+            <span>◒</span>
+            Desempenho
+          </a>
+
+          <a href="/ranking" class="menu-item">
+            <span>♛</span>
+            Ranking
+          </a>
+
+          <a href="/relatorios" class="menu-item">
+            <span>▥</span>
+            Relatórios
+          </a>
+
+        </div>
+
+
+        <div class="menu-group">
+
+          <div class="menu-title">
+            Pessoal
+          </div>
+
+          <a href="/financas" class="menu-item">
+            <span>R$</span>
+            Finanças
+          </a>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+
+  <!-- ÁREA PRINCIPAL -->
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <button
+        id="abrirMenu"
+        class="mobile-menu-button"
+      >
+        ☰
+      </button>
+
+      <div class="header-title">
+        Dashboard
+      </div>
+
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
           </span>
 
-          <h2>
-            Autentica&ccedil;&atilde;o funcionando
-          </h2>
+        </div>
 
-          <p class="description">
-            Login conclu&iacute;do com sucesso.
-            O dashboard ser&aacute; migrado na pr&oacute;xima etapa.
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+      <!-- HERO -->
+
+      <section class="hero">
+
+        <div class="hero-glow"></div>
+
+        <div>
+
+          <div class="hero-label">
+            <span></span>
+            Jankinho Study
+          </div>
+
+          <h1>
+            Seu espaço para<br>
+            estudar melhor.
+          </h1>
+
+          <p id="mensagemHero">
+            Carregando seus dados...
           </p>
 
+        </div>
+
+
+        <div class="hero-actions">
+
+          <a
+            href="/questoes"
+            class="button-primary"
+          >
+            Resolver questões →
+          </a>
+
+          <a
+            href="/flashcards"
+            class="button-secondary"
+          >
+            Flashcards
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- MÉTRICAS -->
+
+      <section class="metrics">
+
+        <div class="metric-card">
+
+          <div>
+
+            <span class="metric-label">
+              Questões
+            </span>
+
+            <strong id="totalQuestoes">
+              --
+            </strong>
+
+            <small>
+              disponíveis
+            </small>
+
+          </div>
+
+          <div class="metric-icon">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="metric-card">
+
+          <div>
+
+            <span class="metric-label">
+              Respondidas
+            </span>
+
+            <strong id="totalRespondidas">
+              --
+            </strong>
+
+            <small>
+              por você
+            </small>
+
+          </div>
+
+          <div class="metric-icon">
+            ◒
+          </div>
+
+        </div>
+
+
+        <div class="metric-card">
+
+          <div>
+
+            <span class="metric-label">
+              Acertos
+            </span>
+
+            <strong
+              id="totalAcertos"
+              class="green"
+            >
+              --
+            </strong>
+
+            <small>
+              respostas corretas
+            </small>
+
+          </div>
+
+          <div class="metric-icon green-box">
+            ↑
+          </div>
+
+        </div>
+
+
+        <div class="metric-card">
+
+          <div>
+
+            <span class="metric-label">
+              Aproveitamento
+            </span>
+
+            <strong
+              id="percentual"
+              class="orange"
+            >
+              --
+            </strong>
+
+            <small>
+              desempenho geral
+            </small>
+
+          </div>
+
+          <div class="metric-icon orange-box">
+            %
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- MEIO -->
+
+      <section class="dashboard-grid">
+
+        <!-- DISCIPLINAS -->
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <strong>
+                Desempenho por disciplina
+              </strong>
+
+              <span>
+                Onde você está concentrando seus estudos
+              </span>
+
+            </div>
+
+            <a href="/desempenho">
+              Ver detalhes →
+            </a>
+
+          </div>
 
           <div
-            id="usuario"
-            class="description"
-            style="margin-top: 24px;"
+            id="disciplinasContainer"
+            class="disciplinas-list"
           >
-            Carregando usu&aacute;rio...
+
+            <div class="empty">
+              Carregando...
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PROGRESSO -->
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <strong>
+                Seu progresso
+              </strong>
+
+              <span>
+                Questões já exploradas
+              </span>
+
+            </div>
+
           </div>
 
 
-          <button
-            id="sairBtn"
-            class="btn-primary"
-            type="button"
-            style="margin-top: 24px;"
-          >
-            Sair
-          </button>
+          <div class="progress-circle-wrapper">
+
+            <div class="progress-circle">
+
+              <svg viewBox="0 0 100 100">
+
+                <circle
+                  class="circle-background"
+                  cx="50"
+                  cy="50"
+                  r="42"
+                ></circle>
+
+                <circle
+                  id="progressCircle"
+                  class="circle-progress"
+                  cx="50"
+                  cy="50"
+                  r="42"
+                ></circle>
+
+              </svg>
+
+              <div class="progress-text">
+
+                <strong id="progressoPercentual">
+                  0%
+                </strong>
+
+                <span>
+                  explorado
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="progress-info">
+
+            <div>
+
+              <span>
+                Respondidas
+              </span>
+
+              <strong id="progressoRespondidas">
+                0
+              </strong>
+
+            </div>
+
+            <div class="progress-divider"></div>
+
+            <div>
+
+              <span>
+                Disponíveis
+              </span>
+
+              <strong id="progressoDisponiveis">
+                0
+              </strong>
+
+            </div>
+
+          </div>
 
         </div>
 
-      </div>
+      </section>
 
 
-      <div class="footer">
-        Jankinho Study &bull; Estude. Pratique. Evolua.
-      </div>
+      <!-- INFERIOR -->
 
-    </section>
+      <section class="bottom-grid">
 
-  </main>
+        <!-- ATIVIDADE -->
 
+        <div class="panel">
 
-  <script>
+          <div class="panel-header">
 
-    async function carregarUsuario() {
+            <div>
 
-      try {
+              <strong>
+                Atividade recente
+              </strong>
 
-        const resposta =
-          await fetch(
-            "/api/auth/me",
-            {
-              method: "GET",
-              credentials: "same-origin"
-            }
-          );
+              <span>
+                Suas últimas respostas
+              </span>
 
+            </div>
 
-        if (!resposta.ok) {
+            <a href="/desempenho">
+              Ver tudo →
+            </a>
 
-          window.location.href =
-            "/login.html";
+          </div>
 
-          return;
-        }
+          <div id="atividadeContainer">
 
+            <div class="empty">
+              Carregando...
+            </div>
 
-        const dados =
-          await resposta.json();
+          </div>
 
-
-        if (
-          !dados.autenticado ||
-          !dados.usuario
-        ) {
-
-          window.location.href =
-            "/login.html";
-
-          return;
-        }
+        </div>
 
 
-        const usuario =
-          document.getElementById(
-            "usuario"
-          );
+        <div class="small-grid">
+
+          <!-- FINANÇAS -->
+
+          <div class="panel small-panel">
+
+            <div class="finance-header">
+
+              <div>
+
+                <strong>
+                  Finanças
+                </strong>
+
+                <span>
+                  Visão geral
+                </span>
+
+              </div>
+
+              <div class="finance-icon">
+                R$
+              </div>
+
+            </div>
 
 
-        usuario.textContent =
-          dados.usuario.nome +
-          " \u2022 " +
-          dados.usuario.email;
-
-      }
-      catch (erro) {
-
-        console.error(
-          "Erro ao carregar usuario:",
-          erro
-        );
+            <strong
+              id="saldo"
+              class="saldo"
+            >
+              R$ 0,00
+            </strong>
 
 
-        const usuario =
-          document.getElementById(
-            "usuario"
-          );
+            <div class="finance-values">
+
+              <div>
+
+                <span>
+                  Receitas
+                </span>
+
+                <strong
+                  id="receitas"
+                  class="green"
+                >
+                  R$ 0,00
+                </strong>
+
+              </div>
+
+              <div>
+
+                <span>
+                  Despesas
+                </span>
+
+                <strong
+                  id="despesas"
+                  class="red"
+                >
+                  R$ 0,00
+                </strong>
+
+              </div>
+
+            </div>
 
 
-        usuario.textContent =
-          "Nao foi possivel carregar o usuario.";
+            <a
+              href="/financas"
+              class="panel-link"
+            >
+              Abrir finanças →
+            </a>
 
-      }
-
-    }
-
-
-    async function sair() {
-
-      const botao =
-        document.getElementById(
-          "sairBtn"
-        );
+          </div>
 
 
-      try {
+          <!-- ACESSO RÁPIDO -->
 
-        botao.disabled = true;
-        botao.textContent = "Saindo...";
+          <div class="panel small-panel">
 
+            <strong>
+              Acesso rápido
+            </strong>
 
-        await fetch(
-          "/api/auth/logout",
-          {
-            method: "POST",
-            credentials: "same-origin"
-          }
-        );
+            <span class="panel-subtitle">
+              Continue de onde parou
+            </span>
 
 
-        window.location.href =
-          "/login.html";
+            <div class="quick-links">
 
-      }
-      catch (erro) {
+              <a href="/questoes">
 
-        console.error(
-          "Erro ao sair:",
-          erro
-        );
+                <div class="quick-icon orange-box">
+                  ✓
+                </div>
 
+                <div>
 
-        botao.disabled = false;
-        botao.textContent = "Sair";
+                  <strong>
+                    Resolver questões
+                  </strong>
 
-      }
+                  <span>
+                    Praticar agora
+                  </span>
 
-    }
+                </div>
 
+                <b>→</b>
 
-    document
-      .getElementById("sairBtn")
-      .addEventListener(
-        "click",
-        sair
-      );
+              </a>
 
 
-    carregarUsuario();
+              <a href="/flashcards">
 
-  </script>
+                <div class="quick-icon">
+                  ▣
+                </div>
+
+                <div>
+
+                  <strong>
+                    Revisar flashcards
+                  </strong>
+
+                  <span>
+                    Reforçar conteúdo
+                  </span>
+
+                </div>
+
+                <b>→</b>
+
+              </a>
+
+
+              <a href="/desempenho">
+
+                <div class="quick-icon">
+                  ◒
+                </div>
+
+                <div>
+
+                  <strong>
+                    Ver desempenho
+                  </strong>
+
+                  <span>
+                    Acompanhar evolução
+                  </span>
+
+                </div>
+
+                <b>→</b>
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/dashboard.js"></script>
 
 </body>
 </html>

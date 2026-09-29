@@ -1,4 +1,4 @@
-﻿const form =
+const form =
   document.getElementById("cadastroForm");
 
 const nomeInput =
@@ -91,7 +91,7 @@ form.addEventListener(
     if (senha !== confirmarSenha) {
 
       mostrarErro(
-        "As senhas nÃ£o coincidem."
+        "As senhas não coincidem."
       );
 
       return;
@@ -138,7 +138,7 @@ form.addEventListener(
 
         throw new Error(
           dados.error ||
-          "NÃ£o foi possÃ­vel criar sua conta."
+          "Não foi possível criar sua conta."
         );
 
       }
@@ -153,7 +153,7 @@ form.addEventListener(
       mostrarErro(
         error instanceof Error
           ? error.message
-          : "NÃ£o foi possÃ­vel criar sua conta."
+          : "Não foi possível criar sua conta."
       );
 
     }

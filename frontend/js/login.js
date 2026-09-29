@@ -1,4 +1,4 @@
-﻿const form =
+const form =
   document.getElementById("loginForm");
 
 const emailInput =
@@ -99,7 +99,7 @@ form.addEventListener(
 
         throw new Error(
           dados.error ||
-          "NÃ£o foi possÃ­vel entrar."
+          "Não foi possível entrar."
         );
 
       }
@@ -114,7 +114,7 @@ form.addEventListener(
       mostrarErro(
         error instanceof Error
           ? error.message
-          : "NÃ£o foi possÃ­vel entrar."
+          : "Não foi possível entrar."
       );
 
     }
