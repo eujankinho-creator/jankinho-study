@@ -80,11 +80,6 @@ const gruposMenu: MenuGroup[] = [
         label: "Ranking",
         icon: "♛",
       },
-      {
-        href: "/relatorios",
-        label: "Relatórios",
-        icon: "▥",
-      },
     ],
   },
   {
@@ -119,7 +114,7 @@ function tituloPagina(pathname: string) {
   if (pathname.startsWith("/evolucao")) return "Evolução";
   if (pathname.startsWith("/desempenho")) return "Desempenho";
   if (pathname.startsWith("/ranking")) return "Ranking";
-  if (pathname.startsWith("/relatorios")) return "Relatórios";
+
   if (pathname.startsWith("/financas")) return "Finanças";
 
   return "Jankinho Study";
