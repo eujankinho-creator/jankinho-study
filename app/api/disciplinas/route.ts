@@ -1,9 +1,23 @@
 import { NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
+import { obterUsuarioId } from "@/lib/auth";
 
 export async function GET() {
   try {
+    const usuarioId = await obterUsuarioId();
+
+    if (!usuarioId) {
+      return NextResponse.json(
+        { error: "Não autenticado." },
+        { status: 401 }
+      );
+    }
+
     const disciplinas = await prisma.disciplina.findMany({
+      where: {
+        usuarioId,
+      },
       orderBy: {
         nome: "asc",
       },
@@ -26,8 +40,16 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const usuarioId = await obterUsuarioId();
 
+    if (!usuarioId) {
+      return NextResponse.json(
+        { error: "Não autenticado." },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json();
     const nome = String(body.nome || "").trim();
 
     if (!nome) {
@@ -48,6 +70,7 @@ export async function POST(request: Request) {
             equals: nome,
             mode: "insensitive",
           },
+          usuarioId,
         },
       });
 
@@ -57,7 +80,8 @@ export async function POST(request: Request) {
 
     const disciplina = await prisma.disciplina.create({
       data: {
-        nome: nome,
+        nome,
+        usuarioId,
       },
     });
 

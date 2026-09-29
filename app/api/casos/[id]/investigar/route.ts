@@ -366,52 +366,45 @@ export async function POST(request: Request) {
           },
         });
 
-      const informacoesAtuais =
+        const informacoesAtuais =
         investigacao.informacoesColetadas &&
-        typeof investigacao.informacoesColetadas ===
-          "object" &&
-        !Array.isArray(
-          investigacao.informacoesColetadas
-        )
-          ? (investigacao.informacoesColetadas as Record<
-              string,
-              unknown
-            >)
+        typeof investigacao.informacoesColetadas === "object" &&
+        !Array.isArray(investigacao.informacoesColetadas)
+          ? (investigacao.informacoesColetadas as Record<string, any>)
           : {};
 
-      const examesColetados = Array.isArray(
-        informacoesAtuais.exames
-      )
-        ? [
-            ...(informacoesAtuais.exames as unknown[]),
-            {
-              nome: nomeExame,
-              resultado: respostaExame,
-            },
-          ]
-        : [
-            {
-              nome: nomeExame,
-              resultado: respostaExame,
-            },
-          ];
+          const examesColetados = Array.isArray(informacoesAtuais.exames)
+          ? [
+              ...informacoesAtuais.exames,
+              {
+                nome: nomeExame,
+                resultado: respostaExame,
+              },
+            ]
+          : [
+              {
+                nome: nomeExame,
+                resultado: respostaExame,
+              },
+            ];
+        
+        const informacoesAtualizadas = {
+          ...informacoesAtuais,
+          exames: examesColetados,
+        };
+        
+        await prisma.investigacaoCaso.update({
+          where: {
+            id: investigacao.id,
+          },
+          data: {
+            informacoesColetadas: JSON.parse(
+              JSON.stringify(informacoesAtualizadas)
+            ),
+          },
+        });
 
-      const informacoesAtualizadas = {
-        ...informacoesAtuais,
-        exames: examesColetados,
-      };
-
-      await prisma.investigacaoCaso.update({
-        where: {
-          id: investigacao.id,
-        },
-        data: {
-          informacoesColetadas:
-            informacoesAtualizadas,
-        },
-      });
-
-      const investigacaoAtualizada =
+        const investigacaoAtualizada =
         await prisma.investigacaoCaso.findUnique({
           where: {
             id: investigacao.id,
@@ -554,15 +547,6 @@ export async function POST(request: Request) {
       [tipo]: resposta,
     };
 
-    await prisma.investigacaoCaso.update({
-      where: {
-        id: investigacao.id,
-      },
-      data: {
-        informacoesColetadas:
-          informacoesAtualizadas,
-      },
-    });
 
     const investigacaoAtualizada =
       await prisma.investigacaoCaso.findUnique({
