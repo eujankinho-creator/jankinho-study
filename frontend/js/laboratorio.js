@@ -1,4 +1,4 @@
-﻿const initialState = {
+const initialState = {
   fc: 72,
   fr: 16,
 
@@ -1137,15 +1137,86 @@ function renderControls() {
                 .slider;
 
 
-            state.values[
-              field
-            ] =
+            const value =
               Number(
                 input.value
               );
 
 
-            renderControls();
+            state.values[
+              field
+            ] =
+              value;
+
+
+            const container =
+              input.closest(
+                ".slider-control"
+              );
+
+
+            if (container) {
+
+              const numero =
+                container.querySelector(
+                  ".slider-number"
+                );
+
+
+              const category =
+                categories.find(
+                  function (item) {
+
+                    return (
+                      item.id ===
+                      state.category
+                    );
+
+                  }
+                );
+
+
+              const slider =
+                category
+                  ? category.sliders.find(
+                      function (item) {
+
+                        return (
+                          item.field ===
+                          field
+                        );
+
+                      }
+                    )
+                  : null;
+
+
+              if (
+                numero &&
+                slider
+              ) {
+
+                let textoValor =
+                  value;
+
+
+                if (
+                  slider.step < 1
+                ) {
+
+                  textoValor =
+                    value.toFixed(1);
+                }
+
+
+                numero.innerHTML =
+                  textoValor +
+                  '<small>' +
+                  slider.unit +
+                  '</small>';
+              }
+            }
+
 
             renderData();
           }
