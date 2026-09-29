@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     "/api/**": [
       "./node_modules/@prisma/engines/**/*",
       "./node_modules/prisma/**/*",
+      "./public/**/*",
     ],
   },
 };
