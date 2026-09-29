@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
+
 import AppLayout from "@/components/AppLayout";
 
 type Categoria =
@@ -16,21 +17,17 @@ type Estado = {
   fr: number;
   volumeCorrente: number;
   metabolismo: number;
-
   pao2: number;
   paco2: number;
   hco3: number;
   fio2: number;
-
   sodio: number;
   cloro: number;
   potassio: number;
   calcio: number;
-
   creatinina: number;
   adh: number;
   hidratacao: number;
-
   vasoconstricao: number;
   vasodilatacao: number;
 };
@@ -40,21 +37,17 @@ const estadoInicial: Estado = {
   fr: 16,
   volumeCorrente: 500,
   metabolismo: 100,
-
   pao2: 95,
   paco2: 40,
   hco3: 24,
   fio2: 21,
-
   sodio: 140,
   cloro: 104,
   potassio: 4.2,
   calcio: 2.4,
-
   creatinina: 0.9,
   adh: 50,
   hidratacao: 100,
-
   vasoconstricao: 50,
   vasodilatacao: 50,
 };
@@ -68,19 +61,24 @@ function calcular(estado: Estado) {
     (estado.fr * estado.volumeCorrente) / 1000;
 
   const ventilacaoAlveolar =
-    (estado.fr * Math.max(estado.volumeCorrente - 150, 0)) /
+    (estado.fr *
+      Math.max(estado.volumeCorrente - 150, 0)) /
     1000;
 
   const ph =
     6.1 +
     Math.log10(
-      estado.hco3 / (0.03 * Math.max(estado.paco2, 1))
+      estado.hco3 /
+        (0.03 * Math.max(estado.paco2, 1))
     );
 
   const anionGap =
-    estado.sodio - estado.cloro - estado.hco3;
+    estado.sodio -
+    estado.cloro -
+    estado.hco3;
 
-  const winter = 1.5 * estado.hco3 + 8;
+  const winter =
+    1.5 * estado.hco3 + 8;
 
   const winterMin = winter - 2;
   const winterMax = winter + 2;
@@ -115,17 +113,26 @@ function calcular(estado: Estado) {
     140
   );
 
-  const pam = (pas + 2 * pad) / 3;
+  const pam =
+    (pas + 2 * pad) / 3;
 
-  const rr = 60000 / Math.max(estado.fc, 1);
+  const rr =
+    60000 / Math.max(estado.fc, 1);
 
   const qtc =
-    380 * Math.sqrt(60 / Math.max(estado.fc, 1));
+    380 *
+    Math.sqrt(
+      60 / Math.max(estado.fc, 1)
+    );
 
-  let disturbo = "Equilíbrio ácido-base";
+  let disturbo =
+    "Equilíbrio ácido-base";
 
   if (ph < 7.35) {
-    if (estado.hco3 < 22 && estado.paco2 > 45) {
+    if (
+      estado.hco3 < 22 &&
+      estado.paco2 > 45
+    ) {
       disturbo = "Acidose mista";
     } else if (estado.hco3 < 22) {
       disturbo = "Acidose metabólica";
@@ -137,7 +144,10 @@ function calcular(estado: Estado) {
   }
 
   if (ph > 7.45) {
-    if (estado.hco3 > 26 && estado.paco2 < 35) {
+    if (
+      estado.hco3 > 26 &&
+      estado.paco2 < 35
+    ) {
       disturbo = "Alcalose mista";
     } else if (estado.hco3 > 26) {
       disturbo = "Alcalose metabólica";
@@ -229,7 +239,9 @@ function TopMetric({
       <div
         className={
           "mt-1 flex items-end gap-1 " +
-          (accent ? "text-orange-400" : "text-zinc-100")
+          (accent
+            ? "text-orange-400"
+            : "text-zinc-100")
         }
       >
         <span className="text-xl font-semibold">
@@ -313,7 +325,9 @@ function Slider({
         step={step}
         value={value}
         onChange={(event) =>
-          onChange(Number(event.target.value))
+          onChange(
+            Number(event.target.value)
+          )
         }
         className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-zinc-800 accent-orange-500"
       />
@@ -354,35 +368,49 @@ function Result({
   );
 }
 
+/* =========================================================
+   ECG
+   ========================================================= */
+
 function ECGMonitor({
   fc,
   qtc,
   potassio,
   calcio,
+  sodio,
 }: {
   fc: number;
   qtc: number;
   potassio: number;
   calcio: number;
+  sodio: number;
 }) {
   const [phase, setPhase] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  const animationRef = useRef<number | null>(null);
-  const previousTime = useRef(0);
+  const animationRef =
+    useRef<number | null>(null);
+
+  const previousTime =
+    useRef(0);
 
   useEffect(() => {
+    setMounted(true);
+
     const animate = (time: number) => {
       if (previousTime.current === 0) {
         previousTime.current = time;
       }
 
-      const delta = time - previousTime.current;
+      const delta =
+        time - previousTime.current;
 
       previousTime.current = time;
 
       setPhase(
         (oldPhase) =>
-          oldPhase + delta * (fc / 60000)
+          oldPhase +
+          delta * (fc / 60000)
       );
 
       animationRef.current =
@@ -393,119 +421,261 @@ function ECGMonitor({
       requestAnimationFrame(animate);
 
     return () => {
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
+      if (
+        animationRef.current !== null
+      ) {
+        cancelAnimationFrame(
+          animationRef.current
+        );
       }
     };
   }, [fc]);
 
+  /*
+   * POTÁSSIO
+   *
+   * O K+ continua sendo o principal
+   * modulador das alterações de
+   * repolarização neste modelo.
+   */
   const kFactor = clamp(
     (potassio - 4.2) / 2,
     -1,
     1
   );
 
+  /*
+   * CÁLCIO
+   *
+   * O Ca2+ modula principalmente
+   * a duração do QT.
+   */
   const calciumFactor = clamp(
     (calcio - 2.4) / 1.1,
     -1,
     1
   );
 
+  /*
+   * SÓDIO
+   *
+   * 140 mEq/L é utilizado como
+   * referência.
+   *
+   * O efeito foi mantido pequeno,
+   * porque o Na+ sérico não produz
+   * uma relação ECG tão direta quanto
+   * K+ e Ca2+.
+   */
+  const sodiumFactor = clamp(
+    (sodio - 140) / 20,
+    -1,
+    1
+  );
+
+  /*
+   * Onda T.
+   */
   const tAmplitude = clamp(
     13 + kFactor * 15,
     5,
     29
   );
 
+  /*
+   * QRS.
+   *
+   * Potássio elevado:
+   * → maior tendência ao alargamento.
+   *
+   * Sódio muito alterado:
+   * → pequena modulação adicional.
+   */
+  const sodiumQrsEffect =
+    Math.abs(sodiumFactor) * 0.008;
+
   const qrsWidth =
     0.035 +
-    Math.max(kFactor, 0) * 0.025;
+    Math.max(kFactor, 0) * 0.025 +
+    (sodiumFactor < 0
+      ? sodiumQrsEffect
+      : sodiumQrsEffect * 0.35);
 
+  /*
+   * Amplitude da onda R.
+   */
+  const qrsAmplitude = clamp(
+    50 + sodiumFactor * 8,
+    38,
+    58
+  );
+
+  /*
+   * Pequena modulação da onda P.
+   */
+  const pAmplitude = clamp(
+    10 + sodiumFactor * 1.8,
+    7,
+    12
+  );
+
+  /*
+   * QT.
+   */
   const qtWidth = clamp(
-    0.22 - calciumFactor * 0.07,
+    0.22 -
+      calciumFactor * 0.07,
     0.13,
     0.34
   );
 
+  /*
+   * Onda U na hipocalemia.
+   */
   const uAmplitude =
     potassio < 3.2 ? 7 : 0;
 
   const width = 1000;
   const height = 190;
 
+  /*
+   * Durante SSR:
+   *
+   * phase = 0
+   *
+   * Depois que o componente monta:
+   * phase começa a animar.
+   *
+   * Isso impede que o servidor
+   * gere pontos diferentes do
+   * primeiro HTML do navegador.
+   */
+  const animationPhase =
+    mounted ? phase : 0;
+
   const points: string[] = [];
 
   for (let i = 0; i < width; i++) {
-    const normalized = i / width;
+    const normalized =
+      i / width;
 
     const cycle =
-      (normalized + phase) % 1;
+      (normalized +
+        animationPhase) %
+      1;
 
     let y = 0;
 
-    if (cycle >= 0.04 && cycle < 0.12) {
-      const t = (cycle - 0.04) / 0.08;
+    /*
+     * Onda P
+     */
+    if (
+      cycle >= 0.04 &&
+      cycle < 0.12
+    ) {
+      const t =
+        (cycle - 0.04) / 0.08;
 
       y =
-        Math.sin(t * Math.PI) * 10;
+        Math.sin(t * Math.PI) *
+        pAmplitude;
     }
 
-    if (cycle >= 0.17 && cycle < 0.185) {
-      const t = (cycle - 0.17) / 0.015;
+    /*
+     * Onda Q
+     */
+    if (
+      cycle >= 0.17 &&
+      cycle < 0.185
+    ) {
+      const t =
+        (cycle - 0.17) / 0.015;
 
       y =
-        -12 * Math.sin(t * Math.PI);
+        -12 *
+        Math.sin(t * Math.PI);
     }
 
-    if (cycle >= 0.185 && cycle < 0.205) {
-      const t = (cycle - 0.185) / 0.02;
+    /*
+     * Onda R
+     */
+    if (
+      cycle >= 0.185 &&
+      cycle < 0.205
+    ) {
+      const t =
+        (cycle - 0.185) / 0.02;
 
       y =
-        50 * Math.sin(t * Math.PI);
+        qrsAmplitude *
+        Math.sin(t * Math.PI);
     }
 
+    /*
+     * Onda S
+     */
     if (
       cycle >= 0.205 &&
       cycle < 0.205 + qrsWidth
     ) {
       const t =
-        (cycle - 0.205) / qrsWidth;
+        (cycle - 0.205) /
+        qrsWidth;
 
       y =
-        -22 * Math.sin(t * Math.PI);
+        -22 *
+        Math.sin(t * Math.PI);
     }
 
-    if (cycle >= 0.29 && cycle < 0.29 + qtWidth) {
+    /*
+     * Onda T
+     */
+    if (
+      cycle >= 0.29 &&
+      cycle < 0.29 + qtWidth
+    ) {
       const t =
-        (cycle - 0.29) / qtWidth;
+        (cycle - 0.29) /
+        qtWidth;
 
       y =
-        tAmplitude * Math.sin(t * Math.PI);
+        tAmplitude *
+        Math.sin(t * Math.PI);
     }
 
+    /*
+     * Onda U.
+     */
     if (
       uAmplitude > 0 &&
       cycle >= 0.43 &&
       cycle < 0.52
     ) {
       const t =
-        (cycle - 0.43) / 0.09;
+        (cycle - 0.43) /
+        0.09;
 
       y +=
-        uAmplitude * Math.sin(t * Math.PI);
+        uAmplitude *
+        Math.sin(t * Math.PI);
     }
 
     const screenY =
-      height / 2 - y * 2.1;
+      height / 2 -
+      y * 2.1;
 
     points.push(
-      String(i) + "," + String(screenY)
+      String(i) +
+        "," +
+        String(screenY)
     );
   }
 
   const qrsStatus =
     potassio >= 6
       ? "QRS ALARGANDO"
+      : sodio < 125
+      ? "CONDUÇÃO MODULADA"
       : "QRS PRESERVADO";
 
   const qtStatus =
@@ -521,6 +691,13 @@ function ECGMonitor({
       : potassio < 3.2
       ? "T ACHATADA + U"
       : "REPOLARIZAÇÃO";
+
+  const sodiumStatus =
+    sodio < 125
+      ? "Na⁺ BAIXO"
+      : sodio > 155
+      ? "Na⁺ ALTO"
+      : "Na⁺ NORMAL";
 
   return (
     <Panel className="overflow-hidden">
@@ -588,7 +765,7 @@ function ECGMonitor({
         </div>
       </div>
 
-      <div className="grid grid-cols-4 divide-x divide-zinc-800 border-t border-zinc-800">
+      <div className="grid grid-cols-5 divide-x divide-zinc-800 border-t border-zinc-800">
         <div className="px-3 py-3">
           <div className="text-[9px] uppercase text-zinc-600">
             QRS
@@ -628,10 +805,24 @@ function ECGMonitor({
             {tStatus}
           </div>
         </div>
+
+        <div className="px-3 py-3">
+          <div className="text-[9px] uppercase text-zinc-600">
+            Na⁺
+          </div>
+
+          <div className="mt-1 text-[10px] text-zinc-300">
+            {sodiumStatus}
+          </div>
+        </div>
       </div>
     </Panel>
   );
 }
+
+/* =========================================================
+   SATURAÇÃO / PLETH
+   ========================================================= */
 
 function SaturationMonitor({
   spo2,
@@ -643,23 +834,31 @@ function SaturationMonitor({
   pao2: number;
 }) {
   const [phase, setPhase] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  const animationRef = useRef<number | null>(null);
-  const previousTime = useRef(0);
+  const animationRef =
+    useRef<number | null>(null);
+
+  const previousTime =
+    useRef(0);
 
   useEffect(() => {
+    setMounted(true);
+
     const animate = (time: number) => {
       if (previousTime.current === 0) {
         previousTime.current = time;
       }
 
-      const delta = time - previousTime.current;
+      const delta =
+        time - previousTime.current;
 
       previousTime.current = time;
 
       setPhase(
         (oldPhase) =>
-          oldPhase + delta * (fc / 60000)
+          oldPhase +
+          delta * (fc / 60000)
       );
 
       animationRef.current =
@@ -670,8 +869,12 @@ function SaturationMonitor({
       requestAnimationFrame(animate);
 
     return () => {
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
+      if (
+        animationRef.current !== null
+      ) {
+        cancelAnimationFrame(
+          animationRef.current
+        );
       }
     };
   }, [fc]);
@@ -679,44 +882,62 @@ function SaturationMonitor({
   const width = 1000;
   const height = 190;
 
+  const animationPhase =
+    mounted ? phase : 0;
+
   const points: string[] = [];
 
   for (let i = 0; i < width; i++) {
-    const normalized = i / width;
+    const normalized =
+      i / width;
 
     const cycle =
-      (normalized + phase) % 1;
+      (normalized +
+        animationPhase) %
+      1;
 
     let y = 0;
 
     if (cycle < 0.12) {
-      const t = cycle / 0.12;
+      const t =
+        cycle / 0.12;
 
-      y = 10 + 42 * t;
+      y =
+        10 + 42 * t;
     } else if (cycle < 0.22) {
       const t =
         (cycle - 0.12) / 0.1;
 
-      y = 52 - 15 * t;
+      y =
+        52 - 15 * t;
     } else if (cycle < 0.28) {
       const t =
         (cycle - 0.22) / 0.06;
 
-      y = 37 - 28 * t;
+      y =
+        37 - 28 * t;
     } else {
       const t =
         (cycle - 0.28) / 0.72;
 
-      y = 9 - 5 * t;
+      y =
+        9 - 5 * t;
     }
 
-    y *= clamp(spo2 / 100, 0.55, 1);
+    y *= clamp(
+      spo2 / 100,
+      0.55,
+      1
+    );
 
     const screenY =
-      height / 2 - y * 2;
+      height / 2 -
+      y * 2;
 
     points.push(
-      String(i) + "," + String(screenY)
+      String(i) +
+        "," +
+        String(screenY)
     );
   }
 
@@ -743,6 +964,7 @@ function SaturationMonitor({
         <div className="text-right">
           <div className="text-2xl font-semibold text-blue-400">
             {Math.round(spo2)}
+
             <span className="ml-1 text-sm">
               %
             </span>
@@ -850,12 +1072,18 @@ function SaturationMonitor({
   );
 }
 
+/* =========================================================
+   PÁGINA
+   ========================================================= */
+
 export default function LaboratorioPage() {
   const [estado, setEstado] =
     useState<Estado>(estadoInicial);
 
   const [categoria, setCategoria] =
-    useState<Categoria>("gasometria");
+    useState<Categoria>(
+      "gasometria"
+    );
 
   const [respirando, setRespirando] =
     useState(true);
@@ -869,11 +1097,16 @@ export default function LaboratorioPage() {
       return;
     }
 
-    const timer = window.setInterval(() => {
-      setTempoApneia((previous) =>
-        Math.min(previous + 1, 120)
-      );
-    }, 1000);
+    const timer =
+      window.setInterval(() => {
+        setTempoApneia(
+          (previous) =>
+            Math.min(
+              previous + 1,
+              120
+            )
+        );
+      }, 1000);
 
     return () =>
       window.clearInterval(timer);
@@ -887,7 +1120,9 @@ export default function LaboratorioPage() {
 
       return {
         ...estado,
+
         fr: 0,
+
         volumeCorrente: 0,
 
         pao2: clamp(
@@ -911,7 +1146,8 @@ export default function LaboratorioPage() {
     ]);
 
   const resultados = useMemo(
-    () => calcular(estadoEfetivo),
+    () =>
+      calcular(estadoEfetivo),
     [estadoEfetivo]
   );
 
@@ -972,7 +1208,6 @@ export default function LaboratorioPage() {
     <AppLayout>
       <div className="min-h-screen bg-[#080808] text-zinc-100">
         <div className="mx-auto max-w-[1700px] px-5 py-6">
-
           <header className="mb-5 flex flex-col gap-4 border-b border-zinc-800 pb-5 xl:flex-row xl:items-center xl:justify-between">
             <div>
               <div className="flex items-center gap-2">
@@ -995,9 +1230,9 @@ export default function LaboratorioPage() {
               </h1>
 
               <p className="mt-1 text-xs text-zinc-600">
-                Ambiente interativo de fisiologia
-                cardiovascular, respiratória e
-                ácido-base.
+                Ambiente interativo de
+                fisiologia cardiovascular,
+                respiratória e ácido-base.
               </p>
             </div>
 
@@ -1054,13 +1289,17 @@ export default function LaboratorioPage() {
 
             <TopMetric
               label="PaO₂"
-              value={Math.round(resultados.pao2Final)}
+              value={Math.round(
+                resultados.pao2Final
+              )}
               unit="mmHg"
             />
 
             <TopMetric
               label="SpO₂"
-              value={Math.round(resultados.spo2)}
+              value={Math.round(
+                resultados.spo2
+              )}
               unit="%"
             />
 
@@ -1073,22 +1312,31 @@ export default function LaboratorioPage() {
             <TopMetric
               label="PA"
               value={
-                String(Math.round(resultados.pas)) +
+                String(
+                  Math.round(
+                    resultados.pas
+                  )
+                ) +
                 "/" +
-                String(Math.round(resultados.pad))
+                String(
+                  Math.round(
+                    resultados.pad
+                  )
+                )
               }
               unit="mmHg"
             />
 
             <TopMetric
               label="PAM"
-              value={Math.round(resultados.pam)}
+              value={Math.round(
+                resultados.pam
+              )}
               unit="mmHg"
             />
           </div>
 
           <div className="grid gap-5 xl:grid-cols-[235px_minmax(0,1fr)_300px]">
-
             <aside>
               <Panel className="overflow-hidden">
                 <PanelTitle
@@ -1097,95 +1345,142 @@ export default function LaboratorioPage() {
                 />
 
                 <div className="space-y-1 p-3">
-                  {categorias.map((item) => (
-                    <Tab
-                      key={item.id}
-                      active={categoria === item.id}
-                      onClick={() =>
-                        setCategoria(item.id)
-                      }
-                    >
-                      {item.label}
-                    </Tab>
-                  ))}
+                  {categorias.map(
+                    (item) => (
+                      <Tab
+                        key={item.id}
+                        active={
+                          categoria ===
+                          item.id
+                        }
+                        onClick={() =>
+                          setCategoria(
+                            item.id
+                          )
+                        }
+                      >
+                        {item.label}
+                      </Tab>
+                    )
+                  )}
                 </div>
 
                 <div className="border-t border-zinc-800 p-5">
-
-                  {categoria === "gasometria" && (
+                  {categoria ===
+                    "gasometria" && (
                     <div className="space-y-6">
                       <Slider
                         label="PaCO₂"
-                        value={estado.paco2}
+                        value={
+                          estado.paco2
+                        }
                         min={20}
                         max={100}
                         step={1}
                         unit="mmHg"
-                        onChange={(value) =>
-                          alterar("paco2", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "paco2",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="HCO₃⁻"
-                        value={estado.hco3}
+                        value={
+                          estado.hco3
+                        }
                         min={10}
                         max={40}
                         step={1}
                         unit="mEq/L"
-                        onChange={(value) =>
-                          alterar("hco3", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "hco3",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="PaO₂"
-                        value={estado.pao2}
+                        value={
+                          estado.pao2
+                        }
                         min={30}
                         max={300}
                         step={1}
                         unit="mmHg"
-                        onChange={(value) =>
-                          alterar("pao2", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "pao2",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="FiO₂"
-                        value={estado.fio2}
+                        value={
+                          estado.fio2
+                        }
                         min={21}
                         max={100}
                         step={1}
                         unit="%"
-                        onChange={(value) =>
-                          alterar("fio2", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "fio2",
+                            value
+                          )
                         }
                       />
                     </div>
                   )}
 
-                  {categoria === "respiratorio" && (
+                  {categoria ===
+                    "respiratorio" && (
                     <div className="space-y-6">
                       <Slider
                         label="Frequência respiratória"
-                        value={estado.fr}
+                        value={
+                          estado.fr
+                        }
                         min={4}
                         max={40}
                         step={1}
                         unit="irpm"
-                        onChange={(value) =>
-                          alterar("fr", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "fr",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="Volume corrente"
-                        value={estado.volumeCorrente}
+                        value={
+                          estado.volumeCorrente
+                        }
                         min={200}
                         max={1200}
                         step={10}
                         unit="mL"
-                        onChange={(value) =>
+                        onChange={(
+                          value
+                        ) =>
                           alterar(
                             "volumeCorrente",
                             value
@@ -1195,40 +1490,59 @@ export default function LaboratorioPage() {
 
                       <Slider
                         label="Metabolismo"
-                        value={estado.metabolismo}
+                        value={
+                          estado.metabolismo
+                        }
                         min={50}
                         max={200}
                         step={5}
                         unit="%"
-                        onChange={(value) =>
-                          alterar("metabolismo", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "metabolismo",
+                            value
+                          )
                         }
                       />
                     </div>
                   )}
 
-                  {categoria === "cardio" && (
+                  {categoria ===
+                    "cardio" && (
                     <div className="space-y-6">
                       <Slider
                         label="Frequência cardíaca"
-                        value={estado.fc}
+                        value={
+                          estado.fc
+                        }
                         min={30}
                         max={180}
                         step={1}
                         unit="bpm"
-                        onChange={(value) =>
-                          alterar("fc", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "fc",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="Vasoconstrição"
-                        value={estado.vasoconstricao}
+                        value={
+                          estado.vasoconstricao
+                        }
                         min={0}
                         max={100}
                         step={1}
                         unit="%"
-                        onChange={(value) =>
+                        onChange={(
+                          value
+                        ) =>
                           alterar(
                             "vasoconstricao",
                             value
@@ -1238,12 +1552,16 @@ export default function LaboratorioPage() {
 
                       <Slider
                         label="Vasodilatação"
-                        value={estado.vasodilatacao}
+                        value={
+                          estado.vasodilatacao
+                        }
                         min={0}
                         max={100}
                         step={1}
                         unit="%"
-                        onChange={(value) =>
+                        onChange={(
+                          value
+                        ) =>
                           alterar(
                             "vasodilatacao",
                             value
@@ -1253,116 +1571,172 @@ export default function LaboratorioPage() {
                     </div>
                   )}
 
-                  {categoria === "renal" && (
+                  {categoria ===
+                    "renal" && (
                     <div className="space-y-6">
                       <Slider
                         label="Hidratação"
-                        value={estado.hidratacao}
+                        value={
+                          estado.hidratacao
+                        }
                         min={0}
                         max={150}
                         step={1}
                         unit="%"
-                        onChange={(value) =>
-                          alterar("hidratacao", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "hidratacao",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="ADH"
-                        value={estado.adh}
+                        value={
+                          estado.adh
+                        }
                         min={0}
                         max={100}
                         step={1}
                         unit="%"
-                        onChange={(value) =>
-                          alterar("adh", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "adh",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="Creatinina"
-                        value={estado.creatinina}
+                        value={
+                          estado.creatinina
+                        }
                         min={0.3}
                         max={5}
                         step={0.1}
                         unit="mg/dL"
-                        onChange={(value) =>
-                          alterar("creatinina", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "creatinina",
+                            value
+                          )
                         }
                       />
                     </div>
                   )}
 
-                  {categoria === "eletrólitos" && (
+                  {categoria ===
+                    "eletrólitos" && (
                     <div className="space-y-6">
                       <Slider
                         label="Sódio"
-                        value={estado.sodio}
+                        value={
+                          estado.sodio
+                        }
                         min={110}
                         max={170}
                         step={1}
                         unit="mEq/L"
-                        onChange={(value) =>
-                          alterar("sodio", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "sodio",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="Potássio"
-                        value={estado.potassio}
+                        value={
+                          estado.potassio
+                        }
                         min={2}
                         max={8}
                         step={0.1}
                         unit="mEq/L"
-                        onChange={(value) =>
-                          alterar("potassio", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "potassio",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="Cálcio"
-                        value={estado.calcio}
+                        value={
+                          estado.calcio
+                        }
                         min={1.5}
                         max={3.5}
                         step={0.1}
                         unit="mmol/L"
-                        onChange={(value) =>
-                          alterar("calcio", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "calcio",
+                            value
+                          )
                         }
                       />
 
                       <Slider
                         label="Cloro"
-                        value={estado.cloro}
+                        value={
+                          estado.cloro
+                        }
                         min={80}
                         max={130}
                         step={1}
                         unit="mEq/L"
-                        onChange={(value) =>
-                          alterar("cloro", value)
+                        onChange={(
+                          value
+                        ) =>
+                          alterar(
+                            "cloro",
+                            value
+                          )
                         }
                       />
                     </div>
                   )}
-
                 </div>
               </Panel>
             </aside>
 
             <main className="min-w-0 space-y-5">
-
               <div className="grid gap-5 lg:grid-cols-2">
                 <ECGMonitor
                   fc={estado.fc}
                   qtc={resultados.qtc}
-                  potassio={estado.potassio}
+                  potassio={
+                    estado.potassio
+                  }
                   calcio={estado.calcio}
+                  sodio={estado.sodio}
                 />
 
                 <SaturationMonitor
-                  spo2={resultados.spo2}
+                  spo2={
+                    resultados.spo2
+                  }
                   fc={estado.fc}
-                  pao2={resultados.pao2Final}
+                  pao2={
+                    resultados.pao2Final
+                  }
                 />
               </div>
 
@@ -1373,18 +1747,20 @@ export default function LaboratorioPage() {
                 />
 
                 <div className="grid grid-cols-2 gap-px bg-zinc-800 sm:grid-cols-4">
-
                   <div className="bg-[#101010] p-5">
                     <div className="text-[10px] uppercase tracking-widest text-zinc-600">
                       pH
                     </div>
 
                     <div className="mt-2 text-4xl font-semibold text-orange-400">
-                      {resultados.ph.toFixed(2)}
+                      {resultados.ph.toFixed(
+                        2
+                      )}
                     </div>
 
                     <div className="mt-2 text-[10px] text-zinc-600">
-                      referência 7,35–7,45
+                      referência
+                      7,35–7,45
                     </div>
                   </div>
 
@@ -1394,7 +1770,9 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-2 text-4xl font-semibold">
-                      {estadoEfetivo.paco2}
+                      {
+                        estadoEfetivo.paco2
+                      }
                     </div>
 
                     <div className="mt-2 text-[10px] text-zinc-600">
@@ -1408,7 +1786,9 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-2 text-4xl font-semibold">
-                      {estadoEfetivo.hco3}
+                      {
+                        estadoEfetivo.hco3
+                      }
                     </div>
 
                     <div className="mt-2 text-[10px] text-zinc-600">
@@ -1422,18 +1802,18 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-2 text-4xl font-semibold text-blue-400">
-                      {Math.round(resultados.pao2Final)}
+                      {Math.round(
+                        resultados.pao2Final
+                      )}
                     </div>
 
                     <div className="mt-2 text-[10px] text-zinc-600">
                       mmHg
                     </div>
                   </div>
-
                 </div>
 
                 <div className="grid gap-5 p-5 md:grid-cols-3">
-
                   <div>
                     <div className="text-[10px] uppercase tracking-widest text-zinc-600">
                       FiO₂
@@ -1450,7 +1830,10 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-1 text-lg font-medium">
-                      {resultados.anionGap.toFixed(1)}
+                      {resultados.anionGap.toFixed(
+                        1
+                      )}
+
                       <span className="ml-1 text-xs text-zinc-600">
                         mEq/L
                       </span>
@@ -1463,10 +1846,11 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-1 text-sm font-medium text-orange-400">
-                      {resultados.disturbo}
+                      {
+                        resultados.disturbo
+                      }
                     </div>
                   </div>
-
                 </div>
               </Panel>
 
@@ -1477,14 +1861,15 @@ export default function LaboratorioPage() {
                 />
 
                 <div className="grid grid-cols-2 divide-x divide-zinc-800 sm:grid-cols-4">
-
                   <div className="p-5">
                     <div className="text-[10px] uppercase tracking-widest text-zinc-600">
                       FR
                     </div>
 
                     <div className="mt-2 text-2xl font-semibold">
-                      {estadoEfetivo.fr}
+                      {
+                        estadoEfetivo.fr
+                      }
                     </div>
 
                     <div className="mt-1 text-[10px] text-zinc-600">
@@ -1498,7 +1883,9 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-2 text-2xl font-semibold">
-                      {estadoEfetivo.volumeCorrente}
+                      {
+                        estadoEfetivo.volumeCorrente
+                      }
                     </div>
 
                     <div className="mt-1 text-[10px] text-zinc-600">
@@ -1512,7 +1899,9 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-2 text-2xl font-semibold">
-                      {resultados.ventilacaoMinuto.toFixed(1)}
+                      {resultados.ventilacaoMinuto.toFixed(
+                        1
+                      )}
                     </div>
 
                     <div className="mt-1 text-[10px] text-zinc-600">
@@ -1526,21 +1915,20 @@ export default function LaboratorioPage() {
                     </div>
 
                     <div className="mt-2 text-2xl font-semibold">
-                      {resultados.ventilacaoAlveolar.toFixed(1)}
+                      {resultados.ventilacaoAlveolar.toFixed(
+                        1
+                      )}
                     </div>
 
                     <div className="mt-1 text-[10px] text-zinc-600">
                       L/min
                     </div>
                   </div>
-
                 </div>
               </Panel>
-
             </main>
 
             <aside className="space-y-5">
-
               <Panel>
                 <PanelTitle
                   title="Interpretação"
@@ -1548,50 +1936,61 @@ export default function LaboratorioPage() {
                 />
 
                 <div className="p-5">
-
                   <div className="rounded-xl border border-orange-500/10 bg-orange-500/5 p-4">
                     <div className="text-[9px] uppercase tracking-widest text-orange-500/70">
                       Ácido-base
                     </div>
 
                     <div className="mt-2 text-sm font-semibold text-orange-400">
-                      {resultados.disturbo}
+                      {
+                        resultados.disturbo
+                      }
                     </div>
                   </div>
 
                   <div className="mt-4 space-y-1">
-
                     <Result
                       label="pH"
-                      value={resultados.ph.toFixed(2)}
+                      value={resultados.ph.toFixed(
+                        2
+                      )}
                     />
 
                     <Result
                       label="PaCO₂"
-                      value={estadoEfetivo.paco2}
+                      value={
+                        estadoEfetivo.paco2
+                      }
                       unit="mmHg"
                     />
 
                     <Result
                       label="HCO₃⁻"
-                      value={estadoEfetivo.hco3}
+                      value={
+                        estadoEfetivo.hco3
+                      }
                       unit="mEq/L"
                     />
 
                     <Result
                       label="Ânion gap"
-                      value={resultados.anionGap.toFixed(1)}
+                      value={resultados.anionGap.toFixed(
+                        1
+                      )}
                     />
 
                     <Result
                       label="Winter"
                       value={
-                        resultados.winterMin.toFixed(1) +
+                        resultados.winterMin.toFixed(
+                          1
+                        ) +
                         "–" +
-                        resultados.winterMax.toFixed(1)
+                        resultados.winterMax.toFixed(
+                          1
+                        )
                       }
                     />
-
                   </div>
                 </div>
               </Panel>
@@ -1603,22 +2002,27 @@ export default function LaboratorioPage() {
                 />
 
                 <div className="p-5">
-
                   <Result
                     label="Pressão sistólica"
-                    value={Math.round(resultados.pas)}
+                    value={Math.round(
+                      resultados.pas
+                    )}
                     unit="mmHg"
                   />
 
                   <Result
                     label="Pressão diastólica"
-                    value={Math.round(resultados.pad)}
+                    value={Math.round(
+                      resultados.pad
+                    )}
                     unit="mmHg"
                   />
 
                   <Result
                     label="PAM"
-                    value={Math.round(resultados.pam)}
+                    value={Math.round(
+                      resultados.pam
+                    )}
                     unit="mmHg"
                   />
 
@@ -1630,10 +2034,11 @@ export default function LaboratorioPage() {
 
                   <Result
                     label="R-R"
-                    value={Math.round(resultados.rr)}
+                    value={Math.round(
+                      resultados.rr
+                    )}
                     unit="ms"
                   />
-
                 </div>
               </Panel>
 
@@ -1644,7 +2049,6 @@ export default function LaboratorioPage() {
                 />
 
                 <div className="p-5">
-
                   <Result
                     label="Na⁺"
                     value={estado.sodio}
@@ -1653,13 +2057,17 @@ export default function LaboratorioPage() {
 
                   <Result
                     label="K⁺"
-                    value={estado.potassio.toFixed(1)}
+                    value={estado.potassio.toFixed(
+                      1
+                    )}
                     unit="mEq/L"
                   />
 
                   <Result
                     label="Ca²⁺"
-                    value={estado.calcio.toFixed(1)}
+                    value={estado.calcio.toFixed(
+                      1
+                    )}
                     unit="mmol/L"
                   />
 
@@ -1668,7 +2076,6 @@ export default function LaboratorioPage() {
                     value={estado.cloro}
                     unit="mEq/L"
                   />
-
                 </div>
               </Panel>
 
@@ -1679,7 +2086,6 @@ export default function LaboratorioPage() {
                 />
 
                 <div className="p-5">
-
                   <div
                     className={
                       "rounded-xl border p-4 " +
@@ -1707,14 +2113,13 @@ export default function LaboratorioPage() {
 
                     {!respirando && (
                       <div className="mt-2 text-[10px] text-zinc-600">
-                        Tempo: {tempoApneia}s
+                        Tempo:{" "}
+                        {tempoApneia}s
                       </div>
                     )}
                   </div>
-
                 </div>
               </Panel>
-
             </aside>
           </div>
         </div>
