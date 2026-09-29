@@ -55,6 +55,11 @@ const gruposMenu: MenuGroup[] = [
         icon: "⚗",
       },
       {
+        href: "/anatomia",
+        label: "Anatomia 3D",
+        icon: "🧬",
+      },
+      {
         href: "/evolucao",
         label: "Evolução",
         icon: "✎",
@@ -433,6 +438,8 @@ export default function AppLayout({
                 ? "Casos Clínicos"
                 : pathname.startsWith("/laboratorio")
                 ? "Laboratório"
+                : pathname.startsWith("/anatomia")
+                ? "Anatomia 3D"
                 : pathname.startsWith("/evolucao")
                 ? "Evolução"
                 : pathname.startsWith("/desempenho")
