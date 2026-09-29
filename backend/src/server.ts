@@ -19,6 +19,7 @@ import {
 } from "jose";
 
 import { prisma } from "../../lib/prisma";
+import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
@@ -2133,6 +2134,186 @@ const server =
           return;
         }
 
+
+        /* CASO CLINICO INDIVIDUAL */
+
+        const matchCasoDetalhe =
+          caminho.match(
+            /^\/api\/casos\/(\d+)$/
+          );
+
+
+        if (
+          matchCasoDetalhe &&
+          metodo === "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const resultado =
+            await buscarCasoDetalhe(
+              usuarioId,
+              Number(
+                matchCasoDetalhe[1]
+              )
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+        const matchInvestigar =
+          caminho.match(
+            /^\/api\/casos\/(\d+)\/investigar$/
+          );
+
+
+        if (
+          matchInvestigar &&
+          metodo === "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const body =
+            await lerJson(
+              request
+            );
+
+
+          const resultado =
+            await investigarCasoClinico(
+              usuarioId,
+              Number(
+                matchInvestigar[1]
+              ),
+              body
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+        const matchHipotese =
+          caminho.match(
+            /^\/api\/casos\/(\d+)\/hipotese$/
+          );
+
+
+        if (
+          matchHipotese &&
+          metodo === "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const body =
+            await lerJson(
+              request
+            );
+
+
+          const resultado =
+            await avaliarHipoteseCaso(
+              usuarioId,
+              Number(
+                matchHipotese[1]
+              ),
+              body
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+        const matchRefazer =
+          caminho.match(
+            /^\/api\/casos\/(\d+)\/refazer$/
+          );
+
+
+        if (
+          matchRefazer &&
+          metodo === "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const resultado =
+            await refazerCasoClinico(
+              usuarioId,
+              Number(
+                matchRefazer[1]
+              )
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
         /* DISCIPLINAS */
 
         if (
@@ -2377,6 +2558,27 @@ const server =
           redirect(
             response,
             "/casos.html"
+          );
+
+          return;
+        }
+
+
+        const matchCasoPagina =
+          caminho.match(
+            /^\/casos\/(\d+)$/
+          );
+
+
+        if (
+          matchCasoPagina &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/caso.html?id=" +
+            matchCasoPagina[1]
           );
 
           return;

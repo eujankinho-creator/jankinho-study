@@ -1,4 +1,4 @@
-﻿import OpenAI from "openai";
+import OpenAI from "openai";
 
 import { prisma } from "../../lib/prisma";
 
@@ -138,6 +138,24 @@ export async function listarCasos(
             publicado: true,
             geradoPorIA: true,
             createdAt: true,
+
+            investigacoes: {
+              where: {
+                usuarioId:
+                  usuarioId,
+              },
+
+              select: {
+                finalizado:
+                  true,
+
+                status:
+                  true,
+              },
+
+              take:
+                1,
+            },
           },
 
           orderBy: {
@@ -147,12 +165,36 @@ export async function listarCasos(
         });
 
 
+    const casosFormatados =
+      casos.map(
+        function (caso) {
+
+          const {
+            investigacoes,
+            ...dadosCaso
+          } = caso;
+
+
+          return {
+            ...dadosCaso,
+
+            concluido:
+              investigacoes.length > 0 &&
+              investigacoes[0]
+                .finalizado === true,
+          };
+        }
+      );
+
+
     return {
       status: 200,
 
       data: {
         sucesso: true,
-        casos,
+
+        casos:
+          casosFormatados,
       },
     };
 

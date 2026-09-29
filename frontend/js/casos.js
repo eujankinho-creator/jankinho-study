@@ -1,4 +1,4 @@
-﻿const state = {
+const state = {
   casos: [],
   filtrados: []
 };
@@ -357,6 +357,18 @@ function renderCasos() {
           }
 
 
+          if (
+            caso.concluido
+          ) {
+
+            badges.push(
+              '<span class="case-badge completed">' +
+              '\u2713 Concluido' +
+              '</span>'
+            );
+          }
+
+
           return `
             <article class="case-card">
 
@@ -409,14 +421,47 @@ function renderCasos() {
 
                 <div class="case-action">
 
-                  <a
-                    href="/casos/${caso.id}"
-                  >
-                    Investigar caso
-                    <span>
-                      \u2192
-                    </span>
-                  </a>
+                  ${
+                    caso.concluido
+                      ? `
+                        <div class="completed-actions">
+
+                          <a
+                            href="/casos/${caso.id}"
+                            class="view-result"
+                          >
+                            Ver resultado
+                            <span>
+                              \u2192
+                            </span>
+                          </a>
+
+
+                          <button
+                            type="button"
+                            class="refazer-caso-lista"
+                            data-id="${caso.id}"
+                            data-titulo="${escapeHtml(
+                              caso.titulo
+                            )}"
+                          >
+                            \u21bb Refazer caso
+                          </button>
+
+                        </div>
+                      `
+                      : `
+                        <a
+                          href="/casos/${caso.id}"
+                        >
+                          Investigar caso
+
+                          <span>
+                            \u2192
+                          </span>
+                        </a>
+                      `
+                  }
 
                 </div>
 
@@ -428,6 +473,39 @@ function renderCasos() {
         }
       )
       .join("");
+
+
+  document
+    .querySelectorAll(
+      ".refazer-caso-lista"
+    )
+    .forEach(
+      function (botao) {
+
+        botao.addEventListener(
+          "click",
+          function () {
+
+            const id =
+              Number(
+                botao.dataset.id
+              );
+
+
+            const titulo =
+              botao.dataset.titulo ||
+              "este caso";
+
+
+            refazerCasoDaLista(
+              id,
+              titulo,
+              botao
+            );
+          }
+        );
+      }
+    );
 }
 
 
@@ -605,6 +683,74 @@ async function gerarCaso() {
   }
 }
 
+
+
+async function refazerCasoDaLista(
+  id,
+  titulo,
+  botao
+) {
+
+  const confirmado =
+    window.confirm(
+      "Deseja refazer o caso:\n\n" +
+      titulo +
+      "\n\nSeu progresso, hipotese e avaliacao serao apagados."
+    );
+
+
+  if (!confirmado) {
+    return;
+  }
+
+
+  const textoAnterior =
+    botao.textContent;
+
+
+  try {
+
+    limparErro();
+
+
+    botao.disabled =
+      true;
+
+
+    botao.textContent =
+      "Reiniciando...";
+
+
+    await api(
+      "/api/casos/" +
+      id +
+      "/refazer",
+      {
+        method:
+          "POST"
+      }
+    );
+
+
+    await carregarCasos();
+
+  }
+  catch (erro) {
+
+    mostrarErro(
+      erro.message ||
+      "Nao foi possivel refazer o caso."
+    );
+
+
+    botao.disabled =
+      false;
+
+
+    botao.textContent =
+      textoAnterior;
+  }
+}
 
 async function sair() {
 

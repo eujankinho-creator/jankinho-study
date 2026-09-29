@@ -1,0 +1,744 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Caso Clinico | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/caso.css"
+  >
+
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+
+        <strong>
+          Jankinho
+        </strong>
+
+        <span>
+          Study
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+
+          <span>
+            &#8962;
+          </span>
+
+          Dashboard
+
+        </a>
+
+        <a href="/questoes" class="menu-item">
+
+          <span>
+            &#9635;
+          </span>
+
+          Quest&otilde;es
+
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+
+          <span>
+            &#9648;
+          </span>
+
+          Flashcards
+
+        </a>
+
+        <a href="/casos" class="menu-item active">
+
+          <span>
+            &#9877;
+          </span>
+
+          Casos Cl&iacute;nicos
+
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+
+          <span>
+            &#9879;
+          </span>
+
+          Laborat&oacute;rio
+
+        </a>
+
+        <a href="/anatomia" class="menu-item">
+
+          <span>
+            3D
+          </span>
+
+          Anatomia 3D
+
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+
+          <span>
+            &#9998;
+          </span>
+
+          Evolu&ccedil;&atilde;o
+
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+
+          <span>
+            &#9682;
+          </span>
+
+          Desempenho
+
+        </a>
+
+        <a href="/ranking" class="menu-item">
+
+          <span>
+            &#9819;
+          </span>
+
+          Ranking
+
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+
+          <span>
+            &#9645;
+          </span>
+
+          Relat&oacute;rios
+
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+
+          <span>
+            R$
+          </span>
+
+          Finan&ccedil;as
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+
+    <header class="header">
+
+      <div class="header-title">
+        Caso Cl&iacute;nico
+      </div>
+
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="case-page">
+
+
+      <a
+        href="/casos"
+        class="back-link"
+      >
+        &larr; Voltar para casos
+      </a>
+
+
+      <div
+        id="erroBox"
+        class="error-box"
+      >
+
+        <div>
+
+          <strong>
+            Aten&ccedil;&atilde;o
+          </strong>
+
+          <p id="erroTexto"></p>
+
+        </div>
+
+
+        <button
+          id="fecharErro"
+          type="button"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <section
+        id="loadingView"
+        class="loading-card"
+      >
+        Carregando caso cl&iacute;nico...
+      </section>
+
+
+      <section
+        id="casoView"
+        class="hidden"
+      >
+
+
+        <section class="case-hero">
+
+          <div class="hero-line"></div>
+
+
+          <div class="case-hero-content">
+
+
+            <div
+              id="caseBadges"
+              class="case-badges"
+            ></div>
+
+
+            <h1 id="casoTitulo"></h1>
+
+
+            <p
+              id="casoEspecialidade"
+              class="specialty"
+            ></p>
+
+
+          </div>
+
+        </section>
+
+
+        <section class="complaint-card">
+
+          <span class="section-label">
+            &#9656; Queixa inicial
+          </span>
+
+          <p id="queixaInicial"></p>
+
+        </section>
+
+
+        <section class="panel">
+
+
+          <button
+            id="toggleInformacoes"
+            class="collapse-header"
+            type="button"
+          >
+
+            <div>
+
+              <span class="section-label">
+                Informa&ccedil;&otilde;es iniciais
+              </span>
+
+              <h2>
+                Dados dispon&iacute;veis
+              </h2>
+
+            </div>
+
+
+            <span id="toggleIcon">
+              -
+            </span>
+
+          </button>
+
+
+          <div
+            id="informacoesBody"
+            class="initial-data-grid"
+          >
+
+
+            <div class="data-card">
+
+              <h3>
+                Dados iniciais
+              </h3>
+
+              <div id="dadosIniciais"></div>
+
+            </div>
+
+
+            <div class="data-card">
+
+              <h3>
+                Sinais vitais iniciais
+              </h3>
+
+              <div id="sinaisVitais"></div>
+
+            </div>
+
+
+          </div>
+
+        </section>
+
+
+        <section
+          id="investigacaoPanel"
+          class="panel"
+        >
+
+
+          <div class="panel-heading">
+
+            <span class="section-label">
+              Investiga&ccedil;&atilde;o
+            </span>
+
+            <h2>
+              O que voc&ecirc; quer investigar?
+            </h2>
+
+            <p>
+              Solicite informa&ccedil;&otilde;es progressivamente
+              e construa seu racioc&iacute;nio cl&iacute;nico.
+            </p>
+
+          </div>
+
+
+          <div class="investigation-grid">
+
+
+            <button
+              class="investigation-button"
+              data-investigar="ANAMNESE"
+              type="button"
+            >
+
+              <span>
+                &#9636;
+              </span>
+
+              <strong>
+                Anamnese
+              </strong>
+
+              <small>
+                Hist&oacute;ria e informa&ccedil;&otilde;es do paciente
+              </small>
+
+            </button>
+
+
+            <button
+              class="investigation-button"
+              data-investigar="EXAME_FISICO"
+              type="button"
+            >
+
+              <span>
+                &#9827;
+              </span>
+
+              <strong>
+                Exame f&iacute;sico
+              </strong>
+
+              <small>
+                Achados do exame f&iacute;sico
+              </small>
+
+            </button>
+
+
+            <button
+              class="investigation-button"
+              data-investigar="SINAIS_VITAIS"
+              type="button"
+            >
+
+              <span>
+                &#9829;
+              </span>
+
+              <strong>
+                Sinais vitais
+              </strong>
+
+              <small>
+                Verificar par&acirc;metros vitais
+              </small>
+
+            </button>
+
+
+            <button
+              class="investigation-button"
+              data-investigar="EVOLUCAO"
+              type="button"
+            >
+
+              <span>
+                &#8599;
+              </span>
+
+              <strong>
+                Evolu&ccedil;&atilde;o
+              </strong>
+
+              <small>
+                Acompanhar evolu&ccedil;&atilde;o cl&iacute;nica
+              </small>
+
+            </button>
+
+
+          </div>
+
+        </section>
+
+
+        <section class="panel">
+
+
+          <div class="panel-heading">
+
+            <span class="section-label">
+              Exames
+            </span>
+
+            <h2>
+              Exames diagn&oacute;sticos dispon&iacute;veis
+            </h2>
+
+            <p>
+              O resultado somente aparece depois que
+              voc&ecirc; solicitar o exame.
+            </p>
+
+          </div>
+
+
+          <div
+            id="examesLista"
+            class="exam-grid"
+          ></div>
+
+
+        </section>
+
+
+        <section class="panel">
+
+
+          <div class="records-heading">
+
+            <div>
+
+              <span class="section-label">
+                Investiga&ccedil;&atilde;o
+              </span>
+
+              <h2>
+                Informa&ccedil;&otilde;es coletadas
+              </h2>
+
+            </div>
+
+
+            <span
+              id="registrosCount"
+              class="count-badge"
+            >
+              0 registros
+            </span>
+
+          </div>
+
+
+          <div id="registrosLista"></div>
+
+
+        </section>
+
+
+        <section
+          id="hipotesePanel"
+          class="panel hypothesis-panel"
+        >
+
+
+          <div class="panel-heading">
+
+            <span class="section-label">
+              Racioc&iacute;nio cl&iacute;nico
+            </span>
+
+            <h2>
+              Qual &eacute; sua hip&oacute;tese?
+            </h2>
+
+            <p>
+              Quando considerar que possui informa&ccedil;&otilde;es
+              suficientes, registre sua hip&oacute;tese diagn&oacute;stica
+              e explique seu racioc&iacute;nio.
+            </p>
+
+          </div>
+
+
+          <div class="hypothesis-form">
+
+
+            <div>
+
+              <label for="hipotese">
+                Hip&oacute;tese diagn&oacute;stica
+              </label>
+
+              <input
+                id="hipotese"
+                type="text"
+                placeholder="Ex.: Tromboembolismo pulmonar"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label for="justificativa">
+                Justificativa
+              </label>
+
+              <textarea
+                id="justificativa"
+                rows="6"
+                placeholder="Explique quais achados sustentam sua hipotese e como voce chegou a essa conclusao..."
+              ></textarea>
+
+            </div>
+
+
+            <div class="hypothesis-actions">
+
+              <button
+                id="limparHipotese"
+                class="button-secondary"
+                type="button"
+              >
+                Limpar
+              </button>
+
+
+              <button
+                id="finalizarCaso"
+                class="button-primary"
+                type="button"
+              >
+                Finalizar caso &rarr;
+              </button>
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+        <section
+          id="resultadoPanel"
+          class="result-panel hidden"
+        >
+
+
+          <div class="result-header">
+
+            <div>
+
+              <span class="section-label">
+                Caso finalizado
+              </span>
+
+              <h2>
+                Resultado da investiga&ccedil;&atilde;o
+              </h2>
+
+              <p>
+                Abaixo est&aacute; a avalia&ccedil;&atilde;o
+                do seu racioc&iacute;nio cl&iacute;nico.
+              </p>
+
+            </div>
+
+
+            <button
+              id="refazerCaso"
+              class="button-secondary"
+              type="button"
+            >
+              &#8635; Refazer caso
+            </button>
+
+          </div>
+
+
+          <div id="resultadoConteudo"></div>
+
+
+        </section>
+
+
+        <div class="case-footer">
+
+          <a
+            href="/casos"
+            class="button-secondary"
+          >
+            &larr; Voltar para todos os casos
+          </a>
+
+        </div>
+
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/caso.js"></script>
+
+
+</body>
+</html>

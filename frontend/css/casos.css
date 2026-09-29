@@ -1,4 +1,4 @@
-﻿@import url("/css/app.css");
+@import url("/css/app.css");
 
 .cases-page {
   width: 100%;
@@ -379,6 +379,140 @@
   .cases-grid,
   .two-cols {
     grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* ==========================================================
+   CASOS CONCLUIDOS
+   ========================================================== */
+
+.case-badge.completed {
+  border:
+    1px solid
+    rgba(52,211,153,.28);
+
+  background:
+    rgba(52,211,153,.11);
+
+  color:
+    #34d399;
+}
+
+
+.case-card:has(
+  .case-badge.completed
+) {
+  border-color:
+    rgba(52,211,153,.16);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(52,211,153,.035),
+      rgba(255,255,255,.02)
+    );
+}
+
+
+.completed-actions {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    auto;
+
+  gap:
+    8px;
+}
+
+
+.completed-actions .view-result {
+  border-color:
+    rgba(52,211,153,.18);
+
+  background:
+    rgba(52,211,153,.06);
+
+  color:
+    #6ee7b7;
+}
+
+
+.completed-actions .view-result:hover {
+  border-color:
+    rgba(52,211,153,.35);
+
+  background:
+    rgba(52,211,153,.11);
+
+  color:
+    #a7f3d0;
+}
+
+
+.refazer-caso-lista {
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius:
+    14px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    11px 13px;
+
+  color:
+    #737373;
+
+  font:
+    inherit;
+
+  font-size:
+    12px;
+
+  font-weight:
+    600;
+
+  cursor:
+    pointer;
+
+  transition:
+    .2s;
+}
+
+
+.refazer-caso-lista:hover {
+  border-color:
+    rgba(249,115,22,.28);
+
+  background:
+    rgba(249,115,22,.08);
+
+  color:
+    #fb923c;
+}
+
+
+.refazer-caso-lista:disabled {
+  opacity:
+    .55;
+
+  cursor:
+    wait;
+}
+
+
+@media (max-width: 500px) {
+
+  .completed-actions {
+    grid-template-columns:
+      1fr;
   }
 
 }
