@@ -1,0 +1,256 @@
+JANKINHO STUDY - AUDITORIA FINAL
+Data: 2026-09-29 20:10:36
+
+============================================================
+1. GIT
+============================================================
+Branch: migracao/html-typescript
+
+Arquivos pendentes:
+  ?? auditar-migracao-v2.ps1
+  ?? auditar-migracao.ps1
+
+============================================================
+2. PAGINAS HTML MIGRADAS
+============================================================
+[OK] frontend\index.html
+[OK] frontend\login.html
+[OK] frontend\cadastro.html
+[OK] frontend\questoes.html
+[OK] frontend\flashcards.html
+[OK] frontend\financas.html
+[OK] frontend\casos.html
+[OK] frontend\caso.html
+[OK] frontend\laboratorio.html
+[OK] frontend\evolucao.html
+[OK] frontend\desempenho.html
+[OK] frontend\ranking.html
+[OK] frontend\configuracoes.html
+
+============================================================
+3. BACKEND TYPESCRIPT
+============================================================
+[OK] backend\src\server.ts
+[OK] backend\src\iaQuestoes.ts
+[OK] backend\src\flashcards.ts
+[OK] backend\src\casos.ts
+[OK] backend\src\casosDetalhe.ts
+[OK] backend\src\desempenho.ts
+[OK] backend\src\ranking.ts
+[OK] backend\src\configuracoes.ts
+
+============================================================
+4. ARQUIVOS E PASTAS POSSIVELMENTE LEGADOS
+============================================================
+[EXISTE] app
+[EXISTE] components
+[NAO EXISTE] .next
+[NAO EXISTE] next.config.js
+[NAO EXISTE] next.config.mjs
+[EXISTE] next.config.ts
+[NAO EXISTE] postcss.config.js
+[EXISTE] postcss.config.mjs
+[NAO EXISTE] postcss.config.cjs
+[NAO EXISTE] tailwind.config.js
+[NAO EXISTE] tailwind.config.ts
+[EXISTE] eslint.config.mjs
+
+============================================================
+5. PACKAGE.JSON
+============================================================
+Dependencies:
+  @prisma/adapter-pg
+  @prisma/client
+  bcryptjs
+  jose
+  next
+  openai
+  pg
+  prisma
+  react
+  react-dom
+  recharts
+
+DevDependencies:
+  @tailwindcss/postcss
+  @types/bcryptjs
+  @types/node
+  @types/pg
+  @types/react
+  @types/react-dom
+  eslint
+  eslint-config-next
+  tailwindcss
+  tsx
+  typescript
+
+Possiveis dependencias legadas:
+  [VERIFICAR] next
+  [VERIFICAR] react
+  [VERIFICAR] react-dom
+  [VERIFICAR] recharts
+  [VERIFICAR] @types/react
+  [VERIFICAR] @types/react-dom
+  [VERIFICAR] @tailwindcss/postcss
+  [VERIFICAR] tailwindcss
+  [VERIFICAR] eslint-config-next
+
+============================================================
+6. REFERENCIAS NEXT REACT TAILWIND
+============================================================
+app\api\auth\cadastro\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\auth\login\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\auth\logout\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\auth\me\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\casos\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\desempenho\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\disciplinas\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\financeiro\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\flashcards\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\ia\gerar-caso\route.ts:2
+  import { NextResponse } from "next/server";
+app\api\ia\gerar-questoes\route.ts:2
+  import { NextResponse } from "next/server";
+app\api\questoes\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\ranking\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\respostas\route.ts:1
+  import { NextResponse } from "next/server";
+app\api\usuarios\route.ts:1
+  import { NextResponse } from "next/server";
+app\cadastro\page.tsx:3
+  import { FormEvent, useState } from "react";
+app\cadastro\page.tsx:4
+  import { useRouter } from "next/navigation";
+app\casos\page.tsx:3
+  import { useEffect, useMemo, useState } from "react";
+app\casos\page.tsx:4
+  import Link from "next/link";
+app\desempenho\page.tsx:3
+  import { useEffect, useState } from "react";
+app\evolucao\page.tsx:3
+  import { useMemo, useState } from "react";
+app\financas\page.tsx:3
+  import { useEffect, useMemo, useState } from "react";
+app\flashcards\page.tsx:3
+  import { FormEvent, useEffect, useMemo, useState } from "react";
+app\globals.css:1
+  @import "tailwindcss";
+app\laboratorio\page.tsx:3
+  import { useEffect, useMemo, useRef, useState } from "react";
+app\laboratorio\page.tsx:4
+  import type { ReactNode } from "react";
+app\layout.tsx:1
+  import type { Metadata } from "next";
+app\layout.tsx:2
+  import { Geist, Geist_Mono } from "next/font/google";
+app\login\page.tsx:3
+  import { FormEvent, useState } from "react";
+app\login\page.tsx:4
+  import { useRouter } from "next/navigation";
+app\page.tsx:3
+  import { useEffect, useMemo, useState } from "react";
+app\page.tsx:4
+  import Link from "next/link";
+app\questoes\page.tsx:3
+  import { useEffect, useMemo, useState } from "react";
+app\ranking\page.tsx:3
+  import { useEffect, useState } from "react";
+components\AppLayout.tsx:9
+  } from "react";
+components\AppLayout.tsx:10
+  import Link from "next/link";
+components\AppLayout.tsx:11
+  import { usePathname, useRouter } from "next/navigation";
+components\Sidebar.tsx:3
+  import Link from "next/link";
+components\Sidebar.tsx:4
+  import { usePathname } from "next/navigation";
+lib\auth.ts:1
+  import { cookies } from "next/headers";
+
+============================================================
+7. REFERENCIAS REMOVIDAS
+============================================================
+[RESTO] components\Sidebar.tsx:11
+  { name: "Relatórios", href: "/relatorios", icon: "📊" },
+
+============================================================
+8. ROTAS DO SERVER
+============================================================
+[OK] /health
+[OK] /questoes
+[OK] /flashcards
+[OK] /financas
+[OK] /casos
+[OK] /laboratorio
+[OK] /evolucao
+[OK] /desempenho
+[OK] /ranking
+[OK] /configuracoes
+
+Rotas que deveriam estar removidas:
+[OK REMOVIDA] /anatomia
+[OK REMOVIDA] /relatorios
+
+============================================================
+9. SERVIDOR LOCAL
+============================================================
+[OK] Porta 3002 ativa.
+[OK] /health HTTP 200
+Resposta: {"status":"ok","backend":"typescript"}
+
+============================================================
+10. SCRIPTS TEMPORARIOS
+============================================================
+  auditar-migracao-v2.ps1
+  auditar-migracao.ps1
+
+============================================================
+11. ESTRUTURA DA RAIZ
+============================================================
+[FILE] .env
+[FILE] .gitignore
+[FILE] .railwayignore
+[DIR]  app
+[FILE] auditar-migracao.ps1
+[FILE] auditar-migracao-v2.ps1
+[DIR]  backend
+[DIR]  components
+[FILE] eslint.config.mjs
+[FILE] estruturas.json
+[DIR]  frontend
+[DIR]  lib
+[FILE] middleware.ts
+[FILE] next.config.ts
+[FILE] next-env.d.ts
+[FILE] package.json
+[FILE] package-lock.json
+[FILE] postcss.config.mjs
+[DIR]  prisma
+[FILE] prisma.config.ts
+[DIR]  public
+[FILE] README.md
+[DIR]  scripts
+[FILE] sistemas.txt
+[DIR]  src
+[FILE] tsconfig.json
+
+============================================================
+AUDITORIA CONCLUIDA
+============================================================
+Nenhum arquivo do projeto foi apagado.
+Nenhuma dependencia foi removida.
+
+Resultado salvo em:
+auditoria-migracao.txt
