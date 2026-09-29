@@ -266,8 +266,8 @@ model InvestigacaoCaso {
 model RegistroInvestigacao {
   id Int @id @default(autoincrement())
 
-investigacaoId Int
-investigacao InvestigacaoCaso @relation(fields: [investigacaoId], references: [id], onDelete: Cascade)
+  investigacaoId Int
+  investigacao   InvestigacaoCaso @relation(fields: [investigacaoId], references: [id], onDelete: Cascade)
 
   /**
    * Exemplos:
