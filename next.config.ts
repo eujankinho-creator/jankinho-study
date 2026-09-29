@@ -7,12 +7,6 @@ const nextConfig: NextConfig = {
       "./node_modules/.prisma/client/**/*",
     ],
   },
-
-  outputFileTracingIncludes: {
-    "/api/**": [
-      "./src/generated/client/**/*",
-    ],
-  },
 };
 
 export default nextConfig;
