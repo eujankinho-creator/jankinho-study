@@ -1,0 +1,757 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Financas | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/financas.css"
+  >
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>Jankinho</strong>
+        <span>Study</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/anatomia" class="menu-item">
+          <span>3D</span>
+          Anatomia 3D
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a
+          href="/financas"
+          class="menu-item active"
+        >
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-title">
+        Finan&ccedil;as
+      </div>
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="finance-page">
+
+      <!-- HERO -->
+
+      <section class="finance-hero">
+
+        <div>
+
+          <div class="hero-badges">
+
+            <span class="badge badge-orange">
+              Pessoal
+            </span>
+
+            <span class="hero-muted">
+              Controle financeiro
+            </span>
+
+          </div>
+
+          <h1>
+            Finan&ccedil;as
+          </h1>
+
+          <p>
+            Organize suas receitas, despesas e acompanhe
+            seu saldo em um s&oacute; lugar.
+          </p>
+
+        </div>
+
+
+        <button
+          id="atualizarTopo"
+          class="button-secondary"
+          type="button"
+        >
+          &#8635; Atualizar
+        </button>
+
+      </section>
+
+
+      <div
+        id="erroBox"
+        class="error-box"
+      >
+
+        <span id="erroTexto"></span>
+
+        <button
+          id="fecharErro"
+          type="button"
+        >
+          Fechar
+        </button>
+
+      </div>
+
+
+      <!-- RESUMO -->
+
+      <section class="summary-grid">
+
+        <div class="summary-card income-card">
+
+          <div class="summary-top">
+
+            <div>
+
+              <span class="income">
+                Receitas
+              </span>
+
+              <small>
+                Total recebido
+              </small>
+
+            </div>
+
+            <div class="summary-icon income-icon">
+              &uarr;
+            </div>
+
+          </div>
+
+
+          <strong
+            id="receitasTotal"
+            class="summary-value income"
+          >
+            R$ 0,00
+          </strong>
+
+
+          <div class="summary-bottom">
+
+            <span id="quantidadeReceitas">
+              0 lancamentos
+            </span>
+
+            <span class="income">
+              Entrada
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="summary-card expense-card">
+
+          <div class="summary-top">
+
+            <div>
+
+              <span class="expense">
+                Despesas
+              </span>
+
+              <small>
+                Total gasto
+              </small>
+
+            </div>
+
+            <div class="summary-icon expense-icon">
+              &darr;
+            </div>
+
+          </div>
+
+
+          <strong
+            id="despesasTotal"
+            class="summary-value expense"
+          >
+            R$ 0,00
+          </strong>
+
+
+          <div class="summary-bottom">
+
+            <span id="quantidadeDespesas">
+              0 lancamentos
+            </span>
+
+            <span class="expense">
+              Sa&iacute;da
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="saldoCard"
+          class="summary-card balance-card"
+        >
+
+          <div class="summary-top">
+
+            <div>
+
+              <span
+                id="saldoLabel"
+                class="orange"
+              >
+                Saldo
+              </span>
+
+              <small>
+                Resultado do per&iacute;odo
+              </small>
+
+            </div>
+
+            <div
+              id="saldoIcon"
+              class="summary-icon balance-icon"
+            >
+              =
+            </div>
+
+          </div>
+
+
+          <strong
+            id="saldoTotal"
+            class="summary-value orange"
+          >
+            R$ 0,00
+          </strong>
+
+
+          <div class="summary-bottom">
+            <span>
+              Receitas menos despesas
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FORMULARIO + FILTRO -->
+
+      <section class="finance-main-grid">
+
+        <div class="panel">
+
+          <div class="panel-heading">
+
+            <span
+              id="formBadge"
+              class="badge badge-orange"
+            >
+              Novo lan&ccedil;amento
+            </span>
+
+            <h2 id="formTitulo">
+              Adicionar movimenta&ccedil;&atilde;o
+            </h2>
+
+            <p>
+              Registre uma entrada ou sa&iacute;da para manter seu
+              controle financeiro atualizado.
+            </p>
+
+          </div>
+
+
+          <div class="finance-form">
+
+            <div>
+
+              <label for="descricao">
+                Descri&ccedil;&atilde;o
+              </label>
+
+              <input
+                id="descricao"
+                type="text"
+                placeholder="Ex.: Bolsa, aluguel, alimentacao..."
+              >
+
+            </div>
+
+
+            <div class="two-cols">
+
+              <div>
+
+                <label for="valor">
+                  Valor
+                </label>
+
+                <input
+                  id="valor"
+                  type="text"
+                  inputmode="decimal"
+                  placeholder="0,00"
+                >
+
+              </div>
+
+
+              <div>
+
+                <label for="data">
+                  Data
+                </label>
+
+                <input
+                  id="data"
+                  type="date"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <label>
+                Tipo
+              </label>
+
+              <div class="type-buttons">
+
+                <button
+                  id="tipoReceita"
+                  class="type-button income-selected"
+                  type="button"
+                >
+                  &uarr; Receita
+                </button>
+
+                <button
+                  id="tipoDespesa"
+                  class="type-button"
+                  type="button"
+                >
+                  &darr; Despesa
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="save-actions">
+
+              <button
+                id="salvarMovimentacao"
+                class="button-primary grow"
+                type="button"
+              >
+                Adicionar movimenta&ccedil;&atilde;o
+              </button>
+
+              <button
+                id="cancelarEdicao"
+                class="button-secondary hidden"
+                type="button"
+              >
+                Cancelar
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-heading">
+
+            <span class="badge">
+              Filtro
+            </span>
+
+            <h2>
+              Per&iacute;odo financeiro
+            </h2>
+
+            <p>
+              Analise somente o intervalo desejado.
+            </p>
+
+          </div>
+
+
+          <div class="filter-form">
+
+            <div>
+
+              <label for="inicio">
+                Data inicial
+              </label>
+
+              <input
+                id="inicio"
+                type="date"
+              >
+
+            </div>
+
+
+            <div>
+
+              <label for="fim">
+                Data final
+              </label>
+
+              <input
+                id="fim"
+                type="date"
+              >
+
+            </div>
+
+
+            <button
+              id="limparPeriodo"
+              class="button-secondary"
+              type="button"
+            >
+              Limpar per&iacute;odo
+            </button>
+
+          </div>
+
+
+          <div
+            id="filtroAtivo"
+            class="active-filter hidden"
+          >
+
+            <span>
+              Filtro ativo
+            </span>
+
+            <strong id="filtroTexto"></strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- BARRAS -->
+
+      <section class="bars-grid">
+
+        <div class="panel">
+
+          <div class="bar-heading">
+
+            <div>
+
+              <span class="badge badge-success">
+                Receitas
+              </span>
+
+              <p>
+                Comparativo visual
+              </p>
+
+            </div>
+
+            <strong
+              id="barReceitasValor"
+              class="income"
+            >
+              R$ 0,00
+            </strong>
+
+          </div>
+
+
+          <div class="bar-track">
+
+            <div
+              id="barReceitas"
+              class="bar-fill income-fill"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="bar-heading">
+
+            <div>
+
+              <span class="badge badge-danger">
+                Despesas
+              </span>
+
+              <p>
+                Comparativo visual
+              </p>
+
+            </div>
+
+            <strong
+              id="barDespesasValor"
+              class="expense"
+            >
+              R$ 0,00
+            </strong>
+
+          </div>
+
+
+          <div class="bar-track">
+
+            <div
+              id="barDespesas"
+              class="bar-fill expense-fill"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- HISTORICO -->
+
+      <section class="panel history-panel">
+
+        <div class="history-header">
+
+          <div>
+
+            <span class="badge badge-orange">
+              Hist&oacute;rico
+            </span>
+
+            <h2>
+              Movimenta&ccedil;&otilde;es
+            </h2>
+
+            <p>
+              Todas as receitas e despesas registradas.
+            </p>
+
+          </div>
+
+
+          <div class="history-actions">
+
+            <span id="totalLancamentos">
+              0 lancamentos
+            </span>
+
+            <button
+              id="atualizarHistorico"
+              class="button-secondary"
+              type="button"
+            >
+              &#8635; Atualizar
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div id="movimentacoesLista">
+
+          <div class="empty">
+            Carregando...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="finance-footer">
+        Controle financeiro do Jankinho Study
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/financas.js"></script>
+
+</body>
+</html>

@@ -2278,6 +2278,20 @@ const server =
           return;
         }
 
+
+        if (
+          caminho ===
+          "/financas"
+        ) {
+
+          redirect(
+            response,
+            "/financas.html"
+          );
+
+          return;
+        }
+
         await servirArquivo(
           response,
           caminho
