@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingIncludes: {
+    "/api/auth/login": [
+      "./node_modules/.prisma/client/**/*",
+    ],
+    "/api/auth/cadastro": [
+      "./node_modules/.prisma/client/**/*",
+    ],
+    "/api/**": [
+      "./node_modules/.prisma/client/**/*",
+    ],
+  },
 };
 
 export default nextConfig;
