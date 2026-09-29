@@ -89,18 +89,18 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Erro ao realizar login:", error);
-    console.error("Etapa:", etapa);
-    console.error("AUTH_SECRET configurado:", !!process.env.AUTH_SECRET);
-    console.error("DATABASE_URL configurado:", !!process.env.DATABASE_URL);
+
+    const mensagem =
+      error instanceof Error
+        ? error.message
+        : String(error);
 
     return NextResponse.json(
       {
-        error: "Não foi possível realizar o login.",
-        debug: {
-          etapa,
-          authSecret: !!process.env.AUTH_SECRET,
-          databaseUrl: !!process.env.DATABASE_URL,
-        },
+        error: mensagem,
+        etapa,
+        authSecretConfigurado: !!process.env.AUTH_SECRET,
+        databaseConfigurado: !!process.env.DATABASE_URL,
       },
       {
         status: 500,
