@@ -10,56 +10,48 @@ datasource db {
 }
 
 model Usuario {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  email     String   @unique
-  senhaHash String?
-  createdAt DateTime @default(now())
-
+  id            Int                @id @default(autoincrement())
+  nome          String
+  email         String             @unique
+  createdAt     DateTime           @default(now())
+  senhaHash     String?
+  casosCriados  CasoClinico[]
   disciplinas   Disciplina[]
+  flashcards    Flashcard[]
+  investigacoes InvestigacaoCaso[]
+  movimentacoes Movimentacao[]
   questoes      Questao[]
   respostas     Resposta[]
-  flashcards    Flashcard[]
-  movimentacoes Movimentacao[]
-
-  casosCriados  CasoClinico[]
-  investigacoes InvestigacaoCaso[]
 }
 
 model Disciplina {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   nome      String
-  createdAt DateTime @default(now())
-
+  createdAt DateTime  @default(now())
   usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-
-  questoes Questao[]
+  usuario   Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  questoes  Questao[]
 }
 
 model Questao {
-  id          Int      @id @default(autoincrement())
-  enunciado   String
-  explicacao  String?
-  tema        String?
-  dificuldade String?
-  createdAt   DateTime @default(now())
-
-  usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-
+  id           Int           @id @default(autoincrement())
+  enunciado    String
+  explicacao   String?
+  createdAt    DateTime      @default(now())
+  usuarioId    Int
   disciplinaId Int
-  disciplina   Disciplina @relation(fields: [disciplinaId], references: [id], onDelete: Cascade)
-
+  dificuldade  String?
+  tema         String?
   alternativas Alternativa[]
+  disciplina   Disciplina    @relation(fields: [disciplinaId], references: [id], onDelete: Cascade)
+  usuario      Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   respostas    Resposta[]
 }
 
 model Alternativa {
-  id      Int     @id @default(autoincrement())
-  texto   String
-  correta Boolean @default(false)
-
+  id        Int     @id @default(autoincrement())
+  texto     String
+  correta   Boolean @default(false)
   questaoId Int
   questao   Questao @relation(fields: [questaoId], references: [id], onDelete: Cascade)
 }
@@ -68,12 +60,10 @@ model Resposta {
   id           Int      @id @default(autoincrement())
   correta      Boolean
   respondidaAt DateTime @default(now())
-
-  usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-
-  questaoId Int
-  questao   Questao @relation(fields: [questaoId], references: [id], onDelete: Cascade)
+  usuarioId    Int
+  questaoId    Int
+  questao      Questao  @relation(fields: [questaoId], references: [id], onDelete: Cascade)
+  usuario      Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 }
 
 model Flashcard {
@@ -82,9 +72,8 @@ model Flashcard {
   verso     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 }
 
 model Movimentacao {
@@ -94,78 +83,49 @@ model Movimentacao {
   tipo      TipoMovimentacao
   data      DateTime         @default(now())
   createdAt DateTime         @default(now())
-
   usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuario   Usuario          @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 }
 
-/**
- * =========================================================
- * CASOS CLÍNICOS
- * =========================================================
- */
-
 model CasoClinico {
-  id Int @id @default(autoincrement())
-
-  titulo        String
-  area          String
-  especialidade String?
-  dificuldade   String
-  cenario       String
-
-  queixaInicial String
-
-  /**
-   * Informações apresentadas automaticamente no início.
-   * Nunca devem conter o diagnóstico final.
-   */
-  dadosIniciais Json
-
-  /**
-   * Informações que o servidor libera
-   * somente quando o usuário solicita.
-   */
-  anamnese Json
-
-  exameFisico Json
-
-  sinaisVitais Json
-
-  /**
-   * Mantido para informações gerais do caso.
-   * Os exames solicitáveis individualmente ficam em ExameCaso.
-   */
-  exames Json
-
-  evolucao Json
-
-  /**
-   * Informações ocultas durante a investigação.
-   */
-  diagnosticoFinal String
-
-  explicacaoDiagnostico String
-
+  id                       Int                @id @default(autoincrement())
+  titulo                   String
+  area                     String
+  especialidade            String?
+  dificuldade              String
+  cenario                  String
+  queixaInicial            String
+  /// *
+  ///    * Informações apresentadas automaticamente no início.
+  ///    * Nunca devem conter o diagnóstico final.
+  dadosIniciais            Json
+  /// *
+  ///    * Informações que o servidor libera
+  ///    * somente quando o usuário solicita.
+  anamnese                 Json
+  exameFisico              Json
+  sinaisVitais             Json
+  /// *
+  ///    * Mantido para informações gerais do caso.
+  ///    * Os exames solicitáveis individualmente ficam em ExameCaso.
+  exames                   Json
+  evolucao                 Json
+  /// *
+  ///    * Informações ocultas durante a investigação.
+  diagnosticoFinal         String
+  explicacaoDiagnostico    String
   diagnosticosDiferenciais Json
-
-  pontosChave Json
-
-  /**
-   * Configurações do caso.
-   */
-  publicado Boolean @default(false)
-
-  geradoPorIA Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  autorId Int
-  autor   Usuario @relation(fields: [autorId], references: [id], onDelete: Cascade)
-
-  investigacoes InvestigacaoCaso[]
-  examesCaso    ExameCaso[]
+  pontosChave              Json
+  /// *
+  ///    * Configurações do caso.
+  publicado                Boolean            @default(false)
+  createdAt                DateTime           @default(now())
+  updatedAt                DateTime           @updatedAt
+  autorId                  Int
+  geradoPorIA              Boolean            @default(false)
+  autor                    Usuario            @relation(fields: [autorId], references: [id], onDelete: Cascade)
+  examesCaso               ExameCaso[]
+  investigacoes            InvestigacaoCaso[]
 
   @@index([area])
   @@index([dificuldade])
@@ -175,86 +135,60 @@ model CasoClinico {
 }
 
 model ExameCaso {
-  id Int @id @default(autoincrement())
-
-  casoId Int
-  caso   CasoClinico @relation(fields: [casoId], references: [id], onDelete: Cascade)
-
-  /**
-   * Exemplo:
-   * Hemograma
-   * Gasometria arterial
-   * ECG
-   * Radiografia de tórax
-   * Troponina
-   */
-  nome String
-
-  categoria String?
-
-  /**
-   * O que o exame realmente mostrou.
-   * Fica no banco e NÃO é enviado antes de ser solicitado.
-   */
-  resultado String
-
+  id            Int         @id @default(autoincrement())
+  casoId        Int
+  /// *
+  ///    * Exemplo:
+  ///    * Hemograma
+  ///    * Gasometria arterial
+  ///    * ECG
+  ///    * Radiografia de tórax
+  ///    * Troponina
+  nome          String
+  categoria     String?
+  /// *
+  ///    * O que o exame realmente mostrou.
+  ///    * Fica no banco e NÃO é enviado antes de ser solicitado.
+  resultado     String
   interpretacao String?
-
-  /**
-   * Ajuda o sistema a organizar a investigação.
-   */
-  disponivel Boolean @default(true)
-
-  ordem Int @default(0)
-
-  createdAt DateTime @default(now())
+  /// *
+  ///    * Ajuda o sistema a organizar a investigação.
+  disponivel    Boolean     @default(true)
+  ordem         Int         @default(0)
+  createdAt     DateTime    @default(now())
+  caso          CasoClinico @relation(fields: [casoId], references: [id], onDelete: Cascade)
 
   @@index([casoId])
   @@index([nome])
 }
 
 model InvestigacaoCaso {
-  id Int @id @default(autoincrement())
-
-  casoId Int
-  caso   CasoClinico @relation(fields: [casoId], references: [id], onDelete: Cascade)
-
-  usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-
-  /**
-   * EM_ANDAMENTO
-   * FINALIZADA
-   */
-  status String @default("EM_ANDAMENTO")
-
-  /**
-   * Guarda tudo que o aluno já descobriu.
-   */
+  id                   Int                    @id @default(autoincrement())
+  casoId               Int
+  usuarioId            Int
+  /// *
+  ///    * EM_ANDAMENTO
+  ///    * FINALIZADA
+  status               String                 @default("EM_ANDAMENTO")
+  /// *
+  ///    * Guarda tudo que o aluno já descobriu.
   informacoesColetadas Json
-
-  /**
-   * Hipótese diagnóstica enviada pelo aluno.
-   */
-  hipotese String?
-
-  /**
-   * Raciocínio utilizado pelo aluno.
-   */
-  justificativa String?
-
-  /**
-   * Avaliação feita pelo sistema depois
-   * da hipótese final.
-   */
-  avaliacao Json?
-
-  finalizado Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  registros RegistroInvestigacao[]
+  /// *
+  ///    * Hipótese diagnóstica enviada pelo aluno.
+  hipotese             String?
+  /// *
+  ///    * Raciocínio utilizado pelo aluno.
+  justificativa        String?
+  /// *
+  ///    * Avaliação feita pelo sistema depois
+  ///    * da hipótese final.
+  avaliacao            Json?
+  finalizado           Boolean                @default(false)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  caso                 CasoClinico            @relation(fields: [casoId], references: [id], onDelete: Cascade)
+  usuario              Usuario                @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  registros            RegistroInvestigacao[]
 
   @@unique([casoId, usuarioId])
   @@index([usuarioId])
@@ -264,42 +198,31 @@ model InvestigacaoCaso {
 }
 
 model RegistroInvestigacao {
-  id Int @id @default(autoincrement())
-
-investigacaoId Int
-investigacao InvestigacaoCaso @relation(fields: [investigacaoId], references: [id], onDelete: Cascade)
-
-  /**
-   * Exemplos:
-   * ANAMNESE
-   * EXAME_FISICO
-   * SINAL_VITAL
-   * EXAME
-   * EVOLUCAO
-   * HIPOTESE
-   */
-  tipo String
-
-  titulo String
-
-  /**
-   * Pergunta feita pelo usuário.
-   * Exemplo:
-   * "Quais são os antecedentes do paciente?"
-   */
-  pergunta String?
-
-  /**
-   * Resposta liberada pelo sistema.
-   */
-  resposta String
-
-  /**
-   * Ordem cronológica da investigação.
-   */
-  ordem Int
-
-  createdAt DateTime @default(now())
+  id             Int              @id @default(autoincrement())
+  investigacaoId Int
+  /// *
+  ///    * Exemplos:
+  ///    * ANAMNESE
+  ///    * EXAME_FISICO
+  ///    * SINAL_VITAL
+  ///    * EXAME
+  ///    * EVOLUCAO
+  ///    * HIPOTESE
+  tipo           String
+  titulo         String
+  /// *
+  ///    * Pergunta feita pelo usuário.
+  ///    * Exemplo:
+  ///    * "Quais são os antecedentes do paciente?"
+  pergunta       String?
+  /// *
+  ///    * Resposta liberada pelo sistema.
+  resposta       String
+  /// *
+  ///    * Ordem cronológica da investigação.
+  ordem          Int
+  createdAt      DateTime         @default(now())
+  investigacao   InvestigacaoCaso @relation(fields: [investigacaoId], references: [id], onDelete: Cascade)
 
   @@index([investigacaoId])
   @@index([tipo])
