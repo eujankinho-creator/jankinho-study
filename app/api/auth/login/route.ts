@@ -4,7 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { criarSessao } from "@/lib/auth";
 
 export async function POST(request: Request) {
+  let etapa = "início";
+
   try {
+    etapa = "ler requisição";
     const body = await request.json();
 
     const email = String(body.email || "")
@@ -23,6 +26,8 @@ export async function POST(request: Request) {
         }
       );
     }
+
+    etapa = "consultar usuário no banco";
 
     const usuario = await prisma.usuario.findUnique({
       where: {
@@ -52,6 +57,8 @@ export async function POST(request: Request) {
       );
     }
 
+    etapa = "comparar senha";
+
     const senhaCorreta = await bcrypt.compare(
       senha,
       usuario.senhaHash
@@ -68,6 +75,8 @@ export async function POST(request: Request) {
       );
     }
 
+    etapa = "criar sessão";
+
     await criarSessao(usuario.id);
 
     return NextResponse.json({
@@ -80,12 +89,18 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Erro ao realizar login:", error);
-    console.error("DEBUG AUTH_SECRET:", !!process.env.AUTH_SECRET);
-    console.error("DEBUG DATABASE_URL:", !!process.env.DATABASE_URL);
+    console.error("Etapa:", etapa);
+    console.error("AUTH_SECRET configurado:", !!process.env.AUTH_SECRET);
+    console.error("DATABASE_URL configurado:", !!process.env.DATABASE_URL);
 
     return NextResponse.json(
       {
         error: "Não foi possível realizar o login.",
+        debug: {
+          etapa,
+          authSecret: !!process.env.AUTH_SECRET,
+          databaseUrl: !!process.env.DATABASE_URL,
+        },
       },
       {
         status: 500,
