@@ -819,10 +819,6 @@ async function listarQuestoes(
   try {
     const questoes =
       await prisma.questao.findMany({
-        where: {
-          usuarioId,
-        },
-
         include: {
           disciplina: true,
           alternativas: true,
@@ -1146,8 +1142,7 @@ async function criarResposta(
       await prisma.questao.findFirst({
         where: {
           id: questaoId,
-          usuarioId,
-        },
+          },
       });
 
     if (!questao) {
@@ -1827,7 +1822,10 @@ async function servirArquivo(
           ),
 
         "Cache-Control":
-          "no-cache",
+          process.env.NODE_ENV === "production" &&
+          path.extname(arquivo).toLowerCase() !== ".html"
+            ? "public, max-age=86400"
+            : "no-cache",
       }
     );
 

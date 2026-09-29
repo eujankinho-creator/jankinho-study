@@ -17,10 +17,6 @@ export async function listarFlashcards(
       await prisma
         .flashcard
         .findMany({
-          where: {
-            usuarioId,
-          },
-
           orderBy: {
             createdAt:
               "desc",

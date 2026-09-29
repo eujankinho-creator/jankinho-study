@@ -756,7 +756,7 @@ Nao revele o diagnostico final fora do campo diagnosticoFinal.
               caso.pontosChave,
 
             publicado:
-              false,
+              true,
 
             geradoPorIA:
               true,

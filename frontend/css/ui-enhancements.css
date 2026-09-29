@@ -1,0 +1,569 @@
+/* =========================================================
+   JANKINHO STUDY - UI GLOBAL
+========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  opacity: 0;
+
+  transition:
+    opacity .18s ease;
+}
+
+
+body.ui-ready {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   BARRA DE CARREGAMENTO
+========================================================= */
+
+.ui-loading-line {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  z-index: 99999;
+
+  width: 0;
+  height: 2px;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f97316,
+      #fb923c
+    );
+
+  box-shadow:
+    0 0 12px
+    rgba(249,115,22,.45);
+
+  transition:
+    width .22s ease,
+    opacity .18s ease;
+}
+
+
+.ui-loading-line.active {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   LOADING MAIS SUAVE
+========================================================= */
+
+.loading-card,
+.loading-state,
+.skeleton {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.loading-card::after,
+.loading-state::after,
+.skeleton::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: -60%;
+
+  width: 45%;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.035),
+      transparent
+    );
+
+  animation:
+    uiShimmer 1.35s
+    ease-in-out infinite;
+}
+
+
+@keyframes uiShimmer {
+
+  0% {
+    left: -60%;
+  }
+
+  100% {
+    left: 120%;
+  }
+
+}
+
+
+.ui-reveal {
+  animation:
+    uiReveal .22s
+    ease both;
+}
+
+
+@keyframes uiReveal {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   CRONOMETRO
+========================================================= */
+
+.study-timer {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  margin-left: auto;
+  margin-right: 16px;
+
+  z-index: 100;
+}
+
+
+.study-timer-button {
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius: 12px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    0 12px;
+
+  color:
+    #a3a3a3;
+
+  font: inherit;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    transform .18s ease;
+}
+
+
+.study-timer-button:hover {
+  border-color:
+    rgba(249,115,22,.25);
+
+  background:
+    rgba(249,115,22,.06);
+
+  color:
+    #fff;
+}
+
+
+.study-timer-button.running {
+  border-color:
+    rgba(249,115,22,.28);
+
+  background:
+    rgba(249,115,22,.08);
+
+  color:
+    #fb923c;
+}
+
+
+.study-timer-button:active {
+  transform:
+    scale(.98);
+}
+
+
+.study-timer-icon {
+  font-size: 14px;
+}
+
+
+.study-timer-time {
+  min-width: 58px;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  letter-spacing:
+    .02em;
+}
+
+
+.study-timer-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    #525252;
+}
+
+
+.study-timer-button.running
+.study-timer-dot {
+  background:
+    #f97316;
+
+  box-shadow:
+    0 0 9px
+    rgba(249,115,22,.7);
+
+  animation:
+    timerPulse 1.4s
+    ease-in-out infinite;
+}
+
+
+@keyframes timerPulse {
+
+  0%,
+  100% {
+    opacity: .45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+}
+
+
+.study-timer-panel {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 300px;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transform:
+    translateY(-5px);
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius: 17px;
+
+  background:
+    #0a0a0a;
+
+  padding: 17px;
+
+  box-shadow:
+    0 20px 55px
+    rgba(0,0,0,.45);
+
+  pointer-events: none;
+
+  transition:
+    opacity .16s ease,
+    transform .16s ease,
+    visibility .16s ease;
+}
+
+
+.study-timer.open
+.study-timer-panel {
+  visibility: visible;
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  pointer-events: auto;
+}
+
+
+.study-timer-panel-title {
+  color:
+    #fff;
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+
+.study-timer-panel-subtitle {
+  margin-top: 3px;
+
+  color:
+    #525252;
+
+  font-size: 9px;
+}
+
+
+.study-timer-display {
+  margin-top: 16px;
+
+  border:
+    1px solid
+    rgba(249,115,22,.12);
+
+  border-radius: 14px;
+
+  background:
+    rgba(249,115,22,.035);
+
+  padding: 16px;
+
+  text-align: center;
+}
+
+
+.study-timer-display strong {
+  display: block;
+
+  color:
+    #fb923c;
+
+  font-size: 28px;
+
+  font-weight: 800;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  letter-spacing:
+    .03em;
+}
+
+
+.study-timer-display span {
+  display: block;
+
+  margin-top: 4px;
+
+  color:
+    #525252;
+
+  font-size: 9px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .08em;
+}
+
+
+.study-timer-today {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 11px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.05);
+
+  border-radius: 11px;
+
+  background:
+    rgba(255,255,255,.015);
+
+  padding:
+    10px 11px;
+}
+
+
+.study-timer-today span {
+  color:
+    #525252;
+
+  font-size: 9px;
+}
+
+
+.study-timer-today strong {
+  color:
+    #d4d4d4;
+
+  font-size: 11px;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+.study-timer-actions {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+
+.study-timer-actions button {
+  height: 36px;
+
+  border-radius: 10px;
+
+  font: inherit;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.study-timer-start {
+  border: 0;
+
+  background:
+    #f97316;
+
+  color:
+    #050505;
+}
+
+
+.study-timer-reset {
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:
+    #737373;
+}
+
+
+.study-timer-reset:hover {
+  color:
+    #fff;
+}
+
+
+.study-timer-status {
+  margin-top: 10px;
+
+  color:
+    #404040;
+
+  font-size: 8px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .study-timer {
+    margin-right: 8px;
+  }
+
+
+  .study-timer-button {
+    padding:
+      0 9px;
+  }
+
+
+  .study-timer-icon {
+    display: none;
+  }
+
+
+  .study-timer-panel {
+    position: fixed;
+
+    top: 78px;
+    right: 12px;
+    left: 12px;
+
+    width: auto;
+  }
+
+}
+
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration:
+      .01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .01ms !important;
+  }
+
+}

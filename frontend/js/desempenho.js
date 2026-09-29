@@ -683,9 +683,10 @@ async function start() {
 
   try {
 
-    await loadUser();
-
-    await loadPerformance();
+    await Promise.all([
+    loadUser(),
+    loadPerformance()
+  ]);
 
   }
   catch (error) {
