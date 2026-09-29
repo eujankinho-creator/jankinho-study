@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Desempenho | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/desempenho.css"
+  >
+
+</head>
+
+<body>
+
+
+  <aside class="sidebar">
+
+    <a
+      href="/"
+      class="sidebar-logo"
+    >
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+
+        <strong>
+          Jankinho
+        </strong>
+
+        <span>
+          Study
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a
+          href="/desempenho"
+          class="menu-item active"
+        >
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+
+    <header class="header">
+
+      <div class="header-title">
+        Desempenho
+      </div>
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="performance-page">
+
+
+      <section class="performance-heading">
+
+        <div>
+
+          <div class="heading-badges">
+
+            <span class="orange-badge">
+              An&aacute;lise
+            </span>
+
+            <span>
+              Seu desempenho
+            </span>
+
+          </div>
+
+          <h1>
+            Desempenho
+          </h1>
+
+          <p>
+            Acompanhe seus resultados, identifique pontos fortes
+            e descubra quais conte&uacute;dos merecem mais revis&atilde;o.
+          </p>
+
+        </div>
+
+
+        <button
+          id="atualizarTopo"
+          class="secondary-button"
+          type="button"
+        >
+          &#8635; Atualizar
+        </button>
+
+      </section>
+
+
+      <div
+        id="loading"
+        class="loading-card"
+      >
+        Carregando desempenho...
+      </div>
+
+
+      <section
+        id="erro"
+        class="error-card hidden"
+      >
+
+        <div class="error-icon">
+          !
+        </div>
+
+        <h2>
+          N&atilde;o foi poss&iacute;vel carregar o desempenho
+        </h2>
+
+        <p id="erroTexto"></p>
+
+        <button
+          id="tentarNovamente"
+          class="primary-button"
+          type="button"
+        >
+          Tentar novamente
+        </button>
+
+      </section>
+
+
+      <div
+        id="conteudo"
+        class="hidden"
+      >
+
+
+        <section
+          id="summaryCards"
+          class="summary-grid"
+        ></section>
+
+
+        <section class="performance-card">
+
+          <div class="general-header">
+
+            <div>
+
+              <span class="orange-badge">
+                Vis&atilde;o geral
+              </span>
+
+              <h2>
+                Aproveitamento geral
+              </h2>
+
+              <p>
+                Percentual de acertos considerando todas
+                as quest&otilde;es respondidas.
+              </p>
+
+            </div>
+
+            <div class="general-percent">
+
+              <strong id="percentualGeral">
+                0%
+              </strong>
+
+              <span>
+                aproveitamento
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="progress large">
+
+            <div
+              id="barraGeral"
+              class="progress-value"
+            ></div>
+
+          </div>
+
+
+          <div class="scale">
+            <span>0%</span>
+            <span>50%</span>
+            <span>100%</span>
+          </div>
+
+        </section>
+
+
+        <section class="performance-card">
+
+          <span class="small-badge">
+            An&aacute;lise
+          </span>
+
+          <h2 class="section-title">
+            Desempenho por disciplina
+          </h2>
+
+          <p class="section-description">
+            Compare seu aproveitamento em cada disciplina.
+          </p>
+
+          <div
+            id="disciplinas"
+            class="discipline-list"
+          ></div>
+
+        </section>
+
+
+        <section class="performance-card">
+
+          <span class="small-badge">
+            Conte&uacute;do
+          </span>
+
+          <h2 class="section-title">
+            Desempenho por tema
+          </h2>
+
+          <p class="section-description">
+            Identifique os conte&uacute;dos que precisam de mais revis&atilde;o.
+          </p>
+
+          <div
+            id="temas"
+            class="theme-grid"
+          ></div>
+
+        </section>
+
+
+        <section class="performance-card">
+
+          <span class="small-badge">
+            Hist&oacute;rico
+          </span>
+
+          <h2 class="section-title">
+            &Uacute;ltimas respostas
+          </h2>
+
+          <p class="section-description">
+            Suas 10 respostas mais recentes.
+          </p>
+
+          <div
+            id="historico"
+            class="history-list"
+          ></div>
+
+        </section>
+
+
+        <div class="bottom-actions">
+
+          <button
+            id="atualizarRodape"
+            class="secondary-button"
+            type="button"
+          >
+            &#8635; Atualizar desempenho
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/desempenho.js"></script>
+
+</body>
+</html>

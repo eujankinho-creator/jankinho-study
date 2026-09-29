@@ -1,3 +1,5 @@
+import { atenderRanking } from "./ranking";
+import { atenderDesempenho } from "./desempenho";
 import {
   createServer,
   IncomingMessage,
@@ -2608,6 +2610,62 @@ const server =
           redirect(
             response,
             "/evolucao.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/api/desempenho" &&
+          metodo === "GET"
+        ) {
+
+          await atenderDesempenho(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/desempenho" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/desempenho.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/api/ranking" &&
+          metodo === "GET"
+        ) {
+
+          await atenderRanking(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/ranking" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/ranking.html"
           );
 
           return;

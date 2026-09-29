@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Ranking | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/ranking.css"
+  >
+
+</head>
+
+<body>
+
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>Jankinho</strong>
+        <span>Study</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a
+          href="/ranking"
+          class="menu-item active"
+        >
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+
+    <header class="header">
+
+      <div class="header-title">
+        Ranking
+      </div>
+
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="ranking-page">
+
+
+      <section class="ranking-heading">
+
+        <div>
+
+          <div class="heading-badges">
+
+            <span class="orange-badge">
+              Competi&ccedil;&atilde;o
+            </span>
+
+            <span>
+              Desempenho acad&ecirc;mico
+            </span>
+
+          </div>
+
+
+          <h1>
+            Ranking
+          </h1>
+
+
+          <p>
+            Acompanhe o desempenho dos estudantes
+            com base nas quest&otilde;es respondidas.
+          </p>
+
+        </div>
+
+
+        <button
+          id="atualizarRanking"
+          class="secondary-button"
+          type="button"
+        >
+          &#8635; Atualizar
+        </button>
+
+      </section>
+
+
+      <div
+        id="loading"
+        class="loading-card"
+      >
+        Carregando ranking...
+      </div>
+
+
+      <div
+        id="erro"
+        class="error-message hidden"
+      ></div>
+
+
+      <section
+        id="semClassificados"
+        class="empty-ranking hidden"
+      >
+
+        <div class="trophy">
+          &#127942;
+        </div>
+
+        <h2>
+          Ainda n&atilde;o h&aacute; classificados
+        </h2>
+
+        <p>
+          Os usu&aacute;rios precisam responder
+          pelo menos 5 quest&otilde;es para entrar
+          na classifica&ccedil;&atilde;o.
+        </p>
+
+        <button
+          id="atualizarVazio"
+          class="primary-button"
+          type="button"
+        >
+          Atualizar ranking
+        </button>
+
+      </section>
+
+
+      <div
+        id="conteudo"
+        class="hidden"
+      >
+
+
+        <section id="podioSection">
+
+          <div class="section-heading">
+
+            <span class="small-badge">
+              Destaques
+            </span>
+
+            <h2>
+              Melhores desempenhos
+            </h2>
+
+            <p>
+              Os tr&ecirc;s primeiros classificados
+              aparecem em destaque.
+            </p>
+
+          </div>
+
+
+          <div
+            id="podio"
+            class="podium-grid"
+          ></div>
+
+        </section>
+
+
+        <section class="ranking-card">
+
+          <div class="ranking-card-heading">
+
+            <div>
+
+              <span class="orange-badge">
+                Classifica&ccedil;&atilde;o
+              </span>
+
+              <h2>
+                Todos os usu&aacute;rios
+              </h2>
+
+              <p>
+                Usu&aacute;rios com pelo menos
+                5 quest&otilde;es aparecem classificados.
+              </p>
+
+            </div>
+
+
+            <div class="classified-counter">
+
+              <span>
+                Classificados
+              </span>
+
+              <strong id="totalClassificados">
+                0
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="listaUsuarios"
+            class="users-list"
+          ></div>
+
+        </section>
+
+
+        <div
+          id="avisoMinimo"
+          class="minimum-notice hidden"
+        >
+          A classifica&ccedil;&atilde;o considera apenas
+          usu&aacute;rios com 5 ou mais quest&otilde;es respondidas.
+        </div>
+
+
+        <div class="bottom-actions">
+
+          <button
+            id="atualizarRodape"
+            class="secondary-button"
+            type="button"
+          >
+            &#8635; Atualizar ranking
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/ranking.js"></script>
+
+</body>
+</html>
