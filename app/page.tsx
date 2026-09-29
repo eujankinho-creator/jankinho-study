@@ -271,9 +271,7 @@ export default function Dashboard() {
 
   return (
     <AppLayout
-      titulo="Dashboard"
-      subtitulo="Seu centro de estudos"
-      paginaAtiva="dashboard"
+
     >
       {/* HERO */}
 

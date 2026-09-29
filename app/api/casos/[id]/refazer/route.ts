@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
+
 import { obterUsuarioId } from "@/lib/auth";
 
 export async function POST(
@@ -110,7 +112,6 @@ export async function POST(
               informacoesColetadas: {},
               hipotese: null,
               justificativa: null,
-              avaliacao: null,
               finalizado: false,
             },
             include: {
