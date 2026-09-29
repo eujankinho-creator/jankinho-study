@@ -1,0 +1,698 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Flashcards | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/flashcards.css"
+  >
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>Jankinho</strong>
+        <span>Study</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item active">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/anatomia" class="menu-item">
+          <span>3D</span>
+          Anatomia 3D
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-title">
+        Flashcards
+      </div>
+
+      <div class="header-user">
+
+        <div>
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="flashcards-page">
+
+      <!-- BIBLIOTECA -->
+
+      <section id="bibliotecaView">
+
+        <section class="flashcards-hero">
+
+          <div>
+
+            <div class="hero-badges">
+
+              <span class="badge badge-orange">
+                Estudo
+              </span>
+
+              <span class="hero-muted">
+                Revis&atilde;o ativa
+              </span>
+
+            </div>
+
+            <h1>
+              Flashcards
+            </h1>
+
+            <p>
+              Transforme conte&uacute;dos importantes em revis&otilde;es
+              r&aacute;pidas e objetivas.
+            </p>
+
+          </div>
+
+
+          <button
+            id="iniciarEstudoTopo"
+            class="button-primary"
+            type="button"
+          >
+            &#9654; Iniciar estudo
+          </button>
+
+        </section>
+
+
+        <div
+          id="erroBox"
+          class="error-box"
+        >
+
+          <span id="erroTexto"></span>
+
+          <button
+            id="fecharErro"
+            type="button"
+          >
+            &times;
+          </button>
+
+        </div>
+
+
+        <section class="action-grid">
+
+          <button
+            id="iniciarEstudoCard"
+            class="action-card"
+            type="button"
+          >
+
+            <div class="action-icon orange-icon">
+              &#9654;
+            </div>
+
+            <div>
+
+              <strong>
+                Modo de estudo
+              </strong>
+
+              <p>
+                Revise seus cards um por um.
+              </p>
+
+              <span>
+                Come&ccedil;ar revis&atilde;o &rarr;
+              </span>
+
+            </div>
+
+          </button>
+
+
+          <button
+            id="abrirFormulario"
+            class="action-card"
+            type="button"
+          >
+
+            <div class="action-icon">
+              +
+            </div>
+
+            <div>
+
+              <strong>
+                Novo flashcard
+              </strong>
+
+              <p>
+                Crie uma nova pergunta e resposta.
+              </p>
+
+              <span>
+                Criar agora &rarr;
+              </span>
+
+            </div>
+
+          </button>
+
+
+          <div class="action-card static-card">
+
+            <div class="action-icon">
+              &#9635;
+            </div>
+
+            <div>
+
+              <strong>
+                Sua biblioteca
+              </strong>
+
+              <p id="bibliotecaResumo">
+                0 flashcards cadastrados.
+              </p>
+
+              <span class="muted-link">
+                Biblioteca pessoal
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- FORMULARIO -->
+
+        <section
+          id="formularioNovo"
+          class="new-card-panel hidden"
+        >
+
+          <div class="new-card-header">
+
+            <div>
+
+              <span class="badge badge-orange">
+                Novo conte&uacute;do
+              </span>
+
+              <h2>
+                Criar flashcard
+              </h2>
+
+              <p>
+                Coloque a pergunta na frente e a resposta no verso.
+              </p>
+
+            </div>
+
+            <button
+              id="fecharFormulario"
+              class="close-form"
+              type="button"
+            >
+              &times;
+            </button>
+
+          </div>
+
+
+          <form id="flashcardForm">
+
+            <div class="form-grid">
+
+              <div>
+
+                <label for="frente">
+                  Frente
+                </label>
+
+                <textarea
+                  id="frente"
+                  rows="6"
+                  placeholder="Ex.: O que e debito cardiaco?"
+                ></textarea>
+
+                <small>
+                  Pergunta, conceito ou situacao que voce quer lembrar.
+                </small>
+
+              </div>
+
+
+              <div>
+
+                <label for="verso">
+                  Verso
+                </label>
+
+                <textarea
+                  id="verso"
+                  rows="6"
+                  placeholder="Ex.: Volume de sangue bombeado pelo coracao por minuto."
+                ></textarea>
+
+                <small>
+                  Resposta ou explicacao exibida durante a revisao.
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                id="cancelarFormulario"
+                class="button-secondary"
+                type="button"
+              >
+                Cancelar
+              </button>
+
+              <button
+                id="salvarFlashcard"
+                class="button-primary"
+                type="submit"
+              >
+                Salvar flashcard
+              </button>
+
+            </div>
+
+          </form>
+
+        </section>
+
+
+        <!-- ESTATISTICAS -->
+
+        <section class="stats-grid">
+
+          <div class="stat-card">
+
+            <span>
+              Total
+            </span>
+
+            <strong id="totalCards">
+              0
+            </strong>
+
+            <p>
+              flashcards cadastrados
+            </p>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span>
+              Encontrados
+            </span>
+
+            <strong id="cardsEncontrados">
+              0
+            </strong>
+
+            <p>
+              ap&oacute;s a busca atual
+            </p>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <span class="orange">
+              Revis&atilde;o
+            </span>
+
+            <strong
+              id="statusRevisao"
+              class="status-title"
+            >
+              Crie seu primeiro card
+            </strong>
+
+            <p id="statusRevisaoDescricao">
+              Comece sua biblioteca de revis&atilde;o.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- BUSCA -->
+
+        <section class="search-card">
+
+          <div class="search-wrapper">
+
+            <span>
+              &#8981;
+            </span>
+
+            <input
+              id="busca"
+              type="text"
+              placeholder="Buscar flashcards..."
+            >
+
+          </div>
+
+        </section>
+
+
+        <!-- LISTA -->
+
+        <section
+          id="flashcardsLista"
+          class="flashcards-grid"
+        >
+
+          <div class="empty full-width">
+            Carregando flashcards...
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <!-- MODO ESTUDO -->
+
+      <section
+        id="estudoView"
+        class="study-view hidden"
+      >
+
+        <div class="study-top">
+
+          <div>
+
+            <div class="hero-badges">
+
+              <span class="badge badge-orange">
+                Revis&atilde;o
+              </span>
+
+              <span class="hero-muted">
+                Modo de estudo
+              </span>
+
+            </div>
+
+            <h1 id="estudoTitulo">
+              Flashcard 1 de 1
+            </h1>
+
+          </div>
+
+
+          <button
+            id="sairEstudo"
+            class="button-secondary"
+            type="button"
+          >
+            Sair
+          </button>
+
+        </div>
+
+
+        <div class="study-progress-row">
+
+          <div class="progress-track">
+
+            <div
+              id="studyProgress"
+              class="progress-fill"
+            ></div>
+
+          </div>
+
+          <span id="studyProgressText">
+            0%
+          </span>
+
+        </div>
+
+
+        <section class="study-card">
+
+          <div class="study-front">
+
+            <div class="study-label">
+
+              <span class="badge badge-orange">
+                Frente
+              </span>
+
+              <span>
+                Pergunta
+              </span>
+
+            </div>
+
+            <div class="front-content">
+
+              <p id="studyFrente"></p>
+
+            </div>
+
+          </div>
+
+
+          <div class="study-back">
+
+            <div class="study-label">
+
+              <span class="badge">
+                Verso
+              </span>
+
+              <button
+                id="ocultarResposta"
+                class="text-button hidden"
+                type="button"
+              >
+                Ocultar resposta
+              </button>
+
+            </div>
+
+
+            <div
+              id="versoContainer"
+              class="back-content"
+            >
+
+              <button
+                id="mostrarResposta"
+                class="button-primary"
+                type="button"
+              >
+                Mostrar resposta
+              </button>
+
+            </div>
+
+
+            <div class="study-navigation">
+
+              <button
+                id="cardAnterior"
+                class="button-secondary"
+                type="button"
+              >
+                &larr; Anterior
+              </button>
+
+              <button
+                id="proximoCard"
+                class="button-primary"
+                type="button"
+              >
+                Pr&oacute;ximo &rarr;
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <p class="study-help">
+          Use a revis&atilde;o para testar sua mem&oacute;ria antes de
+          revelar a resposta.
+        </p>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/flashcards.js"></script>
+
+</body>
+</html>

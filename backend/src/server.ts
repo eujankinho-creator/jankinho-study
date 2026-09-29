@@ -19,6 +19,7 @@ import {
 } from "jose";
 
 import { prisma } from "../../lib/prisma";
+import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
 
 
@@ -1990,6 +1991,72 @@ const server =
         }
 
 
+
+        /* FLASHCARDS */
+
+        if (
+          caminho ===
+          "/api/flashcards"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          if (
+            metodo === "GET"
+          ) {
+
+            const resultado =
+              await listarFlashcards(
+                usuarioId
+              );
+
+
+            json(
+              response,
+              resultado.status,
+              resultado.data
+            );
+
+            return;
+          }
+
+
+          if (
+            metodo === "POST"
+          ) {
+
+            const body =
+              await lerJson(
+                request
+              );
+
+
+            const resultado =
+              await criarFlashcard(
+                usuarioId,
+                body
+              );
+
+
+            json(
+              response,
+              resultado.status,
+              resultado.data
+            );
+
+            return;
+          }
+        }
+
         /* DISCIPLINAS */
 
         if (
@@ -2196,6 +2263,20 @@ const server =
           return;
         }
 
+
+
+        if (
+          caminho ===
+          "/flashcards"
+        ) {
+
+          redirect(
+            response,
+            "/flashcards.html"
+          );
+
+          return;
+        }
 
         await servirArquivo(
           response,
