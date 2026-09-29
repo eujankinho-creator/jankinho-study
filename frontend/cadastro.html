@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Cadastro | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/auth.css"
+  >
+
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <div class="glow glow-top"></div>
+    <div class="glow glow-bottom"></div>
+
+    <section class="auth-container">
+
+      <div class="brand">
+
+        <div class="logo">
+          J
+        </div>
+
+        <h1>
+          Jankinho Study
+        </h1>
+
+        <p>
+          Comece sua jornada de estudos.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-content">
+
+          <span class="badge">
+            Primeiro acesso
+          </span>
+
+          <h2>
+            Criar sua conta
+          </h2>
+
+          <p class="description">
+            Crie seu perfil para acompanhar
+            sua evoluÃ§Ã£o acadÃªmica.
+          </p>
+
+
+          <div
+            id="erro"
+            class="error"
+          ></div>
+
+
+          <form
+            id="cadastroForm"
+            class="form"
+          >
+
+            <div class="field">
+
+              <label for="nome">
+                Nome
+              </label>
+
+              <input
+                id="nome"
+                class="input"
+                type="text"
+                placeholder="Como devemos chamar vocÃª?"
+                autocomplete="name"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="email">
+                E-mail
+              </label>
+
+              <input
+                id="email"
+                class="input"
+                type="email"
+                placeholder="seu@email.com"
+                autocomplete="email"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="senha">
+                Senha
+              </label>
+
+              <input
+                id="senha"
+                class="input"
+                type="password"
+                placeholder="MÃ­nimo de 6 caracteres"
+                autocomplete="new-password"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="confirmarSenha">
+                Confirmar senha
+              </label>
+
+              <input
+                id="confirmarSenha"
+                class="input"
+                type="password"
+                placeholder="Digite a senha novamente"
+                autocomplete="new-password"
+              >
+
+            </div>
+
+
+            <button
+              id="cadastroBtn"
+              class="btn-primary"
+              type="submit"
+            >
+              Criar minha conta
+            </button>
+
+          </form>
+
+
+          <div class="divider">
+
+            <div></div>
+
+            <span>
+              jÃ¡ possui uma conta?
+            </span>
+
+            <div></div>
+
+          </div>
+
+
+          <div class="switch">
+
+            <a href="/login.html">
+              â† Voltar para o login
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer">
+        Jankinho Study â€¢ Estude. Pratique. Evolua.
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="/js/cadastro.js"></script>
+
+</body>
+</html>

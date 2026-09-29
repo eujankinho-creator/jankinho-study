@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/auth.css"
+  >
+</head>
+
+<body>
+
+  <main class="auth-page">
+
+    <div class="glow glow-top"></div>
+    <div class="glow glow-bottom"></div>
+
+    <section class="auth-container">
+
+      <div class="brand">
+
+        <div class="logo">
+          J
+        </div>
+
+        <h1>
+          Jankinho Study
+        </h1>
+
+        <p>
+          Seu espa&ccedil;o para estudar melhor.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-content">
+
+          <span class="badge">
+            Migra&ccedil;&atilde;o
+          </span>
+
+          <h2>
+            Autentica&ccedil;&atilde;o funcionando
+          </h2>
+
+          <p class="description">
+            Login conclu&iacute;do com sucesso.
+            O dashboard ser&aacute; migrado na pr&oacute;xima etapa.
+          </p>
+
+
+          <div
+            id="usuario"
+            class="description"
+            style="margin-top: 24px;"
+          >
+            Carregando usu&aacute;rio...
+          </div>
+
+
+          <button
+            id="sairBtn"
+            class="btn-primary"
+            type="button"
+            style="margin-top: 24px;"
+          >
+            Sair
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer">
+        Jankinho Study &bull; Estude. Pratique. Evolua.
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    async function carregarUsuario() {
+
+      try {
+
+        const resposta =
+          await fetch(
+            "/api/auth/me",
+            {
+              method: "GET",
+              credentials: "same-origin"
+            }
+          );
+
+
+        if (!resposta.ok) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+        }
+
+
+        const dados =
+          await resposta.json();
+
+
+        if (
+          !dados.autenticado ||
+          !dados.usuario
+        ) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+        }
+
+
+        const usuario =
+          document.getElementById(
+            "usuario"
+          );
+
+
+        usuario.textContent =
+          dados.usuario.nome +
+          " \u2022 " +
+          dados.usuario.email;
+
+      }
+      catch (erro) {
+
+        console.error(
+          "Erro ao carregar usuario:",
+          erro
+        );
+
+
+        const usuario =
+          document.getElementById(
+            "usuario"
+          );
+
+
+        usuario.textContent =
+          "Nao foi possivel carregar o usuario.";
+
+      }
+
+    }
+
+
+    async function sair() {
+
+      const botao =
+        document.getElementById(
+          "sairBtn"
+        );
+
+
+      try {
+
+        botao.disabled = true;
+        botao.textContent = "Saindo...";
+
+
+        await fetch(
+          "/api/auth/logout",
+          {
+            method: "POST",
+            credentials: "same-origin"
+          }
+        );
+
+
+        window.location.href =
+          "/login.html";
+
+      }
+      catch (erro) {
+
+        console.error(
+          "Erro ao sair:",
+          erro
+        );
+
+
+        botao.disabled = false;
+        botao.textContent = "Sair";
+
+      }
+
+    }
+
+
+    document
+      .getElementById("sairBtn")
+      .addEventListener(
+        "click",
+        sair
+      );
+
+
+    carregarUsuario();
+
+  </script>
+
+</body>
+</html>
