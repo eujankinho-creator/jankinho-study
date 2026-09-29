@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     const usuario = await prisma.usuario.findUnique({
       where: {
-        email: email,
+        email,
       },
     });
 
@@ -44,8 +44,7 @@ export async function POST(request: Request) {
     if (!usuario.senhaHash) {
       return NextResponse.json(
         {
-          error:
-            "Este usuário ainda não possui uma senha configurada.",
+          error: "Este usuário ainda não possui uma senha configurada.",
         },
         {
           status: 401,
@@ -81,6 +80,8 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Erro ao realizar login:", error);
+    console.error("DEBUG AUTH_SECRET:", !!process.env.AUTH_SECRET);
+    console.error("DEBUG DATABASE_URL:", !!process.env.DATABASE_URL);
 
     return NextResponse.json(
       {
