@@ -33,7 +33,7 @@ import { gerarQuestoesIA } from "./iaQuestoes";
 
 
 const PORT =
-  Number(process.env.PORT || 3001);
+  Number(process.env.PORT || 3002);
 
 const COOKIE_NAME =
   "jankinho_session";
@@ -2511,6 +2511,109 @@ const server =
           }
         }
 
+
+        /* =========================================================
+           PROTECAO CENTRAL DO FRONTEND
+        ========================================================= */
+
+        const paginasPublicasFrontend =
+          new Set([
+            "/login",
+            "/login.html",
+            "/cadastro",
+            "/cadastro.html",
+          ]);
+
+
+        const aliasesProtegidosFrontend =
+          new Set([
+            "/questoes",
+            "/flashcards",
+            "/financas",
+            "/casos",
+            "/laboratorio",
+            "/evolucao",
+            "/desempenho",
+            "/ranking",
+            "/configuracoes",
+          ]);
+
+
+        const ehPaginaCasoFrontend =
+          /^\/casos\/\d+$/.test(
+            caminho
+          );
+
+
+        const ehHtmlProtegidoFrontend =
+          caminho.endsWith(".html") &&
+          !paginasPublicasFrontend.has(
+            caminho
+          );
+
+
+        const ehPaginaProtegidaFrontend =
+          caminho === "/" ||
+          aliasesProtegidosFrontend.has(
+            caminho
+          ) ||
+          ehPaginaCasoFrontend ||
+          ehHtmlProtegidoFrontend;
+
+
+        if (
+          metodo === "GET" &&
+          (
+            paginasPublicasFrontend.has(
+              caminho
+            ) ||
+            ehPaginaProtegidaFrontend
+          )
+        ) {
+
+          const usuarioIdFrontend =
+            await usuarioIdDaRequisicao(
+              request
+            );
+
+
+          /*
+           * Usuario autenticado nao precisa
+           * voltar para login/cadastro.
+           */
+          if (
+            paginasPublicasFrontend.has(
+              caminho
+            ) &&
+            usuarioIdFrontend
+          ) {
+
+            redirect(
+              response,
+              "/"
+            );
+
+            return;
+          }
+
+
+          /*
+           * Todas as paginas internas precisam
+           * de uma sessao JWT valida.
+           */
+          if (
+            ehPaginaProtegidaFrontend &&
+            !usuarioIdFrontend
+          ) {
+
+            redirect(
+              response,
+              "/login.html"
+            );
+
+            return;
+          }
+        }
 
         /* FRONTEND */
 
