@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Casos Clinicos | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/casos.css"
+  >
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>Jankinho</strong>
+        <span>Study</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item active">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/anatomia" class="menu-item">
+          <span>3D</span>
+          Anatomia 3D
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-title">
+        Casos Cl&iacute;nicos
+      </div>
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="cases-page">
+
+      <section class="cases-hero">
+
+        <div>
+
+          <div class="hero-title">
+
+            <div class="hero-icon">
+              &#9877;
+            </div>
+
+            <div>
+
+              <span>
+                Laborat&oacute;rio cl&iacute;nico
+              </span>
+
+              <h1>
+                Casos Cl&iacute;nicos
+              </h1>
+
+            </div>
+
+          </div>
+
+
+          <p>
+            Investigue casos cl&iacute;nicos progressivamente,
+            solicite informa&ccedil;&otilde;es, interprete exames
+            e formule sua hip&oacute;tese diagn&oacute;stica.
+          </p>
+
+        </div>
+
+
+        <button
+          id="abrirGerador"
+          class="button-primary"
+          type="button"
+        >
+          &#10022; Criar caso com IA
+        </button>
+
+      </section>
+
+
+      <div
+        id="erroBox"
+        class="error-box"
+      >
+
+        <span id="erroTexto"></span>
+
+        <button
+          id="fecharErro"
+          type="button"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <section class="filters">
+
+        <div class="search-wrapper">
+
+          <span>
+            &#8981;
+          </span>
+
+          <input
+            id="busca"
+            type="text"
+            placeholder="Buscar casos..."
+          >
+
+        </div>
+
+
+        <select id="filtroArea">
+
+          <option value="Todas">
+            Todas
+          </option>
+
+          <option value="Enfermagem">
+            Enfermagem
+          </option>
+
+          <option value="Medicina">
+            Medicina
+          </option>
+
+          <option value="Cardiologia">
+            Cardiologia
+          </option>
+
+          <option value="Pneumologia">
+            Pneumologia
+          </option>
+
+          <option value="Neurologia">
+            Neurologia
+          </option>
+
+          <option value="Emergencia">
+            Emerg&ecirc;ncia
+          </option>
+
+          <option value="UTI">
+            UTI
+          </option>
+
+          <option value="Saude da Mulher">
+            Sa&uacute;de da Mulher
+          </option>
+
+          <option value="Pediatria">
+            Pediatria
+          </option>
+
+          <option value="Infectologia">
+            Infectologia
+          </option>
+
+        </select>
+
+
+        <select id="filtroDificuldade">
+
+          <option value="Todos">
+            Todos
+          </option>
+
+          <option value="Facil">
+            F&aacute;cil
+          </option>
+
+          <option value="Medio">
+            M&eacute;dio
+          </option>
+
+          <option value="Dificil">
+            Dif&iacute;cil
+          </option>
+
+        </select>
+
+      </section>
+
+
+      <section
+        id="casosLista"
+        class="cases-grid"
+      >
+
+        <div class="empty full-width">
+          Carregando casos...
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <div
+    id="modalGerador"
+    class="modal-overlay"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span>
+            Intelig&ecirc;ncia artificial
+          </span>
+
+          <h2>
+            Criar caso cl&iacute;nico
+          </h2>
+
+          <p>
+            A IA criar&aacute; um caso investig&aacute;vel
+            e salvar&aacute; sua estrutura no banco.
+          </p>
+
+        </div>
+
+        <button
+          id="fecharGerador"
+          type="button"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <div class="modal-content">
+
+        <div class="two-cols">
+
+          <div>
+
+            <label>
+              &Aacute;rea
+            </label>
+
+            <select id="area">
+
+              <option value="Enfermagem">
+                Enfermagem
+              </option>
+
+              <option value="Medicina">
+                Medicina
+              </option>
+
+              <option value="Cardiologia">
+                Cardiologia
+              </option>
+
+              <option value="Pneumologia">
+                Pneumologia
+              </option>
+
+              <option value="Neurologia">
+                Neurologia
+              </option>
+
+              <option value="Emergencia">
+                Emerg&ecirc;ncia
+              </option>
+
+              <option value="UTI">
+                UTI
+              </option>
+
+              <option value="Pediatria">
+                Pediatria
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label>
+              Especialidade
+            </label>
+
+            <input
+              id="especialidade"
+              type="text"
+              placeholder="Ex.: Cardiologia"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="two-cols">
+
+          <div>
+
+            <label>
+              Dificuldade
+            </label>
+
+            <select id="dificuldade">
+
+              <option value="Facil">
+                F&aacute;cil
+              </option>
+
+              <option value="Medio" selected>
+                M&eacute;dio
+              </option>
+
+              <option value="Dificil">
+                Dif&iacute;cil
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label>
+              Cen&aacute;rio
+            </label>
+
+            <input
+              id="cenario"
+              type="text"
+              value="Pronto atendimento"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Tipo de caso
+          </label>
+
+          <input
+            id="tipoCaso"
+            type="text"
+            value="Investigacao clinica"
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Caracter&iacute;sticas adicionais
+          </label>
+
+          <textarea
+            id="caracteristicas"
+            rows="5"
+            placeholder="Opcional: idade, perfil do paciente, contexto clinico..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            id="cancelarGerador"
+            class="button-secondary"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            id="gerarCaso"
+            class="button-primary"
+            type="button"
+          >
+            Gerar caso
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="/js/casos.js"></script>
+
+</body>
+</html>

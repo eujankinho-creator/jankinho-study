@@ -19,6 +19,7 @@ import {
 } from "jose";
 
 import { prisma } from "../../lib/prisma";
+import { listarCasos, gerarCasoClinico } from "./casos";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
 
@@ -2057,6 +2058,81 @@ const server =
           }
         }
 
+
+        /* CASOS */
+
+        if (
+          caminho ===
+            "/api/casos" &&
+          metodo === "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const resultado =
+            await listarCasos(
+              usuarioId
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/ia/gerar-caso" &&
+          metodo === "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const body =
+            await lerJson(
+              request
+            );
+
+
+          const resultado =
+            await gerarCasoClinico(
+              usuarioId,
+              body
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
         /* DISCIPLINAS */
 
         if (
@@ -2287,6 +2363,20 @@ const server =
           redirect(
             response,
             "/financas.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+          "/casos"
+        ) {
+
+          redirect(
+            response,
+            "/casos.html"
           );
 
           return;
