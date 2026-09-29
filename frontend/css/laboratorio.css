@@ -1,0 +1,1068 @@
+﻿@import url("/css/app.css");
+
+
+.lab-page {
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 24px 28px 50px;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+
+.lab-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.08);
+}
+
+
+.simulation-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #737373;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+}
+
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+
+.status-dot.breathing {
+  background: #4ade80;
+
+  box-shadow:
+    0 0 10px
+    rgba(74,222,128,.7);
+}
+
+
+.status-dot.apnea {
+  background: #f87171;
+
+  box-shadow:
+    0 0 10px
+    rgba(248,113,113,.7);
+}
+
+
+.lab-heading h1 {
+  margin: 8px 0 0;
+
+  font-size: 22px;
+}
+
+
+.lab-heading p {
+  margin: 6px 0 0;
+
+  color: #525252;
+
+  font-size: 12px;
+}
+
+
+.lab-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+
+.lab-button {
+  border:
+    1px solid
+    rgba(255,255,255,.11);
+
+  border-radius: 12px;
+
+  background: #151515;
+
+  padding: 10px 14px;
+
+  color: #e5e5e5;
+
+  font: inherit;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+
+.lab-button:hover {
+  border-color:
+    rgba(249,115,22,.25);
+}
+
+
+.lab-button.danger {
+  border-color: #ef4444;
+
+  background: #ef4444;
+
+  color: white;
+}
+
+
+.lab-button.secondary {
+  background: transparent;
+
+  color: #737373;
+}
+
+
+.apnea-badge {
+  border:
+    1px solid
+    rgba(248,113,113,.2);
+
+  border-radius: 10px;
+
+  background:
+    rgba(248,113,113,.05);
+
+  padding: 9px 12px;
+
+  color: #f87171;
+
+  font-size: 12px;
+}
+
+
+
+.top-metrics {
+  display: grid;
+
+  grid-template-columns:
+    repeat(8,minmax(0,1fr));
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+}
+
+
+.metric-card {
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius: 13px;
+
+  background: #0c0c0c;
+
+  padding: 12px 14px;
+}
+
+
+.metric-card span {
+  display: block;
+
+  color: #525252;
+
+  font-size: 9px;
+
+  letter-spacing: .13em;
+
+  text-transform: uppercase;
+}
+
+
+.metric-value {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+
+  margin-top: 5px;
+}
+
+
+.metric-value strong {
+  color: #f5f5f5;
+
+  font-size: 19px;
+}
+
+
+.metric-card.accent
+.metric-value strong {
+  color: #fb923c;
+}
+
+
+.metric-value small {
+  padding-bottom: 2px;
+
+  color: #525252;
+
+  font-size: 9px;
+}
+
+
+
+.laboratory-grid {
+  display: grid;
+
+  grid-template-columns:
+    235px
+    minmax(0,1fr)
+    300px;
+
+  gap: 20px;
+}
+
+
+.lab-panel {
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius: 18px;
+
+  background: #101010;
+
+  box-shadow:
+    0 10px 40px
+    rgba(0,0,0,.25);
+}
+
+
+.panel-header {
+  padding: 16px 20px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+
+.panel-header h2 {
+  margin: 0;
+
+  font-size: 13px;
+}
+
+
+.panel-header p {
+  margin: 5px 0 0;
+
+  color: #525252;
+
+  font-size: 10px;
+}
+
+
+.panel-content {
+  padding: 20px;
+}
+
+
+
+.control-tabs {
+  display: grid;
+  gap: 4px;
+
+  padding: 12px;
+}
+
+
+.control-tab {
+  width: 100%;
+
+  border: 1px solid transparent;
+
+  border-radius: 10px;
+
+  background: transparent;
+
+  padding: 10px 11px;
+
+  color: #737373;
+
+  font: inherit;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+
+.control-tab:hover {
+  background: #171717;
+
+  color: #d4d4d4;
+}
+
+
+.control-tab.active {
+  border-color:
+    rgba(249,115,22,.2);
+
+  background:
+    rgba(249,115,22,.1);
+
+  color: #fb923c;
+}
+
+
+.control-sliders {
+  display: grid;
+  gap: 24px;
+
+  padding: 20px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+
+.slider-control {
+  display: grid;
+  gap: 8px;
+}
+
+
+.slider-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  font-size: 11px;
+}
+
+
+.slider-heading span:first-child {
+  color: #a3a3a3;
+}
+
+
+.slider-number {
+  color: #e5e5e5;
+
+  font-weight: 600;
+}
+
+
+.slider-number small {
+  margin-left: 3px;
+
+  color: #525252;
+
+  font-size: 9px;
+}
+
+
+.slider-control input {
+  width: 100%;
+
+  accent-color: #f97316;
+
+  cursor: pointer;
+}
+
+
+.slider-limits {
+  display: flex;
+  justify-content: space-between;
+
+  color: #303030;
+
+  font-size: 8px;
+}
+
+
+
+.lab-center {
+  min-width: 0;
+
+  display: grid;
+  gap: 20px;
+}
+
+
+.lab-right {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+
+.monitor-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap: 20px;
+}
+
+
+.monitor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 20px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+
+.monitor-header > div:first-child {
+  display: grid;
+}
+
+
+.monitor-header strong {
+  font-size: 12px;
+}
+
+
+.monitor-header span {
+  margin-top: 3px;
+
+  color: #404040;
+
+  font-size: 9px;
+}
+
+
+.monitor-number {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+
+.monitor-number strong {
+  font-size: 25px;
+}
+
+
+.monitor-number small {
+  padding-bottom: 3px;
+
+  color: #525252;
+
+  font-size: 9px;
+}
+
+
+.monitor-number.green strong {
+  color: #4ade80;
+}
+
+
+.monitor-number.blue strong {
+  color: #60a5fa;
+}
+
+
+.monitor-screen {
+  position: relative;
+
+  height: 215px;
+
+  overflow: hidden;
+}
+
+
+.ecg-screen {
+  background: #050807;
+}
+
+
+.spo-screen {
+  background: #04080d;
+}
+
+
+.monitor-screen canvas {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+}
+
+
+.monitor-label {
+  position: absolute;
+
+  left: 15px;
+  top: 12px;
+
+  color:
+    rgba(74,222,128,.5);
+
+  font-size: 9px;
+}
+
+
+.blue-label {
+  color:
+    rgba(96,165,250,.55);
+}
+
+
+.pulse-label {
+  position: absolute;
+
+  right: 15px;
+  top: 12px;
+
+  display: grid;
+
+  text-align: right;
+}
+
+
+.pulse-label span {
+  color: #525252;
+
+  font-size: 8px;
+}
+
+
+.pulse-label strong {
+  margin-top: 2px;
+
+  color: #93c5fd;
+
+  font-size: 12px;
+}
+
+
+.ecg-results {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5,minmax(0,1fr));
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+
+.monitor-results {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+
+.monitor-result {
+  padding: 11px;
+
+  border-right:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+
+.monitor-result:last-child {
+  border-right: 0;
+}
+
+
+.monitor-result span {
+  display: block;
+
+  color: #404040;
+
+  font-size: 8px;
+
+  text-transform: uppercase;
+}
+
+
+.monitor-result strong {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #bdbdbd;
+
+  font-size: 9px;
+
+  font-weight: 500;
+}
+
+
+.monitor-result .normal {
+  color: #60a5fa;
+}
+
+
+.monitor-result .warning {
+  color: #facc15;
+}
+
+
+.monitor-result .danger {
+  color: #f87171;
+}
+
+
+
+.gasometry-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+
+  gap: 1px;
+
+  background:
+    rgba(255,255,255,.07);
+}
+
+
+.gas-card {
+  background: #101010;
+
+  padding: 20px;
+}
+
+
+.gas-card span {
+  color: #404040;
+
+  font-size: 9px;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+}
+
+
+.gas-card strong {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 35px;
+}
+
+
+.gas-card strong.orange {
+  color: #fb923c;
+}
+
+
+.gas-card strong.blue {
+  color: #60a5fa;
+}
+
+
+.gas-card small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #404040;
+
+  font-size: 9px;
+}
+
+
+.gasometry-footer {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap: 20px;
+
+  padding: 20px;
+}
+
+
+.simple-stat span {
+  display: block;
+
+  color: #404040;
+
+  font-size: 9px;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+}
+
+
+.simple-stat strong {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 16px;
+}
+
+
+.simple-stat strong.orange {
+  color: #fb923c;
+
+  font-size: 13px;
+}
+
+
+
+.mechanics-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+}
+
+
+.mechanics-card {
+  padding: 20px;
+
+  border-right:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+
+.mechanics-card:last-child {
+  border-right: 0;
+}
+
+
+.mechanics-card span {
+  color: #404040;
+
+  font-size: 9px;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+}
+
+
+.mechanics-card strong {
+  display: block;
+
+  margin-top: 7px;
+
+  font-size: 23px;
+}
+
+
+.mechanics-card small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #404040;
+
+  font-size: 9px;
+}
+
+
+
+.interpretation-highlight {
+  margin-bottom: 15px;
+
+  border:
+    1px solid
+    rgba(249,115,22,.1);
+
+  border-radius: 12px;
+
+  background:
+    rgba(249,115,22,.05);
+
+  padding: 15px;
+}
+
+
+.interpretation-highlight span {
+  color:
+    rgba(249,115,22,.65);
+
+  font-size: 8px;
+
+  letter-spacing: .14em;
+
+  text-transform: uppercase;
+}
+
+
+.interpretation-highlight strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #fb923c;
+
+  font-size: 13px;
+}
+
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+
+  padding: 10px 0;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.04);
+}
+
+
+.result-row:last-child {
+  border-bottom: 0;
+}
+
+
+.result-row span {
+  color: #525252;
+
+  font-size: 11px;
+}
+
+
+.result-row strong {
+  color: #d4d4d4;
+
+  font-size: 11px;
+
+  text-align: right;
+}
+
+
+.result-row small {
+  margin-left: 3px;
+
+  color: #404040;
+
+  font-size: 9px;
+}
+
+
+
+.breathing-card {
+  border: 1px solid;
+  border-radius: 12px;
+
+  padding: 15px;
+}
+
+
+.breathing-card.normal {
+  border-color:
+    rgba(74,222,128,.1);
+
+  background:
+    rgba(74,222,128,.04);
+}
+
+
+.breathing-card.apnea {
+  border-color:
+    rgba(248,113,113,.12);
+
+  background:
+    rgba(248,113,113,.05);
+}
+
+
+.breathing-card span {
+  color: #525252;
+
+  font-size: 8px;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+}
+
+
+.breathing-card strong {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 13px;
+}
+
+
+.breathing-card.normal strong {
+  color: #4ade80;
+}
+
+
+.breathing-card.apnea strong {
+  color: #f87171;
+}
+
+
+.breathing-card small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #525252;
+
+  font-size: 10px;
+}
+
+
+
+@media (max-width: 1450px) {
+
+  .top-metrics {
+    grid-template-columns:
+      repeat(4,minmax(0,1fr));
+  }
+
+
+  .laboratory-grid {
+    grid-template-columns:
+      220px
+      minmax(0,1fr);
+  }
+
+
+  .lab-right {
+    grid-column:
+      1 / -1;
+
+    grid-template-columns:
+      repeat(4,minmax(0,1fr));
+  }
+
+}
+
+
+@media (max-width: 1050px) {
+
+  .monitor-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .lab-right {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+@media (max-width: 850px) {
+
+  .lab-page {
+    padding:
+      22px 15px 40px;
+  }
+
+
+  .lab-heading {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+
+  .laboratory-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .lab-right {
+    grid-column: auto;
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .control-tabs {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+@media (max-width: 620px) {
+
+  .top-metrics {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+
+  .gasometry-grid,
+  .mechanics-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+
+  .gasometry-footer {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .ecg-results {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}

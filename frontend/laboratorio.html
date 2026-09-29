@@ -1,0 +1,585 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Laboratorio | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/laboratorio.css"
+  >
+
+</head>
+
+<body>
+
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>Jankinho</strong>
+        <span>Study</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item active">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/anatomia" class="menu-item">
+          <span>3D</span>
+          Anatomia 3D
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+
+    <header class="header">
+
+      <div class="header-title">
+        Laborat&oacute;rio
+      </div>
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="lab-page">
+
+
+      <section class="lab-heading">
+
+        <div>
+
+          <div class="simulation-status">
+
+            <span
+              id="statusDot"
+              class="status-dot breathing"
+            ></span>
+
+            <span>
+              Simula&ccedil;&atilde;o fisiol&oacute;gica
+            </span>
+
+          </div>
+
+          <h1>
+            Laborat&oacute;rio
+          </h1>
+
+          <p>
+            Ambiente interativo de fisiologia cardiovascular,
+            respirat&oacute;ria e &aacute;cido-base.
+          </p>
+
+        </div>
+
+
+        <div class="lab-actions">
+
+          <div
+            id="apneaBadge"
+            class="apnea-badge hidden"
+          >
+            Apneia &middot;
+            <strong id="apneaSeconds">0</strong>s
+          </div>
+
+          <button
+            id="respirationButton"
+            class="lab-button"
+            type="button"
+          >
+            Pausar respira&ccedil;&atilde;o
+          </button>
+
+          <button
+            id="resetButton"
+            class="lab-button secondary"
+            type="button"
+          >
+            Resetar
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <section
+        id="topMetrics"
+        class="top-metrics"
+      ></section>
+
+
+      <section class="laboratory-grid">
+
+
+        <aside>
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Controles
+              </h2>
+
+              <p>
+                Vari&aacute;veis fisiol&oacute;gicas
+              </p>
+
+            </div>
+
+
+            <div
+              id="tabs"
+              class="control-tabs"
+            ></div>
+
+
+            <div
+              id="controls"
+              class="control-sliders"
+            ></div>
+
+          </div>
+
+        </aside>
+
+
+        <section class="lab-center">
+
+
+          <div class="monitor-grid">
+
+
+            <div class="lab-panel monitor-panel">
+
+              <div class="monitor-header">
+
+                <div>
+
+                  <strong>
+                    ECG
+                  </strong>
+
+                  <span>
+                    Monitoriza&ccedil;&atilde;o el&eacute;trica
+                  </span>
+
+                </div>
+
+                <div class="monitor-number green">
+
+                  <strong id="ecgFC">
+                    72
+                  </strong>
+
+                  <small>
+                    bpm
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <div class="monitor-screen ecg-screen">
+
+                <canvas id="ecgCanvas"></canvas>
+
+                <span class="monitor-label">
+                  ECG II
+                </span>
+
+              </div>
+
+
+              <div
+                id="ecgResults"
+                class="ecg-results"
+              ></div>
+
+            </div>
+
+
+            <div class="lab-panel monitor-panel">
+
+              <div class="monitor-header">
+
+                <div>
+
+                  <strong>
+                    SpO&#8322;
+                  </strong>
+
+                  <span>
+                    Oximetria / pletismografia
+                  </span>
+
+                </div>
+
+                <div class="monitor-number blue">
+
+                  <strong id="spo2Number">
+                    98
+                  </strong>
+
+                  <small>
+                    %
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <div class="monitor-screen spo-screen">
+
+                <canvas id="spoCanvas"></canvas>
+
+                <span class="monitor-label blue-label">
+                  PLETH
+                </span>
+
+                <div class="pulse-label">
+
+                  <span>
+                    PR
+                  </span>
+
+                  <strong id="pulseFC">
+                    72 bpm
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <div
+                id="spoResults"
+                class="monitor-results"
+              ></div>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Gasometria arterial
+              </h2>
+
+              <p>
+                An&aacute;lise &aacute;cido-base e oxigena&ccedil;&atilde;o
+              </p>
+
+            </div>
+
+
+            <div
+              id="gasometry"
+              class="gasometry-grid"
+            ></div>
+
+
+            <div
+              id="gasometryFooter"
+              class="gasometry-footer"
+            ></div>
+
+          </div>
+
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Mec&acirc;nica respirat&oacute;ria
+              </h2>
+
+              <p>
+                Dados derivados da ventila&ccedil;&atilde;o
+              </p>
+
+            </div>
+
+
+            <div
+              id="respiratoryMechanics"
+              class="mechanics-grid"
+            ></div>
+
+          </div>
+
+
+        </section>
+
+
+        <aside class="lab-right">
+
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Interpreta&ccedil;&atilde;o
+              </h2>
+
+              <p>
+                Leitura dos resultados
+              </p>
+
+            </div>
+
+            <div
+              id="interpretation"
+              class="panel-content"
+            ></div>
+
+          </div>
+
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Hemodin&acirc;mica
+              </h2>
+
+              <p>
+                Vari&aacute;veis cardiovasculares
+              </p>
+
+            </div>
+
+            <div
+              id="hemodynamics"
+              class="panel-content"
+            ></div>
+
+          </div>
+
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Eletr&oacute;litos
+              </h2>
+
+              <p>
+                Estado atual
+              </p>
+
+            </div>
+
+            <div
+              id="electrolytes"
+              class="panel-content"
+            ></div>
+
+          </div>
+
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Respira&ccedil;&atilde;o
+              </h2>
+
+              <p>
+                Estado atual
+              </p>
+
+            </div>
+
+            <div
+              id="respirationState"
+              class="panel-content"
+            ></div>
+
+          </div>
+
+
+        </aside>
+
+
+      </section>
+
+
+    </main>
+
+
+  </div>
+
+
+  <script src="/js/laboratorio.js"></script>
+
+
+</body>
+
+</html>
