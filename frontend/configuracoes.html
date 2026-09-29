@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Configura&ccedil;&otilde;es | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/configuracoes.css"
+  >
+
+</head>
+
+<body>
+
+
+  <aside class="sidebar">
+
+    <a
+      href="/"
+      class="sidebar-logo"
+    >
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>
+          Jankinho
+        </strong>
+
+        <span>
+          Study
+        </span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+        <a
+          href="/configuracoes"
+          class="menu-item active"
+        >
+          <span>&#9881;</span>
+          Configura&ccedil;&otilde;es
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+        title="Sair"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+
+    <header class="header">
+
+      <div class="header-title">
+        Configura&ccedil;&otilde;es
+      </div>
+
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="settings-page">
+
+
+      <section class="settings-heading">
+
+        <span class="orange-badge">
+          Conta
+        </span>
+
+        <h1>
+          Configura&ccedil;&otilde;es
+        </h1>
+
+        <p>
+          Gerencie seus dados pessoais,
+          apar&ecirc;ncia e seguran&ccedil;a da conta.
+        </p>
+
+      </section>
+
+
+      <div
+        id="pageMessage"
+        class="page-message hidden"
+      ></div>
+
+
+      <div
+        id="loading"
+        class="loading-card"
+      >
+        Carregando configura&ccedil;&otilde;es...
+      </div>
+
+
+      <div
+        id="settingsContent"
+        class="settings-content hidden"
+      >
+
+
+        <!-- PERFIL -->
+
+        <section class="settings-card">
+
+          <div class="settings-icon">
+            &#9786;
+          </div>
+
+
+          <div class="settings-card-content">
+
+            <div class="card-heading">
+
+              <div>
+
+                <span class="small-label">
+                  Perfil
+                </span>
+
+                <h2>
+                  Informa&ccedil;&otilde;es pessoais
+                </h2>
+
+                <p>
+                  Atualize como seu nome aparece dentro
+                  do Jankinho Study.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <form
+              id="profileForm"
+              class="settings-form"
+            >
+
+              <div class="field">
+
+                <label for="nome">
+                  Nome
+                </label>
+
+                <input
+                  id="nome"
+                  name="nome"
+                  type="text"
+                  maxlength="80"
+                  autocomplete="name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="email">
+                  E-mail
+                </label>
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  readonly
+                >
+
+                <small>
+                  O e-mail utilizado para entrar na conta
+                  n&atilde;o &eacute; alterado por esta tela.
+                </small>
+
+              </div>
+
+
+              <div class="account-meta">
+
+                <span>
+                  Conta criada em
+                </span>
+
+                <strong id="createdAt">
+                  -
+                </strong>
+
+              </div>
+
+
+              <button
+                id="saveProfile"
+                class="primary-button"
+                type="submit"
+              >
+                Salvar perfil
+              </button>
+
+            </form>
+
+          </div>
+
+        </section>
+
+
+        <!-- APARENCIA -->
+
+        <section class="settings-card">
+
+          <div class="settings-icon">
+            &#9728;
+          </div>
+
+
+          <div class="settings-card-content">
+
+            <span class="small-label">
+              Apar&ecirc;ncia
+            </span>
+
+            <h2>
+              Tema da plataforma
+            </h2>
+
+            <p>
+              A interface atual foi otimizada para
+              uso no tema escuro.
+            </p>
+
+
+            <div class="theme-box">
+
+              <div>
+
+                <strong>
+                  Tema escuro
+                </strong>
+
+                <span>
+                  Ativo em toda a plataforma
+                </span>
+
+              </div>
+
+
+              <div class="active-theme">
+                Ativo
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- SEGURANCA -->
+
+        <section class="settings-card">
+
+          <div class="settings-icon">
+            &#128274;
+          </div>
+
+
+          <div class="settings-card-content">
+
+            <span class="small-label">
+              Seguran&ccedil;a
+            </span>
+
+            <h2>
+              Alterar senha
+            </h2>
+
+            <p>
+              Use uma nova senha com pelo menos
+              6 caracteres.
+            </p>
+
+
+            <form
+              id="passwordForm"
+              class="settings-form"
+            >
+
+              <div
+                id="currentPasswordField"
+                class="field"
+              >
+
+                <label for="senhaAtual">
+                  Senha atual
+                </label>
+
+                <input
+                  id="senhaAtual"
+                  name="senhaAtual"
+                  type="password"
+                  autocomplete="current-password"
+                >
+
+              </div>
+
+
+              <div class="password-grid">
+
+                <div class="field">
+
+                  <label for="novaSenha">
+                    Nova senha
+                  </label>
+
+                  <input
+                    id="novaSenha"
+                    name="novaSenha"
+                    type="password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label for="confirmarSenha">
+                    Confirmar nova senha
+                  </label>
+
+                  <input
+                    id="confirmarSenha"
+                    name="confirmarSenha"
+                    type="password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div class="password-info">
+                A altera&ccedil;&atilde;o n&atilde;o encerra
+                automaticamente sua sess&atilde;o atual.
+              </div>
+
+
+              <button
+                id="savePassword"
+                class="secondary-button"
+                type="submit"
+              >
+                Alterar senha
+              </button>
+
+            </form>
+
+          </div>
+
+        </section>
+
+
+        <!-- SESSAO -->
+
+        <section class="settings-card danger-card">
+
+          <div class="settings-icon danger">
+            &#8618;
+          </div>
+
+
+          <div class="settings-card-content">
+
+            <span class="small-label danger-text">
+              Sess&atilde;o
+            </span>
+
+            <h2>
+              Encerrar sess&atilde;o
+            </h2>
+
+            <p>
+              Saia desta conta neste navegador.
+            </p>
+
+
+            <button
+              id="logoutButton"
+              class="danger-button"
+              type="button"
+            >
+              Sair da conta
+            </button>
+
+          </div>
+
+        </section>
+
+
+      </div>
+
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/configuracoes.js"></script>
+
+</body>
+</html>

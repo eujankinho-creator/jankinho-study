@@ -1,0 +1,629 @@
+@import url("/css/app.css");
+
+
+.hidden {
+  display: none !important;
+}
+
+
+.settings-page {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding:
+    32px 28px 55px;
+}
+
+
+.settings-heading {
+  margin-bottom:
+    28px;
+}
+
+
+.orange-badge,
+.small-label {
+  display: inline-flex;
+
+  border:
+    1px solid
+    rgba(249,115,22,.18);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(249,115,22,.08);
+
+  padding:
+    5px 9px;
+
+  color:
+    #fb923c;
+
+  font-size:
+    9px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .08em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.small-label {
+  border-color:
+    rgba(255,255,255,.07);
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:
+    #737373;
+}
+
+
+.settings-heading h1 {
+  margin:
+    11px 0 0;
+
+  color:
+    #fff;
+
+  font-size:
+    34px;
+
+  letter-spacing:
+    -.03em;
+}
+
+
+.settings-heading p {
+  max-width:
+    650px;
+
+  margin:
+    9px 0 0;
+
+  color:
+    #737373;
+
+  font-size:
+    13px;
+
+  line-height:
+    22px;
+}
+
+
+.loading-card {
+  min-height:
+    260px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius:
+    20px;
+
+  background:
+    #0a0a0a;
+
+  color:
+    #737373;
+
+  font-size:
+    12px;
+}
+
+
+.settings-content {
+  display: grid;
+
+  gap:
+    15px;
+}
+
+
+.settings-card {
+  display: grid;
+
+  grid-template-columns:
+    50px 1fr;
+
+  gap:
+    18px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius:
+    20px;
+
+  background:
+    #0a0a0a;
+
+  padding:
+    22px;
+}
+
+
+.settings-icon {
+  width:
+    44px;
+
+  height:
+    44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius:
+    13px;
+
+  background:
+    rgba(249,115,22,.08);
+
+  color:
+    #fb923c;
+
+  font-size:
+    18px;
+}
+
+
+.settings-icon.danger {
+  background:
+    rgba(244,63,94,.08);
+
+  color:
+    #fb7185;
+}
+
+
+.settings-card-content {
+  min-width:
+    0;
+}
+
+
+.settings-card-content h2 {
+  margin:
+    9px 0 0;
+
+  color:
+    #fff;
+
+  font-size:
+    18px;
+}
+
+
+.settings-card-content > p,
+.card-heading p {
+  max-width:
+    620px;
+
+  margin:
+    6px 0 0;
+
+  color:
+    #525252;
+
+  font-size:
+    11px;
+
+  line-height:
+    18px;
+}
+
+
+.settings-form {
+  margin-top:
+    20px;
+}
+
+
+.field {
+  display: grid;
+
+  gap:
+    7px;
+
+  margin-bottom:
+    14px;
+}
+
+
+.field label {
+  color:
+    #a3a3a3;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .07em;
+}
+
+
+.field input {
+  width:
+    100%;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  outline:
+    none;
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    11px 12px;
+
+  color:
+    #e5e5e5;
+
+  font: inherit;
+
+  font-size:
+    12px;
+}
+
+
+.field input:focus {
+  border-color:
+    rgba(249,115,22,.45);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(249,115,22,.06);
+}
+
+
+.field input[readonly] {
+  color:
+    #737373;
+
+  cursor:
+    not-allowed;
+}
+
+
+.field small {
+  color:
+    #404040;
+
+  font-size:
+    9px;
+
+  line-height:
+    15px;
+}
+
+
+.password-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:
+    12px;
+}
+
+
+.primary-button,
+.secondary-button,
+.danger-button {
+  border-radius:
+    11px;
+
+  padding:
+    10px 15px;
+
+  font: inherit;
+
+  font-size:
+    11px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+.primary-button {
+  border:
+    0;
+
+  background:
+    #f97316;
+
+  color:
+    #050505;
+}
+
+
+.secondary-button {
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:
+    #d4d4d4;
+}
+
+
+.danger-button {
+  margin-top:
+    18px;
+
+  border:
+    1px solid
+    rgba(244,63,94,.18);
+
+  background:
+    rgba(244,63,94,.08);
+
+  color:
+    #fb7185;
+}
+
+
+.primary-button:disabled,
+.secondary-button:disabled,
+.danger-button:disabled {
+  opacity:
+    .55;
+
+  cursor:
+    not-allowed;
+}
+
+
+.theme-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap:
+    20px;
+
+  margin-top:
+    19px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  border-radius:
+    14px;
+
+  background:
+    rgba(255,255,255,.015);
+
+  padding:
+    14px;
+}
+
+
+.theme-box strong {
+  display:
+    block;
+
+  color:
+    #d4d4d4;
+
+  font-size:
+    12px;
+}
+
+
+.theme-box span {
+  display:
+    block;
+
+  margin-top:
+    4px;
+
+  color:
+    #404040;
+
+  font-size:
+    9px;
+}
+
+
+.active-theme {
+  border:
+    1px solid
+    rgba(16,185,129,.18);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(16,185,129,.07);
+
+  padding:
+    5px 9px;
+
+  color:
+    #34d399;
+
+  font-size:
+    9px;
+
+  font-weight:
+    800;
+}
+
+
+.account-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap:
+    15px;
+
+  margin:
+    4px 0 17px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.05);
+
+  padding-top:
+    13px;
+
+  color:
+    #404040;
+
+  font-size:
+    9px;
+}
+
+
+.account-meta strong {
+  color:
+    #737373;
+
+  font-size:
+    10px;
+}
+
+
+.password-info {
+  margin:
+    3px 0 16px;
+
+  color:
+    #404040;
+
+  font-size:
+    9px;
+
+  line-height:
+    15px;
+}
+
+
+.danger-card {
+  border-color:
+    rgba(244,63,94,.08);
+}
+
+
+.danger-text {
+  border-color:
+    rgba(244,63,94,.14);
+
+  background:
+    rgba(244,63,94,.05);
+
+  color:
+    #fb7185;
+}
+
+
+.page-message {
+  margin-bottom:
+    15px;
+
+  border:
+    1px solid
+    rgba(16,185,129,.18);
+
+  border-radius:
+    12px;
+
+  background:
+    rgba(16,185,129,.05);
+
+  padding:
+    12px 14px;
+
+  color:
+    #6ee7b7;
+
+  font-size:
+    11px;
+}
+
+
+.page-message.error {
+  border-color:
+    rgba(244,63,94,.18);
+
+  background:
+    rgba(244,63,94,.05);
+
+  color:
+    #fda4af;
+}
+
+
+@media (max-width: 720px) {
+
+  .settings-page {
+    padding:
+      24px 15px 45px;
+  }
+
+
+  .settings-card {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .password-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .theme-box {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+}

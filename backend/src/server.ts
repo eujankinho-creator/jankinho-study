@@ -1,3 +1,8 @@
+import {
+  obterConfiguracoes,
+  atualizarPerfil,
+  atualizarSenha,
+} from "./configuracoes";
 import { atenderRanking } from "./ranking";
 import { atenderDesempenho } from "./desempenho";
 import {
@@ -2666,6 +2671,62 @@ const server =
           redirect(
             response,
             "/ranking.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/api/configuracoes" &&
+          metodo === "GET"
+        ) {
+
+          await obterConfiguracoes(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/api/configuracoes/perfil" &&
+          metodo === "PATCH"
+        ) {
+
+          await atualizarPerfil(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/api/configuracoes/senha" &&
+          metodo === "PATCH"
+        ) {
+
+          await atualizarSenha(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/configuracoes" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/configuracoes.html"
           );
 
           return;
