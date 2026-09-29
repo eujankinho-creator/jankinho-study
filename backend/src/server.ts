@@ -2599,6 +2599,20 @@ const server =
           return;
         }
 
+
+        if (
+          caminho === "/evolucao" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/evolucao.html"
+          );
+
+          return;
+        }
+
         await servirArquivo(
           response,
           caminho

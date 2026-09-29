@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Evolucao | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/evolucao.css"
+  >
+
+</head>
+
+<body>
+
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>Jankinho</strong>
+        <span>Study</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/evolucao" class="menu-item active">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+        title="Sair"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+
+    <header class="header">
+
+      <div class="header-title">
+        Evolu&ccedil;&atilde;o
+      </div>
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="evolution-page">
+
+
+      <section class="evolution-hero">
+
+        <div>
+
+          <div class="training-badge">
+            Treinamento pr&aacute;tico
+          </div>
+
+          <h1>
+            Evolu&ccedil;&atilde;o de Enfermagem
+          </h1>
+
+          <p>
+            Treine a constru&ccedil;&atilde;o de registros de enfermagem
+            a partir de casos cl&iacute;nicos e desenvolva objetividade,
+            organiza&ccedil;&atilde;o e racioc&iacute;nio cl&iacute;nico.
+          </p>
+
+        </div>
+
+
+        <div class="mode-card">
+
+          <div class="mode-icon">
+            &#9998;
+          </div>
+
+          <div>
+            <span>Modo atual</span>
+            <strong>Pr&aacute;tica livre</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="config-panel evolution-panel">
+
+        <div class="panel-top">
+
+          <div>
+
+            <h2>
+              Configurar treinamento
+            </h2>
+
+            <p>
+              Escolha o perfil do caso que deseja praticar.
+            </p>
+
+          </div>
+
+          <div class="config-icon">
+            &#9881;
+          </div>
+
+        </div>
+
+
+        <div class="filter-grid">
+          <div class="field">
+
+            <label for="categoria">
+              Categoria
+            </label>
+
+            <select id="categoria">
+
+              <option value="Todos">
+                Todos os contextos
+              </option>
+
+              <option value="Higiene e conforto">
+                Higiene e conforto
+              </option>
+
+              <option value="Feridas e curativos">
+                Feridas e curativos
+              </option>
+
+              <option value="Dispositivos">
+                Dispositivos
+              </option>
+
+              <option value="Respiratorio">
+                Respirat&oacute;rio
+              </option>
+
+              <option value="Sinais vitais e dor">
+                Sinais vitais e dor
+              </option>
+
+              <option value="Eliminacoes">
+                Elimina&ccedil;&otilde;es
+              </option>
+
+              <option value="Nutricional">
+                Nutri&ccedil;&atilde;o
+              </option>
+
+              <option value="Pre e pos-operatorio">
+                Pr&eacute; e p&oacute;s-operat&oacute;rio
+              </option>
+
+              <option value="Urgencias e intercorrencias">
+                Urg&ecirc;ncias e intercorr&ecirc;ncias
+              </option>
+
+              <option value="Admissao alta e transferencia">
+                Admiss&atilde;o, alta e transfer&ecirc;ncia
+              </option>
+
+              <option value="UTI">
+                UTI
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <div class="field">
+
+            <label for="nivel">
+              N&iacute;vel
+            </label>
+
+            <select id="nivel">
+
+              <option value="Basico">
+                B&aacute;sico
+              </option>
+
+              <option value="Intermediario">
+                Intermedi&aacute;rio
+              </option>
+
+              <option value="Avancado">
+                Avan&ccedil;ado
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="setor">
+              Setor
+            </label>
+
+            <select id="setor">
+
+              <option value="Clinica Medica">
+                Cl&iacute;nica M&eacute;dica
+              </option>
+
+              <option value="UTI">
+                UTI
+              </option>
+
+              <option value="Emergencia">
+                Emerg&ecirc;ncia
+              </option>
+
+              <option value="Pediatria">
+                Pediatria
+              </option>
+
+              <option value="Obstetricia">
+                Obstetr&iacute;cia
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="tipo">
+              Situa&ccedil;&atilde;o
+            </label>
+
+            <select id="tipo">
+
+              <option value="Admissao">
+                Admiss&atilde;o
+              </option>
+
+              <option
+                value="Acompanhamento"
+                selected
+              >
+                Acompanhamento
+              </option>
+
+              <option value="Pos-procedimento">
+                P&oacute;s-procedimento
+              </option>
+
+              <option value="Intercorrencia">
+                Intercorr&ecirc;ncia
+              </option>
+
+            </select>
+
+          </div>
+
+
+        </div>
+
+
+        <div class="config-actions">
+
+          <button
+            id="aplicarConfiguracao"
+            class="secondary-button"
+            type="button"
+          >
+            Aplicar configura&ccedil;&atilde;o
+          </button>
+
+          <button
+            id="novoCaso"
+            class="primary-button"
+            type="button"
+          >
+            Novo caso
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <section class="practice-grid">
+
+
+        <article class="evolution-panel case-panel">
+
+          <div class="case-heading">
+
+            <div>
+
+              <span class="section-label">
+                Caso cl&iacute;nico
+              </span>
+
+              <h2 id="casoTitulo">
+                Carregando...
+              </h2>
+
+            </div>
+
+
+            <div
+              id="caseBadges"
+              class="case-badges"
+            ></div>
+
+          </div>
+
+
+          <div class="patient-box">
+
+            <span>
+              Paciente
+            </span>
+
+            <strong id="casoPaciente"></strong>
+
+          </div>
+
+
+          <div
+            id="casoTexto"
+            class="case-text"
+          ></div>
+
+
+          <div class="task-box">
+
+            <div class="task-icon">
+              !
+            </div>
+
+            <div>
+
+              <strong>
+                Sua tarefa
+              </strong>
+
+              <p>
+                Analise os dados apresentados e escreva uma
+                evolu&ccedil;&atilde;o de enfermagem objetiva,
+                organizada e baseada nos achados do caso.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="evolution-panel answer-panel">
+
+          <span class="section-label">
+            Sua resposta
+          </span>
+
+          <h2>
+            Escreva a evolu&ccedil;&atilde;o
+          </h2>
+
+          <p class="answer-subtitle">
+            Escreva como se estivesse realizando o registro
+            no prontu&aacute;rio.
+          </p>
+
+
+          <textarea
+            id="resposta"
+            placeholder="Ex.: Paciente consciente, orientado, comunicativo..."
+          ></textarea>
+
+
+          <div class="answer-info">
+
+            <span id="contadorCaracteres">
+              0 caracteres
+            </span>
+
+            <span id="statusResposta">
+              Comece a escrever
+            </span>
+
+          </div>
+
+
+          <button
+            id="corrigirResposta"
+            class="primary-button correct-button"
+            type="button"
+            disabled
+          >
+            Corrigir minha evolu&ccedil;&atilde;o
+          </button>
+
+        </article>
+
+
+      </section>
+
+
+      <section
+        id="resultado"
+        class="evolution-panel result-panel hidden"
+      ></section>
+
+
+      <section class="tip-panel">
+
+        <div class="tip-icon">
+          i
+        </div>
+
+        <div>
+
+          <h3>
+            Dica de treinamento
+          </h3>
+
+          <p>
+            Uma boa evolu&ccedil;&atilde;o deve ser objetiva,
+            clara, cronol&oacute;gica e baseada em dados
+            observados ou relatados. Evite julgamentos vagos e
+            priorize informa&ccedil;&otilde;es relevantes para o cuidado.
+          </p>
+
+        </div>
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+    <script src="/js/evolucao-casos-extra.js"></script>
+  <script src="/js/evolucao.js"></script>
+
+
+</body>
+
+</html>
