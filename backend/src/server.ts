@@ -19,6 +19,7 @@ import {
 } from "jose";
 
 import { prisma } from "../../lib/prisma";
+import { gerarQuestoesIA } from "./iaQuestoes";
 
 
 const PORT =
@@ -1950,6 +1951,45 @@ const server =
         }
 
 
+        /* IA QUESTOES */
+
+        if (
+          caminho ===
+            "/api/ia/gerar-questoes" &&
+          metodo === "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          const body =
+            await lerJson(
+              request
+            );
+
+          const resultado =
+            await gerarQuestoesIA(
+              usuarioId,
+              body
+            );
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
         /* DISCIPLINAS */
 
         if (
@@ -2142,6 +2182,20 @@ const server =
 
 
         /* FRONTEND */
+
+        if (
+          caminho ===
+          "/questoes"
+        ) {
+
+          redirect(
+            response,
+            "/questoes.html"
+          );
+
+          return;
+        }
+
 
         await servirArquivo(
           response,

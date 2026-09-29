@@ -1,0 +1,906 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Questoes | Jankinho Study</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/questoes.css"
+  >
+</head>
+
+<body>
+
+  <aside class="sidebar">
+
+    <a href="/" class="sidebar-logo">
+
+      <div class="logo-box">
+        J
+      </div>
+
+      <div>
+        <strong>Jankinho</strong>
+        <span>Study</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item active">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/anatomia" class="menu-item">
+          <span>3D</span>
+          Anatomia 3D
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+        <a href="/relatorios" class="menu-item">
+          <span>&#9645;</span>
+          Relat&oacute;rios
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div id="avatarSidebar" class="avatar">
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-title">
+        Quest&otilde;es
+      </div>
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Jankinho Study
+          </span>
+
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="questions-page">
+
+      <section id="bancoView">
+
+        <div class="questions-hero">
+
+          <div>
+
+            <div class="hero-badges">
+
+              <span class="badge badge-orange">
+                Estudo
+              </span>
+
+              <span class="personal-bank">
+                Banco pessoal
+              </span>
+
+            </div>
+
+            <h1>
+              Banco de quest&otilde;es
+            </h1>
+
+            <p>
+              Organize suas quest&otilde;es, pratique em sess&otilde;es
+              e use IA para ampliar seu banco de estudos.
+            </p>
+
+          </div>
+
+
+          <div class="questions-stats">
+
+            <div>
+              <strong id="statQuestoes">0</strong>
+              <span>Quest&otilde;es</span>
+            </div>
+
+            <div>
+              <strong id="statDisciplinas">0</strong>
+              <span>Disciplinas</span>
+            </div>
+
+            <div>
+              <strong class="orange">10</strong>
+              <span>por sess&atilde;o</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="erroBox"
+          class="error-box"
+        >
+          <span id="erroTexto"></span>
+
+          <button
+            id="fecharErro"
+            type="button"
+          >
+            &times;
+          </button>
+        </div>
+
+
+        <section class="action-grid">
+
+          <button
+            id="iniciarSessao"
+            class="action-card"
+            type="button"
+          >
+
+            <div class="action-icon orange-icon">
+              &#9654;
+            </div>
+
+            <div>
+
+              <strong>
+                Iniciar sess&atilde;o
+              </strong>
+
+              <p>
+                Resolva at&eacute; 10 quest&otilde;es aleat&oacute;rias do banco.
+              </p>
+
+              <span>
+                Come&ccedil;ar agora &rarr;
+              </span>
+
+            </div>
+
+          </button>
+
+
+          <button
+            id="abrirIA"
+            class="action-card"
+            type="button"
+          >
+
+            <div class="action-icon">
+              &#10022;
+            </div>
+
+            <div>
+
+              <strong>
+                Gerar com IA
+              </strong>
+
+              <p>
+                Crie quest&otilde;es personalizadas por curso, tema e dificuldade.
+              </p>
+
+              <span>
+                Abrir gerador &rarr;
+              </span>
+
+            </div>
+
+          </button>
+
+
+          <button
+            id="abrirManual"
+            class="action-card"
+            type="button"
+          >
+
+            <div class="action-icon">
+              +
+            </div>
+
+            <div>
+
+              <strong>
+                Criar quest&atilde;o
+              </strong>
+
+              <p>
+                Adicione uma quest&atilde;o manualmente ao seu banco.
+              </p>
+
+              <span>
+                Criar agora &rarr;
+              </span>
+
+            </div>
+
+          </button>
+
+        </section>
+
+
+        <section class="filters-card">
+
+          <div class="search-wrapper">
+
+            <span>
+              &#8981;
+            </span>
+
+            <input
+              id="busca"
+              type="text"
+              placeholder="Buscar por questao, tema ou disciplina..."
+            >
+
+          </div>
+
+
+          <select id="filtroDisciplina">
+
+            <option value="">
+              Todas as disciplinas
+            </option>
+
+          </select>
+
+
+          <select id="filtroDificuldade">
+
+            <option value="">
+              Dificuldade
+            </option>
+
+            <option value="Facil">
+              F&aacute;cil
+            </option>
+
+            <option value="Medio">
+              M&eacute;dio
+            </option>
+
+            <option value="Dificil">
+              Dif&iacute;cil
+            </option>
+
+          </select>
+
+
+          <button
+            id="abrirDisciplina"
+            class="button-secondary"
+            type="button"
+          >
+            + Disciplina
+          </button>
+
+        </section>
+
+
+        <section>
+
+          <div class="list-header">
+
+            <div>
+
+              <h2>
+                Suas quest&otilde;es
+              </h2>
+
+              <span id="resultadoContagem">
+                Carregando...
+              </span>
+
+            </div>
+
+            <button
+              id="limparFiltros"
+              class="clear-filter"
+              type="button"
+            >
+              Limpar filtros
+            </button>
+
+          </div>
+
+
+          <div id="questoesLista">
+
+            <div class="empty">
+              Carregando quest&otilde;es...
+            </div>
+
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <section
+        id="sessaoView"
+        class="hidden"
+      >
+
+        <div
+          id="sessaoQuestao"
+          class="session-wrapper"
+        ></div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- MODAL IA -->
+
+  <div
+    id="modalIA"
+    class="modal-overlay"
+  >
+
+    <div class="modal modal-medium">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="badge badge-orange">
+            Intelig&ecirc;ncia artificial
+          </span>
+
+          <h2>
+            Gerar quest&otilde;es com IA
+          </h2>
+
+          <p>
+            Defina o conte&uacute;do e deixe a IA montar seu banco.
+          </p>
+
+        </div>
+
+        <button
+          class="modal-close"
+          data-close="modalIA"
+          type="button"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <div class="modal-content">
+
+        <div class="two-cols">
+
+          <div>
+
+            <label>
+              Curso
+            </label>
+
+            <input
+              id="cursoIA"
+              type="text"
+              value="Enfermagem"
+              placeholder="Ex.: Enfermagem"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label>
+              Disciplina
+            </label>
+
+            <input
+              id="disciplinaIA"
+              type="text"
+              list="disciplinasLista"
+              placeholder="Ex.: Fisiologia"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Tema
+          </label>
+
+          <input
+            id="temaIA"
+            type="text"
+            placeholder="Ex.: Sistema cardiovascular"
+          >
+
+        </div>
+
+
+        <div class="two-cols">
+
+          <div>
+
+            <label>
+              Dificuldade
+            </label>
+
+            <select id="dificuldadeIA">
+
+              <option value="Facil">
+                F&aacute;cil
+              </option>
+
+              <option
+                value="Medio"
+                selected
+              >
+                M&eacute;dio
+              </option>
+
+              <option value="Dificil">
+                Dif&iacute;cil
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label>
+              Quantidade
+            </label>
+
+            <select id="quantidadeIA">
+
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="ia-warning">
+
+          <span>
+            &#10022;
+          </span>
+
+          <p>
+            A IA criara cinco alternativas, uma resposta correta
+            e uma explicacao para cada questao.
+          </p>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            class="button-secondary"
+            data-close="modalIA"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            id="gerarIA"
+            class="button-primary"
+            type="button"
+          >
+            Gerar quest&otilde;es
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MODAL MANUAL -->
+
+  <div
+    id="modalManual"
+    class="modal-overlay"
+  >
+
+    <div class="modal modal-large">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="badge badge-orange">
+            Criacao manual
+          </span>
+
+          <h2>
+            Criar quest&atilde;o
+          </h2>
+
+          <p>
+            Monte sua propria questao e adicione ao seu banco.
+          </p>
+
+        </div>
+
+        <button
+          class="modal-close"
+          data-close="modalManual"
+          type="button"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <div class="modal-content">
+
+        <div class="two-cols">
+
+          <div>
+
+            <label>
+              Disciplina
+            </label>
+
+            <input
+              id="disciplinaManual"
+              type="text"
+              list="disciplinasLista"
+              placeholder="Ex.: Fisiologia"
+            >
+
+          </div>
+
+
+          <div>
+
+            <label>
+              Dificuldade
+            </label>
+
+            <select id="dificuldadeManual">
+
+              <option value="Facil">
+                F&aacute;cil
+              </option>
+
+              <option value="Medio" selected>
+                M&eacute;dio
+              </option>
+
+              <option value="Dificil">
+                Dif&iacute;cil
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Tema
+          </label>
+
+          <input
+            id="temaManual"
+            type="text"
+            placeholder="Ex.: Sistema cardiovascular"
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Enunciado
+          </label>
+
+          <textarea
+            id="enunciadoManual"
+            placeholder="Digite o enunciado da questao..."
+          ></textarea>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Alternativas
+          </label>
+
+          <div
+            id="alternativasManual"
+            class="alternatives-editor"
+          ></div>
+
+          <p class="field-help">
+            Clique na letra da alternativa correta para marca-la.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Explicacao
+          </label>
+
+          <textarea
+            id="explicacaoManual"
+            placeholder="Explique por que essa e a resposta correta..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            class="button-secondary"
+            data-close="modalManual"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            id="salvarManual"
+            class="button-primary"
+            type="button"
+          >
+            Criar quest&atilde;o
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MODAL DISCIPLINA -->
+
+  <div
+    id="modalDisciplina"
+    class="modal-overlay"
+  >
+
+    <div class="modal modal-small">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="badge badge-orange">
+            Organizacao
+          </span>
+
+          <h2>
+            Nova disciplina
+          </h2>
+
+          <p>
+            Adicione uma disciplina ao seu banco.
+          </p>
+
+        </div>
+
+        <button
+          class="modal-close"
+          data-close="modalDisciplina"
+          type="button"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <div class="modal-content">
+
+        <div>
+
+          <label>
+            Nome da disciplina
+          </label>
+
+          <input
+            id="novaDisciplina"
+            type="text"
+            placeholder="Ex.: Farmacologia"
+          >
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            class="button-secondary"
+            data-close="modalDisciplina"
+            type="button"
+          >
+            Cancelar
+          </button>
+
+          <button
+            id="criarDisciplina"
+            class="button-primary"
+            type="button"
+          >
+            Criar disciplina
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <datalist id="disciplinasLista"></datalist>
+
+
+  <script src="/js/questoes.js"></script>
+
+</body>
+</html>
