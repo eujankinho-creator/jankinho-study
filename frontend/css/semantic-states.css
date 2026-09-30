@@ -1,0 +1,548 @@
+/* =========================================================
+   CORTEX SEMANTIC STATES
+   Fonte unica de prioridade para estados interativos.
+   Carregar SEMPRE depois dos temas e CSS especificos.
+========================================================= */
+
+:root {
+  --cortex-state-success: #00e676;
+  --cortex-state-success-rgb: 0, 230, 118;
+
+  --cortex-state-danger: #ff2d55;
+  --cortex-state-danger-rgb: 255, 45, 85;
+
+  --cortex-state-warning: #ffd60a;
+  --cortex-state-warning-rgb: 255, 214, 10;
+
+  --cortex-state-info: #29b6f6;
+  --cortex-state-info-rgb: 41, 182, 246;
+}
+
+
+/*
+ * O seletor :is(#cortex-semantic-priority, html[data-theme])
+ * usa especificidade de ID sem depender de um ID real.
+ * Isso garante que estados semanticos vençam qualquer tema.
+ */
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option,
+  .sim-option,
+  .filter-chip,
+  .receptor-card,
+  .flash-category-option,
+  .mode-button,
+  .check-chip,
+  .area-option,
+  .review-button,
+  .control-tab,
+  .tool-button,
+  .compact-tool,
+  .color-chip,
+  .theme-choice,
+  .case-flow-item,
+  .compare-toggle,
+  .favorite-button,
+  .toolbar-button,
+  .correct-selector,
+  .course-tabs button
+):not(.active):not(.selected):not(.correct):not(.wrong):not(:disabled) {
+  opacity: 1 !important;
+  border-color:
+    color-mix(
+      in srgb,
+      var(--theme-border-strong, rgba(255,255,255,.18)) 88%,
+      white 12%
+    ) !important;
+}
+
+
+/* =========================================================
+   SELECIONADO / ATIVO
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option.selected:not(.correct):not(.wrong),
+  .sim-option.selected:not(.correct):not(.wrong),
+  .filter-chip.active,
+  .receptor-card.active,
+  .flash-category-option.active,
+  .mode-button.active,
+  .check-chip.active,
+  .area-option.active,
+  .review-button.active,
+  .control-tab.active,
+  .tool-button.active:not(.danger),
+  .compact-tool.active,
+  .color-chip.active,
+  .theme-choice.active,
+  .case-flow-item.active,
+  .compare-toggle.active,
+  .favorite-button.active,
+  .toolbar-button.active,
+  .correct-selector.active,
+  .course-tabs button.active,
+  .menu-item.active,
+  [aria-selected="true"],
+  [aria-pressed="true"]
+) {
+  opacity: 1 !important;
+
+  border-color:
+    var(--theme-accent, #f97316) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(var(--theme-accent-rgb, 249,115,22), .34),
+      rgba(var(--theme-accent-rgb, 249,115,22), .15)
+    ) !important;
+
+  color:
+    var(--theme-text, #fff) !important;
+
+  box-shadow:
+    0 0 0 2px
+      rgba(var(--theme-accent-rgb, 249,115,22), .24),
+    0 0 24px
+      rgba(var(--theme-accent-rgb, 249,115,22), .18),
+    inset 0 0 0 1px
+      rgba(255,255,255,.07) !important;
+}
+
+
+/* =========================================================
+   CORRETO / SUCESSO
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option.correct,
+  .sim-option.correct,
+  .quiz-options button.correct,
+  .answer-option.correct,
+  .question-option.correct,
+  .alternative.correct,
+  .alternative-card.correct,
+  .guided-feedback.correct,
+  .activity-result.correct,
+  .result-icon.correct,
+  .summary-value.success,
+  .badge-success,
+  .correct-button,
+  .type-button.income-selected
+) {
+  opacity: 1 !important;
+
+  border-color:
+    var(--cortex-state-success) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(var(--cortex-state-success-rgb), .42),
+      rgba(var(--cortex-state-success-rgb), .18)
+    ) !important;
+
+  color:
+    #effff6 !important;
+
+  box-shadow:
+    0 0 0 2px
+      rgba(var(--cortex-state-success-rgb), .22),
+    0 0 28px
+      rgba(var(--cortex-state-success-rgb), .25),
+    inset 4px 0 0
+      var(--cortex-state-success) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option.correct,
+  .sim-option.correct
+) .option-letter {
+  border-color:
+    var(--cortex-state-success) !important;
+
+  background:
+    var(--cortex-state-success) !important;
+
+  color:
+    #02170b !important;
+
+  box-shadow:
+    0 0 17px
+      rgba(var(--cortex-state-success-rgb), .42) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option.correct,
+  .sim-option.correct
+) .option-text {
+  color:
+    #effff6 !important;
+}
+
+
+/* =========================================================
+   ERRADO / ERRO / PERIGO
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option.wrong,
+  .sim-option.wrong,
+  .quiz-options button.wrong,
+  .answer-option.wrong,
+  .question-option.wrong,
+  .alternative.wrong,
+  .alternative-card.wrong,
+  .guided-feedback.wrong,
+  .activity-result.wrong,
+  .result-icon.wrong,
+  .summary-value.error,
+  .badge-danger,
+  .wrong-item,
+  .danger-button,
+  .lab-button.danger,
+  .tool-button.danger,
+  .settings-icon.danger,
+  .account-actions .danger,
+  .type-button.expense-selected,
+  .type-button.debt-selected
+) {
+  opacity: 1 !important;
+
+  border-color:
+    var(--cortex-state-danger) !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(var(--cortex-state-danger-rgb), .42),
+      rgba(var(--cortex-state-danger-rgb), .18)
+    ) !important;
+
+  color:
+    #fff3f6 !important;
+
+  box-shadow:
+    0 0 0 2px
+      rgba(var(--cortex-state-danger-rgb), .20),
+    0 0 28px
+      rgba(var(--cortex-state-danger-rgb), .23),
+    inset 4px 0 0
+      var(--cortex-state-danger) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option.wrong,
+  .sim-option.wrong
+) .option-letter {
+  border-color:
+    var(--cortex-state-danger) !important;
+
+  background:
+    var(--cortex-state-danger) !important;
+
+  color:
+    #fff !important;
+
+  box-shadow:
+    0 0 17px
+      rgba(var(--cortex-state-danger-rgb), .42) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-option.wrong,
+  .sim-option.wrong
+) .option-text {
+  color:
+    #fff1f4 !important;
+}
+
+
+/* =========================================================
+   MENSAGENS DE ERRO / PERIGO
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .error-box.visible,
+  .sim-error:not(.hidden),
+  .music-message.error,
+  .sigaa-message.error,
+  .page-message.error,
+  .filter-result-message.error,
+  .flash-category-error:not(.hidden),
+  .error-card,
+  .error-message,
+  .danger-card
+) {
+  border-color:
+    rgba(var(--cortex-state-danger-rgb), .72) !important;
+
+  background:
+    rgba(var(--cortex-state-danger-rgb), .14) !important;
+
+  color:
+    #ffd8df !important;
+
+  box-shadow:
+    0 0 0 1px
+      rgba(var(--cortex-state-danger-rgb), .10),
+    0 10px 28px
+      rgba(var(--cortex-state-danger-rgb), .08) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+.danger-text {
+  color:
+    #ff8ca3 !important;
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .ia-warning,
+  .pharma-warning,
+  .timer-box.warning,
+  .monitor-result .warning
+) {
+  border-color:
+    rgba(var(--cortex-state-warning-rgb), .75) !important;
+
+  background:
+    rgba(var(--cortex-state-warning-rgb), .13) !important;
+
+  color:
+    #fff0a1 !important;
+
+  box-shadow:
+    0 0 0 1px
+      rgba(var(--cortex-state-warning-rgb), .09),
+    0 10px 24px
+      rgba(var(--cortex-state-warning-rgb), .07) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .timer-box.danger,
+  .monitor-result .danger
+) {
+  border-color:
+    var(--cortex-state-danger) !important;
+
+  color:
+    #ff91a7 !important;
+}
+
+
+/* =========================================================
+   SELOS EXPLICITOS DE RESPOSTA
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+.cortex-answer-state {
+  display:
+    inline-flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  flex:
+    0 0 auto !important;
+
+  margin-left:
+    auto !important;
+
+  border-radius:
+    999px !important;
+
+  padding:
+    6px 10px !important;
+
+  font-size:
+    10px !important;
+
+  font-weight:
+    950 !important;
+
+  line-height:
+    1 !important;
+
+  letter-spacing:
+    .05em !important;
+
+  white-space:
+    nowrap !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+.cortex-answer-state-correct {
+  border:
+    1px solid #6dffab !important;
+
+  background:
+    var(--cortex-state-success) !important;
+
+  color:
+    #02170b !important;
+
+  box-shadow:
+    0 0 16px
+      rgba(var(--cortex-state-success-rgb), .42) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+.cortex-answer-state-wrong {
+  border:
+    1px solid #ff7893 !important;
+
+  background:
+    var(--cortex-state-danger) !important;
+
+  color:
+    #fff !important;
+
+  box-shadow:
+    0 0 16px
+      rgba(var(--cortex-state-danger-rgb), .42) !important;
+}
+
+
+/* Respostas corrigidas nunca ficam apagadas por :disabled do tema. */
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  button.session-option.correct:disabled,
+  button.session-option.wrong:disabled,
+  button.sim-option.correct:disabled,
+  button.sim-option.wrong:disabled
+) {
+  opacity:
+    1 !important;
+
+  filter:
+    none !important;
+
+  cursor:
+    default !important;
+}
+
+
+/* =========================================================
+   CHECKBOX / RADIO / SELECT
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+input[type="checkbox"],
+:is(#cortex-semantic-priority, html[data-theme]) body
+input[type="radio"] {
+  accent-color:
+    var(--theme-accent, #f97316) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+input[type="checkbox"]:not(:checked):not(:disabled),
+:is(#cortex-semantic-priority, html[data-theme]) body
+input[type="radio"]:not(:checked):not(:disabled) {
+  outline:
+    1px solid
+    rgba(255,255,255,.28) !important;
+
+  outline-offset:
+    2px !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+input[type="checkbox"]:checked:not(:disabled),
+:is(#cortex-semantic-priority, html[data-theme]) body
+input[type="radio"]:checked:not(:disabled) {
+  outline:
+    2px solid
+    var(--theme-accent, #f97316) !important;
+
+  outline-offset:
+    2px !important;
+
+  filter:
+    drop-shadow(
+      0 0 6px
+      rgba(var(--theme-accent-rgb, 249,115,22), .58)
+    ) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+label:has(input[type="checkbox"]:checked),
+:is(#cortex-semantic-priority, html[data-theme]) body
+label:has(input[type="radio"]:checked) {
+  border-color:
+    var(--theme-accent, #f97316) !important;
+
+  box-shadow:
+    0 0 0 2px
+      rgba(var(--theme-accent-rgb, 249,115,22), .20) !important;
+}
+
+
+/* =========================================================
+   FOCO
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  button,
+  [role="button"],
+  [role="tab"],
+  a,
+  input,
+  select,
+  textarea
+):focus-visible {
+  outline:
+    3px solid
+    var(--theme-accent, #f97316) !important;
+
+  outline-offset:
+    3px !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  :is(#cortex-semantic-priority, html[data-theme]) body
+  .cortex-answer-state {
+    padding:
+      5px 7px !important;
+
+    font-size:
+      9px !important;
+  }
+
+}
