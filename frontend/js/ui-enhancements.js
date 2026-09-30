@@ -917,51 +917,7 @@
 
 
 
-  /* CORTEX GLOBAL INTERACTION CONTRAST V2 */
-  function initGlobalInteractionContrast() {
 
-    if (
-      document.getElementById(
-        "cortex-global-interaction-contrast"
-      )
-    ) {
-      return;
-    }
-
-    const style =
-      document.createElement(
-        "style"
-      );
-
-    style.id =
-      "cortex-global-interaction-contrast";
-
-    style.textContent =
-      "\n:root{--cortex-ok:#00e676;--cortex-ok-rgb:0,230,118;--cortex-bad:#ff2d55;--cortex-bad-rgb:255,45,85}\n\n/* Estados neutros mais legiveis */\nhtml[data-theme] body :is(\n  .session-option,.sim-option,.filter-chip,.receptor-card,.flash-category-option,\n  .mode-button,.check-chip,.area-option,.control-tab,.tool-button,.theme-choice,\n  .course-tabs button,.correct-selector,.question-option,.alternative,.alternative-card\n):not(.active):not(.selected):not(.correct):not(.wrong):not(:disabled){\n  border-color:rgba(255,255,255,.24)!important;\n  background:rgba(255,255,255,.045)!important;\n  color:var(--theme-text-soft,#e5e5e5)!important;\n  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)!important;\n  opacity:1!important\n}\n\n/* Selecionado/ativo */\nhtml[data-theme] body :is(\n  .session-option.selected,.sim-option.selected,.filter-chip.active,.receptor-card.active,\n  .flash-category-option.active,.mode-button.active,.check-chip.active,.area-option.active,\n  .review-button.active,.control-tab.active,.tool-button.active,.color-chip.active,\n  .theme-choice.active,.course-tabs button.active,.correct-selector.active,.toolbar-button.active,\n  .favorite-button.active,.compare-toggle.active,.modal-header-actions button.active,\n  [aria-selected=\"true\"],[aria-pressed=\"true\"]\n){\n  border-color:var(--theme-accent,#ff7a18)!important;\n  background:linear-gradient(135deg,rgba(var(--theme-accent-rgb,249,115,22),.36),rgba(var(--theme-accent-rgb,249,115,22),.18))!important;\n  color:var(--theme-text,#fff)!important;\n  box-shadow:0 0 0 2px rgba(var(--theme-accent-rgb,249,115,22),.28),0 0 26px rgba(var(--theme-accent-rgb,249,115,22),.22),inset 0 0 0 1px rgba(255,255,255,.08)!important;\n  opacity:1!important\n}\n\n/* Correta - sempre verde */\nhtml[data-theme] body :is(\n  .session-option.correct,.sim-option.correct,.quiz-options button.correct,\n  .question-option.correct,.alternative.correct,.alternative-card.correct,.answer-option.correct\n){\n  border:2px solid var(--cortex-ok)!important;\n  background:linear-gradient(135deg,rgba(var(--cortex-ok-rgb),.42),rgba(var(--cortex-ok-rgb),.20))!important;\n  color:#f3fff8!important;\n  box-shadow:0 0 0 2px rgba(var(--cortex-ok-rgb),.22),0 0 30px rgba(var(--cortex-ok-rgb),.30),inset 5px 0 0 var(--cortex-ok)!important;\n  opacity:1!important\n}\n\n/* Errada - sempre vermelho */\nhtml[data-theme] body :is(\n  .session-option.wrong,.sim-option.wrong,.quiz-options button.wrong,\n  .question-option.wrong,.alternative.wrong,.alternative-card.wrong,.answer-option.wrong\n){\n  border:2px solid var(--cortex-bad)!important;\n  background:linear-gradient(135deg,rgba(var(--cortex-bad-rgb),.44),rgba(var(--cortex-bad-rgb),.20))!important;\n  color:#fff5f7!important;\n  box-shadow:0 0 0 2px rgba(var(--cortex-bad-rgb),.22),0 0 30px rgba(var(--cortex-bad-rgb),.30),inset 5px 0 0 var(--cortex-bad)!important;\n  opacity:1!important\n}\n\nhtml[data-theme] body :is(.session-option.correct,.sim-option.correct) .option-letter{\n  border-color:var(--cortex-ok)!important;background:var(--cortex-ok)!important;color:#02170b!important;\n  box-shadow:0 0 18px rgba(var(--cortex-ok-rgb),.46)!important\n}\nhtml[data-theme] body :is(.session-option.wrong,.sim-option.wrong) .option-letter{\n  border-color:var(--cortex-bad)!important;background:var(--cortex-bad)!important;color:#fff!important;\n  box-shadow:0 0 18px rgba(var(--cortex-bad-rgb),.46)!important\n}\n\n/* Texto explicito para nao depender so da cor */\nhtml[data-theme] body .session-option.correct::after,\nhtml[data-theme] body .sim-option.correct::after{\n  content:\"✓ CORRETA\"!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;\n  flex:0 0 auto!important;margin-left:auto!important;border-radius:999px!important;background:var(--cortex-ok)!important;\n  padding:5px 9px!important;color:#02170b!important;font-size:10px!important;font-weight:900!important;\n  letter-spacing:.045em!important;line-height:1!important;white-space:nowrap!important;\n  box-shadow:0 0 14px rgba(var(--cortex-ok-rgb),.34)!important\n}\nhtml[data-theme] body .session-option.wrong::after,\nhtml[data-theme] body .sim-option.wrong::after{\n  content:\"✕ ERRADA\"!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;\n  flex:0 0 auto!important;margin-left:auto!important;border-radius:999px!important;background:var(--cortex-bad)!important;\n  padding:5px 9px!important;color:#fff!important;font-size:10px!important;font-weight:900!important;\n  letter-spacing:.045em!important;line-height:1!important;white-space:nowrap!important;\n  box-shadow:0 0 14px rgba(var(--cortex-bad-rgb),.34)!important\n}\n\n/* Outros feedbacks */\nhtml[data-theme] body :is(.activity-result.correct,.guided-feedback.correct,.result-icon.correct){\n  border-color:var(--cortex-ok)!important;background:rgba(var(--cortex-ok-rgb),.22)!important;color:#c8ffdf!important\n}\nhtml[data-theme] body :is(.activity-result.wrong,.guided-feedback.wrong,.result-icon.wrong,.wrong-item){\n  border-color:var(--cortex-bad)!important;background:rgba(var(--cortex-bad-rgb),.20)!important;color:#ffd6df!important\n}\n\n/* Checkbox/radio */\nhtml[data-theme] body input[type=\"checkbox\"],\nhtml[data-theme] body input[type=\"radio\"]{accent-color:var(--theme-accent,#ff7a18)!important}\nhtml[data-theme] body input[type=\"checkbox\"]:not(:checked):not(:disabled),\nhtml[data-theme] body input[type=\"radio\"]:not(:checked):not(:disabled){\n  outline:1px solid rgba(255,255,255,.38)!important;outline-offset:2px!important\n}\nhtml[data-theme] body input[type=\"checkbox\"]:checked:not(:disabled),\nhtml[data-theme] body input[type=\"radio\"]:checked:not(:disabled){\n  outline:2px solid var(--theme-accent,#ff7a18)!important;outline-offset:2px!important;\n  filter:drop-shadow(0 0 6px rgba(var(--theme-accent-rgb,249,115,22),.65))!important\n}\nhtml[data-theme] body label:has(input[type=\"checkbox\"]:checked),\nhtml[data-theme] body label:has(input[type=\"radio\"]:checked){\n  border-color:var(--theme-accent,#ff7a18)!important;\n  box-shadow:0 0 0 2px rgba(var(--theme-accent-rgb,249,115,22),.22)!important\n}\n\n/* Foco de teclado */\nhtml[data-theme] body :is(button,[role=\"button\"],[role=\"tab\"],input,select,textarea):focus-visible{\n  outline:3px solid var(--theme-accent,#ff7a18)!important;outline-offset:3px!important;\n  box-shadow:0 0 0 5px rgba(var(--theme-accent-rgb,249,115,22),.20)!important\n}\n\n@media(max-width:640px){\n  html[data-theme] body .session-option.correct::after,\n  html[data-theme] body .session-option.wrong::after,\n  html[data-theme] body .sim-option.correct::after,\n  html[data-theme] body .sim-option.wrong::after{padding:4px 6px!important;font-size:9px!important}\n}\n";
-
-    document.head.appendChild(
-      style
-    );
-
-
-    /* CORTEX EXPLICIT ANSWER LABELS V1 */
-    const answerLabelStyle =
-      document.createElement(
-        "style"
-      );
-
-    answerLabelStyle.id =
-      "cortex-explicit-answer-labels";
-
-    answerLabelStyle.textContent =
-      "\nhtml[data-theme] body .cortex-answer-state{\n  display:inline-flex!important;\n  align-items:center!important;\n  justify-content:center!important;\n  flex:0 0 auto!important;\n  margin-left:auto!important;\n  border-radius:999px!important;\n  padding:6px 10px!important;\n  font-size:10px!important;\n  font-weight:950!important;\n  letter-spacing:.05em!important;\n  line-height:1!important;\n  white-space:nowrap!important\n}\nhtml[data-theme] body .cortex-answer-state-correct{\n  border:1px solid #5dff9f!important;\n  background:#00e676!important;\n  color:#02170b!important;\n  box-shadow:0 0 16px rgba(0,230,118,.42)!important\n}\nhtml[data-theme] body .cortex-answer-state-wrong{\n  border:1px solid #ff718e!important;\n  background:#ff2d55!important;\n  color:#fff!important;\n  box-shadow:0 0 16px rgba(255,45,85,.42)!important\n}\nhtml[data-theme] body .session-option:has(.cortex-answer-state)::after,\nhtml[data-theme] body .sim-option:has(.cortex-answer-state)::after{\n  content:none!important;\n  display:none!important\n}\n@media(max-width:640px){\n  html[data-theme] body .cortex-answer-state{\n    padding:5px 7px!important;\n    font-size:9px!important\n  }\n}\n";
-
-    document.head.appendChild(
-      answerLabelStyle
-    );
-    /* CORTEX EXPLICIT ANSWER LABELS V1 END */
-  }
-  /* CORTEX GLOBAL INTERACTION CONTRAST V2 END */
 
 
   /* =========================================================
@@ -981,11 +937,6 @@
 
 
       initRevealObserver();
-
-
-      initGlobalInteractionContrast();
-
-
       initTimer();
     }
   );
