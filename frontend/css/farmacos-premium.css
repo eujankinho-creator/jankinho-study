@@ -3755,3 +3755,31 @@ html:has(body.modal-open) {
   }
 
 }
+
+
+/* Unidade 3: princípio ativo e fonte do material */
+.drug-active {
+  margin: 8px 0 0;
+  color: var(--theme-text-soft);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.drug-active strong {
+  color: var(--theme-text);
+  font-weight: 800;
+}
+
+.active-principle-section p {
+  margin: 0;
+  color: var(--theme-text);
+  font-weight: 800;
+}
+
+.drug-source {
+  display: block;
+  margin-top: 7px;
+  color: var(--theme-text-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
