@@ -11,6 +11,7 @@
     "dark-orange",
     "pink-glitter",
     "blue-black",
+    "black-white",
   ];
 
 

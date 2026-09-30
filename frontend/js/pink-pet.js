@@ -330,7 +330,9 @@
         stored ===
           "dark-orange" ||
         stored ===
-          "blue-black"
+          "blue-black" ||
+        stored ===
+          "black-white"
       ) {
 
         return stored;

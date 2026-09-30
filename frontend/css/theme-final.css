@@ -3147,3 +3147,460 @@ body.dashboard-view
     0 0 12px
     rgba(22,135,255,.42) !important;
 }
+
+
+/* CORTEX CANONICAL THEMES V7 START */
+
+/*
+ * Blue Black e Black & White usam a mesma arquitetura visual
+ * do Pink Glitter: uma paleta completa aplicada por variaveis
+ * e uma camada final unica. Esta camada fica por ultimo para
+ * neutralizar residuos antigos de Dark Orange.
+ */
+
+html[data-theme="blue-black"] {
+  color-scheme: dark;
+  --theme-bg:#030914;
+  --theme-bg-secondary:#06111f;
+  --theme-surface:rgba(8,25,45,.94);
+  --theme-surface-strong:rgba(10,32,57,.97);
+  --theme-surface-soft:rgba(62,158,255,.07);
+  --theme-border:rgba(104,181,255,.20);
+  --theme-border-strong:rgba(104,181,255,.34);
+  --theme-text:#f3f9ff;
+  --theme-text-soft:#c8e4ff;
+  --theme-text-muted:#8ba9c5;
+  --theme-accent:#2496ff;
+  --theme-accent-2:#78c2ff;
+  --theme-accent-deep:#0872da;
+  --theme-accent-rgb:36,150,255;
+  --theme-accent-2-rgb:120,194,255;
+  --theme-accent-soft:rgba(36,150,255,.13);
+  --theme-accent-medium:rgba(36,150,255,.20);
+  --theme-accent-strong:rgba(36,150,255,.40);
+  --theme-gradient:linear-gradient(135deg,#1687ff 0%,#3aa4ff 52%,#8bceff 100%);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(36,150,255,.23),rgba(120,194,255,.08));
+  --theme-hero:radial-gradient(circle at 88% 10%,rgba(36,150,255,.22),transparent 34%),linear-gradient(145deg,#0a2039 0%,#030a14 100%);
+  --theme-shadow:0 18px 52px rgba(0,15,35,.34),0 0 26px rgba(36,150,255,.035);
+  --theme-glow:0 0 0 1px rgba(104,181,255,.12),0 12px 34px rgba(36,150,255,.16);
+  --theme-button-text:#00111f;
+  --theme-chip-bg:rgba(36,150,255,.055);
+  --theme-chip-border:rgba(104,181,255,.16);
+  --theme-input-bg:rgba(8,28,50,.82);
+  --theme-hover-bg:rgba(36,150,255,.12);
+  --theme-hover-border:rgba(104,181,255,.28);
+  --bg:#030914;
+  --sidebar:#040d18;
+  --panel:#08192d;
+  --orange:#2496ff;
+  --orange-light:#78c2ff;
+  --border:rgba(104,181,255,.20);
+  --text:#f3f9ff;
+  --muted:#8ba9c5;
+}
+
+html[data-theme="black-white"] {
+  color-scheme: dark;
+  --theme-bg:#050505;
+  --theme-bg-secondary:#0a0a0a;
+  --theme-surface:rgba(18,18,18,.96);
+  --theme-surface-strong:rgba(24,24,24,.98);
+  --theme-surface-soft:rgba(255,255,255,.045);
+  --theme-border:rgba(255,255,255,.13);
+  --theme-border-strong:rgba(255,255,255,.28);
+  --theme-text:#fafafa;
+  --theme-text-soft:#d4d4d4;
+  --theme-text-muted:#a3a3a3;
+  --theme-accent:#f5f5f5;
+  --theme-accent-2:#d4d4d4;
+  --theme-accent-deep:#a3a3a3;
+  --theme-accent-rgb:245,245,245;
+  --theme-accent-2-rgb:212,212,212;
+  --theme-accent-soft:rgba(255,255,255,.08);
+  --theme-accent-medium:rgba(255,255,255,.13);
+  --theme-accent-strong:rgba(255,255,255,.30);
+  --theme-gradient:linear-gradient(135deg,#ffffff 0%,#e5e5e5 55%,#bdbdbd 100%);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.045));
+  --theme-hero:radial-gradient(circle at 88% 10%,rgba(255,255,255,.10),transparent 34%),linear-gradient(145deg,#181818 0%,#070707 100%);
+  --theme-shadow:0 18px 52px rgba(0,0,0,.42);
+  --theme-glow:0 0 0 1px rgba(255,255,255,.10),0 12px 32px rgba(255,255,255,.055);
+  --theme-button-text:#080808;
+  --theme-chip-bg:rgba(255,255,255,.045);
+  --theme-chip-border:rgba(255,255,255,.12);
+  --theme-input-bg:rgba(255,255,255,.04);
+  --theme-hover-bg:rgba(255,255,255,.08);
+  --theme-hover-border:rgba(255,255,255,.22);
+  --bg:#050505;
+  --sidebar:#080808;
+  --panel:#111111;
+  --orange:#f5f5f5;
+  --orange-light:#d4d4d4;
+  --border:rgba(255,255,255,.13);
+  --text:#fafafa;
+  --muted:#a3a3a3;
+}
+
+html[data-theme="blue-black"] body {
+  background:
+    radial-gradient(circle at 8% 0%,rgba(36,150,255,.17),transparent 31%),
+    radial-gradient(circle at 100% 12%,rgba(120,194,255,.09),transparent 26%),
+    linear-gradient(180deg,#030914 0%,#020711 100%) !important;
+}
+
+html[data-theme="black-white"] body {
+  background:
+    radial-gradient(circle at 10% 0%,rgba(255,255,255,.055),transparent 30%),
+    linear-gradient(180deg,#050505 0%,#080808 100%) !important;
+}
+
+html[data-theme="blue-black"] body::before,
+html[data-theme="black-white"] body::before {
+  content:none !important;
+}
+
+html[data-theme="blue-black"] :is(
+  .sidebar,.mobile-sidebar,.cortex-mobile-sidebar-panel
+) {
+  background:linear-gradient(180deg,#061425 0%,#030b15 55%,#020711 100%) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:14px 0 42px rgba(0,15,35,.16) !important;
+}
+
+html[data-theme="black-white"] :is(
+  .sidebar,.mobile-sidebar,.cortex-mobile-sidebar-panel
+) {
+  background:linear-gradient(180deg,#0c0c0c 0%,#070707 100%) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:14px 0 42px rgba(0,0,0,.22) !important;
+}
+
+html[data-theme="blue-black"] .header,
+html[data-theme="black-white"] .header {
+  background:color-mix(in srgb,var(--theme-bg-secondary) 92%,transparent) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:0 8px 30px rgba(0,0,0,.18) !important;
+}
+
+html[data-theme="blue-black"] :is(
+  .card,.dashboard-card,.stat-card,.stats-card,.summary-card,.metric-card,.info-card,.content-card,
+  .question-card,.flashcard,.flashcard-card,.case-card,.caso-card,.finance-card,.finance-summary-card,
+  .balance-card,.ranking-card,.podium-card,.settings-card,.performance-card,.history-card,.theme-box,
+  .user-row,.user-stat,.podium-stat,.classified-counter,.study-timer-panel,.study-timer-today,
+  .study-timer-display,.loading-card,.loading-state,.empty-state,.empty-ranking,.panel,.box,.section-box,
+  .filter-box,.toolbar,.filters,.filter-bar,.search-box,.table-container,.list-container,.content-box,
+  .result-container,.details-box,.premium-panel,.courses-section,.profile-strip,.course-hero,
+  .course-kpis article,.course-tab-panels,.course-card,.schedule-day,.notice-card,.overview-feature,
+  .grade-group,.resource-row,.activity-columns>section,.lessons-block,.syllabus-grid>article,
+  .syllabus-bottom>section,.academic-metrics article,.account-toolbar,.connect-area,.sigaa-form
+) {
+  background:linear-gradient(145deg,rgba(10,32,57,.95),rgba(4,15,28,.97)) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:var(--theme-shadow) !important;
+}
+
+html[data-theme="black-white"] :is(
+  .card,.dashboard-card,.stat-card,.stats-card,.summary-card,.metric-card,.info-card,.content-card,
+  .question-card,.flashcard,.flashcard-card,.case-card,.caso-card,.finance-card,.finance-summary-card,
+  .balance-card,.ranking-card,.podium-card,.settings-card,.performance-card,.history-card,.theme-box,
+  .user-row,.user-stat,.podium-stat,.classified-counter,.study-timer-panel,.study-timer-today,
+  .study-timer-display,.loading-card,.loading-state,.empty-state,.empty-ranking,.panel,.box,.section-box,
+  .filter-box,.toolbar,.filters,.filter-bar,.search-box,.table-container,.list-container,.content-box,
+  .result-container,.details-box,.premium-panel,.courses-section,.profile-strip,.course-hero,
+  .course-kpis article,.course-tab-panels,.course-card,.schedule-day,.notice-card,.overview-feature,
+  .grade-group,.resource-row,.activity-columns>section,.lessons-block,.syllabus-grid>article,
+  .syllabus-bottom>section,.academic-metrics article,.account-toolbar,.connect-area,.sigaa-form
+) {
+  background:linear-gradient(145deg,#171717,#0d0d0d) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:var(--theme-shadow) !important;
+}
+
+html[data-theme="blue-black"] :is(
+  .hero,.hero-card,.hero-panel,.welcome-card,.banner,.page-hero,.hero-section,.top-banner,.headline-card,
+  .dashboard-hero,.questions-hero,.questoes-hero,.flashcards-hero,.cases-hero,.casos-hero,.case-hero,
+  .finance-hero,.settings-hero,.analysis-hero,.practice-hero,.laboratorio-hero,.evolucao-hero,
+  .evolution-hero,.music-hero,.academic-hero
+),
+html[data-theme="black-white"] :is(
+  .hero,.hero-card,.hero-panel,.welcome-card,.banner,.page-hero,.hero-section,.top-banner,.headline-card,
+  .dashboard-hero,.questions-hero,.questoes-hero,.flashcards-hero,.cases-hero,.casos-hero,.case-hero,
+  .finance-hero,.settings-hero,.analysis-hero,.practice-hero,.laboratorio-hero,.evolucao-hero,
+  .evolution-hero,.music-hero,.academic-hero
+) {
+  background:var(--theme-hero) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:var(--theme-shadow) !important;
+}
+
+html[data-theme="blue-black"] :is(
+  .counter,.count,.stat,.stat-box,.stat-item,.metric,.metric-box,.summary-item,.summary-box,
+  .dashboard-stat,.dashboard-metric,.score-box,.result-box,.result-stat,.finance-stat,.progress-card,
+  .classified-counter,.user-stat,.podium-stat,.course-card-meta>span,.today-summary,.availability-grid>div
+),
+html[data-theme="black-white"] :is(
+  .counter,.count,.stat,.stat-box,.stat-item,.metric,.metric-box,.summary-item,.summary-box,
+  .dashboard-stat,.dashboard-metric,.score-box,.result-box,.result-stat,.finance-stat,.progress-card,
+  .classified-counter,.user-stat,.podium-stat,.course-card-meta>span,.today-summary,.availability-grid>div
+) {
+  background:var(--theme-accent-soft) !important;
+  border-color:var(--theme-border) !important;
+  color:var(--theme-text) !important;
+}
+
+html[data-theme="blue-black"] :is(input,textarea,select),
+html[data-theme="black-white"] :is(input,textarea,select) {
+  background:var(--theme-input-bg) !important;
+  border-color:var(--theme-border) !important;
+  color:var(--theme-text) !important;
+  caret-color:var(--theme-accent) !important;
+}
+
+html[data-theme="blue-black"] :is(input,textarea)::placeholder,
+html[data-theme="black-white"] :is(input,textarea)::placeholder {
+  color:var(--theme-text-muted) !important;
+  opacity:.88;
+}
+
+html[data-theme="blue-black"] :is(
+  .badge,.tag,.chip,.pill,.status,.small-badge,.you-badge,.orange-badge,.active-theme,.heading-badge,
+  .metric-icon,.quick-icon,.finance-icon,.settings-icon,.resource-icon,.course-number
+),
+html[data-theme="black-white"] :is(
+  .badge,.tag,.chip,.pill,.status,.small-badge,.you-badge,.orange-badge,.active-theme,.heading-badge,
+  .metric-icon,.quick-icon,.finance-icon,.settings-icon,.resource-icon,.course-number
+) {
+  background:var(--theme-gradient-soft) !important;
+  border-color:var(--theme-border-strong) !important;
+  color:var(--theme-accent-2) !important;
+}
+
+html[data-theme="blue-black"] :is(
+  .orange,.orange-text,.accent-text,.theme-accent-text,.section-label,.hero-label,.music-kicker,
+  .sigaa-kicker,.course-code,.panel-heading small,.section-heading small,.subheading small
+),
+html[data-theme="black-white"] :is(
+  .orange,.orange-text,.accent-text,.theme-accent-text,.section-label,.hero-label,.music-kicker,
+  .sigaa-kicker,.course-code,.panel-heading small,.section-heading small,.subheading small
+) {
+  color:var(--theme-accent-2) !important;
+}
+
+html[data-theme="blue-black"] :is(
+  .button-primary,.primary-button,.btn-primary,.main-action,.submit-button,.action-button,
+  button.primary,button.cta,.music-search button,.sigaa-form button
+),
+html[data-theme="black-white"] :is(
+  .button-primary,.primary-button,.btn-primary,.main-action,.submit-button,.action-button,
+  button.primary,button.cta,.music-search button,.sigaa-form button
+) {
+  background:var(--theme-gradient) !important;
+  color:var(--theme-button-text) !important;
+  border-color:transparent !important;
+  box-shadow:var(--theme-glow) !important;
+}
+
+html[data-theme="blue-black"] .menu-item,
+html[data-theme="black-white"] .menu-item {
+  background:transparent !important;
+  border-color:transparent !important;
+  color:var(--theme-text-muted) !important;
+  box-shadow:none !important;
+}
+
+html[data-theme="blue-black"] .menu-item:hover,
+html[data-theme="black-white"] .menu-item:hover {
+  background:var(--theme-hover-bg) !important;
+  color:var(--theme-text) !important;
+}
+
+html[data-theme="blue-black"] .menu-item.active,
+html[data-theme="black-white"] .menu-item.active {
+  background:linear-gradient(90deg,var(--theme-accent-medium),transparent) !important;
+  color:var(--theme-accent-2) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:none !important;
+}
+
+html[data-theme="blue-black"] .menu-item.active::before,
+html[data-theme="black-white"] .menu-item.active::before {
+  background:var(--theme-accent) !important;
+  box-shadow:0 0 12px rgba(var(--theme-accent-rgb),.42) !important;
+}
+
+html[data-theme="blue-black"] .sidebar .cortex-nav-icon,
+html[data-theme="black-white"] .sidebar .cortex-nav-icon {
+  color:inherit !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+html[data-theme="blue-black"] .sidebar :is(.cortex-nav-icon,.menu-icon) svg *,
+html[data-theme="black-white"] .sidebar :is(.cortex-nav-icon,.menu-icon) svg * {
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.7 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+
+html[data-theme="blue-black"] :is(.progress-value,.progress-fill,.progress-bar>div,.theme-preview-fill),
+html[data-theme="black-white"] :is(.progress-value,.progress-fill,.progress-bar>div,.theme-preview-fill) {
+  background:var(--theme-gradient) !important;
+  box-shadow:0 0 13px rgba(var(--theme-accent-rgb),.18) !important;
+}
+
+html[data-theme="blue-black"] table,
+html[data-theme="black-white"] table {
+  background:var(--theme-surface) !important;
+}
+html[data-theme="blue-black"] :is(th,td),
+html[data-theme="black-white"] :is(th,td) {
+  border-color:var(--theme-border) !important;
+}
+html[data-theme="blue-black"] th,
+html[data-theme="black-white"] th {
+  background:var(--theme-accent-soft) !important;
+  color:var(--theme-text) !important;
+}
+
+html[data-theme="blue-black"] ::selection {
+  background:rgba(36,150,255,.34);
+  color:#fff;
+}
+html[data-theme="black-white"] ::selection {
+  background:rgba(255,255,255,.26);
+  color:#fff;
+}
+
+html[data-theme="blue-black"] * {
+  scrollbar-color:rgba(36,150,255,.46) rgba(3,12,23,.58);
+}
+html[data-theme="black-white"] * {
+  scrollbar-color:rgba(255,255,255,.32) rgba(15,15,15,.75);
+}
+
+html[data-theme="blue-black"] *::-webkit-scrollbar-thumb {
+  background:linear-gradient(#2496ff,#0b70d2) !important;
+  border-color:#06111f !important;
+}
+html[data-theme="black-white"] *::-webkit-scrollbar-thumb {
+  background:linear-gradient(#d4d4d4,#737373) !important;
+  border-color:#0a0a0a !important;
+}
+
+html[data-theme="blue-black"] :is(.logo-box,.logo-box.cortex-logo) {
+  background:linear-gradient(145deg,#0b2948,#06111f) !important;
+  border-color:var(--theme-border-strong) !important;
+  color:var(--theme-accent-2) !important;
+  box-shadow:0 10px 28px rgba(0,20,50,.25),0 0 20px rgba(36,150,255,.10) !important;
+}
+html[data-theme="black-white"] :is(.logo-box,.logo-box.cortex-logo) {
+  background:linear-gradient(145deg,#202020,#0b0b0b) !important;
+  border-color:var(--theme-border-strong) !important;
+  color:#fff !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.32),0 0 0 1px rgba(255,255,255,.04) inset !important;
+}
+
+html[data-theme="blue-black"] .logo-box.cortex-logo :is(.cortex-logo-letter,.cortex-brain-logo),
+html[data-theme="black-white"] .logo-box.cortex-logo :is(.cortex-logo-letter,.cortex-brain-logo) {
+  color:var(--theme-accent-2) !important;
+}
+html[data-theme="blue-black"] .logo-box.cortex-logo .cortex-logo-ring,
+html[data-theme="black-white"] .logo-box.cortex-logo .cortex-logo-ring {
+  border-color:var(--theme-border-strong) !important;
+}
+html[data-theme="blue-black"] .logo-box.cortex-logo :is(.cortex-logo-spark,.cortex-logo-dot),
+html[data-theme="black-white"] .logo-box.cortex-logo :is(.cortex-logo-spark,.cortex-logo-dot) {
+  background:var(--theme-gradient) !important;
+  box-shadow:0 0 12px rgba(var(--theme-accent-rgb),.28) !important;
+}
+
+/* Global music player follows the selected palette. */
+html[data-theme="blue-black"] .global-player-bubble {
+  border-color:var(--theme-border-strong) !important;
+  background:linear-gradient(145deg,#0a2948,#030914) !important;
+  color:var(--theme-accent-2) !important;
+}
+html[data-theme="black-white"] .global-player-bubble {
+  border-color:var(--theme-border-strong) !important;
+  background:linear-gradient(145deg,#202020,#080808) !important;
+  color:#f5f5f5 !important;
+}
+html[data-theme="black-white"] .global-music-player,
+html[data-theme="blue-black"] .global-music-player {
+  --shell-accent:var(--theme-accent) !important;
+}
+
+/* Theme previews */
+.theme-choice-preview.mono {
+  background:radial-gradient(circle at 82% 15%,rgba(255,255,255,.13),transparent 36%),linear-gradient(180deg,#1a1a1a,#050505) !important;
+}
+.theme-choice-preview.mono .theme-preview-top {
+  background:rgba(255,255,255,.10) !important;
+}
+.theme-choice-preview.mono .theme-preview-fill {
+  background:linear-gradient(90deg,#ffffff,#d4d4d4,#8a8a8a) !important;
+  box-shadow:0 0 12px rgba(255,255,255,.10) !important;
+}
+.theme-choice-preview.mono .theme-preview-card {
+  border-color:rgba(255,255,255,.16) !important;
+  background:linear-gradient(145deg,#1d1d1d,#0b0b0b) !important;
+}
+
+/*
+ * LEGIBILIDADE GLOBAL V7
+ * Aumenta apenas microtextos e metadados. Titulos e layout
+ * principal permanecem com as proporcoes originais.
+ */
+:root {
+  --cortex-micro-text:11px;
+  --cortex-small-text:12px;
+}
+
+:is(
+  .menu-title,.sidebar-logo span,.sidebar-logo small,.user-info span,.header-user span,
+  .metric-label,.metric-card small,.panel-header span,.finance-header span,.panel-subtitle,
+  .disciplina-info span,.activity-content span,.activity-status,.finance-values span,
+  .quick-links span,.progress-info span,.progress-text span,.theme-choice-chip,.theme-current-label,
+  .small-label,.section-label,.hero-label,.card-kicker,.page-kicker,.eyebrow,.meta,.caption,.hint,
+  .sigaa-kicker,.panel-heading small,.section-heading small,.subheading small,.notice-meta,
+  .notice-badge,.course-card>small,.course-card-meta small,.course-card-meta strong,
+  .course-card-action,.account-toolbar small,.account-toolbar strong,.academic-metrics span,
+  .academic-metrics .metric-small,.today-chip span,.today-chip strong,.day-heading strong,
+  .day-heading span,.lesson-card small,.lesson-card strong,.lesson-card span,.day-empty,
+  .profile-main small,.profile-main span,.profile-meta>span,.profile-meta strong,.course-code,
+  .course-hero p,.course-health span,.course-health strong,.course-loading strong,.course-loading small,
+  .course-kpis span,.course-tabs button,.overview-feature>small,.overview-feature p,
+  .overview-feature button,.mini-event span,.mini-event strong,.availability-grid strong,
+  .availability-grid small,.grade-group-head small,.grade-row strong,.grade-row small,
+  .resource-icon,.resource-copy strong,.resource-copy span,.download-button,.attendance-ring span,
+  .attendance-summary>div:last-child>small,.attendance-summary p,.attendance-history>div,
+  .activity-date,.activity-card strong,.activity-card small,.lesson-timeline small,
+  .lesson-timeline strong,.lesson-timeline p,.attachment-tags span,.syllabus-grid>article>small,
+  .syllabus-grid h3,.syllabus-grid p,.syllabus-list span,.syllabus-list strong,.reference-list p,
+  .reference-list span,.section-unavailable,.empty-state
+) {
+  font-size:max(var(--cortex-micro-text),.69rem) !important;
+  line-height:1.45;
+}
+
+:is(
+  .menu-item,.button-primary,.button-secondary,.primary-button,.secondary-button,.btn-primary,.btn-secondary,
+  input,textarea,select,.field label,.theme-choice-description,.page-message,.minimum-notice
+) {
+  font-size:max(var(--cortex-small-text),.75rem);
+}
+
+@media (max-width:700px) {
+  :root {
+    --cortex-micro-text:11px;
+    --cortex-small-text:12px;
+  }
+}
+
+/* Pet remains exclusive to Pink Glitter. */
+html:not([data-theme="pink-glitter"]) #cortexPinkPet {
+  display:none !important;
+}
+
+/* CORTEX CANONICAL THEMES V7 END */

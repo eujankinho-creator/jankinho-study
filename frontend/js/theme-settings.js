@@ -27,6 +27,16 @@
     }
 
 
+    if (
+      theme ===
+      "black-white"
+    ) {
+
+      return "Black & White";
+
+    }
+
+
     return "Dark Orange";
   }
 

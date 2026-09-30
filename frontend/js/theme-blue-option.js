@@ -3,7 +3,25 @@
   "use strict";
 
 
-  function createBlueThemeOption() {
+  const OPTIONS = [
+    {
+      theme: "blue-black",
+      marker: "blue",
+      title: "Blue Black",
+      description: "Preto profundo com azul eletrico, seguindo a mesma logica visual do Pink.",
+      chip: "Blue"
+    },
+    {
+      theme: "black-white",
+      marker: "mono",
+      title: "Black & White",
+      description: "Preto e branco minimalista, alto contraste e visual premium.",
+      chip: "Mono"
+    }
+  ];
+
+
+  function createOption(config) {
 
     const grid =
       document.querySelector(
@@ -16,109 +34,82 @@
     }
 
 
-    const old =
+    let button =
       grid.querySelector(
-        '[data-cortex-blue-theme-option="true"]'
+        '[data-theme-choice="' +
+        config.theme +
+        '"]'
       );
 
 
-    if (old) {
-      old.remove();
+    if (!button) {
+
+      button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "theme-choice";
+
+
+      button.setAttribute(
+        "data-theme-choice",
+        config.theme
+      );
+
+
+      grid.appendChild(
+        button
+      );
+
     }
 
 
-    const existing =
-      grid.querySelector(
-        '[data-theme-choice="blue-black"]'
-      );
-
-
-    if (existing) {
-
-      existing
-        .setAttribute(
-          "data-cortex-blue-theme-option",
-          "true"
-        );
-
-
-      const preview =
-        existing.querySelector(
-          ".theme-choice-preview"
-        );
-
-
-      if (preview) {
-
-        preview.classList.remove(
-          "dark",
-          "pink"
-        );
-
-
-        preview.classList.add(
-          "blue"
-        );
-
-      }
-
-
-      return;
-    }
-
-
-    const button =
-      document.createElement(
-        "button"
-      );
-
-
-    button.type =
-      "button";
-
-
-    button.className =
-      "theme-choice cortex-blue-theme-option";
-
-
     button.setAttribute(
-      "data-theme-choice",
-      "blue-black"
-    );
-
-
-    button.setAttribute(
-      "data-cortex-blue-theme-option",
+      "data-cortex-extra-theme-option",
       "true"
     );
 
 
     button.innerHTML =
       [
-        '<div class="theme-choice-preview blue">',
+        '<div class="theme-choice-preview ' +
+          config.marker +
+          '">',
         '  <div class="theme-preview-top">',
         '    <div class="theme-preview-fill"></div>',
         '  </div>',
         '  <div class="theme-preview-card"></div>',
         '</div>',
         '',
-        '<div class="theme-choice-title">',
-        '  Blue Black',
-        '</div>',
+        '<div class="theme-choice-title">' +
+          config.title +
+          '</div>',
         '',
-        '<div class="theme-choice-description">',
-        '  Preto profundo com azul eletrico e glow frio.',
-        '</div>',
+        '<div class="theme-choice-description">' +
+          config.description +
+          '</div>',
         '',
-        '<div class="theme-choice-chip">',
-        '  Blue',
-        '</div>'
+        '<div class="theme-choice-chip">' +
+          config.chip +
+          '</div>'
       ].join("");
 
+  }
 
-    grid.appendChild(
-      button
+
+  function createThemeOptions() {
+
+    OPTIONS.forEach(
+      createOption
     );
+
   }
 
 
@@ -129,13 +120,13 @@
 
     document.addEventListener(
       "DOMContentLoaded",
-      createBlueThemeOption
+      createThemeOptions
     );
 
   }
   else {
 
-    createBlueThemeOption();
+    createThemeOptions();
 
   }
 
