@@ -3733,3 +3733,198 @@ textarea {
   -webkit-text-size-adjust: 100%;
 }
 /* CORTEX GLOBAL TYPOGRAPHY STANDARD V1 END */
+
+
+/* =========================================================
+   CORTEX INTERACTION CONTRAST V1
+   Estados de resposta e selecao evidentes em todos os temas.
+========================================================= */
+:root {
+  --cortex-correct:#00e676;
+  --cortex-correct-rgb:0,230,118;
+  --cortex-wrong:#ff3158;
+  --cortex-wrong-rgb:255,49,88;
+}
+
+/* Opcoes disponiveis: contorno mais perceptivel antes da selecao. */
+html[data-theme] :is(
+  .questions-view .session-option,
+  .simulado-view .sim-option,
+  .simulado-view .mode-button,
+  .simulado-view .check-chip,
+  .simulado-view .area-option,
+  .flashcards-view .flash-category-option,
+  .pharma-view .filter-chip,
+  .pharma-view .receptor-card,
+  .lab-view .control-tab,
+  .tool-button,
+  .theme-choice,
+  .case-flow-item,
+  .course-tabs button,
+  .correct-selector
+):not(.active):not(.selected):not(.correct):not(.wrong):not(:disabled) {
+  border-color:rgba(255,255,255,.20) !important;
+  background:rgba(255,255,255,.035) !important;
+  color:var(--theme-text-soft) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025) !important;
+}
+
+/* Opcao escolhida/ativa: preenchimento forte e anel de selecao. */
+html[data-theme] :is(
+  .questions-view .session-option.selected,
+  .simulado-view .sim-option.selected,
+  .simulado-view .mode-button.active,
+  .simulado-view .check-chip.active,
+  .simulado-view .area-option.active,
+  .simulado-view .review-button.active,
+  .flashcards-view .flash-category-option.active,
+  .pharma-view .filter-chip.active,
+  .pharma-view .receptor-card.active,
+  .pharma-view .toolbar-button.active,
+  .pharma-view .favorite-button.active,
+  .pharma-view .modal-header-actions button.active,
+  .lab-view .control-tab.active,
+  .tool-button.active,
+  .theme-choice.active,
+  .case-flow-item.active,
+  .course-tabs button.active,
+  .correct-selector.active,
+  [aria-selected="true"],
+  [aria-pressed="true"]
+) {
+  border-color:var(--theme-accent) !important;
+  background:linear-gradient(135deg,rgba(var(--theme-accent-rgb),.28),rgba(var(--theme-accent-rgb),.13)) !important;
+  color:var(--theme-text) !important;
+  box-shadow:
+    0 0 0 2px rgba(var(--theme-accent-rgb),.18),
+    0 0 24px rgba(var(--theme-accent-rgb),.18),
+    inset 0 0 0 1px rgba(255,255,255,.06) !important;
+}
+
+/* Resposta correta: verde vivo universal, acima dos overrides de tema. */
+html[data-theme] :is(
+  .questions-view .session-option.correct,
+  .simulado-view .sim-option.correct,
+  .pharma-view .quiz-options button.correct
+) {
+  border-color:var(--cortex-correct) !important;
+  background:linear-gradient(135deg,rgba(var(--cortex-correct-rgb),.32),rgba(var(--cortex-correct-rgb),.16)) !important;
+  color:#f0fff7 !important;
+  box-shadow:
+    0 0 0 2px rgba(var(--cortex-correct-rgb),.20),
+    0 0 26px rgba(var(--cortex-correct-rgb),.22),
+    inset 4px 0 0 var(--cortex-correct) !important;
+}
+
+/* Resposta errada: vermelho vivo universal. */
+html[data-theme] :is(
+  .questions-view .session-option.wrong,
+  .simulado-view .sim-option.wrong,
+  .pharma-view .quiz-options button.wrong
+) {
+  border-color:var(--cortex-wrong) !important;
+  background:linear-gradient(135deg,rgba(var(--cortex-wrong-rgb),.32),rgba(var(--cortex-wrong-rgb),.16)) !important;
+  color:#fff3f5 !important;
+  box-shadow:
+    0 0 0 2px rgba(var(--cortex-wrong-rgb),.20),
+    0 0 26px rgba(var(--cortex-wrong-rgb),.22),
+    inset 4px 0 0 var(--cortex-wrong) !important;
+}
+
+html[data-theme] :is(
+  .questions-view .session-option.correct,
+  .simulado-view .sim-option.correct
+) .option-letter {
+  border-color:var(--cortex-correct) !important;
+  background:var(--cortex-correct) !important;
+  color:#03150c !important;
+  box-shadow:0 0 16px rgba(var(--cortex-correct-rgb),.34) !important;
+}
+
+html[data-theme] :is(
+  .questions-view .session-option.wrong,
+  .simulado-view .sim-option.wrong
+) .option-letter {
+  border-color:var(--cortex-wrong) !important;
+  background:var(--cortex-wrong) !important;
+  color:#fff !important;
+  box-shadow:0 0 16px rgba(var(--cortex-wrong-rgb),.34) !important;
+}
+
+/* Texto reforca o significado alem da cor. */
+html[data-theme] .questions-view .session-option.correct::after,
+html[data-theme] .simulado-view .sim-option.correct::after {
+  content:"✓ CORRETA";
+  margin-left:auto;
+  color:#07170f;
+  background:var(--cortex-correct);
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+
+html[data-theme] .questions-view .session-option.wrong::after,
+html[data-theme] .simulado-view .sim-option.wrong::after {
+  content:"✕ ERRADA";
+  margin-left:auto;
+  color:#fff;
+  background:var(--cortex-wrong);
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+
+html[data-theme] :is(.activity-result.correct,.guided-feedback.correct,.result-icon.correct) {
+  border-color:var(--cortex-correct) !important;
+  color:#baffd7 !important;
+  background:rgba(var(--cortex-correct-rgb),.18) !important;
+}
+
+html[data-theme] :is(.activity-result.wrong,.guided-feedback.wrong,.result-icon.wrong,.wrong-item) {
+  border-color:var(--cortex-wrong) !important;
+  color:#ffd4dc !important;
+  background:rgba(var(--cortex-wrong-rgb),.16) !important;
+}
+
+/* Checkbox/radio nativos. */
+html[data-theme] input[type="checkbox"],
+html[data-theme] input[type="radio"] {
+  accent-color:var(--theme-accent);
+}
+
+html[data-theme] input[type="checkbox"]:not(:checked):not(:disabled),
+html[data-theme] input[type="radio"]:not(:checked):not(:disabled) {
+  outline:1px solid rgba(255,255,255,.28);
+  outline-offset:2px;
+}
+
+html[data-theme] input[type="checkbox"]:checked:not(:disabled),
+html[data-theme] input[type="radio"]:checked:not(:disabled) {
+  outline:2px solid var(--theme-accent);
+  outline-offset:2px;
+  filter:drop-shadow(0 0 5px rgba(var(--theme-accent-rgb),.55));
+}
+
+/* Foco de teclado forte em todos os temas. */
+html[data-theme] :is(button,[role="button"],[role="tab"],input,select,textarea):focus-visible {
+  outline:3px solid var(--theme-accent) !important;
+  outline-offset:3px !important;
+  box-shadow:0 0 0 5px rgba(var(--theme-accent-rgb),.18) !important;
+}
+
+@media (max-width:640px) {
+  html[data-theme] .questions-view .session-option.correct::after,
+  html[data-theme] .questions-view .session-option.wrong::after,
+  html[data-theme] .simulado-view .sim-option.correct::after,
+  html[data-theme] .simulado-view .sim-option.wrong::after {
+    padding:4px 6px;
+    font-size:9px;
+  }
+}
+/* CORTEX INTERACTION CONTRAST V1 END */
