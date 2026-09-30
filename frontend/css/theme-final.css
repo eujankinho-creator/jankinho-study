@@ -3928,3 +3928,190 @@ html[data-theme] :is(button,[role="button"],[role="tab"],input,select,textarea):
   }
 }
 /* CORTEX INTERACTION CONTRAST V1 END */
+
+
+/* =========================================================
+   CORTEX QUESTION SEMANTIC LOCK V2
+   Resposta semantica nunca pode herdar a cor do tema.
+   Principalmente necessario no Pink Glitter, que possui
+   regras amplas para botoes/cards.
+========================================================= */
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.selected:not(.correct):not(.wrong) {
+  border:2px solid var(--theme-accent) !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(var(--theme-accent-rgb),.34),
+      rgba(var(--theme-accent-rgb),.16)
+    ) !important;
+  color:var(--theme-text) !important;
+  opacity:1 !important;
+  box-shadow:
+    0 0 0 2px rgba(var(--theme-accent-rgb),.22),
+    0 0 24px rgba(var(--theme-accent-rgb),.18) !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.correct,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+.session-option.correct {
+  border:2px solid #00e676 !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,230,118,.42),
+      rgba(0,230,118,.20)
+    ) !important;
+  color:#f4fff8 !important;
+  opacity:1 !important;
+  box-shadow:
+    0 0 0 2px rgba(0,230,118,.22),
+    0 0 30px rgba(0,230,118,.28),
+    inset 5px 0 0 #00e676 !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.wrong,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+.session-option.wrong {
+  border:2px solid #ff2d55 !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,45,85,.44),
+      rgba(255,45,85,.20)
+    ) !important;
+  color:#fff5f7 !important;
+  opacity:1 !important;
+  box-shadow:
+    0 0 0 2px rgba(255,45,85,.22),
+    0 0 30px rgba(255,45,85,.28),
+    inset 5px 0 0 #ff2d55 !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.correct .option-letter,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+.session-option.correct .option-letter {
+  border-color:#00e676 !important;
+  background:#00e676 !important;
+  color:#04170c !important;
+  box-shadow:0 0 16px rgba(0,230,118,.38) !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.wrong .option-letter,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+.session-option.wrong .option-letter {
+  border-color:#ff2d55 !important;
+  background:#ff2d55 !important;
+  color:#fff !important;
+  box-shadow:0 0 16px rgba(255,45,85,.38) !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.correct .option-text,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+.session-option.correct .option-text {
+  color:#effff6 !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.wrong .option-text,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+.session-option.wrong .option-text {
+  color:#fff1f4 !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.correct
+.cortex-answer-state-correct {
+  border:1px solid #7dffb4 !important;
+  background:#00e676 !important;
+  color:#03160b !important;
+  opacity:1 !important;
+  box-shadow:0 0 16px rgba(0,230,118,.38) !important;
+}
+
+html[data-theme] body.questions-view
+.session-card
+.session-alternatives
+.session-option.wrong
+.cortex-answer-state-wrong {
+  border:1px solid #ff7994 !important;
+  background:#ff2d55 !important;
+  color:#fff !important;
+  opacity:1 !important;
+  box-shadow:0 0 16px rgba(255,45,85,.38) !important;
+}
+
+/* Evita que o estilo rosa generico para botoes sobrescreva respostas. */
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+button.session-option.correct:hover,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+button.session-option.correct:disabled {
+  border-color:#00e676 !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,230,118,.42),
+      rgba(0,230,118,.20)
+    ) !important;
+  color:#f4fff8 !important;
+  opacity:1 !important;
+}
+
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+button.session-option.wrong:hover,
+html[data-theme="pink-glitter"] body.questions-view
+.session-card
+.session-alternatives
+button.session-option.wrong:disabled {
+  border-color:#ff2d55 !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,45,85,.44),
+      rgba(255,45,85,.20)
+    ) !important;
+  color:#fff5f7 !important;
+  opacity:1 !important;
+}
+
+/* CORTEX QUESTION SEMANTIC LOCK V2 END */
