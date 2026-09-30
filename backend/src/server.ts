@@ -1216,26 +1216,32 @@ async function listarFinanceiro(
   response: ServerResponse,
   url: URL
 ) {
+
   const usuarioId =
     await exigirUsuario(
       request,
       response
     );
 
+
   if (!usuarioId) {
     return;
   }
 
+
   try {
+
     const inicio =
       url.searchParams.get(
         "inicio"
       );
 
+
     const fim =
       url.searchParams.get(
         "fim"
       );
+
 
     const dataInicio =
       inicio
@@ -1245,6 +1251,7 @@ async function listarFinanceiro(
           )
         : undefined;
 
+
     const dataFim =
       fim
         ? new Date(
@@ -1253,75 +1260,135 @@ async function listarFinanceiro(
           )
         : undefined;
 
+
     const movimentacoes =
       await prisma.movimentacao.findMany({
+
         where: {
+
           usuarioId,
 
           ...(dataInicio ||
           dataFim
             ? {
+
                 data: {
+
                   ...(dataInicio
                     ? {
                         gte:
-                          dataInicio,
+                          dataInicio
                       }
                     : {}),
 
                   ...(dataFim
                     ? {
                         lte:
-                          dataFim,
+                          dataFim
                       }
-                    : {}),
-                },
+                    : {})
+
+                }
+
               }
-            : {}),
+            : {})
+
         },
 
         orderBy: {
-          data: "desc",
-        },
+          data:
+            "desc"
+        }
+
       });
 
-    let receitas = 0;
-    let despesas = 0;
+
+    let receitas =
+      0;
+
+    let despesas =
+      0;
+
+    let dividas =
+      0;
+
 
     for (
       const movimentacao
       of movimentacoes
     ) {
+
       const valor =
         Number(
           movimentacao.valor
         );
 
+
       if (
         movimentacao.tipo ===
         "RECEITA"
       ) {
-        receitas += valor;
+
+        receitas +=
+          valor;
+
       }
+
 
       if (
         movimentacao.tipo ===
         "DESPESA"
       ) {
-        despesas += valor;
+
+        despesas +=
+          valor;
+
       }
+
+
+      if (
+        movimentacao.tipo ===
+        "DIVIDA"
+      ) {
+
+        if (
+          movimentacao.quitada
+        ) {
+
+          /*
+           * A divida quitada deixa de ser
+           * compromisso pendente e passa
+           * a representar dinheiro gasto.
+           */
+          despesas +=
+            valor;
+
+        }
+        else {
+
+          dividas +=
+            valor;
+
+        }
+
+      }
+
     }
+
 
     json(
       response,
       200,
       {
+
         movimentacoes:
           movimentacoes.map(
             function (
               movimentacao
             ) {
+
               return {
+
                 id:
                   movimentacao.id,
 
@@ -1339,72 +1406,105 @@ async function listarFinanceiro(
                 data:
                   movimentacao.data,
 
+                quitada:
+                  movimentacao.quitada,
+
+                quitadaEm:
+                  movimentacao.quitadaEm,
+
                 createdAt:
-                  movimentacao.createdAt,
+                  movimentacao.createdAt
+
               };
+
             }
           ),
 
         resumo: {
+
           receitas,
+
           despesas,
+
+          dividas,
+
           saldo:
             receitas -
-            despesas,
-        },
+            despesas
+
+        }
+
       }
     );
+
   }
-  catch (error) {
+  catch (
+    error
+  ) {
+
     console.error(
       "Erro no financeiro:",
       error
     );
+
 
     json(
       response,
       500,
       {
         error:
-          "Não foi possível carregar as movimentações.",
+          "Nao foi possivel carregar as movimentacoes."
       }
     );
-  }
-}
 
+  }
+
+}
 
 async function criarMovimentacao(
   request: IncomingMessage,
   response: ServerResponse
 ) {
+
   const usuarioId =
     await exigirUsuario(
       request,
       response
     );
 
+
   if (!usuarioId) {
     return;
   }
 
+
   try {
+
     const body =
-      await lerJson(request);
+      await lerJson(
+        request
+      );
+
 
     const descricao =
       String(
-        body.descricao || ""
+        body.descricao ||
+        ""
       ).trim();
+
 
     const valor =
       Number(
         body.valor
       );
 
+
     const tipo =
       String(
-        body.tipo || ""
+        body.tipo ||
+        ""
       );
+
 
     const data =
       body.data
@@ -1414,69 +1514,107 @@ async function criarMovimentacao(
           )
         : new Date();
 
+
     if (!descricao) {
+
       json(
         response,
         400,
         {
           error:
-            "A descrição é obrigatória.",
+            "A descricao e obrigatoria."
         }
       );
 
       return;
+
     }
+
 
     if (
-      !Number.isFinite(valor) ||
-      valor <= 0
+      !Number.isFinite(
+        valor
+      ) ||
+      valor <=
+      0
     ) {
+
       json(
         response,
         400,
         {
           error:
-            "Informe um valor válido.",
+            "Informe um valor valido."
         }
       );
 
       return;
+
     }
+
 
     if (
-      tipo !== "RECEITA" &&
-      tipo !== "DESPESA"
+      tipo !==
+        "RECEITA" &&
+      tipo !==
+        "DESPESA" &&
+      tipo !==
+        "DIVIDA"
     ) {
+
       json(
         response,
         400,
         {
           error:
-            "Tipo de movimentação inválido.",
+            "Tipo de movimentacao invalido."
         }
       );
 
       return;
+
     }
+
 
     const movimentacao =
-      await prisma.movimentacao.create({
-        data: {
-          descricao,
-          valor,
-          tipo: tipo as any,
-          data,
-          usuarioId,
-        },
-      });
+      await prisma
+        .movimentacao
+        .create({
+
+          data: {
+
+            descricao,
+
+            valor,
+
+            tipo:
+              tipo as any,
+
+            data,
+
+            quitada:
+              false,
+
+            quitadaEm:
+              null,
+
+            usuarioId
+
+          }
+
+        });
+
 
     json(
       response,
       201,
       {
-        sucesso: true,
+
+        sucesso:
+          true,
 
         movimentacao: {
+
           id:
             movimentacao.id,
 
@@ -1494,65 +1632,91 @@ async function criarMovimentacao(
           data:
             movimentacao.data,
 
-          createdAt:
-            movimentacao.createdAt,
-        },
+          quitada:
+            movimentacao.quitada,
+
+          quitadaEm:
+            movimentacao.quitadaEm
+
+        }
+
       }
     );
+
   }
-  catch (error) {
+  catch (
+    error
+  ) {
+
     console.error(
-      "Erro ao criar movimentação:",
+      "Erro ao criar movimentacao:",
       error
     );
+
 
     json(
       response,
       500,
       {
         error:
-          "Não foi possível criar a movimentação.",
+          "Nao foi possivel criar a movimentacao."
       }
     );
-  }
-}
 
+  }
+
+}
 
 async function editarMovimentacao(
   request: IncomingMessage,
   response: ServerResponse
 ) {
+
   const usuarioId =
     await exigirUsuario(
       request,
       response
     );
 
+
   if (!usuarioId) {
     return;
   }
 
+
   try {
+
     const body =
-      await lerJson(request);
+      await lerJson(
+        request
+      );
+
 
     const id =
-      Number(body.id);
+      Number(
+        body.id
+      );
+
 
     const descricao =
       String(
-        body.descricao || ""
+        body.descricao ||
+        ""
       ).trim();
+
 
     const valor =
       Number(
         body.valor
       );
 
+
     const tipo =
       String(
-        body.tipo || ""
+        body.tipo ||
+        ""
       );
+
 
     const data =
       body.data
@@ -1562,82 +1726,346 @@ async function editarMovimentacao(
           )
         : new Date();
 
+
     if (
-      !Number.isInteger(id)
+      !Number.isInteger(
+        id
+      )
     ) {
+
       json(
         response,
         400,
         {
           error:
-            "Movimentação inválida.",
+            "Movimentacao invalida."
         }
       );
 
       return;
+
     }
 
+
+    if (
+      !descricao ||
+      !Number.isFinite(
+        valor
+      ) ||
+      valor <=
+      0
+    ) {
+
+      json(
+        response,
+        400,
+        {
+          error:
+            "Dados financeiros invalidos."
+        }
+      );
+
+      return;
+
+    }
+
+
+    if (
+      tipo !==
+        "RECEITA" &&
+      tipo !==
+        "DESPESA" &&
+      tipo !==
+        "DIVIDA"
+    ) {
+
+      json(
+        response,
+        400,
+        {
+          error:
+            "Tipo de movimentacao invalido."
+        }
+      );
+
+      return;
+
+    }
+
+
     const existente =
-      await prisma.movimentacao.findFirst({
-        where: {
-          id,
-          usuarioId,
-        },
-      });
+      await prisma
+        .movimentacao
+        .findFirst({
+
+          where: {
+            id,
+            usuarioId
+          }
+
+        });
+
 
     if (!existente) {
+
       json(
         response,
         404,
         {
           error:
-            "Movimentação não encontrada.",
+            "Movimentacao nao encontrada."
         }
       );
 
       return;
+
     }
 
-    const movimentacao =
-      await prisma.movimentacao.update({
-        where: {
-          id,
-        },
 
-        data: {
-          descricao,
-          valor,
-          tipo: tipo as any,
-          data,
-        },
-      });
+    const continuaDivida =
+      tipo ===
+      "DIVIDA";
+
+
+    const movimentacao =
+      await prisma
+        .movimentacao
+        .update({
+
+          where: {
+            id
+          },
+
+          data: {
+
+            descricao,
+
+            valor,
+
+            tipo:
+              tipo as any,
+
+            data,
+
+            quitada:
+              continuaDivida
+                ? existente.quitada
+                : false,
+
+            quitadaEm:
+              continuaDivida
+                ? existente.quitadaEm
+                : null
+
+          }
+
+        });
+
 
     json(
       response,
       200,
       {
-        sucesso: true,
-        movimentacao,
+        sucesso:
+          true,
+
+        movimentacao
       }
     );
+
   }
-  catch (error) {
+  catch (
+    error
+  ) {
+
     console.error(
-      "Erro ao editar movimentação:",
+      "Erro ao editar movimentacao:",
       error
     );
+
 
     json(
       response,
       500,
       {
         error:
-          "Não foi possível editar a movimentação.",
+          "Nao foi possivel editar a movimentacao."
       }
     );
+
   }
+
 }
 
+async function quitarDivida(
+  request: IncomingMessage,
+  response: ServerResponse
+) {
+
+  const usuarioId =
+    await exigirUsuario(
+      request,
+      response
+    );
+
+
+  if (!usuarioId) {
+    return;
+  }
+
+
+  try {
+
+    const body =
+      await lerJson(
+        request
+      );
+
+
+    const id =
+      Number(
+        body.id
+      );
+
+
+    if (
+      !Number.isInteger(
+        id
+      )
+    ) {
+
+      json(
+        response,
+        400,
+        {
+          error:
+            "Divida invalida."
+        }
+      );
+
+      return;
+
+    }
+
+
+    const existente =
+      await prisma
+        .movimentacao
+        .findFirst({
+
+          where: {
+            id,
+            usuarioId,
+            tipo:
+              "DIVIDA"
+          }
+
+        });
+
+
+    if (!existente) {
+
+      json(
+        response,
+        404,
+        {
+          error:
+            "Divida nao encontrada."
+        }
+      );
+
+      return;
+
+    }
+
+
+    if (
+      existente.quitada
+    ) {
+
+      json(
+        response,
+        200,
+        {
+          sucesso:
+            true
+        }
+      );
+
+      return;
+
+    }
+
+
+    const movimentacao =
+      await prisma
+        .movimentacao
+        .update({
+
+          where: {
+            id
+          },
+
+          data: {
+
+            quitada:
+              true,
+
+            quitadaEm:
+              new Date()
+
+          }
+
+        });
+
+
+    json(
+      response,
+      200,
+      {
+
+        sucesso:
+          true,
+
+        movimentacao: {
+
+          id:
+            movimentacao.id,
+
+          quitada:
+            movimentacao.quitada,
+
+          quitadaEm:
+            movimentacao.quitadaEm
+
+        }
+
+      }
+    );
+
+  }
+  catch (
+    error
+  ) {
+
+    console.error(
+      "Erro ao quitar divida:",
+      error
+    );
+
+
+    json(
+      response,
+      500,
+      {
+        error:
+          "Nao foi possivel quitar a divida."
+      }
+    );
+
+  }
+
+}
 
 async function excluirMovimentacao(
   request: IncomingMessage,
@@ -2611,6 +3039,23 @@ const server =
 
         if (
           caminho ===
+            "/api/financeiro/quitar" &&
+          metodo ===
+            "POST"
+        ) {
+
+          await quitarDivida(
+            request,
+            response
+          );
+
+          return;
+
+        }
+
+
+        if (
+          caminho ===
           "/api/financeiro"
         ) {
           if (
@@ -2878,6 +3323,7 @@ const server =
         const aliasesProtegidosFrontend =
           new Set([
             "/questoes",
+            "/simulado",
             "/flashcards",
             "/lousa",
             "/farmacos",
@@ -2985,6 +3431,20 @@ const server =
           return;
         }
 
+
+
+        if (
+          caminho ===
+          "/simulado"
+        ) {
+
+          redirect(
+            response,
+            "/simulado.html"
+          );
+
+          return;
+        }
 
 
         if (

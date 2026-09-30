@@ -19,18 +19,29 @@
   <script src="/js/ui-enhancements.js"></script>
   <link rel="stylesheet" href="/css/themes.css">
   <script src="/js/theme-manager.js"></script>
-  <link rel="stylesheet" href="/css/cortex-brand.css">
-  <link rel="stylesheet" href="/css/financas-premium.css">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20260930-no-old-pet9">
+  <link rel="stylesheet" href="/css/financas-premium.css?v=20260930-final1">
   <link
     rel="stylesheet"
-    href="/css/sidebar-standard.css"
+    href="/css/sidebar-standard.css?v=20260930-restored1"
   >
-  <link rel="stylesheet" href="/css/theme-final.css">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20260930-pet4">
 
   <script
-    src="/js/sidebar-standard.js?v=20260930-lousa"
+    src="/js/sidebar-standard.js?v=20260930-restored1"
     defer
   ></script>
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/favicon.svg?v=cortex-v1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#090909"
+  >
+
 </head>
 
 <body class="finance-view">
@@ -233,7 +244,7 @@
           </h1>
 
           <p>
-            Organize suas receitas, despesas e acompanhe
+            Organize suas receitas, despesas, d&iacute;vidas e acompanhe
             seu saldo em um s&oacute; lugar.
           </p>
 
@@ -377,6 +388,52 @@
 
             <span class="expense">
               Sa&iacute;da
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="summary-card debt-card">
+
+          <div class="summary-top">
+
+            <div>
+
+              <span class="debt">
+                D&iacute;vidas
+              </span>
+
+              <small>
+                Total comprometido
+              </small>
+
+            </div>
+
+            <div class="summary-icon debt-icon">
+              !
+            </div>
+
+          </div>
+
+
+          <strong
+            id="dividasTotal"
+            class="summary-value debt"
+          >
+            R$ 0,00
+          </strong>
+
+
+          <div class="summary-bottom">
+
+            <span id="quantidadeDividas">
+              0 lan&ccedil;amentos
+            </span>
+
+            <span class="debt">
+              D&iacute;vida
             </span>
 
           </div>
@@ -535,6 +592,14 @@
                   type="button"
                 >
                   &darr; Despesa
+                </button>
+
+                <button
+                  id="tipoDivida"
+                  class="type-button"
+                  type="button"
+                >
+                  ! D&iacute;vida
                 </button>
 
               </div>
@@ -841,6 +906,55 @@
         </article>
 
       </section>
+      <!-- DIVIDAS PENDENTES -->
+
+      <section
+        class="panel debt-panel"
+      >
+
+        <div class="history-header">
+
+          <div>
+
+            <span class="badge debt-badge">
+              D&iacute;vidas
+            </span>
+
+            <h2>
+              D&iacute;vidas pendentes
+            </h2>
+
+            <p>
+              Acompanhe seus compromissos e marque
+              uma d&iacute;vida como quitada quando pagar.
+            </p>
+
+          </div>
+
+
+          <div class="history-actions">
+
+            <span id="dividasPendentesResumo">
+              Nenhuma pendente
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div id="dividasPendentesLista">
+
+          <div class="empty">
+            Carregando...
+          </div>
+
+        </div>
+
+      </section>
+
+
+
       <!-- HISTORICO -->
 
       <section class="panel history-panel">
@@ -858,7 +972,7 @@
             </h2>
 
             <p>
-              Todas as receitas e despesas registradas.
+              Todas as receitas, despesas e d&iacute;vidas registradas.
             </p>
 
           </div>
@@ -904,8 +1018,8 @@
 
 
   <script src="/js/financas-ui.js"></script>
-  <script src="/js/financas.js"></script>
+  <script src="/js/financas.js?v=20260930-final1"></script>
 
-  <script src="/js/cortex-brand.js"></script>
+  <script src="/js/cortex-brand.js?v=20260930-no-old-pet9"></script>
 </body>
 </html>

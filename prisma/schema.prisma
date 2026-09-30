@@ -82,6 +82,8 @@ model Movimentacao {
   valor     Decimal          @db.Decimal(10, 2)
   tipo      TipoMovimentacao
   data      DateTime         @default(now())
+  quitada   Boolean          @default(false)
+  quitadaEm DateTime?
   createdAt DateTime         @default(now())
   usuarioId Int
   usuario   Usuario          @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
@@ -231,4 +233,5 @@ model RegistroInvestigacao {
 enum TipoMovimentacao {
   RECEITA
   DESPESA
+  DIVIDA
 }

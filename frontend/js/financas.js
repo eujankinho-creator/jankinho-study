@@ -3,6 +3,7 @@ const state = {
   resumo: {
     receitas: 0,
     despesas: 0,
+    dividas: 0,
     saldo: 0
   },
   tipo: "RECEITA",
@@ -240,6 +241,7 @@ async function carregarMovimentacoes() {
       dados.resumo || {
         receitas: 0,
         despesas: 0,
+        dividas: 0,
         saldo: 0
       };
 
@@ -272,6 +274,13 @@ function renderResumo() {
   const despesas =
     Number(
       state.resumo.despesas ||
+      0
+    );
+
+
+  const dividas =
+    Number(
+      state.resumo.dividas ||
       0
     );
 
@@ -309,6 +318,19 @@ function renderResumo() {
     ).length;
 
 
+  const quantidadeDividas =
+    state.movimentacoes.filter(
+      function (item) {
+
+        return (
+          item.tipo ===
+          "DIVIDA"
+        );
+
+      }
+    ).length;
+
+
   $("receitasTotal")
     .textContent =
     moeda(receitas);
@@ -317,6 +339,11 @@ function renderResumo() {
   $("despesasTotal")
     .textContent =
     moeda(despesas);
+
+
+  $("dividasTotal")
+    .textContent =
+    moeda(dividas);
 
 
   $("saldoTotal")
@@ -339,6 +366,16 @@ function renderResumo() {
     quantidadeDespesas +
     (
       quantidadeDespesas === 1
+        ? " lancamento"
+        : " lancamentos"
+    );
+
+
+  $("quantidadeDividas")
+    .textContent =
+    quantidadeDividas +
+    (
+      quantidadeDividas === 1
         ? " lancamento"
         : " lancamentos"
     );
@@ -370,16 +407,21 @@ function renderResumo() {
     $("saldoCard");
 
 
-  if (saldo >= 0) {
+  if (
+    saldo >= 0
+  ) {
 
     saldoTotal.className =
       "summary-value orange";
 
+
     saldoLabel.className =
       "orange";
 
+
     saldoIcon.className =
       "summary-icon balance-icon";
+
 
     saldoCard.className =
       "summary-card balance-card";
@@ -390,14 +432,18 @@ function renderResumo() {
     saldoTotal.className =
       "summary-value expense";
 
+
     saldoLabel.className =
       "expense";
+
 
     saldoIcon.className =
       "summary-icon expense-icon";
 
+
     saldoCard.className =
       "summary-card expense-card";
+
   }
 
 
@@ -408,47 +454,45 @@ function renderResumo() {
 
   $("barDespesasValor")
     .textContent =
-    moeda(despesas);
+    moeda(
+      despesas
+    );
+
+
+  const totalSaidas =
+    despesas;
 
 
   const maior =
     Math.max(
       receitas,
-      despesas,
+      totalSaidas,
       1
-    );
-
-
-  const percentualReceitas =
-    Math.min(
-      100,
-      receitas /
-      maior *
-      100
-    );
-
-
-  const percentualDespesas =
-    Math.min(
-      100,
-      despesas /
-      maior *
-      100
     );
 
 
   $("barReceitas")
     .style.width =
-    percentualReceitas +
+    Math.min(
+      100,
+      receitas /
+      maior *
+      100
+    ) +
     "%";
 
 
   $("barDespesas")
     .style.width =
-    percentualDespesas +
+    Math.min(
+      100,
+      totalSaidas /
+      maior *
+      100
+    ) +
     "%";
-}
 
+}
 
 function renderFiltro() {
 
@@ -501,7 +545,8 @@ function renderMovimentacoes() {
 
 
   if (
-    state.movimentacoes.length === 0
+    state.movimentacoes.length ===
+    0
   ) {
 
     container.innerHTML =
@@ -510,6 +555,81 @@ function renderMovimentacoes() {
       '</div>';
 
     return;
+
+  }
+
+
+  function tipoVisual(
+    tipo
+  ) {
+
+    if (
+      tipo ===
+      "RECEITA"
+    ) {
+
+      return {
+        classe:
+          "income",
+
+        fundo:
+          "income-bg",
+
+        simbolo:
+          "\u2191",
+
+        nome:
+          "Receita",
+
+        sinal:
+          "+"
+      };
+
+    }
+
+
+    if (
+      tipo ===
+      "DIVIDA"
+    ) {
+
+      return {
+        classe:
+          "debt",
+
+        fundo:
+          "debt-bg",
+
+        simbolo:
+          "!",
+
+        nome:
+          "Divida",
+
+        sinal:
+          "-"
+      };
+
+    }
+
+
+    return {
+      classe:
+        "expense",
+
+      fundo:
+        "expense-bg",
+
+      simbolo:
+        "\u2193",
+
+      nome:
+        "Despesa",
+
+      sinal:
+        "-"
+    };
+
   }
 
 
@@ -518,26 +638,40 @@ function renderMovimentacoes() {
       .map(
         function (item) {
 
-          const receita =
+          const visual =
+            tipoVisual(
+              item.tipo
+            );
+
+
+          if (
             item.tipo ===
-            "RECEITA";
+              "DIVIDA" &&
+            item.quitada
+          ) {
+
+            visual.nome =
+              "Divida quitada";
+
+            visual.classe =
+              "debt-paid";
+
+            visual.fundo =
+              "debt-paid-bg";
+
+            visual.simbolo =
+              "\u2713";
+
+          }
 
 
           return `
             <div class="movement-item">
 
               <div
-                class="movement-icon ${
-                  receita
-                    ? "income-bg"
-                    : "expense-bg"
-                }"
+                class="movement-icon ${visual.fundo}"
               >
-                ${
-                  receita
-                    ? "\u2191"
-                    : "\u2193"
-                }
+                ${visual.simbolo}
               </div>
 
 
@@ -562,17 +696,9 @@ function renderMovimentacoes() {
                   </span>
 
                   <span
-                    class="${
-                      receita
-                        ? "income"
-                        : "expense"
-                    }"
+                    class="${visual.classe}"
                   >
-                    ${
-                      receita
-                        ? "Receita"
-                        : "Despesa"
-                    }
+                    ${visual.nome}
                   </span>
 
                 </div>
@@ -581,17 +707,9 @@ function renderMovimentacoes() {
 
 
               <div
-                class="movement-value ${
-                  receita
-                    ? "income"
-                    : "expense"
-                }"
+                class="movement-value ${visual.classe}"
               >
-                ${
-                  receita
-                    ? "+"
-                    : "-"
-                }
+                ${visual.sinal}
                 ${moeda(
                   item.valor
                 )}
@@ -642,8 +760,10 @@ function renderMovimentacoes() {
                 botao.dataset.edit
               )
             );
+
           }
         );
+
       }
     );
 
@@ -664,13 +784,14 @@ function renderMovimentacoes() {
                 botao.dataset.delete
               )
             );
+
           }
         );
+
       }
     );
+
 }
-
-
 
 function moedaCompacta(valor) {
 
@@ -892,7 +1013,12 @@ function renderFluxoMensal() {
       }
       else if (
         item.tipo ===
-        "DESPESA"
+          "DESPESA" ||
+        (
+          item.tipo ===
+            "DIVIDA" &&
+          item.quitada
+        )
       ) {
 
         registro.despesas +=
@@ -1297,7 +1423,12 @@ function renderSaldoEvolucao() {
       }
       else if (
         item.tipo ===
-        "DESPESA"
+          "DESPESA" ||
+        (
+          item.tipo ===
+            "DIVIDA" &&
+          item.quitada
+        )
       ) {
 
         registro.valor -=
@@ -1812,6 +1943,269 @@ function renderGraficosFinanceiros() {
 
 }
 
+function renderDividasPendentes() {
+
+  const container =
+    $("dividasPendentesLista");
+
+
+  const resumo =
+    $("dividasPendentesResumo");
+
+
+  if (!container) {
+    return;
+  }
+
+
+  const dividas =
+    state.movimentacoes.filter(
+      function (
+        item
+      ) {
+
+        return (
+          item.tipo ===
+            "DIVIDA" &&
+          !item.quitada
+        );
+
+      }
+    );
+
+
+  const total =
+    dividas.reduce(
+      function (
+        soma,
+        item
+      ) {
+
+        return (
+          soma +
+          Number(
+            item.valor ||
+            0
+          )
+        );
+
+      },
+      0
+    );
+
+
+  if (
+    resumo
+  ) {
+
+    resumo.textContent =
+      dividas.length ===
+      0
+        ? "Nenhuma pendente"
+        : dividas.length +
+          (
+            dividas.length ===
+            1
+              ? " pendente - "
+              : " pendentes - "
+          ) +
+          moeda(
+            total
+          );
+
+  }
+
+
+  if (
+    dividas.length ===
+    0
+  ) {
+
+    container.innerHTML =
+      '<div class="debt-empty">' +
+      '<strong>Tudo em dia</strong>' +
+      '<span>Nao ha dividas pendentes.</span>' +
+      '</div>';
+
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    dividas
+      .map(
+        function (
+          item
+        ) {
+
+          return `
+            <article class="debt-item">
+
+              <div class="debt-item-main">
+
+                <div class="debt-item-icon">
+                  !
+                </div>
+
+                <div>
+
+                  <strong>
+                    ${escapeHtml(
+                      item.descricao
+                    )}
+                  </strong>
+
+                  <span>
+                    ${formatarData(
+                      item.data
+                    )}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <strong class="debt-item-value">
+                ${moeda(
+                  item.valor
+                )}
+              </strong>
+
+
+              <button
+                class="pay-debt-button"
+                data-pay-debt="${item.id}"
+                type="button"
+              >
+                Quitar
+              </button>
+
+            </article>
+          `;
+
+        }
+      )
+      .join("");
+
+
+  container
+    .querySelectorAll(
+      "[data-pay-debt]"
+    )
+    .forEach(
+      function (
+        button
+      ) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            quitarDivida(
+              Number(
+                button.dataset
+                  .payDebt
+              )
+            );
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+async function quitarDivida(
+  id
+) {
+
+  const divida =
+    state.movimentacoes.find(
+      function (
+        item
+      ) {
+
+        return (
+          item.id ===
+            id &&
+          item.tipo ===
+            "DIVIDA"
+        );
+
+      }
+    );
+
+
+  if (!divida) {
+    return;
+  }
+
+
+  const confirmar =
+    window.confirm(
+      "Confirmar quitacao de " +
+      divida.descricao +
+      " no valor de " +
+      moeda(
+        divida.valor
+      ) +
+      "?"
+    );
+
+
+  if (!confirmar) {
+    return;
+  }
+
+
+  try {
+
+    limparErro();
+
+
+    await api(
+      "/api/financeiro/quitar",
+      {
+
+        method:
+          "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify({
+            id
+          })
+
+      }
+    );
+
+
+    await carregarMovimentacoes();
+
+  }
+  catch (
+    erro
+  ) {
+
+    mostrarErro(
+      erro.message ||
+      "Nao foi possivel quitar a divida."
+    );
+
+  }
+
+}
+
+
 function renderTudo() {
 
   renderResumo();
@@ -1819,6 +2213,8 @@ function renderTudo() {
   renderFiltro();
 
   renderMovimentacoes();
+
+  renderDividasPendentes();
 
   renderGraficosFinanceiros();
 
@@ -1833,32 +2229,51 @@ function selecionarTipo(
     tipo;
 
 
-  $("tipoReceita")
-    .classList.toggle(
+  const receita =
+    $("tipoReceita");
+
+
+  const despesa =
+    $("tipoDespesa");
+
+
+  const divida =
+    $("tipoDivida");
+
+
+  receita
+    .classList
+    .toggle(
       "income-selected",
-      tipo === "RECEITA"
+      tipo ===
+      "RECEITA"
     );
 
 
-  $("tipoReceita")
-    .classList.remove(
-      "expense-selected"
-    );
-
-
-  $("tipoDespesa")
-    .classList.toggle(
+  despesa
+    .classList
+    .toggle(
       "expense-selected",
-      tipo === "DESPESA"
+      tipo ===
+      "DESPESA"
     );
 
 
-  $("tipoDespesa")
-    .classList.remove(
-      "income-selected"
-    );
+  if (
+    divida
+  ) {
+
+    divida
+      .classList
+      .toggle(
+        "debt-selected",
+        tipo ===
+        "DIVIDA"
+      );
+
+  }
+
 }
-
 
 function limparFormulario() {
 
@@ -2199,6 +2614,19 @@ $("tipoDespesa")
       selecionarTipo(
         "DESPESA"
       );
+    }
+  );
+
+
+$("tipoDivida")
+  .addEventListener(
+    "click",
+    function () {
+
+      selecionarTipo(
+        "DIVIDA"
+      );
+
     }
   );
 

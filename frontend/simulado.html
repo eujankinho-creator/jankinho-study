@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Simulado | Cortex</title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/favicon.svg?v=cortex-v1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#090909"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/app.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/ui-enhancements.css"
+  >
+
+  <script src="/js/ui-enhancements.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/themes.css"
+  >
+
+  <script src="/js/theme-manager.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/cortex-brand.css?v=20260930-no-old-pet9"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/sidebar-standard.css?v=20260930-restored1"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/simulado-premium.css?v=20260930-final1"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/theme-final.css?v=20260930-pet4"
+  >
+
+  <script
+    src="/js/sidebar-standard.js?v=20260930-restored1"
+    defer
+  ></script>
+
+</head>
+
+
+<body class="simulado-view">
+
+  <aside class="sidebar">
+
+    <a
+      href="/"
+      class="sidebar-logo"
+    >
+
+      <div class="logo-box"></div>
+
+      <div>
+        <strong>Cortex</strong>
+        <span>Study Platform</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu"></div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Cortex
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+      >
+        &rarr;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-title">
+        Simulado
+      </div>
+
+      <div class="sim-header-status">
+
+        <span class="sim-live-dot"></span>
+
+        <span>
+          Cortex Training
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <main class="simulado-page">
+
+
+      <!-- CONFIGURACAO -->
+
+      <section id="configView">
+
+        <section class="sim-hero">
+
+          <div>
+
+            <span class="sim-kicker">
+              CORTEX TRAINING
+            </span>
+
+            <h1>
+              Treine como se fosse prova.
+            </h1>
+
+            <p>
+              Misture &aacute;reas da sa&uacute;de, revise pontos
+              fracos e acompanhe seu desempenho em cada tema.
+            </p>
+
+          </div>
+
+
+          <div class="sim-hero-stats">
+
+            <div>
+
+              <strong id="simTotalQuestions">
+                0
+              </strong>
+
+              <span>
+                quest&otilde;es
+              </span>
+
+            </div>
+
+            <div>
+
+              <strong id="simTotalAreas">
+                0
+              </strong>
+
+              <span>
+                &aacute;reas
+              </span>
+
+            </div>
+
+            <div>
+
+              <strong id="simBestScore">
+                --
+              </strong>
+
+              <span>
+                melhor resultado
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <section class="quick-modes">
+
+          <button
+            class="quick-mode-card"
+            data-preset="review"
+            type="button"
+          >
+
+            <span class="quick-icon">
+              10
+            </span>
+
+            <div>
+
+              <strong>
+                Revis&atilde;o r&aacute;pida
+              </strong>
+
+              <p>
+                10 quest&otilde;es com feedback imediato.
+              </p>
+
+            </div>
+
+          </button>
+
+
+          <button
+            class="quick-mode-card featured"
+            data-preset="exam"
+            type="button"
+          >
+
+            <span class="quick-icon">
+              20
+            </span>
+
+            <div>
+
+              <strong>
+                Simulado
+              </strong>
+
+              <p>
+                20 quest&otilde;es em modo prova.
+              </p>
+
+            </div>
+
+          </button>
+
+
+          <button
+            class="quick-mode-card"
+            data-preset="challenge"
+            type="button"
+          >
+
+            <span class="quick-icon">
+              30
+            </span>
+
+            <div>
+
+              <strong>
+                Desafio
+              </strong>
+
+              <p>
+                30 quest&otilde;es para uma revis&atilde;o ampla.
+              </p>
+
+            </div>
+
+          </button>
+
+        </section>
+
+
+        <section class="sim-config-grid">
+
+
+          <div class="sim-config-card main-config">
+
+            <div class="config-heading">
+
+              <div>
+
+                <span class="config-eyebrow">
+                  CONFIGURAR SESS&Atilde;O
+                </span>
+
+                <h2>
+                  Monte seu simulado
+                </h2>
+
+              </div>
+
+              <span
+                id="availableCount"
+                class="available-count"
+              >
+                0 dispon&iacute;veis
+              </span>
+
+            </div>
+
+
+            <div class="config-section">
+
+              <label class="config-label">
+                Modo
+              </label>
+
+              <div class="mode-switch">
+
+                <button
+                  class="mode-button active"
+                  data-mode="guided"
+                  type="button"
+                >
+                  <strong>
+                    Treino guiado
+                  </strong>
+
+                  <span>
+                    feedback ap&oacute;s responder
+                  </span>
+                </button>
+
+
+                <button
+                  class="mode-button"
+                  data-mode="exam"
+                  type="button"
+                >
+                  <strong>
+                    Modo prova
+                  </strong>
+
+                  <span>
+                    resultado somente no final
+                  </span>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="config-row">
+
+              <div>
+
+                <label
+                  class="config-label"
+                  for="simQuantity"
+                >
+                  Quantidade
+                </label>
+
+                <select
+                  id="simQuantity"
+                  class="sim-select"
+                >
+
+                  <option value="5">
+                    5 quest&otilde;es
+                  </option>
+
+                  <option
+                    value="10"
+                    selected
+                  >
+                    10 quest&otilde;es
+                  </option>
+
+                  <option value="20">
+                    20 quest&otilde;es
+                  </option>
+
+                  <option value="30">
+                    30 quest&otilde;es
+                  </option>
+
+                  <option value="50">
+                    50 quest&otilde;es
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div>
+
+                <label
+                  class="config-label"
+                  for="simTimer"
+                >
+                  Tempo
+                </label>
+
+                <select
+                  id="simTimer"
+                  class="sim-select"
+                >
+
+                  <option value="0">
+                    Sem limite
+                  </option>
+
+                  <option value="20">
+                    20 minutos
+                  </option>
+
+                  <option value="40">
+                    40 minutos
+                  </option>
+
+                  <option value="60">
+                    60 minutos
+                  </option>
+
+                  <option value="90">
+                    90 minutos
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <div class="config-section">
+
+              <label class="config-label">
+                Dificuldade
+              </label>
+
+              <div class="difficulty-row">
+
+                <label class="check-chip active">
+
+                  <input
+                    type="checkbox"
+                    value="facil"
+                    data-difficulty
+                    checked
+                  >
+
+                  <span>
+                    F&aacute;cil
+                  </span>
+
+                </label>
+
+
+                <label class="check-chip active">
+
+                  <input
+                    type="checkbox"
+                    value="medio"
+                    data-difficulty
+                    checked
+                  >
+
+                  <span>
+                    M&eacute;dio
+                  </span>
+
+                </label>
+
+
+                <label class="check-chip active">
+
+                  <input
+                    type="checkbox"
+                    value="dificil"
+                    data-difficulty
+                    checked
+                  >
+
+                  <span>
+                    Dif&iacute;cil
+                  </span>
+
+                </label>
+
+              </div>
+
+            </div>
+
+
+            <div class="config-section">
+
+              <div class="areas-heading">
+
+                <label class="config-label">
+                  &Aacute;reas / disciplinas
+                </label>
+
+                <div>
+
+                  <button
+                    id="selectAllAreas"
+                    class="tiny-action"
+                    type="button"
+                  >
+                    Todas
+                  </button>
+
+                  <button
+                    id="clearAreas"
+                    class="tiny-action"
+                    type="button"
+                  >
+                    Limpar
+                  </button>
+
+                </div>
+
+              </div>
+
+
+              <div
+                id="areasGrid"
+                class="areas-grid"
+              ></div>
+
+            </div>
+
+
+            <div
+              id="simError"
+              class="sim-error hidden"
+            ></div>
+
+
+            <button
+              id="startSimulation"
+              class="start-simulation"
+              type="button"
+            >
+              <span>
+                Iniciar simulado
+              </span>
+
+              <strong>
+                &rarr;
+              </strong>
+            </button>
+
+          </div>
+
+
+          <aside class="sim-side-column">
+
+            <section class="sim-side-card">
+
+              <span class="side-kicker">
+                COMO FUNCIONA
+              </span>
+
+              <h3>
+                Revis&atilde;o inteligente
+              </h3>
+
+              <div class="sim-feature">
+
+                <span>
+                  01
+                </span>
+
+                <div>
+                  <strong>
+                    Misture &aacute;reas
+                  </strong>
+
+                  <p>
+                    Combine disciplinas na mesma sess&atilde;o.
+                  </p>
+                </div>
+
+              </div>
+
+
+              <div class="sim-feature">
+
+                <span>
+                  02
+                </span>
+
+                <div>
+                  <strong>
+                    Marque para revisar
+                  </strong>
+
+                  <p>
+                    Separe quest&otilde;es que merecem outra passada.
+                  </p>
+                </div>
+
+              </div>
+
+
+              <div class="sim-feature">
+
+                <span>
+                  03
+                </span>
+
+                <div>
+                  <strong>
+                    Veja os pontos fracos
+                  </strong>
+
+                  <p>
+                    O resultado mostra acertos por &aacute;rea.
+                  </p>
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <section class="sim-side-card history-card">
+
+              <div class="history-title">
+
+                <span class="side-kicker">
+                  HIST&Oacute;RICO
+                </span>
+
+                <button
+                  id="clearSimHistory"
+                  class="tiny-action"
+                  type="button"
+                >
+                  Limpar
+                </button>
+
+              </div>
+
+              <div id="simulationHistory"></div>
+
+            </section>
+
+          </aside>
+
+        </section>
+
+      </section>
+
+
+      <!-- QUESTOES -->
+
+      <section
+        id="simulationView"
+        class="hidden"
+      >
+
+        <div class="simulation-topbar">
+
+          <button
+            id="exitSimulation"
+            class="sim-secondary-button"
+            type="button"
+          >
+            &larr; Encerrar
+          </button>
+
+
+          <div class="simulation-progress-info">
+
+            <span id="questionCounter">
+              Quest&atilde;o 1 de 10
+            </span>
+
+            <div class="simulation-progress">
+
+              <div id="simulationProgressFill"></div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="timerBox"
+            class="timer-box"
+          >
+
+            <span>
+              Tempo
+            </span>
+
+            <strong id="simulationTimer">
+              --:--
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <section class="simulation-question-shell">
+
+          <div class="question-context">
+
+            <div id="questionBadges"></div>
+
+            <button
+              id="markReview"
+              class="review-button"
+              type="button"
+            >
+              &#9734; Revisar
+            </button>
+
+          </div>
+
+
+          <h2 id="simulationQuestion"></h2>
+
+
+          <div
+            id="simulationOptions"
+            class="simulation-options"
+          ></div>
+
+
+          <div
+            id="guidedFeedback"
+            class="guided-feedback hidden"
+          ></div>
+
+
+          <div class="simulation-navigation">
+
+            <button
+              id="previousSimulation"
+              class="sim-secondary-button"
+              type="button"
+            >
+              &larr; Anterior
+            </button>
+
+            <button
+              id="nextSimulation"
+              class="sim-primary-button"
+              type="button"
+            >
+              Pr&oacute;xima &rarr;
+            </button>
+
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <!-- RESULTADO -->
+
+      <section
+        id="resultView"
+        class="hidden"
+      >
+
+        <section class="result-hero">
+
+          <div
+            id="scoreCircle"
+            class="score-circle"
+          >
+
+            <strong id="resultPercent">
+              0%
+            </strong>
+
+            <span>
+              desempenho
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <span class="sim-kicker">
+              SIMULADO FINALIZADO
+            </span>
+
+            <h1 id="resultTitle">
+              Resultado
+            </h1>
+
+            <p id="resultSummary"></p>
+
+          </div>
+
+        </section>
+
+
+        <section class="result-stats">
+
+          <div>
+
+            <span>
+              Acertos
+            </span>
+
+            <strong id="resultCorrect">
+              0
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Erros
+            </span>
+
+            <strong id="resultWrong">
+              0
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Para revisar
+            </span>
+
+            <strong id="resultMarked">
+              0
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Tempo
+            </span>
+
+            <strong id="resultTime">
+              --
+            </strong>
+
+          </div>
+
+        </section>
+
+
+        <section class="result-grid">
+
+          <div class="result-panel">
+
+            <div class="result-panel-title">
+
+              <div>
+
+                <span class="side-kicker">
+                  DESEMPENHO
+                </span>
+
+                <h2>
+                  Resultado por &aacute;rea
+                </h2>
+
+              </div>
+
+            </div>
+
+
+            <div id="areaResults"></div>
+
+          </div>
+
+
+          <div class="result-panel">
+
+            <div class="result-panel-title">
+
+              <div>
+
+                <span class="side-kicker">
+                  REVIS&Atilde;O
+                </span>
+
+                <h2>
+                  Quest&otilde;es para rever
+                </h2>
+
+              </div>
+
+            </div>
+
+
+            <div id="wrongQuestions"></div>
+
+          </div>
+
+        </section>
+
+
+        <div class="result-actions">
+
+          <button
+            id="backToSimulationSetup"
+            class="sim-secondary-button"
+            type="button"
+          >
+            Novo simulado
+          </button>
+
+          <button
+            id="retryWrong"
+            class="sim-secondary-button"
+            type="button"
+          >
+            Refazer erros
+          </button>
+
+          <button
+            id="repeatSimulation"
+            class="sim-primary-button"
+            type="button"
+          >
+            Repetir simulado
+          </button>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/simulado.js?v=20260930-final1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-no-old-pet9"></script>
+
+</body>
+</html>
