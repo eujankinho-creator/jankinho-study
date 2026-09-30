@@ -1249,10 +1249,23 @@ function renderSessao() {
             }
 
 
-            state.selecionada =
+            const indice =
               Number(
                 botao.dataset.option
               );
+
+
+            if (
+              state.eliminadas.has(
+                indice
+              )
+            ) {
+              return;
+            }
+
+
+            state.selecionada =
+              indice;
 
 
             renderSessao();
