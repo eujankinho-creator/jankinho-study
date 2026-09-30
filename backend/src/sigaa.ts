@@ -1202,6 +1202,131 @@ async function loadCourseLessons(
 }
 
 
+function isDownloadableSigaaFile(
+  file:
+    any
+) {
+
+  const id =
+    safeText(
+      file?.id,
+      200
+    );
+
+
+  return Boolean(
+    file?.type ===
+      "file" &&
+    id &&
+    typeof file
+      ?.download ===
+      "function"
+  );
+
+}
+
+
+function sigaaFileKind(
+  value:
+    any
+) {
+
+  const title =
+    safeText(
+      value,
+      300
+    )
+      .toLowerCase();
+
+
+  if (/\.pdf(?:$|[?#\s])/.test(title)) {
+
+    return {
+      kind:
+        "PDF",
+
+      extension:
+        "pdf",
+    };
+
+  }
+
+
+  if (/\.docx?(?:$|[?#\s])/.test(title)) {
+
+    return {
+      kind:
+        "WORD",
+
+      extension:
+        title.includes(
+          ".docx"
+        )
+          ? "docx"
+          : "doc",
+    };
+
+  }
+
+
+  if (/\.pptx?(?:$|[?#\s])/.test(title)) {
+
+    return {
+      kind:
+        "SLIDE",
+
+      extension:
+        title.includes(
+          ".pptx"
+        )
+          ? "pptx"
+          : "ppt",
+    };
+
+  }
+
+
+  if (/\.xlsx?(?:$|[?#\s])/.test(title)) {
+
+    return {
+      kind:
+        "PLANILHA",
+
+      extension:
+        title.includes(
+          ".xlsx"
+        )
+          ? "xlsx"
+          : "xls",
+    };
+
+  }
+
+
+  if (/\.zip(?:$|[?#\s])/.test(title)) {
+
+    return {
+      kind:
+        "ZIP",
+
+      extension:
+        "zip",
+    };
+
+  }
+
+
+  return {
+    kind:
+      "ARQUIVO",
+
+    extension:
+      "",
+  };
+
+}
+
+
 function lessonFiles(
   lessons:
     any[]
@@ -1230,11 +1355,9 @@ function lessonFiles(
     ) {
 
       if (
-        attachment?.type ===
-          "file" &&
-        typeof attachment
-          .download ===
-          "function"
+        isDownloadableSigaaFile(
+          attachment
+        )
       ) {
 
         result.push(
@@ -1460,7 +1583,10 @@ async function loadCourseFiles(
           lessons
         ),
       ]
-    );
+    )
+      .filter(
+        isDownloadableSigaaFile
+      );
 
 
   session.filesByCourse.set(
@@ -1488,8 +1614,25 @@ function serializeCourseFile(
     );
 
 
+  const fileMeta =
+    sigaaFileKind(
+      file?.title
+    );
+
+
   return {
     id,
+
+    kind:
+      fileMeta.kind,
+
+    extension:
+      fileMeta.extension,
+
+    verified:
+      isDownloadableSigaaFile(
+        file
+      ),
 
     title:
       safeText(
@@ -1512,11 +1655,8 @@ function serializeCourseFile(
         : "Arquivos da disciplina",
 
     downloadable:
-      Boolean(
-        id &&
-        typeof file
-          ?.download ===
-          "function"
+      isDownloadableSigaaFile(
+        file
       ),
   };
 
@@ -1550,9 +1690,33 @@ function serializeLessonAttachment(
     );
 
 
+  const fileMeta =
+    sigaaFileKind(
+      attachment?.title ||
+      attachment?.name
+    );
+
+
   return {
     id,
     type,
+
+    kind:
+      type ===
+        "file"
+        ? fileMeta.kind
+        : type.toUpperCase(),
+
+    extension:
+      type ===
+        "file"
+        ? fileMeta.extension
+        : "",
+
+    verifiedFile:
+      isDownloadableSigaaFile(
+        attachment
+      ),
 
     title:
       safeText(
@@ -1572,13 +1736,8 @@ function serializeLessonAttachment(
       externalUrl,
 
     downloadable:
-      Boolean(
-        type ===
-          "file" &&
-        id &&
-        typeof attachment
-          ?.download ===
-          "function"
+      isDownloadableSigaaFile(
+        attachment
       ),
   };
 
