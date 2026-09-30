@@ -2351,7 +2351,7 @@ async function servirArquivo(
          * permaneçam com CSS/JS antigo depois de um deploy.
          */
         "Cache-Control":
-          "no-cache",
+          "no-store, max-age=0",
       }
     );
 
