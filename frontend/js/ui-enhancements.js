@@ -960,26 +960,6 @@
       answerLabelStyle
     );
     /* CORTEX EXPLICIT ANSWER LABELS V1 END */
-
-
-    /* CORTEX ELIMINATION MODE V1 */
-    const eliminationStyle =
-      document.createElement(
-        "style"
-      );
-
-    eliminationStyle.id =
-      "cortex-elimination-mode";
-
-    eliminationStyle.textContent =
-      "\n:root{--cortex-cut:#facc15;--cortex-cut-rgb:250,204,21}\n\nhtml[data-theme] body .session-option-row,\nhtml[data-theme] body .sim-option-row{\n  display:grid!important;\n  grid-template-columns:minmax(0,1fr) auto!important;\n  align-items:stretch!important;\n  gap:9px!important;\n  width:100%!important\n}\n\nhtml[data-theme] body .session-option,\nhtml[data-theme] body .sim-option{\n  width:100%!important;\n  min-width:0!important\n}\n\nhtml[data-theme] body .eliminate-option,\nhtml[data-theme] body .sim-eliminate-option{\n  min-width:92px!important;\n  display:inline-flex!important;\n  align-items:center!important;\n  justify-content:center!important;\n  gap:6px!important;\n  border:1px solid rgba(var(--cortex-cut-rgb),.48)!important;\n  border-radius:12px!important;\n  background:rgba(var(--cortex-cut-rgb),.07)!important;\n  padding:8px 10px!important;\n  color:#ffe96a!important;\n  font-size:10px!important;\n  font-weight:850!important;\n  line-height:1!important;\n  cursor:pointer!important;\n  transition:transform .15s ease,border-color .15s ease,background .15s ease,box-shadow .15s ease!important\n}\n\nhtml[data-theme] body .eliminate-option:hover,\nhtml[data-theme] body .sim-eliminate-option:hover{\n  transform:translateY(-1px)!important;\n  border-color:var(--cortex-cut)!important;\n  background:rgba(var(--cortex-cut-rgb),.14)!important;\n  box-shadow:0 0 16px rgba(var(--cortex-cut-rgb),.16)!important\n}\n\nhtml[data-theme] body .eliminate-option.active,\nhtml[data-theme] body .sim-eliminate-option.active{\n  border-color:var(--cortex-cut)!important;\n  background:var(--cortex-cut)!important;\n  color:#211900!important;\n  box-shadow:0 0 0 2px rgba(var(--cortex-cut-rgb),.18),0 0 20px rgba(var(--cortex-cut-rgb),.24)!important\n}\n\nhtml[data-theme] body :is(.session-option,.sim-option).eliminated{\n  position:relative!important;\n  border:1px dashed rgba(var(--cortex-cut-rgb),.72)!important;\n  background:rgba(var(--cortex-cut-rgb),.045)!important;\n  color:rgba(255,255,255,.50)!important;\n  box-shadow:inset 0 0 0 1px rgba(var(--cortex-cut-rgb),.05)!important;\n  opacity:.62!important;\n  cursor:not-allowed!important\n}\n\nhtml[data-theme] body :is(.session-option,.sim-option).eliminated .option-text{\n  color:rgba(255,255,255,.48)!important;\n  text-decoration-line:line-through!important;\n  text-decoration-color:var(--cortex-cut)!important;\n  text-decoration-thickness:2px!important;\n  text-decoration-skip-ink:none!important\n}\n\nhtml[data-theme] body :is(.session-option,.sim-option).eliminated .option-letter{\n  border-color:rgba(var(--cortex-cut-rgb),.62)!important;\n  background:rgba(var(--cortex-cut-rgb),.12)!important;\n  color:#ffe66a!important\n}\n\nhtml[data-theme] body :is(.session-option-row,.sim-option-row).is-eliminated{\n  filter:saturate(.82)!important\n}\n\n@media(max-width:640px){\n  html[data-theme] body .session-option-row,\n  html[data-theme] body .sim-option-row{\n    grid-template-columns:minmax(0,1fr)!important\n  }\n\n  html[data-theme] body .eliminate-option,\n  html[data-theme] body .sim-eliminate-option{\n    width:100%!important;\n    min-height:34px!important\n  }\n}\n";
-
-    document.head.appendChild(
-      eliminationStyle
-    );
-    /* CORTEX ELIMINATION MODE V1 END */
-
-
   }
   /* CORTEX GLOBAL INTERACTION CONTRAST V2 END */
 
