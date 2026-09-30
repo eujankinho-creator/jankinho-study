@@ -1359,10 +1359,20 @@ async function listarFinanceiro(
 
         },
 
-        orderBy: {
-          data:
-            "desc"
-        }
+        orderBy: [
+          {
+            data:
+              "desc"
+          },
+          {
+            createdAt:
+              "desc"
+          },
+          {
+            id:
+              "desc"
+          }
+        ]
 
       });
 
