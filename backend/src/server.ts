@@ -1211,6 +1211,86 @@ async function criarResposta(
    FINANCEIRO
 ========================================================= */
 
+async function obterUsuarioIdsFinanceiros(
+  usuarioId: number
+) {
+  const usuario =
+    await prisma.usuario.findUnique({
+      where: {
+        id: usuarioId
+      },
+      select: {
+        id: true,
+        nome: true
+      }
+    });
+
+  if (!usuario) {
+    return [usuarioId];
+  }
+
+  const nome =
+    usuario.nome
+      .trim()
+      .toLocaleLowerCase("pt-BR");
+
+  const ehPedroOuBeatriz =
+    nome === "pedro" ||
+    nome.startsWith("pedro ") ||
+    nome === "beatriz" ||
+    nome.startsWith("beatriz ");
+
+  if (!ehPedroOuBeatriz) {
+    return [usuarioId];
+  }
+
+  const casal =
+    await prisma.usuario.findMany({
+      where: {
+        OR: [
+          {
+            nome: {
+              equals: "Pedro",
+              mode: "insensitive"
+            }
+          },
+          {
+            nome: {
+              startsWith: "Pedro ",
+              mode: "insensitive"
+            }
+          },
+          {
+            nome: {
+              equals: "Beatriz",
+              mode: "insensitive"
+            }
+          },
+          {
+            nome: {
+              startsWith: "Beatriz ",
+              mode: "insensitive"
+            }
+          }
+        ]
+      },
+      select: {
+        id: true
+      }
+    });
+
+  const ids =
+    casal.map(
+      function (item) {
+        return item.id;
+      }
+    );
+
+  return ids.includes(usuarioId)
+    ? ids
+    : [usuarioId];
+}
+
 async function listarFinanceiro(
   request: IncomingMessage,
   response: ServerResponse,
@@ -1266,7 +1346,9 @@ async function listarFinanceiro(
 
         where: {
 
-          usuarioId,
+          usuarioId: {
+            in: await obterUsuarioIdsFinanceiros(usuarioId)
+          },
 
           ...(dataInicio ||
           dataFim
@@ -1800,7 +1882,9 @@ async function editarMovimentacao(
 
           where: {
             id,
-            usuarioId
+            usuarioId: {
+              in: await obterUsuarioIdsFinanceiros(usuarioId)
+            }
           }
 
         });
@@ -1955,7 +2039,9 @@ async function quitarDivida(
 
           where: {
             id,
-            usuarioId,
+            usuarioId: {
+              in: await obterUsuarioIdsFinanceiros(usuarioId)
+            },
             tipo:
               "DIVIDA"
           }
@@ -2109,7 +2195,9 @@ async function excluirMovimentacao(
       await prisma.movimentacao.findFirst({
         where: {
           id,
-          usuarioId,
+          usuarioId: {
+            in: await obterUsuarioIdsFinanceiros(usuarioId)
+          },
         },
       });
 
