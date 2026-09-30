@@ -1871,10 +1871,10 @@ export async function downloadSigaaCourseFile(
 
 
     const downloadedPath =
-      await withTimeout(
+      await withTimeout<string>(
         file.download(
           tempDirectory
-        ),
+        ) as Promise<string>,
         45000,
         "Timeout ao baixar arquivo."
       );
