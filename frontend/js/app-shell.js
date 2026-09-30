@@ -1138,6 +1138,52 @@
 
       try {
 
+        const frameDocument =
+          frame.contentDocument;
+
+        if (frameDocument) {
+
+          let typographyStyle =
+            frameDocument.getElementById(
+              "cortexTypographyStandard"
+            );
+
+          if (!typographyStyle) {
+
+            typographyStyle =
+              frameDocument.createElement(
+                "style"
+              );
+
+            typographyStyle.id =
+              "cortexTypographyStandard";
+
+            typographyStyle.textContent =
+              "html{font-size:16px!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}" +
+              "body{font-size:16px}" +
+              "button,input,select,textarea{font-family:inherit;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}" +
+              ".finance-mobile-button,.finance-mobile-overlay{display:none!important}";
+
+            frameDocument.head.appendChild(
+              typographyStyle
+            );
+
+          }
+
+
+          frameDocument
+            .querySelectorAll(
+              ".finance-mobile-button,.finance-mobile-overlay"
+            )
+            .forEach(
+              function (element) {
+                element.remove();
+              }
+            );
+
+        }
+
+
         const path =
           frame.contentWindow
             .location
