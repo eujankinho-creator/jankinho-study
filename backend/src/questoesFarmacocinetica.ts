@@ -508,24 +508,26 @@ sincronizarQuestoesFarmacocineticaHaggi() {
   ) {
 
     disciplina =
-      await prisma
-        .disciplina
-        .findFirst({
-          where: {
-            nome: {
-              contains:
-                "Farmacologia",
+      (
+        await prisma
+          .disciplina
+          .findFirst({
+            where: {
+              nome: {
+                contains:
+                  "Farmacologia",
 
-              mode:
-                "insensitive",
+                mode:
+                  "insensitive",
+              },
             },
-          },
 
-          orderBy: {
-            id:
-              "asc",
-          },
-        });
+            orderBy: {
+              id:
+                "asc",
+            },
+          })
+      ) ?? undefined;
 
 
     usuarioId =
