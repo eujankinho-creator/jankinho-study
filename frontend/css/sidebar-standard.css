@@ -1,6 +1,5 @@
 /* =========================================================
-   CORTEX STANDARD SIDEBAR
-   Fonte unica de estilo para os icones de navegacao.
+   CORTEX STANDARD SIDEBAR - RESTAURADA
 ========================================================= */
 
 
@@ -85,6 +84,15 @@
 .cortex-nav-label {
   min-width:
     0;
+
+  overflow:
+    visible;
+
+  text-overflow:
+    clip;
+
+  white-space:
+    nowrap;
 }
 
 
@@ -128,11 +136,6 @@
 }
 
 
-/*
- * Mata estilos antigos baseados em letras,
- * emojis ou spans genericos.
- */
-
 .sidebar-menu
 .menu-item >
 span:not(.cortex-nav-icon):not(.cortex-nav-label) {
@@ -148,38 +151,345 @@ span:not(.cortex-nav-icon):not(.cortex-nav-label) {
 }
 
 
-/* Mobile usa exatamente os mesmos icones */
+/* =========================================================
+   MOBILE
+========================================================= */
 
-.mobile-sidebar
-.sidebar-menu
-.cortex-nav-icon {
-  width:
-    34px;
-
-  height:
-    34px;
-}
-
-
-.mobile-sidebar
-.sidebar-menu
-.cortex-nav-icon svg {
-  width:
-    18px;
-
-  height:
-    18px;
+.cortex-mobile-sidebar-button,
+.cortex-mobile-sidebar-overlay {
+  display:
+    none;
 }
 
 
 @media (
-  max-width: 820px
+  max-width: 900px
 ) {
 
-  .sidebar-menu
-  .cortex-nav-icon {
+  .mobile-menu-button {
+    display:
+      none !important;
+  }
+
+
+  .cortex-mobile-sidebar-button {
+    position:
+      fixed;
+
+    z-index:
+      10025;
+
+    top:
+      max(
+        10px,
+        env(safe-area-inset-top)
+      );
+
+    left:
+      10px;
+
+    width:
+      42px;
+
+    height:
+      42px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    border:
+      1px solid
+      var(
+        --theme-border-strong,
+        rgba(255,255,255,.10)
+      );
+
+    border-radius:
+      12px;
+
+    background:
+      color-mix(
+        in srgb,
+        var(--theme-surface-strong, #0b0b0b)
+        95%,
+        transparent
+      );
+
+    color:
+      var(
+        --theme-text-soft,
+        #ddd
+      );
+
+    box-shadow:
+      0 10px 30px
+      rgba(0,0,0,.28);
+
+    backdrop-filter:
+      blur(18px);
+
+    -webkit-backdrop-filter:
+      blur(18px);
+  }
+
+
+  .cortex-mobile-sidebar-button svg {
+    width:
+      20px;
+
+    height:
+      20px;
+
+    fill:
+      none;
+
+    stroke:
+      currentColor;
+
+    stroke-width:
+      1.8;
+
+    stroke-linecap:
+      round;
+  }
+
+
+  .main-area
+  .header {
+    padding-left:
+      64px !important;
+  }
+
+
+  .cortex-mobile-sidebar-overlay {
+    position:
+      fixed;
+
+    inset:
+      0;
+
+    z-index:
+      10030;
+
+    display:
+      block;
+
+    visibility:
+      hidden;
+
+    pointer-events:
+      none;
+  }
+
+
+  .cortex-mobile-sidebar-overlay.open {
+    visibility:
+      visible;
+
+    pointer-events:
+      auto;
+  }
+
+
+  .cortex-mobile-sidebar-backdrop {
+    position:
+      absolute;
+
+    inset:
+      0;
+
+    width:
+      100%;
+
+    height:
+      100%;
+
+    border:
+      0;
+
+    background:
+      rgba(0,0,0,.72);
+  }
+
+
+  .cortex-mobile-sidebar-panel {
+    position:
+      absolute;
+
+    inset:
+      0 auto 0 0;
+
+    width:
+      min(
+        295px,
+        88vw
+      );
+
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    background:
+      var(
+        --theme-surface-strong,
+        #080808
+      );
+
+    border-right:
+      1px solid
+      var(
+        --theme-border
+      );
+
+    box-shadow:
+      20px 0 60px
+      rgba(0,0,0,.45);
+
+    transform:
+      translateX(-102%);
+
+    transition:
+      transform .20s ease;
+  }
+
+
+  .cortex-mobile-sidebar-overlay.open
+  .cortex-mobile-sidebar-panel {
+    transform:
+      translateX(0);
+  }
+
+
+  .cortex-mobile-sidebar-header {
+    min-height:
+      68px;
+
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      space-between;
+
+    padding:
+      10px 13px;
+
+    border-bottom:
+      1px solid
+      var(
+        --theme-border
+      );
+  }
+
+
+  .cortex-mobile-sidebar-header strong,
+  .cortex-mobile-sidebar-header span {
+    display:
+      block;
+  }
+
+
+  .cortex-mobile-sidebar-header strong {
+    color:
+      var(
+        --theme-text
+      );
+
+    font-size:
+      15px;
+  }
+
+
+  .cortex-mobile-sidebar-header span {
+    margin-top:
+      2px;
+
+    color:
+      var(
+        --theme-text-muted
+      );
+
+    font-size:
+      7px;
+
+    letter-spacing:
+      .10em;
+
+    text-transform:
+      uppercase;
+  }
+
+
+  .cortex-mobile-sidebar-close {
+    width:
+      37px;
+
+    height:
+      37px;
+
+    border:
+      0;
+
+    border-radius:
+      10px;
+
+    background:
+      var(
+        --theme-surface-soft
+      );
+
+    color:
+      var(
+        --theme-text-muted
+      );
+
+    font:
+      inherit;
+
+    font-size:
+      20px;
+  }
+
+
+  .cortex-mobile-sidebar-menu {
     flex:
-      0 0 34px;
+      1;
+
+    overflow-y:
+      auto;
+
+    padding-bottom:
+      max(
+        20px,
+        env(safe-area-inset-bottom)
+      );
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .menu-item {
+    min-height:
+      44px;
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .cortex-nav-label {
+    overflow:
+      visible;
+
+    text-overflow:
+      clip;
+
+    white-space:
+      nowrap;
   }
 
 }

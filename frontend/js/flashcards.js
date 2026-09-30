@@ -2,7 +2,9 @@ const state = {
   flashcards: [],
   filtrados: [],
   respostas: {},
-  estudoIndex: 0
+  estudoIndex: 0,
+  estudoCards: [],
+  categoriasSelecionadas: new Set()
 };
 
 
@@ -574,10 +576,607 @@ async function criarFlashcard(
 }
 
 
-function iniciarEstudo() {
+/* =========================================================
+   CORTEX FLASHCARD CATEGORIES V1
+========================================================= */
+
+
+function categoriaFlashcard(
+  card
+) {
+
+  const frente =
+    String(
+      card &&
+      card.frente
+        ? card.frente
+        : ""
+    );
+
+
+  const match =
+    frente.match(
+      /^\s*\[([^\]|]+)(?:\s*\|\s*[^\]]+)?\]/
+    );
+
 
   if (
-    state.filtrados.length === 0
+    match &&
+    match[1]
+  ) {
+
+    return match[1]
+      .trim();
+
+  }
+
+
+  return "Geral";
+
+}
+
+
+function cardsEmEstudo() {
+
+  return (
+    state.estudoCards &&
+    state.estudoCards.length
+      ? state.estudoCards
+      : state.filtrados
+  );
+
+}
+
+
+function garantirModalCategorias() {
+
+  if (
+    $("flashcardCategoryModal")
+  ) {
+
+    return;
+
+  }
+
+
+  const modal =
+    document.createElement(
+      "div"
+    );
+
+
+  modal.id =
+    "flashcardCategoryModal";
+
+
+  modal.className =
+    "flash-category-modal hidden";
+
+
+  modal.innerHTML = `
+    <div
+      class="flash-category-backdrop"
+      data-close-category
+    ></div>
+
+    <section class="flash-category-card">
+
+      <div class="flash-category-header">
+
+        <div>
+
+          <span class="badge badge-orange">
+            Revisao personalizada
+          </span>
+
+          <h2>
+            O que voce quer treinar?
+          </h2>
+
+          <p>
+            Escolha uma ou mais categorias antes de iniciar.
+          </p>
+
+        </div>
+
+        <button
+          id="closeCategoryModal"
+          class="flash-category-close"
+          type="button"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <div class="flash-category-toolbar">
+
+        <button
+          id="selectAllFlashCategories"
+          type="button"
+        >
+          Selecionar todas
+        </button>
+
+        <button
+          id="clearFlashCategories"
+          type="button"
+        >
+          Limpar
+        </button>
+
+      </div>
+
+
+      <div
+        id="flashCategoryList"
+        class="flash-category-list"
+      ></div>
+
+
+      <div
+        id="flashCategoryError"
+        class="flash-category-error hidden"
+      ></div>
+
+
+      <div class="flash-category-footer">
+
+        <span id="flashCategoryTotal">
+          0 flashcards
+        </span>
+
+        <button
+          id="confirmFlashCategories"
+          class="button-primary"
+          type="button"
+        >
+          Iniciar revisao
+        </button>
+
+      </div>
+
+    </section>
+  `;
+
+
+  document.body
+    .appendChild(
+      modal
+    );
+
+
+  $("closeCategoryModal")
+    .addEventListener(
+      "click",
+      fecharModalCategorias
+    );
+
+
+  modal
+    .querySelector(
+      "[data-close-category]"
+    )
+    .addEventListener(
+      "click",
+      fecharModalCategorias
+    );
+
+
+  $("selectAllFlashCategories")
+    .addEventListener(
+      "click",
+      function () {
+
+        categoriasDisponiveis()
+          .forEach(
+            function (
+              item
+            ) {
+
+              state
+                .categoriasSelecionadas
+                .add(
+                  item.nome
+                );
+
+            }
+          );
+
+
+        renderCategoriasFlashcards();
+
+      }
+    );
+
+
+  $("clearFlashCategories")
+    .addEventListener(
+      "click",
+      function () {
+
+        state
+          .categoriasSelecionadas
+          .clear();
+
+
+        renderCategoriasFlashcards();
+
+      }
+    );
+
+
+  $("confirmFlashCategories")
+    .addEventListener(
+      "click",
+      confirmarCategoriasEstudo
+    );
+
+}
+
+
+function categoriasDisponiveis() {
+
+  const map =
+    new Map();
+
+
+  state.filtrados.forEach(
+    function (
+      card
+    ) {
+
+      const categoria =
+        categoriaFlashcard(
+          card
+        );
+
+
+      map.set(
+        categoria,
+        (
+          map.get(
+            categoria
+          ) ||
+          0
+        ) +
+        1
+      );
+
+    }
+  );
+
+
+  return Array
+    .from(
+      map.entries()
+    )
+    .map(
+      function (
+        entry
+      ) {
+
+        return {
+          nome:
+            entry[0],
+
+          quantidade:
+            entry[1]
+        };
+
+      }
+    )
+    .sort(
+      function (
+        a,
+        b
+      ) {
+
+        return a.nome
+          .localeCompare(
+            b.nome,
+            "pt-BR"
+          );
+
+      }
+    );
+
+}
+
+
+function abrirSeletorCategorias() {
+
+  if (
+    state.filtrados.length ===
+    0
+  ) {
+
+    mostrarErro(
+      "Nao ha flashcards para estudar."
+    );
+
+
+    return;
+
+  }
+
+
+  garantirModalCategorias();
+
+
+  state
+    .categoriasSelecionadas
+    .clear();
+
+
+  categoriasDisponiveis()
+    .forEach(
+      function (
+        item
+      ) {
+
+        state
+          .categoriasSelecionadas
+          .add(
+            item.nome
+          );
+
+      }
+    );
+
+
+  renderCategoriasFlashcards();
+
+
+  $("flashcardCategoryModal")
+    .classList
+    .remove(
+      "hidden"
+    );
+
+}
+
+
+function fecharModalCategorias() {
+
+  const modal =
+    $("flashcardCategoryModal");
+
+
+  if (
+    modal
+  ) {
+
+    modal
+      .classList
+      .add(
+        "hidden"
+      );
+
+  }
+
+}
+
+
+function renderCategoriasFlashcards() {
+
+  const categorias =
+    categoriasDisponiveis();
+
+
+  $("flashCategoryList")
+    .innerHTML =
+    categorias
+      .map(
+        function (
+          item
+        ) {
+
+          const ativo =
+            state
+              .categoriasSelecionadas
+              .has(
+                item.nome
+              );
+
+
+          return `
+            <label
+              class="flash-category-option ${
+                ativo
+                  ? "active"
+                  : ""
+              }"
+            >
+
+              <input
+                type="checkbox"
+                data-flash-category="${escapeHtml(
+                  item.nome
+                )}"
+                ${
+                  ativo
+                    ? "checked"
+                    : ""
+                }
+              >
+
+              <span class="flash-category-name">
+                [${escapeHtml(
+                  item.nome
+                )}]
+              </span>
+
+              <strong>
+                ${item.quantidade}
+              </strong>
+
+            </label>
+          `;
+
+        }
+      )
+      .join("");
+
+
+  document
+    .querySelectorAll(
+      "[data-flash-category]"
+    )
+    .forEach(
+      function (
+        input
+      ) {
+
+        input.addEventListener(
+          "change",
+          function () {
+
+            const categoria =
+              input.dataset
+                .flashCategory;
+
+
+            if (
+              input.checked
+            ) {
+
+              state
+                .categoriasSelecionadas
+                .add(
+                  categoria
+                );
+
+            }
+            else {
+
+              state
+                .categoriasSelecionadas
+                .delete(
+                  categoria
+                );
+
+            }
+
+
+            renderCategoriasFlashcards();
+
+          }
+        );
+
+      }
+    );
+
+
+  const total =
+    state.filtrados
+      .filter(
+        function (
+          card
+        ) {
+
+          return state
+            .categoriasSelecionadas
+            .has(
+              categoriaFlashcard(
+                card
+              )
+            );
+
+        }
+      )
+      .length;
+
+
+  $("flashCategoryTotal")
+    .textContent =
+    total +
+    (
+      total === 1
+        ? " flashcard selecionado"
+        : " flashcards selecionados"
+    );
+
+
+  $("flashCategoryError")
+    .classList
+    .add(
+      "hidden"
+    );
+
+}
+
+
+function confirmarCategoriasEstudo() {
+
+  const cards =
+    state.filtrados
+      .filter(
+        function (
+          card
+        ) {
+
+          return state
+            .categoriasSelecionadas
+            .has(
+              categoriaFlashcard(
+                card
+              )
+            );
+
+        }
+      );
+
+
+  if (
+    cards.length ===
+    0
+  ) {
+
+    $("flashCategoryError")
+      .textContent =
+      "Selecione pelo menos uma categoria.";
+
+
+    $("flashCategoryError")
+      .classList
+      .remove(
+        "hidden"
+      );
+
+
+    return;
+
+  }
+
+
+  fecharModalCategorias();
+
+
+  iniciarEstudoDireto(
+    cards
+  );
+
+}
+
+
+function iniciarEstudo() {
+
+  abrirSeletorCategorias();
+
+}
+
+
+function iniciarEstudoDireto(cardsSelecionados) {
+
+  state.estudoCards = Array.isArray(cardsSelecionados)
+    ? [...cardsSelecionados]
+    : [...state.filtrados];
+
+
+  if (
+    state.estudoCards.length === 0
   ) {
 
     mostrarErro(
@@ -628,13 +1227,20 @@ function sairEstudo() {
 
 
   state.estudoIndex = 0;
+
+  state.estudoCards =
+    [];
 }
 
 
 function renderEstudo() {
 
+  const cards =
+    cardsEmEstudo();
+
+
   const card =
-    state.filtrados[
+    cards[
       state.estudoIndex
     ];
 
@@ -644,18 +1250,20 @@ function renderEstudo() {
     sairEstudo();
 
     return;
+
   }
 
 
   const total =
-    state.filtrados.length;
+    cards.length;
 
 
   const progresso =
     Math.round(
       (
         (
-          state.estudoIndex + 1
+          state.estudoIndex +
+          1
         ) /
         total
       ) *
@@ -667,7 +1275,8 @@ function renderEstudo() {
     .textContent =
     "Flashcard " +
     (
-      state.estudoIndex + 1
+      state.estudoIndex +
+      1
     ) +
     " de " +
     total;
@@ -675,12 +1284,14 @@ function renderEstudo() {
 
   $("studyProgress")
     .style.width =
-    progresso + "%";
+    progresso +
+    "%";
 
 
   $("studyProgressText")
     .textContent =
-    progresso + "%";
+    progresso +
+    "%";
 
 
   $("studyFrente")
@@ -689,13 +1300,17 @@ function renderEstudo() {
 
 
   renderVersoEstudo();
-}
 
+}
 
 function renderVersoEstudo() {
 
+  const cards =
+    cardsEmEstudo();
+
+
   const card =
-    state.filtrados[
+    cards[
       state.estudoIndex
     ];
 
@@ -715,11 +1330,15 @@ function renderVersoEstudo() {
     $("versoContainer");
 
 
-  if (visivel) {
+  if (
+    visivel
+  ) {
 
-    container.classList.add(
-      "revealed"
-    );
+    container
+      .classList
+      .add(
+        "revealed"
+      );
 
 
     container.innerHTML =
@@ -731,15 +1350,19 @@ function renderVersoEstudo() {
 
 
     $("ocultarResposta")
-      .classList.remove(
+      .classList
+      .remove(
         "hidden"
       );
+
   }
   else {
 
-    container.classList.remove(
-      "revealed"
-    );
+    container
+      .classList
+      .remove(
+        "revealed"
+      );
 
 
     container.innerHTML =
@@ -752,7 +1375,8 @@ function renderVersoEstudo() {
 
 
     $("ocultarResposta")
-      .classList.add(
+      .classList
+      .add(
         "hidden"
       );
 
@@ -762,14 +1386,15 @@ function renderVersoEstudo() {
         "click",
         mostrarRespostaEstudo
       );
-  }
-}
 
+  }
+
+}
 
 function mostrarRespostaEstudo() {
 
   const card =
-    state.filtrados[
+    cardsEmEstudo()[
       state.estudoIndex
     ];
 
@@ -781,17 +1406,18 @@ function mostrarRespostaEstudo() {
 
   state.respostas[
     card.id
-  ] = true;
+  ] =
+    true;
 
 
   renderVersoEstudo();
-}
 
+}
 
 function ocultarRespostaEstudo() {
 
   const card =
-    state.filtrados[
+    cardsEmEstudo()[
       state.estudoIndex
     ];
 
@@ -803,66 +1429,87 @@ function ocultarRespostaEstudo() {
 
   state.respostas[
     card.id
-  ] = false;
+  ] =
+    false;
 
 
   renderVersoEstudo();
-}
 
+}
 
 function proximoCard() {
 
+  const cards =
+    cardsEmEstudo();
+
+
   if (
-    state.filtrados.length === 0
+    cards.length ===
+    0
   ) {
+
     return;
+
   }
 
 
   if (
     state.estudoIndex >=
-    state.filtrados.length - 1
+    cards.length -
+    1
   ) {
 
-    state.estudoIndex = 0;
+    state.estudoIndex =
+      0;
 
   }
   else {
 
     state.estudoIndex++;
+
   }
 
 
   renderEstudo();
-}
 
+}
 
 function cardAnterior() {
 
+  const cards =
+    cardsEmEstudo();
+
+
   if (
-    state.filtrados.length === 0
+    cards.length ===
+    0
   ) {
+
     return;
+
   }
 
 
   if (
-    state.estudoIndex <= 0
+    state.estudoIndex <=
+    0
   ) {
 
     state.estudoIndex =
-      state.filtrados.length - 1;
+      cards.length -
+      1;
 
   }
   else {
 
     state.estudoIndex--;
+
   }
 
 
   renderEstudo();
-}
 
+}
 
 async function sair() {
 

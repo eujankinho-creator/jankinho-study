@@ -2408,3 +2408,421 @@ html[data-theme="pink-glitter"]
   }
 
 }
+
+/* CORTEX FLASHCARD CATEGORY PICKER V1 */
+
+
+.flash-category-modal {
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  z-index:
+    10050;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    18px;
+}
+
+
+.flash-category-modal.hidden {
+  display:
+    none !important;
+}
+
+
+.flash-category-backdrop {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .82
+    );
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+}
+
+
+.flash-category-card {
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    min(
+      610px,
+      100%
+    );
+
+  max-height:
+    min(
+      720px,
+      90vh
+    );
+
+  overflow-y:
+    auto;
+
+  padding:
+    20px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    20px;
+
+  background:
+    var(--theme-surface-strong);
+
+  box-shadow:
+    0 30px 100px
+    rgba(
+      0,
+      0,
+      0,
+      .55
+    );
+}
+
+
+.flash-category-header {
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap:
+    15px;
+}
+
+
+.flash-category-header h2 {
+  margin:
+    8px 0 4px;
+
+  color:
+    var(--theme-text);
+
+  font-size:
+    21px;
+
+  letter-spacing:
+    -.03em;
+}
+
+
+.flash-category-header p {
+  margin:
+    0;
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    9px;
+}
+
+
+.flash-category-close {
+  width:
+    34px;
+
+  height:
+    34px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    10px;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    18px;
+
+  cursor:
+    pointer;
+}
+
+
+.flash-category-toolbar {
+  display:
+    flex;
+
+  gap:
+    12px;
+
+  margin:
+    20px 0 10px;
+}
+
+
+.flash-category-toolbar button {
+  border:
+    0;
+
+  background:
+    transparent;
+
+  color:
+    var(--theme-accent);
+
+  font:
+    inherit;
+
+  font-size:
+    8px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+.flash-category-list {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    7px;
+}
+
+
+.flash-category-option {
+  position:
+    relative;
+
+  min-height:
+    49px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    8px;
+
+  padding:
+    9px 11px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    12px;
+
+  background:
+    var(--theme-surface-soft);
+
+  cursor:
+    pointer;
+}
+
+
+.flash-category-option.active {
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+}
+
+
+.flash-category-option input {
+  position:
+    absolute;
+
+  opacity:
+    0;
+}
+
+
+.flash-category-name {
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    9px;
+
+  font-weight:
+    750;
+}
+
+
+.flash-category-option.active
+.flash-category-name {
+  color:
+    var(--theme-accent);
+}
+
+
+.flash-category-option strong {
+  min-width:
+    25px;
+
+  padding:
+    4px 6px;
+
+  border-radius:
+    999px;
+
+  background:
+    var(--theme-surface);
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    7px;
+
+  text-align:
+    center;
+}
+
+
+.flash-category-error {
+  margin-top:
+    10px;
+
+  color:
+    #f87171;
+
+  font-size:
+    8px;
+}
+
+
+.flash-category-error.hidden {
+  display:
+    none;
+}
+
+
+.flash-category-footer {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    15px;
+
+  margin-top:
+    18px;
+
+  padding-top:
+    14px;
+
+  border-top:
+    1px solid
+    var(--theme-border);
+}
+
+
+.flash-category-footer > span {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    8px;
+}
+
+
+@media (
+  max-width: 600px
+) {
+
+  .flash-category-modal {
+    padding:
+      10px;
+  }
+
+
+  .flash-category-card {
+    max-height:
+      92svh;
+
+    padding:
+      16px;
+
+    border-radius:
+      17px;
+  }
+
+
+  .flash-category-list {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .flash-category-footer {
+    align-items:
+      stretch;
+
+    flex-direction:
+      column;
+  }
+
+
+  .flash-category-footer
+  button {
+    width:
+      100%;
+  }
+
+}

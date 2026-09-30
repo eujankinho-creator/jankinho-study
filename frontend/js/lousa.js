@@ -62,6 +62,45 @@
     size:
       4,
 
+    toolSizes: {
+
+      pen:
+        4,
+
+      highlighter:
+        12,
+
+      eraser:
+        18,
+
+      line:
+        3,
+
+      arrow:
+        3,
+
+      rect:
+        3,
+
+      circle:
+        3
+
+    },
+
+    toolSmoothing: {
+
+      pen:
+        58,
+
+      highlighter:
+        68,
+
+      eraser:
+        35
+
+    },
+
+
     background:
       "grid",
 
@@ -87,6 +126,51 @@
       false,
 
     panStart:
+      null,
+
+    touchPointers:
+      new Map(),
+
+    touchGesture:
+      null,
+
+    selectedIndex:
+      null,
+
+    selectedIndices:
+      new Set(),
+
+    selectionMarquee:
+      null,
+
+    selectionDraggingGroup:
+      false,
+
+    selectionDragStart:
+      null,
+
+    selectionOriginalCommands:
+      new Map(),
+
+    selectionMoved:
+      false,
+
+    selectionClipboard:
+      [],
+
+    undoSnapshots:
+      [],
+
+    redoSnapshots:
+      [],
+
+    selectionDragging:
+      false,
+
+    selectionStart:
+      null,
+
+    selectionOriginal:
       null,
 
     dpr:
@@ -115,6 +199,9 @@
 
 
   const toolNames = {
+
+    select:
+      "Seleção",
 
     hand:
       "M\u00e3o",
@@ -847,6 +934,143 @@
   }
 
 
+  function smoothStrokePoints(
+    points,
+    smoothing
+  ) {
+
+    if (
+      !Array.isArray(
+        points
+      ) ||
+      points.length <
+        3 ||
+      smoothing <=
+        0
+    ) {
+
+      return points;
+
+    }
+
+
+    const strength =
+      Math.max(
+        0,
+        Math.min(
+          1,
+          smoothing /
+          100
+        )
+      );
+
+
+    const result = [
+      {
+        x:
+          points[0].x,
+
+        y:
+          points[0].y
+      }
+    ];
+
+
+    for (
+      let index = 1;
+      index <
+        points.length -
+        1;
+      index++
+    ) {
+
+      const previous =
+        points[
+          index -
+          1
+        ];
+
+
+      const current =
+        points[
+          index
+        ];
+
+
+      const next =
+        points[
+          index +
+          1
+        ];
+
+
+      const averageX =
+        (
+          previous.x +
+          current.x *
+          2 +
+          next.x
+        ) /
+        4;
+
+
+      const averageY =
+        (
+          previous.y +
+          current.y *
+          2 +
+          next.y
+        ) /
+        4;
+
+
+      result.push({
+
+        x:
+          current.x *
+          (
+            1 -
+            strength
+          ) +
+          averageX *
+          strength,
+
+        y:
+          current.y *
+          (
+            1 -
+            strength
+          ) +
+          averageY *
+          strength
+
+      });
+
+    }
+
+
+    result.push({
+
+      x:
+        points[
+          points.length -
+          1
+        ].x,
+
+      y:
+        points[
+          points.length -
+          1
+        ].y
+
+    });
+
+
+    return result;
+
+  }
+
+
   function drawStroke(
     command,
     context
@@ -857,7 +1081,7 @@
         command.points
       ) ||
       command.points.length ===
-      0
+        0
     ) {
 
       return;
@@ -866,6 +1090,7 @@
 
 
     context.save();
+
 
     setupContext(
       context
@@ -880,11 +1105,14 @@
       context.globalCompositeOperation =
         "destination-out";
 
+
       context.globalAlpha =
         1;
 
+
       context.strokeStyle =
         "#000";
+
 
       context.lineWidth =
         Math.max(
@@ -902,11 +1130,14 @@
       context.globalCompositeOperation =
         "source-over";
 
+
       context.globalAlpha =
         .25;
 
+
       context.strokeStyle =
         command.color;
+
 
       context.lineWidth =
         Math.max(
@@ -921,11 +1152,14 @@
       context.globalCompositeOperation =
         "source-over";
 
+
       context.globalAlpha =
         1;
 
+
       context.strokeStyle =
         command.color;
+
 
       context.lineWidth =
         command.size;
@@ -933,11 +1167,25 @@
     }
 
 
-    context.beginPath();
+    const smoothing =
+      Number(
+        command.smoothing ||
+        0
+      );
+
+
+    const points =
+      smoothStrokePoints(
+        command.points,
+        smoothing
+      );
 
 
     const first =
-      command.points[0];
+      points[0];
+
+
+    context.beginPath();
 
 
     context.moveTo(
@@ -946,36 +1194,104 @@
     );
 
 
-    for (
-      let index = 1;
-      index <
-      command.points.length;
-      index++
-    ) {
-
-      const point =
-        command.points[
-          index
-        ];
-
-
-      context.lineTo(
-        point.x,
-        point.y
-      );
-
-    }
-
-
     if (
-      command.points.length ===
+      points.length ===
       1
     ) {
 
       context.lineTo(
-        first.x + .1,
-        first.y + .1
+        first.x +
+        .1,
+        first.y +
+        .1
       );
+
+    }
+    else if (
+      smoothing >
+        0 &&
+      points.length >
+        2
+    ) {
+
+      for (
+        let index = 1;
+        index <
+          points.length -
+          1;
+        index++
+      ) {
+
+        const current =
+          points[
+            index
+          ];
+
+
+        const next =
+          points[
+            index +
+            1
+          ];
+
+
+        const middle = {
+
+          x:
+            (
+              current.x +
+              next.x
+            ) /
+            2,
+
+          y:
+            (
+              current.y +
+              next.y
+            ) /
+            2
+
+        };
+
+
+        context.quadraticCurveTo(
+          current.x,
+          current.y,
+          middle.x,
+          middle.y
+        );
+
+      }
+
+
+      const last =
+        points[
+          points.length -
+          1
+        ];
+
+
+      context.lineTo(
+        last.x,
+        last.y
+      );
+
+    }
+    else {
+
+      for (
+        let index = 1;
+        index <
+          points.length;
+        index++
+      ) {
+
+        context.lineTo(
+          points[index].x,
+          points[index].y
+        );
+
+      }
 
     }
 
@@ -985,7 +1301,6 @@
     context.restore();
 
   }
-
 
   function drawArrow(
     context,
@@ -1677,6 +1992,12 @@
     }
 
 
+    drawSelectionOverlay();
+
+
+    drawMultiSelectionOverlay();
+
+
     updateInfiniteBackground();
 
 
@@ -1905,8 +2226,810 @@
 
     updateInfiniteBackground();
 
+    updateToolContext();
+
   }
 
+
+  /* =======================================================
+     CORTEX TOOL THICKNESS V6
+  ======================================================= */
+
+
+  const thicknessTools =
+    new Set([
+      "pen",
+      "highlighter",
+      "eraser",
+      "line",
+      "arrow",
+      "rect",
+      "circle"
+    ]);
+
+
+  /* CORTEX SMOOTHING SETTINGS V7 */
+
+
+  const smoothingTools =
+    new Set([
+      "pen",
+      "highlighter",
+      "eraser"
+    ]);
+
+
+  function loadToolSmoothing() {
+
+    try {
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem(
+            "cortex_whiteboard_smoothing_v1"
+          ) ||
+          "null"
+        );
+
+
+      if (
+        !saved ||
+        typeof saved !==
+        "object"
+      ) {
+
+        return;
+
+      }
+
+
+      Object.keys(
+        state.toolSmoothing
+      )
+        .forEach(
+          function (
+            tool
+          ) {
+
+            const value =
+              Number(
+                saved[
+                  tool
+                ]
+              );
+
+
+            if (
+              Number.isFinite(
+                value
+              )
+            ) {
+
+              state.toolSmoothing[
+                tool
+              ] =
+                Math.max(
+                  0,
+                  Math.min(
+                    100,
+                    value
+                  )
+                );
+
+            }
+
+          }
+        );
+
+    }
+    catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+    }
+
+  }
+
+
+  function saveToolSmoothing() {
+
+    try {
+
+      localStorage.setItem(
+        "cortex_whiteboard_smoothing_v1",
+        JSON.stringify(
+          state.toolSmoothing
+        )
+      );
+
+    }
+    catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+    }
+
+  }
+
+
+  function loadToolSizes() {
+
+    try {
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem(
+            "cortex_whiteboard_tool_sizes_v1"
+          ) ||
+          "null"
+        );
+
+
+      if (
+        saved &&
+        typeof saved ===
+        "object"
+      ) {
+
+        Object.keys(
+          state.toolSizes
+        )
+          .forEach(
+            function (
+              tool
+            ) {
+
+              const value =
+                Number(
+                  saved[
+                    tool
+                  ]
+                );
+
+
+              if (
+                Number.isFinite(
+                  value
+                ) &&
+                value >= 1 &&
+                value <= 20
+              ) {
+
+                state.toolSizes[
+                  tool
+                ] =
+                  value;
+
+              }
+
+            }
+          );
+
+      }
+
+    }
+    catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+    }
+
+  }
+
+
+  function saveToolSizes() {
+
+    try {
+
+      localStorage.setItem(
+        "cortex_whiteboard_tool_sizes_v1",
+        JSON.stringify(
+          state.toolSizes
+        )
+      );
+
+    }
+    catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+    }
+
+  }
+
+
+  function thicknessToolName(
+    tool
+  ) {
+
+    const names = {
+
+      pen:
+        "Caneta",
+
+      highlighter:
+        "Marca-texto",
+
+      eraser:
+        "Borracha",
+
+      line:
+        "Linha",
+
+      arrow:
+        "Seta",
+
+      rect:
+        "Retangulo",
+
+      circle:
+        "Circulo"
+
+    };
+
+
+    return (
+      names[
+        tool
+      ] ||
+      "Ferramenta"
+    );
+
+  }
+
+
+  function setupThicknessPopover() {
+
+    const panel =
+      $("strokeControls");
+
+
+    if (!panel) {
+      return;
+    }
+
+
+    if (
+      panel.dataset
+        .floatingReady ===
+      "true"
+    ) {
+
+      return;
+
+    }
+
+
+    panel.dataset
+      .floatingReady =
+      "true";
+
+
+    panel.classList.add(
+      "tool-thickness-popover"
+    );
+
+
+    panel.classList.remove(
+      "thickness-popover-open"
+    );
+
+
+    /*
+     * Suavizacao aparece apenas para
+     * ferramentas de desenho livre.
+     */
+
+    if (
+      !panel.querySelector(
+        ".tool-smoothing-control"
+      )
+    ) {
+
+      const smoothing =
+        document.createElement(
+          "div"
+        );
+
+
+      smoothing.className =
+        "tool-smoothing-control hidden";
+
+
+      smoothing.innerHTML = `
+        <span class="smoothing-label">
+          Suavizacao
+        </span>
+
+        <input
+          id="smoothingRange"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          value="58"
+        >
+
+        <strong id="smoothingValue">
+          58%
+        </strong>
+      `;
+
+
+      panel.appendChild(
+        smoothing
+      );
+
+    }
+
+
+    document.body
+      .appendChild(
+        panel
+      );
+
+
+    const sizeRange =
+      $("brushSize");
+
+
+    if (
+      sizeRange
+    ) {
+
+      sizeRange.addEventListener(
+        "input",
+        function (
+          event
+        ) {
+
+          const value =
+            Number(
+              event.target.value
+            );
+
+
+          state.size =
+            value;
+
+
+          if (
+            thicknessTools.has(
+              state.tool
+            )
+          ) {
+
+            state.toolSizes[
+              state.tool
+            ] =
+              value;
+
+
+            saveToolSizes();
+
+          }
+
+
+          const output =
+            $("brushSizeValue");
+
+
+          if (
+            output
+          ) {
+
+            output.textContent =
+              value;
+
+          }
+
+
+          queueSave();
+
+        }
+      );
+
+    }
+
+
+    const smoothingRange =
+      $("smoothingRange");
+
+
+    if (
+      smoothingRange
+    ) {
+
+      smoothingRange.addEventListener(
+        "input",
+        function (
+          event
+        ) {
+
+          if (
+            !smoothingTools.has(
+              state.tool
+            )
+          ) {
+
+            return;
+
+          }
+
+
+          const value =
+            Number(
+              event.target.value
+            );
+
+
+          state.toolSmoothing[
+            state.tool
+          ] =
+            value;
+
+
+          const output =
+            $("smoothingValue");
+
+
+          if (
+            output
+          ) {
+
+            output.textContent =
+              value +
+              "%";
+
+          }
+
+
+          saveToolSmoothing();
+
+        }
+      );
+
+    }
+
+
+    document.addEventListener(
+      "pointerdown",
+      function (
+        event
+      ) {
+
+        if (
+          !panel.classList
+            .contains(
+              "thickness-popover-open"
+            )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          panel.contains(
+            event.target
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          event.target.closest &&
+          event.target.closest(
+            "[data-tool]"
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        hideThicknessPopover();
+
+      }
+    );
+
+
+    window.addEventListener(
+      "resize",
+      hideThicknessPopover
+    );
+
+  }
+
+
+  function hideThicknessPopover() {
+
+    const panel =
+      $("strokeControls");
+
+
+    if (!panel) {
+      return;
+    }
+
+
+    panel.classList.remove(
+      "thickness-popover-open"
+    );
+
+
+    panel.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  function showThicknessPopover(
+    tool
+  ) {
+
+    if (
+      !thicknessTools.has(
+        tool
+      )
+    ) {
+
+      hideThicknessPopover();
+
+      return;
+
+    }
+
+
+    const panel =
+      $("strokeControls");
+
+
+    const button =
+      document.querySelector(
+        '[data-tool="' +
+        tool +
+        '"]'
+      );
+
+
+    if (
+      !panel ||
+      !button
+    ) {
+
+      return;
+
+    }
+
+
+    const size =
+      Number(
+        state.toolSizes[
+          tool
+        ] ||
+        state.size ||
+        4
+      );
+
+
+    state.size =
+      size;
+
+
+    const sizeRange =
+      $("brushSize");
+
+
+    const sizeOutput =
+      $("brushSizeValue");
+
+
+    const caption =
+      panel.querySelector(
+        ".context-caption"
+      );
+
+
+    if (
+      sizeRange
+    ) {
+
+      sizeRange.value =
+        size;
+
+    }
+
+
+    if (
+      sizeOutput
+    ) {
+
+      sizeOutput.textContent =
+        size;
+
+    }
+
+
+    if (
+      caption
+    ) {
+
+      caption.textContent =
+        thicknessToolName(
+          tool
+        );
+
+    }
+
+
+    const smoothingBlock =
+      panel.querySelector(
+        ".tool-smoothing-control"
+      );
+
+
+    if (
+      smoothingBlock
+    ) {
+
+      const showSmoothing =
+        smoothingTools.has(
+          tool
+        );
+
+
+      smoothingBlock
+        .classList.toggle(
+          "hidden",
+          !showSmoothing
+        );
+
+
+      if (
+        showSmoothing
+      ) {
+
+        const smooth =
+          Number(
+            state.toolSmoothing[
+              tool
+            ] ??
+            50
+          );
+
+
+        const range =
+          $("smoothingRange");
+
+
+        const output =
+          $("smoothingValue");
+
+
+        if (
+          range
+        ) {
+
+          range.value =
+            smooth;
+
+        }
+
+
+        if (
+          output
+        ) {
+
+          output.textContent =
+            smooth +
+            "%";
+
+        }
+
+      }
+
+    }
+
+
+    panel.classList.remove(
+      "hidden"
+    );
+
+
+    panel.classList.add(
+      "thickness-popover-open"
+    );
+
+
+    requestAnimationFrame(
+      function () {
+
+        const buttonRect =
+          button
+            .getBoundingClientRect();
+
+
+        const panelRect =
+          panel
+            .getBoundingClientRect();
+
+
+        let left =
+          buttonRect.left +
+          buttonRect.width /
+          2 -
+          panelRect.width /
+          2;
+
+
+        left =
+          Math.max(
+            8,
+            Math.min(
+              window.innerWidth -
+              panelRect.width -
+              8,
+              left
+            )
+          );
+
+
+        let top =
+          buttonRect.bottom +
+          9;
+
+
+        if (
+          top +
+          panelRect.height >
+          window.innerHeight -
+          8
+        ) {
+
+          top =
+            buttonRect.top -
+            panelRect.height -
+            9;
+
+        }
+
+
+        panel.style.left =
+          left +
+          "px";
+
+
+        panel.style.top =
+          top +
+          "px";
+
+      }
+    );
+
+  }
 
   function selectTool(
     tool
@@ -1926,13 +3049,81 @@
     state.tool =
       tool;
 
+    /* CORTEX MULTI TOOL CHANGE V8_1 */
+
+    if (
+      tool !==
+      "select" &&
+      state.selectedIndices
+    ) {
+
+      clearBoardSelection();
+
+    }
+
+
+
+    if (
+      thicknessTools.has(
+        tool
+      )
+    ) {
+
+      state.size =
+        Number(
+          state.toolSizes[
+            tool
+          ] ||
+          state.size ||
+          4
+        );
+
+    }
+
+
+    if (
+      tool !==
+      "select"
+    ) {
+
+      state.selectedIndex =
+        null;
+
+
+      state.selectionDragging =
+        false;
+
+
+      state.selectionOriginal =
+        null;
+
+    }
+
 
     syncInterface();
+
+
+    if (
+      thicknessTools.has(
+        tool
+      )
+    ) {
+
+      showThicknessPopover(
+        tool
+      );
+
+    }
+    else {
+
+      hideThicknessPopover();
+
+    }
+
 
     queueSave();
 
   }
-
 
   function selectColor(
     color
@@ -2432,6 +3623,47 @@
   }
 
 
+  /* CORTEX MULTI HISTORY V8_1 */
+
+
+  function cloneBoardCommands(
+    commands
+  ) {
+
+    return JSON.parse(
+      JSON.stringify(
+        commands
+      )
+    );
+
+  }
+
+
+  function saveUndoSnapshot() {
+
+    state.undoSnapshots.push(
+      cloneBoardCommands(
+        state.commands
+      )
+    );
+
+
+    if (
+      state.undoSnapshots.length >
+      80
+    ) {
+
+      state.undoSnapshots.shift();
+
+    }
+
+
+    state.redoSnapshots =
+      [];
+
+  }
+
+
   function commitDraft() {
 
     if (
@@ -2441,6 +3673,11 @@
       return;
 
     }
+
+
+    /* CORTEX COMMIT SNAPSHOT V8_1 */
+
+    saveUndoSnapshot();
 
 
     state.commands.push(
@@ -2462,15 +3699,2823 @@
   }
 
 
+
+  /* CORTEX MULTITOUCH MOBILE V4 */
+
+
+  function registerTouchPointer(
+    event
+  ) {
+
+    if (
+      event.pointerType !==
+      "touch"
+    ) {
+
+      return;
+
+    }
+
+
+    const point =
+      screenPoint(
+        event
+      );
+
+
+    state.touchPointers.set(
+      event.pointerId,
+      {
+        x:
+          point.x,
+
+        y:
+          point.y
+      }
+    );
+
+  }
+
+
+  function getTouchMetrics() {
+
+    const points =
+      Array.from(
+        state.touchPointers.values()
+      );
+
+
+    if (
+      points.length <
+      2
+    ) {
+
+      return null;
+
+    }
+
+
+    const first =
+      points[0];
+
+    const second =
+      points[1];
+
+
+    const center = {
+
+      x:
+        (
+          first.x +
+          second.x
+        ) /
+        2,
+
+      y:
+        (
+          first.y +
+          second.y
+        ) /
+        2
+
+    };
+
+
+    const distance =
+      Math.max(
+        1,
+        Math.hypot(
+          second.x -
+          first.x,
+          second.y -
+          first.y
+        )
+      );
+
+
+    return {
+      center,
+      distance
+    };
+
+  }
+
+
+  function beginTouchGesture() {
+
+    const metrics =
+      getTouchMetrics();
+
+
+    if (
+      !metrics
+    ) {
+
+      return false;
+
+    }
+
+
+    /*
+     * Se o primeiro dedo comecou um risco,
+     * cancela esse risco assim que o segundo
+     * dedo entra na lousa.
+     */
+    state.drawing =
+      false;
+
+    state.draft =
+      null;
+
+    state.panning =
+      false;
+
+    state.panStart =
+      null;
+
+
+    stage.classList.remove(
+      "is-panning"
+    );
+
+
+    const anchorWorld =
+      screenToWorld(
+        metrics.center.x,
+        metrics.center.y
+      );
+
+
+    state.touchGesture = {
+
+      startDistance:
+        metrics.distance,
+
+      startZoom:
+        state.camera.zoom,
+
+      anchorWorld
+
+    };
+
+
+    stage.classList.add(
+      "is-touch-navigating"
+    );
+
+
+    render();
+
+    return true;
+
+  }
+
+
+  function updateTouchGesture() {
+
+    const gesture =
+      state.touchGesture;
+
+
+    const metrics =
+      getTouchMetrics();
+
+
+    if (
+      !gesture ||
+      !metrics
+    ) {
+
+      return false;
+
+    }
+
+
+    const scale =
+      metrics.distance /
+      gesture.startDistance;
+
+
+    const zoom =
+      clamp(
+        gesture.startZoom *
+        scale,
+        MIN_ZOOM,
+        MAX_ZOOM
+      );
+
+
+    state.camera.zoom =
+      zoom;
+
+
+    /*
+     * O ponto que estava entre os dois dedos
+     * continua preso entre eles durante pan
+     * e pinch-to-zoom.
+     */
+    state.camera.x =
+      gesture.anchorWorld.x -
+      metrics.center.x /
+      zoom;
+
+
+    state.camera.y =
+      gesture.anchorWorld.y -
+      metrics.center.y /
+      zoom;
+
+
+    render();
+
+    return true;
+
+  }
+
+
+  function finishTouchGesture() {
+
+    state.touchGesture =
+      null;
+
+    state.drawing =
+      false;
+
+    state.draft =
+      null;
+
+    state.panning =
+      false;
+
+    state.panStart =
+      null;
+
+
+    stage.classList.remove(
+      "is-touch-navigating"
+    );
+
+
+    stage.classList.remove(
+      "is-panning"
+    );
+
+
+    render();
+
+    queueSave();
+
+  }
+
+
+
+  /* =======================================================
+     CORTEX SELECTION TOOL V5
+  ======================================================= */
+
+
+  function cloneCommand(
+    command
+  ) {
+
+    return JSON.parse(
+      JSON.stringify(
+        command
+      )
+    );
+
+  }
+
+
+  function commandBoundsOne(
+    command
+  ) {
+
+    let minX =
+      Infinity;
+
+    let minY =
+      Infinity;
+
+    let maxX =
+      -Infinity;
+
+    let maxY =
+      -Infinity;
+
+
+    function include(
+      point
+    ) {
+
+      if (!point) {
+        return;
+      }
+
+
+      minX =
+        Math.min(
+          minX,
+          point.x
+        );
+
+
+      minY =
+        Math.min(
+          minY,
+          point.y
+        );
+
+
+      maxX =
+        Math.max(
+          maxX,
+          point.x
+        );
+
+
+      maxY =
+        Math.max(
+          maxY,
+          point.y
+        );
+
+    }
+
+
+    if (
+      Array.isArray(
+        command.points
+      )
+    ) {
+
+      command.points.forEach(
+        include
+      );
+
+    }
+
+
+    include(
+      command.start
+    );
+
+
+    include(
+      command.end
+    );
+
+
+    if (
+      command.position
+    ) {
+
+      include(
+        command.position
+      );
+
+
+      const fontSize =
+        command.fontSize ||
+        18;
+
+
+      include({
+        x:
+          command.position.x +
+          360,
+
+        y:
+          command.position.y +
+          fontSize *
+          2.4
+      });
+
+    }
+
+
+    if (
+      minX === Infinity
+    ) {
+
+      return null;
+
+    }
+
+
+    return {
+      minX,
+      minY,
+      maxX,
+      maxY
+    };
+
+  }
+
+
+  function selectedCommand() {
+
+    if (
+      state.selectedIndex ===
+      null
+    ) {
+
+      return null;
+
+    }
+
+
+    return (
+      state.commands[
+        state.selectedIndex
+      ] ||
+      null
+    );
+
+  }
+
+
+  function hitTestCommand(
+    point
+  ) {
+
+    for (
+      let index =
+        state.commands.length -
+        1;
+
+      index >= 0;
+
+      index--
+    ) {
+
+      const command =
+        state.commands[
+          index
+        ];
+
+
+      const bounds =
+        commandBoundsOne(
+          command
+        );
+
+
+      if (!bounds) {
+        continue;
+      }
+
+
+      const padding =
+        Math.max(
+          10 /
+          state.camera.zoom,
+          Number(
+            command.size ||
+            2
+          ) *
+          2
+        );
+
+
+      if (
+        point.x >=
+          bounds.minX -
+          padding &&
+        point.x <=
+          bounds.maxX +
+          padding &&
+        point.y >=
+          bounds.minY -
+          padding &&
+        point.y <=
+          bounds.maxY +
+          padding
+      ) {
+
+        return index;
+
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+  function translateCommand(
+    source,
+    deltaX,
+    deltaY
+  ) {
+
+    const command =
+      cloneCommand(
+        source
+      );
+
+
+    function move(
+      point
+    ) {
+
+      if (!point) {
+        return;
+      }
+
+
+      point.x +=
+        deltaX;
+
+
+      point.y +=
+        deltaY;
+
+    }
+
+
+    if (
+      Array.isArray(
+        command.points
+      )
+    ) {
+
+      command.points.forEach(
+        move
+      );
+
+    }
+
+
+    move(
+      command.start
+    );
+
+
+    move(
+      command.end
+    );
+
+
+    move(
+      command.position
+    );
+
+
+    return command;
+
+  }
+
+
+  function beginSelection(
+    event
+  ) {
+
+    const point =
+      worldPoint(
+        event
+      );
+
+
+    const index =
+      hitTestCommand(
+        point
+      );
+
+
+    state.selectedIndex =
+      index;
+
+
+    if (
+      index ===
+      null
+    ) {
+
+      state.selectionDragging =
+        false;
+
+      state.selectionOriginal =
+        null;
+
+      render();
+
+      return;
+
+    }
+
+
+    state.selectionDragging =
+      true;
+
+
+    state.selectionStart =
+      point;
+
+
+    state.selectionOriginal =
+      cloneCommand(
+        state.commands[
+          index
+        ]
+      );
+
+
+    try {
+
+      canvas.setPointerCapture(
+        event.pointerId
+      );
+
+    }
+    catch (
+      error
+    ) {}
+
+
+    render();
+
+  }
+
+
+  function moveSelection(
+    event
+  ) {
+
+    if (
+      !state.selectionDragging ||
+      state.selectedIndex ===
+        null ||
+      !state.selectionOriginal ||
+      !state.selectionStart
+    ) {
+
+      return;
+
+    }
+
+
+    const point =
+      worldPoint(
+        event
+      );
+
+
+    const deltaX =
+      point.x -
+      state.selectionStart.x;
+
+
+    const deltaY =
+      point.y -
+      state.selectionStart.y;
+
+
+    state.commands[
+      state.selectedIndex
+    ] =
+      translateCommand(
+        state.selectionOriginal,
+        deltaX,
+        deltaY
+      );
+
+
+    render();
+
+  }
+
+
+  function finishSelection() {
+
+    if (
+      !state.selectionDragging
+    ) {
+
+      return;
+
+    }
+
+
+    state.selectionDragging =
+      false;
+
+
+    state.selectionStart =
+      null;
+
+
+    state.selectionOriginal =
+      null;
+
+
+    queueSave();
+
+    render();
+
+  }
+
+
+  function deleteSelection() {
+
+    if (
+      state.selectedIndex ===
+      null
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      !state.commands[
+        state.selectedIndex
+      ]
+    ) {
+
+      state.selectedIndex =
+        null;
+
+      return;
+
+    }
+
+
+    state.commands.splice(
+      state.selectedIndex,
+      1
+    );
+
+
+    state.selectedIndex =
+      null;
+
+
+    state.selectionDragging =
+      false;
+
+
+    state.selectionOriginal =
+      null;
+
+
+    state.redo =
+      [];
+
+
+    queueSave();
+
+    render();
+
+  }
+
+
+  function drawSelectionOverlay() {
+
+    const command =
+      selectedCommand();
+
+
+    if (
+      state.tool !==
+        "select" ||
+      !command
+    ) {
+
+      return;
+
+    }
+
+
+    const bounds =
+      commandBoundsOne(
+        command
+      );
+
+
+    if (!bounds) {
+      return;
+    }
+
+
+    const padding =
+      8 /
+      state.camera.zoom;
+
+
+    const accent =
+      getComputedStyle(
+        document.documentElement
+      )
+        .getPropertyValue(
+          "--theme-accent"
+        )
+        .trim() ||
+      "#f97316";
+
+
+    const x =
+      bounds.minX -
+      padding;
+
+
+    const y =
+      bounds.minY -
+      padding;
+
+
+    const width =
+      bounds.maxX -
+      bounds.minX +
+      padding *
+      2;
+
+
+    const height =
+      bounds.maxY -
+      bounds.minY +
+      padding *
+      2;
+
+
+    ctx.save();
+
+
+    ctx.globalCompositeOperation =
+      "source-over";
+
+
+    ctx.strokeStyle =
+      accent;
+
+
+    ctx.fillStyle =
+      accent;
+
+
+    ctx.lineWidth =
+      1.5 /
+      state.camera.zoom;
+
+
+    ctx.setLineDash([
+      6 /
+        state.camera.zoom,
+
+      4 /
+        state.camera.zoom
+    ]);
+
+
+    ctx.strokeRect(
+      x,
+      y,
+      width,
+      height
+    );
+
+
+    ctx.setLineDash([]);
+
+
+    const handle =
+      6 /
+      state.camera.zoom;
+
+
+    [
+      [x, y],
+      [x + width, y],
+      [x, y + height],
+      [
+        x + width,
+        y + height
+      ]
+    ].forEach(
+      function (
+        position
+      ) {
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+          position[0],
+          position[1],
+          handle,
+          0,
+          Math.PI *
+          2
+        );
+
+
+        ctx.fill();
+
+      }
+    );
+
+
+    ctx.restore();
+
+  }
+
+
+  function updateToolContext() {
+
+    const colorControls =
+      $("colorControls");
+
+
+    const shapeControls =
+      $("shapeControls");
+
+
+    const colorTools =
+      new Set([
+        "pen",
+        "highlighter",
+        "line",
+        "arrow",
+        "rect",
+        "circle",
+        "text"
+      ]);
+
+
+    const fillTools =
+      new Set([
+        "rect",
+        "circle"
+      ]);
+
+
+    if (
+      colorControls
+    ) {
+
+      colorControls
+        .classList.toggle(
+          "hidden",
+          !colorTools.has(
+            state.tool
+          )
+        );
+
+    }
+
+
+    if (
+      shapeControls
+    ) {
+
+      shapeControls
+        .classList.toggle(
+          "hidden",
+          !fillTools.has(
+            state.tool
+          )
+        );
+
+    }
+
+  }
+
+  /* =======================================================
+     CORTEX MULTI SELECTION V8_1
+  ======================================================= */
+
+
+  function selectionClone(
+    value
+  ) {
+
+    return JSON.parse(
+      JSON.stringify(
+        value
+      )
+    );
+
+  }
+
+
+  function selectionCommandBounds(
+    command
+  ) {
+
+    if (
+      typeof commandBoundsOne ===
+      "function"
+    ) {
+
+      return commandBoundsOne(
+        command
+      );
+
+    }
+
+
+    let minX =
+      Infinity;
+
+    let minY =
+      Infinity;
+
+    let maxX =
+      -Infinity;
+
+    let maxY =
+      -Infinity;
+
+
+    function include(
+      point
+    ) {
+
+      if (!point) {
+        return;
+      }
+
+
+      minX =
+        Math.min(
+          minX,
+          point.x
+        );
+
+
+      minY =
+        Math.min(
+          minY,
+          point.y
+        );
+
+
+      maxX =
+        Math.max(
+          maxX,
+          point.x
+        );
+
+
+      maxY =
+        Math.max(
+          maxY,
+          point.y
+        );
+
+    }
+
+
+    if (
+      Array.isArray(
+        command.points
+      )
+    ) {
+
+      command.points
+        .forEach(
+          include
+        );
+
+    }
+
+
+    include(
+      command.start
+    );
+
+
+    include(
+      command.end
+    );
+
+
+    if (
+      command.position
+    ) {
+
+      include(
+        command.position
+      );
+
+
+      const fontSize =
+        Number(
+          command.fontSize ||
+          18
+        );
+
+
+      include({
+
+        x:
+          command.position.x +
+          360,
+
+        y:
+          command.position.y +
+          fontSize *
+          2.5
+
+      });
+
+    }
+
+
+    if (
+      minX ===
+      Infinity
+    ) {
+
+      return null;
+
+    }
+
+
+    return {
+      minX,
+      minY,
+      maxX,
+      maxY
+    };
+
+  }
+
+
+  function selectionRect(
+    start,
+    end
+  ) {
+
+    return {
+
+      minX:
+        Math.min(
+          start.x,
+          end.x
+        ),
+
+      minY:
+        Math.min(
+          start.y,
+          end.y
+        ),
+
+      maxX:
+        Math.max(
+          start.x,
+          end.x
+        ),
+
+      maxY:
+        Math.max(
+          start.y,
+          end.y
+        )
+
+    };
+
+  }
+
+
+  function selectionIntersects(
+    a,
+    b
+  ) {
+
+    return !(
+      a.maxX <
+        b.minX ||
+      a.minX >
+        b.maxX ||
+      a.maxY <
+        b.minY ||
+      a.minY >
+        b.maxY
+    );
+
+  }
+
+
+  function selectedIndexes() {
+
+    return Array
+      .from(
+        state.selectedIndices
+      )
+      .filter(
+        function (
+          index
+        ) {
+
+          return Boolean(
+            state.commands[
+              index
+            ]
+          );
+
+        }
+      )
+      .sort(
+        function (
+          a,
+          b
+        ) {
+
+          return a - b;
+
+        }
+      );
+
+  }
+
+
+  function clearBoardSelection() {
+
+    state.selectedIndices
+      .clear();
+
+
+    state.selectedIndex =
+      null;
+
+
+    state.selectionMarquee =
+      null;
+
+
+    state.selectionDraggingGroup =
+      false;
+
+
+    state.selectionDragStart =
+      null;
+
+
+    state.selectionOriginalCommands
+      .clear();
+
+
+    state.selectionMoved =
+      false;
+
+
+    updateSelectionToolbar();
+
+  }
+
+
+  function selectAllBoardItems() {
+
+    state.selectedIndices
+      .clear();
+
+
+    state.commands.forEach(
+      function (
+        command,
+        index
+      ) {
+
+        state.selectedIndices
+          .add(
+            index
+          );
+
+      }
+    );
+
+
+    state.selectedIndex =
+      null;
+
+
+    updateSelectionToolbar();
+
+    render();
+
+  }
+
+
+  function hitTestBoardItem(
+    point
+  ) {
+
+    for (
+      let index =
+        state.commands.length -
+        1;
+
+      index >=
+        0;
+
+      index--
+    ) {
+
+      const bounds =
+        selectionCommandBounds(
+          state.commands[
+            index
+          ]
+        );
+
+
+      if (!bounds) {
+        continue;
+      }
+
+
+      const padding =
+        Math.max(
+          8 /
+          state.camera.zoom,
+          3
+        );
+
+
+      if (
+        point.x >=
+          bounds.minX -
+          padding &&
+        point.x <=
+          bounds.maxX +
+          padding &&
+        point.y >=
+          bounds.minY -
+          padding &&
+        point.y <=
+          bounds.maxY +
+          padding
+      ) {
+
+        return index;
+
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+  function moveCommandForSelection(
+    original,
+    deltaX,
+    deltaY
+  ) {
+
+    const command =
+      selectionClone(
+        original
+      );
+
+
+    function move(
+      point
+    ) {
+
+      if (!point) {
+        return;
+      }
+
+
+      point.x +=
+        deltaX;
+
+
+      point.y +=
+        deltaY;
+
+    }
+
+
+    if (
+      Array.isArray(
+        command.points
+      )
+    ) {
+
+      command.points
+        .forEach(
+          move
+        );
+
+    }
+
+
+    move(
+      command.start
+    );
+
+
+    move(
+      command.end
+    );
+
+
+    move(
+      command.position
+    );
+
+
+    return command;
+
+  }
+
+
+  function beginBoardSelection(
+    event
+  ) {
+
+    const point =
+      worldPoint(
+        event
+      );
+
+
+    const hit =
+      hitTestBoardItem(
+        point
+      );
+
+
+    const additive =
+      Boolean(
+        event.shiftKey ||
+        event.ctrlKey ||
+        event.metaKey
+      );
+
+
+    state.selectedIndex =
+      null;
+
+
+    if (
+      hit !==
+      null
+    ) {
+
+      if (
+        additive
+      ) {
+
+        if (
+          state.selectedIndices
+            .has(
+              hit
+            )
+        ) {
+
+          state.selectedIndices
+            .delete(
+              hit
+            );
+
+
+          updateSelectionToolbar();
+
+          render();
+
+          return;
+
+        }
+
+
+        state.selectedIndices
+          .add(
+            hit
+          );
+
+      }
+      else if (
+        !state.selectedIndices
+          .has(
+            hit
+          )
+      ) {
+
+        state.selectedIndices
+          .clear();
+
+
+        state.selectedIndices
+          .add(
+            hit
+          );
+
+      }
+
+
+      state.selectionDraggingGroup =
+        true;
+
+
+      state.selectionDragStart =
+        point;
+
+
+      state.selectionOriginalCommands =
+        new Map();
+
+
+      selectedIndexes()
+        .forEach(
+          function (
+            index
+          ) {
+
+            state.selectionOriginalCommands
+              .set(
+                index,
+                selectionClone(
+                  state.commands[
+                    index
+                  ]
+                )
+              );
+
+          }
+        );
+
+
+      state.selectionMoved =
+        false;
+
+
+      try {
+
+        canvas.setPointerCapture(
+          event.pointerId
+        );
+
+      }
+      catch (
+        error
+      ) {}
+
+
+      updateSelectionToolbar();
+
+      render();
+
+      return;
+
+    }
+
+
+    if (
+      !additive
+    ) {
+
+      state.selectedIndices
+        .clear();
+
+    }
+
+
+    state.selectionMarquee = {
+
+      start:
+        point,
+
+      end:
+        point,
+
+      additive
+
+    };
+
+
+    try {
+
+      canvas.setPointerCapture(
+        event.pointerId
+      );
+
+    }
+    catch (
+      error
+    ) {}
+
+
+    updateSelectionToolbar();
+
+    render();
+
+  }
+
+
+  function moveBoardSelection(
+    event
+  ) {
+
+    if (
+      state.selectionDraggingGroup &&
+      state.selectionDragStart
+    ) {
+
+      const point =
+        worldPoint(
+          event
+        );
+
+
+      const deltaX =
+        point.x -
+        state.selectionDragStart.x;
+
+
+      const deltaY =
+        point.y -
+        state.selectionDragStart.y;
+
+
+      const distance =
+        Math.hypot(
+          deltaX,
+          deltaY
+        ) *
+        state.camera.zoom;
+
+
+      if (
+        distance >
+        2
+      ) {
+
+        if (
+          !state.selectionMoved
+        ) {
+
+          saveUndoSnapshot();
+
+
+          state.selectionMoved =
+            true;
+
+        }
+
+
+        state.selectionOriginalCommands
+          .forEach(
+            function (
+              original,
+              index
+            ) {
+
+              state.commands[
+                index
+              ] =
+                moveCommandForSelection(
+                  original,
+                  deltaX,
+                  deltaY
+                );
+
+            }
+          );
+
+      }
+
+
+      render();
+
+      return;
+
+    }
+
+
+    if (
+      state.selectionMarquee
+    ) {
+
+      state.selectionMarquee.end =
+        worldPoint(
+          event
+        );
+
+
+      render();
+
+    }
+
+  }
+
+
+  function finishBoardSelection() {
+
+    if (
+      state.selectionDraggingGroup
+    ) {
+
+      state.selectionDraggingGroup =
+        false;
+
+
+      state.selectionDragStart =
+        null;
+
+
+      state.selectionOriginalCommands
+        .clear();
+
+
+      if (
+        state.selectionMoved
+      ) {
+
+        queueSave();
+
+      }
+
+
+      state.selectionMoved =
+        false;
+
+
+      updateSelectionToolbar();
+
+      render();
+
+      return;
+
+    }
+
+
+    if (
+      !state.selectionMarquee
+    ) {
+
+      return;
+
+    }
+
+
+    const marquee =
+      state.selectionMarquee;
+
+
+    const area =
+      selectionRect(
+        marquee.start,
+        marquee.end
+      );
+
+
+    const width =
+      (
+        area.maxX -
+        area.minX
+      ) *
+      state.camera.zoom;
+
+
+    const height =
+      (
+        area.maxY -
+        area.minY
+      ) *
+      state.camera.zoom;
+
+
+    if (
+      width >
+        3 ||
+      height >
+        3
+    ) {
+
+      state.commands
+        .forEach(
+          function (
+            command,
+            index
+          ) {
+
+            const bounds =
+              selectionCommandBounds(
+                command
+              );
+
+
+            if (
+              bounds &&
+              selectionIntersects(
+                area,
+                bounds
+              )
+            ) {
+
+              state.selectedIndices
+                .add(
+                  index
+                );
+
+            }
+
+          }
+        );
+
+    }
+    else if (
+      !marquee.additive
+    ) {
+
+      state.selectedIndices
+        .clear();
+
+    }
+
+
+    state.selectionMarquee =
+      null;
+
+
+    updateSelectionToolbar();
+
+    render();
+
+  }
+
+
+  function selectionGroupBounds() {
+
+    const indexes =
+      selectedIndexes();
+
+
+    if (
+      indexes.length ===
+      0
+    ) {
+
+      return null;
+
+    }
+
+
+    const result = {
+
+      minX:
+        Infinity,
+
+      minY:
+        Infinity,
+
+      maxX:
+        -Infinity,
+
+      maxY:
+        -Infinity
+
+    };
+
+
+    indexes.forEach(
+      function (
+        index
+      ) {
+
+        const bounds =
+          selectionCommandBounds(
+            state.commands[
+              index
+            ]
+          );
+
+
+        if (!bounds) {
+          return;
+        }
+
+
+        result.minX =
+          Math.min(
+            result.minX,
+            bounds.minX
+          );
+
+
+        result.minY =
+          Math.min(
+            result.minY,
+            bounds.minY
+          );
+
+
+        result.maxX =
+          Math.max(
+            result.maxX,
+            bounds.maxX
+          );
+
+
+        result.maxY =
+          Math.max(
+            result.maxY,
+            bounds.maxY
+          );
+
+      }
+    );
+
+
+    return (
+      result.minX ===
+      Infinity
+        ? null
+        : result
+    );
+
+  }
+
+
+  function drawSelectionBox(
+    bounds,
+    accent,
+    strong
+  ) {
+
+    const padding =
+      7 /
+      state.camera.zoom;
+
+
+    ctx.save();
+
+
+    ctx.globalCompositeOperation =
+      "source-over";
+
+
+    ctx.strokeStyle =
+      accent;
+
+
+    ctx.lineWidth =
+      (
+        strong
+          ? 1.8
+          : 1.1
+      ) /
+      state.camera.zoom;
+
+
+    ctx.globalAlpha =
+      strong
+        ? 1
+        : .55;
+
+
+    ctx.setLineDash([
+      6 /
+        state.camera.zoom,
+
+      4 /
+        state.camera.zoom
+    ]);
+
+
+    ctx.strokeRect(
+
+      bounds.minX -
+      padding,
+
+      bounds.minY -
+      padding,
+
+      bounds.maxX -
+      bounds.minX +
+      padding *
+      2,
+
+      bounds.maxY -
+      bounds.minY +
+      padding *
+      2
+
+    );
+
+
+    ctx.restore();
+
+  }
+
+
+  function drawMultiSelectionOverlay() {
+
+    if (
+      state.tool !==
+      "select"
+    ) {
+
+      return;
+
+    }
+
+
+    const accent =
+      getComputedStyle(
+        document.documentElement
+      )
+        .getPropertyValue(
+          "--theme-accent"
+        )
+        .trim() ||
+      "#f97316";
+
+
+    selectedIndexes()
+      .forEach(
+        function (
+          index
+        ) {
+
+          const bounds =
+            selectionCommandBounds(
+              state.commands[
+                index
+              ]
+            );
+
+
+          if (
+            bounds
+          ) {
+
+            drawSelectionBox(
+              bounds,
+              accent,
+              false
+            );
+
+          }
+
+        }
+      );
+
+
+    if (
+      state.selectedIndices.size >
+      1
+    ) {
+
+      const group =
+        selectionGroupBounds();
+
+
+      if (
+        group
+      ) {
+
+        drawSelectionBox(
+          group,
+          accent,
+          true
+        );
+
+      }
+
+    }
+
+
+    if (
+      state.selectionMarquee
+    ) {
+
+      const area =
+        selectionRect(
+          state.selectionMarquee.start,
+          state.selectionMarquee.end
+        );
+
+
+      ctx.save();
+
+
+      ctx.globalCompositeOperation =
+        "source-over";
+
+
+      ctx.fillStyle =
+        accent;
+
+
+      ctx.strokeStyle =
+        accent;
+
+
+      ctx.globalAlpha =
+        .11;
+
+
+      ctx.fillRect(
+
+        area.minX,
+
+        area.minY,
+
+        area.maxX -
+        area.minX,
+
+        area.maxY -
+        area.minY
+
+      );
+
+
+      ctx.globalAlpha =
+        .95;
+
+
+      ctx.lineWidth =
+        1.3 /
+        state.camera.zoom;
+
+
+      ctx.setLineDash([
+        6 /
+          state.camera.zoom,
+
+        4 /
+          state.camera.zoom
+      ]);
+
+
+      ctx.strokeRect(
+
+        area.minX,
+
+        area.minY,
+
+        area.maxX -
+        area.minX,
+
+        area.maxY -
+        area.minY
+
+      );
+
+
+      ctx.restore();
+
+    }
+
+  }
+
+
+  function copyBoardSelection() {
+
+    const copied =
+      selectedIndexes()
+        .map(
+          function (
+            index
+          ) {
+
+            return (
+              state.commands[
+                index
+              ]
+            );
+
+          }
+        );
+
+
+    if (
+      copied.length ===
+      0
+    ) {
+
+      return;
+
+    }
+
+
+    state.selectionClipboard =
+      cloneBoardCommands(
+        copied
+      );
+
+
+    try {
+
+      localStorage.setItem(
+        "cortex_whiteboard_clipboard_v2",
+        JSON.stringify(
+          state.selectionClipboard
+        )
+      );
+
+    }
+    catch (
+      error
+    ) {}
+
+
+    flashSelectionToolbar(
+      "Copiado"
+    );
+
+  }
+
+
+  function loadBoardClipboard() {
+
+    if (
+      state.selectionClipboard.length >
+      0
+    ) {
+
+      return (
+        state.selectionClipboard
+      );
+
+    }
+
+
+    try {
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem(
+            "cortex_whiteboard_clipboard_v2"
+          ) ||
+          "[]"
+        );
+
+
+      if (
+        Array.isArray(
+          saved
+        )
+      ) {
+
+        state.selectionClipboard =
+          saved;
+
+      }
+
+    }
+    catch (
+      error
+    ) {}
+
+
+    return (
+      state.selectionClipboard
+    );
+
+  }
+
+
+  function pasteBoardSelection() {
+
+    const clipboard =
+      loadBoardClipboard();
+
+
+    if (
+      clipboard.length ===
+      0
+    ) {
+
+      return;
+
+    }
+
+
+    saveUndoSnapshot();
+
+
+    const offset =
+      28 /
+      Math.max(
+        .3,
+        state.camera.zoom
+      );
+
+
+    const firstIndex =
+      state.commands.length;
+
+
+    clipboard.forEach(
+      function (
+        command
+      ) {
+
+        state.commands.push(
+          moveCommandForSelection(
+            command,
+            offset,
+            offset
+          )
+        );
+
+      }
+    );
+
+
+    state.selectedIndices
+      .clear();
+
+
+    for (
+      let index =
+        firstIndex;
+
+      index <
+        state.commands.length;
+
+      index++
+    ) {
+
+      state.selectedIndices
+        .add(
+          index
+        );
+
+    }
+
+
+    state.selectionClipboard =
+      clipboard.map(
+        function (
+          command
+        ) {
+
+          return (
+            moveCommandForSelection(
+              command,
+              offset,
+              offset
+            )
+          );
+
+        }
+      );
+
+
+    try {
+
+      localStorage.setItem(
+        "cortex_whiteboard_clipboard_v2",
+        JSON.stringify(
+          state.selectionClipboard
+        )
+      );
+
+    }
+    catch (
+      error
+    ) {}
+
+
+    queueSave();
+
+    updateSelectionToolbar();
+
+    render();
+
+  }
+
+
+  function duplicateBoardSelection() {
+
+    copyBoardSelection();
+
+    pasteBoardSelection();
+
+  }
+
+
+  function deleteBoardSelection() {
+
+    const indexes =
+      selectedIndexes();
+
+
+    if (
+      indexes.length ===
+      0
+    ) {
+
+      return;
+
+    }
+
+
+    saveUndoSnapshot();
+
+
+    indexes
+      .sort(
+        function (
+          a,
+          b
+        ) {
+
+          return b - a;
+
+        }
+      )
+      .forEach(
+        function (
+          index
+        ) {
+
+          state.commands.splice(
+            index,
+            1
+          );
+
+        }
+      );
+
+
+    clearBoardSelection();
+
+    queueSave();
+
+    render();
+
+  }
+
+
+  function ensureSelectionToolbar() {
+
+    if (
+      $("selectionActionBar")
+    ) {
+
+      return;
+
+    }
+
+
+    const bar =
+      document.createElement(
+        "div"
+      );
+
+
+    bar.id =
+      "selectionActionBar";
+
+
+    bar.className =
+      "selection-action-bar hidden";
+
+
+    bar.innerHTML = `
+      <span
+        id="selectionCount"
+        class="selection-count"
+      >
+        0 selecionados
+      </span>
+
+      <span class="selection-bar-divider"></span>
+
+      <button
+        type="button"
+        data-selection-action="all"
+        title="Selecionar todos - Ctrl+A"
+      >
+        Todos
+      </button>
+
+      <button
+        type="button"
+        data-selection-action="copy"
+        title="Copiar - Ctrl+C"
+      >
+        Copiar
+      </button>
+
+      <button
+        type="button"
+        data-selection-action="paste"
+        title="Colar - Ctrl+V"
+      >
+        Colar
+      </button>
+
+      <button
+        type="button"
+        data-selection-action="duplicate"
+      >
+        Duplicar
+      </button>
+
+      <button
+        type="button"
+        class="selection-delete"
+        data-selection-action="delete"
+      >
+        Apagar
+      </button>
+    `;
+
+
+    stage.appendChild(
+      bar
+    );
+
+
+    bar.addEventListener(
+      "pointerdown",
+      function (
+        event
+      ) {
+
+        event.stopPropagation();
+
+      }
+    );
+
+
+    bar.addEventListener(
+      "click",
+      function (
+        event
+      ) {
+
+        const button =
+          event.target.closest(
+            "[data-selection-action]"
+          );
+
+
+        if (!button) {
+          return;
+        }
+
+
+        const action =
+          button.dataset
+            .selectionAction;
+
+
+        if (
+          action ===
+          "all"
+        ) {
+
+          selectAllBoardItems();
+
+        }
+
+
+        if (
+          action ===
+          "copy"
+        ) {
+
+          copyBoardSelection();
+
+        }
+
+
+        if (
+          action ===
+          "paste"
+        ) {
+
+          pasteBoardSelection();
+
+        }
+
+
+        if (
+          action ===
+          "duplicate"
+        ) {
+
+          duplicateBoardSelection();
+
+        }
+
+
+        if (
+          action ===
+          "delete"
+        ) {
+
+          deleteBoardSelection();
+
+        }
+
+      }
+    );
+
+  }
+
+
+  function updateSelectionToolbar() {
+
+    const bar =
+      $("selectionActionBar");
+
+
+    if (!bar) {
+      return;
+    }
+
+
+    const count =
+      state.selectedIndices.size;
+
+
+    bar.classList.toggle(
+      "hidden",
+      state.tool !==
+        "select"
+    );
+
+
+    const countElement =
+      $("selectionCount");
+
+
+    if (
+      countElement
+    ) {
+
+      countElement.textContent =
+        count +
+        (
+          count === 1
+            ? " selecionado"
+            : " selecionados"
+        );
+
+    }
+
+
+    const actions =
+      bar.querySelectorAll(
+        "[data-selection-action]"
+      );
+
+
+    actions.forEach(
+      function (
+        button
+      ) {
+
+        const action =
+          button.dataset
+            .selectionAction;
+
+
+        if (
+          action ===
+            "all" ||
+          action ===
+            "paste"
+        ) {
+
+          button.disabled =
+            false;
+
+          return;
+
+        }
+
+
+        button.disabled =
+          count ===
+          0;
+
+      }
+    );
+
+  }
+
+
+  function flashSelectionToolbar(
+    message
+  ) {
+
+    const count =
+      $("selectionCount");
+
+
+    if (!count) {
+      return;
+    }
+
+
+    count.textContent =
+      message;
+
+
+    window.setTimeout(
+      updateSelectionToolbar,
+      650
+    );
+
+  }
+
+
   function pointerDown(
     event
   ) {
+
+    /* CORTEX CLOSE POPOVER ON CANVAS V7 */
+
+    hideThicknessPopover();
+
+
+    /* CORTEX TOUCH DOWN V4 */
+
+    if (
+      event.pointerType ===
+      "touch"
+    ) {
+
+      registerTouchPointer(
+        event
+      );
+
+
+      if (
+        state.touchPointers.size >=
+        2
+      ) {
+
+        event.preventDefault();
+
+
+        try {
+
+          canvas.setPointerCapture(
+            event.pointerId
+          );
+
+        }
+        catch (
+          error
+        ) {}
+
+
+        if (
+          !state.touchGesture
+        ) {
+
+          beginTouchGesture();
+
+        }
+
+
+        return;
+
+      }
+
+    }
+
+
+    /* CORTEX MULTI DOWN V8_1 */
+
+    if (
+      state.tool ===
+        "select" &&
+      event.button ===
+        0 &&
+      !state.touchGesture
+    ) {
+
+      hideThicknessPopover();
+
+      event.preventDefault();
+
+
+      beginBoardSelection(
+        event
+      );
+
+
+      return;
+
+    }
+
 
     const wantsPan =
       state.tool ===
       "hand" ||
       event.button ===
       1 ||
+      event.button ===
+      2 ||
       (
         state.spacePressed &&
         event.button ===
@@ -2485,6 +6530,26 @@
       event.preventDefault();
 
       beginPan(
+        event
+      );
+
+      return;
+
+    }
+
+
+    /* CORTEX SELECT POINTER DOWN V5 */
+
+    if (
+      state.tool ===
+      "select" &&
+      event.button ===
+      0
+    ) {
+
+      event.preventDefault();
+
+      beginSelection(
         event
       );
 
@@ -2611,7 +6676,19 @@
           state.color,
 
         size:
-          state.size
+          state.size,
+
+        smoothing:
+          smoothingTools.has(
+            state.tool
+          )
+            ? Number(
+                state.toolSmoothing[
+                  state.tool
+                ] ||
+                0
+              )
+            : 0
 
       };
 
@@ -2651,6 +6728,91 @@
   function pointerMove(
     event
   ) {
+
+    /* CORTEX TOUCH MOVE V4 */
+
+    if (
+      event.pointerType ===
+      "touch" &&
+      state.touchPointers.has(
+        event.pointerId
+      )
+    ) {
+
+      registerTouchPointer(
+        event
+      );
+
+
+      if (
+        state.touchGesture ||
+        state.touchPointers.size >=
+        2
+      ) {
+
+        event.preventDefault();
+
+
+        if (
+          !state.touchGesture
+        ) {
+
+          beginTouchGesture();
+
+        }
+
+
+        updateTouchGesture();
+
+        return;
+
+      }
+
+    }
+
+
+    /* CORTEX SELECT POINTER MOVE V5 */
+
+    if (
+      state.tool ===
+      "select" &&
+      state.selectionDragging
+    ) {
+
+      event.preventDefault();
+
+      moveSelection(
+        event
+      );
+
+      return;
+
+    }
+
+
+    /* CORTEX MULTI MOVE V8_1 */
+
+    if (
+      state.tool ===
+        "select" &&
+      (
+        state.selectionDraggingGroup ||
+        state.selectionMarquee
+      )
+    ) {
+
+      event.preventDefault();
+
+
+      moveBoardSelection(
+        event
+      );
+
+
+      return;
+
+    }
+
 
     if (
       state.panning
@@ -2742,6 +6904,87 @@
   function pointerUp(
     event
   ) {
+
+    /* CORTEX TOUCH UP V4 */
+
+    if (
+      event.pointerType ===
+      "touch"
+    ) {
+
+      const wasGesture =
+        Boolean(
+          state.touchGesture
+        );
+
+
+      state.touchPointers.delete(
+        event.pointerId
+      );
+
+
+      if (
+        wasGesture
+      ) {
+
+        event.preventDefault();
+
+
+        if (
+          state.touchPointers.size <
+          2
+        ) {
+
+          finishTouchGesture();
+
+        }
+
+
+        return;
+
+      }
+
+    }
+
+
+    /* CORTEX SELECT POINTER UP V5 */
+
+    if (
+      state.tool ===
+      "select" &&
+      state.selectionDragging
+    ) {
+
+      event.preventDefault();
+
+      finishSelection();
+
+      return;
+
+    }
+
+
+    /* CORTEX MULTI UP V8_1 */
+
+    if (
+      state.tool ===
+        "select" &&
+      (
+        state.selectionDraggingGroup ||
+        state.selectionMarquee
+      )
+    ) {
+
+      event.preventDefault();
+
+
+      finishBoardSelection();
+
+
+      return;
+
+    }
+
 
     if (
       state.panning
@@ -2855,6 +7098,38 @@
   function undo() {
 
     if (
+      state.undoSnapshots.length >
+      0
+    ) {
+
+      state.redoSnapshots.push(
+        cloneBoardCommands(
+          state.commands
+        )
+      );
+
+
+      state.commands =
+        state.undoSnapshots.pop();
+
+
+      clearBoardSelection();
+
+      render();
+
+      queueSave();
+
+      return;
+
+    }
+
+
+    /*
+     * Compatibilidade com desenhos antigos
+     * realizados antes da V8.
+     */
+
+    if (
       state.commands.length ===
       0
     ) {
@@ -2879,6 +7154,33 @@
   function redo() {
 
     if (
+      state.redoSnapshots.length >
+      0
+    ) {
+
+      state.undoSnapshots.push(
+        cloneBoardCommands(
+          state.commands
+        )
+      );
+
+
+      state.commands =
+        state.redoSnapshots.pop();
+
+
+      clearBoardSelection();
+
+      render();
+
+      queueSave();
+
+      return;
+
+    }
+
+
+    if (
       state.redo.length ===
       0
     ) {
@@ -2898,7 +7200,6 @@
     queueSave();
 
   }
-
 
   function clearBoard() {
 
@@ -3763,6 +8064,20 @@
     );
 
 
+    /* CORTEX RIGHT CLICK PAN V5 */
+
+    canvas.addEventListener(
+      "contextmenu",
+      function (
+        event
+      ) {
+
+        event.preventDefault();
+
+      }
+    );
+
+
     stage.addEventListener(
       "wheel",
       wheelBoard,
@@ -3849,7 +8164,176 @@
         }
 
 
+        /* CORTEX SELECTION KEYBOARD V5 */
+
+        if (
+          state.tool ===
+          "select" &&
+          (
+            event.key ===
+              "Delete" ||
+            event.key ===
+              "Backspace"
+          )
+        ) {
+
+          event.preventDefault();
+
+          deleteSelection();
+
+          return;
+
+        }
+
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
+
+          state.selectedIndex =
+            null;
+
+
+          state.selectionDragging =
+            false;
+
+
+          state.selectionOriginal =
+            null;
+
+
+          render();
+
+          return;
+
+        }
+
+
+        /* CORTEX MULTI KEYBOARD V8_1 */
+
+        if (
+          state.tool ===
+          "select"
+        ) {
+
+          const selectionKey =
+            event.key
+              .toLowerCase();
+
+
+          if (
+            (
+              event.ctrlKey ||
+              event.metaKey
+            ) &&
+            selectionKey ===
+              "a"
+          ) {
+
+            event.preventDefault();
+
+            selectAllBoardItems();
+
+            return;
+
+          }
+
+
+          if (
+            (
+              event.ctrlKey ||
+              event.metaKey
+            ) &&
+            selectionKey ===
+              "c"
+          ) {
+
+            event.preventDefault();
+
+            copyBoardSelection();
+
+            return;
+
+          }
+
+
+          if (
+            (
+              event.ctrlKey ||
+              event.metaKey
+            ) &&
+            selectionKey ===
+              "v"
+          ) {
+
+            event.preventDefault();
+
+            pasteBoardSelection();
+
+            return;
+
+          }
+
+
+          if (
+            (
+              event.ctrlKey ||
+              event.metaKey
+            ) &&
+            selectionKey ===
+              "x"
+          ) {
+
+            event.preventDefault();
+
+            copyBoardSelection();
+
+            deleteBoardSelection();
+
+            return;
+
+          }
+
+
+          if (
+            event.key ===
+              "Delete" ||
+            event.key ===
+              "Backspace"
+          ) {
+
+            event.preventDefault();
+
+            deleteBoardSelection();
+
+            return;
+
+          }
+
+
+          if (
+            event.key ===
+            "Escape"
+          ) {
+
+            event.preventDefault();
+
+            clearBoardSelection();
+
+            render();
+
+            return;
+
+          }
+
+        }
+
+
         const shortcuts = {
+
+          s:
+            "select",
 
           v:
             "hand",
@@ -4004,9 +8488,36 @@
 
     loadSaved();
 
+    loadToolSizes();
+
+    loadToolSmoothing();
+
+
+    if (
+      thicknessTools.has(
+        state.tool
+      )
+    ) {
+
+      state.size =
+        state.toolSizes[
+          state.tool
+        ] ||
+        state.size;
+
+    }
+
+
+    setupThicknessPopover();
+
     syncInterface();
 
     bindEvents();
+
+    ensureSelectionToolbar();
+
+    updateSelectionToolbar();
+
 
     render();
 

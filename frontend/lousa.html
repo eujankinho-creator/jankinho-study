@@ -19,10 +19,10 @@
 
   <link
     rel="stylesheet"
-    href="/css/ui-enhancements.css"
+    href="/css/ui-enhancements.css?v=20260930-global4"
   >
 
-  <script src="/js/ui-enhancements.js"></script>
+  <script src="/js/ui-enhancements.js?v=20260930-global4"></script>
 
   <link
     rel="stylesheet"
@@ -33,28 +33,39 @@
 
   <link
     rel="stylesheet"
-    href="/css/cortex-brand.css"
+    href="/css/cortex-brand.css?v=20260930-global4"
   >
 
   <link
     rel="stylesheet"
-    href="/css/sidebar-standard.css"
+    href="/css/sidebar-standard.css?v=20260930-global4"
   >
 
   <link
     rel="stylesheet"
-    href="/css/lousa.css"
+    href="/css/lousa.css?v=20260930-global4"
   >
 
   <link
     rel="stylesheet"
-    href="/css/theme-final.css"
+    href="/css/theme-final.css?v=20260930-pet4"
   >
 
   <script
-    src="/js/sidebar-standard.js?v=20260930-lousa"
+    src="/js/sidebar-standard.js?v=20260930-global4"
     defer
   ></script>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/favicon.svg?v=cortex-v1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#090909"
+  >
 
 </head>
 
@@ -197,127 +208,46 @@
 
         <!-- FERRAMENTAS -->
 
-        <div class="whiteboard-toolbar">
+
+        <div
+          class="whiteboard-toolbar professional-toolbar"
+        >
 
 
-          <div class="toolbar-group tools-group">
+          <!-- NAVEGACAO -->
 
-            <span class="toolbar-label">
-              Ferramentas
-            </span>
-
+          <div
+            class="toolbar-cluster tools-group"
+          >
 
             <div class="toolbar-buttons">
 
               <button
-                class="tool-button active"
-                data-tool="pen"
+                class="tool-button compact-tool"
+                data-tool="select"
                 type="button"
-                title="Caneta (B)"
+                title="Selecionar e mover (S)"
+                aria-label="Selecionar"
               >
-                <span class="tool-symbol">
-                  &#9998;
-                </span>
-
-                Caneta
+                <svg viewBox="0 0 24 24">
+                  <path d="m5 3 14 8-6 2-3 6Z"/>
+                </svg>
               </button>
 
 
               <button
-                class="tool-button"
-                data-tool="highlighter"
+                class="tool-button compact-tool"
+                data-tool="hand"
                 type="button"
-                title="Marca-texto (H)"
+                title="Mover lousa (V / Espaco / Botao direito)"
+                aria-label="Mover lousa"
               >
-                <span class="tool-symbol">
-                  &#9644;
-                </span>
-
-                Marca-texto
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="eraser"
-                type="button"
-                title="Borracha (E)"
-              >
-                <span class="tool-symbol">
-                  &#9671;
-                </span>
-
-                Borracha
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="line"
-                type="button"
-                title="Linha (L)"
-              >
-                <span class="tool-symbol">
-                  /
-                </span>
-
-                Linha
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="arrow"
-                type="button"
-                title="Seta (A)"
-              >
-                <span class="tool-symbol">
-                  &rarr;
-                </span>
-
-                Seta
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="rect"
-                type="button"
-                title="Retangulo (R)"
-              >
-                <span class="tool-symbol">
-                  &#9633;
-                </span>
-
-                Ret&acirc;ngulo
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="circle"
-                type="button"
-                title="Circulo (C)"
-              >
-                <span class="tool-symbol">
-                  &#9711;
-                </span>
-
-                C&iacute;rculo
-              </button>
-
-
-              <button
-                class="tool-button"
-                data-tool="text"
-                type="button"
-                title="Texto (T)"
-              >
-                <span class="tool-symbol">
-                  T
-                </span>
-
-                Texto
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 11V7a1.5 1.5 0 0 1 3 0v3"/>
+                  <path d="M10 10V5.5a1.5 1.5 0 0 1 3 0V10"/>
+                  <path d="M13 10V6.5a1.5 1.5 0 0 1 3 0V11"/>
+                  <path d="M16 11V9a1.5 1.5 0 0 1 3 0v6c0 4-2.5 6-6 6h-1c-2.6 0-4-1.2-5.5-3L4 14.5a1.6 1.6 0 0 1 2.5-2Z"/>
+                </svg>
               </button>
 
             </div>
@@ -325,14 +255,186 @@
           </div>
 
 
-          <!-- COR -->
+          <span class="toolbar-divider"></span>
 
-          <div class="toolbar-group color-group">
 
-            <span class="toolbar-label">
-              Cor
+          <!-- DESENHO -->
+
+          <div class="toolbar-cluster">
+
+            <div class="toolbar-buttons">
+
+              <button
+                class="tool-button compact-tool active"
+                data-tool="pen"
+                type="button"
+                title="Caneta (B)"
+                aria-label="Caneta"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="m4 20 4.2-1 10.5-10.5a2.1 2.1 0 0 0-3-3L5.2 16Z"/>
+                  <path d="m14.5 6.5 3 3"/>
+                </svg>
+              </button>
+
+
+              <button
+                class="tool-button compact-tool"
+                data-tool="highlighter"
+                type="button"
+                title="Marca-texto (H)"
+                aria-label="Marca-texto"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="m7 15 7-7 3 3-7 7H7Z"/>
+                  <path d="m4 20 5-2"/>
+                  <path d="M14 8 16 6l3 3-2 2"/>
+                </svg>
+              </button>
+
+
+              <button
+                class="tool-button compact-tool"
+                data-tool="eraser"
+                type="button"
+                title="Borracha (E)"
+                aria-label="Borracha"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="m7 18-3-3 9-10a2 2 0 0 1 3 0l3 3a2 2 0 0 1 0 3l-7 7Z"/>
+                  <path d="M7 18h12"/>
+                  <path d="m10 8 6 6"/>
+                </svg>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <span class="toolbar-divider"></span>
+
+
+          <!-- FORMAS -->
+
+          <div class="toolbar-cluster">
+
+            <div class="toolbar-buttons">
+
+              <button
+                class="tool-button compact-tool"
+                data-tool="line"
+                type="button"
+                title="Linha (L)"
+                aria-label="Linha"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 19 19 5"/>
+                </svg>
+              </button>
+
+
+              <button
+                class="tool-button compact-tool"
+                data-tool="arrow"
+                type="button"
+                title="Seta (A)"
+                aria-label="Seta"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 19 19 5"/>
+                  <path d="M12 5h7v7"/>
+                </svg>
+              </button>
+
+
+              <button
+                class="tool-button compact-tool"
+                data-tool="rect"
+                type="button"
+                title="Retangulo (R)"
+                aria-label="Retangulo"
+              >
+                <svg viewBox="0 0 24 24">
+                  <rect
+                    x="5"
+                    y="5"
+                    width="14"
+                    height="14"
+                    rx="2"
+                  />
+                </svg>
+              </button>
+
+
+              <button
+                class="tool-button compact-tool"
+                data-tool="circle"
+                type="button"
+                title="Circulo (C)"
+                aria-label="Circulo"
+              >
+                <svg viewBox="0 0 24 24">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="7"
+                  />
+                </svg>
+              </button>
+
+
+              <button
+                class="tool-button compact-tool"
+                data-tool="text"
+                type="button"
+                title="Texto (T)"
+                aria-label="Texto"
+              >
+                <span class="toolbar-text-symbol">
+                  T
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <span class="toolbar-divider"></span>
+
+
+          <!-- CONTEXTO -->
+
+          <div
+            id="strokeControls"
+            class="toolbar-context-panel"
+          >
+
+            <span class="context-caption">
+              Espessura
             </span>
 
+            <input
+              id="brushSize"
+              type="range"
+              min="1"
+              max="20"
+              value="4"
+              title="Espessura"
+            >
+
+            <strong id="brushSizeValue">
+              4
+            </strong>
+
+          </div>
+
+
+          <div
+            id="colorControls"
+            class="toolbar-context-panel color-context"
+          >
 
             <div class="color-tools">
 
@@ -377,6 +479,15 @@
               ></button>
 
               <button
+                class="color-chip color-chip-white"
+                data-color="#ffffff"
+                style="--chip:#ffffff"
+                type="button"
+                aria-label="Branco"
+                title="Branco"
+              ></button>
+
+              <button
                 class="color-chip"
                 data-color="#111827"
                 style="--chip:#111827"
@@ -388,13 +499,11 @@
                 class="custom-color"
                 title="Cor personalizada"
               >
-
                 <input
                   id="colorPicker"
                   type="color"
                   value="#f97316"
                 >
-
               </label>
 
             </div>
@@ -402,48 +511,44 @@
           </div>
 
 
-          <!-- ESPESSURA -->
+          <div
+            id="shapeControls"
+            class="toolbar-context-panel hidden"
+          >
 
-          <div class="toolbar-group size-group">
-
-            <span class="toolbar-label">
-              Espessura
-            </span>
-
-            <div class="size-control">
-
+            <label
+              class="fill-toggle compact-fill"
+            >
               <input
-                id="brushSize"
-                type="range"
-                min="1"
-                max="20"
-                value="4"
+                id="fillShapes"
+                type="checkbox"
               >
 
-              <strong id="brushSizeValue">
-                4
-              </strong>
-
-            </div>
+              <span>
+                Preencher
+              </span>
+            </label>
 
           </div>
 
 
-          <!-- FUNDO -->
+          <div class="toolbar-spacer"></div>
 
-          <div class="toolbar-group">
 
-            <span class="toolbar-label">
-              Fundo
-            </span>
+          <!-- VISUALIZACAO -->
+
+          <div
+            class="toolbar-cluster view-cluster"
+          >
 
             <select
               id="backgroundSelect"
-              class="board-select"
+              class="board-select compact-select"
+              title="Fundo da lousa"
+              aria-label="Fundo da lousa"
             >
-
               <option value="grid">
-                Quadriculado
+                Grade
               </option>
 
               <option value="blank">
@@ -451,7 +556,7 @@
               </option>
 
               <option value="dots">
-                Pontilhado
+                Pontos
               </option>
 
               <option value="lines">
@@ -461,68 +566,129 @@
               <option value="dark">
                 Escuro
               </option>
-
             </select>
 
           </div>
 
 
-          <div class="toolbar-group">
+          <div
+            id="zoomToolbar"
+            class="toolbar-cluster zoom-toolbar"
+          >
 
-            <span class="toolbar-label">
-              Formas
-            </span>
+            <div class="toolbar-buttons">
 
-            <label class="fill-toggle">
-
-              <input
-                id="fillShapes"
-                type="checkbox"
+              <button
+                id="zoomOutBoard"
+                class="tool-button compact-tool"
+                type="button"
+                title="Diminuir zoom"
               >
+                &minus;
+              </button>
 
-              <span>
-                Preencher
-              </span>
+              <button
+                id="zoomPercentBoard"
+                class="tool-button zoom-percent compact-tool percent-tool"
+                type="button"
+                title="Voltar para 100%"
+              >
+                100%
+              </button>
 
-            </label>
+              <button
+                id="zoomInBoard"
+                class="tool-button compact-tool"
+                type="button"
+                title="Aumentar zoom"
+              >
+                +
+              </button>
+
+
+              <button
+                id="fitBoard"
+                class="tool-button compact-tool"
+                type="button"
+                title="Enquadrar conteudo"
+                aria-label="Enquadrar conteudo"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 4H4v4"/>
+                  <path d="M16 4h4v4"/>
+                  <path d="M8 20H4v-4"/>
+                  <path d="M16 20h4v-4"/>
+                </svg>
+              </button>
+
+
+              <button
+                id="originBoard"
+                class="tool-button compact-tool"
+                type="button"
+                title="Voltar para origem"
+                aria-label="Origem"
+              >
+                <svg viewBox="0 0 24 24">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="7"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="2"
+                  />
+                </svg>
+              </button>
+
+            </div>
 
           </div>
 
 
+          <span class="toolbar-divider"></span>
+
+
           <!-- HISTORICO -->
 
-          <div class="toolbar-group toolbar-history">
+          <div
+            class="toolbar-cluster toolbar-history"
+          >
 
-            <span class="toolbar-label">
-              Hist&oacute;rico
-            </span>
-
-            <div class="toolbar-buttons compact">
+            <div class="toolbar-buttons">
 
               <button
                 id="undoBoard"
-                class="tool-button"
+                class="tool-button compact-tool"
                 type="button"
                 title="Desfazer Ctrl+Z"
               >
-                &larr; Desfazer
+                &#8630;
               </button>
 
               <button
                 id="redoBoard"
-                class="tool-button"
+                class="tool-button compact-tool"
                 type="button"
                 title="Refazer Ctrl+Y"
               >
-                Refazer &rarr;
+                &#8631;
               </button>
 
               <button
                 id="clearBoard"
-                class="tool-button danger"
+                class="tool-button compact-tool danger"
                 type="button"
+                title="Limpar lousa"
+                aria-label="Limpar lousa"
               >
-                Limpar
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 7h14"/>
+                  <path d="M9 7V5h6v2"/>
+                  <path d="m8 10 .5 8h7l.5-8"/>
+                </svg>
               </button>
 
             </div>
@@ -618,8 +784,8 @@
   </div>
 
 
-  <script src="/js/lousa.js"></script>
-  <script src="/js/cortex-brand.js"></script>
+  <script src="/js/lousa.js?v=20260930-global4"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 
 </body>
 </html>

@@ -3,6 +3,68 @@
   "use strict";
 
 
+  /* =======================================================
+     MANTER PAGINAS INTERNAS DENTRO DO /APP
+  ======================================================= */
+
+  function ensureCortexShell() {
+
+    if (
+      window.parent !==
+      window
+    ) {
+
+      return false;
+
+    }
+
+
+    const path =
+      window.location.pathname ||
+      "/";
+
+
+    if (
+      path === "/app" ||
+      path === "/app.html" ||
+      path === "/login" ||
+      path === "/login.html" ||
+      path === "/cadastro" ||
+      path === "/cadastro.html"
+    ) {
+
+      return false;
+
+    }
+
+
+    const view =
+      path +
+      window.location.search;
+
+
+    window.location.replace(
+      "/app?view=" +
+      encodeURIComponent(
+        view
+      )
+    );
+
+
+    return true;
+
+  }
+
+
+  if (
+    ensureCortexShell()
+  ) {
+
+    return;
+
+  }
+
+
   function icon(
     paths
   ) {
@@ -27,6 +89,14 @@
         '<path d="M9.5 19v-5h5v5"/>'
       ),
 
+    simulado:
+      icon(
+        '<rect x="5" y="3.5" width="14" height="17" rx="2.5"/>' +
+        '<path d="M9 8h6"/>' +
+        '<path d="m9 12 1.7 1.7L15 9.5"/>' +
+        '<path d="M9 17h6"/>'
+      ),
+
     questoes:
       icon(
         '<rect x="5" y="4" width="14" height="16" rx="3"/>' +
@@ -48,6 +118,7 @@
         '<path d="M12 17v4"/>' +
         '<path d="m7 13 3-3 2 2 5-5"/>'
       ),
+
     farmacos:
       icon(
         '<path d="M8.1 4.6a5 5 0 0 1 7.1 0l4.2 4.2a5 5 0 0 1-7.1 7.1l-4.2-4.2a5 5 0 0 1 0-7.1Z"/>' +
@@ -63,6 +134,7 @@
         '<path d="M8 13h3"/>' +
         '<path d="M8 16h6"/>'
       ),
+
     casos:
       icon(
         '<path d="M8 5h8"/>' +
@@ -121,7 +193,7 @@
       icon(
         '<circle cx="12" cy="12" r="3"/>' +
         '<path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/>'
-      ),
+      )
 
   };
 
@@ -129,6 +201,7 @@
   const sections = [
 
     {
+
       title:
         "Estudo",
 
@@ -137,83 +210,94 @@
         {
           href: "/",
           key: "dashboard",
-          label: "Dashboard",
+          label: "Dashboard"
+        },
+
+        {
+          href: "/simulado",
+          key: "simulado",
+          label: "Simulado"
         },
 
         {
           href: "/questoes",
           key: "questoes",
-          label: "Questões",
+          label: "Quest\u00f5es"
         },
 
         {
           href: "/flashcards",
           key: "flashcards",
-          label: "Flashcards",
+          label: "Flashcards"
         },
 
         {
           href: "/lousa",
           key: "lousa",
-          label: "Lousa",
+          label: "Lousa"
         },
 
         {
           href: "/farmacos",
           key: "farmacos",
-          label: "Farmacologia",
+          label: "Farmacologia"
         },
+
         {
           href: "/sigaa",
           key: "sigaa",
-          label: "Acadêmico",
+          label: "Acad\u00eamico"
         },
 
         {
           href: "/casos",
           key: "casos",
-          label: "Casos Clínicos",
+          label: "Casos Cl\u00ednicos"
         },
 
         {
           href: "/laboratorio",
           key: "laboratorio",
-          label: "Laboratório",
+          label: "Laborat\u00f3rio"
         },
 
         {
           href: "/evolucao",
           key: "evolucao",
-          label: "Evolução",
-        },
+          label: "Evolu\u00e7\u00e3o"
+        }
 
-      ],
+      ]
 
     },
 
+
     {
+
       title:
-        "Análise",
+        "An\u00e1lise",
 
       items: [
 
         {
           href: "/desempenho",
           key: "desempenho",
-          label: "Desempenho",
+          label: "Desempenho"
         },
 
         {
           href: "/ranking",
           key: "ranking",
-          label: "Ranking",
-        },
+          label: "Ranking"
+        }
 
-      ],
+      ]
 
     },
 
+
     {
+
       title:
         "Pessoal",
 
@@ -222,24 +306,24 @@
         {
           href: "/financas",
           key: "financas",
-          label: "Finanças",
+          label: "Finan\u00e7as"
         },
 
         {
           href: "/musica",
           key: "musica",
-          label: "Música",
+          label: "M\u00fasica"
         },
 
         {
           href: "/configuracoes",
           key: "configuracoes",
-          label: "Configurações",
-        },
+          label: "Configura\u00e7\u00f5es"
+        }
 
-      ],
+      ]
 
-    },
+    }
 
   ];
 
@@ -340,12 +424,11 @@
             ? ' active'
             : ''
         ) +
-        '" ' +
-        'data-cortex-nav="' +
-        item.key +
         '">' +
 
-        icons[item.key] +
+        icons[
+          item.key
+        ] +
 
         '<span class="cortex-nav-label">' +
           item.label +
@@ -359,48 +442,41 @@
 
   function renderMenu() {
 
-    return sections.map(
-      function (
-        section
-      ) {
+    return sections
+      .map(
+        function (
+          section
+        ) {
 
-        return (
-          '<div class="menu-group">' +
+          return (
+            '<div class="menu-group">' +
 
-            '<div class="menu-title">' +
-              section.title +
-            '</div>' +
+              '<div class="menu-title">' +
+                section.title +
+              '</div>' +
 
-            section.items
-              .map(
-                renderItem
-              )
-              .join("") +
+              section.items
+                .map(
+                  renderItem
+                )
+                .join("") +
 
-          '</div>'
-        );
+            '</div>'
+          );
 
-      }
-    ).join("");
+        }
+      )
+      .join("");
 
   }
 
 
-  function applyStandardSidebar() {
+  function applySidebar() {
 
     const menus =
       document.querySelectorAll(
         ".sidebar-menu"
       );
-
-
-    if (
-      !menus.length
-    ) {
-
-      return;
-
-    }
 
 
     const content =
@@ -415,14 +491,192 @@
         menu.innerHTML =
           content;
 
+      }
+    );
 
-        menu.setAttribute(
-          "data-cortex-standard-sidebar",
-          "true"
+  }
+
+
+  /* =======================================================
+     MOBILE - SOMENTE O HAMBURGER FIXO
+  ======================================================= */
+
+  function ensureMobileMenu() {
+
+    if (
+      document.getElementById(
+        "cortexMobileSidebarButton"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+
+    button.id =
+      "cortexMobileSidebarButton";
+
+
+    button.className =
+      "cortex-mobile-sidebar-button";
+
+
+    button.type =
+      "button";
+
+
+    button.setAttribute(
+      "aria-label",
+      "Abrir menu"
+    );
+
+
+    button.innerHTML =
+      '<svg viewBox="0 0 24 24">' +
+        '<path d="M5 7h14"/>' +
+        '<path d="M5 12h14"/>' +
+        '<path d="M5 17h14"/>' +
+      '</svg>';
+
+
+    document.body
+      .appendChild(
+        button
+      );
+
+
+    const overlay =
+      document.createElement(
+        "div"
+      );
+
+
+    overlay.id =
+      "cortexMobileSidebarOverlay";
+
+
+    overlay.className =
+      "cortex-mobile-sidebar-overlay";
+
+
+    overlay.innerHTML =
+      '<button ' +
+        'class="cortex-mobile-sidebar-backdrop" ' +
+        'type="button">' +
+      '</button>' +
+
+      '<aside class="cortex-mobile-sidebar-panel">' +
+
+        '<div class="cortex-mobile-sidebar-header">' +
+
+          '<div>' +
+            '<strong>Cortex</strong>' +
+            '<span>Study Platform</span>' +
+          '</div>' +
+
+          '<button ' +
+            'class="cortex-mobile-sidebar-close" ' +
+            'type="button">' +
+            '&times;' +
+          '</button>' +
+
+        '</div>' +
+
+        '<div class="sidebar-menu cortex-mobile-sidebar-menu">' +
+          renderMenu() +
+        '</div>' +
+
+      '</aside>';
+
+
+    document.body
+      .appendChild(
+        overlay
+      );
+
+
+    button.addEventListener(
+      "click",
+      function () {
+
+        overlay.classList.add(
+          "open"
         );
 
       }
     );
+
+
+    overlay
+      .querySelector(
+        ".cortex-mobile-sidebar-backdrop"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          overlay.classList.remove(
+            "open"
+          );
+
+        }
+      );
+
+
+    overlay
+      .querySelector(
+        ".cortex-mobile-sidebar-close"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          overlay.classList.remove(
+            "open"
+          );
+
+        }
+      );
+
+
+    overlay
+      .querySelectorAll(
+        ".menu-item"
+      )
+      .forEach(
+        function (
+          link
+        ) {
+
+          link.addEventListener(
+            "click",
+            function () {
+
+              overlay.classList.remove(
+                "open"
+              );
+
+            }
+          );
+
+        }
+      );
+
+  }
+
+
+  function init() {
+
+    applySidebar();
+
+    ensureMobileMenu();
 
   }
 
@@ -434,40 +688,18 @@
 
     document.addEventListener(
       "DOMContentLoaded",
-      applyStandardSidebar,
+      init,
       {
         once:
-          true,
+          true
       }
     );
 
   }
   else {
 
-    applyStandardSidebar();
+    init();
 
   }
-
-
-  /*
-   * Caso alguma pagina redesenhe o menu depois,
-   * reaplica o padrao uma vez.
-   */
-
-  window.addEventListener(
-    "load",
-    function () {
-
-      window.setTimeout(
-        applyStandardSidebar,
-        0
-      );
-
-    },
-    {
-      once:
-        true,
-    }
-  );
 
 })();

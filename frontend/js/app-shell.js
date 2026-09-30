@@ -215,6 +215,9 @@
         "connected"
       );
 
+
+      showPlayerBubble();
+
     }
     else {
 
@@ -225,6 +228,15 @@
       button.classList.remove(
         "connected"
       );
+
+
+      if (
+        !hasActiveTrack()
+      ) {
+
+        hidePlayerBubble();
+
+      }
 
     }
   }
@@ -874,20 +886,7 @@
       "global-player-open"
     );
 
-
-    const bubble =
-      document.getElementById(
-        "globalPlayerBubble"
-      );
-
-
-    if (bubble) {
-
-      bubble.classList.add(
-        "hidden"
-      );
-
-    }
+    showPlayerBubble();
   }
 
 
@@ -982,9 +981,31 @@
     }
 
 
+    /*
+     * Nunca permitir carregar o proprio shell
+     * dentro do iframe.
+     */
+    const pathOnly =
+      text
+        .split("?")[0]
+        .replace(
+          /\/+$/,
+          ""
+        );
+
+
+    if (
+      pathOnly === "/app" ||
+      pathOnly === "/app.html"
+    ) {
+
+      return null;
+
+    }
+
+
     return text;
   }
-
 
   function configureFrame() {
 
@@ -1002,16 +1023,40 @@
       );
 
 
+    /*
+     * Se a URL nao informou uma pagina,
+     * tenta recuperar a ultima pagina valida.
+     */
     if (!view) {
 
       try {
 
+        const saved =
+          localStorage.getItem(
+            "cortex_shell_last_view"
+          );
+
+
         view =
           validView(
-            localStorage.getItem(
-              "cortex_shell_last_view"
-            )
+            saved
           );
+
+
+        /*
+         * Remove estado antigo quebrado,
+         * especialmente /app dentro de /app.
+         */
+        if (
+          saved &&
+          !view
+        ) {
+
+          localStorage.removeItem(
+            "cortex_shell_last_view"
+          );
+
+        }
 
       }
       catch {}
@@ -1019,15 +1064,8 @@
     }
 
 
-    if (!view) {
-
-      view =
-        "/index.html";
-
-    }
-
-
     if (
+      !view ||
       view === "/"
     ) {
 
@@ -1045,8 +1083,10 @@
 
     if (
       spotify &&
-      view.includes(
-        "/musica"
+      (
+        view.includes(
+          "/musica"
+        )
       )
     ) {
 
@@ -1066,6 +1106,20 @@
     }
 
 
+    /*
+     * Segunda barreira contra shell recursivo.
+     */
+    if (
+      view === "/app" ||
+      view === "/app.html"
+    ) {
+
+      view =
+        "/index.html";
+
+    }
+
+
     frame.src =
       view;
 
@@ -1075,8 +1129,8 @@
       "",
       "/app"
     );
-  }
 
+  }
 
   frame.addEventListener(
     "load",
@@ -1096,6 +1150,29 @@
             .search;
 
 
+        /*
+         * Se por qualquer motivo /app entrar no iframe,
+         * recupera imediatamente o Dashboard.
+         */
+        if (
+          path === "/app" ||
+          path === "/app.html"
+        ) {
+
+          localStorage.removeItem(
+            "cortex_shell_last_view"
+          );
+
+
+          frame.src =
+            "/index.html";
+
+
+          return;
+
+        }
+
+
         if (
           path &&
           !path.includes(
@@ -1103,25 +1180,31 @@
           ) &&
           !path.includes(
             "cadastro"
-          ) &&
-          !path.includes(
-            "app.html"
           )
         ) {
 
           localStorage.setItem(
             "cortex_shell_last_view",
-            path + search
+            path +
+            search
           );
 
         }
 
       }
-      catch {}
+      catch (
+        error
+      ) {
+
+        console.error(
+          "Cortex frame:",
+          error
+        );
+
+      }
 
     }
   );
-
 
   $("globalSpotifyConnect")
     .addEventListener(
@@ -1323,10 +1406,11 @@
   function showPlayerBubble() {
 
     if (
-      !playerBubble ||
-      !hasActiveTrack()
+      !playerBubble
     ) {
+
       return;
+
     }
 
 
@@ -1337,6 +1421,7 @@
 
     playerBubble.classList.toggle(
       "paused",
+      !hasActiveTrack() ||
       Boolean(
         state.playback &&
         state.playback.paused
@@ -1344,7 +1429,6 @@
     );
 
   }
-
 
   function hidePlayerBubble() {
 
@@ -1362,13 +1446,6 @@
 
   function openFloatingPlayer() {
 
-    if (
-      !hasActiveTrack()
-    ) {
-      return;
-    }
-
-
     document.body.classList.add(
       "global-player-open"
     );
@@ -1377,7 +1454,6 @@
     hidePlayerBubble();
 
   }
-
 
   function closeFloatingPlayer() {
 
@@ -1436,8 +1512,24 @@
   );
 
 
+  /* CORTEX PLAYER ALWAYS VISIBLE */
+  showPlayerBubble();
+
+  /*
+   * Inicializa primeiro o shell.
+   */
   configureFrame();
 
+
+  /*
+   * O botao de musica sempre fica disponivel.
+   */
+  showPlayerBubble();
+
+
+  /*
+   * Depois inicia a conexao Spotify.
+   */
   loadSpotify();
 
 })();

@@ -1345,12 +1345,26 @@
       "click",
       async function () {
 
-        if (!state.player) {
-          return;
-        }
-
-
         try {
+
+          const shell =
+            shellPlayer();
+
+
+          if (shell) {
+
+            await shell
+              .togglePlay();
+
+            return;
+
+          }
+
+
+          if (!state.player) {
+            return;
+          }
+
 
           await state.player
             .togglePlay();
@@ -1374,9 +1388,27 @@
       "click",
       async function () {
 
+        const shell =
+          shellPlayer();
+
+
+        if (shell) {
+
+          await shell
+            .previous()
+            .catch(
+              function () {}
+            );
+
+          return;
+
+        }
+
+
         if (!state.player) {
           return;
         }
+
 
         await state.player
           .previousTrack()
@@ -1393,9 +1425,27 @@
       "click",
       async function () {
 
+        const shell =
+          shellPlayer();
+
+
+        if (shell) {
+
+          await shell
+            .next()
+            .catch(
+              function () {}
+            );
+
+          return;
+
+        }
+
+
         if (!state.player) {
           return;
         }
+
 
         await state.player
           .nextTrack()
@@ -1466,13 +1516,34 @@
           state.playback.duration;
 
 
-        await state.player
-          .seek(
-            position
-          )
-          .catch(
-            function () {}
-          );
+        const shell =
+          shellPlayer();
+
+
+        if (shell) {
+
+          await shell
+            .seek(
+              position
+            )
+            .catch(
+              function () {}
+            );
+
+        }
+        else if (
+          state.player
+        ) {
+
+          await state.player
+            .seek(
+              position
+            )
+            .catch(
+              function () {}
+            );
+
+        }
 
 
         state.dragging =
@@ -1499,7 +1570,23 @@
           "%";
 
 
-        if (
+        const shell =
+          shellPlayer();
+
+
+        if (shell) {
+
+          shell
+            .setVolume(
+              value /
+              100
+            )
+            .catch(
+              function () {}
+            );
+
+        }
+        else if (
           state.player
         ) {
 

@@ -996,3 +996,1459 @@
   }
 
 }
+
+/* CORTEX LOUSA PROFESSIONAL TOUCH V4 */
+
+
+/* =========================================================
+   LOUSA PREMIUM
+========================================================= */
+
+.whiteboard-shell {
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    22px;
+
+  box-shadow:
+    0 28px 90px
+    rgba(
+      0,
+      0,
+      0,
+      .28
+    );
+}
+
+
+.whiteboard-toolbar {
+  position:
+    relative;
+
+  z-index:
+    20;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-surface-strong)
+      94%,
+      transparent
+    );
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  scrollbar-width:
+    thin;
+}
+
+
+.board-stage {
+  position:
+    relative;
+
+  isolation:
+    isolate;
+
+  border-top:
+    1px solid
+    var(--theme-border);
+
+  border-bottom:
+    1px solid
+    var(--theme-border);
+}
+
+
+.tool-button {
+  transition:
+    transform .14s ease,
+    border-color .14s ease,
+    background .14s ease,
+    color .14s ease,
+    box-shadow .14s ease;
+}
+
+
+.tool-button:hover {
+  transform:
+    translateY(-1px);
+}
+
+
+.tool-button.active {
+  box-shadow:
+    inset 0 0 0 1px
+    var(--theme-accent-soft),
+    0 6px 18px
+    rgba(
+      0,
+      0,
+      0,
+      .12
+    );
+}
+
+
+.board-stage.is-touch-navigating
+#boardCanvas {
+  cursor:
+    grabbing !important;
+}
+
+
+/* =========================================================
+   TOUCH
+========================================================= */
+
+@media (
+  pointer: coarse
+) {
+
+  .board-stage::after {
+    content:
+      "2 dedos - mover e zoom";
+
+    position:
+      absolute;
+
+    z-index:
+      6;
+
+    top:
+      12px;
+
+    left:
+      50%;
+
+    transform:
+      translateX(-50%);
+
+    padding:
+      7px 12px;
+
+    border:
+      1px solid
+      var(--theme-border);
+
+    border-radius:
+      999px;
+
+    background:
+      color-mix(
+        in srgb,
+        var(--theme-surface-strong)
+        92%,
+        transparent
+      );
+
+    color:
+      var(--theme-text-muted);
+
+    font-size:
+      8px;
+
+    font-weight:
+      800;
+
+    letter-spacing:
+      .02em;
+
+    box-shadow:
+      0 8px 24px
+      rgba(
+        0,
+        0,
+        0,
+        .16
+      );
+
+    backdrop-filter:
+      blur(14px);
+
+    -webkit-backdrop-filter:
+      blur(14px);
+
+    pointer-events:
+      none;
+  }
+
+
+  .tool-button {
+    min-height:
+      42px;
+
+    padding:
+      0 13px;
+
+    border-radius:
+      11px;
+
+    font-size:
+      9px;
+  }
+
+
+  .color-chip,
+  .custom-color {
+    width:
+      31px;
+
+    height:
+      31px;
+
+    flex-basis:
+      31px;
+  }
+
+
+  .board-select,
+  .fill-toggle {
+    height:
+      42px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+  max-width: 700px
+) {
+
+  .lousa-page {
+    padding:
+      9px;
+  }
+
+
+  .lousa-heading {
+    gap:
+      10px;
+
+    margin-bottom:
+      10px;
+  }
+
+
+  .lousa-heading h1 {
+    font-size:
+      25px;
+  }
+
+
+  .lousa-heading p {
+    line-height:
+      1.5;
+  }
+
+
+  .heading-actions {
+    gap:
+      5px;
+  }
+
+
+  .board-action {
+    min-height:
+      39px;
+  }
+
+
+  .whiteboard-shell {
+    border-radius:
+      16px;
+  }
+
+
+  .whiteboard-toolbar {
+    gap:
+      10px;
+
+    padding:
+      9px;
+  }
+
+
+  .toolbar-group {
+    gap:
+      5px;
+  }
+
+
+  .board-stage {
+    height:
+      68svh;
+
+    min-height:
+      500px;
+
+    max-height:
+      none;
+  }
+
+
+  .board-footer {
+    min-height:
+      44px;
+
+    padding:
+      9px 11px;
+
+    flex-direction:
+      row;
+
+    align-items:
+      center;
+  }
+
+
+  .shortcut-list {
+    display:
+      none;
+  }
+
+
+  .board-footer::after {
+    display:
+      block;
+
+    content:
+      "2 dedos: navegar / zoom";
+
+    margin-left:
+      auto;
+
+    font-size:
+      7px;
+
+    white-space:
+      nowrap;
+  }
+
+}
+
+/* CORTEX LOUSA PROFESSIONAL V5 */
+
+
+/* =========================================================
+   TOOLBAR COMPACTA
+========================================================= */
+
+.professional-toolbar {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+
+  min-height:
+    56px;
+
+  padding:
+    8px 10px;
+
+  overflow-x:
+    auto;
+
+  overflow-y:
+    hidden;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-surface-strong)
+      96%,
+      transparent
+    );
+
+  scrollbar-width:
+    thin;
+}
+
+
+.toolbar-cluster {
+  display:
+    flex;
+
+  flex: 0 0 auto;
+
+  align-items:
+    center;
+
+  padding:
+    3px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    12px;
+
+  background:
+    var(--theme-surface-soft);
+}
+
+
+.toolbar-buttons {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    2px;
+}
+
+
+.toolbar-divider {
+  width:
+    1px;
+
+  height:
+    27px;
+
+  flex:
+    0 0 1px;
+
+  margin:
+    0 1px;
+
+  background:
+    var(--theme-border);
+}
+
+
+.toolbar-spacer {
+  flex:
+    1 1 auto;
+
+  min-width:
+    8px;
+}
+
+
+.compact-tool {
+  width:
+    36px;
+
+  min-width:
+    36px;
+
+  height:
+    36px;
+
+  min-height:
+    36px;
+
+  padding:
+    0;
+
+  border:
+    0;
+
+  border-radius:
+    9px;
+
+  background:
+    transparent;
+}
+
+
+.compact-tool svg {
+  width:
+    17px;
+
+  height:
+    17px;
+
+  fill:
+    none;
+
+  stroke:
+    currentColor;
+
+  stroke-width:
+    1.7;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+}
+
+
+.compact-tool:hover {
+  transform:
+    none;
+
+  background:
+    var(--theme-surface);
+}
+
+
+.compact-tool.active {
+  border:
+    0;
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+
+  box-shadow:
+    inset 0 0 0 1px
+    var(--theme-border-strong);
+}
+
+
+.toolbar-text-symbol {
+  font-size:
+    15px;
+
+  font-weight:
+    850;
+
+  font-family:
+    Georgia,
+    serif;
+}
+
+
+/* =========================================================
+   CONTROLES CONTEXTUAIS
+========================================================= */
+
+.toolbar-context-panel {
+  min-height:
+    42px;
+
+  display:
+    flex;
+
+  flex:
+    0 0 auto;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    4px 9px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    12px;
+
+  background:
+    var(--theme-surface-soft);
+
+  animation:
+    cortexToolbarContextIn
+    .14s ease;
+}
+
+
+.toolbar-context-panel.hidden {
+  display:
+    none !important;
+}
+
+
+.context-caption {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    7px;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    .06em;
+
+  text-transform:
+    uppercase;
+}
+
+
+#strokeControls
+input[type="range"] {
+  width:
+    82px;
+
+  accent-color:
+    var(--theme-accent);
+}
+
+
+#strokeControls strong {
+  min-width:
+    18px;
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    9px;
+
+  text-align:
+    center;
+}
+
+
+.color-context {
+  padding:
+    5px 7px;
+}
+
+
+.color-context
+.color-tools {
+  gap:
+    4px;
+}
+
+
+.color-context
+.color-chip,
+.color-context
+.custom-color {
+  width:
+    23px;
+
+  height:
+    23px;
+
+  flex-basis:
+    23px;
+
+  border-radius:
+    7px;
+}
+
+
+.compact-fill {
+  height:
+    32px;
+
+  border:
+    0;
+
+  padding:
+    0 5px;
+
+  background:
+    transparent;
+}
+
+
+.compact-select {
+  width:
+    92px;
+
+  min-width:
+    92px;
+
+  height:
+    36px;
+
+  border:
+    0;
+
+  padding:
+    0 7px;
+
+  background:
+    transparent;
+
+  font-size:
+    8px;
+}
+
+
+.percent-tool {
+  width:
+    50px;
+
+  min-width:
+    50px;
+
+  font-size:
+    8px;
+}
+
+
+/* =========================================================
+   SELECAO
+========================================================= */
+
+.board-stage[data-tool="select"]
+#boardCanvas {
+  cursor:
+    default;
+}
+
+
+.board-stage[data-tool="select"].is-panning
+#boardCanvas {
+  cursor:
+    grabbing;
+}
+
+
+/* =========================================================
+   BOARD
+========================================================= */
+
+.whiteboard-shell {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    18px;
+}
+
+
+.board-stage {
+  box-shadow:
+    inset 0 1px 0
+    rgba(
+      255,
+      255,
+      255,
+      .025
+    );
+}
+
+
+.board-footer {
+  min-height:
+    40px;
+
+  padding:
+    7px 11px;
+}
+
+
+.board-footer::after {
+  content:
+    "Espaco / botao direito: navegar  |  Ctrl + scroll: zoom";
+}
+
+
+/* =========================================================
+   ANIMACAO
+========================================================= */
+
+@keyframes cortexToolbarContextIn {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(
+        -2px
+      );
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(
+        0
+      );
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+  max-width: 700px
+) {
+
+  .professional-toolbar {
+    position:
+      relative;
+
+    min-height:
+      54px;
+
+    padding:
+      7px;
+
+    gap:
+      5px;
+  }
+
+
+  .compact-tool {
+    width:
+      38px;
+
+    min-width:
+      38px;
+
+    height:
+      38px;
+
+    min-height:
+      38px;
+  }
+
+
+  .toolbar-divider {
+    height:
+      25px;
+  }
+
+
+  .toolbar-context-panel {
+    min-height:
+      42px;
+
+    padding:
+      4px 7px;
+  }
+
+
+  #strokeControls
+  input[type="range"] {
+    width:
+      76px;
+  }
+
+
+  .color-context
+  .color-chip,
+  .color-context
+  .custom-color {
+    width:
+      27px;
+
+    height:
+      27px;
+
+    flex-basis:
+      27px;
+  }
+
+
+  .board-footer::after {
+    content:
+      "2 dedos: mover / zoom";
+  }
+
+}
+
+/* CORTEX THICKNESS POPOVER V6 */
+
+
+/* O controlador original nunca fica preso na toolbar. */
+
+#strokeControls.tool-thickness-popover {
+  position:
+    fixed;
+
+  z-index:
+    10050;
+
+  min-width:
+    205px;
+
+  min-height:
+    52px;
+
+  display:
+    none;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  padding:
+    9px 11px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    13px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-surface-strong)
+      97%,
+      transparent
+    );
+
+  box-shadow:
+    0 18px 55px
+    rgba(
+      0,
+      0,
+      0,
+      .35
+    );
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+}
+
+
+/*
+ * Sintaxe separada para navegadores
+ * que nao suportem nesting CSS.
+ */
+
+#strokeControls.tool-thickness-popover.thickness-popover-open {
+  display:
+    flex !important;
+}
+
+
+#strokeControls.tool-thickness-popover.hidden {
+  display:
+    none !important;
+}
+
+
+#strokeControls.tool-thickness-popover.thickness-popover-open.hidden {
+  display:
+    flex !important;
+}
+
+
+.tool-thickness-popover
+.context-caption {
+  min-width:
+    70px;
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    7px;
+
+  font-weight:
+    850;
+
+  line-height:
+    1.25;
+}
+
+
+.tool-thickness-popover
+#brushSize {
+  width:
+    85px;
+
+  accent-color:
+    var(--theme-accent);
+}
+
+
+.tool-thickness-popover
+#brushSizeValue {
+  min-width:
+    22px;
+
+  color:
+    var(--theme-accent);
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  text-align:
+    center;
+}
+
+
+.color-chip-white {
+  border:
+    1px solid
+    rgba(
+      0,
+      0,
+      0,
+      .22
+    ) !important;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(
+      255,
+      255,
+      255,
+      .8
+    );
+}
+
+
+.board-stage[data-background="dark"]
+~ * {
+  /* Mantido vazio propositalmente. */
+}
+
+
+@media (
+  max-width: 700px
+) {
+
+  #strokeControls.tool-thickness-popover {
+    min-width:
+      195px;
+
+    min-height:
+      56px;
+
+    padding:
+      10px 12px;
+  }
+
+
+  .tool-thickness-popover
+  #brushSize {
+    width:
+      78px;
+  }
+
+}
+
+/* CORTEX DRAWING POPOVER V7 */
+
+
+#strokeControls.tool-thickness-popover.thickness-popover-open {
+  display:
+    grid !important;
+
+  grid-template-columns:
+    auto
+    minmax(
+      90px,
+      1fr
+    )
+    auto;
+
+  align-items:
+    center;
+
+  column-gap:
+    10px;
+
+  row-gap:
+    9px;
+
+  min-width:
+    235px;
+
+  padding:
+    11px 12px;
+}
+
+
+.tool-thickness-popover
+.context-caption {
+  min-width:
+    72px;
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    8px;
+
+  font-weight:
+    850;
+
+  letter-spacing:
+    .01em;
+
+  text-transform:
+    none;
+}
+
+
+.tool-thickness-popover
+#brushSize {
+  width:
+    100%;
+
+  min-width:
+    90px;
+}
+
+
+.tool-thickness-popover
+#brushSizeValue {
+  min-width:
+    26px;
+
+  text-align:
+    right;
+}
+
+
+.tool-smoothing-control {
+  grid-column:
+    1 / -1;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    72px
+    minmax(
+      90px,
+      1fr
+    )
+    40px;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  padding-top:
+    8px;
+
+  border-top:
+    1px solid
+    var(--theme-border);
+}
+
+
+.tool-smoothing-control.hidden {
+  display:
+    none !important;
+}
+
+
+.smoothing-label {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    8px;
+
+  font-weight:
+    750;
+}
+
+
+#smoothingRange {
+  width:
+    100%;
+
+  accent-color:
+    var(--theme-accent);
+}
+
+
+#smoothingValue {
+  color:
+    var(--theme-accent);
+
+  font-size:
+    9px;
+
+  text-align:
+    right;
+}
+
+
+@media (
+  max-width: 700px
+) {
+
+  #strokeControls.tool-thickness-popover.thickness-popover-open {
+    min-width:
+      min(
+        260px,
+        calc(
+          100vw -
+          18px
+        )
+      );
+
+    padding:
+      12px;
+  }
+
+}
+
+/* CORTEX MULTI SELECTION V8_1 */
+
+
+.selection-action-bar {
+  position:
+    absolute;
+
+  z-index:
+    35;
+
+  top:
+    13px;
+
+  left:
+    50%;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    3px;
+
+  max-width:
+    calc(
+      100% -
+      20px
+    );
+
+  padding:
+    5px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-surface-strong)
+      97%,
+      transparent
+    );
+
+  box-shadow:
+    0 16px 48px
+    rgba(
+      0,
+      0,
+      0,
+      .34
+    );
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  transform:
+    translateX(
+      -50%
+    );
+}
+
+
+.selection-action-bar.hidden {
+  display:
+    none !important;
+}
+
+
+.selection-count {
+  min-width:
+    86px;
+
+  padding:
+    0 8px;
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    8px;
+
+  font-weight:
+    800;
+
+  text-align:
+    center;
+
+  white-space:
+    nowrap;
+}
+
+
+.selection-bar-divider {
+  width:
+    1px;
+
+  height:
+    22px;
+
+  background:
+    var(--theme-border);
+}
+
+
+.selection-action-bar button {
+  min-width:
+    38px;
+
+  height:
+    31px;
+
+  border:
+    0;
+
+  border-radius:
+    8px;
+
+  background:
+    transparent;
+
+  padding:
+    0 8px;
+
+  color:
+    var(--theme-text-soft);
+
+  font:
+    inherit;
+
+  font-size:
+    8px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  white-space:
+    nowrap;
+}
+
+
+.selection-action-bar button:hover {
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+}
+
+
+.selection-action-bar button:disabled {
+  opacity:
+    .32;
+
+  cursor:
+    default;
+}
+
+
+.selection-action-bar
+.selection-delete:hover {
+  background:
+    rgba(
+      239,
+      68,
+      68,
+      .11
+    );
+
+  color:
+    #f87171;
+}
+
+
+.board-stage[data-tool="select"]
+#boardCanvas {
+  cursor:
+    default;
+}
+
+
+@media (
+  max-width: 700px
+) {
+
+  .selection-action-bar {
+    top:
+      9px;
+
+    max-width:
+      calc(
+        100% -
+        14px
+      );
+
+    overflow-x:
+      auto;
+  }
+
+
+  .selection-count {
+    min-width:
+      74px;
+  }
+
+
+  .selection-action-bar button {
+    min-width:
+      44px;
+
+    height:
+      35px;
+
+    padding:
+      0 10px;
+  }
+
+}
