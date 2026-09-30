@@ -936,6 +936,36 @@ function renderSessao() {
       }
 
 
+      let estadoResposta =
+        "";
+
+
+      if (
+        state.respondida
+      ) {
+
+        if (
+          indice ===
+          indiceCorreta
+        ) {
+
+          estadoResposta =
+            '<span class="cortex-answer-state cortex-answer-state-correct">✓ CORRETA</span>';
+
+        }
+        else if (
+          indice ===
+          state.selecionada
+        ) {
+
+          estadoResposta =
+            '<span class="cortex-answer-state cortex-answer-state-wrong">✕ ERRADA</span>';
+
+        }
+
+      }
+
+
       opcoes += `
         <button
           type="button"
@@ -959,6 +989,8 @@ function renderSessao() {
               alternativa.texto
             )}
           </span>
+
+          ${estadoResposta}
 
         </button>
       `;
