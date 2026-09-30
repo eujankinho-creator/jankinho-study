@@ -488,7 +488,11 @@
 
       initPointerGlow();
 
-      createMobileMenu();
+      /*
+       * O menu mobile e controlado exclusivamente pela
+       * sidebar global (sidebar-standard.js).
+       * Nao criar um segundo drawer nesta pagina.
+       */
 
     }
   );
