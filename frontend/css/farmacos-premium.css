@@ -1,0 +1,3644 @@
+.pharma-view {
+  background:
+    var(--theme-bg, #050505);
+  color:
+    var(--theme-text, #f5f5f5);
+}
+
+
+.pharma-page {
+  padding:
+    30px;
+  max-width:
+    1600px;
+  margin:
+    0 auto;
+}
+
+
+.pharma-hero {
+  position:
+    relative;
+  overflow:
+    hidden;
+
+  display:
+    grid;
+  grid-template-columns:
+    minmax(0, 1fr) auto;
+
+  gap:
+    32px;
+
+  padding:
+    38px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    26px;
+
+  background:
+    var(--theme-hero);
+
+  box-shadow:
+    var(--theme-shadow);
+
+  margin-bottom:
+    18px;
+}
+
+
+.pharma-hero::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    280px;
+  height:
+    280px;
+
+  right:
+    -80px;
+  top:
+    -110px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      var(--theme-accent-rgb),
+      .16
+    );
+
+  filter:
+    blur(65px);
+
+  pointer-events:
+    none;
+}
+
+
+.pharma-kicker {
+  display:
+    flex;
+  align-items:
+    center;
+  gap:
+    10px;
+
+  color:
+    var(--theme-accent);
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .13em;
+
+  font-size:
+    12px;
+
+  font-weight:
+    800;
+
+  margin-bottom:
+    15px;
+}
+
+
+.pharma-kicker span {
+  width:
+    26px;
+  height:
+    2px;
+
+  background:
+    var(--theme-accent);
+}
+
+
+.pharma-hero h1 {
+  margin:
+    0;
+
+  max-width:
+    760px;
+
+  font-size:
+    clamp(
+      34px,
+      4vw,
+      58px
+    );
+
+  line-height:
+    1.02;
+
+  letter-spacing:
+    -.045em;
+}
+
+
+.pharma-hero h1 em {
+  color:
+    var(--theme-accent);
+  font-style:
+    normal;
+}
+
+
+.pharma-hero-copy > p {
+  max-width:
+    720px;
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    16px;
+
+  line-height:
+    1.7;
+
+  margin:
+    18px 0 0;
+}
+
+
+.hero-pills {
+  display:
+    flex;
+  flex-wrap:
+    wrap;
+
+  gap:
+    8px;
+
+  margin-top:
+    22px;
+}
+
+
+.hero-pills span {
+  padding:
+    8px 12px;
+
+  border-radius:
+    999px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+}
+
+
+.pharma-hero-stats {
+  position:
+    relative;
+  z-index:
+    1;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, 115px);
+
+  align-self:
+    center;
+
+  gap:
+    10px;
+}
+
+
+.pharma-hero-stats article {
+  min-height:
+    116px;
+
+  padding:
+    16px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    space-between;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    19px;
+
+  background:
+    var(--theme-surface);
+}
+
+
+.pharma-hero-stats span {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    11px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .08em;
+}
+
+
+.pharma-hero-stats strong {
+  font-size:
+    29px;
+
+  color:
+    var(--theme-accent);
+}
+
+
+.pharma-warning {
+  display:
+    flex;
+  align-items:
+    center;
+
+  gap:
+    14px;
+
+  padding:
+    14px 18px;
+
+  margin-bottom:
+    18px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    15px;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    12px;
+}
+
+
+.pharma-warning strong {
+  color:
+    var(--theme-accent);
+
+  white-space:
+    nowrap;
+}
+
+
+.pharma-toolbar {
+  position:
+    sticky;
+
+  top:
+    0;
+
+  z-index:
+    20;
+
+  display:
+    flex;
+
+  gap:
+    10px;
+
+  padding:
+    12px;
+
+  margin-bottom:
+    18px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    19px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-bg)
+      88%,
+      transparent
+    );
+
+  backdrop-filter:
+    blur(18px);
+}
+
+
+.pharma-search {
+  flex:
+    1;
+
+  display:
+    flex;
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  padding:
+    0 15px;
+
+  min-width:
+    230px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    13px;
+
+  background:
+    var(--theme-surface);
+}
+
+
+.pharma-search span {
+  color:
+    var(--theme-accent);
+}
+
+
+.pharma-search input {
+  width:
+    100%;
+
+  min-height:
+    45px;
+
+  border:
+    0;
+
+  outline:
+    0;
+
+  background:
+    transparent;
+
+  color:
+    var(--theme-text);
+
+  font:
+    inherit;
+}
+
+
+.pharma-search input::placeholder {
+  color:
+    var(--theme-text-muted);
+}
+
+
+.toolbar-button,
+.text-button {
+  border:
+    1px solid
+    var(--theme-border);
+
+  background:
+    var(--theme-surface);
+
+  color:
+    var(--theme-text-soft);
+
+  border-radius:
+    13px;
+
+  padding:
+    0 16px;
+
+  min-height:
+    45px;
+
+  font:
+    inherit;
+
+  font-size:
+    12px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  transition:
+    .2s ease;
+}
+
+
+.toolbar-button:hover,
+.toolbar-button.active {
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+}
+
+
+.toolbar-button.primary {
+  background:
+    var(--theme-gradient);
+
+  color:
+    var(--theme-button-text);
+
+  border-color:
+    transparent;
+}
+
+
+.pharma-section {
+  border:
+    1px solid
+    var(--theme-border);
+
+  background:
+    var(--theme-surface);
+
+  border-radius:
+    22px;
+
+  padding:
+    24px;
+
+  margin-bottom:
+    18px;
+
+  box-shadow:
+    var(--theme-shadow);
+}
+
+
+.section-heading {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    18px;
+
+  margin-bottom:
+    20px;
+}
+
+
+.section-heading small {
+  display:
+    block;
+
+  color:
+    var(--theme-accent);
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    .13em;
+
+  text-transform:
+    uppercase;
+
+  margin-bottom:
+    5px;
+}
+
+
+.section-heading h2 {
+  margin:
+    0;
+
+  font-size:
+    21px;
+
+  letter-spacing:
+    -.025em;
+}
+
+
+.section-heading > span,
+.active-filter-label {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    12px;
+}
+
+
+.text-button {
+  min-height:
+    auto;
+
+  padding:
+    8px 12px;
+}
+
+
+.filter-row {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    8px;
+}
+
+
+.filter-row.secondary {
+  margin-top:
+    9px;
+}
+
+
+.filter-chip {
+  padding:
+    9px 13px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    999px;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-soft);
+
+  font:
+    inherit;
+
+  font-size:
+    12px;
+
+  cursor:
+    pointer;
+
+  transition:
+    .2s ease;
+}
+
+
+.filter-chip:hover,
+.filter-chip.active {
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+
+  border-color:
+    var(--theme-border-strong);
+}
+
+
+.receptor-map {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    10px;
+}
+
+
+.receptor-card {
+  min-height:
+    150px;
+
+  padding:
+    16px;
+
+  text-align:
+    left;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    17px;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text);
+
+  cursor:
+    pointer;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    background .2s ease;
+}
+
+
+.receptor-card:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    var(--theme-border-strong);
+}
+
+
+.receptor-card.active {
+  background:
+    var(--theme-accent-soft);
+
+  border-color:
+    var(--theme-accent);
+}
+
+
+.receptor-name {
+  color:
+    var(--theme-accent);
+
+  font-weight:
+    900;
+
+  font-size:
+    22px;
+}
+
+
+.receptor-family {
+  color:
+    var(--theme-text-muted);
+
+  margin-top:
+    3px;
+
+  font-size:
+    10px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .07em;
+}
+
+
+.receptor-card p {
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    11px;
+
+  line-height:
+    1.45;
+
+  min-height:
+    47px;
+}
+
+
+.receptor-card > span {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    10px;
+}
+
+
+.drug-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    12px;
+}
+
+
+.drug-card {
+  position:
+    relative;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  min-height:
+    340px;
+
+  padding:
+    20px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    20px;
+
+  background:
+    var(--theme-surface-soft);
+
+  cursor:
+    pointer;
+
+  outline:
+    none;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.drug-card:hover,
+.drug-card:focus {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    var(--theme-border-strong);
+
+  box-shadow:
+    var(--theme-glow);
+}
+
+
+.drug-card-top {
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap:
+    12px;
+}
+
+
+.drug-group {
+  display:
+    inline-block;
+
+  color:
+    var(--theme-accent);
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .1em;
+
+  font-size:
+    9px;
+
+  font-weight:
+    900;
+}
+
+
+.drug-card h3 {
+  margin:
+    7px 0 4px;
+
+  font-size:
+    22px;
+
+  letter-spacing:
+    -.025em;
+}
+
+
+.drug-class {
+  color:
+    var(--theme-text-muted);
+
+  margin:
+    0;
+
+  font-size:
+    11px;
+}
+
+
+.favorite-button {
+  width:
+    35px;
+
+  height:
+    35px;
+
+  flex:
+    0 0 35px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    11px;
+
+  background:
+    var(--theme-surface);
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    18px;
+
+  cursor:
+    pointer;
+}
+
+
+.favorite-button.active {
+  color:
+    var(--theme-accent);
+
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+}
+
+
+.drug-action {
+  display:
+    inline-flex;
+
+  align-self:
+    flex-start;
+
+  margin:
+    16px 0 12px;
+
+  padding:
+    6px 9px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    8px;
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+}
+
+
+.receptor-tags {
+  display:
+    flex;
+
+  gap:
+    6px;
+
+  flex-wrap:
+    wrap;
+}
+
+
+.receptor-tag {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  min-width:
+    34px;
+
+  padding:
+    5px 8px;
+
+  border-radius:
+    8px;
+
+  background:
+    var(--theme-surface);
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+}
+
+
+.receptor-tags.large
+.receptor-tag {
+  font-size:
+    13px;
+
+  padding:
+    8px 11px;
+}
+
+
+.drug-mechanism {
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    12px;
+
+  line-height:
+    1.55;
+
+  margin:
+    16px 0;
+
+  flex:
+    1;
+}
+
+
+.memory-mask {
+  flex:
+    1;
+
+  margin:
+    16px 0;
+
+  min-height:
+    80px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    15px;
+
+  text-align:
+    center;
+
+  border:
+    1px dashed
+    var(--theme-border-strong);
+
+  border-radius:
+    14px;
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    11px;
+}
+
+
+.drug-card-footer {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    10px;
+
+  border-top:
+    1px solid
+    var(--theme-border);
+
+  padding-top:
+    14px;
+
+  margin-top:
+    auto;
+}
+
+
+.review-status {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    10px;
+}
+
+
+.review-status.done {
+  color:
+    #5fd28a;
+}
+
+
+.compare-toggle {
+  border:
+    0;
+
+  background:
+    transparent;
+
+  color:
+    var(--theme-accent);
+
+  font:
+    inherit;
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+.compare-toggle.active {
+  color:
+    var(--theme-text-muted);
+}
+
+
+.pharma-empty {
+  padding:
+    55px 20px;
+
+  text-align:
+    center;
+
+  color:
+    var(--theme-text-muted);
+}
+
+
+.compare-dock {
+  position:
+    fixed;
+
+  z-index:
+    70;
+
+  left:
+    calc(50% + 115px);
+
+  bottom:
+    22px;
+
+  transform:
+    translateX(-50%);
+
+  width:
+    min(
+      720px,
+      calc(100vw - 290px)
+    );
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    14px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    17px;
+
+  background:
+    var(--theme-surface-strong);
+
+  box-shadow:
+    0 22px 70px
+    rgba(0, 0, 0, .42);
+
+  backdrop-filter:
+    blur(20px);
+}
+
+
+.compare-dock > div:first-child {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  min-width:
+    120px;
+}
+
+
+.compare-dock strong {
+  font-size:
+    11px;
+}
+
+
+.compare-dock span {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    10px;
+}
+
+
+.compare-names {
+  flex:
+    1;
+
+  display:
+    flex;
+
+  gap:
+    6px;
+
+  overflow:
+    hidden;
+}
+
+
+.compare-names span {
+  padding:
+    6px 8px;
+
+  border-radius:
+    8px;
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+
+  white-space:
+    nowrap;
+}
+
+
+.compare-dock button {
+  border:
+    0;
+
+  min-height:
+    39px;
+
+  padding:
+    0 15px;
+
+  border-radius:
+    10px;
+
+  background:
+    var(--theme-gradient);
+
+  color:
+    var(--theme-button-text);
+
+  font-weight:
+    900;
+
+  cursor:
+    pointer;
+}
+
+
+.compare-dock button:disabled {
+  opacity:
+    .45;
+
+  cursor:
+    default;
+}
+
+
+.pharma-modal {
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  z-index:
+    150;
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  align-items:
+    flex-start;
+
+  padding:
+    40px 18px;
+
+  overflow:
+    auto;
+}
+
+
+.modal-backdrop {
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  border:
+    0;
+
+  background:
+    rgba(0, 0, 0, .74);
+
+  backdrop-filter:
+    blur(7px);
+}
+
+
+.drug-modal-card {
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  width:
+    min(
+      880px,
+      100%
+    );
+
+  padding:
+    28px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    24px;
+
+  background:
+    var(--theme-bg-secondary);
+
+  box-shadow:
+    0 30px 100px
+    rgba(0, 0, 0, .65);
+}
+
+
+.compare-modal-card {
+  width:
+    min(
+      1250px,
+      100%
+    );
+}
+
+
+.quiz-modal-card {
+  width:
+    min(
+      650px,
+      100%
+    );
+}
+
+
+.modal-close {
+  position:
+    absolute;
+
+  top:
+    15px;
+
+  right:
+    15px;
+
+  width:
+    37px;
+
+  height:
+    37px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    11px;
+
+  background:
+    var(--theme-surface);
+
+  color:
+    var(--theme-text);
+
+  font-size:
+    21px;
+
+  cursor:
+    pointer;
+}
+
+
+.modal-drug-header {
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+
+  padding-right:
+    44px;
+
+  border-bottom:
+    1px solid
+    var(--theme-border);
+
+  padding-bottom:
+    22px;
+}
+
+
+.modal-drug-header h2 {
+  margin:
+    7px 0 4px;
+
+  font-size:
+    35px;
+}
+
+
+.modal-drug-header p {
+  margin:
+    0;
+
+  color:
+    var(--theme-text-muted);
+}
+
+
+.modal-header-actions {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  justify-content:
+    flex-end;
+
+  gap:
+    7px;
+}
+
+
+.modal-header-actions button,
+.study-reveal button {
+  padding:
+    9px 12px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    10px;
+
+  background:
+    var(--theme-surface);
+
+  color:
+    var(--theme-text-soft);
+
+  font:
+    inherit;
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+.modal-header-actions button.active {
+  color:
+    var(--theme-accent);
+
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+}
+
+
+.modal-info-section {
+  padding:
+    20px 0;
+
+  border-bottom:
+    1px solid
+    var(--theme-border);
+}
+
+
+.modal-info-section h3 {
+  margin:
+    0 0 11px;
+
+  color:
+    var(--theme-accent);
+
+  font-size:
+    11px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .09em;
+}
+
+
+.modal-info-section p,
+.modal-info-section li {
+  color:
+    var(--theme-text-soft);
+
+  line-height:
+    1.65;
+
+  font-size:
+    13px;
+}
+
+
+.modal-info-section ul {
+  margin:
+    0;
+
+  padding-left:
+    19px;
+
+  display:
+    grid;
+
+  gap:
+    6px;
+}
+
+
+.study-reveal {
+  padding:
+    17px;
+
+  border:
+    1px dashed
+    var(--theme-border-strong);
+
+  border-radius:
+    14px;
+
+  background:
+    var(--theme-accent-soft);
+}
+
+
+.study-reveal p {
+  margin:
+    0 0 12px;
+}
+
+
+.study-reveal button {
+  color:
+    var(--theme-accent);
+}
+
+
+.exam-tip {
+  margin-top:
+    20px;
+
+  padding:
+    17px;
+
+  border-radius:
+    15px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-gradient-soft);
+}
+
+
+.exam-tip span {
+  display:
+    block;
+
+  color:
+    var(--theme-accent);
+
+  font-size:
+    9px;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .1em;
+
+  margin-bottom:
+    6px;
+}
+
+
+.exam-tip strong {
+  font-size:
+    13px;
+}
+
+
+.compare-header {
+  margin-bottom:
+    22px;
+}
+
+
+.compare-header span {
+  color:
+    var(--theme-accent);
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .1em;
+}
+
+
+.compare-header h2 {
+  margin:
+    6px 0;
+}
+
+
+.compare-header p {
+  color:
+    var(--theme-text-muted);
+
+  margin:
+    0;
+}
+
+
+.compare-table-wrap {
+  overflow:
+    auto;
+}
+
+
+.compare-table {
+  width:
+    100%;
+
+  border-collapse:
+    collapse;
+
+  min-width:
+    820px;
+}
+
+
+.compare-table th,
+.compare-table td {
+  padding:
+    13px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  text-align:
+    left;
+
+  vertical-align:
+    top;
+
+  color:
+    var(--theme-text-soft);
+
+  line-height:
+    1.55;
+
+  font-size:
+    11px;
+}
+
+
+.compare-table thead th {
+  color:
+    var(--theme-accent);
+
+  background:
+    var(--theme-accent-soft);
+}
+
+
+.compare-table tbody th {
+  width:
+    160px;
+
+  color:
+    var(--theme-text);
+
+  background:
+    var(--theme-surface);
+}
+
+
+.quiz-header {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  padding-right:
+    42px;
+
+  color:
+    var(--theme-accent);
+
+  font-size:
+    11px;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .08em;
+}
+
+
+.quiz-drug {
+  display:
+    inline-block;
+
+  margin-top:
+    28px;
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    10px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .09em;
+}
+
+
+.quiz-modal-card h2 {
+  font-size:
+    24px;
+
+  line-height:
+    1.35;
+
+  margin:
+    8px 0 22px;
+}
+
+
+.quiz-options {
+  display:
+    grid;
+
+  gap:
+    9px;
+}
+
+
+.quiz-options button {
+  min-height:
+    50px;
+
+  padding:
+    12px 15px;
+
+  text-align:
+    left;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    13px;
+
+  background:
+    var(--theme-surface);
+
+  color:
+    var(--theme-text-soft);
+
+  font:
+    inherit;
+
+  font-size:
+    12px;
+
+  cursor:
+    pointer;
+}
+
+
+.quiz-options button:hover:not(:disabled) {
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+}
+
+
+.quiz-options button.correct {
+  border-color:
+    rgba(74, 222, 128, .5);
+
+  background:
+    rgba(74, 222, 128, .1);
+
+  color:
+    #86efac;
+}
+
+
+.quiz-options button.wrong {
+  border-color:
+    rgba(248, 113, 113, .5);
+
+  background:
+    rgba(248, 113, 113, .1);
+
+  color:
+    #fca5a5;
+}
+
+
+.quiz-feedback {
+  margin-top:
+    16px;
+
+  padding:
+    14px;
+
+  border-radius:
+    12px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-soft);
+
+  line-height:
+    1.5;
+
+  font-size:
+    12px;
+}
+
+
+.quiz-feedback strong {
+  display:
+    block;
+
+  color:
+    var(--theme-accent);
+
+  margin-bottom:
+    4px;
+}
+
+
+.next-question {
+  margin-top:
+    13px;
+
+  min-height:
+    42px;
+
+  padding:
+    0 15px;
+
+  border:
+    0;
+
+  border-radius:
+    11px;
+
+  background:
+    var(--theme-gradient);
+
+  color:
+    var(--theme-button-text);
+
+  font-weight:
+    900;
+
+  cursor:
+    pointer;
+}
+
+
+.modal-open {
+  overflow:
+    hidden;
+}
+
+
+.hidden {
+  display:
+    none !important;
+}
+
+
+@media (
+  max-width: 1180px
+) {
+
+  .receptor-map {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .drug-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .pharma-hero {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .pharma-hero-stats {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+  }
+
+}
+
+
+@media (
+  max-width: 820px
+) {
+
+  .pharma-page {
+    padding:
+      16px;
+  }
+
+
+  .pharma-toolbar {
+    position:
+      static;
+
+    flex-wrap:
+      wrap;
+  }
+
+
+  .pharma-search {
+    flex-basis:
+      100%;
+  }
+
+
+  .receptor-map {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .drug-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .pharma-hero-stats {
+    grid-template-columns:
+      1fr 1fr 1fr;
+  }
+
+
+  .pharma-hero-stats article {
+    min-height:
+      90px;
+  }
+
+
+  .compare-dock {
+    left:
+      50%;
+
+    width:
+      calc(100vw - 28px);
+  }
+
+
+  .compare-names {
+    display:
+      none;
+  }
+
+
+  .modal-drug-header {
+    flex-direction:
+      column;
+  }
+
+
+  .modal-header-actions {
+    justify-content:
+      flex-start;
+  }
+
+}
+
+
+@media (
+  max-width: 520px
+) {
+
+  .pharma-hero {
+    padding:
+      25px 20px;
+  }
+
+
+  .pharma-hero-stats {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .receptor-map {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .section-heading {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+
+  .toolbar-button {
+    flex:
+      1;
+  }
+
+}
+
+
+/* CORTEX PHARMA UX PATCH V2 */
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.pharma-view .sidebar .menu-icon {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+}
+
+
+.pharma-view .sidebar .menu-icon svg {
+  width:
+    19px;
+
+  height:
+    19px;
+
+  fill:
+    none;
+
+  stroke:
+    currentColor;
+
+  stroke-width:
+    1.7;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+}
+
+
+.pharma-view .sidebar .menu-item.active .menu-icon {
+  color:
+    var(--theme-accent);
+}
+
+
+/* =========================================================
+   BARRA DE ACOES
+========================================================= */
+
+.pharma-actions-bar {
+  position:
+    relative;
+
+  top:
+    auto;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  padding:
+    14px 16px;
+
+  gap:
+    18px;
+
+  background:
+    var(--theme-surface);
+
+  backdrop-filter:
+    none;
+}
+
+
+.pharma-actions-copy {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+}
+
+
+.pharma-actions-copy small {
+  color:
+    var(--theme-accent);
+
+  font-size:
+    9px;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .12em;
+}
+
+
+.pharma-actions-copy strong {
+  color:
+    var(--theme-text-soft);
+
+  font-size:
+    13px;
+
+  font-weight:
+    650;
+}
+
+
+.pharma-actions-buttons {
+  display:
+    flex;
+
+  align-items:
+    stretch;
+
+  justify-content:
+    flex-end;
+
+  gap:
+    9px;
+}
+
+
+.pharma-actions-buttons
+.toolbar-button {
+  min-height:
+    50px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    8px;
+}
+
+
+.action-button-icon {
+  color:
+    var(--theme-accent);
+
+  font-size:
+    16px;
+}
+
+
+/* =========================================================
+   QUIZ EM DESTAQUE
+========================================================= */
+
+.pharma-actions-buttons
+.quiz-featured {
+  position:
+    relative;
+
+  min-width:
+    245px;
+
+  min-height:
+    62px;
+
+  padding:
+    8px 14px 8px 10px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    42px 1fr 24px;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  overflow:
+    hidden;
+
+  text-align:
+    left;
+
+  border:
+    1px solid
+    rgba(
+      var(--theme-accent-rgb),
+      .42
+    );
+
+  background:
+    var(--theme-gradient);
+
+  color:
+    var(--theme-button-text);
+
+  box-shadow:
+    0 10px 30px
+    rgba(
+      var(--theme-accent-rgb),
+      .20
+    );
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.pharma-actions-buttons
+.quiz-featured::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  width:
+    90px;
+
+  height:
+    160px;
+
+  left:
+    -100px;
+
+  top:
+    -45px;
+
+  transform:
+    rotate(20deg);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .18
+    );
+
+  filter:
+    blur(4px);
+
+  transition:
+    left .45s ease;
+}
+
+
+.pharma-actions-buttons
+.quiz-featured:hover {
+  transform:
+    translateY(-2px)
+    scale(1.01);
+
+  box-shadow:
+    0 16px 42px
+    rgba(
+      var(--theme-accent-rgb),
+      .28
+    );
+
+  color:
+    var(--theme-button-text);
+}
+
+
+.pharma-actions-buttons
+.quiz-featured:hover::before {
+  left:
+    310px;
+}
+
+
+.quiz-featured-icon {
+  width:
+    42px;
+
+  height:
+    42px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    13px;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .16
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .18
+    );
+
+  font-size:
+    20px;
+
+  font-weight:
+    950;
+}
+
+
+.quiz-featured-copy {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    1px;
+}
+
+
+.quiz-featured-copy small {
+  opacity:
+    .68;
+
+  font-size:
+    8px;
+
+  font-weight:
+    850;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .08em;
+}
+
+
+.quiz-featured-copy strong {
+  font-size:
+    14px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    -.01em;
+}
+
+
+.quiz-featured-arrow {
+  font-size:
+    18px;
+
+  font-weight:
+    900;
+
+  transition:
+    transform .2s ease;
+}
+
+
+.quiz-featured:hover
+.quiz-featured-arrow {
+  transform:
+    translateX(3px);
+}
+
+
+/* =========================================================
+   PESQUISA JUNTO AOS FARMACOS
+========================================================= */
+
+.catalog-search-area {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      190px,
+      .38fr
+    )
+    minmax(
+      340px,
+      1fr
+    );
+
+  align-items:
+    center;
+
+  gap:
+    18px;
+
+  margin:
+    -3px 0 22px;
+
+  padding:
+    16px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    17px;
+
+  background:
+    var(--theme-surface-soft);
+}
+
+
+.catalog-search-copy {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+}
+
+
+.catalog-search-copy strong {
+  color:
+    var(--theme-text);
+
+  font-size:
+    13px;
+}
+
+
+.catalog-search-copy span {
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    10px;
+
+  line-height:
+    1.45;
+}
+
+
+.catalog-search {
+  min-height:
+    52px;
+
+  padding:
+    0 9px 0 15px;
+
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-surface-strong);
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(
+      var(--theme-accent-rgb),
+      .025
+    );
+}
+
+
+.catalog-search:focus-within {
+  border-color:
+    var(--theme-accent);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      var(--theme-accent-rgb),
+      .08
+    );
+}
+
+
+.catalog-search input {
+  min-height:
+    50px;
+}
+
+
+.catalog-search-icon {
+  width:
+    20px;
+
+  height:
+    20px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  color:
+    var(--theme-accent);
+}
+
+
+.catalog-search-icon svg {
+  width:
+    18px;
+
+  height:
+    18px;
+
+  fill:
+    none;
+
+  stroke:
+    currentColor;
+
+  stroke-width:
+    1.8;
+
+  stroke-linecap:
+    round;
+}
+
+
+.search-result-indicator {
+  flex:
+    0 0 auto;
+
+  padding:
+    7px 9px;
+
+  border-radius:
+    9px;
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+
+  font-size:
+    9px;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .06em;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width: 1050px
+) {
+
+  .pharma-actions-bar {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+
+  .pharma-actions-buttons {
+    width:
+      100%;
+  }
+
+
+  .pharma-actions-buttons
+  .toolbar-button {
+    flex:
+      1;
+  }
+
+
+  .pharma-actions-buttons
+  .quiz-featured {
+    flex:
+      1.5;
+  }
+
+
+  .catalog-search-area {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+
+@media (
+  max-width: 720px
+) {
+
+  .pharma-actions-buttons {
+    flex-wrap:
+      wrap;
+  }
+
+
+  .pharma-actions-buttons
+  .toolbar-button {
+    flex:
+      1 1
+      calc(50% - 6px);
+  }
+
+
+  .pharma-actions-buttons
+  .quiz-featured {
+    flex:
+      1 1 100%;
+
+    min-width:
+      100%;
+  }
+
+
+  .catalog-search-area {
+    padding:
+      12px;
+
+    gap:
+      11px;
+  }
+
+
+  .search-result-indicator {
+    display:
+      none;
+  }
+
+}
+
+
+/* CORTEX PHARMA CATALOG V3 */
+
+
+/* =========================================================
+   ANCORA
+========================================================= */
+
+.catalog-anchor {
+  height:
+    1px;
+
+  scroll-margin-top:
+    90px;
+}
+
+
+/* =========================================================
+   BUSCA DO CATALOGO
+========================================================= */
+
+.catalog-search-bar {
+  position:
+    sticky;
+
+  top:
+    10px;
+
+  z-index:
+    35;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  margin:
+    -7px 0 14px;
+
+  padding:
+    9px;
+
+  border:
+    1px solid
+    var(--theme-border-strong);
+
+  border-radius:
+    16px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-bg-secondary)
+      94%,
+      transparent
+    );
+
+  box-shadow:
+    0 12px 34px
+    rgba(
+      0,
+      0,
+      0,
+      .25
+    );
+
+  backdrop-filter:
+    blur(18px);
+}
+
+
+.catalog-search-main {
+  min-width:
+    0;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    38px
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  align-items:
+    center;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    12px;
+
+  background:
+    var(--theme-surface);
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.catalog-search-main:focus-within {
+  border-color:
+    var(--theme-accent);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      var(--theme-accent-rgb),
+      .08
+    );
+}
+
+
+.catalog-search-icon {
+  width:
+    38px;
+
+  height:
+    48px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  color:
+    var(--theme-accent);
+}
+
+
+.catalog-search-icon svg {
+  width:
+    17px;
+
+  height:
+    17px;
+
+  fill:
+    none;
+
+  stroke:
+    currentColor;
+
+  stroke-width:
+    1.8;
+
+  stroke-linecap:
+    round;
+}
+
+
+.catalog-search-field {
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    center;
+
+  padding:
+    5px 2px;
+}
+
+
+.catalog-search-field label {
+  color:
+    var(--theme-accent);
+
+  font-size:
+    8px;
+
+  font-weight:
+    900;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .08em;
+
+  margin-bottom:
+    1px;
+}
+
+
+.catalog-search-field input {
+  width:
+    100%;
+
+  height:
+    27px;
+
+  padding:
+    0;
+
+  border:
+    0;
+
+  outline:
+    none;
+
+  background:
+    transparent;
+
+  color:
+    var(--theme-text);
+
+  font:
+    inherit;
+
+  font-size:
+    13px;
+}
+
+
+.catalog-search-field input::placeholder {
+  color:
+    var(--theme-text-muted);
+}
+
+
+.catalog-clear-search {
+  width:
+    33px;
+
+  height:
+    33px;
+
+  margin-right:
+    7px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    9px;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    19px;
+
+  cursor:
+    pointer;
+}
+
+
+.catalog-clear-search:hover {
+  color:
+    var(--theme-accent);
+
+  border-color:
+    var(--theme-border-strong);
+}
+
+
+/* =========================================================
+   RESUMO DO FILTRO
+========================================================= */
+
+.catalog-search-status {
+  max-width:
+    270px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+
+  padding:
+    0 11px;
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    9px;
+
+  white-space:
+    nowrap;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+}
+
+
+.catalog-search-status span:last-child {
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+}
+
+
+.catalog-status-dot {
+  width:
+    6px;
+
+  height:
+    6px;
+
+  flex:
+    0 0 auto;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--theme-accent);
+
+  box-shadow:
+    0 0 0 4px
+    var(--theme-accent-soft);
+}
+
+
+/* =========================================================
+   APROXIMAR CARDS
+========================================================= */
+
+.catalog-search-bar +
+.drug-grid {
+  margin-top:
+    0;
+}
+
+
+.pharma-section:has(
+  #drugGrid
+) {
+  padding-top:
+    20px;
+}
+
+
+.pharma-section:has(
+  #drugGrid
+)
+.section-heading {
+  margin-bottom:
+    13px;
+}
+
+
+/* =========================================================
+   FEEDBACK VISUAL APOS FILTRO
+========================================================= */
+
+.drug-grid {
+  scroll-margin-top:
+    100px;
+}
+
+
+@keyframes pharmaResultEnter {
+
+  from {
+    opacity:
+      .72;
+
+    transform:
+      translateY(5px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+.drug-card {
+  animation:
+    pharmaResultEnter
+    .22s ease both;
+}
+
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
+  .drug-card {
+    animation:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width: 850px
+) {
+
+  .catalog-search-bar {
+    grid-template-columns:
+      1fr;
+
+    top:
+      6px;
+  }
+
+
+  .catalog-search-status {
+    max-width:
+      none;
+
+    padding:
+      2px 6px 4px;
+  }
+
+}
+
+
+@media (
+  max-width: 520px
+) {
+
+  .catalog-search-status {
+    display:
+      none;
+  }
+
+
+  .catalog-search-bar {
+    padding:
+      7px;
+
+    border-radius:
+      13px;
+  }
+
+}
+
+
+/* CORTEX PHARMA CLEAN SEARCH V4 */
+
+
+/* =========================================================
+   SIDEBAR ICONS
+========================================================= */
+
+.pharma-view
+.sidebar
+.menu-icon {
+  display:
+    inline-flex !important;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex:
+    0 0 auto;
+}
+
+
+.pharma-view
+.sidebar
+.menu-icon svg {
+  display:
+    block !important;
+
+  width:
+    19px !important;
+
+  height:
+    19px !important;
+
+  fill:
+    none !important;
+
+  stroke:
+    currentColor !important;
+
+  stroke-width:
+    1.7 !important;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+}
+
+
+.pharma-view
+.sidebar
+.menu-icon-text {
+  font-size:
+    0 !important;
+}
+
+
+.pharma-view
+.sidebar
+.menu-item.active
+.menu-icon {
+  color:
+    var(--theme-accent);
+}
+
+
+/* =========================================================
+   BUSCA - REMOVER CAMADA CINZA INTERNA
+========================================================= */
+
+.pharma-view
+.catalog-search-main {
+  overflow:
+    hidden;
+
+  background:
+    var(--theme-surface) !important;
+}
+
+
+.pharma-view
+.catalog-search-field {
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+
+  outline:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  appearance:
+    none !important;
+}
+
+
+.pharma-view
+.catalog-search-field input,
+.pharma-view
+.catalog-search-field input[type="search"] {
+  display:
+    block;
+
+  width:
+    100%;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    0 !important;
+
+  outline:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  color:
+    var(--theme-text) !important;
+
+  appearance:
+    none !important;
+
+  -webkit-appearance:
+    none !important;
+}
+
+
+.pharma-view
+.catalog-search-field
+input:focus {
+  border:
+    0 !important;
+
+  outline:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+.pharma-view
+.catalog-search-field
+input:-webkit-autofill,
+.pharma-view
+.catalog-search-field
+input:-webkit-autofill:hover,
+.pharma-view
+.catalog-search-field
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color:
+    var(--theme-text);
+
+  -webkit-box-shadow:
+    0 0 0 1000px
+    var(--theme-surface)
+    inset !important;
+
+  transition:
+    background-color
+    9999s ease-out;
+}
+
+
+/* Remove decoracao nativa do search */
+
+.pharma-view
+.catalog-search-field
+input[type="search"]::-webkit-search-decoration,
+.pharma-view
+.catalog-search-field
+input[type="search"]::-webkit-search-cancel-button,
+.pharma-view
+.catalog-search-field
+input[type="search"]::-webkit-search-results-button,
+.pharma-view
+.catalog-search-field
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:
+    none;
+}
+
+
+/* =========================================================
+   CAMPO MAIS LIMPO / INTEGRADO
+========================================================= */
+
+.pharma-view
+.catalog-search-main {
+  min-height:
+    51px;
+
+  grid-template-columns:
+    39px
+    minmax(0, 1fr)
+    auto;
+}
+
+
+.pharma-view
+.catalog-search-icon {
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+}
+
+
+.pharma-view
+.catalog-search-field {
+  min-height:
+    48px;
+
+  padding:
+    5px 0 !important;
+}
+
+
+.pharma-view
+.catalog-search-field label {
+  margin:
+    0 0 2px;
+
+  line-height:
+    1;
+}
+
+
+.pharma-view
+.catalog-search-field input {
+  min-height:
+    25px !important;
+
+  height:
+    25px !important;
+
+  line-height:
+    25px !important;
+}
+
+
+/* =========================================================
+   DARK / PINK / BLUE
+========================================================= */
+
+html[data-theme="dark-orange"]
+.pharma-view
+.catalog-search-main {
+  background:
+    rgba(
+      18,
+      18,
+      18,
+      .94
+    ) !important;
+}
+
+
+html[data-theme="pink-glitter"]
+.pharma-view
+.catalog-search-main {
+  background:
+    rgba(
+      55,
+      18,
+      46,
+      .92
+    ) !important;
+}
+
+
+html[data-theme="blue-black"]
+.pharma-view
+.catalog-search-main {
+  background:
+    var(--theme-surface) !important;
+}

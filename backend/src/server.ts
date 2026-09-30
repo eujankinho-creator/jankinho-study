@@ -40,6 +40,13 @@ import {
   desconectarSpotify,
 } from "./spotify";
 
+import {
+  connectSigaa,
+  sigaaStatus,
+  sigaaOverview,
+  disconnectSigaa,
+} from "./sigaa";
+
 
 const PORT =
   Number(process.env.PORT || 3002);
@@ -2654,6 +2661,160 @@ const server =
         }
 
 
+        /* =========================================================
+           SIGAA UFPB
+        ========================================================= */
+
+        if (
+          caminho ===
+            "/api/sigaa/connect" &&
+          metodo ===
+            "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const body =
+            await lerJson(
+              request
+            );
+
+
+          const resultado =
+            await connectSigaa(
+              usuarioId,
+              body
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/sigaa/status" &&
+          metodo ===
+            "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const resultado =
+            sigaaStatus(
+              usuarioId
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/sigaa/overview" &&
+          metodo ===
+            "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const force =
+            url.searchParams.get(
+              "force"
+            ) ===
+            "1";
+
+
+          const resultado =
+            await sigaaOverview(
+              usuarioId,
+              force
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/sigaa/disconnect" &&
+          metodo ===
+            "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const resultado =
+            await disconnectSigaa(
+              usuarioId
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
         /* ALIASES */
 
         if (
@@ -2718,8 +2879,10 @@ const server =
           new Set([
             "/questoes",
             "/flashcards",
+            "/farmacos",
             "/financas",
             "/musica",
+            "/sigaa",
             "/app",
             "/casos",
             "/laboratorio",
@@ -2831,6 +2994,20 @@ const server =
           redirect(
             response,
             "/flashcards.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+          "/farmacos"
+        ) {
+
+          redirect(
+            response,
+            "/farmacos.html"
           );
 
           return;
@@ -3038,6 +3215,20 @@ const server =
 
           return;
         }
+
+        if (
+          caminho === "/sigaa" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/sigaa.html"
+          );
+
+          return;
+        }
+
 
         if (
           caminho === "/app" &&

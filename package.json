@@ -1,29 +1,30 @@
 {
-    "name":  "jankinho-study",
-    "version":  "0.1.0",
-    "private":  true,
-    "scripts":  {
-                    "dev":  "tsx watch backend/src/server.ts",
-                    "build":  "prisma generate \u0026\u0026 tsc --noEmit",
-                    "start":  "tsx backend/src/server.ts",
-                    "lint":  "tsc --noEmit",
-                    "postinstall":  "prisma generate",
-                    "db:seed":  "tsx scripts/create-user.ts"
-                },
-    "dependencies":  {
-                         "@prisma/adapter-pg":  "^7.10.0",
-                         "@prisma/client":  "^6.19.0",
-                         "bcryptjs":  "^3.0.3",
-                         "jose":  "^6.2.12",
-                         "openai":  "^7.23.0",
-                         "pg":  "^8.23.0",
-                         "prisma":  "^6.19.0"
-                     },
-    "devDependencies":  {
-                            "@types/bcryptjs":  "^2.4.6",
-                            "@types/node":  "^20",
-                            "@types/pg":  "^8.23.1",
-                            "tsx":  "^4.23.15",
-                            "typescript":  "^5"
-                        }
+    "name": "jankinho-study",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "tsx watch backend/src/server.ts",
+        "build": "prisma generate && tsc --noEmit",
+        "start": "tsx backend/src/server.ts",
+        "lint": "tsc --noEmit",
+        "postinstall": "prisma generate",
+        "db:seed": "tsx scripts/create-user.ts"
+    },
+    "dependencies": {
+        "@prisma/adapter-pg": "^7.10.0",
+        "@prisma/client": "^6.19.0",
+        "bcryptjs": "^3.0.3",
+        "jose": "^6.2.12",
+        "openai": "^7.23.0",
+        "pg": "^8.23.0",
+        "prisma": "^6.19.0",
+        "sigaa-api": "github:GeovaneSchmitz/sigaa-api#master"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^2.4.6",
+        "@types/node": "^20",
+        "@types/pg": "^8.23.1",
+        "tsx": "^4.23.15",
+        "typescript": "^5"
+    }
 }

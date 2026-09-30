@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#050505"
+  >
+
+  <title>Farmacologia | Cortex</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/app.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/ui-enhancements.css"
+  >
+
+  <script src="/js/ui-enhancements.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/themes.css"
+  >
+
+  <script src="/js/theme-manager.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/cortex-brand.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/farmacos-premium.css"
+  >
+  <link
+    rel="stylesheet"
+    href="/css/sidebar-standard.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/theme-final.css"
+  >
+
+  <script
+    src="/js/sidebar-standard.js"
+    defer
+  ></script>
+</head>
+
+<body class="pharma-view">
+
+  <aside class="sidebar">
+
+    <a
+      href="/"
+      class="sidebar-logo"
+    >
+      <div class="logo-box"></div>
+
+      <div>
+        <strong>Cortex</strong>
+        <span>Study Platform</span>
+      </div>
+    </a>
+
+    <div class="sidebar-menu">
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+
+        <a
+          href="/"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M4 11.5 12 5l8 6.5"
+              />
+
+              <path
+                d="M6.5 10.5V19h11v-8.5"
+              />
+
+              <path
+                d="M9.5 19v-5h5v5"
+              />
+
+            </svg>
+
+          </span>
+
+          Dashboard
+
+        </a>
+
+
+        <a
+          href="/questoes"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <rect
+                x="5"
+                y="4"
+                width="14"
+                height="16"
+                rx="3"
+              />
+
+              <path d="M9 9h6"/>
+              <path d="M9 13h6"/>
+              <path d="M9 17h3"/>
+
+            </svg>
+
+          </span>
+
+          Quest&otilde;es
+
+        </a>
+
+
+        <a
+          href="/flashcards"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <rect
+                x="4"
+                y="6"
+                width="14"
+                height="12"
+                rx="2"
+              />
+
+              <path
+                d="m8 6 2-2h10v12l-2 2"
+              />
+
+            </svg>
+
+          </span>
+
+          Flashcards
+
+        </a>
+        <a
+          href="/farmacos"
+          class="menu-item active"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M8.1 4.6a5 5 0 0 1 7.1 0l4.2 4.2a5 5 0 0 1-7.1 7.1l-4.2-4.2a5 5 0 0 1 0-7.1Z"
+              />
+
+              <path
+                d="m9.2 12.8 6.4-6.4"
+              />
+
+            </svg>
+
+          </span>
+
+          Farmacologia
+
+        </a>
+
+        
+
+
+        <a
+          href="/casos"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M8 5h8"
+              />
+
+              <path
+                d="M10 3h4v4h-4z"
+              />
+
+              <rect
+                x="5"
+                y="6"
+                width="14"
+                height="15"
+                rx="3"
+              />
+
+              <path
+                d="M12 10v7"
+              />
+
+              <path
+                d="M8.5 13.5h7"
+              />
+
+            </svg>
+
+          </span>
+
+          Casos Cl&iacute;nicos
+
+        </a>
+
+
+        <a
+          href="/laboratorio"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M9 3h6"
+              />
+
+              <path
+                d="M10 3v6l-5 8a2.5 2.5 0 0 0 2.2 4h9.6A2.5 2.5 0 0 0 19 17l-5-8V3"
+              />
+
+              <path
+                d="M7.5 15h9"
+              />
+
+            </svg>
+
+          </span>
+
+          Laborat&oacute;rio
+
+        </a>
+
+
+        <a
+          href="/evolucao"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M5 19h14"
+              />
+
+              <path
+                d="m7 15 3-4 3 2 4-6"
+              />
+
+              <path
+                d="M15 7h2v2"
+              />
+
+            </svg>
+
+          </span>
+
+          Evolu&ccedil;&atilde;o
+
+        </a>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+
+        <a
+          href="/desempenho"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path d="M5 19V10"/>
+              <path d="M10 19V5"/>
+              <path d="M15 19v-7"/>
+              <path d="M20 19V8"/>
+
+            </svg>
+
+          </span>
+
+          Desempenho
+
+        </a>
+
+
+        <a
+          href="/ranking"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M8 21h8"
+              />
+
+              <path
+                d="M12 17v4"
+              />
+
+              <path
+                d="M7 4h10v4a5 5 0 0 1-10 0z"
+              />
+
+              <path
+                d="M7 6H4v1a4 4 0 0 0 4 4"
+              />
+
+              <path
+                d="M17 6h3v1a4 4 0 0 1-4 4"
+              />
+
+            </svg>
+
+          </span>
+
+          Ranking
+
+        </a>
+
+      </div>
+
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+
+        <a
+          href="/financas"
+          class="menu-item"
+        >
+
+          <span class="menu-icon menu-icon-text">
+            R$
+          </span>
+
+          Finan&ccedil;as
+
+        </a>
+        <a href="/musica" class="menu-item">
+          <span>&#9835;</span>
+          M&uacute;sica
+        </a>
+
+
+        <a
+          href="/configuracoes"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <circle
+                cx="12"
+                cy="12"
+                r="3"
+              />
+
+              <path
+                d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"
+              />
+
+            </svg>
+
+          </span>
+
+          Configura&ccedil;&otilde;es
+
+        </a>
+
+      </div>
+
+
+    </div>
+
+
+
+    
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+        title="Sair"
+      >
+        &rarr;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-copy">
+
+        <div class="header-title">
+          Farmacologia
+        </div>
+
+        <span>
+          Atlas interativo de f&aacute;rmacos
+        </span>
+
+      </div>
+
+      <div class="header-user">
+
+        <div>
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Cortex
+          </span>
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="pharma-page">
+
+      <section class="pharma-hero">
+
+        <div class="pharma-hero-copy">
+
+          <div class="pharma-kicker">
+            <span></span>
+            Cortex Pharmacology
+          </div>
+
+          <h1>
+            Entenda o f&aacute;rmaco
+            <em>pelo receptor.</em>
+          </h1>
+
+          <p>
+            Relacione classe, receptor, mecanismo de a&ccedil;&atilde;o,
+            efeito fisiol&oacute;gico e aplica&ccedil;&atilde;o cl&iacute;nica.
+          </p>
+
+          <div class="hero-pills">
+
+            <span>
+              Agonistas
+            </span>
+
+            <span>
+              Antagonistas
+            </span>
+
+            <span>
+              Diretos
+            </span>
+
+            <span>
+              Indiretos
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="pharma-hero-stats">
+
+          <article>
+
+            <span>
+              F&aacute;rmacos
+            </span>
+
+            <strong id="drugTotal">
+              0
+            </strong>
+
+          </article>
+
+          <article>
+
+            <span>
+              Revisados
+            </span>
+
+            <strong id="reviewedTotal">
+              0
+            </strong>
+
+          </article>
+
+          <article>
+
+            <span>
+              Favoritos
+            </span>
+
+            <strong id="favoriteTotal">
+              0
+            </strong>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <section class="pharma-warning">
+
+        <strong>
+          Modo estudo
+        </strong>
+
+        <span>
+          Conte&uacute;do educacional resumido. Contraindica&ccedil;&otilde;es,
+          indica&ccedil;&otilde;es e efeitos podem variar conforme apresenta&ccedil;&atilde;o,
+          dose e contexto cl&iacute;nico.
+        </span>
+
+      </section>
+
+
+      <section class="pharma-toolbar">
+
+        
+
+        <button
+          id="studyModeButton"
+          class="toolbar-button"
+          type="button"
+        >
+          Modo estudo
+        </button>
+
+        <button
+          id="favoritesButton"
+          class="toolbar-button"
+          type="button"
+        >
+          Favoritos
+        </button>
+
+        <button
+          id="quizButton"
+          class="toolbar-button primary"
+          type="button"
+        >
+          Quiz r&aacute;pido
+        </button>
+
+      </section>
+
+
+      <section class="pharma-section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <small>
+              Classifica&ccedil;&atilde;o
+            </small>
+
+            <h2>
+              Filtrar por grupo
+            </h2>
+
+          </div>
+
+          <button
+            id="clearFilters"
+            type="button"
+            class="text-button"
+          >
+            Limpar filtros
+          </button>
+
+        </div>
+
+        <div
+          id="groupFilters"
+          class="filter-row"
+        ></div>
+
+        <div
+          id="actionFilters"
+          class="filter-row secondary"
+        ></div>
+
+      </section>
+
+
+      <section class="pharma-section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <small>
+              Farmacodin&acirc;mica
+            </small>
+
+            <h2>
+              Mapa de receptores
+            </h2>
+
+          </div>
+
+          <span
+            id="activeReceptorLabel"
+            class="active-filter-label"
+          >
+            Todos os receptores
+          </span>
+
+        </div>
+
+        <div
+          id="receptorMap"
+          class="receptor-map"
+        ></div>
+
+      </section>
+
+
+      <section class="pharma-section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <small>
+              Cat&aacute;logo
+            </small>
+
+            <h2>
+              F&aacute;rmacos
+            </h2>
+
+          </div>
+
+          <span id="resultCount">
+            0 resultados
+          </span>
+
+        </div>
+
+        <div
+          id="catalogAnchor"
+          class="catalog-anchor"
+        ></div>
+
+
+        <div
+          id="catalogSearchBar"
+          class="catalog-search-bar"
+        >
+
+          <div class="catalog-search-main">
+
+            <span class="catalog-search-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="6"
+                />
+
+                <path
+                  d="m16 16 4 4"
+                />
+
+              </svg>
+
+            </span>
+
+
+            <div class="catalog-search-field">
+
+              <label for="drugSearch">
+                Buscar no catálogo
+              </label>
+
+              <input
+                id="drugSearch"
+                type="search"
+                autocomplete="off"
+                placeholder="Fármaco, receptor, mecanismo, efeito..."
+              >
+
+            </div>
+
+
+            <button
+              id="clearSearchButton"
+              class="catalog-clear-search hidden"
+              type="button"
+              title="Limpar pesquisa"
+            >
+              &times;
+            </button>
+
+          </div>
+
+
+          <div class="catalog-search-status">
+
+            <span class="catalog-status-dot"></span>
+
+            <span id="catalogFilterSummary">
+              Todos os fármacos
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="drugGrid"
+          class="drug-grid"
+        ></div>
+
+        <div
+          id="emptyState"
+          class="pharma-empty hidden"
+        >
+          Nenhum f&aacute;rmaco encontrado com esses filtros.
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <div
+    id="compareDock"
+    class="compare-dock hidden"
+  >
+
+    <div>
+
+      <strong>
+        Comparar f&aacute;rmacos
+      </strong>
+
+      <span id="compareCount">
+        0 / 3
+      </span>
+
+    </div>
+
+    <div
+      id="compareNames"
+      class="compare-names"
+    ></div>
+
+    <button
+      id="openCompare"
+      type="button"
+    >
+      Comparar
+    </button>
+
+  </div>
+
+
+  <div
+    id="drugModal"
+    class="pharma-modal hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <button
+      class="modal-backdrop"
+      data-close-modal
+      type="button"
+      aria-label="Fechar"
+    ></button>
+
+    <article class="drug-modal-card">
+
+      <button
+        class="modal-close"
+        data-close-modal
+        type="button"
+      >
+        &times;
+      </button>
+
+      <div id="drugModalContent"></div>
+
+    </article>
+
+  </div>
+
+
+  <div
+    id="compareModal"
+    class="pharma-modal hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <button
+      class="modal-backdrop"
+      data-close-compare
+      type="button"
+      aria-label="Fechar"
+    ></button>
+
+    <article class="drug-modal-card compare-modal-card">
+
+      <button
+        class="modal-close"
+        data-close-compare
+        type="button"
+      >
+        &times;
+      </button>
+
+      <div id="compareModalContent"></div>
+
+    </article>
+
+  </div>
+
+
+  <div
+    id="quizModal"
+    class="pharma-modal hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <button
+      class="modal-backdrop"
+      data-close-quiz
+      type="button"
+      aria-label="Fechar"
+    ></button>
+
+    <article class="drug-modal-card quiz-modal-card">
+
+      <button
+        class="modal-close"
+        data-close-quiz
+        type="button"
+      >
+        &times;
+      </button>
+
+      <div id="quizContent"></div>
+
+    </article>
+
+  </div>
+
+
+  <script src="/js/farmacos-data.js"></script>
+  <script src="/js/farmacos.js"></script>
+  <script src="/js/cortex-brand.js"></script>
+
+</body>
+</html>
