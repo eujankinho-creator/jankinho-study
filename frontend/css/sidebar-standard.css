@@ -493,3 +493,69 @@ span:not(.cortex-nav-icon):not(.cortex-nav-label) {
   }
 
 }
+
+/* =========================================================
+   CORTEX MOBILE SIDEBAR SINGLE OWNER V2
+   sidebar-standard.js e o unico dono da navegacao mobile.
+========================================================= */
+
+#mobileOverlay,
+.mobile-overlay,
+.mobile-sidebar,
+.mobile-menu-button,
+.finance-mobile-button,
+.finance-mobile-overlay {
+  display:
+    none !important;
+}
+
+
+html.cortex-mobile-menu-open,
+body.cortex-mobile-menu-open {
+  overflow:
+    hidden !important;
+
+  overscroll-behavior:
+    none !important;
+}
+
+
+@media (max-width: 900px) {
+
+  .sidebar {
+    display:
+      none !important;
+  }
+
+
+  .main-area {
+    padding-left:
+      0 !important;
+  }
+
+
+  .cortex-mobile-sidebar-button {
+    display:
+      grid !important;
+  }
+
+
+  .cortex-mobile-sidebar-overlay {
+    display:
+      block !important;
+  }
+
+}
+
+
+@media (min-width: 901px) {
+
+  .cortex-mobile-sidebar-button,
+  .cortex-mobile-sidebar-overlay {
+    display:
+      none !important;
+  }
+
+}
+
+/* CORTEX MOBILE SIDEBAR SINGLE OWNER V2 END */
