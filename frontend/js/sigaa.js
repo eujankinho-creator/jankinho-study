@@ -75,13 +75,16 @@
 
   function renderLessonAttachment(attachment, courseId) {
     const item = attachment || {};
-    const title = escapeHtml(item.title || item.type || "Recurso");
+    const rawTitle = item.title || item.type || "Recurso";
+    const title = escapeHtml(rawTitle);
 
-    if (item.downloadable && item.id) {
+    if (item.downloadable && item.verifiedFile && item.id) {
       const url = "/api/sigaa/courses/" + encodeURIComponent(courseId) +
         "/files/" + encodeURIComponent(item.id) + "/download";
+      const kind = item.kind && item.kind !== "ARQUIVO" ? " " + item.kind : "";
       return '<button type="button" data-sigaa-download="' + escapeHtml(url) +
-        '" data-filename="' + title + '">Baixar · ' + title + "</button>";
+        '" data-filename="' + escapeHtml(rawTitle) + '">Baixar' +
+        escapeHtml(kind) + ' · ' + title + "</button>";
     }
 
     if (item.url) {
@@ -273,24 +276,39 @@
 
   function renderFiles(section, courseId) {
     if (!section || section.available === false) return unavailable(section);
-    const files = Array.isArray(section.data) ? section.data : [];
-    if (!files.length) return emptyState("Nenhum arquivo publicado nesta disciplina.");
+
+    const files = (Array.isArray(section.data) ? section.data : [])
+      .filter((file) => file && file.verified && file.downloadable && file.id);
+
+    if (!files.length) {
+      return emptyState(
+        "Nenhum arquivo baixável foi encontrado nesta disciplina. " +
+        "Textos, descrições e informações das aulas não são tratados como arquivos."
+      );
+    }
+
     return '<div class="resource-list">' + files.map((file) => {
       const url = "/api/sigaa/courses/" + encodeURIComponent(courseId) +
         "/files/" + encodeURIComponent(file.id) + "/download";
       const source = file.source || "SIGAA";
-      const description = file.description || "Material disponibilizado no SIGAA";
+      const description = file.description ||
+        "Arquivo confirmado no SIGAA e disponível para download.";
+      const kind = file.kind || "ARQUIVO";
+      const downloadLabel =
+        kind === "PDF" ? "Baixar PDF" :
+        kind === "WORD" ? "Baixar Word" :
+        "Baixar arquivo";
+
       return `
         <article class="resource-row">
-          <div class="resource-icon">DOC</div>
+          <div class="resource-icon">${escapeHtml(kind)}</div>
           <div class="resource-copy">
             <strong>${escapeHtml(file.title || "Arquivo")}</strong>
             <span>${escapeHtml(description)}</span>
-            <span class="resource-source">${escapeHtml(source)}</span>
+            <span class="resource-source">${escapeHtml(source)} · arquivo confirmado</span>
           </div>
-          ${file.downloadable === false ? '<span class="download-button">Indisponível</span>' :
-            '<button type="button" class="download-button" data-sigaa-download="' + escapeHtml(url) +
-            '" data-filename="' + escapeHtml(file.title || "arquivo") + '">Baixar</button>'}
+          <button type="button" class="download-button" data-sigaa-download="${escapeHtml(url)}"
+            data-filename="${escapeHtml(file.title || "arquivo")}">${escapeHtml(downloadLabel)}</button>
         </article>
       `;
     }).join("") + "</div>";
@@ -386,7 +404,7 @@
     $("tab-overview").innerHTML = `
       <div class="overview-cards">
         <article class="overview-feature"><small>DESEMPENHO</small><h3>Notas</h3><p>${gradeCount ? gradeCount + " lançamento(s) de nota disponíveis." : "Nenhuma nota lançada ou seção indisponível."}</p><button type="button" data-open-tab="grades">Ver boletim →</button></article>
-        <article class="overview-feature"><small>MATERIAIS</small><h3>Arquivos</h3><p>${files.length ? files.length + " arquivo(s) disponível(is) para download." : "Nenhum arquivo encontrado."}</p><button type="button" data-open-tab="files">Abrir materiais →</button></article>
+        <article class="overview-feature"><small>MATERIAIS</small><h3>Arquivos</h3><p>${files.length ? files.length + " arquivo(s) real(is) confirmado(s) para download." : "Nenhum arquivo encontrado."}</p><button type="button" data-open-tab="files">Abrir materiais →</button></article>
         <article class="overview-feature"><small>FREQUÊNCIA</small><h3>Presença</h3><p>${sections.absences?.available === false ? "Seção indisponível." : (sections.absences?.data?.totalAbsences || 0) + " falta(s) registrada(s)."}</p><button type="button" data-open-tab="attendance">Ver frequência →</button></article>
         <article class="overview-feature"><small>AGENDA</small><h3>Atividades</h3><p>${homeworks.length + exams.length ? homeworks.length + exams.length + " atividade(s) ou avaliação(ões)." : "Nenhuma atividade encontrada."}</p><button type="button" data-open-tab="activities">Ver agenda →</button></article>
       </div>
