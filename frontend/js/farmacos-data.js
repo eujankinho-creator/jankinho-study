@@ -2878,3 +2878,146 @@
   });
 
 })();
+
+
+/*
+ * Normalizacao colinergica — remove categorias genericas duplicadas.
+ * Receptores muscarinicos ficam em M1-M5; nicotinicos em Nn/Nm.
+ * Inibidores indiretos sao ligados ao alvo enzimatico AChE/BChE,
+ * em vez de serem apresentados como ligantes diretos de receptores.
+ */
+(function () {
+  "use strict";
+
+  delete window.CortexReceptores.Muscarinicos;
+  delete window.CortexReceptores.Nicotinicos;
+
+  Object.assign(window.CortexReceptores, {
+    "M4": {
+      familia: "Muscarinico",
+      via: "Gi/o",
+      resumo: "Predomina no SNC, especialmente em circuitos do cortex e ganglios da base. Reduz adenilato ciclase e AMPc quando ativado."
+    },
+    "M5": {
+      familia: "Muscarinico",
+      via: "Gq/11",
+      resumo: "Receptor muscarinico predominantemente central, encontrado entre outras regioes em substantia nigra e area tegmental ventral; ativa a via PLC/IP3-DAG."
+    },
+    "AChE": {
+      familia: "Enzima colinergica",
+      via: "Degradacao da acetilcolina",
+      resumo: "Acetilcolinesterase. Sua inibicao aumenta a disponibilidade de acetilcolina nas sinapses e na juncao neuromuscular."
+    },
+    "BChE": {
+      familia: "Enzima colinergica",
+      via: "Hidrolise de colina-esteres",
+      resumo: "Butirilcolinesterase. Alvo adicional relevante de alguns inibidores de colinesterase, especialmente rivastigmina."
+    }
+  });
+
+  function updateDrug(id, changes) {
+    const drug = window.CortexFarmacos.find(function (item) {
+      return item.id === id;
+    });
+
+    if (drug) {
+      Object.assign(drug, changes);
+    }
+  }
+
+  // Agonistas diretos nao seletivos / amplos.
+  updateDrug("acetilcolina", {
+    receptores: ["M1", "M2", "M3", "M4", "M5", "Nn", "Nm"],
+    mecanismo: "Agonista colinergico endogeno: ativa receptores muscarinicos M1-M5 e nicotinicos Nn/Nm."
+  });
+
+  updateDrug("carbacol", {
+    receptores: ["M1", "M2", "M3", "M4", "M5", "Nn", "Nm"],
+    mecanismo: "Agonista colinergico direto com atividade muscarinica e nicotinica; ativa receptores M1-M5 e Nn/Nm.",
+    dica: "Carbacol = agonista direto muscarinico + nicotinico; no olho promove miose e reduz a pressao intraocular."
+  });
+
+  updateDrug("betanecol", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Agonista colinergico direto seletivo para a familia muscarinica, com atividade em M1-M5 e efeito clinico especialmente importante em M3 no detrusor e musculo liso."
+  });
+
+  updateDrug("pilocarpina", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Agonista muscarinico direto com atividade nos subtipos M1-M5; seus efeitos glandulares e oculares sao especialmente importantes."
+  });
+
+  updateDrug("metacolina", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Agonista colinergico direto predominantemente muscarinico; a broncoconstricao usada no teste de provocacao ocorre principalmente por receptores muscarinicos das vias aereas."
+  });
+
+  // Antimuscarinicos nao seletivos que possuem afinidade por M1-M5.
+  updateDrug("atropina", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Antagonista competitivo nao seletivo dos receptores muscarinicos M1-M5."
+  });
+
+  updateDrug("escopolamina", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Antagonista muscarinico nao seletivo com atividade nos subtipos M1-M5 e importante penetracao no SNC."
+  });
+
+  updateDrug("ipratropio", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Antagonista muscarinico competitivo com afinidade pelos subtipos M1-M5; a broncodilatacao decorre principalmente do bloqueio de M3 nas vias aereas."
+  });
+
+  updateDrug("tiotropio", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Antagonista muscarinico de longa acao com afinidade por M1-M5 e dissociacao mais lenta de M1/M3 que de M2; o efeito broncodilatador e principalmente M3."
+  });
+
+  updateDrug("oxibutinina", {
+    receptores: ["M1", "M2", "M3", "M4", "M5"],
+    mecanismo: "Antagonista muscarinico com afinidade pelos subtipos M1-M5; o efeito terapeutico na bexiga e predominantemente relacionado ao bloqueio de M3."
+  });
+
+  // Inibidores de colinesterase: alvo direto = enzima, nao receptor M/N.
+  updateDrug("neostigmina", {
+    receptores: ["AChE"],
+    mecanismo: "Inibe reversivelmente a acetilcolinesterase (AChE), elevando acetilcolina na sinapse. Os efeitos muscarinicos e nicotinicos sao indiretos.",
+    dica: "Neostigmina = inibe AChE; aumenta ACh e melhora transmissao neuromuscular."
+  });
+
+  updateDrug("piridostigmina", {
+    receptores: ["AChE"],
+    mecanismo: "Inibe reversivelmente a acetilcolinesterase (AChE), aumentando acetilcolina; os efeitos em receptores muscarinicos e nicotinicos sao indiretos.",
+    dica: "Piridostigmina = AChE; efeito colinergico indireto."
+  });
+
+  updateDrug("edrofonio", {
+    receptores: ["AChE"],
+    mecanismo: "Inibidor reversivel e de curta duracao da acetilcolinesterase (AChE); aumenta acetilcolina nos locais de transmissao colinergica.",
+    dica: "Edrofonio = AChE, acao curta e efeito colinergico indireto."
+  });
+
+  updateDrug("donepezila", {
+    receptores: ["AChE"],
+    mecanismo: "Inibe reversivelmente a acetilcolinesterase (AChE), aumentando a disponibilidade sinaptica de acetilcolina no SNC.",
+    dica: "Donepezila = AChE; Alzheimer."
+  });
+
+  updateDrug("galantamina", {
+    receptores: ["AChE", "Nn"],
+    mecanismo: "Inibe reversivelmente a acetilcolinesterase (AChE) e apresenta modulacao alosterica positiva de receptores nicotinicos neuronais.",
+    dica: "Galantamina = AChE + modulacao nicotinica neuronal; Alzheimer."
+  });
+
+  updateDrug("rivastigmina", {
+    receptores: ["AChE", "BChE"],
+    mecanismo: "Inibe acetilcolinesterase (AChE) e butirilcolinesterase (BChE), aumentando a disponibilidade de acetilcolina no SNC.",
+    dica: "Rivastigmina = AChE + BChE; Alzheimer e demencia associada a Parkinson."
+  });
+
+  updateDrug("fisostigmina", {
+    receptores: ["AChE", "BChE"],
+    mecanismo: "Inibidor de colinesterases com acao central; aumenta acetilcolina e pode reverter intoxicacao por antimuscarinicos.",
+    dica: "Fisostigmina = inibidor de colinesterase com acesso ao SNC; antidoto em intoxicacao antimuscarinica."
+  });
+})();
