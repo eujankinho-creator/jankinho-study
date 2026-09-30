@@ -1486,10 +1486,30 @@
             "click",
             function () {
 
-              chooseAnswer(
+              const optionIndex =
                 Number(
                   button.dataset.answer
+                );
+
+
+              const currentEliminated =
+                state.eliminated.get(
+                  state.index
+                );
+
+
+              if (
+                currentEliminated &&
+                currentEliminated.has(
+                  optionIndex
                 )
+              ) {
+                return;
+              }
+
+
+              chooseAnswer(
+                optionIndex
               );
 
             }
