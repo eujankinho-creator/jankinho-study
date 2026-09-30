@@ -2026,3 +2026,855 @@
   ];
 
 })();
+
+/*
+ * Unidade 3 — Farmacologia By Haggi
+ * Fonte: PDF "3 stag.pdf" enviado pelo usuario.
+ *
+ * Esta camada preserva a terminologia do material de estudo.
+ * Quando o PDF informa apenas um alvo/via (e nao um receptor
+ * molecular especifico), o Cortex registra esse alvo como tal.
+ */
+(function () {
+  "use strict";
+
+  const SOURCE = "3ª Unidade — Farmacologia By Haggi";
+
+  function slug(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  function make(names, shared, overrides) {
+    const map = overrides || {};
+
+    return names.map(function (name) {
+      return Object.assign(
+        {
+          id: slug(name),
+          nome: name,
+          principioAtivo: name,
+          fonte: SOURCE
+        },
+        shared,
+        map[name] || {}
+      );
+    });
+  }
+
+  Object.assign(
+    window.CortexReceptores,
+    {
+      "COX-1": {
+        familia: "Cicloxigenase",
+        via: "COX-1",
+        resumo: "Predominantemente constitutiva; no material, relaciona-se à proteção da mucosa gástrica, função renal e agregação plaquetária."
+      },
+      "COX-2": {
+        familia: "Cicloxigenase",
+        via: "COX-2",
+        resumo: "Mais associada à resposta inflamatória e alvo preferencial dos AINEs seletivos descritos no material."
+      },
+      "Receptor intracelular": {
+        familia: "Corticoides",
+        via: "Núcleo / transcrição gênica",
+        resumo: "Corticoide liga-se a receptor intracelular, segue ao núcleo e altera a transcrição gênica, aumentando anexina 1/lipocortina e reduzindo fosfolipase A2."
+      },
+      "Parede celular": {
+        familia: "Antimicrobianos",
+        via: "Parede bacteriana",
+        resumo: "Alvo de classes que bloqueiam a síntese da parede/peptidoglicano no material."
+      },
+      "Membrana bacteriana": {
+        familia: "Antimicrobianos",
+        via: "Membrana",
+        resumo: "Polimixinas formam poros e desestabilizam a membrana bacteriana."
+      },
+      "DNA girase/topoisomerases": {
+        familia: "Antimicrobianos",
+        via: "DNA",
+        resumo: "Alvo descrito para quinolonas."
+      },
+      "50S": {
+        familia: "Ribossomo bacteriano",
+        via: "Síntese proteica",
+        resumo: "Alvo de macrolídeos e cloranfenicol no material."
+      },
+      "30S": {
+        familia: "Ribossomo bacteriano",
+        via: "Síntese proteica",
+        resumo: "Alvo de tetraciclinas e aminoglicosídeos no material."
+      },
+      "Ácido fólico": {
+        familia: "Antimicrobianos",
+        via: "Via do folato",
+        resumo: "Alvo metabólico de sulfonamidas, trimetoprim e da associação sulfametoxazol + trimetoprim."
+      },
+      "H1": {
+        familia: "Histamínico",
+        via: "Gq",
+        resumo: "No material: broncoconstrição, vasodilatação, edema e prurido."
+      },
+      "H2": {
+        familia: "Histamínico",
+        via: "Gs",
+        resumo: "No material: aumento de HCl gástrico e efeitos cardíacos."
+      },
+      "H3": {
+        familia: "Histamínico",
+        via: "Gi",
+        resumo: "Descrito como autorreceptor no SNC."
+      },
+      "H4": {
+        familia: "Histamínico",
+        via: "Gi",
+        resumo: "Relacionado à quimiotaxia de leucócitos no material."
+      },
+      "Mastócitos/basófilos": {
+        familia: "Antialérgicos",
+        via: "Liberação de histamina",
+        resumo: "Cromolim e nedocromil são descritos como redutores da liberação de histamina por mastócitos/basófilos."
+      },
+      "Via dos leucotrienos": {
+        familia: "Eicosanoides",
+        via: "Leucotrienos",
+        resumo: "O material relaciona leucotrienos à broncoconstrição/exsudato e montelucaste ao controle da asma crônica."
+      },
+      "PGE": {
+        familia: "Eicosanoides",
+        via: "Prostaglandinas",
+        resumo: "Alvo/via indicada no material para misoprostol, análogo de PGE."
+      },
+      "PGE1": {
+        familia: "Eicosanoides",
+        via: "Prostaglandinas",
+        resumo: "Alvo/via indicada no material para alprostadil."
+      },
+      "Nav": {
+        familia: "Canal de sódio",
+        via: "Canal de Na+ voltagem-dependente",
+        resumo: "Anestésicos locais bloqueiam canais Nav, reduzem influxo de Na+ e impedem despolarização e propagação do potencial de ação."
+      },
+      "Ação central": {
+        familia: "Analgésicos",
+        via: "SNC",
+        resumo: "O material descreve o paracetamol com ação predominantemente central e pouca ação anti-inflamatória periférica clinicamente relevante."
+      }
+    }
+  );
+
+  const unit3 = [];
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["AAS", "Salicilato de metila"],
+      {
+        grupo: "AINEs",
+        classe: "Salicilatos",
+        acao: "Inibição de COX",
+        receptores: ["COX-1", "COX-2"],
+        mecanismo: "Inibição da cicloxigenase, reduzindo a formação de prostanoides.",
+        efeitos: ["Redução de dor", "Redução de febre", "Redução de inflamação"],
+        usos: ["Dor, febre e inflamação"],
+        adversos: ["Sangramento", "Salicismo"],
+        alertas: [],
+        dica: "Salicilatos → COX; no AAS, lembre também de plaquetas."
+      },
+      {
+        "AAS": {
+          principioAtivo: "Ácido acetilsalicílico (AAS)",
+          mecanismo: "Inibe COX; o material destaca inibição irreversível da COX plaquetária.",
+          efeitos: ["Redução de dor, febre e inflamação", "Antiagregação plaquetária em baixa dose"],
+          usos: ["Dor, febre e inflamação", "AAS em baixa dose como antiagregante"],
+          alertas: ["Criança + doença viral + salicilato → Síndrome de Reye"],
+          dica: "AAS + plaqueta = inibição irreversível / antiagregação."
+        }
+      }
+    )
+  );
+
+  unit3.push(
+    {
+      id: "paracetamol",
+      nome: "Paracetamol",
+      principioAtivo: "Paracetamol",
+      grupo: "Analgésicos e antipiréticos",
+      classe: "Paracetamol",
+      acao: "Ação predominantemente central",
+      receptores: ["Ação central"],
+      mecanismo: "O material descreve ação predominantemente central, com pouca ação anti-inflamatória periférica clinicamente relevante.",
+      efeitos: ["Analgesia", "Antipirese"],
+      usos: ["Dor leve/moderada", "Febre"],
+      adversos: ["Hepatotoxicidade por superdosagem"],
+      alertas: ["Não classificar como AINE anti-inflamatório no contexto do material"],
+      dica: "Paracetamol + overdose = fígado.",
+      fonte: SOURCE
+    }
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Ácido mefenâmico", "Ácido tolfenâmico"],
+      {
+        grupo: "AINEs",
+        classe: "Fenamatos",
+        acao: "Inibição não seletiva de COX",
+        receptores: ["COX-1", "COX-2"],
+        mecanismo: "Inibição não seletiva de COX-1/COX-2.",
+        efeitos: ["Redução de inflamação", "Analgesia"],
+        usos: ["Inflamações", "Dismenorreia"],
+        adversos: ["Agressão gástrica", "Alterações hematológicas"],
+        alertas: [],
+        dica: "Fenamatos = COX-1/COX-2 + inflamação/dismenorreia."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Diclofenaco"],
+      {
+        grupo: "AINEs",
+        classe: "Acetatos",
+        acao: "Inibição de COX",
+        receptores: ["COX-1", "COX-2"],
+        mecanismo: "Inibe COX-1/COX-2.",
+        efeitos: ["Analgesia", "Ação anti-inflamatória"],
+        usos: ["Dores e inflamações articulares"],
+        adversos: ["Agressão gástrica", "Hepatotoxicidade", "Alterações hematológicas"],
+        alertas: [],
+        dica: "Diclofenaco + articulação = tropismo pelo líquido sinovial."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Ibuprofeno", "Naproxeno", "Cetoprofeno"],
+      {
+        grupo: "AINEs",
+        classe: "Propionatos",
+        acao: "Inibição não seletiva de COX",
+        receptores: ["COX-1", "COX-2"],
+        mecanismo: "Inibição não seletiva de COX-1/COX-2.",
+        efeitos: ["Analgesia", "Antipirese", "Ação anti-inflamatória"],
+        usos: ["Dor", "Inflamação", "Processos musculoesqueléticos"],
+        adversos: ["Toxicidade gástrica", "Toxicidade renal"],
+        alertas: ["AINE + rim → redução de prostaglandinas renais e risco de lesão renal"],
+        dica: "Propionatos = dor, inflamação e processos musculoesqueléticos."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Piroxicam", "Tenoxicam", "Meloxicam", "Metoxicam"],
+      {
+        grupo: "AINEs",
+        classe: "Oxicans",
+        acao: "Inibição de COX",
+        receptores: ["COX-1", "COX-2"],
+        mecanismo: "Inibição de COX-1/COX-2; o material destaca leve preferência do meloxicam por COX-2.",
+        efeitos: ["Analgesia", "Ação anti-inflamatória"],
+        usos: ["Artrite reumatoide", "Osteoartrite", "Inflamação crônica"],
+        adversos: ["Tontura", "Sonolência", "Agressão gástrica"],
+        alertas: ["Meia-vida longa"],
+        dica: "Piroxicam/meloxicam = oxicans + meia-vida longa."
+      }
+    )
+  );
+
+  unit3.push(
+    {
+      id: "dipirona",
+      nome: "Dipirona",
+      principioAtivo: "Dipirona / metamizol",
+      grupo: "Analgésicos e antipiréticos",
+      classe: "Dipirona / metamizol",
+      acao: "Redução da síntese de prostaglandinas",
+      receptores: ["COX-1", "COX-2"],
+      mecanismo: "Redução da síntese de prostaglandinas.",
+      efeitos: ["Analgesia", "Antipirese"],
+      usos: ["Analgesia", "Antipirese"],
+      adversos: ["Agranulocitose", "Aplasia medular", "Anemia", "Hipotensão IV"],
+      alertas: ["Alterações hematológicas são destaque no material"],
+      dica: "Dipirona + alteração hematológica = agranulocitose.",
+      fonte: SOURCE
+    }
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Nimesulida", "Nimesutona"],
+      {
+        grupo: "AINEs",
+        classe: "Seletivos / preferenciais COX-2",
+        acao: "Inibição preferencial de COX-2",
+        receptores: ["COX-2"],
+        mecanismo: "Inibição preferencial de COX-2.",
+        efeitos: ["Analgesia", "Ação anti-inflamatória"],
+        usos: ["Processos musculares/articulares", "Dismenorreia"],
+        adversos: ["Risco renal"],
+        alertas: ["Menor agressão gastrointestinal que os não seletivos, segundo o material"],
+        dica: "COX-2 preferencial = menor agressão gástrica, mas o risco renal permanece."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Celecoxibe", "Rofecoxibe", "Valdecoxibe"],
+      {
+        grupo: "AINEs",
+        classe: "Coxibes",
+        acao: "Inibição altamente seletiva de COX-2",
+        receptores: ["COX-2"],
+        mecanismo: "Inibição altamente seletiva de COX-2.",
+        efeitos: ["Analgesia", "Ação anti-inflamatória"],
+        usos: ["Inflamação", "Dor"],
+        adversos: ["Risco cardiovascular"],
+        alertas: ["Menor toxicidade gástrica no material", "Coxibe + cardiopatia → atenção ao risco cardiovascular"],
+        dica: "Coxibe = COX-2 seletiva + risco cardiovascular."
+      }
+    )
+  );
+
+  const corticoidShared = {
+    grupo: "Corticoides",
+    classe: "Anti-inflamatório esteroidal",
+    acao: "Modulação gênica via receptor intracelular",
+    receptores: ["Receptor intracelular"],
+    mecanismo: "Corticoide → receptor intracelular → núcleo → alteração da transcrição gênica → aumento de anexina 1/lipocortina → redução de fosfolipase A2 → redução de ácido araquidônico e de prostaglandinas, tromboxanos e leucotrienos.",
+    efeitos: ["Ação anti-inflamatória", "Imunossupressão"],
+    usos: ["Terapias anti-inflamatórias"],
+    adversos: ["Hiperglicemia/diabetes", "Fraqueza/atrofia muscular", "Osteoporose", "Redistribuição de gordura", "Infecções", "Hipertensão", "Glaucoma", "Catarata", "Redução da cicatrização", "Supressão do eixo HPA"],
+    alertas: ["Uso crônico não deve ser interrompido abruptamente", "Retirada brusca após uso prolongado pode provocar insuficiência/crise adrenal"],
+    dica: "Corticoide = receptor intracelular → núcleo → anexina 1 → ↓ fosfolipase A2."
+  };
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Hidrocortisona", "Dexametasona", "Betametasona", "Prednisona", "Prednisolona"],
+      corticoidShared,
+      {
+        "Hidrocortisona": {
+          usos: ["Referência de corticoide esteroidal"],
+          dica: "Hidrocortisona = relacionada ao cortisol fisiológico; menor potência anti-inflamatória que corticoides mais potentes."
+        },
+        "Dexametasona": {
+          usos: ["Controle de inflamação intensa"],
+          dica: "Dexametasona = potente ação anti-inflamatória/imunossupressora."
+        },
+        "Betametasona": {
+          usos: ["Tratamentos anti-inflamatórios"],
+          dica: "Betametasona = potente anti-inflamatório."
+        },
+        "Prednisona": {
+          usos: ["Terapias inflamatórias"],
+          dica: "Prednisona: não retirar abruptamente após uso prolongado."
+        },
+        "Prednisolona": {
+          usos: ["Terapias inflamatórias"],
+          dica: "Prednisolona: não retirar abruptamente após uso prolongado."
+        }
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Penicilina G", "Penicilina V", "Amoxicilina", "Ampicilina"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Penicilinas",
+        acao: "Bactericida",
+        receptores: ["Parede celular"],
+        mecanismo: "Bloqueiam a síntese do peptidoglicano da parede celular.",
+        efeitos: ["Morte bacteriana"],
+        usos: ["Antimicrobiano com alvo em parede celular"],
+        adversos: [],
+        alertas: [],
+        dica: "Penicilinas = parede celular + bactericidas."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Cefalexina", "Cefuroxima", "Ceftriaxona", "Cefepima"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Cefalosporinas",
+        acao: "Bloqueio da parede celular",
+        receptores: ["Parede celular"],
+        mecanismo: "Bloqueiam a parede celular bacteriana.",
+        efeitos: ["Ação antimicrobiana por bloqueio de parede"],
+        usos: ["Antimicrobiano beta-lactâmico"],
+        adversos: [],
+        alertas: [],
+        dica: "Cefalosporinas: o material destaca 4 gerações e progressão geral para maior ação Gram−."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Imipeném"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Carbapenemos",
+        acao: "Bloqueio da parede celular",
+        receptores: ["Parede celular"],
+        mecanismo: "Bloqueia a parede celular bacteriana.",
+        efeitos: ["Ação antimicrobiana por bloqueio de parede"],
+        usos: ["Infecções graves/resistentes"],
+        adversos: [],
+        alertas: [],
+        dica: "Carbapenemo no material = parede celular + infecções graves/resistentes."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Aztreonam"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Monobactâmicos",
+        acao: "Bloqueio da parede celular",
+        receptores: ["Parede celular"],
+        mecanismo: "Bloqueia a parede celular bacteriana.",
+        efeitos: ["Ação antimicrobiana por bloqueio de parede"],
+        usos: ["Infecções específicas", "Espectro estreito"],
+        adversos: [],
+        alertas: [],
+        dica: "Aztreonam = monobactâmico + parede celular + espectro estreito."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Vancomicina"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Glicopeptídeos",
+        acao: "Bactericida",
+        receptores: ["Parede celular"],
+        mecanismo: "Bloqueia a síntese de peptidoglicano.",
+        efeitos: ["Morte bacteriana"],
+        usos: ["Antimicrobiano com alvo em parede celular"],
+        adversos: [],
+        alertas: [],
+        dica: "Vancomicina = glicopeptídeo + parede celular + bactericida."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Polimixina B", "Colistina"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Polimixinas",
+        acao: "Desestabilização de membrana",
+        receptores: ["Membrana bacteriana"],
+        mecanismo: "Formam poros e desestabilizam a membrana bacteriana.",
+        efeitos: ["Dano de membrana bacteriana"],
+        usos: ["Gram− multirresistentes"],
+        adversos: [],
+        alertas: [],
+        dica: "Polimixinas = membrana + Gram− multirresistentes."
+      }
+    )
+  );
+
+  const quinoloneShared = {
+    grupo: "Antimicrobianos",
+    classe: "Quinolonas",
+    acao: "Inibição de DNA girase/topoisomerases",
+    receptores: ["DNA girase/topoisomerases"],
+    mecanismo: "Inibem DNA girase/topoisomerases.",
+    efeitos: ["Interferência na replicação do DNA bacteriano"],
+    usos: ["Antimicrobiano da classe das quinolonas"],
+    adversos: ["Tendinite", "Ruptura de tendão"],
+    alertas: ["O material destaca toxicidade envolvendo especialmente o tendão de Aquiles"],
+    dica: "Quinolona + tendão = tendinite/ruptura."
+  };
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Ácido nalidíxico", "Norfloxacino", "Ciprofloxacino", "Levofloxacino", "Moxifloxacino", "Gatifloxacino"],
+      quinoloneShared,
+      {
+        "Ácido nalidíxico": { usos: ["1ª geração: Gram− urinárias"] },
+        "Norfloxacino": { usos: ["2ª geração: Gram− ampliado"] },
+        "Ciprofloxacino": { usos: ["2ª geração: Gram− ampliado"] },
+        "Levofloxacino": { usos: ["3ª geração: Gram+ e Gram−"] },
+        "Moxifloxacino": { usos: ["4ª geração: amplo espectro + anaeróbios"] },
+        "Gatifloxacino": { usos: ["4ª geração: amplo espectro + anaeróbios"] }
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Eritromicina", "Azitromicina", "Claritromicina"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Macrolídeos",
+        acao: "Bacteriostático",
+        receptores: ["50S"],
+        mecanismo: "Bloqueiam a translocação no ribossomo 50S.",
+        efeitos: ["Inibição da síntese proteica bacteriana"],
+        usos: ["Antimicrobiano inibidor de ribossomo"],
+        adversos: [],
+        alertas: [],
+        dica: "Macrolídeo = 50S + bacteriostático."
+      }
+    )
+  );
+
+  unit3.push(
+    {
+      id: "cloranfenicol",
+      nome: "Cloranfenicol",
+      principioAtivo: "Cloranfenicol",
+      grupo: "Antimicrobianos",
+      classe: "Cloranfenicol",
+      acao: "Bacteriostático",
+      receptores: ["50S"],
+      mecanismo: "Inibe a peptidiltransferase no ribossomo 50S.",
+      efeitos: ["Inibição da síntese proteica bacteriana"],
+      usos: ["Antimicrobiano inibidor de ribossomo"],
+      adversos: ["Mielotoxicidade"],
+      alertas: [],
+      dica: "Cloranfenicol = 50S + mielotoxicidade.",
+      fonte: SOURCE
+    }
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Tetraciclina", "Doxiciclina", "Minociclina"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Tetraciclinas",
+        acao: "Bacteriostático",
+        receptores: ["30S"],
+        mecanismo: "Impedem a ligação do aminoacil-tRNA ao ribossomo 30S.",
+        efeitos: ["Inibição da síntese proteica bacteriana"],
+        usos: ["Antimicrobiano inibidor de ribossomo"],
+        adversos: [],
+        alertas: ["Evitar em gestantes e menores de 8 anos, conforme o material"],
+        dica: "Tetraciclina = 30S + evitar em gestantes/<8 anos."
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Gentamicina", "Amicacina", "Tobramicina", "Estreptomicina"],
+      {
+        grupo: "Antimicrobianos",
+        classe: "Aminoglicosídeos",
+        acao: "Bactericida",
+        receptores: ["30S"],
+        mecanismo: "Provocam leitura errada do mRNA no ribossomo 30S.",
+        efeitos: ["Inibição da síntese proteica bacteriana", "Ação bactericida"],
+        usos: ["Antimicrobiano inibidor de ribossomo"],
+        adversos: ["Nefrotoxicidade", "Ototoxicidade"],
+        alertas: ["O material destaca que são o grupo bactericida entre os inibidores de ribossomo apresentados"],
+        dica: "Aminoglicosídeo = 30S + CIDA + nefro/ototoxicidade."
+      }
+    )
+  );
+
+  unit3.push(
+    {
+      id: "sulfametoxazol",
+      nome: "Sulfametoxazol",
+      principioAtivo: "Sulfametoxazol",
+      grupo: "Antimicrobianos",
+      classe: "Sulfonamidas",
+      acao: "Bacteriostático",
+      receptores: ["Ácido fólico"],
+      mecanismo: "Compete com PABA na via do ácido fólico.",
+      efeitos: ["Interferência na síntese de folato bacteriano"],
+      usos: ["Antimicrobiano da via do folato"],
+      adversos: [],
+      alertas: [],
+      dica: "Sulfonamida = ácido fólico + compete com PABA.",
+      fonte: SOURCE
+    },
+    {
+      id: "trimetoprim",
+      nome: "Trimetoprim",
+      principioAtivo: "Trimetoprim",
+      grupo: "Antimicrobianos",
+      classe: "Inibidor da via do folato",
+      acao: "Inibição de di-hidrofolato redutase",
+      receptores: ["Ácido fólico"],
+      mecanismo: "Inibe a di-hidrofolato redutase.",
+      efeitos: ["Interferência na síntese de folato bacteriano"],
+      usos: ["Associado ao sulfametoxazol"],
+      adversos: [],
+      alertas: [],
+      dica: "Trimetoprim = di-hidrofolato redutase; lembrar associação com sulfametoxazol.",
+      fonte: SOURCE
+    },
+    {
+      id: "bactrim",
+      nome: "Bactrim",
+      principioAtivo: "Sulfametoxazol + trimetoprim",
+      grupo: "Antimicrobianos",
+      classe: "Associação na via do folato",
+      acao: "Bloqueio sequencial da via do folato",
+      receptores: ["Ácido fólico"],
+      mecanismo: "Bloqueio sequencial da via do folato pela associação sulfametoxazol + trimetoprim.",
+      efeitos: ["Sinergismo"],
+      usos: ["Associação antimicrobiana"],
+      adversos: [],
+      alertas: [],
+      dica: "Bactrim = sulfametoxazol + trimetoprim = bloqueio sequencial + sinergismo.",
+      fonte: SOURCE
+    }
+  );
+
+  const h1First = {
+    grupo: "Anti-histamínicos",
+    classe: "Anti-H1 de 1ª geração",
+    acao: "Antagonismo competitivo de H1",
+    receptores: ["H1"],
+    mecanismo: "Antagonismo competitivo de H1; o material destaca maior penetração no SNC.",
+    efeitos: ["Sedação/sonolência"],
+    usos: ["Processos alérgicos"],
+    adversos: ["Sedação"],
+    alertas: ["1ª geração = H1 + SNC = sono"],
+    dica: "Anti-H1 de 1ª geração = maior sedação."
+  };
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Prometazina", "Dimenidrinato", "Difenidramina", "Clorfeniramina", "Meclizina"],
+      h1First,
+      {
+        "Prometazina": { usos: ["Alergias", "Sedação", "Antiemético"], efeitos: ["Sedação intensa"] },
+        "Dimenidrinato": { usos: ["Cinetose/enjoo"], efeitos: ["Sedação", "Efeito antiemético"] },
+        "Difenidramina": { usos: ["Alergia", "Insônia", "Antiemético"], efeitos: ["Sedação"] },
+        "Clorfeniramina": { usos: ["Rinite", "Urticária"], efeitos: ["Sedação moderada"] },
+        "Meclizina": { usos: ["Vertigem", "Cinetose"], efeitos: ["Sedação leve"] }
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Loratadina", "Desloratadina", "Fexofenadina", "Cetirizina", "Bilastina"],
+      {
+        grupo: "Anti-histamínicos",
+        classe: "Anti-H1 de 2ª geração",
+        acao: "Antagonismo competitivo de H1",
+        receptores: ["H1"],
+        mecanismo: "Antagonismo competitivo de H1; o material destaca menor penetração no SNC.",
+        efeitos: ["Menor sedação", "Ação mais periférica"],
+        usos: ["Processos alérgicos"],
+        adversos: ["Menor sedação em comparação à 1ª geração"],
+        alertas: [],
+        dica: "H1 2ª geração = menos sedação."
+      }
+    )
+  );
+
+  const h2Shared = {
+    grupo: "Anti-histamínicos",
+    classe: "Anti-H2",
+    acao: "Bloqueio de H2",
+    receptores: ["H2"],
+    mecanismo: "Bloqueiam H2 da célula parietal gástrica, reduzindo AMPc e a atividade da bomba H+/K+-ATPase, diminuindo a secreção de HCl.",
+    efeitos: ["Redução da secreção de HCl"],
+    usos: ["Condições relacionadas à secreção ácida gástrica"],
+    adversos: [],
+    alertas: [],
+    dica: "Anti-H2 = H2 → ↓ HCl."
+  };
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Cimetidina", "Ranitidina", "Famotidina", "Nizatidina"],
+      h2Shared,
+      {
+        "Cimetidina": {
+          usos: ["Gastrite", "Úlcera", "Refluxo"],
+          alertas: ["Inibe CYP450 → muitas interações medicamentosas"],
+          dica: "Cimetidina = H2 + inibe CYP450."
+        },
+        "Ranitidina": { usos: ["Úlcera", "Refluxo"], dica: "Ranitidina = bloqueador H2 no material." },
+        "Famotidina": { usos: ["Gastrite", "Úlcera"], dica: "Famotidina = menos interações que cimetidina, segundo o material." },
+        "Nizatidina": { usos: ["Úlcera", "Refluxo"], dica: "Nizatidina = bloqueador H2 no material." }
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Cromolim", "Nedocromil"],
+      {
+        grupo: "Antialérgicos",
+        classe: "Estabilizadores relacionados a mastócitos/basófilos",
+        acao: "Redução da liberação de histamina",
+        receptores: ["Mastócitos/basófilos"],
+        mecanismo: "Não bloqueiam H1; o material descreve redução da liberação de histamina por mastócitos/basófilos.",
+        efeitos: ["Redução profilática de mediadores alérgicos"],
+        usos: ["Profilaxia em processos alérgicos respiratórios"],
+        adversos: [],
+        alertas: ["Não confundir com anti-histamínicos H1 clássicos"],
+        dica: "Cromolim/nedocromil: não são anti-H1; reduzem liberação de histamina."
+      }
+    )
+  );
+
+  unit3.push(
+    {
+      id: "montelucaste",
+      nome: "Montelucaste",
+      principioAtivo: "Montelucaste",
+      grupo: "Eicosanoides",
+      classe: "Fármaco da via dos leucotrienos",
+      acao: "Atuação na via dos leucotrienos",
+      receptores: ["Via dos leucotrienos"],
+      mecanismo: "O material informa atuação sobre a via dos leucotrienos.",
+      efeitos: ["Controle da resposta relacionada a leucotrienos"],
+      usos: ["Controle da asma crônica"],
+      adversos: [],
+      alertas: [],
+      dica: "Leucotrienos = broncoconstrição/asma; montelucaste = controle da asma crônica.",
+      fonte: SOURCE
+    },
+    {
+      id: "misoprostol",
+      nome: "Misoprostol",
+      principioAtivo: "Misoprostol",
+      grupo: "Eicosanoides",
+      classe: "Análogo de PGE",
+      acao: "Análogo de prostaglandina",
+      receptores: ["PGE"],
+      mecanismo: "Análogo de PGE conforme o material.",
+      efeitos: ["Proteção gástrica", "Ação uterotônica"],
+      usos: ["Proteção gástrica"],
+      adversos: [],
+      alertas: ["O material destaca também ação uterotônica"],
+      dica: "Misoprostol = análogo de PGE + proteção gástrica.",
+      fonte: SOURCE
+    },
+    {
+      id: "alprostadil",
+      nome: "Alprostadil",
+      principioAtivo: "Alprostadil",
+      grupo: "Eicosanoides",
+      classe: "PGE1",
+      acao: "Análogo/ação relacionada a PGE1",
+      receptores: ["PGE1"],
+      mecanismo: "O material relaciona alprostadil a PGE1.",
+      efeitos: ["Vasodilatação"],
+      usos: ["Uso intracavernoso para disfunção erétil"],
+      adversos: [],
+      alertas: [],
+      dica: "Alprostadil = PGE1 + vasodilatação.",
+      fonte: SOURCE
+    }
+  );
+
+  const localBase = {
+    grupo: "Anestésicos locais",
+    acao: "Bloqueio de canais de Na+ voltagem-dependentes",
+    receptores: ["Nav"],
+    mecanismo: "Bloqueia canais de Na+ voltagem-dependentes (Nav) → reduz influxo de Na+ → impede despolarização, potencial de ação e propagação do estímulo.",
+    efeitos: ["Bloqueio regional e reversível da sensibilidade"],
+    usos: ["Anestesia local"],
+    adversos: [],
+    alertas: ["Em tecido inflamado, o pH mais ácido aumenta a fração ionizada fora da célula, reduz a passagem pela membrana e diminui a eficácia", "Vasoconstritor associado pode aumentar duração e reduzir absorção sistêmica; o material alerta para cuidado em hipertensos/cardiopatas"],
+    dica: "Anestésico local = bloqueia Nav."
+  };
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Cocaína", "Procaína", "Tetracaína", "Benzocaína"],
+      Object.assign({}, localBase, {
+        classe: "Anestésico local — Éster",
+        alertas: localBase.alertas.concat(["Éster → metabolismo no plasma → PABA → maior alergia/anafilaxia"])
+      }),
+      {
+        "Cocaína": { efeitos: ["Anestesia local"], adversos: ["Cardiotoxicidade", "Dependência"], dica: "Cocaína = éster; protótipo; cardiotoxicidade/dependência; duração moderada." },
+        "Procaína": { adversos: ["Alta alergenicidade"], dica: "Procaína = éster + alta alergenicidade + duração curta." },
+        "Tetracaína": { usos: ["Uso tópico", "Raquidiana"], dica: "Tetracaína = éster de longa duração; tópica e raquidiana." },
+        "Benzocaína": { adversos: ["Metemoglobinemia"], dica: "Benzocaína = éster + metemoglobinemia + duração curta." }
+      }
+    )
+  );
+
+  unit3.push.apply(
+    unit3,
+    make(
+      ["Lidocaína", "Bupivacaína", "Levobupivacaína", "Ropivacaína", "Mepivacaína", "Prilocaína"],
+      Object.assign({}, localBase, {
+        classe: "Anestésico local — Amida",
+        alertas: localBase.alertas.concat(["Amida → metabolismo no fígado; hepatopatia é cuidado especial no material"])
+      }),
+      {
+        "Lidocaína": { usos: ["Anestesia local", "Antiarrítmico classe IB IV"], dica: "Lidocaína = amida muito utilizada + antiarrítmico classe IB IV; duração moderada." },
+        "Bupivacaína": { adversos: ["Maior cardiotoxicidade"], dica: "Bupivacaína = amida de longa duração + maior cardiotoxicidade." },
+        "Levobupivacaína": { adversos: ["Menor cardiotoxicidade que bupivacaína"], dica: "Levobupivacaína = longa duração + menor cardiotoxicidade que bupivacaína." },
+        "Ropivacaína": { usos: ["Anestesia local", "Peridural"], dica: "Ropivacaína = longa duração + perfil cardíaco mais seguro; peridural." },
+        "Mepivacaína": { usos: ["Odontologia"], dica: "Mepivacaína = amida de duração moderada + odontologia." },
+        "Prilocaína": { adversos: ["Metemoglobinemia em doses altas"], dica: "Prilocaína = amida + metemoglobinemia em doses altas." }
+      }
+    )
+  );
+
+  window.CortexFarmacos.forEach(function (drug) {
+    if (!drug.principioAtivo) {
+      drug.principioAtivo = drug.nome;
+    }
+  });
+
+  unit3.forEach(function (incoming) {
+    const existing = window.CortexFarmacos.find(function (drug) {
+      return drug.id === incoming.id;
+    });
+
+    if (existing) {
+      Object.assign(existing, incoming);
+    } else {
+      window.CortexFarmacos.push(incoming);
+    }
+  });
+
+})();
