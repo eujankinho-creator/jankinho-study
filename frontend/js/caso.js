@@ -1643,10 +1643,6 @@ async function refazerCaso() {
     limparErro();
 
 
-    state.tipoProcessando =
-      tipo;
-
-
     setProcessando(
       true
     );
@@ -1837,14 +1833,18 @@ async function iniciar() {
 
   try {
 
-    await carregarUsuario();
-
-    await carregarCaso();
+    await Promise.all([
+      carregarUsuario(),
+      carregarCaso()
+    ]);
 
   }
   catch (erro) {
 
-    console.error(erro);
+    console.error(
+      erro
+    );
+
   }
 }
 

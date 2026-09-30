@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Financas | Jankinho Study</title>
+  <title>Finan&ccedil;as | Cortex</title>
 
   <link
     rel="stylesheet"
@@ -17,21 +17,24 @@
   >
   <link rel="stylesheet" href="/css/ui-enhancements.css">
   <script src="/js/ui-enhancements.js"></script>
+  <link rel="stylesheet" href="/css/themes.css">
+  <script src="/js/theme-manager.js"></script>
+  <link rel="stylesheet" href="/css/cortex-brand.css">
+  <link rel="stylesheet" href="/css/financas-premium.css">
 </head>
 
-<body>
+<body class="finance-view">
 
   <aside class="sidebar">
 
     <a href="/" class="sidebar-logo">
 
       <div class="logo-box">
-        J
+        C
       </div>
 
       <div>
-        <strong>Jankinho</strong>
-        <span>Study</span>
+        <strong>Cortex</strong><span>Study Platform</span>
       </div>
 
     </a>
@@ -170,7 +173,7 @@
           </strong>
 
           <span>
-            Jankinho Study
+            Cortex
           </span>
 
         </div>
@@ -219,13 +222,33 @@
         </div>
 
 
-        <button
-          id="atualizarTopo"
-          class="button-secondary"
-          type="button"
-        >
-          &#8635; Atualizar
-        </button>
+        <div class="finance-hero-side">
+
+          <div class="finance-hero-balance">
+
+            <span>
+              Saldo do per&iacute;odo
+            </span>
+
+            <strong id="heroSaldo">
+              R$ 0,00
+            </strong>
+
+            <small id="heroPeriodo">
+              Vis&atilde;o financeira atual
+            </small>
+
+          </div>
+
+          <button
+            id="atualizarTopo"
+            class="button-secondary finance-refresh"
+            type="button"
+          >
+            Atualizar
+          </button>
+
+        </div>
 
       </section>
 
@@ -432,7 +455,7 @@
               <input
                 id="descricao"
                 type="text"
-                placeholder="Ex.: Bolsa, aluguel, alimentacao..."
+                placeholder="Ex.: Bolsa, aluguel, alimenta&ccedil;&atilde;o..."
               >
 
             </div>
@@ -686,6 +709,120 @@
       </section>
 
 
+
+      <!-- ANALISE GRAFICA -->
+
+      <section class="finance-analytics-grid">
+
+        <article class="panel chart-panel">
+
+          <div class="chart-heading">
+
+            <div>
+
+              <span class="badge badge-orange">
+                Fluxo mensal
+              </span>
+
+              <h2>
+                Receitas x despesas
+              </h2>
+
+              <p>
+                Comparativo das entradas e sa&iacute;das ao longo do tempo.
+              </p>
+
+            </div>
+
+            <span
+              id="fluxoMensalResumo"
+              class="chart-summary"
+            >
+              --
+            </span>
+
+          </div>
+
+          <div
+            id="fluxoMensalChart"
+            class="finance-chart"
+          >
+
+            <div class="chart-empty">
+              Carregando dados...
+            </div>
+
+          </div>
+
+          <div class="chart-legend">
+
+            <span>
+              <i class="legend-dot income-dot"></i>
+              Receitas
+            </span>
+
+            <span>
+              <i class="legend-dot expense-dot"></i>
+              Despesas
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <article class="panel chart-panel">
+
+          <div class="chart-heading">
+
+            <div>
+
+              <span class="badge">
+                Evolu&ccedil;&atilde;o
+              </span>
+
+              <h2>
+                Saldo acumulado
+              </h2>
+
+              <p>
+                Evolu&ccedil;&atilde;o do resultado dentro do per&iacute;odo exibido.
+              </p>
+
+            </div>
+
+            <span
+              id="saldoTendenciaResumo"
+              class="chart-summary"
+            >
+              --
+            </span>
+
+          </div>
+
+          <div
+            id="saldoEvolucaoChart"
+            class="finance-chart"
+          >
+
+            <div class="chart-empty">
+              Carregando dados...
+            </div>
+
+          </div>
+
+          <div class="chart-legend">
+
+            <span>
+              <i class="legend-line"></i>
+              Saldo acumulado
+            </span>
+
+          </div>
+
+        </article>
+
+      </section>
       <!-- HISTORICO -->
 
       <section class="panel history-panel">
@@ -740,7 +877,7 @@
 
 
       <div class="finance-footer">
-        Controle financeiro do Jankinho Study
+        Controle financeiro do Cortex
       </div>
 
     </main>
@@ -748,7 +885,9 @@
   </div>
 
 
+  <script src="/js/financas-ui.js"></script>
   <script src="/js/financas.js"></script>
 
+  <script src="/js/cortex-brand.js"></script>
 </body>
 </html>

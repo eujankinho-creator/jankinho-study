@@ -1,4 +1,4 @@
-﻿const state = {
+const state = {
   flashcards: [],
   filtrados: [],
   respostas: {},
@@ -216,7 +216,7 @@ function atualizarResumo() {
 
     $("statusRevisaoDescricao")
       .textContent =
-      "Sua biblioteca est\u00e1 dispon\u00edvel.";
+      "A biblioteca compartilhada est\u00e1 pronta para revis\u00e3o.";
 
   }
   else {
@@ -228,18 +228,38 @@ function atualizarResumo() {
 
     $("statusRevisaoDescricao")
       .textContent =
-      "Comece sua biblioteca de revis\u00e3o.";
+      "Crie o primeiro flashcard da biblioteca.";
   }
+}
+
+
+function normalizarBusca(valor) {
+
+  return String(
+    valor ?? ""
+  )
+    .toLocaleLowerCase(
+      "pt-BR"
+    )
+    .normalize(
+      "NFD"
+    )
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    );
+
 }
 
 
 function aplicarBusca() {
 
   const termo =
-    $("busca")
-      .value
-      .trim()
-      .toLowerCase();
+    normalizarBusca(
+      $("busca")
+        .value
+        .trim()
+    );
 
 
   if (!termo) {
@@ -254,30 +274,41 @@ function aplicarBusca() {
       state.flashcards.filter(
         function (card) {
 
+          const frente =
+            normalizarBusca(
+              card.frente
+            );
+
+
+          const verso =
+            normalizarBusca(
+              card.verso
+            );
+
+
           return (
-            String(
-              card.frente || ""
+            frente.includes(
+              termo
+            ) ||
+            verso.includes(
+              termo
             )
-              .toLowerCase()
-              .includes(termo)
-            ||
-            String(
-              card.verso || ""
-            )
-              .toLowerCase()
-              .includes(termo)
           );
 
         }
       );
+
   }
 
 
-  state.estudoIndex = 0;
+  state.estudoIndex =
+    0;
+
 
   atualizarResumo();
 
   renderLista();
+
 }
 
 
@@ -950,15 +981,20 @@ async function iniciar() {
 
   try {
 
-    await carregarUsuario();
-
-    await carregarFlashcards();
+    await Promise.all([
+      carregarUsuario(),
+      carregarFlashcards()
+    ]);
 
   }
   catch (erro) {
 
-    console.error(erro);
+    console.error(
+      erro
+    );
+
   }
+
 }
 
 

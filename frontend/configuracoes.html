@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Configura&ccedil;&otilde;es | Jankinho Study</title>
+  <title>Configura&ccedil;&otilde;es | Cortex</title>
 
   <link
     rel="stylesheet"
@@ -19,9 +19,13 @@
 
   <link rel="stylesheet" href="/css/ui-enhancements.css">
   <script src="/js/ui-enhancements.js"></script>
+  <link rel="stylesheet" href="/css/themes.css">
+  <script src="/js/theme-manager.js"></script>
+  <link rel="stylesheet" href="/css/cortex-brand.css">
+  <link rel="stylesheet" href="/css/configuracoes-premium.css">
 </head>
 
-<body>
+<body class="settings-view">
 
 
   <aside class="sidebar">
@@ -32,17 +36,11 @@
     >
 
       <div class="logo-box">
-        J
+        C
       </div>
 
       <div>
-        <strong>
-          Jankinho
-        </strong>
-
-        <span>
-          Study
-        </span>
+        <strong>Cortex</strong><span>Study Platform</span>
       </div>
 
     </a>
@@ -184,7 +182,7 @@
           </strong>
 
           <span>
-            Jankinho Study
+            Cortex
           </span>
 
         </div>
@@ -268,7 +266,7 @@
 
                 <p>
                   Atualize como seu nome aparece dentro
-                  do Jankinho Study.
+                  do Cortex.
                 </p>
 
               </div>
@@ -347,15 +345,16 @@
 
         </section>
 
-
         <!-- APARENCIA -->
 
-        <section class="settings-card">
+        <section
+          id="themeSettingsCard"
+          class="settings-card"
+        >
 
           <div class="settings-icon">
-            &#9728;
+            &#10024;
           </div>
-
 
           <div class="settings-card-content">
 
@@ -364,40 +363,83 @@
             </span>
 
             <h2>
-              Tema da plataforma
+              Temas visuais
             </h2>
 
             <p>
-              A interface atual foi otimizada para
-              uso no tema escuro.
+              Escolha o estilo visual da plataforma.
+              O tema selecionado &eacute; salvo neste navegador.
             </p>
 
+            <div class="theme-settings-grid">
 
-            <div class="theme-box">
+              <button
+                type="button"
+                class="theme-choice"
+                data-theme-choice="dark-orange"
+              >
+                <div class="theme-choice-preview dark">
+                  <div class="theme-preview-top">
+                    <div class="theme-preview-fill"></div>
+                  </div>
+                  <div class="theme-preview-card"></div>
+                </div>
 
-              <div>
+                <div class="theme-choice-title">
+                  Dark Orange
+                </div>
 
-                <strong>
-                  Tema escuro
-                </strong>
+                <div class="theme-choice-description">
+                  Preto profundo, laranja, blur e glow no estilo Cortex.
+                </div>
 
-                <span>
-                  Ativo em toda a plataforma
-                </span>
+                <div class="theme-choice-chip">
+                  Moderno
+                </div>
+              </button>
 
+              <button
+                type="button"
+                class="theme-choice"
+                data-theme-choice="pink-glitter"
+              >
+                <div class="theme-choice-preview pink">
+                  <div class="theme-preview-top">
+                    <div class="theme-preview-fill"></div>
+                  </div>
+                  <div class="theme-preview-card"></div>
+                </div>
+
+                <div class="theme-choice-title">
+                  Pink Glitter
+                </div>
+
+                <div class="theme-choice-description">
+                  Rosa, brilho suave, glitter e uma interface mais delicada.
+                </div>
+
+                <div class="theme-choice-chip">
+                  Fofo
+                </div>
+              </button>
+
+            </div>
+
+            <div class="theme-current-row">
+              <div class="theme-current-label">
+                Tema atual
               </div>
-
-
-              <div class="active-theme">
-                Ativo
+              <div
+                id="themeCurrentName"
+                class="theme-current-name"
+              >
+                Dark Orange
               </div>
-
             </div>
 
           </div>
 
         </section>
-
 
         <!-- SEGURANCA -->
 
@@ -554,7 +596,10 @@
   </div>
 
 
+  <script src="/js/configuracoes-ui.js"></script>
   <script src="/js/configuracoes.js"></script>
 
+  <script src="/js/theme-settings.js"></script>
+  <script src="/js/cortex-brand.js"></script>
 </body>
 </html>

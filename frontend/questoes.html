@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Questoes | Jankinho Study</title>
+  <title>Quest&otilde;es | Cortex</title>
 
   <link
     rel="stylesheet"
@@ -17,21 +17,24 @@
   >
   <link rel="stylesheet" href="/css/ui-enhancements.css">
   <script src="/js/ui-enhancements.js"></script>
+  <link rel="stylesheet" href="/css/themes.css">
+  <script src="/js/theme-manager.js"></script>
+  <link rel="stylesheet" href="/css/cortex-brand.css">
+  <link rel="stylesheet" href="/css/questoes-premium.css">
 </head>
 
-<body>
+<body class="questions-view">
 
   <aside class="sidebar">
 
     <a href="/" class="sidebar-logo">
 
       <div class="logo-box">
-        J
+        C
       </div>
 
       <div>
-        <strong>Jankinho</strong>
-        <span>Study</span>
+        <strong>Cortex</strong><span>Study Platform</span>
       </div>
 
     </a>
@@ -164,7 +167,7 @@
           </strong>
 
           <span>
-            Jankinho Study
+            Cortex
           </span>
 
         </div>
@@ -196,7 +199,7 @@
               </span>
 
               <span class="personal-bank">
-                Banco pessoal
+                Banco global
               </span>
 
             </div>
@@ -206,8 +209,8 @@
             </h1>
 
             <p>
-              Organize suas quest&otilde;es, pratique em sess&otilde;es
-              e use IA para ampliar seu banco de estudos.
+              Explore quest&otilde;es compartilhadas, pratique em sess&otilde;es
+              e use IA para ampliar o banco de estudos.
             </p>
 
           </div>
@@ -327,7 +330,7 @@
               </strong>
 
               <p>
-                Adicione uma quest&atilde;o manualmente ao seu banco.
+                Adicione uma quest&atilde;o manualmente ao banco compartilhado.
               </p>
 
               <span>
@@ -352,7 +355,7 @@
             <input
               id="busca"
               type="text"
-              placeholder="Buscar por questao, tema ou disciplina..."
+              placeholder="Buscar por quest&atilde;o, tema ou disciplina..."
             >
 
           </div>
@@ -406,7 +409,7 @@
             <div>
 
               <h2>
-                Suas quest&otilde;es
+                Quest&otilde;es dispon&iacute;veis
               </h2>
 
               <span id="resultadoContagem">
@@ -478,7 +481,7 @@
           </h2>
 
           <p>
-            Defina o conte&uacute;do e deixe a IA montar seu banco.
+            Defina o conte&uacute;do e deixe a IA ampliar o banco.
           </p>
 
         </div>
@@ -605,8 +608,8 @@
           </span>
 
           <p>
-            A IA criara cinco alternativas, uma resposta correta
-            e uma explicacao para cada questao.
+            A IA criar&aacute; cinco alternativas, uma resposta correta
+            e uma explica&ccedil;&atilde;o para cada quest&atilde;o.
           </p>
 
         </div>
@@ -653,7 +656,7 @@
         <div>
 
           <span class="badge badge-orange">
-            Criacao manual
+            Cria&ccedil;&atilde;o manual
           </span>
 
           <h2>
@@ -661,7 +664,7 @@
           </h2>
 
           <p>
-            Monte sua propria questao e adicione ao seu banco.
+            Monte sua pr&oacute;pria quest&atilde;o e adicione ao banco compartilhado.
           </p>
 
         </div>
@@ -747,7 +750,7 @@
 
           <textarea
             id="enunciadoManual"
-            placeholder="Digite o enunciado da questao..."
+            placeholder="Digite o enunciado da quest&atilde;o..."
           ></textarea>
 
         </div>
@@ -765,7 +768,7 @@
           ></div>
 
           <p class="field-help">
-            Clique na letra da alternativa correta para marca-la.
+            Clique na letra da alternativa correta para marc&aacute;-la.
           </p>
 
         </div>
@@ -779,7 +782,7 @@
 
           <textarea
             id="explicacaoManual"
-            placeholder="Explique por que essa e a resposta correta..."
+            placeholder="Explique por que essa &eacute; a resposta correta..."
           ></textarea>
 
         </div>
@@ -826,7 +829,7 @@
         <div>
 
           <span class="badge badge-orange">
-            Organizacao
+            Organiza&ccedil;&atilde;o
           </span>
 
           <h2>
@@ -834,7 +837,7 @@
           </h2>
 
           <p>
-            Adicione uma disciplina ao seu banco.
+            Organize novas quest&otilde;es por disciplina.
           </p>
 
         </div>
@@ -897,7 +900,9 @@
   <datalist id="disciplinasLista"></datalist>
 
 
+  <script src="/js/questoes-ui.js"></script>
   <script src="/js/questoes.js"></script>
 
+  <script src="/js/cortex-brand.js"></script>
 </body>
 </html>

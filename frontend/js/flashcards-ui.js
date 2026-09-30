@@ -1,0 +1,855 @@
+(function () {
+
+  "use strict";
+
+
+  const icons = {
+
+    home:
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="M4 11.5 12 5l8 6.5"></path>' +
+      '<path d="M6.5 10.5V19h11v-8.5"></path>' +
+      '<path d="M9.5 19v-5h5v5"></path>' +
+      '</svg>',
+
+    questions:
+      '<svg viewBox="0 0 24 24">' +
+      '<rect x="5" y="4" width="14" height="16" rx="3"></rect>' +
+      '<path d="M9 9h6"></path>' +
+      '<path d="M9 13h6"></path>' +
+      '<path d="M9 17h3"></path>' +
+      '</svg>',
+
+    flash:
+      '<svg viewBox="0 0 24 24">' +
+      '<rect x="4" y="6" width="14" height="12" rx="2"></rect>' +
+      '<path d="m8 6 2-2h10v12l-2 2"></path>' +
+      '</svg>',
+
+    cases:
+      '<svg viewBox="0 0 24 24">' +
+      '<rect x="5" y="6" width="14" height="15" rx="3"></rect>' +
+      '<path d="M9 6V4h6v2"></path>' +
+      '<path d="M12 10v7"></path>' +
+      '<path d="M8.5 13.5h7"></path>' +
+      '</svg>',
+
+    lab:
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="M9 3h6"></path>' +
+      '<path d="M10 3v6l-5 8a2.5 2.5 0 0 0 2.2 4h9.6A2.5 2.5 0 0 0 19 17l-5-8V3"></path>' +
+      '<path d="M7.5 15h9"></path>' +
+      '</svg>',
+
+    evolution:
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="M5 19h14"></path>' +
+      '<path d="m7 15 3-4 3 2 4-6"></path>' +
+      '<path d="M15 7h2v2"></path>' +
+      '</svg>',
+
+    performance:
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="M5 19V10"></path>' +
+      '<path d="M10 19V5"></path>' +
+      '<path d="M15 19v-7"></path>' +
+      '<path d="M20 19V8"></path>' +
+      '</svg>',
+
+    ranking:
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="M8 21h8"></path>' +
+      '<path d="M12 17v4"></path>' +
+      '<path d="M7 4h10v4a5 5 0 0 1-10 0z"></path>' +
+      '<path d="M7 6H4v1a4 4 0 0 0 4 4"></path>' +
+      '<path d="M17 6h3v1a4 4 0 0 1-4 4"></path>' +
+      '</svg>',
+
+    settings:
+      '<svg viewBox="0 0 24 24">' +
+      '<circle cx="12" cy="12" r="3"></circle>' +
+      '<path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.4 1a8 8 0 0 0-1.7-1L14.5 3h-5l-.3 3.1a8 8 0 0 0-1.7 1l-2.4-1-2 3.4L5.1 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.4-1a8 8 0 0 0 1.7 1l.3 3.1h5l.3-3.1a8 8 0 0 0 1.7-1l2.4 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"></path>' +
+      '</svg>',
+
+    play:
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="m9 7 8 5-8 5z"></path>' +
+      '</svg>',
+
+    plus:
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="M12 5v14"></path>' +
+      '<path d="M5 12h14"></path>' +
+      '</svg>',
+
+    library:
+      '<svg viewBox="0 0 24 24">' +
+      '<rect x="5" y="5" width="13" height="15" rx="2"></rect>' +
+      '<path d="M8 3h11v15"></path>' +
+      '</svg>',
+
+    search:
+      '<svg viewBox="0 0 24 24">' +
+      '<circle cx="11" cy="11" r="6"></circle>' +
+      '<path d="m16 16 4 4"></path>' +
+      '</svg>'
+
+  };
+
+
+  function replaceSidebarIcons(root) {
+
+    if (!root) {
+      return;
+    }
+
+
+    root
+      .querySelectorAll(
+        ".menu-item"
+      )
+      .forEach(
+        function (link) {
+
+          const span =
+            link.querySelector(
+              ":scope > span"
+            );
+
+
+          if (!span) {
+            return;
+          }
+
+
+          const href =
+            link.getAttribute(
+              "href"
+            );
+
+
+          let icon = "";
+
+
+          if (href === "/") {
+            icon = icons.home;
+          }
+          else if (href === "/questoes") {
+            icon = icons.questions;
+          }
+          else if (href === "/flashcards") {
+            icon = icons.flash;
+          }
+          else if (href === "/casos") {
+            icon = icons.cases;
+          }
+          else if (href === "/laboratorio") {
+            icon = icons.lab;
+          }
+          else if (href === "/evolucao") {
+            icon = icons.evolution;
+          }
+          else if (href === "/desempenho") {
+            icon = icons.performance;
+          }
+          else if (href === "/ranking") {
+            icon = icons.ranking;
+          }
+          else if (href === "/configuracoes") {
+            icon = icons.settings;
+          }
+          else if (href === "/financas") {
+
+            span.className =
+              "cortex-nav-icon";
+
+            span.textContent =
+              "R$";
+
+            return;
+          }
+
+
+          if (!icon) {
+            return;
+          }
+
+
+          span.className =
+            "cortex-nav-icon";
+
+
+          span.innerHTML =
+            icon;
+
+        }
+      );
+
+  }
+
+
+  function replacePageIcons() {
+
+    const top =
+      document.getElementById(
+        "iniciarEstudoTopo"
+      );
+
+
+    if (top) {
+
+      top.innerHTML =
+        icons.play +
+        "<span>Iniciar estudo</span>";
+
+    }
+
+
+    const study =
+      document.querySelector(
+        "#iniciarEstudoCard .action-icon"
+      );
+
+
+    if (study) {
+      study.innerHTML =
+        icons.play;
+    }
+
+
+    const create =
+      document.querySelector(
+        "#abrirFormulario .action-icon"
+      );
+
+
+    if (create) {
+      create.innerHTML =
+        icons.plus;
+    }
+
+
+    const library =
+      document.querySelector(
+        ".static-card .action-icon"
+      );
+
+
+    if (library) {
+      library.innerHTML =
+        icons.library;
+    }
+
+
+    const search =
+      document.querySelector(
+        ".search-wrapper > span"
+      );
+
+
+    if (search) {
+      search.innerHTML =
+        icons.search;
+    }
+
+  }
+
+
+  function animateLibraryCards() {
+
+    const container =
+      document.getElementById(
+        "flashcardsLista"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    function apply() {
+
+      container
+        .querySelectorAll(
+          ".flashcard-item"
+        )
+        .forEach(
+          function (
+            card,
+            index
+          ) {
+
+            card.style.animationDelay =
+              Math.min(
+                index * 35,
+                280
+              ) +
+              "ms";
+
+          }
+        );
+
+    }
+
+
+    apply();
+
+
+    const observer =
+      new MutationObserver(
+        apply
+      );
+
+
+    observer.observe(
+      container,
+      {
+        childList:
+          true
+      }
+    );
+
+  }
+
+
+  function initPointerGlow() {
+
+    if (
+      !window.matchMedia(
+        "(pointer: fine)"
+      ).matches
+    ) {
+      return;
+    }
+
+
+    document.addEventListener(
+      "pointermove",
+      function (event) {
+
+        const target =
+          event.target.closest(
+            [
+              ".action-card",
+              ".stat-card",
+              ".flashcard-item",
+              ".new-card-panel",
+              ".study-card"
+            ].join(",")
+          );
+
+
+        if (!target) {
+          return;
+        }
+
+
+        const rect =
+          target.getBoundingClientRect();
+
+
+        target.style.setProperty(
+          "--mx",
+          (
+            event.clientX -
+            rect.left
+          ) +
+          "px"
+        );
+
+
+        target.style.setProperty(
+          "--my",
+          (
+            event.clientY -
+            rect.top
+          ) +
+          "px"
+        );
+
+      }
+    );
+
+  }
+
+
+  function initStudyAnimation() {
+
+    const back =
+      document.getElementById(
+        "versoContainer"
+      );
+
+
+    const card =
+      document.querySelector(
+        ".study-card"
+      );
+
+
+    if (
+      !back ||
+      !card
+    ) {
+      return;
+    }
+
+
+    let wasVisible =
+      back.classList.contains(
+        "revealed"
+      );
+
+
+    function update() {
+
+      const visible =
+        back.classList.contains(
+          "revealed"
+        );
+
+
+      card.classList.toggle(
+        "answer-visible",
+        visible
+      );
+
+
+      if (
+        visible &&
+        !wasVisible
+      ) {
+
+        card.classList.remove(
+          "answer-visible"
+        );
+
+
+        void card.offsetWidth;
+
+
+        card.classList.add(
+          "answer-visible"
+        );
+
+      }
+
+
+      wasVisible =
+        visible;
+
+    }
+
+
+    update();
+
+
+    const observer =
+      new MutationObserver(
+        update
+      );
+
+
+    observer.observe(
+      back,
+      {
+        attributes:
+          true,
+
+        attributeFilter:
+          ["class"]
+      }
+    );
+
+  }
+
+
+  function initStudyKeyboard() {
+
+    const studyView =
+      document.getElementById(
+        "estudoView"
+      );
+
+
+    const help =
+      document.querySelector(
+        ".study-help"
+      );
+
+
+    if (help) {
+
+      help.innerHTML =
+        "Teste sua memoria antes de revelar. " +
+        "<strong>Espaco</strong>: mostrar/ocultar " +
+        "&middot; <strong>&larr; &rarr;</strong>: navegar.";
+
+    }
+
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          !studyView ||
+          studyView.classList.contains(
+            "hidden"
+          )
+        ) {
+          return;
+        }
+
+
+        const active =
+          document.activeElement;
+
+
+        if (
+          active &&
+          (
+            active.tagName === "INPUT" ||
+            active.tagName === "TEXTAREA" ||
+            active.tagName === "SELECT"
+          )
+        ) {
+          return;
+        }
+
+
+        if (
+          event.code ===
+          "Space"
+        ) {
+
+          event.preventDefault();
+
+
+          const back =
+            document.getElementById(
+              "versoContainer"
+            );
+
+
+          if (
+            back &&
+            back.classList.contains(
+              "revealed"
+            )
+          ) {
+
+            const hide =
+              document.getElementById(
+                "ocultarResposta"
+              );
+
+
+            if (hide) {
+              hide.click();
+            }
+
+          }
+          else {
+
+            const show =
+              document.getElementById(
+                "mostrarRespostaInterno"
+              );
+
+
+            if (show) {
+              show.click();
+            }
+
+          }
+
+        }
+        else if (
+          event.key ===
+          "ArrowRight"
+        ) {
+
+          event.preventDefault();
+
+
+          const next =
+            document.getElementById(
+              "proximoCard"
+            );
+
+
+          if (next) {
+            next.click();
+          }
+
+        }
+        else if (
+          event.key ===
+          "ArrowLeft"
+        ) {
+
+          event.preventDefault();
+
+
+          const previous =
+            document.getElementById(
+              "cardAnterior"
+            );
+
+
+          if (previous) {
+            previous.click();
+          }
+
+        }
+        else if (
+          event.key ===
+          "Escape"
+        ) {
+
+          const exit =
+            document.getElementById(
+              "sairEstudo"
+            );
+
+
+          if (exit) {
+            exit.click();
+          }
+
+        }
+
+      }
+    );
+
+  }
+
+
+  function createMobileMenu() {
+
+    const header =
+      document.querySelector(
+        ".header"
+      );
+
+
+    const menu =
+      document.querySelector(
+        ".sidebar .sidebar-menu"
+      );
+
+
+    if (
+      !header ||
+      !menu
+    ) {
+      return;
+    }
+
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+
+    button.type =
+      "button";
+
+
+    button.className =
+      "flashcards-mobile-button";
+
+
+    button.setAttribute(
+      "aria-label",
+      "Abrir menu"
+    );
+
+
+    button.innerHTML =
+      '<svg viewBox="0 0 24 24">' +
+      '<path d="M5 7h14"></path>' +
+      '<path d="M5 12h14"></path>' +
+      '<path d="M5 17h14"></path>' +
+      '</svg>';
+
+
+    header.insertBefore(
+      button,
+      header.firstChild
+    );
+
+
+    const overlay =
+      document.createElement(
+        "div"
+      );
+
+
+    overlay.className =
+      "flashcards-mobile-overlay";
+
+
+    const drawer =
+      document.createElement(
+        "aside"
+      );
+
+
+    drawer.className =
+      "flashcards-mobile-drawer";
+
+
+    const head =
+      document.createElement(
+        "div"
+      );
+
+
+    head.className =
+      "flashcards-mobile-head";
+
+
+    head.innerHTML =
+      [
+        '<a href="/" class="flashcards-mobile-brand">',
+        '  <div class="logo-box"></div>',
+        '  <span>Cortex</span>',
+        '</a>',
+        '<button type="button" class="flashcards-mobile-close" aria-label="Fechar menu">&times;</button>'
+      ].join("");
+
+
+    const clone =
+      menu.cloneNode(
+        true
+      );
+
+
+    drawer.appendChild(
+      head
+    );
+
+
+    drawer.appendChild(
+      clone
+    );
+
+
+    overlay.appendChild(
+      drawer
+    );
+
+
+    document.body.appendChild(
+      overlay
+    );
+
+
+    replaceSidebarIcons(
+      clone
+    );
+
+
+    function open() {
+
+      overlay.classList.add(
+        "open"
+      );
+
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+
+
+    function close() {
+
+      overlay.classList.remove(
+        "open"
+      );
+
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    button.addEventListener(
+      "click",
+      open
+    );
+
+
+    head
+      .querySelector(
+        ".flashcards-mobile-close"
+      )
+      .addEventListener(
+        "click",
+        close
+      );
+
+
+    overlay.addEventListener(
+      "click",
+      function (event) {
+
+        if (
+          event.target ===
+          overlay
+        ) {
+          close();
+        }
+
+      }
+    );
+
+
+    clone
+      .querySelectorAll(
+        "a"
+      )
+      .forEach(
+        function (link) {
+
+          link.addEventListener(
+            "click",
+            close
+          );
+
+        }
+      );
+
+  }
+
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+      replaceSidebarIcons(
+        document
+      );
+
+      replacePageIcons();
+
+      animateLibraryCards();
+
+      initPointerGlow();
+
+      initStudyAnimation();
+
+      initStudyKeyboard();
+
+      createMobileMenu();
+
+    }
+  );
+
+})();

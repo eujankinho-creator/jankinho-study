@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -8,45 +10,80 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Dashboard | Jankinho Study</title>
+  <meta
+    name="theme-color"
+    content="#050505"
+  >
+
+  <title>Dashboard | Cortex</title>
 
   <link
     rel="stylesheet"
     href="/css/app.css"
   >
-  <link rel="stylesheet" href="/css/ui-enhancements.css">
+
+  <link
+    rel="stylesheet"
+    href="/css/ui-enhancements.css"
+  >
+
   <script src="/js/ui-enhancements.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/themes.css"
+  >
+
+  <script src="/js/theme-manager.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/cortex-brand.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/dashboard-premium.css"
+  >
+
 </head>
 
-<body>
 
-  <!-- SIDEBAR DESKTOP -->
+<body class="dashboard-view">
+
+
+  <!-- =====================================================
+       SIDEBAR DESKTOP
+  ====================================================== -->
 
   <aside class="sidebar">
+
 
     <a
       href="/"
       class="sidebar-logo"
     >
 
-      <div class="logo-box">
-        J
-      </div>
+      <div class="logo-box"></div>
 
       <div>
+
         <strong>
-          Jankinho
+          Cortex
         </strong>
 
         <span>
-          Study
+          Study Platform
         </span>
+
       </div>
 
     </a>
 
 
+
     <div class="sidebar-menu">
+
 
       <div class="menu-group">
 
@@ -54,80 +91,271 @@
           Estudo
         </div>
 
+
         <a
           href="/"
           class="menu-item active"
         >
-          <span>⌂</span>
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M4 11.5 12 5l8 6.5"
+              />
+
+              <path
+                d="M6.5 10.5V19h11v-8.5"
+              />
+
+              <path
+                d="M9.5 19v-5h5v5"
+              />
+
+            </svg>
+
+          </span>
+
           Dashboard
+
         </a>
+
 
         <a
           href="/questoes"
           class="menu-item"
         >
-          <span>▣</span>
-          Questões
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <rect
+                x="5"
+                y="4"
+                width="14"
+                height="16"
+                rx="3"
+              />
+
+              <path d="M9 9h6"/>
+              <path d="M9 13h6"/>
+              <path d="M9 17h3"/>
+
+            </svg>
+
+          </span>
+
+          Quest&otilde;es
+
         </a>
+
 
         <a
           href="/flashcards"
           class="menu-item"
         >
-          <span>▤</span>
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <rect
+                x="4"
+                y="6"
+                width="14"
+                height="12"
+                rx="2"
+              />
+
+              <path
+                d="m8 6 2-2h10v12l-2 2"
+              />
+
+            </svg>
+
+          </span>
+
           Flashcards
+
         </a>
+
 
         <a
           href="/casos"
           class="menu-item"
         >
-          <span>⚕</span>
-          Casos Clínicos
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M8 5h8"
+              />
+
+              <path
+                d="M10 3h4v4h-4z"
+              />
+
+              <rect
+                x="5"
+                y="6"
+                width="14"
+                height="15"
+                rx="3"
+              />
+
+              <path
+                d="M12 10v7"
+              />
+
+              <path
+                d="M8.5 13.5h7"
+              />
+
+            </svg>
+
+          </span>
+
+          Casos Cl&iacute;nicos
+
         </a>
+
 
         <a
           href="/laboratorio"
           class="menu-item"
         >
-          <span>⚗</span>
-          Laboratório
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M9 3h6"
+              />
+
+              <path
+                d="M10 3v6l-5 8a2.5 2.5 0 0 0 2.2 4h9.6A2.5 2.5 0 0 0 19 17l-5-8V3"
+              />
+
+              <path
+                d="M7.5 15h9"
+              />
+
+            </svg>
+
+          </span>
+
+          Laborat&oacute;rio
+
         </a>
+
 
         <a
           href="/evolucao"
           class="menu-item"
         >
-          <span>✎</span>
-          Evolução
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M5 19h14"
+              />
+
+              <path
+                d="m7 15 3-4 3 2 4-6"
+              />
+
+              <path
+                d="M15 7h2v2"
+              />
+
+            </svg>
+
+          </span>
+
+          Evolu&ccedil;&atilde;o
+
         </a>
 
       </div>
+
 
 
       <div class="menu-group">
 
         <div class="menu-title">
-          Análise
+          An&aacute;lise
         </div>
+
 
         <a
           href="/desempenho"
           class="menu-item"
         >
-          <span>◒</span>
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path d="M5 19V10"/>
+              <path d="M10 19V5"/>
+              <path d="M15 19v-7"/>
+              <path d="M20 19V8"/>
+
+            </svg>
+
+          </span>
+
           Desempenho
+
         </a>
+
 
         <a
           href="/ranking"
           class="menu-item"
         >
-          <span>♛</span>
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M8 21h8"
+              />
+
+              <path
+                d="M12 17v4"
+              />
+
+              <path
+                d="M7 4h10v4a5 5 0 0 1-10 0z"
+              />
+
+              <path
+                d="M7 6H4v1a4 4 0 0 0 4 4"
+              />
+
+              <path
+                d="M17 6h3v1a4 4 0 0 1-4 4"
+              />
+
+            </svg>
+
+          </span>
+
           Ranking
+
         </a>
 
       </div>
+
 
 
       <div class="menu-group">
@@ -136,22 +364,53 @@
           Pessoal
         </div>
 
+
         <a
           href="/financas"
           class="menu-item"
         >
-          <span>R$</span>
-          Finanças
+
+          <span class="menu-icon menu-icon-text">
+            R$
+          </span>
+
+          Finan&ccedil;as
+
         </a>
 
-        <a href="/configuracoes" class="menu-item">
-          <span>&#9881;</span>
+
+        <a
+          href="/configuracoes"
+          class="menu-item"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <circle
+                cx="12"
+                cy="12"
+                r="3"
+              />
+
+              <path
+                d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"
+              />
+
+            </svg>
+
+          </span>
+
           Configura&ccedil;&otilde;es
+
         </a>
 
       </div>
 
+
     </div>
+
 
 
     <div class="sidebar-user">
@@ -163,6 +422,7 @@
         U
       </div>
 
+
       <div class="user-info">
 
         <strong id="nomeSidebar">
@@ -173,20 +433,35 @@
 
       </div>
 
+
       <button
         id="logoutSidebar"
         class="logout-button"
+        type="button"
         title="Sair"
+        aria-label="Sair"
       >
-        ↪
+
+        <svg viewBox="0 0 24 24">
+
+          <path d="M10 5H6v14h4"/>
+          <path d="m14 8 4 4-4 4"/>
+          <path d="M18 12H9"/>
+
+        </svg>
+
       </button>
 
     </div>
 
+
   </aside>
 
 
-  <!-- MENU MOBILE -->
+
+  <!-- =====================================================
+       MENU MOBILE
+  ====================================================== -->
 
   <div
     id="mobileOverlay"
@@ -196,10 +471,13 @@
     <button
       id="fecharOverlay"
       class="overlay-background"
+      type="button"
       aria-label="Fechar menu"
     ></button>
 
+
     <aside class="mobile-sidebar">
+
 
       <div class="mobile-logo-row">
 
@@ -208,33 +486,38 @@
           class="sidebar-logo"
         >
 
-          <div class="logo-box">
-            J
-          </div>
+          <div class="logo-box"></div>
 
           <div>
+
             <strong>
-              Jankinho
+              Cortex
             </strong>
 
             <span>
-              Study
+              Study Platform
             </span>
+
           </div>
 
         </a>
 
+
         <button
           id="fecharMenu"
           class="mobile-close"
+          type="button"
+          aria-label="Fechar menu"
         >
-          ×
+          &times;
         </button>
 
       </div>
 
 
+
       <div class="sidebar-menu">
+
 
         <div class="menu-group">
 
@@ -242,56 +525,106 @@
             Estudo
           </div>
 
-          <a href="/" class="menu-item active">
-            <span>⌂</span>
+
+          <a
+            href="/"
+            class="menu-item active"
+          >
+            <span class="menu-icon menu-icon-text">
+              01
+            </span>
             Dashboard
           </a>
 
-          <a href="/questoes" class="menu-item">
-            <span>▣</span>
-            Questões
+
+          <a
+            href="/questoes"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              Q
+            </span>
+            Quest&otilde;es
           </a>
 
-          <a href="/flashcards" class="menu-item">
-            <span>▤</span>
+
+          <a
+            href="/flashcards"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              F
+            </span>
             Flashcards
           </a>
 
-          <a href="/casos" class="menu-item">
-            <span>⚕</span>
-            Casos Clínicos
+
+          <a
+            href="/casos"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              C
+            </span>
+            Casos Cl&iacute;nicos
           </a>
 
-          <a href="/laboratorio" class="menu-item">
-            <span>⚗</span>
-            Laboratório
+
+          <a
+            href="/laboratorio"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              L
+            </span>
+            Laborat&oacute;rio
           </a>
 
-          <a href="/evolucao" class="menu-item">
-            <span>✎</span>
-            Evolução
+
+          <a
+            href="/evolucao"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              E
+            </span>
+            Evolu&ccedil;&atilde;o
           </a>
 
         </div>
+
 
 
         <div class="menu-group">
 
           <div class="menu-title">
-            Análise
+            An&aacute;lise
           </div>
 
-          <a href="/desempenho" class="menu-item">
-            <span>◒</span>
+
+          <a
+            href="/desempenho"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              D
+            </span>
             Desempenho
           </a>
 
-          <a href="/ranking" class="menu-item">
-            <span>♛</span>
+
+          <a
+            href="/ranking"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              R
+            </span>
             Ranking
           </a>
 
         </div>
+
 
 
         <div class="menu-group">
@@ -300,40 +633,78 @@
             Pessoal
           </div>
 
-          <a href="/financas" class="menu-item">
-            <span>R$</span>
-            Finanças
+
+          <a
+            href="/financas"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              R$
+            </span>
+            Finan&ccedil;as
           </a>
 
-        <a href="/configuracoes" class="menu-item">
-          <span>&#9881;</span>
-          Configura&ccedil;&otilde;es
-        </a>
+
+          <a
+            href="/configuracoes"
+            class="menu-item"
+          >
+            <span class="menu-icon menu-icon-text">
+              CFG
+            </span>
+            Configura&ccedil;&otilde;es
+          </a>
 
         </div>
 
+
       </div>
+
 
     </aside>
 
   </div>
 
 
-  <!-- ÁREA PRINCIPAL -->
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
 
   <div class="main-area">
 
+
     <header class="header">
+
 
       <button
         id="abrirMenu"
         class="mobile-menu-button"
+        type="button"
+        aria-label="Abrir menu"
       >
-        ☰
+
+        <svg viewBox="0 0 24 24">
+
+          <path d="M5 7h14"/>
+          <path d="M5 12h14"/>
+          <path d="M5 17h14"/>
+
+        </svg>
+
       </button>
 
-      <div class="header-title">
-        Dashboard
+
+      <div class="header-copy">
+
+        <div class="header-title">
+          Dashboard
+        </div>
+
+        <span id="dashboardDate">
+          Cortex
+        </span>
+
       </div>
 
 
@@ -346,10 +717,11 @@
           </strong>
 
           <span>
-            Jankinho Study
+            Cortex
           </span>
 
         </div>
+
 
         <div
           id="avatarHeader"
@@ -360,67 +732,188 @@
 
       </div>
 
+
     </header>
+
 
 
     <main class="dashboard">
 
-      <!-- HERO -->
 
-      <section class="hero">
+      <!-- =================================================
+           HERO
+      ================================================== -->
 
+      <section
+        class="hero dashboard-hero-premium"
+        data-reveal
+      >
+
+        <div class="hero-grid-pattern"></div>
         <div class="hero-glow"></div>
 
-        <div>
+
+        <div class="hero-copy">
+
 
           <div class="hero-label">
+
             <span></span>
-            Jankinho Study
+
+            Vis&atilde;o geral
+
           </div>
 
+
           <h1>
-            Seu espaço para<br>
-            estudar melhor.
+
+            Seu espa&ccedil;o para
+            <br>
+
+            <em>
+              estudar com consist&ecirc;ncia.
+            </em>
+
           </h1>
+
 
           <p id="mensagemHero">
             Carregando seus dados...
           </p>
 
+
+          <div class="hero-actions">
+
+            <a
+              href="/questoes"
+              class="button-primary"
+            >
+
+              Resolver quest&otilde;es
+
+              <span>
+                &rarr;
+              </span>
+
+            </a>
+
+
+            <a
+              href="/flashcards"
+              class="button-secondary"
+            >
+
+              Revisar flashcards
+
+            </a>
+
+          </div>
+
+
         </div>
 
 
-        <div class="hero-actions">
 
-          <a
-            href="/questoes"
-            class="button-primary"
-          >
-            Resolver questões →
-          </a>
+        <div class="hero-insight">
 
-          <a
-            href="/flashcards"
-            class="button-secondary"
-          >
-            Flashcards
-          </a>
+          <div class="hero-insight-top">
+
+            <span>
+              Hoje
+            </span>
+
+            <div class="live-pill">
+
+              <i></i>
+
+              Em andamento
+
+            </div>
+
+          </div>
+
+
+          <div class="hero-today-number">
+
+            <strong id="hojeRespondidas">
+              0
+            </strong>
+
+            <span>
+              quest&otilde;es respondidas
+            </span>
+
+          </div>
+
+
+          <div class="hero-today-stats">
+
+            <div>
+
+              <span>
+                Acertos
+              </span>
+
+              <strong id="hojeAcertos">
+                0
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Aproveitamento
+              </span>
+
+              <strong id="hojePercentual">
+                0%
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="hero-insight-line">
+
+            <span></span>
+
+          </div>
+
+
+          <small>
+            Continue no seu ritmo.
+            Consist&ecirc;ncia vale mais que pressa.
+          </small>
 
         </div>
+
 
       </section>
 
 
-      <!-- MÉTRICAS -->
 
-      <section class="metrics">
+      <!-- =================================================
+           METRICAS
+      ================================================== -->
 
-        <div class="metric-card">
+      <section
+        class="metrics"
+        data-reveal
+      >
+
+
+        <article class="metric-card">
+
+          <div class="metric-accent"></div>
+
 
           <div>
 
             <span class="metric-label">
-              Questões
+              Quest&otilde;es
             </span>
 
             <strong id="totalQuestoes">
@@ -428,19 +921,39 @@
             </strong>
 
             <small>
-              disponíveis
+              dispon&iacute;veis
             </small>
 
           </div>
 
+
           <div class="metric-icon">
-            ✓
+
+            <svg viewBox="0 0 24 24">
+
+              <rect
+                x="5"
+                y="4"
+                width="14"
+                height="16"
+                rx="3"
+              />
+
+              <path d="M9 9h6"/>
+              <path d="M9 13h6"/>
+
+            </svg>
+
           </div>
 
-        </div>
+        </article>
 
 
-        <div class="metric-card">
+
+        <article class="metric-card">
+
+          <div class="metric-accent"></div>
+
 
           <div>
 
@@ -453,19 +966,36 @@
             </strong>
 
             <small>
-              por você
+              por voc&ecirc;
             </small>
 
           </div>
 
+
           <div class="metric-icon">
-            ◒
+
+            <svg viewBox="0 0 24 24">
+
+              <circle
+                cx="12"
+                cy="12"
+                r="8"
+              />
+
+              <path d="M12 8v4l3 2"/>
+
+            </svg>
+
           </div>
 
-        </div>
+        </article>
 
 
-        <div class="metric-card">
+
+        <article class="metric-card">
+
+          <div class="metric-accent"></div>
+
 
           <div>
 
@@ -486,14 +1016,27 @@
 
           </div>
 
+
           <div class="metric-icon green-box">
-            ↑
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="m6 12 4 4 8-8"
+              />
+
+            </svg>
+
           </div>
 
-        </div>
+        </article>
 
 
-        <div class="metric-card">
+
+        <article class="metric-card">
+
+          <div class="metric-accent"></div>
+
 
           <div>
 
@@ -514,42 +1057,79 @@
 
           </div>
 
+
           <div class="metric-icon orange-box">
-            %
+
+            <svg viewBox="0 0 24 24">
+
+              <path d="M7 17 17 7"/>
+
+              <circle
+                cx="8"
+                cy="8"
+                r="2"
+              />
+
+              <circle
+                cx="16"
+                cy="16"
+                r="2"
+              />
+
+            </svg>
+
           </div>
 
-        </div>
+        </article>
+
 
       </section>
 
 
-      <!-- MEIO -->
 
-      <section class="dashboard-grid">
+      <!-- =================================================
+           DESEMPENHO / PROGRESSO
+      ================================================== -->
 
-        <!-- DISCIPLINAS -->
+      <section
+        class="dashboard-grid"
+        data-reveal
+      >
 
-        <div class="panel">
+
+        <article class="panel discipline-panel">
+
 
           <div class="panel-header">
 
             <div>
 
+              <div class="panel-kicker">
+                Desempenho
+              </div>
+
               <strong>
-                Desempenho por disciplina
+                Por disciplina
               </strong>
 
               <span>
-                Onde você está concentrando seus estudos
+                Onde seus estudos est&atilde;o
+                concentrados.
               </span>
 
             </div>
 
+
             <a href="/desempenho">
-              Ver detalhes →
+
+              Ver detalhes
+
+              <span>&rarr;</span>
+
             </a>
 
           </div>
+
 
           <div
             id="disciplinasContainer"
@@ -562,28 +1142,34 @@
 
           </div>
 
-        </div>
+
+        </article>
 
 
-        <!-- PROGRESSO -->
 
-        <div class="panel">
+        <article class="panel progress-panel">
+
 
           <div class="panel-header">
 
             <div>
 
+              <div class="panel-kicker">
+                Progresso
+              </div>
+
               <strong>
-                Seu progresso
+                Seu avan&ccedil;o
               </strong>
 
               <span>
-                Questões já exploradas
+                Quest&otilde;es exploradas.
               </span>
 
             </div>
 
           </div>
+
 
 
           <div class="progress-circle-wrapper">
@@ -599,6 +1185,7 @@
                   r="42"
                 ></circle>
 
+
                 <circle
                   id="progressCircle"
                   class="circle-progress"
@@ -608,6 +1195,7 @@
                 ></circle>
 
               </svg>
+
 
               <div class="progress-text">
 
@@ -626,7 +1214,9 @@
           </div>
 
 
+
           <div class="progress-info">
+
 
             <div>
 
@@ -640,12 +1230,14 @@
 
             </div>
 
+
             <div class="progress-divider"></div>
+
 
             <div>
 
               <span>
-                Disponíveis
+                Dispon&iacute;veis
               </span>
 
               <strong id="progressoDisponiveis">
@@ -654,40 +1246,59 @@
 
             </div>
 
+
           </div>
 
-        </div>
+
+        </article>
+
 
       </section>
 
 
-      <!-- INFERIOR -->
 
-      <section class="bottom-grid">
+      <!-- =================================================
+           INFERIOR
+      ================================================== -->
 
-        <!-- ATIVIDADE -->
+      <section
+        class="bottom-grid"
+        data-reveal
+      >
 
-        <div class="panel">
+
+        <article class="panel activity-panel">
+
 
           <div class="panel-header">
 
             <div>
+
+              <div class="panel-kicker">
+                Hist&oacute;rico
+              </div>
 
               <strong>
                 Atividade recente
               </strong>
 
               <span>
-                Suas últimas respostas
+                Suas &uacute;ltimas respostas.
               </span>
 
             </div>
 
+
             <a href="/desempenho">
-              Ver tudo →
+
+              Ver tudo
+
+              <span>&rarr;</span>
+
             </a>
 
           </div>
+
 
           <div id="atividadeContainer">
 
@@ -697,34 +1308,44 @@
 
           </div>
 
-        </div>
+
+        </article>
+
 
 
         <div class="small-grid">
 
-          <!-- FINANÇAS -->
 
-          <div class="panel small-panel">
+          <!-- FINANCAS -->
+
+          <article class="panel small-panel finance-panel">
+
 
             <div class="finance-header">
 
               <div>
 
+                <div class="panel-kicker">
+                  Pessoal
+                </div>
+
                 <strong>
-                  Finanças
+                  Finan&ccedil;as
                 </strong>
 
                 <span>
-                  Visão geral
+                  Vis&atilde;o geral
                 </span>
 
               </div>
+
 
               <div class="finance-icon">
                 R$
               </div>
 
             </div>
+
 
 
             <strong
@@ -735,7 +1356,9 @@
             </strong>
 
 
+
             <div class="finance-values">
+
 
               <div>
 
@@ -752,6 +1375,7 @@
 
               </div>
 
+
               <div>
 
                 <span>
@@ -767,6 +1391,7 @@
 
               </div>
 
+
             </div>
 
 
@@ -774,42 +1399,54 @@
               href="/financas"
               class="panel-link"
             >
-              Abrir finanças →
+
+              Abrir finan&ccedil;as
+
+              <span>&rarr;</span>
+
             </a>
 
-        <a href="/configuracoes" class="menu-item">
-          <span>&#9881;</span>
-          Configura&ccedil;&otilde;es
-        </a>
 
-          </div>
+          </article>
 
 
-          <!-- ACESSO RÁPIDO -->
 
-          <div class="panel small-panel">
+          <!-- ACESSO RAPIDO -->
 
-            <strong>
-              Acesso rápido
-            </strong>
+          <article class="panel small-panel quick-panel">
 
-            <span class="panel-subtitle">
-              Continue de onde parou
-            </span>
+
+            <div>
+
+              <div class="panel-kicker">
+                Atalhos
+              </div>
+
+              <strong>
+                Acesso r&aacute;pido
+              </strong>
+
+              <span class="panel-subtitle">
+                Continue de onde parou.
+              </span>
+
+            </div>
+
 
 
             <div class="quick-links">
 
+
               <a href="/questoes">
 
                 <div class="quick-icon orange-box">
-                  ✓
+                  Q
                 </div>
 
                 <div>
 
                   <strong>
-                    Resolver questões
+                    Resolver quest&otilde;es
                   </strong>
 
                   <span>
@@ -818,15 +1455,16 @@
 
                 </div>
 
-                <b>→</b>
+                <b>&rarr;</b>
 
               </a>
+
 
 
               <a href="/flashcards">
 
                 <div class="quick-icon">
-                  ▣
+                  F
                 </div>
 
                 <div>
@@ -836,52 +1474,64 @@
                   </strong>
 
                   <span>
-                    Reforçar conteúdo
+                    Refor&ccedil;ar conte&uacute;do
                   </span>
 
                 </div>
 
-                <b>→</b>
+                <b>&rarr;</b>
 
               </a>
 
 
-              <a href="/desempenho">
+
+              <a href="/casos">
 
                 <div class="quick-icon">
-                  ◒
+                  C
                 </div>
 
                 <div>
 
                   <strong>
-                    Ver desempenho
+                    Casos cl&iacute;nicos
                   </strong>
 
                   <span>
-                    Acompanhar evolução
+                    Treinar racioc&iacute;nio
                   </span>
 
                 </div>
 
-                <b>→</b>
+                <b>&rarr;</b>
 
               </a>
 
+
             </div>
 
-          </div>
+
+          </article>
+
 
         </div>
 
+
       </section>
 
+
     </main>
+
 
   </div>
 
 
+
+  <script src="/js/dashboard-ui.js"></script>
   <script src="/js/dashboard.js"></script>
+  <script src="/js/cortex-brand.js"></script>
+
 
 </body>
+
 </html>

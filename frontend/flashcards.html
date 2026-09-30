@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Flashcards | Jankinho Study</title>
+  <title>Flashcards | Cortex</title>
 
   <link
     rel="stylesheet"
@@ -17,21 +17,24 @@
   >
   <link rel="stylesheet" href="/css/ui-enhancements.css">
   <script src="/js/ui-enhancements.js"></script>
+  <link rel="stylesheet" href="/css/themes.css">
+  <script src="/js/theme-manager.js"></script>
+  <link rel="stylesheet" href="/css/cortex-brand.css">
+  <link rel="stylesheet" href="/css/flashcards-premium.css">
 </head>
 
-<body>
+<body class="flashcards-view">
 
   <aside class="sidebar">
 
     <a href="/" class="sidebar-logo">
 
       <div class="logo-box">
-        J
+        C
       </div>
 
       <div>
-        <strong>Jankinho</strong>
-        <span>Study</span>
+        <strong>Cortex</strong><span>Study Platform</span>
       </div>
 
     </a>
@@ -166,7 +169,7 @@
           </strong>
 
           <span>
-            Jankinho Study
+            Cortex
           </span>
         </div>
 
@@ -263,7 +266,7 @@
               </strong>
 
               <p>
-                Revise seus cards um por um.
+                Revise os cards um por um.
               </p>
 
               <span>
@@ -313,7 +316,7 @@
             <div>
 
               <strong>
-                Sua biblioteca
+                Biblioteca Cortex
               </strong>
 
               <p id="bibliotecaResumo">
@@ -321,7 +324,7 @@
               </p>
 
               <span class="muted-link">
-                Biblioteca pessoal
+                Biblioteca compartilhada
               </span>
 
             </div>
@@ -380,11 +383,11 @@
                 <textarea
                   id="frente"
                   rows="6"
-                  placeholder="Ex.: O que e debito cardiaco?"
+                  placeholder="Ex.: O que &eacute; d&eacute;bito card&iacute;aco?"
                 ></textarea>
 
                 <small>
-                  Pergunta, conceito ou situacao que voce quer lembrar.
+                  Pergunta, conceito ou situa&ccedil;&atilde;o que voc&ecirc; quer lembrar.
                 </small>
 
               </div>
@@ -399,11 +402,11 @@
                 <textarea
                   id="verso"
                   rows="6"
-                  placeholder="Ex.: Volume de sangue bombeado pelo coracao por minuto."
+                  placeholder="Ex.: Volume de sangue bombeado pelo cora&ccedil;&atilde;o por minuto."
                 ></textarea>
 
                 <small>
-                  Resposta ou explicacao exibida durante a revisao.
+                  Resposta ou explica&ccedil;&atilde;o exibida durante a revis&atilde;o.
                 </small>
 
               </div>
@@ -689,7 +692,9 @@
   </div>
 
 
+  <script src="/js/flashcards-ui.js"></script>
   <script src="/js/flashcards.js"></script>
 
+  <script src="/js/cortex-brand.js"></script>
 </body>
 </html>

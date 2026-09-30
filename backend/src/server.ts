@@ -2898,7 +2898,7 @@ server.listen(
       "======================================"
     );
     console.log(
-      " JANKINHO STUDY"
+      " CORTEX"
     );
     console.log(
       " Backend TypeScript"

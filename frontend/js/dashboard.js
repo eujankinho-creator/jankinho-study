@@ -44,6 +44,59 @@ function escapeHtml(texto) {
 }
 
 
+function mesmoDia(a, b) {
+
+  const dataA =
+    new Date(a);
+
+  const dataB =
+    new Date(b);
+
+
+  return (
+    dataA.getFullYear() ===
+      dataB.getFullYear() &&
+    dataA.getMonth() ===
+      dataB.getMonth() &&
+    dataA.getDate() ===
+      dataB.getDate()
+  );
+
+}
+
+
+function atualizarData() {
+
+  const elemento =
+    $("dashboardDate");
+
+
+  if (!elemento) {
+    return;
+  }
+
+
+  const texto =
+    new Intl.DateTimeFormat(
+      "pt-BR",
+      {
+        weekday: "long",
+        day: "2-digit",
+        month: "long"
+      }
+    )
+      .format(
+        new Date()
+      );
+
+
+  elemento.textContent =
+    texto.charAt(0).toUpperCase() +
+    texto.slice(1);
+
+}
+
+
 async function carregarUsuario() {
 
   const resposta =
@@ -62,15 +115,16 @@ async function carregarUsuario() {
       "/login.html";
 
     return null;
-
   }
 
 
   const dados =
     await resposta.json();
 
+
   const usuario =
-    dados.usuario;
+    dados.usuario ||
+    dados;
 
 
   if (!usuario) {
@@ -79,13 +133,13 @@ async function carregarUsuario() {
       "/login.html";
 
     return null;
-
   }
 
 
   const nome =
     usuario.nome ||
-    "Usuário";
+    "Usu\u00e1rio";
+
 
   const inicial =
     nome
@@ -93,25 +147,50 @@ async function carregarUsuario() {
       .toUpperCase();
 
 
-  $("nomeSidebar")
-    .textContent =
-    nome;
+  const nomeSidebar =
+    $("nomeSidebar");
 
-  $("emailSidebar")
-    .textContent =
-    usuario.email || "";
+  const emailSidebar =
+    $("emailSidebar");
 
-  $("nomeHeader")
-    .textContent =
-    nome;
+  const nomeHeader =
+    $("nomeHeader");
 
-  $("avatarSidebar")
-    .textContent =
-    inicial;
+  const avatarSidebar =
+    $("avatarSidebar");
 
-  $("avatarHeader")
-    .textContent =
-    inicial;
+  const avatarHeader =
+    $("avatarHeader");
+
+
+  if (nomeSidebar) {
+    nomeSidebar.textContent =
+      nome;
+  }
+
+
+  if (emailSidebar) {
+    emailSidebar.textContent =
+      usuario.email || "";
+  }
+
+
+  if (nomeHeader) {
+    nomeHeader.textContent =
+      nome;
+  }
+
+
+  if (avatarSidebar) {
+    avatarSidebar.textContent =
+      inicial;
+  }
+
+
+  if (avatarHeader) {
+    avatarHeader.textContent =
+      inicial;
+  }
 
 
   return usuario;
@@ -126,33 +205,44 @@ function mensagemDashboard(
 
   if (respondidas === 0) {
 
-    return "Comece sua primeira sessão de estudos.";
-
+    return (
+      "Comece sua primeira sess\u00e3o " +
+      "de estudos no Cortex."
+    );
   }
 
 
   if (percentual >= 90) {
 
-    return "Excelente desempenho. Continue mantendo o ritmo.";
-
+    return (
+      "Excelente desempenho. " +
+      "Continue mantendo o ritmo."
+    );
   }
 
 
   if (percentual >= 75) {
 
-    return "Bom ritmo. Mais algumas questões podem elevar seu desempenho.";
-
+    return (
+      "Bom ritmo. Mais algumas quest\u00f5es " +
+      "podem elevar seu desempenho."
+    );
   }
 
 
   if (percentual >= 50) {
 
-    return "Você está evoluindo. Foque nas questões que errou.";
-
+    return (
+      "Voc\u00ea est\u00e1 evoluindo. " +
+      "Use seus erros para direcionar a pr\u00f3xima sess\u00e3o."
+    );
   }
 
 
-  return "Vamos começar. Cada questão respondida melhora seu domínio.";
+  return (
+    "Cada quest\u00e3o respondida ajuda a " +
+    "construir consist\u00eancia."
+  );
 
 }
 
@@ -166,8 +256,84 @@ function renderDisciplinas(
     $("disciplinasContainer");
 
 
+  if (!container) {
+    return;
+  }
+
+
+  /*
+   * Une disciplinas da API com disciplinas
+   * encontradas nas respostas.
+   *
+   * Isso permite exibir desempenho de
+   * conteudos globais tambem.
+   */
+  const mapa =
+    new Map();
+
+
+  disciplinas.forEach(
+    function (disciplina) {
+
+      if (
+        disciplina &&
+        disciplina.id
+      ) {
+
+        mapa.set(
+          disciplina.id,
+          {
+            id:
+              disciplina.id,
+
+            nome:
+              disciplina.nome ||
+              "Disciplina"
+          }
+        );
+      }
+
+    }
+  );
+
+
+  respostas.forEach(
+    function (resposta) {
+
+      const disciplina =
+        resposta.questao &&
+        resposta.questao.disciplina;
+
+
+      if (
+        disciplina &&
+        disciplina.id &&
+        !mapa.has(
+          disciplina.id
+        )
+      ) {
+
+        mapa.set(
+          disciplina.id,
+          {
+            id:
+              disciplina.id,
+
+            nome:
+              disciplina.nome ||
+              "Disciplina"
+          }
+        );
+      }
+
+    }
+  );
+
+
   const desempenho =
-    disciplinas
+    Array.from(
+      mapa.values()
+    )
       .map(
         function (disciplina) {
 
@@ -194,7 +360,9 @@ function renderDisciplinas(
             lista.filter(
               function (resposta) {
 
-                return resposta.correta;
+                return Boolean(
+                  resposta.correta
+                );
 
               }
             ).length;
@@ -203,16 +371,24 @@ function renderDisciplinas(
           const percentual =
             total > 0
               ? Math.round(
-                  (acertos / total) *
+                  (
+                    acertos /
+                    total
+                  ) *
                   100
                 )
               : 0;
 
 
           return {
-            id: disciplina.id,
-            nome: disciplina.nome,
+            id:
+              disciplina.id,
+
+            nome:
+              disciplina.nome,
+
             total,
+
             percentual
           };
 
@@ -221,7 +397,10 @@ function renderDisciplinas(
       .filter(
         function (item) {
 
-          return item.total > 0;
+          return (
+            item.total >
+            0
+          );
 
         }
       )
@@ -235,21 +414,27 @@ function renderDisciplinas(
 
         }
       )
-      .slice(0, 5);
+      .slice(
+        0,
+        5
+      );
 
 
   if (
-    desempenho.length === 0
+    desempenho.length ===
+    0
   ) {
 
     container.innerHTML =
-      '<div class="empty">' +
-      'Ainda não há dados.<br>' +
-      'Resolva algumas questões para acompanhar seu desempenho.' +
-      '</div>';
+      [
+        '<div class="empty">',
+        'Ainda n\u00e3o h\u00e1 dados.<br>',
+        'Resolva algumas quest\u00f5es para ',
+        'acompanhar seu desempenho.',
+        '</div>'
+      ].join("");
 
     return;
-
   }
 
 
@@ -261,8 +446,10 @@ function renderDisciplinas(
           let classe =
             "red";
 
+
           if (
-            item.percentual >= 80
+            item.percentual >=
+            80
           ) {
 
             classe =
@@ -270,7 +457,8 @@ function renderDisciplinas(
 
           }
           else if (
-            item.percentual >= 60
+            item.percentual >=
+            60
           ) {
 
             classe =
@@ -280,7 +468,7 @@ function renderDisciplinas(
 
 
           return `
-            <div>
+            <div class="disciplina-row">
 
               <div class="disciplina-header">
 
@@ -292,7 +480,7 @@ function renderDisciplinas(
 
                   <span>
                     ${item.total}
-                    questões
+                    quest\u00f5es
                   </span>
 
                   <b class="${classe}">
@@ -329,21 +517,32 @@ function renderAtividade(
     $("atividadeContainer");
 
 
+  if (!container) {
+    return;
+  }
+
+
   const recentes =
-    respostas.slice(0, 5);
+    respostas
+      .slice(
+        0,
+        5
+      );
 
 
   if (
-    recentes.length === 0
+    recentes.length ===
+    0
   ) {
 
     container.innerHTML =
-      '<div class="empty">' +
-      'Nenhuma atividade ainda.' +
-      '</div>';
+      [
+        '<div class="empty">',
+        'Nenhuma atividade ainda.',
+        '</div>'
+      ].join("");
 
     return;
-
   }
 
 
@@ -353,13 +552,15 @@ function renderAtividade(
         function (resposta) {
 
           const correta =
-            resposta.correta;
+            Boolean(
+              resposta.correta
+            );
 
 
           const enunciado =
             resposta.questao
               ? resposta.questao.enunciado
-              : "Questão respondida";
+              : "Quest\u00e3o respondida";
 
 
           const disciplina =
@@ -381,8 +582,8 @@ function renderAtividade(
               >
                 ${
                   correta
-                    ? "✓"
-                    : "×"
+                    ? "\u2713"
+                    : "\u00d7"
                 }
               </div>
 
@@ -394,7 +595,7 @@ function renderAtividade(
 
                 <span>
                   ${escapeHtml(disciplina)}
-                  ·
+                  &middot;
                   ${dataCurta(
                     resposta.respondidaAt
                   )}
@@ -426,20 +627,117 @@ function renderAtividade(
 }
 
 
+function renderHoje(
+  respostas
+) {
+
+  const hoje =
+    new Date();
+
+
+  const respostasHoje =
+    respostas.filter(
+      function (resposta) {
+
+        return (
+          resposta.respondidaAt &&
+          mesmoDia(
+            resposta.respondidaAt,
+            hoje
+          )
+        );
+
+      }
+    );
+
+
+  const acertosHoje =
+    respostasHoje.filter(
+      function (resposta) {
+
+        return Boolean(
+          resposta.correta
+        );
+
+      }
+    ).length;
+
+
+  const percentualHoje =
+    respostasHoje.length > 0
+      ? Math.round(
+          (
+            acertosHoje /
+            respostasHoje.length
+          ) *
+          100
+        )
+      : 0;
+
+
+  const hojeRespondidas =
+    $("hojeRespondidas");
+
+  const hojeAcertos =
+    $("hojeAcertos");
+
+  const hojePercentual =
+    $("hojePercentual");
+
+
+  if (hojeRespondidas) {
+
+    hojeRespondidas.textContent =
+      String(
+        respostasHoje.length
+      );
+  }
+
+
+  if (hojeAcertos) {
+
+    hojeAcertos.textContent =
+      String(
+        acertosHoje
+      );
+  }
+
+
+  if (hojePercentual) {
+
+    hojePercentual.textContent =
+      percentualHoje +
+      "%";
+  }
+
+}
+
+
 async function carregarDashboard() {
 
   try {
 
-    await carregarUsuario();
+    atualizarData();
+
+
+    /*
+     * Usuario e dados comecam a carregar
+     * ao mesmo tempo para reduzir espera.
+     */
+    const usuarioPromise =
+      carregarUsuario();
 
 
     const [
+      usuario,
       questoesResponse,
       respostasResponse,
       disciplinasResponse,
       financeiroResponse
     ] =
       await Promise.all([
+        usuarioPromise,
+
         fetch(
           "/api/questoes",
           {
@@ -474,70 +772,107 @@ async function carregarDashboard() {
       ]);
 
 
+    if (!usuario) {
+      return;
+    }
+
+
+    const respostasApi =
+      [
+        questoesResponse,
+        respostasResponse,
+        disciplinasResponse,
+        financeiroResponse
+      ];
+
+
     if (
-      questoesResponse.status === 401
+      respostasApi.some(
+        function (response) {
+
+          return (
+            response.status ===
+            401
+          );
+
+        }
+      )
     ) {
 
       location.href =
         "/login.html";
 
       return;
-
     }
 
 
-    const questoes =
-      questoesResponse.ok
-        ? await questoesResponse.json()
+    const [
+      questoes,
+      respostas,
+      disciplinas,
+      financeiro
+    ] =
+      await Promise.all([
+        questoesResponse.ok
+          ? questoesResponse.json()
+          : Promise.resolve([]),
+
+        respostasResponse.ok
+          ? respostasResponse.json()
+          : Promise.resolve([]),
+
+        disciplinasResponse.ok
+          ? disciplinasResponse.json()
+          : Promise.resolve([]),
+
+        financeiroResponse.ok
+          ? financeiroResponse.json()
+          : Promise.resolve({
+              resumo: {
+                receitas: 0,
+                despesas: 0,
+                saldo: 0
+              }
+            })
+      ]);
+
+
+    const listaQuestoes =
+      Array.isArray(questoes)
+        ? questoes
         : [];
 
 
-    const respostas =
-      respostasResponse.ok
-        ? await respostasResponse.json()
+    const listaRespostas =
+      Array.isArray(respostas)
+        ? respostas
         : [];
 
 
-    const disciplinas =
-      disciplinasResponse.ok
-        ? await disciplinasResponse.json()
+    const listaDisciplinas =
+      Array.isArray(disciplinas)
+        ? disciplinas
         : [];
-
-
-    const financeiro =
-      financeiroResponse.ok
-        ? await financeiroResponse.json()
-        : {
-            resumo: {
-              receitas: 0,
-              despesas: 0,
-              saldo: 0
-            }
-          };
 
 
     const totalQuestoes =
-      Array.isArray(questoes)
-        ? questoes.length
-        : 0;
+      listaQuestoes.length;
 
 
     const totalRespondidas =
-      Array.isArray(respostas)
-        ? respostas.length
-        : 0;
+      listaRespostas.length;
 
 
     const totalAcertos =
-      Array.isArray(respostas)
-        ? respostas.filter(
-            function (resposta) {
+      listaRespostas.filter(
+        function (resposta) {
 
-              return resposta.correta;
+          return Boolean(
+            resposta.correta
+          );
 
-            }
-          ).length
-        : 0;
+        }
+      ).length;
 
 
     const percentual =
@@ -584,7 +919,8 @@ async function carregarDashboard() {
 
     $("percentual")
       .textContent =
-      percentual + "%";
+      percentual +
+      "%";
 
 
     $("mensagemHero")
@@ -597,7 +933,8 @@ async function carregarDashboard() {
 
     $("progressoPercentual")
       .textContent =
-      progresso + "%";
+      progresso +
+      "%";
 
 
     $("progressoRespondidas")
@@ -630,43 +967,56 @@ async function carregarDashboard() {
 
 
     renderDisciplinas(
-      Array.isArray(disciplinas)
-        ? disciplinas
-        : [],
-      Array.isArray(respostas)
-        ? respostas
-        : []
+      listaDisciplinas,
+      listaRespostas
     );
 
 
     renderAtividade(
-      Array.isArray(respostas)
-        ? respostas
-        : []
+      listaRespostas
+    );
+
+
+    renderHoje(
+      listaRespostas
     );
 
 
     const resumo =
-      financeiro.resumo || {
-        receitas: 0,
-        despesas: 0,
-        saldo: 0
-      };
+      financeiro &&
+      financeiro.resumo
+        ? financeiro.resumo
+        : {
+            receitas: 0,
+            despesas: 0,
+            saldo: 0
+          };
 
 
     $("saldo")
       .textContent =
-      moeda(resumo.saldo);
+      moeda(
+        resumo.saldo
+      );
 
 
     $("receitas")
       .textContent =
-      moeda(resumo.receitas);
+      moeda(
+        resumo.receitas
+      );
 
 
     $("despesas")
       .textContent =
-      moeda(resumo.despesas);
+      moeda(
+        resumo.despesas
+      );
+
+
+    document.body.classList.add(
+      "dashboard-loaded"
+    );
 
   }
   catch (erro) {
@@ -688,7 +1038,9 @@ async function sair() {
     await fetch(
       "/api/auth/logout",
       {
-        method: "POST",
+        method:
+          "POST",
+
         credentials:
           "same-origin"
       }
@@ -705,19 +1057,56 @@ async function sair() {
 }
 
 
-$("logoutSidebar")
-  .addEventListener(
+const logoutSidebar =
+  $("logoutSidebar");
+
+
+if (logoutSidebar) {
+
+  logoutSidebar.addEventListener(
     "click",
     sair
   );
+
+}
 
 
 const overlay =
   $("mobileOverlay");
 
 
-$("abrirMenu")
-  .addEventListener(
+const abrirMenu =
+  $("abrirMenu");
+
+
+const fecharMenuBtn =
+  $("fecharMenu");
+
+
+const fecharOverlay =
+  $("fecharOverlay");
+
+
+function fecharMenu() {
+
+  if (!overlay) {
+    return;
+  }
+
+
+  overlay.classList.remove(
+    "open"
+  );
+
+}
+
+
+if (
+  abrirMenu &&
+  overlay
+) {
+
+  abrirMenu.addEventListener(
     "click",
     function () {
 
@@ -728,28 +1117,44 @@ $("abrirMenu")
     }
   );
 
+}
 
-function fecharMenu() {
 
-  overlay.classList.remove(
-    "open"
+if (fecharMenuBtn) {
+
+  fecharMenuBtn.addEventListener(
+    "click",
+    fecharMenu
   );
 
 }
 
 
-$("fecharMenu")
-  .addEventListener(
+if (fecharOverlay) {
+
+  fecharOverlay.addEventListener(
     "click",
     fecharMenu
   );
 
+}
 
-$("fecharOverlay")
-  .addEventListener(
-    "click",
-    fecharMenu
-  );
+
+document.addEventListener(
+  "keydown",
+  function (event) {
+
+    if (
+      event.key ===
+      "Escape"
+    ) {
+
+      fecharMenu();
+
+    }
+
+  }
+);
 
 
 carregarDashboard();

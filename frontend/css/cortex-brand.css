@@ -1,0 +1,719 @@
+/* =========================================================
+   CORTEX BRAND
+========================================================= */
+
+/* -----------------------------------------
+   Logo Cortex
+----------------------------------------- */
+
+.logo-box.cortex-logo {
+  position: relative;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.10), transparent 35%),
+    linear-gradient(145deg, rgba(24,24,24,.92), rgba(10,10,10,.96));
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+.logo-box.cortex-logo::before {
+  content: "";
+
+  position: absolute;
+  inset: 1px;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(249,115,22,.18),
+      rgba(249,115,22,.04)
+    );
+
+  opacity: .9;
+}
+
+.logo-box.cortex-logo .cortex-logo-core {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.logo-box.cortex-logo .cortex-logo-letter {
+  position: relative;
+  z-index: 3;
+
+  color: #f8fafc;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .01em;
+
+  text-shadow:
+    0 0 12px rgba(249,115,22,.18);
+}
+
+.logo-box.cortex-logo .cortex-logo-ring,
+.logo-box.cortex-logo .cortex-logo-spark,
+.logo-box.cortex-logo .cortex-logo-dot {
+  position: absolute;
+  z-index: 2;
+}
+
+.logo-box.cortex-logo .cortex-logo-ring {
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+  border: 1.5px solid rgba(249,115,22,.45);
+
+  opacity: .9;
+}
+
+.logo-box.cortex-logo .cortex-logo-spark {
+  width: 14px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(90deg, #f97316, #fb923c);
+
+  transform:
+    rotate(-32deg)
+    translate(8px, -8px);
+
+  box-shadow:
+    0 0 10px rgba(249,115,22,.35);
+}
+
+.logo-box.cortex-logo .cortex-logo-dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #fb923c;
+
+  transform:
+    translate(10px, -10px);
+
+  box-shadow:
+    0 0 12px rgba(251,146,60,.5);
+}
+
+
+/* -----------------------------------------
+   Pink theme logo
+----------------------------------------- */
+
+html[data-theme="pink-glitter"] .logo-box.cortex-logo {
+  border-color: rgba(255,166,214,.22);
+
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.11), transparent 35%),
+    linear-gradient(145deg, rgba(64,20,53,.92), rgba(35,10,29,.96));
+
+  box-shadow:
+    0 12px 28px rgba(14,0,11,.30),
+    0 0 18px rgba(255,105,180,.08),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+html[data-theme="pink-glitter"] .logo-box.cortex-logo::before {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,105,180,.22),
+      rgba(255,166,214,.08)
+    );
+}
+
+html[data-theme="pink-glitter"] .logo-box.cortex-logo .cortex-logo-letter {
+  color: #fff7fc;
+
+  text-shadow:
+    0 0 14px rgba(255,105,180,.18);
+}
+
+html[data-theme="pink-glitter"] .logo-box.cortex-logo .cortex-logo-ring {
+  border-color: rgba(255,166,214,.50);
+}
+
+html[data-theme="pink-glitter"] .logo-box.cortex-logo .cortex-logo-spark {
+  background:
+    linear-gradient(90deg, #ff69b4, #ff9fd0);
+
+  box-shadow:
+    0 0 12px rgba(255,105,180,.34);
+}
+
+html[data-theme="pink-glitter"] .logo-box.cortex-logo .cortex-logo-dot {
+  background: #ffc6e6;
+
+  box-shadow:
+    0 0 12px rgba(255,166,214,.48);
+}
+
+
+/* -----------------------------------------
+   Sidebar com mais contraste no rosa
+----------------------------------------- */
+
+html[data-theme="pink-glitter"] .sidebar-logo strong,
+html[data-theme="pink-glitter"] .sidebar-logo span,
+html[data-theme="pink-glitter"] .sidebar-logo small {
+  color: #fff4fb !important;
+}
+
+html[data-theme="pink-glitter"] .menu-title {
+  color: #f2bfd9 !important;
+}
+
+html[data-theme="pink-glitter"] .menu-item {
+  color: #f3c5dd !important;
+}
+
+html[data-theme="pink-glitter"] .menu-item span,
+html[data-theme="pink-glitter"] .menu-item strong,
+html[data-theme="pink-glitter"] .menu-item small {
+  color: inherit !important;
+}
+
+html[data-theme="pink-glitter"] .menu-item i,
+html[data-theme="pink-glitter"] .menu-item svg,
+html[data-theme="pink-glitter"] .menu-item .icon,
+html[data-theme="pink-glitter"] .menu-item [class*="icon"] {
+  color: #ffd8eb !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="pink-glitter"] .menu-item:hover,
+html[data-theme="pink-glitter"] .menu-item:focus-visible {
+  color: #fff7fc !important;
+}
+
+html[data-theme="pink-glitter"] .menu-item:hover i,
+html[data-theme="pink-glitter"] .menu-item:hover svg,
+html[data-theme="pink-glitter"] .menu-item:hover .icon,
+html[data-theme="pink-glitter"] .menu-item.active i,
+html[data-theme="pink-glitter"] .menu-item.active svg,
+html[data-theme="pink-glitter"] .menu-item.active .icon {
+  color: #fff2fa !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+html[data-theme="pink-glitter"] .menu-item.active {
+  color: #fff3fa !important;
+}
+
+html[data-theme="pink-glitter"] .logout-button,
+html[data-theme="pink-glitter"] .logout-button span,
+html[data-theme="pink-glitter"] .logout-button i,
+html[data-theme="pink-glitter"] .logout-button svg {
+  color: #ffd8eb !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+
+/* =========================================================
+   GATINHO FOFO - PINK WIDGET
+========================================================= */
+
+.pink-cat-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+
+  z-index: 9999;
+
+  display: none;
+}
+
+html[data-theme="pink-glitter"] .pink-cat-widget {
+  display: block;
+}
+
+.pink-cat-widget .pink-cat-shell {
+  position: relative;
+}
+
+.pink-cat-widget .pink-cat-bubble {
+  position: absolute;
+  right: 8px;
+  bottom: calc(100% + 12px);
+
+  max-width: 210px;
+
+  padding: 10px 12px;
+
+  border-radius: 16px 16px 5px 16px;
+  border: 1px solid rgba(255,166,214,.22);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(73,24,61,.96),
+      rgba(44,14,37,.96)
+    );
+
+  color: #fff5fb;
+  font-size: 12px;
+  line-height: 18px;
+
+  box-shadow:
+    0 16px 40px rgba(10,0,8,.26),
+    0 0 20px rgba(255,105,180,.08);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility .18s ease;
+}
+
+.pink-cat-widget .pink-cat-bubble::after {
+  content: "";
+
+  position: absolute;
+  right: 18px;
+  top: 100%;
+
+  width: 12px;
+  height: 12px;
+
+  transform: rotate(45deg) translateY(-7px);
+
+  border-right: 1px solid rgba(255,166,214,.20);
+  border-bottom: 1px solid rgba(255,166,214,.20);
+
+  background: rgba(52,17,44,.96);
+}
+
+.pink-cat-widget.is-open .pink-cat-bubble {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.pink-cat-widget .pink-cat-button {
+  position: relative;
+
+  width: 88px;
+  height: 88px;
+
+  border: 0;
+  padding: 0;
+
+  border-radius: 28px;
+
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255,255,255,.18), transparent 20%),
+    linear-gradient(145deg, rgba(255,105,180,.20), rgba(255,159,208,.08));
+
+  box-shadow:
+    0 16px 42px rgba(10,0,8,.30),
+    0 0 24px rgba(255,105,180,.10),
+    inset 0 0 0 1px rgba(255,166,214,.18);
+
+  cursor: pointer;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+.pink-cat-widget .pink-cat-button:hover {
+  transform: translateY(-2px) scale(1.02);
+
+  box-shadow:
+    0 20px 46px rgba(10,0,8,.34),
+    0 0 30px rgba(255,105,180,.14),
+    inset 0 0 0 1px rgba(255,166,214,.22);
+}
+
+.pink-cat-widget .pink-cat-button:active {
+  transform: scale(.98);
+}
+
+.pink-cat-widget .pink-cat-face {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pink-cat-widget .pink-cat-head {
+  position: relative;
+
+  width: 54px;
+  height: 48px;
+
+  border-radius: 22px 22px 20px 20px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffd7eb 0%,
+      #ffc1de 100%
+    );
+
+  box-shadow:
+    inset 0 -4px 10px rgba(255,105,180,.08);
+}
+
+.pink-cat-widget .pink-cat-ear {
+  position: absolute;
+  top: -8px;
+
+  width: 18px;
+  height: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffd7eb 0%,
+      #ffbadc 100%
+    );
+
+  transform: rotate(45deg);
+
+  border-radius: 4px;
+}
+
+.pink-cat-widget .pink-cat-ear.left {
+  left: 6px;
+}
+
+.pink-cat-widget .pink-cat-ear.right {
+  right: 6px;
+}
+
+.pink-cat-widget .pink-cat-ear::after {
+  content: "";
+
+  position: absolute;
+  inset: 4px;
+
+  border-radius: 3px;
+
+  background: rgba(255,105,180,.16);
+}
+
+.pink-cat-widget .pink-cat-eye {
+  position: absolute;
+  top: 20px;
+
+  width: 6px;
+  height: 9px;
+
+  border-radius: 999px;
+
+  background: #3a152d;
+
+  transition:
+    transform .16s ease,
+    height .16s ease,
+    top .16s ease;
+}
+
+.pink-cat-widget .pink-cat-eye.left {
+  left: 15px;
+}
+
+.pink-cat-widget .pink-cat-eye.right {
+  right: 15px;
+}
+
+.pink-cat-widget .pink-cat-blush {
+  position: absolute;
+  top: 26px;
+
+  width: 10px;
+  height: 6px;
+
+  border-radius: 999px;
+
+  background: rgba(255,105,180,.24);
+
+  filter: blur(.3px);
+}
+
+.pink-cat-widget .pink-cat-blush.left {
+  left: 8px;
+}
+
+.pink-cat-widget .pink-cat-blush.right {
+  right: 8px;
+}
+
+.pink-cat-widget .pink-cat-nose {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+
+  width: 8px;
+  height: 6px;
+
+  transform: translateX(-50%);
+
+  border-radius: 999px 999px 80% 80%;
+
+  background: #ff7dbd;
+}
+
+.pink-cat-widget .pink-cat-mouth {
+  position: absolute;
+  top: 31px;
+  left: 50%;
+
+  width: 18px;
+  height: 8px;
+
+  transform: translateX(-50%);
+}
+
+.pink-cat-widget .pink-cat-mouth::before,
+.pink-cat-widget .pink-cat-mouth::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+
+  width: 8px;
+  height: 6px;
+
+  border-bottom: 1.8px solid #6a204f;
+  border-radius: 0 0 10px 10px;
+}
+
+.pink-cat-widget .pink-cat-mouth::before {
+  left: 1px;
+  transform: rotate(8deg);
+}
+
+.pink-cat-widget .pink-cat-mouth::after {
+  right: 1px;
+  transform: rotate(-8deg);
+}
+
+.pink-cat-widget .pink-cat-paw {
+  position: absolute;
+  right: -2px;
+  bottom: 12px;
+
+  width: 18px;
+  height: 22px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffd7eb 0%,
+      #ffbfdc 100%
+    );
+
+  transform-origin: bottom center;
+}
+
+.pink-cat-widget .pink-cat-paw::before,
+.pink-cat-widget .pink-cat-paw::after {
+  content: "";
+
+  position: absolute;
+  top: 4px;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+  background: rgba(255,105,180,.18);
+}
+
+.pink-cat-widget .pink-cat-paw::before {
+  left: 4px;
+}
+
+.pink-cat-widget .pink-cat-paw::after {
+  right: 4px;
+}
+
+.pink-cat-widget .pink-cat-sparkle {
+  position: absolute;
+  left: -4px;
+  top: -4px;
+
+  width: 18px;
+  height: 18px;
+
+  color: #ffe7f4;
+  font-size: 14px;
+  line-height: 18px;
+
+  opacity: 0;
+  transform: scale(.8);
+
+  transition:
+    opacity .18s ease,
+    transform .18s ease;
+}
+
+.pink-cat-widget.is-awake .pink-cat-sparkle {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pink-cat-widget.is-awake .pink-cat-paw {
+  animation: pinkCatWave .75s ease-in-out 2;
+}
+
+.pink-cat-widget.is-awake .pink-cat-head {
+  animation: pinkCatBob .55s ease-in-out 2;
+}
+
+.pink-cat-widget.is-awake .pink-cat-eye {
+  height: 3px;
+  top: 24px;
+}
+
+@keyframes pinkCatWave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-18deg); }
+  50% { transform: rotate(8deg); }
+  75% { transform: rotate(-14deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes pinkCatBob {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+  .pink-cat-widget {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .pink-cat-widget .pink-cat-button {
+    width: 76px;
+    height: 76px;
+    border-radius: 24px;
+  }
+
+  .pink-cat-widget .pink-cat-head {
+    width: 48px;
+    height: 42px;
+  }
+
+  .pink-cat-widget .pink-cat-bubble {
+    max-width: 170px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+/* Sparkle seguro contra problema de encoding */
+.pink-cat-sparkle::before {
+  content: "\2726";
+  display: block;
+}
+
+/* =========================================================
+   CORTEX - LOGO CEREBRO MINIMALISTA
+========================================================= */
+
+.logo-box.cortex-logo,
+html[data-theme="pink-glitter"] .logo-box.cortex-logo {
+  width: 40px !important;
+  height: 40px !important;
+
+  overflow: visible !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+}
+
+.logo-box.cortex-logo::before,
+html[data-theme="pink-glitter"] .logo-box.cortex-logo::before {
+  display: none !important;
+}
+
+.cortex-brain-logo {
+  width: 30px;
+  height: 30px;
+
+  fill: none;
+
+  stroke: #f97316;
+
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(
+      0 0 6px
+      rgba(249,115,22,.18)
+    );
+}
+
+html[data-theme="pink-glitter"]
+.cortex-brain-logo {
+  stroke: #ffc2df;
+
+  filter:
+    drop-shadow(
+      0 0 7px
+      rgba(255,105,180,.30)
+    );
+}
+
+.sidebar-logo:hover
+.cortex-brain-logo {
+  transform: scale(1.06);
+}
+
+.cortex-brain-logo {
+  transition:
+    transform .18s ease,
+    filter .18s ease;
+}

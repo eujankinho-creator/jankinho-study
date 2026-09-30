@@ -1,0 +1,2404 @@
+/* =========================================================
+   CORTEX - AREA ANALISE PREMIUM
+========================================================= */
+
+.analysis-view {
+  --analysis-accent:
+    var(--theme-accent, #f97316);
+
+  --analysis-accent-2:
+    var(--theme-accent-2, #fb923c);
+
+  --analysis-border:
+    rgba(255,255,255,.07);
+
+  --analysis-text:
+    #f5f5f5;
+
+  --analysis-muted:
+    #696969;
+
+  --analysis-card:
+    rgba(14,14,14,.82);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.analysis-view svg {
+  fill:
+    none;
+
+  stroke:
+    currentColor;
+
+  stroke-width:
+    1.7;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+}
+
+
+.analysis-view .sidebar {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,10,10,.98),
+      rgba(7,7,7,.98)
+    ) !important;
+
+  box-shadow:
+    14px 0 50px
+    rgba(0,0,0,.12);
+}
+
+
+.analysis-view .sidebar-logo,
+.analysis-view .sidebar-user {
+  min-height:
+    78px;
+}
+
+
+.analysis-view .header {
+  height:
+    78px;
+
+  padding:
+    0 34px;
+
+  background:
+    rgba(5,5,5,.82) !important;
+
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
+
+  box-shadow:
+    0 8px 30px
+    rgba(0,0,0,.12);
+}
+
+
+.analysis-view .header-title {
+  color:
+    rgba(255,255,255,.90) !important;
+
+  font-size:
+    13px;
+
+  font-weight:
+    750;
+}
+
+
+.analysis-view
+:is(
+  .performance-page,
+  .ranking-page
+) {
+  max-width:
+    1500px;
+
+  padding:
+    34px;
+}
+
+
+/* =========================================================
+   NAV ICONS
+========================================================= */
+
+.analysis-view .cortex-nav-icon {
+  width:
+    22px !important;
+
+  min-width:
+    22px;
+
+  height:
+    22px;
+
+  display:
+    grid !important;
+
+  place-items:
+    center;
+
+  color:
+    rgba(255,255,255,.40);
+
+  font-size:
+    8px !important;
+
+  font-weight:
+    850;
+
+  transition:
+    color .18s ease,
+    transform .18s ease;
+}
+
+
+.analysis-view
+.cortex-nav-icon svg {
+  width:
+    17px;
+
+  height:
+    17px;
+}
+
+
+.analysis-view
+.menu-item:hover
+.cortex-nav-icon {
+  transform:
+    scale(1.06);
+}
+
+
+.analysis-view
+.menu-item.active
+.cortex-nav-icon {
+  color:
+    var(--analysis-accent-2);
+}
+
+
+/* =========================================================
+   HERO SHARED
+========================================================= */
+
+.analysis-view
+:is(
+  .performance-heading,
+  .ranking-heading
+) {
+  position:
+    relative;
+
+  min-height:
+    245px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    34px;
+
+  overflow:
+    hidden;
+
+  margin-bottom:
+    25px;
+
+  padding:
+    34px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.075);
+
+  border-radius:
+    24px;
+
+  background:
+    radial-gradient(
+      circle at 88% 18%,
+      rgba(249,115,22,.08),
+      transparent 29%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(16,16,16,.95),
+      rgba(9,9,9,.96)
+    );
+
+  box-shadow:
+    0 25px 65px
+    rgba(0,0,0,.20);
+
+  isolation:
+    isolate;
+}
+
+
+.analysis-view
+:is(
+  .performance-heading,
+  .ranking-heading
+)::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    -1;
+
+  pointer-events:
+    none;
+
+  opacity:
+    .15;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.03)
+      1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.03)
+      1px,
+      transparent 1px
+    );
+
+  background-size:
+    42px 42px;
+
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      black 42%,
+      black
+    );
+}
+
+
+.analysis-view
+:is(
+  .performance-heading,
+  .ranking-heading
+)::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  z-index:
+    -1;
+
+  width:
+    350px;
+
+  height:
+    350px;
+
+  right:
+    -120px;
+
+  top:
+    -140px;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--analysis-accent);
+
+  opacity:
+    .065;
+
+  filter:
+    blur(80px);
+}
+
+
+.analysis-view .heading-badges {
+  gap:
+    8px;
+
+  color:
+    #686868;
+
+  font-size:
+    9px;
+}
+
+
+.analysis-view
+:is(
+  .orange-badge,
+  .small-badge
+) {
+  min-height:
+    24px;
+
+  align-items:
+    center;
+
+  padding:
+    4px 8px;
+
+  font-size:
+    8px;
+
+  font-weight:
+    750;
+}
+
+
+.analysis-view
+:is(
+  .performance-heading h1,
+  .ranking-heading h1
+) {
+  margin-top:
+    17px;
+
+  color:
+    #f5f5f5;
+
+  font-size:
+    clamp(33px,4vw,48px);
+
+  line-height:
+    1;
+
+  letter-spacing:
+    -.045em;
+}
+
+
+.analysis-view
+:is(
+  .performance-heading p,
+  .ranking-heading p
+) {
+  max-width:
+    650px;
+
+  margin-top:
+    16px;
+
+  color:
+    #858585;
+
+  font-size:
+    13px;
+
+  line-height:
+    22px;
+}
+
+
+/* =========================================================
+   HERO SIDE CARD
+========================================================= */
+
+.analysis-hero-side {
+  width:
+    265px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    9px;
+}
+
+
+.analysis-hero-metric {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    17px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    17px;
+
+  box-shadow:
+    0 14px 32px
+    rgba(0,0,0,.13);
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+}
+
+
+.analysis-hero-metric span {
+  display:
+    block;
+
+  color:
+    #676767;
+
+  font-size:
+    8px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .10em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.analysis-hero-metric strong {
+  display:
+    block;
+
+  margin-top:
+    8px;
+
+  color:
+    #f2f2f2;
+
+  font-size:
+    29px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    -.04em;
+}
+
+
+.analysis-hero-metric small {
+  display:
+    block;
+
+  margin-top:
+    4px;
+
+  color:
+    #555;
+
+  font-size:
+    8px;
+}
+
+
+.analysis-hero-side
+.secondary-button {
+  width:
+    100%;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.analysis-view
+.primary-button {
+  min-height:
+    42px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border:
+    0;
+
+  border-radius:
+    11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--analysis-accent),
+      var(--analysis-accent-2)
+    );
+
+  padding:
+    0 15px;
+
+  color:
+    #090909;
+
+  font-size:
+    11px;
+
+  font-weight:
+    800;
+
+  box-shadow:
+    0 10px 28px
+    rgba(249,115,22,.15);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    filter .18s ease;
+}
+
+
+.analysis-view
+.primary-button:hover {
+  transform:
+    translateY(-1px);
+
+  filter:
+    brightness(1.04);
+
+  box-shadow:
+    0 14px 34px
+    rgba(249,115,22,.20);
+}
+
+
+.analysis-view
+.secondary-button {
+  min-height:
+    40px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    0 14px;
+
+  color:
+    #c7c7c7;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease;
+}
+
+
+.analysis-view
+.secondary-button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    rgba(249,115,22,.18);
+
+  background:
+    rgba(249,115,22,.045);
+}
+
+
+.analysis-view
+.secondary-button svg {
+  width:
+    15px;
+
+  height:
+    15px;
+}
+
+
+/* =========================================================
+   LOADING / ERRORS
+========================================================= */
+
+.analysis-view
+.loading-card {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,16,16,.90),
+      rgba(9,9,9,.94)
+    );
+
+  color:
+    #666;
+}
+
+
+.analysis-view
+.loading-card::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(255,255,255,.035) 45%,
+      transparent 70%
+    );
+
+  transform:
+    translateX(-100%);
+
+  animation:
+    cortexAnalysisLoading
+    1.7s infinite;
+}
+
+
+.analysis-view
+:is(
+  .error-card,
+  .error-message
+) {
+  border-color:
+    rgba(244,63,94,.18);
+
+  background:
+    rgba(244,63,94,.05);
+}
+
+
+/* =========================================================
+   PERFORMANCE SUMMARY
+========================================================= */
+
+.performance-view
+.summary-grid {
+  gap:
+    14px;
+}
+
+
+.performance-view
+.summary-card {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  min-height:
+    122px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17,17,17,.79),
+      rgba(10,10,10,.83)
+    );
+
+  padding:
+    18px;
+
+  box-shadow:
+    0 14px 38px
+    rgba(0,0,0,.10);
+
+  transition:
+    transform .20s ease,
+    border-color .20s ease,
+    box-shadow .20s ease;
+}
+
+
+.performance-view
+.summary-card::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    18px;
+
+  right:
+    18px;
+
+  top:
+    0;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(249,115,22,.40),
+      transparent
+    );
+
+  opacity:
+    .45;
+}
+
+
+.performance-view
+.summary-card:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(249,115,22,.15);
+
+  box-shadow:
+    0 20px 46px
+    rgba(0,0,0,.16);
+}
+
+
+.performance-view
+.summary-label {
+  color:
+    #606060;
+
+  font-size:
+    8px;
+}
+
+
+.performance-view
+.summary-value {
+  margin-top:
+    14px;
+
+  font-size:
+    27px;
+
+  letter-spacing:
+    -.035em;
+}
+
+
+.performance-view
+.summary-subtitle {
+  color:
+    #555;
+
+  font-size:
+    9px;
+}
+
+
+/* =========================================================
+   PERFORMANCE CARDS
+========================================================= */
+
+.performance-view
+.performance-card {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  margin-top:
+    16px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,16,16,.80),
+      rgba(10,10,10,.84)
+    );
+
+  padding:
+    25px;
+
+  box-shadow:
+    0 17px 44px
+    rgba(0,0,0,.11);
+
+  transition:
+    border-color .20s ease,
+    box-shadow .20s ease;
+}
+
+
+.performance-view
+.performance-card:hover {
+  border-color:
+    rgba(249,115,22,.10);
+
+  box-shadow:
+    0 21px 50px
+    rgba(0,0,0,.15);
+}
+
+
+.performance-view
+.performance-card::after,
+.ranking-view
+:is(
+  .podium-card,
+  .ranking-card,
+  .user-row
+)::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  border-radius:
+    inherit;
+
+  background:
+    radial-gradient(
+      230px circle at
+      var(--mx,80%)
+      var(--my,0%),
+      rgba(249,115,22,.065),
+      transparent 65%
+    );
+
+  opacity:
+    0;
+
+  transition:
+    opacity .22s ease;
+}
+
+
+.performance-view
+.performance-card:hover::after,
+.ranking-view
+:is(
+  .podium-card,
+  .ranking-card,
+  .user-row
+):hover::after {
+  opacity:
+    1;
+}
+
+
+.performance-view
+.performance-card > *,
+.ranking-view
+:is(
+  .podium-card,
+  .ranking-card,
+  .user-row
+) > * {
+  position:
+    relative;
+
+  z-index:
+    2;
+}
+
+
+.performance-view
+.general-header h2,
+.performance-view
+.section-title {
+  color:
+    #e9e9e9;
+
+  font-size:
+    17px;
+}
+
+
+.performance-view
+.general-header p,
+.performance-view
+.section-description {
+  color:
+    #666;
+
+  font-size:
+    10px;
+}
+
+
+.performance-view
+.general-percent strong {
+  font-size:
+    38px;
+
+  letter-spacing:
+    -.045em;
+}
+
+
+.performance-view
+.general-percent span {
+  color:
+    #555;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.analysis-view .progress {
+  height:
+    7px;
+
+  background:
+    rgba(255,255,255,.045);
+}
+
+
+.analysis-view
+.progress.large {
+  height:
+    9px;
+}
+
+
+.analysis-view
+.progress-value {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--analysis-accent),
+      var(--analysis-accent-2)
+    );
+
+  box-shadow:
+    0 0 13px
+    rgba(249,115,22,.12);
+
+  transition:
+    width .65s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+
+.analysis-view
+.progress-value::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.20),
+      transparent
+    );
+
+  transform:
+    translateX(-120%);
+
+  animation:
+    cortexAnalysisProgress
+    3.4s ease-in-out infinite;
+}
+
+
+.analysis-view
+.progress-value.good {
+  background:
+    linear-gradient(
+      90deg,
+      #059669,
+      #34d399
+    );
+}
+
+
+.analysis-view
+.progress-value.low {
+  background:
+    linear-gradient(
+      90deg,
+      #e11d48,
+      #fb7185
+    );
+}
+
+
+/* =========================================================
+   DISCIPLINES / THEMES / HISTORY
+========================================================= */
+
+.performance-view
+:is(
+  .discipline-item,
+  .theme-item,
+  .history-item
+) {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  border-radius:
+    14px;
+
+  background:
+    rgba(255,255,255,.015);
+
+  padding:
+    15px;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease;
+}
+
+
+.performance-view
+:is(
+  .discipline-item,
+  .theme-item,
+  .history-item
+):hover {
+  transform:
+    translateX(2px);
+
+  border-color:
+    rgba(249,115,22,.11);
+
+  background:
+    rgba(249,115,22,.018);
+}
+
+
+.performance-view
+.item-heading strong {
+  color:
+    #dedede;
+}
+
+
+.performance-view
+.item-heading small {
+  color:
+    #555;
+}
+
+
+.performance-view
+.percent {
+  font-size:
+    14px;
+}
+
+
+.performance-view
+.history-question {
+  color:
+    #d8d8d8;
+
+  font-size:
+    11px;
+}
+
+
+.performance-view
+.meta-badge {
+  border-color:
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.015);
+
+  color:
+    #666;
+}
+
+
+.performance-view
+.history-date {
+  color:
+    #484848;
+}
+
+
+/* =========================================================
+   RANKING SECTION
+========================================================= */
+
+.ranking-view .section-heading {
+  margin:
+    7px 0 19px;
+}
+
+
+.ranking-view
+.section-heading h2 {
+  color:
+    #e9e9e9;
+
+  font-size:
+    18px;
+}
+
+
+.ranking-view
+.section-heading p {
+  color:
+    #626262;
+
+  font-size:
+    10px;
+}
+
+
+/* =========================================================
+   PODIUM
+========================================================= */
+
+.ranking-view
+.podium-grid {
+  gap:
+    14px;
+
+  margin-bottom:
+    28px;
+}
+
+
+.ranking-view
+.podium-card {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  min-height:
+    300px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    21px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17,17,17,.80),
+      rgba(10,10,10,.84)
+    );
+
+  padding:
+    23px;
+
+  box-shadow:
+    0 16px 42px
+    rgba(0,0,0,.12);
+
+  transition:
+    transform .20s ease,
+    border-color .20s ease,
+    box-shadow .20s ease;
+}
+
+
+.ranking-view
+.podium-card:hover {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(249,115,22,.15);
+
+  box-shadow:
+    0 23px 52px
+    rgba(0,0,0,.18);
+}
+
+
+.ranking-view
+.podium-card.first {
+  transform:
+    translateY(-14px);
+
+  border-color:
+    rgba(249,115,22,.24);
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(249,115,22,.11),
+      transparent 36%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(24,17,12,.92),
+      rgba(11,10,9,.94)
+    );
+
+  box-shadow:
+    0 22px 56px
+    rgba(0,0,0,.19),
+    0 0 26px
+    rgba(249,115,22,.04);
+}
+
+
+.ranking-view
+.podium-card.first:hover {
+  transform:
+    translateY(-18px);
+}
+
+
+.ranking-view .medal {
+  min-height:
+    37px;
+
+  font-size:
+    28px;
+
+  filter:
+    drop-shadow(
+      0 5px 8px
+      rgba(0,0,0,.18)
+    );
+}
+
+
+.ranking-view
+.podium-avatar {
+  width:
+    64px;
+
+  height:
+    64px;
+
+  border:
+    1px solid
+    rgba(249,115,22,.12);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(249,115,22,.10),
+      rgba(249,115,22,.035)
+    );
+
+  color:
+    #f1a46d;
+
+  font-size:
+    14px;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.16);
+}
+
+
+.ranking-view
+.podium-card h3 {
+  color:
+    #ededed;
+}
+
+
+.ranking-view
+.podium-percent {
+  font-size:
+    30px;
+
+  letter-spacing:
+    -.04em;
+}
+
+
+.ranking-view
+.podium-caption {
+  color:
+    #555;
+}
+
+
+.ranking-view
+.podium-stat {
+  border-color:
+    rgba(255,255,255,.045);
+
+  background:
+    rgba(255,255,255,.014);
+}
+
+
+.ranking-view
+.podium-stat span {
+  color:
+    #555;
+}
+
+
+.ranking-view
+.you-badge {
+  border-color:
+    rgba(249,115,22,.20);
+
+  background:
+    rgba(249,115,22,.09);
+
+  color:
+    var(--analysis-accent-2);
+}
+
+
+/* =========================================================
+   RANKING TABLE
+========================================================= */
+
+.ranking-view
+.ranking-card {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,16,16,.80),
+      rgba(10,10,10,.84)
+    );
+
+  padding:
+    24px;
+
+  box-shadow:
+    0 17px 44px
+    rgba(0,0,0,.11);
+}
+
+
+.ranking-view
+.ranking-card-heading h2 {
+  color:
+    #e9e9e9;
+
+  font-size:
+    18px;
+}
+
+
+.ranking-view
+.ranking-card-heading p {
+  color:
+    #626262;
+}
+
+
+.ranking-view
+.classified-counter {
+  min-width:
+    100px;
+
+  border-color:
+    rgba(249,115,22,.10);
+
+  background:
+    rgba(249,115,22,.035);
+
+  text-align:
+    center;
+}
+
+
+.ranking-view
+.classified-counter span {
+  color:
+    #666;
+}
+
+
+.ranking-view
+.classified-counter strong {
+  color:
+    var(--analysis-accent-2);
+
+  font-size:
+    18px;
+}
+
+
+/* =========================================================
+   USERS
+========================================================= */
+
+.ranking-view
+.users-list {
+  gap:
+    8px;
+}
+
+
+.ranking-view
+.user-row {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.05);
+
+  border-radius:
+    14px;
+
+  background:
+    rgba(255,255,255,.012);
+
+  padding:
+    13px;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease;
+}
+
+
+.ranking-view
+.user-row:hover {
+  transform:
+    translateX(2px);
+
+  border-color:
+    rgba(249,115,22,.11);
+
+  background:
+    rgba(249,115,22,.018);
+}
+
+
+.ranking-view
+.user-row.current {
+  border-color:
+    rgba(249,115,22,.20);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(249,115,22,.07),
+      rgba(249,115,22,.018)
+    );
+
+  box-shadow:
+    inset 3px 0 0
+    var(--analysis-accent);
+}
+
+
+.ranking-view
+.position-box {
+  border-color:
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.018);
+}
+
+
+.ranking-view
+.user-avatar {
+  border:
+    1px solid
+    rgba(249,115,22,.10);
+
+  background:
+    rgba(249,115,22,.075);
+
+  color:
+    var(--analysis-accent-2);
+}
+
+
+.ranking-view
+.user-name strong {
+  color:
+    #dedede;
+}
+
+
+.ranking-view
+.user-name small {
+  color:
+    #555;
+}
+
+
+.ranking-view
+.user-stat {
+  border-color:
+    rgba(255,255,255,.04);
+
+  background:
+    rgba(255,255,255,.012);
+}
+
+
+.ranking-view
+.user-stat span {
+  color:
+    #555;
+}
+
+
+/* =========================================================
+   EMPTY RANKING
+========================================================= */
+
+.ranking-view
+.empty-ranking {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    21px;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(249,115,22,.06),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(16,16,16,.90),
+      rgba(9,9,9,.94)
+    );
+}
+
+
+.ranking-view
+.empty-ranking h2 {
+  color:
+    #eeeeee;
+}
+
+
+.ranking-view
+.empty-ranking p {
+  color:
+    #696969;
+}
+
+
+.ranking-view
+.minimum-notice {
+  border-color:
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.014);
+
+  color:
+    #5e5e5e;
+}
+
+
+/* =========================================================
+   MOBILE DRAWER
+========================================================= */
+
+.analysis-mobile-button {
+  display:
+    none;
+}
+
+
+.analysis-mobile-overlay {
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  z-index:
+    9990;
+
+  display:
+    none;
+
+  background:
+    rgba(0,0,0,.68);
+
+  backdrop-filter:
+    blur(8px);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+}
+
+
+.analysis-mobile-overlay.open {
+  display:
+    block;
+}
+
+
+.analysis-mobile-drawer {
+  width:
+    min(300px,86vw);
+
+  height:
+    100%;
+
+  overflow-y:
+    auto;
+
+  border-right:
+    1px solid
+    rgba(255,255,255,.08);
+
+  background:
+    #090909;
+
+  box-shadow:
+    25px 0 70px
+    rgba(0,0,0,.35);
+
+  animation:
+    cortexAnalysisDrawer
+    .22s ease both;
+}
+
+
+.analysis-mobile-head {
+  height:
+    70px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.06);
+
+  padding:
+    0 15px 0 20px;
+}
+
+
+.analysis-mobile-brand {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  color:
+    #f5f5f5;
+
+  font-size:
+    14px;
+
+  font-weight:
+    800;
+
+  text-decoration:
+    none;
+}
+
+
+.analysis-mobile-brand
+.logo-box {
+  width:
+    36px;
+
+  height:
+    36px;
+}
+
+
+.analysis-mobile-close {
+  width:
+    38px;
+
+  height:
+    38px;
+
+  border:
+    0;
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:
+    #aaa;
+
+  font-size:
+    20px;
+}
+
+
+/* =========================================================
+   PINK GLITTER
+========================================================= */
+
+html[data-theme="pink-glitter"]
+.analysis-view
+:is(
+  .performance-heading,
+  .ranking-heading
+) {
+  border-color:
+    rgba(255,166,214,.20);
+
+  background:
+    radial-gradient(
+      circle at 88% 18%,
+      rgba(255,105,180,.18),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(62,20,52,.95),
+      rgba(34,10,29,.96)
+    );
+
+  box-shadow:
+    0 25px 65px
+    rgba(10,0,8,.24),
+    0 0 26px
+    rgba(255,105,180,.05);
+}
+
+
+html[data-theme="pink-glitter"]
+.analysis-view
+:is(
+  .performance-heading p,
+  .ranking-heading p
+) {
+  color:
+    #e5aec9 !important;
+}
+
+
+html[data-theme="pink-glitter"]
+.analysis-view
+.analysis-hero-metric {
+  border-color:
+    rgba(255,166,214,.17);
+
+  background:
+    rgba(255,105,180,.055);
+}
+
+
+html[data-theme="pink-glitter"]
+.analysis-view
+.analysis-hero-metric strong {
+  color:
+    #fff4fb;
+}
+
+
+html[data-theme="pink-glitter"]
+.analysis-view
+.analysis-hero-metric span,
+html[data-theme="pink-glitter"]
+.analysis-view
+.analysis-hero-metric small {
+  color:
+    #dda5c0;
+}
+
+
+html[data-theme="pink-glitter"]
+.performance-view
+:is(
+  .summary-card,
+  .performance-card
+),
+html[data-theme="pink-glitter"]
+.ranking-view
+:is(
+  .podium-card,
+  .ranking-card,
+  .user-row
+) {
+  border-color:
+    rgba(255,166,214,.17) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(59,19,49,.90),
+      rgba(36,11,30,.92)
+    ) !important;
+
+  box-shadow:
+    0 16px 42px
+    rgba(10,0,8,.20);
+}
+
+
+html[data-theme="pink-glitter"]
+.performance-view
+.performance-card::after,
+html[data-theme="pink-glitter"]
+.ranking-view
+:is(
+  .podium-card,
+  .ranking-card,
+  .user-row
+)::after {
+  background:
+    radial-gradient(
+      230px circle at
+      var(--mx,80%)
+      var(--my,0%),
+      rgba(255,105,180,.12),
+      transparent 65%
+    );
+}
+
+
+html[data-theme="pink-glitter"]
+.performance-view
+:is(
+  .summary-value,
+  .general-header h2,
+  .section-title,
+  .item-heading strong,
+  .history-question
+),
+html[data-theme="pink-glitter"]
+.ranking-view
+:is(
+  .section-heading h2,
+  .ranking-card-heading h2,
+  .user-name strong,
+  .podium-card h3
+) {
+  color:
+    #fff4fb !important;
+}
+
+
+html[data-theme="pink-glitter"]
+.performance-view
+:is(
+  .summary-label,
+  .summary-subtitle,
+  .general-header p,
+  .section-description,
+  .item-heading small,
+  .history-date
+),
+html[data-theme="pink-glitter"]
+.ranking-view
+:is(
+  .section-heading p,
+  .ranking-card-heading p,
+  .user-name small,
+  .podium-caption,
+  .minimum-notice
+) {
+  color:
+    #dda5c0 !important;
+}
+
+
+html[data-theme="pink-glitter"]
+.analysis-view
+.progress-value:not(.good):not(.low) {
+  background:
+    linear-gradient(
+      90deg,
+      #ff69b4,
+      #ff9fd0
+    );
+
+  box-shadow:
+    0 0 14px
+    rgba(255,105,180,.22);
+}
+
+
+html[data-theme="pink-glitter"]
+.ranking-view
+.podium-card.first {
+  border-color:
+    rgba(255,166,214,.28) !important;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255,105,180,.18),
+      transparent 36%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(70,22,58,.95),
+      rgba(37,11,31,.96)
+    ) !important;
+
+  box-shadow:
+    0 23px 58px
+    rgba(10,0,8,.25),
+    0 0 28px
+    rgba(255,105,180,.07);
+}
+
+
+html[data-theme="pink-glitter"]
+.ranking-view
+.user-row.current {
+  border-color:
+    rgba(255,166,214,.27) !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,105,180,.11),
+      rgba(255,105,180,.025)
+    ) !important;
+
+  box-shadow:
+    inset 3px 0 0
+    #ff7fbe;
+}
+
+
+html[data-theme="pink-glitter"]
+.ranking-view
+.user-avatar {
+  border-color:
+    rgba(255,166,214,.16);
+
+  background:
+    rgba(255,105,180,.09);
+
+  color:
+    #ffb9dc;
+}
+
+
+html[data-theme="pink-glitter"]
+.ranking-view
+.you-badge {
+  border-color:
+    rgba(255,166,214,.20);
+
+  background:
+    rgba(255,105,180,.10);
+
+  color:
+    #ffc0df;
+}
+
+
+html[data-theme="pink-glitter"]
+.analysis-view
+.secondary-button {
+  border-color:
+    rgba(255,166,214,.16);
+
+  background:
+    rgba(255,105,180,.055);
+
+  color:
+    #ffd3e8;
+}
+
+
+html[data-theme="pink-glitter"]
+.analysis-view
+.primary-button {
+  background:
+    linear-gradient(
+      135deg,
+      #ff69b4,
+      #ff91cc,
+      #ffc6e5
+    );
+
+  color:
+    #300d26;
+
+  box-shadow:
+    0 12px 30px
+    rgba(255,105,180,.20);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+.analysis-animate {
+  animation:
+    cortexAnalysisIn
+    .40s cubic-bezier(.2,.8,.2,1)
+    both;
+}
+
+
+@keyframes cortexAnalysisIn {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes cortexAnalysisProgress {
+
+  0%,
+  62% {
+    transform:
+      translateX(-120%);
+  }
+
+  100% {
+    transform:
+      translateX(130%);
+  }
+
+}
+
+
+@keyframes cortexAnalysisLoading {
+
+  to {
+    transform:
+      translateX(100%);
+  }
+
+}
+
+
+@keyframes cortexAnalysisDrawer {
+
+  from {
+    transform:
+      translateX(-100%);
+  }
+
+  to {
+    transform:
+      translateX(0);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .analysis-view
+  :is(
+    .performance-heading,
+    .ranking-heading
+  ) {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      25px;
+  }
+
+
+  .analysis-hero-side {
+    width:
+      100%;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .analysis-view
+  :is(
+    .performance-page,
+    .ranking-page
+  ) {
+    padding:
+      24px 17px 90px;
+  }
+
+
+  .analysis-view .header {
+    padding:
+      0 16px;
+  }
+
+
+  .analysis-mobile-button {
+    width:
+      40px;
+
+    height:
+      40px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    flex:
+      0 0 auto;
+
+    margin-right:
+      14px;
+
+    border:
+      1px solid
+      rgba(255,255,255,.07);
+
+    border-radius:
+      11px;
+
+    background:
+      rgba(255,255,255,.025);
+
+    color:
+      #aaa;
+  }
+
+
+  .analysis-mobile-button svg {
+    width:
+      18px;
+
+    height:
+      18px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .analysis-view
+  :is(
+    .performance-page,
+    .ranking-page
+  ) {
+    padding:
+      18px 13px 90px;
+  }
+
+
+  .analysis-view
+  :is(
+    .performance-heading,
+    .ranking-heading
+  ) {
+    min-height:
+      auto;
+
+    padding:
+      24px 19px;
+
+    border-radius:
+      19px;
+  }
+
+
+  .analysis-view
+  :is(
+    .performance-heading h1,
+    .ranking-heading h1
+  ) {
+    font-size:
+      29px;
+  }
+
+
+  .ranking-view
+  .podium-card.first,
+  .ranking-view
+  .podium-card.first:hover {
+    transform:
+      none;
+  }
+
+
+  .performance-view
+  .performance-card,
+  .ranking-view
+  .ranking-card {
+    padding:
+      19px;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .analysis-view *,
+  .analysis-view *::before,
+  .analysis-view *::after {
+    animation-duration:
+      .01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .01ms !important;
+  }
+
+}

@@ -351,7 +351,7 @@ function renderCasos() {
 
             badges.push(
               '<span class="case-badge public">' +
-              'Publico' +
+              'P\u00fablico' +
               '</span>'
             );
           }
@@ -363,7 +363,7 @@ function renderCasos() {
 
             badges.push(
               '<span class="case-badge completed">' +
-              '\u2713 Concluido' +
+              '\u2713 Conclu\u00eddo' +
               '</span>'
             );
           }
@@ -856,9 +856,11 @@ $("logoutSidebar")
 
 async function iniciar() {
 
-  await carregarUsuario();
+  await Promise.all([
+    carregarUsuario(),
+    carregarCasos()
+  ]);
 
-  await carregarCasos();
 }
 
 

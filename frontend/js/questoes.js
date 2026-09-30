@@ -1,4 +1,4 @@
-﻿const state = {
+const state = {
   questoes: [],
   disciplinas: [],
   filtradas: [],
@@ -222,6 +222,7 @@ function popularDisciplinas() {
   const select =
     $("filtroDisciplina");
 
+
   select.innerHTML =
     '<option value="">' +
     'Todas as disciplinas' +
@@ -231,22 +232,116 @@ function popularDisciplinas() {
   const datalist =
     $("disciplinasLista");
 
-  datalist.innerHTML = "";
+
+  datalist.innerHTML =
+    "";
+
+
+  /*
+   * O banco de questoes e global.
+   *
+   * Por isso o filtro precisa considerar
+   * as disciplinas encontradas nas questoes,
+   * alem das disciplinas do usuario.
+   *
+   * state.disciplinas continua inalterado
+   * para nao interferir na criacao manual.
+   */
+  const mapa =
+    new Map();
+
+
+  function adicionar(nome) {
+
+    const valor =
+      t(nome)
+        .trim();
+
+
+    if (!valor) {
+      return;
+    }
+
+
+    const chave =
+      valor
+        .toLocaleLowerCase(
+          "pt-BR"
+        );
+
+
+    if (!mapa.has(chave)) {
+
+      mapa.set(
+        chave,
+        valor
+      );
+
+    }
+
+  }
 
 
   state.disciplinas.forEach(
     function (disciplina) {
+
+      adicionar(
+        disciplina.nome
+      );
+
+    }
+  );
+
+
+  state.questoes.forEach(
+    function (questao) {
+
+      if (
+        questao.disciplina
+      ) {
+
+        adicionar(
+          questao.disciplina.nome
+        );
+
+      }
+
+    }
+  );
+
+
+  const nomes =
+    Array.from(
+      mapa.values()
+    )
+      .sort(
+        function (a, b) {
+
+          return a.localeCompare(
+            b,
+            "pt-BR"
+          );
+
+        }
+      );
+
+
+  nomes.forEach(
+    function (nome) {
 
       const option =
         document.createElement(
           "option"
         );
 
+
       option.value =
-        disciplina.id;
+        nome;
+
 
       option.textContent =
-        disciplina.nome;
+        nome;
+
 
       select.appendChild(
         option
@@ -258,19 +353,23 @@ function popularDisciplinas() {
           "option"
         );
 
+
       dataOption.value =
-        disciplina.nome;
+        nome;
+
 
       datalist.appendChild(
         dataOption
       );
+
     }
   );
 
 
   $("statDisciplinas")
     .textContent =
-    state.disciplinas.length;
+    nomes.length;
+
 }
 
 
@@ -367,9 +466,18 @@ function aplicarFiltros() {
           !disciplina ||
           (
             questao.disciplina &&
-            String(
-              questao.disciplina.id
-            ) === disciplina
+            t(
+              questao.disciplina.nome
+            )
+              .trim()
+              .toLocaleLowerCase(
+                "pt-BR"
+              ) ===
+            disciplina
+              .trim()
+              .toLocaleLowerCase(
+                "pt-BR"
+              )
           );
 
 
@@ -2141,15 +2249,20 @@ async function iniciar() {
 
   try {
 
-    await carregarUsuario();
-
-    await carregarDados();
+    await Promise.all([
+      carregarUsuario(),
+      carregarDados()
+    ]);
 
   }
   catch (erro) {
 
-    console.error(erro);
+    console.error(
+      erro
+    );
+
   }
+
 }
 
 

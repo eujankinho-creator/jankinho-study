@@ -1,0 +1,2338 @@
+/* =========================================================
+   CORTEX - LABORATORIO + EVOLUCAO
+========================================================= */
+
+.practice-view {
+  --practice-accent: #f97316;
+  --practice-accent-soft: #fb923c;
+  --practice-panel: rgba(14,14,14,.88);
+  --practice-panel-2: rgba(9,9,9,.92);
+  --practice-border: rgba(255,255,255,.075);
+  --practice-muted: #737373;
+}
+
+
+/* =========================================================
+   BASE
+========================================================= */
+
+.practice-view .header {
+  height: 78px;
+
+  padding:
+    0 32px;
+
+  background:
+    rgba(5,5,5,.84) !important;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.045);
+
+  backdrop-filter:
+    blur(22px);
+
+  -webkit-backdrop-filter:
+    blur(22px);
+
+  box-shadow:
+    0 8px 34px
+    rgba(0,0,0,.14);
+}
+
+
+.practice-view .header-title {
+  color:
+    rgba(255,255,255,.90);
+
+  font-size:
+    13px;
+
+  font-weight:
+    750;
+}
+
+
+.practice-view
+:is(
+  .lab-page,
+  .evolution-page
+) {
+  animation:
+    cortexPracticePageIn
+    .38s ease both;
+}
+
+
+.practice-view button,
+.practice-view select,
+.practice-view textarea,
+.practice-view input {
+  font-family:
+    inherit;
+}
+
+
+/* =========================================================
+   LAB - PAGINA
+========================================================= */
+
+.lab-view .lab-page {
+  max-width:
+    1720px;
+
+  padding:
+    30px 30px 60px;
+}
+
+
+/* =========================================================
+   LAB - HERO
+========================================================= */
+
+.lab-view .lab-heading {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  min-height:
+    190px;
+
+  margin:
+    0 0 18px;
+
+  padding:
+    30px;
+
+  border:
+    1px solid
+    var(--practice-border);
+
+  border-radius:
+    24px;
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(249,115,22,.10),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(17,17,17,.97),
+      rgba(8,8,8,.97)
+    );
+
+  box-shadow:
+    0 25px 65px
+    rgba(0,0,0,.20);
+}
+
+
+.lab-view .lab-heading::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  opacity:
+    .11;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.04)
+      1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.04)
+      1px,
+      transparent 1px
+    );
+
+  background-size:
+    42px 42px;
+
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      black
+    );
+}
+
+
+.lab-view .lab-heading > * {
+  position:
+    relative;
+
+  z-index:
+    1;
+}
+
+
+.lab-view .simulation-status {
+  width:
+    fit-content;
+
+  border:
+    1px solid
+    rgba(74,222,128,.14);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(74,222,128,.045);
+
+  padding:
+    7px 11px;
+
+  color:
+    #8b948e;
+
+  letter-spacing:
+    .12em;
+}
+
+
+.lab-view .status-dot {
+  width:
+    7px;
+
+  height:
+    7px;
+}
+
+
+.lab-view .status-dot.breathing {
+  animation:
+    cortexPulse
+    2s ease-in-out infinite;
+}
+
+
+.lab-view .lab-heading h1 {
+  margin-top:
+    18px;
+
+  color:
+    #f5f5f5;
+
+  font-size:
+    clamp(34px,4vw,48px);
+
+  line-height:
+    1;
+
+  letter-spacing:
+    -.045em;
+}
+
+
+.lab-view .lab-heading p {
+  max-width:
+    650px;
+
+  margin-top:
+    14px;
+
+  color:
+    #7c7c7c;
+
+  font-size:
+    13px;
+
+  line-height:
+    21px;
+}
+
+
+.lab-view .lab-actions {
+  justify-content:
+    flex-end;
+}
+
+
+.lab-view .lab-button {
+  min-height:
+    42px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  padding:
+    0 16px;
+
+  color:
+    #d5d5d5;
+
+  box-shadow:
+    0 8px 22px
+    rgba(0,0,0,.12);
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease;
+}
+
+
+.lab-view .lab-button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    rgba(249,115,22,.24);
+
+  background:
+    rgba(249,115,22,.06);
+}
+
+
+.lab-view .lab-button.danger {
+  border-color:
+    rgba(239,68,68,.55);
+
+  background:
+    rgba(239,68,68,.16);
+
+  color:
+    #fca5a5;
+}
+
+
+.lab-view .lab-button.secondary {
+  color:
+    #858585;
+}
+
+
+.lab-view .apnea-badge {
+  min-height:
+    42px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+}
+
+
+/* =========================================================
+   LAB - METRICAS
+========================================================= */
+
+.lab-view .top-metrics {
+  gap:
+    10px;
+
+  margin-bottom:
+    20px;
+}
+
+
+.lab-view .metric-card {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  min-height:
+    90px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17,17,17,.90),
+      rgba(9,9,9,.94)
+    );
+
+  padding:
+    15px;
+
+  box-shadow:
+    0 12px 32px
+    rgba(0,0,0,.10);
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+
+.lab-view .metric-card::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    15px;
+
+  right:
+    15px;
+
+  top:
+    0;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(249,115,22,.40),
+      transparent
+    );
+
+  opacity:
+    .38;
+}
+
+
+.lab-view .metric-card:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(249,115,22,.14);
+
+  box-shadow:
+    0 17px 38px
+    rgba(0,0,0,.16);
+}
+
+
+.lab-view .metric-card span {
+  color:
+    #575757;
+}
+
+
+.lab-view .metric-value {
+  margin-top:
+    9px;
+}
+
+
+.lab-view .metric-value strong {
+  font-size:
+    23px;
+
+  letter-spacing:
+    -.025em;
+}
+
+
+/* =========================================================
+   LAB - GRID
+========================================================= */
+
+.lab-view .laboratory-grid {
+  grid-template-columns:
+    245px
+    minmax(0,1fr)
+    310px;
+
+  gap:
+    18px;
+}
+
+
+.lab-view .lab-center,
+.lab-view .lab-right {
+  gap:
+    18px;
+}
+
+
+/* =========================================================
+   LAB - PANELS
+========================================================= */
+
+.lab-view .lab-panel {
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    19px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17,17,17,.88),
+      rgba(10,10,10,.92)
+    );
+
+  box-shadow:
+    0 16px 45px
+    rgba(0,0,0,.15);
+
+  transition:
+    border-color .20s ease,
+    box-shadow .20s ease;
+}
+
+
+.lab-view .lab-panel:hover {
+  border-color:
+    rgba(249,115,22,.10);
+
+  box-shadow:
+    0 19px 48px
+    rgba(0,0,0,.19);
+}
+
+
+.lab-view .panel-header {
+  padding:
+    18px 20px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.055);
+}
+
+
+.lab-view .panel-header h2 {
+  color:
+    #ebebeb;
+
+  font-size:
+    13px;
+
+  font-weight:
+    750;
+}
+
+
+.lab-view .panel-header p {
+  color:
+    #565656;
+}
+
+
+/* =========================================================
+   LAB - CONTROLES
+========================================================= */
+
+.lab-view .control-tabs {
+  gap:
+    5px;
+
+  padding:
+    12px;
+}
+
+
+.lab-view .control-tab {
+  min-height:
+    40px;
+
+  border-radius:
+    10px;
+
+  padding:
+    0 12px;
+
+  transition:
+    background .17s ease,
+    border-color .17s ease,
+    color .17s ease,
+    transform .17s ease;
+}
+
+
+.lab-view .control-tab:hover {
+  transform:
+    translateX(2px);
+
+  background:
+    rgba(255,255,255,.035);
+}
+
+
+.lab-view .control-tab.active {
+  border-color:
+    rgba(249,115,22,.20);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(249,115,22,.12),
+      rgba(249,115,22,.035)
+    );
+
+  color:
+    #fb923c;
+
+  box-shadow:
+    inset 2px 0 0
+    #f97316;
+}
+
+
+.lab-view .control-sliders {
+  gap:
+    27px;
+
+  padding:
+    20px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.055);
+}
+
+
+.lab-view .slider-heading {
+  font-size:
+    11px;
+}
+
+
+.lab-view .slider-heading span:first-child {
+  color:
+    #b4b4b4;
+}
+
+
+.lab-view .slider-number {
+  color:
+    #f0f0f0;
+}
+
+
+.lab-view
+.slider-control
+input[type="range"] {
+  height:
+    22px;
+
+  appearance:
+    none;
+
+  -webkit-appearance:
+    none;
+
+  background:
+    transparent;
+
+  outline:
+    none;
+
+  touch-action:
+    none;
+
+  cursor:
+    grab;
+}
+
+
+.lab-view
+.slider-control
+input[type="range"]:active {
+  cursor:
+    grabbing;
+}
+
+
+.lab-view
+.slider-control
+input[type="range"]::-webkit-slider-runnable-track {
+  height:
+    5px;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(249,115,22,.32),
+      rgba(255,255,255,.08)
+    );
+}
+
+
+.lab-view
+.slider-control
+input[type="range"]::-webkit-slider-thumb {
+  width:
+    16px;
+
+  height:
+    16px;
+
+  margin-top:
+    -5px;
+
+  appearance:
+    none;
+
+  -webkit-appearance:
+    none;
+
+  border:
+    3px solid
+    #171717;
+
+  border-radius:
+    50%;
+
+  background:
+    #fb923c;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(249,115,22,.28),
+    0 0 14px
+    rgba(249,115,22,.20);
+}
+
+
+.lab-view
+.slider-control
+input[type="range"]::-moz-range-track {
+  height:
+    5px;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.08);
+}
+
+
+.lab-view
+.slider-control
+input[type="range"]::-moz-range-thumb {
+  width:
+    14px;
+
+  height:
+    14px;
+
+  border:
+    3px solid
+    #171717;
+
+  border-radius:
+    50%;
+
+  background:
+    #fb923c;
+}
+
+
+.lab-view .slider-limits {
+  color:
+    #3d3d3d;
+}
+
+
+/* =========================================================
+   LAB - MONITORES
+========================================================= */
+
+.lab-view .monitor-grid {
+  gap:
+    18px;
+}
+
+
+.lab-view .monitor-panel {
+  overflow:
+    hidden;
+}
+
+
+.lab-view .monitor-header {
+  min-height:
+    67px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.05);
+
+  background:
+    rgba(255,255,255,.01);
+}
+
+
+.lab-view .monitor-number strong {
+  font-size:
+    29px;
+
+  letter-spacing:
+    -.04em;
+}
+
+
+.lab-view .monitor-screen {
+  height:
+    230px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.025);
+
+  border-left:
+    0;
+
+  border-right:
+    0;
+
+  box-shadow:
+    inset 0 0 40px
+    rgba(0,0,0,.40);
+}
+
+
+.lab-view .ecg-screen {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(18,54,31,.10),
+      transparent 72%
+    ),
+    #030605;
+}
+
+
+.lab-view .spo-screen {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(30,80,140,.09),
+      transparent 72%
+    ),
+    #030609;
+}
+
+
+.lab-view .monitor-result {
+  background:
+    rgba(255,255,255,.008);
+}
+
+
+.lab-view .monitor-result strong {
+  color:
+    #c9c9c9;
+}
+
+
+/* =========================================================
+   LAB - GASOMETRIA / MECANICA
+========================================================= */
+
+.lab-view .gasometry-grid {
+  background:
+    rgba(255,255,255,.045);
+}
+
+
+.lab-view .gas-card {
+  background:
+    rgba(12,12,12,.92);
+
+  padding:
+    22px;
+}
+
+
+.lab-view .gas-card strong {
+  font-size:
+    38px;
+
+  letter-spacing:
+    -.04em;
+}
+
+
+.lab-view .mechanics-card {
+  background:
+    rgba(255,255,255,.008);
+
+  padding:
+    22px;
+}
+
+
+.lab-view .mechanics-card strong {
+  color:
+    #ececec;
+}
+
+
+/* =========================================================
+   LAB - INTERPRETACAO
+========================================================= */
+
+.lab-view .interpretation-highlight {
+  border-color:
+    rgba(249,115,22,.14);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(249,115,22,.08),
+      rgba(249,115,22,.025)
+    );
+}
+
+
+.lab-view .result-row {
+  padding:
+    11px 0;
+
+  border-color:
+    rgba(255,255,255,.035);
+}
+
+
+.lab-view .result-row span {
+  color:
+    #666;
+}
+
+
+.lab-view .result-row strong {
+  color:
+    #dedede;
+}
+
+
+/* =========================================================
+   EVOLUCAO - PAGINA
+========================================================= */
+
+.evolution-view .evolution-page {
+  max-width:
+    1380px;
+
+  padding:
+    28px 30px 60px;
+}
+
+
+/* =========================================================
+   EVOLUCAO - HERO
+========================================================= */
+
+.evolution-view .evolution-hero {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  min-height:
+    230px;
+
+  margin:
+    0 0 22px;
+
+  padding:
+    32px;
+
+  align-items:
+    center;
+
+  border:
+    1px solid
+    rgba(255,255,255,.075);
+
+  border-radius:
+    24px;
+
+  background:
+    radial-gradient(
+      circle at 86% 12%,
+      rgba(249,115,22,.10),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(17,17,17,.96),
+      rgba(8,8,8,.97)
+    );
+
+  box-shadow:
+    0 25px 65px
+    rgba(0,0,0,.20);
+}
+
+
+.evolution-view .evolution-hero::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  opacity:
+    .11;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.035)
+      1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.035)
+      1px,
+      transparent 1px
+    );
+
+  background-size:
+    42px 42px;
+
+  mask-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      black
+    );
+}
+
+
+.evolution-view .evolution-hero > * {
+  position:
+    relative;
+
+  z-index:
+    1;
+}
+
+
+.evolution-view .training-badge {
+  border-color:
+    rgba(249,115,22,.20);
+
+  background:
+    rgba(249,115,22,.075);
+
+  padding:
+    7px 11px;
+}
+
+
+.evolution-view .evolution-hero h1 {
+  font-size:
+    clamp(34px,4vw,46px);
+
+  line-height:
+    1.05;
+
+  letter-spacing:
+    -.045em;
+}
+
+
+.evolution-view .evolution-hero p {
+  margin-top:
+    15px;
+
+  color:
+    #7c7c7c;
+}
+
+
+.evolution-view .mode-card {
+  min-width:
+    210px;
+
+  border-color:
+    rgba(255,255,255,.075);
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    15px;
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.15);
+
+  backdrop-filter:
+    blur(12px);
+}
+
+
+/* =========================================================
+   EVOLUCAO - PANELS
+========================================================= */
+
+.evolution-view .evolution-panel {
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius:
+    20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,16,16,.90),
+      rgba(9,9,9,.94)
+    );
+
+  box-shadow:
+    0 17px 46px
+    rgba(0,0,0,.15);
+
+  transition:
+    border-color .20s ease,
+    box-shadow .20s ease;
+}
+
+
+.evolution-view .evolution-panel:hover {
+  border-color:
+    rgba(249,115,22,.10);
+
+  box-shadow:
+    0 21px 50px
+    rgba(0,0,0,.19);
+}
+
+
+/* =========================================================
+   EVOLUCAO - CONFIG
+========================================================= */
+
+.evolution-view .config-panel {
+  margin-bottom:
+    20px;
+
+  padding:
+    24px;
+}
+
+
+.evolution-view .panel-top h2 {
+  color:
+    #ececec;
+
+  font-size:
+    16px;
+}
+
+
+.evolution-view .panel-top p {
+  color:
+    #626262;
+}
+
+
+.evolution-view .config-icon {
+  width:
+    42px;
+
+  height:
+    42px;
+
+  border-color:
+    rgba(249,115,22,.12);
+
+  background:
+    rgba(249,115,22,.055);
+
+  color:
+    #fb923c;
+}
+
+
+.evolution-view .filter-grid {
+  gap:
+    12px;
+}
+
+
+.evolution-view .field label {
+  color:
+    #8e8e8e;
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    .02em;
+}
+
+
+.evolution-view .field select {
+  min-height:
+    45px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.075);
+
+  border-radius:
+    11px;
+
+  background:
+    #0c0c0c;
+
+  color:
+    #e6e6e6;
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+
+.evolution-view .field select:hover {
+  border-color:
+    rgba(255,255,255,.12);
+
+  background:
+    #101010;
+}
+
+
+.evolution-view .field select:focus {
+  border-color:
+    rgba(249,115,22,.40);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(249,115,22,.07);
+}
+
+
+.evolution-view .field select option {
+  background:
+    #111;
+
+  color:
+    #eee;
+}
+
+
+.evolution-view .filter-result-message {
+  border-radius:
+    11px;
+
+  background:
+    rgba(249,115,22,.035);
+
+  color:
+    #8c8c8c;
+}
+
+
+/* =========================================================
+   EVOLUCAO - BOTOES
+========================================================= */
+
+.evolution-view
+:is(
+  .primary-button,
+  .secondary-button
+) {
+  min-height:
+    42px;
+
+  border-radius:
+    11px;
+
+  padding:
+    0 17px;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+}
+
+
+.evolution-view .primary-button {
+  border:
+    0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f97316,
+      #fb923c
+    );
+
+  color:
+    #070707;
+
+  box-shadow:
+    0 10px 28px
+    rgba(249,115,22,.16);
+}
+
+
+.evolution-view .primary-button:not(:disabled):hover {
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 14px 32px
+    rgba(249,115,22,.21);
+}
+
+
+.evolution-view .secondary-button {
+  border-color:
+    rgba(255,255,255,.075);
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:
+    #c9c9c9;
+}
+
+
+.evolution-view .secondary-button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    rgba(249,115,22,.18);
+}
+
+
+/* =========================================================
+   EVOLUCAO - PRATICA
+========================================================= */
+
+.evolution-view .practice-grid {
+  gap:
+    18px;
+}
+
+
+.evolution-view
+:is(
+  .case-panel,
+  .answer-panel
+) {
+  padding:
+    25px;
+}
+
+
+.evolution-view .case-heading h2,
+.evolution-view .answer-panel h2 {
+  color:
+    #f1f1f1;
+
+  letter-spacing:
+    -.025em;
+}
+
+
+.evolution-view .case-badge {
+  border-color:
+    rgba(255,255,255,.065);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    6px 9px;
+
+  color:
+    #777;
+}
+
+
+.evolution-view .patient-box {
+  border-color:
+    rgba(249,115,22,.13);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(249,115,22,.065),
+      rgba(249,115,22,.02)
+    );
+
+  padding:
+    16px;
+}
+
+
+.evolution-view .case-text {
+  border-color:
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(5,5,5,.68);
+
+  color:
+    #c4c4c4;
+
+  line-height:
+    24px;
+
+  box-shadow:
+    inset 0 1px 14px
+    rgba(0,0,0,.18);
+}
+
+
+.evolution-view .task-box {
+  border-color:
+    rgba(255,255,255,.05);
+
+  background:
+    rgba(255,255,255,.015);
+}
+
+
+.evolution-view .task-box p {
+  color:
+    #666;
+}
+
+
+/* =========================================================
+   EVOLUCAO - TEXTAREA
+========================================================= */
+
+.evolution-view .answer-panel textarea {
+  min-height:
+    390px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.075);
+
+  border-radius:
+    14px;
+
+  background:
+    rgba(5,5,5,.74);
+
+  padding:
+    18px;
+
+  color:
+    #ededed;
+
+  caret-color:
+    #fb923c;
+
+  box-shadow:
+    inset 0 1px 18px
+    rgba(0,0,0,.17);
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+
+.evolution-view
+.answer-panel textarea:hover {
+  border-color:
+    rgba(255,255,255,.11);
+}
+
+
+.evolution-view
+.answer-panel textarea:focus {
+  border-color:
+    rgba(249,115,22,.36);
+
+  background:
+    rgba(8,8,8,.88);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(249,115,22,.06),
+    inset 0 1px 18px
+    rgba(0,0,0,.17);
+}
+
+
+.evolution-view
+.answer-panel textarea::placeholder {
+  color:
+    #444;
+}
+
+
+/* =========================================================
+   EVOLUCAO - RESULTADO
+========================================================= */
+
+.evolution-view .result-panel {
+  margin-top:
+    20px;
+
+  padding:
+    26px;
+}
+
+
+.evolution-view .score-card {
+  width:
+    105px;
+
+  height:
+    105px;
+
+  border-color:
+    rgba(249,115,22,.20);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(249,115,22,.09),
+      rgba(249,115,22,.025)
+    );
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.15);
+}
+
+
+.evolution-view .score-card strong {
+  font-size:
+    34px;
+
+  letter-spacing:
+    -.04em;
+}
+
+
+.evolution-view .result-stat {
+  border-color:
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.014);
+}
+
+
+.evolution-view .criterion {
+  transition:
+    transform .17s ease,
+    border-color .17s ease;
+}
+
+
+.evolution-view .criterion:hover {
+  transform:
+    translateX(2px);
+}
+
+
+.evolution-view .reference-box {
+  border-color:
+    rgba(255,255,255,.055);
+}
+
+
+.evolution-view .reference-header {
+  background:
+    rgba(255,255,255,.012);
+}
+
+
+.evolution-view .reference-text {
+  background:
+    rgba(5,5,5,.72);
+
+  color:
+    #b3b3b3;
+}
+
+
+/* =========================================================
+   EVOLUCAO - DICA
+========================================================= */
+
+.evolution-view .tip-panel {
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  border-radius:
+    17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(12,12,12,.88),
+      rgba(7,7,7,.92)
+    );
+
+  box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.10);
+}
+
+
+/* =========================================================
+   EVOLUCAO - MODAL
+========================================================= */
+
+.evolution-view .evolution-welcome {
+  background:
+    rgba(0,0,0,.76);
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+
+  animation:
+    cortexPracticeFade
+    .22s ease both;
+}
+
+
+.evolution-view .evolution-welcome-card {
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  border-radius:
+    26px;
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(249,115,22,.09),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20,20,20,.97),
+      rgba(8,8,8,.98)
+    );
+
+  padding:
+    32px;
+
+  box-shadow:
+    0 35px 110px
+    rgba(0,0,0,.58);
+
+  animation:
+    cortexPracticeModal
+    .30s cubic-bezier(.2,.8,.2,1)
+    both;
+}
+
+
+.evolution-view .welcome-icon {
+  width:
+    52px;
+
+  height:
+    52px;
+
+  border:
+    1px solid
+    rgba(249,115,22,.14);
+
+  background:
+    rgba(249,115,22,.07);
+}
+
+
+/* =========================================================
+   STICKY CONTROLS DESKTOP
+========================================================= */
+
+@media (min-width: 1451px) {
+
+  .lab-view
+  .laboratory-grid
+  > aside:first-child {
+    position:
+      sticky;
+
+    top:
+      96px;
+
+    align-self:
+      start;
+  }
+
+}
+
+
+/* =========================================================
+   PINK GLITTER
+========================================================= */
+
+html[data-theme="pink-glitter"]
+.practice-view {
+  --practice-accent:
+    #ff69b4;
+
+  --practice-accent-soft:
+    #ff9dcc;
+}
+
+
+html[data-theme="pink-glitter"]
+.practice-view .header {
+  background:
+    rgba(35,8,28,.88) !important;
+
+  border-color:
+    rgba(255,170,215,.11);
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view .lab-heading,
+html[data-theme="pink-glitter"]
+.evolution-view .evolution-hero {
+  border-color:
+    rgba(255,169,215,.20);
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(255,105,180,.19),
+      transparent 32%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(63,20,52,.96),
+      rgba(31,8,26,.97)
+    );
+
+  box-shadow:
+    0 25px 65px
+    rgba(12,0,10,.24),
+    0 0 32px
+    rgba(255,105,180,.045);
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view
+:is(
+  .metric-card,
+  .lab-panel
+),
+html[data-theme="pink-glitter"]
+.evolution-view
+.evolution-panel {
+  border-color:
+    rgba(255,169,215,.15);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(57,18,47,.91),
+      rgba(32,9,27,.94)
+    );
+
+  box-shadow:
+    0 17px 46px
+    rgba(15,0,12,.18);
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view .metric-card::before {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,146,203,.55),
+      transparent
+    );
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view .metric-card.accent
+.metric-value strong {
+  color:
+    #ffadd6;
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view .control-tab.active {
+  border-color:
+    rgba(255,155,207,.22);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,105,180,.14),
+      rgba(255,105,180,.035)
+    );
+
+  color:
+    #ffadd6;
+
+  box-shadow:
+    inset 2px 0 0
+    #ff69b4;
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view
+.slider-control
+input[type="range"]::-webkit-slider-runnable-track {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,105,180,.40),
+      rgba(255,255,255,.09)
+    );
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view
+.slider-control
+input[type="range"]::-webkit-slider-thumb {
+  border-color:
+    #311027;
+
+  background:
+    #ff91c8;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(255,145,200,.30),
+    0 0 15px
+    rgba(255,105,180,.24);
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view
+.slider-control
+input[type="range"]::-moz-range-thumb {
+  background:
+    #ff91c8;
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view .interpretation-highlight,
+html[data-theme="pink-glitter"]
+.evolution-view .patient-box {
+  border-color:
+    rgba(255,169,215,.18);
+
+  background:
+    rgba(255,105,180,.07);
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view .interpretation-highlight strong,
+html[data-theme="pink-glitter"]
+.evolution-view
+:is(
+  .section-label,
+  .patient-box span,
+  .training-badge
+) {
+  color:
+    #ffacd5;
+}
+
+
+html[data-theme="pink-glitter"]
+.evolution-view .field select {
+  border-color:
+    rgba(255,169,215,.15);
+
+  background:
+    #2d0d25;
+
+  color:
+    #fff2f9;
+}
+
+
+html[data-theme="pink-glitter"]
+.evolution-view .field select option {
+  background:
+    #2a0c22;
+}
+
+
+html[data-theme="pink-glitter"]
+.evolution-view
+.answer-panel textarea {
+  border-color:
+    rgba(255,169,215,.14);
+
+  background:
+    rgba(30,7,24,.80);
+
+  color:
+    #fff2f9;
+
+  caret-color:
+    #ff91c8;
+}
+
+
+html[data-theme="pink-glitter"]
+.evolution-view
+.answer-panel textarea:focus {
+  border-color:
+    rgba(255,145,200,.42);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(255,105,180,.08);
+}
+
+
+html[data-theme="pink-glitter"]
+.evolution-view .primary-button {
+  background:
+    linear-gradient(
+      135deg,
+      #ff69b4,
+      #ff9dcc,
+      #ffc5e3
+    );
+
+  color:
+    #310c26;
+
+  box-shadow:
+    0 11px 30px
+    rgba(255,105,180,.20);
+}
+
+
+html[data-theme="pink-glitter"]
+.evolution-view .secondary-button {
+  border-color:
+    rgba(255,169,215,.16);
+
+  background:
+    rgba(255,105,180,.045);
+
+  color:
+    #ffd5e9;
+}
+
+
+html[data-theme="pink-glitter"]
+.evolution-view .evolution-welcome-card {
+  border-color:
+    rgba(255,169,215,.20);
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(255,105,180,.18),
+      transparent 36%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(63,20,52,.98),
+      rgba(30,8,25,.99)
+    );
+}
+
+
+/* Monitores continuam escuros para legibilidade */
+
+html[data-theme="pink-glitter"]
+.lab-view .ecg-screen {
+  background:
+    #030605;
+}
+
+
+html[data-theme="pink-glitter"]
+.lab-view .spo-screen {
+  background:
+    #030609;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1450px) {
+
+  .lab-view .laboratory-grid {
+    grid-template-columns:
+      225px
+      minmax(0,1fr);
+  }
+
+
+  .lab-view .lab-right {
+    grid-template-columns:
+      repeat(4,minmax(0,1fr));
+  }
+
+}
+
+
+@media (max-width: 1150px) {
+
+  .evolution-view .filter-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+@media (max-width: 1050px) {
+
+  .lab-view .monitor-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .lab-view .lab-right {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .practice-view .header {
+    padding:
+      0 17px;
+  }
+
+
+  .lab-view .lab-page,
+  .evolution-view .evolution-page {
+    padding:
+      20px 15px 55px;
+  }
+
+
+  .lab-view .lab-heading,
+  .evolution-view .evolution-hero {
+    min-height:
+      auto;
+
+    padding:
+      24px 20px;
+
+    border-radius:
+      20px;
+  }
+
+
+  .lab-view .lab-heading {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+
+  .evolution-view .evolution-hero {
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+  }
+
+
+  .lab-view .laboratory-grid,
+  .evolution-view .practice-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .lab-view .lab-right {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+
+  .evolution-view .mode-card {
+    width:
+      100%;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .lab-view .top-metrics,
+  .lab-view .gasometry-grid,
+  .lab-view .mechanics-grid,
+  .lab-view .lab-right,
+  .evolution-view .filter-grid {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .lab-view .lab-actions {
+    width:
+      100%;
+
+    justify-content:
+      flex-start;
+  }
+
+
+  .lab-view .lab-button {
+    flex:
+      1;
+  }
+
+
+  .evolution-view
+  :is(
+    .case-panel,
+    .answer-panel,
+    .config-panel,
+    .result-panel
+  ) {
+    padding:
+      19px;
+  }
+
+
+  .evolution-view .config-actions,
+  .evolution-view .result-actions {
+    flex-direction:
+      column;
+  }
+
+
+  .evolution-view .config-actions button,
+  .evolution-view .result-actions button {
+    width:
+      100%;
+  }
+
+
+  .evolution-view
+  .evolution-welcome-card {
+    padding:
+      24px;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .lab-view .top-metrics,
+  .lab-view .gasometry-grid,
+  .lab-view .mechanics-grid,
+  .lab-view .lab-right,
+  .evolution-view .filter-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .lab-view .control-tabs {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .lab-view .lab-heading h1,
+  .evolution-view .evolution-hero h1 {
+    font-size:
+      30px;
+  }
+
+
+  .lab-view .monitor-screen {
+    height:
+      190px;
+  }
+
+
+  .evolution-view
+  .answer-panel textarea {
+    min-height:
+      300px;
+  }
+
+}
+
+
+/* =========================================================
+   ANIMACOES
+========================================================= */
+
+@keyframes cortexPracticePageIn {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(6px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes cortexPracticeFade {
+
+  from {
+    opacity:
+      0;
+  }
+
+  to {
+    opacity:
+      1;
+  }
+
+}
+
+
+@keyframes cortexPracticeModal {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(10px)
+      scale(.985);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+@keyframes cortexPulse {
+
+  0%,
+  100% {
+    opacity:
+      .75;
+
+    transform:
+      scale(.92);
+  }
+
+  50% {
+    opacity:
+      1;
+
+    transform:
+      scale(1.18);
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .practice-view *,
+  .practice-view *::before,
+  .practice-view *::after {
+    animation-duration:
+      .01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .01ms !important;
+  }
+
+}
