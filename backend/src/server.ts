@@ -2879,6 +2879,7 @@ const server =
           new Set([
             "/questoes",
             "/flashcards",
+            "/lousa",
             "/farmacos",
             "/financas",
             "/musica",
@@ -3238,6 +3239,20 @@ const server =
           redirect(
             response,
             "/app.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/lousa" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/lousa.html"
           );
 
           return;

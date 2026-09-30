@@ -1,0 +1,998 @@
+/* =========================================================
+   CORTEX LOUSA
+========================================================= */
+
+.lousa-view {
+  min-height: 100vh;
+}
+
+
+.lousa-page {
+  width: 100%;
+  padding: 22px 26px 32px;
+}
+
+
+.lousa-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 14px;
+}
+
+
+.lousa-kicker {
+  margin-bottom: 5px;
+
+  color:
+    var(--theme-accent);
+
+  font-size: 8px;
+  font-weight: 900;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+}
+
+
+.lousa-heading h1 {
+  margin: 0;
+
+  color:
+    var(--theme-text);
+
+  font-size: 30px;
+
+  letter-spacing: -.03em;
+}
+
+
+.lousa-heading p {
+  margin: 6px 0 0;
+
+  color:
+    var(--theme-text-muted);
+
+  font-size: 11px;
+}
+
+
+.heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+
+.board-action {
+  min-height: 36px;
+
+  padding: 0 12px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius: 10px;
+
+  background:
+    var(--theme-surface);
+
+  color:
+    var(--theme-text-soft);
+
+  font: inherit;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.board-action:hover {
+  border-color:
+    var(--theme-border-strong);
+
+  color:
+    var(--theme-accent);
+}
+
+
+.board-action.primary {
+  border-color:
+    transparent;
+
+  background:
+    var(--theme-gradient);
+
+  color:
+    var(--theme-button-text);
+}
+
+
+/* =========================================================
+   SAVE STATUS
+========================================================= */
+
+.board-save-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color:
+    var(--theme-text-muted);
+
+  font-size: 9px;
+}
+
+
+.save-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background:
+    #22c55e;
+
+  box-shadow:
+    0 0 8px
+    rgba(34,197,94,.45);
+}
+
+
+/* =========================================================
+   SHELL
+========================================================= */
+
+.whiteboard-shell {
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius: 20px;
+
+  background:
+    var(--theme-surface);
+
+  box-shadow:
+    var(--theme-shadow);
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.whiteboard-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+
+  overflow-x: auto;
+
+  padding: 13px 14px;
+
+  border-bottom:
+    1px solid
+    var(--theme-border);
+
+  background:
+    var(--theme-surface-strong);
+}
+
+
+.whiteboard-toolbar::-webkit-scrollbar {
+  height: 5px;
+}
+
+
+.whiteboard-toolbar::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    var(--theme-accent-medium);
+}
+
+
+.toolbar-group {
+  flex: 0 0 auto;
+
+  display: grid;
+
+  gap: 6px;
+}
+
+
+.tools-group {
+  min-width: max-content;
+}
+
+
+.toolbar-label {
+  color:
+    var(--theme-text-muted);
+
+  font-size: 7px;
+  font-weight: 900;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+.toolbar-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+
+.tool-button {
+  min-height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  padding: 0 9px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius: 9px;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-soft);
+
+  font: inherit;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    border-color .15s ease,
+    color .15s ease,
+    background .15s ease,
+    transform .15s ease;
+}
+
+
+.tool-button:hover {
+  border-color:
+    var(--theme-border-strong);
+
+  color:
+    var(--theme-text);
+
+  transform:
+    translateY(-1px);
+}
+
+
+.tool-button.active {
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+
+  color:
+    var(--theme-accent);
+
+  box-shadow:
+    0 0 0 1px
+    rgba(
+      var(--theme-accent-rgb),
+      .05
+    );
+}
+
+
+.tool-button.danger {
+  color: #fca5a5;
+}
+
+
+.tool-symbol {
+  min-width: 14px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   CORES
+========================================================= */
+
+.color-tools {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.color-chip,
+.custom-color {
+  position: relative;
+
+  width: 25px;
+  height: 25px;
+
+  flex: 0 0 25px;
+
+  border:
+    2px solid
+    transparent;
+
+  border-radius: 8px;
+
+  background:
+    var(--chip);
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255,255,255,.15);
+}
+
+
+.color-chip.active {
+  border-color:
+    var(--theme-text);
+
+  box-shadow:
+    0 0 0 2px
+    var(--theme-accent-soft);
+}
+
+
+.custom-color {
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  background:
+    conic-gradient(
+      red,
+      yellow,
+      lime,
+      aqua,
+      blue,
+      magenta,
+      red
+    );
+}
+
+
+.custom-color input {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   SIZE
+========================================================= */
+
+.size-control {
+  min-height: 34px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+
+.size-control input {
+  width: 100px;
+
+  accent-color:
+    var(--theme-accent);
+}
+
+
+.size-control strong {
+  min-width: 19px;
+
+  color:
+    var(--theme-text-soft);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   SELECT / FILL
+========================================================= */
+
+.board-select {
+  height: 34px;
+
+  min-width: 120px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius: 9px;
+
+  background:
+    var(--theme-surface-soft);
+
+  padding:
+    0 9px;
+
+  color:
+    var(--theme-text-soft);
+
+  font: inherit;
+
+  font-size: 8px;
+
+  outline: none;
+}
+
+
+.fill-toggle {
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 0 9px;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius: 9px;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-soft);
+
+  font-size: 8px;
+
+  cursor: pointer;
+}
+
+
+.fill-toggle input {
+  accent-color:
+    var(--theme-accent);
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+.board-stage {
+  position: relative;
+
+  width: 100%;
+
+  height:
+    clamp(
+      520px,
+      calc(100vh - 265px),
+      900px
+    );
+
+  overflow: hidden;
+
+  background-color:
+    #ffffff;
+}
+
+
+.board-stage[data-background="blank"] {
+  background:
+    #ffffff;
+}
+
+
+.board-stage[data-background="grid"] {
+  background-color:
+    #ffffff;
+
+  background-image:
+    linear-gradient(
+      #e8e8ec 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      #e8e8ec 1px,
+      transparent 1px
+    );
+
+  background-size:
+    28px 28px;
+}
+
+
+.board-stage[data-background="dots"] {
+  background-color:
+    #ffffff;
+
+  background-image:
+    radial-gradient(
+      #c9cbd1 1.3px,
+      transparent 1.3px
+    );
+
+  background-size:
+    22px 22px;
+}
+
+
+.board-stage[data-background="lines"] {
+  background-color:
+    #ffffff;
+
+  background-image:
+    linear-gradient(
+      #e1e3e8 1px,
+      transparent 1px
+    );
+
+  background-size:
+    100% 30px;
+}
+
+
+.board-stage[data-background="dark"] {
+  background-color:
+    #090b10;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.045) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    28px 28px;
+}
+
+
+#boardCanvas {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  touch-action: none;
+
+  cursor: crosshair;
+}
+
+
+.board-stage[data-tool="eraser"]
+#boardCanvas {
+  cursor: cell;
+}
+
+
+.board-stage[data-tool="text"]
+#boardCanvas {
+  cursor: text;
+}
+
+
+.board-empty {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  color:
+    #a1a1aa;
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+
+.board-empty.hidden {
+  display: none;
+}
+
+
+.empty-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 4px;
+
+  border:
+    1px solid
+    #e4e4e7;
+
+  border-radius: 13px;
+
+  background:
+    rgba(255,255,255,.82);
+
+  color:
+    #71717a;
+
+  font-size: 18px;
+}
+
+
+.board-empty strong {
+  color:
+    #52525b;
+
+  font-size: 12px;
+}
+
+
+.board-empty span {
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.board-footer {
+  min-height: 47px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  padding:
+    8px 13px;
+
+  border-top:
+    1px solid
+    var(--theme-border);
+
+  background:
+    var(--theme-surface-strong);
+}
+
+
+.board-footer > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+
+.board-footer strong {
+  color:
+    var(--theme-accent);
+
+  font-size: 9px;
+}
+
+
+.board-footer span {
+  color:
+    var(--theme-text-muted);
+
+  font-size: 7px;
+}
+
+
+.shortcut-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+.whiteboard-shell:fullscreen {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 0;
+  border-radius: 0;
+
+  background:
+    var(--theme-bg);
+}
+
+
+.whiteboard-shell:fullscreen
+.board-stage {
+  flex: 1;
+
+  height: auto;
+}
+
+
+.whiteboard-shell:fullscreen
+.board-footer {
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width: 900px
+) {
+
+  .lousa-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .whiteboard-toolbar {
+    gap: 12px;
+  }
+
+
+  .board-stage {
+    height:
+      calc(
+        100vh - 300px
+      );
+
+    min-height:
+      500px;
+  }
+
+}
+
+
+@media (
+  max-width: 700px
+) {
+
+  .lousa-page {
+    padding:
+      14px;
+  }
+
+
+  .heading-actions {
+    width: 100%;
+  }
+
+
+  .board-action {
+    flex: 1;
+  }
+
+
+  .board-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .shortcut-list {
+    justify-content: flex-start;
+  }
+
+}
+
+
+/* CORTEX LOUSA INFINITE V2 */
+
+
+/* =========================================================
+   CANVAS INFINITO
+========================================================= */
+
+.board-stage {
+  position: relative;
+
+  overflow: hidden;
+
+  overscroll-behavior: none;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+}
+
+
+#boardCanvas {
+  touch-action: none;
+}
+
+
+/*
+ * O fundo agora acompanha a camera.
+ * As imagens anteriores de fundo sao
+ * substituidas dinamicamente pelo JS.
+ */
+
+.board-stage[data-background] {
+  background-repeat:
+    repeat;
+
+  background-attachment:
+    local;
+}
+
+
+/* =========================================================
+   CURSORES
+========================================================= */
+
+.board-stage[data-tool="hand"]
+#boardCanvas {
+  cursor: grab;
+}
+
+
+.board-stage.space-pan-ready
+#boardCanvas {
+  cursor: grab;
+}
+
+
+.board-stage.is-panning
+#boardCanvas {
+  cursor: grabbing !important;
+}
+
+
+.board-stage[data-tool="pen"]
+#boardCanvas,
+.board-stage[data-tool="highlighter"]
+#boardCanvas,
+.board-stage[data-tool="line"]
+#boardCanvas,
+.board-stage[data-tool="arrow"]
+#boardCanvas,
+.board-stage[data-tool="rect"]
+#boardCanvas,
+.board-stage[data-tool="circle"]
+#boardCanvas {
+  cursor: crosshair;
+}
+
+
+.board-stage[data-tool="text"]
+#boardCanvas {
+  cursor: text;
+}
+
+
+.board-stage[data-tool="eraser"]
+#boardCanvas {
+  cursor: cell;
+}
+
+
+/* =========================================================
+   ZOOM
+========================================================= */
+
+.zoom-toolbar {
+  min-width: max-content;
+}
+
+
+.zoom-button {
+  width: 34px;
+
+  padding:
+    0;
+}
+
+
+.zoom-percent {
+  min-width: 54px;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  color:
+    var(--theme-accent);
+}
+
+
+/* =========================================================
+   INDICACAO DE NAVEGACAO
+========================================================= */
+
+.board-footer::after {
+  content:
+    "Ctrl + scroll: zoom  |  Scroll: mover  |  Espaço + arrastar: navegar";
+
+  margin-left:
+    auto;
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    7px;
+
+  white-space:
+    nowrap;
+}
+
+
+@media (
+  max-width: 1100px
+) {
+
+  .board-footer::after {
+    display: none;
+  }
+
+}

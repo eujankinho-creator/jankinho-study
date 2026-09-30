@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Lousa | Cortex</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/app.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/ui-enhancements.css"
+  >
+
+  <script src="/js/ui-enhancements.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/themes.css"
+  >
+
+  <script src="/js/theme-manager.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/cortex-brand.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/sidebar-standard.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/lousa.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/theme-final.css"
+  >
+
+  <script
+    src="/js/sidebar-standard.js"
+    defer
+  ></script>
+
+</head>
+
+
+<body class="lousa-view">
+
+  <aside class="sidebar">
+
+    <a
+      href="/"
+      class="sidebar-logo"
+    >
+
+      <div class="logo-box"></div>
+
+      <div>
+        <strong>Cortex</strong>
+        <span>Study Platform</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu"></div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Cortex
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+        title="Sair"
+      >
+        &rarr;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-title">
+        Lousa de estudos
+      </div>
+
+      <div class="board-save-status">
+
+        <span class="save-dot"></span>
+
+        <span id="saveStatus">
+          Salva automaticamente
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <main class="lousa-page">
+
+
+      <section class="lousa-heading">
+
+        <div>
+
+          <div class="lousa-kicker">
+            CORTEX CANVAS
+          </div>
+
+          <h1>
+            Lousa
+          </h1>
+
+          <p>
+            Desenhe, escreva, marque e organize seus
+            racioc&iacute;nios livremente.
+          </p>
+
+        </div>
+
+
+        <div class="heading-actions">
+
+          <button
+            id="saveBoard"
+            class="board-action"
+            type="button"
+          >
+            Salvar
+          </button>
+
+          <button
+            id="exportBoard"
+            class="board-action"
+            type="button"
+          >
+            Exportar PNG
+          </button>
+
+          <button
+            id="fullscreenBoard"
+            class="board-action primary"
+            type="button"
+          >
+            Tela cheia
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <section
+        id="whiteboardShell"
+        class="whiteboard-shell"
+      >
+
+
+        <!-- FERRAMENTAS -->
+
+        <div class="whiteboard-toolbar">
+
+
+          <div class="toolbar-group tools-group">
+
+            <span class="toolbar-label">
+              Ferramentas
+            </span>
+
+
+            <div class="toolbar-buttons">
+
+              <button
+                class="tool-button active"
+                data-tool="pen"
+                type="button"
+                title="Caneta (B)"
+              >
+                <span class="tool-symbol">
+                  &#9998;
+                </span>
+
+                Caneta
+              </button>
+
+
+              <button
+                class="tool-button"
+                data-tool="highlighter"
+                type="button"
+                title="Marca-texto (H)"
+              >
+                <span class="tool-symbol">
+                  &#9644;
+                </span>
+
+                Marca-texto
+              </button>
+
+
+              <button
+                class="tool-button"
+                data-tool="eraser"
+                type="button"
+                title="Borracha (E)"
+              >
+                <span class="tool-symbol">
+                  &#9671;
+                </span>
+
+                Borracha
+              </button>
+
+
+              <button
+                class="tool-button"
+                data-tool="line"
+                type="button"
+                title="Linha (L)"
+              >
+                <span class="tool-symbol">
+                  /
+                </span>
+
+                Linha
+              </button>
+
+
+              <button
+                class="tool-button"
+                data-tool="arrow"
+                type="button"
+                title="Seta (A)"
+              >
+                <span class="tool-symbol">
+                  &rarr;
+                </span>
+
+                Seta
+              </button>
+
+
+              <button
+                class="tool-button"
+                data-tool="rect"
+                type="button"
+                title="Retangulo (R)"
+              >
+                <span class="tool-symbol">
+                  &#9633;
+                </span>
+
+                Ret&acirc;ngulo
+              </button>
+
+
+              <button
+                class="tool-button"
+                data-tool="circle"
+                type="button"
+                title="Circulo (C)"
+              >
+                <span class="tool-symbol">
+                  &#9711;
+                </span>
+
+                C&iacute;rculo
+              </button>
+
+
+              <button
+                class="tool-button"
+                data-tool="text"
+                type="button"
+                title="Texto (T)"
+              >
+                <span class="tool-symbol">
+                  T
+                </span>
+
+                Texto
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- COR -->
+
+          <div class="toolbar-group color-group">
+
+            <span class="toolbar-label">
+              Cor
+            </span>
+
+
+            <div class="color-tools">
+
+              <button
+                class="color-chip active"
+                data-color="#f97316"
+                style="--chip:#f97316"
+                type="button"
+                aria-label="Laranja"
+              ></button>
+
+              <button
+                class="color-chip"
+                data-color="#ef4444"
+                style="--chip:#ef4444"
+                type="button"
+                aria-label="Vermelho"
+              ></button>
+
+              <button
+                class="color-chip"
+                data-color="#22c55e"
+                style="--chip:#22c55e"
+                type="button"
+                aria-label="Verde"
+              ></button>
+
+              <button
+                class="color-chip"
+                data-color="#3b82f6"
+                style="--chip:#3b82f6"
+                type="button"
+                aria-label="Azul"
+              ></button>
+
+              <button
+                class="color-chip"
+                data-color="#a855f7"
+                style="--chip:#a855f7"
+                type="button"
+                aria-label="Roxo"
+              ></button>
+
+              <button
+                class="color-chip"
+                data-color="#111827"
+                style="--chip:#111827"
+                type="button"
+                aria-label="Preto"
+              ></button>
+
+              <label
+                class="custom-color"
+                title="Cor personalizada"
+              >
+
+                <input
+                  id="colorPicker"
+                  type="color"
+                  value="#f97316"
+                >
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- ESPESSURA -->
+
+          <div class="toolbar-group size-group">
+
+            <span class="toolbar-label">
+              Espessura
+            </span>
+
+            <div class="size-control">
+
+              <input
+                id="brushSize"
+                type="range"
+                min="1"
+                max="20"
+                value="4"
+              >
+
+              <strong id="brushSizeValue">
+                4
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- FUNDO -->
+
+          <div class="toolbar-group">
+
+            <span class="toolbar-label">
+              Fundo
+            </span>
+
+            <select
+              id="backgroundSelect"
+              class="board-select"
+            >
+
+              <option value="grid">
+                Quadriculado
+              </option>
+
+              <option value="blank">
+                Branco
+              </option>
+
+              <option value="dots">
+                Pontilhado
+              </option>
+
+              <option value="lines">
+                Linhas
+              </option>
+
+              <option value="dark">
+                Escuro
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="toolbar-group">
+
+            <span class="toolbar-label">
+              Formas
+            </span>
+
+            <label class="fill-toggle">
+
+              <input
+                id="fillShapes"
+                type="checkbox"
+              >
+
+              <span>
+                Preencher
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <!-- HISTORICO -->
+
+          <div class="toolbar-group toolbar-history">
+
+            <span class="toolbar-label">
+              Hist&oacute;rico
+            </span>
+
+            <div class="toolbar-buttons compact">
+
+              <button
+                id="undoBoard"
+                class="tool-button"
+                type="button"
+                title="Desfazer Ctrl+Z"
+              >
+                &larr; Desfazer
+              </button>
+
+              <button
+                id="redoBoard"
+                class="tool-button"
+                type="button"
+                title="Refazer Ctrl+Y"
+              >
+                Refazer &rarr;
+              </button>
+
+              <button
+                id="clearBoard"
+                class="tool-button danger"
+                type="button"
+              >
+                Limpar
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- QUADRO -->
+
+        <div
+          id="boardStage"
+          class="board-stage"
+          data-background="grid"
+          data-tool="pen"
+        >
+
+          <canvas
+            id="boardCanvas"
+            aria-label="Lousa de estudos"
+          ></canvas>
+
+
+          <div
+            id="boardEmpty"
+            class="board-empty"
+          >
+
+            <div class="empty-icon">
+              &#9998;
+            </div>
+
+            <strong>
+              Comece a escrever
+            </strong>
+
+            <span>
+              Use as ferramentas acima para criar seu esquema.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="board-footer">
+
+          <div>
+
+            <strong id="currentToolLabel">
+              Caneta
+            </strong>
+
+            <span>
+              ferramenta atual
+            </span>
+
+          </div>
+
+
+          <div class="shortcut-list">
+
+            <span>
+              B Caneta
+            </span>
+
+            <span>
+              H Marca-texto
+            </span>
+
+            <span>
+              E Borracha
+            </span>
+
+            <span>
+              T Texto
+            </span>
+
+            <span>
+              Ctrl+Z Desfazer
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/lousa.js"></script>
+  <script src="/js/cortex-brand.js"></script>
+
+</body>
+</html>

@@ -41,6 +41,13 @@
         '<path d="m8 6 2-2h10v12l-2 2"/>'
       ),
 
+    lousa:
+      icon(
+        '<rect x="4" y="4" width="16" height="13" rx="2"/>' +
+        '<path d="M8 21h8"/>' +
+        '<path d="M12 17v4"/>' +
+        '<path d="m7 13 3-3 2 2 5-5"/>'
+      ),
     farmacos:
       icon(
         '<path d="M8.1 4.6a5 5 0 0 1 7.1 0l4.2 4.2a5 5 0 0 1-7.1 7.1l-4.2-4.2a5 5 0 0 1 0-7.1Z"/>' +
@@ -143,6 +150,12 @@
           href: "/flashcards",
           key: "flashcards",
           label: "Flashcards",
+        },
+
+        {
+          href: "/lousa",
+          key: "lousa",
+          label: "Lousa",
         },
 
         {
