@@ -30,6 +30,7 @@ import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerC
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
+import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import {
   iniciarSpotifyAuth,
   concluirSpotifyAuth,
@@ -4013,6 +4014,20 @@ server.on(
 server.listen(
   PORT,
   function () {
+
+    void sincronizarQuestoesFarmacocineticaHaggi()
+      .catch(
+        function (error) {
+
+          console.error(
+            "[questoes] Falha ao sincronizar Farmacocinetica HAGGI:",
+            error
+          );
+
+        }
+      );
+
+
     console.log("");
     console.log(
       "======================================"
