@@ -2345,11 +2345,12 @@ async function servirArquivo(
             arquivo
           ),
 
+        /*
+         * Revalidar arquivos estaticos evita que contas diferentes
+         * permaneçam com CSS/JS antigo depois de um deploy.
+         */
         "Cache-Control":
-          process.env.NODE_ENV === "production" &&
-          path.extname(arquivo).toLowerCase() !== ".html"
-            ? "public, max-age=86400"
-            : "no-cache",
+          "no-cache",
       }
     );
 
