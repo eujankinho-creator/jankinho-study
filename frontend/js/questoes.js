@@ -8,6 +8,7 @@ const state = {
   respondida: false,
   pontuacao: 0,
   corretaAtual: false,
+  eliminadas: new Set(),
   alternativasManual: [
     { texto: "", correta: false },
     { texto: "", correta: false },
@@ -766,6 +767,8 @@ function iniciarComQuestoes(
   state.selecionada = null;
   state.respondida = false;
   state.pontuacao = 0;
+  state.eliminadas =
+    new Set();
 
 
   $("bancoView")
@@ -828,6 +831,8 @@ function sairSessao() {
   state.selecionada = null;
   state.respondida = false;
   state.pontuacao = 0;
+  state.eliminadas =
+    new Set();
 
 
   $("sessaoView")
@@ -906,6 +911,21 @@ function renderSessao() {
         "session-option";
 
 
+      const eliminada =
+        !state.respondida &&
+        state.eliminadas.has(
+          indice
+        );
+
+
+      if (
+        eliminada
+      ) {
+        classe +=
+          " eliminated";
+      }
+
+
       if (
         state.selecionada ===
         indice
@@ -967,32 +987,79 @@ function renderSessao() {
 
 
       opcoes += `
-        <button
-          type="button"
-          class="${classe}"
-          data-option="${indice}"
-          ${
-            state.respondida
-              ? "disabled"
+        <div
+          class="session-option-row ${
+            eliminada
+              ? "is-eliminated"
               : ""
-          }
+          }"
         >
 
-          <span class="option-letter">
-            ${String.fromCharCode(
-              65 + indice
-            )}
-          </span>
+          <button
+            type="button"
+            class="${classe}"
+            data-option="${indice}"
+            ${
+              state.respondida
+                ? "disabled"
+                : ""
+            }
+          >
 
-          <span class="option-text">
-            ${escapeHtml(
-              alternativa.texto
-            )}
-          </span>
+            <span class="option-letter">
+              ${String.fromCharCode(
+                65 + indice
+              )}
+            </span>
 
-          ${estadoResposta}
+            <span class="option-text">
+              ${escapeHtml(
+                alternativa.texto
+              )}
+            </span>
 
-        </button>
+            ${estadoResposta}
+
+          </button>
+
+          ${
+            state.respondida
+              ? ""
+              : `
+                <button
+                  type="button"
+                  class="eliminate-option ${
+                    eliminada
+                      ? "active"
+                      : ""
+                  }"
+                  data-cut-option="${indice}"
+                  aria-pressed="${
+                    eliminada
+                      ? "true"
+                      : "false"
+                  }"
+                  title="${
+                    eliminada
+                      ? "Desfazer eliminação"
+                      : "Eliminar alternativa"
+                  }"
+                >
+                  <span aria-hidden="true">
+                    ✂
+                  </span>
+                  <span>
+                    ${
+                      eliminada
+                        ? "Desfazer"
+                        : "Cortar"
+                    }
+                  </span>
+                </button>
+              `
+          }
+
+        </div>
       `;
 
     }
@@ -1195,6 +1262,78 @@ function renderSessao() {
     );
 
 
+  document
+    .querySelectorAll(
+      "[data-cut-option]"
+    )
+    .forEach(
+      function (
+        botao
+      ) {
+
+        botao.addEventListener(
+          "click",
+          function (
+            event
+          ) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+
+            if (
+              state.respondida
+            ) {
+              return;
+            }
+
+
+            const indice =
+              Number(
+                botao.dataset.cutOption
+              );
+
+
+            if (
+              state.eliminadas.has(
+                indice
+              )
+            ) {
+
+              state.eliminadas.delete(
+                indice
+              );
+
+            }
+            else {
+
+              state.eliminadas.add(
+                indice
+              );
+
+
+              if (
+                state.selecionada ===
+                indice
+              ) {
+
+                state.selecionada =
+                  null;
+
+              }
+
+            }
+
+
+            renderSessao();
+
+          }
+        );
+
+      }
+    );
+
+
   const confirmar =
     $("confirmarResposta");
 
@@ -1223,6 +1362,9 @@ function renderSessao() {
           null;
         state.respondida =
           false;
+
+        state.eliminadas =
+          new Set();
 
         renderSessao();
       }
