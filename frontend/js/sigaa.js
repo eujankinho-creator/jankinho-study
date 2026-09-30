@@ -22,6 +22,76 @@
     return data;
   }
 
+  function filenameFromDisposition(header, fallback) {
+    const value = String(header || "");
+    const encoded = value.match(/filename\*=UTF-8''([^;]+)/i);
+    if (encoded) {
+      try { return decodeURIComponent(encoded[1]); } catch {}
+    }
+    const plain = value.match(/filename="?([^";]+)"?/i);
+    return plain ? plain[1] : (fallback || "arquivo");
+  }
+
+  async function downloadSigaaFile(url, fallbackName, button) {
+    const originalText = button ? button.textContent : "";
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Baixando...";
+    }
+    showMessage("Preparando arquivo do SIGAA...", "info");
+
+    try {
+      const response = await fetch(url, { credentials: "same-origin" });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || "Nao foi possivel baixar o arquivo.");
+      }
+
+      const blob = await response.blob();
+      const filename = filenameFromDisposition(
+        response.headers.get("content-disposition"),
+        fallbackName
+      );
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = filename;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
+      showMessage("Download iniciado: " + filename, "info");
+      window.setTimeout(() => showMessage("", ""), 2500);
+    } catch (error) {
+      showMessage(error.message || "Nao foi possivel baixar o arquivo.", "error");
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = originalText || "Baixar";
+      }
+    }
+  }
+
+  function renderLessonAttachment(attachment, courseId) {
+    const item = attachment || {};
+    const title = escapeHtml(item.title || item.type || "Recurso");
+
+    if (item.downloadable && item.id) {
+      const url = "/api/sigaa/courses/" + encodeURIComponent(courseId) +
+        "/files/" + encodeURIComponent(item.id) + "/download";
+      return '<button type="button" data-sigaa-download="' + escapeHtml(url) +
+        '" data-filename="' + title + '">Baixar · ' + title + "</button>";
+    }
+
+    if (item.url) {
+      return '<a href="' + escapeHtml(item.url) +
+        '" target="_blank" rel="noopener noreferrer">Abrir · ' + title + "</a>";
+    }
+
+    return "<span>" + title + "</span>";
+  }
+
   function showMessage(text, type) {
     const box = $("messageBox");
     if (!text) {
@@ -205,13 +275,25 @@
     if (!section || section.available === false) return unavailable(section);
     const files = Array.isArray(section.data) ? section.data : [];
     if (!files.length) return emptyState("Nenhum arquivo publicado nesta disciplina.");
-    return '<div class="resource-list">' + files.map((file) => `
-      <article class="resource-row">
-        <div class="resource-icon">DOC</div>
-        <div class="resource-copy"><strong>${escapeHtml(file.title || "Arquivo")}</strong><span>${escapeHtml(file.description || "Material disponibilizado no SIGAA")}</span></div>
-        <a class="download-button" href="/api/sigaa/courses/${encodeURIComponent(courseId)}/files/${encodeURIComponent(file.id)}/download">Baixar</a>
-      </article>
-    `).join("") + "</div>";
+    return '<div class="resource-list">' + files.map((file) => {
+      const url = "/api/sigaa/courses/" + encodeURIComponent(courseId) +
+        "/files/" + encodeURIComponent(file.id) + "/download";
+      const source = file.source || "SIGAA";
+      const description = file.description || "Material disponibilizado no SIGAA";
+      return `
+        <article class="resource-row">
+          <div class="resource-icon">DOC</div>
+          <div class="resource-copy">
+            <strong>${escapeHtml(file.title || "Arquivo")}</strong>
+            <span>${escapeHtml(description)}</span>
+            <span class="resource-source">${escapeHtml(source)}</span>
+          </div>
+          ${file.downloadable === false ? '<span class="download-button">Indisponível</span>' :
+            '<button type="button" class="download-button" data-sigaa-download="' + escapeHtml(url) +
+            '" data-filename="' + escapeHtml(file.title || "arquivo") + '">Baixar</button>'}
+        </article>
+      `;
+    }).join("") + "</div>";
   }
 
   function renderAttendance(section) {
@@ -233,7 +315,7 @@
       </div>`;
   }
 
-  function renderActivities(sections) {
+  function renderActivities(sections, courseId) {
     const exams = sections.exams?.available === false ? [] : (sections.exams?.data || []);
     const homeworks = sections.homeworks?.available === false ? [] : (sections.homeworks?.data || []);
     const lessons = sections.lessons?.available === false ? [] : (sections.lessons?.data || []);
@@ -249,7 +331,7 @@
       </div>
       <section class="lessons-block"><div class="subheading"><small>CONTEÚDO</small><h3>Aulas e tópicos</h3></div>
         ${lessons.length ? '<div class="lesson-timeline">' + lessons.map((lesson) => `
-          <article><div class="timeline-dot"></div><div><small>${escapeHtml(formatDate(lesson.startDate, false))}</small><strong>${escapeHtml(lesson.title || "Aula")}</strong>${lesson.content ? "<p>" + escapeHtml(lesson.content) + "</p>" : ""}${lesson.attachments?.length ? '<div class="attachment-tags">' + lesson.attachments.map((a) => "<span>" + escapeHtml(a.title || a.type) + "</span>").join("") + "</div>" : ""}</div></article>
+          <article><div class="timeline-dot"></div><div><small>${escapeHtml(formatDate(lesson.startDate, false))}</small><strong>${escapeHtml(lesson.title || "Aula")}</strong>${lesson.content ? "<p>" + escapeHtml(lesson.content) + "</p>" : ""}${lesson.attachments?.length ? '<div class="attachment-tags">' + lesson.attachments.map((a) => renderLessonAttachment(a, courseId)).join("") + "</div>" : ""}</div></article>
         `).join("") + "</div>" : unavailable(sections.lessons) || emptyState("Nenhuma aula encontrada.")}
       </section>`;
   }
@@ -298,7 +380,7 @@
     $("tab-grades").innerHTML = renderGrades(sections.grades);
     $("tab-files").innerHTML = renderFiles(sections.files, course.id);
     $("tab-attendance").innerHTML = renderAttendance(sections.absences);
-    $("tab-activities").innerHTML = renderActivities(sections);
+    $("tab-activities").innerHTML = renderActivities(sections, course.id);
     $("tab-syllabus").innerHTML = renderSyllabus(sections.syllabus);
 
     $("tab-overview").innerHTML = `
@@ -411,6 +493,17 @@
   document.addEventListener("click", (event) => {
     const target = event.target.closest("[data-course-id]");
     if (target) openCourse(target.dataset.courseId, false);
+  });
+
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-sigaa-download]");
+    if (!button) return;
+    event.preventDefault();
+    downloadSigaaFile(
+      button.dataset.sigaaDownload,
+      button.dataset.filename || "arquivo",
+      button
+    );
   });
 
   $("courseTabs").addEventListener("click", (event) => {

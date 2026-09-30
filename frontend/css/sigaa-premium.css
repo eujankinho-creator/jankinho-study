@@ -88,3 +88,14 @@
 @media(max-width:1180px){.academic-grid{grid-template-columns:1fr}.schedule-panel,.notices-panel{min-height:auto}.course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.overview-cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.academic-hero,.connect-area{grid-template-columns:1fr}.academic-metrics,.course-kpis{grid-template-columns:repeat(2,1fr)}.schedule-grid{grid-template-columns:repeat(2,1fr)}.profile-strip{grid-template-columns:auto 1fr}.profile-meta{grid-column:1/-1}.syllabus-grid{grid-template-columns:1fr}}
 @media(max-width:700px){.sigaa-page{padding:15px}.academic-hero{padding:24px}.academic-hero h1{font-size:36px}.connect-features,.course-grid,.schedule-grid,.academic-metrics,.course-kpis,.overview-cards,.overview-lower,.grade-groups,.activity-columns,.syllabus-bottom,.attendance-history{grid-template-columns:1fr}.account-toolbar,.section-heading,.course-hero{align-items:flex-start;flex-direction:column}.account-actions,.course-search,.course-search input{width:100%}.profile-meta{display:grid;width:100%}.profile-strip{grid-template-columns:1fr}.profile-avatar{display:none}.workspace-topbar{flex-wrap:wrap}.course-health{width:100%}.resource-row{grid-template-columns:auto 1fr}.download-button{grid-column:1/-1;text-align:center}.attendance-summary{align-items:flex-start;flex-direction:column}}
+
+
+/* CORTEX SIGAA FILE UX V5 */
+.download-button{appearance:none;cursor:pointer;font:inherit;white-space:nowrap}
+.download-button:disabled{opacity:.55;cursor:wait}
+.resource-source{display:inline-flex!important;width:max-content;margin-top:5px;padding:3px 6px;border:1px solid var(--theme-border);border-radius:999px;background:var(--theme-accent-soft);color:var(--theme-accent)!important;font-size:11px!important;font-weight:800}
+.attachment-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.attachment-tags span,.attachment-tags a,.attachment-tags button{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:6px 9px;border:1px solid var(--theme-border);border-radius:9px;background:var(--theme-surface);color:var(--theme-text-soft);font:inherit;font-weight:700;text-decoration:none}
+.attachment-tags a,.attachment-tags button{cursor:pointer;color:var(--theme-accent);border-color:var(--theme-border-strong)}
+.attachment-tags a:hover,.attachment-tags button:hover{background:var(--theme-accent-soft);color:var(--theme-text)}
+@media(max-width:700px){.resource-row{grid-template-columns:auto minmax(0,1fr)}.resource-row .download-button{grid-column:1/-1;width:100%}}

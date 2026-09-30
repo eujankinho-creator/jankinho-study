@@ -63,6 +63,30 @@
       familia: "Adrenergico",
       via: "Gs",
       resumo: "Participa do relaxamento do detrusor e de efeitos metabolicos."
+    },
+
+    "D1": {
+      familia: "Dopaminergico",
+      via: "Gs",
+      resumo: "Receptor dopaminergico D1. Sua ativacao aumenta AMPc e participa de respostas dopaminergicas em diferentes tecidos."
+    },
+
+    "Muscarinicos": {
+      familia: "Colinergico",
+      via: "Receptores M",
+      resumo: "Alvo muscarinico nao especificado por subtipo no material. Inclui receptores M1 a M5 conforme o tecido."
+    },
+
+    "Nicotinicos": {
+      familia: "Colinergico",
+      via: "Canal ionico",
+      resumo: "Alvo nicotinico nao especificado por subtipo no material. Inclui receptores neuronais e da juncao neuromuscular."
+    },
+
+    "GABA-A": {
+      familia: "GABAergico",
+      via: "Canal de Cl-",
+      resumo: "Receptor ionotropico GABA-A. Benzodiazepinicos e barbituricos modulam sua atividade em sitios distintos."
     }
 
   };

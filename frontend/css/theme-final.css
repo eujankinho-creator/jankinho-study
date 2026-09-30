@@ -3604,3 +3604,73 @@ html:not([data-theme="pink-glitter"]) #cortexPinkPet {
 }
 
 /* CORTEX CANONICAL THEMES V7 END */
+
+
+/* CORTEX READABILITY + BLUE CONTRAST V8 START */
+html[data-theme="blue-black"] {
+  --theme-text-soft:#d6ebff;
+  --theme-text-muted:#a8d4fb;
+  --muted:#a8d4fb;
+}
+html[data-theme="blue-black"] :is(
+  .subtitle,.description,.helper-text,.card-subtitle,.section-subtitle,.panel-subtitle,
+  .muted,.caption,.hint,.meta,.theme-choice-description,.sidebar-logo span,.sidebar-logo small,
+  .menu-title,.user-info span,.header-user span,.metric-label,.metric-card small,.panel-header span,
+  .finance-header span,.disciplina-info span,.activity-content span,.activity-status,.finance-values span,
+  .quick-links span,.progress-info span,.progress-text span,.form-footnote,.status-detail small,
+  .panel-heading p,.section-heading p,.today-summary,.day-empty,.notice-meta,.notice-card p,
+  .course-number,.course-card-meta small,.course-card-meta strong,.profile-main span,.profile-meta>span,
+  .course-hero p,.course-health span,.course-loading small,.course-kpis span,.course-tabs button,
+  .overview-feature p,.availability-grid small,.grade-row small,.resource-copy span,
+  .attendance-summary p,.lesson-timeline p,.reference-list p,.empty-state,.section-unavailable
+) { color:#a8d4fb !important; }
+
+:root {
+  --cortex-micro-text:13px;
+  --cortex-small-text:14px;
+  --cortex-body-small:15px;
+}
+:is(
+  .menu-title,.sidebar-logo span,.sidebar-logo small,.user-info span,.header-user span,
+  .metric-label,.metric-card small,.panel-header span,.finance-header span,.panel-subtitle,
+  .disciplina-info span,.activity-content span,.activity-status,.finance-values span,
+  .quick-links span,.progress-info span,.progress-text span,.theme-choice-chip,.theme-current-label,
+  .small-label,.section-label,.hero-label,.card-kicker,.page-kicker,.eyebrow,.meta,.caption,.hint,
+  .sigaa-kicker,.panel-heading small,.section-heading small,.subheading small,.notice-meta,
+  .notice-badge,.course-card>small,.course-card-meta small,.course-card-meta strong,
+  .course-card-action,.account-toolbar small,.account-toolbar strong,.academic-metrics span,
+  .academic-metrics .metric-small,.today-chip span,.today-chip strong,.day-heading strong,
+  .day-heading span,.lesson-card small,.lesson-card strong,.lesson-card span,.day-empty,
+  .profile-main small,.profile-main span,.profile-meta>span,.profile-meta strong,.course-code,
+  .course-health span,.course-health strong,.course-loading strong,.course-loading small,
+  .course-kpis span,.course-tabs button,.overview-feature>small,.overview-feature button,
+  .mini-event span,.mini-event strong,.availability-grid strong,.availability-grid small,
+  .grade-group-head small,.grade-row strong,.grade-row small,.resource-icon,.resource-copy strong,
+  .resource-copy span,.download-button,.attendance-ring span,.attendance-summary>div:last-child>small,
+  .attendance-history>div,.activity-date,.activity-card strong,.activity-card small,
+  .lesson-timeline small,.lesson-timeline strong,.attachment-tags span,.attachment-tags a,
+  .attachment-tags button,.syllabus-grid>article>small,.syllabus-list span,.syllabus-list strong,
+  .reference-list span,.section-unavailable
+) {
+  font-size:clamp(13px,.82rem,14px) !important;
+  line-height:1.5 !important;
+}
+:is(
+  .subtitle,.description,.helper-text,.card-subtitle,.section-subtitle,.panel-subtitle,
+  .theme-choice-description,.page-message,.minimum-notice,.academic-hero p,.connect-copy p,
+  .panel-heading p,.section-heading p,.notice-card p,.course-hero p,.overview-feature p,
+  .resource-copy span,.attendance-summary p,.lesson-timeline p,.syllabus-grid p,.reference-list p,
+  .exam-tip strong,.modal-info-section li,.drug-class,.drug-mechanism
+) {
+  font-size:clamp(14px,.93rem,16px) !important;
+  line-height:1.62 !important;
+}
+:is(
+  .menu-item,.button-primary,.button-secondary,.primary-button,.secondary-button,.btn-primary,.btn-secondary,
+  input,textarea,select,.field label,.sigaa-form label,.account-actions a,.account-actions button,
+  .ghost-button,.back-button
+) { font-size:clamp(13px,.86rem,15px) !important; }
+@media (max-width:700px) {
+  :root { --cortex-micro-text:13px; --cortex-small-text:14px; --cortex-body-small:15px; }
+}
+/* CORTEX READABILITY + BLUE CONTRAST V8 END */

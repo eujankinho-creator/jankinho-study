@@ -367,7 +367,7 @@
 
   function renderReceptors() {
 
-    const order = [
+    const preferredOrder = [
       "M1",
       "M2",
       "M3",
@@ -378,7 +378,56 @@
       "beta1",
       "beta2",
       "beta3",
+      "D1",
+      "GABA-A",
+      "Muscarinicos",
+      "Nicotinicos",
     ];
+
+
+    const usedReceptors =
+      unique(
+        drugs.flatMap(
+          function (
+            drug
+          ) {
+
+            return Array.isArray(
+              drug.receptores
+            )
+              ? drug.receptores
+              : [];
+
+          }
+        )
+      );
+
+
+    const order =
+      unique(
+        [
+          ...preferredOrder,
+          ...Object.keys(
+            receptors
+          ),
+          ...usedReceptors,
+        ]
+      ).filter(
+        function (
+          name
+        ) {
+
+          return (
+            usedReceptors.includes(
+              name
+            ) ||
+            Boolean(
+              receptors[name]
+            )
+          );
+
+        }
+      );
 
 
     $("receptorMap")

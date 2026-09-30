@@ -52,6 +52,9 @@ type SigaaSession = {
   filesByCourse?:
     Map<string, any[]>;
 
+  lessonsByCourse?:
+    Map<string, any[]>;
+
   detailCache?:
     Map<
       string,
@@ -1106,6 +1109,482 @@ function serializeSyllabus(
 }
 
 
+/* CORTEX SIGAA RESILIENT RESOURCES V6 */
+
+function safeExternalUrl(
+  value:
+    any
+) {
+
+  try {
+
+    const url =
+      new URL(
+        String(
+          value ||
+          ""
+        )
+      );
+
+
+    if (
+      url.protocol ===
+        "http:" ||
+      url.protocol ===
+        "https:"
+    ) {
+
+      return url.toString();
+
+    }
+
+  }
+  catch (
+    error
+  ) {}
+
+
+  return null;
+
+}
+
+
+async function loadCourseLessons(
+  session:
+    SigaaSession,
+  course:
+    any,
+  courseId:
+    string,
+  force =
+    false
+) {
+
+  session.lessonsByCourse ??=
+    new Map();
+
+
+  if (
+    !force &&
+    session.lessonsByCourse.has(
+      courseId
+    )
+  ) {
+
+    return (
+      session.lessonsByCourse.get(
+        courseId
+      ) ||
+      []
+    );
+
+  }
+
+
+  const lessons =
+    Array.from(
+      await withTimeout(
+        course.getLessons(),
+        22000,
+        "Timeout ao carregar aulas e anexos."
+      ) as any[]
+    );
+
+
+  session.lessonsByCourse.set(
+    courseId,
+    lessons
+  );
+
+
+  return lessons;
+
+}
+
+
+function lessonFiles(
+  lessons:
+    any[]
+) {
+
+  const result:
+    any[] = [];
+
+
+  for (
+    const lesson
+    of lessons
+  ) {
+
+    const attachments =
+      Array.isArray(
+        lesson?.attachments
+      )
+        ? lesson.attachments
+        : [];
+
+
+    for (
+      const attachment
+      of attachments
+    ) {
+
+      if (
+        attachment?.type ===
+          "file" &&
+        typeof attachment
+          .download ===
+          "function"
+      ) {
+
+        result.push(
+          attachment
+        );
+
+      }
+
+    }
+
+  }
+
+
+  return result;
+
+}
+
+
+function uniqueFiles(
+  files:
+    any[]
+) {
+
+  const result:
+    any[] = [];
+
+
+  const used =
+    new Set<string>();
+
+
+  files.forEach(
+    function (
+      file:
+        any,
+      index:
+        number
+    ) {
+
+      const id =
+        safeText(
+          file?.id,
+          200
+        );
+
+
+      const title =
+        safeText(
+          file?.title,
+          240
+        );
+
+
+      const key =
+        id
+          ? "id:" + id
+          : "fallback:" +
+            title +
+            ":" +
+            index;
+
+
+      if (
+        used.has(
+          key
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      used.add(
+        key
+      );
+
+
+      result.push(
+        file
+      );
+
+    }
+  );
+
+
+  return result;
+
+}
+
+
+async function loadCourseFiles(
+  session:
+    SigaaSession,
+  course:
+    any,
+  courseId:
+    string,
+  force =
+    false
+) {
+
+  session.filesByCourse ??=
+    new Map();
+
+
+  if (
+    !force &&
+    session.filesByCourse.has(
+      courseId
+    )
+  ) {
+
+    return (
+      session.filesByCourse.get(
+        courseId
+      ) ||
+      []
+    );
+
+  }
+
+
+  let directFiles:
+    any[] = [];
+
+
+  let lessons:
+    any[] = [];
+
+
+  let directError:
+    unknown = null;
+
+
+  let lessonsError:
+    unknown = null;
+
+
+  try {
+
+    directFiles =
+      Array.from(
+        await withTimeout(
+          course.getFiles(),
+          20000,
+          "Timeout ao carregar a aba de arquivos."
+        ) as any[]
+      );
+
+  }
+  catch (
+    error
+  ) {
+
+    directError =
+      error;
+
+
+    console.warn(
+      "SIGAA files tab:",
+      error instanceof Error
+        ? error.message
+        : String(
+            error
+          )
+    );
+
+  }
+
+
+  try {
+
+    lessons =
+      await loadCourseLessons(
+        session,
+        course,
+        courseId,
+        force
+      );
+
+  }
+  catch (
+    error
+  ) {
+
+    lessonsError =
+      error;
+
+
+    console.warn(
+      "SIGAA lesson attachments:",
+      error instanceof Error
+        ? error.message
+        : String(
+            error
+          )
+    );
+
+  }
+
+
+  if (
+    directError &&
+    lessonsError
+  ) {
+
+    throw directError;
+
+  }
+
+
+  /*
+   * O SIGAA pode publicar arquivos de duas formas:
+   * na aba "Arquivos" ou anexados aos topicos de aula.
+   * O Cortex une as duas fontes para nao perder materiais.
+   */
+  const files =
+    uniqueFiles(
+      [
+        ...directFiles,
+        ...lessonFiles(
+          lessons
+        ),
+      ]
+    );
+
+
+  session.filesByCourse.set(
+    courseId,
+    files
+  );
+
+
+  return files;
+
+}
+
+
+function serializeCourseFile(
+  file:
+    any,
+  lessonFileIds:
+    Set<string>
+) {
+
+  const id =
+    safeText(
+      file?.id,
+      200
+    );
+
+
+  return {
+    id,
+
+    title:
+      safeText(
+        file?.title ||
+        "Arquivo",
+        240
+      ),
+
+    description:
+      safeText(
+        file?.description,
+        1000
+      ),
+
+    source:
+      lessonFileIds.has(
+        id
+      )
+        ? "Anexo de aula"
+        : "Arquivos da disciplina",
+
+    downloadable:
+      Boolean(
+        id &&
+        typeof file
+          ?.download ===
+          "function"
+      ),
+  };
+
+}
+
+
+function serializeLessonAttachment(
+  attachment:
+    any
+) {
+
+  const type =
+    safeText(
+      attachment?.type ||
+      "recurso",
+      80
+    );
+
+
+  const id =
+    safeText(
+      attachment?.id,
+      200
+    );
+
+
+  const externalUrl =
+    safeExternalUrl(
+      attachment?.href ||
+      attachment?.src
+    );
+
+
+  return {
+    id,
+    type,
+
+    title:
+      safeText(
+        attachment?.title ||
+        attachment?.name ||
+        "Recurso",
+        240
+      ),
+
+    description:
+      safeText(
+        attachment?.description,
+        1000
+      ),
+
+    url:
+      externalUrl,
+
+    downloadable:
+      Boolean(
+        type ===
+          "file" &&
+        id &&
+        typeof attachment
+          ?.download ===
+          "function"
+      ),
+  };
+
+}
+
+
 export async function sigaaCourseDetail(
   userId:
     number,
@@ -1159,6 +1638,27 @@ export async function sigaaCourseDetail(
 
   session.detailCache ??=
     new Map();
+
+
+  if (
+    force
+  ) {
+
+    session.detailCache.delete(
+      courseId
+    );
+
+
+    session.filesByCourse?.delete(
+      courseId
+    );
+
+
+    session.lessonsByCourse?.delete(
+      courseId
+    );
+
+  }
 
 
   const cached =
@@ -1302,26 +1802,58 @@ export async function sigaaCourseDetail(
         async function () {
 
           const rawFiles =
-            Array.from(
-              await course
-                .getFiles() as any[]
+            await loadCourseFiles(
+              session,
+              course,
+              courseId,
+              force
             );
 
 
-          session.filesByCourse ??=
-            new Map();
+          let rawLessons:
+            any[] = [];
 
 
-          session.filesByCourse.set(
-            courseId,
-            rawFiles
-          );
+          try {
+
+            rawLessons =
+              await loadCourseLessons(
+                session,
+                course,
+                courseId,
+                force
+              );
+
+          }
+          catch (
+            error
+          ) {}
+
+
+          const lessonFileIds =
+            new Set<string>(
+              lessonFiles(
+                rawLessons
+              ).map(
+                function (
+                  file:
+                    any
+                ) {
+
+                  return safeText(
+                    file?.id,
+                    200
+                  );
+
+                }
+              )
+            );
 
 
           return rawFiles
             .slice(
               0,
-              100
+              250
             )
             .map(
               function (
@@ -1329,26 +1861,10 @@ export async function sigaaCourseDetail(
                   any
               ) {
 
-                return {
-                  id:
-                    String(
-                      file.id ||
-                      ""
-                    ),
-
-                  title:
-                    safeText(
-                      file.title ||
-                      "Arquivo",
-                      240
-                    ),
-
-                  description:
-                    safeText(
-                      file.description,
-                      1000
-                    ),
-                };
+                return serializeCourseFile(
+                  file,
+                  lessonFileIds
+                );
 
               }
             );
@@ -1461,16 +1977,18 @@ export async function sigaaCourseDetail(
         async function () {
 
           const list =
-            Array.from(
-              await course
-                .getLessons() as any[]
+            await loadCourseLessons(
+              session,
+              course,
+              courseId,
+              force
             );
 
 
           return list
             .slice(
               0,
-              80
+              120
             )
             .map(
               function (
@@ -1495,7 +2013,7 @@ export async function sigaaCourseDetail(
                   content:
                     safeText(
                       lesson.contentText,
-                      2500
+                      3500
                     ),
 
                   startDate:
@@ -1515,32 +2033,10 @@ export async function sigaaCourseDetail(
                       ? lesson.attachments
                           .slice(
                             0,
-                            30
+                            50
                           )
                           .map(
-                            function (
-                              attachment:
-                                any
-                            ) {
-
-                              return {
-                                type:
-                                  safeText(
-                                    attachment.type ||
-                                    "recurso",
-                                    80
-                                  ),
-
-                                title:
-                                  safeText(
-                                    attachment.title ||
-                                    attachment.name ||
-                                    "Recurso",
-                                    240
-                                  ),
-                              };
-
-                            }
+                            serializeLessonAttachment
                           )
                       : [],
                 };
@@ -1799,37 +2295,16 @@ export async function downloadSigaaCourseFile(
     }
 
 
-    session.filesByCourse ??=
-      new Map();
-
-
     let files =
-      session.filesByCourse.get(
-        courseId
-      );
-
-
-    if (!files) {
-
-      files =
-        Array.from(
-          await withTimeout(
-            course.getFiles(),
-            15000,
-            "Timeout ao carregar arquivos."
-          ) as any[]
-        );
-
-
-      session.filesByCourse.set(
+      await loadCourseFiles(
+        session,
+        course,
         courseId,
-        files
+        false
       );
 
-    }
 
-
-    const file =
+    let file =
       files.find(
         function (
           item:
@@ -1850,12 +2325,49 @@ export async function downloadSigaaCourseFile(
 
     if (!file) {
 
+      /*
+       * O material pode ter sido publicado depois que a
+       * disciplina entrou no cache. Atualiza as duas fontes
+       * antes de responder que o arquivo nao existe.
+       */
+      files =
+        await loadCourseFiles(
+          session,
+          course,
+          courseId,
+          true
+        );
+
+
+      file =
+        files.find(
+          function (
+            item:
+              any
+          ) {
+
+            return (
+              String(
+                item.id ||
+                ""
+              ) ===
+              fileId
+            );
+
+          }
+        );
+
+    }
+
+
+    if (!file) {
+
       return {
         status:
           404,
 
         error:
-          "Arquivo nao encontrado nesta disciplina.",
+          "Arquivo nao encontrado nesta disciplina. Atualize a turma e tente novamente.",
       };
 
     }
