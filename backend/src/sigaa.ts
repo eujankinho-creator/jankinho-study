@@ -2,6 +2,16 @@ import {
   createRequire,
 } from "node:module";
 
+import {
+  mkdtemp,
+  readFile,
+  rm,
+  stat,
+} from "node:fs/promises";
+
+import os from "node:os";
+import path from "node:path";
+
 
 const require =
   createRequire(
@@ -35,6 +45,24 @@ type SigaaSession = {
 
   connectedAt:
     number;
+
+  courses?:
+    any[];
+
+  filesByCourse?:
+    Map<string, any[]>;
+
+  detailCache?:
+    Map<
+      string,
+      {
+        createdAt:
+          number;
+
+        value:
+          any;
+      }
+    >;
 
   cache?:
     {
