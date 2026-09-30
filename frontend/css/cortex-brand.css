@@ -1129,3 +1129,48 @@ html[data-theme="pink-glitter"]
 
 
 /* CORTEX PINK PET V2 END */
+
+/* CORTEX LEGACY PET DISABLED V9 */
+
+#pinkCatWidget,
+.pink-cat-widget,
+.pink-cat-bubble,
+.pink-cat-particle {
+  display:
+    none !important;
+
+  visibility:
+    hidden !important;
+
+  opacity:
+    0 !important;
+
+  pointer-events:
+    none !important;
+}
+
+
+/* CORTEX LEGACY PET HARD DISABLE V12 */
+
+#pinkCatWidget,
+.pink-cat-widget,
+.pink-cat-shell,
+.pink-cat-button,
+.pink-cat-bubble,
+.pink-cat-face,
+.pink-cat-head,
+.pink-cat-particle {
+  display: none !important;
+
+  visibility: hidden !important;
+
+  opacity: 0 !important;
+
+  width: 0 !important;
+  height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  pointer-events: none !important;
+}

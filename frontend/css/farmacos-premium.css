@@ -3642,3 +3642,116 @@ html[data-theme="blue-black"]
   background:
     var(--theme-surface) !important;
 }
+
+/* CORTEX PHARMA MODAL POLISH V4 */
+
+
+/* =========================================================
+   MODAL COM CONTRASTE UNIFORME
+========================================================= */
+
+.pharma-modal:not(.hidden) {
+  position: fixed !important;
+
+  inset: 0 !important;
+
+  z-index: 150 !important;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      .90
+    ) !important;
+
+  isolation:
+    isolate;
+
+  overflow-y:
+    auto;
+
+  overscroll-behavior:
+    contain;
+
+  -webkit-overflow-scrolling:
+    touch;
+}
+
+
+.pharma-modal
+.modal-backdrop {
+  position:
+    fixed !important;
+
+  inset:
+    0 !important;
+
+  z-index:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  backdrop-filter:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+}
+
+
+.pharma-modal
+.drug-modal-card {
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  box-shadow:
+    0 32px 110px
+    rgba(
+      0,
+      0,
+      0,
+      .82
+    );
+}
+
+
+body.modal-open {
+  overflow:
+    hidden !important;
+
+  overscroll-behavior:
+    none;
+}
+
+
+html:has(body.modal-open) {
+  overflow:
+    hidden;
+}
+
+
+@media (
+  max-width: 700px
+) {
+
+  .pharma-modal {
+    padding:
+      14px 9px !important;
+  }
+
+
+  .pharma-modal
+  .drug-modal-card {
+    padding:
+      21px 17px;
+
+    border-radius:
+      18px;
+  }
+
+}

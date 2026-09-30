@@ -1,0 +1,2763 @@
+/* =========================================================
+   CORTEX PINK PET V8
+========================================================= */
+
+
+/* Apenas o pet antigo */
+
+.pink-cat-widget,
+.pink-cat-speech,
+.pink-cat-message,
+.pink-cat-bubble {
+  display:
+    none !important;
+}
+
+
+/* =========================================================
+   WIDGET
+========================================================= */
+
+#cortexPinkPet[hidden] {
+  display:
+    none !important;
+}
+
+
+#cortexPinkPet:not([hidden]) {
+  display:
+    block !important;
+
+  visibility:
+    visible !important;
+
+  opacity:
+    1 !important;
+}
+
+
+.cortex-pet-widget {
+  position:
+    fixed;
+
+  z-index:
+    9995;
+
+  right:
+    18px;
+
+  bottom:
+    96px;
+}
+
+
+/* =========================================================
+   CAT
+========================================================= */
+
+.cortex-pet-avatar {
+  position:
+    relative;
+
+  width:
+    68px;
+
+  height:
+    74px;
+
+  display:
+    block;
+
+  border:
+    0;
+
+  padding:
+    0;
+
+  background:
+    transparent;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform .18s ease,
+    filter .18s ease;
+
+  filter:
+    drop-shadow(
+      0 12px 12px
+      rgba(
+        40,
+        0,
+        28,
+        .30
+      )
+    );
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+.cortex-pet-avatar:hover {
+  transform:
+    translateY(-2px);
+}
+
+
+.cortex-pet-shadow {
+  position:
+    absolute;
+
+  left:
+    11px;
+
+  bottom:
+    1px;
+
+  width:
+    46px;
+
+  height:
+    8px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      20,
+      0,
+      15,
+      .30
+    );
+
+  filter:
+    blur(3px);
+}
+
+
+.cortex-pet-body {
+  position:
+    absolute;
+
+  left:
+    17px;
+
+  bottom:
+    7px;
+
+  width:
+    38px;
+
+  height:
+    38px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      225,
+      241,
+      .44
+    );
+
+  border-radius:
+    48% 48% 43% 43%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffa7d1,
+      #ed69ae 58%,
+      #cd478f
+    );
+
+  box-shadow:
+    inset 4px 4px 8px
+    rgba(
+      255,
+      255,
+      255,
+      .14
+    );
+}
+
+
+.cortex-pet-tail {
+  position:
+    absolute;
+
+  right:
+    0;
+
+  bottom:
+    14px;
+
+  width:
+    28px;
+
+  height:
+    35px;
+
+  border:
+    6px solid
+    #dc599e;
+
+  border-left:
+    0;
+
+  border-bottom:
+    0;
+
+  border-radius:
+    0 25px 0 0;
+
+  transform-origin:
+    4px 28px;
+
+  animation:
+    cortexPetTail
+    2.5s ease-in-out
+    infinite;
+}
+
+
+.cortex-pet-head {
+  position:
+    absolute;
+
+  left:
+    11px;
+
+  top:
+    7px;
+
+  width:
+    48px;
+
+  height:
+    44px;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      226,
+      242,
+      .52
+    );
+
+  border-radius:
+    48% 48% 45% 45%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffb9dc,
+      #ef78b6 62%,
+      #d5549d
+    );
+
+  box-shadow:
+    inset 4px 4px 8px
+    rgba(
+      255,
+      255,
+      255,
+      .18
+    );
+}
+
+
+.cortex-pet-ear {
+  position:
+    absolute;
+
+  top:
+    -9px;
+
+  width:
+    18px;
+
+  height:
+    20px;
+
+  z-index:
+    -1;
+
+  border-radius:
+    4px 11px 4px 11px;
+
+  background:
+    #ef75b3;
+}
+
+
+.pet-ear-left {
+  left:
+    2px;
+
+  transform:
+    rotate(37deg);
+}
+
+
+.pet-ear-right {
+  right:
+    2px;
+
+  transform:
+    rotate(53deg);
+}
+
+
+.cortex-pet-eye {
+  position:
+    absolute;
+
+  top:
+    17px;
+
+  width:
+    5px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  background:
+    #421128;
+
+  animation:
+    cortexPetBlink
+    5s infinite;
+}
+
+
+.pet-eye-left {
+  left:
+    12px;
+}
+
+
+.pet-eye-right {
+  right:
+    12px;
+}
+
+
+.cortex-pet-eye::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    1px;
+
+  left:
+    1px;
+
+  width:
+    2px;
+
+  height:
+    2px;
+
+  border-radius:
+    50%;
+
+  background:
+    white;
+}
+
+
+.cortex-pet-nose {
+  position:
+    absolute;
+
+  top:
+    26px;
+
+  left:
+    50%;
+
+  width:
+    5px;
+
+  height:
+    4px;
+
+  border-radius:
+    50%;
+
+  background:
+    #8d295d;
+
+  transform:
+    translateX(-50%);
+}
+
+
+.cortex-pet-mouth-left,
+.cortex-pet-mouth-right {
+  position:
+    absolute;
+
+  top:
+    29px;
+
+  width:
+    7px;
+
+  height:
+    5px;
+
+  border-bottom:
+    1.5px solid
+    #792550;
+}
+
+
+.cortex-pet-mouth-left {
+  left:
+    16px;
+
+  border-radius:
+    0 0 7px 0;
+}
+
+
+.cortex-pet-mouth-right {
+  right:
+    16px;
+
+  border-radius:
+    0 0 0 7px;
+}
+
+
+/* =========================================================
+   PANEL - SOMENTE APOS CLICAR
+========================================================= */
+
+.cortex-pet-panel {
+  position:
+    absolute;
+
+  right:
+    0;
+
+  bottom:
+    82px;
+
+  width:
+    310px;
+
+  max-height:
+    min(
+      620px,
+      calc(
+        100vh -
+        130px
+      )
+    );
+
+  overflow-y:
+    auto;
+
+  padding:
+    14px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      161,
+      209,
+      .23
+    );
+
+  border-radius:
+    19px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(63,18,51,.985),
+      rgba(28,7,23,.99)
+    );
+
+  box-shadow:
+    0 25px 75px
+    rgba(
+      22,
+      0,
+      17,
+      .54
+    );
+
+  backdrop-filter:
+    blur(24px);
+
+  -webkit-backdrop-filter:
+    blur(24px);
+
+  visibility:
+    hidden;
+
+  opacity:
+    0;
+
+  pointer-events:
+    none;
+
+  transform:
+    translateY(9px)
+    scale(.965);
+
+  transform-origin:
+    bottom right;
+
+  transition:
+    opacity .18s ease,
+    visibility .18s ease,
+    transform .18s ease;
+}
+
+
+.cortex-pet-panel.open {
+  visibility:
+    visible;
+
+  opacity:
+    1;
+
+  pointer-events:
+    auto;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+.cortex-pet-panel-head {
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap:
+    10px;
+
+  padding-bottom:
+    11px;
+}
+
+
+.pet-panel-kicker {
+  display:
+    block;
+
+  color:
+    #ff89c0;
+
+  font-size:
+    7px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    .13em;
+}
+
+
+.cortex-pet-panel-head
+strong {
+  display:
+    block;
+
+  margin-top:
+    3px;
+
+  color:
+    #ffe6f3;
+
+  font-size:
+    13px;
+}
+
+
+.cortex-pet-close {
+  width:
+    31px;
+
+  height:
+    31px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      177,
+      217,
+      .11
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .035
+    );
+
+  color:
+    #d995b6;
+
+  font:
+    inherit;
+
+  font-size:
+    19px;
+
+  cursor:
+    pointer;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.cortex-pet-stats {
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    10px;
+
+  padding:
+    7px 0 3px;
+}
+
+
+.cortex-pet-stat {
+  padding:
+    9px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      167,
+      211,
+      .08
+    );
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .022
+    );
+}
+
+
+.cortex-pet-stat
+> div:first-child {
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  gap:
+    5px;
+
+  margin-bottom:
+    6px;
+
+  color:
+    #cf91b1;
+
+  font-size:
+    7px;
+}
+
+
+.cortex-pet-stat
+strong {
+  color:
+    #ffc0de;
+
+  font-size:
+    7px;
+}
+
+
+.cortex-pet-bar {
+  height:
+    5px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .055
+    );
+}
+
+
+.cortex-pet-bar
+span {
+  display:
+    block;
+
+  width:
+    0;
+
+  height:
+    100%;
+
+  border-radius:
+    inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff65ad,
+      #ffc2df
+    );
+
+  transition:
+    width .3s ease;
+}
+
+
+.cortex-pet-divider {
+  height:
+    1px;
+
+  margin:
+    12px 0;
+
+  background:
+    rgba(
+      255,
+      174,
+      218,
+      .09
+    );
+}
+
+
+/* =========================================================
+   FOOD
+========================================================= */
+
+.cortex-food-head {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    10px;
+
+  margin-bottom:
+    8px;
+}
+
+
+.cortex-food-head
+strong {
+  color:
+    #f4c4dc;
+
+  font-size:
+    9px;
+}
+
+
+.cortex-food-head
+span {
+  color:
+    #a96b8b;
+
+  font-size:
+    7px;
+}
+
+
+.cortex-food-tray {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      1fr
+    );
+
+  gap:
+    6px;
+}
+
+
+.cortex-food-item {
+  min-width:
+    0;
+
+  min-height:
+    62px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    4px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      164,
+      210,
+      .10
+    );
+
+  border-radius:
+    11px;
+
+  padding:
+    5px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .025
+    );
+
+  color:
+    #f7d3e5;
+
+  cursor:
+    grab;
+
+  touch-action:
+    none;
+
+  user-select:
+    none;
+
+  transition:
+    transform .14s ease,
+    border-color .14s ease,
+    background .14s ease;
+}
+
+
+.cortex-food-item:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(
+      255,
+      140,
+      198,
+      .28
+    );
+
+  background:
+    rgba(
+      255,
+      105,
+      180,
+      .07
+    );
+}
+
+
+.cortex-food-item:active {
+  cursor:
+    grabbing;
+}
+
+
+.cortex-food-item
+> span {
+  font-size:
+    21px;
+
+  line-height:
+    1;
+}
+
+
+.cortex-food-item
+small {
+  color:
+    #bd7e9e;
+
+  font-size:
+    6px;
+}
+
+
+/* GHOST */
+
+.cortex-food-ghost {
+  position:
+    fixed;
+
+  z-index:
+    20000;
+
+  width:
+    44px;
+
+  height:
+    44px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      182,
+      218,
+      .25
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      58,
+      13,
+      45,
+      .94
+    );
+
+  box-shadow:
+    0 12px 35px
+    rgba(
+      20,
+      0,
+      15,
+      .4
+    );
+
+  font-size:
+    24px;
+
+  pointer-events:
+    none;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+}
+
+
+/* PET RECEBENDO COMIDA */
+
+.cortex-pet-avatar.pet-food-target {
+  filter:
+    drop-shadow(
+      0 0 14px
+      rgba(
+        255,
+        104,
+        177,
+        .28
+      )
+    );
+}
+
+
+.cortex-pet-avatar.pet-food-hover {
+  transform:
+    translateY(-3px)
+    scale(1.10);
+
+  filter:
+    drop-shadow(
+      0 0 18px
+      rgba(
+        255,
+        104,
+        177,
+        .55
+      )
+    );
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.cortex-pet-actions {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
+
+  gap:
+    7px;
+}
+
+
+.cortex-pet-actions
+button {
+  min-width:
+    0;
+
+  min-height:
+    72px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    6px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      164,
+      210,
+      .11
+    );
+
+  border-radius:
+    12px;
+
+  padding:
+    8px 6px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .025
+    );
+
+  color:
+    #efbdd6;
+
+  font:
+    inherit;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform .14s ease,
+    background .14s ease;
+}
+
+
+.cortex-pet-actions
+button:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    rgba(
+      255,
+      105,
+      180,
+      .08
+    );
+}
+
+
+.pet-action-icon {
+  width:
+    31px;
+
+  height:
+    31px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(
+      255,
+      105,
+      180,
+      .10
+    );
+
+  color:
+    #ff99ca;
+
+  font-size:
+    12px;
+
+  font-weight:
+    900;
+}
+
+
+.cortex-pet-actions
+button
+div {
+  min-width:
+    0;
+
+  text-align:
+    center;
+}
+
+
+.cortex-pet-actions
+button
+strong {
+  display:
+    block;
+
+  color:
+    #efbdd6;
+
+  font-size:
+    7px;
+}
+
+
+.cortex-pet-actions
+button
+small {
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  color:
+    #97637d;
+
+  font-size:
+    5px;
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.cortex-pet-particles {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  overflow:
+    visible;
+
+  pointer-events:
+    none;
+}
+
+
+.cortex-pet-particle {
+  position:
+    absolute;
+
+  top:
+    10px;
+
+  left:
+    50%;
+
+  opacity:
+    0;
+
+  color:
+    #ff77b8;
+
+  font-size:
+    13px;
+
+  animation:
+    petParticle
+    .95s ease-out
+    var(--pet-delay)
+    forwards;
+}
+
+
+.cortex-pet-particle.star,
+.cortex-pet-particle.sleep {
+  color:
+    #ffe1f0;
+}
+
+
+.cortex-pet-particle.crumb {
+  color:
+    #eebb82;
+
+  font-size:
+    8px;
+}
+
+
+/* =========================================================
+   PET MOOD
+========================================================= */
+
+.pet-super-happy
+.cortex-pet-head {
+  filter:
+    saturate(1.12)
+    brightness(1.05);
+}
+
+
+.pet-tired
+.cortex-pet-eye {
+  height:
+    3px;
+
+  top:
+    19px;
+}
+
+
+/* =========================================================
+   INTERACTION ANIMATIONS
+========================================================= */
+
+.pet-petting
+.cortex-pet-head {
+  animation:
+    petPetting
+    .65s ease;
+}
+
+
+.pet-eating
+.cortex-pet-head {
+  animation:
+    petEating
+    .85s ease;
+}
+
+
+.pet-playing {
+  animation:
+    petPlaying
+    .75s
+    cubic-bezier(
+      .25,
+      .7,
+      .35,
+      1.3
+    );
+}
+
+
+.pet-sleeping
+.cortex-pet-eye {
+  height:
+    2px;
+
+  top:
+    20px;
+}
+
+
+/* =========================================================
+   SPOTIFY
+========================================================= */
+
+.global-player-bubble {
+  right:
+    18px !important;
+
+  bottom:
+    18px !important;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes cortexPetTail {
+
+  0%,
+  100% {
+    transform:
+      rotate(10deg);
+  }
+
+  50% {
+    transform:
+      rotate(-14deg);
+  }
+
+}
+
+
+@keyframes cortexPetBlink {
+
+  0%,
+  45%,
+  49%,
+  100% {
+    transform:
+      scaleY(1);
+  }
+
+  47% {
+    transform:
+      scaleY(.12);
+  }
+
+}
+
+
+@keyframes petParticle {
+
+  0% {
+    opacity:
+      0;
+
+    transform:
+      translate(
+        -50%,
+        4px
+      )
+      scale(.6);
+  }
+
+  20% {
+    opacity:
+      1;
+  }
+
+  100% {
+    opacity:
+      0;
+
+    transform:
+      translate(
+        calc(
+          -50% +
+          var(--pet-x)
+        ),
+        -48px
+      )
+      scale(1.15);
+  }
+
+}
+
+
+@keyframes petPetting {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  35% {
+    transform:
+      translateY(4px)
+      scaleX(1.07)
+      scaleY(.93);
+  }
+
+  70% {
+    transform:
+      translateY(-2px)
+      scale(1.02);
+  }
+
+}
+
+
+@keyframes petEating {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(0);
+  }
+
+  15%,
+  45%,
+  75% {
+    transform:
+      translateY(4px)
+      rotate(-2deg);
+  }
+
+  30%,
+  60% {
+    transform:
+      translateY(1px)
+      rotate(2deg);
+  }
+
+}
+
+
+@keyframes petPlaying {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(0);
+  }
+
+  40% {
+    transform:
+      translateY(-18px)
+      rotate(-6deg);
+  }
+
+  65% {
+    transform:
+      translateY(-5px)
+      rotate(5deg);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+  max-width: 600px
+) {
+
+  .cortex-pet-widget {
+    right:
+      10px;
+
+    bottom:
+      82px;
+  }
+
+
+  .cortex-pet-panel {
+    right:
+      0;
+
+    bottom:
+      76px;
+
+    width:
+      min(
+        310px,
+        calc(
+          100vw -
+          20px
+        )
+      );
+
+    max-height:
+      calc(
+        100svh -
+        115px
+      );
+  }
+
+
+  .cortex-food-item {
+    min-height:
+      64px;
+  }
+
+
+  .global-player-bubble {
+    right:
+      10px !important;
+
+    bottom:
+      10px !important;
+  }
+
+}
+
+/* =========================================================
+   CORTEX PET FINAL POSITION V12
+========================================================= */
+
+/*
+ * O unico pet ativo e #cortexPinkPet.
+ * Ele fica fisicamente preso ao canto inferior direito.
+ */
+
+#cortexPinkPet {
+  position: fixed !important;
+
+  right: 0 !important;
+  bottom: 0 !important;
+
+  width: 72px !important;
+  height: 72px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  z-index: 10020 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+}
+
+
+/* container real do pet */
+#cortexPinkPet
+.cortex-pet-avatar {
+  position: absolute !important;
+
+  right: 0 !important;
+  bottom: 0 !important;
+
+  width: 68px !important;
+  height: 68px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  scale: 1 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+
+/* hover sem quadrado */
+#cortexPinkPet
+.cortex-pet-avatar:hover {
+  background: transparent !important;
+
+  box-shadow: none !important;
+
+  filter:
+    drop-shadow(
+      0 5px 8px
+      rgba(0,0,0,.28)
+    )
+    drop-shadow(
+      0 0 9px
+      rgba(255,105,180,.25)
+    ) !important;
+}
+
+
+/* click/focus sem retangulo */
+#cortexPinkPet
+.cortex-pet-avatar:active,
+
+#cortexPinkPet
+.cortex-pet-avatar:focus,
+
+#cortexPinkPet
+.cortex-pet-avatar:focus-visible {
+  background: transparent !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  filter:
+    drop-shadow(
+      0 4px 7px
+      rgba(0,0,0,.25)
+    )
+    drop-shadow(
+      0 0 11px
+      rgba(255,105,180,.30)
+    ) !important;
+}
+
+
+/* quando recebe comida */
+#cortexPinkPet
+.cortex-pet-avatar.pet-food-target,
+
+#cortexPinkPet
+.cortex-pet-avatar.pet-food-hover {
+  background: transparent !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/*
+ * Painel abre acima do pet sem mover o pet.
+ */
+
+#cortexPinkPet
+.cortex-pet-panel {
+  position: absolute !important;
+
+  right: 4px !important;
+  bottom: 78px !important;
+}
+
+
+/*
+ * Spotify fica ao lado do pet.
+ */
+
+.global-player-bubble {
+  right: 82px !important;
+  bottom: 8px !important;
+}
+
+
+@media (max-width: 600px) {
+
+  #cortexPinkPet {
+    right: 0 !important;
+    bottom: 0 !important;
+
+    width: 66px !important;
+    height: 66px !important;
+  }
+
+
+  #cortexPinkPet
+  .cortex-pet-avatar {
+    right: 0 !important;
+    bottom: 0 !important;
+
+    width: 64px !important;
+    height: 64px !important;
+
+    transform: none !important;
+    scale: 1 !important;
+  }
+
+
+  #cortexPinkPet
+  .cortex-pet-panel {
+    right: 3px !important;
+    bottom: 72px !important;
+  }
+
+
+  .global-player-bubble {
+    right: 74px !important;
+    bottom: 6px !important;
+  }
+
+}
+
+
+
+
+/* CORTEX PET CUSTOMIZER V13 */
+
+
+/* =========================================================
+   CUSTOMIZER
+========================================================= */
+
+.cortex-pet-customizer {
+  margin:
+    4px 0 14px;
+
+  padding:
+    12px;
+
+  border:
+    1px solid
+    rgba(255,155,207,.10);
+
+  border-radius:
+    14px;
+
+  background:
+    rgba(255,255,255,.022);
+}
+
+
+.pet-customizer-block {
+  min-width:
+    0;
+}
+
+
+.pet-customizer-title {
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  margin-bottom:
+    9px;
+}
+
+
+.pet-customizer-title strong {
+  display:
+    block;
+
+  color:
+    #f2c3db;
+
+  font-size:
+    9px;
+}
+
+
+.pet-customizer-title span {
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  color:
+    #99667f;
+
+  font-size:
+    6px;
+}
+
+
+.pet-customizer-divider {
+  height:
+    1px;
+
+  margin:
+    12px 0;
+
+  background:
+    rgba(255,168,214,.08);
+}
+
+
+/* =========================================================
+   NOME
+========================================================= */
+
+.cortex-pet-name-editor {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    auto;
+
+  gap:
+    7px;
+}
+
+
+#cortexPetNameInput {
+  width:
+    100%;
+
+  min-width:
+    0;
+
+  height:
+    35px;
+
+  padding:
+    0 10px !important;
+
+  border:
+    1px solid
+    rgba(255,164,210,.12) !important;
+
+  border-radius:
+    10px !important;
+
+  outline:
+    none !important;
+
+  background:
+    rgba(255,255,255,.035) !important;
+
+  color:
+    #ffe8f4 !important;
+
+  font-size:
+    8px !important;
+}
+
+
+#cortexPetNameInput::placeholder {
+  color:
+    #82596e;
+}
+
+
+#cortexPetNameInput:focus {
+  border-color:
+    rgba(255,111,179,.38) !important;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(255,105,180,.06) !important;
+}
+
+
+#cortexPetNameSave {
+  height:
+    35px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    rgba(255,164,210,.15) !important;
+
+  border-radius:
+    10px !important;
+
+  background:
+    rgba(255,105,180,.09) !important;
+
+  color:
+    #ffc1df !important;
+
+  font-size:
+    7px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+#cortexPetNameSave:hover {
+  background:
+    rgba(255,105,180,.14) !important;
+}
+
+
+#cortexPetNameSave.saved {
+  background:
+    rgba(255,105,180,.18) !important;
+
+  color:
+    #fff2f8 !important;
+}
+
+
+/* =========================================================
+   ROUPAS
+========================================================= */
+
+.cortex-pet-outfit-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:
+    6px;
+}
+
+
+.cortex-pet-outfit-option {
+  min-width:
+    0;
+
+  height:
+    55px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    4px;
+
+  padding:
+    5px !important;
+
+  border:
+    1px solid
+    rgba(255,164,210,.09) !important;
+
+  border-radius:
+    10px !important;
+
+  background:
+    rgba(255,255,255,.022) !important;
+
+  color:
+    #d994b7 !important;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform .14s ease,
+    border-color .14s ease,
+    background .14s ease;
+}
+
+
+.cortex-pet-outfit-option:hover {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    rgba(255,135,196,.25) !important;
+
+  background:
+    rgba(255,105,180,.055) !important;
+}
+
+
+.cortex-pet-outfit-option.selected {
+  border-color:
+    rgba(255,123,187,.38) !important;
+
+  background:
+    rgba(255,105,180,.11) !important;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255,181,219,.05) !important;
+}
+
+
+.outfit-option-preview {
+  width:
+    25px;
+
+  height:
+    23px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    8px;
+
+  background:
+    rgba(255,105,180,.09);
+
+  color:
+    #ff9fcb;
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+}
+
+
+.cortex-pet-outfit-option small {
+  color:
+    #a66e8a;
+
+  font-size:
+    6px;
+}
+
+
+.cortex-pet-outfit-option.selected small {
+  color:
+    #e6abc8;
+}
+
+
+/* =========================================================
+   ACCESSORY LAYER
+========================================================= */
+
+.cortex-pet-outfit {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    20;
+
+  overflow:
+    visible;
+
+  pointer-events:
+    none;
+}
+
+
+/* =========================================================
+   GRAVATA
+========================================================= */
+
+.pet-outfit-bow {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    42px;
+
+  width:
+    28px;
+
+  height:
+    15px;
+
+  transform:
+    translateX(-50%);
+
+  z-index:
+    25;
+}
+
+
+.pet-outfit-bow i {
+  position:
+    absolute;
+
+  top:
+    2px;
+
+  width:
+    14px;
+
+  height:
+    11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #7f59e9,
+      #af82ff
+    );
+
+  box-shadow:
+    0 2px 5px
+    rgba(43,13,79,.22);
+}
+
+
+.pet-outfit-bow i:first-child {
+  left:
+    0;
+
+  border-radius:
+    9px 3px 3px 9px;
+
+  transform:
+    rotate(9deg);
+}
+
+
+.pet-outfit-bow i:nth-child(2) {
+  right:
+    0;
+
+  border-radius:
+    3px 9px 9px 3px;
+
+  transform:
+    rotate(-9deg);
+}
+
+
+.pet-outfit-bow b {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    4px;
+
+  width:
+    7px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  background:
+    #d7c3ff;
+
+  transform:
+    translateX(-50%);
+}
+
+
+/* =========================================================
+   MOLETOM
+========================================================= */
+
+#cortexPinkPet .cortex-pet-avatar[data-pet-outfit="hoodie"] .cortex-pet-body {
+  background:
+    linear-gradient(
+      145deg,
+      #8c68df,
+      #6341b9
+    ) !important;
+
+  border-color:
+    rgba(221,206,255,.36) !important;
+}
+
+
+.pet-outfit-hoodie-ring {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    41px;
+
+  width:
+    38px;
+
+  height:
+    20px;
+
+  border:
+    4px solid
+    #9475e4;
+
+  border-bottom:
+    0;
+
+  border-radius:
+    20px 20px 5px 5px;
+
+  transform:
+    translateX(-50%);
+
+  opacity:
+    .92;
+}
+
+
+/* =========================================================
+   CACHECOL
+========================================================= */
+
+.pet-outfit-scarf {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    43px;
+
+  width:
+    33px;
+
+  height:
+    8px;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5bd7df,
+      #89eef2
+    );
+
+  transform:
+    translateX(-50%);
+
+  box-shadow:
+    0 2px 5px
+    rgba(0,45,55,.20);
+}
+
+
+.pet-outfit-scarf i {
+  position:
+    absolute;
+
+  right:
+    4px;
+
+  top:
+    5px;
+
+  width:
+    7px;
+
+  height:
+    18px;
+
+  border-radius:
+    0 0 4px 4px;
+
+  background:
+    #68dce3;
+
+  transform:
+    rotate(-8deg);
+}
+
+
+/* =========================================================
+   OCULOS
+========================================================= */
+
+.pet-outfit-glasses {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    22px;
+
+  width:
+    38px;
+
+  height:
+    13px;
+
+  transform:
+    translateX(-50%);
+}
+
+
+.pet-outfit-glasses i {
+  position:
+    absolute;
+
+  top:
+    0;
+
+  width:
+    14px;
+
+  height:
+    11px;
+
+  border:
+    2px solid
+    #4e2244;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(255,209,233,.09);
+}
+
+
+.pet-outfit-glasses i.left {
+  left:
+    1px;
+}
+
+
+.pet-outfit-glasses i.right {
+  right:
+    1px;
+}
+
+
+.pet-outfit-glasses b {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    5px;
+
+  width:
+    8px;
+
+  height:
+    2px;
+
+  background:
+    #4e2244;
+
+  transform:
+    translateX(-50%);
+}
+
+
+/* =========================================================
+   COROA
+========================================================= */
+
+.pet-outfit-crown {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    -2px;
+
+  width:
+    30px;
+
+  height:
+    18px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    2px 2px 6px 6px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe576,
+      #e9ae31
+    );
+
+  transform:
+    translateX(-50%)
+    rotate(-3deg);
+
+  box-shadow:
+    0 3px 7px
+    rgba(88,54,0,.20);
+}
+
+
+.pet-outfit-crown::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    3px;
+
+  right:
+    3px;
+
+  bottom:
+    3px;
+
+  height:
+    3px;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.33);
+}
+
+
+.pet-outfit-crown i {
+  position:
+    absolute;
+
+  top:
+    -8px;
+
+  width:
+    13px;
+
+  height:
+    15px;
+
+  background:
+    #ffe576;
+
+  transform:
+    rotate(45deg);
+}
+
+
+.pet-outfit-crown i:first-child {
+  left:
+    -1px;
+}
+
+
+.pet-outfit-crown i:nth-child(2) {
+  left:
+    9px;
+
+  top:
+    -11px;
+}
+
+
+.pet-outfit-crown i:nth-child(3) {
+  right:
+    -1px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .cortex-pet-customizer {
+    padding:
+      10px;
+  }
+
+
+  .cortex-pet-outfit-grid {
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+}
+
+
+
+
+/* CORTEX PET OUTFIT LOCK V14 */
+
+
+/* =========================================================
+   PET SEMPRE NO MESMO LUGAR
+========================================================= */
+
+#cortexPinkPet {
+  position:
+    fixed !important;
+
+  right:
+    0 !important;
+
+  bottom:
+    0 !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+}
+
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit] {
+  position:
+    absolute !important;
+
+  right:
+    0 !important;
+
+  bottom:
+    0 !important;
+
+  left:
+    auto !important;
+
+  top:
+    auto !important;
+
+  width:
+    68px !important;
+
+  height:
+    68px !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  transform-origin:
+    center center !important;
+}
+
+
+/* =========================================================
+   ROUPA = SOMENTE CAMADA VISUAL
+========================================================= */
+
+#cortexPinkPet
+.cortex-pet-outfit {
+  position:
+    absolute !important;
+
+  left:
+    0 !important;
+
+  top:
+    0 !important;
+
+  right:
+    0 !important;
+
+  bottom:
+    0 !important;
+
+  width:
+    68px !important;
+
+  height:
+    68px !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  z-index:
+    20 !important;
+
+  pointer-events:
+    none !important;
+
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  transform:
+    none !important;
+
+  scale:
+    1 !important;
+}
+
+
+/* Nenhum estilo pode deslocar o avatar */
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit="none"],
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit="bow"],
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit="hoodie"],
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit="scarf"],
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit="glasses"],
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit="crown"] {
+  right:
+    0 !important;
+
+  bottom:
+    0 !important;
+
+  left:
+    auto !important;
+
+  top:
+    auto !important;
+
+  margin:
+    0 !important;
+}
+
+
+/* =========================================================
+   MOLETOM
+========================================================= */
+
+#cortexPinkPet
+.cortex-pet-avatar[data-pet-outfit="hoodie"]
+.cortex-pet-body {
+  background:
+    linear-gradient(
+      145deg,
+      #8c68df,
+      #6341b9
+    ) !important;
+
+  border-color:
+    rgba(
+      221,
+      206,
+      255,
+      .36
+    ) !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  #cortexPinkPet
+  .cortex-pet-avatar[data-pet-outfit] {
+    right:
+      0 !important;
+
+    bottom:
+      0 !important;
+
+    left:
+      auto !important;
+
+    top:
+      auto !important;
+
+    width:
+      64px !important;
+
+    height:
+      64px !important;
+  }
+
+
+  #cortexPinkPet
+  .cortex-pet-outfit {
+    width:
+      64px !important;
+
+    height:
+      64px !important;
+  }
+
+}

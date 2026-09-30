@@ -804,6 +804,1199 @@
       ],
       dica:
         "Rocuronio = antagonista Nm nao despolarizante."
+    },
+
+    {
+      "id": "dopamina",
+      "nome": "Dopamina",
+      "grupo": "Adrenergicos",
+      "classe": "Agonista adrenergico dose-dependente",
+      "acao": "Agonista direto",
+      "receptores": [
+        "D1",
+        "beta1",
+        "alpha1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: D1, beta1, alpha1. Principal efeito descrito: Aumento do debito cardiaco, vasodilatacao renal em baixas doses e vasoconstricao em altas doses.",
+      "efeitos": [
+        "Aumento do debito cardiaco, vasodilatacao renal em baixas doses e vasoconstricao em altas doses."
+      ],
+      "usos": [
+        "Choque e insuficiencia cardiaca aguda."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Choque e insuficiencia cardiaca aguda."
+    },
+
+    {
+      "id": "isoproterenol",
+      "nome": "Isoproterenol",
+      "grupo": "Adrenergicos",
+      "classe": "Agonista beta adrenergico",
+      "acao": "Agonista direto",
+      "receptores": [
+        "beta1",
+        "beta2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1, beta2. Principal efeito descrito: Aumento da frequencia cardiaca e broncodilatacao.",
+      "efeitos": [
+        "Aumento da frequencia cardiaca e broncodilatacao."
+      ],
+      "usos": [
+        "Bradicardia, atualmente com uso raro."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Bradicardia, atualmente com uso raro."
+    },
+
+    {
+      "id": "metildopa",
+      "nome": "Metildopa",
+      "grupo": "Adrenergicos",
+      "classe": "Agonista alpha2 apos conversao em alpha-metilnoradrenalina",
+      "acao": "Agonista direto",
+      "receptores": [
+        "alpha2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: alpha2. Principal efeito descrito: Reducao da atividade simpatica.",
+      "efeitos": [
+        "Reducao da atividade simpatica."
+      ],
+      "usos": [
+        "Hipertensao arterial, especialmente na gestacao."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hipertensao arterial, especialmente na gestacao."
+    },
+
+    {
+      "id": "fenoterol",
+      "nome": "Fenoterol",
+      "grupo": "Adrenergicos",
+      "classe": "Agonista beta2",
+      "acao": "Agonista direto",
+      "receptores": [
+        "beta2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta2. Principal efeito descrito: Broncodilatacao e relaxamento da musculatura lisa bronquica.",
+      "efeitos": [
+        "Broncodilatacao e relaxamento da musculatura lisa bronquica."
+      ],
+      "usos": [
+        "Asma e DPOC."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Asma e DPOC."
+    },
+
+    {
+      "id": "doxazosina",
+      "nome": "Doxazosina",
+      "grupo": "Antiadrenergicos",
+      "classe": "Antagonista alpha1",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "alpha1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: alpha1. Principal efeito descrito: Vasodilatacao e relaxamento da musculatura lisa da prostata e colo da bexiga.",
+      "efeitos": [
+        "Vasodilatacao e relaxamento da musculatura lisa da prostata e colo da bexiga."
+      ],
+      "usos": [
+        "Hipertensao arterial e hiperplasia prostatica benigna."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hipertensao arterial e hiperplasia prostatica benigna."
+    },
+
+    {
+      "id": "terazosina",
+      "nome": "Terazosina",
+      "grupo": "Antiadrenergicos",
+      "classe": "Antagonista alpha1",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "alpha1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: alpha1. Principal efeito descrito: Vasodilatacao e relaxamento da prostata.",
+      "efeitos": [
+        "Vasodilatacao e relaxamento da prostata."
+      ],
+      "usos": [
+        "Hipertensao arterial e hiperplasia prostatica benigna."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hipertensao arterial e hiperplasia prostatica benigna."
+    },
+
+    {
+      "id": "alfuzosina",
+      "nome": "Alfuzosina",
+      "grupo": "Antiadrenergicos",
+      "classe": "Antagonista alpha1",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "alpha1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: alpha1. Principal efeito descrito: Relaxamento da musculatura lisa prostatica.",
+      "efeitos": [
+        "Relaxamento da musculatura lisa prostatica."
+      ],
+      "usos": [
+        "Hiperplasia prostatica benigna."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hiperplasia prostatica benigna."
+    },
+
+    {
+      "id": "fentolamina",
+      "nome": "Fentolamina",
+      "grupo": "Antiadrenergicos",
+      "classe": "Antagonista alpha1 e alpha2",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "alpha1",
+        "alpha2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: alpha1, alpha2. Principal efeito descrito: Vasodilatacao intensa e aumento reflexo da frequencia cardiaca.",
+      "efeitos": [
+        "Vasodilatacao intensa e aumento reflexo da frequencia cardiaca."
+      ],
+      "usos": [
+        "Feocromocitoma, extravasamento de catecolaminas e crise hipertensiva."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Feocromocitoma, extravasamento de catecolaminas e crise hipertensiva."
+    },
+
+    {
+      "id": "fenoxibenzamina",
+      "nome": "Fenoxibenzamina",
+      "grupo": "Antiadrenergicos",
+      "classe": "Antagonista alpha1 e alpha2 irreversivel",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "alpha1",
+        "alpha2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: alpha1, alpha2. Principal efeito descrito: Vasodilatacao prolongada.",
+      "efeitos": [
+        "Vasodilatacao prolongada."
+      ],
+      "usos": [
+        "Feocromocitoma no pre-operatorio e tratamento cronico."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Feocromocitoma no pre-operatorio e tratamento cronico."
+    },
+
+    {
+      "id": "atenolol",
+      "nome": "Atenolol",
+      "grupo": "Antiadrenergicos",
+      "classe": "Betabloqueador beta1 seletivo",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "beta1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1. Principal efeito descrito: Reducao da frequencia cardiaca e da contratilidade.",
+      "efeitos": [
+        "Reducao da frequencia cardiaca e da contratilidade."
+      ],
+      "usos": [
+        "Hipertensao arterial, angina e infarto do miocardio."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hipertensao arterial, angina e infarto do miocardio."
+    },
+
+    {
+      "id": "esmolol",
+      "nome": "Esmolol",
+      "grupo": "Antiadrenergicos",
+      "classe": "Betabloqueador beta1 seletivo",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "beta1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1. Principal efeito descrito: Reducao rapida da frequencia cardiaca.",
+      "efeitos": [
+        "Reducao rapida da frequencia cardiaca."
+      ],
+      "usos": [
+        "Taquiarritmias e controle da frequencia cardiaca no perioperatorio."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Taquiarritmias e controle da frequencia cardiaca no perioperatorio."
+    },
+
+    {
+      "id": "timolol",
+      "nome": "Timolol",
+      "grupo": "Antiadrenergicos",
+      "classe": "Betabloqueador nao seletivo",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "beta1",
+        "beta2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1, beta2. Principal efeito descrito: Reducao da producao de humor aquoso e da frequencia cardiaca.",
+      "efeitos": [
+        "Reducao da producao de humor aquoso e da frequencia cardiaca."
+      ],
+      "usos": [
+        "Glaucoma e hipertensao ocular."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Glaucoma e hipertensao ocular."
+    },
+
+    {
+      "id": "nadolol",
+      "nome": "Nadolol",
+      "grupo": "Antiadrenergicos",
+      "classe": "Betabloqueador nao seletivo",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "beta1",
+        "beta2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1, beta2. Principal efeito descrito: Reducao da frequencia cardiaca e da pressao arterial.",
+      "efeitos": [
+        "Reducao da frequencia cardiaca e da pressao arterial."
+      ],
+      "usos": [
+        "Hipertensao arterial e angina."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hipertensao arterial e angina."
+    },
+
+    {
+      "id": "pindolol",
+      "nome": "Pindolol",
+      "grupo": "Antiadrenergicos",
+      "classe": "Betabloqueador com agonismo parcial",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "beta1",
+        "beta2"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1, beta2. Principal efeito descrito: Betabloqueio com menor reducao da frequencia cardiaca em repouso.",
+      "efeitos": [
+        "Betabloqueio com menor reducao da frequencia cardiaca em repouso."
+      ],
+      "usos": [
+        "Hipertensao arterial."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hipertensao arterial."
+    },
+
+    {
+      "id": "acebutolol",
+      "nome": "Acebutolol",
+      "grupo": "Antiadrenergicos",
+      "classe": "Betabloqueador beta1 com agonismo parcial",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "beta1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1. Principal efeito descrito: Reducao da frequencia cardiaca com menor bradicardia em repouso.",
+      "efeitos": [
+        "Reducao da frequencia cardiaca com menor bradicardia em repouso."
+      ],
+      "usos": [
+        "Hipertensao arterial e arritmias."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Hipertensao arterial e arritmias."
+    },
+
+    {
+      "id": "labetalol",
+      "nome": "Labetalol",
+      "grupo": "Antiadrenergicos",
+      "classe": "Bloqueador beta e alpha1",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "beta1",
+        "beta2",
+        "alpha1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: beta1, beta2, alpha1. Principal efeito descrito: Reducao da frequencia cardiaca e vasodilatacao.",
+      "efeitos": [
+        "Reducao da frequencia cardiaca e vasodilatacao."
+      ],
+      "usos": [
+        "Crises hipertensivas e hipertensao na gestacao."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Crises hipertensivas e hipertensao na gestacao."
+    },
+
+    {
+      "id": "acetilcolina",
+      "nome": "Acetilcolina",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico direto",
+      "acao": "Agonista direto",
+      "receptores": [
+        "M1",
+        "M2",
+        "M3",
+        "Nn",
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: M1, M2, M3, Nn, Nm. Principal efeito descrito: Bradicardia, miose, aumento das secrecoes, broncoconstricao, aumento do peristaltismo e contracao da bexiga.",
+      "efeitos": [
+        "Bradicardia, miose, aumento das secrecoes, broncoconstricao, aumento do peristaltismo e contracao da bexiga."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: M1, M2, M3, Nn, Nm."
+    },
+
+    {
+      "id": "carbacol",
+      "nome": "Carbacol",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico direto",
+      "acao": "Agonista direto",
+      "receptores": [
+        "Muscarinicos",
+        "Nicotinicos"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Muscarinicos, Nicotinicos. Principal efeito descrito: Promove miose intensa e reduz a pressao intraocular.",
+      "efeitos": [
+        "Promove miose intensa e reduz a pressao intraocular."
+      ],
+      "usos": [
+        "Glaucoma."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Glaucoma."
+    },
+
+    {
+      "id": "metacolina",
+      "nome": "Metacolina",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico direto",
+      "acao": "Agonista direto",
+      "receptores": [
+        "M3"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: M3. Principal efeito descrito: Provoca broncoconstricao.",
+      "efeitos": [
+        "Provoca broncoconstricao."
+      ],
+      "usos": [
+        "Teste de provocacao para diagnostico de hiper-reatividade bronquica."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Teste de provocacao para diagnostico de hiper-reatividade bronquica."
+    },
+
+    {
+      "id": "edrofonio",
+      "nome": "Edrofonio",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico indireto",
+      "acao": "Agonista indireto",
+      "receptores": [
+        "Muscarinicos",
+        "Nicotinicos"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Muscarinicos, Nicotinicos. Principal efeito descrito: Aumento da forca muscular, bradicardia, miose, aumento das secrecoes, motilidade gastrointestinal e contracao da bexiga.",
+      "efeitos": [
+        "Aumento da forca muscular, bradicardia, miose, aumento das secrecoes, motilidade gastrointestinal e contracao da bexiga."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Muscarinicos, Nicotinicos."
+    },
+
+    {
+      "id": "donepezila",
+      "nome": "Donepezila",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico indireto",
+      "acao": "Agonista indireto",
+      "receptores": [
+        "Muscarinicos",
+        "Nicotinicos"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Muscarinicos, Nicotinicos. Principal efeito descrito: Melhora da memoria e da cognicao; pode causar nauseas, vomitos, diarreia e bradicardia.",
+      "efeitos": [
+        "Melhora da memoria e da cognicao; pode causar nauseas, vomitos, diarreia e bradicardia."
+      ],
+      "usos": [
+        "Doenca de Alzheimer."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Doenca de Alzheimer."
+    },
+
+    {
+      "id": "galantamina",
+      "nome": "Galantamina",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico indireto",
+      "acao": "Agonista indireto",
+      "receptores": [
+        "Muscarinicos",
+        "Nicotinicos"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Muscarinicos, Nicotinicos. Principal efeito descrito: Melhora da funcao cognitiva; pode ocorrer nausea, vomito, perda de apetite e bradicardia.",
+      "efeitos": [
+        "Melhora da funcao cognitiva; pode ocorrer nausea, vomito, perda de apetite e bradicardia."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Muscarinicos, Nicotinicos."
+    },
+
+    {
+      "id": "rivastigmina",
+      "nome": "Rivastigmina",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico indireto",
+      "acao": "Agonista indireto",
+      "receptores": [
+        "Muscarinicos",
+        "Nicotinicos"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Muscarinicos, Nicotinicos. Principal efeito descrito: Melhora da cognicao; pode causar nauseas, vomitos e bradicardia.",
+      "efeitos": [
+        "Melhora da cognicao; pode causar nauseas, vomitos e bradicardia."
+      ],
+      "usos": [
+        "Alzheimer e demencia associada a doenca de Parkinson."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Alzheimer e demencia associada a doenca de Parkinson."
+    },
+
+    {
+      "id": "fisostigmina",
+      "nome": "Fisostigmina",
+      "grupo": "Colinergicos",
+      "classe": "Agonista parassimpatico indireto",
+      "acao": "Agonista indireto",
+      "receptores": [
+        "Muscarinicos",
+        "Nicotinicos"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Muscarinicos, Nicotinicos. Principal efeito descrito: Reversao da intoxicacao por antimuscarinicos, miose, bradicardia e aumento da motilidade gastrointestinal; em excesso pode causar convulsoes e crise colinergica.",
+      "efeitos": [
+        "Reversao da intoxicacao por antimuscarinicos, miose, bradicardia e aumento da motilidade gastrointestinal; em excesso pode causar convulsoes e crise colinergica."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Muscarinicos, Nicotinicos."
+    },
+
+    {
+      "id": "tiotropio",
+      "nome": "Tiotropio",
+      "grupo": "Anticolinergicos",
+      "classe": "Antagonista muscarinico",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "M3"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: M3. Principal efeito descrito: Broncodilatacao prolongada.",
+      "efeitos": [
+        "Broncodilatacao prolongada."
+      ],
+      "usos": [
+        "DPOC e asma."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: DPOC e asma."
+    },
+
+    {
+      "id": "glicopirrolato",
+      "nome": "Glicopirrolato",
+      "grupo": "Anticolinergicos",
+      "classe": "Antagonista muscarinico",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "M3"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: M3. Principal efeito descrito: Reducao das secrecoes.",
+      "efeitos": [
+        "Reducao das secrecoes."
+      ],
+      "usos": [
+        "Pre-anestesia e excesso de secrecoes."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Pre-anestesia e excesso de secrecoes."
+    },
+
+    {
+      "id": "diciclomina",
+      "nome": "Diciclomina",
+      "grupo": "Anticolinergicos",
+      "classe": "Antagonista muscarinico",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "M3"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: M3. Principal efeito descrito: Relaxamento da musculatura lisa intestinal.",
+      "efeitos": [
+        "Relaxamento da musculatura lisa intestinal."
+      ],
+      "usos": [
+        "Colica intestinal e sindrome do intestino irritavel."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Colica intestinal e sindrome do intestino irritavel."
+    },
+
+    {
+      "id": "pirenzepina",
+      "nome": "Pirenzepina",
+      "grupo": "Anticolinergicos",
+      "classe": "Antagonista muscarinico",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "M1"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: M1. Principal efeito descrito: Reducao da secrecao gastrica.",
+      "efeitos": [
+        "Reducao da secrecao gastrica."
+      ],
+      "usos": [
+        "Ulcera peptica, atualmente com uso raro."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Ulcera peptica, atualmente com uso raro."
+    },
+
+    {
+      "id": "tropicamida",
+      "nome": "Tropicamida",
+      "grupo": "Anticolinergicos",
+      "classe": "Antagonista muscarinico",
+      "acao": "Antagonista direto",
+      "receptores": [
+        "M3"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: M3. Principal efeito descrito: Midriase de curta duracao.",
+      "efeitos": [
+        "Midriase de curta duracao."
+      ],
+      "usos": [
+        "Exame de fundo de olho."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Exame de fundo de olho."
+    },
+
+    {
+      "id": "mecamilamina",
+      "nome": "Mecamilamina",
+      "grupo": "Ganglionares",
+      "classe": "Bloqueador ganglionar",
+      "acao": "Bloqueador ganglionar",
+      "receptores": [
+        "Nn"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nn. Principal efeito descrito: Bloqueio da transmissao ganglionar, reduzindo tonos simpatico e parassimpatico; pode provocar hipotensao, taquicardia, boca seca, constipacao e retencao urinaria.",
+      "efeitos": [
+        "Bloqueio da transmissao ganglionar, reduzindo tonos simpatico e parassimpatico; pode provocar hipotensao, taquicardia, boca seca, constipacao e retencao urinaria."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nn."
+    },
+
+    {
+      "id": "trimetafano",
+      "nome": "Trimetafano",
+      "grupo": "Ganglionares",
+      "classe": "Bloqueador ganglionar",
+      "acao": "Bloqueador ganglionar",
+      "receptores": [
+        "Nn"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nn. Principal efeito descrito: Bloqueio ganglionar de acao curta com reducao rapida da pressao arterial; pode causar hipotensao, taquicardia reflexa, midriase e retencao urinaria.",
+      "efeitos": [
+        "Bloqueio ganglionar de acao curta com reducao rapida da pressao arterial; pode causar hipotensao, taquicardia reflexa, midriase e retencao urinaria."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nn."
+    },
+
+    {
+      "id": "hexametonio",
+      "nome": "Hexametonio",
+      "grupo": "Ganglionares",
+      "classe": "Bloqueador ganglionar",
+      "acao": "Bloqueador ganglionar",
+      "receptores": [
+        "Nn"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nn. Principal efeito descrito: Bloqueio da transmissao ganglionar, levando a hipotensao, taquicardia, boca seca, constipacao, retencao urinaria e midriase.",
+      "efeitos": [
+        "Bloqueio da transmissao ganglionar, levando a hipotensao, taquicardia, boca seca, constipacao, retencao urinaria e midriase."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nn."
+    },
+
+    {
+      "id": "mivacurio",
+      "nome": "Mivacurio",
+      "grupo": "Neuromusculares",
+      "classe": "Bloqueador neuromuscular nao despolarizante",
+      "acao": "Bloqueador neuromuscular",
+      "receptores": [
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nm. Principal efeito descrito: Bloqueio neuromuscular competitivo, promovendo relaxamento da musculatura esqueletica para procedimentos cirurgicos e intubacao.",
+      "efeitos": [
+        "Bloqueio neuromuscular competitivo, promovendo relaxamento da musculatura esqueletica para procedimentos cirurgicos e intubacao."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nm."
+    },
+
+    {
+      "id": "atracurio",
+      "nome": "Atracurio",
+      "grupo": "Neuromusculares",
+      "classe": "Bloqueador neuromuscular nao despolarizante",
+      "acao": "Bloqueador neuromuscular",
+      "receptores": [
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nm. Principal efeito descrito: Relaxamento da musculatura esqueletica durante cirurgias e ventilacao mecanica.",
+      "efeitos": [
+        "Relaxamento da musculatura esqueletica durante cirurgias e ventilacao mecanica."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nm."
+    },
+
+    {
+      "id": "cisatracurio",
+      "nome": "Cisatracurio",
+      "grupo": "Neuromusculares",
+      "classe": "Bloqueador neuromuscular nao despolarizante",
+      "acao": "Bloqueador neuromuscular",
+      "receptores": [
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nm. Principal efeito descrito: Relaxamento da musculatura esqueletica com menor liberacao de histamina, utilizado em cirurgias e terapia intensiva.",
+      "efeitos": [
+        "Relaxamento da musculatura esqueletica com menor liberacao de histamina, utilizado em cirurgias e terapia intensiva."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nm."
+    },
+
+    {
+      "id": "pancuronio",
+      "nome": "Pancuronio",
+      "grupo": "Neuromusculares",
+      "classe": "Bloqueador neuromuscular nao despolarizante",
+      "acao": "Bloqueador neuromuscular",
+      "receptores": [
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nm. Principal efeito descrito: Bloqueio neuromuscular prolongado, produzindo relaxamento muscular durante procedimentos cirurgicos e ventilacao mecanica.",
+      "efeitos": [
+        "Bloqueio neuromuscular prolongado, produzindo relaxamento muscular durante procedimentos cirurgicos e ventilacao mecanica."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nm."
+    },
+
+    {
+      "id": "vecuronio",
+      "nome": "Vecuronio",
+      "grupo": "Neuromusculares",
+      "classe": "Bloqueador neuromuscular nao despolarizante",
+      "acao": "Bloqueador neuromuscular",
+      "receptores": [
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nm. Principal efeito descrito: Relaxamento da musculatura esqueletica durante anestesia geral, com minimos efeitos cardiovasculares.",
+      "efeitos": [
+        "Relaxamento da musculatura esqueletica durante anestesia geral, com minimos efeitos cardiovasculares."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nm."
+    },
+
+    {
+      "id": "d-tubocurarina",
+      "nome": "d-Tubocurarina",
+      "grupo": "Neuromusculares",
+      "classe": "Bloqueador neuromuscular nao despolarizante",
+      "acao": "Bloqueador neuromuscular",
+      "receptores": [
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nm. Principal efeito descrito: Bloqueio neuromuscular competitivo e relaxamento da musculatura esqueletica; pode causar hipotensao e broncoconstricao por liberacao de histamina.",
+      "efeitos": [
+        "Bloqueio neuromuscular competitivo e relaxamento da musculatura esqueletica; pode causar hipotensao e broncoconstricao por liberacao de histamina."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nm."
+    },
+
+    {
+      "id": "decametonio",
+      "nome": "Decametonio",
+      "grupo": "Neuromusculares",
+      "classe": "Bloqueador neuromuscular despolarizante",
+      "acao": "Bloqueador neuromuscular",
+      "receptores": [
+        "Nm"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: Nm. Principal efeito descrito: Bloqueio neuromuscular despolarizante, causando fasciculacoes iniciais seguidas de relaxamento e paralisia da musculatura esqueletica.",
+      "efeitos": [
+        "Bloqueio neuromuscular despolarizante, causando fasciculacoes iniciais seguidas de relaxamento e paralisia da musculatura esqueletica."
+      ],
+      "usos": [],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Receptor/alvo no material: Nm."
+    },
+
+    {
+      "id": "diazepam",
+      "nome": "Diazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de longa acao",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Ansiedade, espasmos musculares, estado de mal epileptico, abstinencia alcoolica e sedacao."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Ansiedade, espasmos musculares, estado de mal epileptico, abstinencia alcoolica e sedacao."
+    },
+
+    {
+      "id": "clonazepam",
+      "nome": "Clonazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de longa acao",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Epilepsia, transtorno do panico e ansiedade."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Epilepsia, transtorno do panico e ansiedade."
+    },
+
+    {
+      "id": "lorazepam",
+      "nome": "Lorazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de acao intermediaria",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Ansiedade, convulsoes e sedacao."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Ansiedade, convulsoes e sedacao."
+    },
+
+    {
+      "id": "alprazolam",
+      "nome": "Alprazolam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de acao intermediaria",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Transtorno do panico e ansiedade."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Transtorno do panico e ansiedade."
+    },
+
+    {
+      "id": "midazolam",
+      "nome": "Midazolam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de curta acao",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Sedacao, procedimentos e inducao anestesica."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Sedacao, procedimentos e inducao anestesica."
+    },
+
+    {
+      "id": "temazepam",
+      "nome": "Temazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Insonia."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Insonia."
+    },
+
+    {
+      "id": "triazolam",
+      "nome": "Triazolam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de curta acao",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Insonia de curta duracao."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Insonia de curta duracao."
+    },
+
+    {
+      "id": "oxazepam",
+      "nome": "Oxazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Ansiedade e abstinencia alcoolica."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Ansiedade e abstinencia alcoolica."
+    },
+
+    {
+      "id": "nitrazepam",
+      "nome": "Nitrazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Insonia e algumas epilepsias."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Insonia e algumas epilepsias."
+    },
+
+    {
+      "id": "flurazepam",
+      "nome": "Flurazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de longa acao",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Insonia."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Insonia."
+    },
+
+    {
+      "id": "bromazepam",
+      "nome": "Bromazepam",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Ansiedade."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Ansiedade."
+    },
+
+    {
+      "id": "clordiazepoxido",
+      "nome": "Clordiazepoxido",
+      "grupo": "Benzodiazepinicos",
+      "classe": "Benzodiazepinico de longa acao",
+      "acao": "Benzodiazepinico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Ansiedade e abstinencia alcoolica."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Ansiedade e abstinencia alcoolica."
+    },
+
+    {
+      "id": "fenobarbital",
+      "nome": "Fenobarbital",
+      "grupo": "Barbituricos",
+      "classe": "Barbiturico de longa acao",
+      "acao": "Barbiturico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Epilepsia, convulsoes e sedacao."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Epilepsia, convulsoes e sedacao."
+    },
+
+    {
+      "id": "tiopental",
+      "nome": "Tiopental",
+      "grupo": "Barbituricos",
+      "classe": "Barbiturico de ultracurta acao",
+      "acao": "Barbiturico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Inducao anestesica."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Inducao anestesica."
+    },
+
+    {
+      "id": "pentobarbital",
+      "nome": "Pentobarbital",
+      "grupo": "Barbituricos",
+      "classe": "Barbiturico de curta acao",
+      "acao": "Barbiturico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Sedacao, anestesia e controle de convulsoes."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Sedacao, anestesia e controle de convulsoes."
+    },
+
+    {
+      "id": "secobarbital",
+      "nome": "Secobarbital",
+      "grupo": "Barbituricos",
+      "classe": "Barbiturico de curta acao",
+      "acao": "Barbiturico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Sedacao e hipnose, atualmente com uso raro."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Sedacao e hipnose, atualmente com uso raro."
+    },
+
+    {
+      "id": "amobarbital",
+      "nome": "Amobarbital",
+      "grupo": "Barbituricos",
+      "classe": "Barbiturico de acao intermediaria",
+      "acao": "Barbiturico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Sedacao e hipnose, atualmente com uso raro."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Sedacao e hipnose, atualmente com uso raro."
+    },
+
+    {
+      "id": "butabarbital",
+      "nome": "Butabarbital",
+      "grupo": "Barbituricos",
+      "classe": "Barbiturico de acao intermediaria",
+      "acao": "Barbiturico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Sedacao e tratamento de curto prazo da insonia."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Sedacao e tratamento de curto prazo da insonia."
+    },
+
+    {
+      "id": "mefobarbital",
+      "nome": "Mefobarbital",
+      "grupo": "Barbituricos",
+      "classe": "Barbiturico de longa acao",
+      "acao": "Barbiturico",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A.",
+      "efeitos": [],
+      "usos": [
+        "Epilepsia e sedacao."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Epilepsia e sedacao."
+    },
+
+    {
+      "id": "primidona",
+      "nome": "Primidona",
+      "grupo": "Barbituricos",
+      "classe": "Anticonvulsivante derivado dos barbituricos",
+      "acao": "Anticonvulsivante",
+      "receptores": [
+        "GABA-A"
+      ],
+      "mecanismo": "Receptor/alvo indicado no material: GABA-A. Principal efeito descrito: No material, e descrita como metabolizada em fenobarbital.",
+      "efeitos": [
+        "No material, e descrita como metabolizada em fenobarbital."
+      ],
+      "usos": [
+        "Epilepsia e tremor essencial."
+      ],
+      "adversos": [],
+      "alertas": [],
+      "dica": "Indicacao no material: Epilepsia e tremor essencial."
     }
 
   ];
