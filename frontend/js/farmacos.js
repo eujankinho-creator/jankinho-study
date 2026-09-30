@@ -180,6 +180,8 @@
     return normalize(
       [
         drug.nome,
+        drug.principioAtivo,
+        drug.fonte,
         drug.grupo,
         drug.classe,
         drug.acao,
@@ -499,7 +501,7 @@
           formatReceptor(
             state.receptor
           )
-        : "Todos os receptores";
+        : "Todos os receptores / alvos";
 
   }
 
@@ -614,6 +616,11 @@
 
                   <p class="drug-class">
                     ${escapeHtml(drug.classe)}
+                  </p>
+
+                  <p class="drug-active">
+                    <strong>Princípio ativo:</strong>
+                    ${escapeHtml(drug.principioAtivo || drug.nome)}
                   </p>
 
                 </div>
@@ -849,10 +856,29 @@
         </div>
 
 
+        <section class="modal-info-section active-principle-section">
+
+          <h3>
+            Princípio ativo
+          </h3>
+
+          <p>
+            ${escapeHtml(drug.principioAtivo || drug.nome)}
+          </p>
+
+          ${drug.fonte ? `
+            <small class="drug-source">
+              Fonte de estudo: ${escapeHtml(drug.fonte)}
+            </small>
+          ` : ""}
+
+        </section>
+
+
         <section class="modal-info-section">
 
           <h3>
-            Receptores
+            Receptores / alvos
           </h3>
 
           <div class="receptor-tags large">
@@ -877,8 +903,7 @@
                 >
 
                   <p>
-                    Antes de revelar: qual receptor este fármaco
-                    ativa ou bloqueia?
+                    Antes de revelar: qual receptor ou alvo farmacológico está relacionado a este fármaco?
                   </p>
 
                   <button
@@ -1228,7 +1253,12 @@
       ],
 
       [
-        "Receptores",
+        "Princípio ativo",
+        "principioAtivo"
+      ],
+
+      [
+        "Receptores / alvos",
         "receptores"
       ],
 
@@ -1274,7 +1304,7 @@
           </h2>
 
           <p>
-            Compare receptor, mecanismo e efeitos lado a lado.
+            Compare princípio ativo, receptor/alvo, mecanismo e efeitos lado a lado.
           </p>
 
         </div>
@@ -1583,7 +1613,7 @@
     return {
       drug,
       question:
-        "Qual destes receptores está relacionado à ação de " +
+        "Qual destes receptores ou alvos está relacionado à ação de " +
         drug.nome +
         "?",
       answer,
