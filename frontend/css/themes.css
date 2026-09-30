@@ -2780,3 +2780,224 @@ html[data-theme="pink-glitter"]
   color:
     #dca2c0 !important;
 }
+
+
+/* CORTEX BLUE BLACK GLOBAL V4 */
+
+/* =========================================================
+   CORTEX BLUE BLACK GLOBAL V4
+   padroniza o tema azul e remove residuos orange
+========================================================= */
+
+html[data-theme="blue-black"],
+body[data-theme="blue-black"] {
+  --theme-accent: #1687ff !important;
+  --theme-accent-2: #66b5ff !important;
+  --theme-accent-soft: rgba(22, 135, 255, 0.12) !important;
+  --theme-accent-strong: rgba(22, 135, 255, 0.24) !important;
+  --theme-border: rgba(80, 164, 255, 0.18) !important;
+  --theme-border-strong: rgba(102, 181, 255, 0.30) !important;
+  --theme-surface: #06111d !important;
+  --theme-surface-2: #071725 !important;
+  --theme-surface-3: #091d2f !important;
+  --theme-surface-4: #0c2337 !important;
+  --theme-text: #edf6ff !important;
+  --theme-text-soft: #c5dcf3 !important;
+  --theme-text-muted: #8eaac5 !important;
+  --theme-glow: rgba(22, 135, 255, 0.30) !important;
+  --theme-glow-soft: rgba(22, 135, 255, 0.14) !important;
+}
+
+/* fundo geral */
+
+html[data-theme="blue-black"] body,
+html[data-theme="blue-black"] .app-shell,
+html[data-theme="blue-black"] .app-content,
+html[data-theme="blue-black"] .page-shell,
+html[data-theme="blue-black"] .dashboard-view,
+html[data-theme="blue-black"] .dashboard-page {
+  background:
+    radial-gradient(circle at top, rgba(15, 65, 120, 0.16), transparent 35%),
+    linear-gradient(180deg, #040c15 0%, #06111d 45%, #030913 100%) !important;
+  color: #edf6ff !important;
+}
+
+/* sidebar desktop + mobile */
+
+html[data-theme="blue-black"] .sidebar,
+html[data-theme="blue-black"] .cortex-mobile-sidebar-panel {
+  background:
+    linear-gradient(180deg, #04101f 0%, #030b14 55%, #02070d 100%) !important;
+  border-right: 1px solid rgba(80, 164, 255, 0.16) !important;
+  box-shadow: 14px 0 36px rgba(0, 20, 50, 0.20) !important;
+}
+
+/* blocos internos da sidebar */
+
+html[data-theme="blue-black"] .sidebar-logo,
+html[data-theme="blue-black"] .sidebar-user {
+  border-color: rgba(80, 164, 255, 0.14) !important;
+}
+
+html[data-theme="blue-black"] .sidebar-logo strong,
+html[data-theme="blue-black"] .sidebar-user .user-info strong {
+  color: #eef7ff !important;
+}
+
+html[data-theme="blue-black"] .sidebar-logo span,
+html[data-theme="blue-black"] .sidebar-logo small,
+html[data-theme="blue-black"] .sidebar-user .user-info span,
+html[data-theme="blue-black"] .menu-title {
+  color: #89a8c8 !important;
+}
+
+/* links/menu */
+
+html[data-theme="blue-black"] .menu-item {
+  color: #9eb9d4 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="blue-black"] .menu-item:hover {
+  color: #e6f3ff !important;
+  background: rgba(22, 135, 255, 0.06) !important;
+}
+
+html[data-theme="blue-black"] .menu-item.active {
+  color: #66b5ff !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22, 135, 255, 0.18),
+      rgba(22, 135, 255, 0.05)
+    ) !important;
+  border-color: rgba(80, 164, 255, 0.12) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(80, 164, 255, 0.08),
+    0 8px 22px rgba(7, 47, 92, 0.18) !important;
+}
+
+html[data-theme="blue-black"] .menu-item.active::before {
+  background: #1687ff !important;
+  box-shadow: 0 0 14px rgba(22, 135, 255, 0.55) !important;
+}
+
+/* icones da sidebar */
+
+html[data-theme="blue-black"] .menu-icon,
+html[data-theme="blue-black"] .cortex-nav-icon {
+  color: #8fb3d2 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="blue-black"] .menu-item:hover .menu-icon,
+html[data-theme="blue-black"] .menu-item:hover .cortex-nav-icon {
+  color: #bfe0ff !important;
+}
+
+html[data-theme="blue-black"] .menu-item.active .menu-icon,
+html[data-theme="blue-black"] .menu-item.active .cortex-nav-icon {
+  color: #66b5ff !important;
+  background: rgba(22, 135, 255, 0.11) !important;
+  box-shadow: inset 0 0 0 1px rgba(102, 181, 255, 0.16) !important;
+}
+
+html[data-theme="blue-black"] .menu-icon svg,
+html[data-theme="blue-black"] .cortex-nav-icon svg,
+html[data-theme="blue-black"] .menu-icon svg *,
+html[data-theme="blue-black"] .cortex-nav-icon svg * {
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.7 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* cards / hero / paineis globais */
+
+html[data-theme="blue-black"] .hero-card,
+html[data-theme="blue-black"] .dashboard-hero,
+html[data-theme="blue-black"] .hero-panel,
+html[data-theme="blue-black"] .premium-card,
+html[data-theme="blue-black"] .glass-card,
+html[data-theme="blue-black"] .content-card,
+html[data-theme="blue-black"] .section-card,
+html[data-theme="blue-black"] .stat-card,
+html[data-theme="blue-black"] .metric-card,
+html[data-theme="blue-black"] .widget-card,
+html[data-theme="blue-black"] .panel,
+html[data-theme="blue-black"] .toolbar-group,
+html[data-theme="blue-black"] .whiteboard-shell {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 18, 31, 0.96),
+      rgba(5, 12, 22, 0.98)
+    ) !important;
+  border-color: rgba(80, 164, 255, 0.16) !important;
+  box-shadow:
+    0 14px 34px rgba(0, 16, 36, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
+}
+
+/* badges / chips / detalhes que ainda podem ficar laranja */
+
+html[data-theme="blue-black"] .badge,
+html[data-theme="blue-black"] .tag,
+html[data-theme="blue-black"] .chip,
+html[data-theme="blue-black"] .section-eyebrow,
+html[data-theme="blue-black"] .hero-badge,
+html[data-theme="blue-black"] .eyebrow,
+html[data-theme="blue-black"] .pill {
+  color: #72bfff !important;
+  background: rgba(22, 135, 255, 0.10) !important;
+  border-color: rgba(102, 181, 255, 0.20) !important;
+}
+
+/* botoes principais no modo azul */
+
+html[data-theme="blue-black"] .btn-primary,
+html[data-theme="blue-black"] .primary-button,
+html[data-theme="blue-black"] .action-button.primary,
+html[data-theme="blue-black"] button.is-primary {
+  color: #eef7ff !important;
+  background:
+    linear-gradient(135deg, #0f72db, #2d95ff) !important;
+  border-color: rgba(120, 194, 255, 0.35) !important;
+  box-shadow:
+    0 10px 24px rgba(22, 135, 255, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset !important;
+}
+
+html[data-theme="blue-black"] .btn-primary:hover,
+html[data-theme="blue-black"] .primary-button:hover,
+html[data-theme="blue-black"] .action-button.primary:hover,
+html[data-theme="blue-black"] button.is-primary:hover {
+  filter: brightness(1.06) !important;
+}
+
+/* botao hamburger mobile */
+
+html[data-theme="blue-black"] .cortex-mobile-sidebar-button {
+  color: #66b5ff !important;
+  background: rgba(3, 15, 29, 0.95) !important;
+  border-color: rgba(80, 164, 255, 0.22) !important;
+  box-shadow: 0 10px 22px rgba(0, 18, 38, 0.26) !important;
+}
+
+/* evita residuos claros/brancos quadrados em areas do dashboard */
+
+html[data-theme="blue-black"] .dashboard-hero::before,
+html[data-theme="blue-black"] .dashboard-hero::after,
+html[data-theme="blue-black"] .hero-card::before,
+html[data-theme="blue-black"] .hero-card::after,
+html[data-theme="blue-black"] .premium-card::before,
+html[data-theme="blue-black"] .premium-card::after {
+  background:
+    radial-gradient(circle, rgba(22, 135, 255, 0.10), transparent 70%) !important;
+  opacity: 0.55 !important;
+  filter: blur(28px) !important;
+}

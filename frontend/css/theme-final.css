@@ -2533,3 +2533,617 @@ html[data-theme]
 
 
 /* CORTEX THEME PAGE PATCH END */
+
+
+
+/* CORTEX BLUE SIDEBAR GLOBAL V3 */
+
+
+/* =========================================================
+   BLUE BLACK - SIDEBAR GLOBAL
+========================================================= */
+
+html[data-theme="blue-black"]
+.sidebar {
+  background:
+    linear-gradient(
+      180deg,
+      #04101f 0%,
+      #020a15 52%,
+      #01050b 100%
+    ) !important;
+
+  border-right:
+    1px solid
+    rgba(80,164,255,.18) !important;
+
+  box-shadow:
+    14px 0 42px
+    rgba(0,20,50,.16) !important;
+}
+
+
+/* =========================================================
+   LOGO CORTEX AZUL EM TODAS AS PAGINAS
+========================================================= */
+
+html[data-theme="blue-black"]
+.logo-box,
+
+html[data-theme="blue-black"]
+.logo-box.cortex-logo {
+  border-color:
+    rgba(80,164,255,.24) !important;
+
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255,255,255,.10),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(8,34,63,.96),
+      rgba(2,12,24,.98)
+    ) !important;
+
+  box-shadow:
+    0 10px 28px
+    rgba(0,20,50,.30),
+    0 0 20px
+    rgba(22,135,255,.10),
+    inset 0 1px 0
+    rgba(255,255,255,.04) !important;
+}
+
+
+html[data-theme="blue-black"]
+.logo-box.cortex-logo::before {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,135,255,.24),
+      rgba(102,181,255,.06)
+    ) !important;
+}
+
+
+html[data-theme="blue-black"]
+.logo-box.cortex-logo
+.cortex-logo-letter {
+  color:
+    #eef7ff !important;
+
+  text-shadow:
+    0 0 14px
+    rgba(22,135,255,.28) !important;
+}
+
+
+html[data-theme="blue-black"]
+.logo-box.cortex-logo
+.cortex-logo-ring {
+  border-color:
+    rgba(102,181,255,.62) !important;
+}
+
+
+html[data-theme="blue-black"]
+.logo-box.cortex-logo
+.cortex-logo-spark {
+  background:
+    linear-gradient(
+      90deg,
+      #1687ff,
+      #66b5ff
+    ) !important;
+
+  box-shadow:
+    0 0 12px
+    rgba(22,135,255,.42) !important;
+}
+
+
+html[data-theme="blue-black"]
+.logo-box.cortex-logo
+.cortex-logo-dot {
+  background:
+    #72c1ff !important;
+
+  box-shadow:
+    0 0 12px
+    rgba(102,181,255,.55) !important;
+}
+
+
+/* =========================================================
+   TITULOS / TEXTOS
+========================================================= */
+
+html[data-theme="blue-black"]
+.sidebar-logo {
+  border-bottom-color:
+    rgba(80,164,255,.16) !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar-logo strong {
+  color:
+    #eef7ff !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar-logo span,
+
+html[data-theme="blue-black"]
+.sidebar-logo small,
+
+html[data-theme="blue-black"]
+.menu-title {
+  color:
+    #7691aa !important;
+}
+
+
+/* =========================================================
+   ITENS DA SIDEBAR
+========================================================= */
+
+html[data-theme="blue-black"]
+.menu-item {
+  color:
+    #86a4bf !important;
+
+  background:
+    transparent !important;
+
+  border-color:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+html[data-theme="blue-black"]
+.menu-item:hover {
+  color:
+    #dceeff !important;
+
+  background:
+    rgba(22,135,255,.065) !important;
+}
+
+
+html[data-theme="blue-black"]
+.menu-item.active {
+  color:
+    #66b5ff !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(22,135,255,.18),
+      rgba(22,135,255,.035)
+    ) !important;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(80,164,255,.06) !important;
+}
+
+
+html[data-theme="blue-black"]
+.menu-item.active::before {
+  background:
+    #1687ff !important;
+
+  box-shadow:
+    0 0 12px
+    rgba(22,135,255,.55) !important;
+}
+
+
+/* =========================================================
+   ICONES - SEM PREENCHIMENTO
+========================================================= */
+
+html[data-theme="blue-black"]
+.sidebar
+.cortex-nav-icon {
+  color:
+    #7699b8 !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar
+.cortex-nav-icon svg,
+
+html[data-theme="blue-black"]
+.sidebar
+.cortex-nav-icon svg path,
+
+html[data-theme="blue-black"]
+.sidebar
+.cortex-nav-icon svg rect,
+
+html[data-theme="blue-black"]
+.sidebar
+.cortex-nav-icon svg circle,
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-icon svg,
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-icon svg path,
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-icon svg rect,
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-icon svg circle {
+  fill:
+    none !important;
+
+  stroke:
+    currentColor !important;
+
+  stroke-width:
+    1.7 !important;
+
+  stroke-linecap:
+    round !important;
+
+  stroke-linejoin:
+    round !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-item:hover
+.cortex-nav-icon {
+  color:
+    #a9d3fb !important;
+
+  background:
+    rgba(22,135,255,.055) !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-item.active
+.cortex-nav-icon {
+  color:
+    #66b5ff !important;
+
+  background:
+    rgba(22,135,255,.12) !important;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(80,164,255,.20) !important;
+}
+
+
+/* garante que o SVG ativo continue outline */
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-item.active
+.cortex-nav-icon svg,
+
+html[data-theme="blue-black"]
+.sidebar
+.menu-item.active
+.cortex-nav-icon svg * {
+  fill:
+    none !important;
+
+  stroke:
+    currentColor !important;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+html[data-theme="blue-black"]
+.sidebar
+.cortex-nav-label {
+  color:
+    inherit !important;
+}
+
+
+/* =========================================================
+   USUARIO NO RODAPE
+========================================================= */
+
+html[data-theme="blue-black"]
+.sidebar-user {
+  border-top-color:
+    rgba(80,164,255,.16) !important;
+
+  background:
+    rgba(3,14,27,.62) !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar-user
+.avatar {
+  border:
+    1px solid
+    rgba(80,164,255,.28) !important;
+
+  background:
+    rgba(22,135,255,.11) !important;
+
+  color:
+    #66b5ff !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar-user
+.user-info strong {
+  color:
+    #eef7ff !important;
+}
+
+
+html[data-theme="blue-black"]
+.sidebar-user
+.user-info span {
+  color:
+    #7691aa !important;
+}
+
+
+html[data-theme="blue-black"]
+.logout-button {
+  color:
+    #7691aa !important;
+}
+
+
+html[data-theme="blue-black"]
+.logout-button:hover {
+  color:
+    #66b5ff !important;
+
+  background:
+    rgba(22,135,255,.09) !important;
+}
+
+
+/* =========================================================
+   SIDEBAR MOBILE
+========================================================= */
+
+html[data-theme="blue-black"]
+.cortex-mobile-sidebar-panel {
+  background:
+    linear-gradient(
+      180deg,
+      #04101f,
+      #01050b
+    ) !important;
+
+  border-right-color:
+    rgba(80,164,255,.18) !important;
+}
+
+
+html[data-theme="blue-black"]
+.cortex-mobile-sidebar-button {
+  border-color:
+    rgba(80,164,255,.22) !important;
+
+  background:
+    rgba(3,15,29,.95) !important;
+
+  color:
+    #66b5ff !important;
+}
+
+
+
+/* CORTEX DASHBOARD LOGO SAME AS GLOBAL V5 */
+
+/*
+ * O Dashboard nao possui mais uma identidade propria
+ * para a logo. Estes seletores apenas anulam residuos
+ * antigos de app.css/dashboard-premium.
+ */
+
+html[data-theme="blue-black"]
+body.dashboard-view
+.sidebar
+.logo-box.cortex-logo {
+  width:
+    42px !important;
+
+  height:
+    42px !important;
+
+  flex:
+    0 0 42px !important;
+
+  border:
+    1px solid
+    rgba(
+      80,
+      164,
+      255,
+      .20
+    ) !important;
+
+  border-radius:
+    18px !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8,29,52,.96),
+      rgba(4,13,24,.98)
+    ) !important;
+
+  box-shadow:
+    0 12px 28px
+    rgba(0,18,36,.24),
+    0 0 0 1px
+    rgba(255,255,255,.02)
+    inset,
+    0 0 24px
+    rgba(22,135,255,.12) !important;
+
+  filter:
+    none !important;
+
+  transform:
+    none !important;
+
+  isolation:
+    isolate !important;
+
+  overflow:
+    hidden !important;
+}
+
+
+/*
+ * Mesmo tratamento de brilho das demais paginas.
+ * Nada de quadrado branco.
+ */
+
+html[data-theme="blue-black"]
+body.dashboard-view
+.sidebar
+.logo-box.cortex-logo::before {
+  inset:
+    0 !important;
+
+  border-radius:
+    inherit !important;
+
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(120,194,255,.12),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(22,135,255,.12),
+      transparent 55%
+    ) !important;
+
+  opacity:
+    1 !important;
+
+  filter:
+    none !important;
+}
+
+
+html[data-theme="blue-black"]
+body.dashboard-view
+.sidebar
+.logo-box.cortex-logo::after {
+  inset:
+    -8px !important;
+
+  border-radius:
+    inherit !important;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(22,135,255,.18),
+      transparent 65%
+    ) !important;
+
+  opacity:
+    .55 !important;
+
+  filter:
+    blur(20px) !important;
+
+  z-index:
+    -1 !important;
+}
+
+
+/* elementos internos identicos */
+
+html[data-theme="blue-black"]
+body.dashboard-view
+.sidebar
+.logo-box.cortex-logo
+.cortex-logo-letter {
+  color:
+    #eef7ff !important;
+
+  text-shadow:
+    0 0 10px
+    rgba(22,135,255,.18) !important;
+}
+
+
+html[data-theme="blue-black"]
+body.dashboard-view
+.sidebar
+.logo-box.cortex-logo
+.cortex-logo-ring {
+  border-color:
+    rgba(102,181,255,.62) !important;
+}
+
+
+html[data-theme="blue-black"]
+body.dashboard-view
+.sidebar
+.logo-box.cortex-logo
+.cortex-logo-spark {
+  background:
+    linear-gradient(
+      90deg,
+      #1687ff,
+      #66b5ff
+    ) !important;
+
+  box-shadow:
+    0 0 12px
+    rgba(22,135,255,.42) !important;
+}
+
+
+html[data-theme="blue-black"]
+body.dashboard-view
+.sidebar
+.logo-box.cortex-logo
+.cortex-logo-dot {
+  background:
+    #66b5ff !important;
+
+  box-shadow:
+    0 0 12px
+    rgba(22,135,255,.42) !important;
+}
