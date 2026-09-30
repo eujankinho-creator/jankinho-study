@@ -503,8 +503,24 @@ span:not(.cortex-nav-icon):not(.cortex-nav-label) {
 .mobile-overlay,
 .mobile-sidebar,
 .mobile-menu-button,
+.analysis-mobile-button,
+.analysis-mobile-overlay,
+.analysis-mobile-drawer,
+.clinical-mobile-menu,
+.clinical-mobile-overlay,
+.clinical-mobile-drawer,
+.settings-mobile-button,
+.settings-mobile-overlay,
+.settings-mobile-drawer,
 .finance-mobile-button,
-.finance-mobile-overlay {
+.finance-mobile-overlay,
+.finance-mobile-drawer,
+.flashcards-mobile-button,
+.flashcards-mobile-overlay,
+.flashcards-mobile-drawer,
+.questions-mobile-menu,
+.questions-mobile-overlay,
+.questions-mobile-drawer {
   display:
     none !important;
 }
