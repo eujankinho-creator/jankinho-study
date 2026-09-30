@@ -717,3 +717,415 @@ html[data-theme="pink-glitter"]
     transform .18s ease,
     filter .18s ease;
 }
+
+/* CORTEX PINK PET V2 START */
+
+
+/* =========================================================
+   INTERACOES EXTRAS
+========================================================= */
+
+.pink-cat-widget {
+  --pet-pop-x:
+    0px;
+}
+
+
+.pink-cat-widget
+.pink-cat-button {
+  transform-origin:
+    50% 85%;
+}
+
+
+/* PULINHO */
+
+.pink-cat-widget.pet-hop
+.pink-cat-button {
+  animation:
+    pinkPetHop
+    .68s
+    cubic-bezier(.22,.9,.31,1.25);
+}
+
+
+@keyframes pinkPetHop {
+
+  0% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  28% {
+    transform:
+      translateY(-13px)
+      scale(1.035,.97);
+  }
+
+  48% {
+    transform:
+      translateY(-17px)
+      scale(.99,1.04);
+  }
+
+  72% {
+    transform:
+      translateY(2px)
+      scale(1.04,.96);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* BALANCAR DE LADO */
+
+.pink-cat-widget.pet-wiggle
+.pink-cat-head {
+  animation:
+    pinkPetWiggle
+    .62s
+    ease-in-out;
+}
+
+
+@keyframes pinkPetWiggle {
+
+  0% {
+    transform:
+      rotate(0deg);
+  }
+
+  20% {
+    transform:
+      rotate(-8deg);
+  }
+
+  40% {
+    transform:
+      rotate(7deg);
+  }
+
+  60% {
+    transform:
+      rotate(-5deg);
+  }
+
+  80% {
+    transform:
+      rotate(3deg);
+  }
+
+  100% {
+    transform:
+      rotate(0deg);
+  }
+
+}
+
+
+/* RONRONAR */
+
+.pink-cat-widget.pet-purr
+.pink-cat-button {
+  animation:
+    pinkPetPurr
+    .11s
+    ease-in-out
+    8
+    alternate;
+}
+
+
+@keyframes pinkPetPurr {
+
+  from {
+    transform:
+      translateX(-1px)
+      translateY(0);
+  }
+
+  to {
+    transform:
+      translateX(1px)
+      translateY(-1px);
+  }
+
+}
+
+
+/* APERTO FOFO */
+
+.pink-cat-widget.pet-squish
+.pink-cat-head {
+  animation:
+    pinkPetSquish
+    .58s
+    cubic-bezier(.2,.9,.3,1.25);
+}
+
+
+@keyframes pinkPetSquish {
+
+  0% {
+    transform:
+      scale(1);
+  }
+
+  28% {
+    transform:
+      scale(1.09,.88);
+  }
+
+  52% {
+    transform:
+      scale(.94,1.08);
+  }
+
+  76% {
+    transform:
+      scale(1.03,.98);
+  }
+
+  100% {
+    transform:
+      scale(1);
+  }
+
+}
+
+
+/* ORELHAS */
+
+.pink-cat-widget.pet-ears
+.pink-cat-ear.left {
+  animation:
+    pinkPetEarLeft
+    .48s
+    ease-in-out
+    2;
+}
+
+
+.pink-cat-widget.pet-ears
+.pink-cat-ear.right {
+  animation:
+    pinkPetEarRight
+    .48s
+    ease-in-out
+    2;
+}
+
+
+@keyframes pinkPetEarLeft {
+
+  0%,
+  100% {
+    transform:
+      rotate(45deg);
+  }
+
+  50% {
+    transform:
+      rotate(30deg)
+      translate(-2px,-1px);
+  }
+
+}
+
+
+@keyframes pinkPetEarRight {
+
+  0%,
+  100% {
+    transform:
+      rotate(45deg);
+  }
+
+  50% {
+    transform:
+      rotate(60deg)
+      translate(1px,-2px);
+  }
+
+}
+
+
+/* OLHOS FELIZES */
+
+.pink-cat-widget.pet-happy
+.pink-cat-eye {
+  height:
+    3px !important;
+
+  top:
+    24px !important;
+
+  transform:
+    scaleX(1.25);
+}
+
+
+/* BOCHECHAS */
+
+.pink-cat-widget.pet-happy
+.pink-cat-blush {
+  opacity:
+    1;
+
+  transform:
+    scale(1.25);
+
+  box-shadow:
+    0 0 10px
+    rgba(255,105,180,.22);
+}
+
+
+/* =========================================================
+   CORACOES / PARTICULAS
+========================================================= */
+
+.pink-cat-particle {
+  position:
+    absolute;
+
+  z-index:
+    12;
+
+  left:
+    50%;
+
+  top:
+    30%;
+
+  pointer-events:
+    none;
+
+  color:
+    #ff9dcc;
+
+  font-size:
+    15px;
+
+  line-height:
+    1;
+
+  opacity:
+    0;
+
+  text-shadow:
+    0 0 8px
+    rgba(255,105,180,.45);
+
+  animation:
+    pinkPetParticle
+    1.05s
+    ease-out
+    forwards;
+}
+
+
+.pink-cat-particle.star {
+  color:
+    #ffe2f1;
+
+  font-size:
+    13px;
+}
+
+
+.pink-cat-particle.heart {
+  color:
+    #ff82c2;
+}
+
+
+@keyframes pinkPetParticle {
+
+  0% {
+    opacity:
+      0;
+
+    transform:
+      translate(
+        -50%,
+        0
+      )
+      scale(.5)
+      rotate(0deg);
+  }
+
+  20% {
+    opacity:
+      1;
+  }
+
+  100% {
+    opacity:
+      0;
+
+    transform:
+      translate(
+        calc(-50% + var(--pet-pop-x)),
+        -62px
+      )
+      scale(1.25)
+      rotate(16deg);
+  }
+
+}
+
+
+/* =========================================================
+   GLOW QUANDO INTERAGE
+========================================================= */
+
+.pink-cat-widget.pet-interacting
+.pink-cat-button {
+  box-shadow:
+    0 20px 48px
+    rgba(10,0,8,.34),
+    0 0 34px
+    rgba(255,105,180,.21),
+    inset 0 0 0 1px
+    rgba(255,190,224,.30);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .pink-cat-widget.pet-hop
+  .pink-cat-button,
+
+  .pink-cat-widget.pet-wiggle
+  .pink-cat-head,
+
+  .pink-cat-widget.pet-purr
+  .pink-cat-button,
+
+  .pink-cat-widget.pet-squish
+  .pink-cat-head,
+
+  .pink-cat-widget.pet-ears
+  .pink-cat-ear,
+
+  .pink-cat-particle {
+    animation:
+      none !important;
+  }
+
+}
+
+
+/* CORTEX PINK PET V2 END */

@@ -30,6 +30,15 @@ import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerC
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
+import {
+  iniciarSpotifyAuth,
+  concluirSpotifyAuth,
+  statusSpotify,
+  tokenSpotify,
+  buscarSpotify,
+  tocarSpotify,
+  desconectarSpotify,
+} from "./spotify";
 
 
 const PORT =
@@ -1999,6 +2008,188 @@ const server =
 
 
 
+        /* SPOTIFY */
+
+        if (
+          caminho ===
+            "/api/spotify/login" &&
+          metodo === "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await iniciarSpotifyAuth(
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/spotify/callback" &&
+          metodo === "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await concluirSpotifyAuth(
+            request,
+            response,
+            url
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/spotify/status" &&
+          metodo === "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await statusSpotify(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/spotify/token" &&
+          metodo === "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await tokenSpotify(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/spotify/search" &&
+          metodo === "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await buscarSpotify(
+            request,
+            response,
+            url
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/spotify/play" &&
+          metodo === "PUT"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          const body =
+            await lerJson(
+              request
+            );
+
+          await tocarSpotify(
+            request,
+            response,
+            body
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho ===
+            "/api/spotify/disconnect" &&
+          metodo === "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await desconectarSpotify(
+            response
+          );
+
+          return;
+        }
+
         /* FLASHCARDS */
 
         if (
@@ -2528,6 +2719,8 @@ const server =
             "/questoes",
             "/flashcards",
             "/financas",
+            "/musica",
+            "/app",
             "/casos",
             "/laboratorio",
             "/evolucao",
@@ -2833,6 +3026,32 @@ const server =
           return;
         }
 
+        if (
+          caminho === "/musica" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/musica.html"
+          );
+
+          return;
+        }
+
+        if (
+          caminho === "/app" &&
+          metodo === "GET"
+        ) {
+
+          redirect(
+            response,
+            "/app.html"
+          );
+
+          return;
+        }
+
         await servirArquivo(
           response,
           caminho
@@ -2908,7 +3127,7 @@ server.listen(
     );
     console.log("");
     console.log(
-      `http://localhost:${PORT}`
+      `http://127.0.0.1:${PORT}/app`
     );
     console.log("");
     console.log(
@@ -2928,6 +3147,9 @@ server.listen(
     );
     console.log(
       "  /api/financeiro"
+    );
+    console.log(
+      "  /api/spotify/*"
     );
     console.log("");
   }

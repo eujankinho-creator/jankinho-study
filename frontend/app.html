@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Cortex</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/app-shell.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/themes.css"
+  >
+
+  <script src="/js/theme-manager.js"></script>
+
+  <link rel="stylesheet" href="/css/theme-final.css">
+</head>
+
+
+<body class="cortex-app-shell">
+
+
+  <main class="shell-workspace">
+
+    <iframe
+      id="cortexAppFrame"
+      class="shell-frame"
+      title="Cortex"
+      allow="autoplay; encrypted-media"
+    ></iframe>
+
+  </main>
+
+
+  <button
+    id="globalPlayerBubble"
+    class="global-player-bubble hidden"
+    type="button"
+    aria-label="Abrir player"
+    title="Abrir player"
+  >
+    &#9835;
+
+    <span
+      id="globalPlayerPlayingDot"
+      class="global-player-playing-dot"
+    ></span>
+
+  </button>
+
+
+  <footer
+    id="globalMusicPlayer"
+    class="global-music-player"
+  >
+
+    <button
+      id="globalPlayerClose"
+      class="global-player-close"
+      type="button"
+      aria-label="Recolher player"
+      title="Recolher player"
+    >
+      &times;
+    </button>
+
+
+    <div class="global-track">
+
+      <div class="global-cover-wrap">
+
+        <img
+          id="globalCover"
+          class="global-cover hidden"
+          alt="Capa do album"
+        >
+
+        <div
+          id="globalCoverPlaceholder"
+          class="global-cover-placeholder"
+        >
+          &#9835;
+        </div>
+
+      </div>
+
+
+      <div class="global-track-copy">
+
+        <strong id="globalTrackName">
+          Cortex Player
+        </strong>
+
+        <span id="globalTrackArtist">
+          Conecte o Spotify
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="global-center">
+
+      <div class="global-controls">
+
+        <button
+          id="globalPrevious"
+          type="button"
+          aria-label="Musica anterior"
+        >
+          &#9198;
+        </button>
+
+        <button
+          id="globalPlay"
+          class="global-main-play"
+          type="button"
+          aria-label="Play"
+        >
+          &#9654;
+        </button>
+
+        <button
+          id="globalNext"
+          type="button"
+          aria-label="Proxima musica"
+        >
+          &#9197;
+        </button>
+
+      </div>
+
+
+      <div class="global-progress">
+
+        <span id="globalCurrentTime">
+          0:00
+        </span>
+
+        <input
+          id="globalProgress"
+          type="range"
+          min="0"
+          max="1000"
+          value="0"
+        >
+
+        <span id="globalDuration">
+          0:00
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="global-right">
+
+
+      <button
+        id="openMusicPage"
+        class="global-music-page"
+        type="button"
+      >
+        &#9835;
+        <span>M&uacute;sica</span>
+      </button>
+
+
+      <div class="global-volume">
+
+        <span>
+          &#128266;
+        </span>
+
+        <input
+          id="globalVolume"
+          type="range"
+          min="0"
+          max="100"
+          value="55"
+        >
+
+        <small id="globalVolumeValue">
+          55%
+        </small>
+
+      </div>
+
+
+      <button
+        id="globalSpotifyConnect"
+        class="global-connect"
+        type="button"
+      >
+        Conectar
+      </button>
+
+    </div>
+
+
+  </footer>
+
+
+  <script src="/js/app-shell.js"></script>
+
+</body>
+</html>

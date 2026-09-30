@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>M&uacute;sica | Cortex</title>
+
+  <link
+    rel="stylesheet"
+    href="/css/musica-premium.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/css/ui-enhancements.css"
+  >
+
+  <script src="/js/ui-enhancements.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/themes.css"
+  >
+
+  <script src="/js/theme-manager.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="/css/cortex-brand.css"
+  >
+  <link rel="stylesheet" href="/css/theme-final.css">
+</head>
+
+<body class="music-view">
+
+  <aside class="sidebar">
+
+    <a
+      href="/"
+      class="sidebar-logo"
+    >
+
+      <div class="logo-box">
+        C
+      </div>
+
+      <div>
+        <strong>Cortex</strong>
+        <span>Study Platform</span>
+      </div>
+
+    </a>
+
+
+    <div class="sidebar-menu">
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Estudo
+        </div>
+
+        <a href="/" class="menu-item">
+          <span>&#8962;</span>
+          Dashboard
+        </a>
+
+        <a href="/questoes" class="menu-item">
+          <span>&#9635;</span>
+          Quest&otilde;es
+        </a>
+
+        <a href="/flashcards" class="menu-item">
+          <span>&#9648;</span>
+          Flashcards
+        </a>
+
+        <a href="/casos" class="menu-item">
+          <span>&#9877;</span>
+          Casos Cl&iacute;nicos
+        </a>
+
+        <a href="/laboratorio" class="menu-item">
+          <span>&#9879;</span>
+          Laborat&oacute;rio
+        </a>
+
+        <a href="/evolucao" class="menu-item">
+          <span>&#9998;</span>
+          Evolu&ccedil;&atilde;o
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          An&aacute;lise
+        </div>
+
+        <a href="/desempenho" class="menu-item">
+          <span>&#9682;</span>
+          Desempenho
+        </a>
+
+        <a href="/ranking" class="menu-item">
+          <span>&#9819;</span>
+          Ranking
+        </a>
+
+      </div>
+
+
+      <div class="menu-group">
+
+        <div class="menu-title">
+          Pessoal
+        </div>
+
+        <a href="/financas" class="menu-item">
+          <span>R$</span>
+          Finan&ccedil;as
+        </a>
+
+        <a
+          href="/musica"
+          class="menu-item active"
+        >
+          <span>&#9835;</span>
+          M&uacute;sica
+        </a>
+
+        <a href="/configuracoes" class="menu-item">
+          <span>&#9881;</span>
+          Configura&ccedil;&otilde;es
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-user">
+
+      <div
+        id="avatarSidebar"
+        class="avatar"
+      >
+        U
+      </div>
+
+      <div class="user-info">
+
+        <strong id="nomeSidebar">
+          Carregando...
+        </strong>
+
+        <span id="emailSidebar"></span>
+
+      </div>
+
+      <button
+        id="logoutSidebar"
+        class="logout-button"
+        type="button"
+        title="Sair"
+      >
+        &#8618;
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="main-area">
+
+    <header class="header">
+
+      <div class="header-title">
+        M&uacute;sica
+      </div>
+
+      <div class="header-user">
+
+        <div>
+
+          <strong id="nomeHeader">
+            Carregando...
+          </strong>
+
+          <span>
+            Cortex
+          </span>
+
+        </div>
+
+        <div
+          id="avatarHeader"
+          class="avatar header-avatar"
+        >
+          U
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <main class="music-page">
+
+      <section class="music-hero">
+
+        <div>
+
+          <div class="music-kicker">
+            <span></span>
+            Cortex Player
+          </div>
+
+          <h1>
+            Sua m&uacute;sica sem sair do estudo.
+          </h1>
+
+          <p>
+            Conecte sua conta Spotify, pesquise no cat&aacute;logo
+            e reproduza diretamente pelo Cortex.
+          </p>
+
+        </div>
+
+
+        <div class="music-connection-card">
+
+          <div>
+
+            <small>
+              Spotify
+            </small>
+
+            <strong id="spotifyConnectionText">
+              Verificando...
+            </strong>
+
+          </div>
+
+          <div
+            id="spotifyStatusDot"
+            class="spotify-status-dot"
+          ></div>
+
+          <button
+            id="spotifyConnect"
+            class="spotify-connect"
+            type="button"
+          >
+            Conectar Spotify
+          </button>
+
+          <button
+            id="spotifyDisconnect"
+            class="spotify-disconnect hidden"
+            type="button"
+          >
+            Desconectar
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <div
+        id="musicMessage"
+        class="music-message hidden"
+      ></div>
+
+
+      <section class="music-layout">
+
+        <div class="music-main-column">
+
+          <section class="music-panel search-panel">
+
+            <div class="panel-title">
+
+              <div>
+
+                <span class="music-badge">
+                  Cat&aacute;logo Spotify
+                </span>
+
+                <h2>
+                  Buscar m&uacute;sica
+                </h2>
+
+                <p>
+                  Procure por m&uacute;sica, artista ou &aacute;lbum.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <form
+              id="musicSearchForm"
+              class="music-search"
+            >
+
+              <input
+                id="musicSearch"
+                type="search"
+                autocomplete="off"
+                placeholder="Ex.: Drake, The Weeknd, Passionfruit..."
+              >
+
+              <button
+                id="musicSearchButton"
+                type="submit"
+              >
+                Buscar
+              </button>
+
+            </form>
+
+
+            <div
+              id="musicResults"
+              class="music-results"
+            >
+
+              <div class="music-empty">
+                Conecte o Spotify e pesquise uma m&uacute;sica.
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <aside class="music-player-column">
+
+          <section class="music-panel player-panel">
+
+            <div
+              id="deviceStatus"
+              class="device-status"
+            >
+              Cortex Player offline
+            </div>
+
+
+            <div class="now-playing-cover-wrap">
+
+              <img
+                id="nowPlayingCover"
+                class="now-playing-cover hidden"
+                alt="Capa do album"
+              >
+
+              <div
+                id="coverPlaceholder"
+                class="cover-placeholder"
+              >
+                &#9835;
+              </div>
+
+            </div>
+
+
+            <div class="now-playing-copy">
+
+              <span>
+                Tocando agora
+              </span>
+
+              <h2 id="nowPlayingName">
+                Nenhuma m&uacute;sica
+              </h2>
+
+              <p id="nowPlayingArtist">
+                Escolha uma faixa nos resultados.
+              </p>
+
+              <a
+                id="openSpotifyTrack"
+                class="spotify-track-link hidden"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Abrir no Spotify
+              </a>
+
+            </div>
+
+
+            <div class="player-controls">
+
+              <button
+                id="previousTrack"
+                type="button"
+                aria-label="Anterior"
+              >
+                &#9198;
+              </button>
+
+              <button
+                id="togglePlayback"
+                class="play-main"
+                type="button"
+                aria-label="Play"
+              >
+                &#9654;
+              </button>
+
+              <button
+                id="nextTrack"
+                type="button"
+                aria-label="Pr&oacute;xima"
+              >
+                &#9197;
+              </button>
+
+            </div>
+
+
+            <div class="progress-area">
+
+              <input
+                id="trackProgress"
+                type="range"
+                min="0"
+                max="1000"
+                value="0"
+              >
+
+              <div class="time-row">
+
+                <span id="currentTime">
+                  0:00
+                </span>
+
+                <span id="durationTime">
+                  0:00
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="volume-area">
+
+              <span>
+                &#128266;
+              </span>
+
+              <input
+                id="playerVolume"
+                type="range"
+                min="0"
+                max="100"
+                value="55"
+              >
+
+              <span id="volumeValue">
+                55%
+              </span>
+
+            </div>
+
+
+            <div class="spotify-attribution">
+              Playback fornecido pelo Spotify
+            </div>
+
+          </section>
+
+        </aside>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <script src="/js/musica.js"></script>
+  <script src="/js/cortex-brand.js"></script>
+
+</body>
+</html>

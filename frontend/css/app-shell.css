@@ -1,0 +1,1453 @@
+@import url("/css/app.css");
+
+
+/* =========================================================
+   CORTEX SHELL
+========================================================= */
+
+* {
+  box-sizing:
+    border-box;
+}
+
+
+html,
+body {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  overflow:
+    hidden;
+}
+
+
+body.cortex-app-shell {
+  margin:
+    0;
+
+  background:
+    #050505;
+}
+
+
+.hidden {
+  display:
+    none !important;
+}
+
+
+.shell-workspace {
+  width:
+    100%;
+
+  height:
+    100vh;
+
+  overflow:
+    hidden;
+}
+
+
+.shell-frame {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  border:
+    0;
+
+  background:
+    #050505;
+}
+
+
+/* =========================================================
+   BOTAO FLUTUANTE
+========================================================= */
+
+.global-player-bubble {
+  position:
+    fixed;
+
+  z-index:
+    100001;
+
+  right:
+    22px;
+
+  bottom:
+    22px;
+
+
+  width:
+    48px;
+
+  height:
+    48px;
+
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+
+  border:
+    1px solid
+    rgba(249,115,22,.24);
+
+  border-radius:
+    50%;
+
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(28,28,28,.98),
+      rgba(10,10,10,.99)
+    );
+
+
+  color:
+    #fb923c;
+
+
+  font-size:
+    20px;
+
+
+  cursor:
+    pointer;
+
+
+  box-shadow:
+    0 14px 38px
+    rgba(0,0,0,.34),
+    0 0 24px
+    rgba(249,115,22,.08);
+
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+
+.global-player-bubble:hover {
+  transform:
+    translateY(-2px)
+    scale(1.04);
+
+  border-color:
+    rgba(249,115,22,.42);
+
+  box-shadow:
+    0 17px 42px
+    rgba(0,0,0,.38),
+    0 0 28px
+    rgba(249,115,22,.13);
+}
+
+
+.global-player-playing-dot {
+  position:
+    absolute;
+
+  top:
+    6px;
+
+  right:
+    6px;
+
+
+  width:
+    8px;
+
+  height:
+    8px;
+
+
+  border:
+    2px solid
+    #101010;
+
+  border-radius:
+    50%;
+
+
+  background:
+    #1ed760;
+
+
+  box-shadow:
+    0 0 8px
+    rgba(30,215,96,.55);
+}
+
+
+.global-player-bubble.paused
+.global-player-playing-dot {
+  background:
+    #777;
+
+  box-shadow:
+    none;
+}
+
+
+/* =========================================================
+   PLAYER FLUTUANTE
+========================================================= */
+
+.global-music-player {
+  --shell-accent:
+    #f97316;
+
+  --shell-accent-2:
+    #fb923c;
+
+
+  position:
+    fixed;
+
+  z-index:
+    100000;
+
+
+  left:
+    50%;
+
+  bottom:
+    20px;
+
+
+  width:
+    min(
+      940px,
+      calc(100vw - 40px)
+    );
+
+
+  min-height:
+    64px;
+
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(190px,1fr)
+    minmax(250px,1.25fr)
+    minmax(190px,1fr);
+
+
+  align-items:
+    center;
+
+
+  gap:
+    15px;
+
+
+  padding:
+    8px 48px 8px 10px;
+
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  border-radius:
+    18px;
+
+
+  background:
+    rgba(8,8,8,.975);
+
+
+  box-shadow:
+    0 22px 60px
+    rgba(0,0,0,.44),
+    0 0 30px
+    rgba(249,115,22,.035);
+
+
+  backdrop-filter:
+    blur(24px);
+
+  -webkit-backdrop-filter:
+    blur(24px);
+
+
+  opacity:
+    0;
+
+
+  pointer-events:
+    none;
+
+
+  transform:
+    translate(
+      -50%,
+      25px
+    )
+    scale(.98);
+
+
+  transition:
+    opacity .20s ease,
+    transform .20s ease;
+}
+
+
+body.global-player-open
+.global-music-player {
+  opacity:
+    1;
+
+  pointer-events:
+    auto;
+
+  transform:
+    translate(
+      -50%,
+      0
+    )
+    scale(1);
+}
+
+
+body.global-player-open
+.global-player-bubble {
+  opacity:
+    0;
+
+  pointer-events:
+    none;
+
+  transform:
+    translateY(10px)
+    scale(.85);
+}
+
+
+/* =========================================================
+   FECHAR
+========================================================= */
+
+.global-player-close {
+  position:
+    absolute;
+
+  top:
+    8px;
+
+  right:
+    8px;
+
+
+  width:
+    30px;
+
+  height:
+    30px;
+
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+
+  border:
+    0;
+
+  border-radius:
+    9px;
+
+
+  background:
+    rgba(255,255,255,.025);
+
+
+  color:
+    #666;
+
+
+  font:
+    inherit;
+
+  font-size:
+    18px;
+
+
+  cursor:
+    pointer;
+
+
+  transition:
+    color .16s ease,
+    background .16s ease;
+}
+
+
+.global-player-close:hover {
+  background:
+    rgba(255,255,255,.055);
+
+  color:
+    #eee;
+}
+
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.global-track {
+  min-width:
+    0;
+
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+
+  gap:
+    10px;
+}
+
+
+.global-cover-wrap {
+  width:
+    46px;
+
+  height:
+    46px;
+
+
+  flex:
+    0 0 auto;
+
+
+  overflow:
+    hidden;
+
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    9px;
+
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(249,115,22,.10),
+      transparent 65%
+    ),
+    #090909;
+}
+
+
+.global-cover {
+  width:
+    100%;
+
+  height:
+    100%;
+
+
+  display:
+    block;
+
+
+  object-fit:
+    contain;
+}
+
+
+.global-cover-placeholder {
+  color:
+    rgba(255,255,255,.13);
+
+  font-size:
+    21px;
+}
+
+
+.global-track-copy {
+  min-width:
+    0;
+}
+
+
+.global-track-copy strong,
+.global-track-copy span {
+  display:
+    block;
+
+
+  overflow:
+    hidden;
+
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+.global-track-copy strong {
+  color:
+    #ededed;
+
+  font-size:
+    11px;
+
+  font-weight:
+    750;
+}
+
+
+.global-track-copy span {
+  margin-top:
+    3px;
+
+
+  color:
+    #626262;
+
+  font-size:
+    8px;
+}
+
+
+/* =========================================================
+   CENTER
+========================================================= */
+
+.global-center {
+  min-width:
+    0;
+}
+
+
+.global-controls {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+
+  gap:
+    9px;
+}
+
+
+.global-controls button {
+  width:
+    31px;
+
+  height:
+    31px;
+
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+
+  border:
+    0;
+
+  border-radius:
+    50%;
+
+
+  background:
+    transparent;
+
+
+  color:
+    #8b8b8b;
+
+
+  font:
+    inherit;
+
+  font-size:
+    13px;
+
+
+  cursor:
+    pointer;
+
+
+  transition:
+    color .16s ease,
+    transform .16s ease;
+}
+
+
+.global-controls button:hover {
+  color:
+    #fff;
+
+  transform:
+    scale(1.06);
+}
+
+
+.global-controls
+.global-main-play {
+  width:
+    38px;
+
+  height:
+    38px;
+
+
+  background:
+    #f3f3f3;
+
+
+  color:
+    #070707;
+
+
+  box-shadow:
+    0 7px 20px
+    rgba(0,0,0,.24);
+}
+
+
+/* =========================================================
+   PROGRESSO
+========================================================= */
+
+.global-progress {
+  display:
+    grid;
+
+
+  grid-template-columns:
+    32px
+    1fr
+    32px;
+
+
+  align-items:
+    center;
+
+
+  gap:
+    6px;
+
+
+  margin-top:
+    4px;
+}
+
+
+.global-progress span {
+  color:
+    #4e4e4e;
+
+  font-size:
+    7px;
+
+  text-align:
+    center;
+}
+
+
+.global-progress input,
+.global-volume input {
+  width:
+    100%;
+
+
+  accent-color:
+    var(--shell-accent);
+
+
+  cursor:
+    pointer;
+}
+
+
+/* =========================================================
+   RIGHT
+========================================================= */
+
+.global-right {
+  min-width:
+    0;
+
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    flex-end;
+
+
+  gap:
+    8px;
+}
+
+
+.global-music-page,
+.global-connect {
+  min-height:
+    32px;
+
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+
+  gap:
+    6px;
+
+
+  border:
+    1px solid
+    rgba(255,255,255,.065);
+
+  border-radius:
+    9px;
+
+
+  background:
+    rgba(255,255,255,.022);
+
+
+  padding:
+    0 9px;
+
+
+  color:
+    #858585;
+
+
+  font:
+    inherit;
+
+  font-size:
+    8px;
+
+  font-weight:
+    700;
+
+
+  cursor:
+    pointer;
+}
+
+
+.global-music-page:hover {
+  border-color:
+    rgba(249,115,22,.18);
+
+  color:
+    var(--shell-accent-2);
+}
+
+
+.global-connect {
+  border:
+    0;
+
+  background:
+    #1ed760;
+
+  color:
+    #071009;
+}
+
+
+.global-connect.connected {
+  width:
+    8px;
+
+  min-width:
+    8px;
+
+  height:
+    8px;
+
+  min-height:
+    8px;
+
+
+  overflow:
+    hidden;
+
+
+  border-radius:
+    50%;
+
+
+  background:
+    #1ed760;
+
+
+  padding:
+    0;
+
+
+  color:
+    transparent;
+
+  font-size:
+    0;
+
+
+  box-shadow:
+    0 0 8px
+    rgba(30,215,96,.35);
+
+
+  cursor:
+    default;
+}
+
+
+/* =========================================================
+   VOLUME
+========================================================= */
+
+.global-volume {
+  width:
+    115px;
+
+
+  display:
+    grid;
+
+
+  grid-template-columns:
+    auto
+    1fr
+    25px;
+
+
+  align-items:
+    center;
+
+
+  gap:
+    5px;
+
+
+  color:
+    #555;
+
+  font-size:
+    8px;
+}
+
+
+.global-volume small {
+  color:
+    #555;
+
+  font-size:
+    7px;
+}
+
+
+/* =========================================================
+   PINK GLITTER
+========================================================= */
+
+html[data-theme="pink-glitter"]
+.global-player-bubble {
+  border-color:
+    rgba(255,166,214,.25);
+
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(65,22,54,.98),
+      rgba(32,9,26,.99)
+    );
+
+
+  color:
+    #ff9dcc;
+
+
+  box-shadow:
+    0 14px 38px
+    rgba(20,0,16,.35),
+    0 0 24px
+    rgba(255,105,180,.10);
+}
+
+
+html[data-theme="pink-glitter"]
+.global-music-player {
+  --shell-accent:
+    #ff69b4;
+
+  --shell-accent-2:
+    #ff9dcc;
+
+
+  border-color:
+    rgba(255,166,214,.17);
+
+
+  background:
+    rgba(39,10,31,.975);
+
+
+  box-shadow:
+    0 22px 60px
+    rgba(20,0,16,.44),
+    0 0 30px
+    rgba(255,105,180,.05);
+}
+
+
+html[data-theme="pink-glitter"]
+.global-cover-wrap {
+  border-color:
+    rgba(255,166,214,.14);
+
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255,105,180,.18),
+      transparent 65%
+    ),
+    #26091f;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .global-music-player {
+    width:
+      calc(100vw - 24px);
+
+
+    grid-template-columns:
+      minmax(140px,1fr)
+      auto;
+
+
+    padding-right:
+      43px;
+  }
+
+
+  .global-right {
+    display:
+      none;
+  }
+
+
+  .global-player-bubble {
+    right:
+      16px;
+
+    bottom:
+      16px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .global-music-player {
+    bottom:
+      10px;
+
+
+    width:
+      calc(100vw - 18px);
+
+
+    grid-template-columns:
+      minmax(105px,1fr)
+      auto;
+
+
+    gap:
+      5px;
+
+
+    padding:
+      7px 38px 7px 7px;
+
+
+    border-radius:
+      15px;
+  }
+
+
+  .global-cover-wrap {
+    width:
+      38px;
+
+    height:
+      38px;
+  }
+
+
+  .global-track-copy strong {
+    font-size:
+      9px;
+  }
+
+
+  .global-track-copy span {
+    font-size:
+      7px;
+  }
+
+
+  .global-progress {
+    display:
+      none;
+  }
+
+
+  .global-controls {
+    gap:
+      3px;
+  }
+
+
+  .global-controls button {
+    width:
+      28px;
+
+    height:
+      28px;
+  }
+
+
+  .global-controls
+  .global-main-play {
+    width:
+      35px;
+
+    height:
+      35px;
+  }
+
+
+  .global-player-bubble {
+    width:
+      44px;
+
+    height:
+      44px;
+
+
+    right:
+      13px;
+
+    bottom:
+      13px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .global-music-player,
+  .global-player-bubble {
+    transition:
+      none !important;
+  }
+
+}
+
+/* CORTEX PLAYER THEME SYNC START */
+
+
+/* =========================================================
+   DARK ORANGE
+========================================================= */
+
+html[data-theme="dark-orange"]
+body.cortex-app-shell
+.global-player-bubble {
+  right:
+    22px !important;
+
+  border-color:
+    rgba(249,115,22,.27) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(27,17,11,.99),
+      rgba(8,8,8,.99)
+    ) !important;
+
+  color:
+    #fb923c !important;
+
+  box-shadow:
+    0 14px 38px
+    rgba(0,0,0,.35),
+    0 0 24px
+    rgba(249,115,22,.10) !important;
+}
+
+
+html[data-theme="dark-orange"]
+body.cortex-app-shell
+.global-music-player {
+  --shell-accent:
+    #f97316 !important;
+
+  --shell-accent-2:
+    #fb923c !important;
+
+  border-color:
+    rgba(249,115,22,.16) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,12,8,.985),
+      rgba(6,6,6,.99)
+    ) !important;
+
+  box-shadow:
+    0 22px 60px
+    rgba(0,0,0,.46),
+    0 0 28px
+    rgba(249,115,22,.05) !important;
+}
+
+
+/* =========================================================
+   PINK GLITTER
+========================================================= */
+
+html[data-theme="pink-glitter"]
+body.cortex-app-shell
+.global-player-bubble {
+  /*
+   * Pet fica no canto direito.
+   * Musica fica ao lado dele, sem sobrepor.
+   */
+  right:
+    86px !important;
+
+  border-color:
+    rgba(255,166,214,.34) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(74,24,61,.99),
+      rgba(35,8,28,.99)
+    ) !important;
+
+  color:
+    #ffb2da !important;
+
+  box-shadow:
+    0 14px 38px
+    rgba(28,0,22,.38),
+    0 0 26px
+    rgba(255,105,180,.16) !important;
+}
+
+
+html[data-theme="pink-glitter"]
+body.cortex-app-shell
+.global-music-player {
+  --shell-accent:
+    #ff69b4 !important;
+
+  --shell-accent-2:
+    #ffacd6 !important;
+
+  border-color:
+    rgba(255,166,214,.24) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(61,19,50,.985),
+      rgba(27,7,22,.99)
+    ) !important;
+
+  box-shadow:
+    0 22px 60px
+    rgba(27,0,22,.48),
+    0 0 34px
+    rgba(255,105,180,.075) !important;
+}
+
+
+html[data-theme="pink-glitter"]
+body.cortex-app-shell
+.global-player-close,
+
+html[data-theme="pink-glitter"]
+body.cortex-app-shell
+.global-music-page {
+  border-color:
+    rgba(255,166,214,.14) !important;
+
+  background:
+    rgba(255,105,180,.055) !important;
+
+  color:
+    #efb0d1 !important;
+}
+
+
+/* =========================================================
+   BLUE BLACK
+========================================================= */
+
+html[data-theme="blue-black"]
+body.cortex-app-shell {
+  background:
+    #01050b !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-player-bubble {
+  right:
+    22px !important;
+
+  border-color:
+    rgba(66,159,255,.34) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8,30,57,.99),
+      rgba(2,8,17,.99)
+    ) !important;
+
+  color:
+    #6ab8ff !important;
+
+  box-shadow:
+    0 14px 38px
+    rgba(0,16,38,.42),
+    0 0 28px
+    rgba(22,135,255,.15) !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-player-playing-dot {
+  background:
+    #33c8ff !important;
+
+  box-shadow:
+    0 0 10px
+    rgba(51,200,255,.62) !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-player-bubble.paused
+.global-player-playing-dot {
+  background:
+    #587084 !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-music-player {
+  --shell-accent:
+    #1687ff !important;
+
+  --shell-accent-2:
+    #6ab8ff !important;
+
+  border-color:
+    rgba(69,161,255,.22) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7,25,47,.985),
+      rgba(1,7,15,.995)
+    ) !important;
+
+  box-shadow:
+    0 22px 60px
+    rgba(0,17,42,.52),
+    0 0 36px
+    rgba(22,135,255,.07) !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-cover-wrap {
+  border-color:
+    rgba(72,164,255,.18) !important;
+
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(22,135,255,.20),
+      transparent 65%
+    ),
+    #03101f !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-main-play {
+  background:
+    linear-gradient(
+      145deg,
+      #76c4ff,
+      #299cff
+    ) !important;
+
+  color:
+    #00101f !important;
+
+  box-shadow:
+    0 7px 24px
+    rgba(20,137,255,.22) !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-player-close,
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-music-page {
+  border-color:
+    rgba(73,161,255,.15) !important;
+
+  background:
+    rgba(22,135,255,.055) !important;
+
+  color:
+    #a4d4ff !important;
+}
+
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-player-close:hover,
+
+html[data-theme="blue-black"]
+body.cortex-app-shell
+.global-music-page:hover {
+  border-color:
+    rgba(83,172,255,.32) !important;
+
+  background:
+    rgba(22,135,255,.10) !important;
+
+  color:
+    #d9eeff !important;
+}
+
+
+/* =========================================================
+   MOBILE PET / MUSIC SEPARATION
+========================================================= */
+
+@media (max-width: 600px) {
+
+  html[data-theme="pink-glitter"]
+  body.cortex-app-shell
+  .global-player-bubble {
+    right:
+      72px !important;
+  }
+
+}
+
+
+/* CORTEX PLAYER THEME SYNC END */

@@ -105,8 +105,7 @@ form.addEventListener(
       }
 
 
-      window.location.href =
-        "/";
+      window.location.href = "/app";
 
     }
     catch (error) {

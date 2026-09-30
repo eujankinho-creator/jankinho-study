@@ -3,8 +3,8 @@
 ========================================================= */
 
 .practice-view {
-  --practice-accent: #f97316;
-  --practice-accent-soft: #fb923c;
+  --practice-accent: var(--theme-accent);
+  --practice-accent-soft: var(--theme-accent-2);
   --practice-panel: rgba(14,14,14,.88);
   --practice-panel-2: rgba(9,9,9,.92);
   --practice-border: rgba(255,255,255,.075);
@@ -116,7 +116,7 @@
   background:
     radial-gradient(
       circle at 85% 10%,
-      rgba(249,115,22,.10),
+      rgba(var(--theme-accent-rgb),.10),
       transparent 30%
     ),
     linear-gradient(
@@ -300,10 +300,10 @@
     translateY(-1px);
 
   border-color:
-    rgba(249,115,22,.24);
+    rgba(var(--theme-accent-rgb),.24);
 
   background:
-    rgba(249,115,22,.06);
+    rgba(var(--theme-accent-rgb),.06);
 }
 
 
@@ -411,7 +411,7 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(249,115,22,.40),
+      rgba(var(--theme-accent-rgb),.40),
       transparent
     );
 
@@ -425,7 +425,7 @@
     translateY(-2px);
 
   border-color:
-    rgba(249,115,22,.14);
+    rgba(var(--theme-accent-rgb),.14);
 
   box-shadow:
     0 17px 38px
@@ -507,7 +507,7 @@
 
 .lab-view .lab-panel:hover {
   border-color:
-    rgba(249,115,22,.10);
+    rgba(var(--theme-accent-rgb),.10);
 
   box-shadow:
     0 19px 48px
@@ -585,21 +585,21 @@
 
 .lab-view .control-tab.active {
   border-color:
-    rgba(249,115,22,.20);
+    rgba(var(--theme-accent-rgb),.20);
 
   background:
     linear-gradient(
       90deg,
-      rgba(249,115,22,.12),
-      rgba(249,115,22,.035)
+      rgba(var(--theme-accent-rgb),.12),
+      rgba(var(--theme-accent-rgb),.035)
     );
 
   color:
-    #fb923c;
+    var(--theme-accent-2);
 
   box-shadow:
     inset 2px 0 0
-    #f97316;
+    var(--theme-accent);
 }
 
 
@@ -680,7 +680,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   background:
     linear-gradient(
       90deg,
-      rgba(249,115,22,.32),
+      rgba(var(--theme-accent-rgb),.32),
       rgba(255,255,255,.08)
     );
 }
@@ -712,13 +712,13 @@ input[type="range"]::-webkit-slider-thumb {
     50%;
 
   background:
-    #fb923c;
+    var(--theme-accent-2);
 
   box-shadow:
     0 0 0 1px
-    rgba(249,115,22,.28),
+    rgba(var(--theme-accent-rgb),.28),
     0 0 14px
-    rgba(249,115,22,.20);
+    rgba(var(--theme-accent-rgb),.20);
 }
 
 
@@ -753,7 +753,7 @@ input[type="range"]::-moz-range-thumb {
     50%;
 
   background:
-    #fb923c;
+    var(--theme-accent-2);
 }
 
 
@@ -904,13 +904,13 @@ input[type="range"]::-moz-range-thumb {
 
 .lab-view .interpretation-highlight {
   border-color:
-    rgba(249,115,22,.14);
+    rgba(var(--theme-accent-rgb),.14);
 
   background:
     linear-gradient(
       135deg,
-      rgba(249,115,22,.08),
-      rgba(249,115,22,.025)
+      rgba(var(--theme-accent-rgb),.08),
+      rgba(var(--theme-accent-rgb),.025)
     );
 }
 
@@ -982,7 +982,7 @@ input[type="range"]::-moz-range-thumb {
   background:
     radial-gradient(
       circle at 86% 12%,
-      rgba(249,115,22,.10),
+      rgba(var(--theme-accent-rgb),.10),
       transparent 30%
     ),
     linear-gradient(
@@ -1049,10 +1049,10 @@ input[type="range"]::-moz-range-thumb {
 
 .evolution-view .training-badge {
   border-color:
-    rgba(249,115,22,.20);
+    rgba(var(--theme-accent-rgb),.20);
 
   background:
-    rgba(249,115,22,.075);
+    rgba(var(--theme-accent-rgb),.075);
 
   padding:
     7px 11px;
@@ -1133,7 +1133,7 @@ input[type="range"]::-moz-range-thumb {
 
 .evolution-view .evolution-panel:hover {
   border-color:
-    rgba(249,115,22,.10);
+    rgba(var(--theme-accent-rgb),.10);
 
   box-shadow:
     0 21px 50px
@@ -1177,13 +1177,13 @@ input[type="range"]::-moz-range-thumb {
     42px;
 
   border-color:
-    rgba(249,115,22,.12);
+    rgba(var(--theme-accent-rgb),.12);
 
   background:
-    rgba(249,115,22,.055);
+    rgba(var(--theme-accent-rgb),.055);
 
   color:
-    #fb923c;
+    var(--theme-accent-2);
 }
 
 
@@ -1240,11 +1240,11 @@ input[type="range"]::-moz-range-thumb {
 
 .evolution-view .field select:focus {
   border-color:
-    rgba(249,115,22,.40);
+    rgba(var(--theme-accent-rgb),.40);
 
   box-shadow:
     0 0 0 3px
-    rgba(249,115,22,.07);
+    rgba(var(--theme-accent-rgb),.07);
 }
 
 
@@ -1262,7 +1262,7 @@ input[type="range"]::-moz-range-thumb {
     11px;
 
   background:
-    rgba(249,115,22,.035);
+    rgba(var(--theme-accent-rgb),.035);
 
   color:
     #8c8c8c;
@@ -1302,8 +1302,8 @@ input[type="range"]::-moz-range-thumb {
   background:
     linear-gradient(
       135deg,
-      #f97316,
-      #fb923c
+      var(--theme-accent),
+      var(--theme-accent-2)
     );
 
   color:
@@ -1311,7 +1311,7 @@ input[type="range"]::-moz-range-thumb {
 
   box-shadow:
     0 10px 28px
-    rgba(249,115,22,.16);
+    rgba(var(--theme-accent-rgb),.16);
 }
 
 
@@ -1321,7 +1321,7 @@ input[type="range"]::-moz-range-thumb {
 
   box-shadow:
     0 14px 32px
-    rgba(249,115,22,.21);
+    rgba(var(--theme-accent-rgb),.21);
 }
 
 
@@ -1342,7 +1342,7 @@ input[type="range"]::-moz-range-thumb {
     translateY(-1px);
 
   border-color:
-    rgba(249,115,22,.18);
+    rgba(var(--theme-accent-rgb),.18);
 }
 
 
@@ -1396,13 +1396,13 @@ input[type="range"]::-moz-range-thumb {
 
 .evolution-view .patient-box {
   border-color:
-    rgba(249,115,22,.13);
+    rgba(var(--theme-accent-rgb),.13);
 
   background:
     linear-gradient(
       135deg,
-      rgba(249,115,22,.065),
-      rgba(249,115,22,.02)
+      rgba(var(--theme-accent-rgb),.065),
+      rgba(var(--theme-accent-rgb),.02)
     );
 
   padding:
@@ -1469,7 +1469,7 @@ input[type="range"]::-moz-range-thumb {
     #ededed;
 
   caret-color:
-    #fb923c;
+    var(--theme-accent-2);
 
   box-shadow:
     inset 0 1px 18px
@@ -1492,14 +1492,14 @@ input[type="range"]::-moz-range-thumb {
 .evolution-view
 .answer-panel textarea:focus {
   border-color:
-    rgba(249,115,22,.36);
+    rgba(var(--theme-accent-rgb),.36);
 
   background:
     rgba(8,8,8,.88);
 
   box-shadow:
     0 0 0 3px
-    rgba(249,115,22,.06),
+    rgba(var(--theme-accent-rgb),.06),
     inset 0 1px 18px
     rgba(0,0,0,.17);
 }
@@ -1533,13 +1533,13 @@ input[type="range"]::-moz-range-thumb {
     105px;
 
   border-color:
-    rgba(249,115,22,.20);
+    rgba(var(--theme-accent-rgb),.20);
 
   background:
     radial-gradient(
       circle at center,
-      rgba(249,115,22,.09),
-      rgba(249,115,22,.025)
+      rgba(var(--theme-accent-rgb),.09),
+      rgba(var(--theme-accent-rgb),.025)
     );
 
   box-shadow:
@@ -1659,7 +1659,7 @@ input[type="range"]::-moz-range-thumb {
   background:
     radial-gradient(
       circle at 85% 0%,
-      rgba(249,115,22,.09),
+      rgba(var(--theme-accent-rgb),.09),
       transparent 35%
     ),
     linear-gradient(
@@ -1691,10 +1691,10 @@ input[type="range"]::-moz-range-thumb {
 
   border:
     1px solid
-    rgba(249,115,22,.14);
+    rgba(var(--theme-accent-rgb),.14);
 
   background:
-    rgba(249,115,22,.07);
+    rgba(var(--theme-accent-rgb),.07);
 }
 
 

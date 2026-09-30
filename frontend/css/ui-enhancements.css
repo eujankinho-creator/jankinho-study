@@ -42,13 +42,13 @@ body.ui-ready {
   background:
     linear-gradient(
       90deg,
-      #f97316,
-      #fb923c
+      var(--theme-accent),
+      var(--theme-accent-2)
     );
 
   box-shadow:
     0 0 12px
-    rgba(249,115,22,.45);
+    rgba(var(--theme-accent-rgb),.45);
 
   transition:
     width .22s ease,
@@ -198,10 +198,10 @@ body.ui-ready {
 
 .study-timer-button:hover {
   border-color:
-    rgba(249,115,22,.25);
+    rgba(var(--theme-accent-rgb),.25);
 
   background:
-    rgba(249,115,22,.06);
+    rgba(var(--theme-accent-rgb),.06);
 
   color:
     #fff;
@@ -210,13 +210,13 @@ body.ui-ready {
 
 .study-timer-button.running {
   border-color:
-    rgba(249,115,22,.28);
+    rgba(var(--theme-accent-rgb),.28);
 
   background:
-    rgba(249,115,22,.08);
+    rgba(var(--theme-accent-rgb),.08);
 
   color:
-    #fb923c;
+    var(--theme-accent-2);
 }
 
 
@@ -256,11 +256,11 @@ body.ui-ready {
 .study-timer-button.running
 .study-timer-dot {
   background:
-    #f97316;
+    var(--theme-accent);
 
   box-shadow:
     0 0 9px
-    rgba(249,115,22,.7);
+    rgba(var(--theme-accent-rgb),.7);
 
   animation:
     timerPulse 1.4s
@@ -357,12 +357,12 @@ body.ui-ready {
 
   border:
     1px solid
-    rgba(249,115,22,.12);
+    rgba(var(--theme-accent-rgb),.12);
 
   border-radius: 14px;
 
   background:
-    rgba(249,115,22,.035);
+    rgba(var(--theme-accent-rgb),.035);
 
   padding: 16px;
 
@@ -374,7 +374,7 @@ body.ui-ready {
   display: block;
 
   color:
-    #fb923c;
+    var(--theme-accent-2);
 
   font-size: 28px;
 
@@ -475,7 +475,7 @@ body.ui-ready {
   border: 0;
 
   background:
-    #f97316;
+    var(--theme-accent);
 
   color:
     #050505;
