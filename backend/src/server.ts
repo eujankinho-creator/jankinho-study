@@ -44,6 +44,8 @@ import {
   connectSigaa,
   sigaaStatus,
   sigaaOverview,
+  sigaaCourseDetail,
+  downloadSigaaCourseFile,
   disconnectSigaa,
 } from "./sigaa";
 
@@ -3213,6 +3215,160 @@ const server =
           const resultado =
             await sigaaOverview(
               usuarioId,
+              force
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
+          );
+
+          return;
+        }
+
+
+
+
+        const matchSigaaCourseFile =
+          caminho.match(
+            /^\/api\/sigaa\/courses\/([^/]+)\/files\/([^/]+)\/download$/
+          );
+
+
+        if (
+          matchSigaaCourseFile &&
+          metodo ===
+            "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const result =
+            await downloadSigaaCourseFile(
+              usuarioId,
+              decodeURIComponent(
+                matchSigaaCourseFile[1]
+              ),
+              decodeURIComponent(
+                matchSigaaCourseFile[2]
+              )
+            );
+
+
+          if (
+            result.status !==
+              200 ||
+            !result.buffer
+          ) {
+
+            json(
+              response,
+              result.status,
+              {
+                error:
+                  result.error ||
+                  "Nao foi possivel baixar o arquivo.",
+              }
+            );
+
+            return;
+          }
+
+
+          const safeFilename =
+            String(
+              result.filename ||
+              "arquivo"
+            )
+              .replace(
+                /[\r\n"]/g,
+                "_"
+              );
+
+
+          response.writeHead(
+            200,
+            {
+              "Content-Type":
+                result.contentType ||
+                "application/octet-stream",
+
+              "Content-Length":
+                String(
+                  result.buffer.length
+                ),
+
+              "Content-Disposition":
+                "attachment; filename=\"" +
+                safeFilename +
+                "\"; filename*=UTF-8''" +
+                encodeURIComponent(
+                  safeFilename
+                ),
+
+              "Cache-Control":
+                "private, no-store",
+            }
+          );
+
+
+          response.end(
+            result.buffer
+          );
+
+          return;
+        }
+
+
+        const matchSigaaCourseDetail =
+          caminho.match(
+            /^\/api\/sigaa\/courses\/([^/]+)$/
+          );
+
+
+        if (
+          matchSigaaCourseDetail &&
+          metodo ===
+            "GET"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const force =
+            url.searchParams.get(
+              "force"
+            ) ===
+            "1";
+
+
+          const resultado =
+            await sigaaCourseDetail(
+              usuarioId,
+              decodeURIComponent(
+                matchSigaaCourseDetail[1]
+              ),
               force
             );
 

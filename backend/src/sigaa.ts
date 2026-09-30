@@ -622,6 +622,1365 @@ async function readNotice(
 }
 
 
+function isoDate(
+  value:
+    any
+) {
+
+  if (!value) {
+    return null;
+  }
+
+  const date =
+    new Date(value);
+
+  return Number.isNaN(
+    date.getTime()
+  )
+    ? null
+    : date.toISOString();
+
+}
+
+
+function safeText(
+  value:
+    any,
+  maxLength =
+    4000
+) {
+
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim()
+    .slice(
+      0,
+      maxLength
+    );
+
+}
+
+
+async function loadStudentCourses(
+  session:
+    SigaaSession
+) {
+
+  if (
+    session.courses &&
+    session.courses.length
+  ) {
+
+    return session.courses;
+
+  }
+
+
+  const bonds =
+    await withTimeout(
+      session.account
+        .getActiveBonds(),
+      15000,
+      "Timeout ao carregar vinculos."
+    );
+
+
+  const studentBond =
+    Array
+      .from(
+        bonds as any[]
+      )
+      .find(
+        function (
+          bond:
+            any
+        ) {
+
+          return (
+            bond.type ===
+            "student"
+          );
+
+        }
+      ) as any;
+
+
+  if (!studentBond) {
+
+    throw new Error(
+      "Nenhum vinculo ativo de estudante foi encontrado."
+    );
+
+  }
+
+
+  const rawCourses =
+    await withTimeout(
+      studentBond
+        .getCourses(),
+      18000,
+      "Timeout ao carregar turmas."
+    );
+
+
+  session.courses =
+    Array.from(
+      rawCourses as any[]
+    );
+
+
+  return session.courses;
+
+}
+
+
+async function findCourse(
+  session:
+    SigaaSession,
+  courseId:
+    string
+) {
+
+  const courses =
+    await loadStudentCourses(
+      session
+    );
+
+
+  return courses.find(
+    function (
+      course:
+        any
+    ) {
+
+      return (
+        String(
+          course.id ||
+          ""
+        ) ===
+        courseId
+      );
+
+    }
+  );
+
+}
+
+
+async function safeCourseSection(
+  name:
+    string,
+  loader:
+    () => Promise<any>
+) {
+
+  try {
+
+    return {
+      available:
+        true,
+
+      data:
+        await withTimeout(
+          loader(),
+          15000,
+          "Timeout em " +
+          name +
+          "."
+        ),
+    };
+
+  }
+  catch (
+    error
+  ) {
+
+    console.warn(
+      "SIGAA course section:",
+      name,
+      error instanceof Error
+        ? error.message
+        : String(error)
+    );
+
+
+    return {
+      available:
+        false,
+
+      data:
+        null,
+
+      error:
+        "Esta informacao nao esta disponivel no SIGAA para esta turma.",
+    };
+
+  }
+
+}
+
+
+function serializeGrades(
+  groups:
+    any[]
+) {
+
+  return groups.map(
+    function (
+      group:
+        any
+    ) {
+
+      return {
+        name:
+          safeText(
+            group.name,
+            180
+          ),
+
+        type:
+          safeText(
+            group.type,
+            80
+          ),
+
+        value:
+          typeof group.value ===
+            "number"
+            ? group.value
+            : null,
+
+        grades:
+          Array.isArray(
+            group.grades
+          )
+            ? group.grades.map(
+                function (
+                  grade:
+                    any
+                ) {
+
+                  return {
+                    name:
+                      safeText(
+                        grade.name,
+                        180
+                      ),
+
+                    code:
+                      safeText(
+                        grade.code,
+                        80
+                      ),
+
+                    value:
+                      typeof grade.value ===
+                        "number"
+                        ? grade.value
+                        : null,
+
+                    weight:
+                      typeof grade.weight ===
+                        "number"
+                        ? grade.weight
+                        : null,
+
+                    maxValue:
+                      typeof grade.maxValue ===
+                        "number"
+                        ? grade.maxValue
+                        : null,
+                  };
+
+                }
+              )
+            : [],
+      };
+
+    }
+  );
+
+}
+
+
+function serializeSyllabus(
+  syllabus:
+    any
+) {
+
+  if (!syllabus) {
+    return null;
+  }
+
+
+  return {
+    methods:
+      safeText(
+        syllabus.methods,
+        6000
+      ),
+
+    assessmentProcedures:
+      safeText(
+        syllabus.assessmentProcedures,
+        6000
+      ),
+
+    attendanceSchedule:
+      safeText(
+        syllabus.attendanceSchedule,
+        4000
+      ),
+
+    schedule:
+      Array.isArray(
+        syllabus.schedule
+      )
+        ? syllabus.schedule
+            .slice(
+              0,
+              80
+            )
+            .map(
+              function (
+                item:
+                  any
+              ) {
+
+                return {
+                  description:
+                    safeText(
+                      item.description,
+                      1200
+                    ),
+
+                  startDate:
+                    isoDate(
+                      item.startDate
+                    ),
+
+                  endDate:
+                    isoDate(
+                      item.endDate
+                    ),
+                };
+
+              }
+            )
+        : [],
+
+    evaluations:
+      Array.isArray(
+        syllabus.evaluations
+      )
+        ? syllabus.evaluations
+            .slice(
+              0,
+              30
+            )
+            .map(
+              function (
+                item:
+                  any
+              ) {
+
+                return {
+                  description:
+                    safeText(
+                      item.description,
+                      500
+                    ),
+
+                  date:
+                    isoDate(
+                      item.date
+                    ),
+                };
+
+              }
+            )
+        : [],
+
+    basicReferences:
+      Array.isArray(
+        syllabus.basicReferences
+      )
+        ? syllabus.basicReferences
+            .slice(
+              0,
+              40
+            )
+            .map(
+              function (
+                item:
+                  any
+              ) {
+
+                return {
+                  type:
+                    safeText(
+                      item.type,
+                      100
+                    ),
+
+                  description:
+                    safeText(
+                      item.description,
+                      1200
+                    ),
+                };
+
+              }
+            )
+        : [],
+
+    supplementaryReferences:
+      Array.isArray(
+        syllabus.supplementaryReferences
+      )
+        ? syllabus.supplementaryReferences
+            .slice(
+              0,
+              40
+            )
+            .map(
+              function (
+                item:
+                  any
+              ) {
+
+                return {
+                  type:
+                    safeText(
+                      item.type,
+                      100
+                    ),
+
+                  description:
+                    safeText(
+                      item.description,
+                      1200
+                    ),
+                };
+
+              }
+            )
+        : [],
+  };
+
+}
+
+
+export async function sigaaCourseDetail(
+  userId:
+    number,
+  courseId:
+    string,
+  force:
+    boolean
+) {
+
+  const session =
+    sessions.get(
+      userId
+    );
+
+
+  if (!session) {
+
+    return {
+      status:
+        409,
+
+      data: {
+        connected:
+          false,
+
+        error:
+          "Conecte sua conta do SIGAA primeiro.",
+      },
+    };
+
+  }
+
+
+  if (
+    !courseId ||
+    courseId.length > 200
+  ) {
+
+    return {
+      status:
+        400,
+
+      data: {
+        error:
+          "Turma invalida.",
+      },
+    };
+
+  }
+
+
+  session.detailCache ??=
+    new Map();
+
+
+  const cached =
+    session.detailCache.get(
+      courseId
+    );
+
+
+  if (
+    !force &&
+    cached &&
+    (
+      Date.now() -
+      cached.createdAt
+    ) <
+    CACHE_DURATION
+  ) {
+
+    return {
+      status:
+        200,
+
+      data: {
+        ...cached.value,
+
+        cached:
+          true,
+      },
+    };
+
+  }
+
+
+  try {
+
+    const course =
+      await findCourse(
+        session,
+        courseId
+      );
+
+
+    if (!course) {
+
+      return {
+        status:
+          404,
+
+        data: {
+          error:
+            "Disciplina nao encontrada nesta sessao do SIGAA.",
+        },
+      };
+
+    }
+
+
+    const grades =
+      await safeCourseSection(
+        "notas",
+        async function () {
+
+          const groups =
+            await course
+              .getGrades();
+
+
+          return serializeGrades(
+            Array.from(
+              groups as any[]
+            )
+          );
+
+        }
+      );
+
+
+    const absences =
+      await safeCourseSection(
+        "frequencia",
+        async function () {
+
+          const value =
+            await course
+              .getAbsence();
+
+
+          return {
+            totalAbsences:
+              Number(
+                value.totalAbsences ||
+                0
+              ),
+
+            maxAbsences:
+              Number(
+                value.maxAbsences ||
+                0
+              ),
+
+            list:
+              Array.isArray(
+                value.list
+              )
+                ? value.list
+                    .slice(
+                      0,
+                      100
+                    )
+                    .map(
+                      function (
+                        item:
+                          any
+                      ) {
+
+                        return {
+                          date:
+                            isoDate(
+                              item.date
+                            ),
+
+                          numOfAbsences:
+                            Number(
+                              item.numOfAbsences ||
+                              0
+                            ),
+                        };
+
+                      }
+                    )
+                : [],
+          };
+
+        }
+      );
+
+
+    const files =
+      await safeCourseSection(
+        "arquivos",
+        async function () {
+
+          const rawFiles =
+            Array.from(
+              await course
+                .getFiles() as any[]
+            );
+
+
+          session.filesByCourse ??=
+            new Map();
+
+
+          session.filesByCourse.set(
+            courseId,
+            rawFiles
+          );
+
+
+          return rawFiles
+            .slice(
+              0,
+              100
+            )
+            .map(
+              function (
+                file:
+                  any
+              ) {
+
+                return {
+                  id:
+                    String(
+                      file.id ||
+                      ""
+                    ),
+
+                  title:
+                    safeText(
+                      file.title ||
+                      "Arquivo",
+                      240
+                    ),
+
+                  description:
+                    safeText(
+                      file.description,
+                      1000
+                    ),
+                };
+
+              }
+            );
+
+        }
+      );
+
+
+    const exams =
+      await safeCourseSection(
+        "avaliacoes",
+        async function () {
+
+          const list =
+            Array.from(
+              await course
+                .getExamCalendar() as any[]
+            );
+
+
+          return list
+            .slice(
+              0,
+              40
+            )
+            .map(
+              function (
+                exam:
+                  any
+              ) {
+
+                return {
+                  description:
+                    safeText(
+                      exam.description,
+                      500
+                    ),
+
+                  date:
+                    isoDate(
+                      exam.date
+                    ),
+                };
+
+              }
+            );
+
+        }
+      );
+
+
+    const homeworks =
+      await safeCourseSection(
+        "tarefas",
+        async function () {
+
+          const list =
+            Array.from(
+              await course
+                .getHomeworks() as any[]
+            );
+
+
+          return list
+            .slice(
+              0,
+              60
+            )
+            .map(
+              function (
+                homework:
+                  any
+              ) {
+
+                return {
+                  id:
+                    String(
+                      homework.id ||
+                      ""
+                    ),
+
+                  title:
+                    safeText(
+                      homework.title ||
+                      "Tarefa",
+                      300
+                    ),
+
+                  startDate:
+                    isoDate(
+                      homework.startDate
+                    ),
+
+                  endDate:
+                    isoDate(
+                      homework.endDate
+                    ),
+                };
+
+              }
+            );
+
+        }
+      );
+
+
+    const lessons =
+      await safeCourseSection(
+        "aulas",
+        async function () {
+
+          const list =
+            Array.from(
+              await course
+                .getLessons() as any[]
+            );
+
+
+          return list
+            .slice(
+              0,
+              80
+            )
+            .map(
+              function (
+                lesson:
+                  any
+              ) {
+
+                return {
+                  id:
+                    String(
+                      lesson.id ||
+                      ""
+                    ),
+
+                  title:
+                    safeText(
+                      lesson.title ||
+                      "Aula",
+                      300
+                    ),
+
+                  content:
+                    safeText(
+                      lesson.contentText,
+                      2500
+                    ),
+
+                  startDate:
+                    isoDate(
+                      lesson.startDate
+                    ),
+
+                  endDate:
+                    isoDate(
+                      lesson.endDate
+                    ),
+
+                  attachments:
+                    Array.isArray(
+                      lesson.attachments
+                    )
+                      ? lesson.attachments
+                          .slice(
+                            0,
+                            30
+                          )
+                          .map(
+                            function (
+                              attachment:
+                                any
+                            ) {
+
+                              return {
+                                type:
+                                  safeText(
+                                    attachment.type ||
+                                    "recurso",
+                                    80
+                                  ),
+
+                                title:
+                                  safeText(
+                                    attachment.title ||
+                                    attachment.name ||
+                                    "Recurso",
+                                    240
+                                  ),
+                              };
+
+                            }
+                          )
+                      : [],
+                };
+
+              }
+            );
+
+        }
+      );
+
+
+    const syllabus =
+      await safeCourseSection(
+        "plano de ensino",
+        async function () {
+
+          return serializeSyllabus(
+            await course
+              .getSyllabus()
+          );
+
+        }
+      );
+
+
+    const detail = {
+      connected:
+        true,
+
+      course: {
+        id:
+          String(
+            course.id ||
+            ""
+          ),
+
+        name:
+          String(
+            course.title ||
+            "Turma"
+          ),
+
+        code:
+          String(
+            course.code ||
+            ""
+          ),
+
+        period:
+          String(
+            course.period ||
+            ""
+          ),
+
+        schedule:
+          String(
+            course.schedule ||
+            ""
+          ),
+
+        numberOfStudents:
+          Number(
+            course.numberOfStudents ||
+            0
+          ),
+      },
+
+      sections: {
+        grades,
+        absences,
+        files,
+        exams,
+        homeworks,
+        lessons,
+        syllabus,
+      },
+
+      updatedAt:
+        new Date()
+          .toISOString(),
+    };
+
+
+    session.detailCache.set(
+      courseId,
+      {
+        createdAt:
+          Date.now(),
+
+        value:
+          detail,
+      }
+    );
+
+
+    return {
+      status:
+        200,
+
+      data: {
+        ...detail,
+
+        cached:
+          false,
+      },
+    };
+
+  }
+  catch (
+    error
+  ) {
+
+    console.error(
+      "SIGAA course detail:",
+      error instanceof Error
+        ? error.message
+        : String(error)
+    );
+
+
+    return {
+      status:
+        502,
+
+      data: {
+        error:
+          publicError(
+            error
+          ),
+      },
+    };
+
+  }
+
+}
+
+
+function contentTypeForFile(
+  filename:
+    string
+) {
+
+  const extension =
+    path.extname(
+      filename
+    )
+      .toLowerCase();
+
+
+  const types:
+    Record<
+      string,
+      string
+    > = {
+      ".pdf":
+        "application/pdf",
+
+      ".doc":
+        "application/msword",
+
+      ".docx":
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+
+      ".ppt":
+        "application/vnd.ms-powerpoint",
+
+      ".pptx":
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+
+      ".xls":
+        "application/vnd.ms-excel",
+
+      ".xlsx":
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+
+      ".txt":
+        "text/plain; charset=utf-8",
+
+      ".zip":
+        "application/zip",
+
+      ".png":
+        "image/png",
+
+      ".jpg":
+        "image/jpeg",
+
+      ".jpeg":
+        "image/jpeg",
+    };
+
+
+  return (
+    types[
+      extension
+    ] ||
+    "application/octet-stream"
+  );
+
+}
+
+
+export async function downloadSigaaCourseFile(
+  userId:
+    number,
+  courseId:
+    string,
+  fileId:
+    string
+) {
+
+  const session =
+    sessions.get(
+      userId
+    );
+
+
+  if (!session) {
+
+    return {
+      status:
+        409,
+
+      error:
+        "Conecte sua conta do SIGAA primeiro.",
+    };
+
+  }
+
+
+  let tempDirectory:
+    string |
+    null =
+    null;
+
+
+  try {
+
+    const course =
+      await findCourse(
+        session,
+        courseId
+      );
+
+
+    if (!course) {
+
+      return {
+        status:
+          404,
+
+        error:
+          "Disciplina nao encontrada.",
+      };
+
+    }
+
+
+    session.filesByCourse ??=
+      new Map();
+
+
+    let files =
+      session.filesByCourse.get(
+        courseId
+      );
+
+
+    if (!files) {
+
+      files =
+        Array.from(
+          await withTimeout(
+            course.getFiles(),
+            15000,
+            "Timeout ao carregar arquivos."
+          ) as any[]
+        );
+
+
+      session.filesByCourse.set(
+        courseId,
+        files
+      );
+
+    }
+
+
+    const file =
+      files.find(
+        function (
+          item:
+            any
+        ) {
+
+          return (
+            String(
+              item.id ||
+              ""
+            ) ===
+            fileId
+          );
+
+        }
+      );
+
+
+    if (!file) {
+
+      return {
+        status:
+          404,
+
+        error:
+          "Arquivo nao encontrado nesta disciplina.",
+      };
+
+    }
+
+
+    tempDirectory =
+      await mkdtemp(
+        path.join(
+          os.tmpdir(),
+          "cortex-sigaa-"
+        )
+      );
+
+
+    const downloadedPath =
+      await withTimeout(
+        file.download(
+          tempDirectory
+        ),
+        45000,
+        "Timeout ao baixar arquivo."
+      );
+
+
+    const resolved =
+      path.resolve(
+        downloadedPath
+      );
+
+
+    const root =
+      path.resolve(
+        tempDirectory
+      ) +
+      path.sep;
+
+
+    if (
+      !resolved.startsWith(
+        root
+      )
+    ) {
+
+      throw new Error(
+        "Caminho de arquivo invalido."
+      );
+
+    }
+
+
+    const fileStat =
+      await stat(
+        resolved
+      );
+
+
+    if (
+      fileStat.size >
+      50 * 1024 * 1024
+    ) {
+
+      return {
+        status:
+          413,
+
+        error:
+          "O arquivo excede o limite de 50 MB do Cortex.",
+      };
+
+    }
+
+
+    const buffer =
+      await readFile(
+        resolved
+      );
+
+
+    const filename =
+      path.basename(
+        resolved
+      ) ||
+      safeText(
+        file.title ||
+        "arquivo",
+        180
+      );
+
+
+    return {
+      status:
+        200,
+
+      filename,
+
+      contentType:
+        contentTypeForFile(
+          filename
+        ),
+
+      buffer,
+    };
+
+  }
+  catch (
+    error
+  ) {
+
+    console.error(
+      "SIGAA file download:",
+      error instanceof Error
+        ? error.message
+        : String(error)
+    );
+
+
+    return {
+      status:
+        502,
+
+      error:
+        "Nao foi possivel baixar este arquivo do SIGAA.",
+    };
+
+  }
+  finally {
+
+    if (
+      tempDirectory
+    ) {
+
+      await rm(
+        tempDirectory,
+        {
+          recursive:
+            true,
+
+          force:
+            true,
+        }
+      ).catch(
+        function () {
+          // Limpeza temporaria nao deve afetar a resposta.
+        }
+      );
+
+    }
+
+  }
+
+}
+
+
 export async function connectSigaa(
   userId:
     number,
@@ -975,6 +2334,18 @@ export async function sigaaOverview(
       Array.from(
         rawCourses as any[]
       );
+
+
+    session.courses =
+      courseObjects;
+
+
+    session.filesByCourse ??=
+      new Map();
+
+
+    session.detailCache ??=
+      new Map();
 
 
     const courses:

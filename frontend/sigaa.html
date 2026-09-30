@@ -1,650 +1,202 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acadêmico | Cortex</title>
-
-  <link
-    rel="stylesheet"
-    href="/css/app.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="/css/ui-enhancements.css?v=20260930-global4"
-  >
-
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20260930-global4">
   <script src="/js/ui-enhancements.js?v=20260930-global4"></script>
-
-  <link
-    rel="stylesheet"
-    href="/css/themes.css?v=20260930-bluefix4"
-  >
-
-  <link
-    rel="stylesheet"
-    href="/css/cortex-brand.css?v=20260930-bluefix4"
-  >
-
-  <link
-    rel="stylesheet"
-    href="/css/sigaa-premium.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="/css/sidebar-standard.css?v=20260930-global4"
-  >
-
-  <link
-    rel="stylesheet"
-    href="/css/theme-final.css?v=20260930-blue-global3"
-  >
-
+  <link rel="stylesheet" href="/css/themes.css?v=20260930-bluefix4">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20260930-bluefix4">
+  <link rel="stylesheet" href="/css/sigaa-premium.css?v=20260930-academic4">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20260930-global4">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20260930-blue-global3">
   <script src="/js/theme-manager.js"></script>
-
-  <script
-    src="/js/sidebar-standard.js?v=20260930-global4"
-    defer
-  ></script>
-
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="/favicon.svg?v=cortex-blue-v2"
-  >
-
-  <meta
-    name="theme-color"
-    content="#090909"
-  >
-
+  <script src="/js/sidebar-standard.js?v=20260930-global4" defer></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-blue-v2">
+  <meta name="theme-color" content="#090909">
 </head>
 
-
 <body class="sigaa-view">
-
   <aside class="sidebar">
-
-    <a
-      href="/"
-      class="sidebar-logo"
-    >
-
+    <a href="/" class="sidebar-logo">
       <div class="logo-box"></div>
-
-      <div>
-        <strong>Cortex</strong>
-        <span>Study Platform</span>
-      </div>
-
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
     </a>
-
     <div class="sidebar-menu"></div>
-
-
     <div class="sidebar-user">
-
-      <div
-        id="avatarSidebar"
-        class="avatar"
-      >
-        U
-      </div>
-
+      <div id="avatarSidebar" class="avatar">U</div>
       <div class="user-info">
-
-        <strong id="nomeSidebar">
-          Cortex
-        </strong>
-
+        <strong id="nomeSidebar">Cortex</strong>
         <span id="emailSidebar"></span>
-
       </div>
-
-      <button
-        id="logoutSidebar"
-        class="logout-button"
-        type="button"
-      >
-        &rarr;
-      </button>
-
+      <button id="logoutSidebar" class="logout-button" type="button">&rarr;</button>
     </div>
-
   </aside>
 
-
   <div class="main-area">
-
     <header class="header">
-
       <div class="header-copy">
-
-        <div class="header-title">
-          Acadêmico
-        </div>
-
-        <span>
-          SIGAA UFPB
-        </span>
-
+        <div class="header-title">Acadêmico</div>
+        <span>Central acadêmica integrada ao SIGAA UFPB</span>
       </div>
-
     </header>
 
-
     <main class="sigaa-page">
-
-
-      <!-- ==================================================
-           HERO COMPACTO
-      =================================================== -->
-
-      <section class="sigaa-hero">
-
-        <div class="hero-main">
-
-          <div class="sigaa-kicker">
-
-            <span></span>
-
-            Cortex Acadêmico
-
+      <section class="academic-hero">
+        <div class="hero-copy">
+          <div class="sigaa-kicker"><span></span>Cortex Academic Hub</div>
+          <h1>Seu semestre, <em>organizado de verdade.</em></h1>
+          <p>Aulas, disciplinas, avisos, notas, frequência, avaliações e materiais do SIGAA em uma experiência única.</p>
+          <div class="hero-pills">
+            <span>Notas</span><span>Arquivos</span><span>Frequência</span><span>Atividades</span>
           </div>
-
-          <h1>
-            Sua rotina acadêmica
-            <em>em um só lugar.</em>
-          </h1>
-
-          <p>
-            Cronograma, avisos e turmas sincronizados
-            com sua conta do SIGAA.
-          </p>
-
         </div>
-
-
-        <div class="sigaa-status">
-
-          <span
-            id="statusDot"
-            class="status-dot"
-          ></span>
-
-          <div>
-
-            <small>
-              SIGAA UFPB
-            </small>
-
-            <strong id="statusText">
-              Verificando...
-            </strong>
-
+        <div class="hero-status-card">
+          <div class="status-top">
+            <span id="statusDot" class="status-dot"></span>
+            <div><small>SIGAA UFPB</small><strong id="statusText">Verificando...</strong></div>
           </div>
-
+          <div class="status-detail">
+            <span>Sessão protegida</span>
+            <small>Credenciais não são persistidas pelo Cortex.</small>
+          </div>
         </div>
-
       </section>
 
+      <div id="messageBox" class="sigaa-message hidden"></div>
 
-      <div
-        id="messageBox"
-        class="sigaa-message hidden"
-      ></div>
-
-
-      <!-- ==================================================
-           CONEXAO
-      =================================================== -->
-
-      <section
-        id="connectArea"
-        class="connect-area hidden"
-      >
-
+      <section id="connectArea" class="connect-area hidden">
         <div class="connect-copy">
-
-          <span>
-            Integração acadêmica
-          </span>
-
-          <h2>
-            Conectar ao SIGAA
-          </h2>
-
-          <p>
-            Entre com sua conta da UFPB para carregar seu
-            cronograma, turmas e avisos diretamente no Cortex.
-          </p>
-
-
-          <div class="security-note">
-
-            <strong>
-              Sessão temporária
-            </strong>
-
-            <span>
-              Sua senha não é armazenada no banco de dados
-              nem no navegador.
-            </span>
-
+          <span>Portal acadêmico</span>
+          <h2>Conecte sua conta do SIGAA</h2>
+          <p>O Cortex abre uma sessão temporária com o SIGAA para consultar seus dados acadêmicos. Sua senha não é salva no banco nem no navegador.</p>
+          <div class="connect-features">
+            <div><b>01</b><span>Turmas e horários</span></div>
+            <div><b>02</b><span>Notas e frequência</span></div>
+            <div><b>03</b><span>Arquivos e atividades</span></div>
           </div>
-
         </div>
-
-
-        <form
-          id="sigaaForm"
-          class="sigaa-form"
-        >
-
-          <label>
-
-            Usuário SIGAA
-
-            <input
-              id="sigaaUsername"
-              type="text"
-              autocomplete="username"
-              required
-              placeholder="Seu usuário"
-            >
-
-          </label>
-
-
-          <label>
-
-            Senha
-
-            <input
-              id="sigaaPassword"
-              type="password"
-              autocomplete="current-password"
-              required
-              placeholder="Sua senha"
-            >
-
-          </label>
-
-
-          <button
-            id="connectButton"
-            type="submit"
-          >
-            Conectar ao SIGAA
-          </button>
-
+        <form id="sigaaForm" class="sigaa-form">
+          <div class="form-brand"><span>UFPB</span><strong>Acesso acadêmico</strong></div>
+          <label>Usuário SIGAA<input id="sigaaUsername" type="text" autocomplete="username" required placeholder="Seu usuário"></label>
+          <label>Senha<input id="sigaaPassword" type="password" autocomplete="current-password" required placeholder="Sua senha"></label>
+          <button id="connectButton" type="submit">Conectar com segurança</button>
+          <small class="form-footnote">A sessão expira ao reiniciar o servidor ou ao desconectar.</small>
         </form>
-
       </section>
 
-
-      <!-- ==================================================
-           AREA ACADEMICA
-      =================================================== -->
-
-      <div
-        id="academicArea"
-        class="hidden"
-      >
-
-
-        <!-- CONTROLES -->
-
+      <div id="academicArea" class="hidden">
         <section class="account-toolbar">
-
           <div class="account-connected">
-
             <span class="account-online-dot"></span>
-
-            <div>
-
-              <small>
-                Conta SIGAA
-              </small>
-
-              <strong id="accountName">
-                Conectado
-              </strong>
-
-            </div>
-
+            <div><small>Conta conectada</small><strong id="accountName">SIGAA</strong></div>
           </div>
-
-
           <div class="account-actions">
+            <a href="https://sigaa.ufpb.br/" target="_blank" rel="noopener noreferrer">Portal oficial ↗</a>
+            <button id="refreshButton" type="button">Sincronizar</button>
+            <button id="disconnectButton" type="button" class="danger">Desconectar</button>
+          </div>
+        </section>
 
-            <a
-              href="https://sigaa.ufpb.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Abrir SIGAA
-            </a>
-
-            <button
-              id="refreshButton"
-              type="button"
-            >
-              Atualizar
-            </button>
-
-            <button
-              id="disconnectButton"
-              type="button"
-              class="danger"
-            >
-              Desconectar
-            </button>
-
+        <section id="academicDashboard">
+          <div class="academic-metrics">
+            <article><div class="metric-icon">P</div><div><span>Período atual</span><strong id="periodMetric">--</strong></div></article>
+            <article><div class="metric-icon">D</div><div><span>Disciplinas</span><strong id="coursesMetric">0</strong></div></article>
+            <article><div class="metric-icon">A</div><div><span>Avisos recentes</span><strong id="noticesMetric">0</strong></div></article>
+            <article><div class="metric-icon">S</div><div><span>Sincronizado</span><strong id="updatedMetric" class="metric-small">--</strong></div></article>
           </div>
 
+          <section class="academic-grid">
+            <article class="premium-panel schedule-panel">
+              <div class="panel-heading">
+                <div><small>AGENDA SEMANAL</small><h2>Minha semana</h2><p>Horários identificados nas turmas ativas.</p></div>
+                <div class="today-chip"><span>Hoje</span><strong id="todayTitle">--</strong></div>
+              </div>
+              <div id="todaySummary" class="today-summary">Carregando cronograma...</div>
+              <div id="scheduleGrid" class="schedule-grid"></div>
+            </article>
+
+            <article class="premium-panel notices-panel">
+              <div class="panel-heading">
+                <div><small>FEED ACADÊMICO</small><h2>Avisos recentes</h2><p>Publicações das suas disciplinas.</p></div>
+                <span class="live-badge">LIVE</span>
+              </div>
+              <div id="noticeList" class="notice-list"></div>
+            </article>
+          </section>
+
+          <section class="courses-section">
+            <div class="section-heading">
+              <div><small>DISCIPLINAS ATIVAS</small><h2>Entrar em uma disciplina</h2><p>Abra uma turma para consultar notas, arquivos, faltas, avaliações, tarefas e plano de ensino.</p></div>
+              <div class="course-search"><input id="courseSearch" type="search" placeholder="Buscar disciplina..."></div>
+            </div>
+            <div id="courseGrid" class="course-grid"></div>
+          </section>
+
+          <section class="profile-strip">
+            <div class="profile-avatar" id="studentInitial">U</div>
+            <div class="profile-main"><small>VÍNCULO ACADÊMICO</small><strong id="studentName">--</strong><span id="studentProgram">--</span></div>
+            <div class="profile-meta"><span>Matrícula<strong id="studentRegistration">--</strong></span><span>Período<strong id="studentPeriod">--</strong></span></div>
+          </section>
         </section>
 
+        <section id="courseWorkspace" class="course-workspace hidden">
+          <div class="workspace-topbar">
+            <button id="backToDashboard" class="back-button" type="button">← Todas as disciplinas</button>
+            <button id="refreshCourseButton" class="ghost-button" type="button">Atualizar disciplina</button>
+          </div>
 
-        <!-- ==================================================
-             FOCO PRINCIPAL
-        =================================================== -->
+          <section class="course-hero">
+            <div>
+              <div class="course-code" id="workspaceCourseCode">TURMA</div>
+              <h2 id="workspaceCourseName">Disciplina</h2>
+              <p id="workspaceCourseMeta">--</p>
+            </div>
+            <div class="course-health">
+              <span>Dados do SIGAA</span>
+              <strong id="workspaceUpdated">--</strong>
+            </div>
+          </section>
 
-        <section class="academic-focus-grid">
+          <div id="courseLoading" class="course-loading hidden">
+            <span class="loading-orb"></span>
+            <div><strong>Abrindo disciplina</strong><small>Consultando notas, arquivos e atividades no SIGAA...</small></div>
+          </div>
 
-
-          <!-- CRONOGRAMA -->
-
-          <article class="sigaa-panel schedule-panel">
-
-            <div class="panel-heading priority-heading">
-
-              <div>
-
-                <small>
-                  Prioridade
-                </small>
-
-                <h2>
-                  Cronograma de aulas
-                </h2>
-
-                <p>
-                  Sua semana acadêmica no SIGAA
-                </p>
-
-              </div>
-
-
-              <div class="priority-icon">
-                01
-              </div>
-
+          <div id="courseContent">
+            <div class="course-kpis">
+              <article><span>Notas lançadas</span><strong id="gradeCount">0</strong></article>
+              <article><span>Faltas</span><strong id="absenceCount">0</strong></article>
+              <article><span>Arquivos</span><strong id="fileCount">0</strong></article>
+              <article><span>Atividades</span><strong id="activityCount">0</strong></article>
             </div>
 
+            <nav class="course-tabs" id="courseTabs">
+              <button class="active" data-tab="overview" type="button">Visão geral</button>
+              <button data-tab="grades" type="button">Notas</button>
+              <button data-tab="files" type="button">Arquivos</button>
+              <button data-tab="attendance" type="button">Frequência</button>
+              <button data-tab="activities" type="button">Atividades</button>
+              <button data-tab="syllabus" type="button">Plano de ensino</button>
+            </nav>
 
-            <div class="today-focus">
-
-              <div class="today-date">
-
-                <small>
-                  Hoje
-                </small>
-
-                <strong id="todayTitle">
-                  Carregando...
-                </strong>
-
-              </div>
-
-
-              <div
-                id="todaySummary"
-                class="today-summary"
-              >
-                Verificando cronograma...
-              </div>
-
+            <div class="course-tab-panels">
+              <section id="tab-overview" class="course-tab-panel active"></section>
+              <section id="tab-grades" class="course-tab-panel"></section>
+              <section id="tab-files" class="course-tab-panel"></section>
+              <section id="tab-attendance" class="course-tab-panel"></section>
+              <section id="tab-activities" class="course-tab-panel"></section>
+              <section id="tab-syllabus" class="course-tab-panel"></section>
             </div>
-
-
-            <div
-              id="scheduleGrid"
-              class="schedule-grid"
-            ></div>
-
-          </article>
-
-
-          <!-- AVISOS -->
-
-          <article class="sigaa-panel notices-panel">
-
-            <div class="panel-heading priority-heading">
-
-              <div>
-
-                <small>
-                  Importante
-                </small>
-
-                <h2>
-                  Avisos recentes
-                </h2>
-
-                <p>
-                  Atualizações publicadas nas turmas
-                </p>
-
-              </div>
-
-
-              <div class="notice-counter">
-
-                <strong id="noticesMetric">
-                  0
-                </strong>
-
-                <span>
-                  avisos
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div
-              id="noticeList"
-              class="notice-list"
-            ></div>
-
-          </article>
-
+          </div>
         </section>
-
-
-        <!-- ==================================================
-             RESUMO
-        =================================================== -->
-
-        <section class="sigaa-metrics">
-
-          <article>
-
-            <span>
-              Período atual
-            </span>
-
-            <strong id="periodMetric">
-              --
-            </strong>
-
-          </article>
-
-
-          <article>
-
-            <span>
-              Turmas ativas
-            </span>
-
-            <strong id="coursesMetric">
-              0
-            </strong>
-
-          </article>
-
-
-          <article>
-
-            <span>
-              Última sincronização
-            </span>
-
-            <strong
-              id="updatedMetric"
-              class="small-value"
-            >
-              --
-            </strong>
-
-          </article>
-
-        </section>
-
-
-        <!-- ==================================================
-             DADOS SECUNDARIOS
-        =================================================== -->
-
-        <section class="secondary-grid">
-
-
-          <article class="sigaa-panel">
-
-            <div class="panel-heading">
-
-              <div>
-
-                <small>
-                  Disciplinas
-                </small>
-
-                <h2>
-                  Minhas turmas
-                </h2>
-
-              </div>
-
-            </div>
-
-
-            <div
-              id="courseGrid"
-              class="course-grid"
-            ></div>
-
-          </article>
-
-
-          <article class="sigaa-panel student-panel">
-
-            <div class="panel-heading">
-
-              <div>
-
-                <small>
-                  Perfil acadêmico
-                </small>
-
-                <h2>
-                  Meu vínculo
-                </h2>
-
-              </div>
-
-            </div>
-
-
-            <div class="student-info">
-
-              <div>
-
-                <span>
-                  Aluno
-                </span>
-
-                <strong id="studentName">
-                  --
-                </strong>
-
-              </div>
-
-
-              <div>
-
-                <span>
-                  Matrícula
-                </span>
-
-                <strong id="studentRegistration">
-                  --
-                </strong>
-
-              </div>
-
-
-              <div>
-
-                <span>
-                  Curso
-                </span>
-
-                <strong id="studentProgram">
-                  --
-                </strong>
-
-              </div>
-
-            </div>
-
-
-            <a
-              class="open-sigaa"
-              href="https://sigaa.ufpb.br/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Abrir portal oficial
-              <span>
-                &rarr;
-              </span>
-            </a>
-
-          </article>
-
-        </section>
-
-
       </div>
-
     </main>
-
   </div>
 
-
-  <script src="/js/sigaa.js"></script>
+  <script src="/js/sigaa.js?v=20260930-academic4"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
-
 </body>
 </html>
