@@ -498,15 +498,168 @@
 
 
   /* =======================================================
-     MOBILE - SOMENTE O HAMBURGER FIXO
+     MOBILE - IMPLEMENTACAO UNICA
   ======================================================= */
+
+  function cleanupLegacyMobileArtifacts() {
+
+    document
+      .querySelectorAll(
+        [
+          "#mobileOverlay",
+          "#abrirMenu",
+          "#fecharMenu",
+          "#fecharOverlay",
+          ".mobile-menu-button",
+          ".finance-mobile-button",
+          ".finance-mobile-overlay"
+        ].join(",")
+      )
+      .forEach(
+        function (
+          element
+        ) {
+
+          element.remove();
+
+        }
+      );
+
+  }
+
+
+  function setMobileMenuOpen(
+    button,
+    overlay,
+    open
+  ) {
+
+    overlay.classList.toggle(
+      "open",
+      open
+    );
+
+
+    overlay.setAttribute(
+      "aria-hidden",
+      open
+        ? "false"
+        : "true"
+    );
+
+
+    button.setAttribute(
+      "aria-expanded",
+      open
+        ? "true"
+        : "false"
+    );
+
+
+    document.documentElement
+      .classList.toggle(
+        "cortex-mobile-menu-open",
+        open
+      );
+
+
+    document.body
+      .classList.toggle(
+        "cortex-mobile-menu-open",
+        open
+      );
+
+  }
+
 
   function ensureMobileMenu() {
 
-    if (
+    cleanupLegacyMobileArtifacts();
+
+
+    document
+      .querySelectorAll(
+        "#cortexMobileSidebarButton"
+      )
+      .forEach(
+        function (
+          element,
+          index
+        ) {
+
+          if (
+            index > 0
+          ) {
+            element.remove();
+          }
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        "#cortexMobileSidebarOverlay"
+      )
+      .forEach(
+        function (
+          element,
+          index
+        ) {
+
+          if (
+            index > 0
+          ) {
+            element.remove();
+          }
+
+        }
+      );
+
+
+    let button =
       document.getElementById(
         "cortexMobileSidebarButton"
-      )
+      );
+
+
+    let overlay =
+      document.getElementById(
+        "cortexMobileSidebarOverlay"
+      );
+
+
+    /*
+     * Se apenas metade do componente existir,
+     * remove o fragmento e recria o par completo.
+     */
+    if (
+      Boolean(button) !==
+      Boolean(overlay)
+    ) {
+
+      if (button) {
+        button.remove();
+      }
+
+
+      if (overlay) {
+        overlay.remove();
+      }
+
+
+      button =
+        null;
+
+      overlay =
+        null;
+
+    }
+
+
+    if (
+      button &&
+      overlay
     ) {
 
       return;
@@ -514,7 +667,7 @@
     }
 
 
-    const button =
+    button =
       document.createElement(
         "button"
       );
@@ -538,21 +691,27 @@
     );
 
 
+    button.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+
+    button.setAttribute(
+      "aria-controls",
+      "cortexMobileSidebarPanel"
+    );
+
+
     button.innerHTML =
-      '<svg viewBox="0 0 24 24">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true">' +
         '<path d="M5 7h14"/>' +
         '<path d="M5 12h14"/>' +
         '<path d="M5 17h14"/>' +
       '</svg>';
 
 
-    document.body
-      .appendChild(
-        button
-      );
-
-
-    const overlay =
+    overlay =
       document.createElement(
         "div"
       );
@@ -566,13 +725,23 @@
       "cortex-mobile-sidebar-overlay";
 
 
+    overlay.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
     overlay.innerHTML =
       '<button ' +
         'class="cortex-mobile-sidebar-backdrop" ' +
-        'type="button">' +
+        'type="button" ' +
+        'aria-label="Fechar menu">' +
       '</button>' +
 
-      '<aside class="cortex-mobile-sidebar-panel">' +
+      '<aside ' +
+        'id="cortexMobileSidebarPanel" ' +
+        'class="cortex-mobile-sidebar-panel" ' +
+        'aria-label="Navegacao principal">' +
 
         '<div class="cortex-mobile-sidebar-header">' +
 
@@ -583,7 +752,8 @@
 
           '<button ' +
             'class="cortex-mobile-sidebar-close" ' +
-            'type="button">' +
+            'type="button" ' +
+            'aria-label="Fechar menu">' +
             '&times;' +
           '</button>' +
 
@@ -598,16 +768,36 @@
 
     document.body
       .appendChild(
+        button
+      );
+
+
+    document.body
+      .appendChild(
         overlay
       );
+
+
+    const close =
+      function () {
+
+        setMobileMenuOpen(
+          button,
+          overlay,
+          false
+        );
+
+      };
 
 
     button.addEventListener(
       "click",
       function () {
 
-        overlay.classList.add(
-          "open"
+        setMobileMenuOpen(
+          button,
+          overlay,
+          true
         );
 
       }
@@ -620,13 +810,7 @@
       )
       .addEventListener(
         "click",
-        function () {
-
-          overlay.classList.remove(
-            "open"
-          );
-
-        }
+        close
       );
 
 
@@ -636,13 +820,7 @@
       )
       .addEventListener(
         "click",
-        function () {
-
-          overlay.classList.remove(
-            "open"
-          );
-
-        }
+        close
       );
 
 
@@ -657,22 +835,66 @@
 
           link.addEventListener(
             "click",
-            function () {
-
-              overlay.classList.remove(
-                "open"
-              );
-
-            }
+            close
           );
 
         }
       );
 
+
+    document.addEventListener(
+      "keydown",
+      function (
+        event
+      ) {
+
+        if (
+          event.key ===
+            "Escape" &&
+          overlay.classList
+            .contains(
+              "open"
+            )
+        ) {
+
+          close();
+
+        }
+
+      }
+    );
+
+
+    window.addEventListener(
+      "resize",
+      function () {
+
+        if (
+          window.innerWidth >
+            900 &&
+          overlay.classList
+            .contains(
+              "open"
+            )
+        ) {
+
+          close();
+
+        }
+
+      },
+      {
+        passive:
+          true
+      }
+    );
+
   }
 
 
   function init() {
+
+    cleanupLegacyMobileArtifacts();
 
     applySidebar();
 
