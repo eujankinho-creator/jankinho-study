@@ -3709,3 +3709,27 @@ html[data-theme="black-white"] :is(.sidebar,.cortex-mobile-sidebar-panel) .corte
   filter:drop-shadow(0 0 4px rgba(255,255,255,.42)) drop-shadow(0 0 10px rgba(255,255,255,.12)) !important;
 }
 /* CORTEX SIDEBAR LOGO FINAL OVERRIDE V9 END */
+
+
+/* CORTEX GLOBAL TYPOGRAPHY STANDARD V1
+   Mantem a escala tipografica identica entre usuarios,
+   temas e navegadores mobile. */
+html {
+  font-size: 16px !important;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
+body {
+  font-size: 16px;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+/* CORTEX GLOBAL TYPOGRAPHY STANDARD V1 END */
