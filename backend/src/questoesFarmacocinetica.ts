@@ -492,14 +492,25 @@ sincronizarQuestoesFarmacocineticaHaggi() {
     atuais[0];
 
 
-  let disciplina =
-    referencia
-      ?.disciplina;
+  let disciplina:
+    {
+      id: number;
+      nome: string;
+      createdAt: Date;
+      usuarioId: number;
+    } |
+    null |
+    undefined =
+      referencia
+        ?.disciplina;
 
 
-  let usuarioId =
-    referencia
-      ?.usuarioId;
+  let usuarioId:
+    number |
+    null |
+    undefined =
+      referencia
+        ?.usuarioId;
 
 
   if (
@@ -508,26 +519,24 @@ sincronizarQuestoesFarmacocineticaHaggi() {
   ) {
 
     disciplina =
-      (
-        await prisma
-          .disciplina
-          .findFirst({
-            where: {
-              nome: {
-                contains:
-                  "Farmacologia",
+      await prisma
+        .disciplina
+        .findFirst({
+          where: {
+            nome: {
+              contains:
+                "Farmacologia",
 
-                mode:
-                  "insensitive",
-              },
+              mode:
+                "insensitive",
             },
+          },
 
-            orderBy: {
-              id:
-                "asc",
-            },
-          })
-      ) ?? undefined;
+          orderBy: {
+            id:
+              "asc",
+          },
+        });
 
 
     usuarioId =
