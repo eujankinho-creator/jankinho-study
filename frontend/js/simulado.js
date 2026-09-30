@@ -31,6 +31,9 @@
     marked:
       new Set(),
 
+    eliminated:
+      new Map(),
+
     startedAt:
       null,
 
@@ -1001,6 +1004,10 @@
       new Set();
 
 
+    state.eliminated =
+      new Map();
+
+
     state.startedAt =
       Date.now();
 
@@ -1183,6 +1190,13 @@
       );
 
 
+    const eliminated =
+      state.eliminated.get(
+        state.index
+      ) ||
+      new Set();
+
+
     const percent =
       Math.round(
         (
@@ -1282,6 +1296,31 @@
               "sim-option";
 
 
+            const locked =
+              state.mode ===
+                "guided" &&
+              Boolean(
+                answer
+              );
+
+
+            const isEliminated =
+              !locked &&
+              eliminated.has(
+                index
+              );
+
+
+            if (
+              isEliminated
+            ) {
+
+              classes +=
+                " eliminated";
+
+            }
+
+
             if (
               answer &&
               answer.selected ===
@@ -1355,35 +1394,78 @@
 
 
             return `
-              <button
-                class="${classes}"
-                data-answer="${index}"
-                type="button"
-                ${
-                  state.mode ===
-                    "guided" &&
-                  answer
-                    ? "disabled"
+              <div
+                class="sim-option-row ${
+                  isEliminated
+                    ? "is-eliminated"
                     : ""
-                }
+                }"
               >
 
-                <span class="option-letter">
-                  ${String.fromCharCode(
-                    65 +
-                    index
-                  )}
-                </span>
+                <button
+                  class="${classes}"
+                  data-answer="${index}"
+                  type="button"
+                  ${
+                    locked
+                      ? "disabled"
+                      : ""
+                  }
+                >
 
-                <span class="option-text">
-                  ${escapeHtml(
-                    option.texto
-                  )}
-                </span>
+                  <span class="option-letter">
+                    ${String.fromCharCode(
+                      65 +
+                      index
+                    )}
+                  </span>
 
-                ${estadoResposta}
+                  <span class="option-text">
+                    ${escapeHtml(
+                      option.texto
+                    )}
+                  </span>
 
-              </button>
+                  ${estadoResposta}
+
+                </button>
+
+                ${
+                  locked
+                    ? ""
+                    : `
+                      <button
+                        type="button"
+                        class="sim-eliminate-option ${
+                          isEliminated
+                            ? "active"
+                            : ""
+                        }"
+                        data-cut-answer="${index}"
+                        aria-pressed="${
+                          isEliminated
+                            ? "true"
+                            : "false"
+                        }"
+                        title="${
+                          isEliminated
+                            ? "Desfazer eliminação"
+                            : "Eliminar alternativa"
+                        }"
+                      >
+                        <span aria-hidden="true">✂</span>
+                        <span>
+                          ${
+                            isEliminated
+                              ? "Desfazer"
+                              : "Cortar"
+                          }
+                        </span>
+                      </button>
+                    `
+                }
+
+              </div>
             `;
 
           }
@@ -1409,6 +1491,99 @@
                   button.dataset.answer
                 )
               );
+
+            }
+          );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        "[data-cut-answer]"
+      )
+      .forEach(
+        function (
+          button
+        ) {
+
+          button.addEventListener(
+            "click",
+            function (
+              event
+            ) {
+
+              event.preventDefault();
+              event.stopPropagation();
+
+
+              const optionIndex =
+                Number(
+                  button.dataset.cutAnswer
+                );
+
+
+              let current =
+                state.eliminated.get(
+                  state.index
+                );
+
+
+              if (!current) {
+
+                current =
+                  new Set();
+
+                state.eliminated.set(
+                  state.index,
+                  current
+                );
+
+              }
+
+
+              if (
+                current.has(
+                  optionIndex
+                )
+              ) {
+
+                current.delete(
+                  optionIndex
+                );
+
+              }
+              else {
+
+                current.add(
+                  optionIndex
+                );
+
+
+                const currentAnswer =
+                  state.answers[
+                    state.index
+                  ];
+
+
+                if (
+                  currentAnswer &&
+                  currentAnswer.selected ===
+                    optionIndex
+                ) {
+
+                  state.answers[
+                    state.index
+                  ] =
+                    null;
+
+                }
+
+              }
+
+
+              renderQuestion();
 
             }
           );
