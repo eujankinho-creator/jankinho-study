@@ -942,6 +942,24 @@
     document.head.appendChild(
       style
     );
+
+
+    /* CORTEX EXPLICIT ANSWER LABELS V1 */
+    const answerLabelStyle =
+      document.createElement(
+        "style"
+      );
+
+    answerLabelStyle.id =
+      "cortex-explicit-answer-labels";
+
+    answerLabelStyle.textContent =
+      "\nhtml[data-theme] body .cortex-answer-state{\n  display:inline-flex!important;\n  align-items:center!important;\n  justify-content:center!important;\n  flex:0 0 auto!important;\n  margin-left:auto!important;\n  border-radius:999px!important;\n  padding:6px 10px!important;\n  font-size:10px!important;\n  font-weight:950!important;\n  letter-spacing:.05em!important;\n  line-height:1!important;\n  white-space:nowrap!important\n}\nhtml[data-theme] body .cortex-answer-state-correct{\n  border:1px solid #5dff9f!important;\n  background:#00e676!important;\n  color:#02170b!important;\n  box-shadow:0 0 16px rgba(0,230,118,.42)!important\n}\nhtml[data-theme] body .cortex-answer-state-wrong{\n  border:1px solid #ff718e!important;\n  background:#ff2d55!important;\n  color:#fff!important;\n  box-shadow:0 0 16px rgba(255,45,85,.42)!important\n}\nhtml[data-theme] body .session-option:has(.cortex-answer-state)::after,\nhtml[data-theme] body .sim-option:has(.cortex-answer-state)::after{\n  content:none!important;\n  display:none!important\n}\n@media(max-width:640px){\n  html[data-theme] body .cortex-answer-state{\n    padding:5px 7px!important;\n    font-size:9px!important\n  }\n}\n";
+
+    document.head.appendChild(
+      answerLabelStyle
+    );
+    /* CORTEX EXPLICIT ANSWER LABELS V1 END */
   }
   /* CORTEX GLOBAL INTERACTION CONTRAST V2 END */
 
