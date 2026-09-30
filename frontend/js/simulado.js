@@ -1322,6 +1322,38 @@
             }
 
 
+            let estadoResposta =
+              "";
+
+
+            if (
+              state.mode ===
+                "guided" &&
+              answer
+            ) {
+
+              if (
+                index ===
+                correct
+              ) {
+
+                estadoResposta =
+                  '<span class="cortex-answer-state cortex-answer-state-correct">✓ CORRETA</span>';
+
+              }
+              else if (
+                index ===
+                answer.selected
+              ) {
+
+                estadoResposta =
+                  '<span class="cortex-answer-state cortex-answer-state-wrong">✕ ERRADA</span>';
+
+              }
+
+            }
+
+
             return `
               <button
                 class="${classes}"
@@ -1348,6 +1380,8 @@
                     option.texto
                   )}
                 </span>
+
+                ${estadoResposta}
 
               </button>
             `;
