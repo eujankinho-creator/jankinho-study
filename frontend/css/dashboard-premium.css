@@ -1987,32 +1987,6 @@ html[data-theme="pink-glitter"]
   }
 
 
-  .dashboard-view
-  .mobile-menu-button {
-    display:
-      grid;
-
-    place-items:
-      center;
-  }
-
-
-  .dashboard-view
-  .mobile-menu-button svg {
-    width:
-      19px;
-
-    height:
-      19px;
-  }
-
-
-  .dashboard-view
-  .mobile-sidebar {
-    background:
-      #080808;
-  }
-
 }
 
 
