@@ -44,7 +44,16 @@
       null,
 
     lastSession:
-      []
+      [],
+
+    performanceSaved:
+      false,
+
+    performanceSavePromise:
+      null,
+
+    finishing:
+      false
 
   };
 
@@ -1005,6 +1014,18 @@
       Date.now();
 
 
+    state.performanceSaved =
+      false;
+
+
+    state.performanceSavePromise =
+      null;
+
+
+    state.finishing =
+      false;
+
+
     const minutes =
       Number(
         $("simTimer")
@@ -1832,9 +1853,150 @@
   }
 
 
-  function finishSimulation() {
+  async function saveSimulationPerformance() {
+
+    if (
+      state.performanceSaved
+    ) {
+      return;
+    }
+
+
+    if (
+      state.performanceSavePromise
+    ) {
+
+      return state
+        .performanceSavePromise;
+
+    }
+
+
+    const respostas =
+      state.answers
+        .map(
+          function (
+            answer,
+            index
+          ) {
+
+            if (
+              !answer ||
+              !state.session[
+                index
+              ]
+            ) {
+
+              return null;
+
+            }
+
+
+            return {
+              questaoId:
+                state.session[
+                  index
+                ].id,
+
+              correta:
+                Boolean(
+                  answer.correct
+                ),
+            };
+
+          }
+        )
+        .filter(
+          Boolean
+        );
+
+
+    if (
+      respostas.length ===
+        0
+    ) {
+
+      state.performanceSaved =
+        true;
+
+      return;
+
+    }
+
+
+    state.performanceSavePromise =
+      api(
+        "/api/respostas/lote",
+        {
+          method:
+            "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body:
+            JSON.stringify({
+              respostas,
+            }),
+        }
+      )
+        .then(
+          function () {
+
+            state.performanceSaved =
+              true;
+
+          }
+        )
+        .finally(
+          function () {
+
+            state.performanceSavePromise =
+              null;
+
+          }
+        );
+
+
+    return state
+      .performanceSavePromise;
+
+  }
+
+
+  async function finishSimulation() {
+
+    if (
+      state.finishing
+    ) {
+      return;
+    }
+
+
+    state.finishing =
+      true;
+
 
     stopTimer();
+
+
+    try {
+
+      await saveSimulationPerformance();
+
+    }
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Desempenho do simulado:",
+        error
+      );
+
+    }
 
 
     const total =
