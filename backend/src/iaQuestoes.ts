@@ -1,4 +1,4 @@
-﻿import OpenAI from "openai";
+import OpenAI from "openai";
 
 import { prisma } from "../../lib/prisma";
 
@@ -14,6 +14,126 @@ type ResultadoIA = {
   status: number;
   data: unknown;
 };
+
+
+function urlSegura(
+  value:
+    unknown
+) {
+
+  const text =
+    String(
+      value ||
+      ""
+    )
+      .trim();
+
+
+  if (!text) {
+    return null;
+  }
+
+
+  try {
+
+    const url =
+      new URL(
+        text
+      );
+
+
+    if (
+      url.protocol !==
+        "https:" &&
+      url.protocol !==
+        "http:"
+    ) {
+      return null;
+    }
+
+
+    return url.toString();
+
+  }
+  catch {
+
+    return null;
+
+  }
+
+}
+
+
+async function gerarImagemQuestao(
+  prompt:
+    string
+) {
+
+  const texto =
+    String(
+      prompt ||
+      ""
+    )
+      .trim();
+
+
+  if (!texto) {
+    return null;
+  }
+
+
+  try {
+
+    const resultado =
+      await openai
+        .images
+        .generate({
+          model:
+            "gpt-image-2.5-flare",
+
+          prompt:
+            "Crie uma imagem educacional limpa para uma questão de nível superior em Enfermagem/Medicina. " +
+            "Não revele nem destaque a resposta correta. Evite texto desnecessário. " +
+            "A figura deve ser clinicamente coerente, legível em celular e útil para interpretação visual. " +
+            texto,
+        });
+
+
+    const base64 =
+      resultado.data?.[0]
+        ?.b64_json;
+
+
+    if (!base64) {
+      return null;
+    }
+
+
+    return (
+      "data:image/png;base64," +
+      base64
+    );
+
+  }
+  catch (
+    error
+  ) {
+
+    console.warn(
+      "[questoes-ia] Imagem não gerada:",
+      error instanceof Error
+        ? error.message
+        : String(
+            error
+          )
+    );
+
+
+    return null;
+
+  }
+
+}
 
 
 export async function gerarQuestoesIA(
@@ -133,7 +253,22 @@ export async function gerarQuestoesIA(
         .responses
         .create({
           model:
-            "gpt-5-mini",
+            "gpt-5.4-mini",
+
+          reasoning: {
+            effort:
+              "low",
+          },
+
+          tools: [
+            {
+              type:
+                "web_search",
+            },
+          ],
+
+          tool_choice:
+            "auto",
 
           input: [
             {
@@ -141,7 +276,19 @@ export async function gerarQuestoesIA(
                 "system",
 
               content:
-                "Voce e um professor universitario especializado em Enfermagem e Medicina. Crie questoes de nivel superior, tecnicamente corretas, clinicamente coerentes e adequadas para estudantes da area da saude. Evite questoes obvias. Quando apropriado, utilize casos clinicos. Cada questao deve ter exatamente 5 alternativas e apenas uma alternativa correta.",
+                [
+                  "Você é um professor universitário especializado em Enfermagem e Medicina.",
+                  "Crie questões de nível superior, tecnicamente corretas, clinicamente coerentes e adequadas para estudantes da área da saúde.",
+                  "Antes de criar questões, use a pesquisa na web quando isso puder localizar questões de concursos, provas de residência, EBSERH, prefeituras, hospitais universitários ou bancas relacionadas ao tema.",
+                  "REGRA DE FONTE: se encontrar uma questão real identificável, NÃO copie o enunciado e as alternativas integralmente. Crie uma versão adaptada/parafraseada que avalie o mesmo conhecimento e informe banca/ano ou prova no campo fonte, além do link realmente consultado no campo fonteUrl.",
+                  "Se não houver uma questão verificável, crie uma questão autoral no estilo de concurso e use fonte='Questão autoral no estilo de concurso' e fonteUrl=null.",
+                  "Nunca invente banca, ano, órgão ou URL.",
+                  "Cada questão deve ter exatamente 5 alternativas e apenas uma correta.",
+                  "Evite questões óbvias. Quando apropriado, utilize casos clínicos, cálculos e tomada de decisão.",
+                  "Você pode propor questão com imagem apenas quando a interpretação visual realmente agregar valor (por exemplo ECG, ferida, escala, gráfico, anatomia, tabela, equipamento, exame ou esquema).",
+                  "No máximo duas questões do lote devem solicitar imagem. A imagem não pode conter o gabarito nem destacar a resposta.",
+                  "Para questão visual, forneça um imagemPrompt curto e objetivo e um imagemAlt acessível.",
+                ].join(" "),
             },
 
             {
@@ -151,7 +298,7 @@ export async function gerarQuestoesIA(
               content:
                 "Gere " +
                 quantidade +
-                " questoes de multipla escolha para estudantes de " +
+                " questões de múltipla escolha para estudantes de " +
                 curso +
                 ". Disciplina: " +
                 disciplina +
@@ -159,7 +306,8 @@ export async function gerarQuestoesIA(
                 tema +
                 ". Dificuldade: " +
                 dificuldade +
-                ". Para cada questao, forneca o enunciado, exatamente 5 alternativas, indique qual e a correta e forneca uma explicacao objetiva e didatica.",
+                ". Tente primeiro encontrar padrões ou questões públicas de concursos relacionadas ao conteúdo. " +
+                "Para cada questão, forneça enunciado, exatamente 5 alternativas, uma correta, explicação objetiva, fonte, fonteUrl quando verificável, e indique se uma imagem educacional é necessária.",
             },
           ],
 
@@ -198,9 +346,46 @@ export async function gerarQuestoesIA(
                             "string",
                         },
 
+                        fonte: {
+                          type:
+                            "string",
+                        },
+
+                        fonteUrl: {
+                          type: [
+                            "string",
+                            "null"
+                          ],
+                        },
+
+                        precisaImagem: {
+                          type:
+                            "boolean",
+                        },
+
+                        imagemPrompt: {
+                          type: [
+                            "string",
+                            "null"
+                          ],
+                        },
+
+                        imagemAlt: {
+                          type: [
+                            "string",
+                            "null"
+                          ],
+                        },
+
                         alternativas: {
                           type:
                             "array",
+
+                          minItems:
+                            5,
+
+                          maxItems:
+                            5,
 
                           items: {
                             type:
@@ -232,6 +417,11 @@ export async function gerarQuestoesIA(
                       required: [
                         "enunciado",
                         "explicacao",
+                        "fonte",
+                        "fonteUrl",
+                        "precisaImagem",
+                        "imagemPrompt",
+                        "imagemAlt",
                         "alternativas"
                       ],
 
@@ -261,6 +451,10 @@ export async function gerarQuestoesIA(
 
     const questoesSalvas:
       unknown[] = [];
+
+
+    let imagensGeradas =
+      0;
 
 
     for (
@@ -308,20 +502,79 @@ export async function gerarQuestoesIA(
       }
 
 
+      let imagemUrl:
+        string |
+        null =
+        null;
+
+
+      if (
+        questao.precisaImagem &&
+        questao.imagemPrompt &&
+        imagensGeradas <
+          2
+      ) {
+
+        imagemUrl =
+          await gerarImagemQuestao(
+            questao.imagemPrompt
+          );
+
+
+        if (
+          imagemUrl
+        ) {
+
+          imagensGeradas++;
+
+        }
+
+      }
+
+
       const salva =
         await prisma
           .questao
           .create({
             data: {
               enunciado:
-                questao.enunciado,
+                String(
+                  questao.enunciado
+                )
+                  .trim(),
 
               explicacao:
-                questao.explicacao,
+                String(
+                  questao.explicacao
+                )
+                  .trim(),
 
               tema,
 
               dificuldade,
+
+              fonte:
+                String(
+                  questao.fonte ||
+                  "Questão autoral no estilo de concurso"
+                )
+                  .trim(),
+
+              fonteUrl:
+                urlSegura(
+                  questao.fonteUrl
+                ),
+
+              imagemUrl,
+
+              imagemAlt:
+                imagemUrl
+                  ? String(
+                      questao.imagemAlt ||
+                      "Imagem de apoio para interpretação da questão."
+                    )
+                      .trim()
+                  : null,
 
               usuarioId,
 
@@ -341,7 +594,8 @@ export async function gerarQuestoesIA(
                           texto:
                             String(
                               alternativa.texto
-                            ),
+                            )
+                              .trim(),
 
                           correta:
                             Boolean(
@@ -378,6 +632,8 @@ export async function gerarQuestoesIA(
 
         quantidadeSalva:
           questoesSalvas.length,
+
+        imagensGeradas,
 
         questoes:
           questoesSalvas,
