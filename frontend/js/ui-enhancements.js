@@ -921,6 +921,192 @@
 
 
   /* =========================================================
+     MICROINTERACOES PROFISSIONAIS
+  ========================================================= */
+
+  const motionSelector =
+    [
+      ".hero",
+      ".academic-hero",
+      ".question-card",
+      ".metric-card",
+      ".panel",
+      ".course-card",
+      ".case-card",
+      ".drug-card",
+      ".flashcard",
+      ".notice-card",
+      ".activity-card",
+      ".resource-card",
+      ".overview-feature",
+      ".lesson-card",
+      ".finance-card",
+      ".result-card",
+      ".theme-choice",
+      ".session-card",
+    ].join(",");
+
+
+  function markMotion(
+    root
+  ) {
+
+    if (
+      !(root instanceof Element)
+    ) {
+      return;
+    }
+
+
+    const candidates =
+      [];
+
+
+    if (
+      root.matches(
+        motionSelector
+      )
+    ) {
+
+      candidates.push(
+        root
+      );
+
+    }
+
+
+    root
+      .querySelectorAll(
+        motionSelector
+      )
+      .forEach(
+        function (
+          element
+        ) {
+
+          candidates.push(
+            element
+          );
+
+        }
+      );
+
+
+    candidates
+      .slice(
+        0,
+        40
+      )
+      .forEach(
+        function (
+          element,
+          index
+        ) {
+
+          if (
+            element.classList
+              .contains(
+                "ui-motion-item"
+              )
+          ) {
+            return;
+          }
+
+
+          element.style
+            .animationDelay =
+            Math.min(
+              index * 18,
+              126
+            ) +
+            "ms";
+
+
+          element.classList
+            .add(
+              "ui-motion-item"
+            );
+
+        }
+      );
+
+  }
+
+
+  function initProfessionalMotion() {
+
+    markMotion(
+      document.body
+    );
+
+
+    const observer =
+      new MutationObserver(
+        function (
+          mutations
+        ) {
+
+          for (
+            const mutation
+            of mutations
+          ) {
+
+            if (
+              mutation.type !==
+                "childList"
+            ) {
+              continue;
+            }
+
+
+            mutation.addedNodes
+              .forEach(
+                function (
+                  node
+                ) {
+
+                  if (
+                    node instanceof
+                      Element
+                  ) {
+
+                    window
+                      .requestAnimationFrame(
+                        function () {
+
+                          markMotion(
+                            node
+                          );
+
+                        }
+                      );
+
+                  }
+
+                }
+              );
+
+          }
+
+        }
+      );
+
+
+    observer.observe(
+      document.body,
+      {
+        childList:
+          true,
+
+        subtree:
+          true,
+      }
+    );
+
+  }
+
+
+  /* =========================================================
      START
   ========================================================= */
 
@@ -937,6 +1123,7 @@
 
 
       initRevealObserver();
+      initProfessionalMotion();
       initTimer();
     }
   );
