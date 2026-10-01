@@ -2778,6 +2778,19 @@ const server =
               body
             );
 
+
+          if (
+            resultado.status >=
+              200 &&
+            resultado.status <
+              300
+          ) {
+
+            await sincronizarFlashcardsDasQuestoes();
+
+          }
+
+
           json(
             response,
             resultado.status,
