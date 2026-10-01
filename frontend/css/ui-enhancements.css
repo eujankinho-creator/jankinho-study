@@ -567,3 +567,282 @@ body.ui-ready {
   }
 
 }
+
+/* =========================================================
+   CORTEX PROFESSIONAL MOTION V2
+   Movimento sem sobrescrever cores semanticas dos temas.
+========================================================= */
+
+:root {
+  --cortex-motion-fast:
+    120ms;
+
+  --cortex-motion-base:
+    180ms;
+
+  --cortex-motion-slow:
+    280ms;
+
+  --cortex-motion-ease:
+    cubic-bezier(.2,.8,.2,1);
+}
+
+
+.ui-motion-item {
+  animation:
+    cortexEnter
+    var(--cortex-motion-slow)
+    var(--cortex-motion-ease)
+    both;
+}
+
+
+@keyframes cortexEnter {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translate3d(
+        0,
+        8px,
+        0
+      )
+      scale(.995);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translate3d(
+        0,
+        0,
+        0
+      )
+      scale(1);
+  }
+
+}
+
+
+:is(
+  button,
+  .button-primary,
+  .button-secondary,
+  .primary-button,
+  .secondary-button,
+  .btn-primary,
+  .btn-secondary,
+  .ghost-button,
+  .back-button,
+  .download-button,
+  .course-tabs button,
+  .theme-choice,
+  .answer-question,
+  .session-option,
+  .correct-selector
+) {
+  transition:
+    transform
+    var(--cortex-motion-fast)
+    var(--cortex-motion-ease),
+    box-shadow
+    var(--cortex-motion-base)
+    ease,
+    border-color
+    var(--cortex-motion-base)
+    ease,
+    background-color
+    var(--cortex-motion-base)
+    ease,
+    color
+    var(--cortex-motion-base)
+    ease,
+    opacity
+    var(--cortex-motion-base)
+    ease;
+}
+
+
+:is(
+  button,
+  .button-primary,
+  .button-secondary,
+  .primary-button,
+  .secondary-button,
+  .btn-primary,
+  .btn-secondary,
+  .ghost-button,
+  .back-button,
+  .download-button,
+  .answer-question,
+  .session-option,
+  .correct-selector
+):active {
+  transform:
+    scale(.975);
+}
+
+
+:is(
+  input,
+  textarea,
+  select
+) {
+  transition:
+    border-color
+    var(--cortex-motion-base)
+    ease,
+    box-shadow
+    var(--cortex-motion-base)
+    ease,
+    background-color
+    var(--cortex-motion-base)
+    ease,
+    transform
+    var(--cortex-motion-fast)
+    ease;
+}
+
+
+:is(
+  .modal,
+  .dialog,
+  .modal-card,
+  .modal-content,
+  .study-timer-panel
+) {
+  transform-origin:
+    center top;
+}
+
+
+:is(
+  .question-card,
+  .metric-card,
+  .panel,
+  .course-card,
+  .case-card,
+  .drug-card,
+  .flashcard,
+  .notice-card,
+  .activity-card,
+  .resource-card,
+  .overview-feature,
+  .lesson-card,
+  .finance-card,
+  .result-card,
+  .theme-choice
+) {
+  transition:
+    transform
+    var(--cortex-motion-base)
+    var(--cortex-motion-ease),
+    border-color
+    var(--cortex-motion-base)
+    ease,
+    box-shadow
+    var(--cortex-motion-base)
+    ease,
+    background-color
+    var(--cortex-motion-base)
+    ease;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  :is(
+    .question-card,
+    .course-card,
+    .case-card,
+    .drug-card,
+    .flashcard,
+    .notice-card,
+    .activity-card,
+    .resource-card,
+    .overview-feature,
+    .lesson-card,
+    .theme-choice
+  ):hover {
+    transform:
+      translate3d(
+        0,
+        -2px,
+        0
+      );
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  html {
+    scroll-behavior:
+      auto;
+  }
+
+
+  body {
+    overscroll-behavior-y:
+      contain;
+  }
+
+
+  :is(
+    button,
+    a,
+    input,
+    select,
+    textarea,
+    .menu-item,
+    .session-option
+  ) {
+    touch-action:
+      manipulation;
+  }
+
+
+  .ui-motion-item {
+    animation-duration:
+      220ms;
+  }
+
+
+  /*
+   * No mobile evita animacoes de hover e filtros caros.
+   */
+  :is(
+    .question-card,
+    .course-card,
+    .case-card,
+    .drug-card,
+    .flashcard,
+    .notice-card,
+    .activity-card,
+    .resource-card,
+    .overview-feature,
+    .lesson-card,
+    .theme-choice
+  ) {
+    transform:
+      translateZ(0);
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ui-motion-item {
+    animation:
+      none !important;
+  }
+
+}
+
+/* CORTEX PROFESSIONAL MOTION V2 END */
