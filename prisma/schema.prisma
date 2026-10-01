@@ -46,7 +46,7 @@ model Questao {
   disciplina   Disciplina    @relation(fields: [disciplinaId], references: [id], onDelete: Cascade)
   usuario      Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   respostas    Resposta[]
-  flashcard    Flashcard?
+  flashcards   Flashcard[]
 }
 
 model Alternativa {
@@ -74,7 +74,7 @@ model Flashcard {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   usuarioId   Int
-  questaoId   Int?     @unique
+  questaoId   Int?
   origem      String   @default("manual")
   tema        String?
   disciplina  String?
