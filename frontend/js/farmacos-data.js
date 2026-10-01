@@ -3843,3 +3843,337 @@
 
 })();
 /* CORTEX ANESTESICOS GERAIS HAGGI V1 END */
+
+
+/*
+ * CORTEX ANTIDEPRESSIVOS DIEGO V1
+ *
+ * Fonte acadêmica: Atividade de Farmacologia — ANTIDEPRESSIVOS (Questões Diego).
+ * Alvos e mecanismos complementados por NCBI/StatPearls e literatura farmacológica.
+ */
+(function () {
+  "use strict";
+
+  const SOURCE =
+    "Questões Diego — Atividade de Antidepressivos; mecanismos revisados em NCBI/StatPearls";
+
+  Object.assign(
+    window.CortexReceptores,
+    {
+      "SERT": {
+        familia: "Transportador de monoamina",
+        via: "Recaptação de serotonina",
+        resumo: "Transportador de serotonina. Sua inibição reduz a recaptação pré-sináptica de 5-HT e aumenta a disponibilidade de serotonina na fenda sináptica."
+      },
+
+      "NET": {
+        familia: "Transportador de monoamina",
+        via: "Recaptação de noradrenalina",
+        resumo: "Transportador de noradrenalina. Sua inibição aumenta a disponibilidade sináptica de norepinefrina/noradrenalina."
+      },
+
+      "DAT": {
+        familia: "Transportador de monoamina",
+        via: "Recaptação de dopamina",
+        resumo: "Transportador de dopamina. Sua inibição aumenta a disponibilidade sináptica de dopamina."
+      },
+
+      "MAO-A": {
+        familia: "Enzima monoaminoxidase",
+        via: "Metabolismo de monoaminas",
+        resumo: "Isoenzima que metaboliza principalmente serotonina e noradrenalina e também participa do metabolismo de outras monoaminas. Inibidores aumentam monoaminas sinápticas."
+      },
+
+      "MAO-B": {
+        familia: "Enzima monoaminoxidase",
+        via: "Metabolismo de monoaminas",
+        resumo: "Isoenzima da monoaminoxidase envolvida no metabolismo de monoaminas, incluindo dopamina e tiramina. Fenelzina inibe MAO-A e MAO-B de forma irreversível."
+      },
+
+      "5-HT2A": {
+        familia: "Serotoninérgico",
+        via: "Gq/11",
+        resumo: "Receptor serotoninérgico 5-HT2A. O antagonismo desse receptor participa do perfil farmacológico da trazodona."
+      },
+
+      "5-HT6": {
+        familia: "Serotoninérgico",
+        via: "Gs",
+        resumo: "Receptor serotoninérgico 5-HT6. A amoxapina apresenta interação relevante com esse receptor além de seus efeitos noradrenérgicos e dopaminérgicos."
+      },
+
+      "D2": {
+        familia: "Dopaminérgico",
+        via: "Gi/o",
+        resumo: "Receptor dopaminérgico D2. O antagonismo pode produzir efeitos extrapiramidais e prolactinérgicos em fármacos com atividade antidopaminérgica."
+      },
+
+      "D4": {
+        familia: "Dopaminérgico",
+        via: "Gi/o",
+        resumo: "Receptor dopaminérgico D4. A amoxapina apresenta atividade antagonista em receptores dopaminérgicos D2/D4."
+      }
+    }
+  );
+
+
+  const drugs = [
+
+    {
+      id: "fluoxetina",
+      nome: "Fluoxetina",
+      principioAtivo: "Fluoxetina",
+      grupo: "Antidepressivos",
+      classe: "ISRS",
+      acao: "Inibição seletiva da recaptação de serotonina",
+      receptores: ["SERT"],
+      mecanismo: "Bloqueia o transportador de serotonina (SERT) no terminal pré-sináptico, reduzindo a recaptação de 5-HT e aumentando sua disponibilidade sináptica. Tem efeito mínimo sobre a recaptação de noradrenalina.",
+      efeitos: ["Aumento da neurotransmissão serotoninérgica", "Efeito antidepressivo e ansiolítico"],
+      usos: ["Depressão maior", "Transtorno obsessivo-compulsivo", "Transtorno do pânico", "Bulimia nervosa"],
+      adversos: ["Náusea", "Insônia ou ativação", "Disfunção sexual", "Síndrome serotoninérgica em combinações de risco"],
+      alertas: ["Meia-vida longa", "Ao trocar para IMAO, requer washout prolongado; referências recomendam cerca de 5 semanas após fluoxetina"],
+      dica: "Fluoxetina = ISRS → SERT. Fluoxetina + IMAO sem washout = risco de síndrome serotoninérgica.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "sertralina",
+      nome: "Sertralina",
+      principioAtivo: "Sertralina",
+      grupo: "Antidepressivos",
+      classe: "ISRS",
+      acao: "Inibição seletiva da recaptação de serotonina",
+      receptores: ["SERT"],
+      mecanismo: "Inibe principalmente o transportador de serotonina (SERT), elevando 5-HT na fenda sináptica. Apresenta efeitos mínimos sobre recaptação de noradrenalina e dopamina em comparação ao efeito serotoninérgico principal.",
+      efeitos: ["Aumento da neurotransmissão serotoninérgica"],
+      usos: ["Depressão maior", "TOC", "Transtorno do pânico", "TEPT", "Ansiedade social"],
+      adversos: ["Náusea", "Diarreia", "Disfunção sexual", "Insônia ou sonolência"],
+      alertas: ["Evitar associação com IMAO pelo risco de síndrome serotoninérgica"],
+      dica: "Sertralina = ISRS → SERT.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "protriptilina",
+      nome: "Protriptilina",
+      principioAtivo: "Protriptilina",
+      grupo: "Antidepressivos",
+      classe: "Antidepressivo tricíclico — amina secundária",
+      acao: "Inibição de recaptação de monoaminas",
+      receptores: ["NET", "SERT", "M1", "H1", "alpha1"],
+      mecanismo: "Como tricíclico de amina secundária, inibe sobretudo a recaptação de noradrenalina por NET e também afeta SERT. O antagonismo muscarínico, H1 e α1 explica parte importante dos efeitos adversos.",
+      efeitos: ["Aumento de noradrenalina e serotonina sinápticas"],
+      usos: ["Depressão em situações selecionadas"],
+      adversos: ["Boca seca", "Constipação", "Taquicardia", "Hipotensão ortostática", "Sedação variável"],
+      alertas: ["Pode reduzir o limiar convulsivo", "TCAs apresentam risco de cardiotoxicidade em overdose"],
+      dica: "Protriptilina = TCA secundária → NET > SERT; lembrar M1/H1/α1 nos efeitos adversos.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "desipramina",
+      nome: "Desipramina",
+      principioAtivo: "Desipramina",
+      grupo: "Antidepressivos",
+      classe: "Antidepressivo tricíclico — amina secundária",
+      acao: "Inibição de recaptação de monoaminas",
+      receptores: ["NET", "SERT", "M1", "H1", "alpha1"],
+      mecanismo: "Inibe preferencialmente a recaptação de noradrenalina por NET e, em menor grau, a recaptação de serotonina. O bloqueio muscarínico, H1 e α1 contribui para efeitos adversos típicos dos tricíclicos.",
+      efeitos: ["Aumento de noradrenalina sináptica", "Aumento menor de serotonina"],
+      usos: ["Depressão em situações selecionadas"],
+      adversos: ["Efeitos anticolinérgicos", "Hipotensão ortostática", "Taquicardia", "Sedação"],
+      alertas: ["Pode reduzir o limiar convulsivo", "Risco de arritmias e toxicidade cardíaca em overdose"],
+      dica: "Desipramina = TCA secundária → forte componente noradrenérgico.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "nortriptilina",
+      nome: "Nortriptilina",
+      principioAtivo: "Nortriptilina",
+      grupo: "Antidepressivos",
+      classe: "Antidepressivo tricíclico — amina secundária",
+      acao: "Inibição de recaptação de monoaminas",
+      receptores: ["NET", "SERT", "M1", "H1", "alpha1"],
+      mecanismo: "Inibe a recaptação de noradrenalina e serotonina, com predomínio noradrenérgico típico das aminas secundárias. Também antagoniza receptores muscarínicos, H1 e α1.",
+      efeitos: ["Aumento de noradrenalina e serotonina sinápticas"],
+      usos: ["Depressão", "Dor neuropática em contextos selecionados"],
+      adversos: ["Boca seca", "Constipação", "Hipotensão ortostática", "Sedação", "Taquicardia"],
+      alertas: ["Pode reduzir o limiar convulsivo", "Cautela com arritmias e overdose"],
+      dica: "Nortriptilina = TCA secundária → NET predominante + M1/H1/α1.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "amitriptilina",
+      nome: "Amitriptilina",
+      principioAtivo: "Amitriptilina",
+      grupo: "Antidepressivos",
+      classe: "Antidepressivo tricíclico — amina terciária",
+      acao: "Inibição de recaptação de serotonina e noradrenalina",
+      receptores: ["SERT", "NET", "M1", "H1", "alpha1"],
+      mecanismo: "Inibe SERT e NET e apresenta afinidade importante por receptores muscarínicos M1, histamínicos H1 e α1-adrenérgicos. Esses alvos explicam o perfil antidepressivo e grande parte dos efeitos adversos.",
+      efeitos: ["Aumento de serotonina e noradrenalina", "Sedação"],
+      usos: ["Depressão", "Dor neuropática e outras indicações selecionadas"],
+      adversos: ["Boca seca", "Palpitações/taquicardia", "Sedação", "Hipotensão ortostática", "Constipação"],
+      alertas: ["Pode reduzir o limiar convulsivo", "Risco de cardiotoxicidade em overdose"],
+      dica: "Amitriptilina = SERT/NET + M1/H1/α1 → boca seca + sono + hipotensão ortostática.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "maprotilina",
+      nome: "Maprotilina",
+      principioAtivo: "Maprotilina",
+      grupo: "Antidepressivos",
+      classe: "Antidepressivo tetracíclico",
+      acao: "Inibição predominante da recaptação de noradrenalina",
+      receptores: ["NET", "H1", "alpha1", "alpha2"],
+      mecanismo: "É forte inibidora da recaptação de noradrenalina por NET, com pouca ação sobre recaptação serotoninérgica. Também apresenta forte ação anti-H1 e antagonismo α-adrenérgico.",
+      efeitos: ["Aumento de noradrenalina sináptica", "Sedação por bloqueio H1"],
+      usos: ["Depressão em situações selecionadas"],
+      adversos: ["Sedação", "Hipotensão ortostática", "Efeitos anticolinérgicos"],
+      alertas: ["Pode reduzir o limiar convulsivo"],
+      dica: "Maprotilina = tetracíclico → NET forte + H1; atenção a sedação e convulsão.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "amoxapina",
+      nome: "Amoxapina",
+      principioAtivo: "Amoxapina",
+      grupo: "Antidepressivos",
+      classe: "Tricíclico dibenzoxazepínico de segunda geração",
+      acao: "Inibição de recaptação de noradrenalina + antagonismo dopaminérgico",
+      receptores: ["NET", "D2", "D4", "5-HT6"],
+      mecanismo: "Inibe principalmente a recaptação pré-sináptica de noradrenalina e também antagoniza receptores dopaminérgicos D2 e D4. Há atividade descrita em 5-HT6.",
+      efeitos: ["Aumento da neurotransmissão noradrenérgica", "Antagonismo dopaminérgico"],
+      usos: ["Depressão, especialmente em cenários de resposta inadequada a opções de primeira linha"],
+      adversos: ["Constipação", "Hipotensão", "Taquicardia", "Sedação", "Efeitos extrapiramidais podem ocorrer"],
+      alertas: ["Pode reduzir o limiar convulsivo", "Atividade antidopaminérgica diferencia a amoxapina de TCAs clássicos"],
+      dica: "Amoxapina = NET + D2/D4; pode lembrar perfil antidepressivo com componente antidopaminérgico.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "fenelzina",
+      nome: "Fenelzina",
+      principioAtivo: "Fenelzina",
+      grupo: "Antidepressivos",
+      classe: "IMAO irreversível não seletivo",
+      acao: "Inibição irreversível de MAO-A e MAO-B",
+      receptores: ["MAO-A", "MAO-B"],
+      mecanismo: "Inibe irreversivelmente MAO-A e MAO-B, reduzindo a degradação de serotonina, noradrenalina e dopamina e aumentando a disponibilidade dessas monoaminas.",
+      efeitos: ["Aumento de serotonina", "Aumento de noradrenalina", "Aumento de dopamina"],
+      usos: ["Depressão resistente/atípica em contextos selecionados"],
+      adversos: ["Hipotensão ortostática", "Tontura", "Disfunção sexual", "Ganho de peso"],
+      alertas: ["Tiramina + IMAO pode causar crise hipertensiva", "Associação com fármacos serotoninérgicos pode causar síndrome serotoninérgica", "IMAO irreversível exige washout adequado"],
+      dica: "Fenelzina = MAO-A/B irreversível. Queijo/embutidos/vinho + tiramina = crise hipertensiva.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "trazodona",
+      nome: "Trazodona",
+      principioAtivo: "Trazodona",
+      grupo: "Antidepressivos",
+      classe: "SARI — antagonista serotoninérgico e inibidor de recaptação",
+      acao: "Antagonismo 5-HT2A + inibição de SERT",
+      receptores: ["5-HT2A", "SERT", "H1", "alpha1"],
+      mecanismo: "Antagoniza receptores serotoninérgicos 5-HT2 e inibe o transportador de serotonina. Também bloqueia H1 e α1-adrenérgicos, contribuindo para sedação e hipotensão ortostática.",
+      efeitos: ["Aumento de serotonina sináptica", "Sedação"],
+      usos: ["Depressão", "Insônia em contextos selecionados"],
+      adversos: ["Sedação", "Tontura", "Hipotensão ortostática"],
+      alertas: ["Bloqueio α1 favorece hipotensão ortostática"],
+      dica: "Trazodona = 5-HT2A + SERT + H1/α1.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "venlafaxina",
+      nome: "Venlafaxina",
+      principioAtivo: "Venlafaxina",
+      grupo: "Antidepressivos",
+      classe: "IRSN / SNRI",
+      acao: "Inibição da recaptação de serotonina e noradrenalina",
+      receptores: ["SERT", "NET"],
+      mecanismo: "Inibe os transportadores SERT e NET, aumentando serotonina e noradrenalina. Em doses mais baixas, o efeito serotoninérgico tende a predominar; em doses maiores, a ação noradrenérgica torna-se mais evidente.",
+      efeitos: ["Aumento de serotonina", "Aumento de noradrenalina"],
+      usos: ["Depressão maior", "Ansiedade social", "Transtorno do pânico"],
+      adversos: ["Náusea", "Disfunção sexual", "Insônia", "Elevação da pressão arterial em alguns pacientes"],
+      alertas: ["Retirada abrupta pode causar sintomas de descontinuação"],
+      dica: "Venlafaxina = SNRI → SERT + NET.",
+      fonte: SOURCE
+    },
+
+    {
+      id: "bupropiona",
+      nome: "Bupropiona",
+      principioAtivo: "Bupropiona",
+      grupo: "Antidepressivos",
+      classe: "IRND / NDRI",
+      acao: "Inibição da recaptação de noradrenalina e dopamina",
+      receptores: ["NET", "DAT"],
+      mecanismo: "Inibe os transportadores de noradrenalina e dopamina (NET e DAT), aumentando a disponibilidade dessas monoaminas. Tem efeito mínimo direto sobre serotonina.",
+      efeitos: ["Aumento de noradrenalina", "Aumento de dopamina", "Perfil geralmente mais ativador"],
+      usos: ["Depressão", "Cessação do tabagismo"],
+      adversos: ["Insônia", "Agitação", "Boca seca"],
+      alertas: ["Pode reduzir o limiar convulsivo e é contraindicada em situações de alto risco de convulsão"],
+      dica: "Bupropiona = NET + DAT; quase não mexe diretamente com serotonina.",
+      fonte: SOURCE
+    }
+
+  ];
+
+
+  drugs.forEach(
+    function (
+      incoming
+    ) {
+
+      const index =
+        window.CortexFarmacos
+          .findIndex(
+            function (
+              item
+            ) {
+
+              return (
+                item.id ===
+                incoming.id
+              );
+
+            }
+          );
+
+
+      if (
+        index >= 0
+      ) {
+
+        window.CortexFarmacos[
+          index
+        ] =
+          Object.assign(
+            {},
+            window.CortexFarmacos[
+              index
+            ],
+            incoming
+          );
+
+      }
+      else {
+
+        window.CortexFarmacos
+          .push(
+            incoming
+          );
+
+      }
+
+    }
+  );
+
+})();
+/* CORTEX ANTIDEPRESSIVOS DIEGO V1 END */
