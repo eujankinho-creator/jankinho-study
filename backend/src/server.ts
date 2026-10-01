@@ -28,11 +28,13 @@ import {
 import { prisma } from "../../lib/prisma";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
-import { listarFlashcards, criarFlashcard, limparFlashcardsParaMetodologia } from "./flashcards";
+import { listarFlashcards, criarFlashcard } from "./flashcards";
+import { limparFlashcardsParaMetodologia } from "./flashcardsMetodologia";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import { sincronizarQuestoesDiego } from "./questoesDiego";
 import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
+import { sincronizarQuestoesCalculoMedicamentos } from "./questoesCalculoMedicamentos";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -924,6 +926,38 @@ async function criarQuestao(
           ).trim()
         : null;
 
+
+    const fonte =
+      body.fonte
+        ? String(
+            body.fonte
+          ).trim()
+        : null;
+
+
+    const fonteUrl =
+      body.fonteUrl
+        ? String(
+            body.fonteUrl
+          ).trim()
+        : null;
+
+
+    const imagemUrl =
+      body.imagemUrl
+        ? String(
+            body.imagemUrl
+          ).trim()
+        : null;
+
+
+    const imagemAlt =
+      body.imagemAlt
+        ? String(
+            body.imagemAlt
+          ).trim()
+        : null;
+
     const alternativas =
       Array.isArray(
         body.alternativas
@@ -1000,6 +1034,10 @@ async function criarQuestao(
           explicacao,
           dificuldade,
           tema,
+          fonte,
+          fonteUrl,
+          imagemUrl,
+          imagemAlt,
           usuarioId,
           disciplinaId,
 
@@ -4394,6 +4432,8 @@ server.listen(
         await sincronizarQuestoesDiego();
 
         await sincronizarQuestoesFarmacocineticaHaggi();
+
+        await sincronizarQuestoesCalculoMedicamentos();
 
         await limparFlashcardsParaMetodologia();
 
