@@ -135,7 +135,6 @@
   .guided-feedback.correct,
   .activity-result.correct,
   .result-icon.correct,
-  .summary-value.success,
   .badge-success,
   .correct-button,
   .type-button.income-selected
@@ -211,7 +210,6 @@
   .guided-feedback.wrong,
   .activity-result.wrong,
   .result-icon.wrong,
-  .summary-value.error,
   .badge-danger,
   .wrong-item,
   .danger-button,
@@ -553,3 +551,23 @@ label:has(input[type="radio"]:checked) {
   }
 
 }
+
+
+/* CORTEX PERFORMANCE SUMMARY TEXT ONLY
+   Acertos/Erros no resumo sao numeros informativos, sem barra/fundo. */
+:is(#cortex-semantic-priority, html[data-theme]) body .summary-value.success {
+  color:var(--cortex-state-success) !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+:is(#cortex-semantic-priority, html[data-theme]) body .summary-value.error {
+  color:var(--cortex-state-danger) !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+/* CORTEX PERFORMANCE SUMMARY TEXT ONLY END */
