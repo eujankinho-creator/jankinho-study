@@ -826,6 +826,126 @@
         open
       );
 
+
+    if (
+      open
+    ) {
+
+      const menu =
+        overlay.querySelector(
+          ".cortex-mobile-sidebar-menu"
+        );
+
+
+      const active =
+        overlay.querySelector(
+          ".menu-item.active"
+        );
+
+
+      if (
+        menu &&
+        active
+      ) {
+
+        window.requestAnimationFrame(
+          function () {
+
+            const menuRect =
+              menu.getBoundingClientRect();
+
+
+            const activeRect =
+              active.getBoundingClientRect();
+
+
+            if (
+              activeRect.top <
+                menuRect.top ||
+              activeRect.bottom >
+                menuRect.bottom
+            ) {
+
+              const target =
+                active.offsetTop -
+                menu.clientHeight /
+                  2 +
+                active.clientHeight /
+                  2;
+
+
+              menu.scrollTop =
+                Math.max(
+                  0,
+                  target
+                );
+
+            }
+
+          }
+        );
+
+      }
+
+    }
+
+  }
+
+
+  function resetMobileMenuState() {
+
+    document.documentElement
+      .classList.remove(
+        "cortex-mobile-menu-open"
+      );
+
+
+    document.body
+      .classList.remove(
+        "cortex-mobile-menu-open"
+      );
+
+
+    const button =
+      document.getElementById(
+        "cortexMobileSidebarButton"
+      );
+
+
+    const overlay =
+      document.getElementById(
+        "cortexMobileSidebarOverlay"
+      );
+
+
+    if (
+      button
+    ) {
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+
+
+    if (
+      overlay
+    ) {
+
+      overlay.classList.remove(
+        "open"
+      );
+
+
+      overlay.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
   }
 
 
@@ -1149,7 +1269,40 @@
   }
 
 
+  window.addEventListener(
+      "pageshow",
+      function () {
+
+        resetMobileMenuState();
+
+      },
+      {
+        passive:
+          true
+      }
+    );
+
+
+  window.addEventListener(
+      "orientationchange",
+      function () {
+
+        window.setTimeout(
+          resetMobileMenuState,
+          80
+        );
+
+      },
+      {
+        passive:
+          true
+      }
+    );
+
+
   function init() {
+
+    resetMobileMenuState();
 
     cleanupLegacyMobileArtifacts();
 
