@@ -257,8 +257,21 @@
         "cortex-desktop-intro-pending"
       );
 
+
+      document.documentElement
+        .classList
+        .remove(
+          "cortex-dashboard-intro-boot",
+          "cortex-dashboard-content-hidden"
+        );
+
       return;
     }
+
+
+    body.classList.add(
+      "cortex-desktop-intro-pending"
+    );
 
 
     try {
@@ -287,10 +300,28 @@
         );
 
 
+        /*
+         * Revela o dashboard por baixo do fade
+         * somente quando a intro já começou a sair.
+         */
+        document.documentElement
+          .classList
+          .remove(
+            "cortex-dashboard-content-hidden"
+          );
+
+
         window.setTimeout(
           function () {
 
             intro.remove();
+
+
+            document.documentElement
+              .classList
+              .remove(
+                "cortex-dashboard-intro-boot"
+              );
 
           },
           820
