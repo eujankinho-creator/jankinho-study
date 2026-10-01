@@ -2433,50 +2433,67 @@ function contentTypeForFile(
 }
 
 
-async function downloadResolvedSigaaFile(
+async function directAuthenticatedSigaaDownload(
   file:
     any,
   tempDirectory:
     string
 ) {
 
-  /*
-   * sigaa-api possui um retry interno em SigaaFile.download().
-   * Na UFPB atual esse retry pode tentar reconstruir o arquivo
-   * com FileData incompleto e gerar "SIGAA: Invalid FileData.".
-   *
-   * Como os anexos de aula ja carregam o formulario JSF valido,
-   * usamos o HTTP interno diretamente e evitamos esse retry.
-   */
   const internalHttp =
     file?.http;
 
 
-  const form =
-    file?.form;
+  const httpSession =
+    internalHttp?.httpSession;
 
 
   if (
-    internalHttp &&
-    typeof internalHttp
-      .downloadFileByPost ===
-      "function" &&
-    form?.action?.href &&
-    form?.postValues
+    !httpSession ||
+    typeof httpSession
+      .getURL !==
+      "function" ||
+    typeof httpSession
+      .afterHTTPOptions !==
+      "function"
   ) {
 
-    return withTimeout<string>(
-      internalHttp
-        .downloadFileByPost(
-          form.action.href,
-          form.postValues,
-          tempDirectory
-        ),
-      45000,
-      "Timeout ao baixar anexo de aula."
+    throw new Error(
+      "Sessao HTTP interna do SIGAA indisponivel."
     );
 
   }
+
+
+  let requestUrl:
+    URL;
+
+
+  let method:
+    "GET" |
+    "POST";
+
+
+  let body:
+    string |
+    undefined;
+
+
+  let headers:
+    Record<string, string> = {
+      "User-Agent":
+        "Cortex SIGAA Downloader/1.0",
+
+      Accept:
+        "*/*",
+
+      "Cache-Control":
+        "no-cache",
+  };
+
+
+  const form =
+    file?.form;
 
 
   const id =
@@ -2494,62 +2511,421 @@ async function downloadResolvedSigaaFile(
 
 
   if (
-    internalHttp &&
-    typeof internalHttp
-      .downloadFileByGet ===
-      "function" &&
+    form?.action?.href &&
+    form?.postValues
+  ) {
+
+    requestUrl =
+      httpSession.getURL(
+        form.action.href
+      );
+
+
+    method =
+      "POST";
+
+
+    body =
+      new URLSearchParams(
+        Object.entries(
+          form.postValues
+        )
+          .map(
+            function (
+              entry
+            ) {
+
+              return [
+                String(
+                  entry[0]
+                ),
+                String(
+                  entry[1] ??
+                  ""
+                ),
+              ];
+
+            }
+          )
+      )
+        .toString();
+
+
+    headers[
+      "Content-Type"
+    ] =
+      "application/x-www-form-urlencoded";
+
+
+    headers[
+      "Content-Length"
+    ] =
+      String(
+        Buffer.byteLength(
+          body
+        )
+      );
+
+  }
+  else if (
     id &&
     key
   ) {
 
-    return withTimeout<string>(
-      internalHttp
-        .downloadFileByGet(
-          "/sigaa/verFoto?idArquivo=" +
-          encodeURIComponent(
-            id
-          ) +
-          "&key=" +
-          encodeURIComponent(
-            key
-          ),
-          tempDirectory
-        ),
-      45000,
-      "Timeout ao baixar arquivo do SIGAA."
+    requestUrl =
+      httpSession.getURL(
+        "/sigaa/verFoto?idArquivo=" +
+        encodeURIComponent(
+          id
+        ) +
+        "&key=" +
+        encodeURIComponent(
+          key
+        )
+      );
+
+
+    method =
+      "GET";
+
+  }
+  else {
+
+    throw new Error(
+      "Arquivo SIGAA sem formulario ou chave valida."
     );
 
   }
 
 
-  if (
-    typeof file?.download ===
-    "function"
+  for (
+    let redirectCount = 0;
+    redirectCount < 6;
+    redirectCount += 1
   ) {
 
-    /*
-     * O terceiro argumento existe no runtime da biblioteca
-     * e desliga o retry que causa Invalid FileData.
-     */
-    return withTimeout<string>(
-      file.download(
+    const requestOptions =
+      await httpSession
+        .afterHTTPOptions(
+          requestUrl,
+          {
+            hostname:
+              requestUrl.hostname,
+
+            method,
+
+            headers:
+              {
+                ...headers,
+              },
+          },
+          body
+        );
+
+
+    const response =
+      await withTimeout<Response>(
+        fetch(
+          requestUrl,
+          {
+            method,
+
+            headers:
+              requestOptions.headers,
+
+            body:
+              method ===
+                "POST"
+                ? body
+                : undefined,
+
+            redirect:
+              "manual",
+          }
+        ),
+        45000,
+        "Timeout ao baixar arquivo diretamente do SIGAA."
+      );
+
+
+    if (
+      response.status >= 300 &&
+      response.status < 400
+    ) {
+
+      const location =
+        response.headers
+          .get(
+            "location"
+          );
+
+
+      if (!location) {
+
+        throw new Error(
+          "SIGAA redirecionou o download sem informar destino."
+        );
+
+      }
+
+
+      requestUrl =
+        new URL(
+          location,
+          requestUrl
+        );
+
+
+      /*
+       * O SIGAA costuma responder POST -> 302 -> GET
+       * para entregar o binario.
+       */
+      method =
+        "GET";
+
+
+      body =
+        undefined;
+
+
+      delete headers[
+        "Content-Type"
+      ];
+
+
+      delete headers[
+        "Content-Length"
+      ];
+
+
+      continue;
+
+    }
+
+
+    if (
+      response.status !== 200
+    ) {
+
+      throw new Error(
+        "SIGAA retornou HTTP " +
+        response.status +
+        " no download."
+      );
+
+    }
+
+
+    const contentType =
+      String(
+        response.headers
+          .get(
+            "content-type"
+          ) ||
+        ""
+      )
+        .toLowerCase();
+
+
+    if (
+      contentType.includes(
+        "text/html"
+      )
+    ) {
+
+      const preview =
+        (
+          await response
+            .text()
+        )
+          .slice(
+            0,
+            500
+          );
+
+
+      throw new Error(
+        "SIGAA retornou HTML em vez do arquivo: " +
+        preview
+          .replace(
+            /\s+/g,
+            " "
+          )
+          .slice(
+            0,
+            180
+          )
+      );
+
+    }
+
+
+    const disposition =
+      response.headers
+        .get(
+          "content-disposition"
+        ) ||
+      "";
+
+
+    let filename =
+      safeText(
+        file?.title ||
+        "arquivo",
+        180
+      );
+
+
+    const utf8Name =
+      disposition
+        .match(
+          /filename\*=UTF-8''([^;]+)/i
+        );
+
+
+    const plainName =
+      disposition
+        .match(
+          /filename="?([^";]+)"?/i
+        );
+
+
+    if (
+      utf8Name?.[1]
+    ) {
+
+      try {
+
+        filename =
+          decodeURIComponent(
+            utf8Name[1]
+          );
+
+      }
+      catch {
+
+        filename =
+          utf8Name[1];
+
+      }
+
+    }
+    else if (
+      plainName?.[1]
+    ) {
+
+      filename =
+        plainName[1];
+
+    }
+
+
+    filename =
+      path.basename(
+        filename
+          .replace(
+            /[\r\n]/g,
+            "_"
+          )
+      );
+
+
+    const finalPath =
+      path.join(
         tempDirectory,
-        undefined,
-        false
-      ) as Promise<string>,
-      45000,
-      "Timeout ao baixar arquivo."
-    );
+        filename ||
+        "arquivo"
+      );
+
+
+    const buffer =
+      Buffer.from(
+        await response
+          .arrayBuffer()
+      );
+
+
+    await import(
+      "node:fs/promises"
+    )
+      .then(
+        function (
+          fs
+        ) {
+
+          return fs.writeFile(
+            finalPath,
+            buffer
+          );
+
+        }
+      );
+
+
+    return finalPath;
 
   }
 
 
   throw new Error(
-    "Arquivo SIGAA sem mecanismo de download."
+    "SIGAA excedeu o limite de redirecionamentos no download."
   );
 
 }
 
+
+async function downloadResolvedSigaaFile(
+  file:
+    any,
+  tempDirectory:
+    string
+) {
+
+  try {
+
+    return await directAuthenticatedSigaaDownload(
+      file,
+      tempDirectory
+    );
+
+  }
+  catch (
+    directError
+  ) {
+
+    console.warn(
+      "SIGAA direct authenticated download:",
+      directError instanceof Error
+        ? directError.message
+        : String(
+            directError
+          )
+    );
+
+
+    if (
+      typeof file?.download ===
+      "function"
+    ) {
+
+      return withTimeout<string>(
+        file.download(
+          tempDirectory,
+          undefined,
+          false
+        ) as Promise<string>,
+        45000,
+        "Timeout ao baixar arquivo."
+      );
+
+    }
+
+
+    throw directError;
+
+  }
+
+}
 
 async function resolveFreshLessonFile(
   session:
