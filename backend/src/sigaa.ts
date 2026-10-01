@@ -2433,6 +2433,169 @@ function contentTypeForFile(
 }
 
 
+async function downloadResolvedSigaaFile(
+  file:
+    any,
+  tempDirectory:
+    string
+) {
+
+  /*
+   * sigaa-api possui um retry interno em SigaaFile.download().
+   * Na UFPB atual esse retry pode tentar reconstruir o arquivo
+   * com FileData incompleto e gerar "SIGAA: Invalid FileData.".
+   *
+   * Como os anexos de aula ja carregam o formulario JSF valido,
+   * usamos o HTTP interno diretamente e evitamos esse retry.
+   */
+  const internalHttp =
+    file?.http;
+
+
+  const form =
+    file?.form;
+
+
+  if (
+    internalHttp &&
+    typeof internalHttp
+      .downloadFileByPost ===
+      "function" &&
+    form?.action?.href &&
+    form?.postValues
+  ) {
+
+    return withTimeout<string>(
+      internalHttp
+        .downloadFileByPost(
+          form.action.href,
+          form.postValues,
+          tempDirectory
+        ),
+      45000,
+      "Timeout ao baixar anexo de aula."
+    );
+
+  }
+
+
+  const id =
+    safeText(
+      file?.id,
+      200
+    );
+
+
+  const key =
+    safeText(
+      file?.key,
+      1000
+    );
+
+
+  if (
+    internalHttp &&
+    typeof internalHttp
+      .downloadFileByGet ===
+      "function" &&
+    id &&
+    key
+  ) {
+
+    return withTimeout<string>(
+      internalHttp
+        .downloadFileByGet(
+          "/sigaa/verFoto?idArquivo=" +
+          encodeURIComponent(
+            id
+          ) +
+          "&key=" +
+          encodeURIComponent(
+            key
+          ),
+          tempDirectory
+        ),
+      45000,
+      "Timeout ao baixar arquivo do SIGAA."
+    );
+
+  }
+
+
+  if (
+    typeof file?.download ===
+    "function"
+  ) {
+
+    /*
+     * O terceiro argumento existe no runtime da biblioteca
+     * e desliga o retry que causa Invalid FileData.
+     */
+    return withTimeout<string>(
+      file.download(
+        tempDirectory,
+        undefined,
+        false
+      ) as Promise<string>,
+      45000,
+      "Timeout ao baixar arquivo."
+    );
+
+  }
+
+
+  throw new Error(
+    "Arquivo SIGAA sem mecanismo de download."
+  );
+
+}
+
+
+async function resolveFreshLessonFile(
+  session:
+    SigaaSession,
+  course:
+    any,
+  courseId:
+    string,
+  fileId:
+    string
+) {
+
+  const lessons =
+    await loadCourseLessons(
+      session,
+      course,
+      courseId,
+      true
+    );
+
+
+  return uniqueFiles(
+    lessonFiles(
+      lessons
+    )
+  )
+    .find(
+      function (
+        item:
+          any
+      ) {
+
+        return (
+          String(
+            item?.id ||
+            ""
+          ) ===
+          fileId
+        );
+
+      }
+    );
+
+}
+
+
 export async function downloadSigaaCourseFile(
   userId:
     number,
@@ -2489,42 +2652,28 @@ export async function downloadSigaaCourseFile(
     }
 
 
-    let files =
-      await loadCourseFiles(
+    /*
+     * Prioriza anexos de aula, pois sao a fonte mais estavel
+     * na versao atual do SIGAA/UFPB e trazem o formulario JSF
+     * completo necessario para o download.
+     */
+    let file =
+      await resolveFreshLessonFile(
         session,
         course,
         courseId,
-        false
-      );
-
-
-    let file =
-      files.find(
-        function (
-          item:
-            any
-        ) {
-
-          return (
-            String(
-              item.id ||
-              ""
-            ) ===
-            fileId
-          );
-
-        }
-      );
+        fileId
+      )
+        .catch(
+          function () {
+            return null;
+          }
+        );
 
 
     if (!file) {
 
-      /*
-       * O material pode ter sido publicado depois que a
-       * disciplina entrou no cache. Atualiza as duas fontes
-       * antes de responder que o arquivo nao existe.
-       */
-      files =
+      const files =
         await loadCourseFiles(
           session,
           course,
@@ -2542,7 +2691,7 @@ export async function downloadSigaaCourseFile(
 
             return (
               String(
-                item.id ||
+                item?.id ||
                 ""
               ) ===
               fileId
@@ -2576,14 +2725,64 @@ export async function downloadSigaaCourseFile(
       );
 
 
-    const downloadedPath =
-      await withTimeout<string>(
-        file.download(
+    let downloadedPath:
+      string;
+
+
+    try {
+
+      downloadedPath =
+        await downloadResolvedSigaaFile(
+          file,
           tempDirectory
-        ) as Promise<string>,
-        45000,
-        "Timeout ao baixar arquivo."
+        );
+
+    }
+    catch (
+      firstError
+    ) {
+
+      console.warn(
+        "SIGAA file download first attempt:",
+        firstError instanceof Error
+          ? firstError.message
+          : String(
+              firstError
+            )
       );
+
+
+      /*
+       * Formulario/chave do SIGAA pode expirar rapidamente.
+       * Recarrega o topico da aula e tenta uma unica vez
+       * com um objeto novo, sem acionar o retry quebrado
+       * da biblioteca.
+       */
+      const refreshed =
+        await resolveFreshLessonFile(
+          session,
+          course,
+          courseId,
+          fileId
+        );
+
+
+      if (!refreshed) {
+        throw firstError;
+      }
+
+
+      file =
+        refreshed;
+
+
+      downloadedPath =
+        await downloadResolvedSigaaFile(
+          file,
+          tempDirectory
+        );
+
+    }
 
 
     const resolved =
