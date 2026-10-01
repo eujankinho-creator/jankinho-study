@@ -887,3 +887,126 @@
     width: 100%;
   }
 }
+
+
+/* =========================================================
+   CORTEX SIMULADO VISUAL QUESTIONS V1
+========================================================= */
+
+.simulation-question-meta {
+  margin:
+    10px 0 0;
+}
+
+
+.sim-question-source {
+  display:
+    inline-flex;
+
+  max-width:
+    100%;
+
+  color:
+    #99a5b4;
+
+  font-size:
+    11px;
+
+  line-height:
+    1.45;
+
+  text-decoration:
+    none;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+a.sim-question-source:hover {
+  color:
+    var(--theme-accent);
+
+  text-decoration:
+    underline;
+}
+
+
+.simulation-question-visual {
+  width:
+    100%;
+
+  margin:
+    20px 0 24px;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  border-radius:
+    18px;
+
+  background:
+    #0d1117;
+
+  box-shadow:
+    0 18px 45px
+    rgba(0,0,0,.22);
+}
+
+
+.simulation-question-visual img {
+  display:
+    block;
+
+  width:
+    100%;
+
+  height:
+    auto;
+
+  max-height:
+    620px;
+
+  object-fit:
+    contain;
+
+  background:
+    #0d1117;
+}
+
+
+.simulation-question-visual.hidden {
+  display:
+    none;
+}
+
+
+@media (max-width: 640px) {
+
+  .simulation-question-visual {
+    margin:
+      15px 0 19px;
+
+    border-radius:
+      12px;
+  }
+
+
+  .simulation-question-visual img {
+    max-height:
+      430px;
+  }
+
+
+  .sim-question-source {
+    font-size:
+      10px;
+  }
+
+}
+
+/* CORTEX SIMULADO VISUAL QUESTIONS V1 END */
