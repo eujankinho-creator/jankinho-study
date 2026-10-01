@@ -28,8 +28,7 @@ import {
 import { prisma } from "../../lib/prisma";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
-import { listarFlashcards, criarFlashcard } from "./flashcards";
-import { sincronizarFlashcardsDasQuestoes, sincronizarFlashcardDaQuestao } from "./flashcardsQuestoes";
+import { listarFlashcards, criarFlashcard, limparFlashcardsParaMetodologia } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import { sincronizarQuestoesDiego } from "./questoesDiego";
@@ -1032,11 +1031,6 @@ async function criarQuestao(
           alternativas: true,
         },
       });
-
-    await sincronizarFlashcardDaQuestao(
-      questao.id
-    );
-
 
     json(
       response,
@@ -2779,18 +2773,6 @@ const server =
             );
 
 
-          if (
-            resultado.status >=
-              200 &&
-            resultado.status <
-              300
-          ) {
-
-            await sincronizarFlashcardsDasQuestoes();
-
-          }
-
-
           json(
             response,
             resultado.status,
@@ -4413,7 +4395,7 @@ server.listen(
 
         await sincronizarQuestoesFarmacocineticaHaggi();
 
-        await sincronizarFlashcardsDasQuestoes();
+        await limparFlashcardsParaMetodologia();
 
       }
     )()
@@ -4421,7 +4403,7 @@ server.listen(
         function (error) {
 
           console.error(
-            "[conteudo] Falha ao sincronizar questoes/flashcards:",
+            "[conteudo] Falha ao sincronizar questoes/limpeza de flashcards:",
             error
           );
 
