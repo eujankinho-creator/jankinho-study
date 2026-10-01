@@ -3336,6 +3336,33 @@ const server =
           }
 
 
+          const sourceParam =
+            url.searchParams.get(
+              "source"
+            );
+
+
+          const source =
+            sourceParam ===
+              "lesson" ||
+            sourceParam ===
+              "course"
+              ? sourceParam
+              : null;
+
+
+          const lessonId =
+            url.searchParams.get(
+              "lessonId"
+            );
+
+
+          const expectedTitle =
+            url.searchParams.get(
+              "title"
+            );
+
+
           const result =
             await downloadSigaaCourseFile(
               usuarioId,
@@ -3344,7 +3371,12 @@ const server =
               ),
               decodeURIComponent(
                 matchSigaaCourseFile[2]
-              )
+              ),
+              {
+                source,
+                lessonId,
+                expectedTitle,
+              }
             );
 
 
