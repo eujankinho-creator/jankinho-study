@@ -3368,14 +3368,66 @@ const server =
           }
 
 
-          const safeFilename =
+          const originalFilename =
             String(
               result.filename ||
               "arquivo"
             )
               .replace(
-                /[\r\n"]/g,
+                /[\u0000-\u001F\u007F]/g,
                 "_"
+              )
+              .trim() ||
+            "arquivo";
+
+
+          const fallbackFilename =
+            originalFilename
+              .normalize(
+                "NFKD"
+              )
+              .replace(
+                /[\u0300-\u036f]/g,
+                ""
+              )
+              .replace(
+                /[^\x20-\x7E]/g,
+                "_"
+              )
+              .replace(
+                /["\\]/g,
+                "_"
+              )
+              .slice(
+                0,
+                180
+              ) ||
+            "arquivo";
+
+
+          const encodedFilename =
+            encodeURIComponent(
+              originalFilename
+            )
+              .replace(
+                /['()*]/g,
+                function (
+                  character
+                ) {
+
+                  return (
+                    "%" +
+                    character
+                      .charCodeAt(
+                        0
+                      )
+                      .toString(
+                        16
+                      )
+                      .toUpperCase()
+                  );
+
+                }
               );
 
 
@@ -3393,11 +3445,9 @@ const server =
 
               "Content-Disposition":
                 "attachment; filename=\"" +
-                safeFilename +
+                fallbackFilename +
                 "\"; filename*=UTF-8''" +
-                encodeURIComponent(
-                  safeFilename
-                ),
+                encodedFilename,
 
               "Cache-Control":
                 "private, no-store",
