@@ -264,15 +264,55 @@ sincronizarFlashcardDaQuestao(
     );
 
 
+  const existente =
+    await prisma
+      .flashcard
+      .findFirst({
+        where: {
+          questaoId:
+            questao.id,
+
+          origem:
+            "questao",
+        },
+      });
+
+
+  if (
+    existente
+  ) {
+
+    return prisma
+      .flashcard
+      .update({
+        where: {
+          id:
+            existente.id,
+        },
+
+        data: {
+          frente,
+          verso,
+
+          origem:
+            "questao",
+
+          tema,
+
+          disciplina,
+
+          usuarioId:
+            questao.usuarioId,
+        },
+      });
+
+  }
+
+
   return prisma
     .flashcard
-    .upsert({
-      where: {
-        questaoId:
-          questao.id,
-      },
-
-      create: {
+    .create({
+      data: {
         frente,
         verso,
 
@@ -288,21 +328,6 @@ sincronizarFlashcardDaQuestao(
 
         questaoId:
           questao.id,
-      },
-
-      update: {
-        frente,
-        verso,
-
-        origem:
-          "questao",
-
-        tema,
-
-        disciplina,
-
-        usuarioId:
-          questao.usuarioId,
       },
     });
 
