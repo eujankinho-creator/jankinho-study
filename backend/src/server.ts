@@ -853,10 +853,37 @@ async function listarQuestoes(
         },
       });
 
+    const publicas =
+      questoes.map(
+        function (
+          questao
+        ) {
+
+          return {
+            ...questao,
+
+            imagemUrl:
+              questao.imagemUrl &&
+              questao.imagemUrl
+                .startsWith(
+                  "data:image/"
+                )
+                ? (
+                    "/api/questoes/" +
+                    questao.id +
+                    "/imagem"
+                  )
+                : questao.imagemUrl,
+          };
+
+        }
+      );
+
+
     json(
       response,
       200,
-      questoes
+      publicas
     );
   }
   catch (error) {
@@ -874,6 +901,123 @@ async function listarQuestoes(
       }
     );
   }
+}
+
+
+async function servirImagemQuestao(
+  request: IncomingMessage,
+  response: ServerResponse,
+  questaoId: number
+) {
+
+  const usuarioId =
+    await exigirUsuario(
+      request,
+      response
+    );
+
+
+  if (!usuarioId) {
+    return;
+  }
+
+
+  const questao =
+    await prisma
+      .questao
+      .findUnique({
+        where: {
+          id:
+            questaoId,
+        },
+
+        select: {
+          imagemUrl:
+            true,
+
+          imagemAlt:
+            true,
+        },
+      });
+
+
+  if (
+    !questao ||
+    !questao.imagemUrl ||
+    !questao.imagemUrl
+      .startsWith(
+        "data:image/"
+      )
+  ) {
+
+    json(
+      response,
+      404,
+      {
+        error:
+          "Imagem da questão não encontrada.",
+      }
+    );
+
+    return;
+
+  }
+
+
+  const match =
+    questao.imagemUrl
+      .match(
+        /^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/
+      );
+
+
+  if (!match) {
+
+    json(
+      response,
+      415,
+      {
+        error:
+          "Formato de imagem inválido.",
+      }
+    );
+
+    return;
+
+  }
+
+
+  const buffer =
+    Buffer.from(
+      match[2],
+      "base64"
+    );
+
+
+  response.writeHead(
+    200,
+    {
+      "Content-Type":
+        match[1],
+
+      "Content-Length":
+        String(
+          buffer.length
+        ),
+
+      "Cache-Control":
+        "private, max-age=86400",
+
+      "Content-Disposition":
+        "inline",
+    }
+  );
+
+
+  response.end(
+    buffer
+  );
+
 }
 
 
@@ -3355,6 +3499,33 @@ const server =
 
 
         /* QUESTÕES */
+
+        const matchQuestaoImagem =
+          caminho.match(
+            /^\/api\/questoes\/(\d+)\/imagem$/
+          );
+
+
+        if (
+          matchQuestaoImagem &&
+          metodo ===
+            "GET"
+        ) {
+
+          await servirImagemQuestao(
+            request,
+            response,
+            Number(
+              matchQuestaoImagem[1]
+            )
+          );
+
+          return;
+
+        }
+
+
+
 
         if (
           caminho ===
