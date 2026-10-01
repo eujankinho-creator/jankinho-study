@@ -443,7 +443,9 @@
   }
 
 
-  function renderMenu() {
+  function renderMenu(
+    excludedKeys
+  ) {
 
     return sections
       .map(
@@ -459,6 +461,20 @@
               '</div>' +
 
               section.items
+                .filter(
+                  function (
+                    item
+                  ) {
+
+                    return (
+                      !excludedKeys ||
+                      excludedKeys.indexOf(
+                        item.key
+                      ) === -1
+                    );
+
+                  }
+                )
                 .map(
                   renderItem
                 )
@@ -839,7 +855,7 @@
 
       const active =
         overlay.querySelector(
-          ".menu-item.active"
+          ".cortex-mobile-sidebar-menu .menu-item.active"
         );
 
 
@@ -1137,7 +1153,21 @@
         '</div>' +
 
         '<div class="sidebar-menu cortex-mobile-sidebar-menu">' +
-          renderMenu() +
+          renderMenu(
+            [
+              "configuracoes"
+            ]
+          ) +
+        '</div>' +
+
+        '<div class="sidebar-menu cortex-mobile-sidebar-footer">' +
+          renderItem(
+            {
+              href: "/configuracoes",
+              key: "configuracoes",
+              label: "Configurações"
+            }
+          ) +
         '</div>' +
 
       '</aside>';
