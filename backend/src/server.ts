@@ -31,6 +31,7 @@ import { listarCasos, gerarCasoClinico } from "./casos";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
+import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
   concluirSpotifyAuth,
@@ -4014,6 +4015,19 @@ server.on(
 server.listen(
   PORT,
   function () {
+
+    void resetAllPerformanceIfRequested()
+      .catch(
+        function (error) {
+
+          console.error(
+            "[performance-reset] Falha:",
+            error
+          );
+
+        }
+      );
+
 
     void sincronizarQuestoesFarmacocineticaHaggi()
       .catch(
