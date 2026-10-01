@@ -46,6 +46,7 @@ model Questao {
   disciplina   Disciplina    @relation(fields: [disciplinaId], references: [id], onDelete: Cascade)
   usuario      Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   respostas    Resposta[]
+  flashcard    Flashcard?
 }
 
 model Alternativa {
@@ -67,13 +68,18 @@ model Resposta {
 }
 
 model Flashcard {
-  id        Int      @id @default(autoincrement())
-  frente    String
-  verso     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  usuarioId Int
-  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  id          Int      @id @default(autoincrement())
+  frente      String
+  verso       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  usuarioId   Int
+  questaoId   Int?     @unique
+  origem      String   @default("manual")
+  tema        String?
+  disciplina  String?
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  questao     Questao? @relation(fields: [questaoId], references: [id], onDelete: Cascade)
 }
 
 model Movimentacao {
