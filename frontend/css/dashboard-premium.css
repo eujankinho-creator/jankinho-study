@@ -2107,3 +2107,923 @@ html[data-theme="pink-glitter"]
   }
 
 }
+
+/* =========================================================
+   CORTEX CINEMATIC INTRO V1 - DESKTOP
+   Splash premium inspirado em aberturas cinematograficas.
+========================================================= */
+
+.cortex-desktop-intro {
+  display:
+    none;
+}
+
+
+@media (min-width: 901px) {
+
+  body.cortex-desktop-intro-pending {
+    overflow:
+      hidden;
+  }
+
+
+  .cortex-desktop-intro {
+    --intro-accent:
+      var(
+        --theme-accent,
+        #f97316
+      );
+
+    --intro-accent-2:
+      var(
+        --theme-accent-2,
+        #fb923c
+      );
+
+    position:
+      fixed;
+
+    inset:
+      0;
+
+    z-index:
+      2147483600;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    overflow:
+      hidden;
+
+    background:
+      #030303;
+
+    opacity:
+      1;
+
+    visibility:
+      visible;
+
+    pointer-events:
+      auto;
+
+    isolation:
+      isolate;
+  }
+
+
+  .cortex-intro-vignette,
+  .cortex-intro-ambient,
+  .cortex-intro-scan {
+    position:
+      absolute;
+
+    inset:
+      0;
+
+    pointer-events:
+      none;
+  }
+
+
+  .cortex-intro-vignette {
+    z-index:
+      6;
+
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        transparent 20%,
+        rgba(0,0,0,.18) 55%,
+        rgba(0,0,0,.86) 100%
+      );
+  }
+
+
+  .cortex-intro-ambient {
+    z-index:
+      1;
+
+    inset:
+      -25%;
+
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        color-mix(
+          in srgb,
+          var(--intro-accent)
+          17%,
+          transparent
+        ),
+        transparent 28%
+      );
+
+    opacity:
+      0;
+
+    transform:
+      scale(.58);
+
+    filter:
+      blur(34px);
+
+    animation:
+      cortexIntroAmbient
+      2.65s
+      cubic-bezier(.2,.7,.2,1)
+      both;
+  }
+
+
+  .cortex-intro-scan {
+    z-index:
+      2;
+
+    left:
+      -30%;
+
+    right:
+      auto;
+
+    width:
+      30%;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        color-mix(
+          in srgb,
+          var(--intro-accent)
+          10%,
+          transparent
+        ),
+        rgba(255,255,255,.06),
+        transparent
+      );
+
+    opacity:
+      0;
+
+    transform:
+      skewX(-12deg);
+
+    filter:
+      blur(12px);
+
+    animation:
+      cortexIntroScan
+      1.45s
+      1.25s
+      cubic-bezier(.16,.75,.28,1)
+      both;
+  }
+
+
+  .cortex-intro-stage {
+    position:
+      relative;
+
+    z-index:
+      4;
+
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    align-items:
+      center;
+
+    justify-content:
+      center;
+
+    min-width:
+      340px;
+
+    transform:
+      translateZ(0);
+  }
+
+
+  .cortex-intro-mark {
+    position:
+      relative;
+
+    width:
+      110px;
+
+    height:
+      110px;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    opacity:
+      0;
+
+    transform:
+      scale(.70);
+
+    animation:
+      cortexIntroMarkIn
+      .82s
+      .16s
+      cubic-bezier(.18,.86,.24,1.18)
+      both;
+  }
+
+
+  .cortex-intro-mark-glow {
+    position:
+      absolute;
+
+    inset:
+      6px;
+
+    border-radius:
+      50%;
+
+    background:
+      radial-gradient(
+        circle,
+        color-mix(
+          in srgb,
+          var(--intro-accent)
+          31%,
+          transparent
+        ),
+        color-mix(
+          in srgb,
+          var(--intro-accent)
+          8%,
+          transparent
+        )
+        35%,
+        transparent
+        70%
+      );
+
+    opacity:
+      0;
+
+    transform:
+      scale(.65);
+
+    filter:
+      blur(18px);
+
+    animation:
+      cortexIntroLogoGlow
+      1.65s
+      .35s
+      ease-out
+      both;
+  }
+
+
+  .cortex-intro-brain {
+    position:
+      relative;
+
+    z-index:
+      2;
+
+    width:
+      78px;
+
+    height:
+      78px;
+
+    overflow:
+      visible;
+
+    fill:
+      none;
+
+    stroke:
+      var(--intro-accent-2);
+
+    stroke-width:
+      1.25;
+
+    stroke-linecap:
+      round;
+
+    stroke-linejoin:
+      round;
+
+    filter:
+      drop-shadow(
+        0 0 5px
+        color-mix(
+          in srgb,
+          var(--intro-accent)
+          70%,
+          transparent
+        )
+      )
+      drop-shadow(
+        0 0 18px
+        color-mix(
+          in srgb,
+          var(--intro-accent)
+          28%,
+          transparent
+        )
+      );
+  }
+
+
+  .cortex-intro-brain path {
+    stroke-dasharray:
+      72;
+
+    stroke-dashoffset:
+      72;
+
+    animation:
+      cortexIntroDraw
+      1.05s
+      .18s
+      cubic-bezier(.55,.08,.28,.96)
+      forwards;
+  }
+
+
+  .cortex-intro-brain path:nth-child(2) {
+    animation-delay:
+      .29s;
+  }
+
+
+  .cortex-intro-brain path:nth-child(3) {
+    animation-delay:
+      .44s;
+  }
+
+
+  .cortex-intro-wordmark {
+    display:
+      flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      center;
+
+    gap:
+      .11em;
+
+    margin-top:
+      19px;
+
+    color:
+      #f7f7f7;
+
+    font-size:
+      clamp(
+        29px,
+        3.1vw,
+        43px
+      );
+
+    font-weight:
+      760;
+
+    letter-spacing:
+      .18em;
+
+    line-height:
+      1;
+
+    text-indent:
+      .18em;
+
+    text-shadow:
+      0 8px 34px
+      rgba(0,0,0,.42);
+  }
+
+
+  .cortex-intro-wordmark span {
+    display:
+      inline-block;
+
+    opacity:
+      0;
+
+    transform:
+      translateY(12px)
+      scale(.92);
+
+    filter:
+      blur(7px);
+
+    animation:
+      cortexIntroLetter
+      .48s
+      cubic-bezier(.18,.8,.24,1)
+      forwards;
+  }
+
+
+  .cortex-intro-wordmark span:nth-child(1) {
+    animation-delay:
+      .78s;
+  }
+
+
+  .cortex-intro-wordmark span:nth-child(2) {
+    animation-delay:
+      .84s;
+  }
+
+
+  .cortex-intro-wordmark span:nth-child(3) {
+    animation-delay:
+      .90s;
+  }
+
+
+  .cortex-intro-wordmark span:nth-child(4) {
+    animation-delay:
+      .96s;
+  }
+
+
+  .cortex-intro-wordmark span:nth-child(5) {
+    animation-delay:
+      1.02s;
+  }
+
+
+  .cortex-intro-wordmark span:nth-child(6) {
+    animation-delay:
+      1.08s;
+  }
+
+
+  .cortex-intro-subtitle {
+    margin-top:
+      11px;
+
+    color:
+      rgba(255,255,255,.36);
+
+    font-size:
+      8px;
+
+    font-weight:
+      700;
+
+    letter-spacing:
+      .42em;
+
+    text-indent:
+      .42em;
+
+    text-transform:
+      uppercase;
+
+    opacity:
+      0;
+
+    transform:
+      translateY(8px);
+
+    animation:
+      cortexIntroSubtitle
+      .58s
+      1.15s
+      ease
+      forwards;
+  }
+
+
+  .cortex-intro-line {
+    position:
+      relative;
+
+    width:
+      176px;
+
+    height:
+      1px;
+
+    margin-top:
+      26px;
+
+    overflow:
+      hidden;
+
+    background:
+      rgba(255,255,255,.035);
+
+    opacity:
+      0;
+
+    animation:
+      cortexIntroSubtitle
+      .35s
+      1.34s
+      ease
+      forwards;
+  }
+
+
+  .cortex-intro-line span {
+    position:
+      absolute;
+
+    top:
+      0;
+
+    left:
+      0;
+
+    width:
+      54%;
+
+    height:
+      100%;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        var(--intro-accent-2),
+        rgba(255,255,255,.8),
+        transparent
+      );
+
+    box-shadow:
+      0 0 10px
+      color-mix(
+        in srgb,
+        var(--intro-accent)
+        35%,
+        transparent
+      );
+
+    transform:
+      translateX(-130%);
+
+    animation:
+      cortexIntroLine
+      .92s
+      1.42s
+      cubic-bezier(.2,.75,.3,1)
+      both;
+  }
+
+
+  .cortex-desktop-intro.is-exiting {
+    animation:
+      cortexIntroExit
+      .78s
+      cubic-bezier(.7,0,.84,0)
+      forwards;
+  }
+
+
+  .cortex-desktop-intro.is-exiting
+  .cortex-intro-stage {
+    animation:
+      cortexIntroStageExit
+      .78s
+      cubic-bezier(.16,.84,.32,1)
+      forwards;
+  }
+
+
+  body.cortex-intro-complete
+  .sidebar {
+    animation:
+      cortexDashboardSidebarIn
+      .72s
+      cubic-bezier(.2,.82,.28,1)
+      both;
+  }
+
+
+  body.cortex-intro-complete
+  .main-area {
+    animation:
+      cortexDashboardMainIn
+      .78s
+      cubic-bezier(.2,.82,.28,1)
+      both;
+  }
+
+}
+
+
+@keyframes cortexIntroDraw {
+
+  to {
+    stroke-dashoffset:
+      0;
+  }
+
+}
+
+
+@keyframes cortexIntroMarkIn {
+
+  0% {
+    opacity:
+      0;
+
+    transform:
+      scale(.70);
+  }
+
+  62% {
+    opacity:
+      1;
+  }
+
+  100% {
+    opacity:
+      1;
+
+    transform:
+      scale(1);
+  }
+
+}
+
+
+@keyframes cortexIntroLogoGlow {
+
+  0% {
+    opacity:
+      0;
+
+    transform:
+      scale(.6);
+  }
+
+  45% {
+    opacity:
+      .88;
+  }
+
+  100% {
+    opacity:
+      .42;
+
+    transform:
+      scale(1.55);
+  }
+
+}
+
+
+@keyframes cortexIntroLetter {
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter:
+      blur(0);
+  }
+
+}
+
+
+@keyframes cortexIntroSubtitle {
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes cortexIntroLine {
+
+  0% {
+    transform:
+      translateX(-130%);
+  }
+
+  100% {
+    transform:
+      translateX(245%);
+  }
+
+}
+
+
+@keyframes cortexIntroAmbient {
+
+  0%,
+  20% {
+    opacity:
+      0;
+
+    transform:
+      scale(.58);
+  }
+
+  58% {
+    opacity:
+      .9;
+  }
+
+  100% {
+    opacity:
+      .22;
+
+    transform:
+      scale(1.2);
+  }
+
+}
+
+
+@keyframes cortexIntroScan {
+
+  0% {
+    left:
+      -30%;
+
+    opacity:
+      0;
+  }
+
+  16% {
+    opacity:
+      .85;
+  }
+
+  82% {
+    opacity:
+      .48;
+  }
+
+  100% {
+    left:
+      120%;
+
+    opacity:
+      0;
+  }
+
+}
+
+
+@keyframes cortexIntroExit {
+
+  0% {
+    opacity:
+      1;
+
+    filter:
+      brightness(1);
+  }
+
+  38% {
+    opacity:
+      1;
+
+    filter:
+      brightness(1.7);
+  }
+
+  100% {
+    opacity:
+      0;
+
+    visibility:
+      hidden;
+
+    filter:
+      brightness(.7);
+  }
+
+}
+
+
+@keyframes cortexIntroStageExit {
+
+  0% {
+    opacity:
+      1;
+
+    transform:
+      scale(1);
+  }
+
+  38% {
+    opacity:
+      1;
+
+    transform:
+      scale(1.055);
+  }
+
+  100% {
+    opacity:
+      0;
+
+    transform:
+      scale(1.38);
+
+    filter:
+      blur(12px);
+  }
+
+}
+
+
+@keyframes cortexDashboardSidebarIn {
+
+  0% {
+    opacity:
+      .2;
+
+    transform:
+      translateX(-14px);
+  }
+
+  100% {
+    opacity:
+      1;
+
+    transform:
+      translateX(0);
+  }
+
+}
+
+
+@keyframes cortexDashboardMainIn {
+
+  0% {
+    opacity:
+      0;
+
+    transform:
+      scale(.985)
+      translateY(8px);
+
+    filter:
+      blur(5px);
+  }
+
+  100% {
+    opacity:
+      1;
+
+    transform:
+      scale(1)
+      translateY(0);
+
+    filter:
+      blur(0);
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .cortex-desktop-intro {
+    display:
+      none !important;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cortex-desktop-intro {
+    display:
+      none !important;
+  }
+
+}
+
+/* CORTEX CINEMATIC INTRO V1 END */
