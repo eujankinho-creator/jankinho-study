@@ -235,6 +235,39 @@ function atualizarResumo() {
 }
 
 
+function frenteVisivelFlashcard(
+  card
+) {
+
+  const frente =
+    String(
+      card &&
+      card.frente
+        ? card.frente
+        : ""
+    );
+
+
+  if (
+    card &&
+    card.origem ===
+      "questao"
+  ) {
+
+    return frente
+      .replace(
+        /^\s*\[[^\]]+\]\s*/,
+        ""
+      )
+      .trim();
+
+  }
+
+
+  return frente;
+
+}
+
 function normalizarBusca(valor) {
 
   return String(
@@ -278,7 +311,9 @@ function aplicarBusca() {
 
           const frente =
             normalizarBusca(
-              card.frente
+              frenteVisivelFlashcard(
+                card
+              )
             );
 
 
@@ -288,11 +323,29 @@ function aplicarBusca() {
             );
 
 
+          const tema =
+            normalizarBusca(
+              card.tema
+            );
+
+
+          const disciplina =
+            normalizarBusca(
+              card.disciplina
+            );
+
+
           return (
             frente.includes(
               termo
             ) ||
             verso.includes(
+              termo
+            ) ||
+            tema.includes(
+              termo
+            ) ||
+            disciplina.includes(
               termo
             )
           );
@@ -356,7 +409,12 @@ function renderLista() {
               <div class="flashcard-top">
 
                 <span class="badge badge-orange">
-                  Flashcard
+                  \${
+                    card.origem ===
+                      "questao"
+                      ? "Questão"
+                      : "Flashcard"
+                  }
                 </span>
 
                 <span class="flashcard-id">
@@ -584,6 +642,20 @@ async function criarFlashcard(
 function categoriaFlashcard(
   card
 ) {
+
+  if (
+    card &&
+    card.disciplina
+  ) {
+
+    return String(
+      card.disciplina
+    )
+      .trim() ||
+      "Geral";
+
+  }
+
 
   const frente =
     String(
@@ -1296,7 +1368,9 @@ function renderEstudo() {
 
   $("studyFrente")
     .textContent =
-    card.frente;
+    frenteVisivelFlashcard(
+      card
+    );
 
 
   renderVersoEstudo();
