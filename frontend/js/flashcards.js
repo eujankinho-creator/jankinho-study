@@ -248,23 +248,12 @@ function frenteVisivelFlashcard(
     );
 
 
-  if (
-    card &&
-    card.origem ===
-      "questao"
-  ) {
-
-    return frente
-      .replace(
-        /^\s*\[[^\]]+\]\s*/,
-        ""
-      )
-      .trim();
-
-  }
-
-
-  return frente;
+  return frente
+    .replace(
+      /^\s*\[[^\]]+\]\s*/,
+      ""
+    )
+    .trim();
 
 }
 
@@ -432,7 +421,9 @@ function renderLista() {
 
                 <p>
                   ${escapeHtml(
-                    card.frente
+                    frenteVisivelFlashcard(
+                      card
+                    )
                   )}
                 </p>
 
