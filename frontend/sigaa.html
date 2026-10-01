@@ -9,7 +9,7 @@
   <script src="/js/ui-enhancements.js?v=20260930-audit1"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20260930-bluefix4">
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20260930-logo9">
-  <link rel="stylesheet" href="/css/sigaa-premium.css?v=20260930-files7">
+  <link rel="stylesheet" href="/css/sigaa-premium.css?v=20261001-priority1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20260930-audit1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20260930-audit1s8s7">
 
@@ -103,6 +103,18 @@
         </section>
 
         <section id="academicDashboard">
+          <section id="prioritySection" class="academic-priority hidden" aria-live="polite">
+            <div class="priority-heading">
+              <div>
+                <small>PRIORIDADE ACADÊMICA</small>
+                <h2>Próximos 7 dias</h2>
+                <p>Provas e atividades com data próxima identificadas no SIGAA.</p>
+              </div>
+              <span id="priorityCount" class="priority-count">0</span>
+            </div>
+            <div id="priorityList" class="priority-list"></div>
+          </section>
+
           <div class="academic-metrics">
             <article><div class="metric-icon">P</div><div><span>Período atual</span><strong id="periodMetric">--</strong></div></article>
             <article><div class="metric-icon">D</div><div><span>Disciplinas</span><strong id="coursesMetric">0</strong></div></article>
@@ -198,7 +210,7 @@
     </main>
   </div>
 
-  <script src="/js/sigaa.js?v=20260930-files7"></script>
+  <script src="/js/sigaa.js?v=20261001-priority1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
