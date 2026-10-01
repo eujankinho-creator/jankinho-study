@@ -1032,3 +1032,62 @@ body.cortex-mobile-menu-open {
 
 /* CORTEX MOBILE SETTINGS ACCESS V5 END */
 
+
+
+/* =========================================================
+   CORTEX MOBILE VISUAL VIEWPORT V6
+   Evita que o rodape fique atras da barra do Safari/Chrome.
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .cortex-mobile-sidebar-overlay,
+  .cortex-mobile-sidebar-backdrop,
+  .cortex-mobile-sidebar-panel {
+    height:
+      var(
+        --cortex-mobile-visual-height,
+        100vh
+      ) !important;
+  }
+
+
+  .cortex-mobile-sidebar-overlay,
+  .cortex-mobile-sidebar-panel {
+    min-height:
+      0 !important;
+
+    max-height:
+      var(
+        --cortex-mobile-visual-height,
+        100vh
+      ) !important;
+  }
+
+
+  .cortex-mobile-sidebar-footer {
+    position:
+      sticky;
+
+    bottom:
+      0;
+
+    flex-shrink:
+      0;
+
+    padding-bottom:
+      max(
+        12px,
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+
+
+  .cortex-mobile-sidebar-menu {
+    padding-bottom:
+      12px !important;
+  }
+
+}
+
+/* CORTEX MOBILE VISUAL VIEWPORT V6 END */
