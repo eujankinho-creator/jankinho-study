@@ -1290,8 +1290,17 @@ async function criarRespostasEmLote(
     }
 
 
-    const respostas =
-      recebidas
+    type RespostaLote = {
+      questaoId: number;
+      correta: boolean;
+    };
+
+
+    const respostas:
+      RespostaLote[] =
+      (
+        recebidas as any[]
+      )
         .map(
           function (
             item:
@@ -1314,7 +1323,8 @@ async function criarRespostasEmLote(
         )
         .filter(
           function (
-            item
+            item:
+              RespostaLote
           ) {
 
             return (
@@ -1348,12 +1358,14 @@ async function criarRespostasEmLote(
     }
 
 
-    const ids =
+    const ids:
+      number[] =
       Array.from(
-        new Set(
+        new Set<number>(
           respostas.map(
             function (
-              item
+              item:
+                RespostaLote
             ) {
 
               return item
@@ -1409,7 +1421,8 @@ async function criarRespostasEmLote(
           data:
             respostas.map(
               function (
-                item
+                item:
+                  RespostaLote
               ) {
 
                 return {
