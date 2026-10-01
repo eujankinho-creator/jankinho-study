@@ -115,6 +115,10 @@
     if (!connected) {
       $("academicDashboard").classList.remove("hidden");
       $("courseWorkspace").classList.add("hidden");
+      const prioritySection = $("prioritySection");
+      if (prioritySection) prioritySection.classList.add("hidden");
+      const priorityList = $("priorityList");
+      if (priorityList) priorityList.innerHTML = "";
       currentCourseId = null;
       currentCourseData = null;
     }
@@ -183,6 +187,62 @@
     }).join("");
   }
 
+  function renderPriorities(priorities) {
+    const list = Array.isArray(priorities) ? priorities : [];
+    const section = $("prioritySection");
+    const container = $("priorityList");
+    const count = $("priorityCount");
+
+    if (!section || !container || !count) return;
+
+    count.textContent = String(list.length);
+    section.classList.toggle("hidden", list.length === 0);
+
+    if (!list.length) {
+      container.innerHTML = "";
+      return;
+    }
+
+    container.innerHTML = list.map((item) => {
+      const days = Number(item.daysLeft);
+      const when =
+        days <= 0 ? "Hoje" :
+        days === 1 ? "Amanhã" :
+        "Em " + days + " dias";
+
+      const typeLabel =
+        item.kind === "exam"
+          ? "PROVA"
+          : "ATIVIDADE";
+
+      const urgency =
+        item.urgency === "critical"
+          ? "critical"
+          : item.urgency === "high"
+            ? "high"
+            : "attention";
+
+      return `
+        <button
+          type="button"
+          class="priority-item priority-${urgency}"
+          data-course-id="${escapeHtml(item.courseId || "")}"
+        >
+          <span class="priority-type">${typeLabel}</span>
+          <span class="priority-copy">
+            <strong>${escapeHtml(item.title || typeLabel)}</strong>
+            <small>${escapeHtml(item.course || "Disciplina")}</small>
+          </span>
+          <span class="priority-date">
+            <strong>${escapeHtml(when)}</strong>
+            <small>${escapeHtml(formatDate(item.date, false))}</small>
+          </span>
+        </button>
+      `;
+    }).join("");
+  }
+
+
   function renderNotices(notices) {
     const list = Array.isArray(notices) ? notices : [];
     $("noticesMetric").textContent = list.length;
@@ -234,6 +294,7 @@
     $("updatedMetric").textContent = formatDate(data.updatedAt);
     $("studentInitial").textContent = (student.name || "U").trim().charAt(0).toUpperCase();
     renderSchedule(data.schedule || {});
+    renderPriorities(data.priorities);
     renderNotices(data.notices);
     renderCourses(data.courses);
   }
