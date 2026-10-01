@@ -31,6 +31,7 @@ import { listarCasos, gerarCasoClinico } from "./casos";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
+import { sincronizarQuestoesDiego } from "./questoesDiego";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -4104,6 +4105,19 @@ server.listen(
 
           console.error(
             "[performance-reset] Falha:",
+            error
+          );
+
+        }
+      );
+
+
+    void sincronizarQuestoesDiego()
+      .catch(
+        function (error) {
+
+          console.error(
+            "[questoes] Falha ao sincronizar Questões Diego:",
             error
           );
 
