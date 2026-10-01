@@ -1635,11 +1635,35 @@ async function loadCourseFiles(
 }
 
 
+function normalizeSigaaFileTitle(
+  value:
+    any
+) {
+
+  return safeText(
+    value,
+    500
+  )
+    .normalize(
+      "NFKC"
+    )
+    .trim()
+    .toLocaleLowerCase(
+      "pt-BR"
+    );
+
+}
+
+
 function serializeCourseFile(
   file:
     any,
-  lessonFileIds:
-    Set<string>
+  sourceKind:
+    "course" |
+    "lesson",
+  lessonId:
+    string |
+    null = null
 ) {
 
   const id =
@@ -1657,6 +1681,10 @@ function serializeCourseFile(
 
   return {
     id,
+
+    sourceKind,
+
+    lessonId,
 
     kind:
       fileMeta.kind,
@@ -1683,9 +1711,8 @@ function serializeCourseFile(
       ),
 
     source:
-      lessonFileIds.has(
-        id
-      )
+      sourceKind ===
+        "lesson"
         ? "Anexo de aula"
         : "Arquivos da disciplina",
 
@@ -1700,7 +1727,10 @@ function serializeCourseFile(
 
 function serializeLessonAttachment(
   attachment:
-    any
+    any,
+  lessonId:
+    string |
+    null = null
 ) {
 
   const type =
@@ -1735,6 +1765,14 @@ function serializeLessonAttachment(
   return {
     id,
     type,
+
+    sourceKind:
+      type ===
+        "file"
+        ? "lesson"
+        : null,
+
+    lessonId,
 
     kind:
       type ===
@@ -1777,7 +1815,6 @@ function serializeLessonAttachment(
   };
 
 }
-
 
 export async function sigaaCourseDetail(
   userId:
@@ -1995,17 +2032,43 @@ export async function sigaaCourseDetail(
         "arquivos",
         async function () {
 
-          const rawFiles =
-            await loadCourseFiles(
-              session,
-              course,
-              courseId,
-              force
-            );
+          let directFiles:
+            any[] = [];
 
 
           let rawLessons:
             any[] = [];
+
+
+          try {
+
+            directFiles =
+              Array.from(
+                await withTimeout(
+                  course.getFiles(),
+                  20000,
+                  "Timeout ao carregar a aba de arquivos."
+                ) as any[]
+              )
+                .filter(
+                  isDownloadableSigaaFile
+                );
+
+          }
+          catch (
+            error
+          ) {
+
+            console.warn(
+              "SIGAA direct files detail:",
+              error instanceof Error
+                ? error.message
+                : String(
+                    error
+                  )
+            );
+
+          }
 
 
           try {
@@ -2021,51 +2084,165 @@ export async function sigaaCourseDetail(
           }
           catch (
             error
-          ) {}
+          ) {
 
-
-          const lessonFileIds =
-            new Set<string>(
-              lessonFiles(
-                rawLessons
-              ).map(
-                function (
-                  file:
-                    any
-                ) {
-
-                  return safeText(
-                    file?.id,
-                    200
-                  );
-
-                }
-              )
+            console.warn(
+              "SIGAA lesson files detail:",
+              error instanceof Error
+                ? error.message
+                : String(
+                    error
+                  )
             );
 
+          }
 
-          return rawFiles
-            .slice(
-              0,
-              250
-            )
-            .map(
+
+          const serialized:
+            any[] = [];
+
+
+          const used =
+            new Set<string>();
+
+
+          const add =
+            function (
+              file:
+                any,
+              sourceKind:
+                "course" |
+                "lesson",
+              lessonId:
+                string |
+                null
+            ) {
+
+              const id =
+                safeText(
+                  file?.id,
+                  200
+                );
+
+
+              const title =
+                safeText(
+                  file?.title,
+                  240
+                );
+
+
+              const key =
+                [
+                  sourceKind,
+                  lessonId ||
+                    "",
+                  id,
+                  normalizeSigaaFileTitle(
+                    title
+                  ),
+                ].join(
+                  ":"
+                );
+
+
+              if (
+                !id ||
+                used.has(
+                  key
+                )
+              ) {
+                return;
+              }
+
+
+              used.add(
+                key
+              );
+
+
+              serialized.push(
+                serializeCourseFile(
+                  file,
+                  sourceKind,
+                  lessonId
+                )
+              );
+
+            };
+
+
+          directFiles
+            .forEach(
               function (
                 file:
                   any
               ) {
 
-                return serializeCourseFile(
+                add(
                   file,
-                  lessonFileIds
+                  "course",
+                  null
                 );
 
               }
             );
 
+
+          rawLessons
+            .forEach(
+              function (
+                lesson:
+                  any
+              ) {
+
+                const lessonId =
+                  safeText(
+                    lesson?.id,
+                    200
+                  );
+
+
+                const attachments =
+                  Array.isArray(
+                    lesson?.attachments
+                  )
+                    ? lesson.attachments
+                    : [];
+
+
+                attachments
+                  .filter(
+                    isDownloadableSigaaFile
+                  )
+                  .forEach(
+                    function (
+                      file:
+                        any
+                    ) {
+
+                      add(
+                        file,
+                        "lesson",
+                        lessonId ||
+                          null
+                      );
+
+                    }
+                  );
+
+              }
+            );
+
+
+          return serialized
+            .slice(
+              0,
+              250
+            );
+
         }
       );
-
 
     const exams =
       await safeCourseSection(
@@ -2230,7 +2407,21 @@ export async function sigaaCourseDetail(
                             50
                           )
                           .map(
-                            serializeLessonAttachment
+                            function (
+                              attachment:
+                                any
+                            ) {
+
+                              return serializeLessonAttachment(
+                                attachment,
+                                String(
+                                  lesson.id ||
+                                  ""
+                                ) ||
+                                null
+                              );
+
+                            }
                           )
                       : [],
                 };
@@ -2935,7 +3126,13 @@ async function resolveFreshLessonFile(
   courseId:
     string,
   fileId:
-    string
+    string,
+  lessonId:
+    string |
+    null,
+  expectedTitle:
+    string |
+    null
 ) {
 
   const lessons =
@@ -2947,30 +3144,158 @@ async function resolveFreshLessonFile(
     );
 
 
-  return uniqueFiles(
-    lessonFiles(
-      lessons
+  const normalizedExpected =
+    expectedTitle
+      ? normalizeSigaaFileTitle(
+          expectedTitle
+        )
+      : "";
+
+
+  for (
+    const lesson
+    of lessons
+  ) {
+
+    const currentLessonId =
+      safeText(
+        lesson?.id,
+        200
+      );
+
+
+    if (
+      lessonId &&
+      currentLessonId !==
+        lessonId
+    ) {
+      continue;
+    }
+
+
+    const attachments =
+      Array.isArray(
+        lesson?.attachments
+      )
+        ? lesson.attachments
+        : [];
+
+
+    for (
+      const item
+      of attachments
+    ) {
+
+      if (
+        !isDownloadableSigaaFile(
+          item
+        )
+      ) {
+        continue;
+      }
+
+
+      if (
+        String(
+          item?.id ||
+          ""
+        ) !==
+        fileId
+      ) {
+        continue;
+      }
+
+
+      if (
+        normalizedExpected &&
+        normalizeSigaaFileTitle(
+          item?.title
+        ) !==
+          normalizedExpected
+      ) {
+        continue;
+      }
+
+
+      return item;
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+async function resolveFreshCourseFile(
+  course:
+    any,
+  fileId:
+    string,
+  expectedTitle:
+    string |
+    null
+) {
+
+  const files =
+    Array.from(
+      await withTimeout(
+        course.getFiles(),
+        20000,
+        "Timeout ao atualizar arquivo da disciplina."
+      ) as any[]
+    );
+
+
+  const normalizedExpected =
+    expectedTitle
+      ? normalizeSigaaFileTitle(
+          expectedTitle
+        )
+      : "";
+
+
+  return files
+    .filter(
+      isDownloadableSigaaFile
     )
-  )
     .find(
       function (
         item:
           any
       ) {
 
-        return (
+        if (
           String(
             item?.id ||
             ""
-          ) ===
+          ) !==
           fileId
-        );
+        ) {
+          return false;
+        }
+
+
+        if (
+          normalizedExpected &&
+          normalizeSigaaFileTitle(
+            item?.title
+          ) !==
+            normalizedExpected
+        ) {
+          return false;
+        }
+
+
+        return true;
 
       }
-    );
+    ) ||
+    null;
 
 }
-
 
 export async function downloadSigaaCourseFile(
   userId:
@@ -2978,7 +3303,22 @@ export async function downloadSigaaCourseFile(
   courseId:
     string,
   fileId:
-    string
+    string,
+  options:
+    {
+      source?:
+        "lesson" |
+        "course" |
+        null;
+
+      lessonId?:
+        string |
+        null;
+
+      expectedTitle?:
+        string |
+        null;
+    } = {}
 ) {
 
   const session =
@@ -3028,56 +3368,100 @@ export async function downloadSigaaCourseFile(
     }
 
 
-    /*
-     * Prioriza anexos de aula, pois sao a fonte mais estavel
-     * na versao atual do SIGAA/UFPB e trazem o formulario JSF
-     * completo necessario para o download.
-     */
-    let file =
-      await resolveFreshLessonFile(
-        session,
-        course,
-        courseId,
-        fileId
-      )
-        .catch(
-          function () {
-            return null;
-          }
-        );
+    const source =
+      options.source ||
+      null;
 
 
-    if (!file) {
+    const lessonId =
+      safeText(
+        options.lessonId,
+        200
+      ) ||
+      null;
 
-      const files =
-        await loadCourseFiles(
+
+    const expectedTitle =
+      safeText(
+        options.expectedTitle,
+        500
+      ) ||
+      null;
+
+
+    let file:
+      any =
+      null;
+
+
+    if (
+      source ===
+      "lesson"
+    ) {
+
+      file =
+        await resolveFreshLessonFile(
           session,
           course,
           courseId,
-          true
-        );
-
-
-      file =
-        files.find(
-          function (
-            item:
-              any
-          ) {
-
-            return (
-              String(
-                item?.id ||
-                ""
-              ) ===
-              fileId
-            );
-
-          }
+          fileId,
+          lessonId,
+          expectedTitle
         );
 
     }
+    else if (
+      source ===
+      "course"
+    ) {
 
+      file =
+        await resolveFreshCourseFile(
+          course,
+          fileId,
+          expectedTitle
+        );
+
+    }
+    else {
+
+      /*
+       * Compatibilidade com links antigos: primeiro procura
+       * pelo titulo exato nas aulas e depois nos arquivos.
+       */
+      file =
+        await resolveFreshLessonFile(
+          session,
+          course,
+          courseId,
+          fileId,
+          lessonId,
+          expectedTitle
+        )
+          .catch(
+            function () {
+              return null;
+            }
+          );
+
+
+      if (!file) {
+
+        file =
+          await resolveFreshCourseFile(
+            course,
+            fileId,
+            expectedTitle
+          )
+            .catch(
+              function () {
+                return null;
+              }
+            );
+
+      }
+
+    }
 
     if (!file) {
 
@@ -3135,12 +3519,21 @@ export async function downloadSigaaCourseFile(
        * da biblioteca.
        */
       const refreshed =
-        await resolveFreshLessonFile(
-          session,
-          course,
-          courseId,
-          fileId
-        );
+        source ===
+          "course"
+          ? await resolveFreshCourseFile(
+              course,
+              fileId,
+              expectedTitle
+            )
+          : await resolveFreshLessonFile(
+              session,
+              course,
+              courseId,
+              fileId,
+              lessonId,
+              expectedTitle
+            );
 
 
       if (!refreshed) {
