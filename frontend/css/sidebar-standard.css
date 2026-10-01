@@ -739,3 +739,222 @@ body.cortex-mobile-menu-open {
 }
 
 /* CORTEX MOBILE PERFORMANCE V3 END */
+
+
+/* =========================================================
+   CORTEX MOBILE NAVIGATION SAFETY V4
+   Botao sempre no viewport + drawer com scroll proprio.
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .cortex-mobile-sidebar-button {
+    position:
+      fixed !important;
+
+    top:
+      max(
+        10px,
+        env(safe-area-inset-top)
+      ) !important;
+
+    left:
+      max(
+        10px,
+        env(safe-area-inset-left)
+      ) !important;
+
+    z-index:
+      2147483000 !important;
+
+    transform:
+      translateZ(0);
+
+    isolation:
+      isolate;
+  }
+
+
+  .cortex-mobile-sidebar-overlay {
+    position:
+      fixed !important;
+
+    inset:
+      0 !important;
+
+    width:
+      100vw !important;
+
+    height:
+      100dvh !important;
+
+    min-height:
+      100dvh !important;
+
+    max-height:
+      100dvh !important;
+
+    overflow:
+      hidden !important;
+
+    z-index:
+      2147483001 !important;
+
+    contain:
+      none !important;
+  }
+
+
+  .cortex-mobile-sidebar-backdrop {
+    position:
+      fixed !important;
+
+    inset:
+      0 !important;
+
+    width:
+      100vw !important;
+
+    height:
+      100dvh !important;
+
+    touch-action:
+      none;
+  }
+
+
+  .cortex-mobile-sidebar-panel {
+    position:
+      fixed !important;
+
+    top:
+      0 !important;
+
+    bottom:
+      auto !important;
+
+    left:
+      0 !important;
+
+    height:
+      100dvh !important;
+
+    min-height:
+      0 !important;
+
+    max-height:
+      100dvh !important;
+
+    overflow:
+      hidden !important;
+
+    z-index:
+      1;
+
+    contain:
+      none !important;
+
+    overscroll-behavior:
+      none;
+  }
+
+
+  .cortex-mobile-sidebar-header {
+    flex:
+      0 0 auto;
+
+    padding-top:
+      max(
+        10px,
+        env(safe-area-inset-top)
+      );
+  }
+
+
+  .cortex-mobile-sidebar-menu {
+    flex:
+      1 1 auto !important;
+
+    min-height:
+      0 !important;
+
+    height:
+      auto !important;
+
+    overflow-x:
+      hidden !important;
+
+    overflow-y:
+      auto !important;
+
+    overscroll-behavior-x:
+      none !important;
+
+    overscroll-behavior-y:
+      contain !important;
+
+    touch-action:
+      pan-y !important;
+
+    -webkit-overflow-scrolling:
+      touch;
+
+    scroll-behavior:
+      auto;
+
+    scrollbar-gutter:
+      stable;
+
+    padding-bottom:
+      max(
+        28px,
+        env(safe-area-inset-bottom)
+      ) !important;
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .menu-group {
+    min-width:
+      0;
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .menu-item {
+    touch-action:
+      pan-y !important;
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .menu-title {
+    position:
+      relative;
+
+    pointer-events:
+      none;
+  }
+
+}
+
+
+html.cortex-mobile-menu-open {
+  overflow:
+    visible !important;
+
+  overscroll-behavior:
+    auto !important;
+}
+
+
+body.cortex-mobile-menu-open {
+  overflow:
+    hidden !important;
+
+  overscroll-behavior:
+    none !important;
+}
+
+
+/* CORTEX MOBILE NAVIGATION SAFETY V4 END */
