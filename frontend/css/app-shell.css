@@ -2791,3 +2791,28 @@ body.cortex-app-shell
 }
 
 /* CORTEX ROUTE CINEMATIC INTROS V1 END */
+
+
+/* =========================================================
+   CORTEX INTRO FLASH GUARD V2
+========================================================= */
+
+@media (min-width: 901px) {
+
+  .shell-frame.shell-frame-intro-hidden {
+    opacity:
+      0 !important;
+
+    visibility:
+      hidden !important;
+
+    pointer-events:
+      none !important;
+
+    transition:
+      opacity .24s ease !important;
+  }
+
+}
+
+/* CORTEX INTRO FLASH GUARD V2 END */
