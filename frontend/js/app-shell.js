@@ -1007,6 +1007,115 @@
     return text;
   }
 
+  function navigateFrameFast(
+    href
+  ) {
+
+    const view =
+      validView(
+        href
+      );
+
+
+    if (!view) {
+      return;
+    }
+
+
+    let normalized =
+      view;
+
+
+    if (
+      normalized === "/"
+    ) {
+      normalized =
+        "/index.html";
+    }
+
+
+    try {
+
+      const currentPath =
+        frame.contentWindow
+          ?.location
+          ?.pathname;
+
+
+      const currentSearch =
+        frame.contentWindow
+          ?.location
+          ?.search ||
+        "";
+
+
+      if (
+        currentPath &&
+        (
+          currentPath +
+          currentSearch
+        ) ===
+          normalized
+      ) {
+        return;
+      }
+
+    }
+    catch {}
+
+
+    frame.classList.add(
+      "shell-frame-navigating"
+    );
+
+
+    localStorage.setItem(
+      "cortex_shell_last_view",
+      normalized
+    );
+
+
+    frame.src =
+      normalized;
+
+  }
+
+
+  window.addEventListener(
+    "message",
+    function (
+      event
+    ) {
+
+      if (
+        event.origin !==
+          window.location.origin
+      ) {
+        return;
+      }
+
+
+      const data =
+        event.data;
+
+
+      if (
+        !data ||
+        data.type !==
+          "cortex:navigate"
+      ) {
+        return;
+      }
+
+
+      navigateFrameFast(
+        data.href
+      );
+
+    }
+  );
+
+
   function configureFrame() {
 
     const params =
@@ -1135,6 +1244,11 @@
   frame.addEventListener(
     "load",
     function () {
+
+      frame.classList.remove(
+        "shell-frame-navigating"
+      );
+
 
       try {
 
