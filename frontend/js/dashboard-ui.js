@@ -192,9 +192,135 @@
   }
 
 
+  function initDesktopIntro() {
+
+    const intro =
+      document.getElementById(
+        "cortexDesktopIntro"
+      );
+
+
+    const body =
+      document.body;
+
+
+    if (
+      !intro ||
+      !body
+    ) {
+      return;
+    }
+
+
+    const isDesktop =
+      window.matchMedia(
+        "(min-width: 901px)"
+      ).matches;
+
+
+    const reduceMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+
+    let alreadySeen =
+      false;
+
+
+    try {
+
+      alreadySeen =
+        sessionStorage.getItem(
+          "cortexDesktopIntroSeen"
+        ) ===
+        "1";
+
+    }
+    catch (erro) {
+
+      alreadySeen =
+        false;
+
+    }
+
+
+    if (
+      !isDesktop ||
+      reduceMotion ||
+      alreadySeen
+    ) {
+
+      intro.remove();
+
+      body.classList.remove(
+        "cortex-desktop-intro-pending"
+      );
+
+      return;
+    }
+
+
+    try {
+
+      sessionStorage.setItem(
+        "cortexDesktopIntroSeen",
+        "1"
+      );
+
+    }
+    catch (erro) {
+      /* sessionStorage pode estar bloqueado */
+    }
+
+
+    const finish =
+      function () {
+
+        body.classList.remove(
+          "cortex-desktop-intro-pending"
+        );
+
+
+        body.classList.add(
+          "cortex-intro-complete"
+        );
+
+
+        window.setTimeout(
+          function () {
+
+            intro.remove();
+
+          },
+          820
+        );
+
+      };
+
+
+    window.setTimeout(
+      function () {
+
+        intro.classList.add(
+          "is-exiting"
+        );
+
+
+        finish();
+
+      },
+      2550
+    );
+
+  }
+
+
   document.addEventListener(
     "DOMContentLoaded",
     function () {
+
+      initDesktopIntro();
 
       initReveal();
 
