@@ -1001,11 +1001,55 @@ function abrirSeletorCategorias() {
   renderCategoriasFlashcards();
 
 
-  $("flashcardCategoryModal")
+  const modal =
+    $("flashcardCategoryModal");
+
+
+  modal
     .classList
     .remove(
       "hidden"
     );
+
+
+  modal.scrollTop =
+    0;
+
+
+  const card =
+    modal.querySelector(
+      ".flash-category-card"
+    );
+
+
+  if (
+    card
+  ) {
+
+    card.scrollTop =
+      0;
+
+  }
+
+
+  window.requestAnimationFrame(
+    function () {
+
+      modal.scrollTop =
+        0;
+
+
+      if (
+        card
+      ) {
+
+        card.scrollTop =
+          0;
+
+      }
+
+    }
+  );
 
 }
 
