@@ -654,3 +654,194 @@ label:has(input[type="radio"]:checked) {
   box-shadow:none !important;
 }
 /* CORTEX BLACK WHITE LOGO NO BOX GLOW V1 END */
+
+
+/* =========================================================
+   CORTEX EXPLANATION READABILITY V2
+   Explicacoes permanecem neutras e legiveis em TODOS os temas.
+   O estado correto/errado aparece na borda, nao no fundo do texto.
+========================================================= */
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-explanation,
+  .guided-feedback,
+  .question-explanation,
+  .answer-explanation,
+  .explanation-box,
+  .feedback-explanation
+) {
+  border:
+    1px solid
+    rgba(255,255,255,.16) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      #15191f,
+      #0e1116
+    ) !important;
+
+  color:
+    #f8fafc !important;
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.24) !important;
+
+  text-shadow:
+    none !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+.guided-feedback.correct {
+  border-color:
+    rgba(
+      var(--cortex-state-success-rgb),
+      .78
+    ) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      #15191f,
+      #0e1512
+    ) !important;
+
+  box-shadow:
+    inset 4px 0 0
+      var(--cortex-state-success),
+    0 12px 30px
+      rgba(0,0,0,.24) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+.guided-feedback.wrong {
+  border-color:
+    rgba(
+      var(--cortex-state-danger-rgb),
+      .78
+    ) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      #15191f,
+      #170e11
+    ) !important;
+
+  box-shadow:
+    inset 4px 0 0
+      var(--cortex-state-danger),
+    0 12px 30px
+      rgba(0,0,0,.24) !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-explanation,
+  .guided-feedback,
+  .question-explanation,
+  .answer-explanation,
+  .explanation-box,
+  .feedback-explanation
+)
+:is(
+  strong,
+  b,
+  h3,
+  h4
+) {
+  color:
+    #ffffff !important;
+
+  font-size:
+    clamp(
+      14px,
+      .95rem,
+      16px
+    ) !important;
+
+  line-height:
+    1.45 !important;
+}
+
+
+:is(#cortex-semantic-priority, html[data-theme]) body
+:is(
+  .session-explanation,
+  .guided-feedback,
+  .question-explanation,
+  .answer-explanation,
+  .explanation-box,
+  .feedback-explanation
+)
+:is(
+  p,
+  span,
+  li
+) {
+  color:
+    #eef2f7 !important;
+
+  font-size:
+    clamp(
+      15px,
+      1rem,
+      17px
+    ) !important;
+
+  font-weight:
+    500 !important;
+
+  line-height:
+    1.7 !important;
+
+  opacity:
+    1 !important;
+}
+
+
+@media (max-width: 640px) {
+
+  :is(#cortex-semantic-priority, html[data-theme]) body
+  :is(
+    .session-explanation,
+    .guided-feedback,
+    .question-explanation,
+    .answer-explanation,
+    .explanation-box,
+    .feedback-explanation
+  ) {
+    padding:
+      16px !important;
+  }
+
+
+  :is(#cortex-semantic-priority, html[data-theme]) body
+  :is(
+    .session-explanation,
+    .guided-feedback,
+    .question-explanation,
+    .answer-explanation,
+    .explanation-box,
+    .feedback-explanation
+  )
+  :is(
+    p,
+    span,
+    li
+  ) {
+    font-size:
+      15px !important;
+
+    line-height:
+      1.68 !important;
+  }
+
+}
+
+/* CORTEX EXPLANATION READABILITY V2 END */
