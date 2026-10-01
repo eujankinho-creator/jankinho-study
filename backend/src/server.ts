@@ -32,6 +32,7 @@ import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import { sincronizarQuestoesDiego } from "./questoesDiego";
+import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -4105,6 +4106,19 @@ server.listen(
 
           console.error(
             "[performance-reset] Falha:",
+            error
+          );
+
+        }
+      );
+
+
+    void sincronizarQuestoesSemiotecnica()
+      .catch(
+        function (error) {
+
+          console.error(
+            "[questoes] Falha ao sincronizar Semiotécnica:",
             error
           );
 
