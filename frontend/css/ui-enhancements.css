@@ -8,15 +8,31 @@ html {
 
 
 body {
-  opacity: 0;
-
-  transition:
-    opacity .18s ease;
+  opacity: 1;
 }
 
 
 body.ui-ready {
-  opacity: 1;
+  animation:
+    cortexPageReady
+    .20s
+    cubic-bezier(.2,.8,.2,1)
+    both;
+}
+
+
+@keyframes cortexPageReady {
+
+  from {
+    opacity: .82;
+    transform: translate3d(0,3px,0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+
 }
 
 
@@ -846,3 +862,165 @@ body.ui-ready {
 }
 
 /* CORTEX PROFESSIONAL MOTION V2 END */
+
+
+/* =========================================================
+   CORTEX INTERACTION RESPONSE V3
+   Feedback imediato sem alterar cores semanticas.
+========================================================= */
+
+.ui-feedback-ready {
+  -webkit-tap-highlight-color:
+    transparent;
+
+  touch-action:
+    manipulation;
+
+  transform-origin:
+    center;
+}
+
+
+.ui-feedback-ready.ui-pressing {
+  transform:
+    scale(.975)
+    translateZ(0) !important;
+
+  transition-duration:
+    70ms !important;
+
+  filter:
+    brightness(1.035);
+}
+
+
+.ui-feedback-ready.ui-activated {
+  animation:
+    cortexActivated
+    180ms
+    cubic-bezier(.2,.8,.2,1)
+    both;
+}
+
+
+@keyframes cortexActivated {
+
+  0% {
+    transform:
+      scale(.975);
+  }
+
+  55% {
+    transform:
+      scale(1.012);
+  }
+
+  100% {
+    transform:
+      scale(1);
+  }
+
+}
+
+
+:is(
+  button,
+  a[href],
+  [role="button"],
+  [role="tab"],
+  .menu-item,
+  .session-option,
+  .sim-option,
+  .action-card,
+  .course-card,
+  .drug-card,
+  .flashcard-item,
+  .theme-choice,
+  .filter-chip,
+  .area-option,
+  .receptor-card
+) {
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+:is(
+  button,
+  a[href],
+  [role="button"],
+  [role="tab"]
+):not(:disabled) {
+  cursor:
+    pointer;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  :is(
+    button,
+    a[href],
+    [role="button"],
+    [role="tab"]
+  ):not(:disabled):hover {
+    transition-duration:
+      140ms;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  body.ui-ready {
+    animation-duration:
+      145ms;
+  }
+
+
+  .ui-feedback-ready.ui-pressing {
+    transform:
+      scale(.982)
+      translateZ(0) !important;
+
+    filter:
+      brightness(1.025);
+  }
+
+
+  /*
+   * Menos custo de pintura em dispositivos touch.
+   */
+  :is(
+    .header,
+    .modal-overlay,
+    .cortex-mobile-sidebar-button
+  ) {
+    -webkit-backdrop-filter:
+      none !important;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  body.ui-ready,
+  .ui-feedback-ready.ui-activated {
+    animation:
+      none !important;
+  }
+
+
+  .ui-feedback-ready.ui-pressing {
+    transform:
+      none !important;
+
+    filter:
+      none !important;
+  }
+
+}
+
+/* CORTEX INTERACTION RESPONSE V3 END */
