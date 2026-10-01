@@ -774,6 +774,54 @@
      MOBILE - IMPLEMENTACAO UNICA
   ======================================================= */
 
+  function syncMobileVisualViewport() {
+
+    if (
+      window.innerWidth >
+        900
+    ) {
+
+      document.documentElement
+        .style
+        .removeProperty(
+          "--cortex-mobile-visual-height"
+        );
+
+      return;
+
+    }
+
+
+    const viewport =
+      window.visualViewport;
+
+
+    const height =
+      viewport
+        ? viewport.height
+        : window.innerHeight;
+
+
+    if (
+      !height ||
+      height <= 0
+    ) {
+      return;
+    }
+
+
+    document.documentElement
+      .style
+      .setProperty(
+        "--cortex-mobile-visual-height",
+        Math.round(
+          height
+        ) + "px"
+      );
+
+  }
+
+
   function cleanupLegacyMobileArtifacts() {
 
     document
@@ -846,6 +894,9 @@
     if (
       open
     ) {
+
+      syncMobileVisualViewport();
+
 
       const menu =
         overlay.querySelector(
@@ -1276,6 +1327,9 @@
       "resize",
       function () {
 
+        syncMobileVisualViewport();
+
+
         if (
           window.innerWidth >
             900 &&
@@ -1295,6 +1349,23 @@
           true
       }
     );
+
+
+    if (
+      window.visualViewport
+    ) {
+
+      window.visualViewport
+        .addEventListener(
+          "resize",
+          syncMobileVisualViewport,
+          {
+            passive:
+              true
+          }
+        );
+
+    }
 
   }
 
@@ -1331,6 +1402,8 @@
 
 
   function init() {
+
+    syncMobileVisualViewport();
 
     resetMobileMenuState();
 
