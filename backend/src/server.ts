@@ -29,6 +29,7 @@ import { prisma } from "../../lib/prisma";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
+import { sincronizarFlashcardsDasQuestoes, sincronizarFlashcardDaQuestao } from "./flashcardsQuestoes";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import { sincronizarQuestoesDiego } from "./questoesDiego";
@@ -1032,6 +1033,11 @@ async function criarQuestao(
         },
       });
 
+    await sincronizarFlashcardDaQuestao(
+      questao.id
+    );
+
+
     json(
       response,
       201,
@@ -1210,6 +1216,248 @@ async function criarResposta(
       }
     );
   }
+}
+
+
+async function criarRespostasEmLote(
+  request: IncomingMessage,
+  response: ServerResponse
+) {
+
+  const usuarioId =
+    await exigirUsuario(
+      request,
+      response
+    );
+
+
+  if (!usuarioId) {
+    return;
+  }
+
+
+  try {
+
+    const body =
+      await lerJson(
+        request
+      );
+
+
+    const recebidas =
+      Array.isArray(
+        body.respostas
+      )
+        ? body.respostas
+        : [];
+
+
+    if (
+      recebidas.length ===
+        0
+    ) {
+
+      json(
+        response,
+        400,
+        {
+          error:
+            "Nenhuma resposta foi enviada.",
+        }
+      );
+
+      return;
+
+    }
+
+
+    if (
+      recebidas.length >
+        200
+    ) {
+
+      json(
+        response,
+        400,
+        {
+          error:
+            "Limite de 200 respostas por envio.",
+        }
+      );
+
+      return;
+
+    }
+
+
+    const respostas =
+      recebidas
+        .map(
+          function (
+            item:
+              any
+          ) {
+
+            return {
+              questaoId:
+                Number(
+                  item?.questaoId
+                ),
+
+              correta:
+                Boolean(
+                  item?.correta
+                ),
+            };
+
+          }
+        )
+        .filter(
+          function (
+            item
+          ) {
+
+            return (
+              Number.isInteger(
+                item.questaoId
+              ) &&
+              item.questaoId >
+                0
+            );
+
+          }
+        );
+
+
+    if (
+      respostas.length !==
+        recebidas.length
+    ) {
+
+      json(
+        response,
+        400,
+        {
+          error:
+            "Ha respostas com questao invalida.",
+        }
+      );
+
+      return;
+
+    }
+
+
+    const ids =
+      Array.from(
+        new Set(
+          respostas.map(
+            function (
+              item
+            ) {
+
+              return item
+                .questaoId;
+
+            }
+          )
+        )
+      );
+
+
+    const questoes =
+      await prisma
+        .questao
+        .findMany({
+          where: {
+            id: {
+              in:
+                ids,
+            },
+          },
+
+          select: {
+            id:
+              true,
+          },
+        });
+
+
+    if (
+      questoes.length !==
+        ids.length
+    ) {
+
+      json(
+        response,
+        404,
+        {
+          error:
+            "Uma ou mais questoes do simulado nao existem mais.",
+        }
+      );
+
+      return;
+
+    }
+
+
+    const resultado =
+      await prisma
+        .resposta
+        .createMany({
+          data:
+            respostas.map(
+              function (
+                item
+              ) {
+
+                return {
+                  usuarioId,
+
+                  questaoId:
+                    item.questaoId,
+
+                  correta:
+                    item.correta,
+                };
+
+              }
+            ),
+        });
+
+
+    json(
+      response,
+      201,
+      {
+        registradas:
+          resultado.count,
+      }
+    );
+
+  }
+  catch (
+    error
+  ) {
+
+    console.error(
+      "Erro ao salvar respostas do simulado:",
+      error
+    );
+
+
+    json(
+      response,
+      500,
+      {
+        error:
+          "Nao foi possivel registrar o desempenho do simulado.",
+      }
+    );
+
+  }
+
 }
 
 
@@ -3094,6 +3342,23 @@ const server =
 
         if (
           caminho ===
+            "/api/respostas/lote" &&
+          metodo ===
+            "POST"
+        ) {
+
+          await criarRespostasEmLote(
+            request,
+            response
+          );
+
+          return;
+
+        }
+
+
+        if (
+          caminho ===
           "/api/respostas"
         ) {
           if (
@@ -4113,38 +4378,24 @@ server.listen(
       );
 
 
-    void sincronizarQuestoesSemiotecnica()
+    void (
+      async function () {
+
+        await sincronizarQuestoesSemiotecnica();
+
+        await sincronizarQuestoesDiego();
+
+        await sincronizarQuestoesFarmacocineticaHaggi();
+
+        await sincronizarFlashcardsDasQuestoes();
+
+      }
+    )()
       .catch(
         function (error) {
 
           console.error(
-            "[questoes] Falha ao sincronizar Semiotécnica:",
-            error
-          );
-
-        }
-      );
-
-
-    void sincronizarQuestoesDiego()
-      .catch(
-        function (error) {
-
-          console.error(
-            "[questoes] Falha ao sincronizar Questões Diego:",
-            error
-          );
-
-        }
-      );
-
-
-    void sincronizarQuestoesFarmacocineticaHaggi()
-      .catch(
-        function (error) {
-
-          console.error(
-            "[questoes] Falha ao sincronizar Farmacocinetica HAGGI:",
+            "[conteudo] Falha ao sincronizar questoes/flashcards:",
             error
           );
 
