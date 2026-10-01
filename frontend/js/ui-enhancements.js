@@ -1107,6 +1107,232 @@
 
 
   /* =========================================================
+     RESPOSTA IMEDIATA A CLIQUES / TOQUES
+  ========================================================= */
+
+  function interactiveTarget(
+    target
+  ) {
+
+    if (
+      !(target instanceof Element)
+    ) {
+      return null;
+    }
+
+
+    return target.closest(
+      [
+        "button",
+        "a[href]",
+        "[role='button']",
+        "[role='tab']",
+        ".menu-item",
+        ".session-option",
+        ".sim-option",
+        ".action-card",
+        ".course-card",
+        ".drug-card",
+        ".flashcard-item",
+        ".theme-choice",
+        ".filter-chip",
+        ".area-option",
+        ".receptor-card",
+      ].join(",")
+    );
+
+  }
+
+
+  function releasePressed(
+    element
+  ) {
+
+    if (!element) {
+      return;
+    }
+
+
+    element.classList
+      .remove(
+        "ui-pressing"
+      );
+
+  }
+
+
+  function initGlobalInteractionFeedback() {
+
+    document.addEventListener(
+      "pointerdown",
+      function (
+        event
+      ) {
+
+        const element =
+          interactiveTarget(
+            event.target
+          );
+
+
+        if (
+          !element ||
+          element.matches(
+            ":disabled"
+          )
+        ) {
+          return;
+        }
+
+
+        element.classList
+          .add(
+            "ui-feedback-ready",
+            "ui-pressing"
+          );
+
+      },
+      {
+        passive:
+          true,
+      }
+    );
+
+
+    [
+      "pointerup",
+      "pointercancel",
+      "pointerleave",
+    ]
+      .forEach(
+        function (
+          eventName
+        ) {
+
+          document.addEventListener(
+            eventName,
+            function (
+              event
+            ) {
+
+              releasePressed(
+                interactiveTarget(
+                  event.target
+                )
+              );
+
+            },
+            {
+              passive:
+                true,
+            }
+          );
+
+        }
+      );
+
+
+    document.addEventListener(
+      "click",
+      function (
+        event
+      ) {
+
+        const element =
+          interactiveTarget(
+            event.target
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        element.classList
+          .add(
+            "ui-feedback-ready",
+            "ui-activated"
+          );
+
+
+        window.setTimeout(
+          function () {
+
+            element.classList
+              .remove(
+                "ui-activated",
+                "ui-pressing"
+              );
+
+          },
+          180
+        );
+
+      },
+      {
+        passive:
+          true,
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function (
+        event
+      ) {
+
+        if (
+          event.key !==
+            "Enter" &&
+          event.key !==
+            " "
+        ) {
+          return;
+        }
+
+
+        const element =
+          interactiveTarget(
+            event.target
+          );
+
+
+        if (!element) {
+          return;
+        }
+
+
+        element.classList
+          .add(
+            "ui-feedback-ready",
+            "ui-pressing"
+          );
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keyup",
+      function (
+        event
+      ) {
+
+        releasePressed(
+          interactiveTarget(
+            event.target
+          )
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
      START
   ========================================================= */
 
@@ -1124,6 +1350,7 @@
 
       initRevealObserver();
       initProfessionalMotion();
+      initGlobalInteractionFeedback();
       initTimer();
     }
   );
