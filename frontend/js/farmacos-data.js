@@ -3021,3 +3021,825 @@
     dica: "Fisostigmina = inibidor de colinesterase com acesso ao SNC; antidoto em intoxicacao antimuscarinica."
   });
 })();
+
+
+/*
+ * CORTEX ANESTESICOS GERAIS HAGGI V1
+ *
+ * Base da unidade: PDF "AnestesicosGerais" (HAGGI).
+ * Efeitos, caracteristicas e indicacoes preservam o material.
+ * Receptores/alvos e mecanismos ausentes no PDF recebem
+ * complemento farmacodinamico para manter o padrao do Cortex.
+ */
+(function () {
+  "use strict";
+
+  const SOURCE =
+    "Anestésicos Gerais — HAGGI; alvos/mecanismos complementados por farmacologia de referência";
+
+
+  Object.assign(
+    window.CortexReceptores,
+    {
+      "NMDA": {
+        familia:
+          "Glutamatérgico",
+        via:
+          "Canal catiônico",
+        resumo:
+          "Receptor ionotrópico de glutamato. Seu bloqueio reduz transmissão excitatória; é alvo central da cetamina e participa da ação anestésica do óxido nitroso."
+      },
+
+      "μ (MOR)": {
+        familia:
+          "Opioide",
+        via:
+          "Gi/o",
+        resumo:
+          "Receptor opioide μ. Sua ativação reduz adenilato ciclase, diminui entrada de Ca2+ pré-sináptica e favorece saída de K+, reduzindo transmissão nociceptiva."
+      },
+
+      "K2P": {
+        familia:
+          "Canal de K+",
+        via:
+          "Corrente de vazamento de K+",
+        resumo:
+          "Família de canais de potássio de dois poros. Anestésicos voláteis podem aumentar correntes de K+ e reduzir excitabilidade neuronal; o efeito anestésico é multifatorial."
+      }
+    }
+  );
+
+
+  const anestesicos =
+    [
+      {
+        id:
+          "oxido-nitroso",
+
+        nome:
+          "Óxido Nitroso",
+
+        principioAtivo:
+          "Óxido nitroso (N₂O)",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico inalatório gasoso",
+
+        acao:
+          "Antagonismo NMDA / modulação central",
+
+        receptores:
+          [
+            "NMDA",
+            "GABA-A"
+          ],
+
+        mecanismo:
+          "O material descreve analgesia e anestesia de baixa potência. Como complemento farmacodinâmico, o efeito anestésico envolve principalmente inibição não competitiva de receptores NMDA; ações ansiolíticas também envolvem GABA-A.",
+
+        efeitos:
+          [
+            "Analgesia",
+            "Anestesia de baixa potência",
+            "Euforia",
+            "Pouca depressão respiratória"
+          ],
+
+        usos:
+          [
+            "Anestesia, geralmente associado a outros agentes"
+          ],
+
+        adversos:
+          [
+            "Mielotoxicidade em uso prolongado"
+          ],
+
+        alertas:
+          [
+            "Baixa potência anestésica quando usado isoladamente"
+          ],
+
+        dica:
+          "Óxido nitroso = baixa potência + analgesia + NMDA.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "eter",
+
+        nome:
+          "Éter",
+
+        principioAtivo:
+          "Éter dietílico",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico inalatório volátil",
+
+        acao:
+          "Depressão multifatorial do SNC",
+
+        receptores:
+          [
+            "GABA-A",
+            "K2P"
+          ],
+
+        mecanismo:
+          "Anestésico volátil com ação multifatorial no SNC. Como complemento farmacodinâmico, anestésicos voláteis potencializam vias inibitórias como GABA-A e modulam canais de K+; o material o descreve como anestésico inalatório potente.",
+
+        efeitos:
+          [
+            "Anestesia inalatória potente"
+          ],
+
+        usos:
+          [
+            "Obsoleto"
+          ],
+
+        adversos:
+          [
+            "Irritação das vias respiratórias",
+            "Sobrecarga cardíaca",
+            "Muito explosivo"
+          ],
+
+        alertas:
+          [
+            "Agente obsoleto no material"
+          ],
+
+        dica:
+          "Éter = potente, irritante e explosivo; lembrar que é obsoleto.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "halotano",
+
+        nome:
+          "Halotano",
+
+        principioAtivo:
+          "Halotano",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico inalatório halogenado",
+
+        acao:
+          "Depressão multifatorial do SNC",
+
+        receptores:
+          [
+            "GABA-A",
+            "K2P"
+          ],
+
+        mecanismo:
+          "Anestésico volátil halogenado. Como complemento farmacodinâmico, sua ação anestésica é multifatorial, com facilitação de transmissão inibitória e modulação de canais iônicos como GABA-A e K2P.",
+
+        efeitos:
+          [
+            "Anestesia inalatória potente"
+          ],
+
+        usos:
+          [
+            "Anestesia cirúrgica"
+          ],
+
+        adversos:
+          [
+            "Hepatotoxicidade",
+            "Hipotensão",
+            "Depressão respiratória",
+            "Extrassístoles"
+          ],
+
+        alertas:
+          [
+            "Hepatotoxicidade é destaque no material"
+          ],
+
+        dica:
+          "Halotano = anestesia potente + fígado + hipotensão + arritmia.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "sevoflurano",
+
+        nome:
+          "Sevoflurano",
+
+        principioAtivo:
+          "Sevoflurano",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico inalatório halogenado",
+
+        acao:
+          "Depressão multifatorial do SNC",
+
+        receptores:
+          [
+            "GABA-A",
+            "K2P"
+          ],
+
+        mecanismo:
+          "Anestésico volátil halogenado de ação multifatorial. Como complemento farmacodinâmico, potencializa transmissão inibitória e modula canais iônicos; o material destaca indução e recuperação rápidas.",
+
+        efeitos:
+          [
+            "Indução rápida",
+            "Recuperação rápida",
+            "Pouca irritação das vias respiratórias"
+          ],
+
+        usos:
+          [
+            "Anestesia cirúrgica"
+          ],
+
+        adversos:
+          [],
+
+        alertas:
+          [
+            "No material, o principal destaque é a baixa irritação das vias respiratórias"
+          ],
+
+        dica:
+          "Sevoflurano = entra rápido, sai rápido e irrita pouco a via aérea.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "isoflurano",
+
+        nome:
+          "Isoflurano",
+
+        principioAtivo:
+          "Isoflurano",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico inalatório halogenado",
+
+        acao:
+          "Depressão multifatorial do SNC",
+
+        receptores:
+          [
+            "GABA-A",
+            "K2P"
+          ],
+
+        mecanismo:
+          "Anestésico volátil com ação multifatorial em receptores e canais iônicos do SNC. O material destaca redução do tônus arterial e venoso.",
+
+        efeitos:
+          [
+            "Redução do tônus arterial",
+            "Redução do tônus venoso"
+          ],
+
+        usos:
+          [
+            "Anestesia cirúrgica"
+          ],
+
+        adversos:
+          [
+            "Hipotensão",
+            "Depressão respiratória",
+            "Pode causar isquemia miocárdica"
+          ],
+
+        alertas:
+          [
+            "Atenção à hipotensão e à possível isquemia miocárdica destacadas no material"
+          ],
+
+        dica:
+          "Isoflurano = reduz tônus vascular → hipotensão.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "enflurano",
+
+        nome:
+          "Enflurano",
+
+        principioAtivo:
+          "Enflurano",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico inalatório halogenado",
+
+        acao:
+          "Depressão multifatorial do SNC",
+
+        receptores:
+          [
+            "GABA-A",
+            "K2P"
+          ],
+
+        mecanismo:
+          "Anestésico volátil halogenado com ação multifatorial sobre transmissão inibitória e canais iônicos. O material destaca redução do limiar convulsivo.",
+
+        efeitos:
+          [
+            "Anestesia geral por via inalatória"
+          ],
+
+        usos:
+          [
+            "Anestesia cirúrgica"
+          ],
+
+        adversos:
+          [
+            "Diminui o limiar convulsivo",
+            "Depressão respiratória"
+          ],
+
+        alertas:
+          [
+            "Limiar convulsivo reduzido é o ponto-chave do material"
+          ],
+
+        dica:
+          "Enflurano = lembre convulsão: diminui o limiar convulsivo.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "tiopental",
+
+        nome:
+          "Tiopental",
+
+        principioAtivo:
+          "Tiopental",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Barbitúrico intravenoso",
+
+        acao:
+          "Modulador positivo de GABA-A",
+
+        receptores:
+          [
+            "GABA-A"
+          ],
+
+        mecanismo:
+          "Barbitúrico que potencializa a neurotransmissão inibitória mediada por GABA-A, aumentando a atividade do canal de Cl−. O material destaca indução muito rápida de inconsciência.",
+
+        efeitos:
+          [
+            "Indução muito rápida de inconsciência",
+            "Alta lipossolubilidade"
+          ],
+
+        usos:
+          [
+            "Indução da anestesia"
+          ],
+
+        adversos:
+          [
+            "Eliminação lenta",
+            "Janela terapêutica estreita"
+          ],
+
+        alertas:
+          [
+            "Janela terapêutica estreita"
+          ],
+
+        dica:
+          "Tiopental = barbitúrico GABA-A + indução muito rápida.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "midazolam",
+
+        nome:
+          "Midazolam",
+
+        principioAtivo:
+          "Midazolam",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Benzodiazepínico",
+
+        acao:
+          "Modulador alostérico positivo de GABA-A",
+
+        receptores:
+          [
+            "GABA-A"
+          ],
+
+        mecanismo:
+          "Potencializa GABA, como indicado no material. Liga-se ao sítio benzodiazepínico do receptor GABA-A e aumenta a frequência de abertura do canal de Cl− em resposta ao GABA.",
+
+        efeitos:
+          [
+            "Sedação",
+            "Amnésia",
+            "Ansiólise"
+          ],
+
+        usos:
+          [
+            "Adjuvante na anestesia equilibrada"
+          ],
+
+        adversos:
+          [],
+
+        alertas:
+          [],
+
+        dica:
+          "Midazolam = benzodiazepínico → GABA-A → sedação + amnésia + ansiólise.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "etomidato",
+
+        nome:
+          "Etomidato",
+
+        principioAtivo:
+          "Etomidato",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico intravenoso imidazólico",
+
+        acao:
+          "Modulador positivo de GABA-A",
+
+        receptores:
+          [
+            "GABA-A"
+          ],
+
+        mecanismo:
+          "Anestésico intravenoso que modula positivamente receptores GABA-A, aumentando a ação inibitória do GABA. O material destaca metabolização rápida e ausência de descarga adrenérgica.",
+
+        efeitos:
+          [
+            "Anestesia intravenosa",
+            "Rápida metabolização",
+            "Boa janela terapêutica"
+          ],
+
+        usos:
+          [
+            "Anestesia geral"
+          ],
+
+        adversos:
+          [],
+
+        alertas:
+          [
+            "O material destaca que não provoca descarga adrenérgica"
+          ],
+
+        dica:
+          "Etomidato = GABA-A + rápida metabolização + boa janela terapêutica.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "morfina",
+
+        nome:
+          "Morfina",
+
+        principioAtivo:
+          "Morfina",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Opioide analgésico — adjuvante",
+
+        acao:
+          "Agonista opioide",
+
+        receptores:
+          [
+            "μ (MOR)"
+          ],
+
+        mecanismo:
+          "O material relaciona a analgesia aos receptores μ. Como complemento farmacodinâmico, a ativação de MOR acoplado a Gi/o reduz adenilato ciclase e transmissão nociceptiva.",
+
+        efeitos:
+          [
+            "Analgesia"
+          ],
+
+        usos:
+          [
+            "Adjuvante"
+          ],
+
+        adversos:
+          [],
+
+        alertas:
+          [],
+
+        dica:
+          "Morfina = receptor μ (MOR) → analgesia.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "fentanil",
+
+        nome:
+          "Fentanil",
+
+        principioAtivo:
+          "Fentanil",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Opioide sintético — adjuvante",
+
+        acao:
+          "Agonista opioide μ",
+
+        receptores:
+          [
+            "μ (MOR)"
+          ],
+
+        mecanismo:
+          "O material descreve analgesia potente por receptores μ. Como complemento farmacodinâmico, é agonista predominantemente μ-opioide e reduz transmissão nociceptiva por sinalização Gi/o.",
+
+        efeitos:
+          [
+            "Analgesia potente",
+            "Cerca de 100× mais potente que a morfina, segundo o material"
+          ],
+
+        usos:
+          [
+            "Analgesia em procedimentos curtos"
+          ],
+
+        adversos:
+          [],
+
+        alertas:
+          [],
+
+        dica:
+          "Fentanil = μ (MOR) + analgesia muito potente; material: ~100× morfina.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "propofol",
+
+        nome:
+          "Propofol",
+
+        principioAtivo:
+          "Propofol",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico intravenoso",
+
+        acao:
+          "Potencialização de GABA-A",
+
+        receptores:
+          [
+            "GABA-A"
+          ],
+
+        mecanismo:
+          "Anestésico intravenoso cuja ação está fortemente relacionada à potencialização da neurotransmissão GABAérgica por GABA-A. O material destaca indução/manutenção e recuperação rápida.",
+
+        efeitos:
+          [
+            "Indução rápida",
+            "Manutenção da anestesia",
+            "Recuperação rápida",
+            "Efeito antiemético"
+          ],
+
+        usos:
+          [
+            "Indução e manutenção por infusão"
+          ],
+
+        adversos:
+          [],
+
+        alertas:
+          [],
+
+        dica:
+          "Propofol = GABA-A + recuperação rápida + antiemético.",
+
+        fonte:
+          SOURCE
+      },
+
+      {
+        id:
+          "cetamina",
+
+        nome:
+          "Cetamina",
+
+        principioAtivo:
+          "Cetamina",
+
+        grupo:
+          "Anestésicos gerais",
+
+        classe:
+          "Anestésico dissociativo",
+
+        acao:
+          "Antagonista não competitivo de NMDA",
+
+        receptores:
+          [
+            "NMDA"
+          ],
+
+        mecanismo:
+          "Bloqueia receptores NMDA de forma não competitiva, produzindo anestesia dissociativa, como indicado no material.",
+
+        efeitos:
+          [
+            "Anestesia dissociativa",
+            "Aumenta descarga simpática",
+            "Mantém pressão arterial",
+            "Alucinações",
+            "Euforia",
+            "Dissociação"
+          ],
+
+        usos:
+          [
+            "Anestesia dissociativa"
+          ],
+
+        adversos:
+          [
+            "Alucinações"
+          ],
+
+        alertas:
+          [
+            "O material destaca aumento da descarga simpática e manutenção da pressão arterial"
+          ],
+
+        dica:
+          "Cetamina = NMDA bloqueado + dissociação + descarga simpática.",
+
+        fonte:
+          SOURCE
+      }
+    ];
+
+
+  anestesicos.forEach(
+    function (
+      incoming
+    ) {
+
+      const index =
+        window.CortexFarmacos
+          .findIndex(
+            function (
+              item
+            ) {
+
+              return (
+                item.id ===
+                incoming.id
+              );
+
+            }
+          );
+
+
+      if (
+        index >= 0
+      ) {
+
+        window.CortexFarmacos[
+          index
+        ] =
+          Object.assign(
+            {},
+            window.CortexFarmacos[
+              index
+            ],
+            incoming
+          );
+
+      }
+      else {
+
+        window.CortexFarmacos
+          .push(
+            incoming
+          );
+
+      }
+
+    }
+  );
+
+})();
+/* CORTEX ANESTESICOS GERAIS HAGGI V1 END */
