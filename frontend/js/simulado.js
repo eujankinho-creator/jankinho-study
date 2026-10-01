@@ -810,6 +810,158 @@
   }
 
 
+  function safeQuestionImageUrl(
+    value
+  ) {
+
+    const url =
+      String(
+        value ||
+        ""
+      )
+        .trim();
+
+
+    if (
+      url.startsWith(
+        "/assets/"
+      ) ||
+      url.startsWith(
+        "data:image/"
+      ) ||
+      url.startsWith(
+        "https://"
+      )
+    ) {
+
+      return url;
+
+    }
+
+
+    return "";
+
+  }
+
+
+  function renderQuestionMedia(
+    question
+  ) {
+
+    const meta =
+      $("simulationQuestionMeta");
+
+
+    const visual =
+      $("simulationQuestionVisual");
+
+
+    const fonte =
+      String(
+        question.fonte ||
+        ""
+      )
+        .trim();
+
+
+    const fonteUrl =
+      String(
+        question.fonteUrl ||
+        ""
+      )
+        .trim();
+
+
+    if (
+      fonte
+    ) {
+
+      if (
+        /^https:\/\//i.test(
+          fonteUrl
+        )
+      ) {
+
+        meta.innerHTML =
+          '<a class="sim-question-source" ' +
+          'href="' +
+          escapeHtml(
+            fonteUrl
+          ) +
+          '" target="_blank" rel="noopener noreferrer">' +
+          'Fonte: ' +
+          escapeHtml(
+            fonte
+          ) +
+          '</a>';
+
+      }
+      else {
+
+        meta.innerHTML =
+          '<span class="sim-question-source">' +
+          'Fonte: ' +
+          escapeHtml(
+            fonte
+          ) +
+          '</span>';
+
+      }
+
+    }
+    else {
+
+      meta.innerHTML =
+        "";
+
+    }
+
+
+    const src =
+      safeQuestionImageUrl(
+        question.imagemUrl
+      );
+
+
+    if (
+      src
+    ) {
+
+      visual.classList
+        .remove(
+          "hidden"
+        );
+
+
+      visual.innerHTML =
+        '<img src="' +
+        escapeHtml(
+          src
+        ) +
+        '" alt="' +
+        escapeHtml(
+          question.imagemAlt ||
+          "Imagem de apoio da questão"
+        ) +
+        '" loading="lazy" decoding="async">';
+
+    }
+    else {
+
+      visual.classList
+        .add(
+          "hidden"
+        );
+
+
+      visual.innerHTML =
+        "";
+
+    }
+
+  }
+
+
   function showError(
     message
   ) {
@@ -1237,6 +1389,11 @@
     $("simulationQuestion")
       .textContent =
       question.enunciado;
+
+
+    renderQuestionMedia(
+      question
+    );
 
 
     $("questionBadges")
