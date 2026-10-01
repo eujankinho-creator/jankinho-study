@@ -37,6 +37,73 @@ function limparErro() {
 }
 
 
+function resetCortexIntroSession() {
+
+  try {
+
+    const keys =
+      [];
+
+
+    for (
+      let index = 0;
+      index < sessionStorage.length;
+      index += 1
+    ) {
+
+      const key =
+        sessionStorage.key(
+          index
+        );
+
+
+      if (
+        key &&
+        (
+          key ===
+            "cortexDesktopIntroSeen" ||
+          key.startsWith(
+            "cortexPageIntroSeen:"
+          )
+        )
+      ) {
+
+        keys.push(
+          key
+        );
+
+      }
+
+    }
+
+
+    keys.forEach(
+      function (
+        key
+      ) {
+
+        sessionStorage.removeItem(
+          key
+        );
+
+      }
+    );
+
+  }
+  catch (
+    error
+  ) {
+
+    /*
+     * O login continua normalmente mesmo
+     * se o navegador bloquear sessionStorage.
+     */
+
+  }
+
+}
+
+
 form.addEventListener(
   "submit",
   async function (event) {
@@ -103,6 +170,9 @@ form.addEventListener(
         );
 
       }
+
+
+      resetCortexIntroSession();
 
 
       window.location.href = "/app";
