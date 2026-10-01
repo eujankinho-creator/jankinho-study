@@ -191,14 +191,25 @@ sincronizarQuestoesDiego() {
   }
 
 
-  let disciplina =
-    atuais[0]
-      ?.disciplina;
+  let disciplina:
+    {
+      id: number;
+      nome: string;
+      createdAt: Date;
+      usuarioId: number;
+    }
+    | null
+    | undefined =
+      atuais[0]
+        ?.disciplina;
 
 
-  let usuarioId =
-    atuais[0]
-      ?.usuarioId;
+  let usuarioId:
+    number
+    | null
+    | undefined =
+      atuais[0]
+        ?.usuarioId;
 
 
   if (
