@@ -575,3 +575,167 @@ body.cortex-mobile-menu-open {
 }
 
 /* CORTEX MOBILE SIDEBAR SINGLE OWNER V2 END */
+
+
+/* =========================================================
+   CORTEX MOBILE PERFORMANCE V3
+========================================================= */
+
+.sidebar-menu .menu-item,
+.cortex-mobile-sidebar-button,
+.cortex-mobile-sidebar-close,
+.cortex-mobile-sidebar-backdrop {
+  touch-action:
+    manipulation;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+@media (max-width: 900px) {
+
+  .cortex-mobile-sidebar-button {
+    will-change:
+      transform;
+
+    backdrop-filter:
+      none;
+
+    -webkit-backdrop-filter:
+      none;
+
+    box-shadow:
+      0 8px 22px
+      rgba(0,0,0,.24);
+
+    transition:
+      transform .12s ease,
+      border-color .14s ease,
+      background-color .14s ease;
+  }
+
+
+  .cortex-mobile-sidebar-button:active {
+    transform:
+      scale(.94);
+  }
+
+
+  .cortex-mobile-sidebar-overlay {
+    contain:
+      layout paint style;
+
+    overscroll-behavior:
+      contain;
+  }
+
+
+  .cortex-mobile-sidebar-backdrop {
+    opacity:
+      0;
+
+    transition:
+      opacity .14s ease;
+  }
+
+
+  .cortex-mobile-sidebar-overlay.open
+  .cortex-mobile-sidebar-backdrop {
+    opacity:
+      1;
+  }
+
+
+  .cortex-mobile-sidebar-panel {
+    will-change:
+      transform;
+
+    contain:
+      layout paint;
+
+    box-shadow:
+      14px 0 38px
+      rgba(0,0,0,.38);
+
+    transition:
+      transform .16s
+      cubic-bezier(.2,.8,.2,1);
+  }
+
+
+  .cortex-mobile-sidebar-menu {
+    overscroll-behavior:
+      contain;
+
+    -webkit-overflow-scrolling:
+      touch;
+
+    scrollbar-width:
+      thin;
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .menu-item {
+    min-height:
+      48px;
+
+    margin-bottom:
+      2px;
+
+    transition:
+      transform .10s ease,
+      background-color .14s ease,
+      color .14s ease;
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .menu-item:active {
+    transform:
+      scale(.985);
+  }
+
+
+  .cortex-mobile-sidebar-menu
+  .cortex-nav-icon {
+    width:
+      36px;
+
+    height:
+      36px;
+
+    flex-basis:
+      36px;
+  }
+
+
+  .cortex-mobile-sidebar-close {
+    transition:
+      transform .12s ease,
+      background-color .14s ease;
+  }
+
+
+  .cortex-mobile-sidebar-close:active {
+    transform:
+      scale(.92);
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cortex-mobile-sidebar-panel,
+  .cortex-mobile-sidebar-backdrop,
+  .cortex-mobile-sidebar-button,
+  .cortex-mobile-sidebar-menu .menu-item {
+    transition:
+      none !important;
+  }
+
+}
+
+/* CORTEX MOBILE PERFORMANCE V3 END */
