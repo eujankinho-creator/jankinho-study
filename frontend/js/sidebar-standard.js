@@ -418,6 +418,9 @@
         'href="' +
         item.href +
         '" ' +
+        'data-cortex-nav="' +
+        item.href +
+        '" ' +
         'class="menu-item' +
         (
           active
@@ -493,6 +496,260 @@
 
       }
     );
+
+  }
+
+
+  /* =======================================================
+     NAVEGACAO ACELERADA
+  ======================================================= */
+
+  const prefetchedRoutes =
+    new Set();
+
+
+  function normalizedNavigationPath(
+    href
+  ) {
+
+    const value =
+      String(
+        href ||
+        ""
+      );
+
+
+    if (
+      value === "/"
+    ) {
+      return "/index.html";
+    }
+
+
+    return value;
+
+  }
+
+
+  function prefetchRoute(
+    href
+  ) {
+
+    const route =
+      normalizedNavigationPath(
+        href
+      );
+
+
+    if (
+      !route ||
+      prefetchedRoutes.has(
+        route
+      )
+    ) {
+      return;
+    }
+
+
+    prefetchedRoutes.add(
+      route
+    );
+
+
+    fetch(
+      route,
+      {
+        method:
+          "GET",
+
+        credentials:
+          "same-origin",
+
+        cache:
+          "force-cache",
+      }
+    )
+      .catch(
+        function () {
+
+          prefetchedRoutes.delete(
+            route
+          );
+
+        }
+      );
+
+  }
+
+
+  function setOptimisticActive(
+    href
+  ) {
+
+    document
+      .querySelectorAll(
+        ".sidebar-menu .menu-item"
+      )
+      .forEach(
+        function (
+          item
+        ) {
+
+          item.classList.toggle(
+            "active",
+            item.getAttribute(
+              "href"
+            ) ===
+              href
+          );
+
+        }
+      );
+
+  }
+
+
+  function enhanceFastNavigation() {
+
+    document
+      .querySelectorAll(
+        ".sidebar-menu .menu-item"
+      )
+      .forEach(
+        function (
+          link
+        ) {
+
+          if (
+            link.dataset
+              .cortexFastNav ===
+            "1"
+          ) {
+            return;
+          }
+
+
+          link.dataset
+            .cortexFastNav =
+            "1";
+
+
+          const href =
+            link.getAttribute(
+              "href"
+            );
+
+
+          if (!href) {
+            return;
+          }
+
+
+          link.addEventListener(
+            "pointerenter",
+            function () {
+
+              prefetchRoute(
+                href
+              );
+
+            },
+            {
+              passive:
+                true
+            }
+          );
+
+
+          link.addEventListener(
+            "pointerdown",
+            function () {
+
+              prefetchRoute(
+                href
+              );
+
+
+              setOptimisticActive(
+                href
+              );
+
+            },
+            {
+              passive:
+                true
+            }
+          );
+
+
+          link.addEventListener(
+            "click",
+            function (
+              event
+            ) {
+
+              if (
+                event.defaultPrevented ||
+                event.button > 0 ||
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+              ) {
+                return;
+              }
+
+
+              const targetRoute =
+                href === "/"
+                  ? "/"
+                  : href
+                      .replace(
+                        /\.html$/,
+                        ""
+                      );
+
+
+              if (
+                currentRoute() ===
+                  targetRoute
+              ) {
+
+                event.preventDefault();
+
+                return;
+
+              }
+
+
+              if (
+                window.parent !==
+                window
+              ) {
+
+                event.preventDefault();
+
+
+                window.parent
+                  .postMessage(
+                    {
+                      type:
+                        "cortex:navigate",
+
+                      href:
+                        href,
+                    },
+                    window.location
+                      .origin
+                  );
+
+              }
+
+            }
+          );
+
+        }
+      );
 
   }
 
@@ -899,6 +1156,8 @@
     applySidebar();
 
     ensureMobileMenu();
+
+    enhanceFastNavigation();
 
   }
 
