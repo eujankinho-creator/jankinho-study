@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Questão 7 - correção de glicemia e seringas de insulina</title>
+  <desc id="desc">Tabela com faixas de glicemia capilar e doses de insulina regular, seguida de três seringas de 1 mL para os pacientes 1, 2 e 3.</desc>
+  <rect width="1200" height="760" rx="28" fill="#0d1117"/>
+  <rect x="34" y="34" width="1132" height="692" rx="24" fill="#151b23" stroke="#313a46" stroke-width="2"/>
+  <text x="70" y="90" fill="#f8fafc" font-size="34" font-family="Arial, sans-serif" font-weight="700">Correção da glicemia — Insulina regular</text>
+  <text x="70" y="126" fill="#aeb8c5" font-size="19" font-family="Arial, sans-serif">Use a tabela para determinar a dose e depois converta UI para mL em seringa U-100.</text>
+
+  <g transform="translate(70 165)">
+    <rect width="1060" height="250" rx="16" fill="#0f141b" stroke="#3a4553" stroke-width="2"/>
+    <rect width="1060" height="62" rx="16" fill="#1d2632"/>
+    <rect y="46" width="1060" height="16" fill="#1d2632"/>
+    <line x1="530" y1="0" x2="530" y2="250" stroke="#3a4553" stroke-width="2"/>
+    <line x1="0" y1="62" x2="1060" y2="62" stroke="#3a4553" stroke-width="2"/>
+    <line x1="0" y1="125" x2="1060" y2="125" stroke="#303a46" stroke-width="2"/>
+    <line x1="0" y1="188" x2="1060" y2="188" stroke="#303a46" stroke-width="2"/>
+
+    <text x="265" y="40" text-anchor="middle" fill="#ffffff" font-size="22" font-family="Arial, sans-serif" font-weight="700">GLICEMIA CAPILAR</text>
+    <text x="795" y="40" text-anchor="middle" fill="#ffffff" font-size="22" font-family="Arial, sans-serif" font-weight="700">DOSE DE INSULINA REGULAR</text>
+
+    <text x="265" y="103" text-anchor="middle" fill="#e7edf5" font-size="23" font-family="Arial, sans-serif">141–180 mg/dL</text>
+    <text x="795" y="103" text-anchor="middle" fill="#9be7c4" font-size="23" font-family="Arial, sans-serif" font-weight="700">20 UI — via SC</text>
+
+    <text x="265" y="166" text-anchor="middle" fill="#e7edf5" font-size="23" font-family="Arial, sans-serif">181–240 mg/dL</text>
+    <text x="795" y="166" text-anchor="middle" fill="#9be7c4" font-size="23" font-family="Arial, sans-serif" font-weight="700">40 UI — via SC</text>
+
+    <text x="265" y="229" text-anchor="middle" fill="#e7edf5" font-size="23" font-family="Arial, sans-serif">241–280 mg/dL</text>
+    <text x="795" y="229" text-anchor="middle" fill="#9be7c4" font-size="23" font-family="Arial, sans-serif" font-weight="700">60 UI — via SC</text>
+  </g>
+
+  <text x="70" y="460" fill="#f8fafc" font-size="24" font-family="Arial, sans-serif" font-weight="700">Pacientes</text>
+
+  <g transform="translate(70 490)">
+    <g transform="translate(0 0)">
+      <text x="0" y="0" fill="#f1f5f9" font-size="20" font-family="Arial, sans-serif" font-weight="700">Paciente 1 — 163 mg/dL</text>
+      <g transform="translate(0 28)">
+        <rect x="0" y="22" width="280" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="280" y="32" width="52" height="30" rx="4" fill="#cbd5e1"/>
+        <line x1="332" y1="47" x2="385" y2="47" stroke="#e2e8f0" stroke-width="4"/>
+        <line x1="385" y1="47" x2="420" y2="47" stroke="#94a3b8" stroke-width="1"/>
+        <line x1="0" y1="47" x2="-24" y2="47" stroke="#94a3b8" stroke-width="7"/>
+        <line x1="-24" y1="29" x2="-24" y2="65" stroke="#94a3b8" stroke-width="7"/>
+        <g stroke="#334155" stroke-width="2">
+          <line x1="28" y1="22" x2="28" y2="38"/><line x1="56" y1="22" x2="56" y2="44"/><line x1="84" y1="22" x2="84" y2="38"/>
+          <line x1="112" y1="22" x2="112" y2="44"/><line x1="140" y1="22" x2="140" y2="38"/><line x1="168" y1="22" x2="168" y2="44"/>
+          <line x1="196" y1="22" x2="196" y2="38"/><line x1="224" y1="22" x2="224" y2="44"/><line x1="252" y1="22" x2="252" y2="38"/>
+        </g>
+        <text x="0" y="96" fill="#94a3b8" font-size="14" font-family="Arial, sans-serif">0 mL</text>
+        <text x="260" y="96" fill="#94a3b8" font-size="14" font-family="Arial, sans-serif">1,0 mL</text>
+      </g>
+    </g>
+
+    <g transform="translate(400 0)">
+      <text x="0" y="0" fill="#f1f5f9" font-size="20" font-family="Arial, sans-serif" font-weight="700">Paciente 2 — 277 mg/dL</text>
+      <g transform="translate(0 28)">
+        <rect x="0" y="22" width="280" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="280" y="32" width="52" height="30" rx="4" fill="#cbd5e1"/>
+        <line x1="332" y1="47" x2="385" y2="47" stroke="#e2e8f0" stroke-width="4"/>
+        <line x1="385" y1="47" x2="420" y2="47" stroke="#94a3b8" stroke-width="1"/>
+        <line x1="0" y1="47" x2="-24" y2="47" stroke="#94a3b8" stroke-width="7"/>
+        <line x1="-24" y1="29" x2="-24" y2="65" stroke="#94a3b8" stroke-width="7"/>
+        <g stroke="#334155" stroke-width="2">
+          <line x1="28" y1="22" x2="28" y2="38"/><line x1="56" y1="22" x2="56" y2="44"/><line x1="84" y1="22" x2="84" y2="38"/>
+          <line x1="112" y1="22" x2="112" y2="44"/><line x1="140" y1="22" x2="140" y2="38"/><line x1="168" y1="22" x2="168" y2="44"/>
+          <line x1="196" y1="22" x2="196" y2="38"/><line x1="224" y1="22" x2="224" y2="44"/><line x1="252" y1="22" x2="252" y2="38"/>
+        </g>
+        <text x="0" y="96" fill="#94a3b8" font-size="14" font-family="Arial, sans-serif">0 mL</text>
+        <text x="260" y="96" fill="#94a3b8" font-size="14" font-family="Arial, sans-serif">1,0 mL</text>
+      </g>
+    </g>
+
+    <g transform="translate(800 0)">
+      <text x="0" y="0" fill="#f1f5f9" font-size="20" font-family="Arial, sans-serif" font-weight="700">Paciente 3 — 194 mg/dL</text>
+      <g transform="translate(0 28)">
+        <rect x="0" y="22" width="280" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+        <rect x="280" y="32" width="52" height="30" rx="4" fill="#cbd5e1"/>
+        <line x1="332" y1="47" x2="385" y2="47" stroke="#e2e8f0" stroke-width="4"/>
+        <line x1="385" y1="47" x2="420" y2="47" stroke="#94a3b8" stroke-width="1"/>
+        <line x1="0" y1="47" x2="-24" y2="47" stroke="#94a3b8" stroke-width="7"/>
+        <line x1="-24" y1="29" x2="-24" y2="65" stroke="#94a3b8" stroke-width="7"/>
+        <g stroke="#334155" stroke-width="2">
+          <line x1="28" y1="22" x2="28" y2="38"/><line x1="56" y1="22" x2="56" y2="44"/><line x1="84" y1="22" x2="84" y2="38"/>
+          <line x1="112" y1="22" x2="112" y2="44"/><line x1="140" y1="22" x2="140" y2="38"/><line x1="168" y1="22" x2="168" y2="44"/>
+          <line x1="196" y1="22" x2="196" y2="38"/><line x1="224" y1="22" x2="224" y2="44"/><line x1="252" y1="22" x2="252" y2="38"/>
+        </g>
+        <text x="0" y="96" fill="#94a3b8" font-size="14" font-family="Arial, sans-serif">0 mL</text>
+        <text x="260" y="96" fill="#94a3b8" font-size="14" font-family="Arial, sans-serif">1,0 mL</text>
+      </g>
+    </g>
+  </g>
+
+  <text x="70" y="704" fill="#7f8b99" font-size="15" font-family="Arial, sans-serif">Recriação visual do quadro e das seringas presentes no exercício da UFPB. Não contém o gabarito marcado.</text>
+</svg>
