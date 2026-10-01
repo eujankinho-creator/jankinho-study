@@ -69,7 +69,7 @@
       </g>
     </g>
 
-    <g transform="translate(800 0)">
+    <g transform="translate(0 150)">
       <text x="0" y="0" fill="#f1f5f9" font-size="20" font-family="Arial, sans-serif" font-weight="700">Paciente 3 — 194 mg/dL</text>
       <g transform="translate(0 28)">
         <rect x="0" y="22" width="280" height="50" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
@@ -89,5 +89,5 @@
     </g>
   </g>
 
-  <text x="70" y="704" fill="#7f8b99" font-size="15" font-family="Arial, sans-serif">Recriação visual do quadro e das seringas presentes no exercício da UFPB. Não contém o gabarito marcado.</text>
+  <text x="70" y="748" fill="#7f8b99" font-size="15" font-family="Arial, sans-serif">Recriação visual do quadro e das seringas presentes no exercício da UFPB. Não contém o gabarito marcado.</text>
 </svg>
