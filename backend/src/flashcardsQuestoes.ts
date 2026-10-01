@@ -176,6 +176,140 @@ function perguntaCurta(
 
 
 export async function
+sincronizarFlashcardDaQuestao(
+  questaoId:
+    number
+) {
+
+  const questao =
+    await prisma
+      .questao
+      .findUnique({
+        where: {
+          id:
+            questaoId,
+        },
+
+        include: {
+          disciplina:
+            true,
+
+          alternativas:
+            true,
+        },
+      });
+
+
+  if (!questao) {
+    return null;
+  }
+
+
+  const correta =
+    questao.alternativas
+      .find(
+        function (
+          alternativa
+        ) {
+
+          return alternativa
+            .correta;
+
+        }
+      );
+
+
+  if (!correta) {
+    return null;
+  }
+
+
+  const disciplina =
+    limparTexto(
+      questao.disciplina
+        .nome
+    ) ||
+    "Geral";
+
+
+  const tema =
+    limparTexto(
+      questao.tema
+    ) ||
+    "Geral";
+
+
+  const frente =
+    limitar(
+      "[" +
+      disciplina +
+      " | " +
+      tema +
+      "] " +
+      perguntaCurta(
+        questao.enunciado,
+        tema,
+        disciplina
+      ),
+      240
+    );
+
+
+  const verso =
+    limitar(
+      limparTexto(
+        correta.texto
+      ),
+      220
+    );
+
+
+  return prisma
+    .flashcard
+    .upsert({
+      where: {
+        questaoId:
+          questao.id,
+      },
+
+      create: {
+        frente,
+        verso,
+
+        origem:
+          "questao",
+
+        tema,
+
+        disciplina,
+
+        usuarioId:
+          questao.usuarioId,
+
+        questaoId:
+          questao.id,
+      },
+
+      update: {
+        frente,
+        verso,
+
+        origem:
+          "questao",
+
+        tema,
+
+        disciplina,
+
+        usuarioId:
+          questao.usuarioId,
+      },
+    });
+
+}
+
+
+export async function
 sincronizarFlashcardsDasQuestoes() {
 
   const questoes =
