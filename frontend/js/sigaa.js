@@ -32,44 +32,45 @@
     return plain ? plain[1] : (fallback || "arquivo");
   }
 
-  async function downloadSigaaFile(url, fallbackName, button) {
-    const originalText = button ? button.textContent : "";
-    if (button) {
-      button.disabled = true;
-      button.textContent = "Baixando...";
+  function downloadSigaaFile(url, fallbackName, button) {
+    const targetUrl = String(url || "").trim();
+    if (!targetUrl) {
+      showMessage("Link de download indisponível.", "error");
+      return;
     }
-    showMessage("Preparando arquivo do SIGAA...", "info");
 
+    if (button) {
+      button.setAttribute("aria-busy", "true");
+    }
+
+    showMessage(
+      "Enviando " + (fallbackName || "arquivo") + " para o dispositivo...",
+      "info"
+    );
+
+    /*
+     * Download direto: preserva o gesto do usuario e deixa o
+     * Content-Disposition: attachment do backend controlar o arquivo.
+     * Isso e mais confiavel em mobile do que fetch -> Blob -> click().
+     */
     try {
-      const response = await fetch(url, { credentials: "same-origin" });
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data.error || "Nao foi possivel baixar o arquivo.");
-      }
+      const topWindow =
+        window.top &&
+        window.top !== window &&
+        window.top.location.origin === window.location.origin
+          ? window.top
+          : window;
 
-      const blob = await response.blob();
-      const filename = filenameFromDisposition(
-        response.headers.get("content-disposition"),
-        fallbackName
-      );
-      const objectUrl = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = objectUrl;
-      link.download = filename;
-      link.style.display = "none";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
-      showMessage("Download iniciado: " + filename, "info");
-      window.setTimeout(() => showMessage("", ""), 2500);
-    } catch (error) {
-      showMessage(error.message || "Nao foi possivel baixar o arquivo.", "error");
-    } finally {
-      if (button) {
-        button.disabled = false;
-        button.textContent = originalText || "Baixar";
-      }
+      topWindow.location.href = targetUrl;
+
+      window.setTimeout(() => {
+        if (button) {
+          button.removeAttribute("aria-busy");
+        }
+        showMessage("", "");
+      }, 1800);
+    } catch {
+      window.location.href = targetUrl;
     }
   }
 
@@ -368,8 +369,10 @@
             <span>${escapeHtml(description)}</span>
             <span class="resource-source">${escapeHtml(source)} · arquivo confirmado</span>
           </div>
-          <button type="button" class="download-button" data-sigaa-download="${escapeHtml(url)}"
-            data-filename="${escapeHtml(file.title || "arquivo")}">${escapeHtml(downloadLabel)}</button>
+          <a class="download-button" href="${escapeHtml(url)}"
+            data-sigaa-download="${escapeHtml(url)}"
+            data-filename="${escapeHtml(file.title || "arquivo")}"
+            download>${escapeHtml(downloadLabel)}</a>
         </article>
       `;
     }).join("") + "</div>";
