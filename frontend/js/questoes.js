@@ -40,6 +40,136 @@ function escapeHtml(texto) {
 }
 
 
+function safeQuestionImageUrl(
+  value
+) {
+
+  const url =
+    String(
+      value ||
+      ""
+    )
+      .trim();
+
+
+  if (
+    url.startsWith(
+      "/assets/"
+    ) ||
+    url.startsWith(
+      "data:image/"
+    ) ||
+    url.startsWith(
+      "https://"
+    )
+  ) {
+
+    return url;
+
+  }
+
+
+  return "";
+
+}
+
+
+function renderQuestionVisual(
+  questao,
+  compact
+) {
+
+  const src =
+    safeQuestionImageUrl(
+      questao &&
+      questao.imagemUrl
+    );
+
+
+  if (!src) {
+    return "";
+  }
+
+
+  return `
+    <figure class="question-visual ${
+      compact
+        ? "compact"
+        : ""
+    }">
+
+      <img
+        src="${escapeHtml(src)}"
+        alt="${escapeHtml(
+          questao.imagemAlt ||
+          "Imagem de apoio da questão"
+        )}"
+        loading="lazy"
+        decoding="async"
+      >
+
+    </figure>
+  `;
+
+}
+
+
+function renderQuestionSource(
+  questao
+) {
+
+  const fonte =
+    String(
+      questao &&
+      questao.fonte
+        ? questao.fonte
+        : ""
+    )
+      .trim();
+
+
+  if (!fonte) {
+    return "";
+  }
+
+
+  const url =
+    String(
+      questao.fonteUrl ||
+      ""
+    )
+      .trim();
+
+
+  if (
+    /^https:\/\//i.test(
+      url
+    )
+  ) {
+
+    return `
+      <a
+        class="question-source"
+        href="${escapeHtml(url)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Fonte: ${escapeHtml(fonte)}
+      </a>
+    `;
+
+  }
+
+
+  return `
+    <span class="question-source">
+      Fonte: ${escapeHtml(fonte)}
+    </span>
+  `;
+
+}
+
+
 function mostrarErro(mensagem) {
 
   $("erroTexto").textContent =
@@ -624,6 +754,17 @@ function renderLista() {
               </h3>
 
 
+              ${renderQuestionVisual(
+                questao,
+                true
+              )}
+
+
+              ${renderQuestionSource(
+                questao
+              )}
+
+
               <div class="question-bottom">
 
                 <div class="question-meta">
@@ -1104,6 +1245,17 @@ function renderSessao() {
               questao.enunciado
             )}
           </h2>
+
+
+          ${renderQuestionSource(
+            questao
+          )}
+
+
+          ${renderQuestionVisual(
+            questao,
+            false
+          )}
 
         </div>
 
