@@ -42,6 +42,10 @@ model Questao {
   disciplinaId Int
   dificuldade  String?
   tema         String?
+  fonte        String?
+  fonteUrl     String?
+  imagemUrl    String?        @db.Text
+  imagemAlt    String?
   alternativas Alternativa[]
   disciplina   Disciplina    @relation(fields: [disciplinaId], references: [id], onDelete: Cascade)
   usuario      Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
