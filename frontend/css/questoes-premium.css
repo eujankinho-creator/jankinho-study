@@ -2066,3 +2066,141 @@ html[data-theme="pink-glitter"]
   }
 
 }
+
+/* =========================================================
+   CORTEX QUESTION VISUALS V1
+========================================================= */
+
+.questions-view .question-source {
+  display:
+    inline-flex;
+
+  width:
+    fit-content;
+
+  max-width:
+    100%;
+
+  margin-top:
+    12px;
+
+  color:
+    #9ca7b5 !important;
+
+  font-size:
+    11px;
+
+  line-height:
+    1.45;
+
+  text-decoration:
+    none;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+.questions-view a.question-source:hover {
+  color:
+    var(--q-accent-2) !important;
+
+  text-decoration:
+    underline;
+}
+
+
+.questions-view .question-visual {
+  width:
+    100%;
+
+  margin:
+    20px 0 4px;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  border-radius:
+    16px;
+
+  background:
+    #0d1117;
+
+  box-shadow:
+    0 16px 36px
+    rgba(0,0,0,.20);
+}
+
+
+.questions-view .question-visual img {
+  display:
+    block;
+
+  width:
+    100%;
+
+  height:
+    auto;
+
+  max-height:
+    620px;
+
+  object-fit:
+    contain;
+
+  background:
+    #0d1117;
+}
+
+
+.questions-view .question-visual.compact {
+  margin:
+    14px 0 2px;
+
+  max-height:
+    250px;
+}
+
+
+.questions-view .question-visual.compact img {
+  max-height:
+    250px;
+}
+
+
+@media (max-width: 640px) {
+
+  .questions-view .question-visual {
+    margin-top:
+      15px;
+
+    border-radius:
+      12px;
+  }
+
+
+  .questions-view .question-visual img {
+    max-height:
+      430px;
+  }
+
+
+  .questions-view .question-visual.compact,
+  .questions-view .question-visual.compact img {
+    max-height:
+      190px;
+  }
+
+
+  .questions-view .question-source {
+    font-size:
+      10px;
+  }
+
+}
+
+/* CORTEX QUESTION VISUALS V1 END */
