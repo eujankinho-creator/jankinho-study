@@ -386,6 +386,9 @@
       "beta3",
       "D1",
       "GABA-A",
+      "NMDA",
+      "μ (MOR)",
+      "K2P",
       "Muscarinicos",
       "Nicotinicos",
     ];
