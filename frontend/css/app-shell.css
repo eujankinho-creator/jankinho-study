@@ -1451,3 +1451,59 @@ body.cortex-app-shell
 
 
 /* CORTEX PLAYER THEME SYNC END */
+
+
+/* =========================================================
+   CORTEX SHELL NAVIGATION MOTION V1
+========================================================= */
+
+.shell-frame {
+  transition:
+    opacity .14s ease,
+    transform .14s ease,
+    filter .14s ease;
+
+  transform:
+    translateZ(0);
+
+  will-change:
+    opacity,
+    transform;
+}
+
+
+.shell-frame.shell-frame-navigating {
+  opacity:
+    .72;
+
+  transform:
+    translate3d(0,2px,0);
+
+  filter:
+    saturate(.94);
+}
+
+
+@media (max-width: 900px) {
+
+  .shell-frame.shell-frame-navigating {
+    opacity:
+      .62;
+
+    transform:
+      translate3d(0,1px,0);
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .shell-frame {
+    transition:
+      none !important;
+  }
+
+}
+
+/* CORTEX SHELL NAVIGATION MOTION V1 END */
