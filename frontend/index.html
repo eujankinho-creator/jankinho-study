@@ -17,6 +17,52 @@
 
   <title>Dashboard | Cortex</title>
 
+  <script>
+    (function () {
+      try {
+        if (
+          window.matchMedia("(min-width: 901px)").matches &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+          sessionStorage.getItem("cortexDesktopIntroSeen") !== "1"
+        ) {
+          document.documentElement.classList.add(
+            "cortex-dashboard-intro-boot",
+            "cortex-dashboard-content-hidden"
+          );
+        }
+      }
+      catch (error) {
+        if (
+          window.matchMedia("(min-width: 901px)").matches &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          document.documentElement.classList.add(
+            "cortex-dashboard-intro-boot",
+            "cortex-dashboard-content-hidden"
+          );
+        }
+      }
+    })();
+  </script>
+
+  <style>
+    @media (min-width: 901px) {
+      html.cortex-dashboard-intro-boot {
+        background: #030303;
+      }
+
+      html.cortex-dashboard-content-hidden
+      body > *:not(#cortexDesktopIntro) {
+        visibility: hidden !important;
+      }
+
+      html:not(.cortex-dashboard-intro-boot)
+      #cortexDesktopIntro {
+        display: none !important;
+      }
+    }
+  </style>
+
   <link
     rel="stylesheet"
     href="/css/app.css"
@@ -72,7 +118,7 @@
 </head>
 
 
-<body class="dashboard-view cortex-desktop-intro-pending">
+<body class="dashboard-view">
 
   <!-- =====================================================
        CORTEX CINEMATIC INTRO - DESKTOP
@@ -1386,7 +1432,7 @@
 
 
 
-  <script src="/js/dashboard-ui.js?v=20261001-cinematic1"></script>
+  <script src="/js/dashboard-ui.js?v=20261001-cinematic2"></script>
   <script src="/js/dashboard.js"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 
