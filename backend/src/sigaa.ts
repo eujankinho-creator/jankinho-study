@@ -120,6 +120,38 @@ type SigaaNotice = {
 };
 
 
+type SigaaPriority = {
+
+  id:
+    string;
+
+  kind:
+    "exam" |
+    "homework";
+
+  title:
+    string;
+
+  course:
+    string;
+
+  courseId:
+    string;
+
+  date:
+    string;
+
+  daysLeft:
+    number;
+
+  urgency:
+    "critical" |
+    "high" |
+    "attention";
+
+};
+
+
 type SigaaOverview = {
 
   connected:
@@ -146,6 +178,9 @@ type SigaaOverview = {
 
   notices:
     SigaaNotice[];
+
+  priorities:
+    SigaaPriority[];
 
   schedule:
     Record<
@@ -2897,6 +2932,311 @@ export function sigaaStatus(
 }
 
 
+async function loadUpcomingPriorities(
+  courseObjects:
+    any[]
+) {
+
+  const priorities:
+    SigaaPriority[] = [];
+
+
+  const now =
+    Date.now();
+
+
+  const dayMs =
+    24 *
+    60 *
+    60 *
+    1000;
+
+
+  const batches:
+    any[][] = [];
+
+
+  for (
+    let index = 0;
+    index < courseObjects.length;
+    index += 4
+  ) {
+
+    batches.push(
+      courseObjects.slice(
+        index,
+        index + 4
+      )
+    );
+
+  }
+
+
+  for (
+    const batch
+    of batches
+  ) {
+
+    await Promise.all(
+      batch.map(
+        async function (
+          course:
+            any
+        ) {
+
+          const courseId =
+            String(
+              course?.id ||
+              ""
+            );
+
+
+          const courseName =
+            safeText(
+              course?.title ||
+              "Disciplina",
+              240
+            );
+
+
+          const addPriority =
+            function (
+              kind:
+                "exam" |
+                "homework",
+              id:
+                string,
+              title:
+                string,
+              rawDate:
+                any
+            ) {
+
+              const date =
+                isoDate(
+                  rawDate
+                );
+
+
+              if (!date) {
+                return;
+              }
+
+
+              const time =
+                new Date(
+                  date
+                )
+                  .getTime();
+
+
+              if (
+                !Number.isFinite(
+                  time
+                )
+              ) {
+                return;
+              }
+
+
+              const daysLeft =
+                Math.ceil(
+                  (
+                    time -
+                    now
+                  ) /
+                  dayMs
+                );
+
+
+              if (
+                daysLeft < 0 ||
+                daysLeft > 7
+              ) {
+                return;
+              }
+
+
+              priorities.push({
+                id:
+                  id ||
+                  kind +
+                  ":" +
+                  courseId +
+                  ":" +
+                  date,
+
+                kind,
+
+                title:
+                  safeText(
+                    title ||
+                    (
+                      kind ===
+                        "exam"
+                        ? "Avaliação"
+                        : "Atividade"
+                    ),
+                    400
+                  ),
+
+                course:
+                  courseName,
+
+                courseId,
+
+                date,
+
+                daysLeft,
+
+                urgency:
+                  daysLeft <= 1
+                    ? "critical"
+                    : daysLeft <= 3
+                      ? "high"
+                      : "attention",
+              });
+
+            };
+
+
+          const [
+            examsResult,
+            homeworksResult,
+          ] =
+            await Promise.allSettled([
+              withTimeout(
+                course.getExamCalendar(),
+                9000,
+                "Timeout ao carregar avaliacoes prioritarias."
+              ),
+
+              withTimeout(
+                course.getHomeworks(),
+                9000,
+                "Timeout ao carregar tarefas prioritarias."
+              ),
+            ]);
+
+
+          if (
+            examsResult.status ===
+            "fulfilled"
+          ) {
+
+            Array
+              .from(
+                examsResult.value as any[]
+              )
+              .slice(
+                0,
+                50
+              )
+              .forEach(
+                function (
+                  exam:
+                    any,
+                  index:
+                    number
+                ) {
+
+                  addPriority(
+                    "exam",
+                    String(
+                      exam?.id ||
+                      "exam-" +
+                      index
+                    ),
+                    safeText(
+                      exam?.description ||
+                      "Avaliação",
+                      400
+                    ),
+                    exam?.date
+                  );
+
+                }
+              );
+
+          }
+
+
+          if (
+            homeworksResult.status ===
+            "fulfilled"
+          ) {
+
+            Array
+              .from(
+                homeworksResult.value as any[]
+              )
+              .slice(
+                0,
+                80
+              )
+              .forEach(
+                function (
+                  homework:
+                    any,
+                  index:
+                    number
+                ) {
+
+                  addPriority(
+                    "homework",
+                    String(
+                      homework?.id ||
+                      "homework-" +
+                      index
+                    ),
+                    safeText(
+                      homework?.title ||
+                      "Atividade",
+                      400
+                    ),
+                    homework?.endDate
+                  );
+
+                }
+              );
+
+          }
+
+        }
+      )
+    );
+
+  }
+
+
+  priorities.sort(
+    function (
+      a,
+      b
+    ) {
+
+      return (
+        new Date(
+          a.date
+        ).getTime() -
+        new Date(
+          b.date
+        ).getTime()
+      );
+
+    }
+  );
+
+
+  return priorities
+    .slice(
+      0,
+      30
+    );
+
+}
+
+
 export async function sigaaOverview(
   userId:
     number,
@@ -3194,6 +3534,12 @@ export async function sigaaOverview(
     );
 
 
+    const priorities =
+      await loadUpcomingPriorities(
+        courseObjects
+      );
+
+
     const overview:
       SigaaOverview = {
 
@@ -3232,6 +3578,8 @@ export async function sigaaOverview(
           0,
           20
         ),
+
+      priorities,
 
       schedule:
         parseSchedule(
