@@ -25,12 +25,10 @@ body.ui-ready {
 
   from {
     opacity: .82;
-    transform: translate3d(0,3px,0);
   }
 
   to {
     opacity: 1;
-    transform: translate3d(0,0,0);
   }
 
 }
@@ -1024,3 +1022,27 @@ body.ui-ready {
 }
 
 /* CORTEX INTERACTION RESPONSE V3 END */
+
+
+/* =========================================================
+   CORTEX FIXED VIEWPORT SAFETY V1
+   O body nunca pode virar containing block de elementos fixed.
+========================================================= */
+
+html,
+body,
+body.ui-ready {
+  transform:
+    none !important;
+
+  perspective:
+    none !important;
+}
+
+
+body.ui-ready {
+  will-change:
+    auto !important;
+}
+
+/* CORTEX FIXED VIEWPORT SAFETY V1 END */
