@@ -80,8 +80,18 @@
     const title = escapeHtml(rawTitle);
 
     if (item.downloadable && item.verifiedFile && item.id) {
+      const query = new URLSearchParams({
+        source: item.sourceKind || "lesson",
+        title: rawTitle
+      });
+
+      if (item.lessonId) {
+        query.set("lessonId", item.lessonId);
+      }
+
       const url = "/api/sigaa/courses/" + encodeURIComponent(courseId) +
-        "/files/" + encodeURIComponent(item.id) + "/download";
+        "/files/" + encodeURIComponent(item.id) + "/download?" +
+        query.toString();
       const kind = item.kind && item.kind !== "ARQUIVO" ? " " + item.kind : "";
       return '<button type="button" data-sigaa-download="' + escapeHtml(url) +
         '" data-filename="' + escapeHtml(rawTitle) + '">Baixar' +
@@ -350,8 +360,18 @@
     }
 
     return '<div class="resource-list">' + files.map((file) => {
+      const query = new URLSearchParams({
+        source: file.sourceKind || "course",
+        title: file.title || "Arquivo"
+      });
+
+      if (file.lessonId) {
+        query.set("lessonId", file.lessonId);
+      }
+
       const url = "/api/sigaa/courses/" + encodeURIComponent(courseId) +
-        "/files/" + encodeURIComponent(file.id) + "/download";
+        "/files/" + encodeURIComponent(file.id) + "/download?" +
+        query.toString();
       const source = file.source || "SIGAA";
       const description = file.description ||
         "Arquivo confirmado no SIGAA e disponível para download.";
