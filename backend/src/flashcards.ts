@@ -319,6 +319,7 @@ limparFlashcardsParaMetodologia() {
 
                 }
               ),
+          },
         },
 
         data: {
