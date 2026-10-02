@@ -13,24 +13,8 @@ body {
 
 
 body.ui-ready {
-  animation:
-    cortexPageReady
-    .20s
-    cubic-bezier(.2,.8,.2,1)
-    both;
-}
-
-
-@keyframes cortexPageReady {
-
-  from {
-    opacity: .82;
-  }
-
-  to {
-    opacity: 1;
-  }
-
+  opacity:
+    1;
 }
 
 
@@ -603,42 +587,14 @@ body.ui-ready {
 
 
 .ui-motion-item {
+  opacity:
+    1 !important;
+
+  transform:
+    none !important;
+
   animation:
-    cortexEnter
-    var(--cortex-motion-slow)
-    var(--cortex-motion-ease)
-    both;
-}
-
-
-@keyframes cortexEnter {
-
-  from {
-    opacity:
-      0;
-
-    transform:
-      translate3d(
-        0,
-        8px,
-        0
-      )
-      scale(.995);
-  }
-
-  to {
-    opacity:
-      1;
-
-    transform:
-      translate3d(
-        0,
-        0,
-        0
-      )
-      scale(1);
-  }
-
+    none !important;
 }
 
 
