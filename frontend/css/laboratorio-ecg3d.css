@@ -93,7 +93,7 @@
   max-width: 780px;
   margin: 6px 0 0;
   color: var(--ecg-soft);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.55;
 }
 
@@ -108,7 +108,7 @@
   padding: 0 14px;
   color: #dce9f7;
   font-weight: 750;
-  font-size: 10px;
+  font-size: 12px;
   cursor: pointer;
   transition: .18s ease;
 }
@@ -170,7 +170,7 @@
 
 .ecg-section-tab .tab-index {
   color: #9cb0c5;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -186,13 +186,13 @@
 
 .ecg-section-tab strong {
   color: inherit;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .ecg-section-tab small {
   overflow: hidden;
   color: #8ea0b4;
-  font-size: 8px;
+  font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -285,12 +285,12 @@
 }
 
 .heart-model-loading strong {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .heart-model-loading small {
   color: #7f93a7;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .loading-ring {
@@ -329,7 +329,7 @@
 
 .heart-viewer-top > span {
   color: #607386;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .heart-viewer-actions {
@@ -347,7 +347,7 @@
   background: rgba(12, 23, 35, .88);
   padding: 0 9px;
   color: #dce7f3;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 750;
   cursor: pointer;
 }
@@ -364,19 +364,19 @@
   background: rgba(2, 7, 11, .82);
   padding: 5px 7px;
   color: #e3edf7;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .heart-viewer-bottom small {
   color: #8293a5;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .heart-viewer-caption {
   padding: 7px 10px;
   background: #0a131d;
   color: #8194a8;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .heart-label {
@@ -390,7 +390,7 @@
   box-shadow: 0 5px 12px rgba(0, 0, 0, .34);
   padding: 0 5px;
   color: white;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 850;
   backdrop-filter: blur(5px);
   transform: translate(-50%, -50%);
@@ -398,7 +398,7 @@
 
 .heart-axis-label {
   white-space: nowrap;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 850;
   text-shadow: 0 1px 5px #000;
   transform: translate(-50%, -50%);
@@ -434,13 +434,13 @@
 }
 
 .sim-mode strong {
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .sim-mode small {
   color: inherit;
   opacity: .7;
-  font-size: 6px;
+  font-size: 9px;
 }
 
 .sim-option {
@@ -451,7 +451,7 @@
   border-bottom: 1px solid var(--ecg-border);
   padding: 0 10px;
   color: #9bacc0;
-  font-size: 7px;
+  font-size: 10px;
   cursor: pointer;
 }
 
@@ -469,7 +469,7 @@
   display: flex;
   align-items: center;
   padding: 0 10px;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 750;
   cursor: pointer;
   list-style: none;
@@ -479,7 +479,7 @@
   content: "▶";
   margin-right: 6px;
   color: #8da0b4;
-  font-size: 6px;
+  font-size: 9px;
   transition: transform .18s ease;
 }
 
@@ -491,7 +491,7 @@
   margin: 0;
   padding: 0 10px 10px 22px;
   color: #708398;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.55;
 }
 
@@ -510,7 +510,7 @@
   border-radius: 7px;
   background: #101c29;
   color: #d7e2ec;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .sim-transport button {
@@ -519,7 +519,7 @@
 
 .sim-transport > span {
   color: #7e91a4;
-  font-size: 7px;
+  font-size: 10px;
   text-align: center;
 }
 
@@ -573,17 +573,17 @@
   border-radius: 50%;
   background: #24364a;
   color: #bdcad7;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 800;
 }
 
 .qrs-moment strong {
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .qrs-moment small {
   color: #65788c;
-  font-size: 6px;
+  font-size: 9px;
 }
 
 .qrs-moment.active {
@@ -604,20 +604,20 @@
 
 .sim-explanation > span {
   color: #8ea1b5;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 750;
 }
 
 .sim-explanation h2 {
   margin: 4px 0 5px;
   color: #f4f8fc;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .sim-explanation p {
   margin: 0;
   color: #a6b6c7;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.55;
 }
 
@@ -627,7 +627,7 @@
   gap: 12px;
   margin-top: 8px;
   color: #7f91a4;
-  font-size: 6px;
+  font-size: 9px;
 }
 
 .explanation-key span {
@@ -668,13 +668,13 @@
 .matrix-head h2 {
   margin: 0;
   color: #f2f7fc;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .matrix-head p {
   margin: 3px 0 0;
   color: #7f91a5;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .paper-controls {
@@ -690,7 +690,7 @@
   background: #0d1824;
   padding: 0 7px;
   color: #d8e5f1;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .matrix-canvas-wrap {
@@ -718,7 +718,7 @@
 .concept-header span {
   display: block;
   color: var(--ecg-cyan-2);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
   letter-spacing: .12em;
 }
@@ -734,7 +734,7 @@
   max-width: 880px;
   margin: 6px 0 0;
   color: #9cadbf;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.55;
 }
 
@@ -756,7 +756,7 @@
 .fundamentals-path p {
   margin: 4px 0 0;
   color: #8294a7;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .fundamental-step-list {
@@ -800,7 +800,7 @@
   border-radius: 50%;
   background: #24364a;
   color: #c8d5e2;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 850;
 }
 
@@ -817,7 +817,7 @@
 
 .fundamental-step strong {
   overflow: hidden;
-  font-size: 9px;
+  font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -825,7 +825,7 @@
 .fundamental-step small {
   overflow: hidden;
   color: #8799ac;
-  font-size: 7px;
+  font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -869,7 +869,7 @@
 .paper-learning-head p {
   margin: 5px 0 0;
   color: #8fa0b2;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.55;
 }
 
@@ -911,12 +911,12 @@
   background: rgba(34, 211, 238, .08);
   color: #91f8ff;
   box-shadow: 0 0 18px rgba(34, 211, 238, .06);
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .conduction-node span {
   color: #8fa2b6;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .conduction-track i {
@@ -946,13 +946,13 @@
 .concept-copy h4 {
   margin: 0 0 7px;
   color: #ecf4fb;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .concept-copy p {
   margin: 0 0 8px;
   color: #93a5b8;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.6;
 }
 
@@ -970,7 +970,7 @@
   background: #111d2a;
   padding: 0 9px;
   color: #b3c1cf;
-  font-size: 7px;
+  font-size: 10px;
   cursor: pointer;
 }
 
@@ -1014,7 +1014,7 @@
 
 .electrode-body small {
   color: #6f8194;
-  font-size: 6px;
+  font-size: 9px;
 }
 
 .electrode-dot-svg {
@@ -1030,7 +1030,7 @@
 
 .electrode-dot-svg text {
   fill: #fff;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 850;
   text-anchor: middle;
   dominant-baseline: middle;
@@ -1063,7 +1063,7 @@
   border-radius: 7px;
   background: #101b28;
   color: #c3d0dd;
-  font-size: 7px;
+  font-size: 10px;
   cursor: pointer;
 }
 
@@ -1084,7 +1084,7 @@
 
 .electrode-focus-card > span {
   color: #8ea0b5;
-  font-size: 6px;
+  font-size: 9px;
   font-weight: 850;
   letter-spacing: .1em;
 }
@@ -1092,13 +1092,13 @@
 .electrode-focus-card h4 {
   margin: 6px 0;
   color: #f0f5fa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .electrode-focus-card p {
   margin: 0;
   color: #9badbf;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.55;
 }
 
@@ -1111,7 +1111,7 @@
 .electrode-legend p {
   margin: 0;
   color: #8fa2b6;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .wave-cards {
@@ -1139,20 +1139,20 @@
   border-radius: 9px;
   background: rgba(94, 234, 212, .04);
   color: #8bf8e9;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 900;
 }
 
 .wave-cards strong {
   display: block;
   color: #e8f0f8;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .wave-cards p {
   margin: 5px 0 0;
   color: #7e91a5;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.5;
 }
 
@@ -1173,7 +1173,7 @@
 .derivation-card > span,
 .einthoven-card > span {
   color: #8194a8;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
   letter-spacing: .12em;
 }
@@ -1192,7 +1192,7 @@
   background: #308f4a;
   padding: 3px 6px;
   color: white;
-  font-size: 6px;
+  font-size: 9px;
   vertical-align: middle;
 }
 
@@ -1209,7 +1209,7 @@
   background: #111d2a;
   padding: 0 9px;
   color: #d1dce7;
-  font-size: 7px;
+  font-size: 10px;
   cursor: pointer;
 }
 
@@ -1217,7 +1217,7 @@
 .derivation-card p,
 .einthoven-card p {
   color: #8194a8;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.55;
 }
 
@@ -1236,7 +1236,7 @@
   background: #0d1824;
   padding: 0 10px;
   color: #5eead4;
-  font-size: 7px;
+  font-size: 10px;
   cursor: pointer;
 }
 
@@ -1262,13 +1262,13 @@
 .subcard-heading h4 {
   margin: 0;
   color: #edf4fb;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .subcard-heading p {
   margin: 4px 0 0;
   color: #7f92a6;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 #calibrationCanvas {
@@ -1295,7 +1295,7 @@
 
 .paper-settings > label > span {
   color: #c3cfdb;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -1312,7 +1312,7 @@
   border-radius: 8px;
   background: #101c29;
   color: #eef6fd;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .paper-metric-grid {
@@ -1347,7 +1347,7 @@
 .paper-metric-grid small {
   display: block;
   color: #90a2b5;
-  font-size: 6px;
+  font-size: 9px;
 }
 
 .paper-metric-grid strong {
@@ -1360,7 +1360,7 @@
 .paper-metric-grid p {
   margin: 2px 0 0;
   color: #9aabbb;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .frequency-learning-grid {
@@ -1394,7 +1394,7 @@
 
 .frequency-result span {
   color: #8397aa;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .frequency-result strong {
@@ -1404,7 +1404,7 @@
 
 .frequency-result small {
   color: #8194a8;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .info-strip {
@@ -1414,7 +1414,7 @@
   background: #0e1c29;
   padding: 8px 9px;
   color: #8fa2b6;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.5;
 }
 
@@ -1432,7 +1432,7 @@
   background: #0f1b28;
   padding: 0 12px;
   color: #c5d2df;
-  font-size: 8px;
+  font-size: 11px;
   cursor: pointer;
 }
 
@@ -1463,12 +1463,12 @@
 .guided-steps-head h3 {
   margin: 0;
   color: #edf4fb;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .guided-steps-head span {
   color: #cdd8e2;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -1520,7 +1520,7 @@
   border-radius: 50%;
   background: #112030;
   color: #b8c8d8;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 850;
 }
 
@@ -1532,14 +1532,14 @@
 
 .guided-step-button strong {
   display: block;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .guided-step-button small {
   display: block;
   margin-top: 2px;
   color: #8ea1b4;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .guided-main-card {
@@ -1549,7 +1549,7 @@
 
 .guided-main-card > span {
   color: #88a0b7;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
   letter-spacing: .12em;
 }
@@ -1563,7 +1563,7 @@
 .guided-main-card > p {
   margin: 5px 0 12px;
   color: #bdc9d5;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .guided-canvas-wrap {
@@ -1600,13 +1600,13 @@
   border: 2px solid var(--ecg-cyan);
   border-radius: 50%;
   color: var(--ecg-cyan);
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .guided-info p {
   margin: 0;
   color: #a5b5c6;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.55;
 }
 
@@ -1627,7 +1627,7 @@
   background: #0e1a26;
   padding: 0 13px;
   color: #879aad;
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 750;
   cursor: pointer;
 }
@@ -1729,7 +1729,7 @@
   display: block;
   overflow: hidden;
   color: #eef4fa;
-  font-size: 9px;
+  font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1739,7 +1739,7 @@
   overflow: hidden;
   margin-top: 3px;
   color: #8194a8;
-  font-size: 7px;
+  font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1771,7 +1771,7 @@
 .pattern-detail-head p {
   margin: 4px 0 0;
   color: #8ea1b5;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .pattern-detail-head label {
@@ -1780,7 +1780,7 @@
   align-items: center;
   gap: 8px;
   color: #879aaf;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .pattern-detail-head select {
@@ -1790,7 +1790,7 @@
   background: #0e1a26;
   padding: 0 9px;
   color: #eef4fa;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .p-wave-comparison {
@@ -1818,7 +1818,7 @@
 .pattern-wave-card h4 {
   margin: 0;
   color: #eff5fa;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .status-good,
@@ -1826,7 +1826,7 @@
   flex: 0 0 auto;
   border-radius: 5px;
   padding: 4px 6px;
-  font-size: 6px;
+  font-size: 9px;
   font-weight: 800;
 }
 
@@ -1854,7 +1854,7 @@
 .pattern-wave-card p {
   margin: 0;
   color: #9badbf;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.5;
 }
 
@@ -1884,7 +1884,7 @@
 
 .generic-pattern-copy > span {
   color: var(--ecg-cyan-2);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
   letter-spacing: .12em;
 }
@@ -1897,7 +1897,7 @@
 
 .generic-pattern-copy p {
   color: #93a5b8;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.55;
 }
 
@@ -1914,7 +1914,7 @@
   background: #101c29;
   padding: 5px 7px;
   color: #a2b3c4;
-  font-size: 6px;
+  font-size: 9px;
 }
 
 .ecg-lab-footer {
@@ -1929,7 +1929,7 @@
 .ecg-lab-footer p {
   margin: 0;
   color: #5f7287;
-  font-size: 6px;
+  font-size: 9px;
 }
 
 @media (max-width: 1420px) {
@@ -2159,7 +2159,7 @@
 
   .heart-viewer-top button {
     padding: 0 7px;
-    font-size: 7px;
+    font-size: 10px;
   }
 
   .matrix-canvas-wrap {
@@ -2211,12 +2211,12 @@
 
 .ecg-hover-tooltip strong {
   color: #dffbff;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .ecg-hover-tooltip span {
   color: #8fb8c3;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.35;
 }
 
@@ -2230,7 +2230,7 @@
   background: rgba(7, 24, 28, .76);
   padding: 5px 7px;
   color: #4c7c83;
-  font-size: 6px;
+  font-size: 9px;
   pointer-events: none;
 }
 
@@ -2284,12 +2284,12 @@
 
 .electrode-direction-note strong {
   color: #f9a8d4;
-  font-size: 7px;
+  font-size: 10px;
 }
 
 .electrode-direction-note span {
   color: #8fa2b6;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.55;
 }
 
@@ -2310,7 +2310,7 @@
 
 .wave-annotated-copy > span {
   color: var(--ecg-cyan-2);
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
   letter-spacing: .11em;
 }
@@ -2318,13 +2318,13 @@
 .wave-annotated-copy h4 {
   margin: 7px 0 5px;
   color: #edf4fb;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .wave-annotated-copy p {
   margin: 0;
   color: #8ea0b3;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.6;
 }
 
@@ -2365,12 +2365,12 @@
 
 .wave-tooltip strong {
   color: #99f6e4;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .wave-tooltip span {
   color: #a4b5c6;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.45;
 }
 
@@ -2395,7 +2395,7 @@
 
 .guided-context-panel > span {
   color: var(--ecg-cyan-2);
-  font-size: 6px;
+  font-size: 9px;
   font-weight: 850;
   letter-spacing: .12em;
 }
@@ -2403,7 +2403,7 @@
 .guided-context-panel > h3 {
   margin: 5px 0 8px;
   color: #eef5fb;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .guided-context-body {
@@ -2430,14 +2430,14 @@
   border-radius: 50%;
   background: rgba(34, 211, 238, .10);
   color: #67e8f9;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
 }
 
 .guided-context-item p {
   margin: 1px 0 0;
   color: #a9b9c9;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.5;
 }
 
@@ -2469,19 +2469,19 @@
   border-radius: 7px;
   background: rgba(94, 234, 212, .08);
   color: #70eadb;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
 }
 
 .pattern-teaching-grid strong {
   color: #eef4fa;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .pattern-teaching-grid p {
   margin: 4px 0 0;
   color: #8fa2b6;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.55;
 }
 
@@ -2543,25 +2543,25 @@
   border-radius: 50%;
   background: rgba(34, 211, 238, .09);
   color: #67e8f9;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 850;
 }
 
 .conduction-to-paper strong {
   color: #ecf4fb;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .conduction-to-paper p {
   margin: 4px 0 0;
   color: #8799ac;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1.5;
 }
 
 .conduction-to-paper em {
   color: #5eead4;
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 900;
 }
@@ -3575,3 +3575,45 @@ html[data-theme="black-white"] .ecg-lab {
 [data-section-panel="patterns"] .pattern-detail-head {
   border-bottom-color: var(--theme-border) !important;
 }
+
+
+/* =========================================================
+   CORTEX LAB READABILITY V1
+   Tipografia didática ampliada sem alterar a malha estrutural.
+========================================================= */
+.ecg-lab {
+  line-height: 1.5;
+}
+
+.ecg-hero-copy p,
+.section-intro p,
+.sim-explanation p,
+.matrix-head p,
+.concept-copy p,
+.electrode-focus-card p,
+.wave-cards p,
+.axis-card p,
+.derivation-card p,
+.einthoven-card p,
+.guided-main-card > p,
+.guided-info p,
+.guided-context-item p,
+.pattern-detail-head p,
+.pattern-wave-card p,
+.generic-pattern-copy p,
+.pattern-teaching-grid p,
+.conduction-to-paper p {
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .ecg-lab {
+    padding-inline: 14px;
+  }
+
+  .ecg-section-tab small {
+    white-space: normal;
+    line-height: 1.25;
+  }
+}
+/* CORTEX LAB READABILITY V1 END */
