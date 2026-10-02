@@ -20,6 +20,10 @@
     null;
 
 
+  let pendingFallbackTimer =
+    0;
+
+
   const state = {
 
     connected:
@@ -1377,6 +1381,15 @@
       null;
 
 
+    window.clearTimeout(
+      pendingFallbackTimer
+    );
+
+
+    pendingFallbackTimer =
+      0;
+
+
     saveLoadedFrameLocation(
       frame
     );
@@ -1462,9 +1475,39 @@
       }
 
 
-      swapFrames(
-        loadedFrame
+      /*
+       * "load" significa apenas que HTML/CSS/JS terminaram.
+       * Muitas páginas ainda estão buscando dados da API.
+       * A troca normal acontece no cortex:page-ready.
+       */
+      window.clearTimeout(
+        pendingFallbackTimer
       );
+
+
+      pendingFallbackTimer =
+        window.setTimeout(
+          function () {
+
+            if (
+              loadedFrame ===
+                standbyFrame &&
+              pendingTarget &&
+              sameFrameTarget(
+                loadedFrame,
+                pendingTarget
+              )
+            ) {
+
+              swapFrames(
+                loadedFrame
+              );
+
+            }
+
+          },
+          2800
+        );
 
 
       return;
@@ -1562,6 +1605,15 @@
     }
 
 
+    window.clearTimeout(
+      pendingFallbackTimer
+    );
+
+
+    pendingFallbackTimer =
+      0;
+
+
     pendingTarget =
       normalized;
 
@@ -1599,8 +1651,62 @@
         event.data;
 
 
+      if (!data) {
+        return;
+      }
+
+
       if (
-        !data ||
+        data.type ===
+          "cortex:page-ready"
+      ) {
+
+        if (
+          event.source !==
+            standbyFrame.contentWindow ||
+          !pendingTarget
+        ) {
+
+          return;
+        }
+
+
+        const readyHref =
+          normalizedTarget(
+            data.href ||
+            ""
+          );
+
+
+        const targetHref =
+          normalizedTarget(
+            pendingTarget
+          );
+
+
+        if (
+          readyHref !==
+            targetHref &&
+          !sameFrameTarget(
+            standbyFrame,
+            pendingTarget
+          )
+        ) {
+
+          return;
+        }
+
+
+        swapFrames(
+          standbyFrame
+        );
+
+
+        return;
+      }
+
+
+      if (
         data.type !==
           "cortex:navigate"
       ) {
