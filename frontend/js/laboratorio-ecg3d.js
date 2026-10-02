@@ -1878,9 +1878,10 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
     gradient.addColorStop(1, "rgba(10,10,10,.98)");
   }
   else {
-    gradient.addColorStop(0, colorWithAlpha(palette.accent, .28));
-    gradient.addColorStop(.72, colorWithAlpha(palette.accent, .72));
-    gradient.addColorStop(1, palette.accent);
+    /* DII destacado com cor clínica fixa: nunca depende do tema. */
+    gradient.addColorStop(0, "rgba(185,28,28,.30)");
+    gradient.addColorStop(.72, "rgba(185,28,28,.78)");
+    gradient.addColorStop(1, "#991b1b");
   }
 
   /*
@@ -1951,7 +1952,7 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
   ctx.fillStyle =
     activeColor === "#191919"
       ? "#ef4444"
-      : palette.accent;
+      : "#991b1b";
   ctx.beginPath();
   ctx.arc(newestX, newestY, 2.8 * dpr, 0, TAU);
   ctx.fill();
@@ -2177,7 +2178,7 @@ function drawEcgMatrix() {
       LAB_STATE.ecgTime,
       period,
       lead === "DII"
-        ? getLabThemePalette().accent
+        ? "#991b1b"
         : "#191919",
       dpr
     );
