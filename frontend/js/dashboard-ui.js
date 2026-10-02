@@ -289,21 +289,38 @@
     );
 
 
-    try {
-
-      sessionStorage.removeItem(
-        "cortexDashboardFreshLogin"
-      );
+    let hasStarted =
+      false;
 
 
-      sessionStorage.setItem(
-        "cortexDesktopIntroSeen",
-        "1"
-      );
+    function markIntroStarted() {
 
-    }
-    catch (erro) {
-      /* sessionStorage pode estar bloqueado */
+      if (hasStarted) {
+        return;
+      }
+
+
+      hasStarted =
+        true;
+
+
+      try {
+
+        sessionStorage.removeItem(
+          "cortexDashboardFreshLogin"
+        );
+
+
+        sessionStorage.setItem(
+          "cortexDesktopIntroSeen",
+          "1"
+        );
+
+      }
+      catch (erro) {
+        /* sessionStorage pode estar bloqueado */
+      }
+
     }
 
 
@@ -539,6 +556,9 @@
 
         return;
       }
+
+
+      markIntroStarted();
 
 
       intro.classList.add(
