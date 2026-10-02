@@ -2178,7 +2178,13 @@ function updateAxisValue() {
   if (!slider || !output) return;
   const value = Number(slider.value);
   const status = value >= -30 && value <= 90 ? "normal" : "desviado";
-  output.innerHTML = (value >= 0 ? "+" : "") + value + "° <small>" + status + "</small>";
+  output.innerHTML =
+    (value >= 0 ? "+" : "") +
+    value +
+    "° <small>" +
+    status +
+    "</small>";
+  drawAxisDiagram();
 }
 
 function updateAxisLead(lead) {
@@ -2192,6 +2198,279 @@ function updateAxisLead(lead) {
   const projected = Math.cos(axis - leadAngle);
   voltage.textContent = (projected >= 0 ? "+" : "") + projected.toFixed(2).replace(".", ",") + " mV";
   explanation.textContent = "Eixo de " + lead + ": " + (LEAD_DIRECTIONS[lead] || 0) + "°. A projeção é proporcional ao cosseno da diferença angular; quanto mais paralelo, maior a deflexão.";
+}
+
+
+function drawCanvasArrow(ctx, x1, y1, x2, y2, color, dpr) {
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  const head = 7 * dpr;
+
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineWidth = 1.35 * dpr;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(
+    x2 - head * Math.cos(angle - Math.PI / 6),
+    y2 - head * Math.sin(angle - Math.PI / 6)
+  );
+  ctx.lineTo(
+    x2 - head * Math.cos(angle + Math.PI / 6),
+    y2 - head * Math.sin(angle + Math.PI / 6)
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawAxisDiagram() {
+  const canvas = byId("axisDiagramCanvas");
+  const slider = byId("axisSlider");
+  if (!canvas || !slider) return;
+
+  const size = fitCanvas(canvas, 190);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+  const width = size.pixelWidth;
+  const height = size.pixelHeight;
+
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = "#0b1621";
+  ctx.fillRect(0, 0, width, height);
+
+  const cx = width * 0.50;
+  const cy = height * 0.50;
+  const radius = Math.min(width, height) * 0.34;
+
+  ctx.save();
+  ctx.strokeStyle = "rgba(148,163,184,.18)";
+  ctx.lineWidth = 1 * dpr;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, TAU);
+  ctx.stroke();
+
+  const axes = [
+    ["DI", 0],
+    ["aVL", -30],
+    ["DII", 60],
+    ["aVF", 90],
+    ["DIII", 120],
+    ["aVR", -150]
+  ];
+
+  axes.forEach(function (entry) {
+    const angle = entry[1] * Math.PI / 180;
+    const x = cx + Math.cos(angle) * radius;
+    const y = cy + Math.sin(angle) * radius;
+
+    ctx.strokeStyle = "rgba(148,163,184,.22)";
+    ctx.beginPath();
+    ctx.moveTo(
+      cx - Math.cos(angle) * radius,
+      cy - Math.sin(angle) * radius
+    );
+    ctx.lineTo(x, y);
+    ctx.stroke();
+
+    ctx.fillStyle = "#8295a9";
+    ctx.font = "700 " + (7 * dpr) + "px system-ui";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(
+      entry[0],
+      cx + Math.cos(angle) * (radius + 14 * dpr),
+      cy + Math.sin(angle) * (radius + 14 * dpr)
+    );
+  });
+
+  const value = Number(slider.value);
+  const vectorAngle = value * Math.PI / 180;
+  const vx = cx + Math.cos(vectorAngle) * radius * 0.88;
+  const vy = cy + Math.sin(vectorAngle) * radius * 0.88;
+
+  drawCanvasArrow(ctx, cx, cy, vx, vy, "#ff5c69", dpr);
+
+  ctx.fillStyle = "#ffd2d6";
+  ctx.font = "800 " + (9 * dpr) + "px system-ui";
+  ctx.textAlign = "center";
+  ctx.fillText(
+    (value >= 0 ? "+" : "") + value + "°",
+    cx,
+    height - 12 * dpr
+  );
+
+  ctx.fillStyle = "#5eead4";
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3.5 * dpr, 0, TAU);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+const FUNDAMENTAL_WAVE_REGIONS = [
+  { id: "P", start: 0.065, end: 0.155, title: "Onda P", text: "Despolarização atrial. Meça duração e amplitude apenas com calibração conhecida." },
+  { id: "PR", start: 0.065, end: 0.205, title: "Intervalo PR", text: "Do início da P ao início do QRS. Inclui condução atrial e atraso AV." },
+  { id: "QRS", start: 0.205, end: 0.315, title: "Complexo QRS", text: "Despolarização ventricular. Observe início, fim, duração e morfologia." },
+  { id: "ST", start: 0.315, end: 0.44, title: "Segmento ST", text: "Do ponto J ao início da onda T. Compare com uma linha de base estável." },
+  { id: "QT", start: 0.205, end: 0.62, title: "Intervalo QT", text: "Do início do QRS ao final da T. Sua interpretação depende da frequência cardíaca." },
+  { id: "T", start: 0.44, end: 0.62, title: "Onda T", text: "Repolarização ventricular. Avalie polaridade, simetria e relação com o QRS." }
+];
+
+let fundamentalWaveHover = null;
+
+function setupFundamentalWaveInteraction() {
+  const canvas = byId("fundamentalsWaveCanvas");
+  const tooltip = byId("fundamentalsWaveTooltip");
+  if (!canvas) return;
+
+  canvas.addEventListener("pointermove", function (event) {
+    const rect = canvas.getBoundingClientRect();
+    const x = clamp(event.clientX - rect.left, 0, rect.width);
+    const phase = rect.width ? x / rect.width : 0;
+
+    fundamentalWaveHover =
+      FUNDAMENTAL_WAVE_REGIONS
+        .slice()
+        .sort(function (a, b) {
+          return (a.end - a.start) - (b.end - b.start);
+        })
+        .find(function (region) {
+          return phase >= region.start && phase <= region.end;
+        }) || null;
+
+    if (tooltip && fundamentalWaveHover) {
+      tooltip.hidden = false;
+      tooltip.innerHTML =
+        "<strong>" + fundamentalWaveHover.title + "</strong>" +
+        "<span>" + fundamentalWaveHover.text + "</span>";
+      tooltip.style.left =
+        clamp(x + 12, 8, Math.max(8, rect.width - 230)) +
+        "px";
+      tooltip.style.top = "12px";
+    }
+    else if (tooltip) {
+      tooltip.hidden = true;
+    }
+
+    drawFundamentalsWave();
+  });
+
+  canvas.addEventListener("pointerleave", function () {
+    fundamentalWaveHover = null;
+    if (tooltip) tooltip.hidden = true;
+    drawFundamentalsWave();
+  });
+}
+
+function drawFundamentalsWave() {
+  const canvas = byId("fundamentalsWaveCanvas");
+  if (
+    !canvas ||
+    LAB_STATE.section !== "fundamentals" ||
+    LAB_STATE.fundamentalPart !== "waves"
+  ) return;
+
+  const size = fitCanvas(canvas, 280);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+  const width = size.pixelWidth;
+  const height = size.pixelHeight;
+
+  drawPaperGrid(ctx, width, height, dpr, true);
+
+  const baseline = height * 0.57;
+  const amplitude = height * 0.28;
+
+  if (fundamentalWaveHover) {
+    ctx.fillStyle = "rgba(34,211,238,.10)";
+    ctx.fillRect(
+      fundamentalWaveHover.start * width,
+      0,
+      (fundamentalWaveHover.end - fundamentalWaveHover.start) * width,
+      height
+    );
+  }
+
+  ctx.beginPath();
+  for (let i = 0; i < 900; i += 1) {
+    const n = i / 899;
+    const x = n * width;
+    const y = baseline - leadWave(n, "DII") * amplitude;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = "#e7eef7";
+  ctx.lineWidth = 1.65 * dpr;
+  ctx.stroke();
+
+  const annotations = [
+    ["P", 0.12, 0.18],
+    ["Q", 0.232, 0.30],
+    ["R", 0.255, 0.15],
+    ["S", 0.282, 0.35],
+    ["ST", 0.375, 0.33],
+    ["T", 0.52, 0.17]
+  ];
+
+  annotations.forEach(function (entry) {
+    const x = entry[1] * width;
+    const phase = entry[1];
+    const waveY = baseline - leadWave(phase, "DII") * amplitude;
+    const labelY = entry[2] * height;
+
+    drawCanvasArrow(
+      ctx,
+      x,
+      labelY + 12 * dpr,
+      x,
+      waveY - 5 * dpr,
+      "#5eead4",
+      dpr
+    );
+
+    ctx.fillStyle = "#99f6e4";
+    ctx.font = "800 " + (8 * dpr) + "px system-ui";
+    ctx.textAlign = "center";
+    ctx.fillText(entry[0], x, labelY);
+  });
+
+  const brackets = [
+    ["PR", 0.065, 0.205, 0.82],
+    ["QRS", 0.205, 0.315, 0.76],
+    ["QT", 0.205, 0.62, 0.90]
+  ];
+
+  brackets.forEach(function (entry) {
+    const x1 = entry[1] * width;
+    const x2 = entry[2] * width;
+    const y = entry[3] * height;
+
+    ctx.strokeStyle = entry[0] === "QT" ? "#f8c94f" : "#38bdf8";
+    ctx.lineWidth = 1.1 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(x1, y - 6 * dpr);
+    ctx.lineTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.lineTo(x2, y - 6 * dpr);
+    ctx.stroke();
+
+    ctx.fillStyle = entry[0] === "QT" ? "#fde68a" : "#bae6fd";
+    ctx.font = "700 " + (7 * dpr) + "px system-ui";
+    ctx.textAlign = "center";
+    ctx.fillText(entry[0], (x1 + x2) / 2, y + 11 * dpr);
+  });
+
+  ctx.fillStyle = "#8094a8";
+  ctx.font = "600 " + (7 * dpr) + "px system-ui";
+  ctx.textAlign = "left";
+  ctx.fillText("DII · ciclo esquemático", 10 * dpr, 12 * dpr);
 }
 
 function setupPaperLearning() {
@@ -2388,6 +2667,11 @@ function drawIrregularFrequency() {
 }
 
 function drawFundamentals() {
+  if (LAB_STATE.fundamentalPart === "waves") {
+    drawFundamentalsWave();
+    drawAxisDiagram();
+  }
+
   if (LAB_STATE.fundamentalPart === "paper") {
     drawCalibration();
     drawRegularFrequency();
@@ -2844,6 +3128,7 @@ function init() {
   setupEcgInteraction();
   setupElectrodeLearning();
   setupAxisLearning();
+  setupFundamentalWaveInteraction();
   setupPaperLearning();
   setupGuidedReading();
   setupPatterns();
