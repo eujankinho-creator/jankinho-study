@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECG 3D | Laboratório | Cortex</title>
+
+  <link rel="stylesheet" href="/css/laboratorio-ecg.css?v=20261002-ecg1">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20260930-global4">
+  <script src="/js/ui-enhancements.js?v=20260930-global4"></script>
+  <link rel="stylesheet" href="/css/themes.css?v=20260930-bluefix4">
+  <script src="/js/theme-manager.js"></script>
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20260930-bluefix4">
+  <link rel="stylesheet" href="/css/pratica-premium.css">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20260930-global4">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20260930-blue-global3">
+  <script src="/js/sidebar-standard.js?v=20260930-global4" defer></script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-blue-v2">
+  <meta name="theme-color" content="#090909">
+</head>
+
+<body class="practice-view lab-view ecg-lab-view">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box">C</div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-group">
+        <div class="menu-title">Estudo</div>
+        <a href="/" class="menu-item"><span>&#8962;</span>Dashboard</a>
+        <a href="/questoes" class="menu-item"><span>&#9635;</span>Questões</a>
+        <a href="/flashcards" class="menu-item"><span>&#9648;</span>Flashcards</a>
+        <a href="/farmacos" class="menu-item"><span class="menu-icon menu-icon-text">Rx</span>Farmacologia</a>
+        <a href="/casos" class="menu-item"><span>&#9877;</span>Casos Clínicos</a>
+        <a href="/laboratorio" class="menu-item active"><span>&#9879;</span>Laboratório</a>
+        <a href="/evolucao" class="menu-item"><span>&#9998;</span>Evolução</a>
+      </div>
+
+      <div class="menu-group">
+        <div class="menu-title">Análise</div>
+        <a href="/desempenho" class="menu-item"><span>&#9682;</span>Desempenho</a>
+        <a href="/ranking" class="menu-item"><span>&#9819;</span>Ranking</a>
+      </div>
+
+      <div class="menu-group">
+        <div class="menu-title">Pessoal</div>
+        <a href="/financas" class="menu-item"><span>R$</span>Finanças</a>
+        <a href="/musica" class="menu-item"><span>&#9835;</span>Música</a>
+        <a href="/configuracoes" class="menu-item"><span>&#9881;</span>Configurações</a>
+      </div>
+    </div>
+
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info">
+        <strong id="nomeSidebar">Carregando...</strong>
+        <span id="emailSidebar"></span>
+      </div>
+      <button id="logoutSidebar" class="logout-button" type="button">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header">
+      <div class="header-title">Laboratório</div>
+      <div class="header-user">
+        <div>
+          <strong id="nomeHeader">Carregando...</strong>
+          <span>Cortex</span>
+        </div>
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
+      </div>
+    </header>
+
+    <main class="ecg-page">
+      <section class="ecg-heading">
+        <div>
+          <div class="simulation-status">
+            <span class="status-dot ecg-ready"></span>
+            <span>Simulador didático interativo</span>
+          </div>
+          <h1>Laboratório de ECG 3D</h1>
+          <p>Relacione vetor elétrico, anatomia cardíaca, derivações e traçado em tempo real.</p>
+        </div>
+        <div class="heading-badge">
+          <span>ECG</span>
+          <strong>3D + Vetor + Traçado</strong>
+        </div>
+      </section>
+
+      <nav class="lab-mode-nav" aria-label="Modos do laboratório">
+        <a class="lab-mode-link" href="/laboratorio.html">
+          <span class="mode-icon">&#9825;</span>
+          <span><strong>Corpo integrado</strong><small>Fisiologia, gasometria e hemodinâmica</small></span>
+        </a>
+        <a class="lab-mode-link active" href="/laboratorio-ecg.html" aria-current="page">
+          <span class="mode-icon">ECG</span>
+          <span><strong>ECG 3D</strong><small>Coração, eixos e derivações sincronizadas</small></span>
+        </a>
+      </nav>
+
+      <section class="ecg-simulator-grid">
+        <article class="ecg-panel heart-panel">
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">ANATOMIA ELÉTRICA</span>
+              <h2>Coração 3D e eixos</h2>
+            </div>
+            <div class="panel-chip">Arraste para girar</div>
+          </div>
+
+          <div class="heart-toolbar" aria-label="Controles de visualização">
+            <button class="heart-tool active" type="button" data-view="free">Livre</button>
+            <button class="heart-tool" type="button" data-view="front">Frontal</button>
+            <button class="heart-tool" type="button" data-view="horizontal">Horizontal</button>
+            <button id="sectionToggle" class="heart-tool" type="button">Seção</button>
+            <button id="resetHeart" class="heart-tool icon-only" type="button" title="Resetar visão">↺</button>
+          </div>
+
+          <div class="heart-stage">
+            <canvas id="heartCanvas" aria-label="Modelo 3D didático do coração"></canvas>
+
+            <div class="heart-legend">
+              <span><i class="legend-dot frontal"></i>Plano frontal</span>
+              <span><i class="legend-dot horizontal"></i>Plano horizontal</span>
+              <span><i class="legend-dot activation"></i>Ativação atual</span>
+            </div>
+
+            <div class="heart-hud">
+              <span>Fase</span>
+              <strong id="heartPhaseName">Início do QRS</strong>
+              <small id="heartVectorText">Vetor septal: direita → esquerda</small>
+            </div>
+          </div>
+
+          <div class="lead-groups">
+            <div class="lead-group-row">
+              <span>Periféricas</span>
+              <div>I · II · III · aVR · aVL · aVF</div>
+            </div>
+            <div class="lead-group-row">
+              <span>Precordiais</span>
+              <div>V1 · V2 · V3 · V4 · V5 · V6</div>
+            </div>
+            <div class="lead-group-row">
+              <span>Posteriores / direitas</span>
+              <div>V7 · V8 · V9 · V3R · V4R · V5R · V6R</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ecg-panel trace-panel">
+          <div class="panel-title-row trace-title">
+            <div>
+              <span class="eyebrow">TRAÇADO SINCRONIZADO</span>
+              <h2>ECG por derivações</h2>
+            </div>
+            <div class="trace-stats">
+              <span><strong id="currentBpm">72</strong> bpm</span>
+              <span><strong>25</strong> mm/s</span>
+              <span><strong>10</strong> mm/mV</span>
+            </div>
+          </div>
+
+          <div class="lead-selector-wrap">
+            <div class="lead-selector-head">
+              <span>Derivações visíveis</span>
+              <div>
+                <button id="selectCoreLeads" type="button">12 padrão</button>
+                <button id="selectAllLeads" type="button">Todas</button>
+              </div>
+            </div>
+            <div id="leadSelector" class="lead-selector"></div>
+          </div>
+
+          <div id="traceViewport" class="trace-viewport">
+            <canvas id="ecgLearningCanvas"></canvas>
+          </div>
+
+          <div class="transport">
+            <button id="prevPhase" class="transport-mini" type="button" title="Fase anterior">◀</button>
+            <button id="playPause" class="transport-primary" type="button">
+              <span id="playIcon">▶</span>
+              <span id="playText">Iniciar loop</span>
+            </button>
+            <button id="nextPhase" class="transport-mini" type="button" title="Próxima fase">▶</button>
+
+            <div class="phase-progress">
+              <div class="phase-progress-track">
+                <div id="phaseProgressBar" class="phase-progress-bar"></div>
+              </div>
+              <span id="phasePercent">20%</span>
+            </div>
+          </div>
+
+          <div class="phase-explanation">
+            <div class="phase-marker">
+              <span id="phaseIndex">03</span>
+            </div>
+            <div>
+              <span class="eyebrow" id="phaseCategory">DESPOLARIZAÇÃO VENTRICULAR</span>
+              <h3 id="phaseTitle">Início do QRS — ativação septal</h3>
+              <p id="phaseDescription">O septo interventricular é ativado primeiro. O vetor inicial se desloca predominantemente da esquerda para a direita antes da massa ventricular dominar o QRS.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="ecg-learning">
+        <div class="learning-head">
+          <div>
+            <span class="eyebrow">APRENDIZAGEM VISUAL</span>
+            <h2>Entenda o ECG por camadas</h2>
+          </div>
+          <div class="learning-tabs" role="tablist">
+            <button class="learn-tab active" type="button" data-target="electrodes">Eletrodos</button>
+            <button class="learn-tab" type="button" data-target="fundamentals">Fundamentos</button>
+            <button class="learn-tab" type="button" data-target="guided">Leitura guiada 0–9</button>
+            <button class="learn-tab" type="button" data-target="patterns">Padrões / alterações</button>
+          </div>
+        </div>
+
+        <div id="panel-electrodes" class="learn-panel active">
+          <div class="electrode-layout">
+            <div class="body-map-card">
+              <div class="body-map-title">
+                <strong>Posicionamento no contorno corporal</strong>
+                <span>Clique em um eletrodo para destacar a derivação correspondente.</span>
+              </div>
+
+              <svg id="bodyElectrodeMap" class="body-map" viewBox="0 0 520 560" role="img" aria-label="Mapa didático de eletrodos do ECG">
+                <path class="body-silhouette" d="M207 57 C207 22 231 8 260 8 C289 8 313 22 313 57 C313 83 297 103 282 112 L291 140 C337 153 379 176 406 214 C434 253 447 324 438 404 L423 545 L97 545 L82 404 C73 324 86 253 114 214 C141 176 183 153 229 140 L238 112 C223 103 207 83 207 57 Z"></path>
+                <path class="body-midline" d="M260 142 L260 520"></path>
+
+                <g class="limb-electrodes">
+                  <circle class="electrode-dot limb" data-lead="RA" cx="151" cy="205" r="11"></circle>
+                  <text x="126" y="209">RA</text>
+                  <circle class="electrode-dot limb" data-lead="LA" cx="369" cy="205" r="11"></circle>
+                  <text x="385" y="209">LA</text>
+                  <circle class="electrode-dot limb" data-lead="RL" cx="168" cy="473" r="11"></circle>
+                  <text x="139" y="478">RL</text>
+                  <circle class="electrode-dot limb" data-lead="LL" cx="352" cy="473" r="11"></circle>
+                  <text x="367" y="478">LL</text>
+                </g>
+
+                <g class="chest-electrodes">
+                  <circle class="electrode-dot precordial" data-lead="V1" cx="245" cy="250" r="9"></circle>
+                  <text x="216" y="247">V1</text>
+                  <circle class="electrode-dot precordial" data-lead="V2" cx="278" cy="250" r="9"></circle>
+                  <text x="289" y="247">V2</text>
+                  <circle class="electrode-dot precordial" data-lead="V3" cx="303" cy="279" r="9"></circle>
+                  <text x="313" y="282">V3</text>
+                  <circle class="electrode-dot precordial" data-lead="V4" cx="328" cy="309" r="9"></circle>
+                  <text x="338" y="313">V4</text>
+                  <circle class="electrode-dot precordial" data-lead="V5" cx="363" cy="301" r="9"></circle>
+                  <text x="373" y="305">V5</text>
+                  <circle class="electrode-dot precordial" data-lead="V6" cx="397" cy="294" r="9"></circle>
+                  <text x="407" y="298">V6</text>
+                </g>
+
+                <g class="posterior-electrodes">
+                  <circle class="electrode-dot posterior" data-lead="V7" cx="421" cy="323" r="8"></circle>
+                  <text x="431" y="326">V7</text>
+                  <circle class="electrode-dot posterior" data-lead="V8" cx="419" cy="350" r="8"></circle>
+                  <text x="429" y="353">V8</text>
+                  <circle class="electrode-dot posterior" data-lead="V9" cx="411" cy="377" r="8"></circle>
+                  <text x="421" y="380">V9</text>
+                </g>
+
+                <g class="right-electrodes">
+                  <circle class="electrode-dot right-sided" data-lead="V3R" cx="217" cy="279" r="8"></circle>
+                  <text x="172" y="282">V3R</text>
+                  <circle class="electrode-dot right-sided" data-lead="V4R" cx="192" cy="309" r="8"></circle>
+                  <text x="146" y="313">V4R</text>
+                  <circle class="electrode-dot right-sided" data-lead="V5R" cx="157" cy="301" r="8"></circle>
+                  <text x="111" y="305">V5R</text>
+                  <circle class="electrode-dot right-sided" data-lead="V6R" cx="123" cy="294" r="8"></circle>
+                  <text x="76" y="298">V6R</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="electrode-notes">
+              <article>
+                <span class="note-number">01</span>
+                <div><strong>Periféricas</strong><p>RA, LA, RL e LL formam as derivações dos membros e o plano frontal: I, II, III, aVR, aVL e aVF.</p></div>
+              </article>
+              <article>
+                <span class="note-number">02</span>
+                <div><strong>V1–V6</strong><p>Exploram o plano horizontal. V1–V2 observam mais o septo/direita; V3–V4 a transição/anterior; V5–V6 a parede lateral.</p></div>
+              </article>
+              <article>
+                <span class="note-number">03</span>
+                <div><strong>V7–V9</strong><p>Extensão posterior para ampliar a observação da parede posterior, mantendo o mesmo nível horizontal de V6.</p></div>
+              </article>
+              <article>
+                <span class="note-number">04</span>
+                <div><strong>Direitas</strong><p>V3R–V6R espelham o posicionamento precordial para avaliar melhor o ventrículo direito.</p></div>
+              </article>
+              <div id="electrodeFocus" class="electrode-focus">
+                <span>Eletrodo em foco</span>
+                <strong>Nenhum selecionado</strong>
+                <p>Selecione um ponto no mapa para relacioná-lo ao traçado.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-fundamentals" class="learn-panel">
+          <div class="fundamentals-grid">
+            <article><span>P</span><strong>Despolarização atrial</strong><p>Representa a ativação elétrica dos átrios antes da condução pelo nó AV.</p></article>
+            <article><span>PR</span><strong>Condução AV</strong><p>Tempo entre o início da ativação atrial e o início da despolarização ventricular.</p></article>
+            <article><span>QRS</span><strong>Despolarização ventricular</strong><p>Vetor rápido e de grande amplitude produzido pela ativação dos ventrículos.</p></article>
+            <article><span>ST</span><strong>Ventrículos despolarizados</strong><p>Segmento entre o fim do QRS e o início da onda T; deve ser analisado em relação à linha de base.</p></article>
+            <article><span>T</span><strong>Repolarização ventricular</strong><p>Retorno elétrico ventricular ao estado de repouso.</p></article>
+            <article><span>QT</span><strong>Atividade ventricular total</strong><p>Abrange despolarização e repolarização ventriculares; sua duração varia com a frequência cardíaca.</p></article>
+          </div>
+        </div>
+
+        <div id="panel-guided" class="learn-panel">
+          <div class="guided-intro">
+            <div><span class="eyebrow">PASSO A PASSO</span><h3>Leitura guiada 0–9</h3></div>
+            <p>Clique em uma etapa: o simulador pausa, posiciona o ciclo e sincroniza coração, vetor e traçado.</p>
+          </div>
+          <div id="guidedSteps" class="guided-steps"></div>
+        </div>
+
+        <div id="panel-patterns" class="learn-panel">
+          <div class="pattern-layout">
+            <div id="patternSelector" class="pattern-selector"></div>
+            <div class="pattern-detail">
+              <span class="eyebrow">PADRÃO ATIVO</span>
+              <h3 id="patternName">Ritmo sinusal</h3>
+              <p id="patternDescription">P antes de cada QRS, intervalos regulares e progressão precordial preservada no modelo didático.</p>
+              <div class="pattern-tags" id="patternTags"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="educational-note">Simulador educacional para estudo de eletrocardiografia. Não substitui interpretação clínica, laudo ou equipamento médico.</p>
+    </main>
+  </div>
+
+  <script src="/js/laboratorio-ecg.js?v=20261002-ecg1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+</body>
+</html>
