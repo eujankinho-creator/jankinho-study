@@ -312,7 +312,7 @@
       try {
 
         if (
-          !pageHasFocus()
+          !document.hasFocus()
         ) {
 
           return false;
