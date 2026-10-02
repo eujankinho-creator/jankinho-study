@@ -2688,15 +2688,74 @@ function setupGuidedReading() {
 
   const previous = byId("guidedPrevious");
   const next = byId("guidedNext");
+
   if (previous) previous.addEventListener("click", function () {
     setGuidedStep(LAB_STATE.guidedStep - 1);
   });
+
   if (next) next.addEventListener("click", function () {
     setGuidedStep(LAB_STATE.guidedStep + 1);
   });
 
+  all("[data-guided-mode]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      setGuidedMode(button.dataset.guidedMode);
+    });
+  });
+
   renderGuidedDots();
+  setGuidedMode("route");
   setGuidedStep(0);
+}
+
+
+function setGuidedMode(mode) {
+  LAB_STATE.guidedMode = mode || "route";
+
+  all("[data-guided-mode]").forEach(function (button) {
+    button.classList.toggle(
+      "active",
+      button.dataset.guidedMode === LAB_STATE.guidedMode
+    );
+  });
+
+  renderGuidedContext();
+}
+
+function renderGuidedContext() {
+  const content = GUIDED_CONTEXT[LAB_STATE.guidedStep];
+  if (!content) return;
+
+  const mode = LAB_STATE.guidedMode || "route";
+  const labels = {
+    route: ["COMO ANALISAR", "Roteiro desta etapa"],
+    practice: ["EXEMPLO DIDÁTICO", "Aplicando no traçado"],
+    tips: ["DICAS DE LEITURA", "O que ajuda a não se perder"],
+    errors: ["ERROS COMUNS", "O que costuma levar à interpretação errada"]
+  };
+
+  const selected = content[mode] || content.route;
+  const label = labels[mode] || labels.route;
+
+  if (byId("guidedContextEyebrow")) {
+    byId("guidedContextEyebrow").textContent = label[0];
+  }
+
+  if (byId("guidedContextTitle")) {
+    byId("guidedContextTitle").textContent = label[1];
+  }
+
+  if (byId("guidedContextBody")) {
+    byId("guidedContextBody").innerHTML =
+      selected.map(function (item, index) {
+        return (
+          '<div class="guided-context-item">' +
+          '<span>' + (index + 1) + '</span>' +
+          '<p>' + item + '</p>' +
+          '</div>'
+        );
+      }).join("");
+  }
 }
 
 function renderGuidedStepList() {
@@ -2753,6 +2812,7 @@ function setGuidedStep(index) {
   if (byId("guidedPrevious")) byId("guidedPrevious").disabled = LAB_STATE.guidedStep === 0;
   if (byId("guidedNext")) byId("guidedNext").disabled = LAB_STATE.guidedStep === GUIDED_STEPS.length - 1;
 
+  renderGuidedContext();
   drawGuided();
 }
 
