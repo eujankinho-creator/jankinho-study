@@ -49,6 +49,7 @@ const LAB_STATE = {
   ecgLastFrame: performance.now(),
   ecgLastDraw: 0,
   ecgBpmBase: 72,
+  ecgBpm: 72,
   ecgHover: null,
   ecgHoverPinned: false,
   lastSoundS1Beat: -1,
@@ -1038,9 +1039,22 @@ function setupSimulatorControls() {
     /*
      * Mantém a fase relativa ao trocar a frequência, evitando salto visual.
      */
-    const oldProgress = currentCycleProgress();
-    const period = getBeatPeriod();
-    LAB_STATE.ecgTime = Math.floor(LAB_STATE.ecgTime / period) * period + oldProgress * period;
+    const oldPeriod = 60 / Math.max(1, LAB_STATE.ecgBpm);
+    const oldBeat = Math.floor(LAB_STATE.ecgTime / oldPeriod);
+    const oldProgress =
+      ((LAB_STATE.ecgTime % oldPeriod) + oldPeriod) %
+      oldPeriod /
+      oldPeriod;
+
+    LAB_STATE.ecgBpm =
+      LAB_STATE.ecgBpmBase *
+      Number(speed.value || 1);
+
+    const newPeriod = getBeatPeriod();
+    LAB_STATE.ecgTime =
+      oldBeat * newPeriod +
+      oldProgress * newPeriod;
+
     LAB_STATE.ecgLastFrame = performance.now();
     drawEcgMatrix();
   });
@@ -1166,8 +1180,7 @@ async function playHeartSound(kind) {
 }
 
 function getSimulationBpm() {
-  const speed = Number((byId("phaseSpeed") || {}).value || 1);
-  return LAB_STATE.ecgBpmBase * speed;
+  return LAB_STATE.ecgBpm;
 }
 
 function getBeatPeriod() {
@@ -1626,6 +1639,8 @@ function setupEcgInteraction() {
   canvas.style.cursor = "crosshair";
 
   canvas.addEventListener("pointermove", function (event) {
+    if (LAB_STATE.ecgHoverPinned) return;
+
     const rect = canvas.getBoundingClientRect();
     const x = clamp(event.clientX - rect.left, 0, rect.width);
     const y = clamp(event.clientY - rect.top, 0, rect.height);
@@ -2571,6 +2586,10 @@ function init() {
   } catch (error) {
     showHeartFatalError(error);
   }
+
+  LAB_STATE.ecgBpm =
+    LAB_STATE.ecgBpmBase *
+    Number((byId("phaseSpeed") || {}).value || 1);
 
   LAB_STATE.ecgTime = PHASES[4].progress * getBeatPeriod();
   syncPhaseUi(4, false);
