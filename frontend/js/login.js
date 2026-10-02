@@ -52,6 +52,16 @@ function prepareDashboardAfterLogin(
       "cortexDesktopIntroSeen"
     );
 
+
+    sessionStorage.removeItem(
+      "cortex_auth_me_v1"
+    );
+
+
+    sessionStorage.removeItem(
+      "cortex_timer_key_v1"
+    );
+
     sessionStorage.setItem(
       "cortexDashboardFreshLogin",
       "1"
