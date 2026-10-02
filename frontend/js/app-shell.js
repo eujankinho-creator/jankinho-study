@@ -1064,11 +1064,6 @@
     catch {}
 
 
-    frame.classList.add(
-      "shell-frame-navigating"
-    );
-
-
     localStorage.setItem(
       "cortex_shell_last_view",
       normalized
@@ -1244,10 +1239,6 @@
   frame.addEventListener(
     "load",
     function () {
-
-      frame.classList.remove(
-        "shell-frame-navigating"
-      );
 
 
       try {
