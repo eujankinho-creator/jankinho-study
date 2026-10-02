@@ -19,6 +19,11 @@ import {
 
 import path from "node:path";
 
+import {
+  brotliCompressSync,
+  constants as zlibConstants,
+} from "node:zlib";
+
 import bcrypt from "bcryptjs";
 
 import {
@@ -2688,6 +2693,38 @@ async function excluirMovimentacao(
    ARQUIVOS DO FRONTEND
 ========================================================= */
 
+type StaticFileCacheEntry = {
+  content: Buffer;
+  brotli: Buffer | null;
+  etag: string;
+  extensao: string;
+  contentType: string;
+};
+
+
+const staticFileCache =
+  new Map<
+    string,
+    StaticFileCacheEntry
+  >();
+
+
+function compressibleExtension(
+  extensao: string
+) {
+
+  return [
+    ".html",
+    ".css",
+    ".js",
+    ".json",
+    ".svg",
+  ].includes(
+    extensao
+  );
+}
+
+
 function contentType(
   arquivo: string
 ) {
@@ -2773,35 +2810,111 @@ async function servirArquivo(
   }
 
   try {
-    const info =
-      await stat(arquivo);
-
-    if (!info.isFile()) {
-      throw new Error();
-    }
-
-    const extensao =
-      path.extname(
+    let cached =
+      staticFileCache.get(
         arquivo
-      ).toLowerCase();
+      );
 
 
-    const etag =
-      'W/"' +
-      String(
-        info.size
-      ) +
-      "-" +
-      String(
-        Math.trunc(
-          info.mtimeMs
+    if (!cached) {
+
+      const info =
+        await stat(
+          arquivo
+        );
+
+
+      if (!info.isFile()) {
+        throw new Error();
+      }
+
+
+      const extensao =
+        path.extname(
+          arquivo
+        ).toLowerCase();
+
+
+      const content =
+        await readFile(
+          arquivo
+        );
+
+
+      const etag =
+        'W/"' +
+        String(
+          info.size
+        ) +
+        "-" +
+        String(
+          Math.trunc(
+            info.mtimeMs
+          )
+        ) +
+        '"';
+
+
+      let brotli:
+        Buffer | null =
+        null;
+
+
+      if (
+        content.length >
+          1024 &&
+        compressibleExtension(
+          extensao
         )
-      ) +
-      '"';
+      ) {
+
+        try {
+
+          brotli =
+            brotliCompressSync(
+              content,
+              {
+                params: {
+                  [zlibConstants
+                    .BROTLI_PARAM_QUALITY]:
+                    4,
+                },
+              }
+            );
+
+        }
+        catch {
+
+          brotli =
+            null;
+
+        }
+
+      }
+
+
+      cached = {
+        content,
+        brotli,
+        etag,
+        extensao,
+        contentType:
+          contentType(
+            arquivo
+          ),
+      };
+
+
+      staticFileCache.set(
+        arquivo,
+        cached
+      );
+
+    }
 
 
     const cacheControl =
-      extensao ===
+      cached.extensao ===
         ".html"
         ? "private, max-age=30, stale-while-revalidate=120"
         : versionado
@@ -2813,17 +2926,20 @@ async function servirArquivo(
       request.headers[
         "if-none-match"
       ] ===
-        etag
+        cached.etag
     ) {
 
       response.writeHead(
         304,
         {
           "ETag":
-            etag,
+            cached.etag,
 
           "Cache-Control":
             cacheControl,
+
+          "Vary":
+            "Accept-Encoding",
         }
       );
 
@@ -2834,34 +2950,73 @@ async function servirArquivo(
     }
 
 
-    const conteudo =
-      await readFile(
-        arquivo
+    const acceptEncoding =
+      String(
+        request.headers[
+          "accept-encoding"
+        ] ||
+        ""
       );
+
+
+    const useBrotli =
+      Boolean(
+        cached.brotli &&
+        /(^|[,\s])br([,\s]|$)/
+          .test(
+            acceptEncoding
+          )
+      );
+
+
+    const payload =
+      useBrotli &&
+      cached.brotli
+        ? cached.brotli
+        : cached.content;
+
+
+    const headers:
+      Record<
+        string,
+        string | number
+      > = {
+
+      "Content-Type":
+        cached.contentType,
+
+      "Content-Length":
+        payload.length,
+
+      "ETag":
+        cached.etag,
+
+      "Cache-Control":
+        cacheControl,
+
+      "Vary":
+        "Accept-Encoding",
+    };
+
+
+    if (useBrotli) {
+
+      headers[
+        "Content-Encoding"
+      ] =
+        "br";
+
+    }
 
 
     response.writeHead(
       200,
-      {
-        "Content-Type":
-          contentType(
-            arquivo
-          ),
-
-        "ETag":
-          etag,
-
-        /*
-         * HTML continua revalidando para nunca prender uma versao
-         * antiga. CSS/JS/imagens com ?v= usam cache imutavel.
-         */
-        "Cache-Control":
-          cacheControl,
-      }
+      headers
     );
 
+
     response.end(
-      conteudo
+      payload
     );
   }
   catch {
