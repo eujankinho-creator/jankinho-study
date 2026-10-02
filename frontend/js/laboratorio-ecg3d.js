@@ -33,7 +33,7 @@ const COLORS = {
 
 const LAB_STATE = {
   section: "simulator",
-  fundamentalPart: "paper",
+  fundamentalPart: "signal",
   phaseIndex: 4,
   phasePlaying: false,
   phaseTimer: null,
@@ -758,7 +758,7 @@ function loadHeartModel() {
   const loader = new GLTFLoader();
   const loading = byId("heartModelLoading");
   const urls = [
-    "/models/heart.glb?v=20261002-1840",
+    "/models/heart.glb?v=20261002-1915",
     "https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb",
     "https://cdn.jsdelivr.net/gh/yihalem123/Human-Organ3D@main/models/heart.glb"
   ];
@@ -3128,6 +3128,13 @@ function setPattern(id) {
   }
 }
 
+
+function getPatternSpeedFactor() {
+  const select = byId("patternPaperSpeed");
+  const value = select ? parseFloat(select.value) : 25;
+  return value >= 50 ? 2 : 1;
+}
+
 function drawPatternCanvas(canvas, mode) {
   if (!canvas) return;
   const size = fitCanvas(canvas, 220);
@@ -3147,15 +3154,18 @@ function drawPatternCanvas(canvas, mode) {
 
   ctx.lineWidth = 1.4 * dpr;
 
+  const speedFactor = getPatternSpeedFactor();
+
   ctx.beginPath();
   for (let i = 0; i < 500; i += 1) {
-    const n = i / 499;
+    const screenN = i / 499;
+    const n = 0.5 + (screenN - 0.5) / speedFactor;
     let value = 0;
     if (mode === "normal") value = atrialComponent(n, false) * .72 + atrialComponent(n, true) * .62;
     if (mode === "left") value = atrialComponent(n, false) * .52 + gaussian(n, .43, .09, .36);
     if (mode === "right") value = gaussian(n, .31, .045, .62) + atrialComponent(n, true) * .28;
     value += gaussian(n, .72, .010, 1.05) - gaussian(n, .69, .012, .17) - gaussian(n, .75, .014, .28);
-    const x = n * size.pixelWidth;
+    const x = screenN * size.pixelWidth;
     const y = baseline - value * size.pixelHeight * .42;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
@@ -3171,12 +3181,13 @@ function drawPatternCanvas(canvas, mode) {
   components.forEach(function (part) {
     ctx.beginPath();
     for (let i = 0; i < 260; i += 1) {
-      const n = i / 259 * .55;
+      const screenN = i / 259 * .55;
+      const n = 0.5 + (screenN - 0.5) / speedFactor;
       let value;
       if (mode === "normal") value = atrialComponent(n, part.left) * (part.left ? .62 : .72);
       else if (mode === "left") value = part.left ? gaussian(n, .43, .09, .36) : atrialComponent(n, false) * .52;
       else value = part.left ? atrialComponent(n, true) * .28 : gaussian(n, .31, .045, .62);
-      const x = n * size.pixelWidth;
+      const x = screenN * size.pixelWidth;
       const y = baseline - value * size.pixelHeight * .42;
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
@@ -3261,7 +3272,10 @@ function drawGenericPattern(kind) {
 
     ctx.beginPath();
     const points = 950;
-    const beats = kind === "alternans" ? 4 : 3;
+    const speedFactor = getPatternSpeedFactor();
+    const beats =
+      (kind === "alternans" ? 4 : 3) /
+      speedFactor;
 
     for (let i = 0; i < points; i += 1) {
       const n = i / (points - 1);
