@@ -42,6 +42,7 @@ import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocineti
 import { sincronizarQuestoesDiego } from "./questoesDiego";
 import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
 import { sincronizarQuestoesCalculoMedicamentos } from "./questoesCalculoMedicamentos";
+import { sincronizarQuestoesLaboratorioEcg } from "./questoesLaboratorioEcg";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -4856,6 +4857,8 @@ server.listen(
         await sincronizarQuestoesFarmacocineticaHaggi();
 
         await sincronizarQuestoesCalculoMedicamentos();
+
+        await sincronizarQuestoesLaboratorioEcg();
 
         await limparFlashcardsParaMetodologia();
 
