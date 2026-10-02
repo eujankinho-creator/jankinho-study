@@ -44,7 +44,15 @@ const LAB_STATE = {
   guidedStep: 0,
   patternId: "p-wave",
   paperSpeed: 25,
-  paperGain: 10
+  paperGain: 10,
+  ecgTime: 0,
+  ecgLastFrame: performance.now(),
+  ecgLastDraw: 0,
+  ecgBpmBase: 72,
+  ecgHover: null,
+  ecgHoverPinned: false,
+  lastSoundS1Beat: -1,
+  lastSoundS2Beat: -1
 };
 
 const PHASES = [
@@ -549,7 +557,7 @@ function loadHeartModel() {
   const loader = new GLTFLoader();
   const loading = byId("heartModelLoading");
   const urls = [
-    "/models/heart.glb?v=20261002-1748",
+    "/models/heart.glb?v=20261002-1758",
     "https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb",
     "https://cdn.jsdelivr.net/gh/yihalem123/Human-Organ3D@main/models/heart.glb"
   ];
@@ -579,6 +587,7 @@ function loadHeartModel() {
         const maxDim = Math.max(size.x, size.y, size.z) || 1;
         const scale = 3.25 / maxDim;
         heartModel.scale.setScalar(scale);
+        heartModel.userData.baseScale = scale;
 
         heartModel.rotation.set(-0.10, -0.28, -0.08);
 
@@ -618,7 +627,14 @@ function loadHeartModel() {
         if (loading) loading.classList.add("loaded");
         updateHeartElectricalState();
       },
-      function () {},
+      function (progressEvent) {
+        if (!loading || !progressEvent || !progressEvent.total) return;
+        const percent = Math.round(progressEvent.loaded / progressEvent.total * 100);
+        const small = loading.querySelector("small");
+        if (small) {
+          small.textContent = "Modelo anatômico otimizado · " + percent + "%";
+        }
+      },
       function () {
         tryUrl(index + 1);
       }
@@ -835,21 +851,37 @@ function vectorForPhase(index) {
   return vectors[index] || vectors[0];
 }
 
-function updateHeartElectricalState() {
+function updateHeartElectricalState(cycleProgress) {
   if (!conductionRoot) return;
 
   const phase = PHASES[LAB_STATE.phaseIndex];
+  const progress = typeof cycleProgress === "number"
+    ? cycleProgress
+    : phase.progress;
+
   const curve = conductionRoot.userData.curve;
   if (curve && signalDot) {
-    const point = curve.getPointAt(clamp(phase.progress * 1.45, 0, 1));
+    const electricalWindow = clamp((progress - 0.045) / 0.38, 0, 1);
+    const point = curve.getPointAt(electricalWindow);
     signalDot.position.copy(point);
+
+    const activeElectrical =
+      progress >= 0.045 &&
+      progress <= 0.62;
+
+    signalDot.visible = activeElectrical;
 
     if (activationGlow) {
       activationGlow.position.copy(point);
-      const strong = LAB_STATE.phaseIndex >= 4 && LAB_STATE.phaseIndex <= 7;
-      const scale = strong ? 2.8 : 1.65;
-      activationGlow.scale.set(scale, scale, scale);
-      activationGlow.material.opacity = strong ? 0.38 : 0.18;
+      activationGlow.visible = activeElectrical;
+
+      const qrsEnergy = Math.exp(-Math.pow((progress - 0.255) / 0.075, 2));
+      const atrialEnergy = Math.exp(-Math.pow((progress - 0.11) / 0.055, 2));
+      const energy = Math.max(qrsEnergy, atrialEnergy * 0.55);
+      const glowScale = 1.4 + energy * 2.1;
+
+      activationGlow.scale.set(glowScale, glowScale, glowScale);
+      activationGlow.material.opacity = 0.13 + energy * 0.34;
     }
   }
 
@@ -862,6 +894,16 @@ function updateHeartElectricalState() {
       vectorArrow.setDirection(vector.clone().normalize());
       vectorArrow.setLength(0.82 + vector.length() * 0.22, 0.16, 0.09);
     }
+  }
+
+  if (heartModel && heartModel.userData.baseScale) {
+    const base = heartModel.userData.baseScale;
+    const systolicPulse =
+      Math.exp(-Math.pow((progress - 0.31) / 0.11, 2));
+    const rebound =
+      Math.exp(-Math.pow((progress - 0.58) / 0.10, 2));
+    const scaleFactor = 1 - systolicPulse * 0.018 + rebound * 0.006;
+    heartModel.scale.setScalar(base * scaleFactor);
   }
 }
 
@@ -975,11 +1017,17 @@ function setupSimulatorControls() {
     setPhase(LAB_STATE.phaseIndex + 1);
   });
 
-  if (play) play.addEventListener("click", function () {
+  if (play) play.addEventListener("click", async function () {
     LAB_STATE.phasePlaying = !LAB_STATE.phasePlaying;
     play.textContent = LAB_STATE.phasePlaying ? "Ⅱ Pausar" : "▶ Contínuo";
-    if (LAB_STATE.phasePlaying) startPhaseLoop();
-    else stopPhaseLoop();
+
+    if (LAB_STATE.phasePlaying) {
+      await ensureAudioContext();
+      startPhaseLoop();
+    }
+    else {
+      stopPhaseLoop();
+    }
   });
 
   if (slider) slider.addEventListener("input", function () {
@@ -987,7 +1035,14 @@ function setupSimulatorControls() {
   });
 
   if (speed) speed.addEventListener("change", function () {
-    if (LAB_STATE.phasePlaying) startPhaseLoop();
+    /*
+     * Mantém a fase relativa ao trocar a frequência, evitando salto visual.
+     */
+    const oldProgress = currentCycleProgress();
+    const period = getBeatPeriod();
+    LAB_STATE.ecgTime = Math.floor(LAB_STATE.ecgTime / period) * period + oldProgress * period;
+    LAB_STATE.ecgLastFrame = performance.now();
+    drawEcgMatrix();
   });
 
   all("[data-qrs-step]").forEach(function (button) {
@@ -1009,7 +1064,6 @@ function setupSimulatorControls() {
       sound.textContent = soundEnabled ? "♪ Som ativo" : "♪ Som";
       if (soundEnabled) {
         await ensureAudioContext();
-        playHeartTone("lub");
       }
     });
   }
@@ -1033,46 +1087,112 @@ async function ensureAudioContext() {
   return audioContext;
 }
 
-async function playHeartTone(kind) {
+function createHeartNoise(context, when, duration, frequency, amount) {
+  const sampleRate = context.sampleRate;
+  const length = Math.max(1, Math.floor(sampleRate * duration));
+  const buffer = context.createBuffer(1, length, sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < length; i += 1) {
+    const envelope = Math.exp(-i / (length * 0.22));
+    data[i] = (Math.random() * 2 - 1) * envelope;
+  }
+
+  const source = context.createBufferSource();
+  source.buffer = buffer;
+
+  const filter = context.createBiquadFilter();
+  filter.type = "bandpass";
+  filter.frequency.setValueAtTime(frequency, when);
+  filter.Q.setValueAtTime(0.9, when);
+
+  const gain = context.createGain();
+  gain.gain.setValueAtTime(0.0001, when);
+  gain.gain.exponentialRampToValueAtTime(amount, when + 0.008);
+  gain.gain.exponentialRampToValueAtTime(0.0001, when + duration);
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(context.destination);
+  source.start(when);
+  source.stop(when + duration);
+}
+
+async function playHeartSound(kind) {
   if (!soundEnabled) return;
   const context = await ensureAudioContext();
   if (!context) return;
 
   const now = context.currentTime;
-  const oscillator = context.createOscillator();
-  const gain = context.createGain();
+  const isS2 = kind === "s2";
+  const duration = isS2 ? 0.105 : 0.145;
+  const frequencies = isS2 ? [72, 104] : [48, 72];
+  const amplitudes = isS2 ? [0.060, 0.035] : [0.082, 0.046];
 
-  oscillator.type = "sine";
-  oscillator.frequency.setValueAtTime(kind === "dub" ? 64 : 82, now);
-  oscillator.frequency.exponentialRampToValueAtTime(kind === "dub" ? 44 : 56, now + 0.14);
+  frequencies.forEach(function (frequency, index) {
+    const oscillator = context.createOscillator();
+    const filter = context.createBiquadFilter();
+    const gain = context.createGain();
 
-  gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.exponentialRampToValueAtTime(kind === "dub" ? 0.09 : 0.12, now + 0.015);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.17);
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(frequency, now);
+    oscillator.frequency.exponentialRampToValueAtTime(
+      frequency * (isS2 ? 0.72 : 0.62),
+      now + duration
+    );
 
-  oscillator.connect(gain);
-  gain.connect(context.destination);
-  oscillator.start(now);
-  oscillator.stop(now + 0.18);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(isS2 ? 170 : 135, now);
+    filter.Q.setValueAtTime(0.75, now);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(amplitudes[index], now + 0.008 + index * 0.006);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    oscillator.connect(filter);
+    filter.connect(gain);
+    gain.connect(context.destination);
+    oscillator.start(now + index * 0.004);
+    oscillator.stop(now + duration);
+  });
+
+  createHeartNoise(
+    context,
+    now,
+    duration,
+    isS2 ? 115 : 82,
+    isS2 ? 0.020 : 0.027
+  );
 }
 
-function startPhaseLoop() {
-  stopPhaseLoop();
-  const speed = Number((byId("phaseSpeed") || {}).value || 0.25);
-  const delay = Math.max(180, 1000 / speed);
-  LAB_STATE.phaseTimer = window.setInterval(function () {
-    setPhase((LAB_STATE.phaseIndex + 1) % PHASES.length);
-  }, delay);
+function getSimulationBpm() {
+  const speed = Number((byId("phaseSpeed") || {}).value || 1);
+  return LAB_STATE.ecgBpmBase * speed;
 }
 
-function stopPhaseLoop() {
-  if (LAB_STATE.phaseTimer) {
-    clearInterval(LAB_STATE.phaseTimer);
-    LAB_STATE.phaseTimer = null;
-  }
+function getBeatPeriod() {
+  return 60 / getSimulationBpm();
 }
 
-function setPhase(index) {
+function phaseIndexForCycle(progress) {
+  if (progress < 0.06) return 0;
+  if (progress < 0.135) return 1;
+  if (progress < 0.18) return 2;
+  if (progress < 0.215) return 3;
+  if (progress < 0.245) return 4;
+  if (progress < 0.29) return 5;
+  if (progress < 0.34) return 6;
+  if (progress < 0.44) return 7;
+  if (progress < 0.62) return 8;
+  return 9;
+}
+
+function currentCycleProgress() {
+  const period = getBeatPeriod();
+  return ((LAB_STATE.ecgTime % period) + period) % period / period;
+}
+
+function syncPhaseUi(index, redraw) {
   LAB_STATE.phaseIndex = (index + PHASES.length) % PHASES.length;
   const phase = PHASES[LAB_STATE.phaseIndex];
 
@@ -1090,14 +1210,103 @@ function setPhase(index) {
     });
   }
 
-  updateHeartElectricalState();
+  if (redraw !== false) {
+    updateHeartElectricalState(currentCycleProgress());
+    drawEcgMatrix();
+  }
+}
 
-  if (soundEnabled && LAB_STATE.phasePlaying) {
-    if (LAB_STATE.phaseIndex === 4) playHeartTone("lub");
-    if (LAB_STATE.phaseIndex === 8) playHeartTone("dub");
+function setPhase(index) {
+  LAB_STATE.phasePlaying = false;
+  stopPhaseLoop();
+
+  const play = byId("phasePlay");
+  if (play) play.textContent = "▶ Contínuo";
+
+  const normalized = (index + PHASES.length) % PHASES.length;
+  const period = getBeatPeriod();
+  const beatStart = Math.floor(LAB_STATE.ecgTime / period) * period;
+  LAB_STATE.ecgTime = beatStart + PHASES[normalized].progress * period;
+
+  syncPhaseUi(normalized, true);
+}
+
+function startPhaseLoop() {
+  LAB_STATE.ecgLastFrame = performance.now();
+}
+
+function stopPhaseLoop() {
+  LAB_STATE.ecgLastFrame = performance.now();
+}
+
+function triggerSynchronizedHeartSounds(previousTime, currentTime, period) {
+  if (!soundEnabled) return;
+
+  const currentBeat = Math.floor(currentTime / period);
+  const currentPhase = ((currentTime % period) + period) % period / period;
+  const previousBeat = Math.floor(previousTime / period);
+  const previousPhase = ((previousTime % period) + period) % period / period;
+
+  const crossed = function (threshold) {
+    if (currentBeat > previousBeat) {
+      return currentPhase >= threshold || previousPhase < threshold;
+    }
+    return previousPhase < threshold && currentPhase >= threshold;
+  };
+
+  /*
+   * S1 ocorre logo após o início da despolarização ventricular (QRS).
+   * S2 acompanha o fim da sístole, próximo ao final da repolarização ventricular.
+   * O ECG não "gera" o som; aqui os eventos mecânicos são sincronizados didaticamente.
+   */
+  if (
+    crossed(0.255) &&
+    LAB_STATE.lastSoundS1Beat !== currentBeat
+  ) {
+    LAB_STATE.lastSoundS1Beat = currentBeat;
+    playHeartSound("s1");
   }
 
-  drawEcgMatrix();
+  if (
+    crossed(0.60) &&
+    LAB_STATE.lastSoundS2Beat !== currentBeat
+  ) {
+    LAB_STATE.lastSoundS2Beat = currentBeat;
+    playHeartSound("s2");
+  }
+}
+
+function simulationFrame(now) {
+  requestAnimationFrame(simulationFrame);
+
+  const delta = clamp((now - LAB_STATE.ecgLastFrame) / 1000, 0, 0.06);
+  LAB_STATE.ecgLastFrame = now;
+
+  if (
+    LAB_STATE.section !== "simulator" ||
+    !LAB_STATE.phasePlaying
+  ) {
+    return;
+  }
+
+  const period = getBeatPeriod();
+  const previousTime = LAB_STATE.ecgTime;
+  LAB_STATE.ecgTime += delta;
+
+  const progress = currentCycleProgress();
+  const index = phaseIndexForCycle(progress);
+
+  if (index !== LAB_STATE.phaseIndex) {
+    syncPhaseUi(index, false);
+  }
+
+  updateHeartElectricalState(progress);
+  triggerSynchronizedHeartSounds(previousTime, LAB_STATE.ecgTime, period);
+
+  if (now - LAB_STATE.ecgLastDraw >= 20) {
+    LAB_STATE.ecgLastDraw = now;
+    drawEcgMatrix();
+  }
 }
 
 function fitCanvas(canvas, cssHeight) {
@@ -1201,9 +1410,54 @@ function leadWave(phase, lead) {
   return value;
 }
 
-function drawLeadTrace(ctx, rect, lead, activeProgress, activeColor, dpr) {
+const TRACE_HEAD_RATIO = 0.94;
+
+function getDisplayedLeadLayout() {
+  let leads;
+  let title;
+  let subtitle;
+
+  if (LAB_STATE.axisMode === "frontal") {
+    leads = ["DI", "aVR", "DII", "aVL", "DIII", "aVF"];
+    title = "Derivações periféricas · plano frontal";
+    subtitle = "Bipolares: DI, DII, DIII · Unipolares aumentadas: aVR, aVL, aVF";
+  }
+  else if (LAB_STATE.axisMode === "horizontal") {
+    leads = ["V1", "V2", "V3", "V4", "V5", "V6"];
+    title = "Derivações precordiais · plano horizontal";
+    subtitle = "Progressão precordial de V1 a V6";
+  }
+  else {
+    leads = ["DI", "DII", "DIII", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"];
+    title = "ECG de 12 derivações";
+    subtitle = "6 periféricas no plano frontal + 6 precordiais no plano horizontal";
+  }
+
+  if (LAB_STATE.posteriorLeads) leads = leads.concat(["V7", "V8", "V9"]);
+  if (LAB_STATE.rightLeads) leads = leads.concat(["V3R", "V4R"]);
+
+  const cols = leads.length > 8 ? 4 : 2;
+  const rows = Math.ceil(leads.length / cols);
+
+  return { leads, title, subtitle, cols, rows };
+}
+
+function waveNameFromPhase(phase) {
+  if (phase >= 0.075 && phase < 0.15) return "Onda P";
+  if (phase >= 0.15 && phase < 0.205) return "Intervalo PR";
+  if (phase >= 0.205 && phase < 0.238) return "Onda Q";
+  if (phase >= 0.238 && phase < 0.268) return "Onda R";
+  if (phase >= 0.268 && phase < 0.315) return "Onda S";
+  if (phase >= 0.315 && phase < 0.44) return "Segmento ST";
+  if (phase >= 0.44 && phase < 0.62) return "Onda T";
+  return "Linha de base / TP";
+}
+
+function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
   const baseline = rect.y + rect.h * .52;
   const amplitude = rect.h * .30;
+  const windowDuration = period * 2;
+  const headX = rect.x + rect.w * TRACE_HEAD_RATIO;
 
   ctx.save();
 
@@ -1213,76 +1467,214 @@ function drawLeadTrace(ctx, rect, lead, activeProgress, activeColor, dpr) {
   ctx.fillText(lead, rect.x + 7 * dpr, rect.y + 6 * dpr);
 
   if (lead === "DII") {
-    ctx.fillStyle = "rgba(34, 211, 238, .11)";
+    ctx.fillStyle = "rgba(34, 211, 238, .09)";
     ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
   }
 
-  const points = Math.max(220, Math.floor(rect.w / (2 * dpr)));
+  const points = Math.max(260, Math.floor(rect.w / (1.6 * dpr)));
+  const gradient = ctx.createLinearGradient(rect.x, 0, headX, 0);
+
+  if (activeColor === "#191919") {
+    gradient.addColorStop(0, "rgba(25,25,25,.27)");
+    gradient.addColorStop(.72, "rgba(25,25,25,.72)");
+    gradient.addColorStop(1, "rgba(10,10,10,.98)");
+  }
+  else {
+    gradient.addColorStop(0, "rgba(0,168,200,.28)");
+    gradient.addColorStop(.72, "rgba(0,168,200,.72)");
+    gradient.addColorStop(1, "rgba(0,153,184,1)");
+  }
+
   ctx.beginPath();
 
   for (let i = 0; i < points; i += 1) {
     const n = i / (points - 1);
-    const phase = n;
+    const sampleTime = endTime - windowDuration + n * windowDuration;
+    const phase = ((sampleTime % period) + period) % period / period;
     const value = leadWave(phase, lead);
-    const x = rect.x + n * rect.w;
+    const x = rect.x + n * rect.w * TRACE_HEAD_RATIO;
     const y = baseline - value * amplitude;
 
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   }
 
-  ctx.strokeStyle = activeColor;
-  ctx.lineWidth = 1.45 * dpr;
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 1.5 * dpr;
   ctx.stroke();
 
-  const cursorX = rect.x + clamp(activeProgress, 0, 1) * rect.w;
-  ctx.strokeStyle = "rgba(255, 82, 92, .72)";
+  const currentPhase = ((endTime % period) + period) % period / period;
+  const currentValue = leadWave(currentPhase, lead);
+  const currentY = baseline - currentValue * amplitude;
+
+  ctx.strokeStyle = "rgba(239, 68, 68, .24)";
   ctx.lineWidth = 1 * dpr;
-  ctx.setLineDash([4 * dpr, 4 * dpr]);
   ctx.beginPath();
-  ctx.moveTo(cursorX, rect.y + 8 * dpr);
-  ctx.lineTo(cursorX, rect.y + rect.h - 8 * dpr);
+  ctx.moveTo(headX, rect.y);
+  ctx.lineTo(headX, rect.y + rect.h);
   ctx.stroke();
-  ctx.setLineDash([]);
 
-  const cursorY = baseline - leadWave(activeProgress, lead) * amplitude;
-  ctx.fillStyle = "#ff5b65";
+  ctx.fillStyle = activeColor === "#191919" ? "#ef4444" : "#0891b2";
   ctx.beginPath();
-  ctx.arc(cursorX, cursorY, 3 * dpr, 0, TAU);
+  ctx.arc(headX, currentY, 2.8 * dpr, 0, TAU);
   ctx.fill();
 
   ctx.restore();
+}
+
+function drawEcgHover(ctx, layout, size, period) {
+  const hover = LAB_STATE.ecgHover;
+  if (!hover) return;
+
+  const px = hover.nx * size.pixelWidth;
+  const py = hover.ny * size.pixelHeight;
+  const cellW = size.pixelWidth / layout.cols;
+  const cellH = size.pixelHeight / layout.rows;
+  const col = clamp(Math.floor(px / cellW), 0, layout.cols - 1);
+  const row = clamp(Math.floor(py / cellH), 0, layout.rows - 1);
+  const index = row * layout.cols + col;
+
+  if (index >= layout.leads.length) return;
+
+  const lead = layout.leads[index];
+  const rect = {
+    x: col * cellW,
+    y: row * cellH,
+    w: cellW,
+    h: cellH
+  };
+
+  const localX = clamp((px - rect.x) / (rect.w * TRACE_HEAD_RATIO), 0, 1);
+  const windowDuration = period * 2;
+  const sampleTime =
+    LAB_STATE.ecgTime -
+    windowDuration +
+    localX * windowDuration;
+
+  const phase =
+    ((sampleTime % period) + period) % period / period;
+
+  const value = leadWave(phase, lead);
+  const baseline = rect.y + rect.h * .52;
+  const amplitude = rect.h * .30;
+  const waveY = baseline - value * amplitude;
+  const pointX = rect.x + localX * rect.w * TRACE_HEAD_RATIO;
+
+  ctx.save();
+  ctx.strokeStyle = "rgba(8,145,178,.72)";
+  ctx.lineWidth = 1 * size.dpr;
+  ctx.setLineDash([3 * size.dpr, 3 * size.dpr]);
+
+  ctx.beginPath();
+  ctx.moveTo(pointX, rect.y);
+  ctx.lineTo(pointX, rect.y + rect.h);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(rect.x, waveY);
+  ctx.lineTo(rect.x + rect.w, waveY);
+  ctx.stroke();
+
+  ctx.setLineDash([]);
+  ctx.fillStyle = "#0891b2";
+  ctx.beginPath();
+  ctx.arc(pointX, waveY, 4 * size.dpr, 0, TAU);
+  ctx.fill();
+  ctx.restore();
+
+  hover.lead = lead;
+  hover.phase = phase;
+  hover.value = value;
+  hover.wave = waveNameFromPhase(phase);
+  hover.timeMs = phase * period * 1000;
+
+  updateEcgHoverTooltip();
+}
+
+function updateEcgHoverTooltip() {
+  const tooltip = byId("ecgHoverTooltip");
+  const hover = LAB_STATE.ecgHover;
+  const canvas = byId("ecgMatrixCanvas");
+
+  if (!tooltip || !canvas || !hover) {
+    if (tooltip) tooltip.hidden = true;
+    return;
+  }
+
+  tooltip.hidden = false;
+  tooltip.innerHTML =
+    "<strong>" + hover.lead + " · " + hover.wave + "</strong>" +
+    "<span>" + (hover.value >= 0 ? "+" : "") +
+    hover.value.toFixed(2).replace(".", ",") +
+    " mV · " +
+    Math.round(hover.timeMs) +
+    " ms no ciclo</span>";
+
+  const wrap = canvas.parentElement;
+  const maxLeft = Math.max(8, (wrap ? wrap.clientWidth : canvas.clientWidth) - 220);
+  const maxTop = Math.max(8, (wrap ? wrap.clientHeight : canvas.clientHeight) - 62);
+
+  tooltip.style.left = clamp(hover.cssX + 12, 8, maxLeft) + "px";
+  tooltip.style.top = clamp(hover.cssY + 12, 8, maxTop) + "px";
+}
+
+function setupEcgInteraction() {
+  const canvas = byId("ecgMatrixCanvas");
+  const tooltip = byId("ecgHoverTooltip");
+  if (!canvas) return;
+
+  canvas.style.cursor = "crosshair";
+
+  canvas.addEventListener("pointermove", function (event) {
+    const rect = canvas.getBoundingClientRect();
+    const x = clamp(event.clientX - rect.left, 0, rect.width);
+    const y = clamp(event.clientY - rect.top, 0, rect.height);
+
+    LAB_STATE.ecgHover = {
+      nx: rect.width ? x / rect.width : 0,
+      ny: rect.height ? y / rect.height : 0,
+      cssX: x,
+      cssY: y
+    };
+
+    if (!LAB_STATE.phasePlaying) {
+      drawEcgMatrix();
+    }
+  });
+
+  canvas.addEventListener("pointerleave", function () {
+    if (LAB_STATE.ecgHoverPinned) return;
+    LAB_STATE.ecgHover = null;
+    if (tooltip) tooltip.hidden = true;
+    if (!LAB_STATE.phasePlaying) drawEcgMatrix();
+  });
+
+  canvas.addEventListener("click", function () {
+    LAB_STATE.ecgHoverPinned = !LAB_STATE.ecgHoverPinned;
+    if (tooltip) {
+      tooltip.classList.toggle("pinned", LAB_STATE.ecgHoverPinned);
+    }
+  });
 }
 
 function drawEcgMatrix() {
   const canvas = byId("ecgMatrixCanvas");
   if (!canvas || LAB_STATE.section !== "simulator") return;
 
-  let leads;
-  let title;
-  let subtitle;
-
-  if (LAB_STATE.axisMode === "frontal") {
-    leads = ["DI", "aVR", "DII", "aVL", "DIII", "aVF"];
-    title = "Derivações periféricas · plano frontal";
-    subtitle = "Bipolares: DI, DII, DIII · Unipolares aumentadas: aVR, aVL, aVF";
-  } else if (LAB_STATE.axisMode === "horizontal") {
-    leads = ["V1", "V2", "V3", "V4", "V5", "V6"];
-    title = "Derivações precordiais · plano horizontal";
-    subtitle = "Progressão precordial de V1 a V6";
-  } else {
-    leads = ["DI", "DII", "DIII", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"];
-    title = "ECG de 12 derivações";
-    subtitle = "6 periféricas no plano frontal + 6 precordiais no plano horizontal";
-  }
-
-  if (LAB_STATE.posteriorLeads) leads = leads.concat(["V7", "V8", "V9"]);
-  if (LAB_STATE.rightLeads) leads = leads.concat(["V3R", "V4R"]);
+  const layout = getDisplayedLeadLayout();
+  const bpm = getSimulationBpm();
+  const period = 60 / bpm;
 
   const heading = document.querySelector(".matrix-head h2");
   const copy = document.querySelector(".matrix-head p");
-  if (heading) heading.textContent = title;
-  if (copy) copy.textContent = subtitle;
+  if (heading) heading.textContent = layout.title;
+  if (copy) {
+    copy.textContent =
+      layout.subtitle +
+      " · ritmo sinusal " +
+      Math.round(bpm) +
+      " bpm · janela de 2 batimentos";
+  }
 
   const hostHeight = canvas.parentElement ? canvas.parentElement.clientHeight : 650;
   const size = fitCanvas(canvas, Math.max(540, hostHeight));
@@ -1292,23 +1684,21 @@ function drawEcgMatrix() {
   ctx.clearRect(0, 0, size.pixelWidth, size.pixelHeight);
   drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, false);
 
-  const cols = leads.length > 8 ? 4 : 2;
-  const rows = Math.ceil(leads.length / cols);
-  const cellW = size.pixelWidth / cols;
-  const cellH = size.pixelHeight / rows;
+  const cellW = size.pixelWidth / layout.cols;
+  const cellH = size.pixelHeight / layout.rows;
 
   ctx.save();
   ctx.strokeStyle = "rgba(183, 68, 68, .48)";
   ctx.lineWidth = 1.05 * dpr;
 
-  for (let col = 1; col < cols; col += 1) {
+  for (let col = 1; col < layout.cols; col += 1) {
     ctx.beginPath();
     ctx.moveTo(col * cellW, 0);
     ctx.lineTo(col * cellW, size.pixelHeight);
     ctx.stroke();
   }
 
-  for (let row = 1; row < rows; row += 1) {
+  for (let row = 1; row < layout.rows; row += 1) {
     ctx.beginPath();
     ctx.moveTo(0, row * cellH);
     ctx.lineTo(size.pixelWidth, row * cellH);
@@ -1316,26 +1706,28 @@ function drawEcgMatrix() {
   }
   ctx.restore();
 
-  const progress = PHASES[LAB_STATE.phaseIndex].progress;
-
-  leads.forEach(function (lead, index) {
-    const row = Math.floor(index / cols);
-    const col = index % cols;
+  layout.leads.forEach(function (lead, index) {
+    const row = Math.floor(index / layout.cols);
+    const col = index % layout.cols;
     const rect = {
       x: col * cellW,
       y: row * cellH,
       w: cellW,
       h: cellH
     };
+
     drawLeadTrace(
       ctx,
       rect,
       lead,
-      progress,
+      LAB_STATE.ecgTime,
+      period,
       lead === "DII" ? "#00a8c8" : "#191919",
       dpr
     );
   });
+
+  drawEcgHover(ctx, layout, size, period);
 }
 
 /* =========================================================
@@ -2162,6 +2554,7 @@ function init() {
   setupSectionTabs();
   setupFundamentalParts();
   setupSimulatorControls();
+  setupEcgInteraction();
   setupElectrodeLearning();
   setupAxisLearning();
   setupPaperLearning();
@@ -2179,8 +2572,11 @@ function init() {
     showHeartFatalError(error);
   }
 
-  setPhase(4);
+  LAB_STATE.ecgTime = PHASES[4].progress * getBeatPeriod();
+  syncPhaseUi(4, false);
   setLabSection("simulator");
+  LAB_STATE.ecgLastFrame = performance.now();
+  requestAnimationFrame(simulationFrame);
 
   requestAnimationFrame(function () {
     drawEcgMatrix();
