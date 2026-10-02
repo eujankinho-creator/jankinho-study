@@ -8,8 +8,16 @@
   };
 
 
-  const frame =
+  let frame =
     $("cortexAppFrame");
+
+
+  let standbyFrame =
+    $("cortexAppFrameNext");
+
+
+  let pendingTarget =
+    null;
 
 
   const state = {
@@ -1106,6 +1114,402 @@
   }
 
 
+  function frameLocation(
+    targetFrame
+  ) {
+
+    try {
+
+      const location =
+        targetFrame
+          .contentWindow
+          ?.location;
+
+
+      if (!location) {
+        return "";
+      }
+
+
+      return (
+        location.pathname +
+        location.search +
+        location.hash
+      );
+
+    }
+    catch {
+
+      return "";
+
+    }
+
+  }
+
+
+  function normalizedTarget(
+    value
+  ) {
+
+    try {
+
+      const url =
+        new URL(
+          value,
+          window.location.origin
+        );
+
+
+      return (
+        url.pathname +
+        url.search +
+        url.hash
+      );
+
+    }
+    catch {
+
+      return String(
+        value ||
+        ""
+      );
+
+    }
+
+  }
+
+
+  function sameFrameTarget(
+    targetFrame,
+    value
+  ) {
+
+    return (
+      frameLocation(
+        targetFrame
+      ) ===
+      normalizedTarget(
+        value
+      )
+    );
+
+  }
+
+
+  function enhanceLoadedFrame(
+    loadedFrame
+  ) {
+
+    try {
+
+      const frameDocument =
+        loadedFrame.contentDocument;
+
+
+      if (frameDocument) {
+
+        let typographyStyle =
+          frameDocument.getElementById(
+            "cortexTypographyStandard"
+          );
+
+
+        if (!typographyStyle) {
+
+          typographyStyle =
+            frameDocument.createElement(
+              "style"
+            );
+
+
+          typographyStyle.id =
+            "cortexTypographyStandard";
+
+
+          typographyStyle.textContent =
+            "html{font-size:16px!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}" +
+            "body{font-size:16px}" +
+            "button,input,select,textarea{font-family:inherit;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}" +
+            "#mobileOverlay,.mobile-overlay,.mobile-menu-button,.analysis-mobile-button,.analysis-mobile-overlay,.clinical-mobile-menu,.clinical-mobile-overlay,.settings-mobile-button,.settings-mobile-overlay,.finance-mobile-button,.finance-mobile-overlay,.flashcards-mobile-button,.flashcards-mobile-overlay,.questions-mobile-menu,.questions-mobile-overlay{display:none!important}";
+
+
+          frameDocument.head.appendChild(
+            typographyStyle
+          );
+
+        }
+
+
+        frameDocument
+          .querySelectorAll(
+            "#mobileOverlay,.mobile-overlay,.mobile-menu-button,.analysis-mobile-button,.analysis-mobile-overlay,.clinical-mobile-menu,.clinical-mobile-overlay,.settings-mobile-button,.settings-mobile-overlay,.finance-mobile-button,.finance-mobile-overlay,.flashcards-mobile-button,.flashcards-mobile-overlay,.questions-mobile-menu,.questions-mobile-overlay"
+          )
+          .forEach(
+            function (
+              element
+            ) {
+
+              element.remove();
+
+            }
+          );
+
+      }
+
+    }
+    catch (
+      error
+    ) {
+
+      console.error(
+        "Cortex frame enhancement:",
+        error
+      );
+
+    }
+
+  }
+
+
+  function saveLoadedFrameLocation(
+    loadedFrame
+  ) {
+
+    try {
+
+      const path =
+        loadedFrame
+          .contentWindow
+          .location
+          .pathname;
+
+
+      const search =
+        loadedFrame
+          .contentWindow
+          .location
+          .search;
+
+
+      if (
+        path &&
+        !path.includes(
+          "login"
+        ) &&
+        !path.includes(
+          "cadastro"
+        )
+      ) {
+
+        localStorage.setItem(
+          "cortex_shell_last_view",
+          path +
+          search
+        );
+
+      }
+
+    }
+    catch {}
+
+  }
+
+
+  function swapFrames(
+    loadedFrame
+  ) {
+
+    const previousFrame =
+      frame;
+
+
+    loadedFrame.classList.remove(
+      "shell-frame-standby"
+    );
+
+
+    loadedFrame.classList.add(
+      "shell-frame-active"
+    );
+
+
+    loadedFrame.removeAttribute(
+      "aria-hidden"
+    );
+
+
+    loadedFrame.removeAttribute(
+      "tabindex"
+    );
+
+
+    previousFrame.classList.remove(
+      "shell-frame-active"
+    );
+
+
+    previousFrame.classList.add(
+      "shell-frame-standby"
+    );
+
+
+    previousFrame.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    previousFrame.setAttribute(
+      "tabindex",
+      "-1"
+    );
+
+
+    frame =
+      loadedFrame;
+
+
+    standbyFrame =
+      previousFrame;
+
+
+    pendingTarget =
+      null;
+
+
+    saveLoadedFrameLocation(
+      frame
+    );
+
+  }
+
+
+  function handleFrameLoad(
+    loadedFrame
+  ) {
+
+    enhanceLoadedFrame(
+      loadedFrame
+    );
+
+
+    let path =
+      "";
+
+
+    try {
+
+      path =
+        loadedFrame
+          .contentWindow
+          .location
+          .pathname;
+
+    }
+    catch {}
+
+
+    if (
+      path === "/app" ||
+      path === "/app.html"
+    ) {
+
+      localStorage.removeItem(
+        "cortex_shell_last_view"
+      );
+
+
+      if (
+        loadedFrame ===
+          standbyFrame
+      ) {
+
+        pendingTarget =
+          "/index.html";
+
+
+        loadedFrame.dataset
+          .cortexTarget =
+          "/index.html";
+
+      }
+
+
+      loadedFrame.src =
+        "/index.html";
+
+
+      return;
+
+    }
+
+
+    if (
+      loadedFrame ===
+        standbyFrame &&
+      pendingTarget
+    ) {
+
+      if (
+        !sameFrameTarget(
+          loadedFrame,
+          pendingTarget
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      swapFrames(
+        loadedFrame
+      );
+
+
+      return;
+
+    }
+
+
+    if (
+      loadedFrame ===
+        frame
+    ) {
+
+      saveLoadedFrameLocation(
+        loadedFrame
+      );
+
+    }
+
+  }
+
+
+  frame.addEventListener(
+    "load",
+    function () {
+
+      handleFrameLoad(
+        frame
+      );
+
+    }
+  );
+
+
+  standbyFrame.addEventListener(
+    "load",
+    function () {
+
+      handleFrameLoad(
+        standbyFrame
+      );
+
+    }
+  );
+
+
   function navigateFrameFast(
     href
   ) {
@@ -1121,49 +1525,53 @@
     }
 
 
-    let normalized =
+    const normalized =
       directFramePath(
         view
       );
 
 
-    try {
+    if (
+      sameFrameTarget(
+        frame,
+        normalized
+      )
+    ) {
 
-      const currentPath =
-        frame.contentWindow
-          ?.location
-          ?.pathname;
-
-
-      const currentSearch =
-        frame.contentWindow
-          ?.location
-          ?.search ||
-        "";
-
-
-      if (
-        currentPath &&
-        (
-          currentPath +
-          currentSearch
-        ) ===
-          normalized
-      ) {
-        return;
-      }
+      return;
 
     }
-    catch {}
 
 
-    localStorage.setItem(
-      "cortex_shell_last_view",
-      normalized
-    );
+    if (
+      pendingTarget &&
+      normalizedTarget(
+        pendingTarget
+      ) ===
+        normalizedTarget(
+          normalized
+        )
+    ) {
+
+      return;
+
+    }
 
 
-    frame.src =
+    pendingTarget =
+      normalized;
+
+
+    standbyFrame.dataset
+      .cortexTarget =
+      normalized;
+
+
+    /*
+     * A pagina atual continua visivel. A proxima so assume
+     * a tela depois que o evento load confirmar que esta pronta.
+     */
+    standbyFrame.src =
       normalized;
 
   }
@@ -1220,10 +1628,6 @@
       );
 
 
-    /*
-     * Se a URL nao informou uma pagina,
-     * tenta recuperar a ultima pagina valida.
-     */
     if (!view) {
 
       try {
@@ -1240,10 +1644,6 @@
           );
 
 
-        /*
-         * Remove estado antigo quebrado,
-         * especialmente /app dentro de /app.
-         */
         if (
           saved &&
           !view
@@ -1280,10 +1680,8 @@
 
     if (
       spotify &&
-      (
-        view.includes(
-          "/musica"
-        )
+      view.includes(
+        "/musica"
       )
     ) {
 
@@ -1303,9 +1701,6 @@
     }
 
 
-    /*
-     * Segunda barreira contra shell recursivo.
-     */
     if (
       view === "/app" ||
       view === "/app.html"
@@ -1323,6 +1718,16 @@
       );
 
 
+    /*
+     * O HTML do shell nao possui mais src inicial.
+     * Assim o Dashboard e carregado exatamente uma vez,
+     * evitando consumir a flag da intro em uma carga fantasma.
+     */
+    frame.dataset
+      .cortexTarget =
+      view;
+
+
     frame.src =
       view;
 
@@ -1335,126 +1740,6 @@
 
   }
 
-  frame.addEventListener(
-    "load",
-    function () {
-
-
-      try {
-
-        const frameDocument =
-          frame.contentDocument;
-
-        if (frameDocument) {
-
-          let typographyStyle =
-            frameDocument.getElementById(
-              "cortexTypographyStandard"
-            );
-
-          if (!typographyStyle) {
-
-            typographyStyle =
-              frameDocument.createElement(
-                "style"
-              );
-
-            typographyStyle.id =
-              "cortexTypographyStandard";
-
-            typographyStyle.textContent =
-              "html{font-size:16px!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}" +
-              "body{font-size:16px}" +
-              "button,input,select,textarea{font-family:inherit;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}" +
-              "#mobileOverlay,.mobile-overlay,.mobile-menu-button,.analysis-mobile-button,.analysis-mobile-overlay,.clinical-mobile-menu,.clinical-mobile-overlay,.settings-mobile-button,.settings-mobile-overlay,.finance-mobile-button,.finance-mobile-overlay,.flashcards-mobile-button,.flashcards-mobile-overlay,.questions-mobile-menu,.questions-mobile-overlay{display:none!important}";
-
-            frameDocument.head.appendChild(
-              typographyStyle
-            );
-
-          }
-
-
-          frameDocument
-            .querySelectorAll(
-              "#mobileOverlay,.mobile-overlay,.mobile-menu-button,.analysis-mobile-button,.analysis-mobile-overlay,.clinical-mobile-menu,.clinical-mobile-overlay,.settings-mobile-button,.settings-mobile-overlay,.finance-mobile-button,.finance-mobile-overlay,.flashcards-mobile-button,.flashcards-mobile-overlay,.questions-mobile-menu,.questions-mobile-overlay"
-            )
-            .forEach(
-              function (element) {
-                element.remove();
-              }
-            );
-
-        }
-
-
-        const path =
-          frame.contentWindow
-            .location
-            .pathname;
-
-
-        const search =
-          frame.contentWindow
-            .location
-            .search;
-
-
-        /*
-         * Se por qualquer motivo /app entrar no iframe,
-         * recupera imediatamente o Dashboard.
-         */
-        if (
-          path === "/app" ||
-          path === "/app.html"
-        ) {
-
-          localStorage.removeItem(
-            "cortex_shell_last_view"
-          );
-
-
-          frame.src =
-            "/index.html";
-
-
-          return;
-
-        }
-
-
-        if (
-          path &&
-          !path.includes(
-            "login"
-          ) &&
-          !path.includes(
-            "cadastro"
-          )
-        ) {
-
-          localStorage.setItem(
-            "cortex_shell_last_view",
-            path +
-            search
-          );
-
-        }
-
-      }
-      catch (
-        error
-      ) {
-
-        console.error(
-          "Cortex frame:",
-          error
-        );
-
-      }
-
-    }
-  );
 
   $("globalSpotifyConnect")
     .addEventListener(
@@ -1480,8 +1765,9 @@
       "click",
       function () {
 
-        frame.src =
-          "/musica.html";
+        navigateFrameFast(
+          "/musica"
+        );
 
       }
     );
