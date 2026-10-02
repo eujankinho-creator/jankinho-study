@@ -3174,3 +3174,344 @@ html[data-theme="black-white"] .ecg-lab {
   --ecg-cyan: var(--theme-accent);
   --ecg-cyan-2: var(--theme-accent-2);
 }
+
+
+/* =========================================================
+   STRICT GLOBAL THEME — SECTIONS 02 / 03 / 04
+   Tudo fora do Simulador 3D usa somente a paleta global Cortex.
+========================================================= */
+
+[data-section-panel="fundamentals"],
+[data-section-panel="guided"],
+[data-section-panel="patterns"] {
+  color: var(--theme-text) !important;
+}
+
+/* Superfícies gerais */
+[data-section-panel="fundamentals"] .lab-card,
+[data-section-panel="fundamentals"] .concept-card,
+[data-section-panel="fundamentals"] .electrodes-card,
+[data-section-panel="fundamentals"] .paper-learning-card,
+[data-section-panel="fundamentals"] .concept-copy,
+[data-section-panel="fundamentals"] .conduction-track,
+[data-section-panel="fundamentals"] .electrode-body,
+[data-section-panel="fundamentals"] .electrode-focus-card,
+[data-section-panel="fundamentals"] .wave-cards article,
+[data-section-panel="fundamentals"] .axis-card,
+[data-section-panel="fundamentals"] .derivation-card,
+[data-section-panel="fundamentals"] .einthoven-card,
+[data-section-panel="fundamentals"] .paper-demo,
+[data-section-panel="fundamentals"] .paper-settings,
+[data-section-panel="fundamentals"] .paper-metric-grid article,
+[data-section-panel="fundamentals"] .frequency-card,
+[data-section-panel="fundamentals"] .frequency-card canvas,
+[data-section-panel="fundamentals"] .wave-annotated-card,
+[data-section-panel="fundamentals"] .wave-annotated-canvas-wrap,
+[data-section-panel="guided"] .guided-step-list,
+[data-section-panel="guided"] .guided-main-card,
+[data-section-panel="guided"] .guided-info,
+[data-section-panel="guided"] .guided-context-panel,
+[data-section-panel="guided"] .guided-context-item,
+[data-section-panel="guided"] .guided-canvas-wrap,
+[data-section-panel="patterns"] .pattern-detail-card,
+[data-section-panel="patterns"] .pattern-wave-card,
+[data-section-panel="patterns"] .generic-pattern-comparison,
+[data-section-panel="patterns"] .generic-pattern-chart,
+[data-section-panel="patterns"] .generic-pattern-copy,
+[data-section-panel="patterns"] .pattern-teaching-grid article {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+  color: var(--theme-text) !important;
+  box-shadow: none !important;
+}
+
+/* Sub-superfícies com leve contraste, ainda seguindo o tema */
+[data-section-panel="fundamentals"] .conduction-track,
+[data-section-panel="fundamentals"] .paper-settings,
+[data-section-panel="fundamentals"] .frequency-card canvas,
+[data-section-panel="fundamentals"] .wave-annotated-canvas-wrap,
+[data-section-panel="fundamentals"] #axisDiagramCanvas,
+[data-section-panel="guided"] .guided-info,
+[data-section-panel="guided"] .guided-context-item,
+[data-section-panel="guided"] .guided-canvas-wrap,
+[data-section-panel="patterns"] .generic-pattern-chart {
+  background: var(--theme-bg-secondary) !important;
+}
+
+/* Bordas e divisores */
+[data-section-panel="fundamentals"] .concept-copy,
+[data-section-panel="fundamentals"] .conduction-track,
+[data-section-panel="fundamentals"] .electrode-body,
+[data-section-panel="fundamentals"] .electrode-focus-card,
+[data-section-panel="fundamentals"] .wave-cards article,
+[data-section-panel="fundamentals"] .paper-demo,
+[data-section-panel="fundamentals"] .paper-settings,
+[data-section-panel="fundamentals"] .frequency-card canvas,
+[data-section-panel="fundamentals"] #calibrationCanvas,
+[data-section-panel="fundamentals"] #axisDiagramCanvas,
+[data-section-panel="guided"] .guided-main-card,
+[data-section-panel="guided"] .guided-info,
+[data-section-panel="guided"] .guided-context-panel,
+[data-section-panel="guided"] .guided-context-item,
+[data-section-panel="guided"] .guided-canvas-wrap,
+[data-section-panel="patterns"] .pattern-detail-card,
+[data-section-panel="patterns"] .pattern-wave-card,
+[data-section-panel="patterns"] .generic-pattern-chart,
+[data-section-panel="patterns"] .generic-pattern-copy {
+  border-color: var(--theme-border) !important;
+}
+
+/* Títulos */
+[data-section-panel="fundamentals"] h2,
+[data-section-panel="fundamentals"] h3,
+[data-section-panel="fundamentals"] h4,
+[data-section-panel="fundamentals"] strong,
+[data-section-panel="guided"] h2,
+[data-section-panel="guided"] h3,
+[data-section-panel="guided"] h4,
+[data-section-panel="guided"] strong,
+[data-section-panel="patterns"] h2,
+[data-section-panel="patterns"] h3,
+[data-section-panel="patterns"] h4,
+[data-section-panel="patterns"] strong {
+  color: var(--theme-text) !important;
+}
+
+/* Textos secundários */
+[data-section-panel="fundamentals"] p,
+[data-section-panel="fundamentals"] small,
+[data-section-panel="fundamentals"] label,
+[data-section-panel="fundamentals"] .conduction-node span,
+[data-section-panel="fundamentals"] .electrode-legend p,
+[data-section-panel="fundamentals"] .subcard-heading p,
+[data-section-panel="fundamentals"] .frequency-result span,
+[data-section-panel="guided"] p,
+[data-section-panel="guided"] small,
+[data-section-panel="guided"] .guided-step-button small,
+[data-section-panel="patterns"] p,
+[data-section-panel="patterns"] small {
+  color: var(--theme-text-muted) !important;
+}
+
+/* Eyebrows e destaques de interface */
+[data-section-panel="fundamentals"] .concept-header > span,
+[data-section-panel="fundamentals"] .card-heading > span,
+[data-section-panel="fundamentals"] .paper-learning-head > div > span,
+[data-section-panel="fundamentals"] .electrode-focus-card > span,
+[data-section-panel="fundamentals"] .axis-card > span,
+[data-section-panel="fundamentals"] .derivation-card > span,
+[data-section-panel="fundamentals"] .einthoven-card > span,
+[data-section-panel="guided"] .guided-main-card > span,
+[data-section-panel="guided"] .guided-context-panel > span,
+[data-section-panel="patterns"] .generic-pattern-copy > span {
+  color: var(--theme-accent-2) !important;
+}
+
+/* Botões / selects / opções */
+[data-section-panel="fundamentals"] button,
+[data-section-panel="fundamentals"] select,
+[data-section-panel="fundamentals"] .electrode-category,
+[data-section-panel="fundamentals"] .electrode-lead-buttons button,
+[data-section-panel="fundamentals"] .axis-lead-buttons button,
+[data-section-panel="guided"] button,
+[data-section-panel="guided"] select,
+[data-section-panel="patterns"] button,
+[data-section-panel="patterns"] select {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface-soft) !important;
+  color: var(--theme-text-soft) !important;
+}
+
+/* Estados ativos — sempre accent do tema atual */
+[data-section-panel="fundamentals"] button.active,
+[data-section-panel="fundamentals"] .electrode-category.active,
+[data-section-panel="fundamentals"] .electrode-lead-buttons button.active,
+[data-section-panel="fundamentals"] .axis-lead-buttons button.active,
+[data-section-panel="guided"] button.active,
+[data-section-panel="patterns"] button.active,
+[data-section-panel="patterns"] .pattern-topic.active {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-gradient-soft) !important;
+  color: var(--theme-text) !important;
+  box-shadow: var(--theme-glow) !important;
+}
+
+/* Botões primários */
+[data-section-panel="guided"] .guided-footer .primary {
+  border-color: transparent !important;
+  background: var(--theme-gradient) !important;
+  color: var(--theme-button-text) !important;
+}
+
+/* Fundamentos — sequência de condução */
+[data-section-panel="fundamentals"] .conduction-node b {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent-2) !important;
+  box-shadow: var(--theme-glow) !important;
+}
+
+[data-section-panel="fundamentals"] .conduction-track i {
+  background:
+    linear-gradient(
+      90deg,
+      var(--theme-accent-soft),
+      var(--theme-accent),
+      var(--theme-accent-soft)
+    ) !important;
+}
+
+[data-section-panel="fundamentals"] .conduction-track i::after {
+  border-left-color: var(--theme-accent) !important;
+}
+
+/* Fundamentos — corpo/eletrodos neutralizados pela paleta global */
+[data-section-panel="fundamentals"] .body-shape {
+  fill:
+    color-mix(
+      in srgb,
+      var(--theme-text-muted) 34%,
+      var(--theme-surface)
+    ) !important;
+  stroke: var(--theme-text-muted) !important;
+}
+
+[data-section-panel="fundamentals"] .body-axis {
+  stroke:
+    color-mix(
+      in srgb,
+      var(--theme-text-muted) 30%,
+      transparent
+    ) !important;
+}
+
+[data-section-panel="fundamentals"] .electrode-dot-svg circle {
+  fill: var(--theme-surface-strong) !important;
+  stroke: var(--theme-text-soft) !important;
+}
+
+[data-section-panel="fundamentals"] .electrode-dot-svg text {
+  fill: var(--theme-text) !important;
+}
+
+[data-section-panel="fundamentals"] .electrode-dot-svg.active circle {
+  fill: var(--theme-accent-soft) !important;
+  stroke: var(--theme-accent) !important;
+}
+
+[data-section-panel="fundamentals"] .electrode-dot-svg.active text {
+  fill: var(--theme-accent-2) !important;
+}
+
+[data-section-panel="fundamentals"] .electrode-focus-card {
+  border-left-color: var(--theme-accent) !important;
+}
+
+/* Setas didáticas da seção 02 seguem o tema, não cores fixas */
+[data-section-panel="fundamentals"] .electrode-vector-line {
+  stroke: var(--theme-accent) !important;
+  filter:
+    drop-shadow(
+      0 0 5px
+      color-mix(in srgb, var(--theme-accent) 48%, transparent)
+    ) !important;
+}
+
+[data-section-panel="fundamentals"] .electrode-arrow-head {
+  fill: var(--theme-accent) !important;
+}
+
+[data-section-panel="fundamentals"] .electrode-vector-plus {
+  fill: var(--theme-accent-2) !important;
+}
+
+/* Cards P / PR / QRS / ST / T */
+[data-section-panel="fundamentals"] .wave-cards article {
+  background: var(--theme-surface) !important;
+}
+
+[data-section-panel="fundamentals"] .wave-cards article > span,
+[data-section-panel="fundamentals"] .paper-metric-grid article > span,
+[data-section-panel="guided"] .guided-step-button > span,
+[data-section-panel="guided"] .guided-context-item > span,
+[data-section-panel="patterns"] .pattern-teaching-grid article > span {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent-2) !important;
+}
+
+/* Papel e medidas — controles/cards */
+[data-section-panel="fundamentals"] .paper-settings > label > strong,
+[data-section-panel="fundamentals"] .frequency-note,
+[data-section-panel="guided"] .guided-info {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface-soft) !important;
+  color: var(--theme-text-soft) !important;
+}
+
+[data-section-panel="fundamentals"] .paper-settings input,
+[data-section-panel="fundamentals"] input[type="range"] {
+  accent-color: var(--theme-accent) !important;
+}
+
+/*
+ * Os canvases didáticos das seções 02–04 mantêm o traçado branco,
+ * mas fundo/grade/anotações são redesenhados pelo JS com a paleta global.
+ */
+[data-section-panel="fundamentals"] canvas,
+[data-section-panel="guided"] canvas,
+[data-section-panel="patterns"] canvas {
+  border-color: var(--theme-border) !important;
+}
+
+/* Leitura guiada */
+[data-section-panel="guided"] .guided-step-button {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+}
+
+[data-section-panel="guided"] .guided-step-button.active {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-gradient-soft) !important;
+}
+
+[data-section-panel="guided"] .guided-dots button {
+  background: var(--theme-border) !important;
+}
+
+[data-section-panel="guided"] .guided-dots button.active {
+  background: var(--theme-accent) !important;
+  box-shadow: var(--theme-glow) !important;
+}
+
+/* Padrões */
+[data-section-panel="patterns"] .pattern-topic {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface) !important;
+  color: var(--theme-text-soft) !important;
+}
+
+[data-section-panel="patterns"] .pattern-topic.active {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-gradient-soft) !important;
+  color: var(--theme-text) !important;
+}
+
+[data-section-panel="patterns"] .pattern-topic-icon path {
+  stroke: var(--theme-text-muted) !important;
+}
+
+[data-section-panel="patterns"] .pattern-topic.active .pattern-topic-icon path {
+  stroke: var(--theme-accent-2) !important;
+}
+
+/* Mantém estados realmente semânticos (normal/alerta) fora do sistema de tema */
+[data-section-panel="patterns"] .status-good {
+  background: #059669 !important;
+  color: #ffffff !important;
+}
+
+[data-section-panel="patterns"] .status-alert {
+  background: #be123c !important;
+  color: #ffffff !important;
+}
