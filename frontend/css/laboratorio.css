@@ -3694,8 +3694,7 @@ input[type="range"] {
 
   html[data-theme]
   body.lab-view
-  .lab-center
-  > .lab-panel:nth-of-type(1) {
+  .gasometry-panel {
     grid-column:
       1 !important;
 
@@ -3706,8 +3705,7 @@ input[type="range"] {
 
   html[data-theme]
   body.lab-view
-  .lab-center
-  > .lab-panel:nth-of-type(2) {
+  .mechanics-panel {
     grid-column:
       2 !important;
 
