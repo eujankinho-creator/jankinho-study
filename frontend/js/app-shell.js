@@ -1007,6 +1007,105 @@
     return text;
   }
 
+  const directHtmlRoutes =
+    new Set([
+      "/simulado",
+      "/questoes",
+      "/flashcards",
+      "/lousa",
+      "/farmacos",
+      "/sigaa",
+      "/casos",
+      "/laboratorio",
+      "/evolucao",
+      "/desempenho",
+      "/ranking",
+      "/financas",
+      "/musica",
+      "/configuracoes",
+    ]);
+
+
+  function directFramePath(
+    value
+  ) {
+
+    const text =
+      String(
+        value ||
+        ""
+      );
+
+
+    if (
+      text === "/"
+    ) {
+
+      return "/index.html";
+    }
+
+
+    const hashIndex =
+      text.indexOf("#");
+
+
+    const withoutHash =
+      hashIndex >= 0
+        ? text.slice(
+            0,
+            hashIndex
+          )
+        : text;
+
+
+    const hash =
+      hashIndex >= 0
+        ? text.slice(
+            hashIndex
+          )
+        : "";
+
+
+    const queryIndex =
+      withoutHash.indexOf("?");
+
+
+    const pathname =
+      queryIndex >= 0
+        ? withoutHash.slice(
+            0,
+            queryIndex
+          )
+        : withoutHash;
+
+
+    const search =
+      queryIndex >= 0
+        ? withoutHash.slice(
+            queryIndex
+          )
+        : "";
+
+
+    if (
+      directHtmlRoutes.has(
+        pathname
+      )
+    ) {
+
+      return (
+        pathname +
+        ".html" +
+        search +
+        hash
+      );
+    }
+
+
+    return text;
+  }
+
+
   function navigateFrameFast(
     href
   ) {
@@ -1023,15 +1122,9 @@
 
 
     let normalized =
-      view;
-
-
-    if (
-      normalized === "/"
-    ) {
-      normalized =
-        "/index.html";
-    }
+      directFramePath(
+        view
+      );
 
 
     try {
@@ -1222,6 +1315,12 @@
         "/index.html";
 
     }
+
+
+    view =
+      directFramePath(
+        view
+      );
 
 
     frame.src =
