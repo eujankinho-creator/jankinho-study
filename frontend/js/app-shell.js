@@ -1871,6 +1871,10 @@
   }
 
 
+  window.CortexShellNavigate =
+    navigateFrameFast;
+
+
   window.addEventListener(
     "message",
     function (

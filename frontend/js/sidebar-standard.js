@@ -1031,18 +1031,54 @@
                 event.preventDefault();
 
 
-                window.parent
-                  .postMessage(
-                    {
-                      type:
-                        "cortex:navigate",
+                try {
 
-                      href:
-                        href,
-                    },
-                    window.location
-                      .origin
-                  );
+                  if (
+                    typeof window.parent
+                      .CortexShellNavigate ===
+                      "function"
+                  ) {
+
+                    window.parent
+                      .CortexShellNavigate(
+                        href
+                      );
+
+                  }
+                  else {
+
+                    window.parent
+                      .postMessage(
+                        {
+                          type:
+                            "cortex:navigate",
+
+                          href:
+                            href,
+                        },
+                        window.location
+                          .origin
+                      );
+
+                  }
+
+                }
+                catch {
+
+                  window.parent
+                    .postMessage(
+                      {
+                        type:
+                          "cortex:navigate",
+
+                        href:
+                          href,
+                      },
+                      window.location
+                        .origin
+                    );
+
+                }
 
               }
 
@@ -1738,6 +1774,19 @@
   }
 
 
+  function prepareNavigationBeforePaint() {
+
+    cleanupLegacyMobileArtifacts();
+
+    applySidebar();
+
+    enhanceFastNavigation();
+
+    notifyShellVisualReady();
+
+  }
+
+
   function init() {
 
     syncMobileVisualViewport();
@@ -1745,8 +1794,6 @@
     resetMobileMenuState();
 
     cleanupLegacyMobileArtifacts();
-
-    applySidebar();
 
     ensureMobileMenu();
 
@@ -1757,7 +1804,7 @@
   }
 
 
-  notifyShellVisualReady();
+  prepareNavigationBeforePaint();
 
 
   if (
