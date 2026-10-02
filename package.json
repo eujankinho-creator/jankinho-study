@@ -23,7 +23,10 @@
     "pg": "^8.23.0",
     "prisma": "^6.19.0",
     "sigaa-api": "github:GeovaneSchmitz/sigaa-api#master",
-    "three": "0.158.0"
+    "three": "0.158.0",
+    "@gltf-transform/core": "^4.2.1",
+    "@gltf-transform/functions": "^4.2.1",
+    "meshoptimizer": "^0.24.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
