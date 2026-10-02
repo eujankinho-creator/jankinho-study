@@ -103,6 +103,9 @@ const state = {
   beatAccumulator:
     0,
 
+  lastAudioBeatCycle:
+    null,
+
   ecgBuffer:
     [],
 
@@ -4867,6 +4870,34 @@ function resetTraceBuffers(
     0;
 
 
+  const rr =
+    60 /
+    Math.max(
+      results.effectiveHR,
+      1
+    );
+
+
+  const qrsCenter =
+    clamp(
+      results.ecg.prMs /
+      1000,
+      .125,
+      rr *
+      .42
+    );
+
+
+  state.lastAudioBeatCycle =
+    Math.floor(
+      (
+        state.ecgClock -
+        qrsCenter
+      ) /
+      rr
+    );
+
+
   state.traceInitialized =
     true;
 
@@ -4933,6 +4964,52 @@ function pushTraceSamples(
         results.ecg
       )
     );
+
+
+    const rr =
+      60 /
+      Math.max(
+        results.effectiveHR,
+        1
+      );
+
+
+    const qrsCenter =
+      clamp(
+        results.ecg.prMs /
+        1000,
+        .125,
+        rr *
+        .42
+      );
+
+
+    const beatCycle =
+      Math.floor(
+        (
+          state.ecgClock -
+          qrsCenter
+        ) /
+        rr
+      );
+
+
+    if (
+      state.lastAudioBeatCycle !==
+        null &&
+      beatCycle !==
+        state.lastAudioBeatCycle
+    ) {
+
+      playHeartbeat(
+        results.spo2
+      );
+
+    }
+
+
+    state.lastAudioBeatCycle =
+      beatCycle;
 
 
     ecgSamples -=
@@ -5465,6 +5542,12 @@ function renderLiveControls() {
   }
 
 
+  document.body.classList.toggle(
+    "lab-live-paused",
+    !state.live
+  );
+
+
   const soundButton =
     $("soundButton");
 
@@ -5821,30 +5904,6 @@ function animationLoop(
     );
 
 
-    state.beatAccumulator +=
-      deltaSeconds *
-      animationModel.results
-        .effectiveHR /
-      60;
-
-
-    if (
-      state.beatAccumulator >=
-      1
-    ) {
-
-      state.beatAccumulator %=
-        1;
-
-
-      playHeartbeat(
-        animationModel.results
-          .spo2
-      );
-
-    }
-
-
     drawECG(
       animationModel
     );
@@ -6073,6 +6132,10 @@ function resetLaboratory() {
 
   state.beatAccumulator =
     0;
+
+
+  state.lastAudioBeatCycle =
+    null;
 
 
   if (
