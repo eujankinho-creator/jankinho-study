@@ -5536,8 +5536,8 @@ function renderLiveControls() {
     $("liveButtonText")
       .textContent =
       state.live
-        ? "Pausar ao vivo"
-        : "Retomar ao vivo";
+        ? "Pausar"
+        : "Retomar";
 
   }
 
@@ -5581,8 +5581,8 @@ function renderLiveControls() {
     $("soundButtonText")
       .textContent =
       state.soundEnabled
-        ? "Som FC ligado"
-        : "Som FC desligado";
+        ? "Som ligado"
+        : "Som desligado";
 
   }
 

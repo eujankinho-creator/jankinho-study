@@ -3991,3 +3991,1040 @@ and (
 
 
 /* CORTEX LAB WORKSTATION V4 END */
+
+
+/* =========================================================
+   CORTEX CLINICAL CONSOLE V5
+   Inspired by compact premium bedside monitors.
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  html[data-theme]
+  body.lab-view
+  .lab-page {
+    grid-template-rows:
+      44px
+      34px
+      minmax(0,1fr) !important;
+
+    gap:
+      7px !important;
+
+    padding:
+      7px 10px 9px !important;
+  }
+
+
+  /*
+   * Duplicated values already exist inside the monitor and
+   * gasometry panels. Hiding this row gives the waveform the
+   * priority at 100% browser zoom.
+   */
+  html[data-theme]
+  body.lab-view
+  .top-metrics {
+    display:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-heading {
+    height:
+      44px !important;
+
+    min-height:
+      44px !important;
+
+    border-radius:
+      12px !important;
+
+    padding:
+      5px 7px 5px 10px !important;
+
+    background:
+      linear-gradient(
+        110deg,
+        color-mix(
+          in srgb,
+          var(--theme-surface-strong) 97%,
+          var(--theme-accent) 3%
+        ),
+        var(--theme-surface)
+      ) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.025),
+      0 10px 28px rgba(0,0,0,.12) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .simulation-status {
+    min-height:
+      24px !important;
+
+    height:
+      24px !important;
+
+    background:
+      rgba(74,222,128,.045) !important;
+
+    border-color:
+      rgba(74,222,128,.12) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-heading h1 {
+    font-size:
+      16px !important;
+
+    font-weight:
+      780 !important;
+
+    color:
+      var(--theme-text) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-button,
+  html[data-theme]
+  body.lab-view
+  .apnea-badge {
+    min-height:
+      28px !important;
+
+    height:
+      28px !important;
+
+    padding:
+      0 9px !important;
+
+    border-radius:
+      8px !important;
+
+    background:
+      rgba(255,255,255,.025) !important;
+
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.025) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .live-control.active {
+    border-color:
+      rgba(74,222,128,.20) !important;
+
+    background:
+      rgba(74,222,128,.055) !important;
+
+    color:
+      #77ef9d !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .sound-control.active {
+    border-color:
+      rgba(var(--theme-accent-rgb),.22) !important;
+
+    background:
+      rgba(var(--theme-accent-rgb),.07) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .physiology-toolbar {
+    height:
+      34px !important;
+
+    min-height:
+      34px !important;
+
+    grid-template-columns:
+      124px minmax(0,1fr) !important;
+
+    border-radius:
+      10px !important;
+
+    padding:
+      3px 5px 3px 8px !important;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(var(--theme-accent-rgb),.025),
+        var(--theme-surface)
+      ) !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .physiology-toolbar-copy
+  .physiology-kicker {
+    display:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .physiology-toolbar-copy strong {
+    color:
+      var(--theme-text-soft) !important;
+
+    font-size:
+      8px !important;
+
+    letter-spacing:
+      .02em !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .physiology-preset {
+    min-height:
+      25px !important;
+
+    height:
+      25px !important;
+
+    border-radius:
+      7px !important;
+
+    border-color:
+      rgba(255,255,255,.045) !important;
+
+    background:
+      rgba(255,255,255,.018) !important;
+
+    font-size:
+      7px !important;
+
+    font-weight:
+      760 !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .physiology-preset:hover {
+    border-color:
+      var(--theme-border-strong) !important;
+
+    background:
+      var(--theme-accent-soft) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .laboratory-grid {
+    grid-template-columns:
+      248px
+      minmax(0,1fr)
+      282px !important;
+
+    gap:
+      7px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .laboratory-grid
+  > aside:first-child
+  > .lab-panel,
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  > .lab-panel {
+    border-radius:
+      14px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .control-tabs {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+
+    padding:
+      6px !important;
+
+    gap:
+      5px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .control-tab {
+    min-height:
+      27px !important;
+
+    height:
+      27px !important;
+
+    border-radius:
+      8px !important;
+
+    border:
+      1px solid
+      rgba(255,255,255,.045) !important;
+
+    background:
+      rgba(255,255,255,.018) !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .control-tab.active {
+    border-color:
+      var(--theme-border-strong) !important;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(var(--theme-accent-rgb),.12),
+        rgba(var(--theme-accent-rgb),.045)
+      ) !important;
+
+    color:
+      var(--theme-accent-2) !important;
+
+    box-shadow:
+      inset 2px 0 0
+      var(--theme-accent) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .control-sliders {
+    gap:
+      6px !important;
+
+    padding:
+      6px !important;
+
+    scrollbar-gutter:
+      stable !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .slider-control {
+    gap:
+      4px !important;
+
+    padding:
+      7px 8px 6px !important;
+
+    border-radius:
+      11px !important;
+
+    border:
+      1px solid
+      rgba(255,255,255,.045) !important;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255,255,255,.026),
+        rgba(255,255,255,.008)
+      ) !important;
+
+    box-shadow:
+      inset 0 1px 0
+      rgba(255,255,255,.018) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .slider-heading {
+    min-height:
+      19px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .slider-heading
+  > span:first-child {
+    color:
+      var(--theme-text-soft) !important;
+
+    font-size:
+      8px !important;
+
+    font-weight:
+      710 !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .slider-number {
+    min-height:
+      19px !important;
+
+    border-radius:
+      6px !important;
+
+    background:
+      rgba(0,0,0,.24) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .slider-control
+  input[type="range"]::-webkit-slider-runnable-track {
+    height:
+      4px !important;
+
+    border:
+      0 !important;
+
+    background:
+      linear-gradient(
+        90deg,
+        var(--theme-accent)
+        0,
+        var(--theme-accent-2)
+        var(--range-progress),
+        rgba(255,255,255,.065)
+        var(--range-progress),
+        rgba(255,255,255,.065)
+        100%
+      ) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .slider-control
+  input[type="range"]::-webkit-slider-thumb {
+    width:
+      14px !important;
+
+    height:
+      14px !important;
+
+    margin-top:
+      -5px !important;
+
+    border:
+      3px solid
+      var(--theme-surface-strong) !important;
+
+    box-shadow:
+      0 0 0 1px
+      rgba(var(--theme-accent-rgb),.24),
+      0 2px 8px rgba(0,0,0,.38) !important;
+  }
+
+
+  /*
+   * Center behaves like one clinical console:
+   * full-width ECG, compact PLETH, then two small data trays.
+   */
+  html[data-theme]
+  body.lab-view
+  .lab-center {
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,1fr) !important;
+
+    grid-template-rows:
+      minmax(0,1fr)
+      112px !important;
+
+    gap:
+      7px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-grid {
+    position:
+      relative !important;
+
+    grid-template-columns:
+      1fr !important;
+
+    grid-template-rows:
+      minmax(250px,1.55fr)
+      minmax(145px,.78fr) !important;
+
+    gap:
+      6px !important;
+
+    padding:
+      22px 6px 6px !important;
+
+    border:
+      1px solid
+      var(--theme-border) !important;
+
+    border-radius:
+      16px !important;
+
+    background:
+      linear-gradient(
+        180deg,
+        #080a0b,
+        #030405
+      ) !important;
+
+    box-shadow:
+      inset 0 1px 0
+      rgba(255,255,255,.018),
+      0 20px 55px
+      rgba(0,0,0,.22) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-grid::before {
+    content:
+      "MONITOR MULTIPARAMÉTRICO  ·  ECG II / PLETH";
+
+    position:
+      absolute;
+
+    top:
+      7px;
+
+    left:
+      10px;
+
+    z-index:
+      4;
+
+    color:
+      #596068;
+
+    font-size:
+      6px;
+
+    font-weight:
+      850;
+
+    letter-spacing:
+      .13em;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-panel {
+    height:
+      100% !important;
+
+    min-height:
+      0 !important;
+
+    border:
+      1px solid
+      rgba(255,255,255,.035) !important;
+
+    border-radius:
+      11px !important;
+
+    background:
+      #020303 !important;
+
+    box-shadow:
+      inset 0 0 0 1px
+      rgba(255,255,255,.008) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-grid
+  .monitor-panel:first-child {
+    grid-template-rows:
+      34px
+      minmax(175px,1fr)
+      38px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-grid
+  .monitor-panel:last-child {
+    grid-template-rows:
+      31px
+      minmax(90px,1fr)
+      34px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-header {
+    height:
+      auto !important;
+
+    min-height:
+      0 !important;
+
+    padding:
+      4px 8px !important;
+
+    border-bottom:
+      1px solid
+      rgba(255,255,255,.035) !important;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,.018),
+        rgba(255,255,255,.004)
+      ) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-header
+  > div:first-child
+  > strong {
+    font-size:
+      9px !important;
+
+    letter-spacing:
+      .08em !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-header
+  > div:first-child
+  > span {
+    color:
+      #525960 !important;
+
+    font-size:
+      6px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-number strong {
+    font-size:
+      27px !important;
+
+    font-weight:
+      760 !important;
+
+    font-variant-numeric:
+      tabular-nums !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .ecg-screen,
+  html[data-theme]
+  body.lab-view
+  .spo-screen {
+    min-height:
+      0 !important;
+
+    border:
+      0 !important;
+
+    background:
+      #010202 !important;
+
+    box-shadow:
+      inset 0 0 42px
+      rgba(0,0,0,.58) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .ecg-results,
+  html[data-theme]
+  body.lab-view
+  .monitor-results {
+    height:
+      auto !important;
+
+    min-height:
+      0 !important;
+
+    border-top:
+      1px solid
+      rgba(255,255,255,.03) !important;
+
+    background:
+      #030404 !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-result {
+    padding:
+      4px 6px !important;
+
+    background:
+      transparent !important;
+
+    border-right-color:
+      rgba(255,255,255,.025) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-result span {
+    color:
+      #4d545a !important;
+
+    font-size:
+      6px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-result strong {
+    color:
+      #afb8bf !important;
+
+    font-size:
+      7px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-label {
+    color:
+      rgba(174,184,190,.42) !important;
+
+    letter-spacing:
+      .05em !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-science-badge {
+    border-color:
+      rgba(72,232,121,.11) !important;
+
+    background:
+      rgba(72,232,121,.035) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .blue-badge {
+    border-color:
+      rgba(56,168,255,.11) !important;
+
+    background:
+      rgba(56,168,255,.035) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gasometry-panel,
+  html[data-theme]
+  body.lab-view
+  .mechanics-panel {
+    height:
+      112px !important;
+
+    border-radius:
+      12px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gasometry-panel
+  .panel-header,
+  html[data-theme]
+  body.lab-view
+  .mechanics-panel
+  .panel-header {
+    height:
+      29px !important;
+
+    min-height:
+      29px !important;
+
+    padding:
+      5px 8px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gasometry-panel
+  .panel-header p,
+  html[data-theme]
+  body.lab-view
+  .mechanics-panel
+  .panel-header p {
+    display:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gas-card {
+    padding:
+      4px 6px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gas-card strong {
+    font-size:
+      14px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gasometry-footer {
+    min-height:
+      25px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .mechanics-card {
+    padding:
+      5px 6px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .mechanics-card strong {
+    font-size:
+      14px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right {
+    grid-template-rows:
+      58px
+      minmax(0,1fr) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-panel-tabs {
+    border:
+      1px solid
+      var(--theme-border);
+
+    border-radius:
+      12px;
+
+    background:
+      rgba(255,255,255,.01);
+
+    padding:
+      4px;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-panel-tab {
+    min-height:
+      23px !important;
+
+    border-radius:
+      7px !important;
+
+    border-color:
+      transparent !important;
+
+    background:
+      transparent !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-panel-tab.active {
+    border-color:
+      var(--theme-border-strong) !important;
+
+    background:
+      var(--theme-accent-soft) !important;
+
+    color:
+      var(--theme-accent-2) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  > .lab-panel[data-lab-panel] {
+    border-radius:
+      13px !important;
+
+    box-shadow:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  .panel-header {
+    min-height:
+      36px !important;
+
+    padding:
+      7px 9px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  .panel-header h2 {
+    font-size:
+      10px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  .panel-header p {
+    font-size:
+      6px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  .panel-content {
+    padding:
+      6px 9px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .result-row {
+    min-height:
+      26px !important;
+
+    padding:
+      4px 0 !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .result-row span {
+    color:
+      var(--theme-text-muted) !important;
+
+    font-size:
+      7px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .result-row strong {
+    font-size:
+      8px !important;
+
+    font-variant-numeric:
+      tabular-nums !important;
+  }
+
+}
+
+
+/*
+ * On 1200–1450 px we keep the same clinical composition;
+ * the side rails shrink before waveform width is sacrificed.
+ */
+@media (
+  min-width: 1200px
+)
+and (
+  max-width: 1450px
+) {
+
+  html[data-theme]
+  body.lab-view
+  .laboratory-grid {
+    grid-template-columns:
+      226px
+      minmax(0,1fr)
+      238px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-grid {
+    grid-template-rows:
+      minmax(225px,1.5fr)
+      minmax(125px,.72fr) !important;
+  }
+
+}
+
+
+/* CORTEX CLINICAL CONSOLE V5 END */
