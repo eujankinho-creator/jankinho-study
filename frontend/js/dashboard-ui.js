@@ -309,15 +309,13 @@
 
     function pageHasFocus() {
 
+      /*
+       * O Dashboard roda dentro do iframe do /app.
+       * O documento interno pode nao receber foco direto
+       * mesmo com a aba do Cortex ativa. Por isso a fonte
+       * de verdade e a janela principal.
+       */
       try {
-
-        if (
-          !document.hasFocus()
-        ) {
-
-          return false;
-        }
-
 
         if (
           window.top &&
@@ -331,7 +329,7 @@
         }
 
 
-        return true;
+        return document.hasFocus();
 
       }
       catch {
@@ -589,7 +587,7 @@
       focusTimer =
         window.setTimeout(
           resumeIntro,
-          320
+          500
         );
 
     }
