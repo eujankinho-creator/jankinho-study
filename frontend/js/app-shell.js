@@ -1247,21 +1247,6 @@
 
         }
 
-
-        frameDocument
-          .querySelectorAll(
-            "#mobileOverlay,.mobile-overlay,.mobile-menu-button,.analysis-mobile-button,.analysis-mobile-overlay,.clinical-mobile-menu,.clinical-mobile-overlay,.settings-mobile-button,.settings-mobile-overlay,.finance-mobile-button,.finance-mobile-overlay,.flashcards-mobile-button,.flashcards-mobile-overlay,.questions-mobile-menu,.questions-mobile-overlay"
-          )
-          .forEach(
-            function (
-              element
-            ) {
-
-              element.remove();
-
-            }
-          );
-
       }
 
     }
@@ -1917,56 +1902,6 @@
         window.CortexShellNavigationReady(
           event.source,
           data.href
-        );
-
-
-        return;
-      }
-
-
-      if (
-        data.type ===
-          "cortex:page-ready"
-      ) {
-
-        if (
-          event.source !==
-            standbyFrame.contentWindow ||
-          !pendingTarget
-        ) {
-
-          return;
-        }
-
-
-        const readyHref =
-          normalizedTarget(
-            data.href ||
-            ""
-          );
-
-
-        const targetHref =
-          normalizedTarget(
-            pendingTarget
-          );
-
-
-        if (
-          readyHref !==
-            targetHref &&
-          !sameFrameTarget(
-            standbyFrame,
-            pendingTarget
-          )
-        ) {
-
-          return;
-        }
-
-
-        swapFrames(
-          standbyFrame
         );
 
 
