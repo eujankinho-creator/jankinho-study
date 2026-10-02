@@ -58,7 +58,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/laboratorio.css?v=20261002-systemic3"
+    href="/css/laboratorio.css?v=20261002-anatomy1"
   >
 
   <script
@@ -573,7 +573,7 @@
                 </span>
 
                 <strong>
-                  Cardiorrenal, pulmonar e metabólico
+                  Sistema cardiorrenal integrado
                 </strong>
               </div>
 
@@ -592,7 +592,7 @@
                   type="button"
                   aria-expanded="false"
                 >
-                  Abrir néfron
+                  Ampliar néfron
                 </button>
 
               </div>
@@ -600,196 +600,243 @@
             </div>
 
 
-            <div class="integrated-stage">
+            <div class="integrated-stage cardiorenal-stage">
+
+              <div class="system-legend system-legend-top">
+
+                <span class="legend-item arterial">sangue arterial</span>
+                <span class="legend-item venous">sangue venoso</span>
+                <span class="legend-item renal">filtrado</span>
+                <span class="legend-item urine">urina</span>
+
+              </div>
+
+
+              <div class="collection-column">
+
+                <div class="collection-readout">
+                  <span>COLETADO</span>
+                  <strong id="collectionVolume">0 mL</strong>
+                  <small id="collectionState">SIMULAÇÃO</small>
+                </div>
+
+                <div class="collection-cylinder">
+
+                  <div
+                    id="collectionFill"
+                    class="collection-fill"
+                  ></div>
+
+                  <div class="collection-scale">
+                    <span>500</span>
+                    <span>400</span>
+                    <span>300</span>
+                    <span>200</span>
+                    <span>100</span>
+                  </div>
+
+                </div>
+
+                <small>
+                  fluxo urinário relativo
+                </small>
+
+              </div>
+
 
               <svg
-                class="integrated-body-svg"
-                viewBox="0 0 900 520"
+                class="integrated-body-svg cardiorenal-svg"
+                viewBox="0 0 1080 620"
                 role="img"
-                aria-label="Esquema fisiológico integrado de coração, pulmões e rim"
+                aria-label="Modelo fisiológico cardiorrenal com coração, vasos, rim, ureter e bexiga"
               >
 
                 <defs>
 
                   <linearGradient id="arterialGradient" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#ff587b"/>
-                    <stop offset="100%" stop-color="#ff8ca3"/>
+                    <stop offset="0%" stop-color="#e95070"/>
+                    <stop offset="52%" stop-color="#ff6f8b"/>
+                    <stop offset="100%" stop-color="#ff9aae"/>
                   </linearGradient>
 
                   <linearGradient id="venousGradient" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#7d76d8"/>
-                    <stop offset="100%" stop-color="#aba6ff"/>
+                    <stop offset="0%" stop-color="#6862c7"/>
+                    <stop offset="55%" stop-color="#8e88e0"/>
+                    <stop offset="100%" stop-color="#b0abff"/>
                   </linearGradient>
 
-                  <linearGradient id="renalGradient" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#f2bd54"/>
-                    <stop offset="100%" stop-color="#ffd985"/>
+                  <linearGradient id="filtrateGradient" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#f2cf6b"/>
+                    <stop offset="100%" stop-color="#fff0ad"/>
                   </linearGradient>
 
-                  <filter id="organGlow">
-                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                  <linearGradient id="urineGradient" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#d89a2e"/>
+                    <stop offset="100%" stop-color="#f7c456"/>
+                  </linearGradient>
+
+                  <radialGradient id="heartBodyGradient" cx=".35" cy=".28" r=".9">
+                    <stop offset="0%" stop-color="#ff9a94"/>
+                    <stop offset="45%" stop-color="#d9555b"/>
+                    <stop offset="100%" stop-color="#7f1f32"/>
+                  </radialGradient>
+
+                  <radialGradient id="kidneyBodyGradient" cx=".32" cy=".35" r=".9">
+                    <stop offset="0%" stop-color="#ffb07d"/>
+                    <stop offset="48%" stop-color="#d75f48"/>
+                    <stop offset="100%" stop-color="#7f2c29"/>
+                  </radialGradient>
+
+                  <filter id="softOrganGlow">
+                    <feGaussianBlur stdDeviation="5" result="blur"/>
                     <feMerge>
                       <feMergeNode in="blur"/>
                       <feMergeNode in="SourceGraphic"/>
                     </feMerge>
                   </filter>
 
+                  <filter id="labelGlow">
+                    <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity=".55"/>
+                  </filter>
+
                 </defs>
 
 
                 <path
-                  class="body-silhouette"
-                  d="M450 22 C410 22 390 50 395 85 C370 96 340 116 323 151 C295 208 300 302 321 390 C334 445 363 493 403 505 L497 505 C537 493 566 445 579 390 C600 302 605 208 577 151 C560 116 530 96 505 85 C510 50 490 22 450 22Z"
+                  class="body-silhouette body-silhouette-detailed"
+                  d="M542 0 C507 1 490 24 494 57 C473 67 447 79 425 96 C393 122 377 162 371 211 C362 278 361 356 374 432 C383 486 393 545 419 602 L465 602 C478 548 488 500 495 448 L589 448 C596 500 606 548 619 602 L665 602 C691 545 701 486 710 432 C723 356 722 278 713 211 C707 162 691 122 659 96 C637 79 611 67 590 57 C594 24 577 1 542 0Z"
                 />
 
 
-                <path
-                  class="flow-path venous-flow"
-                  d="M444 254 C405 250 364 230 340 202 C320 178 326 148 355 132"
-                />
+                <g class="major-vessels">
 
-                <path
-                  class="flow-path pulmonary-flow"
-                  d="M448 236 C412 217 383 186 370 155"
-                />
-
-                <path
-                  class="flow-path pulmonary-flow"
-                  d="M452 236 C488 217 517 186 530 155"
-                />
-
-                <path
-                  class="flow-path arterial-flow"
-                  d="M456 252 C508 264 548 297 573 344 C586 370 591 404 579 447"
-                />
-
-                <path
-                  class="flow-path arterial-flow"
-                  d="M456 252 C500 276 514 309 517 354"
-                />
-
-                <path
-                  class="flow-path venous-flow"
-                  d="M520 401 C488 386 465 350 449 289"
-                />
-
-
-                <g id="systemLungGroup" class="organ-group lung-group">
-
-                  <path
-                    class="organ lung left-lung"
-                    d="M430 120 C390 112 354 137 342 182 C329 229 348 266 390 270 C415 272 428 253 432 219 Z"
-                  />
-
-                  <path
-                    class="organ lung right-lung"
-                    d="M470 120 C510 112 546 137 558 182 C571 229 552 266 510 270 C485 272 472 253 468 219 Z"
-                  />
-
-                  <path
-                    class="airway"
-                    d="M450 92 L450 154 M450 145 L410 179 M450 145 L490 179"
-                  />
+                  <path class="vessel venous-vessel vena-cava" d="M510 183 C480 225 474 282 476 346 C478 407 496 444 516 470"/>
+                  <path class="vessel arterial-vessel aorta-main" d="M561 170 C586 208 586 253 580 299 C574 344 573 387 596 421"/>
+                  <path class="vessel arterial-vessel renal-artery-main" d="M580 320 C625 322 667 329 710 347"/>
+                  <path class="vessel venous-vessel renal-vein-main" d="M476 346 C550 352 630 354 704 360"/>
+                  <path class="vessel arterial-vessel afferent-vessel" d="M710 347 C742 350 761 356 779 365"/>
+                  <path class="vessel venous-vessel efferent-vessel" d="M783 384 C757 393 733 391 704 360"/>
 
                 </g>
 
 
-                <g id="systemHeartGroup" class="organ-group heart-group">
+                <g
+                  id="systemHeartGroup"
+                  class="organ-group detailed-heart-group"
+                >
+
+                  <path class="heart-aorta" d="M542 128 C545 95 554 81 576 77 C599 73 613 91 611 109 C609 126 597 135 583 140"/>
+                  <path class="heart-pulmonary" d="M530 145 C506 130 492 118 484 101"/>
+                  <path class="heart-vena" d="M521 138 C518 111 517 95 518 75"/>
 
                   <path
-                    class="organ heart"
-                    d="M450 220 C425 195 383 210 390 248 C396 280 430 299 450 316 C470 299 504 280 510 248 C517 210 475 195 450 220Z"
+                    class="organ anatomical-heart"
+                    d="M536 135 C510 118 480 130 475 161 C470 190 488 214 511 232 C526 244 538 258 544 278 C557 258 576 243 594 226 C615 207 630 183 624 155 C618 128 589 116 565 132 C554 140 547 148 542 157 C541 149 539 141 536 135Z"
                   />
+
+                  <path class="heart-septum" d="M545 154 C544 184 548 217 544 259"/>
+                  <path class="heart-coronary" d="M565 149 C586 160 595 181 588 204 C583 219 570 230 557 240"/>
+                  <path class="heart-coronary secondary" d="M520 151 C504 168 505 192 518 210 C526 222 535 229 541 236"/>
 
                 </g>
 
 
-                <g id="systemKidneyGroup" class="organ-group kidney-group">
+                <g
+                  id="systemKidneyGroup"
+                  class="organ-group detailed-kidney-group"
+                >
 
                   <path
-                    class="organ kidney"
-                    d="M536 338 C566 323 595 343 596 376 C597 411 574 437 544 431 C520 426 515 402 525 383 C535 365 516 348 536 338Z"
+                    class="organ anatomical-kidney"
+                    d="M774 289 C823 275 871 302 886 347 C901 392 881 446 841 468 C811 485 771 475 756 446 C744 424 751 402 767 387 C777 377 779 365 765 356 C746 344 748 312 774 289Z"
                   />
 
                   <path
-                    class="renal-ureter"
-                    d="M558 427 C555 451 548 471 540 492"
+                    class="kidney-cortex-line"
+                    d="M787 306 C823 295 856 315 866 349 C876 383 862 423 834 441 C813 454 785 447 775 426 C767 410 774 394 786 382 C799 369 800 355 788 345 C776 335 776 319 787 306Z"
+                  />
+
+                  <path
+                    class="renal-pelvis"
+                    d="M799 365 C820 349 847 351 860 370 C845 377 832 388 823 402 C812 393 803 381 799 365Z"
+                  />
+
+                  <path class="renal-pyramid p1" d="M807 316 L828 350 L797 348Z"/>
+                  <path class="renal-pyramid p2" d="M842 319 L848 356 L820 347Z"/>
+                  <path class="renal-pyramid p3" d="M863 348 L850 382 L830 359Z"/>
+                  <path class="renal-pyramid p4" d="M856 401 L830 415 L829 381Z"/>
+
+                  <circle class="glomerulus-dot" cx="804" cy="367" r="8"/>
+
+                  <path
+                    class="filtrate-path"
+                    d="M804 367 C818 380 825 397 823 419 C821 441 810 454 798 468"
+                  />
+
+                  <path
+                    class="urine-path"
+                    d="M798 468 C792 498 786 526 780 551"
                   />
 
                 </g>
 
 
-                <g class="system-label label-heart">
+                <g class="bladder-group">
 
-                  <rect x="282" y="282" width="142" height="48" rx="9"/>
-                  <text x="294" y="299" class="label-title">CORAÇÃO</text>
-                  <text id="systemFC" x="294" y="319" class="label-value">72 bpm</text>
+                  <path
+                    class="bladder-organ"
+                    d="M739 543 C760 527 794 527 815 543 C825 551 826 567 816 577 C795 596 759 596 738 577 C728 567 729 551 739 543Z"
+                  />
 
-                </g>
-
-
-                <g class="system-label label-lung">
-
-                  <rect x="570" y="144" width="150" height="48" rx="9"/>
-                  <text x="582" y="161" class="label-title">PULMÕES</text>
-                  <text id="systemSpO2" x="582" y="181" class="label-value">SpO₂ 97%</text>
+                  <path class="bladder-neck" d="M777 584 L777 600"/>
 
                 </g>
 
 
-                <g class="system-label label-map">
+                <g class="leader"><path d="M487 171 L405 145 L342 145"/><circle cx="487" cy="171" r="4"/></g>
+                <g class="leader"><path d="M479 299 L385 299 L329 299"/><circle cx="479" cy="299" r="4"/></g>
+                <g class="leader"><path d="M583 271 L651 271 L700 271"/><circle cx="583" cy="271" r="4"/></g>
+                <g class="leader"><path d="M672 337 L613 322 L547 322"/><circle cx="672" cy="337" r="4"/></g>
+                <g class="leader"><path d="M672 359 L599 377 L530 377"/><circle cx="672" cy="359" r="4"/></g>
+                <g class="leader"><path d="M783 365 L688 395 L600 395"/><circle cx="783" cy="365" r="4"/></g>
+                <g class="leader"><path d="M789 384 L876 384 L933 384"/><circle cx="789" cy="384" r="4"/></g>
+                <g class="leader"><path d="M861 330 L933 330 L963 330"/><circle cx="861" cy="330" r="4"/></g>
+                <g class="leader"><path d="M812 417 L900 430 L960 430"/><circle cx="812" cy="417" r="4"/></g>
+                <g class="leader"><path d="M801 458 L892 462 L960 462"/><circle cx="801" cy="458" r="4"/></g>
+                <g class="leader"><path d="M790 512 L879 520 L930 520"/><circle cx="790" cy="512" r="4"/></g>
+                <g class="leader"><path d="M814 558 L884 575 L936 575"/><circle cx="814" cy="558" r="4"/></g>
 
-                  <rect x="574" y="265" width="150" height="48" rx="9"/>
-                  <text x="586" y="282" class="label-title">PRESSÃO</text>
-                  <text id="systemMAP" x="586" y="302" class="label-value">PAM 93 mmHg</text>
 
+                <g class="anatomy-label"><rect x="260" y="126" width="86" height="34" rx="7"/><text x="274" y="148">Coração</text></g>
+                <g class="anatomy-label"><rect x="245" y="282" width="91" height="34" rx="7"/><text x="258" y="304">Veia cava</text></g>
+                <g class="anatomy-label"><rect x="699" y="254" width="72" height="34" rx="7"/><text x="714" y="276">Aorta</text></g>
+                <g class="anatomy-label"><rect x="452" y="304" width="103" height="34" rx="7"/><text x="464" y="326">Artéria renal</text></g>
+                <g class="anatomy-label"><rect x="438" y="360" width="96" height="34" rx="7"/><text x="451" y="382">Veia renal</text></g>
+                <g class="anatomy-label"><rect x="470" y="378" width="132" height="34" rx="7"/><text x="482" y="400">Arteríola aferente</text></g>
+                <g class="anatomy-label"><rect x="930" y="367" width="135" height="34" rx="7"/><text x="942" y="389">Arteríola eferente</text></g>
+                <g class="anatomy-label"><rect x="952" y="313" width="66" height="34" rx="7"/><text x="965" y="335">Rim</text></g>
+                <g class="anatomy-label"><rect x="948" y="413" width="104" height="34" rx="7"/><text x="960" y="435">Alça de Henle</text></g>
+                <g class="anatomy-label"><rect x="946" y="445" width="112" height="34" rx="7"/><text x="958" y="467">Ducto coletor</text></g>
+                <g class="anatomy-label"><rect x="921" y="503" width="74" height="34" rx="7"/><text x="935" y="525">Ureter</text></g>
+                <g class="anatomy-label"><rect x="925" y="558" width="78" height="34" rx="7"/><text x="938" y="580">Bexiga</text></g>
+
+
+                <g class="callout callout-filter">
+                  <rect x="868" y="280" width="183" height="34" rx="7"/>
+                  <text id="systemFiltrationCallout" x="881" y="302">≈ 20% do plasma filtrado</text>
                 </g>
 
-
-                <g class="system-label label-kidney">
-
-                  <rect x="605" y="365" width="174" height="52" rx="9"/>
-                  <text x="617" y="382" class="label-title">RIM</text>
-                  <text id="systemRenal" x="617" y="402" class="label-value">Reserva 100%</text>
-
+                <g class="callout callout-reabsorption">
+                  <rect x="450" y="430" width="231" height="34" rx="7"/>
+                  <text id="systemReabsorptionCallout" x="463" y="452">≈ 99% reabsorvido → sangue</text>
                 </g>
 
-
-                <g class="system-label label-gas">
-
-                  <rect x="258" y="417" width="245" height="54" rx="9"/>
-                  <text x="270" y="435" class="label-title">GASOMETRIA</text>
-                  <text id="systemGas" x="270" y="456" class="label-value">PaCO₂ 40 · HCO₃⁻ 24 · pH 7.40</text>
-
-                </g>
-
-
-                <g class="system-label label-flow">
-
-                  <rect x="122" y="195" width="175" height="52" rx="9"/>
-                  <text x="134" y="212" class="label-title">DÉBITO CARDÍACO</text>
-                  <text id="systemCO" x="134" y="233" class="label-value">5.6 L/min</text>
-
+                <g class="callout callout-urine">
+                  <rect x="851" y="486" width="192" height="38" rx="7"/>
+                  <text id="systemUrineCallout" x="865" y="511">URINA 1,0 mL/min</text>
                 </g>
 
               </svg>
-
-
-              <div class="integrated-legend">
-
-                <span class="legend-item arterial">
-                  arterial
-                </span>
-
-                <span class="legend-item venous">
-                  venoso
-                </span>
-
-                <span class="legend-item renal">
-                  renal / filtrado
-                </span>
-
-              </div>
 
 
               <div
@@ -801,13 +848,8 @@
                 <div class="nephron-head">
 
                   <div>
-                    <span class="physiology-kicker">
-                      NÉFRON
-                    </span>
-
-                    <strong>
-                      Hemodinâmica renal
-                    </strong>
+                    <span class="physiology-kicker">NÉFRON</span>
+                    <strong>Hemodinâmica glomerular</strong>
                   </div>
 
                   <button
@@ -821,29 +863,37 @@
                 </div>
 
                 <div class="nephron-track">
-
                   <span class="nephron-vessel afferent"></span>
                   <span class="nephron-glomerulus"></span>
                   <span class="nephron-vessel efferent"></span>
                   <span class="nephron-tubule"></span>
-
                 </div>
 
                 <div class="nephron-metrics">
 
                   <div>
-                    <span>Perfusão renal</span>
-                    <strong id="nephronPerfusion">100%</strong>
+                    <span>Fluxo renal</span>
+                    <strong id="nephronRBF">1.200 mL/min</strong>
                   </div>
 
                   <div>
-                    <span>Filtração relativa</span>
-                    <strong id="nephronFiltration">100%</strong>
+                    <span>TFG estimada</span>
+                    <strong id="nephronGFR">125 mL/min</strong>
+                  </div>
+
+                  <div>
+                    <span>Fração filtração</span>
+                    <strong id="nephronFF">20%</strong>
                   </div>
 
                   <div>
                     <span>Urina estimada</span>
                     <strong id="nephronUrine">1,0 mL/min</strong>
+                  </div>
+
+                  <div>
+                    <span>Perfusão renal</span>
+                    <strong id="nephronPerfusion">100%</strong>
                   </div>
 
                   <div>
@@ -854,7 +904,7 @@
                 </div>
 
                 <small>
-                  Índices didáticos relativos ao estado basal; não equivalem a eGFR ou medida clínica de TFG.
+                  Valores renais são estimativas didáticas normalizadas ao estado basal e não substituem TFG/eGFR clínicos.
                 </small>
 
               </div>
@@ -862,41 +912,48 @@
             </div>
 
 
-            <div class="integrated-bottom-strip">
+            <div class="integrated-bottom-strip cardiorenal-metrics">
 
               <div>
-                <span>FC</span>
-                <strong id="integratedFC">72 bpm</strong>
+                <span>Débito cardíaco</span>
+                <strong id="integratedCO">5,5 L/min</strong>
+                <small>sangue bombeado</small>
               </div>
 
               <div>
-                <span>PAM</span>
-                <strong id="integratedMAP">93 mmHg</strong>
+                <span>Pressão art. média</span>
+                <strong id="integratedMAP">90 mmHg</strong>
+                <small>pressão de perfusão</small>
               </div>
 
               <div>
-                <span>SpO₂</span>
-                <strong id="integratedSpO2">97%</strong>
+                <span>Fluxo sanguíneo renal</span>
+                <strong id="integratedRBF">1.200 mL/min</strong>
+                <small>estimativa relativa</small>
               </div>
 
               <div>
-                <span>PaCO₂</span>
-                <strong id="integratedPaCO2">40 mmHg</strong>
+                <span>TFG estimada</span>
+                <strong id="integratedGFR">125 mL/min</strong>
+                <small>filtrado por minuto</small>
               </div>
 
               <div>
-                <span>HCO₃⁻</span>
-                <strong id="integratedHCO3">24,0 mEq/L</strong>
+                <span>Fração de filtração</span>
+                <strong id="integratedFF">20%</strong>
+                <small>plasma filtrado</small>
               </div>
 
               <div>
-                <span>Na⁺ / K⁺</span>
-                <strong id="integratedElectrolytes">140 / 4,2</strong>
-              </div>
-
-              <div>
-                <span>Urina</span>
+                <span>Débito urinário</span>
                 <strong id="integratedUrine">1,0 mL/min</strong>
+                <small>urina estimada</small>
+              </div>
+
+              <div>
+                <span>Reserva renal</span>
+                <strong id="integratedRenalReserve">100%</strong>
+                <small>índice didático</small>
               </div>
 
             </div>
@@ -1259,7 +1316,7 @@
     })();
   </script>
 
-<script defer src="/js/laboratorio.js?v=20261002-systemic3"></script>
+<script defer src="/js/laboratorio.js?v=20261002-anatomy1"></script>
 
 
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
