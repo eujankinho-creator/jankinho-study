@@ -6338,3 +6338,1227 @@ and (
 
 
 /* CORTEX INTEGRATED BODY V6 END */
+
+
+/* =========================================================
+   CORTEX CARDIORENAL ANATOMY V7
+   Original redraw inspired by clinical physiology simulators.
+========================================================= */
+
+.lab-view .cardiorenal-stage {
+  position:
+    relative;
+
+  min-height:
+    0;
+
+  overflow:
+    hidden;
+
+  background:
+    radial-gradient(
+      circle at 62% 34%,
+      rgba(132,145,158,.045),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      #0b0f13,
+      #080b0f
+    );
+}
+
+
+.lab-view .cardiorenal-svg {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  min-height:
+    410px;
+
+  padding:
+    0 6px 0 42px;
+}
+
+
+.lab-view .body-silhouette-detailed {
+  fill:
+    rgba(255,255,255,.006);
+
+  stroke:
+    rgba(132,145,156,.33);
+
+  stroke-width:
+    3;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  filter:
+    drop-shadow(
+      0 0 10px
+      rgba(0,0,0,.30)
+    );
+}
+
+
+.lab-view .major-vessels .vessel {
+  fill:
+    none;
+
+  stroke-width:
+    12;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+
+  stroke-dasharray:
+    15 9;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  animation:
+    cortexCardioFlow
+    var(--flow-duration)
+    linear infinite;
+}
+
+
+.lab-view .major-vessels
+.arterial-vessel {
+  stroke:
+    url(#arterialGradient);
+
+  filter:
+    drop-shadow(
+      0 0 4px
+      rgba(241,95,122,.22)
+    );
+}
+
+
+.lab-view .major-vessels
+.venous-vessel {
+  stroke:
+    url(#venousGradient);
+
+  animation-direction:
+    reverse;
+
+  filter:
+    drop-shadow(
+      0 0 4px
+      rgba(147,140,227,.20)
+    );
+}
+
+
+.lab-view.lab-live-paused
+.major-vessels
+.vessel {
+  animation-play-state:
+    paused;
+}
+
+
+@keyframes cortexCardioFlow {
+
+  to {
+    stroke-dashoffset:
+      -96;
+  }
+
+}
+
+
+.lab-view .detailed-heart-group {
+  transform-origin:
+    542px 194px;
+
+  filter:
+    drop-shadow(
+      0 12px 18px
+      rgba(0,0,0,.40)
+    );
+}
+
+
+.lab-view .anatomical-heart {
+  fill:
+    url(#heartBodyGradient);
+
+  stroke:
+    #ff8d91;
+
+  stroke-width:
+    2.4;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  filter:
+    url(#softOrganGlow);
+}
+
+
+.lab-view .heart-aorta {
+  fill:
+    none;
+
+  stroke:
+    #e95964;
+
+  stroke-width:
+    16;
+
+  stroke-linecap:
+    round;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .heart-pulmonary {
+  fill:
+    none;
+
+  stroke:
+    #7d83d9;
+
+  stroke-width:
+    12;
+
+  stroke-linecap:
+    round;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .heart-vena {
+  fill:
+    none;
+
+  stroke:
+    #625fc2;
+
+  stroke-width:
+    11;
+
+  stroke-linecap:
+    round;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .heart-septum {
+  fill:
+    none;
+
+  stroke:
+    rgba(255,211,198,.42);
+
+  stroke-width:
+    2.4;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .heart-coronary {
+  fill:
+    none;
+
+  stroke:
+    rgba(255,224,208,.68);
+
+  stroke-width:
+    2;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .heart-coronary.secondary {
+  opacity:
+    .60;
+}
+
+
+.lab-view .detailed-kidney-group {
+  filter:
+    drop-shadow(
+      0 14px 21px
+      rgba(0,0,0,.42)
+    );
+}
+
+
+.lab-view .anatomical-kidney {
+  fill:
+    url(#kidneyBodyGradient);
+
+  stroke:
+    #f39872;
+
+  stroke-width:
+    2.4;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  filter:
+    url(#softOrganGlow);
+}
+
+
+.lab-view .kidney-cortex-line {
+  fill:
+    rgba(255,190,132,.08);
+
+  stroke:
+    rgba(255,200,154,.42);
+
+  stroke-width:
+    2;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .renal-pelvis {
+  fill:
+    rgba(248,206,116,.70);
+
+  stroke:
+    rgba(255,229,154,.78);
+
+  stroke-width:
+    1.5;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .renal-pyramid {
+  fill:
+    rgba(255,193,139,.36);
+
+  stroke:
+    rgba(255,213,172,.40);
+
+  stroke-width:
+    1.2;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .glomerulus-dot {
+  fill:
+    #f4cf69;
+
+  stroke:
+    #fff0a6;
+
+  stroke-width:
+    2;
+
+  filter:
+    drop-shadow(
+      0 0 6px
+      rgba(242,207,107,.50)
+    );
+}
+
+
+.lab-view .filtrate-path {
+  fill:
+    none;
+
+  stroke:
+    url(#filtrateGradient);
+
+  stroke-width:
+    6;
+
+  stroke-linecap:
+    round;
+
+  stroke-dasharray:
+    6 7;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  animation:
+    cortexFiltrateFlow
+    calc(
+      var(--flow-duration) * 1.15
+    )
+    linear
+    infinite;
+}
+
+
+.lab-view .urine-path {
+  fill:
+    none;
+
+  stroke:
+    url(#urineGradient);
+
+  stroke-width:
+    7;
+
+  stroke-linecap:
+    round;
+
+  stroke-dasharray:
+    8 8;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  animation:
+    cortexFiltrateFlow
+    calc(
+      var(--flow-duration) * 1.35
+    )
+    linear
+    infinite;
+}
+
+
+.lab-view.lab-live-paused
+.filtrate-path,
+.lab-view.lab-live-paused
+.urine-path {
+  animation-play-state:
+    paused;
+}
+
+
+@keyframes cortexFiltrateFlow {
+
+  to {
+    stroke-dashoffset:
+      -70;
+  }
+
+}
+
+
+.lab-view .bladder-organ {
+  fill:
+    rgba(213,166,73,.58);
+
+  stroke:
+    rgba(247,202,105,.82);
+
+  stroke-width:
+    2.2;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  filter:
+    drop-shadow(
+      0 10px 12px
+      rgba(0,0,0,.30)
+    );
+}
+
+
+.lab-view .bladder-neck {
+  fill:
+    none;
+
+  stroke:
+    #d9a23b;
+
+  stroke-width:
+    5;
+
+  stroke-linecap:
+    round;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .leader path {
+  fill:
+    none;
+
+  stroke:
+    rgba(224,230,234,.64);
+
+  stroke-width:
+    1.5;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .leader circle {
+  fill:
+    #dfe5e9;
+
+  stroke:
+    #11161c;
+
+  stroke-width:
+    2;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .anatomy-label {
+  filter:
+    url(#labelGlow);
+}
+
+
+.lab-view .anatomy-label rect {
+  fill:
+    rgba(18,23,29,.94);
+
+  stroke:
+    rgba(172,183,192,.34);
+
+  stroke-width:
+    1;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.lab-view .anatomy-label text {
+  fill:
+    #d8dde1;
+
+  font-size:
+    13px;
+
+  font-weight:
+    760;
+
+  letter-spacing:
+    -.01em;
+
+  dominant-baseline:
+    middle;
+}
+
+
+.lab-view .callout rect {
+  fill:
+    rgba(14,18,23,.95);
+
+  stroke:
+    rgba(230,182,81,.45);
+
+  stroke-width:
+    1.2;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  filter:
+    url(#labelGlow);
+}
+
+
+.lab-view .callout text {
+  fill:
+    #efc766;
+
+  font-size:
+    13px;
+
+  font-weight:
+    790;
+
+  letter-spacing:
+    .01em;
+
+  dominant-baseline:
+    middle;
+}
+
+
+.lab-view .callout-reabsorption rect {
+  stroke:
+    rgba(155,147,231,.48);
+}
+
+
+.lab-view .callout-reabsorption text {
+  fill:
+    #aaa4ef;
+}
+
+
+.lab-view .callout-urine rect {
+  stroke:
+    rgba(228,161,51,.68);
+}
+
+
+.lab-view .callout-urine text {
+  fill:
+    #e9aa3e;
+
+  font-size:
+    14px;
+}
+
+
+.lab-view .system-legend {
+  position:
+    absolute;
+
+  z-index:
+    8;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(10,14,18,.82);
+
+  padding:
+    6px 9px;
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+}
+
+
+.lab-view .system-legend-top {
+  top:
+    9px;
+
+  left:
+    9px;
+}
+
+
+.lab-view .system-legend
+.legend-item {
+  position:
+    relative;
+
+  padding-left:
+    12px;
+
+  color:
+    #8e979e;
+
+  font-size:
+    7px;
+
+  font-weight:
+    740;
+}
+
+
+.lab-view .system-legend
+.legend-item::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  top:
+    50%;
+
+  width:
+    7px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  transform:
+    translateY(-50%);
+}
+
+
+.lab-view .system-legend
+.legend-item.arterial::before {
+  background:
+    #ef6280;
+}
+
+
+.lab-view .system-legend
+.legend-item.venous::before {
+  background:
+    #8e88e0;
+}
+
+
+.lab-view .system-legend
+.legend-item.renal::before {
+  background:
+    #f2cf6b;
+}
+
+
+.lab-view .system-legend
+.legend-item.urine::before {
+  background:
+    #dfa13a;
+}
+
+
+.lab-view .collection-column {
+  position:
+    absolute;
+
+  left:
+    18px;
+
+  top:
+    92px;
+
+  bottom:
+    54px;
+
+  z-index:
+    7;
+
+  width:
+    98px;
+
+  display:
+    grid;
+
+  grid-template-rows:
+    auto
+    minmax(0,1fr)
+    auto;
+
+  gap:
+    7px;
+}
+
+
+.lab-view .collection-readout {
+  display:
+    grid;
+
+  justify-items:
+    center;
+
+  gap:
+    2px;
+}
+
+
+.lab-view .collection-readout span {
+  color:
+    #69737a;
+
+  font-size:
+    6px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .08em;
+}
+
+
+.lab-view .collection-readout strong {
+  color:
+    #e7ebee;
+
+  font-size:
+    18px;
+
+  font-weight:
+    760;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+.lab-view .collection-readout small {
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.018);
+
+  padding:
+    2px 6px;
+
+  color:
+    #767f86;
+
+  font-size:
+    6px;
+
+  font-weight:
+    760;
+}
+
+
+.lab-view .collection-cylinder {
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  border:
+    2px solid
+    rgba(157,168,177,.38);
+
+  border-top:
+    1px solid
+    rgba(157,168,177,.16);
+
+  border-radius:
+    8px 8px 12px 12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.018),
+      rgba(255,255,255,.005)
+    );
+
+  box-shadow:
+    inset 0 0 18px
+    rgba(0,0,0,.40);
+}
+
+
+.lab-view .collection-cylinder::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    8px;
+
+  top:
+    12px;
+
+  bottom:
+    10px;
+
+  width:
+    2px;
+
+  border-radius:
+    99px;
+
+  background:
+    rgba(229,235,239,.72);
+}
+
+
+.lab-view .collection-fill {
+  position:
+    absolute;
+
+  left:
+    11px;
+
+  right:
+    5px;
+
+  bottom:
+    5px;
+
+  height:
+    0%;
+
+  border-radius:
+    0 0 7px 7px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(242,196,84,.48),
+      rgba(215,151,35,.66)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.16);
+
+  transition:
+    height .22s linear;
+}
+
+
+.lab-view .collection-scale {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    space-around;
+
+  padding:
+    16px 7px 16px 17px;
+
+  pointer-events:
+    none;
+}
+
+
+.lab-view .collection-scale span {
+  position:
+    relative;
+
+  color:
+    #56616a;
+
+  font-size:
+    6px;
+
+  text-align:
+    right;
+}
+
+
+.lab-view .collection-scale span::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    -7px;
+
+  top:
+    50%;
+
+  width:
+    9px;
+
+  height:
+    1px;
+
+  background:
+    rgba(216,225,231,.34);
+}
+
+
+.lab-view .collection-column
+> small {
+  color:
+    #5c666e;
+
+  font-size:
+    6px;
+
+  text-align:
+    center;
+}
+
+
+.lab-view .cardiorenal-metrics {
+  grid-template-columns:
+    repeat(7,minmax(0,1fr));
+
+  background:
+    #090c10;
+}
+
+
+.lab-view .cardiorenal-metrics
+> div {
+  position:
+    relative;
+
+  min-height:
+    55px;
+
+  gap:
+    3px;
+
+  padding:
+    7px 9px 6px;
+
+  border-top:
+    2px solid
+    rgba(239,98,128,.62);
+
+  border-right:
+    1px solid
+    rgba(255,255,255,.04);
+}
+
+
+.lab-view .cardiorenal-metrics
+> div:nth-child(4),
+.lab-view .cardiorenal-metrics
+> div:nth-child(5),
+.lab-view .cardiorenal-metrics
+> div:nth-child(6) {
+  border-top-color:
+    rgba(230,182,81,.78);
+}
+
+
+.lab-view .cardiorenal-metrics
+> div:nth-child(7) {
+  border-top-color:
+    rgba(142,136,224,.76);
+}
+
+
+.lab-view .cardiorenal-metrics span {
+  color:
+    #68727a;
+
+  font-size:
+    6px;
+
+  font-weight:
+    780;
+
+  text-transform:
+    uppercase;
+}
+
+
+.lab-view .cardiorenal-metrics strong {
+  color:
+    #e2e7ea;
+
+  font-size:
+    16px;
+
+  font-weight:
+    760;
+
+  line-height:
+    1;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+.lab-view .cardiorenal-metrics small {
+  color:
+    #555f67;
+
+  font-size:
+    6px;
+
+  line-height:
+    1.15;
+}
+
+
+.lab-view .detailed-kidney-group.is-low-perfusion
+.anatomical-kidney {
+  filter:
+    saturate(.55)
+    brightness(.72);
+
+  opacity:
+    .82;
+}
+
+
+@media (min-width: 1200px) {
+
+  html[data-theme]
+  body.lab-view
+  .integrated-body-view {
+    grid-template-rows:
+      40px
+      minmax(0,1fr)
+      58px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-stage {
+    min-height:
+      0;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-svg {
+    min-height:
+      0;
+
+    padding-left:
+      55px;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-metrics
+  > div {
+    min-height:
+      58px;
+  }
+
+}
+
+
+@media (
+  min-width: 1200px
+)
+and (
+  max-height: 820px
+) {
+
+  html[data-theme]
+  body.lab-view
+  .integrated-body-view {
+    grid-template-rows:
+      38px
+      minmax(0,1fr)
+      50px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-metrics
+  > div {
+    min-height:
+      50px;
+
+    padding:
+      5px 7px;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-metrics strong {
+    font-size:
+      13px;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .collection-column {
+    top:
+      72px;
+
+    bottom:
+      42px;
+  }
+
+}
+
+
+@media (max-width: 1199px) {
+
+  .lab-view .cardiorenal-svg {
+    min-width:
+      940px;
+
+    width:
+      940px;
+
+    height:
+      560px;
+  }
+
+
+  .lab-view .cardiorenal-stage {
+    overflow-x:
+      auto;
+
+    overflow-y:
+      hidden;
+  }
+
+
+  .lab-view .cardiorenal-metrics {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+
+  .lab-view .collection-column {
+    display:
+      none;
+  }
+
+}
+
+
+/* CORTEX CARDIORENAL ANATOMY V7 END */
