@@ -58,7 +58,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/laboratorio.css?v=20261002-natural-flow2"
+    href="/css/laboratorio.css?v=20261002-layout11"
   >
 
   <script
@@ -961,58 +961,6 @@
           </div>
 
 
-          <div class="lab-panel gasometry-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Gasometria arterial
-              </h2>
-
-              <p>
-                An&aacute;lise &aacute;cido-base e oxigena&ccedil;&atilde;o
-              </p>
-
-            </div>
-
-
-            <div
-              id="gasometry"
-              class="gasometry-grid"
-            ></div>
-
-
-            <div
-              id="gasometryFooter"
-              class="gasometry-footer"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel mechanics-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Mec&acirc;nica respirat&oacute;ria
-              </h2>
-
-              <p>
-                Dados derivados da ventila&ccedil;&atilde;o
-              </p>
-
-            </div>
-
-
-            <div
-              id="respiratoryMechanics"
-              class="mechanics-grid"
-            ></div>
-
-          </div>
-
-
         </section>
 
 
@@ -1068,6 +1016,56 @@
 
           </div>
 
+
+          <div class="lab-panel mechanics-panel hemodynamics-companion" data-hemodynamics-companion="mechanics">
+
+            <div class="panel-header">
+
+              <h2>
+                Mec&acirc;nica respirat&oacute;ria
+              </h2>
+
+              <p>
+                Dados derivados da ventila&ccedil;&atilde;o
+              </p>
+
+            </div>
+
+
+            <div
+              id="respiratoryMechanics"
+              class="mechanics-grid"
+            ></div>
+
+          </div>
+
+          <div class="lab-panel gasometry-panel hemodynamics-companion" data-hemodynamics-companion="gasometry">
+
+            <div class="panel-header">
+
+              <h2>
+                Gasometria arterial
+              </h2>
+
+              <p>
+                An&aacute;lise &aacute;cido-base e oxigena&ccedil;&atilde;o
+              </p>
+
+            </div>
+
+
+            <div
+              id="gasometry"
+              class="gasometry-grid"
+            ></div>
+
+
+            <div
+              id="gasometryFooter"
+              class="gasometry-footer"
+            ></div>
+
+          </div>
 
           <div class="lab-panel" data-lab-panel="electrolytes">
 
