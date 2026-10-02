@@ -549,8 +549,9 @@ function loadHeartModel() {
   const loader = new GLTFLoader();
   const loading = byId("heartModelLoading");
   const urls = [
-    "https://cdn.jsdelivr.net/gh/yihalem123/Human-Organ3D@main/models/heart.glb",
-    "https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb"
+    "/models/heart.glb?v=20261002-1748",
+    "https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb",
+    "https://cdn.jsdelivr.net/gh/yihalem123/Human-Organ3D@main/models/heart.glb"
   ];
 
   function tryUrl(index) {
@@ -2143,6 +2144,17 @@ function setupResize() {
   });
 }
 
+function showHeartFatalError(error) {
+  console.error("Falha ao inicializar o coração 3D:", error);
+  const loading = byId("heartModelLoading");
+  if (!loading) return;
+
+  loading.classList.add("error");
+  loading.innerHTML =
+    "<strong>O visualizador 3D não iniciou.</strong>" +
+    "<small>O restante do laboratório continua funcionando. Recarregue a página para tentar novamente.</small>";
+}
+
 function init() {
   loadCurrentUser();
   if (byId("logoutSidebar")) byId("logoutSidebar").addEventListener("click", logout);
@@ -2156,10 +2168,36 @@ function init() {
   setupGuidedReading();
   setupPatterns();
   setupResize();
-  initHeart3D();
+
+  /*
+   * O 3D é isolado do restante do laboratório.
+   * Mesmo se WebGL/modelo falhar, ECG, fundamentos e demais canvases continuam.
+   */
+  try {
+    initHeart3D();
+  } catch (error) {
+    showHeartFatalError(error);
+  }
 
   setPhase(4);
   setLabSection("simulator");
+
+  requestAnimationFrame(function () {
+    drawEcgMatrix();
+    drawFundamentals();
+    drawGuided();
+    drawPatterns();
+  });
 }
+
+window.addEventListener("error", function (event) {
+  if (
+    event &&
+    event.message &&
+    /webgl|three|gltf|module/i.test(event.message)
+  ) {
+    showHeartFatalError(event.error || new Error(event.message));
+  }
+});
 
 init();
