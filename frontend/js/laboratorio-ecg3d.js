@@ -12,6 +12,50 @@
     return;
   }
 
+
+  async function loadCurrentUser() {
+    try {
+      const response = await fetch("/api/auth/me", {
+        credentials: "same-origin"
+      });
+
+      if (response.status === 401) {
+        location.href = "/login.html";
+        return;
+      }
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
+      const user = data.usuario || {};
+      const name = user.nome || "Usuário";
+      const initial = name.charAt(0).toUpperCase();
+
+      if (get("nomeSidebar")) get("nomeSidebar").textContent = name;
+      if (get("emailSidebar")) get("emailSidebar").textContent = user.email || "";
+      if (get("nomeHeader")) get("nomeHeader").textContent = name;
+      if (get("avatarSidebar")) get("avatarSidebar").textContent = initial;
+      if (get("avatarHeader")) get("avatarHeader").textContent = initial;
+    }
+    catch (error) {
+      console.error("Falha ao carregar usuário do laboratório:", error);
+    }
+  }
+
+  async function logoutLaboratory() {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "same-origin"
+      });
+    }
+    finally {
+      location.href = "/login.html";
+    }
+  }
+
   const LEADS = [
     ["I","limb",.72,1],
     ["II","limb",1,1],
@@ -1071,6 +1115,12 @@
   }
 
   function init() {
+    loadCurrentUser();
+
+    if (get("logoutSidebar")) {
+      get("logoutSidebar").addEventListener("click", logoutLaboratory);
+    }
+
     renderLeads();
     renderGuided();
     renderPatterns();
