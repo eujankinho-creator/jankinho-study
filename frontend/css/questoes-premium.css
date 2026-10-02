@@ -705,9 +705,7 @@
     box-shadow .20s ease;
 
   animation:
-    cortexQuestionIn
-    .38s cubic-bezier(.2,.8,.2,1)
-    both;
+    none;
 }
 
 .questions-view .question-card::before {
