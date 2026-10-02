@@ -1,33 +1,35 @@
 {
-    "name": "jankinho-study",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "tsx watch backend/src/server.ts",
-        "build": "npm run security:sql && prisma generate && tsc --noEmit",
-        "start": "tsx backend/src/server.ts",
-        "lint": "tsc --noEmit",
-        "postinstall": "prisma generate",
-        "db:seed": "tsx scripts/create-user.ts",
-        "predev": "prisma db push",
-        "prestart": "prisma db push",
-        "security:sql": "node scripts/check-sql-safety.mjs"
-    },
-    "dependencies": {
-        "@prisma/adapter-pg": "^7.10.0",
-        "@prisma/client": "^6.19.0",
-        "bcryptjs": "^3.0.3",
-        "jose": "^6.2.12",
-        "openai": "^7.23.0",
-        "pg": "^8.23.0",
-        "prisma": "^6.19.0",
-        "sigaa-api": "github:GeovaneSchmitz/sigaa-api#master"
-    },
-    "devDependencies": {
-        "@types/bcryptjs": "^2.4.6",
-        "@types/node": "^20",
-        "@types/pg": "^8.23.1",
-        "tsx": "^4.23.15",
-        "typescript": "^5"
-    }
+  "name": "jankinho-study",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch backend/src/server.ts",
+    "build": "npm run security:sql && prisma generate && tsc --noEmit",
+    "start": "tsx backend/src/server.ts",
+    "lint": "tsc --noEmit",
+    "postinstall": "prisma generate && npm run prepare:ecg-assets",
+    "db:seed": "tsx scripts/create-user.ts",
+    "predev": "prisma db push",
+    "prestart": "prisma db push",
+    "security:sql": "node scripts/check-sql-safety.mjs",
+    "prepare:ecg-assets": "node scripts/prepare-ecg-assets.mjs"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^6.19.0",
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.12",
+    "openai": "^7.23.0",
+    "pg": "^8.23.0",
+    "prisma": "^6.19.0",
+    "sigaa-api": "github:GeovaneSchmitz/sigaa-api#master",
+    "three": "0.158.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  }
 }
