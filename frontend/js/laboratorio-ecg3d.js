@@ -1870,7 +1870,6 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
     ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
   }
 
-  const points = Math.max(260, Math.floor(rect.w / (1.6 * dpr)));
   const gradient = ctx.createLinearGradient(rect.x, 0, headX, 0);
 
   if (activeColor === "#191919") {
@@ -1879,38 +1878,60 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
     gradient.addColorStop(1, "rgba(10,10,10,.98)");
   }
   else {
-    gradient.addColorStop(
-      0,
-      colorWithAlpha(palette.accent, .28)
-    );
-    gradient.addColorStop(
-      .72,
-      colorWithAlpha(palette.accent, .72)
-    );
+    gradient.addColorStop(0, colorWithAlpha(palette.accent, .28));
+    gradient.addColorStop(.72, colorWithAlpha(palette.accent, .72));
     gradient.addColorStop(1, palette.accent);
   }
 
-  ctx.beginPath();
+  /*
+   * O traçado usa uma grade temporal fixa de 500 Hz.
+   * Cada amostra recebe seu valor Y uma única vez pelo instante absoluto dela;
+   * conforme o tempo avança, a amostra apenas muda de X.
+   * Isso evita o "tremor" vertical do QRS causado por reamostragem em posições
+   * horizontais fixas a cada frame.
+   */
+  const sampleRate = 500;
+  const firstSample = Math.floor((endTime - windowDuration) * sampleRate);
+  const lastSample = Math.floor(endTime * sampleRate);
 
-  for (let i = 0; i < points; i += 1) {
-    const n = i / (points - 1);
-    const sampleTime = endTime - windowDuration + n * windowDuration;
+  ctx.beginPath();
+  let started = false;
+
+  for (let sampleIndex = firstSample; sampleIndex <= lastSample; sampleIndex += 1) {
+    const sampleTime = sampleIndex / sampleRate;
+    const age = endTime - sampleTime;
+    const n = 1 - age / windowDuration;
+
+    if (n < 0 || n > 1) continue;
+
     const phase = ((sampleTime % period) + period) % period / period;
     const value = leadWave(phase, lead);
     const x = rect.x + n * rect.w * TRACE_HEAD_RATIO;
     const y = baseline - value * amplitude;
 
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+    if (!started) {
+      ctx.moveTo(x, y);
+      started = true;
+    }
+    else {
+      ctx.lineTo(x, y);
+    }
   }
 
   ctx.strokeStyle = gradient;
   ctx.lineWidth = 1.5 * dpr;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
   ctx.stroke();
 
-  const currentPhase = ((endTime % period) + period) % period / period;
-  const currentValue = leadWave(currentPhase, lead);
-  const currentY = baseline - currentValue * amplitude;
+  const newestSampleTime = lastSample / sampleRate;
+  const newestAge = endTime - newestSampleTime;
+  const newestN = clamp(1 - newestAge / windowDuration, 0, 1);
+  const newestPhase =
+    ((newestSampleTime % period) + period) % period / period;
+  const newestValue = leadWave(newestPhase, lead);
+  const newestX = rect.x + newestN * rect.w * TRACE_HEAD_RATIO;
+  const newestY = baseline - newestValue * amplitude;
 
   ctx.strokeStyle = "rgba(239, 68, 68, .24)";
   ctx.lineWidth = 1 * dpr;
@@ -1924,7 +1945,7 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
       ? "#ef4444"
       : palette.accent;
   ctx.beginPath();
-  ctx.arc(headX, currentY, 2.8 * dpr, 0, TAU);
+  ctx.arc(newestX, newestY, 2.8 * dpr, 0, TAU);
   ctx.fill();
 
   ctx.restore();
