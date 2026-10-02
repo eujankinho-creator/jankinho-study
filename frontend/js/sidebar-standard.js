@@ -617,6 +617,112 @@
           "force-cache",
       }
     )
+      .then(
+        function (
+          response
+        ) {
+
+          if (!response.ok) {
+            throw new Error(
+              "Falha no prefetch."
+            );
+          }
+
+
+          return response.text();
+
+        }
+      )
+      .then(
+        function (
+          html
+        ) {
+
+          /*
+           * No desktop, o hover da barra lateral normalmente
+           * acontece antes do clique. Aproveitamos esse tempo
+           * para aquecer também CSS e JS específicos da seção.
+           */
+          const parser =
+            new DOMParser();
+
+
+          const documentPrefetch =
+            parser.parseFromString(
+              html,
+              "text/html"
+            );
+
+
+          const assets =
+            new Set();
+
+
+          documentPrefetch
+            .querySelectorAll(
+              'link[rel="stylesheet"][href],script[src]'
+            )
+            .forEach(
+              function (
+                node
+              ) {
+
+                const value =
+                  node.getAttribute(
+                    node.tagName ===
+                      "SCRIPT"
+                      ? "src"
+                      : "href"
+                  );
+
+
+                if (
+                  !value ||
+                  !value.startsWith(
+                    "/"
+                  )
+                ) {
+                  return;
+                }
+
+
+                assets.add(
+                  value
+                );
+
+              }
+            );
+
+
+          return Promise.allSettled(
+            Array.from(
+              assets
+            )
+              .map(
+                function (
+                  asset
+                ) {
+
+                  return fetch(
+                    asset,
+                    {
+                      method:
+                        "GET",
+
+                      credentials:
+                        "same-origin",
+
+                      cache:
+                        "force-cache",
+                    }
+                  );
+
+                }
+              )
+          );
+
+        }
+      )
       .catch(
         function () {
 
