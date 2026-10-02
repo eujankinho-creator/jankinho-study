@@ -83,6 +83,8 @@ const LAB_STATE = {
   patternId: "p-wave",
   paperSpeed: 25,
   paperGain: 10,
+  regularRrSquares: 5,
+  irregularQrsCount: 8,
   ecgTime: 0,
   ecgLastFrame: performance.now(),
   ecgLastDraw: 0,
@@ -2771,10 +2773,14 @@ function drawFundamentalsWave() {
 function setupPaperLearning() {
   const speed = byId("paperSpeedSlider");
   const gain = byId("paperGainSlider");
+  const rrSlider = byId("regularRrSquaresSlider");
+  const qrsSlider = byId("irregularQrsCountSlider");
 
   function update() {
     LAB_STATE.paperSpeed = Number(speed ? speed.value : 25);
     LAB_STATE.paperGain = Number(gain ? gain.value : 10);
+    LAB_STATE.regularRrSquares = Number(rrSlider ? rrSlider.value : 5);
+    LAB_STATE.irregularQrsCount = Number(qrsSlider ? qrsSlider.value : 8);
 
     if (byId("paperSpeedValue")) byId("paperSpeedValue").textContent = String(LAB_STATE.paperSpeed).replace(".5", ",5") + " mm/s";
     if (byId("paperGainValue")) byId("paperGainValue").textContent = LAB_STATE.paperGain + " mm/mV";
@@ -2784,20 +2790,83 @@ function setupPaperLearning() {
     const smallMv = 1 / LAB_STATE.paperGain;
     const bigMv = 5 / LAB_STATE.paperGain;
 
-    if (byId("smallSquareTime")) byId("smallSquareTime").textContent = smallTime.toFixed(3).replace("0.040", "0,04").replace(".", ",") + " s";
+    const timeText = smallTime.toFixed(3).replace("0.040", "0,04").replace("0.080", "0,08").replace("0.020", "0,02").replace(".", ",");
+    const mvText = smallMv.toFixed(2).replace("0.10", "0,10").replace("0.20", "0,20").replace("0.05", "0,05").replace(".", ",");
+
+    if (byId("smallSquareTime")) byId("smallSquareTime").textContent = timeText + " s";
     if (byId("bigSquareTime")) byId("bigSquareTime").textContent = bigTime.toFixed(2).replace(".", ",") + " s · quadrado grande";
-    if (byId("smallSquareMv")) byId("smallSquareMv").textContent = smallMv.toFixed(2).replace("0.10", "0,1").replace(".", ",") + " mV";
-    if (byId("bigSquareMv")) byId("bigSquareMv").textContent = bigMv.toFixed(2).replace("0.50", "0,5").replace(".", ",") + " mV · quadrado grande";
+    if (byId("smallSquareMv")) byId("smallSquareMv").textContent = mvText + " mV";
+    if (byId("bigSquareMv")) byId("bigSquareMv").textContent = bigMv.toFixed(2).replace(".", ",") + " mV · quadrado grande";
+    if (byId("paperHorizontalScale")) byId("paperHorizontalScale").textContent = "1 mm = " + timeText + " s";
+    if (byId("paperVerticalScale")) byId("paperVerticalScale").textContent = "1 mm = " + mvText + " mV";
+
+    if (byId("regularRrSquaresValue")) byId("regularRrSquaresValue").textContent = String(LAB_STATE.regularRrSquares);
+    if (byId("irregularQrsCountValue")) byId("irregularQrsCountValue").textContent = String(LAB_STATE.irregularQrsCount);
 
     drawCalibration();
     drawRegularFrequency();
     drawIrregularFrequency();
   }
 
+  function stepSlider(slider, delta) {
+    if (!slider) return;
+    const min = Number(slider.min || 0);
+    const max = Number(slider.max || 100);
+    slider.value = String(clamp(Number(slider.value) + delta, min, max));
+    update();
+  }
+
   if (speed) speed.addEventListener("input", update);
   if (gain) gain.addEventListener("input", update);
+  if (rrSlider) rrSlider.addEventListener("input", update);
+  if (qrsSlider) qrsSlider.addEventListener("input", update);
+
+  if (byId("regularRrMinus")) byId("regularRrMinus").addEventListener("click", function () { stepSlider(rrSlider, -1); });
+  if (byId("regularRrPlus")) byId("regularRrPlus").addEventListener("click", function () { stepSlider(rrSlider, 1); });
+  if (byId("irregularQrsMinus")) byId("irregularQrsMinus").addEventListener("click", function () { stepSlider(qrsSlider, -1); });
+  if (byId("irregularQrsPlus")) byId("irregularQrsPlus").addEventListener("click", function () { stepSlider(qrsSlider, 1); });
+
   update();
 }
+
+function drawLearningPaperGrid(ctx, width, height, dpr, speed, gain) {
+  const palette = getLabThemePalette();
+  const base = 8 * dpr;
+  const xStep = base * (speed / 25);
+  const yStep = base * (gain / 10);
+
+  ctx.save();
+  ctx.fillStyle = palette.bgSecondary;
+  ctx.fillRect(0, 0, width, height);
+
+  let index = 0;
+  for (let x = 0; x <= width + xStep; x += xStep) {
+    const major = index % 5 === 0;
+    ctx.strokeStyle = major ? colorWithAlpha(palette.accent, .34) : colorWithAlpha(palette.textMuted, .14);
+    ctx.lineWidth = major ? 1.15 * dpr : .7 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+    index += 1;
+  }
+
+  index = 0;
+  for (let y = 0; y <= height + yStep; y += yStep) {
+    const major = index % 5 === 0;
+    ctx.strokeStyle = major ? colorWithAlpha(palette.accent, .34) : colorWithAlpha(palette.textMuted, .14);
+    ctx.lineWidth = major ? 1.15 * dpr : .7 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+    index += 1;
+  }
+
+  ctx.restore();
+  return { xStep: xStep, yStep: yStep };
+}
+
 
 function drawCalibration() {
   const palette = getLabThemePalette();
@@ -2807,142 +2876,181 @@ function drawCalibration() {
   const size = fitCanvas(canvas, 250);
   const ctx = size.ctx;
   const dpr = size.dpr;
+  const grid = drawLearningPaperGrid(
+    ctx,
+    size.pixelWidth,
+    size.pixelHeight,
+    dpr,
+    LAB_STATE.paperSpeed,
+    LAB_STATE.paperGain
+  );
 
-  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
+  const baseline = size.pixelHeight * .58;
+  const speedScale = LAB_STATE.paperSpeed / 25;
+  const gainScale = LAB_STATE.paperGain / 10;
 
-  const baseline = size.pixelHeight * .55;
   ctx.save();
   ctx.beginPath();
 
-  const beats = 3;
-  const points = 700;
+  const cyclesAcross = 3 / speedScale;
+  const points = 900;
   for (let i = 0; i < points; i += 1) {
     const n = i / (points - 1);
-    const cycle = (n * beats) % 1;
+    const cycle = (n * cyclesAcross) % 1;
     const value = leadWave(cycle, "DII");
     const x = n * size.pixelWidth;
-    const y = baseline - value * size.pixelHeight * .20;
+    const y = baseline - value * size.pixelHeight * .18 * gainScale;
 
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   }
 
-  ctx.strokeStyle = palette.textSoft;
-  ctx.lineWidth = 1.5 * dpr;
+  ctx.strokeStyle = palette.text;
+  ctx.lineWidth = 1.55 * dpr;
+  ctx.lineJoin = "round";
   ctx.stroke();
 
-  const xMeasure = size.pixelWidth * .19;
-  const yTop = baseline - size.pixelHeight * .20;
-  ctx.strokeStyle = palette.accent;
-  ctx.lineWidth = 1.3 * dpr;
-  ctx.setLineDash([4 * dpr, 3 * dpr]);
+  const pulseX = 22 * dpr;
+  const pulseWidth = Math.max(grid.xStep * 5, 34 * dpr);
+  const pulseHeight = Math.min(grid.yStep * 10, size.pixelHeight * .34);
+  const pulseBase = size.pixelHeight - 24 * dpr;
+
+  ctx.strokeStyle = palette.accent2;
+  ctx.lineWidth = 1.5 * dpr;
   ctx.beginPath();
-  ctx.moveTo(xMeasure, baseline);
-  ctx.lineTo(xMeasure, yTop);
+  ctx.moveTo(pulseX, pulseBase);
+  ctx.lineTo(pulseX + grid.xStep, pulseBase);
+  ctx.lineTo(pulseX + grid.xStep, pulseBase - pulseHeight);
+  ctx.lineTo(pulseX + grid.xStep + pulseWidth, pulseBase - pulseHeight);
+  ctx.lineTo(pulseX + grid.xStep + pulseWidth, pulseBase);
+  ctx.lineTo(pulseX + grid.xStep * 2 + pulseWidth, pulseBase);
   ctx.stroke();
-  ctx.setLineDash([]);
 
   ctx.fillStyle = palette.accent2;
-  ctx.font = "700 " + (11 * dpr) + "px system-ui";
-  ctx.fillText("1 mV", xMeasure + 8 * dpr, yTop + 18 * dpr);
+  ctx.font = "700 " + (8 * dpr) + "px system-ui";
+  ctx.fillText("pulso de calibração · 1 mV", pulseX, pulseBase - pulseHeight - 8 * dpr);
 
-  const x1 = size.pixelWidth * .18;
-  const x2 = size.pixelWidth * .36;
-  const y = baseline + 40 * dpr;
-  ctx.beginPath();
-  ctx.moveTo(x1, y);
-  ctx.lineTo(x2, y);
-  ctx.moveTo(x1, y - 6 * dpr);
-  ctx.lineTo(x1, y + 6 * dpr);
-  ctx.moveTo(x2, y - 6 * dpr);
-  ctx.lineTo(x2, y + 6 * dpr);
-  ctx.stroke();
+  ctx.fillStyle = palette.textSoft;
+  ctx.font = "700 " + (8 * dpr) + "px system-ui";
+  ctx.fillText(
+    LAB_STATE.paperSpeed + " mm/s · " + LAB_STATE.paperGain + " mm/mV",
+    size.pixelWidth - 170 * dpr,
+    18 * dpr
+  );
 
-  ctx.fillText((5 / LAB_STATE.paperSpeed).toFixed(2).replace(".", ",") + " s", x1 + 24 * dpr, y + 19 * dpr);
+  ctx.fillStyle = palette.textMuted;
+  ctx.font = "600 " + (7 * dpr) + "px system-ui";
+  ctx.fillText(
+    "↑ sensibilidade aumenta a altura · ↑ velocidade estica o traçado",
+    12 * dpr,
+    18 * dpr
+  );
+
   ctx.restore();
 }
-
 function drawRegularFrequency() {
   const palette = getLabThemePalette();
   const canvas = byId("regularFrequencyCanvas");
   if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
+
   const size = fitCanvas(canvas, 180);
   const ctx = size.ctx;
   const dpr = size.dpr;
   drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
 
-  const baseline = size.pixelHeight * .60;
-  const rrSquares = 5;
+  const rrSquares = clamp(Math.round(LAB_STATE.regularRrSquares || 5), 2, 8);
   const bpm = Math.round(300 / rrSquares);
+
   if (byId("regularBpm")) byId("regularBpm").textContent = bpm + " bpm";
+  if (byId("regularFormula")) byId("regularFormula").textContent = "300 ÷ " + rrSquares + " = " + bpm + " bpm";
 
-  const beatPositions = [0.13, 0.38, 0.63, 0.88];
+  const baseline = size.pixelHeight * .61;
+  const rrRatio = clamp(.14 * rrSquares, .28, .72);
+  const firstR = size.pixelWidth * .18;
+  const secondR = firstR + size.pixelWidth * rrRatio;
+  const beatPositions = [firstR / size.pixelWidth, secondR / size.pixelWidth];
+
   ctx.save();
-  ctx.strokeStyle = palette.textSoft;
-  ctx.lineWidth = 1.4 * dpr;
+  ctx.strokeStyle = palette.text;
+  ctx.lineWidth = 1.45 * dpr;
   ctx.beginPath();
-  ctx.moveTo(0, baseline);
 
-  const points = 600;
+  const points = 700;
   for (let i = 0; i < points; i += 1) {
     const n = i / (points - 1);
     let value = 0;
     beatPositions.forEach(function (pos) {
       const local = n - pos;
-      value += gaussian(local, -0.045, .015, .10);
-      value += gaussian(local, 0, .008, .90);
-      value += gaussian(local, .055, .030, .16);
+      value += gaussian(local, -0.035, .012, .09);
+      value += gaussian(local, 0, .006, .92);
+      value += gaussian(local, .040, .024, .15);
     });
     const x = n * size.pixelWidth;
-    const y = baseline - value * size.pixelHeight * .33;
-    ctx.lineTo(x, y);
+    const y = baseline - value * size.pixelHeight * .31;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
   }
   ctx.stroke();
 
-  const x1 = beatPositions[1] * size.pixelWidth;
-  const x2 = beatPositions[2] * size.pixelWidth;
   ctx.strokeStyle = palette.accent;
-  ctx.lineWidth = 1.2 * dpr;
+  ctx.lineWidth = 1.35 * dpr;
   ctx.beginPath();
-  ctx.moveTo(x1, 22 * dpr);
-  ctx.lineTo(x2, 22 * dpr);
-  ctx.moveTo(x1, 18 * dpr);
-  ctx.lineTo(x1, 27 * dpr);
-  ctx.moveTo(x2, 18 * dpr);
-  ctx.lineTo(x2, 27 * dpr);
+  ctx.moveTo(firstR, 28 * dpr);
+  ctx.lineTo(secondR, 28 * dpr);
+  ctx.moveTo(firstR, 22 * dpr);
+  ctx.lineTo(firstR, 34 * dpr);
+  ctx.moveTo(secondR, 22 * dpr);
+  ctx.lineTo(secondR, 34 * dpr);
   ctx.stroke();
+
   ctx.fillStyle = palette.accent2;
   ctx.font = "700 " + (8 * dpr) + "px system-ui";
-  ctx.fillText("5 quadrados grandes", x1 + 6 * dpr, 14 * dpr);
+  ctx.textAlign = "center";
+  ctx.fillText(rrSquares + " quadrados grandes", (firstR + secondR) / 2, 18 * dpr);
+
+  ctx.fillStyle = palette.textSoft;
+  ctx.font = "700 " + (8 * dpr) + "px system-ui";
+  ctx.fillText("300 ÷ " + rrSquares + " = " + bpm + " bpm", size.pixelWidth * .50, size.pixelHeight - 12 * dpr);
   ctx.restore();
 }
-
 function drawIrregularFrequency() {
   const palette = getLabThemePalette();
   const canvas = byId("irregularFrequencyCanvas");
   if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
+
   const size = fitCanvas(canvas, 180);
   const ctx = size.ctx;
   const dpr = size.dpr;
   drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
 
-  const baseline = size.pixelHeight * .60;
-  const beats = [0.08, 0.19, 0.35, 0.47, 0.63, 0.75, 0.86, 0.97];
+  const count = clamp(Math.round(LAB_STATE.irregularQrsCount || 8), 3, 15);
+  const bpm = count * 10;
+  if (byId("irregularBpm")) byId("irregularBpm").textContent = bpm + " bpm";
+  if (byId("irregularFormula")) byId("irregularFormula").textContent = count + " QRS × 10 = " + bpm + " bpm";
+
+  const baseline = size.pixelHeight * .61;
+  const beats = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const base = (i + .55) / count;
+    const jitter = Math.sin(i * 2.41 + count * .17) * Math.min(.022, .12 / count);
+    beats.push(clamp(base + jitter, .035, .965));
+  }
 
   ctx.save();
-  ctx.strokeStyle = palette.textSoft;
-  ctx.lineWidth = 1.4 * dpr;
+  ctx.strokeStyle = palette.text;
+  ctx.lineWidth = 1.45 * dpr;
   ctx.beginPath();
 
-  const points = 650;
+  const points = 850;
   for (let i = 0; i < points; i += 1) {
     const n = i / (points - 1);
     let value = 0;
     beats.forEach(function (pos) {
       const local = n - pos;
-      value += gaussian(local, -0.027, .010, .07);
-      value += gaussian(local, 0, .006, .68);
-      value += gaussian(local, .036, .023, .12);
+      value += gaussian(local, -0.018, .008, .07);
+      value += gaussian(local, 0, .0048, .68);
+      value += gaussian(local, .024, .016, .12);
     });
 
     const x = n * size.pixelWidth;
@@ -2953,17 +3061,42 @@ function drawIrregularFrequency() {
   ctx.stroke();
 
   ctx.fillStyle = palette.accent;
-  beats.forEach(function (pos) {
+  beats.forEach(function (pos, index) {
+    const x = pos * size.pixelWidth;
     ctx.beginPath();
-    ctx.arc(pos * size.pixelWidth, 22 * dpr, 3 * dpr, 0, TAU);
+    ctx.arc(x, 24 * dpr, 3.2 * dpr, 0, TAU);
     ctx.fill();
+
+    if (count <= 10) {
+      ctx.fillStyle = palette.textSoft;
+      ctx.font = "700 " + (6.5 * dpr) + "px system-ui";
+      ctx.textAlign = "center";
+      ctx.fillText(String(index + 1), x, 13 * dpr);
+      ctx.fillStyle = palette.accent;
+    }
   });
 
+  ctx.strokeStyle = colorWithAlpha(palette.accent, .68);
+  ctx.setLineDash([4 * dpr, 4 * dpr]);
+  ctx.beginPath();
+  ctx.moveTo(8 * dpr, size.pixelHeight - 30 * dpr);
+  ctx.lineTo(size.pixelWidth - 8 * dpr, size.pixelHeight - 30 * dpr);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = palette.textSoft;
   ctx.font = "700 " + (8 * dpr) + "px system-ui";
-  ctx.fillText("6 segundos · conte 8 QRS", size.pixelWidth * .35, 16 * dpr);
+  ctx.textAlign = "left";
+  ctx.fillText("0 s", 8 * dpr, size.pixelHeight - 12 * dpr);
+  ctx.textAlign = "right";
+  ctx.fillText("6 s", size.pixelWidth - 8 * dpr, size.pixelHeight - 12 * dpr);
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = palette.accent2;
+  ctx.font = "800 " + (9 * dpr) + "px system-ui";
+  ctx.fillText(count + " QRS em 6 s × 10 = " + bpm + " bpm", size.pixelWidth * .50, size.pixelHeight - 12 * dpr);
   ctx.restore();
 }
-
 function drawFundamentals() {
   if (LAB_STATE.fundamentalPart === "waves") {
     drawFundamentalsWave();
