@@ -695,8 +695,9 @@
 
 .matrix-canvas-wrap {
   position: relative;
-  height: calc(100% - 52px);
-  min-height: 650px;
+  height: 650px;
+  min-height: 0;
+  max-height: 650px;
   overflow: hidden;
   border-top: 1px solid #23364a;
   background: var(--ecg-paper);
@@ -1942,7 +1943,9 @@
   }
 
   .matrix-canvas-wrap {
-    min-height: 610px;
+    height: 610px;
+    min-height: 0;
+    max-height: 610px;
   }
 
   .guided-layout {
@@ -1957,7 +1960,9 @@
   }
 
   .matrix-canvas-wrap {
-    min-height: 620px;
+    height: 620px;
+    min-height: 0;
+    max-height: 620px;
   }
 
   .fundamentals-path {
@@ -2079,7 +2084,9 @@
   }
 
   .matrix-canvas-wrap {
-    min-height: 560px;
+    height: 560px;
+    min-height: 0;
+    max-height: 560px;
     overflow-x: auto;
   }
 
@@ -2163,7 +2170,9 @@
   }
 
   .matrix-canvas-wrap {
-    min-height: 510px;
+    height: 510px;
+    min-height: 0;
+    max-height: 510px;
   }
 
   #electrodeBodySvg {
