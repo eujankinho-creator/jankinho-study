@@ -15,6 +15,28 @@ const clamp = function (value, min, max) {
   return Math.min(Math.max(value, min), max);
 };
 
+function themeCss(name, fallback) {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+  return value || fallback;
+}
+
+function getLabThemePalette() {
+  return {
+    bg: themeCss("--theme-bg", "#050505"),
+    bgSecondary: themeCss("--theme-bg-secondary", "#090909"),
+    surface: themeCss("--theme-surface", "#121212"),
+    surfaceStrong: themeCss("--theme-surface-strong", "#171717"),
+    border: themeCss("--theme-border", "rgba(255,255,255,.08)"),
+    text: themeCss("--theme-text", "#f5f5f5"),
+    textSoft: themeCss("--theme-text-soft", "#c8c8c8"),
+    textMuted: themeCss("--theme-text-muted", "#737373"),
+    accent: themeCss("--theme-accent", "#f97316"),
+    accent2: themeCss("--theme-accent-2", "#fb923c")
+  };
+}
+
 const TAU = Math.PI * 2;
 
 const COLORS = {
@@ -1532,10 +1554,11 @@ function fitCanvas(canvas, cssHeight) {
 
 function drawPaperGrid(ctx, width, height, dpr, dark) {
   const small = 8 * dpr;
+  const palette = getLabThemePalette();
   ctx.save();
 
   if (dark) {
-    ctx.fillStyle = "#0b1621";
+    ctx.fillStyle = palette.bgSecondary;
     ctx.fillRect(0, 0, width, height);
   } else {
     ctx.fillStyle = "#fffaf7";
@@ -1544,9 +1567,17 @@ function drawPaperGrid(ctx, width, height, dpr, dark) {
 
   for (let x = 0; x <= width; x += small) {
     const major = Math.round(x / small) % 5 === 0;
-    ctx.strokeStyle = dark
-      ? (major ? "rgba(93, 123, 151, .32)" : "rgba(93, 123, 151, .12)")
-      : (major ? "rgba(239, 68, 68, .34)" : "rgba(239, 68, 68, .13)");
+
+    if (dark) {
+      ctx.strokeStyle = major ? palette.accent : palette.textMuted;
+      ctx.globalAlpha = major ? .20 : .075;
+    } else {
+      ctx.strokeStyle = major
+        ? "rgba(239, 68, 68, .34)"
+        : "rgba(239, 68, 68, .13)";
+      ctx.globalAlpha = 1;
+    }
+
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(x, 0);
@@ -1556,9 +1587,17 @@ function drawPaperGrid(ctx, width, height, dpr, dark) {
 
   for (let y = 0; y <= height; y += small) {
     const major = Math.round(y / small) % 5 === 0;
-    ctx.strokeStyle = dark
-      ? (major ? "rgba(93, 123, 151, .32)" : "rgba(93, 123, 151, .12)")
-      : (major ? "rgba(239, 68, 68, .34)" : "rgba(239, 68, 68, .13)");
+
+    if (dark) {
+      ctx.strokeStyle = major ? palette.accent : palette.textMuted;
+      ctx.globalAlpha = major ? .20 : .075;
+    } else {
+      ctx.strokeStyle = major
+        ? "rgba(239, 68, 68, .34)"
+        : "rgba(239, 68, 68, .13)";
+      ctx.globalAlpha = 1;
+    }
+
     ctx.beginPath();
     ctx.moveTo(0, y);
     ctx.lineTo(width, y);
@@ -2239,9 +2278,10 @@ function drawAxisDiagram() {
   const dpr = size.dpr;
   const width = size.pixelWidth;
   const height = size.pixelHeight;
+  const palette = getLabThemePalette();
 
   ctx.clearRect(0, 0, width, height);
-  ctx.fillStyle = "#0b1621";
+  ctx.fillStyle = palette.bgSecondary;
   ctx.fillRect(0, 0, width, height);
 
   const cx = width * 0.50;
@@ -2249,7 +2289,7 @@ function drawAxisDiagram() {
   const radius = Math.min(width, height) * 0.34;
 
   ctx.save();
-  ctx.strokeStyle = "rgba(148,163,184,.18)";
+  ctx.strokeStyle = palette.border;
   ctx.lineWidth = 1 * dpr;
   ctx.beginPath();
   ctx.arc(cx, cy, radius, 0, TAU);
@@ -2269,7 +2309,7 @@ function drawAxisDiagram() {
     const x = cx + Math.cos(angle) * radius;
     const y = cy + Math.sin(angle) * radius;
 
-    ctx.strokeStyle = "rgba(148,163,184,.22)";
+    ctx.strokeStyle = palette.border;
     ctx.beginPath();
     ctx.moveTo(
       cx - Math.cos(angle) * radius,
@@ -2278,7 +2318,7 @@ function drawAxisDiagram() {
     ctx.lineTo(x, y);
     ctx.stroke();
 
-    ctx.fillStyle = "#8295a9";
+    ctx.fillStyle = palette.textMuted;
     ctx.font = "700 " + (7 * dpr) + "px system-ui";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -2294,9 +2334,9 @@ function drawAxisDiagram() {
   const vx = cx + Math.cos(vectorAngle) * radius * 0.88;
   const vy = cy + Math.sin(vectorAngle) * radius * 0.88;
 
-  drawCanvasArrow(ctx, cx, cy, vx, vy, "#ff5c69", dpr);
+  drawCanvasArrow(ctx, cx, cy, vx, vy, palette.accent, dpr);
 
-  ctx.fillStyle = "#ffd2d6";
+  ctx.fillStyle = palette.textSoft;
   ctx.font = "800 " + (9 * dpr) + "px system-ui";
   ctx.textAlign = "center";
   ctx.fillText(
@@ -2305,7 +2345,7 @@ function drawAxisDiagram() {
     height - 12 * dpr
   );
 
-  ctx.fillStyle = "#5eead4";
+  ctx.fillStyle = palette.accent2;
   ctx.beginPath();
   ctx.arc(cx, cy, 3.5 * dpr, 0, TAU);
   ctx.fill();
@@ -2381,6 +2421,7 @@ function drawFundamentalsWave() {
   const dpr = size.dpr;
   const width = size.pixelWidth;
   const height = size.pixelHeight;
+  const palette = getLabThemePalette();
 
   drawPaperGrid(ctx, width, height, dpr, true);
 
@@ -2388,13 +2429,16 @@ function drawFundamentalsWave() {
   const amplitude = height * 0.28;
 
   if (fundamentalWaveHover) {
-    ctx.fillStyle = "rgba(34,211,238,.10)";
+    ctx.fillStyle = palette.accent;
+    ctx.save();
+    ctx.globalAlpha = .10;
     ctx.fillRect(
       fundamentalWaveHover.start * width,
       0,
       (fundamentalWaveHover.end - fundamentalWaveHover.start) * width,
       height
     );
+    ctx.restore();
   }
 
   ctx.beginPath();
@@ -2406,7 +2450,7 @@ function drawFundamentalsWave() {
     else ctx.lineTo(x, y);
   }
 
-  ctx.strokeStyle = "#e7eef7";
+  ctx.strokeStyle = palette.text;
   ctx.lineWidth = 1.65 * dpr;
   ctx.stroke();
 
@@ -2431,11 +2475,11 @@ function drawFundamentalsWave() {
       labelY + 12 * dpr,
       x,
       waveY - 5 * dpr,
-      "#5eead4",
+      palette.accent2,
       dpr
     );
 
-    ctx.fillStyle = "#99f6e4";
+    ctx.fillStyle = palette.accent2;
     ctx.font = "800 " + (8 * dpr) + "px system-ui";
     ctx.textAlign = "center";
     ctx.fillText(entry[0], x, labelY);
@@ -2452,7 +2496,7 @@ function drawFundamentalsWave() {
     const x2 = entry[2] * width;
     const y = entry[3] * height;
 
-    ctx.strokeStyle = entry[0] === "QT" ? "#f8c94f" : "#38bdf8";
+    ctx.strokeStyle = entry[0] === "QT" ? palette.accent2 : palette.accent;
     ctx.lineWidth = 1.1 * dpr;
     ctx.beginPath();
     ctx.moveTo(x1, y - 6 * dpr);
@@ -2461,13 +2505,13 @@ function drawFundamentalsWave() {
     ctx.lineTo(x2, y - 6 * dpr);
     ctx.stroke();
 
-    ctx.fillStyle = entry[0] === "QT" ? "#fde68a" : "#bae6fd";
+    ctx.fillStyle = entry[0] === "QT" ? palette.accent2 : palette.textSoft;
     ctx.font = "700 " + (7 * dpr) + "px system-ui";
     ctx.textAlign = "center";
     ctx.fillText(entry[0], (x1 + x2) / 2, y + 11 * dpr);
   });
 
-  ctx.fillStyle = "#8094a8";
+  ctx.fillStyle = palette.textMuted;
   ctx.font = "600 " + (7 * dpr) + "px system-ui";
   ctx.textAlign = "left";
   ctx.fillText("DII · ciclo esquemático", 10 * dpr, 12 * dpr);
@@ -3259,9 +3303,10 @@ function drawGenericPattern(kind) {
 
   const baseline1 = size.pixelHeight * .36;
   const baseline2 = size.pixelHeight * .72;
+  const palette = getLabThemePalette();
   const rows = [
-    { y: baseline1, label: "Referência", color: "#cbd5e1", kind: "normal" },
-    { y: baseline2, label: "Padrão selecionado", color: "#5eead4", kind: kind }
+    { y: baseline1, label: "Referência", color: palette.textSoft, kind: "normal" },
+    { y: baseline2, label: "Padrão selecionado", color: palette.accent2, kind: kind }
   ];
 
   rows.forEach(function (row, rowIndex) {
@@ -3320,11 +3365,11 @@ function drawGenericPattern(kind) {
           y - 32 * dpr,
           x,
           y,
-          "#f8c94f",
+          palette.accent2,
           dpr
         );
 
-        ctx.fillStyle = "#fde68a";
+        ctx.fillStyle = palette.accent2;
         ctx.font = "700 " + (8 * dpr) + "px system-ui";
         ctx.fillText(
           feature[0],
@@ -3350,6 +3395,37 @@ function drawPatterns() {
 /* =========================================================
    INITIALIZATION
 ========================================================= */
+
+
+function setupThemeIntegration() {
+  let scheduled = false;
+
+  const redraw = function () {
+    if (scheduled) return;
+    scheduled = true;
+
+    requestAnimationFrame(function () {
+      scheduled = false;
+
+      const palette = getLabThemePalette();
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", palette.bg);
+
+      drawEcgMatrix();
+      drawFundamentals();
+      drawGuided();
+      drawPatterns();
+    });
+  };
+
+  const observer = new MutationObserver(redraw);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"]
+  });
+
+  redraw();
+}
 
 function setupResize() {
   let timer = null;
@@ -3394,6 +3470,7 @@ function init() {
   setupPaperLearning();
   setupGuidedReading();
   setupPatterns();
+  setupThemeIntegration();
   setupResize();
 
   /*
