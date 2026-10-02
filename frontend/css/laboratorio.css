@@ -10281,3 +10281,41 @@ and (
 
 
 /* CORTEX LAB NATURAL FLOW V10 END */
+
+
+/* =========================================================
+   CORTEX LAB VIEW STATE GUARD V10.1
+   Keeps Monitor and Integrated Body mutually exclusive.
+========================================================= */
+
+html[data-theme]
+body.lab-view
+.integrated-body-view[hidden] {
+  display:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view.lab-center-integrated
+.monitor-grid,
+html[data-theme]
+body.lab-view.lab-center-integrated
+.gasometry-panel,
+html[data-theme]
+body.lab-view.lab-center-integrated
+.mechanics-panel {
+  display:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view.lab-center-integrated
+.integrated-body-view:not([hidden]) {
+  display:
+    grid !important;
+}
+
+
+/* CORTEX LAB VIEW STATE GUARD V10.1 END */
