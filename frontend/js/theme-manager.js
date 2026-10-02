@@ -19,6 +19,10 @@
     new Set();
 
 
+  let changeVersion =
+    0;
+
+
   function normalize(
     theme
   ) {
@@ -30,7 +34,6 @@
     ) {
 
       return theme;
-
     }
 
 
@@ -52,7 +55,6 @@
     catch {
 
       return "dark-orange";
-
     }
   }
 
@@ -79,7 +81,9 @@
   ) {
 
     listeners.forEach(
-      function (listener) {
+      function (
+        listener
+      ) {
 
         try {
 
@@ -145,7 +149,9 @@
           "iframe"
         )
         .forEach(
-          function (frame) {
+          function (
+            frame
+          ) {
 
             if (
               frame.contentWindow
@@ -203,6 +209,17 @@
     }
 
 
+    if (
+      settings.bumpVersion !==
+      false
+    ) {
+
+      changeVersion +=
+        1;
+
+    }
+
+
     notifyListeners(
       normalized
     );
@@ -221,6 +238,151 @@
 
 
     return normalized;
+  }
+
+
+  async function persistAccountTheme(
+    theme
+  ) {
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/configuracoes/tema",
+          {
+            method:
+              "PATCH",
+
+            credentials:
+              "same-origin",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify({
+                tema:
+                  normalize(
+                    theme
+                  ),
+              }),
+          }
+        );
+
+
+      /*
+       * Na tela de login nao existe sessao autenticada.
+       * Nesse caso o cache local continua funcionando
+       * e nenhuma mensagem de erro deve aparecer.
+       */
+      if (
+        response.status ===
+          401 ||
+        response.status ===
+          403
+      ) {
+
+        return;
+      }
+
+
+      if (!response.ok) {
+
+        console.warn(
+          "Cortex: nao foi possivel sincronizar o tema da conta."
+        );
+
+      }
+
+    }
+    catch (
+      error
+    ) {
+
+      console.warn(
+        "Cortex: tema salvo localmente; sincronizacao indisponivel.",
+        error
+      );
+
+    }
+
+  }
+
+
+  async function syncFromAccount() {
+
+    const versionAtStart =
+      changeVersion;
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/auth/me",
+          {
+            method:
+              "GET",
+
+            credentials:
+              "same-origin",
+
+            cache:
+              "no-store",
+          }
+        );
+
+
+      if (!response.ok) {
+        return;
+      }
+
+
+      const data =
+        await response.json();
+
+
+      const accountTheme =
+        data &&
+        data.usuario
+          ? data.usuario.tema
+          : null;
+
+
+      if (
+        !accountTheme ||
+        versionAtStart !==
+          changeVersion
+      ) {
+
+        return;
+      }
+
+
+      applyTheme(
+        accountTheme,
+        {
+          persist:
+            true,
+
+          broadcast:
+            true,
+
+          bumpVersion:
+            true,
+        }
+      );
+
+    }
+    catch {
+      /*
+       * Sem conexao, usa o ultimo tema local.
+       */
+    }
+
   }
 
 
@@ -244,6 +406,9 @@
 
           broadcast:
             false,
+
+          bumpVersion:
+            true,
         }
       );
 
@@ -270,7 +435,7 @@
       if (
         !data ||
         data.type !==
-        "cortex-theme-change"
+          "cortex-theme-change"
       ) {
         return;
       }
@@ -284,6 +449,9 @@
 
           broadcast:
             false,
+
+          bumpVersion:
+            true,
         }
       );
 
@@ -311,11 +479,32 @@
       theme
     ) {
 
-      return applyTheme(
-        theme
+      const normalized =
+        applyTheme(
+          theme,
+          {
+            persist:
+              true,
+
+            broadcast:
+              true,
+
+            bumpVersion:
+              true,
+          }
+        );
+
+
+      void persistAccountTheme(
+        normalized
       );
 
+
+      return normalized;
     },
+
+
+    syncFromAccount,
 
 
     subscribe(
@@ -361,8 +550,14 @@
 
           broadcast:
             false,
+
+          bumpVersion:
+            false,
         }
       );
+
+
+      void syncFromAccount();
 
     }
   );
