@@ -2801,13 +2801,12 @@ async function servirArquivo(
 
 
     const cacheControl =
-      (
-        versionado &&
-        extensao !==
-          ".html"
-      )
-        ? "public, max-age=31536000, immutable"
-        : "private, max-age=0, must-revalidate";
+      extensao ===
+        ".html"
+        ? "private, max-age=30, stale-while-revalidate=120"
+        : versionado
+          ? "public, max-age=31536000, immutable"
+          : "private, max-age=60, must-revalidate";
 
 
     if (
