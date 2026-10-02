@@ -60,6 +60,7 @@
     rel="stylesheet"
     href="/css/laboratorio.css?v=20261002-layout11"
   >
+  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261002-ecg3d1">
 
   <script
     src="/js/sidebar-standard.js?v=20261001-nav-core6"
@@ -354,21 +355,21 @@
 
       <section
         id="physiologyToolbar"
-        class="physiology-toolbar"
+        class="physiology-toolbar lab-area-toolbar"
       >
 
         <div class="physiology-toolbar-copy">
 
           <span class="physiology-kicker">
-            MODELO FISIOLÓGICO
+            ÁREAS DO LABORATÓRIO
           </span>
 
           <strong>
-            Cenários rápidos
+            Visualização
           </strong>
 
           <small>
-            Altere um estado reconhecido e depois refine os controles manualmente.
+            Alterne entre monitor fisiológico, corpo integrado e ECG 3D.
           </small>
 
         </div>
@@ -377,11 +378,6 @@
           id="labViewTabs"
           class="lab-view-tabs"
           aria-label="Visualização do laboratório"
-        ></div>
-
-        <div
-          id="presetBar"
-          class="physiology-presets"
         ></div>
 
       </section>
@@ -424,6 +420,240 @@
 
 
         <section class="lab-center">
+
+
+          <section
+            id="ecgLearningLab"
+            class="ecg3d-view"
+            data-center-view="ecg3d"
+            hidden
+            aria-hidden="true"
+          >
+
+            <div class="ecg3d-head">
+              <div>
+                <span class="physiology-kicker">ELETROCARDIOGRAFIA INTERATIVA</span>
+                <strong>ECG 3D · coração, vetor e derivações</strong>
+                <small>O coração, o vetor elétrico e o traçado avançam juntos. O loop começa somente quando você iniciar.</small>
+              </div>
+              <div class="ecg3d-status">
+                <span class="ecg3d-status-dot"></span>
+                <span id="ecgTutorStatus">PAUSADO</span>
+              </div>
+            </div>
+
+            <div class="ecg3d-simulator-grid">
+
+              <article class="ecg3d-card ecg3d-heart-card">
+
+                <div class="ecg3d-card-head">
+                  <div>
+                    <span>ANATOMIA ELÉTRICA</span>
+                    <strong>Coração 3D e eixos</strong>
+                  </div>
+                  <small>Arraste para girar · scroll para zoom</small>
+                </div>
+
+                <div class="ecg3d-heart-tools">
+                  <button type="button" class="ecg3d-tool active" data-ecg-view="free">Livre</button>
+                  <button type="button" class="ecg3d-tool" data-ecg-view="front">Frontal</button>
+                  <button type="button" class="ecg3d-tool" data-ecg-view="horizontal">Horizontal</button>
+                  <button type="button" class="ecg3d-tool" id="ecgSectionToggle">Seção</button>
+                  <button type="button" class="ecg3d-tool icon" id="ecgHeartReset" title="Resetar visão">↺</button>
+                </div>
+
+                <div class="ecg3d-heart-stage">
+                  <canvas id="ecgHeartCanvas" aria-label="Modelo didático 3D do coração"></canvas>
+
+                  <div class="ecg3d-plane-legend">
+                    <span><i class="front"></i>Plano frontal</span>
+                    <span><i class="horizontal"></i>Plano horizontal</span>
+                    <span><i class="active"></i>Ativação atual</span>
+                  </div>
+
+                  <div class="ecg3d-heart-hud">
+                    <span>FASE ELÉTRICA</span>
+                    <strong id="ecgHeartPhase">Início do QRS</strong>
+                    <small id="ecgHeartVector">Vetor septal: esquerda → direita</small>
+                  </div>
+                </div>
+
+                <div class="ecg3d-lead-summary">
+                  <div><span>Periféricas</span><strong>I · II · III · aVR · aVL · aVF</strong></div>
+                  <div><span>Precordiais</span><strong>V1 · V2 · V3 · V4 · V5 · V6</strong></div>
+                  <div><span>Posteriores / direitas</span><strong>V7 · V8 · V9 · V3R · V4R · V5R · V6R</strong></div>
+                </div>
+
+              </article>
+
+              <article class="ecg3d-card ecg3d-trace-card">
+
+                <div class="ecg3d-card-head trace">
+                  <div>
+                    <span>TRAÇADO SINCRONIZADO</span>
+                    <strong>ECG por derivações</strong>
+                  </div>
+                  <div class="ecg3d-scale">
+                    <span><b id="ecgTutorBpm">72</b> bpm</span>
+                    <span><b>25</b> mm/s</span>
+                    <span><b>10</b> mm/mV</span>
+                  </div>
+                </div>
+
+                <div class="ecg3d-lead-controls">
+                  <div class="ecg3d-lead-head">
+                    <span>Derivações visíveis</span>
+                    <div>
+                      <button id="ecgCoreLeads" type="button">12 padrão</button>
+                      <button id="ecgAllLeads" type="button">Todas</button>
+                    </div>
+                  </div>
+                  <div id="ecgLeadSelector" class="ecg3d-lead-selector"></div>
+                </div>
+
+                <div class="ecg3d-trace-viewport">
+                  <canvas id="ecgTutorCanvas"></canvas>
+                </div>
+
+                <div class="ecg3d-transport">
+                  <button id="ecgPrevPhase" type="button" class="mini">◀</button>
+                  <button id="ecgPlayPause" type="button" class="primary">
+                    <span id="ecgPlayIcon">▶</span>
+                    <span id="ecgPlayText">Iniciar loop</span>
+                  </button>
+                  <button id="ecgNextPhase" type="button" class="mini">▶</button>
+
+                  <div class="ecg3d-progress">
+                    <div><span id="ecgProgressBar"></span></div>
+                    <small id="ecgProgressText">20%</small>
+                  </div>
+                </div>
+
+                <div class="ecg3d-phase-copy">
+                  <span class="ecg3d-phase-number" id="ecgPhaseIndex">03</span>
+                  <div>
+                    <span class="physiology-kicker" id="ecgPhaseCategory">DESPOLARIZAÇÃO VENTRICULAR</span>
+                    <strong id="ecgPhaseTitle">Início do QRS — ativação septal</strong>
+                    <p id="ecgPhaseDescription">O septo interventricular é ativado primeiro. O vetor inicial aparece no coração e no traçado ao mesmo tempo.</p>
+                  </div>
+                </div>
+
+              </article>
+
+            </div>
+
+            <section class="ecg3d-learning">
+
+              <div class="ecg3d-learning-head">
+                <div>
+                  <span class="physiology-kicker">APRENDIZAGEM VISUAL</span>
+                  <strong>Entenda o ECG por camadas</strong>
+                </div>
+                <div class="ecg3d-learning-tabs">
+                  <button type="button" class="ecg3d-learn-tab active" data-ecg-learn="electrodes">Eletrodos</button>
+                  <button type="button" class="ecg3d-learn-tab" data-ecg-learn="fundamentals">Fundamentos</button>
+                  <button type="button" class="ecg3d-learn-tab" data-ecg-learn="guided">Leitura guiada 0–9</button>
+                  <button type="button" class="ecg3d-learn-tab" data-ecg-learn="patterns">Padrões / alterações</button>
+                </div>
+              </div>
+
+              <div id="ecgLearn-electrodes" class="ecg3d-learn-panel active">
+
+                <div class="ecg3d-electrode-layout">
+
+                  <div class="ecg3d-body-map-card">
+                    <div class="ecg3d-subhead">
+                      <strong>Posicionamento no corpo</strong>
+                      <small>Clique em um eletrodo para entender sua posição.</small>
+                    </div>
+
+                    <svg class="ecg3d-body-map" viewBox="0 0 520 560" role="img" aria-label="Posicionamento didático dos eletrodos de ECG">
+                      <path class="body" d="M207 57 C207 22 231 8 260 8 C289 8 313 22 313 57 C313 83 297 103 282 112 L291 140 C337 153 379 176 406 214 C434 253 447 324 438 404 L423 545 L97 545 L82 404 C73 324 86 253 114 214 C141 176 183 153 229 140 L238 112 C223 103 207 83 207 57 Z"></path>
+                      <path class="mid" d="M260 142 L260 520"></path>
+
+                      <g>
+                        <circle class="ecg-electrode limb" data-electrode="RA" cx="151" cy="205" r="11"></circle><text x="126" y="209">RA</text>
+                        <circle class="ecg-electrode limb" data-electrode="LA" cx="369" cy="205" r="11"></circle><text x="385" y="209">LA</text>
+                        <circle class="ecg-electrode limb" data-electrode="RL" cx="168" cy="473" r="11"></circle><text x="139" y="478">RL</text>
+                        <circle class="ecg-electrode limb" data-electrode="LL" cx="352" cy="473" r="11"></circle><text x="367" y="478">LL</text>
+
+                        <circle class="ecg-electrode chest" data-electrode="V1" cx="245" cy="250" r="9"></circle><text x="216" y="247">V1</text>
+                        <circle class="ecg-electrode chest" data-electrode="V2" cx="278" cy="250" r="9"></circle><text x="289" y="247">V2</text>
+                        <circle class="ecg-electrode chest" data-electrode="V3" cx="303" cy="279" r="9"></circle><text x="313" y="282">V3</text>
+                        <circle class="ecg-electrode chest" data-electrode="V4" cx="328" cy="309" r="9"></circle><text x="338" y="313">V4</text>
+                        <circle class="ecg-electrode chest" data-electrode="V5" cx="363" cy="301" r="9"></circle><text x="373" y="305">V5</text>
+                        <circle class="ecg-electrode chest" data-electrode="V6" cx="397" cy="294" r="9"></circle><text x="407" y="298">V6</text>
+
+                        <circle class="ecg-electrode posterior" data-electrode="V7" cx="421" cy="323" r="8"></circle><text x="431" y="326">V7</text>
+                        <circle class="ecg-electrode posterior" data-electrode="V8" cx="419" cy="350" r="8"></circle><text x="429" y="353">V8</text>
+                        <circle class="ecg-electrode posterior" data-electrode="V9" cx="411" cy="377" r="8"></circle><text x="421" y="380">V9</text>
+
+                        <circle class="ecg-electrode right" data-electrode="V3R" cx="217" cy="279" r="8"></circle><text x="172" y="282">V3R</text>
+                        <circle class="ecg-electrode right" data-electrode="V4R" cx="192" cy="309" r="8"></circle><text x="146" y="313">V4R</text>
+                        <circle class="ecg-electrode right" data-electrode="V5R" cx="157" cy="301" r="8"></circle><text x="111" y="305">V5R</text>
+                        <circle class="ecg-electrode right" data-electrode="V6R" cx="123" cy="294" r="8"></circle><text x="76" y="298">V6R</text>
+                      </g>
+                    </svg>
+                  </div>
+
+                  <div class="ecg3d-electrode-notes">
+                    <article><span>01</span><div><strong>Periféricas</strong><p>RA, LA, RL e LL constroem o plano frontal: I, II, III, aVR, aVL e aVF.</p></div></article>
+                    <article><span>02</span><div><strong>V1–V6</strong><p>V1–V2 observam mais septo/direita; V3–V4 a transição/anterior; V5–V6 a parede lateral.</p></div></article>
+                    <article><span>03</span><div><strong>V7–V9</strong><p>Extensão posterior no mesmo nível horizontal de V6 para ampliar a observação da parede posterior.</p></div></article>
+                    <article><span>04</span><div><strong>Direitas</strong><p>V3R–V6R espelham o posicionamento precordial para explorar melhor o ventrículo direito.</p></div></article>
+
+                    <div id="ecgElectrodeFocus" class="ecg3d-electrode-focus">
+                      <span>ELETRODO EM FOCO</span>
+                      <strong>Nenhum selecionado</strong>
+                      <p>Selecione um ponto no mapa.</p>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div id="ecgLearn-fundamentals" class="ecg3d-learn-panel">
+                <div class="ecg3d-fundamentals">
+                  <article><span>P</span><strong>Despolarização atrial</strong><p>Ativação elétrica dos átrios antes da condução pelo nó AV.</p></article>
+                  <article><span>PR</span><strong>Condução AV</strong><p>Tempo entre o início da ativação atrial e o início da despolarização ventricular.</p></article>
+                  <article><span>QRS</span><strong>Despolarização ventricular</strong><p>Vetor rápido produzido pela ativação coordenada dos ventrículos.</p></article>
+                  <article><span>ST</span><strong>Ventrículos despolarizados</strong><p>Segmento analisado em relação à linha isoelétrica.</p></article>
+                  <article><span>T</span><strong>Repolarização ventricular</strong><p>Recuperação elétrica ventricular representada pela onda T.</p></article>
+                  <article><span>QT</span><strong>Atividade ventricular total</strong><p>Integra despolarização e repolarização; varia com a frequência cardíaca.</p></article>
+                </div>
+              </div>
+
+              <div id="ecgLearn-guided" class="ecg3d-learn-panel">
+                <div class="ecg3d-guided-intro">
+                  <div><span class="physiology-kicker">PASSO A PASSO</span><strong>Leitura guiada 0–9</strong></div>
+                  <p>Cada etapa pausa o loop, posiciona o ciclo e sincroniza coração, vetor e traçado.</p>
+                </div>
+                <div id="ecgGuidedSteps" class="ecg3d-guided-steps"></div>
+              </div>
+
+              <div id="ecgLearn-patterns" class="ecg3d-learn-panel">
+                <div class="ecg3d-pattern-layout">
+                  <div id="ecgPatternSelector" class="ecg3d-pattern-selector"></div>
+                  <div class="ecg3d-pattern-detail">
+                    <span class="physiology-kicker">PADRÃO ATIVO</span>
+                    <strong id="ecgPatternName">Ritmo sinusal</strong>
+                    <p id="ecgPatternDescription">P antes de cada QRS, intervalos regulares e progressão precordial preservada no modelo didático.</p>
+                    <div id="ecgPatternTags" class="ecg3d-pattern-tags"></div>
+                  </div>
+                </div>
+              </div>
+
+            </section>
+
+            <p class="ecg3d-disclaimer">
+              Simulador educacional para estudo de eletrocardiografia. Não substitui interpretação clínica, laudo ou equipamento médico.
+            </p>
+
+          </section>
+
+
+
 
 
           <div class="monitor-grid">
