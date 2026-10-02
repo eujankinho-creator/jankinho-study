@@ -2914,3 +2914,832 @@ html[data-theme="pink-glitter"]
   }
 
 }
+
+
+/* =========================================================
+   CORTEX AUTH THEME SYNC V2
+   Faz a experiencia premium acompanhar o tema da conta.
+========================================================= */
+
+:root,
+html[data-theme="dark-orange"] {
+  --auth-accent-rgb:
+    249, 115, 22;
+}
+
+
+html[data-theme="pink-glitter"] {
+  --auth-accent-rgb:
+    255, 105, 180;
+}
+
+
+html[data-theme="blue-black"] {
+  color-scheme:
+    dark;
+
+  --auth-bg:
+    #020812;
+
+  --auth-panel:
+    rgba(5, 20, 37, .80);
+
+  --auth-panel-strong:
+    rgba(6, 24, 43, .95);
+
+  --auth-border:
+    rgba(80,164,255,.17);
+
+  --auth-border-hover:
+    rgba(102,181,255,.32);
+
+  --auth-text:
+    #eef7ff;
+
+  --auth-text-soft:
+    #c7def4;
+
+  --auth-text-muted:
+    #88a7c5;
+
+  --auth-accent:
+    #1687ff;
+
+  --auth-accent-two:
+    #66b5ff;
+
+  --auth-accent-soft:
+    rgba(22,135,255,.13);
+
+  --auth-accent-glow:
+    rgba(22,135,255,.25);
+
+  --auth-accent-rgb:
+    22, 135, 255;
+
+  --auth-gradient:
+    linear-gradient(
+      135deg,
+      #1687ff,
+      #66b5ff
+    );
+}
+
+
+html[data-theme="black-white"] {
+  color-scheme:
+    dark;
+
+  --auth-bg:
+    #030303;
+
+  --auth-panel:
+    rgba(12,12,12,.82);
+
+  --auth-panel-strong:
+    rgba(17,17,17,.96);
+
+  --auth-border:
+    rgba(255,255,255,.14);
+
+  --auth-border-hover:
+    rgba(255,255,255,.30);
+
+  --auth-text:
+    #f7f7f7;
+
+  --auth-text-soft:
+    #cecece;
+
+  --auth-text-muted:
+    #8c8c8c;
+
+  --auth-accent:
+    #ededed;
+
+  --auth-accent-two:
+    #ffffff;
+
+  --auth-accent-soft:
+    rgba(255,255,255,.09);
+
+  --auth-accent-glow:
+    rgba(255,255,255,.15);
+
+  --auth-accent-rgb:
+    255, 255, 255;
+
+  --auth-gradient:
+    linear-gradient(
+      135deg,
+      #d8d8d8,
+      #ffffff
+    );
+}
+
+
+body.auth-login-premium,
+body.auth-register-premium {
+  background:
+    var(
+      --auth-bg
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-page::before,
+.auth-register-premium
+.auth-page::before {
+  background:
+    radial-gradient(
+      circle at 10% 15%,
+      rgba(
+        var(--auth-accent-rgb),
+        .13
+      ),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 94% 82%,
+      rgba(
+        var(--auth-accent-rgb),
+        .065
+      ),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      var(--auth-bg),
+      color-mix(
+        in srgb,
+        var(--auth-bg)
+        88%,
+        var(--auth-accent)
+      )
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-orb-one,
+.auth-register-premium
+.auth-orb-one {
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .13
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-orb-two,
+.auth-register-premium
+.auth-orb-two {
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .075
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-orb-three,
+.auth-register-premium
+.auth-orb-three {
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .05
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-shell,
+.auth-register-premium
+.auth-shell {
+  border-color:
+    var(
+      --auth-border
+    ) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--auth-panel-strong)
+      82%,
+      transparent
+    ) !important;
+
+  box-shadow:
+    0 30px 100px
+    rgba(0,0,0,.48),
+    0 0 40px
+    rgba(
+      var(--auth-accent-rgb),
+      .055
+    ),
+    inset 0 1px 0
+    rgba(255,255,255,.025) !important;
+}
+
+
+.auth-login-premium
+.auth-showcase,
+.auth-register-premium
+.auth-showcase {
+  border-color:
+    var(
+      --auth-border
+    ) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--auth-panel-strong)
+        92%,
+        var(--auth-accent)
+      ),
+      var(--auth-panel-strong)
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-showcase::before,
+.auth-register-premium
+.auth-showcase::before {
+  border-color:
+    rgba(
+      var(--auth-accent-rgb),
+      .10
+    ) !important;
+
+  box-shadow:
+    0 0 0 60px
+    rgba(
+      var(--auth-accent-rgb),
+      .018
+    ),
+    0 0 0 120px
+    rgba(
+      var(--auth-accent-rgb),
+      .009
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-showcase::after,
+.auth-register-premium
+.auth-showcase::after {
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        var(--auth-accent-rgb),
+        .13
+      ),
+      transparent 68%
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-form-side,
+.auth-register-premium
+.auth-form-side {
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--auth-panel)
+        92%,
+        var(--auth-accent)
+      ),
+      var(--auth-panel-strong)
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-form-side::before,
+.auth-register-premium
+.auth-form-side::before {
+  background:
+    radial-gradient(
+      circle at 80% 5%,
+      rgba(
+        var(--auth-accent-rgb),
+        .09
+      ),
+      transparent 31%
+    ) !important;
+}
+
+
+.auth-login-premium
+.brain-mark,
+.auth-register-premium
+.brain-mark {
+  border-color:
+    rgba(
+      var(--auth-accent-rgb),
+      .22
+    ) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(
+        var(--auth-accent-rgb),
+        .15
+      ),
+      rgba(
+        var(--auth-accent-rgb),
+        .04
+      )
+    ) !important;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.28),
+    0 0 25px
+    rgba(
+      var(--auth-accent-rgb),
+      .09
+    ) !important;
+}
+
+
+.auth-login-premium
+.brain-mark svg,
+.auth-register-premium
+.brain-mark svg {
+  stroke:
+    var(
+      --auth-accent-two
+    ) !important;
+
+  filter:
+    drop-shadow(
+      0 0 7px
+      rgba(
+        var(--auth-accent-rgb),
+        .28
+      )
+    ) !important;
+}
+
+
+.auth-login-premium
+.showcase-kicker,
+.auth-login-premium
+.showcase-content h1 em,
+.auth-register-premium
+.showcase-kicker,
+.auth-register-premium
+.showcase-content h1 em {
+  color:
+    var(
+      --auth-accent-two
+    ) !important;
+}
+
+
+.auth-login-premium
+.showcase-content h1,
+.auth-login-premium
+.auth-heading h2,
+.auth-register-premium
+.showcase-content h1,
+.auth-register-premium
+.auth-heading h2 {
+  color:
+    var(
+      --auth-text
+    ) !important;
+}
+
+
+.auth-login-premium
+.brand-copy span,
+.auth-login-premium
+.showcase-content > p,
+.auth-login-premium
+.feature-item span,
+.auth-login-premium
+.showcase-footer,
+.auth-login-premium
+.auth-heading p,
+.auth-login-premium
+.field label,
+.auth-login-premium
+.auth-switch,
+.auth-login-premium
+.auth-security,
+.auth-register-premium
+.brand-copy span,
+.auth-register-premium
+.showcase-content > p,
+.auth-register-premium
+.feature-item span,
+.auth-register-premium
+.showcase-footer,
+.auth-register-premium
+.auth-heading p,
+.auth-register-premium
+.field label,
+.auth-register-premium
+.auth-switch,
+.auth-register-premium
+.auth-security {
+  color:
+    var(
+      --auth-text-muted
+    ) !important;
+}
+
+
+.auth-login-premium
+.feature-item,
+.auth-register-premium
+.feature-item {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--auth-border)
+      65%,
+      transparent
+    ) !important;
+
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .025
+    ) !important;
+}
+
+
+.auth-login-premium
+.feature-item:hover,
+.auth-register-premium
+.feature-item:hover {
+  border-color:
+    var(
+      --auth-border-hover
+    ) !important;
+
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .065
+    ) !important;
+}
+
+
+.auth-login-premium
+.feature-icon,
+.auth-register-premium
+.feature-icon {
+  border-color:
+    rgba(
+      var(--auth-accent-rgb),
+      .16
+    ) !important;
+
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .08
+    ) !important;
+
+  color:
+    var(
+      --auth-accent-two
+    ) !important;
+}
+
+
+.auth-login-premium
+.auth-eyebrow,
+.auth-register-premium
+.auth-eyebrow {
+  border-color:
+    rgba(
+      var(--auth-accent-rgb),
+      .20
+    ) !important;
+
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .075
+    ) !important;
+
+  color:
+    var(
+      --auth-accent-two
+    ) !important;
+}
+
+
+.auth-login-premium
+.input,
+.auth-register-premium
+.input {
+  border-color:
+    var(
+      --auth-border
+    ) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--auth-panel)
+      82%,
+      transparent
+    ) !important;
+
+  color:
+    var(
+      --auth-text
+    ) !important;
+}
+
+
+.auth-login-premium
+.input:hover,
+.auth-register-premium
+.input:hover {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--auth-border-hover)
+      70%,
+      transparent
+    ) !important;
+}
+
+
+.auth-login-premium
+.input:focus,
+.auth-register-premium
+.input:focus {
+  border-color:
+    var(
+      --auth-border-hover
+    ) !important;
+
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .035
+    ) !important;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      var(--auth-accent-rgb),
+      .075
+    ),
+    0 12px 34px
+    rgba(0,0,0,.16) !important;
+}
+
+
+.auth-login-premium
+.input-shell:focus-within
+.input-icon,
+.auth-register-premium
+.input-shell:focus-within
+.input-icon {
+  color:
+    var(
+      --auth-accent-two
+    ) !important;
+}
+
+
+.auth-login-premium
+.password-toggle:hover,
+.auth-register-premium
+.password-toggle:hover {
+  border-color:
+    rgba(
+      var(--auth-accent-rgb),
+      .20
+    ) !important;
+
+  background:
+    rgba(
+      var(--auth-accent-rgb),
+      .07
+    ) !important;
+}
+
+
+.auth-login-premium
+.btn-primary,
+.auth-register-premium
+.btn-primary {
+  background:
+    var(
+      --auth-gradient
+    ) !important;
+
+  color:
+    #080808 !important;
+
+  box-shadow:
+    0 14px 36px
+    rgba(
+      var(--auth-accent-rgb),
+      .20
+    ),
+    inset 0 1px 0
+    rgba(255,255,255,.22) !important;
+}
+
+
+.auth-login-premium
+.auth-switch a,
+.auth-register-premium
+.auth-switch a {
+  color:
+    var(
+      --auth-accent-two
+    ) !important;
+}
+
+
+@media (max-width: 520px) {
+
+  .auth-login-premium
+  .auth-page::before,
+  .auth-register-premium
+  .auth-page::before {
+    background:
+      radial-gradient(
+        circle at 12% 6%,
+        rgba(
+          var(--auth-accent-rgb),
+          .16
+        ),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 92% 92%,
+        rgba(
+          var(--auth-accent-rgb),
+          .08
+        ),
+        transparent 34%
+      ),
+      linear-gradient(
+        165deg,
+        var(--auth-bg),
+        color-mix(
+          in srgb,
+          var(--auth-bg)
+          90%,
+          var(--auth-accent)
+        )
+        55%,
+        var(--auth-bg)
+      ) !important;
+  }
+
+
+  .auth-login-premium
+  .auth-shell,
+  .auth-register-premium
+  .auth-shell {
+    border-color:
+      var(
+        --auth-border
+      ) !important;
+
+    background:
+      linear-gradient(
+        145deg,
+        color-mix(
+          in srgb,
+          var(--auth-panel-strong)
+          88%,
+          var(--auth-accent)
+        ),
+        var(--auth-panel-strong)
+      ) !important;
+
+    box-shadow:
+      0 30px 90px
+      rgba(0,0,0,.55),
+      0 0 30px
+      rgba(
+        var(--auth-accent-rgb),
+        .07
+      ),
+      inset 0 1px 0
+      rgba(255,255,255,.035) !important;
+  }
+
+
+  .auth-login-premium
+  .auth-form-side,
+  .auth-register-premium
+  .auth-form-side {
+    background:
+      radial-gradient(
+        circle at 100% 0%,
+        rgba(
+          var(--auth-accent-rgb),
+          .10
+        ),
+        transparent 30%
+      ),
+      transparent !important;
+  }
+
+
+  .auth-login-premium
+  .auth-form-side::after,
+  .auth-register-premium
+  .auth-form-side::after {
+    border-color:
+      rgba(
+        var(--auth-accent-rgb),
+        .09
+      ) !important;
+
+    box-shadow:
+      0 0 0 34px
+      rgba(
+        var(--auth-accent-rgb),
+        .016
+      ),
+      0 0 0 68px
+      rgba(
+        var(--auth-accent-rgb),
+        .009
+      ) !important;
+  }
+
+
+  .auth-login-premium
+  .mobile-brand::after,
+  .auth-register-premium
+  .mobile-brand::after {
+    border-color:
+      rgba(
+        var(--auth-accent-rgb),
+        .18
+      ) !important;
+
+    background:
+      rgba(
+        var(--auth-accent-rgb),
+        .065
+      ) !important;
+
+    color:
+      var(
+        --auth-accent-two
+      ) !important;
+  }
+
+
+  .auth-login-premium
+  .input:focus,
+  .auth-register-premium
+  .input:focus {
+    border-color:
+      var(
+        --auth-border-hover
+      ) !important;
+
+    background:
+      rgba(
+        var(--auth-accent-rgb),
+        .035
+      ) !important;
+
+    box-shadow:
+      0 0 0 3px
+      rgba(
+        var(--auth-accent-rgb),
+        .07
+      ),
+      0 14px 34px
+      rgba(0,0,0,.16) !important;
+  }
+
+}
+
+/* CORTEX AUTH THEME SYNC V2 END */
