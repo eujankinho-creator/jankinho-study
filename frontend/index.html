@@ -23,6 +23,7 @@
         if (
           window.matchMedia("(min-width: 901px)").matches &&
           !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+          sessionStorage.getItem("cortexDashboardFreshLogin") === "1" &&
           sessionStorage.getItem("cortexDesktopIntroSeen") !== "1"
         ) {
           document.documentElement.classList.add(
@@ -32,15 +33,10 @@
         }
       }
       catch (error) {
-        if (
-          window.matchMedia("(min-width: 901px)").matches &&
-          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ) {
-          document.documentElement.classList.add(
-            "cortex-dashboard-intro-boot",
-            "cortex-dashboard-content-hidden"
-          );
-        }
+        /*
+         * Se sessionStorage estiver bloqueado, nao prende
+         * o Dashboard em uma tela invisivel.
+         */
       }
     })();
   </script>
@@ -80,7 +76,7 @@
     href="/css/themes.css?v=20260930-bluefix4"
   >
 
-  <script src="/js/theme-manager.js?v=20260930-themes7"></script>
+  <script src="/js/theme-manager.js?v=20261001-account-theme1"></script>
 
   <link
     rel="stylesheet"
@@ -1432,7 +1428,7 @@
 
 
 
-  <script src="/js/dashboard-ui.js?v=20261001-cinematic2"></script>
+  <script src="/js/dashboard-ui.js?v=20261001-login-intro3"></script>
   <script src="/js/dashboard.js"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 
