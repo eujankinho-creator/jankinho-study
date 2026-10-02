@@ -155,6 +155,94 @@ async function carregarUsuario() {
 }
 
 
+function preencherFiltroAreas() {
+
+  const select =
+    $("filtroArea");
+
+
+  if (!select) {
+    return;
+  }
+
+
+  const atual =
+    select.value;
+
+
+  const areas =
+    Array.from(
+      new Set(
+        state.casos
+          .map(
+            function (
+              caso
+            ) {
+
+              return String(
+                caso.area ||
+                ""
+              ).trim();
+
+            }
+          )
+          .filter(Boolean)
+      )
+    )
+      .sort(
+        function (
+          a,
+          b
+        ) {
+
+          return a.localeCompare(
+            b,
+            "pt-BR"
+          );
+
+        }
+      );
+
+
+  select.innerHTML =
+    '<option value="Todas">Todas</option>' +
+    areas
+      .map(
+        function (
+          area
+        ) {
+
+          return (
+            '<option value="' +
+            escapeHtml(
+              area
+            ) +
+            '">' +
+            escapeHtml(
+              area
+            ) +
+            '</option>'
+          );
+
+        }
+      )
+      .join("");
+
+
+  if (
+    areas.includes(
+      atual
+    )
+  ) {
+
+    select.value =
+      atual;
+
+  }
+
+}
+
+
 async function carregarCasos() {
 
   try {
@@ -174,6 +262,9 @@ async function carregarCasos() {
       )
         ? dados.casos
         : [];
+
+
+    preencherFiltroAreas();
 
 
     aplicarFiltros();
