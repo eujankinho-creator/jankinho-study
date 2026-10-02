@@ -3085,3 +3085,92 @@ html[data-theme="black-white"] .ecg-laboratory-page {
 html[data-theme="pink-glitter"] .ecg-laboratory-page {
   isolation: auto;
 }
+
+
+/* =========================================================
+   CORTEX THEME RESIDUE CLEANUP
+   Remove os últimos accents cyan/blue herdados do protótipo.
+========================================================= */
+
+.conduction-track {
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--theme-accent-soft),
+      transparent
+    ) !important;
+}
+
+.conduction-node b {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent-2) !important;
+  box-shadow: var(--theme-glow) !important;
+}
+
+.conduction-track i {
+  background:
+    linear-gradient(
+      90deg,
+      var(--theme-accent-soft),
+      var(--theme-accent),
+      var(--theme-accent-soft)
+    ) !important;
+}
+
+.conduction-track i::after {
+  border-left-color: var(--theme-accent) !important;
+}
+
+.wave-cards article > span {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent-2) !important;
+}
+
+.paper-learning-head button {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface-soft) !important;
+  color: var(--theme-accent-2) !important;
+}
+
+.guided-dots button {
+  background: var(--theme-border) !important;
+}
+
+.guided-dots button.active {
+  background: var(--theme-accent) !important;
+  box-shadow:
+    0 0 0 3px var(--theme-accent-soft),
+    var(--theme-glow) !important;
+}
+
+.pattern-topic.active .pattern-topic-icon path {
+  stroke: var(--theme-accent-2) !important;
+}
+
+.pattern-topic-icon path {
+  stroke: var(--theme-text-muted) !important;
+}
+
+.electrode-dot-svg.active circle {
+  stroke: var(--theme-accent) !important;
+  fill: var(--theme-accent-soft) !important;
+}
+
+.electrode-dot-svg.active text {
+  fill: var(--theme-accent-2) !important;
+}
+
+.heart-axis-label {
+  text-shadow: 0 1px 5px var(--theme-bg) !important;
+}
+
+html[data-theme="dark-orange"] .ecg-lab,
+html[data-theme="pink-glitter"] .ecg-lab,
+html[data-theme="blue-black"] .ecg-lab,
+html[data-theme="black-white"] .ecg-lab {
+  --ecg-cyan: var(--theme-accent);
+  --ecg-cyan-2: var(--theme-accent-2);
+}
