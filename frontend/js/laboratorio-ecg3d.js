@@ -758,7 +758,7 @@ function loadHeartModel() {
   const loader = new GLTFLoader();
   const loading = byId("heartModelLoading");
   const urls = [
-    "/models/heart.glb?v=20261002-1915",
+    "/models/heart.glb?v=20261002-1935",
     "https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb",
     "https://cdn.jsdelivr.net/gh/yihalem123/Human-Organ3D@main/models/heart.glb"
   ];
