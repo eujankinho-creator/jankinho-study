@@ -542,6 +542,38 @@
     }
 
 
+    const directRoutes =
+      new Set([
+        "/simulado",
+        "/questoes",
+        "/flashcards",
+        "/lousa",
+        "/farmacos",
+        "/sigaa",
+        "/casos",
+        "/laboratorio",
+        "/evolucao",
+        "/desempenho",
+        "/ranking",
+        "/financas",
+        "/musica",
+        "/configuracoes",
+      ]);
+
+
+    if (
+      directRoutes.has(
+        value
+      )
+    ) {
+
+      return (
+        value +
+        ".html"
+      );
+    }
+
+
     return value;
 
   }
