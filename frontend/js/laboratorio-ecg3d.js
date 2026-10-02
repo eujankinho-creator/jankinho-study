@@ -1907,7 +1907,11 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
     const phase = ((sampleTime % period) + period) % period / period;
     const value = leadWave(phase, lead);
     const x = rect.x + n * rect.w * TRACE_HEAD_RATIO;
-    const y = baseline - value * amplitude;
+    const y = clamp(
+      baseline - value * amplitude,
+      rect.y + rect.h * .06,
+      rect.y + rect.h * .94
+    );
 
     if (!started) {
       ctx.moveTo(x, y);
@@ -1931,7 +1935,11 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
     ((newestSampleTime % period) + period) % period / period;
   const newestValue = leadWave(newestPhase, lead);
   const newestX = rect.x + newestN * rect.w * TRACE_HEAD_RATIO;
-  const newestY = baseline - newestValue * amplitude;
+  const newestY = clamp(
+    baseline - newestValue * amplitude,
+    rect.y + rect.h * .06,
+    rect.y + rect.h * .94
+  );
 
   ctx.strokeStyle = "rgba(239, 68, 68, .24)";
   ctx.lineWidth = 1 * dpr;
@@ -1987,7 +1995,11 @@ function drawEcgHover(ctx, layout, size, period) {
   const value = leadWave(phase, lead);
   const baseline = rect.y + rect.h * .52;
   const amplitude = rect.h * .30;
-  const waveY = baseline - value * amplitude;
+  const waveY = clamp(
+    baseline - value * amplitude,
+    rect.y + rect.h * .06,
+    rect.y + rect.h * .94
+  );
   const pointX = rect.x + localX * rect.w * TRACE_HEAD_RATIO;
 
   ctx.save();
@@ -2108,8 +2120,18 @@ function drawEcgMatrix() {
       " bpm · janela de 2 batimentos";
   }
 
-  const hostHeight = canvas.parentElement ? canvas.parentElement.clientHeight : 650;
-  const size = fitCanvas(canvas, Math.max(540, hostHeight));
+  /*
+   * A altura visual do canvas é definida pelo CSS e precisa ser a fonte da verdade.
+   * Nunca derive a próxima altura a partir do parent após alterar canvas.height:
+   * em containers com altura percentual isso pode criar um ciclo de crescimento
+   * (canvas -> parent -> canvas) a cada frame.
+   */
+  const visualRect = canvas.getBoundingClientRect();
+  const visualHeight =
+    visualRect.height ||
+    canvas.clientHeight ||
+    650;
+  const size = fitCanvas(canvas, visualHeight);
   const ctx = size.ctx;
   const dpr = size.dpr;
 
