@@ -1405,6 +1405,61 @@
   }
 
 
+  window.CortexShellNavigationReady =
+    function (
+      sourceWindow,
+      href
+    ) {
+
+      if (
+        !pendingTarget ||
+        sourceWindow !==
+          standbyFrame.contentWindow
+      ) {
+        return false;
+      }
+
+
+      const ready =
+        normalizedTarget(
+          href ||
+          ""
+        );
+
+
+      const expected =
+        normalizedTarget(
+          pendingTarget
+        );
+
+
+      if (
+        ready !==
+          expected &&
+        !sameFrameTarget(
+          standbyFrame,
+          pendingTarget
+        )
+      ) {
+        return false;
+      }
+
+
+      enhanceLoadedFrame(
+        standbyFrame
+      );
+
+
+      swapFrames(
+        standbyFrame
+      );
+
+
+      return true;
+
+    };
+
+
   function waitForStandbyFirstPaint(
     target,
     revision
@@ -1850,6 +1905,21 @@
 
 
       if (!data) {
+        return;
+      }
+
+
+      if (
+        data.type ===
+          "cortex:first-paint-ready"
+      ) {
+
+        window.CortexShellNavigationReady(
+          event.source,
+          data.href
+        );
+
+
         return;
       }
 
