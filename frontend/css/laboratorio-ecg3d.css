@@ -332,6 +332,13 @@
   font-size: 8px;
 }
 
+.heart-viewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: auto;
+}
+
 .heart-viewer-top button {
   pointer-events: auto;
   min-height: 30px;
@@ -343,6 +350,12 @@
   font-size: 8px;
   font-weight: 750;
   cursor: pointer;
+}
+
+#heartCutawayToggle[aria-pressed="true"] {
+  border-color: rgba(94, 234, 212, .44);
+  color: #8af6e9;
+  background: rgba(13, 75, 75, .46);
 }
 
 .heart-viewer-bottom > span {
@@ -484,7 +497,7 @@
 
 .sim-transport {
   display: grid;
-  grid-template-columns: 31px auto 31px minmax(100px, 1fr) 74px;
+  grid-template-columns: 31px auto 31px minmax(92px, 1fr) 64px 74px;
   align-items: center;
   gap: 5px;
   padding: 8px;
@@ -514,6 +527,12 @@
   justify-self: center;
   min-width: 90px;
   padding: 0 9px;
+}
+
+.sim-transport .sound-button[aria-pressed="true"] {
+  border-color: rgba(94, 234, 212, .38);
+  background: rgba(13, 75, 75, .42);
+  color: #8af6e9;
 }
 
 .sim-slider {
@@ -2075,8 +2094,12 @@
     grid-template-columns: 34px auto 34px minmax(90px, 1fr);
   }
 
+  .sim-transport .sound-button,
   .sim-transport select {
-    grid-column: 1 / -1;
+    grid-column: span 2;
+  }
+
+  .sim-transport select {
     width: 88px;
     justify-self: end;
   }
