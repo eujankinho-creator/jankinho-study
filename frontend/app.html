@@ -14,7 +14,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/app-shell.css?v=20261001-fast-nav2"
+    href="/css/app-shell.css?v=20261002-seamless-nav1"
   >
 
   <link
@@ -52,10 +52,19 @@
 
     <iframe
       id="cortexAppFrame"
-      class="shell-frame"
+      class="shell-frame shell-frame-active"
       title="Cortex"
       allow="autoplay; encrypted-media"
-     src="/index.html"></iframe>
+    ></iframe>
+
+    <iframe
+      id="cortexAppFrameNext"
+      class="shell-frame shell-frame-standby"
+      title="Cortex - carregamento"
+      allow="autoplay; encrypted-media"
+      aria-hidden="true"
+      tabindex="-1"
+    ></iframe>
 
   </main>
 
@@ -231,7 +240,7 @@
   </footer>
 
 
-  <script src="/js/app-shell.js?v=20261001-fast-nav3"></script>
+  <script src="/js/app-shell.js?v=20261002-seamless-nav1"></script>
   <script src="/js/pink-pet.js?v=20260930-themes7"></script>
 
 </body>
