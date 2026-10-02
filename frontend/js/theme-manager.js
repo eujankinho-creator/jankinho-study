@@ -560,7 +560,14 @@
       );
 
 
-      void syncFromAccount();
+      if (
+        window.parent ===
+          window
+      ) {
+
+        void syncFromAccount();
+
+      }
 
     }
   );

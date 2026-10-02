@@ -12,115 +12,6 @@
   let progressValue = 0;
   let finishTimer = null;
 
-  let domReady =
-    false;
-
-  let pageReadySent =
-    false;
-
-  let pageReadyTimer =
-    0;
-
-
-  function pageIdentity() {
-
-    return (
-      window.location.pathname +
-      window.location.search +
-      window.location.hash
-    );
-
-  }
-
-
-  function postPageReady() {
-
-    if (
-      pageReadySent ||
-      !domReady ||
-      pendingRequests > 0
-    ) {
-      return;
-    }
-
-
-    window.clearTimeout(
-      pageReadyTimer
-    );
-
-
-    /*
-     * Aguarda um pequeno período estável. Se algum script
-     * da página iniciar um fetch logo após DOMContentLoaded,
-     * startProgress cancela este envio.
-     */
-    pageReadyTimer =
-      window.setTimeout(
-        function () {
-
-          if (
-            pageReadySent ||
-            pendingRequests > 0
-          ) {
-            return;
-          }
-
-
-          window.requestAnimationFrame(
-            function () {
-
-              window.requestAnimationFrame(
-                function () {
-
-                  if (
-                    pageReadySent ||
-                    pendingRequests > 0
-                  ) {
-                    return;
-                  }
-
-
-                  pageReadySent =
-                    true;
-
-
-                  try {
-
-                    if (
-                      window.parent &&
-                      window.parent !==
-                        window
-                    ) {
-
-                      window.parent.postMessage(
-                        {
-                          type:
-                            "cortex:page-ready",
-
-                          href:
-                            pageIdentity(),
-                        },
-                        window.location.origin
-                      );
-
-                    }
-
-                  }
-                  catch {}
-
-                }
-              );
-
-            }
-          );
-
-        },
-        90
-      );
-
-  }
-
-
   /* =========================================================
      FETCH / LOADING
   ========================================================= */
@@ -167,11 +58,6 @@
 
     window.clearTimeout(
       finishTimer
-    );
-
-
-    window.clearTimeout(
-      pageReadyTimer
     );
 
 
@@ -231,9 +117,6 @@
     ) {
       return;
     }
-
-
-    postPageReady();
 
 
     if (!progress) {
@@ -470,6 +353,22 @@
 
     try {
 
+      const cached =
+        sessionStorage.getItem(
+          "cortex_timer_key_v1"
+        );
+
+
+      if (cached) {
+        return cached;
+      }
+
+    }
+    catch {}
+
+
+    try {
+
       const response =
         await nativeFetch(
           "/api/auth/me",
@@ -494,10 +393,23 @@
 
         if (user && user.id) {
 
-          return (
+          const key =
             "jankinho_study_timer_v2_" +
-            user.id
-          );
+            user.id;
+
+
+          try {
+
+            sessionStorage.setItem(
+              "cortex_timer_key_v1",
+              key
+            );
+
+          }
+          catch {}
+
+
+          return key;
         }
       }
 
@@ -958,275 +870,6 @@
 
 
   /* =========================================================
-     REVEAL AUTOMATICO
-  ========================================================= */
-
-  function initRevealObserver() {
-
-    const observer =
-      new MutationObserver(
-        function (mutations) {
-
-          for (
-            const mutation
-            of mutations
-          ) {
-
-            if (
-              mutation.type !==
-              "attributes"
-            ) {
-              continue;
-            }
-
-
-            const element =
-              mutation.target;
-
-
-            if (
-              !(element instanceof HTMLElement)
-            ) {
-              continue;
-            }
-
-
-            const oldValue =
-              mutation.oldValue ||
-              "";
-
-
-            if (
-              oldValue.includes(
-                "hidden"
-              ) &&
-              !element.classList.contains(
-                "hidden"
-              )
-            ) {
-
-              element.classList.remove(
-                "ui-reveal"
-              );
-
-
-              void element.offsetWidth;
-
-
-              element.classList.add(
-                "ui-reveal"
-              );
-            }
-          }
-        }
-      );
-
-
-    observer.observe(
-      document.body,
-      {
-        subtree: true,
-        attributes: true,
-        attributeFilter: [
-          "class"
-        ],
-        attributeOldValue: true,
-      }
-    );
-  }
-
-
-
-
-
-
-  /* =========================================================
-     MICROINTERACOES PROFISSIONAIS
-  ========================================================= */
-
-  const motionSelector =
-    [
-      ".hero",
-      ".academic-hero",
-      ".question-card",
-      ".metric-card",
-      ".panel",
-      ".course-card",
-      ".case-card",
-      ".drug-card",
-      ".flashcard",
-      ".notice-card",
-      ".activity-card",
-      ".resource-card",
-      ".overview-feature",
-      ".lesson-card",
-      ".finance-card",
-      ".result-card",
-      ".theme-choice",
-      ".session-card",
-    ].join(",");
-
-
-  function markMotion(
-    root
-  ) {
-
-    if (
-      !(root instanceof Element)
-    ) {
-      return;
-    }
-
-
-    const candidates =
-      [];
-
-
-    if (
-      root.matches(
-        motionSelector
-      )
-    ) {
-
-      candidates.push(
-        root
-      );
-
-    }
-
-
-    root
-      .querySelectorAll(
-        motionSelector
-      )
-      .forEach(
-        function (
-          element
-        ) {
-
-          candidates.push(
-            element
-          );
-
-        }
-      );
-
-
-    candidates
-      .slice(
-        0,
-        40
-      )
-      .forEach(
-        function (
-          element,
-          index
-        ) {
-
-          if (
-            element.classList
-              .contains(
-                "ui-motion-item"
-              )
-          ) {
-            return;
-          }
-
-
-          element.style
-            .animationDelay =
-            Math.min(
-              index * 18,
-              126
-            ) +
-            "ms";
-
-
-          element.classList
-            .add(
-              "ui-motion-item"
-            );
-
-        }
-      );
-
-  }
-
-
-  function initProfessionalMotion() {
-
-    markMotion(
-      document.body
-    );
-
-
-    const observer =
-      new MutationObserver(
-        function (
-          mutations
-        ) {
-
-          for (
-            const mutation
-            of mutations
-          ) {
-
-            if (
-              mutation.type !==
-                "childList"
-            ) {
-              continue;
-            }
-
-
-            mutation.addedNodes
-              .forEach(
-                function (
-                  node
-                ) {
-
-                  if (
-                    node instanceof
-                      Element
-                  ) {
-
-                    window
-                      .requestAnimationFrame(
-                        function () {
-
-                          markMotion(
-                            node
-                          );
-
-                        }
-                      );
-
-                  }
-
-                }
-              );
-
-          }
-
-        }
-      );
-
-
-    observer.observe(
-      document.body,
-      {
-        childList:
-          true,
-
-        subtree:
-          true,
-      }
-    );
-
-  }
-
-
-  /* =========================================================
      RESPOSTA IMEDIATA A CLIQUES / TOQUES
   ========================================================= */
 
@@ -1468,36 +1111,10 @@
       );
 
 
-      domReady =
-        true;
       initGlobalInteractionFeedback();
+
       initTimer();
 
-
-      postPageReady();
-
-
-      /*
-       * Fallback: nunca deixa o shell esperando indefinidamente
-       * por uma integração de terceiros ou request travada.
-       */
-      window.setTimeout(
-        function () {
-
-          if (pageReadySent) {
-            return;
-          }
-
-
-          pendingRequests =
-            0;
-
-
-          postPageReady();
-
-        },
-        2400
-      );
     }
   );
 

@@ -756,7 +756,15 @@
 
       if (
         connection &&
-        connection.saveData
+        (
+          connection.saveData ||
+          String(
+            connection.effectiveType ||
+            ""
+          ).includes(
+            "2g"
+          )
+        )
       ) {
         return;
       }
@@ -785,39 +793,23 @@
 
 
     const routes =
-      [];
-
-
-    sections.forEach(
-      function (
-        section
-      ) {
-
-        section.items.forEach(
+      [
+        "/questoes",
+        "/flashcards",
+        "/sigaa",
+        "/casos",
+        "/farmacos",
+      ]
+        .filter(
           function (
-            item
+            route
           ) {
 
-            if (
-              item.href !==
-                current &&
-              routes.indexOf(
-                item.href
-              ) ===
-                -1
-            ) {
-
-              routes.push(
-                item.href
-              );
-
-            }
+            return route !==
+              current;
 
           }
         );
-
-      }
-    );
 
 
     let index =
@@ -828,69 +820,64 @@
 
       if (
         index >=
-        routes.length
+          routes.length ||
+        document.hidden
       ) {
         return;
       }
+
+
+      const work =
+        function () {
+
+          prefetchRoute(
+            routes[
+              index
+            ]
+          );
+
+
+          index +=
+            1;
+
+
+          window.setTimeout(
+            next,
+            900
+          );
+
+        };
 
 
       if (
-        document.hidden
+        "requestIdleCallback" in
+          window
       ) {
 
-        window.setTimeout(
-          next,
-          500
+        window.requestIdleCallback(
+          work,
+          {
+            timeout:
+              1800
+          }
         );
 
-        return;
       }
+      else {
 
+        window.setTimeout(
+          work,
+          120
+        );
 
-      prefetchRoute(
-        routes[
-          index
-        ]
-      );
-
-
-      index +=
-        1;
-
-
-      window.setTimeout(
-        next,
-        130
-      );
+      }
 
     }
 
 
     window.setTimeout(
-      function () {
-
-        if (
-          "requestIdleCallback" in
-            window
-        ) {
-
-          window.requestIdleCallback(
-            next,
-            {
-              timeout:
-                1200
-            }
-          );
-
-        }
-        else {
-
-          next();
-
-        }
-
-      },
-      650
+      next,
+      1400
     );
 
   }
@@ -1699,6 +1686,58 @@
     );
 
 
+  function notifyShellVisualReady() {
+
+    if (
+      window.parent ===
+        window
+    ) {
+      return;
+    }
+
+
+    const href =
+      window.location.pathname +
+      window.location.search +
+      window.location.hash;
+
+
+    try {
+
+      if (
+        typeof window.parent
+          .CortexShellNavigationReady ===
+          "function"
+      ) {
+
+        window.parent
+          .CortexShellNavigationReady(
+            window,
+            href
+          );
+
+      }
+      else {
+
+        window.parent.postMessage(
+          {
+            type:
+              "cortex:first-paint-ready",
+
+            href:
+              href,
+          },
+          window.location.origin
+        );
+
+      }
+
+    }
+    catch {}
+
+  }
+
+
   function init() {
 
     syncMobileVisualViewport();
@@ -1716,6 +1755,9 @@
     warmNavigationCache();
 
   }
+
+
+  notifyShellVisualReady();
 
 
   if (

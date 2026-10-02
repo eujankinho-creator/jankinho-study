@@ -183,6 +183,16 @@
       }
     );
 
+
+    window.setTimeout(
+      function () {
+
+        observer.disconnect();
+
+      },
+      2200
+    );
+
   }
 
 
