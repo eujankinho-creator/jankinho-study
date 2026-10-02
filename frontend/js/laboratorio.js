@@ -3125,40 +3125,26 @@ function renderPresets() {
             }
 
 
-            if (
-              preset.id ===
-              "normal"
-            ) {
-
-              state.values = {
-                ...initialState
-              };
+            state.values = {
+              ...initialState,
+              ...preset.patch
+            };
 
 
-              state.autoRenal =
-                true;
+            state.autoRenal =
+              true;
 
 
-              state.autoBaroreflex =
-                true;
+            state.autoBaroreflex =
+              true;
 
 
-              state.autoOxygen =
-                true;
+            state.autoOxygen =
+              true;
 
 
-              state.simulatedRenalHours =
-                0;
-
-            }
-            else {
-
-              Object.assign(
-                state.values,
-                preset.patch
-              );
-
-            }
+            state.simulatedRenalHours =
+              0;
 
 
             renderControls();
@@ -4528,7 +4514,9 @@ function drawCalibrationPulse(
 }
 
 
-function drawECG() {
+function drawECG(
+  modelInput
+) {
 
   const canvas =
     $("ecgCanvas");
@@ -4547,6 +4535,7 @@ function drawECG() {
 
 
   const model =
+    modelInput ||
     physiologicalModel();
 
 
@@ -4785,7 +4774,9 @@ function drawPlethGrid(
 }
 
 
-function drawSPO() {
+function drawSPO(
+  modelInput
+) {
 
   const canvas =
     $("spoCanvas");
@@ -4804,6 +4795,7 @@ function drawSPO() {
 
 
   const model =
+    modelInput ||
     physiologicalModel();
 
 
@@ -5010,10 +5002,18 @@ function animationLoop(
   );
 
 
-  drawECG();
+  const animationModel =
+    physiologicalModel();
 
 
-  drawSPO();
+  drawECG(
+    animationModel
+  );
+
+
+  drawSPO(
+    animationModel
+  );
 
 
   if (
