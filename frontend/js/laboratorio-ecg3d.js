@@ -547,26 +547,26 @@ const PATTERN_TEACHING = {
 };
 
 const LEAD_AXES = [
-  { id: "DI", short: "DI +", plane: "frontal", angle: 0, color: "#ff375f" },
-  { id: "DII", short: "DII +", plane: "frontal", angle: 60, color: "#22d3ee" },
-  { id: "DIII", short: "DIII +", plane: "frontal", angle: 120, color: "#eab308" },
-  { id: "aVR", short: "aVR +", plane: "frontal", angle: -150, color: "#c084fc" },
-  { id: "aVL", short: "aVL +", plane: "frontal", angle: -30, color: "#ec4899" },
-  { id: "aVF", short: "aVF +", plane: "frontal", angle: 90, color: "#3b82f6" },
-  { id: "V1", short: "V1", plane: "horizontal", angle: 160, color: "#f97316" },
-  { id: "V2", short: "V2", plane: "horizontal", angle: 140, color: "#f59e0b" },
-  { id: "V3", short: "V3", plane: "horizontal", angle: 116, color: "#22c55e" },
-  { id: "V4", short: "V4", plane: "horizontal", angle: 86, color: "#10b981" },
-  { id: "V5", short: "V5", plane: "horizontal", angle: 55, color: "#0ea5e9" },
-  { id: "V6", short: "V6", plane: "horizontal", angle: 20, color: "#8b5cf6" }
+  { id: "DI", short: "DI +", plane: "frontal", angle: 0 },
+  { id: "DII", short: "DII +", plane: "frontal", angle: 60 },
+  { id: "DIII", short: "DIII +", plane: "frontal", angle: 120 },
+  { id: "aVR", short: "aVR +", plane: "frontal", angle: -150 },
+  { id: "aVL", short: "aVL +", plane: "frontal", angle: -30 },
+  { id: "aVF", short: "aVF +", plane: "frontal", angle: 90 },
+  { id: "V1", short: "V1", plane: "horizontal", angle: 160 },
+  { id: "V2", short: "V2", plane: "horizontal", angle: 140 },
+  { id: "V3", short: "V3", plane: "horizontal", angle: 116 },
+  { id: "V4", short: "V4", plane: "horizontal", angle: 86 },
+  { id: "V5", short: "V5", plane: "horizontal", angle: 55 },
+  { id: "V6", short: "V6", plane: "horizontal", angle: 20 }
 ];
 
 const EXTRA_AXES = [
-  { id: "V7", short: "V7", plane: "horizontal", angle: -8, color: "#a855f7", group: "posterior" },
-  { id: "V8", short: "V8", plane: "horizontal", angle: -28, color: "#c084fc", group: "posterior" },
-  { id: "V9", short: "V9", plane: "horizontal", angle: -48, color: "#d8b4fe", group: "posterior" },
-  { id: "V3R", short: "V3R", plane: "horizontal", angle: 215, color: "#fb7185", group: "right" },
-  { id: "V4R", short: "V4R", plane: "horizontal", angle: 238, color: "#f43f5e", group: "right" }
+  { id: "V7", short: "V7", plane: "horizontal", angle: -8, group: "posterior" },
+  { id: "V8", short: "V8", plane: "horizontal", angle: -28, group: "posterior" },
+  { id: "V9", short: "V9", plane: "horizontal", angle: -48, group: "posterior" },
+  { id: "V3R", short: "V3R", plane: "horizontal", angle: 215, group: "right" },
+  { id: "V4R", short: "V4R", plane: "horizontal", angle: 238, group: "right" }
 ];
 
 const LEAD_DIRECTIONS = {
