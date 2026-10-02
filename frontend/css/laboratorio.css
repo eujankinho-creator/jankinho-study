@@ -2765,7 +2765,7 @@ input[type="range"] {
   body.lab-view
   .lab-page {
     height:
-      calc(100dvh - 76px) !important;
+      calc(100dvh - 72px) !important;
 
     max-width:
       none !important;
