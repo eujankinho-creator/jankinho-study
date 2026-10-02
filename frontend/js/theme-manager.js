@@ -257,6 +257,9 @@
             credentials:
               "same-origin",
 
+            keepalive:
+              true,
+
             headers: {
               "Content-Type":
                 "application/json",
