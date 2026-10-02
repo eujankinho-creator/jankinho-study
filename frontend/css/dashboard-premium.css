@@ -2127,6 +2127,13 @@ html[data-theme="pink-glitter"]
   }
 
 
+  .cortex-desktop-intro:not(.is-running),
+  .cortex-desktop-intro:not(.is-running) * {
+    animation-play-state:
+      paused !important;
+  }
+
+
   .cortex-desktop-intro {
     --intro-accent:
       var(
