@@ -2244,3 +2244,273 @@
     display: none;
   }
 }
+
+
+/* =========================================================
+   ECG LAB — DIDACTIC POLISH
+========================================================= */
+
+.electrode-vector-line {
+  stroke: #ec4899;
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(236, 72, 153, .48));
+}
+
+.electrode-arrow-head {
+  fill: #ec4899;
+}
+
+.electrode-vector-origin {
+  fill: #f8fafc;
+  stroke: #0b1520;
+  stroke-width: 2;
+}
+
+.electrode-vector-plus {
+  fill: #f9a8d4;
+  font-size: 18px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.electrode-direction-note {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, .14);
+  padding-top: 9px;
+}
+
+.electrode-direction-note strong {
+  color: #f9a8d4;
+  font-size: 7px;
+}
+
+.electrode-direction-note span {
+  color: #8fa2b6;
+  font-size: 7px;
+  line-height: 1.55;
+}
+
+.wave-annotated-card {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 12px;
+  margin: 0 14px 14px;
+  border: 1px solid #26394d;
+  border-radius: 10px;
+  background: #0d1824;
+  padding: 12px;
+}
+
+.wave-annotated-copy {
+  align-self: center;
+}
+
+.wave-annotated-copy > span {
+  color: var(--ecg-cyan-2);
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: .11em;
+}
+
+.wave-annotated-copy h4 {
+  margin: 7px 0 5px;
+  color: #edf4fb;
+  font-size: 12px;
+}
+
+.wave-annotated-copy p {
+  margin: 0;
+  color: #8ea0b3;
+  font-size: 8px;
+  line-height: 1.6;
+}
+
+.wave-annotated-canvas-wrap {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #2a3e52;
+  border-radius: 9px;
+  background: #0b1621;
+}
+
+#fundamentalsWaveCanvas {
+  width: 100%;
+  height: 280px;
+  display: block;
+  cursor: crosshair;
+}
+
+.wave-tooltip {
+  position: absolute;
+  z-index: 5;
+  width: 210px;
+  display: grid;
+  gap: 4px;
+  pointer-events: none;
+  border: 1px solid rgba(94, 234, 212, .42);
+  border-radius: 8px;
+  background: rgba(5, 15, 24, .95);
+  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+  padding: 8px 9px;
+  backdrop-filter: blur(9px);
+}
+
+.wave-tooltip[hidden] {
+  display: none !important;
+}
+
+.wave-tooltip strong {
+  color: #99f6e4;
+  font-size: 8px;
+}
+
+.wave-tooltip span {
+  color: #a4b5c6;
+  font-size: 7px;
+  line-height: 1.45;
+}
+
+#axisDiagramCanvas {
+  width: 100%;
+  height: 190px;
+  display: block;
+  margin: 8px 0 9px;
+  border: 1px solid #26394d;
+  border-radius: 8px;
+  background: #0b1621;
+}
+
+.guided-context-panel {
+  margin-top: 10px;
+  border: 1px solid #294057;
+  border-radius: 9px;
+  background:
+    linear-gradient(145deg, rgba(13, 31, 44, .96), rgba(8, 21, 31, .96));
+  padding: 11px;
+}
+
+.guided-context-panel > span {
+  color: var(--ecg-cyan-2);
+  font-size: 6px;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+
+.guided-context-panel > h3 {
+  margin: 5px 0 8px;
+  color: #eef5fb;
+  font-size: 10px;
+}
+
+.guided-context-body {
+  display: grid;
+  gap: 6px;
+}
+
+.guided-context-item {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: start;
+  gap: 7px;
+  border: 1px solid rgba(84, 110, 136, .18);
+  border-radius: 7px;
+  background: rgba(9, 24, 35, .72);
+  padding: 7px;
+}
+
+.guided-context-item > span {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(34, 211, 238, .10);
+  color: #67e8f9;
+  font-size: 7px;
+  font-weight: 850;
+}
+
+.guided-context-item p {
+  margin: 1px 0 0;
+  color: #a9b9c9;
+  font-size: 7px;
+  line-height: 1.5;
+}
+
+.pattern-teaching-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  border-top: 1px solid rgba(78, 104, 130, .22);
+  padding: 12px 14px 14px;
+}
+
+.pattern-teaching-grid article {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  border: 1px solid #293d52;
+  border-radius: 9px;
+  background: #0d1925;
+  padding: 9px;
+}
+
+.pattern-teaching-grid article > span {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: rgba(94, 234, 212, .08);
+  color: #70eadb;
+  font-size: 7px;
+  font-weight: 850;
+}
+
+.pattern-teaching-grid strong {
+  color: #eef4fa;
+  font-size: 8px;
+}
+
+.pattern-teaching-grid p {
+  margin: 4px 0 0;
+  color: #8fa2b6;
+  font-size: 7px;
+  line-height: 1.55;
+}
+
+@media (max-width: 1180px) {
+  .wave-annotated-card {
+    grid-template-columns: 1fr;
+  }
+
+  .pattern-teaching-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .wave-annotated-card {
+    margin: 0 9px 10px;
+    padding: 9px;
+  }
+
+  #fundamentalsWaveCanvas {
+    min-width: 640px;
+  }
+
+  .wave-annotated-canvas-wrap {
+    overflow-x: auto;
+  }
+
+  .pattern-teaching-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+}
