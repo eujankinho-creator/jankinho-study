@@ -1211,9 +1211,7 @@
     box-shadow .20s ease;
 
   animation:
-    cortexFlashCardIn
-    .38s cubic-bezier(.2,.8,.2,1)
-    both;
+    none;
 }
 
 
