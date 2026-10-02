@@ -48,6 +48,50 @@ function normalizarTema(
   return "dark-orange";
 }
 
+function normalizarFotoPerfil(
+  value: unknown
+) {
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === ""
+  ) {
+    return null;
+  }
+
+
+  const foto =
+    String(value)
+      .trim();
+
+
+  if (
+    foto.length >
+      280 * 1024
+  ) {
+
+    throw new Error(
+      "A foto de perfil ficou muito grande."
+    );
+  }
+
+
+  if (
+    !/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/
+      .test(foto)
+  ) {
+
+    throw new Error(
+      "Formato de foto de perfil invalido."
+    );
+  }
+
+
+  return foto;
+}
+
+
 
 function json(
   response: ServerResponse,
@@ -212,7 +256,7 @@ async function lerJson(
 
           if (
             body.length >
-            64 * 1024
+            512 * 1024
           ) {
 
             reject(
@@ -323,6 +367,7 @@ export async function obterConfiguracoes(
           createdAt: true,
           senhaHash: true,
           tema: true,
+          fotoPerfil: true,
         },
       });
 
@@ -368,6 +413,10 @@ export async function obterConfiguracoes(
             normalizarTema(
               usuario.tema
             ),
+
+          fotoPerfil:
+            usuario.fotoPerfil ||
+            null,
         },
       }
     );
@@ -483,21 +532,83 @@ export async function atualizarPerfil(
     }
 
 
+    const possuiFotoPerfil =
+      Object.prototype
+        .hasOwnProperty
+        .call(
+          body,
+          "fotoPerfil"
+        );
+
+
+    let fotoPerfil:
+      string |
+      null |
+      undefined =
+      undefined;
+
+
+    if (possuiFotoPerfil) {
+
+      try {
+
+        fotoPerfil =
+          normalizarFotoPerfil(
+            body.fotoPerfil
+          );
+
+      }
+      catch (error) {
+
+        json(
+          response,
+          400,
+          {
+            error:
+              error instanceof Error
+                ? error.message
+                : "Foto de perfil invalida.",
+          }
+        );
+
+
+        return;
+      }
+    }
+
+
+    const dadosPerfil: {
+      nome: string;
+      fotoPerfil?: string | null;
+    } = {
+      nome,
+    };
+
+
+    if (possuiFotoPerfil) {
+
+      dadosPerfil.fotoPerfil =
+        fotoPerfil ??
+        null;
+
+    }
+
+
     const usuario =
       await prisma.usuario.update({
         where: {
           id: usuarioId,
         },
 
-        data: {
-          nome,
-        },
+        data:
+          dadosPerfil,
 
         select: {
           id: true,
           nome: true,
           email: true,
           createdAt: true,
+          fotoPerfil: true,
         },
       });
 

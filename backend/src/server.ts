@@ -645,6 +645,7 @@ async function me(
           nome: true,
           email: true,
           tema: true,
+          fotoPerfil: true,
           createdAt: true,
         },
       });

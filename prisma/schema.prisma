@@ -14,6 +14,7 @@ model Usuario {
   nome          String
   email         String             @unique
   tema          String             @default("dark-orange")
+  fotoPerfil    String?            @db.Text
   createdAt     DateTime           @default(now())
   senhaHash     String?
   casosCriados  CasoClinico[]
