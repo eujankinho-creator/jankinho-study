@@ -44,7 +44,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/laboratorio.css?v=20261002-physiology3"
+    href="/css/laboratorio.css?v=20261002-workstation1"
   >
 
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
@@ -287,6 +287,35 @@
 
 
         <div class="lab-actions">
+
+          <button
+            id="liveButton"
+            class="lab-button live-control active"
+            type="button"
+            aria-pressed="true"
+          >
+            <span class="live-control-dot"></span>
+            <span id="liveButtonText">Pausar ao vivo</span>
+          </button>
+
+          <button
+            id="soundButton"
+            class="lab-button sound-control secondary"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="sound-control-icon">♪</span>
+            <span id="soundButtonText">Som FC desligado</span>
+          </button>
+
+          <button
+            id="referencesButton"
+            class="lab-button secondary"
+            type="button"
+            aria-expanded="false"
+          >
+            Referências
+          </button>
 
           <div
             id="apneaBadge"
@@ -580,8 +609,14 @@
 
         <aside class="lab-right">
 
+          <div
+            id="labPanelTabs"
+            class="lab-panel-tabs"
+            aria-label="Painéis do laboratório"
+          ></div>
 
-          <div class="lab-panel">
+
+          <div class="lab-panel" data-lab-panel="interpretation">
 
             <div class="panel-header">
 
@@ -603,7 +638,7 @@
           </div>
 
 
-          <div class="lab-panel">
+          <div class="lab-panel" data-lab-panel="hemodynamics">
 
             <div class="panel-header">
 
@@ -625,7 +660,7 @@
           </div>
 
 
-          <div class="lab-panel">
+          <div class="lab-panel" data-lab-panel="electrolytes">
 
             <div class="panel-header">
 
@@ -647,7 +682,7 @@
           </div>
 
 
-          <div class="lab-panel physiology-control-panel">
+          <div class="lab-panel physiology-control-panel" data-lab-panel="homeostasis">
 
             <div class="panel-header">
 
@@ -669,7 +704,7 @@
           </div>
 
 
-          <div class="lab-panel">
+          <div class="lab-panel" data-lab-panel="renal">
 
             <div class="panel-header">
 
@@ -691,7 +726,7 @@
           </div>
 
 
-          <div class="lab-panel">
+          <div class="lab-panel" data-lab-panel="respiration">
 
             <div class="panel-header">
 
@@ -719,7 +754,20 @@
       </section>
 
 
-      <section class="lab-science-note">
+      <section
+        id="sciencePanel"
+        class="lab-science-note"
+        aria-hidden="true"
+      >
+
+        <button
+          id="scienceCloseButton"
+          class="science-close-button"
+          type="button"
+          aria-label="Fechar referências"
+        >
+          ×
+        </button>
 
         <div>
           <span class="physiology-kicker">
@@ -843,7 +891,7 @@
     })();
   </script>
 
-<script defer src="/js/laboratorio.js?v=20261002-physiology3"></script>
+<script defer src="/js/laboratorio.js?v=20261002-workstation1"></script>
 
 
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
