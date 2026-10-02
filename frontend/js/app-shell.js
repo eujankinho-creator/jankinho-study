@@ -16,6 +16,205 @@
     $("cortexAppFrameNext");
 
 
+  /* =======================================================
+     CORTEX GLOBAL PROFILE PHOTO
+  ======================================================= */
+
+  let cortexProfilePhoto =
+    null;
+
+
+  function applyProfilePhotoToDocument(
+    targetDocument
+  ) {
+
+    if (!targetDocument) {
+      return;
+    }
+
+
+    targetDocument
+      .querySelectorAll(
+        ".avatar, #settingsHeroAvatar, .settings-account-avatar"
+      )
+      .forEach(
+        function (
+          avatar
+        ) {
+
+          if (
+            cortexProfilePhoto
+          ) {
+
+            avatar.style.backgroundImage =
+              'url("' +
+              cortexProfilePhoto +
+              '")';
+
+            avatar.style.backgroundSize =
+              "cover";
+
+            avatar.style.backgroundPosition =
+              "center";
+
+            avatar.style.backgroundRepeat =
+              "no-repeat";
+
+            avatar.style.color =
+              "transparent";
+
+            avatar.style.overflow =
+              "hidden";
+
+            avatar.style.borderRadius =
+              "50%";
+
+            avatar.classList.add(
+              "has-profile-photo"
+            );
+
+          }
+          else {
+
+            avatar.style.backgroundImage =
+              "";
+
+            avatar.style.backgroundSize =
+              "";
+
+            avatar.style.backgroundPosition =
+              "";
+
+            avatar.style.backgroundRepeat =
+              "";
+
+            avatar.style.color =
+              "";
+
+            avatar.classList.remove(
+              "has-profile-photo"
+            );
+
+          }
+
+        }
+      );
+
+  }
+
+
+  function applyProfilePhotoToFrame(
+    targetFrame
+  ) {
+
+    if (!targetFrame) {
+      return;
+    }
+
+
+    try {
+
+      applyProfilePhotoToDocument(
+        targetFrame.contentDocument
+      );
+
+    }
+    catch {}
+
+  }
+
+
+  function refreshProfilePhotoFrames() {
+
+    applyProfilePhotoToFrame(
+      frame
+    );
+
+
+    applyProfilePhotoToFrame(
+      standbyFrame
+    );
+
+  }
+
+
+  function scheduleProfilePhotoApply(
+    targetFrame
+  ) {
+
+    applyProfilePhotoToFrame(
+      targetFrame
+    );
+
+
+    window.setTimeout(
+      function () {
+
+        applyProfilePhotoToFrame(
+          targetFrame
+        );
+
+      },
+      160
+    );
+
+
+    window.setTimeout(
+      function () {
+
+        applyProfilePhotoToFrame(
+          targetFrame
+        );
+
+      },
+      650
+    );
+
+  }
+
+
+  async function loadGlobalProfilePhoto() {
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/auth/me",
+          {
+            credentials:
+              "same-origin",
+
+            cache:
+              "no-store",
+          }
+        );
+
+
+      if (!response.ok) {
+        return;
+      }
+
+
+      const data =
+        await response.json();
+
+
+      cortexProfilePhoto =
+        data &&
+        data.usuario &&
+        data.usuario.fotoPerfil
+          ? data.usuario.fotoPerfil
+          : null;
+
+
+      refreshProfilePhotoFrames();
+
+    }
+    catch {}
+
+  }
+
+
   let pendingTarget =
     null;
 
@@ -1741,6 +1940,10 @@
         event.currentTarget
       );
 
+      scheduleProfilePhotoApply(
+        event.currentTarget
+      );
+
     }
   );
 
@@ -1752,6 +1955,10 @@
     ) {
 
       handleFrameLoad(
+        event.currentTarget
+      );
+
+      scheduleProfilePhotoApply(
         event.currentTarget
       );
 
@@ -1894,6 +2101,23 @@
 
 
       if (!data) {
+        return;
+      }
+
+
+      if (
+        data.type ===
+          "cortex:profile-photo-updated"
+      ) {
+
+        cortexProfilePhoto =
+          data.fotoPerfil ||
+          null;
+
+
+        refreshProfilePhotoFrames();
+
+
         return;
       }
 
@@ -2369,8 +2593,11 @@
   showPlayerBubble();
 
   /*
-   * Inicializa primeiro o shell.
+   * Carrega os dados visuais da conta antes de iniciar a navegacao.
    */
+  loadGlobalProfilePhoto();
+
+
   configureFrame();
 
 
