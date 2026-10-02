@@ -2763,6 +2763,15 @@ function contentType(
 
       ".ico":
         "image/x-icon",
+
+      ".glb":
+        "model/gltf-binary",
+
+      ".gltf":
+        "model/gltf+json",
+
+      ".wasm":
+        "application/wasm",
     };
 
   return (
