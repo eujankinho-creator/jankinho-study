@@ -89,7 +89,37 @@ const state = {
     0,
 
   renderQueued:
-    false
+    false,
+
+  live:
+    true,
+
+  soundEnabled:
+    false,
+
+  audioContext:
+    null,
+
+  beatAccumulator:
+    0,
+
+  ecgBuffer:
+    [],
+
+  plethBuffer:
+    [],
+
+  ecgSampleAccumulator:
+    0,
+
+  plethSampleAccumulator:
+    0,
+
+  traceInitialized:
+    false,
+
+  analysisPanel:
+    "hemodynamics"
 };
 
 
@@ -704,6 +734,71 @@ const presets = [
       vq: 72,
       fio2: 21
     }
+  }
+
+];
+
+
+const ECG_SAMPLE_RATE =
+  250;
+
+
+const PLETH_SAMPLE_RATE =
+  100;
+
+
+const TRACE_SECONDS =
+  6;
+
+
+const analysisPanels = [
+
+  {
+    id:
+      "hemodynamics",
+
+    label:
+      "Hemodinâmica"
+  },
+
+  {
+    id:
+      "electrolytes",
+
+    label:
+      "Eletrólitos"
+  },
+
+  {
+    id:
+      "interpretation",
+
+    label:
+      "Ácido-base"
+  },
+
+  {
+    id:
+      "renal",
+
+    label:
+      "Rim"
+  },
+
+  {
+    id:
+      "homeostasis",
+
+    label:
+      "Homeostase"
+  },
+
+  {
+    id:
+      "respiration",
+
+    label:
+      "Respiração"
   }
 
 ];
@@ -2780,6 +2875,93 @@ function statusClass(
 }
 
 
+function renderAnalysisTabs() {
+
+  const container =
+    $("labPanelTabs");
+
+
+  if (!container) {
+    return;
+  }
+
+
+  container.innerHTML =
+    analysisPanels
+      .map(
+        function (
+          panel
+        ) {
+
+          return (
+            '<button type="button" class="lab-panel-tab ' +
+            (
+              state.analysisPanel ===
+                panel.id
+                ? "active"
+                : ""
+            ) +
+            '" data-lab-panel-target="' +
+            panel.id +
+            '">' +
+              panel.label +
+            "</button>"
+          );
+
+        }
+      )
+      .join("");
+
+
+  document
+    .querySelectorAll(
+      "[data-lab-panel]"
+    )
+    .forEach(
+      function (
+        panel
+      ) {
+
+        panel.classList.toggle(
+          "is-active",
+          panel.dataset
+            .labPanel ===
+            state.analysisPanel
+        );
+
+      }
+    );
+
+
+  container
+    .querySelectorAll(
+      "[data-lab-panel-target]"
+    )
+    .forEach(
+      function (
+        button
+      ) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            state.analysisPanel =
+              button.dataset
+                .labPanelTarget;
+
+
+            renderAnalysisTabs();
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
 function renderTabs() {
 
   $("tabs")
@@ -2898,6 +3080,25 @@ function renderControls() {
                   : 0;
 
 
+          const progress =
+            clamp(
+              (
+                (
+                  value -
+                  slider.min
+                ) /
+                Math.max(
+                  slider.max -
+                  slider.min,
+                  .0001
+                )
+              ) *
+              100,
+              0,
+              100
+            );
+
+
           return (
             '<div class="slider-control ' +
             (
@@ -2939,7 +3140,9 @@ function renderControls() {
                 value +
                 '" data-slider="' +
                 slider.field +
-                '"' +
+                '" style="--range-progress:' +
+                progress +
+                '%"' +
                 (
                   derived
                     ? " disabled"
@@ -2990,6 +3193,45 @@ function renderControls() {
               field
             ] =
               value;
+
+
+            if (
+              input.min !==
+                input.max
+            ) {
+
+              const progress =
+                clamp(
+                  (
+                    (
+                      value -
+                      Number(
+                        input.min
+                      )
+                    ) /
+                    Math.max(
+                      Number(
+                        input.max
+                      ) -
+                      Number(
+                        input.min
+                      ),
+                      .0001
+                    )
+                  ) *
+                  100,
+                  0,
+                  100
+                );
+
+
+              input.style.setProperty(
+                "--range-progress",
+                progress +
+                "%"
+              );
+
+            }
 
 
             const slider =
@@ -3144,6 +3386,14 @@ function renderPresets() {
 
 
             state.simulatedRenalHours =
+              0;
+
+
+            state.traceInitialized =
+              false;
+
+
+            state.beatAccumulator =
               0;
 
 
@@ -4514,6 +4764,296 @@ function drawCalibrationPulse(
 }
 
 
+function resetTraceBuffers(
+  modelInput
+) {
+
+  const model =
+    modelInput ||
+    physiologicalModel();
+
+
+  const values =
+    model.values;
+
+
+  const results =
+    model.results;
+
+
+  const ecgCount =
+    TRACE_SECONDS *
+    ECG_SAMPLE_RATE;
+
+
+  const plethCount =
+    TRACE_SECONDS *
+    PLETH_SAMPLE_RATE;
+
+
+  state.ecgBuffer =
+    [];
+
+
+  state.plethBuffer =
+    [];
+
+
+  state.ecgClock =
+    0;
+
+
+  state.plethClock =
+    0;
+
+
+  for (
+    let index = 0;
+    index <
+      ecgCount;
+    index++
+  ) {
+
+    const time =
+      (
+        index -
+        ecgCount
+      ) /
+      ECG_SAMPLE_RATE;
+
+
+    state.ecgBuffer.push(
+      ecgValueAtTime(
+        time,
+        values,
+        results,
+        results.ecg
+      )
+    );
+
+  }
+
+
+  for (
+    let index = 0;
+    index <
+      plethCount;
+    index++
+  ) {
+
+    const time =
+      (
+        index -
+        plethCount
+      ) /
+      PLETH_SAMPLE_RATE;
+
+
+    state.plethBuffer.push(
+      plethValueAtTime(
+        time,
+        results
+      )
+    );
+
+  }
+
+
+  state.ecgSampleAccumulator =
+    0;
+
+
+  state.plethSampleAccumulator =
+    0;
+
+
+  state.traceInitialized =
+    true;
+
+}
+
+
+function pushTraceSamples(
+  deltaSeconds,
+  model
+) {
+
+  if (
+    !state.traceInitialized
+  ) {
+
+    resetTraceBuffers(
+      model
+    );
+
+  }
+
+
+  const values =
+    model.values;
+
+
+  const results =
+    model.results;
+
+
+  state.ecgSampleAccumulator +=
+    deltaSeconds *
+    ECG_SAMPLE_RATE;
+
+
+  let ecgSamples =
+    Math.min(
+      30,
+      Math.floor(
+        state.ecgSampleAccumulator
+      )
+    );
+
+
+  state.ecgSampleAccumulator -=
+    ecgSamples;
+
+
+  while (
+    ecgSamples >
+    0
+  ) {
+
+    state.ecgClock +=
+      1 /
+      ECG_SAMPLE_RATE;
+
+
+    state.ecgBuffer.push(
+      ecgValueAtTime(
+        state.ecgClock,
+        values,
+        results,
+        results.ecg
+      )
+    );
+
+
+    ecgSamples -=
+      1;
+
+  }
+
+
+  const maxEcg =
+    TRACE_SECONDS *
+    ECG_SAMPLE_RATE;
+
+
+  if (
+    state.ecgBuffer.length >
+    maxEcg
+  ) {
+
+    state.ecgBuffer.splice(
+      0,
+      state.ecgBuffer.length -
+      maxEcg
+    );
+
+  }
+
+
+  state.plethSampleAccumulator +=
+    deltaSeconds *
+    PLETH_SAMPLE_RATE;
+
+
+  let plethSamples =
+    Math.min(
+      16,
+      Math.floor(
+        state.plethSampleAccumulator
+      )
+    );
+
+
+  state.plethSampleAccumulator -=
+    plethSamples;
+
+
+  while (
+    plethSamples >
+    0
+  ) {
+
+    state.plethClock +=
+      1 /
+      PLETH_SAMPLE_RATE;
+
+
+    let sample =
+      plethValueAtTime(
+        state.plethClock,
+        results
+      );
+
+
+    if (
+      results.perfusionIndex <
+      .42
+    ) {
+
+      const noise =
+        clamp(
+          (
+            .42 -
+            results.perfusionIndex
+          ) *
+          .025,
+          0,
+          .015
+        );
+
+
+      sample +=
+        Math.sin(
+          state.plethClock *
+          63
+        ) *
+        noise;
+
+    }
+
+
+    state.plethBuffer.push(
+      sample
+    );
+
+
+    plethSamples -=
+      1;
+
+  }
+
+
+  const maxPleth =
+    TRACE_SECONDS *
+    PLETH_SAMPLE_RATE;
+
+
+  if (
+    state.plethBuffer.length >
+    maxPleth
+  ) {
+
+    state.plethBuffer.splice(
+      0,
+      state.plethBuffer.length -
+      maxPleth
+    );
+
+  }
+
+}
+
+
 function drawECG(
   modelInput
 ) {
@@ -4539,20 +5079,15 @@ function drawECG(
     physiologicalModel();
 
 
-  const values =
-    model.values;
+  if (
+    !state.traceInitialized
+  ) {
 
+    resetTraceBuffers(
+      model
+    );
 
-  const results =
-    model.results;
-
-
-  const morphology =
-    results.ecg;
-
-
-  const seconds =
-    6;
+  }
 
 
   context.clearRect(
@@ -4566,25 +5101,19 @@ function drawECG(
   drawECGGrid(
     context,
     size,
-    seconds
+    TRACE_SECONDS
   );
 
 
   drawCalibrationPulse(
     context,
     size,
-    seconds
+    TRACE_SECONDS
   );
 
 
-  const points =
-    Math.max(
-      700,
-      Math.floor(
-        size.width /
-        1.4
-      )
-    );
+  const buffer =
+    state.ecgBuffer;
 
 
   const baseline =
@@ -4601,51 +5130,34 @@ function drawECG(
 
 
   for (
-    let i = 0;
-    i <
-      points;
-    i++
+    let index = 0;
+    index <
+      buffer.length;
+    index++
   ) {
 
-    const normalized =
-      i /
-      (
-        points -
-        1
-      );
-
-
-    const time =
-      state.ecgClock -
-      seconds *
-      (
-        1 -
-        normalized
-      );
-
-
-    const millivolts =
-      ecgValueAtTime(
-        time,
-        values,
-        results,
-        morphology
-      );
-
-
     const x =
-      normalized *
+      (
+        index /
+        Math.max(
+          buffer.length -
+          1,
+          1
+        )
+      ) *
       size.width;
 
 
     const y =
       baseline -
-      millivolts *
+      buffer[
+        index
+      ] *
       mvScale;
 
 
     if (
-      i ===
+      index ===
       0
     ) {
 
@@ -4672,16 +5184,16 @@ function drawECG(
 
 
   context.lineWidth =
-    1.55 *
+    1.45 *
     size.dpr;
 
 
   context.shadowColor =
-    "rgba(72,232,121,.28)";
+    "rgba(72,232,121,.16)";
 
 
   context.shadowBlur =
-    4 *
+    2 *
     size.dpr;
 
 
@@ -4799,16 +5311,15 @@ function drawSPO(
     physiologicalModel();
 
 
-  const values =
-    model.values;
+  if (
+    !state.traceInitialized
+  ) {
 
+    resetTraceBuffers(
+      model
+    );
 
-  const results =
-    model.results;
-
-
-  const seconds =
-    6;
+  }
 
 
   context.clearRect(
@@ -4825,14 +5336,8 @@ function drawSPO(
   );
 
 
-  const points =
-    Math.max(
-      600,
-      Math.floor(
-        size.width /
-        1.5
-      )
-    );
+  const buffer =
+    state.plethBuffer;
 
 
   const baseline =
@@ -4845,80 +5350,38 @@ function drawSPO(
     .32;
 
 
-  const signalNoise =
-    clamp(
-      (
-        .42 -
-        results.perfusionIndex
-      ) *
-      .025,
-      0,
-      .015
-    );
-
-
   context.beginPath();
 
 
   for (
-    let i = 0;
-    i <
-      points;
-    i++
+    let index = 0;
+    index <
+      buffer.length;
+    index++
   ) {
 
-    const normalized =
-      i /
-      (
-        points -
-        1
-      );
-
-
-    const time =
-      state.plethClock -
-      seconds *
-      (
-        1 -
-        normalized
-      );
-
-
-    let value =
-      plethValueAtTime(
-        time,
-        results
-      );
-
-
-    if (
-      signalNoise >
-      0
-    ) {
-
-      value +=
-        Math.sin(
-          time *
-          63
-        ) *
-        signalNoise;
-
-    }
-
-
     const x =
-      normalized *
+      (
+        index /
+        Math.max(
+          buffer.length -
+          1,
+          1
+        )
+      ) *
       size.width;
 
 
     const y =
       baseline -
-      value *
+      buffer[
+        index
+      ] *
       amplitudeScale;
 
 
     if (
-      i ===
+      index ===
       0
     ) {
 
@@ -4945,16 +5408,16 @@ function drawSPO(
 
 
   context.lineWidth =
-    1.65 *
+    1.5 *
     size.dpr;
 
 
   context.shadowColor =
-    "rgba(56,168,255,.25)";
+    "rgba(56,168,255,.14)";
 
 
   context.shadowBlur =
-    4 *
+    2 *
     size.dpr;
 
 
@@ -4963,6 +5426,356 @@ function drawSPO(
 
   context.shadowBlur =
     0;
+
+}
+
+
+function renderLiveControls() {
+
+  const liveButton =
+    $("liveButton");
+
+
+  if (liveButton) {
+
+    liveButton.classList.toggle(
+      "active",
+      state.live
+    );
+
+
+    liveButton.setAttribute(
+      "aria-pressed",
+      state.live
+        ? "true"
+        : "false"
+    );
+
+  }
+
+
+  if ($("liveButtonText")) {
+
+    $("liveButtonText")
+      .textContent =
+      state.live
+        ? "Pausar ao vivo"
+        : "Retomar ao vivo";
+
+  }
+
+
+  const soundButton =
+    $("soundButton");
+
+
+  if (soundButton) {
+
+    soundButton.classList.toggle(
+      "active",
+      state.soundEnabled
+    );
+
+
+    soundButton.classList.toggle(
+      "secondary",
+      !state.soundEnabled
+    );
+
+
+    soundButton.setAttribute(
+      "aria-pressed",
+      state.soundEnabled
+        ? "true"
+        : "false"
+    );
+
+  }
+
+
+  if ($("soundButtonText")) {
+
+    $("soundButtonText")
+      .textContent =
+      state.soundEnabled
+        ? "Som FC ligado"
+        : "Som FC desligado";
+
+  }
+
+}
+
+
+function toggleLive() {
+
+  state.live =
+    !state.live;
+
+
+  state.previousAnimation =
+    performance.now();
+
+
+  renderLiveControls();
+
+
+  renderData();
+
+
+  if (
+    !state.live
+  ) {
+
+    const model =
+      physiologicalModel();
+
+
+    drawECG(
+      model
+    );
+
+
+    drawSPO(
+      model
+    );
+
+  }
+
+}
+
+
+async function ensureAudioContext() {
+
+  if (
+    state.audioContext
+  ) {
+
+    if (
+      state.audioContext.state ===
+      "suspended"
+    ) {
+
+      await state.audioContext
+        .resume();
+
+    }
+
+
+    return state.audioContext;
+
+  }
+
+
+  const AudioContextClass =
+    window.AudioContext ||
+    window.webkitAudioContext;
+
+
+  if (!AudioContextClass) {
+    return null;
+  }
+
+
+  state.audioContext =
+    new AudioContextClass();
+
+
+  if (
+    state.audioContext.state ===
+    "suspended"
+  ) {
+
+    await state.audioContext
+      .resume();
+
+  }
+
+
+  return state.audioContext;
+
+}
+
+
+async function toggleSound() {
+
+  state.soundEnabled =
+    !state.soundEnabled;
+
+
+  if (
+    state.soundEnabled
+  ) {
+
+    const context =
+      await ensureAudioContext();
+
+
+    if (!context) {
+
+      state.soundEnabled =
+        false;
+
+    }
+
+  }
+
+
+  renderLiveControls();
+
+}
+
+
+function playHeartbeat(
+  spo2
+) {
+
+  if (
+    !state.soundEnabled ||
+    !state.live ||
+    document.hidden ||
+    !state.audioContext
+  ) {
+    return;
+  }
+
+
+  const context =
+    state.audioContext;
+
+
+  if (
+    context.state !==
+    "running"
+  ) {
+    return;
+  }
+
+
+  const now =
+    context.currentTime;
+
+
+  const oscillator =
+    context.createOscillator();
+
+
+  const gain =
+    context.createGain();
+
+
+  /*
+   * Pulse-oximeter style pitch cue:
+   * lower saturation -> slightly lower pitch.
+   * It is an educational audio cue, not a medical alarm.
+   */
+  oscillator.frequency.value =
+    clamp(
+      390 +
+      spo2 *
+      4,
+      560,
+      800
+    );
+
+
+  oscillator.type =
+    "sine";
+
+
+  gain.gain.setValueAtTime(
+    .0001,
+    now
+  );
+
+
+  gain.gain.exponentialRampToValueAtTime(
+    .028,
+    now +
+    .004
+  );
+
+
+  gain.gain.exponentialRampToValueAtTime(
+    .0001,
+    now +
+    .055
+  );
+
+
+  oscillator.connect(
+    gain
+  );
+
+
+  gain.connect(
+    context.destination
+  );
+
+
+  oscillator.start(
+    now
+  );
+
+
+  oscillator.stop(
+    now +
+    .06
+  );
+
+}
+
+
+function toggleSciencePanel(
+  force
+) {
+
+  const panel =
+    $("sciencePanel");
+
+
+  const button =
+    $("referencesButton");
+
+
+  if (!panel) {
+    return;
+  }
+
+
+  const next =
+    typeof force ===
+      "boolean"
+      ? force
+      : !panel.classList
+          .contains(
+            "is-open"
+          );
+
+
+  panel.classList.toggle(
+    "is-open",
+    next
+  );
+
+
+  panel.setAttribute(
+    "aria-hidden",
+    next
+      ? "false"
+      : "true"
+  );
+
+
+  if (button) {
+
+    button.setAttribute(
+      "aria-expanded",
+      next
+        ? "true"
+        : "false"
+    );
+
+  }
 
 }
 
@@ -4989,94 +5802,154 @@ function animationLoop(
     now;
 
 
-  state.ecgClock +=
-    deltaSeconds;
-
-
-  state.plethClock +=
-    deltaSeconds;
-
-
-  updateHomeostasis(
-    deltaSeconds
-  );
-
-
-  const animationModel =
-    physiologicalModel();
-
-
-  drawECG(
-    animationModel
-  );
-
-
-  drawSPO(
-    animationModel
-  );
-
-
   if (
-    now -
-    state.lastRender >
-    250
+    state.live
   ) {
 
-    state.lastRender =
-      now;
+    updateHomeostasis(
+      deltaSeconds
+    );
 
 
-    renderData();
+    const animationModel =
+      physiologicalModel();
+
+
+    pushTraceSamples(
+      deltaSeconds,
+      animationModel
+    );
+
+
+    state.beatAccumulator +=
+      deltaSeconds *
+      animationModel.results
+        .effectiveHR /
+      60;
 
 
     if (
-      state.autoRenal &&
-      state.category ===
-        "gasometria"
+      state.beatAccumulator >=
+      1
     ) {
 
-      const input =
-        document.querySelector(
-          '[data-slider="hco3"]'
-        );
+      state.beatAccumulator %=
+        1;
+
+
+      playHeartbeat(
+        animationModel.results
+          .spo2
+      );
+
+    }
+
+
+    drawECG(
+      animationModel
+    );
+
+
+    drawSPO(
+      animationModel
+    );
+
+
+    if (
+      now -
+      state.lastRender >
+      250
+    ) {
+
+      state.lastRender =
+        now;
+
+
+      renderData();
 
 
       if (
-        input &&
-        document.activeElement !==
-          input
+        state.autoRenal &&
+        state.category ===
+          "gasometria"
       ) {
 
-        input.value =
-          state.values.hco3;
-
-
-        const container =
-          input.closest(
-            ".slider-control"
+        const input =
+          document.querySelector(
+            '[data-slider="hco3"]'
           );
 
 
-        const number =
-          container
-            ? container.querySelector(
-                ".slider-number"
-              )
-            : null;
+        if (
+          input &&
+          document.activeElement !==
+            input
+        ) {
+
+          input.value =
+            state.values.hco3;
 
 
-        if (number) {
+          const progress =
+            clamp(
+              (
+                (
+                  state.values.hco3 -
+                  Number(
+                    input.min
+                  )
+                ) /
+                Math.max(
+                  Number(
+                    input.max
+                  ) -
+                  Number(
+                    input.min
+                  ),
+                  .0001
+                )
+              ) *
+              100,
+              0,
+              100
+            );
 
-          number.innerHTML =
-            state.values.hco3
-              .toFixed(
-                1
-              )
-              .replace(
-                ".",
-                ","
-              ) +
-            "<small>mEq/L</small>";
+
+          input.style.setProperty(
+            "--range-progress",
+            progress +
+            "%"
+          );
+
+
+          const container =
+            input.closest(
+              ".slider-control"
+            );
+
+
+          const number =
+            container
+              ? container.querySelector(
+                  ".slider-number"
+                )
+              : null;
+
+
+          if (number) {
+
+            number.innerHTML =
+              state.values.hco3
+                .toFixed(
+                  1
+                )
+                .replace(
+                  ".",
+                  ","
+                ) +
+              "<small>mEq/L</small>";
+
+          }
 
         }
 
@@ -5127,15 +6000,21 @@ function toggleRespiration() {
       setInterval(
         function () {
 
-          state.apneaTime =
-            Math.min(
-              state.apneaTime +
-              1,
-              600
-            );
+          if (
+            state.live
+          ) {
+
+            state.apneaTime =
+              Math.min(
+                state.apneaTime +
+                1,
+                600
+              );
 
 
-          renderData();
+            renderData();
+
+          }
 
         },
         1000
@@ -5184,6 +6063,18 @@ function resetLaboratory() {
     0;
 
 
+  state.live =
+    true;
+
+
+  state.traceInitialized =
+    false;
+
+
+  state.beatAccumulator =
+    0;
+
+
   if (
     state.apneaTimer
   ) {
@@ -5209,6 +6100,12 @@ function resetLaboratory() {
 
 
   renderHomeostasis();
+
+
+  renderAnalysisTabs();
+
+
+  renderLiveControls();
 
 
   renderData();
@@ -5243,6 +6140,68 @@ async function logout() {
 
 
 function bindEvents() {
+
+  if (
+    $("liveButton")
+  ) {
+
+    $("liveButton")
+      .addEventListener(
+        "click",
+        toggleLive
+      );
+
+  }
+
+
+  if (
+    $("soundButton")
+  ) {
+
+    $("soundButton")
+      .addEventListener(
+        "click",
+        toggleSound
+      );
+
+  }
+
+
+  if (
+    $("referencesButton")
+  ) {
+
+    $("referencesButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          toggleSciencePanel();
+
+        }
+      );
+
+  }
+
+
+  if (
+    $("scienceCloseButton")
+  ) {
+
+    $("scienceCloseButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          toggleSciencePanel(
+            false
+          );
+
+        }
+      );
+
+  }
+
 
   $("respirationButton")
     .addEventListener(
@@ -5292,7 +6251,28 @@ async function start() {
     renderHomeostasis();
 
 
+    renderAnalysisTabs();
+
+
+    renderLiveControls();
+
+
     renderData();
+
+
+    resetTraceBuffers(
+      physiologicalModel()
+    );
+
+
+    drawECG(
+      physiologicalModel()
+    );
+
+
+    drawSPO(
+      physiologicalModel()
+    );
 
 
     bindEvents();
