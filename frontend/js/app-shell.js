@@ -24,6 +24,10 @@
     0;
 
 
+  let navigationRevision =
+    0;
+
+
   const state = {
 
     connected:
@@ -1381,6 +1385,10 @@
       null;
 
 
+    navigationRevision +=
+      1;
+
+
     window.clearTimeout(
       pendingFallbackTimer
     );
@@ -1392,6 +1400,121 @@
 
     saveLoadedFrameLocation(
       frame
+    );
+
+  }
+
+
+  function waitForStandbyFirstPaint(
+    target,
+    revision
+  ) {
+
+    const startedAt =
+      performance.now();
+
+
+    function inspect() {
+
+      if (
+        revision !==
+          navigationRevision ||
+        !pendingTarget ||
+        standbyFrame.dataset
+          .cortexTarget !==
+          target
+      ) {
+
+        return;
+      }
+
+
+      try {
+
+        const documentReady =
+          standbyFrame
+            .contentDocument;
+
+
+        if (
+          sameFrameTarget(
+            standbyFrame,
+            target
+          ) &&
+          documentReady &&
+          documentReady.body &&
+          documentReady.readyState !==
+            "loading"
+        ) {
+
+          /*
+           * Dois frames de pintura garantem que o navegador
+           * tenha montado o layout antes da troca. Nao esperamos
+           * APIs, imagens ou dados secundarios terminarem.
+           */
+          window.requestAnimationFrame(
+            function () {
+
+              window.requestAnimationFrame(
+                function () {
+
+                  if (
+                    revision !==
+                      navigationRevision ||
+                    !pendingTarget ||
+                    standbyFrame.dataset
+                      .cortexTarget !==
+                      target ||
+                    !sameFrameTarget(
+                      standbyFrame,
+                      target
+                    )
+                  ) {
+
+                    return;
+                  }
+
+
+                  enhanceLoadedFrame(
+                    standbyFrame
+                  );
+
+
+                  swapFrames(
+                    standbyFrame
+                  );
+
+                }
+              );
+
+            }
+          );
+
+
+          return;
+        }
+
+      }
+      catch {}
+
+
+      if (
+        performance.now() -
+          startedAt <
+        1800
+      ) {
+
+        window.requestAnimationFrame(
+          inspect
+        );
+
+      }
+
+    }
+
+
+    window.requestAnimationFrame(
+      inspect
     );
 
   }
@@ -1476,9 +1599,9 @@
 
 
       /*
-       * "load" significa apenas que HTML/CSS/JS terminaram.
-       * Muitas páginas ainda estão buscando dados da API.
-       * A troca normal acontece no cortex:page-ready.
+       * Fallback do primeiro-paint: se por algum motivo o watcher
+       * nao conseguir detectar o estado interactive, o evento load
+       * faz a troca imediatamente. Nao esperamos mais as APIs.
        */
       window.clearTimeout(
         pendingFallbackTimer
@@ -1506,7 +1629,7 @@
             }
 
           },
-          2800
+          0
         );
 
 
@@ -1618,17 +1741,32 @@
       normalized;
 
 
+    navigationRevision +=
+      1;
+
+
+    const revision =
+      navigationRevision;
+
+
     standbyFrame.dataset
       .cortexTarget =
       normalized;
 
 
     /*
-     * A pagina atual continua visivel. A proxima so assume
-     * a tela depois que o evento load confirmar que esta pronta.
+     * Mantem a pagina atual apenas ate o DOM da nova secao
+     * estar apto a ser pintado. Dados de API podem completar
+     * depois, ja com a nova pagina visivel.
      */
     standbyFrame.src =
       normalized;
+
+
+    waitForStandbyFirstPaint(
+      normalized,
+      revision
+    );
 
   }
 
