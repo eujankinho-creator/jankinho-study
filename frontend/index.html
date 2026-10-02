@@ -69,7 +69,7 @@
     href="/css/ui-enhancements.css?v=20261002-fluid-final4"
   >
 
-  <script src="/js/ui-enhancements.js?v=20261001-nav-core3"></script>
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core3"></script>
 
   <link
     rel="stylesheet"
@@ -1428,9 +1428,45 @@
 
 
 
-  <script src="/js/dashboard-ui.js?v=20261002-fluid-final4"></script>
-  <script src="/js/dashboard.js?v=20261002-fluid-final4"></script>
-  <script src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
+  
+  <script>
+    (function () {
+      if (window.parent === window) {
+        return;
+      }
+
+      var href =
+        window.location.pathname +
+        window.location.search +
+        window.location.hash;
+
+      try {
+        if (
+          typeof window.parent.CortexShellNavigationReady ===
+            "function"
+        ) {
+          window.parent.CortexShellNavigationReady(
+            window,
+            href
+          );
+        }
+        else {
+          window.parent.postMessage(
+            {
+              type: "cortex:first-paint-ready",
+              href: href
+            },
+            window.location.origin
+          );
+        }
+      }
+      catch (error) {}
+    })();
+  </script>
+
+<script defer src="/js/dashboard-ui.js?v=20261002-fluid-final4"></script>
+  <script defer src="/js/dashboard.js?v=20261002-fluid-final4"></script>
+  <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 
 
 </body>
