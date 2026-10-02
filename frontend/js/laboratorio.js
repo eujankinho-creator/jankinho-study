@@ -141,7 +141,10 @@ const categories = [
           .1,
 
         unit:
-          "mEq/L"
+          "mEq/L",
+
+        derivedWhen:
+          "autoRenal"
       },
 
       {
@@ -1257,9 +1260,21 @@ function arterialOxygen(
     120;
 
 
+  const apneaPenalty =
+    state.breathing
+      ? 0
+      : state.apneaTime *
+        .55 *
+        (
+          values.metabolismo /
+          100
+        );
+
+
   return clamp(
     pao2Alveolar -
-    gradientAa,
+    gradientAa -
+    apneaPenalty,
     18,
     650
   );
@@ -1478,13 +1493,13 @@ function computeHemodynamics(
    */
   const svr =
     clamp(
-      1000 *
+      1250 *
       Math.exp(
         netTone *
         .86
       ),
-      360,
-      2450
+      450,
+      2800
     );
 
 
@@ -1508,7 +1523,7 @@ function computeHemodynamics(
 
   const afterloadFactor =
     Math.pow(
-      1000 /
+      1250 /
       svr,
       .14
     );
@@ -1516,7 +1531,7 @@ function computeHemodynamics(
 
   let strokeVolume =
     clamp(
-      70 *
+      78 *
       Math.pow(
         volumeFactor,
         .48
@@ -1645,7 +1660,7 @@ function computeHemodynamics(
       40 *
       (
         strokeVolume /
-        70
+        78
       ) /
       arterialCompliance,
       18,
@@ -3681,18 +3696,13 @@ function renderHemodynamics(
     ) +
     resultRow(
       "Débito cardíaco",
-      results.cardiaOutput,
-      ""
-    )
-      .replace(
-        "undefined",
-        results
-          .cardiacOutput
-          .toFixed(
-            2
-          ) +
-        "<small>L/min</small>"
-      ) +
+      results
+        .cardiacOutput
+        .toFixed(
+          2
+        ),
+      "L/min"
+    ) +
     resultRow(
       "RVS",
       Math.round(
