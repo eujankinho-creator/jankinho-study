@@ -24,6 +24,10 @@
     null;
 
 
+  const profilePhotoObservers =
+    new WeakMap();
+
+
   function applyProfilePhotoToDocument(
     targetDocument
   ) {
@@ -35,7 +39,7 @@
 
     targetDocument
       .querySelectorAll(
-        ".avatar, #settingsHeroAvatar, .settings-account-avatar"
+        ".avatar, #avatarSidebar, #avatarHeader, #settingsHeroAvatar, .settings-account-avatar, [data-profile-avatar=\"current\"]"
       )
       .forEach(
         function (
@@ -103,6 +107,96 @@
   }
 
 
+  function ensureProfilePhotoObserver(
+    targetFrame
+  ) {
+
+    if (!targetFrame) {
+      return;
+    }
+
+
+    try {
+
+      const targetDocument =
+        targetFrame.contentDocument;
+
+
+      if (
+        !targetDocument ||
+        !targetDocument.body ||
+        profilePhotoObservers.has(
+          targetDocument
+        )
+      ) {
+
+        return;
+      }
+
+
+      let queued =
+        false;
+
+
+      const observer =
+        new MutationObserver(
+          function () {
+
+            if (queued) {
+              return;
+            }
+
+
+            queued =
+              true;
+
+
+            queueMicrotask(
+              function () {
+
+                queued =
+                  false;
+
+
+                applyProfilePhotoToDocument(
+                  targetDocument
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      observer.observe(
+        targetDocument.body,
+        {
+          childList:
+            true,
+
+          subtree:
+            true,
+        }
+      );
+
+
+      profilePhotoObservers.set(
+        targetDocument,
+        observer
+      );
+
+
+      applyProfilePhotoToDocument(
+        targetDocument
+      );
+
+    }
+    catch {}
+
+  }
+
+
   function applyProfilePhotoToFrame(
     targetFrame
   ) {
@@ -116,6 +210,11 @@
 
       applyProfilePhotoToDocument(
         targetFrame.contentDocument
+      );
+
+
+      ensureProfilePhotoObserver(
+        targetFrame
       );
 
     }

@@ -170,6 +170,7 @@ export async function atenderRanking(
         select: {
           id: true,
           nome: true,
+          fotoPerfil: true,
 
           respostas: {
             select: {
@@ -218,6 +219,10 @@ export async function atenderRanking(
 
             nome:
               usuario.nome,
+
+            fotoPerfil:
+              usuario.fotoPerfil ||
+              null,
 
             total,
 

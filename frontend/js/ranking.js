@@ -103,6 +103,141 @@ function initials(name) {
 }
 
 
+function avatarMarkup(
+  item,
+  className
+) {
+
+  const photo =
+    item &&
+    item.fotoPerfil
+      ? String(
+          item.fotoPerfil
+        )
+      : "";
+
+
+  if (photo) {
+
+    return (
+      '<div class="' +
+      className +
+      ' has-profile-photo">' +
+        '<img src="' +
+        escapeHtml(
+          photo
+        ) +
+        '" alt="Foto de ' +
+        escapeHtml(
+          item.nome ||
+          "usuario"
+        ) +
+        '">' +
+      '</div>'
+    );
+  }
+
+
+  return (
+    '<div class="' +
+    className +
+    '">' +
+      escapeHtml(
+        initials(
+          item &&
+          item.nome
+        )
+      ) +
+    '</div>'
+  );
+}
+
+
+function applyCurrentUserAvatar(
+  element,
+  user
+) {
+
+  if (!element) {
+    return;
+  }
+
+
+  const name =
+    user &&
+    user.nome
+      ? user.nome
+      : "Usuario";
+
+
+  const photo =
+    user &&
+    user.fotoPerfil
+      ? String(
+          user.fotoPerfil
+        )
+      : "";
+
+
+  if (photo) {
+
+    element.style.backgroundImage =
+      'url("' +
+      photo +
+      '")';
+
+    element.style.backgroundSize =
+      "cover";
+
+    element.style.backgroundPosition =
+      "center";
+
+    element.style.backgroundRepeat =
+      "no-repeat";
+
+    element.style.color =
+      "transparent";
+
+    element.style.overflow =
+      "hidden";
+
+    element.style.borderRadius =
+      "50%";
+
+    element.classList.add(
+      "has-profile-photo"
+    );
+
+    return;
+  }
+
+
+  element.style.backgroundImage =
+    "";
+
+  element.style.backgroundSize =
+    "";
+
+  element.style.backgroundPosition =
+    "";
+
+  element.style.backgroundRepeat =
+    "";
+
+  element.style.color =
+    "";
+
+  element.classList.remove(
+    "has-profile-photo"
+  );
+
+  element.textContent =
+    name
+      .charAt(0)
+      .toUpperCase();
+}
+
+
 function medal(position) {
 
   if (position === 1) {
@@ -182,12 +317,6 @@ async function loadUser() {
     "Usuario";
 
 
-  const initial =
-    name
-      .charAt(0)
-      .toUpperCase();
-
-
   $("nomeSidebar")
     .textContent =
     name;
@@ -203,14 +332,16 @@ async function loadUser() {
     name;
 
 
-  $("avatarSidebar")
-    .textContent =
-    initial;
+  applyCurrentUserAvatar(
+    $("avatarSidebar"),
+    user
+  );
 
 
-  $("avatarHeader")
-    .textContent =
-    initial;
+  applyCurrentUserAvatar(
+    $("avatarHeader"),
+    user
+  );
 }
 
 
@@ -264,13 +395,10 @@ function renderPodium(
               </div>
 
 
-              <div class="podium-avatar">
-                ${escapeHtml(
-                  initials(
-                    item.nome
-                  )
-                )}
-              </div>
+              ${avatarMarkup(
+                item,
+                "podium-avatar"
+              )}
 
 
               <h3>
@@ -394,13 +522,10 @@ function renderUsers(
                   </div>
 
 
-                  <div class="user-avatar">
-                    ${escapeHtml(
-                      initials(
-                        item.nome
-                      )
-                    )}
-                  </div>
+                  ${avatarMarkup(
+                    item,
+                    "user-avatar"
+                  )}
 
 
                   <div class="user-name">
