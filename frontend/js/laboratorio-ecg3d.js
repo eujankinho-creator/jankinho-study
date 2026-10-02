@@ -1991,9 +1991,12 @@ function setupElectrodeLearning() {
 function renderElectrodeGroup(group) {
   const holder = byId("electrodeDots");
   const leadButtons = byId("electrodeLeadButtons");
-  if (!holder || !leadButtons) return;
+  const vectorHolder = byId("electrodeVectors");
+  if (!holder || !leadButtons || !vectorHolder) return;
 
   holder.innerHTML = "";
+  vectorHolder.innerHTML = "";
+
   (ELECTRODE_POINTS[group] || []).forEach(function (point) {
     const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     g.setAttribute("class", "electrode-dot-svg");
@@ -2002,6 +2005,7 @@ function renderElectrodeGroup(group) {
 
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("r", point.label.length > 2 ? "14" : "11");
+
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
     text.textContent = point.label;
 
@@ -2015,44 +2019,126 @@ function renderElectrodeGroup(group) {
   });
 
   leadButtons.innerHTML = "";
-  (ELECTRODE_LEADS[group] || []).forEach(function (lead, index) {
+
+  const groupLeads = ELECTRODE_LEADS[group] || [];
+  groupLeads.forEach(function (lead, index) {
     const button = document.createElement("button");
     button.type = "button";
-    button.innerHTML = "<strong>" + lead[0] + "</strong><br><small>" + lead[1] + "</small>";
+    button.dataset.leadId = lead[0];
+    button.innerHTML =
+      "<strong>" + lead[0] + "</strong><br><small>" + lead[1] + "</small>";
+
     if (index === 0) button.classList.add("active");
+
     button.addEventListener("click", function () {
-      all("#electrodeLeadButtons button").forEach(function (item) {
-        item.classList.toggle("active", item === button);
-      });
-      const point = (ELECTRODE_POINTS[group] || [])[Math.min(index, (ELECTRODE_POINTS[group] || []).length - 1)];
-      if (point) updateElectrodeFocus(lead[0], point);
+      focusLead(group, lead[0]);
     });
+
     leadButtons.appendChild(button);
   });
 
-  const first = (ELECTRODE_POINTS[group] || [])[0];
-  if (first) {
-    focusElectrode(group, first.id);
+  if (groupLeads.length) {
+    focusLead(group, groupLeads[0][0]);
   }
+}
+
+function renderElectrodeVector(leadId) {
+  const holder = byId("electrodeVectors");
+  if (!holder) return;
+  holder.innerHTML = "";
+
+  const vector = ELECTRODE_VECTOR_CONFIG[leadId];
+  if (!vector) return;
+
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute("x1", vector[0]);
+  line.setAttribute("y1", vector[1]);
+  line.setAttribute("x2", vector[2]);
+  line.setAttribute("y2", vector[3]);
+  line.setAttribute("class", "electrode-vector-line");
+  line.setAttribute("marker-end", "url(#electrodeArrowHead)");
+  holder.appendChild(line);
+
+  const start = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  start.setAttribute("cx", vector[0]);
+  start.setAttribute("cy", vector[1]);
+  start.setAttribute("r", "4.5");
+  start.setAttribute("class", "electrode-vector-origin");
+  holder.appendChild(start);
+
+  const plus = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  plus.setAttribute("x", vector[2] + 8);
+  plus.setAttribute("y", vector[3] - 8);
+  plus.setAttribute("class", "electrode-vector-plus");
+  plus.textContent = "+";
+  holder.appendChild(plus);
+}
+
+function focusLead(group, leadId) {
+  all("#electrodeLeadButtons button").forEach(function (button) {
+    button.classList.toggle("active", button.dataset.leadId === leadId);
+  });
+
+  const points = ELECTRODE_POINTS[group] || [];
+  all(".electrode-dot-svg").forEach(function (item) {
+    const id = item.getAttribute("data-electrode-id");
+    const detail = ELECTRODE_VECTOR_CONFIG[leadId];
+    const point = points.find(function (candidate) {
+      return candidate.id === id;
+    });
+
+    if (!detail || !point) {
+      item.classList.remove("active");
+      return;
+    }
+
+    const targetX = detail[2];
+    const targetY = detail[3];
+    const distance = Math.hypot(point.x - targetX, point.y - targetY);
+    item.classList.toggle("active", distance < 22);
+  });
+
+  renderElectrodeVector(leadId);
+  updateElectrodeFocus(leadId);
 }
 
 function focusElectrode(group, id) {
   all(".electrode-dot-svg").forEach(function (item) {
-    item.classList.toggle("active", item.getAttribute("data-electrode-id") === id);
+    item.classList.toggle(
+      "active",
+      item.getAttribute("data-electrode-id") === id
+    );
   });
+
   const point = (ELECTRODE_POINTS[group] || []).find(function (item) {
     return item.id === id;
   });
-  if (point) updateElectrodeFocus(id, point);
+
+  if (!point) return;
+
+  const title = byId("electrodeFocusTitle");
+  const paragraph = byId("electrodeFocusText");
+  const direction = byId("electrodeDirectionText");
+
+  if (title) title.textContent = point.label + " · " + point.title;
+  if (paragraph) paragraph.textContent = point.text;
+  if (direction) {
+    direction.textContent =
+      "Este é o local do eletrodo. Escolha uma derivação ao lado para ver a seta do eixo e o polo positivo.";
+  }
 }
 
-function updateElectrodeFocus(id, point) {
-  const box = byId("electrodeFocusCard");
-  if (!box) return;
-  const title = box.querySelector("h4");
-  const paragraph = box.querySelector("p");
-  if (title) title.textContent = id + " · " + point.title;
-  if (paragraph) paragraph.textContent = point.text;
+function updateElectrodeFocus(leadId) {
+  const detail = ELECTRODE_LEAD_DETAILS[leadId];
+  if (!detail) return;
+
+  const title = byId("electrodeFocusTitle");
+  const paragraph = byId("electrodeFocusText");
+  const direction = byId("electrodeDirectionText");
+
+  if (title) title.textContent = detail.title;
+  if (paragraph) paragraph.textContent = detail.text;
+  if (direction) direction.textContent = detail.direction;
 }
 
 function setupAxisLearning() {
