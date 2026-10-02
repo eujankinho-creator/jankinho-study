@@ -34,6 +34,7 @@ import {
 import { prisma } from "../../lib/prisma";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
+import { sincronizarCasosFaculdade } from "./casosFaculdade";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { limparFlashcardsParaMetodologia } from "./flashcardsMetodologia";
 import { gerarQuestoesIA } from "./iaQuestoes";
@@ -4835,6 +4836,8 @@ server.listen(
 
     void (
       async function () {
+
+        await sincronizarCasosFaculdade();
 
         await sincronizarQuestoesSemiotecnica();
 

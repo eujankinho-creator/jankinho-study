@@ -241,6 +241,12 @@ model RegistroInvestigacao {
   @@index([tipo])
 }
 
+model AppConfig {
+  chave     String   @id
+  valor     Json?
+  updatedAt DateTime @updatedAt
+}
+
 enum TipoMovimentacao {
   RECEITA
   DESPESA
