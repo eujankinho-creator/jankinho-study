@@ -3034,3 +3034,129 @@ html[data-theme="pink-glitter"]
 }
 
 /* CORTEX CINEMATIC INTRO V1 END */
+
+
+/* =========================================================
+   CORTEX DASHBOARD MOBILE CTA V2
+========================================================= */
+
+@media (max-width: 700px) {
+
+  body.dashboard-view
+  .hero-copy {
+    width:
+      100% !important;
+
+    min-width:
+      0 !important;
+  }
+
+
+  body.dashboard-view
+  .hero-actions {
+    width:
+      100% !important;
+
+    display:
+      grid !important;
+
+    grid-template-columns:
+      minmax(0,1fr) !important;
+
+    gap:
+      9px !important;
+
+    margin-top:
+      20px !important;
+  }
+
+
+  body.dashboard-view
+  .hero-actions
+  .button-primary,
+  body.dashboard-view
+  .hero-actions
+  .button-secondary {
+    width:
+      100% !important;
+
+    min-width:
+      0 !important;
+
+    min-height:
+      49px !important;
+
+    flex:
+      none !important;
+
+    display:
+      flex !important;
+
+    align-items:
+      center !important;
+
+    border-radius:
+      13px !important;
+
+    padding:
+      0 16px !important;
+
+    font-size:
+      12px !important;
+
+    line-height:
+      1.2 !important;
+
+    white-space:
+      normal !important;
+  }
+
+
+  body.dashboard-view
+  .hero-actions
+  .button-primary {
+    justify-content:
+      space-between !important;
+  }
+
+
+  body.dashboard-view
+  .hero-actions
+  .button-primary span {
+    flex:
+      0 0 auto;
+
+    margin-left:
+      12px;
+  }
+
+
+  body.dashboard-view
+  .hero-actions
+  .button-secondary {
+    justify-content:
+      center !important;
+  }
+
+}
+
+
+@media (max-width: 390px) {
+
+  body.dashboard-view
+  .dashboard-hero-premium {
+    padding:
+      22px 16px !important;
+  }
+
+
+  body.dashboard-view
+  .hero h1 {
+    font-size:
+      27px !important;
+  }
+
+}
+
+
+/* CORTEX DASHBOARD MOBILE CTA V2 END */
