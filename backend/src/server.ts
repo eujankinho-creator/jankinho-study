@@ -2734,8 +2734,10 @@ function contentType(
 
 
 async function servirArquivo(
+  request: IncomingMessage,
   response: ServerResponse,
-  caminho: string
+  caminho: string,
+  versionado: boolean
 ) {
   let caminhoRelativo =
     caminho;
@@ -2778,10 +2780,66 @@ async function servirArquivo(
       throw new Error();
     }
 
+    const extensao =
+      path.extname(
+        arquivo
+      ).toLowerCase();
+
+
+    const etag =
+      'W/"' +
+      String(
+        info.size
+      ) +
+      "-" +
+      String(
+        Math.trunc(
+          info.mtimeMs
+        )
+      ) +
+      '"';
+
+
+    const cacheControl =
+      (
+        versionado &&
+        extensao !==
+          ".html"
+      )
+        ? "public, max-age=31536000, immutable"
+        : "private, max-age=0, must-revalidate";
+
+
+    if (
+      request.headers[
+        "if-none-match"
+      ] ===
+        etag
+    ) {
+
+      response.writeHead(
+        304,
+        {
+          "ETag":
+            etag,
+
+          "Cache-Control":
+            cacheControl,
+        }
+      );
+
+
+      response.end();
+
+      return;
+    }
+
+
     const conteudo =
       await readFile(
         arquivo
       );
+
 
     response.writeHead(
       200,
@@ -2791,12 +2849,15 @@ async function servirArquivo(
             arquivo
           ),
 
+        "ETag":
+          etag,
+
         /*
-         * Revalidar arquivos estaticos evita que contas diferentes
-         * permaneçam com CSS/JS antigo depois de um deploy.
+         * HTML continua revalidando para nunca prender uma versao
+         * antiga. CSS/JS/imagens com ?v= usam cache imutavel.
          */
         "Cache-Control":
-          "no-store, max-age=0",
+          cacheControl,
       }
     );
 
@@ -4541,8 +4602,12 @@ const server =
         }
 
         await servirArquivo(
+          request,
           response,
-          caminho
+          caminho,
+          url.searchParams.has(
+            "v"
+          )
         );
       }
       catch (error) {
