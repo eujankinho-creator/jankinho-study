@@ -672,6 +672,268 @@ const categories = [
 ];
 
 
+const controlInfo = {
+
+  paco2: {
+    help:
+      "CO₂ arterial. Sobe com hipoventilação e cai quando a ventilação alveolar aumenta.",
+    low:
+      "baixo CO₂",
+    high:
+      "alto CO₂"
+  },
+
+  hco3: {
+    help:
+      "Principal componente metabólico do equilíbrio ácido-base. O rim regula sua concentração ao longo do tempo.",
+    low:
+      "baixo",
+    high:
+      "alto"
+  },
+
+  pao2: {
+    help:
+      "Pressão arterial de oxigênio. Quando o acoplamento pulmonar está ativo, é derivada de FiO₂ e V/Q.",
+    low:
+      "hipoxemia",
+    high:
+      "hiperóxia"
+  },
+
+  fio2: {
+    help:
+      "Fração de oxigênio inspirado. Ar ambiente começa em aproximadamente 21%.",
+    low:
+      "ar ambiente",
+    high:
+      "O₂ elevado"
+  },
+
+  fr: {
+    help:
+      "Respirações por minuto. Junto ao volume corrente define quanto ar fresco chega aos alvéolos.",
+    low:
+      "lenta",
+    high:
+      "rápida"
+  },
+
+  volumeCorrente: {
+    help:
+      "Ar movimentado por respiração. Parte do volume ocupa o espaço morto e não participa diretamente da troca gasosa.",
+    low:
+      "baixo VC",
+    high:
+      "alto VC"
+  },
+
+  metabolismo: {
+    help:
+      "Demanda metabólica do corpo. Quanto maior, maior o consumo de O₂ e a produção de CO₂.",
+    low:
+      "repouso",
+    high:
+      "demanda alta"
+  },
+
+  vq: {
+    help:
+      "Eficiência da relação ventilação/perfusão. Valores menores dificultam a oxigenação mesmo com ventilação presente.",
+    low:
+      "desigual",
+    high:
+      "eficiente"
+  },
+
+  hemoglobina: {
+    help:
+      "Quantidade de hemoglobina disponível para transportar oxigênio. SpO₂ normal não garante conteúdo total de O₂ normal.",
+    low:
+      "anemia",
+    high:
+      "elevada"
+  },
+
+  fc: {
+    help:
+      "Batimentos por minuto. Mais batimentos tendem a elevar débito cardíaco, mas frequências muito altas reduzem tempo de enchimento.",
+    low:
+      "bradicardia",
+    high:
+      "taquicardia"
+  },
+
+  contratilidade: {
+    help:
+      "Força de ejeção do coração. Aumenta o volume sistólico quando pré-carga e pós-carga permitem.",
+    low:
+      "reduzida",
+    high:
+      "elevada"
+  },
+
+  vasoconstricao: {
+    help:
+      "Aumenta resistência vascular sistêmica e tende a elevar a pressão arterial, ao custo de maior pós-carga.",
+    low:
+      "mínima",
+    high:
+      "intensa"
+  },
+
+  vasodilatacao: {
+    help:
+      "Reduz resistência vascular sistêmica e tende a reduzir pressão arterial e pós-carga.",
+    low:
+      "mínima",
+    high:
+      "intensa"
+  },
+
+  hidratacao: {
+    help:
+      "Representa volume circulante relativo. Menor volume reduz pré-carga, perfusão renal e pressão.",
+    low:
+      "desidratado",
+    high:
+      "sobrecarga"
+  },
+
+  adh: {
+    help:
+      "Vasopressina/ADH aumenta reabsorção de água no ducto coletor e reduz o débito urinário.",
+    low:
+      "diurese",
+    high:
+      "retenção"
+  },
+
+  creatinina: {
+    help:
+      "Usada aqui somente como proxy didático de reserva renal. Não corresponde a eGFR real.",
+    low:
+      "reserva alta",
+    high:
+      "reserva baixa"
+  },
+
+  aferente: {
+    help:
+      "Controla a entrada de sangue no glomérulo. Constrição reduz perfusão e filtração; dilatação facilita fluxo.",
+    low:
+      "dilatada",
+    high:
+      "constrita"
+  },
+
+  eferente: {
+    help:
+      "Controla a saída do glomérulo. Constrição moderada sustenta pressão glomerular; excesso reduz o fluxo renal.",
+    low:
+      "dilatada",
+    high:
+      "constrita"
+  },
+
+  sodio: {
+    help:
+      "Principal cátion extracelular. Alterações importantes afetam osmolaridade e distribuição de água corporal.",
+    low:
+      "hiponatremia",
+    high:
+      "hipernatremia"
+  },
+
+  potassio: {
+    help:
+      "Fortemente ligado à excitabilidade cardíaca. Modifica T, P, PR, QRS e pode gerar padrões perigosos no ECG.",
+    low:
+      "hipocalemia",
+    high:
+      "hipercalemia"
+  },
+
+  calcio: {
+    help:
+      "Participa da contração e repolarização. Hipocalcemia tende a prolongar QT; hipercalcemia tende a encurtá-lo.",
+    low:
+      "hipocalcemia",
+    high:
+      "hipercalcemia"
+  },
+
+  magnesio: {
+    help:
+      "Importante para estabilidade elétrica e equilíbrio de outros eletrólitos, especialmente potássio.",
+    low:
+      "baixo",
+    high:
+      "alto"
+  },
+
+  cloro: {
+    help:
+      "Ânion extracelular importante para eletroneutralidade e cálculo do ânion gap.",
+    low:
+      "baixo",
+    high:
+      "alto"
+  }
+
+};
+
+
+const categoryInfo = {
+
+  gasometria: {
+    kicker:
+      "ÁCIDO-BASE",
+    description:
+      "CO₂, bicarbonato e oxigenação arterial.",
+    tone:
+      "gas"
+  },
+
+  respiratorio: {
+    kicker:
+      "PULMÕES",
+    description:
+      "Ventilação, troca gasosa e transporte de O₂.",
+    tone:
+      "lung"
+  },
+
+  cardio: {
+    kicker:
+      "CORAÇÃO",
+    description:
+      "Débito, força de ejeção e resistência vascular.",
+    tone:
+      "heart"
+  },
+
+  renal: {
+    kicker:
+      "RIM",
+    description:
+      "Volume, ADH, perfusão glomerular e filtração.",
+    tone:
+      "kidney"
+  },
+
+  eletrolitos: {
+    kicker:
+      "ELETRÓLITOS",
+    description:
+      "Concentrações que modulam excitabilidade e equilíbrio corporal.",
+    tone:
+      "electrolyte"
+  }
+
+};
+
+
 const presets = [
 
   {
@@ -3547,8 +3809,38 @@ function renderControls() {
   }
 
 
+  const categoryMeta =
+    categoryInfo[
+      category.id
+    ] ||
+    {
+      kicker:
+        category.label
+          .toUpperCase(),
+
+      description:
+        "",
+
+      tone:
+        "neutral"
+    };
+
+
   $("controls")
     .innerHTML =
+    '<div class="control-system-intro control-system-intro--' +
+      categoryMeta.tone +
+      '">' +
+      '<span class="control-system-kicker">' +
+        categoryMeta.kicker +
+      "</span>" +
+      '<strong>' +
+        category.label +
+      "</strong>" +
+      '<small>' +
+        categoryMeta.description +
+      "</small>" +
+    "</div>" +
     category.sliders
       .map(
         function (
@@ -3600,37 +3892,63 @@ function renderControls() {
             );
 
 
+          const meta =
+            controlInfo[
+              slider.field
+            ] ||
+            {
+              help:
+                "",
+
+              low:
+                slider.min,
+
+              high:
+                slider.max
+            };
+
+
           return (
-            '<div class="slider-control ' +
-            (
-              derived
-                ? "is-derived"
-                : ""
-            ) +
+            '<div class="phys-control phys-control--' +
+              categoryMeta.tone +
+              (
+                derived
+                  ? " is-derived"
+                  : ""
+              ) +
             '">' +
-              '<div class="slider-heading">' +
-                "<span>" +
-                  slider.label +
+
+              '<div class="phys-control-head">' +
+
+                '<div class="phys-control-title">' +
+                  '<strong>' +
+                    slider.label +
+                  "</strong>" +
                   (
                     derived
                       ? '<span class="slider-auto-label">AUTO</span>'
                       : ""
                   ) +
-                "</span>" +
-                '<span class="slider-number">' +
+                "</div>" +
+
+                '<span class="phys-control-value">' +
                   Number(
                     value
-                  ).toFixed(
-                    decimals
-                  ).replace(
-                    ".",
-                    ","
-                  ) +
-                  "<small>" +
+                  )
+                    .toFixed(
+                      decimals
+                    )
+                    .replace(
+                      ".",
+                      ","
+                    ) +
+                  '<small>' +
                     slider.unit +
                   "</small>" +
                 "</span>" +
+
               "</div>" +
+
               '<input type="range" min="' +
                 slider.min +
                 '" max="' +
@@ -3650,14 +3968,24 @@ function renderControls() {
                     : ""
                 ) +
               ">" +
-              '<div class="slider-limits">' +
-                "<span>" +
-                  slider.min +
+
+              '<div class="phys-control-extremes">' +
+                '<span>' +
+                  meta.low +
                 "</span>" +
-                "<span>" +
-                  slider.max +
+                '<span>' +
+                  meta.high +
                 "</span>" +
               "</div>" +
+
+              (
+                meta.help
+                  ? '<p class="phys-control-help">' +
+                      meta.help +
+                    "</p>"
+                  : ""
+              ) +
+
             "</div>"
           );
 
@@ -3753,7 +4081,7 @@ function renderControls() {
 
             const container =
               input.closest(
-                ".slider-control"
+                ".phys-control"
               );
 
 
@@ -3764,7 +4092,7 @@ function renderControls() {
 
               const number =
                 container.querySelector(
-                  ".slider-number"
+                  ".phys-control-value"
                 );
 
 
