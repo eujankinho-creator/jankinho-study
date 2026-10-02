@@ -3521,6 +3521,14 @@ function renderCenterViewTabs() {
 
       label:
         "Corpo integrado"
+    },
+
+    {
+      id:
+        "ecg3d",
+
+      label:
+        "ECG 3D"
     }
   ];
 
@@ -3560,6 +3568,14 @@ function renderCenterViewTabs() {
     );
 
 
+  document.body
+    .classList.toggle(
+      "lab-center-ecg3d",
+      state.centerView ===
+        "ecg3d"
+    );
+
+
   const integrated =
     $("integratedBody");
 
@@ -3578,6 +3594,31 @@ function renderCenterViewTabs() {
     integrated.setAttribute(
       "aria-hidden",
       active
+        ? "false"
+        : "true"
+    );
+
+  }
+
+
+  const ecgLearning =
+    $("ecgLearningLab");
+
+
+  if (ecgLearning) {
+
+    const ecgActive =
+      state.centerView ===
+      "ecg3d";
+
+
+    ecgLearning.hidden =
+      !ecgActive;
+
+
+    ecgLearning.setAttribute(
+      "aria-hidden",
+      ecgActive
         ? "false"
         : "true"
     );
@@ -3607,6 +3648,20 @@ function renderCenterViewTabs() {
 
 
             renderData();
+
+
+            if (
+              state.centerView ===
+              "ecg3d"
+            ) {
+
+              window.dispatchEvent(
+                new Event(
+                  "cortex:ecg3d-visible"
+                )
+              );
+
+            }
 
 
             if (
@@ -4141,7 +4196,16 @@ function renderControls() {
 
 function renderPresets() {
 
-  $("presetBar")
+  const presetBar =
+    $("presetBar");
+
+
+  if (!presetBar) {
+    return;
+  }
+
+
+  presetBar
     .innerHTML =
     presets
       .map(
