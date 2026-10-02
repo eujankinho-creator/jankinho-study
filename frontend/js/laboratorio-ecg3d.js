@@ -452,9 +452,12 @@ let extraAxisRoot;
 let conductionRoot;
 let vectorArrow;
 let signalDot;
+let activationGlow;
 let modelMaterials = [];
 let animationHandle;
 let cutawayEnabled = true;
+let audioContext = null;
+let soundEnabled = false;
 
 const clippingPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0.18);
 
@@ -777,6 +780,19 @@ function buildConductionPath() {
   const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xffffb5 });
   signalDot = new THREE.Mesh(new THREE.SphereGeometry(0.045, 14, 14), dotMaterial);
   conductionRoot.add(signalDot);
+
+  activationGlow = new THREE.Mesh(
+    new THREE.SphereGeometry(0.18, 24, 24),
+    new THREE.MeshBasicMaterial({
+      color: 0xf8c94f,
+      transparent: true,
+      opacity: 0.24,
+      depthWrite: false
+    })
+  );
+  activationGlow.scale.set(1.8, 1.8, 1.8);
+  conductionRoot.add(activationGlow);
+
   conductionRoot.userData.curve = curve;
 
   const saAnchor = new THREE.Object3D();
@@ -826,6 +842,14 @@ function updateHeartElectricalState() {
   if (curve && signalDot) {
     const point = curve.getPointAt(clamp(phase.progress * 1.45, 0, 1));
     signalDot.position.copy(point);
+
+    if (activationGlow) {
+      activationGlow.position.copy(point);
+      const strong = LAB_STATE.phaseIndex >= 4 && LAB_STATE.phaseIndex <= 7;
+      const scale = strong ? 2.8 : 1.65;
+      activationGlow.scale.set(scale, scale, scale);
+      activationGlow.material.opacity = strong ? 0.38 : 0.18;
+    }
   }
 
   if (vectorArrow) {
@@ -841,6 +865,16 @@ function updateHeartElectricalState() {
 }
 
 function setupHeartControls() {
+  const cutaway = byId("heartCutawayToggle");
+  if (cutaway) {
+    cutaway.addEventListener("click", function () {
+      cutawayEnabled = !cutawayEnabled;
+      cutaway.setAttribute("aria-pressed", cutawayEnabled ? "true" : "false");
+      cutaway.textContent = cutawayEnabled ? "Corte: ativo" : "Corte: inteiro";
+      applyCutaway();
+    });
+  }
+
   const fullscreen = byId("heartFullscreen");
   if (fullscreen) {
     fullscreen.addEventListener("click", async function () {
@@ -871,6 +905,7 @@ function setupHeartControls() {
         item.classList.toggle("active", item === button);
       });
       updateAxisVisibility();
+      drawEcgMatrix();
     });
   });
 
@@ -879,6 +914,7 @@ function setupHeartControls() {
     posterior.addEventListener("change", function () {
       LAB_STATE.posteriorLeads = posterior.checked;
       updateAxisVisibility();
+      drawEcgMatrix();
     });
   }
 
@@ -887,6 +923,7 @@ function setupHeartControls() {
     right.addEventListener("change", function () {
       LAB_STATE.rightLeads = right.checked;
       updateAxisVisibility();
+      drawEcgMatrix();
     });
   }
 }
@@ -963,11 +1000,59 @@ function setupSimulatorControls() {
     });
   });
 
+  const sound = byId("heartSoundToggle");
+  if (sound) {
+    sound.addEventListener("click", async function () {
+      soundEnabled = !soundEnabled;
+      sound.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+      sound.textContent = soundEnabled ? "♪ Som ativo" : "♪ Som";
+      if (soundEnabled) {
+        await ensureAudioContext();
+        playHeartTone("lub");
+      }
+    });
+  }
+
   const paperSpeed = byId("paperSpeedSimulator");
   const paperGain = byId("paperGainSimulator");
 
   if (paperSpeed) paperSpeed.addEventListener("change", drawEcgMatrix);
   if (paperGain) paperGain.addEventListener("change", drawEcgMatrix);
+}
+
+async function ensureAudioContext() {
+  if (!audioContext) {
+    const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextCtor) return null;
+    audioContext = new AudioContextCtor();
+  }
+  if (audioContext.state === "suspended") {
+    await audioContext.resume();
+  }
+  return audioContext;
+}
+
+async function playHeartTone(kind) {
+  if (!soundEnabled) return;
+  const context = await ensureAudioContext();
+  if (!context) return;
+
+  const now = context.currentTime;
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(kind === "dub" ? 64 : 82, now);
+  oscillator.frequency.exponentialRampToValueAtTime(kind === "dub" ? 44 : 56, now + 0.14);
+
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(kind === "dub" ? 0.09 : 0.12, now + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.17);
+
+  oscillator.connect(gain);
+  gain.connect(context.destination);
+  oscillator.start(now);
+  oscillator.stop(now + 0.18);
 }
 
 function startPhaseLoop() {
@@ -1005,6 +1090,12 @@ function setPhase(index) {
   }
 
   updateHeartElectricalState();
+
+  if (soundEnabled && LAB_STATE.phasePlaying) {
+    if (LAB_STATE.phaseIndex === 4) playHeartTone("lub");
+    if (LAB_STATE.phaseIndex === 8) playHeartTone("dub");
+  }
+
   drawEcgMatrix();
 }
 
@@ -1083,7 +1174,18 @@ function leadWave(phase, lead) {
     DIII: [1, .62],
     aVR: [-1, .86],
     aVL: [1, .35],
-    aVF: [1, .78]
+    aVF: [1, .78],
+    V1: [-1, .72],
+    V2: [-1, .48],
+    V3: [1, .38],
+    V4: [1, .86],
+    V5: [1, 1.02],
+    V6: [1, .82],
+    V7: [1, .68],
+    V8: [1, .60],
+    V9: [1, .52],
+    V3R: [-1, .42],
+    V4R: [-1, .30]
   }[lead] || [1, 1];
 
   polarity = config[0];
@@ -1155,6 +1257,32 @@ function drawEcgMatrix() {
   const canvas = byId("ecgMatrixCanvas");
   if (!canvas || LAB_STATE.section !== "simulator") return;
 
+  let leads;
+  let title;
+  let subtitle;
+
+  if (LAB_STATE.axisMode === "frontal") {
+    leads = ["DI", "aVR", "DII", "aVL", "DIII", "aVF"];
+    title = "Derivações periféricas · plano frontal";
+    subtitle = "Bipolares: DI, DII, DIII · Unipolares aumentadas: aVR, aVL, aVF";
+  } else if (LAB_STATE.axisMode === "horizontal") {
+    leads = ["V1", "V2", "V3", "V4", "V5", "V6"];
+    title = "Derivações precordiais · plano horizontal";
+    subtitle = "Progressão precordial de V1 a V6";
+  } else {
+    leads = ["DI", "DII", "DIII", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"];
+    title = "ECG de 12 derivações";
+    subtitle = "6 periféricas no plano frontal + 6 precordiais no plano horizontal";
+  }
+
+  if (LAB_STATE.posteriorLeads) leads = leads.concat(["V7", "V8", "V9"]);
+  if (LAB_STATE.rightLeads) leads = leads.concat(["V3R", "V4R"]);
+
+  const heading = document.querySelector(".matrix-head h2");
+  const copy = document.querySelector(".matrix-head p");
+  if (heading) heading.textContent = title;
+  if (copy) copy.textContent = subtitle;
+
   const hostHeight = canvas.parentElement ? canvas.parentElement.clientHeight : 650;
   const size = fitCanvas(canvas, Math.max(540, hostHeight));
   const ctx = size.ctx;
@@ -1163,26 +1291,35 @@ function drawEcgMatrix() {
   ctx.clearRect(0, 0, size.pixelWidth, size.pixelHeight);
   drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, false);
 
-  const cols = 2;
-  const rows = 3;
+  const cols = leads.length > 8 ? 4 : 2;
+  const rows = Math.ceil(leads.length / cols);
   const cellW = size.pixelWidth / cols;
   const cellH = size.pixelHeight / rows;
 
   ctx.save();
-  ctx.strokeStyle = "rgba(183, 68, 68, .55)";
-  ctx.lineWidth = 1.2 * dpr;
-  ctx.beginPath();
-  ctx.moveTo(cellW, 0);
-  ctx.lineTo(cellW, size.pixelHeight);
-  ctx.stroke();
+  ctx.strokeStyle = "rgba(183, 68, 68, .48)";
+  ctx.lineWidth = 1.05 * dpr;
+
+  for (let col = 1; col < cols; col += 1) {
+    ctx.beginPath();
+    ctx.moveTo(col * cellW, 0);
+    ctx.lineTo(col * cellW, size.pixelHeight);
+    ctx.stroke();
+  }
+
+  for (let row = 1; row < rows; row += 1) {
+    ctx.beginPath();
+    ctx.moveTo(0, row * cellH);
+    ctx.lineTo(size.pixelWidth, row * cellH);
+    ctx.stroke();
+  }
   ctx.restore();
 
-  const leads = ["DI", "aVR", "DII", "aVL", "DIII", "aVF"];
   const progress = PHASES[LAB_STATE.phaseIndex].progress;
 
   leads.forEach(function (lead, index) {
-    const row = Math.floor(index / 2);
-    const col = index % 2;
+    const row = Math.floor(index / cols);
+    const col = index % cols;
     const rect = {
       x: col * cellW,
       y: row * cellH,
@@ -1198,6 +1335,8 @@ function drawEcgMatrix() {
       dpr
     );
   });
+}
+
 }
 
 /* =========================================================
@@ -1904,6 +2043,8 @@ function genericWaveValue(n, kind, variant) {
 
   if (kind === "alternans") {
     value *= variant % 2 === 0 ? .55 : 1;
+  } else if (kind === "r-progression") {
+    value *= 0.45 + Math.min(variant, 4) * 0.18;
   } else if (kind === "q") {
     value -= gaussian(n, .22, .018, .55);
   } else if (kind === "bundle") {
