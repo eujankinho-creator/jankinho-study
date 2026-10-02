@@ -1488,10 +1488,12 @@
 
   frame.addEventListener(
     "load",
-    function () {
+    function (
+      event
+    ) {
 
       handleFrameLoad(
-        frame
+        event.currentTarget
       );
 
     }
@@ -1500,10 +1502,12 @@
 
   standbyFrame.addEventListener(
     "load",
-    function () {
+    function (
+      event
+    ) {
 
       handleFrameLoad(
-        standbyFrame
+        event.currentTarget
       );
 
     }
