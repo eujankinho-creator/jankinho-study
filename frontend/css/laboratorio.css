@@ -1393,3 +1393,1301 @@
 }
 
 /* CORTEX PHYSIOLOGY LAB V2 END */
+
+
+/* =========================================================
+   CORTEX LAB WORKSTATION V3
+   Compact desktop physiology station
+========================================================= */
+
+.lab-view .lab-panel,
+.lab-view .physiology-toolbar,
+.lab-view .metric-card {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--theme-border) 88%,
+      var(--theme-accent) 12%
+    );
+
+  background:
+    linear-gradient(
+      155deg,
+      color-mix(
+        in srgb,
+        var(--theme-surface) 96%,
+        var(--theme-accent) 4%
+      ),
+      var(--theme-surface-strong)
+    );
+
+  box-shadow:
+    0 14px 36px
+    rgba(0,0,0,.14),
+    inset 0 1px 0
+    rgba(255,255,255,.025);
+}
+
+
+.lab-view .lab-actions {
+  gap:
+    6px;
+}
+
+
+.lab-view .lab-button {
+  min-height:
+    34px;
+
+  border-radius:
+    999px;
+
+  padding:
+    0 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.018)
+    );
+
+  font-size:
+    10px;
+
+  font-weight:
+    750;
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.035);
+
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    background .15s ease,
+    color .15s ease,
+    box-shadow .15s ease;
+}
+
+
+.lab-view .lab-button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    var(--theme-accent-soft);
+}
+
+
+.lab-view .live-control {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+}
+
+
+.lab-view .live-control-dot {
+  width:
+    7px;
+
+  height:
+    7px;
+
+  border-radius:
+    50%;
+
+  background:
+    #4ade80;
+
+  box-shadow:
+    0 0 9px
+    rgba(74,222,128,.52);
+}
+
+
+.lab-view .live-control:not(.active)
+.live-control-dot {
+  background:
+    #fbbf24;
+
+  box-shadow:
+    0 0 8px
+    rgba(251,191,36,.30);
+}
+
+
+.lab-view .sound-control {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+}
+
+
+.lab-view .sound-control.active {
+  border-color:
+    rgba(var(--theme-accent-rgb),.24);
+
+  background:
+    rgba(var(--theme-accent-rgb),.085);
+
+  color:
+    var(--theme-accent-2);
+}
+
+
+.lab-view .sound-control-icon {
+  font-size:
+    12px;
+
+  line-height:
+    1;
+}
+
+
+.lab-view .control-tabs {
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:
+    6px;
+}
+
+
+.lab-view .control-tab {
+  min-height:
+    36px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.045);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.018);
+
+  padding:
+    0 11px;
+
+  font-size:
+    10px;
+
+  text-align:
+    center;
+
+  transition:
+    background .15s ease,
+    color .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease;
+}
+
+
+.lab-view .control-tab.active {
+  border-color:
+    rgba(var(--theme-accent-rgb),.26);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(var(--theme-accent-rgb),.14),
+      rgba(var(--theme-accent-rgb),.055)
+    );
+
+  color:
+    var(--theme-accent-2);
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.035),
+    0 7px 18px
+    rgba(var(--theme-accent-rgb),.045);
+}
+
+
+.lab-view .control-sliders {
+  gap:
+    9px;
+
+  padding:
+    10px;
+
+  scrollbar-width:
+    thin;
+
+  scrollbar-color:
+    rgba(var(--theme-accent-rgb),.22)
+    transparent;
+}
+
+
+.lab-view .slider-control {
+  gap:
+    7px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.048);
+
+  border-radius:
+    15px;
+
+  background:
+    linear-gradient(
+      150deg,
+      rgba(255,255,255,.028),
+      rgba(255,255,255,.008)
+    );
+
+  padding:
+    10px 11px 8px;
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.02);
+
+  transition:
+    border-color .15s ease,
+    background .15s ease,
+    box-shadow .15s ease;
+}
+
+
+.lab-view .slider-control:hover {
+  border-color:
+    rgba(var(--theme-accent-rgb),.15);
+
+  background:
+    linear-gradient(
+      150deg,
+      rgba(var(--theme-accent-rgb),.055),
+      rgba(255,255,255,.012)
+    );
+}
+
+
+.lab-view .slider-number {
+  display:
+    inline-flex;
+
+  align-items:
+    baseline;
+
+  min-height:
+    24px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.05);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(0,0,0,.20);
+
+  padding:
+    4px 8px;
+
+  color:
+    var(--theme-text);
+
+  font-size:
+    10px;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+.lab-view .slider-control
+input[type="range"] {
+  --range-progress:
+    50%;
+
+  width:
+    100%;
+
+  height:
+    26px;
+
+  margin:
+    0;
+
+  appearance:
+    none;
+
+  -webkit-appearance:
+    none;
+
+  border:
+    0;
+
+  outline:
+    0;
+
+  background:
+    transparent;
+
+  cursor:
+    pointer;
+}
+
+
+.lab-view .slider-control
+input[type="range"]::-webkit-slider-runnable-track {
+  height:
+    7px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--theme-accent)
+      0,
+      var(--theme-accent-2)
+      var(--range-progress),
+      rgba(255,255,255,.07)
+      var(--range-progress),
+      rgba(255,255,255,.07)
+      100%
+    );
+
+  box-shadow:
+    inset 0 1px 2px
+    rgba(0,0,0,.35);
+}
+
+
+.lab-view .slider-control
+input[type="range"]::-webkit-slider-thumb {
+  width:
+    18px;
+
+  height:
+    18px;
+
+  margin-top:
+    -6px;
+
+  appearance:
+    none;
+
+  -webkit-appearance:
+    none;
+
+  border:
+    4px solid
+    color-mix(
+      in srgb,
+      var(--theme-surface-strong) 86%,
+      black 14%
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    var(--theme-accent-2);
+
+  box-shadow:
+    0 0 0 1px
+    rgba(var(--theme-accent-rgb),.28),
+    0 3px 10px
+    rgba(0,0,0,.38),
+    0 0 13px
+    rgba(var(--theme-accent-rgb),.18);
+}
+
+
+.lab-view .slider-control
+input[type="range"]::-moz-range-track {
+  height:
+    7px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.07);
+}
+
+
+.lab-view .slider-control
+input[type="range"]::-moz-range-progress {
+  height:
+    7px;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--theme-accent),
+      var(--theme-accent-2)
+    );
+}
+
+
+.lab-view .slider-control
+input[type="range"]::-moz-range-thumb {
+  width:
+    12px;
+
+  height:
+    12px;
+
+  border:
+    4px solid
+    var(--theme-surface-strong);
+
+  border-radius:
+    50%;
+
+  background:
+    var(--theme-accent-2);
+
+  box-shadow:
+    0 0 0 1px
+    rgba(var(--theme-accent-rgb),.28),
+    0 3px 10px
+    rgba(0,0,0,.38);
+}
+
+
+.lab-view .slider-control.is-derived
+input[type="range"] {
+  opacity:
+    .45;
+}
+
+
+.lab-view .slider-limits {
+  opacity:
+    .72;
+}
+
+
+.lab-view .lab-panel-tabs {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
+  gap:
+    5px;
+}
+
+
+.lab-view .lab-panel-tab {
+  min-height:
+    31px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.048);
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(255,255,255,.018);
+
+  padding:
+    0 7px;
+
+  color:
+    var(--theme-text-muted);
+
+  font:
+    inherit;
+
+  font-size:
+    8px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+.lab-view .lab-panel-tab.active {
+  border-color:
+    rgba(var(--theme-accent-rgb),.20);
+
+  background:
+    rgba(var(--theme-accent-rgb),.08);
+
+  color:
+    var(--theme-accent-2);
+}
+
+
+.lab-view .science-close-button {
+  position:
+    absolute;
+
+  top:
+    10px;
+
+  right:
+    10px;
+
+  z-index:
+    2;
+
+  display:
+    grid;
+
+  width:
+    31px;
+
+  height:
+    31px;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    var(--theme-border);
+
+  border-radius:
+    50%;
+
+  background:
+    var(--theme-surface-soft);
+
+  color:
+    var(--theme-text-soft);
+
+  font:
+    inherit;
+
+  font-size:
+    18px;
+
+  cursor:
+    pointer;
+}
+
+
+.lab-view .lab-science-note {
+  position:
+    fixed;
+
+  top:
+    88px;
+
+  right:
+    24px;
+
+  z-index:
+    2000;
+
+  display:
+    none;
+
+  width:
+    min(
+      720px,
+      calc(100vw - 310px)
+    );
+
+  max-height:
+    calc(100vh - 112px);
+
+  overflow:
+    auto;
+
+  margin:
+    0;
+
+  border-color:
+    var(--theme-border-strong);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-surface-strong) 96%,
+      transparent
+    );
+
+  box-shadow:
+    0 30px 90px
+    rgba(0,0,0,.48);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+
+.lab-view .lab-science-note.is-open {
+  display:
+    grid;
+}
+
+
+.lab-view .monitor-screen canvas {
+  transform:
+    translateZ(0);
+}
+
+
+.lab-view .ecg-screen,
+.lab-view .spo-screen {
+  border-top:
+    1px solid
+    rgba(255,255,255,.035);
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.035);
+}
+
+
+.lab-view .monitor-number strong {
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+@media (
+  min-width: 1200px
+) {
+
+  .lab-view .lab-page {
+    height:
+      calc(100dvh - 64px);
+
+    max-width:
+      none;
+
+    overflow:
+      hidden;
+
+    display:
+      grid;
+
+    grid-template-rows:
+      auto
+      auto
+      auto
+      minmax(0,1fr);
+
+    gap:
+      9px;
+
+    padding:
+      10px 14px 12px;
+  }
+
+
+  .lab-view .lab-heading {
+    min-height:
+      48px;
+
+    margin:
+      0;
+
+    border:
+      1px solid
+      var(--theme-border);
+
+    border-radius:
+      16px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(var(--theme-accent-rgb),.045),
+        rgba(255,255,255,.01)
+      );
+
+    padding:
+      8px 10px 8px 14px;
+  }
+
+
+  .lab-view .lab-heading h1 {
+    margin:
+      2px 0 0;
+
+    font-size:
+      18px;
+
+    letter-spacing:
+      -.025em;
+  }
+
+
+  .lab-view .lab-heading p {
+    display:
+      none;
+  }
+
+
+  .lab-view .simulation-status {
+    font-size:
+      8px;
+  }
+
+
+  .lab-view .top-metrics {
+    grid-template-columns:
+      repeat(12,minmax(0,1fr));
+
+    gap:
+      6px;
+
+    margin:
+      0;
+  }
+
+
+  .lab-view .metric-card {
+    min-width:
+      0;
+
+    min-height:
+      60px;
+
+    padding:
+      8px 10px;
+  }
+
+
+  .lab-view .metric-card:nth-child(-n+4) {
+    grid-column:
+      span 1;
+  }
+
+
+  .lab-view .metric-card:nth-child(n+5) {
+    grid-column:
+      span 2;
+  }
+
+
+  .lab-view .metric-card:nth-child(n+5)
+  .metric-value strong {
+    font-size:
+      clamp(22px,1.7vw,29px);
+
+    letter-spacing:
+      -.04em;
+  }
+
+
+  .lab-view .metric-value {
+    margin-top:
+      2px;
+  }
+
+
+  .lab-view .metric-value strong {
+    font-size:
+      17px;
+  }
+
+
+  .lab-view .physiology-toolbar {
+    min-height:
+      43px;
+
+    grid-template-columns:
+      180px minmax(0,1fr);
+
+    gap:
+      10px;
+
+    margin:
+      0;
+
+    border-radius:
+      14px;
+
+    padding:
+      6px 8px 6px 12px;
+  }
+
+
+  .lab-view .physiology-toolbar-copy {
+    gap:
+      1px;
+  }
+
+
+  .lab-view .physiology-toolbar-copy strong {
+    font-size:
+      11px;
+  }
+
+
+  .lab-view .physiology-toolbar-copy small {
+    display:
+      none;
+  }
+
+
+  .lab-view .physiology-presets {
+    flex-wrap:
+      nowrap;
+
+    justify-content:
+      flex-start;
+
+    overflow-x:
+      auto;
+
+    padding-bottom:
+      1px;
+
+    scrollbar-width:
+      none;
+  }
+
+
+  .lab-view .physiology-presets::-webkit-scrollbar {
+    display:
+      none;
+  }
+
+
+  .lab-view .physiology-preset {
+    flex:
+      0 0 auto;
+
+    min-height:
+      29px;
+
+    border-radius:
+      999px;
+
+    font-size:
+      8px;
+  }
+
+
+  .lab-view .laboratory-grid {
+    min-height:
+      0;
+
+    height:
+      100%;
+
+    grid-template-columns:
+      285px
+      minmax(0,1fr)
+      325px;
+
+    gap:
+      10px;
+  }
+
+
+  .lab-view .laboratory-grid
+  > aside:first-child {
+    min-height:
+      0;
+  }
+
+
+  .lab-view .laboratory-grid
+  > aside:first-child
+  > .lab-panel {
+    height:
+      100%;
+
+    display:
+      grid;
+
+    grid-template-rows:
+      auto
+      auto
+      minmax(0,1fr);
+  }
+
+
+  .lab-view .panel-header {
+    padding:
+      9px 12px;
+  }
+
+
+  .lab-view .panel-header h2 {
+    font-size:
+      11px;
+  }
+
+
+  .lab-view .panel-header p {
+    margin-top:
+      2px;
+
+    font-size:
+      8px;
+  }
+
+
+  .lab-view .control-tabs {
+    padding:
+      7px;
+  }
+
+
+  .lab-view .control-tab {
+    min-height:
+      31px;
+
+    font-size:
+      9px;
+  }
+
+
+  .lab-view .control-sliders {
+    min-height:
+      0;
+
+    overflow-y:
+      auto;
+
+    overscroll-behavior:
+      contain;
+  }
+
+
+  .lab-view .lab-center {
+    min-height:
+      0;
+
+    display:
+      grid;
+
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,1fr);
+
+    grid-template-rows:
+      minmax(0,1fr)
+      auto;
+
+    gap:
+      10px;
+  }
+
+
+  .lab-view .monitor-grid {
+    grid-column:
+      1 / -1;
+
+    min-height:
+      0;
+
+    gap:
+      10px;
+  }
+
+
+  .lab-view .monitor-panel {
+    min-height:
+      0;
+
+    display:
+      grid;
+
+    grid-template-rows:
+      auto
+      minmax(155px,1fr)
+      auto;
+  }
+
+
+  .lab-view .monitor-header {
+    min-height:
+      42px;
+
+    padding:
+      7px 11px;
+  }
+
+
+  .lab-view .monitor-number strong {
+    font-size:
+      28px;
+  }
+
+
+  .lab-view .monitor-screen {
+    height:
+      auto;
+
+    min-height:
+      155px;
+  }
+
+
+  .lab-view .ecg-results,
+  .lab-view .monitor-results {
+    min-height:
+      47px;
+  }
+
+
+  .lab-view .monitor-result {
+    min-width:
+      0;
+
+    padding:
+      6px 7px;
+  }
+
+
+  .lab-view .monitor-result strong {
+    overflow:
+      hidden;
+
+    margin-top:
+      2px;
+
+    font-size:
+      8px;
+
+    line-height:
+      11px;
+
+    text-overflow:
+      ellipsis;
+  }
+
+
+  .lab-view .lab-center
+  > .lab-panel {
+    min-height:
+      0;
+  }
+
+
+  .lab-view .gasometry-grid {
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+
+  .lab-view .gas-card {
+    min-height:
+      49px;
+
+    padding:
+      7px 9px;
+  }
+
+
+  .lab-view .gas-card strong {
+    margin-top:
+      2px;
+
+    font-size:
+      18px;
+  }
+
+
+  .lab-view .gas-card small {
+    margin-top:
+      2px;
+
+    font-size:
+      7px;
+  }
+
+
+  .lab-view .gasometry-footer {
+    grid-template-columns:
+      repeat(4,minmax(0,1fr));
+  }
+
+
+  .lab-view .simple-stat {
+    padding:
+      6px 8px;
+  }
+
+
+  .lab-view .mechanics-grid {
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+
+
+  .lab-view .mechanics-card {
+    padding:
+      8px;
+  }
+
+
+  .lab-view .mechanics-card strong {
+    font-size:
+      17px;
+  }
+
+
+  .lab-view .lab-right {
+    min-height:
+      0;
+
+    display:
+      grid;
+
+    grid-template-rows:
+      auto
+      minmax(0,1fr);
+
+    align-content:
+      stretch;
+
+    gap:
+      7px;
+  }
+
+
+  .lab-view .lab-right
+  > .lab-panel[data-lab-panel] {
+    display:
+      none;
+
+    min-height:
+      0;
+
+    height:
+      100%;
+
+    overflow-y:
+      auto;
+
+    overscroll-behavior:
+      contain;
+  }
+
+
+  .lab-view .lab-right
+  > .lab-panel[data-lab-panel].is-active {
+    display:
+      block;
+  }
+
+
+  .lab-view .lab-right
+  .panel-content {
+    padding:
+      11px 12px;
+  }
+
+
+  .lab-view .result-row {
+    min-height:
+      34px;
+
+    padding:
+      7px 0;
+  }
+
+
+  .lab-view .result-row strong {
+    font-size:
+      10px;
+  }
+
+
+  .lab-view .interpretation-highlight {
+    margin:
+      0 0 7px;
+
+    padding:
+      10px;
+  }
+
+
+  .lab-view .breathing-card {
+    min-height:
+      130px;
+  }
+
+}
+
+
+@media (
+  max-width: 1199px
+) {
+
+  .lab-view .lab-panel-tabs {
+    display:
+      none;
+  }
+
+
+  .lab-view .lab-right
+  > .lab-panel[data-lab-panel] {
+    display:
+      block;
+  }
+
+}
+
+
+@media (
+  max-width: 900px
+) {
+
+  .lab-view .lab-science-note {
+    top:
+      76px;
+
+    left:
+      12px;
+
+    right:
+      12px;
+
+    width:
+      auto;
+
+    max-height:
+      calc(100dvh - 92px);
+  }
+
+}
+
+
+/* CORTEX LAB WORKSTATION V3 END */
