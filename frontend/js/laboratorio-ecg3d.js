@@ -2902,6 +2902,85 @@ function drawGuided() {
     ctx.fillText("R–R", (x1 + x2) / 2 - 12 * dpr, 28 * dpr);
   }
 
+  if (LAB_STATE.guidedStep === 1) {
+    const cx = size.pixelWidth * .78;
+    const cy = size.pixelHeight * .25;
+    const radius = size.pixelHeight * .16;
+
+    ctx.strokeStyle = "rgba(148,163,184,.32)";
+    ctx.lineWidth = 1 * dpr;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, TAU);
+    ctx.stroke();
+
+    [0, 60, 90, 120, -30, -150].forEach(function (degrees) {
+      const angle = degrees * Math.PI / 180;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(
+        cx + Math.cos(angle) * radius,
+        cy + Math.sin(angle) * radius
+      );
+      ctx.stroke();
+    });
+
+    drawCanvasArrow(
+      ctx,
+      cx,
+      cy,
+      cx + Math.cos(47 * Math.PI / 180) * radius * .88,
+      cy + Math.sin(47 * Math.PI / 180) * radius * .88,
+      "#ff5c69",
+      dpr
+    );
+
+    ctx.fillStyle = "#ffd2d6";
+    ctx.font = "800 " + (9 * dpr) + "px system-ui";
+    ctx.fillText("+47°", cx - 12 * dpr, cy + radius + 16 * dpr);
+  }
+
+  if (LAB_STATE.guidedStep === 4) {
+    const beat = beatPositions[2];
+    const x1 = (beat - .06) * size.pixelWidth;
+    const x2 = (beat - .012) * size.pixelWidth;
+    const y = baseline + 62 * dpr;
+
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 1.4 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(x1, y - 8 * dpr);
+    ctx.lineTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.lineTo(x2, y - 8 * dpr);
+    ctx.stroke();
+
+    ctx.fillStyle = "#bae6fd";
+    ctx.font = "700 " + (9 * dpr) + "px system-ui";
+    ctx.fillText("PR: início da P → início do QRS", x1, y + 18 * dpr);
+  }
+
+  if (LAB_STATE.guidedStep === 5) {
+    const beat = beatPositions[2];
+    const x1 = (beat - .012) * size.pixelWidth;
+    const x2 = (beat + .018) * size.pixelWidth;
+    const y = baseline + 54 * dpr;
+
+    ctx.fillStyle = "rgba(248,201,79,.10)";
+    ctx.fillRect(x1, 0, x2 - x1, size.pixelHeight);
+
+    ctx.strokeStyle = "#f8c94f";
+    ctx.beginPath();
+    ctx.moveTo(x1, y - 7 * dpr);
+    ctx.lineTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.lineTo(x2, y - 7 * dpr);
+    ctx.stroke();
+
+    ctx.fillStyle = "#fde68a";
+    ctx.font = "700 " + (9 * dpr) + "px system-ui";
+    ctx.fillText("duração do QRS", x1 - 6 * dpr, y + 18 * dpr);
+  }
+
   if (LAB_STATE.guidedStep === 6) {
     ctx.strokeStyle = "#ff7a84";
     ctx.lineWidth = 2 * dpr;
@@ -2909,8 +2988,61 @@ function drawGuided() {
     ctx.moveTo(size.pixelWidth * .08, baseline);
     ctx.lineTo(size.pixelWidth * .94, baseline);
     ctx.stroke();
+
     ctx.fillStyle = "#ff9da5";
     ctx.fillText("linha isoelétrica", size.pixelWidth * .72, baseline - 8 * dpr);
+
+    const beat = beatPositions[2];
+    drawCanvasArrow(
+      ctx,
+      (beat + .025) * size.pixelWidth,
+      baseline - 70 * dpr,
+      (beat + .028) * size.pixelWidth,
+      baseline - 3 * dpr,
+      "#ff7a84",
+      dpr
+    );
+  }
+
+  if (LAB_STATE.guidedStep === 7) {
+    const beat = beatPositions[2];
+    const x1 = (beat - .012) * size.pixelWidth;
+    const x2 = (beat + .09) * size.pixelWidth;
+    const y = baseline + 70 * dpr;
+
+    ctx.strokeStyle = "#a78bfa";
+    ctx.lineWidth = 1.4 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(x1, y - 8 * dpr);
+    ctx.lineTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.lineTo(x2, y - 8 * dpr);
+    ctx.stroke();
+
+    ctx.fillStyle = "#ddd6fe";
+    ctx.font = "700 " + (9 * dpr) + "px system-ui";
+    ctx.fillText("QT: início do QRS → final da T", x1, y + 18 * dpr);
+  }
+
+  if (LAB_STATE.guidedStep === 8) {
+    beatPositions.forEach(function (beat) {
+      const tx = (beat + .045) * size.pixelWidth;
+      const ty = baseline - .16 * size.pixelHeight * .32;
+
+      drawCanvasArrow(
+        ctx,
+        tx,
+        ty - 38 * dpr,
+        tx,
+        ty - 5 * dpr,
+        "#5eead4",
+        dpr
+      );
+    });
+
+    ctx.fillStyle = "#99f6e4";
+    ctx.font = "700 " + (9 * dpr) + "px system-ui";
+    ctx.fillText("compare polaridade e forma das ondas T", 20 * dpr, 36 * dpr);
   }
 
   ctx.restore();
@@ -2922,6 +3054,14 @@ function drawGuided() {
 
 function setupPatterns() {
   renderPatternTopics();
+
+  const speed = byId("patternPaperSpeed");
+  if (speed) {
+    speed.addEventListener("change", function () {
+      drawPatterns();
+    });
+  }
+
   setPattern("p-wave");
 }
 
@@ -2960,6 +3100,14 @@ function setPattern(id) {
 
   if (byId("patternDetailTitle")) byId("patternDetailTitle").textContent = pattern.detailTitle;
   if (byId("patternDetailText")) byId("patternDetailText").textContent = pattern.detailText;
+
+  const teaching = PATTERN_TEACHING[pattern.id];
+  if (teaching) {
+    if (byId("patternWhatChanges")) byId("patternWhatChanges").textContent = teaching.change;
+    if (byId("patternHowRecognize")) byId("patternHowRecognize").textContent = teaching.recognize;
+    if (byId("patternCompareNormal")) byId("patternCompareNormal").textContent = teaching.normal;
+    if (byId("patternCaution")) byId("patternCaution").textContent = teaching.caution;
+  }
 
   const pComparison = byId("pWaveComparison");
   const generic = byId("genericPatternComparison");
@@ -3132,6 +3280,46 @@ function drawGenericPattern(kind) {
     ctx.strokeStyle = row.color;
     ctx.lineWidth = 1.5 * dpr;
     ctx.stroke();
+
+    if (rowIndex === 1) {
+      const feature = {
+        alternans: ["amplitude alternante", .52],
+        "r-progression": ["R aumenta nas precordiais", .56],
+        q: ["Q mais profunda/larga", .08],
+        bundle: ["QRS alargado", .43],
+        delta: ["início lento · delta", .39],
+        low: ["baixa amplitude", .45],
+        st: ["segmento ST", .50],
+        potassium: ["onda T", .60],
+        biphasic: ["T bifásica", .60],
+        wellens: ["T anterior alterada", .60],
+        nodal: ["relação P–QRS", .36]
+      }[kind];
+
+      if (feature) {
+        const x = size.pixelWidth * feature[1];
+        const y = row.y - size.pixelHeight * .10;
+
+        drawCanvasArrow(
+          ctx,
+          x,
+          y - 32 * dpr,
+          x,
+          y,
+          "#f8c94f",
+          dpr
+        );
+
+        ctx.fillStyle = "#fde68a";
+        ctx.font = "700 " + (8 * dpr) + "px system-ui";
+        ctx.fillText(
+          feature[0],
+          clamp(x - 46 * dpr, 10 * dpr, size.pixelWidth - 150 * dpr),
+          y - 38 * dpr
+        );
+      }
+    }
+
     ctx.restore();
   });
 }
