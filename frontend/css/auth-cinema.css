@@ -1,0 +1,638 @@
+/* =========================================================
+   CORTEX LOGIN CINEMA V1
+   Desktop only. Decorative layer: never intercepts input.
+========================================================= */
+
+.auth-cinema-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1100px;
+  transform-style: preserve-3d;
+  contain: layout paint style;
+  opacity: .94;
+}
+
+.cinema-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .22;
+  background-image:
+    linear-gradient(
+      rgba(var(--auth-accent-rgb),.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(var(--auth-accent-rgb),.045) 1px,
+      transparent 1px
+    );
+  background-size: 54px 54px;
+  mask-image:
+    radial-gradient(
+      ellipse at 54% 48%,
+      #000 0%,
+      rgba(0,0,0,.78) 36%,
+      transparent 78%
+    );
+  transform:
+    rotateX(62deg)
+    translate3d(0, 80px, -120px)
+    scale(1.4);
+  transform-origin: 50% 65%;
+  animation:
+    cinemaGridDrift
+    18s linear infinite;
+}
+
+.cinema-book {
+  --book-w: 112px;
+  --book-h: 78px;
+  --book-delay: 0s;
+
+  position: absolute;
+  width: var(--book-w);
+  height: var(--book-h);
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation:
+    cinemaBookFloat
+    9s
+    var(--book-delay)
+    cubic-bezier(.45,.04,.28,1)
+    infinite;
+}
+
+.cinema-book-one {
+  --book-w: 122px;
+  --book-h: 84px;
+  --book-delay: -1.4s;
+  top: 14%;
+  right: 7%;
+  transform:
+    rotateX(56deg)
+    rotateZ(-13deg)
+    translate3d(0,0,0);
+}
+
+.cinema-book-two {
+  --book-w: 94px;
+  --book-h: 66px;
+  --book-delay: -4.8s;
+  right: 12%;
+  bottom: 17%;
+  opacity: .64;
+  transform:
+    rotateX(58deg)
+    rotateZ(12deg)
+    translate3d(0,0,-30px);
+}
+
+.cinema-book-three {
+  --book-w: 72px;
+  --book-h: 50px;
+  --book-delay: -7.2s;
+  left: 7%;
+  bottom: 22%;
+  opacity: .42;
+  transform:
+    rotateX(61deg)
+    rotateZ(-8deg)
+    translate3d(0,0,-48px);
+}
+
+.cinema-book-shadow {
+  position: absolute;
+  inset: 16% 4% -16%;
+  border-radius: 50%;
+  background:
+    rgba(0,0,0,.42);
+  transform:
+    translateZ(-12px)
+    scale(.95,.45);
+  opacity: .72;
+}
+
+.cinema-book-back,
+.cinema-book-front,
+.cinema-book-pages {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 9px 9px 4px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.cinema-book-back {
+  border:
+    1px solid
+    rgba(var(--auth-accent-rgb),.28);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(var(--auth-accent-rgb),.25),
+      rgba(var(--auth-accent-rgb),.07)
+    );
+  box-shadow:
+    0 14px 30px
+    rgba(0,0,0,.28),
+    inset 0 0 0 1px
+    rgba(255,255,255,.035);
+  transform:
+    translateZ(-3px);
+}
+
+.cinema-book-pages {
+  inset:
+    5px 5px 5px 8px;
+  border-radius:
+    3px 7px 7px 3px;
+  background:
+    color-mix(
+      in srgb,
+      var(--auth-text)
+      82%,
+      var(--auth-bg)
+    );
+  opacity: .78;
+  transform:
+    translateZ(0);
+}
+
+.cinema-book-pages::before,
+.cinema-book-pages::after,
+.cinema-book-pages span {
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 9%;
+  height: 1px;
+  border-radius: 999px;
+  background:
+    rgba(var(--auth-accent-rgb),.19);
+}
+
+.cinema-book-pages::before {
+  top: 28%;
+}
+
+.cinema-book-pages::after {
+  top: 48%;
+}
+
+.cinema-book-pages span:nth-child(1) {
+  top: 67%;
+}
+
+.cinema-book-pages span:nth-child(2) {
+  top: 82%;
+  right: 36%;
+}
+
+.cinema-book-pages span:nth-child(3) {
+  top: 17%;
+  right: 52%;
+}
+
+.cinema-book-front {
+  display: block;
+  border:
+    1px solid
+    rgba(var(--auth-accent-rgb),.34);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--auth-panel-strong)
+        68%,
+        var(--auth-accent)
+      ),
+      var(--auth-panel-strong)
+    );
+  box-shadow:
+    0 12px 32px
+    rgba(0,0,0,.32),
+    inset 8px 0 18px
+    rgba(0,0,0,.22),
+    inset 0 1px 0
+    rgba(255,255,255,.06);
+  transform-origin:
+    2% 50%;
+  transform:
+    translateZ(4px)
+    rotateY(0deg);
+  animation:
+    cinemaBookOpen
+    9s
+    var(--book-delay)
+    cubic-bezier(.28,.03,.18,1)
+    infinite;
+}
+
+.cinema-book-mark {
+  position: absolute;
+  width: 15%;
+  aspect-ratio: 1;
+  left: 13%;
+  top: 15%;
+  border:
+    1px solid
+    rgba(var(--auth-accent-rgb),.46);
+  border-radius: 50%;
+  box-shadow:
+    0 0 14px
+    rgba(var(--auth-accent-rgb),.12);
+}
+
+.cinema-book-line {
+  position: absolute;
+  left: 13%;
+  right: 18%;
+  bottom: 29%;
+  height: 2px;
+  border-radius: 999px;
+  background:
+    rgba(var(--auth-accent-rgb),.38);
+}
+
+.cinema-book-line.short {
+  right: 45%;
+  bottom: 20%;
+  opacity: .58;
+}
+
+.cinema-morph-field {
+  position: absolute;
+  display: grid;
+  grid-template-columns:
+    auto 28px repeat(3, 22px);
+  align-items: center;
+  gap: 7px;
+  opacity: .54;
+  color:
+    var(--auth-text-muted);
+  font-variant-numeric:
+    tabular-nums;
+  letter-spacing: .08em;
+  will-change: transform, opacity;
+}
+
+.cinema-morph-one {
+  top: 30%;
+  right: 6%;
+  animation:
+    cinemaFieldFloat
+    8.5s -2s ease-in-out infinite;
+}
+
+.cinema-morph-two {
+  right: 14%;
+  bottom: 31%;
+  transform: scale(.82);
+  opacity: .36;
+  animation:
+    cinemaFieldFloat
+    10s -5.8s ease-in-out infinite reverse;
+}
+
+.cinema-morph-label {
+  font-size: 7px;
+  font-weight: 850;
+  text-transform: uppercase;
+  color:
+    color-mix(
+      in srgb,
+      var(--auth-accent-two)
+      72%,
+      var(--auth-text-muted)
+    );
+}
+
+.cinema-morph-line {
+  width: 28px;
+  height: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(var(--auth-accent-rgb),.60)
+    );
+}
+
+.cinema-morph-glyph {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border:
+    1px solid
+    rgba(var(--auth-accent-rgb),.15);
+  border-radius: 6px;
+  background:
+    rgba(var(--auth-accent-rgb),.045);
+  color:
+    var(--auth-accent-two);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+  font-size: 10px;
+  font-weight: 800;
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.03);
+  transition:
+    none;
+}
+
+.cinema-morph-glyph.is-morphing {
+  animation:
+    cinemaGlyphMorph
+    720ms
+    cubic-bezier(.2,.8,.2,1)
+    both;
+}
+
+.cinema-symbol {
+  position: absolute;
+  color:
+    var(--auth-accent-two);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+  font-size: 18px;
+  opacity: .12;
+  text-shadow:
+    0 0 18px
+    rgba(var(--auth-accent-rgb),.28);
+  will-change: transform, opacity;
+}
+
+.cinema-symbol-one {
+  left: 12%;
+  top: 20%;
+  animation:
+    cinemaSymbolRise
+    11s -3s ease-in-out infinite;
+}
+
+.cinema-symbol-two {
+  left: 20%;
+  bottom: 13%;
+  font-size: 12px;
+  animation:
+    cinemaSymbolRise
+    13s -7s ease-in-out infinite;
+}
+
+.cinema-symbol-three {
+  right: 29%;
+  top: 11%;
+  font-size: 11px;
+  animation:
+    cinemaSymbolRise
+    9s -5s ease-in-out infinite reverse;
+}
+
+.cinema-symbol-four {
+  right: 6%;
+  bottom: 11%;
+  font-size: 15px;
+  animation:
+    cinemaSymbolRise
+    12s -1s ease-in-out infinite;
+}
+
+.cinema-orbit {
+  position: absolute;
+  border:
+    1px solid
+    rgba(var(--auth-accent-rgb),.10);
+  border-radius: 50%;
+  opacity: .44;
+}
+
+.cinema-orbit::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: 50%;
+  left: -3px;
+  border-radius: 50%;
+  background:
+    var(--auth-accent-two);
+  box-shadow:
+    0 0 12px
+    rgba(var(--auth-accent-rgb),.65);
+}
+
+.cinema-orbit-one {
+  width: 210px;
+  height: 210px;
+  right: -102px;
+  top: 33%;
+  animation:
+    cinemaOrbitSpin
+    17s linear infinite;
+}
+
+.cinema-orbit-two {
+  width: 126px;
+  height: 126px;
+  left: -62px;
+  top: 36%;
+  opacity: .24;
+  animation:
+    cinemaOrbitSpin
+    13s linear infinite reverse;
+}
+
+@keyframes cinemaBookOpen {
+  0%,
+  12%,
+  86%,
+  100% {
+    transform:
+      translateZ(4px)
+      rotateY(0deg);
+  }
+
+  30%,
+  66% {
+    transform:
+      translateZ(4px)
+      rotateY(-142deg);
+  }
+
+  42%,
+  54% {
+    transform:
+      translateZ(4px)
+      rotateY(-154deg);
+  }
+}
+
+@keyframes cinemaBookFloat {
+  0%,
+  100% {
+    translate:
+      0 0;
+  }
+
+  50% {
+    translate:
+      0 -9px;
+  }
+}
+
+@keyframes cinemaGridDrift {
+  from {
+    background-position:
+      0 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      54px 54px,
+      54px 54px;
+  }
+}
+
+@keyframes cinemaFieldFloat {
+  0%,
+  100% {
+    translate:
+      0 0;
+  }
+
+  50% {
+    translate:
+      -8px -5px;
+  }
+}
+
+@keyframes cinemaGlyphMorph {
+  0% {
+    opacity: 1;
+    transform:
+      translate3d(0,0,0)
+      rotateX(0deg)
+      scale(1);
+  }
+
+  42% {
+    opacity: 0;
+    transform:
+      translate3d(0,-9px,0)
+      rotateX(80deg)
+      scale(.72);
+  }
+
+  58% {
+    opacity: 0;
+    transform:
+      translate3d(0,8px,0)
+      rotateX(-70deg)
+      scale(.72);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translate3d(0,0,0)
+      rotateX(0deg)
+      scale(1);
+  }
+}
+
+@keyframes cinemaSymbolRise {
+  0%,
+  100% {
+    opacity: .08;
+    transform:
+      translate3d(0,10px,0)
+      rotate(-8deg);
+  }
+
+  50% {
+    opacity: .20;
+    transform:
+      translate3d(7px,-10px,0)
+      rotate(6deg);
+  }
+}
+
+@keyframes cinemaOrbitSpin {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+/* Keep real interface above cinema layer. */
+.auth-login-premium
+.auth-showcase
+> :not(.auth-cinema-stage) {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Theme-specific refinement without hard-coded animation colors. */
+html[data-theme="pink-glitter"]
+.auth-cinema-stage {
+  opacity: .98;
+}
+
+html[data-theme="blue-black"]
+.auth-cinema-stage {
+  opacity: .96;
+}
+
+html[data-theme="black-white"]
+.auth-cinema-stage {
+  opacity: .72;
+}
+
+
+/* Desktop only by design. */
+@media (max-width: 900px) {
+
+  .auth-cinema-stage {
+    display:
+      none !important;
+  }
+
+}
+
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
+  .auth-cinema-stage {
+    display:
+      none !important;
+  }
+
+}
+
+
+/* Avoid spending GPU/CPU when login tab is not visible. */
+html.cortex-cinema-paused
+.auth-cinema-stage,
+html.cortex-cinema-paused
+.auth-cinema-stage * {
+  animation-play-state:
+    paused !important;
+}
