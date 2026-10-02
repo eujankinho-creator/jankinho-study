@@ -14,6 +14,41 @@ import {
 } from "../../lib/prisma";
 
 
+const TEMAS_PERMITIDOS =
+  new Set([
+    "dark-orange",
+    "pink-glitter",
+    "blue-black",
+    "black-white",
+  ]);
+
+
+function normalizarTema(
+  value: unknown
+) {
+
+  const tema =
+    String(
+      value ||
+      ""
+    )
+      .trim();
+
+
+  if (
+    TEMAS_PERMITIDOS.has(
+      tema
+    )
+  ) {
+
+    return tema;
+  }
+
+
+  return "dark-orange";
+}
+
+
 function json(
   response: ServerResponse,
   status: number,
@@ -287,6 +322,7 @@ export async function obterConfiguracoes(
           email: true,
           createdAt: true,
           senhaHash: true,
+          tema: true,
         },
       });
 
@@ -326,6 +362,11 @@ export async function obterConfiguracoes(
           temSenha:
             Boolean(
               usuario.senhaHash
+            ),
+
+          tema:
+            normalizarTema(
+              usuario.tema
             ),
         },
       }
@@ -485,6 +526,118 @@ export async function atualizarPerfil(
       {
         error:
           "Nao foi possivel atualizar o perfil.",
+      }
+    );
+  }
+}
+
+
+export async function atualizarTema(
+  request: IncomingMessage,
+  response: ServerResponse
+) {
+
+  try {
+
+    const usuarioId =
+      await obterUsuarioId(
+        request
+      );
+
+
+    if (!usuarioId) {
+
+      json(
+        response,
+        401,
+        {
+          error:
+            "Nao autenticado.",
+        }
+      );
+
+      return;
+    }
+
+
+    const body =
+      await lerJson(
+        request
+      );
+
+
+    const tema =
+      String(
+        body.tema ||
+        ""
+      )
+        .trim();
+
+
+    if (
+      !TEMAS_PERMITIDOS.has(
+        tema
+      )
+    ) {
+
+      json(
+        response,
+        400,
+        {
+          error:
+            "Tema invalido.",
+        }
+      );
+
+      return;
+    }
+
+
+    const usuario =
+      await prisma.usuario.update({
+        where: {
+          id: usuarioId,
+        },
+
+        data: {
+          tema,
+        },
+
+        select: {
+          id: true,
+          tema: true,
+        },
+      });
+
+
+    json(
+      response,
+      200,
+      {
+        sucesso: true,
+
+        tema:
+          normalizarTema(
+            usuario.tema
+          ),
+      }
+    );
+
+  }
+  catch (error) {
+
+    console.error(
+      "Erro ao atualizar tema:",
+      error
+    );
+
+
+    json(
+      response,
+      500,
+      {
+        error:
+          "Nao foi possivel salvar o tema.",
       }
     );
   }
