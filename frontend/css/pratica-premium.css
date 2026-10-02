@@ -59,8 +59,7 @@
   .evolution-page
 ) {
   animation:
-    cortexPracticePageIn
-    .38s ease both;
+    none;
 }
 
 
