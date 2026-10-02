@@ -1865,11 +1865,6 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
   ctx.textBaseline = "top";
   ctx.fillText(lead, rect.x + 7 * dpr, rect.y + 6 * dpr);
 
-  if (lead === "DII") {
-    ctx.fillStyle = colorWithAlpha(palette.accent, .09);
-    ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
-  }
-
   const gradient = ctx.createLinearGradient(rect.x, 0, headX, 0);
 
   if (activeColor === "#191919") {
@@ -1878,10 +1873,9 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
     gradient.addColorStop(1, "rgba(10,10,10,.98)");
   }
   else {
-    /* DII destacado com cor clínica fixa: nunca depende do tema. */
-    gradient.addColorStop(0, "rgba(185,28,28,.30)");
-    gradient.addColorStop(.72, "rgba(185,28,28,.78)");
-    gradient.addColorStop(1, "#991b1b");
+    gradient.addColorStop(0, "rgba(25,25,25,.27)");
+    gradient.addColorStop(.72, "rgba(25,25,25,.72)");
+    gradient.addColorStop(1, "rgba(10,10,10,.98)");
   }
 
   /*
@@ -1949,10 +1943,7 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
   ctx.lineTo(headX, rect.y + rect.h);
   ctx.stroke();
 
-  ctx.fillStyle =
-    activeColor === "#191919"
-      ? "#ef4444"
-      : "#991b1b";
+  ctx.fillStyle = "#ef4444";
   ctx.beginPath();
   ctx.arc(newestX, newestY, 2.8 * dpr, 0, TAU);
   ctx.fill();
@@ -2177,9 +2168,7 @@ function drawEcgMatrix() {
       lead,
       LAB_STATE.ecgTime,
       period,
-      lead === "DII"
-        ? "#991b1b"
-        : "#191919",
+      "#191919",
       dpr
     );
   });
