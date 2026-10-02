@@ -146,7 +146,10 @@
 
                 <div class="heart-viewer-top">
                   <span id="heartOrientation">−90°</span>
-                  <button id="heartFullscreen" type="button">Ampliar coração ⛶</button>
+                  <div class="heart-viewer-actions">
+                    <button id="heartCutawayToggle" type="button" aria-pressed="true">Corte: ativo</button>
+                    <button id="heartFullscreen" type="button">Ampliar coração ⛶</button>
+                  </div>
                 </div>
 
                 <div class="heart-viewer-bottom">
@@ -194,6 +197,7 @@
               <span id="phaseCounter">5/10</span>
               <button id="phaseNext" type="button" aria-label="Próximo">▶</button>
               <button id="phasePlay" class="continuous-button" type="button">▶ Contínuo</button>
+              <button id="heartSoundToggle" class="sound-button" type="button" aria-pressed="false">♪ Som</button>
               <select id="phaseSpeed" aria-label="Velocidade">
                 <option value="0.25">0,25×</option>
                 <option value="0.5">0,5×</option>
