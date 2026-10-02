@@ -12,6 +12,114 @@
   let progressValue = 0;
   let finishTimer = null;
 
+  let domReady =
+    false;
+
+  let pageReadySent =
+    false;
+
+  let pageReadyTimer =
+    0;
+
+
+  function pageIdentity() {
+
+    return (
+      window.location.pathname +
+      window.location.search +
+      window.location.hash
+    );
+
+  }
+
+
+  function postPageReady() {
+
+    if (
+      pageReadySent ||
+      !domReady ||
+      pendingRequests > 0
+    ) {
+      return;
+    }
+
+
+    window.clearTimeout(
+      pageReadyTimer
+    );
+
+
+    /*
+     * Aguarda um pequeno período estável. Se algum script
+     * da página iniciar um fetch logo após DOMContentLoaded,
+     * startProgress cancela este envio.
+     */
+    pageReadyTimer =
+      window.setTimeout(
+        function () {
+
+          if (
+            pageReadySent ||
+            pendingRequests > 0
+          ) {
+            return;
+          }
+
+
+          window.requestAnimationFrame(
+            function () {
+
+              window.requestAnimationFrame(
+                function () {
+
+                  if (
+                    pageReadySent ||
+                    pendingRequests > 0
+                  ) {
+                    return;
+                  }
+
+
+                  pageReadySent =
+                    true;
+
+
+                  try {
+
+                    if (
+                      window.parent &&
+                      window.parent !==
+                        window
+                    ) {
+
+                      window.parent.postMessage(
+                        {
+                          type:
+                            "cortex:page-ready",
+
+                          href:
+                            pageIdentity(),
+                        },
+                        window.location.origin
+                      );
+
+                    }
+
+                  }
+                  catch {}
+
+                }
+              );
+
+            }
+          );
+
+        },
+        90
+      );
+
+  }
+
 
   /* =========================================================
      FETCH / LOADING
@@ -59,6 +167,11 @@
 
     window.clearTimeout(
       finishTimer
+    );
+
+
+    window.clearTimeout(
+      pageReadyTimer
     );
 
 
@@ -114,9 +227,16 @@
 
 
     if (
-      pendingRequests !== 0 ||
-      !progress
+      pendingRequests !== 0
     ) {
+      return;
+    }
+
+
+    postPageReady();
+
+
+    if (!progress) {
       return;
     }
 
@@ -1348,10 +1468,39 @@
       );
 
 
+      domReady =
+        true;
+
+
       initRevealObserver();
-      initProfessionalMotion();
       initGlobalInteractionFeedback();
       initTimer();
+
+
+      postPageReady();
+
+
+      /*
+       * Fallback: nunca deixa o shell esperando indefinidamente
+       * por uma integração de terceiros ou request travada.
+       */
+      window.setTimeout(
+        function () {
+
+          if (pageReadySent) {
+            return;
+          }
+
+
+          pendingRequests =
+            0;
+
+
+          postPageReady();
+
+        },
+        2400
+      );
     }
   );
 
