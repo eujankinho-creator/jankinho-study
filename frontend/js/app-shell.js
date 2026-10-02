@@ -1436,15 +1436,60 @@
             .contentDocument;
 
 
+        const hasVisualLayout =
+          Boolean(
+            documentReady &&
+            documentReady.body &&
+            (
+              documentReady.querySelector(
+                ".main-area"
+              ) ||
+              documentReady.querySelector(
+                ".academic-main"
+              ) ||
+              documentReady.querySelector(
+                ".finance-main"
+              ) ||
+              documentReady.querySelector(
+                ".content"
+              ) ||
+              documentReady.querySelector(
+                "main"
+              )
+            )
+          );
+
+
+        const stylesheetLinks =
+          documentReady
+            ? documentReady.querySelectorAll(
+                'link[rel="stylesheet"]'
+              ).length
+            : 0;
+
+
+        const stylesReady =
+          Boolean(
+            documentReady &&
+            (
+              stylesheetLinks === 0 ||
+              documentReady.styleSheets
+                .length >=
+                Math.min(
+                  stylesheetLinks,
+                  2
+                )
+            )
+          );
+
+
         if (
           sameFrameTarget(
             standbyFrame,
             target
           ) &&
-          documentReady &&
-          documentReady.body &&
-          documentReady.readyState !==
-            "loading"
+          hasVisualLayout &&
+          stylesReady
         ) {
 
           /*
@@ -1455,36 +1500,30 @@
           window.requestAnimationFrame(
             function () {
 
-              window.requestAnimationFrame(
-                function () {
+              if (
+                revision !==
+                  navigationRevision ||
+                !pendingTarget ||
+                standbyFrame.dataset
+                  .cortexTarget !==
+                  target ||
+                !sameFrameTarget(
+                  standbyFrame,
+                  target
+                )
+              ) {
 
-                  if (
-                    revision !==
-                      navigationRevision ||
-                    !pendingTarget ||
-                    standbyFrame.dataset
-                      .cortexTarget !==
-                      target ||
-                    !sameFrameTarget(
-                      standbyFrame,
-                      target
-                    )
-                  ) {
-
-                    return;
-                  }
+                return;
+              }
 
 
-                  enhanceLoadedFrame(
-                    standbyFrame
-                  );
+              enhanceLoadedFrame(
+                standbyFrame
+              );
 
 
-                  swapFrames(
-                    standbyFrame
-                  );
-
-                }
+              swapFrames(
+                standbyFrame
               );
 
             }
@@ -1725,6 +1764,27 @@
 
       return;
 
+    }
+
+
+    if (
+      sameFrameTarget(
+        standbyFrame,
+        normalized
+      )
+    ) {
+
+      enhanceLoadedFrame(
+        standbyFrame
+      );
+
+
+      swapFrames(
+        standbyFrame
+      );
+
+
+      return;
     }
 
 
