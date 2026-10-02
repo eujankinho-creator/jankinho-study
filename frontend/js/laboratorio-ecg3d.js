@@ -310,13 +310,40 @@ const PATTERNS = [
     tags: ["ST", "T", "derivações contíguas"]
   },
   {
-    id: "potassium",
-    title: "Hipocalemia e hipercalemia",
-    subtitle: "Alterações no QT, ST e T",
-    kind: "potassium",
-    detailTitle: "Potássio e repolarização",
-    detailText: "Modelos didáticos destacam mudanças na onda T e na duração do complexo conforme alterações eletrolíticas.",
-    tags: ["onda T", "eletrólitos", "repolarização"]
+    id: "hypokalemia",
+    title: "Hipocalemia",
+    subtitle: "T achatada · ST ↓ · onda U",
+    kind: "hypokalemia",
+    detailTitle: "Hipocalemia: T achatada, ST deprimido e onda U",
+    detailText: "Modelo didático baseado nos achados clássicos: redução/achatamento da onda T, depressão do segmento ST, onda U proeminente e aumento aparente do intervalo QT, frequentemente refletindo prolongamento do QTU/QU.",
+    tags: ["T achatada", "ST deprimido", "onda U", "QTU/QU"]
+  },
+  {
+    id: "hyperkalemia",
+    title: "Hipercalemia",
+    subtitle: "T alta, estreita e simétrica",
+    kind: "hyperkalemia",
+    detailTitle: "Hipercalemia: repolarização acelerada e progressão com gravidade",
+    detailText: "Modelo didático de fase inicial/moderada com onda T alta, estreita e simétrica. Em hipercalemia mais importante podem surgir redução da P, prolongamento da condução e alargamento do QRS.",
+    tags: ["T apiculada", "QTc pode encurtar", "QRS em casos graves"]
+  },
+  {
+    id: "hypocalcemia",
+    title: "Hipocalcemia",
+    subtitle: "ST prolongado · QT maior",
+    kind: "hypocalcemia",
+    detailTitle: "Hipocalcemia: prolongamento do ST e do QT",
+    detailText: "O prolongamento do QT na hipocalcemia decorre predominantemente do alongamento do segmento ST. O desenho mantém QRS semelhante e desloca a onda T para mais tarde.",
+    tags: ["ST prolongado", "QT prolongado", "repolarização"]
+  },
+  {
+    id: "hypercalcemia",
+    title: "Hipercalcemia",
+    subtitle: "ST curto · QT menor",
+    kind: "hypercalcemia",
+    detailTitle: "Hipercalcemia: encurtamento do ST e do QT",
+    detailText: "O achado clássico é o encurtamento do segmento ST, que pode ficar muito breve ou quase desaparecer, aproximando a onda T do final do QRS e reduzindo o intervalo QT.",
+    tags: ["ST encurtado", "QT curto", "cálcio"]
   },
   {
     id: "biphasic-t",
@@ -520,11 +547,29 @@ const PATTERN_TEACHING = {
     normal: "No normal o ST permanece próximo à linha de base e a repolarização segue padrão esperado para a derivação.",
     caution: "Suspeita de síndrome coronariana é avaliação clínica urgente; o simulador é apenas educacional."
   },
-  potassium: {
-    change: "Alterações do potássio podem modificar T, ST, QT/QU e, em casos importantes, o QRS.",
-    recognize: "Compare T achatada/onda U em um extremo com T mais alta e estreita no outro, sempre considerando o conjunto.",
-    normal: "A onda T de referência é suave e proporcional ao QRS na derivação mostrada.",
-    caution: "Eletrólitos não podem ser inferidos com segurança apenas pelo ECG."
+  hypokalemia: {
+    change: "A onda T perde amplitude, o ST pode ficar deprimido e surge uma onda U positiva após a T; T e U podem se fundir em casos mais marcados.",
+    recognize: "Procure T achatada ou invertida, depressão de ST e uma deflexão U após a T. O aparente QT longo pode representar, na prática, aumento do intervalo QU/QTU.",
+    normal: "No traçado de referência, a T tem amplitude maior e não existe uma U proeminente separada.",
+    caution: "A intensidade das alterações não acompanha o potássio sérico de forma perfeitamente previsível; use o ECG como contexto, não como dosagem."
+  },
+  hyperkalemia: {
+    change: "A repolarização pode produzir T alta, estreita e simétrica; com maior gravidade podem ocorrer redução da P, atraso de condução e alargamento do QRS.",
+    recognize: "No modelo inicial, compare a T ampla do normal com uma T mais apiculada e simétrica. Não use apenas a altura da T para inferir potássio.",
+    normal: "No traçado de referência, a T é mais arredondada e menos estreita.",
+    caution: "A sequência clássica varia entre pacientes e o ECG pode ser pouco sensível mesmo com hipercalemia relevante."
+  },
+  hypocalcemia: {
+    change: "O segmento ST se prolonga e aumenta a duração do QT, com QRS relativamente preservado no modelo didático.",
+    recognize: "Compare a distância entre o final do QRS e o início da T: ela fica maior, alongando o QT.",
+    normal: "No traçado de referência, a T começa mais cedo após um ST de duração habitual.",
+    caution: "QT deve ser interpretado com correção pela frequência e considerando medicamentos e outros eletrólitos."
+  },
+  hypercalcemia: {
+    change: "O segmento ST encurta e pode quase desaparecer, aproximando a onda T do QRS e reduzindo o QT.",
+    recognize: "Observe a redução do tempo entre o final do QRS e o início da T. O QT curto decorre principalmente desse ST abreviado.",
+    normal: "No traçado de referência existe um intervalo maior entre o QRS e a onda T.",
+    caution: "Alterações adicionais de T, PR ou QRS podem ocorrer em hipercalcemia importante, mas não são o foco do padrão clássico mostrado."
   },
   "biphasic-t": {
     change: "A onda T cruza a linha de base e apresenta duas fases de polaridades opostas.",
@@ -3474,6 +3519,43 @@ function drawPWaveComparisons() {
   drawPatternCanvas(byId("patternCanvasRightAtrium"), "right");
 }
 
+function electrolyteWaveValue(n, kind) {
+  /*
+   * Modelos didáticos representativos em DII.
+   * Mantêm P/QRS simples e isolam a alteração eletrolítica principal.
+   * Não simulam concentração sérica específica nem substituem ECG real.
+   */
+  const p = gaussian(n, .12, .026, .13);
+  const qrs =
+    gaussian(n, .235, .012, -.18) +
+    gaussian(n, .255, .014, 1.12) +
+    gaussian(n, .278, .016, -.34);
+
+  if (kind === "hypokalemia") {
+    const stDepression = gaussian(n, .39, .095, -.08);
+    const flatT = gaussian(n, .52, .070, .085);
+    const uWave = gaussian(n, .69, .035, .20);
+    return p + qrs + stDepression + flatT + uWave;
+  }
+
+  if (kind === "hyperkalemia") {
+    const peakedT = gaussian(n, .50, .036, .62);
+    return p * .78 + qrs + peakedT;
+  }
+
+  if (kind === "hypocalcemia") {
+    const delayedT = gaussian(n, .68, .064, .30);
+    return p + qrs + delayedT;
+  }
+
+  if (kind === "hypercalcemia") {
+    const earlyT = gaussian(n, .395, .055, .30);
+    return p + qrs + earlyT;
+  }
+
+  return p + qrs + gaussian(n, .52, .065, .30);
+}
+
 function genericWaveValue(n, kind, variant) {
   let value = leadWave(n, "DII");
 
@@ -3491,8 +3573,13 @@ function genericWaveValue(n, kind, variant) {
     value *= .38;
   } else if (kind === "st") {
     value += gaussian(n, .39, .080, .20);
-  } else if (kind === "potassium") {
-    value += gaussian(n, .51, .035, .48);
+  } else if (
+    kind === "hypokalemia" ||
+    kind === "hyperkalemia" ||
+    kind === "hypocalcemia" ||
+    kind === "hypercalcemia"
+  ) {
+    value = electrolyteWaveValue(n, kind);
   } else if (kind === "biphasic") {
     value += gaussian(n, .50, .040, .28) - gaussian(n, .57, .050, .25);
   } else if (kind === "wellens") {
@@ -3560,7 +3647,10 @@ function drawGenericPattern(kind) {
         delta: ["início lento · delta", .39],
         low: ["baixa amplitude", .45],
         st: ["segmento ST", .50],
-        potassium: ["onda T", .60],
+        hypokalemia: ["T achatada + U proeminente", .67],
+        hyperkalemia: ["T alta, estreita e simétrica", .57],
+        hypocalcemia: ["ST prolongado · QT maior", .61],
+        hypercalcemia: ["ST encurtado · QT menor", .47],
         biphasic: ["T bifásica", .60],
         wellens: ["T anterior alterada", .60],
         nodal: ["relação P–QRS", .36]
