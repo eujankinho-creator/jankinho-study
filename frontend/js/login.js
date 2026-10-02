@@ -37,57 +37,44 @@ function limparErro() {
 }
 
 
-function resetCortexIntroSession() {
+function prepareDashboardAfterLogin(
+  theme
+) {
 
   try {
 
-    const keys =
-      [];
+    /*
+     * A intro do Dashboard pertence ao login atual.
+     * O preenchimento automatico/salvamento de senha
+     * nao interfere mais nessa marcacao.
+     */
+    sessionStorage.removeItem(
+      "cortexDesktopIntroSeen"
+    );
+
+    sessionStorage.setItem(
+      "cortexDashboardFreshLogin",
+      "1"
+    );
 
 
-    for (
-      let index = 0;
-      index < sessionStorage.length;
-      index += 1
-    ) {
-
-      const key =
-        sessionStorage.key(
-          index
-        );
+    /*
+     * Sempre inicia um novo login no Dashboard.
+     * Evita restaurar uma janela antiga antes da intro.
+     */
+    localStorage.removeItem(
+      "cortex_shell_last_view"
+    );
 
 
-      if (
-        key &&
-        (
-          key ===
-            "cortexDesktopIntroSeen" ||
-          key.startsWith(
-            "cortexPageIntroSeen:"
-          )
-        )
-      ) {
+    if (theme) {
 
-        keys.push(
-          key
-        );
-
-      }
+      localStorage.setItem(
+        "jankinho_theme_v1",
+        theme
+      );
 
     }
-
-
-    keys.forEach(
-      function (
-        key
-      ) {
-
-        sessionStorage.removeItem(
-          key
-        );
-
-      }
-    );
 
   }
   catch (
@@ -95,14 +82,13 @@ function resetCortexIntroSession() {
   ) {
 
     /*
-     * O login continua normalmente mesmo
-     * se o navegador bloquear sessionStorage.
+     * Se o navegador bloquear storage,
+     * o login continua normalmente.
      */
 
   }
 
 }
-
 
 form.addEventListener(
   "submit",
@@ -172,10 +158,25 @@ form.addEventListener(
       }
 
 
-      resetCortexIntroSession();
+      const accountTheme =
+        dados &&
+        dados.usuario
+          ? dados.usuario.tema
+          : null;
 
 
-      window.location.href = "/app";
+      prepareDashboardAfterLogin(
+        accountTheme
+      );
+
+
+      /*
+       * replace evita voltar para um estado intermediario
+       * do formulario/autofill com o botao "Voltar".
+       */
+      window.location.replace(
+        "/app"
+      );
 
     }
     catch (error) {
