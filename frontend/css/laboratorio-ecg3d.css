@@ -1,0 +1,1050 @@
+
+/* Cortex ECG 3D Lab
+   Dedicated visual layer for the ECG learning workstation. */
+
+.lab-view .ecg3d-view[hidden] {
+  display: none !important;
+}
+
+body.lab-center-ecg3d .top-metrics {
+  display: none !important;
+}
+
+body.lab-center-ecg3d .laboratory-grid {
+  grid-template-columns: minmax(0,1fr) !important;
+}
+
+body.lab-center-ecg3d .laboratory-grid > aside,
+body.lab-center-ecg3d .laboratory-grid > .lab-right {
+  display: none !important;
+}
+
+body.lab-center-ecg3d .lab-center > :not(.ecg3d-view) {
+  display: none !important;
+}
+
+body.lab-center-ecg3d .lab-center {
+  gap: 0;
+}
+
+.lab-view .lab-area-toolbar {
+  grid-template-columns: minmax(220px,.7fr) minmax(0,1.3fr);
+  align-items: center;
+}
+
+.lab-view .ecg3d-view {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lab-view .ecg3d-head,
+.lab-view .ecg3d-card,
+.lab-view .ecg3d-learning {
+  border: 1px solid var(--theme-border);
+  background:
+    linear-gradient(
+      155deg,
+      color-mix(in srgb,var(--theme-surface) 96%,var(--theme-accent) 4%),
+      var(--theme-surface-strong)
+    );
+  box-shadow: 0 16px 42px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.lab-view .ecg3d-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-radius: 14px;
+  padding: 11px 13px;
+}
+
+.lab-view .ecg3d-head > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.lab-view .ecg3d-head strong {
+  color: var(--theme-text);
+  font-size: 12px;
+}
+
+.lab-view .ecg3d-head small {
+  color: var(--theme-text-muted);
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.lab-view .ecg3d-status {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 29px;
+  border: 1px solid rgba(250,204,21,.13);
+  border-radius: 999px;
+  background: rgba(250,204,21,.035);
+  padding: 0 10px;
+  color: #dac451;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: .08em;
+}
+
+.lab-view .ecg3d-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #facc15;
+  box-shadow: 0 0 10px rgba(250,204,21,.45);
+}
+
+.lab-view .ecg3d-status.is-running .ecg3d-status-dot {
+  background: #4ade80;
+  box-shadow: 0 0 10px rgba(74,222,128,.48);
+}
+
+.lab-view .ecg3d-simulator-grid {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(420px,.9fr) minmax(560px,1.1fr);
+  gap: 12px;
+}
+
+.lab-view .ecg3d-card {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.lab-view .ecg3d-card-head {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--theme-border);
+  padding: 9px 12px;
+}
+
+.lab-view .ecg3d-card-head > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.lab-view .ecg3d-card-head > div:first-child span {
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: .13em;
+}
+
+.lab-view .ecg3d-card-head strong {
+  color: var(--theme-text);
+  font-size: 11px;
+}
+
+.lab-view .ecg3d-card-head small {
+  color: var(--theme-text-muted);
+  font-size: 7px;
+}
+
+.lab-view .ecg3d-scale {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.lab-view .ecg3d-scale span {
+  border: 1px solid var(--theme-border);
+  border-radius: 7px;
+  background: var(--theme-surface-soft);
+  padding: 5px 7px;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+}
+
+.lab-view .ecg3d-scale b {
+  color: var(--theme-text-soft);
+  font-size: 9px;
+}
+
+.lab-view .ecg3d-heart-tools {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--theme-border);
+  padding: 7px 8px;
+  scrollbar-width: none;
+}
+
+.lab-view .ecg3d-heart-tools::-webkit-scrollbar {
+  display: none;
+}
+
+.lab-view .ecg3d-tool {
+  flex: 0 0 auto;
+  min-height: 27px;
+  border: 1px solid var(--theme-border);
+  border-radius: 7px;
+  background: var(--theme-surface-soft);
+  padding: 0 9px;
+  color: var(--theme-text-muted);
+  font: inherit;
+  font-size: 7px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lab-view .ecg3d-tool.active,
+.lab-view .ecg3d-tool:hover {
+  border-color: rgba(250,204,21,.20);
+  background: rgba(250,204,21,.045);
+  color: #e7d061;
+}
+
+.lab-view .ecg3d-tool.icon {
+  margin-left: auto;
+}
+
+.lab-view .ecg3d-heart-stage {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 44%,rgba(143,31,42,.12),transparent 30%),
+    linear-gradient(rgba(255,255,255,.017) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.017) 1px,transparent 1px),
+    #07090a;
+  background-size: auto,26px 26px,26px 26px,auto;
+}
+
+.lab-view #ecgHeartCanvas {
+  width: 100%;
+  height: 430px;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+.lab-view #ecgHeartCanvas:active {
+  cursor: grabbing;
+}
+
+.lab-view .ecg3d-plane-legend {
+  position: absolute;
+  left: 9px;
+  top: 9px;
+  display: grid;
+  gap: 5px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 9px;
+  background: rgba(5,7,8,.72);
+  padding: 7px 8px;
+  backdrop-filter: blur(9px);
+  color: #758087;
+  font-size: 6px;
+  pointer-events: none;
+}
+
+.lab-view .ecg3d-plane-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lab-view .ecg3d-plane-legend i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.lab-view .ecg3d-plane-legend i.front {
+  background: #60a5fa;
+}
+
+.lab-view .ecg3d-plane-legend i.horizontal {
+  background: #c084fc;
+}
+
+.lab-view .ecg3d-plane-legend i.active {
+  background: #facc15;
+  box-shadow: 0 0 8px rgba(250,204,21,.45);
+}
+
+.lab-view .ecg3d-heart-hud {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  width: min(250px,calc(100% - 18px));
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgba(250,204,21,.11);
+  border-radius: 10px;
+  background: rgba(5,7,8,.78);
+  padding: 9px 10px;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+.lab-view .ecg3d-heart-hud > span {
+  color: #807746;
+  font-size: 6px;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+
+.lab-view .ecg3d-heart-hud strong {
+  color: #e6d264;
+  font-size: 10px;
+}
+
+.lab-view .ecg3d-heart-hud small {
+  color: #7b858c;
+  font-size: 7px;
+}
+
+.lab-view .ecg3d-lead-summary {
+  display: grid;
+  border-top: 1px solid var(--theme-border);
+}
+
+.lab-view .ecg3d-lead-summary > div {
+  display: grid;
+  grid-template-columns: 125px minmax(0,1fr);
+  gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,.035);
+  padding: 7px 10px;
+}
+
+.lab-view .ecg3d-lead-summary > div:last-child {
+  border-bottom: 0;
+}
+
+.lab-view .ecg3d-lead-summary span {
+  color: var(--theme-text-muted);
+  font-size: 7px;
+}
+
+.lab-view .ecg3d-lead-summary strong {
+  color: var(--theme-text-soft);
+  font-size: 7px;
+  letter-spacing: .04em;
+}
+
+.lab-view .ecg3d-lead-controls {
+  border-bottom: 1px solid var(--theme-border);
+  padding: 8px 9px;
+}
+
+.lab-view .ecg3d-lead-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.lab-view .ecg3d-lead-head > span {
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+.lab-view .ecg3d-lead-head > div {
+  display: flex;
+  gap: 4px;
+}
+
+.lab-view .ecg3d-lead-head button {
+  min-height: 22px;
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  background: var(--theme-surface-soft);
+  padding: 0 7px;
+  color: var(--theme-text-muted);
+  font: inherit;
+  font-size: 6px;
+  cursor: pointer;
+}
+
+.lab-view .ecg3d-lead-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.lab-view .ecg3d-lead-pill {
+  min-height: 22px;
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  background: var(--theme-surface-soft);
+  padding: 0 7px;
+  color: var(--theme-text-muted);
+  font: inherit;
+  font-size: 6px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.lab-view .ecg3d-lead-pill.active {
+  border-color: rgba(74,222,128,.18);
+  background: rgba(74,222,128,.04);
+  color: #6ee794;
+}
+
+.lab-view .ecg3d-lead-pill.special.active {
+  border-color: rgba(192,132,252,.18);
+  background: rgba(192,132,252,.045);
+  color: #cca1f5;
+}
+
+.lab-view .ecg3d-trace-viewport {
+  height: 430px;
+  overflow: auto;
+  background: #030605;
+  scrollbar-width: thin;
+  scrollbar-color: #2c3032 transparent;
+}
+
+.lab-view #ecgTutorCanvas {
+  width: 100%;
+  min-width: 560px;
+  display: block;
+}
+
+.lab-view .ecg3d-transport {
+  display: grid;
+  grid-template-columns: 30px auto 30px minmax(120px,1fr);
+  align-items: center;
+  gap: 5px;
+  border-top: 1px solid var(--theme-border);
+  border-bottom: 1px solid var(--theme-border);
+  padding: 7px 9px;
+}
+
+.lab-view .ecg3d-transport button {
+  border: 1px solid var(--theme-border);
+  background: var(--theme-surface-soft);
+  color: var(--theme-text-soft);
+  font: inherit;
+  cursor: pointer;
+}
+
+.lab-view .ecg3d-transport .mini {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  font-size: 7px;
+}
+
+.lab-view .ecg3d-transport .primary {
+  min-width: 108px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 7px;
+  font-size: 7px;
+  font-weight: 850;
+}
+
+.lab-view .ecg3d-transport .primary.playing {
+  border-color: rgba(250,204,21,.18);
+  background: rgba(250,204,21,.045);
+  color: #e5d05f;
+}
+
+.lab-view .ecg3d-progress {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 31px;
+  align-items: center;
+  gap: 6px;
+}
+
+.lab-view .ecg3d-progress > div {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255,255,255,.06);
+}
+
+.lab-view .ecg3d-progress > div > span {
+  display: block;
+  width: 20%;
+  height: 100%;
+  border-radius: inherit;
+  background: #facc15;
+  box-shadow: 0 0 8px rgba(250,204,21,.25);
+}
+
+.lab-view .ecg3d-progress small {
+  color: var(--theme-text-muted);
+  font-size: 6px;
+  text-align: right;
+}
+
+.lab-view .ecg3d-phase-copy {
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: 36px minmax(0,1fr);
+  gap: 10px;
+  padding: 10px 11px;
+}
+
+.lab-view .ecg3d-phase-number {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(250,204,21,.13);
+  border-radius: 9px;
+  background: rgba(250,204,21,.035);
+  color: #e0ca5a;
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.lab-view .ecg3d-phase-copy > div {
+  min-width: 0;
+}
+
+.lab-view .ecg3d-phase-copy strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--theme-text);
+  font-size: 10px;
+}
+
+.lab-view .ecg3d-phase-copy p {
+  margin: 4px 0 0;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  line-height: 1.5;
+}
+
+.lab-view .ecg3d-learning {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.lab-view .ecg3d-learning-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--theme-border);
+  padding: 10px 12px;
+}
+
+.lab-view .ecg3d-learning-head > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.lab-view .ecg3d-learning-head strong {
+  color: var(--theme-text);
+  font-size: 11px;
+}
+
+.lab-view .ecg3d-learning-tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lab-view .ecg3d-learning-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.lab-view .ecg3d-learn-tab {
+  flex: 0 0 auto;
+  min-height: 25px;
+  border: 1px solid var(--theme-border);
+  border-radius: 7px;
+  background: var(--theme-surface-soft);
+  padding: 0 8px;
+  color: var(--theme-text-muted);
+  font: inherit;
+  font-size: 6px;
+  font-weight: 820;
+  cursor: pointer;
+}
+
+.lab-view .ecg3d-learn-tab.active {
+  border-color: rgba(250,204,21,.17);
+  background: rgba(250,204,21,.04);
+  color: #deca62;
+}
+
+.lab-view .ecg3d-learn-panel {
+  display: none;
+  padding: 12px;
+}
+
+.lab-view .ecg3d-learn-panel.active {
+  display: block;
+}
+
+.lab-view .ecg3d-electrode-layout {
+  display: grid;
+  grid-template-columns: minmax(340px,.9fr) minmax(360px,1.1fr);
+  gap: 10px;
+}
+
+.lab-view .ecg3d-body-map-card,
+.lab-view .ecg3d-electrode-notes,
+.lab-view .ecg3d-fundamentals article,
+.lab-view .ecg3d-pattern-detail {
+  border: 1px solid var(--theme-border);
+  border-radius: 12px;
+  background: var(--theme-surface-soft);
+}
+
+.lab-view .ecg3d-body-map-card {
+  overflow: hidden;
+}
+
+.lab-view .ecg3d-subhead {
+  display: grid;
+  gap: 3px;
+  border-bottom: 1px solid var(--theme-border);
+  padding: 9px 10px;
+}
+
+.lab-view .ecg3d-subhead strong {
+  color: var(--theme-text);
+  font-size: 9px;
+}
+
+.lab-view .ecg3d-subhead small {
+  color: var(--theme-text-muted);
+  font-size: 7px;
+}
+
+.lab-view .ecg3d-body-map {
+  width: 100%;
+  height: min(470px,58vh);
+  display: block;
+  padding: 7px;
+}
+
+.lab-view .ecg3d-body-map .body {
+  fill: rgba(255,255,255,.012);
+  stroke: rgba(255,255,255,.13);
+  stroke-width: 2;
+}
+
+.lab-view .ecg3d-body-map .mid {
+  fill: none;
+  stroke: rgba(255,255,255,.04);
+  stroke-width: 1;
+  stroke-dasharray: 5 8;
+}
+
+.lab-view .ecg3d-body-map text {
+  fill: #6d7479;
+  font-size: 10px;
+  font-weight: 750;
+  pointer-events: none;
+}
+
+.lab-view .ecg-electrode {
+  stroke: rgba(255,255,255,.58);
+  stroke-width: 1.3;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.lab-view .ecg-electrode:hover,
+.lab-view .ecg-electrode.active {
+  stroke: white;
+  stroke-width: 2.4;
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+.lab-view .ecg-electrode.limb {
+  fill: #60a5fa;
+  color: #60a5fa;
+}
+
+.lab-view .ecg-electrode.chest {
+  fill: #4ade80;
+  color: #4ade80;
+}
+
+.lab-view .ecg-electrode.posterior {
+  fill: #c084fc;
+  color: #c084fc;
+}
+
+.lab-view .ecg-electrode.right {
+  fill: #fb7185;
+  color: #fb7185;
+}
+
+.lab-view .ecg3d-electrode-notes {
+  overflow: hidden;
+}
+
+.lab-view .ecg3d-electrode-notes article {
+  display: grid;
+  grid-template-columns: 30px minmax(0,1fr);
+  gap: 8px;
+  border-bottom: 1px solid var(--theme-border);
+  padding: 9px 10px;
+}
+
+.lab-view .ecg3d-electrode-notes article > span {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--theme-border);
+  border-radius: 7px;
+  color: var(--theme-text-muted);
+  font-size: 6px;
+  font-weight: 850;
+}
+
+.lab-view .ecg3d-electrode-notes strong {
+  color: var(--theme-text-soft);
+  font-size: 8px;
+}
+
+.lab-view .ecg3d-electrode-notes p,
+.lab-view .ecg3d-electrode-focus p {
+  margin: 3px 0 0;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  line-height: 1.45;
+}
+
+.lab-view .ecg3d-electrode-focus {
+  margin: 9px;
+  border: 1px solid rgba(250,204,21,.09);
+  border-radius: 9px;
+  background: rgba(250,204,21,.025);
+  padding: 9px;
+}
+
+.lab-view .ecg3d-electrode-focus > span {
+  color: #7d7548;
+  font-size: 6px;
+  font-weight: 850;
+  letter-spacing: .1em;
+}
+
+.lab-view .ecg3d-electrode-focus strong {
+  display: block;
+  margin-top: 4px;
+  color: #dbc85f;
+  font-size: 9px;
+}
+
+.lab-view .ecg3d-fundamentals {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 7px;
+}
+
+.lab-view .ecg3d-fundamentals article {
+  min-height: 120px;
+  padding: 10px;
+}
+
+.lab-view .ecg3d-fundamentals article > span {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 9px;
+  border: 1px solid rgba(74,222,128,.11);
+  border-radius: 8px;
+  background: rgba(74,222,128,.028);
+  color: #70d991;
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.lab-view .ecg3d-fundamentals strong {
+  color: var(--theme-text-soft);
+  font-size: 8px;
+}
+
+.lab-view .ecg3d-fundamentals p {
+  margin: 5px 0 0;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  line-height: 1.5;
+}
+
+.lab-view .ecg3d-guided-intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.lab-view .ecg3d-guided-intro > div {
+  display: grid;
+  gap: 3px;
+}
+
+.lab-view .ecg3d-guided-intro strong {
+  color: var(--theme-text);
+  font-size: 10px;
+}
+
+.lab-view .ecg3d-guided-intro p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+}
+
+.lab-view .ecg3d-guided-steps {
+  display: grid;
+  grid-template-columns: repeat(5,minmax(0,1fr));
+  gap: 6px;
+}
+
+.lab-view .ecg3d-guided-step {
+  min-height: 94px;
+  display: grid;
+  align-content: space-between;
+  border: 1px solid var(--theme-border);
+  border-radius: 10px;
+  background: var(--theme-surface-soft);
+  padding: 8px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lab-view .ecg3d-guided-step:hover,
+.lab-view .ecg3d-guided-step.active {
+  border-color: rgba(250,204,21,.14);
+  background: rgba(250,204,21,.028);
+}
+
+.lab-view .ecg3d-guided-step > span {
+  color: var(--theme-text-muted);
+  font-size: 6px;
+  font-weight: 850;
+  letter-spacing: .08em;
+}
+
+.lab-view .ecg3d-guided-step strong {
+  margin-top: 5px;
+  color: var(--theme-text-soft);
+  font-size: 8px;
+}
+
+.lab-view .ecg3d-guided-step small {
+  margin-top: 5px;
+  color: var(--theme-text-muted);
+  font-size: 6px;
+  line-height: 1.35;
+}
+
+.lab-view .ecg3d-pattern-layout {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 8px;
+}
+
+.lab-view .ecg3d-pattern-selector {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 6px;
+}
+
+.lab-view .ecg3d-pattern-button {
+  min-height: 78px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  border: 1px solid var(--theme-border);
+  border-radius: 10px;
+  background: var(--theme-surface-soft);
+  padding: 8px;
+  color: var(--theme-text-muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lab-view .ecg3d-pattern-button strong {
+  color: var(--theme-text-soft);
+  font-size: 8px;
+}
+
+.lab-view .ecg3d-pattern-button span {
+  font-size: 6px;
+}
+
+.lab-view .ecg3d-pattern-button.active {
+  border-color: rgba(74,222,128,.14);
+  background: rgba(74,222,128,.028);
+}
+
+.lab-view .ecg3d-pattern-detail {
+  padding: 12px;
+}
+
+.lab-view .ecg3d-pattern-detail > strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--theme-text);
+  font-size: 10px;
+}
+
+.lab-view .ecg3d-pattern-detail p {
+  margin: 5px 0 0;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  line-height: 1.5;
+}
+
+.lab-view .ecg3d-pattern-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 9px;
+}
+
+.lab-view .ecg3d-pattern-tags span {
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  background: var(--theme-surface-soft);
+  padding: 4px 6px;
+  color: var(--theme-text-muted);
+  font-size: 6px;
+}
+
+.lab-view .ecg3d-disclaimer {
+  margin: 0;
+  color: var(--theme-text-muted);
+  font-size: 6px;
+  text-align: center;
+}
+
+@media (max-width: 1180px) {
+  .lab-view .ecg3d-simulator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-view .ecg3d-heart-stage,
+  .lab-view #ecgHeartCanvas,
+  .lab-view .ecg3d-trace-viewport {
+    height: 390px;
+    min-height: 390px;
+  }
+
+  .lab-view .ecg3d-guided-steps {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+
+  .lab-view .ecg3d-pattern-selector {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+}
+
+@media (max-width: 850px) {
+  .lab-view .lab-area-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-view .ecg3d-head,
+  .lab-view .ecg3d-learning-head,
+  .lab-view .ecg3d-guided-intro {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .lab-view .ecg3d-electrode-layout,
+  .lab-view .ecg3d-pattern-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-view .ecg3d-fundamentals {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .lab-view .ecg3d-card-head.trace {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .lab-view .ecg3d-scale {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .lab-view .ecg3d-head {
+    border-radius: 12px;
+  }
+
+  .lab-view .ecg3d-simulator-grid {
+    gap: 9px;
+  }
+
+  .lab-view .ecg3d-heart-stage,
+  .lab-view #ecgHeartCanvas {
+    height: 350px;
+    min-height: 350px;
+  }
+
+  .lab-view .ecg3d-trace-viewport {
+    height: 360px;
+  }
+
+  .lab-view .ecg3d-lead-summary > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .lab-view .ecg3d-lead-selector {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .lab-view .ecg3d-transport {
+    grid-template-columns: 30px minmax(105px,1fr) 30px;
+  }
+
+  .lab-view .ecg3d-progress {
+    grid-column: 1 / -1;
+  }
+
+  .lab-view .ecg3d-learning-tabs {
+    width: 100%;
+  }
+
+  .lab-view .ecg3d-fundamentals {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-view .ecg3d-guided-steps {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .lab-view .ecg3d-pattern-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-view .ecg3d-body-map {
+    height: 420px;
+  }
+}
