@@ -8931,3 +8931,1353 @@ and (
 
 
 /* CORTEX CONTROL COLLISION SAFETY V9 END */
+
+
+/* =========================================================
+   CORTEX LAB NATURAL FLOW V10
+   Natural document flow. No viewport-packing constraints.
+========================================================= */
+
+/*
+ * The laboratory is allowed to breathe and scroll as a page.
+ * Earlier workstation layers intentionally tried to fit every
+ * panel inside one viewport; these rules neutralize that model.
+ */
+html[data-theme]
+body.lab-view
+.lab-page {
+  height:
+    auto !important;
+
+  min-height:
+    calc(100dvh - 64px);
+
+  max-width:
+    1880px !important;
+
+  overflow:
+    visible !important;
+
+  display:
+    block !important;
+
+  margin:
+    0 auto !important;
+
+  padding:
+    16px 18px 44px !important;
+}
+
+
+/* ---------- compact top rail ---------- */
+
+html[data-theme]
+body.lab-view
+.lab-heading {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    space-between !important;
+
+  gap:
+    16px !important;
+
+  margin:
+    0 0 10px !important;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    1px solid
+    var(--theme-border) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  padding:
+    4px 0 12px !important;
+
+  box-shadow:
+    none !important;
+
+  overflow:
+    visible !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-heading
+> div:first-child {
+  min-width:
+    0 !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  gap:
+    10px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-heading h1 {
+  margin:
+    0 !important;
+
+  font-size:
+    20px !important;
+
+  line-height:
+    1 !important;
+
+  white-space:
+    nowrap !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-heading p {
+  display:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.simulation-status {
+  min-height:
+    25px !important;
+
+  height:
+    25px !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 8px !important;
+
+  font-size:
+    7px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-actions {
+  display:
+    flex !important;
+
+  flex-wrap:
+    wrap !important;
+
+  justify-content:
+    flex-end !important;
+
+  gap:
+    6px !important;
+
+  min-width:
+    0 !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-button,
+html[data-theme]
+body.lab-view
+.apnea-badge {
+  min-height:
+    30px !important;
+
+  height:
+    auto !important;
+
+  padding:
+    6px 10px !important;
+
+  border-radius:
+    9px !important;
+
+  font-size:
+    8px !important;
+}
+
+
+/* Duplicated values already exist where they are interpreted. */
+html[data-theme]
+body.lab-view
+.top-metrics {
+  display:
+    none !important;
+}
+
+
+/* ---------- scenario / view toolbar ---------- */
+
+html[data-theme]
+body.lab-view
+.physiology-toolbar {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  display:
+    grid !important;
+
+  grid-template-columns:
+    auto auto minmax(0,1fr) !important;
+
+  align-items:
+    center !important;
+
+  gap:
+    10px !important;
+
+  margin:
+    0 0 14px !important;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    1px solid
+    var(--theme-border) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  padding:
+    0 0 12px !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.physiology-toolbar-copy {
+  display:
+    flex !important;
+
+  align-items:
+    baseline !important;
+
+  gap:
+    7px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.physiology-toolbar-copy
+.physiology-kicker {
+  display:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.physiology-toolbar-copy strong {
+  font-size:
+    10px !important;
+
+  white-space:
+    nowrap;
+}
+
+
+html[data-theme]
+body.lab-view
+.physiology-toolbar-copy small {
+  display:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-view-tabs {
+  min-width:
+    max-content;
+}
+
+
+html[data-theme]
+body.lab-view
+.physiology-presets {
+  min-width:
+    0;
+
+  display:
+    flex !important;
+
+  flex-wrap:
+    wrap !important;
+
+  justify-content:
+    flex-start !important;
+
+  gap:
+    5px !important;
+
+  overflow:
+    visible !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.physiology-preset {
+  min-height:
+    27px !important;
+
+  border-radius:
+    999px !important;
+
+  padding:
+    0 9px !important;
+
+  font-size:
+    7px !important;
+}
+
+
+/* ---------- natural three-rail layout ---------- */
+
+html[data-theme]
+body.lab-view
+.laboratory-grid {
+  width:
+    100%;
+
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  display:
+    grid !important;
+
+  grid-template-columns:
+    clamp(260px,17vw,310px)
+    minmax(520px,1fr)
+    clamp(250px,18vw,330px) !important;
+
+  align-items:
+    start !important;
+
+  gap:
+    14px !important;
+
+  isolation:
+    auto !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.laboratory-grid
+> aside:first-child,
+html[data-theme]
+body.lab-view
+.lab-center,
+html[data-theme]
+body.lab-view
+.lab-right {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  overflow:
+    visible !important;
+
+  contain:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.laboratory-grid
+> aside:first-child {
+  position:
+    relative !important;
+
+  z-index:
+    1 !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.laboratory-grid
+> aside:first-child
+> .lab-panel {
+  height:
+    auto !important;
+
+  min-height:
+    0 !important;
+
+  display:
+    block !important;
+
+  overflow:
+    hidden !important;
+
+  contain:
+    none !important;
+}
+
+
+/*
+ * Side controls now scroll with the document. This removes the
+ * nested-scroll feeling and guarantees that descriptions never
+ * have to overlap neighboring content.
+ */
+html[data-theme]
+body.lab-view
+.control-sliders {
+  min-height:
+    0 !important;
+
+  max-height:
+    none !important;
+
+  height:
+    auto !important;
+
+  overflow:
+    visible !important;
+
+  overscroll-behavior:
+    auto !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.control-tabs {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr)) !important;
+
+  grid-auto-rows:
+    31px !important;
+
+  gap:
+    4px !important;
+
+  padding:
+    8px 9px !important;
+
+  overflow:
+    visible !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.control-tab {
+  min-height:
+    31px !important;
+
+  height:
+    31px !important;
+
+  font-size:
+    7px !important;
+}
+
+
+/* Controls may use natural height; never clip teaching text. */
+html[data-theme]
+body.lab-view
+.phys-control {
+  overflow:
+    visible !important;
+
+  contain:
+    none !important;
+
+  padding:
+    12px 1px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.phys-control-title strong {
+  font-size:
+    9px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.phys-control-help {
+  font-size:
+    7px !important;
+
+  line-height:
+    12px !important;
+}
+
+
+/* ---------- center monitor ---------- */
+
+html[data-theme]
+body.lab-view
+.lab-center {
+  display:
+    grid !important;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  align-items:
+    start;
+
+  gap:
+    14px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-grid {
+  grid-column:
+    1 / -1;
+
+  width:
+    100%;
+
+  height:
+    auto !important;
+
+  min-height:
+    0 !important;
+
+  display:
+    grid !important;
+
+  grid-template-columns:
+    1fr !important;
+
+  grid-template-rows:
+    auto auto !important;
+
+  gap:
+    10px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-panel {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  border-radius:
+    14px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-grid
+.monitor-panel:first-child
+.monitor-screen {
+  height:
+    clamp(290px,31vh,390px) !important;
+
+  min-height:
+    290px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-grid
+.monitor-panel:nth-child(2)
+.monitor-screen {
+  height:
+    clamp(160px,19vh,230px) !important;
+
+  min-height:
+    160px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-header {
+  min-height:
+    46px !important;
+
+  height:
+    auto !important;
+
+  padding:
+    8px 12px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-number strong {
+  font-size:
+    27px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.ecg-results,
+html[data-theme]
+body.lab-view
+.monitor-results {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  display:
+    grid !important;
+
+  background:
+    rgba(255,255,255,.012);
+
+  border-top:
+    1px solid
+    var(--theme-border) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.ecg-results {
+  grid-template-columns:
+    repeat(5,minmax(0,1fr)) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-results {
+  grid-template-columns:
+    repeat(3,minmax(0,1fr)) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-result {
+  min-height:
+    0 !important;
+
+  padding:
+    8px 10px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.monitor-result strong {
+  margin-top:
+    3px !important;
+
+  font-size:
+    9px !important;
+}
+
+
+/* ---------- compact derived-data deck ---------- */
+
+html[data-theme]
+body.lab-view
+.gasometry-panel,
+html[data-theme]
+body.lab-view
+.mechanics-panel {
+  grid-column:
+    auto;
+
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  border-radius:
+    14px !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.gasometry-panel
+.panel-header,
+html[data-theme]
+body.lab-view
+.mechanics-panel
+.panel-header {
+  min-height:
+    41px !important;
+
+  padding:
+    8px 11px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.gasometry-grid,
+html[data-theme]
+body.lab-view
+.mechanics-grid {
+  display:
+    grid !important;
+
+  gap:
+    1px !important;
+
+  background:
+    var(--theme-border) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.gasometry-grid {
+  grid-template-columns:
+    repeat(3,minmax(0,1fr)) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.mechanics-grid {
+  grid-template-columns:
+    repeat(3,minmax(0,1fr)) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.gas-card,
+html[data-theme]
+body.lab-view
+.mechanics-card {
+  min-height:
+    0 !important;
+
+  padding:
+    10px 11px !important;
+
+  background:
+    var(--theme-surface-strong) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.gas-card strong,
+html[data-theme]
+body.lab-view
+.mechanics-card strong {
+  margin-top:
+    4px !important;
+
+  font-size:
+    clamp(18px,1.5vw,24px) !important;
+
+  line-height:
+    1 !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.gasometry-footer {
+  grid-template-columns:
+    repeat(4,minmax(0,1fr)) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.simple-stat {
+  min-height:
+    0 !important;
+
+  padding:
+    7px 9px !important;
+}
+
+
+/* ---------- integrated body gets room instead of being squeezed ---------- */
+
+html[data-theme]
+body.lab-view
+.integrated-body-view {
+  grid-column:
+    1 / -1 !important;
+
+  grid-row:
+    auto !important;
+
+  width:
+    100% !important;
+
+  height:
+    auto !important;
+
+  min-height:
+    680px !important;
+
+  display:
+    grid;
+
+  grid-template-rows:
+    auto minmax(570px,auto) auto !important;
+
+  overflow:
+    hidden !important;
+
+  border-radius:
+    15px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.cardiorenal-stage {
+  min-height:
+    570px !important;
+
+  height:
+    auto !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.cardiorenal-svg {
+  width:
+    100% !important;
+
+  height:
+    570px !important;
+
+  min-height:
+    570px !important;
+
+  padding:
+    0 8px 0 48px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.cardiorenal-metrics {
+  min-height:
+    0 !important;
+
+  grid-template-columns:
+    repeat(7,minmax(0,1fr)) !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.cardiorenal-metrics
+> div {
+  min-height:
+    0 !important;
+
+  padding:
+    8px 9px !important;
+}
+
+
+/* ---------- right inspector ---------- */
+
+html[data-theme]
+body.lab-view
+.lab-right {
+  display:
+    grid !important;
+
+  grid-template-rows:
+    auto auto !important;
+
+  align-content:
+    start !important;
+
+  gap:
+    8px !important;
+
+  position:
+    sticky !important;
+
+  top:
+    12px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-panel-tabs {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  display:
+    grid !important;
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr)) !important;
+
+  gap:
+    4px !important;
+
+  padding:
+    4px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-panel-tab {
+  min-height:
+    29px !important;
+
+  height:
+    29px !important;
+
+  font-size:
+    7px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-right
+> .lab-panel[data-lab-panel] {
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  max-height:
+    none !important;
+
+  overflow:
+    visible !important;
+
+  border-radius:
+    13px !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-right
+> .lab-panel[data-lab-panel]:not(.is-active) {
+  display:
+    none !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-right
+> .lab-panel[data-lab-panel].is-active {
+  display:
+    block !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-right
+.panel-header {
+  min-height:
+    0 !important;
+
+  padding:
+    9px 10px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.lab-right
+.panel-content {
+  padding:
+    7px 10px 10px !important;
+}
+
+
+html[data-theme]
+body.lab-view
+.result-row {
+  min-height:
+    0 !important;
+
+  padding:
+    7px 0 !important;
+}
+
+
+/* ---------- medium desktop: move inspector below ---------- */
+
+@media (
+  min-width: 1000px
+)
+and (
+  max-width: 1439px
+) {
+
+  html[data-theme]
+  body.lab-view
+  .laboratory-grid {
+    grid-template-columns:
+      clamp(250px,23vw,290px)
+      minmax(0,1fr) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right {
+    grid-column:
+      1 / -1;
+
+    position:
+      static !important;
+
+    grid-template-columns:
+      250px minmax(0,1fr) !important;
+
+    grid-template-rows:
+      auto !important;
+
+    align-items:
+      start;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-panel-tabs {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-center {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gasometry-panel,
+  html[data-theme]
+  body.lab-view
+  .mechanics-panel {
+    grid-column:
+      1 !important;
+  }
+
+}
+
+
+/* ---------- tablet / mobile ---------- */
+
+@media (max-width: 999px) {
+
+  html[data-theme]
+  body.lab-view
+  .lab-page {
+    padding:
+      14px 12px 36px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-heading {
+    align-items:
+      flex-start !important;
+
+    flex-direction:
+      column !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-actions {
+    width:
+      100%;
+
+    justify-content:
+      flex-start !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .physiology-toolbar {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .physiology-toolbar-copy {
+    display:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .laboratory-grid {
+    grid-template-columns:
+      1fr !important;
+
+    gap:
+      12px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-center {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right {
+    position:
+      static !important;
+
+    display:
+      grid !important;
+
+    grid-template-columns:
+      1fr !important;
+
+    gap:
+      10px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-panel-tabs {
+    display:
+      none !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  > .lab-panel[data-lab-panel],
+  html[data-theme]
+  body.lab-view
+  .lab-right
+  > .lab-panel[data-lab-panel]:not(.is-active) {
+    display:
+      block !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .integrated-body-view {
+    min-height:
+      620px !important;
+
+    grid-template-rows:
+      auto minmax(500px,auto) auto !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-stage {
+    min-height:
+      500px !important;
+
+    overflow-x:
+      auto !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-svg {
+    min-width:
+      900px !important;
+
+    width:
+      900px !important;
+
+    height:
+      520px !important;
+
+    min-height:
+      520px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .cardiorenal-metrics {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+  }
+
+}
+
+
+@media (max-width: 620px) {
+
+  html[data-theme]
+  body.lab-view
+  .lab-heading h1 {
+    font-size:
+      18px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .lab-button {
+    flex:
+      1 1 calc(50% - 4px);
+
+    justify-content:
+      center;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-grid
+  .monitor-panel:first-child
+  .monitor-screen {
+    height:
+      260px !important;
+
+    min-height:
+      260px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .monitor-grid
+  .monitor-panel:nth-child(2)
+  .monitor-screen {
+    height:
+      150px !important;
+
+    min-height:
+      150px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .ecg-results {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gasometry-grid,
+  html[data-theme]
+  body.lab-view
+  .mechanics-grid {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .gasometry-footer {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr)) !important;
+  }
+
+}
+
+
+/* CORTEX LAB NATURAL FLOW V10 END */
