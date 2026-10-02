@@ -307,6 +307,67 @@
     }
 
 
+    function pageHasFocus() {
+
+      try {
+
+        if (
+          !pageHasFocus()
+        ) {
+
+          return false;
+        }
+
+
+        if (
+          window.top &&
+          window.top !==
+            window &&
+          window.top.document
+        ) {
+
+          return window.top.document
+            .hasFocus();
+        }
+
+
+        return true;
+
+      }
+      catch {
+
+        return document.hasFocus();
+
+      }
+
+    }
+
+
+    const focusWindow =
+      (
+        function () {
+
+          try {
+
+            return (
+              window.top &&
+              window.top !==
+                window
+            )
+              ? window.top
+              : window;
+
+          }
+          catch {
+
+            return window;
+
+          }
+
+        }
+      )();
+
+
     let remaining =
       2550;
 
@@ -330,13 +391,13 @@
     const cleanupFocusEvents =
       function () {
 
-        window.removeEventListener(
+        focusWindow.removeEventListener(
           "focus",
           scheduleResume
         );
 
 
-        window.removeEventListener(
+        focusWindow.removeEventListener(
           "blur",
           pauseIntro
         );
@@ -465,7 +526,7 @@
       if (
         finished ||
         document.hidden ||
-        !document.hasFocus()
+        !pageHasFocus()
       ) {
         return;
       }
@@ -514,7 +575,7 @@
 
       if (
         document.hidden ||
-        !document.hasFocus()
+        !pageHasFocus()
       ) {
         return;
       }
@@ -528,7 +589,7 @@
       focusTimer =
         window.setTimeout(
           resumeIntro,
-          220
+          320
         );
 
     }
@@ -550,13 +611,13 @@
     }
 
 
-    window.addEventListener(
+    focusWindow.addEventListener(
       "focus",
       scheduleResume
     );
 
 
-    window.addEventListener(
+    focusWindow.addEventListener(
       "blur",
       pauseIntro
     );
