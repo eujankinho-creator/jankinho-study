@@ -1,3 +1,5 @@
+@import url("/css/app.css");
+
 
 /* Cortex ECG 3D Lab
    Dedicated visual layer for the ECG learning workstation. */
@@ -1046,5 +1048,95 @@ body.lab-center-ecg3d .lab-center {
 
   .lab-view .ecg3d-body-map {
     height: 420px;
+  }
+}
+
+
+
+/* Standalone ECG laboratory page */
+.lab-view .ecg3d-page {
+  width: 100%;
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: 20px 22px 48px;
+}
+
+.lab-view .ecg3d-page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+  padding: 2px 2px 14px;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.lab-view .ecg3d-page-heading > div:first-child {
+  min-width: 0;
+}
+
+.lab-view .physiology-kicker {
+  display: block;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.lab-view .ecg3d-page-heading h1 {
+  margin: 5px 0 0;
+  color: var(--theme-text);
+  font-size: clamp(24px,2.15vw,34px);
+  line-height: 1;
+  letter-spacing: -.035em;
+}
+
+.lab-view .ecg3d-page-heading p {
+  max-width: 760px;
+  margin: 7px 0 0;
+  color: var(--theme-text-muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.lab-view .ecg3d-page-badge {
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+  border: 1px solid rgba(250,204,21,.10);
+  border-radius: 11px;
+  background: rgba(250,204,21,.025);
+  padding: 9px 10px;
+}
+
+.lab-view .ecg3d-page-badge span {
+  color: #b8a84f;
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+
+.lab-view .ecg3d-page-badge strong {
+  color: var(--theme-text-soft);
+  font-size: 8px;
+}
+
+.ecg3d-only-view .ecg3d-view {
+  display: grid;
+}
+
+@media (max-width: 760px) {
+  .lab-view .ecg3d-page {
+    padding: 14px 11px 36px;
+  }
+
+  .lab-view .ecg3d-page-heading {
+    align-items: flex-start;
+  }
+
+  .lab-view .ecg3d-page-badge {
+    display: none;
   }
 }
