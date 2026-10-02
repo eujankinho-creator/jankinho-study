@@ -52,7 +52,7 @@
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/configuracoes-premium.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/configuracoes-premium.css?v=20261002-profile-photo1">
   <link
     rel="stylesheet"
     href="/css/sidebar-standard.css?v=20261002-fluid-final4"
@@ -339,6 +339,67 @@
               id="profileForm"
               class="settings-form"
             >
+
+
+              <div class="profile-photo-editor">
+
+                <div
+                  id="profilePhotoPreview"
+                  class="profile-photo-preview"
+                  aria-label="Foto de perfil"
+                >
+                  <img
+                    id="profilePhotoImage"
+                    alt="Foto de perfil"
+                    class="hidden"
+                  >
+                  <span id="profilePhotoInitial">U</span>
+                </div>
+
+                <div class="profile-photo-copy">
+
+                  <strong>
+                    Foto de perfil
+                  </strong>
+
+                  <span>
+                    Esta imagem fica vinculada à sua conta e acompanha o Cortex em qualquer dispositivo.
+                  </span>
+
+                  <div class="profile-photo-actions">
+
+                    <button
+                      id="chooseProfilePhoto"
+                      class="profile-photo-button"
+                      type="button"
+                    >
+                      Escolher foto
+                    </button>
+
+                    <button
+                      id="removeProfilePhoto"
+                      class="profile-photo-button subtle"
+                      type="button"
+                    >
+                      Remover
+                    </button>
+
+                  </div>
+
+                  <small>
+                    JPG, PNG ou WebP. O Cortex recorta e comprime automaticamente antes de salvar.
+                  </small>
+
+                </div>
+
+                <input
+                  id="profilePhotoInput"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  hidden
+                >
+
+              </div>
 
               <div class="field">
 
@@ -693,8 +754,8 @@
     })();
   </script>
 
-<script defer src="/js/configuracoes-ui.js?v=20261002-fluid-final4"></script>
-  <script defer src="/js/configuracoes.js?v=20261002-fluid-final4"></script>
+<script defer src="/js/configuracoes-ui.js?v=20261002-profile-photo1"></script>
+  <script defer src="/js/configuracoes.js?v=20261002-profile-photo1"></script>
 
   <script defer src="/js/theme-settings.js?v=20261002-fluid-final4"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>

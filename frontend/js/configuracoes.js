@@ -5,6 +5,7 @@ const $ = function (id) {
 
 const state = {
   temSenha: true,
+  fotoPerfil: null,
 };
 
 
@@ -121,6 +122,411 @@ function showMessage(
 }
 
 
+function applyProfilePhoto(
+  element,
+  photo,
+  initial
+) {
+
+  if (!element) {
+    return;
+  }
+
+
+  if (photo) {
+
+    element.style.backgroundImage =
+      'url("' +
+      photo +
+      '")';
+
+    element.style.backgroundSize =
+      "cover";
+
+    element.style.backgroundPosition =
+      "center";
+
+    element.style.backgroundRepeat =
+      "no-repeat";
+
+    element.style.color =
+      "transparent";
+
+    element.style.overflow =
+      "hidden";
+
+    element.style.borderRadius =
+      "50%";
+
+    element.classList.add(
+      "has-profile-photo"
+    );
+
+    return;
+  }
+
+
+  element.style.backgroundImage =
+    "";
+
+  element.style.backgroundSize =
+    "";
+
+  element.style.backgroundPosition =
+    "";
+
+  element.style.backgroundRepeat =
+    "";
+
+  element.style.color =
+    "";
+
+  element.classList.remove(
+    "has-profile-photo"
+  );
+
+  element.textContent =
+    initial ||
+    "U";
+}
+
+
+function renderProfilePhoto() {
+
+  const name =
+    $("nome") &&
+    $("nome").value
+      ? $("nome").value
+      : (
+          $("nomeHeader")
+            ? $("nomeHeader").textContent
+            : "Usuario"
+        );
+
+
+  const initial =
+    String(
+      name ||
+      "Usuario"
+    )
+      .charAt(0)
+      .toUpperCase();
+
+
+  const image =
+    $("profilePhotoImage");
+
+
+  const initialNode =
+    $("profilePhotoInitial");
+
+
+  if (
+    image &&
+    initialNode
+  ) {
+
+    if (
+      state.fotoPerfil
+    ) {
+
+      image.src =
+        state.fotoPerfil;
+
+      image.classList.remove(
+        "hidden"
+      );
+
+      initialNode.classList.add(
+        "hidden"
+      );
+
+    }
+    else {
+
+      image.removeAttribute(
+        "src"
+      );
+
+      image.classList.add(
+        "hidden"
+      );
+
+      initialNode.textContent =
+        initial;
+
+      initialNode.classList.remove(
+        "hidden"
+      );
+
+    }
+
+  }
+
+
+  [
+    $("avatarSidebar"),
+    $("avatarHeader"),
+    $("settingsHeroAvatar")
+  ]
+    .filter(Boolean)
+    .forEach(
+      function (
+        element
+      ) {
+
+        applyProfilePhoto(
+          element,
+          state.fotoPerfil,
+          initial
+        );
+
+      }
+    );
+}
+
+
+function notifyGlobalProfilePhoto() {
+
+  if (
+    window.parent !==
+    window
+  ) {
+
+    window.parent.postMessage(
+      {
+        type:
+          "cortex:profile-photo-updated",
+
+        fotoPerfil:
+          state.fotoPerfil
+      },
+      window.location.origin
+    );
+
+  }
+
+}
+
+
+function loadImageElement(
+  file
+) {
+
+  return new Promise(
+    function (
+      resolve,
+      reject
+    ) {
+
+      const image =
+        new Image();
+
+
+      const url =
+        URL.createObjectURL(
+          file
+        );
+
+
+      image.onload =
+        function () {
+
+          URL.revokeObjectURL(
+            url
+          );
+
+          resolve(
+            image
+          );
+
+        };
+
+
+      image.onerror =
+        function () {
+
+          URL.revokeObjectURL(
+            url
+          );
+
+          reject(
+            new Error(
+              "Nao foi possivel ler a imagem."
+            )
+          );
+
+        };
+
+
+      image.src =
+        url;
+
+    }
+  );
+}
+
+
+async function compressProfilePhoto(
+  file
+) {
+
+  if (
+    !file ||
+    !/^image\/(?:jpeg|png|webp)$/
+      .test(
+        file.type
+      )
+  ) {
+
+    throw new Error(
+      "Escolha uma imagem JPG, PNG ou WebP."
+    );
+  }
+
+
+  if (
+    file.size >
+    8 * 1024 * 1024
+  ) {
+
+    throw new Error(
+      "A imagem original deve ter no maximo 8 MB."
+    );
+  }
+
+
+  const image =
+    await loadImageElement(
+      file
+    );
+
+
+  const cropSize =
+    Math.min(
+      image.naturalWidth,
+      image.naturalHeight
+    );
+
+
+  const sx =
+    Math.max(
+      0,
+      (
+        image.naturalWidth -
+        cropSize
+      ) /
+      2
+    );
+
+
+  const sy =
+    Math.max(
+      0,
+      (
+        image.naturalHeight -
+        cropSize
+      ) /
+      2
+    );
+
+
+  const attempts = [
+    {
+      size: 320,
+      quality: .84
+    },
+    {
+      size: 288,
+      quality: .78
+    },
+    {
+      size: 256,
+      quality: .72
+    }
+  ];
+
+
+  for (
+    const attempt of
+    attempts
+  ) {
+
+    const canvas =
+      document.createElement(
+        "canvas"
+      );
+
+
+    canvas.width =
+      attempt.size;
+
+    canvas.height =
+      attempt.size;
+
+
+    const context =
+      canvas.getContext(
+        "2d"
+      );
+
+
+    if (!context) {
+
+      throw new Error(
+        "Seu navegador nao conseguiu processar a foto."
+      );
+    }
+
+
+    context.fillStyle =
+      "#111111";
+
+    context.fillRect(
+      0,
+      0,
+      attempt.size,
+      attempt.size
+    );
+
+
+    context.drawImage(
+      image,
+      sx,
+      sy,
+      cropSize,
+      cropSize,
+      0,
+      0,
+      attempt.size,
+      attempt.size
+    );
+
+
+    const data =
+      canvas.toDataURL(
+        "image/jpeg",
+        attempt.quality
+      );
+
+
+    if (
+      data.length <
+      260 * 1024
+    ) {
+
+      return data;
+    }
+
+  }
+
+
+  throw new Error(
+    "A foto ficou muito grande mesmo apos a compressao."
+  );
+}
+
+
 function updateUserUI(
   user
 ) {
@@ -151,14 +557,49 @@ function updateUserUI(
     name;
 
 
-  $("avatarSidebar")
-    .textContent =
-    initial;
+  if (
+    Object.prototype
+      .hasOwnProperty
+      .call(
+        user,
+        "fotoPerfil"
+      )
+  ) {
+
+    state.fotoPerfil =
+      user.fotoPerfil ||
+      null;
+
+  }
 
 
-  $("avatarHeader")
-    .textContent =
-    initial;
+  [
+    $("avatarSidebar"),
+    $("avatarHeader")
+  ]
+    .forEach(
+      function (
+        element
+      ) {
+
+        applyProfilePhoto(
+          element,
+          state.fotoPerfil,
+          initial
+        );
+
+      }
+    );
+
+
+  renderProfilePhoto();
+
+
+  window.setTimeout(
+    renderProfilePhoto,
+    0
+  );
+
 }
 
 
@@ -232,6 +673,11 @@ async function loadSettings() {
       Boolean(
         user.temSenha
       );
+
+
+    state.fotoPerfil =
+      user.fotoPerfil ||
+      null;
 
 
     updateUserUI(
@@ -330,6 +776,8 @@ $("profileForm")
               body:
                 JSON.stringify({
                   nome,
+                  fotoPerfil:
+                    state.fotoPerfil,
                 }),
             }
           );
@@ -338,6 +786,17 @@ $("profileForm")
         updateUserUI(
           data.usuario
         );
+
+
+        state.fotoPerfil =
+          data.usuario.fotoPerfil ||
+          null;
+
+
+        renderProfilePhoto();
+
+
+        notifyGlobalProfilePhoto();
 
 
         $("nome").value =
@@ -367,6 +826,107 @@ $("profileForm")
         button.textContent =
           "Salvar perfil";
       }
+    }
+  );
+
+
+$("chooseProfilePhoto")
+  .addEventListener(
+    "click",
+    function () {
+
+      $("profilePhotoInput")
+        .click();
+
+    }
+  );
+
+
+$("profilePhotoInput")
+  .addEventListener(
+    "change",
+    async function () {
+
+      const file =
+        this.files &&
+        this.files[0];
+
+
+      this.value =
+        "";
+
+
+      if (!file) {
+        return;
+      }
+
+
+      const button =
+        $("chooseProfilePhoto");
+
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "Processando...";
+
+
+      try {
+
+        state.fotoPerfil =
+          await compressProfilePhoto(
+            file
+          );
+
+
+        renderProfilePhoto();
+
+
+        showMessage(
+          "Foto pronta. Clique em Salvar perfil para sincronizar em todos os dispositivos."
+        );
+
+      }
+      catch (error) {
+
+        showMessage(
+          error.message ||
+          "Nao foi possivel processar a foto.",
+          "error"
+        );
+
+      }
+      finally {
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          "Escolher foto";
+
+      }
+
+    }
+  );
+
+
+$("removeProfilePhoto")
+  .addEventListener(
+    "click",
+    function () {
+
+      state.fotoPerfil =
+        null;
+
+
+      renderProfilePhoto();
+
+
+      showMessage(
+        "Foto removida da pre-visualizacao. Clique em Salvar perfil para confirmar."
+      );
+
     }
   );
 

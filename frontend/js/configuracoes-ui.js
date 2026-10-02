@@ -403,6 +403,34 @@
           avatar.textContent ||
           "U";
 
+
+        heroAvatar.style.backgroundImage =
+          avatar.style.backgroundImage;
+
+
+        heroAvatar.style.backgroundSize =
+          avatar.style.backgroundSize;
+
+
+        heroAvatar.style.backgroundPosition =
+          avatar.style.backgroundPosition;
+
+
+        heroAvatar.style.backgroundRepeat =
+          avatar.style.backgroundRepeat;
+
+
+        heroAvatar.style.color =
+          avatar.style.color;
+
+
+        heroAvatar.classList.toggle(
+          "has-profile-photo",
+          avatar.classList.contains(
+            "has-profile-photo"
+          )
+        );
+
       }
 
     }
