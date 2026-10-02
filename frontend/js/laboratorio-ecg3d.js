@@ -37,21 +37,36 @@ function getLabThemePalette() {
   };
 }
 
-const TAU = Math.PI * 2;
+function colorWithAlpha(color, alpha) {
+  const value = String(color || "").trim();
 
-const COLORS = {
-  cyan: "#22d3ee",
-  cyan2: "#5eead4",
-  red: "#ff5665",
-  yellow: "#f8c94f",
-  green: "#34d399",
-  purple: "#a78bfa",
-  pink: "#ec4899",
-  blue: "#38bdf8",
-  orange: "#fb923c",
-  white: "#f8fafc",
-  muted: "#94a3b8"
-};
+  if (/^#[0-9a-f]{6}$/i.test(value)) {
+    const r = parseInt(value.slice(1, 3), 16);
+    const g = parseInt(value.slice(3, 5), 16);
+    const b = parseInt(value.slice(5, 7), 16);
+    return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+  }
+
+  if (/^#[0-9a-f]{3}$/i.test(value)) {
+    const r = parseInt(value[1] + value[1], 16);
+    const g = parseInt(value[2] + value[2], 16);
+    const b = parseInt(value[3] + value[3], 16);
+    return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+  }
+
+  const rgb = value.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  if (rgb) {
+    return "rgba(" + rgb[1] + "," + rgb[2] + "," + rgb[3] + "," + alpha + ")";
+  }
+
+  return value;
+}
+
+function simulatorIsVisible() {
+  return LAB_STATE.section === "simulator" && !document.hidden;
+}
+
+const TAU = Math.PI * 2;
 
 const LAB_STATE = {
   section: "simulator",
@@ -631,6 +646,8 @@ function setLabSection(section) {
     panel.classList.toggle("active", active);
   });
 
+  syncSimulatorActivity();
+
   if (section === "simulator") {
     requestAnimationFrame(function () {
       resizeThree();
@@ -646,6 +663,73 @@ function setLabSection(section) {
   if (section === "patterns") {
     requestAnimationFrame(drawPatterns);
   }
+}
+
+async function suspendSimulatorAudio() {
+  if (
+    audioContext &&
+    audioContext.state === "running"
+  ) {
+    try {
+      await audioContext.suspend();
+    } catch (error) {
+      console.warn("Não foi possível suspender o áudio:", error);
+    }
+  }
+}
+
+async function resumeSimulatorAudio() {
+  if (
+    !soundEnabled ||
+    !LAB_STATE.phasePlaying ||
+    !simulatorIsVisible() ||
+    !audioContext ||
+    audioContext.state !== "suspended"
+  ) return;
+
+  try {
+    await audioContext.resume();
+  } catch (error) {
+    console.warn("Não foi possível retomar o áudio:", error);
+  }
+}
+
+function syncSimulatorActivity() {
+  if (simulatorIsVisible()) {
+    LAB_STATE.ecgLastFrame = performance.now();
+    startHeartRenderLoop();
+
+    if (LAB_STATE.phasePlaying) {
+      startPhaseLoop();
+      resumeSimulatorAudio();
+    }
+
+    requestAnimationFrame(function () {
+      resizeThree();
+      drawEcgMatrix();
+    });
+    return;
+  }
+
+  stopHeartRenderLoop();
+  stopPhaseLoop();
+  suspendSimulatorAudio();
+}
+
+function setupSimulatorVisibilityLifecycle() {
+  document.addEventListener("visibilitychange", function () {
+    syncSimulatorActivity();
+  });
+
+  window.addEventListener("pagehide", function () {
+    stopHeartRenderLoop();
+    stopPhaseLoop();
+    suspendSimulatorAudio();
+  });
+
+  window.addEventListener("pageshow", function () {
+    syncSimulatorActivity();
+  });
 }
 
 function setupFundamentalParts() {
@@ -685,7 +769,10 @@ let vectorArrow;
 let signalDot;
 let activationGlow;
 let modelMaterials = [];
-let animationHandle;
+let animationHandle = null;
+let heartRenderRunning = false;
+let simulationAnimationHandle = null;
+let simulationLoopRunning = false;
 let cutawayEnabled = false;
 let audioContext = null;
 let soundEnabled = true;
@@ -745,7 +832,7 @@ function initHeart3D() {
   key.position.set(4, 5, 6);
   scene.add(key);
 
-  const fill = new THREE.DirectionalLight(0x9edbff, 1.25);
+  const fill = new THREE.DirectionalLight(0xe8edf2, 1.15);
   fill.position.set(-5, 2, 3);
   scene.add(fill);
 
@@ -773,7 +860,7 @@ function initHeart3D() {
   setupHeartControls();
 
   resizeThree();
-  animateThree();
+  startHeartRenderLoop();
 }
 
 function loadHeartModel() {
@@ -905,21 +992,31 @@ function circlePoints(radius, plane) {
 }
 
 function buildAxes() {
+  if (!axisRoot || !extraAxisRoot) return;
+
   axisRoot.clear();
   extraAxisRoot.clear();
 
-  function addCircle(plane, color) {
-    const geometry = new THREE.BufferGeometry().setFromPoints(circlePoints(2.18, plane));
+  const palette = getLabThemePalette();
+  const axisColor = new THREE.Color(palette.accent);
+
+  function addCircle(plane) {
+    const geometry =
+      new THREE.BufferGeometry().setFromPoints(
+        circlePoints(2.18, plane)
+      );
+
     const material = new THREE.LineBasicMaterial({
-      color: color,
+      color: axisColor,
       transparent: true,
-      opacity: 0.28
+      opacity: 0.18
     });
+
     axisRoot.add(new THREE.Line(geometry, material));
   }
 
-  addCircle("frontal", 0x63758a);
-  addCircle("horizontal", 0x63758a);
+  addCircle("frontal");
+  addCircle("horizontal");
 
   LEAD_AXES.forEach(function (lead) {
     addLeadAxis(axisRoot, lead);
@@ -935,6 +1032,7 @@ function buildAxes() {
 }
 
 function addLeadAxis(parent, lead) {
+  const palette = getLabThemePalette();
   const angle = lead.angle * Math.PI / 180;
   const radius = 2.28;
   let end;
@@ -951,9 +1049,9 @@ function addLeadAxis(parent, lead) {
   ]);
 
   const material = new THREE.LineBasicMaterial({
-    color: new THREE.Color(lead.color),
+    color: new THREE.Color(palette.accent),
     transparent: true,
-    opacity: 0.78
+    opacity: 0.76
   });
 
   const group = new THREE.Group();
@@ -962,7 +1060,11 @@ function addLeadAxis(parent, lead) {
 
   const labelAnchor = new THREE.Object3D();
   labelAnchor.position.copy(end.clone().multiplyScalar(1.08));
-  const label = makeTextLabel(lead.short, "heart-axis-label", lead.color);
+  const label = makeTextLabel(
+    lead.short,
+    "heart-axis-label",
+    palette.accent2
+  );
   labelAnchor.add(label);
   group.add(labelAnchor);
 
@@ -1191,18 +1293,52 @@ function resizeThree() {
 
 let threeClock = new THREE.Clock();
 
-function animateThree() {
+function startHeartRenderLoop() {
+  if (
+    heartRenderRunning ||
+    !simulatorIsVisible() ||
+    !renderer ||
+    !scene ||
+    !camera
+  ) return;
+
+  heartRenderRunning = true;
+  threeClock.getDelta();
   animationHandle = requestAnimationFrame(animateThree);
-  if (!renderer || !scene || !camera) return;
+}
+
+function stopHeartRenderLoop() {
+  heartRenderRunning = false;
+
+  if (animationHandle) {
+    cancelAnimationFrame(animationHandle);
+    animationHandle = null;
+  }
+}
+
+function animateThree() {
+  if (!heartRenderRunning || !simulatorIsVisible()) {
+    stopHeartRenderLoop();
+    return;
+  }
 
   const delta = threeClock.getDelta();
-  if (heartRoot && heartRoot.userData.mixer && LAB_STATE.phasePlaying) {
+
+  if (
+    heartRoot &&
+    heartRoot.userData.mixer &&
+    LAB_STATE.phasePlaying
+  ) {
     heartRoot.userData.mixer.update(delta * 0.45);
   }
 
   if (controls) controls.update();
   renderer.render(scene, camera);
-  if (labelRenderer) labelRenderer.render(scene, camera);
+  if (labelRenderer) {
+    labelRenderer.render(scene, camera);
+  }
+
+  animationHandle = requestAnimationFrame(animateThree);
 }
 
 /* =========================================================
@@ -1341,7 +1477,11 @@ function createHeartNoise(context, when, duration, frequency, amount) {
 }
 
 async function playHeartSound(kind) {
-  if (!soundEnabled) return;
+  if (
+    !soundEnabled ||
+    !LAB_STATE.phasePlaying ||
+    !simulatorIsVisible()
+  ) return;
   const context = await ensureAudioContext();
   if (!context) return;
 
@@ -1454,10 +1594,26 @@ function setPhase(index) {
 
 function startPhaseLoop() {
   LAB_STATE.ecgLastFrame = performance.now();
+
+  if (
+    simulationLoopRunning ||
+    !LAB_STATE.phasePlaying ||
+    !simulatorIsVisible()
+  ) return;
+
+  simulationLoopRunning = true;
+  simulationAnimationHandle =
+    requestAnimationFrame(simulationFrame);
 }
 
 function stopPhaseLoop() {
   LAB_STATE.ecgLastFrame = performance.now();
+  simulationLoopRunning = false;
+
+  if (simulationAnimationHandle) {
+    cancelAnimationFrame(simulationAnimationHandle);
+    simulationAnimationHandle = null;
+  }
 }
 
 function triggerSynchronizedHeartSounds(previousTime, currentTime, period) {
@@ -1498,17 +1654,18 @@ function triggerSynchronizedHeartSounds(previousTime, currentTime, period) {
 }
 
 function simulationFrame(now) {
-  requestAnimationFrame(simulationFrame);
-
-  const delta = clamp((now - LAB_STATE.ecgLastFrame) / 1000, 0, 0.06);
-  LAB_STATE.ecgLastFrame = now;
-
   if (
-    LAB_STATE.section !== "simulator" ||
-    !LAB_STATE.phasePlaying
+    !simulationLoopRunning ||
+    !LAB_STATE.phasePlaying ||
+    !simulatorIsVisible()
   ) {
+    stopPhaseLoop();
     return;
   }
+
+  const delta =
+    clamp((now - LAB_STATE.ecgLastFrame) / 1000, 0, 0.06);
+  LAB_STATE.ecgLastFrame = now;
 
   const period = getBeatPeriod();
   const previousTime = LAB_STATE.ecgTime;
@@ -1528,6 +1685,9 @@ function simulationFrame(now) {
     LAB_STATE.ecgLastDraw = now;
     drawEcgMatrix();
   }
+
+  simulationAnimationHandle =
+    requestAnimationFrame(simulationFrame);
 }
 
 function fitCanvas(canvas, cssHeight) {
@@ -1692,6 +1852,7 @@ function waveNameFromPhase(phase) {
 }
 
 function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
+  const palette = getLabThemePalette();
   const baseline = rect.y + rect.h * .52;
   const amplitude = rect.h * .30;
   const windowDuration = period * 2;
@@ -1705,7 +1866,7 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
   ctx.fillText(lead, rect.x + 7 * dpr, rect.y + 6 * dpr);
 
   if (lead === "DII") {
-    ctx.fillStyle = "rgba(34, 211, 238, .09)";
+    ctx.fillStyle = colorWithAlpha(palette.accent, .09);
     ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
   }
 
@@ -1718,9 +1879,15 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
     gradient.addColorStop(1, "rgba(10,10,10,.98)");
   }
   else {
-    gradient.addColorStop(0, "rgba(0,168,200,.28)");
-    gradient.addColorStop(.72, "rgba(0,168,200,.72)");
-    gradient.addColorStop(1, "rgba(0,153,184,1)");
+    gradient.addColorStop(
+      0,
+      colorWithAlpha(palette.accent, .28)
+    );
+    gradient.addColorStop(
+      .72,
+      colorWithAlpha(palette.accent, .72)
+    );
+    gradient.addColorStop(1, palette.accent);
   }
 
   ctx.beginPath();
@@ -1752,7 +1919,10 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
   ctx.lineTo(headX, rect.y + rect.h);
   ctx.stroke();
 
-  ctx.fillStyle = activeColor === "#191919" ? "#ef4444" : "#0891b2";
+  ctx.fillStyle =
+    activeColor === "#191919"
+      ? "#ef4444"
+      : palette.accent;
   ctx.beginPath();
   ctx.arc(headX, currentY, 2.8 * dpr, 0, TAU);
   ctx.fill();
@@ -1761,6 +1931,7 @@ function drawLeadTrace(ctx, rect, lead, endTime, period, activeColor, dpr) {
 }
 
 function drawEcgHover(ctx, layout, size, period) {
+  const palette = getLabThemePalette();
   const hover = LAB_STATE.ecgHover;
   if (!hover) return;
 
@@ -1799,7 +1970,7 @@ function drawEcgHover(ctx, layout, size, period) {
   const pointX = rect.x + localX * rect.w * TRACE_HEAD_RATIO;
 
   ctx.save();
-  ctx.strokeStyle = "rgba(8,145,178,.72)";
+  ctx.strokeStyle = colorWithAlpha(palette.accent, .72);
   ctx.lineWidth = 1 * size.dpr;
   ctx.setLineDash([3 * size.dpr, 3 * size.dpr]);
 
@@ -1814,7 +1985,7 @@ function drawEcgHover(ctx, layout, size, period) {
   ctx.stroke();
 
   ctx.setLineDash([]);
-  ctx.fillStyle = "#0891b2";
+  ctx.fillStyle = palette.accent;
   ctx.beginPath();
   ctx.arc(pointX, waveY, 4 * size.dpr, 0, TAU);
   ctx.fill();
@@ -1962,7 +2133,9 @@ function drawEcgMatrix() {
       lead,
       LAB_STATE.ecgTime,
       period,
-      lead === "DII" ? "#00a8c8" : "#191919",
+      lead === "DII"
+        ? getLabThemePalette().accent
+        : "#191919",
       dpr
     );
   });
@@ -2549,6 +2722,7 @@ function setupPaperLearning() {
 }
 
 function drawCalibration() {
+  const palette = getLabThemePalette();
   const canvas = byId("calibrationCanvas");
   if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
 
@@ -2575,13 +2749,13 @@ function drawCalibration() {
     else ctx.lineTo(x, y);
   }
 
-  ctx.strokeStyle = "#dbeafe";
+  ctx.strokeStyle = palette.textSoft;
   ctx.lineWidth = 1.5 * dpr;
   ctx.stroke();
 
   const xMeasure = size.pixelWidth * .19;
   const yTop = baseline - size.pixelHeight * .20;
-  ctx.strokeStyle = "#67e8f9";
+  ctx.strokeStyle = palette.accent;
   ctx.lineWidth = 1.3 * dpr;
   ctx.setLineDash([4 * dpr, 3 * dpr]);
   ctx.beginPath();
@@ -2590,7 +2764,7 @@ function drawCalibration() {
   ctx.stroke();
   ctx.setLineDash([]);
 
-  ctx.fillStyle = "#a5f3fc";
+  ctx.fillStyle = palette.accent2;
   ctx.font = "700 " + (11 * dpr) + "px system-ui";
   ctx.fillText("1 mV", xMeasure + 8 * dpr, yTop + 18 * dpr);
 
@@ -2611,6 +2785,7 @@ function drawCalibration() {
 }
 
 function drawRegularFrequency() {
+  const palette = getLabThemePalette();
   const canvas = byId("regularFrequencyCanvas");
   if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
   const size = fitCanvas(canvas, 180);
@@ -2625,7 +2800,7 @@ function drawRegularFrequency() {
 
   const beatPositions = [0.13, 0.38, 0.63, 0.88];
   ctx.save();
-  ctx.strokeStyle = "#dbeafe";
+  ctx.strokeStyle = palette.textSoft;
   ctx.lineWidth = 1.4 * dpr;
   ctx.beginPath();
   ctx.moveTo(0, baseline);
@@ -2648,7 +2823,7 @@ function drawRegularFrequency() {
 
   const x1 = beatPositions[1] * size.pixelWidth;
   const x2 = beatPositions[2] * size.pixelWidth;
-  ctx.strokeStyle = "#5eead4";
+  ctx.strokeStyle = palette.accent;
   ctx.lineWidth = 1.2 * dpr;
   ctx.beginPath();
   ctx.moveTo(x1, 22 * dpr);
@@ -2658,13 +2833,14 @@ function drawRegularFrequency() {
   ctx.moveTo(x2, 18 * dpr);
   ctx.lineTo(x2, 27 * dpr);
   ctx.stroke();
-  ctx.fillStyle = "#99f6e4";
+  ctx.fillStyle = palette.accent2;
   ctx.font = "700 " + (8 * dpr) + "px system-ui";
   ctx.fillText("5 quadrados grandes", x1 + 6 * dpr, 14 * dpr);
   ctx.restore();
 }
 
 function drawIrregularFrequency() {
+  const palette = getLabThemePalette();
   const canvas = byId("irregularFrequencyCanvas");
   if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
   const size = fitCanvas(canvas, 180);
@@ -2676,7 +2852,7 @@ function drawIrregularFrequency() {
   const beats = [0.08, 0.19, 0.35, 0.47, 0.63, 0.75, 0.86, 0.97];
 
   ctx.save();
-  ctx.strokeStyle = "#dbeafe";
+  ctx.strokeStyle = palette.textSoft;
   ctx.lineWidth = 1.4 * dpr;
   ctx.beginPath();
 
@@ -2698,7 +2874,7 @@ function drawIrregularFrequency() {
   }
   ctx.stroke();
 
-  ctx.fillStyle = "#5eead4";
+  ctx.fillStyle = palette.accent;
   beats.forEach(function (pos) {
     ctx.beginPath();
     ctx.arc(pos * size.pixelWidth, 22 * dpr, 3 * dpr, 0, TAU);
@@ -2861,6 +3037,7 @@ function setGuidedStep(index) {
 }
 
 function drawGuided() {
+  const palette = getLabThemePalette();
   const canvas = byId("guidedEcgCanvas");
   if (!canvas || LAB_STATE.section !== "guided") return;
   const size = fitCanvas(canvas, 310);
@@ -2895,7 +3072,7 @@ function drawGuided() {
     else ctx.lineTo(x, y);
   }
 
-  ctx.strokeStyle = "#e5eef7";
+  ctx.strokeStyle = palette.text;
   ctx.lineWidth = 1.6 * dpr;
   ctx.stroke();
 
@@ -2904,13 +3081,13 @@ function drawGuided() {
       const px = (pos - .045) * size.pixelWidth;
       const rx = pos * size.pixelWidth;
 
-      ctx.fillStyle = "#5eead4";
+      ctx.fillStyle = palette.accent2;
       ctx.font = "700 " + (10 * dpr) + "px system-ui";
       ctx.fillText("P", px - 4 * dpr, baseline - 34 * dpr);
       ctx.fillText("R", rx - 4 * dpr, baseline - size.pixelHeight * .30);
 
       ctx.setLineDash([3 * dpr, 3 * dpr]);
-      ctx.strokeStyle = "rgba(34,211,238,.65)";
+      ctx.strokeStyle = colorWithAlpha(palette.accent, .65);
       ctx.beginPath();
       ctx.moveTo(px, baseline - 28 * dpr);
       ctx.lineTo(px, baseline + 22 * dpr);
@@ -2921,7 +3098,7 @@ function drawGuided() {
     const x1 = (beatPositions[0] - .045) * size.pixelWidth;
     const x2 = (beatPositions[4] - .045) * size.pixelWidth;
     const bracketY = baseline + 72 * dpr;
-    ctx.strokeStyle = "#5eead4";
+    ctx.strokeStyle = palette.accent;
     ctx.lineWidth = 1.3 * dpr;
     ctx.beginPath();
     ctx.moveTo(x1, bracketY - 10 * dpr);
@@ -2929,7 +3106,7 @@ function drawGuided() {
     ctx.lineTo(x2, bracketY);
     ctx.lineTo(x2, bracketY - 10 * dpr);
     ctx.stroke();
-    ctx.fillStyle = "#67e8f9";
+    ctx.fillStyle = palette.accent2;
     ctx.font = "700 " + (10 * dpr) + "px system-ui";
     ctx.fillText("Mesma relação entre P e QRS a cada ciclo", size.pixelWidth * .34, bracketY + 20 * dpr);
   }
@@ -2989,7 +3166,7 @@ function drawGuided() {
     const x2 = (beat - .012) * size.pixelWidth;
     const y = baseline + 62 * dpr;
 
-    ctx.strokeStyle = "#38bdf8";
+    ctx.strokeStyle = palette.accent;
     ctx.lineWidth = 1.4 * dpr;
     ctx.beginPath();
     ctx.moveTo(x1, y - 8 * dpr);
@@ -2998,7 +3175,7 @@ function drawGuided() {
     ctx.lineTo(x2, y - 8 * dpr);
     ctx.stroke();
 
-    ctx.fillStyle = "#bae6fd";
+    ctx.fillStyle = palette.textSoft;
     ctx.font = "700 " + (9 * dpr) + "px system-ui";
     ctx.fillText("PR: início da P → início do QRS", x1, y + 18 * dpr);
   }
@@ -3079,12 +3256,12 @@ function drawGuided() {
         ty - 38 * dpr,
         tx,
         ty - 5 * dpr,
-        "#5eead4",
+        palette.accent2,
         dpr
       );
     });
 
-    ctx.fillStyle = "#99f6e4";
+    ctx.fillStyle = palette.accent2;
     ctx.font = "700 " + (9 * dpr) + "px system-ui";
     ctx.fillText("compare polaridade e forma das ondas T", 20 * dpr, 36 * dpr);
   }
@@ -3181,6 +3358,7 @@ function getPatternSpeedFactor() {
 
 function drawPatternCanvas(canvas, mode) {
   if (!canvas) return;
+  const palette = getLabThemePalette();
   const size = fitCanvas(canvas, 220);
   const ctx = size.ctx;
   const dpr = size.dpr;
@@ -3214,12 +3392,12 @@ function drawPatternCanvas(canvas, mode) {
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   }
-  ctx.strokeStyle = "#e8eef6";
+  ctx.strokeStyle = palette.textSoft;
   ctx.stroke();
 
   const components = [
-    { color: "#38bdf8", left: false },
-    { color: "#f59e0b", left: true }
+    { color: palette.accent, left: false },
+    { color: palette.accent2, left: true }
   ];
 
   components.forEach(function (part) {
@@ -3241,7 +3419,7 @@ function drawPatternCanvas(canvas, mode) {
     ctx.stroke();
   });
 
-  ctx.strokeStyle = "#67e8f9";
+  ctx.strokeStyle = palette.accent;
   ctx.lineWidth = 1 * dpr;
   ctx.beginPath();
   ctx.moveTo(size.pixelWidth * .22, size.pixelHeight * .25);
@@ -3250,7 +3428,7 @@ function drawPatternCanvas(canvas, mode) {
   ctx.lineTo(size.pixelWidth * .47, size.pixelHeight * .25);
   ctx.stroke();
 
-  ctx.fillStyle = "#d9faff";
+  ctx.fillStyle = palette.text;
   ctx.font = "700 " + (9 * dpr) + "px system-ui";
   ctx.fillText("P", size.pixelWidth * .34, size.pixelHeight * .17);
   ctx.restore();
@@ -3411,6 +3589,10 @@ function setupThemeIntegration() {
       const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute("content", palette.bg);
 
+      if (axisRoot && extraAxisRoot) {
+        buildAxes();
+      }
+
       drawEcgMatrix();
       drawFundamentals();
       drawGuided();
@@ -3471,6 +3653,7 @@ function init() {
   setupGuidedReading();
   setupPatterns();
   setupThemeIntegration();
+  setupSimulatorVisibilityLifecycle();
   setupResize();
 
   /*
@@ -3491,7 +3674,7 @@ function init() {
   syncPhaseUi(4, false);
   setLabSection("simulator");
   LAB_STATE.ecgLastFrame = performance.now();
-  requestAnimationFrame(simulationFrame);
+  syncSimulatorActivity();
 
   requestAnimationFrame(function () {
     drawEcgMatrix();
