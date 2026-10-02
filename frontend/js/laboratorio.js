@@ -130,7 +130,10 @@ const state = {
     "monitor",
 
   nephronOpen:
-    false
+    false,
+
+  collectionVolume:
+    0
 };
 
 
@@ -2973,8 +2976,62 @@ function computeRenalSystem(
     );
 
 
+  const renalBloodFlow =
+    clamp(
+      results.cardiacOutput *
+      1000 *
+      (
+        renalBloodShare /
+        100
+      ),
+      180,
+      2600
+    );
+
+
+  const gfrEstimated =
+    clamp(
+      125 *
+      filtrationRelative,
+      5,
+      220
+    );
+
+
+  const filtrationFraction =
+    clamp(
+      20 *
+      (
+        filtrationRelative /
+        Math.max(
+          renalPerfusion,
+          .08
+        )
+      ),
+      5,
+      38
+    );
+
+
+  const reabsorptionPercent =
+    clamp(
+      100 -
+      (
+        urineFlow /
+        Math.max(
+          gfrEstimated,
+          1
+        )
+      ) *
+      100,
+      90,
+      99.95
+    );
+
+
   return {
     reserve,
+
     perfusion:
       renalPerfusion,
 
@@ -2983,7 +3040,15 @@ function computeRenalSystem(
 
     urineFlow,
 
-    renalBloodShare
+    renalBloodShare,
+
+    renalBloodFlow,
+
+    gfrEstimated,
+
+    filtrationFraction,
+
+    reabsorptionPercent
   };
 
 }
@@ -4783,82 +4848,54 @@ function renderIntegratedBody(
   }
 
 
-  setText(
-    "systemFC",
-    Math.round(
-      results.effectiveHR
-    ) +
-    " bpm"
-  );
-
-
-  setText(
-    "systemSpO2",
-    "SpO₂ " +
-    Math.round(
-      results.spo2
-    ) +
-    "%"
-  );
-
-
-  setText(
-    "systemMAP",
-    "PAM " +
-    Math.round(
-      results.map
-    ) +
-    " mmHg"
-  );
-
-
-  setText(
-    "systemRenal",
-    "Reserva " +
-    Math.round(
-      renal.reserve *
-      100
-    ) +
-    "%"
-  );
-
-
-  setText(
-    "systemGas",
-    "PaCO₂ " +
-    Math.round(
-      values.paco2
-    ) +
-    " · HCO₃⁻ " +
-    values.hco3
+  const urineText =
+    renal.urineFlow
       .toFixed(
         1
-      ) +
-    " · pH " +
-    results.ph
-      .toFixed(
-        2
       )
-  );
+      .replace(
+        ".",
+        ","
+      ) +
+    " mL/min";
+
+
+  const flowText =
+    Math.round(
+      renal.renalBloodFlow
+    )
+      .toLocaleString(
+        "pt-BR"
+      ) +
+    " mL/min";
+
+
+  const gfrText =
+    Math.round(
+      renal.gfrEstimated
+    ) +
+    " mL/min";
+
+
+  const ffText =
+    Math.round(
+      renal.filtrationFraction
+    ) +
+    "%";
 
 
   setText(
-    "systemCO",
+    "integratedCO",
     results
       .cardiacOutput
       .toFixed(
-        1
+        2
+      )
+      .replace(
+        ".",
+        ","
       ) +
     " L/min"
-  );
-
-
-  setText(
-    "integratedFC",
-    Math.round(
-      results.effectiveHR
-    ) +
-    " bpm"
   );
 
 
@@ -4872,65 +4909,54 @@ function renderIntegratedBody(
 
 
   setText(
-    "integratedSpO2",
+    "integratedRBF",
+    flowText
+  );
+
+
+  setText(
+    "integratedGFR",
+    gfrText
+  );
+
+
+  setText(
+    "integratedFF",
+    ffText
+  );
+
+
+  setText(
+    "integratedUrine",
+    urineText
+  );
+
+
+  setText(
+    "integratedRenalReserve",
     Math.round(
-      results.spo2
+      renal.reserve *
+      100
     ) +
     "%"
   );
 
 
   setText(
-    "integratedPaCO2",
-    Math.round(
-      values.paco2
-    ) +
-    " mmHg"
+    "nephronRBF",
+    flowText
   );
 
 
   setText(
-    "integratedHCO3",
-    values.hco3
-      .toFixed(
-        1
-      )
-      .replace(
-        ".",
-        ","
-      ) +
-    " mEq/L"
+    "nephronGFR",
+    gfrText
   );
 
 
   setText(
-    "integratedElectrolytes",
-    Math.round(
-      values.sodio
-    ) +
-    " / " +
-    values.potassio
-      .toFixed(
-        1
-      )
-      .replace(
-        ".",
-        ","
-      )
-  );
-
-
-  setText(
-    "integratedUrine",
-    renal.urineFlow
-      .toFixed(
-        1
-      )
-      .replace(
-        ".",
-        ","
-      ) +
-    " mL/min"
+    "nephronFF",
+    ffText
   );
 
 
@@ -4945,26 +4971,8 @@ function renderIntegratedBody(
 
 
   setText(
-    "nephronFiltration",
-    Math.round(
-      renal.filtration *
-      100
-    ) +
-    "%"
-  );
-
-
-  setText(
     "nephronUrine",
-    renal.urineFlow
-      .toFixed(
-        1
-      )
-      .replace(
-        ".",
-        ","
-      ) +
-    " mL/min"
+    urineText
   );
 
 
@@ -4982,6 +4990,76 @@ function renderIntegratedBody(
   );
 
 
+  setText(
+    "systemFiltrationCallout",
+    "≈ " +
+    Math.round(
+      renal.filtrationFraction
+    ) +
+    "% do plasma filtrado"
+  );
+
+
+  setText(
+    "systemReabsorptionCallout",
+    "≈ " +
+    renal.reabsorptionPercent
+      .toFixed(
+        1
+      )
+      .replace(
+        ".",
+        ","
+      ) +
+    "% reabsorvido → sangue"
+  );
+
+
+  setText(
+    "systemUrineCallout",
+    "URINA " +
+    urineText
+  );
+
+
+  setText(
+    "collectionVolume",
+    Math.round(
+      state.collectionVolume
+    ) +
+    " mL"
+  );
+
+
+  setText(
+    "collectionState",
+    state.live
+      ? "x500 DO TEMPO REAL"
+      : "PAUSADO"
+  );
+
+
+  const fill =
+    $("collectionFill");
+
+
+  if (fill) {
+
+    fill.style.height =
+      clamp(
+        (
+          state.collectionVolume /
+          500
+        ) *
+        100,
+        0,
+        100
+      ) +
+      "%";
+
+  }
+
+
   const stage =
     $("integratedBody");
 
@@ -4990,14 +5068,14 @@ function renderIntegratedBody(
 
     const flowDuration =
       clamp(
-        3.4 -
+        3.35 -
         (
           results.cardiacOutput -
           5.5
         ) *
-        .30,
-        1.15,
-        5.2
+        .28,
+        1.2,
+        5.1
       );
 
 
@@ -5009,42 +5087,26 @@ function renderIntegratedBody(
 
 
     stage.style.setProperty(
-      "--oxygen-level",
+      "--renal-flow",
       String(
         clamp(
-          results.spo2 /
-          100,
-          .45,
-          1
+          renal.perfusion,
+          .15,
+          1.4
         )
       )
     );
 
 
     stage.style.setProperty(
-      "--renal-level",
+      "--filtration-level",
       String(
         clamp(
-          renal.perfusion,
-          .15,
-          1.35
+          renal.filtration,
+          .1,
+          1.5
         )
       )
-    );
-
-  }
-
-
-  const lungs =
-    $("systemLungGroup");
-
-
-  if (lungs) {
-
-    lungs.classList.toggle(
-      "is-hypoxemic",
-      results.spo2 <
-      92
     );
 
   }
@@ -5132,7 +5194,7 @@ function toggleNephron(
     button.textContent =
       state.nephronOpen
         ? "Fechar néfron"
-        : "Abrir néfron";
+        : "Ampliar néfron";
 
   }
 
@@ -6756,6 +6818,22 @@ function animationLoop(
       physiologicalModel();
 
 
+    state.collectionVolume =
+      clamp(
+        state.collectionVolume +
+        animationModel.results
+          .renalSystem
+          .urineFlow *
+        (
+          deltaSeconds /
+          60
+        ) *
+        500,
+        0,
+        500
+      );
+
+
     pushTraceSamples(
       deltaSeconds,
       animationModel
@@ -7003,6 +7081,10 @@ function resetLaboratory() {
     null;
 
 
+  state.collectionVolume =
+    0;
+
+
   if (
     state.apneaTimer
   ) {
@@ -7093,6 +7175,42 @@ function bindEvents() {
       .addEventListener(
         "click",
         toggleSound
+      );
+
+  }
+
+
+  if (
+    $("nephronButton")
+  ) {
+
+    $("nephronButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          toggleNephron();
+
+        }
+      );
+
+  }
+
+
+  if (
+    $("nephronCloseButton")
+  ) {
+
+    $("nephronCloseButton")
+      .addEventListener(
+        "click",
+        function () {
+
+          toggleNephron(
+            false
+          );
+
+        }
       );
 
   }
