@@ -80,6 +80,14 @@ const LAB_STATE = {
   rightLeads: false,
   guidedStep: 0,
   guidedMode: "route",
+  guidedQuizQuestions: [],
+  guidedQuizIndex: 0,
+  guidedQuizSelected: null,
+  guidedQuizAnswered: false,
+  guidedQuizScore: 0,
+  guidedQuizLoaded: false,
+  guidedQuizLoading: false,
+  guidedQuizError: "",
   patternId: "p-wave",
   paperSpeed: 25,
   paperGain: 10,
@@ -706,6 +714,7 @@ function setLabSection(section) {
   }
   if (section === "guided") {
     requestAnimationFrame(drawGuided);
+    loadGuidedQuizQuestions();
   }
   if (section === "patterns") {
     requestAnimationFrame(drawPatterns);
@@ -3109,6 +3118,391 @@ function drawFundamentals() {
     drawIrregularFrequency();
   }
 }
+
+
+const GUIDED_QUIZ_THEME =
+  "Laboratório ECG — Leitura Guiada";
+
+function shuffleGuidedQuizAlternatives(alternativas) {
+  const copy = Array.isArray(alternativas)
+    ? alternativas.map(function (item) { return { ...item }; })
+    : [];
+
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = temp;
+  }
+
+  return copy;
+}
+
+async function loadGuidedQuizQuestions(force) {
+  if (
+    LAB_STATE.guidedQuizLoading ||
+    (LAB_STATE.guidedQuizLoaded && !force)
+  ) return;
+
+  LAB_STATE.guidedQuizLoading = true;
+  LAB_STATE.guidedQuizError = "";
+  renderGuidedQuiz();
+
+  try {
+    const response = await fetch("/api/questoes", {
+      credentials: "same-origin"
+    });
+
+    if (response.status === 401) {
+      location.href = "/login.html";
+      return;
+    }
+
+    const data = await response.json().catch(function () {
+      return [];
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        data && data.error
+          ? data.error
+          : "Não foi possível carregar as questões."
+      );
+    }
+
+    const questions =
+      (Array.isArray(data) ? data : [])
+        .filter(function (question) {
+          return question && question.tema === GUIDED_QUIZ_THEME;
+        })
+        .map(function (question) {
+          return {
+            ...question,
+            alternativas: shuffleGuidedQuizAlternatives(question.alternativas)
+          };
+        });
+
+    LAB_STATE.guidedQuizQuestions = questions;
+    LAB_STATE.guidedQuizIndex = 0;
+    LAB_STATE.guidedQuizSelected = null;
+    LAB_STATE.guidedQuizAnswered = false;
+    LAB_STATE.guidedQuizScore = 0;
+    LAB_STATE.guidedQuizLoaded = true;
+
+    if (!questions.length) {
+      LAB_STATE.guidedQuizError =
+        "As questões ainda estão sendo sincronizadas com o banco. Tente novamente em alguns segundos.";
+    }
+  }
+  catch (error) {
+    console.error("Falha ao carregar questões do ECG:", error);
+    LAB_STATE.guidedQuizError =
+      error && error.message
+        ? error.message
+        : "Não foi possível carregar as questões.";
+  }
+  finally {
+    LAB_STATE.guidedQuizLoading = false;
+    renderGuidedQuiz();
+  }
+}
+
+function guidedQuizCurrentQuestion() {
+  return LAB_STATE.guidedQuizQuestions[
+    LAB_STATE.guidedQuizIndex
+  ] || null;
+}
+
+function guidedQuizDifficultyLabel(value) {
+  const normalized = String(value || "").toLowerCase();
+  if (normalized === "facil" || normalized === "fácil") return "Fácil";
+  if (normalized === "dificil" || normalized === "difícil") return "Difícil";
+  return "Médio";
+}
+
+function guidedQuizEscape(value) {
+  const div = document.createElement("div");
+  div.textContent = String(value == null ? "" : value);
+  return div.innerHTML;
+}
+
+function renderGuidedQuiz() {
+  const holder = byId("guidedQuizContent");
+  if (!holder) return;
+
+  if (LAB_STATE.guidedQuizLoading) {
+    holder.innerHTML =
+      '<div class="guided-quiz-loading">' +
+      '<span class="loading-ring"></span>' +
+      '<strong>Carregando questões do banco...</strong>' +
+      '<small>As respostas contam no seu desempenho.</small>' +
+      '</div>';
+    return;
+  }
+
+  if (LAB_STATE.guidedQuizError && !LAB_STATE.guidedQuizQuestions.length) {
+    holder.innerHTML =
+      '<div class="guided-quiz-empty">' +
+      '<span>ⓘ</span>' +
+      '<div><strong>Questões indisponíveis por enquanto</strong>' +
+      '<p>' + guidedQuizEscape(LAB_STATE.guidedQuizError) + '</p></div>' +
+      '<button id="guidedQuizRetry" type="button">Tentar novamente</button>' +
+      '</div>';
+
+    const retry = byId("guidedQuizRetry");
+    if (retry) {
+      retry.addEventListener("click", function () {
+        LAB_STATE.guidedQuizLoaded = false;
+        loadGuidedQuizQuestions(true);
+      });
+    }
+    return;
+  }
+
+  const total = LAB_STATE.guidedQuizQuestions.length;
+
+  if (!total) {
+    holder.innerHTML =
+      '<div class="guided-quiz-empty">' +
+      '<span>30</span>' +
+      '<div><strong>Banco de questões do ECG</strong>' +
+      '<p>Abra esta área novamente quando a sincronização terminar.</p></div>' +
+      '</div>';
+    return;
+  }
+
+  if (LAB_STATE.guidedQuizIndex >= total) {
+    const score = LAB_STATE.guidedQuizScore;
+    const percent = Math.round(score / total * 100);
+
+    holder.innerHTML =
+      '<div class="guided-quiz-result">' +
+      '<span class="guided-quiz-result-icon">✓</span>' +
+      '<small>REVISÃO CONCLUÍDA</small>' +
+      '<h3>Resultado da Leitura Guiada</h3>' +
+      '<p>Suas respostas foram registradas no desempenho do Cortex.</p>' +
+      '<div class="guided-quiz-result-stats">' +
+      '<article><span>Acertos</span><strong>' + score + '</strong></article>' +
+      '<article><span>Questões</span><strong>' + total + '</strong></article>' +
+      '<article><span>Aproveitamento</span><strong>' + percent + '%</strong></article>' +
+      '</div>' +
+      '<button id="guidedQuizRestart" type="button">Refazer as 30 questões</button>' +
+      '</div>';
+
+    const restart = byId("guidedQuizRestart");
+    if (restart) {
+      restart.addEventListener("click", function () {
+        LAB_STATE.guidedQuizQuestions =
+          LAB_STATE.guidedQuizQuestions.map(function (question) {
+            return {
+              ...question,
+              alternativas: shuffleGuidedQuizAlternatives(question.alternativas)
+            };
+          });
+        LAB_STATE.guidedQuizIndex = 0;
+        LAB_STATE.guidedQuizSelected = null;
+        LAB_STATE.guidedQuizAnswered = false;
+        LAB_STATE.guidedQuizScore = 0;
+        renderGuidedQuiz();
+      });
+    }
+    return;
+  }
+
+  const question = guidedQuizCurrentQuestion();
+  const alternatives = Array.isArray(question.alternativas)
+    ? question.alternativas
+    : [];
+  const correctIndex = alternatives.findIndex(function (item) {
+    return Boolean(item.correta);
+  });
+  const progress = Math.round(
+    (LAB_STATE.guidedQuizIndex + 1) / total * 100
+  );
+
+  const optionsHtml = alternatives.map(function (alternative, index) {
+    let className = "guided-quiz-option";
+    let stateLabel = "";
+
+    if (LAB_STATE.guidedQuizSelected === index) {
+      className += " selected";
+    }
+
+    if (LAB_STATE.guidedQuizAnswered) {
+      if (index === correctIndex) {
+        className += " correct";
+        stateLabel =
+          '<span class="cortex-answer-state cortex-answer-state-correct">✓ CORRETA</span>';
+      }
+      else if (index === LAB_STATE.guidedQuizSelected) {
+        className += " wrong";
+        stateLabel =
+          '<span class="cortex-answer-state cortex-answer-state-wrong">✕ ERRADA</span>';
+      }
+    }
+
+    return (
+      '<button type="button" class="' + className + '" data-guided-quiz-option="' + index + '"' +
+      (LAB_STATE.guidedQuizAnswered ? ' disabled' : '') + '>' +
+      '<span class="guided-quiz-letter">' + String.fromCharCode(65 + index) + '</span>' +
+      '<span class="guided-quiz-option-text">' + guidedQuizEscape(alternative.texto) + '</span>' +
+      stateLabel +
+      '</button>'
+    );
+  }).join("");
+
+  const explanation = LAB_STATE.guidedQuizAnswered
+    ? (
+      '<div class="guided-quiz-explanation">' +
+      '<strong>Explicação</strong>' +
+      '<p>' + guidedQuizEscape(question.explicacao || "Revise o conteúdo acima e compare com a alternativa correta.") + '</p>' +
+      '</div>'
+    )
+    : "";
+
+  holder.innerHTML =
+    '<div class="guided-quiz-topline">' +
+    '<div><span>QUESTÃO ' + (LAB_STATE.guidedQuizIndex + 1) + ' DE ' + total + '</span>' +
+    '<strong>' + progress + '% concluído</strong></div>' +
+    '<div class="guided-quiz-progress"><i style="width:' + progress + '%"></i></div>' +
+    '</div>' +
+    '<div class="guided-quiz-meta">' +
+    '<span>Laboratório de ECG</span>' +
+    '<span>' + guidedQuizDifficultyLabel(question.dificuldade) + '</span>' +
+    '<span>Leitura guiada</span>' +
+    '</div>' +
+    '<h3 class="guided-quiz-question">' + guidedQuizEscape(question.enunciado) + '</h3>' +
+    '<div class="guided-quiz-options">' + optionsHtml + '</div>' +
+    explanation +
+    '<div class="guided-quiz-actions">' +
+    (
+      LAB_STATE.guidedQuizAnswered
+        ? '<button id="guidedQuizNext" class="primary" type="button">' +
+          (LAB_STATE.guidedQuizIndex === total - 1 ? 'Ver resultado' : 'Próxima questão →') +
+          '</button>'
+        : '<button id="guidedQuizConfirm" class="primary" type="button"' +
+          (LAB_STATE.guidedQuizSelected === null ? ' disabled' : '') +
+          '>Confirmar resposta</button>'
+    ) +
+    '</div>';
+
+  all("[data-guided-quiz-option]", holder).forEach(function (button) {
+    button.addEventListener("click", function () {
+      if (LAB_STATE.guidedQuizAnswered) return;
+      LAB_STATE.guidedQuizSelected = Number(button.dataset.guidedQuizOption);
+      renderGuidedQuiz();
+    });
+  });
+
+  const confirm = byId("guidedQuizConfirm");
+  if (confirm) {
+    confirm.addEventListener("click", confirmGuidedQuizAnswer);
+  }
+
+  const next = byId("guidedQuizNext");
+  if (next) {
+    next.addEventListener("click", function () {
+      LAB_STATE.guidedQuizIndex += 1;
+      LAB_STATE.guidedQuizSelected = null;
+      LAB_STATE.guidedQuizAnswered = false;
+      renderGuidedQuiz();
+
+      const quizArea = document.querySelector(".guided-quiz-area");
+      if (quizArea) {
+        quizArea.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    });
+  }
+}
+
+async function confirmGuidedQuizAnswer() {
+  if (
+    LAB_STATE.guidedQuizSelected === null ||
+    LAB_STATE.guidedQuizAnswered
+  ) return;
+
+  const question = guidedQuizCurrentQuestion();
+  if (!question) return;
+
+  const alternative =
+    question.alternativas[
+      LAB_STATE.guidedQuizSelected
+    ];
+
+  if (!alternative) return;
+
+  const correct = Boolean(alternative.correta);
+  const button = byId("guidedQuizConfirm");
+
+  try {
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Salvando...";
+    }
+
+    const response = await fetch("/api/respostas", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        questaoId: question.id,
+        correta: correct
+      })
+    });
+
+    if (response.status === 401) {
+      location.href = "/login.html";
+      return;
+    }
+
+    const data = await response.json().catch(function () {
+      return {};
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        data && data.error
+          ? data.error
+          : "Não foi possível registrar a resposta."
+      );
+    }
+
+    if (correct) {
+      LAB_STATE.guidedQuizScore += 1;
+    }
+
+    LAB_STATE.guidedQuizAnswered = true;
+    LAB_STATE.guidedQuizError = "";
+    renderGuidedQuiz();
+  }
+  catch (error) {
+    console.error("Falha ao registrar resposta do ECG:", error);
+    LAB_STATE.guidedQuizError =
+      error && error.message
+        ? error.message
+        : "Não foi possível registrar a resposta.";
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Tentar confirmar novamente";
+    }
+
+    const holder = byId("guidedQuizContent");
+    if (holder && !holder.querySelector(".guided-quiz-save-error")) {
+      const message = document.createElement("p");
+      message.className = "guided-quiz-save-error";
+      message.textContent = LAB_STATE.guidedQuizError;
+      const actions = holder.querySelector(".guided-quiz-actions");
+      if (actions) actions.prepend(message);
+    }
+  }
+}
+
 
 /* =========================================================
    GUIDED READING
