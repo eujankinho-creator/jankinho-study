@@ -2,8 +2,9 @@ import { mkdir, cp, copyFile, writeFile, rename, stat } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { NodeIO } from "@gltf-transform/core";
-import { dedup, prune, weld, simplify } from "@gltf-transform/functions";
+import { dedup, prune, weld, simplify, textureCompress } from "@gltf-transform/functions";
 import { MeshoptSimplifier } from "meshoptimizer";
+import sharp from "sharp";
 
 const root = process.cwd();
 const frontend = path.join(root, "frontend");
@@ -91,8 +92,15 @@ else {
       weld(),
       simplify({
         simplifier: MeshoptSimplifier,
-        ratio: 0.48,
-        error: 0.0025
+        ratio: 0.36,
+        error: 0.004
+      }),
+      textureCompress({
+        encoder: sharp,
+        resize: [1024, 1024],
+        targetFormat: "webp",
+        quality: 78,
+        effort: 4
       }),
       prune()
     );
