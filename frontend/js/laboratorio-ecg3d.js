@@ -1,1160 +1,2026 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 
-(function () {
-  "use strict";
+const byId = function (id) {
+  return document.getElementById(id);
+};
 
-  const get = function (id) {
-    return document.getElementById(id);
-  };
+const all = function (selector, root) {
+  return Array.from((root || document).querySelectorAll(selector));
+};
 
-  const root = get("ecgLearningLab");
+const clamp = function (value, min, max) {
+  return Math.min(Math.max(value, min), max);
+};
 
-  if (!root) {
-    return;
+const TAU = Math.PI * 2;
+
+const COLORS = {
+  cyan: "#22d3ee",
+  cyan2: "#5eead4",
+  red: "#ff5665",
+  yellow: "#f8c94f",
+  green: "#34d399",
+  purple: "#a78bfa",
+  pink: "#ec4899",
+  blue: "#38bdf8",
+  orange: "#fb923c",
+  white: "#f8fafc",
+  muted: "#94a3b8"
+};
+
+const LAB_STATE = {
+  section: "simulator",
+  fundamentalPart: "paper",
+  phaseIndex: 4,
+  phasePlaying: false,
+  phaseTimer: null,
+  qrsStep: 0,
+  axisMode: "all",
+  posteriorLeads: false,
+  rightLeads: false,
+  guidedStep: 0,
+  patternId: "p-wave",
+  paperSpeed: 25,
+  paperGain: 10
+};
+
+const PHASES = [
+  {
+    badge: "Linha de base: repouso elétrico",
+    step: "1. Repouso",
+    title: "Linha isoelétrica",
+    text: "Entre os ciclos, não há um vetor cardíaco dominante. O traçado retorna à linha de base enquanto o miocárdio se prepara para um novo disparo.",
+    heartText: "repouso elétrico",
+    progress: 0.02
+  },
+  {
+    badge: "Onda P: despolarização atrial",
+    step: "2. Onda P",
+    title: "Ativação dos átrios",
+    text: "O impulso parte do nó sinusal e se espalha pelos átrios. Essa atividade elétrica aparece no papel como a onda P.",
+    heartText: "átrios ativados",
+    progress: 0.09
+  },
+  {
+    badge: "PR: condução pelo nó AV",
+    step: "3. Segmento PR",
+    title: "Atraso fisiológico no nó AV",
+    text: "O impulso desacelera no nó AV antes de seguir pelo feixe de His. Esse atraso permite que o enchimento ventricular se complete.",
+    heartText: "condução AV",
+    progress: 0.15
+  },
+  {
+    badge: "QRS: ativação inicial do septo",
+    step: "4. Pré-QRS",
+    title: "Preparação para o QRS",
+    text: "O sistema His–Purkinje distribui rapidamente o impulso aos ventrículos, preparando o início da despolarização ventricular.",
+    heartText: "His–Purkinje",
+    progress: 0.19
+  },
+  {
+    badge: "QRS: despolarização ventricular",
+    step: "5. Vetor 1",
+    title: "Início do QRS: septo",
+    text: "O primeiro vetor representa o início da despolarização ventricular. Pelo sistema His–Purkinje, o impulso chega ao septo e a ativação inicial segue predominantemente da esquerda para a direita.",
+    heartText: "septo",
+    progress: 0.225
+  },
+  {
+    badge: "QRS: paredes e ápice",
+    step: "6. Vetor 2",
+    title: "Meio do QRS: paredes e ápice",
+    text: "A maior massa ventricular passa a dominar o vetor. A ativação se dirige para o ápice e para as paredes livres, produzindo a maior parte da amplitude do QRS.",
+    heartText: "paredes e ápice",
+    progress: 0.27
+  },
+  {
+    badge: "QRS: bases ventriculares",
+    step: "7. Vetor 3",
+    title: "Fim do QRS: bases",
+    text: "As regiões basais são ativadas por último. O vetor líquido diminui progressivamente até o complexo QRS retornar à linha de base.",
+    heartText: "bases ventriculares",
+    progress: 0.33
+  },
+  {
+    badge: "Segmento ST: ventrículos despolarizados",
+    step: "8. Platô",
+    title: "Tudo despolarizado",
+    text: "Com grande parte dos ventrículos despolarizada ao mesmo tempo, há pouca diferença de potencial entre regiões e o vetor líquido fica próximo de zero.",
+    heartText: "platô ventricular",
+    progress: 0.40
+  },
+  {
+    badge: "Onda T: repolarização ventricular",
+    step: "9. Onda T",
+    title: "Recuperação elétrica",
+    text: "A repolarização ventricular gera a onda T. O vetor observado depende da sequência de recuperação das células ventriculares.",
+    heartText: "repolarização",
+    progress: 0.51
+  },
+  {
+    badge: "TP: retorno à linha de base",
+    step: "10. Intervalo TP",
+    title: "Novo ciclo",
+    text: "A atividade elétrica retorna ao repouso até um novo disparo do nó sinusal reiniciar a sequência.",
+    heartText: "intervalo TP",
+    progress: 0.75
   }
+];
 
+const QRS_MOMENTS = [4, 5, 6];
 
-  async function loadCurrentUser() {
-    try {
-      const response = await fetch("/api/auth/me", {
-        credentials: "same-origin"
-      });
-
-      if (response.status === 401) {
-        location.href = "/login.html";
-        return;
-      }
-
-      if (!response.ok) {
-        return;
-      }
-
-      const data = await response.json();
-      const user = data.usuario || {};
-      const name = user.nome || "Usuário";
-      const initial = name.charAt(0).toUpperCase();
-
-      if (get("nomeSidebar")) get("nomeSidebar").textContent = name;
-      if (get("emailSidebar")) get("emailSidebar").textContent = user.email || "";
-      if (get("nomeHeader")) get("nomeHeader").textContent = name;
-      if (get("avatarSidebar")) get("avatarSidebar").textContent = initial;
-      if (get("avatarHeader")) get("avatarHeader").textContent = initial;
-    }
-    catch (error) {
-      console.error("Falha ao carregar usuário do laboratório:", error);
-    }
+const GUIDED_STEPS = [
+  {
+    title: "Ritmo",
+    subtitle: "Regular ou irregular?",
+    question: "Os batimentos seguem um padrão regular ou irregular? Existe uma onda P antes de cada QRS?",
+    info: "No ritmo sinusal, há uma onda P de morfologia semelhante antes de cada QRS, com relação P–QRS preservada e ciclos regulares."
+  },
+  {
+    title: "Eixo",
+    subtitle: "Qual o eixo elétrico?",
+    question: "Qual é a direção média da despolarização ventricular no plano frontal?",
+    info: "Observe DI e aVF como ponto de partida. Um QRS positivo em ambas costuma ser compatível com eixo dentro da faixa habitual."
+  },
+  {
+    title: "Frequência",
+    subtitle: "Quantos batimentos por minuto?",
+    question: "Meça o intervalo R–R e estime a frequência cardíaca usando a velocidade do papel.",
+    info: "Em ritmo regular a 25 mm/s, uma regra prática é dividir 300 pelo número de quadrados grandes entre dois picos R."
+  },
+  {
+    title: "Onda P",
+    subtitle: "Morfologia e relação com o QRS",
+    question: "Há onda P antes de cada QRS? A morfologia e a polaridade são coerentes entre os ciclos?",
+    info: "Compare duração, amplitude e forma. Alterações de morfologia devem ser interpretadas junto ao contexto clínico e às demais derivações."
+  },
+  {
+    title: "Intervalo PR",
+    subtitle: "Está normal?",
+    question: "O intervalo entre o início da onda P e o início do QRS é constante e proporcional?",
+    info: "O PR representa a condução atrioventricular. Meça do início da P ao início do QRS em uma derivação com limites bem definidos."
+  },
+  {
+    title: "Complexo QRS",
+    subtitle: "Duração e morfologia",
+    question: "O QRS é estreito ou alargado? Como é a progressão de R nas precordiais?",
+    info: "A duração e a morfologia do QRS ajudam a reconhecer atrasos de condução e padrões de ativação ventricular."
+  },
+  {
+    title: "Segmento ST",
+    subtitle: "Elevação ou depressão?",
+    question: "O segmento ST está próximo da linha isoelétrica ou há deslocamento significativo em derivações contíguas?",
+    info: "Compare o ST com uma linha de base estável e interprete qualquer alteração em conjunto com derivações contíguas e contexto."
+  },
+  {
+    title: "Intervalo QT",
+    subtitle: "Está no intervalo esperado?",
+    question: "O QT parece proporcional à frequência cardíaca ou está claramente prolongado ou encurtado?",
+    info: "O QT inclui despolarização e repolarização ventriculares. A interpretação clínica costuma considerar correção pela frequência."
+  },
+  {
+    title: "Onda T",
+    subtitle: "Polaridade e alterações",
+    question: "A onda T é concordante com o QRS? Há inversão, apiculamento ou padrão bifásico?",
+    info: "A onda T representa repolarização ventricular. Forma e polaridade devem ser avaliadas considerando derivações, eletrólitos e contexto."
   }
+];
 
-  async function logoutLaboratory() {
-    try {
-      await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "same-origin"
-      });
-    }
-    finally {
+const PATTERNS = [
+  {
+    id: "p-wave",
+    title: "Onda P",
+    subtitle: "Duração e amplitude",
+    kind: "p",
+    detailTitle: "Onda P: duração e amplitude",
+    detailText: "Compare a morfologia normal da onda P com padrões didáticos associados a maior contribuição atrial direita ou esquerda.",
+    tags: ["P normal", "P bífida", "P alta"]
+  },
+  {
+    id: "alternans",
+    title: "Alternância elétrica",
+    subtitle: "Variação batimento a batimento",
+    kind: "alternans",
+    detailTitle: "Alternância elétrica",
+    detailText: "Modelo didático com variação cíclica da amplitude dos complexos. A interpretação real depende do contexto e do conjunto do traçado.",
+    tags: ["amplitude variável", "QRS", "comparar ciclos"]
+  },
+  {
+    id: "r-progression",
+    title: "V1–V6: R cresce e S diminui",
+    subtitle: "Progressão da onda R",
+    kind: "r-progression",
+    detailTitle: "Progressão da onda R nas precordiais",
+    detailText: "A transição de V1 a V6 costuma mostrar aumento relativo da onda R e redução da onda S. O padrão varia com posição e anatomia.",
+    tags: ["V1–V6", "transição", "precordiais"]
+  },
+  {
+    id: "pathologic-q",
+    title: "Onda Q patológica",
+    subtitle: "Critérios e significados",
+    kind: "q",
+    detailTitle: "Ondas Q: comparação visual",
+    detailText: "Observe profundidade, largura e distribuição da onda Q. Um padrão isolado não deve ser interpretado sem as demais derivações.",
+    tags: ["onda Q", "largura", "profundidade"]
+  },
+  {
+    id: "bundle",
+    title: "Bloqueios de ramo",
+    subtitle: "BRD e BRE",
+    kind: "bundle",
+    detailTitle: "Bloqueios de ramo",
+    detailText: "O atraso na condução intraventricular alarga e modifica o QRS. A morfologia difere entre bloqueio direito e esquerdo.",
+    tags: ["QRS largo", "BRD", "BRE"]
+  },
+  {
+    id: "delta",
+    title: "Pré-excitação e onda delta",
+    subtitle: "Wolff–Parkinson–White",
+    kind: "delta",
+    detailTitle: "Pré-excitação e onda delta",
+    detailText: "Modelo didático com início lento do QRS e PR mais curto. A interpretação definitiva exige critérios e contexto apropriados.",
+    tags: ["PR", "onda delta", "pré-excitação"]
+  },
+  {
+    id: "low-voltage",
+    title: "Baixa voltagem",
+    subtitle: "Causas e contexto",
+    kind: "low",
+    detailTitle: "Baixa voltagem",
+    detailText: "Compare a amplitude dos complexos com um traçado de referência. A causa não pode ser inferida apenas pelo desenho esquemático.",
+    tags: ["amplitude", "QRS", "contexto"]
+  },
+  {
+    id: "infarction",
+    title: "Evolução do ECG no infarto (IAM)",
+    subtitle: "Fases e alterações",
+    kind: "st",
+    detailTitle: "Alterações de ST e T",
+    detailText: "Visualização didática de alterações de ST/T ao longo do tempo. Diagnóstico real exige quadro clínico, derivações contíguas e critérios validados.",
+    tags: ["ST", "T", "derivações contíguas"]
+  },
+  {
+    id: "potassium",
+    title: "Hipocalemia e hipercalemia",
+    subtitle: "Alterações no QT, ST e T",
+    kind: "potassium",
+    detailTitle: "Potássio e repolarização",
+    detailText: "Modelos didáticos destacam mudanças na onda T e na duração do complexo conforme alterações eletrolíticas.",
+    tags: ["onda T", "eletrólitos", "repolarização"]
+  },
+  {
+    id: "biphasic-t",
+    title: "T bifásica: sobe–desce e desce–sobe",
+    subtitle: "Reconhecimento e significado",
+    kind: "biphasic",
+    detailTitle: "Onda T bifásica",
+    detailText: "Compare padrões sobe–desce e desce–sobe. A distribuição nas derivações e o contexto determinam o significado clínico.",
+    tags: ["T bifásica", "polaridade", "contexto"]
+  },
+  {
+    id: "wellens",
+    title: "Padrão de Wellens",
+    subtitle: "Padrão de T anterior",
+    kind: "wellens",
+    detailTitle: "Padrão de Wellens",
+    detailText: "Visualização educacional de ondas T anteriores características. Suspeitas clínicas exigem avaliação médica urgente e critérios completos.",
+    tags: ["V2–V4", "onda T", "anterior"]
+  },
+  {
+    id: "sinus-nodal",
+    title: "Ritmo sinusal × ritmo nodal",
+    subtitle: "Diferenças no traçado",
+    kind: "nodal",
+    detailTitle: "Ritmo sinusal e ritmo nodal",
+    detailText: "Compare a relação entre onda P e QRS. Ritmos nodais podem apresentar P ausente, retrógrada ou em posição diferente em relação ao QRS.",
+    tags: ["ritmo", "onda P", "QRS"]
+  }
+];
+
+const LEAD_AXES = [
+  { id: "DI", short: "DI +", plane: "frontal", angle: 0, color: "#ff375f" },
+  { id: "DII", short: "DII +", plane: "frontal", angle: 60, color: "#22d3ee" },
+  { id: "DIII", short: "DIII +", plane: "frontal", angle: 120, color: "#eab308" },
+  { id: "aVR", short: "aVR +", plane: "frontal", angle: -150, color: "#c084fc" },
+  { id: "aVL", short: "aVL +", plane: "frontal", angle: -30, color: "#ec4899" },
+  { id: "aVF", short: "aVF +", plane: "frontal", angle: 90, color: "#3b82f6" },
+  { id: "V1", short: "V1", plane: "horizontal", angle: 160, color: "#f97316" },
+  { id: "V2", short: "V2", plane: "horizontal", angle: 140, color: "#f59e0b" },
+  { id: "V3", short: "V3", plane: "horizontal", angle: 116, color: "#22c55e" },
+  { id: "V4", short: "V4", plane: "horizontal", angle: 86, color: "#10b981" },
+  { id: "V5", short: "V5", plane: "horizontal", angle: 55, color: "#0ea5e9" },
+  { id: "V6", short: "V6", plane: "horizontal", angle: 20, color: "#8b5cf6" }
+];
+
+const EXTRA_AXES = [
+  { id: "V7", short: "V7", plane: "horizontal", angle: -8, color: "#a855f7", group: "posterior" },
+  { id: "V8", short: "V8", plane: "horizontal", angle: -28, color: "#c084fc", group: "posterior" },
+  { id: "V9", short: "V9", plane: "horizontal", angle: -48, color: "#d8b4fe", group: "posterior" },
+  { id: "V3R", short: "V3R", plane: "horizontal", angle: 215, color: "#fb7185", group: "right" },
+  { id: "V4R", short: "V4R", plane: "horizontal", angle: 238, color: "#f43f5e", group: "right" }
+];
+
+const LEAD_DIRECTIONS = {
+  DI: 0,
+  DII: 60,
+  DIII: 120,
+  aVR: -150,
+  aVL: -30,
+  aVF: 90
+};
+
+async function loadCurrentUser() {
+  try {
+    const response = await fetch("/api/auth/me", { credentials: "same-origin" });
+    if (response.status === 401) {
       location.href = "/login.html";
+      return;
     }
-  }
+    if (!response.ok) return;
+    const data = await response.json();
+    const user = data.usuario || {};
+    const name = user.nome || "Usuário";
+    const initial = name.charAt(0).toUpperCase();
 
-  const LEADS = [
-    ["I","limb",.72,1],
-    ["II","limb",1,1],
-    ["III","limb",.76,1],
-    ["aVR","limb",.72,-1],
-    ["aVL","limb",.55,1],
-    ["aVF","limb",.86,1],
-    ["V1","chest",.72,-.55],
-    ["V2","chest",.82,-.25],
-    ["V3","chest",.92,.15],
-    ["V4","chest",1.02,.70],
-    ["V5","chest",1,.95],
-    ["V6","chest",.88,.90],
-    ["V7","posterior",.72,.78],
-    ["V8","posterior",.64,.72],
-    ["V9","posterior",.58,.66],
-    ["V3R","right",.70,-.35],
-    ["V4R","right",.75,-.18],
-    ["V5R","right",.68,.04],
-    ["V6R","right",.60,.12]
-  ].map(function (item) {
-    return {
-      id: item[0],
-      group: item[1],
-      scale: item[2],
-      polarity: item[3]
-    };
+    if (byId("nomeSidebar")) byId("nomeSidebar").textContent = name;
+    if (byId("emailSidebar")) byId("emailSidebar").textContent = user.email || "";
+    if (byId("nomeHeader")) byId("nomeHeader").textContent = name;
+    if (byId("avatarSidebar")) byId("avatarSidebar").textContent = initial;
+    if (byId("avatarHeader")) byId("avatarHeader").textContent = initial;
+  } catch (error) {
+    console.error("Falha ao carregar usuário:", error);
+  }
+}
+
+async function logout() {
+  try {
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "same-origin"
+    });
+  } finally {
+    location.href = "/login.html";
+  }
+}
+
+function setupSectionTabs() {
+  all("[data-lab-section]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      setLabSection(button.dataset.labSection);
+    });
   });
 
-  const CORE = new Set([
-    "I","II","III","aVR","aVL","aVF",
-    "V1","V2","V3","V4","V5","V6"
+  all("[data-jump-section]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      setLabSection(button.dataset.jumpSection);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  const support = byId("supportButton");
+  if (support) {
+    support.addEventListener("click", function () {
+      setLabSection("fundamentals");
+      setFundamentalPart("signal");
+    });
+  }
+}
+
+function setLabSection(section) {
+  LAB_STATE.section = section;
+  all("[data-lab-section]").forEach(function (button) {
+    button.classList.toggle("active", button.dataset.labSection === section);
+  });
+  all("[data-section-panel]").forEach(function (panel) {
+    const active = panel.dataset.sectionPanel === section;
+    panel.hidden = !active;
+    panel.classList.toggle("active", active);
+  });
+
+  if (section === "simulator") {
+    requestAnimationFrame(function () {
+      resizeThree();
+      drawEcgMatrix();
+    });
+  }
+  if (section === "fundamentals") {
+    requestAnimationFrame(drawFundamentals);
+  }
+  if (section === "guided") {
+    requestAnimationFrame(drawGuided);
+  }
+  if (section === "patterns") {
+    requestAnimationFrame(drawPatterns);
+  }
+}
+
+function setupFundamentalParts() {
+  all("[data-fundamental-part]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      setFundamentalPart(button.dataset.fundamentalPart);
+    });
+  });
+}
+
+function setFundamentalPart(part) {
+  LAB_STATE.fundamentalPart = part;
+  all("[data-fundamental-part]").forEach(function (button) {
+    button.classList.toggle("active", button.dataset.fundamentalPart === part);
+  });
+  all(".fundamental-part").forEach(function (panel) {
+    panel.hidden = panel.id !== "fundamentalPart-" + part;
+  });
+  requestAnimationFrame(drawFundamentals);
+}
+
+/* =========================================================
+   3D HEART
+========================================================= */
+
+let scene;
+let camera;
+let renderer;
+let labelRenderer;
+let controls;
+let heartModel;
+let heartRoot;
+let axisRoot;
+let extraAxisRoot;
+let conductionRoot;
+let vectorArrow;
+let signalDot;
+let modelMaterials = [];
+let animationHandle;
+let cutawayEnabled = true;
+
+const clippingPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0.18);
+
+function makeTextLabel(text, className, color) {
+  const element = document.createElement("div");
+  element.className = className;
+  element.textContent = text;
+  if (color) element.style.color = color;
+  return new CSS2DObject(element);
+}
+
+function initHeart3D() {
+  const host = byId("heart3dHost");
+  if (!host) return;
+
+  scene = new THREE.Scene();
+
+  camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+  camera.position.set(0, 0.15, 7.4);
+
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    powerPreference: "high-performance"
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setClearColor(0x000000, 0);
+  renderer.localClippingEnabled = true;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+  host.prepend(renderer.domElement);
+
+  labelRenderer = new CSS2DRenderer();
+  labelRenderer.domElement.className = "heart-css-label-layer";
+  labelRenderer.domElement.style.position = "absolute";
+  labelRenderer.domElement.style.inset = "0";
+  labelRenderer.domElement.style.pointerEvents = "none";
+  host.appendChild(labelRenderer.domElement);
+
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.06;
+  controls.enablePan = false;
+  controls.minDistance = 4.6;
+  controls.maxDistance = 10;
+  controls.target.set(0, 0, 0);
+  controls.autoRotate = false;
+
+  const hemi = new THREE.HemisphereLight(0xffe8df, 0x07101b, 1.35);
+  scene.add(hemi);
+
+  const key = new THREE.DirectionalLight(0xffcab7, 3.2);
+  key.position.set(4, 5, 6);
+  scene.add(key);
+
+  const fill = new THREE.DirectionalLight(0x9edbff, 1.25);
+  fill.position.set(-5, 2, 3);
+  scene.add(fill);
+
+  const rim = new THREE.DirectionalLight(0xff6272, 1.6);
+  rim.position.set(-3, 1, -5);
+  scene.add(rim);
+
+  const top = new THREE.PointLight(0xffbfa8, 1.5, 16);
+  top.position.set(0, 4, 1);
+  scene.add(top);
+
+  heartRoot = new THREE.Group();
+  axisRoot = new THREE.Group();
+  extraAxisRoot = new THREE.Group();
+  conductionRoot = new THREE.Group();
+
+  scene.add(heartRoot);
+  scene.add(axisRoot);
+  scene.add(extraAxisRoot);
+  scene.add(conductionRoot);
+
+  buildAxes();
+  buildConductionPath();
+  loadHeartModel();
+  setupHeartControls();
+
+  resizeThree();
+  animateThree();
+}
+
+function loadHeartModel() {
+  const loader = new GLTFLoader();
+  const loading = byId("heartModelLoading");
+  const urls = [
+    "https://cdn.jsdelivr.net/gh/yihalem123/Human-Organ3D@main/models/heart.glb",
+    "https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb"
+  ];
+
+  function tryUrl(index) {
+    if (index >= urls.length) {
+      if (loading) {
+        loading.classList.add("error");
+        loading.innerHTML = "<strong>Não foi possível carregar o modelo anatômico.</strong><small>Tente recarregar a página. O simulador não usa coração geométrico como fallback.</small>";
+      }
+      return;
+    }
+
+    loader.load(
+      urls[index],
+      function (gltf) {
+        heartModel = gltf.scene;
+
+        const box = new THREE.Box3().setFromObject(heartModel);
+        const size = new THREE.Vector3();
+        const center = new THREE.Vector3();
+        box.getSize(size);
+        box.getCenter(center);
+
+        heartModel.position.sub(center);
+
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        const scale = 3.25 / maxDim;
+        heartModel.scale.setScalar(scale);
+
+        heartModel.rotation.set(-0.10, -0.28, -0.08);
+
+        modelMaterials = [];
+        heartModel.traverse(function (object) {
+          if (!object.isMesh) return;
+
+          object.castShadow = false;
+          object.receiveShadow = false;
+
+          const original = Array.isArray(object.material) ? object.material : [object.material];
+          const cloned = original.map(function (material) {
+            const next = material.clone();
+            next.side = THREE.DoubleSide;
+            next.clippingPlanes = cutawayEnabled ? [clippingPlane] : [];
+            next.clipIntersection = false;
+            next.needsUpdate = true;
+            if ("roughness" in next) next.roughness = Math.min(0.78, next.roughness == null ? 0.65 : next.roughness);
+            if ("metalness" in next) next.metalness = 0.02;
+            modelMaterials.push(next);
+            return next;
+          });
+
+          object.material = Array.isArray(object.material) ? cloned : cloned[0];
+        });
+
+        heartRoot.add(heartModel);
+        buildChamberLabels();
+
+        if (gltf.animations && gltf.animations.length) {
+          const mixer = new THREE.AnimationMixer(heartModel);
+          const action = mixer.clipAction(gltf.animations[0]);
+          action.play();
+          heartRoot.userData.mixer = mixer;
+        }
+
+        if (loading) loading.classList.add("loaded");
+        updateHeartElectricalState();
+      },
+      function () {},
+      function () {
+        tryUrl(index + 1);
+      }
+    );
+  }
+
+  tryUrl(0);
+}
+
+function applyCutaway() {
+  modelMaterials.forEach(function (material) {
+    material.clippingPlanes = cutawayEnabled ? [clippingPlane] : [];
+    material.needsUpdate = true;
+  });
+}
+
+function buildChamberLabels() {
+  const labels = [
+    ["AD", -0.55, 0.44, 0.55],
+    ["AE", 0.48, 0.56, 0.42],
+    ["VD", -0.38, -0.48, 0.70],
+    ["VE", 0.48, -0.40, 0.55]
+  ];
+
+  labels.forEach(function (entry) {
+    const anchor = new THREE.Object3D();
+    anchor.position.set(entry[1], entry[2], entry[3]);
+    const label = makeTextLabel(entry[0], "heart-label");
+    anchor.add(label);
+    heartRoot.add(anchor);
+  });
+}
+
+function circlePoints(radius, plane) {
+  const points = [];
+  for (let i = 0; i <= 120; i += 1) {
+    const angle = TAU * i / 120;
+    if (plane === "frontal") {
+      points.push(new THREE.Vector3(radius * Math.cos(angle), radius * Math.sin(angle), 0));
+    } else {
+      points.push(new THREE.Vector3(radius * Math.cos(angle), 0, radius * Math.sin(angle)));
+    }
+  }
+  return points;
+}
+
+function buildAxes() {
+  axisRoot.clear();
+  extraAxisRoot.clear();
+
+  function addCircle(plane, color) {
+    const geometry = new THREE.BufferGeometry().setFromPoints(circlePoints(2.18, plane));
+    const material = new THREE.LineBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 0.28
+    });
+    axisRoot.add(new THREE.Line(geometry, material));
+  }
+
+  addCircle("frontal", 0x63758a);
+  addCircle("horizontal", 0x63758a);
+
+  LEAD_AXES.forEach(function (lead) {
+    addLeadAxis(axisRoot, lead);
+  });
+
+  EXTRA_AXES.forEach(function (lead) {
+    const object = addLeadAxis(extraAxisRoot, lead);
+    object.visible = false;
+    object.userData.group = lead.group;
+  });
+
+  updateAxisVisibility();
+}
+
+function addLeadAxis(parent, lead) {
+  const angle = lead.angle * Math.PI / 180;
+  const radius = 2.28;
+  let end;
+
+  if (lead.plane === "frontal") {
+    end = new THREE.Vector3(radius * Math.cos(angle), -radius * Math.sin(angle), 0);
+  } else {
+    end = new THREE.Vector3(radius * Math.cos(angle), 0, radius * Math.sin(angle));
+  }
+
+  const geometry = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0, 0),
+    end
   ]);
 
-  const PHASES = [
-    {
-      index:"00", min:0, max:.05,
-      title:"Linha de base — repouso elétrico",
-      category:"DIÁSTOLE ELÉTRICA",
-      short:"Repouso elétrico",
-      vector:"Sem vetor dominante",
-      description:"Entre os ciclos não há um vetor cardíaco dominante e o traçado retorna à linha isoelétrica.",
-      glow:[0,.18,.05], vector3d:[0,.10,0]
-    },
-    {
-      index:"01", min:.05, max:.12,
-      title:"Onda P — despolarização atrial",
-      category:"ATIVAÇÃO ATRIAL",
-      short:"Onda P",
-      vector:"Átrios → nó AV",
-      description:"O impulso parte do nó sinusal e se propaga pelos átrios. A onda P representa essa despolarização atrial.",
-      glow:[.05,.88,.05], vector3d:[.25,-.34,.05]
-    },
-    {
-      index:"02", min:.12, max:.18,
-      title:"Segmento PR — condução pelo nó AV",
-      category:"CONDUÇÃO ATRIOVENTRICULAR",
-      short:"Segmento PR",
-      vector:"Atraso fisiológico no nó AV",
-      description:"A condução desacelera no nó AV antes de alcançar o sistema His–Purkinje, favorecendo o enchimento ventricular.",
-      glow:[.02,.42,.02], vector3d:[.02,-.50,.02]
-    },
-    {
-      index:"03", min:.18, max:.225,
-      title:"Início do QRS — ativação septal",
-      category:"DESPOLARIZAÇÃO VENTRICULAR",
-      short:"QRS septal",
-      vector:"Septo: esquerda → direita",
-      description:"O septo interventricular é ativado primeiro. O vetor inicial se desloca da esquerda para a direita antes de a massa ventricular dominar o QRS.",
-      glow:[.04,.05,.03], vector3d:[.62,-.08,.05]
-    },
-    {
-      index:"04", min:.225, max:.29,
-      title:"QRS — ativação da massa ventricular",
-      category:"DESPOLARIZAÇÃO VENTRICULAR",
-      short:"QRS principal",
-      vector:"Base/septo → ápice e parede livre",
-      description:"A maior massa do ventrículo esquerdo domina o vetor. A ativação percorre rapidamente o miocárdio pelo sistema de Purkinje.",
-      glow:[-.20,-.45,.10], vector3d:[-.72,-.92,.12]
-    },
-    {
-      index:"05", min:.29, max:.36,
-      title:"Fim do QRS — regiões basais",
-      category:"FINAL DA DESPOLARIZAÇÃO",
-      short:"Fim do QRS",
-      vector:"Últimas forças ventriculares",
-      description:"As últimas regiões ventriculares são ativadas e o vetor líquido diminui, encerrando o complexo QRS.",
-      glow:[-.10,.28,-.10], vector3d:[-.26,.55,-.12]
-    },
-    {
-      index:"06", min:.36, max:.44,
-      title:"Segmento ST — ventrículos despolarizados",
-      category:"PLATÔ ELÉTRICO",
-      short:"Segmento ST",
-      vector:"Pouco vetor líquido",
-      description:"Grande parte do miocárdio ventricular está despolarizada ao mesmo tempo, produzindo pouco vetor líquido.",
-      glow:[0,-.20,0], vector3d:[.05,0,0]
-    },
-    {
-      index:"07", min:.44, max:.58,
-      title:"Onda T — repolarização ventricular",
-      category:"REPOLARIZAÇÃO VENTRICULAR",
-      short:"Onda T",
-      vector:"Repolarização ventricular",
-      description:"A repolarização ventricular gera a onda T. O coração e o traçado mostram juntos a recuperação elétrica.",
-      glow:[-.28,-.32,.02], vector3d:[-.50,-.60,.08]
-    },
-    {
-      index:"08", min:.58, max:.68,
-      title:"Fim da onda T — recuperação elétrica",
-      category:"RECUPERAÇÃO",
-      short:"Fim da T",
-      vector:"Vetor reduzindo",
-      description:"A repolarização se completa progressivamente e o vetor líquido retorna a valores mínimos.",
-      glow:[0,-.05,0], vector3d:[-.10,-.12,.02]
-    },
-    {
-      index:"09", min:.68, max:1.01,
-      title:"Intervalo TP — preparação para novo ciclo",
-      category:"LINHA ISOELÉTRICA",
-      short:"Intervalo TP",
-      vector:"Sem vetor dominante",
-      description:"O coração permanece eletricamente em repouso até o próximo disparo sinusal, quando o ciclo recomeça.",
-      glow:[0,.08,0], vector3d:[0,0,0]
-    }
+  const material = new THREE.LineBasicMaterial({
+    color: new THREE.Color(lead.color),
+    transparent: true,
+    opacity: 0.78
+  });
+
+  const group = new THREE.Group();
+  const line = new THREE.Line(geometry, material);
+  group.add(line);
+
+  const labelAnchor = new THREE.Object3D();
+  labelAnchor.position.copy(end.clone().multiplyScalar(1.08));
+  const label = makeTextLabel(lead.short, "heart-axis-label", lead.color);
+  labelAnchor.add(label);
+  group.add(labelAnchor);
+
+  group.userData.lead = lead;
+  parent.add(group);
+  return group;
+}
+
+function updateAxisVisibility() {
+  if (!axisRoot || !extraAxisRoot) return;
+
+  axisRoot.children.forEach(function (child) {
+    if (!child.userData || !child.userData.lead) return;
+    const lead = child.userData.lead;
+    child.visible =
+      LAB_STATE.axisMode === "all" ||
+      LAB_STATE.axisMode === lead.plane;
+  });
+
+  extraAxisRoot.children.forEach(function (child) {
+    if (!child.userData || !child.userData.lead) return;
+    const lead = child.userData.lead;
+    const groupAllowed =
+      (lead.group === "posterior" && LAB_STATE.posteriorLeads) ||
+      (lead.group === "right" && LAB_STATE.rightLeads);
+    const planeAllowed =
+      LAB_STATE.axisMode === "all" ||
+      LAB_STATE.axisMode === lead.plane;
+    child.visible = groupAllowed && planeAllowed;
+  });
+}
+
+function buildConductionPath() {
+  conductionRoot.clear();
+
+  const points = [
+    new THREE.Vector3(-0.44, 0.70, 0.70),
+    new THREE.Vector3(-0.28, 0.35, 0.75),
+    new THREE.Vector3(-0.10, 0.05, 0.74),
+    new THREE.Vector3(0.02, -0.18, 0.73),
+    new THREE.Vector3(-0.30, -0.58, 0.72),
+    new THREE.Vector3(0.28, -0.72, 0.68)
   ];
 
-  const GUIDED = [
-    ["0","Ritmo e frequência","Regularidade, relação P–QRS e frequência.",.03],
-    ["1","Onda P","Morfologia e sequência da ativação atrial.",.08],
-    ["2","Intervalo PR","Tempo de condução atrioventricular.",.15],
-    ["3","QRS septal","Vetor inicial de ativação do septo.",.20],
-    ["4","QRS principal","Massa ventricular dominante.",.25],
-    ["5","Eixo elétrico","Relacione o vetor com I, II, aVF e demais derivações.",.28],
-    ["6","Segmento ST","Compare o ST com a linha isoelétrica.",.39],
-    ["7","Onda T","Observe a repolarização ventricular.",.50],
-    ["8","QT / QTc","Despolarização + repolarização ventriculares.",.57],
-    ["9","Revisão global","Releia o traçado completo sistematicamente.",.73]
+  const curve = new THREE.CatmullRomCurve3(points);
+  const tube = new THREE.TubeGeometry(curve, 70, 0.016, 6, false);
+  const material = new THREE.MeshBasicMaterial({
+    color: 0xf8c94f,
+    transparent: true,
+    opacity: 0.78
+  });
+  const mesh = new THREE.Mesh(tube, material);
+  conductionRoot.add(mesh);
+
+  const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xffffb5 });
+  signalDot = new THREE.Mesh(new THREE.SphereGeometry(0.045, 14, 14), dotMaterial);
+  conductionRoot.add(signalDot);
+  conductionRoot.userData.curve = curve;
+
+  const saAnchor = new THREE.Object3D();
+  saAnchor.position.copy(points[0]);
+  const saLabel = makeTextLabel("SA", "heart-label");
+  saAnchor.add(saLabel);
+  conductionRoot.add(saAnchor);
+
+  const avAnchor = new THREE.Object3D();
+  avAnchor.position.copy(points[1]);
+  const avLabel = makeTextLabel("AV", "heart-label");
+  avAnchor.add(avLabel);
+  conductionRoot.add(avAnchor);
+
+  vectorArrow = new THREE.ArrowHelper(
+    new THREE.Vector3(1, -0.2, 0.1).normalize(),
+    new THREE.Vector3(0, 0, 0.9),
+    0.82,
+    0xffffff,
+    0.16,
+    0.09
+  );
+  conductionRoot.add(vectorArrow);
+}
+
+function vectorForPhase(index) {
+  const vectors = [
+    new THREE.Vector3(0.1, 0.1, 0.2),
+    new THREE.Vector3(0.2, -0.4, 0.1),
+    new THREE.Vector3(0.0, -0.55, 0.05),
+    new THREE.Vector3(0.2, -0.45, 0.1),
+    new THREE.Vector3(0.75, -0.12, 0.15),
+    new THREE.Vector3(-0.5, -0.78, 0.10),
+    new THREE.Vector3(-0.25, 0.55, -0.08),
+    new THREE.Vector3(0.05, 0.0, 0.0),
+    new THREE.Vector3(-0.5, -0.55, 0.05),
+    new THREE.Vector3(0.05, 0.05, 0.0)
   ];
+  return vectors[index] || vectors[0];
+}
 
-  const PATTERNS = [
-    {
-      id:"sinus", name:"Ritmo sinusal", caption:"Referência didática",
-      description:"P antes de cada QRS, intervalos regulares e progressão precordial preservada no modelo didático.",
-      bpm:72, tags:["P presente","QRS estreito","Regular"]
-    },
-    {
-      id:"brady", name:"Bradicardia sinusal", caption:"Frequência reduzida",
-      description:"Mantém a sequência sinusal, porém com maior intervalo entre os ciclos cardíacos.",
-      bpm:48, tags:["P presente","FC baixa","Regular"]
-    },
-    {
-      id:"tachy", name:"Taquicardia sinusal", caption:"Frequência elevada",
-      description:"Ritmo sinusal com ciclos mais próximos entre si e menor intervalo diastólico.",
-      bpm:118, tags:["P presente","FC alta","Regular"]
-    },
-    {
-      id:"af", name:"Fibrilação atrial", caption:"Ritmo irregular",
-      description:"Modelo visual com ausência de P organizada e irregularidade entre os complexos QRS.",
-      bpm:96, tags:["Sem P organizada","RR irregular","Fibrilação"]
-    },
-    {
-      id:"av1", name:"BAV de 1º grau", caption:"PR prolongado",
-      description:"Cada onda P conduz ao QRS, porém o intervalo PR está prolongado no modelo.",
-      bpm:68, tags:["PR prolongado","1:1","QRS após P"]
-    },
-    {
-      id:"rbbb", name:"Bloqueio de ramo D", caption:"QRS alargado",
-      description:"Atraso didático da ativação ventricular direita, com QRS mais largo e componente terminal em V1.",
-      bpm:72, tags:["QRS largo","V1 terminal","Condução"]
-    },
-    {
-      id:"stemi", name:"Elevação do ST", caption:"Alteração de ST",
-      description:"Padrão educacional simplificado de elevação do ST em derivações anteriores para treinamento visual.",
-      bpm:78, tags:["ST elevado","V2–V4","Padrão didático"]
-    },
-    {
-      id:"hyperk", name:"Hipercalemia", caption:"T apiculada",
-      description:"Modelo com ondas T mais altas e estreitas, usado para reconhecer alterações de repolarização associadas ao potássio.",
-      bpm:70, tags:["T apiculada","Repolarização","Eletrólitos"]
+function updateHeartElectricalState() {
+  if (!conductionRoot) return;
+
+  const phase = PHASES[LAB_STATE.phaseIndex];
+  const curve = conductionRoot.userData.curve;
+  if (curve && signalDot) {
+    const point = curve.getPointAt(clamp(phase.progress * 1.45, 0, 1));
+    signalDot.position.copy(point);
+  }
+
+  if (vectorArrow) {
+    const vector = vectorForPhase(LAB_STATE.phaseIndex);
+    if (vector.lengthSq() < 0.02) {
+      vectorArrow.visible = false;
+    } else {
+      vectorArrow.visible = true;
+      vectorArrow.setDirection(vector.clone().normalize());
+      vectorArrow.setLength(0.82 + vector.length() * 0.22, 0.16, 0.09);
     }
-  ];
-
-  const ELECTRODES = {
-    RA:"Eletrodo do membro superior direito. Participa da construção das derivações do plano frontal.",
-    LA:"Eletrodo do membro superior esquerdo. Participa de I, III e das derivações aumentadas.",
-    RL:"Eletrodo de referência/terra no membro inferior direito.",
-    LL:"Eletrodo do membro inferior esquerdo. Participa de II, III e aVF.",
-    V1:"4º espaço intercostal direito, junto ao esterno. Observa principalmente septo e ventrículo direito.",
-    V2:"4º espaço intercostal esquerdo, junto ao esterno. Explora a região septal.",
-    V3:"Posicionado entre V2 e V4. Participa da zona de transição precordial.",
-    V4:"5º espaço intercostal na linha hemiclavicular esquerda. Parede anterior.",
-    V5:"Mesmo nível horizontal de V4, linha axilar anterior. Parede lateral.",
-    V6:"Mesmo nível de V4/V5, linha axilar média. Parede lateral.",
-    V7:"Extensão posterior no mesmo nível horizontal de V6, linha axilar posterior.",
-    V8:"Extensão posterior no mesmo nível de V6, em direção à região escapular.",
-    V9:"Extensão posterior mais medial no mesmo plano horizontal.",
-    V3R:"Posição direita espelhada de V3.",
-    V4R:"Derivação direita importante para observar o ventrículo direito.",
-    V5R:"Extensão lateral direita da sequência precordial.",
-    V6R:"Extensão direita em linha axilar média."
-  };
-
-  const state = {
-    running:false,
-    phase:.20,
-    lastFrame:performance.now(),
-    yaw:-.35,
-    pitch:.12,
-    zoom:1,
-    sectioned:false,
-    pattern:"sinus",
-    selected:new Set(LEADS.map(function (lead) { return lead.id; })),
-    dragging:false,
-    dragX:0,
-    dragY:0
-  };
-
-  function clamp(value,min,max) {
-    return Math.min(Math.max(value,min),max);
   }
+}
 
-  function wrap(value) {
-    value=value%1;
-    return value<0 ? value+1 : value;
-  }
-
-  function currentPattern() {
-    return PATTERNS.find(function (item) {
-      return item.id===state.pattern;
-    }) || PATTERNS[0];
-  }
-
-  function phaseInfo(value) {
-    const p=wrap(value);
-    return PHASES.find(function (item) {
-      return p>=item.min && p<item.max;
-    }) || PHASES[0];
-  }
-
-  function canvasSize(canvas,forcedCssHeight) {
-    const dpr=Math.min(window.devicePixelRatio||1,2);
-    const rect=canvas.getBoundingClientRect();
-    const cssWidth=Math.max(1,rect.width);
-    const cssHeight=Math.max(1,forcedCssHeight||rect.height||360);
-    const width=Math.round(cssWidth*dpr);
-    const height=Math.round(cssHeight*dpr);
-
-    if(canvas.width!==width || canvas.height!==height) {
-      canvas.width=width;
-      canvas.height=height;
-    }
-
-    return {dpr:dpr,width:width,height:height,cssWidth:cssWidth,cssHeight:cssHeight};
-  }
-
-  function rotate(point) {
-    let x=point[0], y=point[1], z=point[2];
-
-    const cy=Math.cos(state.yaw);
-    const sy=Math.sin(state.yaw);
-    const x1=x*cy-z*sy;
-    const z1=x*sy+z*cy;
-    x=x1; z=z1;
-
-    const cp=Math.cos(state.pitch);
-    const sp=Math.sin(state.pitch);
-    const y1=y*cp-z*sp;
-    const z2=y*sp+z*cp;
-
-    return [x,y1,z2];
-  }
-
-  function project(point,size,scale) {
-    const p=rotate(point);
-    const perspective=4.2/(4.2+p[2]);
-
-    return {
-      x:size.cssWidth*.5+p[0]*scale*perspective,
-      y:size.cssHeight*.49-p[1]*scale*perspective,
-      z:p[2],
-      rx:p[0],
-      ry:p[1],
-      rz:p[2]
-    };
-  }
-
-  function heartMesh() {
-    const rows=25;
-    const cols=36;
-    const vertices=[];
-    const faces=[];
-
-    for(let i=0;i<=rows;i+=1) {
-      const t=i/rows;
-      const theta=Math.PI*t;
-      const radial=Math.pow(Math.sin(theta),.73);
-      const y=1.08-2.42*t;
-
-      for(let j=0;j<=cols;j+=1) {
-        const phi=Math.PI*2*j/cols;
-        const front=1+.12*Math.cos(phi-.35);
-        const lateral=1+.08*Math.cos(2*phi)*(1-t);
-        const taper=.98-.18*t;
-        let x=.95*radial*front*lateral*Math.cos(phi)*taper-.08;
-        let z=.76*radial*(1+.06*Math.sin(phi))*Math.sin(phi)*taper+.04;
-
-        if(t<.23) {
-          x+=.08*Math.sin(2*phi)*(.23-t)/.23;
+function setupHeartControls() {
+  const fullscreen = byId("heartFullscreen");
+  if (fullscreen) {
+    fullscreen.addEventListener("click", async function () {
+      const host = byId("heart3dHost");
+      if (!host) return;
+      try {
+        if (!document.fullscreenElement) {
+          await host.requestFullscreen();
+        } else {
+          await document.exitFullscreen();
         }
-
-        vertices.push([x,y,z]);
+      } catch (error) {
+        console.warn(error);
       }
-    }
-
-    for(let i=0;i<rows;i+=1) {
-      for(let j=0;j<cols;j+=1) {
-        const a=i*(cols+1)+j;
-        const b=a+1;
-        const c=a+(cols+1);
-        const d=c+1;
-        faces.push([a,c,b],[b,c,d]);
-      }
-    }
-
-    return {vertices:vertices,faces:faces};
-  }
-
-  function ellipsoid(cx,cy,cz,rx,ry,rz,rows,cols) {
-    const vertices=[];
-    const faces=[];
-
-    for(let i=0;i<=rows;i+=1) {
-      const theta=Math.PI*i/rows;
-      const st=Math.sin(theta);
-
-      for(let j=0;j<=cols;j+=1) {
-        const phi=Math.PI*2*j/cols;
-        vertices.push([
-          cx+rx*st*Math.cos(phi),
-          cy+ry*Math.cos(theta),
-          cz+rz*st*Math.sin(phi)
-        ]);
-      }
-    }
-
-    for(let i=0;i<rows;i+=1) {
-      for(let j=0;j<cols;j+=1) {
-        const a=i*(cols+1)+j;
-        const b=a+1;
-        const c=a+(cols+1);
-        const d=c+1;
-        faces.push([a,c,b],[b,c,d]);
-      }
-    }
-
-    return {vertices:vertices,faces:faces};
-  }
-
-  const meshes = {
-    ventricle:heartMesh(),
-    leftAtrium:ellipsoid(-.48,.92,.03,.47,.39,.39,12,18),
-    rightAtrium:ellipsoid(.44,.88,-.03,.43,.37,.37,12,18),
-    inner:ellipsoid(-.12,-.18,.02,.48,.75,.38,12,18)
-  };
-
-  function shade(base,light) {
-    return "rgb("+
-      clamp(Math.round(base[0]*light),0,255)+","+
-      clamp(Math.round(base[1]*light),0,255)+","+
-      clamp(Math.round(base[2]*light),0,255)+")";
-  }
-
-  function drawMesh(ctx,mesh,size,base,alpha,cut) {
-    const scale=120*state.zoom;
-    const projected=mesh.vertices.map(function (point) {
-      return project(point,size,scale);
     });
 
-    const triangles=[];
-
-    mesh.faces.forEach(function (face) {
-      const a=projected[face[0]];
-      const b=projected[face[1]];
-      const c=projected[face[2]];
-      const avgX=(a.rx+b.rx+c.rx)/3;
-
-      if(cut && avgX>.10) {
-        return;
-      }
-
-      const ux=b.rx-a.rx, uy=b.ry-a.ry, uz=b.rz-a.rz;
-      const vx=c.rx-a.rx, vy=c.ry-a.ry, vz=c.rz-a.rz;
-      const nx=uy*vz-uz*vy;
-      const ny=uz*vx-ux*vz;
-      const nz=ux*vy-uy*vx;
-      const len=Math.sqrt(nx*nx+ny*ny+nz*nz)||1;
-      const dot=(nx*-.35+ny*.68+nz*-.45)/len;
-      const light=clamp(.58+.31*dot+.08*((a.rz+b.rz+c.rz)/3+1)/2,.37,1.13);
-
-      triangles.push({
-        a:a,b:b,c:c,
-        z:(a.z+b.z+c.z)/3,
-        fill:shade(base,light)
-      });
-    });
-
-    triangles.sort(function (one,two) {
-      return two.z-one.z;
-    });
-
-    ctx.save();
-    ctx.globalAlpha=alpha;
-
-    triangles.forEach(function (tri) {
-      ctx.beginPath();
-      ctx.moveTo(tri.a.x,tri.a.y);
-      ctx.lineTo(tri.b.x,tri.b.y);
-      ctx.lineTo(tri.c.x,tri.c.y);
-      ctx.closePath();
-      ctx.fillStyle=tri.fill;
-      ctx.fill();
-    });
-
-    ctx.restore();
-  }
-
-  function drawVessel(ctx,size,from,to,width,color) {
-    const scale=120*state.zoom;
-    const a=project(from,size,scale);
-    const b=project(to,size,scale);
-
-    ctx.save();
-    ctx.lineCap="round";
-    ctx.strokeStyle=color;
-    ctx.lineWidth=width*state.zoom;
-    ctx.beginPath();
-    ctx.moveTo(a.x,a.y);
-    ctx.lineTo(b.x,b.y);
-    ctx.stroke();
-
-    ctx.strokeStyle="rgba(255,255,255,.12)";
-    ctx.lineWidth=Math.max(1,width*.13);
-    ctx.beginPath();
-    ctx.moveTo(a.x-width*.12,a.y);
-    ctx.lineTo(b.x-width*.12,b.y);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawRing(ctx,size,plane,color,labels) {
-    const scale=120*state.zoom;
-    const pts=[];
-
-    for(let i=0;i<=90;i+=1) {
-      const a=Math.PI*2*i/90;
-      const point=plane==="frontal"
-        ? [2.04*Math.cos(a),2.04*Math.sin(a),0]
-        : [2.08*Math.cos(a),0,2.08*Math.sin(a)];
-
-      pts.push(project(point,size,scale));
-    }
-
-    ctx.save();
-    ctx.strokeStyle=color;
-    ctx.lineWidth=1;
-    ctx.setLineDash([5,6]);
-    ctx.beginPath();
-    pts.forEach(function (p,index) {
-      if(index===0) ctx.moveTo(p.x,p.y);
-      else ctx.lineTo(p.x,p.y);
-    });
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    labels.forEach(function (item) {
-      const point=plane==="frontal"
-        ? [2.22*Math.cos(item.angle),2.22*Math.sin(item.angle),0]
-        : [2.24*Math.cos(item.angle),0,2.24*Math.sin(item.angle)];
-
-      const p=project(point,size,scale);
-      ctx.fillStyle=item.color||color;
-      ctx.font="700 8px system-ui, sans-serif";
-      ctx.textAlign="center";
-      ctx.textBaseline="middle";
-      ctx.fillText(item.label,p.x,p.y);
-    });
-
-    ctx.restore();
-  }
-
-  function drawArrow(ctx,size,vector) {
-    const scale=120*state.zoom;
-    const a=project([0,-.02,0],size,scale);
-    const b=project(vector,size,scale);
-    const angle=Math.atan2(b.y-a.y,b.x-a.x);
-
-    ctx.save();
-    ctx.strokeStyle="#facc15";
-    ctx.fillStyle="#facc15";
-    ctx.lineWidth=2;
-    ctx.shadowColor="rgba(250,204,21,.55)";
-    ctx.shadowBlur=8;
-    ctx.beginPath();
-    ctx.moveTo(a.x,a.y);
-    ctx.lineTo(b.x,b.y);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(b.x,b.y);
-    ctx.lineTo(b.x-8*Math.cos(angle-Math.PI/6),b.y-8*Math.sin(angle-Math.PI/6));
-    ctx.lineTo(b.x-8*Math.cos(angle+Math.PI/6),b.y-8*Math.sin(angle+Math.PI/6));
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawActivation(ctx,size,point) {
-    const p=project(point,size,120*state.zoom);
-    const pulse=18+4*Math.sin(performance.now()/150);
-    const gradient=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,pulse);
-
-    gradient.addColorStop(0,"rgba(255,247,165,.95)");
-    gradient.addColorStop(.25,"rgba(250,204,21,.65)");
-    gradient.addColorStop(1,"rgba(250,204,21,0)");
-
-    ctx.save();
-    ctx.fillStyle=gradient;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,pulse,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.fillStyle="#fff2a1";
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,3,0,Math.PI*2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawHeart() {
-    const canvas=get("ecgHeartCanvas");
-
-    if(!canvas || root.hidden) {
-      return;
-    }
-
-    const size=canvasSize(canvas);
-    const ctx=canvas.getContext("2d");
-    const info=phaseInfo(state.phase);
-
-    ctx.clearRect(0,0,size.width,size.height);
-    ctx.save();
-    ctx.scale(size.dpr,size.dpr);
-
-    drawRing(ctx,size,"frontal","rgba(96,165,250,.42)",[
-      {label:"I",angle:0},
-      {label:"aVL",angle:-.72},
-      {label:"II",angle:-1.08},
-      {label:"aVF",angle:-1.55},
-      {label:"III",angle:-2.10},
-      {label:"aVR",angle:2.52}
-    ]);
-
-    drawRing(ctx,size,"horizontal","rgba(192,132,252,.40)",[
-      {label:"V1",angle:2.65},
-      {label:"V2",angle:2.25},
-      {label:"V3",angle:1.82},
-      {label:"V4",angle:1.38},
-      {label:"V5",angle:.88},
-      {label:"V6",angle:.40},
-      {label:"V7",angle:.08,color:"#c084fc"},
-      {label:"V8",angle:-.25,color:"#c084fc"},
-      {label:"V9",angle:-.55,color:"#c084fc"},
-      {label:"V4R",angle:-2.35,color:"#fb7185"}
-    ]);
-
-    if(state.sectioned) {
-      drawMesh(ctx,meshes.inner,size,[92,22,31],.95,false);
-    }
-
-    drawMesh(ctx,meshes.ventricle,size,[174,39,49],1,state.sectioned);
-    drawMesh(ctx,meshes.leftAtrium,size,[194,52,61],.98,state.sectioned);
-    drawMesh(ctx,meshes.rightAtrium,size,[148,30,42],.98,state.sectioned);
-
-    drawVessel(ctx,size,[-.33,1.05,.02],[-.36,1.90,.02],17,"#a22d3a");
-    drawVessel(ctx,size,[.15,1.05,-.04],[.12,1.82,-.04],13,"#7f2231");
-    drawVessel(ctx,size,[.05,1.12,.10],[.72,1.62,.18],11,"#713042");
-    drawVessel(ctx,size,[.40,1.05,-.05],[.82,1.44,-.38],9,"#66303f");
-
-    drawActivation(ctx,size,info.glow);
-    drawArrow(ctx,size,info.vector3d);
-
-    ctx.restore();
-  }
-
-  function gaussian(x,center,width,amplitude) {
-    const d=(x-center)/width;
-    return amplitude*Math.exp(-d*d);
-  }
-
-  function noise(value) {
-    return Math.sin(value*93.731+17.17)*.5+
-      Math.sin(value*37.19)*.25;
-  }
-
-  function wave(cycle,lead,rowSeed) {
-    const pattern=currentPattern();
-    const pol=lead.polarity;
-    const amp=lead.scale;
-    let value=0;
-    let qrs=.225;
-
-    if(pattern.id==="av1") {
-      qrs=.285;
-    }
-
-    if(pattern.id!=="af") {
-      value+=gaussian(cycle,.09,.032,.18*amp*(pol<0?-.65:1));
-    }
-    else {
-      value+=.035*noise(cycle*35+rowSeed);
-      value+=.020*Math.sin(cycle*Math.PI*16+rowSeed);
-    }
-
-    const qWidth=pattern.id==="rbbb"?.022:.012;
-    const rWidth=pattern.id==="rbbb"?.026:.014;
-    const sWidth=pattern.id==="rbbb"?.030:.016;
-
-    value+=gaussian(cycle,qrs-.024,qWidth,-.20*amp);
-    value+=gaussian(cycle,qrs,rWidth,1.08*amp*pol);
-    value+=gaussian(cycle,qrs+.025,sWidth,-.42*amp*(pol>=0?1:-.65));
-
-    if(pattern.id==="rbbb" && lead.id==="V1") {
-      value+=gaussian(cycle,qrs+.062,.022,.68*amp);
-    }
-
-    if(pattern.id==="stemi" && ["V2","V3","V4"].indexOf(lead.id)!==-1) {
-      value+=gaussian(cycle,.35,.075,.20);
-      value+=gaussian(cycle,.41,.06,.12);
-    }
-
-    let tAmp=.34*amp*(pol<-.5?-.6:1);
-    let tWidth=.070;
-
-    if(pattern.id==="hyperk") {
-      tAmp=.72*amp;
-      tWidth=.038;
-    }
-
-    value+=gaussian(cycle,.50,tWidth,tAmp);
-
-    return value;
-  }
-
-  function drawTraceGrid(ctx,size,rowHeight) {
-    const step=8*size.dpr;
-
-    ctx.save();
-    ctx.lineWidth=1;
-
-    for(let x=0;x<=size.width;x+=step) {
-      const major=Math.round(x/step)%5===0;
-      ctx.strokeStyle=major?"rgba(54,145,86,.16)":"rgba(54,145,86,.06)";
-      ctx.beginPath();
-      ctx.moveTo(x,0);
-      ctx.lineTo(x,size.height);
-      ctx.stroke();
-    }
-
-    for(let y=0;y<=size.height;y+=step) {
-      const major=Math.round(y/step)%5===0;
-      ctx.strokeStyle=major?"rgba(54,145,86,.16)":"rgba(54,145,86,.06)";
-      ctx.beginPath();
-      ctx.moveTo(0,y);
-      ctx.lineTo(size.width,y);
-      ctx.stroke();
-    }
-
-    for(let y=rowHeight;y<size.height;y+=rowHeight) {
-      ctx.strokeStyle="rgba(255,255,255,.045)";
-      ctx.beginPath();
-      ctx.moveTo(0,y);
-      ctx.lineTo(size.width,y);
-      ctx.stroke();
-    }
-
-    ctx.restore();
-  }
-
-  function drawTrace() {
-    const canvas=get("ecgTutorCanvas");
-
-    if(!canvas || root.hidden) {
-      return;
-    }
-
-    const selected=LEADS.filter(function (lead) {
-      return state.selected.has(lead.id);
-    });
-
-    const rowCss=36;
-    const cssHeight=Math.max(320,selected.length*rowCss);
-    canvas.style.height=cssHeight+"px";
-
-    const size=canvasSize(canvas,cssHeight);
-    const ctx=canvas.getContext("2d");
-    const rowHeight=rowCss*size.dpr;
-
-    ctx.clearRect(0,0,size.width,size.height);
-    ctx.fillStyle="#030605";
-    ctx.fillRect(0,0,size.width,size.height);
-
-    drawTraceGrid(ctx,size,rowHeight);
-
-    selected.forEach(function (lead,row) {
-      const center=row*rowHeight+rowHeight*.53;
-      const pad=40*size.dpr;
-      const usable=size.width-pad-7*size.dpr;
-
-      ctx.save();
-      ctx.fillStyle=lead.group==="right"?"#fb7185":
-        lead.group==="posterior"?"#c084fc":"#72e596";
-      ctx.font=(7*size.dpr)+"px system-ui,sans-serif";
-      ctx.textBaseline="middle";
-      ctx.fillText(lead.id,9*size.dpr,center);
-
-      ctx.beginPath();
-      const points=Math.max(360,Math.floor(usable/(2*size.dpr)));
-
-      for(let i=0;i<points;i+=1) {
-        const normalized=i/(points-1);
-        const cycles=2.7;
-        let cycle=wrap(normalized*cycles+state.phase);
-
-        if(currentPattern().id==="af") {
-          cycle=wrap(cycle+.014*Math.sin(normalized*21+row*.7));
-        }
-
-        const value=wave(cycle,lead,row);
-        const x=pad+normalized*usable;
-        const y=center-value*rowHeight*.34;
-
-        if(i===0) ctx.moveTo(x,y);
-        else ctx.lineTo(x,y);
-      }
-
-      ctx.strokeStyle=lead.group==="posterior"?"#bd91ed":
-        lead.group==="right"?"#ef8496":"#56df80";
-      ctx.lineWidth=1.2*size.dpr;
-      ctx.shadowColor="rgba(72,232,121,.16)";
-      ctx.shadowBlur=2.5*size.dpr;
-      ctx.stroke();
-      ctx.restore();
-    });
-
-    const markerX=40*size.dpr+
-      wrap(state.phase)*(size.width-47*size.dpr);
-
-    ctx.save();
-    ctx.strokeStyle="rgba(250,204,21,.40)";
-    ctx.lineWidth=1*size.dpr;
-    ctx.setLineDash([4*size.dpr,5*size.dpr]);
-    ctx.beginPath();
-    ctx.moveTo(markerX,0);
-    ctx.lineTo(markerX,size.height);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function syncUI() {
-    const info=phaseInfo(state.phase);
-    const percent=Math.round(wrap(state.phase)*100);
-    const pattern=currentPattern();
-
-    get("ecgHeartPhase").textContent=info.short;
-    get("ecgHeartVector").textContent=info.vector;
-    get("ecgPhaseIndex").textContent=info.index;
-    get("ecgPhaseCategory").textContent=info.category;
-    get("ecgPhaseTitle").textContent=info.title;
-    get("ecgPhaseDescription").textContent=info.description;
-    get("ecgProgressBar").style.width=percent+"%";
-    get("ecgProgressText").textContent=percent+"%";
-    get("ecgTutorBpm").textContent=pattern.bpm;
-
-    get("ecgPlayIcon").textContent=state.running?"Ⅱ":"▶";
-    get("ecgPlayText").textContent=state.running?"Pausar":"Iniciar loop";
-    get("ecgPlayPause").classList.toggle("playing",state.running);
-    get("ecgSectionToggle").classList.toggle("active",state.sectioned);
-
-    get("ecgTutorStatus").textContent=state.running?"AO VIVO":"PAUSADO";
-    const status=get("ecgTutorStatus").parentElement;
-    status.classList.toggle("is-running",state.running);
-  }
-
-  function renderLeads() {
-    get("ecgLeadSelector").innerHTML=LEADS.map(function (lead) {
-      const active=state.selected.has(lead.id);
-      const special=lead.group==="posterior" || lead.group==="right";
-
-      return '<button type="button" class="ecg3d-lead-pill'+
-        (active?" active":"")+
-        (special?" special":"")+
-        '" data-ecg-lead="'+lead.id+'">'+lead.id+"</button>";
-    }).join("");
-
-    root.querySelectorAll("[data-ecg-lead]").forEach(function (button) {
-      button.addEventListener("click",function () {
-        const id=button.dataset.ecgLead;
-
-        if(state.selected.has(id)) {
-          if(state.selected.size>1) {
-            state.selected.delete(id);
-          }
-        }
-        else {
-          state.selected.add(id);
-        }
-
-        renderLeads();
-        drawTrace();
-      });
-    });
-  }
-
-  function renderGuided() {
-    get("ecgGuidedSteps").innerHTML=GUIDED.map(function (step) {
-      return '<button type="button" class="ecg3d-guided-step" data-ecg-phase="'+step[3]+'">'+
-        "<span>ETAPA "+step[0]+"</span>"+
-        "<strong>"+step[1]+"</strong>"+
-        "<small>"+step[2]+"</small>"+
-        "</button>";
-    }).join("");
-
-    root.querySelectorAll("[data-ecg-phase]").forEach(function (button) {
-      button.addEventListener("click",function () {
-        state.running=false;
-        state.phase=Number(button.dataset.ecgPhase);
-
-        root.querySelectorAll("[data-ecg-phase]").forEach(function (item) {
-          item.classList.toggle("active",item===button);
-        });
-
-        syncUI();
-        drawHeart();
-        drawTrace();
-
-        root.scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
-      });
-    });
-  }
-
-  function renderPatterns() {
-    get("ecgPatternSelector").innerHTML=PATTERNS.map(function (pattern) {
-      return '<button type="button" class="ecg3d-pattern-button'+
-        (pattern.id===state.pattern?" active":"")+
-        '" data-ecg-pattern="'+pattern.id+'">'+
-        "<strong>"+pattern.name+"</strong>"+
-        "<span>"+pattern.caption+"</span>"+
-        "</button>";
-    }).join("");
-
-    root.querySelectorAll("[data-ecg-pattern]").forEach(function (button) {
-      button.addEventListener("click",function () {
-        state.pattern=button.dataset.ecgPattern;
-        renderPatterns();
-        renderPatternDetail();
-        syncUI();
-        drawTrace();
-      });
-    });
-  }
-
-  function renderPatternDetail() {
-    const pattern=currentPattern();
-
-    get("ecgPatternName").textContent=pattern.name;
-    get("ecgPatternDescription").textContent=pattern.description;
-    get("ecgPatternTags").innerHTML=pattern.tags.map(function (tag) {
-      return "<span>"+tag+"</span>";
-    }).join("");
-  }
-
-  function setView(view) {
-    if(view==="front") {
-      state.yaw=0;
-      state.pitch=0;
-      state.zoom=1;
-    }
-    else if(view==="horizontal") {
-      state.yaw=-.05;
-      state.pitch=-1.18;
-      state.zoom=1;
-    }
-    else {
-      state.yaw=-.35;
-      state.pitch=.12;
-      state.zoom=1;
-    }
-
-    root.querySelectorAll("[data-ecg-view]").forEach(function (button) {
-      button.classList.toggle("active",button.dataset.ecgView===view);
-    });
-
-    drawHeart();
-  }
-
-  function bindHeart() {
-    const canvas=get("ecgHeartCanvas");
-
-    canvas.addEventListener("pointerdown",function (event) {
-      state.dragging=true;
-      state.dragX=event.clientX;
-      state.dragY=event.clientY;
-      canvas.setPointerCapture(event.pointerId);
-    });
-
-    canvas.addEventListener("pointermove",function (event) {
-      if(!state.dragging) return;
-
-      const dx=event.clientX-state.dragX;
-      const dy=event.clientY-state.dragY;
-      state.dragX=event.clientX;
-      state.dragY=event.clientY;
-      state.yaw+=dx*.008;
-      state.pitch=clamp(state.pitch+dy*.008,-1.45,1.45);
-
-      root.querySelectorAll("[data-ecg-view]").forEach(function (button) {
-        button.classList.toggle("active",button.dataset.ecgView==="free");
-      });
-
-      drawHeart();
-    });
-
-    function end(event) {
-      state.dragging=false;
-      if(canvas.hasPointerCapture && canvas.hasPointerCapture(event.pointerId)) {
-        canvas.releasePointerCapture(event.pointerId);
-      }
-    }
-
-    canvas.addEventListener("pointerup",end);
-    canvas.addEventListener("pointercancel",end);
-
-    canvas.addEventListener("wheel",function (event) {
+    fullscreen.addEventListener("contextmenu", function (event) {
       event.preventDefault();
-      state.zoom=clamp(state.zoom-event.deltaY*.0007,.76,1.34);
-      drawHeart();
-    },{passive:false});
-
-    root.querySelectorAll("[data-ecg-view]").forEach(function (button) {
-      button.addEventListener("click",function () {
-        setView(button.dataset.ecgView);
-      });
-    });
-
-    get("ecgSectionToggle").addEventListener("click",function () {
-      state.sectioned=!state.sectioned;
-      syncUI();
-      drawHeart();
-    });
-
-    get("ecgHeartReset").addEventListener("click",function () {
-      state.sectioned=false;
-      setView("free");
-      syncUI();
+      cutawayEnabled = !cutawayEnabled;
+      applyCutaway();
     });
   }
 
-  function bindTransport() {
-    get("ecgPlayPause").addEventListener("click",function () {
-      state.running=!state.running;
-      state.lastFrame=performance.now();
-      syncUI();
+  all("[data-axis-mode]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      LAB_STATE.axisMode = button.dataset.axisMode;
+      all("[data-axis-mode]").forEach(function (item) {
+        item.classList.toggle("active", item === button);
+      });
+      updateAxisVisibility();
     });
+  });
 
-    get("ecgPrevPhase").addEventListener("click",function () {
-      state.running=false;
-      state.phase=wrap(state.phase-.05);
-      syncUI();
-      drawHeart();
-      drawTrace();
-    });
-
-    get("ecgNextPhase").addEventListener("click",function () {
-      state.running=false;
-      state.phase=wrap(state.phase+.05);
-      syncUI();
-      drawHeart();
-      drawTrace();
-    });
-
-    get("ecgCoreLeads").addEventListener("click",function () {
-      state.selected=new Set(Array.from(CORE));
-      renderLeads();
-      drawTrace();
-    });
-
-    get("ecgAllLeads").addEventListener("click",function () {
-      state.selected=new Set(LEADS.map(function (lead) {
-        return lead.id;
-      }));
-      renderLeads();
-      drawTrace();
+  const posterior = byId("posteriorLeads");
+  if (posterior) {
+    posterior.addEventListener("change", function () {
+      LAB_STATE.posteriorLeads = posterior.checked;
+      updateAxisVisibility();
     });
   }
 
-  function bindLearning() {
-    root.querySelectorAll("[data-ecg-learn]").forEach(function (button) {
-      button.addEventListener("click",function () {
-        const target=button.dataset.ecgLearn;
-
-        root.querySelectorAll("[data-ecg-learn]").forEach(function (item) {
-          item.classList.toggle("active",item===button);
-        });
-
-        root.querySelectorAll(".ecg3d-learn-panel").forEach(function (panel) {
-          panel.classList.toggle("active",panel.id==="ecgLearn-"+target);
-        });
-      });
+  const right = byId("rightLeads");
+  if (right) {
+    right.addEventListener("change", function () {
+      LAB_STATE.rightLeads = right.checked;
+      updateAxisVisibility();
     });
+  }
+}
 
-    root.querySelectorAll(".ecg-electrode").forEach(function (dot) {
-      dot.addEventListener("click",function () {
-        root.querySelectorAll(".ecg-electrode").forEach(function (item) {
-          item.classList.toggle("active",item===dot);
-        });
+function resizeThree() {
+  const host = byId("heart3dHost");
+  if (!host || !renderer || !camera || !labelRenderer) return;
+  const width = Math.max(1, host.clientWidth);
+  const height = Math.max(1, host.clientHeight);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height, false);
+  labelRenderer.setSize(width, height);
+}
 
-        const id=dot.dataset.electrode;
-        const box=get("ecgElectrodeFocus");
-        box.querySelector("strong").textContent=id;
-        box.querySelector("p").textContent=ELECTRODES[id]||"Posição didática selecionada.";
+let threeClock = new THREE.Clock();
+
+function animateThree() {
+  animationHandle = requestAnimationFrame(animateThree);
+  if (!renderer || !scene || !camera) return;
+
+  const delta = threeClock.getDelta();
+  if (heartRoot && heartRoot.userData.mixer && LAB_STATE.phasePlaying) {
+    heartRoot.userData.mixer.update(delta * 0.45);
+  }
+
+  if (controls) controls.update();
+  renderer.render(scene, camera);
+  if (labelRenderer) labelRenderer.render(scene, camera);
+}
+
+/* =========================================================
+   SIMULATOR / ECG MATRIX
+========================================================= */
+
+function setupSimulatorControls() {
+  const previous = byId("phasePrevious");
+  const next = byId("phaseNext");
+  const play = byId("phasePlay");
+  const slider = byId("phaseSlider");
+  const speed = byId("phaseSpeed");
+
+  if (previous) previous.addEventListener("click", function () {
+    setPhase(LAB_STATE.phaseIndex - 1);
+  });
+
+  if (next) next.addEventListener("click", function () {
+    setPhase(LAB_STATE.phaseIndex + 1);
+  });
+
+  if (play) play.addEventListener("click", function () {
+    LAB_STATE.phasePlaying = !LAB_STATE.phasePlaying;
+    play.textContent = LAB_STATE.phasePlaying ? "Ⅱ Pausar" : "▶ Contínuo";
+    if (LAB_STATE.phasePlaying) startPhaseLoop();
+    else stopPhaseLoop();
+  });
+
+  if (slider) slider.addEventListener("input", function () {
+    setPhase(Number(slider.value));
+  });
+
+  if (speed) speed.addEventListener("change", function () {
+    if (LAB_STATE.phasePlaying) startPhaseLoop();
+  });
+
+  all("[data-qrs-step]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const qrs = Number(button.dataset.qrsStep);
+      LAB_STATE.qrsStep = qrs;
+      all("[data-qrs-step]").forEach(function (item) {
+        item.classList.toggle("active", item === button);
       });
+      setPhase(QRS_MOMENTS[qrs]);
+    });
+  });
+
+  const paperSpeed = byId("paperSpeedSimulator");
+  const paperGain = byId("paperGainSimulator");
+
+  if (paperSpeed) paperSpeed.addEventListener("change", drawEcgMatrix);
+  if (paperGain) paperGain.addEventListener("change", drawEcgMatrix);
+}
+
+function startPhaseLoop() {
+  stopPhaseLoop();
+  const speed = Number((byId("phaseSpeed") || {}).value || 0.25);
+  const delay = Math.max(180, 1000 / speed);
+  LAB_STATE.phaseTimer = window.setInterval(function () {
+    setPhase((LAB_STATE.phaseIndex + 1) % PHASES.length);
+  }, delay);
+}
+
+function stopPhaseLoop() {
+  if (LAB_STATE.phaseTimer) {
+    clearInterval(LAB_STATE.phaseTimer);
+    LAB_STATE.phaseTimer = null;
+  }
+}
+
+function setPhase(index) {
+  LAB_STATE.phaseIndex = (index + PHASES.length) % PHASES.length;
+  const phase = PHASES[LAB_STATE.phaseIndex];
+
+  if (byId("phaseCounter")) byId("phaseCounter").textContent = (LAB_STATE.phaseIndex + 1) + "/10";
+  if (byId("phaseSlider")) byId("phaseSlider").value = String(LAB_STATE.phaseIndex);
+  if (byId("heartPhaseBadge")) byId("heartPhaseBadge").textContent = phase.badge;
+  if (byId("simExplanationStep")) byId("simExplanationStep").textContent = phase.step;
+  if (byId("simExplanationTitle")) byId("simExplanationTitle").textContent = phase.title;
+  if (byId("simExplanationText")) byId("simExplanationText").textContent = phase.text;
+
+  if (LAB_STATE.phaseIndex >= 4 && LAB_STATE.phaseIndex <= 6) {
+    LAB_STATE.qrsStep = LAB_STATE.phaseIndex - 4;
+    all("[data-qrs-step]").forEach(function (button) {
+      button.classList.toggle("active", Number(button.dataset.qrsStep) === LAB_STATE.qrsStep);
     });
   }
 
-  function animation(now) {
-    const delta=Math.min(80,Math.max(0,now-state.lastFrame));
-    state.lastFrame=now;
+  updateHeartElectricalState();
+  drawEcgMatrix();
+}
 
-    if(!root.hidden) {
-      if(state.running) {
-        state.phase=wrap(
-          state.phase+
-          delta*currentPattern().bpm/60000
-        );
-        syncUI();
-      }
+function fitCanvas(canvas, cssHeight) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const width = Math.max(1, canvas.clientWidth);
+  const height = Math.max(1, cssHeight || canvas.clientHeight || 300);
+  const pixelWidth = Math.round(width * dpr);
+  const pixelHeight = Math.round(height * dpr);
 
-      drawHeart();
-      drawTrace();
+  if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+    canvas.width = pixelWidth;
+    canvas.height = pixelHeight;
+  }
+
+  return {
+    ctx: canvas.getContext("2d"),
+    dpr: dpr,
+    width: width,
+    height: height,
+    pixelWidth: pixelWidth,
+    pixelHeight: pixelHeight
+  };
+}
+
+function drawPaperGrid(ctx, width, height, dpr, dark) {
+  const small = 8 * dpr;
+  ctx.save();
+
+  if (dark) {
+    ctx.fillStyle = "#0b1621";
+    ctx.fillRect(0, 0, width, height);
+  } else {
+    ctx.fillStyle = "#fffaf7";
+    ctx.fillRect(0, 0, width, height);
+  }
+
+  for (let x = 0; x <= width; x += small) {
+    const major = Math.round(x / small) % 5 === 0;
+    ctx.strokeStyle = dark
+      ? (major ? "rgba(93, 123, 151, .32)" : "rgba(93, 123, 151, .12)")
+      : (major ? "rgba(239, 68, 68, .34)" : "rgba(239, 68, 68, .13)");
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+  }
+
+  for (let y = 0; y <= height; y += small) {
+    const major = Math.round(y / small) % 5 === 0;
+    ctx.strokeStyle = dark
+      ? (major ? "rgba(93, 123, 151, .32)" : "rgba(93, 123, 151, .12)")
+      : (major ? "rgba(239, 68, 68, .34)" : "rgba(239, 68, 68, .13)");
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function gaussian(x, center, width, amplitude) {
+  const d = (x - center) / width;
+  return amplitude * Math.exp(-d * d);
+}
+
+function leadWave(phase, lead) {
+  let polarity = 1;
+  let scale = 1;
+
+  const config = {
+    DI: [1, .88],
+    DII: [1, 1.0],
+    DIII: [1, .62],
+    aVR: [-1, .86],
+    aVL: [1, .35],
+    aVF: [1, .78]
+  }[lead] || [1, 1];
+
+  polarity = config[0];
+  scale = config[1];
+
+  let value = 0;
+  value += gaussian(phase, .12, .026, .13 * polarity * scale);
+  value += gaussian(phase, .235, .012, -.18 * polarity * scale);
+  value += gaussian(phase, .255, .014, 1.12 * polarity * scale);
+  value += gaussian(phase, .278, .016, -.34 * polarity * scale);
+  value += gaussian(phase, .52, .065, .30 * polarity * scale);
+  return value;
+}
+
+function drawLeadTrace(ctx, rect, lead, activeProgress, activeColor, dpr) {
+  const baseline = rect.y + rect.h * .52;
+  const amplitude = rect.h * .30;
+
+  ctx.save();
+
+  ctx.fillStyle = "#3f3f46";
+  ctx.font = (8 * dpr) + "px system-ui, sans-serif";
+  ctx.textBaseline = "top";
+  ctx.fillText(lead, rect.x + 7 * dpr, rect.y + 6 * dpr);
+
+  if (lead === "DII") {
+    ctx.fillStyle = "rgba(34, 211, 238, .11)";
+    ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+  }
+
+  const points = Math.max(220, Math.floor(rect.w / (2 * dpr)));
+  ctx.beginPath();
+
+  for (let i = 0; i < points; i += 1) {
+    const n = i / (points - 1);
+    const phase = n;
+    const value = leadWave(phase, lead);
+    const x = rect.x + n * rect.w;
+    const y = baseline - value * amplitude;
+
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = activeColor;
+  ctx.lineWidth = 1.45 * dpr;
+  ctx.stroke();
+
+  const cursorX = rect.x + clamp(activeProgress, 0, 1) * rect.w;
+  ctx.strokeStyle = "rgba(255, 82, 92, .72)";
+  ctx.lineWidth = 1 * dpr;
+  ctx.setLineDash([4 * dpr, 4 * dpr]);
+  ctx.beginPath();
+  ctx.moveTo(cursorX, rect.y + 8 * dpr);
+  ctx.lineTo(cursorX, rect.y + rect.h - 8 * dpr);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  const cursorY = baseline - leadWave(activeProgress, lead) * amplitude;
+  ctx.fillStyle = "#ff5b65";
+  ctx.beginPath();
+  ctx.arc(cursorX, cursorY, 3 * dpr, 0, TAU);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawEcgMatrix() {
+  const canvas = byId("ecgMatrixCanvas");
+  if (!canvas || LAB_STATE.section !== "simulator") return;
+
+  const hostHeight = canvas.parentElement ? canvas.parentElement.clientHeight : 650;
+  const size = fitCanvas(canvas, Math.max(540, hostHeight));
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+
+  ctx.clearRect(0, 0, size.pixelWidth, size.pixelHeight);
+  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, false);
+
+  const cols = 2;
+  const rows = 3;
+  const cellW = size.pixelWidth / cols;
+  const cellH = size.pixelHeight / rows;
+
+  ctx.save();
+  ctx.strokeStyle = "rgba(183, 68, 68, .55)";
+  ctx.lineWidth = 1.2 * dpr;
+  ctx.beginPath();
+  ctx.moveTo(cellW, 0);
+  ctx.lineTo(cellW, size.pixelHeight);
+  ctx.stroke();
+  ctx.restore();
+
+  const leads = ["DI", "aVR", "DII", "aVL", "DIII", "aVF"];
+  const progress = PHASES[LAB_STATE.phaseIndex].progress;
+
+  leads.forEach(function (lead, index) {
+    const row = Math.floor(index / 2);
+    const col = index % 2;
+    const rect = {
+      x: col * cellW,
+      y: row * cellH,
+      w: cellW,
+      h: cellH
+    };
+    drawLeadTrace(
+      ctx,
+      rect,
+      lead,
+      progress,
+      lead === "DII" ? "#00a8c8" : "#191919",
+      dpr
+    );
+  });
+}
+
+/* =========================================================
+   FUNDAMENTALS
+========================================================= */
+
+const ELECTRODE_POINTS = {
+  limb: [
+    { id: "RA", label: "BD", x: 78, y: 136, title: "Braço direito", text: "Eletrodo do braço direito. Participa das derivações periféricas." },
+    { id: "LA", label: "BE", x: 382, y: 136, title: "Braço esquerdo", text: "Eletrodo do braço esquerdo. Atua como polo positivo em DI e aVL." },
+    { id: "RL", label: "PD", x: 214, y: 304, title: "Perna direita", text: "Eletrodo de referência/terra no ECG padrão." },
+    { id: "LL", label: "PE", x: 246, y: 304, title: "Perna esquerda", text: "Eletrodo da perna esquerda. Participa de DII, DIII e aVF." }
+  ],
+  chest: [
+    { id: "V1", label: "V1", x: 220, y: 154, title: "V1", text: "4º espaço intercostal direito junto ao esterno." },
+    { id: "V2", label: "V2", x: 240, y: 154, title: "V2", text: "4º espaço intercostal esquerdo junto ao esterno." },
+    { id: "V3", label: "V3", x: 259, y: 174, title: "V3", text: "Posicionado entre V2 e V4." },
+    { id: "V4", label: "V4", x: 278, y: 195, title: "V4", text: "5º espaço intercostal, linha hemiclavicular esquerda." },
+    { id: "V5", label: "V5", x: 311, y: 188, title: "V5", text: "Mesmo nível de V4, linha axilar anterior." },
+    { id: "V6", label: "V6", x: 342, y: 181, title: "V6", text: "Mesmo nível de V4/V5, linha axilar média." }
+  ],
+  posterior: [
+    { id: "V7", label: "V7", x: 363, y: 191, title: "V7", text: "Extensão posterior no mesmo plano horizontal de V6." },
+    { id: "V8", label: "V8", x: 373, y: 211, title: "V8", text: "Derivação posterior mais medial." },
+    { id: "V9", label: "V9", x: 377, y: 231, title: "V9", text: "Extensão posterior adicional para avaliação da parede posterior." }
+  ],
+  right: [
+    { id: "V3R", label: "V3R", x: 199, y: 174, title: "V3R", text: "Posição direita espelhada de V3." },
+    { id: "V4R", label: "V4R", x: 182, y: 195, title: "V4R", text: "Derivação precordial direita usada para observar o ventrículo direito." },
+    { id: "VD", label: "VD", x: 166, y: 188, title: "VD", text: "Referência didática ao território precordial direito." }
+  ]
+};
+
+const ELECTRODE_LEADS = {
+  limb: [
+    ["DI", "Derivação I"],
+    ["DII", "Derivação II"],
+    ["DIII", "Derivação III"],
+    ["aVR", "braço direito"],
+    ["aVL", "braço esquerdo"],
+    ["aVF", "pé esquerdo"]
+  ],
+  chest: [["V1", "septal"], ["V2", "septal"], ["V3", "transição"], ["V4", "anterior"], ["V5", "lateral"], ["V6", "lateral"]],
+  posterior: [["V7", "posterior"], ["V8", "posterior"], ["V9", "posterior"]],
+  right: [["V3R", "direita"], ["V4R", "direita"], ["VD", "território direito"]]
+};
+
+function setupElectrodeLearning() {
+  all("[data-electrode-group]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      all("[data-electrode-group]").forEach(function (item) {
+        item.classList.toggle("active", item === button);
+      });
+      renderElectrodeGroup(button.dataset.electrodeGroup);
+    });
+  });
+  renderElectrodeGroup("limb");
+}
+
+function renderElectrodeGroup(group) {
+  const holder = byId("electrodeDots");
+  const leadButtons = byId("electrodeLeadButtons");
+  if (!holder || !leadButtons) return;
+
+  holder.innerHTML = "";
+  (ELECTRODE_POINTS[group] || []).forEach(function (point) {
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.setAttribute("class", "electrode-dot-svg");
+    g.setAttribute("data-electrode-id", point.id);
+    g.setAttribute("transform", "translate(" + point.x + " " + point.y + ")");
+
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("r", point.label.length > 2 ? "14" : "11");
+    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    text.textContent = point.label;
+
+    g.appendChild(circle);
+    g.appendChild(text);
+    holder.appendChild(g);
+
+    g.addEventListener("click", function () {
+      focusElectrode(group, point.id);
+    });
+  });
+
+  leadButtons.innerHTML = "";
+  (ELECTRODE_LEADS[group] || []).forEach(function (lead, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.innerHTML = "<strong>" + lead[0] + "</strong><br><small>" + lead[1] + "</small>";
+    if (index === 0) button.classList.add("active");
+    button.addEventListener("click", function () {
+      all("#electrodeLeadButtons button").forEach(function (item) {
+        item.classList.toggle("active", item === button);
+      });
+      const point = (ELECTRODE_POINTS[group] || [])[Math.min(index, (ELECTRODE_POINTS[group] || []).length - 1)];
+      if (point) updateElectrodeFocus(lead[0], point);
+    });
+    leadButtons.appendChild(button);
+  });
+
+  const first = (ELECTRODE_POINTS[group] || [])[0];
+  if (first) {
+    focusElectrode(group, first.id);
+  }
+}
+
+function focusElectrode(group, id) {
+  all(".electrode-dot-svg").forEach(function (item) {
+    item.classList.toggle("active", item.getAttribute("data-electrode-id") === id);
+  });
+  const point = (ELECTRODE_POINTS[group] || []).find(function (item) {
+    return item.id === id;
+  });
+  if (point) updateElectrodeFocus(id, point);
+}
+
+function updateElectrodeFocus(id, point) {
+  const box = byId("electrodeFocusCard");
+  if (!box) return;
+  const title = box.querySelector("h4");
+  const paragraph = box.querySelector("p");
+  if (title) title.textContent = id + " · " + point.title;
+  if (paragraph) paragraph.textContent = point.text;
+}
+
+function setupAxisLearning() {
+  const holder = byId("axisLeadButtons");
+  if (!holder) return;
+
+  ["DI", "DII", "DIII", "aVR", "aVL", "aVF"].forEach(function (lead, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = lead;
+    if (index === 0) button.classList.add("active");
+    button.addEventListener("click", function () {
+      all("#axisLeadButtons button").forEach(function (item) {
+        item.classList.toggle("active", item === button);
+      });
+      updateAxisLead(lead);
+    });
+    holder.appendChild(button);
+  });
+
+  const slider = byId("axisSlider");
+  if (slider) {
+    slider.addEventListener("input", function () {
+      updateAxisValue();
+      const active = holder.querySelector("button.active");
+      if (active) updateAxisLead(active.textContent);
+    });
+  }
+
+  updateAxisValue();
+  updateAxisLead("DI");
+}
+
+function updateAxisValue() {
+  const slider = byId("axisSlider");
+  const output = byId("axisValue");
+  if (!slider || !output) return;
+  const value = Number(slider.value);
+  const status = value >= -30 && value <= 90 ? "normal" : "desviado";
+  output.innerHTML = (value >= 0 ? "+" : "") + value + "° <small>" + status + "</small>";
+}
+
+function updateAxisLead(lead) {
+  const slider = byId("axisSlider");
+  const voltage = byId("axisLeadVoltage");
+  const explanation = byId("axisLeadExplanation");
+  if (!slider || !voltage || !explanation) return;
+
+  const axis = Number(slider.value) * Math.PI / 180;
+  const leadAngle = (LEAD_DIRECTIONS[lead] || 0) * Math.PI / 180;
+  const projected = Math.cos(axis - leadAngle);
+  voltage.textContent = (projected >= 0 ? "+" : "") + projected.toFixed(2).replace(".", ",") + " mV";
+  explanation.textContent = "Eixo de " + lead + ": " + (LEAD_DIRECTIONS[lead] || 0) + "°. A projeção é proporcional ao cosseno da diferença angular; quanto mais paralelo, maior a deflexão.";
+}
+
+function setupPaperLearning() {
+  const speed = byId("paperSpeedSlider");
+  const gain = byId("paperGainSlider");
+
+  function update() {
+    LAB_STATE.paperSpeed = Number(speed ? speed.value : 25);
+    LAB_STATE.paperGain = Number(gain ? gain.value : 10);
+
+    if (byId("paperSpeedValue")) byId("paperSpeedValue").textContent = String(LAB_STATE.paperSpeed).replace(".5", ",5") + " mm/s";
+    if (byId("paperGainValue")) byId("paperGainValue").textContent = LAB_STATE.paperGain + " mm/mV";
+
+    const smallTime = 1 / LAB_STATE.paperSpeed;
+    const bigTime = 5 / LAB_STATE.paperSpeed;
+    const smallMv = 1 / LAB_STATE.paperGain;
+    const bigMv = 5 / LAB_STATE.paperGain;
+
+    if (byId("smallSquareTime")) byId("smallSquareTime").textContent = smallTime.toFixed(3).replace("0.040", "0,04").replace(".", ",") + " s";
+    if (byId("bigSquareTime")) byId("bigSquareTime").textContent = bigTime.toFixed(2).replace(".", ",") + " s · quadrado grande";
+    if (byId("smallSquareMv")) byId("smallSquareMv").textContent = smallMv.toFixed(2).replace("0.10", "0,1").replace(".", ",") + " mV";
+    if (byId("bigSquareMv")) byId("bigSquareMv").textContent = bigMv.toFixed(2).replace("0.50", "0,5").replace(".", ",") + " mV · quadrado grande";
+
+    drawCalibration();
+    drawRegularFrequency();
+    drawIrregularFrequency();
+  }
+
+  if (speed) speed.addEventListener("input", update);
+  if (gain) gain.addEventListener("input", update);
+  update();
+}
+
+function drawCalibration() {
+  const canvas = byId("calibrationCanvas");
+  if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
+
+  const size = fitCanvas(canvas, 250);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+
+  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
+
+  const baseline = size.pixelHeight * .55;
+  ctx.save();
+  ctx.beginPath();
+
+  const beats = 3;
+  const points = 700;
+  for (let i = 0; i < points; i += 1) {
+    const n = i / (points - 1);
+    const cycle = (n * beats) % 1;
+    const value = leadWave(cycle, "DII");
+    const x = n * size.pixelWidth;
+    const y = baseline - value * size.pixelHeight * .20;
+
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = "#dbeafe";
+  ctx.lineWidth = 1.5 * dpr;
+  ctx.stroke();
+
+  const xMeasure = size.pixelWidth * .19;
+  const yTop = baseline - size.pixelHeight * .20;
+  ctx.strokeStyle = "#67e8f9";
+  ctx.lineWidth = 1.3 * dpr;
+  ctx.setLineDash([4 * dpr, 3 * dpr]);
+  ctx.beginPath();
+  ctx.moveTo(xMeasure, baseline);
+  ctx.lineTo(xMeasure, yTop);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = "#a5f3fc";
+  ctx.font = "700 " + (11 * dpr) + "px system-ui";
+  ctx.fillText("1 mV", xMeasure + 8 * dpr, yTop + 18 * dpr);
+
+  const x1 = size.pixelWidth * .18;
+  const x2 = size.pixelWidth * .36;
+  const y = baseline + 40 * dpr;
+  ctx.beginPath();
+  ctx.moveTo(x1, y);
+  ctx.lineTo(x2, y);
+  ctx.moveTo(x1, y - 6 * dpr);
+  ctx.lineTo(x1, y + 6 * dpr);
+  ctx.moveTo(x2, y - 6 * dpr);
+  ctx.lineTo(x2, y + 6 * dpr);
+  ctx.stroke();
+
+  ctx.fillText((5 / LAB_STATE.paperSpeed).toFixed(2).replace(".", ",") + " s", x1 + 24 * dpr, y + 19 * dpr);
+  ctx.restore();
+}
+
+function drawRegularFrequency() {
+  const canvas = byId("regularFrequencyCanvas");
+  if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
+  const size = fitCanvas(canvas, 180);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
+
+  const baseline = size.pixelHeight * .60;
+  const rrSquares = 5;
+  const bpm = Math.round(300 / rrSquares);
+  if (byId("regularBpm")) byId("regularBpm").textContent = bpm + " bpm";
+
+  const beatPositions = [0.13, 0.38, 0.63, 0.88];
+  ctx.save();
+  ctx.strokeStyle = "#dbeafe";
+  ctx.lineWidth = 1.4 * dpr;
+  ctx.beginPath();
+  ctx.moveTo(0, baseline);
+
+  const points = 600;
+  for (let i = 0; i < points; i += 1) {
+    const n = i / (points - 1);
+    let value = 0;
+    beatPositions.forEach(function (pos) {
+      const local = n - pos;
+      value += gaussian(local, -0.045, .015, .10);
+      value += gaussian(local, 0, .008, .90);
+      value += gaussian(local, .055, .030, .16);
+    });
+    const x = n * size.pixelWidth;
+    const y = baseline - value * size.pixelHeight * .33;
+    ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  const x1 = beatPositions[1] * size.pixelWidth;
+  const x2 = beatPositions[2] * size.pixelWidth;
+  ctx.strokeStyle = "#5eead4";
+  ctx.lineWidth = 1.2 * dpr;
+  ctx.beginPath();
+  ctx.moveTo(x1, 22 * dpr);
+  ctx.lineTo(x2, 22 * dpr);
+  ctx.moveTo(x1, 18 * dpr);
+  ctx.lineTo(x1, 27 * dpr);
+  ctx.moveTo(x2, 18 * dpr);
+  ctx.lineTo(x2, 27 * dpr);
+  ctx.stroke();
+  ctx.fillStyle = "#99f6e4";
+  ctx.font = "700 " + (8 * dpr) + "px system-ui";
+  ctx.fillText("5 quadrados grandes", x1 + 6 * dpr, 14 * dpr);
+  ctx.restore();
+}
+
+function drawIrregularFrequency() {
+  const canvas = byId("irregularFrequencyCanvas");
+  if (!canvas || LAB_STATE.section !== "fundamentals" || LAB_STATE.fundamentalPart !== "paper") return;
+  const size = fitCanvas(canvas, 180);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
+
+  const baseline = size.pixelHeight * .60;
+  const beats = [0.08, 0.19, 0.35, 0.47, 0.63, 0.75, 0.86, 0.97];
+
+  ctx.save();
+  ctx.strokeStyle = "#dbeafe";
+  ctx.lineWidth = 1.4 * dpr;
+  ctx.beginPath();
+
+  const points = 650;
+  for (let i = 0; i < points; i += 1) {
+    const n = i / (points - 1);
+    let value = 0;
+    beats.forEach(function (pos) {
+      const local = n - pos;
+      value += gaussian(local, -0.027, .010, .07);
+      value += gaussian(local, 0, .006, .68);
+      value += gaussian(local, .036, .023, .12);
+    });
+
+    const x = n * size.pixelWidth;
+    const y = baseline - value * size.pixelHeight * .32;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  ctx.fillStyle = "#5eead4";
+  beats.forEach(function (pos) {
+    ctx.beginPath();
+    ctx.arc(pos * size.pixelWidth, 22 * dpr, 3 * dpr, 0, TAU);
+    ctx.fill();
+  });
+
+  ctx.font = "700 " + (8 * dpr) + "px system-ui";
+  ctx.fillText("6 segundos · conte 8 QRS", size.pixelWidth * .35, 16 * dpr);
+  ctx.restore();
+}
+
+function drawFundamentals() {
+  if (LAB_STATE.fundamentalPart === "paper") {
+    drawCalibration();
+    drawRegularFrequency();
+    drawIrregularFrequency();
+  }
+}
+
+/* =========================================================
+   GUIDED READING
+========================================================= */
+
+function setupGuidedReading() {
+  renderGuidedStepList();
+
+  const previous = byId("guidedPrevious");
+  const next = byId("guidedNext");
+  if (previous) previous.addEventListener("click", function () {
+    setGuidedStep(LAB_STATE.guidedStep - 1);
+  });
+  if (next) next.addEventListener("click", function () {
+    setGuidedStep(LAB_STATE.guidedStep + 1);
+  });
+
+  renderGuidedDots();
+  setGuidedStep(0);
+}
+
+function renderGuidedStepList() {
+  const holder = byId("guidedStepList");
+  if (!holder) return;
+  holder.innerHTML = "";
+
+  GUIDED_STEPS.forEach(function (step, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "guided-step-button";
+    button.innerHTML =
+      "<span>" + (index + 1) + "</span>" +
+      "<div><strong>" + step.title + "</strong><small>" + step.subtitle + "</small></div>";
+    button.addEventListener("click", function () {
+      setGuidedStep(index);
+    });
+    holder.appendChild(button);
+  });
+}
+
+function renderGuidedDots() {
+  const holder = byId("guidedDots");
+  if (!holder) return;
+  holder.innerHTML = "";
+  GUIDED_STEPS.forEach(function (_, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("aria-label", "Ir para etapa " + (index + 1));
+    button.addEventListener("click", function () {
+      setGuidedStep(index);
+    });
+    holder.appendChild(button);
+  });
+}
+
+function setGuidedStep(index) {
+  LAB_STATE.guidedStep = clamp(index, 0, GUIDED_STEPS.length - 1);
+  const step = GUIDED_STEPS[LAB_STATE.guidedStep];
+
+  if (byId("guidedProgress")) byId("guidedProgress").textContent = (LAB_STATE.guidedStep + 1) + " / 9";
+  if (byId("guidedStageLabel")) byId("guidedStageLabel").textContent = "ETAPA " + (LAB_STATE.guidedStep + 1) + " DE 9";
+  if (byId("guidedTitle")) byId("guidedTitle").textContent = step.title;
+  if (byId("guidedQuestion")) byId("guidedQuestion").textContent = step.question;
+  if (byId("guidedInfoText")) byId("guidedInfoText").textContent = step.info;
+
+  all(".guided-step-button").forEach(function (button, idx) {
+    button.classList.toggle("active", idx === LAB_STATE.guidedStep);
+  });
+  all("#guidedDots button").forEach(function (button, idx) {
+    button.classList.toggle("active", idx === LAB_STATE.guidedStep);
+  });
+
+  if (byId("guidedPrevious")) byId("guidedPrevious").disabled = LAB_STATE.guidedStep === 0;
+  if (byId("guidedNext")) byId("guidedNext").disabled = LAB_STATE.guidedStep === GUIDED_STEPS.length - 1;
+
+  drawGuided();
+}
+
+function drawGuided() {
+  const canvas = byId("guidedEcgCanvas");
+  if (!canvas || LAB_STATE.section !== "guided") return;
+  const size = fitCanvas(canvas, 310);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+
+  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
+
+  const baseline = size.pixelHeight * .54;
+  const beatPositions = [0.13, 0.32, 0.51, 0.70, 0.89];
+
+  ctx.save();
+  ctx.fillStyle = "#cbd5e1";
+  ctx.font = "700 " + (12 * dpr) + "px system-ui";
+  ctx.fillText("DII", 16 * dpr, 22 * dpr);
+
+  ctx.beginPath();
+  const points = 1000;
+
+  for (let i = 0; i < points; i += 1) {
+    const n = i / (points - 1);
+    let value = 0;
+    beatPositions.forEach(function (pos) {
+      const local = n - pos;
+      value += gaussian(local, -0.045, .013, .10);
+      value += gaussian(local, 0, .007, .96);
+      value += gaussian(local, .045, .026, .16);
+    });
+    const x = n * size.pixelWidth;
+    const y = baseline - value * size.pixelHeight * .32;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = "#e5eef7";
+  ctx.lineWidth = 1.6 * dpr;
+  ctx.stroke();
+
+  if (LAB_STATE.guidedStep === 0 || LAB_STATE.guidedStep === 3) {
+    beatPositions.forEach(function (pos) {
+      const px = (pos - .045) * size.pixelWidth;
+      const rx = pos * size.pixelWidth;
+
+      ctx.fillStyle = "#5eead4";
+      ctx.font = "700 " + (10 * dpr) + "px system-ui";
+      ctx.fillText("P", px - 4 * dpr, baseline - 34 * dpr);
+      ctx.fillText("R", rx - 4 * dpr, baseline - size.pixelHeight * .30);
+
+      ctx.setLineDash([3 * dpr, 3 * dpr]);
+      ctx.strokeStyle = "rgba(34,211,238,.65)";
+      ctx.beginPath();
+      ctx.moveTo(px, baseline - 28 * dpr);
+      ctx.lineTo(px, baseline + 22 * dpr);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    const x1 = (beatPositions[0] - .045) * size.pixelWidth;
+    const x2 = (beatPositions[4] - .045) * size.pixelWidth;
+    const bracketY = baseline + 72 * dpr;
+    ctx.strokeStyle = "#5eead4";
+    ctx.lineWidth = 1.3 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(x1, bracketY - 10 * dpr);
+    ctx.lineTo(x1, bracketY);
+    ctx.lineTo(x2, bracketY);
+    ctx.lineTo(x2, bracketY - 10 * dpr);
+    ctx.stroke();
+    ctx.fillStyle = "#67e8f9";
+    ctx.font = "700 " + (10 * dpr) + "px system-ui";
+    ctx.fillText("Mesma relação entre P e QRS a cada ciclo", size.pixelWidth * .34, bracketY + 20 * dpr);
+  }
+
+  if (LAB_STATE.guidedStep === 2) {
+    const x1 = beatPositions[1] * size.pixelWidth;
+    const x2 = beatPositions[2] * size.pixelWidth;
+    ctx.strokeStyle = "#f8c94f";
+    ctx.beginPath();
+    ctx.moveTo(x1, 38 * dpr);
+    ctx.lineTo(x2, 38 * dpr);
+    ctx.stroke();
+    ctx.fillStyle = "#fde68a";
+    ctx.fillText("R–R", (x1 + x2) / 2 - 12 * dpr, 28 * dpr);
+  }
+
+  if (LAB_STATE.guidedStep === 6) {
+    ctx.strokeStyle = "#ff7a84";
+    ctx.lineWidth = 2 * dpr;
+    ctx.beginPath();
+    ctx.moveTo(size.pixelWidth * .08, baseline);
+    ctx.lineTo(size.pixelWidth * .94, baseline);
+    ctx.stroke();
+    ctx.fillStyle = "#ff9da5";
+    ctx.fillText("linha isoelétrica", size.pixelWidth * .72, baseline - 8 * dpr);
+  }
+
+  ctx.restore();
+}
+
+/* =========================================================
+   PATTERNS
+========================================================= */
+
+function setupPatterns() {
+  renderPatternTopics();
+  setPattern("p-wave");
+}
+
+function renderPatternTopics() {
+  const holder = byId("patternTopicGrid");
+  if (!holder) return;
+  holder.innerHTML = "";
+
+  PATTERNS.forEach(function (pattern) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "pattern-topic";
+    button.dataset.patternId = pattern.id;
+    button.innerHTML =
+      '<span class="pattern-topic-icon">' +
+      '<svg viewBox="0 0 50 30"><path d="M1 18 L8 18 L12 14 L16 19 L21 18 L25 5 L30 26 L34 18 L42 18 L49 18"></path></svg>' +
+      "</span>" +
+      "<span><strong>" + pattern.title + "</strong><small>" + pattern.subtitle + "</small></span>" +
+      "<b>›</b>";
+    button.addEventListener("click", function () {
+      setPattern(pattern.id);
+    });
+    holder.appendChild(button);
+  });
+}
+
+function setPattern(id) {
+  LAB_STATE.patternId = id;
+  const pattern = PATTERNS.find(function (item) {
+    return item.id === id;
+  }) || PATTERNS[0];
+
+  all(".pattern-topic").forEach(function (button) {
+    button.classList.toggle("active", button.dataset.patternId === id);
+  });
+
+  if (byId("patternDetailTitle")) byId("patternDetailTitle").textContent = pattern.detailTitle;
+  if (byId("patternDetailText")) byId("patternDetailText").textContent = pattern.detailText;
+
+  const pComparison = byId("pWaveComparison");
+  const generic = byId("genericPatternComparison");
+  if (pComparison) pComparison.hidden = pattern.kind !== "p";
+  if (generic) generic.hidden = pattern.kind === "p";
+
+  if (pattern.kind === "p") {
+    drawPWaveComparisons();
+  } else {
+    if (byId("genericPatternTitle")) byId("genericPatternTitle").textContent = pattern.title;
+    if (byId("genericPatternText")) byId("genericPatternText").textContent = pattern.detailText;
+    if (byId("genericPatternTags")) {
+      byId("genericPatternTags").innerHTML = pattern.tags.map(function (tag) {
+        return "<span>" + tag + "</span>";
+      }).join("");
+    }
+    drawGenericPattern(pattern.kind);
+  }
+}
+
+function drawPatternCanvas(canvas, mode) {
+  if (!canvas) return;
+  const size = fitCanvas(canvas, 220);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
+
+  const baseline = size.pixelHeight * .62;
+  ctx.save();
+
+  function atrialComponent(n, left) {
+    const center = left ? .37 : .31;
+    const width = left ? .07 : .055;
+    const amp = left ? .26 : .34;
+    return gaussian(n, center, width, amp);
+  }
+
+  ctx.lineWidth = 1.4 * dpr;
+
+  ctx.beginPath();
+  for (let i = 0; i < 500; i += 1) {
+    const n = i / 499;
+    let value = 0;
+    if (mode === "normal") value = atrialComponent(n, false) * .72 + atrialComponent(n, true) * .62;
+    if (mode === "left") value = atrialComponent(n, false) * .52 + gaussian(n, .43, .09, .36);
+    if (mode === "right") value = gaussian(n, .31, .045, .62) + atrialComponent(n, true) * .28;
+    value += gaussian(n, .72, .010, 1.05) - gaussian(n, .69, .012, .17) - gaussian(n, .75, .014, .28);
+    const x = n * size.pixelWidth;
+    const y = baseline - value * size.pixelHeight * .42;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = "#e8eef6";
+  ctx.stroke();
+
+  const components = [
+    { color: "#38bdf8", left: false },
+    { color: "#f59e0b", left: true }
+  ];
+
+  components.forEach(function (part) {
+    ctx.beginPath();
+    for (let i = 0; i < 260; i += 1) {
+      const n = i / 259 * .55;
+      let value;
+      if (mode === "normal") value = atrialComponent(n, part.left) * (part.left ? .62 : .72);
+      else if (mode === "left") value = part.left ? gaussian(n, .43, .09, .36) : atrialComponent(n, false) * .52;
+      else value = part.left ? atrialComponent(n, true) * .28 : gaussian(n, .31, .045, .62);
+      const x = n * size.pixelWidth;
+      const y = baseline - value * size.pixelHeight * .42;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = part.color;
+    ctx.lineWidth = 1.25 * dpr;
+    ctx.stroke();
+  });
+
+  ctx.strokeStyle = "#67e8f9";
+  ctx.lineWidth = 1 * dpr;
+  ctx.beginPath();
+  ctx.moveTo(size.pixelWidth * .22, size.pixelHeight * .25);
+  ctx.lineTo(size.pixelWidth * .22, size.pixelHeight * .20);
+  ctx.lineTo(size.pixelWidth * .47, size.pixelHeight * .20);
+  ctx.lineTo(size.pixelWidth * .47, size.pixelHeight * .25);
+  ctx.stroke();
+
+  ctx.fillStyle = "#d9faff";
+  ctx.font = "700 " + (9 * dpr) + "px system-ui";
+  ctx.fillText("P", size.pixelWidth * .34, size.pixelHeight * .17);
+  ctx.restore();
+}
+
+function drawPWaveComparisons() {
+  if (LAB_STATE.section !== "patterns") return;
+  drawPatternCanvas(byId("patternCanvasNormal"), "normal");
+  drawPatternCanvas(byId("patternCanvasLeftAtrium"), "left");
+  drawPatternCanvas(byId("patternCanvasRightAtrium"), "right");
+}
+
+function genericWaveValue(n, kind, variant) {
+  let value = leadWave(n, "DII");
+
+  if (kind === "alternans") {
+    value *= variant % 2 === 0 ? .55 : 1;
+  } else if (kind === "q") {
+    value -= gaussian(n, .22, .018, .55);
+  } else if (kind === "bundle") {
+    value = gaussian(n, .12, .026, .12) - gaussian(n, .225, .018, .18) + gaussian(n, .27, .035, .75) - gaussian(n, .32, .030, .28) + gaussian(n, .55, .07, .25);
+  } else if (kind === "delta") {
+    value += gaussian(n, .205, .040, .35);
+  } else if (kind === "low") {
+    value *= .38;
+  } else if (kind === "st") {
+    value += gaussian(n, .39, .080, .20);
+  } else if (kind === "potassium") {
+    value += gaussian(n, .51, .035, .48);
+  } else if (kind === "biphasic") {
+    value += gaussian(n, .50, .040, .28) - gaussian(n, .57, .050, .25);
+  } else if (kind === "wellens") {
+    value -= gaussian(n, .53, .050, .45);
+  } else if (kind === "nodal") {
+    value -= gaussian(n, .32, .018, .12);
+  }
+
+  return value;
+}
+
+function drawGenericPattern(kind) {
+  const canvas = byId("genericPatternCanvas");
+  if (!canvas || LAB_STATE.section !== "patterns") return;
+  const size = fitCanvas(canvas, 330);
+  const ctx = size.ctx;
+  const dpr = size.dpr;
+  drawPaperGrid(ctx, size.pixelWidth, size.pixelHeight, dpr, true);
+
+  const baseline1 = size.pixelHeight * .36;
+  const baseline2 = size.pixelHeight * .72;
+  const rows = [
+    { y: baseline1, label: "Referência", color: "#cbd5e1", kind: "normal" },
+    { y: baseline2, label: "Padrão selecionado", color: "#5eead4", kind: kind }
+  ];
+
+  rows.forEach(function (row, rowIndex) {
+    ctx.save();
+    ctx.fillStyle = row.color;
+    ctx.font = "700 " + (8 * dpr) + "px system-ui";
+    ctx.fillText(row.label, 12 * dpr, row.y - 55 * dpr);
+
+    ctx.beginPath();
+    const points = 950;
+    const beats = kind === "alternans" ? 4 : 3;
+
+    for (let i = 0; i < points; i += 1) {
+      const n = i / (points - 1);
+      const cyclePosition = n * beats;
+      const cycle = cyclePosition % 1;
+      const variant = Math.floor(cyclePosition);
+      const value = row.kind === "normal"
+        ? leadWave(cycle, "DII")
+        : genericWaveValue(cycle, kind, variant);
+      const x = n * size.pixelWidth;
+      const y = row.y - value * size.pixelHeight * .16;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
     }
 
-    requestAnimationFrame(animation);
-  }
+    ctx.strokeStyle = row.color;
+    ctx.lineWidth = 1.5 * dpr;
+    ctx.stroke();
+    ctx.restore();
+  });
+}
 
-  function init() {
-    loadCurrentUser();
+function drawPatterns() {
+  const pattern = PATTERNS.find(function (item) {
+    return item.id === LAB_STATE.patternId;
+  }) || PATTERNS[0];
 
-    if (get("logoutSidebar")) {
-      get("logoutSidebar").addEventListener("click", logoutLaboratory);
-    }
+  if (pattern.kind === "p") drawPWaveComparisons();
+  else drawGenericPattern(pattern.kind);
+}
 
-    renderLeads();
-    renderGuided();
-    renderPatterns();
-    renderPatternDetail();
-    bindHeart();
-    bindTransport();
-    bindLearning();
-    syncUI();
+/* =========================================================
+   INITIALIZATION
+========================================================= */
 
-    const observer=new MutationObserver(function () {
-      if(!root.hidden) {
-        requestAnimationFrame(function () {
-          drawHeart();
-          drawTrace();
-        });
-      }
-    });
+function setupResize() {
+  let timer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      resizeThree();
+      drawEcgMatrix();
+      drawFundamentals();
+      drawGuided();
+      drawPatterns();
+    }, 80);
+  });
 
-    observer.observe(root,{attributes:true,attributeFilter:["hidden"]});
+  document.addEventListener("fullscreenchange", function () {
+    setTimeout(resizeThree, 70);
+  });
+}
 
-    let resizeTimer=null;
-    window.addEventListener("resize",function () {
-      clearTimeout(resizeTimer);
-      resizeTimer=setTimeout(function () {
-        drawHeart();
-        drawTrace();
-      },80);
-    });
+function init() {
+  loadCurrentUser();
+  if (byId("logoutSidebar")) byId("logoutSidebar").addEventListener("click", logout);
 
-    requestAnimationFrame(function (now) {
-      state.lastFrame=now;
-      animation(now);
-    });
-  }
+  setupSectionTabs();
+  setupFundamentalParts();
+  setupSimulatorControls();
+  setupElectrodeLearning();
+  setupAxisLearning();
+  setupPaperLearning();
+  setupGuidedReading();
+  setupPatterns();
+  setupResize();
+  initHeart3D();
 
-  init();
-})();
+  setPhase(4);
+  setLabSection("simulator");
+}
+
+init();
