@@ -1095,3 +1095,83 @@
 .slider-control input[type="range"]:active {
   cursor: grabbing;
 }
+
+
+/* =========================================================
+   MODOS DO LABORATÓRIO
+========================================================= */
+
+.lab-mode-nav {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.lab-mode-link {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 15px;
+  background: #0d0d0d;
+  padding: 11px 14px;
+  color: #9b9b9b;
+  text-decoration: none;
+  transition: .2s ease;
+}
+
+.lab-mode-link:hover {
+  border-color: rgba(255,255,255,.16);
+  transform: translateY(-1px);
+}
+
+.lab-mode-link.active {
+  border-color: rgba(249,115,22,.22);
+  background: linear-gradient(145deg, rgba(249,115,22,.075), rgba(255,255,255,.015));
+}
+
+.lab-mode-link .mode-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 11px;
+  background: #151515;
+  color: #cfcfcf;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.lab-mode-link.active .mode-icon {
+  border-color: rgba(249,115,22,.2);
+  color: #fb923c;
+}
+
+.lab-mode-link > span:last-child {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.lab-mode-link strong {
+  color: #e5e5e5;
+  font-size: 12px;
+}
+
+.lab-mode-link small {
+  overflow: hidden;
+  color: #555;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .lab-mode-nav {
+    grid-template-columns: 1fr;
+  }
+}
