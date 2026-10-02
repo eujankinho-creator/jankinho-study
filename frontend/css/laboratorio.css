@@ -7562,3 +7562,844 @@ and (
 
 
 /* CORTEX CARDIORENAL ANATOMY V7 END */
+
+
+/* =========================================================
+   CORTEX PHYSIO CONTROL RAIL V8
+   Compact physiology controls inspired by user's ECG simulator.
+========================================================= */
+
+.lab-view .control-sliders {
+  display:
+    block !important;
+
+  padding:
+    0 12px 12px !important;
+
+  background:
+    transparent !important;
+}
+
+
+.lab-view .control-system-intro {
+  --system-tone:
+    var(--theme-accent);
+
+  position:
+    sticky;
+
+  top:
+    0;
+
+  z-index:
+    3;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr auto;
+
+  gap:
+    2px 8px;
+
+  align-items:
+    end;
+
+  margin:
+    0 -3px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.075);
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--theme-surface-strong) 96%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--theme-surface) 98%,
+        transparent
+      )
+    );
+
+  padding:
+    10px 3px 9px;
+
+  backdrop-filter:
+    blur(12px);
+}
+
+
+.lab-view .control-system-intro--heart {
+  --system-tone:
+    #ee718f;
+}
+
+
+.lab-view .control-system-intro--lung {
+  --system-tone:
+    #86c4d8;
+}
+
+
+.lab-view .control-system-intro--kidney {
+  --system-tone:
+    #e5b84f;
+}
+
+
+.lab-view .control-system-intro--gas {
+  --system-tone:
+    #a69ce5;
+}
+
+
+.lab-view .control-system-intro--electrolyte {
+  --system-tone:
+    #8fa8e8;
+}
+
+
+.lab-view .control-system-kicker {
+  grid-column:
+    1 / -1;
+
+  position:
+    relative;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+
+  color:
+    var(--system-tone);
+
+  font-size:
+    6px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    .17em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.lab-view .control-system-kicker::before {
+  content:
+    "";
+
+  width:
+    6px;
+
+  height:
+    6px;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--system-tone);
+
+  box-shadow:
+    0 0 10px
+    color-mix(
+      in srgb,
+      var(--system-tone) 45%,
+      transparent
+    );
+}
+
+
+.lab-view .control-system-intro strong {
+  color:
+    var(--theme-text);
+
+  font-size:
+    12px;
+
+  font-weight:
+    780;
+}
+
+
+.lab-view .control-system-intro small {
+  grid-column:
+    1 / -1;
+
+  max-width:
+    95%;
+
+  color:
+    var(--theme-text-muted);
+
+  font-size:
+    7px;
+
+  line-height:
+    12px;
+}
+
+
+.lab-view .phys-control {
+  --system-tone:
+    var(--theme-accent);
+
+  position:
+    relative;
+
+  display:
+    grid;
+
+  gap:
+    8px;
+
+  margin:
+    0;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.075) !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  padding:
+    13px 1px 12px !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+.lab-view .phys-control--heart {
+  --system-tone:
+    #ee718f;
+}
+
+
+.lab-view .phys-control--lung {
+  --system-tone:
+    #86c4d8;
+}
+
+
+.lab-view .phys-control--kidney {
+  --system-tone:
+    #e5b84f;
+}
+
+
+.lab-view .phys-control--gas {
+  --system-tone:
+    #a69ce5;
+}
+
+
+.lab-view .phys-control--electrolyte {
+  --system-tone:
+    #8fa8e8;
+}
+
+
+.lab-view .phys-control:last-child {
+  border-bottom:
+    0 !important;
+}
+
+
+.lab-view .phys-control-head {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    8px;
+}
+
+
+.lab-view .phys-control-title {
+  min-width:
+    0;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+}
+
+
+.lab-view .phys-control-title strong {
+  overflow:
+    hidden;
+
+  color:
+    var(--theme-text);
+
+  font-size:
+    10px;
+
+  font-weight:
+    770;
+
+  line-height:
+    1.15;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+.lab-view .phys-control-value {
+  flex:
+    0 0 auto;
+
+  display:
+    inline-flex;
+
+  align-items:
+    baseline;
+
+  gap:
+    4px;
+
+  min-height:
+    24px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.085);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  padding:
+    4px 8px;
+
+  color:
+    #e5e9ec;
+
+  font-size:
+    9px;
+
+  font-weight:
+    780;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.025);
+}
+
+
+.lab-view .phys-control-value small {
+  color:
+    #8a949b;
+
+  font-size:
+    7px;
+
+  font-weight:
+    700;
+}
+
+
+.lab-view .phys-control
+input[type="range"] {
+  --range-progress:
+    50%;
+
+  width:
+    100%;
+
+  height:
+    17px;
+
+  margin:
+    0;
+
+  appearance:
+    none;
+
+  -webkit-appearance:
+    none;
+
+  border:
+    0;
+
+  outline:
+    0;
+
+  background:
+    transparent;
+
+  cursor:
+    pointer;
+}
+
+
+.lab-view .phys-control
+input[type="range"]::-webkit-slider-runnable-track {
+  height:
+    3px;
+
+  border:
+    0;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--system-tone)
+      0,
+      color-mix(
+        in srgb,
+        var(--system-tone) 70%,
+        white
+      )
+      var(--range-progress),
+      rgba(137,150,160,.35)
+      var(--range-progress),
+      rgba(137,150,160,.35)
+      100%
+    );
+
+  box-shadow:
+    none;
+}
+
+
+.lab-view .phys-control
+input[type="range"]::-webkit-slider-thumb {
+  width:
+    15px;
+
+  height:
+    15px;
+
+  margin-top:
+    -6px;
+
+  appearance:
+    none;
+
+  -webkit-appearance:
+    none;
+
+  border:
+    2px solid
+    #cbd1d6;
+
+  border-radius:
+    50%;
+
+  background:
+    #11161c;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(0,0,0,.72),
+    0 2px 7px
+    rgba(0,0,0,.38);
+}
+
+
+.lab-view .phys-control
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  border-color:
+    var(--system-tone);
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--system-tone) 18%,
+      transparent
+    );
+}
+
+
+.lab-view .phys-control
+input[type="range"]::-moz-range-track {
+  height:
+    3px;
+
+  border:
+    0;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(137,150,160,.35);
+}
+
+
+.lab-view .phys-control
+input[type="range"]::-moz-range-progress {
+  height:
+    3px;
+
+  border-radius:
+    999px;
+
+  background:
+    var(--system-tone);
+}
+
+
+.lab-view .phys-control
+input[type="range"]::-moz-range-thumb {
+  width:
+    12px;
+
+  height:
+    12px;
+
+  border:
+    2px solid
+    #cbd1d6;
+
+  border-radius:
+    50%;
+
+  background:
+    #11161c;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(0,0,0,.72);
+}
+
+
+.lab-view .phys-control-extremes {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  margin-top:
+    -4px;
+
+  color:
+    #69747c;
+
+  font-size:
+    5px;
+
+  font-weight:
+    760;
+
+  letter-spacing:
+    .08em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.lab-view .phys-control-help {
+  margin:
+    -1px 0 0;
+
+  color:
+    #87919a;
+
+  font-size:
+    7px;
+
+  line-height:
+    12px;
+}
+
+
+.lab-view .phys-control.is-derived {
+  opacity:
+    .70;
+}
+
+
+.lab-view .phys-control.is-derived
+input[type="range"] {
+  cursor:
+    not-allowed;
+}
+
+
+.lab-view .phys-control
+.slider-auto-label {
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--system-tone) 20%,
+      transparent
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--system-tone) 8%,
+      transparent
+    );
+
+  padding:
+    2px 5px;
+
+  color:
+    var(--system-tone);
+
+  font-size:
+    5px;
+
+  font-weight:
+    850;
+}
+
+
+.lab-view .control-tabs {
+  grid-template-columns:
+    repeat(5,minmax(0,1fr)) !important;
+
+  gap:
+    3px !important;
+
+  padding:
+    6px 7px !important;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.055);
+}
+
+
+.lab-view .control-tab {
+  position:
+    relative;
+
+  min-width:
+    0;
+
+  min-height:
+    26px !important;
+
+  height:
+    26px !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    6px !important;
+
+  background:
+    transparent !important;
+
+  padding:
+    0 4px !important;
+
+  color:
+    #737d84 !important;
+
+  font-size:
+    6px !important;
+
+  font-weight:
+    760 !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+.lab-view .control-tab.active {
+  background:
+    rgba(255,255,255,.045) !important;
+
+  color:
+    #e4e8eb !important;
+
+  box-shadow:
+    inset 0 -2px 0
+    var(--theme-accent) !important;
+}
+
+
+.lab-view .control-tab[data-category="cardio"].active {
+  box-shadow:
+    inset 0 -2px 0
+    #ee718f !important;
+}
+
+
+.lab-view .control-tab[data-category="respiratorio"].active {
+  box-shadow:
+    inset 0 -2px 0
+    #86c4d8 !important;
+}
+
+
+.lab-view .control-tab[data-category="renal"].active {
+  box-shadow:
+    inset 0 -2px 0
+    #e5b84f !important;
+}
+
+
+.lab-view .control-tab[data-category="gasometria"].active {
+  box-shadow:
+    inset 0 -2px 0
+    #a69ce5 !important;
+}
+
+
+.lab-view .control-tab[data-category="eletrolitos"].active {
+  box-shadow:
+    inset 0 -2px 0
+    #8fa8e8 !important;
+}
+
+
+@media (min-width: 1200px) {
+
+  html[data-theme]
+  body.lab-view
+  .laboratory-grid
+  > aside:first-child
+  > .lab-panel {
+    grid-template-rows:
+      36px
+      39px
+      minmax(0,1fr) !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .control-sliders {
+    overflow-y:
+      auto !important;
+
+    padding:
+      0 10px 10px !important;
+
+    scrollbar-gutter:
+      stable !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .control-system-intro {
+    padding:
+      9px 2px 8px;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .phys-control {
+    padding:
+      11px 1px 10px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .phys-control-help {
+    font-size:
+      6.5px;
+
+    line-height:
+      11px;
+  }
+
+}
+
+
+@media (
+  min-width: 1200px
+)
+and (
+  max-height: 820px
+) {
+
+  html[data-theme]
+  body.lab-view
+  .phys-control {
+    gap:
+      6px;
+
+    padding:
+      8px 1px !important;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .phys-control-help {
+    font-size:
+      6px;
+
+    line-height:
+      10px;
+  }
+
+
+  html[data-theme]
+  body.lab-view
+  .control-system-intro small {
+    display:
+      none;
+  }
+
+}
+
+
+/* CORTEX PHYSIO CONTROL RAIL V8 END */
