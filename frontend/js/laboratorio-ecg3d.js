@@ -3148,9 +3148,20 @@ async function loadGuidedQuizQuestions(force) {
   LAB_STATE.guidedQuizError = "";
   renderGuidedQuiz();
 
+  const controller =
+    typeof AbortController !== "undefined"
+      ? new AbortController()
+      : null;
+
+  const timeoutId = setTimeout(function () {
+    if (controller) controller.abort();
+  }, 8000);
+
   try {
     const response = await fetch("/api/questoes", {
-      credentials: "same-origin"
+      credentials: "same-origin",
+      cache: "no-store",
+      signal: controller ? controller.signal : undefined
     });
 
     if (response.status === 401) {
@@ -3197,14 +3208,49 @@ async function loadGuidedQuizQuestions(force) {
   catch (error) {
     console.error("Falha ao carregar questões do ECG:", error);
     LAB_STATE.guidedQuizError =
-      error && error.message
-        ? error.message
-        : "Não foi possível carregar as questões.";
+      error && error.name === "AbortError"
+        ? "O carregamento demorou mais que o esperado. Tente novamente."
+        : (
+          error && error.message
+            ? error.message
+            : "Não foi possível carregar as questões."
+        );
   }
   finally {
+    clearTimeout(timeoutId);
     LAB_STATE.guidedQuizLoading = false;
     renderGuidedQuiz();
   }
+}
+
+function setupGuidedQuizAutoload() {
+  const area = document.querySelector(".guided-quiz-area");
+  if (!area) return;
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        loadGuidedQuizQuestions();
+      });
+    }, {
+      rootMargin: "500px 0px"
+    });
+
+    observer.observe(area);
+  }
+
+  document.addEventListener("click", function (event) {
+    const target = event.target && event.target.closest
+      ? event.target.closest('[data-lab-section="guided"]')
+      : null;
+
+    if (!target) return;
+
+    setTimeout(function () {
+      loadGuidedQuizQuestions();
+    }, 0);
+  });
 }
 
 function guidedQuizCurrentQuestion() {
@@ -4301,6 +4347,7 @@ function init() {
   setupFundamentalWaveInteraction();
   setupPaperLearning();
   setupGuidedReading();
+  setupGuidedQuizAutoload();
   setupPatterns();
   setupThemeIntegration();
   setupSimulatorVisibilityLifecycle();
