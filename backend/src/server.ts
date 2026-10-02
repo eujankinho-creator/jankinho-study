@@ -638,6 +638,7 @@ async function me(
           id: true,
           nome: true,
           email: true,
+          tema: true,
           createdAt: true,
         },
       });
