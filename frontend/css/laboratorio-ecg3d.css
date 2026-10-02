@@ -3515,3 +3515,63 @@ html[data-theme="black-white"] .ecg-lab {
   background: #be123c !important;
   color: #ffffff !important;
 }
+
+
+/* Cobertura adicional dos blocos visíveis nas referências enviadas */
+[data-section-panel="fundamentals"] .fundamentals-path,
+[data-section-panel="fundamentals"] .fundamental-step,
+[data-section-panel="fundamentals"] .concept-header,
+[data-section-panel="fundamentals"] .card-heading,
+[data-section-panel="fundamentals"] .paper-learning-head,
+[data-section-panel="fundamentals"] .subcard-heading,
+[data-section-panel="fundamentals"] .axis-learning-grid,
+[data-section-panel="fundamentals"] .paper-measure-grid,
+[data-section-panel="fundamentals"] .frequency-learning-grid,
+[data-section-panel="guided"] .guided-layout,
+[data-section-panel="guided"] .guided-steps,
+[data-section-panel="guided"] .guided-steps-head,
+[data-section-panel="guided"] .guided-footer,
+[data-section-panel="patterns"] .pattern-detail-head,
+[data-section-panel="patterns"] .p-wave-comparison,
+[data-section-panel="patterns"] .pattern-topic-grid {
+  border-color: var(--theme-border) !important;
+  color: var(--theme-text) !important;
+}
+
+[data-section-panel="fundamentals"] .fundamental-step {
+  background: var(--theme-surface) !important;
+}
+
+[data-section-panel="fundamentals"] .fundamental-step.active {
+  background: var(--theme-gradient-soft) !important;
+  border-color: var(--theme-border-strong) !important;
+  box-shadow: var(--theme-glow) !important;
+}
+
+[data-section-panel="fundamentals"] .fundamental-step > span,
+[data-section-panel="guided"] .guided-step-button > span {
+  background: var(--theme-accent-soft) !important;
+  border-color: var(--theme-border-strong) !important;
+  color: var(--theme-accent-2) !important;
+}
+
+[data-section-panel="fundamentals"] .fundamental-step.active > span,
+[data-section-panel="guided"] .guided-step-button.active > span {
+  background: var(--theme-accent) !important;
+  border-color: var(--theme-accent) !important;
+  color: var(--theme-button-text) !important;
+}
+
+[data-section-panel="guided"] .guided-steps,
+[data-section-panel="guided"] .guided-main-card,
+[data-section-panel="patterns"] .pattern-detail-card {
+  background: var(--theme-surface) !important;
+}
+
+[data-section-panel="guided"] .guided-footer {
+  border-top-color: var(--theme-border) !important;
+}
+
+[data-section-panel="patterns"] .pattern-detail-head {
+  border-bottom-color: var(--theme-border) !important;
+}
