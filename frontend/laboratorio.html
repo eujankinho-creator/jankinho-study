@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-glow2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261002-ecg-height-lock3">
+  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261002-paper-visual6">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -440,9 +440,13 @@
               <div class="paper-demo">
                 <div class="subcard-heading">
                   <h4>Papel milimetrado e calibração</h4>
-                  <p>Padrão: 25 mm/s (tempo) e 10 mm/mV (amplitude).</p>
+                  <p>Altere velocidade e sensibilidade ao lado: a malha e o traçado mudam visualmente na mesma hora.</p>
                 </div>
                 <canvas id="calibrationCanvas"></canvas>
+                <div class="paper-live-explainer">
+                  <span><b>↔</b><small>Horizontal</small><strong id="paperHorizontalScale">1 mm = 0,04 s</strong></span>
+                  <span><b>↕</b><small>Vertical</small><strong id="paperVerticalScale">1 mm = 0,10 mV</strong></span>
+                </div>
               </div>
 
               <div class="paper-settings">
@@ -474,20 +478,38 @@
           <div class="frequency-learning-grid">
             <article class="lab-card frequency-card">
               <div class="card-heading">
-                <div><h3>Cálculo da frequência · ritmo regular</h3><p>Conte os quadrados grandes entre dois complexos QRS consecutivos.</p></div>
+                <div><h3>Cálculo da frequência · ritmo regular</h3><p>Manipule a distância R–R e veja a regra dos 300 acontecendo no papel.</p></div>
               </div>
               <canvas id="regularFrequencyCanvas"></canvas>
-              <div class="frequency-result"><span>Frequência cardíaca</span><strong id="regularBpm">60 bpm</strong><small>regra dos 300</small></div>
-              <p class="info-strip">ⓘ A 25 mm/s, uma forma prática de estimar FC em ritmo regular é 300 dividido pelo número de quadrados grandes entre dois R.</p>
+              <div class="frequency-manipulator" aria-label="Manipular quadrados grandes entre ondas R">
+                <button id="regularRrMinus" type="button" aria-label="Diminuir quadrados grandes">−</button>
+                <label>
+                  <span>Quadrados grandes entre R–R</span>
+                  <input id="regularRrSquaresSlider" type="range" min="2" max="8" step="1" value="5">
+                  <strong id="regularRrSquaresValue">5</strong>
+                </label>
+                <button id="regularRrPlus" type="button" aria-label="Aumentar quadrados grandes">+</button>
+              </div>
+              <div class="frequency-result"><span>Frequência cardíaca</span><strong id="regularBpm">60 bpm</strong><small id="regularFormula">300 ÷ 5 = 60</small></div>
+              <p class="info-strip">ⓘ A 25 mm/s: <strong>FC = 300 ÷ quadrados grandes entre dois R.</strong> Quanto maior o R–R, menor a frequência.</p>
             </article>
 
             <article class="lab-card frequency-card">
               <div class="card-heading">
-                <div><h3>Cálculo da frequência · ritmo irregular</h3><p>Use uma janela de tempo conhecida e conte os complexos QRS.</p></div>
+                <div><h3>Cálculo da frequência · ritmo irregular</h3><p>Escolha quantos QRS aparecem em uma janela fixa de 6 segundos.</p></div>
               </div>
               <canvas id="irregularFrequencyCanvas"></canvas>
-              <div class="frequency-result"><span>Frequência cardíaca média</span><strong>80 bpm</strong><small>8 QRS em 6 segundos × 10</small></div>
-              <p class="info-strip">ⓘ Em ritmos irregulares, contar QRS em 6 segundos e multiplicar por 10 fornece uma estimativa da frequência média.</p>
+              <div class="frequency-manipulator" aria-label="Manipular quantidade de QRS em seis segundos">
+                <button id="irregularQrsMinus" type="button" aria-label="Diminuir número de QRS">−</button>
+                <label>
+                  <span>QRS contados em 6 segundos</span>
+                  <input id="irregularQrsCountSlider" type="range" min="3" max="15" step="1" value="8">
+                  <strong id="irregularQrsCountValue">8</strong>
+                </label>
+                <button id="irregularQrsPlus" type="button" aria-label="Aumentar número de QRS">+</button>
+              </div>
+              <div class="frequency-result"><span>Frequência cardíaca média</span><strong id="irregularBpm">80 bpm</strong><small id="irregularFormula">8 QRS × 10 = 80 bpm</small></div>
+              <p class="info-strip">ⓘ Em 6 segundos, <strong>conte os QRS e multiplique por 10.</strong> O gráfico acima redesenha exatamente a quantidade selecionada.</p>
             </article>
           </div>
         </div>
