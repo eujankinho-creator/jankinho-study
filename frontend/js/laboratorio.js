@@ -1292,23 +1292,62 @@ function updateHomeostasis(
     physiologicalHours;
 
 
-  const target =
+  const baseTarget =
     chronicRenalBicarbonateTarget(
       state.values
     );
 
 
-  const reserve =
-    renalReserve(
-      state.values.creatinina
+  const currentValues =
+    physiologicalValues();
+
+
+  const currentResults =
+    calculate(
+      currentValues
     );
+
+
+  const renalSystem =
+    computeRenalSystem(
+      currentValues,
+      currentResults
+    );
+
+
+  const perfusionCapacity =
+    clamp(
+      renalSystem.perfusion,
+      .20,
+      1
+    );
+
+
+  const reserve =
+    clamp(
+      renalReserve(
+        state.values.creatinina
+      ) *
+      perfusionCapacity,
+      .08,
+      1
+    );
+
+
+  const target =
+    24 +
+    (
+      baseTarget -
+      24
+    ) *
+    perfusionCapacity;
 
 
   const tauHours =
     42 /
     Math.max(
       reserve,
-      .12
+      .08
     );
 
 
