@@ -307,8 +307,79 @@
     }
 
 
+    let remaining =
+      2550;
+
+
+    let runningSince =
+      0;
+
+
+    let finishTimer =
+      0;
+
+
+    let focusTimer =
+      0;
+
+
+    let finished =
+      false;
+
+
+    const cleanupFocusEvents =
+      function () {
+
+        window.removeEventListener(
+          "focus",
+          scheduleResume
+        );
+
+
+        window.removeEventListener(
+          "blur",
+          pauseIntro
+        );
+
+
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibility
+        );
+
+      };
+
+
     const finish =
       function () {
+
+        if (finished) {
+          return;
+        }
+
+
+        finished =
+          true;
+
+
+        window.clearTimeout(
+          finishTimer
+        );
+
+
+        window.clearTimeout(
+          focusTimer
+        );
+
+
+        cleanupFocusEvents();
+
+
+        intro.classList.add(
+          "is-running",
+          "is-exiting"
+        );
+
 
         body.classList.remove(
           "cortex-desktop-intro-pending"
@@ -320,10 +391,6 @@
         );
 
 
-        /*
-         * Revela o dashboard por baixo do fade
-         * somente quando a intro já começou a sair.
-         */
         document.documentElement
           .classList
           .remove(
@@ -350,22 +417,160 @@
       };
 
 
-    window.setTimeout(
-      function () {
+    function pauseIntro() {
 
-        intro.classList.add(
-          "is-exiting"
-        );
+      if (finished) {
+        return;
+      }
 
+
+      window.clearTimeout(
+        focusTimer
+      );
+
+
+      window.clearTimeout(
+        finishTimer
+      );
+
+
+      if (runningSince) {
+
+        remaining =
+          Math.max(
+            0,
+            remaining -
+            (
+              performance.now() -
+              runningSince
+            )
+          );
+
+
+        runningSince =
+          0;
+
+      }
+
+
+      intro.classList.remove(
+        "is-running"
+      );
+
+    }
+
+
+    function resumeIntro() {
+
+      if (
+        finished ||
+        document.hidden ||
+        !document.hasFocus()
+      ) {
+        return;
+      }
+
+
+      if (
+        remaining <=
+        0
+      ) {
 
         finish();
 
-      },
-      2550
+        return;
+      }
+
+
+      intro.classList.add(
+        "is-running"
+      );
+
+
+      runningSince =
+        performance.now();
+
+
+      finishTimer =
+        window.setTimeout(
+          finish,
+          remaining
+        );
+
+    }
+
+
+    function scheduleResume() {
+
+      if (finished) {
+        return;
+      }
+
+
+      window.clearTimeout(
+        focusTimer
+      );
+
+
+      if (
+        document.hidden ||
+        !document.hasFocus()
+      ) {
+        return;
+      }
+
+
+      /*
+       * Pequena janela de estabilidade para avisos nativos
+       * do navegador (ex.: Password Manager) tomarem foco
+       * antes da animacao realmente comecar.
+       */
+      focusTimer =
+        window.setTimeout(
+          resumeIntro,
+          220
+        );
+
+    }
+
+
+    function handleVisibility() {
+
+      if (document.hidden) {
+
+        pauseIntro();
+
+      }
+      else {
+
+        scheduleResume();
+
+      }
+
+    }
+
+
+    window.addEventListener(
+      "focus",
+      scheduleResume
     );
 
-  }
 
+    window.addEventListener(
+      "blur",
+      pauseIntro
+    );
+
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibility
+    );
+
+
+    scheduleResume();
+
+  }
 
   document.addEventListener(
     "DOMContentLoaded",
