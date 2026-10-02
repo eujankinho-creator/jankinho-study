@@ -1094,47 +1094,45 @@ body.cortex-mobile-menu-open {
 
 
 /* =========================================================
-   CORTEX LAB NEW BADGE
+   CORTEX LAB NEW GLOW
 ========================================================= */
 
 .sidebar-menu
 .menu-item[href="/laboratorio"]::after {
-  content: "NOVO";
+  content: "";
+  width: 7px;
+  height: 7px;
   margin-left: auto;
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 18px;
-  padding: 2px 6px;
-  border: 1px solid var(--theme-border-strong, rgba(255,255,255,.12));
-  border-radius: 999px;
-  background: var(--theme-accent-soft, rgba(249,115,22,.12));
-  color: var(--theme-accent-2, #fb923c);
-  font-size: 6px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: .10em;
-  text-transform: uppercase;
-  box-shadow: var(--theme-glow, none);
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: var(--theme-accent, #f97316);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--theme-accent) 10%, transparent),
+    0 0 10px color-mix(in srgb, var(--theme-accent) 68%, transparent);
+  opacity: .82;
+  animation: cortexLabGlow 2.8s ease-in-out infinite;
 }
 
 .sidebar-menu
 .menu-item[href="/laboratorio"]:hover::after,
 .sidebar-menu
 .menu-item[href="/laboratorio"].active::after {
-  border-color: var(--theme-accent, #f97316);
-  background: var(--theme-gradient-soft, var(--theme-accent-soft));
-  color: var(--theme-text, #fff);
+  opacity: 1;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--theme-accent) 14%, transparent),
+    0 0 13px color-mix(in srgb, var(--theme-accent) 78%, transparent);
 }
 
-@media (max-width: 900px) {
-  .cortex-mobile-sidebar-menu
+@keyframes cortexLabGlow {
+  0%, 100% { opacity: .58; transform: scale(.92); }
+  50% { opacity: .95; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-menu
   .menu-item[href="/laboratorio"]::after {
-    min-height: 19px;
-    padding: 2px 7px;
-    font-size: 6px;
+    animation: none;
   }
 }
 
-/* CORTEX LAB NEW BADGE END */
+/* CORTEX LAB NEW GLOW END */
