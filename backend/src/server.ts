@@ -2,6 +2,7 @@ import {
   obterConfiguracoes,
   atualizarPerfil,
   atualizarSenha,
+  atualizarTema,
 } from "./configuracoes";
 import { atenderRanking } from "./ranking";
 import { atenderDesempenho } from "./desempenho";
