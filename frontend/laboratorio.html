@@ -1,27 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Laborat&oacute;rio | Cortex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório ECG 3D | Cortex</title>
 
   <script>
     (function () {
       var theme = "dark-orange";
-
       try {
-        var saved =
-          localStorage.getItem(
-            "jankinho_theme_v1"
-          );
-
+        var saved = localStorage.getItem("jankinho_theme_v1");
         if (
           saved === "dark-orange" ||
           saved === "pink-glitter" ||
@@ -32,15 +20,9 @@
         }
       }
       catch (error) {}
-
-      document.documentElement
-        .setAttribute(
-          "data-theme",
-          theme
-        );
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
-
 
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
@@ -48,386 +30,89 @@
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/pratica-premium.css?v=20261002-fluid-final4">
-  <link
-    rel="stylesheet"
-    href="/css/sidebar-standard.css?v=20261002-fluid-final4"
-  >
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261002-ecg3d2">
 
-  <link
-    rel="stylesheet"
-    href="/css/laboratorio.css?v=20261002-layout11"
-  >
-  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261002-ecg3d1">
-
-  <script
-    src="/js/sidebar-standard.js?v=20261001-nav-core6"
-    defer
-  ></script>
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="/favicon.svg?v=cortex-white-v3"
-  >
-
-  <meta
-    name="theme-color"
-    content="#090909"
-  >
-
+  <script defer src="/js/sidebar-standard.js?v=20261001-nav-core6"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
+  <meta name="theme-color" content="#090909">
 </head>
 
-<body class="practice-view lab-view">
-
-
+<body class="practice-view lab-view ecg3d-only-view">
   <aside class="sidebar">
-
     <a href="/" class="sidebar-logo">
-
-      <div class="logo-box">
-        C
-      </div>
-
-      <div>
-        <strong>Cortex</strong><span>Study Platform</span>
-      </div>
-
+      <div class="logo-box">C</div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
     </a>
 
-
     <div class="sidebar-menu">
-
-
       <div class="menu-group">
-
-        <div class="menu-title">
-          Estudo
-        </div>
-
-        <a href="/" class="menu-item">
-          <span>&#8962;</span>
-          Dashboard
-        </a>
-
-        <a href="/questoes" class="menu-item">
-          <span>&#9635;</span>
-          Quest&otilde;es
-        </a>
-
-        <a href="/flashcards" class="menu-item">
-          <span>&#9648;</span>
-          Flashcards
-        </a>
-        <a href="/farmacos" class="menu-item">
-          <span class="menu-icon menu-icon-text">Rx</span>
-          Farmacologia
-        </a>
-
-        <a href="/casos" class="menu-item">
-          <span>&#9877;</span>
-          Casos Cl&iacute;nicos
-        </a>
-
-        <a href="/laboratorio" class="menu-item active">
-          <span>&#9879;</span>
-          Laborat&oacute;rio
-        </a>
-
-        <a href="/evolucao" class="menu-item">
-          <span>&#9998;</span>
-          Evolu&ccedil;&atilde;o
-        </a>
-
+        <div class="menu-title">Estudo</div>
+        <a href="/" class="menu-item"><span>&#8962;</span>Dashboard</a>
+        <a href="/questoes" class="menu-item"><span>&#9635;</span>Questões</a>
+        <a href="/flashcards" class="menu-item"><span>&#9648;</span>Flashcards</a>
+        <a href="/farmacos" class="menu-item"><span class="menu-icon menu-icon-text">Rx</span>Farmacologia</a>
+        <a href="/casos" class="menu-item"><span>&#9877;</span>Casos Clínicos</a>
+        <a href="/laboratorio" class="menu-item active"><span>&#9879;</span>Laboratório</a>
+        <a href="/evolucao" class="menu-item"><span>&#9998;</span>Evolução</a>
       </div>
 
-
       <div class="menu-group">
-
-        <div class="menu-title">
-          An&aacute;lise
-        </div>
-
-        <a href="/desempenho" class="menu-item">
-          <span>&#9682;</span>
-          Desempenho
-        </a>
-
-        <a href="/ranking" class="menu-item">
-          <span>&#9819;</span>
-          Ranking
-        </a>
-
+        <div class="menu-title">Análise</div>
+        <a href="/desempenho" class="menu-item"><span>&#9682;</span>Desempenho</a>
+        <a href="/ranking" class="menu-item"><span>&#9819;</span>Ranking</a>
       </div>
 
-
       <div class="menu-group">
-
-        <div class="menu-title">
-          Pessoal
-        </div>
-
-        <a href="/financas" class="menu-item">
-          <span>R$</span>
-          Finan&ccedil;as
-        </a>
-        <a href="/musica" class="menu-item">
-          <span>&#9835;</span>
-          M&uacute;sica
-        </a>
-
-        <a href="/configuracoes" class="menu-item">
-          <span>&#9881;</span>
-          Configura&ccedil;&otilde;es
-        </a>
-
+        <div class="menu-title">Pessoal</div>
+        <a href="/financas" class="menu-item"><span>R$</span>Finanças</a>
+        <a href="/musica" class="menu-item"><span>&#9835;</span>Música</a>
+        <a href="/configuracoes" class="menu-item"><span>&#9881;</span>Configurações</a>
       </div>
-
-
     </div>
-
 
     <div class="sidebar-user">
-
-      <div
-        id="avatarSidebar"
-        class="avatar"
-      >
-        U
-      </div>
-
+      <div id="avatarSidebar" class="avatar">U</div>
       <div class="user-info">
-
-        <strong id="nomeSidebar">
-          Carregando...
-        </strong>
-
+        <strong id="nomeSidebar">Carregando...</strong>
         <span id="emailSidebar"></span>
-
       </div>
-
-      <button
-        id="logoutSidebar"
-        class="logout-button"
-        type="button"
-      >
-        &#8618;
-      </button>
-
+      <button id="logoutSidebar" class="logout-button" type="button">&#8618;</button>
     </div>
-
   </aside>
 
-
   <div class="main-area">
-
-
     <header class="header">
-
-      <div class="header-title">
-        Laborat&oacute;rio
-      </div>
-
+      <div class="header-title">Laboratório ECG 3D</div>
       <div class="header-user">
-
         <div>
-
-          <strong id="nomeHeader">
-            Carregando...
-          </strong>
-
-          <span>
-            Cortex
-          </span>
-
+          <strong id="nomeHeader">Carregando...</strong>
+          <span>Cortex</span>
         </div>
-
-        <div
-          id="avatarHeader"
-          class="avatar header-avatar"
-        >
-          U
-        </div>
-
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
       </div>
-
     </header>
 
-
-    <main class="lab-page">
-
-
-      <section class="lab-heading">
-
+    <main class="ecg3d-page">
+      <section class="ecg3d-page-heading">
         <div>
-
-          <div class="simulation-status">
-
-            <span
-              id="statusDot"
-              class="status-dot breathing"
-            ></span>
-
-            <span>
-              Simula&ccedil;&atilde;o fisiol&oacute;gica
-            </span>
-
-          </div>
-
-          <h1>
-            Laborat&oacute;rio
-          </h1>
-
-          <p>
-            Ambiente interativo de fisiologia cardiovascular,
-            respirat&oacute;ria e &aacute;cido-base.
-          </p>
-
+          <span class="physiology-kicker">LABORATÓRIO DE ELETROCARDIOGRAFIA</span>
+          <h1>ECG 3D</h1>
+          <p>Explore a atividade elétrica do coração relacionando anatomia, vetores, derivações e traçado em tempo real.</p>
         </div>
-
-
-        <div class="lab-actions">
-
-          <button
-            id="liveButton"
-            class="lab-button live-control active"
-            type="button"
-            aria-pressed="true"
-          >
-            <span class="live-control-dot"></span>
-            <span id="liveButtonText">Pausar ao vivo</span>
-          </button>
-
-          <button
-            id="soundButton"
-            class="lab-button sound-control secondary"
-            type="button"
-            aria-pressed="false"
-          >
-            <span class="sound-control-icon">♪</span>
-            <span id="soundButtonText">Som FC desligado</span>
-          </button>
-
-          <button
-            id="referencesButton"
-            class="lab-button secondary"
-            type="button"
-            aria-expanded="false"
-          >
-            Referências
-          </button>
-
-          <div
-            id="apneaBadge"
-            class="apnea-badge hidden"
-          >
-            Apneia &middot;
-            <strong id="apneaSeconds">0</strong>s
-          </div>
-
-          <button
-            id="respirationButton"
-            class="lab-button"
-            type="button"
-          >
-            Pausar respira&ccedil;&atilde;o
-          </button>
-
-          <button
-            id="resetButton"
-            class="lab-button secondary"
-            type="button"
-          >
-            Resetar
-          </button>
-
+        <div class="ecg3d-page-badge">
+          <span>SIMULADOR</span>
+          <strong>Coração 3D + ECG sincronizado</strong>
         </div>
-
       </section>
 
-
-      <section
-        id="topMetrics"
-        class="top-metrics"
-      ></section>
-
-
-      <section
-        id="physiologyToolbar"
-        class="physiology-toolbar lab-area-toolbar"
-      >
-
-        <div class="physiology-toolbar-copy">
-
-          <span class="physiology-kicker">
-            ÁREAS DO LABORATÓRIO
-          </span>
-
-          <strong>
-            Visualização
-          </strong>
-
-          <small>
-            Alterne entre monitor fisiológico, corpo integrado e ECG 3D.
-          </small>
-
-        </div>
-
-        <div
-          id="labViewTabs"
-          class="lab-view-tabs"
-          aria-label="Visualização do laboratório"
-        ></div>
-
-      </section>
-
-
-      <section class="laboratory-grid">
-
-
-        <aside>
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Controles
-              </h2>
-
-              <p>
-                Vari&aacute;veis fisiol&oacute;gicas
-              </p>
-
-            </div>
-
-
-            <div
-              id="tabs"
-              class="control-tabs"
-            ></div>
-
-
-            <div
-              id="controls"
-              class="control-sliders"
-            ></div>
-
-          </div>
-
-        </aside>
-
-
-        <section class="lab-center">
-
-
-          <section
+<section
             id="ecgLearningLab"
             class="ecg3d-view"
             data-center-view="ecg3d"
-            hidden
-            aria-hidden="true"
+            aria-hidden="false"
           >
 
             <div class="ecg3d-head">
@@ -651,891 +336,20 @@
             </p>
 
           </section>
-
-
-
-
-
-          <div class="monitor-grid">
-
-
-            <div class="lab-panel monitor-panel">
-
-              <div class="monitor-header">
-
-                <div>
-
-                  <strong>
-                    ECG
-                  </strong>
-
-                  <span>
-                    Monitoriza&ccedil;&atilde;o el&eacute;trica
-                  </span>
-
-                </div>
-
-                <div class="monitor-number green">
-
-                  <strong id="ecgFC">
-                    72
-                  </strong>
-
-                  <small>
-                    bpm
-                  </small>
-
-                </div>
-
-              </div>
-
-
-              <div class="monitor-screen ecg-screen">
-
-                <canvas id="ecgCanvas"></canvas>
-
-                <span class="monitor-label">
-                  ECG II · escala simulada 25 mm/s · 10 mm/mV
-                </span>
-
-                <span
-                  id="ecgPatternBadge"
-                  class="monitor-science-badge"
-                >
-                  Ritmo sinusal
-                </span>
-
-              </div>
-
-
-              <div
-                id="ecgResults"
-                class="ecg-results"
-              ></div>
-
-            </div>
-
-
-            <div class="lab-panel monitor-panel">
-
-              <div class="monitor-header">
-
-                <div>
-
-                  <strong>
-                    SpO&#8322;
-                  </strong>
-
-                  <span>
-                    Oximetria / pletismografia
-                  </span>
-
-                </div>
-
-                <div class="monitor-number blue">
-
-                  <strong id="spo2Number">
-                    98
-                  </strong>
-
-                  <small>
-                    %
-                  </small>
-
-                </div>
-
-              </div>
-
-
-              <div class="monitor-screen spo-screen">
-
-                <canvas id="spoCanvas"></canvas>
-
-                <span class="monitor-label blue-label">
-                  PLETH · perfusão periférica
-                </span>
-
-                <span
-                  id="plethQualityBadge"
-                  class="monitor-science-badge blue-badge"
-                >
-                  Sinal adequado
-                </span>
-
-                <div class="pulse-label">
-
-                  <span>
-                    PR
-                  </span>
-
-                  <strong id="pulseFC">
-                    72 bpm
-                  </strong>
-
-                </div>
-
-              </div>
-
-
-              <div
-                id="spoResults"
-                class="monitor-results"
-              ></div>
-
-            </div>
-
-
-          </div>
-
-
-          <div
-            id="integratedBody"
-            class="integrated-body-view"
-            data-center-view="integrated"
-            aria-hidden="true"
-          >
-
-            <div class="integrated-stage-header">
-
-              <div>
-                <span class="physiology-kicker">
-                  CORPO AO VIVO
-                </span>
-
-                <strong>
-                  Sistema cardiorrenal integrado
-                </strong>
-              </div>
-
-              <div class="integrated-stage-actions">
-
-                <span
-                  id="integratedStatus"
-                  class="integrated-live-pill"
-                >
-                  SISTEMAS ACOPLADOS
-                </span>
-
-                <button
-                  id="nephronButton"
-                  class="integrated-action-button"
-                  type="button"
-                  aria-expanded="false"
-                >
-                  Ampliar néfron
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <div class="integrated-stage cardiorenal-stage">
-
-              <div class="system-legend system-legend-top">
-
-                <span class="legend-item arterial">sangue arterial</span>
-                <span class="legend-item venous">sangue venoso</span>
-                <span class="legend-item renal">filtrado</span>
-                <span class="legend-item urine">urina</span>
-
-              </div>
-
-
-              <div class="collection-column">
-
-                <div class="collection-readout">
-                  <span>COLETADO</span>
-                  <strong id="collectionVolume">0 mL</strong>
-                  <small id="collectionState">SIMULAÇÃO</small>
-                </div>
-
-                <div class="collection-cylinder">
-
-                  <div
-                    id="collectionFill"
-                    class="collection-fill"
-                  ></div>
-
-                  <div class="collection-scale">
-                    <span>500</span>
-                    <span>400</span>
-                    <span>300</span>
-                    <span>200</span>
-                    <span>100</span>
-                  </div>
-
-                </div>
-
-                <small>
-                  fluxo urinário relativo
-                </small>
-
-              </div>
-
-
-              <svg
-                class="integrated-body-svg cardiorenal-svg"
-                viewBox="0 0 1080 620"
-                role="img"
-                aria-label="Modelo fisiológico cardiorrenal com coração, vasos, rim, ureter e bexiga"
-              >
-
-                <defs>
-
-                  <linearGradient id="arterialGradient" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#e95070"/>
-                    <stop offset="52%" stop-color="#ff6f8b"/>
-                    <stop offset="100%" stop-color="#ff9aae"/>
-                  </linearGradient>
-
-                  <linearGradient id="venousGradient" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#6862c7"/>
-                    <stop offset="55%" stop-color="#8e88e0"/>
-                    <stop offset="100%" stop-color="#b0abff"/>
-                  </linearGradient>
-
-                  <linearGradient id="filtrateGradient" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#f2cf6b"/>
-                    <stop offset="100%" stop-color="#fff0ad"/>
-                  </linearGradient>
-
-                  <linearGradient id="urineGradient" x1="0" x2="1">
-                    <stop offset="0%" stop-color="#d89a2e"/>
-                    <stop offset="100%" stop-color="#f7c456"/>
-                  </linearGradient>
-
-                  <radialGradient id="heartBodyGradient" cx=".35" cy=".28" r=".9">
-                    <stop offset="0%" stop-color="#ff9a94"/>
-                    <stop offset="45%" stop-color="#d9555b"/>
-                    <stop offset="100%" stop-color="#7f1f32"/>
-                  </radialGradient>
-
-                  <radialGradient id="kidneyBodyGradient" cx=".32" cy=".35" r=".9">
-                    <stop offset="0%" stop-color="#ffb07d"/>
-                    <stop offset="48%" stop-color="#d75f48"/>
-                    <stop offset="100%" stop-color="#7f2c29"/>
-                  </radialGradient>
-
-                  <filter id="softOrganGlow">
-                    <feGaussianBlur stdDeviation="5" result="blur"/>
-                    <feMerge>
-                      <feMergeNode in="blur"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-
-                  <filter id="labelGlow">
-                    <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity=".55"/>
-                  </filter>
-
-                </defs>
-
-
-                <path
-                  class="body-silhouette body-silhouette-detailed"
-                  d="M542 0 C507 1 490 24 494 57 C473 67 447 79 425 96 C393 122 377 162 371 211 C362 278 361 356 374 432 C383 486 393 545 419 602 L465 602 C478 548 488 500 495 448 L589 448 C596 500 606 548 619 602 L665 602 C691 545 701 486 710 432 C723 356 722 278 713 211 C707 162 691 122 659 96 C637 79 611 67 590 57 C594 24 577 1 542 0Z"
-                />
-
-
-                <g class="major-vessels">
-
-                  <path class="vessel venous-vessel vena-cava" d="M510 183 C480 225 474 282 476 346 C478 407 496 444 516 470"/>
-                  <path class="vessel arterial-vessel aorta-main" d="M561 170 C586 208 586 253 580 299 C574 344 573 387 596 421"/>
-                  <path class="vessel arterial-vessel renal-artery-main" d="M580 320 C625 322 667 329 710 347"/>
-                  <path class="vessel venous-vessel renal-vein-main" d="M476 346 C550 352 630 354 704 360"/>
-                  <path class="vessel arterial-vessel afferent-vessel" d="M710 347 C742 350 761 356 779 365"/>
-                  <path class="vessel venous-vessel efferent-vessel" d="M783 384 C757 393 733 391 704 360"/>
-
-                </g>
-
-
-                <g
-                  id="systemHeartGroup"
-                  class="organ-group detailed-heart-group"
-                >
-
-                  <path class="heart-aorta" d="M542 128 C545 95 554 81 576 77 C599 73 613 91 611 109 C609 126 597 135 583 140"/>
-                  <path class="heart-pulmonary" d="M530 145 C506 130 492 118 484 101"/>
-                  <path class="heart-vena" d="M521 138 C518 111 517 95 518 75"/>
-
-                  <path
-                    class="organ anatomical-heart"
-                    d="M536 135 C510 118 480 130 475 161 C470 190 488 214 511 232 C526 244 538 258 544 278 C557 258 576 243 594 226 C615 207 630 183 624 155 C618 128 589 116 565 132 C554 140 547 148 542 157 C541 149 539 141 536 135Z"
-                  />
-
-                  <path class="heart-septum" d="M545 154 C544 184 548 217 544 259"/>
-                  <path class="heart-coronary" d="M565 149 C586 160 595 181 588 204 C583 219 570 230 557 240"/>
-                  <path class="heart-coronary secondary" d="M520 151 C504 168 505 192 518 210 C526 222 535 229 541 236"/>
-
-                </g>
-
-
-                <g
-                  id="systemKidneyGroup"
-                  class="organ-group detailed-kidney-group"
-                >
-
-                  <path
-                    class="organ anatomical-kidney"
-                    d="M774 289 C823 275 871 302 886 347 C901 392 881 446 841 468 C811 485 771 475 756 446 C744 424 751 402 767 387 C777 377 779 365 765 356 C746 344 748 312 774 289Z"
-                  />
-
-                  <path
-                    class="kidney-cortex-line"
-                    d="M787 306 C823 295 856 315 866 349 C876 383 862 423 834 441 C813 454 785 447 775 426 C767 410 774 394 786 382 C799 369 800 355 788 345 C776 335 776 319 787 306Z"
-                  />
-
-                  <path
-                    class="renal-pelvis"
-                    d="M799 365 C820 349 847 351 860 370 C845 377 832 388 823 402 C812 393 803 381 799 365Z"
-                  />
-
-                  <path class="renal-pyramid p1" d="M807 316 L828 350 L797 348Z"/>
-                  <path class="renal-pyramid p2" d="M842 319 L848 356 L820 347Z"/>
-                  <path class="renal-pyramid p3" d="M863 348 L850 382 L830 359Z"/>
-                  <path class="renal-pyramid p4" d="M856 401 L830 415 L829 381Z"/>
-
-                  <circle class="glomerulus-dot" cx="804" cy="367" r="8"/>
-
-                  <path
-                    class="filtrate-path"
-                    d="M804 367 C818 380 825 397 823 419 C821 441 810 454 798 468"
-                  />
-
-                  <path
-                    class="urine-path"
-                    d="M798 468 C792 498 786 526 780 551"
-                  />
-
-                </g>
-
-
-                <g class="bladder-group">
-
-                  <path
-                    class="bladder-organ"
-                    d="M739 543 C760 527 794 527 815 543 C825 551 826 567 816 577 C795 596 759 596 738 577 C728 567 729 551 739 543Z"
-                  />
-
-                  <path class="bladder-neck" d="M777 584 L777 600"/>
-
-                </g>
-
-
-                <g class="leader"><path d="M487 171 L405 145 L342 145"/><circle cx="487" cy="171" r="4"/></g>
-                <g class="leader"><path d="M479 299 L385 299 L329 299"/><circle cx="479" cy="299" r="4"/></g>
-                <g class="leader"><path d="M583 271 L651 271 L700 271"/><circle cx="583" cy="271" r="4"/></g>
-                <g class="leader"><path d="M672 337 L613 322 L547 322"/><circle cx="672" cy="337" r="4"/></g>
-                <g class="leader"><path d="M672 359 L599 377 L530 377"/><circle cx="672" cy="359" r="4"/></g>
-                <g class="leader"><path d="M783 365 L688 395 L600 395"/><circle cx="783" cy="365" r="4"/></g>
-                <g class="leader"><path d="M789 384 L876 384 L933 384"/><circle cx="789" cy="384" r="4"/></g>
-                <g class="leader"><path d="M861 330 L933 330 L963 330"/><circle cx="861" cy="330" r="4"/></g>
-                <g class="leader"><path d="M812 417 L900 430 L960 430"/><circle cx="812" cy="417" r="4"/></g>
-                <g class="leader"><path d="M801 458 L892 462 L960 462"/><circle cx="801" cy="458" r="4"/></g>
-                <g class="leader"><path d="M790 512 L879 520 L930 520"/><circle cx="790" cy="512" r="4"/></g>
-                <g class="leader"><path d="M814 558 L884 575 L936 575"/><circle cx="814" cy="558" r="4"/></g>
-
-
-                <g class="anatomy-label"><rect x="260" y="126" width="86" height="34" rx="7"/><text x="274" y="148">Coração</text></g>
-                <g class="anatomy-label"><rect x="245" y="282" width="91" height="34" rx="7"/><text x="258" y="304">Veia cava</text></g>
-                <g class="anatomy-label"><rect x="699" y="254" width="72" height="34" rx="7"/><text x="714" y="276">Aorta</text></g>
-                <g class="anatomy-label"><rect x="452" y="304" width="103" height="34" rx="7"/><text x="464" y="326">Artéria renal</text></g>
-                <g class="anatomy-label"><rect x="438" y="360" width="96" height="34" rx="7"/><text x="451" y="382">Veia renal</text></g>
-                <g class="anatomy-label"><rect x="470" y="378" width="132" height="34" rx="7"/><text x="482" y="400">Arteríola aferente</text></g>
-                <g class="anatomy-label"><rect x="930" y="367" width="135" height="34" rx="7"/><text x="942" y="389">Arteríola eferente</text></g>
-                <g class="anatomy-label"><rect x="952" y="313" width="66" height="34" rx="7"/><text x="965" y="335">Rim</text></g>
-                <g class="anatomy-label"><rect x="948" y="413" width="104" height="34" rx="7"/><text x="960" y="435">Alça de Henle</text></g>
-                <g class="anatomy-label"><rect x="946" y="445" width="112" height="34" rx="7"/><text x="958" y="467">Ducto coletor</text></g>
-                <g class="anatomy-label"><rect x="921" y="503" width="74" height="34" rx="7"/><text x="935" y="525">Ureter</text></g>
-                <g class="anatomy-label"><rect x="925" y="558" width="78" height="34" rx="7"/><text x="938" y="580">Bexiga</text></g>
-
-
-                <g class="callout callout-filter">
-                  <rect x="868" y="280" width="183" height="34" rx="7"/>
-                  <text id="systemFiltrationCallout" x="881" y="302">≈ 20% do plasma filtrado</text>
-                </g>
-
-                <g class="callout callout-reabsorption">
-                  <rect x="450" y="430" width="231" height="34" rx="7"/>
-                  <text id="systemReabsorptionCallout" x="463" y="452">≈ 99% reabsorvido → sangue</text>
-                </g>
-
-                <g class="callout callout-urine">
-                  <rect x="851" y="486" width="192" height="38" rx="7"/>
-                  <text id="systemUrineCallout" x="865" y="511">URINA 1,0 mL/min</text>
-                </g>
-
-              </svg>
-
-
-              <div
-                id="nephronPanel"
-                class="nephron-panel"
-                aria-hidden="true"
-              >
-
-                <div class="nephron-head">
-
-                  <div>
-                    <span class="physiology-kicker">NÉFRON</span>
-                    <strong>Hemodinâmica glomerular</strong>
-                  </div>
-
-                  <button
-                    id="nephronCloseButton"
-                    type="button"
-                    aria-label="Fechar néfron"
-                  >
-                    ×
-                  </button>
-
-                </div>
-
-                <div class="nephron-track">
-                  <span class="nephron-vessel afferent"></span>
-                  <span class="nephron-glomerulus"></span>
-                  <span class="nephron-vessel efferent"></span>
-                  <span class="nephron-tubule"></span>
-                </div>
-
-                <div class="nephron-metrics">
-
-                  <div>
-                    <span>Fluxo renal</span>
-                    <strong id="nephronRBF">1.200 mL/min</strong>
-                  </div>
-
-                  <div>
-                    <span>TFG estimada</span>
-                    <strong id="nephronGFR">125 mL/min</strong>
-                  </div>
-
-                  <div>
-                    <span>Fração filtração</span>
-                    <strong id="nephronFF">20%</strong>
-                  </div>
-
-                  <div>
-                    <span>Urina estimada</span>
-                    <strong id="nephronUrine">1,0 mL/min</strong>
-                  </div>
-
-                  <div>
-                    <span>Perfusão renal</span>
-                    <strong id="nephronPerfusion">100%</strong>
-                  </div>
-
-                  <div>
-                    <span>HCO₃⁻</span>
-                    <strong id="nephronHco3">24,0 mEq/L</strong>
-                  </div>
-
-                </div>
-
-                <small>
-                  Valores renais são estimativas didáticas normalizadas ao estado basal e não substituem TFG/eGFR clínicos.
-                </small>
-
-              </div>
-
-            </div>
-
-
-            <div class="integrated-bottom-strip cardiorenal-metrics">
-
-              <div>
-                <span>Débito cardíaco</span>
-                <strong id="integratedCO">5,5 L/min</strong>
-                <small>sangue bombeado</small>
-              </div>
-
-              <div>
-                <span>Pressão art. média</span>
-                <strong id="integratedMAP">90 mmHg</strong>
-                <small>pressão de perfusão</small>
-              </div>
-
-              <div>
-                <span>Fluxo sanguíneo renal</span>
-                <strong id="integratedRBF">1.200 mL/min</strong>
-                <small>estimativa relativa</small>
-              </div>
-
-              <div>
-                <span>TFG estimada</span>
-                <strong id="integratedGFR">125 mL/min</strong>
-                <small>filtrado por minuto</small>
-              </div>
-
-              <div>
-                <span>Fração de filtração</span>
-                <strong id="integratedFF">20%</strong>
-                <small>plasma filtrado</small>
-              </div>
-
-              <div>
-                <span>Débito urinário</span>
-                <strong id="integratedUrine">1,0 mL/min</strong>
-                <small>urina estimada</small>
-              </div>
-
-              <div>
-                <span>Reserva renal</span>
-                <strong id="integratedRenalReserve">100%</strong>
-                <small>índice didático</small>
-              </div>
-
-            </div>
-
-          </div>
-
-
-        </section>
-
-
-        <aside class="lab-right">
-
-          <div
-            id="labPanelTabs"
-            class="lab-panel-tabs"
-            aria-label="Painéis do laboratório"
-          ></div>
-
-
-          <div class="lab-panel" data-lab-panel="interpretation">
-
-            <div class="panel-header">
-
-              <h2>
-                Interpreta&ccedil;&atilde;o
-              </h2>
-
-              <p>
-                Leitura dos resultados
-              </p>
-
-            </div>
-
-            <div
-              id="interpretation"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel" data-lab-panel="hemodynamics">
-
-            <div class="panel-header">
-
-              <h2>
-                Hemodin&acirc;mica
-              </h2>
-
-              <p>
-                Vari&aacute;veis cardiovasculares
-              </p>
-
-            </div>
-
-            <div
-              id="hemodynamics"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel mechanics-panel hemodynamics-companion" data-hemodynamics-companion="mechanics">
-
-            <div class="panel-header">
-
-              <h2>
-                Mec&acirc;nica respirat&oacute;ria
-              </h2>
-
-              <p>
-                Dados derivados da ventila&ccedil;&atilde;o
-              </p>
-
-            </div>
-
-
-            <div
-              id="respiratoryMechanics"
-              class="mechanics-grid"
-            ></div>
-
-          </div>
-
-          <div class="lab-panel gasometry-panel hemodynamics-companion" data-hemodynamics-companion="gasometry">
-
-            <div class="panel-header">
-
-              <h2>
-                Gasometria arterial
-              </h2>
-
-              <p>
-                An&aacute;lise &aacute;cido-base e oxigena&ccedil;&atilde;o
-              </p>
-
-            </div>
-
-
-            <div
-              id="gasometry"
-              class="gasometry-grid"
-            ></div>
-
-
-            <div
-              id="gasometryFooter"
-              class="gasometry-footer"
-            ></div>
-
-          </div>
-
-          <div class="lab-panel" data-lab-panel="electrolytes">
-
-            <div class="panel-header">
-
-              <h2>
-                Eletr&oacute;litos
-              </h2>
-
-              <p>
-                Estado atual
-              </p>
-
-            </div>
-
-            <div
-              id="electrolytes"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel physiology-control-panel" data-lab-panel="homeostasis">
-
-            <div class="panel-header">
-
-              <h2>
-                Homeostase
-              </h2>
-
-              <p>
-                Acoplamentos automáticos
-              </p>
-
-            </div>
-
-            <div
-              id="homeostasis"
-              class="panel-content homeostasis-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel" data-lab-panel="renal">
-
-            <div class="panel-header">
-
-              <h2>
-                Rim / HCO&#8323;&#8315;
-              </h2>
-
-              <p>
-                Compensação renal acelerada
-              </p>
-
-            </div>
-
-            <div
-              id="renalState"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel" data-lab-panel="respiration">
-
-            <div class="panel-header">
-
-              <h2>
-                Respira&ccedil;&atilde;o
-              </h2>
-
-              <p>
-                Estado atual
-              </p>
-
-            </div>
-
-            <div
-              id="respirationState"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-        </aside>
-
-
-      </section>
-
-
-      <section
-        id="sciencePanel"
-        class="lab-science-note"
-        aria-hidden="true"
-      >
-
-        <button
-          id="scienceCloseButton"
-          class="science-close-button"
-          type="button"
-          aria-label="Fechar referências"
-        >
-          ×
-        </button>
-
-        <div>
-          <span class="physiology-kicker">
-            BASE CIENTÍFICA
-          </span>
-
-          <h2>
-            Simulação educacional, não monitor clínico
-          </h2>
-
-          <p>
-            O modelo usa relações fisiológicas publicadas para demonstrar tendências:
-            ECG e eletrólitos, curva de oxi-hemoglobina, equilíbrio ácido-base,
-            compensação renal e hemodinâmica. Valores individuais reais variam e
-            alterações eletrocardiográficas não seguem sempre uma sequência previsível.
-          </p>
-        </div>
-
-        <div class="lab-reference-grid">
-
-          <a
-            href="https://www.ncbi.nlm.nih.gov/books/NBK470284/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Hipercalemia · NCBI
-          </a>
-
-          <a
-            href="https://www.ncbi.nlm.nih.gov/books/NBK482465/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Hipocalemia · NCBI
-          </a>
-
-          <a
-            href="https://www.ncbi.nlm.nih.gov/books/NBK482128/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Cálcio · NCBI
-          </a>
-
-          <a
-            href="https://pubmed.ncbi.nlm.nih.gov/35496/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Curva O₂ · Severinghaus
-          </a>
-
-          <a
-            href="https://www.ncbi.nlm.nih.gov/books/NBK556075/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            RVS / PAM · NCBI
-          </a>
-
-          <a
-            href="https://www.merckmanuals.com/professional/multimedia/table/primary-changes-and-compensations-in-simple-acid-base-disorders"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Compensação ácido-base · Merck
-          </a>
-
-          <a
-            href="https://www.fda.gov/consumers/consumer-updates/pulse-oximeters-and-oxygen-concentrators-what-know-about-home-oxygen-therapy"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Oximetria · FDA
-          </a>
-
-          <a
-            href="https://www.ncbi.nlm.nih.gov/books/NBK482248/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Fluxo renal / autorregulação · NCBI
-          </a>
-
-          <a
-            href="https://www.ncbi.nlm.nih.gov/books/NBK526069/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ADH / vasopressina · NCBI
-          </a>
-
-        </div>
-
-      </section>
-
-
     </main>
-
-
   </div>
 
-
-  
   <script>
     (function () {
-      if (window.parent === window) {
-        return;
-      }
-
-      var href =
-        window.location.pathname +
-        window.location.search +
-        window.location.hash;
-
+      if (window.parent === window) return;
+      var href = window.location.pathname + window.location.search + window.location.hash;
       try {
-        if (
-          typeof window.parent.CortexShellNavigationReady ===
-            "function"
-        ) {
-          window.parent.CortexShellNavigationReady(
-            window,
-            href
-          );
+        if (typeof window.parent.CortexShellNavigationReady === "function") {
+          window.parent.CortexShellNavigationReady(window, href);
         }
         else {
           window.parent.postMessage(
-            {
-              type: "cortex:first-paint-ready",
-              href: href
-            },
+            { type: "cortex:first-paint-ready", href: href },
             window.location.origin
           );
         }
@@ -1544,11 +358,7 @@
     })();
   </script>
 
-<script defer src="/js/laboratorio-ecg3d.js?v=20261002-ecg3d1"></script>
-<script defer src="/js/laboratorio.js?v=20261002-controls2"></script>
-
-
+  <script defer src="/js/laboratorio-ecg3d.js?v=20261002-ecg3d2"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>
-
 </html>
