@@ -736,6 +736,166 @@
   }
 
 
+  function warmNavigationCache() {
+
+    if (
+      window.parent ===
+        window
+    ) {
+      return;
+    }
+
+
+    try {
+
+      const connection =
+        navigator.connection ||
+        navigator.mozConnection ||
+        navigator.webkitConnection;
+
+
+      if (
+        connection &&
+        connection.saveData
+      ) {
+        return;
+      }
+
+
+      if (
+        window.parent
+          .__cortexNavigationWarmupStarted
+      ) {
+        return;
+      }
+
+
+      window.parent
+        .__cortexNavigationWarmupStarted =
+        true;
+
+    }
+    catch {
+      return;
+    }
+
+
+    const current =
+      currentRoute();
+
+
+    const routes =
+      [];
+
+
+    sections.forEach(
+      function (
+        section
+      ) {
+
+        section.items.forEach(
+          function (
+            item
+          ) {
+
+            if (
+              item.href !==
+                current &&
+              routes.indexOf(
+                item.href
+              ) ===
+                -1
+            ) {
+
+              routes.push(
+                item.href
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    let index =
+      0;
+
+
+    function next() {
+
+      if (
+        index >=
+        routes.length
+      ) {
+        return;
+      }
+
+
+      if (
+        document.hidden
+      ) {
+
+        window.setTimeout(
+          next,
+          500
+        );
+
+        return;
+      }
+
+
+      prefetchRoute(
+        routes[
+          index
+        ]
+      );
+
+
+      index +=
+        1;
+
+
+      window.setTimeout(
+        next,
+        130
+      );
+
+    }
+
+
+    window.setTimeout(
+      function () {
+
+        if (
+          "requestIdleCallback" in
+            window
+        ) {
+
+          window.requestIdleCallback(
+            next,
+            {
+              timeout:
+                1200
+            }
+          );
+
+        }
+        else {
+
+          next();
+
+        }
+
+      },
+      650
+    );
+
+  }
+
+
   function setOptimisticActive(
     href
   ) {
@@ -1552,6 +1712,8 @@
     ensureMobileMenu();
 
     enhanceFastNavigation();
+
+    warmNavigationCache();
 
   }
 
