@@ -13,6 +13,7 @@ model Usuario {
   id            Int                @id @default(autoincrement())
   nome          String
   email         String             @unique
+  tema          String             @default("dark-orange")
   createdAt     DateTime           @default(now())
   senhaHash     String?
   casosCriados  CasoClinico[]
