@@ -7,6 +7,115 @@
     window.fetch.bind(window);
 
 
+  const AUTH_CACHE_KEY =
+    "cortex_auth_me_v1";
+
+
+  const AUTH_CACHE_TTL =
+    60000;
+
+
+  function readAuthCache() {
+
+    try {
+
+      const raw =
+        sessionStorage.getItem(
+          AUTH_CACHE_KEY
+        );
+
+
+      if (!raw) {
+        return null;
+      }
+
+
+      const cached =
+        JSON.parse(
+          raw
+        );
+
+
+      if (
+        !cached ||
+        !cached.data ||
+        !cached.savedAt ||
+        Date.now() -
+          Number(
+            cached.savedAt
+          ) >
+          AUTH_CACHE_TTL
+      ) {
+
+        sessionStorage.removeItem(
+          AUTH_CACHE_KEY
+        );
+
+
+        return null;
+      }
+
+
+      return cached.data;
+
+    }
+    catch {
+
+      return null;
+
+    }
+
+  }
+
+
+  function writeAuthCache(
+    data
+  ) {
+
+    try {
+
+      sessionStorage.setItem(
+        AUTH_CACHE_KEY,
+        JSON.stringify({
+          savedAt:
+            Date.now(),
+
+          data:
+            data,
+        })
+      );
+
+    }
+    catch {}
+
+  }
+
+
+  function authCacheResponse(
+    data
+  ) {
+
+    return new Response(
+      JSON.stringify(
+        data
+      ),
+      {
+        status:
+          200,
+
+        headers: {
+          "Content-Type":
+            "application/json; charset=utf-8",
+
+          "X-Cortex-Cache":
+            "session",
+        },
+      }
+    );
+
+  }
+
+
   let pendingRequests = 0;
   let progress = null;
   let progressValue = 0;
@@ -190,8 +299,55 @@
               : "";
 
 
+      const method =
+        String(
+          (
+            args[1] &&
+            args[1].method
+          ) ||
+          (
+            first &&
+            typeof first !==
+              "string" &&
+            first.method
+          ) ||
+          "GET"
+        )
+          .toUpperCase();
+
+
+      const authMe =
+        method ===
+          "GET" &&
+        (
+          url ===
+            "/api/auth/me" ||
+          url.startsWith(
+            "/api/auth/me?"
+          )
+        );
+
+
+      if (authMe) {
+
+        const cached =
+          readAuthCache();
+
+
+        if (cached) {
+
+          return authCacheResponse(
+            cached
+          );
+
+        }
+
+      }
+
+
       const track =
-        url.includes("/api/");
+        url.includes("/api/") &&
+        !authMe;
 
 
       if (track) {
@@ -201,10 +357,32 @@
 
       try {
 
-        return await nativeFetch.apply(
-          window,
-          args
-        );
+        const response =
+          await nativeFetch.apply(
+            window,
+            args
+          );
+
+
+        if (
+          authMe &&
+          response.ok
+        ) {
+
+          response
+            .clone()
+            .json()
+            .then(
+              writeAuthCache
+            )
+            .catch(
+              function () {}
+            );
+
+        }
+
+
+        return response;
 
       }
       finally {
@@ -365,6 +543,44 @@
 
     }
     catch {}
+
+
+    const authCached =
+      readAuthCache();
+
+
+    const cachedUser =
+      authCached &&
+      (
+        authCached.usuario ||
+        authCached
+      );
+
+
+    if (
+      cachedUser &&
+      cachedUser.id
+    ) {
+
+      const key =
+        "jankinho_study_timer_v2_" +
+        cachedUser.id;
+
+
+      try {
+
+        sessionStorage.setItem(
+          "cortex_timer_key_v1",
+          key
+        );
+
+      }
+      catch {}
+
+
+      return key;
+
+    }
 
 
     try {

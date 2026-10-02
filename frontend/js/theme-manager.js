@@ -348,6 +348,23 @@
         await response.json();
 
 
+      try {
+
+        sessionStorage.setItem(
+          "cortex_auth_me_v1",
+          JSON.stringify({
+            savedAt:
+              Date.now(),
+
+            data:
+              data,
+          })
+        );
+
+      }
+      catch {}
+
+
       const accountTheme =
         data &&
         data.usuario
