@@ -11,6 +11,36 @@
 
   <title>Casos Cl&iacute;nicos | Cortex</title>
 
+  <script>
+    (function () {
+      var theme = "dark-orange";
+
+      try {
+        var saved =
+          localStorage.getItem(
+            "jankinho_theme_v1"
+          );
+
+        if (
+          saved === "dark-orange" ||
+          saved === "pink-glitter" ||
+          saved === "blue-black" ||
+          saved === "black-white"
+        ) {
+          theme = saved;
+        }
+      }
+      catch (error) {}
+
+      document.documentElement
+        .setAttribute(
+          "data-theme",
+          theme
+        );
+    })();
+  </script>
+
+
   <link
     rel="stylesheet"
     href="/css/casos.css?v=20261002-fluid-final4"
@@ -18,7 +48,7 @@
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core3"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
-  <script src="/js/theme-manager.js?v=20261001-nav-core3"></script>
+  <script defer src="/js/theme-manager.js?v=20261001-nav-core7"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/casos-premium.css?v=20261002-fluid-final4">
   <link
