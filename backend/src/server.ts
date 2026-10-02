@@ -4432,6 +4432,20 @@ const server =
 
 
         if (
+          caminho === "/api/configuracoes/tema" &&
+          metodo === "PATCH"
+        ) {
+
+          await atualizarTema(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
           caminho === "/api/configuracoes/perfil" &&
           metodo === "PATCH"
         ) {
