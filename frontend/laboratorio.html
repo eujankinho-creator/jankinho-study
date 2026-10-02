@@ -44,7 +44,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/laboratorio.css?v=20261002-fluid-final4"
+    href="/css/laboratorio.css?v=20261002-physiology2"
   >
 
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
@@ -323,6 +323,35 @@
       ></section>
 
 
+      <section
+        id="physiologyToolbar"
+        class="physiology-toolbar"
+      >
+
+        <div class="physiology-toolbar-copy">
+
+          <span class="physiology-kicker">
+            MODELO FISIOLÓGICO
+          </span>
+
+          <strong>
+            Cenários rápidos
+          </strong>
+
+          <small>
+            Altere um estado reconhecido e depois refine os controles manualmente.
+          </small>
+
+        </div>
+
+        <div
+          id="presetBar"
+          class="physiology-presets"
+        ></div>
+
+      </section>
+
+
       <section class="laboratory-grid">
 
 
@@ -401,7 +430,14 @@
                 <canvas id="ecgCanvas"></canvas>
 
                 <span class="monitor-label">
-                  ECG II
+                  ECG II · 25 mm/s · 10 mm/mV
+                </span>
+
+                <span
+                  id="ecgPatternBadge"
+                  class="monitor-science-badge"
+                >
+                  Ritmo sinusal
                 </span>
 
               </div>
@@ -451,7 +487,14 @@
                 <canvas id="spoCanvas"></canvas>
 
                 <span class="monitor-label blue-label">
-                  PLETH
+                  PLETH · perfusão periférica
+                </span>
+
+                <span
+                  id="plethQualityBadge"
+                  class="monitor-science-badge blue-badge"
+                >
+                  Sinal adequado
                 </span>
 
                 <div class="pulse-label">
@@ -604,6 +647,50 @@
           </div>
 
 
+          <div class="lab-panel physiology-control-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Homeostase
+              </h2>
+
+              <p>
+                Acoplamentos automáticos
+              </p>
+
+            </div>
+
+            <div
+              id="homeostasis"
+              class="panel-content homeostasis-content"
+            ></div>
+
+          </div>
+
+
+          <div class="lab-panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Rim / HCO&#8323;&#8315;
+              </h2>
+
+              <p>
+                Compensação renal acelerada
+              </p>
+
+            </div>
+
+            <div
+              id="renalState"
+              class="panel-content"
+            ></div>
+
+          </div>
+
+
           <div class="lab-panel">
 
             <div class="panel-header">
@@ -628,6 +715,88 @@
 
         </aside>
 
+
+      </section>
+
+
+      <section class="lab-science-note">
+
+        <div>
+          <span class="physiology-kicker">
+            BASE CIENTÍFICA
+          </span>
+
+          <h2>
+            Simulação educacional, não monitor clínico
+          </h2>
+
+          <p>
+            O modelo usa relações fisiológicas publicadas para demonstrar tendências:
+            ECG e eletrólitos, curva de oxi-hemoglobina, equilíbrio ácido-base,
+            compensação renal e hemodinâmica. Valores individuais reais variam e
+            alterações eletrocardiográficas não seguem sempre uma sequência previsível.
+          </p>
+        </div>
+
+        <div class="lab-reference-grid">
+
+          <a
+            href="https://www.ncbi.nlm.nih.gov/books/NBK470284/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hipercalemia · NCBI
+          </a>
+
+          <a
+            href="https://www.ncbi.nlm.nih.gov/books/NBK482465/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hipocalemia · NCBI
+          </a>
+
+          <a
+            href="https://www.ncbi.nlm.nih.gov/books/NBK482128/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Cálcio · NCBI
+          </a>
+
+          <a
+            href="https://pubmed.ncbi.nlm.nih.gov/35496/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Curva O₂ · Severinghaus
+          </a>
+
+          <a
+            href="https://www.ncbi.nlm.nih.gov/books/NBK556075/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            RVS / PAM · NCBI
+          </a>
+
+          <a
+            href="https://www.merckmanuals.com/professional/multimedia/table/primary-changes-and-compensations-in-simple-acid-base-disorders"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Compensação ácido-base · Merck
+          </a>
+
+          <a
+            href="https://www.fda.gov/consumers/consumer-updates/pulse-oximeters-and-oxygen-concentrators-what-know-about-home-oxygen-therapy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Oximetria · FDA
+          </a>
+
+        </div>
 
       </section>
 
@@ -674,7 +843,7 @@
     })();
   </script>
 
-<script defer src="/js/laboratorio.js?v=20261002-fluid-final4"></script>
+<script defer src="/js/laboratorio.js?v=20261002-physiology2"></script>
 
 
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>

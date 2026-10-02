@@ -1095,3 +1095,301 @@
 .slider-control input[type="range"]:active {
   cursor: grabbing;
 }
+
+
+/* =========================================================
+   CORTEX PHYSIOLOGY LAB V2
+========================================================= */
+
+.lab-view .physiology-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px,.7fr) minmax(0,1.3fr);
+  gap: 20px;
+  align-items: center;
+  margin: 0 0 18px;
+  border: 1px solid var(--theme-border);
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      circle at 92% 20%,
+      rgba(var(--theme-accent-rgb),.10),
+      transparent 34%
+    ),
+    var(--theme-surface);
+  padding: 17px 18px;
+  box-shadow: 0 16px 42px rgba(0,0,0,.12);
+}
+
+.lab-view .physiology-toolbar-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.lab-view .physiology-kicker {
+  color: var(--theme-accent-2);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.lab-view .physiology-toolbar-copy strong {
+  color: var(--theme-text);
+  font-size: 14px;
+}
+
+.lab-view .physiology-toolbar-copy small {
+  max-width: 420px;
+  color: var(--theme-text-muted);
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.lab-view .physiology-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: flex-end;
+}
+
+.lab-view .physiology-preset,
+.lab-view .physiology-toggle {
+  min-height: 33px;
+  border: 1px solid var(--theme-border);
+  border-radius: 10px;
+  background: var(--theme-surface-soft);
+  padding: 0 10px;
+  color: var(--theme-text-soft);
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    border-color .16s ease,
+    background .16s ease,
+    color .16s ease,
+    transform .16s ease;
+}
+
+.lab-view .physiology-preset:hover,
+.lab-view .physiology-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--theme-border-strong);
+  background: var(--theme-accent-soft);
+  color: var(--theme-text);
+}
+
+.lab-view .physiology-toggle {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.lab-view .physiology-toggle strong {
+  color: inherit;
+  font-size: 9px;
+}
+
+.lab-view .physiology-toggle span {
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  padding: 4px 7px;
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  letter-spacing: .06em;
+}
+
+.lab-view .physiology-toggle.active {
+  border-color: var(--theme-border-strong);
+  background: var(--theme-accent-soft);
+  color: var(--theme-accent-2);
+  box-shadow: 0 0 18px rgba(var(--theme-accent-rgb),.06);
+}
+
+.lab-view .physiology-toggle.active span {
+  background: rgba(var(--theme-accent-rgb),.12);
+  color: var(--theme-accent-2);
+}
+
+.lab-view .homeostasis-content {
+  display: grid;
+  gap: 7px;
+}
+
+.lab-view .homeostasis-note {
+  margin-top: 5px;
+  border-top: 1px solid var(--theme-border);
+  padding-top: 9px;
+  color: var(--theme-text-muted);
+  font-size: 8px;
+  line-height: 14px;
+}
+
+.lab-view .monitor-science-badge {
+  position: absolute;
+  top: 11px;
+  right: 12px;
+  z-index: 3;
+  border: 1px solid rgba(72,232,121,.18);
+  border-radius: 999px;
+  background: rgba(72,232,121,.06);
+  padding: 4px 7px;
+  color: #6ef09a;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+
+.lab-view .monitor-science-badge.blue-badge {
+  border-color: rgba(56,168,255,.18);
+  background: rgba(56,168,255,.06);
+  color: #70beff;
+}
+
+.lab-view .ecg-screen,
+.lab-view .spo-screen {
+  position: relative;
+}
+
+.lab-view .monitor-result strong.danger,
+.lab-view .danger-text {
+  color: #fb7185 !important;
+}
+
+.lab-view .monitor-result strong.warning,
+.lab-view .warning-text {
+  color: #fbbf24 !important;
+}
+
+.lab-view .monitor-result strong.normal,
+.lab-view .normal-text {
+  color: #4ade80 !important;
+}
+
+.lab-view .scientific-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.045);
+}
+
+.lab-view .scientific-row:last-child {
+  border-bottom: 0;
+}
+
+.lab-view .scientific-row span {
+  color: var(--theme-text-muted);
+  font-size: 9px;
+}
+
+.lab-view .scientific-row strong {
+  color: var(--theme-text);
+  font-size: 10px;
+  text-align: right;
+}
+
+.lab-view .lab-science-note {
+  display: grid;
+  grid-template-columns: minmax(240px,.85fr) minmax(0,1.15fr);
+  gap: 22px;
+  margin-top: 20px;
+  border: 1px solid var(--theme-border);
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      145deg,
+      var(--theme-surface),
+      var(--theme-surface-strong)
+    );
+  padding: 21px;
+}
+
+.lab-view .lab-science-note h2 {
+  margin: 7px 0 8px;
+  color: var(--theme-text);
+  font-size: 16px;
+}
+
+.lab-view .lab-science-note p {
+  margin: 0;
+  color: var(--theme-text-muted);
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.lab-view .lab-reference-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+  align-content: start;
+}
+
+.lab-view .lab-reference-grid a {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  border: 1px solid var(--theme-border);
+  border-radius: 10px;
+  background: var(--theme-surface-soft);
+  padding: 0 11px;
+  color: var(--theme-text-soft);
+  font-size: 9px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.lab-view .lab-reference-grid a:hover {
+  border-color: var(--theme-border-strong);
+  background: var(--theme-accent-soft);
+  color: var(--theme-accent-2);
+}
+
+.lab-view .slider-control.is-derived {
+  opacity: .72;
+}
+
+.lab-view .slider-control.is-derived input {
+  cursor: not-allowed;
+}
+
+.lab-view .slider-auto-label {
+  display: inline-flex;
+  margin-left: 6px;
+  border-radius: 999px;
+  background: var(--theme-accent-soft);
+  padding: 3px 6px;
+  color: var(--theme-accent-2);
+  font-size: 7px;
+  font-weight: 850;
+}
+
+@media (max-width: 1100px) {
+  .lab-view .physiology-toolbar,
+  .lab-view .lab-science-note {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-view .physiology-presets {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 650px) {
+  .lab-view .lab-reference-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-view .physiology-presets {
+    gap: 6px;
+  }
+
+  .lab-view .physiology-preset {
+    flex: 1 1 calc(50% - 6px);
+  }
+}
+
+/* CORTEX PHYSIOLOGY LAB V2 END */
