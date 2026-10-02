@@ -1002,3 +1002,23 @@ body.ui-ready {
 }
 
 /* CORTEX FIXED VIEWPORT SAFETY V1 END */
+
+
+/* =========================================================
+   CORTEX NO ENTRY REVEAL FINAL
+   Conteudo dinamico aparece imediatamente; nenhuma secao
+   deve nascer escura depois de carregar dados.
+========================================================= */
+
+.ui-reveal {
+  opacity:
+    1 !important;
+
+  transform:
+    none !important;
+
+  animation:
+    none !important;
+}
+
+/* CORTEX NO ENTRY REVEAL FINAL END */

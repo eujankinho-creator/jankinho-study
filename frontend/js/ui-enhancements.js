@@ -1470,9 +1470,6 @@
 
       domReady =
         true;
-
-
-      initRevealObserver();
       initGlobalInteractionFeedback();
       initTimer();
 
