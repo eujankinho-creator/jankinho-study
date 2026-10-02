@@ -40,6 +40,8 @@ const initialState = {
   creatinina: 0.9,
   adh: 50,
   hidratacao: 100,
+  aferente: 50,
+  eferente: 50,
 
   contratilidade: 100,
   vasoconstricao: 50,
@@ -122,7 +124,13 @@ const state = {
     false,
 
   analysisPanel:
-    "hemodynamics"
+    "hemodynamics",
+
+  centerView:
+    "monitor",
+
+  nephronOpen:
+    false
 };
 
 
@@ -500,6 +508,46 @@ const categories = [
 
         unit:
           "mg/dL"
+      },
+
+      {
+        field:
+          "aferente",
+
+        label:
+          "Tônus arteríola aferente",
+
+        min:
+          0,
+
+        max:
+          100,
+
+        step:
+          1,
+
+        unit:
+          "%"
+      },
+
+      {
+        field:
+          "eferente",
+
+        label:
+          "Tônus arteríola eferente",
+
+        min:
+          0,
+
+        max:
+          100,
+
+        step:
+          1,
+
+        unit:
+          "%"
       }
 
     ]
@@ -2706,6 +2754,202 @@ function perfusionIndex(
 }
 
 
+function computeRenalSystem(
+  values,
+  results
+) {
+
+  const reserve =
+    renalReserve(
+      values.creatinina
+    );
+
+
+  /*
+   * Relative educational renal perfusion model:
+   * - systemic perfusion follows MAP and cardiac output;
+   * - afferent constriction decreases renal inflow;
+   * - afferent dilation increases inflow;
+   * - efferent constriction can initially preserve/increase
+   *   glomerular pressure but severe constriction reduces flow.
+   *
+   * Values are normalized to a healthy resting baseline and
+   * are NOT eGFR or a patient-specific GFR calculation.
+   */
+  const systemicPerfusion =
+    clamp(
+      (
+        results.map /
+        90
+      ) *
+      Math.pow(
+        results.cardiacOutput /
+        5.5,
+        .22
+      ),
+      .30,
+      1.65
+    );
+
+
+  const afferentTone =
+    (
+      values.aferente -
+      50
+    ) /
+    50;
+
+
+  const efferentTone =
+    (
+      values.eferente -
+      50
+    ) /
+    50;
+
+
+  const afferentFlow =
+    Math.exp(
+      -
+      afferentTone *
+      .52
+    );
+
+
+  const efferentFlowPenalty =
+    efferentTone >
+      .55
+      ? 1 -
+        (
+          efferentTone -
+          .55
+        ) *
+        .34
+      : 1;
+
+
+  const renalPerfusion =
+    clamp(
+      systemicPerfusion *
+      afferentFlow *
+      efferentFlowPenalty,
+      .12,
+      1.85
+    );
+
+
+  const efferentPressureEffect =
+    clamp(
+      1 +
+      efferentTone *
+      .30,
+      .65,
+      1.32
+    );
+
+
+  const afferentPressureEffect =
+    clamp(
+      1 -
+      afferentTone *
+      .43,
+      .48,
+      1.48
+    );
+
+
+  const severeEfferentPenalty =
+    values.eferente >
+      82
+      ? clamp(
+          1 -
+          (
+            values.eferente -
+            82
+          ) /
+          18 *
+          .36,
+          .64,
+          1
+        )
+      : 1;
+
+
+  const filtrationRelative =
+    clamp(
+      renalPerfusion *
+      afferentPressureEffect *
+      efferentPressureEffect *
+      severeEfferentPenalty *
+      reserve,
+      .05,
+      1.75
+    );
+
+
+  const adhWaterFactor =
+    clamp(
+      (
+        1 -
+        .85 *
+        (
+          values.adh /
+          100
+        )
+      ) /
+      .575,
+      .12,
+      1.72
+    );
+
+
+  const hydrationFactor =
+    clamp(
+      Math.pow(
+        values.hidratacao /
+        100,
+        1.7
+      ),
+      .32,
+      1.85
+    );
+
+
+  const urineFlow =
+    clamp(
+      filtrationRelative *
+      adhWaterFactor *
+      hydrationFactor,
+      .03,
+      8
+    );
+
+
+  const renalBloodShare =
+    clamp(
+      22 *
+      renalPerfusion,
+      5,
+      38
+    );
+
+
+  return {
+    reserve,
+    perfusion:
+      renalPerfusion,
+
+    filtration:
+      filtrationRelative,
+
+    urineFlow,
+
+    renalBloodShare
+  };
+
+}
+
+
 function physiologicalModel() {
 
   const values =
@@ -2727,6 +2971,13 @@ function physiologicalModel() {
 
   results.ecg =
     ecgMorphology(
+      values,
+      results
+    );
+
+
+  results.renalSystem =
+    computeRenalSystem(
       values,
       results
     );
@@ -2874,6 +3125,149 @@ function statusClass(
 
 
   return "danger-text";
+
+}
+
+
+function renderCenterViewTabs() {
+
+  const container =
+    $("labViewTabs");
+
+
+  if (!container) {
+    return;
+  }
+
+
+  const views = [
+    {
+      id:
+        "monitor",
+
+      label:
+        "Monitor"
+    },
+
+    {
+      id:
+        "integrated",
+
+      label:
+        "Corpo integrado"
+    }
+  ];
+
+
+  container.innerHTML =
+    views
+      .map(
+        function (
+          view
+        ) {
+
+          return (
+            '<button type="button" class="lab-view-tab ' +
+            (
+              state.centerView ===
+                view.id
+                ? "active"
+                : ""
+            ) +
+            '" data-center-view-target="' +
+            view.id +
+            '">' +
+              view.label +
+            "</button>"
+          );
+
+        }
+      )
+      .join("");
+
+
+  document.body
+    .classList.toggle(
+      "lab-center-integrated",
+      state.centerView ===
+        "integrated"
+    );
+
+
+  const integrated =
+    $("integratedBody");
+
+
+  if (integrated) {
+
+    const active =
+      state.centerView ===
+      "integrated";
+
+
+    integrated.hidden =
+      !active;
+
+
+    integrated.setAttribute(
+      "aria-hidden",
+      active
+        ? "false"
+        : "true"
+    );
+
+  }
+
+
+  container
+    .querySelectorAll(
+      "[data-center-view-target]"
+    )
+    .forEach(
+      function (
+        button
+      ) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            state.centerView =
+              button.dataset
+                .centerViewTarget;
+
+
+            renderCenterViewTabs();
+
+
+            renderData();
+
+
+            if (
+              state.centerView ===
+              "monitor"
+            ) {
+
+              const model =
+                physiologicalModel();
+
+
+              drawECG(
+                model
+              );
+
+
+              drawSPO(
+                model
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
 
 }
 
@@ -4082,6 +4476,34 @@ function renderRenalState(
       " mg/dL"
     ) +
     scientificRow(
+      "Perfusão renal relativa",
+      Math.round(
+        results.renalSystem.perfusion *
+        100
+      ) +
+      "%"
+    ) +
+    scientificRow(
+      "Filtração relativa",
+      Math.round(
+        results.renalSystem.filtration *
+        100
+      ) +
+      "%"
+    ) +
+    scientificRow(
+      "Urina estimada",
+      results.renalSystem.urineFlow
+        .toFixed(
+          1
+        )
+        .replace(
+          ".",
+          ","
+        ) +
+      " mL/min"
+    ) +
+    scientificRow(
       "Tempo simulado",
       state.simulatedRenalHours.toFixed(
         1
@@ -4287,6 +4709,397 @@ function renderSPOStatus(
 }
 
 
+function setText(
+  id,
+  value
+) {
+
+  const element =
+    $(
+      id
+    );
+
+
+  if (element) {
+
+    element.textContent =
+      value;
+
+  }
+
+}
+
+
+function renderIntegratedBody(
+  values,
+  results
+) {
+
+  const renal =
+    results.renalSystem;
+
+
+  if (!renal) {
+    return;
+  }
+
+
+  setText(
+    "systemFC",
+    Math.round(
+      results.effectiveHR
+    ) +
+    " bpm"
+  );
+
+
+  setText(
+    "systemSpO2",
+    "SpO₂ " +
+    Math.round(
+      results.spo2
+    ) +
+    "%"
+  );
+
+
+  setText(
+    "systemMAP",
+    "PAM " +
+    Math.round(
+      results.map
+    ) +
+    " mmHg"
+  );
+
+
+  setText(
+    "systemRenal",
+    "Reserva " +
+    Math.round(
+      renal.reserve *
+      100
+    ) +
+    "%"
+  );
+
+
+  setText(
+    "systemGas",
+    "PaCO₂ " +
+    Math.round(
+      values.paco2
+    ) +
+    " · HCO₃⁻ " +
+    values.hco3
+      .toFixed(
+        1
+      ) +
+    " · pH " +
+    results.ph
+      .toFixed(
+        2
+      )
+  );
+
+
+  setText(
+    "systemCO",
+    results
+      .cardiacOutput
+      .toFixed(
+        1
+      ) +
+    " L/min"
+  );
+
+
+  setText(
+    "integratedFC",
+    Math.round(
+      results.effectiveHR
+    ) +
+    " bpm"
+  );
+
+
+  setText(
+    "integratedMAP",
+    Math.round(
+      results.map
+    ) +
+    " mmHg"
+  );
+
+
+  setText(
+    "integratedSpO2",
+    Math.round(
+      results.spo2
+    ) +
+    "%"
+  );
+
+
+  setText(
+    "integratedPaCO2",
+    Math.round(
+      values.paco2
+    ) +
+    " mmHg"
+  );
+
+
+  setText(
+    "integratedHCO3",
+    values.hco3
+      .toFixed(
+        1
+      )
+      .replace(
+        ".",
+        ","
+      ) +
+    " mEq/L"
+  );
+
+
+  setText(
+    "integratedElectrolytes",
+    Math.round(
+      values.sodio
+    ) +
+    " / " +
+    values.potassio
+      .toFixed(
+        1
+      )
+      .replace(
+        ".",
+        ","
+      )
+  );
+
+
+  setText(
+    "integratedUrine",
+    renal.urineFlow
+      .toFixed(
+        1
+      )
+      .replace(
+        ".",
+        ","
+      ) +
+    " mL/min"
+  );
+
+
+  setText(
+    "nephronPerfusion",
+    Math.round(
+      renal.perfusion *
+      100
+    ) +
+    "%"
+  );
+
+
+  setText(
+    "nephronFiltration",
+    Math.round(
+      renal.filtration *
+      100
+    ) +
+    "%"
+  );
+
+
+  setText(
+    "nephronUrine",
+    renal.urineFlow
+      .toFixed(
+        1
+      )
+      .replace(
+        ".",
+        ","
+      ) +
+    " mL/min"
+  );
+
+
+  setText(
+    "nephronHco3",
+    values.hco3
+      .toFixed(
+        1
+      )
+      .replace(
+        ".",
+        ","
+      ) +
+    " mEq/L"
+  );
+
+
+  const stage =
+    $("integratedBody");
+
+
+  if (stage) {
+
+    const flowDuration =
+      clamp(
+        3.4 -
+        (
+          results.cardiacOutput -
+          5.5
+        ) *
+        .30,
+        1.15,
+        5.2
+      );
+
+
+    stage.style.setProperty(
+      "--flow-duration",
+      flowDuration +
+      "s"
+    );
+
+
+    stage.style.setProperty(
+      "--oxygen-level",
+      String(
+        clamp(
+          results.spo2 /
+          100,
+          .45,
+          1
+        )
+      )
+    );
+
+
+    stage.style.setProperty(
+      "--renal-level",
+      String(
+        clamp(
+          renal.perfusion,
+          .15,
+          1.35
+        )
+      )
+    );
+
+  }
+
+
+  const lungs =
+    $("systemLungGroup");
+
+
+  if (lungs) {
+
+    lungs.classList.toggle(
+      "is-hypoxemic",
+      results.spo2 <
+      92
+    );
+
+  }
+
+
+  const kidney =
+    $("systemKidneyGroup");
+
+
+  if (kidney) {
+
+    kidney.classList.toggle(
+      "is-low-perfusion",
+      renal.perfusion <
+      .65
+    );
+
+  }
+
+
+  const status =
+    $("integratedStatus");
+
+
+  if (status) {
+
+    status.textContent =
+      state.live
+        ? "SISTEMAS ACOPLADOS · AO VIVO"
+        : "SISTEMAS CONGELADOS";
+
+  }
+
+}
+
+
+function toggleNephron(
+  force
+) {
+
+  const panel =
+    $("nephronPanel");
+
+
+  const button =
+    $("nephronButton");
+
+
+  if (!panel) {
+    return;
+  }
+
+
+  state.nephronOpen =
+    typeof force ===
+      "boolean"
+      ? force
+      : !state.nephronOpen;
+
+
+  panel.classList.toggle(
+    "is-open",
+    state.nephronOpen
+  );
+
+
+  panel.setAttribute(
+    "aria-hidden",
+    state.nephronOpen
+      ? "false"
+      : "true"
+  );
+
+
+  if (button) {
+
+    button.setAttribute(
+      "aria-expanded",
+      state.nephronOpen
+        ? "true"
+        : "false"
+    );
+
+
+    button.textContent =
+      state.nephronOpen
+        ? "Fechar néfron"
+        : "Abrir néfron";
+
+  }
+
+}
+
+
 function renderRespirationButton() {
 
   $("statusDot")
@@ -4397,6 +5210,12 @@ function renderData() {
 
 
   renderRespirationButton();
+
+
+  renderIntegratedBody(
+    values,
+    results
+  );
 
 
   $("ecgFC")
@@ -5904,14 +6723,21 @@ function animationLoop(
     );
 
 
-    drawECG(
-      animationModel
-    );
+    if (
+      state.centerView ===
+      "monitor"
+    ) {
+
+      drawECG(
+        animationModel
+      );
 
 
-    drawSPO(
-      animationModel
-    );
+      drawSPO(
+        animationModel
+      );
+
+    }
 
 
     if (
@@ -6165,6 +6991,9 @@ function resetLaboratory() {
   renderHomeostasis();
 
 
+  renderCenterViewTabs();
+
+
   renderAnalysisTabs();
 
 
@@ -6312,6 +7141,9 @@ async function start() {
 
 
     renderHomeostasis();
+
+
+    renderCenterViewTabs();
 
 
     renderAnalysisTabs();
