@@ -16,7 +16,7 @@
     href="/css/financas.css?v=20261002-fluid-final4"
   >
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
-  <script src="/js/ui-enhancements.js?v=20261001-nav-core3"></script>
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core3"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <script src="/js/theme-manager.js?v=20261001-nav-core3"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
@@ -1019,9 +1019,45 @@
   </div>
 
 
-  <script src="/js/financas-ui.js?v=20261002-fluid-final4"></script>
-  <script src="/js/financas.js?v=20261002-fluid-final4"></script>
+  
+  <script>
+    (function () {
+      if (window.parent === window) {
+        return;
+      }
 
-  <script src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
+      var href =
+        window.location.pathname +
+        window.location.search +
+        window.location.hash;
+
+      try {
+        if (
+          typeof window.parent.CortexShellNavigationReady ===
+            "function"
+        ) {
+          window.parent.CortexShellNavigationReady(
+            window,
+            href
+          );
+        }
+        else {
+          window.parent.postMessage(
+            {
+              type: "cortex:first-paint-ready",
+              href: href
+            },
+            window.location.origin
+          );
+        }
+      }
+      catch (error) {}
+    })();
+  </script>
+
+<script defer src="/js/financas-ui.js?v=20261002-fluid-final4"></script>
+  <script defer src="/js/financas.js?v=20261002-fluid-final4"></script>
+
+  <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>
 </html>
