@@ -454,6 +454,9 @@ async function login(
           id: usuario.id,
           nome: usuario.nome,
           email: usuario.email,
+          tema:
+            usuario.tema ||
+            "dark-orange",
         },
       }
     );
