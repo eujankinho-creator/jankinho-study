@@ -228,11 +228,22 @@
       false;
 
 
+    let freshLogin =
+      false;
+
+
     try {
 
       alreadySeen =
         sessionStorage.getItem(
           "cortexDesktopIntroSeen"
+        ) ===
+        "1";
+
+
+      freshLogin =
+        sessionStorage.getItem(
+          "cortexDashboardFreshLogin"
         ) ===
         "1";
 
@@ -242,13 +253,17 @@
       alreadySeen =
         false;
 
+      freshLogin =
+        false;
+
     }
 
 
     if (
       !isDesktop ||
       reduceMotion ||
-      alreadySeen
+      alreadySeen ||
+      !freshLogin
     ) {
 
       intro.remove();
@@ -275,6 +290,11 @@
 
 
     try {
+
+      sessionStorage.removeItem(
+        "cortexDashboardFreshLogin"
+      );
+
 
       sessionStorage.setItem(
         "cortexDesktopIntroSeen",
