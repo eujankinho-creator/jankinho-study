@@ -42,6 +42,7 @@ const LAB_STATE = {
   posteriorLeads: false,
   rightLeads: false,
   guidedStep: 0,
+  guidedMode: "route",
   patternId: "p-wave",
   paperSpeed: 25,
   paperGain: 10,
@@ -309,6 +310,205 @@ const PATTERNS = [
   }
 ];
 
+
+const ELECTRODE_LEAD_DETAILS = {
+  DI: {
+    title: "DI · braço direito → braço esquerdo",
+    text: "DI compara o potencial do braço esquerdo (+) com o braço direito (−). Seu eixo é aproximadamente 0° no plano frontal.",
+    direction: "A seta vai do braço direito para o braço esquerdo, que é o polo positivo."
+  },
+  DII: {
+    title: "DII · braço direito → perna esquerda",
+    text: "DII usa o braço direito como polo negativo e a perna esquerda como polo positivo. Seu eixo fica próximo de +60° e costuma mostrar bem onda P e ritmo.",
+    direction: "A seta desce do braço direito em direção à perna esquerda (+)."
+  },
+  DIII: {
+    title: "DIII · braço esquerdo → perna esquerda",
+    text: "DIII compara o braço esquerdo (−) com a perna esquerda (+), com eixo próximo de +120°.",
+    direction: "A seta parte do braço esquerdo e aponta para a perna esquerda (+)."
+  },
+  aVR: {
+    title: "aVR · polo positivo no braço direito",
+    text: "aVR observa o coração a partir do ombro direito. A referência negativa é formada pela média dos outros dois membros.",
+    direction: "A seta parte do centro elétrico em direção ao braço direito (+)."
+  },
+  aVL: {
+    title: "aVL · polo positivo no braço esquerdo",
+    text: "aVL observa o coração a partir do ombro esquerdo, usando como referência a média dos outros dois membros.",
+    direction: "A seta parte do centro elétrico em direção ao braço esquerdo (+)."
+  },
+  aVF: {
+    title: "aVF · polo positivo inferior",
+    text: "aVF olha o coração de baixo para cima, com polo positivo na perna esquerda e referência formada pelos braços.",
+    direction: "A seta parte do centro elétrico em direção à perna esquerda (+)."
+  },
+  V1: { title: "V1 · precordial direita", text: "V1 fica no 4º espaço intercostal direito junto ao esterno e observa principalmente forças septais e do ventrículo direito.", direction: "A seta esquemática parte do centro do tórax em direção ao eletrodo V1." },
+  V2: { title: "V2 · precordial septal", text: "V2 fica no 4º espaço intercostal esquerdo junto ao esterno e complementa a visão septal.", direction: "A seta esquemática aponta do centro cardíaco para V2." },
+  V3: { title: "V3 · zona de transição", text: "V3 é colocada entre V2 e V4 e participa da avaliação da transição da onda R nas precordiais.", direction: "A seta esquemática aponta do centro cardíaco para V3." },
+  V4: { title: "V4 · parede anterior", text: "V4 fica no 5º espaço intercostal na linha hemiclavicular esquerda e observa predominantemente a região anterior/apical.", direction: "A seta esquemática aponta do centro cardíaco para V4." },
+  V5: { title: "V5 · parede lateral", text: "V5 fica no mesmo nível horizontal de V4, na linha axilar anterior, ampliando a visão lateral.", direction: "A seta esquemática aponta do centro cardíaco para V5." },
+  V6: { title: "V6 · parede lateral", text: "V6 fica no mesmo nível horizontal de V4 e V5, na linha axilar média.", direction: "A seta esquemática aponta do centro cardíaco para V6." },
+  V7: { title: "V7 · posterior lateral", text: "V7 prolonga o plano horizontal de V6 para a região posterior esquerda.", direction: "A seta aponta do centro cardíaco para a região posterior correspondente a V7." },
+  V8: { title: "V8 · posterior", text: "V8 continua a sequência posterior e ajuda a observar a parede posterior.", direction: "A seta aponta do centro cardíaco para V8." },
+  V9: { title: "V9 · posterior medial", text: "V9 é uma derivação posterior adicional, mais medial que V8.", direction: "A seta aponta do centro cardíaco para V9." },
+  V3R: { title: "V3R · precordial direita", text: "V3R é a posição espelhada de V3 no hemitórax direito e pode complementar a avaliação do ventrículo direito.", direction: "A seta aponta do centro cardíaco para V3R." },
+  V4R: { title: "V4R · ventrículo direito", text: "V4R é a posição direita correspondente a V4 e é uma derivação importante na avaliação do ventrículo direito.", direction: "A seta aponta do centro cardíaco para V4R." },
+  VD: { title: "Território direito", text: "Referência didática ao território precordial direito; no ECG clínico use as derivações direitas padronizadas.", direction: "A seta indica a direção de observação para o hemitórax direito." }
+};
+
+const ELECTRODE_VECTOR_CONFIG = {
+  DI:   [78, 136, 382, 136],
+  DII:  [78, 136, 246, 304],
+  DIII: [382, 136, 246, 304],
+  aVR:  [230, 205, 78, 136],
+  aVL:  [230, 205, 382, 136],
+  aVF:  [230, 205, 246, 304],
+  V1:   [230, 190, 220, 154],
+  V2:   [230, 190, 240, 154],
+  V3:   [230, 190, 259, 174],
+  V4:   [230, 190, 278, 195],
+  V5:   [230, 190, 311, 188],
+  V6:   [230, 190, 342, 181],
+  V7:   [230, 190, 363, 191],
+  V8:   [230, 190, 373, 211],
+  V9:   [230, 190, 377, 231],
+  V3R:  [230, 190, 199, 174],
+  V4R:  [230, 190, 182, 195],
+  VD:   [230, 190, 166, 188]
+};
+
+const GUIDED_CONTEXT = [
+  {
+    route: ["Compare os intervalos R–R.", "Procure uma onda P antes de cada QRS.", "Confirme se a relação P:QRS é constante."],
+    practice: ["Exemplo: R–R praticamente iguais e uma P antes de cada QRS.", "Conclusão didática: padrão compatível com ritmo regular de origem sinusal."],
+    tips: ["Use uma tira longa, preferencialmente DII.", "Não confunda artefato de linha de base com irregularidade real."],
+    errors: ["Chamar qualquer ritmo regular de sinusal sem conferir P.", "Avaliar só dois complexos e ignorar o restante da tira."]
+  },
+  {
+    route: ["Comece por DI e aVF.", "Depois use DII quando houver dúvida limítrofe.", "Relacione polaridade do QRS com o quadrante do eixo."],
+    practice: ["Exemplo: QRS positivo em DI e aVF.", "Isso coloca o vetor médio no quadrante inferior esquerdo, frequentemente dentro da faixa habitual."],
+    tips: ["O eixo é uma direção média, não uma única seta instantânea.", "Confirme sempre com mais de uma derivação."],
+    errors: ["Usar somente uma derivação.", "Confundir eixo do QRS com eixo da onda P ou T."]
+  },
+  {
+    route: ["Em ritmo regular, meça R–R.", "A 25 mm/s use 300 ÷ quadrados grandes.", "Em ritmo irregular, prefira janela de 6 s ou cálculo médio."],
+    practice: ["Exemplo: 4 quadrados grandes entre dois R.", "300 ÷ 4 ≈ 75 bpm."],
+    tips: ["Confirme a velocidade do papel antes de calcular.", "Escolha um R–R representativo."],
+    errors: ["Usar regra dos 300 em ritmo muito irregular.", "Esquecer que 50 mm/s muda a conversão."]
+  },
+  {
+    route: ["Localize a P antes do QRS.", "Compare polaridade, duração e amplitude.", "Veja se a morfologia se repete em todos os ciclos."],
+    practice: ["Exemplo: P positiva e semelhante em DII antes de cada QRS.", "O achado apoia origem sinusal quando o restante também é coerente."],
+    tips: ["DII costuma mostrar a P com clareza.", "V1 ajuda a observar componentes atriais."],
+    errors: ["Medir ruído como onda P.", "Interpretar tamanho sem conferir calibração."]
+  },
+  {
+    route: ["Meça do início da P ao início do QRS.", "Verifique se o intervalo é constante.", "Compare diferentes ciclos."],
+    practice: ["Exemplo: PR estável ao longo da tira.", "A constância ajuda a avaliar a relação atrioventricular."],
+    tips: ["Escolha uma derivação em que P e QRS tenham início nítido.", "Use vários ciclos para confirmar."],
+    errors: ["Medir do pico da P em vez do início.", "Misturar PR com segmento PR."]
+  },
+  {
+    route: ["Meça a duração total do QRS.", "Observe morfologia e entalhes.", "Nas precordiais, acompanhe a progressão de R."],
+    practice: ["Exemplo: QRS estreito e progressão gradual de R de V1 a V6.", "Depois procure padrões específicos apenas se a morfologia justificar."],
+    tips: ["Compare derivações contíguas.", "Morfologia importa tanto quanto duração."],
+    errors: ["Chamar QRS largo sem medir.", "Avaliar progressão de R usando apenas uma precordial."]
+  },
+  {
+    route: ["Defina uma linha de base adequada.", "Localize o ponto J.", "Compare ST em derivações contíguas."],
+    practice: ["Exemplo: ST próximo da linha de base em derivações vizinhas.", "Qualquer desvio deve ser quantificado e contextualizado."],
+    tips: ["Use o segmento TP quando disponível como referência.", "Olhe distribuição, não só magnitude."],
+    errors: ["Usar uma linha de base instável.", "Interpretar uma única derivação isoladamente."]
+  },
+  {
+    route: ["Meça do início do QRS ao final da T.", "Considere a frequência cardíaca.", "Evite medir quando o final da T não está claro."],
+    practice: ["Exemplo: QT aparentemente longo deve ser corrigido pela frequência antes de concluir prolongamento."],
+    tips: ["Escolha derivações com final de T bem definido.", "Compare mais de um ciclo."],
+    errors: ["Medir até a onda U.", "Comparar QT bruto entre frequências muito diferentes."]
+  },
+  {
+    route: ["Observe polaridade e simetria.", "Compare a T com o QRS e derivações vizinhas.", "Procure inversão, apiculamento ou padrão bifásico."],
+    practice: ["Exemplo: mudança de T em derivações contíguas merece correlação com ST, sintomas e contexto."],
+    tips: ["A T normal varia conforme a derivação.", "Compare com ECG anterior quando disponível."],
+    errors: ["Chamar toda T negativa de patológica.", "Ignorar alterações eletrolíticas e contexto clínico."]
+  }
+];
+
+const PATTERN_TEACHING = {
+  "p-wave": {
+    change: "Mudam duração, formato e/ou amplitude da onda P conforme a contribuição de cada átrio.",
+    recognize: "Compare P normal, P mais larga/entalhada e P mais alta/pontiaguda, sempre na mesma escala.",
+    normal: "No traçado de referência a P é arredondada e antecede cada QRS; use duração e amplitude apenas com calibração conhecida.",
+    caution: "Morfologia atrial não deve ser usada isoladamente para definir aumento de câmara."
+  },
+  alternans: {
+    change: "A amplitude do QRS varia de um batimento para o seguinte em um padrão alternante.",
+    recognize: "Procure alternância repetitiva grande–pequeno–grande–pequeno sem mudança equivalente na calibração.",
+    normal: "No ritmo de referência a amplitude dos complexos consecutivos permanece semelhante.",
+    caution: "Artefatos, respiração e mau contato também podem produzir variações de amplitude."
+  },
+  "r-progression": {
+    change: "Nas precordiais, a onda R tende a crescer de V1 em direção a V5/V6 enquanto a S perde predominância.",
+    recognize: "Compare V1, V2, V3, V4, V5 e V6 em sequência e identifique a zona de transição.",
+    normal: "A progressão normal é gradual; posição dos eletrodos e anatomia podem deslocar a transição.",
+    caution: "Má colocação de precordiais pode simular progressão anormal."
+  },
+  "pathologic-q": {
+    change: "A onda Q torna-se mais larga e/ou profunda em derivações onde esse padrão não seria esperado.",
+    recognize: "Meça largura e profundidade e procure distribuição em derivações contíguas.",
+    normal: "Pequenas ondas q podem ser fisiológicas em algumas derivações; compare localização e proporção.",
+    caution: "Não classifique uma Q isolada sem critérios completos e contexto."
+  },
+  bundle: {
+    change: "O QRS se alarga e assume morfologia característica conforme o atraso ocorre no ramo direito ou esquerdo.",
+    recognize: "Primeiro confirme duração; depois compare V1 e derivações laterais para a morfologia.",
+    normal: "No traçado normal a ativação ventricular é rápida e o QRS permanece estreito.",
+    caution: "Diferencie bloqueio completo, atraso inespecífico e padrões de estimulação ventricular."
+  },
+  delta: {
+    change: "O início do QRS fica mais lento e inclinado, formando a onda delta, geralmente com PR encurtado.",
+    recognize: "Procure PR curto + início empastado do QRS + alteração secundária da morfologia.",
+    normal: "No normal, o QRS começa de forma mais abrupta após o intervalo PR esperado.",
+    caution: "O desenho é didático; diagnóstico de pré-excitação exige conjunto de critérios."
+  },
+  "low-voltage": {
+    change: "A amplitude global dos complexos QRS fica menor.",
+    recognize: "Compare a altura do QRS com a calibração e avalie se a redução é difusa.",
+    normal: "Com a mesma calibração, o traçado de referência apresenta amplitudes maiores.",
+    caution: "Ganhos diferentes, obesidade, derrame, doença pulmonar e outras condições podem influenciar a voltagem."
+  },
+  infarction: {
+    change: "Podem ocorrer alterações de ST, T e posteriormente Q, variando com tempo e território.",
+    recognize: "Procure alterações em derivações anatomicamente contíguas e compare com o traçado de referência.",
+    normal: "No normal o ST permanece próximo à linha de base e a repolarização segue padrão esperado para a derivação.",
+    caution: "Suspeita de síndrome coronariana é avaliação clínica urgente; o simulador é apenas educacional."
+  },
+  potassium: {
+    change: "Alterações do potássio podem modificar T, ST, QT/QU e, em casos importantes, o QRS.",
+    recognize: "Compare T achatada/onda U em um extremo com T mais alta e estreita no outro, sempre considerando o conjunto.",
+    normal: "A onda T de referência é suave e proporcional ao QRS na derivação mostrada.",
+    caution: "Eletrólitos não podem ser inferidos com segurança apenas pelo ECG."
+  },
+  "biphasic-t": {
+    change: "A onda T cruza a linha de base e apresenta duas fases de polaridades opostas.",
+    recognize: "Observe qual componente vem primeiro: positivo–negativo ou negativo–positivo.",
+    normal: "A T de referência tem uma deflexão principal sem duas fases marcadas.",
+    caution: "Significado depende da derivação, do contexto e de alterações associadas."
+  },
+  wellens: {
+    change: "Há alterações características da onda T principalmente em precordiais anteriores em contextos específicos.",
+    recognize: "Compare V2–V4 e procure T profundamente invertida ou bifásica conforme o padrão clínico.",
+    normal: "No normal, a T anterior segue a polaridade esperada para aquela derivação.",
+    caution: "É um padrão de alto risco quando clinicamente compatível; não deve ser tratado como curiosidade gráfica."
+  },
+  "sinus-nodal": {
+    change: "Muda a relação temporal e a morfologia da onda P em relação ao QRS.",
+    recognize: "No sinusal, P precede o QRS; em ritmo nodal a P pode faltar, aparecer retrógrada ou surgir depois do QRS.",
+    normal: "Use o ritmo sinusal como referência de relação P–QRS organizada.",
+    caution: "O diagnóstico do mecanismo do ritmo exige analisar frequência, P, PR e contexto."
+  }
+};
+
 const LEAD_AXES = [
   { id: "DI", short: "DI +", plane: "frontal", angle: 0, color: "#ff375f" },
   { id: "DII", short: "DII +", plane: "frontal", angle: 60, color: "#22d3ee" },
@@ -464,9 +664,9 @@ let signalDot;
 let activationGlow;
 let modelMaterials = [];
 let animationHandle;
-let cutawayEnabled = true;
+let cutawayEnabled = false;
 let audioContext = null;
-let soundEnabled = false;
+let soundEnabled = true;
 
 const clippingPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0.18);
 
@@ -558,7 +758,7 @@ function loadHeartModel() {
   const loader = new GLTFLoader();
   const loading = byId("heartModelLoading");
   const urls = [
-    "/models/heart.glb?v=20261002-1810",
+    "/models/heart.glb?v=20261002-1840",
     "https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb",
     "https://cdn.jsdelivr.net/gh/yihalem123/Human-Organ3D@main/models/heart.glb"
   ];
@@ -603,7 +803,7 @@ function loadHeartModel() {
           const cloned = original.map(function (material) {
             const next = material.clone();
             next.side = THREE.DoubleSide;
-            next.clippingPlanes = cutawayEnabled ? [clippingPlane] : [];
+            next.clippingPlanes = [];
             next.clipIntersection = false;
             next.needsUpdate = true;
             if ("roughness" in next) next.roughness = Math.min(0.78, next.roughness == null ? 0.65 : next.roughness);
@@ -909,16 +1109,6 @@ function updateHeartElectricalState(cycleProgress) {
 }
 
 function setupHeartControls() {
-  const cutaway = byId("heartCutawayToggle");
-  if (cutaway) {
-    cutaway.addEventListener("click", function () {
-      cutawayEnabled = !cutawayEnabled;
-      cutaway.setAttribute("aria-pressed", cutawayEnabled ? "true" : "false");
-      cutaway.textContent = cutawayEnabled ? "Corte: ativo" : "Corte: inteiro";
-      applyCutaway();
-    });
-  }
-
   const fullscreen = byId("heartFullscreen");
   if (fullscreen) {
     fullscreen.addEventListener("click", async function () {
@@ -933,12 +1123,6 @@ function setupHeartControls() {
       } catch (error) {
         console.warn(error);
       }
-    });
-
-    fullscreen.addEventListener("contextmenu", function (event) {
-      event.preventDefault();
-      cutawayEnabled = !cutawayEnabled;
-      applyCutaway();
     });
   }
 
@@ -1072,6 +1256,8 @@ function setupSimulatorControls() {
 
   const sound = byId("heartSoundToggle");
   if (sound) {
+    sound.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
+    sound.textContent = soundEnabled ? "♪ Som ativo" : "♪ Som";
     sound.addEventListener("click", async function () {
       soundEnabled = !soundEnabled;
       sound.setAttribute("aria-pressed", soundEnabled ? "true" : "false");
