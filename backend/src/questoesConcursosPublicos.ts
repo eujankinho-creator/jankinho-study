@@ -1276,6 +1276,906 @@ const questoes: QuestaoConcurso[] = [
         "correta": false
       }
     ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-001",
+    "enunciado": "Paciente adulto chega à emergência com suspeita de sepse, pressão arterial reduzida, taquipneia e alteração do estado mental. Qual prioridade de enfermagem é mais adequada?",
+    "explicacao": "Reconhecer precocemente sinais de disfunção orgânica, monitorar perfusão e acionar protocolo institucional favorece tratamento oportuno.",
+    "assunto": "Sepse",
+    "dificuldade": "dificil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Avaliar rapidamente perfusão, sinais vitais e acionar protocolo de sepse",
+        "correta": true
+      },
+      {
+        "texto": "Aguardar confirmação microbiológica antes de qualquer conduta",
+        "correta": false
+      },
+      {
+        "texto": "Priorizar apenas o controle da febre",
+        "correta": false
+      },
+      {
+        "texto": "Manter observação sem reavaliação frequente",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-002",
+    "enunciado": "Na prevenção de infecção de corrente sanguínea associada a cateter venoso central, qual conjunto de medidas é mais adequado?",
+    "explicacao": "Higiene das mãos, barreira máxima na inserção, antissepsia apropriada e revisão diária da necessidade do cateter são medidas centrais.",
+    "assunto": "IRAS",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Troca diária do cateter independentemente da indicação",
+        "correta": false
+      },
+      {
+        "texto": "Higiene das mãos, técnica asséptica e retirada quando não houver indicação",
+        "correta": true
+      },
+      {
+        "texto": "Uso de antibiótico profilático contínuo",
+        "correta": false
+      },
+      {
+        "texto": "Manter curativo úmido para evitar ressecamento",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-003",
+    "enunciado": "Em paciente com acidente vascular cerebral agudo, qual avaliação deve ser realizada precocemente antes da oferta de dieta por via oral?",
+    "explicacao": "A avaliação da deglutição reduz risco de broncoaspiração em pacientes com AVC.",
+    "assunto": "Neurologia",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Avaliação da deglutição",
+        "correta": true
+      },
+      {
+        "texto": "Teste de acuidade visual",
+        "correta": false
+      },
+      {
+        "texto": "Medida de circunferência abdominal",
+        "correta": false
+      },
+      {
+        "texto": "Avaliação dermatológica completa",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-004",
+    "enunciado": "Paciente com insuficiência cardíaca apresenta ganho de 2 kg em curto período e edema periférico. Qual interpretação é mais provável?",
+    "explicacao": "Ganho rápido de peso em insuficiência cardíaca pode refletir retenção hídrica e piora da congestão.",
+    "assunto": "Cardiologia",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Redução do volume intravascular",
+        "correta": false
+      },
+      {
+        "texto": "Possível retenção hídrica",
+        "correta": true
+      },
+      {
+        "texto": "Melhora obrigatória da função cardíaca",
+        "correta": false
+      },
+      {
+        "texto": "Perda de massa muscular",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-005",
+    "enunciado": "Na abordagem inicial ao paciente politraumatizado, qual princípio deve orientar a avaliação?",
+    "explicacao": "A avaliação sistematizada prioriza ameaças imediatas à vida, seguindo via aérea, respiração, circulação e demais etapas.",
+    "assunto": "Trauma",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Investigar primeiro histórico social completo",
+        "correta": false
+      },
+      {
+        "texto": "Priorizar ameaças imediatas à vida em sequência sistemática",
+        "correta": true
+      },
+      {
+        "texto": "Realizar curativos antes de avaliar respiração",
+        "correta": false
+      },
+      {
+        "texto": "Avaliar dor antes de garantir via aérea",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-006",
+    "enunciado": "Qual achado é mais compatível com hipoperfusão periférica em paciente crítico?",
+    "explicacao": "Extremidades frias, enchimento capilar prolongado e alteração do estado mental podem indicar redução da perfusão tecidual.",
+    "assunto": "Terapia Intensiva",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Enchimento capilar prolongado",
+        "correta": true
+      },
+      {
+        "texto": "Pele quente com perfusão preservada",
+        "correta": false
+      },
+      {
+        "texto": "Diurese aumentada isoladamente",
+        "correta": false
+      },
+      {
+        "texto": "Apetite aumentado",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-007",
+    "enunciado": "Em paciente sob ventilação mecânica, qual cuidado ajuda a prevenir pneumonia associada à ventilação?",
+    "explicacao": "Elevação da cabeceira quando não contraindicada, higiene oral, manejo adequado da via aérea e avaliação diária fazem parte da prevenção.",
+    "assunto": "Terapia Intensiva",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Manter decúbito totalmente horizontal em todos os casos",
+        "correta": false
+      },
+      {
+        "texto": "Aplicar medidas preventivas combinadas e reavaliar diariamente",
+        "correta": true
+      },
+      {
+        "texto": "Trocar o circuito a cada turno sem indicação",
+        "correta": false
+      },
+      {
+        "texto": "Evitar higiene oral",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-008",
+    "enunciado": "Durante transfusão sanguínea, o paciente desenvolve febre, calafrios e dispneia. Qual deve ser a primeira conduta?",
+    "explicacao": "Diante de suspeita de reação transfusional, a transfusão deve ser interrompida e o paciente avaliado imediatamente.",
+    "assunto": "Hemoterapia",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Aumentar a velocidade da infusão",
+        "correta": false
+      },
+      {
+        "texto": "Interromper a transfusão e avaliar o paciente",
+        "correta": true
+      },
+      {
+        "texto": "Trocar apenas o equipo e continuar",
+        "correta": false
+      },
+      {
+        "texto": "Aguardar o término da bolsa",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-009",
+    "enunciado": "Qual situação caracteriza maior risco para desenvolvimento de lesão por pressão?",
+    "explicacao": "Imobilidade, perfusão reduzida, umidade e estado nutricional comprometido são fatores importantes de risco.",
+    "assunto": "Segurança do Paciente",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Paciente independente e com mobilidade preservada",
+        "correta": false
+      },
+      {
+        "texto": "Paciente imóvel, com perfusão reduzida e umidade frequente",
+        "correta": true
+      },
+      {
+        "texto": "Paciente jovem que deambula sem auxílio",
+        "correta": false
+      },
+      {
+        "texto": "Paciente com pele íntegra e atividade habitual",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-010",
+    "enunciado": "Em uma parada cardiorrespiratória intra-hospitalar, qual ação deve ocorrer sem demora após reconhecimento da ausência de respiração normal e pulso?",
+    "explicacao": "O início imediato de compressões torácicas de alta qualidade é essencial até a chegada do desfibrilador e suporte avançado.",
+    "assunto": "Ressuscitação Cardiopulmonar",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Iniciar compressões torácicas",
+        "correta": true
+      },
+      {
+        "texto": "Aguardar avaliação médica antes de tocar no paciente",
+        "correta": false
+      },
+      {
+        "texto": "Transportar o paciente antes de iniciar suporte",
+        "correta": false
+      },
+      {
+        "texto": "Administrar água por via oral",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-011",
+    "enunciado": "Na suspeita de síndrome coronariana aguda, qual exame deve ser obtido precocemente quando disponível?",
+    "explicacao": "O eletrocardiograma de 12 derivações é fundamental na avaliação inicial de dor torácica suspeita de origem isquêmica.",
+    "assunto": "Cardiologia",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "ECG de 12 derivações",
+        "correta": true
+      },
+      {
+        "texto": "Espirometria",
+        "correta": false
+      },
+      {
+        "texto": "Ultrassonografia abdominal de rotina",
+        "correta": false
+      },
+      {
+        "texto": "Teste ergométrico durante dor intensa",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-012",
+    "enunciado": "Paciente diabético consciente apresenta tremor, sudorese e glicemia de 54 mg/dL. Qual conduta inicial é adequada?",
+    "explicacao": "Em paciente consciente e capaz de deglutir, carboidrato de absorção rápida é indicado, seguido de reavaliação.",
+    "assunto": "Diabetes Mellitus",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Administrar insulina regular",
+        "correta": false
+      },
+      {
+        "texto": "Ofertar carboidrato de absorção rápida e reavaliar",
+        "correta": true
+      },
+      {
+        "texto": "Manter jejum",
+        "correta": false
+      },
+      {
+        "texto": "Aguardar melhora espontânea",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-013",
+    "enunciado": "Em paciente com doença renal crônica, qual alteração eletrolítica pode representar risco de arritmia grave?",
+    "explicacao": "A hipercalemia pode causar alterações de condução e arritmias potencialmente fatais.",
+    "assunto": "Nefrologia",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Hipercalemia",
+        "correta": true
+      },
+      {
+        "texto": "Hipouricemia isolada",
+        "correta": false
+      },
+      {
+        "texto": "Hipocolesterolemia",
+        "correta": false
+      },
+      {
+        "texto": "Hipoalbuminemia leve isolada",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-014",
+    "enunciado": "Em paciente com suspeita de delirium, qual característica favorece esse diagnóstico?",
+    "explicacao": "Delirium costuma ter início agudo, curso flutuante e alterações de atenção e consciência.",
+    "assunto": "Saúde do Idoso",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Início agudo e curso flutuante",
+        "correta": true
+      },
+      {
+        "texto": "Evolução lenta e estável por anos",
+        "correta": false
+      },
+      {
+        "texto": "Memória isoladamente alterada sem flutuação",
+        "correta": false
+      },
+      {
+        "texto": "Ausência completa de alteração de atenção",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-015",
+    "enunciado": "Qual prática é recomendada na prevenção de erros de identificação do paciente?",
+    "explicacao": "Utilizar pelo menos dois identificadores e conferir antes de procedimentos e administração de medicamentos reduz erros.",
+    "assunto": "Segurança do Paciente",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Usar apenas o número do leito",
+        "correta": false
+      },
+      {
+        "texto": "Conferir ao menos dois identificadores antes do cuidado",
+        "correta": true
+      },
+      {
+        "texto": "Perguntar apenas o primeiro nome",
+        "correta": false
+      },
+      {
+        "texto": "Identificar somente na admissão",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-016",
+    "enunciado": "Em paciente com risco de suicídio, qual abordagem inicial é mais segura?",
+    "explicacao": "É apropriado perguntar diretamente sobre ideação, plano e meios, manter ambiente seguro e acionar suporte especializado.",
+    "assunto": "Saúde Mental",
+    "dificuldade": "dificil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Evitar falar sobre suicídio",
+        "correta": false
+      },
+      {
+        "texto": "Avaliar diretamente o risco e garantir segurança",
+        "correta": true
+      },
+      {
+        "texto": "Deixar o paciente sozinho",
+        "correta": false
+      },
+      {
+        "texto": "Minimizar as falas para reduzir ansiedade",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-017",
+    "enunciado": "Em puérpera com sangramento vaginal intenso e sinais de instabilidade, qual prioridade é indicada?",
+    "explicacao": "Hemorragia pós-parto é emergência obstétrica; reconhecimento rápido, suporte hemodinâmico e acionamento do protocolo são prioritários.",
+    "assunto": "Saúde da Mulher",
+    "dificuldade": "dificil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Aguardar involução uterina espontânea",
+        "correta": false
+      },
+      {
+        "texto": "Reconhecer emergência, monitorar e acionar protocolo de hemorragia",
+        "correta": true
+      },
+      {
+        "texto": "Orientar deambulação",
+        "correta": false
+      },
+      {
+        "texto": "Oferecer dieta antes da avaliação",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-018",
+    "enunciado": "Em criança com desconforto respiratório, qual achado é sinal de maior gravidade?",
+    "explicacao": "Cianose, esforço respiratório intenso e alteração do estado de consciência são sinais de gravidade.",
+    "assunto": "Saúde da Criança",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Cianose e tiragem intensa",
+        "correta": true
+      },
+      {
+        "texto": "Coriza leve isolada",
+        "correta": false
+      },
+      {
+        "texto": "Apetite preservado",
+        "correta": false
+      },
+      {
+        "texto": "Espirros ocasionais",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-019",
+    "enunciado": "Qual medida é apropriada para prevenção de infecção urinária associada a cateter vesical?",
+    "explicacao": "Indicar cateter apenas quando necessário, manter sistema fechado e removê-lo precocemente são medidas preventivas.",
+    "assunto": "IRAS",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Manter cateter por conveniência",
+        "correta": false
+      },
+      {
+        "texto": "Reavaliar indicação diariamente e remover quando possível",
+        "correta": true
+      },
+      {
+        "texto": "Abrir o sistema rotineiramente",
+        "correta": false
+      },
+      {
+        "texto": "Desconectar a bolsa para transporte",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "enare-ebserh-2026-020",
+    "enunciado": "Na passagem de plantão, qual estratégia favorece a segurança do paciente?",
+    "explicacao": "Comunicação estruturada e objetiva diminui omissões e melhora continuidade do cuidado.",
+    "assunto": "Comunicação em Saúde",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "EBSERH / ENARE",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
+    "alternativas": [
+      {
+        "texto": "Transmitir apenas informações informais",
+        "correta": false
+      },
+      {
+        "texto": "Usar comunicação estruturada com dados essenciais",
+        "correta": true
+      },
+      {
+        "texto": "Evitar confirmar pendências",
+        "correta": false
+      },
+      {
+        "texto": "Omitir mudanças recentes para ganhar tempo",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "ufpa-residencia-2026-001",
+    "enunciado": "Em programas de residência multiprofissional, qual característica melhor descreve a formação em serviço?",
+    "explicacao": "A residência em saúde integra prática supervisionada, ensino e trabalho em regime intensivo, com atuação interprofissional.",
+    "assunto": "Residência Multiprofissional",
+    "dificuldade": "facil",
+    "banca": "UFPA",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Universidade Federal do Pará",
+    "fonteUrl": "https://www.gov.br/ebserh/pt-br/hospitais-universitarios/regiao-norte/chu-ufpa/ensino-e-pesquisa/processo-seletivo/pss-multi-uni-2026/processo-seletivo-simplificado-residencia-multiprofissional-e-em-area-profissional-da-saude-do-ano-de-2026.pdf/@@download/file",
+    "alternativas": [
+      {
+        "texto": "Formação exclusivamente teórica",
+        "correta": false
+      },
+      {
+        "texto": "Formação em serviço com prática supervisionada e integração multiprofissional",
+        "correta": true
+      },
+      {
+        "texto": "Curso de curta duração sem prática",
+        "correta": false
+      },
+      {
+        "texto": "Atividade voluntária sem supervisão",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "ufpa-residencia-2026-002",
+    "enunciado": "Qual princípio do SUS sustenta a oferta de ações de saúde de acordo com diferentes necessidades dos usuários?",
+    "explicacao": "Equidade busca reduzir desigualdades, oferecendo mais a quem mais necessita.",
+    "assunto": "SUS",
+    "dificuldade": "facil",
+    "banca": "UFPA",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Universidade Federal do Pará",
+    "fonteUrl": "https://www.gov.br/ebserh/pt-br/hospitais-universitarios/regiao-norte/chu-ufpa/ensino-e-pesquisa/processo-seletivo/pss-multi-uni-2026/processo-seletivo-simplificado-residencia-multiprofissional-e-em-area-profissional-da-saude-do-ano-de-2026.pdf/@@download/file",
+    "alternativas": [
+      {
+        "texto": "Equidade",
+        "correta": true
+      },
+      {
+        "texto": "Centralização",
+        "correta": false
+      },
+      {
+        "texto": "Privatização",
+        "correta": false
+      },
+      {
+        "texto": "Fragmentação",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "ufpa-residencia-2026-003",
+    "enunciado": "Na clínica ampliada, qual postura da equipe é mais adequada?",
+    "explicacao": "A clínica ampliada considera sujeito, contexto, trabalho em equipe e construção compartilhada do projeto terapêutico.",
+    "assunto": "Saúde Coletiva",
+    "dificuldade": "medio",
+    "banca": "UFPA",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Universidade Federal do Pará",
+    "fonteUrl": "https://www.gov.br/ebserh/pt-br/hospitais-universitarios/regiao-norte/chu-ufpa/ensino-e-pesquisa/processo-seletivo/pss-multi-uni-2026/processo-seletivo-simplificado-residencia-multiprofissional-e-em-area-profissional-da-saude-do-ano-de-2026.pdf/@@download/file",
+    "alternativas": [
+      {
+        "texto": "Focar somente no diagnóstico biomédico",
+        "correta": false
+      },
+      {
+        "texto": "Construir cuidado considerando contexto e diferentes saberes",
+        "correta": true
+      },
+      {
+        "texto": "Evitar participação do usuário",
+        "correta": false
+      },
+      {
+        "texto": "Restringir decisões a uma única profissão",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "ufpa-residencia-2026-004",
+    "enunciado": "Em trabalho interprofissional, qual comportamento favorece cuidado seguro?",
+    "explicacao": "Compartilhar objetivos, reconhecer competências profissionais e comunicar responsabilidades favorece coordenação do cuidado.",
+    "assunto": "Trabalho Interprofissional",
+    "dificuldade": "medio",
+    "banca": "UFPA",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Universidade Federal do Pará",
+    "fonteUrl": "https://www.gov.br/ebserh/pt-br/hospitais-universitarios/regiao-norte/chu-ufpa/ensino-e-pesquisa/processo-seletivo/pss-multi-uni-2026/processo-seletivo-simplificado-residencia-multiprofissional-e-em-area-profissional-da-saude-do-ano-de-2026.pdf/@@download/file",
+    "alternativas": [
+      {
+        "texto": "Evitar compartilhamento de informações",
+        "correta": false
+      },
+      {
+        "texto": "Definir objetivos comuns e comunicar responsabilidades",
+        "correta": true
+      },
+      {
+        "texto": "Duplicar intervenções sem coordenação",
+        "correta": false
+      },
+      {
+        "texto": "Impedir discussão entre categorias",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "ufpa-residencia-2026-005",
+    "enunciado": "Qual indicador pode auxiliar na avaliação de qualidade assistencial em enfermagem hospitalar?",
+    "explicacao": "Indicadores como incidência de lesão por pressão, quedas e eventos relacionados a dispositivos permitem monitorar qualidade e segurança.",
+    "assunto": "Gestão em Enfermagem",
+    "dificuldade": "medio",
+    "banca": "UFPA",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Universidade Federal do Pará",
+    "fonteUrl": "https://www.gov.br/ebserh/pt-br/hospitais-universitarios/regiao-norte/chu-ufpa/ensino-e-pesquisa/processo-seletivo/pss-multi-uni-2026/processo-seletivo-simplificado-residencia-multiprofissional-e-em-area-profissional-da-saude-do-ano-de-2026.pdf/@@download/file",
+    "alternativas": [
+      {
+        "texto": "Incidência de quedas e lesão por pressão",
+        "correta": true
+      },
+      {
+        "texto": "Cor das paredes da unidade",
+        "correta": false
+      },
+      {
+        "texto": "Número de elevadores",
+        "correta": false
+      },
+      {
+        "texto": "Quantidade de cadeiras da recepção",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "humap-ufms-enare-2026-001",
+    "enunciado": "Em paciente crítico, qual parâmetro pode indicar redução de perfusão renal?",
+    "explicacao": "A queda da diurese é um sinal relevante de hipoperfusão ou disfunção renal, devendo ser interpretada no contexto clínico.",
+    "assunto": "Paciente Crítico",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Humap-UFMS / EBSERH",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/realizar-residencias-multiprofissionais-e-em-areas-profissionais-da-saude",
+    "alternativas": [
+      {
+        "texto": "Oligúria",
+        "correta": true
+      },
+      {
+        "texto": "Polifagia",
+        "correta": false
+      },
+      {
+        "texto": "Aumento da acuidade visual",
+        "correta": false
+      },
+      {
+        "texto": "Hipertricose",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "humap-ufms-enare-2026-002",
+    "enunciado": "Qual alteração pode indicar deterioração respiratória em paciente crítico?",
+    "explicacao": "Aumento do trabalho respiratório, queda da saturação e alteração do nível de consciência são sinais de deterioração.",
+    "assunto": "Paciente Crítico",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Humap-UFMS / EBSERH",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/realizar-residencias-multiprofissionais-e-em-areas-profissionais-da-saude",
+    "alternativas": [
+      {
+        "texto": "Redução progressiva da saturação com esforço respiratório",
+        "correta": true
+      },
+      {
+        "texto": "Sono fisiológico noturno sem alterações",
+        "correta": false
+      },
+      {
+        "texto": "Apetite preservado",
+        "correta": false
+      },
+      {
+        "texto": "Diurese normal isolada",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "humap-ufms-enare-2026-003",
+    "enunciado": "Em paciente com choque, qual objetivo geral da ressuscitação é prioritário?",
+    "explicacao": "O objetivo é restabelecer perfusão e oxigenação tecidual adequadas enquanto se trata a causa do choque.",
+    "assunto": "Choque",
+    "dificuldade": "dificil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Humap-UFMS / EBSERH",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/realizar-residencias-multiprofissionais-e-em-areas-profissionais-da-saude",
+    "alternativas": [
+      {
+        "texto": "Restabelecer perfusão tecidual adequada",
+        "correta": true
+      },
+      {
+        "texto": "Normalizar apenas a temperatura corporal",
+        "correta": false
+      },
+      {
+        "texto": "Aumentar exclusivamente a frequência cardíaca",
+        "correta": false
+      },
+      {
+        "texto": "Reduzir diurese",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "humap-ufms-enare-2026-004",
+    "enunciado": "Qual cuidado é importante no paciente em uso de drogas vasoativas por acesso venoso?",
+    "explicacao": "Monitorização hemodinâmica e vigilância do acesso são essenciais, pois extravasamento e alterações de pressão podem causar complicações.",
+    "assunto": "Terapia Intensiva",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Humap-UFMS / EBSERH",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/realizar-residencias-multiprofissionais-e-em-areas-profissionais-da-saude",
+    "alternativas": [
+      {
+        "texto": "Monitorar pressão, perfusão e integridade do acesso",
+        "correta": true
+      },
+      {
+        "texto": "Interromper toda monitorização após estabilização inicial",
+        "correta": false
+      },
+      {
+        "texto": "Administrar sem bomba quando possível",
+        "correta": false
+      },
+      {
+        "texto": "Ignorar sinais de extravasamento",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "humap-ufms-enare-2026-005",
+    "enunciado": "No cuidado ao paciente crítico, por que a reavaliação frequente é essencial?",
+    "explicacao": "Pacientes críticos podem deteriorar rapidamente; reavaliações detectam mudanças e permitem intervenção precoce.",
+    "assunto": "Paciente Crítico",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Residência Multiprofissional - Enfermagem",
+    "orgao": "Humap-UFMS / EBSERH",
+    "fonteUrl": "https://www.gov.br/pt-br/servicos/realizar-residencias-multiprofissionais-e-em-areas-profissionais-da-saude",
+    "alternativas": [
+      {
+        "texto": "Porque mudanças clínicas podem ocorrer rapidamente",
+        "correta": true
+      },
+      {
+        "texto": "Porque substitui todos os exames complementares",
+        "correta": false
+      },
+      {
+        "texto": "Porque elimina necessidade de comunicação",
+        "correta": false
+      },
+      {
+        "texto": "Porque evita qualquer registro de enfermagem",
+        "correta": false
+      }
+    ]
   }
 ];
 
