@@ -266,16 +266,68 @@
   border: 1px solid rgba(245, 158, 11, .55);
 }
 
+.electrochemical-readout {
+  display: grid;
+  grid-template-columns: 92px 92px minmax(190px, 1fr);
+  gap: 7px;
+  width: min(520px, 100%);
+  margin-top: 10px;
+}
+
+.electrochemical-readout > div {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 11px;
+  background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018);
+}
+
+.electrochemical-readout span {
+  color: #536071;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .11em;
+}
+
+.electrochemical-readout strong {
+  color: #aeb9c9;
+  font-size: 10px;
+}
+
+.electrochemical-readout > div:first-child strong {
+  color: #8fe1ff;
+}
+
+.electrochemical-readout > div:nth-child(2) strong {
+  color: #f7c06d;
+}
+
+.electrochemical-readout .polarity-readout strong {
+  overflow: hidden;
+  color: #9eb1d6;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .cell-stage-wrap {
   position: relative;
   height: clamp(430px, 58vh, 650px);
   margin-top: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .055);
-  border-radius: 17px;
+  border: 1px solid rgba(255, 255, 255, .07);
+  border-radius: 20px;
   background:
-    radial-gradient(circle at 50% 51%, rgba(47, 86, 166, .11), transparent 31%),
-    linear-gradient(180deg, rgba(18, 24, 34, .92), rgba(8, 12, 18, .96));
+    radial-gradient(ellipse at 48% 54%, rgba(59, 105, 205, .17), transparent 34%),
+    radial-gradient(circle at 18% 8%, rgba(94, 140, 255, .07), transparent 24%),
+    radial-gradient(circle at 84% 84%, rgba(18, 85, 132, .08), transparent 28%),
+    linear-gradient(180deg, rgba(17, 23, 35, .97), rgba(5, 9, 16, .985));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    inset 0 -30px 80px rgba(0,0,0,.22),
+    0 20px 60px rgba(0,0,0,.20);
 }
 
 .cell-stage-wrap::before {
@@ -283,19 +335,31 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image:
-    radial-gradient(circle, rgba(255, 255, 255, .035) 1px, transparent 1px);
-  background-size: 26px 26px;
-  opacity: .34;
+  background:
+    radial-gradient(circle at 50% 52%, transparent 0 36%, rgba(104,151,255,.028) 53%, transparent 70%),
+    radial-gradient(circle, rgba(255, 255, 255, .03) 1px, transparent 1px);
+  background-size: auto, 30px 30px;
+  opacity: .42;
+}
+
+.cell-stage-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(118deg, rgba(255,255,255,.025), transparent 24%, transparent 75%, rgba(70,110,190,.025));
+  mix-blend-mode: screen;
 }
 
 #cellCanvas {
   position: absolute;
+  z-index: 1;
   inset: 0;
   width: 100%;
   height: 100%;
   touch-action: none;
   cursor: grab;
+  filter: saturate(1.05) contrast(1.02);
 }
 
 #cellCanvas.dragging {
@@ -304,7 +368,7 @@
 
 .stage-label {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   display: grid;
   gap: 3px;
   pointer-events: none;
@@ -808,5 +872,16 @@
 
   .membrane-bottom-grid {
     margin-top: 10px;
+  }
+}
+
+
+@media (max-width: 760px) {
+  .electrochemical-readout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .electrochemical-readout .polarity-readout {
+    grid-column: 1 / -1;
   }
 }
