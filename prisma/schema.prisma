@@ -59,7 +59,7 @@ model Questao {
   respostas    Resposta[]
   flashcards   Flashcard[]
 
-  @@unique([usuarioId, fonte, origemId])
+  @@index([usuarioId, fonte, origemId])
   @@index([fonte])
   @@index([banca])
   @@index([ano])
