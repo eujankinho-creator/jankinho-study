@@ -16,6 +16,9 @@
     selectedAreas:
       new Set(),
 
+    questionSource:
+      "all",
+
     mode:
       "guided",
 
@@ -202,6 +205,339 @@
   }
 
 
+  function questionSource(
+    question
+  ) {
+
+    const fonte =
+      normalize(
+        question &&
+        question.fonte
+      );
+
+    return fonte
+      .startsWith(
+        "romulo-passos"
+      )
+        ? "romulo"
+        : "cortex";
+
+  }
+
+
+  function contestFilters() {
+
+    return {
+      banca:
+        $("simBanca")
+          ? $("simBanca").value
+          : "",
+
+      ano:
+        $("simAno")
+          ? $("simAno").value
+          : "",
+
+      orgao:
+        $("simOrgao")
+          ? $("simOrgao").value
+          : "",
+
+      cargo:
+        $("simCargo")
+          ? $("simCargo").value
+          : "",
+
+      assunto:
+        $("simAssunto")
+          ? $("simAssunto").value
+          : ""
+    };
+
+  }
+
+
+  function matchesContestFilters(
+    question
+  ) {
+
+    if (
+      state.questionSource !==
+      "romulo"
+    ) {
+      return true;
+    }
+
+    const filters =
+      contestFilters();
+
+    const comparisons = [
+      [
+        filters.banca,
+        question.banca
+      ],
+      [
+        filters.ano,
+        question.ano
+      ],
+      [
+        filters.orgao,
+        question.orgao
+      ],
+      [
+        filters.cargo,
+        question.cargo
+      ],
+      [
+        filters.assunto,
+        question.tema
+      ]
+    ];
+
+    return comparisons
+      .every(
+        function (
+          pair
+        ) {
+
+          const expected =
+            normalize(
+              pair[0]
+            );
+
+          if (!expected) {
+            return true;
+          }
+
+          return normalize(
+            pair[1]
+          ) ===
+          expected;
+
+        }
+      );
+
+  }
+
+
+  function sourceScopedQuestions() {
+
+    return sourceScopedQuestions()
+      .filter(
+        function (
+          question
+        ) {
+
+          if (
+            state.questionSource ===
+            "all"
+          ) {
+            return true;
+          }
+
+          return (
+            questionSource(
+              question
+            ) ===
+              state.questionSource &&
+            matchesContestFilters(
+              question
+            )
+          );
+
+        }
+      );
+
+  }
+
+
+  function uniqueValues(
+    questions,
+    field
+  ) {
+
+    return Array
+      .from(
+        new Set(
+          questions
+            .map(
+              function (
+                question
+              ) {
+                return String(
+                  question[field] ??
+                  ""
+                ).trim();
+              }
+            )
+            .filter(Boolean)
+        )
+      )
+      .sort(
+        function (
+          a,
+          b
+        ) {
+
+          if (
+            field ===
+            "ano"
+          ) {
+            return (
+              Number(b) -
+              Number(a)
+            );
+          }
+
+          return a.localeCompare(
+            b,
+            "pt-BR"
+          );
+
+        }
+      );
+
+  }
+
+
+  function fillContestSelect(
+    id,
+    values,
+    emptyLabel
+  ) {
+
+    const select =
+      $(id);
+
+    if (!select) {
+      return;
+    }
+
+    const previous =
+      select.value;
+
+    select.innerHTML =
+      '<option value="">' +
+      escapeHtml(
+        emptyLabel
+      ) +
+      '</option>' +
+      values
+        .map(
+          function (
+            value
+          ) {
+
+            return (
+              '<option value="' +
+              escapeHtml(
+                value
+              ) +
+              '">' +
+              escapeHtml(
+                value
+              ) +
+              '</option>'
+            );
+
+          }
+        )
+        .join("");
+
+    if (
+      values.includes(
+        previous
+      )
+    ) {
+      select.value =
+        previous;
+    }
+
+  }
+
+
+  function populateContestFilters() {
+
+    const romuloQuestions =
+      state.questions
+        .filter(
+          function (
+            question
+          ) {
+            return (
+              questionSource(
+                question
+              ) ===
+              "romulo"
+            );
+          }
+        );
+
+    fillContestSelect(
+      "simBanca",
+      uniqueValues(
+        romuloQuestions,
+        "banca"
+      ),
+      "Todas"
+    );
+
+    fillContestSelect(
+      "simAno",
+      uniqueValues(
+        romuloQuestions,
+        "ano"
+      ),
+      "Todos"
+    );
+
+    fillContestSelect(
+      "simOrgao",
+      uniqueValues(
+        romuloQuestions,
+        "orgao"
+      ),
+      "Todos"
+    );
+
+    fillContestSelect(
+      "simCargo",
+      uniqueValues(
+        romuloQuestions,
+        "cargo"
+      ),
+      "Todos"
+    );
+
+    fillContestSelect(
+      "simAssunto",
+      uniqueValues(
+        romuloQuestions,
+        "tema"
+      ),
+      "Todos"
+    );
+
+  }
+
+
+  function updateContestVisibility() {
+
+    const filters =
+      $("contestFilters");
+
+    if (filters) {
+      filters.classList
+        .toggle(
+          "hidden",
+          state.questionSource !==
+            "romulo"
+        );
+    }
+
+  }
+
+
   function shuffle(
     items
   ) {
@@ -356,7 +692,8 @@
       new Map();
 
 
-    state.questions.forEach(
+    sourceScopedQuestions()
+      .forEach(
       function (
         question
       ) {
@@ -627,6 +964,22 @@
       count +
       " dispon\u00edveis";
 
+    const emptyHint =
+      $("romuloEmptyHint");
+
+    if (emptyHint) {
+      emptyHint.classList
+        .toggle(
+          "hidden",
+          !(
+            state.questionSource ===
+              "romulo" &&
+            count ===
+              0
+          )
+        );
+    }
+
   }
 
 
@@ -650,6 +1003,10 @@
       .textContent =
       state.questions.length;
 
+
+    populateContestFilters();
+
+    updateContestVisibility();
 
     renderAreas();
 
@@ -1235,6 +1592,23 @@
 
     const available =
       availableQuestions();
+
+
+    if (
+      state.questionSource ===
+        "romulo" &&
+      sourceScopedQuestions()
+        .length ===
+        0
+    ) {
+
+      showError(
+        "Ainda nao ha questoes do Banco Romulo Passos importadas para estes filtros."
+      );
+
+      return;
+
+    }
 
 
     if (
@@ -2736,6 +3110,112 @@
 
         }
       );
+
+
+    document
+      .querySelectorAll(
+        "[data-question-source]"
+      )
+      .forEach(
+        function (
+          button
+        ) {
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              state.questionSource =
+                button.dataset
+                  .questionSource ||
+                "all";
+
+              document
+                .querySelectorAll(
+                  "[data-question-source]"
+                )
+                .forEach(
+                  function (
+                    option
+                  ) {
+                    option.classList
+                      .toggle(
+                        "active",
+                        option ===
+                          button
+                      );
+                  }
+                );
+
+              updateContestVisibility();
+
+              state.selectedAreas
+                .clear();
+
+              renderAreas();
+
+            }
+          );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        "[data-contest-filter]"
+      )
+      .forEach(
+        function (
+          select
+        ) {
+
+          select.addEventListener(
+            "change",
+            function () {
+
+              state.selectedAreas
+                .clear();
+
+              renderAreas();
+
+            }
+          );
+
+        }
+      );
+
+
+    const clearContestFilters =
+      $("clearContestFilters");
+
+    if (clearContestFilters) {
+      clearContestFilters
+        .addEventListener(
+          "click",
+          function () {
+
+            document
+              .querySelectorAll(
+                "[data-contest-filter]"
+              )
+              .forEach(
+                function (
+                  select
+                ) {
+                  select.value =
+                    "";
+                }
+              );
+
+            state.selectedAreas
+              .clear();
+
+            renderAreas();
+
+          }
+        );
+    }
 
 
     document
