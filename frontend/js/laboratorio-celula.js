@@ -41,7 +41,11 @@
     naChannelOpen: true,
     kChannelOpen: true,
     vm: -70,
-    stimulusOffset: 0,
+    lastVm: -70,
+    stimulusCurrent: 0,
+    stimulusUntil: 0,
+    refractoryUntil: 0,
+    pumps: [],
     history: [],
     lastHistory: 0,
     lastPumpCycle: 0,
@@ -70,7 +74,7 @@
     { type: "K", angle: 2.48, color: "#f59e0b" }
   ];
 
-  const PUMP_ANGLE = -2.32;
+  const PUMP_ANGLES = [-2.32, -0.52, 1.72];
 
   function canvasInfo(canvas) {
     const dpr = window.devicePixelRatio || 1;
@@ -178,6 +182,9 @@
       vy: (Math.random() - .5) * 8,
       wobble: Math.random() * Math.PI * 2,
       flashUntil: 0,
+      boundPumpId: null,
+      boundSlotType: null,
+      boundSlotIndex: null,
       transport: null
     };
   }
@@ -240,9 +247,24 @@
   }
 
   function membranePermeabilities() {
+    let na = .04;
+    let k = 1;
+    const phase = state.actionPotential ? state.actionPotential.phase : "rest";
+
+    if (phase === "depolarization") {
+      na = 8;
+      k = .65;
+    } else if (phase === "repolarization") {
+      na = .008;
+      k = 5;
+    } else if (phase === "hyperpolarization") {
+      na = .012;
+      k = 2.2;
+    }
+
     return {
-      na: state.naChannelOpen ? .04 : .0015,
-      k: state.kChannelOpen ? 1 : .012
+      na: state.naChannelOpen ? na : .0015,
+      k: state.kChannelOpen ? k : .012
     };
   }
 
@@ -263,7 +285,7 @@
     const crossingCharge = activeTransportVoltage();
 
     return clamp(
-      base + pumpElectrogenic + crossingCharge + state.stimulusOffset,
+      base + pumpElectrogenic + crossingCharge,
       -100,
       35
     );
@@ -320,6 +342,235 @@
     return zone === "in"
       ? g.r - membraneHalf - ion.radius - clearance
       : g.r + membraneHalf + ion.radius + clearance;
+  }
+
+  function resetPumps() {
+    state.pumps = PUMP_ANGLES.map(function (angle, index) {
+      return {
+        id: "pump-" + index,
+        angle: angle,
+        phase: "na-binding",
+        phaseSince: performance.now(),
+        readyAt: 0,
+        lastAutoBind: 0,
+        pulseUntil: 0,
+        naSlots: [null, null, null],
+        kSlots: [null, null]
+      };
+    });
+  }
+
+  function pumpBindingPoint(pump, type, index, g) {
+    const offsets = type === "Na" ? [-.085, 0, .085] : [-.055, .055];
+    const radius = type === "Na" ? g.r - 28 : g.r + 28;
+    return pointAtRadius(pump.angle + offsets[index], radius, g);
+  }
+
+  function pumpSlotActive(pump, type) {
+    return (
+      (type === "Na" && pump.phase === "na-binding") ||
+      (type === "K" && pump.phase === "k-binding")
+    );
+  }
+
+  function freePumpSlot(pump, type) {
+    const slots = type === "Na" ? pump.naSlots : pump.kSlots;
+    for (let i = 0; i < slots.length; i += 1) {
+      if (slots[i] === null) return i;
+    }
+    return -1;
+  }
+
+  function pumpSlotsFull(pump, type) {
+    const slots = type === "Na" ? pump.naSlots : pump.kSlots;
+    return slots.every(function (id) { return id !== null; });
+  }
+
+  function bindIonToPumpSlot(pump, ion, type, slotIndex, manual) {
+    if (!state.pumpOn || !pumpSlotActive(pump, type)) return false;
+    if (ion.transport || ion.boundPumpId) return false;
+
+    const expectedZone = type === "Na" ? "in" : "out";
+    if (ion.type !== type || ion.zone !== expectedZone) return false;
+
+    const slots = type === "Na" ? pump.naSlots : pump.kSlots;
+    if (slots[slotIndex] !== null) return false;
+
+    const g = geometry();
+    const point = pumpBindingPoint(pump, type, slotIndex, g);
+
+    slots[slotIndex] = ion.id;
+    ion.boundPumpId = pump.id;
+    ion.boundSlotType = type;
+    ion.boundSlotIndex = slotIndex;
+    ion.vx = 0;
+    ion.vy = 0;
+    ion.nx = clamp(point.x / g.w, .02, .98);
+    ion.ny = clamp(point.y / g.h, .025, .975);
+    ion.flashUntil = performance.now() + 450;
+
+    if (pumpSlotsFull(pump, type)) {
+      pump.readyAt = performance.now() + 650;
+    }
+
+    if (manual) {
+      const filled = slots.filter(function (id) { return id !== null; }).length;
+      const total = slots.length;
+      setExplanation(
+        type + "⁺ encaixado na Na⁺/K⁺-ATPase",
+        "O íon ocupou um sítio específico da bomba. O ciclo só avança quando todos os sítios exigidos desta etapa estiverem preenchidos.",
+        type === "Na"
+          ? filled + "/3 Na⁺ intracelulares ligados"
+          : filled + "/2 K⁺ extracelulares ligados"
+      );
+      setHint(type === "Na" ? "Complete os 3 sítios de Na⁺." : "Complete os 2 sítios de K⁺.");
+    }
+
+    return true;
+  }
+
+  function nearestFreeIonToPoint(type, zone, point, radius) {
+    let best = null;
+    let bestDistance = radius;
+
+    state.ions.forEach(function (ion) {
+      if (
+        ion.type !== type ||
+        ion.zone !== zone ||
+        ion.transport ||
+        ion.boundPumpId ||
+        ion.id === state.draggingId
+      ) return;
+
+      const p = normalizedToPoint(ion, geometry());
+      const d = Math.hypot(p.x - point.x, p.y - point.y);
+      if (d < bestDistance) {
+        bestDistance = d;
+        best = ion;
+      }
+    });
+
+    return best;
+  }
+
+  function tryBindIonToPump(ion, x, y, manual) {
+    if (!state.pumpOn || ion.transport || ion.boundPumpId) return false;
+
+    const g = geometry();
+    let match = null;
+    let bestDistance = 25;
+
+    state.pumps.forEach(function (pump) {
+      const type = pump.phase === "na-binding" ? "Na" : pump.phase === "k-binding" ? "K" : null;
+      if (!type || ion.type !== type) return;
+
+      const expectedZone = type === "Na" ? "in" : "out";
+      if (ion.zone !== expectedZone) return;
+
+      const slots = type === "Na" ? pump.naSlots : pump.kSlots;
+      slots.forEach(function (slotIonId, index) {
+        if (slotIonId !== null) return;
+        const p = pumpBindingPoint(pump, type, index, g);
+        const d = Math.hypot(x - p.x, y - p.y);
+        if (d < bestDistance) {
+          bestDistance = d;
+          match = { pump: pump, type: type, index: index };
+        }
+      });
+    });
+
+    if (!match) return false;
+    return bindIonToPumpSlot(match.pump, ion, match.type, match.index, manual);
+  }
+
+  function releasePumpBoundIons(pump, type, newZone, now) {
+    const slots = type === "Na" ? pump.naSlots : pump.kSlots;
+    const ids = slots.slice();
+    const duration = 960;
+
+    ids.forEach(function (id, index) {
+      const ion = state.ions.find(function (item) { return item.id === id; });
+      if (!ion) return;
+
+      ion.boundPumpId = null;
+      ion.boundSlotType = null;
+      ion.boundSlotIndex = null;
+
+      startIonTransport(ion, newZone, pump.angle, {
+        kind: "pump",
+        duration: duration,
+        delay: index * 90,
+        silent: true,
+        extra: 13 + index * 2
+      });
+    });
+
+    for (let i = 0; i < slots.length; i += 1) slots[i] = null;
+    pump.pulseUntil = now + 1200;
+  }
+
+  function updatePumpStates(now) {
+    if (!state.pumpOn) return;
+
+    const g = geometry();
+
+    state.pumps.forEach(function (pump) {
+      if (pump.phase === "na-binding") {
+        if (!pumpSlotsFull(pump, "Na") && now - pump.lastAutoBind > 320) {
+          const slot = freePumpSlot(pump, "Na");
+          if (slot >= 0) {
+            const site = pumpBindingPoint(pump, "Na", slot, g);
+            const ion = nearestFreeIonToPoint("Na", "in", site, 30);
+            if (ion) {
+              bindIonToPumpSlot(pump, ion, "Na", slot, false);
+              pump.lastAutoBind = now;
+            }
+          }
+        }
+
+        if (pumpSlotsFull(pump, "Na") && now >= pump.readyAt) {
+          pump.phase = "na-release";
+          pump.phaseSince = now;
+          releasePumpBoundIons(pump, "Na", "out", now);
+          setExplanation(
+            "ATPase: 3 Na⁺ liberados para fora",
+            "Após ligar três Na⁺ intracelulares, a bomba muda de conformação e os libera no meio extracelular. Agora expõe dois sítios para K⁺.",
+            "3 Na⁺ → exterior  ·  próximo: 2 K⁺"
+          );
+        }
+      } else if (pump.phase === "na-release" && now - pump.phaseSince > 1180) {
+        pump.phase = "k-binding";
+        pump.phaseSince = now;
+        pump.readyAt = 0;
+      } else if (pump.phase === "k-binding") {
+        if (!pumpSlotsFull(pump, "K") && now - pump.lastAutoBind > 320) {
+          const slot = freePumpSlot(pump, "K");
+          if (slot >= 0) {
+            const site = pumpBindingPoint(pump, "K", slot, g);
+            const ion = nearestFreeIonToPoint("K", "out", site, 30);
+            if (ion) {
+              bindIonToPumpSlot(pump, ion, "K", slot, false);
+              pump.lastAutoBind = now;
+            }
+          }
+        }
+
+        if (pumpSlotsFull(pump, "K") && now >= pump.readyAt) {
+          pump.phase = "k-release";
+          pump.phaseSince = now;
+          releasePumpBoundIons(pump, "K", "in", now);
+          setExplanation(
+            "ATPase: 2 K⁺ liberados para dentro",
+            "Com dois K⁺ extracelulares ligados, a bomba retorna à conformação inicial e libera K⁺ no citoplasma. Um ciclo 3:2 foi concluído.",
+            "2 K⁺ → interior  ·  ciclo concluído"
+          );
+        }
+      } else if (pump.phase === "k-release" && now - pump.phaseSince > 1180) {
+        pump.phase = "na-binding";
+        pump.phaseSince = now;
+        pump.readyAt = 0;
+      }
+    });
   }
 
   function nearestChannelAny(angle) {
@@ -526,7 +777,8 @@
           ion.type === type &&
           ion.zone === zone &&
           ion.id !== state.draggingId &&
-          !ion.transport
+          !ion.transport &&
+          !ion.boundPumpId
         );
       })
       .map(function (ion) {
@@ -626,7 +878,7 @@
     const g = geometry();
     const dt = Math.min(delta, 40) / 1000;
     const active = state.ions.filter(function (ion) {
-      return !ion.transport && ion.id !== state.draggingId;
+      return !ion.transport && !ion.boundPumpId && ion.id !== state.draggingId;
     });
 
     // Brownian motion + like-charge repulsion. All visible Na⁺/K⁺ are +1 cations.
@@ -711,7 +963,7 @@
   }
 
   function tryLocalChannelFlux(now) {
-    if (state.actionPotential) return;
+    const permeability = membranePermeabilities();
 
     CHANNELS.forEach(function (channel) {
       if (!channelIsOpen(channel.type)) return;
@@ -719,17 +971,20 @@
       const drive = electrochemicalDrive(channel.type);
       const fromZone = drive.outward ? "in" : "out";
       const toZone = drive.outward ? "out" : "in";
-      const local = localIonCandidates(channel.type, fromZone, channel.angle, 48);
+      const local = localIonCandidates(channel.type, fromZone, channel.angle, 56);
 
       if (!local.length) return;
 
-      // Higher electrochemical drive means a nearby particle is more likely to cross.
-      const chance = .16 + drive.strength * .56;
+      const p = channel.type === "Na" ? permeability.na : permeability.k;
+      const reference = channel.type === "Na" ? 8 : 5;
+      const permeabilityFactor = clamp(p / reference, .002, 1);
+      const chance = clamp(.015 + drive.strength * permeabilityFactor * .94, .015, .96);
+
       if (Math.random() > chance) return;
 
       startIonTransport(local[0].ion, toZone, channel.angle, {
         kind: "channel",
-        duration: 720,
+        duration: state.actionPotential ? 520 : 720,
         silent: true,
         extra: 12
       });
@@ -750,7 +1005,7 @@
     let bestDistance = 25;
 
     state.ions.forEach(function (ion) {
-      if (ion.transport) return;
+      if (ion.transport || ion.boundPumpId) return;
       const p = normalizedToPoint(ion, g);
       const dx = p.x - x;
       const dy = p.y - y;
@@ -822,6 +1077,12 @@
       const pushingAcross = originZone === "out"
         ? desiredRadius < stopRadius
         : desiredRadius > stopRadius;
+
+      if (tryBindIonToPump(ion, p.x, p.y, true)) {
+        endDragging(event.pointerId);
+        event.preventDefault();
+        return;
+      }
 
       if (!pushingAcross) {
         const resolved = resolveIonOverlap(ion, p.x, p.y, g);
@@ -904,40 +1165,7 @@
   }
 
   function runPumpCycle(now) {
-    if (!state.pumpOn || state.actionPotential) return;
-
-    const naLocal = localIonCandidates("Na", "in", PUMP_ANGLE, 64);
-    const kLocal = localIonCandidates("K", "out", PUMP_ANGLE, 64);
-
-    // A complete pump cycle only occurs when substrates are physically near the ATPase.
-    if (naLocal.length < 3 || kLocal.length < 2) return;
-
-    for (let i = 0; i < 3; i += 1) {
-      startIonTransport(naLocal[i].ion, "out", PUMP_ANGLE, {
-        kind: "pump",
-        duration: 1120,
-        delay: i * 95,
-        silent: true,
-        extra: 13 + i * 2
-      });
-    }
-
-    for (let i = 0; i < 2; i += 1) {
-      startIonTransport(kLocal[i].ion, "in", PUMP_ANGLE + .05, {
-        kind: "pump",
-        duration: 1120,
-        delay: 70 + i * 125,
-        silent: true,
-        extra: 12 + i * 2
-      });
-    }
-
-    state.pumpPulseUntil = now + 1250;
-    setExplanation(
-      "Ciclo local da bomba Na⁺/K⁺",
-      "A bomba só funcionou porque 3 Na⁺ intracelulares e 2 K⁺ extracelulares chegaram fisicamente à sua vizinhança. Nenhuma partícula distante foi puxada.",
-      "3 Na⁺ locais → fora  ·  2 K⁺ locais → dentro"
-    );
+    updatePumpStates(now);
   }
 
   function passiveLeak() {
@@ -953,71 +1181,78 @@
   }
 
   function triggerActionPotential(now) {
-    if (state.actionPotential) return;
+    if (
+      state.actionPotential ||
+      now < state.refractoryUntil ||
+      !state.naChannelOpen
+    ) return;
 
     state.actionPotential = {
-      start: now,
-      sodiumMoved: false,
-      potassiumMoved: false
+      phase: "depolarization",
+      phaseSince: now
     };
+    state.refractoryUntil = now + 1550;
 
+    setPhase("despolarização", "canais de Na⁺ ativados por voltagem");
     setExplanation(
       "Limiar atingido",
-      "O limiar foi alcançado. Canais de Na⁺ dependentes de voltagem abrem em cascata e produzem uma despolarização rápida: começa o potencial de ação.",
-      "Vm ≥ -55 mV  →  disparo"
+      "O Vm cruzou -55 mV. A permeabilidade ao Na⁺ aumentou e o gradiente eletroquímico favorece entrada de Na⁺ pelos canais próximos.",
+      "Vm ≥ -55 mV  →  PNa ↑"
     );
   }
 
-  function actionPotentialVoltage(now) {
+  function updateActionPotentialState(now) {
     const ap = state.actionPotential;
-    if (!ap) return null;
+    if (!ap) return;
 
-    const t = now - ap.start;
+    const elapsed = now - ap.phaseSince;
 
-    if (t < 220) {
-      if (!ap.sodiumMoved && t > 40) {
-        const naAngles = [-1.15, .08, -1.15, .08];
-        for (let i = 0; i < 4; i += 1) moveOne("Na", "out", "in", naAngles[i], 8 + i, { kind: "channel", duration: 420, delay: i * 55, silent: true });
-        ap.sodiumMoved = true;
-      }
-
-      const u = clamp(t / 220, 0, 1);
-      setPhase("despolarização", "entrada rápida de Na⁺");
-      return -55 + u * 85;
+    if (
+      ap.phase === "depolarization" &&
+      (state.vm >= 20 || elapsed > 720)
+    ) {
+      ap.phase = "repolarization";
+      ap.phaseSince = now;
+      setPhase("repolarização", "Na⁺ inativa · K⁺ domina");
+      setExplanation(
+        "Repolarização",
+        "A permeabilidade ao Na⁺ cai e a permeabilidade ao K⁺ aumenta. O K⁺ próximo aos canais tende a sair, trazendo o Vm de volta para valores negativos.",
+        "PNa ↓  ·  PK ↑"
+      );
+      return;
     }
 
-    if (t < 470) {
-      if (!ap.potassiumMoved) {
-        const kAngles = [1.03, 2.48, 1.03, 2.48];
-        for (let i = 0; i < 4; i += 1) moveOne("K", "in", "out", kAngles[i], 10 + i * 2, { kind: "channel", duration: 460, delay: i * 60, silent: true });
-        ap.potassiumMoved = true;
-        setExplanation(
-          "Repolarização",
-          "Os canais de Na⁺ inativam e a permeabilidade ao K⁺ domina. A saída de K⁺ devolve negatividade ao interior.",
-          "K⁺ → exterior  ·  Vm cai"
-        );
-      }
-
-      const u = clamp((t - 220) / 250, 0, 1);
-      setPhase("repolarização", "saída de K⁺");
-      return 30 - u * 110;
+    if (
+      ap.phase === "repolarization" &&
+      (state.vm <= -72 || elapsed > 980)
+    ) {
+      ap.phase = "hyperpolarization";
+      ap.phaseSince = now;
+      setPhase("hiperpolarização", "canais de K⁺ fechando lentamente");
+      return;
     }
 
-    if (t < 720) {
-      const u = clamp((t - 470) / 250, 0, 1);
-      setPhase("hiperpolarização", "K⁺ ainda saindo");
-      return -80 + u * 10;
+    if (ap.phase === "hyperpolarization" && elapsed > 340) {
+      ap.phase = "recovery";
+      ap.phaseSince = now;
+      setPhase("hiperpolarização", "recuperação das permeabilidades");
+      return;
     }
 
-    state.actionPotential = null;
-    state.stimulusOffset = 0;
-    setPhase("repouso", "recuperação dos gradientes");
-    setExplanation(
-      "Retorno ao repouso",
-      "Após a hiperpolarização, os canais voltam ao estado basal. Vazamentos seletivos e a bomba Na⁺/K⁺ ajudam a restabelecer as condições de repouso.",
-      "Vm → -70 mV"
-    );
-    return null;
+    if (
+      ap.phase === "recovery" &&
+      elapsed > 260 &&
+      state.vm > -78 &&
+      state.vm < -62
+    ) {
+      state.actionPotential = null;
+      setPhase("repouso", "gradientes e permeabilidades basais");
+      setExplanation(
+        "Retorno ao repouso",
+        "As permeabilidades voltaram ao padrão basal. A bomba e os vazamentos seletivos sustentam os gradientes para um próximo potencial de ação.",
+        "Vm → repouso"
+      );
+    }
   }
 
   function setPhase(name, detail) {
@@ -1030,26 +1265,41 @@
   }
 
   function updateVm(now, delta) {
-    const apVoltage = actionPotentialVoltage(now);
-
-    if (apVoltage !== null) {
-      state.vm = apVoltage;
-      return;
-    }
-
-    if (state.stimulusOffset > 0) {
-      state.stimulusOffset = Math.max(0, state.stimulusOffset - delta * .0042);
-    }
+    updateActionPotentialState(now);
 
     const target = targetVm();
-    state.vm += (target - state.vm) * Math.min(1, delta * .004);
+    const phase = state.actionPotential ? state.actionPotential.phase : "rest";
+    const responseRate =
+      phase === "depolarization" ? .010 :
+      phase === "repolarization" ? .009 :
+      phase === "hyperpolarization" ? .006 :
+      .0038;
 
-    if (state.vm >= -55 && !state.actionPotential) {
+    state.vm += (target - state.vm) * Math.min(1, delta * responseRate);
+
+    if (now < state.stimulusUntil) {
+      // Corrente externa carrega a capacitância da membrana; não altera
+      // diretamente as concentrações. Os fluxos iônicos respondem depois.
+      state.vm += state.stimulusCurrent * delta * .0045;
+    } else {
+      state.stimulusCurrent = 0;
+    }
+
+    state.vm = clamp(state.vm, -100, 35);
+
+    const crossedThreshold = state.lastVm < -55 && state.vm >= -55;
+    if (
+      crossedThreshold &&
+      !state.actionPotential &&
+      now >= state.refractoryUntil
+    ) {
       triggerActionPotential(now);
     }
 
     if (!state.actionPotential) {
-      if (state.vm > -65) {
+      if (now < state.refractoryUntil) {
+        setPhase("refratário", "excitabilidade temporariamente reduzida");
+      } else if (state.vm > -65) {
         setPhase("despolarização", "interior menos negativo");
       } else if (state.vm < -75) {
         setPhase("hiperpolarização", "interior mais negativo");
@@ -1057,6 +1307,8 @@
         setPhase("repouso", "gradientes preservados");
       }
     }
+
+    state.lastVm = state.vm;
   }
 
   function updateDataUI() {
@@ -1164,36 +1416,68 @@
       ctx.restore();
     });
 
-    const pumpX = g.cx + Math.cos(PUMP_ANGLE) * g.r;
-    const pumpY = g.cy + Math.sin(PUMP_ANGLE) * g.r;
-    const pumpActive = state.pumpOn;
+    state.pumps.forEach(function (pump) {
+      const pumpX = g.cx + Math.cos(pump.angle) * g.r;
+      const pumpY = g.cy + Math.sin(pump.angle) * g.r;
+      const pumpActive = state.pumpOn;
 
-    ctx.save();
-    ctx.translate(pumpX, pumpY);
-    ctx.rotate(PUMP_ANGLE + Math.PI / 2);
-    ctx.fillStyle = pumpActive ? "rgba(167, 139, 250, .14)" : "rgba(90, 90, 100, .08)";
-    ctx.strokeStyle = pumpActive ? "#a78bfa" : "rgba(130, 130, 140, .28)";
-    ctx.lineWidth = 1.4;
-    ctx.beginPath();
-    ctx.roundRect(-14, -22, 28, 44, 9);
-    ctx.fill();
-    ctx.stroke();
-
-    if (now < state.pumpPulseUntil) {
-      ctx.strokeStyle = "rgba(188, 166, 255, .55)";
-      ctx.lineWidth = 2;
+      ctx.save();
+      ctx.translate(pumpX, pumpY);
+      ctx.rotate(pump.angle + Math.PI / 2);
+      ctx.fillStyle = pumpActive ? "rgba(167, 139, 250, .14)" : "rgba(90, 90, 100, .08)";
+      ctx.strokeStyle = pumpActive ? "#a78bfa" : "rgba(130, 130, 140, .28)";
+      ctx.lineWidth = 1.4;
       ctx.beginPath();
-      ctx.roundRect(-20, -28, 40, 56, 12);
+      ctx.roundRect(-14, -23, 28, 46, 9);
+      ctx.fill();
       ctx.stroke();
-    }
-    ctx.restore();
 
-    ctx.save();
-    ctx.fillStyle = pumpActive ? "#bda8ff" : "#59616d";
-    ctx.font = "700 8px system-ui, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Na⁺/K⁺", g.cx + Math.cos(PUMP_ANGLE) * (g.r + 40), g.cy + Math.sin(PUMP_ANGLE) * (g.r + 40));
-    ctx.restore();
+      if (now < pump.pulseUntil) {
+        ctx.strokeStyle = "rgba(188, 166, 255, .48)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(-19, -28, 38, 56, 12);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      ["Na", "K"].forEach(function (type) {
+        const slots = type === "Na" ? pump.naSlots : pump.kSlots;
+        const activeSites = pumpSlotActive(pump, type);
+
+        slots.forEach(function (ionId, index) {
+          const p = pumpBindingPoint(pump, type, index, g);
+          const occupied = ionId !== null;
+          const siteColor = type === "Na" ? "#38bdf8" : "#f59e0b";
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 5.2, 0, Math.PI * 2);
+          ctx.fillStyle = occupied
+            ? (type === "Na" ? "rgba(56,189,248,.28)" : "rgba(245,158,11,.27)")
+            : "rgba(6,10,17,.72)";
+          ctx.fill();
+          ctx.strokeStyle = activeSites && pumpActive
+            ? siteColor
+            : "rgba(126,137,154,.24)";
+          ctx.globalAlpha = activeSites ? .88 : .38;
+          ctx.lineWidth = occupied ? 1.7 : 1;
+          ctx.stroke();
+          ctx.restore();
+        });
+      });
+
+      ctx.save();
+      ctx.fillStyle = pumpActive ? "#bda8ff" : "#59616d";
+      ctx.font = "800 7px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        "3Na⁺ : 2K⁺",
+        g.cx + Math.cos(pump.angle) * (g.r + 47),
+        g.cy + Math.sin(pump.angle) * (g.r + 47)
+      );
+      ctx.restore();
+    });
 
     if (state.eventPulse && now < state.eventPulse.until) {
       const ratio = 1 - (state.eventPulse.until - now) / 780;
@@ -1440,12 +1724,24 @@
     });
 
     $("stimulusButton").addEventListener("click", function () {
-      if (state.actionPotential) return;
-      state.stimulusOffset = Math.min(28, state.stimulusOffset + 8);
+      const now = performance.now();
+
+      if (now < state.refractoryUntil) {
+        setExplanation(
+          "Período refratário",
+          "A membrana ainda está recuperando a excitabilidade. Um novo pulso não produz outro potencial de ação imediatamente.",
+          "refratário  ·  novo disparo bloqueado"
+        );
+        return;
+      }
+
+      state.stimulusCurrent = 18;
+      state.stimulusUntil = now + 220;
+
       setExplanation(
-        "Estímulo despolarizante",
-        "O estímulo deslocou o potencial para valores menos negativos. Se a membrana alcançar -55 mV, o potencial de ação será disparado.",
-        "Vm + 8 mV  ·  alvo: -55 mV"
+        "Pulso de corrente aplicado",
+        "Uma corrente despolarizante carrega temporariamente a capacitância da membrana. Se o Vm cruzar o limiar, os canais dependentes de voltagem assumem a resposta.",
+        "Iinj por 220 ms  →  ΔVm  →  limiar"
       );
     });
 
@@ -1457,7 +1753,10 @@
     state.naChannelOpen = true;
     state.kChannelOpen = true;
     state.vm = -70;
-    state.stimulusOffset = 0;
+    state.lastVm = -70;
+    state.stimulusCurrent = 0;
+    state.stimulusUntil = 0;
+    state.refractoryUntil = 0;
     state.history = new Array(150).fill(-70);
     state.actionPotential = null;
     state.eventPulse = null;
@@ -1469,6 +1768,7 @@
     state.lastLeakCycle = performance.now();
     state.lastPhysicsFlux = performance.now();
 
+    resetPumps();
     spawnInitialIons();
 
     ["pumpToggle", "naChannelToggle", "kChannelToggle"].forEach(function (id) {
@@ -1517,12 +1817,11 @@
 
     updateParticlePhysics(delta);
 
-    if (state.pumpOn && now - state.lastPumpCycle > 720) {
+    if (state.pumpOn) {
       runPumpCycle(now);
-      state.lastPumpCycle = now;
     }
 
-    if (now - state.lastLeakCycle > 240) {
+    if (now - state.lastLeakCycle > (state.actionPotential ? 90 : 220)) {
       passiveLeak();
       state.lastLeakCycle = now;
     }
