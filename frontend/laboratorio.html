@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/pratica-premium.css">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20260930-global4">
   <link rel="stylesheet" href="/css/theme-final.css?v=20260930-blue-global3">
-  <link rel="stylesheet" href="/css/laboratorio-hub.css?v=20261003-membrana2">
+  <link rel="stylesheet" href="/css/laboratorio-hub.css?v=20261003-hub-premium3">
   <script src="/js/sidebar-standard.js?v=20261003-lab1" defer></script>
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-blue-v2">
@@ -89,15 +89,19 @@
             <span class="choice-status">DISPONÍVEL</span>
           </div>
 
-          <div class="ecg-preview" aria-hidden="true">
-            <div class="ecg-heart">
-              <span></span>
-              <i></i>
+          <div class="ecg-preview minimal-ecg" aria-hidden="true">
+            <div class="preview-meta">
+              <span>DERIVAÇÃO II</span>
+              <strong>25 mm/s · 10 mm/mV</strong>
             </div>
-            <svg viewBox="0 0 520 130" preserveAspectRatio="none">
-              <path class="ecg-grid-line" d="M0 26H520M0 52H520M0 78H520M0 104H520"></path>
-              <path class="ecg-line" d="M0 68 L50 68 L65 62 L76 68 L116 68 L128 72 L137 18 L149 105 L160 68 L204 68 L220 54 L238 68 L290 68 L308 62 L320 68 L355 68 L365 72 L375 18 L387 105 L399 68 L443 68 L458 54 L477 68 L520 68"></path>
+            <svg viewBox="0 0 620 140" preserveAspectRatio="none">
+              <path class="ecg-baseline" d="M0 82H620"></path>
+              <path class="ecg-line" d="M0 82 L58 82 L74 76 L88 82 L138 82 L152 87 L164 29 L178 119 L192 82 L246 82 L264 66 L286 82 L338 82 L354 76 L368 82 L418 82 L432 87 L444 29 L458 119 L472 82 L526 82 L544 66 L566 82 L620 82"></path>
             </svg>
+            <div class="ecg-readout">
+              <span class="readout-live"><i></i> sinal ativo</span>
+              <strong>72 <small>bpm</small></strong>
+            </div>
           </div>
 
           <div class="choice-copy">
@@ -123,17 +127,26 @@
             <span class="choice-status new">NOVO</span>
           </div>
 
-          <div class="membrane-preview" aria-hidden="true">
-            <div class="cell-preview">
-              <span class="cell-core"></span>
-              <span class="membrane-ring"></span>
-              <i class="ion na na-1">Na⁺</i>
-              <i class="ion na na-2">Na⁺</i>
-              <i class="ion na na-3">Na⁺</i>
-              <i class="ion k k-1">K⁺</i>
-              <i class="ion k k-2">K⁺</i>
-              <i class="channel channel-na"></i>
-              <i class="channel channel-k"></i>
+          <div class="membrane-preview minimal-membrane" aria-hidden="true">
+            <div class="preview-meta">
+              <span>MEMBRANA PLASMÁTICA</span>
+              <strong>Vm −70 mV</strong>
+            </div>
+            <div class="membrane-field">
+              <span class="micro-ion na ion-a">Na⁺</span>
+              <span class="micro-ion na ion-b">Na⁺</span>
+              <span class="micro-ion k ion-c">K⁺</span>
+              <span class="micro-ion k ion-d">K⁺</span>
+              <div class="bilayer-strip">
+                <span class="membrane-channel channel-na-min"></span>
+                <span class="membrane-channel channel-k-min"></span>
+                <span class="pump-glyph">3:2</span>
+              </div>
+            </div>
+            <div class="membrane-readout">
+              <span><i class="dot na-dot"></i> Na⁺</span>
+              <span><i class="dot k-dot"></i> K⁺</span>
+              <strong>gradiente eletroquímico</strong>
             </div>
           </div>
 
