@@ -49,6 +49,7 @@
     pumpPulseUntil: 0,
     eventPulse: null,
     actionPotential: null,
+    lastBlockNotice: 0,
     lastFrame: performance.now()
   };
 
@@ -154,7 +155,8 @@
       ny: point.ny,
       radius: 13,
       wobble: Math.random() * Math.PI * 2,
-      flashUntil: 0
+      flashUntil: 0,
+      transport: null
     };
   }
 
@@ -196,12 +198,30 @@
     };
   }
 
+  function transportVoltageDelta(type, fromZone, toZone) {
+    if (type === "Na") return fromZone === "out" && toZone === "in" ? 3.6 : -3.6;
+    return fromZone === "in" && toZone === "out" ? -2.7 : 2.7;
+  }
+
+  function activeTransportVoltage() {
+    return state.ions.reduce(function (sum, ion) {
+      if (!ion.transport) return sum;
+      return sum + ion.transport.voltageDelta * ion.transport.chargeProgress;
+    }, 0);
+  }
+
   function targetVm() {
     const current = counts();
     const naDelta = current.naIn - INITIAL.naIn;
     const kOutDelta = current.kOut - INITIAL.kOut;
     const pumpPenalty = state.pumpOn ? 0 : 1.8;
-    return clamp(-70 + naDelta * 3.6 - kOutDelta * 2.7 + state.stimulusOffset + pumpPenalty, -95, 20);
+    const crossingCharge = activeTransportVoltage();
+
+    return clamp(
+      -70 + naDelta * 3.6 - kOutDelta * 2.7 + crossingCharge + state.stimulusOffset + pumpPenalty,
+      -95,
+      20
+    );
   }
 
   function setExplanation(title, text, equation) {
@@ -236,69 +256,212 @@
     return null;
   }
 
-  function placeIonNearAngle(ion, angle, zone, extra) {
-    const g = geometry();
-    const radial = zone === "in" ? g.r - 32 : g.r + 34 + (extra || 0);
-    const x = g.cx + Math.cos(angle) * radial;
-    const y = g.cy + Math.sin(angle) * radial;
-
-    ion.zone = zone;
-    ion.nx = clamp(x / g.w, .025, .975);
-    ion.ny = clamp(y / g.h, .035, .965);
-    ion.flashUntil = performance.now() + 700;
+  function radialDistance(x, y, g) {
+    const dx = x - g.cx;
+    const dy = y - g.cy;
+    return Math.sqrt(dx * dx + dy * dy);
   }
 
-  function transferThroughChannel(ion, newZone, angle) {
-    const oldZone = ion.zone;
-    ion.zone = newZone;
+  function pointAtRadius(angle, radius, g) {
+    return {
+      x: g.cx + Math.cos(angle) * radius,
+      y: g.cy + Math.sin(angle) * radius
+    };
+  }
+
+  function membraneStopRadius(zone, ion, g) {
+    const membraneHalf = 8;
+    const clearance = 2;
+    return zone === "in"
+      ? g.r - membraneHalf - ion.radius - clearance
+      : g.r + membraneHalf + ion.radius + clearance;
+  }
+
+  function nearestChannelAny(angle) {
+    let best = null;
+    let distance = Infinity;
+
+    CHANNELS.forEach(function (channel) {
+      const d = angleDistance(channel.angle, angle);
+      if (d < distance) {
+        distance = d;
+        best = channel;
+      }
+    });
+
+    return distance <= .24 ? best : null;
+  }
+
+  function notifyBlocked(ion, angle, reason) {
+    const now = performance.now();
+    ion.flashUntil = now + 360;
+
     state.eventPulse = {
-      type: ion.type,
+      type: "blocked",
       angle: angle,
-      until: performance.now() + 780
+      until: now + 420
     };
 
+    if (now - state.lastBlockNotice < 650) return;
+    state.lastBlockNotice = now;
+
+    setExplanation(
+      "A membrana bloqueou o íon",
+      reason,
+      "bicamada ≠ passagem livre  ·  use o canal correto"
+    );
+    setHint("A membrana é uma barreira física: procure a abertura compatível.");
+  }
+
+  function explainCompletedTransport(ion, oldZone, newZone) {
     if (ion.type === "Na" && oldZone === "out" && newZone === "in") {
       setExplanation(
-        "Na⁺ entrou na célula",
-        "O gradiente químico e a atração elétrica favorecem a entrada de Na⁺. A carga positiva entrando torna o interior menos negativo: ocorre despolarização.",
-        "Na⁺ → interior  ·  Vm sobe"
+        "Na⁺ atravessou o canal",
+        "A entrada real de carga positiva tornou o interior menos negativo. O traçado de Vm sobe durante a própria travessia, não depois dela.",
+        "Na⁺ → interior  ·  despolarização"
       );
-      setHint("Boa: a entrada de Na⁺ despolarizou a membrana.");
+      setHint("Observe: o Vm mudou enquanto o Na⁺ cruzava a membrana.");
     } else if (ion.type === "Na" && oldZone === "in" && newZone === "out") {
       setExplanation(
         "Na⁺ saiu da célula",
-        "Retirar carga positiva do citoplasma favorece maior negatividade interna. Em condições fisiológicas, a bomba Na⁺/K⁺ é o principal mecanismo sustentando esse gradiente ao longo do tempo.",
-        "Na⁺ → exterior  ·  interior mais negativo"
+        "A saída de carga positiva favorece maior negatividade interna. Na fisiologia, esse fluxo ativo é sustentado principalmente pela Na⁺/K⁺-ATPase.",
+        "Na⁺ → exterior  ·  Vm cai"
       );
     } else if (ion.type === "K" && oldZone === "in" && newZone === "out") {
-      placeIonNearAngle(ion, angle, "out", 18);
       setExplanation(
-        "K⁺ saiu e sofreu oposição elétrica",
-        "O gradiente químico empurra K⁺ para fora, mas o interior negativo passa a atrair esse cátion de volta. O equilíbrio entre essas forças ajuda a estabelecer o potencial de repouso.",
+        "K⁺ atravessou o canal",
+        "O gradiente químico favoreceu a saída, mas a negatividade interna gera uma força elétrica oposta. A saída de K⁺ deixa o interior mais negativo e o gráfico acompanha essa mudança.",
         "K⁺ → exterior  ·  hiperpolarização"
       );
-      setHint("Perceba a 'repulsão' para fora e a atração elétrica tentando limitar a saída de K⁺.");
+      setHint("O K⁺ só saiu pelo canal e o Vm caiu durante a passagem.");
     } else if (ion.type === "K" && oldZone === "out" && newZone === "in") {
       setExplanation(
         "K⁺ entrou na célula",
-        "A entrada de carga positiva reduz parte da negatividade do citoplasma. No repouso fisiológico, porém, o gradiente de K⁺ favorece principalmente sua saída.",
+        "A entrada de carga positiva deixa o interior menos negativo. O gradiente fisiológico de K⁺, porém, tende a favorecer sua saída no repouso.",
         "K⁺ → interior  ·  Vm sobe"
       );
     }
   }
 
-  function rejectCrossing(ion, original, reason) {
-    ion.zone = original.zone;
-    ion.nx = original.nx;
-    ion.ny = original.ny;
-    ion.flashUntil = performance.now() + 450;
+  function startIonTransport(ion, newZone, angle, options) {
+    if (!ion || ion.transport || ion.zone === newZone) return false;
 
-    setExplanation(
-      "Membrana seletiva",
-      reason,
-      "sem canal compatível → sem passagem"
-    );
-    setHint("Tente alinhar o íon com um canal da mesma cor.");
+    const opts = options || {};
+    const g = geometry();
+    const current = normalizedToPoint(ion, g);
+    const oldZone = ion.zone;
+    const entryRadius = membraneStopRadius(oldZone, ion, g);
+    const exitRadius = membraneStopRadius(newZone, ion, g);
+    const entry = pointAtRadius(angle, entryRadius, g);
+    const exit = pointAtRadius(angle, exitRadius, g);
+    const destinationExtra = opts.extra || 9;
+    const destinationRadius = newZone === "in"
+      ? Math.max(18, exitRadius - destinationExtra)
+      : exitRadius + destinationExtra;
+    const destination = pointAtRadius(angle, destinationRadius, g);
+    const now = performance.now();
+
+    ion.transport = {
+      kind: opts.kind || "channel",
+      oldZone: oldZone,
+      newZone: newZone,
+      angle: angle,
+      start: now + (opts.delay || 0),
+      duration: opts.duration || (opts.kind === "pump" ? 980 : 680),
+      source: { x: current.x, y: current.y },
+      entry: entry,
+      exit: exit,
+      destination: destination,
+      progress: 0,
+      chargeProgress: 0,
+      voltageDelta: transportVoltageDelta(ion.type, oldZone, newZone),
+      silent: Boolean(opts.silent)
+    };
+
+    return true;
+  }
+
+  function positionTransport(ion, now) {
+    const tr = ion.transport;
+    if (!tr) return false;
+    if (now < tr.start) return true;
+
+    const g = geometry();
+    const p = clamp((now - tr.start) / tr.duration, 0, 1);
+    const approachEnd = tr.kind === "pump" ? .38 : .14;
+    const crossingEnd = tr.kind === "pump" ? .70 : .72;
+    let x;
+    let y;
+
+    function ease(t) {
+      return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    if (p < approachEnd) {
+      const u = ease(p / approachEnd);
+      x = tr.source.x + (tr.entry.x - tr.source.x) * u;
+      y = tr.source.y + (tr.entry.y - tr.source.y) * u;
+      tr.chargeProgress = 0;
+    } else if (p < crossingEnd) {
+      const u = ease((p - approachEnd) / (crossingEnd - approachEnd));
+      x = tr.entry.x + (tr.exit.x - tr.entry.x) * u;
+      y = tr.entry.y + (tr.exit.y - tr.entry.y) * u;
+      tr.chargeProgress = u;
+    } else {
+      const u = ease((p - crossingEnd) / (1 - crossingEnd));
+      x = tr.exit.x + (tr.destination.x - tr.exit.x) * u;
+      y = tr.exit.y + (tr.destination.y - tr.exit.y) * u;
+      tr.chargeProgress = 1;
+    }
+
+    tr.progress = p;
+    ion.nx = clamp(x / g.w, .02, .98);
+    ion.ny = clamp(y / g.h, .025, .975);
+
+    if (p >= 1) {
+      const oldZone = tr.oldZone;
+      const newZone = tr.newZone;
+      const silent = tr.silent;
+      ion.zone = newZone;
+      ion.transport = null;
+      ion.flashUntil = now + 520;
+
+      state.eventPulse = {
+        type: ion.type,
+        angle: tr.angle,
+        until: now + 650
+      };
+
+      if (!silent) explainCompletedTransport(ion, oldZone, newZone);
+      return false;
+    }
+
+    return true;
+  }
+
+  function updateIonTransports(now) {
+    state.ions.forEach(function (ion) {
+      if (ion.transport) positionTransport(ion, now);
+    });
+  }
+
+  function transferThroughChannel(ion, newZone, angle, options) {
+    const oldZone = ion.zone;
+    const started = startIonTransport(ion, newZone, angle, options);
+
+    if (!started) return false;
+
+    if (!(options && options.silent)) {
+      const verb = newZone === "in" ? "entrando" : "saindo";
+      setExplanation(
+        ion.type + "⁺ está " + verb,
+        "O íon foi capturado pela abertura do canal. Agora ele percorre fisicamente a proteína até o outro lado; enquanto cruza, sua carga já altera o potencial de membrana.",
+        ion.type + "⁺ em trânsito  ·  Vm responde em tempo real"
+      );
+      setHint("Solte o mouse: o canal conclui a passagem, sem teletransporte.");
+    }
+
+    return true;
   }
 
   function pointerPosition(event) {
@@ -315,6 +478,7 @@
     let bestDistance = 25;
 
     state.ions.forEach(function (ion) {
+      if (ion.transport) return;
       const p = normalizedToPoint(ion, g);
       const dx = p.x - x;
       const dy = p.y - y;
@@ -332,10 +496,24 @@
   function bindCellInteraction() {
     const canvas = $("cellCanvas");
 
+    function endDragging(pointerId) {
+      state.draggingId = null;
+      state.draggingStart = null;
+      canvas.classList.remove("dragging");
+
+      if (
+        pointerId !== undefined &&
+        canvas.hasPointerCapture &&
+        canvas.hasPointerCapture(pointerId)
+      ) {
+        canvas.releasePointerCapture(pointerId);
+      }
+    }
+
     canvas.addEventListener("pointerdown", function (event) {
       const p = pointerPosition(event);
       const ion = findIonAt(p.x, p.y);
-      if (!ion) return;
+      if (!ion || ion.transport) return;
 
       state.draggingId = ion.id;
       state.draggingStart = {
@@ -356,101 +534,141 @@
         return item.id === state.draggingId;
       });
 
-      if (!ion) return;
+      if (!ion || ion.transport) {
+        endDragging(event.pointerId);
+        return;
+      }
 
-      const rect = canvas.getBoundingClientRect();
+      const g = geometry();
       const p = pointerPosition(event);
+      const dx = p.x - g.cx;
+      const dy = p.y - g.cy;
+      const desiredRadius = Math.sqrt(dx * dx + dy * dy);
+      const angle = Math.atan2(dy, dx);
+      const originZone = state.draggingStart.zone;
+      const stopRadius = membraneStopRadius(originZone, ion, g);
+      const pushingAcross = originZone === "out"
+        ? desiredRadius < stopRadius
+        : desiredRadius > stopRadius;
 
-      ion.nx = clamp(p.x / rect.width, .02, .98);
-      ion.ny = clamp(p.y / rect.height, .025, .975);
+      if (!pushingAcross) {
+        ion.nx = clamp(p.x / g.w, .02, .98);
+        ion.ny = clamp(p.y / g.h, .025, .975);
+        event.preventDefault();
+        return;
+      }
+
+      const stopPoint = pointAtRadius(angle, stopRadius, g);
+      ion.nx = clamp(stopPoint.x / g.w, .02, .98);
+      ion.ny = clamp(stopPoint.y / g.h, .025, .975);
+
+      const compatible = nearestValidChannel(ion.type, angle);
+      const anyChannel = nearestChannelAny(angle);
+
+      if (!compatible) {
+        if (anyChannel && anyChannel.type !== ion.type) {
+          notifyBlocked(
+            ion,
+            angle,
+            "Esse é um canal de " + anyChannel.type + "⁺. Ele não oferece a seletividade necessária para " + ion.type + "⁺, então o íon encosta na membrana e não atravessa."
+          );
+        } else {
+          notifyBlocked(
+            ion,
+            angle,
+            "Fora da abertura de um canal compatível, a bicamada lipídica funciona como obstáculo. O íon pode deslizar pela superfície, mas não cruzar a membrana."
+          );
+        }
+        event.preventDefault();
+        return;
+      }
+
+      if (!channelIsOpen(ion.type)) {
+        notifyBlocked(
+          ion,
+          compatible.angle,
+          "O canal correto está alinhado, mas está fechado. A barreira permanece contínua até você abrir esse canal."
+        );
+        event.preventDefault();
+        return;
+      }
+
+      const newZone = originZone === "out" ? "in" : "out";
+      const entryPoint = pointAtRadius(compatible.angle, stopRadius, g);
+      ion.nx = clamp(entryPoint.x / g.w, .02, .98);
+      ion.ny = clamp(entryPoint.y / g.h, .025, .975);
+
+      if (transferThroughChannel(ion, newZone, compatible.angle, { kind: "channel" })) {
+        endDragging(event.pointerId);
+      }
+
       event.preventDefault();
     });
 
     function finishDrag(event) {
       if (!state.draggingId) return;
-
-      const ion = state.ions.find(function (item) {
-        return item.id === state.draggingId;
-      });
-      const original = state.draggingStart;
-
-      state.draggingId = null;
-      state.draggingStart = null;
-      canvas.classList.remove("dragging");
-
-      if (canvas.hasPointerCapture && canvas.hasPointerCapture(event.pointerId)) {
-        canvas.releasePointerCapture(event.pointerId);
-      }
-
-      if (!ion || !original) return;
-
-      const g = geometry();
-      const p = normalizedToPoint(ion, g);
-      const newZone = zoneAt(p.x, p.y, g);
-
-      if (newZone === original.zone) {
-        ion.zone = original.zone;
-        return;
-      }
-
-      const angle = Math.atan2(p.y - g.cy, p.x - g.cx);
-      const channel = nearestValidChannel(ion.type, angle);
-
-      if (!channel) {
-        rejectCrossing(
-          ion,
-          original,
-          "A bicamada lipídica bloqueou o cátion. Para atravessar, leve-o até um canal compatível localizado na própria membrana."
-        );
-        return;
-      }
-
-      if (!channelIsOpen(ion.type)) {
-        rejectCrossing(
-          ion,
-          original,
-          "Você encontrou o canal correto, mas ele está fechado. Reabra o canal e tente novamente."
-        );
-        return;
-      }
-
-      transferThroughChannel(ion, newZone, channel.angle);
+      endDragging(event.pointerId);
     }
 
     canvas.addEventListener("pointerup", finishDrag);
     canvas.addEventListener("pointercancel", finishDrag);
   }
 
-  function moveOne(type, fromZone, toZone, angle, extra) {
+  function moveOne(type, fromZone, toZone, angle, extra, options) {
     const ion = state.ions.find(function (item) {
-      return item.type === type && item.zone === fromZone && item.id !== state.draggingId;
+      return (
+        item.type === type &&
+        item.zone === fromZone &&
+        item.id !== state.draggingId &&
+        !item.transport
+      );
     });
 
     if (!ion) return false;
 
-    placeIonNearAngle(ion, angle, toZone, extra || 0);
-    return true;
+    const opts = Object.assign({}, options || {}, {
+      extra: extra || 9,
+      silent: options && "silent" in options ? options.silent : true
+    });
+
+    return startIonTransport(ion, toZone, angle, opts);
   }
 
   function runPumpCycle(now) {
     if (!state.pumpOn || state.actionPotential) return;
 
+    const current = counts();
+    const excessNaInside = Math.max(0, current.naIn - INITIAL.naIn);
+    const excessKOutside = Math.max(0, current.kOut - INITIAL.kOut);
+    const naMoves = Math.min(3, excessNaInside);
+    const kMoves = Math.min(2, excessKOutside);
     let moved = 0;
-    for (let i = 0; i < 3; i += 1) {
-      if (moveOne("Na", "in", "out", PUMP_ANGLE, i * 4)) moved += 1;
+
+    for (let i = 0; i < naMoves; i += 1) {
+      if (moveOne("Na", "in", "out", PUMP_ANGLE, 11 + i * 2, {
+        kind: "pump",
+        duration: 1080,
+        delay: i * 120,
+        silent: true
+      })) moved += 1;
     }
 
-    for (let i = 0; i < 2; i += 1) {
-      if (moveOne("K", "out", "in", PUMP_ANGLE + .12, i * 4)) moved += 1;
+    for (let i = 0; i < kMoves; i += 1) {
+      if (moveOne("K", "out", "in", PUMP_ANGLE + .05, 10 + i * 2, {
+        kind: "pump",
+        duration: 1080,
+        delay: 80 + i * 140,
+        silent: true
+      })) moved += 1;
     }
 
-    state.pumpPulseUntil = now + 900;
+    state.pumpPulseUntil = now + 1100;
 
     if (moved > 0) {
       setExplanation(
-        "Bomba Na⁺/K⁺ em ação",
-        "A ATPase remove 3 Na⁺ do citoplasma e traz 2 K⁺ para dentro por ciclo. Isso preserva os gradientes e contribui levemente para a negatividade interna.",
-        "3 Na⁺ → fora  ·  2 K⁺ → dentro  ·  ATP"
+        "Bomba Na⁺/K⁺ restaurando o gradiente",
+        "A ATPase está recolhendo os íons que se desviaram do repouso. Cada partícula percorre visualmente a proteína; não há mais salto instantâneo entre os lados.",
+        "até 3 Na⁺ → fora  ·  até 2 K⁺ → dentro  ·  ATP"
       );
     }
   }
@@ -459,18 +677,27 @@
     if (state.actionPotential) return;
 
     if (state.naChannelOpen) {
-      moveOne("Na", "out", "in", -1.15, 0);
+      moveOne("Na", "out", "in", -1.15, 8, {
+        kind: "channel",
+        duration: 760,
+        silent: true
+      });
     }
 
     if (state.kChannelOpen) {
-      moveOne("K", "in", "out", 1.03, 8);
+      moveOne("K", "in", "out", 1.03, 12, {
+        kind: "channel",
+        duration: 780,
+        delay: 120,
+        silent: true
+      });
     }
 
     if (!state.pumpOn) {
       setExplanation(
         "Bomba desligada",
-        "Sem a ATPase Na⁺/K⁺, os gradientes começam a se dissipar lentamente pelos fluxos passivos. O potencial tende a perder estabilidade e caminhar em direção a valores menos negativos.",
-        "gradientes ↓  ·  Vm → 0 mV"
+        "Sem a ATPase Na⁺/K⁺, os vazamentos agora deslocam íons fisicamente pelos canais e os gradientes começam a se dissipar. O gráfico acompanha essa redistribuição a cada travessia.",
+        "gradientes ↓  ·  Vm perde estabilidade"
       );
     }
   }
@@ -499,7 +726,8 @@
 
     if (t < 220) {
       if (!ap.sodiumMoved && t > 40) {
-        for (let i = 0; i < 4; i += 1) moveOne("Na", "out", "in", -.98 + i * .08, i * 2);
+        const naAngles = [-1.15, .08, -1.15, .08];
+        for (let i = 0; i < 4; i += 1) moveOne("Na", "out", "in", naAngles[i], 8 + i, { kind: "channel", duration: 420, delay: i * 55, silent: true });
         ap.sodiumMoved = true;
       }
 
@@ -510,7 +738,8 @@
 
     if (t < 470) {
       if (!ap.potassiumMoved) {
-        for (let i = 0; i < 4; i += 1) moveOne("K", "in", "out", .94 + i * .08, i * 4);
+        const kAngles = [1.03, 2.48, 1.03, 2.48];
+        for (let i = 0; i < 4; i += 1) moveOne("K", "in", "out", kAngles[i], 10 + i * 2, { kind: "channel", duration: 460, delay: i * 60, silent: true });
         ap.potassiumMoved = true;
         setExplanation(
           "Repolarização",
@@ -721,7 +950,11 @@
       const px = g.cx + Math.cos(state.eventPulse.angle) * g.r;
       const py = g.cy + Math.sin(state.eventPulse.angle) * g.r;
       ctx.save();
-      ctx.strokeStyle = state.eventPulse.type === "Na" ? "rgba(56,189,248,.5)" : "rgba(245,158,11,.5)";
+      ctx.strokeStyle = state.eventPulse.type === "Na"
+        ? "rgba(56,189,248,.5)"
+        : state.eventPulse.type === "K"
+          ? "rgba(245,158,11,.5)"
+          : "rgba(251,113,133,.55)";
       ctx.lineWidth = 2;
       ctx.globalAlpha = 1 - ratio;
       ctx.beginPath();
@@ -732,26 +965,42 @@
 
     state.ions.forEach(function (ion) {
       const p = normalizedToPoint(ion, g);
-      const wobble = ion.id === state.draggingId ? 0 : Math.sin(now * .0017 + ion.wobble) * 1.6;
+      const moving = Boolean(ion.transport);
+      const wobble = ion.id === state.draggingId || moving ? 0 : Math.sin(now * .0017 + ion.wobble) * 1.6;
       const x = p.x + wobble;
-      const y = p.y + Math.cos(now * .0014 + ion.wobble) * 1.2;
+      const y = p.y + (moving ? 0 : Math.cos(now * .0014 + ion.wobble) * 1.2);
       const isNa = ion.type === "Na";
       const fill = isNa ? "rgba(56, 189, 248, .16)" : "rgba(245, 158, 11, .15)";
       const stroke = isNa ? "#38bdf8" : "#f59e0b";
       const text = isNa ? "#c5f1ff" : "#ffe0aa";
+      const crossing = moving ? ion.transport.chargeProgress : 0;
+      const visibleRadius = ion.radius * (1 - Math.sin(crossing * Math.PI) * .24);
 
       ctx.save();
-      if (ion.id === state.draggingId || now < ion.flashUntil) {
+
+      if (moving) {
+        const trailEnd = pointAtRadius(ion.transport.angle, g.r, g);
+        ctx.strokeStyle = isNa ? "rgba(56,189,248,.22)" : "rgba(245,158,11,.20)";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(trailEnd.x, trailEnd.y);
+        ctx.stroke();
+
+        ctx.shadowColor = stroke;
+        ctx.shadowBlur = 18;
+      } else if (ion.id === state.draggingId || now < ion.flashUntil) {
         ctx.shadowColor = stroke;
         ctx.shadowBlur = 14;
       }
+
       ctx.beginPath();
-      ctx.arc(x, y, ion.radius, 0, Math.PI * 2);
+      ctx.arc(x, y, visibleRadius, 0, Math.PI * 2);
       ctx.fillStyle = fill;
       ctx.fill();
       ctx.strokeStyle = stroke;
       ctx.globalAlpha = .9;
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = moving ? 1.8 : 1.2;
       ctx.stroke();
 
       ctx.shadowBlur = 0;
@@ -934,6 +1183,9 @@
     state.actionPotential = null;
     state.eventPulse = null;
     state.pumpPulseUntil = 0;
+    state.draggingId = null;
+    state.draggingStart = null;
+    state.lastBlockNotice = 0;
     state.lastPumpCycle = performance.now();
     state.lastLeakCycle = performance.now();
 
@@ -993,9 +1245,10 @@
       state.lastLeakCycle = now;
     }
 
+    updateIonTransports(now);
     updateVm(now, delta);
 
-    if (now - state.lastHistory > 90) {
+    if (now - state.lastHistory > 70) {
       state.history.push(state.vm);
       if (state.history.length > 240) state.history.shift();
       state.lastHistory = now;
