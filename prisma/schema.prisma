@@ -45,6 +45,11 @@ model Questao {
   dificuldade  String?
   tema         String?
   fonte        String?
+  origemId     String?
+  banca        String?
+  ano          Int?
+  cargo        String?
+  orgao        String?
   fonteUrl     String?
   imagemUrl    String?        @db.Text
   imagemAlt    String?
@@ -53,6 +58,11 @@ model Questao {
   usuario      Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   respostas    Resposta[]
   flashcards   Flashcard[]
+
+  @@unique([usuarioId, fonte, origemId])
+  @@index([fonte])
+  @@index([banca])
+  @@index([ano])
 }
 
 model Alternativa {
