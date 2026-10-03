@@ -843,9 +843,58 @@ function makeTextLabel(text, className, color) {
   return new CSS2DObject(element);
 }
 
+function cleanupHeart3DLayers(host) {
+  if (!host) return;
+
+  stopHeartRenderLoop();
+
+  if (renderer) {
+    try {
+      renderer.dispose();
+      renderer.forceContextLoss();
+    } catch (error) {}
+  }
+
+  host.querySelectorAll(
+    ".heart-css-label-layer, .heart-webgl-layer"
+  ).forEach(function (node) {
+    node.remove();
+  });
+
+  /*
+   * Versões anteriores do laboratório não davam classe ao canvas WebGL.
+   * Remove apenas canvases diretos do visualizador; canvases internos de
+   * outros componentes não existem dentro deste host.
+   */
+  Array.from(host.children).forEach(function (child) {
+    if (
+      child &&
+      child.tagName === "CANVAS"
+    ) {
+      child.remove();
+    }
+  });
+
+  labelRenderer = null;
+  renderer = null;
+}
+
+function removeStaleHeartLabelLayers(host) {
+  if (!host || !labelRenderer) return;
+
+  const currentLayer = labelRenderer.domElement;
+  host.querySelectorAll(".heart-css-label-layer").forEach(function (layer) {
+    if (layer !== currentLayer) {
+      layer.remove();
+    }
+  });
+}
+
 function initHeart3D() {
   const host = byId("heart3dHost");
   if (!host) return;
+
+  cleanupHeart3DLayers(host);
 
   scene = new THREE.Scene();
 
@@ -857,6 +906,7 @@ function initHeart3D() {
     alpha: true,
     powerPreference: "high-performance"
   });
+  renderer.domElement.className = "heart-webgl-layer";
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setClearColor(0x000000, 0);
   renderer.localClippingEnabled = true;
@@ -1389,6 +1439,10 @@ function animateThree() {
   }
 
   if (controls) controls.update();
+
+  const host = byId("heart3dHost");
+  removeStaleHeartLabelLayers(host);
+
   renderer.render(scene, camera);
   if (labelRenderer) {
     labelRenderer.render(scene, camera);
