@@ -450,9 +450,19 @@
 
     if (draggingIon) {
       const g = lab.geometry();
-      draggingIon.nx = clamp(draggingIon.nx + dx / Math.max(g.w, 1), .025, .975);
-      draggingIon.ny = clamp(draggingIon.ny + dy / Math.max(g.h, 1), .035, .965);
-      confineIon(draggingIon);
+      const targetNx = clamp(draggingIon.nx + dx / Math.max(g.w, 1), .025, .975);
+      const targetNy = clamp(draggingIon.ny + dy / Math.max(g.h, 1), .035, .965);
+      const result = lab.moveExternalIon
+        ? lab.moveExternalIon(draggingIon, draggingOrigin, targetNx * g.w, targetNy * g.h)
+        : "moved";
+
+      if (result === "bound" || result === "transferred") {
+        lab.state.draggingId = null;
+        lab.state.draggingStart = null;
+        draggingIon = null;
+        draggingOrigin = null;
+        canvas.classList.remove("dragging-ion-3d");
+      }
     } else if (rotating) {
       yaw += dx * .008;
       pitch = clamp(pitch + dy * .006, -.78, .78);
@@ -464,12 +474,6 @@
     if (activePointer !== event.pointerId) return;
 
     if (draggingIon && draggingOrigin) {
-      const g = lab.geometry();
-      const x = draggingIon.nx * g.w;
-      const y = draggingIon.ny * g.h;
-      if (lab.resolveExternalDrop) {
-        lab.resolveExternalDrop(draggingIon, draggingOrigin, x, y);
-      }
       lab.state.draggingId = null;
       lab.state.draggingStart = null;
     }
