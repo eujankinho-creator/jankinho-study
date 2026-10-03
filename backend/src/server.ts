@@ -1050,6 +1050,314 @@ async function criarQuestao(
 }
 
 
+async function importarQuestoesInternas(
+  request: IncomingMessage,
+  response: ServerResponse
+) {
+  const chaveEsperada =
+    process.env.QUESTION_IMPORT_SECRET;
+
+  const chaveRecebida =
+    request.headers["x-import-key"];
+
+  if (
+    !chaveEsperada ||
+    typeof chaveRecebida !== "string" ||
+    chaveRecebida !== chaveEsperada
+  ) {
+    json(
+      response,
+      401,
+      {
+        error:
+          "Importação não autorizada.",
+      }
+    );
+
+    return;
+  }
+
+  try {
+    const body =
+      await lerJson(request);
+
+    const usuarioId =
+      Number(body.usuarioId);
+
+    const itens =
+      Array.isArray(body.questoes)
+        ? body.questoes
+        : [];
+
+    if (
+      !usuarioId ||
+      itens.length === 0
+    ) {
+      json(
+        response,
+        400,
+        {
+          error:
+            "usuarioId e questoes são obrigatórios.",
+        }
+      );
+
+      return;
+    }
+
+    const usuario =
+      await prisma.usuario.findUnique({
+        where: {
+          id: usuarioId,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+    if (!usuario) {
+      json(
+        response,
+        404,
+        {
+          error:
+            "Usuário de importação não encontrado.",
+        }
+      );
+
+      return;
+    }
+
+    let importadas = 0;
+    let duplicadas = 0;
+    const erros: Array<{
+      origemId: string | null;
+      erro: string;
+    }> = [];
+
+    for (const item of itens) {
+      const origem =
+        String(
+          item.origem ||
+          "romulo-passos"
+        ).trim();
+
+      const origemId =
+        String(
+          item.origemId || ""
+        ).trim();
+
+      const enunciado =
+        String(
+          item.enunciado || ""
+        ).trim();
+
+      const disciplinaNome =
+        String(
+          item.disciplina || ""
+        ).trim();
+
+      const alternativas =
+        Array.isArray(
+          item.alternativas
+        )
+          ? item.alternativas
+          : [];
+
+      if (
+        !origemId ||
+        !enunciado ||
+        !disciplinaNome ||
+        alternativas.length < 2
+      ) {
+        erros.push({
+          origemId:
+            origemId || null,
+          erro:
+            "Questão incompleta.",
+        });
+
+        continue;
+      }
+
+      const existente =
+        await prisma.questao.findFirst({
+          where: {
+            usuarioId,
+            origem,
+            origemId,
+          },
+          select: {
+            id: true,
+          },
+        });
+
+      if (existente) {
+        duplicadas += 1;
+        continue;
+      }
+
+      let disciplina =
+        await prisma.disciplina.findFirst({
+          where: {
+            usuarioId,
+            nome: {
+              equals:
+                disciplinaNome,
+              mode:
+                "insensitive",
+            },
+          },
+        });
+
+      if (!disciplina) {
+        disciplina =
+          await prisma.disciplina.create({
+            data: {
+              nome:
+                disciplinaNome,
+              usuarioId,
+            },
+          });
+      }
+
+      try {
+        await prisma.questao.create({
+          data: {
+            enunciado,
+            explicacao:
+              item.explicacao
+                ? String(
+                    item.explicacao
+                  ).trim()
+                : null,
+            dificuldade:
+              item.dificuldade
+                ? String(
+                    item.dificuldade
+                  ).trim()
+                : null,
+            tema:
+              item.assunto
+                ? String(
+                    item.assunto
+                  ).trim()
+                : null,
+            origem,
+            origemId,
+            banca:
+              item.banca
+                ? String(
+                    item.banca
+                  ).trim()
+                : null,
+            ano:
+              Number.isFinite(
+                Number(item.ano)
+              )
+                ? Number(item.ano)
+                : null,
+            cargo:
+              item.cargo
+                ? String(
+                    item.cargo
+                  ).trim()
+                : null,
+            orgao:
+              item.orgao
+                ? String(
+                    item.orgao
+                  ).trim()
+                : null,
+            fonteUrl:
+              item.fonteUrl
+                ? String(
+                    item.fonteUrl
+                  ).trim()
+                : null,
+            imagemUrl:
+              item.imagemUrl
+                ? String(
+                    item.imagemUrl
+                  ).trim()
+                : null,
+            usuarioId,
+            disciplinaId:
+              disciplina.id,
+            alternativas: {
+              create:
+                alternativas.map(
+                  function (
+                    alternativa: any
+                  ) {
+                    return {
+                      texto:
+                        String(
+                          alternativa.texto ||
+                          ""
+                        ).trim(),
+                      correta:
+                        Boolean(
+                          alternativa.correta
+                        ),
+                    };
+                  }
+                ),
+            },
+          },
+        });
+
+        importadas += 1;
+      }
+      catch (error: any) {
+        if (
+          String(
+            error?.code || ""
+          ) === "P2002"
+        ) {
+          duplicadas += 1;
+          continue;
+        }
+
+        erros.push({
+          origemId,
+          erro:
+            "Falha ao salvar a questão.",
+        });
+      }
+    }
+
+    json(
+      response,
+      200,
+      {
+        sucesso: true,
+        totalRecebidas:
+          itens.length,
+        importadas,
+        duplicadas,
+        erros,
+      }
+    );
+  }
+  catch (error) {
+    console.error(
+      "Erro na importação de questões:",
+      error
+    );
+
+    json(
+      response,
+      500,
+      {
+        error:
+          "Não foi possível importar as questões.",
+      }
+    );
+  }
+}
+
+
 /* =========================================================
    RESPOSTAS
 ========================================================= */
@@ -3060,6 +3368,23 @@ const server =
 
             return;
           }
+        }
+
+
+        /* IMPORTAÇÃO INTERNA DE QUESTÕES */
+
+        if (
+          caminho ===
+            "/api/internal/questoes/importar" &&
+          metodo ===
+            "POST"
+        ) {
+          await importarQuestoesInternas(
+            request,
+            response
+          );
+
+          return;
         }
 
 
