@@ -4186,9 +4186,9 @@ html[data-theme="black-white"] .ecg-lab {
   gap: 7px;
   margin: 0 14px 10px;
   padding: 10px 11px;
-  border: 1px solid #26394d;
+  border: 1px solid var(--theme-border);
   border-radius: 9px;
-  background: rgba(8, 17, 27, .72);
+  background: var(--theme-surface-soft);
 }
 
 .pattern-visual-legend:empty {
@@ -4201,10 +4201,10 @@ html[data-theme="black-white"] .ecg-lab {
   gap: 6px;
   min-height: 26px;
   padding: 4px 8px;
-  border: 1px solid #2b4055;
+  border: 1px solid var(--theme-border);
   border-radius: 999px;
-  background: #0d1824;
-  color: #aebdcb;
+  background: var(--theme-surface);
+  color: var(--theme-text-soft);
   font-size: 9px;
   font-weight: 750;
 }
@@ -4224,7 +4224,7 @@ html[data-theme="black-white"] .ecg-lab {
   align-items: center;
   gap: 14px;
   margin: 0 14px 9px;
-  color: #8799aa;
+  color: var(--theme-text-muted);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: .04em;
@@ -4278,11 +4278,11 @@ html[data-theme="black-white"] .ecg-lab {
 
 .generic-pattern-chart {
   overflow: hidden;
-  background: #09131e;
+  background: var(--theme-bg-secondary);
 }
 
 .generic-pattern-copy {
-  border-color: rgba(34, 211, 238, .18);
+  border-color: var(--theme-border);
 }
 
 .pattern-teaching-grid article {
@@ -4290,20 +4290,20 @@ html[data-theme="black-white"] .ecg-lab {
 }
 
 .pattern-teaching-grid article:nth-child(1) {
-  border-color: rgba(34, 211, 238, .28);
-  background: linear-gradient(145deg, rgba(34,211,238,.055), rgba(13,25,37,.96));
+  border-color: var(--theme-border);
+  background: var(--theme-surface-soft);
 }
 
 .pattern-teaching-grid article:nth-child(2) {
-  border-color: rgba(244, 114, 182, .24);
+  border-color: var(--theme-border);
 }
 
 .pattern-teaching-grid article:nth-child(3) {
-  border-color: rgba(52, 211, 153, .24);
+  border-color: var(--theme-border);
 }
 
 .pattern-teaching-grid article:nth-child(4) {
-  border-color: rgba(251, 146, 60, .24);
+  border-color: var(--theme-border);
 }
 
 .pattern-teaching-grid article:nth-child(1) > span { color: #22d3ee; }
@@ -4320,3 +4320,37 @@ html[data-theme="black-white"] .ecg-lab {
   }
 }
 /* CORTEX ECG PATTERN TEACHING V2 END */
+
+
+/* CORTEX ECG PATTERN THEME BACKGROUNDS V3 */
+.pattern-visual-legend,
+.pattern-visual-chip,
+.pattern-teaching-grid article,
+.generic-pattern-copy {
+  background-color: var(--theme-surface-soft) !important;
+}
+
+.pattern-visual-chip {
+  background: var(--theme-surface) !important;
+}
+
+.pattern-visual-legend,
+.pattern-visual-chip,
+.pattern-teaching-grid article,
+.generic-pattern-copy {
+  border-color: var(--theme-border) !important;
+}
+
+.pattern-comparison-labels {
+  color: var(--theme-text-muted) !important;
+}
+
+/*
+ * As cores didáticas ficam restritas aos elementos de leitura:
+ * traçados do canvas, pontos da legenda e rótulos-chave.
+ */
+.pattern-visual-chip i,
+.pattern-dot {
+  forced-color-adjust: none;
+}
+/* CORTEX ECG PATTERN THEME BACKGROUNDS V3 END */
