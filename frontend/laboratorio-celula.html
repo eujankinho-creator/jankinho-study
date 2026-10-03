@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Membrana Viva | Laboratório | Cortex</title>
+  <title>Laboratório da Célula | Cortex</title>
 
   <script>
     (function () {
@@ -20,11 +20,9 @@
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/pratica-premium.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-physiology4">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-reset1">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -34,7 +32,7 @@
   <meta name="theme-color" content="#07090d">
 </head>
 
-<body class="practice-view lab-view membrane-lab-view">
+<body class="practice-view lab-view cell-lab-reset-view">
   <aside class="sidebar">
     <a href="/" class="sidebar-logo">
       <div class="logo-box">C</div>
@@ -56,8 +54,8 @@
   <div class="main-area">
     <header class="header">
       <div>
-        <div class="header-title">Membrana Viva</div>
-        <span class="membrane-header-subtitle">Potencial de ação e membrana excitável</span>
+        <div class="header-title">Laboratório da Célula</div>
+        <span class="cell-reset-subtitle">Nova construção</span>
       </div>
 
       <div class="header-user">
@@ -69,284 +67,52 @@
       </div>
     </header>
 
-    <main class="membrane-page">
-      <section class="membrane-heading">
-        <div>
-          <a class="back-lab-link" href="/laboratorio.html">← Voltar ao hub</a>
-          <div class="simulation-status">
-            <span class="status-dot membrane-ready"></span>
-            <span>Simulação eletrofisiológica interativa</span>
-          </div>
-          <h1>Membrana Viva</h1>
-          <p>
-            Entenda o potencial de ação acompanhando poucas partículas representativas: concentração,
-            força eletroquímica, canais dependentes de voltagem, ATPase e Vm respondem ao mesmo modelo.
-          </p>
-        </div>
+    <main class="cell-reset-page">
+      <a class="back-lab-link" href="/laboratorio.html">← Voltar ao hub</a>
 
-        <div class="membrane-heading-actions">
-          <div class="view-mode-switch" role="group" aria-label="Modo de visualização da membrana">
-            <button id="mode2d" class="active" type="button" aria-pressed="true">2D</button>
-            <button id="mode3d" type="button" aria-pressed="false">3D</button>
-          </div>
-          <button id="resetMembrane" class="membrane-button subtle" type="button">Resetar</button>
-        </div>
+      <section class="cell-reset-empty" aria-label="Área vazia do novo laboratório da célula">
+        <span>BASE LIMPA</span>
+        <h1>Laboratório da Célula</h1>
+        <p>O simulador anterior foi removido. Esta área está pronta para ser construída do zero.</p>
       </section>
-
-      <section class="membrane-metrics">
-        <article>
-          <span>Potencial de membrana</span>
-          <strong id="vmValue">-70 mV</strong>
-          <small id="vmState">repouso</small>
-        </article>
-        <article>
-          <span>Referência de limiar</span>
-          <strong>≈ -55 mV</strong>
-          <small>não é um gatilho fixo do modelo</small>
-        </article>
-        <article>
-          <span>Bomba Na⁺/K⁺</span>
-          <strong id="pumpStateMetric">ativa</strong>
-          <small>3 ATPases visíveis · ciclo 3 Na⁺ : 2 K⁺</small>
-        </article>
-        <article>
-          <span>Fase elétrica</span>
-          <strong id="phaseMetric">repouso</strong>
-          <small id="phaseMetricDetail">gradientes preservados</small>
-        </article>
-      </section>
-
-      <section class="membrane-layout">
-        <article class="membrane-panel membrane-stage-panel">
-          <div class="panel-title-row">
-            <div>
-              <span class="eyebrow">AMBIENTE EXTRACELULAR + CITOPLASMA</span>
-              <h2>Arraste os íons pela membrana</h2>
-            </div>
-            <div id="interactionChip" class="interaction-chip">clique + arraste</div>
-          </div>
-
-          <div class="stage-help">
-            <span><i class="legend-ion na"></i>Na⁺</span>
-            <span><i class="legend-ion k"></i>K⁺</span>
-            <span><i class="legend-channel na"></i>canal de Na⁺</span>
-            <span><i class="legend-channel k"></i>canal de K⁺</span>
-            <span>ATPase · 3 Na⁺ : 2 K⁺</span>
-          </div>
-
-          <div class="electrochemical-readout" aria-label="Leitura eletroquímica">
-            <div>
-              <span>ENa</span>
-              <strong id="naEquilibriumMetric">+67 mV</strong>
-            </div>
-            <div>
-              <span>EK</span>
-              <strong id="kEquilibriumMetric">-90 mV</strong>
-            </div>
-            <div class="polarity-readout">
-              <span>SEPARAÇÃO DE CARGAS</span>
-              <strong id="polarityMetric">interior − / exterior +</strong>
-            </div>
-          </div>
-
-          <div class="cell-stage-wrap">
-            <canvas id="cellCanvas" aria-label="Célula interativa 2D com íons sódio e potássio"></canvas>
-            <canvas id="cellCanvas3d" aria-label="Célula interativa tridimensional com rotação, profundidade, canais e ATPases"></canvas>
-            <div class="view3d-guide" aria-hidden="true">
-              <span>ARRASTE O FUNDO PARA GIRAR</span>
-              <span>ARRASTE UM ÍON PARA MOVER</span>
-              <span>RODA DO MOUSE = PROFUNDIDADE</span>
-            </div>
-
-            <div class="stage-label extracellular">
-              <span>MEIO EXTRACELULAR</span>
-              <strong>Na⁺ predominante</strong>
-            </div>
-
-            <div class="stage-label intracellular">
-              <span>CITOPLASMA</span>
-              <strong>K⁺ predominante</strong>
-            </div>
-
-            <div id="dragHint" class="drag-hint">
-              Arraste um Na⁺ externo até um canal azul
-            </div>
-          </div>
-
-          <div class="distribution-grid">
-            <div class="distribution-card na">
-              <span>Na⁺ extracelular</span>
-              <strong id="naOutConcentration">145 mM</strong>
-              <small id="naOutParticles">8 partículas didáticas</small>
-            </div>
-            <div class="distribution-card na">
-              <span>Na⁺ intracelular</span>
-              <strong id="naInConcentration">12 mM</strong>
-              <small id="naInParticles">3 partículas didáticas</small>
-            </div>
-            <div class="distribution-card k">
-              <span>K⁺ extracelular</span>
-              <strong id="kOutConcentration">4 mM</strong>
-              <small id="kOutParticles">3 partículas didáticas</small>
-            </div>
-            <div class="distribution-card k">
-              <span>K⁺ intracelular</span>
-              <strong id="kInConcentration">140 mM</strong>
-              <small id="kInParticles">8 partículas didáticas</small>
-            </div>
-          </div>
-        </article>
-
-        <aside class="membrane-side">
-          <article class="membrane-panel control-panel">
-            <div class="panel-title-row compact">
-              <div>
-                <span class="eyebrow">CONTROLES</span>
-                <h2>Permeabilidade e transporte</h2>
-              </div>
-            </div>
-
-            <div class="control-switch-row">
-              <div>
-                <span class="control-dot pump"></span>
-                <div>
-                  <strong>Bomba Na⁺/K⁺</strong>
-                  <small>3 Na⁺ para fora · 2 K⁺ para dentro</small>
-                </div>
-              </div>
-              <button id="pumpToggle" class="toggle-control on" type="button" aria-pressed="true"><span></span></button>
-            </div>
-
-            <div class="pump-mode-block">
-              <div class="pump-mode-copy">
-                <span>MODO DA ATPase</span>
-                <strong id="pumpModeMetric">manual</strong>
-              </div>
-              <div class="pump-mode-segment" role="group" aria-label="Modo da bomba sódio potássio">
-                <button id="pumpModeManual" class="active" type="button" aria-pressed="true">Manual</button>
-                <button id="pumpModeAuto" type="button" aria-pressed="false">Automático</button>
-              </div>
-              <p>Manual: o ciclo só inicia quando a mesma ATPase tem 3 Na⁺ internos e 2 K⁺ externos preparados. A ligação e liberação seguem a sequência conformacional. Automático: captura apenas íons próximos.</p>
-            </div>
-
-            <div class="control-switch-row">
-              <div>
-                <span class="control-dot na"></span>
-                <div>
-                  <strong>Canal de Na⁺</strong>
-                  <small>permite entrada de Na⁺</small>
-                </div>
-              </div>
-              <button id="naChannelToggle" class="toggle-control on na-toggle" type="button" aria-pressed="true"><span></span></button>
-            </div>
-
-            <div class="control-switch-row">
-              <div>
-                <span class="control-dot k"></span>
-                <div>
-                  <strong>Canal de K⁺</strong>
-                  <small>permite saída de K⁺</small>
-                </div>
-              </div>
-              <button id="kChannelToggle" class="toggle-control on k-toggle" type="button" aria-pressed="true"><span></span></button>
-            </div>
-
-            <div class="stimulus-box">
-              <div>
-                <span>ESTÍMULO</span>
-                <strong>Despolarize a membrana</strong>
-                <p>Um pulso injeta corrente na membrana. A resposta surge das condutâncias de Na⁺ e K⁺, das portas de ativação/inativação e dos gradientes atuais.</p>
-              </div>
-              <button id="stimulusButton" type="button">Aplicar pulso de corrente</button>
-            </div>
-          </article>
-
-          <article class="membrane-panel explanation-panel">
-            <div class="explanation-head">
-              <span class="live-dot"></span>
-              <div>
-                <span>O QUE ESTÁ ACONTECENDO?</span>
-                <strong id="explanationTitle">Potencial de repouso</strong>
-              </div>
-            </div>
-
-            <p id="explanationText">
-              O interior permanece negativo porque a membrana é muito mais permeável ao K⁺,
-              enquanto a bomba Na⁺/K⁺ sustenta os gradientes ao longo do tempo.
-            </p>
-
-            <div id="explanationEquation" class="explanation-equation">
-              Vm ≈ -70 mV
-            </div>
-
-            <div class="teaching-points">
-              <span>gradiente químico</span>
-              <span>gradiente elétrico</span>
-              <span>permeabilidade seletiva</span>
-            </div>
-          </article>
-        </aside>
-      </section>
-
-      <section class="membrane-bottom-grid">
-        <article class="membrane-panel voltage-panel">
-          <div class="panel-title-row">
-            <div>
-              <span class="eyebrow">VOLTAGEM DA MEMBRANA</span>
-              <h2>Potencial em tempo real</h2>
-            </div>
-
-            <div class="graph-legend">
-              <span><i class="vm-line"></i>Vm</span>
-              <span><i class="threshold-line"></i>referência ≈ -55 mV</span>
-              <span><i class="rest-line"></i>repouso -70 mV</span>
-            </div>
-          </div>
-
-          <div class="voltage-canvas-wrap">
-            <canvas id="voltageCanvas" aria-label="Gráfico do potencial de membrana em milivolts"></canvas>
-          </div>
-        </article>
-
-        <article class="membrane-panel lesson-panel">
-          <span class="eyebrow">LEITURA RÁPIDA</span>
-          <h2>O que observar</h2>
-
-          <div class="lesson-step active" id="lessonRest">
-            <span>01</span>
-            <div>
-              <strong>Repouso</strong>
-              <p>K⁺ tende a sair pelos canais de vazamento; a atração elétrica limita essa saída e estabiliza o Vm.</p>
-            </div>
-          </div>
-
-          <div class="lesson-step" id="lessonDepolarization">
-            <span>02</span>
-            <div>
-              <strong>Despolarização</strong>
-              <p>A ativação rápida de Na⁺ aumenta gNa e cria feedback regenerativo enquanto a inativação de Na⁺ ainda é baixa.</p>
-            </div>
-          </div>
-
-          <div class="lesson-step" id="lessonRepolarization">
-            <span>03</span>
-            <div>
-              <strong>Repolarização</strong>
-              <p>A ativação mais lenta de K⁺ aumenta gK, repolariza a membrana e pode produzir hiperpolarização transitória.</p>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <p class="educational-note">
-        Modelo educacional simplificado. Cada esfera representa um conjunto de íons. A separação de cargas
-        mostrada ocorre junto à membrana; o meio intra e extracelular permanecem quase eletroneutros no volume total.
-      </p>
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261003-physiology4"></script>
-  <script src="/js/laboratorio-celula-3d.js?v=20261003-physiology4"></script>
+  <script>
+    (function () {
+      async function loadUser() {
+        try {
+          var response = await fetch("/api/auth/me", { credentials: "same-origin" });
+          if (response.status === 401) {
+            location.href = "/login.html";
+            return;
+          }
+          if (!response.ok) return;
+
+          var data = await response.json();
+          var user = data.usuario || {};
+          var name = user.nome || "Usuário";
+          var initial = name.charAt(0).toUpperCase();
+
+          document.getElementById("nomeSidebar").textContent = name;
+          document.getElementById("emailSidebar").textContent = user.email || "";
+          document.getElementById("nomeHeader").textContent = name;
+          document.getElementById("avatarSidebar").textContent = initial;
+          document.getElementById("avatarHeader").textContent = initial;
+        } catch (error) {}
+      }
+
+      document.getElementById("logoutSidebar").addEventListener("click", async function () {
+        try {
+          await fetch("/api/auth/logout", { method: "POST", credentials: "same-origin" });
+        } finally {
+          location.href = "/login.html";
+        }
+      });
+
+      loadUser();
+    })();
+  </script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
