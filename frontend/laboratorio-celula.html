@@ -4,19 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Membrana Viva | Laboratório | Cortex</title>
-<link rel="stylesheet" href="/css/ui-enhancements.css?v=20260930-global4">
-  <script src="/js/ui-enhancements.js?v=20260930-global4"></script>
-  <link rel="stylesheet" href="/css/themes.css?v=20260930-bluefix4">
-  <script src="/js/theme-manager.js"></script>
-  <link rel="stylesheet" href="/css/cortex-brand.css?v=20260930-bluefix4">
-  <link rel="stylesheet" href="/css/pratica-premium.css">
-  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20260930-global4">
-  <link rel="stylesheet" href="/css/theme-final.css?v=20260930-blue-global3">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-membrana2">
-  <script src="/js/sidebar-standard.js?v=20261003-lab1" defer></script>
 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-blue-v2">
-  <meta name="theme-color" content="#080b11">
+  <script>
+    (function () {
+      var theme = "dark-orange";
+      try {
+        var saved = localStorage.getItem("jankinho_theme_v1");
+        if (saved) theme = saved;
+      } catch (error) {}
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/css/app.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/pratica-premium.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-membrana3">
+
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
+  <meta name="theme-color" content="#07090d">
 </head>
 
 <body class="practice-view lab-view membrane-lab-view">
