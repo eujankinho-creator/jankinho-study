@@ -322,7 +322,7 @@
 
   function sourceScopedQuestions() {
 
-    return sourceScopedQuestions()
+    return state.questions
       .filter(
         function (
           question
