@@ -177,7 +177,7 @@
       zone: zone,
       nx: point.nx,
       ny: point.ny,
-      radius: 13,
+      radius: 11,
       vx: (Math.random() - .5) * 8,
       vy: (Math.random() - .5) * 8,
       wobble: Math.random() * Math.PI * 2,
@@ -361,8 +361,10 @@
   }
 
   function pumpBindingPoint(pump, type, index, g) {
-    const offsets = type === "Na" ? [-.085, 0, .085] : [-.055, .055];
-    const radius = type === "Na" ? g.r - 28 : g.r + 28;
+    // Sítios separados o suficiente para que cada esfera "encaixe" visualmente
+    // sem se sobrepor às vizinhas.
+    const offsets = type === "Na" ? [-.155, 0, .155] : [-.105, .105];
+    const radius = type === "Na" ? g.r - 31 : g.r + 31;
     return pointAtRadius(pump.angle + offsets[index], radius, g);
   }
 
@@ -1335,6 +1337,110 @@
 
     $("vmState").textContent = stateText;
     $("pumpStateMetric").textContent = state.pumpOn ? "ativa" : "desligada";
+
+    if ($("naEquilibriumMetric")) {
+      $("naEquilibriumMetric").textContent = Math.round(equilibriumPotential("Na")) + " mV";
+    }
+    if ($("kEquilibriumMetric")) {
+      $("kEquilibriumMetric").textContent = Math.round(equilibriumPotential("K")) + " mV";
+    }
+    if ($("polarityMetric")) {
+      $("polarityMetric").textContent =
+        state.vm < -5 ? "interior − / exterior +" :
+        state.vm > 5 ? "interior + / exterior −" :
+        "próximo de 0 mV";
+    }
+  }
+
+  function drawIonSphere(ctx, x, y, radius, type, glow, bound) {
+    const isNa = type === "Na";
+    const edge = isNa ? "#38bdf8" : "#f59e0b";
+    const mid = isNa ? "#138fc4" : "#c76f08";
+    const dark = isNa ? "#07364c" : "#55300a";
+    const text = isNa ? "#dcf8ff" : "#fff1ce";
+
+    ctx.save();
+    ctx.shadowColor = edge;
+    ctx.shadowBlur = glow ? 16 : bound ? 10 : 5;
+
+    const sphere = ctx.createRadialGradient(
+      x - radius * .38,
+      y - radius * .42,
+      Math.max(1, radius * .08),
+      x,
+      y,
+      radius
+    );
+    sphere.addColorStop(0, "rgba(255,255,255,.95)");
+    sphere.addColorStop(.14, isNa ? "#9be7ff" : "#ffd68d");
+    sphere.addColorStop(.46, mid);
+    sphere.addColorStop(.78, dark);
+    sphere.addColorStop(1, "rgba(3,8,14,.98)");
+
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = sphere;
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+    ctx.lineWidth = bound ? 1.8 : 1.1;
+    ctx.strokeStyle = edge;
+    ctx.globalAlpha = .78;
+    ctx.stroke();
+
+    ctx.globalAlpha = .66;
+    ctx.beginPath();
+    ctx.arc(x - radius * .33, y - radius * .36, Math.max(1.5, radius * .16), 0, Math.PI * 2);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = text;
+    ctx.font = "900 " + Math.max(7, radius * .62) + "px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(type + "⁺", x, y + .6);
+    ctx.restore();
+  }
+
+  function drawMembranePolarity(ctx, g) {
+    const strength = clamp(Math.abs(state.vm) / 70, 0, 1);
+    const negativeInside = state.vm <= 0;
+    const count = 18;
+
+    if (strength < .04) return;
+
+    for (let i = 0; i < count; i += 1) {
+      const angle = (Math.PI * 2 * i) / count + .04;
+      const inner = pointAtRadius(angle, g.r - 22, g);
+      const outer = pointAtRadius(angle, g.r + 22, g);
+      const alpha = .10 + strength * .58;
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font = "900 9px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      ctx.fillStyle = negativeInside ? "rgba(117,154,255,.95)" : "rgba(255,183,82,.95)";
+      ctx.fillText(negativeInside ? "−" : "+", inner.x, inner.y);
+
+      ctx.fillStyle = negativeInside ? "rgba(255,183,82,.88)" : "rgba(117,154,255,.95)";
+      ctx.fillText(negativeInside ? "+" : "−", outer.x, outer.y);
+      ctx.restore();
+    }
+
+    ctx.save();
+    ctx.globalAlpha = .42 + strength * .35;
+    ctx.font = "800 7px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillStyle = negativeInside ? "#8da9ff" : "#ffc16b";
+    ctx.fillText(
+      negativeInside ? "INTERIOR MAIS NEGATIVO" : "INTERIOR POSITIVO",
+      g.cx,
+      g.cy + g.r * .34
+    );
+    ctx.restore();
   }
 
   function drawCell(now) {
@@ -1348,33 +1454,78 @@
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, size.cssWidth, size.cssHeight);
 
-    const gradient = ctx.createRadialGradient(g.cx, g.cy, g.r * .12, g.cx, g.cy, g.r * 1.08);
-    gradient.addColorStop(0, "rgba(28, 51, 92, .56)");
-    gradient.addColorStop(.78, "rgba(12, 24, 43, .48)");
-    gradient.addColorStop(1, "rgba(8, 15, 28, .25)");
+    const cellBody = ctx.createRadialGradient(
+      g.cx - g.r * .33,
+      g.cy - g.r * .38,
+      g.r * .04,
+      g.cx,
+      g.cy,
+      g.r * 1.12
+    );
+    cellBody.addColorStop(0, "rgba(85, 135, 235, .42)");
+    cellBody.addColorStop(.28, "rgba(31, 70, 142, .47)");
+    cellBody.addColorStop(.70, "rgba(11, 28, 58, .72)");
+    cellBody.addColorStop(1, "rgba(4, 11, 23, .94)");
 
+    ctx.save();
+    ctx.shadowColor = "rgba(67,124,255,.22)";
+    ctx.shadowBlur = 34;
     ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r - 8, 0, Math.PI * 2);
-    ctx.fillStyle = gradient;
+    ctx.arc(g.cx, g.cy, g.r - 9, 0, Math.PI * 2);
+    ctx.fillStyle = cellBody;
     ctx.fill();
+    ctx.restore();
+
+    // Membrana com espessura e brilho para parecer um volume, não um círculo chapado.
+    ctx.save();
+    ctx.shadowColor = "rgba(97,150,255,.24)";
+    ctx.shadowBlur = 18;
+    ctx.beginPath();
+    ctx.arc(g.cx, g.cy, g.r, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(67, 101, 178, .30)";
+    ctx.lineWidth = 20;
+    ctx.stroke();
 
     ctx.beginPath();
     ctx.arc(g.cx, g.cy, g.r, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(118, 154, 246, .17)";
-    ctx.lineWidth = 15;
+    ctx.strokeStyle = "rgba(137, 177, 255, .28)";
+    ctx.lineWidth = 11;
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(176, 196, 255, .13)";
-    ctx.lineWidth = 2;
+    ctx.arc(g.cx, g.cy, g.r - 1.5, -2.7, -.42);
+    ctx.strokeStyle = "rgba(222, 235, 255, .30)";
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
     ctx.stroke();
+    ctx.restore();
 
+    ctx.save();
     ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r - 11, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(81, 115, 196, .12)";
-    ctx.lineWidth = 1;
-    ctx.stroke();
+    ctx.ellipse(
+      g.cx - g.r * .22,
+      g.cy - g.r * .28,
+      g.r * .42,
+      g.r * .19,
+      -.48,
+      0,
+      Math.PI * 2
+    );
+    const sheen = ctx.createRadialGradient(
+      g.cx - g.r * .30,
+      g.cy - g.r * .34,
+      1,
+      g.cx - g.r * .22,
+      g.cy - g.r * .28,
+      g.r * .42
+    );
+    sheen.addColorStop(0, "rgba(255,255,255,.15)");
+    sheen.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = sheen;
+    ctx.fill();
+    ctx.restore();
+
+    drawMembranePolarity(ctx, g);
 
     CHANNELS.forEach(function (channel) {
       const x = g.cx + Math.cos(channel.angle) * g.r;
@@ -1424,11 +1575,18 @@
       ctx.save();
       ctx.translate(pumpX, pumpY);
       ctx.rotate(pump.angle + Math.PI / 2);
-      ctx.fillStyle = pumpActive ? "rgba(167, 139, 250, .14)" : "rgba(90, 90, 100, .08)";
-      ctx.strokeStyle = pumpActive ? "#a78bfa" : "rgba(130, 130, 140, .28)";
-      ctx.lineWidth = 1.4;
+      const pumpBody = ctx.createLinearGradient(-22, 0, 22, 0);
+      pumpBody.addColorStop(0, pumpActive ? "rgba(74,45,132,.96)" : "rgba(45,45,52,.86)");
+      pumpBody.addColorStop(.45, pumpActive ? "rgba(177,132,255,.50)" : "rgba(80,80,90,.34)");
+      pumpBody.addColorStop(.58, pumpActive ? "rgba(59,34,112,.96)" : "rgba(43,43,49,.90)");
+      pumpBody.addColorStop(1, pumpActive ? "rgba(129,82,219,.68)" : "rgba(60,60,68,.42)");
+      ctx.shadowColor = pumpActive ? "rgba(167,139,250,.28)" : "transparent";
+      ctx.shadowBlur = pumpActive ? 12 : 0;
+      ctx.fillStyle = pumpBody;
+      ctx.strokeStyle = pumpActive ? "rgba(199,176,255,.72)" : "rgba(130,130,140,.28)";
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
-      ctx.roundRect(-14, -23, 28, 46, 9);
+      ctx.roundRect(-19, -28, 38, 56, 12);
       ctx.fill();
       ctx.stroke();
 
@@ -1452,7 +1610,7 @@
 
           ctx.save();
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 5.2, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, 11.8, 0, Math.PI * 2);
           ctx.fillStyle = occupied
             ? (type === "Na" ? "rgba(56,189,248,.28)" : "rgba(245,158,11,.27)")
             : "rgba(6,10,17,.72)";
@@ -1506,51 +1664,33 @@
     state.ions.forEach(function (ion) {
       const p = normalizedToPoint(ion, g);
       const moving = Boolean(ion.transport);
-      const wobble = ion.id === state.draggingId || moving ? 0 : Math.sin(now * .0017 + ion.wobble) * 1.6;
+      const bound = Boolean(ion.boundPumpId);
+      const wobble = ion.id === state.draggingId || moving || bound
+        ? 0
+        : Math.sin(now * .0017 + ion.wobble) * 1.25;
       const x = p.x + wobble;
-      const y = p.y + (moving ? 0 : Math.cos(now * .0014 + ion.wobble) * 1.2);
-      const isNa = ion.type === "Na";
-      const fill = isNa ? "rgba(56, 189, 248, .16)" : "rgba(245, 158, 11, .15)";
-      const stroke = isNa ? "#38bdf8" : "#f59e0b";
-      const text = isNa ? "#c5f1ff" : "#ffe0aa";
+      const y = p.y + (moving || bound ? 0 : Math.cos(now * .0014 + ion.wobble) * 1.0);
       const crossing = moving ? ion.transport.chargeProgress : 0;
-      const visibleRadius = ion.radius * (1 - Math.sin(crossing * Math.PI) * .24);
-
-      ctx.save();
+      const radius = bound
+        ? 10.2
+        : ion.radius * (1 - Math.sin(crossing * Math.PI) * .18);
+      const glow = ion.id === state.draggingId || moving || now < ion.flashUntil;
 
       if (moving) {
         const trailEnd = pointAtRadius(ion.transport.angle, g.r, g);
-        ctx.strokeStyle = isNa ? "rgba(56,189,248,.22)" : "rgba(245,158,11,.20)";
-        ctx.lineWidth = 1.2;
+        ctx.save();
+        ctx.strokeStyle = ion.type === "Na"
+          ? "rgba(56,189,248,.20)"
+          : "rgba(245,158,11,.18)";
+        ctx.lineWidth = 1.1;
         ctx.beginPath();
         ctx.moveTo(x, y);
         ctx.lineTo(trailEnd.x, trailEnd.y);
         ctx.stroke();
-
-        ctx.shadowColor = stroke;
-        ctx.shadowBlur = 18;
-      } else if (ion.id === state.draggingId || now < ion.flashUntil) {
-        ctx.shadowColor = stroke;
-        ctx.shadowBlur = 14;
+        ctx.restore();
       }
 
-      ctx.beginPath();
-      ctx.arc(x, y, visibleRadius, 0, Math.PI * 2);
-      ctx.fillStyle = fill;
-      ctx.fill();
-      ctx.strokeStyle = stroke;
-      ctx.globalAlpha = .9;
-      ctx.lineWidth = moving ? 1.8 : 1.2;
-      ctx.stroke();
-
-      ctx.shadowBlur = 0;
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = text;
-      ctx.font = "800 8px system-ui, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(ion.type + "⁺", x, y + .5);
-      ctx.restore();
+      drawIonSphere(ctx, x, y, radius, ion.type, glow, bound);
     });
 
     ctx.save();
