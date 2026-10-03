@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECG Lab | Cortex</title>
+
+  <script>
+    (function () {
+      var theme = "dark-orange";
+      try {
+        var saved = localStorage.getItem("jankinho_theme_v1");
+        if (saved) theme = saved;
+      } catch (error) {}
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/pratica-premium.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-glow2">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261002-guided-quiz9">
+
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261001-nav-core6"></script>
+
+  <link rel="preload" href="/models/heart.glb?v=20261002-1935" as="fetch" type="model/gltf-binary" crossorigin="anonymous">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
+  <meta name="theme-color" content="#071019">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/three.module.js?v=20261002-1748",
+      "three/addons/": "/vendor/three/addons/"
+    }
+  }
+  </script>
+</head>
+
+<body class="practice-view ecg-laboratory-page">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box">C</div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+
+    <div class="sidebar-menu">
+      <div class="menu-group">
+        <div class="menu-title">Estudo</div>
+        <a href="/" class="menu-item"><span>&#8962;</span>Dashboard</a>
+        <a href="/questoes" class="menu-item"><span>&#9635;</span>Questões</a>
+        <a href="/flashcards" class="menu-item"><span>&#9648;</span>Flashcards</a>
+        <a href="/farmacos" class="menu-item"><span class="menu-icon menu-icon-text">Rx</span>Farmacologia</a>
+        <a href="/casos" class="menu-item"><span>&#9877;</span>Casos Clínicos</a>
+        <a href="/laboratorio" class="menu-item active"><span>&#9879;</span>Laboratório</a>
+        <a href="/evolucao" class="menu-item"><span>&#9998;</span>Evolução</a>
+      </div>
+
+      <div class="menu-group">
+        <div class="menu-title">Análise</div>
+        <a href="/desempenho" class="menu-item"><span>&#9682;</span>Desempenho</a>
+        <a href="/ranking" class="menu-item"><span>&#9819;</span>Ranking</a>
+      </div>
+
+      <div class="menu-group">
+        <div class="menu-title">Pessoal</div>
+        <a href="/financas" class="menu-item"><span>R$</span>Finanças</a>
+        <a href="/musica" class="menu-item"><span>&#9835;</span>Música</a>
+        <a href="/configuracoes" class="menu-item"><span>&#9881;</span>Configurações</a>
+      </div>
+    </div>
+
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info">
+        <strong id="nomeSidebar">Carregando...</strong>
+        <span id="emailSidebar"></span>
+      </div>
+      <button id="logoutSidebar" class="logout-button" type="button" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header">
+      <div class="header-title">Laboratório</div>
+      <div class="header-user">
+        <div>
+          <strong id="nomeHeader">Carregando...</strong>
+          <span>Cortex</span>
+        </div>
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
+      </div>
+    </header>
+
+    <main class="ecg-lab">
+      <section class="ecg-lab-hero">
+        <div class="ecg-hero-mark" aria-hidden="true">
+          <svg viewBox="0 0 60 40">
+            <path d="M2 23h10l4-12 7 25 7-31 7 23 5-8h16"></path>
+          </svg>
+        </div>
+        <div class="ecg-hero-copy">
+          <h1>Laboratório de ECG</h1>
+          <p>Explore o coração em 3D, entenda os fundamentos e reconheça padrões e alterações do ECG. Teste seu raciocínio com visualizações interativas e revisão comentada.</p>
+        </div>
+        <button id="supportButton" class="ecg-support-button" type="button">
+          <span aria-hidden="true">▤</span>
+          Material de apoio
+        </button>
+      </section>
+
+      <nav class="ecg-section-tabs" aria-label="Áreas do laboratório">
+        <button class="ecg-section-tab active" type="button" data-lab-section="simulator">
+          <span class="tab-index">01</span>
+          <span><strong>Simulador 3D</strong><small>Veja o impulso acontecer</small></span>
+        </button>
+        <button class="ecg-section-tab" type="button" data-lab-section="fundamentals">
+          <span class="tab-index">02</span>
+          <span><strong>Fundamentos</strong><small>3 partes · do sinal à medida</small></span>
+        </button>
+        <button class="ecg-section-tab" type="button" data-lab-section="guided">
+          <span class="tab-index">03</span>
+          <span><strong>Leitura guiada</strong><small>Um roteiro para cada ECG</small></span>
+        </button>
+        <button class="ecg-section-tab" type="button" data-lab-section="patterns">
+          <span class="tab-index">04</span>
+          <span><strong>Padrões e alterações</strong><small>Compare com o normal</small></span>
+        </button>
+      </nav>
+
+      <section id="labSection-simulator" class="ecg-section-panel active" data-section-panel="simulator">
+        <div class="simulator-layout">
+          <article class="lab-card heart-workstation">
+            <div class="heart-viewer">
+              <div id="heart3dHost" class="heart3d-host" aria-label="Coração anatômico 3D">
+                <div id="heartModelLoading" class="heart-model-loading">
+                  <span class="loading-ring"></span>
+                  <strong>Carregando coração anatômico...</strong>
+                  <small>Modelo GLB anatômico otimizado</small>
+                </div>
+
+                <div class="heart-viewer-top">
+                  <span id="heartOrientation">−90°</span>
+                  <div class="heart-viewer-actions">
+                    <button id="heartFullscreen" type="button">Ampliar coração ⛶</button>
+                  </div>
+                </div>
+
+                <div class="heart-viewer-bottom">
+                  <span id="heartPhaseBadge">QRS: despolarização ventricular</span>
+                  <small>arraste para girar</small>
+                </div>
+              </div>
+
+              <div class="heart-viewer-caption">
+                <span>12 eixos: 6 periféricas no plano frontal e 6 precordiais no plano horizontal.</span>
+              </div>
+            </div>
+
+            <div class="simulator-mode-tabs">
+              <button class="sim-mode active" type="button" data-axis-mode="all">
+                <strong>12 eixos</strong>
+              </button>
+              <button class="sim-mode" type="button" data-axis-mode="frontal">
+                <strong>Derivações periféricas</strong>
+                <small>Plano frontal</small>
+              </button>
+              <button class="sim-mode" type="button" data-axis-mode="horizontal">
+                <strong>Derivações precordiais</strong>
+                <small>Plano horizontal</small>
+              </button>
+            </div>
+
+            <label class="sim-option">
+              <input id="posteriorLeads" type="checkbox">
+              <span>Incluir posteriores V7–V9</span>
+            </label>
+
+            <label class="sim-option">
+              <input id="rightLeads" type="checkbox">
+              <span>Incluir direitas V3R–V4R · VD</span>
+            </label>
+
+            <details class="sim-details">
+              <summary>O ECG é a sombra de uma seta</summary>
+              <p>Cada derivação registra a projeção do vetor elétrico cardíaco sobre o seu próprio eixo. Quando o vetor aponta para o polo positivo, o traçado tende a subir; quando se afasta, tende a descer.</p>
+            </details>
+
+            <div class="sim-transport">
+              <button id="phasePrevious" type="button" aria-label="Anterior">◀</button>
+              <span id="phaseCounter">5/10</span>
+              <button id="phaseNext" type="button" aria-label="Próximo">▶</button>
+              <button id="phasePlay" class="continuous-button" type="button">▶ Contínuo</button>
+              <button id="heartSoundToggle" class="sound-button" type="button" aria-pressed="true">♪ Som ativo</button>
+              <select id="phaseSpeed" aria-label="Velocidade do ritmo">
+                <option value="0.75">54 bpm</option>
+                <option value="1" selected>72 bpm</option>
+                <option value="1.25">90 bpm</option>
+              </select>
+            </div>
+
+            <input id="phaseSlider" class="sim-slider" type="range" min="0" max="9" step="1" value="4">
+
+            <div class="qrs-moments" aria-label="Três momentos do QRS">
+              <button class="qrs-moment active" type="button" data-qrs-step="0">
+                <span>1</span><strong>Septo</strong><small>Início do QRS</small>
+              </button>
+              <button class="qrs-moment" type="button" data-qrs-step="1">
+                <span>2</span><strong>Paredes e ápice</strong><small>Meio do QRS</small>
+              </button>
+              <button class="qrs-moment" type="button" data-qrs-step="2">
+                <span>3</span><strong>Bases</strong><small>Fim do QRS</small>
+              </button>
+            </div>
+
+            <div class="sim-explanation">
+              <span id="simExplanationStep">5. Vetor 1</span>
+              <h2 id="simExplanationTitle">Início do QRS: septo</h2>
+              <p id="simExplanationText">O primeiro vetor representa o início da despolarização ventricular. Pelo sistema His–Purkinje, o impulso chega ao septo e a ativação inicial segue predominantemente da esquerda para a direita.</p>
+              <div class="explanation-key">
+                <span><i class="key-dot depolarized"></i>Despolarizado</span>
+                <span><i class="key-dot resting"></i>Repouso / repolarizado</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lab-card ecg-matrix-card">
+            <div class="matrix-head">
+              <div>
+                <h2>Derivações periféricas · plano frontal</h2>
+                <p>Bipolares: DI, DII, DIII · Unipolares aumentadas: aVR, aVL, aVF</p>
+              </div>
+              <div class="paper-controls">
+                <select id="paperSpeedSimulator" aria-label="Velocidade do papel">
+                  <option value="25">25 mm/s</option>
+                  <option value="50">50 mm/s</option>
+                </select>
+                <select id="paperGainSimulator" aria-label="Ganho">
+                  <option value="10">10 mm/mV</option>
+                  <option value="5">5 mm/mV</option>
+                  <option value="20">20 mm/mV</option>
+                </select>
+              </div>
+            </div>
+            <div class="matrix-canvas-wrap">
+              <canvas id="ecgMatrixCanvas"></canvas>
+              <div id="ecgHoverTooltip" class="ecg-hover-tooltip" hidden></div>
+              <div class="ecg-interaction-hint">Passe o mouse sobre o traçado para identificar P, QRS, ST, T e valores aproximados.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="labSection-fundamentals" class="ecg-section-panel" data-section-panel="fundamentals" hidden>
+        <div class="section-intro">
+          <span>APRENDER O CONCEITO</span>
+          <h2>Do impulso elétrico ao papel</h2>
+          <p>Entenda como a atividade elétrica do coração se transforma nas ondas do ECG, como medimos tempo e amplitude e como o papel milimetrado padroniza essas medidas.</p>
+        </div>
+
+        <article class="lab-card fundamentals-path">
+          <div>
+            <h3>Explore as 3 partes</h3>
+            <p>Escolha um tema para estudar.</p>
+          </div>
+          <div class="fundamental-step-list">
+            <button class="fundamental-step active" type="button" data-fundamental-part="signal">
+              <span>1</span><div><strong>Do impulso ao ECG</strong><small>Da célula ao traçado</small></div><b>›</b>
+            </button>
+            <button class="fundamental-step" type="button" data-fundamental-part="waves">
+              <span>2</span><div><strong>Ondas e intervalos</strong><small>P, QRS, T e suas medidas</small></div><b>›</b>
+            </button>
+            <button class="fundamental-step" type="button" data-fundamental-part="paper">
+              <span>3</span><div><strong>Papel e medidas</strong><small>Como ler e calcular no papel milimetrado</small></div><b>›</b>
+            </button>
+          </div>
+        </article>
+
+        <div id="fundamentalPart-signal" class="fundamental-part active">
+          <article class="lab-card concept-card">
+            <div class="concept-header">
+              <div>
+                <span>FUNDAMENTOS · PARTE 1 DE 3</span>
+                <h3>Do impulso ao ECG</h3>
+                <p>Do nó sinusal ao sistema His–Purkinje: acompanhe a sequência elétrica antes de olhar o papel.</p>
+              </div>
+            </div>
+
+            <div class="conduction-grid">
+              <div class="conduction-track">
+                <div class="conduction-node"><b>SA</b><span>Nó sinusal</span></div>
+                <i></i>
+                <div class="conduction-node"><b>AV</b><span>Nó AV</span></div>
+                <i></i>
+                <div class="conduction-node"><b>His</b><span>Feixe de His</span></div>
+                <i></i>
+                <div class="conduction-node"><b>R/L</b><span>Ramos</span></div>
+                <i></i>
+                <div class="conduction-node"><b>P</b><span>Purkinje</span></div>
+              </div>
+              <div class="concept-copy">
+                <h4>Uma sequência organizada</h4>
+                <p>O impulso normalmente nasce no nó sinusal, percorre os átrios, sofre atraso fisiológico no nó AV e segue pelo sistema His–Purkinje para ativar os ventrículos.</p>
+                <p>O ECG não mostra diretamente a contração mecânica; ele registra diferenças de potencial geradas pela atividade elétrica.</p>
+              </div>
+            </div>
+            <div class="conduction-to-paper">
+              <article><span>1</span><div><strong>Nó SA + despolarização atrial</strong><p>Gera a atividade elétrica que aparece como <b>onda P</b>.</p></div><em>→ P</em></article>
+              <article><span>2</span><div><strong>Condução e atraso pelo nó AV</strong><p>Participa do tempo entre o início da P e o início ventricular.</p></div><em>→ PR</em></article>
+              <article><span>3</span><div><strong>His, ramos e Purkinje</strong><p>Distribuem rapidamente o impulso pelos ventrículos.</p></div><em>→ QRS</em></article>
+              <article><span>4</span><div><strong>Recuperação ventricular</strong><p>A repolarização ventricular aparece principalmente na onda T.</p></div><em>→ T</em></article>
+            </div>
+          </article>
+
+          <article class="lab-card electrodes-card">
+            <div class="card-heading">
+              <div>
+                <h3>Onde ficam os eletrodos?</h3>
+                <p><strong>ECG padrão: 10 eletrodos → 12 derivações.</strong> Os eletrodos são os contatos na pele; cada derivação é uma forma de comparar esses sinais.</p>
+              </div>
+            </div>
+
+            <div class="electrode-category-tabs">
+              <button class="electrode-category active" type="button" data-electrode-group="limb">Derivações periféricas</button>
+              <button class="electrode-category" type="button" data-electrode-group="chest">Derivações precordiais</button>
+              <button class="electrode-category" type="button" data-electrode-group="posterior">Extras · V7–V9</button>
+              <button class="electrode-category" type="button" data-electrode-group="right">Extras · V3R–V4R · VD</button>
+            </div>
+
+            <div class="electrode-layout">
+              <div class="electrode-body">
+                <svg id="electrodeBodySvg" viewBox="0 0 460 360" role="img" aria-label="Posicionamento de eletrodos e direção das derivações">
+                  <defs>
+                    <marker id="electrodeArrowHead" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+                      <path d="M0,0 L9,4.5 L0,9 Z" class="electrode-arrow-head"></path>
+                    </marker>
+                  </defs>
+                  <path class="body-shape" d="M196 35 C196 15 210 6 230 6 C250 6 264 15 264 35 C264 53 255 66 244 72 L248 94 C290 101 337 116 395 128 L413 139 L409 150 C351 155 305 153 272 149 L277 248 L267 330 L245 330 L230 235 L215 330 L193 330 L183 248 L188 149 C155 153 109 155 51 150 L47 139 L65 128 C123 116 170 101 212 94 L216 72 C205 66 196 53 196 35 Z"></path>
+                  <line class="body-axis" x1="230" y1="95" x2="230" y2="330"></line>
+                  <g id="electrodeVectors"></g>
+                  <g id="electrodeDots"></g>
+                </svg>
+                <small>Posição convencional nos membros · tronco ilustrado de forma esquemática.</small>
+              </div>
+
+              <div class="electrode-info">
+                <div id="electrodeLeadButtons" class="electrode-lead-buttons"></div>
+                <div id="electrodeFocusCard" class="electrode-focus-card">
+                  <span>DERIVAÇÃO EM FOCO</span>
+                  <h4 id="electrodeFocusTitle">DI · braço direito → braço esquerdo</h4>
+                  <p id="electrodeFocusText">DI compara o potencial do braço esquerdo (+) com o braço direito (−). Seu eixo é aproximadamente 0° no plano frontal.</p>
+                  <div class="electrode-direction-note">
+                    <strong>Como ler a seta</strong>
+                    <span id="electrodeDirectionText">A seta aponta para o polo positivo da derivação. Vetor cardíaco no mesmo sentido tende a gerar deflexão positiva.</span>
+                  </div>
+                </div>
+                <div class="electrode-legend">
+                  <p><strong>BD / RA</strong> · braço direito</p>
+                  <p><strong>BE / LA</strong> · braço esquerdo</p>
+                  <p><strong>PD / RL</strong> · perna direita</p>
+                  <p><strong>PE / LL</strong> · perna esquerda</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div id="fundamentalPart-waves" class="fundamental-part" hidden>
+          <article class="lab-card concept-card">
+            <div class="card-heading">
+              <div>
+                <span>FUNDAMENTOS · PARTE 2 DE 3</span>
+                <h3>Ondas, intervalos e eixo</h3>
+                <p>Reconheça a ordem P → QRS → T e relacione a direção do vetor às derivações.</p>
+              </div>
+            </div>
+
+            <div class="wave-cards">
+              <article><span>P</span><strong>Despolarização atrial</strong><p>Ativação elétrica dos átrios; vem antes do QRS quando o impulso é sinusal.</p></article>
+              <article><span>PR</span><strong>Condução AV</strong><p>Do início da P ao início do QRS: inclui condução atrial, nó AV e sistema His.</p></article>
+              <article><span>QRS</span><strong>Despolarização ventricular</strong><p>Ativação rápida dos ventrículos; largura e morfologia ajudam a avaliar condução.</p></article>
+              <article><span>ST</span><strong>Segmento ST</strong><p>Do ponto J ao início da T; deve ser comparado com uma linha de base adequada.</p></article>
+              <article><span>T</span><strong>Repolarização ventricular</strong><p>Recuperação elétrica ventricular; polaridade e forma dependem da derivação.</p></article>
+            </div>
+            <div class="wave-annotated-card">
+              <div class="wave-annotated-copy">
+                <span>UM CICLO, PASSO A PASSO</span>
+                <h4>Veja onde cada onda começa e termina</h4>
+                <p>As setas marcam os pontos usados na medida. Passe o mouse sobre o desenho para destacar P, PR, QRS, ST, QT e T.</p>
+              </div>
+              <div class="wave-annotated-canvas-wrap">
+                <canvas id="fundamentalsWaveCanvas"></canvas>
+                <div id="fundamentalsWaveTooltip" class="wave-tooltip" hidden></div>
+              </div>
+            </div>
+          </article>
+
+          <div class="axis-learning-grid">
+            <article class="lab-card axis-card">
+              <span>EIXO ELÉTRICO DO QRS</span>
+              <h3 id="axisValue">+47° <small>normal</small></h3>
+              <canvas id="axisDiagramCanvas" aria-label="Diagrama do eixo elétrico"></canvas>
+              <input id="axisSlider" type="range" min="-180" max="180" value="47">
+              <button id="axisChallenge" type="button">Desafio: estime o eixo</button>
+              <p>Faixa didática de referência: −30° a +90°. O eixo representa a direção média da despolarização ventricular no plano frontal.</p>
+            </article>
+
+            <article class="lab-card derivation-card">
+              <span>DERIVAÇÃO SELECIONADA</span>
+              <div id="axisLeadButtons" class="axis-lead-buttons"></div>
+              <h3 id="axisLeadVoltage">+0,00 mV</h3>
+              <p id="axisLeadExplanation">Selecione uma derivação para ver como a projeção do vetor sobre o eixo altera o sinal.</p>
+            </article>
+
+            <article class="lab-card einthoven-card">
+              <span>LEI DE EINTHOVEN</span>
+              <h3 id="einthovenEquation">DI + DIII = DII</h3>
+              <p>No modelo idealizado, as três derivações bipolares dos membros formam lados do mesmo triângulo e obedecem à relação de Einthoven.</p>
+            </article>
+          </div>
+        </div>
+
+        <div id="fundamentalPart-paper" class="fundamental-part" hidden>
+          <article class="lab-card paper-learning-card">
+            <div class="paper-learning-head">
+              <div>
+                <h3>Papel e medidas</h3>
+                <p>O ECG é registrado em papel milimetrado com calibração padronizada. Entenda como tempo e amplitude são representados e como usar os quadradinhos.</p>
+              </div>
+              <button type="button" data-jump-section="simulator">Ver um traçado no simulador 3D ›</button>
+            </div>
+
+            <div class="paper-measure-grid">
+              <div class="paper-demo">
+                <div class="subcard-heading">
+                  <h4>Papel milimetrado e calibração</h4>
+                  <p>Altere velocidade e sensibilidade ao lado: a malha e o traçado mudam visualmente na mesma hora.</p>
+                </div>
+                <canvas id="calibrationCanvas"></canvas>
+                <div class="paper-live-explainer">
+                  <span><b>↔</b><small>Horizontal</small><strong id="paperHorizontalScale">1 mm = 0,04 s</strong></span>
+                  <span><b>↕</b><small>Vertical</small><strong id="paperVerticalScale">1 mm = 0,10 mV</strong></span>
+                </div>
+              </div>
+
+              <div class="paper-settings">
+                <div class="subcard-heading">
+                  <h4>Configurações do papel</h4>
+                  <p>Ajuste a velocidade e a sensibilidade para ver como as medidas se relacionam.</p>
+                </div>
+
+                <label>
+                  <span>Velocidade do papel (mm/s)</span>
+                  <input id="paperSpeedSlider" type="range" min="12.5" max="50" step="12.5" value="25">
+                  <strong id="paperSpeedValue">25 mm/s</strong>
+                </label>
+
+                <label>
+                  <span>Sensibilidade (mm/mV)</span>
+                  <input id="paperGainSlider" type="range" min="5" max="20" step="5" value="10">
+                  <strong id="paperGainValue">10 mm/mV</strong>
+                </label>
+
+                <div class="paper-metric-grid">
+                  <article><span>◷</span><div><small>Tempo por quadradinho</small><strong id="smallSquareTime">0,04 s</strong><p id="bigSquareTime">0,20 s · quadrado grande</p></div></article>
+                  <article><span>∿</span><div><small>Amplitude por quadradinho</small><strong id="smallSquareMv">0,1 mV</strong><p id="bigSquareMv">0,5 mV · quadrado grande</p></div></article>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="frequency-learning-grid">
+            <article class="lab-card frequency-card">
+              <div class="card-heading">
+                <div><h3>Cálculo da frequência · ritmo regular</h3><p>Manipule a distância R–R e veja a regra dos 300 acontecendo no papel.</p></div>
+              </div>
+              <canvas id="regularFrequencyCanvas"></canvas>
+              <div class="frequency-manipulator" aria-label="Manipular quadrados grandes entre ondas R">
+                <button id="regularRrMinus" type="button" aria-label="Diminuir quadrados grandes">−</button>
+                <label>
+                  <span>Quadrados grandes entre R–R</span>
+                  <input id="regularRrSquaresSlider" type="range" min="2" max="8" step="1" value="5">
+                  <strong id="regularRrSquaresValue">5</strong>
+                </label>
+                <button id="regularRrPlus" type="button" aria-label="Aumentar quadrados grandes">+</button>
+              </div>
+              <div class="frequency-result"><span>Frequência cardíaca</span><strong id="regularBpm">60 bpm</strong><small id="regularFormula">300 ÷ 5 = 60</small></div>
+              <p class="info-strip">ⓘ A 25 mm/s: <strong>FC = 300 ÷ quadrados grandes entre dois R.</strong> Quanto maior o R–R, menor a frequência.</p>
+            </article>
+
+            <article class="lab-card frequency-card">
+              <div class="card-heading">
+                <div><h3>Cálculo da frequência · ritmo irregular</h3><p>Escolha quantos QRS aparecem em uma janela fixa de 6 segundos.</p></div>
+              </div>
+              <canvas id="irregularFrequencyCanvas"></canvas>
+              <div class="frequency-manipulator" aria-label="Manipular quantidade de QRS em seis segundos">
+                <button id="irregularQrsMinus" type="button" aria-label="Diminuir número de QRS">−</button>
+                <label>
+                  <span>QRS contados em 6 segundos</span>
+                  <input id="irregularQrsCountSlider" type="range" min="3" max="15" step="1" value="8">
+                  <strong id="irregularQrsCountValue">8</strong>
+                </label>
+                <button id="irregularQrsPlus" type="button" aria-label="Aumentar número de QRS">+</button>
+              </div>
+              <div class="frequency-result"><span>Frequência cardíaca média</span><strong id="irregularBpm">80 bpm</strong><small id="irregularFormula">8 QRS × 10 = 80 bpm</small></div>
+              <p class="info-strip">ⓘ Em 6 segundos, <strong>conte os QRS e multiplique por 10.</strong> O gráfico acima redesenha exatamente a quantidade selecionada.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="labSection-guided" class="ecg-section-panel" data-section-panel="guided" hidden>
+        <div class="section-intro guided-intro">
+          <span>UM ECG, UMA SEQUÊNCIA</span>
+          <h2>Leitura guiada</h2>
+          <p>Avance passo a passo por um roteiro de interpretação do ECG, com explicações visuais e pontos de atenção em cada etapa.</p>
+        </div>
+
+        <div class="guided-quick-actions">
+          <button class="active" type="button" data-guided-mode="route">▤ Roteiro completo</button>
+          <button type="button" data-guided-mode="practice">▶ Exemplo prático</button>
+          <button type="button" data-guided-mode="tips">◉ Dicas de leitura</button>
+          <button type="button" data-guided-mode="errors">△ Erros comuns</button>
+        </div>
+
+        <div class="guided-layout">
+          <aside class="lab-card guided-steps-card">
+            <div class="guided-steps-head">
+              <h3>Etapas da interpretação</h3>
+              <span id="guidedProgress">1 / 9</span>
+            </div>
+            <div id="guidedStepList" class="guided-step-list"></div>
+          </aside>
+
+          <article class="lab-card guided-main-card">
+            <span id="guidedStageLabel">ETAPA 1 DE 9</span>
+            <h2 id="guidedTitle">Ritmo</h2>
+            <p id="guidedQuestion">Os batimentos seguem um padrão regular ou irregular? Existe uma onda P antes de cada QRS?</p>
+
+            <div class="guided-canvas-wrap">
+              <canvas id="guidedEcgCanvas"></canvas>
+            </div>
+
+            <div class="guided-info">
+              <span>ⓘ</span>
+              <p id="guidedInfoText">No ritmo sinusal, há uma onda P de morfologia constante antes de cada QRS, com intervalo PR fixo e ciclos regulares. Compare a morfologia das ondas P e o intervalo entre os complexos.</p>
+            </div>
+            <div id="guidedContextPanel" class="guided-context-panel">
+              <span id="guidedContextEyebrow">COMO ANALISAR</span>
+              <h3 id="guidedContextTitle">Comece olhando a regularidade</h3>
+              <div id="guidedContextBody" class="guided-context-body"></div>
+            </div>
+
+            <div class="guided-footer">
+              <button id="guidedPrevious" type="button">← Etapa anterior</button>
+              <div id="guidedDots" class="guided-dots"></div>
+              <button id="guidedNext" class="primary" type="button">Próxima etapa →</button>
+            </div>
+          </article>
+        </div>
+
+        <section class="guided-quiz-area" aria-labelledby="guidedQuizHeading">
+          <div class="guided-quiz-intro">
+            <div>
+              <span>TESTE O QUE VOCÊ APRENDEU</span>
+              <h2 id="guidedQuizHeading">Questões da Leitura Guiada</h2>
+              <p>30 questões curtas sobre ritmo, frequência, eixo, onda P, PR, QRS, ST, QT, T e medidas do papel. Cada resposta é registrada no seu desempenho do Cortex.</p>
+            </div>
+            <div class="guided-quiz-badge">
+              <strong>30</strong>
+              <span>questões</span>
+            </div>
+          </div>
+
+          <article class="lab-card guided-quiz-shell">
+            <div id="guidedQuizContent" class="guided-quiz-content">
+              <div class="guided-quiz-loading">
+                <span class="loading-ring"></span>
+                <strong>Carregando questões do banco...</strong>
+                <small>As respostas contam no seu desempenho.</small>
+              </div>
+            </div>
+          </article>
+        </section>
+      </section>
+
+      <section id="labSection-patterns" class="ecg-section-panel" data-section-panel="patterns" hidden>
+        <div class="section-intro">
+          <span>PADRÕES, ALTERAÇÕES E CONTEXTOS</span>
+          <h2>Padrões e alterações</h2>
+          <p>Compare o traçado normal com padrões didáticos frequentes e entenda quais elementos do ECG mudam.</p>
+        </div>
+
+        <div id="patternTopicGrid" class="pattern-topic-grid"></div>
+
+        <article class="lab-card pattern-detail-card">
+          <div class="pattern-detail-head">
+            <div>
+              <h3 id="patternDetailTitle">Onda P: duração e amplitude</h3>
+              <p id="patternDetailText">Compare a morfologia normal da onda P com padrões associados a aumento atrial.</p>
+            </div>
+            <label>Velocidade do papel
+              <select id="patternPaperSpeed">
+                <option>25 mm/s</option>
+                <option>50 mm/s</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="pWaveComparison" class="p-wave-comparison">
+            <article class="pattern-wave-card">
+              <div><h4>P normal</h4><span class="status-good">Padrão normal</span></div>
+              <canvas id="patternCanvasNormal"></canvas>
+              <p><strong>Duração:</strong> até cerca de 120 ms · <strong>Amplitude:</strong> até cerca de 2,5 mm em DII.</p>
+            </article>
+            <article class="pattern-wave-card">
+              <div><h4>P bífida · átrio esquerdo</h4><span class="status-alert">AE aumentado</span></div>
+              <canvas id="patternCanvasLeftAtrium"></canvas>
+              <p>Modelo didático com onda P mais larga e entalhada, destacando contribuição atrial esquerda mais tardia.</p>
+            </article>
+            <article class="pattern-wave-card">
+              <div><h4>P alta · átrio direito</h4><span class="status-alert">AD aumentado</span></div>
+              <canvas id="patternCanvasRightAtrium"></canvas>
+              <p>Modelo didático com onda P mais alta e pontiaguda, destacando maior contribuição atrial direita.</p>
+            </article>
+          </div>
+
+          <div id="genericPatternComparison" class="generic-pattern-comparison" hidden>
+            <div class="generic-pattern-chart">
+              <canvas id="genericPatternCanvas"></canvas>
+            </div>
+            <div class="generic-pattern-copy">
+              <span id="genericPatternEyebrow">COMPARAÇÃO</span>
+              <h4 id="genericPatternTitle">Padrão selecionado</h4>
+              <p id="genericPatternText">Selecione um tema acima para visualizar uma comparação didática.</p>
+              <div id="genericPatternTags" class="pattern-tags"></div>
+            </div>
+          </div>
+
+          <div class="pattern-teaching-grid">
+            <article>
+              <span>01</span>
+              <div><strong>O que muda</strong><p id="patternWhatChanges">Selecione um padrão para ver a alteração principal.</p></div>
+            </article>
+            <article>
+              <span>02</span>
+              <div><strong>Como reconhecer</strong><p id="patternHowRecognize">Observe forma, duração, amplitude e distribuição nas derivações.</p></div>
+            </article>
+            <article>
+              <span>03</span>
+              <div><strong>Compare com o normal</strong><p id="patternCompareNormal">Use o traçado de referência e procure a diferença que realmente define o padrão.</p></div>
+            </article>
+            <article>
+              <span>04</span>
+              <div><strong>Atenção</strong><p id="patternCaution">Nenhum desenho isolado substitui contexto, derivações contíguas e critérios completos.</p></div>
+            </article>
+          </div>
+        </article>
+      </section>
+
+      <footer class="ecg-lab-footer">
+        <p>Conteúdo educacional. Não substitui interpretação clínica, laudo ou equipamento médico.</p>
+        <p>Modelo 3D do coração: Human-Organ3D · licença MIT · carregado a partir do repositório público no GitHub.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      if (window.parent === window) return;
+      var href = window.location.pathname + window.location.search + window.location.hash;
+      try {
+        if (typeof window.parent.CortexShellNavigationReady === "function") {
+          window.parent.CortexShellNavigationReady(window, href);
+        } else {
+          window.parent.postMessage({ type: "cortex:first-paint-ready", href: href }, window.location.origin);
+        }
+      } catch (error) {}
+    })();
+  </script>
+
+  <script type="module" src="/js/laboratorio-ecg3d.js?v=20261003-label-ghost-rootfix2"></script>
+  <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
+</body>
+</html>
