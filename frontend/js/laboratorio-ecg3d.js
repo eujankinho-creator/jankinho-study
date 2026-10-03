@@ -97,7 +97,7 @@ const LAB_STATE = {
   ecgLastFrame: performance.now(),
   ecgLastDraw: 0,
   ecgBpmBase: 72,
-  ecgBpm: 72,
+  ecgBpm: 54,
   ecgHover: null,
   ecgHoverPinned: false,
   lastSoundS1Beat: -1,
