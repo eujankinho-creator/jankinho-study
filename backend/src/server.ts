@@ -841,7 +841,8 @@ async function criarDisciplina(
 
 async function listarQuestoes(
   request: IncomingMessage,
-  response: ServerResponse
+  response: ServerResponse,
+  url: URL
 ) {
   const usuarioId =
     await exigirUsuario(
@@ -854,8 +855,122 @@ async function listarQuestoes(
   }
 
   try {
+    const fonte =
+      String(
+        url.searchParams.get("fonte") ||
+        ""
+      ).trim();
+
+    const banca =
+      String(
+        url.searchParams.get("banca") ||
+        ""
+      ).trim();
+
+    const anoRaw =
+      String(
+        url.searchParams.get("ano") ||
+        ""
+      ).trim();
+
+    const orgao =
+      String(
+        url.searchParams.get("orgao") ||
+        ""
+      ).trim();
+
+    const cargo =
+      String(
+        url.searchParams.get("cargo") ||
+        ""
+      ).trim();
+
+    const disciplina =
+      String(
+        url.searchParams.get("disciplina") ||
+        ""
+      ).trim();
+
+    const assunto =
+      String(
+        url.searchParams.get("assunto") ||
+        ""
+      ).trim();
+
+    const ano =
+      Number(anoRaw);
+
+    const where:
+      any = {};
+
+    if (fonte) {
+      where.fonte = {
+        startsWith:
+          fonte,
+        mode:
+          "insensitive",
+      };
+    }
+
+    if (banca) {
+      where.banca = {
+        equals:
+          banca,
+        mode:
+          "insensitive",
+      };
+    }
+
+    if (
+      anoRaw &&
+      Number.isFinite(ano)
+    ) {
+      where.ano =
+        ano;
+    }
+
+    if (orgao) {
+      where.orgao = {
+        equals:
+          orgao,
+        mode:
+          "insensitive",
+      };
+    }
+
+    if (cargo) {
+      where.cargo = {
+        equals:
+          cargo,
+        mode:
+          "insensitive",
+      };
+    }
+
+    if (assunto) {
+      where.tema = {
+        equals:
+          assunto,
+        mode:
+          "insensitive",
+      };
+    }
+
+    if (disciplina) {
+      where.disciplina = {
+        nome: {
+          equals:
+            disciplina,
+          mode:
+            "insensitive",
+        },
+      };
+    }
+
     const questoes =
       await prisma.questao.findMany({
+        where,
+
         include: {
           disciplina: true,
           alternativas: true,
@@ -4100,7 +4215,8 @@ const server =
           ) {
             await listarQuestoes(
               request,
-              response
+              response,
+              url
             );
 
             return;
