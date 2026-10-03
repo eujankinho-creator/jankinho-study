@@ -43,6 +43,7 @@ import { sincronizarQuestoesDiego } from "./questoesDiego";
 import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
 import { sincronizarQuestoesCalculoMedicamentos } from "./questoesCalculoMedicamentos";
 import { sincronizarQuestoesLaboratorioEcg } from "./questoesLaboratorioEcg";
+import { sincronizarQuestoesConcursosPublicos } from "./questoesConcursosPublicos";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -5307,6 +5308,8 @@ server.listen(
         await sincronizarQuestoesCalculoMedicamentos();
 
         await sincronizarQuestoesLaboratorioEcg();
+
+        await sincronizarQuestoesConcursosPublicos();
 
         await limparFlashcardsParaMetodologia();
 
