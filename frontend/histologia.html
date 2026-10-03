@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histology Guide | Cortex</title>
+
+  <script>
+    (function () {
+      var theme = "dark-orange";
+      try {
+        var saved = localStorage.getItem("jankinho_theme_v1");
+        if (saved) theme = saved;
+      } catch (error) {}
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261003-histo1">
+  <link rel="stylesheet" href="/css/themes.css?v=20261003-histo1">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261003-histo1">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261003-histo1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261003-histo1">
+  <link rel="stylesheet" href="/css/histologia-guide.css?v=20261003-histo1">
+
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261001-nav-core6"></script>
+  <script defer src="/js/histologia-guide.js?v=20261003-histo1"></script>
+  <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
+</head>
+
+<body class="histology-page">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box">C</div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+    <div class="sidebar-menu"></div>
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info">
+        <strong id="nomeSidebar">Carregando...</strong>
+        <span id="emailSidebar"></span>
+      </div>
+      <button id="logoutSidebar" class="logout-button" type="button" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header histology-header">
+      <div class="header-title">
+        <a class="histology-back" href="/laboratorio">&larr;</a>
+        Histology Guide
+      </div>
+      <div class="histology-header-status">
+        <span class="histology-live-dot"></span>
+        <span>Microscópio virtual</span>
+      </div>
+    </header>
+
+    <main class="histology-shell">
+      <section class="histology-hero">
+        <div>
+          <span class="histology-kicker">CORTEX MICROSCOPY LAB</span>
+          <h1>Explore o tecido.<br>Entenda o que está vendo.</h1>
+          <p>Lâminas histológicas reais com zoom, hotspots e explicações guiadas sobre tecido, células, função e critérios de reconhecimento.</p>
+        </div>
+        <div class="histology-hero-stats">
+          <div><strong id="slideCount">8</strong><span>lâminas reais</span></div>
+          <div><strong>H&amp;E</strong><span>coloração principal</span></div>
+          <div><strong>2 modos</strong><span>aprender + testar</span></div>
+        </div>
+      </section>
+
+      <section class="histology-workspace">
+        <aside class="slide-library">
+          <div class="library-head">
+            <div>
+              <span class="panel-kicker">LÂMINAS</span>
+              <h2>Biblioteca</h2>
+            </div>
+            <span id="libraryCount">8</span>
+          </div>
+
+          <div class="library-search">
+            <span>⌕</span>
+            <input id="slideSearch" type="search" placeholder="Buscar tecido ou órgão...">
+          </div>
+
+          <div id="slideFilters" class="slide-filters">
+            <button class="active" type="button" data-slide-filter="all">Todos</button>
+            <button type="button" data-slide-filter="epitelial">Epitélio</button>
+            <button type="button" data-slide-filter="muscular">Músculo</button>
+            <button type="button" data-slide-filter="nervoso">Nervoso</button>
+            <button type="button" data-slide-filter="glandular">Glândulas</button>
+          </div>
+
+          <div id="slideList" class="slide-list"></div>
+        </aside>
+
+        <section class="microscope-column">
+          <div class="microscope-toolbar">
+            <div class="mode-switcher" aria-label="Modo de estudo">
+              <button id="learnMode" class="active" type="button">Aprender</button>
+              <button id="testMode" type="button">Testar</button>
+            </div>
+
+            <div class="microscope-actions">
+              <button id="zoomOut" type="button" aria-label="Diminuir zoom">−</button>
+              <span id="zoomLabel">10×</span>
+              <button id="zoomIn" type="button" aria-label="Aumentar zoom">+</button>
+              <button id="resetView" class="wide" type="button">Centralizar</button>
+              <button id="fullscreenViewer" class="wide" type="button">Tela cheia</button>
+            </div>
+          </div>
+
+          <article class="microscope-card">
+            <div class="microscope-chrome">
+              <div class="microscope-brand">
+                <span class="scope-dot"></span>
+                <div><strong>CORTEX OPTICAL SCOPE</strong><small id="scopeSlideName">Traqueia</small></div>
+              </div>
+              <div class="scope-readout">
+                <span id="scopeStain">H&amp;E</span>
+                <span id="scopeMagnification">10×</span>
+              </div>
+            </div>
+
+            <div id="microscopeViewport" class="microscope-viewport" tabindex="0" aria-label="Microscópio virtual histológico">
+              <div class="ocular-vignette"></div>
+              <div class="scope-grid"></div>
+              <div id="slideLayer" class="slide-layer">
+                <div id="hotspotLayer" class="hotspot-layer"></div>
+              </div>
+              <div id="hoverTooltip" class="histology-tooltip" hidden></div>
+
+              <div class="scope-corners" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+              </div>
+
+              <div class="scope-scale">
+                <span></span>
+                <small id="scaleLabel">visão geral</small>
+              </div>
+
+              <div class="scope-help">
+                <span>roda do mouse = zoom</span>
+                <span>arraste = mover</span>
+                <span>passe sobre os pontos = identificar</span>
+              </div>
+            </div>
+
+            <div class="microscope-bottom-bar">
+              <div>
+                <strong id="slideTitle">Traqueia</strong>
+                <span id="slideSubtitle">Epitélio respiratório e cartilagem hialina</span>
+              </div>
+              <div class="slide-source">
+                <span>Imagem real</span>
+                <a id="slideSourceLink" href="#" target="_blank" rel="noopener noreferrer">Wikimedia Commons ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <section class="zoom-guide">
+            <div class="zoom-guide-track">
+              <button class="active" type="button" data-zoom-level="1">
+                <strong>4×</strong><span>arquitetura</span>
+              </button>
+              <button type="button" data-zoom-level="1.65">
+                <strong>10×</strong><span>camadas</span>
+              </button>
+              <button type="button" data-zoom-level="2.6">
+                <strong>40×</strong><span>células</span>
+              </button>
+            </div>
+            <p id="zoomTeachingText">Comece em baixa magnificação e reconheça a arquitetura geral antes de procurar detalhes celulares.</p>
+          </section>
+        </section>
+
+        <aside class="histology-inspector">
+          <div class="inspector-head">
+            <span class="panel-kicker">GUIA DIDÁTICO</span>
+            <span id="inspectorState">Visão geral</span>
+          </div>
+
+          <div class="inspector-title">
+            <span id="inspectorType">TECIDO EPITELIAL</span>
+            <h2 id="inspectorTitle">Traqueia</h2>
+            <p id="inspectorLead">Observe a organização da mucosa respiratória, glândulas submucosas e cartilagem hialina.</p>
+          </div>
+
+          <div class="inspector-section">
+            <span>COMO RECONHECER</span>
+            <p id="inspectorRecognize">Procure o epitélio pseudoestratificado ciliado voltado para o lúmen, seguido por tecido conjuntivo e cartilagem hialina.</p>
+          </div>
+
+          <div class="inspector-section">
+            <span>CÉLULAS / ESTRUTURAS</span>
+            <div id="cellChips" class="cell-chips"></div>
+          </div>
+
+          <div class="inspector-section">
+            <span>FUNÇÃO</span>
+            <p id="inspectorFunction">Conduzir o ar, remover partículas pelo transporte mucociliar e manter a via aérea pérvia.</p>
+          </div>
+
+          <div class="inspector-section zoom-section">
+            <span>NO ZOOM ATUAL</span>
+            <p id="zoomNarration">Em baixa magnificação, identifique primeiro a luz, a parede e a cartilagem antes de procurar células individuais.</p>
+          </div>
+
+          <div id="testPrompt" class="test-prompt" hidden>
+            <span>MODO TESTE</span>
+            <h3 id="testQuestion">Qual estrutura está marcada?</h3>
+            <div id="testAnswers" class="test-answers"></div>
+            <p id="testFeedback"></p>
+          </div>
+
+          <div class="inspector-tip">
+            <span>💡</span>
+            <p><strong>Dica:</strong> não memorize a cor. Use arquitetura, posição das células, matriz e relação com o lúmen.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="histology-learning-strip">
+        <article>
+          <span>01</span>
+          <div><strong>Comece longe</strong><p>Reconheça o órgão e a arquitetura geral em baixa magnificação.</p></div>
+        </article>
+        <article>
+          <span>02</span>
+          <div><strong>Aproxime por camadas</strong><p>Suba o zoom e procure limites, epitélios, cápsulas, vasos e compartimentos.</p></div>
+        </article>
+        <article>
+          <span>03</span>
+          <div><strong>Identifique células</strong><p>Em alta magnificação, observe núcleos, citoplasma, matriz e especializações.</p></div>
+        </article>
+        <article>
+          <span>04</span>
+          <div><strong>Explique a função</strong><p>Ligue a forma microscópica à função fisiológica para fixar o conteúdo.</p></div>
+        </article>
+      </section>
+
+      <footer class="histology-footer">
+        <p>Conteúdo educacional. As lâminas são imagens histológicas reais disponibilizadas por autores em repositórios públicos com licença indicada na fonte.</p>
+        <p>Fontes iniciais: Wikimedia Commons · expansão planejada com coleções acadêmicas de histologia.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      if (window.parent === window) return;
+      var href = window.location.pathname + window.location.search + window.location.hash;
+      try {
+        if (typeof window.parent.CortexShellNavigationReady === "function") {
+          window.parent.CortexShellNavigationReady(window, href);
+        } else {
+          window.parent.postMessage({ type: "cortex:first-paint-ready", href: href }, window.location.origin);
+        }
+      } catch (error) {}
+    })();
+  </script>
+</body>
+</html>
