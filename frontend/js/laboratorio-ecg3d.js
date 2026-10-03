@@ -601,6 +601,160 @@ const PATTERN_TEACHING = {
   }
 };
 
+const PATTERN_TEACHING_COLORS = {
+  reference: "#d6dde6",
+  cyan: "#22d3ee",
+  pink: "#f472b6",
+  orange: "#fb923c",
+  green: "#34d399",
+  yellow: "#facc15"
+};
+
+const PATTERN_VISUAL_GUIDE = {
+  "p-wave": [
+    ["reference", "Cinza · ECG de referência"],
+    ["cyan", "Ciano · componente atrial direito"],
+    ["pink", "Rosa · componente atrial esquerdo"],
+    ["orange", "Laranja · morfologia alterada"]
+  ],
+  alternans: [
+    ["reference", "Cinza · referência estável"],
+    ["orange", "Laranja · amplitude que alterna entre batimentos"]
+  ],
+  "r-progression": [
+    ["reference", "Cinza · referência"],
+    ["green", "Verde · mudança do QRS / progressão da onda R"]
+  ],
+  "pathologic-q": [
+    ["reference", "Cinza · referência"],
+    ["pink", "Rosa · onda Q mais profunda ou larga"]
+  ],
+  bundle: [
+    ["reference", "Cinza · referência"],
+    ["orange", "Laranja · QRS alargado / condução intraventricular"]
+  ],
+  delta: [
+    ["reference", "Cinza · referência"],
+    ["cyan", "Ciano · início lento do QRS / onda delta"]
+  ],
+  "low-voltage": [
+    ["reference", "Cinza · referência"],
+    ["orange", "Laranja · redução global da amplitude"]
+  ],
+  infarction: [
+    ["reference", "Cinza · referência"],
+    ["cyan", "Ciano · segmento ST alterado"],
+    ["pink", "Rosa · repolarização / onda T"]
+  ],
+  hypokalemia: [
+    ["reference", "Cinza · referência"],
+    ["cyan", "Ciano · depressão do ST"],
+    ["yellow", "Amarelo · onda T achatada"],
+    ["pink", "Rosa · onda U proeminente"]
+  ],
+  hyperkalemia: [
+    ["reference", "Cinza · referência"],
+    ["pink", "Rosa · onda T alta, estreita e simétrica"]
+  ],
+  hypocalcemia: [
+    ["reference", "Cinza · referência"],
+    ["cyan", "Ciano · ST prolongado / QT maior"]
+  ],
+  hypercalcemia: [
+    ["reference", "Cinza · referência"],
+    ["orange", "Laranja · ST encurtado / QT menor"]
+  ],
+  "biphasic-t": [
+    ["reference", "Cinza · referência"],
+    ["pink", "Rosa · onda T com duas fases"]
+  ],
+  wellens: [
+    ["reference", "Cinza · referência"],
+    ["pink", "Rosa · alteração da onda T anterior"]
+  ],
+  "sinus-nodal": [
+    ["reference", "Cinza · ritmo sinusal de referência"],
+    ["cyan", "Ciano · posição / relação da onda P"],
+    ["orange", "Laranja · relação P–QRS modificada"]
+  ]
+};
+
+function renderPatternVisualLegend(pattern) {
+  const holder = byId("patternVisualLegend");
+  if (!holder) return;
+
+  const items = PATTERN_VISUAL_GUIDE[pattern.id] || [
+    ["reference", "Cinza · ECG de referência"],
+    ["orange", "Laranja · alteração do padrão selecionado"]
+  ];
+
+  holder.innerHTML = items.map(function (item) {
+    const color = PATTERN_TEACHING_COLORS[item[0]] || PATTERN_TEACHING_COLORS.orange;
+    return (
+      '<span class="pattern-visual-chip">' +
+        '<i style="background:' + color + ';color:' + color + '"></i>' +
+        item[1] +
+      "</span>"
+    );
+  }).join("");
+}
+
+function getPatternHighlightWindows(kind) {
+  const C = PATTERN_TEACHING_COLORS;
+
+  return {
+    alternans: [
+      { start: 0, end: 1, color: C.orange }
+    ],
+    "r-progression": [
+      { start: .19, end: .34, color: C.green }
+    ],
+    q: [
+      { start: .17, end: .25, color: C.pink }
+    ],
+    bundle: [
+      { start: .17, end: .38, color: C.orange }
+    ],
+    delta: [
+      { start: .15, end: .29, color: C.cyan }
+    ],
+    low: [
+      { start: 0, end: 1, color: C.orange }
+    ],
+    st: [
+      { start: .31, end: .46, color: C.cyan },
+      { start: .45, end: .63, color: C.pink }
+    ],
+    hypokalemia: [
+      { start: .31, end: .45, color: C.cyan },
+      { start: .45, end: .61, color: C.yellow },
+      { start: .62, end: .76, color: C.pink }
+    ],
+    hyperkalemia: [
+      { start: .42, end: .59, color: C.pink }
+    ],
+    hypocalcemia: [
+      { start: .30, end: .72, color: C.cyan }
+    ],
+    hypercalcemia: [
+      { start: .30, end: .46, color: C.orange }
+    ],
+    biphasic: [
+      { start: .43, end: .65, color: C.pink }
+    ],
+    wellens: [
+      { start: .43, end: .66, color: C.pink }
+    ],
+    nodal: [
+      { start: .26, end: .38, color: C.cyan },
+      { start: .18, end: .40, color: C.orange }
+    ]
+  }[kind] || [
+    { start: 0, end: 1, color: C.orange }
+  ];
+}
+
+
 const LEAD_AXES = [
   { id: "DI", short: "DI +", plane: "frontal", angle: 0, color: "#ff375f" },
   { id: "DII", short: "DII +", plane: "frontal", angle: 60, color: "#22d3ee" },
@@ -4166,6 +4320,8 @@ function setPattern(id) {
   if (byId("patternDetailTitle")) byId("patternDetailTitle").textContent = pattern.detailTitle;
   if (byId("patternDetailText")) byId("patternDetailText").textContent = pattern.detailText;
 
+  renderPatternVisualLegend(pattern);
+
   const teaching = PATTERN_TEACHING[pattern.id];
   if (teaching) {
     if (byId("patternWhatChanges")) byId("patternWhatChanges").textContent = teaching.change;
@@ -4236,12 +4392,20 @@ function drawPatternCanvas(canvas, mode) {
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   }
-  ctx.strokeStyle = palette.textSoft;
+  const traceColor =
+    mode === "normal"
+      ? PATTERN_TEACHING_COLORS.reference
+      : mode === "left"
+        ? PATTERN_TEACHING_COLORS.pink
+        : PATTERN_TEACHING_COLORS.orange;
+
+  ctx.strokeStyle = traceColor;
+  ctx.lineWidth = (mode === "normal" ? 1.45 : 1.85) * dpr;
   ctx.stroke();
 
   const components = [
-    { color: palette.accent, left: false },
-    { color: palette.accent2, left: true }
+    { color: PATTERN_TEACHING_COLORS.cyan, left: false },
+    { color: PATTERN_TEACHING_COLORS.pink, left: true }
   ];
 
   components.forEach(function (part) {
@@ -4263,7 +4427,9 @@ function drawPatternCanvas(canvas, mode) {
     ctx.stroke();
   });
 
-  ctx.strokeStyle = palette.accent;
+  ctx.strokeStyle = mode === "normal"
+    ? PATTERN_TEACHING_COLORS.reference
+    : traceColor;
   ctx.lineWidth = 1 * dpr;
   ctx.beginPath();
   ctx.moveTo(size.pixelWidth * .22, size.pixelHeight * .25);
@@ -4360,6 +4526,7 @@ function genericWaveValue(n, kind, variant) {
 function drawGenericPattern(kind) {
   const canvas = byId("genericPatternCanvas");
   if (!canvas || LAB_STATE.section !== "patterns") return;
+
   const size = fitCanvas(canvas, 330);
   const ctx = size.ctx;
   const dpr = size.dpr;
@@ -4367,64 +4534,122 @@ function drawGenericPattern(kind) {
 
   const baseline1 = size.pixelHeight * .36;
   const baseline2 = size.pixelHeight * .72;
-  const palette = getLabThemePalette();
+  const C = PATTERN_TEACHING_COLORS;
+  const speedFactor = getPatternSpeedFactor();
+  const beats = (kind === "alternans" ? 4 : 3) / speedFactor;
+  const points = 950;
+
   const rows = [
-    { y: baseline1, label: "Referência", color: palette.textSoft, kind: "normal" },
-    { y: baseline2, label: "Padrão selecionado", color: palette.accent2, kind: kind }
+    {
+      y: baseline1,
+      label: "ECG DE REFERÊNCIA",
+      color: C.reference,
+      selected: false
+    },
+    {
+      y: baseline2,
+      label: "PADRÃO SELECIONADO",
+      color: "rgba(214, 221, 230, .62)",
+      selected: true
+    }
   ];
 
-  rows.forEach(function (row, rowIndex) {
+  function sampleAt(index, selected) {
+    const n = index / (points - 1);
+    const cyclePosition = n * beats;
+    const cycle = cyclePosition % 1;
+    const variant = Math.floor(cyclePosition);
+    return {
+      n: n,
+      cycle: cycle,
+      variant: variant,
+      value: selected
+        ? genericWaveValue(cycle, kind, variant)
+        : leadWave(cycle, "DII")
+    };
+  }
+
+  rows.forEach(function (row) {
     ctx.save();
     ctx.fillStyle = row.color;
-    ctx.font = "700 " + (8 * dpr) + "px system-ui";
+    ctx.font = "800 " + (8 * dpr) + "px system-ui";
     ctx.fillText(row.label, 12 * dpr, row.y - 55 * dpr);
 
     ctx.beginPath();
-    const points = 950;
-    const speedFactor = getPatternSpeedFactor();
-    const beats =
-      (kind === "alternans" ? 4 : 3) /
-      speedFactor;
-
     for (let i = 0; i < points; i += 1) {
-      const n = i / (points - 1);
-      const cyclePosition = n * beats;
-      const cycle = cyclePosition % 1;
-      const variant = Math.floor(cyclePosition);
-      const value = row.kind === "normal"
-        ? leadWave(cycle, "DII")
-        : genericWaveValue(cycle, kind, variant);
-      const x = n * size.pixelWidth;
-      const y = row.y - value * size.pixelHeight * .16;
+      const point = sampleAt(i, row.selected);
+      const x = point.n * size.pixelWidth;
+      const y = row.y - point.value * size.pixelHeight * .16;
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
 
     ctx.strokeStyle = row.color;
-    ctx.lineWidth = 1.5 * dpr;
+    ctx.lineWidth = (row.selected ? 1.25 : 1.55) * dpr;
     ctx.stroke();
 
-    if (rowIndex === 1) {
+    if (row.selected) {
+      const windows = getPatternHighlightWindows(kind);
+
+      windows.forEach(function (windowDef) {
+        ctx.beginPath();
+        let drawing = false;
+
+        for (let i = 0; i < points; i += 1) {
+          const point = sampleAt(i, true);
+          const active =
+            windowDef.start === 0 &&
+            windowDef.end === 1
+              ? true
+              : point.cycle >= windowDef.start &&
+                point.cycle <= windowDef.end;
+
+          if (!active) {
+            drawing = false;
+            continue;
+          }
+
+          const x = point.n * size.pixelWidth;
+          const y = row.y - point.value * size.pixelHeight * .16;
+
+          if (!drawing) {
+            ctx.moveTo(x, y);
+            drawing = true;
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+
+        ctx.strokeStyle = windowDef.color;
+        ctx.lineWidth = 2.35 * dpr;
+        ctx.shadowColor = windowDef.color;
+        ctx.shadowBlur = 5 * dpr;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      });
+
       const feature = {
         alternans: ["amplitude alternante", .52],
-        "r-progression": ["R aumenta nas precordiais", .56],
-        q: ["Q mais profunda/larga", .08],
+        "r-progression": ["R cresce / S diminui", .56],
+        q: ["onda Q alterada", .08],
         bundle: ["QRS alargado", .43],
-        delta: ["início lento · delta", .39],
+        delta: ["onda delta", .39],
         low: ["baixa amplitude", .45],
-        st: ["segmento ST", .50],
-        hypokalemia: ["T achatada + U proeminente", .67],
-        hyperkalemia: ["T alta, estreita e simétrica", .57],
-        hypocalcemia: ["ST prolongado · QT maior", .61],
-        hypercalcemia: ["ST encurtado · QT menor", .47],
+        st: ["ST / repolarização", .50],
+        hypokalemia: ["ST ↓ · T achatada · U", .67],
+        hyperkalemia: ["T apiculada", .57],
+        hypocalcemia: ["ST longo · QT maior", .61],
+        hypercalcemia: ["ST curto · QT menor", .47],
         biphasic: ["T bifásica", .60],
         wellens: ["T anterior alterada", .60],
         nodal: ["relação P–QRS", .36]
       }[kind];
 
       if (feature) {
+        const firstWindow = windows[0];
         const x = size.pixelWidth * feature[1];
         const y = row.y - size.pixelHeight * .10;
+        const annotationColor = firstWindow ? firstWindow.color : C.orange;
 
         drawCanvasArrow(
           ctx,
@@ -4432,15 +4657,15 @@ function drawGenericPattern(kind) {
           y - 32 * dpr,
           x,
           y,
-          palette.accent2,
+          annotationColor,
           dpr
         );
 
-        ctx.fillStyle = palette.accent2;
-        ctx.font = "700 " + (8 * dpr) + "px system-ui";
+        ctx.fillStyle = annotationColor;
+        ctx.font = "800 " + (8 * dpr) + "px system-ui";
         ctx.fillText(
           feature[0],
-          clamp(x - 46 * dpr, 10 * dpr, size.pixelWidth - 150 * dpr),
+          clamp(x - 46 * dpr, 10 * dpr, size.pixelWidth - 165 * dpr),
           y - 38 * dpr
         );
       }
