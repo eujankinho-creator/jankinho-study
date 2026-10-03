@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-premium7">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-spatial3d1">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -85,10 +85,11 @@
         </div>
 
         <div class="membrane-heading-actions">
+          <div class="view-mode-switch" role="group" aria-label="Modo de visualização da membrana">
+            <button id="mode2d" type="button" aria-pressed="false">2D</button>
+            <button id="mode3d" class="active" type="button" aria-pressed="true">3D</button>
+          </div>
           <button id="resetMembrane" class="membrane-button subtle" type="button">Resetar</button>
-          <button class="membrane-button future" type="button" disabled title="Será construído na próxima etapa">
-            Zoom interno · próxima etapa
-          </button>
         </div>
       </section>
 
@@ -122,7 +123,7 @@
               <span class="eyebrow">AMBIENTE EXTRACELULAR + CITOPLASMA</span>
               <h2>Arraste os íons pela membrana</h2>
             </div>
-            <div class="interaction-chip">clique + arraste</div>
+            <div id="interactionChip" class="interaction-chip">gire a cena · arraste íons · roda = profundidade</div>
           </div>
 
           <div class="stage-help">
@@ -149,7 +150,13 @@
           </div>
 
           <div class="cell-stage-wrap">
-            <canvas id="cellCanvas" aria-label="Célula interativa com íons sódio e potássio"></canvas>
+            <canvas id="cellCanvas" aria-label="Célula interativa 2D com íons sódio e potássio"></canvas>
+            <canvas id="cellCanvas3d" aria-label="Célula interativa tridimensional com rotação, profundidade, canais e ATPases"></canvas>
+            <div class="view3d-guide" aria-hidden="true">
+              <span>ARRASTE O FUNDO PARA GIRAR</span>
+              <span>ARRASTE UM ÍON PARA MOVER</span>
+              <span>RODA DO MOUSE = PROFUNDIDADE</span>
+            </div>
 
             <div class="stage-label extracellular">
               <span>MEIO EXTRACELULAR</span>
@@ -338,7 +345,8 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261003-premium7"></script>
+  <script src="/js/laboratorio-celula.js?v=20261003-spatial3d1"></script>
+  <script src="/js/laboratorio-celula-3d.js?v=20261003-spatial3d1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
