@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-spatial3d2">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-physiology2">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -79,15 +79,15 @@
           </div>
           <h1>Membrana Viva</h1>
           <p>
-            Entenda um potencial de ação acompanhando poucas partículas representativas em uma membrana
-            com profundidade: concentração, força eletroquímica, canais, ATPase e Vm respondem juntos.
+            Entenda o potencial de ação acompanhando poucas partículas representativas: concentração,
+            força eletroquímica, canais dependentes de voltagem, ATPase e Vm respondem ao mesmo modelo.
           </p>
         </div>
 
         <div class="membrane-heading-actions">
           <div class="view-mode-switch" role="group" aria-label="Modo de visualização da membrana">
-            <button id="mode2d" type="button" aria-pressed="false">2D</button>
-            <button id="mode3d" class="active" type="button" aria-pressed="true">3D</button>
+            <button id="mode2d" class="active" type="button" aria-pressed="true">2D</button>
+            <button id="mode3d" type="button" aria-pressed="false">3D</button>
           </div>
           <button id="resetMembrane" class="membrane-button subtle" type="button">Resetar</button>
         </div>
@@ -100,9 +100,9 @@
           <small id="vmState">repouso</small>
         </article>
         <article>
-          <span>Limiar</span>
-          <strong>-55 mV</strong>
-          <small>disparo do potencial de ação</small>
+          <span>Referência de limiar</span>
+          <strong>≈ -55 mV</strong>
+          <small>não é um gatilho fixo do modelo</small>
         </article>
         <article>
           <span>Bomba Na⁺/K⁺</span>
@@ -123,7 +123,7 @@
               <span class="eyebrow">AMBIENTE EXTRACELULAR + CITOPLASMA</span>
               <h2>Arraste os íons pela membrana</h2>
             </div>
-            <div id="interactionChip" class="interaction-chip">gire a cena · arraste íons · roda = profundidade</div>
+            <div id="interactionChip" class="interaction-chip">clique + arraste</div>
           </div>
 
           <div class="stage-help">
@@ -211,7 +211,7 @@
                 <span class="control-dot pump"></span>
                 <div>
                   <strong>Bomba Na⁺/K⁺</strong>
-                  <small>3 Na⁺ internos → 2 K⁺ externos</small>
+                  <small>3 Na⁺ para fora · 2 K⁺ para dentro</small>
                 </div>
               </div>
               <button id="pumpToggle" class="toggle-control on" type="button" aria-pressed="true"><span></span></button>
@@ -226,7 +226,7 @@
                 <button id="pumpModeManual" class="active" type="button" aria-pressed="true">Manual</button>
                 <button id="pumpModeAuto" type="button" aria-pressed="false">Automático</button>
               </div>
-              <p>Manual: você precisa completar os 3 sítios de Na⁺ e, depois, os 2 de K⁺. Automático: só captura íons que chegam perto.</p>
+              <p>Manual: o ciclo só inicia quando a mesma ATPase tem 3 Na⁺ internos e 2 K⁺ externos preparados. A ligação e liberação seguem a sequência conformacional. Automático: captura apenas íons próximos.</p>
             </div>
 
             <div class="control-switch-row">
@@ -255,7 +255,7 @@
               <div>
                 <span>ESTÍMULO</span>
                 <strong>Despolarize a membrana</strong>
-                <p>Um pulso de corrente carrega a membrana. Se o Vm cruzar -55 mV, os canais dependentes de voltagem assumem a resposta.</p>
+                <p>Um pulso injeta corrente na membrana. A resposta surge das condutâncias de Na⁺ e K⁺, das portas de ativação/inativação e dos gradientes atuais.</p>
               </div>
               <button id="stimulusButton" type="button">Aplicar pulso de corrente</button>
             </div>
@@ -298,7 +298,7 @@
 
             <div class="graph-legend">
               <span><i class="vm-line"></i>Vm</span>
-              <span><i class="threshold-line"></i>limiar -55 mV</span>
+              <span><i class="threshold-line"></i>referência ≈ -55 mV</span>
               <span><i class="rest-line"></i>repouso -70 mV</span>
             </div>
           </div>
@@ -324,7 +324,7 @@
             <span>02</span>
             <div>
               <strong>Despolarização</strong>
-              <p>Entrada de Na⁺ torna o interior menos negativo. Se o limiar for alcançado, ocorre resposta regenerativa.</p>
+              <p>A ativação rápida de Na⁺ aumenta gNa e cria feedback regenerativo enquanto a inativação de Na⁺ ainda é baixa.</p>
             </div>
           </div>
 
@@ -332,7 +332,7 @@
             <span>03</span>
             <div>
               <strong>Repolarização</strong>
-              <p>Saída de K⁺ devolve negatividade ao interior e pode gerar breve hiperpolarização.</p>
+              <p>A ativação mais lenta de K⁺ aumenta gK, repolariza a membrana e pode produzir hiperpolarização transitória.</p>
             </div>
           </div>
         </article>
@@ -345,8 +345,8 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261003-spatial3d2"></script>
-  <script src="/js/laboratorio-celula-3d.js?v=20261003-spatial3d2"></script>
+  <script src="/js/laboratorio-celula.js?v=20261003-physiology2"></script>
+  <script src="/js/laboratorio-celula-3d.js?v=20261003-physiology2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
