@@ -1435,10 +1435,9 @@
 
     ctx.save();
 
-    if (glow) {
-      ctx.shadowColor = isNa ? "rgba(109,207,246,.26)" : "rgba(234,180,90,.24)";
-      ctx.shadowBlur = 10;
-    }
+    // Volume sem sombra projetada: o relevo vem apenas do gradiente da esfera.
+    ctx.shadowColor = "transparent";
+    ctx.shadowBlur = 0;
 
     const sphere = ctx.createRadialGradient(
       x - radius * .28,
