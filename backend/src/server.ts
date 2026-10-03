@@ -44,6 +44,7 @@ import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
 import { sincronizarQuestoesCalculoMedicamentos } from "./questoesCalculoMedicamentos";
 import { sincronizarQuestoesLaboratorioEcg } from "./questoesLaboratorioEcg";
 import { sincronizarQuestoesConcursosPublicos } from "./questoesConcursosPublicos";
+import { sincronizarQuestoesResidenciasFederais } from "./questoesResidenciasFederais";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -5310,6 +5311,8 @@ server.listen(
         await sincronizarQuestoesLaboratorioEcg();
 
         await sincronizarQuestoesConcursosPublicos();
+
+        await sincronizarQuestoesResidenciasFederais();
 
         await limparFlashcardsParaMetodologia();
 
