@@ -55,10 +55,12 @@
   };
 
   const INITIAL = {
-    naIn: 5,
-    naOut: 18,
-    kIn: 18,
-    kOut: 5
+    // Poucas partículas visíveis: cada uma representa um conjunto de íons.
+    // As concentrações fisiológicas continuam sendo exibidas em mM.
+    naIn: 3,
+    naOut: 8,
+    kIn: 8,
+    kOut: 3
   };
 
   const CHANNELS = [
@@ -211,10 +213,10 @@
     const kOutDelta = current.kOut - INITIAL.kOut;
 
     return {
-      naIn: clamp(12 + naDelta * 3, 2, 150),
-      naOut: clamp(145 - naDelta * 3, 25, 180),
-      kOut: clamp(4 + kOutDelta * 3, 1, 120),
-      kIn: clamp(140 - kOutDelta * 3, 20, 170)
+      naIn: clamp(12 + naDelta * 4, 2, 150),
+      naOut: clamp(145 - naDelta * 4, 25, 180),
+      kOut: clamp(4 + kOutDelta * 4, 1, 120),
+      kIn: clamp(140 - kOutDelta * 4, 20, 170)
     };
   }
 
@@ -1066,10 +1068,10 @@
     $("kOutConcentration").textContent = Math.round(c.kOut) + " mM";
     $("kInConcentration").textContent = Math.round(c.kIn) + " mM";
 
-    $("naOutParticles").textContent = current.naOut + " partículas relativas";
-    $("naInParticles").textContent = current.naIn + " partículas relativas";
-    $("kOutParticles").textContent = current.kOut + " partículas relativas";
-    $("kInParticles").textContent = current.kIn + " partículas relativas";
+    $("naOutParticles").textContent = current.naOut + " partículas didáticas";
+    $("naInParticles").textContent = current.naIn + " partículas didáticas";
+    $("kOutParticles").textContent = current.kOut + " partículas didáticas";
+    $("kInParticles").textContent = current.kIn + " partículas didáticas";
 
     $("vmValue").textContent = Math.round(state.vm) + " mV";
 
