@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-glow2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261002-guided-quiz9">
+  <link rel="stylesheet" href="/css/laboratorio-ecg3d.css?v=20261003-pattern-teaching3">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -613,36 +613,6 @@
             </label>
           </div>
 
-          <div id="pWaveComparison" class="p-wave-comparison">
-            <article class="pattern-wave-card">
-              <div><h4>P normal</h4><span class="status-good">Padrão normal</span></div>
-              <canvas id="patternCanvasNormal"></canvas>
-              <p><strong>Duração:</strong> até cerca de 120 ms · <strong>Amplitude:</strong> até cerca de 2,5 mm em DII.</p>
-            </article>
-            <article class="pattern-wave-card">
-              <div><h4>P bífida · átrio esquerdo</h4><span class="status-alert">AE aumentado</span></div>
-              <canvas id="patternCanvasLeftAtrium"></canvas>
-              <p>Modelo didático com onda P mais larga e entalhada, destacando contribuição atrial esquerda mais tardia.</p>
-            </article>
-            <article class="pattern-wave-card">
-              <div><h4>P alta · átrio direito</h4><span class="status-alert">AD aumentado</span></div>
-              <canvas id="patternCanvasRightAtrium"></canvas>
-              <p>Modelo didático com onda P mais alta e pontiaguda, destacando maior contribuição atrial direita.</p>
-            </article>
-          </div>
-
-          <div id="genericPatternComparison" class="generic-pattern-comparison" hidden>
-            <div class="generic-pattern-chart">
-              <canvas id="genericPatternCanvas"></canvas>
-            </div>
-            <div class="generic-pattern-copy">
-              <span id="genericPatternEyebrow">COMPARAÇÃO</span>
-              <h4 id="genericPatternTitle">Padrão selecionado</h4>
-              <p id="genericPatternText">Selecione um tema acima para visualizar uma comparação didática.</p>
-              <div id="genericPatternTags" class="pattern-tags"></div>
-            </div>
-          </div>
-
           <div class="pattern-teaching-grid">
             <article>
               <span>01</span>
@@ -661,6 +631,45 @@
               <div><strong>Atenção</strong><p id="patternCaution">Nenhum desenho isolado substitui contexto, derivações contíguas e critérios completos.</p></div>
             </article>
           </div>
+
+          <div id="patternVisualLegend" class="pattern-visual-legend" aria-label="Legenda visual das alterações"></div>
+
+          <div class="pattern-comparison-labels">
+            <span><i class="pattern-dot pattern-dot-reference"></i>ECG de referência</span>
+            <span><i class="pattern-dot pattern-dot-selected"></i>Padrão selecionado</span>
+          </div>
+
+          <div id="pWaveComparison" class="p-wave-comparison">
+            <article class="pattern-wave-card">
+              <div><h4>ECG de referência · P normal</h4><span class="status-good">Referência</span></div>
+              <canvas id="patternCanvasNormal"></canvas>
+              <p><strong>Duração:</strong> até cerca de 120 ms · <strong>Amplitude:</strong> até cerca de 2,5 mm em DII.</p>
+            </article>
+            <article class="pattern-wave-card">
+              <div><h4>Padrão selecionado · P bífida</h4><span class="status-alert">Componente AE</span></div>
+              <canvas id="patternCanvasLeftAtrium"></canvas>
+              <p>Modelo didático com onda P mais larga e entalhada, destacando contribuição atrial esquerda mais tardia.</p>
+            </article>
+            <article class="pattern-wave-card">
+              <div><h4>Padrão selecionado · P alta</h4><span class="status-alert">Componente AD</span></div>
+              <canvas id="patternCanvasRightAtrium"></canvas>
+              <p>Modelo didático com onda P mais alta e pontiaguda, destacando maior contribuição atrial direita.</p>
+            </article>
+          </div>
+
+          <div id="genericPatternComparison" class="generic-pattern-comparison" hidden>
+            <div class="generic-pattern-chart">
+              <canvas id="genericPatternCanvas"></canvas>
+            </div>
+            <div class="generic-pattern-copy">
+              <span id="genericPatternEyebrow">REFERÊNCIA × PADRÃO</span>
+              <h4 id="genericPatternTitle">Padrão selecionado</h4>
+              <p id="genericPatternText">Selecione um tema acima para visualizar uma comparação didática.</p>
+              <div id="genericPatternTags" class="pattern-tags"></div>
+            </div>
+          </div>
+
+
         </article>
       </section>
 
@@ -685,7 +694,7 @@
     })();
   </script>
 
-  <script type="module" src="/js/laboratorio-ecg3d.js?v=20261003-label-ghost-rootfix2"></script>
+  <script type="module" src="/js/laboratorio-ecg3d.js?v=20261003-pattern-teaching3"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>
 </html>
