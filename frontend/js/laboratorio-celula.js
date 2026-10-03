@@ -46,6 +46,7 @@
     lastHistory: 0,
     lastPumpCycle: 0,
     lastLeakCycle: 0,
+    lastPhysicsFlux: 0,
     pumpPulseUntil: 0,
     eventPulse: null,
     actionPotential: null,
@@ -154,6 +155,8 @@
       nx: point.nx,
       ny: point.ny,
       radius: 13,
+      vx: (Math.random() - .5) * 8,
+      vy: (Math.random() - .5) * 8,
       wobble: Math.random() * Math.PI * 2,
       flashUntil: 0,
       transport: null
@@ -199,8 +202,8 @@
   }
 
   function transportVoltageDelta(type, fromZone, toZone) {
-    if (type === "Na") return fromZone === "out" && toZone === "in" ? 3.6 : -3.6;
-    return fromZone === "in" && toZone === "out" ? -2.7 : 2.7;
+    if (type === "Na") return fromZone === "out" && toZone === "in" ? 2.2 : -2.2;
+    return fromZone === "in" && toZone === "out" ? -1.8 : 1.8;
   }
 
   function activeTransportVoltage() {
@@ -210,17 +213,40 @@
     }, 0);
   }
 
+  function equilibriumPotential(type) {
+    const c = concentrations(counts());
+    const inside = type === "Na" ? c.naIn : c.kIn;
+    const outside = type === "Na" ? c.naOut : c.kOut;
+    return 61.5 * Math.log10(Math.max(.01, outside) / Math.max(.01, inside));
+  }
+
+  function membranePermeabilities() {
+    return {
+      na: state.naChannelOpen ? .04 : .0015,
+      k: state.kChannelOpen ? 1 : .012
+    };
+  }
+
+  function ghkVoltage() {
+    const c = concentrations(counts());
+    const p = membranePermeabilities();
+    const numerator = p.k * c.kOut + p.na * c.naOut;
+    const denominator = p.k * c.kIn + p.na * c.naIn;
+
+    return 61.5 * Math.log10(
+      Math.max(.001, numerator) / Math.max(.001, denominator)
+    );
+  }
+
   function targetVm() {
-    const current = counts();
-    const naDelta = current.naIn - INITIAL.naIn;
-    const kOutDelta = current.kOut - INITIAL.kOut;
-    const pumpPenalty = state.pumpOn ? 0 : 1.8;
+    const base = ghkVoltage();
+    const pumpElectrogenic = state.pumpOn ? -1.2 : 0;
     const crossingCharge = activeTransportVoltage();
 
     return clamp(
-      -70 + naDelta * 3.6 - kOutDelta * 2.7 + crossingCharge + state.stimulusOffset + pumpPenalty,
-      -95,
-      20
+      base + pumpElectrogenic + crossingCharge + state.stimulusOffset,
+      -100,
+      35
     );
   }
 
@@ -252,7 +278,7 @@
       }
     });
 
-    if (distance <= .24) return best;
+    if (distance <= .12) return best;
     return null;
   }
 
@@ -289,17 +315,17 @@
       }
     });
 
-    return distance <= .24 ? best : null;
+    return distance <= .12 ? best : null;
   }
 
   function notifyBlocked(ion, angle, reason) {
     const now = performance.now();
-    ion.flashUntil = now + 360;
+    ion.flashUntil = now + 220;
 
     state.eventPulse = {
       type: "blocked",
       angle: angle,
-      until: now + 420
+      until: now + 280
     };
 
     if (now - state.lastBlockNotice < 650) return;
@@ -464,6 +490,225 @@
     return true;
   }
 
+  function distanceToAngleSite(ion, angle, zone, g) {
+    if (ion.zone !== zone || ion.transport) return Infinity;
+    const radial = membraneStopRadius(zone, ion, g);
+    const site = pointAtRadius(angle, radial, g);
+    const p = normalizedToPoint(ion, g);
+    return Math.hypot(p.x - site.x, p.y - site.y);
+  }
+
+  function localIonCandidates(type, zone, angle, captureRadius) {
+    const g = geometry();
+
+    return state.ions
+      .filter(function (ion) {
+        return (
+          ion.type === type &&
+          ion.zone === zone &&
+          ion.id !== state.draggingId &&
+          !ion.transport
+        );
+      })
+      .map(function (ion) {
+        return {
+          ion: ion,
+          distance: distanceToAngleSite(ion, angle, zone, g)
+        };
+      })
+      .filter(function (entry) {
+        return entry.distance <= captureRadius;
+      })
+      .sort(function (a, b) {
+        return a.distance - b.distance;
+      });
+  }
+
+  function electrochemicalDrive(type) {
+    const eIon = equilibriumPotential(type);
+    const difference = state.vm - eIon;
+    const outward = difference > 0;
+
+    return {
+      eIon: eIon,
+      outward: outward,
+      strength: clamp(Math.abs(difference) / 120, .06, .95)
+    };
+  }
+
+  function resolveIonOverlap(ion, x, y, g) {
+    let rx = x;
+    let ry = y;
+
+    state.ions.forEach(function (other) {
+      if (
+        other.id === ion.id ||
+        other.zone !== ion.zone ||
+        other.transport
+      ) return;
+
+      const op = normalizedToPoint(other, g);
+      let dx = rx - op.x;
+      let dy = ry - op.y;
+      let d = Math.hypot(dx, dy);
+      const minDistance = ion.radius + other.radius + 3;
+
+      if (d >= minDistance) return;
+
+      if (d < .001) {
+        const a = (ion.id * 2.399963) % (Math.PI * 2);
+        dx = Math.cos(a);
+        dy = Math.sin(a);
+        d = 1;
+      }
+
+      const push = minDistance - d;
+      rx += dx / d * push;
+      ry += dy / d * push;
+    });
+
+    return { x: rx, y: ry };
+  }
+
+  function confineIonToZone(ion, x, y, g) {
+    const dx = x - g.cx;
+    const dy = y - g.cy;
+    const d = Math.max(.001, Math.hypot(dx, dy));
+    const stop = membraneStopRadius(ion.zone, ion, g);
+
+    if (ion.zone === "in" && d > stop) {
+      return {
+        x: g.cx + dx / d * stop,
+        y: g.cy + dy / d * stop,
+        hitMembrane: true
+      };
+    }
+
+    if (ion.zone === "out" && d < stop) {
+      return {
+        x: g.cx + dx / d * stop,
+        y: g.cy + dy / d * stop,
+        hitMembrane: true
+      };
+    }
+
+    return {
+      x: clamp(x, ion.radius + 4, g.w - ion.radius - 4),
+      y: clamp(y, ion.radius + 4, g.h - ion.radius - 4),
+      hitMembrane: false
+    };
+  }
+
+  function updateParticlePhysics(delta) {
+    const g = geometry();
+    const dt = Math.min(delta, 40) / 1000;
+    const active = state.ions.filter(function (ion) {
+      return !ion.transport && ion.id !== state.draggingId;
+    });
+
+    // Brownian motion + like-charge repulsion. All visible Na⁺/K⁺ are +1 cations.
+    active.forEach(function (ion) {
+      ion.vx += (Math.random() - .5) * 23 * dt;
+      ion.vy += (Math.random() - .5) * 23 * dt;
+    });
+
+    for (let i = 0; i < active.length; i += 1) {
+      for (let j = i + 1; j < active.length; j += 1) {
+        const a = active[i];
+        const b = active[j];
+        if (a.zone !== b.zone) continue;
+
+        const ap = normalizedToPoint(a, g);
+        const bp = normalizedToPoint(b, g);
+        let dx = ap.x - bp.x;
+        let dy = ap.y - bp.y;
+        let d = Math.hypot(dx, dy);
+
+        if (d > 82) continue;
+        if (d < .01) {
+          const seed = ((a.id + b.id) * 1.618) % (Math.PI * 2);
+          dx = Math.cos(seed);
+          dy = Math.sin(seed);
+          d = 1;
+        }
+
+        const ux = dx / d;
+        const uy = dy / d;
+        const hardCore = a.radius + b.radius + 3;
+        const softForce = (82 - d) / 82 * 25;
+        const overlapForce = d < hardCore ? (hardCore - d) * 34 : 0;
+        const force = softForce + overlapForce;
+
+        a.vx += ux * force * dt;
+        a.vy += uy * force * dt;
+        b.vx -= ux * force * dt;
+        b.vy -= uy * force * dt;
+      }
+    }
+
+    active.forEach(function (ion) {
+      const damping = Math.pow(.965, delta / 16.67);
+      ion.vx *= damping;
+      ion.vy *= damping;
+
+      const speed = Math.hypot(ion.vx, ion.vy);
+      const maxSpeed = 27;
+      if (speed > maxSpeed) {
+        ion.vx = ion.vx / speed * maxSpeed;
+        ion.vy = ion.vy / speed * maxSpeed;
+      }
+
+      const p = normalizedToPoint(ion, g);
+      let next = {
+        x: p.x + ion.vx * dt,
+        y: p.y + ion.vy * dt
+      };
+
+      next = resolveIonOverlap(ion, next.x, next.y, g);
+      const confined = confineIonToZone(ion, next.x, next.y, g);
+
+      if (confined.hitMembrane) {
+        const nx = (confined.x - g.cx) / Math.max(1, Math.hypot(confined.x - g.cx, confined.y - g.cy));
+        const ny = (confined.y - g.cy) / Math.max(1, Math.hypot(confined.x - g.cx, confined.y - g.cy));
+        const radialVelocity = ion.vx * nx + ion.vy * ny;
+        ion.vx -= 1.55 * radialVelocity * nx;
+        ion.vy -= 1.55 * radialVelocity * ny;
+      }
+
+      if (confined.x <= ion.radius + 5 || confined.x >= g.w - ion.radius - 5) ion.vx *= -.65;
+      if (confined.y <= ion.radius + 5 || confined.y >= g.h - ion.radius - 5) ion.vy *= -.65;
+
+      ion.nx = clamp(confined.x / g.w, .02, .98);
+      ion.ny = clamp(confined.y / g.h, .025, .975);
+    });
+  }
+
+  function tryLocalChannelFlux(now) {
+    if (state.actionPotential) return;
+
+    CHANNELS.forEach(function (channel) {
+      if (!channelIsOpen(channel.type)) return;
+
+      const drive = electrochemicalDrive(channel.type);
+      const fromZone = drive.outward ? "in" : "out";
+      const toZone = drive.outward ? "out" : "in";
+      const local = localIonCandidates(channel.type, fromZone, channel.angle, 48);
+
+      if (!local.length) return;
+
+      // Higher electrochemical drive means a nearby particle is more likely to cross.
+      const chance = .16 + drive.strength * .56;
+      if (Math.random() > chance) return;
+
+      startIonTransport(local[0].ion, toZone, channel.angle, {
+        kind: "channel",
+        duration: 720,
+        silent: true,
+        extra: 12
+      });
+    });
+  }
+
   function pointerPosition(event) {
     const rect = $("cellCanvas").getBoundingClientRect();
     return {
@@ -552,13 +797,16 @@
         : desiredRadius > stopRadius;
 
       if (!pushingAcross) {
-        ion.nx = clamp(p.x / g.w, .02, .98);
-        ion.ny = clamp(p.y / g.h, .025, .975);
+        const resolved = resolveIonOverlap(ion, p.x, p.y, g);
+        const confined = confineIonToZone(ion, resolved.x, resolved.y, g);
+        ion.nx = clamp(confined.x / g.w, .02, .98);
+        ion.ny = clamp(confined.y / g.h, .025, .975);
         event.preventDefault();
         return;
       }
 
-      const stopPoint = pointAtRadius(angle, stopRadius, g);
+      const rawStopPoint = pointAtRadius(angle, stopRadius, g);
+      const stopPoint = resolveIonOverlap(ion, rawStopPoint.x, rawStopPoint.y, g);
       ion.nx = clamp(stopPoint.x / g.w, .02, .98);
       ion.ny = clamp(stopPoint.y / g.h, .025, .975);
 
@@ -615,89 +863,64 @@
   }
 
   function moveOne(type, fromZone, toZone, angle, extra, options) {
-    const ion = state.ions.find(function (item) {
-      return (
-        item.type === type &&
-        item.zone === fromZone &&
-        item.id !== state.draggingId &&
-        !item.transport
-      );
-    });
+    const opts = options || {};
+    const captureRadius = opts.captureRadius || (opts.kind === "pump" ? 58 : 50);
+    const local = localIonCandidates(type, fromZone, angle, captureRadius);
+    if (!local.length) return false;
 
-    if (!ion) return false;
-
-    const opts = Object.assign({}, options || {}, {
+    const transportOptions = Object.assign({}, opts, {
       extra: extra || 9,
-      silent: options && "silent" in options ? options.silent : true
+      silent: "silent" in opts ? opts.silent : true
     });
 
-    return startIonTransport(ion, toZone, angle, opts);
+    return startIonTransport(local[0].ion, toZone, angle, transportOptions);
   }
 
   function runPumpCycle(now) {
     if (!state.pumpOn || state.actionPotential) return;
 
-    const current = counts();
-    const excessNaInside = Math.max(0, current.naIn - INITIAL.naIn);
-    const excessKOutside = Math.max(0, current.kOut - INITIAL.kOut);
-    const naMoves = Math.min(3, excessNaInside);
-    const kMoves = Math.min(2, excessKOutside);
-    let moved = 0;
+    const naLocal = localIonCandidates("Na", "in", PUMP_ANGLE, 64);
+    const kLocal = localIonCandidates("K", "out", PUMP_ANGLE, 64);
 
-    for (let i = 0; i < naMoves; i += 1) {
-      if (moveOne("Na", "in", "out", PUMP_ANGLE, 11 + i * 2, {
+    // A complete pump cycle only occurs when substrates are physically near the ATPase.
+    if (naLocal.length < 3 || kLocal.length < 2) return;
+
+    for (let i = 0; i < 3; i += 1) {
+      startIonTransport(naLocal[i].ion, "out", PUMP_ANGLE, {
         kind: "pump",
-        duration: 1080,
-        delay: i * 120,
-        silent: true
-      })) moved += 1;
+        duration: 1120,
+        delay: i * 95,
+        silent: true,
+        extra: 13 + i * 2
+      });
     }
 
-    for (let i = 0; i < kMoves; i += 1) {
-      if (moveOne("K", "out", "in", PUMP_ANGLE + .05, 10 + i * 2, {
+    for (let i = 0; i < 2; i += 1) {
+      startIonTransport(kLocal[i].ion, "in", PUMP_ANGLE + .05, {
         kind: "pump",
-        duration: 1080,
-        delay: 80 + i * 140,
-        silent: true
-      })) moved += 1;
+        duration: 1120,
+        delay: 70 + i * 125,
+        silent: true,
+        extra: 12 + i * 2
+      });
     }
 
-    state.pumpPulseUntil = now + 1100;
-
-    if (moved > 0) {
-      setExplanation(
-        "Bomba Na⁺/K⁺ restaurando o gradiente",
-        "A ATPase está recolhendo os íons que se desviaram do repouso. Cada partícula percorre visualmente a proteína; não há mais salto instantâneo entre os lados.",
-        "até 3 Na⁺ → fora  ·  até 2 K⁺ → dentro  ·  ATP"
-      );
-    }
+    state.pumpPulseUntil = now + 1250;
+    setExplanation(
+      "Ciclo local da bomba Na⁺/K⁺",
+      "A bomba só funcionou porque 3 Na⁺ intracelulares e 2 K⁺ extracelulares chegaram fisicamente à sua vizinhança. Nenhuma partícula distante foi puxada.",
+      "3 Na⁺ locais → fora  ·  2 K⁺ locais → dentro"
+    );
   }
 
   function passiveLeak() {
-    if (state.actionPotential) return;
-
-    if (state.naChannelOpen) {
-      moveOne("Na", "out", "in", -1.15, 8, {
-        kind: "channel",
-        duration: 760,
-        silent: true
-      });
-    }
-
-    if (state.kChannelOpen) {
-      moveOne("K", "in", "out", 1.03, 12, {
-        kind: "channel",
-        duration: 780,
-        delay: 120,
-        silent: true
-      });
-    }
+    tryLocalChannelFlux(performance.now());
 
     if (!state.pumpOn) {
       setExplanation(
         "Bomba desligada",
-        "Sem a ATPase Na⁺/K⁺, os vazamentos agora deslocam íons fisicamente pelos canais e os gradientes começam a se dissipar. O gráfico acompanha essa redistribuição a cada travessia.",
-        "gradientes ↓  ·  Vm perde estabilidade"
+        "Sem a ATPase Na⁺/K⁺, os gradientes deixam de ser restaurados. Os canais continuam permitindo apenas fluxos locais, guiados pela força eletroquímica e pela concentração disponível junto à membrana.",
+        "difusão local + força elétrica  ·  gradientes se dissipam"
       );
     }
   }
@@ -954,11 +1177,17 @@
         ? "rgba(56,189,248,.5)"
         : state.eventPulse.type === "K"
           ? "rgba(245,158,11,.5)"
-          : "rgba(251,113,133,.55)";
-      ctx.lineWidth = 2;
-      ctx.globalAlpha = 1 - ratio;
+          : "rgba(184,194,209,.24)";
+      ctx.lineWidth = state.eventPulse.type === "blocked" ? 1 : 2;
+      ctx.globalAlpha = (1 - ratio) * (state.eventPulse.type === "blocked" ? .6 : 1);
       ctx.beginPath();
-      ctx.arc(px, py, 16 + ratio * 35, 0, Math.PI * 2);
+      ctx.arc(
+        px,
+        py,
+        state.eventPulse.type === "blocked" ? 12 + ratio * 13 : 16 + ratio * 35,
+        0,
+        Math.PI * 2
+      );
       ctx.stroke();
       ctx.restore();
     }
@@ -1188,6 +1417,7 @@
     state.lastBlockNotice = 0;
     state.lastPumpCycle = performance.now();
     state.lastLeakCycle = performance.now();
+    state.lastPhysicsFlux = performance.now();
 
     spawnInitialIons();
 
@@ -1235,12 +1465,14 @@
     const delta = Math.min(50, now - state.lastFrame);
     state.lastFrame = now;
 
-    if (state.pumpOn && now - state.lastPumpCycle > 2600) {
+    updateParticlePhysics(delta);
+
+    if (state.pumpOn && now - state.lastPumpCycle > 720) {
       runPumpCycle(now);
       state.lastPumpCycle = now;
     }
 
-    if (now - state.lastLeakCycle > (state.pumpOn ? 6200 : 2700)) {
+    if (now - state.lastLeakCycle > 240) {
       passiveLeak();
       state.lastLeakCycle = now;
     }
