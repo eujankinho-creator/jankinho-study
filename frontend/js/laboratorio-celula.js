@@ -38,6 +38,7 @@
     draggingId: null,
     draggingStart: null,
     pumpOn: true,
+    pumpMode: "manual",
     naChannelOpen: true,
     kChannelOpen: true,
     vm: -70,
@@ -517,8 +518,10 @@
     const g = geometry();
 
     state.pumps.forEach(function (pump) {
+      const autoMode = state.pumpMode === "auto";
+
       if (pump.phase === "na-binding") {
-        if (!pumpSlotsFull(pump, "Na") && now - pump.lastAutoBind > 320) {
+        if (autoMode && !pumpSlotsFull(pump, "Na") && now - pump.lastAutoBind > 320) {
           const slot = freePumpSlot(pump, "Na");
           if (slot >= 0) {
             const site = pumpBindingPoint(pump, "Na", slot, g);
@@ -545,7 +548,7 @@
         pump.phaseSince = now;
         pump.readyAt = 0;
       } else if (pump.phase === "k-binding") {
-        if (!pumpSlotsFull(pump, "K") && now - pump.lastAutoBind > 320) {
+        if (autoMode && !pumpSlotsFull(pump, "K") && now - pump.lastAutoBind > 320) {
           const slot = freePumpSlot(pump, "K");
           if (slot >= 0) {
             const site = pumpBindingPoint(pump, "K", slot, g);
@@ -1816,7 +1819,60 @@
     ctx.restore();
   }
 
+  function setPumpMode(mode) {
+    const nextMode = mode === "auto" ? "auto" : "manual";
+    state.pumpMode = nextMode;
+
+    // Cancela somente ligações parciais da ATPase para não misturar os modos.
+    state.ions.forEach(function (ion) {
+      if (!ion.boundPumpId) return;
+      ion.boundPumpId = null;
+      ion.boundSlotType = null;
+      ion.boundSlotIndex = null;
+      ion.flashUntil = performance.now() + 240;
+    });
+
+    resetPumps();
+
+    const manualButton = $("pumpModeManual");
+    const autoButton = $("pumpModeAuto");
+    if (manualButton) {
+      manualButton.classList.toggle("active", nextMode === "manual");
+      manualButton.setAttribute("aria-pressed", String(nextMode === "manual"));
+    }
+    if (autoButton) {
+      autoButton.classList.toggle("active", nextMode === "auto");
+      autoButton.setAttribute("aria-pressed", String(nextMode === "auto"));
+    }
+
+    if ($("pumpModeMetric")) {
+      $("pumpModeMetric").textContent = nextMode === "manual" ? "manual" : "automático";
+    }
+
+    setExplanation(
+      nextMode === "manual" ? "ATPase em modo manual" : "ATPase em modo automático",
+      nextMode === "manual"
+        ? "Nenhum sítio será preenchido sozinho. Encaixe 3 Na⁺ do citoplasma; depois, quando a bomba virar para fora, encaixe 2 K⁺ extracelulares."
+        : "A ATPase só captura automaticamente íons que chegarem à vizinhança imediata dos seus sítios por difusão.",
+      nextMode === "manual"
+        ? "3 Na⁺ manuais → mudança conformacional → 2 K⁺ manuais"
+        : "captura local · sem puxar íons à distância"
+    );
+  }
+
   function bindControls() {
+    if ($("pumpModeManual")) {
+      $("pumpModeManual").addEventListener("click", function () {
+        if (state.pumpMode !== "manual") setPumpMode("manual");
+      });
+    }
+
+    if ($("pumpModeAuto")) {
+      $("pumpModeAuto").addEventListener("click", function () {
+        if (state.pumpMode !== "auto") setPumpMode("auto");
+      });
+    }
+
     $("pumpToggle").addEventListener("click", function () {
       state.pumpOn = !state.pumpOn;
       this.classList.toggle("on", state.pumpOn);
@@ -1890,6 +1946,7 @@
 
   function resetSimulation() {
     state.pumpOn = true;
+    state.pumpMode = "manual";
     state.naChannelOpen = true;
     state.kChannelOpen = true;
     state.vm = -70;
@@ -1916,6 +1973,18 @@
       button.classList.add("on");
       button.setAttribute("aria-pressed", "true");
     });
+
+    if ($("pumpModeManual")) {
+      $("pumpModeManual").classList.add("active");
+      $("pumpModeManual").setAttribute("aria-pressed", "true");
+    }
+    if ($("pumpModeAuto")) {
+      $("pumpModeAuto").classList.remove("active");
+      $("pumpModeAuto").setAttribute("aria-pressed", "false");
+    }
+    if ($("pumpModeMetric")) {
+      $("pumpModeMetric").textContent = "manual";
+    }
 
     setPhase("repouso", "gradientes preservados");
     setExplanation(
