@@ -361,6 +361,15 @@
     }
 
 
+    if (
+      path.startsWith("/laboratorio-")
+    ) {
+
+      return "/laboratorio";
+
+    }
+
+
     return path;
 
   }
