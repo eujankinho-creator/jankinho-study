@@ -42,10 +42,23 @@ model Questao {
   disciplinaId Int
   dificuldade  String?
   tema         String?
+  origem       String?
+  origemId     String?
+  banca        String?
+  ano          Int?
+  cargo        String?
+  orgao        String?
+  fonteUrl     String?
+  imagemUrl    String?
   alternativas Alternativa[]
   disciplina   Disciplina    @relation(fields: [disciplinaId], references: [id], onDelete: Cascade)
   usuario      Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   respostas    Resposta[]
+
+  @@unique([usuarioId, origem, origemId])
+  @@index([origem])
+  @@index([banca])
+  @@index([ano])
 }
 
 model Alternativa {
