@@ -772,15 +772,84 @@ function syncSimulatorActivity() {
   suspendSimulatorAudio();
 }
 
+async function shutdownSimulatorForNavigation() {
+  /*
+   * O Cortex pode manter esta página viva dentro do shell/iframe ao navegar.
+   * Portanto não basta depender de pagehide/visibilitychange: ao sair do
+   * Laboratório, interrompemos explicitamente som, ECG e renderização 3D.
+   */
+  LAB_STATE.phasePlaying = false;
+
+  const play = byId("phasePlay");
+  if (play) {
+    play.textContent = "▶ Contínuo";
+  }
+
+  stopHeartRenderLoop();
+  stopPhaseLoop();
+
+  if (audioContext) {
+    const contextToClose = audioContext;
+    audioContext = null;
+
+    try {
+      await contextToClose.close();
+    } catch (error) {
+      try {
+        if (contextToClose.state === "running") {
+          await contextToClose.suspend();
+        }
+      } catch (suspendError) {
+        console.warn("Não foi possível encerrar o áudio do laboratório:", suspendError);
+      }
+    }
+  }
+}
+
 function setupSimulatorVisibilityLifecycle() {
   document.addEventListener("visibilitychange", function () {
     syncSimulatorActivity();
   });
 
+  /*
+   * A navegação do Cortex é interceptada pelo shell antes de trocar a página.
+   * Capturamos qualquer link que realmente saia desta rota para desligar o
+   * laboratório antes que o iframe antigo seja mantido em cache.
+   */
+  document.addEventListener("click", function (event) {
+    const anchor =
+      event.target &&
+      event.target.closest
+        ? event.target.closest("a[href]")
+        : null;
+
+    if (!anchor) return;
+    if (anchor.target && anchor.target.toLowerCase() === "_blank") return;
+
+    let targetUrl;
+    try {
+      targetUrl = new URL(anchor.href, window.location.href);
+    } catch (error) {
+      return;
+    }
+
+    if (
+      targetUrl.origin === window.location.origin &&
+      (
+        targetUrl.pathname !== window.location.pathname ||
+        targetUrl.search !== window.location.search
+      )
+    ) {
+      shutdownSimulatorForNavigation();
+    }
+  }, true);
+
   window.addEventListener("pagehide", function () {
-    stopHeartRenderLoop();
-    stopPhaseLoop();
-    suspendSimulatorAudio();
+    shutdownSimulatorForNavigation();
+  });
+
+  window.addEventListener("beforeunload", function () {
+    shutdownSimulatorForNavigation();
   });
 
   window.addEventListener("pageshow", function () {
