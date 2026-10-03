@@ -1025,6 +1025,77 @@
     return best;
   }
 
+  function moveExternalIon(ion, original, x, y) {
+    if (!ion || !original || ion.transport || ion.boundPumpId) return "locked";
+
+    const g = geometry();
+
+    if (tryBindIonToPump(ion, x, y, true)) {
+      return "bound";
+    }
+
+    const dx = x - g.cx;
+    const dy = y - g.cy;
+    const desiredRadius = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
+    const originZone = original.zone;
+    const stopRadius = membraneStopRadius(originZone, ion, g);
+    const pushingAcross = originZone === "out"
+      ? desiredRadius < stopRadius
+      : desiredRadius > stopRadius;
+
+    if (!pushingAcross) {
+      const resolved = resolveIonOverlap(ion, x, y, g);
+      const confined = confineIonToZone(ion, resolved.x, resolved.y, g);
+      ion.nx = clamp(confined.x / g.w, .02, .98);
+      ion.ny = clamp(confined.y / g.h, .025, .975);
+      return "moved";
+    }
+
+    const rawStopPoint = pointAtRadius(angle, stopRadius, g);
+    const stopPoint = resolveIonOverlap(ion, rawStopPoint.x, rawStopPoint.y, g);
+    ion.nx = clamp(stopPoint.x / g.w, .02, .98);
+    ion.ny = clamp(stopPoint.y / g.h, .025, .975);
+
+    const compatible = nearestValidChannel(ion.type, angle);
+    const anyChannel = nearestChannelAny(angle);
+
+    if (!compatible) {
+      if (anyChannel && anyChannel.type !== ion.type) {
+        notifyBlocked(
+          ion,
+          angle,
+          "Esse canal é seletivo para " + anyChannel.type + "⁺. O " + ion.type + "⁺ encosta na membrana, mas não atravessa."
+        );
+      } else {
+        notifyBlocked(
+          ion,
+          angle,
+          "A bicamada continua sendo uma barreira no 3D. O íon só cruza quando encontra a abertura de um canal compatível."
+        );
+      }
+      return "blocked";
+    }
+
+    if (!channelIsOpen(ion.type)) {
+      notifyBlocked(
+        ion,
+        compatible.angle,
+        "O canal compatível está fechado. Mesmo no modo 3D, o íon fica retido do lado de origem."
+      );
+      return "blocked";
+    }
+
+    const newZone = originZone === "out" ? "in" : "out";
+    const entryPoint = pointAtRadius(compatible.angle, stopRadius, g);
+    ion.nx = clamp(entryPoint.x / g.w, .02, .98);
+    ion.ny = clamp(entryPoint.y / g.h, .025, .975);
+
+    return transferThroughChannel(ion, newZone, compatible.angle, { kind: "channel" })
+      ? "transferred"
+      : "blocked";
+  }
+
   function bindCellInteraction() {
     const canvas = $("cellCanvas");
 
@@ -2120,6 +2191,16 @@
       loop(now);
     });
   }
+
+  window.__membraneLab = {
+    state: state,
+    geometry: geometry,
+    normalizedToPoint: normalizedToPoint,
+    pumpBindingPoint: pumpBindingPoint,
+    tryBindIonToPump: tryBindIonToPump,
+    moveExternalIon: moveExternalIon,
+    channels: CHANNELS
+  };
 
   start();
 })();
