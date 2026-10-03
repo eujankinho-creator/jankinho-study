@@ -119,6 +119,16 @@
     return Math.sqrt(dx * dx + dy * dy) < g.r - 5 ? "in" : "out";
   }
 
+  function pointIsClear(x, y, zone, g, minDistance) {
+    const minimum = minDistance || 30;
+
+    return state.ions.every(function (other) {
+      if (other.zone !== zone || other.transport) return true;
+      const p = normalizedToPoint(other, g);
+      return Math.hypot(x - p.x, y - p.y) >= minimum;
+    });
+  }
+
   function randomPoint(zone) {
     const g = geometry();
     let x;
@@ -137,7 +147,13 @@
       }
 
       tries += 1;
-    } while (zoneAt(x, y, g) !== zone && tries < 120);
+    } while (
+      (
+        zoneAt(x, y, g) !== zone ||
+        !pointIsClear(x, y, zone, g, 31)
+      ) &&
+      tries < 220
+    );
 
     return {
       nx: clamp(x / g.w, .03, .97),
@@ -151,6 +167,7 @@
     return {
       id: state.nextIonId++,
       type: type,
+      charge: 1,
       zone: zone,
       nx: point.nx,
       ny: point.ny,
@@ -540,32 +557,36 @@
     let rx = x;
     let ry = y;
 
-    state.ions.forEach(function (other) {
-      if (
-        other.id === ion.id ||
-        other.zone !== ion.zone ||
-        other.transport
-      ) return;
+    // Algumas passadas curtas resolvem também pequenos "engarrafamentos"
+    // quando várias partículas estão muito próximas.
+    for (let pass = 0; pass < 4; pass += 1) {
+      state.ions.forEach(function (other) {
+        if (
+          other.id === ion.id ||
+          other.zone !== ion.zone ||
+          other.transport
+        ) return;
 
-      const op = normalizedToPoint(other, g);
-      let dx = rx - op.x;
-      let dy = ry - op.y;
-      let d = Math.hypot(dx, dy);
-      const minDistance = ion.radius + other.radius + 3;
+        const op = normalizedToPoint(other, g);
+        let dx = rx - op.x;
+        let dy = ry - op.y;
+        let d = Math.hypot(dx, dy);
+        const minDistance = ion.radius + other.radius + 3;
 
-      if (d >= minDistance) return;
+        if (d >= minDistance) return;
 
-      if (d < .001) {
-        const a = (ion.id * 2.399963) % (Math.PI * 2);
-        dx = Math.cos(a);
-        dy = Math.sin(a);
-        d = 1;
-      }
+        if (d < .001) {
+          const a = ((ion.id + other.id) * 2.399963) % (Math.PI * 2);
+          dx = Math.cos(a);
+          dy = Math.sin(a);
+          d = 1;
+        }
 
-      const push = minDistance - d;
-      rx += dx / d * push;
-      ry += dy / d * push;
-    });
+        const push = minDistance - d;
+        rx += dx / d * push;
+        ry += dy / d * push;
+      });
+    }
 
     return { x: rx, y: ry };
   }
@@ -635,9 +656,13 @@
         const ux = dx / d;
         const uy = dy / d;
         const hardCore = a.radius + b.radius + 3;
-        const softForce = (82 - d) / 82 * 25;
+        const chargeProduct = (a.charge || 0) * (b.charge || 0);
+        const electrostaticForce = ((82 - d) / 82) * 25 * chargeProduct;
         const overlapForce = d < hardCore ? (hardCore - d) * 34 : 0;
-        const force = softForce + overlapForce;
+
+        // Sinais iguais se repelem; sinais opostos tenderiam à atração.
+        // O termo de volume excluído continua impedindo sobreposição física.
+        const force = electrostaticForce + overlapForce;
 
         a.vx += ux * force * dt;
         a.vy += uy * force * dt;
