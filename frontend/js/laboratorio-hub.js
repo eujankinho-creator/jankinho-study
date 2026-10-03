@@ -53,4 +53,28 @@
   if ($("logoutSidebar")) {
     $("logoutSidebar").addEventListener("click", logout);
   }
+
+  const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  if (precisePointer.matches) {
+    document.querySelectorAll(".lab-choice-card").forEach(function (card) {
+      let raf = 0;
+
+      card.addEventListener("pointermove", function (event) {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function () {
+          const rect = card.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 100;
+          const y = ((event.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty("--pointer-x", x.toFixed(2) + "%");
+          card.style.setProperty("--pointer-y", y.toFixed(2) + "%");
+        });
+      });
+
+      card.addEventListener("pointerleave", function () {
+        if (raf) cancelAnimationFrame(raf);
+        card.style.setProperty("--pointer-x", "50%");
+        card.style.setProperty("--pointer-y", "50%");
+      });
+    });
+  }
 })();
