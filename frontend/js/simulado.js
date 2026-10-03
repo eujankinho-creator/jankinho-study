@@ -13,6 +13,9 @@
     questions:
       [],
 
+    answeredQuestionIds:
+      new Set(),
+
     selectedAreas:
       new Set(),
 
@@ -985,18 +988,69 @@
 
   async function loadQuestions() {
 
-    const data =
-      await api(
-        "/api/questoes"
+    const [
+      data,
+      respostas
+    ] =
+      await Promise.all([
+        api(
+          "/api/questoes"
+        ),
+        api(
+          "/api/respostas"
+        )
+      ]);
+
+
+    state.answeredQuestionIds =
+      new Set(
+        (
+          Array.isArray(
+            respostas
+          )
+            ? respostas
+            : []
+        )
+          .map(
+            function (
+              resposta
+            ) {
+
+              return Number(
+                resposta.questaoId
+              );
+
+            }
+          )
+          .filter(
+            Number.isInteger
+          )
       );
 
 
     state.questions =
-      Array.isArray(
-        data
+      (
+        Array.isArray(
+          data
+        )
+          ? data
+          : []
       )
-        ? data
-        : [];
+        .filter(
+          function (
+            question
+          ) {
+
+            return !state
+              .answeredQuestionIds
+              .has(
+                Number(
+                  question.id
+                )
+              );
+
+          }
+        );
 
 
     $("simTotalQuestions")
