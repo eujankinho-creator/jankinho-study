@@ -1442,7 +1442,25 @@
 
 
 .ranking-view
-.you-badge {
+.podium-card > .you-badge {
+  position:
+    absolute;
+
+  top:
+    13px;
+
+  right:
+    13px;
+
+  left:
+    auto;
+
+  z-index:
+    5;
+
+  margin:
+    0;
+
   border-color:
     rgba(249,115,22,.20);
 
@@ -1451,6 +1469,27 @@
 
   color:
     var(--analysis-accent-2);
+
+  transform:
+    none;
+}
+
+.ranking-view
+.podium-card > .medal {
+  position:
+    relative;
+
+  z-index:
+    3;
+
+  display:
+    block;
+
+  width:
+    fit-content;
+
+  margin:
+    0 auto;
 }
 
 
