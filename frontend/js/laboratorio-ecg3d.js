@@ -1084,6 +1084,43 @@ function buildChamberLabels() {
   });
 }
 
+function removeCss2DFromRoot(root) {
+  if (!root) return;
+
+  root.traverse(function (object) {
+    if (!object || !object.isCSS2DObject || !object.element) return;
+
+    const element = object.element;
+    if (element.parentNode) {
+      element.parentNode.removeChild(element);
+    }
+  });
+}
+
+function disposeObjectTree(root) {
+  if (!root) return;
+
+  root.traverse(function (object) {
+    if (!object) return;
+
+    if (object.geometry && typeof object.geometry.dispose === "function") {
+      object.geometry.dispose();
+    }
+
+    if (object.material) {
+      const materials = Array.isArray(object.material)
+        ? object.material
+        : [object.material];
+
+      materials.forEach(function (material) {
+        if (material && typeof material.dispose === "function") {
+          material.dispose();
+        }
+      });
+    }
+  });
+}
+
 function circlePoints(radius, plane) {
   const points = [];
   for (let i = 0; i <= 120; i += 1) {
@@ -1099,6 +1136,17 @@ function circlePoints(radius, plane) {
 
 function buildAxes() {
   if (!axisRoot || !extraAxisRoot) return;
+
+  /*
+   * CSS2DRenderer usa elementos HTML reais. Apenas axisRoot.clear()
+   * remove os objetos da cena, mas não garante que os elementos HTML
+   * antigos desapareçam imediatamente. Isso gerava labels "fantasma"
+   * depois que o tema era aplicado ou a página era reaberta.
+   */
+  removeCss2DFromRoot(axisRoot);
+  removeCss2DFromRoot(extraAxisRoot);
+  disposeObjectTree(axisRoot);
+  disposeObjectTree(extraAxisRoot);
 
   axisRoot.clear();
   extraAxisRoot.clear();
@@ -1118,7 +1166,9 @@ function buildAxes() {
       opacity: 0.18
     });
 
-    axisRoot.add(new THREE.Line(geometry, material));
+    const circle = new THREE.Line(geometry, material);
+    circle.userData.axisCircle = true;
+    axisRoot.add(circle);
   }
 
   addCircle("frontal");
@@ -1177,6 +1227,26 @@ function addLeadAxis(parent, lead) {
   group.userData.lead = lead;
   parent.add(group);
   return group;
+}
+
+function updateAxisThemeColors() {
+  if (!axisRoot) return;
+
+  const palette = getLabThemePalette();
+  const neutral = new THREE.Color(palette.textMuted);
+
+  axisRoot.children.forEach(function (child) {
+    if (
+      child &&
+      child.userData &&
+      child.userData.axisCircle &&
+      child.material &&
+      child.material.color
+    ) {
+      child.material.color.copy(neutral);
+      child.material.needsUpdate = true;
+    }
+  });
 }
 
 function updateAxisVisibility() {
@@ -4340,7 +4410,7 @@ function setupThemeIntegration() {
       if (meta) meta.setAttribute("content", palette.bg);
 
       if (axisRoot && extraAxisRoot) {
-        buildAxes();
+        updateAxisThemeColors();
       }
 
       drawEcgMatrix();
