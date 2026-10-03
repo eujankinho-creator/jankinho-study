@@ -4170,3 +4170,153 @@ html[data-theme="black-white"] .ecg-lab {
   }
 }
 /* LEITURA GUIADA · QUESTÕES DO BANCO END */
+
+
+/* =========================================================
+   CORTEX ECG PATTERN TEACHING V2
+   Ordem didática + cores independentes do tema.
+========================================================= */
+.pattern-teaching-grid {
+  margin: 0 14px 12px !important;
+}
+
+.pattern-visual-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 14px 10px;
+  padding: 10px 11px;
+  border: 1px solid #26394d;
+  border-radius: 9px;
+  background: rgba(8, 17, 27, .72);
+}
+
+.pattern-visual-legend:empty {
+  display: none;
+}
+
+.pattern-visual-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 4px 8px;
+  border: 1px solid #2b4055;
+  border-radius: 999px;
+  background: #0d1824;
+  color: #aebdcb;
+  font-size: 9px;
+  font-weight: 750;
+}
+
+.pattern-visual-chip i,
+.pattern-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.pattern-comparison-labels {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 0 14px 9px;
+  color: #8799aa;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.pattern-comparison-labels span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pattern-dot-reference {
+  color: #d6dde6;
+  background: #d6dde6;
+}
+
+.pattern-dot-selected {
+  color: #fb923c;
+  background: #fb923c;
+}
+
+.pattern-wave-card {
+  position: relative;
+}
+
+.pattern-wave-card canvas,
+.generic-pattern-chart {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.018);
+}
+
+.pattern-wave-card:nth-child(1) {
+  border-color: rgba(214, 221, 230, .22);
+}
+
+.pattern-wave-card:nth-child(2) {
+  border-color: rgba(244, 114, 182, .28);
+}
+
+.pattern-wave-card:nth-child(3) {
+  border-color: rgba(251, 146, 60, .28);
+}
+
+.pattern-wave-card:nth-child(2) h4 {
+  color: #f9a8d4;
+}
+
+.pattern-wave-card:nth-child(3) h4 {
+  color: #fdba74;
+}
+
+.generic-pattern-chart {
+  overflow: hidden;
+  background: #09131e;
+}
+
+.generic-pattern-copy {
+  border-color: rgba(34, 211, 238, .18);
+}
+
+.pattern-teaching-grid article {
+  min-height: 96px;
+}
+
+.pattern-teaching-grid article:nth-child(1) {
+  border-color: rgba(34, 211, 238, .28);
+  background: linear-gradient(145deg, rgba(34,211,238,.055), rgba(13,25,37,.96));
+}
+
+.pattern-teaching-grid article:nth-child(2) {
+  border-color: rgba(244, 114, 182, .24);
+}
+
+.pattern-teaching-grid article:nth-child(3) {
+  border-color: rgba(52, 211, 153, .24);
+}
+
+.pattern-teaching-grid article:nth-child(4) {
+  border-color: rgba(251, 146, 60, .24);
+}
+
+.pattern-teaching-grid article:nth-child(1) > span { color: #22d3ee; }
+.pattern-teaching-grid article:nth-child(2) > span { color: #f472b6; }
+.pattern-teaching-grid article:nth-child(3) > span { color: #34d399; }
+.pattern-teaching-grid article:nth-child(4) > span { color: #fb923c; }
+
+@media (max-width: 900px) {
+  .pattern-visual-legend,
+  .pattern-comparison-labels,
+  .pattern-teaching-grid {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+}
+/* CORTEX ECG PATTERN TEACHING V2 END */
