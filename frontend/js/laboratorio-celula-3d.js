@@ -380,7 +380,7 @@
         ? "gire a cena · arraste íons · roda = profundidade"
         : "clique + arraste";
     }
-    try { localStorage.setItem("membrane_view_mode", mode); } catch (e) {}
+    try { localStorage.setItem("membrane_view_mode_v2", mode); } catch (e) {}
   }
 
   function pointerPos(event) {
@@ -515,8 +515,8 @@
     canvas.addEventListener("pointercancel", finishPointer);
     canvas.addEventListener("wheel", onWheel, { passive: false });
 
-    let saved = "3d";
-    try { saved = localStorage.getItem("membrane_view_mode") || "3d"; } catch (e) {}
+    let saved = "2d";
+    try { saved = localStorage.getItem("membrane_view_mode_v2") || "2d"; } catch (e) {}
     setMode(saved);
     cancelAnimationFrame(animationFrame);
     render();
