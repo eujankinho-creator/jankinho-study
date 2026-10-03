@@ -1,6 +1,7 @@
 const state = {
   questoes: [],
   disciplinas: [],
+  respondidasIds: new Set(),
   filtradas: [],
   sessao: [],
   indice: 0,
@@ -513,7 +514,8 @@ async function carregarDados() {
     const resultados =
       await Promise.all([
         api("/api/questoes"),
-        api("/api/disciplinas")
+        api("/api/disciplinas"),
+        api("/api/respostas")
       ]);
 
 
@@ -531,6 +533,20 @@ async function carregarDados() {
       )
         ? resultados[1]
         : [];
+
+
+    state.respondidasIds =
+      new Set(
+        (
+          Array.isArray(resultados[2])
+            ? resultados[2]
+            : []
+        )
+          .map(function (resposta) {
+            return Number(resposta.questaoId);
+          })
+          .filter(Number.isInteger)
+      );
 
 
     popularDisciplinas();
@@ -713,6 +729,12 @@ function renderLista() {
               : 0;
 
 
+          const jaFeita =
+            state.respondidasIds.has(
+              Number(questao.id)
+            );
+
+
           return `
             <article class="question-card">
 
@@ -741,6 +763,12 @@ function renderLista() {
                         )}
                       </span>
                     `
+                    : ""
+                }
+
+                ${
+                  jaFeita
+                    ? `<span class="badge question-done-badge">✓ Feita</span>`
                     : ""
                 }
 
