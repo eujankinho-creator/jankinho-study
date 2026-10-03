@@ -1392,3 +1392,52 @@
     font-size: 5.5px;
   }
 }
+
+
+/* =========================================================
+   MINIMAL PHYSIOLOGY — retorna à linguagem visual original
+========================================================= */
+
+.membrane-panel {
+  box-shadow: none;
+  background: var(--mem-panel);
+}
+
+.cell-stage-wrap {
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(44, 75, 122, .10), transparent 42%),
+    rgba(6, 10, 17, .94);
+  box-shadow: none;
+}
+
+body:not(.membrane-3d) .cell-stage-wrap::before,
+body:not(.membrane-3d) .cell-stage-wrap::after {
+  opacity: 0;
+}
+
+#cellCanvas {
+  filter: none;
+}
+
+.legend-ion.na,
+.legend-ion.k {
+  box-shadow: none;
+}
+
+.electrochemical-readout > div,
+.distribution-card,
+.pump-mode-block,
+.stimulus-box {
+  box-shadow: none;
+  background: rgba(255, 255, 255, .018);
+}
+
+.drag-hint {
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.view-mode-switch {
+  backdrop-filter: none;
+}
