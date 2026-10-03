@@ -376,6 +376,906 @@ const questoes: QuestaoConcurso[] = [
       { texto: "Percentual de profissionais por leito como único indicador", correta: false },
       { texto: "Média de idade dos pacientes internados", correta: false }
     ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-001",
+    "enunciado": "Em um trabalhador com suspeita de perda auditiva induzida por ruído, qual informação ocupacional é essencial na anamnese de enfermagem?",
+    "explicacao": "Investigar tempo, intensidade e padrão de exposição ao ruído ajuda a avaliar o possível nexo entre trabalho e alteração auditiva.",
+    "assunto": "Saúde do Trabalhador",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Tempo e características da exposição ocupacional ao ruído",
+        "correta": true
+      },
+      {
+        "texto": "Apenas a preferência musical do trabalhador",
+        "correta": false
+      },
+      {
+        "texto": "Somente a idade, sem investigar exposição",
+        "correta": false
+      },
+      {
+        "texto": "A cor do protetor auricular utilizado",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-002",
+    "enunciado": "Na prevenção de dermatoses ocupacionais, qual medida é apropriada?",
+    "explicacao": "Identificar o agente irritante ou sensibilizante e reduzir a exposição, além de orientar proteção adequada da pele, é fundamental.",
+    "assunto": "Dermatoses Ocupacionais",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Aumentar o contato com o agente para criar tolerância",
+        "correta": false
+      },
+      {
+        "texto": "Identificar e controlar a exposição ao agente causador",
+        "correta": true
+      },
+      {
+        "texto": "Usar qualquer creme como substituto das medidas de controle",
+        "correta": false
+      },
+      {
+        "texto": "Ignorar lesões iniciais se não houver dor",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-003",
+    "enunciado": "Ao identificar fadiga intensa em trabalhador submetido a jornadas prolongadas, qual ação é coerente com a prevenção de acidentes?",
+    "explicacao": "Fadiga aumenta risco de erro e acidente; a avaliação da organização do trabalho, pausas e carga horária é parte da prevenção.",
+    "assunto": "Ergonomia e Organização do Trabalho",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Avaliar jornada, pausas e fatores de fadiga",
+        "correta": true
+      },
+      {
+        "texto": "Recomendar cafeína como única medida preventiva",
+        "correta": false
+      },
+      {
+        "texto": "Desconsiderar a fadiga se os sinais vitais estiverem normais",
+        "correta": false
+      },
+      {
+        "texto": "Aumentar a carga de trabalho para testar adaptação",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-004",
+    "enunciado": "Qual achado é compatível com possível intoxicação aguda por agente químico no trabalho e requer avaliação imediata?",
+    "explicacao": "Alterações neurológicas ou respiratórias de início súbito após exposição química devem ser avaliadas rapidamente.",
+    "assunto": "Toxicologia Ocupacional",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Tontura súbita e dispneia após exposição",
+        "correta": true
+      },
+      {
+        "texto": "Unhas compridas sem sintomas",
+        "correta": false
+      },
+      {
+        "texto": "Miopia estável há anos",
+        "correta": false
+      },
+      {
+        "texto": "Cicatriz antiga sem alteração",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-005",
+    "enunciado": "Em um acidente ocupacional com exposição ocular a produto químico, qual conduta inicial é geralmente indicada?",
+    "explicacao": "A irrigação imediata e abundante reduz o tempo de contato do agente com os tecidos, seguida de avaliação conforme o produto envolvido.",
+    "assunto": "Primeiros Socorros Ocupacionais",
+    "dificuldade": "facil",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Cobrir o olho sem irrigar",
+        "correta": false
+      },
+      {
+        "texto": "Irrigar imediatamente com água em abundância",
+        "correta": true
+      },
+      {
+        "texto": "Aplicar colírio anestésico por conta própria",
+        "correta": false
+      },
+      {
+        "texto": "Esperar o fim do turno",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-006",
+    "enunciado": "Qual dado é útil para vigilância de acidentes de trabalho em uma empresa?",
+    "explicacao": "Taxas e padrões de acidentes por setor, atividade, horário e mecanismo ajudam a identificar riscos e direcionar prevenção.",
+    "assunto": "Vigilância em Saúde do Trabalhador",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Distribuição dos acidentes por setor e mecanismo",
+        "correta": true
+      },
+      {
+        "texto": "Apenas o nome dos trabalhadores",
+        "correta": false
+      },
+      {
+        "texto": "Somente o total anual sem contexto",
+        "correta": false
+      },
+      {
+        "texto": "Preferências pessoais da equipe",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-007",
+    "enunciado": "Em relação aos equipamentos de proteção individual, qual orientação está correta?",
+    "explicacao": "O EPI deve ser adequado ao risco, possuir condições de uso e ser acompanhado de treinamento, sem substituir medidas coletivas quando estas são aplicáveis.",
+    "assunto": "Equipamentos de Proteção Individual",
+    "dificuldade": "facil",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "O EPI elimina a necessidade de qualquer outra medida",
+        "correta": false
+      },
+      {
+        "texto": "O EPI deve ser adequado ao risco e usado corretamente",
+        "correta": true
+      },
+      {
+        "texto": "Qualquer modelo de EPI serve para qualquer exposição",
+        "correta": false
+      },
+      {
+        "texto": "Treinamento é desnecessário quando o EPI é novo",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-008",
+    "enunciado": "Qual intervenção contribui para prevenção de distúrbios osteomusculares relacionados ao trabalho?",
+    "explicacao": "Adequação ergonômica, variação de tarefas, pausas e redução de sobrecarga são componentes importantes da prevenção.",
+    "assunto": "Ergonomia",
+    "dificuldade": "facil",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Aumentar movimentos repetitivos para condicionamento",
+        "correta": false
+      },
+      {
+        "texto": "Adequar posto de trabalho e reduzir sobrecarga repetitiva",
+        "correta": true
+      },
+      {
+        "texto": "Evitar pausas durante toda a jornada",
+        "correta": false
+      },
+      {
+        "texto": "Usar analgésico preventivamente como única medida",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-009",
+    "enunciado": "Após um acidente de trabalho, por que a investigação das causas deve ir além da identificação de erro individual?",
+    "explicacao": "Acidentes costumam envolver fatores organizacionais, ambientais, técnicos e humanos; analisar o sistema favorece prevenção mais efetiva.",
+    "assunto": "Investigação de Acidentes",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Porque fatores do sistema e do ambiente também contribuem para o evento",
+        "correta": true
+      },
+      {
+        "texto": "Porque o trabalhador nunca participa da análise",
+        "correta": false
+      },
+      {
+        "texto": "Porque toda investigação deve procurar um culpado",
+        "correta": false
+      },
+      {
+        "texto": "Porque equipamentos não influenciam acidentes",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-010",
+    "enunciado": "Qual ação é indicada em programa de promoção da saúde de trabalhadores com fatores de risco cardiovascular?",
+    "explicacao": "Educação em saúde, rastreamento conforme indicação, incentivo à atividade física, alimentação saudável e controle de fatores de risco são medidas úteis.",
+    "assunto": "Promoção da Saúde",
+    "dificuldade": "facil",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Focar apenas em trabalhadores já infartados",
+        "correta": false
+      },
+      {
+        "texto": "Promover controle de fatores de risco e hábitos saudáveis",
+        "correta": true
+      },
+      {
+        "texto": "Excluir trabalhadores assintomáticos das ações",
+        "correta": false
+      },
+      {
+        "texto": "Realizar apenas campanhas anuais sem acompanhamento",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-011",
+    "enunciado": "Em caso de síncope no ambiente de trabalho, qual é a prioridade inicial da equipe de enfermagem?",
+    "explicacao": "A prioridade é avaliar responsividade, via aérea, respiração e circulação, garantindo segurança e suporte básico conforme necessidade.",
+    "assunto": "Atendimento Pré-Hospitalar",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Avaliar responsividade e ABC",
+        "correta": true
+      },
+      {
+        "texto": "Oferecer alimento imediatamente sem avaliação",
+        "correta": false
+      },
+      {
+        "texto": "Colocar o trabalhador em pé para testar equilíbrio",
+        "correta": false
+      },
+      {
+        "texto": "Aguardar recuperação espontânea sem verificar sinais",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-012",
+    "enunciado": "Qual situação sugere necessidade de encaminhamento urgente após trauma ocupacional?",
+    "explicacao": "Alteração do nível de consciência, dificuldade respiratória, sangramento importante ou sinais de instabilidade exigem atendimento urgente.",
+    "assunto": "Trauma",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Escoriação superficial isolada",
+        "correta": false
+      },
+      {
+        "texto": "Alteração do nível de consciência após trauma",
+        "correta": true
+      },
+      {
+        "texto": "Pequeno hematoma sem dor",
+        "correta": false
+      },
+      {
+        "texto": "Desconforto muscular leve após esforço",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-013",
+    "enunciado": "No planejamento de vacinação ocupacional, qual princípio deve ser considerado?",
+    "explicacao": "O risco biológico associado à função e o histórico vacinal orientam a necessidade de imunização e atualização de doses.",
+    "assunto": "Imunização Ocupacional",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Vacinar todos com o mesmo esquema sem avaliar histórico",
+        "correta": false
+      },
+      {
+        "texto": "Considerar risco ocupacional e situação vacinal do trabalhador",
+        "correta": true
+      },
+      {
+        "texto": "Evitar registro das doses aplicadas",
+        "correta": false
+      },
+      {
+        "texto": "Aplicar reforços em intervalos aleatórios",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-014",
+    "enunciado": "Qual medida favorece a prevenção de estresse relacionado ao trabalho?",
+    "explicacao": "Ações sobre carga, autonomia, suporte, comunicação e organização do trabalho podem reduzir fatores psicossociais de risco.",
+    "assunto": "Saúde Mental do Trabalhador",
+    "dificuldade": "medio",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Aumentar metas sem avaliar recursos disponíveis",
+        "correta": false
+      },
+      {
+        "texto": "Melhorar organização, suporte e comunicação no trabalho",
+        "correta": true
+      },
+      {
+        "texto": "Evitar qualquer discussão sobre fatores psicossociais",
+        "correta": false
+      },
+      {
+        "texto": "Responsabilizar exclusivamente o indivíduo pelo estresse",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "cebraspe-petrobras-2024-015",
+    "enunciado": "Quando um trabalhador apresenta dispneia súbita durante atividade em área com risco de gás, qual conduta inicial é mais segura?",
+    "explicacao": "A retirada da zona de risco deve ocorrer com segurança, evitando nova exposição da equipe, seguida de avaliação e suporte das funções vitais.",
+    "assunto": "Emergências Ocupacionais",
+    "dificuldade": "dificil",
+    "banca": "CEBRASPE",
+    "ano": 2024,
+    "cargo": "Ênfase Enfermagem do Trabalho",
+    "orgao": "Petrobras",
+    "fonteUrl": "https://www.cebraspe.org.br/concursos/petrobras_23_ntj",
+    "alternativas": [
+      {
+        "texto": "Entrar na área sem proteção para retirar rapidamente o trabalhador",
+        "correta": false
+      },
+      {
+        "texto": "Garantir segurança da cena e remover da exposição com proteção adequada",
+        "correta": true
+      },
+      {
+        "texto": "Manter o trabalhador na área para avaliar sintomas",
+        "correta": false
+      },
+      {
+        "texto": "Oferecer água antes de retirar da exposição",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-006",
+    "enunciado": "Na classificação de risco, qual paciente deve receber prioridade de avaliação?",
+    "explicacao": "Comprometimento de via aérea, respiração ou circulação representa risco imediato e demanda prioridade.",
+    "assunto": "Urgência e Emergência",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Paciente com dispneia intensa e cianose",
+        "correta": true
+      },
+      {
+        "texto": "Paciente com receita para renovação",
+        "correta": false
+      },
+      {
+        "texto": "Paciente com dor leve há meses",
+        "correta": false
+      },
+      {
+        "texto": "Paciente assintomático para resultado de exame",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-007",
+    "enunciado": "Em paciente com suspeita de sepse, qual aspecto é essencial na avaliação inicial de enfermagem?",
+    "explicacao": "A identificação precoce de sinais de disfunção orgânica, instabilidade hemodinâmica e alteração do estado mental é fundamental.",
+    "assunto": "Sepse",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Avaliar sinais vitais e perfusão de forma rápida",
+        "correta": true
+      },
+      {
+        "texto": "Esperar surgimento de febre alta obrigatoriamente",
+        "correta": false
+      },
+      {
+        "texto": "Avaliar apenas a dor",
+        "correta": false
+      },
+      {
+        "texto": "Adiar a reavaliação por várias horas",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-008",
+    "enunciado": "Qual cuidado reduz risco de queda em paciente hospitalizado com mobilidade comprometida?",
+    "explicacao": "Avaliar risco, manter ambiente seguro, orientar paciente e família e disponibilizar auxílio para mobilização reduz eventos de queda.",
+    "assunto": "Segurança do Paciente",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Deixar objetos de uso frequente fora do alcance",
+        "correta": false
+      },
+      {
+        "texto": "Avaliar risco e facilitar solicitação de ajuda para mobilização",
+        "correta": true
+      },
+      {
+        "texto": "Manter iluminação baixa durante todo o dia",
+        "correta": false
+      },
+      {
+        "texto": "Retirar dispositivos de apoio sem avaliação",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-009",
+    "enunciado": "Durante transfusão de hemocomponente, o paciente apresenta calafrios e dispneia. Qual conduta inicial é adequada?",
+    "explicacao": "A transfusão deve ser interrompida diante de suspeita de reação transfusional e o paciente deve ser avaliado imediatamente conforme protocolo.",
+    "assunto": "Hemoterapia",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Aumentar a velocidade para terminar a bolsa",
+        "correta": false
+      },
+      {
+        "texto": "Interromper a transfusão e avaliar o paciente",
+        "correta": true
+      },
+      {
+        "texto": "Ignorar os sintomas se não houver febre",
+        "correta": false
+      },
+      {
+        "texto": "Administrar nova bolsa do mesmo hemocomponente",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-010",
+    "enunciado": "Em paciente com risco de broncoaspiração, qual cuidado é apropriado durante alimentação?",
+    "explicacao": "Posicionamento adequado, avaliação da deglutição e observação de sinais de aspiração reduzem o risco.",
+    "assunto": "Cuidados de Enfermagem",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Manter o paciente totalmente deitado",
+        "correta": false
+      },
+      {
+        "texto": "Manter cabeceira elevada e observar a deglutição",
+        "correta": true
+      },
+      {
+        "texto": "Oferecer grandes volumes rapidamente",
+        "correta": false
+      },
+      {
+        "texto": "Evitar avaliação da capacidade de deglutir",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-011",
+    "enunciado": "Qual achado sugere infiltração em acesso venoso periférico?",
+    "explicacao": "Edema, desconforto, pele fria e redução do fluxo no local podem indicar infiltração.",
+    "assunto": "Terapia Intravenosa",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Edema e resfriamento ao redor do acesso",
+        "correta": true
+      },
+      {
+        "texto": "Fluxo livre sem desconforto",
+        "correta": false
+      },
+      {
+        "texto": "Curativo íntegro e local assintomático",
+        "correta": false
+      },
+      {
+        "texto": "Ausência de edema e dor",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-012",
+    "enunciado": "Na assistência ao paciente com insuficiência cardíaca, qual dado é útil para acompanhar retenção hídrica?",
+    "explicacao": "O peso diário, obtido em condições semelhantes, é um indicador sensível de variação de volume corporal.",
+    "assunto": "Cardiologia",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Peso corporal diário",
+        "correta": true
+      },
+      {
+        "texto": "Cor dos cabelos",
+        "correta": false
+      },
+      {
+        "texto": "Altura medida a cada plantão",
+        "correta": false
+      },
+      {
+        "texto": "Acuidade visual semanal",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-013",
+    "enunciado": "Em paciente com crise convulsiva, qual conduta de enfermagem é adequada durante o evento?",
+    "explicacao": "Deve-se proteger a pessoa contra traumas, manter via aérea e observar duração da crise, sem introduzir objetos na boca.",
+    "assunto": "Neurologia",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Conter os membros com força",
+        "correta": false
+      },
+      {
+        "texto": "Introduzir objeto entre os dentes",
+        "correta": false
+      },
+      {
+        "texto": "Proteger contra trauma e observar a duração da crise",
+        "correta": true
+      },
+      {
+        "texto": "Oferecer líquido durante os movimentos convulsivos",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-014",
+    "enunciado": "Qual medida é importante para prevenção de pneumonia associada à ventilação mecânica?",
+    "explicacao": "Cuidados de higiene, elevação da cabeceira quando indicada, manejo adequado da via aérea e avaliação diária fazem parte das medidas preventivas.",
+    "assunto": "Controle de Infecção",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Manter cabeceira baixa em todos os pacientes",
+        "correta": false
+      },
+      {
+        "texto": "Aplicar medidas de prevenção em conjunto e avaliar diariamente",
+        "correta": true
+      },
+      {
+        "texto": "Desconectar o circuito rotineiramente sem indicação",
+        "correta": false
+      },
+      {
+        "texto": "Evitar higiene oral",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-015",
+    "enunciado": "Ao avaliar dor, qual princípio deve orientar o registro de enfermagem?",
+    "explicacao": "A dor deve ser avaliada de forma sistemática, incluindo intensidade, localização, características, fatores associados e resposta às intervenções.",
+    "assunto": "Avaliação da Dor",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Registrar apenas se o paciente solicitar analgésico",
+        "correta": false
+      },
+      {
+        "texto": "Caracterizar a dor e reavaliar após intervenções",
+        "correta": true
+      },
+      {
+        "texto": "Usar somente a impressão do profissional",
+        "correta": false
+      },
+      {
+        "texto": "Evitar escalas de avaliação",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-016",
+    "enunciado": "Em paciente com hipoxemia, qual parâmetro deve ser interpretado junto com a oximetria de pulso?",
+    "explicacao": "A oximetria deve ser correlacionada com quadro clínico, perfusão, frequência respiratória e possíveis limitações da medida.",
+    "assunto": "Avaliação Respiratória",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Somente a temperatura ambiente",
+        "correta": false
+      },
+      {
+        "texto": "Quadro clínico e sinais de esforço respiratório",
+        "correta": true
+      },
+      {
+        "texto": "Apenas o peso corporal",
+        "correta": false
+      },
+      {
+        "texto": "Somente a idade",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-017",
+    "enunciado": "Qual prática é adequada na prevenção de infecção urinária associada a cateter vesical?",
+    "explicacao": "Evitar cateterização desnecessária e remover o dispositivo assim que não houver indicação reduz risco de infecção.",
+    "assunto": "Infecção Urinária",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Manter cateter por conveniência da equipe",
+        "correta": false
+      },
+      {
+        "texto": "Reavaliar diariamente a indicação e remover precocemente",
+        "correta": true
+      },
+      {
+        "texto": "Abrir o sistema regularmente para coleta",
+        "correta": false
+      },
+      {
+        "texto": "Desconectar a bolsa para esvaziamento",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-018",
+    "enunciado": "Na prevenção de eventos adversos, qual medida melhora a comunicação entre profissionais durante transferência de cuidado?",
+    "explicacao": "Uma passagem de plantão estruturada reduz omissões e melhora continuidade e segurança.",
+    "assunto": "Comunicação em Saúde",
+    "dificuldade": "facil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Usar comunicação estruturada com informações essenciais",
+        "correta": true
+      },
+      {
+        "texto": "Evitar confirmar informações importantes",
+        "correta": false
+      },
+      {
+        "texto": "Transmitir apenas diagnósticos sem plano de cuidado",
+        "correta": false
+      },
+      {
+        "texto": "Substituir registros por mensagens informais",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-019",
+    "enunciado": "Em paciente com risco de delirium, qual intervenção não farmacológica pode ajudar na prevenção?",
+    "explicacao": "Orientação frequente, manutenção do ciclo sono-vigília, mobilização e uso de óculos ou aparelhos auditivos quando necessários ajudam a reduzir risco.",
+    "assunto": "Saúde do Idoso",
+    "dificuldade": "medio",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Privação de sono para manter vigilância",
+        "correta": false
+      },
+      {
+        "texto": "Orientação, mobilização e preservação do sono",
+        "correta": true
+      },
+      {
+        "texto": "Restrição física rotineira",
+        "correta": false
+      },
+      {
+        "texto": "Manter o ambiente sem referências de tempo",
+        "correta": false
+      }
+    ]
+  },
+  {
+    "origemId": "fgv-macae-2026-020",
+    "enunciado": "Ao cuidar de paciente com risco de suicídio, qual postura inicial é apropriada?",
+    "explicacao": "Acolhimento sem julgamento, avaliação direta do risco, garantia de segurança e acionamento da rede assistencial são condutas fundamentais.",
+    "assunto": "Saúde Mental",
+    "dificuldade": "dificil",
+    "banca": "FGV",
+    "ano": 2026,
+    "cargo": "Enfermeiro",
+    "orgao": "Prefeitura de Macaé",
+    "fonteUrl": "https://conhecimento.fgv.br/concursos/prefeiturademacae26",
+    "alternativas": [
+      {
+        "texto": "Evitar perguntar sobre ideação suicida",
+        "correta": false
+      },
+      {
+        "texto": "Acolher, avaliar risco diretamente e garantir segurança",
+        "correta": true
+      },
+      {
+        "texto": "Deixar o paciente sozinho para preservar privacidade",
+        "correta": false
+      },
+      {
+        "texto": "Minimizar falas sobre morte para reduzir ansiedade",
+        "correta": false
+      }
+    ]
   }
 ];
 
