@@ -45,6 +45,8 @@ import { sincronizarQuestoesCalculoMedicamentos } from "./questoesCalculoMedicam
 import { sincronizarQuestoesLaboratorioEcg } from "./questoesLaboratorioEcg";
 import { sincronizarQuestoesConcursosPublicos } from "./questoesConcursosPublicos";
 import { sincronizarQuestoesResidenciasFederais } from "./questoesResidenciasFederais";
+import { sincronizarQuestoesEnareEbserh500 } from "./questoesEnareEbserh500";
+import { sincronizarQuestoesSusLegislacao200 } from "./questoesSusLegislacao200";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -5313,6 +5315,10 @@ server.listen(
         await sincronizarQuestoesConcursosPublicos();
 
         await sincronizarQuestoesResidenciasFederais();
+
+        await sincronizarQuestoesEnareEbserh500();
+
+        await sincronizarQuestoesSusLegislacao200();
 
         await limparFlashcardsParaMetodologia();
 
