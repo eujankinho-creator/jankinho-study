@@ -1328,18 +1328,41 @@
     }
 
     ctx.save();
-    ctx.setLineDash([5, 5]);
-    ctx.strokeStyle = "rgba(246,199,100,.62)";
+
+    const thresholdY = yFor(-55);
+    ctx.fillStyle = "rgba(246,199,100,.045)";
+    ctx.fillRect(padL, thresholdY - 4, w - padL - padR, 8);
+
+    ctx.setLineDash([6, 4]);
+    ctx.strokeStyle = "rgba(246,199,100,.82)";
+    ctx.lineWidth = 1.35;
+    ctx.shadowColor = "rgba(246,199,100,.18)";
+    ctx.shadowBlur = 5;
     ctx.beginPath();
-    ctx.moveTo(padL, yFor(-55));
-    ctx.lineTo(w - padR, yFor(-55));
+    ctx.moveTo(padL, thresholdY);
+    ctx.lineTo(w - padR, thresholdY);
     ctx.stroke();
 
-    ctx.strokeStyle = "rgba(104,120,140,.48)";
+    ctx.shadowBlur = 0;
+    ctx.setLineDash([]);
+    ctx.font = "800 8px system-ui, sans-serif";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "bottom";
+    ctx.fillStyle = "rgba(246,211,132,.92)";
+    ctx.fillText("LIMIAR  −55 mV", w - padR - 4, thresholdY - 5);
+
+    ctx.setLineDash([4, 5]);
+    ctx.strokeStyle = "rgba(104,120,140,.50)";
+    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(padL, yFor(-70));
     ctx.lineTo(w - padR, yFor(-70));
     ctx.stroke();
+
+    ctx.setLineDash([]);
+    ctx.font = "700 7px system-ui, sans-serif";
+    ctx.fillStyle = "rgba(112,128,148,.72)";
+    ctx.fillText("REPOUSO  −70 mV", w - padR - 4, yFor(-70) - 4);
     ctx.restore();
 
     if (state.history.length > 1) {
