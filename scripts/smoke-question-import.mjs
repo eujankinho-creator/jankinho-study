@@ -1,6 +1,5 @@
-import pg from "pg";
-
-const { Pool } = pg;
+import { PrismaClient } from "../src/generated/client/index.js";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 const databaseUrl = process.env.DATABASE_URL;
 const importSecret = process.env.QUESTION_IMPORT_SECRET;
@@ -23,22 +22,19 @@ if (!baseUrl) {
   process.exit(1);
 }
 
-const pool = new Pool({
-  connectionString: databaseUrl,
-  ssl: databaseUrl.includes("railway.internal")
-    ? undefined
-    : { rejectUnauthorized: false },
-});
+const adapter = new PrismaPg({ connectionString: databaseUrl });
+const prisma = new PrismaClient({ adapter });
 
 const runId = `20261002-${Date.now()}`;
 const fonte = `romulo-passos-smoke-test-${runId}`;
+const disciplina = `Teste Importacao ${runId}`;
 const origemIds = Array.from({ length: 5 }, (_, index) => `smoke-${runId}-${index + 1}`);
 
 async function postBatch(usuarioId) {
   const questoes = origemIds.map((origemId, index) => ({
     fonte,
     origemId,
-    disciplina: "Teste Importacao",
+    disciplina,
     assunto: "Smoke test",
     dificuldade: "teste",
     enunciado: `Questão sintética de teste ${index + 1} do importador.`,
@@ -77,34 +73,49 @@ async function postBatch(usuarioId) {
 let first = null;
 let second = null;
 let remaining = null;
+let usuarioId = null;
 
 try {
-  const userResult = await pool.query('SELECT id FROM "Usuario" ORDER BY id ASC LIMIT 1');
+  const user = await prisma.usuario.findFirst({
+    orderBy: { id: "asc" },
+    select: { id: true },
+  });
 
-  if (userResult.rowCount === 0) {
+  if (!user) {
     throw new Error("no existing user available for smoke test");
   }
 
-  const usuarioId = userResult.rows[0].id;
-
+  usuarioId = user.id;
   first = await postBatch(usuarioId);
   second = await postBatch(usuarioId);
 } finally {
-  try {
-    await pool.query(
-      'DELETE FROM "Questao" WHERE "fonte" = $1 AND "origemId" = ANY($2::text[])',
-      [fonte, origemIds],
-    );
+  if (usuarioId) {
+    await prisma.questao.deleteMany({
+      where: {
+        usuarioId,
+        fonte,
+        origemId: { in: origemIds },
+      },
+    });
 
-    const check = await pool.query(
-      'SELECT COUNT(*)::int AS count FROM "Questao" WHERE "fonte" = $1 AND "origemId" = ANY($2::text[])',
-      [fonte, origemIds],
-    );
+    await prisma.disciplina.deleteMany({
+      where: {
+        usuarioId,
+        nome: disciplina,
+        questoes: { none: {} },
+      },
+    });
 
-    remaining = check.rows[0]?.count ?? null;
-  } finally {
-    await pool.end();
+    remaining = await prisma.questao.count({
+      where: {
+        usuarioId,
+        fonte,
+        origemId: { in: origemIds },
+      },
+    });
   }
+
+  await prisma.$disconnect();
 }
 
 console.log("[smoke-import] deployment_health=running");
