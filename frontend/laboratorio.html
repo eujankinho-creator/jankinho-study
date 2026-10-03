@@ -1,642 +1,170 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório | Cortex</title>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Laborat&oacute;rio | Cortex</title>
-
-  <link
-    rel="stylesheet"
-    href="/css/laboratorio.css"
-  >
-
+  <link rel="stylesheet" href="/css/laboratorio-hub.css?v=20261003-membrana1">
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20260930-global4">
   <script src="/js/ui-enhancements.js?v=20260930-global4"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20260930-bluefix4">
   <script src="/js/theme-manager.js"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20260930-bluefix4">
   <link rel="stylesheet" href="/css/pratica-premium.css">
-  <link
-    rel="stylesheet"
-    href="/css/sidebar-standard.css?v=20260930-global4"
-  >
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20260930-global4">
   <link rel="stylesheet" href="/css/theme-final.css?v=20260930-blue-global3">
+  <script src="/js/sidebar-standard.js?v=20261003-lab1" defer></script>
 
-  <script
-    src="/js/sidebar-standard.js?v=20260930-global4"
-    defer
-  ></script>
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="/favicon.svg?v=cortex-blue-v2"
-  >
-
-  <meta
-    name="theme-color"
-    content="#090909"
-  >
-
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-blue-v2">
+  <meta name="theme-color" content="#090909">
 </head>
 
-<body class="practice-view lab-view">
-
-
+<body class="practice-view lab-hub-view">
   <aside class="sidebar">
-
     <a href="/" class="sidebar-logo">
-
-      <div class="logo-box">
-        C
-      </div>
-
-      <div>
-        <strong>Cortex</strong><span>Study Platform</span>
-      </div>
-
+      <div class="logo-box">C</div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
     </a>
 
-
-    <div class="sidebar-menu">
-
-
-      <div class="menu-group">
-
-        <div class="menu-title">
-          Estudo
-        </div>
-
-        <a href="/" class="menu-item">
-          <span>&#8962;</span>
-          Dashboard
-        </a>
-
-        <a href="/questoes" class="menu-item">
-          <span>&#9635;</span>
-          Quest&otilde;es
-        </a>
-
-        <a href="/flashcards" class="menu-item">
-          <span>&#9648;</span>
-          Flashcards
-        </a>
-        <a href="/farmacos" class="menu-item">
-          <span class="menu-icon menu-icon-text">Rx</span>
-          Farmacologia
-        </a>
-
-        <a href="/casos" class="menu-item">
-          <span>&#9877;</span>
-          Casos Cl&iacute;nicos
-        </a>
-
-        <a href="/laboratorio" class="menu-item active">
-          <span>&#9879;</span>
-          Laborat&oacute;rio
-        </a>
-
-        <a href="/evolucao" class="menu-item">
-          <span>&#9998;</span>
-          Evolu&ccedil;&atilde;o
-        </a>
-
-      </div>
-
-
-      <div class="menu-group">
-
-        <div class="menu-title">
-          An&aacute;lise
-        </div>
-
-        <a href="/desempenho" class="menu-item">
-          <span>&#9682;</span>
-          Desempenho
-        </a>
-
-        <a href="/ranking" class="menu-item">
-          <span>&#9819;</span>
-          Ranking
-        </a>
-
-      </div>
-
-
-      <div class="menu-group">
-
-        <div class="menu-title">
-          Pessoal
-        </div>
-
-        <a href="/financas" class="menu-item">
-          <span>R$</span>
-          Finan&ccedil;as
-        </a>
-        <a href="/musica" class="menu-item">
-          <span>&#9835;</span>
-          M&uacute;sica
-        </a>
-
-        <a href="/configuracoes" class="menu-item">
-          <span>&#9881;</span>
-          Configura&ccedil;&otilde;es
-        </a>
-
-      </div>
-
-
-    </div>
-
+    <div class="sidebar-menu"></div>
 
     <div class="sidebar-user">
-
-      <div
-        id="avatarSidebar"
-        class="avatar"
-      >
-        U
-      </div>
-
+      <div id="avatarSidebar" class="avatar">U</div>
       <div class="user-info">
-
-        <strong id="nomeSidebar">
-          Carregando...
-        </strong>
-
+        <strong id="nomeSidebar">Carregando...</strong>
         <span id="emailSidebar"></span>
-
       </div>
-
-      <button
-        id="logoutSidebar"
-        class="logout-button"
-        type="button"
-      >
-        &#8618;
-      </button>
-
+      <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
     </div>
-
   </aside>
 
-
   <div class="main-area">
-
-
     <header class="header">
-
-      <div class="header-title">
-        Laborat&oacute;rio
+      <div>
+        <div class="header-title">Laboratório</div>
+        <span class="lab-header-subtitle">Experimentos interativos do Cortex</span>
       </div>
 
       <div class="header-user">
-
         <div>
-
-          <strong id="nomeHeader">
-            Carregando...
-          </strong>
-
-          <span>
-            Cortex
-          </span>
-
+          <strong id="nomeHeader">Carregando...</strong>
+          <span>Cortex</span>
         </div>
-
-        <div
-          id="avatarHeader"
-          class="avatar header-avatar"
-        >
-          U
-        </div>
-
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
       </div>
-
     </header>
 
+    <main class="lab-hub-page">
+      <section class="lab-hub-hero">
+        <div class="hub-orbit hub-orbit-one"></div>
+        <div class="hub-orbit hub-orbit-two"></div>
 
-    <main class="lab-page">
-
-
-      <section class="lab-heading">
-
-        <div>
-
-          <div class="simulation-status">
-
-            <span
-              id="statusDot"
-              class="status-dot breathing"
-            ></span>
-
-            <span>
-              Simula&ccedil;&atilde;o fisiol&oacute;gica
-            </span>
-
+        <div class="hub-hero-copy">
+          <div class="hub-kicker">
+            <span></span>
+            CORTEX LAB
           </div>
-
-          <h1>
-            Laborat&oacute;rio
-          </h1>
-
+          <h1>Aprenda fisiologia <em>mexendo no sistema.</em></h1>
           <p>
-            Ambiente interativo de fisiologia cardiovascular,
-            respirat&oacute;ria e &aacute;cido-base.
+            Escolha um laboratório. Cada ambiente foi pensado para transformar o conteúdo
+            em uma experiência visual, manipulável e didática.
           </p>
-
         </div>
 
-
-        <div class="lab-actions">
-
-          <div
-            id="apneaBadge"
-            class="apnea-badge hidden"
-          >
-            Apneia &middot;
-            <strong id="apneaSeconds">0</strong>s
+        <div class="hub-status">
+          <span class="hub-status-dot"></span>
+          <div>
+            <small>AMBIENTES DISPONÍVEIS</small>
+            <strong>2 laboratórios ativos</strong>
           </div>
-
-          <button
-            id="respirationButton"
-            class="lab-button"
-            type="button"
-          >
-            Pausar respira&ccedil;&atilde;o
-          </button>
-
-          <button
-            id="resetButton"
-            class="lab-button secondary"
-            type="button"
-          >
-            Resetar
-          </button>
-
         </div>
-
       </section>
 
+      <section class="lab-choice-grid" aria-label="Laboratórios disponíveis">
+        <a class="lab-choice-card ecg-card" href="/laboratorio-ecg.html">
+          <div class="choice-glow"></div>
 
+          <div class="choice-top">
+            <span class="choice-index">01</span>
+            <span class="choice-status">DISPONÍVEL</span>
+          </div>
 
-      <nav class="lab-mode-nav" aria-label="Modos do laboratório">
+          <div class="ecg-preview" aria-hidden="true">
+            <div class="ecg-heart">
+              <span></span>
+              <i></i>
+            </div>
+            <svg viewBox="0 0 520 130" preserveAspectRatio="none">
+              <path class="ecg-grid-line" d="M0 26H520M0 52H520M0 78H520M0 104H520"></path>
+              <path class="ecg-line" d="M0 68 L50 68 L65 62 L76 68 L116 68 L128 72 L137 18 L149 105 L160 68 L204 68 L220 54 L238 68 L290 68 L308 62 L320 68 L355 68 L365 72 L375 18 L387 105 L399 68 L443 68 L458 54 L477 68 L520 68"></path>
+            </svg>
+          </div>
 
-        <a class="lab-mode-link active" href="/laboratorio.html" aria-current="page">
+          <div class="choice-copy">
+            <div class="choice-icon">ECG</div>
+            <div>
+              <span class="choice-eyebrow">ELETROFISIOLOGIA CARDÍACA</span>
+              <h2>ECG 3D</h2>
+              <p>Explore coração, vetores, derivações e padrões eletrocardiográficos sincronizados.</p>
+            </div>
+          </div>
 
-          <span class="mode-icon">&#9825;</span>
-
-          <span>
-            <strong>Corpo integrado</strong>
-            <small>Fisiologia, gasometria e hemodinâmica</small>
-          </span>
-
+          <div class="choice-footer">
+            <span>Coração 3D · derivações · traçado</span>
+            <strong>Entrar <b>→</b></strong>
+          </div>
         </a>
 
-        <a class="lab-mode-link" href="/laboratorio-ecg.html">
+        <a class="lab-choice-card membrane-card" href="/laboratorio-celula.html">
+          <div class="choice-glow"></div>
 
-          <span class="mode-icon">ECG</span>
+          <div class="choice-top">
+            <span class="choice-index">02</span>
+            <span class="choice-status new">NOVO</span>
+          </div>
 
-          <span>
-            <strong>ECG 3D</strong>
-            <small>Coração, eixos e derivações sincronizadas</small>
-          </span>
+          <div class="membrane-preview" aria-hidden="true">
+            <div class="cell-preview">
+              <span class="cell-core"></span>
+              <span class="membrane-ring"></span>
+              <i class="ion na na-1">Na⁺</i>
+              <i class="ion na na-2">Na⁺</i>
+              <i class="ion na na-3">Na⁺</i>
+              <i class="ion k k-1">K⁺</i>
+              <i class="ion k k-2">K⁺</i>
+              <i class="channel channel-na"></i>
+              <i class="channel channel-k"></i>
+            </div>
+          </div>
 
+          <div class="choice-copy">
+            <div class="choice-icon membrane-icon">Vm</div>
+            <div>
+              <span class="choice-eyebrow">MEMBRANA EXCITÁVEL</span>
+              <h2>Membrana Viva</h2>
+              <p>Manipule Na⁺ e K⁺, atravesse canais, desligue a bomba e acompanhe o potencial em tempo real.</p>
+            </div>
+          </div>
+
+          <div class="choice-footer">
+            <span>Íons · canais · bomba Na⁺/K⁺ · Vm</span>
+            <strong>Entrar <b>→</b></strong>
+          </div>
         </a>
-
-      </nav>
-
-      <section
-        id="topMetrics"
-        class="top-metrics"
-      ></section>
-
-
-      <section class="laboratory-grid">
-
-
-        <aside>
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Controles
-              </h2>
-
-              <p>
-                Vari&aacute;veis fisiol&oacute;gicas
-              </p>
-
-            </div>
-
-
-            <div
-              id="tabs"
-              class="control-tabs"
-            ></div>
-
-
-            <div
-              id="controls"
-              class="control-sliders"
-            ></div>
-
-          </div>
-
-        </aside>
-
-
-        <section class="lab-center">
-
-
-          <div class="monitor-grid">
-
-
-            <div class="lab-panel monitor-panel">
-
-              <div class="monitor-header">
-
-                <div>
-
-                  <strong>
-                    ECG
-                  </strong>
-
-                  <span>
-                    Monitoriza&ccedil;&atilde;o el&eacute;trica
-                  </span>
-
-                </div>
-
-                <div class="monitor-number green">
-
-                  <strong id="ecgFC">
-                    72
-                  </strong>
-
-                  <small>
-                    bpm
-                  </small>
-
-                </div>
-
-              </div>
-
-
-              <div class="monitor-screen ecg-screen">
-
-                <canvas id="ecgCanvas"></canvas>
-
-                <span class="monitor-label">
-                  ECG II
-                </span>
-
-              </div>
-
-
-              <div
-                id="ecgResults"
-                class="ecg-results"
-              ></div>
-
-            </div>
-
-
-            <div class="lab-panel monitor-panel">
-
-              <div class="monitor-header">
-
-                <div>
-
-                  <strong>
-                    SpO&#8322;
-                  </strong>
-
-                  <span>
-                    Oximetria / pletismografia
-                  </span>
-
-                </div>
-
-                <div class="monitor-number blue">
-
-                  <strong id="spo2Number">
-                    98
-                  </strong>
-
-                  <small>
-                    %
-                  </small>
-
-                </div>
-
-              </div>
-
-
-              <div class="monitor-screen spo-screen">
-
-                <canvas id="spoCanvas"></canvas>
-
-                <span class="monitor-label blue-label">
-                  PLETH
-                </span>
-
-                <div class="pulse-label">
-
-                  <span>
-                    PR
-                  </span>
-
-                  <strong id="pulseFC">
-                    72 bpm
-                  </strong>
-
-                </div>
-
-              </div>
-
-
-              <div
-                id="spoResults"
-                class="monitor-results"
-              ></div>
-
-            </div>
-
-
-          </div>
-
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Gasometria arterial
-              </h2>
-
-              <p>
-                An&aacute;lise &aacute;cido-base e oxigena&ccedil;&atilde;o
-              </p>
-
-            </div>
-
-
-            <div
-              id="gasometry"
-              class="gasometry-grid"
-            ></div>
-
-
-            <div
-              id="gasometryFooter"
-              class="gasometry-footer"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Mec&acirc;nica respirat&oacute;ria
-              </h2>
-
-              <p>
-                Dados derivados da ventila&ccedil;&atilde;o
-              </p>
-
-            </div>
-
-
-            <div
-              id="respiratoryMechanics"
-              class="mechanics-grid"
-            ></div>
-
-          </div>
-
-
-        </section>
-
-
-        <aside class="lab-right">
-
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Interpreta&ccedil;&atilde;o
-              </h2>
-
-              <p>
-                Leitura dos resultados
-              </p>
-
-            </div>
-
-            <div
-              id="interpretation"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Hemodin&acirc;mica
-              </h2>
-
-              <p>
-                Vari&aacute;veis cardiovasculares
-              </p>
-
-            </div>
-
-            <div
-              id="hemodynamics"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Eletr&oacute;litos
-              </h2>
-
-              <p>
-                Estado atual
-              </p>
-
-            </div>
-
-            <div
-              id="electrolytes"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-          <div class="lab-panel">
-
-            <div class="panel-header">
-
-              <h2>
-                Respira&ccedil;&atilde;o
-              </h2>
-
-              <p>
-                Estado atual
-              </p>
-
-            </div>
-
-            <div
-              id="respirationState"
-              class="panel-content"
-            ></div>
-
-          </div>
-
-
-        </aside>
-
-
       </section>
 
-
+      <section class="hub-tip">
+        <span class="hub-tip-icon">i</span>
+        <div>
+          <strong>Ambientes didáticos, não apenas animações.</strong>
+          <p>Os elementos respondem às suas ações para ajudar a entender causa e efeito fisiológico.</p>
+        </div>
+      </section>
     </main>
-
-
   </div>
 
-
-  <script src="/js/laboratorio.js"></script>
-
-
+  <script src="/js/laboratorio-hub.js?v=20261003-membrana1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
-
 </html>
