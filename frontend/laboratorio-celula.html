@@ -106,7 +106,7 @@
         <article>
           <span>Bomba Na⁺/K⁺</span>
           <strong id="pumpStateMetric">ativa</strong>
-          <small>3 Na⁺ para fora · 2 K⁺ para dentro</small>
+          <small>3 ATPases visíveis · ciclo 3 Na⁺ : 2 K⁺</small>
         </article>
         <article>
           <span>Fase elétrica</span>
@@ -130,6 +130,7 @@
             <span><i class="legend-ion k"></i>K⁺</span>
             <span><i class="legend-channel na"></i>canal de Na⁺</span>
             <span><i class="legend-channel k"></i>canal de K⁺</span>
+            <span>ATPase · 3 Na⁺ : 2 K⁺</span>
           </div>
 
           <div class="cell-stage-wrap">
@@ -188,7 +189,7 @@
                 <span class="control-dot pump"></span>
                 <div>
                   <strong>Bomba Na⁺/K⁺</strong>
-                  <small>mantém os gradientes iônicos</small>
+                  <small>3 Na⁺ entram nos sítios internos · 2 K⁺ nos externos</small>
                 </div>
               </div>
               <button id="pumpToggle" class="toggle-control on" type="button" aria-pressed="true"><span></span></button>
@@ -220,9 +221,9 @@
               <div>
                 <span>ESTÍMULO</span>
                 <strong>Despolarize a membrana</strong>
-                <p>Cada pulso eleva temporariamente o Vm. Ao atingir -55 mV, o potencial de ação dispara.</p>
+                <p>Um pulso de corrente carrega a membrana. Se o Vm cruzar -55 mV, os canais dependentes de voltagem assumem a resposta.</p>
               </div>
-              <button id="stimulusButton" type="button">Aplicar +8 mV</button>
+              <button id="stimulusButton" type="button">Aplicar pulso de corrente</button>
             </div>
           </article>
 
@@ -310,7 +311,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261003-action-focus4"></script>
+  <script src="/js/laboratorio-celula.js?v=20261003-pump-current5"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
