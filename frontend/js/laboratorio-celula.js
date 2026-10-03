@@ -1357,28 +1357,31 @@
 
   function drawIonSphere(ctx, x, y, radius, type, glow, bound) {
     const isNa = type === "Na";
-    const edge = isNa ? "#38bdf8" : "#f59e0b";
-    const mid = isNa ? "#138fc4" : "#c76f08";
-    const dark = isNa ? "#07364c" : "#55300a";
-    const text = isNa ? "#dcf8ff" : "#fff1ce";
+    const accent = isNa ? "#6dcff6" : "#eab45a";
+    const inner = isNa ? "rgba(61,150,194,.88)" : "rgba(183,119,40,.88)";
+    const deep = isNa ? "rgba(9,35,49,.96)" : "rgba(52,31,9,.96)";
+    const text = isNa ? "#dff8ff" : "#fff0cf";
 
     ctx.save();
-    ctx.shadowColor = edge;
-    ctx.shadowBlur = glow ? 16 : bound ? 10 : 5;
+
+    if (glow) {
+      ctx.shadowColor = isNa ? "rgba(109,207,246,.26)" : "rgba(234,180,90,.24)";
+      ctx.shadowBlur = 10;
+    }
 
     const sphere = ctx.createRadialGradient(
-      x - radius * .38,
-      y - radius * .42,
-      Math.max(1, radius * .08),
+      x - radius * .28,
+      y - radius * .34,
+      Math.max(1, radius * .10),
       x,
       y,
-      radius
+      radius * 1.05
     );
-    sphere.addColorStop(0, "rgba(255,255,255,.95)");
-    sphere.addColorStop(.14, isNa ? "#9be7ff" : "#ffd68d");
-    sphere.addColorStop(.46, mid);
-    sphere.addColorStop(.78, dark);
-    sphere.addColorStop(1, "rgba(3,8,14,.98)");
+    sphere.addColorStop(0, "rgba(255,255,255,.52)");
+    sphere.addColorStop(.16, isNa ? "rgba(150,222,247,.66)" : "rgba(248,211,149,.64)");
+    sphere.addColorStop(.44, inner);
+    sphere.addColorStop(.82, deep);
+    sphere.addColorStop(1, "rgba(2,6,10,.98)");
 
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -1386,23 +1389,25 @@
     ctx.fill();
 
     ctx.shadowBlur = 0;
-    ctx.lineWidth = bound ? 1.8 : 1.1;
-    ctx.strokeStyle = edge;
-    ctx.globalAlpha = .78;
+    ctx.strokeStyle = bound ? "rgba(255,255,255,.34)" : accent;
+    ctx.globalAlpha = bound ? .9 : .62;
+    ctx.lineWidth = bound ? 1.35 : .85;
     ctx.stroke();
 
-    ctx.globalAlpha = .66;
+    // Fresnel-like rim instead of a glossy white dot.
+    ctx.globalAlpha = .20;
     ctx.beginPath();
-    ctx.arc(x - radius * .33, y - radius * .36, Math.max(1.5, radius * .16), 0, Math.PI * 2);
-    ctx.fillStyle = "#ffffff";
-    ctx.fill();
+    ctx.arc(x, y, radius - 1.7, -.9, 2.0);
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 1.1;
+    ctx.stroke();
 
     ctx.globalAlpha = 1;
     ctx.fillStyle = text;
-    ctx.font = "900 " + Math.max(7, radius * .62) + "px system-ui, sans-serif";
+    ctx.font = "800 " + Math.max(7, radius * .58) + "px system-ui, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(type + "⁺", x, y + .6);
+    ctx.fillText(type + "⁺", x, y + .4);
     ctx.restore();
   }
 
@@ -1457,75 +1462,83 @@
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, size.cssWidth, size.cssHeight);
 
-    const cellBody = ctx.createRadialGradient(
-      g.cx - g.r * .33,
-      g.cy - g.r * .38,
-      g.r * .04,
+    const bodyGradient = ctx.createRadialGradient(
+      g.cx - g.r * .24,
+      g.cy - g.r * .28,
+      g.r * .08,
       g.cx,
       g.cy,
-      g.r * 1.12
+      g.r
     );
-    cellBody.addColorStop(0, "rgba(85, 135, 235, .42)");
-    cellBody.addColorStop(.28, "rgba(31, 70, 142, .47)");
-    cellBody.addColorStop(.70, "rgba(11, 28, 58, .72)");
-    cellBody.addColorStop(1, "rgba(4, 11, 23, .94)");
+    bodyGradient.addColorStop(0, "rgba(66,88,122,.32)");
+    bodyGradient.addColorStop(.46, "rgba(18,35,60,.58)");
+    bodyGradient.addColorStop(.82, "rgba(7,17,31,.90)");
+    bodyGradient.addColorStop(1, "rgba(4,9,17,.98)");
 
     ctx.save();
-    ctx.shadowColor = "rgba(67,124,255,.22)";
-    ctx.shadowBlur = 34;
+    ctx.shadowColor = "rgba(55,93,145,.16)";
+    ctx.shadowBlur = 28;
     ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r - 9, 0, Math.PI * 2);
-    ctx.fillStyle = cellBody;
+    ctx.arc(g.cx, g.cy, g.r - 11, 0, Math.PI * 2);
+    ctx.fillStyle = bodyGradient;
     ctx.fill();
     ctx.restore();
 
-    // Membrana com espessura e brilho para parecer um volume, não um círculo chapado.
+    // Subtle depth/vignette within the cytoplasm.
+    const depth = ctx.createLinearGradient(
+      g.cx - g.r,
+      g.cy - g.r,
+      g.cx + g.r,
+      g.cy + g.r
+    );
+    depth.addColorStop(0, "rgba(255,255,255,.025)");
+    depth.addColorStop(.50, "rgba(255,255,255,0)");
+    depth.addColorStop(1, "rgba(0,0,0,.20)");
+    ctx.beginPath();
+    ctx.arc(g.cx, g.cy, g.r - 12, 0, Math.PI * 2);
+    ctx.fillStyle = depth;
+    ctx.fill();
+
+    // Bilayer: two rings of polar heads with faint tails between them.
+    const lipidCount = 48;
+    for (let i = 0; i < lipidCount; i += 1) {
+      const a = (Math.PI * 2 * i) / lipidCount;
+      const outer = pointAtRadius(a, g.r + 5, g);
+      const inner = pointAtRadius(a, g.r - 5, g);
+      const tailOuter = pointAtRadius(a, g.r + 1, g);
+      const tailInner = pointAtRadius(a, g.r - 1, g);
+
+      ctx.save();
+      ctx.strokeStyle = "rgba(106,137,185,.11)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(outer.x, outer.y);
+      ctx.lineTo(tailOuter.x, tailOuter.y);
+      ctx.moveTo(inner.x, inner.y);
+      ctx.lineTo(tailInner.x, tailInner.y);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(outer.x, outer.y, 2.35, 0, Math.PI * 2);
+      ctx.arc(inner.x, inner.y, 2.35, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(146,173,217,.42)";
+      ctx.fill();
+      ctx.restore();
+    }
+
     ctx.save();
-    ctx.shadowColor = "rgba(97,150,255,.24)";
-    ctx.shadowBlur = 18;
     ctx.beginPath();
     ctx.arc(g.cx, g.cy, g.r, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(67, 101, 178, .30)";
-    ctx.lineWidth = 20;
+    ctx.strokeStyle = "rgba(123,155,205,.13)";
+    ctx.lineWidth = 15;
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(137, 177, 255, .28)";
-    ctx.lineWidth = 11;
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r - 1.5, -2.7, -.42);
-    ctx.strokeStyle = "rgba(222, 235, 255, .30)";
-    ctx.lineWidth = 3;
+    ctx.arc(g.cx, g.cy, g.r - 1, -2.75, -.42);
+    ctx.strokeStyle = "rgba(218,230,247,.12)";
+    ctx.lineWidth = 2.4;
     ctx.lineCap = "round";
     ctx.stroke();
-    ctx.restore();
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.ellipse(
-      g.cx - g.r * .22,
-      g.cy - g.r * .28,
-      g.r * .42,
-      g.r * .19,
-      -.48,
-      0,
-      Math.PI * 2
-    );
-    const sheen = ctx.createRadialGradient(
-      g.cx - g.r * .30,
-      g.cy - g.r * .34,
-      1,
-      g.cx - g.r * .22,
-      g.cy - g.r * .28,
-      g.r * .42
-    );
-    sheen.addColorStop(0, "rgba(255,255,255,.15)");
-    sheen.addColorStop(1, "rgba(255,255,255,0)");
-    ctx.fillStyle = sheen;
-    ctx.fill();
     ctx.restore();
 
     drawMembranePolarity(ctx, g);
@@ -1534,34 +1547,53 @@
       const x = g.cx + Math.cos(channel.angle) * g.r;
       const y = g.cy + Math.sin(channel.angle) * g.r;
       const open = channelIsOpen(channel.type);
+      const isNa = channel.type === "Na";
+      const accent = isNa ? "#6dcff6" : "#eab45a";
 
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(channel.angle + Math.PI / 2);
-      ctx.fillStyle = open ? "rgba(12, 20, 30, .95)" : "rgba(24, 24, 28, .96)";
-      ctx.strokeStyle = open ? channel.color : "rgba(130, 136, 148, .24)";
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.roundRect(-10, -21, 20, 42, 6);
-      ctx.fill();
-      ctx.stroke();
+
+      const protein = ctx.createLinearGradient(-16, 0, 16, 0);
+      protein.addColorStop(0, "rgba(29,37,49,.98)");
+      protein.addColorStop(.36, open ? (isNa ? "rgba(40,95,120,.96)" : "rgba(104,72,31,.96)") : "rgba(48,50,56,.96)");
+      protein.addColorStop(.64, open ? (isNa ? "rgba(23,66,87,.98)" : "rgba(73,48,18,.98)") : "rgba(42,44,49,.98)");
+      protein.addColorStop(1, "rgba(20,25,34,.98)");
 
       ctx.beginPath();
-      ctx.moveTo(-5, -16);
-      ctx.lineTo(-5, 16);
-      ctx.moveTo(5, -16);
-      ctx.lineTo(5, 16);
-      ctx.strokeStyle = open ? channel.color : "rgba(130, 136, 148, .18)";
-      ctx.globalAlpha = open ? .6 : .3;
+      ctx.moveTo(-14, -22);
+      ctx.bezierCurveTo(-21, -13, -18, -4, -12, 0);
+      ctx.bezierCurveTo(-18, 5, -20, 14, -13, 22);
+      ctx.lineTo(13, 22);
+      ctx.bezierCurveTo(20, 14, 18, 5, 12, 0);
+      ctx.bezierCurveTo(18, -5, 21, -14, 14, -22);
+      ctx.closePath();
+      ctx.fillStyle = protein;
+      ctx.fill();
+      ctx.strokeStyle = open ? accent : "rgba(139,147,159,.18)";
+      ctx.globalAlpha = open ? .58 : .26;
+      ctx.lineWidth = 1.1;
+      ctx.stroke();
+
+      // Pore
+      ctx.globalAlpha = 1;
+      ctx.beginPath();
+      ctx.roundRect(-3.2, -16, 6.4, 32, 3.2);
+      ctx.fillStyle = open
+        ? (isNa ? "rgba(109,207,246,.16)" : "rgba(234,180,90,.15)")
+        : "rgba(6,8,12,.82)";
+      ctx.fill();
+      ctx.strokeStyle = open ? accent : "rgba(92,98,108,.22)";
+      ctx.globalAlpha = open ? .58 : .24;
       ctx.stroke();
       ctx.restore();
 
       ctx.save();
-      ctx.fillStyle = open ? channel.color : "#525b67";
-      ctx.font = "700 8px system-ui, sans-serif";
+      ctx.fillStyle = open ? accent : "#626a75";
+      ctx.font = "800 7px system-ui, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      const labelRadius = g.r + 33;
+      const labelRadius = g.r + 31;
       ctx.fillText(
         channel.type + "⁺",
         g.cx + Math.cos(channel.angle) * labelRadius,
@@ -1578,19 +1610,27 @@
       ctx.save();
       ctx.translate(pumpX, pumpY);
       ctx.rotate(pump.angle + Math.PI / 2);
-      const pumpBody = ctx.createLinearGradient(-22, 0, 22, 0);
-      pumpBody.addColorStop(0, pumpActive ? "rgba(74,45,132,.96)" : "rgba(45,45,52,.86)");
-      pumpBody.addColorStop(.45, pumpActive ? "rgba(177,132,255,.50)" : "rgba(80,80,90,.34)");
-      pumpBody.addColorStop(.58, pumpActive ? "rgba(59,34,112,.96)" : "rgba(43,43,49,.90)");
-      pumpBody.addColorStop(1, pumpActive ? "rgba(129,82,219,.68)" : "rgba(60,60,68,.42)");
-      ctx.shadowColor = pumpActive ? "rgba(167,139,250,.28)" : "transparent";
-      ctx.shadowBlur = pumpActive ? 12 : 0;
-      ctx.fillStyle = pumpBody;
-      ctx.strokeStyle = pumpActive ? "rgba(199,176,255,.72)" : "rgba(130,130,140,.28)";
-      ctx.lineWidth = 1.5;
+      const pumpBody = ctx.createLinearGradient(-24, 0, 24, 0);
+      pumpBody.addColorStop(0, pumpActive ? "rgba(45,42,64,.98)" : "rgba(40,42,47,.92)");
+      pumpBody.addColorStop(.38, pumpActive ? "rgba(94,79,135,.94)" : "rgba(61,63,69,.74)");
+      pumpBody.addColorStop(.62, pumpActive ? "rgba(65,53,98,.98)" : "rgba(46,48,54,.90)");
+      pumpBody.addColorStop(1, pumpActive ? "rgba(36,33,53,.98)" : "rgba(37,39,44,.94)");
+
+      ctx.shadowColor = pumpActive ? "rgba(130,110,180,.14)" : "transparent";
+      ctx.shadowBlur = pumpActive ? 8 : 0;
       ctx.beginPath();
-      ctx.roundRect(-19, -28, 38, 56, 12);
+      ctx.moveTo(-16, -28);
+      ctx.bezierCurveTo(-27, -19, -22, -6, -15, 0);
+      ctx.bezierCurveTo(-23, 7, -26, 18, -15, 28);
+      ctx.bezierCurveTo(-4, 23, 3, 23, 15, 28);
+      ctx.bezierCurveTo(26, 18, 23, 7, 15, 0);
+      ctx.bezierCurveTo(22, -6, 27, -19, 16, -28);
+      ctx.bezierCurveTo(5, -24, -5, -24, -16, -28);
+      ctx.closePath();
+      ctx.fillStyle = pumpBody;
       ctx.fill();
+      ctx.strokeStyle = pumpActive ? "rgba(171,155,211,.34)" : "rgba(130,130,140,.18)";
+      ctx.lineWidth = 1.1;
       ctx.stroke();
 
       if (now < pump.pulseUntil) {
@@ -1614,15 +1654,19 @@
           ctx.save();
           ctx.beginPath();
           ctx.arc(p.x, p.y, 11.8, 0, Math.PI * 2);
-          ctx.fillStyle = occupied
-            ? (type === "Na" ? "rgba(56,189,248,.28)" : "rgba(245,158,11,.27)")
-            : "rgba(6,10,17,.72)";
+          const socket = ctx.createRadialGradient(p.x - 3, p.y - 3, 1, p.x, p.y, 12);
+          socket.addColorStop(0, occupied
+            ? (type === "Na" ? "rgba(67,151,191,.34)" : "rgba(178,117,41,.34)")
+            : "rgba(23,27,34,.82)");
+          socket.addColorStop(.72, "rgba(6,9,14,.96)");
+          socket.addColorStop(1, "rgba(0,0,0,.98)");
+          ctx.fillStyle = socket;
           ctx.fill();
           ctx.strokeStyle = activeSites && pumpActive
             ? siteColor
-            : "rgba(126,137,154,.24)";
-          ctx.globalAlpha = activeSites ? .88 : .38;
-          ctx.lineWidth = occupied ? 1.7 : 1;
+            : "rgba(126,137,154,.16)";
+          ctx.globalAlpha = activeSites ? .58 : .24;
+          ctx.lineWidth = occupied ? 1.2 : .9;
           ctx.stroke();
           ctx.restore();
         });
