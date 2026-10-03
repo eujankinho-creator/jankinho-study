@@ -19,7 +19,13 @@
       category: "epitelial",
       type: "Tecido epitelial respiratório",
       stain: "H&E",
-      file: "Trachea (mammal) histology cross-section.png",
+      file: "Traqueia – HE – 20x.jpg",
+      zoomFiles: [
+        "Traqueia – HE – 20x.jpg",
+        "Traqueia – HE – 100x.jpg",
+        "Traqueia2 – HE – 400x.jpg"
+      ],
+      magnifications: ["20×", "100×", "400×"],
       lead: "Reconheça a mucosa respiratória, glândulas submucosas e cartilagem hialina.",
       recognize: "Procure um lúmen revestido por epitélio pseudoestratificado ciliado, glândulas na submucosa e grandes placas de cartilagem hialina.",
       cells: ["células ciliadas", "células caliciformes", "células basais", "condrócitos"],
@@ -42,7 +48,8 @@
       category: "epitelial",
       type: "Sistema respiratório",
       stain: "H&E",
-      file: "Lung histology.jpg",
+      file: "Human tertiary bronchus - Respiratory bronchiole.jpg",
+      magnifications: ["campo", "detalhe", "alto zoom"],
       lead: "Observe espaços alveolares, septos finos e vias aéreas de pequeno calibre.",
       recognize: "A grande quantidade de espaços vazios separados por septos delgados é o principal padrão do parênquima pulmonar.",
       cells: ["pneumócitos I", "pneumócitos II", "macrófagos alveolares"],
@@ -65,7 +72,8 @@
       category: "glandular",
       type: "Órgão glandular",
       stain: "H&E",
-      file: "Liver-H&E.jpg",
+      file: "Liver (254 13).jpg",
+      magnifications: ["300×", "zoom digital", "zoom digital"],
       lead: "Observe cordões de hepatócitos separados por sinusóides.",
       recognize: "Hepatócitos são células grandes e eosinofílicas, frequentemente com núcleo central evidente, organizadas em placas.",
       cells: ["hepatócitos", "células de Kupffer", "endotélio sinusoidal"],
@@ -88,7 +96,13 @@
       category: "epitelial",
       type: "Sistema urinário",
       stain: "H&E",
-      file: "Kidney H&E.jpg",
+      file: "Kidney cortex (947 21) Human.jpg",
+      zoomFiles: [
+        "Kidney cortex (947 21) Human.jpg",
+        "Kidney cortex (947 22) Human.jpg",
+        "Glomerulus.jpg"
+      ],
+      magnifications: ["600×", "1200×", "glomérulo"],
       lead: "Procure corpúsculos renais arredondados entre numerosos túbulos.",
       recognize: "O córtex renal mostra glomérulos e grande quantidade de túbulos em cortes transversais e longitudinais.",
       cells: ["podócitos", "células endoteliais", "epitélio tubular"],
@@ -112,6 +126,7 @@
       type: "Tecido muscular estriado",
       stain: "H&E",
       file: "Skeletal muscle histology.jpg",
+      magnifications: ["campo", "detalhe", "alto zoom"],
       lead: "Observe fibras longas paralelas, estriações e núcleos periféricos.",
       recognize: "Fibras multinucleadas, alongadas e organizadas paralelamente, com núcleos localizados na periferia.",
       cells: ["fibras musculares", "células satélite", "fibroblastos"],
@@ -134,7 +149,8 @@
       category: "glandular",
       type: "Glândula endócrina",
       stain: "H&E",
-      file: "Histology of Thyroid gland.jpg",
+      file: "Thyroid gland microscope.jpg",
+      magnifications: ["campo", "detalhe", "alto zoom"],
       lead: "Observe numerosos folículos esféricos preenchidos por coloide.",
       recognize: "Folículos revestidos por epitélio cúbico simples e preenchidos por material eosinofílico homogêneo.",
       cells: ["células foliculares", "células parafoliculares"],
@@ -158,6 +174,7 @@
       type: "Tecido nervoso",
       stain: "H&E",
       file: "CEREBELLUM HE.jpg",
+      magnifications: ["campo", "camadas", "alto zoom"],
       lead: "Reconheça o córtex cerebelar organizado em camadas bem definidas.",
       recognize: "Procure uma camada molecular clara, uma fileira de grandes células de Purkinje e uma camada granulosa muito basófila.",
       cells: ["Purkinje", "células granulares", "células estreladas", "glia"],
@@ -174,26 +191,27 @@
       ]
     },
     {
-      id: "trachea-low",
-      title: "Traqueia · visão geral",
-      subtitle: "Arquitetura completa da parede",
+      id: "small-intestine",
+      title: "Intestino delgado",
+      subtitle: "Vilosidades e mucosa intestinal",
       category: "epitelial",
-      type: "Sistema respiratório",
+      type: "Sistema digestório",
       stain: "H&E",
-      file: "Trachea (mammal) histology cross-section low mag.png",
-      lead: "Use esta lâmina para treinar a orientação espacial antes de aumentar a magnificação.",
-      recognize: "Em baixa magnificação é possível localizar lúmen, mucosa, submucosa, cartilagem e tecido periférico.",
-      cells: ["epitélio respiratório", "glândulas", "condrócitos"],
-      func: "Mostrar como diferentes tecidos se organizam juntos para formar a parede traqueal.",
+      file: "Small intestine low mag.jpg",
+      magnifications: ["campo", "vilosidades", "alto zoom"],
+      lead: "Observe a mucosa formando projeções digitiformes em direção ao lúmen.",
+      recognize: "As vilosidades são projeções da mucosa revestidas por epitélio cilíndrico simples, com tecido conjuntivo no eixo.",
+      cells: ["enterócitos", "células caliciformes", "linfócitos"],
+      func: "Aumentar a superfície de absorção e participar da digestão e defesa da mucosa.",
       zoom: [
-        "Comece delimitando toda a luz e a cartilagem.",
-        "Aproxime para acompanhar a mucosa ao longo da parede.",
-        "Em zoom alto, migre para a lâmina de traqueia de maior magnificação."
+        "Em baixa magnificação, reconheça as vilosidades projetando-se para o lúmen.",
+        "Aproxime para comparar o epitélio de revestimento e o eixo conjuntivo das vilosidades.",
+        "Em alto zoom, procure enterócitos, células caliciformes e núcleos da lâmina própria."
       ],
       hotspots: [
-        { x: 28, y: 28, title: "Lúmen", text: "Espaço interno por onde passa o ar.", cells: [] },
-        { x: 48, y: 43, title: "Mucosa", text: "Camada mais interna, revestida pelo epitélio respiratório.", cells: ["células ciliadas", "caliciformes"] },
-        { x: 69, y: 70, title: "Cartilagem", text: "Sustentação rígida da parede traqueal.", cells: ["condrócitos"] }
+        { x: 30, y: 30, title: "Vilosidade intestinal", text: "Projeção da mucosa que aumenta a área de absorção.", cells: ["enterócitos", "células caliciformes"] },
+        { x: 54, y: 48, title: "Epitélio cilíndrico simples", text: "Revestimento com enterócitos e células caliciformes.", cells: ["enterócitos", "células caliciformes"] },
+        { x: 70, y: 68, title: "Lâmina própria", text: "Tecido conjuntivo do eixo da vilosidade, contendo vasos e células imunes.", cells: ["linfócitos", "fibroblastos"] }
       ]
     }
   ];
@@ -221,18 +239,56 @@
     return div.innerHTML;
   }
 
-  function slideImage(slide) {
-    return commonsFile(slide.file);
+  function slideFileForZoom(slide, index) {
+    if (
+      Array.isArray(slide.zoomFiles) &&
+      slide.zoomFiles[index]
+    ) {
+      return slide.zoomFiles[index];
+    }
+
+    return slide.file;
   }
 
-  function slideSource(slide) {
-    return commonsPage(slide.file);
+  function slideImage(slide, index) {
+    return commonsFile(
+      slideFileForZoom(
+        slide,
+        typeof index === "number"
+          ? index
+          : 0
+      )
+    );
+  }
+
+  function slideSource(slide, index) {
+    return commonsPage(
+      slideFileForZoom(
+        slide,
+        typeof index === "number"
+          ? index
+          : 0
+      )
+    );
   }
 
   function magnificationLabel(scale) {
-    if (scale < 1.4) return "4×";
-    if (scale < 2.2) return "10×";
-    return "40×";
+    const index =
+      zoomIndex(scale);
+
+    if (
+      state.slide &&
+      Array.isArray(state.slide.magnifications) &&
+      state.slide.magnifications[index]
+    ) {
+      return state.slide.magnifications[index];
+    }
+
+    return index === 0
+      ? "campo"
+      : index === 1
+        ? "detalhe"
+        : "alto zoom";
   }
 
   function zoomIndex(scale) {
@@ -275,6 +331,28 @@
       zoomIndex(
         state.scale
       );
+
+    const activeFile =
+      slideFileForZoom(
+        state.slide,
+        index
+      );
+
+    if (
+      layer.dataset.activeFile !==
+      activeFile
+    ) {
+      layer.dataset.activeFile =
+        activeFile;
+
+      layer.style.backgroundImage =
+        'url("' +
+        commonsFile(activeFile) +
+        '")';
+
+      $("slideSourceLink").href =
+        commonsPage(activeFile);
+    }
 
     $("scaleLabel").textContent =
       index === 0
@@ -539,9 +617,18 @@
     const layer =
       $("slideLayer");
 
+    const initialFile =
+      slideFileForZoom(
+        slide,
+        0
+      );
+
+    layer.dataset.activeFile =
+      initialFile;
+
     layer.style.backgroundImage =
       'url("' +
-      slideImage(slide) +
+      commonsFile(initialFile) +
       '")';
 
     $("scopeSlideName").textContent =
@@ -557,7 +644,10 @@
       slide.subtitle;
 
     $("slideSourceLink").href =
-      slideSource(slide);
+      slideSource(
+        slide,
+        0
+      );
 
     $("slideSourceLink").textContent =
       "Wikimedia Commons ↗";
@@ -647,7 +737,7 @@
             escapeHtml(slide.id) +
             '">' +
               '<span class="slide-thumb" style="background-image:url(&quot;' +
-              escapeHtml(slideImage(slide)) +
+              escapeHtml(slideImage(slide, 0)) +
               '&quot;)"></span>' +
               "<span>" +
                 "<strong>" +
