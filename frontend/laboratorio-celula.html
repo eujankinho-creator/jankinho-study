@@ -204,10 +204,22 @@
                 <span class="control-dot pump"></span>
                 <div>
                   <strong>Bomba Na⁺/K⁺</strong>
-                  <small>3 Na⁺ entram nos sítios internos · 2 K⁺ nos externos</small>
+                  <small>3 Na⁺ internos → 2 K⁺ externos</small>
                 </div>
               </div>
               <button id="pumpToggle" class="toggle-control on" type="button" aria-pressed="true"><span></span></button>
+            </div>
+
+            <div class="pump-mode-block">
+              <div class="pump-mode-copy">
+                <span>MODO DA ATPase</span>
+                <strong id="pumpModeMetric">manual</strong>
+              </div>
+              <div class="pump-mode-segment" role="group" aria-label="Modo da bomba sódio potássio">
+                <button id="pumpModeManual" class="active" type="button" aria-pressed="true">Manual</button>
+                <button id="pumpModeAuto" type="button" aria-pressed="false">Automático</button>
+              </div>
+              <p>Manual: você precisa completar os 3 sítios de Na⁺ e, depois, os 2 de K⁺. Automático: só captura íons que chegam perto.</p>
             </div>
 
             <div class="control-switch-row">
@@ -326,7 +338,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261003-immersive6"></script>
+  <script src="/js/laboratorio-celula.js?v=20261003-premium7"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
