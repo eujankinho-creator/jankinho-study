@@ -84,7 +84,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/simulado-premium.css?v=20261002-fluid-final4"
+    href="/css/simulado-premium.css?v=20261002-romulo1"
   >
 
   <link
@@ -393,6 +393,174 @@
                 </button>
 
               </div>
+
+            </div>
+
+
+            <div class="config-section">
+
+              <label class="config-label">
+                Origem das quest&otilde;es
+              </label>
+
+              <div class="question-source-switch">
+
+                <button
+                  class="source-option active"
+                  data-question-source="all"
+                  type="button"
+                >
+                  <strong>Todo o banco</strong>
+                  <span>Cortex + concursos importados</span>
+                </button>
+
+                <button
+                  class="source-option"
+                  data-question-source="cortex"
+                  type="button"
+                >
+                  <strong>Banco Cortex</strong>
+                  <span>Quest&otilde;es internas e da IA</span>
+                </button>
+
+                <button
+                  class="source-option"
+                  data-question-source="romulo"
+                  type="button"
+                >
+                  <strong>Banco R&ocirc;mulo Passos</strong>
+                  <span>Quest&otilde;es de concursos importadas</span>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div
+              id="contestFilters"
+              class="config-section contest-filters hidden"
+            >
+
+              <div class="contest-filter-heading">
+
+                <div>
+                  <label class="config-label">
+                    Filtros de concurso
+                  </label>
+
+                  <p>
+                    Refine o banco importado por metadados da prova.
+                  </p>
+                </div>
+
+                <button
+                  id="clearContestFilters"
+                  class="tiny-action"
+                  type="button"
+                >
+                  Limpar filtros
+                </button>
+
+              </div>
+
+              <div class="contest-filter-grid">
+
+                <div>
+                  <label
+                    class="config-label"
+                    for="simBanca"
+                  >
+                    Banca
+                  </label>
+
+                  <select
+                    id="simBanca"
+                    class="sim-select"
+                    data-contest-filter
+                  >
+                    <option value="">Todas</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="config-label"
+                    for="simAno"
+                  >
+                    Ano
+                  </label>
+
+                  <select
+                    id="simAno"
+                    class="sim-select"
+                    data-contest-filter
+                  >
+                    <option value="">Todos</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="config-label"
+                    for="simOrgao"
+                  >
+                    &Oacute;rg&atilde;o
+                  </label>
+
+                  <select
+                    id="simOrgao"
+                    class="sim-select"
+                    data-contest-filter
+                  >
+                    <option value="">Todos</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="config-label"
+                    for="simCargo"
+                  >
+                    Cargo
+                  </label>
+
+                  <select
+                    id="simCargo"
+                    class="sim-select"
+                    data-contest-filter
+                  >
+                    <option value="">Todos</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    class="config-label"
+                    for="simAssunto"
+                  >
+                    Assunto
+                  </label>
+
+                  <select
+                    id="simAssunto"
+                    class="sim-select"
+                    data-contest-filter
+                  >
+                    <option value="">Todos</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <p
+                id="romuloEmptyHint"
+                class="romulo-empty-hint hidden"
+              >
+                O banco R&ocirc;mulo Passos est&aacute; integrado ao Simulado,
+                mas ainda n&atilde;o h&aacute; quest&otilde;es reais importadas para
+                estes filtros.
+              </p>
 
             </div>
 
@@ -1045,7 +1213,7 @@
     })();
   </script>
 
-<script defer src="/js/simulado.js?v=20261002-fluid-final4"></script>
+<script defer src="/js/simulado.js?v=20261002-romulo1"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 
 </body>
