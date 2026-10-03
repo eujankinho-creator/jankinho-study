@@ -1350,7 +1350,10 @@
       const iNa = g.na * (state.vm - ena);
       const iK = g.k * (state.vm - ek);
       const iLeak = .3 * (state.vm - (-54.4));
-      const iPump = state.pumpOn ? .35 : 0;
+      const activePumpCycles = state.pumpOn
+        ? state.pumps.filter(function (pump) { return pump.phase !== "loading"; }).length
+        : 0;
+      const iPump = activePumpCycles * .12;
       const iInjected = now < state.stimulusUntil ? state.stimulusCurrent : 0;
 
       const dV = iInjected - iNa - iK - iLeak - iPump;
@@ -1394,15 +1397,18 @@
     $("kInParticles").textContent = current.kIn + " partículas didáticas";
 
     $("vmValue").textContent = Math.round(state.vm) + " mV";
+    $("vmState").textContent = state.hhPhase;
 
-    let stateText = "repouso";
-    if (state.vm >= 0) stateText = "pico positivo";
-    else if (state.vm >= -55) stateText = "limiar atingido";
-    else if (state.vm > -65) stateText = "despolarizando";
-    else if (state.vm < -75) stateText = "hiperpolarizado";
-
-    $("vmState").textContent = stateText;
-    $("pumpStateMetric").textContent = state.pumpOn ? "ativa" : "desligada";
+    const cycling = state.pumps.some(function (pump) {
+      return pump.phase !== "loading";
+    });
+    $("pumpStateMetric").textContent = !state.pumpOn
+      ? "desligada"
+      : cycling
+        ? "em ciclo"
+        : state.pumpMode === "manual"
+          ? "aguardando 3:2"
+          : "ativa";
 
     if ($("naEquilibriumMetric")) {
       $("naEquilibriumMetric").textContent = Math.round(equilibriumPotential("Na")) + " mV";
@@ -1524,138 +1530,82 @@
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, size.cssWidth, size.cssHeight);
 
-    const bodyGradient = ctx.createRadialGradient(
-      g.cx - g.r * .24,
-      g.cy - g.r * .28,
+    // Minimalist cell body: the visual language returns to the first version.
+    const gradient = ctx.createRadialGradient(
+      g.cx - g.r * .18,
+      g.cy - g.r * .18,
       g.r * .08,
       g.cx,
       g.cy,
-      g.r
+      g.r * 1.08
     );
-    bodyGradient.addColorStop(0, "rgba(66,88,122,.32)");
-    bodyGradient.addColorStop(.46, "rgba(18,35,60,.58)");
-    bodyGradient.addColorStop(.82, "rgba(7,17,31,.90)");
-    bodyGradient.addColorStop(1, "rgba(4,9,17,.98)");
+    gradient.addColorStop(0, "rgba(31,52,87,.52)");
+    gradient.addColorStop(.76, "rgba(12,24,43,.44)");
+    gradient.addColorStop(1, "rgba(7,13,24,.22)");
 
-    ctx.save();
-    ctx.shadowColor = "rgba(55,93,145,.16)";
-    ctx.shadowBlur = 28;
     ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r - 11, 0, Math.PI * 2);
-    ctx.fillStyle = bodyGradient;
-    ctx.fill();
-    ctx.restore();
-
-    // Subtle depth/vignette within the cytoplasm.
-    const depth = ctx.createLinearGradient(
-      g.cx - g.r,
-      g.cy - g.r,
-      g.cx + g.r,
-      g.cy + g.r
-    );
-    depth.addColorStop(0, "rgba(255,255,255,.025)");
-    depth.addColorStop(.50, "rgba(255,255,255,0)");
-    depth.addColorStop(1, "rgba(0,0,0,.20)");
-    ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r - 12, 0, Math.PI * 2);
-    ctx.fillStyle = depth;
+    ctx.arc(g.cx, g.cy, g.r - 8, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
     ctx.fill();
 
-    // Bilayer: two rings of polar heads with faint tails between them.
-    const lipidCount = 48;
-    for (let i = 0; i < lipidCount; i += 1) {
-      const a = (Math.PI * 2 * i) / lipidCount;
-      const outer = pointAtRadius(a, g.r + 5, g);
-      const inner = pointAtRadius(a, g.r - 5, g);
-      const tailOuter = pointAtRadius(a, g.r + 1, g);
-      const tailInner = pointAtRadius(a, g.r - 1, g);
-
-      ctx.save();
-      ctx.strokeStyle = "rgba(106,137,185,.11)";
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(outer.x, outer.y);
-      ctx.lineTo(tailOuter.x, tailOuter.y);
-      ctx.moveTo(inner.x, inner.y);
-      ctx.lineTo(tailInner.x, tailInner.y);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(outer.x, outer.y, 2.35, 0, Math.PI * 2);
-      ctx.arc(inner.x, inner.y, 2.35, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(146,173,217,.42)";
-      ctx.fill();
-      ctx.restore();
-    }
-
-    ctx.save();
     ctx.beginPath();
     ctx.arc(g.cx, g.cy, g.r, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(123,155,205,.13)";
+    ctx.strokeStyle = "rgba(118,154,246,.17)";
     ctx.lineWidth = 15;
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.arc(g.cx, g.cy, g.r - 1, -2.75, -.42);
-    ctx.strokeStyle = "rgba(218,230,247,.12)";
-    ctx.lineWidth = 2.4;
-    ctx.lineCap = "round";
+    ctx.arc(g.cx, g.cy, g.r, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(176,196,255,.13)";
+    ctx.lineWidth = 2;
     ctx.stroke();
-    ctx.restore();
+
+    ctx.beginPath();
+    ctx.arc(g.cx, g.cy, g.r - 11, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(81,115,196,.11)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
 
     drawMembranePolarity(ctx, g);
 
     CHANNELS.forEach(function (channel) {
       const x = g.cx + Math.cos(channel.angle) * g.r;
       const y = g.cy + Math.sin(channel.angle) * g.r;
-      const open = channelIsOpen(channel.type);
-      const isNa = channel.type === "Na";
-      const accent = isNa ? "#6dcff6" : "#eab45a";
+      const enabled = channelIsOpen(channel.type);
+      const conductance = channel.type === "Na"
+        ? membranePermeabilities().na / 120
+        : membranePermeabilities().k / 36;
+      const gateAlpha = clamp(.2 + Math.sqrt(Math.max(0, conductance)) * .8, .18, 1);
 
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(channel.angle + Math.PI / 2);
-
-      const protein = ctx.createLinearGradient(-16, 0, 16, 0);
-      protein.addColorStop(0, "rgba(29,37,49,.98)");
-      protein.addColorStop(.36, open ? (isNa ? "rgba(40,95,120,.96)" : "rgba(104,72,31,.96)") : "rgba(48,50,56,.96)");
-      protein.addColorStop(.64, open ? (isNa ? "rgba(23,66,87,.98)" : "rgba(73,48,18,.98)") : "rgba(42,44,49,.98)");
-      protein.addColorStop(1, "rgba(20,25,34,.98)");
-
+      ctx.fillStyle = "rgba(9,15,24,.94)";
+      ctx.strokeStyle = enabled ? channel.color : "rgba(112,122,138,.24)";
+      ctx.globalAlpha = enabled ? .55 + gateAlpha * .35 : .32;
+      ctx.lineWidth = 1.25;
       ctx.beginPath();
-      ctx.moveTo(-14, -22);
-      ctx.bezierCurveTo(-21, -13, -18, -4, -12, 0);
-      ctx.bezierCurveTo(-18, 5, -20, 14, -13, 22);
-      ctx.lineTo(13, 22);
-      ctx.bezierCurveTo(20, 14, 18, 5, 12, 0);
-      ctx.bezierCurveTo(18, -5, 21, -14, 14, -22);
-      ctx.closePath();
-      ctx.fillStyle = protein;
+      ctx.roundRect(-9, -20, 18, 40, 6);
       ctx.fill();
-      ctx.strokeStyle = open ? accent : "rgba(139,147,159,.18)";
-      ctx.globalAlpha = open ? .58 : .26;
-      ctx.lineWidth = 1.1;
       ctx.stroke();
 
-      // Pore
-      ctx.globalAlpha = 1;
       ctx.beginPath();
-      ctx.roundRect(-3.2, -16, 6.4, 32, 3.2);
-      ctx.fillStyle = open
-        ? (isNa ? "rgba(109,207,246,.16)" : "rgba(234,180,90,.15)")
-        : "rgba(6,8,12,.82)";
-      ctx.fill();
-      ctx.strokeStyle = open ? accent : "rgba(92,98,108,.22)";
-      ctx.globalAlpha = open ? .58 : .24;
+      ctx.moveTo(-4, -15);
+      ctx.lineTo(-4, 15);
+      ctx.moveTo(4, -15);
+      ctx.lineTo(4, 15);
+      ctx.strokeStyle = enabled ? channel.color : "rgba(112,122,138,.18)";
+      ctx.globalAlpha = enabled ? gateAlpha : .22;
       ctx.stroke();
       ctx.restore();
 
       ctx.save();
-      ctx.fillStyle = open ? accent : "#626a75";
-      ctx.font = "800 7px system-ui, sans-serif";
+      ctx.fillStyle = enabled ? channel.color : "#545e6b";
+      ctx.globalAlpha = .88;
+      ctx.font = "700 8px system-ui, sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      const labelRadius = g.r + 31;
+      const labelRadius = g.r + 33;
       ctx.fillText(
         channel.type + "⁺",
         g.cx + Math.cos(channel.angle) * labelRadius,
@@ -1672,76 +1622,62 @@
       ctx.save();
       ctx.translate(pumpX, pumpY);
       ctx.rotate(pump.angle + Math.PI / 2);
-      const pumpBody = ctx.createLinearGradient(-24, 0, 24, 0);
-      pumpBody.addColorStop(0, pumpActive ? "rgba(45,42,64,.98)" : "rgba(40,42,47,.92)");
-      pumpBody.addColorStop(.38, pumpActive ? "rgba(94,79,135,.94)" : "rgba(61,63,69,.74)");
-      pumpBody.addColorStop(.62, pumpActive ? "rgba(65,53,98,.98)" : "rgba(46,48,54,.90)");
-      pumpBody.addColorStop(1, pumpActive ? "rgba(36,33,53,.98)" : "rgba(37,39,44,.94)");
-
-      ctx.shadowColor = pumpActive ? "rgba(130,110,180,.14)" : "transparent";
-      ctx.shadowBlur = pumpActive ? 8 : 0;
+      ctx.fillStyle = pumpActive ? "rgba(167,139,250,.10)" : "rgba(90,90,100,.06)";
+      ctx.strokeStyle = pumpActive ? "rgba(167,139,250,.72)" : "rgba(130,130,140,.24)";
+      ctx.lineWidth = 1.2;
       ctx.beginPath();
-      ctx.moveTo(-16, -28);
-      ctx.bezierCurveTo(-27, -19, -22, -6, -15, 0);
-      ctx.bezierCurveTo(-23, 7, -26, 18, -15, 28);
-      ctx.bezierCurveTo(-4, 23, 3, 23, 15, 28);
-      ctx.bezierCurveTo(26, 18, 23, 7, 15, 0);
-      ctx.bezierCurveTo(22, -6, 27, -19, 16, -28);
-      ctx.bezierCurveTo(5, -24, -5, -24, -16, -28);
-      ctx.closePath();
-      ctx.fillStyle = pumpBody;
+      ctx.roundRect(-13, -22, 26, 44, 8);
       ctx.fill();
-      ctx.strokeStyle = pumpActive ? "rgba(171,155,211,.34)" : "rgba(130,130,140,.18)";
-      ctx.lineWidth = 1.1;
       ctx.stroke();
-
-      if (now < pump.pulseUntil) {
-        ctx.strokeStyle = "rgba(188, 166, 255, .48)";
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.roundRect(-19, -28, 38, 56, 12);
-        ctx.stroke();
-      }
       ctx.restore();
 
-      ["Na", "K"].forEach(function (type) {
-        const slots = type === "Na" ? pump.naSlots : pump.kSlots;
-        const activeSites = pumpSlotActive(pump, type);
+      ["Na", "K-ready", "K"].forEach(function (type) {
+        if (type === "K" && pump.phase !== "k-binding" && pump.phase !== "k-release") return;
+        if (type === "K-ready" && pump.phase !== "loading" && pump.phase !== "phosphorylation" && pump.phase !== "na-release") return;
 
+        const slots = pumpSlotArray(pump, type);
+        const activeSites = pumpSlotActive(pump, type);
         slots.forEach(function (ionId, index) {
           const p = pumpBindingPoint(pump, type, index, g);
           const occupied = ionId !== null;
-          const siteColor = type === "Na" ? "#38bdf8" : "#f59e0b";
+          const isNa = type === "Na";
+          const siteColor = isNa ? "#38bdf8" : "#f59e0b";
 
           ctx.save();
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 11.8, 0, Math.PI * 2);
-          const socket = ctx.createRadialGradient(p.x - 3, p.y - 3, 1, p.x, p.y, 12);
-          socket.addColorStop(0, occupied
-            ? (type === "Na" ? "rgba(67,151,191,.34)" : "rgba(178,117,41,.34)")
-            : "rgba(23,27,34,.82)");
-          socket.addColorStop(.72, "rgba(6,9,14,.96)");
-          socket.addColorStop(1, "rgba(0,0,0,.98)");
-          ctx.fillStyle = socket;
+          ctx.arc(p.x, p.y, type === "K-ready" ? 9.4 : 10.8, 0, Math.PI * 2);
+          ctx.fillStyle = occupied ? "rgba(9,14,22,.86)" : "rgba(7,11,18,.68)";
           ctx.fill();
-          ctx.strokeStyle = activeSites && pumpActive
-            ? siteColor
-            : "rgba(126,137,154,.16)";
-          ctx.globalAlpha = activeSites ? .58 : .24;
-          ctx.lineWidth = occupied ? 1.2 : .9;
+          ctx.strokeStyle = siteColor;
+          ctx.globalAlpha = occupied ? .74 : activeSites ? .42 : .18;
+          ctx.lineWidth = occupied ? 1.25 : .8;
           ctx.stroke();
+
+          if (type === "K-ready") {
+            ctx.setLineDash([2, 3]);
+            ctx.globalAlpha = occupied ? .55 : .24;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 13.2, 0, Math.PI * 2);
+            ctx.stroke();
+          }
           ctx.restore();
         });
       });
 
       ctx.save();
-      ctx.fillStyle = pumpActive ? "#bda8ff" : "#59616d";
-      ctx.font = "800 7px system-ui, sans-serif";
+      ctx.fillStyle = pumpActive ? "#ad9bea" : "#59616d";
+      ctx.font = "700 7px system-ui, sans-serif";
       ctx.textAlign = "center";
+      const phaseLabel =
+        pump.phase === "loading" ? "3Na + 2K" :
+        pump.phase === "phosphorylation" ? "ATP" :
+        pump.phase === "na-release" ? "Na →" :
+        pump.phase === "k-binding" ? "K ligado" :
+        "K ←";
       ctx.fillText(
-        "3Na⁺ : 2K⁺",
-        g.cx + Math.cos(pump.angle) * (g.r + 47),
-        g.cy + Math.sin(pump.angle) * (g.r + 47)
+        phaseLabel,
+        g.cx + Math.cos(pump.angle) * (g.r + 58),
+        g.cy + Math.sin(pump.angle) * (g.r + 58)
       );
       ctx.restore();
     });
@@ -1752,20 +1688,14 @@
       const py = g.cy + Math.sin(state.eventPulse.angle) * g.r;
       ctx.save();
       ctx.strokeStyle = state.eventPulse.type === "Na"
-        ? "rgba(56,189,248,.5)"
+        ? "rgba(56,189,248,.42)"
         : state.eventPulse.type === "K"
-          ? "rgba(245,158,11,.5)"
-          : "rgba(184,194,209,.24)";
-      ctx.lineWidth = state.eventPulse.type === "blocked" ? 1 : 2;
-      ctx.globalAlpha = (1 - ratio) * (state.eventPulse.type === "blocked" ? .6 : 1);
+          ? "rgba(245,158,11,.42)"
+          : "rgba(184,194,209,.20)";
+      ctx.lineWidth = 1.3;
+      ctx.globalAlpha = (1 - ratio) * .75;
       ctx.beginPath();
-      ctx.arc(
-        px,
-        py,
-        state.eventPulse.type === "blocked" ? 12 + ratio * 13 : 16 + ratio * 35,
-        0,
-        Math.PI * 2
-      );
+      ctx.arc(px, py, 13 + ratio * 26, 0, Math.PI * 2);
       ctx.stroke();
       ctx.restore();
     }
@@ -1778,20 +1708,18 @@
         ? 0
         : Math.sin(now * .0017 + ion.wobble) * 1.25;
       const x = p.x + wobble;
-      const y = p.y + (moving || bound ? 0 : Math.cos(now * .0014 + ion.wobble) * 1.0);
-      const crossing = moving ? ion.transport.chargeProgress : 0;
-      const radius = bound
-        ? 10.2
-        : ion.radius * (1 - Math.sin(crossing * Math.PI) * .18);
-      const glow = ion.id === state.draggingId || moving || now < ion.flashUntil;
+      const y = p.y + (moving || bound ? 0 : Math.cos(now * .0014 + ion.wobble) * .95);
+      const isNa = ion.type === "Na";
+      const stroke = isNa ? "#38bdf8" : "#f59e0b";
+      const fill = isNa ? "rgba(56,189,248,.13)" : "rgba(245,158,11,.13)";
+      const text = isNa ? "#cdf5ff" : "#ffe4b5";
+      const radius = bound ? 9.7 : ion.radius;
 
       if (moving) {
         const trailEnd = pointAtRadius(ion.transport.angle, g.r, g);
         ctx.save();
-        ctx.strokeStyle = ion.type === "Na"
-          ? "rgba(56,189,248,.20)"
-          : "rgba(245,158,11,.18)";
-        ctx.lineWidth = 1.1;
+        ctx.strokeStyle = isNa ? "rgba(56,189,248,.14)" : "rgba(245,158,11,.13)";
+        ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(x, y);
         ctx.lineTo(trailEnd.x, trailEnd.y);
@@ -1799,11 +1727,26 @@
         ctx.restore();
       }
 
-      drawIonSphere(ctx, x, y, radius, ion.type, glow, bound);
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = fill;
+      ctx.fill();
+      ctx.strokeStyle = stroke;
+      ctx.globalAlpha = ion.id === state.draggingId || moving || now < ion.flashUntil ? 1 : .78;
+      ctx.lineWidth = bound ? 1.35 : 1.05;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = text;
+      ctx.font = "800 8px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(ion.type + "⁺", x, y + .4);
+      ctx.restore();
     });
 
     ctx.save();
-    ctx.fillStyle = "rgba(138, 155, 188, .36)";
+    ctx.fillStyle = "rgba(138,155,188,.34)";
     ctx.font = "700 8px system-ui, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText("MEMBRANA", g.cx, g.cy - g.r - 14);
