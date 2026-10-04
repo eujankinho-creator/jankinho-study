@@ -5104,3 +5104,99 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .membrane-stage .crossing-flash{
   outline:0!important;
 }
+
+
+/* =========================================================
+   EDITABLE WHITE CYTOPLASM V58
+   EC stays dark; IC/cytoplasm is white by default and user-editable.
+========================================================= */
+
+.membrane-stage{
+  --cytoplasm-color:#ffffff;
+  background:#343a40!important;
+  isolation:isolate;
+}
+
+/* Cytoplasm begins immediately below the lower leaflet of the bilayer. */
+.membrane-stage::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  left:0;
+  right:0;
+  top:calc(50% + 43px);
+  bottom:0;
+  background:var(--cytoplasm-color,#ffffff);
+  pointer-events:none;
+  transition:background-color .18s ease;
+}
+
+/* Ensure every simulation layer stays above the editable cytoplasm plane. */
+.membrane-stage .charge-band,
+.membrane-stage .bilayer,
+.membrane-stage .membrane-build-slots,
+.membrane-stage .particle-canvas,
+.membrane-stage .placed-layer{
+  position:absolute;
+}
+
+/* Compact color control in the simulator toolbar. */
+.cytoplasm-color-control{
+  height:30px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:0 7px;
+  border:1px solid var(--mv-border);
+  border-radius:7px;
+  background:rgba(255,255,255,.018);
+  color:var(--mv-muted);
+  cursor:pointer;
+  user-select:none;
+}
+
+.cytoplasm-color-control span{
+  font-size:8px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.cytoplasm-color-control input[type="color"]{
+  width:22px;
+  height:22px;
+  padding:2px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:6px;
+  background:transparent;
+  cursor:pointer;
+}
+
+.cytoplasm-color-control input[type="color"]::-webkit-color-swatch-wrapper{
+  padding:0;
+}
+
+.cytoplasm-color-control input[type="color"]::-webkit-color-swatch{
+  border:0;
+  border-radius:4px;
+}
+
+.cytoplasm-color-control input[type="color"]::-moz-color-swatch{
+  border:0;
+  border-radius:4px;
+}
+
+.cytoplasm-color-control:hover{
+  border-color:var(--mv-border-strong);
+  color:var(--mv-soft);
+}
+
+@media(max-width:1280px){
+  .cytoplasm-color-control span{
+    display:none;
+  }
+  .cytoplasm-color-control{
+    width:32px;
+    padding:0 4px;
+    justify-content:center;
+  }
+}
