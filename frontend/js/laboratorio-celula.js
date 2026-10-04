@@ -1040,15 +1040,17 @@
     if(type==="bomba"){
       return '<span class="protein-label">Bomba Na⁺/K⁺</span>'+
         '<span class="protein-art nak-pump-art" aria-label="Bomba de sódio e potássio">'+
-          '<span class="nak-shell"></span>'+
-          '<span class="nak-cavity"></span>'+
+          '<svg class="nak-pump-svg" viewBox="0 0 120 170" aria-hidden="true">'+
+            '<path class="nak-shell" d="M31 12 C42 5 51 6 60 12 C69 6 84 7 94 15 C103 24 101 40 102 56 C103 73 108 93 110 106 C113 125 106 140 93 150 C84 156 75 156 68 149 C64 145 62 148 59 153 C55 159 49 159 45 153 C42 148 40 146 36 151 C28 158 17 156 10 149 C3 142 7 131 12 121 C18 109 20 94 22 79 C24 65 23 49 23 37 C23 25 24 17 31 12 Z"/>'+
+            '<path class="nak-cavity" d="M54 31 C54 42 53 50 49 57 C45 63 40 68 40 76 C40 84 44 91 50 95 C56 100 56 107 52 115 C48 123 45 131 44 143 C50 139 55 135 59 129 C62 133 65 139 68 145 C69 132 66 123 62 116 C59 109 60 101 66 97 C74 92 80 88 81 80 C82 71 78 64 71 59 C65 54 65 45 65 31 Z"/>'+
+            '<path class="nak-atp-groove" d="M31 127 C25 126 21 130 21 136 C21 142 26 145 32 143 C37 142 39 137 37 133 C36 129 34 128 31 127 Z"/>'+
+          '</svg>'+
           '<span class="nak-phosphate">P</span>'+
           '<i class="pump-slot nak-site nak-site-k slot-k1" data-accept="k" data-slot="k1" aria-label="Sítio para K+"></i>'+
           '<i class="pump-slot nak-site nak-site-k slot-k2" data-accept="k" data-slot="k2" aria-label="Sítio para K+"></i>'+
           '<i class="pump-slot nak-site nak-site-na slot-na1" data-accept="na" data-slot="na1" aria-label="Sítio para Na+"></i>'+
           '<i class="pump-slot nak-site nak-site-na slot-na2" data-accept="na" data-slot="na2" aria-label="Sítio para Na+"></i>'+
           '<i class="pump-slot nak-site nak-site-na slot-na3" data-accept="na" data-slot="na3" aria-label="Sítio para Na+"></i>'+
-          '<span class="nak-atp-pocket"></span>'+
           '<i class="pump-slot nak-site nak-site-atp slot-atp" data-accept="atp" data-slot="atp" aria-label="Ranhura intracelular inferior esquerda para ATP"></i>'+
         '</span>'+
         '<span class="pump-state-badge">Na⁺ · 0/3</span>';
@@ -1319,7 +1321,7 @@
       return '<span class="ghost-molecule" data-type="'+type+'">'+catalogue[type].label+'</span>';
     }
     if(type==="bomba"){
-      return '<span class="ghost-protein"><span class="protein-art nak-pump-art nak-pump-ghost"><span class="nak-shell"></span><span class="nak-cavity"></span><span class="nak-atp-pocket"></span></span></span>';
+      return '<span class="ghost-protein"><span class="protein-art nak-pump-art nak-pump-ghost"><svg class="nak-pump-svg" viewBox="0 0 120 170" aria-hidden="true"><path class="nak-shell" d="M31 12 C42 5 51 6 60 12 C69 6 84 7 94 15 C103 24 101 40 102 56 C103 73 108 93 110 106 C113 125 106 140 93 150 C84 156 75 156 68 149 C64 145 62 148 59 153 C55 159 49 159 45 153 C42 148 40 146 36 151 C28 158 17 156 10 149 C3 142 7 131 12 121 C18 109 20 94 22 79 C24 65 23 49 23 37 C23 25 24 17 31 12 Z"/><path class="nak-cavity" d="M54 31 C54 42 53 50 49 57 C45 63 40 68 40 76 C40 84 44 91 50 95 C56 100 56 107 52 115 C48 123 45 131 44 143 C50 139 55 135 59 129 C62 133 65 139 68 145 C69 132 66 123 62 116 C59 109 60 101 66 97 C74 92 80 88 81 80 C82 71 78 64 71 59 C65 54 65 45 65 31 Z"/><path class="nak-atp-groove" d="M31 127 C25 126 21 130 21 136 C21 142 26 145 32 143 C37 142 39 137 37 133 C36 129 34 128 31 127 Z"/></svg></span></span>';
     }
     if(type==="sglt"){
       return '<span class="ghost-protein"><span class="protein-art sglt-art"><i class="sglt-site sglt-na-left">Na</i><i class="sglt-site sglt-glucose">G</i><i class="sglt-site sglt-na-right">Na</i></span></span>';
