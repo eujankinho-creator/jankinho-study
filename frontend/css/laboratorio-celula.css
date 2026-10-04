@@ -4696,3 +4696,254 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     font-size:11px!important;
   }
 }
+
+
+/* =========================================================
+   SATURATED CLEAN MEMBRANE V56
+   Cleaner bilayer, stronger structures, lighter cell background.
+========================================================= */
+
+:root{
+  --mv-na:#ffd000;
+  --mv-k:#00bce7;
+  --mv-o2:#ff4655;
+}
+
+/* Lighter live-cell background for stronger contrast with saturated structures. */
+.membrane-stage{
+  background:
+    linear-gradient(
+      180deg,
+      #8fa1aa 0 46%,
+      #aaa79a 54% 100%
+    )!important;
+}
+
+/* Bilayer: strong color, zero artificial contour. */
+.membrane-stage .lipid-head{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:#ffb000!important;
+}
+
+.membrane-stage .lipid-tail{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:#ff2f92!important;
+}
+
+.membrane-stage .hydrophobic-core{
+  background:rgba(255,47,146,.10)!important;
+}
+
+.membrane-stage .bilayer-highlight{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+
+/* Main protein palette: saturated fills, no contour lines. */
+.membrane-stage .placed-protein[data-type="vazante-na"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="vazante-na"] .protein-channel::after{
+  background:#ffc400!important;
+}
+.membrane-stage .placed-protein[data-type="vazante-na"] .protein-pore{
+  background:#ff7a00!important;
+}
+
+.membrane-stage .placed-protein[data-type="vazante"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="vazante"] .protein-channel::after{
+  background:#00c6ea!important;
+}
+.membrane-stage .placed-protein[data-type="vazante"] .protein-pore{
+  background:#008dbb!important;
+}
+
+.membrane-stage .placed-protein[data-type="vg-na"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="vg-na"] .protein-channel::after{
+  background:#ff9700!important;
+}
+.membrane-stage .placed-protein[data-type="vg-na"] .protein-pore{
+  background:#ff4b1f!important;
+}
+
+.membrane-stage .placed-protein[data-type="vg-k"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="vg-k"] .protein-channel::after{
+  background:#00c8ef!important;
+}
+.membrane-stage .placed-protein[data-type="vg-k"] .protein-pore{
+  background:#007eb8!important;
+}
+
+.membrane-stage .placed-protein[data-type="lg-na"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="lg-na"] .protein-channel::after{
+  background:#ffd000!important;
+}
+.membrane-stage .placed-protein[data-type="lg-na"] .protein-pore{
+  background:#fff06a!important;
+}
+
+.membrane-stage .placed-protein[data-type="lg-k"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="lg-k"] .protein-channel::after{
+  background:#536df5!important;
+}
+.membrane-stage .placed-protein[data-type="lg-k"] .protein-pore{
+  background:#00baff!important;
+}
+
+.membrane-stage .nak-shell{
+  fill:#2fd6ae!important;
+}
+.membrane-stage .nak-cavity{
+  fill:#007f6a!important;
+}
+.membrane-stage .nak-atp-groove{
+  fill:#28cfa6!important;
+}
+.membrane-stage .nak-pump-art .pump-slot,
+.membrane-stage .nak-pump-art .pump-slot.pump-site-active:not(.occupied){
+  background:rgba(0,92,75,.50)!important;
+}
+.membrane-stage .nak-pump-art .pump-slot.occupied{
+  background:rgba(0,92,75,.20)!important;
+}
+
+.membrane-stage .sglt-art{
+  background:#e64b9b!important;
+}
+.membrane-stage .sglt-art::before{
+  background:#b78af4!important;
+}
+.membrane-stage .sglt-glucose{
+  background:#8e59d9!important;
+}
+.membrane-stage .sglt-na-left,
+.membrane-stage .sglt-na-right{
+  background:#ffd000!important;
+}
+
+/* DOM molecules/transit molecules match the stronger particle palette. */
+.molecule-na{background:#ffd000!important}
+.molecule-k{background:#00bce7!important}
+.molecule-cl{background:#22c4d8!important}
+.molecule-glucose{background:#8b5cf6!important}
+.molecule-pi{background:#705cf6!important}
+.molecule-o2 i{background:#ff4655!important}
+.molecule-co2 i:nth-child(1),
+.molecule-co2 i:nth-child(3){background:#ff4655!important}
+.molecule-co2 i:nth-child(2){background:#343b48!important}
+.molecule-atp i{background:#55db57!important}
+.molecule-adp i{background:#5967df!important}
+
+/* Previews use the same saturated language and no outlines. */
+.channel-preview::before,
+.channel-preview::after,
+.channel-preview i,
+.pump-preview,
+.pump-preview::before,
+.pump-preview::after,
+.sglt-preview,
+.sglt-preview::before,
+.sglt-preview::after{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+.structure-card[data-type="vazante-na"] .channel-preview::before,
+.structure-card[data-type="vazante-na"] .channel-preview::after{
+  background:#ffc400!important;
+}
+.structure-card[data-type="vazante"] .channel-preview::before,
+.structure-card[data-type="vazante"] .channel-preview::after{
+  background:#00c6ea!important;
+}
+.structure-card[data-type="vg-na"] .channel-preview::before,
+.structure-card[data-type="vg-na"] .channel-preview::after{
+  background:#ff9700!important;
+}
+.structure-card[data-type="vg-k"] .channel-preview::before,
+.structure-card[data-type="vg-k"] .channel-preview::after{
+  background:#00c8ef!important;
+}
+.structure-card[data-type="lg-na"] .channel-preview::before,
+.structure-card[data-type="lg-na"] .channel-preview::after{
+  background:#ffd000!important;
+}
+.structure-card[data-type="lg-k"] .channel-preview::before,
+.structure-card[data-type="lg-k"] .channel-preview::after{
+  background:#536df5!important;
+}
+.channel-preview i{
+  background:#095d76!important;
+}
+
+.pump-preview,
+.structure-card[data-type="bomba"] .pump-preview{
+  background:#2fd6ae!important;
+}
+.pump-preview::before,
+.structure-card[data-type="bomba"] .pump-preview::before{
+  background:#007f6a!important;
+}
+.pump-preview::after,
+.structure-card[data-type="bomba"] .pump-preview::after{
+  border:0!important;
+  background:transparent!important;
+}
+
+.sglt-preview{
+  background:#e64b9b!important;
+}
+.sglt-preview::before{
+  background:#b78af4!important;
+}
+.sglt-preview::after{
+  background:#8e59d9!important;
+}
+
+/* Solute-picker previews: vivid fills, no rings/outlines. */
+.o2-orb::before,
+.o2-orb::after,
+.co2-orb::before,
+.na-orb::before,
+.k-orb::before,
+.glucose-orb::before,
+.atp-orb::before{
+  border:0!important;
+  outline:0!important;
+}
+
+.o2-orb::before,
+.o2-orb::after{
+  background:#ff4655!important;
+}
+
+.co2-orb::before{
+  background:#ff4655!important;
+  box-shadow:
+    8px 0 0 -1px #343b48,
+    16px 0 0 -1px #ff4655!important;
+}
+
+.na-orb::before{background:#ffd000!important}
+.k-orb::before{background:#00bce7!important}
+.glucose-orb::before{background:#8b5cf6!important}
+.atp-orb::before{
+  background:#68e565!important;
+  box-shadow:
+    7px -2px 0 -1px #62e15f,
+    14px 2px 0 -1px #50d852,
+    20px -1px 0 -1px #43cf49!important;
+}
+
+/* Keep the stage visually clean even during interaction. */
+.membrane-stage.is-drop-target,
+.membrane-stage .channel-pass .protein-pore,
+.membrane-stage .crossing-flash{
+  outline:0!important;
+  box-shadow:none!important;
+}
