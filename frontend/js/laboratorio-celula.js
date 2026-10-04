@@ -14,71 +14,29 @@
   var removeButton=document.getElementById("removeSelected");
   var collisionToast=document.getElementById("collisionToast");
 
-  var armed=null;
   var selected=null;
   var placedCount=0;
-  var dragPayload=null;
+  var sourceDrag=null;
   var moving=null;
-  var ghost=null;
+  var rafMove=0;
+  var rafSource=0;
   var collisionTimer=0;
+  var lastCollisionType="";
+  var lastCollisionAt=0;
   var resizeTimer=0;
 
   var catalogue={
-    "canal-na":{
-      name:"Canal de sódio (Na⁺)",category:"PROTEÍNA TRANSMEMBRANA",
-      text:"Canal seletivo para Na⁺. O sódio só atravessa esta membrana pelo canal compatível ou por transporte ativo.",
-      label:"Canal Na⁺",kind:"protein",art:"channel"
-    },
-    "canal-k":{
-      name:"Canal de potássio (K⁺)",category:"PROTEÍNA TRANSMEMBRANA",
-      text:"Canal seletivo para K⁺. Permite a travessia do potássio pela bicamada sem que o íon atravesse diretamente a região hidrofóbica.",
-      label:"Canal K⁺",kind:"protein",art:"channel"
-    },
-    "vazante":{
-      name:"Canal vazante de K⁺",category:"PROTEÍNA TRANSMEMBRANA",
-      text:"Canal passivo para K⁺. Nesta simulação ele também funciona como uma via seletiva para potássio.",
-      label:"Canal vazante",kind:"protein",art:"channel"
-    },
-    "bomba":{
-      name:"Bomba Na⁺/K⁺-ATPase",category:"TRANSPORTE ATIVO",
-      text:"Só inicia o ciclo com 3 Na⁺ encaixados no lado intracelular, 2 K⁺ no lado extracelular e 1 ATP no encaixe energético.",
-      label:"Bomba Na⁺/K⁺",kind:"protein",art:"pump"
-    },
-    "aquaporina":{
-      name:"Aquaporina",category:"PROTEÍNA TRANSMEMBRANA",
-      text:"Canal seletivo para água. H₂O pode cruzar a bicamada apenas quando passa por uma aquaporina colocada na membrana.",
-      label:"Aquaporina",kind:"protein",art:"channel"
-    },
-    "na":{
-      name:"Sódio (Na⁺)",category:"ÍON",
-      text:"O Na⁺ não atravessa diretamente a bicamada. Use um Canal Na⁺ ou carregue a bomba Na⁺/K⁺ pelo lado intracelular.",
-      label:"Na⁺",kind:"molecule"
-    },
-    "k":{
-      name:"Potássio (K⁺)",category:"ÍON",
-      text:"O K⁺ não atravessa diretamente a bicamada. Use Canal K⁺, canal vazante ou o ciclo da bomba Na⁺/K⁺.",
-      label:"K⁺",kind:"molecule"
-    },
-    "cl":{
-      name:"Cloreto (Cl⁻)",category:"ÍON",
-      text:"Sem um canal de Cl⁻ disponível nesta versão, o íon fica bloqueado pela bicamada.",
-      label:"Cl⁻",kind:"molecule"
-    },
-    "h2o":{
-      name:"Água (H₂O)",category:"MOLÉCULA",
-      text:"Nesta simulação a travessia rápida de água ocorre pela aquaporina.",
-      label:"H₂O",kind:"molecule"
-    },
-    "atp":{
-      name:"ATP",category:"ENERGIA",
-      text:"O ATP não atravessa a membrana nesta simulação. Ele deve ser encaixado no sítio energético da bomba pelo lado intracelular.",
-      label:"ATP",kind:"molecule"
-    },
-    "adp":{
-      name:"ADP + Pi",category:"PRODUTO ENERGÉTICO",
-      text:"Produtos gerados após a hidrólise do ATP durante o ciclo da bomba Na⁺/K⁺.",
-      label:"ADP+Pi",kind:"molecule"
-    }
+    "canal-na":{name:"Canal de sódio (Na⁺)",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal seletivo para Na⁺. O sódio atravessa a bicamada somente quando passa pelo poro deste canal.",label:"Canal Na⁺",kind:"protein",art:"channel"},
+    "canal-k":{name:"Canal de potássio (K⁺)",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal seletivo para K⁺. O potássio atravessa a bicamada somente pelo poro compatível ou pela bomba.",label:"Canal K⁺",kind:"protein",art:"channel"},
+    "vazante":{name:"Canal vazante de K⁺",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal passivo para K⁺. Nesta simulação funciona como via seletiva para potássio.",label:"Canal vazante",kind:"protein",art:"channel"},
+    "bomba":{name:"Bomba Na⁺/K⁺-ATPase",category:"TRANSPORTE ATIVO",text:"Só inicia o ciclo com 3 Na⁺ no lado intracelular, 2 K⁺ no lado extracelular e 1 ATP no sítio energético.",label:"Bomba Na⁺/K⁺",kind:"protein",art:"pump"},
+    "aquaporina":{name:"Aquaporina",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal seletivo para água. H₂O cruza a membrana pelo poro da aquaporina.",label:"Aquaporina",kind:"protein",art:"channel"},
+    "na":{name:"Sódio (Na⁺)",category:"ÍON",text:"Na⁺ não atravessa diretamente os fosfolipídios. Use um Canal Na⁺ ou a bomba Na⁺/K⁺.",label:"Na⁺",kind:"molecule"},
+    "k":{name:"Potássio (K⁺)",category:"ÍON",text:"K⁺ não atravessa diretamente os fosfolipídios. Use Canal K⁺, canal vazante ou a bomba.",label:"K⁺",kind:"molecule"},
+    "cl":{name:"Cloreto (Cl⁻)",category:"ÍON",text:"Sem canal de Cl⁻ nesta versão, o íon colide com a bicamada e não a atravessa.",label:"Cl⁻",kind:"molecule"},
+    "h2o":{name:"Água (H₂O)",category:"MOLÉCULA",text:"Nesta simulação a travessia rápida da água ocorre por aquaporina.",label:"H₂O",kind:"molecule"},
+    "atp":{name:"ATP",category:"ENERGIA",text:"ATP não atravessa a bicamada. Arraste-o para o encaixe energético da bomba pelo lado intracelular.",label:"ATP",kind:"molecule"},
+    "adp":{name:"ADP + Pi",category:"PRODUTO ENERGÉTICO",text:"Produtos da hidrólise do ATP após um ciclo completo da bomba.",label:"ADP+Pi",kind:"molecule"}
   };
 
   var gates={na:["canal-na"],k:["canal-k","vazante"],h2o:["aquaporina"]};
@@ -87,69 +45,65 @@
     var lipid=document.createElement("span");
     lipid.className="phospholipid";
     lipid.style.setProperty("--delay",delay+"s");
-    var head=document.createElement("i");
-    head.className="lipid-head";
-    var tailA=document.createElement("i");
-    tailA.className="lipid-tail tail-a";
-    var tailB=document.createElement("i");
-    tailB.className="lipid-tail tail-b";
-    if(flip){lipid.appendChild(tailA);lipid.appendChild(tailB);lipid.appendChild(head)}
-    else{lipid.appendChild(head);lipid.appendChild(tailA);lipid.appendChild(tailB)}
+    var head=document.createElement("i");head.className="lipid-head";
+    var tailA=document.createElement("i");tailA.className="lipid-tail tail-a";
+    var tailB=document.createElement("i");tailB.className="lipid-tail tail-b";
+    if(flip){lipid.append(tailA,tailB,head)}else{lipid.append(head,tailA,tailB)}
     return lipid;
   }
 
   function buildBilayer(){
     if(!topRow||!bottomRow||!stage)return;
-    topRow.innerHTML="";bottomRow.innerHTML="";
-    var amount=Math.max(24,Math.min(48,Math.round(stage.clientWidth/30)));
+    topRow.textContent="";bottomRow.textContent="";
+    var amount=Math.max(24,Math.min(44,Math.round(stage.clientWidth/31)));
+    var fragTop=document.createDocumentFragment();
+    var fragBottom=document.createDocumentFragment();
     for(var i=0;i<amount;i++){
-      var delay=-((i%12)*0.28);
-      topRow.appendChild(makeLipid(delay,false));
-      bottomRow.appendChild(makeLipid(delay-.65,true));
+      var delay=-((i%10)*0.3);
+      fragTop.appendChild(makeLipid(delay,false));
+      fragBottom.appendChild(makeLipid(delay-.7,true));
     }
+    topRow.appendChild(fragTop);bottomRow.appendChild(fragBottom);
   }
 
-  function getBarrier(){
+  function barrier(){
     var top=bilayer.offsetTop;
-    return {top:top,bottom:top+bilayer.offsetHeight,center:top+bilayer.offsetHeight/2};
+    var height=bilayer.offsetHeight;
+    return {top:top,bottom:top+height,center:top+height/2,height:height};
   }
 
-  function sideOf(y){
-    var b=getBarrier();
-    if(y<b.top)return "EC";
-    if(y>b.bottom)return "IC";
-    return "MP";
-  }
+  function stageRect(){return stage.getBoundingClientRect()}
 
-  function stagePoint(clientX,clientY){
-    var rect=stage.getBoundingClientRect();
+  function pointFromClient(clientX,clientY,rect){
+    rect=rect||stageRect();
     return {
       x:Math.max(16,Math.min(rect.width-16,clientX-rect.left)),
       y:Math.max(16,Math.min(rect.height-16,clientY-rect.top))
     };
   }
 
-  function proteinY(){return getBarrier().center}
+  function sideOf(y,b){
+    b=b||barrier();
+    if(y<b.top)return "EC";
+    if(y>b.bottom)return "IC";
+    return "MP";
+  }
+
+  function proteinY(){return barrier().center}
   function clampProteinX(x){return Math.max(50,Math.min(stage.clientWidth-50,x))}
 
-  function itemMarkup(type){
-    var item=catalogue[type];
-    if(!item)return "";
-    if(item.kind==="protein"){
-      if(item.art==="pump"){
-        return '<span class="protein-label">'+item.label+'</span>'+
-          '<span class="protein-art pump-art"></span>'+
-          '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K</i>'+
-          '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K</i>'+
-          '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na</i>'+
-          '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2">Na</i>'+
-          '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3">Na</i>'+
-          '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp">ATP</i>'+
-          '<span class="pump-state-badge">0/6</span>';
-      }
-      return '<span class="protein-label">'+item.label+'</span><span class="protein-art protein-channel"><i class="protein-pore"></i></span>';
+  function proteinArt(type){
+    if(type==="bomba"){
+      return '<span class="protein-label">Bomba Na⁺/K⁺</span><span class="protein-art pump-art"></span>'+
+        '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K</i>'+
+        '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K</i>'+
+        '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na</i>'+
+        '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2">Na</i>'+
+        '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3">Na</i>'+
+        '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp">ATP</i>'+
+        '<span class="pump-state-badge">0/6</span>';
     }
-    return item.label;
+    return '<span class="protein-label">'+catalogue[type].label+'</span><span class="protein-art protein-channel"><i class="protein-pore"></i></span>';
   }
 
   function updateCounter(){
@@ -162,7 +116,7 @@
     document.querySelector(".selection-index").textContent="01";
     document.getElementById("infoType").textContent="BICAMADA";
     document.getElementById("infoTitle").textContent="Fosfolipídios";
-    document.getElementById("infoText").textContent="Cabeças hidrofílicas voltadas aos meios aquosos e caudas hidrofóbicas apontadas umas para as outras. Íons não atravessam diretamente a região hidrofóbica.";
+    document.getElementById("infoText").textContent="A colisão ocorre na própria superfície dos fosfolipídios. Íons só atravessam pelo poro da proteína compatível.";
   }
 
   function renderInfo(type){
@@ -174,84 +128,172 @@
     document.getElementById("infoText").textContent=item.text;
   }
 
-  function clearSelection(){
-    if(selected)selected.classList.remove("is-selected");
-    selected=null;removeButton.hidden=true;renderDefaultInfo();
-  }
-
   function selectElement(el){
     if(selected&&selected!==el)selected.classList.remove("is-selected");
-    selected=el;el.classList.add("is-selected");removeButton.hidden=false;renderInfo(el.dataset.type);
+    selected=el;
+    if(el){el.classList.add("is-selected");removeButton.hidden=false;renderInfo(el.dataset.type)}
+    else{removeButton.hidden=true;renderDefaultInfo()}
   }
 
   function showCollision(type){
+    var now=performance.now();
+    if(type===lastCollisionType&&now-lastCollisionAt<420)return;
+    lastCollisionType=type;lastCollisionAt=now;
+
     var message="A bicamada bloqueou a passagem.";
-    if(type==="na")message="Na⁺ bloqueado: atravesse por um Canal Na⁺ ou use a bomba Na⁺/K⁺.";
-    if(type==="k")message="K⁺ bloqueado: atravesse por um Canal K⁺/vazante ou use a bomba Na⁺/K⁺.";
-    if(type==="h2o")message="H₂O bloqueada: use uma aquaporina para cruzar a membrana.";
-    if(type==="cl")message="Cl⁻ bloqueado: ainda não há canal de cloreto nesta versão.";
-    if(type==="atp")message="ATP não atravessa a bicamada: use-o no encaixe intracelular da bomba.";
+    if(type==="na")message="Na⁺: atravesse exatamente pelo Canal Na⁺.";
+    else if(type==="k")message="K⁺: atravesse pelo Canal K⁺ ou canal vazante.";
+    else if(type==="h2o")message="H₂O: atravesse pela aquaporina.";
+    else if(type==="cl")message="Cl⁻: ainda não há canal compatível nesta versão.";
+    else if(type==="atp")message="ATP: use o encaixe intracelular da bomba.";
+
     collisionToast.textContent=message;
     collisionToast.classList.add("is-visible");
-    stage.classList.remove("barrier-hit");void stage.offsetWidth;stage.classList.add("barrier-hit");
     clearTimeout(collisionTimer);
-    collisionTimer=setTimeout(function(){
-      collisionToast.classList.remove("is-visible");stage.classList.remove("barrier-hit");
-    },1450);
+    collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1000);
   }
 
   function createPlaced(type,kind,x,y,options){
     options=options||{};
     var item=catalogue[type];
     if(!item)return null;
-    var b=getBarrier();
+    var b=barrier();
 
     if(kind==="protein"){
-      x=clampProteinX(x);y=b.center;
-    }else if(y>=b.top&&y<=b.bottom){
-      y=y<b.center?b.top-26:b.bottom+26;
+      x=clampProteinX(x);
+      y=b.center;
     }
 
     var el=document.createElement("div");
     el.className="placed-element "+(kind==="protein"?"placed-protein":"placed-molecule");
-    el.dataset.type=type;el.dataset.kind=kind;el.dataset.id="mem-"+(++placedCount);
-    el.innerHTML=itemMarkup(type);el.style.left=x+"px";el.style.top=y+"px";
+    el.dataset.type=type;
+    el.dataset.kind=kind;
+    el.dataset.id="mem-"+(++placedCount);
+    el.innerHTML=kind==="protein"?proteinArt(type):item.label;
+    el.style.left=x+"px";
+    el.style.top=y+"px";
+    layer.appendChild(el);
 
-    el.addEventListener("pointerdown",beginMovePlaced);
-    el.addEventListener("click",function(event){event.stopPropagation();selectElement(el)});
+    if(kind==="molecule"){
+      var half=Math.max(10,el.offsetHeight/2);
+      if(y+half>b.top&&y<b.center)el.style.top=(b.top-half)+"px";
+      else if(y-half<b.bottom&&y>=b.center)el.style.top=(b.bottom+half)+"px";
+    }else{
+      el.style.top=b.center+"px";
+    }
+
+    el.addEventListener("pointerdown",beginPlacedDrag,{passive:false});
+    el.addEventListener("click",function(e){e.stopPropagation();selectElement(el)});
     el.addEventListener("mouseenter",function(){renderInfo(type)});
     el.addEventListener("mouseleave",function(){if(selected)renderInfo(selected.dataset.type);else renderDefaultInfo()});
 
-    layer.appendChild(el);
     if(options.select!==false)selectElement(el);
     updateCounter();
     return el;
   }
 
-  function armTool(tool){
-    document.querySelectorAll(".tool-item,.molecule-tool").forEach(function(node){
-      node.classList.toggle("is-armed",node===tool);
-    });
-    armed={type:tool.dataset.type,kind:tool.dataset.kind};
-    var item=catalogue[armed.type];
-    armedText.textContent=item?item.name:"Item selecionado";
-    armedHint.hidden=false;
+  function ghostMarkup(type,kind){
+    if(kind==="molecule"){
+      return '<span class="ghost-molecule" data-type="'+type+'">'+catalogue[type].label+'</span>';
+    }
+    if(type==="bomba"){
+      return '<span class="ghost-protein"><span class="protein-art pump-art"></span></span>';
+    }
+    return '<span class="ghost-protein"><span class="protein-art protein-channel"><i class="protein-pore"></i></span></span>';
   }
 
-  function disarmTool(){
-    armed=null;armedHint.hidden=true;
-    document.querySelectorAll(".tool-item,.molecule-tool").forEach(function(node){node.classList.remove("is-armed")});
+  function beginSourceDrag(event){
+    if(event.button!==undefined&&event.button!==0)return;
+    event.preventDefault();
+
+    var tool=event.currentTarget;
+    var ghost=document.createElement("div");
+    ghost.className="drag-ghost";
+    ghost.innerHTML=ghostMarkup(tool.dataset.type,tool.dataset.kind);
+    document.body.appendChild(ghost);
+
+    var rect=stageRect();
+    sourceDrag={
+      tool:tool,
+      type:tool.dataset.type,
+      kind:tool.dataset.kind,
+      pointerId:event.pointerId,
+      startX:event.clientX,
+      startY:event.clientY,
+      clientX:event.clientX,
+      clientY:event.clientY,
+      rect:rect,
+      ghost:ghost,
+      moved:false
+    };
+
+    ghost.style.left=event.clientX+"px";
+    ghost.style.top=event.clientY+"px";
+    stage.classList.add("drag-source-active");
+    try{tool.setPointerCapture(event.pointerId)}catch(_){}
+  }
+
+  function queueSourceMove(event){
+    if(!sourceDrag||event.pointerId!==sourceDrag.pointerId)return;
+    sourceDrag.clientX=event.clientX;sourceDrag.clientY=event.clientY;
+    if(Math.hypot(event.clientX-sourceDrag.startX,event.clientY-sourceDrag.startY)>4)sourceDrag.moved=true;
+    if(rafSource)return;
+    rafSource=requestAnimationFrame(applySourceMove);
+  }
+
+  function applySourceMove(){
+    rafSource=0;
+    if(!sourceDrag)return;
+    var d=sourceDrag;
+    d.ghost.style.left=d.clientX+"px";
+    d.ghost.style.top=d.clientY+"px";
+    var r=d.rect;
+    var inside=d.clientX>=r.left&&d.clientX<=r.right&&d.clientY>=r.top&&d.clientY<=r.bottom;
+    stage.classList.toggle("is-drop-target",inside);
+  }
+
+  function endSourceDrag(event){
+    if(!sourceDrag||event.pointerId!==sourceDrag.pointerId)return;
+    if(rafSource){cancelAnimationFrame(rafSource);rafSource=0;applySourceMove()}
+
+    var d=sourceDrag;
+    var r=d.rect;
+    var inside=d.clientX>=r.left&&d.clientX<=r.right&&d.clientY>=r.top&&d.clientY<=r.bottom;
+
+    if(inside&&d.moved){
+      var p=pointFromClient(d.clientX,d.clientY,r);
+      createPlaced(d.type,d.kind,p.x,p.y);
+    }else if(!d.moved){
+      armedHint.hidden=false;
+      armedText.textContent=catalogue[d.type].name;
+      var once=function(e){
+        if(e.target.closest(".tool-item,.molecule-tool"))return;
+        var rr=stageRect();
+        if(e.clientX>=rr.left&&e.clientX<=rr.right&&e.clientY>=rr.top&&e.clientY<=rr.bottom){
+          var p=pointFromClient(e.clientX,e.clientY,rr);
+          createPlaced(d.type,d.kind,p.x,p.y);
+        }
+        armedHint.hidden=true;
+        window.removeEventListener("pointerdown",once,true);
+      };
+      setTimeout(function(){window.addEventListener("pointerdown",once,true)},0);
+    }
+
+    d.ghost.remove();
+    stage.classList.remove("drag-source-active","is-drop-target");
+    try{d.tool.releasePointerCapture(d.pointerId)}catch(_){}
+    sourceDrag=null;
   }
 
   function compatibleGate(type,x){
     var allowed=gates[type]||[];
     if(!allowed.length)return null;
-    var best=null,bestDistance=9999;
-    Array.from(layer.querySelectorAll(".placed-protein")).forEach(function(protein){
+    var best=null,bestDistance=Infinity;
+    layer.querySelectorAll(".placed-protein").forEach(function(protein){
       if(allowed.indexOf(protein.dataset.type)===-1)return;
       var px=parseFloat(protein.style.left)||0;
-      var d=Math.abs(px-x);
-      if(d<48&&d<bestDistance){best=protein;bestDistance=d}
+      var distance=Math.abs(px-x);
+      if(distance<=34&&distance<bestDistance){best=protein;bestDistance=distance}
     });
     return best;
   }
@@ -261,7 +303,7 @@
   }
 
   function slotStagePoint(slot){
-    var sr=slot.getBoundingClientRect(),tr=stage.getBoundingClientRect();
+    var sr=slot.getBoundingClientRect(),tr=stageRect();
     return {x:sr.left+sr.width/2-tr.left,y:sr.top+sr.height/2-tr.top};
   }
 
@@ -270,22 +312,18 @@
     var pump=layer.querySelector('[data-id="'+el.dataset.dockedPump+'"]');
     if(pump){
       var slot=pump.querySelector('[data-slot="'+el.dataset.dockedSlot+'"]');
-      if(slot){
-        slot.classList.remove("occupied","slot-ready");
-        delete slot.dataset.occupiedId;
-      }
+      if(slot){slot.classList.remove("occupied","slot-ready");delete slot.dataset.occupiedId}
       updatePumpState(pump);
     }
     delete el.dataset.dockedPump;delete el.dataset.dockedSlot;el.classList.remove("docked");
   }
 
   function findDockTarget(el,x,y){
-    var type=el.dataset.type,best=null,bestDistance=9999;
-    Array.from(layer.querySelectorAll('.placed-protein[data-type="bomba"] .pump-slot:not(.occupied)')).forEach(function(slot){
+    var type=el.dataset.type,best=null,bestDistance=Infinity;
+    layer.querySelectorAll('.placed-protein[data-type="bomba"] .pump-slot:not(.occupied)').forEach(function(slot){
       if(slot.dataset.accept!==type)return;
-      var point=slotStagePoint(slot);
-      var d=Math.hypot(point.x-x,point.y-y);
-      if(d<34&&d<bestDistance){best=slot;bestDistance=d}
+      var p=slotStagePoint(slot),d=Math.hypot(p.x-x,p.y-y);
+      if(d<32&&d<bestDistance){best=slot;bestDistance=d}
     });
     return best;
   }
@@ -300,8 +338,8 @@
     releaseSlotFor(el);
     var pump=slot.closest('.placed-protein[data-type="bomba"]');
     if(!pump)return;
-    var point=slotStagePoint(slot);
-    el.style.left=point.x+"px";el.style.top=point.y+"px";
+    var p=slotStagePoint(slot);
+    el.style.left=p.x+"px";el.style.top=p.y+"px";
     el.dataset.dockedPump=pump.dataset.id;el.dataset.dockedSlot=slot.dataset.slot;
     el.classList.add("docked");
     slot.classList.remove("slot-ready");slot.classList.add("occupied");slot.dataset.occupiedId=el.dataset.id;
@@ -309,11 +347,11 @@
   }
 
   function repositionDocked(pump){
-    Array.from(pump.querySelectorAll(".pump-slot.occupied")).forEach(function(slot){
+    pump.querySelectorAll(".pump-slot.occupied").forEach(function(slot){
       var el=layer.querySelector('[data-id="'+slot.dataset.occupiedId+'"]');
       if(!el)return;
-      var point=slotStagePoint(slot);
-      el.style.left=point.x+"px";el.style.top=point.y+"px";
+      var p=slotStagePoint(slot);
+      el.style.left=p.x+"px";el.style.top=p.y+"px";
     });
   }
 
@@ -326,7 +364,7 @@
     if(occupied===6){
       pump.dataset.cycling="1";
       if(badge)badge.textContent="PRONTA";
-      setTimeout(function(){startPumpCycle(pump)},420);
+      setTimeout(function(){startPumpCycle(pump)},360);
     }
   }
 
@@ -346,8 +384,7 @@
     if(badge)badge.textContent="ATIVA";
 
     setTimeout(function(){
-      var b=getBarrier();
-      var px=parseFloat(pump.style.left)||stage.clientWidth/2;
+      var b=barrier(),px=parseFloat(pump.style.left)||stage.clientWidth/2;
       var naIndex=0,kIndex=0,atpEl=null;
 
       slots.forEach(function(slot){
@@ -357,228 +394,165 @@
         el.classList.remove("docked");el.classList.add("transporting");
 
         if(el.dataset.type==="na"){
-          var naOffsets=[-30,0,30];
-          el.style.left=(px+naOffsets[naIndex++])+"px";el.style.top=(b.top-48)+"px";
+          var no=[-30,0,30];
+          el.style.left=(px+no[naIndex++])+"px";el.style.top=(b.top-34)+"px";
         }else if(el.dataset.type==="k"){
-          var kOffsets=[-18,18];
-          el.style.left=(px+kOffsets[kIndex++])+"px";el.style.top=(b.bottom+48)+"px";
-        }else if(el.dataset.type==="atp"){
-          atpEl=el;
-        }
+          var ko=[-18,18];
+          el.style.left=(px+ko[kIndex++])+"px";el.style.top=(b.bottom+34)+"px";
+        }else if(el.dataset.type==="atp"){atpEl=el}
         clearPumpSlot(slot);
       });
 
       if(atpEl){
         atpEl.remove();
-        createPlaced("adp","molecule",Math.min(stage.clientWidth-50,px+72),b.bottom+70,{select:false});
+        createPlaced("adp","molecule",Math.min(stage.clientWidth-50,px+70),b.bottom+56,{select:false});
       }
       updateCounter();
 
       setTimeout(function(){
         layer.querySelectorAll(".transporting").forEach(function(el){el.classList.remove("transporting")});
-        pump.classList.remove("pump-ready","pump-cycling");
-        delete pump.dataset.cycling;
+        pump.classList.remove("pump-ready","pump-cycling");delete pump.dataset.cycling;
         if(badge)badge.textContent="0/6";
-        renderInfo("bomba");
-      },820);
-    },520);
+      },760);
+    },480);
   }
 
-  function beginMovePlaced(event){
+  function beginPlacedDrag(event){
     if(event.button!==undefined&&event.button!==0)return;
     var el=event.currentTarget;
     if(el.dataset.cycling==="1")return;
     event.preventDefault();event.stopPropagation();selectElement(el);
     if(el.dataset.kind==="molecule")releaseSlotFor(el);
 
-    var point=stagePoint(event.clientX,event.clientY);
-    var left=parseFloat(el.style.left)||point.x;
-    var top=parseFloat(el.style.top)||point.y;
+    var rect=stageRect(),b=barrier(),p=pointFromClient(event.clientX,event.clientY,rect);
+    var left=parseFloat(el.style.left)||p.x,top=parseFloat(el.style.top)||p.y;
 
     moving={
-      el:el,offsetX:point.x-left,offsetY:point.y-top,pointerId:event.pointerId,
-      startSide:el.dataset.kind==="molecule"?sideOf(top):"MP",gate:null,readySlot:null
+      el:el,pointerId:event.pointerId,rect:rect,b:b,
+      offsetX:p.x-left,offsetY:p.y-top,
+      startSide:el.dataset.kind==="molecule"?sideOf(top,b):"MP",
+      clientX:event.clientX,clientY:event.clientY,
+      gate:null,readySlot:null
     };
+    el.classList.add("is-dragging");
     try{el.setPointerCapture(event.pointerId)}catch(_){}
   }
 
-  function moveProtein(point){
-    var el=moving.el;
-    var x=clampProteinX(point.x-moving.offsetX);
-    el.style.left=x+"px";el.style.top=proteinY()+"px";
-    if(el.dataset.type==="bomba")repositionDocked(el);
+  function queuePlacedMove(event){
+    if(!moving||event.pointerId!==moving.pointerId)return;
+    moving.clientX=event.clientX;moving.clientY=event.clientY;
+    if(rafMove)return;
+    rafMove=requestAnimationFrame(applyPlacedMove);
   }
 
-  function moveMolecule(point){
-    var el=moving.el,type=el.dataset.type,b=getBarrier();
-    var x=point.x-moving.offsetX,y=point.y-moving.offsetY;
-    x=Math.max(18,Math.min(stage.clientWidth-18,x));
-    y=Math.max(18,Math.min(stage.clientHeight-18,y));
+  function applyPlacedMove(){
+    rafMove=0;
+    if(!moving)return;
+    var m=moving,p=pointFromClient(m.clientX,m.clientY,m.rect),el=m.el;
 
-    var enteringFromEC=moving.startSide==="EC"&&y>=b.top;
-    var enteringFromIC=moving.startSide==="IC"&&y<=b.bottom;
+    if(el.dataset.kind==="protein"){
+      var px=clampProteinX(p.x-m.offsetX);
+      el.style.left=px+"px";
+      el.style.top=m.b.center+"px";
+      if(el.dataset.type==="bomba")repositionDocked(el);
+      return;
+    }
 
-    if(enteringFromEC||enteringFromIC){
-      if(!moving.gate)moving.gate=compatibleGate(type,x);
-      if(moving.gate){
-        var gx=parseFloat(moving.gate.style.left)||x;
-        if(y>=b.top-12&&y<=b.bottom+12)x=gx;
-        moving.gate.classList.add("channel-pass");
+    var type=el.dataset.type;
+    var x=Math.max(18,Math.min(m.rect.width-18,p.x-m.offsetX));
+    var y=Math.max(18,Math.min(m.rect.height-18,p.y-m.offsetY));
+    var half=Math.max(10,el.offsetHeight/2);
+    var topSurface=m.b.top;
+    var bottomSurface=m.b.bottom;
+    var crossingFromEC=m.startSide==="EC"&&y+half>=topSurface;
+    var crossingFromIC=m.startSide==="IC"&&y-half<=bottomSurface;
+
+    if(crossingFromEC||crossingFromIC){
+      var gate=compatibleGate(type,x);
+      if(gate){
+        m.gate=gate;
+        gate.classList.add("channel-pass");
+        var gx=parseFloat(gate.style.left)||x;
+        if(y+half>=topSurface-6&&y-half<=bottomSurface+6)x=gx;
         el.classList.remove("is-blocked");
       }else{
-        if(enteringFromEC)y=b.top-20;
-        if(enteringFromIC)y=b.bottom+20;
+        clearGateGlow();
+        m.gate=null;
+        if(crossingFromEC)y=topSurface-half;
+        else y=bottomSurface+half;
         el.classList.add("is-blocked");
         showCollision(type);
       }
     }else{
+      clearGateGlow();
+      m.gate=null;
       el.classList.remove("is-blocked");
     }
 
     el.style.left=x+"px";el.style.top=y+"px";
-    var slot=findDockTarget(el,x,y);
-    moving.readySlot=slot;markReadySlot(slot);
+    m.readySlot=findDockTarget(el,x,y);
+    markReadySlot(m.readySlot);
   }
 
-  function movePlaced(event){
-    if(!moving)return;
-    var point=stagePoint(event.clientX,event.clientY);
-    if(moving.el.dataset.kind==="protein")moveProtein(point);
-    else moveMolecule(point);
-  }
-
-  function endMovePlaced(){
-    if(!moving)return;
-    if(moving.readySlot&&moving.el.dataset.kind==="molecule")dockElement(moving.el,moving.readySlot);
-    moving.el.classList.remove("is-blocked");
+  function endPlacedDrag(event){
+    if(!moving||event.pointerId!==moving.pointerId)return;
+    if(rafMove){cancelAnimationFrame(rafMove);rafMove=0;applyPlacedMove()}
+    var m=moving;
+    if(m.readySlot&&m.el.dataset.kind==="molecule")dockElement(m.el,m.readySlot);
+    m.el.classList.remove("is-dragging","is-blocked");
     markReadySlot(null);clearGateGlow();
-    try{moving.el.releasePointerCapture(moving.pointerId)}catch(_){}
+    try{m.el.releasePointerCapture(m.pointerId)}catch(_){}
     moving=null;
   }
 
-  function ghostFor(tool){
-    var node=document.createElement("div");
-    node.className="drag-ghost";
-    var item=catalogue[tool.dataset.type];
-    node.innerHTML=tool.dataset.kind==="protein"
-      ? '<span class="tool-preview channel-preview"><i></i></span>'
-      : '<span class="placed-molecule" data-type="'+tool.dataset.type+'">'+item.label+'</span>';
-    document.body.appendChild(node);
-    return node;
-  }
-
-  function startTouchTool(event){
-    if(event.pointerType==="mouse")return;
-    event.preventDefault();
-    var tool=event.currentTarget;
-    armTool(tool);
-    ghost=ghostFor(tool);ghost.style.left=event.clientX+"px";ghost.style.top=event.clientY+"px";
-    dragPayload={type:tool.dataset.type,kind:tool.dataset.kind,pointerId:event.pointerId};
-    try{tool.setPointerCapture(event.pointerId)}catch(_){}
-  }
-
-  function moveTouchTool(event){
-    if(!dragPayload||event.pointerId!==dragPayload.pointerId)return;
-    if(ghost){ghost.style.left=event.clientX+"px";ghost.style.top=event.clientY+"px"}
-    var rect=stage.getBoundingClientRect();
-    var inside=event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom;
-    stage.classList.toggle("is-drop-target",inside);
-  }
-
-  function endTouchTool(event){
-    if(!dragPayload||event.pointerId!==dragPayload.pointerId)return;
-    var rect=stage.getBoundingClientRect();
-    var inside=event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom;
-    if(inside){
-      var point=stagePoint(event.clientX,event.clientY);
-      createPlaced(dragPayload.type,dragPayload.kind,point.x,point.y);
-      disarmTool();
-    }
-    if(ghost){ghost.remove();ghost=null}
-    stage.classList.remove("is-drop-target");dragPayload=null;
-  }
-
   document.querySelectorAll(".tool-item,.molecule-tool").forEach(function(tool){
-    tool.addEventListener("click",function(){
-      if(armed&&armed.type===tool.dataset.type)disarmTool();else armTool(tool);
-    });
-    tool.addEventListener("dragstart",function(event){
-      var data={type:tool.dataset.type,kind:tool.dataset.kind};
-      event.dataTransfer.effectAllowed="copy";
-      event.dataTransfer.setData("text/plain",JSON.stringify(data));
-      armTool(tool);
-    });
-    tool.addEventListener("dragend",function(){stage.classList.remove("is-drop-target");disarmTool()});
-    tool.addEventListener("pointerdown",startTouchTool);
-    tool.addEventListener("pointermove",moveTouchTool);
-    tool.addEventListener("pointerup",endTouchTool);
-    tool.addEventListener("pointercancel",endTouchTool);
+    tool.addEventListener("pointerdown",beginSourceDrag,{passive:false});
+    tool.addEventListener("pointermove",queueSourceMove,{passive:true});
+    tool.addEventListener("pointerup",endSourceDrag,{passive:false});
+    tool.addEventListener("pointercancel",endSourceDrag,{passive:false});
   });
 
-  stage.addEventListener("dragover",function(event){
-    event.preventDefault();stage.classList.add("is-drop-target");event.dataTransfer.dropEffect="copy";
-  });
-  stage.addEventListener("dragleave",function(event){
-    if(!stage.contains(event.relatedTarget))stage.classList.remove("is-drop-target");
-  });
-  stage.addEventListener("drop",function(event){
-    event.preventDefault();stage.classList.remove("is-drop-target");
-    try{
-      var data=JSON.parse(event.dataTransfer.getData("text/plain"));
-      var point=stagePoint(event.clientX,event.clientY);
-      createPlaced(data.type,data.kind,point.x,point.y);
-    }catch(_){}
-    disarmTool();
-  });
+  window.addEventListener("pointermove",queuePlacedMove,{passive:true});
+  window.addEventListener("pointerup",endPlacedDrag,{passive:true});
+  window.addEventListener("pointercancel",endPlacedDrag,{passive:true});
 
   stage.addEventListener("click",function(event){
-    if(event.target.closest(".placed-element"))return;
-    if(armed){
-      var point=stagePoint(event.clientX,event.clientY);
-      createPlaced(armed.type,armed.kind,point.x,point.y);disarmTool();return;
-    }
-    clearSelection();
+    if(!event.target.closest(".placed-element"))selectElement(null);
   });
 
-  window.addEventListener("pointermove",movePlaced);
-  window.addEventListener("pointerup",endMovePlaced);
-  window.addEventListener("pointercancel",endMovePlaced);
-
   clearButton.addEventListener("click",function(){
-    layer.innerHTML="";placedCount=0;disarmTool();clearSelection();updateCounter();
+    layer.textContent="";placedCount=0;selectElement(null);updateCounter();
   });
 
   removeButton.addEventListener("click",function(){
     if(!selected)return;
     if(selected.dataset.type==="bomba"){
-      Array.from(selected.querySelectorAll(".pump-slot.occupied")).forEach(function(slot){
+      selected.querySelectorAll(".pump-slot.occupied").forEach(function(slot){
         var molecule=layer.querySelector('[data-id="'+slot.dataset.occupiedId+'"]');
         if(molecule){
           delete molecule.dataset.dockedPump;delete molecule.dataset.dockedSlot;molecule.classList.remove("docked");
         }
         clearPumpSlot(slot);
       });
-    }else if(selected.dataset.kind==="molecule"){
-      releaseSlotFor(selected);
-    }
+    }else if(selected.dataset.kind==="molecule"){releaseSlotFor(selected)}
     selected.remove();selected=null;removeButton.hidden=true;renderDefaultInfo();updateCounter();
   });
 
   document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){disarmTool();clearSelection()}
+    if(event.key==="Escape"){selectElement(null);armedHint.hidden=true}
   });
 
   window.addEventListener("resize",function(){
     clearTimeout(resizeTimer);
     resizeTimer=setTimeout(function(){
       buildBilayer();
-      var b=getBarrier();
+      var b=barrier();
       layer.querySelectorAll('.placed-element[data-kind="protein"]').forEach(function(el){
         el.style.top=b.center+"px";
         el.style.left=clampProteinX(parseFloat(el.style.left)||stage.clientWidth/2)+"px";
         if(el.dataset.type==="bomba")repositionDocked(el);
       });
-    },120);
+    },160);
   });
 
   async function loadUser(){
@@ -608,5 +582,8 @@
     });
   }
 
-  buildBilayer();renderDefaultInfo();updateCounter();loadUser();
+  buildBilayer();
+  renderDefaultInfo();
+  updateCounter();
+  loadUser();
 })();

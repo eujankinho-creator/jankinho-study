@@ -831,3 +831,196 @@
   .pump-state-badge{right:-35px}
   .pump-slot[data-accept="atp"]{bottom:-49px}
 }
+
+
+/* Physics v3 — arraste leve, acoplamento central e colisão exatamente na bicamada */
+.tool-item,.molecule-tool{
+  -webkit-user-drag:none;
+  user-select:none;
+  touch-action:none;
+}
+
+.drag-ghost{
+  position:fixed;
+  z-index:99999;
+  left:0;
+  top:0;
+  width:auto;
+  height:auto;
+  pointer-events:none;
+  opacity:.96;
+  transform:translate3d(-50%,-50%,0);
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,.32));
+  will-change:transform,left,top;
+}
+
+.drag-ghost .ghost-protein{
+  position:relative;
+  width:58px;
+  height:118px;
+  display:grid;
+  place-items:center;
+}
+
+.drag-ghost .ghost-protein .protein-art{
+  width:54px;
+  height:112px;
+  opacity:1!important;
+}
+
+.drag-ghost .ghost-protein .protein-channel::before,
+.drag-ghost .ghost-protein .protein-channel::after{
+  width:20px;
+}
+
+.drag-ghost .ghost-protein .pump-art{
+  width:58px!important;
+  height:118px!important;
+}
+
+.drag-ghost .ghost-molecule{
+  min-width:36px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  padding:0 8px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:11px;
+  background:#13202a;
+  color:#e2ebef;
+  font-size:9px;
+  font-weight:900;
+}
+
+.drag-ghost .ghost-molecule[data-type="na"]{
+  color:#f0c0aa;
+  background:linear-gradient(145deg,#8e4934,#5e352a);
+  clip-path:polygon(25% 4%,75% 4%,98% 50%,75% 96%,25% 96%,2% 50%);
+  border-radius:0;
+}
+.drag-ghost .ghost-molecule[data-type="k"]{
+  color:#f0d994;
+  background:linear-gradient(145deg,#846c32,#5d4c2c);
+  border-radius:50%;
+}
+.drag-ghost .ghost-molecule[data-type="cl"]{color:#c2d8e2;background:linear-gradient(145deg,#4f6978,#31444e)}
+.drag-ghost .ghost-molecule[data-type="h2o"]{color:#c3dce7;background:linear-gradient(145deg,#3e6476,#29434f)}
+.drag-ghost .ghost-molecule[data-type="atp"]{color:#ded0a3;background:linear-gradient(145deg,#6e633f,#49442f)}
+
+.placed-protein{
+  top:50%;
+  opacity:1!important;
+  contain:layout paint;
+}
+
+.placed-protein.is-dragging,
+.placed-molecule.is-dragging{
+  will-change:left,top;
+}
+
+.placed-molecule{
+  animation:none!important;
+  contain:layout paint;
+}
+
+.phospholipid{
+  animation:none!important;
+}
+
+.phospholipid-row{
+  will-change:transform;
+}
+
+.top-row{
+  animation:fluidRowTop 7.4s ease-in-out infinite;
+}
+
+.bottom-row{
+  animation:fluidRowBottom 8.2s ease-in-out infinite;
+}
+
+.phospholipid .lipid-tail{
+  animation:none!important;
+}
+
+.phospholipid:nth-child(6n+1) .lipid-tail.tail-a{
+  animation:tailMicroA 3.8s ease-in-out infinite!important;
+}
+
+.phospholipid:nth-child(6n+4) .lipid-tail.tail-b{
+  animation:tailMicroB 4.2s ease-in-out infinite!important;
+}
+
+@keyframes fluidRowTop{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(4px,1px,0)}
+}
+@keyframes fluidRowBottom{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(-4px,-1px,0)}
+}
+@keyframes tailMicroA{
+  0%,100%{rotate:0deg}
+  50%{rotate:3deg}
+}
+@keyframes tailMicroB{
+  0%,100%{rotate:0deg}
+  50%{rotate:-3deg}
+}
+
+.bilayer-highlight{
+  animation-duration:16s;
+}
+
+.membrane-stage.drag-source-active .drop-hint{
+  opacity:.22;
+}
+
+.membrane-stage.is-drop-target::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  inset:1px;
+  border:1px solid rgba(169,196,211,.18);
+  border-radius:0;
+  pointer-events:none;
+}
+
+.placed-protein .protein-label{
+  top:-14px;
+}
+
+.placed-protein .protein-art{
+  opacity:1!important;
+}
+
+/* A proteína atravessa visualmente as duas folhas e fica no centro exato da MP. */
+.placed-protein{
+  height:156px;
+}
+.placed-protein .protein-art{
+  height:148px;
+}
+.placed-protein .protein-channel::before,
+.placed-protein .protein-channel::after{
+  top:2px;
+  bottom:2px;
+}
+.placed-protein .protein-channel .protein-pore{
+  top:10px;
+  bottom:10px;
+}
+.placed-protein .pump-art{
+  height:150px!important;
+}
+
+/* Feedback de colisão toca a cabeça do fosfolipídio, sem faixa de distância artificial. */
+.placed-molecule.is-blocked{
+  filter:drop-shadow(0 0 7px rgba(164,190,204,.18));
+}
+
+@media (prefers-reduced-motion:reduce){
+  .top-row,.bottom-row,.bilayer-highlight,.phospholipid .lipid-tail{
+    animation:none!important;
+  }
+}
