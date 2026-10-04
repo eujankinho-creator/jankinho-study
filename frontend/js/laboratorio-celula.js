@@ -349,19 +349,19 @@
   }
 
   function particleVisual(type){
-    if(type==="o2")return {label:"",fill:"#ef6a67",stroke:"#151515",text:"#fff",w:30,h:18,shape:"o2"};
-    if(type==="co2")return {label:"",fill:"#5f6268",stroke:"#151515",text:"#fff",w:34,h:18,shape:"co2"};
-    if(type==="glucose")return {label:"",fill:"#8170b8",stroke:"#171721",text:"#fff",w:26,h:24,shape:"hex"};
-    if(type==="na")return {label:"+",fill:"#ffd52f",stroke:"#171717",text:"#202020",w:22,h:22,shape:"circle"};
-    if(type==="k")return {label:"+",fill:"#43b7d8",stroke:"#171717",text:"#10232a",w:24,h:24,shape:"circle"};
-    if(type==="cl")return {label:"−",fill:"#6bb7cf",stroke:"#171717",text:"#10232a",w:23,h:23,shape:"circle"};
-    if(type==="h2o")return {label:"",fill:"#5ecad7",stroke:"#17343a",text:"#ecffff",w:22,h:24,shape:"drop"};
-    if(type==="pi")return {label:"Pi",fill:"#8b8fd4",stroke:"#24264f",text:"#fff",w:20,h:20,shape:"circle"};
-    if(type==="atp")return {label:"",fill:"#86ca6a",stroke:"#20391e",text:"#fff",w:39,h:19,shape:"atp"};
-    if(type==="adp")return {label:"ADP",fill:"#7380b8",stroke:"transparent",text:"#eef0ff",w:36,h:19,shape:"adp"};
-    if(type==="ligand-na")return {label:"",fill:"#f3b37b",stroke:"#1c1c1c",text:"#fff",w:24,h:22,shape:"triangle"};
-    if(type==="ligand-k")return {label:"",fill:"#9ab9da",stroke:"#1c1c1c",text:"#fff",w:24,h:24,shape:"star"};
-    return {label:type.toUpperCase(),fill:"#65737d",stroke:"#bcc8ce",text:"#ffffff",w:25,h:22,shape:"round"};
+    if(type==="o2")return {label:"",fill:"#ff4655",stroke:"transparent",text:"#fff",w:30,h:18,shape:"o2"};
+    if(type==="co2")return {label:"",fill:"#343b48",stroke:"transparent",text:"#fff",w:34,h:18,shape:"co2"};
+    if(type==="glucose")return {label:"",fill:"#8b5cf6",stroke:"transparent",text:"#fff",w:26,h:24,shape:"hex"};
+    if(type==="na")return {label:"+",fill:"#ffd000",stroke:"transparent",text:"#1f2430",w:22,h:22,shape:"circle"};
+    if(type==="k")return {label:"+",fill:"#00bce7",stroke:"transparent",text:"#082b35",w:24,h:24,shape:"circle"};
+    if(type==="cl")return {label:"−",fill:"#22c4d8",stroke:"transparent",text:"#08333a",w:23,h:23,shape:"circle"};
+    if(type==="h2o")return {label:"",fill:"#00c8e0",stroke:"transparent",text:"#ecffff",w:22,h:24,shape:"drop"};
+    if(type==="pi")return {label:"Pi",fill:"#705cf6",stroke:"transparent",text:"#fff",w:20,h:20,shape:"circle"};
+    if(type==="atp")return {label:"",fill:"#55db57",stroke:"transparent",text:"#fff",w:39,h:19,shape:"atp"};
+    if(type==="adp")return {label:"ADP",fill:"#5967df",stroke:"transparent",text:"#f4f5ff",w:36,h:19,shape:"adp"};
+    if(type==="ligand-na")return {label:"",fill:"#ff8a3d",stroke:"transparent",text:"#fff",w:24,h:22,shape:"triangle"};
+    if(type==="ligand-k")return {label:"",fill:"#4f7cff",stroke:"transparent",text:"#fff",w:24,h:24,shape:"star"};
+    return {label:type.toUpperCase(),fill:"#526774",stroke:"transparent",text:"#ffffff",w:25,h:22,shape:"round"};
   }
 
   function roundedRectPath(ctx,x,y,w,h,r){
@@ -399,23 +399,23 @@
       ctx.fill();
     }else if(v.shape==="o2"){
       var rO=7;
-      ctx.fillStyle="#ef6a67";
+      ctx.fillStyle="#ff4655";
       ctx.beginPath();ctx.arc(v.w*.38,v.h/2,rO,0,Math.PI*2);ctx.fill();
       ctx.beginPath();ctx.arc(v.w*.62,v.h/2,rO,0,Math.PI*2);ctx.fill();
     }else if(v.shape==="co2"){
       var rC=6.5;
-      ctx.fillStyle="#ef6a67";
+      ctx.fillStyle="#ff4655";
       ctx.beginPath();ctx.arc(v.w*.26,v.h/2,rC,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle="#51545a";
+      ctx.fillStyle="#343b48";
       ctx.beginPath();ctx.arc(v.w*.50,v.h/2,rC,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle="#ef6a67";
+      ctx.fillStyle="#ff4655";
       ctx.beginPath();ctx.arc(v.w*.74,v.h/2,rC,0,Math.PI*2);ctx.fill();
     }else if(v.shape==="atp"||v.shape==="adp"){
       var centers=v.shape==="atp"
         ? [[6,9],[15,7],[23,11],[31,8],[37,11]]
         : [[6,10],[15,7],[24,11],[32,8]];
 
-      ctx.strokeStyle="rgba(170,220,155,.42)";
+      ctx.strokeStyle="rgba(76,205,91,.68)";
       ctx.lineWidth=1.15;
       for(var bond=0;bond<centers.length-1;bond++){
         ctx.beginPath();
@@ -426,8 +426,8 @@
 
       for(var ai=0;ai<centers.length;ai++){
         ctx.fillStyle=v.shape==="atp"
-          ? (ai<2?"#93d875":"#7fc95f")
-          : (ai<2?"#8994cb":"#707db8");
+          ? (ai<2?"#68e565":"#42d847")
+          : (ai<2?"#7180ef":"#5362d6");
         ctx.beginPath();
         ctx.arc(centers[ai][0],centers[ai][1],ai<2?5:4,0,Math.PI*2);
         ctx.fill();
@@ -941,14 +941,14 @@
     var laneY=p.y;
 
     if(accept==="na"){
-      laneX=slotName==="na1"?-46:slotName==="na2"?0:46;
-      laneY=b.bottom+54;
+      laneX=slotName==="na1"?-34:slotName==="na2"?0:34;
+      laneY=b.bottom+36;
     }else if(accept==="k"){
-      laneX=slotName==="k1"?-32:32;
-      laneY=b.top-50;
+      laneX=slotName==="k1"?-27:27;
+      laneY=b.top-34;
     }else if(accept==="atp"){
-      laneX=-48;
-      laneY=b.bottom+44;
+      laneX=-36;
+      laneY=b.bottom+34;
     }
 
     return {
@@ -1114,7 +1114,8 @@
             // Selecting by the staging lane prevents left/right particles from
             // crossing each other on the way to neighboring cavities.
             var d=Math.hypot(lane.x-cx,lane.y-cy);
-            if(d<bestDistance){
+            var captureRadius=desiredType==="na"?205:desiredType==="k"?190:220;
+            if(d<captureRadius&&d<bestDistance){
               best=candidate;
               bestDistance=d;
             }
@@ -1155,7 +1156,7 @@
               var ax=parseFloat(candidate.style.left)||0;
               var ay=parseFloat(candidate.style.top)||0;
               var d=Math.hypot(waitingX-ax,waitingY-ay);
-              if(d<atpBestDistance){
+              if(d<225&&d<atpBestDistance){
                 waiting=candidate;
                 atpBestDistance=d;
               }
@@ -1251,32 +1252,35 @@
           var pdx=pg.x-x;
           var pdy=pg.y-y;
           var pd=Math.hypot(pdx,pdy);
-          var ramp=Math.min(1,Math.max(0,(now-(pg.startedAt||now))/850));
+          var ramp=Math.min(1,Math.max(0,(now-(pg.startedAt||now))/1050));
+          var maxGuideDistance=pg.kind==="waiting-atp"?255:235;
 
-          // The force starts subtly and becomes more decisive as the molecule
-          // "recognizes" the pump. Random walk remains active, so the path curves naturally.
-          var pFalloff=Math.max(0,1-Math.min(pd,680)/680);
+          if(pd>maxGuideDistance&&el.dataset.autoBinding!=="1"){
+            clearPumpGuide(el,motion);
+            return;
+          }
+
+          // Local guidance only. Molecules first diffuse near the pump naturally;
+          // once inside its capture zone, the pump gently biases their trajectory.
+          var pFalloff=Math.max(0,1-Math.min(pd,maxGuideDistance)/maxGuideDistance);
           var targetSpeed=pg.kind==="waiting-atp"
-            ? 24+18*Math.pow(pFalloff,.62)
-            : 28+25*Math.pow(pFalloff,.62);
+            ? 18+12*Math.pow(pFalloff,.68)
+            : 20+16*Math.pow(pFalloff,.68);
 
           var nxp=pd>0?pdx/pd:0;
           var nyp=pd>0?pdy/pd:0;
           var desiredVx=nxp*targetSpeed;
           var desiredVy=nyp*targetSpeed;
 
-          // Each recruited particle follows its own staging lane. The steering
-          // is intentionally moderate: reliability comes from exclusivity,
-          // not from making all ions rush toward the protein.
-          var steer=(pg.kind==="waiting-atp"?.045:.055)+
-            (pg.kind==="waiting-atp"?.12:.17)*Math.pow(pFalloff,.74);
-          steer*=.42+.58*ramp;
+          var steer=(pg.kind==="waiting-atp"?.026:.032)+
+            (pg.kind==="waiting-atp"?.065:.085)*Math.pow(pFalloff,.78);
+          steer*=.38+.62*ramp;
 
-          motion.vx+=(desiredVx-motion.vx)*Math.min(.24,steer);
-          motion.vy+=(desiredVy-motion.vy)*Math.min(.24,steer);
+          motion.vx+=(desiredVx-motion.vx)*Math.min(.13,steer);
+          motion.vy+=(desiredVy-motion.vy)*Math.min(.13,steer);
 
           var speed=Math.hypot(motion.vx,motion.vy);
-          var speedCap=pg.kind==="waiting-atp"?46:58;
+          var speedCap=pg.kind==="waiting-atp"?38:44;
           if(speed>speedCap){
             motion.vx=motion.vx/speed*speedCap;
             motion.vy=motion.vy/speed*speedCap;
@@ -4190,7 +4194,7 @@
               // does it enter its own cavity through the short docking animation.
               var approachDistance=Math.hypot(approachPoint.x-x,approachPoint.y-y);
               var directDistance=Math.hypot(guidedPoint.x-x,guidedPoint.y-y);
-              if(approachDistance<26||directDistance<48){
+              if(approachDistance<20||directDistance<38){
                 pumpSlot=motion.pumpGuide.slot;
               }
             }
