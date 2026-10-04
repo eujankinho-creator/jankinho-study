@@ -1018,6 +1018,24 @@
       var pump=guide.pump;
       var y=parseFloat(el.style.top)||0;
 
+      // During the final auto-bind animation the molecule crosses the membrane
+      // region on its way into the protein. It must keep ownership even though
+      // sideOf() temporarily returns MP instead of IC/EC.
+      if(el.dataset.autoBinding==="1"){
+        if(
+          !pump||
+          !pump.isConnected||
+          !guide.slot||
+          !guide.slot.isConnected||
+          guide.slot.dataset.reservedBy!==el.dataset.id
+        ){
+          clearPumpGuide(el,motion);
+          return;
+        }
+        claimed.add(el.dataset.id);
+        return;
+      }
+
       if(
         !pumpStillWantsGuide(pump,el.dataset.type,guide)||
         !pumpRecruitmentSideMatches(el.dataset.type,y,b)||
@@ -1025,14 +1043,6 @@
         el.dataset.pumpTransport==="1"
       ){
         clearPumpGuide(el,motion);
-        return;
-      }
-
-      // During the final auto-bind animation the molecule MUST keep ownership
-      // of the slot. Releasing it here allowed another ion to steal the pocket
-      // on the next association tick, causing both bindings to abort forever.
-      if(el.dataset.autoBinding==="1"){
-        claimed.add(el.dataset.id);
         return;
       }
 
