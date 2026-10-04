@@ -1707,3 +1707,140 @@ body[data-membrane-mode="sglt"] .structure-grid{grid-template-columns:1fr}
   .mode-context-card small{grid-row:auto}
   #resetModeScenario{width:100%}
 }
+
+
+/* =========================================================
+   PERFORMANCE + LOW-NOISE UI V32
+========================================================= */
+
+/* Names exist, but do not permanently clutter the observation window. */
+.protein-label{
+  top:-20px!important;
+  max-width:130px!important;
+  padding:3px 6px;
+  border:1px solid var(--mv-border);
+  border-radius:999px;
+  background:color-mix(in srgb,var(--mv-surface) 90%,transparent);
+  color:var(--mv-soft)!important;
+  font-size:5.5px!important;
+  font-weight:850!important;
+  letter-spacing:.015em;
+  opacity:0;
+  transform:translate(-50%,4px)!important;
+  transition:opacity .14s ease,transform .14s ease;
+  backdrop-filter:blur(8px);
+}
+
+.placed-protein:hover .protein-label,
+.placed-protein.is-selected .protein-label{
+  opacity:.94;
+  transform:translate(-50%,0)!important;
+}
+
+/* State is encoded by shape first. The text only appears on inspection. */
+.gate-state-badge,
+.pump-state-badge{
+  opacity:0!important;
+  transform:translate(-50%,3px)!important;
+  pointer-events:none;
+  transition:opacity .14s ease,transform .14s ease!important;
+  white-space:nowrap;
+  border-color:var(--mv-border)!important;
+  background:color-mix(in srgb,var(--mv-surface) 92%,transparent)!important;
+  color:var(--mv-muted)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(8px);
+}
+
+.placed-protein:hover .gate-state-badge,
+.placed-protein.is-selected .gate-state-badge,
+.placed-protein:hover .pump-state-badge,
+.placed-protein.is-selected .pump-state-badge{
+  opacity:.9!important;
+  transform:translate(-50%,0)!important;
+}
+
+.placed-protein.channel-open .gate-state-badge{
+  color:#99d9b2!important;
+}
+
+.placed-protein.channel-closed .gate-state-badge{
+  color:var(--mv-muted)!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-state-badge{
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:-16px!important;
+}
+
+/* Pump site captions appear only during interaction. */
+.pump-pocket-caption{
+  opacity:0!important;
+  transition:opacity .14s ease;
+}
+.placed-protein[data-type="bomba"]:hover .pump-pocket-caption,
+.placed-protein[data-type="bomba"].is-selected .pump-pocket-caption{
+  opacity:.72!important;
+}
+
+/* SGLT site lettering is visual, not explanatory noise. */
+.sglt-na-left,
+.sglt-na-right{
+  color:transparent!important;
+}
+
+/* Canvas is the primary particle renderer; avoid costly per-element paint effects. */
+.particle-canvas{
+  image-rendering:auto;
+}
+.placed-molecule,
+.free-ligand{
+  box-shadow:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+  transition:none!important;
+}
+.placed-protein{
+  filter:none!important;
+}
+
+/* Channel/pump transitions stay short and fluid. */
+.protein-channel::before,
+.protein-channel::after,
+.protein-pore,
+.pump-art,
+.pump-chamber,
+.sglt-art,
+.sglt-art::before{
+  transition-duration:.2s!important;
+  transition-timing-function:cubic-bezier(.22,.72,.28,1)!important;
+}
+
+/* Mode switches visually communicate that only one engine is active. */
+.mode-context-card::after{
+  content:"motor dedicado";
+  flex:0 0 auto;
+  padding:3px 6px;
+  border:1px solid var(--mv-border);
+  border-radius:999px;
+  color:var(--mv-muted);
+  font-size:5px;
+  font-weight:850;
+  letter-spacing:.04em;
+}
+body[data-membrane-mode="all"] .mode-context-card::after{
+  content:"motor completo";
+}
+
+/* The inactive control groups are removed from layout entirely. */
+.structure-section[hidden],
+.structure-card[hidden],
+.solute-choice[hidden],
+.vm-preset-controls[hidden],
+.charge-toggle[hidden],
+.ligand-toggle[hidden]{
+  display:none!important;
+}
+
