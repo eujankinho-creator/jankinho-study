@@ -3762,3 +3762,346 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   border:0!important;
   box-shadow:none!important;
 }
+
+
+/* =========================================================
+   READABILITY + SMART LAYOUT V50
+   Larger labels, smarter inspector hierarchy and Vm polarity.
+========================================================= */
+
+/* Vm polarity is semantic: the signs themselves swap when Vm crosses zero. */
+.charge-band{
+  font-size:18px!important;
+  font-weight:950!important;
+  letter-spacing:.02em;
+}
+.charge-band[data-polarity="positive"]{color:#ffd36a!important}
+.charge-band[data-polarity="negative"]{color:#84c9ff!important}
+.charge-band[data-polarity="neutral"]{color:var(--mv-muted)!important}
+
+/* Page identity remains compact, but no longer microscopic. */
+.membrane-back{
+  font-size:11px!important;
+  font-weight:800;
+}
+
+.membrane-kicker{
+  font-size:9px!important;
+}
+
+.membrane-intro h1{
+  font-size:31px!important;
+}
+
+.membrane-intro p{
+  font-size:10.5px!important;
+  line-height:1.45!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+.membrane-mode{
+  min-width:220px!important;
+}
+.membrane-mode small{font-size:8px!important}
+.membrane-mode strong{font-size:10px!important}
+
+.membrane-mode-tab{
+  min-height:58px!important;
+}
+.membrane-mode-tab>span{
+  font-size:8px!important;
+}
+.membrane-mode-tab strong{
+  font-size:11px!important;
+}
+.membrane-mode-tab small{
+  font-size:8.5px!important;
+  line-height:1.2!important;
+}
+
+.mode-context-card{
+  min-height:46px!important;
+  padding:8px 11px!important;
+}
+.mode-context-card small{font-size:8px!important}
+.mode-context-card strong{font-size:10.5px!important}
+.mode-context-card p{
+  font-size:9px!important;
+  line-height:1.35!important;
+  white-space:normal!important;
+  overflow:visible!important;
+}
+
+#resetModeScenario{
+  height:31px!important;
+  font-size:8px!important;
+}
+
+/* Give the inspector enough width to actually explain what the user selected. */
+.membrane-lab-shell{
+  grid-template-columns:300px minmax(0,1fr)!important;
+}
+
+.membrane-stage-card{
+  grid-template-columns:minmax(0,1fr) 370px!important;
+  grid-template-rows:auto minmax(0,1fr)!important;
+}
+
+.stage-toolbar{
+  min-height:60px!important;
+  padding:8px 12px!important;
+  flex-wrap:wrap;
+  row-gap:6px!important;
+}
+.stage-status{
+  min-width:170px!important;
+}
+.stage-status small{font-size:8px!important}
+.stage-status strong{font-size:11px!important}
+
+.simulation-controls{
+  flex-wrap:wrap;
+}
+.vm-preset-controls>span{
+  font-size:8px!important;
+}
+.sim-control-btn,
+.vm-preset,
+.ligand-toggle{
+  min-width:38px!important;
+  height:34px!important;
+  font-size:9px!important;
+}
+.charge-toggle{
+  min-width:78px!important;
+}
+.stage-actions span{
+  font-size:9px!important;
+}
+.stage-actions button{
+  height:34px!important;
+  font-size:9px!important;
+}
+
+/* Left palette: readable without wasting the whole screen. */
+.toolbox-head span,
+.tool-group-title span{
+  font-size:9px!important;
+}
+.toolbox-head strong{
+  font-size:15px!important;
+}
+.toolbox-head small,
+.tool-group-title small{
+  font-size:8px!important;
+  line-height:1.35!important;
+}
+
+.solute-choice>span:last-child{
+  font-size:11px!important;
+}
+
+.compartment-control-head strong{
+  font-size:11px!important;
+}
+.compartment-control-head small{
+  font-size:8.5px!important;
+}
+.active-solute-mini{
+  font-size:9px!important;
+}
+
+/* Make the right side work like an inspector: selected information first,
+   measurements second, library after that. */
+.stage-footer{
+  padding:12px!important;
+  gap:12px!important;
+}
+.selection-info{
+  order:0;
+  position:sticky;
+  top:0;
+  z-index:5;
+  grid-template-columns:42px minmax(0,1fr)!important;
+  gap:11px!important;
+  padding:13px!important;
+  background:color-mix(in srgb,var(--mv-surface-strong) 96%,transparent)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+.gradient-panel{order:1}
+.structure-console{order:2}
+
+.selection-index{
+  width:42px!important;
+  height:42px!important;
+  font-size:9px!important;
+}
+.selection-info small{
+  font-size:9px!important;
+  letter-spacing:.08em;
+}
+.selection-info strong{
+  display:block;
+  margin-top:2px;
+  font-size:15px!important;
+  line-height:1.2!important;
+}
+.selection-info p{
+  margin-top:5px!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+}
+.delete-key-hint{
+  font-size:8px!important;
+}
+
+.gradient-panel{
+  padding:13px!important;
+}
+.gradient-panel-head small{
+  font-size:9px!important;
+}
+.gradient-panel-head strong{
+  font-size:12px!important;
+}
+.gradient-panel-head>span{
+  font-size:9px!important;
+}
+.concentration-row{
+  min-height:44px!important;
+  grid-template-columns:40px minmax(0,1fr) 88px!important;
+}
+.concentration-symbol{
+  font-size:10px!important;
+}
+.concentration-row>small{
+  font-size:8.5px!important;
+}
+.gradient-panel p{
+  font-size:9.5px!important;
+  line-height:1.5!important;
+}
+
+.structure-console{
+  padding:13px!important;
+}
+.structure-console-head small{
+  font-size:9px!important;
+}
+.structure-console-head strong{
+  font-size:14px!important;
+}
+.structure-console-head>span{
+  max-width:150px!important;
+  font-size:8px!important;
+  line-height:1.35!important;
+}
+.structure-section>small,
+.structure-section-titleline>small{
+  font-size:9px!important;
+}
+.structure-card{
+  min-height:72px!important;
+  grid-template-columns:44px minmax(0,1fr)!important;
+}
+.structure-card>b,
+.structure-card>span>b{
+  font-size:11px!important;
+}
+.structure-card>small,
+.structure-card>span>small{
+  font-size:8.5px!important;
+}
+
+.environment-label strong{
+  font-size:12px!important;
+}
+.environment-label span{
+  font-size:9px!important;
+}
+
+.drop-hint strong{
+  font-size:11px!important;
+}
+.drop-hint small{
+  font-size:8px!important;
+}
+.armed-hint strong{
+  font-size:10px!important;
+}
+.armed-hint small{
+  font-size:8px!important;
+}
+.collision-toast{
+  font-size:9px!important;
+}
+
+.protein-label{
+  font-size:9px!important;
+}
+.gate-state-badge,
+.pump-state-badge{
+  font-size:8.5px!important;
+  line-height:1.2!important;
+  padding:4px 7px!important;
+}
+
+/* Medium desktops: keep central simulation wide, but don't shrink text again. */
+@media(max-width:1500px){
+  .membrane-lab-shell{
+    grid-template-columns:270px minmax(0,1fr)!important;
+  }
+  .membrane-stage-card{
+    grid-template-columns:minmax(0,1fr) 335px!important;
+  }
+  .membrane-intro h1{font-size:28px!important}
+  .membrane-intro p{font-size:9.5px!important}
+  .membrane-mode-tab strong{font-size:10px!important}
+  .membrane-mode-tab small{font-size:8px!important}
+  .selection-info strong{font-size:14px!important}
+  .selection-info p{font-size:10.5px!important}
+}
+
+/* Tablet and narrow windows retain the existing vertical layout. */
+@media(max-width:1180px){
+  .membrane-lab-shell{
+    grid-template-columns:1fr!important;
+  }
+  .membrane-stage-card{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto 620px auto!important;
+  }
+  .stage-footer{
+    grid-template-columns:1fr 1fr!important;
+  }
+  .selection-info{
+    grid-column:1/-1!important;
+    position:relative;
+    top:auto;
+  }
+  .gradient-panel{grid-column:1}
+  .structure-console{grid-column:2}
+}
+
+@media(max-width:760px){
+  .membrane-intro h1{font-size:25px!important}
+  .membrane-intro p{font-size:10px!important}
+  .stage-footer{
+    grid-template-columns:1fr!important;
+  }
+  .selection-info,
+  .gradient-panel,
+  .structure-console{
+    grid-column:1!important;
+  }
+  .structure-card>b,
+  .structure-card>span>b{
+    font-size:12px!important;
+  }
+  .structure-card>small,
+  .structure-card>span>small{
+    font-size:9.5px!important;
+  }
+}
