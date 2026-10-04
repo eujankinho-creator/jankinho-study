@@ -2741,3 +2741,514 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 
   .selection-info{grid-column:1}
 }
+
+
+/* =========================================================
+   CORTEX TYPOGRAPHY + VISUAL LANGUAGE V35
+   Unifies Membrana Viva with the rest of the Cortex shell.
+========================================================= */
+
+.cell-lab-view,
+.cell-lab-view button,
+.cell-lab-view input,
+.cell-lab-view select,
+.cell-lab-view textarea{
+  font-family:Inter,Arial,Helvetica,sans-serif!important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* Cortex uses restrained type: strong hierarchy, low tracking,
+   muted captions and compact uppercase only for true metadata. */
+.cell-lab-view{
+  --mv-font-display:Inter,Arial,Helvetica,sans-serif;
+  --mv-font-ui:Inter,Arial,Helvetica,sans-serif;
+}
+
+.membrane-header .header-title{
+  font-size:13px!important;
+  font-weight:750!important;
+  letter-spacing:-.012em!important;
+  color:var(--theme-text,var(--mv-text))!important;
+}
+
+.membrane-header-subtitle{
+  margin-top:3px!important;
+  font-size:9px!important;
+  font-weight:550!important;
+  line-height:1.25!important;
+  letter-spacing:.015em!important;
+  color:var(--theme-text-muted,var(--mv-muted))!important;
+}
+
+.membrane-back{
+  font-size:9.5px!important;
+  font-weight:650!important;
+  letter-spacing:-.005em!important;
+}
+
+.membrane-kicker{
+  font-size:8px!important;
+  font-weight:800!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase;
+}
+
+.membrane-intro h1{
+  font-family:var(--mv-font-display)!important;
+  font-weight:760!important;
+  letter-spacing:-.045em!important;
+  text-wrap:balance;
+}
+
+.membrane-intro h1 em{
+  font-weight:780!important;
+}
+
+.membrane-intro p{
+  font-size:9px!important;
+  font-weight:500!important;
+  letter-spacing:-.006em!important;
+  line-height:1.45!important;
+}
+
+.membrane-mode small,
+.stage-status small{
+  font-size:7px!important;
+  font-weight:750!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase;
+}
+
+.membrane-mode strong,
+.stage-status strong{
+  font-size:9px!important;
+  font-weight:700!important;
+  letter-spacing:-.012em!important;
+}
+
+/* Mode navigation */
+.membrane-mode-tab{
+  font-family:var(--mv-font-ui)!important;
+}
+
+.membrane-mode-tab>span{
+  font-size:7px!important;
+  font-weight:800!important;
+  letter-spacing:-.01em!important;
+}
+
+.membrane-mode-tab strong{
+  font-size:9px!important;
+  font-weight:720!important;
+  letter-spacing:-.018em!important;
+}
+
+.membrane-mode-tab small{
+  font-size:7px!important;
+  font-weight:520!important;
+  letter-spacing:.002em!important;
+  color:var(--mv-muted)!important;
+}
+
+.mode-context-card small{
+  font-size:7px!important;
+  font-weight:800!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase;
+}
+
+.mode-context-card strong{
+  font-size:9px!important;
+  font-weight:720!important;
+  letter-spacing:-.012em!important;
+}
+
+.mode-context-card p{
+  font-size:7.5px!important;
+  font-weight:500!important;
+  letter-spacing:-.003em!important;
+}
+
+#resetModeScenario{
+  font-size:7.5px!important;
+  font-weight:680!important;
+  letter-spacing:-.005em!important;
+}
+
+/* Left palette */
+.toolbox-head span,
+.tool-group-title span{
+  font-size:7.5px!important;
+  font-weight:800!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase;
+}
+
+.toolbox-head strong{
+  font-size:13px!important;
+  font-weight:740!important;
+  letter-spacing:-.025em!important;
+}
+
+.toolbox-head small,
+.tool-group-title small{
+  font-size:7px!important;
+  font-weight:520!important;
+  letter-spacing:0!important;
+  line-height:1.35!important;
+}
+
+.solute-choice>span:last-child{
+  font-size:9.5px!important;
+  font-weight:650!important;
+  letter-spacing:-.012em!important;
+}
+
+.compartment-control-head strong{
+  font-size:9.5px!important;
+  font-weight:700!important;
+  letter-spacing:-.012em!important;
+}
+
+.compartment-control-head small{
+  font-size:7.5px!important;
+  font-weight:520!important;
+}
+
+.active-solute-mini{
+  font-size:8px!important;
+  font-weight:800!important;
+  letter-spacing:-.015em!important;
+}
+
+.solute-adjust{
+  font-family:var(--mv-font-ui)!important;
+  font-weight:650!important;
+}
+
+/* Toolbar */
+.vm-preset-controls>span{
+  font-size:7px!important;
+  font-weight:780!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase;
+}
+
+.sim-control-btn,
+.vm-preset,
+.ligand-toggle{
+  font-size:7.5px!important;
+  font-weight:680!important;
+  letter-spacing:-.005em!important;
+}
+
+.stage-actions span{
+  font-size:7.5px!important;
+  font-weight:550!important;
+}
+
+.stage-actions button{
+  font-size:7.5px!important;
+  font-weight:680!important;
+  letter-spacing:-.006em!important;
+}
+
+/* Environmental labels */
+.environment-label strong{
+  font-size:10px!important;
+  font-weight:720!important;
+  letter-spacing:-.018em!important;
+}
+
+.environment-label span{
+  font-size:7px!important;
+  font-weight:520!important;
+  letter-spacing:.01em!important;
+}
+
+/* Protein library */
+.structure-console-head small,
+.structure-section>small,
+.structure-section-titleline>small,
+.gradient-panel-head small,
+.selection-info small{
+  font-size:7px!important;
+  font-weight:800!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase;
+}
+
+.structure-console-head strong{
+  font-size:12px!important;
+  font-weight:740!important;
+  letter-spacing:-.022em!important;
+}
+
+.structure-console-head>span{
+  font-size:7px!important;
+  font-weight:520!important;
+  letter-spacing:0!important;
+}
+
+.structure-card>b,
+.structure-card>span>b{
+  font-size:9.5px!important;
+  font-weight:700!important;
+  letter-spacing:-.018em!important;
+}
+
+.structure-card>small,
+.structure-card>span>small{
+  font-size:7.2px!important;
+  font-weight:520!important;
+  letter-spacing:-.003em!important;
+}
+
+/* Concentration instrument */
+.gradient-panel-head strong{
+  font-size:10px!important;
+  font-weight:720!important;
+  letter-spacing:-.015em!important;
+}
+
+.gradient-panel-head>span{
+  font-size:7.5px!important;
+  font-weight:600!important;
+}
+
+.concentration-symbol{
+  font-size:8.5px!important;
+  font-weight:760!important;
+  letter-spacing:-.015em!important;
+}
+
+.concentration-row>small{
+  font-size:7px!important;
+  font-weight:550!important;
+  letter-spacing:-.006em!important;
+}
+
+.gradient-panel p{
+  font-size:7.2px!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+}
+
+/* Selected item */
+.selection-index{
+  font-size:7px!important;
+  font-weight:800!important;
+}
+
+.selection-info strong{
+  font-size:10px!important;
+  font-weight:720!important;
+  letter-spacing:-.016em!important;
+}
+
+.selection-info p{
+  font-size:7.5px!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+}
+
+.delete-key-hint{
+  font-size:6.8px!important;
+  font-weight:520!important;
+}
+
+/* In-stage labels: premium, contextual, never loud. */
+.protein-label{
+  font-size:6px!important;
+  font-weight:680!important;
+  letter-spacing:-.01em!important;
+}
+
+.gate-state-badge,
+.pump-state-badge{
+  font-size:5.8px!important;
+  font-weight:720!important;
+  letter-spacing:-.004em!important;
+}
+
+/* =========================================================
+   CORTEX SURFACES
+========================================================= */
+
+.membrane-intro{
+  border:1px solid var(--theme-border,var(--mv-border))!important;
+  border-radius:14px!important;
+  padding:8px 12px!important;
+  background:
+    radial-gradient(circle at 96% 0%,var(--theme-accent-soft,rgba(var(--mv-accent-rgb),.08)),transparent 30%),
+    linear-gradient(145deg,var(--theme-surface-strong,var(--mv-surface-strong)),var(--theme-surface,var(--mv-surface)))!important;
+  box-shadow:var(--theme-shadow,var(--mv-shadow))!important;
+}
+
+.membrane-mode{
+  border-color:var(--theme-border,var(--mv-border))!important;
+  background:var(--theme-surface-soft,var(--mv-surface-soft))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.membrane-mode-tab,
+.mode-context-card,
+.membrane-toolbox,
+.membrane-stage-card,
+.structure-console,
+.gradient-panel,
+.selection-info{
+  border-color:var(--theme-border,var(--mv-border))!important;
+}
+
+.membrane-mode-tab,
+.mode-context-card{
+  background:
+    linear-gradient(145deg,var(--theme-surface-strong,var(--mv-surface-strong)),var(--theme-surface,var(--mv-surface)))!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+.membrane-mode-tab:hover{
+  border-color:var(--theme-border-strong,var(--mv-border-strong))!important;
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--theme-surface-strong,var(--mv-surface-strong)) 90%,var(--theme-accent,var(--mv-accent)) 10%),
+      var(--theme-surface,var(--mv-surface)))!important;
+}
+
+.membrane-mode-tab.is-active{
+  border-color:var(--theme-border-strong,var(--mv-border-strong))!important;
+  background:
+    linear-gradient(135deg,var(--theme-accent-medium,rgba(var(--mv-accent-rgb),.15)),var(--theme-accent-soft,rgba(var(--mv-accent-rgb),.06)))!important;
+  color:var(--theme-text,var(--mv-text))!important;
+  box-shadow:
+    inset 0 -2px 0 var(--theme-accent,var(--mv-accent)),
+    0 8px 24px rgba(0,0,0,.10)!important;
+}
+
+.membrane-toolbox,
+.stage-footer{
+  background:
+    linear-gradient(180deg,var(--theme-surface-strong,var(--mv-surface-strong)),var(--theme-surface,var(--mv-surface)))!important;
+}
+
+.membrane-toolbox{
+  box-shadow:var(--theme-shadow,var(--mv-shadow))!important;
+}
+
+.stage-toolbar{
+  background:
+    color-mix(in srgb,var(--theme-surface-strong,var(--mv-surface-strong)) 96%,transparent)!important;
+  border-color:var(--theme-border,var(--mv-border))!important;
+}
+
+.structure-console,
+.gradient-panel,
+.selection-info{
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--theme-surface-strong,var(--mv-surface-strong)) 96%,transparent),
+      color-mix(in srgb,var(--theme-surface,var(--mv-surface)) 97%,transparent)
+    )!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.08)!important;
+}
+
+/* Cortex button behavior */
+#resetModeScenario,
+.stage-actions button,
+.sim-run-controls,
+.vm-preset-controls,
+.solute-adjust,
+.ligand-toggle{
+  border-color:var(--theme-border,var(--mv-border))!important;
+  background:var(--theme-surface-soft,var(--mv-surface-soft))!important;
+  color:var(--theme-text-soft,var(--mv-soft))!important;
+}
+
+#resetModeScenario:hover,
+.stage-actions button:hover,
+.solute-adjust:hover,
+.ligand-toggle:hover{
+  border-color:var(--theme-border-strong,var(--mv-border-strong))!important;
+  background:var(--theme-accent-soft,rgba(var(--mv-accent-rgb),.08))!important;
+  color:var(--theme-text,var(--mv-text))!important;
+}
+
+.sim-control-btn.is-active,
+.vm-preset.is-active,
+.ligand-toggle.is-active{
+  border-color:var(--theme-border-strong,var(--mv-border-strong))!important;
+  background:var(--theme-accent-soft,rgba(var(--mv-accent-rgb),.10))!important;
+  color:var(--theme-accent-2,var(--mv-accent2))!important;
+}
+
+/* Cards feel like Cortex, not default form controls. */
+.solute-choice,
+.compartment-control,
+.structure-card,
+.concentration-row{
+  border-color:var(--theme-border,var(--mv-border))!important;
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--theme-surface-soft,var(--mv-surface-soft)) 88%,transparent),
+      rgba(255,255,255,.008)
+    )!important;
+  transition:
+    border-color .16s ease,
+    background .16s ease,
+    transform .16s ease,
+    box-shadow .16s ease!important;
+}
+
+.solute-choice:hover,
+.structure-card:hover{
+  transform:translateY(-1px);
+  border-color:var(--theme-border-strong,var(--mv-border-strong))!important;
+  background:var(--theme-accent-soft,rgba(var(--mv-accent-rgb),.06))!important;
+}
+
+.solute-choice.is-active,
+.structure-card.palette-selected{
+  border-color:var(--theme-border-strong,var(--mv-border-strong))!important;
+  background:
+    linear-gradient(135deg,var(--theme-accent-medium,rgba(var(--mv-accent-rgb),.16)),var(--theme-accent-soft,rgba(var(--mv-accent-rgb),.06)))!important;
+  box-shadow:
+    inset 2px 0 0 var(--theme-accent,var(--mv-accent)),
+    0 10px 24px rgba(0,0,0,.08)!important;
+}
+
+/* Thin, Cortex-like scrollbars */
+.membrane-toolbox,
+.stage-footer{
+  scrollbar-width:thin;
+  scrollbar-color:var(--theme-border-strong,var(--mv-border-strong)) transparent;
+}
+
+.membrane-toolbox::-webkit-scrollbar,
+.stage-footer::-webkit-scrollbar{
+  width:7px;
+}
+
+.membrane-toolbox::-webkit-scrollbar-track,
+.stage-footer::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+.membrane-toolbox::-webkit-scrollbar-thumb,
+.stage-footer::-webkit-scrollbar-thumb{
+  border-radius:999px;
+  background:var(--theme-border-strong,var(--mv-border-strong));
+}
+
+/* Keep typography readable on standard desktop without becoming oversized. */
+@media(max-width:1500px){
+  .membrane-intro h1{font-size:23px!important}
+  .membrane-intro p{font-size:8px!important}
+  .membrane-mode-tab strong{font-size:8.5px!important}
+  .membrane-mode-tab small{font-size:6.5px!important}
+  .solute-choice>span:last-child{font-size:9px!important}
+  .structure-card>b,
+  .structure-card>span>b{font-size:9px!important}
+}
+
