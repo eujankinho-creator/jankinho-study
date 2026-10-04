@@ -2166,3 +2166,492 @@
   }
 }
 
+
+
+/* =========================================================
+   MEMBRANA VIVA — CORTEX THEME + PREMIUM WORKSPACE V11
+   A cromia estrutural acompanha o tema vigente do Cortex.
+========================================================= */
+
+.cell-lab-view{
+  --mv-page:var(--theme-bg,#050505);
+  --mv-page-2:var(--theme-bg-secondary,#090909);
+  --mv-surface:var(--theme-surface,rgba(18,18,18,.92));
+  --mv-surface-strong:var(--theme-surface-strong,rgba(23,23,23,.96));
+  --mv-surface-soft:var(--theme-surface-soft,rgba(255,255,255,.03));
+  --mv-border:var(--theme-border,rgba(255,255,255,.075));
+  --mv-border-strong:var(--theme-border-strong,rgba(249,115,22,.24));
+  --mv-theme-text:var(--theme-text,#f5f5f5);
+  --mv-theme-soft:var(--theme-text-soft,#c8c8c8);
+  --mv-theme-muted:var(--theme-text-muted,#737373);
+  --mv-accent:var(--theme-accent,#f97316);
+  --mv-accent-2:var(--theme-accent-2,#fb923c);
+  --mv-accent-rgb:var(--theme-accent-rgb,249,115,22);
+
+  background:
+    radial-gradient(circle at 80% 7%,rgba(var(--mv-accent-rgb),.09),transparent 30%),
+    radial-gradient(circle at 16% 76%,rgba(var(--mv-accent-rgb),.035),transparent 34%),
+    var(--mv-page)!important;
+  color:var(--mv-theme-text);
+}
+
+/* Header e shell passam a obedecer integralmente o tema vigente. */
+.cell-lab-view .header.membrane-header{
+  background:color-mix(in srgb,var(--mv-page) 88%,transparent)!important;
+  border-bottom:1px solid var(--mv-border)!important;
+  box-shadow:0 8px 30px rgba(0,0,0,.10);
+}
+
+.membrane-header-subtitle,
+.membrane-intro p,
+.toolbox-head>small,
+.tool-group-title small,
+.stage-actions>span,
+.selection-info p,
+.fluid-note small{
+  color:var(--mv-theme-muted)!important;
+}
+
+.membrane-page{
+  width:min(1640px,calc(100% - 28px))!important;
+  padding:14px 0 30px!important;
+}
+
+.membrane-back{
+  margin-bottom:10px!important;
+  color:var(--mv-theme-muted)!important;
+}
+.membrane-back:hover{color:var(--mv-accent-2)!important}
+
+/* Hero mais compacto e com linguagem visual Cortex. */
+.membrane-intro{
+  position:relative;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center!important;
+  gap:18px!important;
+  margin-bottom:12px!important;
+  padding:16px 18px!important;
+  border:1px solid var(--mv-border)!important;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 90% 12%,rgba(var(--mv-accent-rgb),.10),transparent 32%),
+    linear-gradient(145deg,var(--mv-surface),color-mix(in srgb,var(--mv-page) 94%,var(--mv-accent) 6%));
+  box-shadow:var(--theme-shadow,0 18px 48px rgba(0,0,0,.26));
+  overflow:hidden;
+}
+
+.membrane-intro::before{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--mv-accent),var(--mv-accent-2),transparent);
+  opacity:.72;
+}
+
+.membrane-kicker{
+  color:var(--mv-accent-2)!important;
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+}
+
+.membrane-intro h1{
+  margin:5px 0 5px!important;
+  color:var(--mv-theme-text)!important;
+  font-size:clamp(30px,3.2vw,46px)!important;
+  line-height:1!important;
+}
+.membrane-intro h1 em{
+  color:var(--mv-accent-2)!important;
+}
+
+.membrane-intro p{
+  max-width:760px!important;
+  font-size:12px!important;
+  line-height:1.5!important;
+}
+
+.membrane-mode{
+  min-width:210px!important;
+  border-color:var(--mv-border-strong)!important;
+  background:var(--mv-surface-soft)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+.mode-dot,.live-dot{
+  background:var(--mv-accent-2)!important;
+  box-shadow:
+    0 0 0 5px rgba(var(--mv-accent-rgb),.08),
+    0 0 14px rgba(var(--mv-accent-rgb),.30)!important;
+}
+.membrane-mode small,.stage-status small{color:var(--mv-theme-muted)!important}
+.membrane-mode strong,.stage-status strong{color:var(--mv-theme-soft)!important}
+
+/* Workspace: paleta à esquerda + palco e inspector à direita, sem espaço desperdiçado. */
+.membrane-lab-shell{
+  grid-template-columns:284px minmax(0,1fr)!important;
+  gap:12px!important;
+  align-items:start!important;
+}
+
+.membrane-toolbox,
+.membrane-stage-card{
+  border-color:var(--mv-border)!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.018),transparent 32%),
+    var(--mv-surface)!important;
+  box-shadow:var(--theme-shadow,0 18px 48px rgba(0,0,0,.28))!important;
+}
+
+.membrane-toolbox{
+  height:clamp(590px,70vh,760px);
+  display:flex;
+  flex-direction:column;
+  padding:13px!important;
+  border-radius:18px!important;
+  overflow:hidden!important;
+}
+
+.membrane-toolbox::before{
+  left:18px!important;
+  right:18px!important;
+  background:linear-gradient(90deg,transparent,var(--mv-accent),var(--mv-accent-2),transparent)!important;
+  opacity:.68!important;
+}
+
+.toolbox-head{
+  flex:0 0 auto;
+  padding:3px 2px 11px!important;
+  border-bottom-color:var(--mv-border)!important;
+}
+.toolbox-head span{color:var(--mv-accent-2)!important}
+.toolbox-head strong{color:var(--mv-theme-text)!important}
+
+.tool-group{
+  flex:0 0 auto;
+  padding-top:11px!important;
+}
+.tool-group+.tool-group{
+  margin-top:3px!important;
+  padding-top:11px!important;
+  border-top-color:var(--mv-border)!important;
+}
+.tool-group-title span{color:var(--mv-theme-soft)!important}
+
+/* Proteínas mais compactas: cabe mais informação sem deixar a paleta cansativa. */
+.tool-item{
+  min-height:44px!important;
+  margin-bottom:5px!important;
+  padding:5px 7px!important;
+  border-color:var(--mv-border)!important;
+  background:var(--mv-surface-soft)!important;
+}
+.tool-item strong{color:var(--mv-theme-soft)!important}
+.tool-item small{color:var(--mv-theme-muted)!important}
+.tool-item>b{color:var(--mv-theme-muted)!important}
+
+.molecule-grid{gap:5px!important}
+.molecule-tool{
+  min-height:42px!important;
+  border-color:var(--mv-border)!important;
+}
+
+.toolbox-tip{
+  margin-top:auto!important;
+  border-color:var(--mv-border)!important;
+  background:
+    linear-gradient(135deg,rgba(var(--mv-accent-rgb),.055),transparent),
+    var(--mv-surface-soft)!important;
+}
+.toolbox-tip>span{
+  color:var(--mv-accent-2)!important;
+  border-color:var(--mv-border-strong)!important;
+}
+.toolbox-tip p{color:var(--mv-theme-muted)!important}
+.toolbox-tip strong,.toolbox-tip b{color:var(--mv-theme-soft)!important}
+
+/* O stage card agora possui um inspector lateral interno. */
+.membrane-stage-card{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 272px;
+  grid-template-rows:52px minmax(0,1fr);
+  min-height:clamp(590px,70vh,760px);
+  border-radius:18px!important;
+  overflow:hidden!important;
+}
+
+.stage-toolbar{
+  grid-column:1;
+  grid-row:1;
+  min-height:52px!important;
+  border-bottom:1px solid var(--mv-border)!important;
+  background:
+    linear-gradient(90deg,rgba(var(--mv-accent-rgb),.055),transparent 42%),
+    color-mix(in srgb,var(--mv-surface-strong) 96%,transparent)!important;
+}
+
+.stage-actions button{
+  border-color:var(--mv-border)!important;
+  background:var(--mv-surface-soft)!important;
+  color:var(--mv-theme-soft)!important;
+}
+.stage-actions button:hover{
+  border-color:var(--mv-border-strong)!important;
+  color:var(--mv-accent-2)!important;
+  background:var(--theme-accent-soft,rgba(var(--mv-accent-rgb),.1))!important;
+}
+
+.membrane-stage{
+  grid-column:1;
+  grid-row:2;
+  height:auto!important;
+  min-height:538px;
+  border-right:1px solid var(--mv-border);
+}
+
+/* O simulador continua distinguindo EC/IC, mas o chrome ao redor segue o tema. */
+.membrane-stage{
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(var(--mv-accent-rgb),.035),transparent 48%),
+    linear-gradient(
+      180deg,
+      rgba(47,139,188,.095) 0%,
+      rgba(26,82,116,.055) 35%,
+      color-mix(in srgb,var(--mv-page-2) 94%,#101820 6%) 39%,
+      color-mix(in srgb,var(--mv-page-2) 94%,#101820 6%) 61%,
+      rgba(103,74,153,.052) 65%,
+      rgba(91,62,135,.082) 100%
+    )!important;
+}
+
+.environment-label{
+  color:var(--mv-theme-soft)!important;
+  border-color:var(--mv-border)!important;
+  background:color-mix(in srgb,var(--mv-surface-strong) 82%,transparent)!important;
+}
+.environment-label strong{color:var(--mv-theme-text)!important}
+.environment-label span{color:var(--mv-theme-muted)!important}
+
+/* stage-footer vira um inspector vertical premium na terceira coluna. */
+.stage-footer{
+  grid-column:2;
+  grid-row:1 / 3;
+  display:flex!important;
+  flex-direction:column;
+  gap:10px!important;
+  padding:12px!important;
+  border-top:0!important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(var(--mv-accent-rgb),.08),transparent 32%),
+    var(--mv-surface-strong)!important;
+  overflow:auto;
+}
+
+.stage-footer::before{
+  content:"INSPECTOR · MEMBRANA VIVA";
+  display:block;
+  padding:3px 2px 10px;
+  border-bottom:1px solid var(--mv-border);
+  color:var(--mv-accent-2);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.13em;
+}
+
+.selection-info{
+  order:1;
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr);
+  align-items:start!important;
+  gap:10px!important;
+  padding:12px!important;
+  border-color:var(--mv-border)!important;
+  background:var(--mv-surface-soft)!important;
+}
+.selection-info>div{gap:4px!important}
+.selection-info>div>small{color:var(--mv-accent-2)!important}
+.selection-info strong{
+  color:var(--mv-theme-text)!important;
+  font-size:12px!important;
+}
+.selection-info p{
+  margin-top:2px!important;
+  font-size:10px!important;
+  line-height:1.5!important;
+}
+.selection-index{
+  width:34px!important;
+  height:34px!important;
+  color:var(--mv-accent-2)!important;
+  border-color:var(--mv-border-strong)!important;
+  background:rgba(var(--mv-accent-rgb),.055);
+}
+
+.delete-key-hint{
+  grid-column:1 / -1;
+  margin:3px 0 0!important;
+  padding-top:9px;
+  border-top:1px solid var(--mv-border);
+  color:var(--mv-theme-muted)!important;
+}
+.delete-key-hint kbd{
+  border-color:var(--mv-border)!important;
+  background:var(--mv-page-2)!important;
+  color:var(--mv-theme-soft)!important;
+}
+
+.fluid-note{
+  order:2;
+  align-items:flex-start!important;
+  padding:12px!important;
+  border-color:var(--mv-border)!important;
+  background:var(--mv-surface-soft)!important;
+}
+.fluid-note strong{
+  color:var(--mv-theme-soft)!important;
+  font-size:10px!important;
+}
+.fluid-note small{
+  font-size:9px!important;
+  line-height:1.5!important;
+}
+.fluid-icon i{
+  background:var(--mv-accent-2)!important;
+  box-shadow:0 10px 0 -2px color-mix(in srgb,var(--mv-accent) 62%,#6d594b)!important;
+}
+
+/* Painel lateral ganha uma legenda útil sem adicionar novos controles. */
+.stage-footer::after{
+  content:"EC  meio extracelular   ·   MP  membrana plasmática   ·   IC  citoplasma";
+  order:3;
+  display:block;
+  margin-top:auto;
+  padding:11px 10px;
+  border:1px solid var(--mv-border);
+  border-radius:11px;
+  background:
+    linear-gradient(135deg,rgba(52,155,207,.055),rgba(132,90,192,.045)),
+    var(--mv-surface-soft);
+  color:var(--mv-theme-muted);
+  font-size:8px;
+  line-height:1.55;
+}
+
+/* Seleção/drag da paleta usa o tema vigente; as cores científicas dos íons continuam independentes. */
+.tool-item.palette-selected,
+.molecule-tool.palette-selected{
+  border-color:var(--mv-border-strong)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--mv-accent-rgb),.08),
+    0 0 18px rgba(var(--mv-accent-rgb),.09)!important;
+}
+.tool-item.palette-selected::after,
+.molecule-tool.palette-selected::after{
+  color:var(--mv-accent-2)!important;
+}
+
+/* Logo Cortex desta página segue exatamente o tema selecionado. */
+.cell-lab-view .sidebar-logo strong{
+  color:var(--mv-theme-text)!important;
+}
+.cell-lab-view .sidebar-logo span{
+  color:var(--mv-theme-muted)!important;
+}
+.cell-lab-view .sidebar .logo-box.cortex-logo{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.cell-lab-view .sidebar .cortex-brain-logo{
+  stroke:var(--mv-accent-2)!important;
+  color:var(--mv-accent-2)!important;
+  filter:
+    drop-shadow(0 0 4px rgba(var(--mv-accent-rgb),.48))
+    drop-shadow(0 0 11px rgba(var(--mv-accent-rgb),.16))!important;
+}
+
+html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
+  stroke:var(--theme-text)!important;
+  filter:none!important;
+}
+
+/* Bordas, cards e microtextos deixam de carregar o azul fixo antigo. */
+.toolbox-head,
+.tool-group+.tool-group,
+.stage-footer,
+.fluid-note,
+.selection-info,
+.toolbox-tip{
+  border-color:var(--mv-border)!important;
+}
+
+.collision-toast,
+.armed-hint{
+  border-color:var(--mv-border-strong)!important;
+  background:color-mix(in srgb,var(--mv-surface-strong) 94%,transparent)!important;
+  color:var(--mv-theme-soft)!important;
+}
+.armed-hint>span{background:var(--mv-accent-2)!important}
+
+/* Medium desktop: inspector volta para baixo para preservar o palco. */
+@media(max-width:1360px){
+  .membrane-lab-shell{
+    grid-template-columns:248px minmax(0,1fr)!important;
+  }
+  .membrane-stage-card{
+    grid-template-columns:1fr!important;
+    grid-template-rows:52px minmax(510px,1fr) auto!important;
+  }
+  .stage-toolbar{grid-column:1;grid-row:1}
+  .membrane-stage{
+    grid-column:1;
+    grid-row:2;
+    min-height:510px;
+    border-right:0;
+  }
+  .stage-footer{
+    grid-column:1;
+    grid-row:3;
+    display:grid!important;
+    grid-template-columns:minmax(260px,.85fr) minmax(360px,1.25fr);
+    overflow:visible;
+  }
+  .stage-footer::before,
+  .stage-footer::after{grid-column:1 / -1}
+  .selection-info{order:2}
+  .fluid-note{order:1}
+}
+
+/* Tablet/mobile: estágio primeiro; paleta depois. */
+@media(max-width:900px){
+  .membrane-page{width:min(100% - 14px,900px)!important}
+  .membrane-intro{
+    grid-template-columns:1fr!important;
+    padding:14px!important;
+  }
+  .membrane-mode{justify-self:start}
+  .membrane-lab-shell{grid-template-columns:1fr!important}
+  .membrane-stage-card{order:1}
+  .membrane-toolbox{
+    order:2;
+    height:auto;
+  }
+  .toolbox-head{background:transparent!important}
+  .stage-footer{
+    grid-template-columns:1fr!important;
+  }
+  .stage-footer::before,
+  .stage-footer::after{grid-column:1}
+  .membrane-stage{min-height:500px}
+}
+
+@media(max-width:620px){
+  .membrane-intro h1{font-size:34px!important}
+  .membrane-mode{width:100%}
+  .membrane-stage{min-height:470px}
+  .stage-toolbar{padding:8px 10px!important}
+  .stage-footer{padding:8px!important}
+}
+
