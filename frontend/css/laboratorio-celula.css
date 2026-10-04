@@ -4215,3 +4215,484 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .membrane-stage .charge-band{
   text-shadow:none!important;
 }
+
+
+/* =========================================================
+   COMPACT LEARNING WORKSPACE V54
+   Dense controls + readable teaching text + clean simulator.
+========================================================= */
+
+.membrane-page{
+  width:calc(100% - 12px)!important;
+  height:calc(100vh - 62px)!important;
+  padding:5px 3px 7px!important;
+  grid-template-rows:22px 46px 50px 38px minmax(0,1fr)!important;
+  gap:5px!important;
+}
+
+.membrane-back{
+  margin:0 3px!important;
+  min-height:22px!important;
+  line-height:22px!important;
+  font-size:10.5px!important;
+}
+
+/* Compact identity block: still readable, far less vertical waste. */
+.membrane-intro{
+  min-height:46px!important;
+  padding:3px 7px 4px!important;
+  gap:12px!important;
+}
+.membrane-intro>div:first-child{
+  grid-template-columns:auto minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important;
+  gap:1px 9px!important;
+}
+.membrane-kicker{
+  font-size:8px!important;
+}
+.membrane-intro h1{
+  font-size:24px!important;
+  line-height:1!important;
+}
+.membrane-intro p{
+  margin-top:1px!important;
+  max-width:none!important;
+  font-size:10px!important;
+  line-height:1.28!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.membrane-mode{
+  min-width:190px!important;
+  padding:6px 9px!important;
+  border-radius:9px!important;
+}
+.membrane-mode small{font-size:7.5px!important}
+.membrane-mode strong{font-size:9.5px!important}
+
+/* Modes become compact navigation buttons, not large cards. */
+.membrane-mode-tabs{
+  min-height:50px!important;
+  gap:5px!important;
+  margin:0 3px!important;
+}
+.membrane-mode-tab{
+  min-height:50px!important;
+  padding:5px 7px!important;
+  grid-template-columns:22px minmax(0,1fr)!important;
+  border-radius:9px!important;
+}
+.membrane-mode-tab>span{
+  width:22px!important;
+  height:22px!important;
+  font-size:7px!important;
+}
+.membrane-mode-tab strong{
+  font-size:10px!important;
+  line-height:1.05!important;
+}
+.membrane-mode-tab small{
+  margin-top:1px!important;
+  font-size:8px!important;
+  line-height:1.1!important;
+}
+
+/* Mode description is small in footprint, not in typography. */
+.mode-context-card{
+  min-height:38px!important;
+  margin:0 3px!important;
+  padding:5px 8px!important;
+  gap:8px!important;
+}
+.mode-context-card>div{
+  grid-template-columns:auto auto minmax(0,1fr)!important;
+  gap:0 8px!important;
+}
+.mode-context-card small{
+  font-size:8px!important;
+}
+.mode-context-card strong{
+  font-size:10.5px!important;
+}
+.mode-context-card p{
+  font-size:9.5px!important;
+  line-height:1.25!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#resetModeScenario{
+  height:28px!important;
+  padding:0 9px!important;
+  font-size:8.5px!important;
+}
+
+/* Balanced learning workspace: controls left, simulation center, builds/info right. */
+.membrane-lab-shell{
+  min-height:0!important;
+  height:100%!important;
+  padding:0 3px!important;
+  grid-template-columns:270px minmax(0,1fr)!important;
+  gap:7px!important;
+}
+
+.membrane-toolbox{
+  padding:9px!important;
+  border-radius:12px!important;
+}
+
+.toolbox-head{
+  top:-9px!important;
+  margin:-1px -1px 7px!important;
+  padding:4px 3px 8px!important;
+}
+.toolbox-head span{font-size:8px!important}
+.toolbox-head strong{font-size:13px!important}
+.toolbox-head small{
+  max-width:105px!important;
+  font-size:7.5px!important;
+  line-height:1.25!important;
+}
+
+.tool-group-title{
+  margin-bottom:6px!important;
+}
+.tool-group-title span{font-size:8.5px!important}
+.tool-group-title small{font-size:7.5px!important}
+
+.solute-picker{
+  gap:5px!important;
+}
+.solute-choice{
+  min-height:50px!important;
+  grid-template-columns:31px minmax(0,1fr)!important;
+  gap:7px!important;
+  padding:6px 7px!important;
+}
+.solute-choice .solute-orb{
+  width:29px!important;
+  height:29px!important;
+  transform:scale(1)!important;
+}
+.solute-choice>span:last-child{
+  font-size:10px!important;
+  line-height:1.15!important;
+}
+
+.compartment-controls{
+  margin-top:6px!important;
+  gap:5px!important;
+}
+.compartment-control{
+  min-height:62px!important;
+  padding:7px!important;
+  gap:5px!important;
+}
+.compartment-control-head strong{font-size:10.5px!important}
+.compartment-control-head small{font-size:8px!important}
+.active-solute-mini{
+  min-width:34px!important;
+  height:28px!important;
+  font-size:8.5px!important;
+}
+.solute-adjust{
+  height:30px!important;
+  font-size:14px!important;
+}
+
+/* More room for the actual simulator while keeping the build library visible. */
+.membrane-stage-card{
+  grid-template-columns:minmax(0,1fr) 350px!important;
+  grid-template-rows:48px minmax(0,1fr)!important;
+  border-radius:12px!important;
+}
+
+.stage-toolbar{
+  min-height:48px!important;
+  padding:5px 8px!important;
+  gap:7px!important;
+  flex-wrap:nowrap!important;
+}
+.stage-status{
+  min-width:142px!important;
+  gap:6px!important;
+}
+.stage-status small{font-size:7.5px!important}
+.stage-status strong{font-size:10px!important}
+
+.simulation-controls{
+  gap:5px!important;
+  flex-wrap:nowrap!important;
+}
+.sim-run-controls,
+.vm-preset-controls{
+  padding:2px!important;
+  gap:2px!important;
+}
+.vm-preset-controls>span{
+  font-size:7.5px!important;
+}
+.sim-control-btn,
+.vm-preset,
+.ligand-toggle{
+  min-width:34px!important;
+  height:30px!important;
+  padding:0 7px!important;
+  font-size:9px!important;
+}
+.charge-toggle{
+  min-width:68px!important;
+}
+.stage-actions{
+  gap:5px!important;
+}
+.stage-actions span{
+  font-size:8px!important;
+}
+.stage-actions button{
+  height:30px!important;
+  padding:0 8px!important;
+  font-size:8.5px!important;
+}
+
+/* Right rail: builds first, then learning explanation, then measurements. */
+.stage-footer{
+  padding:8px!important;
+  gap:8px!important;
+  overflow:auto!important;
+}
+
+.stage-footer>.structure-console{order:0!important}
+.stage-footer>.selection-info{order:1!important}
+.stage-footer>.gradient-panel{order:2!important}
+
+.structure-console{
+  padding:9px!important;
+  border-radius:10px!important;
+}
+.structure-console-head{
+  top:-8px!important;
+  margin:0!important;
+  padding-bottom:7px!important;
+}
+.structure-console-head small{font-size:8px!important}
+.structure-console-head strong{
+  margin-top:1px!important;
+  font-size:13px!important;
+}
+.structure-console-head>span{
+  max-width:125px!important;
+  font-size:7.5px!important;
+  line-height:1.2!important;
+}
+
+.structure-section{
+  gap:5px!important;
+  padding-top:7px!important;
+}
+.structure-section+.structure-section{
+  margin-top:5px!important;
+  padding-top:7px!important;
+}
+.structure-section>small,
+.structure-section-titleline>small{
+  font-size:8.5px!important;
+  line-height:1.15!important;
+}
+.structure-grid{
+  gap:5px!important;
+}
+.structure-card{
+  min-height:56px!important;
+  grid-template-columns:36px minmax(0,1fr)!important;
+  gap:1px 7px!important;
+  padding:6px!important;
+  border-radius:9px!important;
+}
+.structure-card-wide{
+  min-height:54px!important;
+  grid-template-columns:38px minmax(0,1fr)!important;
+}
+.structure-card .tool-preview{
+  transform:scale(1.02)!important;
+}
+.structure-card>b,
+.structure-card>span>b{
+  font-size:10.5px!important;
+  line-height:1.12!important;
+}
+.structure-card>small,
+.structure-card>span>small{
+  font-size:8.5px!important;
+  line-height:1.15!important;
+}
+
+/* Selected item explanation is deliberately readable: this is the teaching block. */
+.selection-info{
+  grid-template-columns:36px minmax(0,1fr)!important;
+  gap:9px!important;
+  padding:10px!important;
+  border-radius:10px!important;
+  box-shadow:none!important;
+}
+.selection-index{
+  width:36px!important;
+  height:36px!important;
+  font-size:8px!important;
+}
+.selection-info small{
+  font-size:8.5px!important;
+}
+.selection-info strong{
+  margin-top:1px!important;
+  font-size:14px!important;
+  line-height:1.15!important;
+}
+.selection-info p{
+  margin-top:4px!important;
+  font-size:11px!important;
+  line-height:1.42!important;
+}
+.delete-key-hint{
+  padding-top:5px!important;
+  font-size:7.5px!important;
+}
+
+/* Measurements stay compact but readable. */
+.gradient-panel{
+  padding:9px!important;
+  border-radius:10px!important;
+}
+.gradient-panel-head{
+  padding-bottom:6px!important;
+}
+.gradient-panel-head small{font-size:8px!important}
+.gradient-panel-head strong{font-size:11px!important}
+.gradient-panel-head>span{font-size:8px!important}
+.concentration-grid{
+  gap:4px!important;
+  padding-top:6px!important;
+}
+.concentration-row{
+  min-height:34px!important;
+  grid-template-columns:34px minmax(0,1fr) 75px!important;
+  gap:5px!important;
+  padding:4px 5px!important;
+}
+.concentration-symbol{font-size:9.5px!important}
+.concentration-row>small{font-size:7.8px!important}
+.gradient-panel p{
+  margin-top:6px!important;
+  font-size:9px!important;
+  line-height:1.35!important;
+}
+
+/* The live canvas must stay visually pure. */
+.membrane-stage .drop-hint{
+  display:none!important;
+}
+
+/* Build positions only appear while placing/moving a protein. */
+.membrane-stage .membrane-build-slot{
+  opacity:0!important;
+  border-color:transparent!important;
+  background:transparent!important;
+}
+.membrane-stage .membrane-build-slot::after{
+  opacity:0!important;
+}
+.membrane-stage.drag-source-active .membrane-build-slot:not(.is-occupied),
+.membrane-stage .membrane-build-slot.is-target{
+  opacity:.62!important;
+  border-color:rgba(255,255,255,.13)!important;
+  background:rgba(255,255,255,.015)!important;
+}
+.membrane-stage.drag-source-active .membrane-build-slot:not(.is-occupied)::after,
+.membrane-stage .membrane-build-slot.is-target::after{
+  opacity:.6!important;
+}
+
+/* No text glyphs embedded in protein artwork on the simulation canvas. */
+.membrane-stage .sglt-art::after{
+  content:""!important;
+}
+.membrane-stage .nak-phosphate{
+  font-size:0!important;
+  width:11px!important;
+  height:11px!important;
+  background:#efe68a!important;
+}
+
+/* Medium desktops: stay compact instead of shrinking typography. */
+@media(max-width:1500px){
+  .membrane-page{
+    grid-template-rows:22px 44px 48px 38px minmax(0,1fr)!important;
+  }
+  .membrane-lab-shell{
+    grid-template-columns:250px minmax(0,1fr)!important;
+  }
+  .membrane-stage-card{
+    grid-template-columns:minmax(0,1fr) 320px!important;
+  }
+  .membrane-intro h1{font-size:22px!important}
+  .membrane-intro p{font-size:9.5px!important}
+  .membrane-mode-tab strong{font-size:9.5px!important}
+  .membrane-mode-tab small{font-size:7.5px!important}
+  .structure-card>b,
+  .structure-card>span>b{font-size:10px!important}
+  .structure-card>small,
+  .structure-card>span>small{font-size:8px!important}
+  .selection-info p{font-size:10.5px!important}
+}
+
+@media(max-width:1180px){
+  .membrane-page{
+    height:auto!important;
+    grid-template-rows:none!important;
+  }
+  .membrane-lab-shell{
+    grid-template-columns:1fr!important;
+  }
+  .membrane-stage-card{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto 620px auto!important;
+  }
+  .stage-toolbar{
+    flex-wrap:wrap!important;
+  }
+  .stage-footer{
+    grid-template-columns:1fr 1fr!important;
+  }
+  .structure-console{
+    grid-column:1/-1!important;
+  }
+  .selection-info{grid-column:1!important}
+  .gradient-panel{grid-column:2!important}
+}
+
+@media(max-width:760px){
+  .membrane-intro p{
+    white-space:normal!important;
+  }
+  .stage-footer{
+    grid-template-columns:1fr!important;
+  }
+  .structure-console,
+  .selection-info,
+  .gradient-panel{
+    grid-column:1!important;
+  }
+  .structure-card>b,
+  .structure-card>span>b{
+    font-size:11px!important;
+  }
+  .structure-card>small,
+  .structure-card>span>small{
+    font-size:9px!important;
+  }
+  .selection-info p{
+    font-size:11px!important;
+  }
+}
