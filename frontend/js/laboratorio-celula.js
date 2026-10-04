@@ -1039,22 +1039,19 @@
   function proteinArt(type){
     if(type==="bomba"){
       return '<span class="protein-label">Bomba Na⁺/K⁺</span>'+
-        '<span class="protein-art pump-art">'+
-          '<span class="pump-lobe pump-lobe-left"></span>'+
-          '<span class="pump-lobe pump-lobe-right"></span>'+
-          '<span class="pump-chamber"></span>'+
-          '<span class="pump-pocket-caption pocket-caption-k">2 K⁺</span>'+
-          '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1" aria-label="Sítio vazio para K+"></i>'+
-          '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2" aria-label="Sítio vazio para K+"></i>'+
-          '<span class="pump-pocket-caption pocket-caption-na">3 Na⁺</span>'+
-          '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1" aria-label="Sítio vazio para Na+"></i>'+
-          '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2" aria-label="Sítio vazio para Na+"></i>'+
-          '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3" aria-label="Sítio vazio para Na+"></i>'+
-          '<span class="pump-atp-cavity"></span>'+
-          '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp" aria-label="Sítio vazio para ATP"></i>'+
-          '<b class="pump-ratio">3:2</b>'+
+        '<span class="protein-art nak-pump-art" aria-label="Bomba de sódio e potássio">'+
+          '<span class="nak-shell"></span>'+
+          '<span class="nak-cavity"></span>'+
+          '<span class="nak-phosphate">P</span>'+
+          '<i class="pump-slot nak-site nak-site-k slot-k1" data-accept="k" data-slot="k1" aria-label="Sítio para K+"></i>'+
+          '<i class="pump-slot nak-site nak-site-k slot-k2" data-accept="k" data-slot="k2" aria-label="Sítio para K+"></i>'+
+          '<i class="pump-slot nak-site nak-site-na slot-na1" data-accept="na" data-slot="na1" aria-label="Sítio para Na+"></i>'+
+          '<i class="pump-slot nak-site nak-site-na slot-na2" data-accept="na" data-slot="na2" aria-label="Sítio para Na+"></i>'+
+          '<i class="pump-slot nak-site nak-site-na slot-na3" data-accept="na" data-slot="na3" aria-label="Sítio para Na+"></i>'+
+          '<span class="nak-atp-pocket"></span>'+
+          '<i class="pump-slot nak-site nak-site-atp slot-atp" data-accept="atp" data-slot="atp" aria-label="Sítio para ATP"></i>'+
         '</span>'+
-        '<span class="pump-state-badge">0/6</span>';
+        '<span class="pump-state-badge">Na⁺ · 0/3</span>';
     }
 
     if(type==="sglt"){
@@ -1322,7 +1319,7 @@
       return '<span class="ghost-molecule" data-type="'+type+'">'+catalogue[type].label+'</span>';
     }
     if(type==="bomba"){
-      return '<span class="ghost-protein"><span class="protein-art pump-art"><span class="pump-lobe pump-lobe-left"></span><span class="pump-lobe pump-lobe-right"></span><span class="pump-chamber"></span><span class="pump-atp-cavity"></span><b class="pump-ratio">3:2</b></span></span>';
+      return '<span class="ghost-protein"><span class="protein-art nak-pump-art nak-pump-ghost"><span class="nak-shell"></span><span class="nak-cavity"></span><span class="nak-atp-pocket"></span></span></span>';
     }
     if(type==="sglt"){
       return '<span class="ghost-protein"><span class="protein-art sglt-art"><i class="sglt-site sglt-na-left">Na</i><i class="sglt-site sglt-glucose">G</i><i class="sglt-site sglt-na-right">Na</i></span></span>';
@@ -1600,9 +1597,9 @@
 
   function initializePumpState(pump){
     if(!pump)return;
-    pump.dataset.pumpState="inside-open";
+    delete pump.dataset.cycling;
     delete pump.dataset.phosphateBound;
-    setPumpVisualState(pump,"inside-open");
+    setPumpVisualState(pump,"inside-open","Na⁺ · 0/3");
   }
 
   function pumpState(pump){
@@ -1622,17 +1619,6 @@
   function setPumpVisualState(pump,state,label){
     if(!pump)return;
     pump.dataset.pumpState=state;
-
-    pump.classList.remove(
-      "pump-open-in","pump-open-out","pump-occluded",
-      "pump-phosphorylating","pump-k-bound","pump-phosphate-bound"
-    );
-
-    if(state==="inside-open"||state==="inside-na-bound")pump.classList.add("pump-open-in");
-    else if(state==="outside-open")pump.classList.add("pump-open-out");
-    else pump.classList.add("pump-occluded");
-
-    if(pump.dataset.phosphateBound==="1")pump.classList.add("pump-phosphate-bound");
 
     pump.querySelectorAll(".pump-slot").forEach(function(slot){
       var active=pumpSlotActive(slot,pump);
@@ -1654,9 +1640,12 @@
 
     var badge=pump.querySelector(".pump-state-badge");
     if(badge)badge.textContent=label||(
-      state==="inside-open"?"3 Na⁺":
+      state==="inside-open"?"Na⁺ · "+pumpMolecules(pump,"na").length+"/3":
       state==="inside-na-bound"?"ATP":
-      state==="outside-open"?"K⁺ · 0/2":"Ativa"
+      state==="phosphorylating"?"Fosforilação":
+      state==="outside-open"?"K⁺ · "+pumpMolecules(pump,"k").length+"/2":
+      state==="k-bound"?"Retorno":
+      state==="resetting"?"Retorno":"Bomba ativa"
     );
   }
 
@@ -2272,11 +2261,7 @@
     }
 
     pump.dataset.cycling="1";
-    pump.dataset.pumpState="phosphorylating";
-    pump.classList.add("pump-cycling","pump-phosphorylating","pump-occluded");
-
-    var badge=pump.querySelector(".pump-state-badge");
-    if(badge)badge.textContent="Fosforilação";
+    setPumpVisualState(pump,"phosphorylating","Fosforilação");
 
     var atpItem=atpItems[0];
 
@@ -2285,35 +2270,35 @@
 
       if(atpItem.el&&atpItem.el.isConnected){
         releasePumpParticle(atpItem.el,atpItem.slot);
+
         var px=parseFloat(pump.style.left)||stage.clientWidth/2;
         var b=barrier();
+
         atpItem.el.remove();
         markSceneCacheDirty();
         compartmentCountCacheAt=0;
 
-        var adp=createPlaced("adp","molecule",Math.min(stage.clientWidth-42,px+74),b.bottom+62,{select:false,interactive:false});
+        var adp=createPlaced("adp","molecule",Math.min(stage.clientWidth-42,px+72),b.bottom+58,{select:false,interactive:false});
         if(adp){
-          var m=moleculeMotion.get(adp);
-          if(m){
-            m.vx=18+Math.random()*15;
-            m.vy=18+Math.random()*12;
-            m.targetVx=m.vx;
-            m.targetVy=m.vy;
-            m.directionChangeAt=performance.now()+700;
+          var am=moleculeMotion.get(adp);
+          if(am){
+            am.vx=18+Math.random()*14;
+            am.vy=20+Math.random()*10;
+            am.targetVx=am.vx;
+            am.targetVy=am.vy;
+            am.directionChangeAt=performance.now()+700;
           }
         }
       }
 
       pump.dataset.phosphateBound="1";
-      pump.classList.add("pump-phosphate-bound");
-      if(badge)badge.textContent="P";
+      setPumpVisualState(pump,"phosphorylating","P");
 
       setTimeout(function(){
         if(!pump.isConnected)return;
 
-        pump.classList.remove("pump-phosphorylating","pump-occluded");
-        pump.classList.add("pump-open-out");
-        pump.dataset.pumpState="outside-open";
+        // Protein opens to EC before Na+ is released.
+        setPumpVisualState(pump,"outside-open","K⁺ · 0/2");
 
         var lanes=[-28,0,28];
         sodium.forEach(function(item,index){
@@ -2325,11 +2310,10 @@
         setTimeout(function(){
           if(!pump.isConnected)return;
           delete pump.dataset.cycling;
-          pump.classList.remove("pump-cycling");
-          setPumpVisualState(pump,"outside-open","K⁺ externo");
+          setPumpVisualState(pump,"outside-open","K⁺ · 0/2");
           updateCounter();
         },820);
-      },420);
+      },430);
     },360);
   }
 
@@ -2343,54 +2327,50 @@
     }
 
     pump.dataset.cycling="1";
-    pump.dataset.pumpState="k-bound";
-    pump.classList.add("pump-cycling","pump-k-bound","pump-occluded");
-    pump.classList.remove("pump-open-out");
-
-    var badge=pump.querySelector(".pump-state-badge");
-    if(badge)badge.textContent="Retorno";
+    setPumpVisualState(pump,"k-bound","2 K⁺ ligados");
 
     setTimeout(function(){
       if(!pump.isConnected)return;
 
-      var lanes=[-16,16];
-      potassium.forEach(function(item,index){
-        if(!item.el||!item.el.isConnected)return;
-        releasePumpParticle(item.el,item.slot);
-        animatePumpParticle(item.el,pump,"inward",lanes[index]||0);
-      });
-
-      pump.dataset.pumpState="inside-open";
-      pump.classList.remove("pump-k-bound","pump-occluded");
-      pump.classList.add("pump-open-in");
-
-      if(pump.dataset.phosphateBound==="1"){
-        delete pump.dataset.phosphateBound;
-        pump.classList.remove("pump-phosphate-bound");
-
-        var b=barrier();
-        var px=parseFloat(pump.style.left)||stage.clientWidth/2;
-        var pi=createPlaced("pi","molecule",Math.min(stage.clientWidth-30,px+54),b.bottom+54,{select:false,interactive:false});
-        if(pi){
-          var pm=moleculeMotion.get(pi);
-          if(pm){
-            pm.vx=16+Math.random()*12;
-            pm.vy=20+Math.random()*10;
-            pm.targetVx=pm.vx;
-            pm.targetVy=pm.vy;
-            pm.directionChangeAt=performance.now()+650;
-          }
-        }
-      }
+      // Occluded return toward IC with K+ still visibly inside the protein.
+      setPumpVisualState(pump,"resetting","Retorno");
 
       setTimeout(function(){
         if(!pump.isConnected)return;
-        delete pump.dataset.cycling;
-        pump.classList.remove("pump-cycling");
-        setPumpVisualState(pump,"inside-open","Na⁺ interno");
-        updateCounter();
-      },820);
-    },520);
+
+        var lanes=[-17,17];
+        potassium.forEach(function(item,index){
+          if(!item.el||!item.el.isConnected)return;
+          releasePumpParticle(item.el,item.slot);
+          animatePumpParticle(item.el,pump,"inward",lanes[index]||0);
+        });
+
+        if(pump.dataset.phosphateBound==="1"){
+          delete pump.dataset.phosphateBound;
+
+          var b=barrier();
+          var px=parseFloat(pump.style.left)||stage.clientWidth/2;
+          var pi=createPlaced("pi","molecule",Math.min(stage.clientWidth-30,px+52),b.bottom+52,{select:false,interactive:false});
+          if(pi){
+            var pm=moleculeMotion.get(pi);
+            if(pm){
+              pm.vx=16+Math.random()*12;
+              pm.vy=20+Math.random()*10;
+              pm.targetVx=pm.vx;
+              pm.targetVy=pm.vy;
+              pm.directionChangeAt=performance.now()+650;
+            }
+          }
+        }
+
+        setTimeout(function(){
+          if(!pump.isConnected)return;
+          delete pump.dataset.cycling;
+          setPumpVisualState(pump,"inside-open","Na⁺ · 0/3");
+          updateCounter();
+        },820);
+      },420);
+    },420);
   }
 
   function beginPlacedDrag(event){

@@ -855,154 +855,6 @@
   background:rgba(var(--mv-accent-rgb),.07);
 }
 
-/* ---------- Na/K pump ---------- */
-
-.placed-protein[data-type="bomba"]{width:104px}
-
-.pump-art{
-  width:96px;
-  height:156px;
-  border:1.4px solid #231f20;
-  border-radius:43% 43% 24% 24% / 20% 20% 76% 76%;
-  background:#7ccbb9;
-  transition:border-radius .32s ease;
-}
-.pump-lobe{
-  position:absolute;
-  z-index:1;
-  top:8px;
-  bottom:8px;
-  width:43px;
-  background:#7ccbb9;
-}
-.pump-lobe-left{
-  left:2px;
-  border-radius:55% 22% 30% 55% / 20% 16% 72% 68%;
-}
-.pump-lobe-right{
-  right:2px;
-  border-radius:22% 55% 55% 30% / 16% 20% 68% 72%;
-}
-.pump-chamber{
-  position:absolute;
-  z-index:2;
-  left:50%;
-  top:21px;
-  width:42px;
-  height:118px;
-  transform:translateX(-50%);
-  border:1.4px solid #231f20;
-  background:#00967a;
-  clip-path:polygon(32% 0,68% 0,70% 16%,84% 24%,84% 43%,68% 52%,77% 68%,92% 82%,79% 100%,58% 90%,50% 74%,42% 90%,21% 100%,8% 82%,23% 68%,32% 52%,16% 43%,16% 24%,30% 16%);
-  transition:transform .34s ease,width .34s ease,clip-path .34s ease;
-}
-.pump-open-out .pump-chamber{transform:translateX(-50%) rotate(180deg)}
-.pump-open-out .pump-art{border-radius:24% 24% 43% 43% / 76% 76% 20% 20%}
-.pump-occluded .pump-art{border-radius:38% 38% 34% 34% / 27% 27% 63% 63%}
-.pump-occluded .pump-chamber{
-  width:34px;
-  clip-path:polygon(34% 0,66% 0,78% 16%,74% 36%,66% 50%,74% 64%,78% 84%,66% 100%,34% 100%,22% 84%,26% 64%,34% 50%,26% 36%,22% 16%);
-}
-
-.pump-pocket-caption{
-  position:absolute;
-  z-index:8;
-  left:50%;
-  transform:translateX(-50%);
-  color:#effff9;
-  font-size:5px;
-  font-weight:950;
-  pointer-events:none;
-}
-.pocket-caption-k{top:11px}
-.pocket-caption-na{bottom:11px}
-
-.pump-slot{
-  position:absolute;
-  z-index:9;
-  width:21px;
-  height:21px;
-  border:1.2px solid rgba(240,255,250,.54);
-  border-radius:50%;
-  background:#16352c;
-  box-shadow:inset 0 0 0 3px rgba(124,203,185,.12);
-  pointer-events:none;
-}
-.slot-k1{left:26px;top:27px}
-.slot-k2{right:26px;top:27px}
-.slot-na1{left:16px;bottom:25px}
-.slot-na2{left:38px;bottom:18px}
-.slot-na3{right:16px;bottom:25px}
-.pump-atp-cavity{
-  position:absolute;
-  z-index:5;
-  right:-9px;
-  bottom:20px;
-  width:38px;
-  height:27px;
-  border:1px solid #231f20;
-  border-radius:12px;
-  background:#7ccbb9;
-}
-.slot-atp{
-  right:-6px;
-  bottom:23px;
-  width:31px;
-  height:20px;
-  border-radius:8px;
-}
-.pump-site-inactive:not(.occupied){opacity:.25}
-.pump-site-active:not(.occupied){border-color:#effff9;opacity:1}
-.pump-slot.occupied{opacity:.23}
-.pump-ratio{
-  position:absolute;
-  z-index:10;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  min-width:24px;
-  height:16px;
-  display:grid;
-  place-items:center;
-  border:1px solid #16483e;
-  border-radius:5px;
-  background:#00967a;
-  color:#effff9;
-  font-size:6px;
-}
-.pump-state-badge{
-  position:absolute;
-  right:-35px;
-  top:50%;
-  transform:translateY(-50%);
-  min-width:34px;
-  padding:3px 4px;
-  border:1px solid var(--mv-border);
-  border-radius:6px;
-  background:var(--mv-surface);
-  color:var(--mv-muted);
-  font-size:5px;
-  font-weight:950;
-  text-align:center;
-}
-.pump-phosphate-bound .pump-art::after{
-  content:"P";
-  position:absolute;
-  z-index:11;
-  right:-5px;
-  bottom:25px;
-  width:18px;
-  height:18px;
-  display:grid;
-  place-items:center;
-  border:1px solid #332f18;
-  border-radius:50%;
-  background:#efe78d;
-  color:#2d2a13;
-  font-size:7px;
-  font-weight:950;
-}
-
 /* ---------- Na/glucose cotransporter ---------- */
 
 .placed-protein[data-type="sglt"]{width:96px}
@@ -1325,34 +1177,37 @@
 
 .pump-preview{
   position:relative;
-  width:34px;
-  height:40px;
-  border:1px solid #20332e;
-  border-radius:46% 46% 30% 30% / 20% 20% 72% 72%;
-  background:#7ccbb9;
+  width:36px;
+  height:42px;
+  border:1px solid #173b32;
+  border-radius:48% 48% 34% 34% / 22% 22% 74% 74%;
+  background:#7bcdb9;
+  overflow:hidden;
 }
 .pump-preview::before{
   content:"";
   position:absolute;
   left:50%;
   top:7px;
-  width:15px;
-  height:27px;
+  width:16px;
+  height:29px;
   transform:translateX(-50%);
-  border:1px solid #16483e;
-  border-radius:48% 48% 42% 42% / 25% 25% 68% 68%;
-  background:#00967a;
+  border:1px solid #16483d;
+  background:#079a7d;
+  clip-path:polygon(34% 0,66% 0,72% 17%,86% 27%,83% 45%,66% 55%,78% 72%,91% 85%,77% 100%,58% 91%,50% 75%,42% 91%,23% 100%,9% 85%,22% 72%,34% 55%,17% 45%,14% 27%,28% 17%);
 }
-.pump-preview i{
-  position:relative;
-  z-index:2;
-  display:grid;
-  place-items:center;
-  height:100%;
-  color:#effff9;
-  font-size:5px;
-  font-style:normal;
+.pump-preview::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:7px;
+  width:21px;
+  height:8px;
+  transform:translateX(-50%);
+  border-bottom:2px solid rgba(20,68,57,.72);
+  border-radius:50%;
 }
+.pump-preview i{display:none!important}
 
 .sglt-preview{
   position:relative;
@@ -1775,16 +1630,6 @@ body[data-membrane-mode="sglt"] .structure-grid{grid-template-columns:1fr}
   bottom:-16px!important;
 }
 
-/* Pump site captions appear only during interaction. */
-.pump-pocket-caption{
-  opacity:0!important;
-  transition:opacity .14s ease;
-}
-.placed-protein[data-type="bomba"]:hover .pump-pocket-caption,
-.placed-protein[data-type="bomba"].is-selected .pump-pocket-caption{
-  opacity:.72!important;
-}
-
 /* SGLT site lettering is visual, not explanatory noise. */
 .sglt-na-left,
 .sglt-na-right{
@@ -1810,8 +1655,6 @@ body[data-membrane-mode="sglt"] .structure-grid{grid-template-columns:1fr}
 .protein-channel::before,
 .protein-channel::after,
 .protein-pore,
-.pump-art,
-.pump-chamber,
 .sglt-art,
 .sglt-art::before{
   transition-duration:.2s!important;
@@ -1983,42 +1826,6 @@ body[data-membrane-mode="all"] .mode-context-card::after{
   background:#8b8fd4;color:#fff;font-size:6px;font-weight:900;
 }
 .placed-molecule.is-selected{outline:1px dashed var(--mv-accent2)!important;outline-offset:5px}
-
-/* Pump sites follow the supplied authorial model:
-   3 Na + ATP inside, 2 K only after the outward conformation. */
-.placed-protein[data-type="bomba"] .pump-slot{
-  opacity:0!important;
-  visibility:hidden!important;
-  transition:opacity .15s ease!important;
-}
-.placed-protein[data-type="bomba"] .pump-slot.pump-site-active,
-.placed-protein[data-type="bomba"] .pump-slot.occupied{
-  opacity:1!important;
-  visibility:visible!important;
-}
-.placed-protein[data-type="bomba"].pump-open-in .slot-atp{
-  opacity:.24!important;
-  visibility:visible!important;
-}
-.placed-protein[data-type="bomba"].pump-open-in .slot-atp.pump-site-active,
-.placed-protein[data-type="bomba"].pump-open-in .slot-atp.occupied{
-  opacity:1!important;
-}
-.placed-protein[data-type="bomba"] .slot-k1{left:27px!important;right:auto!important;top:19px!important;bottom:auto!important}
-.placed-protein[data-type="bomba"] .slot-k2{right:27px!important;left:auto!important;top:19px!important;bottom:auto!important}
-.placed-protein[data-type="bomba"] .slot-na1{left:20px!important;bottom:23px!important}
-.placed-protein[data-type="bomba"] .slot-na2{left:50%!important;bottom:12px!important;transform:translateX(-50%)!important}
-.placed-protein[data-type="bomba"] .slot-na3{right:20px!important;left:auto!important;bottom:23px!important}
-.placed-protein[data-type="bomba"] .pump-atp-cavity{right:-9px!important;bottom:17px!important;opacity:.52}
-.placed-protein[data-type="bomba"] .slot-atp{right:-6px!important;bottom:20px!important}
-.placed-protein[data-type="bomba"].pump-open-out .slot-na1,
-.placed-protein[data-type="bomba"].pump-open-out .slot-na2,
-.placed-protein[data-type="bomba"].pump-open-out .slot-na3,
-.placed-protein[data-type="bomba"].pump-open-out .slot-atp,
-.placed-protein[data-type="bomba"].pump-open-out .pump-atp-cavity{
-  opacity:0!important;
-  visibility:hidden!important;
-}
 
 /* Keep cotransporter centered in the membrane during both conformations. */
 .placed-protein[data-type="sglt"] .sglt-art{
@@ -3484,4 +3291,288 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   .structure-card>span>b{font-size:11px!important}
   .structure-card>small,
   .structure-card>span>small{font-size:8.5px!important}
+}
+
+
+/* =========================================================
+   Na+/K+ ATPase — CANONICAL AUTHORIAL MODEL V39
+   3 Na+ + ATP on IC face -> outward conformation -> 2 K+ on EC face.
+========================================================= */
+
+.placed-protein[data-type="bomba"]{
+  width:112px!important;
+  height:170px!important;
+}
+
+.nak-pump-art{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:104px!important;
+  height:162px!important;
+  transform:translate(-50%,-50%)!important;
+  overflow:visible!important;
+}
+
+.nak-shell{
+  position:absolute;
+  z-index:1;
+  inset:3px 5px;
+  border:1.5px solid #183b33;
+  border-radius:46% 46% 34% 34% / 21% 21% 74% 74%;
+  background:#7bcdb9;
+  clip-path:polygon(
+    18% 2%,82% 2%,92% 16%,92% 45%,84% 66%,70% 88%,
+    58% 80%,50% 63%,42% 80%,30% 88%,16% 66%,8% 45%,8% 16%
+  );
+  transition:
+    transform .34s cubic-bezier(.22,.72,.28,1),
+    clip-path .34s cubic-bezier(.22,.72,.28,1),
+    border-radius .34s ease;
+}
+
+.nak-cavity{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  top:20px;
+  width:44px;
+  height:121px;
+  transform:translateX(-50%);
+  border:1.5px solid #164d40;
+  background:#079a7d;
+  clip-path:polygon(
+    34% 0,66% 0,70% 15%,84% 24%,84% 43%,67% 53%,
+    77% 68%,92% 82%,79% 100%,59% 91%,50% 73%,
+    41% 91%,21% 100%,8% 82%,23% 68%,33% 53%,16% 43%,16% 24%,30% 15%
+  );
+  transition:
+    transform .34s cubic-bezier(.22,.72,.28,1),
+    width .34s ease,
+    clip-path .34s cubic-bezier(.22,.72,.28,1);
+}
+
+.nak-atp-pocket{
+  position:absolute;
+  z-index:4;
+  right:-7px;
+  bottom:15px;
+  width:43px;
+  height:29px;
+  border:1.2px solid #275c4e;
+  border-radius:14px;
+  background:#7bcdb9;
+  transition:opacity .18s ease,transform .28s ease;
+}
+
+.nak-phosphate{
+  position:absolute;
+  z-index:16;
+  right:2px;
+  bottom:36px;
+  width:18px;
+  height:18px;
+  display:grid;
+  place-items:center;
+  border:1px solid #453f17;
+  border-radius:50%;
+  background:#efe68a;
+  color:#322d11;
+  font-size:7px;
+  font-style:normal;
+  font-weight:900;
+  opacity:0;
+  transform:scale(.7);
+  transition:opacity .16s ease,transform .16s ease;
+  pointer-events:none;
+}
+
+.placed-protein[data-type="bomba"][data-phosphate-bound="1"] .nak-phosphate{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* Empty binding cavities: molecules keep their own artwork when docked. */
+.nak-pump-art .pump-slot{
+  position:absolute!important;
+  z-index:10!important;
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  width:23px!important;
+  height:23px!important;
+  border-radius:50%!important;
+  background:rgba(8,48,40,.30)!important;
+  color:transparent!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.07)!important;
+  transition:
+    opacity .16s ease,
+    visibility .16s ease,
+    border-color .16s ease,
+    background .16s ease!important;
+}
+
+.nak-pump-art .nak-site-na{
+  border:1.5px solid rgba(255,213,47,.55)!important;
+}
+.nak-pump-art .nak-site-k{
+  border:1.5px solid rgba(67,183,216,.58)!important;
+}
+.nak-pump-art .nak-site-atp{
+  width:35px!important;
+  height:21px!important;
+  border-radius:10px!important;
+  border:1.5px solid rgba(132,202,100,.62)!important;
+  background:rgba(36,80,36,.28)!important;
+}
+
+/* 3 Na+ binding sites on the intracellular/lower side. */
+.nak-pump-art .slot-na1{
+  left:18px!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:22px!important;
+}
+.nak-pump-art .slot-na2{
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:9px!important;
+  transform:translateX(-50%)!important;
+}
+.nak-pump-art .slot-na3{
+  left:auto!important;
+  right:18px!important;
+  top:auto!important;
+  bottom:22px!important;
+}
+
+/* ATP binding pocket below/right on the IC side. */
+.nak-pump-art .slot-atp{
+  left:auto!important;
+  right:-3px!important;
+  top:auto!important;
+  bottom:19px!important;
+}
+
+/* 2 K+ binding sites on the extracellular/upper side. */
+.nak-pump-art .slot-k1{
+  left:27px!important;
+  right:auto!important;
+  top:18px!important;
+  bottom:auto!important;
+}
+.nak-pump-art .slot-k2{
+  left:auto!important;
+  right:27px!important;
+  top:18px!important;
+  bottom:auto!important;
+}
+
+/* IC-facing conformation */
+.placed-protein[data-type="bomba"][data-pump-state="inside-open"] .nak-site-na,
+.placed-protein[data-type="bomba"][data-pump-state="inside-na-bound"] .nak-site-na{
+  opacity:1!important;
+  visibility:visible!important;
+}
+.placed-protein[data-type="bomba"][data-pump-state="inside-open"] .nak-site-atp{
+  opacity:.22!important;
+  visibility:visible!important;
+}
+.placed-protein[data-type="bomba"][data-pump-state="inside-na-bound"] .nak-site-atp{
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+/* Occluded transition: protein closes around Na+ or K+. */
+.placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .nak-shell,
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-shell,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-shell{
+  clip-path:polygon(
+    21% 5%,79% 5%,88% 19%,85% 46%,77% 68%,64% 88%,
+    56% 80%,50% 69%,44% 80%,36% 88%,23% 68%,15% 46%,12% 19%
+  );
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .nak-cavity,
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-cavity,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-cavity{
+  width:33px;
+  clip-path:polygon(
+    35% 0,65% 0,77% 18%,72% 38%,64% 50%,72% 62%,
+    77% 82%,65% 100%,35% 100%,23% 82%,28% 62%,36% 50%,28% 38%,23% 18%
+  );
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .pump-slot.occupied,
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .pump-slot.occupied,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .pump-slot.occupied{
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+/* EC-facing conformation: same pump rotates its opening upward. */
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-shell{
+  transform:rotate(180deg);
+}
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-cavity{
+  transform:translateX(-50%) rotate(180deg);
+}
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-site-k{
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-atp-pocket,
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-atp-pocket,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-atp-pocket{
+  opacity:0;
+  transform:scale(.82);
+}
+
+/* Highlight only currently valid empty sites. */
+.nak-pump-art .pump-slot.pump-site-active:not(.occupied){
+  opacity:1!important;
+  visibility:visible!important;
+  background:rgba(255,255,255,.025)!important;
+}
+
+.nak-pump-art .pump-slot.occupied{
+  opacity:1!important;
+  visibility:visible!important;
+  background:rgba(0,0,0,.07)!important;
+  box-shadow:none!important;
+}
+
+/* Docked particles retain the same visual molecule style; no alternate pump ion skin. */
+.placed-molecule.docked[data-docked-pump]{
+  z-index:30!important;
+  transform:translate(-50%,-50%)!important;
+}
+
+/* Canonical ghost uses the same silhouette. */
+.nak-pump-ghost .nak-shell,
+.nak-pump-ghost .nak-cavity,
+.nak-pump-ghost .nak-atp-pocket{
+  opacity:.86;
+}
+
+.placed-protein[data-type="bomba"] .pump-state-badge{
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:-19px!important;
+  transform:translate(-50%,3px)!important;
+}
+
+/* Palette preview belongs to this exact model. */
+.structure-card[data-type="bomba"] .pump-preview{
+  width:36px!important;
+  height:42px!important;
+  border-radius:48% 48% 34% 34% / 22% 22% 74% 74%!important;
+  background:#7bcdb9!important;
+  border-color:#173b32!important;
 }
