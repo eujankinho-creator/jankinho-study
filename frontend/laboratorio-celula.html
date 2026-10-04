@@ -142,11 +142,26 @@
                 </button>
               </div>
 
+              <div class="cell-location-card" aria-label="Localização da membrana na célula">
+                <div class="cell-location-copy">
+                  <small>ONDE ESTAMOS?</small>
+                  <strong>Membrana plasmática</strong>
+                </div>
+                <div class="cell-location-visual" aria-hidden="true">
+                  <span class="cell-body">
+                    <i class="cell-nucleus"></i>
+                    <b class="cell-membrane-focus"></b>
+                  </span>
+                  <span class="cell-focus-line"></span>
+                </div>
+                <p>A área ampliada ao centro representa um pequeno trecho desta membrana.</p>
+              </div>
+
               <div class="compartment-controls">
                 <div class="compartment-control ec-control">
                   <div class="compartment-control-head">
                     <span class="active-solute-mini" id="activeSoluteSymbolEC">Na⁺</span>
-                    <div><strong>Exterior</strong><small>EC · <b id="activeCountEC">0</b></small></div>
+                    <div><strong>Adicionar no EC</strong><small>Extracelular · <b id="activeCountEC">0</b></small></div>
                   </div>
                   <div class="phet-stepper">
                     <button class="solute-adjust" type="button" data-side="EC" data-delta="-10" title="Retirar 10">‹</button>
@@ -159,7 +174,7 @@
                 <div class="compartment-control ic-control">
                   <div class="compartment-control-head">
                     <span class="active-solute-mini" id="activeSoluteSymbolIC">Na⁺</span>
-                    <div><strong>Interior</strong><small>IC · <b id="activeCountIC">0</b></small></div>
+                    <div><strong>Adicionar no IC</strong><small>Intracelular · <b id="activeCountIC">0</b></small></div>
                   </div>
                   <div class="phet-stepper">
                     <button class="solute-adjust" type="button" data-side="IC" data-delta="-10" title="Retirar 10">‹</button>
@@ -186,9 +201,9 @@
 
             <div class="simulation-controls" aria-label="Controles da simulação">
               <div class="sim-run-controls">
-                <button id="simPause" class="sim-control-btn" type="button" aria-pressed="false" title="Pausar simulação">Ⅱ</button>
-                <button id="simSlow" class="sim-control-btn" type="button" aria-pressed="false">0,5×</button>
-                <button id="simNormal" class="sim-control-btn is-active" type="button" aria-pressed="true">1×</button>
+                <button id="simPause" class="sim-control-btn" type="button" aria-pressed="false" title="Pausar simulação"><span>Ⅱ</span><small>Pausa</small></button>
+                <button id="simSlow" class="sim-control-btn" type="button" aria-pressed="false"><span>0,5×</span><small>Lento</small></button>
+                <button id="simNormal" class="sim-control-btn is-active" type="button" aria-pressed="true"><span>1×</span><small>Normal</small></button>
               </div>
               <div class="vm-preset-controls" aria-label="Potencial de membrana">
                 <span>Vm</span>
