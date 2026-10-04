@@ -3645,3 +3645,120 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   }
 }
 
+
+
+/* =========================================================
+   PERFORMANCE V22 — high-density particle renderer
+========================================================= */
+
+.placed-layer{
+  contain:layout paint style;
+}
+
+.placed-molecule{
+  contain:layout paint style;
+  will-change:auto!important;
+  transition:none!important;
+  animation:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+  clip-path:none!important;
+  min-width:24px!important;
+  width:24px;
+  height:24px!important;
+  padding:0!important;
+  border-radius:50%!important;
+  font-size:6.5px!important;
+  line-height:1!important;
+  transform:translate(-50%,-50%)!important;
+  backface-visibility:visible!important;
+}
+
+.placed-molecule[data-type="na"]{
+  color:#ffe9e1!important;
+  background:#b85c40!important;
+  border-color:rgba(255,190,166,.34)!important;
+}
+
+.placed-molecule[data-type="k"]{
+  color:#3c2e08!important;
+  background:#d9b443!important;
+  border-color:rgba(255,229,133,.34)!important;
+}
+
+.placed-molecule[data-type="cl"]{
+  color:#effbff!important;
+  background:#397f9e!important;
+  border-color:rgba(159,221,247,.30)!important;
+}
+
+.placed-molecule[data-type="h2o"]{
+  color:#e9ffff!important;
+  background:#397f86!important;
+  border-color:rgba(159,231,235,.28)!important;
+}
+
+.placed-molecule[data-type="pi"]{
+  width:22px!important;
+  min-width:22px!important;
+  height:22px!important;
+  color:#f3f3ff!important;
+  background:#666db5!important;
+  border-color:rgba(205,210,255,.28)!important;
+}
+
+.placed-molecule[data-type="atp"],
+.placed-molecule[data-type="adp"]{
+  width:auto!important;
+  min-width:31px!important;
+  height:22px!important;
+  padding:0 4px!important;
+  border-radius:7px!important;
+}
+
+.placed-molecule[data-type="atp"]{
+  color:#f4ebff!important;
+  background:#6d4f9d!important;
+  border-color:rgba(220,196,255,.26)!important;
+}
+
+.placed-molecule[data-type="adp"]{
+  color:#eceeff!important;
+  background:#555b92!important;
+  border-color:rgba(198,203,255,.24)!important;
+}
+
+.placed-molecule:not(.docked):not(.is-dragging):not(.channel-transit):not(.pump-transit){
+  will-change:auto!important;
+  transform:translate(-50%,-50%)!important;
+  backface-visibility:visible!important;
+}
+
+/* Efeitos de travessia permanecem discretos e baratos. */
+.placed-molecule.channel-transit,
+.placed-molecule.pump-transit{
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+
+.placed-molecule.crossing-flash{
+  filter:none!important;
+  outline:1px solid rgba(255,255,255,.24);
+  outline-offset:2px;
+}
+
+.placed-protein.capture-active{
+  filter:none!important;
+}
+
+.placed-protein.capture-active .protein-pore{
+  filter:none!important;
+  outline:1px solid rgba(var(--mv-accent-rgb),.18);
+}
+
+/* Dense simulation mode is intentionally simple: no per-particle GPU layer promotion. */
+.membrane-stage{
+  contain:layout paint;
+}
+
