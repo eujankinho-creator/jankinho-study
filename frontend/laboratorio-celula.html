@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-phetlike19">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-console20">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -95,7 +95,7 @@
             <small>1 estrutura por vez</small>
           </div>
 
-          <div class="tool-group">
+          <div class="tool-group legacy-protein-group">
             <div class="tool-group-title">
               <span>Proteínas</span>
               <small>encaixam na bicamada</small>
@@ -139,13 +139,114 @@
               <small>posição livre</small>
             </div>
 
-            <div class="molecule-grid">
-              <button class="molecule-tool na-molecule" type="button" data-kind="molecule" data-type="na"><strong>Na⁺</strong><small>sódio</small></button>
-              <button class="molecule-tool k-molecule" type="button" data-kind="molecule" data-type="k"><strong>K⁺</strong><small>potássio</small></button>
-              <button class="molecule-tool cl-molecule" type="button" data-kind="molecule" data-type="cl"><strong>Cl⁻</strong><small>cloreto</small></button>
-              <button class="molecule-tool water-molecule" type="button" data-kind="molecule" data-type="h2o"><strong>H₂O</strong><small>água</small></button>
-              <button class="molecule-tool atp-molecule" type="button" data-kind="molecule" data-type="atp"><strong>ATP</strong><small>energia</small></button>
-              <button class="molecule-tool pi-molecule" type="button" data-kind="molecule" data-type="pi"><strong>Pi</strong><small>fosfato</small></button>
+            <div class="solute-control-list">
+              <div class="solute-control-row" data-solute="na">
+                <button class="molecule-tool solute-main na-molecule" type="button" data-kind="molecule" data-type="na">
+                  <span class="solute-orb">Na⁺</span><span><strong>Sódio</strong><small>Na⁺</small></span>
+                </button>
+                <div class="solute-side-line">
+                  <span>EC <b id="count-na-EC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="EC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="EC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="EC" data-amount="25">+25</button>
+                </div>
+                <div class="solute-side-line">
+                  <span>IC <b id="count-na-IC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="IC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="IC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="IC" data-amount="25">+25</button>
+                </div>
+              </div>
+
+              <div class="solute-control-row" data-solute="k">
+                <button class="molecule-tool solute-main k-molecule" type="button" data-kind="molecule" data-type="k">
+                  <span class="solute-orb">K⁺</span><span><strong>Potássio</strong><small>K⁺</small></span>
+                </button>
+                <div class="solute-side-line">
+                  <span>EC <b id="count-k-EC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="EC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="EC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="EC" data-amount="25">+25</button>
+                </div>
+                <div class="solute-side-line">
+                  <span>IC <b id="count-k-IC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="IC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="IC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="IC" data-amount="25">+25</button>
+                </div>
+              </div>
+
+              <div class="solute-control-row" data-solute="cl">
+                <button class="molecule-tool solute-main cl-molecule" type="button" data-kind="molecule" data-type="cl">
+                  <span class="solute-orb">Cl⁻</span><span><strong>Cloreto</strong><small>Cl⁻</small></span>
+                </button>
+                <div class="solute-side-line">
+                  <span>EC <b id="count-cl-EC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="EC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="EC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="EC" data-amount="25">+25</button>
+                </div>
+                <div class="solute-side-line">
+                  <span>IC <b id="count-cl-IC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="IC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="IC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="IC" data-amount="25">+25</button>
+                </div>
+              </div>
+
+              <div class="solute-control-row" data-solute="h2o">
+                <button class="molecule-tool solute-main water-molecule" type="button" data-kind="molecule" data-type="h2o">
+                  <span class="solute-orb">H₂O</span><span><strong>Água</strong><small>H₂O</small></span>
+                </button>
+                <div class="solute-side-line">
+                  <span>EC <b id="count-h2o-EC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="EC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="EC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="EC" data-amount="25">+25</button>
+                </div>
+                <div class="solute-side-line">
+                  <span>IC <b id="count-h2o-IC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="IC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="IC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="IC" data-amount="25">+25</button>
+                </div>
+              </div>
+
+              <div class="solute-control-row" data-solute="atp">
+                <button class="molecule-tool solute-main atp-molecule" type="button" data-kind="molecule" data-type="atp">
+                  <span class="solute-orb">ATP</span><span><strong>ATP</strong><small>energia</small></span>
+                </button>
+                <div class="solute-side-line">
+                  <span>EC <b id="count-atp-EC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="EC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="EC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="EC" data-amount="25">+25</button>
+                </div>
+                <div class="solute-side-line">
+                  <span>IC <b id="count-atp-IC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="IC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="IC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="IC" data-amount="25">+25</button>
+                </div>
+              </div>
+
+              <div class="solute-control-row" data-solute="pi">
+                <button class="molecule-tool solute-main pi-molecule" type="button" data-kind="molecule" data-type="pi">
+                  <span class="solute-orb">Pi</span><span><strong>Fosfato</strong><small>Pi</small></span>
+                </button>
+                <div class="solute-side-line">
+                  <span>EC <b id="count-pi-EC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="EC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="EC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="EC" data-amount="25">+25</button>
+                </div>
+                <div class="solute-side-line">
+                  <span>IC <b id="count-pi-IC">0</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="IC" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="IC" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="IC" data-amount="25">+25</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -218,6 +319,39 @@
           </div>
 
           <div class="stage-footer">
+            <div class="structure-console">
+              <div class="structure-console-head">
+                <div><small>ESTRUTURAS</small><strong>Proteínas de membrana</strong></div>
+                <span>clique e posicione</span>
+              </div>
+
+              <div class="structure-section">
+                <small>PASSIVOS</small>
+                <div class="structure-grid">
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="canal-na">
+                    <span class="tool-preview channel-preview na-preview"><i></i></span><b>Canal Na⁺</b><small>seletivo</small>
+                  </button>
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="canal-k">
+                    <span class="tool-preview channel-preview k-preview"><i></i></span><b>Canal K⁺</b><small>seletivo</small>
+                  </button>
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vazante">
+                    <span class="tool-preview channel-preview leak-preview"><i></i></span><b>Vazante K⁺</b><small>leakage</small>
+                  </button>
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="aquaporina">
+                    <span class="tool-preview channel-preview aqua-preview"><i></i></span><b>Aquaporina</b><small>água</small>
+                  </button>
+                </div>
+              </div>
+
+              <div class="structure-section active-transport-section">
+                <small>TRANSPORTE ATIVO</small>
+                <button class="tool-item protein-tool structure-card structure-card-wide" type="button" data-kind="protein" data-type="bomba">
+                  <span class="tool-preview pump-preview"><i>3:2</i></span>
+                  <span><b>Bomba Na⁺/K⁺</b><small>3 Na⁺ → 2 K⁺ · usa ATP</small></span>
+                </button>
+              </div>
+            </div>
+
             <div id="gradientPanel" class="gradient-panel">
               <div class="gradient-panel-head">
                 <div>
@@ -280,7 +414,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-phetlike19"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-console20"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

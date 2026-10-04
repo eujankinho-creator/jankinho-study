@@ -14,6 +14,7 @@
   var removeButton=document.getElementById("removeSelected");
   var collisionToast=document.getElementById("collisionToast");
   var gradientVm=document.getElementById("gradientVm");
+  var soluteTypes=["na","k","cl","h2o","atp","pi"];
   var gradientUi={
     na:{
       direction:document.getElementById("gradientNaDirection"),
@@ -461,6 +462,8 @@
 
     if(gradientVm)gradientVm.textContent="Vm ≈ "+membraneVoltageMv+" mV";
 
+    updateSoluteControlCounts();
+
     ["na","k","cl"].forEach(function(type){
       var ui=gradientUi[type];
       if(!ui||!ui.direction)return;
@@ -682,6 +685,96 @@
       return '<span class="ghost-protein"><span class="protein-art pump-art"><span class="pump-lobe pump-lobe-left"></span><span class="pump-lobe pump-lobe-right"></span><span class="pump-chamber"></span><span class="pump-atp-cavity"></span><b class="pump-ratio">3:2</b></span></span>';
     }
     return '<span class="ghost-protein"><span class="protein-art protein-channel"><i class="protein-pore"></i></span></span>';
+  }
+
+  function safeSpawnPoint(side,index,total){
+    var b=barrier();
+    var w=stage.clientWidth;
+    var h=stage.clientHeight;
+    var padX=30;
+    var padY=34;
+    var minY=side==="EC"?padY:b.bottom+padY;
+    var maxY=side==="EC"?b.top-padY:h-padY;
+
+    if(maxY<=minY){
+      minY=side==="EC"?20:b.bottom+20;
+      maxY=side==="EC"?Math.max(24,b.top-20):Math.max(b.bottom+24,h-20);
+    }
+
+    var cols=Math.max(1,Math.ceil(Math.sqrt(total*1.6)));
+    var rows=Math.max(1,Math.ceil(total/cols));
+    var col=index%cols;
+    var row=Math.floor(index/cols);
+    var cellW=(w-padX*2)/cols;
+    var cellH=(maxY-minY)/rows;
+
+    var x=padX+cellW*(col+.5)+(Math.random()-.5)*Math.min(28,cellW*.65);
+    var y=minY+cellH*(row+.5)+(Math.random()-.5)*Math.min(26,cellH*.6);
+
+    return {
+      x:Math.max(18,Math.min(w-18,x)),
+      y:Math.max(minY,Math.min(maxY,y))
+    };
+  }
+
+  function countFreeMolecules(){
+    return layer.querySelectorAll(".placed-molecule").length;
+  }
+
+  function spawnBatch(type,side,amount){
+    amount=Math.max(1,Math.min(25,parseInt(amount,10)||1));
+    var current=countFreeMolecules();
+    var limit=420;
+    var allowed=Math.max(0,Math.min(amount,limit-current));
+
+    if(allowed<=0){
+      collisionToast.textContent="Limite de partículas atingido para manter a simulação fluida.";
+      collisionToast.classList.add("is-visible");
+      clearTimeout(collisionTimer);
+      collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1500);
+      return;
+    }
+
+    for(var i=0;i<allowed;i++){
+      var p=safeSpawnPoint(side,i,allowed);
+      var el=createPlaced(type,"molecule",p.x,p.y,{select:false});
+      if(el){
+        var motion=moleculeMotion.get(el);
+        if(motion){
+          var angle=Math.random()*Math.PI*2;
+          var speed=(24+Math.random()*22)*Math.sqrt(motion.diffusion||1);
+          motion.vx=Math.cos(angle)*speed;
+          motion.vy=Math.sin(angle)*speed;
+          motion.targetVx=motion.vx;
+          motion.targetVy=motion.vy;
+          motion.directionChangeAt=performance.now()+260+Math.random()*900;
+        }
+      }
+    }
+
+    clearArmedTool();
+    updateCounter();
+    updateSoluteControlCounts();
+    updateGradientPanel(performance.now()+500);
+  }
+
+  function updateSoluteControlCounts(){
+    var b=barrier();
+
+    soluteTypes.forEach(function(type){
+      var counts={EC:0,IC:0};
+      layer.querySelectorAll('.placed-molecule[data-type="'+type+'"]').forEach(function(el){
+        if(!el.isConnected||el.classList.contains("docked")||el.classList.contains("craft-consumed"))return;
+        var y=parseFloat(el.style.top)||0;
+        var side=sideOf(y,b);
+        if(side==="EC"||side==="IC")counts[side]++;
+      });
+
+      ["EC","IC"].forEach(function(sideName){
+        var node=document.getElementById("count-"+type+"-"+sideName);
+        if(node)node.textContent=counts[sideName];
+      });
+    });
   }
 
   function beginSourceDrag(event){
@@ -1521,6 +1614,15 @@
     moving=null;
   }
 
+  document.querySelectorAll(".bulk-add").forEach(function(button){
+    button.addEventListener("pointerdown",function(event){event.stopPropagation()});
+    button.addEventListener("click",function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      spawnBatch(button.dataset.spawnType,button.dataset.side,button.dataset.amount);
+    });
+  });
+
   document.querySelectorAll(".tool-item,.molecule-tool").forEach(function(tool){
     tool.addEventListener("pointerdown",beginSourceDrag,{passive:false});
     tool.addEventListener("pointermove",queueSourceMove,{passive:true});
@@ -1559,7 +1661,7 @@
   });
 
   clearButton.addEventListener("click",function(){
-    layer.textContent="";placedCount=0;selectElement(null);clearArmedTool();updateCounter();updateGradientPanel(performance.now()+500);
+    layer.textContent="";placedCount=0;selectElement(null);clearArmedTool();updateCounter();updateSoluteControlCounts();updateGradientPanel(performance.now()+500);
   });
 
   function removeSelectedElement(){
@@ -2134,6 +2236,7 @@
   buildBilayer();
   renderDefaultInfo();
   updateCounter();
+  updateSoluteControlCounts();
   updateGradientPanel(performance.now()+500);
   loadUser();
   physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
