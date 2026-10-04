@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-gprotein1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-gprotein1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-gprotein1">
-  <link rel="stylesheet" href="/css/laboratorio-proteina-g.css?v=20261004-gprotein1">
+  <link rel="stylesheet" href="/css/laboratorio-proteina-g.css?v=20261004-gprotein2">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-gprotein1"></script>
   <script defer src="/js/theme-manager.js?v=20261004-gprotein1"></script>
@@ -52,7 +52,7 @@
     <header class="header gp-header">
       <div>
         <div class="header-title">Proteína G</div>
-        <span class="gp-header-subtitle">GPCR · Gs · Gi · Gq · segundos mensageiros</span>
+        <span class="gp-header-subtitle">GPCR · Gs · Gi/o · Gq/11 · G12/13</span>
       </div>
 
       <div class="header-user">
@@ -94,7 +94,10 @@
           <span>02</span><strong>Gi</strong><small>↓ adenilato ciclase · ↓ cAMP</small>
         </button>
         <button class="gp-path-tab" type="button" data-pathway="gq">
-          <span>03</span><strong>Gq</strong><small>PLCβ · IP₃/DAG · Ca²⁺</small>
+          <span>03</span><strong>Gq/11</strong><small>PLCβ · IP₃/DAG · Ca²⁺</small>
+        </button>
+        <button class="gp-path-tab" type="button" data-pathway="g12">
+          <span>04</span><strong>G12/13</strong><small>RhoGEF · RhoA · ROCK</small>
         </button>
       </section>
 
@@ -303,13 +306,16 @@
           <span>Gi</span><strong>GPCR → Gαi → AC ↓ → cAMP ↓ → PKA ↓</strong>
         </button>
         <button type="button" class="gp-summary-card gq-summary" data-summary-path="gq">
-          <span>Gq</span><strong>GPCR → Gαq → PLCβ → IP₃ + DAG → Ca²⁺ / PKC</strong>
+          <span>Gq/11</span><strong>GPCR → Gαq/11 → PLCβ → IP₃ + DAG → Ca²⁺ / PKC</strong>
+        </button>
+        <button type="button" class="gp-summary-card g12-summary" data-summary-path="g12">
+          <span>G12/13</span><strong>GPCR → Gα12/13 → RhoGEF → RhoA → ROCK / citoesqueleto</strong>
         </button>
       </section>
     </main>
   </div>
 
-  <script src="/js/laboratorio-proteina-g.js?v=20261004-gprotein1"></script>
+  <script src="/js/laboratorio-proteina-g.js?v=20261004-gprotein2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
