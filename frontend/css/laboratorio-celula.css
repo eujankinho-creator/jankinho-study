@@ -3576,3 +3576,104 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   background:#7bcdb9!important;
   border-color:#173b32!important;
 }
+
+
+/* =========================================================
+   Na+/K+ ATPase V40 — ATP lower-left IC groove
+   Authorial reference: ATP docks into the lower-left groove.
+========================================================= */
+
+/* Distinct non-circular ATP groove on the intracellular lower-left face. */
+.placed-protein[data-type="bomba"] .nak-atp-pocket{
+  left:2px!important;
+  right:auto!important;
+  bottom:5px!important;
+  width:45px!important;
+  height:39px!important;
+  border:1.3px solid #285d50!important;
+  border-radius:0!important;
+  background:#7bcdb9!important;
+  clip-path:polygon(
+    8% 33%,24% 25%,30% 8%,48% 2%,61% 15%,
+    78% 13%,94% 29%,88% 48%,72% 57%,72% 78%,
+    56% 96%,39% 89%,31% 69%,14% 62%
+  )!important;
+  transform:rotate(-8deg)!important;
+  transform-origin:50% 55%!important;
+  opacity:.88!important;
+}
+
+/* Invisible docking hit-area sits exactly over the groove. */
+.placed-protein[data-type="bomba"] .nak-site-atp.slot-atp{
+  left:4px!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:10px!important;
+  width:38px!important;
+  height:28px!important;
+  border-radius:42% 52% 48% 44% / 48% 42% 58% 52%!important;
+  border:1.5px dashed rgba(132,202,100,.58)!important;
+  background:rgba(52,96,45,.16)!important;
+  transform:rotate(-8deg)!important;
+}
+
+/* ATP site remains subtle until 3 Na+ have occupied their sites. */
+.placed-protein[data-type="bomba"][data-pump-state="inside-open"] .nak-site-atp{
+  opacity:.10!important;
+  visibility:visible!important;
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="inside-na-bound"] .nak-site-atp{
+  opacity:1!important;
+  visibility:visible!important;
+  border-color:rgba(160,225,128,.82)!important;
+  background:rgba(79,132,65,.19)!important;
+}
+
+/* When ATP is docked, the molecule sits in the groove instead of receiving another skin. */
+.placed-protein[data-type="bomba"][data-atp-bound="1"] .nak-atp-pocket{
+  opacity:.34!important;
+}
+
+.placed-molecule[data-type="atp"].docked[data-docked-pump]{
+  width:50px!important;
+  height:50px!important;
+}
+
+.placed-molecule[data-type="atp"].docked[data-docked-pump] .molecule-atp{
+  transform:translate(-50%,-50%) rotate(78deg)!important;
+  transform-origin:center!important;
+}
+
+/* ATP groove closes/disappears as soon as the pump turns toward EC. */
+.placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .nak-atp-pocket{
+  opacity:.42!important;
+  transform:rotate(-8deg) scale(.90)!important;
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-atp-pocket,
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-atp-pocket,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-atp-pocket{
+  opacity:0!important;
+  transform:rotate(-8deg) scale(.72)!important;
+}
+
+/* K cavities only become prominent after the 3 Na+ have been expelled to EC. */
+.placed-protein[data-type="bomba"]:not([data-pump-state="outside-open"]):not([data-pump-state="k-bound"]) .nak-site-k:not(.occupied){
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-site-k{
+  opacity:1!important;
+  visibility:visible!important;
+  border-color:rgba(67,183,216,.82)!important;
+  background:rgba(67,183,216,.10)!important;
+}
+
+/* During return, the two K+ remain visually inside until release to IC. */
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-site-k.occupied,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-site-k.occupied{
+  opacity:1!important;
+  visibility:visible!important;
+}

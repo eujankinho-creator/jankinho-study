@@ -1049,7 +1049,7 @@
           '<i class="pump-slot nak-site nak-site-na slot-na2" data-accept="na" data-slot="na2" aria-label="Sítio para Na+"></i>'+
           '<i class="pump-slot nak-site nak-site-na slot-na3" data-accept="na" data-slot="na3" aria-label="Sítio para Na+"></i>'+
           '<span class="nak-atp-pocket"></span>'+
-          '<i class="pump-slot nak-site nak-site-atp slot-atp" data-accept="atp" data-slot="atp" aria-label="Sítio para ATP"></i>'+
+          '<i class="pump-slot nak-site nak-site-atp slot-atp" data-accept="atp" data-slot="atp" aria-label="Ranhura intracelular inferior esquerda para ATP"></i>'+
         '</span>'+
         '<span class="pump-state-badge">Na⁺ · 0/3</span>';
     }
@@ -1589,7 +1589,11 @@
     var pump=layer.querySelector('[data-id="'+el.dataset.dockedPump+'"]');
     if(pump){
       var slot=pump.querySelector('[data-slot="'+el.dataset.dockedSlot+'"]');
-      if(slot){slot.classList.remove("occupied","slot-ready");delete slot.dataset.occupiedId}
+      if(slot){
+        slot.classList.remove("occupied","slot-ready");
+        delete slot.dataset.occupiedId;
+        if(slot.dataset.accept==="atp")delete pump.dataset.atpBound;
+      }
       updatePumpState(pump);
     }
     delete el.dataset.dockedPump;delete el.dataset.dockedSlot;el.classList.remove("docked");
@@ -2198,6 +2202,7 @@
     el.style.left=p.x+"px";el.style.top=p.y+"px";
     el.dataset.dockedPump=pump.dataset.id;el.dataset.dockedSlot=slot.dataset.slot;
     el.classList.add("docked");
+    if(el.dataset.type==="atp")pump.dataset.atpBound="1";
     slot.classList.remove("slot-ready");slot.classList.add("occupied");slot.dataset.occupiedId=el.dataset.id;
     updatePumpState(pump);selectElement(pump);
   }
@@ -2275,6 +2280,7 @@
         var b=barrier();
 
         atpItem.el.remove();
+        delete pump.dataset.atpBound;
         markSceneCacheDirty();
         compartmentCountCacheAt=0;
 
