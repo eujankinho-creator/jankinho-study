@@ -29,6 +29,7 @@
   var simSlow=document.getElementById("simSlow");
   var simNormal=document.getElementById("simNormal");
   var chargeToggle=document.getElementById("chargeToggle");
+  var cytoplasmColorPicker=document.getElementById("cytoplasmColorPicker");
   var chargeOuterBand=stage?stage.querySelector(".charge-positive"):null;
   var chargeInnerBand=stage?stage.querySelector(".charge-negative"):null;
   var ligandToggle=document.getElementById("ligandToggle");
@@ -3365,6 +3366,30 @@
     moving=null;
   }
 
+  function normalizeHexColor(value){
+    return /^#[0-9a-f]{6}$/i.test(value||"")?value.toLowerCase():"#ffffff";
+  }
+
+  function setCytoplasmColor(value,persist){
+    var color=normalizeHexColor(value);
+    if(stage)stage.style.setProperty("--cytoplasm-color",color);
+    if(cytoplasmColorPicker&&cytoplasmColorPicker.value.toLowerCase()!==color){
+      cytoplasmColorPicker.value=color;
+    }
+    if(persist!==false){
+      try{localStorage.setItem("cortex-membrane-cytoplasm-color",color)}catch(_){}
+    }
+  }
+
+  function loadCytoplasmColor(){
+    var saved="#ffffff";
+    try{
+      var stored=localStorage.getItem("cortex-membrane-cytoplasm-color");
+      if(stored)saved=stored;
+    }catch(_){}
+    setCytoplasmColor(saved,false);
+  }
+
   function syncSimulationControls(){
     if(simPause){
       simPause.classList.toggle("is-active",simulationPaused);
@@ -3411,6 +3436,15 @@
   if(chargeToggle)chargeToggle.addEventListener("click",function(){
     setChargesVisible(!chargesVisible);
   });
+
+  if(cytoplasmColorPicker){
+    cytoplasmColorPicker.addEventListener("input",function(){
+      setCytoplasmColor(cytoplasmColorPicker.value,true);
+    });
+    cytoplasmColorPicker.addEventListener("change",function(){
+      setCytoplasmColor(cytoplasmColorPicker.value,true);
+    });
+  }
 
   if(ligandToggle)ligandToggle.addEventListener("click",function(){
     if(ligandsAdded)removeLigands();
@@ -4432,6 +4466,7 @@
   updateBuildSlotVisuals();
   setChargesVisible(false);
   setMembraneVoltage(-70);
+  loadCytoplasmColor();
   selectSoluteType("o2");
   syncSimulationControls();
   renderDefaultInfo();
