@@ -1357,3 +1357,230 @@
 @media(max-width:620px){
   .delete-key-hint{display:none}
 }
+
+
+/* Visual v6 — referências didáticas: proteínas mais vivas, bomba roxa e íons bem distintos */
+:root{
+  --mv-head:#7fb8d7;
+  --mv-head-light:#d6f3ff;
+  --mv-tail:#dfb56d;
+  --mv-tail-dark:#9a6b38;
+  --mv-na:#ff6b45;
+  --mv-k:#f2c94c;
+}
+
+.lipid-head{
+  background:
+    radial-gradient(circle at 32% 28%,#f2fbff 0 8%,#d4eef9 17%,#8fc4dc 48%,#4a7e9a 100%)!important;
+  border-color:rgba(210,241,255,.36)!important;
+  box-shadow:
+    inset 2px 2px 4px rgba(255,255,255,.2),
+    inset -4px -5px 8px rgba(17,52,70,.28),
+    0 0 12px rgba(93,180,220,.14)!important;
+}
+
+.lipid-tail{
+  background:linear-gradient(180deg,#e1b66f,#b68148 58%,#81552e)!important;
+}
+.bottom-row .lipid-tail{
+  background:linear-gradient(0deg,#e1b66f,#b68148 58%,#81552e)!important;
+}
+
+.hydrophobic-core{
+  background:linear-gradient(180deg,rgba(241,189,94,.08),rgba(116,70,34,.035),rgba(241,189,94,.08))!important;
+  border-color:rgba(231,176,88,.1)!important;
+}
+
+/* canais na membrana */
+.placed-protein[data-type="canal-na"] .protein-channel::before,
+.placed-protein[data-type="canal-na"] .protein-channel::after{
+  background:linear-gradient(155deg,#ff9a72 0%,#d86643 46%,#7f3423 100%)!important;
+  border-color:rgba(255,184,152,.4)!important;
+  box-shadow:
+    inset 5px 3px 12px rgba(255,255,255,.11),
+    inset -5px -7px 13px rgba(76,25,15,.22),
+    0 0 14px rgba(255,105,67,.12)!important;
+}
+
+.placed-protein[data-type="canal-k"] .protein-channel::before,
+.placed-protein[data-type="canal-k"] .protein-channel::after{
+  background:linear-gradient(155deg,#ffd56c 0%,#c99428 50%,#715017 100%)!important;
+  border-color:rgba(255,224,133,.4)!important;
+  box-shadow:
+    inset 5px 3px 12px rgba(255,255,255,.11),
+    inset -5px -7px 13px rgba(89,56,8,.22),
+    0 0 14px rgba(245,194,70,.12)!important;
+}
+
+.placed-protein[data-type="vazante"] .protein-channel::before,
+.placed-protein[data-type="vazante"] .protein-channel::after{
+  background:linear-gradient(155deg,#79d2ff 0%,#3f9bc7 48%,#24516c 100%)!important;
+  border-color:rgba(163,226,255,.4)!important;
+  box-shadow:
+    inset 5px 3px 12px rgba(255,255,255,.1),
+    inset -5px -7px 13px rgba(22,61,82,.24),
+    0 0 14px rgba(74,176,224,.12)!important;
+}
+
+.placed-protein[data-type="aquaporina"] .protein-channel::before,
+.placed-protein[data-type="aquaporina"] .protein-channel::after{
+  background:linear-gradient(155deg,#67e3d8 0%,#28a9a2 48%,#165e5b 100%)!important;
+  border-color:rgba(151,244,236,.4)!important;
+  box-shadow:
+    inset 5px 3px 12px rgba(255,255,255,.1),
+    inset -5px -7px 13px rgba(15,75,72,.24),
+    0 0 14px rgba(65,207,198,.13)!important;
+}
+
+.placed-protein .protein-pore{
+  background:linear-gradient(180deg,#0e141a,#070c11 48%,#0e141a)!important;
+  box-shadow:
+    inset 0 0 10px rgba(0,0,0,.95),
+    0 0 0 2px rgba(255,255,255,.035)!important;
+}
+
+/* bomba Na/K inspirada nas referências: duas metades roxas com cavidade interna clara */
+.pump-art::before{
+  background:linear-gradient(155deg,#b29df0 0%,#7e69c7 48%,#493e83 100%)!important;
+  border-color:rgba(221,208,255,.38)!important;
+  box-shadow:
+    inset 6px 4px 14px rgba(255,255,255,.12),
+    inset -6px -8px 14px rgba(48,33,90,.24),
+    0 0 18px rgba(137,111,224,.15)!important;
+}
+
+.pump-art::after{
+  background:linear-gradient(205deg,#b29df0 0%,#7e69c7 48%,#493e83 100%)!important;
+  border-color:rgba(221,208,255,.38)!important;
+  box-shadow:
+    inset 6px 4px 14px rgba(255,255,255,.12),
+    inset -6px -8px 14px rgba(48,33,90,.24),
+    0 0 18px rgba(137,111,224,.15)!important;
+}
+
+.pump-pore{
+  width:22px!important;
+  background:
+    radial-gradient(circle at 50% 22%,rgba(255,255,255,.08),transparent 25%),
+    linear-gradient(180deg,#251c39,#161120 45%,#241b38)!important;
+  box-shadow:
+    inset 0 0 12px rgba(0,0,0,.88),
+    0 0 0 2px rgba(199,181,255,.16)!important;
+}
+
+.pump-ratio{
+  background:rgba(43,32,72,.86)!important;
+  color:#efe9ff!important;
+  border:1px solid rgba(210,194,255,.16);
+}
+
+.pump-side-label{
+  letter-spacing:.06em;
+  text-shadow:0 1px 4px rgba(0,0,0,.5);
+}
+
+.pump-ec-label{color:#ffe27c!important}
+.pump-ic-label{color:#ffab8c!important}
+
+.pump-slot[data-accept="k"]{
+  color:#2b240a!important;
+  background:linear-gradient(180deg,#ffe06e,#f0bf37)!important;
+  border-color:#ffe99b!important;
+  box-shadow:0 0 11px rgba(246,200,73,.24)!important;
+}
+.pump-slot[data-accept="na"]{
+  color:#45180e!important;
+  background:linear-gradient(180deg,#ff9876,#ff6848)!important;
+  border-color:#ffc0a8!important;
+  box-shadow:0 0 11px rgba(255,108,74,.22)!important;
+}
+.pump-slot[data-accept="atp"]{
+  color:#24143f!important;
+  background:linear-gradient(180deg,#d5b5ff,#ab7ae7)!important;
+  border-color:#ead6ff!important;
+  box-shadow:0 0 12px rgba(181,131,239,.25)!important;
+}
+
+/* íons e moléculas */
+.placed-molecule[data-type="na"],
+.drag-ghost .ghost-molecule[data-type="na"]{
+  color:#fff7f2!important;
+  background:linear-gradient(145deg,#ff8c68,#ff5e36 58%,#c93f20)!important;
+  border:1px solid rgba(255,200,177,.52)!important;
+  clip-path:polygon(25% 4%,75% 4%,98% 50%,75% 96%,25% 96%,2% 50%)!important;
+  text-shadow:0 1px 2px rgba(82,22,8,.48);
+  box-shadow:0 0 14px rgba(255,95,52,.16)!important;
+}
+
+.placed-molecule[data-type="k"],
+.drag-ghost .ghost-molecule[data-type="k"]{
+  color:#3b2a07!important;
+  background:linear-gradient(145deg,#ffe37b,#f6c746 58%,#c9951f)!important;
+  border:1px solid rgba(255,238,164,.62)!important;
+  border-radius:50%!important;
+  box-shadow:0 0 14px rgba(247,201,70,.15)!important;
+}
+
+.placed-molecule[data-type="cl"],
+.drag-ghost .ghost-molecule[data-type="cl"]{
+  color:#eefbff!important;
+  background:linear-gradient(145deg,#62c5ef,#328cb6 58%,#1e6485)!important;
+  border-color:rgba(170,229,255,.5)!important;
+  box-shadow:0 0 13px rgba(79,180,225,.14)!important;
+}
+
+.placed-molecule[data-type="h2o"],
+.drag-ghost .ghost-molecule[data-type="h2o"]{
+  color:#ecffff!important;
+  background:linear-gradient(145deg,#58e0d8,#2aa6aa 58%,#17666b)!important;
+  border-color:rgba(172,255,249,.5)!important;
+  box-shadow:0 0 13px rgba(71,211,207,.14)!important;
+}
+
+.placed-molecule[data-type="atp"],
+.drag-ghost .ghost-molecule[data-type="atp"]{
+  color:#fbf3ff!important;
+  background:linear-gradient(145deg,#c5a0f4,#9766d7 58%,#5f3b99)!important;
+  border-color:rgba(230,207,255,.5)!important;
+  box-shadow:0 0 13px rgba(167,112,226,.15)!important;
+}
+
+.placed-molecule[data-type="adp"]{
+  color:#e8e5ff!important;
+  background:linear-gradient(145deg,#7a79b9,#4f4f88)!important;
+  border-color:rgba(191,192,244,.32)!important;
+}
+
+/* paleta acompanha exatamente as cores do laboratório */
+.tool-item[data-type="canal-na"] .tool-preview{
+  background:linear-gradient(145deg,rgba(255,120,79,.14),rgba(30,16,13,.85));
+  border-color:rgba(255,135,93,.24);
+}
+.tool-item[data-type="canal-k"] .tool-preview{
+  background:linear-gradient(145deg,rgba(247,201,72,.14),rgba(29,24,12,.85));
+  border-color:rgba(247,210,92,.24);
+}
+.tool-item[data-type="vazante"] .tool-preview{
+  background:linear-gradient(145deg,rgba(86,187,231,.14),rgba(10,25,33,.86));
+  border-color:rgba(99,194,235,.24);
+}
+.tool-item[data-type="bomba"] .tool-preview{
+  background:linear-gradient(145deg,rgba(157,132,232,.16),rgba(27,20,43,.86));
+  border-color:rgba(174,151,245,.26);
+}
+.tool-item[data-type="aquaporina"] .tool-preview{
+  background:linear-gradient(145deg,rgba(74,216,205,.14),rgba(8,29,29,.86));
+  border-color:rgba(83,222,211,.24);
+}
+
+.molecule-tool[data-type="na"] strong{color:#ff9b79!important}
+.molecule-tool[data-type="k"] strong{color:#ffda67!important}
+.molecule-tool[data-type="cl"] strong{color:#7dd5f6!important}
+.molecule-tool[data-type="h2o"] strong{color:#6ce8df!important}
+.molecule-tool[data-type="atp"] strong{color:#caa4ff!important}
+
+.placed-element.is-selected::after{
+  border-color:rgba(215,236,247,.5)!important;
+  box-shadow:0 0 0 1px rgba(104,188,231,.08),0 0 24px rgba(86,164,205,.16)!important;
+}
+
