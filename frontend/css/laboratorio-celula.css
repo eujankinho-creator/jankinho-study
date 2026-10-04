@@ -2914,3 +2914,25 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
     drop-shadow(0 0 14px rgba(88,165,201,.06))!important;
 }
 
+
+
+/* =========================================================
+   PHYSIOLOGY V16 — difusão, captura local e screening
+========================================================= */
+
+.gradient-panel>p{
+  max-width:100%;
+}
+
+.placed-protein[data-type="canal-na"].channel-pass,
+.placed-protein[data-type="canal-k"].channel-pass,
+.placed-protein[data-type="vazante"].channel-pass,
+.placed-protein[data-type="aquaporina"].channel-pass{
+  transform:translate(-50%,-50%) scale(1.015)!important;
+}
+
+.placed-molecule:not(.docked):not(.is-dragging){
+  backface-visibility:hidden;
+  transform:translateZ(0);
+}
+

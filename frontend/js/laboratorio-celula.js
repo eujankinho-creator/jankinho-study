@@ -136,18 +136,65 @@
     return counts;
   }
 
+  function compartmentAreas(){
+    var b=barrier();
+    var w=Math.max(1,stage.clientWidth);
+    var ec=Math.max(1,b.top*w);
+    var ic=Math.max(1,(stage.clientHeight-b.bottom)*w);
+    return {EC:ec,IC:ic};
+  }
+
+  function ionCompartmentDensity(type){
+    var counts=ionCompartmentCounts(type);
+    var areas=compartmentAreas();
+    var scale=10000;
+    return {
+      EC:(counts.EC+.35)/(areas.EC/scale),
+      IC:(counts.IC+.35)/(areas.IC/scale),
+      counts:counts
+    };
+  }
+
+  function nernstPotentialMv(type){
+    var z=ionCharge(type);
+    if(!z)return 0;
+    var density=ionCompartmentDensity(type);
+    return (61.5/z)*Math.log10(Math.max(.0001,density.EC)/Math.max(.0001,density.IC));
+  }
+
+  function osmoticDriveECtoIC(){
+    var solutes=["na","k","cl","atp","adp","pi"];
+    var areas=compartmentAreas();
+    var ec=0;
+    var ic=0;
+
+    solutes.forEach(function(type){
+      var counts=ionCompartmentCounts(type);
+      ec+=counts.EC;
+      ic+=counts.IC;
+    });
+
+    var ecDensity=(ec+.5)/(areas.EC/10000);
+    var icDensity=(ic+.5)/(areas.IC/10000);
+    return Math.log(Math.max(.0001,icDensity)/Math.max(.0001,ecDensity));
+  }
+
   function electrochemicalDriveECtoIC(type){
     var charge=ionCharge(type);
     if(!charge)return 0;
 
-    var counts=ionCompartmentCounts(type);
-    var chemical=chemicalWeight*Math.log((counts.EC+.5)/(counts.IC+.5));
+    var density=ionCompartmentDensity(type);
+    var chemical=Math.log(Math.max(.0001,density.EC)/Math.max(.0001,density.IC));
     var electrical=-(charge*membraneVoltageMv)/thermalVoltageMv;
     return chemical+electrical;
   }
 
   function passiveDriveForSide(type,fromSide){
-    if(type==="h2o")return .5;
+    if(type==="h2o"){
+      var osmosis=osmoticDriveECtoIC();
+      return fromSide==="EC"?osmosis:-osmosis;
+    }
+
     var charge=ionCharge(type);
     if(!charge)return -Infinity;
 
@@ -156,8 +203,9 @@
   }
 
   function passiveTransportAllowed(type,fromSide){
-    if(type==="h2o")return true;
-    return passiveDriveForSide(type,fromSide)>.35;
+    var drive=passiveDriveForSide(type,fromSide);
+    if(type==="h2o")return drive>.12;
+    return drive>.30;
   }
 
   function associationAllowed(el,motion,now){
@@ -191,7 +239,7 @@
       var radial=Math.hypot(px-x,(py-y)*.64);
 
       if(motion.lastGateId===protein.dataset.id&&motion.clearanceRadius>0&&radial<motion.clearanceRadius)return;
-      if(radial>158)return;
+      if(radial>112)return;
 
       var d=Math.hypot(px-x,mouthY-y);
       if(d<bestD){
@@ -201,7 +249,7 @@
           y:mouthY,
           side:side,
           distance:d,
-          strength:Math.min(1.35,.18+drive*.24)
+          strength:Math.min(1.15,.12+drive*.18)
         };
         bestD=d;
       }
@@ -231,7 +279,7 @@
         if(slot.dataset.accept!==type)return;
         var p=slotStagePoint(slot);
         var d=Math.hypot(p.x-x,p.y-y);
-        if(d<150&&d<bestD){
+        if(d<104&&d<bestD){
           best={pump:pump,slot:slot,x:p.x,y:p.y,distance:d};
           bestD=d;
         }
@@ -248,10 +296,10 @@
       var pg=motion.pumpGuide;
       var pd=Math.hypot(pg.x-x,pg.y-y);
 
-      if(pd<160){
-        var pStrength=Math.max(0,1-pd/160);
-        motion.vx+=(pg.x-x)*(.42*pStrength)*dt;
-        motion.vy+=(pg.y-y)*(.42*pStrength)*dt;
+      if(pd<112){
+        var pStrength=Math.max(0,1-pd/112);
+        motion.vx+=(pg.x-x)*(.30*pStrength)*dt;
+        motion.vy+=(pg.y-y)*(.30*pStrength)*dt;
       }else{
         motion.pumpGuide=null;
       }
@@ -265,9 +313,9 @@
       }
 
       var gd=Math.hypot(gg.x-x,gg.y-y);
-      if(gd<170){
-        var falloff=Math.max(0,1-gd/170);
-        var force=(.28+.32*gg.strength)*falloff;
+      if(gd<122){
+        var falloff=Math.max(0,1-gd/122);
+        var force=(.20+.28*gg.strength)*falloff;
         motion.vx+=(gg.x-x)*force*dt;
         motion.vy+=(gg.y-y)*force*dt;
       }else{
@@ -303,9 +351,10 @@
       var counts=ionCompartmentCounts(type);
       var drive=electrochemicalDriveECtoIC(type);
       var gateOpen=hasCompatibleGate(type);
+      var ex=Math.round(nernstPotentialMv(type));
 
       ui.direction.textContent=gradientDirectionText(type);
-      ui.counts.textContent="EC "+counts.EC+" · IC "+counts.IC;
+      ui.counts.textContent="EC "+counts.EC+" · IC "+counts.IC+" · E≈"+(ex>0?"+":"")+ex+" mV";
       ui.gate.textContent=gateOpen?"via disponível":"sem via";
       ui.gate.classList.toggle("is-open",gateOpen);
       ui.gate.classList.toggle("is-closed",!gateOpen);
@@ -1202,7 +1251,11 @@
         motion.clearanceRadius=0;
       }
 
-      if(dx<46&&dx<bestDistance){
+      if(protein.dataset.channelBusy==="1")return;
+
+      var captureDrive=Math.max(0,passiveDriveForSide(type,side));
+      var captureRadius=22+Math.min(8,captureDrive*2.5);
+      if(dx<captureRadius&&dx<bestDistance){
         best=protein;
         bestDistance=dx;
       }
@@ -1281,7 +1334,10 @@
     if(!el||!el.isConnected)return;
 
     el.classList.remove("channel-transit","auto-channeling","auto-associating","transporting");
-    if(gate&&gate.isConnected)gate.classList.remove("channel-pass");
+    if(gate&&gate.isConnected){
+      gate.classList.remove("channel-pass");
+      delete gate.dataset.channelBusy;
+    }
     delete el.dataset.autoTransport;
 
     var motion=moleculeMotion.get(el);
@@ -1306,6 +1362,8 @@
     if(!el||!gate||el.dataset.autoTransport==="1")return;
     if(!passiveTransportAllowed(el.dataset.type,fromSide))return;
 
+    if(gate.dataset.channelBusy==="1")return;
+    gate.dataset.channelBusy="1";
     el.dataset.autoTransport="1";
     el.classList.add("channel-transit","auto-channeling");
     gate.classList.add("channel-pass");
@@ -1375,60 +1433,88 @@
         !el.dataset.autoBinding;
     });
 
-    var b=barrier();
+    if(ions.length<2)return;
 
-    for(var i=0;i<ions.length;i++){
-      var a=ions[i];
+    var b=barrier();
+    var cellSize=56;
+    var grid=new Map();
+
+    ions.forEach(function(el){
+      var x=parseFloat(el.style.left)||0;
+      var y=parseFloat(el.style.top)||0;
+      var side=sideOf(y,b);
+      if(side==="MP")return;
+
+      var key=side+":"+Math.floor(x/cellSize)+":"+Math.floor(y/cellSize);
+      if(!grid.has(key))grid.set(key,[]);
+      grid.get(key).push(el);
+    });
+
+    var visited=new Set();
+
+    ions.forEach(function(a){
       var ax=parseFloat(a.style.left)||0;
       var ay=parseFloat(a.style.top)||0;
       var aside=sideOf(ay,b);
       var am=moleculeMotion.get(a);
       var qa=ionCharge(a.dataset.type);
-      if(!am||aside==="MP")continue;
+      if(!am||aside==="MP")return;
 
-      for(var j=i+1;j<ions.length;j++){
-        var z=ions[j];
-        var zx=parseFloat(z.style.left)||0;
-        var zy=parseFloat(z.style.top)||0;
-        var zside=sideOf(zy,b);
-        if(zside!==aside)continue;
+      var gx=Math.floor(ax/cellSize);
+      var gy=Math.floor(ay/cellSize);
 
-        var zm=moleculeMotion.get(z);
-        var qz=ionCharge(z.dataset.type);
-        if(!zm)continue;
+      for(var ox=-1;ox<=1;ox++){
+        for(var oy=-1;oy<=1;oy++){
+          var bucket=grid.get(aside+":"+(gx+ox)+":"+(gy+oy));
+          if(!bucket)continue;
 
-        var dx=ax-zx;
-        var dy=ay-zy;
-        var d2=dx*dx+dy*dy;
-        if(d2<=1||d2>4900)continue;
+          bucket.forEach(function(z){
+            if(z===a)return;
 
-        var d=Math.sqrt(d2);
-        var nx=dx/d;
-        var ny=dy/d;
+            var pair=a.dataset.id<z.dataset.id
+              ?a.dataset.id+"|"+z.dataset.id
+              :z.dataset.id+"|"+a.dataset.id;
+            if(visited.has(pair))return;
+            visited.add(pair);
 
-        /* curto alcance: volume excluído impede sobreposição */
-        if(d<22){
-          var steric=(22-d)/22;
-          var push=32*steric;
-          am.vx+=nx*push;
-          am.vy+=ny*push;
-          zm.vx-=nx*push;
-          zm.vy-=ny*push;
-          continue;
+            var zx=parseFloat(z.style.left)||0;
+            var zy=parseFloat(z.style.top)||0;
+            var zm=moleculeMotion.get(z);
+            var qz=ionCharge(z.dataset.type);
+            if(!zm)return;
+
+            var dx=ax-zx;
+            var dy=ay-zy;
+            var d2=dx*dx+dy*dy;
+            if(d2<=1||d2>3136)return;
+
+            var d=Math.sqrt(d2);
+            var nx=dx/d;
+            var ny=dy/d;
+
+            if(d<20){
+              var steric=(20-d)/20;
+              var push=34*steric;
+              am.vx+=nx*push;
+              am.vy+=ny*push;
+              zm.vx-=nx*push;
+              zm.vy-=ny*push;
+              return;
+            }
+
+            /* interação eletrostática efetiva de curto alcance (meio aquoso/screening) */
+            var screened=Math.exp(-(d-20)/22);
+            var sign=qa*qz>0?1:-1;
+            var impulse=sign*10*screened;
+
+            am.vx+=nx*impulse;
+            am.vy+=ny*impulse;
+            zm.vx-=nx*impulse;
+            zm.vy-=ny*impulse;
+          });
         }
-
-        var sameSign=qa*qz>0;
-        var falloff=Math.max(0,(70-d)/70);
-        if(falloff<=0)continue;
-
-        var impulse=(sameSign?18:-12)*falloff;
-
-        am.vx+=nx*impulse;
-        am.vy+=ny*impulse;
-        zm.vx-=nx*impulse;
-        zm.vy-=ny*impulse;
       }
-    }
+    });
   }
 
   function molecularPhysicsStep(dt,now){
@@ -1447,8 +1533,7 @@
     var b=barrier();
     var width=stage.clientWidth;
     var height=stage.clientHeight;
-    var associationTick=now-lastAssociationTime>140;
-    updateGradientPanel(now);
+    var associationTick=now-lastAssociationTime>120;
 
     molecules.forEach(function(el){
       if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1"||el.classList.contains("transporting"))return;
@@ -1483,9 +1568,9 @@
       applyGuidanceForce(el,motion,dt,x,y,b,now);
 
       var boosted=motion.boostUntil&&now<motion.boostUntil;
-      var thermal=boosted?1.70:1;
-      var gamma=boosted?1.05:1.82;
-      var noise=boosted?66:40;
+      var thermal=boosted?1.68:1;
+      var gamma=boosted?1.10:1.95;
+      var noise=boosted?64:38;
       var sqrtDt=Math.sqrt(Math.max(dt,.001));
 
       motion.vx+=(-gamma*motion.vx*dt)+((Math.random()*2-1)*noise*sqrtDt*thermal);
@@ -1551,7 +1636,7 @@
     }
 
     var elapsed=now-lastPhysicsTime;
-    if(elapsed<20)return;
+    if(elapsed<18)return;
     lastPhysicsTime=now;
     molecularPhysicsStep(Math.min(elapsed,50)/1000,now);
   }
