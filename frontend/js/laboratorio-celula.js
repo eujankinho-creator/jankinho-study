@@ -3370,7 +3370,11 @@
     if(simPause){
       simPause.classList.toggle("is-active",simulationPaused);
       simPause.setAttribute("aria-pressed",simulationPaused?"true":"false");
-      simPause.textContent=simulationPaused?"▶":"Ⅱ";
+      var simPauseIcon=simPause.querySelector("span");
+      var simPauseLabel=simPause.querySelector("small");
+      if(simPauseIcon)simPauseIcon.textContent=simulationPaused?"▶":"Ⅱ";
+      else simPause.textContent=simulationPaused?"▶":"Ⅱ";
+      if(simPauseLabel)simPauseLabel.textContent=simulationPaused?"Continuar":"Pausa";
       simPause.title=simulationPaused?"Continuar simulação":"Pausar simulação";
     }
     if(simSlow){
