@@ -1398,7 +1398,7 @@
   function buildBilayer(){
     if(!topRow||!bottomRow||!stage)return;
     topRow.textContent="";bottomRow.textContent="";
-    var amount=Math.max(46,Math.min(92,Math.round(stage.clientWidth/14)));
+    var amount=Math.max(52,Math.min(120,Math.round(stage.clientWidth/11)));
     var fragTop=document.createDocumentFragment();
     var fragBottom=document.createDocumentFragment();
     for(var i=0;i<amount;i++){
