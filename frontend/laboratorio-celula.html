@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-clean30">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-modes31">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -83,6 +83,25 @@
             <strong>Exterior + · Interior −</strong>
           </div>
         </div>
+      </section>
+
+      <section class="membrane-mode-tabs" aria-label="Modos didáticos">
+        <button class="membrane-mode-tab is-active" type="button" data-lab-mode="simple"><span>01</span><strong>Difusão simples</strong><small>O₂ e CO₂</small></button>
+        <button class="membrane-mode-tab" type="button" data-lab-mode="leak"><span>02</span><strong>Vazamento</strong><small>Na⁺ e K⁺</small></button>
+        <button class="membrane-mode-tab" type="button" data-lab-mode="voltage"><span>03</span><strong>Voltagem</strong><small>Vm e cargas</small></button>
+        <button class="membrane-mode-tab" type="button" data-lab-mode="ligand"><span>04</span><strong>Ligantes</strong><small>encaixe e retirada</small></button>
+        <button class="membrane-mode-tab" type="button" data-lab-mode="pump"><span>05</span><strong>Bomba Na⁺/K⁺</strong><small>ATP · 3:2</small></button>
+        <button class="membrane-mode-tab" type="button" data-lab-mode="sglt"><span>06</span><strong>Na⁺/Glicose</strong><small>cotransporte</small></button>
+        <button class="membrane-mode-tab" type="button" data-lab-mode="all"><span>07</span><strong>Todos juntos</strong><small>laboratório completo</small></button>
+      </section>
+
+      <section class="mode-context-card">
+        <div>
+          <small id="modeContextKicker">MODO 01</small>
+          <strong id="modeContextTitle">Difusão simples pela bicamada</strong>
+          <p id="modeContextText">O₂ e CO₂ atravessam diretamente a bicamada conforme o gradiente químico.</p>
+        </div>
+        <button id="resetModeScenario" type="button">Recarregar cenário</button>
       </section>
 
       <section class="membrane-lab-shell">
@@ -362,7 +381,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-clean30"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-modes31"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

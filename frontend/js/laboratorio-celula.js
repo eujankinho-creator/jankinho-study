@@ -29,8 +29,14 @@
   var chargeToggle=document.getElementById("chargeToggle");
   var ligandToggle=document.getElementById("ligandToggle");
   var vmPresetButtons=Array.from(document.querySelectorAll(".vm-preset"));
+  var modeButtons=Array.from(document.querySelectorAll(".membrane-mode-tab"));
+  var modeContextKicker=document.getElementById("modeContextKicker");
+  var modeContextTitle=document.getElementById("modeContextTitle");
+  var modeContextText=document.getElementById("modeContextText");
+  var resetModeScenario=document.getElementById("resetModeScenario");
   var soluteTypes=["o2","co2","na","k","glucose","atp"];
   var selectedSoluteType="na";
+  var currentLabMode="simple";
   var gradientUi={
     na:{
       direction:document.getElementById("gradientNaDirection"),
@@ -114,6 +120,16 @@
   var gates={
     na:["vazante-na","vg-na","lg-na"],
     k:["vazante","vg-k","lg-k"]
+  };
+
+  var labModes={
+    simple:{order:"01",title:"Difusão simples pela bicamada",text:"O₂ e CO₂ atravessam diretamente a bicamada conforme o gradiente químico.",solutes:["o2","co2"],proteins:[],defaultSolute:"o2",voltage:false,ligands:false},
+    leak:{order:"02",title:"Canais de vazamento",text:"Na⁺ e K⁺ atravessam canais sempre abertos seguindo o gradiente eletroquímico.",solutes:["na","k"],proteins:["vazante-na","vazante"],defaultSolute:"na",voltage:false,ligands:false},
+    voltage:{order:"03",title:"Canais dependentes de voltagem",text:"Use −70, −50 e +30 mV para observar estados fechados e abertos dos canais de Na⁺ e K⁺.",solutes:["na","k"],proteins:["vg-na","vg-k"],defaultSolute:"na",voltage:true,ligands:false},
+    ligand:{order:"04",title:"Canais dependentes de ligante",text:"Triângulos e estrelas se ligam aos seus canais. Arraste um ligante preso para retirá-lo.",solutes:["na","k"],proteins:["lg-na","lg-k"],defaultSolute:"na",voltage:false,ligands:true},
+    pump:{order:"05",title:"Bomba Na⁺/K⁺-ATPase",text:"Ciclo ativo com 3 Na⁺, ATP e 2 K⁺, acompanhado pela mudança conformacional da bomba.",solutes:["na","k","atp"],proteins:["bomba"],defaultSolute:"na",voltage:false,ligands:false},
+    sglt:{order:"06",title:"Cotransporte Na⁺/Glicose",text:"O gradiente de Na⁺ impulsiona a entrada de glicose pelo cotransportador.",solutes:["na","glucose"],proteins:["sglt"],defaultSolute:"na",voltage:false,ligands:false},
+    all:{order:"07",title:"Todos os mecanismos juntos",text:"Difusão simples, vazamento, voltagem, ligantes e transporte ativo no mesmo laboratório.",solutes:["o2","co2","na","k","glucose","atp"],proteins:["vazante-na","vazante","vg-na","vg-k","lg-na","lg-k","bomba","sglt"],defaultSolute:"na",voltage:true,ligands:true}
   };
 
   function setArmedTool(tool){
@@ -1273,7 +1289,15 @@
     if(soluteTypes.indexOf(type)===-1)return;
     selectedSoluteType=type;
 
-    document.querySelectorAll(".solute-choice").forEach(function(button){
+    modeButtons.forEach(function(button){
+    button.addEventListener("click",function(){applyLabMode(button.dataset.labMode,true)});
+  });
+
+  if(resetModeScenario){
+    resetModeScenario.addEventListener("click",function(){seedModeScenario(currentLabMode)});
+  }
+
+  document.querySelectorAll(".solute-choice").forEach(function(button){
       var active=button.dataset.soluteType===type;
       button.classList.toggle("is-active",active);
       button.setAttribute("aria-selected",active?"true":"false");
@@ -2648,7 +2672,7 @@
     selectElement(null);
   });
 
-  clearButton.addEventListener("click",function(){
+  function clearSimulationScene(){
     layer.textContent="";
     placedCount=0;
     ligandsAdded=false;
@@ -2656,16 +2680,110 @@
     compartmentCountCacheAt=0;
     selectElement(null);
     clearArmedTool();
+
     if(ligandToggle){
       ligandToggle.textContent="Adicionar ligantes";
       ligandToggle.classList.remove("is-active");
       ligandToggle.setAttribute("aria-pressed","false");
     }
+
     updateCounter();
     updateSoluteControlCounts();
     updateGradientPanel(performance.now()+500);
     renderParticleCanvas(performance.now());
-  });
+  }
+
+  function placeModeProtein(type,fraction){
+    var b=barrier();
+    return createPlaced(type,"protein",stage.clientWidth*fraction,b.center,{select:false});
+  }
+
+  function seedModeScenario(modeName){
+    var cfg=labModes[modeName];
+    if(!cfg)return;
+
+    clearSimulationScene();
+    setMembraneVoltage(-70);
+    setChargesVisible(false);
+
+    if(modeName==="simple"){
+      spawnBatch("o2","EC",50);spawnBatch("o2","IC",10);
+      spawnBatch("co2","EC",12);spawnBatch("co2","IC",44);
+    }else if(modeName==="leak"){
+      placeModeProtein("vazante-na",.43);placeModeProtein("vazante",.57);
+      spawnBatch("na","EC",50);spawnBatch("na","IC",10);
+      spawnBatch("k","EC",10);spawnBatch("k","IC",50);
+    }else if(modeName==="voltage"){
+      placeModeProtein("vg-na",.43);placeModeProtein("vg-k",.57);
+      spawnBatch("na","EC",48);spawnBatch("na","IC",12);
+      spawnBatch("k","EC",12);spawnBatch("k","IC",48);
+      setChargesVisible(true);
+    }else if(modeName==="ligand"){
+      placeModeProtein("lg-na",.43);placeModeProtein("lg-k",.57);
+      spawnBatch("na","EC",38);spawnBatch("na","IC",12);
+      spawnBatch("k","EC",12);spawnBatch("k","IC",38);
+      addLigands();
+    }else if(modeName==="pump"){
+      placeModeProtein("bomba",.50);
+      spawnBatch("na","IC",42);spawnBatch("k","EC",30);spawnBatch("atp","IC",18);
+    }else if(modeName==="sglt"){
+      placeModeProtein("sglt",.50);
+      spawnBatch("na","EC",50);spawnBatch("glucose","EC",26);spawnBatch("na","IC",8);
+    }else if(modeName==="all"){
+      var xs=[.16,.27,.38,.49,.60,.71,.82,.91];
+      cfg.proteins.forEach(function(type,index){placeModeProtein(type,xs[index])});
+      spawnBatch("o2","EC",16);spawnBatch("co2","IC",16);
+      spawnBatch("na","EC",36);spawnBatch("na","IC",10);
+      spawnBatch("k","EC",10);spawnBatch("k","IC",36);
+      spawnBatch("glucose","EC",16);spawnBatch("atp","IC",12);
+      setChargesVisible(true);
+      addLigands();
+    }
+
+    selectSoluteType(cfg.defaultSolute);
+    updateCounter();
+    updateSoluteControlCounts();
+    updateGradientPanel(performance.now()+650);
+  }
+
+  function applyLabMode(modeName,resetScene){
+    var cfg=labModes[modeName]||labModes.simple;
+    currentLabMode=labModes[modeName]?modeName:"simple";
+    document.body.dataset.membraneMode=currentLabMode;
+
+    modeButtons.forEach(function(button){
+      var active=button.dataset.labMode===currentLabMode;
+      button.classList.toggle("is-active",active);
+      button.setAttribute("aria-pressed",active?"true":"false");
+    });
+
+    if(modeContextKicker)modeContextKicker.textContent="MODO "+cfg.order;
+    if(modeContextTitle)modeContextTitle.textContent=cfg.title;
+    if(modeContextText)modeContextText.textContent=cfg.text;
+
+    document.querySelectorAll(".solute-choice").forEach(function(button){
+      button.hidden=cfg.solutes.indexOf(button.dataset.soluteType)===-1;
+    });
+
+    document.querySelectorAll(".structure-card").forEach(function(button){
+      button.hidden=cfg.proteins.indexOf(button.dataset.type)===-1;
+    });
+
+    document.querySelectorAll(".structure-section").forEach(function(section){
+      var cards=Array.from(section.querySelectorAll(".structure-card"));
+      section.hidden=cards.length>0&&!cards.some(function(card){return !card.hidden});
+    });
+
+    var voltageControls=document.querySelector(".vm-preset-controls");
+    if(voltageControls)voltageControls.hidden=!cfg.voltage;
+    if(chargeToggle)chargeToggle.hidden=!cfg.voltage;
+    if(ligandToggle)ligandToggle.hidden=!cfg.ligands;
+
+    if(cfg.solutes.indexOf(selectedSoluteType)===-1)selectSoluteType(cfg.defaultSolute);
+    if(resetScene!==false)seedModeScenario(currentLabMode);
+  }
+
+  clearButton.addEventListener("click",clearSimulationScene);
 
   function removeSelectedElement(){
     if(!selected)return;
@@ -3264,12 +3382,13 @@
   resizeParticleCanvas();
   setChargesVisible(false);
   setMembraneVoltage(-70);
-  selectSoluteType("na");
+  selectSoluteType("o2");
   syncSimulationControls();
   renderDefaultInfo();
   updateCounter();
   updateSoluteControlCounts();
   updateGradientPanel(performance.now()+500);
+  applyLabMode("simple",true);
   loadUser();
   physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
 })();
