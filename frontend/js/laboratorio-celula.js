@@ -37,6 +37,7 @@
     nextIonId: 1,
     draggingId: null,
     draggingStart: null,
+    draggingLigand: null,
     pumpOn: true,
     naChannelOpen: true,
     kChannelOpen: true,
@@ -49,6 +50,19 @@
     pumpPulseUntil: 0,
     eventPulse: null,
     actionPotential: null,
+    pump: {
+      phase: "na-loading",
+      phaseStarted: performance.now(),
+      naBoundIds: [],
+      kBoundIds: [],
+      atpBound: false,
+      atpDrag: null,
+      productsStarted: 0,
+      productsUntil: 0,
+      releaseIndex: 0,
+      cycle: 0,
+      pausedAt: 0
+    },
     lastFrame: performance.now()
   };
 
@@ -67,6 +81,103 @@
   ];
 
   const PUMP_ANGLE = -2.32;
+  const PUMP_CAPTURE_RADIUS = 30;
+  const PUMP_BODY_RADIUS = 58;
+  const PUMP_PHASE = {
+    NA_LOADING: "na-loading",
+    PHOSPHORYLATING: "phosphorylating",
+    RELEASING_NA: "releasing-na",
+    K_LOADING: "k-loading",
+    K_OCCLUDED: "k-occluded",
+    RELEASING_K: "releasing-k"
+  };
+
+  function pumpGeometry(g) {
+    const rx = Math.cos(PUMP_ANGLE);
+    const ry = Math.sin(PUMP_ANGLE);
+    const tx = -ry;
+    const ty = rx;
+    const x = g.cx + rx * g.r;
+    const y = g.cy + ry * g.r;
+
+    return {
+      x: x,
+      y: y,
+      rx: rx,
+      ry: ry,
+      tx: tx,
+      ty: ty,
+      point: function (radial, tangent) {
+        return {
+          x: x + rx * radial + tx * tangent,
+          y: y + ry * radial + ty * tangent
+        };
+      }
+    };
+  }
+
+  function distance(a, b) {
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function pumpNaRadial(now) {
+    const phase = state.pump.phase;
+    if (phase === PUMP_PHASE.NA_LOADING) return -9;
+
+    if (phase === PUMP_PHASE.PHOSPHORYLATING) {
+      const u = clamp((now - state.pump.phaseStarted) / 650, 0, 1);
+      return -9 + u * 18;
+    }
+
+    return 9;
+  }
+
+  function pumpKRadial(now) {
+    const phase = state.pump.phase;
+    if (phase === PUMP_PHASE.K_LOADING) return 9;
+
+    if (phase === PUMP_PHASE.K_OCCLUDED) {
+      const u = clamp((now - state.pump.phaseStarted) / 650, 0, 1);
+      return 9 - u * 18;
+    }
+
+    return -9;
+  }
+
+  function pumpSlotPoint(type, index, g, now) {
+    const pg = pumpGeometry(g);
+    const tangent = type === "Na"
+      ? [-15, 0, 15][index]
+      : [-10, 10][index];
+    const radial = type === "Na" ? pumpNaRadial(now) : pumpKRadial(now);
+    return pg.point(radial, tangent);
+  }
+
+  function atpSitePoint(g) {
+    return pumpGeometry(g).point(-22, 25);
+  }
+
+  function atpTokenPoint(g) {
+    if (state.pump.atpDrag) {
+      return {
+        x: state.pump.atpDrag.nx * g.w,
+        y: state.pump.atpDrag.ny * g.h
+      };
+    }
+    return pumpGeometry(g).point(-82, 35);
+  }
+
+  function ionPointForDrawing(ion, g, now) {
+    if (ion.boundToPump === "Na") {
+      return pumpSlotPoint("Na", ion.pumpSlot, g, now);
+    }
+    if (ion.boundToPump === "K") {
+      return pumpSlotPoint("K", ion.pumpSlot, g, now);
+    }
+    return normalizedToPoint(ion, g);
+  }
 
   function canvasInfo(canvas) {
     const dpr = window.devicePixelRatio || 1;
@@ -315,7 +426,9 @@
     let bestDistance = 25;
 
     state.ions.forEach(function (ion) {
-      const p = normalizedToPoint(ion, g);
+      if (ion.boundToPump) return;
+
+      const p = ionPointForDrawing(ion, g, now);
       const dx = p.x - x;
       const dy = p.y - y;
       const d = Math.sqrt(dx * dx + dy * dy);
@@ -329,11 +442,310 @@
     return best;
   }
 
+  function restoreDraggedIon(ion, original) {
+    ion.zone = original.zone;
+    ion.nx = original.nx;
+    ion.ny = original.ny;
+  }
+
+  function freePumpSlot(type, p, g, now) {
+    const total = type === "Na" ? 3 : 2;
+    const occupied = type === "Na" ? state.pump.naBoundIds : state.pump.kBoundIds;
+    let best = -1;
+    let bestDistance = Infinity;
+
+    for (let index = 0; index < total; index += 1) {
+      const alreadyUsed = occupied.some(function (id) {
+        const boundIon = state.ions.find(function (item) { return item.id === id; });
+        return boundIon && boundIon.pumpSlot === index;
+      });
+      if (alreadyUsed) continue;
+
+      const slot = pumpSlotPoint(type, index, g, now);
+      const d = distance(slot, p);
+      if (d < bestDistance) {
+        bestDistance = d;
+        best = index;
+      }
+    }
+
+    return bestDistance <= PUMP_CAPTURE_RADIUS ? best : -1;
+  }
+
+  function maybeStartPumpReaction(now) {
+    if (
+      state.pump.phase === PUMP_PHASE.NA_LOADING &&
+      state.pump.naBoundIds.length === 3 &&
+      state.pump.atpBound
+    ) {
+      state.pump.phase = PUMP_PHASE.PHOSPHORYLATING;
+      state.pump.phaseStarted = now;
+      state.pump.releaseIndex = 0;
+      state.pumpPulseUntil = now + 1100;
+
+      setExplanation(
+        "Fosforilação da Na⁺/K⁺-ATPase",
+        "Os 3 Na⁺ estão ocupando seus sítios no lado intracelular e o ATP também está ligado. Agora o ATP fosforila a proteína: só depois disso a bomba muda de conformação e pode liberar Na⁺ no EC.",
+        "3 Na⁺ + ATP → bomba fosforilada"
+      );
+      setHint("Fosforilação iniciada. Observe a mudança de conformação antes da saída do Na⁺.");
+      return;
+    }
+
+    if (
+      state.pump.phase === PUMP_PHASE.K_LOADING &&
+      state.pump.kBoundIds.length === 2
+    ) {
+      state.pump.phase = PUMP_PHASE.K_OCCLUDED;
+      state.pump.phaseStarted = now;
+      state.pump.releaseIndex = 0;
+      state.pumpPulseUntil = now + 950;
+
+      setExplanation(
+        "2 K⁺ ligados no lado extracelular",
+        "As duas cavidades externas foram ocupadas por K⁺. A bomba fecha esses sítios e começa a retornar para a conformação voltada ao IC.",
+        "2 K⁺ ligados → retorno para E1"
+      );
+      setHint("Os 2 K⁺ estão ocluídos. Agora a proteína volta a abrir para o IC.");
+    }
+  }
+
+  function tryBindIonToPump(ion, p, original, now) {
+    if (!state.pumpOn) return false;
+
+    const g = geometry();
+    const pg = pumpGeometry(g);
+    if (distance(p, pg) > PUMP_BODY_RADIUS) return false;
+
+    const phase = state.pump.phase;
+
+    if (phase === PUMP_PHASE.NA_LOADING) {
+      if (ion.type !== "Na" || original.zone !== "in") {
+        restoreDraggedIon(ion, original);
+        setExplanation(
+          "Sítios voltados para o IC",
+          "Nesta conformação a bomba aceita somente Na⁺ vindo do meio intracelular. Encaixe três Na⁺ nas três cavidades internas.",
+          "E1: 3 sítios para Na⁺ no IC"
+        );
+        setHint("Use Na⁺ do IC e solte-o diretamente sobre uma cavidade da bomba.");
+        return true;
+      }
+
+      const slot = freePumpSlot("Na", p, g, now);
+      if (slot < 0) {
+        restoreDraggedIon(ion, original);
+        setHint("Solte o Na⁺ sobre um dos espaços livres dentro da proteína.");
+        return true;
+      }
+
+      ion.boundToPump = "Na";
+      ion.pumpSlot = slot;
+      ion.zone = "in";
+      state.pump.naBoundIds.push(ion.id);
+      ion.flashUntil = now + 650;
+
+      setExplanation(
+        "Na⁺ encaixado na bomba",
+        "O Na⁺ ficou preso em um sítio voltado para o IC. A proteína ainda não transporta nada: são necessários 3 Na⁺ e ATP ligados antes da fosforilação.",
+        state.pump.naBoundIds.length + "/3 Na⁺ ligados  ·  ATP " + (state.pump.atpBound ? "ligado" : "livre")
+      );
+      setHint(state.pump.naBoundIds.length < 3
+        ? "Encaixe os outros Na⁺ nas cavidades livres."
+        : (state.pump.atpBound ? "Todos os reagentes ligados." : "Agora arraste ATP até o sítio de ATP."));
+      maybeStartPumpReaction(now);
+      return true;
+    }
+
+    if (phase === PUMP_PHASE.K_LOADING) {
+      if (ion.type !== "K" || original.zone !== "out") {
+        restoreDraggedIon(ion, original);
+        setExplanation(
+          "Conformação aberta para o EC",
+          "Depois de liberar os 3 Na⁺ e os produtos do ATP, a bomba expõe duas novas cavidades para K⁺ no lado extracelular.",
+          "E2: 2 sítios para K⁺ no EC"
+        );
+        setHint("Use K⁺ do EC e solte-o em uma das duas novas cavidades.");
+        return true;
+      }
+
+      const slot = freePumpSlot("K", p, g, now);
+      if (slot < 0) {
+        restoreDraggedIon(ion, original);
+        setHint("Solte o K⁺ sobre um dos dois espaços livres da bomba.");
+        return true;
+      }
+
+      ion.boundToPump = "K";
+      ion.pumpSlot = slot;
+      ion.zone = "out";
+      state.pump.kBoundIds.push(ion.id);
+      ion.flashUntil = now + 650;
+
+      setExplanation(
+        "K⁺ encaixado na bomba",
+        "O K⁺ entrou em uma cavidade que só apareceu após a liberação do Na⁺. Quando os 2 sítios estiverem ocupados, a proteína retorna para o lado IC.",
+        state.pump.kBoundIds.length + "/2 K⁺ ligados"
+      );
+      setHint(state.pump.kBoundIds.length < 2
+        ? "Encaixe mais um K⁺ na segunda cavidade."
+        : "Os dois K⁺ estão ligados.");
+      maybeStartPumpReaction(now);
+      return true;
+    }
+
+    restoreDraggedIon(ion, original);
+    setExplanation(
+      "Bomba em transição",
+      "A proteína está mudando de conformação. Durante esta etapa os sítios não aceitam novos íons.",
+      "aguarde a etapa atual"
+    );
+    setHint("Espere a bomba terminar esta etapa antes de encaixar outro íon.");
+    return true;
+  }
+
+  function releaseBoundIon(id, type, slot, toZone, now) {
+    const ion = state.ions.find(function (item) { return item.id === id; });
+    if (!ion) return;
+
+    ion.boundToPump = null;
+    ion.pumpSlot = null;
+    placeIonNearAngle(
+      ion,
+      PUMP_ANGLE + (type === "Na" ? (slot - 1) * .075 : (slot === 0 ? -.055 : .055)),
+      toZone,
+      18 + slot * 5
+    );
+    ion.flashUntil = now + 950;
+    state.eventPulse = {
+      type: type,
+      angle: PUMP_ANGLE,
+      until: now + 780
+    };
+  }
+
+  function updatePumpCycle(now) {
+    if (!state.pumpOn || state.actionPotential) return;
+
+    const phase = state.pump.phase;
+    const elapsed = now - state.pump.phaseStarted;
+
+    if (phase === PUMP_PHASE.PHOSPHORYLATING && elapsed >= 650) {
+      state.pump.phase = PUMP_PHASE.RELEASING_NA;
+      state.pump.phaseStarted = now;
+      state.pump.releaseIndex = 0;
+      state.pumpPulseUntil = now + 1200;
+
+      setExplanation(
+        "Conformação aberta para o EC",
+        "A fosforilação mudou a conformação da proteína. Agora os sítios que seguravam os 3 Na⁺ estão voltados para o meio extracelular e o Na⁺ pode ser liberado.",
+        "P-bomba · 3 Na⁺ → EC"
+      );
+      setHint("Os três Na⁺ serão liberados para o EC antes de surgirem os sítios de K⁺.");
+      return;
+    }
+
+    if (phase === PUMP_PHASE.RELEASING_NA) {
+      const thresholds = [220, 470, 720];
+      while (
+        state.pump.releaseIndex < 3 &&
+        elapsed >= thresholds[state.pump.releaseIndex]
+      ) {
+        const slot = state.pump.releaseIndex;
+        const id = state.pump.naBoundIds[slot];
+        releaseBoundIon(id, "Na", slot, "out", now);
+        state.pump.releaseIndex += 1;
+      }
+
+      if (elapsed >= 980) {
+        state.pump.naBoundIds = [];
+        state.pump.atpBound = false;
+        state.pump.atpDrag = null;
+        state.pump.productsStarted = now;
+        state.pump.productsUntil = now + 1600;
+        state.pump.phase = PUMP_PHASE.K_LOADING;
+        state.pump.phaseStarted = now;
+        state.pump.releaseIndex = 0;
+
+        setExplanation(
+          "ATP convertido em ADP + Pi",
+          "Somente depois que os 3 Na⁺ foram liberados no EC, o ATP deixa o sítio como ADP + Pi. A conformação externa passa a exibir duas novas cavidades para entrada de K⁺.",
+          "ATP → ADP + Pi  ·  2 K⁺ podem ligar"
+        );
+        setHint("Agora arraste 2 K⁺ do EC para as duas cavidades que apareceram.");
+      }
+      return;
+    }
+
+    if (phase === PUMP_PHASE.K_OCCLUDED && elapsed >= 650) {
+      state.pump.phase = PUMP_PHASE.RELEASING_K;
+      state.pump.phaseStarted = now;
+      state.pump.releaseIndex = 0;
+      state.pumpPulseUntil = now + 1000;
+
+      setExplanation(
+        "Retorno da bomba para o IC",
+        "A proteína voltou para a conformação voltada ao citoplasma. Os dois K⁺ agora ficam expostos ao IC e serão liberados para dentro da célula.",
+        "2 K⁺ → IC"
+      );
+      setHint("A bomba abriu para o IC; os K⁺ serão liberados no citoplasma.");
+      return;
+    }
+
+    if (phase === PUMP_PHASE.RELEASING_K) {
+      const thresholds = [220, 510];
+      while (
+        state.pump.releaseIndex < 2 &&
+        elapsed >= thresholds[state.pump.releaseIndex]
+      ) {
+        const slot = state.pump.releaseIndex;
+        const id = state.pump.kBoundIds[slot];
+        releaseBoundIon(id, "K", slot, "in", now);
+        state.pump.releaseIndex += 1;
+      }
+
+      if (elapsed >= 820) {
+        state.pump.kBoundIds = [];
+        state.pump.phase = PUMP_PHASE.NA_LOADING;
+        state.pump.phaseStarted = now;
+        state.pump.releaseIndex = 0;
+        state.pump.cycle += 1;
+        state.pump.productsStarted = 0;
+        state.pump.productsUntil = 0;
+
+        setExplanation(
+          "Ciclo concluído",
+          "Os 2 K⁺ foram entregues ao IC. A Na⁺/K⁺-ATPase voltou à conformação inicial e novamente apresenta três cavidades para Na⁺ e um sítio para ATP.",
+          "3 Na⁺ para fora · 2 K⁺ para dentro · 1 ATP"
+        );
+        setHint("Novo ciclo: encaixe 3 Na⁺ do IC e ATP.");
+      }
+    }
+  }
+
   function bindCellInteraction() {
     const canvas = $("cellCanvas");
 
     canvas.addEventListener("pointerdown", function (event) {
       const p = pointerPosition(event);
+      const g = geometry();
+
+      if (
+        state.pumpOn &&
+        state.pump.phase === PUMP_PHASE.NA_LOADING &&
+        !state.pump.atpBound &&
+        distance(p, atpTokenPoint(g)) <= 24
+      ) {
+        state.draggingLigand = "ATP";
+        state.pump.atpDrag = {
+          nx: p.x / g.w,
+          ny: p.y / g.h
+        };
+        canvas.classList.add("dragging");
+        canvas.setPointerCapture(event.pointerId);
+        event.preventDefault();
+        return;
+      }
+
       const ion = findIonAt(p.x, p.y);
       if (!ion) return;
 
@@ -350,23 +762,70 @@
     });
 
     canvas.addEventListener("pointermove", function (event) {
+      const p = pointerPosition(event);
+      const g = geometry();
+
+      if (state.draggingLigand === "ATP") {
+        state.pump.atpDrag = {
+          nx: clamp(p.x / g.w, .02, .98),
+          ny: clamp(p.y / g.h, .025, .975)
+        };
+        event.preventDefault();
+        return;
+      }
+
       if (!state.draggingId) return;
 
       const ion = state.ions.find(function (item) {
         return item.id === state.draggingId;
       });
-
       if (!ion) return;
 
-      const rect = canvas.getBoundingClientRect();
-      const p = pointerPosition(event);
-
-      ion.nx = clamp(p.x / rect.width, .02, .98);
-      ion.ny = clamp(p.y / rect.height, .025, .975);
+      ion.nx = clamp(p.x / g.w, .02, .98);
+      ion.ny = clamp(p.y / g.h, .025, .975);
       event.preventDefault();
     });
 
     function finishDrag(event) {
+      const now = performance.now();
+
+      if (state.draggingLigand === "ATP") {
+        const g = geometry();
+        const p = pointerPosition(event);
+        const site = atpSitePoint(g);
+
+        state.draggingLigand = null;
+        canvas.classList.remove("dragging");
+
+        if (canvas.hasPointerCapture && canvas.hasPointerCapture(event.pointerId)) {
+          canvas.releasePointerCapture(event.pointerId);
+        }
+
+        if (
+          state.pumpOn &&
+          state.pump.phase === PUMP_PHASE.NA_LOADING &&
+          distance(p, site) <= 30
+        ) {
+          state.pump.atpBound = true;
+          state.pump.atpDrag = null;
+          state.pumpPulseUntil = now + 700;
+
+          setExplanation(
+            "ATP encaixado",
+            "O ATP está ligado ao domínio citoplasmático da bomba. A fosforilação só começa quando os três sítios de Na⁺ também estiverem ocupados.",
+            "ATP ligado · Na⁺ " + state.pump.naBoundIds.length + "/3"
+          );
+          setHint(state.pump.naBoundIds.length === 3
+            ? "ATP e 3 Na⁺ ligados: a fosforilação começa agora."
+            : "ATP ligado. Complete as três cavidades com Na⁺ do IC.");
+          maybeStartPumpReaction(now);
+        } else {
+          state.pump.atpDrag = null;
+          setHint("Arraste ATP até o sítio de ATP na própria proteína.");
+        }
+        return;
+      }
+
       if (!state.draggingId) return;
 
       const ion = state.ions.find(function (item) {
@@ -386,6 +845,9 @@
 
       const g = geometry();
       const p = normalizedToPoint(ion, g);
+
+      if (tryBindIonToPump(ion, p, original, now)) return;
+
       const newZone = zoneAt(p.x, p.y, g);
 
       if (newZone === original.zone) {
@@ -423,36 +885,16 @@
 
   function moveOne(type, fromZone, toZone, angle, extra) {
     const ion = state.ions.find(function (item) {
-      return item.type === type && item.zone === fromZone && item.id !== state.draggingId;
+      return item.type === type &&
+        item.zone === fromZone &&
+        item.id !== state.draggingId &&
+        !item.boundToPump;
     });
 
     if (!ion) return false;
 
     placeIonNearAngle(ion, angle, toZone, extra || 0);
     return true;
-  }
-
-  function runPumpCycle(now) {
-    if (!state.pumpOn || state.actionPotential) return;
-
-    let moved = 0;
-    for (let i = 0; i < 3; i += 1) {
-      if (moveOne("Na", "in", "out", PUMP_ANGLE, i * 4)) moved += 1;
-    }
-
-    for (let i = 0; i < 2; i += 1) {
-      if (moveOne("K", "out", "in", PUMP_ANGLE + .12, i * 4)) moved += 1;
-    }
-
-    state.pumpPulseUntil = now + 900;
-
-    if (moved > 0) {
-      setExplanation(
-        "Bomba Na⁺/K⁺ em ação",
-        "A ATPase remove 3 Na⁺ do citoplasma e traz 2 K⁺ para dentro por ciclo. Isso preserva os gradientes e contribui levemente para a negatividade interna.",
-        "3 Na⁺ → fora  ·  2 K⁺ → dentro  ·  ATP"
-      );
-    }
   }
 
   function passiveLeak() {
@@ -603,7 +1045,189 @@
     else if (state.vm < -75) stateText = "hiperpolarizado";
 
     $("vmState").textContent = stateText;
-    $("pumpStateMetric").textContent = state.pumpOn ? "ativa" : "desligada";
+    $("pumpStateMetric").textContent = pumpStatusText();
+  }
+
+  function pumpStatusText() {
+    if (!state.pumpOn) return "desligada";
+
+    const phase = state.pump.phase;
+    if (phase === PUMP_PHASE.NA_LOADING) {
+      return state.pump.naBoundIds.length + "/3 Na⁺ · " + (state.pump.atpBound ? "ATP ✓" : "ATP");
+    }
+    if (phase === PUMP_PHASE.PHOSPHORYLATING) return "fosforilando";
+    if (phase === PUMP_PHASE.RELEASING_NA) return "3 Na⁺ → EC";
+    if (phase === PUMP_PHASE.K_LOADING) return state.pump.kBoundIds.length + "/2 K⁺ · EC";
+    if (phase === PUMP_PHASE.K_OCCLUDED) return "retornando";
+    return "2 K⁺ → IC";
+  }
+
+  function drawPumpToken(ctx, x, y, label, stroke, fill, dragging) {
+    ctx.save();
+    if (dragging) {
+      ctx.shadowColor = stroke;
+      ctx.shadowBlur = 18;
+    } else {
+      ctx.shadowColor = stroke;
+      ctx.shadowBlur = 9;
+    }
+    ctx.fillStyle = fill;
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.roundRect(x - 19, y - 11, 38, 22, 11);
+    ctx.fill();
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "#eef5ff";
+    ctx.font = "800 8px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(label, x, y + .5);
+    ctx.restore();
+  }
+
+  function drawPump(ctx, g, now) {
+    const pg = pumpGeometry(g);
+    const phase = state.pump.phase;
+    const active = state.pumpOn;
+    const outward =
+      phase === PUMP_PHASE.PHOSPHORYLATING ||
+      phase === PUMP_PHASE.RELEASING_NA ||
+      phase === PUMP_PHASE.K_LOADING ||
+      phase === PUMP_PHASE.K_OCCLUDED;
+
+    ctx.save();
+    ctx.translate(pg.x, pg.y);
+    ctx.rotate(PUMP_ANGLE);
+
+    const conformProgress = phase === PUMP_PHASE.PHOSPHORYLATING
+      ? clamp((now - state.pump.phaseStarted) / 650, 0, 1)
+      : (outward ? 1 : 0);
+
+    ctx.rotate(conformProgress * .055);
+    ctx.scale(1 + conformProgress * .07, 1 - conformProgress * .035);
+
+    if (active) {
+      ctx.shadowColor = now < state.pumpPulseUntil
+        ? "rgba(176, 130, 255, .9)"
+        : "rgba(139, 92, 246, .48)";
+      ctx.shadowBlur = now < state.pumpPulseUntil ? 24 : 13;
+    }
+
+    const bodyGradient = ctx.createLinearGradient(-34, -26, 38, 28);
+    bodyGradient.addColorStop(0, active ? "rgba(83, 58, 145, .98)" : "rgba(65, 68, 78, .9)");
+    bodyGradient.addColorStop(.48, active ? "rgba(120, 78, 187, .98)" : "rgba(77, 80, 90, .9)");
+    bodyGradient.addColorStop(1, active ? "rgba(57, 36, 111, .98)" : "rgba(54, 57, 66, .9)");
+
+    ctx.beginPath();
+    ctx.moveTo(-29, -29);
+    ctx.bezierCurveTo(-42, -22, -42, -8, -31, -1);
+    ctx.bezierCurveTo(-41, 8, -34, 27, -18, 31);
+    ctx.bezierCurveTo(-5, 35, 2, 27, 10, 27);
+    ctx.bezierCurveTo(26, 30, 39, 18, 35, 3);
+    ctx.bezierCurveTo(42, -12, 31, -30, 15, -28);
+    ctx.bezierCurveTo(4, -26, -3, -33, -15, -32);
+    ctx.closePath();
+    ctx.fillStyle = bodyGradient;
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+
+    ctx.globalAlpha = active ? .68 : .28;
+    ctx.strokeStyle = active ? "rgba(222, 205, 255, .64)" : "rgba(180,180,190,.22)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(-20, -22);
+    ctx.bezierCurveTo(-4, -9, -8, 12, 16, 21);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    function cavity(radial, tangent, rx, ry) {
+      ctx.save();
+      ctx.fillStyle = "rgba(5, 10, 20, .92)";
+      ctx.beginPath();
+      ctx.ellipse(radial, tangent, rx, ry, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    if (
+      phase === PUMP_PHASE.NA_LOADING ||
+      phase === PUMP_PHASE.PHOSPHORYLATING ||
+      phase === PUMP_PHASE.RELEASING_NA
+    ) {
+      const radial = pumpNaRadial(now);
+      [-15, 0, 15].forEach(function (tangent) {
+        cavity(radial, tangent, 7.8, 6.5);
+      });
+    }
+
+    if (
+      phase === PUMP_PHASE.K_LOADING ||
+      phase === PUMP_PHASE.K_OCCLUDED ||
+      phase === PUMP_PHASE.RELEASING_K
+    ) {
+      const radial = pumpKRadial(now);
+      [-10, 10].forEach(function (tangent) {
+        cavity(radial, tangent, 8.2, 7.1);
+      });
+    }
+
+    const siteRadial = -22;
+    const siteTangent = 25;
+    if (phase === PUMP_PHASE.NA_LOADING || phase === PUMP_PHASE.PHOSPHORYLATING) {
+      cavity(siteRadial, siteTangent, 11, 6.4);
+      ctx.fillStyle = state.pump.atpBound ? "#e8d6ff" : "rgba(222, 205, 255, .72)";
+      ctx.font = "800 6px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(state.pump.atpBound ? "ATP" : "ATP", siteRadial, siteTangent + .5);
+    }
+
+    ctx.restore();
+
+    if (
+      phase === PUMP_PHASE.NA_LOADING &&
+      !state.pump.atpBound
+    ) {
+      const atp = atpTokenPoint(g);
+      drawPumpToken(
+        ctx,
+        atp.x,
+        atp.y,
+        "ATP",
+        "#c4a7ff",
+        "rgba(109, 70, 176, .48)",
+        state.draggingLigand === "ATP"
+      );
+    }
+
+    if (now < state.pump.productsUntil && state.pump.productsStarted > 0) {
+      const total = Math.max(1, state.pump.productsUntil - state.pump.productsStarted);
+      const u = clamp((now - state.pump.productsStarted) / total, 0, 1);
+      const adp = pg.point(-48 - u * 34, 25 + u * 7);
+      const pi = pg.point(-43 - u * 30, -20 - u * 5);
+      ctx.save();
+      ctx.globalAlpha = 1 - u * .72;
+      drawPumpToken(ctx, adp.x, adp.y, "ADP", "#d9c6ff", "rgba(92, 63, 150, .38)", false);
+      drawPumpToken(ctx, pi.x, pi.y, "Pi", "#f2d58c", "rgba(156, 113, 37, .34)", false);
+      ctx.restore();
+    }
+
+    ctx.save();
+    ctx.fillStyle = active ? "#d7c7ff" : "#687180";
+    ctx.font = "800 8px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    const label = pg.point(0, 48);
+    ctx.fillText("Na⁺/K⁺-ATPase", label.x, label.y);
+    ctx.font = "700 7px system-ui, sans-serif";
+    ctx.fillStyle = "rgba(210,220,238,.6)";
+    const ec = pg.point(58, 0);
+    const ic = pg.point(-58, 0);
+    ctx.fillText("EC", ec.x, ec.y);
+    ctx.fillText("IC", ic.x, ic.y);
+    ctx.restore();
   }
 
   function drawCell(now) {
@@ -685,36 +1309,7 @@
       ctx.restore();
     });
 
-    const pumpX = g.cx + Math.cos(PUMP_ANGLE) * g.r;
-    const pumpY = g.cy + Math.sin(PUMP_ANGLE) * g.r;
-    const pumpActive = state.pumpOn;
-
-    ctx.save();
-    ctx.translate(pumpX, pumpY);
-    ctx.rotate(PUMP_ANGLE + Math.PI / 2);
-    ctx.fillStyle = pumpActive ? "rgba(167, 139, 250, .14)" : "rgba(90, 90, 100, .08)";
-    ctx.strokeStyle = pumpActive ? "#a78bfa" : "rgba(130, 130, 140, .28)";
-    ctx.lineWidth = 1.4;
-    ctx.beginPath();
-    ctx.roundRect(-14, -22, 28, 44, 9);
-    ctx.fill();
-    ctx.stroke();
-
-    if (now < state.pumpPulseUntil) {
-      ctx.strokeStyle = "rgba(188, 166, 255, .55)";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.roundRect(-20, -28, 40, 56, 12);
-      ctx.stroke();
-    }
-    ctx.restore();
-
-    ctx.save();
-    ctx.fillStyle = pumpActive ? "#bda8ff" : "#59616d";
-    ctx.font = "700 8px system-ui, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Na⁺/K⁺", g.cx + Math.cos(PUMP_ANGLE) * (g.r + 40), g.cy + Math.sin(PUMP_ANGLE) * (g.r + 40));
-    ctx.restore();
+    drawPump(ctx, g, now);
 
     if (state.eventPulse && now < state.eventPulse.until) {
       const ratio = 1 - (state.eventPulse.until - now) / 780;
@@ -870,17 +1465,31 @@
       this.classList.toggle("on", state.pumpOn);
       this.setAttribute("aria-pressed", String(state.pumpOn));
 
+      const now = performance.now();
+
       if (state.pumpOn) {
+        if (state.pump.pausedAt) {
+          const pausedFor = now - state.pump.pausedAt;
+          state.pump.phaseStarted += pausedFor;
+          if (state.pump.productsStarted) state.pump.productsStarted += pausedFor;
+          if (state.pump.productsUntil) state.pump.productsUntil += pausedFor;
+          state.pump.pausedAt = 0;
+        }
+
         setExplanation(
           "Bomba reativada",
-          "A Na⁺/K⁺-ATPase volta a usar ATP para restaurar os gradientes: três Na⁺ saem e dois K⁺ entram por ciclo.",
-          "3 Na⁺ → fora  ·  2 K⁺ → dentro"
+          "A Na⁺/K⁺-ATPase continua exatamente da etapa em que parou. O transporte só ocorre depois dos encaixes e mudanças de conformação corretos.",
+          pumpStatusText()
         );
       } else {
+        state.pump.pausedAt = now;
+        state.draggingLigand = null;
+        state.pump.atpDrag = null;
+
         setExplanation(
           "Bomba desligada",
-          "Agora os gradientes não são ativamente restaurados. Observe como os vazamentos iônicos passam a modificar lentamente a distribuição e o potencial.",
-          "ATPase OFF  ·  gradientes ↓"
+          "A sequência da Na⁺/K⁺-ATPase ficou pausada. Nenhum Na⁺ ou K⁺ será transportado ativamente enquanto a bomba estiver desligada.",
+          "ATPase OFF  ·  ciclo pausado"
         );
       }
     });
@@ -934,6 +1543,20 @@
     state.actionPotential = null;
     state.eventPulse = null;
     state.pumpPulseUntil = 0;
+    state.draggingLigand = null;
+    state.pump = {
+      phase: PUMP_PHASE.NA_LOADING,
+      phaseStarted: performance.now(),
+      naBoundIds: [],
+      kBoundIds: [],
+      atpBound: false,
+      atpDrag: null,
+      productsStarted: 0,
+      productsUntil: 0,
+      releaseIndex: 0,
+      cycle: 0,
+      pausedAt: 0
+    };
     state.lastPumpCycle = performance.now();
     state.lastLeakCycle = performance.now();
 
@@ -951,7 +1574,7 @@
       "O interior permanece negativo porque a membrana é muito mais permeável ao K⁺, enquanto a bomba Na⁺/K⁺ sustenta os gradientes ao longo do tempo.",
       "Vm ≈ -70 mV"
     );
-    setHint("Arraste um Na⁺ externo até um canal azul.");
+    setHint("Bomba: encaixe 3 Na⁺ do IC nas cavidades e arraste ATP para o sítio da proteína.");
     updateDataUI();
   }
 
@@ -983,10 +1606,7 @@
     const delta = Math.min(50, now - state.lastFrame);
     state.lastFrame = now;
 
-    if (state.pumpOn && now - state.lastPumpCycle > 2600) {
-      runPumpCycle(now);
-      state.lastPumpCycle = now;
-    }
+    updatePumpCycle(now);
 
     if (now - state.lastLeakCycle > (state.pumpOn ? 6200 : 2700)) {
       passiveLeak();
