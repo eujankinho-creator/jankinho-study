@@ -67,9 +67,11 @@
   }
 
   function barrier(){
-    var top=bilayer.offsetTop;
-    var height=bilayer.offsetHeight;
-    return {top:top,bottom:top+height,center:top+height/2,height:height};
+    var stageBox=stage.getBoundingClientRect();
+    var membraneBox=bilayer.getBoundingClientRect();
+    var top=membraneBox.top-stageBox.top;
+    var bottom=membraneBox.bottom-stageBox.top;
+    return {top:top,bottom:bottom,center:(top+bottom)/2,height:bottom-top};
   }
 
   function stageRect(){return stage.getBoundingClientRect()}
@@ -94,7 +96,7 @@
 
   function proteinArt(type){
     if(type==="bomba"){
-      return '<span class="protein-label">Bomba Na⁺/K⁺</span><span class="protein-art pump-art"></span>'+
+      return '<span class="protein-label">Bomba Na⁺/K⁺</span><span class="protein-art pump-art"><i class="pump-pore"></i><b class="pump-ratio">3:2</b></span>'+
         '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K</i>'+
         '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K</i>'+
         '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na</i>'+
@@ -197,7 +199,7 @@
       return '<span class="ghost-molecule" data-type="'+type+'">'+catalogue[type].label+'</span>';
     }
     if(type==="bomba"){
-      return '<span class="ghost-protein"><span class="protein-art pump-art"></span></span>';
+      return '<span class="ghost-protein"><span class="protein-art pump-art"><i class="pump-pore"></i><b class="pump-ratio">3:2</b></span></span>';
     }
     return '<span class="ghost-protein"><span class="protein-art protein-channel"><i class="protein-pore"></i></span></span>';
   }

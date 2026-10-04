@@ -1024,3 +1024,134 @@
     animation:none!important;
   }
 }
+
+
+/* Physics v4 — geometria real da MP e bomba transmembrana */
+.placed-protein{
+  height:156px!important;
+  transform:translate(-50%,-50%)!important;
+}
+
+.placed-protein .protein-art{
+  height:150px!important;
+  transform:none!important;
+}
+
+.placed-protein .protein-channel::before,
+.placed-protein .protein-channel::after{
+  top:0!important;
+  bottom:0!important;
+}
+
+.placed-protein .protein-channel .protein-pore{
+  top:8px!important;
+  bottom:8px!important;
+}
+
+.pump-art{
+  position:relative!important;
+  width:86px!important;
+  height:150px!important;
+  background:none!important;
+  overflow:visible;
+}
+
+.pump-art::before,
+.pump-art::after{
+  content:""!important;
+  position:absolute!important;
+  top:2px!important;
+  bottom:2px!important;
+  width:34px!important;
+  transform:none!important;
+  border:1px solid rgba(207,210,226,.25)!important;
+  box-shadow:
+    inset 4px 3px 12px rgba(255,255,255,.07),
+    inset -5px -6px 12px rgba(0,0,0,.18),
+    0 0 14px rgba(119,126,151,.08)!important;
+}
+
+.pump-art::before{
+  left:5px!important;
+  right:auto!important;
+  border-radius:58% 34% 42% 54% / 24% 34% 66% 72%!important;
+  background:linear-gradient(155deg,#85869d 0%,#5a5d74 52%,#343847 100%)!important;
+}
+
+.pump-art::after{
+  right:5px!important;
+  left:auto!important;
+  border-radius:34% 58% 54% 42% / 34% 24% 72% 66%!important;
+  background:linear-gradient(205deg,#85869d 0%,#5a5d74 52%,#343847 100%)!important;
+}
+
+.pump-pore{
+  position:absolute;
+  z-index:4;
+  left:50%;
+  top:10px;
+  bottom:10px;
+  width:16px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:linear-gradient(180deg,#151a22,#0b1117 45%,#151a22);
+  box-shadow:
+    inset 0 0 9px rgba(0,0,0,.9),
+    0 0 0 2px rgba(46,49,63,.65);
+}
+
+.pump-ratio{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  padding:3px 4px;
+  border-radius:6px;
+  background:rgba(20,24,32,.78);
+  color:#c6c8d6;
+  font-size:8px;
+  font-weight:900;
+  line-height:1;
+  pointer-events:none;
+}
+
+.placed-protein[data-type="bomba"]{
+  width:92px!important;
+}
+
+.placed-protein[data-type="bomba"] .protein-label{
+  top:-16px!important;
+}
+
+.placed-protein[data-type="bomba"].channel-pass .pump-pore{
+  box-shadow:
+    inset 0 0 9px rgba(0,0,0,.9),
+    0 0 0 2px rgba(153,184,201,.35),
+    0 0 18px rgba(133,168,186,.24);
+}
+
+/* A barreira visual é exatamente toda a área ocupada pelos fosfolipídios. */
+.bilayer{
+  isolation:isolate;
+}
+
+.placed-layer{
+  z-index:11;
+}
+
+.placed-protein{
+  z-index:12;
+}
+
+.placed-molecule{
+  z-index:14;
+}
+
+.membrane-stage.barrier-hit .bilayer{
+  animation:none!important;
+}
+
+@media(max-width:620px){
+  .placed-protein[data-type="bomba"]{scale:.9}
+}
