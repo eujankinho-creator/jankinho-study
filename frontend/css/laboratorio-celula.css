@@ -4399,3 +4399,365 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   .compartment-controls{grid-template-columns:1fr}
 }
 
+
+
+/* =========================================================
+   ART V27 — protein/solute visual language based on the
+   approved reference sheet; behavior remains state-driven.
+========================================================= */
+
+/* Shared protein silhouette */
+.placed-protein .protein-channel{
+  width:72px!important;
+  height:154px!important;
+}
+
+.placed-protein .protein-channel::before,
+.placed-protein .protein-channel::after{
+  top:5px!important;
+  bottom:5px!important;
+  width:31px!important;
+  border:1.4px solid rgba(17,22,27,.78)!important;
+  border-radius:44% 42% 32% 38% / 20% 22% 76% 70%!important;
+  box-shadow:
+    inset 4px 2px 7px rgba(255,255,255,.15),
+    inset -3px -5px 7px rgba(0,0,0,.10)!important;
+  transition:
+    left .28s cubic-bezier(.2,.8,.2,1),
+    right .28s cubic-bezier(.2,.8,.2,1),
+    transform .28s cubic-bezier(.2,.8,.2,1),
+    border-radius .28s ease!important;
+}
+
+.placed-protein .protein-channel::before{left:2px!important}
+.placed-protein .protein-channel::after{right:2px!important;transform:scaleX(-1)}
+
+.placed-protein .protein-pore{
+  top:8px!important;
+  bottom:8px!important;
+  width:17px!important;
+  background:#1a2530!important;
+  border:1px solid rgba(15,20,25,.85)!important;
+  box-shadow:inset 0 0 7px rgba(0,0,0,.45)!important;
+  transition:
+    width .28s cubic-bezier(.2,.8,.2,1),
+    opacity .2s ease,
+    background .2s ease!important;
+}
+
+/* Leakage Na — yellow, always open */
+.placed-protein[data-type="vazante-na"] .protein-channel::before,
+.placed-protein[data-type="vazante-na"] .protein-channel::after{
+  background:linear-gradient(160deg,#ffe451 0%,#ffc51f 58%,#eaa211 100%)!important;
+}
+.placed-protein[data-type="vazante-na"] .protein-pore{
+  background:linear-gradient(180deg,#8b6814,#4a370d)!important;
+}
+
+/* Leakage K — cyan, always open */
+.placed-protein[data-type="vazante"] .protein-channel::before,
+.placed-protein[data-type="vazante"] .protein-channel::after{
+  background:linear-gradient(160deg,#72d8ee 0%,#30b2dc 58%,#1888b3 100%)!important;
+}
+.placed-protein[data-type="vazante"] .protein-pore{
+  background:linear-gradient(180deg,#236c8a,#123f53)!important;
+}
+
+/* Voltage gated Na — orange */
+.placed-protein[data-type="vg-na"] .protein-channel::before,
+.placed-protein[data-type="vg-na"] .protein-channel::after{
+  background:linear-gradient(160deg,#ffc04f 0%,#ff9b2d 56%,#ec6f23 100%)!important;
+}
+
+/* Voltage gated K — blue */
+.placed-protein[data-type="vg-k"] .protein-channel::before,
+.placed-protein[data-type="vg-k"] .protein-channel::after{
+  background:linear-gradient(160deg,#6fcbe0 0%,#4aa7ca 56%,#2d75a7 100%)!important;
+}
+
+/* Ligand gated Na — yellow */
+.placed-protein[data-type="lg-na"] .protein-channel::before,
+.placed-protein[data-type="lg-na"] .protein-channel::after{
+  background:linear-gradient(160deg,#ffe24c 0%,#ffc21e 56%,#e79c0d 100%)!important;
+}
+
+/* Ligand gated K — deep blue */
+.placed-protein[data-type="lg-k"] .protein-channel::before,
+.placed-protein[data-type="lg-k"] .protein-channel::after{
+  background:linear-gradient(160deg,#5278c2 0%,#3b63b5 56%,#27488d 100%)!important;
+}
+
+/* Closed conformation: lobes meet and pore is pinched. */
+.placed-protein.channel-closed .protein-channel::before{
+  left:7px!important;
+  transform:rotate(2deg)!important;
+  border-radius:44% 36% 38% 43% / 22% 26% 74% 68%!important;
+}
+.placed-protein.channel-closed .protein-channel::after{
+  right:7px!important;
+  transform:scaleX(-1) rotate(2deg)!important;
+  border-radius:44% 36% 38% 43% / 22% 26% 74% 68%!important;
+}
+.placed-protein.channel-closed .protein-pore{
+  width:3px!important;
+  opacity:.18!important;
+  background:#172027!important;
+}
+
+/* Open conformation: visible aqueous pore and outward lobes. */
+.placed-protein.channel-open .protein-channel::before{
+  left:0!important;
+  transform:rotate(-2deg)!important;
+}
+.placed-protein.channel-open .protein-channel::after{
+  right:0!important;
+  transform:scaleX(-1) rotate(-2deg)!important;
+}
+.placed-protein.channel-open .protein-pore{
+  width:20px!important;
+  opacity:1!important;
+}
+
+/* Voltage sensor disc visible in closed voltage-gated channels. */
+.placed-protein[data-type="vg-na"] .protein-pore::after,
+.placed-protein[data-type="vg-k"] .protein-pore::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:19px;
+  height:19px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1.3px solid rgba(17,22,27,.88);
+  background:inherit;
+  opacity:1;
+  transition:opacity .2s ease,transform .2s ease;
+}
+.placed-protein[data-type="vg-na"].channel-open .protein-pore::after,
+.placed-protein[data-type="vg-k"].channel-open .protein-pore::after{
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.5);
+}
+
+/* Ligand receptor notch at extracellular mouth. */
+.placed-protein[data-type="lg-na"] .protein-channel::before,
+.placed-protein[data-type="lg-k"] .protein-channel::before{
+  clip-path:polygon(0 0,38% 0,50% 12%,62% 0,100% 0,100% 100%,0 100%);
+}
+.placed-protein[data-type="lg-na"] .protein-channel::after,
+.placed-protein[data-type="lg-k"] .protein-channel::after{
+  clip-path:polygon(0 0,38% 0,50% 12%,62% 0,100% 0,100% 100%,0 100%);
+}
+
+/* State badges become subtle: shape is the primary status cue. */
+.gate-state-badge{
+  top:auto!important;
+  right:50%!important;
+  bottom:-16px!important;
+  transform:translateX(50%)!important;
+  padding:2px 4px!important;
+  border-radius:5px!important;
+  font-size:5px!important;
+  opacity:.72;
+}
+
+/* Palette previews mirror the exact protein family colors. */
+.structure-card .channel-preview{
+  position:relative;
+  background:transparent!important;
+  border:0!important;
+  overflow:visible!important;
+}
+.structure-card .channel-preview::before,
+.structure-card .channel-preview::after{
+  content:"";
+  position:absolute;
+  top:1px;
+  bottom:1px;
+  width:11px;
+  border-radius:44% 36% 34% 44% / 20% 25% 74% 68%;
+  border:1px solid rgba(10,14,18,.70);
+  background:#ddd;
+}
+.structure-card .channel-preview::before{left:3px}
+.structure-card .channel-preview::after{right:3px;transform:scaleX(-1)}
+.structure-card .channel-preview i{
+  position:absolute;
+  left:50%;
+  top:5px;
+  bottom:5px;
+  width:5px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:#1a2530;
+}
+.structure-card[data-type="vazante-na"] .channel-preview::before,
+.structure-card[data-type="vazante-na"] .channel-preview::after,
+.structure-card[data-type="lg-na"] .channel-preview::before,
+.structure-card[data-type="lg-na"] .channel-preview::after{
+  background:#ffd02d;
+}
+.structure-card[data-type="vazante"] .channel-preview::before,
+.structure-card[data-type="vazante"] .channel-preview::after{
+  background:#39b8df;
+}
+.structure-card[data-type="vg-na"] .channel-preview::before,
+.structure-card[data-type="vg-na"] .channel-preview::after{
+  background:#ffa337;
+}
+.structure-card[data-type="vg-k"] .channel-preview::before,
+.structure-card[data-type="vg-k"] .channel-preview::after{
+  background:#56b6d2;
+}
+.structure-card[data-type="lg-k"] .channel-preview::before,
+.structure-card[data-type="lg-k"] .channel-preview::after{
+  background:#456cc0;
+}
+
+/* Pump: mint body with dark green central cycle motif */
+.placed-protein[data-type="bomba"]{
+  width:104px!important;
+  height:164px!important;
+}
+.placed-protein[data-type="bomba"] .pump-art{
+  width:96px!important;
+  height:156px!important;
+}
+.placed-protein[data-type="bomba"] .pump-lobe{
+  background:linear-gradient(160deg,#9ce0ca 0%,#69c3aa 58%,#48a68f 100%)!important;
+  border-color:rgba(22,58,49,.78)!important;
+  box-shadow:inset 4px 2px 8px rgba(255,255,255,.16)!important;
+}
+.placed-protein[data-type="bomba"] .pump-chamber{
+  background:#087c67!important;
+  border-color:rgba(10,61,53,.88)!important;
+  box-shadow:none!important;
+}
+.placed-protein[data-type="bomba"] .pump-ratio{
+  color:#eafff8!important;
+  background:#087c67!important;
+  border-color:rgba(10,61,53,.72)!important;
+}
+
+/* Sodium/glucose cotransporter: magenta/pink family */
+.placed-protein[data-type="sglt"]{
+  width:92px!important;
+}
+.placed-protein[data-type="sglt"] .sglt-art{
+  width:84px!important;
+  height:154px!important;
+  background:linear-gradient(160deg,#e69ac7 0%,#ce6fa7 58%,#a74e86 100%)!important;
+  border:1.3px solid rgba(62,26,48,.80)!important;
+  border-radius:38% 38% 28% 28% / 20% 20% 72% 72%!important;
+  box-shadow:inset 4px 2px 8px rgba(255,255,255,.15)!important;
+}
+.placed-protein[data-type="sglt"] .sglt-art::before{
+  width:24px!important;
+  background:#6d2756!important;
+  border-radius:45% 45% 30% 30%!important;
+}
+
+/* Solute-picker artwork mirrors the approved visual set. */
+.solute-choice .solute-orb{
+  position:relative;
+  overflow:visible;
+  background:transparent!important;
+  border:0!important;
+  color:transparent!important;
+  box-shadow:none!important;
+}
+.solute-choice .o2-orb::before,
+.solute-choice .o2-orb::after{
+  content:"";
+  position:absolute;
+  top:8px;
+  width:13px;
+  height:13px;
+  border:1px solid #171717;
+  border-radius:50%;
+  background:#ef6a67;
+}
+.solute-choice .o2-orb::before{left:3px}
+.solute-choice .o2-orb::after{right:3px}
+
+.solute-choice .co2-orb::before{
+  content:"";
+  position:absolute;
+  left:1px;
+  top:8px;
+  width:12px;
+  height:12px;
+  border:1px solid #171717;
+  border-radius:50%;
+  background:#ef6a67;
+  box-shadow:
+    8px 0 0 -1px #55585f,
+    9px 0 0 0 #171717,
+    16px 0 0 -1px #ef6a67,
+    17px 0 0 0 #171717;
+}
+.solute-choice .na-orb::before,
+.solute-choice .k-orb::before{
+  content:"+";
+  position:absolute;
+  inset:3px;
+  display:grid;
+  place-items:center;
+  border:1px solid #171717;
+  border-radius:50%;
+  color:#171717;
+  font-size:13px;
+  font-weight:900;
+}
+.solute-choice .na-orb::before{background:#ffd52f}
+.solute-choice .k-orb::before{background:#43b7d8}
+
+.solute-choice .glucose-orb::before{
+  content:"";
+  position:absolute;
+  inset:3px;
+  background:#8170b8;
+  border:1px solid #171721;
+  clip-path:polygon(25% 4%,75% 4%,98% 50%,75% 96%,25% 96%,2% 50%);
+}
+.solute-choice .atp-orb::before{
+  content:"";
+  position:absolute;
+  left:2px;
+  top:10px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#91d574;
+  border:1px solid #20391e;
+  box-shadow:
+    7px -2px 0 -1px #8bd16e,
+    8px -2px 0 0 #20391e,
+    14px 2px 0 -1px #84ca64,
+    15px 2px 0 0 #20391e,
+    20px -1px 0 -1px #7fc55f,
+    21px -1px 0 0 #20391e;
+}
+
+/* Free ligands use the same triangle/star language. */
+.free-ligand[data-type="ligand-na"]::before{
+  background:#f3b37b!important;
+  border-color:#1c1c1c!important;
+  filter:none!important;
+}
+.free-ligand[data-type="ligand-k"]::before{
+  color:#9ab9da!important;
+  -webkit-text-stroke:1px #1c1c1c!important;
+  filter:none!important;
+}
+
+/* Keep membrane artwork crisp rather than glowy. */
+.placed-protein,
+.placed-protein *{
+  text-shadow:none!important;
+}
+.placed-protein.capture-active{
+  filter:none!important;
+}
+
