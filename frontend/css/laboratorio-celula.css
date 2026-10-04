@@ -2961,3 +2961,86 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   filter:brightness(1.12);
 }
 
+
+
+/* =========================================================
+   PHET-LIKE TRANSPORT V19 — sequential Na/K pump states
+========================================================= */
+
+.placed-protein[data-type="bomba"]{
+  transition:filter .2s ease!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot{
+  transition:
+    opacity .22s ease,
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot.pump-site-inactive:not(.occupied){
+  opacity:.18!important;
+  filter:saturate(.35);
+}
+
+.placed-protein[data-type="bomba"] .pump-slot.pump-site-active:not(.occupied){
+  opacity:1!important;
+  transform:scale(1.06);
+}
+
+.placed-protein[data-type="bomba"].pump-open-in .pump-lobe-left{
+  transform:translate(-5px,5px) rotate(-4deg)!important;
+}
+
+.placed-protein[data-type="bomba"].pump-open-in .pump-lobe-right{
+  transform:translate(5px,5px) rotate(4deg)!important;
+}
+
+.placed-protein[data-type="bomba"].pump-open-out .pump-lobe-left{
+  transform:translate(-7px,-6px) rotate(5deg)!important;
+}
+
+.placed-protein[data-type="bomba"].pump-open-out .pump-lobe-right{
+  transform:translate(7px,-6px) rotate(-5deg)!important;
+}
+
+.placed-protein[data-type="bomba"].pump-occluded .pump-lobe-left{
+  transform:translate(3px,0) rotate(1deg)!important;
+}
+
+.placed-protein[data-type="bomba"].pump-occluded .pump-lobe-right{
+  transform:translate(-3px,0) rotate(-1deg)!important;
+}
+
+.placed-protein[data-type="bomba"].pump-cycling .pump-chamber{
+  box-shadow:
+    inset 0 0 14px rgba(0,0,0,.48),
+    0 0 18px rgba(190,151,248,.22)!important;
+}
+
+.placed-protein[data-type="bomba"].pump-phosphate-bound .pump-atp-cavity::after{
+  content:"Pi";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#efe6ff;
+  font-size:7px;
+  font-weight:950;
+  text-shadow:0 0 7px rgba(220,195,255,.55);
+}
+
+.placed-molecule.pump-transit{
+  z-index:46!important;
+  pointer-events:none!important;
+  transition:none!important;
+  will-change:left,top;
+}
+
+.placed-molecule.crossing-flash{
+  filter:
+    drop-shadow(0 0 8px rgba(255,255,255,.22))
+    drop-shadow(0 0 15px rgba(var(--mv-accent-rgb),.12))!important;
+}
+
