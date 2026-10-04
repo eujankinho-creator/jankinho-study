@@ -30,6 +30,7 @@
   var simNormal=document.getElementById("simNormal");
   var chargeToggle=document.getElementById("chargeToggle");
   var cytoplasmColorPicker=document.getElementById("cytoplasmColorPicker");
+  var cytoplasmPlane=document.getElementById("cytoplasmPlane");
   var chargeOuterBand=stage?stage.querySelector(".charge-positive"):null;
   var chargeInnerBand=stage?stage.querySelector(".charge-negative"):null;
   var ligandToggle=document.getElementById("ligandToggle");
@@ -3373,6 +3374,10 @@
   function setCytoplasmColor(value,persist){
     var color=normalizeHexColor(value);
     if(stage)stage.style.setProperty("--cytoplasm-color",color);
+    if(cytoplasmPlane){
+      cytoplasmPlane.style.backgroundColor=color;
+      cytoplasmPlane.dataset.color=color;
+    }
     if(cytoplasmColorPicker&&cytoplasmColorPicker.value.toLowerCase()!==color){
       cytoplasmColorPicker.value=color;
     }
