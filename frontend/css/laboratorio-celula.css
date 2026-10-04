@@ -4947,3 +4947,160 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   outline:0!important;
   box-shadow:none!important;
 }
+
+
+/* =========================================================
+   SOFT OUTLINES + DARK CELL V57
+   Gentle definition, no heavy black contour, solid dark cell background.
+========================================================= */
+
+:root{
+  --mv-soft-outline:rgba(16,22,28,.28);
+  --mv-soft-outline-strong:rgba(12,18,24,.34);
+  --mv-soft-outline-light:rgba(255,255,255,.08);
+}
+
+/* Solid dark live-cell field: no gradient. */
+.membrane-stage{
+  background:#343a40!important;
+}
+
+/* Bilayer gets only a delicate edge for separation. */
+.membrane-stage .lipid-head{
+  border:1px solid rgba(24,28,34,.24)!important;
+  outline:0!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)!important;
+}
+
+.membrane-stage .lipid-tail{
+  outline:0!important;
+  box-shadow:0 0 0 .55px rgba(24,18,30,.22)!important;
+}
+
+.membrane-stage .hydrophobic-core{
+  background:rgba(255,47,146,.075)!important;
+}
+
+/* Channels: definition without the old dark cartoon outline. */
+.membrane-stage .protein-channel::before,
+.membrane-stage .protein-channel::after{
+  border:1px solid var(--mv-soft-outline)!important;
+  outline:0!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)!important;
+}
+
+.membrane-stage .protein-pore{
+  border:1px solid rgba(10,18,24,.20)!important;
+  outline:0!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)!important;
+}
+
+/* Na+/K+ ATPase keeps its organic silhouette with a soft edge. */
+.membrane-stage .nak-shell{
+  stroke:rgba(12,31,27,.30)!important;
+  stroke-width:1.15!important;
+}
+
+.membrane-stage .nak-cavity{
+  stroke:rgba(7,38,31,.22)!important;
+  stroke-width:.85!important;
+}
+
+.membrane-stage .nak-atp-groove{
+  stroke:rgba(8,38,31,.20)!important;
+  stroke-width:.8!important;
+}
+
+.membrane-stage .nak-pump-art .pump-slot,
+.membrane-stage .nak-pump-art .pump-slot.pump-site-active:not(.occupied){
+  box-shadow:
+    inset 0 0 0 1px rgba(8,37,31,.16),
+    inset 0 1px 2px rgba(0,0,0,.07)!important;
+}
+
+/* SGLT follows the same subtle-outline language. */
+.membrane-stage .sglt-art{
+  border:1px solid rgba(62,18,46,.22)!important;
+  outline:0!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)!important;
+}
+
+.membrane-stage .sglt-art::before{
+  border:1px solid rgba(52,35,88,.18)!important;
+  outline:0!important;
+}
+
+.membrane-stage .sglt-glucose{
+  box-shadow:0 0 0 1px rgba(50,34,88,.16)!important;
+}
+
+.membrane-stage .sglt-na-left,
+.membrane-stage .sglt-na-right{
+  box-shadow:0 0 0 1px rgba(72,55,0,.16)!important;
+}
+
+/* DOM molecules/transit molecules: soft 1px definition. */
+.molecule-na,
+.molecule-k,
+.molecule-cl,
+.molecule-glucose,
+.molecule-pi,
+.molecule-o2 i,
+.molecule-co2 i,
+.molecule-atp i,
+.molecule-adp i{
+  box-shadow:0 0 0 1px rgba(15,20,26,.20)!important;
+}
+
+/* Library previews mirror the real structures. */
+.channel-preview::before,
+.channel-preview::after{
+  border:1px solid rgba(15,21,27,.25)!important;
+  outline:0!important;
+}
+
+.channel-preview i{
+  box-shadow:0 0 0 1px rgba(10,22,28,.17)!important;
+}
+
+.pump-preview,
+.structure-card[data-type="bomba"] .pump-preview{
+  border:1px solid rgba(10,46,38,.22)!important;
+  outline:0!important;
+}
+
+.pump-preview::before,
+.structure-card[data-type="bomba"] .pump-preview::before{
+  border:1px solid rgba(8,44,36,.18)!important;
+  outline:0!important;
+}
+
+.sglt-preview{
+  border:1px solid rgba(64,18,47,.20)!important;
+  outline:0!important;
+}
+
+.sglt-preview::before{
+  border:1px solid rgba(54,36,92,.17)!important;
+  outline:0!important;
+}
+
+/* Solute previews also regain only a fine edge. */
+.o2-orb::before,
+.o2-orb::after,
+.co2-orb::before,
+.na-orb::before,
+.k-orb::before,
+.glucose-orb::before,
+.atp-orb::before{
+  border:1px solid rgba(15,20,26,.18)!important;
+  outline:0!important;
+}
+
+/* Keep interaction feedback clean: no dashed selection boxes. */
+.membrane-stage .placed-protein.is-selected::before,
+.membrane-stage.is-drop-target,
+.membrane-stage .channel-pass .protein-pore,
+.membrane-stage .crossing-flash{
+  outline:0!important;
+}
