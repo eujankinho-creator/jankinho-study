@@ -1595,11 +1595,11 @@
     if(type==="sglt"){
       return '<span class="protein-label">Na⁺/Glicose</span>'+
         '<span class="protein-art sglt-art">'+
-          '<i class="sglt-site sglt-na-left">Na</i>'+
-          '<i class="sglt-site sglt-glucose">G</i>'+
-          '<i class="sglt-site sglt-na-right">Na</i>'+
+          '<i class="sglt-site sglt-na-left" aria-label="Cavidade para Na+"></i>'+
+          '<i class="sglt-site sglt-glucose" aria-label="Cavidade para glicose"></i>'+
+          '<i class="sglt-site sglt-na-right" aria-label="Cavidade para Na+"></i>'+
         '</span>'+
-        '<span class="gate-state-badge sglt-state-badge">2 Na + G</span>';
+        '<span class="gate-state-badge sglt-state-badge">Aguardando carga</span>';
     }
 
     var gated=isVoltageGate(type)||isLigandGate(type);
@@ -2324,104 +2324,167 @@
       !el.dataset.autoTransport&&!el.dataset.autoBinding&&!el.dataset.pumpTransport&&!el.dataset.sgltTransport;
   }
 
-  function animateSgltParticle(el,transporter,targetX,targetY,finalX,finalY,delay){
-    setCanvasManaged(el,false);
-    el.dataset.sgltTransport="1";
+  function finishSgltCargo(el){
+    if(!el||!el.isConnected)return;
+    delete el.dataset.sgltTransport;
+    el.classList.remove("sglt-bound-cargo");
+    if(el!==selected)setCanvasManaged(el,true);
 
-    var sx=parseFloat(el.style.left)||targetX;
-    var sy=parseFloat(el.style.top)||targetY;
-
-    labSetTimeout(function(){
-      if(!el.isConnected||!transporter.isConnected)return;
-      var start=performance.now();
-      var bindDuration=320;
-
-      function bindFrame(now){
-        if(!isLabForeground()){
-          var pausedAt=performance.now();
-          runWhenLabForeground(function(){
-            start+=performance.now()-pausedAt;
-            requestAnimationFrame(bindFrame);
-          });
-          return;
-        }
-        if(!el.isConnected||!transporter.isConnected)return;
-        var t=Math.min(1,(now-start)/bindDuration);
-        var e=smooth01(t);
-        el.style.left=(sx+(targetX-sx)*e)+"px";
-        el.style.top=(sy+(targetY-sy)*e)+"px";
-        if(t<1)requestAnimationFrame(bindFrame);
-      }
-      requestAnimationFrame(bindFrame);
-    },delay||0);
-
-    labSetTimeout(function(){
-      if(!el.isConnected||!transporter.isConnected)return;
-      var sx2=parseFloat(el.style.left)||targetX;
-      var sy2=parseFloat(el.style.top)||targetY;
-      var start2=performance.now();
-      var duration2=620;
-
-      function passFrame(now){
-        if(!isLabForeground()){
-          var pausedAt=performance.now();
-          runWhenLabForeground(function(){
-            start2+=performance.now()-pausedAt;
-            requestAnimationFrame(passFrame);
-          });
-          return;
-        }
-        if(!el.isConnected||!transporter.isConnected)return;
-        var t=Math.min(1,(now-start2)/duration2);
-        var e=smooth01(t);
-        el.style.left=(sx2+(finalX-sx2)*e)+"px";
-        el.style.top=(sy2+(finalY-sy2)*e)+"px";
-
-        if(t<1){
-          requestAnimationFrame(passFrame);
-        }else{
-          delete el.dataset.sgltTransport;
-          if(el!==selected)setCanvasManaged(el,true);
-          var motion=moleculeMotion.get(el);
-          if(motion){
-            chooseRandomWalkVelocity(el,motion,1);
-            motion.channelCooldownUntil=performance.now()+3500;
-            motion.associationCooldownUntil=performance.now()+1000;
-          }
-        }
-      }
-      requestAnimationFrame(passFrame);
-    },(delay||0)+820);
+    var motion=moleculeMotion.get(el);
+    if(motion){
+      chooseRandomWalkVelocity(el,motion,1);
+      motion.channelCooldownUntil=performance.now()+3500;
+      motion.associationCooldownUntil=performance.now()+1000;
+    }
   }
 
   function startSgltCycle(transporter,naA,naB,glucose){
-    if(!transporter||transporter.dataset.cycling==="1")return;
+    if(!transporter||!transporter.isConnected||transporter.dataset.cycling==="1")return;
+    if(!moleculeAvailableForSglt(naA)||!moleculeAvailableForSglt(naB)||!moleculeAvailableForSglt(glucose))return;
+
+    var cargo=[naA,glucose,naB];
     transporter.dataset.cycling="1";
-    transporter.classList.add("sglt-cycling");
+    transporter.classList.add("sglt-binding");
+    transporter.classList.remove("sglt-loaded","sglt-cycling");
 
     var badge=transporter.querySelector(".sglt-state-badge");
     if(badge)badge.textContent="Ligando";
 
+    cargo.forEach(function(el){
+      setCanvasManaged(el,false);
+      el.dataset.sgltTransport="1";
+      el.classList.add("sglt-bound-cargo");
+      var motion=moleculeMotion.get(el);
+      if(motion){
+        motion.vx=0;
+        motion.vy=0;
+        motion.targetVx=0;
+        motion.targetVy=0;
+      }
+    });
+
     var b=barrier();
     var px=parseFloat(transporter.style.left)||stage.clientWidth/2;
-    var entryY=b.top-34;
-    var finalY=b.bottom+62;
+    var py=parseFloat(transporter.style.top)||b.center;
 
-    animateSgltParticle(naA,transporter,px-18,entryY,px-20,finalY,0);
-    animateSgltParticle(glucose,transporter,px,entryY+8,px,finalY+8,80);
-    animateSgltParticle(naB,transporter,px+18,entryY,px+20,finalY,160);
+    var tracks=[
+      {
+        el:naA,
+        sx:parseFloat(naA.style.left)||px-22,
+        sy:parseFloat(naA.style.top)||py-70,
+        bindX:px-21.5,bindY:py-50.5,
+        innerX:px-21.5,innerY:py+39.5,
+        finalX:px-20,finalY:b.bottom+62
+      },
+      {
+        el:glucose,
+        sx:parseFloat(glucose.style.left)||px,
+        sy:parseFloat(glucose.style.top)||py-65,
+        bindX:px,bindY:py-38.5,
+        innerX:px,innerY:py+37.5,
+        finalX:px,finalY:b.bottom+70
+      },
+      {
+        el:naB,
+        sx:parseFloat(naB.style.left)||px+22,
+        sy:parseFloat(naB.style.top)||py-70,
+        bindX:px+21.5,bindY:py-50.5,
+        innerX:px+21.5,innerY:py+39.5,
+        finalX:px+20,finalY:b.bottom+62
+      }
+    ];
 
-    labSetTimeout(function(){
-      if(!transporter.isConnected)return;
-      if(badge)badge.textContent="Transportando";
-    },500);
+    var bindDuration=420;
+    var conformDuration=460;
+    var releaseDuration=500;
+    var started=performance.now();
+    var conformStarted=false;
+    var releaseStarted=false;
 
-    labSetTimeout(function(){
-      if(!transporter.isConnected)return;
+    function setTrackPosition(track,fromX,fromY,toX,toY,t){
+      var e=smooth01(Math.max(0,Math.min(1,t)));
+      track.el.style.left=(fromX+(toX-fromX)*e)+"px";
+      track.el.style.top=(fromY+(toY-fromY)*e)+"px";
+    }
+
+    function abortCycle(){
       transporter.dataset.cycling="0";
-      transporter.classList.remove("sglt-cycling");
-      if(badge)badge.textContent="Na⁺ + glicose";
-    },1750);
+      transporter.classList.remove("sglt-binding","sglt-loaded","sglt-cycling");
+      tracks.forEach(function(track){finishSgltCargo(track.el)});
+      if(badge)badge.textContent="Aguardando carga";
+    }
+
+    function frame(now){
+      if(!isLabForeground()){
+        var pausedAt=performance.now();
+        runWhenLabForeground(function(){
+          started+=performance.now()-pausedAt;
+          requestAnimationFrame(frame);
+        });
+        return;
+      }
+
+      if(!transporter.isConnected||tracks.some(function(track){return !track.el.isConnected})){
+        abortCycle();
+        return;
+      }
+
+      var elapsed=now-started;
+
+      if(elapsed<=bindDuration){
+        var bindT=elapsed/bindDuration;
+        tracks.forEach(function(track){
+          setTrackPosition(track,track.sx,track.sy,track.bindX,track.bindY,bindT);
+        });
+        requestAnimationFrame(frame);
+        return;
+      }
+
+      if(!conformStarted){
+        conformStarted=true;
+        transporter.classList.remove("sglt-binding");
+        transporter.classList.add("sglt-loaded","sglt-cycling");
+        if(badge)badge.textContent="Mudando conformação";
+      }
+
+      var conformElapsed=elapsed-bindDuration;
+      if(conformElapsed<=conformDuration){
+        var conformT=conformElapsed/conformDuration;
+        tracks.forEach(function(track){
+          setTrackPosition(track,track.bindX,track.bindY,track.innerX,track.innerY,conformT);
+        });
+        requestAnimationFrame(frame);
+        return;
+      }
+
+      if(!releaseStarted){
+        releaseStarted=true;
+        transporter.classList.remove("sglt-loaded");
+        if(badge)badge.textContent="Liberando no IC";
+      }
+
+      var releaseElapsed=conformElapsed-conformDuration;
+      if(releaseElapsed<=releaseDuration){
+        var releaseT=releaseElapsed/releaseDuration;
+        tracks.forEach(function(track){
+          setTrackPosition(track,track.innerX,track.innerY,track.finalX,track.finalY,releaseT);
+        });
+        requestAnimationFrame(frame);
+        return;
+      }
+
+      tracks.forEach(function(track){
+        track.el.style.left=track.finalX+"px";
+        track.el.style.top=track.finalY+"px";
+        finishSgltCargo(track.el);
+      });
+
+      transporter.dataset.cycling="0";
+      transporter.classList.remove("sglt-binding","sglt-loaded","sglt-cycling");
+      if(badge)badge.textContent="Aguardando carga";
+    }
+
+    requestAnimationFrame(frame);
   }
 
   function updateSgltTransporters(now,b){
@@ -2607,12 +2670,31 @@
     if(!activeModeFeatures.ligands)return;
     getCachedProteins(now).forEach(function(channel){
       if(!isLigandGate(channel.dataset.type))return;
+
+      var ligandId=channel.dataset.boundLigandId;
+      var ligand=ligandId?layer.querySelector('[data-id="'+ligandId+'"]'):null;
+
+      if(ligandId){
+        var binding=ligandBindingPoint(channel);
+        var lx=ligand?parseFloat(ligand.style.left)||0:Infinity;
+        var ly=ligand?parseFloat(ligand.style.top)||0:Infinity;
+        var stillBound=
+          !!ligand&&
+          ligand.dataset.ligandBound===channel.dataset.id&&
+          Math.hypot(binding.x-lx,binding.y-ly)<34;
+
+        if(!stillBound){
+          releaseBoundLigand(channel,false);
+          return;
+        }
+      }
+
       var shouldOpen=!!channel.dataset.boundLigandId;
       if(shouldOpen&&channel.dataset.open!=="1"&&channel.dataset.ligandState!=="opening"){
         channel.dataset.open="1";
         channel.dataset.ligandState="open";
         syncProteinOpenState(channel);
-      }else if(!shouldOpen&&channel.dataset.open==="1"){
+      }else if(!shouldOpen&&channel.dataset.open!=="0"){
         channel.dataset.open="0";
         channel.dataset.ligandState="closed";
         syncProteinOpenState(channel);
