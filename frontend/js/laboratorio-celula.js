@@ -962,10 +962,17 @@
         !pumpStillWantsGuide(pump,el.dataset.type,guide)||
         !pumpRecruitmentSideMatches(el.dataset.type,y,b)||
         el.classList.contains("docked")||
-        el.dataset.autoBinding==="1"||
         el.dataset.pumpTransport==="1"
       ){
         clearPumpGuide(el,motion);
+        return;
+      }
+
+      // During the final auto-bind animation the molecule MUST keep ownership
+      // of the slot. Releasing it here allowed another ion to steal the pocket
+      // on the next association tick, causing both bindings to abort forever.
+      if(el.dataset.autoBinding==="1"){
+        claimed.add(el.dataset.id);
         return;
       }
 
@@ -2611,7 +2618,16 @@
 
     if(slot.dataset.reservedBy&&slot.dataset.reservedBy!==el.dataset.id){
       var reserved=layer.querySelector('[data-id="'+slot.dataset.reservedBy+'"]');
-      if(reserved)return false;
+      if(reserved){
+        var reservedMotion=moleculeMotion.get(reserved);
+        if(reservedMotion){
+          reservedMotion.pumpGuide=null;
+          reservedMotion.pumpGuideStartedAt=0;
+          if(reservedMotion.pumpReservedSlot===slot)reservedMotion.pumpReservedSlot=null;
+          reservedMotion.associationCooldownUntil=performance.now()+260;
+          chooseRandomWalkVelocity(reserved,reservedMotion,.9);
+        }
+      }
       delete slot.dataset.reservedBy;
     }
 
@@ -3640,10 +3656,18 @@
         slot.classList.contains("occupied")||
         slot.dataset.accept!==el.dataset.type||
         !pumpSlotActive(slot,pump)||
-        (slot.dataset.reservedBy&&slot.dataset.reservedBy!==el.dataset.id)
+        (
+          slot.dataset.reservedBy&&
+          slot.dataset.reservedBy!==el.dataset.id&&
+          !!layer.querySelector('[data-id="'+slot.dataset.reservedBy+'"]')
+        )
       ){
         abortBinding();
         return;
+      }
+
+      if(slot.dataset.reservedBy!==el.dataset.id){
+        slot.dataset.reservedBy=el.dataset.id;
       }
 
       var t=Math.min(1,(now-started)/duration);
