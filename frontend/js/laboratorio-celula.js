@@ -2534,6 +2534,34 @@
 
   function isLigandType(type){return type==="ligand-na"||type==="ligand-k"}
 
+  function ligandEcBounds(el,b){
+    var halfW=Math.max(10,el?moleculeHalfWidth(el):11);
+    var halfH=Math.max(10,el?moleculeHalfHeight(el):11);
+    var minX=halfW+8;
+    var maxX=Math.max(minX,stage.clientWidth-halfW-8);
+    var minY=halfH+8;
+    var maxY=Math.max(minY,b.top-halfH-3);
+    return {minX:minX,maxX:maxX,minY:minY,maxY:maxY,halfW:halfW,halfH:halfH};
+  }
+
+  function clampLigandToEC(el,b,x,y){
+    b=b||barrier();
+    var bounds=ligandEcBounds(el,b);
+    var nx=Math.max(bounds.minX,Math.min(bounds.maxX,Number.isFinite(x)?x:(parseFloat(el.style.left)||stage.clientWidth/2)));
+    var ny=Math.max(bounds.minY,Math.min(bounds.maxY,Number.isFinite(y)?y:(parseFloat(el.style.top)||bounds.minY)));
+
+    el.style.left=nx+"px";
+    el.style.top=ny+"px";
+
+    var motion=moleculeMotion.get(el);
+    if(motion&&ny>=bounds.maxY-.5){
+      motion.vy=-Math.abs(motion.vy||26);
+      motion.targetVy=-Math.abs(motion.targetVy||motion.vy||26);
+    }
+
+    return {x:nx,y:ny,bounds:bounds};
+  }
+
   function ligandChannelType(ligandType){
     return ligandType==="ligand-na"?"lg-na":ligandType==="ligand-k"?"lg-k":null;
   }
@@ -2564,8 +2592,7 @@
     if(!ligand)return;
 
     var p=ligandBindingPoint(channel);
-    ligand.style.left=p.x+"px";
-    ligand.style.top=p.y+"px";
+    clampLigandToEC(ligand,barrier(),p.x,p.y);
   }
 
   function releaseBoundLigand(channel,naturally){
@@ -2575,23 +2602,44 @@
 
     if(ligand){
       delete ligand.dataset.ligandBound;
+      var releasePoint=clampLigandToEC(
+        ligand,
+        barrier(),
+        parseFloat(ligand.style.left)||ligandBindingPoint(channel).x,
+        (parseFloat(ligand.style.top)||ligandBindingPoint(channel).y)-8
+      );
       var motion=moleculeMotion.get(ligand);
       if(motion){
-        chooseRandomWalkVelocity(ligand,motion,1);
-        motion.associationCooldownUntil=performance.now()+180;
+        chooseRandomWalkVelocity(ligand,motion,.82);
+        motion.vy=-Math.abs(motion.vy||24);
+        motion.targetVy=-Math.abs(motion.targetVy||motion.vy||24);
+        motion.associationCooldownUntil=performance.now()+650;
       }
     }
 
     delete channel.dataset.boundLigandId;
     channel.dataset.open="0";
     channel.dataset.ligandState="closed";
-    channel.dataset.ligandCooldownUntil="0";
+    channel.dataset.ligandCooldownUntil=String(performance.now()+520);
     syncProteinOpenState(channel);
   }
 
   function bindLigandToChannel(ligand,channel){
     if(!ligand||!channel||ligand.dataset.ligandBound)return false;
     if(channel.dataset.boundLigandId)return false;
+    if(ligandChannelType(ligand.dataset.type)!==channel.dataset.type)return false;
+
+    var b=barrier();
+    var current=clampLigandToEC(
+      ligand,
+      b,
+      parseFloat(ligand.style.left)||0,
+      parseFloat(ligand.style.top)||0
+    );
+    if(sideOf(current.y,b)!=="EC")return false;
+
+    var binding=ligandBindingPoint(channel);
+    if(binding.y>=b.top)return false;
 
     ligand.dataset.ligandBound=channel.dataset.id;
     channel.dataset.boundLigandId=ligand.dataset.id;
@@ -2628,10 +2676,12 @@
       var channel=channels[i];
       if(channel.dataset.boundLigandId)continue;
       if(now<(parseFloat(channel.dataset.ligandCooldownUntil)||0))continue;
-      var px=parseFloat(channel.style.left)||0;
-      var py=parseFloat(channel.style.top)||b.center;
-      var d=Math.hypot(px-x,(py-y)*.7);
-      if(d<105&&d<bestD){best=channel;bestD=d}
+
+      var binding=ligandBindingPoint(channel);
+      if(binding.y>=b.top)continue;
+
+      var d=Math.hypot(binding.x-x,binding.y-y);
+      if(d<38&&d<bestD){best=channel;bestD=d}
     }
 
     return best?bindLigandToChannel(ligand,best):false;
@@ -2658,7 +2708,7 @@
       if(channel.dataset.boundLigandId)continue;
       var binding=ligandBindingPoint(channel);
       var d=Math.hypot(binding.x-x,binding.y-y);
-      if(d<(radius||115)&&d<bestD){best=channel;bestD=d}
+      if(d<(radius||46)&&d<bestD){best=channel;bestD=d}
     }
 
     return best;
@@ -2679,7 +2729,9 @@
         var stillBound=
           !!ligand&&
           ligand.dataset.ligandBound===channel.dataset.id&&
-          Math.hypot(binding.x-lx,binding.y-ly)<34;
+          sideOf(ly,barrier())==="EC"&&
+          binding.y<barrier().top&&
+          Math.hypot(binding.x-lx,binding.y-ly)<18;
 
         if(!stillBound){
           releaseBoundLigand(channel,false);
@@ -2706,17 +2758,16 @@
 
     var b=barrier();
     var centerX=stage.clientWidth/2;
-    var centerY=Math.max(54,Math.min(b.top-54,b.top*.5));
-    var spacing=30;
+    var ecTop=20;
+    var ecBottom=Math.max(ecTop+36,b.top-18);
+    var centerY=ecTop+(ecBottom-ecTop)*.5;
+    var spacing=Math.min(32,Math.max(22,stage.clientWidth/24));
 
     ["ligand-na","ligand-k"].forEach(function(type,typeIndex){
       for(var i=0;i<7;i++){
         var offset=i-3;
-        var x=centerX+offset*spacing+(typeIndex===0?-7:7);
-        var y=centerY+(typeIndex===0?-18:18)+(Math.abs(offset)%2?4:-3);
-
-        x=Math.max(24,Math.min(stage.clientWidth-24,x));
-        y=Math.max(28,Math.min(b.top-30,y));
+        var x=centerX+offset*spacing+(typeIndex===0?-6:6);
+        var y=centerY+(typeIndex===0?-14:14)+(Math.abs(offset)%2?3:-3);
 
         var ligand=createPlaced(type,"molecule",x,y,{
           select:false,
@@ -2726,8 +2777,17 @@
 
         if(ligand){
           ligand.classList.add("free-ligand");
+          var clamped=clampLigandToEC(ligand,b,x,y);
+          ligand.dataset.ligandHomeSide="EC";
+
           var motion=moleculeMotion.get(ligand);
-          if(motion)chooseRandomWalkVelocity(ligand,motion,.62);
+          if(motion){
+            chooseRandomWalkVelocity(ligand,motion,.62);
+            if(clamped.y>=clamped.bounds.maxY-1){
+              motion.vy=-Math.abs(motion.vy||24);
+              motion.targetVy=motion.vy;
+            }
+          }
         }
       }
     });
@@ -3163,6 +3223,12 @@
     var rect=stageRect(),b=barrier(),p=pointFromClient(event.clientX,event.clientY,rect);
     var left=parseFloat(el.style.left)||p.x,top=parseFloat(el.style.top)||p.y;
 
+    if(isLigandType(el.dataset.type)){
+      var ligandStart=clampLigandToEC(el,b,left,top);
+      left=ligandStart.x;
+      top=ligandStart.y;
+    }
+
     moving={
       el:el,pointerId:event.pointerId,rect:rect,b:b,
       offsetX:p.x-left,offsetY:p.y-top,
@@ -3231,7 +3297,15 @@
     var entryBottom=bottomSurface+half;
 
     if(isLigandType(type)){
-      desiredY=Math.max(18,Math.min(topSurface-half-4,desiredY));
+      var dragBounds=ligandEcBounds(el,m.b);
+      desiredX=Math.max(dragBounds.minX,Math.min(dragBounds.maxX,desiredX));
+      desiredY=Math.max(dragBounds.minY,Math.min(dragBounds.maxY,desiredY));
+
+      if(currentY>dragBounds.maxY||currentY<dragBounds.minY){
+        var corrected=clampLigandToEC(el,m.b,currentX,currentY);
+        currentX=corrected.x;
+        currentY=corrected.y;
+      }
 
       var ligandX=limitStep(currentX,desiredX,44);
       var ligandY=limitStep(currentY,desiredY,44);
@@ -3241,7 +3315,7 @@
       m.lastY=ligandY;
 
       clearLigandDropTargets();
-      m.ligandTarget=closestLigandChannelForDrop(el,ligandX,ligandY,performance.now(),120);
+      m.ligandTarget=closestLigandChannelForDrop(el,ligandX,ligandY,performance.now(),46);
       if(m.ligandTarget)m.ligandTarget.classList.add("ligand-drop-target");
 
       if(Math.abs(desiredX-ligandX)>.5||Math.abs(desiredY-ligandY)>.5)scheduleMoveAgain();
@@ -3443,9 +3517,15 @@
     if(isLigandType(m.el.dataset.type)){
       clearLigandDropTargets();
 
-      var lx=parseFloat(m.el.style.left)||m.lastX||0;
-      var ly=parseFloat(m.el.style.top)||m.lastY||0;
-      var target=m.ligandTarget||closestLigandChannelForDrop(m.el,lx,ly,performance.now(),120);
+      var dropped=clampLigandToEC(
+        m.el,
+        m.b||barrier(),
+        parseFloat(m.el.style.left)||m.lastX||0,
+        parseFloat(m.el.style.top)||m.lastY||0
+      );
+      var lx=dropped.x;
+      var ly=dropped.y;
+      var target=m.ligandTarget||closestLigandChannelForDrop(m.el,lx,ly,performance.now(),46);
 
       if(target){
         target.dataset.ligandCooldownUntil="0";
@@ -3454,9 +3534,10 @@
         delete m.el.dataset.ligandBound;
         var freeMotion=moleculeMotion.get(m.el);
         if(freeMotion){
-          chooseRandomWalkVelocity(m.el,freeMotion,1);
-          freeMotion.associationCooldownUntil=performance.now()+280;
+          chooseRandomWalkVelocity(m.el,freeMotion,.82);
+          freeMotion.associationCooldownUntil=performance.now()+520;
         }
+        clampLigandToEC(m.el,m.b||barrier(),lx,ly);
       }
 
       m.el.classList.remove("is-dragging","is-blocked","is-channeling");
@@ -4256,7 +4337,7 @@
     var associationInterval=activeCount>220?180:activeCount>130?135:92;
     var associationTick=needsAssociation&&now-lastAssociationTime>associationInterval;
 
-    if(associationTick&&features.ligands)updateLigandChannels(now);
+    if(features.ligands)updateLigandChannels(now);
     if(associationTick&&features.sglt)updateSgltTransporters(now,b);
     if(associationTick&&features.pump)refreshPumpRecruitment(now,b);
 
@@ -4380,10 +4461,20 @@
         motion.vy=-Math.abs(motion.vy);
       }
 
-      if(features.ligands&&isLigandType(type)&&ny+halfH>b.top-3){
-        ny=b.top-halfH-3;
-        motion.vy=-Math.abs(motion.vy||28);
-        motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
+      if(isLigandType(type)){
+        var ligandBounds=ligandEcBounds(el,b);
+        nx=Math.max(ligandBounds.minX,Math.min(ligandBounds.maxX,nx));
+
+        if(ny>ligandBounds.maxY){
+          ny=ligandBounds.maxY;
+          motion.vy=-Math.abs(motion.vy||28);
+          motion.targetVy=-Math.abs(motion.targetVy||motion.vy||28);
+          motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
+        }else if(ny<ligandBounds.minY){
+          ny=ligandBounds.minY;
+          motion.vy=Math.abs(motion.vy||24);
+          motion.targetVy=Math.abs(motion.targetVy||motion.vy||24);
+        }
       }
 
       if(features.gas&&isGasType(type)){
