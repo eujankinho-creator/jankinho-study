@@ -18,6 +18,13 @@
   var removeButton=document.getElementById("removeSelected");
   var collisionToast=document.getElementById("collisionToast");
   var gradientVm=document.getElementById("gradientVm");
+  var stageVmStatus=document.getElementById("stageVmStatus");
+  var simPause=document.getElementById("simPause");
+  var simSlow=document.getElementById("simSlow");
+  var simNormal=document.getElementById("simNormal");
+  var chargeToggle=document.getElementById("chargeToggle");
+  var ligandToggle=document.getElementById("ligandToggle");
+  var vmPresetButtons=Array.from(document.querySelectorAll(".vm-preset"));
   var soluteTypes=["na","k","cl","h2o","atp","pi"];
   var gradientUi={
     na:{
@@ -55,6 +62,11 @@
   var lastElectrostaticUpdate=0;
   var lastGradientUpdate=0;
   var simulationActive=true;
+  var simulationPaused=false;
+  var simulationTimeScale=1;
+  var chargesVisible=false;
+  var voltageGateTimer=0;
+  var ligandsAdded=false;
   var sceneCacheDirty=true;
   var sceneCacheAt=0;
   var cachedMolecules=[];
@@ -72,21 +84,32 @@
   var chemicalWeight=1.35;
 
   var catalogue={
-    "canal-na":{name:"Canal de sódio (Na⁺)",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal seletivo para Na⁺. O sódio atravessa a bicamada somente quando passa pelo poro deste canal.",label:"Canal Na⁺",kind:"protein",art:"channel"},
-    "canal-k":{name:"Canal de potássio (K⁺)",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal seletivo para K⁺. O potássio atravessa a bicamada somente pelo poro compatível ou pela bomba.",label:"Canal K⁺",kind:"protein",art:"channel"},
-    "vazante":{name:"Canal vazante de K⁺",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal passivo para K⁺. Nesta simulação funciona como via seletiva para potássio.",label:"Canal vazante",kind:"protein",art:"channel"},
-    "bomba":{name:"Bomba Na⁺/K⁺-ATPase",category:"TRANSPORTE ATIVO",text:"Só inicia o ciclo com 3 Na⁺ no lado intracelular, 2 K⁺ no lado extracelular e 1 ATP no sítio energético.",label:"Bomba Na⁺/K⁺",kind:"protein",art:"pump"},
-    "aquaporina":{name:"Aquaporina",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal seletivo para água. H₂O cruza a membrana pelo poro da aquaporina.",label:"Aquaporina",kind:"protein",art:"channel"},
-    "na":{name:"Sódio (Na⁺)",category:"ÍON",text:"Na⁺ não atravessa diretamente os fosfolipídios. Use um Canal Na⁺ ou a bomba Na⁺/K⁺.",label:"Na⁺",kind:"molecule"},
-    "k":{name:"Potássio (K⁺)",category:"ÍON",text:"K⁺ não atravessa diretamente os fosfolipídios. Use Canal K⁺, canal vazante ou a bomba.",label:"K⁺",kind:"molecule"},
-    "cl":{name:"Cloreto (Cl⁻)",category:"ÍON",text:"Sem canal de Cl⁻ nesta versão, o íon colide com a bicamada e não a atravessa.",label:"Cl⁻",kind:"molecule"},
-    "h2o":{name:"Água (H₂O)",category:"MOLÉCULA",text:"Nesta simulação a travessia rápida da água ocorre por aquaporina.",label:"H₂O",kind:"molecule"},
-    "atp":{name:"ATP",category:"ENERGIA",text:"ATP não atravessa a bicamada. Pode ser usado pela bomba ou sintetizado nesta simulação aproximando Pi de uma molécula de ADP.",label:"ATP",kind:"molecule"},
-    "adp":{name:"ADP",category:"NUCLEOTÍDEO",text:"ADP é formado após o consumo de ATP. Aproxime um fosfato inorgânico (Pi) para sintetizar ATP.",label:"ADP",kind:"molecule"},
-    "pi":{name:"Fosfato inorgânico (Pi)",category:"GRUPO FOSFATO",text:"Pi pode se ligar ao ADP no modo de craft molecular para formar ATP.",label:"Pi",kind:"molecule"}
+    "canal-na":{name:"Canal de sódio (Na⁺)",category:"CANAL PASSIVO",text:"Canal seletivo didático para Na⁺.",label:"Canal Na⁺",kind:"protein",art:"channel"},
+    "canal-k":{name:"Canal de potássio (K⁺)",category:"CANAL PASSIVO",text:"Canal seletivo didático para K⁺.",label:"Canal K⁺",kind:"protein",art:"channel"},
+    "vazante-na":{name:"Canal de vazamento de Na⁺",category:"CANAL DE VAZAMENTO",text:"Canal de Na⁺ sempre aberto. O cruzamento é estocástico e enviesado pelo gradiente eletroquímico.",label:"Leak Na⁺",kind:"protein",art:"channel"},
+    "vazante":{name:"Canal de vazamento de K⁺",category:"CANAL DE VAZAMENTO",text:"Canal de K⁺ sempre aberto. O cruzamento é estocástico e enviesado pelo gradiente eletroquímico.",label:"Leak K⁺",kind:"protein",art:"channel"},
+    "vg-na":{name:"Canal de Na⁺ dependente de voltagem",category:"CANAL VOLTAGEM-DEPENDENTE",text:"Abre após uma curta latência em −50 mV e fecha em −70 mV ou +30 mV.",label:"Na⁺ voltagem",kind:"protein",art:"channel"},
+    "vg-k":{name:"Canal de K⁺ dependente de voltagem",category:"CANAL VOLTAGEM-DEPENDENTE",text:"Abre após uma curta latência em +30 mV e fecha em −70 mV ou −50 mV.",label:"K⁺ voltagem",kind:"protein",art:"channel"},
+    "lg-na":{name:"Canal de Na⁺ dependente de ligante",category:"CANAL LIGANTE-DEPENDENTE",text:"Um ligante compatível se liga ao canal, ele abre por alguns segundos e depois fecha.",label:"Na⁺ ligante",kind:"protein",art:"channel"},
+    "lg-k":{name:"Canal de K⁺ dependente de ligante",category:"CANAL LIGANTE-DEPENDENTE",text:"Um ligante compatível se liga ao canal, ele abre por alguns segundos e depois fecha.",label:"K⁺ ligante",kind:"protein",art:"channel"},
+    "bomba":{name:"Bomba Na⁺/K⁺-ATPase",category:"TRANSPORTE ATIVO",text:"Ciclo sequencial: 3 Na⁺ intracelulares, ATP, liberação de Na⁺ no exterior, 2 K⁺ externos e retorno.",label:"Bomba Na⁺/K⁺",kind:"protein",art:"pump"},
+    "aquaporina":{name:"Aquaporina",category:"CANAL DE ÁGUA",text:"Canal seletivo para água.",label:"Aquaporina",kind:"protein",art:"channel"},
+    "na":{name:"Sódio (Na⁺)",category:"ÍON",text:"Na⁺ cruza apenas por vias compatíveis e sofre viés do gradiente eletroquímico.",label:"Na⁺",kind:"molecule"},
+    "k":{name:"Potássio (K⁺)",category:"ÍON",text:"K⁺ cruza apenas por vias compatíveis e sofre viés do gradiente eletroquímico.",label:"K⁺",kind:"molecule"},
+    "cl":{name:"Cloreto (Cl⁻)",category:"ÍON",text:"Sem canal específico nesta versão do painel.",label:"Cl⁻",kind:"molecule"},
+    "h2o":{name:"Água (H₂O)",category:"MOLÉCULA",text:"A água pode atravessar rapidamente pela aquaporina.",label:"H₂O",kind:"molecule"},
+    "atp":{name:"ATP",category:"ENERGIA",text:"Substrato da Na⁺/K⁺-ATPase. ADP + Pi também podem formar ATP no modo didático.",label:"ATP",kind:"molecule"},
+    "adp":{name:"ADP",category:"NUCLEOTÍDEO",text:"Produto da hidrólise de ATP.",label:"ADP",kind:"molecule"},
+    "pi":{name:"Fosfato inorgânico (Pi)",category:"GRUPO FOSFATO",text:"Participa do ciclo da bomba e do craft ADP + Pi → ATP.",label:"Pi",kind:"molecule"},
+    "ligand-na":{name:"Ligante do canal de Na⁺",category:"LIGANTE",text:"Liga-se ao canal de Na⁺ dependente de ligante.",label:"✦",kind:"molecule"},
+    "ligand-k":{name:"Ligante do canal de K⁺",category:"LIGANTE",text:"Liga-se ao canal de K⁺ dependente de ligante.",label:"▲",kind:"molecule"}
   };
 
-  var gates={na:["canal-na"],k:["canal-k","vazante"],h2o:["aquaporina"]};
+  var gates={
+    na:["canal-na","vazante-na","vg-na","lg-na"],
+    k:["canal-k","vazante","vg-k","lg-k"],
+    h2o:["aquaporina"]
+  };
 
   function setArmedTool(tool){
     if(armedTool===tool)return;
@@ -109,6 +132,25 @@
     if(armedTool)armedTool.classList.remove("palette-selected");
     armedTool=null;
     armedHint.hidden=true;
+  }
+
+  function sampleRandomWalkDurationMs(){
+    var u1=Math.max(1e-6,Math.random());
+    var u2=Math.max(1e-6,Math.random());
+    var z=Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);
+    var seconds=Math.max(.03,Math.min(1,.16+.19*z));
+    return seconds*1000;
+  }
+
+  function chooseRandomWalkVelocity(el,motion,scale){
+    var angle=Math.random()*Math.PI*2;
+    var diffusion=motion&&motion.diffusion?motion.diffusion:diffusionFactor(el.dataset.type);
+    var speed=(36+Math.random()*8)*Math.sqrt(diffusion)*(scale||1);
+    motion.vx=Math.cos(angle)*speed;
+    motion.vy=Math.sin(angle)*speed;
+    motion.targetVx=motion.vx;
+    motion.targetVy=motion.vy;
+    motion.directionChangeAt=performance.now()+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
   }
 
   function initMoleculeMotion(el){
@@ -138,7 +180,7 @@
       craftGuide:null,
       targetVx:Math.cos(angle)*speed,
       targetVy:Math.sin(angle)*speed,
-      directionChangeAt:performance.now()+240+Math.random()*620
+      directionChangeAt:performance.now()+sampleRandomWalkDurationMs()
     });
   }
 
@@ -169,6 +211,8 @@
     if(type==="pi")return {label:"Pi",fill:"#666db5",stroke:"#cdd2ff",text:"#f4f4ff",w:22,h:22,shape:"circle"};
     if(type==="atp")return {label:"ATP",fill:"#6d4f9d",stroke:"#d5c0f4",text:"#f5edff",w:33,h:22,shape:"round"};
     if(type==="adp")return {label:"ADP",fill:"#555b92",stroke:"#c6cbff",text:"#eef0ff",w:35,h:22,shape:"round"};
+    if(type==="ligand-na")return {label:"",fill:"#9bb8d5",stroke:"#d9ebff",text:"#fff",w:24,h:24,shape:"star"};
+    if(type==="ligand-k")return {label:"",fill:"#d9a77c",stroke:"#ffe0c2",text:"#fff",w:24,h:22,shape:"triangle"};
     return {label:type.toUpperCase(),fill:"#65737d",stroke:"#bcc8ce",text:"#ffffff",w:25,h:22,shape:"round"};
   }
 
@@ -215,6 +259,22 @@
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
+    }else if(v.shape==="star"){
+      ctx.beginPath();
+      var cx=v.w/2,cy=v.h/2,outer=Math.min(v.w,v.h)*.46,inner=outer*.44;
+      for(var si=0;si<10;si++){
+        var rr=si%2===0?outer:inner;
+        var aa=-Math.PI/2+si*Math.PI/5;
+        var sx=cx+Math.cos(aa)*rr,sy=cy+Math.sin(aa)*rr;
+        if(si===0)ctx.moveTo(sx,sy);else ctx.lineTo(sx,sy);
+      }
+      ctx.closePath();ctx.fill();ctx.stroke();
+    }else if(v.shape==="triangle"){
+      ctx.beginPath();
+      ctx.moveTo(v.w/2,1);
+      ctx.lineTo(v.w-1,v.h-2);
+      ctx.lineTo(1,v.h-2);
+      ctx.closePath();ctx.fill();ctx.stroke();
     }else{
       roundedRectPath(ctx,1,1,v.w-2,v.h-2,7);
       ctx.fill();
@@ -375,6 +435,7 @@
     if(type==="pi")return 1.12;
     if(type==="adp")return .66;
     if(type==="atp")return .56;
+    if(type==="ligand-na"||type==="ligand-k")return .78;
     return 1;
   }
 
@@ -466,10 +527,21 @@
     return fromSide==="EC"?inward:-inward;
   }
 
-  function passiveTransportAllowed(type,fromSide){
+  function crossingProbability(type,fromSide){
     var drive=passiveDriveForSide(type,fromSide);
-    if(type==="h2o")return drive>.12;
-    return drive>.30;
+    if(!Number.isFinite(drive))return 0;
+
+    var probability=.5+.44*Math.tanh(drive/2.25);
+    if(type==="h2o")probability=.5+.38*Math.tanh(drive/1.8);
+    return Math.max(.08,Math.min(.96,probability));
+  }
+
+  function passiveTransportAllowed(type,fromSide){
+    return crossingProbability(type,fromSide)>.1;
+  }
+
+  function checkGradientForCrossing(type,fromSide){
+    return Math.random()<crossingProbability(type,fromSide);
   }
 
   function associationAllowed(el,motion,now){
@@ -675,7 +747,7 @@
     if(!allowed.length)return false;
     var proteins=getCachedProteins(performance.now());
     for(var i=0;i<proteins.length;i++){
-      if(allowed.indexOf(proteins[i].dataset.type)!==-1)return true;
+      if(allowed.indexOf(proteins[i].dataset.type)!==-1&&proteinIsOpen(proteins[i]))return true;
     }
     return false;
   }
@@ -713,16 +785,7 @@
   }
 
   function applyMembraneElectricField(el,motion,dt,b){
-    var charge=ionCharge(el.dataset.type);
-    if(!charge)return;
-
-    var y=parseFloat(el.style.top)||0;
-    var distance=Math.abs(y-b.center);
-    var range=Math.max(120,b.height*1.55);
-    var proximity=Math.max(.18,1-Math.min(distance/range,1));
-    var acceleration=34*proximity*charge;
-
-    motion.vy+=acceleration*dt;
+    /* PhET-like model: Vm biases crossings and channel states instead of applying a per-frame force to every ion. */
   }
 
   function makeLipid(delay,flip){
@@ -783,6 +846,79 @@
   function proteinY(){return barrier().center}
   function clampProteinX(x){return Math.max(50,Math.min(stage.clientWidth-50,x))}
 
+  function isVoltageGate(type){return type==="vg-na"||type==="vg-k"}
+  function isLigandGate(type){return type==="lg-na"||type==="lg-k"}
+
+  function proteinIsOpen(protein){
+    if(!protein||!protein.isConnected)return false;
+    var type=protein.dataset.type;
+    if(type==="vg-na"||type==="vg-k"||type==="lg-na"||type==="lg-k"){
+      return protein.dataset.open==="1";
+    }
+    return true;
+  }
+
+  function syncProteinOpenState(protein){
+    if(!protein||!protein.isConnected)return;
+    var open=proteinIsOpen(protein);
+    protein.classList.toggle("channel-open",open);
+    protein.classList.toggle("channel-closed",!open);
+    var badge=protein.querySelector(".gate-state-badge");
+    if(badge)badge.textContent=open?"ABERTO":"FECHADO";
+  }
+
+  function initializeProteinState(protein){
+    if(!protein||protein.dataset.kind!=="protein")return;
+    var type=protein.dataset.type;
+
+    if(type==="vg-na"){
+      protein.dataset.open=membraneVoltageMv===-50?"1":"0";
+    }else if(type==="vg-k"){
+      protein.dataset.open=membraneVoltageMv===30?"1":"0";
+    }else if(isLigandGate(type)){
+      protein.dataset.open="0";
+      protein.dataset.ligandState="closed";
+      protein.dataset.ligandCooldownUntil="0";
+    }else{
+      protein.dataset.open="1";
+    }
+
+    syncProteinOpenState(protein);
+  }
+
+  function syncVoltageGates(){
+    getCachedProteins(performance.now()).forEach(function(protein){
+      if(protein.dataset.type==="vg-na")protein.dataset.open=membraneVoltageMv===-50?"1":"0";
+      if(protein.dataset.type==="vg-k")protein.dataset.open=membraneVoltageMv===30?"1":"0";
+      if(isVoltageGate(protein.dataset.type))syncProteinOpenState(protein);
+    });
+  }
+
+  function setMembraneVoltage(value){
+    membraneVoltageMv=parseInt(value,10);
+    if(stageVmStatus)stageVmStatus.textContent="Vm ≈ "+(membraneVoltageMv>0?"+":"")+membraneVoltageMv+" mV";
+    if(gradientVm)gradientVm.textContent="Vm ≈ "+(membraneVoltageMv>0?"+":"")+membraneVoltageMv+" mV";
+
+    vmPresetButtons.forEach(function(button){
+      var active=parseInt(button.dataset.vm,10)===membraneVoltageMv;
+      button.classList.toggle("is-active",active);
+      button.setAttribute("aria-pressed",active?"true":"false");
+    });
+
+    clearTimeout(voltageGateTimer);
+    voltageGateTimer=setTimeout(syncVoltageGates,250);
+    lastGradientUpdate=0;
+  }
+
+  function setChargesVisible(visible){
+    chargesVisible=!!visible;
+    stage.classList.toggle("charges-visible",chargesVisible);
+    if(chargeToggle){
+      chargeToggle.classList.toggle("is-active",chargesVisible);
+      chargeToggle.setAttribute("aria-pressed",chargesVisible?"true":"false");
+    }
+  }
+
   function proteinArt(type){
     if(type==="bomba"){
       return '<span class="protein-label">Bomba Na⁺/K⁺</span>'+
@@ -803,7 +939,11 @@
         '</span>'+
         '<span class="pump-state-badge">0/6</span>';
     }
-    return '<span class="protein-label">'+catalogue[type].label+'</span><span class="protein-art protein-channel"><i class="protein-pore"></i></span>';
+
+    var gated=isVoltageGate(type)||isLigandGate(type);
+    return '<span class="protein-label">'+catalogue[type].label+'</span>'+
+      '<span class="protein-art protein-channel"><i class="protein-pore"></i></span>'+
+      (gated?'<span class="gate-state-badge">FECHADO</span>':'');
   }
 
   function updateCounter(){
@@ -927,7 +1067,10 @@
       initMoleculeMotion(el);
       if(options.select===false)setCanvasManaged(el,true);
     }
-    if(kind==="protein"&&type==="bomba")initializePumpState(el);
+    if(kind==="protein"){
+      initializeProteinState(el);
+      if(type==="bomba")initializePumpState(el);
+    }
     if(options.select!==false)selectElement(el);
     updateCounter();
     return el;
@@ -1121,7 +1264,7 @@
     if(!allowed.length)return null;
     var best=null,bestDistance=Infinity;
     getCachedProteins(performance.now()).forEach(function(protein){
-      if(allowed.indexOf(protein.dataset.type)===-1)return;
+      if(allowed.indexOf(protein.dataset.type)===-1||!proteinIsOpen(protein))return;
       var px=parseFloat(protein.style.left)||0;
       var distance=Math.abs(px-x);
       if(distance<=34&&distance<bestDistance){best=protein;bestDistance=distance}
@@ -1316,6 +1459,156 @@
     }
 
     requestAnimationFrame(frame);
+  }
+
+  function isLigandType(type){return type==="ligand-na"||type==="ligand-k"}
+
+  function ligandChannelType(ligandType){
+    return ligandType==="ligand-na"?"lg-na":ligandType==="ligand-k"?"lg-k":null;
+  }
+
+  function releaseBoundLigand(channel,naturally){
+    if(!channel)return;
+    var ligandId=channel.dataset.boundLigandId;
+    var ligand=ligandId?layer.querySelector('[data-id="'+ligandId+'"]'):null;
+
+    if(ligand){
+      delete ligand.dataset.ligandBound;
+      var motion=moleculeMotion.get(ligand);
+      if(motion){
+        chooseRandomWalkVelocity(ligand,motion,1);
+        motion.associationCooldownUntil=performance.now()+1200;
+      }
+    }
+
+    delete channel.dataset.boundLigandId;
+    channel.dataset.open="0";
+    channel.dataset.ligandState="closing";
+    syncProteinOpenState(channel);
+
+    setTimeout(function(){
+      if(!channel.isConnected)return;
+      channel.dataset.ligandState="closed";
+      channel.dataset.ligandCooldownUntil=String(performance.now()+5000);
+      syncProteinOpenState(channel);
+    },500);
+  }
+
+  function bindLigandToChannel(ligand,channel){
+    if(!ligand||!channel||ligand.dataset.ligandBound)return false;
+    var now=performance.now();
+    if(channel.dataset.boundLigandId)return false;
+    if(now<(parseFloat(channel.dataset.ligandCooldownUntil)||0))return false;
+
+    var b=barrier();
+    var px=parseFloat(channel.style.left)||0;
+    var ligandY=b.top-34;
+
+    ligand.dataset.ligandBound=channel.dataset.id;
+    channel.dataset.boundLigandId=ligand.dataset.id;
+    channel.dataset.ligandState="opening";
+    ligand.style.left=(px+(channel.dataset.type==="lg-na"?-17:17))+"px";
+    ligand.style.top=ligandY+"px";
+
+    var motion=moleculeMotion.get(ligand);
+    if(motion){motion.vx=0;motion.vy=0}
+
+    channel.dataset.open="0";
+    syncProteinOpenState(channel);
+
+    setTimeout(function(){
+      if(!channel.isConnected||channel.dataset.boundLigandId!==ligand.dataset.id)return;
+      channel.dataset.ligandState="open";
+      channel.dataset.open="1";
+      channel.dataset.openedAt=String(performance.now());
+      syncProteinOpenState(channel);
+    },500);
+
+    return true;
+  }
+
+  function tryLigandBinding(ligand,x,y,b,now){
+    var channelType=ligandChannelType(ligand.dataset.type);
+    if(!channelType||ligand.dataset.ligandBound)return false;
+    var side=sideOf(y,b);
+    if(side==="MP")return false;
+
+    var channels=getCachedProteinsOfType(channelType,now);
+    var best=null,bestD=Infinity;
+    for(var i=0;i<channels.length;i++){
+      var channel=channels[i];
+      if(channel.dataset.boundLigandId)continue;
+      if(now<(parseFloat(channel.dataset.ligandCooldownUntil)||0))continue;
+      var px=parseFloat(channel.style.left)||0;
+      var py=parseFloat(channel.style.top)||b.center;
+      var d=Math.hypot(px-x,(py-y)*.7);
+      if(d<105&&d<bestD){best=channel;bestD=d}
+    }
+
+    return best?bindLigandToChannel(ligand,best):false;
+  }
+
+  function updateLigandChannels(now){
+    getCachedProteins(now).forEach(function(channel){
+      if(!isLigandGate(channel.dataset.type))return;
+      if(channel.dataset.ligandState==="open"){
+        var openedAt=parseFloat(channel.dataset.openedAt)||now;
+        if(now-openedAt>=15000&&channel.dataset.channelBusy!=="1"){
+          releaseBoundLigand(channel,true);
+        }
+      }
+    });
+  }
+
+  function addLigands(){
+    if(ligandsAdded)return;
+    ligandsAdded=true;
+
+    ["ligand-na","ligand-k"].forEach(function(type,typeIndex){
+      for(var i=0;i<6;i++){
+        var side=i%2===0?"EC":"IC";
+        var p=safeSpawnPoint(side,i,6);
+        p.x+=typeIndex?10:-10;
+        var ligand=createPlaced(type,"molecule",p.x,p.y,{select:false,interactive:false});
+        if(ligand){
+          var motion=moleculeMotion.get(ligand);
+          if(motion)chooseRandomWalkVelocity(ligand,motion,.9);
+        }
+      }
+    });
+
+    if(ligandToggle){
+      ligandToggle.textContent="Remover ligantes";
+      ligandToggle.classList.add("is-active");
+      ligandToggle.setAttribute("aria-pressed","true");
+    }
+
+    markSceneCacheDirty();
+  }
+
+  function removeLigands(){
+    getCachedProteins(performance.now()).forEach(function(channel){
+      if(isLigandGate(channel.dataset.type)){
+        if(channel.dataset.boundLigandId)releaseBoundLigand(channel,false);
+        channel.dataset.open="0";
+        channel.dataset.ligandState="closed";
+        syncProteinOpenState(channel);
+      }
+    });
+
+    getCachedMolecules(performance.now()).forEach(function(el){
+      if(isLigandType(el.dataset.type))el.remove();
+    });
+
+    ligandsAdded=false;
+    markSceneCacheDirty();
+    compartmentCountCacheAt=0;
+
+    if(ligandToggle){
+      ligandToggle.textContent="Adicionar ligantes";
+      ligandToggle.classList.remove("is-active");
+      ligandToggle.setAttribute("aria-pressed","false");
+    }
   }
 
   function findDockTarget(el,x,y){
@@ -1879,6 +2172,58 @@
     moving=null;
   }
 
+  function syncSimulationControls(){
+    if(simPause){
+      simPause.classList.toggle("is-active",simulationPaused);
+      simPause.setAttribute("aria-pressed",simulationPaused?"true":"false");
+      simPause.textContent=simulationPaused?"▶":"Ⅱ";
+      simPause.title=simulationPaused?"Continuar simulação":"Pausar simulação";
+    }
+    if(simSlow){
+      var slow=!simulationPaused&&simulationTimeScale===.5;
+      simSlow.classList.toggle("is-active",slow);
+      simSlow.setAttribute("aria-pressed",slow?"true":"false");
+    }
+    if(simNormal){
+      var normal=!simulationPaused&&simulationTimeScale===1;
+      simNormal.classList.toggle("is-active",normal);
+      simNormal.setAttribute("aria-pressed",normal?"true":"false");
+    }
+  }
+
+  if(simPause)simPause.addEventListener("click",function(){
+    simulationPaused=!simulationPaused;
+    lastPhysicsTime=performance.now();
+    syncSimulationControls();
+  });
+
+  if(simSlow)simSlow.addEventListener("click",function(){
+    simulationPaused=false;
+    simulationTimeScale=.5;
+    syncSimulationControls();
+  });
+
+  if(simNormal)simNormal.addEventListener("click",function(){
+    simulationPaused=false;
+    simulationTimeScale=1;
+    syncSimulationControls();
+  });
+
+  vmPresetButtons.forEach(function(button){
+    button.addEventListener("click",function(){
+      setMembraneVoltage(button.dataset.vm);
+    });
+  });
+
+  if(chargeToggle)chargeToggle.addEventListener("click",function(){
+    setChargesVisible(!chargesVisible);
+  });
+
+  if(ligandToggle)ligandToggle.addEventListener("click",function(){
+    if(ligandsAdded)removeLigands();
+    else addLigands();
+  });
+
   document.querySelectorAll(".side-select").forEach(function(button){
     button.addEventListener("pointerdown",function(event){event.stopPropagation()});
     button.addEventListener("click",function(event){
@@ -1948,7 +2293,22 @@
   });
 
   clearButton.addEventListener("click",function(){
-    layer.textContent="";placedCount=0;markSceneCacheDirty();compartmentCountCacheAt=0;selectElement(null);clearArmedTool();updateCounter();updateSoluteControlCounts();updateGradientPanel(performance.now()+500);renderParticleCanvas(performance.now());
+    layer.textContent="";
+    placedCount=0;
+    ligandsAdded=false;
+    markSceneCacheDirty();
+    compartmentCountCacheAt=0;
+    selectElement(null);
+    clearArmedTool();
+    if(ligandToggle){
+      ligandToggle.textContent="Adicionar ligantes";
+      ligandToggle.classList.remove("is-active");
+      ligandToggle.setAttribute("aria-pressed","false");
+    }
+    updateCounter();
+    updateSoluteControlCounts();
+    updateGradientPanel(performance.now()+500);
+    renderParticleCanvas(performance.now());
   });
 
   function removeSelectedElement(){
@@ -2007,7 +2367,6 @@
 
     var side=sideOf(y,b);
     if(side==="MP")return null;
-    if(!passiveTransportAllowed(el.dataset.type,side))return null;
 
     var now=performance.now();
     var motion=moleculeMotion.get(el);
@@ -2018,34 +2377,32 @@
       ?Math.abs((y+half)-b.top)
       :Math.abs((y-half)-b.bottom);
 
-    if(surfaceDistance>60)return null;
+    if(surfaceDistance>82)return null;
 
     var best=null;
     var bestDistance=Infinity;
+    var proteins=getCachedProteins(now);
 
-    layer.querySelectorAll(".placed-protein").forEach(function(protein){
-      if(allowed.indexOf(protein.dataset.type)===-1)return;
+    for(var i=0;i<proteins.length;i++){
+      var protein=proteins[i];
+      if(allowed.indexOf(protein.dataset.type)===-1||!proteinIsOpen(protein))continue;
+      if(protein.dataset.channelBusy==="1")continue;
 
       var px=parseFloat(protein.style.left)||0;
       var py=parseFloat(protein.style.top)||b.center;
-      var dx=Math.abs(px-x);
-      var radial=Math.hypot(px-x,(py-y)*.72);
+      var radial=Math.hypot(px-x,(py-y)*.68);
 
       if(motion&&motion.lastGateId===protein.dataset.id&&motion.clearanceRadius>0){
-        if(radial<motion.clearanceRadius)return;
+        if(radial<motion.clearanceRadius)continue;
         motion.lastGateId=null;
         motion.clearanceRadius=0;
       }
 
-      if(protein.dataset.channelBusy==="1")return;
-
-      var captureDrive=Math.max(0,passiveDriveForSide(type,side));
-      var captureRadius=22+Math.min(8,captureDrive*2.5);
-      if(dx<captureRadius&&dx<bestDistance){
+      if(radial<92&&radial<bestDistance){
         best=protein;
-        bestDistance=dx;
+        bestDistance=radial;
       }
-    });
+    }
 
     return best;
   }
@@ -2080,7 +2437,7 @@
       if(slot.dataset.accept!==type||!pumpSlotActive(slot,bestPump))return;
       var p=slotStagePoint(slot);
       var d=Math.hypot(p.x-x,p.y-y);
-      if(d<26&&d<slotDistance){
+      if(d<118&&d<slotDistance){
         bestSlot=slot;
         slotDistance=d;
       }
@@ -2091,29 +2448,48 @@
 
   function autoBindPump(el,slot){
     if(!el||!slot||el.dataset.autoBinding==="1"||el.classList.contains("docked"))return;
+
     var p=slotStagePoint(slot);
-    var x=parseFloat(el.style.left)||0;
-    var y=parseFloat(el.style.top)||0;
-    if(Math.hypot(p.x-x,p.y-y)>32)return;
+    var startX=parseFloat(el.style.left)||0;
+    var startY=parseFloat(el.style.top)||0;
+    var distance=Math.hypot(p.x-startX,p.y-startY);
+    if(distance>125)return;
 
     setCanvasManaged(el,false);
     el.dataset.autoBinding="1";
     el.classList.add("auto-associating");
-    el.style.left=p.x+"px";
-    el.style.top=p.y+"px";
 
-    setTimeout(function(){
-      if(!el.isConnected)return;
-      if(slot.isConnected&&!slot.classList.contains("occupied")){
-        var motion=moleculeMotion.get(el);
-        if(slot.dataset.reservedBy===el.dataset.id)delete slot.dataset.reservedBy;
-        if(motion)motion.pumpReservedSlot=null;
-        dockElement(el,slot);
+    var started=performance.now();
+    var duration=260+Math.min(220,distance*1.2);
+
+    function frame(now){
+      if(!el.isConnected||!slot.isConnected){
+        delete el.dataset.autoBinding;
+        el.classList.remove("auto-associating");
+        return;
       }
-      delete el.dataset.autoBinding;
-      el.classList.remove("auto-associating");
-      if(!el.classList.contains("docked")&&el!==selected)setCanvasManaged(el,true);
-    },260);
+
+      var t=Math.min(1,(now-started)/duration);
+      var e=smooth01(t);
+      el.style.left=(startX+(p.x-startX)*e)+"px";
+      el.style.top=(startY+(p.y-startY)*e)+"px";
+
+      if(t<1){
+        requestAnimationFrame(frame);
+      }else{
+        if(!slot.classList.contains("occupied")){
+          var motion=moleculeMotion.get(el);
+          if(slot.dataset.reservedBy===el.dataset.id)delete slot.dataset.reservedBy;
+          if(motion)motion.pumpReservedSlot=null;
+          dockElement(el,slot);
+        }
+        delete el.dataset.autoBinding;
+        el.classList.remove("auto-associating");
+        if(!el.classList.contains("docked")&&el!==selected)setCanvasManaged(el,true);
+      }
+    }
+
+    requestAnimationFrame(frame);
   }
 
   function smooth01(t){
@@ -2142,8 +2518,8 @@
       motion.targetVy=motion.vy;
       motion.directionChangeAt=now+900+Math.random()*500;
       motion.boostUntil=now+1800;
-      motion.channelCooldownUntil=now+1900;
-      motion.associationCooldownUntil=now+1650;
+      motion.channelCooldownUntil=now+10000;
+      motion.associationCooldownUntil=now+1200;
       motion.gateGuide=null;
       motion.pumpGuide=null;
       motion.lastSide=fromSide==="EC"?"IC":"EC";
@@ -2156,7 +2532,15 @@
 
   function autoTransportChannel(el,gate,fromSide,b){
     if(!el||!gate||el.dataset.autoTransport==="1")return;
-    if(!passiveTransportAllowed(el.dataset.type,fromSide))return;
+    if(!proteinIsOpen(gate))return;
+    if(!checkGradientForCrossing(el.dataset.type,fromSide)){
+      var rejectedMotion=moleculeMotion.get(el);
+      if(rejectedMotion){
+        rejectedMotion.associationCooldownUntil=performance.now()+450;
+        chooseRandomWalkVelocity(el,rejectedMotion,1);
+      }
+      return;
+    }
 
     if(gate.dataset.channelBusy==="1")return;
     gate.dataset.channelBusy="1";
@@ -2302,7 +2686,7 @@
   }
 
   function molecularPhysicsStep(dt,now){
-    if(!simulationActive)return;
+    if(!simulationActive||simulationPaused)return;
 
     var molecules=getCachedMolecules(now).filter(function(el){
       return el.isConnected&&!el.classList.contains("docked")&&!el.classList.contains("craft-consumed");
@@ -2310,34 +2694,20 @@
 
     refreshCompartmentCounts(now,false);
     updateGradientPanel(now);
+    updateLigandChannels(now);
     if(!molecules.length)return;
 
     molecules.forEach(initMoleculeMotion);
 
-    var interactiveMolecules=molecules.filter(function(el){
-      return !(moving&&moving.el===el);
-    });
-
-    var electroInterval=interactiveMolecules.length>180?240:interactiveMolecules.length>100?160:100;
-    if(now-lastElectrostaticUpdate>=electroInterval){
-      applyElectrostaticInteractions(interactiveMolecules);
-      lastElectrostaticUpdate=now;
-    }
-
     var b=barrier();
     var width=stage.clientWidth;
     var height=stage.clientHeight;
-    var associationInterval=molecules.length>180?260:molecules.length>100?210:155;
+    var associationInterval=molecules.length>180?190:molecules.length>100?150:105;
     var associationTick=now-lastAssociationTime>associationInterval;
-
-    if(associationTick){
-      getCachedProteins(now).forEach(function(protein){
-        if(protein.classList.contains("capture-active"))protein.classList.remove("capture-active");
-      });
-    }
 
     molecules.forEach(function(el){
       if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1"||el.dataset.pumpTransport==="1"||el.classList.contains("transporting"))return;
+      if(el.dataset.ligandBound)return;
       if(moving&&moving.el===el)return;
 
       var motion=moleculeMotion.get(el);
@@ -2350,61 +2720,32 @@
       var side=sideOf(y,b);
 
       if(associationTick){
-        motion.pumpGuide=pumpGuidanceTarget(el,x,y,b,now);
-        motion.gateGuide=gateGuidanceTarget(el,x,y,b,now);
-        motion.craftGuide=craftGuidanceTarget(el,x,y,b,now);
+        if(isLigandType(el.dataset.type)){
+          if(tryLigandBinding(el,x,y,b,now))return;
+        }else{
+          motion.craftGuide=craftGuidanceTarget(el,x,y,b,now);
 
-        if(motion.craftGuide&&motion.craftGuide.distance<27){
-          if(craftATP(el,motion.craftGuide.partner))return;
-        }
+          if(motion.craftGuide&&motion.craftGuide.distance<27){
+            if(craftATP(el,motion.craftGuide.partner))return;
+          }
 
-        var slot=nearestPumpSlotForAuto(el,x,y,b);
-        if(slot){
-          autoBindPump(el,slot);
-          if(el.dataset.autoBinding==="1")return;
-        }
+          var pumpSlot=nearestPumpSlotForAuto(el,x,y,b);
+          if(pumpSlot){
+            autoBindPump(el,pumpSlot);
+            if(el.dataset.autoBinding==="1")return;
+          }
 
-        var gate=nearestCompatibleChannel(el,x,y,b);
-        if(gate){
-          autoTransportChannel(el,gate,side,b);
-          if(el.dataset.autoTransport==="1")return;
+          var gate=nearestCompatibleChannel(el,x,y,b);
+          if(gate){
+            autoTransportChannel(el,gate,side,b);
+            if(el.dataset.autoTransport==="1")return;
+          }
         }
       }
-
-      applyGuidanceForce(el,motion,dt,x,y,b,now);
 
       var boosted=motion.boostUntil&&now<motion.boostUntil;
-      var diffusion=motion.diffusion||diffusionFactor(el.dataset.type);
-      var sqrtDiffusion=Math.sqrt(diffusion);
-
       if(!boosted&&now>=motion.directionChangeAt){
-        var walkAngle=Math.random()*Math.PI*2;
-        var walkSpeed=(38+Math.random()*26)*Math.min(1.30,Math.max(.80,sqrtDiffusion));
-        motion.targetVx=Math.cos(walkAngle)*walkSpeed;
-        motion.targetVy=Math.sin(walkAngle)*walkSpeed;
-        motion.directionChangeAt=now+220+Math.random()*620;
-      }
-
-      if(boosted){
-        motion.targetVx=motion.vx;
-        motion.targetVy=motion.vy;
-      }
-
-      var steering=boosted?1.35:5.2;
-      motion.vx+=(motion.targetVx-motion.vx)*Math.min(1,steering*dt);
-      motion.vy+=(motion.targetVy-motion.vy)*Math.min(1,steering*dt);
-
-      var microNoise=(boosted?14:10)*sqrtDiffusion*Math.sqrt(Math.max(dt,.001));
-      motion.vx+=(Math.random()*2-1)*microNoise;
-      motion.vy+=(Math.random()*2-1)*microNoise;
-
-      applyMembraneElectricField(el,motion,dt,b);
-
-      var speed=Math.hypot(motion.vx,motion.vy);
-      var maxSpeed=(boosted?88:74)*Math.min(1.30,Math.max(.80,sqrtDiffusion));
-      if(speed>maxSpeed){
-        motion.vx=motion.vx/speed*maxSpeed;
-        motion.vy=motion.vy/speed*maxSpeed;
+        chooseRandomWalkVelocity(el,motion,1);
       }
 
       var nx=x+motion.vx*dt;
@@ -2418,27 +2759,27 @@
 
       if(ny<halfH){
         ny=halfH;
-        motion.vy=Math.abs(motion.vy)*.75;
+        motion.vy=Math.abs(motion.vy);
       }else if(ny>height-halfH){
         ny=height-halfH;
-        motion.vy=-Math.abs(motion.vy)*.75;
+        motion.vy=-Math.abs(motion.vy);
       }
 
       if(side==="EC"&&ny+halfH>b.top){
         ny=b.top-halfH;
-        motion.vy=-Math.abs(motion.vy)*(.62+Math.random()*.18);
-        motion.vx+=(Math.random()-.5)*12;
+        motion.vy=-Math.abs(motion.vy||24);
+        motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
       }else if(side==="IC"&&ny-halfH<b.bottom){
         ny=b.bottom+halfH;
-        motion.vy=Math.abs(motion.vy)*(.62+Math.random()*.18);
-        motion.vx+=(Math.random()-.5)*12;
+        motion.vy=Math.abs(motion.vy||24);
+        motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
       }else if(side==="MP"){
         if(y<=b.center){
           ny=b.top-halfH;
-          motion.vy=-Math.abs(motion.vy||6);
+          motion.vy=-Math.abs(motion.vy||24);
         }else{
           ny=b.bottom+halfH;
-          motion.vy=Math.abs(motion.vy||6);
+          motion.vy=Math.abs(motion.vy||24);
         }
       }
 
@@ -2455,13 +2796,18 @@
 
     if(!lastPhysicsTime){
       lastPhysicsTime=now;
+      renderParticleCanvas(now);
       return;
     }
 
     var elapsed=now-lastPhysicsTime;
     if(elapsed<31)return;
     lastPhysicsTime=now;
-    molecularPhysicsStep(Math.min(elapsed,50)/1000,now);
+
+    if(!simulationPaused){
+      molecularPhysicsStep(Math.min(elapsed,50)/1000*simulationTimeScale,now);
+    }
+
     renderParticleCanvas(now);
   }
 
@@ -2526,6 +2872,9 @@
 
   buildBilayer();
   resizeParticleCanvas();
+  setChargesVisible(false);
+  setMembraneVoltage(-70);
+  syncSimulationControls();
   renderDefaultInfo();
   updateCounter();
   updateSoluteControlCounts();

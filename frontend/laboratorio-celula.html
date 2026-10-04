@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-canvas23">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-phetcore24">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -259,8 +259,23 @@
               <span class="live-dot"></span>
               <div>
                 <small>MEMBRANA EM REPOUSO</small>
-                <strong>Vm ≈ −70 mV</strong>
+                <strong id="stageVmStatus">Vm ≈ −70 mV</strong>
               </div>
+            </div>
+
+            <div class="simulation-controls" aria-label="Controles da simulação">
+              <div class="sim-run-controls">
+                <button id="simPause" class="sim-control-btn" type="button" aria-pressed="false" title="Pausar simulação">Ⅱ</button>
+                <button id="simSlow" class="sim-control-btn" type="button" aria-pressed="false">0,5×</button>
+                <button id="simNormal" class="sim-control-btn is-active" type="button" aria-pressed="true">1×</button>
+              </div>
+              <div class="vm-preset-controls" aria-label="Potencial de membrana">
+                <span>Vm</span>
+                <button class="vm-preset is-active" type="button" data-vm="-70">−70</button>
+                <button class="vm-preset" type="button" data-vm="-50">−50</button>
+                <button class="vm-preset" type="button" data-vm="30">+30</button>
+              </div>
+              <button id="chargeToggle" class="sim-control-btn charge-toggle" type="button" aria-pressed="false">± cargas</button>
             </div>
 
             <div class="stage-actions">
@@ -319,24 +334,57 @@
           <div class="stage-footer">
             <div class="structure-console">
               <div class="structure-console-head">
-                <div><small>ESTRUTURAS</small><strong>Proteínas</strong></div>
-                <span>1 por vez</span>
+                <div><small>TRANSPORTE</small><strong>Proteínas de membrana</strong></div>
+                <span>modelo PhET-like</span>
               </div>
 
               <div class="structure-section">
-                <small>PASSIVOS</small>
+                <small>CANAIS DE VAZAMENTO · sempre abertos</small>
                 <div class="structure-grid">
-                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="canal-na">
-                    <span class="tool-preview channel-preview na-preview"><i></i></span><b>Canal Na⁺</b><small>seletivo</small>
-                  </button>
-                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="canal-k">
-                    <span class="tool-preview channel-preview k-preview"><i></i></span><b>Canal K⁺</b><small>seletivo</small>
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vazante-na">
+                    <span class="tool-preview channel-preview na-preview"><i></i></span><b>Leak Na⁺</b><small>passivo</small>
                   </button>
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vazante">
-                    <span class="tool-preview channel-preview leak-preview"><i></i></span><b>Vazante K⁺</b><small>leakage</small>
+                    <span class="tool-preview channel-preview k-preview"><i></i></span><b>Leak K⁺</b><small>passivo</small>
                   </button>
+                </div>
+              </div>
+
+              <div class="structure-section">
+                <small>DEPENDENTES DE VOLTAGEM</small>
+                <div class="structure-grid">
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vg-na">
+                    <span class="tool-preview channel-preview vg-na-preview"><i></i></span><b>Na⁺ voltagem</b><small>abre em −50 mV</small>
+                  </button>
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vg-k">
+                    <span class="tool-preview channel-preview vg-k-preview"><i></i></span><b>K⁺ voltagem</b><small>abre em +30 mV</small>
+                  </button>
+                </div>
+              </div>
+
+              <div class="structure-section ligand-structure-section">
+                <div class="structure-section-titleline">
+                  <small>DEPENDENTES DE LIGANTE</small>
+                  <button id="ligandToggle" class="ligand-toggle" type="button" aria-pressed="false">Adicionar ligantes</button>
+                </div>
+                <div class="structure-grid">
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="lg-na">
+                    <span class="tool-preview channel-preview lg-na-preview"><i></i></span><b>Na⁺ ligante</b><small>abre ao ligar</small>
+                  </button>
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="lg-k">
+                    <span class="tool-preview channel-preview lg-k-preview"><i></i></span><b>K⁺ ligante</b><small>abre ao ligar</small>
+                  </button>
+                </div>
+              </div>
+
+              <div class="structure-section">
+                <small>OUTROS</small>
+                <div class="structure-grid">
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="aquaporina">
-                    <span class="tool-preview channel-preview aqua-preview"><i></i></span><b>Aquaporina</b><small>água</small>
+                    <span class="tool-preview channel-preview aqua-preview"><i></i></span><b>Aquaporina</b><small>H₂O</small>
+                  </button>
+                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="canal-na">
+                    <span class="tool-preview channel-preview na-preview"><i></i></span><b>Canal Na⁺</b><small>didático</small>
                   </button>
                 </div>
               </div>
@@ -345,7 +393,7 @@
                 <small>TRANSPORTE ATIVO</small>
                 <button class="tool-item protein-tool structure-card structure-card-wide" type="button" data-kind="protein" data-type="bomba">
                   <span class="tool-preview pump-preview"><i>3:2</i></span>
-                  <span><b>Bomba Na⁺/K⁺</b><small>3 Na⁺ → 2 K⁺ · usa ATP</small></span>
+                  <span><b>Bomba Na⁺/K⁺</b><small>3 Na⁺ → 2 K⁺ · ATP</small></span>
                 </button>
               </div>
             </div>
@@ -404,7 +452,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-canvas23"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-phetcore24"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

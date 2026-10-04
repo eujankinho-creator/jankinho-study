@@ -3795,3 +3795,204 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   filter:none!important;
 }
 
+
+
+/* =========================================================
+   PHET CORE V24 — behavior-inspired controls, Cortex visual
+========================================================= */
+
+.simulation-controls{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  margin-left:auto;
+  margin-right:8px;
+}
+
+.sim-run-controls,
+.vm-preset-controls{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  padding:3px;
+  border:1px solid var(--mv-border);
+  border-radius:9px;
+  background:rgba(255,255,255,.018);
+}
+
+.vm-preset-controls>span{
+  padding:0 4px;
+  color:var(--mv-theme-muted);
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+.sim-control-btn,
+.vm-preset,
+.ligand-toggle{
+  min-width:30px;
+  height:25px;
+  padding:0 7px;
+  border:1px solid transparent;
+  border-radius:6px;
+  background:transparent;
+  color:var(--mv-theme-muted);
+  font:inherit;
+  font-size:7px;
+  font-weight:900;
+  cursor:pointer;
+  transition:background .14s ease,border-color .14s ease,color .14s ease,transform .1s ease;
+}
+
+.sim-control-btn:hover,
+.vm-preset:hover,
+.ligand-toggle:hover{
+  color:var(--mv-theme-soft);
+  background:rgba(var(--mv-accent-rgb),.06);
+}
+
+.sim-control-btn:active,
+.vm-preset:active,
+.ligand-toggle:active{
+  transform:scale(.95);
+}
+
+.sim-control-btn.is-active,
+.vm-preset.is-active,
+.ligand-toggle.is-active{
+  color:var(--mv-accent-2);
+  border-color:var(--mv-border-strong);
+  background:rgba(var(--mv-accent-rgb),.10);
+}
+
+.charge-toggle{
+  min-width:54px;
+  border:1px solid var(--mv-border);
+}
+
+.charge-band{
+  opacity:0!important;
+  transition:opacity .18s ease;
+}
+
+.membrane-stage.charges-visible .charge-band{
+  opacity:1!important;
+}
+
+.structure-section-titleline{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+}
+
+.ligand-toggle{
+  height:22px;
+  min-width:auto;
+  border:1px solid var(--mv-border);
+  font-size:6px;
+}
+
+.gate-state-badge{
+  position:absolute;
+  right:-6px;
+  top:50%;
+  transform:translateY(-50%);
+  padding:3px 5px;
+  border:1px solid var(--mv-border);
+  border-radius:6px;
+  background:var(--mv-surface);
+  color:var(--mv-theme-muted);
+  font-size:5.5px;
+  font-weight:950;
+  letter-spacing:.04em;
+  pointer-events:none;
+}
+
+.placed-protein.channel-open .gate-state-badge{
+  color:#9bdcb4;
+  border-color:rgba(113,211,154,.20);
+  background:rgba(66,143,99,.09);
+}
+
+.placed-protein.channel-closed .gate-state-badge{
+  color:#9aa7ae;
+}
+
+.placed-protein.channel-closed .protein-pore{
+  width:4px!important;
+  opacity:.36!important;
+  background:#25292d!important;
+}
+
+.placed-protein.channel-open .protein-pore{
+  opacity:1!important;
+}
+
+.placed-protein[data-type="vg-na"] .protein-channel::before,
+.placed-protein[data-type="vg-na"] .protein-channel::after{
+  background:linear-gradient(150deg,#a87355,#6d4937 55%,#3c2c25);
+}
+
+.placed-protein[data-type="vg-k"] .protein-channel::before,
+.placed-protein[data-type="vg-k"] .protein-channel::after{
+  background:linear-gradient(150deg,#5f89a4,#3e657d 55%,#2b4351);
+}
+
+.placed-protein[data-type="lg-na"] .protein-channel::before,
+.placed-protein[data-type="lg-na"] .protein-channel::after{
+  background:linear-gradient(150deg,#a88450,#75572f 55%,#4b3824);
+}
+
+.placed-protein[data-type="lg-k"] .protein-channel::before,
+.placed-protein[data-type="lg-k"] .protein-channel::after{
+  background:linear-gradient(150deg,#536f9b,#394f76 55%,#273852);
+}
+
+.placed-protein[data-type="vazante-na"] .protein-channel::before,
+.placed-protein[data-type="vazante-na"] .protein-channel::after{
+  background:linear-gradient(150deg,#92704e,#654b36 55%,#3c2e25);
+}
+
+.vg-na-preview,
+.lg-na-preview{
+  --preview-accent:#c4815f;
+}
+
+.vg-k-preview,
+.lg-k-preview{
+  --preview-accent:#5f90ad;
+}
+
+/* Bound ligands remain canvas-rendered, no DOM cost. */
+.placed-molecule[data-type="ligand-na"],
+.placed-molecule[data-type="ligand-k"]{
+  pointer-events:none!important;
+}
+
+/* Toolbar stays compact on desktop and wraps cleanly on smaller widths. */
+@media(max-width:1500px){
+  .stage-toolbar{
+    flex-wrap:wrap;
+    gap:7px;
+  }
+  .simulation-controls{
+    order:3;
+    width:100%;
+    margin:0;
+    justify-content:flex-start;
+  }
+}
+
+@media(max-width:760px){
+  .simulation-controls{
+    gap:4px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .simulation-controls::-webkit-scrollbar{display:none}
+  .vm-preset-controls{flex:0 0 auto}
+}
+
