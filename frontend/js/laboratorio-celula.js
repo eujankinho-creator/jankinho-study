@@ -102,7 +102,10 @@
       vy:Math.sin(angle)*speed,
       seed:Math.random()*1000,
       boostUntil:0,
-      lastSide:null
+      lastSide:null,
+      channelCooldownUntil:0,
+      lastGateId:null,
+      clearanceRadius:0
     });
   }
 
@@ -151,7 +154,7 @@
 
   function passiveTransportAllowed(type,fromSide){
     if(type==="h2o")return true;
-    return passiveDriveForSide(type,fromSide)>.12;
+    return passiveDriveForSide(type,fromSide)>.35;
   }
 
   function hasCompatibleGate(type){
@@ -164,7 +167,7 @@
 
   function gradientDirectionText(type){
     var drive=electrochemicalDriveECtoIC(type);
-    if(Math.abs(drive)<.18)return "quase em equilíbrio";
+    if(Math.abs(drive)<.30)return "quase em equilíbrio";
     return drive>0?"EC → IC":"IC → EC";
   }
 
@@ -815,10 +818,14 @@
 
           var postMotion=moleculeMotion.get(el);
           if(postMotion){
+            var postNow=performance.now();
             var postDirection=completedFrom==="EC"?1:-1;
-            postMotion.vx=(Math.random()-.5)*26;
-            postMotion.vy=postDirection*(22+Math.random()*16);
-            postMotion.boostUntil=performance.now()+1200;
+            postMotion.vx=(Math.random()-.5)*38;
+            postMotion.vy=postDirection*(38+Math.random()*20);
+            postMotion.boostUntil=postNow+1600;
+            postMotion.channelCooldownUntil=postNow+1800;
+            postMotion.lastGateId=transit.gate&&transit.gate.dataset?transit.gate.dataset.id:null;
+            postMotion.clearanceRadius=104;
           }
         }else{
           scheduleMoveAgain();
@@ -1046,17 +1053,34 @@
     if(side==="MP")return null;
     if(!passiveTransportAllowed(el.dataset.type,side))return null;
 
-    var surfaceDistance=side==="EC"?Math.abs((y+el.offsetHeight/2)-b.top):Math.abs((y-el.offsetHeight/2)-b.bottom);
-    if(surfaceDistance>72)return null;
+    var now=performance.now();
+    var motion=moleculeMotion.get(el);
+    if(motion&&motion.channelCooldownUntil&&now<motion.channelCooldownUntil)return null;
+
+    var surfaceDistance=side==="EC"
+      ?Math.abs((y+el.offsetHeight/2)-b.top)
+      :Math.abs((y-el.offsetHeight/2)-b.bottom);
+
+    if(surfaceDistance>60)return null;
 
     var best=null;
     var bestDistance=Infinity;
 
     layer.querySelectorAll(".placed-protein").forEach(function(protein){
       if(allowed.indexOf(protein.dataset.type)===-1)return;
+
       var px=parseFloat(protein.style.left)||0;
+      var py=parseFloat(protein.style.top)||b.center;
       var dx=Math.abs(px-x);
-      if(dx<54&&dx<bestDistance){
+      var radial=Math.hypot(px-x,(py-y)*.72);
+
+      if(motion&&motion.lastGateId===protein.dataset.id&&motion.clearanceRadius>0){
+        if(radial<motion.clearanceRadius)return;
+        motion.lastGateId=null;
+        motion.clearanceRadius=0;
+      }
+
+      if(dx<46&&dx<bestDistance){
         best=protein;
         bestDistance=dx;
       }
@@ -1139,11 +1163,16 @@
 
     var motion=moleculeMotion.get(el);
     if(motion){
+      var now=performance.now();
       var direction=fromSide==="EC"?1:-1;
-      motion.vx=(Math.random()-.5)*30;
-      motion.vy=direction*(24+Math.random()*18);
-      motion.boostUntil=performance.now()+1350;
+
+      motion.vx=(Math.random()-.5)*42;
+      motion.vy=direction*(42+Math.random()*22);
+      motion.boostUntil=now+1800;
+      motion.channelCooldownUntil=now+1900;
       motion.lastSide=fromSide==="EC"?"IC":"EC";
+      motion.lastGateId=gate&&gate.dataset?gate.dataset.id:null;
+      motion.clearanceRadius=108;
     }
   }
 
@@ -1162,12 +1191,12 @@
 
     var mouthY=fromSide==="EC"?b.top-half:b.bottom+half;
     var centerY=b.center;
-    var exitY=fromSide==="EC"?b.bottom+half+16:b.top-half-16;
+    var exitY=fromSide==="EC"?b.bottom+half+28:b.top-half-28;
 
     var startTime=performance.now();
     var approachDuration=220;
     var poreDuration=460;
-    var releaseDuration=200;
+    var releaseDuration=240;
     var total=approachDuration+poreDuration+releaseDuration;
 
     function frame(now){
@@ -1196,7 +1225,7 @@
         var p3=smooth01((elapsed-approachDuration-poreDuration)/releaseDuration);
         var releaseX=gx+(Math.sin(p3*Math.PI)*(Math.random()-.5)*2);
         x=releaseX;
-        y=exitY+(fromSide==="EC"?1:-1)*(10*p3);
+        y=exitY+(fromSide==="EC"?1:-1)*(20*p3);
       }
 
       el.style.left=x+"px";
@@ -1323,9 +1352,9 @@
       }
 
       var boosted=motion.boostUntil&&now<motion.boostUntil;
-      var thermal=boosted?1.65:1;
-      var gamma=boosted?1.45:2.35;
-      var noise=boosted?64:46;
+      var thermal=boosted?1.72:1;
+      var gamma=boosted?1.18:2.25;
+      var noise=boosted?70:48;
       var sqrtDt=Math.sqrt(Math.max(dt,.001));
 
       motion.vx+=(-gamma*motion.vx*dt)+((Math.random()*2-1)*noise*sqrtDt*thermal);
@@ -1333,7 +1362,7 @@
       applyMembraneElectricField(el,motion,dt,b);
 
       var speed=Math.hypot(motion.vx,motion.vy);
-      var maxSpeed=boosted?58:38;
+      var maxSpeed=boosted?72:40;
       if(speed>maxSpeed){
         motion.vx=motion.vx/speed*maxSpeed;
         motion.vy=motion.vy/speed*maxSpeed;

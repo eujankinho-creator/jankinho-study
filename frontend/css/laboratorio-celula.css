@@ -2879,3 +2879,19 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   }
 }
 
+
+
+/* =========================================================
+   CLEARANCE V14 — impede ping-pong no mesmo canal
+========================================================= */
+
+.placed-molecule.channel-transit{
+  filter:
+    drop-shadow(0 0 6px rgba(196,229,245,.22))
+    drop-shadow(0 0 11px rgba(98,183,223,.08))!important;
+}
+
+.placed-protein.channel-pass{
+  filter:drop-shadow(0 0 8px rgba(120,205,243,.18))!important;
+}
+
