@@ -900,7 +900,7 @@
       var motion=moleculeMotion.get(el);
       if(!motion||!associationAllowed(el,motion,now))return false;
 
-      if(motion.pumpGuide&&motion.pumpGuide.pump&&motion.pumpGuide.pump!==pump&&motion.pumpGuide.pump.isConnected){
+      if(motion.pumpGuide&&motion.pumpGuide.pump&&motion.pumpGuide.pump.isConnected){
         return false;
       }
 
@@ -1013,12 +1013,23 @@
 
           if(current){
             var currentMotion=moleculeMotion.get(current);
-            if(currentMotion){
+            var ownerValid=
+              currentMotion&&
+              currentMotion.pumpReservedSlot===slot&&
+              currentMotion.pumpGuide&&
+              currentMotion.pumpGuide.pump===pump&&
+              currentMotion.pumpGuide.slot===slot;
+
+            if(ownerValid){
               var cp=slotStagePoint(slot);
               assignPumpGuide(current,currentMotion,pump,slot,cp.x,cp.y,"slot",now);
               claimed.add(current.dataset.id);
               return;
             }
+
+            if(currentMotion)clearPumpGuide(current,currentMotion);
+            delete slot.dataset.reservedBy;
+            current=null;
           }
 
           var p=slotStagePoint(slot);
@@ -1166,16 +1177,27 @@
 
           // The force starts subtly and becomes more decisive as the molecule
           // "recognizes" the pump. Random walk remains active, so the path curves naturally.
-          var pFalloff=Math.max(0,1-Math.min(pd,620)/620);
-          var base=pg.kind==="waiting-atp"?.10:.13;
-          var nearBoost=pg.kind==="waiting-atp"?.38:.62;
-          var pForce=(base+nearBoost*Math.pow(pFalloff,.74))*(.35+.65*ramp);
+          var pFalloff=Math.max(0,1-Math.min(pd,640)/640);
+          var targetSpeed=pg.kind==="waiting-atp"
+            ? 28+22*Math.pow(pFalloff,.55)
+            : 34+34*Math.pow(pFalloff,.58);
 
-          motion.vx+=pdx*pForce*dt;
-          motion.vy+=pdy*pForce*dt;
+          var nxp=pd>0?pdx/pd:0;
+          var nyp=pd>0?pdy/pd:0;
+          var desiredVx=nxp*targetSpeed;
+          var desiredVy=nyp*targetSpeed;
+
+          // Far away it keeps some random walk. As it gets closer the assigned
+          // molecule progressively commits to its own site, without snapping.
+          var steer=(pg.kind==="waiting-atp"?.05:.07)+
+            (pg.kind==="waiting-atp"?.16:.24)*Math.pow(pFalloff,.70);
+          steer*=.45+.55*ramp;
+
+          motion.vx+=(desiredVx-motion.vx)*Math.min(.34,steer);
+          motion.vy+=(desiredVy-motion.vy)*Math.min(.34,steer);
 
           var speed=Math.hypot(motion.vx,motion.vy);
-          var speedCap=pg.kind==="waiting-atp"?58:72;
+          var speedCap=pg.kind==="waiting-atp"?54:70;
           if(speed>speedCap){
             motion.vx=motion.vx/speed*speedCap;
             motion.vy=motion.vy/speed*speedCap;
@@ -3670,6 +3692,11 @@
         slot.dataset.reservedBy=el.dataset.id;
       }
 
+      slotPointCache.delete(slot);
+      var liveP=slotStagePoint(slot);
+      p.x=liveP.x;
+      p.y=liveP.y;
+
       var t=Math.min(1,(now-started)/duration);
       var e=smooth01(t);
       el.style.left=(startX+(p.x-startX)*e)+"px";
@@ -3815,7 +3842,7 @@
     for(var i=0;i<molecules.length;i++){
       var el=molecules[i];
       var motion=moleculeMotion.get(el);
-      if(!motion||!motion.charge||el.classList.contains("docked")||el.dataset.autoTransport||el.dataset.autoBinding)continue;
+      if(!motion||!motion.charge||el.classList.contains("docked")||el.dataset.autoTransport||el.dataset.autoBinding||motion.pumpGuide)continue;
 
       var x=parseFloat(el.style.left)||0;
       var y=parseFloat(el.style.top)||0;
@@ -3831,7 +3858,7 @@
     for(var aIndex=0;aIndex<molecules.length;aIndex++){
       var a=molecules[aIndex];
       var am=moleculeMotion.get(a);
-      if(!am||!am.charge||a.classList.contains("docked")||a.dataset.autoTransport||a.dataset.autoBinding)continue;
+      if(!am||!am.charge||a.classList.contains("docked")||a.dataset.autoTransport||a.dataset.autoBinding||am.pumpGuide)continue;
 
       var ax=parseFloat(a.style.left)||0;
       var ay=parseFloat(a.style.top)||0;
@@ -4020,19 +4047,21 @@
 
             if(
               motion.pumpGuide&&
+              motion.pumpGuide.kind==="slot"&&
               motion.pumpGuide.slot&&
               motion.pumpGuide.slot.isConnected&&
-              !motion.pumpGuide.slot.classList.contains("occupied")
+              !motion.pumpGuide.slot.classList.contains("occupied")&&
+              motion.pumpGuide.slot.dataset.reservedBy===el.dataset.id
             ){
               var guidedPoint=slotStagePoint(motion.pumpGuide.slot);
               motion.pumpGuide.x=guidedPoint.x;
               motion.pumpGuide.y=guidedPoint.y;
 
-              if(Math.hypot(guidedPoint.x-x,guidedPoint.y-y)<118){
+              // Long-range steering gets the assigned molecule close first.
+              // The final docking animation only starts near its OWN pocket.
+              if(Math.hypot(guidedPoint.x-x,guidedPoint.y-y)<68){
                 pumpSlot=motion.pumpGuide.slot;
               }
-            }else if(!motion.pumpGuide){
-              pumpSlot=nearestPumpSlotForAuto(el,x,y,b);
             }
 
             if(pumpSlot){
