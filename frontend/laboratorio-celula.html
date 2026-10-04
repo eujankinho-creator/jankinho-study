@@ -1,11 +1,392 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Membrana | Cortex</title>
-<script>(function(){let t='dark-orange';try{t=localStorage.getItem('jankinho_theme_v1')||t}catch(_){}document.documentElement.setAttribute('data-theme',t)})()</script>
-<link rel="stylesheet" href="/css/app.css?v=20261002-fluid-final4"><link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4"><link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4"><link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4"><link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1"><link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-<script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script><script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script><script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script><link rel="icon" href="/favicon.svg?v=cortex-white-v3"><meta name="theme-color" content="#080a0f"></head>
-<body class="practice-view lab-view"><aside class="sidebar"><a href="/" class="sidebar-logo"><div class="logo-box">C</div><div><strong>Cortex</strong><span>Study Platform</span></div></a><div class="sidebar-menu"></div><div class="sidebar-user"><div id="avatarSidebar" class="avatar">U</div><div class="user-info"><strong id="nomeSidebar">Carregando...</strong><span id="emailSidebar"></span></div><button id="logoutSidebar" class="logout-button" type="button">&#8618;</button></div></aside>
-<div class="main-area"><header class="header"><div><div class="header-title">Laboratório da Membrana</div></div><div class="header-user"><div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div><div id="avatarHeader" class="avatar header-avatar">U</div></div></header>
-<main></main></div>
-<script>
-(async()=>{try{const r=await fetch('/api/auth/me',{credentials:'same-origin'});if(r.status===401){location.href='/login.html';return}if(!r.ok)return;const d=await r.json(),u=d.usuario||{},n=u.nome||'Usuário',i=n[0].toUpperCase();document.getElementById('nomeSidebar').textContent=n;document.getElementById('emailSidebar').textContent=u.email||'';document.getElementById('nomeHeader').textContent=n;document.getElementById('avatarSidebar').textContent=i;document.getElementById('avatarHeader').textContent=i}catch(_){}})();
-document.getElementById('logoutSidebar').onclick=async()=>{try{await fetch('/api/auth/logout',{method:'POST',credentials:'same-origin'})}finally{location.href='/login.html'}};
-</script><script src="/js/cortex-brand.js?v=20260930-global4"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Membrana Viva | Cortex</title>
+
+  <script>
+    (function () {
+      var theme = "dark-orange";
+      try {
+        theme = localStorage.getItem("jankinho_theme_v1") || theme;
+      } catch (_) {}
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/css/app.css?v=20261004-membrana1">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261004-membrana1">
+  <link rel="stylesheet" href="/css/themes.css?v=20261004-membrana1">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana1">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana1">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-approved1">
+
+  <script defer src="/js/ui-enhancements.js?v=20261004-membrana1"></script>
+  <script defer src="/js/theme-manager.js?v=20261004-membrana1"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261004-membrana1"></script>
+
+  <link rel="icon" href="/favicon.svg?v=cortex-white-v3">
+  <meta name="theme-color" content="#091019">
+</head>
+
+<body class="practice-view cell-lab-view">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box">C</div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+
+    <div class="sidebar-menu"></div>
+
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info">
+        <strong id="nomeSidebar">Carregando...</strong>
+        <span id="emailSidebar"></span>
+      </div>
+      <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header membrane-header">
+      <div>
+        <div class="header-title">Membrana Viva</div>
+        <span class="membrane-header-subtitle">Laboratório de membrana plasmática</span>
+      </div>
+
+      <div class="header-user">
+        <div>
+          <strong id="nomeHeader">Carregando...</strong>
+          <span>Cortex</span>
+        </div>
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
+      </div>
+    </header>
+
+    <main class="membrane-page">
+      <a class="membrane-back" href="/laboratorio.html">
+        <span>←</span> Voltar aos laboratórios
+      </a>
+
+      <section class="membrane-intro">
+        <div>
+          <span class="membrane-kicker">CORTEX LAB · MEMBRANA VIVA</span>
+          <h1>Membrana <em>plasmática</em></h1>
+          <p>
+            Um modelo visual da bicamada lipídica com canais, bomba Na⁺/K⁺ e gradientes iônicos.
+            Passe o cursor pelas estruturas para reconhecer cada componente.
+          </p>
+        </div>
+
+        <div class="membrane-mode">
+          <span class="mode-dot"></span>
+          <div>
+            <small>MODELO ATUAL</small>
+            <strong>Membrana em repouso</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="membrane-workbench" aria-label="Modelo interativo da membrana plasmática">
+        <div class="environment-label extracellular-label">
+          <strong>Espaço extracelular</strong>
+          <span>meio extracelular</span>
+        </div>
+
+        <div class="environment-label cytoplasm-label">
+          <strong>Citoplasma</strong>
+          <span>meio intracelular</span>
+        </div>
+
+        <div class="membrane-canvas-wrap">
+          <svg id="membraneSvg" class="membrane-svg" viewBox="0 0 1400 700" role="img" aria-labelledby="membraneTitle membraneDesc">
+            <title id="membraneTitle">Modelo da membrana plasmática</title>
+            <desc id="membraneDesc">Bicamada fosfolipídica com canais de sódio e potássio, bomba de sódio e potássio e gradientes iônicos.</desc>
+
+            <defs>
+              <linearGradient id="membraneBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#0d1824"/>
+                <stop offset="0.48" stop-color="#0a111a"/>
+                <stop offset="1" stop-color="#081019"/>
+              </linearGradient>
+
+              <radialGradient id="headGrad" cx="38%" cy="32%" r="75%">
+                <stop offset="0" stop-color="#d9e5ec"/>
+                <stop offset="0.22" stop-color="#98b5c8"/>
+                <stop offset="0.67" stop-color="#54768d"/>
+                <stop offset="1" stop-color="#2f4658"/>
+              </radialGradient>
+
+              <linearGradient id="tailGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#c3a07e"/>
+                <stop offset="1" stop-color="#7b5e48"/>
+              </linearGradient>
+
+              <linearGradient id="channelWarm" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#a76643"/>
+                <stop offset="0.45" stop-color="#6d3f2c"/>
+                <stop offset="1" stop-color="#3b261d"/>
+              </linearGradient>
+
+              <linearGradient id="pumpGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#73718d"/>
+                <stop offset="0.55" stop-color="#414458"/>
+                <stop offset="1" stop-color="#262a36"/>
+              </linearGradient>
+
+              <linearGradient id="channelK" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#a88b68"/>
+                <stop offset="0.55" stop-color="#6e5a46"/>
+                <stop offset="1" stop-color="#3c3229"/>
+              </linearGradient>
+
+              <linearGradient id="channelCool" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#6f8797"/>
+                <stop offset="0.55" stop-color="#405565"/>
+                <stop offset="1" stop-color="#24333e"/>
+              </linearGradient>
+
+              <linearGradient id="naGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f1a278"/>
+                <stop offset="0.62" stop-color="#cf6840"/>
+                <stop offset="1" stop-color="#914327"/>
+              </linearGradient>
+
+              <linearGradient id="kGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f1d37b"/>
+                <stop offset="0.6" stop-color="#c99d42"/>
+                <stop offset="1" stop-color="#85672b"/>
+              </linearGradient>
+
+              <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="8" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+
+              <filter id="tinyGlow" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+
+              <pattern id="bilayerPattern" width="42" height="156" patternUnits="userSpaceOnUse">
+                <g class="phospholipid">
+                  <circle cx="10" cy="18" r="11" fill="url(#headGrad)" stroke="#b8cbd6" stroke-opacity=".25"/>
+                  <path d="M7 29 C4 54 9 66 7 82" fill="none" stroke="url(#tailGrad)" stroke-width="4.2" stroke-linecap="round"/>
+                  <path d="M13 29 C16 52 11 67 14 82" fill="none" stroke="url(#tailGrad)" stroke-width="4.2" stroke-linecap="round"/>
+                  <circle cx="10" cy="138" r="11" fill="url(#headGrad)" stroke="#b8cbd6" stroke-opacity=".25"/>
+                  <path d="M7 127 C4 102 9 90 7 74" fill="none" stroke="url(#tailGrad)" stroke-width="4.2" stroke-linecap="round"/>
+                  <path d="M13 127 C16 104 11 89 14 74" fill="none" stroke="url(#tailGrad)" stroke-width="4.2" stroke-linecap="round"/>
+                </g>
+              </pattern>
+
+              <marker id="arrowNa" markerWidth="10" markerHeight="10" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L6,3 z" fill="#dc815d"/>
+              </marker>
+
+              <marker id="arrowK" markerWidth="10" markerHeight="10" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L6,3 z" fill="#c6a04e"/>
+              </marker>
+            </defs>
+
+            <rect x="0" y="0" width="1400" height="700" rx="28" fill="url(#membraneBg)"/>
+            <ellipse cx="670" cy="340" rx="670" ry="240" fill="#42607a" opacity=".035"/>
+            <ellipse cx="1130" cy="160" rx="250" ry="170" fill="#7e92a4" opacity=".028"/>
+
+            <g class="ion-layer ion-layer-na" aria-hidden="true">
+              <g class="ion ion-na ion-float-a" transform="translate(172 130)">
+                <polygon points="0,-18 15,-9 15,9 0,18 -15,9 -15,-9" fill="url(#naGradient)" stroke="#efb396" stroke-width="1.3"/>
+                <text y="5" text-anchor="middle">Na⁺</text>
+              </g>
+              <g class="ion ion-na ion-float-b" transform="translate(325 82)">
+                <polygon points="0,-18 15,-9 15,9 0,18 -15,9 -15,-9" fill="url(#naGradient)" stroke="#efb396" stroke-width="1.3"/>
+                <text y="5" text-anchor="middle">Na⁺</text>
+              </g>
+              <g class="ion ion-na ion-float-c" transform="translate(475 165)">
+                <polygon points="0,-18 15,-9 15,9 0,18 -15,9 -15,-9" fill="url(#naGradient)" stroke="#efb396" stroke-width="1.3"/>
+                <text y="5" text-anchor="middle">Na⁺</text>
+              </g>
+              <g class="ion ion-na ion-float-d" transform="translate(720 110)">
+                <polygon points="0,-18 15,-9 15,9 0,18 -15,9 -15,-9" fill="url(#naGradient)" stroke="#efb396" stroke-width="1.3"/>
+                <text y="5" text-anchor="middle">Na⁺</text>
+              </g>
+              <g class="ion ion-na ion-float-e" transform="translate(1080 145)">
+                <polygon points="0,-18 15,-9 15,9 0,18 -15,9 -15,-9" fill="url(#naGradient)" stroke="#efb396" stroke-width="1.3"/>
+                <text y="5" text-anchor="middle">Na⁺</text>
+              </g>
+              <g class="ion ion-na ion-float-b" transform="translate(1210 82)">
+                <polygon points="0,-18 15,-9 15,9 0,18 -15,9 -15,-9" fill="url(#naGradient)" stroke="#efb396" stroke-width="1.3"/>
+                <text y="5" text-anchor="middle">Na⁺</text>
+              </g>
+            </g>
+
+            <g class="ion-layer ion-layer-k" aria-hidden="true">
+              <g class="ion ion-k ion-float-b" transform="translate(860 92)">
+                <ellipse rx="25" ry="15" fill="url(#kGradient)" stroke="#eedb9f" stroke-width="1.2"/>
+                <text y="5" text-anchor="middle">K⁺</text>
+              </g>
+              <g class="ion ion-k ion-float-d" transform="translate(980 165)">
+                <ellipse rx="25" ry="15" fill="url(#kGradient)" stroke="#eedb9f" stroke-width="1.2"/>
+                <text y="5" text-anchor="middle">K⁺</text>
+              </g>
+              <g class="ion ion-k ion-float-a" transform="translate(1170 205)">
+                <ellipse rx="25" ry="15" fill="url(#kGradient)" stroke="#eedb9f" stroke-width="1.2"/>
+                <text y="5" text-anchor="middle">K⁺</text>
+              </g>
+            </g>
+
+            <g class="structure bilayer-hotspot" data-info="bicamada" tabindex="0" role="button" aria-label="Bicamada fosfolipídica">
+              <rect x="60" y="280" width="1220" height="156" rx="22" fill="#0b121a" opacity=".96"/>
+              <rect x="60" y="280" width="1220" height="156" rx="22" fill="url(#bilayerPattern)"/>
+              <rect x="60" y="280" width="1220" height="156" rx="22" fill="none" stroke="#a7bfce" stroke-opacity=".1"/>
+            </g>
+
+            <g class="structure channel channel-na" data-info="canalNa" tabindex="0" role="button" aria-label="Canal de sódio" transform="translate(235 262)">
+              <path d="M20 8 C4 34 2 57 7 92 C10 118 3 145 17 166 C30 180 48 168 47 148 C46 121 42 102 52 83 C60 69 60 45 54 25 C49 7 32 -4 20 8Z" fill="url(#channelWarm)" stroke="#c98a67" stroke-opacity=".42" stroke-width="2"/>
+              <path d="M90 8 C106 34 108 57 103 92 C100 118 107 145 93 166 C80 180 62 168 63 148 C64 121 68 102 58 83 C50 69 50 45 56 25 C61 7 78 -4 90 8Z" fill="url(#channelWarm)" stroke="#c98a67" stroke-opacity=".42" stroke-width="2"/>
+              <path d="M47 26 Q55 56 55 83 Q55 118 55 148" fill="none" stroke="#261d18" stroke-width="21" stroke-linecap="round"/>
+              <text x="55" y="-17" text-anchor="middle" class="structure-label">Canal Na⁺</text>
+            </g>
+
+            <path class="flow flow-na" d="M290 195 C290 225 290 240 290 257" fill="none" stroke="#dc815d" stroke-width="3" marker-end="url(#arrowNa)" opacity=".78"/>
+
+            <g class="structure pump-structure" data-info="bomba" tabindex="0" role="button" aria-label="Bomba de sódio e potássio" transform="translate(510 250)">
+              <path d="M20 24 C3 50 11 75 19 93 C27 111 15 139 25 166 C34 192 66 188 72 160 C77 136 70 119 79 99 C89 76 101 51 89 26 C80 8 61 1 52 19 C42 0 29 5 20 24Z" fill="url(#pumpGrad)" stroke="#9996ae" stroke-opacity=".48" stroke-width="2"/>
+              <path d="M93 24 C110 50 102 75 94 93 C86 111 98 139 88 166 C79 192 47 188 41 160 C36 136 43 119 34 99 C24 76 12 51 24 26 C33 8 52 1 61 19 C71 0 84 5 93 24Z" fill="url(#pumpGrad)" stroke="#9996ae" stroke-opacity=".48" stroke-width="2" opacity=".62"/>
+              <text x="56" y="-17" text-anchor="middle" class="structure-label">Bomba Na⁺/K⁺</text>
+            </g>
+
+            <path class="flow flow-na flow-up" d="M548 245 C530 215 520 198 505 178" fill="none" stroke="#dc815d" stroke-width="3" marker-end="url(#arrowNa)" opacity=".72"/>
+            <path class="flow flow-k flow-down" d="M595 180 C610 205 617 223 618 248" fill="none" stroke="#c6a04e" stroke-width="3" marker-end="url(#arrowK)" opacity=".72"/>
+
+            <g class="structure channel channel-k" data-info="canalK" tabindex="0" role="button" aria-label="Canal de potássio" transform="translate(805 260)">
+              <path d="M18 10 C3 37 3 65 10 90 C17 115 7 147 21 168 C34 183 52 168 50 148 C47 123 44 102 54 81 C64 61 61 39 54 22 C47 5 29 -5 18 10Z" fill="url(#channelK)" stroke="#c7ad87" stroke-opacity=".42" stroke-width="2"/>
+              <path d="M92 10 C107 37 107 65 100 90 C93 115 103 147 89 168 C76 183 58 168 60 148 C63 123 66 102 56 81 C46 61 49 39 56 22 C63 5 81 -5 92 10Z" fill="url(#channelK)" stroke="#c7ad87" stroke-opacity=".42" stroke-width="2"/>
+              <path d="M49 26 Q55 51 55 82 Q55 114 55 149" fill="none" stroke="#2a241e" stroke-width="20" stroke-linecap="round"/>
+              <text x="55" y="-17" text-anchor="middle" class="structure-label">Canal K⁺</text>
+            </g>
+
+            <path class="flow flow-k" d="M860 200 C860 226 860 240 860 256" fill="none" stroke="#c6a04e" stroke-width="3" marker-end="url(#arrowK)" opacity=".78"/>
+
+            <g class="structure channel channel-leak" data-info="vazamento" tabindex="0" role="button" aria-label="Canal de vazamento" transform="translate(1090 265)">
+              <path d="M18 8 C5 31 3 61 9 88 C15 117 7 145 20 164 C31 180 48 169 47 148 C45 117 43 101 53 82 C63 63 61 37 54 20 C48 5 29 -6 18 8Z" fill="url(#channelCool)" stroke="#9cb4c4" stroke-opacity=".44" stroke-width="2"/>
+              <path d="M92 8 C105 31 107 61 101 88 C95 117 103 145 90 164 C79 180 62 169 63 148 C65 117 67 101 57 82 C47 63 49 37 56 20 C62 5 81 -6 92 8Z" fill="url(#channelCool)" stroke="#9cb4c4" stroke-opacity=".44" stroke-width="2"/>
+              <path d="M50 26 Q55 54 55 82 Q55 116 55 145" fill="none" stroke="#1b252d" stroke-width="20" stroke-linecap="round"/>
+              <text x="55" y="-17" text-anchor="middle" class="structure-label">Canal vazante</text>
+            </g>
+
+            <g class="ion-layer intracellular-ions" aria-hidden="true">
+              <g class="ion ion-k ion-float-a" transform="translate(180 535)">
+                <ellipse rx="25" ry="15" fill="url(#kGradient)" stroke="#eedb9f" stroke-width="1.2"/>
+                <text y="5" text-anchor="middle">K⁺</text>
+              </g>
+              <g class="ion ion-k ion-float-c" transform="translate(360 595)">
+                <ellipse rx="25" ry="15" fill="url(#kGradient)" stroke="#eedb9f" stroke-width="1.2"/>
+                <text y="5" text-anchor="middle">K⁺</text>
+              </g>
+              <g class="ion ion-k ion-float-e" transform="translate(740 560)">
+                <ellipse rx="25" ry="15" fill="url(#kGradient)" stroke="#eedb9f" stroke-width="1.2"/>
+                <text y="5" text-anchor="middle">K⁺</text>
+              </g>
+              <g class="ion ion-k ion-float-b" transform="translate(980 600)">
+                <ellipse rx="25" ry="15" fill="url(#kGradient)" stroke="#eedb9f" stroke-width="1.2"/>
+                <text y="5" text-anchor="middle">K⁺</text>
+              </g>
+              <g class="ion ion-na ion-float-d" transform="translate(1110 540)">
+                <polygon points="0,-18 15,-9 15,9 0,18 -15,9 -15,-9" fill="url(#naGradient)" stroke="#efb396" stroke-width="1.3"/>
+                <text y="5" text-anchor="middle">Na⁺</text>
+              </g>
+            </g>
+
+            <g class="structure energy-complex" data-info="atp" tabindex="0" role="button" aria-label="ATP" transform="translate(520 486)">
+              <circle cx="0" cy="0" r="12" fill="#b7974f" opacity=".95"/>
+              <circle cx="24" cy="7" r="9" fill="#536477"/>
+              <circle cx="44" cy="12" r="9" fill="#536477"/>
+              <polygon points="72,-4 88,5 84,24 65,27 55,11" fill="#517b9a" stroke="#a8c1d2" stroke-opacity=".4"/>
+              <text x="40" y="58" class="energy-label" text-anchor="middle">ATP</text>
+            </g>
+
+            <g class="structure energy-complex" data-info="adp" tabindex="0" role="button" aria-label="ADP e fosfato" transform="translate(665 503)">
+              <circle cx="0" cy="0" r="9" fill="#536477"/>
+              <circle cx="21" cy="7" r="9" fill="#536477"/>
+              <polygon points="49,-4 65,5 61,24 42,27 32,11" fill="#517b9a" stroke="#a8c1d2" stroke-opacity=".4"/>
+              <circle cx="94" cy="14" r="11" fill="#768092"/>
+              <text x="45" y="58" class="energy-label" text-anchor="middle">ADP + Pi</text>
+            </g>
+          </svg>
+
+          <div class="membrane-nameplate">
+            <span class="nameplate-bracket"></span>
+            <div>
+              <strong>Membrana plasmática</strong>
+              <small>bicamada fosfolipídica</small>
+            </div>
+          </div>
+        </div>
+
+        <aside class="concentration-card" aria-label="Concentração dos íons">
+          <div class="concentration-head">
+            <span>Concentração</span>
+            <small>gradiente relativo</small>
+          </div>
+
+          <div class="gradient-columns">
+            <div class="gradient-col na-col">
+              <strong>Na⁺</strong>
+              <div class="gradient-bar">
+                <span class="plus">+</span>
+                <span class="minus">−</span>
+              </div>
+              <small>maior fora</small>
+            </div>
+
+            <div class="gradient-col k-col">
+              <strong>K⁺</strong>
+              <div class="gradient-bar">
+                <span class="plus">+</span>
+                <span class="minus">−</span>
+              </div>
+              <small>maior dentro</small>
+            </div>
+          </div>
+        </aside>
+
+        <div id="membraneInfo" class="membrane-info" aria-live="polite">
+          <span class="info-index">01</span>
+          <div>
+            <small id="infoType">ESTRUTURA</small>
+            <strong id="infoTitle">Bicamada fosfolipídica</strong>
+            <p id="infoText">Forma a barreira seletiva da célula e separa o meio extracelular do citoplasma.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="membrane-legend">
+        <div>
+          <span class="legend-symbol na-symbol">Na⁺</span>
+          <p><strong>Sódio</strong><small>predomina no meio extracelular</small></p>
+        </div>
+        <div>
+          <span class="legend-symbol k-symbol">K⁺</span>
+          <p><strong>Potássio</strong><small>predomina no meio intracelular</small></p>
+        </div>
+        <div class="legend-help">
+          <span>↗</span>
+          <p><strong>Explore o modelo</strong><small>passe o mouse ou toque em uma estrutura</small></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-approved1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+</body>
+</html>
