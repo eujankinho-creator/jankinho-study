@@ -2655,3 +2655,185 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   .stage-footer{padding:8px!important}
 }
 
+
+
+/* =========================================================
+   ELECTROCHEMICAL GRADIENT V12
+========================================================= */
+
+.gradient-panel{
+  order:0;
+  display:grid;
+  gap:7px;
+  padding:12px;
+  border:1px solid var(--mv-border);
+  border-radius:12px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(var(--mv-accent-rgb),.075),transparent 42%),
+    var(--mv-surface-soft);
+}
+
+.gradient-panel-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--mv-border);
+}
+
+.gradient-panel-head>div{
+  min-width:0;
+  display:grid;
+  gap:3px;
+}
+
+.gradient-panel-head small{
+  color:var(--mv-accent-2);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+
+.gradient-panel-head strong{
+  color:var(--mv-theme-text);
+  font-size:11px;
+}
+
+.gradient-panel-head>span{
+  flex:0 0 auto;
+  padding:4px 6px;
+  border:1px solid var(--mv-border-strong);
+  border-radius:7px;
+  background:rgba(var(--mv-accent-rgb),.055);
+  color:var(--mv-theme-soft);
+  font-size:7px;
+  font-weight:900;
+}
+
+.gradient-ion-row{
+  display:grid;
+  grid-template-columns:31px minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  min-height:39px;
+  padding:6px 7px;
+  border:1px solid var(--mv-border);
+  border-radius:9px;
+  background:color-mix(in srgb,var(--mv-surface-soft) 84%,transparent);
+}
+
+.gradient-ion-symbol{
+  width:29px;
+  height:29px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  font-size:8px;
+  font-weight:950;
+}
+
+.gradient-ion-row[data-ion="na"] .gradient-ion-symbol{
+  color:#fff7f2;
+  background:linear-gradient(145deg,#ff8c68,#ff5e36 58%,#c93f20);
+  box-shadow:0 0 12px rgba(255,95,52,.10);
+}
+
+.gradient-ion-row[data-ion="k"] .gradient-ion-symbol{
+  color:#342705;
+  background:linear-gradient(145deg,#ffe37b,#f6c746 58%,#c9951f);
+  box-shadow:0 0 12px rgba(247,201,70,.10);
+}
+
+.gradient-ion-row[data-ion="cl"] .gradient-ion-symbol{
+  color:#effbff;
+  background:linear-gradient(145deg,#62c5ef,#328cb6 58%,#1e6485);
+  box-shadow:0 0 12px rgba(79,180,225,.10);
+}
+
+.gradient-ion-row>div{
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+
+.gradient-ion-row>div strong{
+  color:var(--mv-theme-soft);
+  font-size:9px;
+}
+
+.gradient-ion-row>div small{
+  color:var(--mv-theme-muted);
+  font-size:7px;
+}
+
+.gradient-ion-row>b{
+  padding:3px 5px;
+  border-radius:6px;
+  font-size:6px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.gradient-ion-row>b.is-open{
+  color:var(--mv-accent-2);
+  border:1px solid var(--mv-border-strong);
+  background:rgba(var(--mv-accent-rgb),.07);
+}
+
+.gradient-ion-row>b.is-closed{
+  color:var(--mv-theme-muted);
+  border:1px solid var(--mv-border);
+  background:rgba(255,255,255,.018);
+}
+
+.gradient-panel>p{
+  margin:1px 0 0;
+  color:var(--mv-theme-muted);
+  font-size:8px;
+  line-height:1.45;
+}
+
+/* Campo elétrico sutil: fora +, dentro −. */
+.membrane-stage::before{
+  content:"CAMPO ELÉTRICO  +  →  −";
+  position:absolute;
+  z-index:2;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%) rotate(90deg);
+  transform-origin:right center;
+  color:rgba(var(--mv-accent-rgb),.18);
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.14em;
+  pointer-events:none;
+}
+
+/* O inspector ganha espaço para o painel eletroquímico. */
+.stage-footer .gradient-panel{order:0}
+.stage-footer .selection-info{order:1}
+.stage-footer .fluid-note{order:2}
+
+@media(max-width:1360px){
+  .gradient-panel{
+    grid-column:1 / -1;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .gradient-panel-head,
+  .gradient-panel>p{
+    grid-column:1 / -1;
+  }
+}
+
+@media(max-width:700px){
+  .gradient-panel{
+    grid-template-columns:1fr;
+  }
+  .gradient-panel-head,
+  .gradient-panel>p{
+    grid-column:1;
+  }
+  .membrane-stage::before{display:none}
+}
+

@@ -13,6 +13,24 @@
   var clearButton=document.getElementById("clearStage");
   var removeButton=document.getElementById("removeSelected");
   var collisionToast=document.getElementById("collisionToast");
+  var gradientVm=document.getElementById("gradientVm");
+  var gradientUi={
+    na:{
+      direction:document.getElementById("gradientNaDirection"),
+      counts:document.getElementById("gradientNaCounts"),
+      gate:document.getElementById("gradientNaGate")
+    },
+    k:{
+      direction:document.getElementById("gradientKDirection"),
+      counts:document.getElementById("gradientKCounts"),
+      gate:document.getElementById("gradientKGate")
+    },
+    cl:{
+      direction:document.getElementById("gradientClDirection"),
+      counts:document.getElementById("gradientClCounts"),
+      gate:document.getElementById("gradientClGate")
+    }
+  };
 
   var selected=null;
   var placedCount=0;
@@ -29,6 +47,10 @@
   var physicsRaf=0;
   var lastPhysicsTime=0;
   var lastAssociationTime=0;
+  var lastGradientUpdate=0;
+  var membraneVoltageMv=-70;
+  var thermalVoltageMv=26.7;
+  var chemicalWeight=1.35;
 
   var catalogue={
     "canal-na":{name:"Canal de sódio (Na⁺)",category:"PROTEÍNA TRANSMEMBRANA",text:"Canal seletivo para Na⁺. O sódio atravessa a bicamada somente quando passa pelo poro deste canal.",label:"Canal Na⁺",kind:"protein",art:"channel"},
@@ -82,8 +104,102 @@
     });
   }
 
+  function ionCharge(type){
+    if(type==="na"||type==="k")return 1;
+    if(type==="cl")return -1;
+    return 0;
+  }
+
   function isCationType(type){
-    return type==="na"||type==="k";
+    return ionCharge(type)>0;
+  }
+
+  function ionCompartmentCounts(type){
+    var b=barrier();
+    var counts={EC:0,IC:0};
+
+    layer.querySelectorAll('.placed-molecule[data-type="'+type+'"]').forEach(function(el){
+      if(!el.isConnected||el.classList.contains("docked")||el.classList.contains("craft-consumed"))return;
+      var y=parseFloat(el.style.top)||0;
+      var side=sideOf(y,b);
+      if(side==="EC"||side==="IC")counts[side]++;
+    });
+
+    return counts;
+  }
+
+  function electrochemicalDriveECtoIC(type){
+    var charge=ionCharge(type);
+    if(!charge)return 0;
+
+    var counts=ionCompartmentCounts(type);
+    var chemical=chemicalWeight*Math.log((counts.EC+.5)/(counts.IC+.5));
+    var electrical=-(charge*membraneVoltageMv)/thermalVoltageMv;
+    return chemical+electrical;
+  }
+
+  function passiveDriveForSide(type,fromSide){
+    if(type==="h2o")return .5;
+    var charge=ionCharge(type);
+    if(!charge)return -Infinity;
+
+    var inward=electrochemicalDriveECtoIC(type);
+    return fromSide==="EC"?inward:-inward;
+  }
+
+  function passiveTransportAllowed(type,fromSide){
+    if(type==="h2o")return true;
+    return passiveDriveForSide(type,fromSide)>.12;
+  }
+
+  function hasCompatibleGate(type){
+    var allowed=gates[type]||[];
+    if(!allowed.length)return false;
+    return Array.from(layer.querySelectorAll(".placed-protein")).some(function(protein){
+      return allowed.indexOf(protein.dataset.type)!==-1;
+    });
+  }
+
+  function gradientDirectionText(type){
+    var drive=electrochemicalDriveECtoIC(type);
+    if(Math.abs(drive)<.18)return "quase em equilíbrio";
+    return drive>0?"EC → IC":"IC → EC";
+  }
+
+  function updateGradientPanel(now){
+    if(now-lastGradientUpdate<180)return;
+    lastGradientUpdate=now;
+
+    if(gradientVm)gradientVm.textContent="Vm ≈ "+membraneVoltageMv+" mV";
+
+    ["na","k","cl"].forEach(function(type){
+      var ui=gradientUi[type];
+      if(!ui||!ui.direction)return;
+
+      var counts=ionCompartmentCounts(type);
+      var drive=electrochemicalDriveECtoIC(type);
+      var gateOpen=hasCompatibleGate(type);
+
+      ui.direction.textContent=gradientDirectionText(type);
+      ui.counts.textContent="EC "+counts.EC+" · IC "+counts.IC;
+      ui.gate.textContent=gateOpen?"via disponível":"sem via";
+      ui.gate.classList.toggle("is-open",gateOpen);
+      ui.gate.classList.toggle("is-closed",!gateOpen);
+      ui.direction.dataset.drive=drive>0?".in":drive<0?".out":".eq";
+    });
+  }
+
+  function applyMembraneElectricField(el,motion,dt,b){
+    var charge=ionCharge(el.dataset.type);
+    if(!charge)return;
+
+    var y=parseFloat(el.style.top)||0;
+    var distance=Math.abs(y-b.center);
+    var range=Math.max(120,b.height*1.55);
+    var proximity=Math.max(.18,1-Math.min(distance/range,1));
+    var acceleration=34*proximity*charge;
+
+    motion.vy+=acceleration*dt;
   }
 
   function makeLipid(delay,flip){
@@ -207,6 +323,19 @@
     collisionToast.classList.add("is-visible");
     clearTimeout(collisionTimer);
     collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1000);
+  }
+
+  function showGradientBlock(type,fromSide){
+    var now=performance.now();
+    if(now-lastCollisionAt<520)return;
+    lastCollisionAt=now;
+
+    var label=type==="na"?"Na⁺":type==="k"?"K⁺":type==="cl"?"Cl⁻":"íon";
+    var direction=gradientDirectionText(type);
+    collisionToast.textContent=label+": gradiente eletroquímico favorece "+direction+". O canal passivo não força o fluxo contrário.";
+    collisionToast.classList.add("is-visible");
+    clearTimeout(collisionTimer);
+    collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1400);
   }
 
   function createPlaced(type,kind,x,y,options){
@@ -744,13 +873,17 @@
         var horizontalDistance=Math.abs(desiredX-gateX);
 
         if(horizontalDistance<=30){
-          m.gate=gate;
-          m.transit={gate:gate,from:m.startSide};
-          gate.classList.add("channel-pass");
-          el.classList.add("is-channeling");
-          el.classList.remove("is-blocked");
-          scheduleMoveAgain();
-          return;
+          if(passiveTransportAllowed(type,m.startSide)){
+            m.gate=gate;
+            m.transit={gate:gate,from:m.startSide};
+            gate.classList.add("channel-pass");
+            el.classList.add("is-channeling");
+            el.classList.remove("is-blocked");
+            scheduleMoveAgain();
+            return;
+          }
+
+          showGradientBlock(type,m.startSide);
         }
       }
 
@@ -846,7 +979,7 @@
   });
 
   clearButton.addEventListener("click",function(){
-    layer.textContent="";placedCount=0;selectElement(null);clearArmedTool();updateCounter();
+    layer.textContent="";placedCount=0;selectElement(null);clearArmedTool();updateCounter();updateGradientPanel(performance.now()+500);
   });
 
   function removeSelectedElement(){
@@ -900,6 +1033,7 @@
 
     var side=sideOf(y,b);
     if(side==="MP")return null;
+    if(!passiveTransportAllowed(el.dataset.type,side))return null;
 
     var surfaceDistance=side==="EC"?Math.abs((y+el.offsetHeight/2)-b.top):Math.abs((y-el.offsetHeight/2)-b.bottom);
     if(surfaceDistance>72)return null;
@@ -1015,42 +1149,62 @@
     },340);
   }
 
-  function applyCationRepulsion(molecules){
-    var cations=molecules.filter(function(el){
-      return isCationType(el.dataset.type)&&!el.classList.contains("docked")&&!el.dataset.autoTransport&&!el.dataset.autoBinding;
+  function applyElectrostaticInteractions(molecules){
+    var ions=molecules.filter(function(el){
+      return ionCharge(el.dataset.type)!==0 &&
+        !el.classList.contains("docked") &&
+        !el.dataset.autoTransport &&
+        !el.dataset.autoBinding;
     });
 
     var b=barrier();
 
-    for(var i=0;i<cations.length;i++){
-      var a=cations[i];
+    for(var i=0;i<ions.length;i++){
+      var a=ions[i];
       var ax=parseFloat(a.style.left)||0;
       var ay=parseFloat(a.style.top)||0;
       var aside=sideOf(ay,b);
       var am=moleculeMotion.get(a);
-      if(!am)continue;
+      var qa=ionCharge(a.dataset.type);
+      if(!am||aside==="MP")continue;
 
-      for(var j=i+1;j<cations.length;j++){
-        var z=cations[j];
+      for(var j=i+1;j<ions.length;j++){
+        var z=ions[j];
         var zx=parseFloat(z.style.left)||0;
         var zy=parseFloat(z.style.top)||0;
-        if(sideOf(zy,b)!==aside)continue;
+        var zside=sideOf(zy,b);
+        if(zside!==aside)continue;
+
+        var zm=moleculeMotion.get(z);
+        var qz=ionCharge(z.dataset.type);
+        if(!zm)continue;
 
         var dx=ax-zx;
         var dy=ay-zy;
         var d2=dx*dx+dy*dy;
-        if(d2<=1||d2>2800)continue;
+        if(d2<=1||d2>4900)continue;
 
         var d=Math.sqrt(d2);
-        var force=(54-d)/54;
-        if(force<=0)continue;
-
         var nx=dx/d;
         var ny=dy/d;
-        var zm=moleculeMotion.get(z);
-        if(!zm)continue;
 
-        var impulse=18*force;
+        /* curto alcance: volume excluído impede sobreposição */
+        if(d<22){
+          var steric=(22-d)/22;
+          var push=32*steric;
+          am.vx+=nx*push;
+          am.vy+=ny*push;
+          zm.vx-=nx*push;
+          zm.vy-=ny*push;
+          continue;
+        }
+
+        var sameSign=qa*qz>0;
+        var falloff=Math.max(0,(70-d)/70);
+        if(falloff<=0)continue;
+
+        var impulse=(sameSign?18:-12)*falloff;
+
         am.vx+=nx*impulse;
         am.vy+=ny*impulse;
         zm.vx-=nx*impulse;
@@ -1066,15 +1220,17 @@
       return el.isConnected&&!el.classList.contains("docked")&&!el.classList.contains("craft-consumed");
     });
 
+    updateGradientPanel(now);
     if(!molecules.length)return;
 
     molecules.forEach(initMoleculeMotion);
-    applyCationRepulsion(molecules);
+    applyElectrostaticInteractions(molecules);
 
     var b=barrier();
     var width=stage.clientWidth;
     var height=stage.clientHeight;
     var associationTick=now-lastAssociationTime>140;
+    updateGradientPanel(now);
 
     molecules.forEach(function(el){
       if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1"||el.classList.contains("transporting"))return;
@@ -1106,6 +1262,7 @@
       var jitter=13;
       motion.vx+=(Math.random()-.5)*jitter*dt;
       motion.vy+=(Math.random()-.5)*jitter*dt;
+      applyMembraneElectricField(el,motion,dt,b);
 
       var damping=Math.pow(.86,dt);
       motion.vx*=damping;
@@ -1216,6 +1373,7 @@
   buildBilayer();
   renderDefaultInfo();
   updateCounter();
+  updateGradientPanel(performance.now()+500);
   loadUser();
   physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
 })();

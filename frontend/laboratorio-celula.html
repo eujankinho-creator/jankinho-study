@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-theme-layout11">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-electrochem12">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -72,8 +72,7 @@
           <span class="membrane-kicker">CORTEX LAB · MEMBRANA VIVA</span>
           <h1>Construa sua <em>membrana.</em></h1>
           <p>
-            A bicamada começa vazia. Arraste proteínas para a membrana e moléculas para o meio
-            intra ou extracelular. A bicamada continua em movimento para representar o mosaico fluido.
+            A bicamada começa vazia. Íons livres agora obedecem difusão, gradiente químico e gradiente elétrico. Eles só atravessam a MP quando existe uma via compatível.
           </p>
         </div>
 
@@ -219,6 +218,45 @@
           </div>
 
           <div class="stage-footer">
+            <div id="gradientPanel" class="gradient-panel">
+              <div class="gradient-panel-head">
+                <div>
+                  <small>GRADIENTE ELETROQUÍMICO</small>
+                  <strong>Difusão + campo elétrico</strong>
+                </div>
+                <span id="gradientVm">Vm ≈ −70 mV</span>
+              </div>
+
+              <div class="gradient-ion-row" data-ion="na">
+                <span class="gradient-ion-symbol">Na⁺</span>
+                <div>
+                  <strong id="gradientNaDirection">—</strong>
+                  <small id="gradientNaCounts">EC 0 · IC 0</small>
+                </div>
+                <b id="gradientNaGate">sem via</b>
+              </div>
+
+              <div class="gradient-ion-row" data-ion="k">
+                <span class="gradient-ion-symbol">K⁺</span>
+                <div>
+                  <strong id="gradientKDirection">—</strong>
+                  <small id="gradientKCounts">EC 0 · IC 0</small>
+                </div>
+                <b id="gradientKGate">sem via</b>
+              </div>
+
+              <div class="gradient-ion-row" data-ion="cl">
+                <span class="gradient-ion-symbol">Cl⁻</span>
+                <div>
+                  <strong id="gradientClDirection">—</strong>
+                  <small id="gradientClCounts">EC 0 · IC 0</small>
+                </div>
+                <b id="gradientClGate">sem via</b>
+              </div>
+
+              <p>Fluxo passivo ocorre apenas quando o gradiente eletroquímico favorece a direção e existe um canal compatível.</p>
+            </div>
+
             <div class="fluid-note">
               <span class="fluid-icon"><i></i><i></i><i></i></span>
               <p>
@@ -242,7 +280,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-theme-layout11"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-electrochem12"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
