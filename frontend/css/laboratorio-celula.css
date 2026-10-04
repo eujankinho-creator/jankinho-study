@@ -3691,3 +3691,74 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .placed-protein[data-type="bomba"][data-pump-state="atp-products"] .nak-atp-groove{
   opacity:.18;
 }
+
+
+/* =========================================================
+   CLEAN MOLECULES + ATP GROOVE V48
+   No selection boxes or artificial atom/cavity outlines.
+========================================================= */
+
+.placed-molecule,
+.placed-molecule.is-selected,
+.placed-molecule.is-dragging,
+.placed-molecule.docked,
+.placed-molecule.auto-associating,
+.placed-molecule.channel-transit,
+.placed-molecule.pump-transit{
+  border:0!important;
+  outline:0!important;
+  outline-offset:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+
+.ghost-molecule{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  color:var(--mv-soft)!important;
+}
+
+.molecule-ion,
+.molecule-o2 i,
+.molecule-co2 i,
+.molecule-glucose,
+.molecule-atp i,
+.molecule-adp i,
+.molecule-pi{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+.molecule-atp i,
+.molecule-adp i{
+  box-shadow:none!important;
+}
+
+.placed-protein[data-type="bomba"] .nak-pump-art .pump-slot,
+.placed-protein[data-type="bomba"] .nak-pump-art .pump-slot.pump-site-active,
+.placed-protein[data-type="bomba"] .nak-pump-art .pump-slot.occupied{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+.placed-protein[data-type="bomba"] .nak-pump-art .nak-site-atp{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:rgba(38,112,88,.13)!important;
+}
+
+.placed-protein[data-type="bomba"] .nak-atp-groove{
+  stroke:none!important;
+  stroke-width:0!important;
+  fill:#79c9b5!important;
+}
+
+.placed-protein[data-type="bomba"] .nak-phosphate{
+  border:0!important;
+  box-shadow:none!important;
+}
