@@ -89,8 +89,6 @@
   var chemicalWeight=1.35;
 
   var catalogue={
-    "canal-na":{name:"Canal de sódio (Na⁺)",category:"CANAL PASSIVO",text:"Canal seletivo didático para Na⁺.",label:"Canal Na⁺",kind:"protein",art:"channel"},
-    "canal-k":{name:"Canal de potássio (K⁺)",category:"CANAL PASSIVO",text:"Canal seletivo didático para K⁺.",label:"Canal K⁺",kind:"protein",art:"channel"},
     "vazante-na":{name:"Canal de vazamento de Na⁺",category:"CANAL DE VAZAMENTO",text:"Canal de Na⁺ sempre aberto. O cruzamento é estocástico e enviesado pelo gradiente eletroquímico.",label:"Leak Na⁺",kind:"protein",art:"channel"},
     "vazante":{name:"Canal de vazamento de K⁺",category:"CANAL DE VAZAMENTO",text:"Canal de K⁺ sempre aberto. O cruzamento é estocástico e enviesado pelo gradiente eletroquímico.",label:"Leak K⁺",kind:"protein",art:"channel"},
     "vg-na":{name:"Canal de Na⁺ dependente de voltagem",category:"CANAL VOLTAGEM-DEPENDENTE",text:"Abre após uma curta latência em −50 mV e fecha em −70 mV ou +30 mV.",label:"Na⁺ voltagem",kind:"protein",art:"channel"},
@@ -98,7 +96,6 @@
     "lg-na":{name:"Canal de Na⁺ dependente de ligante",category:"CANAL LIGANTE-DEPENDENTE",text:"Um ligante compatível se liga ao canal, ele abre por alguns segundos e depois fecha.",label:"Na⁺ ligante",kind:"protein",art:"channel"},
     "lg-k":{name:"Canal de K⁺ dependente de ligante",category:"CANAL LIGANTE-DEPENDENTE",text:"Um ligante compatível se liga ao canal, ele abre por alguns segundos e depois fecha.",label:"K⁺ ligante",kind:"protein",art:"channel"},
     "bomba":{name:"Bomba Na⁺/K⁺-ATPase",category:"TRANSPORTE ATIVO",text:"Ciclo sequencial: 3 Na⁺ intracelulares, ATP, liberação de Na⁺ no exterior, 2 K⁺ externos e retorno.",label:"Bomba Na⁺/K⁺",kind:"protein",art:"pump"},
-    "aquaporina":{name:"Aquaporina",category:"CANAL DE ÁGUA",text:"Canal seletivo para água.",label:"Aquaporina",kind:"protein",art:"channel"},
     "sglt":{name:"Cotransportador Na⁺/glicose",category:"TRANSPORTE ATIVO SECUNDÁRIO",text:"Usa o gradiente de Na⁺ para transportar glicose para o interior, com dois Na⁺ por glicose neste modelo didático.",label:"Na⁺/Glicose",kind:"protein",art:"cotransporter"},
     "o2":{name:"Oxigênio (O₂)",category:"GÁS",text:"Molécula apolar pequena: difunde-se diretamente pela bicamada, com viés do gradiente químico.",label:"O₂",kind:"molecule"},
     "co2":{name:"Dióxido de carbono (CO₂)",category:"GÁS",text:"Molécula pequena: difunde-se diretamente pela bicamada, com viés do gradiente químico.",label:"CO₂",kind:"molecule"},
@@ -1150,6 +1147,9 @@
     }
     if(type==="bomba"){
       return '<span class="ghost-protein"><span class="protein-art pump-art"><span class="pump-lobe pump-lobe-left"></span><span class="pump-lobe pump-lobe-right"></span><span class="pump-chamber"></span><span class="pump-atp-cavity"></span><b class="pump-ratio">3:2</b></span></span>';
+    }
+    if(type==="sglt"){
+      return '<span class="ghost-protein"><span class="protein-art sglt-art"><i class="sglt-site sglt-na-left">Na</i><i class="sglt-site sglt-glucose">G</i><i class="sglt-site sglt-na-right">Na</i></span></span>';
     }
     return '<span class="ghost-protein"><span class="protein-art protein-channel"><i class="protein-pore"></i></span></span>';
   }
