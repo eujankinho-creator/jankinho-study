@@ -8051,3 +8051,68 @@ body.cell-lab-view{
     -8px 0 0 rgba(90,67,16,.11),
     8px 0 0 rgba(90,67,16,.11)!important;
 }
+
+
+/* =========================================================
+   REAL LIGAND RECEPTOR DOM V72
+   The visible receptor is now the exact logical binding target.
+========================================================= */
+
+/* Disable the old pseudo-element receptor drawings. */
+.membrane-stage .placed-protein[data-type="lg-na"]::after,
+.membrane-stage .placed-protein[data-type="lg-k"]::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Real receptor element: sits on the extracellular face of the channel. */
+.membrane-stage .ligand-binding-site{
+  position:absolute!important;
+  z-index:26!important;
+  left:50%!important;
+  top:-10px!important;
+  width:24px!important;
+  height:24px!important;
+  transform:translateX(-50%)!important;
+  pointer-events:none!important;
+  filter:none!important;
+  box-shadow:none!important;
+  transition:transform .16s ease,opacity .16s ease!important;
+}
+
+/* Na ligand receptor: hollow magenta triangle. */
+.membrane-stage .ligand-binding-site-na{
+  background:rgba(255,63,120,.16)!important;
+  border:1px solid rgba(122,24,67,.58)!important;
+  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
+}
+
+/* K ligand receptor: hollow lime star. */
+.membrane-stage .ligand-binding-site-k{
+  display:grid!important;
+  place-items:center!important;
+  background:transparent!important;
+  color:#c8ff3d!important;
+  -webkit-text-stroke:.65px rgba(49,73,13,.7)!important;
+  font-size:23px!important;
+  line-height:1!important;
+}
+
+.membrane-stage .ligand-binding-site-k::before{
+  content:"☆"!important;
+}
+
+/* Binding affordance stays subtle and localized to the actual receptor. */
+.membrane-stage .placed-protein.ligand-drop-target .ligand-binding-site{
+  transform:translateX(-50%) scale(1.12)!important;
+}
+
+.membrane-stage .placed-protein[data-bound-ligand-id] .ligand-binding-site{
+  opacity:.72!important;
+}
+
+/* Bound ligand is slightly smaller so receptor remains readable beneath it. */
+.membrane-stage .free-ligand[data-ligand-bound]{
+  z-index:62!important;
+  transform:translate(-50%,-50%) scale(.86)!important;
+}
