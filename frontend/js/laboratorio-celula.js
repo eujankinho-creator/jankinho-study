@@ -35,8 +35,9 @@
     "k":{name:"Potássio (K⁺)",category:"ÍON",text:"K⁺ não atravessa diretamente os fosfolipídios. Use Canal K⁺, canal vazante ou a bomba.",label:"K⁺",kind:"molecule"},
     "cl":{name:"Cloreto (Cl⁻)",category:"ÍON",text:"Sem canal de Cl⁻ nesta versão, o íon colide com a bicamada e não a atravessa.",label:"Cl⁻",kind:"molecule"},
     "h2o":{name:"Água (H₂O)",category:"MOLÉCULA",text:"Nesta simulação a travessia rápida da água ocorre por aquaporina.",label:"H₂O",kind:"molecule"},
-    "atp":{name:"ATP",category:"ENERGIA",text:"ATP não atravessa a bicamada. Arraste-o para o encaixe energético da bomba pelo lado intracelular.",label:"ATP",kind:"molecule"},
-    "adp":{name:"ADP + Pi",category:"PRODUTO ENERGÉTICO",text:"Produtos da hidrólise do ATP após um ciclo completo da bomba.",label:"ADP+Pi",kind:"molecule"}
+    "atp":{name:"ATP",category:"ENERGIA",text:"ATP não atravessa a bicamada. Pode ser usado pela bomba ou sintetizado nesta simulação aproximando Pi de uma molécula de ADP.",label:"ATP",kind:"molecule"},
+    "adp":{name:"ADP",category:"NUCLEOTÍDEO",text:"ADP é formado após o consumo de ATP. Aproxime um fosfato inorgânico (Pi) para sintetizar ATP.",label:"ADP",kind:"molecule"},
+    "pi":{name:"Fosfato inorgânico (Pi)",category:"GRUPO FOSFATO",text:"Pi pode se ligar ao ADP no modo de craft molecular para formar ATP.",label:"Pi",kind:"molecule"}
   };
 
   var gates={na:["canal-na"],k:["canal-k","vazante"],h2o:["aquaporina"]};
@@ -276,7 +277,12 @@
       var created=createPlaced(d.type,d.kind,p.x,p.y);
       if(created&&d.kind==="molecule"){
         var directSlot=findDockTarget(created,p.x,p.y);
-        if(directSlot)dockElement(created,directSlot);
+        if(directSlot){
+          dockElement(created,directSlot);
+        }else{
+          var directCraft=findCraftTarget(created,p.x,p.y);
+          if(directCraft)craftATP(created,directCraft);
+        }
       }
     }else if(!d.moved){
       armedHint.hidden=false;
@@ -353,6 +359,80 @@
     if(slot)slot.classList.add("slot-ready");
   }
 
+  function craftPairType(type){
+    if(type==="adp")return "pi";
+    if(type==="pi")return "adp";
+    return null;
+  }
+
+  function findCraftTarget(el,x,y){
+    var partnerType=craftPairType(el.dataset.type);
+    if(!partnerType)return null;
+
+    var b=barrier();
+    var sourceSide=sideOf(y,b);
+    if(sourceSide==="MP")return null;
+
+    var best=null;
+    var bestDistance=Infinity;
+
+    layer.querySelectorAll('.placed-molecule[data-type="'+partnerType+'"]:not(.docked)').forEach(function(candidate){
+      if(candidate===el)return;
+      var cx=parseFloat(candidate.style.left)||0;
+      var cy=parseFloat(candidate.style.top)||0;
+      if(sideOf(cy,b)!==sourceSide)return;
+
+      var d=Math.hypot(cx-x,cy-y);
+      if(d<44&&d<bestDistance){
+        best=candidate;
+        bestDistance=d;
+      }
+    });
+
+    return best;
+  }
+
+  function markCraftTarget(target){
+    layer.querySelectorAll(".craft-ready").forEach(function(node){node.classList.remove("craft-ready")});
+    if(target)target.classList.add("craft-ready");
+  }
+
+  function craftATP(a,b){
+    if(!a||!b||!a.isConnected||!b.isConnected)return null;
+
+    var ax=parseFloat(a.style.left)||0;
+    var ay=parseFloat(a.style.top)||0;
+    var bx=parseFloat(b.style.left)||0;
+    var by=parseFloat(b.style.top)||0;
+    var x=(ax+bx)/2;
+    var y=(ay+by)/2;
+
+    if(selected===a||selected===b)selected=null;
+
+    a.classList.add("craft-consumed");
+    b.classList.add("craft-consumed");
+
+    setTimeout(function(){
+      if(a.isConnected)a.remove();
+      if(b.isConnected)b.remove();
+
+      var atp=createPlaced("atp","molecule",x,y,{select:false});
+      if(atp){
+        atp.classList.add("craft-created");
+        setTimeout(function(){if(atp.isConnected)atp.classList.remove("craft-created")},700);
+        selectElement(atp);
+      }
+      updateCounter();
+    },180);
+
+    collisionToast.textContent="Craft molecular: ADP + Pi → ATP";
+    collisionToast.classList.add("is-visible");
+    clearTimeout(collisionTimer);
+    collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1200);
+
+    return true;
+  }
+
   function dockElement(el,slot){
     if(!slot)return;
     releaseSlotFor(el);
@@ -425,7 +505,9 @@
 
       if(atpEl){
         atpEl.remove();
-        createPlaced("adp","molecule",Math.min(stage.clientWidth-50,px+70),b.bottom+56,{select:false});
+        var productY=b.bottom+58;
+        createPlaced("adp","molecule",Math.min(stage.clientWidth-64,px+62),productY,{select:false});
+        createPlaced("pi","molecule",Math.min(stage.clientWidth-30,px+104),productY+4,{select:false});
       }
       updateCounter();
 
@@ -452,7 +534,7 @@
       offsetX:p.x-left,offsetY:p.y-top,
       startSide:el.dataset.kind==="molecule"?sideOf(top,b):"MP",
       clientX:event.clientX,clientY:event.clientY,
-      gate:null,readySlot:null,transit:null,
+      gate:null,readySlot:null,craftTarget:null,transit:null,
       lastX:left,lastY:top
     };
     el.classList.add("is-dragging");
@@ -567,6 +649,8 @@
 
     var directPumpSlot=findDockTarget(el,desiredX,desiredY);
     if(directPumpSlot){
+      m.craftTarget=null;
+      markCraftTarget(null);
       var dockPoint=slotStagePoint(directPumpSlot);
       var dockX=limitStep(currentX,dockPoint.x,10);
       var dockY=limitStep(currentY,dockPoint.y,10);
@@ -579,6 +663,28 @@
       el.classList.remove("is-blocked","is-channeling");
       clearGateGlow();
       if(Math.abs(dockPoint.x-dockX)>.5||Math.abs(dockPoint.y-dockY)>.5)scheduleMoveAgain();
+      return;
+    }
+
+    m.readySlot=null;
+    markReadySlot(null);
+
+    var nearbyCraft=findCraftTarget(el,desiredX,desiredY);
+    m.craftTarget=nearbyCraft;
+    markCraftTarget(nearbyCraft);
+
+    if(nearbyCraft){
+      var craftX=parseFloat(nearbyCraft.style.left)||desiredX;
+      var craftY=parseFloat(nearbyCraft.style.top)||desiredY;
+      var nextCraftX=limitStep(currentX,craftX,12);
+      var nextCraftY=limitStep(currentY,craftY,12);
+      el.style.left=nextCraftX+"px";
+      el.style.top=nextCraftY+"px";
+      m.lastX=nextCraftX;
+      m.lastY=nextCraftY;
+      el.classList.remove("is-blocked","is-channeling");
+      clearGateGlow();
+      if(Math.abs(craftX-nextCraftX)>.5||Math.abs(craftY-nextCraftY)>.5)scheduleMoveAgain();
       return;
     }
 
@@ -647,10 +753,13 @@
       m.transit=null;
     }else if(m.readySlot&&m.el.dataset.kind==="molecule"){
       dockElement(m.el,m.readySlot);
+    }else if(m.craftTarget&&m.el.dataset.kind==="molecule"){
+      craftATP(m.el,m.craftTarget);
     }
 
     m.el.classList.remove("is-dragging","is-blocked","is-channeling");
     markReadySlot(null);
+    markCraftTarget(null);
     clearGateGlow();
     try{m.el.releasePointerCapture(m.pointerId)}catch(_){}
     moving=null;

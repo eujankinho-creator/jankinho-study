@@ -1979,3 +1979,65 @@
   transform:translate(-50%,-50%) scale(.72)!important;
 }
 
+
+
+/* Craft molecular — ADP + Pi -> ATP */
+.molecule-tool[data-type="pi"]{
+  --item-accent:#a9b3ff;
+  background:linear-gradient(135deg,rgba(129,139,236,.09),rgba(255,255,255,.008));
+}
+.molecule-tool[data-type="pi"] strong{color:#bdc5ff!important}
+
+.placed-molecule[data-type="adp"],
+.drag-ghost .ghost-molecule[data-type="adp"]{
+  color:#eef0ff!important;
+  background:linear-gradient(145deg,#777bc1,#50558f 58%,#34375f)!important;
+  border-color:rgba(193,198,255,.42)!important;
+  box-shadow:0 0 13px rgba(117,126,221,.14)!important;
+}
+
+.placed-molecule[data-type="pi"],
+.drag-ghost .ghost-molecule[data-type="pi"]{
+  color:#f3f4ff!important;
+  background:radial-gradient(circle at 35% 30%,#dce0ff 0 10%,#9da6ef 42%,#5962b5 100%)!important;
+  border-color:rgba(218,222,255,.52)!important;
+  border-radius:50%!important;
+  min-width:30px!important;
+  width:30px!important;
+  padding:0!important;
+  box-shadow:0 0 13px rgba(123,134,232,.16)!important;
+}
+
+.placed-molecule.craft-ready{
+  outline:1px solid rgba(226,236,255,.68);
+  outline-offset:4px;
+  box-shadow:
+    0 0 0 4px rgba(131,151,238,.09),
+    0 0 24px rgba(131,151,238,.28)!important;
+  animation:craftReadyPulse .72s ease-in-out infinite alternate!important;
+}
+
+@keyframes craftReadyPulse{
+  from{scale:1}
+  to{scale:1.08}
+}
+
+.placed-molecule.craft-consumed{
+  pointer-events:none;
+  animation:craftConsume .2s ease forwards!important;
+}
+
+@keyframes craftConsume{
+  to{scale:.25;opacity:0;filter:blur(2px)}
+}
+
+.placed-molecule.craft-created{
+  animation:craftCreate .65s cubic-bezier(.2,.8,.25,1)!important;
+}
+
+@keyframes craftCreate{
+  0%{scale:.25;opacity:0;filter:drop-shadow(0 0 22px rgba(204,179,255,.8))}
+  55%{scale:1.18;opacity:1;filter:drop-shadow(0 0 18px rgba(204,179,255,.5))}
+  100%{scale:1;opacity:1;filter:none}
+}
+
