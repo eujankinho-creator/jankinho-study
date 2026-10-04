@@ -113,6 +113,7 @@
           '<b class="pump-ratio">3:2</b>'+
         '</span>'+
         '<span class="pump-state-badge">0/6</span>';
+    }
     return '<span class="protein-label">'+catalogue[type].label+'</span><span class="protein-art protein-channel"><i class="protein-pore"></i></span>';
   }
 
