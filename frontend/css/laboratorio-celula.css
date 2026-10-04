@@ -3762,3 +3762,36 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   contain:layout paint;
 }
 
+
+
+/* =========================================================
+   CANVAS PARTICLES V23 — PhET-inspired rendering architecture
+   Free solutes are painted in one canvas; DOM is reserved for
+   proteins, selected particles, docking and crossing animations.
+========================================================= */
+
+.particle-canvas{
+  position:absolute;
+  z-index:6;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+  contain:strict;
+}
+
+.placed-molecule.canvas-managed{
+  display:none!important;
+}
+
+/* Proteins remain DOM-interactive above the particle canvas. */
+.placed-layer{
+  z-index:10!important;
+}
+
+/* Avoid expensive visual effects on the simulation surface. */
+.membrane-stage .ambient{
+  filter:none!important;
+}
+
