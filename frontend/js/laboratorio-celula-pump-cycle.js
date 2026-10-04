@@ -1,8 +1,74 @@
 (()=>{const M=window.MembraneLab;if(!M)return;const {X,S}=M;
- M.cycle=()=>{const c=M.cnt();if(!S.busy&&S.phase==='na'&&c.n===3&&c.a===1){S.busy=true;S.kind='na';S.t0=performance.now();S.msg='ATP consumido: transportando 3 Na⁺ para fora.'}else if(!S.busy&&S.phase==='k'&&c.k===2){S.busy=true;S.kind='k';S.t0=performance.now();S.msg='2 K⁺ ligados: retornando a bomba e levando K⁺ para dentro.'}else S.msg=S.phase==='na'?'Fase 1: encaixe 3 Na⁺ e 1 ATP.':'Fase 2: encaixe 2 K⁺.';M.ui()};
- M.finish=()=>{const g=S.g;if(S.kind==='na'){S.p=S.p.filter(p=>{if(p.b&&p.b.k==='atp')return false;if(p.b&&p.b.k==='na'){p.b=null;p.side='outside';const a=Math.PI*1.5+(Math.random()-.5)*.15,r=g.o+60;p.x=g.cx+Math.cos(a)*r;p.y=g.cy+Math.sin(a)*r}return true});S.atp++;S.phase='k';S.msg='Na⁺ liberado fora. Agora encaixe 2 K⁺.'}else{for(const p of S.p)if(p.b&&p.b.k==='k'){p.b=null;p.side='inside';const a=Math.PI*1.5+(Math.random()-.5)*.15,r=g.i-65;p.x=g.cx+Math.cos(a)*r;p.y=g.cy+Math.sin(a)*r}S.cycles++;S.phase='na';S.msg='Ciclo completo. Adicione novo ATP para repetir.'}S.busy=false;S.kind='';M.ui()};
- M.leak=(p,t)=>{if(p.b||p.c||p.type==='atp'||p.id===S.drag)return;const g=S.g,q=p.type==='na'?g.nc:g.kc;if(M.D(p.x,p.y,q.x,q.y)>34)return;const r=M.D(p.x,p.y,g.cx,g.cy),out=r>g.m;p.c={t0:t,a:p.type==='na'?Math.PI*1.28:Math.PI*1.72,r0:r,r1:out?g.i-42:g.o+42,side:out?'inside':'outside'}};
- M.step=t=>{const g=S.g;if(S.busy&&t-S.t0>1200)M.finish();for(const p of S.p){if(p.b){if(!S.busy){const q=M.pos(p,g);p.x=q.x;p.y=q.y}continue}if(p.id===S.drag)continue;if(p.c){const u=M.clamp((t-p.c.t0)/850,0,1),r=M.L(p.c.r0,p.c.r1,u);p.x=g.cx+Math.cos(p.c.a)*r;p.y=g.cy+Math.sin(p.c.a)*r;if(u===1){p.side=p.c.side;p.c=null}continue}p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.vy*=.99;const r=M.D(p.x,p.y,g.cx,g.cy),a=Math.atan2(p.y-g.cy,p.x-g.cx);if(a>=g.st&&a<=g.en){if(p.side==='inside'&&r>g.i-18){p.x=g.cx+(p.x-g.cx)/r*(g.i-22);p.y=g.cy+(p.y-g.cy)/r*(g.i-22)}if(p.side==='outside'&&r<g.o+18){p.x=g.cx+(p.x-g.cx)/r*(g.o+22);p.y=g.cy+(p.y-g.cy)/r*(g.o+22)}}M.leak(p,t)}};
- M.draw=t=>{const f=M.fit();S.g=M.geo(f.w,f.h);X.setTransform(f.d,0,0,f.d,0,0);X.clearRect(0,0,f.w,f.h);M.membrane(S.g,t);M.channel(S.g.nc,'na',t);M.channel(S.g.kc,'k',t);M.pump(S.g);M.sites(S.g);M.step(t);S.p.forEach(M.drawP);requestAnimationFrame(M.draw)};
- M.ui=()=>{const c=M.cnt(),$=M.$;$('phaseLabel').textContent=S.busy?'Transportando':S.phase==='na'?'Fase Na⁺ + ATP':'Fase K⁺';$('naCount').textContent=c.n+' / 3';$('kCount').textContent=c.k+' / 2';$('atpCount').textContent=c.a+' / 1';$('naProgress').style.width=c.n/3*100+'%';$('kProgress').style.width=c.k/2*100+'%';$('atpProgress').style.width=c.a*100+'%';$('cycleMessage').textContent=S.msg;$('cycleTotal').textContent=S.cycles;$('atpTotal').textContent=S.atp};
+ const duration={na:2600,k:2300};
+ const smooth=v=>M.ease(M.clamp(v,0,1));
+ M.cycle=()=>{
+  const c=M.cnt();
+  if(!S.busy&&S.phase==='na'&&c.n===3&&c.a===1){S.busy=true;S.kind='na';S.t0=performance.now();S.duration=duration.na;S.progress=0;S.msg='ATP ligado: a bomba fecha para dentro e transporta 3 Na⁺ para fora.'}
+  else if(!S.busy&&S.phase==='k'&&c.k===2){S.busy=true;S.kind='k';S.t0=performance.now();S.duration=duration.k;S.progress=0;S.msg='2 K⁺ ligados: a bomba retorna à conformação interna e leva K⁺ para dentro.'}
+  else S.msg=S.phase==='na'?'Fase 1: encaixe 3 Na⁺ e 1 ATP.':'Fase 2: encaixe 2 K⁺.';
+  M.ui()
+ };
+ M.transportBound=(p,t)=>{
+  if(!S.busy||!p.b)return false;const g=S.g,u=M.clamp((t-S.t0)/S.duration,0,1),e=smooth((u-.08)/.78);
+  if(S.kind==='na'&&p.b.k==='na'){
+   const q=[-28,0,28][p.b.i],s=g.na[p.b.i],tx=g.p.x+g.t.x*q+g.n.x*70,ty=g.p.y+g.t.y*q+g.n.y*70,compress=1-.26*Math.sin(e*Math.PI);
+   p.x=M.L(s.x,tx,e)+(g.t.x*q*(compress-1));p.y=M.L(s.y,ty,e)+(g.t.y*q*(compress-1));return true
+  }
+  if(S.kind==='na'&&p.b.k==='atp'){
+   p.alpha=1-M.clamp((u-.18)/.3,0,1);return true
+  }
+  if(S.kind==='k'&&p.b.k==='k'){
+   const q=[-17,17][p.b.i],s=g.k[p.b.i],tx=g.p.x+g.t.x*q-g.n.x*70,ty=g.p.y+g.t.y*q-g.n.y*70,compress=1-.22*Math.sin(e*Math.PI);
+   p.x=M.L(s.x,tx,e)+(g.t.x*q*(compress-1));p.y=M.L(s.y,ty,e)+(g.t.y*q*(compress-1));return true
+  }
+  return false
+ };
+ M.finish=()=>{
+  const g=S.g;
+  if(S.kind==='na'){
+   S.p=S.p.filter(p=>{if(p.b&&p.b.k==='atp')return false;if(p.b&&p.b.k==='na'){const q=[-28,0,28][p.b.i];p.b=null;p.alpha=1;p.side='outside';p.x=g.p.x+g.t.x*q+g.n.x*72;p.y=g.p.y+g.t.y*q+g.n.y*72;p.vx=(Math.random()-.5)*.08;p.vy=(Math.random()-.5)*.08}return true});
+   S.atp++;S.phase='k';S.pumpConf=1;S.msg='3 Na⁺ liberados no meio extracelular. Agora encaixe 2 K⁺.'
+  }else{
+   for(const p of S.p)if(p.b&&p.b.k==='k'){const q=[-17,17][p.b.i];p.b=null;p.side='inside';p.x=g.p.x+g.t.x*q-g.n.x*72;p.y=g.p.y+g.t.y*q-g.n.y*72;p.vx=(Math.random()-.5)*.08;p.vy=(Math.random()-.5)*.08}
+   S.cycles++;S.phase='na';S.pumpConf=0;S.msg='Ciclo completo: 3 Na⁺ saíram, 2 K⁺ entraram e 1 ATP foi consumido.'
+  }
+  S.busy=false;S.kind='';S.progress=0;M.ui()
+ };
+ M.leak=(p,t)=>{
+  if(p.b||p.c||p.type==='atp'||p.id===S.drag)return;const g=S.g,q=p.type==='na'?g.nc:g.kc;
+  if(M.D(p.x,p.y,q.x,q.y)>52)return;const r=M.D(p.x,p.y,g.cx,g.cy),out=p.side==='outside';
+  p.c={t0:t,a:p.type==='na'?Math.PI*1.27:Math.PI*1.73,r0:r,r1:out?g.i-38:g.o+38,side:out?'inside':'outside'}
+ };
+ M.resolveCollisions=()=>{
+  const ions=S.p.filter(p=>p.type!=='atp');for(let pass=0;pass<2;pass++)for(let i=0;i<ions.length;i++)for(let j=i+1;j<ions.length;j++){
+   const a=ions[i],b=ions[j],min=M.radius(a)+M.radius(b)+4,dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||.001;if(d>=min)continue;
+   const nx=dx/d,ny=dy/d,over=min-d,aLock=!!a.b||!!a.c||a.id===S.drag,bLock=!!b.b||!!b.c||b.id===S.drag;
+   if(aLock&&bLock)continue;
+   if(aLock){b.x+=nx*over;b.y+=ny*over;M.keep(b)}
+   else if(bLock){a.x-=nx*over;a.y-=ny*over;M.keep(a)}
+   else{a.x-=nx*over*.5;a.y-=ny*over*.5;b.x+=nx*over*.5;b.y+=ny*over*.5;M.keep(a);M.keep(b)}
+  }
+ };
+ M.step=t=>{
+  const g=S.g;
+  if(S.busy){S.progress=M.clamp((t-S.t0)/S.duration,0,1);S.pumpConf=S.kind==='na'?smooth(S.progress):1-smooth(S.progress);if(S.progress>=1){M.finish();return}}
+  else S.pumpConf=S.phase==='k'?1:0;
+  for(const p of S.p){
+   if(p.b){if(S.busy)M.transportBound(p,t);else{const q=M.pos(p,g);p.x=q.x;p.y=q.y;p.alpha=1}continue}
+   if(p.id===S.drag)continue;
+   if(p.c){const u=smooth((t-p.c.t0)/900),r=M.L(p.c.r0,p.c.r1,u);p.x=g.cx+Math.cos(p.c.a)*r;p.y=g.cy+Math.sin(p.c.a)*r;if(u>=1){p.side=p.c.side;p.c=null}continue}
+   p.x+=p.vx;p.y+=p.vy;p.vx*=.992;p.vy*=.992;M.keep(p);M.leak(p,t)
+  }
+  M.resolveCollisions()
+ };
+ M.draw=t=>{
+  const f=M.fit();S.g=M.geo(f.w,f.h);X.setTransform(f.d,0,0,f.d,0,0);X.clearRect(0,0,f.w,f.h);M.step(t);
+  M.membrane(S.g,t);M.channel(S.g.nc,'na',t);M.channel(S.g.kc,'k',t);M.pump(S.g,t);M.sites(S.g);S.p.forEach(M.drawP);requestAnimationFrame(M.draw)
+ };
+ M.ui=()=>{
+  const c=M.cnt(),$=M.$;$('phaseLabel').textContent=S.busy?(S.kind==='na'?'ATPase: Na⁺ → fora':'ATPase: K⁺ → dentro'):S.phase==='na'?'Fase Na⁺ + ATP':'Fase K⁺';
+  $('naCount').textContent=c.n+' / 3';$('kCount').textContent=c.k+' / 2';$('atpCount').textContent=c.a+' / 1';
+  $('naProgress').style.width=c.n/3*100+'%';$('kProgress').style.width=c.k/2*100+'%';$('atpProgress').style.width=c.a*100+'%';
+  $('cycleMessage').textContent=S.msg;$('cycleTotal').textContent=S.cycles;$('atpTotal').textContent=S.atp
+ };
 })();
