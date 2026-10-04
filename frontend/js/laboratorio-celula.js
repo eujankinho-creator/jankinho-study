@@ -1103,6 +1103,7 @@
           }
 
           var p=slotStagePoint(slot);
+          var lane=pumpApproachPoint(slot,pump,b);
           var candidates=pumpRecruitmentCandidates(desiredType,pump,b,now,claimed);
           var best=null;
           var bestDistance=Infinity;
@@ -1110,7 +1111,9 @@
           candidates.forEach(function(candidate){
             var cx=parseFloat(candidate.style.left)||0;
             var cy=parseFloat(candidate.style.top)||0;
-            var d=Math.hypot(p.x-cx,p.y-cy);
+            // Selecting by the staging lane prevents left/right particles from
+            // crossing each other on the way to neighboring cavities.
+            var d=Math.hypot(lane.x-cx,lane.y-cy);
             if(d<bestDistance){
               best=candidate;
               bestDistance=d;
@@ -1515,7 +1518,7 @@
     if(previousVoltage!==membraneVoltageMv&&labAudioContext)playLabSound("voltage");
 
     clearTimeout(voltageGateTimer);
-    voltageGateTimer=setTimeout(syncVoltageGates,250);
+    voltageGateTimer=labSetTimeout(syncVoltageGates,250);
     lastGradientUpdate=0;
   }
 
@@ -2207,6 +2210,15 @@
     el.classList.add("pump-transit","crossing-flash");
 
     function frame(now){
+      if(!isLabForeground()){
+        var pausedAt=performance.now();
+        runWhenLabForeground(function(){
+          started+=performance.now()-pausedAt;
+          requestAnimationFrame(frame);
+        });
+        return;
+      }
+
       if(!el.isConnected||!pump.isConnected){
         delete el.dataset.pumpTransport;
         if(onDone)onDone();
@@ -2278,12 +2290,20 @@
     var sx=parseFloat(el.style.left)||targetX;
     var sy=parseFloat(el.style.top)||targetY;
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(!el.isConnected||!transporter.isConnected)return;
       var start=performance.now();
       var bindDuration=320;
 
       function bindFrame(now){
+        if(!isLabForeground()){
+          var pausedAt=performance.now();
+          runWhenLabForeground(function(){
+            start+=performance.now()-pausedAt;
+            requestAnimationFrame(bindFrame);
+          });
+          return;
+        }
         if(!el.isConnected||!transporter.isConnected)return;
         var t=Math.min(1,(now-start)/bindDuration);
         var e=smooth01(t);
@@ -2294,7 +2314,7 @@
       requestAnimationFrame(bindFrame);
     },delay||0);
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(!el.isConnected||!transporter.isConnected)return;
       var sx2=parseFloat(el.style.left)||targetX;
       var sy2=parseFloat(el.style.top)||targetY;
@@ -2302,6 +2322,14 @@
       var duration2=620;
 
       function passFrame(now){
+        if(!isLabForeground()){
+          var pausedAt=performance.now();
+          runWhenLabForeground(function(){
+            start2+=performance.now()-pausedAt;
+            requestAnimationFrame(passFrame);
+          });
+          return;
+        }
         if(!el.isConnected||!transporter.isConnected)return;
         var t=Math.min(1,(now-start2)/duration2);
         var e=smooth01(t);
@@ -2342,12 +2370,12 @@
     animateSgltParticle(glucose,transporter,px,entryY+8,px,finalY+8,80);
     animateSgltParticle(naB,transporter,px+18,entryY,px+20,finalY,160);
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(!transporter.isConnected)return;
       if(badge)badge.textContent="Transportando";
     },500);
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(!transporter.isConnected)return;
       transporter.dataset.cycling="0";
       transporter.classList.remove("sglt-cycling");
@@ -2683,7 +2711,7 @@
     b.classList.add("craft-consumed");
     playLabSound("synthesize");
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(a.isConnected)a.remove();
       if(b.isConnected)b.remove();
       markSceneCacheDirty();
@@ -2692,7 +2720,7 @@
       var atp=createPlaced("atp","molecule",x,y,{select:false,interactive:false});
       if(atp){
         atp.classList.add("craft-created");
-        setTimeout(function(){if(atp.isConnected)atp.classList.remove("craft-created")},700);
+        labSetTimeout(function(){if(atp.isConnected)atp.classList.remove("craft-created")},700);
         selectElement(atp);
       }
       updateCounter();
@@ -2701,7 +2729,7 @@
     collisionToast.textContent="Craft molecular: ADP + Pi → ATP";
     collisionToast.classList.add("is-visible");
     clearTimeout(collisionTimer);
-    collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1200);
+    collisionTimer=labSetTimeout(function(){collisionToast.classList.remove("is-visible")},1200);
 
     return true;
   }
@@ -3744,6 +3772,15 @@
     }
 
     function frame(now){
+      if(!isLabForeground()){
+        var pausedAt=performance.now();
+        runWhenLabForeground(function(){
+          started+=performance.now()-pausedAt;
+          requestAnimationFrame(frame);
+        });
+        return;
+      }
+
       if(!el.isConnected||!slot.isConnected||!pump.isConnected){
         abortBinding();
         return;
@@ -3869,6 +3906,15 @@
     var total=approachDuration+poreDuration+releaseDuration;
 
     function frame(now){
+      if(!isLabForeground()){
+        var pausedAt=performance.now();
+        runWhenLabForeground(function(){
+          startTime+=performance.now()-pausedAt;
+          requestAnimationFrame(frame);
+        });
+        return;
+      }
+
       if(!el.isConnected||!gate.isConnected){
         finishChannelTransit(el,gate,fromSide);
         return;
