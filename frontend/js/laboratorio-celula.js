@@ -428,7 +428,7 @@
     state.ions.forEach(function (ion) {
       if (ion.boundToPump) return;
 
-      const p = ionPointForDrawing(ion, g, now);
+      const p = normalizedToPoint(ion, g);
       const dx = p.x - x;
       const dy = p.y - y;
       const d = Math.sqrt(dx * dx + dy * dy);
@@ -1326,8 +1326,8 @@
     }
 
     state.ions.forEach(function (ion) {
-      const p = normalizedToPoint(ion, g);
-      const wobble = ion.id === state.draggingId ? 0 : Math.sin(now * .0017 + ion.wobble) * 1.6;
+      const p = ionPointForDrawing(ion, g, now);
+      const wobble = ion.boundToPump || ion.id === state.draggingId ? 0 : Math.sin(now * .0017 + ion.wobble) * 1.6;
       const x = p.x + wobble;
       const y = p.y + Math.cos(now * .0014 + ion.wobble) * 1.2;
       const isNa = ion.type === "Na";
