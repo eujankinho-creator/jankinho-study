@@ -3391,6 +3391,7 @@
 
     if(persist!==false){
       try{
+        localStorage.setItem("cortex-membrane-background-color-v2",color);
         localStorage.setItem("cortex-membrane-background-color",color);
         localStorage.removeItem("cortex-membrane-cytoplasm-color");
       }catch(_){}
@@ -3398,12 +3399,18 @@
   }
 
   function loadCytoplasmColor(){
-    var saved="#ffffff";
+    var saved="#08090b";
     try{
-      var stored=
+      var storedV2=localStorage.getItem("cortex-membrane-background-color-v2");
+      var legacy=
         localStorage.getItem("cortex-membrane-background-color")||
         localStorage.getItem("cortex-membrane-cytoplasm-color");
-      if(stored)saved=stored;
+
+      if(storedV2){
+        saved=storedV2;
+      }else if(legacy&&legacy.toLowerCase()!=="#ffffff"){
+        saved=legacy;
+      }
     }catch(_){}
     setCytoplasmColor(saved,false);
   }
