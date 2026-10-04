@@ -3996,3 +3996,105 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   .vm-preset-controls{flex:0 0 auto}
 }
 
+
+
+/* =========================================================
+   PHET CORE V25 — gases + glucose cotransport
+========================================================= */
+
+.o2-molecule .solute-orb{
+  color:#fff7f6;
+  background:linear-gradient(90deg,#d35d58 0 47%,#8f2f2d 47% 53%,#df7772 53%);
+  border-radius:999px!important;
+}
+
+.co2-molecule .solute-orb{
+  color:#fff;
+  background:linear-gradient(90deg,#b45752 0 28%,#6d717b 28% 72%,#b45752 72%);
+  border-radius:999px!important;
+}
+
+.glucose-molecule .solute-orb{
+  color:#f5efff;
+  background:#7562a6!important;
+  clip-path:polygon(25% 5%,75% 5%,98% 50%,75% 95%,25% 95%,2% 50%);
+  border-radius:0!important;
+}
+
+.sglt-card{
+  margin-top:4px!important;
+}
+
+.sglt-preview{
+  position:relative;
+  width:32px!important;
+  height:38px!important;
+  display:grid;
+  place-items:center;
+  border-radius:45% 45% 38% 38%;
+  background:linear-gradient(180deg,#a75a84,#713d61);
+  border:1px solid rgba(244,190,220,.24);
+}
+
+.sglt-preview i{
+  font-style:normal;
+  font-size:7px;
+  font-weight:950;
+  color:#f7ddea;
+}
+
+.placed-protein[data-type="sglt"]{
+  width:86px!important;
+}
+
+.sglt-art{
+  position:relative!important;
+  width:78px!important;
+  height:156px!important;
+  border-radius:42% 42% 34% 34% / 28% 28% 70% 70%;
+  background:linear-gradient(145deg,#9b577d,#6d3b5c 58%,#41283a);
+  border:1px solid rgba(237,183,215,.22);
+  box-shadow:inset 4px 2px 12px rgba(255,255,255,.06);
+}
+
+.sglt-art::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:12px;
+  bottom:12px;
+  width:15px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:#171318;
+  opacity:.78;
+}
+
+.sglt-site{
+  position:absolute;
+  z-index:2;
+  width:20px;
+  height:20px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(9,12,18,.86);
+  border:1px solid rgba(255,255,255,.13);
+  color:#ead9e6;
+  font-size:5px;
+  font-style:normal;
+  font-weight:950;
+}
+
+.sglt-na-left{left:11px;top:25px}
+.sglt-glucose{left:50%;top:44px;transform:translateX(-50%)}
+.sglt-na-right{right:11px;top:25px}
+
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-art{
+  transform:scaleX(.92);
+}
+
+.placed-protein[data-type="sglt"] .gate-state-badge{
+  color:#e4b8d2;
+}
+

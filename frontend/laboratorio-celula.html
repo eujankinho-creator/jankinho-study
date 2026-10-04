@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-phetcore24">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-phetcore25">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -140,6 +140,60 @@
             </div>
 
             <div class="solute-control-list compact-solute-console">
+              <div class="solute-compact-row" data-solute="o2" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main o2-molecule" type="button" data-kind="molecule" data-type="o2">
+                    <span class="solute-orb">O₂</span>
+                    <span><strong>Oxigênio</strong><small>difusão simples</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Oxigênio">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-o2-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-o2-IC">0</b></button>
+                  </div>
+                </div>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="o2" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="o2" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="o2" data-amount="25">+25</button>
+                </div>
+              </div>
+              <div class="solute-compact-row" data-solute="co2" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main co2-molecule" type="button" data-kind="molecule" data-type="co2">
+                    <span class="solute-orb">CO₂</span>
+                    <span><strong>Dióxido de carbono</strong><small>difusão simples</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Dióxido de carbono">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-co2-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-co2-IC">0</b></button>
+                  </div>
+                </div>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="co2" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="co2" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="co2" data-amount="25">+25</button>
+                </div>
+              </div>
+              <div class="solute-compact-row" data-solute="glucose" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main glucose-molecule" type="button" data-kind="molecule" data-type="glucose">
+                    <span class="solute-orb">G</span>
+                    <span><strong>Glicose</strong><small>cotransporte</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Glicose">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-glucose-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-glucose-IC">0</b></button>
+                  </div>
+                </div>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="glucose" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="glucose" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="glucose" data-amount="25">+25</button>
+                </div>
+              </div>
               <div class="solute-compact-row" data-solute="na" data-selected-side="EC">
                 <div class="solute-identity">
                   <button class="molecule-tool solute-main na-molecule" type="button" data-kind="molecule" data-type="na">
@@ -395,6 +449,10 @@
                   <span class="tool-preview pump-preview"><i>3:2</i></span>
                   <span><b>Bomba Na⁺/K⁺</b><small>3 Na⁺ → 2 K⁺ · ATP</small></span>
                 </button>
+                <button class="tool-item protein-tool structure-card structure-card-wide sglt-card" type="button" data-kind="protein" data-type="sglt">
+                  <span class="tool-preview sglt-preview"><i>2:1</i></span>
+                  <span><b>Na⁺/Glicose</b><small>2 Na⁺ + glicose → IC</small></span>
+                </button>
               </div>
             </div>
 
@@ -452,7 +510,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-phetcore24"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-phetcore25"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

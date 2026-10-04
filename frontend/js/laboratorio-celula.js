@@ -25,7 +25,7 @@
   var chargeToggle=document.getElementById("chargeToggle");
   var ligandToggle=document.getElementById("ligandToggle");
   var vmPresetButtons=Array.from(document.querySelectorAll(".vm-preset"));
-  var soluteTypes=["na","k","cl","h2o","atp","pi"];
+  var soluteTypes=["o2","co2","glucose","na","k","cl","h2o","atp","pi"];
   var gradientUi={
     na:{
       direction:document.getElementById("gradientNaDirection"),
@@ -94,6 +94,10 @@
     "lg-k":{name:"Canal de K⁺ dependente de ligante",category:"CANAL LIGANTE-DEPENDENTE",text:"Um ligante compatível se liga ao canal, ele abre por alguns segundos e depois fecha.",label:"K⁺ ligante",kind:"protein",art:"channel"},
     "bomba":{name:"Bomba Na⁺/K⁺-ATPase",category:"TRANSPORTE ATIVO",text:"Ciclo sequencial: 3 Na⁺ intracelulares, ATP, liberação de Na⁺ no exterior, 2 K⁺ externos e retorno.",label:"Bomba Na⁺/K⁺",kind:"protein",art:"pump"},
     "aquaporina":{name:"Aquaporina",category:"CANAL DE ÁGUA",text:"Canal seletivo para água.",label:"Aquaporina",kind:"protein",art:"channel"},
+    "sglt":{name:"Cotransportador Na⁺/glicose",category:"TRANSPORTE ATIVO SECUNDÁRIO",text:"Usa o gradiente de Na⁺ para transportar glicose para o interior, com dois Na⁺ por glicose neste modelo didático.",label:"Na⁺/Glicose",kind:"protein",art:"cotransporter"},
+    "o2":{name:"Oxigênio (O₂)",category:"GÁS",text:"Molécula apolar pequena: difunde-se diretamente pela bicamada, com viés do gradiente químico.",label:"O₂",kind:"molecule"},
+    "co2":{name:"Dióxido de carbono (CO₂)",category:"GÁS",text:"Molécula pequena: difunde-se diretamente pela bicamada, com viés do gradiente químico.",label:"CO₂",kind:"molecule"},
+    "glucose":{name:"Glicose",category:"SOLUTO",text:"Não cruza livremente a bicamada neste modelo. Pode entrar pelo cotransportador Na⁺/glicose.",label:"G",kind:"molecule"},
     "na":{name:"Sódio (Na⁺)",category:"ÍON",text:"Na⁺ cruza apenas por vias compatíveis e sofre viés do gradiente eletroquímico.",label:"Na⁺",kind:"molecule"},
     "k":{name:"Potássio (K⁺)",category:"ÍON",text:"K⁺ cruza apenas por vias compatíveis e sofre viés do gradiente eletroquímico.",label:"K⁺",kind:"molecule"},
     "cl":{name:"Cloreto (Cl⁻)",category:"ÍON",text:"Sem canal específico nesta versão do painel.",label:"Cl⁻",kind:"molecule"},
@@ -204,6 +208,9 @@
   }
 
   function particleVisual(type){
+    if(type==="o2")return {label:"O₂",fill:"#cf625e",stroke:"#ffc4c0",text:"#fff7f6",w:31,h:20,shape:"round"};
+    if(type==="co2")return {label:"CO₂",fill:"#777a84",stroke:"#d4d6dc",text:"#ffffff",w:35,h:20,shape:"round"};
+    if(type==="glucose")return {label:"G",fill:"#7562a6",stroke:"#cfc0f5",text:"#ffffff",w:25,h:23,shape:"hex"};
     if(type==="na")return {label:"Na⁺",fill:"#b85c40",stroke:"#efb29d",text:"#fff3ed",w:24,h:24,shape:"circle"};
     if(type==="k")return {label:"K⁺",fill:"#d8b243",stroke:"#ffe08a",text:"#382b08",w:24,h:24,shape:"circle"};
     if(type==="cl")return {label:"Cl⁻",fill:"#397f9e",stroke:"#9fdcf4",text:"#effbff",w:24,h:24,shape:"circle"};
@@ -275,6 +282,11 @@
       ctx.lineTo(v.w-1,v.h-2);
       ctx.lineTo(1,v.h-2);
       ctx.closePath();ctx.fill();ctx.stroke();
+    }else if(v.shape==="hex"){
+      ctx.beginPath();
+      ctx.moveTo(v.w*.25,1);ctx.lineTo(v.w*.75,1);ctx.lineTo(v.w-1,v.h/2);
+      ctx.lineTo(v.w*.75,v.h-1);ctx.lineTo(v.w*.25,v.h-1);ctx.lineTo(1,v.h/2);
+      ctx.closePath();ctx.fill();ctx.stroke();
     }else{
       roundedRectPath(ctx,1,1,v.w-2,v.h-2,7);
       ctx.fill();
@@ -301,7 +313,8 @@
       !el.classList.contains("craft-consumed")&&
       !el.dataset.autoTransport&&
       !el.dataset.autoBinding&&
-      !el.dataset.pumpTransport;
+      !el.dataset.pumpTransport&&
+      !el.dataset.sgltTransport;
   }
 
   function setCanvasManaged(el,managed){
@@ -428,6 +441,9 @@
   }
 
   function diffusionFactor(type){
+    if(type==="o2")return 1.42;
+    if(type==="co2")return 1.28;
+    if(type==="glucose")return .58;
     if(type==="na")return 1.00;
     if(type==="k")return 1.34;
     if(type==="cl")return 1.42;
@@ -514,7 +530,15 @@
     return chemical+electrical;
   }
 
+  function isGasType(type){return type==="o2"||type==="co2"}
+
   function passiveDriveForSide(type,fromSide){
+    if(isGasType(type)){
+      var density=ionCompartmentDensity(type);
+      var chemical=Math.log(Math.max(.0001,density.EC)/Math.max(.0001,density.IC));
+      return fromSide==="EC"?chemical:-chemical;
+    }
+
     if(type==="h2o"){
       var osmosis=osmoticDriveECtoIC();
       return fromSide==="EC"?osmosis:-osmosis;
@@ -875,6 +899,9 @@
       protein.dataset.open=membraneVoltageMv===-50?"1":"0";
     }else if(type==="vg-k"){
       protein.dataset.open=membraneVoltageMv===30?"1":"0";
+    }else if(type==="sglt"){
+      protein.dataset.open="0";
+      protein.dataset.cycling="0";
     }else if(isLigandGate(type)){
       protein.dataset.open="0";
       protein.dataset.ligandState="closed";
@@ -938,6 +965,16 @@
           '<b class="pump-ratio">3:2</b>'+
         '</span>'+
         '<span class="pump-state-badge">0/6</span>';
+    }
+
+    if(type==="sglt"){
+      return '<span class="protein-label">Na⁺/Glicose</span>'+
+        '<span class="protein-art sglt-art">'+
+          '<i class="sglt-site sglt-na-left">Na</i>'+
+          '<i class="sglt-site sglt-glucose">G</i>'+
+          '<i class="sglt-site sglt-na-right">Na</i>'+
+        '</span>'+
+        '<span class="gate-state-badge sglt-state-badge">2 Na + G</span>';
     }
 
     var gated=isVoltageGate(type)||isLigandGate(type);
@@ -1459,6 +1496,139 @@
     }
 
     requestAnimationFrame(frame);
+  }
+
+  function moleculeAvailableForSglt(el){
+    return el&&el.isConnected&&!el.classList.contains("docked")&&!el.classList.contains("craft-consumed")&&
+      !el.dataset.autoTransport&&!el.dataset.autoBinding&&!el.dataset.pumpTransport&&!el.dataset.sgltTransport;
+  }
+
+  function animateSgltParticle(el,transporter,targetX,targetY,finalX,finalY,delay){
+    setCanvasManaged(el,false);
+    el.dataset.sgltTransport="1";
+
+    var sx=parseFloat(el.style.left)||targetX;
+    var sy=parseFloat(el.style.top)||targetY;
+
+    setTimeout(function(){
+      if(!el.isConnected||!transporter.isConnected)return;
+      var start=performance.now();
+      var bindDuration=320;
+
+      function bindFrame(now){
+        if(!el.isConnected||!transporter.isConnected)return;
+        var t=Math.min(1,(now-start)/bindDuration);
+        var e=smooth01(t);
+        el.style.left=(sx+(targetX-sx)*e)+"px";
+        el.style.top=(sy+(targetY-sy)*e)+"px";
+        if(t<1)requestAnimationFrame(bindFrame);
+      }
+      requestAnimationFrame(bindFrame);
+    },delay||0);
+
+    setTimeout(function(){
+      if(!el.isConnected||!transporter.isConnected)return;
+      var sx2=parseFloat(el.style.left)||targetX;
+      var sy2=parseFloat(el.style.top)||targetY;
+      var start2=performance.now();
+      var duration2=620;
+
+      function passFrame(now){
+        if(!el.isConnected||!transporter.isConnected)return;
+        var t=Math.min(1,(now-start2)/duration2);
+        var e=smooth01(t);
+        el.style.left=(sx2+(finalX-sx2)*e)+"px";
+        el.style.top=(sy2+(finalY-sy2)*e)+"px";
+
+        if(t<1){
+          requestAnimationFrame(passFrame);
+        }else{
+          delete el.dataset.sgltTransport;
+          if(el!==selected)setCanvasManaged(el,true);
+          var motion=moleculeMotion.get(el);
+          if(motion){
+            chooseRandomWalkVelocity(el,motion,1);
+            motion.channelCooldownUntil=performance.now()+3500;
+            motion.associationCooldownUntil=performance.now()+1000;
+          }
+        }
+      }
+      requestAnimationFrame(passFrame);
+    },(delay||0)+820);
+  }
+
+  function startSgltCycle(transporter,naA,naB,glucose){
+    if(!transporter||transporter.dataset.cycling==="1")return;
+    transporter.dataset.cycling="1";
+    transporter.classList.add("sglt-cycling");
+
+    var badge=transporter.querySelector(".sglt-state-badge");
+    if(badge)badge.textContent="LIGANDO";
+
+    var b=barrier();
+    var px=parseFloat(transporter.style.left)||stage.clientWidth/2;
+    var entryY=b.top-34;
+    var finalY=b.bottom+62;
+
+    animateSgltParticle(naA,transporter,px-18,entryY,px-20,finalY,0);
+    animateSgltParticle(glucose,transporter,px,entryY+8,px,finalY+8,80);
+    animateSgltParticle(naB,transporter,px+18,entryY,px+20,finalY,160);
+
+    setTimeout(function(){
+      if(!transporter.isConnected)return;
+      if(badge)badge.textContent="TRANSPORTANDO";
+    },500);
+
+    setTimeout(function(){
+      if(!transporter.isConnected)return;
+      transporter.dataset.cycling="0";
+      transporter.classList.remove("sglt-cycling");
+      if(badge)badge.textContent="2 Na + G";
+    },1750);
+  }
+
+  function updateSgltTransporters(now,b){
+    var transporters=getCachedProteinsOfType("sglt",now);
+    if(!transporters.length)return;
+
+    var sodium=getCachedMoleculesOfType("na",now);
+    var glucose=getCachedMoleculesOfType("glucose",now);
+
+    transporters.forEach(function(transporter){
+      if(transporter.dataset.cycling==="1")return;
+      if(crossingProbability("na","EC")<.52)return;
+
+      var px=parseFloat(transporter.style.left)||0;
+      var naNear=[];
+      var glucoseNear=null;
+      var glucoseD=Infinity;
+
+      for(var i=0;i<sodium.length;i++){
+        var ion=sodium[i];
+        if(!moleculeAvailableForSglt(ion))continue;
+        var iy=parseFloat(ion.style.top)||0;
+        if(sideOf(iy,b)!=="EC")continue;
+        var ix=parseFloat(ion.style.left)||0;
+        var d=Math.hypot(ix-px,(iy-b.top)*.72);
+        if(d<135)naNear.push({el:ion,d:d});
+      }
+
+      naNear.sort(function(a,c){return a.d-c.d});
+
+      for(var g=0;g<glucose.length;g++){
+        var sugar=glucose[g];
+        if(!moleculeAvailableForSglt(sugar))continue;
+        var gy=parseFloat(sugar.style.top)||0;
+        if(sideOf(gy,b)!=="EC")continue;
+        var gx=parseFloat(sugar.style.left)||0;
+        var gd=Math.hypot(gx-px,(gy-b.top)*.72);
+        if(gd<135&&gd<glucoseD){glucoseNear=sugar;glucoseD=gd}
+      }
+
+      if(naNear.length>=2&&glucoseNear){
+        startSgltCycle(transporter,naNear[0].el,naNear[1].el,glucoseNear);
+      }
+    });
   }
 
   function isLigandType(type){return type==="ligand-na"||type==="ligand-k"}
@@ -2705,8 +2875,10 @@
     var associationInterval=molecules.length>180?190:molecules.length>100?150:105;
     var associationTick=now-lastAssociationTime>associationInterval;
 
+    if(associationTick)updateSgltTransporters(now,b);
+
     molecules.forEach(function(el){
-      if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1"||el.dataset.pumpTransport==="1"||el.classList.contains("transporting"))return;
+      if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1"||el.dataset.pumpTransport==="1"||el.dataset.sgltTransport==="1"||el.classList.contains("transporting"))return;
       if(el.dataset.ligandBound)return;
       if(moving&&moving.el===el)return;
 
@@ -2765,15 +2937,29 @@
         motion.vy=-Math.abs(motion.vy);
       }
 
-      if(side==="EC"&&ny+halfH>b.top){
+      var crossedGas=false;
+      if(isGasType(el.dataset.type)){
+        if(side==="EC"&&ny+halfH>b.top&&checkGradientForCrossing(el.dataset.type,"EC")){
+          ny=b.bottom+halfH+2;
+          crossedGas=true;
+        }else if(side==="IC"&&ny-halfH<b.bottom&&checkGradientForCrossing(el.dataset.type,"IC")){
+          ny=b.top-halfH-2;
+          crossedGas=true;
+        }
+        if(crossedGas){
+          motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
+        }
+      }
+
+      if(!crossedGas&&side==="EC"&&ny+halfH>b.top){
         ny=b.top-halfH;
         motion.vy=-Math.abs(motion.vy||24);
         motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
-      }else if(side==="IC"&&ny-halfH<b.bottom){
+      }else if(!crossedGas&&side==="IC"&&ny-halfH<b.bottom){
         ny=b.bottom+halfH;
         motion.vy=Math.abs(motion.vy||24);
         motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
-      }else if(side==="MP"){
+      }else if(!crossedGas&&side==="MP"){
         if(y<=b.center){
           ny=b.top-halfH;
           motion.vy=-Math.abs(motion.vy||24);
