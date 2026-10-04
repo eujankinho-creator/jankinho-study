@@ -48,6 +48,7 @@
   var lastPhysicsTime=0;
   var lastAssociationTime=0;
   var lastGradientUpdate=0;
+  var simulationActive=true;
   var membraneVoltageMv=-70;
   var thermalVoltageMv=26.7;
   var chemicalWeight=1.35;
@@ -1518,7 +1519,7 @@
   }
 
   function molecularPhysicsStep(dt,now){
-    if(document.hidden||moving||sourceDrag)return;
+    if(!simulationActive)return;
 
     var molecules=Array.from(layer.querySelectorAll('.placed-molecule')).filter(function(el){
       return el.isConnected&&!el.classList.contains("docked")&&!el.classList.contains("craft-consumed");
@@ -1528,7 +1529,11 @@
     if(!molecules.length)return;
 
     molecules.forEach(initMoleculeMotion);
-    applyElectrostaticInteractions(molecules);
+
+    var interactiveMolecules=molecules.filter(function(el){
+      return !(moving&&moving.el===el);
+    });
+    applyElectrostaticInteractions(interactiveMolecules);
 
     var b=barrier();
     var width=stage.clientWidth;
@@ -1629,7 +1634,9 @@
   }
 
   function molecularPhysicsLoop(now){
+    if(!simulationActive)return;
     physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
+
     if(!lastPhysicsTime){
       lastPhysicsTime=now;
       return;
@@ -1640,6 +1647,21 @@
     lastPhysicsTime=now;
     molecularPhysicsStep(Math.min(elapsed,50)/1000,now);
   }
+
+  window.addEventListener("pagehide",function(){
+    simulationActive=false;
+    if(physicsRaf){
+      cancelAnimationFrame(physicsRaf);
+      physicsRaf=0;
+    }
+  });
+
+  window.addEventListener("pageshow",function(){
+    if(simulationActive)return;
+    simulationActive=true;
+    lastPhysicsTime=0;
+    physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
+  });
 
   window.addEventListener("resize",function(){
     clearTimeout(resizeTimer);
