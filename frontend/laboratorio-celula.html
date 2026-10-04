@@ -3,116 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratório da Célula | Cortex</title>
-
+  <title>Membrana | Laboratório | Cortex</title>
   <script>
-    (function () {
-      var theme = "dark-orange";
-      try {
-        var saved = localStorage.getItem("jankinho_theme_v1");
-        if (saved) theme = saved;
-      } catch (error) {}
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
+    (function(){var theme="dark-orange";try{var saved=localStorage.getItem("jankinho_theme_v1");if(saved)theme=saved;}catch(e){}document.documentElement.setAttribute("data-theme",theme);})();
   </script>
-
   <link rel="stylesheet" href="/css/app.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-reset1">
-
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261003-membrane-duo1">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
-
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
-  <meta name="theme-color" content="#07090d">
+  <meta name="theme-color" content="#080a0f">
 </head>
-
 <body class="practice-view lab-view cell-lab-reset-view">
   <aside class="sidebar">
-    <a href="/" class="sidebar-logo">
-      <div class="logo-box">C</div>
-      <div><strong>Cortex</strong><span>Study Platform</span></div>
-    </a>
-
+    <a href="/" class="sidebar-logo"><div class="logo-box">C</div><div><strong>Cortex</strong><span>Study Platform</span></div></a>
     <div class="sidebar-menu"></div>
-
     <div class="sidebar-user">
       <div id="avatarSidebar" class="avatar">U</div>
-      <div class="user-info">
-        <strong id="nomeSidebar">Carregando...</strong>
-        <span id="emailSidebar"></span>
-      </div>
+      <div class="user-info"><strong id="nomeSidebar">Carregando...</strong><span id="emailSidebar"></span></div>
       <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
     </div>
   </aside>
 
   <div class="main-area">
     <header class="header">
-      <div>
-        <div class="header-title">Laboratório da Célula</div>
-        <span class="cell-reset-subtitle">Nova construção</span>
-      </div>
-
-      <div class="header-user">
-        <div>
-          <strong id="nomeHeader">Carregando...</strong>
-          <span>Cortex</span>
-        </div>
-        <div id="avatarHeader" class="avatar header-avatar">U</div>
-      </div>
+      <div><div class="header-title">Laboratório da Membrana</div><span class="cell-reset-subtitle">Estudo visual da bicamada fosfolipídica</span></div>
+      <div class="header-user"><div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div><div id="avatarHeader" class="avatar header-avatar">U</div></div>
     </header>
 
     <main class="cell-reset-page">
       <a class="back-lab-link" href="/laboratorio.html">← Voltar ao hub</a>
 
-      <section class="cell-reset-empty" aria-label="Área vazia do novo laboratório da célula">
-        <span>BASE LIMPA</span>
-        <h1>Laboratório da Célula</h1>
-        <p>O simulador anterior foi removido. Esta área está pronta para ser construída do zero.</p>
+      <section class="membrane-hero">
+        <div class="copy">
+          <span class="membrane-kicker">Primeira etapa · membrana plasmática</span>
+          <h1>Dois conceitos visuais.</h1>
+          <p>Os dois modelos mostram somente a bicamada fosfolipídica em semicírculo, com cabeças hidrofílicas, caudas hidrofóbicas e movimento de fluidez. Escolha qual linguagem visual deve virar a base oficial do laboratório.</p>
+        </div>
+        <div class="membrane-note">Sem canais · sem bombas · sem íons</div>
+      </section>
+
+      <section class="model-grid">
+        <article class="membrane-model model-a" data-model="a">
+          <div class="model-head">
+            <div><span class="model-index">MODELO A</span><h2>Premium minimalista</h2><p>Mais limpo, tecnológico e alinhado ao visual atual do Cortex.</p></div>
+            <span class="model-badge">PRECISO</span>
+          </div>
+          <div class="model-stage">
+            <div class="stage-copy"><span>MEIO EXTRACELULAR</span><strong>Bicamada fosfolipídica</strong></div>
+            <canvas id="membraneA" aria-label="Modelo premium minimalista da membrana plasmática"></canvas>
+            <div class="stage-foot"><span>cabeças hidrofílicas</span><span>caudas hidrofóbicas</span></div>
+          </div>
+          <div class="model-actions">
+            <div class="model-tags"><span>discreto</span><span>preciso</span><span>premium</span></div>
+            <button class="choose-model" type="button">Escolher este</button>
+          </div>
+        </article>
+
+        <article class="membrane-model model-b" data-model="b">
+          <div class="model-head">
+            <div><span class="model-index">MODELO B</span><h2>Biológico imersivo</h2><p>Mais orgânico, fluido e tridimensional, mantendo leitura didática.</p></div>
+            <span class="model-badge">ORGÂNICO</span>
+          </div>
+          <div class="model-stage">
+            <div class="stage-copy"><span>MEIO EXTRACELULAR</span><strong>Membrana em movimento</strong></div>
+            <canvas id="membraneB" aria-label="Modelo biológico imersivo da membrana plasmática"></canvas>
+            <div class="stage-foot"><span>fluidez de membrana</span><span>bicamada organizada</span></div>
+          </div>
+          <div class="model-actions">
+            <div class="model-tags"><span>orgânico</span><span>imersivo</span><span>3D</span></div>
+            <button class="choose-model" type="button">Escolher este</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="compare-strip" aria-label="Comparação dos modelos">
+        <div><span>ESTRUTURA</span><strong>Fosfolipídios alinhados em duas camadas</strong></div>
+        <div><span>ANIMAÇÃO</span><strong>Oscilação leve das cabeças e caudas</strong></div>
+        <div><span>PRÓXIMA ETAPA</span><strong>Adicionar proteínas só depois da escolha</strong></div>
       </section>
     </main>
   </div>
 
-  <script>
-    (function () {
-      async function loadUser() {
-        try {
-          var response = await fetch("/api/auth/me", { credentials: "same-origin" });
-          if (response.status === 401) {
-            location.href = "/login.html";
-            return;
-          }
-          if (!response.ok) return;
-
-          var data = await response.json();
-          var user = data.usuario || {};
-          var name = user.nome || "Usuário";
-          var initial = name.charAt(0).toUpperCase();
-
-          document.getElementById("nomeSidebar").textContent = name;
-          document.getElementById("emailSidebar").textContent = user.email || "";
-          document.getElementById("nomeHeader").textContent = name;
-          document.getElementById("avatarSidebar").textContent = initial;
-          document.getElementById("avatarHeader").textContent = initial;
-        } catch (error) {}
-      }
-
-      document.getElementById("logoutSidebar").addEventListener("click", async function () {
-        try {
-          await fetch("/api/auth/logout", { method: "POST", credentials: "same-origin" });
-        } finally {
-          location.href = "/login.html";
-        }
-      });
-
-      loadUser();
-    })();
-  </script>
+  <script src="/js/laboratorio-celula.js?v=20261003-membrane-duo1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
