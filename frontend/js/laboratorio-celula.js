@@ -4,6 +4,8 @@
   var stage=document.getElementById("membraneStage");
   var bilayer=document.getElementById("bilayer");
   var layer=document.getElementById("placedLayer");
+  var membraneBuildSlots=document.getElementById("membraneBuildSlots");
+  var membraneBuildSlotNodes=membraneBuildSlots?Array.from(membraneBuildSlots.querySelectorAll(".membrane-build-slot")):[];
   var particleCanvas=document.getElementById("particleCanvas");
   var particleCtx=particleCanvas?particleCanvas.getContext("2d",{alpha:true,desynchronized:true}):null;
   var particleCanvasDpr=1;
@@ -1056,6 +1058,7 @@
     var count=layer.querySelectorAll(".placed-element").length;
     counter.textContent=count+(count===1?" elemento":" elementos");
     dropHint.classList.toggle("is-hidden",count>0);
+    updateBuildSlotVisuals();
   }
 
   function renderDefaultInfo(){
@@ -1130,14 +1133,126 @@
     collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1400);
   }
 
+  function moleculeArt(type){
+    if(type==="na")return '<span class="molecule-shape molecule-ion molecule-na"><b>+</b></span>';
+    if(type==="k")return '<span class="molecule-shape molecule-ion molecule-k"><b>+</b></span>';
+    if(type==="cl")return '<span class="molecule-shape molecule-ion molecule-cl"><b>−</b></span>';
+    if(type==="o2")return '<span class="molecule-shape molecule-o2"><i></i><i></i></span>';
+    if(type==="co2")return '<span class="molecule-shape molecule-co2"><i></i><i></i><i></i></span>';
+    if(type==="glucose")return '<span class="molecule-shape molecule-glucose"></span>';
+    if(type==="atp")return '<span class="molecule-shape molecule-atp"><i></i><i></i><i></i><i></i><i></i></span>';
+    if(type==="adp")return '<span class="molecule-shape molecule-adp"><i></i><i></i><i></i><b>ADP</b></span>';
+    if(type==="pi")return '<span class="molecule-shape molecule-pi">Pi</span>';
+    if(type==="ligand-na"||type==="ligand-k")return "";
+    return '<span class="molecule-shape molecule-generic">'+(catalogue[type]?catalogue[type].label:type)+'</span>';
+  }
+
+  function proteinSlotPositions(){
+    var width=Math.max(1,stage.clientWidth);
+    var edge=Math.min(86,Math.max(46,width*.07));
+    var usable=Math.max(1,width-edge*2);
+    var positions=[];
+    for(var i=0;i<7;i++)positions.push(edge+usable*(i/6));
+    return positions;
+  }
+
+  function occupiedProteinSlots(ignoreEl){
+    var occupied=new Set();
+    layer.querySelectorAll('.placed-protein[data-membrane-slot]').forEach(function(protein){
+      if(protein===ignoreEl)return;
+      var index=parseInt(protein.dataset.membraneSlot,10);
+      if(Number.isFinite(index))occupied.add(index);
+    });
+    return occupied;
+  }
+
+  function nearestAvailableProteinSlot(x,ignoreEl){
+    var positions=proteinSlotPositions();
+    var occupied=occupiedProteinSlots(ignoreEl);
+    var best=null,bestDistance=Infinity;
+
+    positions.forEach(function(px,index){
+      if(occupied.has(index))return;
+      var distance=Math.abs(px-x);
+      if(distance<bestDistance){
+        bestDistance=distance;
+        best={index:index,x:px};
+      }
+    });
+
+    return best;
+  }
+
+  function clearBuildSlotPreview(){
+    membraneBuildSlotNodes.forEach(function(node){node.classList.remove("is-target")});
+  }
+
+  function highlightBuildSlot(index){
+    membraneBuildSlotNodes.forEach(function(node,i){
+      node.classList.toggle("is-target",i===index);
+    });
+  }
+
+  function updateBuildSlotVisuals(){
+    var positions=proteinSlotPositions();
+    var occupied=occupiedProteinSlots(null);
+
+    membraneBuildSlotNodes.forEach(function(node,index){
+      node.style.left=positions[index]+"px";
+      node.classList.toggle("is-occupied",occupied.has(index));
+    });
+  }
+
+  function assignProteinToSlot(protein,index){
+    if(!protein)return false;
+    var positions=proteinSlotPositions();
+    if(!Number.isFinite(index)||index<0||index>=positions.length)return false;
+    if(occupiedProteinSlots(protein).has(index))return false;
+
+    protein.dataset.membraneSlot=String(index);
+    protein.style.left=positions[index]+"px";
+    protein.style.top=barrier().center+"px";
+
+    if(protein.dataset.type==="bomba")repositionDocked(protein);
+    if(isLigandGate(protein.dataset.type))positionBoundLigand(protein);
+
+    clearBuildSlotPreview();
+    updateBuildSlotVisuals();
+    return true;
+  }
+
+  function realignProteinsToBuildSlots(){
+    var positions=proteinSlotPositions();
+
+    layer.querySelectorAll('.placed-protein[data-membrane-slot]').forEach(function(protein){
+      var index=parseInt(protein.dataset.membraneSlot,10);
+      if(!Number.isFinite(index)||positions[index]===undefined)return;
+      protein.style.left=positions[index]+"px";
+      protein.style.top=barrier().center+"px";
+      if(protein.dataset.type==="bomba")repositionDocked(protein);
+      if(isLigandGate(protein.dataset.type))positionBoundLigand(protein);
+    });
+
+    updateBuildSlotVisuals();
+  }
+
   function createPlaced(type,kind,x,y,options){
     options=options||{};
     var item=catalogue[type];
     if(!item)return null;
     var b=barrier();
 
+    var proteinBuildSlot=null;
     if(kind==="protein"){
-      x=clampProteinX(x);
+      proteinBuildSlot=nearestAvailableProteinSlot(x,null);
+      if(!proteinBuildSlot){
+        collisionToast.textContent="As 7 posições da membrana já estão ocupadas.";
+        collisionToast.classList.add("is-visible");
+        clearTimeout(collisionTimer);
+        collisionTimer=setTimeout(function(){collisionToast.classList.remove("is-visible")},1200);
+        return null;
+      }
+      x=proteinBuildSlot.x;
       y=b.center;
     }
 
@@ -1146,10 +1261,11 @@
     el.dataset.type=type;
     el.dataset.kind=kind;
     el.dataset.id="mem-"+(++placedCount);
-    el.innerHTML=kind==="protein"?proteinArt(type):item.label;
+    el.innerHTML=kind==="protein"?proteinArt(type):moleculeArt(type);
     el.style.left=x+"px";
     el.style.top=y+"px";
     layer.appendChild(el);
+    if(kind==="protein"&&proteinBuildSlot)el.dataset.membraneSlot=String(proteinBuildSlot.index);
     markSceneCacheDirty();
 
     if(kind==="molecule"){
@@ -1314,15 +1430,7 @@
     if(soluteTypes.indexOf(type)===-1)return;
     selectedSoluteType=type;
 
-    modeButtons.forEach(function(button){
-    button.addEventListener("click",function(){applyLabMode(button.dataset.labMode,true)});
-  });
-
-  if(resetModeScenario){
-    resetModeScenario.addEventListener("click",function(){seedModeScenario(currentLabMode)});
-  }
-
-  document.querySelectorAll(".solute-choice").forEach(function(button){
+    document.querySelectorAll(".solute-choice").forEach(function(button){
       var active=button.dataset.soluteType===type;
       button.classList.toggle("is-active",active);
       button.setAttribute("aria-selected",active?"true":"false");
@@ -1529,7 +1637,7 @@
     if(badge)badge.textContent=label||(
       state==="inside-open"?"3 Na⁺":
       state==="inside-na-bound"?"ATP":
-      state==="outside-open"?"2 K⁺":"ATIVA"
+      state==="outside-open"?"K⁺ · 0/2":"Ativa"
     );
   }
 
@@ -2221,7 +2329,7 @@
     pump.classList.remove("pump-open-out");
 
     var badge=pump.querySelector(".pump-state-badge");
-    if(badge)badge.textContent="RETORNO";
+    if(badge)badge.textContent="Retorno";
 
     setTimeout(function(){
       if(!pump.isConnected)return;
@@ -2332,6 +2440,12 @@
       var proteinTargetX=clampProteinX(p.x-m.offsetX);
       var proteinCurrentX=parseFloat(el.style.left)||proteinTargetX;
       var proteinX=limitStep(proteinCurrentX,proteinTargetX,42);
+      var buildTarget=nearestAvailableProteinSlot(proteinTargetX,el);
+
+      m.proteinSlotIndex=buildTarget?buildTarget.index:null;
+      if(buildTarget)highlightBuildSlot(buildTarget.index);
+      else clearBuildSlotPreview();
+
       el.style.left=proteinX+"px";
       el.style.top=m.b.center+"px";
       if(el.dataset.type==="bomba")repositionDocked(el);
@@ -2545,6 +2659,22 @@
 
     var m=moving;
 
+    if(m.el.dataset.kind==="protein"){
+      var currentProteinX=parseFloat(m.el.style.left)||stage.clientWidth/2;
+      var slotIndex=Number.isFinite(m.proteinSlotIndex)?m.proteinSlotIndex:null;
+      if(slotIndex===null){
+        var fallbackBuildSlot=nearestAvailableProteinSlot(currentProteinX,m.el);
+        slotIndex=fallbackBuildSlot?fallbackBuildSlot.index:parseInt(m.el.dataset.membraneSlot,10);
+      }
+
+      assignProteinToSlot(m.el,slotIndex);
+      m.el.classList.remove("is-dragging","is-blocked","is-channeling");
+      clearBuildSlotPreview();
+      try{m.el.releasePointerCapture(m.pointerId)}catch(_){}
+      moving=null;
+      return;
+    }
+
     if(isLigandType(m.el.dataset.type)){
       clearLigandDropTargets();
 
@@ -2642,6 +2772,18 @@
     else addLigands();
   });
 
+  modeButtons.forEach(function(button){
+    button.addEventListener("click",function(){
+      applyLabMode(button.dataset.labMode,true);
+    });
+  });
+
+  if(resetModeScenario){
+    resetModeScenario.addEventListener("click",function(){
+      seedModeScenario(currentLabMode);
+    });
+  }
+
   document.querySelectorAll(".solute-choice").forEach(function(button){
     button.addEventListener("click",function(event){
       event.preventDefault();
@@ -2716,57 +2858,18 @@
     renderParticleCanvas(performance.now());
   }
 
-  function placeModeProtein(type,fraction){
-    var b=barrier();
-    return createPlaced(type,"protein",stage.clientWidth*fraction,b.center,{select:false});
-  }
-
   function seedModeScenario(modeName){
-    var cfg=labModes[modeName];
-    if(!cfg)return;
+    var cfg=labModes[modeName]||labModes.simple;
 
     clearSimulationScene();
     setMembraneVoltage(-70);
     setChargesVisible(false);
-
-    if(modeName==="simple"){
-      spawnBatch("o2","EC",50);spawnBatch("o2","IC",10);
-      spawnBatch("co2","EC",12);spawnBatch("co2","IC",44);
-    }else if(modeName==="leak"){
-      placeModeProtein("vazante-na",.43);placeModeProtein("vazante",.57);
-      spawnBatch("na","EC",50);spawnBatch("na","IC",10);
-      spawnBatch("k","EC",10);spawnBatch("k","IC",50);
-    }else if(modeName==="voltage"){
-      placeModeProtein("vg-na",.43);placeModeProtein("vg-k",.57);
-      spawnBatch("na","EC",48);spawnBatch("na","IC",12);
-      spawnBatch("k","EC",12);spawnBatch("k","IC",48);
-      setChargesVisible(true);
-    }else if(modeName==="ligand"){
-      placeModeProtein("lg-na",.43);placeModeProtein("lg-k",.57);
-      spawnBatch("na","EC",38);spawnBatch("na","IC",12);
-      spawnBatch("k","EC",12);spawnBatch("k","IC",38);
-      addLigands();
-    }else if(modeName==="pump"){
-      placeModeProtein("bomba",.50);
-      spawnBatch("na","IC",42);spawnBatch("k","EC",30);spawnBatch("atp","IC",18);
-    }else if(modeName==="sglt"){
-      placeModeProtein("sglt",.50);
-      spawnBatch("na","EC",50);spawnBatch("glucose","EC",26);spawnBatch("na","IC",8);
-    }else if(modeName==="all"){
-      var xs=[.16,.27,.38,.49,.60,.71,.82,.91];
-      cfg.proteins.forEach(function(type,index){placeModeProtein(type,xs[index])});
-      spawnBatch("o2","EC",16);spawnBatch("co2","IC",16);
-      spawnBatch("na","EC",36);spawnBatch("na","IC",10);
-      spawnBatch("k","EC",10);spawnBatch("k","IC",36);
-      spawnBatch("glucose","EC",16);spawnBatch("atp","IC",12);
-      setChargesVisible(true);
-      addLigands();
-    }
-
     selectSoluteType(cfg.defaultSolute);
+
+    updateBuildSlotVisuals();
     updateCounter();
     updateSoluteControlCounts();
-    updateGradientPanel(performance.now()+650);
+    updateGradientPanel(performance.now()+500);
   }
 
   function applyLabMode(modeName,resetScene){
@@ -3374,6 +3477,7 @@
 
   window.addEventListener("resize",function(){
     resizeParticleCanvas();
+    realignProteinsToBuildSlots();
     slotPointCache=new WeakMap();
     geometryDirty=true;
     barrierCache=null;
@@ -3418,6 +3522,7 @@
 
   buildBilayer();
   resizeParticleCanvas();
+  updateBuildSlotVisuals();
   setChargesVisible(false);
   setMembraneVoltage(-70);
   selectSoluteType("o2");

@@ -1844,3 +1844,191 @@ body[data-membrane-mode="all"] .mode-context-card::after{
   display:none!important;
 }
 
+
+
+/* =========================================================
+   SEVEN-SLOT BUILD + MOLECULE CONSISTENCY V33
+========================================================= */
+
+.membrane-build-slots{
+  position:absolute;
+  z-index:8;
+  inset:0;
+  pointer-events:none;
+}
+.membrane-build-slot{
+  position:absolute;
+  top:50%;
+  width:70px;
+  height:116px;
+  transform:translate(-50%,-50%);
+  border:1px dashed rgba(255,255,255,.10);
+  border-radius:18px;
+  background:rgba(255,255,255,.012);
+  opacity:.38;
+  transition:opacity .12s ease,border-color .12s ease,background .12s ease,transform .12s ease;
+}
+.membrane-build-slot::after{
+  content:"+";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:19px;
+  height:19px;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:50%;
+  color:rgba(255,255,255,.24);
+  font-size:9px;
+  font-weight:900;
+}
+.membrane-build-slot.is-occupied{
+  opacity:.11;
+  border-style:solid;
+}
+.membrane-build-slot.is-occupied::after{
+  content:"";
+  width:5px;
+  height:5px;
+  border:0;
+  background:rgba(255,255,255,.20);
+}
+.membrane-build-slot.is-target{
+  opacity:.92;
+  border-color:var(--mv-accent2);
+  background:rgba(var(--mv-accent-rgb),.07);
+  transform:translate(-50%,-50%) scale(1.025);
+}
+
+/* Same molecule artwork while free, docked or crossing. */
+.placed-molecule{
+  width:32px!important;
+  min-width:32px!important;
+  height:32px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:transparent!important;
+  overflow:visible!important;
+}
+.placed-molecule.docked{
+  transform:translate(-50%,-50%)!important;
+}
+.placed-molecule.channel-transit,
+.placed-molecule.pump-transit,
+.placed-molecule.is-channeling{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+.molecule-shape{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  display:block;
+  filter:none;
+  box-shadow:none;
+}
+.molecule-ion{
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border:1px solid #171717;
+  border-radius:50%;
+  color:#171717;
+  font-size:12px;
+  font-weight:950;
+  line-height:1;
+}
+.molecule-na{background:#ffd52f}
+.molecule-k{width:24px;height:24px;background:#43b7d8}
+.molecule-cl{background:#6bb7cf}
+.molecule-o2{width:30px;height:18px}
+.molecule-o2 i{
+  position:absolute;top:2px;width:14px;height:14px;
+  border:1px solid #171717;border-radius:50%;background:#ef6a67;
+}
+.molecule-o2 i:first-child{left:3px}.molecule-o2 i:last-child{right:3px}
+.molecule-co2{width:34px;height:18px}
+.molecule-co2 i{
+  position:absolute;top:2px;width:14px;height:14px;border:1px solid #171717;border-radius:50%;
+}
+.molecule-co2 i:nth-child(1){left:1px;background:#ef6a67}
+.molecule-co2 i:nth-child(2){left:10px;background:#51545a}
+.molecule-co2 i:nth-child(3){right:1px;background:#ef6a67}
+.molecule-glucose{
+  width:26px;height:24px;border:1px solid #171721;background:#8170b8;
+  clip-path:polygon(25% 4%,75% 4%,98% 50%,75% 96%,25% 96%,2% 50%);
+}
+.placed-molecule[data-type="atp"],
+.placed-molecule[data-type="adp"]{width:48px!important}
+.molecule-atp,.molecule-adp{width:42px;height:22px}
+.molecule-atp i,.molecule-adp i{
+  position:absolute;width:9px;height:9px;border:1px solid #20391e;border-radius:50%;background:#84ca64;
+}
+.molecule-atp i:nth-child(1),.molecule-adp i:nth-child(1){left:0;top:6px}
+.molecule-atp i:nth-child(2),.molecule-adp i:nth-child(2){left:8px;top:3px}
+.molecule-atp i:nth-child(3),.molecule-adp i:nth-child(3){left:16px;top:8px}
+.molecule-atp i:nth-child(4){left:25px;top:4px}
+.molecule-atp i:nth-child(5){left:33px;top:8px}
+.molecule-adp b{position:absolute;left:25px;top:5px;color:#dce1ff;font-size:5px;font-weight:900}
+.molecule-pi{
+  width:22px;height:22px;display:grid;place-items:center;border:1px solid #24264f;border-radius:50%;
+  background:#8b8fd4;color:#fff;font-size:6px;font-weight:900;
+}
+.placed-molecule.is-selected{outline:1px dashed var(--mv-accent2)!important;outline-offset:5px}
+
+/* Pump sites follow the supplied authorial model:
+   3 Na + ATP inside, 2 K only after the outward conformation. */
+.placed-protein[data-type="bomba"] .pump-slot{
+  opacity:0!important;
+  visibility:hidden!important;
+  transition:opacity .15s ease!important;
+}
+.placed-protein[data-type="bomba"] .pump-slot.pump-site-active,
+.placed-protein[data-type="bomba"] .pump-slot.occupied{
+  opacity:1!important;
+  visibility:visible!important;
+}
+.placed-protein[data-type="bomba"].pump-open-in .slot-atp{
+  opacity:.24!important;
+  visibility:visible!important;
+}
+.placed-protein[data-type="bomba"].pump-open-in .slot-atp.pump-site-active,
+.placed-protein[data-type="bomba"].pump-open-in .slot-atp.occupied{
+  opacity:1!important;
+}
+.placed-protein[data-type="bomba"] .slot-k1{left:27px!important;right:auto!important;top:19px!important;bottom:auto!important}
+.placed-protein[data-type="bomba"] .slot-k2{right:27px!important;left:auto!important;top:19px!important;bottom:auto!important}
+.placed-protein[data-type="bomba"] .slot-na1{left:20px!important;bottom:23px!important}
+.placed-protein[data-type="bomba"] .slot-na2{left:50%!important;bottom:12px!important;transform:translateX(-50%)!important}
+.placed-protein[data-type="bomba"] .slot-na3{right:20px!important;left:auto!important;bottom:23px!important}
+.placed-protein[data-type="bomba"] .pump-atp-cavity{right:-9px!important;bottom:17px!important;opacity:.52}
+.placed-protein[data-type="bomba"] .slot-atp{right:-6px!important;bottom:20px!important}
+.placed-protein[data-type="bomba"].pump-open-out .slot-na1,
+.placed-protein[data-type="bomba"].pump-open-out .slot-na2,
+.placed-protein[data-type="bomba"].pump-open-out .slot-na3,
+.placed-protein[data-type="bomba"].pump-open-out .slot-atp,
+.placed-protein[data-type="bomba"].pump-open-out .pump-atp-cavity{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+/* Keep cotransporter centered in the membrane during both conformations. */
+.placed-protein[data-type="sglt"] .sglt-art{
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%)!important;
+}
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-art{
+  transform:translate(-50%,-50%) scaleX(.96)!important;
+}
+
+/* Empty by design: build markers replace preloaded examples. */
+body[data-membrane-mode] .drop-hint{top:23%;opacity:.58}

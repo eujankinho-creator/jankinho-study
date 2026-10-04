@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-perf32">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-build33">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -230,6 +230,16 @@
               <div class="bilayer-highlight"></div>
             </div>
 
+            <div id="membraneBuildSlots" class="membrane-build-slots" aria-label="Sete posições para proteínas">
+              <span class="membrane-build-slot" data-build-slot="0"></span>
+              <span class="membrane-build-slot" data-build-slot="1"></span>
+              <span class="membrane-build-slot" data-build-slot="2"></span>
+              <span class="membrane-build-slot" data-build-slot="3"></span>
+              <span class="membrane-build-slot" data-build-slot="4"></span>
+              <span class="membrane-build-slot" data-build-slot="5"></span>
+              <span class="membrane-build-slot" data-build-slot="6"></span>
+            </div>
+
             <div class="charge-band charge-negative" aria-label="Interior relativamente negativo">
               <span>−</span><span>−</span><span>−</span><span>−</span><span>−</span><span>−</span><span>−</span><span>−</span><span>−</span><span>−</span><span>−</span><span>−</span>
             </div>
@@ -240,7 +250,7 @@
             <div id="dropHint" class="drop-hint">
               <span class="drop-icon">↘</span>
               <strong>Membrana vazia</strong>
-              <small>arraste proteínas e moléculas da paleta</small>
+              <small>use as 7 posições para montar sua membrana</small>
             </div>
 
             <div id="collisionToast" class="collision-toast" aria-live="polite"></div>
@@ -263,10 +273,10 @@
                 <small>CANAIS DE VAZAMENTO</small>
                 <div class="structure-grid">
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vazante-na">
-                    <span class="tool-preview channel-preview na-preview"><i></i></span><b>Leak Na⁺</b><small>passivo</small>
+                    <span class="tool-preview channel-preview na-preview"><i></i></span><b>Vazamento Na⁺</b><small>passivo</small>
                   </button>
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vazante">
-                    <span class="tool-preview channel-preview k-preview"><i></i></span><b>Leak K⁺</b><small>passivo</small>
+                    <span class="tool-preview channel-preview k-preview"><i></i></span><b>Vazamento K⁺</b><small>passivo</small>
                   </button>
                 </div>
               </div>
@@ -275,10 +285,10 @@
                 <small>CANAIS DEPENDENTES DE VOLTAGEM</small>
                 <div class="structure-grid">
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vg-na">
-                    <span class="tool-preview channel-preview vg-na-preview"><i></i></span><b>Na⁺ voltagem</b><small>abre em −50 mV</small>
+                    <span class="tool-preview channel-preview vg-na-preview"><i></i></span><b>Na⁺ · voltagem</b><small>abre em −50 mV</small>
                   </button>
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vg-k">
-                    <span class="tool-preview channel-preview vg-k-preview"><i></i></span><b>K⁺ voltagem</b><small>abre em +30 mV</small>
+                    <span class="tool-preview channel-preview vg-k-preview"><i></i></span><b>K⁺ · voltagem</b><small>abre em +30 mV</small>
                   </button>
                 </div>
               </div>
@@ -290,10 +300,10 @@
                 </div>
                 <div class="structure-grid">
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="lg-na">
-                    <span class="tool-preview channel-preview lg-na-preview"><i></i></span><b>Na⁺ ligante</b><small>abre ao ligar</small>
+                    <span class="tool-preview channel-preview lg-na-preview"><i></i></span><b>Na⁺ · ligante</b><small>abre ao ligar</small>
                   </button>
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="lg-k">
-                    <span class="tool-preview channel-preview lg-k-preview"><i></i></span><b>K⁺ ligante</b><small>abre ao ligar</small>
+                    <span class="tool-preview channel-preview lg-k-preview"><i></i></span><b>K⁺ · ligante</b><small>abre ao ligar</small>
                   </button>
                 </div>
               </div>
@@ -381,7 +391,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-perf32"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-build33"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
