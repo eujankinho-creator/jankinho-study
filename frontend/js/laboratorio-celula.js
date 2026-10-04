@@ -2541,22 +2541,20 @@
   function ligandBindingPoint(channel){
     var px=parseFloat(channel.style.left)||0;
     var py=parseFloat(channel.style.top)||barrier().center;
-    var open=channel.dataset.open==="1";
     var type=channel.dataset.type;
 
-    // Ratios adapted from the reference artwork dimensions (650x900).
-    // K ligand site sits very far to the extracellular-left edge.
+    // Fixed extracellular binding sites: the ligand remains physically seated
+    // in the same cavity while the channel changes conformation.
     if(type==="lg-k"){
       return {
         x:px-27.5,
-        y:py-55
+        y:py-55.5
       };
     }
 
-    // Na site shifts further left after the channel opens.
     return {
-      x:px+(open?-21.8:-15.5),
-      y:py-51.5
+      x:px-18,
+      y:py-56.5
     };
   }
 
@@ -2706,11 +2704,21 @@
     if(ligandsAdded)return;
     ligandsAdded=true;
 
+    var b=barrier();
+    var centerX=stage.clientWidth/2;
+    var centerY=Math.max(54,Math.min(b.top-54,b.top*.5));
+    var spacing=30;
+
     ["ligand-na","ligand-k"].forEach(function(type,typeIndex){
       for(var i=0;i<7;i++){
-        var p=safeSpawnPoint("EC",i,7);
-        p.x+=typeIndex?10:-10;
-        var ligand=createPlaced(type,"molecule",p.x,p.y,{
+        var offset=i-3;
+        var x=centerX+offset*spacing+(typeIndex===0?-7:7);
+        var y=centerY+(typeIndex===0?-18:18)+(Math.abs(offset)%2?4:-3);
+
+        x=Math.max(24,Math.min(stage.clientWidth-24,x));
+        y=Math.max(28,Math.min(b.top-30,y));
+
+        var ligand=createPlaced(type,"molecule",x,y,{
           select:false,
           interactive:true,
           canvasManaged:false
@@ -2719,7 +2727,7 @@
         if(ligand){
           ligand.classList.add("free-ligand");
           var motion=moleculeMotion.get(ligand);
-          if(motion)chooseRandomWalkVelocity(ligand,motion,.9);
+          if(motion)chooseRandomWalkVelocity(ligand,motion,.62);
         }
       }
     });
