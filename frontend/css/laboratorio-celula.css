@@ -2032,3 +2032,712 @@ body[data-membrane-mode="all"] .mode-context-card::after{
 
 /* Empty by design: build markers replace preloaded examples. */
 body[data-membrane-mode] .drop-hint{top:23%;opacity:.58}
+
+
+/* =========================================================
+   PREMIUM LAB WORKSPACE V34
+   Desktop-first re-layout: readable controls, larger simulator,
+   independent side panels and efficient use of viewport space.
+========================================================= */
+
+.cell-lab-view{
+  overflow:hidden;
+}
+
+.membrane-page{
+  width:calc(100% - 18px)!important;
+  max-width:none!important;
+  height:calc(100vh - 62px);
+  min-height:0;
+  margin:0 auto!important;
+  padding:8px 4px 10px!important;
+  display:grid;
+  grid-template-rows:auto auto auto auto minmax(0,1fr);
+  gap:7px;
+  overflow:hidden;
+}
+
+.membrane-back{
+  margin:0 4px!important;
+  min-height:18px;
+  font-size:9px!important;
+  line-height:18px;
+}
+
+/* Compact page identity instead of a large marketing hero. */
+.membrane-intro{
+  min-height:52px!important;
+  padding:4px 8px 6px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center!important;
+  gap:18px!important;
+  border-bottom:1px solid var(--mv-border);
+}
+
+.membrane-intro>div:first-child{
+  max-width:none!important;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  grid-template-rows:auto auto;
+  align-items:end;
+  gap:2px 12px;
+}
+
+.membrane-kicker{
+  grid-row:1;
+  grid-column:1;
+  align-self:center;
+  font-size:7px!important;
+  letter-spacing:.12em!important;
+}
+
+.membrane-intro h1{
+  grid-row:1;
+  grid-column:2;
+  margin:0!important;
+  font-size:27px!important;
+  line-height:1!important;
+  letter-spacing:-.035em!important;
+}
+
+.membrane-intro p{
+  grid-row:2;
+  grid-column:1/-1;
+  max-width:980px;
+  margin:1px 0 0!important;
+  font-size:8px!important;
+  line-height:1.35!important;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.membrane-mode{
+  min-width:190px!important;
+  padding:8px 10px!important;
+  border-radius:10px!important;
+}
+.membrane-mode small{font-size:6.5px!important}
+.membrane-mode strong{font-size:8px!important}
+
+/* Mode bar becomes a true compact navigation strip. */
+.membrane-mode-tabs{
+  margin:0 4px!important;
+  display:grid!important;
+  grid-template-columns:repeat(7,minmax(118px,1fr))!important;
+  gap:6px!important;
+  min-height:52px;
+}
+
+.membrane-mode-tab{
+  min-height:52px!important;
+  padding:7px 8px!important;
+  grid-template-columns:24px minmax(0,1fr)!important;
+  border-radius:10px!important;
+}
+
+.membrane-mode-tab>span{
+  width:24px!important;
+  height:24px!important;
+  font-size:6.5px!important;
+}
+
+.membrane-mode-tab strong{
+  font-size:9px!important;
+  line-height:1.1!important;
+}
+
+.membrane-mode-tab small{
+  margin-top:2px;
+  font-size:6.8px!important;
+  line-height:1.1!important;
+}
+
+/* Context stays useful but does not consume a full card-height section. */
+.mode-context-card{
+  min-height:40px!important;
+  margin:0 4px!important;
+  padding:6px 9px!important;
+  border-radius:10px!important;
+}
+
+.mode-context-card>div{
+  grid-template-columns:auto auto minmax(0,1fr)!important;
+  gap:0 9px!important;
+}
+
+.mode-context-card small{
+  grid-row:auto!important;
+  align-self:center;
+  font-size:6.5px!important;
+}
+
+.mode-context-card strong{
+  align-self:center;
+  font-size:8.5px!important;
+  white-space:nowrap;
+}
+
+.mode-context-card p{
+  align-self:center;
+  font-size:7px!important;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.mode-context-card::after{
+  display:none!important;
+}
+
+#resetModeScenario{
+  height:27px!important;
+  padding:0 9px!important;
+  font-size:6.5px!important;
+}
+
+/* Three-zone laboratory: left palette / central simulator / right inspector. */
+.membrane-lab-shell{
+  min-height:0!important;
+  height:100%;
+  display:grid!important;
+  grid-template-columns:292px minmax(0,1fr)!important;
+  gap:9px!important;
+  align-items:stretch!important;
+  overflow:hidden;
+  padding:0 4px;
+}
+
+.membrane-toolbox{
+  position:relative!important;
+  top:auto!important;
+  width:auto!important;
+  height:100%!important;
+  max-height:none!important;
+  min-height:0;
+  overflow:auto!important;
+  padding:13px!important;
+  border-radius:14px!important;
+  scrollbar-gutter:stable;
+}
+
+.toolbox-head{
+  position:sticky;
+  top:-13px;
+  z-index:4;
+  margin:-2px -2px 10px;
+  padding:6px 4px 11px!important;
+  background:linear-gradient(180deg,var(--mv-surface-strong) 82%,transparent);
+  backdrop-filter:blur(12px);
+}
+
+.toolbox-head span{font-size:7.5px!important}
+.toolbox-head strong{
+  margin-top:2px;
+  font-size:13px!important;
+}
+.toolbox-head small{
+  max-width:112px;
+  font-size:6.8px!important;
+  line-height:1.25;
+  text-align:right;
+}
+
+.tool-group{padding-top:3px!important}
+
+.tool-group-title{
+  margin:0 0 9px!important;
+}
+.tool-group-title span{
+  font-size:8px!important;
+}
+.tool-group-title small{
+  font-size:6.8px!important;
+}
+
+/* Larger solute choices. */
+.solute-picker{
+  grid-template-columns:1fr 1fr!important;
+  gap:7px!important;
+}
+
+.solute-choice{
+  min-height:62px!important;
+  grid-template-columns:37px minmax(0,1fr)!important;
+  gap:9px!important;
+  padding:9px 10px!important;
+  border-radius:10px!important;
+}
+
+.solute-choice .solute-orb{
+  width:34px!important;
+  height:34px!important;
+  transform:scale(1.10);
+}
+
+.solute-choice>span:last-child{
+  font-size:9.5px!important;
+  line-height:1.2!important;
+}
+
+.compartment-controls{
+  margin-top:9px;
+  grid-template-columns:1fr!important;
+  gap:7px!important;
+}
+
+.compartment-control{
+  min-height:76px;
+  gap:8px!important;
+  padding:9px!important;
+  border-radius:10px!important;
+}
+
+.compartment-control-head{
+  gap:8px!important;
+}
+
+.active-solute-mini{
+  min-width:37px!important;
+  height:32px!important;
+  font-size:7.5px!important;
+}
+
+.compartment-control-head strong{font-size:9.5px!important}
+.compartment-control-head small{font-size:7px!important}
+
+.phet-stepper{gap:5px!important}
+
+.solute-adjust{
+  height:34px!important;
+  border-radius:8px!important;
+  font-size:15px!important;
+}
+
+/* Main card uses all remaining height. */
+.membrane-stage-card{
+  min-width:0!important;
+  min-height:0!important;
+  height:100%!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 338px!important;
+  grid-template-rows:52px minmax(0,1fr)!important;
+  overflow:hidden!important;
+  border-radius:14px!important;
+}
+
+.stage-toolbar{
+  min-height:52px!important;
+  padding:7px 10px!important;
+  gap:10px!important;
+}
+
+.stage-status{
+  min-width:150px!important;
+}
+
+.stage-status small{font-size:6.5px!important}
+.stage-status strong{font-size:9px!important}
+
+.simulation-controls{
+  gap:7px!important;
+}
+
+.sim-run-controls,
+.vm-preset-controls{
+  padding:3px!important;
+  border-radius:9px!important;
+}
+
+.vm-preset-controls>span{font-size:6.5px!important}
+
+.sim-control-btn,
+.vm-preset,
+.ligand-toggle{
+  height:30px!important;
+  min-width:34px!important;
+  padding:0 8px!important;
+  font-size:7.5px!important;
+}
+
+.charge-toggle{
+  min-width:65px!important;
+}
+
+.stage-actions{
+  gap:8px!important;
+}
+.stage-actions span{font-size:7px!important}
+.stage-actions button{
+  height:31px!important;
+  padding:0 10px!important;
+  font-size:7.5px!important;
+}
+
+/* Simulator is the visual focus. */
+.membrane-stage{
+  grid-column:1!important;
+  grid-row:2!important;
+  width:100%;
+  height:100%!important;
+  min-height:0!important;
+  border-right:1px solid var(--mv-border)!important;
+}
+
+.environment-label{
+  padding:7px 10px!important;
+  border-radius:9px!important;
+}
+.environment-label strong{font-size:10px!important}
+.environment-label span{font-size:7px!important}
+
+/* Right rail: independent scroll and larger information hierarchy. */
+.stage-footer{
+  grid-column:2!important;
+  grid-row:2!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:100%!important;
+  overflow:auto!important;
+  padding:12px!important;
+  gap:10px!important;
+  align-content:start!important;
+  background:linear-gradient(180deg,var(--mv-surface-soft),color-mix(in srgb,var(--mv-surface) 92%,#000 8%))!important;
+  scrollbar-gutter:stable;
+}
+
+.structure-console,
+.gradient-panel,
+.selection-info{
+  border-radius:11px!important;
+  background:color-mix(in srgb,var(--mv-surface-strong) 74%,transparent)!important;
+}
+
+.structure-console{
+  padding:11px!important;
+}
+
+.structure-console-head{
+  padding-bottom:10px!important;
+}
+
+.structure-console-head small{
+  font-size:7.5px!important;
+}
+
+.structure-console-head strong{
+  margin-top:2px;
+  font-size:12px!important;
+}
+
+.structure-console-head>span{
+  max-width:130px;
+  color:var(--mv-muted);
+  font-size:6.5px!important;
+  line-height:1.3;
+  text-align:right;
+}
+
+.structure-section{
+  gap:7px!important;
+  padding-top:10px!important;
+}
+
+.structure-section+.structure-section{
+  margin-top:9px!important;
+  padding-top:11px!important;
+}
+
+.structure-section>small,
+.structure-section-titleline>small{
+  font-size:7.5px!important;
+  line-height:1.2!important;
+}
+
+.structure-section-titleline{
+  margin-bottom:2px;
+}
+
+.structure-grid{
+  gap:7px!important;
+}
+
+.structure-card{
+  min-height:68px!important;
+  grid-template-columns:40px minmax(0,1fr)!important;
+  gap:2px 8px!important;
+  padding:8px!important;
+  border-radius:10px!important;
+}
+
+.structure-card-wide{
+  min-height:66px!important;
+  grid-template-columns:42px minmax(0,1fr)!important;
+}
+
+.structure-card .tool-preview{
+  transform:scale(1.12);
+  transform-origin:center;
+}
+
+.structure-card>b,
+.structure-card>span>b{
+  font-size:9px!important;
+  line-height:1.2!important;
+}
+
+.structure-card>small,
+.structure-card>span>small{
+  font-size:7px!important;
+  line-height:1.2!important;
+}
+
+/* Concentrations become a readable instrument panel. */
+.gradient-panel{
+  padding:11px!important;
+}
+
+.gradient-panel-head{
+  padding-bottom:9px!important;
+}
+
+.gradient-panel-head small{font-size:7.5px!important}
+.gradient-panel-head strong{
+  margin-top:2px;
+  font-size:10px!important;
+}
+.gradient-panel-head>span{font-size:7px!important}
+
+.concentration-grid{
+  gap:6px!important;
+  padding-top:9px!important;
+}
+
+.concentration-row{
+  min-height:38px!important;
+  grid-template-columns:34px minmax(0,1fr) 76px!important;
+  gap:7px!important;
+  padding:6px!important;
+  border-radius:8px!important;
+}
+
+.concentration-symbol{
+  font-size:8.5px!important;
+}
+
+.concentration-row>small{
+  font-size:6.8px!important;
+}
+
+.concentration-bars{
+  height:19px!important;
+  gap:3px!important;
+}
+
+.gradient-panel p{
+  margin-top:9px!important;
+  font-size:6.8px!important;
+  line-height:1.5!important;
+}
+
+/* Selected-structure information gets its own readable block. */
+.selection-info{
+  grid-template-columns:34px minmax(0,1fr)!important;
+  gap:9px!important;
+  padding:10px!important;
+}
+
+.selection-index{
+  width:34px!important;
+  height:34px!important;
+  font-size:7px!important;
+}
+
+.selection-info small{font-size:7px!important}
+.selection-info strong{font-size:10px!important}
+.selection-info p{
+  margin-top:2px!important;
+  font-size:7.3px!important;
+  line-height:1.5!important;
+}
+
+.delete-key-hint{
+  padding-top:7px!important;
+  font-size:6.5px!important;
+}
+
+/* In simple diffusion there is no protein library: give more width back to the stage. */
+body[data-membrane-mode="simple"] .membrane-stage-card{
+  grid-template-columns:minmax(0,1fr) 300px!important;
+}
+
+/* Wide desktop */
+@media(min-width:1800px){
+  .membrane-lab-shell{
+    grid-template-columns:310px minmax(0,1fr)!important;
+  }
+  .membrane-stage-card{
+    grid-template-columns:minmax(0,1fr) 365px!important;
+  }
+  .stage-footer{padding:14px!important}
+}
+
+/* Normal laptop/desktop */
+@media(max-width:1500px){
+  .membrane-page{
+    width:calc(100% - 12px)!important;
+  }
+
+  .membrane-intro h1{font-size:24px!important}
+  .membrane-intro p{font-size:7.4px!important}
+
+  .membrane-mode-tabs{
+    grid-template-columns:repeat(7,minmax(102px,1fr))!important;
+  }
+  .membrane-mode-tab{
+    padding:6px!important;
+  }
+  .membrane-mode-tab strong{font-size:8px!important}
+  .membrane-mode-tab small{font-size:6px!important}
+
+  .membrane-lab-shell{
+    grid-template-columns:252px minmax(0,1fr)!important;
+  }
+  .membrane-stage-card{
+    grid-template-columns:minmax(0,1fr) 298px!important;
+  }
+
+  .membrane-toolbox{padding:10px!important}
+  .solute-choice{
+    min-height:56px!important;
+    padding:7px!important;
+  }
+
+  .stage-footer{padding:9px!important}
+  .structure-console{padding:9px!important}
+  .structure-card{
+    min-height:61px!important;
+    padding:7px!important;
+  }
+}
+
+/* Below this width, preserve simulator size by moving the inspector under it. */
+@media(max-width:1180px){
+  .cell-lab-view{overflow:auto}
+
+  .membrane-page{
+    height:auto!important;
+    overflow:visible!important;
+    display:block!important;
+  }
+
+  .membrane-intro{
+    margin-bottom:7px;
+  }
+
+  .membrane-mode-tabs{
+    display:flex!important;
+    overflow-x:auto!important;
+    margin-bottom:7px!important;
+  }
+  .membrane-mode-tab{
+    flex:0 0 150px!important;
+  }
+
+  .mode-context-card{margin-bottom:7px!important}
+
+  .membrane-lab-shell{
+    height:auto!important;
+    grid-template-columns:1fr!important;
+    overflow:visible!important;
+  }
+
+  .membrane-toolbox{
+    height:auto!important;
+    max-height:none!important;
+  }
+
+  .membrane-toolbox .compartment-controls{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .membrane-stage-card{
+    height:auto!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto 620px auto!important;
+  }
+
+  .membrane-stage{
+    grid-column:1!important;
+    grid-row:2!important;
+    min-height:620px!important;
+    border-right:0!important;
+  }
+
+  .stage-footer{
+    grid-column:1!important;
+    grid-row:3!important;
+    height:auto!important;
+    overflow:visible!important;
+    grid-template-columns:1.25fr 1fr!important;
+  }
+
+  .selection-info{grid-column:2}
+}
+
+@media(max-width:760px){
+  .membrane-intro{
+    grid-template-columns:1fr!important;
+  }
+
+  .membrane-intro>div:first-child{
+    grid-template-columns:1fr!important;
+  }
+
+  .membrane-kicker,
+  .membrane-intro h1,
+  .membrane-intro p{
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
+
+  .membrane-intro p{
+    white-space:normal!important;
+  }
+
+  .membrane-mode{
+    width:100%;
+  }
+
+  .mode-context-card>div{
+    grid-template-columns:1fr!important;
+  }
+
+  .mode-context-card p{
+    white-space:normal!important;
+  }
+
+  .stage-toolbar{
+    height:auto!important;
+    flex-wrap:wrap!important;
+  }
+
+  .simulation-controls{
+    order:3;
+    width:100%;
+    overflow-x:auto;
+  }
+
+  .membrane-stage-card{
+    grid-template-rows:auto 560px auto!important;
+  }
+
+  .membrane-stage{min-height:560px!important}
+
+  .stage-footer{
+    grid-template-columns:1fr!important;
+  }
+
+  .selection-info{grid-column:1}
+}
