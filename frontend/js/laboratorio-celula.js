@@ -288,11 +288,16 @@
   function chooseRandomWalkVelocity(el,motion,scale){
     var angle=Math.random()*Math.PI*2;
     var diffusion=motion&&motion.diffusion?motion.diffusion:diffusionFactor(el.dataset.type);
-    var speed=(36+Math.random()*8)*Math.sqrt(diffusion)*(scale||1);
-    motion.vx=Math.cos(angle)*speed;
-    motion.vy=Math.sin(angle)*speed;
-    motion.targetVx=motion.vx;
-    motion.targetVy=motion.vy;
+    var speed=(39+Math.random()*9)*Math.sqrt(diffusion)*(scale||1);
+    var nextVx=Math.cos(angle)*speed;
+    var nextVy=Math.sin(angle)*speed;
+
+    motion.targetVx=nextVx;
+    motion.targetVy=nextVy;
+
+    // Start turning immediately, but do not snap to a new direction.
+    motion.vx+=(nextVx-motion.vx)*.24;
+    motion.vy+=(nextVy-motion.vy)*.24;
     motion.directionChangeAt=performance.now()+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
   }
 
@@ -301,7 +306,7 @@
     if(moleculeMotion.has(el))return;
     var angle=Math.random()*Math.PI*2;
     var diffusion=diffusionFactor(el.dataset.type);
-    var speed=(20+Math.random()*20)*Math.sqrt(diffusion);
+    var speed=(23+Math.random()*21)*Math.sqrt(diffusion);
     moleculeMotion.set(el,{
       vx:Math.cos(angle)*speed,
       vy:Math.sin(angle)*speed,
@@ -335,7 +340,7 @@
 
     var width=Math.max(1,stage.clientWidth);
     var height=Math.max(1,stage.clientHeight);
-    var dpr=Math.min(1.5,window.devicePixelRatio||1);
+    var dpr=Math.min(1.25,window.devicePixelRatio||1);
     var pixelWidth=Math.max(1,Math.round(width*dpr));
     var pixelHeight=Math.max(1,Math.round(height*dpr));
 
@@ -4230,6 +4235,21 @@
       var boosted=motion.boostUntil&&now<motion.boostUntil;
       if(!boosted&&now>=motion.directionChangeAt)chooseRandomWalkVelocity(el,motion,1);
 
+      // Brownian direction changes interpolate instead of snapping. Guidance
+      // systems (pump/channel/craft) remain in full control when active.
+      if(
+        !boosted&&
+        !motion.pumpGuide&&
+        !motion.gateGuide&&
+        !motion.craftGuide&&
+        Number.isFinite(motion.targetVx)&&
+        Number.isFinite(motion.targetVy)
+      ){
+        var velocityBlend=1-Math.exp(-dt*7.4);
+        motion.vx+=(motion.targetVx-motion.vx)*velocityBlend;
+        motion.vy+=(motion.targetVy-motion.vy)*velocityBlend;
+      }
+
       applyGuidanceForce(el,motion,dt,x,y,b,now);
 
       var nx=x+motion.vx*dt;
@@ -4317,7 +4337,7 @@
 
     ensureSceneCache(now);
     var visibleCount=cachedMolecules.length;
-    var targetFrameMs=visibleCount<=120?16.5:visibleCount<=220?20:visibleCount<=360?24:30;
+    var targetFrameMs=visibleCount<=150?16.5:visibleCount<=260?19:visibleCount<=420?23:28;
     var elapsed=now-lastPhysicsTime;
     if(elapsed<targetFrameMs)return;
 
