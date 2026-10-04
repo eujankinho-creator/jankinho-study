@@ -79,7 +79,10 @@
   var lastAssociationTime=0;
   var lastElectrostaticUpdate=0;
   var lastGradientUpdate=0;
-  var simulationActive=true;
+  var labWindowFocused=document.hasFocus();
+  var labForeground=!document.hidden&&labWindowFocused;
+  var labForegroundQueue=[];
+  var simulationActive=labForeground;
   var simulationPaused=false;
   var simulationTimeScale=1;
   var chargesVisible=false;
@@ -103,7 +106,27 @@
   var labAudioContext=null;
   var labSoundLastAt=Object.create(null);
 
+  function isLabForeground(){
+    return labForeground&&!document.hidden&&labWindowFocused;
+  }
+
+  function runWhenLabForeground(callback){
+    if(typeof callback!=="function")return;
+    if(isLabForeground()){
+      callback();
+      return;
+    }
+    labForegroundQueue.push(callback);
+  }
+
+  function labSetTimeout(callback,delay){
+    return setTimeout(function(){
+      runWhenLabForeground(callback);
+    },delay);
+  }
+
   function unlockLabAudio(){
+    if(!isLabForeground())return labAudioContext;
     if(labAudioContext){
       if(labAudioContext.state==="suspended")labAudioContext.resume().catch(function(){});
       return labAudioContext;
@@ -123,6 +146,7 @@
   }
 
   function playLabSound(kind){
+    if(!isLabForeground())return;
     var ctx=unlockLabAudio();
     if(!ctx||ctx.state==="closed")return;
 
@@ -908,6 +932,33 @@
     });
   }
 
+  function pumpApproachPoint(slot,pump,b){
+    var p=slotStagePoint(slot);
+    var px=parseFloat(pump.style.left)||p.x;
+    var slotName=slot&&slot.dataset?slot.dataset.slot:"";
+    var accept=slot&&slot.dataset?slot.dataset.accept:"";
+    var laneX=0;
+    var laneY=p.y;
+
+    if(accept==="na"){
+      laneX=slotName==="na1"?-46:slotName==="na2"?0:46;
+      laneY=b.bottom+54;
+    }else if(accept==="k"){
+      laneX=slotName==="k1"?-32:32;
+      laneY=b.top-50;
+    }else if(accept==="atp"){
+      laneX=-48;
+      laneY=b.bottom+44;
+    }
+
+    return {
+      x:Math.max(30,Math.min(stage.clientWidth-30,px+laneX)),
+      y:Math.max(26,Math.min(stage.clientHeight-26,laneY)),
+      finalX:p.x,
+      finalY:p.y
+    };
+  }
+
   function assignPumpGuide(el,motion,pump,slot,targetX,targetY,kind,now){
     if(!el||!motion||!pump)return false;
 
@@ -933,11 +984,20 @@
     var sameGuide=motion.pumpGuide&&motion.pumpGuide.pump===pump&&motion.pumpGuide.kind===kind;
     var started=sameGuide&&motion.pumpGuide.startedAt?motion.pumpGuide.startedAt:now;
 
+    var approach=null;
+    if(slot){
+      approach=pumpApproachPoint(slot,pump,barrier());
+    }
+
     motion.pumpGuide={
       pump:pump,
       slot:slot||null,
-      x:targetX,
-      y:targetY,
+      x:approach?approach.x:targetX,
+      y:approach?approach.y:targetY,
+      finalX:approach?approach.finalX:targetX,
+      finalY:approach?approach.finalY:targetY,
+      approachX:approach?approach.x:targetX,
+      approachY:approach?approach.y:targetY,
       kind:kind,
       startedAt:started
     };
@@ -1163,8 +1223,13 @@
             clearPumpGuide(el,motion);
           }else{
             var livePoint=slotStagePoint(pg.slot);
-            pg.x=livePoint.x;
-            pg.y=livePoint.y;
+            var liveApproach=pumpApproachPoint(pg.slot,pump,b);
+            pg.finalX=livePoint.x;
+            pg.finalY=livePoint.y;
+            pg.approachX=liveApproach.x;
+            pg.approachY=liveApproach.y;
+            pg.x=liveApproach.x;
+            pg.y=liveApproach.y;
           }
         }
 
@@ -1177,27 +1242,28 @@
 
           // The force starts subtly and becomes more decisive as the molecule
           // "recognizes" the pump. Random walk remains active, so the path curves naturally.
-          var pFalloff=Math.max(0,1-Math.min(pd,640)/640);
+          var pFalloff=Math.max(0,1-Math.min(pd,680)/680);
           var targetSpeed=pg.kind==="waiting-atp"
-            ? 28+22*Math.pow(pFalloff,.55)
-            : 34+34*Math.pow(pFalloff,.58);
+            ? 24+18*Math.pow(pFalloff,.62)
+            : 28+25*Math.pow(pFalloff,.62);
 
           var nxp=pd>0?pdx/pd:0;
           var nyp=pd>0?pdy/pd:0;
           var desiredVx=nxp*targetSpeed;
           var desiredVy=nyp*targetSpeed;
 
-          // Far away it keeps some random walk. As it gets closer the assigned
-          // molecule progressively commits to its own site, without snapping.
-          var steer=(pg.kind==="waiting-atp"?.05:.07)+
-            (pg.kind==="waiting-atp"?.16:.24)*Math.pow(pFalloff,.70);
-          steer*=.45+.55*ramp;
+          // Each recruited particle follows its own staging lane. The steering
+          // is intentionally moderate: reliability comes from exclusivity,
+          // not from making all ions rush toward the protein.
+          var steer=(pg.kind==="waiting-atp"?.045:.055)+
+            (pg.kind==="waiting-atp"?.12:.17)*Math.pow(pFalloff,.74);
+          steer*=.42+.58*ramp;
 
-          motion.vx+=(desiredVx-motion.vx)*Math.min(.34,steer);
-          motion.vy+=(desiredVy-motion.vy)*Math.min(.34,steer);
+          motion.vx+=(desiredVx-motion.vx)*Math.min(.24,steer);
+          motion.vy+=(desiredVy-motion.vy)*Math.min(.24,steer);
 
           var speed=Math.hypot(motion.vx,motion.vy);
-          var speedCap=pg.kind==="waiting-atp"?54:70;
+          var speedCap=pg.kind==="waiting-atp"?46:58;
           if(speed>speedCap){
             motion.vx=motion.vx/speed*speedCap;
             motion.vy=motion.vy/speed*speedCap;
@@ -2399,7 +2465,7 @@
 
     syncProteinOpenState(channel);
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(!channel.isConnected||channel.dataset.boundLigandId!==ligand.dataset.id)return;
       channel.dataset.ligandState="open";
       channel.dataset.open="1";
@@ -2751,7 +2817,7 @@
     setPumpVisualState(pump,"phosphorylating","Fosforilação");
     playLabSound("phosphorylate");
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(!pump.isConnected)return;
 
       // 2) Only after phosphorylation do the 3 Na+ leave toward EC.
@@ -2849,7 +2915,7 @@
         delete pump.dataset.phosphateBound;
 
         // 4) Only after ATP products appear does the pump expose the two K+ cavities.
-        setTimeout(function(){
+        labSetTimeout(function(){
           if(!pump.isConnected)return;
           delete pump.dataset.cycling;
           setPumpVisualState(pump,"outside-open","K⁺ · 0/2");
@@ -2872,13 +2938,13 @@
     setPumpVisualState(pump,"k-bound","2 K⁺ ligados");
     playLabSound("return");
 
-    setTimeout(function(){
+    labSetTimeout(function(){
       if(!pump.isConnected)return;
 
       // Occluded return toward IC with K+ still visibly inside the protein.
       setPumpVisualState(pump,"resetting","Retorno");
 
-      setTimeout(function(){
+      labSetTimeout(function(){
         if(!pump.isConnected)return;
 
         var lanes=[-17,17];
@@ -2888,7 +2954,7 @@
           animatePumpParticle(item.el,pump,"inward",lanes[index]||0);
         });
 
-        setTimeout(function(){
+        labSetTimeout(function(){
           if(!pump.isConnected)return;
           delete pump.dataset.cycling;
           setPumpVisualState(pump,"inside-open","Na⁺ · 0/3");
@@ -4054,12 +4120,21 @@
               motion.pumpGuide.slot.dataset.reservedBy===el.dataset.id
             ){
               var guidedPoint=slotStagePoint(motion.pumpGuide.slot);
-              motion.pumpGuide.x=guidedPoint.x;
-              motion.pumpGuide.y=guidedPoint.y;
+              var guidedPump=motion.pumpGuide.pump;
+              var approachPoint=pumpApproachPoint(motion.pumpGuide.slot,guidedPump,b);
 
-              // Long-range steering gets the assigned molecule close first.
-              // The final docking animation only starts near its OWN pocket.
-              if(Math.hypot(guidedPoint.x-x,guidedPoint.y-y)<68){
+              motion.pumpGuide.finalX=guidedPoint.x;
+              motion.pumpGuide.finalY=guidedPoint.y;
+              motion.pumpGuide.approachX=approachPoint.x;
+              motion.pumpGuide.approachY=approachPoint.y;
+              motion.pumpGuide.x=approachPoint.x;
+              motion.pumpGuide.y=approachPoint.y;
+
+              // Each molecule reaches a different staging point first. Only then
+              // does it enter its own cavity through the short docking animation.
+              var approachDistance=Math.hypot(approachPoint.x-x,approachPoint.y-y);
+              var directDistance=Math.hypot(guidedPoint.x-x,guidedPoint.y-y);
+              if(approachDistance<26||directDistance<48){
                 pumpSlot=motion.pumpGuide.slot;
               }
             }
@@ -4156,7 +4231,10 @@
   }
 
   function molecularPhysicsLoop(now){
-    if(!simulationActive)return;
+    if(!simulationActive||!isLabForeground()){
+      physicsRaf=0;
+      return;
+    }
     physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
 
     if(!lastPhysicsTime){
@@ -4180,20 +4258,62 @@
     renderParticleCanvas(now);
   }
 
-  window.addEventListener("pagehide",function(){
+  function suspendLabRuntime(){
+    labForeground=false;
     simulationActive=false;
+    lastPhysicsTime=0;
+
     if(physicsRaf){
       cancelAnimationFrame(physicsRaf);
       physicsRaf=0;
     }
-  });
 
-  window.addEventListener("pageshow",function(){
-    if(simulationActive)return;
+    if(labAudioContext&&labAudioContext.state==="running"){
+      labAudioContext.suspend().catch(function(){});
+    }
+  }
+
+  function resumeLabRuntime(){
+    labWindowFocused=document.hasFocus();
+    if(document.hidden||!labWindowFocused)return;
+
+    labForeground=true;
     simulationActive=true;
     lastPhysicsTime=0;
-    physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
+    lastAssociationTime=0;
+
+    var queued=labForegroundQueue.splice(0,labForegroundQueue.length);
+    queued.forEach(function(callback){
+      try{callback()}catch(_){}
+    });
+
+    if(labAudioContext&&labAudioContext.state==="suspended"){
+      labAudioContext.resume().catch(function(){});
+    }
+
+    if(!physicsRaf){
+      physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
+    }
+  }
+
+  function syncLabForegroundState(){
+    labWindowFocused=document.hasFocus();
+    if(document.hidden||!labWindowFocused)suspendLabRuntime();
+    else resumeLabRuntime();
+  }
+
+  document.addEventListener("visibilitychange",syncLabForegroundState);
+  window.addEventListener("blur",function(){
+    labWindowFocused=false;
+    suspendLabRuntime();
   });
+  window.addEventListener("focus",function(){
+    labWindowFocused=true;
+    syncLabForegroundState();
+  });
+
+  window.addEventListener("pagehide",suspendLabRuntime);
+  window.addEventListener("pageshow",syncLabForegroundState);
 
   window.addEventListener("resize",function(){
     resizeParticleCanvas();
@@ -4253,5 +4373,5 @@
   updateGradientPanel(performance.now()+500);
   applyLabMode("simple",true);
   loadUser();
-  physicsRaf=requestAnimationFrame(molecularPhysicsLoop);
+  syncLabForegroundState();
 })();
