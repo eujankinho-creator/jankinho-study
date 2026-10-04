@@ -96,17 +96,23 @@
 
   function proteinArt(type){
     if(type==="bomba"){
-      return '<span class="protein-label">Bomba Na⁺/K⁺</span><span class="protein-art pump-art"><i class="pump-pore"></i><b class="pump-ratio">3:2</b></span>'+
-        '<span class="pump-side-label pump-ec-label">EC · 2 K⁺</span>'+
-        '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K⁺</i>'+
-        '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K⁺</i>'+
-        '<span class="pump-side-label pump-ic-label">IC · 3 Na⁺</span>'+
-        '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na⁺</i>'+
-        '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2">Na⁺</i>'+
-        '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3">Na⁺</i>'+
-        '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp">ATP</i>'+
+      return '<span class="protein-label">Bomba Na⁺/K⁺</span>'+
+        '<span class="protein-art pump-art">'+
+          '<span class="pump-lobe pump-lobe-left"></span>'+
+          '<span class="pump-lobe pump-lobe-right"></span>'+
+          '<span class="pump-chamber"></span>'+
+          '<span class="pump-pocket-caption pocket-caption-k">2 K⁺</span>'+
+          '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K⁺</i>'+
+          '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K⁺</i>'+
+          '<span class="pump-pocket-caption pocket-caption-na">3 Na⁺</span>'+
+          '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na⁺</i>'+
+          '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2">Na⁺</i>'+
+          '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3">Na⁺</i>'+
+          '<span class="pump-atp-cavity"></span>'+
+          '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp">ATP</i>'+
+          '<b class="pump-ratio">3:2</b>'+
+        '</span>'+
         '<span class="pump-state-badge">0/6</span>';
-    }
     return '<span class="protein-label">'+catalogue[type].label+'</span><span class="protein-art protein-channel"><i class="protein-pore"></i></span>';
   }
 
@@ -201,7 +207,7 @@
       return '<span class="ghost-molecule" data-type="'+type+'">'+catalogue[type].label+'</span>';
     }
     if(type==="bomba"){
-      return '<span class="ghost-protein"><span class="protein-art pump-art"><i class="pump-pore"></i><b class="pump-ratio">3:2</b></span></span>';
+      return '<span class="ghost-protein"><span class="protein-art pump-art"><span class="pump-lobe pump-lobe-left"></span><span class="pump-lobe pump-lobe-right"></span><span class="pump-chamber"></span><span class="pump-atp-cavity"></span><b class="pump-ratio">3:2</b></span></span>';
     }
     return '<span class="ghost-protein"><span class="protein-art protein-channel"><i class="protein-pore"></i></span></span>';
   }
@@ -324,10 +330,15 @@
 
   function findDockTarget(el,x,y){
     var type=el.dataset.type,best=null,bestDistance=Infinity;
+    var b=barrier();
+
+    if(type==="k"&&y>b.center+4)return null;
+    if((type==="na"||type==="atp")&&y<b.center-4)return null;
+
     layer.querySelectorAll('.placed-protein[data-type="bomba"] .pump-slot:not(.occupied)').forEach(function(slot){
       if(slot.dataset.accept!==type)return;
       var p=slotStagePoint(slot),d=Math.hypot(p.x-x,p.y-y);
-      if(d<32&&d<bestDistance){best=slot;bestDistance=d}
+      if(d<38&&d<bestDistance){best=slot;bestDistance=d}
     });
     return best;
   }

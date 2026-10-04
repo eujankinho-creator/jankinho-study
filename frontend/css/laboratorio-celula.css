@@ -1584,3 +1584,314 @@
   box-shadow:0 0 0 1px rgba(104,188,231,.08),0 0 24px rgba(86,164,205,.16)!important;
 }
 
+
+
+/* Pump v7 — cavidades anatômicas internas inspiradas no diagrama didático */
+.placed-protein[data-type="bomba"]{
+  width:132px!important;
+  height:164px!important;
+  overflow:visible;
+}
+
+.placed-protein[data-type="bomba"] .protein-label{
+  top:-23px!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-art{
+  position:relative!important;
+  width:122px!important;
+  height:158px!important;
+  overflow:visible!important;
+  display:block!important;
+  background:none!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-art::before,
+.placed-protein[data-type="bomba"] .pump-art::after{
+  display:none!important;
+}
+
+.pump-lobe{
+  position:absolute;
+  z-index:2;
+  top:2px;
+  bottom:2px;
+  width:54px;
+  border:1px solid rgba(222,210,255,.34);
+  background:
+    radial-gradient(circle at 38% 24%,rgba(255,255,255,.12),transparent 24%),
+    linear-gradient(160deg,#b39cf0 0%,#806ac8 48%,#4b3d84 100%);
+  box-shadow:
+    inset 7px 4px 15px rgba(255,255,255,.1),
+    inset -7px -9px 16px rgba(48,32,91,.26),
+    0 0 18px rgba(128,102,220,.12);
+}
+
+.pump-lobe-left{
+  left:2px;
+  border-radius:50% 34% 42% 52% / 25% 30% 70% 72%;
+  clip-path:polygon(
+    0 7%,70% 0,100% 11%,88% 27%,100% 40%,86% 51%,
+    100% 63%,86% 75%,96% 90%,66% 100%,0 94%
+  );
+}
+
+.pump-lobe-right{
+  right:2px;
+  border-radius:34% 50% 52% 42% / 30% 25% 72% 70%;
+  clip-path:polygon(
+    30% 0,100% 7%,100% 94%,34% 100%,4% 90%,14% 75%,
+    0 63%,14% 51%,0 40%,12% 27%,0 11%
+  );
+}
+
+.pump-chamber{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:13px;
+  bottom:17px;
+  width:56px;
+  transform:translateX(-50%);
+  border-radius:30px 30px 24px 24px / 36px 36px 20px 20px;
+  background:
+    radial-gradient(ellipse at 50% 16%,rgba(222,213,255,.15),transparent 34%),
+    linear-gradient(180deg,#302641 0%,#1b1528 42%,#241a34 100%);
+  border:1px solid rgba(201,184,244,.18);
+  box-shadow:
+    inset 0 0 18px rgba(5,4,9,.75),
+    0 0 0 3px rgba(54,39,84,.36);
+}
+
+.pump-chamber::before,
+.pump-chamber::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:42px;
+  border-radius:50%;
+  border:1px solid rgba(214,202,247,.09);
+  pointer-events:none;
+}
+
+.pump-chamber::before{
+  top:21px;
+  height:41px;
+  background:radial-gradient(circle,rgba(246,210,89,.05),transparent 70%);
+}
+
+.pump-chamber::after{
+  bottom:18px;
+  height:55px;
+  background:radial-gradient(circle,rgba(255,112,77,.055),transparent 72%);
+}
+
+.pump-pocket-caption{
+  position:absolute;
+  z-index:7;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:5px;
+  font-weight:900;
+  letter-spacing:.07em;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.pocket-caption-k{
+  top:14px;
+  color:#ffe680;
+}
+
+.pocket-caption-na{
+  bottom:14px;
+  color:#ffad8f;
+}
+
+.pump-slot{
+  position:absolute!important;
+  z-index:10!important;
+  min-width:0!important;
+  width:24px!important;
+  height:24px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  font-size:5.4px!important;
+  line-height:1!important;
+  letter-spacing:-.03em!important;
+  transform:none!important;
+  pointer-events:none!important;
+}
+
+.pump-slot[data-accept="k"]{
+  top:30px!important;
+  background:radial-gradient(circle at 35% 30%,#fff1a4 0 10%,#f7ce4d 38%,#c9971f 100%)!important;
+  color:#3c2a05!important;
+  border:1px solid rgba(255,241,166,.72)!important;
+  box-shadow:
+    inset 2px 2px 4px rgba(255,255,255,.22),
+    0 0 10px rgba(245,202,73,.2)!important;
+}
+
+.pump-slot.slot-k1{left:33px!important}
+.pump-slot.slot-k2{right:33px!important}
+
+.pump-slot[data-accept="na"]{
+  top:auto!important;
+  bottom:31px!important;
+  background:radial-gradient(circle at 35% 30%,#ffc6b2 0 10%,#ff845f 38%,#d94c28 100%)!important;
+  color:#4c1609!important;
+  border:1px solid rgba(255,198,175,.7)!important;
+  box-shadow:
+    inset 2px 2px 4px rgba(255,255,255,.2),
+    0 0 10px rgba(255,111,75,.18)!important;
+}
+
+.pump-slot.slot-na1{left:25px!important}
+.pump-slot.slot-na2{left:49px!important}
+.pump-slot.slot-na3{right:25px!important}
+
+.pump-atp-cavity{
+  position:absolute;
+  z-index:5;
+  right:-8px;
+  bottom:8px;
+  width:41px;
+  height:28px;
+  border-radius:13px 16px 15px 10px;
+  border:1px solid rgba(217,188,255,.3);
+  background:linear-gradient(145deg,#5f4b7f,#322640);
+  box-shadow:
+    inset 3px 3px 8px rgba(255,255,255,.055),
+    0 0 12px rgba(159,116,222,.11);
+}
+
+.pump-slot[data-accept="atp"]{
+  left:auto!important;
+  right:-5px!important;
+  bottom:11px!important;
+  width:35px!important;
+  height:22px!important;
+  border-radius:10px!important;
+  background:radial-gradient(circle at 35% 30%,#ecd9ff 0 8%,#c298f0 38%,#8e5ec9 100%)!important;
+  color:#2d1848!important;
+  border:1px solid rgba(236,216,255,.72)!important;
+  box-shadow:
+    inset 2px 2px 4px rgba(255,255,255,.2),
+    0 0 10px rgba(173,119,228,.2)!important;
+}
+
+.pump-ratio{
+  z-index:12!important;
+  top:50%!important;
+  left:50%!important;
+  transform:translate(-50%,-50%)!important;
+  padding:3px 5px!important;
+  border-radius:7px!important;
+  background:rgba(38,28,58,.86)!important;
+  border:1px solid rgba(212,193,255,.14)!important;
+  color:#f1ebff!important;
+  font-size:7px!important;
+}
+
+.pump-state-badge{
+  top:50%!important;
+  right:-33px!important;
+  min-width:31px!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-side-label{
+  display:none!important;
+}
+
+.pump-slot.occupied{
+  color:transparent!important;
+  background:rgba(255,255,255,.035)!important;
+  border:1px solid rgba(235,240,247,.28)!important;
+  box-shadow:
+    inset 0 0 9px rgba(0,0,0,.4),
+    0 0 10px rgba(174,204,219,.1)!important;
+}
+
+.pump-slot.slot-ready{
+  transform:scale(1.12)!important;
+  border-color:#fff!important;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.12),
+    0 0 18px rgba(193,225,241,.36)!important;
+}
+
+.placed-protein.pump-ready .pump-lobe{
+  box-shadow:
+    inset 7px 4px 15px rgba(255,255,255,.12),
+    inset -7px -9px 16px rgba(48,32,91,.22),
+    0 0 24px rgba(145,116,235,.28)!important;
+}
+
+.placed-protein.pump-cycling .pump-lobe-left{
+  animation:pumpJawLeft .48s ease-in-out infinite alternate;
+}
+.placed-protein.pump-cycling .pump-lobe-right{
+  animation:pumpJawRight .48s ease-in-out infinite alternate;
+}
+
+@keyframes pumpJawLeft{
+  from{transform:translateX(0)}
+  to{transform:translateX(3px)}
+}
+@keyframes pumpJawRight{
+  from{transform:translateX(0)}
+  to{transform:translateX(-3px)}
+}
+
+/* preview da bomba na paleta também mostra duas metades/câmara */
+.pump-preview::before,
+.pump-preview::after{
+  content:"";
+  position:absolute;
+  top:5px;
+  bottom:5px;
+  width:11px;
+  border-radius:8px 4px 5px 8px;
+  background:linear-gradient(155deg,#b39cf0,#806ac8 55%,#4b3d84);
+  border:1px solid rgba(222,210,255,.25);
+  box-shadow:none;
+  transform:none!important;
+}
+
+.pump-preview::before{left:5px}
+.pump-preview::after{right:5px;transform:scaleX(-1)!important}
+
+.pump-preview i{
+  position:relative;
+  z-index:5;
+  color:#f1ebff!important;
+  font-size:6px!important;
+  background:rgba(27,19,42,.72);
+  border-radius:5px;
+  padding:2px 3px;
+}
+
+/* drag fantasma da bomba mantém a silhueta orgânica, sem slots para não poluir */
+.drag-ghost .pump-art{
+  width:76px!important;
+  height:112px!important;
+}
+.drag-ghost .pump-lobe{
+  width:34px!important;
+}
+.drag-ghost .pump-chamber{
+  width:35px!important;
+  top:9px!important;
+  bottom:11px!important;
+}
+.drag-ghost .pump-atp-cavity{
+  width:26px!important;
+  height:18px!important;
+  right:-4px!important;
+  bottom:5px!important;
+}
+
