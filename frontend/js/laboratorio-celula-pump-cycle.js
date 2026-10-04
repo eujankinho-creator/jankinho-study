@@ -40,12 +40,14 @@
   p.c={t0:t,a:p.type==='na'?Math.PI*1.27:Math.PI*1.73,r0:r,r1:out?g.i-38:g.o+38,side:out?'inside':'outside'}
  };
  M.resolveCollisions=()=>{
-  const ions=S.p.filter(p=>p.type!=='atp');for(let pass=0;pass<2;pass++)for(let i=0;i<ions.length;i++)for(let j=i+1;j<ions.length;j++){
+  const ions=S.p.filter(p=>p.type!=='atp');for(let pass=0;pass<3;pass++)for(let i=0;i<ions.length;i++)for(let j=i+1;j<ions.length;j++){
    const a=ions[i],b=ions[j],min=M.radius(a)+M.radius(b)+4,dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||.001;if(d>=min)continue;
-   const nx=dx/d,ny=dy/d,over=min-d,aLock=!!a.b||!!a.c||a.id===S.drag,bLock=!!b.b||!!b.c||b.id===S.drag;
-   if(aLock&&bLock)continue;
-   if(aLock){b.x+=nx*over;b.y+=ny*over;M.keep(b)}
-   else if(bLock){a.x-=nx*over;a.y-=ny*over;M.keep(a)}
+   const nx=dx/d,ny=dy/d,over=min-d,aFixed=!!a.b||!!a.c,bFixed=!!b.b||!!b.c,aDrag=a.id===S.drag,bDrag=b.id===S.drag;
+   if(aFixed&&bFixed)continue;
+   if(aFixed){b.x+=nx*over;b.y+=ny*over;M.keep(b)}
+   else if(bFixed){a.x-=nx*over;a.y-=ny*over;M.keep(a)}
+   else if(aDrag){b.x+=nx*over;b.y+=ny*over;M.keep(b)}
+   else if(bDrag){a.x-=nx*over;a.y-=ny*over;M.keep(a)}
    else{a.x-=nx*over*.5;a.y-=ny*over*.5;b.x+=nx*over*.5;b.y+=ny*over*.5;M.keep(a);M.keep(b)}
   }
  };
