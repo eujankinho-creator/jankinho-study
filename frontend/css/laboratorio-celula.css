@@ -3637,3 +3637,36 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .structure-card[data-type="bomba"] .pump-preview i{
   display:none!important;
 }
+
+
+/* =========================================================
+   Na+/K+ ATPase V44 — cavities without outline
+========================================================= */
+
+/* Empty Na+/K+ sites are recessed spaces only — no black circular ring. */
+.nak-pump-art .pump-slot{
+  border:0!important;
+  box-shadow:none!important;
+  background:rgba(0,82,68,.34)!important;
+}
+
+/* Active empty sites remain visible by tone only. */
+.nak-pump-art .pump-slot.pump-site-active:not(.occupied){
+  border:0!important;
+  box-shadow:none!important;
+  background:rgba(0,82,68,.34)!important;
+}
+
+/* Occupied sites disappear visually beneath the real ion. */
+.nak-pump-art .pump-slot.occupied{
+  border:0!important;
+  box-shadow:none!important;
+  background:rgba(0,82,68,.18)!important;
+}
+
+/* ATP groove keeps its own shape but also loses any artificial ring. */
+.nak-pump-art .nak-site-atp{
+  border:0!important;
+  box-shadow:none!important;
+  background:rgba(60,132,72,.11)!important;
+}
