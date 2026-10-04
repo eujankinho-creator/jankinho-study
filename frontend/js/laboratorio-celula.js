@@ -104,8 +104,11 @@
       boostUntil:0,
       lastSide:null,
       channelCooldownUntil:0,
+      associationCooldownUntil:0,
       lastGateId:null,
-      clearanceRadius:0
+      clearanceRadius:0,
+      gateGuide:null,
+      pumpGuide:null
     });
   }
 
@@ -155,6 +158,122 @@
   function passiveTransportAllowed(type,fromSide){
     if(type==="h2o")return true;
     return passiveDriveForSide(type,fromSide)>.35;
+  }
+
+  function associationAllowed(el,motion,now){
+    if(!el||!motion)return false;
+    if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1")return false;
+    return !(motion.associationCooldownUntil&&now<motion.associationCooldownUntil);
+  }
+
+  function gateGuidanceTarget(el,x,y,b,now){
+    var type=el.dataset.type;
+    var allowed=gates[type]||[];
+    if(!allowed.length)return null;
+
+    var motion=moleculeMotion.get(el);
+    if(!associationAllowed(el,motion,now))return null;
+
+    var side=sideOf(y,b);
+    if(side==="MP"||!passiveTransportAllowed(type,side))return null;
+
+    var half=Math.max(10,el.offsetHeight/2);
+    var mouthY=side==="EC"?b.top-half:b.bottom+half;
+    var drive=Math.max(0,passiveDriveForSide(type,side));
+    var best=null;
+    var bestD=Infinity;
+
+    layer.querySelectorAll(".placed-protein").forEach(function(protein){
+      if(allowed.indexOf(protein.dataset.type)===-1)return;
+
+      var px=parseFloat(protein.style.left)||0;
+      var py=parseFloat(protein.style.top)||b.center;
+      var radial=Math.hypot(px-x,(py-y)*.64);
+
+      if(motion.lastGateId===protein.dataset.id&&motion.clearanceRadius>0&&radial<motion.clearanceRadius)return;
+      if(radial>158)return;
+
+      var d=Math.hypot(px-x,mouthY-y);
+      if(d<bestD){
+        best={
+          gate:protein,
+          x:px,
+          y:mouthY,
+          side:side,
+          distance:d,
+          strength:Math.min(1.35,.18+drive*.24)
+        };
+        bestD=d;
+      }
+    });
+
+    return best;
+  }
+
+  function pumpGuidanceTarget(el,x,y,b,now){
+    var type=el.dataset.type;
+    if(type!=="na"&&type!=="k"&&type!=="atp")return null;
+
+    var motion=moleculeMotion.get(el);
+    if(!associationAllowed(el,motion,now))return null;
+
+    var compartment=sideOf(y,b);
+    if(type==="k"&&compartment!=="EC")return null;
+    if((type==="na"||type==="atp")&&compartment!=="IC")return null;
+
+    var best=null;
+    var bestD=Infinity;
+
+    layer.querySelectorAll('.placed-protein[data-type="bomba"]').forEach(function(pump){
+      if(pump.dataset.cycling==="1")return;
+
+      pump.querySelectorAll('.pump-slot:not(.occupied)').forEach(function(slot){
+        if(slot.dataset.accept!==type)return;
+        var p=slotStagePoint(slot);
+        var d=Math.hypot(p.x-x,p.y-y);
+        if(d<150&&d<bestD){
+          best={pump:pump,slot:slot,x:p.x,y:p.y,distance:d};
+          bestD=d;
+        }
+      });
+    });
+
+    return best;
+  }
+
+  function applyGuidanceForce(el,motion,dt,x,y,b,now){
+    if(!motion||!associationAllowed(el,motion,now))return;
+
+    if(motion.pumpGuide&&motion.pumpGuide.slot&&motion.pumpGuide.slot.isConnected&&!motion.pumpGuide.slot.classList.contains("occupied")){
+      var pg=motion.pumpGuide;
+      var pd=Math.hypot(pg.x-x,pg.y-y);
+
+      if(pd<160){
+        var pStrength=Math.max(0,1-pd/160);
+        motion.vx+=(pg.x-x)*(.42*pStrength)*dt;
+        motion.vy+=(pg.y-y)*(.42*pStrength)*dt;
+      }else{
+        motion.pumpGuide=null;
+      }
+    }
+
+    if(motion.gateGuide&&motion.gateGuide.gate&&motion.gateGuide.gate.isConnected){
+      var gg=motion.gateGuide;
+      if(!passiveTransportAllowed(el.dataset.type,gg.side)){
+        motion.gateGuide=null;
+        return;
+      }
+
+      var gd=Math.hypot(gg.x-x,gg.y-y);
+      if(gd<170){
+        var falloff=Math.max(0,1-gd/170);
+        var force=(.28+.32*gg.strength)*falloff;
+        motion.vx+=(gg.x-x)*force*dt;
+        motion.vy+=(gg.y-y)*force*dt;
+      }else{
+        motion.gateGuide=null;
+      }
+    }
   }
 
   function hasCompatibleGate(type){
@@ -824,6 +943,9 @@
             postMotion.vy=postDirection*(38+Math.random()*20);
             postMotion.boostUntil=postNow+1600;
             postMotion.channelCooldownUntil=postNow+1800;
+            postMotion.associationCooldownUntil=postNow+1550;
+            postMotion.gateGuide=null;
+            postMotion.pumpGuide=null;
             postMotion.lastGateId=transit.gate&&transit.gate.dataset?transit.gate.dataset.id:null;
             postMotion.clearanceRadius=104;
           }
@@ -1105,7 +1227,7 @@
       var px=parseFloat(pump.style.left)||0;
       var py=parseFloat(pump.style.top)||b.center;
       var d=Math.hypot(px-x,(py-y)*.55);
-      if(d<88&&d<bestDistance){
+      if(d<52&&d<bestDistance){
         bestPump=pump;
         bestDistance=d;
       }
@@ -1119,7 +1241,7 @@
       if(slot.dataset.accept!==type)return;
       var p=slotStagePoint(slot);
       var d=Math.hypot(p.x-x,p.y-y);
-      if(d<86&&d<slotDistance){
+      if(d<30&&d<slotDistance){
         bestSlot=slot;
         slotDistance=d;
       }
@@ -1130,23 +1252,24 @@
 
   function autoBindPump(el,slot){
     if(!el||!slot||el.dataset.autoBinding==="1"||el.classList.contains("docked"))return;
+    var p=slotStagePoint(slot);
+    var x=parseFloat(el.style.left)||0;
+    var y=parseFloat(el.style.top)||0;
+    if(Math.hypot(p.x-x,p.y-y)>32)return;
+
     el.dataset.autoBinding="1";
     el.classList.add("auto-associating");
-
-    var p=slotStagePoint(slot);
     el.style.left=p.x+"px";
     el.style.top=p.y+"px";
 
     setTimeout(function(){
-      if(!el.isConnected){
-        return;
-      }
+      if(!el.isConnected)return;
       if(slot.isConnected&&!slot.classList.contains("occupied")){
         dockElement(el,slot);
       }
       delete el.dataset.autoBinding;
       el.classList.remove("auto-associating");
-    },380);
+    },260);
   }
 
   function smooth01(t){
@@ -1170,6 +1293,9 @@
       motion.vy=direction*(42+Math.random()*22);
       motion.boostUntil=now+1800;
       motion.channelCooldownUntil=now+1900;
+      motion.associationCooldownUntil=now+1650;
+      motion.gateGuide=null;
+      motion.pumpGuide=null;
       motion.lastSide=fromSide==="EC"?"IC":"EC";
       motion.lastGateId=gate&&gate.dataset?gate.dataset.id:null;
       motion.clearanceRadius=108;
@@ -1338,23 +1464,28 @@
       var side=sideOf(y,b);
 
       if(associationTick){
+        motion.pumpGuide=pumpGuidanceTarget(el,x,y,b,now);
+        motion.gateGuide=gateGuidanceTarget(el,x,y,b,now);
+
         var slot=nearestPumpSlotForAuto(el,x,y,b);
         if(slot){
           autoBindPump(el,slot);
-          return;
+          if(el.dataset.autoBinding==="1")return;
         }
 
         var gate=nearestCompatibleChannel(el,x,y,b);
         if(gate){
           autoTransportChannel(el,gate,side,b);
-          return;
+          if(el.dataset.autoTransport==="1")return;
         }
       }
 
+      applyGuidanceForce(el,motion,dt,x,y,b,now);
+
       var boosted=motion.boostUntil&&now<motion.boostUntil;
-      var thermal=boosted?1.72:1;
-      var gamma=boosted?1.18:2.25;
-      var noise=boosted?70:48;
+      var thermal=boosted?1.70:1;
+      var gamma=boosted?1.05:1.82;
+      var noise=boosted?66:40;
       var sqrtDt=Math.sqrt(Math.max(dt,.001));
 
       motion.vx+=(-gamma*motion.vx*dt)+((Math.random()*2-1)*noise*sqrtDt*thermal);
@@ -1389,10 +1520,12 @@
 
       if(side==="EC"&&ny+halfH>b.top){
         ny=b.top-halfH;
-        motion.vy=-Math.abs(motion.vy)*.82;
+        motion.vy=-Math.abs(motion.vy)*(.62+Math.random()*.18);
+        motion.vx+=(Math.random()-.5)*12;
       }else if(side==="IC"&&ny-halfH<b.bottom){
         ny=b.bottom+halfH;
-        motion.vy=Math.abs(motion.vy)*.82;
+        motion.vy=Math.abs(motion.vy)*(.62+Math.random()*.18);
+        motion.vx+=(Math.random()-.5)*12;
       }else if(side==="MP"){
         if(y<=b.center){
           ny=b.top-halfH;
