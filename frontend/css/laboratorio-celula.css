@@ -4993,3 +4993,348 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   transform:scaleX(.98);
 }
 
+
+
+/* =========================================================
+   ACTIVE TRANSPORT ART V29 — PhET-like pump silhouettes
+========================================================= */
+
+/* --- Na+/K+ ATPase -------------------------------------------------------
+   PhET visual language:
+   mint outer protein + dark green conformational core.
+   The core flips its opening between cytoplasm/extracellular states.
+------------------------------------------------------------------------- */
+
+.placed-protein[data-type="bomba"]{
+  width:104px!important;
+  height:164px!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-art{
+  width:96px!important;
+  height:156px!important;
+  border-radius:44% 44% 31% 31% / 20% 20% 72% 72%!important;
+  background:#7ccbb9!important;
+  border:1.4px solid #231f20!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  transition:
+    border-radius .34s cubic-bezier(.2,.8,.2,1),
+    transform .34s cubic-bezier(.2,.8,.2,1)!important;
+}
+
+/* The old two jaws become subtle outer volume instead of a separate split pump. */
+.placed-protein[data-type="bomba"] .pump-lobe{
+  position:absolute!important;
+  top:8px!important;
+  bottom:8px!important;
+  width:44px!important;
+  background:#7ccbb9!important;
+  border:0!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  clip-path:none!important;
+  z-index:1!important;
+}
+.placed-protein[data-type="bomba"] .pump-lobe-left{
+  left:2px!important;
+  border-radius:55% 25% 30% 55% / 20% 16% 72% 68%!important;
+}
+.placed-protein[data-type="bomba"] .pump-lobe-right{
+  right:2px!important;
+  border-radius:25% 55% 55% 30% / 16% 20% 68% 72%!important;
+}
+
+/* Dark-green conformational core */
+.placed-protein[data-type="bomba"] .pump-chamber{
+  position:absolute!important;
+  z-index:2!important;
+  left:50%!important;
+  top:21px!important;
+  width:43px!important;
+  height:118px!important;
+  transform:translateX(-50%)!important;
+  background:#00967a!important;
+  border:1.4px solid #231f20!important;
+  border-radius:44% 44% 38% 38% / 24% 24% 69% 69%!important;
+  box-shadow:none!important;
+  transition:
+    clip-path .36s cubic-bezier(.2,.8,.2,1),
+    transform .36s cubic-bezier(.2,.8,.2,1),
+    border-radius .36s ease!important;
+}
+
+/* Inside-facing state: central dark core opens toward IC/bottom. */
+.placed-protein[data-type="bomba"].pump-open-in .pump-chamber{
+  clip-path:polygon(
+    32% 0,68% 0,
+    70% 16%,84% 24%,84% 43%,
+    68% 52%,77% 68%,92% 82%,
+    79% 100%,58% 90%,50% 74%,42% 90%,21% 100%,8% 82%,23% 68%,32% 52%,16% 43%,16% 24%,30% 16%
+  )!important;
+}
+
+/* Outside-facing state = same conformational motif flipped toward EC/top. */
+.placed-protein[data-type="bomba"].pump-open-out .pump-chamber{
+  transform:translateX(-50%) rotate(180deg)!important;
+  clip-path:polygon(
+    32% 0,68% 0,
+    70% 16%,84% 24%,84% 43%,
+    68% 52%,77% 68%,92% 82%,
+    79% 100%,58% 90%,50% 74%,42% 90%,21% 100%,8% 82%,23% 68%,32% 52%,16% 43%,16% 24%,30% 16%
+  )!important;
+}
+
+/* Occluded/phosphorylation state is visibly closed. */
+.placed-protein[data-type="bomba"].pump-occluded .pump-chamber{
+  width:36px!important;
+  border-radius:46% 46% 44% 44% / 30% 30% 62% 62%!important;
+  clip-path:polygon(34% 0,66% 0,78% 16%,74% 36%,66% 50%,74% 64%,78% 84%,66% 100%,34% 100%,22% 84%,26% 64%,34% 50%,26% 36%,22% 16%)!important;
+}
+
+/* The outer mint body changes subtly with conformation, as in the two PhET images. */
+.placed-protein[data-type="bomba"].pump-open-in .pump-art{
+  border-radius:43% 43% 24% 24% / 20% 20% 76% 76%!important;
+}
+.placed-protein[data-type="bomba"].pump-open-out .pump-art{
+  border-radius:24% 24% 43% 43% / 76% 76% 20% 20%!important;
+}
+.placed-protein[data-type="bomba"].pump-occluded .pump-art{
+  border-radius:38% 38% 34% 34% / 27% 27% 63% 63%!important;
+}
+
+/* Binding sites stay functional but look like recessed holes in the protein. */
+.placed-protein[data-type="bomba"] .pump-slot{
+  z-index:6!important;
+  width:21px!important;
+  height:21px!important;
+  background:#18382f!important;
+  border:1.2px solid rgba(13,30,25,.95)!important;
+  box-shadow:inset 0 0 0 3px rgba(124,203,185,.12)!important;
+  color:transparent!important;
+}
+.placed-protein[data-type="bomba"] .pump-slot.occupied{
+  background:#112a23!important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.05)!important;
+}
+.placed-protein[data-type="bomba"] .pump-slot.pump-site-active:not(.occupied){
+  border-color:#d8f4eb!important;
+  box-shadow:inset 0 0 0 2px rgba(216,244,235,.22)!important;
+}
+
+/* Keep captions tiny; shape is now the primary visual explanation. */
+.placed-protein[data-type="bomba"] .pump-pocket-caption{
+  z-index:7!important;
+  font-size:5px!important;
+  padding:1px 3px!important;
+  opacity:.68!important;
+}
+.placed-protein[data-type="bomba"] .pump-ratio{
+  z-index:7!important;
+  font-size:7px!important;
+  min-width:25px!important;
+  height:17px!important;
+  background:#00967a!important;
+  border:1px solid #16483e!important;
+  color:#effff9!important;
+  box-shadow:none!important;
+}
+.placed-protein[data-type="bomba"] .pump-atp-cavity{
+  z-index:5!important;
+  background:#7ccbb9!important;
+  border:1px solid #231f20!important;
+  box-shadow:none!important;
+}
+
+/* Phosphate-bound marker */
+.placed-protein[data-type="bomba"].pump-phosphate-bound .pump-art::after{
+  content:"P";
+  position:absolute;
+  right:-5px;
+  bottom:28px;
+  z-index:8;
+  width:18px;
+  height:18px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#efe78d;
+  border:1px solid #332f18;
+  color:#2d2a13;
+  font-size:7px;
+  font-weight:950;
+}
+
+/* Palette icon for Na+/K+ pump */
+.structure-card[data-type="bomba"] .pump-preview{
+  position:relative!important;
+  width:34px!important;
+  height:40px!important;
+  border-radius:46% 46% 30% 30% / 20% 20% 72% 72%!important;
+  background:#7ccbb9!important;
+  border:1px solid #20332e!important;
+  box-shadow:none!important;
+}
+.structure-card[data-type="bomba"] .pump-preview::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:7px;
+  width:15px;
+  height:27px;
+  transform:translateX(-50%);
+  border-radius:48% 48% 42% 42% / 25% 25% 68% 68%;
+  background:#00967a;
+  border:1px solid #16483e;
+}
+.structure-card[data-type="bomba"] .pump-preview i{
+  position:relative;
+  z-index:2;
+  color:#effff9!important;
+  font-size:5px!important;
+}
+
+
+/* --- Na+/Glucose cotransporter ------------------------------------------
+   PhET visual language:
+   pink outer body + pale-lavender extracellular binding cap + hexagonal
+   glucose site + yellow warning marker when sodium gradient is unfavorable.
+------------------------------------------------------------------------- */
+
+.placed-protein[data-type="sglt"]{
+  width:96px!important;
+  height:164px!important;
+}
+
+.placed-protein[data-type="sglt"] .sglt-art{
+  position:relative!important;
+  width:86px!important;
+  height:154px!important;
+  border-radius:35% 35% 21% 21% / 18% 18% 72% 72%!important;
+  background:#cc6699!important;
+  border:1.4px solid #231f20!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  transition:
+    border-radius .38s cubic-bezier(.2,.8,.2,1),
+    transform .38s cubic-bezier(.2,.8,.2,1)!important;
+}
+
+/* Pale lavender extracellular cap. */
+.placed-protein[data-type="sglt"] .sglt-art::before{
+  content:""!important;
+  position:absolute!important;
+  left:11px!important;
+  right:11px!important;
+  top:8px!important;
+  width:auto!important;
+  height:54px!important;
+  border-radius:46% 46% 34% 34% / 30% 30% 68% 68%!important;
+  background:#c8b8da!important;
+  border:1.2px solid #231f20!important;
+  box-shadow:none!important;
+  transform:none!important;
+  transition:
+    top .4s cubic-bezier(.2,.8,.2,1),
+    bottom .4s cubic-bezier(.2,.8,.2,1),
+    border-radius .4s ease!important;
+}
+
+/* Yellow exclamation mark like the PhET transporter warning. */
+.placed-protein[data-type="sglt"] .sglt-art::after{
+  content:"!";
+  position:absolute;
+  left:50%;
+  top:72px;
+  transform:translateX(-50%);
+  z-index:7;
+  color:#f6e624;
+  -webkit-text-stroke:1px #2b2410;
+  font-size:29px;
+  line-height:1;
+  font-weight:1000;
+  text-shadow:none;
+  opacity:.92;
+}
+
+/* Glucose binding site: lavender hexagon centered in the upper cavity. */
+.placed-protein[data-type="sglt"] .sglt-site{
+  z-index:8!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.placed-protein[data-type="sglt"] .sglt-na-left,
+.placed-protein[data-type="sglt"] .sglt-na-right{
+  width:17px!important;
+  height:17px!important;
+  top:18px!important;
+  border-radius:50%!important;
+  background:#f5cf4d!important;
+  border:1px solid #2c2713!important;
+  color:#332b0b!important;
+  font-size:4px!important;
+}
+.placed-protein[data-type="sglt"] .sglt-na-left{left:13px!important}
+.placed-protein[data-type="sglt"] .sglt-na-right{right:13px!important}
+.placed-protein[data-type="sglt"] .sglt-glucose{
+  left:50%!important;
+  top:25px!important;
+  width:29px!important;
+  height:27px!important;
+  transform:translateX(-50%)!important;
+  border-radius:0!important;
+  clip-path:polygon(25% 3%,75% 3%,98% 50%,75% 97%,25% 97%,2% 50%)!important;
+  background:#b49bc8!important;
+  border:0!important;
+  color:transparent!important;
+}
+
+/* During transport, the protein changes conformation toward the cell interior. */
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-art{
+  transform:scaleX(.96)!important;
+  border-radius:21% 21% 35% 35% / 72% 72% 18% 18%!important;
+}
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-art::before{
+  top:92px!important;
+  border-radius:34% 34% 46% 46% / 68% 68% 30% 30%!important;
+}
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-art::after{
+  opacity:.38;
+}
+
+/* Palette icon for cotransporter */
+.structure-card[data-type="sglt"] .sglt-preview{
+  position:relative!important;
+  width:34px!important;
+  height:40px!important;
+  border-radius:36% 36% 22% 22% / 18% 18% 72% 72%!important;
+  background:#cc6699!important;
+  border:1px solid #4f273e!important;
+  box-shadow:none!important;
+}
+.structure-card[data-type="sglt"] .sglt-preview::before{
+  content:"";
+  position:absolute;
+  left:6px;
+  right:6px;
+  top:4px;
+  height:14px;
+  border-radius:48% 48% 34% 34%;
+  background:#c8b8da;
+  border:1px solid #4e4258;
+}
+.structure-card[data-type="sglt"] .sglt-preview::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:8px;
+  width:10px;
+  height:9px;
+  transform:translateX(-50%);
+  background:#a98dbc;
+  clip-path:polygon(25% 3%,75% 3%,98% 50%,75% 97%,25% 97%,2% 50%);
+}
+.structure-card[data-type="sglt"] .sglt-preview i{
+  display:none!important;
+}
+
