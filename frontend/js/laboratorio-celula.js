@@ -1603,8 +1603,12 @@
     }
 
     var gated=isVoltageGate(type)||isLigandGate(type);
+    var ligandSite=isLigandGate(type)
+      ?'<i class="ligand-binding-site '+(type==="lg-na"?"ligand-binding-site-na":"ligand-binding-site-k")+'" aria-label="Sítio extracelular de ligação"></i>'
+      :'';
+
     return '<span class="protein-label">'+catalogue[type].label+'</span>'+
-      '<span class="protein-art protein-channel"><i class="protein-pore"></i></span>'+
+      '<span class="protein-art protein-channel"><i class="protein-pore"></i>'+ligandSite+'</span>'+
       (gated?'<span class="gate-state-badge">Fechado</span>':'');
   }
 
@@ -1863,7 +1867,10 @@
     if(type==="sglt"){
       return '<span class="ghost-protein"><span class="protein-art sglt-art"><i class="sglt-site sglt-na-left"></i><i class="sglt-site sglt-glucose"></i><i class="sglt-site sglt-na-right"></i></span></span>';
     }
-    return '<span class="ghost-protein"><span class="protein-art protein-channel"><i class="protein-pore"></i></span></span>';
+    var ghostLigandSite=isLigandGate(type)
+      ?'<i class="ligand-binding-site '+(type==="lg-na"?"ligand-binding-site-na":"ligand-binding-site-k")+'"></i>'
+      :'';
+    return '<span class="ghost-protein"><span class="protein-art protein-channel"><i class="protein-pore"></i>'+ghostLigandSite+'</span></span>';
   }
 
   function safeSpawnPoint(side,index,total){
@@ -2567,23 +2574,25 @@
   }
 
   function ligandBindingPoint(channel){
-    var px=parseFloat(channel.style.left)||0;
-    var py=parseFloat(channel.style.top)||barrier().center;
-    var type=channel.dataset.type;
+    if(!channel)return {x:stage.clientWidth/2,y:Math.max(20,barrier().top-30)};
 
-    // Fixed extracellular binding sites: the ligand remains physically seated
-    // in the same cavity while the channel changes conformation.
-    if(type==="lg-k"){
-      return {
-        x:px-27.5,
-        y:py-55.5
-      };
+    var site=channel.querySelector(".ligand-binding-site");
+    if(site&&site.getBoundingClientRect){
+      var stageBox=stage.getBoundingClientRect();
+      var siteBox=site.getBoundingClientRect();
+
+      if(siteBox.width>0&&siteBox.height>0){
+        return {
+          x:(siteBox.left+siteBox.width/2)-stageBox.left,
+          y:(siteBox.top+siteBox.height/2)-stageBox.top
+        };
+      }
     }
 
-    return {
-      x:px-18,
-      y:py-56.5
-    };
+    // Fallback remains extracellular if layout has not painted yet.
+    var px=parseFloat(channel.style.left)||stage.clientWidth/2;
+    var py=parseFloat(channel.style.top)||barrier().center;
+    return {x:px,y:py-70};
   }
 
   function positionBoundLigand(channel){
