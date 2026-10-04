@@ -365,8 +365,8 @@
     if(type==="pi")return {label:"Pi",fill:"#705cf6",stroke:"transparent",text:"#fff",w:20,h:20,shape:"circle"};
     if(type==="atp")return {label:"",fill:"#55db57",stroke:"transparent",text:"#fff",w:39,h:19,shape:"atp"};
     if(type==="adp")return {label:"ADP",fill:"#5967df",stroke:"transparent",text:"#f4f5ff",w:36,h:19,shape:"adp"};
-    if(type==="ligand-na")return {label:"",fill:"#ff8a3d",stroke:"transparent",text:"#fff",w:24,h:22,shape:"triangle"};
-    if(type==="ligand-k")return {label:"",fill:"#4f7cff",stroke:"transparent",text:"#fff",w:24,h:24,shape:"star"};
+    if(type==="ligand-na")return {label:"",fill:"#ff3f78",stroke:"transparent",text:"#fff",w:24,h:22,shape:"triangle"};
+    if(type==="ligand-k")return {label:"",fill:"#c8ff3d",stroke:"transparent",text:"#fff",w:24,h:24,shape:"star"};
     return {label:type.toUpperCase(),fill:"#526774",stroke:"transparent",text:"#ffffff",w:25,h:22,shape:"round"};
   }
 
