@@ -29,7 +29,6 @@
   var simSlow=document.getElementById("simSlow");
   var simNormal=document.getElementById("simNormal");
   var chargeToggle=document.getElementById("chargeToggle");
-  var cytoplasmColorPicker=document.getElementById("cytoplasmColorPicker");
   var cytoplasmPlane=document.getElementById("cytoplasmPlane");
   var chargeOuterBand=stage?stage.querySelector(".charge-positive"):null;
   var chargeInnerBand=stage?stage.querySelector(".charge-negative"):null;
@@ -1399,7 +1398,7 @@
   function buildBilayer(){
     if(!topRow||!bottomRow||!stage)return;
     topRow.textContent="";bottomRow.textContent="";
-    var amount=Math.max(24,Math.min(44,Math.round(stage.clientWidth/31)));
+    var amount=Math.max(46,Math.min(92,Math.round(stage.clientWidth/14)));
     var fragTop=document.createDocumentFragment();
     var fragBottom=document.createDocumentFragment();
     for(var i=0;i<amount;i++){
@@ -3367,54 +3366,6 @@
     moving=null;
   }
 
-  function normalizeHexColor(value){
-    return /^#[0-9a-f]{6}$/i.test(value||"")?value.toLowerCase():"#ffffff";
-  }
-
-  function setCytoplasmColor(value,persist){
-    var color=normalizeHexColor(value);
-
-    if(stage){
-      stage.style.setProperty("--simulation-bg-color",color);
-      stage.style.backgroundColor=color;
-      stage.dataset.backgroundColor=color;
-    }
-
-    if(cytoplasmPlane){
-      cytoplasmPlane.style.backgroundColor=color;
-      cytoplasmPlane.dataset.color=color;
-    }
-
-    if(cytoplasmColorPicker&&cytoplasmColorPicker.value.toLowerCase()!==color){
-      cytoplasmColorPicker.value=color;
-    }
-
-    if(persist!==false){
-      try{
-        localStorage.setItem("cortex-membrane-background-color-v2",color);
-        localStorage.setItem("cortex-membrane-background-color",color);
-        localStorage.removeItem("cortex-membrane-cytoplasm-color");
-      }catch(_){}
-    }
-  }
-
-  function loadCytoplasmColor(){
-    var saved="#08090b";
-    try{
-      var storedV2=localStorage.getItem("cortex-membrane-background-color-v2");
-      var legacy=
-        localStorage.getItem("cortex-membrane-background-color")||
-        localStorage.getItem("cortex-membrane-cytoplasm-color");
-
-      if(storedV2){
-        saved=storedV2;
-      }else if(legacy&&legacy.toLowerCase()!=="#ffffff"){
-        saved=legacy;
-      }
-    }catch(_){}
-    setCytoplasmColor(saved,false);
-  }
-
   function syncSimulationControls(){
     if(simPause){
       simPause.classList.toggle("is-active",simulationPaused);
@@ -3461,15 +3412,6 @@
   if(chargeToggle)chargeToggle.addEventListener("click",function(){
     setChargesVisible(!chargesVisible);
   });
-
-  if(cytoplasmColorPicker){
-    cytoplasmColorPicker.addEventListener("input",function(){
-      setCytoplasmColor(cytoplasmColorPicker.value,true);
-    });
-    cytoplasmColorPicker.addEventListener("change",function(){
-      setCytoplasmColor(cytoplasmColorPicker.value,true);
-    });
-  }
 
   if(ligandToggle)ligandToggle.addEventListener("click",function(){
     if(ligandsAdded)removeLigands();
@@ -4491,7 +4433,6 @@
   updateBuildSlotVisuals();
   setChargesVisible(false);
   setMembraneVoltage(-70);
-  loadCytoplasmColor();
   selectSoluteType("o2");
   syncSimulationControls();
   renderDefaultInfo();
