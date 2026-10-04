@@ -5271,3 +5271,61 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .cytoplasm-plane{
   background:var(--simulation-bg-color,#08090b)!important;
 }
+
+
+/* =========================================================
+   REFERENCE PALETTE + DENSE BILAYER V62
+   Fixed EC/IC colors based on the provided reference image.
+========================================================= */
+
+/* EC: light cool blue. */
+.membrane-stage{
+  background:#cfe2f3!important;
+}
+
+/* IC: warm off-white / light beige. */
+.cytoplasm-plane{
+  background:#f4efe7!important;
+}
+
+/* No user-adjustable background color in this version. */
+.cytoplasm-color-control{
+  display:none!important;
+}
+
+/* Denser phospholipid packing, closer to the reference image. */
+.phospholipid{
+  width:11px!important;
+  flex:0 0 11px!important;
+}
+
+.lipid-head{
+  width:9px!important;
+  height:9px!important;
+}
+
+.top-row .lipid-tail{
+  top:8px!important;
+}
+
+.bottom-row .lipid-tail{
+  bottom:8px!important;
+}
+
+.lipid-tail{
+  height:33px!important;
+  width:1.7px!important;
+}
+
+.tail-a{
+  transform:translateX(-3px) rotate(4deg)!important;
+}
+.tail-b{
+  transform:translateX(1.5px) rotate(-4deg)!important;
+}
+.bottom-row .tail-a{
+  transform:translateX(-3px) rotate(-4deg)!important;
+}
+.bottom-row .tail-b{
+  transform:translateX(1.5px) rotate(4deg)!important;
+}
