@@ -954,7 +954,7 @@
     var laneY=p.y;
 
     if(accept==="na"){
-      laneX=slotName==="na1"?-34:slotName==="na2"?0:34;
+      laneX=slotName==="na1"?-27:slotName==="na2"?27:0;
       laneY=b.bottom+36;
     }else if(accept==="k"){
       laneX=slotName==="k1"?-27:27;
@@ -1577,8 +1577,8 @@
       return '<span class="protein-label">Bomba Na⁺/K⁺</span>'+
         '<span class="protein-art nak-pump-art" aria-label="Bomba de sódio e potássio">'+
           '<svg class="nak-pump-svg" viewBox="0 0 120 170" aria-hidden="true">'+
-            '<path class="nak-shell" d="M31 12 C42 5 51 6 60 12 C69 6 84 7 94 15 C103 24 101 40 102 56 C103 73 108 93 110 106 C113 125 106 140 93 150 C84 156 75 156 68 149 C64 145 62 148 59 153 C55 159 49 159 45 153 C42 148 40 146 36 151 C28 158 17 156 10 149 C3 142 7 131 12 121 C18 109 20 94 22 79 C24 65 23 49 23 37 C23 25 24 17 31 12 Z"/>'+
-            '<path class="nak-cavity" d="M53 31 C53 42 52 50 48 57 C43 64 39 69 39 77 C39 86 43 93 49 97 C55 101 57 108 54 116 C51 124 48 133 47 145 C53 140 57 135 61 130 C65 135 69 141 72 146 C73 133 70 123 66 116 C62 108 63 101 69 97 C77 92 82 87 82 79 C82 70 78 63 71 58 C65 53 65 44 65 31 Z"/>'+
+            '<path class="nak-shell" d="M60 8 C42 8 30 15 27 31 C24 47 24 61 20 79 C16 96 10 114 12 130 C14 146 28 159 43 158 C50 157 55 152 60 145 C65 152 70 157 77 158 C92 159 106 146 108 130 C110 114 104 96 100 79 C96 61 96 47 93 31 C90 15 78 8 60 8 Z"/>'+
+            '<path class="nak-cavity" d="M60 28 C50 33 44 43 44 55 C44 68 34 73 34 84 C34 96 44 102 48 111 C52 120 50 133 44 146 C51 140 56 134 60 128 C64 134 69 140 76 146 C70 133 68 120 72 111 C76 102 86 96 86 84 C86 73 76 68 76 55 C76 43 70 33 60 28 Z"/>'+
             '<path class="nak-atp-groove" d="M31 127 C25 126 21 130 21 136 C21 142 26 145 32 143 C37 142 39 137 37 133 C36 129 34 128 31 127 Z"/>'+
           '</svg>'+
           '<span class="nak-phosphate">P</span>'+
@@ -1858,7 +1858,7 @@
       return '<span class="ghost-molecule" data-type="'+type+'">'+catalogue[type].label+'</span>';
     }
     if(type==="bomba"){
-      return '<span class="ghost-protein"><span class="protein-art nak-pump-art nak-pump-ghost"><svg class="nak-pump-svg" viewBox="0 0 120 170" aria-hidden="true"><path class="nak-shell" d="M31 12 C42 5 51 6 60 12 C69 6 84 7 94 15 C103 24 101 40 102 56 C103 73 108 93 110 106 C113 125 106 140 93 150 C84 156 75 156 68 149 C64 145 62 148 59 153 C55 159 49 159 45 153 C42 148 40 146 36 151 C28 158 17 156 10 149 C3 142 7 131 12 121 C18 109 20 94 22 79 C24 65 23 49 23 37 C23 25 24 17 31 12 Z"/><path class="nak-cavity" d="M53 31 C53 42 52 50 48 57 C43 64 39 69 39 77 C39 86 43 93 49 97 C55 101 57 108 54 116 C51 124 48 133 47 145 C53 140 57 135 61 130 C65 135 69 141 72 146 C73 133 70 123 66 116 C62 108 63 101 69 97 C77 92 82 87 82 79 C82 70 78 63 71 58 C65 53 65 44 65 31 Z"/><path class="nak-atp-groove" d="M31 127 C25 126 21 130 21 136 C21 142 26 145 32 143 C37 142 39 137 37 133 C36 129 34 128 31 127 Z"/></svg></span></span>';
+      return '<span class="ghost-protein"><span class="protein-art nak-pump-art nak-pump-ghost"><svg class="nak-pump-svg" viewBox="0 0 120 170" aria-hidden="true"><path class="nak-shell" d="M60 8 C42 8 30 15 27 31 C24 47 24 61 20 79 C16 96 10 114 12 130 C14 146 28 159 43 158 C50 157 55 152 60 145 C65 152 70 157 77 158 C92 159 106 146 108 130 C110 114 104 96 100 79 C96 61 96 47 93 31 C90 15 78 8 60 8 Z"/><path class="nak-cavity" d="M60 28 C50 33 44 43 44 55 C44 68 34 73 34 84 C34 96 44 102 48 111 C52 120 50 133 44 146 C51 140 56 134 60 128 C64 134 69 140 76 146 C70 133 68 120 72 111 C76 102 86 96 86 84 C86 73 76 68 76 55 C76 43 70 33 60 28 Z"/><path class="nak-atp-groove" d="M31 127 C25 126 21 130 21 136 C21 142 26 145 32 143 C37 142 39 137 37 133 C36 129 34 128 31 127 Z"/></svg></span></span>';
     }
     if(type==="sglt"){
       return '<span class="ghost-protein"><span class="protein-art sglt-art"><i class="sglt-site sglt-na-left"></i><i class="sglt-site sglt-glucose"></i><i class="sglt-site sglt-na-right"></i></span></span>';
@@ -2372,24 +2372,24 @@
         el:naA,
         sx:parseFloat(naA.style.left)||px-22,
         sy:parseFloat(naA.style.top)||py-70,
-        bindX:px-21.5,bindY:py-50.5,
-        innerX:px-21.5,innerY:py+39.5,
+        bindX:px-22.5,bindY:py-50.5,
+        innerX:px-22.5,innerY:py+39.5,
         finalX:px-20,finalY:b.bottom+62
       },
       {
         el:glucose,
         sx:parseFloat(glucose.style.left)||px,
         sy:parseFloat(glucose.style.top)||py-65,
-        bindX:px,bindY:py-38.5,
-        innerX:px,innerY:py+37.5,
+        bindX:px,bindY:py-21.5,
+        innerX:px,innerY:py+22.5,
         finalX:px,finalY:b.bottom+70
       },
       {
         el:naB,
         sx:parseFloat(naB.style.left)||px+22,
         sy:parseFloat(naB.style.top)||py-70,
-        bindX:px+21.5,bindY:py-50.5,
-        innerX:px+21.5,innerY:py+39.5,
+        bindX:px+22.5,bindY:py-50.5,
+        innerX:px+22.5,innerY:py+39.5,
         finalX:px+20,finalY:b.bottom+62
       }
     ];
