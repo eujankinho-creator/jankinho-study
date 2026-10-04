@@ -29,6 +29,8 @@
   var simSlow=document.getElementById("simSlow");
   var simNormal=document.getElementById("simNormal");
   var chargeToggle=document.getElementById("chargeToggle");
+  var chargeOuterBand=stage?stage.querySelector(".charge-positive"):null;
+  var chargeInnerBand=stage?stage.querySelector(".charge-negative"):null;
   var ligandToggle=document.getElementById("ligandToggle");
   var vmPresetButtons=Array.from(document.querySelectorAll(".vm-preset"));
   var modeButtons=Array.from(document.querySelectorAll(".membrane-mode-tab"));
@@ -98,6 +100,74 @@
   var membraneVoltageMv=-70;
   var thermalVoltageMv=26.7;
   var chemicalWeight=1.35;
+  var labAudioContext=null;
+  var labSoundLastAt=Object.create(null);
+
+  function unlockLabAudio(){
+    if(labAudioContext){
+      if(labAudioContext.state==="suspended")labAudioContext.resume().catch(function(){});
+      return labAudioContext;
+    }
+
+    var AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx)return null;
+
+    try{
+      labAudioContext=new AudioCtx();
+      if(labAudioContext.state==="suspended")labAudioContext.resume().catch(function(){});
+    }catch(_){
+      labAudioContext=null;
+    }
+
+    return labAudioContext;
+  }
+
+  function playLabSound(kind){
+    var ctx=unlockLabAudio();
+    if(!ctx||ctx.state==="closed")return;
+
+    var nowMs=performance.now();
+    var last=labSoundLastAt[kind]||0;
+    if(nowMs-last<70)return;
+    labSoundLastAt[kind]=nowMs;
+
+    var patterns={
+      place:[[220,.045,0],[330,.060,.045]],
+      dock:[[430,.045,0],[520,.040,.035]],
+      phosphorylate:[[300,.055,0],[455,.070,.055],[610,.085,.110]],
+      release:[[610,.050,0],[500,.055,.050],[390,.080,.100]],
+      hydrolysis:[[520,.045,0],[355,.080,.050]],
+      synthesize:[[330,.055,0],[470,.065,.050],[660,.100,.110]],
+      return:[[560,.055,0],[430,.065,.055],[340,.085,.115]],
+      ligand:[[390,.045,0],[540,.075,.045]],
+      voltage:[[260,.040,0],[390,.055,.045]]
+    };
+
+    var pattern=patterns[kind]||patterns.dock;
+    var baseTime=ctx.currentTime+.008;
+
+    pattern.forEach(function(note,index){
+      var osc=ctx.createOscillator();
+      var gain=ctx.createGain();
+      var start=baseTime+(note[2]||0);
+      var duration=note[1]||.06;
+      var volume=kind==="dock"?.024:.032;
+
+      osc.type=index%2===0?"sine":"triangle";
+      osc.frequency.setValueAtTime(note[0],start);
+      gain.gain.setValueAtTime(.0001,start);
+      gain.gain.exponentialRampToValueAtTime(volume,start+.012);
+      gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start+duration+.02);
+    });
+  }
+
+  document.addEventListener("pointerdown",unlockLabAudio,{passive:true,once:true});
+  document.addEventListener("keydown",unlockLabAudio,{once:true});
 
   var catalogue={
     "vazante-na":{name:"Canal de vazamento de Na⁺",category:"CANAL DE VAZAMENTO",text:"Canal de Na⁺ sempre aberto. O cruzamento é estocástico e enviesado pelo gradiente eletroquímico.",label:"Vazamento Na⁺",kind:"protein",art:"channel"},
@@ -1045,7 +1115,7 @@
       if(sideOf(cy,b)!==compartment)return;
 
       var d=Math.hypot(cx-x,cy-y);
-      if(d<180&&d<bestD){
+      if(d<360&&d<bestD){
         best={partner:candidate,x:cx,y:cy,distance:d};
         bestD=d;
       }
@@ -1129,12 +1199,24 @@
 
     if(motion.craftGuide&&motion.craftGuide.partner&&motion.craftGuide.partner.isConnected){
       var cg=motion.craftGuide;
-      var cd=Math.hypot(cg.x-x,cg.y-y);
-      if(cd<190){
-        var cFalloff=Math.max(0,1-cd/190);
-        var cForce=.46*Math.pow(cFalloff,.8);
-        motion.vx+=(cg.x-x)*cForce*dt;
-        motion.vy+=(cg.y-y)*cForce*dt;
+      cg.x=parseFloat(cg.partner.style.left)||cg.x;
+      cg.y=parseFloat(cg.partner.style.top)||cg.y;
+
+      var cdx=cg.x-x;
+      var cdy=cg.y-y;
+      var cd=Math.hypot(cdx,cdy);
+
+      if(cd<390){
+        var cFalloff=Math.max(0,1-cd/390);
+        var cForce=.24+.96*Math.pow(cFalloff,.78);
+        motion.vx+=cdx*cForce*dt;
+        motion.vy+=cdy*cForce*dt;
+
+        var cSpeed=Math.hypot(motion.vx,motion.vy);
+        if(cSpeed>68){
+          motion.vx=motion.vx/cSpeed*68;
+          motion.vy=motion.vy/cSpeed*68;
+        }
       }else{
         motion.craftGuide=null;
       }
@@ -1295,7 +1377,25 @@
     });
   }
 
+  function updateChargePolarity(){
+    if(!chargeOuterBand||!chargeInnerBand)return;
+
+    var outerSign=membraneVoltageMv>0?"−":membraneVoltageMv<0?"+":"±";
+    var innerSign=membraneVoltageMv>0?"+":membraneVoltageMv<0?"−":"±";
+    var outerPolarity=membraneVoltageMv>0?"negative":membraneVoltageMv<0?"positive":"neutral";
+    var innerPolarity=membraneVoltageMv>0?"positive":membraneVoltageMv<0?"negative":"neutral";
+
+    chargeOuterBand.dataset.polarity=outerPolarity;
+    chargeInnerBand.dataset.polarity=innerPolarity;
+    chargeOuterBand.setAttribute("aria-label","Exterior relativamente "+(outerPolarity==="positive"?"positivo":outerPolarity==="negative"?"negativo":"neutro"));
+    chargeInnerBand.setAttribute("aria-label","Interior relativamente "+(innerPolarity==="positive"?"positivo":innerPolarity==="negative"?"negativo":"neutro"));
+
+    chargeOuterBand.querySelectorAll("span").forEach(function(node){node.textContent=outerSign});
+    chargeInnerBand.querySelectorAll("span").forEach(function(node){node.textContent=innerSign});
+  }
+
   function setMembraneVoltage(value){
+    var previousVoltage=membraneVoltageMv;
     membraneVoltageMv=parseInt(value,10);
     if(stageVmStatus)stageVmStatus.textContent="Vm ≈ "+(membraneVoltageMv>0?"+":"")+membraneVoltageMv+" mV";
     if(gradientVm)gradientVm.textContent="Vm ≈ "+(membraneVoltageMv>0?"+":"")+membraneVoltageMv+" mV";
@@ -1305,6 +1405,9 @@
       button.classList.toggle("is-active",active);
       button.setAttribute("aria-pressed",active?"true":"false");
     });
+
+    updateChargePolarity();
+    if(previousVoltage!==membraneVoltageMv&&labAudioContext)playLabSound("voltage");
 
     clearTimeout(voltageGateTimer);
     voltageGateTimer=setTimeout(syncVoltageGates,250);
@@ -1594,6 +1697,7 @@
     if(kind==="protein"){
       initializeProteinState(el);
       if(type==="bomba")initializePumpState(el);
+      playLabSound("place");
     }
     if(options.select!==false)selectElement(el);
     updateCounter();
@@ -2259,6 +2363,7 @@
     channel.dataset.ligandState="opening";
     channel.dataset.open="0";
     positionBoundLigand(channel);
+    playLabSound("ligand");
 
     var motion=moleculeMotion.get(ligand);
     if(motion){motion.vx=0;motion.vy=0}
@@ -2442,7 +2547,7 @@
       if(sideOf(cy,b)!==sourceSide)return;
 
       var d=Math.hypot(cx-x,cy-y);
-      if(d<44&&d<bestDistance){
+      if(d<70&&d<bestDistance){
         best=candidate;
         bestDistance=d;
       }
@@ -2471,6 +2576,7 @@
 
     a.classList.add("craft-consumed");
     b.classList.add("craft-consumed");
+    playLabSound("synthesize");
 
     setTimeout(function(){
       if(a.isConnected)a.remove();
@@ -2529,17 +2635,24 @@
     slot.classList.add("occupied");
     slot.dataset.occupiedId=el.dataset.id;
 
+    playLabSound("dock");
     updatePumpState(pump);
     selectElement(pump);
     return true;
   }
 
   function repositionDocked(pump){
+    if(!pump)return;
+
     pump.querySelectorAll(".pump-slot.occupied").forEach(function(slot){
       var el=layer.querySelector('[data-id="'+slot.dataset.occupiedId+'"]');
       if(!el)return;
+
+      // The pump itself is moving, so cached slot coordinates would make ions lag behind.
+      slotPointCache.delete(slot);
       var p=slotStagePoint(slot);
-      el.style.left=p.x+"px";el.style.top=p.y+"px";
+      el.style.left=p.x+"px";
+      el.style.top=p.y+"px";
     });
   }
 
@@ -2598,12 +2711,14 @@
     // 1) 3 Na+ and ATP remain visibly docked while phosphorylation occurs.
     pump.dataset.phosphateBound="1";
     setPumpVisualState(pump,"phosphorylating","Fosforilação");
+    playLabSound("phosphorylate");
 
     setTimeout(function(){
       if(!pump.isConnected)return;
 
       // 2) Only after phosphorylation do the 3 Na+ leave toward EC.
       setPumpVisualState(pump,"na-releasing","3 Na⁺ → EC");
+      playLabSound("release");
 
       var lanes=[-28,0,28];
       var remaining=sodium.length;
@@ -2632,6 +2747,7 @@
 
         // 3) After all three Na+ reach EC, ATP leaves its groove and becomes ADP + Pi.
         setPumpVisualState(pump,"atp-products","ATP → ADP + Pi");
+        playLabSound("hydrolysis");
 
         if(atpItem.el&&atpItem.el.isConnected){
           releasePumpParticle(atpItem.el,atpItem.slot);
@@ -2646,15 +2762,15 @@
 
           var adp=createPlaced(
             "adp","molecule",
-            Math.max(42,Math.min(stage.clientWidth-42,px-54)),
+            Math.max(42,Math.min(stage.clientWidth-42,px-31)),
             b.bottom+58,
             {select:false,interactive:false}
           );
           if(adp){
             var am=moleculeMotion.get(adp);
             if(am){
-              am.vx=-18-Math.random()*14;
-              am.vy=20+Math.random()*10;
+              am.vx=7+Math.random()*4;
+              am.vy=12+Math.random()*6;
               am.targetVx=am.vx;
               am.targetVy=am.vy;
               am.directionChangeAt=performance.now()+700;
@@ -2663,19 +2779,31 @@
 
           var pi=createPlaced(
             "pi","molecule",
-            Math.max(30,Math.min(stage.clientWidth-30,px+48)),
-            b.bottom+54,
+            Math.max(30,Math.min(stage.clientWidth-30,px+31)),
+            b.bottom+55,
             {select:false,interactive:false}
           );
           if(pi){
             var pm=moleculeMotion.get(pi);
             if(pm){
-              pm.vx=16+Math.random()*12;
-              pm.vy=20+Math.random()*10;
+              pm.vx=-7-Math.random()*4;
+              pm.vy=12+Math.random()*6;
               pm.targetVx=pm.vx;
               pm.targetVy=pm.vy;
               pm.directionChangeAt=performance.now()+650;
             }
+          }
+
+          if(adp&&pi){
+            var amNow=moleculeMotion.get(adp);
+            var pmNow=moleculeMotion.get(pi);
+            var adpX=parseFloat(adp.style.left)||px-31;
+            var adpY=parseFloat(adp.style.top)||b.bottom+58;
+            var piX=parseFloat(pi.style.left)||px+31;
+            var piY=parseFloat(pi.style.top)||b.bottom+55;
+
+            if(amNow)amNow.craftGuide={partner:pi,x:piX,y:piY,distance:Math.hypot(piX-adpX,piY-adpY)};
+            if(pmNow)pmNow.craftGuide={partner:adp,x:adpX,y:adpY,distance:Math.hypot(piX-adpX,piY-adpY)};
           }
         }
 
@@ -2704,6 +2832,7 @@
 
     pump.dataset.cycling="1";
     setPumpVisualState(pump,"k-bound","2 K⁺ ligados");
+    playLabSound("return");
 
     setTimeout(function(){
       if(!pump.isConnected)return;
@@ -3859,7 +3988,7 @@
         }else{
           if(features.craft&&(type==="adp"||type==="pi")){
             motion.craftGuide=craftGuidanceTarget(el,x,y,b,now);
-            if(motion.craftGuide&&motion.craftGuide.distance<27&&craftATP(el,motion.craftGuide.partner))continue;
+            if(motion.craftGuide&&motion.craftGuide.distance<42&&craftATP(el,motion.craftGuide.partner))continue;
           }
 
           if(features.pump&&(type==="na"||type==="k"||type==="atp")){
