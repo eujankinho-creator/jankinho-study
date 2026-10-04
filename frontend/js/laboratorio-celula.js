@@ -97,11 +97,13 @@
   function proteinArt(type){
     if(type==="bomba"){
       return '<span class="protein-label">Bomba Na⁺/K⁺</span><span class="protein-art pump-art"><i class="pump-pore"></i><b class="pump-ratio">3:2</b></span>'+
-        '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K</i>'+
-        '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K</i>'+
-        '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na</i>'+
-        '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2">Na</i>'+
-        '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3">Na</i>'+
+        '<span class="pump-side-label pump-ec-label">EC · 2 K⁺</span>'+
+        '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K⁺</i>'+
+        '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K⁺</i>'+
+        '<span class="pump-side-label pump-ic-label">IC · 3 Na⁺</span>'+
+        '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na⁺</i>'+
+        '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2">Na⁺</i>'+
+        '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3">Na⁺</i>'+
         '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp">ATP</i>'+
         '<span class="pump-state-badge">0/6</span>';
     }
@@ -434,7 +436,8 @@
       offsetX:p.x-left,offsetY:p.y-top,
       startSide:el.dataset.kind==="molecule"?sideOf(top,b):"MP",
       clientX:event.clientX,clientY:event.clientY,
-      gate:null,readySlot:null
+      gate:null,readySlot:null,transit:null,
+      lastX:left,lastY:top
     };
     el.classList.add("is-dragging");
     try{el.setPointerCapture(event.pointerId)}catch(_){}
@@ -447,62 +450,175 @@
     rafMove=requestAnimationFrame(applyPlacedMove);
   }
 
+  function limitStep(current,target,maxStep){
+    var delta=target-current;
+    if(Math.abs(delta)<=maxStep)return target;
+    return current+Math.sign(delta)*maxStep;
+  }
+
+  function scheduleMoveAgain(){
+    if(!moving||rafMove)return;
+    rafMove=requestAnimationFrame(applyPlacedMove);
+  }
+
   function applyPlacedMove(){
     rafMove=0;
     if(!moving)return;
-    var m=moving,p=pointFromClient(m.clientX,m.clientY,m.rect),el=m.el;
+
+    var m=moving;
+    var p=pointFromClient(m.clientX,m.clientY,m.rect);
+    var el=m.el;
 
     if(el.dataset.kind==="protein"){
-      var px=clampProteinX(p.x-m.offsetX);
-      el.style.left=px+"px";
+      var proteinTargetX=clampProteinX(p.x-m.offsetX);
+      var proteinCurrentX=parseFloat(el.style.left)||proteinTargetX;
+      var proteinX=limitStep(proteinCurrentX,proteinTargetX,42);
+      el.style.left=proteinX+"px";
       el.style.top=m.b.center+"px";
       if(el.dataset.type==="bomba")repositionDocked(el);
+      if(Math.abs(proteinTargetX-proteinX)>.5)scheduleMoveAgain();
       return;
     }
 
     var type=el.dataset.type;
-    var x=Math.max(18,Math.min(m.rect.width-18,p.x-m.offsetX));
-    var y=Math.max(18,Math.min(m.rect.height-18,p.y-m.offsetY));
+    var desiredX=Math.max(18,Math.min(m.rect.width-18,p.x-m.offsetX));
+    var desiredY=Math.max(18,Math.min(m.rect.height-18,p.y-m.offsetY));
+    var currentX=parseFloat(el.style.left)||m.lastX||desiredX;
+    var currentY=parseFloat(el.style.top)||m.lastY||desiredY;
     var half=Math.max(10,el.offsetHeight/2);
     var topSurface=m.b.top;
     var bottomSurface=m.b.bottom;
-    var crossingFromEC=m.startSide==="EC"&&y+half>=topSurface;
-    var crossingFromIC=m.startSide==="IC"&&y-half<=bottomSurface;
+    var entryTop=topSurface-half;
+    var entryBottom=bottomSurface+half;
+
+    if(m.transit){
+      var transit=m.transit;
+      var gate=transit.gate;
+
+      if(!gate||!gate.isConnected){
+        m.transit=null;
+        m.gate=null;
+        clearGateGlow();
+        el.classList.remove("is-channeling");
+      }else{
+        var gx=parseFloat(gate.style.left)||currentX;
+        var targetY=Math.max(entryTop,Math.min(entryBottom,desiredY));
+        var nextX=limitStep(currentX,gx,8);
+        var nextY=limitStep(currentY,targetY,9);
+
+        el.style.left=nextX+"px";
+        el.style.top=nextY+"px";
+        m.lastX=nextX;
+        m.lastY=nextY;
+
+        gate.classList.add("channel-pass");
+        el.classList.add("is-channeling");
+        el.classList.remove("is-blocked");
+
+        var done=false;
+        if(transit.from==="EC"){
+          if(desiredY<=entryTop&&nextY<=entryTop+1){
+            m.startSide="EC";
+            done=true;
+          }else if(desiredY>=entryBottom&&nextY>=entryBottom-1){
+            m.startSide="IC";
+            done=true;
+          }
+        }else{
+          if(desiredY>=entryBottom&&nextY>=entryBottom-1){
+            m.startSide="IC";
+            done=true;
+          }else if(desiredY<=entryTop&&nextY<=entryTop+1){
+            m.startSide="EC";
+            done=true;
+          }
+        }
+
+        if(done){
+          m.transit=null;
+          m.gate=null;
+          clearGateGlow();
+          el.classList.remove("is-channeling");
+        }else{
+          scheduleMoveAgain();
+        }
+
+        m.readySlot=findDockTarget(el,nextX,nextY);
+        markReadySlot(m.readySlot);
+        return;
+      }
+    }
+
+    var targetX=desiredX;
+    var targetY=desiredY;
+    var crossingFromEC=m.startSide==="EC"&&desiredY+half>=topSurface;
+    var crossingFromIC=m.startSide==="IC"&&desiredY-half<=bottomSurface;
 
     if(crossingFromEC||crossingFromIC){
-      var gate=compatibleGate(type,x);
+      var gate=compatibleGate(type,desiredX);
+
       if(gate){
-        m.gate=gate;
-        gate.classList.add("channel-pass");
-        var gx=parseFloat(gate.style.left)||x;
-        if(y+half>=topSurface-6&&y-half<=bottomSurface+6)x=gx;
-        el.classList.remove("is-blocked");
-      }else{
-        clearGateGlow();
-        m.gate=null;
-        if(crossingFromEC)y=topSurface-half;
-        else y=bottomSurface+half;
-        el.classList.add("is-blocked");
-        showCollision(type);
+        var gateX=parseFloat(gate.style.left)||desiredX;
+        var horizontalDistance=Math.abs(desiredX-gateX);
+
+        if(horizontalDistance<=30){
+          m.gate=gate;
+          m.transit={gate:gate,from:m.startSide};
+          gate.classList.add("channel-pass");
+          el.classList.add("is-channeling");
+          el.classList.remove("is-blocked");
+          scheduleMoveAgain();
+          return;
+        }
       }
+
+      m.gate=null;
+      clearGateGlow();
+      el.classList.remove("is-channeling");
+      targetY=crossingFromEC?entryTop:entryBottom;
+      el.classList.add("is-blocked");
+
+      if(Math.abs(currentY-targetY)<24)showCollision(type);
     }else{
       clearGateGlow();
       m.gate=null;
-      el.classList.remove("is-blocked");
+      el.classList.remove("is-channeling","is-blocked");
     }
 
-    el.style.left=x+"px";el.style.top=y+"px";
-    m.readySlot=findDockTarget(el,x,y);
+    var nextFreeX=limitStep(currentX,targetX,36);
+    var nextFreeY=limitStep(currentY,targetY,36);
+    el.style.left=nextFreeX+"px";
+    el.style.top=nextFreeY+"px";
+    m.lastX=nextFreeX;
+    m.lastY=nextFreeY;
+
+    m.readySlot=findDockTarget(el,nextFreeX,nextFreeY);
     markReadySlot(m.readySlot);
+
+    if(Math.abs(targetX-nextFreeX)>.5||Math.abs(targetY-nextFreeY)>.5){
+      scheduleMoveAgain();
+    }
   }
 
   function endPlacedDrag(event){
     if(!moving||event.pointerId!==moving.pointerId)return;
     if(rafMove){cancelAnimationFrame(rafMove);rafMove=0;applyPlacedMove()}
+
     var m=moving;
-    if(m.readySlot&&m.el.dataset.kind==="molecule")dockElement(m.el,m.readySlot);
-    m.el.classList.remove("is-dragging","is-blocked");
-    markReadySlot(null);clearGateGlow();
+
+    if(m.transit){
+      var half=Math.max(10,m.el.offsetHeight/2);
+      var fallbackY=m.transit.from==="EC"?m.b.top-half:m.b.bottom+half;
+      m.el.style.top=fallbackY+"px";
+      m.startSide=m.transit.from;
+      m.transit=null;
+    }else if(m.readySlot&&m.el.dataset.kind==="molecule"){
+      dockElement(m.el,m.readySlot);
+    }
+
+    m.el.classList.remove("is-dragging","is-blocked","is-channeling");
+    markReadySlot(null);
+    clearGateGlow();
     try{m.el.releasePointerCapture(m.pointerId)}catch(_){}
     moving=null;
   }
@@ -526,22 +642,49 @@
     layer.textContent="";placedCount=0;selectElement(null);updateCounter();
   });
 
-  removeButton.addEventListener("click",function(){
+  function removeSelectedElement(){
     if(!selected)return;
+
     if(selected.dataset.type==="bomba"){
       selected.querySelectorAll(".pump-slot.occupied").forEach(function(slot){
         var molecule=layer.querySelector('[data-id="'+slot.dataset.occupiedId+'"]');
         if(molecule){
-          delete molecule.dataset.dockedPump;delete molecule.dataset.dockedSlot;molecule.classList.remove("docked");
+          delete molecule.dataset.dockedPump;
+          delete molecule.dataset.dockedSlot;
+          molecule.classList.remove("docked");
         }
         clearPumpSlot(slot);
       });
-    }else if(selected.dataset.kind==="molecule"){releaseSlotFor(selected)}
-    selected.remove();selected=null;removeButton.hidden=true;renderDefaultInfo();updateCounter();
-  });
+    }else if(selected.dataset.kind==="molecule"){
+      releaseSlotFor(selected);
+    }
+
+    selected.remove();
+    selected=null;
+    removeButton.hidden=true;
+    renderDefaultInfo();
+    updateCounter();
+  }
+
+  removeButton.addEventListener("click",removeSelectedElement);
 
   document.addEventListener("keydown",function(event){
-    if(event.key==="Escape"){selectElement(null);armedHint.hidden=true}
+    var target=event.target;
+    var typing=target&&(target.matches("input,textarea,select")||target.isContentEditable);
+    if(typing)return;
+
+    if(event.key==="Delete"||event.key==="Backspace"){
+      if(selected){
+        event.preventDefault();
+        removeSelectedElement();
+      }
+      return;
+    }
+
+    if(event.key==="Escape"){
+      selectElement(null);
+      armedHint.hidden=true;
+    }
   });
 
   window.addEventListener("resize",function(){
