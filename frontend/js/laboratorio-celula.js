@@ -2569,6 +2569,36 @@
     return {x:nx,y:ny,bounds:bounds};
   }
 
+  function normalizeLigandsToEC(){
+    var b=barrier();
+    var ligands=getCachedMolecules(performance.now()).filter(function(el){
+      return isLigandType(el.dataset.type)&&el.isConnected;
+    });
+
+    ligands.forEach(function(el,index){
+      if(el.dataset.ligandBound){
+        var channel=layer.querySelector('[data-id="'+el.dataset.ligandBound+'"]');
+        if(channel){
+          positionBoundLigand(channel);
+          return;
+        }
+        delete el.dataset.ligandBound;
+      }
+
+      var x=parseFloat(el.style.left)||stage.clientWidth/2;
+      var y=parseFloat(el.style.top)||0;
+      var bounds=ligandEcBounds(el,b);
+
+      if(sideOf(y,b)!=="EC"||y>bounds.maxY){
+        var column=(index%7)-3;
+        x=stage.clientWidth/2+column*Math.min(32,Math.max(22,stage.clientWidth/24));
+        y=bounds.minY+(bounds.maxY-bounds.minY)*(.34+(index%2)*.18);
+      }
+
+      clampLigandToEC(el,b,x,y);
+    });
+  }
+
   function ligandChannelType(ligandType){
     return ligandType==="ligand-na"?"lg-na":ligandType==="ligand-k"?"lg-k":null;
   }
@@ -2808,6 +2838,11 @@
     }
 
     markSceneCacheDirty();
+
+    requestAnimationFrame(function(){
+      markSceneCacheDirty();
+      normalizeLigandsToEC();
+    });
   }
 
   function removeLigands(){
@@ -4346,7 +4381,10 @@
     var associationInterval=activeCount>220?180:activeCount>130?135:92;
     var associationTick=needsAssociation&&now-lastAssociationTime>associationInterval;
 
-    if(features.ligands)updateLigandChannels(now);
+    if(features.ligands){
+      updateLigandChannels(now);
+      if(associationTick)normalizeLigandsToEC();
+    }
     if(associationTick&&features.sglt)updateSgltTransporters(now,b);
     if(associationTick&&features.pump)refreshPumpRecruitment(now,b);
 
@@ -4484,6 +4522,12 @@
           motion.vy=Math.abs(motion.vy||24);
           motion.targetVy=Math.abs(motion.targetVy||motion.vy||24);
         }
+
+        // Ligands are extracellular-only actors. Do not run them through
+        // the generic membrane collision code below, which also handles IC.
+        el.style.left=nx+"px";
+        el.style.top=ny+"px";
+        continue;
       }
 
       if(features.gas&&isGasType(type)){
