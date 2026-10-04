@@ -2041,3 +2041,128 @@
   100%{scale:1;opacity:1;filter:none}
 }
 
+
+
+/* Dynamics v10 — meios distintos, seleção única e dinâmica molecular */
+.membrane-stage{
+  background:
+    radial-gradient(ellipse at 50% 48%,rgba(86,115,134,.07),transparent 48%),
+    linear-gradient(
+      180deg,
+      rgba(39,126,173,.14) 0%,
+      rgba(35,101,139,.08) 35%,
+      rgba(9,19,29,.98) 38%,
+      rgba(9,19,29,.98) 62%,
+      rgba(98,64,144,.09) 65%,
+      rgba(83,52,122,.13) 100%
+    )!important;
+}
+
+.environment-label{
+  padding:7px 10px 7px 34px;
+  border:1px solid rgba(255,255,255,.055);
+  border-radius:11px;
+  background:rgba(7,13,20,.48);
+  backdrop-filter:blur(8px);
+}
+
+.environment-label::before{
+  position:absolute;
+  left:8px;
+  top:50%;
+  transform:translateY(-50%);
+  width:19px;
+  height:19px;
+  display:grid;
+  place-items:center;
+  border-radius:6px;
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.04em;
+}
+
+.extracellular-label{
+  border-color:rgba(87,185,233,.14);
+  background:linear-gradient(135deg,rgba(35,133,183,.13),rgba(7,13,20,.5));
+}
+.extracellular-label::before{
+  content:"EC";
+  color:#b7e6ff;
+  background:rgba(49,151,203,.17);
+  border:1px solid rgba(95,199,247,.16);
+}
+
+.cytoplasm-label{
+  border-color:rgba(163,126,222,.13);
+  background:linear-gradient(135deg,rgba(106,70,163,.12),rgba(7,13,20,.5));
+}
+.cytoplasm-label::before{
+  content:"IC";
+  color:#dcc6ff;
+  background:rgba(129,90,188,.16);
+  border:1px solid rgba(172,131,232,.15);
+}
+
+.tool-item.palette-selected,
+.molecule-tool.palette-selected{
+  border-color:color-mix(in srgb,var(--item-accent,#8fcce8) 64%,transparent)!important;
+  background:color-mix(in srgb,var(--item-accent,#8fcce8) 13%,#0a141d)!important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb,var(--item-accent,#8fcce8) 12%,transparent),
+    0 0 18px color-mix(in srgb,var(--item-accent,#8fcce8) 10%,transparent);
+}
+
+.tool-item.palette-selected::after,
+.molecule-tool.palette-selected::after{
+  content:"ATIVO";
+  position:absolute;
+  right:7px;
+  top:5px;
+  color:var(--item-accent,#8fcce8);
+  font-size:5px;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+.placed-molecule{
+  transition:
+    box-shadow .16s ease,
+    filter .16s ease,
+    outline .16s ease!important;
+}
+
+.placed-molecule.auto-associating{
+  z-index:35!important;
+  transition:
+    left .34s cubic-bezier(.22,.8,.26,1),
+    top .34s cubic-bezier(.22,.8,.26,1),
+    filter .16s ease!important;
+  filter:drop-shadow(0 0 10px rgba(174,222,245,.32));
+}
+
+.placed-molecule.auto-channeling{
+  z-index:36!important;
+}
+
+.placed-protein.channel-pass{
+  filter:
+    drop-shadow(0 0 9px rgba(120,205,243,.26))
+    drop-shadow(0 0 20px rgba(88,165,201,.12))!important;
+}
+
+.placed-molecule[data-type="na"],
+.placed-molecule[data-type="k"]{
+  will-change:left,top;
+}
+
+.fluid-note small::after{
+  content:" · moléculas em movimento";
+  color:#7895a5;
+}
+
+@media(max-width:620px){
+  .environment-label{
+    padding-left:31px;
+  }
+}
+
