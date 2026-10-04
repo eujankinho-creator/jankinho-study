@@ -6064,3 +6064,357 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     min-height:430px!important;
   }
 }
+
+
+/* =========================================================
+   THEME FLUID WORKSPACE V64
+   Solutes LEFT · Membrane CENTER · Transport library RIGHT
+   Theme-led UI, restored membrane visibility, lighter simulator.
+========================================================= */
+
+/* ---------- definitive simulator palette / visibility fix ---------- */
+
+.cell-lab-view .membrane-stage{
+  --simulation-bg-color:#cfe2f3!important;
+  background:#cfe2f3!important;
+  background-image:none!important;
+  color-scheme:light;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--mv-accent) 18%,transparent),
+    0 10px 28px rgba(15,23,42,.08)!important;
+}
+
+.cell-lab-view .cytoplasm-plane{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:1!important;
+  background:#f4efe7!important;
+  background-image:none!important;
+}
+
+.cell-lab-view .bilayer{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:9!important;
+  pointer-events:none!important;
+}
+
+.cell-lab-view .phospholipid-row{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:2!important;
+}
+
+.cell-lab-view .hydrophobic-core{
+  display:block!important;
+  z-index:1!important;
+  background:rgba(255,47,146,.07)!important;
+}
+
+.cell-lab-view .lipid-head{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  background:#ffad23!important;
+  border:1px solid rgba(53,44,28,.22)!important;
+  box-shadow:none!important;
+}
+
+.cell-lab-view .lipid-tail{
+  display:block!important;
+  visibility:visible!important;
+  opacity:.92!important;
+  background:#ff3f9c!important;
+  box-shadow:none!important;
+}
+
+.cell-lab-view .particle-canvas{
+  z-index:10!important;
+  filter:none!important;
+}
+
+.cell-lab-view .placed-layer{
+  z-index:14!important;
+}
+
+/* ---------- workspace order ---------- */
+
+.membrane-lab-shell{
+  grid-template-columns:300px minmax(480px,1fr) 275px!important;
+  grid-template-rows:minmax(470px,1fr) 68px auto auto!important;
+  grid-template-areas:
+    "solutes stage library"
+    "solutes controls library"
+    "solutes info library"
+    "concentrations concentrations concentrations"!important;
+}
+
+/* ---------- theme-driven outer panels ---------- */
+
+.membrane-toolbox,
+.structure-console,
+.stage-toolbar,
+.selection-info,
+.gradient-panel{
+  border-color:color-mix(in srgb,var(--mv-accent) 28%,var(--mv-border))!important;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--mv-surface-strong) 94%,var(--mv-accent) 6%),
+      color-mix(in srgb,var(--mv-surface) 97%,var(--mv-accent) 3%)
+    )!important;
+  color:var(--mv-text)!important;
+  box-shadow:
+    0 0 22px rgba(var(--mv-accent-rgb),.09),
+    0 12px 28px rgba(0,0,0,.13)!important;
+}
+
+.toolbox-head,
+.structure-console-head{
+  border-bottom-color:color-mix(in srgb,var(--mv-accent) 24%,var(--mv-border))!important;
+  background:
+    color-mix(in srgb,var(--mv-surface-strong) 94%,var(--mv-accent) 6%)!important;
+}
+
+.toolbox-head span,
+.structure-console-head small,
+.tool-group-title span,
+.structure-section>small,
+.structure-section-titleline>small,
+.gradient-panel-head small,
+.selection-info small{
+  color:var(--mv-accent2)!important;
+  text-shadow:0 0 12px rgba(var(--mv-accent-rgb),.18)!important;
+}
+
+.toolbox-head strong,
+.structure-console-head strong,
+.compartment-control-head strong,
+.gradient-panel-head strong,
+.selection-info strong,
+.concentration-symbol{
+  color:var(--mv-text)!important;
+}
+
+.toolbox-head small,
+.structure-console-head>span,
+.tool-group-title small,
+.compartment-control-head small,
+.gradient-panel-head>span,
+.selection-info p,
+.concentration-row>small,
+.gradient-panel p,
+.cell-location-card p{
+  color:var(--mv-muted)!important;
+}
+
+/* ---------- left solute column ---------- */
+
+.solute-choice,
+.compartment-control,
+.cell-location-card{
+  border-color:color-mix(in srgb,var(--mv-accent) 18%,var(--mv-border))!important;
+  background:color-mix(in srgb,var(--mv-surface-soft) 94%,var(--mv-accent) 6%)!important;
+  color:var(--mv-text)!important;
+  box-shadow:none!important;
+}
+
+.solute-choice:hover,
+.solute-adjust:hover{
+  border-color:color-mix(in srgb,var(--mv-accent) 56%,var(--mv-border))!important;
+  background:rgba(var(--mv-accent-rgb),.08)!important;
+}
+
+.solute-choice.is-active{
+  border:1px solid color-mix(in srgb,var(--mv-accent) 74%,white 8%)!important;
+  background:rgba(var(--mv-accent-rgb),.15)!important;
+  color:var(--mv-text)!important;
+  box-shadow:
+    inset 3px 0 0 var(--mv-accent),
+    0 0 18px rgba(var(--mv-accent-rgb),.18)!important;
+}
+
+.solute-adjust{
+  border-color:var(--mv-border)!important;
+  background:var(--mv-surface-strong)!important;
+  color:var(--mv-soft)!important;
+}
+
+.active-solute-mini{
+  border:1px solid color-mix(in srgb,var(--mv-accent) 35%,var(--mv-border))!important;
+  background:rgba(var(--mv-accent-rgb),.13)!important;
+  color:var(--mv-accent2)!important;
+  box-shadow:0 0 12px rgba(var(--mv-accent-rgb),.13)!important;
+}
+
+.cell-location-card{
+  box-shadow:inset 0 0 20px rgba(var(--mv-accent-rgb),.035)!important;
+}
+
+.cell-location-copy small{
+  color:var(--mv-accent2)!important;
+}
+.cell-location-copy strong{
+  color:var(--mv-text)!important;
+}
+
+.cell-body{
+  border-color:color-mix(in srgb,var(--mv-accent) 68%,#e7774f)!important;
+  box-shadow:
+    inset 0 0 0 3px rgba(var(--mv-accent-rgb),.08),
+    0 0 16px rgba(var(--mv-accent-rgb),.10)!important;
+}
+.cell-membrane-focus,
+.cell-focus-line{
+  border-color:var(--mv-accent)!important;
+  background:var(--mv-accent)!important;
+  box-shadow:0 0 9px rgba(var(--mv-accent-rgb),.28)!important;
+}
+
+/* ---------- right transport library ---------- */
+
+.structure-section+.structure-section{
+  border-top-color:color-mix(in srgb,var(--mv-accent) 18%,var(--mv-border))!important;
+}
+
+.structure-card{
+  border-color:color-mix(in srgb,var(--mv-accent) 16%,var(--mv-border))!important;
+  background:color-mix(in srgb,var(--mv-surface-soft) 96%,var(--mv-accent) 4%)!important;
+  color:var(--mv-text)!important;
+  box-shadow:none!important;
+}
+
+.structure-card>b,
+.structure-card>span>b{
+  color:var(--mv-text)!important;
+}
+.structure-card>small,
+.structure-card>span>small{
+  color:var(--mv-muted)!important;
+}
+
+.structure-card:hover{
+  border-color:color-mix(in srgb,var(--mv-accent) 62%,var(--mv-border))!important;
+  background:rgba(var(--mv-accent-rgb),.09)!important;
+  box-shadow:0 0 18px rgba(var(--mv-accent-rgb),.12)!important;
+}
+
+.structure-card.palette-selected{
+  border-color:var(--mv-accent)!important;
+  background:rgba(var(--mv-accent-rgb),.14)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--mv-accent-rgb),.22),
+    0 0 20px rgba(var(--mv-accent-rgb),.18)!important;
+}
+
+.ligand-toggle{
+  border-color:color-mix(in srgb,var(--mv-accent) 55%,var(--mv-border))!important;
+  background:rgba(var(--mv-accent-rgb),.12)!important;
+  color:var(--mv-accent2)!important;
+  box-shadow:0 0 14px rgba(var(--mv-accent-rgb),.10)!important;
+}
+
+/* ---------- controls / didactic data ---------- */
+
+.sim-run-controls,
+.vm-preset-controls{
+  border-color:color-mix(in srgb,var(--mv-accent) 18%,var(--mv-border))!important;
+  background:rgba(var(--mv-accent-rgb),.045)!important;
+}
+
+.sim-control-btn,
+.vm-preset{
+  color:var(--mv-muted)!important;
+}
+
+.sim-control-btn.is-active,
+.vm-preset.is-active{
+  border-color:color-mix(in srgb,var(--mv-accent) 62%,var(--mv-border))!important;
+  background:rgba(var(--mv-accent-rgb),.14)!important;
+  color:var(--mv-accent2)!important;
+  box-shadow:0 0 12px rgba(var(--mv-accent-rgb),.10)!important;
+}
+
+.stage-actions button{
+  border-color:var(--mv-border)!important;
+  background:var(--mv-surface-strong)!important;
+  color:var(--mv-soft)!important;
+}
+
+.gradient-panel-head{
+  border-bottom-color:color-mix(in srgb,var(--mv-accent) 18%,var(--mv-border))!important;
+}
+
+.concentration-row{
+  border-color:color-mix(in srgb,var(--mv-accent) 15%,var(--mv-border))!important;
+  background:var(--mv-surface-soft)!important;
+}
+
+.concentration-bars{
+  border-left-color:color-mix(in srgb,var(--mv-accent) 34%,var(--mv-border))!important;
+}
+
+/* ---------- lighter simulator rendering ---------- */
+
+/* No expensive shadows/glows inside the particle field itself. */
+.membrane-stage .placed-protein,
+.membrane-stage .placed-molecule,
+.membrane-stage .protein-channel::before,
+.membrane-stage .protein-channel::after,
+.membrane-stage .protein-pore,
+.membrane-stage .nak-pump-svg,
+.membrane-stage .sglt-art{
+  filter:none!important;
+  text-shadow:none!important;
+}
+
+.membrane-stage .placed-protein{
+  box-shadow:none!important;
+}
+
+/* Keep only a subtle definition on membrane structures. */
+.membrane-stage .protein-channel::before,
+.membrane-stage .protein-channel::after{
+  box-shadow:inset 0 0 0 1px rgba(20,26,32,.06)!important;
+}
+
+.membrane-stage .nak-shell{
+  filter:none!important;
+}
+
+/* ---------- responsive order ---------- */
+
+@media(max-width:1450px){
+  .membrane-lab-shell{
+    grid-template-columns:275px minmax(430px,1fr) 250px!important;
+  }
+}
+
+@media(max-width:1180px){
+  .membrane-lab-shell{
+    grid-template-columns:250px minmax(0,1fr)!important;
+    grid-template-rows:auto 62px auto auto auto!important;
+    grid-template-areas:
+      "solutes stage"
+      "solutes controls"
+      "library library"
+      "info info"
+      "concentrations concentrations"!important;
+  }
+}
+
+@media(max-width:820px){
+  .membrane-lab-shell{
+    grid-template-columns:1fr!important;
+    grid-template-areas:
+      "solutes"
+      "stage"
+      "controls"
+      "library"
+      "info"
+      "concentrations"!important;
+  }
+}
