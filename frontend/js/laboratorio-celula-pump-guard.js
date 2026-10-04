@@ -1,4 +1,4 @@
 (()=>{const M=window.MembraneLab;if(!M)return;const C=M.C,S=M.S,pt=e=>{const r=C.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
- C.onpointermove=e=>{if(S.drag==null)return;const p=S.p.find(q=>q.id===S.drag),m=pt(e);if(p){p.x=M.clamp(m.x,14,C.clientWidth-14);p.y=M.clamp(m.y,14,C.clientHeight-14);M.keep(p);M.resolveCollisions()}};
+ C.onpointermove=e=>{if(S.drag==null)return;const p=S.p.find(q=>q.id===S.drag),m=pt(e);if(p){p.x=M.clamp(m.x,18,C.clientWidth-18);p.y=M.clamp(m.y,18,C.clientHeight-18);M.keep(p);M.resolveCollisions()}};
  const up=e=>{if(S.drag==null)return;const p=S.p.find(q=>q.id===S.drag);S.drag=null;if(p&&!M.bind(p)){M.keep(p);M.leak(p,performance.now());M.resolveCollisions()}try{C.releasePointerCapture(e.pointerId)}catch(_){}};C.onpointerup=up;C.onpointercancel=up
 })();
