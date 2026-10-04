@@ -812,8 +812,8 @@
       if(type==="atp")return guide&&guide.kind==="waiting-atp";
       return false;
     }
-    if(state==="inside-na-bound")return type==="atp";
-    if(state==="outside-open")return type==="k";
+    if(state==="inside-na-bound")return type==="atp"&&guide&&guide.kind==="slot";
+    if(state==="outside-open")return type==="k"&&guide&&guide.kind==="slot";
     return false;
   }
 
