@@ -183,7 +183,7 @@
 
 .lab-choice-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
   margin-top: 22px;
   perspective: 1400px;
@@ -225,6 +225,11 @@
 .membrane-card {
   --card-accent: #72a7ff;
   --card-accent-rgb: 114, 167, 255;
+}
+
+.gprotein-card {
+  --card-accent: #c38cff;
+  --card-accent-rgb: 195, 140, 255;
 }
 
 .lab-choice-card::before {
@@ -318,7 +323,8 @@
 }
 
 .ecg-preview,
-.membrane-preview {
+.membrane-preview,
+.gprotein-preview {
   position: relative;
   height: 224px;
   margin: 15px -24px 15px;
@@ -700,6 +706,76 @@
   font-weight: 900;
 }
 
+.choice-icon.gprotein-icon {
+  border-color: rgba(195, 140, 255, .22);
+  color: #d7b4ff;
+  background: rgba(145, 83, 215, .08);
+  font-size: 12px;
+}
+
+.gprotein-preview {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(195,140,255,.10), transparent 36%),
+    linear-gradient(180deg, rgba(195,140,255,.025), rgba(0,0,0,.04));
+}
+
+.gp-mini-scene {
+  position: absolute;
+  inset: 48px 22px 38px;
+}
+
+.gp-mini-ligand,
+.gp-mini-gpcr,
+.gp-mini-alpha,
+.gp-mini-effector {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(195,140,255,.25);
+  color: #e7d4ff;
+  background: rgba(110,60,165,.16);
+  box-shadow: 0 0 18px rgba(195,140,255,.08);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.gp-mini-ligand { left: 8%; top: 5%; width: 28px; height: 28px; border-radius: 50%; animation: gpLigandMini 3s ease-in-out infinite; }
+.gp-mini-gpcr { left: 31%; top: 28%; width: 54px; height: 78px; border-radius: 18px; }
+.gp-mini-alpha { left: 54%; top: 49%; width: 42px; height: 42px; border-radius: 50%; animation: gpAlphaMini 3s ease-in-out infinite; }
+.gp-mini-effector { right: 5%; top: 31%; width: 76px; height: 62px; border-radius: 15px; }
+
+.gp-mini-path {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(195,140,255,.65), transparent);
+  transform-origin: left center;
+  animation: gpSignalMini 2s ease-in-out infinite;
+}
+.gp-mini-path.p1 { left: 18%; top: 30%; width: 74px; transform: rotate(21deg); }
+.gp-mini-path.p2 { left: 47%; top: 58%; width: 58px; transform: rotate(8deg); }
+.gp-mini-path.p3 { left: 65%; top: 54%; width: 70px; transform: rotate(-14deg); }
+
+.gprotein-readout {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #7f748d;
+  font-size: 8px;
+  font-weight: 800;
+}
+.gprotein-readout span { display: inline-flex; align-items: center; gap: 6px; }
+.gprotein-readout i { width: 5px; height: 5px; border-radius: 50%; background: #c38cff; box-shadow: 0 0 10px rgba(195,140,255,.7); }
+.gprotein-readout strong { color: #d9c1f5; font-size: 8px; }
+
+@keyframes gpLigandMini { 50% { transform: translate(34px, 25px) scale(.9); } }
+@keyframes gpAlphaMini { 50% { transform: translate(18px, -6px); } }
+@keyframes gpSignalMini { 50% { opacity: .25; } }
+
 .choice-icon.membrane-icon {
   border-color: rgba(86, 136, 255, .2);
   color: #89a1ff;
@@ -853,7 +929,8 @@
   }
 
   .ecg-preview,
-  .membrane-preview {
+  .membrane-preview,
+  .gprotein-preview {
     margin-left: -20px;
     margin-right: -20px;
   }
