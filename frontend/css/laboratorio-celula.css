@@ -7453,3 +7453,63 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     grid-template-columns:36px minmax(0,1fr)!important;
   }
 }
+
+
+/* =========================================================
+   PAGE SCROLL RESTORE V66
+   The premium workspace can exceed viewport height; the document must scroll.
+========================================================= */
+
+html{
+  min-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  scroll-behavior:smooth;
+}
+
+body.cell-lab-view{
+  height:auto!important;
+  min-height:100vh!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:auto!important;
+}
+
+.cell-lab-view .main-area{
+  height:auto!important;
+  min-height:100vh!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+
+.cell-lab-view .membrane-page{
+  height:auto!important;
+  min-height:calc(100vh - 62px)!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+
+.cell-lab-view .membrane-lab-shell{
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+
+/* Side panels keep their own useful scrolling on wide desktop without locking the page. */
+@media(min-width:1081px){
+  .cell-lab-view .membrane-toolbox,
+  .cell-lab-view .structure-console{
+    max-height:min(78vh,820px)!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+}
+
+@media(max-width:1080px){
+  .cell-lab-view .membrane-toolbox,
+  .cell-lab-view .structure-console{
+    max-height:none!important;
+    overflow:visible!important;
+  }
+}
