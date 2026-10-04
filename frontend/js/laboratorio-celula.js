@@ -102,14 +102,14 @@
           '<span class="pump-lobe pump-lobe-right"></span>'+
           '<span class="pump-chamber"></span>'+
           '<span class="pump-pocket-caption pocket-caption-k">2 K⁺</span>'+
-          '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1">K⁺</i>'+
-          '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2">K⁺</i>'+
+          '<i class="pump-slot slot-k1" data-accept="k" data-slot="k1" aria-label="Sítio vazio para K+"></i>'+
+          '<i class="pump-slot slot-k2" data-accept="k" data-slot="k2" aria-label="Sítio vazio para K+"></i>'+
           '<span class="pump-pocket-caption pocket-caption-na">3 Na⁺</span>'+
-          '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1">Na⁺</i>'+
-          '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2">Na⁺</i>'+
-          '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3">Na⁺</i>'+
+          '<i class="pump-slot slot-na1" data-accept="na" data-slot="na1" aria-label="Sítio vazio para Na+"></i>'+
+          '<i class="pump-slot slot-na2" data-accept="na" data-slot="na2" aria-label="Sítio vazio para Na+"></i>'+
+          '<i class="pump-slot slot-na3" data-accept="na" data-slot="na3" aria-label="Sítio vazio para Na+"></i>'+
           '<span class="pump-atp-cavity"></span>'+
-          '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp">ATP</i>'+
+          '<i class="pump-slot slot-atp" data-accept="atp" data-slot="atp" aria-label="Sítio vazio para ATP"></i>'+
           '<b class="pump-ratio">3:2</b>'+
         '</span>'+
         '<span class="pump-state-badge">0/6</span>';
@@ -273,7 +273,11 @@
 
     if(inside&&d.moved){
       var p=pointFromClient(d.clientX,d.clientY,r);
-      createPlaced(d.type,d.kind,p.x,p.y);
+      var created=createPlaced(d.type,d.kind,p.x,p.y);
+      if(created&&d.kind==="molecule"){
+        var directSlot=findDockTarget(created,p.x,p.y);
+        if(directSlot)dockElement(created,directSlot);
+      }
     }else if(!d.moved){
       armedHint.hidden=false;
       armedText.textContent=catalogue[d.type].name;
@@ -333,13 +337,13 @@
     var type=el.dataset.type,best=null,bestDistance=Infinity;
     var b=barrier();
 
-    if(type==="k"&&y>b.center+4)return null;
-    if((type==="na"||type==="atp")&&y<b.center-4)return null;
+    if(type==="k"&&y>b.center+10)return null;
+    if((type==="na"||type==="atp")&&y<b.center-10)return null;
 
     layer.querySelectorAll('.placed-protein[data-type="bomba"] .pump-slot:not(.occupied)').forEach(function(slot){
       if(slot.dataset.accept!==type)return;
       var p=slotStagePoint(slot),d=Math.hypot(p.x-x,p.y-y);
-      if(d<38&&d<bestDistance){best=slot;bestDistance=d}
+      if(d<46&&d<bestDistance){best=slot;bestDistance=d}
     });
     return best;
   }
@@ -559,6 +563,23 @@
         markReadySlot(m.readySlot);
         return;
       }
+    }
+
+    var directPumpSlot=findDockTarget(el,desiredX,desiredY);
+    if(directPumpSlot){
+      var dockPoint=slotStagePoint(directPumpSlot);
+      var dockX=limitStep(currentX,dockPoint.x,10);
+      var dockY=limitStep(currentY,dockPoint.y,10);
+      el.style.left=dockX+"px";
+      el.style.top=dockY+"px";
+      m.lastX=dockX;
+      m.lastY=dockY;
+      m.readySlot=directPumpSlot;
+      markReadySlot(directPumpSlot);
+      el.classList.remove("is-blocked","is-channeling");
+      clearGateGlow();
+      if(Math.abs(dockPoint.x-dockX)>.5||Math.abs(dockPoint.y-dockY)>.5)scheduleMoveAgain();
+      return;
     }
 
     var targetX=desiredX;

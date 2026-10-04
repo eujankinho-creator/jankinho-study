@@ -1895,3 +1895,87 @@
   bottom:5px!important;
 }
 
+
+
+/* Pump v8 — sítios começam vazios e recebem as moléculas reais */
+.placed-protein[data-type="bomba"] .pump-slot{
+  background:
+    radial-gradient(circle at 50% 45%,rgba(0,0,0,.42),rgba(8,10,16,.74) 58%,rgba(22,20,31,.9) 100%)!important;
+  color:transparent!important;
+  box-shadow:
+    inset 0 0 10px rgba(0,0,0,.72),
+    inset 0 0 0 1px rgba(255,255,255,.025)!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot[data-accept="k"]{
+  border:1px solid rgba(247,207,88,.5)!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot[data-accept="na"]{
+  border:1px solid rgba(255,128,94,.48)!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot[data-accept="atp"]{
+  border:1px solid rgba(197,160,244,.5)!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot:not(.occupied)::after{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(255,255,255,.035);
+  box-shadow:inset 0 0 3px rgba(0,0,0,.55);
+}
+
+.placed-protein[data-type="bomba"] .pump-slot[data-accept="atp"]:not(.occupied)::after{
+  width:15px;
+  height:5px;
+  border-radius:4px;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot.slot-ready{
+  background:rgba(18,27,35,.92)!important;
+  border-color:#f4fbff!important;
+  box-shadow:
+    inset 0 0 9px rgba(0,0,0,.58),
+    0 0 0 2px rgba(255,255,255,.09),
+    0 0 18px rgba(168,220,245,.34)!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot.occupied{
+  opacity:.2;
+  border-style:solid!important;
+  background:#080b10!important;
+  box-shadow:inset 0 0 9px rgba(0,0,0,.86)!important;
+}
+
+.placed-protein[data-type="bomba"] .pump-slot.occupied::after{
+  display:none;
+}
+
+.pocket-caption-k,
+.pocket-caption-na{
+  opacity:.7;
+  font-size:5.5px!important;
+}
+
+.pump-atp-cavity{
+  background:
+    radial-gradient(circle at 50% 45%,rgba(0,0,0,.3),transparent 54%),
+    linear-gradient(145deg,#55436f,#2e243a)!important;
+  border-color:rgba(203,170,245,.25)!important;
+}
+
+.placed-molecule.docked{
+  z-index:40!important;
+  filter:
+    drop-shadow(0 0 5px rgba(255,255,255,.12))
+    drop-shadow(0 3px 6px rgba(0,0,0,.35));
+  transform:translate(-50%,-50%) scale(.82)!important;
+}
+
+.placed-molecule.docked[data-type="atp"]{
+  transform:translate(-50%,-50%) scale(.72)!important;
+}
+
