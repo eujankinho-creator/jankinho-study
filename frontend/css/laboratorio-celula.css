@@ -4139,3 +4139,79 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   background:color-mix(in srgb,var(--mv-surface-strong) 97%,transparent);
   backdrop-filter:blur(10px);
 }
+
+
+/* =========================================================
+   CLEAN SIMULATION CANVAS V53
+   Inside the live stage: only membrane, proteins, molecules and ions.
+========================================================= */
+
+/* Remove all explanatory text floating over the live simulation. */
+.membrane-stage .protein-label,
+.membrane-stage .gate-state-badge,
+.membrane-stage .pump-state-badge,
+.membrane-stage .environment-label,
+.membrane-stage .armed-hint,
+.membrane-stage .collision-toast{
+  display:none!important;
+}
+
+/* Selection stays functional, but never draws a box/contour around proteins. */
+.membrane-stage .placed-protein.is-selected::before{
+  display:none!important;
+  content:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+/* Channel proteins: shape by fill/negative space only, no black artificial contour. */
+.membrane-stage .protein-channel::before,
+.membrane-stage .protein-channel::after{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+.membrane-stage .protein-pore{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+/* SGLT: remove external and internal line contours while keeping its geometry. */
+.membrane-stage .sglt-art,
+.membrane-stage .sglt-art::before,
+.membrane-stage .sglt-site{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+.membrane-stage .sglt-art::after{
+  -webkit-text-stroke:0!important;
+  text-shadow:none!important;
+}
+
+/* Na+/K+ ATPase: no outer black contour and no central cavity contour. */
+.membrane-stage .nak-shell,
+.membrane-stage .nak-cavity,
+.membrane-stage .nak-atp-groove{
+  stroke:none!important;
+  stroke-width:0!important;
+}
+
+/* Ligand docking feedback uses a soft fill, never a dashed ring. */
+.membrane-stage .placed-protein[data-type="lg-na"]::after,
+.membrane-stage .placed-protein[data-type="lg-k"]::after,
+.membrane-stage .placed-protein.ligand-drop-target::after{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+/* Keep charge polarity symbols because they are part of the Vm experiment,
+   but never add textual labels inside the stage. */
+.membrane-stage .charge-band{
+  text-shadow:none!important;
+}
