@@ -835,26 +835,6 @@
 }
 .channel-open .gate-state-badge{color:#9adbb4}
 
-/* ligand target */
-.placed-protein[data-type="lg-na"]::after,
-.placed-protein[data-type="lg-k"]::after{
-  content:"";
-  position:absolute;
-  width:25px;
-  height:25px;
-  border:1px dashed transparent;
-  border-radius:50%;
-  opacity:0;
-  pointer-events:none;
-}
-.placed-protein[data-type="lg-na"]::after{left:8px;top:13px}
-.placed-protein[data-type="lg-k"]::after{left:-2px;top:10px}
-.placed-protein.ligand-drop-target::after{
-  opacity:1;
-  border-color:var(--mv-accent2);
-  background:rgba(var(--mv-accent-rgb),.07);
-}
-
 /* ---------- Na/glucose cotransporter ---------- */
 
 .placed-protein[data-type="sglt"]{width:96px}
@@ -963,40 +943,28 @@
 }
 .placed-molecule.craft-consumed{opacity:0;pointer-events:none}
 
-/* Free ligands remain DOM-rendered to be draggable. */
+/* Free ligands remain DOM-rendered to be draggable. Colors/shapes are defined once in V74. */
 .free-ligand{
   display:grid!important;
-  width:26px;
-  min-width:26px;
-  height:26px;
-  padding:0;
-  border:0;
-  background:transparent;
-  color:transparent;
-  pointer-events:auto;
-  cursor:grab;
-  overflow:visible;
+  width:28px!important;
+  min-width:28px!important;
+  height:28px!important;
+  padding:0!important;
+  border:0!important;
+  outline:0!important;
+  background:transparent!important;
+  color:transparent!important;
+  pointer-events:auto!important;
+  cursor:grab!important;
+  overflow:visible!important;
 }
-.free-ligand[data-type="ligand-na"]::before{
-  content:"";
-  width:23px;
-  height:20px;
-  background:#f3b37b;
-  border:1px solid #1c1c1c;
-  clip-path:polygon(50% 0,100% 100%,0 100%);
+.free-ligand.is-selected,
+.free-ligand.is-dragging,
+.free-ligand.ligand-docked{
+  outline:0!important;
+  border:0!important;
+  box-shadow:none!important;
 }
-.free-ligand[data-type="ligand-k"]::before{
-  content:"★";
-  width:24px;
-  height:24px;
-  display:grid;
-  place-items:center;
-  color:#9ab9da;
-  -webkit-text-stroke:1px #1c1c1c;
-  font-size:23px;
-}
-.free-ligand[data-ligand-bound]{z-index:32}
-.free-ligand.is-selected{outline:none}
 
 /* ---------- Drag ghost ---------- */
 
@@ -4199,15 +4167,6 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .membrane-stage .nak-atp-groove{
   stroke:none!important;
   stroke-width:0!important;
-}
-
-/* Ligand docking feedback uses a soft fill, never a dashed ring. */
-.membrane-stage .placed-protein[data-type="lg-na"]::after,
-.membrane-stage .placed-protein[data-type="lg-k"]::after,
-.membrane-stage .placed-protein.ligand-drop-target::after{
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
 }
 
 /* Keep charge polarity symbols because they are part of the Vm experiment,
@@ -7582,224 +7541,6 @@ body.cell-lab-view{
   box-shadow:none!important;
 }
 
-/* ---------- ligand artwork ---------- */
-
-.free-ligand{
-  position:relative!important;
-  filter:none!important;
-  box-shadow:none!important;
-  text-shadow:none!important;
-  background:transparent!important;
-  overflow:visible!important;
-}
-
-/* Na ligand: saturated orange triangle with a very light built-in contour. */
-.free-ligand[data-type="ligand-na"]::before{
-  content:""!important;
-  position:absolute!important;
-  left:50%!important;
-  top:50%!important;
-  width:24px!important;
-  height:21px!important;
-  transform:translate(-50%,-50%)!important;
-  background:rgba(104,45,12,.38)!important;
-  border:0!important;
-  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
-  filter:none!important;
-  box-shadow:none!important;
-}
-
-.free-ligand[data-type="ligand-na"]::after{
-  content:""!important;
-  position:absolute!important;
-  left:50%!important;
-  top:50%!important;
-  width:21px!important;
-  height:18px!important;
-  transform:translate(-50%,-48%)!important;
-  background:#ff7a2f!important;
-  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
-  filter:none!important;
-  box-shadow:none!important;
-}
-
-/* K ligand: vivid blue star, no glow, only a thin soft contour. */
-.free-ligand[data-type="ligand-k"]::before{
-  content:"★"!important;
-  position:absolute!important;
-  left:50%!important;
-  top:50%!important;
-  width:25px!important;
-  height:25px!important;
-  display:grid!important;
-  place-items:center!important;
-  transform:translate(-50%,-52%)!important;
-  background:transparent!important;
-  color:#4f7cff!important;
-  -webkit-text-stroke:.55px rgba(24,43,74,.55)!important;
-  font-size:24px!important;
-  line-height:1!important;
-  filter:none!important;
-  text-shadow:none!important;
-  box-shadow:none!important;
-}
-
-.free-ligand[data-type="ligand-k"]::after{
-  content:none!important;
-  display:none!important;
-}
-
-/* Bound ligands stay clean as well. */
-.free-ligand[data-ligand-bound]{
-  filter:none!important;
-  box-shadow:none!important;
-  text-shadow:none!important;
-}
-
-/* Dock feedback stays subtle; no heavy halo around the channel. */
-.membrane-stage .placed-protein.ligand-drop-target::after{
-  opacity:.45!important;
-  background:rgba(var(--mv-accent-rgb),.045)!important;
-  box-shadow:none!important;
-  filter:none!important;
-}
-
-
-/* =========================================================
-   LIGAND BINDING SITES V69
-   Explicit extracellular receptor sites + high ligand/protein contrast.
-========================================================= */
-
-/* The receptor pocket is always visible on ligand-gated channels. */
-.membrane-stage .placed-protein[data-type="lg-na"]::after,
-.membrane-stage .placed-protein[data-type="lg-k"]::after{
-  position:absolute!important;
-  z-index:24!important;
-  opacity:1!important;
-  pointer-events:none!important;
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  filter:none!important;
-  transition:
-    transform .16s ease,
-    opacity .16s ease,
-    background-color .16s ease,
-    color .16s ease!important;
-}
-
-/* Na+ ligand receptor: triangular extracellular pocket. */
-.membrane-stage .placed-protein[data-type="lg-na"]::after{
-  content:""!important;
-  left:6px!important;
-  top:13px!important;
-  width:30px!important;
-  height:26px!important;
-  border-radius:0!important;
-  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
-  background:rgba(76,44,72,.42)!important;
-}
-
-/* K+ ligand receptor: star-shaped pocket. */
-.membrane-stage .placed-protein[data-type="lg-k"]::after{
-  content:"☆"!important;
-  left:-3px!important;
-  top:12px!important;
-  width:29px!important;
-  height:29px!important;
-  display:grid!important;
-  place-items:center!important;
-  border-radius:0!important;
-  background:transparent!important;
-  color:rgba(20,42,70,.58)!important;
-  -webkit-text-stroke:.6px rgba(20,42,70,.42)!important;
-  font-size:28px!important;
-  line-height:1!important;
-}
-
-/* Hover/drag feedback emphasizes the real pocket, never a generic halo. */
-.membrane-stage .placed-protein.ligand-drop-target::after{
-  opacity:.95!important;
-  transform:scale(1.08)!important;
-}
-
-.membrane-stage .placed-protein[data-type="lg-na"].ligand-drop-target::after{
-  background:#6b2f72!important;
-}
-
-.membrane-stage .placed-protein[data-type="lg-k"].ligand-drop-target::after{
-  color:#203f68!important;
-  -webkit-text-stroke:.8px #203f68!important;
-}
-
-/* Once occupied, the pocket remains visible around the smaller ligand. */
-.membrane-stage .placed-protein[data-bound-ligand-id][data-type="lg-na"]::after{
-  background:rgba(83,38,82,.54)!important;
-}
-
-.membrane-stage .placed-protein[data-bound-ligand-id][data-type="lg-k"]::after{
-  color:rgba(18,39,67,.72)!important;
-}
-
-/* Ligands use deliberately contrasting colors vs. their channels. */
-.free-ligand[data-type="ligand-na"]::before{
-  width:22px!important;
-  height:19px!important;
-  background:#73183e!important;
-  border:0!important;
-  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
-  filter:none!important;
-  box-shadow:none!important;
-}
-
-.free-ligand[data-type="ligand-na"]::after{
-  width:18px!important;
-  height:15px!important;
-  background:#ff3f78!important;
-  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
-  filter:none!important;
-  box-shadow:none!important;
-}
-
-.free-ligand[data-type="ligand-k"]::before{
-  content:"★"!important;
-  color:#c8ff3d!important;
-  -webkit-text-stroke:.7px #31490d!important;
-  font-size:22px!important;
-  filter:none!important;
-  text-shadow:none!important;
-  box-shadow:none!important;
-}
-
-/* Bound ligand sits above its receptor pocket and remains easy to distinguish. */
-.free-ligand[data-ligand-bound]{
-  z-index:60!important;
-  opacity:1!important;
-  transform:translate(-50%,-50%) scale(.92)!important;
-  filter:none!important;
-  box-shadow:none!important;
-}
-
-/* Channel colors stay saturated but do not visually merge with ligand colors. */
-.membrane-stage .placed-protein[data-type="lg-na"] .protein-channel::before,
-.membrane-stage .placed-protein[data-type="lg-na"] .protein-channel::after{
-  background:#ffd000!important;
-}
-
-.membrane-stage .placed-protein[data-type="lg-na"] .protein-pore{
-  background:#ffef7d!important;
-}
-
-.membrane-stage .placed-protein[data-type="lg-k"] .protein-channel::before,
-.membrane-stage .placed-protein[data-type="lg-k"] .protein-channel::after{
-  background:#536df5!important;
-}
-
-.membrane-stage .placed-protein[data-type="lg-k"] .protein-pore{
-  background:#20c4f4!important;
-}
-
-
 /* =========================================================
    SYMMETRIC PROTEIN GEOMETRY V70
    Visual geometry only. Existing biological colors are preserved.
@@ -8053,66 +7794,156 @@ body.cell-lab-view{
 }
 
 
+
+
 /* =========================================================
-   REAL LIGAND RECEPTOR DOM V72
-   The visible receptor is now the exact logical binding target.
+   CANONICAL LIGAND SLOT ENGINE V74
+   Single source of truth: one visible slot = one logical docking point.
 ========================================================= */
 
-/* Disable the old pseudo-element receptor drawings. */
+/* Legacy receptor pseudo-elements are permanently disabled. */
 .membrane-stage .placed-protein[data-type="lg-na"]::after,
-.membrane-stage .placed-protein[data-type="lg-k"]::after{
+.membrane-stage .placed-protein[data-type="lg-k"]::after,
+.membrane-stage .placed-protein.ligand-drop-target::after{
   content:none!important;
   display:none!important;
 }
 
-/* Real receptor element: sits on the extracellular face of the channel. */
-.membrane-stage .ligand-binding-site{
+/* The channel owns one real extracellular slot, exactly like pump cavities. */
+.membrane-stage .protein-channel{
+  overflow:visible!important;
+}
+
+.membrane-stage .ligand-slot{
   position:absolute!important;
-  z-index:26!important;
+  z-index:30!important;
   left:50%!important;
-  top:-10px!important;
-  width:24px!important;
+  top:18px!important;
+  width:26px!important;
   height:24px!important;
   transform:translateX(-50%)!important;
   pointer-events:none!important;
+  opacity:1!important;
+  visibility:visible!important;
   filter:none!important;
   box-shadow:none!important;
-  transition:transform .16s ease,opacity .16s ease!important;
+  transition:
+    transform .14s ease,
+    opacity .14s ease,
+    background-color .14s ease!important;
 }
 
-/* Na ligand receptor: hollow magenta triangle. */
-.membrane-stage .ligand-binding-site-na{
-  background:rgba(255,63,120,.16)!important;
-  border:1px solid rgba(122,24,67,.58)!important;
+/* Empty receptor cavity for the triangular ligand. */
+.membrane-stage .ligand-slot-na{
+  background:rgba(78,31,58,.28)!important;
+  border:1px solid rgba(79,26,56,.50)!important;
   clip-path:polygon(50% 0,100% 100%,0 100%)!important;
 }
 
-/* K ligand receptor: hollow lime star. */
-.membrane-stage .ligand-binding-site-k{
+/* Empty receptor cavity for the star ligand. */
+.membrane-stage .ligand-slot-k{
   display:grid!important;
   place-items:center!important;
   background:transparent!important;
-  color:#c8ff3d!important;
-  -webkit-text-stroke:.65px rgba(49,73,13,.7)!important;
-  font-size:23px!important;
+  border:0!important;
+  color:rgba(37,56,18,.68)!important;
+  -webkit-text-stroke:.7px rgba(37,56,18,.74)!important;
+  font-size:24px!important;
   line-height:1!important;
 }
-
-.membrane-stage .ligand-binding-site-k::before{
+.membrane-stage .ligand-slot-k::before{
   content:"☆"!important;
 }
 
-/* Binding affordance stays subtle and localized to the actual receptor. */
-.membrane-stage .placed-protein.ligand-drop-target .ligand-binding-site{
-  transform:translateX(-50%) scale(1.12)!important;
+/* Pump-like states: free / target / occupied. */
+.membrane-stage .ligand-slot.slot-ready{
+  transform:translateX(-50%) scale(1.10)!important;
+}
+.membrane-stage .ligand-slot-na.slot-ready{
+  background:rgba(78,31,58,.40)!important;
+}
+.membrane-stage .ligand-slot-k.slot-ready{
+  color:rgba(37,56,18,.90)!important;
+}
+.membrane-stage .ligand-slot.occupied{
+  opacity:.38!important;
+  transform:translateX(-50%) scale(.94)!important;
+}
+.membrane-stage .placed-protein.ligand-drop-target .ligand-slot{
+  transform:translateX(-50%) scale(1.10)!important;
 }
 
-.membrane-stage .placed-protein[data-bound-ligand-id] .ligand-binding-site{
-  opacity:.72!important;
-}
-
-/* Bound ligand is slightly smaller so receptor remains readable beneath it. */
+/* Ligands have ONE immutable appearance in every interaction state. */
+.membrane-stage .free-ligand,
+.membrane-stage .free-ligand.is-selected,
+.membrane-stage .free-ligand.is-dragging,
+.membrane-stage .free-ligand.ligand-docked,
 .membrane-stage .free-ligand[data-ligand-bound]{
-  z-index:62!important;
-  transform:translate(-50%,-50%) scale(.86)!important;
+  display:grid!important;
+  width:28px!important;
+  min-width:28px!important;
+  height:28px!important;
+  padding:0!important;
+  border:0!important;
+  outline:0!important;
+  background:transparent!important;
+  color:transparent!important;
+  filter:none!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+  opacity:1!important;
+  transform:translate(-50%,-50%)!important;
+  transition:none!important;
+  z-index:60!important;
+}
+
+/* Triangle ligand: same saturated pink before, during and after docking. */
+.membrane-stage .free-ligand[data-type="ligand-na"]::before,
+.membrane-stage .free-ligand[data-type="ligand-na"].is-selected::before,
+.membrane-stage .free-ligand[data-type="ligand-na"].is-dragging::before,
+.membrane-stage .free-ligand[data-type="ligand-na"].ligand-docked::before{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:23px!important;
+  height:20px!important;
+  transform:translate(-50%,-50%)!important;
+  background:#ff3f78!important;
+  border:1px solid rgba(74,20,48,.72)!important;
+  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.membrane-stage .free-ligand[data-type="ligand-na"]::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Star ligand: same saturated lime before, during and after docking. */
+.membrane-stage .free-ligand[data-type="ligand-k"]::before,
+.membrane-stage .free-ligand[data-type="ligand-k"].is-selected::before,
+.membrane-stage .free-ligand[data-type="ligand-k"].is-dragging::before,
+.membrane-stage .free-ligand[data-type="ligand-k"].ligand-docked::before{
+  content:"★"!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:25px!important;
+  height:25px!important;
+  display:grid!important;
+  place-items:center!important;
+  transform:translate(-50%,-52%)!important;
+  background:transparent!important;
+  color:#c8ff3d!important;
+  -webkit-text-stroke:.65px rgba(49,73,13,.78)!important;
+  font-size:24px!important;
+  line-height:1!important;
+  filter:none!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+}
+.membrane-stage .free-ligand[data-type="ligand-k"]::after{
+  content:none!important;
+  display:none!important;
 }
