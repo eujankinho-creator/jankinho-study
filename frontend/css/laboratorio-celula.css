@@ -5200,3 +5200,38 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     justify-content:center;
   }
 }
+
+
+/* =========================================================
+   REAL CYTOPLASM PLANE V59
+   Replaces the pseudo-element so the color picker changes the IC background reliably.
+========================================================= */
+
+.membrane-stage::after{
+  display:none!important;
+  content:none!important;
+}
+
+.cytoplasm-plane{
+  position:absolute;
+  z-index:1;
+  left:0;
+  right:0;
+  top:calc(50% + 43px);
+  bottom:0;
+  background:#ffffff;
+  pointer-events:none;
+  transition:background-color .18s ease;
+}
+
+/* Keep the extracellular compartment dark and distinct. */
+.membrane-stage{
+  background:#343a40!important;
+}
+
+/* Simulation content stays above the cytoplasm plane. */
+.membrane-stage .charge-band{z-index:4!important}
+.membrane-stage .bilayer{z-index:5!important}
+.membrane-stage .membrane-build-slots{z-index:6!important}
+.membrane-stage .particle-canvas{z-index:7!important}
+.membrane-stage .placed-layer{z-index:12!important}
