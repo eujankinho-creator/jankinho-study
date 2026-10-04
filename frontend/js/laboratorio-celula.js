@@ -1619,7 +1619,7 @@
     if(state==="inside-open")return accept==="na";
     if(state==="inside-na-bound")return accept==="atp";
     if(state==="outside-open")return accept==="k";
-    // phosphorylating, na-releasing, k-bound and resetting accept nothing
+    // phosphorylating, na-releasing, atp-products, k-bound and resetting accept nothing
     return false;
   }
 
@@ -1651,6 +1651,7 @@
       state==="inside-na-bound"?"ATP":
       state==="phosphorylating"?"Fosforilação":
       state==="na-releasing"?"3 Na⁺ → EC":
+      state==="atp-products"?"ATP → ADP + Pi":
       state==="outside-open"?"K⁺ · "+pumpMolecules(pump,"k").length+"/2":
       state==="k-bound"?"Retorno":
       state==="resetting"?"Retorno":"Bomba ativa"
@@ -2270,83 +2271,104 @@
     }
 
     pump.dataset.cycling="1";
-    setPumpVisualState(pump,"phosphorylating","Fosforilação");
-
     var atpItem=atpItems[0];
 
-    // Step 1: ATP is consumed and the pump becomes phosphorylated.
+    // 1) 3 Na+ and ATP remain visibly docked while phosphorylation occurs.
+    pump.dataset.phosphateBound="1";
+    setPumpVisualState(pump,"phosphorylating","Fosforilação");
+
     setTimeout(function(){
       if(!pump.isConnected)return;
 
-      if(atpItem.el&&atpItem.el.isConnected){
-        releasePumpParticle(atpItem.el,atpItem.slot);
+      // 2) Only after phosphorylation do the 3 Na+ leave toward EC.
+      setPumpVisualState(pump,"na-releasing","3 Na⁺ → EC");
 
-        var px=parseFloat(pump.style.left)||stage.clientWidth/2;
-        var b=barrier();
+      var lanes=[-28,0,28];
+      var remaining=sodium.length;
 
-        atpItem.el.remove();
-        delete pump.dataset.atpBound;
-        markSceneCacheDirty();
-        compartmentCountCacheAt=0;
-
-        var adp=createPlaced("adp","molecule",Math.min(stage.clientWidth-42,px+72),b.bottom+58,{select:false,interactive:false});
-        if(adp){
-          var am=moleculeMotion.get(adp);
-          if(am){
-            am.vx=18+Math.random()*14;
-            am.vy=20+Math.random()*10;
-            am.targetVx=am.vx;
-            am.targetVy=am.vy;
-            am.directionChangeAt=performance.now()+700;
-          }
-        }
+      if(!remaining){
+        finishNaRelease();
+        return;
       }
 
-      pump.dataset.phosphateBound="1";
-      setPumpVisualState(pump,"phosphorylating","P · fosforilada");
-
-      // Step 2: ONLY after phosphorylation, expel the three Na+ toward EC.
-      setTimeout(function(){
-        if(!pump.isConnected)return;
-
-        setPumpVisualState(pump,"na-releasing","3 Na⁺ → EC");
-
-        var lanes=[-28,0,28];
-        var remaining=sodium.length;
-
-        if(!remaining){
-          remaining=0;
-          finishNaRelease();
+      sodium.forEach(function(item,index){
+        if(!item.el||!item.el.isConnected){
+          remaining-=1;
+          if(remaining<=0)finishNaRelease();
           return;
         }
 
-        sodium.forEach(function(item,index){
-          if(!item.el||!item.el.isConnected){
-            remaining-=1;
-            if(remaining<=0)finishNaRelease();
-            return;
+        releasePumpParticle(item.el,item.slot);
+        animatePumpParticle(item.el,pump,"outward",lanes[index]||0,function(){
+          remaining-=1;
+          if(remaining<=0)finishNaRelease();
+        });
+      });
+
+      function finishNaRelease(){
+        if(!pump.isConnected)return;
+
+        // 3) After all three Na+ reach EC, ATP leaves its groove and becomes ADP + Pi.
+        setPumpVisualState(pump,"atp-products","ATP → ADP + Pi");
+
+        if(atpItem.el&&atpItem.el.isConnected){
+          releasePumpParticle(atpItem.el,atpItem.slot);
+
+          var px=parseFloat(pump.style.left)||stage.clientWidth/2;
+          var b=barrier();
+
+          atpItem.el.remove();
+          delete pump.dataset.atpBound;
+          markSceneCacheDirty();
+          compartmentCountCacheAt=0;
+
+          var adp=createPlaced(
+            "adp","molecule",
+            Math.max(42,Math.min(stage.clientWidth-42,px-54)),
+            b.bottom+58,
+            {select:false,interactive:false}
+          );
+          if(adp){
+            var am=moleculeMotion.get(adp);
+            if(am){
+              am.vx=-18-Math.random()*14;
+              am.vy=20+Math.random()*10;
+              am.targetVx=am.vx;
+              am.targetVy=am.vy;
+              am.directionChangeAt=performance.now()+700;
+            }
           }
 
-          releasePumpParticle(item.el,item.slot);
-          animatePumpParticle(item.el,pump,"outward",lanes[index]||0,function(){
-            remaining-=1;
-            if(remaining<=0)finishNaRelease();
-          });
-        });
-
-        function finishNaRelease(){
-          if(!pump.isConnected)return;
-
-          // Step 3: only now does the protein open to EC and reveal two K+ cavities.
-          setTimeout(function(){
-            if(!pump.isConnected)return;
-            delete pump.dataset.cycling;
-            setPumpVisualState(pump,"outside-open","K⁺ · 0/2");
-            updateCounter();
-          },180);
+          var pi=createPlaced(
+            "pi","molecule",
+            Math.max(30,Math.min(stage.clientWidth-30,px+48)),
+            b.bottom+54,
+            {select:false,interactive:false}
+          );
+          if(pi){
+            var pm=moleculeMotion.get(pi);
+            if(pm){
+              pm.vx=16+Math.random()*12;
+              pm.vy=20+Math.random()*10;
+              pm.targetVx=pm.vx;
+              pm.targetVy=pm.vy;
+              pm.directionChangeAt=performance.now()+650;
+            }
+          }
         }
-      },520);
-    },380);
+
+        // Pi has now left the pump in this didactic cycle.
+        delete pump.dataset.phosphateBound;
+
+        // 4) Only after ATP products appear does the pump expose the two K+ cavities.
+        setTimeout(function(){
+          if(!pump.isConnected)return;
+          delete pump.dataset.cycling;
+          setPumpVisualState(pump,"outside-open","K⁺ · 0/2");
+          updateCounter();
+        },320);
+      }
+    },620);
   }
 
   function startPumpReturn(pump){
@@ -2376,24 +2398,6 @@
           releasePumpParticle(item.el,item.slot);
           animatePumpParticle(item.el,pump,"inward",lanes[index]||0);
         });
-
-        if(pump.dataset.phosphateBound==="1"){
-          delete pump.dataset.phosphateBound;
-
-          var b=barrier();
-          var px=parseFloat(pump.style.left)||stage.clientWidth/2;
-          var pi=createPlaced("pi","molecule",Math.min(stage.clientWidth-30,px+52),b.bottom+52,{select:false,interactive:false});
-          if(pi){
-            var pm=moleculeMotion.get(pi);
-            if(pm){
-              pm.vx=16+Math.random()*12;
-              pm.vy=20+Math.random()*10;
-              pm.targetVx=pm.vx;
-              pm.targetVy=pm.vy;
-              pm.directionChangeAt=performance.now()+650;
-            }
-          }
-        }
 
         setTimeout(function(){
           if(!pump.isConnected)return;

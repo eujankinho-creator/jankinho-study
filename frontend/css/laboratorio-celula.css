@@ -3670,3 +3670,24 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   box-shadow:none!important;
   background:rgba(60,132,72,.11)!important;
 }
+
+
+/* =========================================================
+   Na+/K+ ATPase V45 — ordered ATP products phase
+========================================================= */
+
+/* After Na+ has reached EC, ATP is converted to ADP + Pi before K+ sites appear. */
+.placed-protein[data-type="bomba"][data-pump-state="atp-products"] .nak-site-na,
+.placed-protein[data-type="bomba"][data-pump-state="atp-products"] .nak-site-atp,
+.placed-protein[data-type="bomba"][data-pump-state="atp-products"] .nak-site-k{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="atp-products"] .nak-cavity{
+  transform:scaleX(.74) scaleY(.94);
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="atp-products"] .nak-atp-groove{
+  opacity:.18;
+}
