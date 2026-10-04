@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Proteína G | Cortex</title>
+
+  <script>
+    (function(){
+      var theme="dark-orange";
+      try{theme=localStorage.getItem("jankinho_theme_v1")||theme}catch(_){}
+      document.documentElement.setAttribute("data-theme",theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/css/app.css?v=20261004-gprotein1">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261004-gprotein1">
+  <link rel="stylesheet" href="/css/themes.css?v=20261004-gprotein1">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-gprotein1">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-gprotein1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261004-gprotein1">
+  <link rel="stylesheet" href="/css/laboratorio-proteina-g.css?v=20261004-gprotein1">
+
+  <script defer src="/js/ui-enhancements.js?v=20261004-gprotein1"></script>
+  <script defer src="/js/theme-manager.js?v=20261004-gprotein1"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261004-gprotein1"></script>
+
+  <link rel="icon" href="/favicon.svg?v=cortex-white-v3">
+  <meta name="theme-color" content="#07090d">
+</head>
+
+<body class="practice-view gprotein-lab-view">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box">C</div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+
+    <div class="sidebar-menu"></div>
+
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info">
+        <strong id="nomeSidebar">Carregando...</strong>
+        <span id="emailSidebar"></span>
+      </div>
+      <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header gp-header">
+      <div>
+        <div class="header-title">Proteína G</div>
+        <span class="gp-header-subtitle">GPCR · Gs · Gi · Gq · segundos mensageiros</span>
+      </div>
+
+      <div class="header-user">
+        <div>
+          <strong id="nomeHeader">Carregando...</strong>
+          <span>Cortex</span>
+        </div>
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
+      </div>
+    </header>
+
+    <main class="gp-page">
+      <a class="gp-back" href="/laboratorio.html"><span>←</span> Voltar aos laboratórios</a>
+
+      <section class="gp-intro">
+        <div>
+          <span class="gp-kicker">CORTEX LAB · TRANSDUÇÃO DE SINAL</span>
+          <h1>Veja o sinal <em>atravessar a membrana.</em></h1>
+          <p>
+            Ligue um agonista ao GPCR e acompanhe, etapa por etapa, a troca GDP→GTP,
+            a dissociação da proteína G e a formação dos segundos mensageiros.
+          </p>
+        </div>
+
+        <div class="gp-intro-status">
+          <span class="gp-live-dot"></span>
+          <div>
+            <small>ESTADO DO RECEPTOR</small>
+            <strong id="introStatus">Aguardando ligante</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="gp-path-tabs" aria-label="Famílias de proteína G">
+        <button class="gp-path-tab is-active" type="button" data-pathway="gs">
+          <span>01</span><strong>Gs</strong><small>↑ adenilato ciclase · ↑ cAMP</small>
+        </button>
+        <button class="gp-path-tab" type="button" data-pathway="gi">
+          <span>02</span><strong>Gi</strong><small>↓ adenilato ciclase · ↓ cAMP</small>
+        </button>
+        <button class="gp-path-tab" type="button" data-pathway="gq">
+          <span>03</span><strong>Gq</strong><small>PLCβ · IP₃/DAG · Ca²⁺</small>
+        </button>
+      </section>
+
+      <section class="gp-context-card">
+        <div>
+          <small id="pathKicker">VIA GS</small>
+          <strong id="pathTitle">Gs estimula a adenilato ciclase</strong>
+          <p id="pathDescription">Gαs-GTP ativa a adenilato ciclase, que converte ATP em cAMP e favorece ativação de PKA.</p>
+        </div>
+        <div class="gp-context-badges">
+          <span id="contextEffector">AC ↑</span>
+          <span id="contextMessenger">cAMP ↑</span>
+        </div>
+      </section>
+
+      <section class="gp-lab-grid">
+        <aside class="gp-control-panel">
+          <div class="gp-panel-head">
+            <span>INTERAÇÃO</span>
+            <strong>Controle do experimento</strong>
+            <p>Arraste o ligante até o sítio do GPCR ou use os controles abaixo.</p>
+          </div>
+
+          <div class="gp-control-block">
+            <small>AGONISTA EXTRACELULAR</small>
+            <div class="gp-ligand-source">
+              <span class="gp-ligand-mini">L</span>
+              <div>
+                <strong>Ligante</strong>
+                <small>permanece no meio EC</small>
+              </div>
+            </div>
+            <button id="bindLigandButton" class="gp-primary-action" type="button">Ligar ao GPCR</button>
+            <button id="releaseLigandButton" class="gp-secondary-action" type="button" disabled>Retirar ligante</button>
+          </div>
+
+          <div class="gp-control-block">
+            <small>SEQUÊNCIA</small>
+            <label class="gp-auto-toggle">
+              <input id="autoPlayToggle" type="checkbox" checked>
+              <span></span>
+              <div><strong>Execução automática</strong><small>avança a cascata após o encaixe</small></div>
+            </label>
+            <button id="nextStepButton" class="gp-secondary-action" type="button" disabled>Avançar uma etapa</button>
+            <button id="resetExperimentButton" class="gp-ghost-action" type="button">Reiniciar experimento</button>
+          </div>
+
+          <div class="gp-control-block gp-rule-block">
+            <small>REGRA BIOQUÍMICA</small>
+            <div class="gp-rule-row"><span>Gα basal</span><strong>GDP</strong></div>
+            <div class="gp-rule-row"><span>Gα ativa</span><strong>GTP</strong></div>
+            <div class="gp-rule-row"><span>Desligamento</span><strong>GTP → GDP + Pi</strong></div>
+          </div>
+        </aside>
+
+        <section class="gp-stage-card">
+          <div class="gp-stage-toolbar">
+            <div class="gp-stage-state">
+              <span class="gp-live-dot"></span>
+              <div>
+                <small id="stageStateLabel">RECEPTOR INATIVO</small>
+                <strong id="stageStateText">Arraste o ligante até o GPCR</strong>
+              </div>
+            </div>
+            <div class="gp-stage-pills">
+              <span id="pillReceptor">GPCR off</span>
+              <span id="pillNucleotide">Gα·GDP</span>
+              <span id="pillEffector">AC basal</span>
+            </div>
+          </div>
+
+          <div id="gpStage" class="gp-stage" data-pathway="gs" tabindex="0" aria-label="Simulação interativa de proteína G">
+            <div class="gp-grid-bg" aria-hidden="true"></div>
+
+            <div class="gp-compartment-label gp-ec-label">
+              <strong>Espaço extracelular</strong>
+              <span>EC</span>
+            </div>
+            <div class="gp-compartment-label gp-ic-label">
+              <strong>Citoplasma</strong>
+              <span>IC</span>
+            </div>
+
+            <button id="gpLigand" class="gp-ligand" type="button" aria-label="Ligante. Arraste até o receptor.">
+              <span>L</span>
+              <small>ligante</small>
+            </button>
+
+            <div class="gp-membrane" aria-hidden="true">
+              <div class="gp-head-row gp-head-row-top"></div>
+              <div class="gp-tail-core"></div>
+              <div class="gp-head-row gp-head-row-bottom"></div>
+            </div>
+
+            <div id="gpcr" class="gpcr" aria-label="Receptor acoplado à proteína G">
+              <span class="gpcr-helix h1"></span>
+              <span class="gpcr-helix h2"></span>
+              <span class="gpcr-helix h3"></span>
+              <span class="gpcr-helix h4"></span>
+              <span class="gpcr-helix h5"></span>
+              <span class="gpcr-helix h6"></span>
+              <span class="gpcr-helix h7"></span>
+              <span id="gpcrSite" class="gpcr-site"><i></i></span>
+              <span class="gpcr-label">GPCR</span>
+            </div>
+
+            <div class="gp-signal-arrow receptor-arrow" aria-hidden="true"></div>
+
+            <div id="gProtein" class="g-protein">
+              <div id="gAlpha" class="g-alpha">
+                <span class="g-subunit-name">Gα<em id="alphaFamily">s</em></span>
+                <b id="nucleotideBadge" class="nucleotide-badge">GDP</b>
+              </div>
+              <div id="gBeta" class="g-beta"><span>Gβ</span></div>
+              <div id="gGamma" class="g-gamma"><span>γ</span></div>
+              <small class="g-protein-caption">heterotrímero</small>
+            </div>
+
+            <div id="gdpParticle" class="gp-nucleotide gp-gdp">GDP</div>
+            <div id="gtpParticle" class="gp-nucleotide gp-gtp">GTP</div>
+            <div id="piParticle" class="gp-nucleotide gp-pi">Pi</div>
+
+            <div id="effector" class="gp-effector">
+              <div class="effector-core">
+                <span id="effectorShort">AC</span>
+                <small id="effectorName">adenilato ciclase</small>
+              </div>
+              <span class="effector-activity" id="effectorActivity">basal</span>
+            </div>
+
+            <div id="substratePool" class="gp-substrate-pool">
+              <span class="substrate-title" id="substrateTitle">ATP</span>
+              <i class="substrate-dot d1"></i><i class="substrate-dot d2"></i><i class="substrate-dot d3"></i>
+            </div>
+
+            <div id="messengerField" class="gp-messenger-field">
+              <div id="campCluster" class="camp-cluster">
+                <span class="camp c1">cAMP</span>
+                <span class="camp c2">cAMP</span>
+                <span class="camp c3">cAMP</span>
+                <span class="camp c4">cAMP</span>
+              </div>
+
+              <div id="pkaNode" class="downstream-node pka-node">
+                <strong>PKA</strong><small id="pkaState">inativa</small>
+              </div>
+
+              <div id="pip2Pool" class="pip2-pool">
+                <span>PIP₂</span><span>PIP₂</span><span>PIP₂</span>
+              </div>
+              <div id="ip3Particle" class="second-messenger ip3">IP₃</div>
+              <div id="dagParticle" class="second-messenger dag">DAG</div>
+
+              <div id="erStore" class="er-store">
+                <div class="er-head"><span>Retículo endoplasmático</span><strong>Ca²⁺</strong></div>
+                <div class="er-ca-pool">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <span class="ip3-receptor">IP₃R</span>
+              </div>
+
+              <div id="calciumCloud" class="calcium-cloud">
+                <span>Ca²⁺</span><span>Ca²⁺</span><span>Ca²⁺</span><span>Ca²⁺</span><span>Ca²⁺</span>
+              </div>
+
+              <div id="pkcNode" class="downstream-node pkc-node">
+                <strong>PKC</strong><small>inativa</small>
+              </div>
+            </div>
+
+            <div id="signalPulse" class="signal-pulse" aria-hidden="true"></div>
+          </div>
+        </section>
+
+        <aside class="gp-learning-panel">
+          <div class="gp-learning-head">
+            <span>GUIA EM TEMPO REAL</span>
+            <strong id="learningTitle">Estado basal</strong>
+            <p id="learningText">O GPCR está livre. Gα contém GDP e permanece associada ao dímero Gβγ.</p>
+          </div>
+
+          <ol class="gp-step-list" id="stepList">
+            <li class="is-active" data-step="0"><span>0</span><div><strong>Repouso</strong><small>Gα·GDP + Gβγ</small></div></li>
+            <li data-step="1"><span>1</span><div><strong>Ligação</strong><small>agonista ativa GPCR</small></div></li>
+            <li data-step="2"><span>2</span><div><strong>Troca</strong><small>GDP sai · GTP entra</small></div></li>
+            <li data-step="3"><span>3</span><div><strong>Separação</strong><small>Gα-GTP se desloca</small></div></li>
+            <li data-step="4"><span>4</span><div><strong>Efetor</strong><small id="stepEffectorText">adenilato ciclase</small></div></li>
+            <li data-step="5"><span>5</span><div><strong>2º mensageiro</strong><small id="stepMessengerText">cAMP</small></div></li>
+            <li data-step="6"><span>6</span><div><strong>Resposta</strong><small id="stepResponseText">PKA</small></div></li>
+            <li data-step="7"><span>7</span><div><strong>Desligamento</strong><small>GTP → GDP + Pi</small></div></li>
+          </ol>
+
+          <div class="gp-lesson-card">
+            <small>O QUE MEMORIZAR</small>
+            <strong id="memoryRule">Gs = estimula AC</strong>
+            <p id="memoryText">Mais adenilato ciclase ativa → mais cAMP → mais sinalização dependente de PKA.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="gp-summary-grid" aria-label="Resumo das vias">
+        <button type="button" class="gp-summary-card gs-summary is-active" data-summary-path="gs">
+          <span>Gs</span><strong>GPCR → Gαs → AC ↑ → cAMP ↑ → PKA ↑</strong>
+        </button>
+        <button type="button" class="gp-summary-card gi-summary" data-summary-path="gi">
+          <span>Gi</span><strong>GPCR → Gαi → AC ↓ → cAMP ↓ → PKA ↓</strong>
+        </button>
+        <button type="button" class="gp-summary-card gq-summary" data-summary-path="gq">
+          <span>Gq</span><strong>GPCR → Gαq → PLCβ → IP₃ + DAG → Ca²⁺ / PKC</strong>
+        </button>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/laboratorio-proteina-g.js?v=20261004-gprotein1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+</body>
+</html>
