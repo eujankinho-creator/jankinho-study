@@ -5235,3 +5235,24 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .membrane-stage .membrane-build-slots{z-index:6!important}
 .membrane-stage .particle-canvas{z-index:7!important}
 .membrane-stage .placed-layer{z-index:12!important}
+
+
+/* =========================================================
+   FULL EDITABLE STAGE BACKGROUND V60
+   One color controls the entire simulation field (EC + IC).
+========================================================= */
+
+.membrane-stage{
+  --simulation-bg-color:#ffffff;
+  background:var(--simulation-bg-color,#ffffff)!important;
+}
+
+/* Keep the legacy IC plane visually unified with the full stage. */
+.cytoplasm-plane{
+  background:var(--simulation-bg-color,#ffffff)!important;
+}
+
+/* The picker now represents the full simulator background. */
+.cytoplasm-color-control{
+  min-width:72px;
+}
