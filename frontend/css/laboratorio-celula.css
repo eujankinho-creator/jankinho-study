@@ -7663,3 +7663,138 @@ body.cell-lab-view{
   box-shadow:none!important;
   filter:none!important;
 }
+
+
+/* =========================================================
+   LIGAND BINDING SITES V69
+   Explicit extracellular receptor sites + high ligand/protein contrast.
+========================================================= */
+
+/* The receptor pocket is always visible on ligand-gated channels. */
+.membrane-stage .placed-protein[data-type="lg-na"]::after,
+.membrane-stage .placed-protein[data-type="lg-k"]::after{
+  position:absolute!important;
+  z-index:24!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transition:
+    transform .16s ease,
+    opacity .16s ease,
+    background-color .16s ease,
+    color .16s ease!important;
+}
+
+/* Na+ ligand receptor: triangular extracellular pocket. */
+.membrane-stage .placed-protein[data-type="lg-na"]::after{
+  content:""!important;
+  left:6px!important;
+  top:13px!important;
+  width:30px!important;
+  height:26px!important;
+  border-radius:0!important;
+  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
+  background:rgba(76,44,72,.42)!important;
+}
+
+/* K+ ligand receptor: star-shaped pocket. */
+.membrane-stage .placed-protein[data-type="lg-k"]::after{
+  content:"☆"!important;
+  left:-3px!important;
+  top:12px!important;
+  width:29px!important;
+  height:29px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:rgba(20,42,70,.58)!important;
+  -webkit-text-stroke:.6px rgba(20,42,70,.42)!important;
+  font-size:28px!important;
+  line-height:1!important;
+}
+
+/* Hover/drag feedback emphasizes the real pocket, never a generic halo. */
+.membrane-stage .placed-protein.ligand-drop-target::after{
+  opacity:.95!important;
+  transform:scale(1.08)!important;
+}
+
+.membrane-stage .placed-protein[data-type="lg-na"].ligand-drop-target::after{
+  background:#6b2f72!important;
+}
+
+.membrane-stage .placed-protein[data-type="lg-k"].ligand-drop-target::after{
+  color:#203f68!important;
+  -webkit-text-stroke:.8px #203f68!important;
+}
+
+/* Once occupied, the pocket remains visible around the smaller ligand. */
+.membrane-stage .placed-protein[data-bound-ligand-id][data-type="lg-na"]::after{
+  background:rgba(83,38,82,.54)!important;
+}
+
+.membrane-stage .placed-protein[data-bound-ligand-id][data-type="lg-k"]::after{
+  color:rgba(18,39,67,.72)!important;
+}
+
+/* Ligands use deliberately contrasting colors vs. their channels. */
+.free-ligand[data-type="ligand-na"]::before{
+  width:22px!important;
+  height:19px!important;
+  background:#73183e!important;
+  border:0!important;
+  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+.free-ligand[data-type="ligand-na"]::after{
+  width:18px!important;
+  height:15px!important;
+  background:#ff3f78!important;
+  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+.free-ligand[data-type="ligand-k"]::before{
+  content:"★"!important;
+  color:#c8ff3d!important;
+  -webkit-text-stroke:.7px #31490d!important;
+  font-size:22px!important;
+  filter:none!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+}
+
+/* Bound ligand sits above its receptor pocket and remains easy to distinguish. */
+.free-ligand[data-ligand-bound]{
+  z-index:60!important;
+  opacity:1!important;
+  transform:translate(-50%,-50%) scale(.92)!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+/* Channel colors stay saturated but do not visually merge with ligand colors. */
+.membrane-stage .placed-protein[data-type="lg-na"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="lg-na"] .protein-channel::after{
+  background:#ffd000!important;
+}
+
+.membrane-stage .placed-protein[data-type="lg-na"] .protein-pore{
+  background:#ffef7d!important;
+}
+
+.membrane-stage .placed-protein[data-type="lg-k"] .protein-channel::before,
+.membrane-stage .placed-protein[data-type="lg-k"] .protein-channel::after{
+  background:#536df5!important;
+}
+
+.membrane-stage .placed-protein[data-type="lg-k"] .protein-pore{
+  background:#20c4f4!important;
+}
