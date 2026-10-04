@@ -3348,3 +3348,300 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   }
 }
 
+
+
+/* =========================================================
+   COMPACT LAB V21 — lighter particles + efficient controls
+========================================================= */
+
+/* O movimento real já é feito pelo motor JS; removemos a flutuação CSS duplicada. */
+.placed-molecule{
+  min-width:30px!important;
+  height:25px!important;
+  padding:0 5px!important;
+  border-width:1px!important;
+  border-radius:10px;
+  font-size:8px!important;
+  box-shadow:
+    inset 1px 1px 3px rgba(255,255,255,.035),
+    0 2px 7px rgba(0,0,0,.12)!important;
+  animation:none!important;
+}
+
+.placed-molecule[data-type="pi"]{
+  width:25px!important;
+  min-width:25px!important;
+  height:25px!important;
+}
+
+.placed-molecule:not(.docked):not(.is-dragging):not(.channel-transit):not(.pump-transit){
+  filter:none!important;
+}
+
+/* Painel esquerdo: mais conteúdo, menos altura e sem caixas repetidas. */
+.membrane-toolbox{
+  width:auto!important;
+  height:clamp(560px,70vh,720px)!important;
+  padding:10px!important;
+  overflow:auto!important;
+}
+
+.toolbox-head{
+  padding:2px 1px 8px!important;
+}
+
+.toolbox-head>div>span{
+  font-size:7px!important;
+}
+
+.toolbox-head>div>strong{
+  font-size:11px!important;
+}
+
+.toolbox-head>small{
+  display:none!important;
+}
+
+.compact-solute-console{
+  gap:5px!important;
+}
+
+.solute-compact-row{
+  display:grid;
+  gap:5px;
+  padding:6px;
+  border:1px solid var(--mv-border);
+  border-radius:10px;
+  background:rgba(255,255,255,.014);
+}
+
+.solute-identity{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 84px;
+  align-items:center;
+  gap:6px;
+}
+
+.solute-main{
+  min-height:30px!important;
+  grid-template-columns:28px minmax(0,1fr)!important;
+  gap:6px!important;
+}
+
+.solute-orb{
+  width:27px!important;
+  height:27px!important;
+  font-size:7px!important;
+}
+
+.solute-main strong{
+  font-size:8px!important;
+}
+
+.solute-main small{
+  font-size:6px!important;
+}
+
+.solute-compartment-switch{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+}
+
+.side-select{
+  height:28px;
+  display:grid;
+  grid-template-columns:1fr;
+  place-items:center;
+  gap:0;
+  padding:2px;
+  border:1px solid var(--mv-border);
+  border-radius:7px;
+  background:rgba(255,255,255,.015);
+  color:var(--mv-theme-muted);
+  cursor:pointer;
+  font:inherit;
+  line-height:1;
+}
+
+.side-select span{
+  font-size:6px;
+  font-weight:950;
+}
+
+.side-select b{
+  color:var(--mv-theme-soft);
+  font-size:7px;
+}
+
+.side-select.is-active{
+  color:var(--mv-accent-2);
+  border-color:var(--mv-border-strong);
+  background:rgba(var(--mv-accent-rgb),.08);
+  box-shadow:inset 0 0 0 1px rgba(var(--mv-accent-rgb),.04);
+}
+
+.solute-quick-add{
+  display:grid;
+  grid-template-columns:minmax(74px,1fr) repeat(3,40px);
+  gap:3px;
+  align-items:center;
+}
+
+.target-side-label{
+  height:24px;
+  display:flex;
+  align-items:center;
+  padding:0 6px;
+  border-radius:7px;
+  background:rgba(255,255,255,.012);
+  color:var(--mv-theme-muted);
+  font-size:6px;
+  white-space:nowrap;
+}
+
+.target-side-label b{
+  margin-left:4px;
+  color:var(--mv-accent-2);
+  font-size:7px;
+}
+
+.bulk-add{
+  height:24px!important;
+  padding:0!important;
+  font-size:7px!important;
+  border-radius:7px!important;
+}
+
+.solute-compact-row:hover{
+  border-color:color-mix(in srgb,var(--mv-border-strong) 70%,var(--mv-border));
+}
+
+/* Inspector: remove conteúdo redundante e compacta estruturas. */
+.stage-footer::after{
+  content:none!important;
+  display:none!important;
+}
+
+.fluid-note{
+  display:none!important;
+}
+
+.stage-footer{
+  gap:7px!important;
+  padding:9px!important;
+}
+
+.structure-console{
+  gap:7px!important;
+  padding:8px!important;
+}
+
+.structure-console-head{
+  padding-bottom:6px!important;
+}
+
+.structure-grid{
+  gap:4px!important;
+}
+
+.structure-card{
+  min-height:52px!important;
+  padding:5px!important;
+  grid-template-columns:29px 1fr!important;
+  border-radius:8px!important;
+}
+
+.structure-card .tool-preview{
+  width:28px!important;
+  height:36px!important;
+}
+
+.structure-card>b,
+.structure-card>span>b{
+  font-size:7px!important;
+}
+
+.structure-card>small,
+.structure-card>span>small{
+  font-size:5.5px!important;
+}
+
+.structure-card-wide{
+  min-height:50px!important;
+  grid-template-columns:34px 1fr!important;
+}
+
+.active-transport-section{
+  padding-top:5px!important;
+}
+
+.gradient-panel{
+  gap:5px!important;
+  padding:9px!important;
+}
+
+.gradient-panel-head{
+  padding-bottom:6px!important;
+}
+
+.gradient-ion-row{
+  min-height:32px!important;
+  padding:4px 5px!important;
+}
+
+.gradient-ion-symbol{
+  width:25px!important;
+  height:25px!important;
+  font-size:7px!important;
+}
+
+.selection-info{
+  padding:8px!important;
+  gap:7px!important;
+}
+
+.selection-index{
+  width:29px!important;
+  height:29px!important;
+}
+
+.selection-info p{
+  font-size:8px!important;
+  line-height:1.35!important;
+}
+
+.delete-key-hint{
+  padding-top:6px!important;
+  font-size:7px!important;
+}
+
+/* Menos efeitos caros com muitos elementos em movimento. */
+.placed-protein.capture-active{
+  filter:drop-shadow(0 0 7px rgba(var(--mv-accent-rgb),.12))!important;
+}
+
+@media(min-width:1361px){
+  .membrane-lab-shell{
+    grid-template-columns:250px minmax(0,1fr)!important;
+  }
+
+  .membrane-stage-card{
+    grid-template-columns:minmax(0,1fr) 260px!important;
+  }
+
+  .stage-footer{
+    width:260px!important;
+  }
+}
+
+@media(max-width:760px){
+  .solute-identity{
+    grid-template-columns:minmax(0,1fr) 92px;
+  }
+
+  .solute-quick-add{
+    grid-template-columns:minmax(78px,1fr) repeat(3,42px);
+  }
+}
+

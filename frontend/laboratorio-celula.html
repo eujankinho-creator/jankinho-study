@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-console20">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-compact21">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -139,121 +139,118 @@
               <small>posição livre</small>
             </div>
 
-            <div class="solute-control-list">
-              <div class="solute-control-row" data-solute="na">
-                <button class="molecule-tool solute-main na-molecule" type="button" data-kind="molecule" data-type="na">
-                  <span class="solute-orb">Na⁺</span><span><strong>Sódio</strong><small>Na⁺</small></span>
-                </button>
-                <div class="solute-side-line">
-                  <span>EC <b id="count-na-EC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="EC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="EC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="EC" data-amount="25">+25</button>
+            <div class="solute-control-list compact-solute-console">
+              <div class="solute-compact-row" data-solute="na" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main na-molecule" type="button" data-kind="molecule" data-type="na">
+                    <span class="solute-orb">Na⁺</span>
+                    <span><strong>Sódio</strong><small>íon</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Sódio">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-na-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-na-IC">0</b></button>
+                  </div>
                 </div>
-                <div class="solute-side-line">
-                  <span>IC <b id="count-na-IC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="IC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="IC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-side="IC" data-amount="25">+25</button>
-                </div>
-              </div>
-
-              <div class="solute-control-row" data-solute="k">
-                <button class="molecule-tool solute-main k-molecule" type="button" data-kind="molecule" data-type="k">
-                  <span class="solute-orb">K⁺</span><span><strong>Potássio</strong><small>K⁺</small></span>
-                </button>
-                <div class="solute-side-line">
-                  <span>EC <b id="count-k-EC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="EC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="EC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="EC" data-amount="25">+25</button>
-                </div>
-                <div class="solute-side-line">
-                  <span>IC <b id="count-k-IC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="IC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="IC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-side="IC" data-amount="25">+25</button>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="na" data-amount="25">+25</button>
                 </div>
               </div>
-
-              <div class="solute-control-row" data-solute="cl">
-                <button class="molecule-tool solute-main cl-molecule" type="button" data-kind="molecule" data-type="cl">
-                  <span class="solute-orb">Cl⁻</span><span><strong>Cloreto</strong><small>Cl⁻</small></span>
-                </button>
-                <div class="solute-side-line">
-                  <span>EC <b id="count-cl-EC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="EC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="EC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="EC" data-amount="25">+25</button>
+              <div class="solute-compact-row" data-solute="k" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main k-molecule" type="button" data-kind="molecule" data-type="k">
+                    <span class="solute-orb">K⁺</span>
+                    <span><strong>Potássio</strong><small>íon</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Potássio">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-k-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-k-IC">0</b></button>
+                  </div>
                 </div>
-                <div class="solute-side-line">
-                  <span>IC <b id="count-cl-IC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="IC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="IC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-side="IC" data-amount="25">+25</button>
-                </div>
-              </div>
-
-              <div class="solute-control-row" data-solute="h2o">
-                <button class="molecule-tool solute-main water-molecule" type="button" data-kind="molecule" data-type="h2o">
-                  <span class="solute-orb">H₂O</span><span><strong>Água</strong><small>H₂O</small></span>
-                </button>
-                <div class="solute-side-line">
-                  <span>EC <b id="count-h2o-EC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="EC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="EC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="EC" data-amount="25">+25</button>
-                </div>
-                <div class="solute-side-line">
-                  <span>IC <b id="count-h2o-IC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="IC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="IC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-side="IC" data-amount="25">+25</button>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="k" data-amount="25">+25</button>
                 </div>
               </div>
-
-              <div class="solute-control-row" data-solute="atp">
-                <button class="molecule-tool solute-main atp-molecule" type="button" data-kind="molecule" data-type="atp">
-                  <span class="solute-orb">ATP</span><span><strong>ATP</strong><small>energia</small></span>
-                </button>
-                <div class="solute-side-line">
-                  <span>EC <b id="count-atp-EC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="EC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="EC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="EC" data-amount="25">+25</button>
+              <div class="solute-compact-row" data-solute="cl" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main cl-molecule" type="button" data-kind="molecule" data-type="cl">
+                    <span class="solute-orb">Cl⁻</span>
+                    <span><strong>Cloreto</strong><small>íon</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Cloreto">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-cl-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-cl-IC">0</b></button>
+                  </div>
                 </div>
-                <div class="solute-side-line">
-                  <span>IC <b id="count-atp-IC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="IC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="IC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-side="IC" data-amount="25">+25</button>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="cl" data-amount="25">+25</button>
                 </div>
               </div>
-
-              <div class="solute-control-row" data-solute="pi">
-                <button class="molecule-tool solute-main pi-molecule" type="button" data-kind="molecule" data-type="pi">
-                  <span class="solute-orb">Pi</span><span><strong>Fosfato</strong><small>Pi</small></span>
-                </button>
-                <div class="solute-side-line">
-                  <span>EC <b id="count-pi-EC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="EC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="EC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="EC" data-amount="25">+25</button>
+              <div class="solute-compact-row" data-solute="h2o" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main water-molecule" type="button" data-kind="molecule" data-type="h2o">
+                    <span class="solute-orb">H₂O</span>
+                    <span><strong>Água</strong><small>molécula</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Água">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-h2o-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-h2o-IC">0</b></button>
+                  </div>
                 </div>
-                <div class="solute-side-line">
-                  <span>IC <b id="count-pi-IC">0</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="IC" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="IC" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-side="IC" data-amount="25">+25</button>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-amount="25">+25</button>
+                </div>
+              </div>
+              <div class="solute-compact-row" data-solute="atp" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main atp-molecule" type="button" data-kind="molecule" data-type="atp">
+                    <span class="solute-orb">ATP</span>
+                    <span><strong>ATP</strong><small>energia</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para ATP">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-atp-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-atp-IC">0</b></button>
+                  </div>
+                </div>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="atp" data-amount="25">+25</button>
+                </div>
+              </div>
+              <div class="solute-compact-row" data-solute="pi" data-selected-side="EC">
+                <div class="solute-identity">
+                  <button class="molecule-tool solute-main pi-molecule" type="button" data-kind="molecule" data-type="pi">
+                    <span class="solute-orb">Pi</span>
+                    <span><strong>Fosfato</strong><small>grupo fosfato</small></span>
+                  </button>
+                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Fosfato">
+                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-pi-EC">0</b></button>
+                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-pi-IC">0</b></button>
+                  </div>
+                </div>
+                <div class="solute-quick-add">
+                  <span class="target-side-label">Adicionar em <b>EC</b></span>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-amount="1">+1</button>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-amount="10">+10</button>
+                  <button class="bulk-add" type="button" data-spawn-type="pi" data-amount="25">+25</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="toolbox-tip">
-            <span>i</span>
-            <p><strong>Dinâmica molecular:</strong> selecione apenas um item por vez. Moléculas livres se movimentam, cátions se repelem e estruturas compatíveis podem se associar automaticamente quando ficam próximas.</p>
-          </div>
         </aside>
 
         <section class="membrane-stage-card">
@@ -321,8 +318,8 @@
           <div class="stage-footer">
             <div class="structure-console">
               <div class="structure-console-head">
-                <div><small>ESTRUTURAS</small><strong>Proteínas de membrana</strong></div>
-                <span>clique e posicione</span>
+                <div><small>ESTRUTURAS</small><strong>Proteínas</strong></div>
+                <span>1 por vez</span>
               </div>
 
               <div class="structure-section">
@@ -391,14 +388,6 @@
               <p>Fluxo passivo ocorre apenas quando o gradiente eletroquímico favorece a direção e existe um canal compatível.</p>
             </div>
 
-            <div class="fluid-note">
-              <span class="fluid-icon"><i></i><i></i><i></i></span>
-              <p>
-                <strong>Mosaico fluido</strong>
-                <small>os fosfolipídios apresentam movimento lateral e as caudas mantêm mobilidade contínua</small>
-              </p>
-            </div>
-
             <div id="selectionInfo" class="selection-info">
               <span class="selection-index">01</span>
               <div>
@@ -414,7 +403,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-console20"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-compact21"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

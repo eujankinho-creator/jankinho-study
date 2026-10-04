@@ -48,6 +48,7 @@
   var physicsRaf=0;
   var lastPhysicsTime=0;
   var lastAssociationTime=0;
+  var lastElectrostaticUpdate=0;
   var lastGradientUpdate=0;
   var simulationActive=true;
   var barrierCache=null;
@@ -101,7 +102,7 @@
     if(moleculeMotion.has(el))return;
     var angle=Math.random()*Math.PI*2;
     var diffusion=diffusionFactor(el.dataset.type);
-    var speed=(12+Math.random()*14)*Math.sqrt(diffusion);
+    var speed=(20+Math.random()*20)*Math.sqrt(diffusion);
     moleculeMotion.set(el,{
       vx:Math.cos(angle)*speed,
       vy:Math.sin(angle)*speed,
@@ -121,7 +122,7 @@
       craftGuide:null,
       targetVx:Math.cos(angle)*speed,
       targetVy:Math.sin(angle)*speed,
-      directionChangeAt:performance.now()+380+Math.random()*760
+      directionChangeAt:performance.now()+240+Math.random()*620
     });
   }
 
@@ -724,7 +725,7 @@
   function spawnBatch(type,side,amount){
     amount=Math.max(1,Math.min(25,parseInt(amount,10)||1));
     var current=countFreeMolecules();
-    var limit=420;
+    var limit=320;
     var allowed=Math.max(0,Math.min(amount,limit-current));
 
     if(allowed<=0){
@@ -742,12 +743,12 @@
         var motion=moleculeMotion.get(el);
         if(motion){
           var angle=Math.random()*Math.PI*2;
-          var speed=(24+Math.random()*22)*Math.sqrt(motion.diffusion||1);
+          var speed=(34+Math.random()*28)*Math.sqrt(motion.diffusion||1);
           motion.vx=Math.cos(angle)*speed;
           motion.vy=Math.sin(angle)*speed;
           motion.targetVx=motion.vx;
           motion.targetVy=motion.vy;
-          motion.directionChangeAt=performance.now()+260+Math.random()*900;
+          motion.directionChangeAt=performance.now()+180+Math.random()*720;
         }
       }
     }
@@ -1614,12 +1615,34 @@
     moving=null;
   }
 
+  document.querySelectorAll(".side-select").forEach(function(button){
+    button.addEventListener("pointerdown",function(event){event.stopPropagation()});
+    button.addEventListener("click",function(event){
+      event.preventDefault();
+      event.stopPropagation();
+
+      var row=button.closest(".solute-compact-row");
+      if(!row)return;
+
+      row.dataset.selectedSide=button.dataset.side;
+      row.querySelectorAll(".side-select").forEach(function(node){
+        node.classList.toggle("is-active",node===button);
+      });
+
+      var target=row.querySelector(".target-side-label b");
+      if(target)target.textContent=button.dataset.side;
+    });
+  });
+
   document.querySelectorAll(".bulk-add").forEach(function(button){
     button.addEventListener("pointerdown",function(event){event.stopPropagation()});
     button.addEventListener("click",function(event){
       event.preventDefault();
       event.stopPropagation();
-      spawnBatch(button.dataset.spawnType,button.dataset.side,button.dataset.amount);
+
+      var row=button.closest(".solute-compact-row");
+      var side=row&&row.dataset.selectedSide?row.dataset.selectedSide:"EC";
+      spawnBatch(button.dataset.spawnType,side,button.dataset.amount);
     });
   });
 
@@ -2035,7 +2058,12 @@
     var interactiveMolecules=molecules.filter(function(el){
       return !(moving&&moving.el===el);
     });
-    applyElectrostaticInteractions(interactiveMolecules);
+
+    var electroInterval=interactiveMolecules.length>220?70:interactiveMolecules.length>120?48:30;
+    if(now-lastElectrostaticUpdate>=electroInterval){
+      applyElectrostaticInteractions(interactiveMolecules);
+      lastElectrostaticUpdate=now;
+    }
 
     var b=barrier();
     var width=stage.clientWidth;
@@ -2091,10 +2119,10 @@
 
       if(!boosted&&now>=motion.directionChangeAt){
         var walkAngle=Math.random()*Math.PI*2;
-        var walkSpeed=(26+Math.random()*18)*Math.min(1.28,Math.max(.78,sqrtDiffusion));
+        var walkSpeed=(38+Math.random()*26)*Math.min(1.30,Math.max(.80,sqrtDiffusion));
         motion.targetVx=Math.cos(walkAngle)*walkSpeed;
         motion.targetVy=Math.sin(walkAngle)*walkSpeed;
-        motion.directionChangeAt=now+340+Math.random()*840;
+        motion.directionChangeAt=now+220+Math.random()*620;
       }
 
       if(boosted){
@@ -2102,18 +2130,18 @@
         motion.targetVy=motion.vy;
       }
 
-      var steering=boosted?1.2:4.4;
+      var steering=boosted?1.35:5.2;
       motion.vx+=(motion.targetVx-motion.vx)*Math.min(1,steering*dt);
       motion.vy+=(motion.targetVy-motion.vy)*Math.min(1,steering*dt);
 
-      var microNoise=(boosted?12:8)*sqrtDiffusion*Math.sqrt(Math.max(dt,.001));
+      var microNoise=(boosted?14:10)*sqrtDiffusion*Math.sqrt(Math.max(dt,.001));
       motion.vx+=(Math.random()*2-1)*microNoise;
       motion.vy+=(Math.random()*2-1)*microNoise;
 
       applyMembraneElectricField(el,motion,dt,b);
 
       var speed=Math.hypot(motion.vx,motion.vy);
-      var maxSpeed=(boosted?82:58)*Math.min(1.30,Math.max(.78,sqrtDiffusion));
+      var maxSpeed=(boosted?88:74)*Math.min(1.30,Math.max(.80,sqrtDiffusion));
       if(speed>maxSpeed){
         motion.vx=motion.vx/speed*maxSpeed;
         motion.vy=motion.vy/speed*maxSpeed;
