@@ -7798,3 +7798,256 @@ body.cell-lab-view{
 .membrane-stage .placed-protein[data-type="lg-k"] .protein-pore{
   background:#20c4f4!important;
 }
+
+
+/* =========================================================
+   SYMMETRIC PROTEIN GEOMETRY V70
+   Visual geometry only. Existing biological colors are preserved.
+========================================================= */
+
+/* ---------- ALL CHANNELS: exact mirrored halves ---------- */
+
+.membrane-stage .protein-channel{
+  width:72px!important;
+  height:156px!important;
+}
+
+.membrane-stage .protein-channel::before,
+.membrane-stage .protein-channel::after{
+  top:4px!important;
+  bottom:4px!important;
+  width:30px!important;
+  border-radius:46% 34% 34% 46% / 24% 24% 76% 76%!important;
+  transform-origin:center center!important;
+  transition:
+    left .28s cubic-bezier(.22,.72,.28,1),
+    right .28s cubic-bezier(.22,.72,.28,1),
+    transform .28s cubic-bezier(.22,.72,.28,1),
+    border-radius .28s cubic-bezier(.22,.72,.28,1)!important;
+}
+
+.membrane-stage .protein-channel::before{
+  left:4px!important;
+  transform:none!important;
+}
+
+.membrane-stage .protein-channel::after{
+  right:4px!important;
+  transform:scaleX(-1)!important;
+}
+
+.membrane-stage .protein-pore{
+  left:50%!important;
+  top:8px!important;
+  bottom:8px!important;
+  transform:translateX(-50%)!important;
+}
+
+/* Closed/open conformations remain perfectly bilateral. */
+.membrane-stage .placed-protein.channel-closed .protein-channel::before{
+  left:10px!important;
+  transform:rotate(0deg)!important;
+}
+.membrane-stage .placed-protein.channel-closed .protein-channel::after{
+  right:10px!important;
+  transform:scaleX(-1) rotate(0deg)!important;
+}
+.membrane-stage .placed-protein.channel-open .protein-channel::before{
+  left:0!important;
+  transform:rotate(0deg)!important;
+}
+.membrane-stage .placed-protein.channel-open .protein-channel::after{
+  right:0!important;
+  transform:scaleX(-1) rotate(0deg)!important;
+}
+
+/* ---------- SGLT: symmetric shell + organized empty cavities ---------- */
+
+.membrane-stage .placed-protein[data-type="sglt"]{
+  width:96px!important;
+}
+
+.membrane-stage .sglt-art{
+  width:86px!important;
+  height:154px!important;
+  border-radius:38% 38% 24% 24% / 18% 18% 72% 72%!important;
+  transform-origin:center center!important;
+}
+
+.membrane-stage .sglt-art::before{
+  left:13px!important;
+  right:13px!important;
+  top:8px!important;
+  height:72px!important;
+  border-radius:46% 46% 34% 34% / 28% 28% 72% 72%!important;
+}
+
+/* Two Na+ cavities are exact mirrors. Glucose is centered below them. */
+.membrane-stage .sglt-na-left,
+.membrane-stage .sglt-na-right{
+  top:18px!important;
+  width:17px!important;
+  height:17px!important;
+}
+
+.membrane-stage .sglt-na-left{
+  left:12px!important;
+  right:auto!important;
+}
+
+.membrane-stage .sglt-na-right{
+  right:12px!important;
+  left:auto!important;
+}
+
+.membrane-stage .sglt-glucose{
+  left:50%!important;
+  top:42px!important;
+  width:29px!important;
+  height:27px!important;
+  transform:translateX(-50%)!important;
+}
+
+/* Outward-to-inward conformational state stays symmetric as a whole. */
+.membrane-stage .placed-protein[data-type="sglt"].sglt-cycling .sglt-art{
+  transform:translate(-50%,-50%) scaleX(.96)!important;
+  border-radius:24% 24% 38% 38% / 72% 72% 18% 18%!important;
+}
+
+.membrane-stage .placed-protein[data-type="sglt"].sglt-cycling .sglt-art::before{
+  top:82px!important;
+  border-radius:34% 34% 46% 46% / 72% 72% 28% 28%!important;
+}
+
+.membrane-stage .placed-protein[data-type="sglt"].sglt-cycling .sglt-na-left,
+.membrane-stage .placed-protein[data-type="sglt"].sglt-cycling .sglt-na-right{
+  top:108px!important;
+}
+
+.membrane-stage .placed-protein[data-type="sglt"].sglt-cycling .sglt-glucose{
+  top:86px!important;
+}
+
+/* ---------- Na+/K+ pump: symmetric body + balanced ion pockets ---------- */
+
+.membrane-stage .nak-pump-svg{
+  transform:none!important;
+}
+
+/* Three Na+ sites form a balanced triangle instead of a diagonal sequence. */
+.membrane-stage .nak-pump-art .slot-na1{
+  left:34px!important;
+  top:78px!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+}
+
+.membrane-stage .nak-pump-art .slot-na2{
+  left:64px!important;
+  top:78px!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+}
+
+.membrane-stage .nak-pump-art .slot-na3{
+  left:49px!important;
+  top:103px!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+}
+
+/* Two K+ sites are mirrored around the central axis. */
+.membrane-stage .nak-pump-art .slot-k1{
+  left:38px!important;
+  top:48px!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+}
+
+.membrane-stage .nak-pump-art .slot-k2{
+  left:60px!important;
+  top:48px!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+}
+
+/* ATP keeps its dedicated groove, but the protein body/cavity remains symmetric. */
+.membrane-stage .nak-pump-art .nak-site-atp{
+  left:17px!important;
+  right:auto!important;
+}
+
+/* ---------- previews mirror the new geometry ---------- */
+
+.channel-preview::before,
+.channel-preview::after{
+  top:1px!important;
+  bottom:1px!important;
+  width:10px!important;
+  border-radius:46% 34% 34% 46% / 24% 24% 76% 76%!important;
+}
+.channel-preview::before{
+  left:3px!important;
+  transform:none!important;
+}
+.channel-preview::after{
+  right:3px!important;
+  transform:scaleX(-1)!important;
+}
+
+.pump-preview,
+.structure-card[data-type="bomba"] .pump-preview{
+  border-radius:46% 46% 32% 32% / 24% 24% 70% 70%!important;
+}
+
+.pump-preview::before,
+.structure-card[data-type="bomba"] .pump-preview::before{
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  clip-path:polygon(
+    50% 0,
+    68% 14%,
+    72% 30%,
+    88% 43%,
+    88% 58%,
+    70% 68%,
+    78% 100%,
+    50% 82%,
+    22% 100%,
+    30% 68%,
+    12% 58%,
+    12% 43%,
+    28% 30%,
+    32% 14%
+  )!important;
+}
+
+/* SGLT preview no longer looks pre-loaded; it only shows a centered vestibule. */
+.sglt-preview{
+  border-radius:38% 38% 24% 24% / 18% 18% 72% 72%!important;
+}
+.sglt-preview::before{
+  left:6px!important;
+  right:6px!important;
+  top:4px!important;
+  height:18px!important;
+  border-radius:46% 46% 34% 34% / 28% 28% 72% 72%!important;
+}
+.sglt-preview::after{
+  width:6px!important;
+  height:6px!important;
+  top:8px!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  border-radius:50%!important;
+  clip-path:none!important;
+  background:rgba(66,43,82,.12)!important;
+  box-shadow:
+    -8px 0 0 rgba(90,67,16,.11),
+    8px 0 0 rgba(90,67,16,.11)!important;
+}
