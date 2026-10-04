@@ -5256,3 +5256,18 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .cytoplasm-color-control{
   min-width:72px;
 }
+
+
+/* =========================================================
+   UNIFIED DARK BACKGROUND V61
+   EC and IC share the same deep-black simulation background.
+========================================================= */
+
+.membrane-stage{
+  --simulation-bg-color:#08090b;
+  background:var(--simulation-bg-color,#08090b)!important;
+}
+
+.cytoplasm-plane{
+  background:var(--simulation-bg-color,#08090b)!important;
+}
