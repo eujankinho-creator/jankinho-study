@@ -2451,6 +2451,12 @@
     if(event.button!==undefined&&event.button!==0)return;
     var el=event.currentTarget;
     if(el.dataset.cycling==="1")return;
+
+    if(el.dataset.kind==="molecule"&&el.dataset.dockedPump){
+      var dockedPump=layer.querySelector('[data-id="'+el.dataset.dockedPump+'"]');
+      if(dockedPump&&dockedPump.dataset.cycling==="1")return;
+    }
+
     event.preventDefault();event.stopPropagation();selectElement(el);
 
     if(isLigandType(el.dataset.type)&&el.dataset.ligandBound){
