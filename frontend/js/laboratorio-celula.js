@@ -226,6 +226,8 @@
       pumpGuide:null,
       pumpReservedSlot:null,
       craftGuide:null,
+      gasTransit:null,
+      gasCooldownUntil:0,
       targetVx:Math.cos(angle)*speed,
       targetVy:Math.sin(angle)*speed,
       directionChangeAt:performance.now()+sampleRandomWalkDurationMs()
@@ -419,13 +421,30 @@
       var drawW=sprite.w;
       var drawH=sprite.h;
 
-      ctx.drawImage(
-        sprite.canvas,
-        x-drawW/2,
-        y-drawH/2,
-        drawW,
-        drawH
-      );
+      var motion=moleculeMotion.get(el);
+      var transit=motion&&motion.gasTransit;
+
+      if(transit){
+        var middle=1-Math.abs(transit.progress-.5)*2;
+        ctx.save();
+        ctx.globalAlpha=.84+.16*(1-middle);
+        ctx.drawImage(
+          sprite.canvas,
+          x-drawW/2,
+          y-drawH/2,
+          drawW,
+          drawH
+        );
+        ctx.restore();
+      }else{
+        ctx.drawImage(
+          sprite.canvas,
+          x-drawW/2,
+          y-drawH/2,
+          drawW,
+          drawH
+        );
+      }
     }
   }
 
@@ -3295,6 +3314,72 @@
     }
   }
 
+  function smootherStep01(t){
+    t=Math.max(0,Math.min(1,t));
+    return t*t*t*(t*(t*6-15)+10);
+  }
+
+  function startGasMembraneTransit(el,motion,fromSide,b,x,y,halfH,now){
+    if(!el||!motion||!isGasType(el.dataset.type))return false;
+    if(motion.gasTransit)return true;
+    if(motion.gasCooldownUntil&&now<motion.gasCooldownUntil)return false;
+    if(!checkGradientForCrossing(el.dataset.type,fromSide))return false;
+
+    var direction=fromSide==="EC"?1:-1;
+    var entryY=fromSide==="EC"?b.top-halfH:b.bottom+halfH;
+    var exitY=fromSide==="EC"?b.bottom+halfH+5:b.top-halfH-5;
+    var duration=el.dataset.type==="o2"?.48:.56;
+
+    motion.gasTransit={
+      from:fromSide,
+      direction:direction,
+      startX:x,
+      endX:x+(Math.random()-.5)*10,
+      startY:Math.abs(y-entryY)<12?y:entryY,
+      endY:exitY,
+      progress:0,
+      duration:duration+Math.random()*.10,
+      phase:Math.random()*Math.PI*2
+    };
+
+    motion.vx*=.44;
+    motion.vy=direction*Math.max(24,Math.abs(motion.vy)*.7);
+    motion.directionChangeAt=Infinity;
+    return true;
+  }
+
+  function advanceGasMembraneTransit(el,motion,dt,now,width){
+    var transit=motion&&motion.gasTransit;
+    if(!transit)return false;
+
+    transit.progress=Math.min(1,transit.progress+dt/Math.max(.32,transit.duration));
+    var eased=smootherStep01(transit.progress);
+    var lateral=Math.sin(transit.progress*Math.PI*2+transit.phase)*2.2*Math.sin(transit.progress*Math.PI);
+    var x=transit.startX+(transit.endX-transit.startX)*eased+lateral;
+    var y=transit.startY+(transit.endY-transit.startY)*eased;
+
+    if(x<-motion.halfW)x=width+motion.halfW-1;
+    else if(x>width+motion.halfW)x=-motion.halfW+1;
+
+    el.style.left=x+"px";
+    el.style.top=y+"px";
+
+    if(transit.progress>=1){
+      var direction=transit.direction;
+      motion.gasTransit=null;
+      motion.gasCooldownUntil=now+760;
+      motion.vx=(Math.random()-.5)*30;
+      motion.vy=direction*(34+Math.random()*18);
+      motion.targetVx=motion.vx;
+      motion.targetVy=motion.vy;
+      motion.boostUntil=now+420;
+      motion.directionChangeAt=now+540+Math.random()*420;
+      compartmentCountCacheAt=0;
+    }
+
+    return true;
+  }
+
   function molecularPhysicsStep(dt,now){
     if(!simulationActive||simulationPaused)return;
 
@@ -3398,27 +3483,40 @@
         motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
       }
 
-      var crossedGas=false;
       if(features.gas&&isGasType(type)){
-        if(side==="EC"&&ny+halfH>b.top&&checkGradientForCrossing(type,"EC")){
-          ny=b.bottom+halfH+2;
-          crossedGas=true;
-        }else if(side==="IC"&&ny-halfH<b.bottom&&checkGradientForCrossing(type,"IC")){
-          ny=b.top-halfH-2;
-          crossedGas=true;
+        // Gas molecules cross the bilayer continuously instead of teleporting.
+        if(motion.gasTransit){
+          advanceGasMembraneTransit(el,motion,dt,now,width);
+          continue;
         }
-        if(crossedGas)motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
+
+        var wantsGasTransit=false;
+        if(side==="EC"&&ny+halfH>b.top){
+          wantsGasTransit=startGasMembraneTransit(el,motion,"EC",b,x,y,halfH,now);
+        }else if(side==="IC"&&ny-halfH<b.bottom){
+          wantsGasTransit=startGasMembraneTransit(el,motion,"IC",b,x,y,halfH,now);
+        }
+
+        if(wantsGasTransit){
+          advanceGasMembraneTransit(el,motion,dt,now,width);
+          continue;
+        }
       }
 
-      if(!crossedGas&&side==="EC"&&ny+halfH>b.top){
+      if(side==="EC"&&ny+halfH>b.top){
         ny=b.top-halfH;
         motion.vy=-Math.abs(motion.vy||24);
         motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
-      }else if(!crossedGas&&side==="IC"&&ny-halfH<b.bottom){
+      }else if(side==="IC"&&ny-halfH<b.bottom){
         ny=b.bottom+halfH;
         motion.vy=Math.abs(motion.vy||24);
         motion.directionChangeAt=now+sampleRandomWalkDurationMs()/Math.max(.35,simulationTimeScale);
-      }else if(!crossedGas&&side==="MP"){
+      }else if(side==="MP"){
+        if(features.gas&&isGasType(type)&&motion.gasTransit){
+          advanceGasMembraneTransit(el,motion,dt,now,width);
+          continue;
+        }
+
         if(y<=b.center){
           ny=b.top-halfH;
           motion.vy=-Math.abs(motion.vy||24);
