@@ -755,3 +755,79 @@
   .selection-info{align-items:flex-start}
   .selection-info button{margin-left:0}
 }
+
+
+/* Membrana Viva — transporte seletivo, encaixes da bomba e feedback de colisão */
+.placed-protein,
+.placed-protein *,
+.protein-art,
+.protein-channel,
+.pump-art{opacity:1!important}
+
+.placed-protein{transition:filter .16s ease}
+.placed-protein.channel-pass{filter:drop-shadow(0 0 12px rgba(159,192,209,.35))}
+.placed-element.transporting{
+  transition:left .72s cubic-bezier(.22,.8,.26,1),top .72s cubic-bezier(.22,.8,.26,1),transform .72s ease;
+  z-index:31;
+}
+.placed-element.docked{animation:none!important;z-index:24}
+
+.membrane-stage.barrier-hit .bilayer{animation:barrierPulse .38s ease}
+@keyframes barrierPulse{0%,100%{filter:none}50%{filter:drop-shadow(0 0 13px rgba(153,181,197,.2))}}
+
+.collision-toast{
+  position:absolute;z-index:45;left:50%;top:18px;max-width:min(520px,calc(100% - 34px));
+  transform:translate(-50%,-8px);padding:7px 11px;border:1px solid rgba(198,214,224,.13);
+  border-radius:10px;background:rgba(7,13,19,.92);color:#9db0bb;font-size:8px;font-weight:700;
+  text-align:center;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;
+  backdrop-filter:blur(12px);
+}
+.collision-toast.is-visible{opacity:1;transform:translate(-50%,0)}
+
+.pump-slot{
+  position:absolute;z-index:7;display:grid;place-items:center;min-width:23px;height:19px;padding:0 4px;
+  border:1px dashed rgba(201,214,222,.28);border-radius:7px;background:rgba(8,14,20,.9);
+  color:#81949f;font-size:6px;font-style:normal;font-weight:900;letter-spacing:-.02em;pointer-events:none;
+  transition:border-color .16s ease,background .16s ease,box-shadow .16s ease,color .16s ease;
+}
+.pump-slot[data-accept="k"]{top:-29px;color:#cbb873;border-color:rgba(205,182,111,.27)}
+.pump-slot.slot-k1{left:7px}.pump-slot.slot-k2{right:7px}
+.pump-slot[data-accept="na"]{bottom:-29px;color:#d79c82;border-color:rgba(218,153,126,.25)}
+.pump-slot.slot-na1{left:-2px}.pump-slot.slot-na2{left:25px}.pump-slot.slot-na3{right:-2px}
+.pump-slot[data-accept="atp"]{
+  left:50%;bottom:-54px;min-width:37px;transform:translateX(-50%);color:#cfc08a;border-color:rgba(207,192,138,.24)
+}
+.pump-slot.slot-ready{
+  border-style:solid;border-color:rgba(214,229,237,.62);color:#e3edf2;background:rgba(99,126,141,.2);
+  box-shadow:0 0 17px rgba(157,188,205,.2)
+}
+.pump-slot.occupied{
+  border-style:solid;background:rgba(116,144,159,.12);border-color:rgba(186,207,218,.38);color:transparent
+}
+
+.pump-state-badge{
+  position:absolute;z-index:8;top:50%;right:-43px;transform:translateY(-50%);
+  min-width:34px;height:21px;display:grid;place-items:center;border:1px solid rgba(190,210,221,.12);
+  border-radius:8px;background:rgba(7,13,19,.9);color:#748893;font-size:6px;font-weight:900;pointer-events:none
+}
+.placed-protein.pump-ready .pump-state-badge,
+.placed-protein.pump-cycling .pump-state-badge{
+  color:#dce7ec;border-color:rgba(186,210,223,.32);box-shadow:0 0 18px rgba(135,168,185,.18)
+}
+.placed-protein.pump-cycling .pump-art{animation:pumpCycle .62s ease-in-out infinite alternate}
+@keyframes pumpCycle{from{transform:rotate(-2deg) scale(.99)}to{transform:rotate(2deg) scale(1.02)}}
+
+.placed-molecule.is-blocked{
+  box-shadow:0 0 0 1px rgba(204,220,229,.28),0 0 17px rgba(146,174,189,.16)
+}
+
+.bilayer::after{
+  content:"barreira seletiva";position:absolute;z-index:5;right:18px;top:50%;transform:translateY(-50%);
+  color:rgba(126,148,160,.3);font-size:6px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;
+  pointer-events:none
+}
+
+@media(max-width:620px){
+  .pump-state-badge{right:-35px}
+  .pump-slot[data-accept="atp"]{bottom:-49px}
+}

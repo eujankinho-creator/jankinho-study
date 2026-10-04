@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-dnd1">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-physics2">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -132,11 +132,6 @@
               <b>⋮⋮</b>
             </button>
 
-            <button class="tool-item protein-tool" type="button" draggable="true" data-kind="protein" data-type="receptor">
-              <span class="tool-preview receptor-preview"><i></i></span>
-              <span><strong>Receptor</strong><small>proteína integral</small></span>
-              <b>⋮⋮</b>
-            </button>
           </div>
 
           <div class="tool-group">
@@ -151,13 +146,12 @@
               <button class="molecule-tool cl-molecule" type="button" draggable="true" data-kind="molecule" data-type="cl"><strong>Cl⁻</strong><small>cloreto</small></button>
               <button class="molecule-tool water-molecule" type="button" draggable="true" data-kind="molecule" data-type="h2o"><strong>H₂O</strong><small>água</small></button>
               <button class="molecule-tool atp-molecule" type="button" draggable="true" data-kind="molecule" data-type="atp"><strong>ATP</strong><small>energia</small></button>
-              <button class="molecule-tool glucose-molecule" type="button" draggable="true" data-kind="molecule" data-type="glicose"><strong>Glu</strong><small>glicose</small></button>
             </div>
           </div>
 
           <div class="toolbox-tip">
             <span>i</span>
-            <p><strong>No celular:</strong> toque em um item e depois toque no ponto onde deseja colocá-lo.</p>
+            <p><strong>Arraste diretamente:</strong> proteínas se acoplam à membrana; íons e moléculas podem ser soltos no EC ou IC. A bicamada bloqueia travessias sem canal.</p>
           </div>
         </aside>
 
@@ -214,6 +208,8 @@
               <small>arraste proteínas e moléculas da paleta</small>
             </div>
 
+            <div id="collisionToast" class="collision-toast" aria-live="polite"></div>
+
             <div id="armedHint" class="armed-hint" hidden>
               <span></span>
               <strong id="armedText">Item selecionado</strong>
@@ -245,7 +241,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-dnd1"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-physics2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
