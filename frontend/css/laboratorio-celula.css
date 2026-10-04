@@ -3294,9 +3294,11 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 }
 
 
+
 /* =========================================================
-   Na+/K+ ATPase — CANONICAL AUTHORIAL MODEL V39
-   3 Na+ + ATP on IC face -> outward conformation -> 2 K+ on EC face.
+   Na+/K+ ATPase — SINGLE AUTHORIAL MODEL V41
+   IC: 3 Na+ + ATP in lower-left groove
+   EC: release 3 Na+ -> reveal 2 K+ cavities -> return K+ to IC
 ========================================================= */
 
 .placed-protein[data-type="bomba"]{
@@ -3314,6 +3316,7 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   overflow:visible!important;
 }
 
+/* Authorial turquoise body. */
 .nak-shell{
   position:absolute;
   z-index:1;
@@ -3325,12 +3328,11 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     18% 2%,82% 2%,92% 16%,92% 45%,84% 66%,70% 88%,
     58% 80%,50% 63%,42% 80%,30% 88%,16% 66%,8% 45%,8% 16%
   );
-  transition:
-    transform .34s cubic-bezier(.22,.72,.28,1),
-    clip-path .34s cubic-bezier(.22,.72,.28,1),
-    border-radius .34s ease;
+  transition:transform .36s cubic-bezier(.22,.72,.28,1),
+             clip-path .36s cubic-bezier(.22,.72,.28,1);
 }
 
+/* Dark green inner opening shown in the reference. */
 .nak-cavity{
   position:absolute;
   z-index:2;
@@ -3346,30 +3348,39 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     77% 68%,92% 82%,79% 100%,59% 91%,50% 73%,
     41% 91%,21% 100%,8% 82%,23% 68%,33% 53%,16% 43%,16% 24%,30% 15%
   );
-  transition:
-    transform .34s cubic-bezier(.22,.72,.28,1),
-    width .34s ease,
-    clip-path .34s cubic-bezier(.22,.72,.28,1);
+  transition:transform .36s cubic-bezier(.22,.72,.28,1),
+             width .36s ease,
+             clip-path .36s cubic-bezier(.22,.72,.28,1);
 }
 
+/* ATP groove exists ONLY on the lower-left IC side. */
 .nak-atp-pocket{
   position:absolute;
   z-index:4;
-  right:-7px;
-  bottom:15px;
-  width:43px;
-  height:29px;
-  border:1.2px solid #275c4e;
-  border-radius:14px;
+  left:1px;
+  right:auto;
+  bottom:5px;
+  width:45px;
+  height:39px;
+  border:1.3px solid #285d50;
   background:#7bcdb9;
-  transition:opacity .18s ease,transform .28s ease;
+  clip-path:polygon(
+    8% 33%,24% 25%,30% 8%,48% 2%,61% 15%,
+    78% 13%,94% 29%,88% 48%,72% 57%,72% 78%,
+    56% 96%,39% 89%,31% 69%,14% 62%
+  );
+  transform:rotate(-8deg);
+  transform-origin:50% 55%;
+  opacity:.88;
+  transition:opacity .18s ease,transform .30s ease;
 }
 
 .nak-phosphate{
   position:absolute;
   z-index:16;
-  right:2px;
-  bottom:36px;
+  left:7px;
+  right:auto;
+  bottom:34px;
   width:18px;
   height:18px;
   display:grid;
@@ -3382,7 +3393,7 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   font-style:normal;
   font-weight:900;
   opacity:0;
-  transform:scale(.7);
+  transform:scale(.72);
   transition:opacity .16s ease,transform .16s ease;
   pointer-events:none;
 }
@@ -3392,7 +3403,7 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   transform:scale(1);
 }
 
-/* Empty binding cavities: molecules keep their own artwork when docked. */
+/* Base recess style. */
 .nak-pump-art .pump-slot{
   position:absolute!important;
   z-index:10!important;
@@ -3402,63 +3413,61 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   width:23px!important;
   height:23px!important;
   border-radius:50%!important;
-  background:rgba(8,48,40,.30)!important;
+  background:rgba(8,48,40,.25)!important;
   color:transparent!important;
   opacity:0!important;
   visibility:hidden!important;
   pointer-events:none!important;
-  box-shadow:inset 0 0 0 2px rgba(255,255,255,.07)!important;
-  transition:
-    opacity .16s ease,
-    visibility .16s ease,
-    border-color .16s ease,
-    background .16s ease!important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)!important;
+  transition:opacity .16s ease,
+             visibility .16s ease,
+             border-color .16s ease,
+             background .16s ease!important;
 }
 
 .nak-pump-art .nak-site-na{
-  border:1.5px solid rgba(255,213,47,.55)!important;
+  border:1.5px solid rgba(255,213,47,.62)!important;
 }
 .nak-pump-art .nak-site-k{
-  border:1.5px solid rgba(67,183,216,.58)!important;
-}
-.nak-pump-art .nak-site-atp{
-  width:35px!important;
-  height:21px!important;
-  border-radius:10px!important;
-  border:1.5px solid rgba(132,202,100,.62)!important;
-  background:rgba(36,80,36,.28)!important;
+  border:1.5px solid rgba(67,183,216,.68)!important;
 }
 
-/* 3 Na+ binding sites on the intracellular/lower side. */
+/* ATP docking hit-area exactly over the lower-left groove. */
+.nak-pump-art .nak-site-atp{
+  left:4px!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:10px!important;
+  width:38px!important;
+  height:28px!important;
+  border-radius:42% 52% 48% 44% / 48% 42% 58% 52%!important;
+  border:1.5px dashed rgba(132,202,100,.64)!important;
+  background:rgba(52,96,45,.14)!important;
+  transform:rotate(-8deg)!important;
+}
+
+/* Three Na+ cavities on the IC-facing half. */
 .nak-pump-art .slot-na1{
   left:18px!important;
   right:auto!important;
   top:auto!important;
-  bottom:22px!important;
+  bottom:24px!important;
 }
 .nak-pump-art .slot-na2{
   left:50%!important;
   right:auto!important;
   top:auto!important;
-  bottom:9px!important;
+  bottom:11px!important;
   transform:translateX(-50%)!important;
 }
 .nak-pump-art .slot-na3{
   left:auto!important;
   right:18px!important;
   top:auto!important;
-  bottom:22px!important;
+  bottom:24px!important;
 }
 
-/* ATP binding pocket below/right on the IC side. */
-.nak-pump-art .slot-atp{
-  left:auto!important;
-  right:-3px!important;
-  top:auto!important;
-  bottom:19px!important;
-}
-
-/* 2 K+ binding sites on the extracellular/upper side. */
+/* Two K+ cavities on the EC-facing half. */
 .nak-pump-art .slot-k1{
   left:27px!important;
   right:auto!important;
@@ -3472,22 +3481,39 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   bottom:auto!important;
 }
 
-/* IC-facing conformation */
+/* STATE: IC open — only Na+ cavities are active. */
 .placed-protein[data-type="bomba"][data-pump-state="inside-open"] .nak-site-na,
 .placed-protein[data-type="bomba"][data-pump-state="inside-na-bound"] .nak-site-na{
   opacity:1!important;
   visibility:visible!important;
 }
+
+/* ATP groove becomes active only after 3 Na+ are in place. */
 .placed-protein[data-type="bomba"][data-pump-state="inside-open"] .nak-site-atp{
-  opacity:.22!important;
+  opacity:.08!important;
   visibility:visible!important;
 }
 .placed-protein[data-type="bomba"][data-pump-state="inside-na-bound"] .nak-site-atp{
   opacity:1!important;
   visibility:visible!important;
+  border-color:rgba(160,225,128,.86)!important;
+  background:rgba(79,132,65,.18)!important;
 }
 
-/* Occluded transition: protein closes around Na+ or K+. */
+/* Real ATP retains the same molecular artwork when fitted into the groove. */
+.placed-protein[data-type="bomba"][data-atp-bound="1"] .nak-atp-pocket{
+  opacity:.34;
+}
+.placed-molecule[data-type="atp"].docked[data-docked-pump]{
+  width:50px!important;
+  height:50px!important;
+}
+.placed-molecule[data-type="atp"].docked[data-docked-pump] .molecule-atp{
+  transform:translate(-50%,-50%) rotate(78deg)!important;
+  transform-origin:center!important;
+}
+
+/* STATE: occluded/phosphorylated. */
 .placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .nak-shell,
 .placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-shell,
 .placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-shell{
@@ -3496,7 +3522,6 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     56% 80%,50% 69%,44% 80%,36% 88%,23% 68%,15% 46%,12% 19%
   );
 }
-
 .placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .nak-cavity,
 .placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-cavity,
 .placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-cavity{
@@ -3506,7 +3531,6 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
     77% 82%,65% 100%,35% 100%,23% 82%,28% 62%,36% 50%,28% 38%,23% 18%
   );
 }
-
 .placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .pump-slot.occupied,
 .placed-protein[data-type="bomba"][data-pump-state="k-bound"] .pump-slot.occupied,
 .placed-protein[data-type="bomba"][data-pump-state="resetting"] .pump-slot.occupied{
@@ -3514,32 +3538,50 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   visibility:visible!important;
 }
 
-/* EC-facing conformation: same pump rotates its opening upward. */
+/* STATE: EC open — rotate same protein and reveal ONLY two K+ cavities. */
 .placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-shell{
   transform:rotate(180deg);
 }
 .placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-cavity{
   transform:translateX(-50%) rotate(180deg);
 }
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-site-na,
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-site-atp,
+.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-atp-pocket{
+  opacity:0!important;
+  visibility:hidden!important;
+}
 .placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-site-k{
+  opacity:1!important;
+  visibility:visible!important;
+  border-color:rgba(67,183,216,.88)!important;
+  background:rgba(67,183,216,.08)!important;
+}
+
+/* K cavities must not leak into IC-facing states. */
+.placed-protein[data-type="bomba"]:not([data-pump-state="outside-open"]):not([data-pump-state="k-bound"]):not([data-pump-state="resetting"]) .nak-site-k{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
+/* STATE: K-bound and return to IC. */
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-atp-pocket,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-atp-pocket{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-site-k.occupied,
+.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-site-k.occupied{
   opacity:1!important;
   visibility:visible!important;
 }
 
-.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-atp-pocket,
-.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-atp-pocket,
-.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-atp-pocket{
-  opacity:0;
-  transform:scale(.82);
-}
-
-/* Highlight only currently valid empty sites. */
+/* Active empty sites remain recessed, not molecule-like. */
 .nak-pump-art .pump-slot.pump-site-active:not(.occupied){
   opacity:1!important;
   visibility:visible!important;
   background:rgba(255,255,255,.025)!important;
 }
-
 .nak-pump-art .pump-slot.occupied{
   opacity:1!important;
   visibility:visible!important;
@@ -3547,13 +3589,13 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   box-shadow:none!important;
 }
 
-/* Docked particles retain the same visual molecule style; no alternate pump ion skin. */
+/* Docked molecules keep original Na/K/ATP visuals. */
 .placed-molecule.docked[data-docked-pump]{
   z-index:30!important;
   transform:translate(-50%,-50%)!important;
 }
 
-/* Canonical ghost uses the same silhouette. */
+/* Same silhouette for drag preview. */
 .nak-pump-ghost .nak-shell,
 .nak-pump-ghost .nak-cavity,
 .nak-pump-ghost .nak-atp-pocket{
@@ -3568,112 +3610,10 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   transform:translate(-50%,3px)!important;
 }
 
-/* Palette preview belongs to this exact model. */
 .structure-card[data-type="bomba"] .pump-preview{
   width:36px!important;
   height:42px!important;
   border-radius:48% 48% 34% 34% / 22% 22% 74% 74%!important;
   background:#7bcdb9!important;
   border-color:#173b32!important;
-}
-
-
-/* =========================================================
-   Na+/K+ ATPase V40 — ATP lower-left IC groove
-   Authorial reference: ATP docks into the lower-left groove.
-========================================================= */
-
-/* Distinct non-circular ATP groove on the intracellular lower-left face. */
-.placed-protein[data-type="bomba"] .nak-atp-pocket{
-  left:2px!important;
-  right:auto!important;
-  bottom:5px!important;
-  width:45px!important;
-  height:39px!important;
-  border:1.3px solid #285d50!important;
-  border-radius:0!important;
-  background:#7bcdb9!important;
-  clip-path:polygon(
-    8% 33%,24% 25%,30% 8%,48% 2%,61% 15%,
-    78% 13%,94% 29%,88% 48%,72% 57%,72% 78%,
-    56% 96%,39% 89%,31% 69%,14% 62%
-  )!important;
-  transform:rotate(-8deg)!important;
-  transform-origin:50% 55%!important;
-  opacity:.88!important;
-}
-
-/* Invisible docking hit-area sits exactly over the groove. */
-.placed-protein[data-type="bomba"] .nak-site-atp.slot-atp{
-  left:4px!important;
-  right:auto!important;
-  top:auto!important;
-  bottom:10px!important;
-  width:38px!important;
-  height:28px!important;
-  border-radius:42% 52% 48% 44% / 48% 42% 58% 52%!important;
-  border:1.5px dashed rgba(132,202,100,.58)!important;
-  background:rgba(52,96,45,.16)!important;
-  transform:rotate(-8deg)!important;
-}
-
-/* ATP site remains subtle until 3 Na+ have occupied their sites. */
-.placed-protein[data-type="bomba"][data-pump-state="inside-open"] .nak-site-atp{
-  opacity:.10!important;
-  visibility:visible!important;
-}
-
-.placed-protein[data-type="bomba"][data-pump-state="inside-na-bound"] .nak-site-atp{
-  opacity:1!important;
-  visibility:visible!important;
-  border-color:rgba(160,225,128,.82)!important;
-  background:rgba(79,132,65,.19)!important;
-}
-
-/* When ATP is docked, the molecule sits in the groove instead of receiving another skin. */
-.placed-protein[data-type="bomba"][data-atp-bound="1"] .nak-atp-pocket{
-  opacity:.34!important;
-}
-
-.placed-molecule[data-type="atp"].docked[data-docked-pump]{
-  width:50px!important;
-  height:50px!important;
-}
-
-.placed-molecule[data-type="atp"].docked[data-docked-pump] .molecule-atp{
-  transform:translate(-50%,-50%) rotate(78deg)!important;
-  transform-origin:center!important;
-}
-
-/* ATP groove closes/disappears as soon as the pump turns toward EC. */
-.placed-protein[data-type="bomba"][data-pump-state="phosphorylating"] .nak-atp-pocket{
-  opacity:.42!important;
-  transform:rotate(-8deg) scale(.90)!important;
-}
-
-.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-atp-pocket,
-.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-atp-pocket,
-.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-atp-pocket{
-  opacity:0!important;
-  transform:rotate(-8deg) scale(.72)!important;
-}
-
-/* K cavities only become prominent after the 3 Na+ have been expelled to EC. */
-.placed-protein[data-type="bomba"]:not([data-pump-state="outside-open"]):not([data-pump-state="k-bound"]) .nak-site-k:not(.occupied){
-  opacity:0!important;
-  visibility:hidden!important;
-}
-
-.placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-site-k{
-  opacity:1!important;
-  visibility:visible!important;
-  border-color:rgba(67,183,216,.82)!important;
-  background:rgba(67,183,216,.10)!important;
-}
-
-/* During return, the two K+ remain visually inside until release to IC. */
-.placed-protein[data-type="bomba"][data-pump-state="k-bound"] .nak-site-k.occupied,
-.placed-protein[data-type="bomba"][data-pump-state="resetting"] .nak-site-k.occupied{
-  opacity:1!important;
-  visibility:visible!important;
 }
