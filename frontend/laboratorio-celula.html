@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261004-membrana2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261004-membrana2">
-  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-phetcore25">
+  <link rel="stylesheet" href="/css/laboratorio-celula.css?v=20261004-membrana-phetmatch26">
 
   <script defer src="/js/ui-enhancements.js?v=20261004-membrana2"></script>
   <script defer src="/js/theme-manager.js?v=20261004-membrana2"></script>
@@ -139,167 +139,53 @@
               <small>posição livre</small>
             </div>
 
-            <div class="solute-control-list compact-solute-console">
-              <div class="solute-compact-row" data-solute="o2" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main o2-molecule" type="button" data-kind="molecule" data-type="o2">
-                    <span class="solute-orb">O₂</span>
-                    <span><strong>Oxigênio</strong><small>difusão simples</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Oxigênio">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-o2-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-o2-IC">0</b></button>
-                  </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="o2" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="o2" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="o2" data-amount="25">+25</button>
-                </div>
+            <div class="phet-solute-console">
+              <div class="solute-picker" role="listbox" aria-label="Solutos">
+                <button class="solute-choice" type="button" data-solute-type="o2" aria-selected="false">
+                  <span class="solute-orb o2-orb">O₂</span><span>Oxigênio</span>
+                </button>
+                <button class="solute-choice" type="button" data-solute-type="co2" aria-selected="false">
+                  <span class="solute-orb co2-orb">CO₂</span><span>Dióxido de carbono</span>
+                </button>
+                <button class="solute-choice is-active" type="button" data-solute-type="na" aria-selected="true">
+                  <span class="solute-orb na-orb">Na⁺</span><span>Sódio</span>
+                </button>
+                <button class="solute-choice" type="button" data-solute-type="k" aria-selected="false">
+                  <span class="solute-orb k-orb">K⁺</span><span>Potássio</span>
+                </button>
+                <button class="solute-choice" type="button" data-solute-type="glucose" aria-selected="false">
+                  <span class="solute-orb glucose-orb">G</span><span>Glicose</span>
+                </button>
+                <button class="solute-choice" type="button" data-solute-type="atp" aria-selected="false">
+                  <span class="solute-orb atp-orb">ATP</span><span>ATP</span>
+                </button>
               </div>
-              <div class="solute-compact-row" data-solute="co2" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main co2-molecule" type="button" data-kind="molecule" data-type="co2">
-                    <span class="solute-orb">CO₂</span>
-                    <span><strong>Dióxido de carbono</strong><small>difusão simples</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Dióxido de carbono">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-co2-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-co2-IC">0</b></button>
+
+              <div class="compartment-controls">
+                <div class="compartment-control ec-control">
+                  <div class="compartment-control-head">
+                    <span class="active-solute-mini" id="activeSoluteSymbolEC">Na⁺</span>
+                    <div><strong>Exterior</strong><small>EC · <b id="activeCountEC">0</b></small></div>
+                  </div>
+                  <div class="phet-stepper">
+                    <button class="solute-adjust" type="button" data-side="EC" data-delta="-10" title="Retirar 10">‹</button>
+                    <button class="solute-adjust coarse" type="button" data-side="EC" data-delta="-50" title="Retirar 50">≪</button>
+                    <button class="solute-adjust coarse" type="button" data-side="EC" data-delta="50" title="Adicionar 50">≫</button>
+                    <button class="solute-adjust" type="button" data-side="EC" data-delta="10" title="Adicionar 10">›</button>
                   </div>
                 </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="co2" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="co2" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="co2" data-amount="25">+25</button>
-                </div>
-              </div>
-              <div class="solute-compact-row" data-solute="glucose" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main glucose-molecule" type="button" data-kind="molecule" data-type="glucose">
-                    <span class="solute-orb">G</span>
-                    <span><strong>Glicose</strong><small>cotransporte</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Glicose">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-glucose-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-glucose-IC">0</b></button>
+
+                <div class="compartment-control ic-control">
+                  <div class="compartment-control-head">
+                    <span class="active-solute-mini" id="activeSoluteSymbolIC">Na⁺</span>
+                    <div><strong>Interior</strong><small>IC · <b id="activeCountIC">0</b></small></div>
                   </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="glucose" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="glucose" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="glucose" data-amount="25">+25</button>
-                </div>
-              </div>
-              <div class="solute-compact-row" data-solute="na" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main na-molecule" type="button" data-kind="molecule" data-type="na">
-                    <span class="solute-orb">Na⁺</span>
-                    <span><strong>Sódio</strong><small>íon</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Sódio">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-na-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-na-IC">0</b></button>
+                  <div class="phet-stepper">
+                    <button class="solute-adjust" type="button" data-side="IC" data-delta="-10" title="Retirar 10">‹</button>
+                    <button class="solute-adjust coarse" type="button" data-side="IC" data-delta="-50" title="Retirar 50">≪</button>
+                    <button class="solute-adjust coarse" type="button" data-side="IC" data-delta="50" title="Adicionar 50">≫</button>
+                    <button class="solute-adjust" type="button" data-side="IC" data-delta="10" title="Adicionar 10">›</button>
                   </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="na" data-amount="25">+25</button>
-                </div>
-              </div>
-              <div class="solute-compact-row" data-solute="k" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main k-molecule" type="button" data-kind="molecule" data-type="k">
-                    <span class="solute-orb">K⁺</span>
-                    <span><strong>Potássio</strong><small>íon</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Potássio">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-k-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-k-IC">0</b></button>
-                  </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="k" data-amount="25">+25</button>
-                </div>
-              </div>
-              <div class="solute-compact-row" data-solute="cl" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main cl-molecule" type="button" data-kind="molecule" data-type="cl">
-                    <span class="solute-orb">Cl⁻</span>
-                    <span><strong>Cloreto</strong><small>íon</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Cloreto">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-cl-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-cl-IC">0</b></button>
-                  </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="cl" data-amount="25">+25</button>
-                </div>
-              </div>
-              <div class="solute-compact-row" data-solute="h2o" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main water-molecule" type="button" data-kind="molecule" data-type="h2o">
-                    <span class="solute-orb">H₂O</span>
-                    <span><strong>Água</strong><small>molécula</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Água">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-h2o-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-h2o-IC">0</b></button>
-                  </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="h2o" data-amount="25">+25</button>
-                </div>
-              </div>
-              <div class="solute-compact-row" data-solute="atp" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main atp-molecule" type="button" data-kind="molecule" data-type="atp">
-                    <span class="solute-orb">ATP</span>
-                    <span><strong>ATP</strong><small>energia</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para ATP">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-atp-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-atp-IC">0</b></button>
-                  </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="atp" data-amount="25">+25</button>
-                </div>
-              </div>
-              <div class="solute-compact-row" data-solute="pi" data-selected-side="EC">
-                <div class="solute-identity">
-                  <button class="molecule-tool solute-main pi-molecule" type="button" data-kind="molecule" data-type="pi">
-                    <span class="solute-orb">Pi</span>
-                    <span><strong>Fosfato</strong><small>grupo fosfato</small></span>
-                  </button>
-                  <div class="solute-compartment-switch" role="group" aria-label="Compartimento para Fosfato">
-                    <button class="side-select is-active" type="button" data-side="EC"><span>EC</span><b id="count-pi-EC">0</b></button>
-                    <button class="side-select" type="button" data-side="IC"><span>IC</span><b id="count-pi-IC">0</b></button>
-                  </div>
-                </div>
-                <div class="solute-quick-add">
-                  <span class="target-side-label">Adicionar em <b>EC</b></span>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-amount="1">+1</button>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-amount="10">+10</button>
-                  <button class="bulk-add" type="button" data-spawn-type="pi" data-amount="25">+25</button>
                 </div>
               </div>
             </div>
@@ -389,11 +275,11 @@
             <div class="structure-console">
               <div class="structure-console-head">
                 <div><small>TRANSPORTE</small><strong>Proteínas de membrana</strong></div>
-                <span>modelo PhET-like</span>
+                <span>categorias do modelo</span>
               </div>
 
               <div class="structure-section">
-                <small>CANAIS DE VAZAMENTO · sempre abertos</small>
+                <small>CANAIS DE VAZAMENTO</small>
                 <div class="structure-grid">
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vazante-na">
                     <span class="tool-preview channel-preview na-preview"><i></i></span><b>Leak Na⁺</b><small>passivo</small>
@@ -405,7 +291,7 @@
               </div>
 
               <div class="structure-section">
-                <small>DEPENDENTES DE VOLTAGEM</small>
+                <small>CANAIS DEPENDENTES DE VOLTAGEM</small>
                 <div class="structure-grid">
                   <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="vg-na">
                     <span class="tool-preview channel-preview vg-na-preview"><i></i></span><b>Na⁺ voltagem</b><small>abre em −50 mV</small>
@@ -418,7 +304,7 @@
 
               <div class="structure-section ligand-structure-section">
                 <div class="structure-section-titleline">
-                  <small>DEPENDENTES DE LIGANTE</small>
+                  <small>CANAIS DEPENDENTES DE LIGANTE</small>
                   <button id="ligandToggle" class="ligand-toggle" type="button" aria-pressed="false">Adicionar ligantes</button>
                 </div>
                 <div class="structure-grid">
@@ -431,20 +317,8 @@
                 </div>
               </div>
 
-              <div class="structure-section">
-                <small>OUTROS</small>
-                <div class="structure-grid">
-                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="aquaporina">
-                    <span class="tool-preview channel-preview aqua-preview"><i></i></span><b>Aquaporina</b><small>H₂O</small>
-                  </button>
-                  <button class="tool-item protein-tool structure-card" type="button" data-kind="protein" data-type="canal-na">
-                    <span class="tool-preview channel-preview na-preview"><i></i></span><b>Canal Na⁺</b><small>didático</small>
-                  </button>
-                </div>
-              </div>
-
               <div class="structure-section active-transport-section">
-                <small>TRANSPORTE ATIVO</small>
+                <small>TRANSPORTADORES ATIVOS</small>
                 <button class="tool-item protein-tool structure-card structure-card-wide" type="button" data-kind="protein" data-type="bomba">
                   <span class="tool-preview pump-preview"><i>3:2</i></span>
                   <span><b>Bomba Na⁺/K⁺</b><small>3 Na⁺ → 2 K⁺ · ATP</small></span>
@@ -456,43 +330,59 @@
               </div>
             </div>
 
-            <div id="gradientPanel" class="gradient-panel">
+            <div id="gradientPanel" class="gradient-panel concentration-panel">
               <div class="gradient-panel-head">
                 <div>
-                  <small>GRADIENTE ELETROQUÍMICO</small>
-                  <strong>Difusão + campo elétrico</strong>
+                  <small>CONCENTRAÇÕES DOS SOLUTOS</small>
+                  <strong>Exterior × Interior</strong>
                 </div>
                 <span id="gradientVm">Vm ≈ −70 mV</span>
               </div>
 
-              <div class="gradient-ion-row" data-ion="na">
-                <span class="gradient-ion-symbol">Na⁺</span>
-                <div>
-                  <strong id="gradientNaDirection">—</strong>
-                  <small id="gradientNaCounts">EC 0 · IC 0</small>
+              <div class="concentration-grid">
+                <div class="concentration-row" data-ion="o2">
+                  <span class="concentration-symbol">O₂</span>
+                  <div class="concentration-bars">
+                    <i class="bar-ec" id="conc-o2-ec"></i>
+                    <i class="bar-ic" id="conc-o2-ic"></i>
+                  </div>
+                  <small id="conc-o2-counts">EC 0 · IC 0</small>
                 </div>
-                <b id="gradientNaGate">sem via</b>
+                <div class="concentration-row" data-ion="co2">
+                  <span class="concentration-symbol">CO₂</span>
+                  <div class="concentration-bars">
+                    <i class="bar-ec" id="conc-co2-ec"></i>
+                    <i class="bar-ic" id="conc-co2-ic"></i>
+                  </div>
+                  <small id="conc-co2-counts">EC 0 · IC 0</small>
+                </div>
+                <div class="concentration-row" data-ion="na">
+                  <span class="concentration-symbol">Na⁺</span>
+                  <div class="concentration-bars">
+                    <i class="bar-ec" id="conc-na-ec"></i>
+                    <i class="bar-ic" id="conc-na-ic"></i>
+                  </div>
+                  <small id="conc-na-counts">EC 0 · IC 0</small>
+                </div>
+                <div class="concentration-row" data-ion="k">
+                  <span class="concentration-symbol">K⁺</span>
+                  <div class="concentration-bars">
+                    <i class="bar-ec" id="conc-k-ec"></i>
+                    <i class="bar-ic" id="conc-k-ic"></i>
+                  </div>
+                  <small id="conc-k-counts">EC 0 · IC 0</small>
+                </div>
+                <div class="concentration-row" data-ion="glucose">
+                  <span class="concentration-symbol">G</span>
+                  <div class="concentration-bars">
+                    <i class="bar-ec" id="conc-glucose-ec"></i>
+                    <i class="bar-ic" id="conc-glucose-ic"></i>
+                  </div>
+                  <small id="conc-glucose-counts">EC 0 · IC 0</small>
+                </div>
               </div>
 
-              <div class="gradient-ion-row" data-ion="k">
-                <span class="gradient-ion-symbol">K⁺</span>
-                <div>
-                  <strong id="gradientKDirection">—</strong>
-                  <small id="gradientKCounts">EC 0 · IC 0</small>
-                </div>
-                <b id="gradientKGate">sem via</b>
-              </div>
-
-              <div class="gradient-ion-row" data-ion="cl">
-                <span class="gradient-ion-symbol">Cl⁻</span>
-                <div>
-                  <strong id="gradientClDirection">—</strong>
-                  <small id="gradientClCounts">EC 0 · IC 0</small>
-                </div>
-                <b id="gradientClGate">sem via</b>
-              </div>
-
-              <p>Fluxo passivo ocorre apenas quando o gradiente eletroquímico favorece a direção e existe um canal compatível.</p>
+              <p>Os gases podem difundir pela bicamada. Na⁺, K⁺ e glicose dependem das proteínas de transporte compatíveis.</p>
             </div>
 
             <div id="selectionInfo" class="selection-info">
@@ -510,7 +400,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-celula.js?v=20261004-membrana-phetcore25"></script>
+  <script src="/js/laboratorio-celula.js?v=20261004-membrana-phetmatch26"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

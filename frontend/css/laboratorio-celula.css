@@ -4098,3 +4098,304 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   color:#e4b8d2;
 }
 
+
+
+/* =========================================================
+   PHET MATCH V26 — exact categories + draggable ligands
+========================================================= */
+
+.phet-solute-console{
+  display:grid;
+  gap:8px;
+}
+
+.solute-picker{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:5px;
+}
+
+.solute-choice{
+  min-height:42px;
+  display:grid;
+  grid-template-columns:30px minmax(0,1fr);
+  align-items:center;
+  gap:7px;
+  padding:5px 7px;
+  border:1px solid var(--mv-border);
+  border-radius:9px;
+  background:rgba(255,255,255,.014);
+  color:var(--mv-theme-muted);
+  text-align:left;
+  cursor:pointer;
+  font:inherit;
+}
+
+.solute-choice:hover{
+  border-color:var(--mv-border-strong);
+  background:rgba(var(--mv-accent-rgb),.04);
+}
+
+.solute-choice.is-active{
+  border-color:var(--mv-border-strong);
+  background:rgba(var(--mv-accent-rgb),.09);
+  color:var(--mv-theme-text);
+  box-shadow:inset 2px 0 0 var(--mv-accent-2);
+}
+
+.solute-choice>span:last-child{
+  font-size:7px;
+  font-weight:850;
+  line-height:1.15;
+}
+
+.solute-choice .solute-orb{
+  width:28px!important;
+  height:28px!important;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.15);
+  font-size:6.5px!important;
+  font-weight:950;
+}
+
+.o2-orb{
+  border-radius:999px!important;
+  color:#fff6f5;
+  background:linear-gradient(90deg,#d65c57 0 46%,#8f2d2b 46% 54%,#df7772 54%);
+}
+.co2-orb{
+  border-radius:999px!important;
+  color:#fff;
+  background:linear-gradient(90deg,#bd605b 0 27%,#6d717b 27% 73%,#bd605b 73%);
+}
+.na-orb{border-radius:50%!important;color:#fff5ef;background:#b85c40}
+.k-orb{border-radius:50%!important;color:#382b08;background:#d8b243}
+.glucose-orb{
+  border-radius:0!important;
+  color:#fff;
+  background:#7562a6;
+  clip-path:polygon(25% 5%,75% 5%,98% 50%,75% 95%,25% 95%,2% 50%);
+}
+.atp-orb{border-radius:8px!important;color:#f5edff;background:#6d4f9d}
+
+.compartment-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+}
+
+.compartment-control{
+  display:grid;
+  gap:6px;
+  padding:7px;
+  border:1px solid var(--mv-border);
+  border-radius:10px;
+  background:rgba(255,255,255,.012);
+}
+
+.ec-control{box-shadow:inset 0 2px 0 rgba(85,174,219,.14)}
+.ic-control{box-shadow:inset 0 2px 0 rgba(154,113,214,.14)}
+
+.compartment-control-head{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.compartment-control-head>div{
+  display:grid;
+  gap:1px;
+}
+
+.compartment-control-head strong{
+  color:var(--mv-theme-soft);
+  font-size:8px;
+}
+
+.compartment-control-head small{
+  color:var(--mv-theme-muted);
+  font-size:6px;
+}
+
+.active-solute-mini{
+  min-width:28px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  padding:0 4px;
+  border-radius:7px;
+  background:rgba(var(--mv-accent-rgb),.08);
+  border:1px solid var(--mv-border);
+  color:var(--mv-accent-2);
+  font-size:6.5px;
+  font-weight:950;
+}
+
+.phet-stepper{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:3px;
+}
+
+.solute-adjust{
+  height:28px;
+  border:1px solid var(--mv-border);
+  border-radius:7px;
+  background:rgba(255,255,255,.018);
+  color:var(--mv-theme-soft);
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+  line-height:1;
+}
+
+.solute-adjust.coarse{
+  background:rgba(var(--mv-accent-rgb),.055);
+}
+
+.solute-adjust:hover{
+  border-color:var(--mv-border-strong);
+  color:var(--mv-accent-2);
+  background:rgba(var(--mv-accent-rgb),.10);
+}
+
+.solute-adjust:active{transform:scale(.94)}
+
+.concentration-panel{
+  gap:8px!important;
+}
+
+.concentration-grid{
+  display:grid;
+  gap:5px;
+}
+
+.concentration-row{
+  display:grid;
+  grid-template-columns:30px minmax(0,1fr) 72px;
+  align-items:center;
+  gap:6px;
+  min-height:28px;
+  padding:4px 5px;
+  border:1px solid var(--mv-border);
+  border-radius:8px;
+  background:rgba(255,255,255,.01);
+}
+
+.concentration-symbol{
+  color:var(--mv-theme-soft);
+  font-size:7px;
+  font-weight:950;
+}
+
+.concentration-row>small{
+  color:var(--mv-theme-muted);
+  font-size:5.8px;
+  text-align:right;
+}
+
+.concentration-bars{
+  position:relative;
+  height:16px;
+  display:grid;
+  grid-template-rows:1fr 1fr;
+  gap:2px;
+  border-left:1px solid rgba(255,255,255,.12);
+}
+
+.concentration-bars i{
+  display:block;
+  width:var(--level,2%);
+  max-width:100%;
+  border-radius:0 4px 4px 0;
+  transition:width .22s ease;
+}
+
+.concentration-bars .bar-ec{
+  background:rgba(83,178,225,.68);
+}
+.concentration-bars .bar-ic{
+  background:rgba(155,112,216,.68);
+}
+
+.free-ligand{
+  display:grid!important;
+  width:26px!important;
+  min-width:26px!important;
+  height:26px!important;
+  padding:0!important;
+  pointer-events:auto!important;
+  cursor:grab!important;
+  background:transparent!important;
+  border:0!important;
+  color:transparent!important;
+  z-index:18!important;
+  overflow:visible;
+}
+
+.free-ligand:active{cursor:grabbing!important}
+
+.free-ligand[data-type="ligand-na"]::before{
+  content:"";
+  width:22px;
+  height:20px;
+  display:block;
+  background:#d9a77c;
+  border:1px solid #ffe0c2;
+  clip-path:polygon(50% 0,100% 100%,0 100%);
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.16));
+}
+
+.free-ligand[data-type="ligand-k"]::before{
+  content:"★";
+  width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  color:#9bb8d5;
+  -webkit-text-stroke:.7px #d9ebff;
+  font-size:23px;
+  line-height:1;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.16));
+}
+
+.free-ligand.is-selected::after{
+  inset:-5px!important;
+  border-style:dashed!important;
+  border-radius:50%!important;
+}
+
+.placed-protein[data-type="lg-na"]::after,
+.placed-protein[data-type="lg-k"]::after{
+  content:"";
+  position:absolute;
+  top:-33px;
+  width:24px;
+  height:24px;
+  border:1px dashed transparent;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0;
+}
+
+.placed-protein[data-type="lg-na"]::after{left:10px}
+.placed-protein[data-type="lg-k"]::after{right:10px}
+
+.placed-protein.ligand-drop-target::after{
+  opacity:1;
+  border-color:var(--mv-accent-2);
+  background:rgba(var(--mv-accent-rgb),.08);
+  box-shadow:0 0 12px rgba(var(--mv-accent-rgb),.18);
+}
+
+.placed-protein[data-type="lg-na"][data-ligand-state="open"] .protein-pore,
+.placed-protein[data-type="lg-k"][data-ligand-state="open"] .protein-pore{
+  opacity:1!important;
+}
+
+@media(max-width:760px){
+  .solute-picker{grid-template-columns:1fr 1fr}
+  .compartment-controls{grid-template-columns:1fr}
+}
+
