@@ -225,6 +225,7 @@
       gateGuide:null,
       pumpGuide:null,
       pumpReservedSlot:null,
+      pumpGuideStartedAt:0,
       craftGuide:null,
       gasTransit:null,
       gasCooldownUntil:0,
@@ -781,6 +782,248 @@
     return best;
   }
 
+
+  function clearPumpGuide(el,motion){
+    if(!el||!motion)return;
+    releasePumpReservation(el,motion);
+
+    var guide=motion.pumpGuide;
+    if(guide&&guide.pump&&guide.pump.dataset&&guide.pump.dataset.atpGuideId===el.dataset.id){
+      delete guide.pump.dataset.atpGuideId;
+    }
+
+    motion.pumpGuide=null;
+    motion.pumpGuideStartedAt=0;
+  }
+
+  function pumpRecruitmentSideMatches(type,y,b){
+    var compartment=sideOf(y,b);
+    if(type==="k")return compartment==="EC";
+    if(type==="na"||type==="atp")return compartment==="IC";
+    return false;
+  }
+
+  function pumpStillWantsGuide(pump,type,guide){
+    if(!pump||!pump.isConnected||pump.dataset.cycling==="1")return false;
+
+    var state=pumpState(pump);
+    if(state==="inside-open"){
+      if(type==="na")return true;
+      if(type==="atp")return guide&&guide.kind==="waiting-atp";
+      return false;
+    }
+    if(state==="inside-na-bound")return type==="atp";
+    if(state==="outside-open")return type==="k";
+    return false;
+  }
+
+  function pumpRecruitmentCandidates(type,pump,b,now,claimed){
+    return getCachedMoleculesOfType(type,now).filter(function(el){
+      if(!el||!el.isConnected||claimed.has(el.dataset.id))return false;
+      if(el.classList.contains("docked")||el.classList.contains("craft-consumed"))return false;
+      if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1"||el.dataset.pumpTransport==="1"||el.dataset.sgltTransport==="1")return false;
+      if(moving&&moving.el===el)return false;
+
+      var y=parseFloat(el.style.top)||0;
+      if(!pumpRecruitmentSideMatches(type,y,b))return false;
+
+      var motion=moleculeMotion.get(el);
+      if(!motion||!associationAllowed(el,motion,now))return false;
+
+      if(motion.pumpGuide&&motion.pumpGuide.pump&&motion.pumpGuide.pump!==pump&&motion.pumpGuide.pump.isConnected){
+        return false;
+      }
+
+      return true;
+    });
+  }
+
+  function assignPumpGuide(el,motion,pump,slot,targetX,targetY,kind,now){
+    if(!el||!motion||!pump)return false;
+
+    if(slot){
+      if(slot.classList.contains("occupied")||slot.dataset.accept!==el.dataset.type||!pumpSlotActive(slot,pump))return false;
+
+      if(slot.dataset.reservedBy&&slot.dataset.reservedBy!==el.dataset.id){
+        var previous=layer.querySelector('[data-id="'+slot.dataset.reservedBy+'"]');
+        if(previous&&previous.isConnected)return false;
+        delete slot.dataset.reservedBy;
+      }
+
+      if(motion.pumpReservedSlot&&motion.pumpReservedSlot!==slot){
+        releasePumpReservation(el,motion);
+      }
+
+      slot.dataset.reservedBy=el.dataset.id;
+      motion.pumpReservedSlot=slot;
+    }else{
+      releasePumpReservation(el,motion);
+    }
+
+    var sameGuide=motion.pumpGuide&&motion.pumpGuide.pump===pump&&motion.pumpGuide.kind===kind;
+    var started=sameGuide&&motion.pumpGuide.startedAt?motion.pumpGuide.startedAt:now;
+
+    motion.pumpGuide={
+      pump:pump,
+      slot:slot||null,
+      x:targetX,
+      y:targetY,
+      kind:kind,
+      startedAt:started
+    };
+    motion.pumpGuideStartedAt=started;
+    pump.classList.add("capture-active");
+    return true;
+  }
+
+  function refreshPumpRecruitment(now,b){
+    var claimed=new Set();
+
+    // Clean stale guides first, while preserving valid targets between association ticks.
+    getCachedMolecules(now).forEach(function(el){
+      var motion=moleculeMotion.get(el);
+      if(!motion||!motion.pumpGuide)return;
+
+      var guide=motion.pumpGuide;
+      var pump=guide.pump;
+      var y=parseFloat(el.style.top)||0;
+
+      if(
+        !pumpStillWantsGuide(pump,el.dataset.type,guide)||
+        !pumpRecruitmentSideMatches(el.dataset.type,y,b)||
+        el.classList.contains("docked")||
+        el.dataset.autoBinding==="1"||
+        el.dataset.pumpTransport==="1"
+      ){
+        clearPumpGuide(el,motion);
+        return;
+      }
+
+      claimed.add(el.dataset.id);
+    });
+
+    getCachedProteinsOfType("bomba",now).forEach(function(pump){
+      if(!pump||!pump.isConnected||pump.dataset.cycling==="1")return;
+
+      var state=pumpState(pump);
+      var desiredType=null;
+
+      if(state==="inside-open")desiredType="na";
+      else if(state==="inside-na-bound")desiredType="atp";
+      else if(state==="outside-open")desiredType="k";
+
+      // Active pockets recruit exactly the number of particles the pump can accept.
+      if(desiredType){
+        var openSlots=Array.from(pump.querySelectorAll('.pump-slot:not(.occupied)')).filter(function(slot){
+          return slot.dataset.accept===desiredType&&pumpSlotActive(slot,pump);
+        });
+
+        openSlots.forEach(function(slot){
+          var current=null;
+
+          if(slot.dataset.reservedBy){
+            current=layer.querySelector('[data-id="'+slot.dataset.reservedBy+'"]');
+            if(
+              !current||
+              !current.isConnected||
+              current.dataset.type!==desiredType||
+              current.classList.contains("docked")
+            ){
+              delete slot.dataset.reservedBy;
+              current=null;
+            }
+          }
+
+          if(current){
+            var currentMotion=moleculeMotion.get(current);
+            if(currentMotion){
+              var cp=slotStagePoint(slot);
+              assignPumpGuide(current,currentMotion,pump,slot,cp.x,cp.y,"slot",now);
+              claimed.add(current.dataset.id);
+              return;
+            }
+          }
+
+          var p=slotStagePoint(slot);
+          var candidates=pumpRecruitmentCandidates(desiredType,pump,b,now,claimed);
+          var best=null;
+          var bestDistance=Infinity;
+
+          candidates.forEach(function(candidate){
+            var cx=parseFloat(candidate.style.left)||0;
+            var cy=parseFloat(candidate.style.top)||0;
+            var d=Math.hypot(p.x-cx,p.y-cy);
+            if(d<bestDistance){
+              best=candidate;
+              bestDistance=d;
+            }
+          });
+
+          if(best){
+            var bestMotion=moleculeMotion.get(best);
+            if(bestMotion&&assignPumpGuide(best,bestMotion,pump,slot,p.x,p.y,"slot",now)){
+              claimed.add(best.dataset.id);
+            }
+          }
+        });
+      }
+
+      // ATP starts approaching as soon as the pump is placed, but waits near
+      // its groove until all 3 Na+ are bound and the ATP pocket becomes active.
+      if(state==="inside-open"&&pumpMolecules(pump,"atp").length===0){
+        var atpSlot=pump.querySelector('.pump-slot[data-accept="atp"]');
+        if(atpSlot){
+          var atpPoint=slotStagePoint(atpSlot);
+          var waitingX=Math.max(34,Math.min(stage.clientWidth-34,atpPoint.x-38));
+          var waitingY=Math.max(b.bottom+30,atpPoint.y+34);
+          var waiting=null;
+
+          if(pump.dataset.atpGuideId){
+            waiting=layer.querySelector('[data-id="'+pump.dataset.atpGuideId+'"]');
+            if(!waiting||!waiting.isConnected||waiting.dataset.type!=="atp"||waiting.classList.contains("docked")){
+              delete pump.dataset.atpGuideId;
+              waiting=null;
+            }
+          }
+
+          if(!waiting){
+            var atpCandidates=pumpRecruitmentCandidates("atp",pump,b,now,claimed);
+            var atpBestDistance=Infinity;
+
+            atpCandidates.forEach(function(candidate){
+              var ax=parseFloat(candidate.style.left)||0;
+              var ay=parseFloat(candidate.style.top)||0;
+              var d=Math.hypot(waitingX-ax,waitingY-ay);
+              if(d<atpBestDistance){
+                waiting=candidate;
+                atpBestDistance=d;
+              }
+            });
+          }
+
+          if(waiting){
+            var waitingMotion=moleculeMotion.get(waiting);
+            if(waitingMotion&&assignPumpGuide(waiting,waitingMotion,pump,null,waitingX,waitingY,"waiting-atp",now)){
+              pump.dataset.atpGuideId=waiting.dataset.id;
+              claimed.add(waiting.dataset.id);
+            }
+          }
+        }
+      }else if(pump.dataset.atpGuideId){
+        var oldWaiting=layer.querySelector('[data-id="'+pump.dataset.atpGuideId+'"]');
+        if(oldWaiting){
+          var oldMotion=moleculeMotion.get(oldWaiting);
+          if(oldMotion&&oldMotion.pumpGuide&&oldMotion.pumpGuide.pump===pump&&oldMotion.pumpGuide.kind==="waiting-atp"){
+            // Let the next active ATP-slot pass recruit this same nearby ATP.
+            oldMotion.pumpGuide=null;
+            oldMotion.pumpGuideStartedAt=0;
+          }
+        }
+        delete pump.dataset.atpGuideId;
+      }
+    });
+  }
+
   function craftGuidanceTarget(el,x,y,b,now){
     var partnerType=craftPairType(el.dataset.type);
     if(!partnerType)return null;
@@ -814,18 +1057,53 @@
   function applyGuidanceForce(el,motion,dt,x,y,b,now){
     if(!motion||!associationAllowed(el,motion,now))return;
 
-    if(motion.pumpGuide&&motion.pumpGuide.slot&&motion.pumpGuide.slot.isConnected&&!motion.pumpGuide.slot.classList.contains("occupied")){
+    if(motion.pumpGuide){
       var pg=motion.pumpGuide;
-      var pd=Math.hypot(pg.x-x,pg.y-y);
+      var pump=pg.pump;
 
-      if(pd<238){
-        var pFalloff=Math.max(0,1-pd/238);
-        var pForce=.42+1.28*Math.pow(pFalloff,.72);
-        motion.vx+=(pg.x-x)*pForce*dt;
-        motion.vy+=(pg.y-y)*pForce*dt;
+      if(!pumpStillWantsGuide(pump,el.dataset.type,pg)){
+        clearPumpGuide(el,motion);
       }else{
-        releasePumpReservation(el,motion);
-        motion.pumpGuide=null;
+        if(pg.slot){
+          if(
+            !pg.slot.isConnected||
+            pg.slot.classList.contains("occupied")||
+            pg.slot.dataset.accept!==el.dataset.type||
+            !pumpSlotActive(pg.slot,pump)||
+            (pg.slot.dataset.reservedBy&&pg.slot.dataset.reservedBy!==el.dataset.id)
+          ){
+            clearPumpGuide(el,motion);
+          }else{
+            var livePoint=slotStagePoint(pg.slot);
+            pg.x=livePoint.x;
+            pg.y=livePoint.y;
+          }
+        }
+
+        if(motion.pumpGuide){
+          pg=motion.pumpGuide;
+          var pdx=pg.x-x;
+          var pdy=pg.y-y;
+          var pd=Math.hypot(pdx,pdy);
+          var ramp=Math.min(1,Math.max(0,(now-(pg.startedAt||now))/850));
+
+          // The force starts subtly and becomes more decisive as the molecule
+          // "recognizes" the pump. Random walk remains active, so the path curves naturally.
+          var pFalloff=Math.max(0,1-Math.min(pd,620)/620);
+          var base=pg.kind==="waiting-atp"?.10:.13;
+          var nearBoost=pg.kind==="waiting-atp"?.38:.62;
+          var pForce=(base+nearBoost*Math.pow(pFalloff,.74))*(.35+.65*ramp);
+
+          motion.vx+=pdx*pForce*dt;
+          motion.vy+=pdy*pForce*dt;
+
+          var speed=Math.hypot(motion.vx,motion.vy);
+          var speedCap=pg.kind==="waiting-atp"?58:72;
+          if(speed>speedCap){
+            motion.vx=motion.vx/speed*speedCap;
+            motion.vy=motion.vy/speed*speedCap;
+          }
+        }
       }
     }
 
@@ -3005,6 +3283,14 @@
     }
 
     if(selected.dataset.type==="bomba"){
+      getCachedMolecules(performance.now()).forEach(function(candidate){
+        var candidateMotion=moleculeMotion.get(candidate);
+        if(candidateMotion&&candidateMotion.pumpGuide&&candidateMotion.pumpGuide.pump===selected){
+          clearPumpGuide(candidate,candidateMotion);
+        }
+      });
+      delete selected.dataset.atpGuideId;
+
       selected.querySelectorAll(".pump-slot.occupied").forEach(function(slot){
         var molecule=layer.querySelector('[data-id="'+slot.dataset.occupiedId+'"]');
         if(molecule){
@@ -3535,6 +3821,7 @@
 
     if(associationTick&&features.ligands)updateLigandChannels(now);
     if(associationTick&&features.sglt)updateSgltTransporters(now,b);
+    if(associationTick&&features.pump)refreshPumpRecruitment(now,b);
 
     for(var mi=0;mi<molecules.length;mi++){
       var el=molecules[mi];
@@ -3576,7 +3863,25 @@
           }
 
           if(features.pump&&(type==="na"||type==="k"||type==="atp")){
-            var pumpSlot=nearestPumpSlotForAuto(el,x,y,b);
+            var pumpSlot=null;
+
+            if(
+              motion.pumpGuide&&
+              motion.pumpGuide.slot&&
+              motion.pumpGuide.slot.isConnected&&
+              !motion.pumpGuide.slot.classList.contains("occupied")
+            ){
+              var guidedPoint=slotStagePoint(motion.pumpGuide.slot);
+              motion.pumpGuide.x=guidedPoint.x;
+              motion.pumpGuide.y=guidedPoint.y;
+
+              if(Math.hypot(guidedPoint.x-x,guidedPoint.y-y)<118){
+                pumpSlot=motion.pumpGuide.slot;
+              }
+            }else if(!motion.pumpGuide){
+              pumpSlot=nearestPumpSlotForAuto(el,x,y,b);
+            }
+
             if(pumpSlot){
               autoBindPump(el,pumpSlot);
               if(el.dataset.autoBinding==="1")continue;
@@ -3595,6 +3900,8 @@
 
       var boosted=motion.boostUntil&&now<motion.boostUntil;
       if(!boosted&&now>=motion.directionChangeAt)chooseRandomWalkVelocity(el,motion,1);
+
+      applyGuidanceForce(el,motion,dt,x,y,b,now);
 
       var nx=x+motion.vx*dt;
       var ny=y+motion.vy*dt;
