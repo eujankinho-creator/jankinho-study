@@ -7513,3 +7513,153 @@ body.cell-lab-view{
     overflow:visible!important;
   }
 }
+
+
+/* =========================================================
+   SGLT + LIGAND POLISH V67
+   Empty SGLT cavities, synchronized conformation, cleaner ligand art.
+========================================================= */
+
+/* SGLT starts EMPTY: these are recessed binding cavities, not preloaded cargo. */
+.membrane-stage .sglt-site{
+  color:transparent!important;
+  text-indent:-9999px!important;
+  background:rgba(49,31,65,.10)!important;
+  border:1px solid rgba(45,31,58,.24)!important;
+  outline:0!important;
+  box-shadow:
+    inset 0 1px 2px rgba(25,16,34,.08),
+    inset 0 0 0 1px rgba(255,255,255,.035)!important;
+  transition:
+    top .46s cubic-bezier(.22,.72,.28,1),
+    left .46s cubic-bezier(.22,.72,.28,1),
+    right .46s cubic-bezier(.22,.72,.28,1),
+    transform .46s cubic-bezier(.22,.72,.28,1)!important;
+}
+
+.membrane-stage .sglt-na-left,
+.membrane-stage .sglt-na-right{
+  background:rgba(90,67,16,.10)!important;
+  border-color:rgba(78,59,15,.25)!important;
+}
+
+.membrane-stage .sglt-glucose{
+  background:rgba(66,43,82,.10)!important;
+  border-color:rgba(57,39,70,.24)!important;
+}
+
+/* No symbol inside the transporter body. */
+.membrane-stage .sglt-art::after{
+  content:""!important;
+  display:none!important;
+}
+
+/* Protein and its cavities change conformation on the SAME timing as cargo. */
+.placed-protein[data-type="sglt"] .sglt-art,
+.placed-protein[data-type="sglt"] .sglt-art::before{
+  transition-duration:.46s!important;
+  transition-timing-function:cubic-bezier(.22,.72,.28,1)!important;
+}
+
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-na-left,
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-na-right{
+  top:108px!important;
+}
+
+.placed-protein[data-type="sglt"].sglt-cycling .sglt-glucose{
+  top:101px!important;
+}
+
+.placed-protein[data-type="sglt"].sglt-loaded .sglt-site{
+  border-color:rgba(40,26,54,.34)!important;
+}
+
+/* Real Na+/glucose DOM particles sit over the empty cavities during the cycle. */
+.membrane-stage .sglt-bound-cargo{
+  z-index:54!important;
+  pointer-events:none!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+/* ---------- ligand artwork ---------- */
+
+.free-ligand{
+  position:relative!important;
+  filter:none!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+
+/* Na ligand: saturated orange triangle with a very light built-in contour. */
+.free-ligand[data-type="ligand-na"]::before{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:24px!important;
+  height:21px!important;
+  transform:translate(-50%,-50%)!important;
+  background:rgba(104,45,12,.38)!important;
+  border:0!important;
+  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+.free-ligand[data-type="ligand-na"]::after{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:21px!important;
+  height:18px!important;
+  transform:translate(-50%,-48%)!important;
+  background:#ff7a2f!important;
+  clip-path:polygon(50% 0,100% 100%,0 100%)!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+/* K ligand: vivid blue star, no glow, only a thin soft contour. */
+.free-ligand[data-type="ligand-k"]::before{
+  content:"★"!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:25px!important;
+  height:25px!important;
+  display:grid!important;
+  place-items:center!important;
+  transform:translate(-50%,-52%)!important;
+  background:transparent!important;
+  color:#4f7cff!important;
+  -webkit-text-stroke:.55px rgba(24,43,74,.55)!important;
+  font-size:24px!important;
+  line-height:1!important;
+  filter:none!important;
+  text-shadow:none!important;
+  box-shadow:none!important;
+}
+
+.free-ligand[data-type="ligand-k"]::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Bound ligands stay clean as well. */
+.free-ligand[data-ligand-bound]{
+  filter:none!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+
+/* Dock feedback stays subtle; no heavy halo around the channel. */
+.membrane-stage .placed-protein.ligand-drop-target::after{
+  opacity:.45!important;
+  background:rgba(var(--mv-accent-rgb),.045)!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
