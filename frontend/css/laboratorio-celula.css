@@ -3252,3 +3252,236 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   .structure-card>span>b{font-size:9px!important}
 }
 
+
+
+/* =========================================================
+   READABILITY BOOST V37
+   Larger Cortex typography without changing the workspace grid.
+========================================================= */
+
+.membrane-header .header-title{
+  font-size:15px!important;
+}
+.membrane-header-subtitle{
+  font-size:10.5px!important;
+}
+
+.membrane-back{
+  font-size:11px!important;
+}
+
+.membrane-kicker{
+  font-size:9px!important;
+}
+
+.membrane-intro h1{
+  font-size:31px!important;
+}
+
+.membrane-intro p{
+  font-size:10.5px!important;
+}
+
+.membrane-mode small,
+.stage-status small{
+  font-size:8px!important;
+}
+
+.membrane-mode strong,
+.stage-status strong{
+  font-size:10.5px!important;
+}
+
+.membrane-mode-tab>span{
+  font-size:8px!important;
+}
+.membrane-mode-tab strong{
+  font-size:10.5px!important;
+}
+.membrane-mode-tab small{
+  font-size:8px!important;
+}
+
+.mode-context-card small{
+  font-size:8px!important;
+}
+.mode-context-card strong{
+  font-size:10.5px!important;
+}
+.mode-context-card p{
+  font-size:9px!important;
+}
+#resetModeScenario{
+  font-size:9px!important;
+}
+
+/* Left panel */
+.toolbox-head span,
+.tool-group-title span{
+  font-size:9px!important;
+}
+
+.toolbox-head strong{
+  font-size:15px!important;
+}
+
+.toolbox-head small,
+.tool-group-title small{
+  font-size:8.5px!important;
+}
+
+.solute-choice>span:last-child{
+  font-size:11px!important;
+}
+
+.compartment-control-head strong{
+  font-size:11px!important;
+}
+.compartment-control-head small{
+  font-size:8.5px!important;
+}
+.active-solute-mini{
+  font-size:9.5px!important;
+}
+
+.solute-adjust{
+  font-size:17px!important;
+}
+
+/* Toolbar */
+.vm-preset-controls>span{
+  font-size:8px!important;
+}
+.sim-control-btn,
+.vm-preset,
+.ligand-toggle{
+  font-size:9px!important;
+}
+.stage-actions span{
+  font-size:8.5px!important;
+}
+.stage-actions button{
+  font-size:9px!important;
+}
+
+/* Environment */
+.environment-label strong{
+  font-size:11.5px!important;
+}
+.environment-label span{
+  font-size:8.5px!important;
+}
+
+/* Right panel */
+.structure-console-head small,
+.structure-section>small,
+.structure-section-titleline>small,
+.gradient-panel-head small,
+.selection-info small{
+  font-size:8.5px!important;
+}
+
+.structure-console-head strong{
+  font-size:14px!important;
+}
+
+.structure-console-head>span{
+  font-size:8px!important;
+}
+
+.structure-card>b,
+.structure-card>span>b{
+  font-size:11px!important;
+}
+
+.structure-card>small,
+.structure-card>span>small{
+  font-size:8.5px!important;
+}
+
+.gradient-panel-head strong{
+  font-size:12px!important;
+}
+.gradient-panel-head>span{
+  font-size:8.5px!important;
+}
+
+.concentration-symbol{
+  font-size:10px!important;
+}
+.concentration-row>small{
+  font-size:8.5px!important;
+}
+.gradient-panel p{
+  font-size:8.5px!important;
+}
+
+.selection-index{
+  font-size:8.5px!important;
+}
+.selection-info strong{
+  font-size:12px!important;
+}
+.selection-info p{
+  font-size:9px!important;
+}
+.delete-key-hint{
+  font-size:8px!important;
+}
+
+/* In-stage contextual labels */
+.protein-label{
+  font-size:7.5px!important;
+}
+.gate-state-badge,
+.pump-state-badge{
+  font-size:7px!important;
+}
+
+/* Make room for the larger text where needed. */
+.solute-choice{
+  min-height:68px!important;
+}
+.structure-card{
+  min-height:74px!important;
+}
+.structure-card-wide{
+  min-height:72px!important;
+}
+.concentration-row{
+  min-height:42px!important;
+}
+.selection-info{
+  padding:12px!important;
+}
+.mode-context-card{
+  min-height:46px!important;
+}
+
+/* Standard desktop: still larger than before, but slightly restrained. */
+@media(max-width:1500px){
+  .membrane-intro h1{font-size:28px!important}
+  .membrane-intro p{font-size:9.5px!important}
+  .membrane-mode-tab strong{font-size:9.5px!important}
+  .membrane-mode-tab small{font-size:7.5px!important}
+  .solute-choice>span:last-child{font-size:10.5px!important}
+  .structure-card>b,
+  .structure-card>span>b{font-size:10.5px!important}
+  .structure-card>small,
+  .structure-card>span>small{font-size:8px!important}
+  .structure-console-head strong{font-size:13px!important}
+}
+
+/* Mobile/tablet readability */
+@media(max-width:760px){
+  .membrane-intro h1{font-size:30px!important}
+  .membrane-intro p{font-size:10px!important}
+  .membrane-mode-tab strong{font-size:10px!important}
+  .membrane-mode-tab small{font-size:8px!important}
+  .toolbox-head strong{font-size:15px!important}
+  .solute-choice>span:last-child{font-size:11px!important}
+  .structure-card>b,
+  .structure-card>span>b{font-size:11px!important}
+  .structure-card>small,
+  .structure-card>span>small{font-size:8.5px!important}
+}
