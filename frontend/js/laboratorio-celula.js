@@ -49,6 +49,8 @@
   var lastAssociationTime=0;
   var lastGradientUpdate=0;
   var simulationActive=true;
+  var barrierCache=null;
+  var geometryDirty=true;
   var membraneVoltageMv=-70;
   var thermalVoltageMv=26.7;
   var chemicalWeight=1.35;
@@ -97,11 +99,15 @@
     if(!el||el.dataset.kind!=="molecule")return;
     if(moleculeMotion.has(el))return;
     var angle=Math.random()*Math.PI*2;
-    var speed=7+Math.random()*10;
+    var diffusion=diffusionFactor(el.dataset.type);
+    var speed=(12+Math.random()*14)*Math.sqrt(diffusion);
     moleculeMotion.set(el,{
       vx:Math.cos(angle)*speed,
       vy:Math.sin(angle)*speed,
       seed:Math.random()*1000,
+      diffusion:diffusion,
+      halfW:Math.max(14,el.offsetWidth/2),
+      halfH:Math.max(10,el.offsetHeight/2),
       boostUntil:0,
       lastSide:null,
       channelCooldownUntil:0,
@@ -109,7 +115,9 @@
       lastGateId:null,
       clearanceRadius:0,
       gateGuide:null,
-      pumpGuide:null
+      pumpGuide:null,
+      pumpReservedSlot:null,
+      craftGuide:null
     });
   }
 
@@ -117,6 +125,29 @@
     if(type==="na"||type==="k")return 1;
     if(type==="cl")return -1;
     return 0;
+  }
+
+  function diffusionFactor(type){
+    if(type==="na")return 1.00;
+    if(type==="k")return 1.34;
+    if(type==="cl")return 1.42;
+    if(type==="h2o")return 1.55;
+    if(type==="pi")return 1.12;
+    if(type==="adp")return .66;
+    if(type==="atp")return .56;
+    return 1;
+  }
+
+  function moleculeHalfHeight(el){
+    var motion=moleculeMotion.get(el);
+    if(motion&&motion.halfH)return motion.halfH;
+    return Math.max(10,el.offsetHeight/2);
+  }
+
+  function moleculeHalfWidth(el){
+    var motion=moleculeMotion.get(el);
+    if(motion&&motion.halfW)return motion.halfW;
+    return Math.max(14,el.offsetWidth/2);
   }
 
   function isCationType(type){
@@ -240,7 +271,7 @@
       var radial=Math.hypot(px-x,(py-y)*.64);
 
       if(motion.lastGateId===protein.dataset.id&&motion.clearanceRadius>0&&radial<motion.clearanceRadius)return;
-      if(radial>112)return;
+      if(radial>188)return;
 
       var d=Math.hypot(px-x,mouthY-y);
       if(d<bestD){
@@ -250,7 +281,7 @@
           y:mouthY,
           side:side,
           distance:d,
-          strength:Math.min(1.15,.12+drive*.18)
+          strength:Math.min(1.35,.22+drive*.22)
         };
         bestD=d;
       }
@@ -259,16 +290,32 @@
     return best;
   }
 
+  function releasePumpReservation(el,motion){
+    if(!motion||!motion.pumpReservedSlot)return;
+    var slot=motion.pumpReservedSlot;
+    if(slot.dataset.reservedBy===el.dataset.id)delete slot.dataset.reservedBy;
+    motion.pumpReservedSlot=null;
+  }
+
   function pumpGuidanceTarget(el,x,y,b,now){
     var type=el.dataset.type;
     if(type!=="na"&&type!=="k"&&type!=="atp")return null;
 
     var motion=moleculeMotion.get(el);
-    if(!associationAllowed(el,motion,now))return null;
+    if(!associationAllowed(el,motion,now)){
+      releasePumpReservation(el,motion);
+      return null;
+    }
 
     var compartment=sideOf(y,b);
-    if(type==="k"&&compartment!=="EC")return null;
-    if((type==="na"||type==="atp")&&compartment!=="IC")return null;
+    if(type==="k"&&compartment!=="EC"){
+      releasePumpReservation(el,motion);
+      return null;
+    }
+    if((type==="na"||type==="atp")&&compartment!=="IC"){
+      releasePumpReservation(el,motion);
+      return null;
+    }
 
     var best=null;
     var bestD=Infinity;
@@ -278,13 +325,64 @@
 
       pump.querySelectorAll('.pump-slot:not(.occupied)').forEach(function(slot){
         if(slot.dataset.accept!==type)return;
+
+        if(slot.dataset.reservedBy&&slot.dataset.reservedBy!==el.dataset.id){
+          if(!layer.querySelector('[data-id="'+slot.dataset.reservedBy+'"]')){
+            delete slot.dataset.reservedBy;
+          }else{
+            return;
+          }
+        }
+
         var p=slotStagePoint(slot);
         var d=Math.hypot(p.x-x,p.y-y);
-        if(d<104&&d<bestD){
+        if(d<228&&d<bestD){
           best={pump:pump,slot:slot,x:p.x,y:p.y,distance:d};
           bestD=d;
         }
       });
+    });
+
+    if(!best){
+      releasePumpReservation(el,motion);
+      return null;
+    }
+
+    if(motion.pumpReservedSlot&&motion.pumpReservedSlot!==best.slot){
+      releasePumpReservation(el,motion);
+    }
+
+    best.slot.dataset.reservedBy=el.dataset.id;
+    motion.pumpReservedSlot=best.slot;
+    best.pump.classList.add("capture-active");
+    return best;
+  }
+
+  function craftGuidanceTarget(el,x,y,b,now){
+    var partnerType=craftPairType(el.dataset.type);
+    if(!partnerType)return null;
+
+    var motion=moleculeMotion.get(el);
+    if(!associationAllowed(el,motion,now))return null;
+
+    var compartment=sideOf(y,b);
+    if(compartment==="MP")return null;
+
+    var best=null;
+    var bestD=Infinity;
+
+    layer.querySelectorAll('.placed-molecule[data-type="'+partnerType+'"]:not(.docked):not(.craft-consumed)').forEach(function(candidate){
+      if(candidate===el)return;
+
+      var cx=parseFloat(candidate.style.left)||0;
+      var cy=parseFloat(candidate.style.top)||0;
+      if(sideOf(cy,b)!==compartment)return;
+
+      var d=Math.hypot(cx-x,cy-y);
+      if(d<142&&d<bestD){
+        best={partner:candidate,x:cx,y:cy,distance:d};
+        bestD=d;
+      }
     });
 
     return best;
@@ -297,11 +395,13 @@
       var pg=motion.pumpGuide;
       var pd=Math.hypot(pg.x-x,pg.y-y);
 
-      if(pd<112){
-        var pStrength=Math.max(0,1-pd/112);
-        motion.vx+=(pg.x-x)*(.30*pStrength)*dt;
-        motion.vy+=(pg.y-y)*(.30*pStrength)*dt;
+      if(pd<238){
+        var pFalloff=Math.max(0,1-pd/238);
+        var pForce=.42+1.28*Math.pow(pFalloff,.72);
+        motion.vx+=(pg.x-x)*pForce*dt;
+        motion.vy+=(pg.y-y)*pForce*dt;
       }else{
+        releasePumpReservation(el,motion);
         motion.pumpGuide=null;
       }
     }
@@ -309,18 +409,33 @@
     if(motion.gateGuide&&motion.gateGuide.gate&&motion.gateGuide.gate.isConnected){
       var gg=motion.gateGuide;
       if(!passiveTransportAllowed(el.dataset.type,gg.side)){
+        motion.gateGuide.gate.classList.remove("capture-active");
         motion.gateGuide=null;
-        return;
-      }
-
-      var gd=Math.hypot(gg.x-x,gg.y-y);
-      if(gd<122){
-        var falloff=Math.max(0,1-gd/122);
-        var force=(.20+.28*gg.strength)*falloff;
-        motion.vx+=(gg.x-x)*force*dt;
-        motion.vy+=(gg.y-y)*force*dt;
       }else{
-        motion.gateGuide=null;
+        var gd=Math.hypot(gg.x-x,gg.y-y);
+        if(gd<198){
+          var gFalloff=Math.max(0,1-gd/198);
+          var gForce=(.34+.66*gg.strength)*Math.pow(gFalloff,.78);
+          motion.vx+=(gg.x-x)*gForce*dt;
+          motion.vy+=(gg.y-y)*gForce*dt;
+          gg.gate.classList.add("capture-active");
+        }else{
+          gg.gate.classList.remove("capture-active");
+          motion.gateGuide=null;
+        }
+      }
+    }
+
+    if(motion.craftGuide&&motion.craftGuide.partner&&motion.craftGuide.partner.isConnected){
+      var cg=motion.craftGuide;
+      var cd=Math.hypot(cg.x-x,cg.y-y);
+      if(cd<150){
+        var cFalloff=Math.max(0,1-cd/150);
+        var cForce=.30*Math.pow(cFalloff,.8);
+        motion.vx+=(cg.x-x)*cForce*dt;
+        motion.vy+=(cg.y-y)*cForce*dt;
+      }else{
+        motion.craftGuide=null;
       }
     }
   }
@@ -402,11 +517,16 @@
   }
 
   function barrier(){
+    if(!geometryDirty&&barrierCache)return barrierCache;
+
     var stageBox=stage.getBoundingClientRect();
     var membraneBox=bilayer.getBoundingClientRect();
     var top=membraneBox.top-stageBox.top;
     var bottom=membraneBox.bottom-stageBox.top;
-    return {top:top,bottom:bottom,center:(top+bottom)/2,height:bottom-top};
+
+    barrierCache={top:top,bottom:bottom,center:(top+bottom)/2,height:bottom-top};
+    geometryDirty=false;
+    return barrierCache;
   }
 
   function stageRect(){return stage.getBoundingClientRect()}
@@ -589,8 +709,9 @@
       moved:false
     };
 
-    ghost.style.left=event.clientX+"px";
-    ghost.style.top=event.clientY+"px";
+    ghost.style.left="0px";
+    ghost.style.top="0px";
+    ghost.style.transform="translate3d("+event.clientX+"px,"+event.clientY+"px,0) translate(-50%,-50%)";
     stage.classList.add("drag-source-active");
     try{tool.setPointerCapture(event.pointerId)}catch(_){}
   }
@@ -608,8 +729,7 @@
     rafSource=0;
     if(!sourceDrag)return;
     var d=sourceDrag;
-    d.ghost.style.left=d.clientX+"px";
-    d.ghost.style.top=d.clientY+"px";
+    d.ghost.style.transform="translate3d("+d.clientX+"px,"+d.clientY+"px,0) translate(-50%,-50%)";
     var r=d.rect;
     var inside=d.clientX>=r.left&&d.clientX<=r.right&&d.clientY>=r.top&&d.clientY<=r.bottom;
     stage.classList.toggle("is-drop-target",inside);
@@ -745,6 +865,7 @@
 
   function craftATP(a,b){
     if(!a||!b||!a.isConnected||!b.isConnected)return null;
+    if(a.classList.contains("craft-consumed")||b.classList.contains("craft-consumed"))return null;
 
     var ax=parseFloat(a.style.left)||0;
     var ay=parseFloat(a.style.top)||0;
@@ -1187,6 +1308,8 @@
       });
     }else if(selected.dataset.kind==="molecule"){
       releaseSlotFor(selected);
+      var selectedMotion=moleculeMotion.get(selected);
+      if(selectedMotion)releasePumpReservation(selected,selectedMotion);
     }
 
     selected.remove();
@@ -1218,7 +1341,8 @@
   });
 
   function nearestCompatibleChannel(el,x,y,b){
-    var allowed=gates[el.dataset.type]||[];
+    var type=el.dataset.type;
+    var allowed=gates[type]||[];
     if(!allowed.length)return null;
 
     var side=sideOf(y,b);
@@ -1229,9 +1353,10 @@
     var motion=moleculeMotion.get(el);
     if(motion&&motion.channelCooldownUntil&&now<motion.channelCooldownUntil)return null;
 
+    var half=moleculeHalfHeight(el);
     var surfaceDistance=side==="EC"
-      ?Math.abs((y+el.offsetHeight/2)-b.top)
-      :Math.abs((y-el.offsetHeight/2)-b.bottom);
+      ?Math.abs((y+half)-b.top)
+      :Math.abs((y-half)-b.bottom);
 
     if(surfaceDistance>60)return null;
 
@@ -1319,6 +1444,9 @@
     setTimeout(function(){
       if(!el.isConnected)return;
       if(slot.isConnected&&!slot.classList.contains("occupied")){
+        var motion=moleculeMotion.get(el);
+        if(slot.dataset.reservedBy===el.dataset.id)delete slot.dataset.reservedBy;
+        if(motion)motion.pumpReservedSlot=null;
         dockElement(el,slot);
       }
       delete el.dataset.autoBinding;
@@ -1538,7 +1666,13 @@
     var b=barrier();
     var width=stage.clientWidth;
     var height=stage.clientHeight;
-    var associationTick=now-lastAssociationTime>120;
+    var associationTick=now-lastAssociationTime>105;
+
+    if(associationTick){
+      layer.querySelectorAll(".placed-protein.capture-active").forEach(function(protein){
+        protein.classList.remove("capture-active");
+      });
+    }
 
     molecules.forEach(function(el){
       if(el.dataset.autoTransport==="1"||el.dataset.autoBinding==="1"||el.classList.contains("transporting"))return;
@@ -1549,13 +1683,18 @@
 
       var x=parseFloat(el.style.left)||width/2;
       var y=parseFloat(el.style.top)||height/2;
-      var halfW=Math.max(14,el.offsetWidth/2);
-      var halfH=Math.max(10,el.offsetHeight/2);
+      var halfW=motion.halfW||moleculeHalfWidth(el);
+      var halfH=motion.halfH||moleculeHalfHeight(el);
       var side=sideOf(y,b);
 
       if(associationTick){
         motion.pumpGuide=pumpGuidanceTarget(el,x,y,b,now);
         motion.gateGuide=gateGuidanceTarget(el,x,y,b,now);
+        motion.craftGuide=craftGuidanceTarget(el,x,y,b,now);
+
+        if(motion.craftGuide&&motion.craftGuide.distance<27){
+          if(craftATP(el,motion.craftGuide.partner))return;
+        }
 
         var slot=nearestPumpSlotForAuto(el,x,y,b);
         if(slot){
@@ -1573,9 +1712,11 @@
       applyGuidanceForce(el,motion,dt,x,y,b,now);
 
       var boosted=motion.boostUntil&&now<motion.boostUntil;
-      var thermal=boosted?1.68:1;
-      var gamma=boosted?1.10:1.95;
-      var noise=boosted?64:38;
+      var diffusion=motion.diffusion||diffusionFactor(el.dataset.type);
+      var sqrtDiffusion=Math.sqrt(diffusion);
+      var thermal=boosted?1.55:1;
+      var gamma=(boosted?1.00:1.52)/Math.max(.82,sqrtDiffusion);
+      var noise=(boosted?70:48)*sqrtDiffusion;
       var sqrtDt=Math.sqrt(Math.max(dt,.001));
 
       motion.vx+=(-gamma*motion.vx*dt)+((Math.random()*2-1)*noise*sqrtDt*thermal);
@@ -1583,7 +1724,7 @@
       applyMembraneElectricField(el,motion,dt,b);
 
       var speed=Math.hypot(motion.vx,motion.vy);
-      var maxSpeed=boosted?72:40;
+      var maxSpeed=(boosted?78:52)*Math.min(1.32,Math.max(.78,sqrtDiffusion));
       if(speed>maxSpeed){
         motion.vx=motion.vx/speed*maxSpeed;
         motion.vy=motion.vy/speed*maxSpeed;
@@ -1664,6 +1805,8 @@
   });
 
   window.addEventListener("resize",function(){
+    geometryDirty=true;
+    barrierCache=null;
     clearTimeout(resizeTimer);
     resizeTimer=setTimeout(function(){
       buildBilayer();
