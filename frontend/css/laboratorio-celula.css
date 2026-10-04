@@ -2837,3 +2837,45 @@ html[data-theme="black-white"] .cell-lab-view .sidebar .cortex-brain-logo{
   .membrane-stage::before{display:none}
 }
 
+
+
+/* =========================================================
+   FLUID TRANSIT V13 — passagem suave + Brownian motion
+========================================================= */
+
+.placed-element.transporting,
+.placed-molecule.channel-transit{
+  transition:none!important;
+  will-change:left,top;
+}
+
+.placed-molecule.channel-transit{
+  z-index:42!important;
+  pointer-events:none;
+  filter:
+    drop-shadow(0 0 7px rgba(196,229,245,.28))
+    drop-shadow(0 0 14px rgba(98,183,223,.12));
+}
+
+.placed-molecule.auto-channeling{
+  transition:none!important;
+}
+
+.placed-molecule:not(.docked):not(.is-dragging):not(.channel-transit){
+  will-change:left,top;
+}
+
+.placed-protein.channel-pass .protein-pore,
+.placed-protein.channel-pass .pump-pore{
+  animation:channelBreath .7s ease-in-out infinite alternate;
+}
+
+@keyframes channelBreath{
+  from{
+    filter:brightness(1);
+  }
+  to{
+    filter:brightness(1.16);
+  }
+}
+

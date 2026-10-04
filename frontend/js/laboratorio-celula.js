@@ -100,7 +100,9 @@
     moleculeMotion.set(el,{
       vx:Math.cos(angle)*speed,
       vy:Math.sin(angle)*speed,
-      seed:Math.random()*1000
+      seed:Math.random()*1000,
+      boostUntil:0,
+      lastSide:null
     });
   }
 
@@ -773,8 +775,8 @@
       }else{
         var gx=parseFloat(gate.style.left)||currentX;
         var targetY=Math.max(entryTop,Math.min(entryBottom,desiredY));
-        var nextX=limitStep(currentX,gx,8);
-        var nextY=limitStep(currentY,targetY,9);
+        var nextX=limitStep(currentX,gx,5);
+        var nextY=limitStep(currentY,targetY,4.5);
 
         el.style.left=nextX+"px";
         el.style.top=nextY+"px";
@@ -805,10 +807,19 @@
         }
 
         if(done){
+          var completedFrom=transit.from;
           m.transit=null;
           m.gate=null;
           clearGateGlow();
           el.classList.remove("is-channeling");
+
+          var postMotion=moleculeMotion.get(el);
+          if(postMotion){
+            var postDirection=completedFrom==="EC"?1:-1;
+            postMotion.vx=(Math.random()-.5)*26;
+            postMotion.vy=postDirection*(22+Math.random()*16);
+            postMotion.boostUntil=performance.now()+1200;
+          }
         }else{
           scheduleMoveAgain();
         }
@@ -1114,39 +1125,91 @@
     },380);
   }
 
+  function smooth01(t){
+    t=Math.max(0,Math.min(1,t));
+    return t*t*(3-2*t);
+  }
+
+  function finishChannelTransit(el,gate,fromSide){
+    if(!el||!el.isConnected)return;
+
+    el.classList.remove("channel-transit","auto-channeling","auto-associating","transporting");
+    if(gate&&gate.isConnected)gate.classList.remove("channel-pass");
+    delete el.dataset.autoTransport;
+
+    var motion=moleculeMotion.get(el);
+    if(motion){
+      var direction=fromSide==="EC"?1:-1;
+      motion.vx=(Math.random()-.5)*30;
+      motion.vy=direction*(24+Math.random()*18);
+      motion.boostUntil=performance.now()+1350;
+      motion.lastSide=fromSide==="EC"?"IC":"EC";
+    }
+  }
+
   function autoTransportChannel(el,gate,fromSide,b){
     if(!el||!gate||el.dataset.autoTransport==="1")return;
+    if(!passiveTransportAllowed(el.dataset.type,fromSide))return;
+
     el.dataset.autoTransport="1";
-    el.classList.add("auto-associating");
+    el.classList.add("channel-transit","auto-channeling");
     gate.classList.add("channel-pass");
 
-    var gx=parseFloat(gate.style.left)||parseFloat(el.style.left)||0;
+    var startX=parseFloat(el.style.left)||0;
+    var startY=parseFloat(el.style.top)||0;
+    var gx=parseFloat(gate.style.left)||startX;
     var half=Math.max(10,el.offsetHeight/2);
+
     var mouthY=fromSide==="EC"?b.top-half:b.bottom+half;
-    var exitY=fromSide==="EC"?b.bottom+half+12:b.top-half-12;
+    var centerY=b.center;
+    var exitY=fromSide==="EC"?b.bottom+half+16:b.top-half-16;
 
-    el.style.left=gx+"px";
-    el.style.top=mouthY+"px";
+    var startTime=performance.now();
+    var approachDuration=220;
+    var poreDuration=460;
+    var releaseDuration=200;
+    var total=approachDuration+poreDuration+releaseDuration;
 
-    setTimeout(function(){
-      if(!el.isConnected||!gate.isConnected)return;
-      el.classList.remove("auto-associating");
-      el.classList.add("transporting","auto-channeling");
-      el.style.left=gx+"px";
-      el.style.top=exitY+"px";
+    function frame(now){
+      if(!el.isConnected||!gate.isConnected){
+        finishChannelTransit(el,gate,fromSide);
+        return;
+      }
 
-      setTimeout(function(){
-        if(!el.isConnected)return;
-        el.classList.remove("transporting","auto-channeling");
-        gate.classList.remove("channel-pass");
-        delete el.dataset.autoTransport;
-        var motion=moleculeMotion.get(el);
-        if(motion){
-          motion.vx+=(Math.random()-.5)*8;
-          motion.vy=fromSide==="EC"?10:-10;
+      var elapsed=now-startTime;
+      var x=startX;
+      var y=startY;
+
+      if(elapsed<=approachDuration){
+        var p1=smooth01(elapsed/approachDuration);
+        x=startX+(gx-startX)*p1;
+        y=startY+(mouthY-startY)*p1;
+      }else if(elapsed<=approachDuration+poreDuration){
+        var p2=smooth01((elapsed-approachDuration)/poreDuration);
+        x=gx;
+        y=mouthY+(centerY-mouthY)*Math.min(p2*2,1);
+        if(p2>.5){
+          var q=smooth01((p2-.5)*2);
+          y=centerY+(exitY-centerY)*q;
         }
-      },760);
-    },340);
+      }else{
+        var p3=smooth01((elapsed-approachDuration-poreDuration)/releaseDuration);
+        var releaseX=gx+(Math.sin(p3*Math.PI)*(Math.random()-.5)*2);
+        x=releaseX;
+        y=exitY+(fromSide==="EC"?1:-1)*(10*p3);
+      }
+
+      el.style.left=x+"px";
+      el.style.top=y+"px";
+
+      if(elapsed<total){
+        requestAnimationFrame(frame);
+      }else{
+        finishChannelTransit(el,gate,fromSide);
+      }
+    }
+
+    requestAnimationFrame(frame);
   }
 
   function applyElectrostaticInteractions(molecules){
@@ -1259,17 +1322,18 @@
         }
       }
 
-      var jitter=13;
-      motion.vx+=(Math.random()-.5)*jitter*dt;
-      motion.vy+=(Math.random()-.5)*jitter*dt;
+      var boosted=motion.boostUntil&&now<motion.boostUntil;
+      var thermal=boosted?1.65:1;
+      var gamma=boosted?1.45:2.35;
+      var noise=boosted?64:46;
+      var sqrtDt=Math.sqrt(Math.max(dt,.001));
+
+      motion.vx+=(-gamma*motion.vx*dt)+((Math.random()*2-1)*noise*sqrtDt*thermal);
+      motion.vy+=(-gamma*motion.vy*dt)+((Math.random()*2-1)*noise*sqrtDt*thermal);
       applyMembraneElectricField(el,motion,dt,b);
 
-      var damping=Math.pow(.86,dt);
-      motion.vx*=damping;
-      motion.vy*=damping;
-
       var speed=Math.hypot(motion.vx,motion.vy);
-      var maxSpeed=22;
+      var maxSpeed=boosted?58:38;
       if(speed>maxSpeed){
         motion.vx=motion.vx/speed*maxSpeed;
         motion.vy=motion.vy/speed*maxSpeed;
@@ -1325,7 +1389,7 @@
     }
 
     var elapsed=now-lastPhysicsTime;
-    if(elapsed<30)return;
+    if(elapsed<20)return;
     lastPhysicsTime=now;
     molecularPhysicsStep(Math.min(elapsed,50)/1000,now);
   }
