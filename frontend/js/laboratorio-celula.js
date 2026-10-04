@@ -3373,23 +3373,36 @@
 
   function setCytoplasmColor(value,persist){
     var color=normalizeHexColor(value);
-    if(stage)stage.style.setProperty("--cytoplasm-color",color);
+
+    if(stage){
+      stage.style.setProperty("--simulation-bg-color",color);
+      stage.style.backgroundColor=color;
+      stage.dataset.backgroundColor=color;
+    }
+
     if(cytoplasmPlane){
       cytoplasmPlane.style.backgroundColor=color;
       cytoplasmPlane.dataset.color=color;
     }
+
     if(cytoplasmColorPicker&&cytoplasmColorPicker.value.toLowerCase()!==color){
       cytoplasmColorPicker.value=color;
     }
+
     if(persist!==false){
-      try{localStorage.setItem("cortex-membrane-cytoplasm-color",color)}catch(_){}
+      try{
+        localStorage.setItem("cortex-membrane-background-color",color);
+        localStorage.removeItem("cortex-membrane-cytoplasm-color");
+      }catch(_){}
     }
   }
 
   function loadCytoplasmColor(){
     var saved="#ffffff";
     try{
-      var stored=localStorage.getItem("cortex-membrane-cytoplasm-color");
+      var stored=
+        localStorage.getItem("cortex-membrane-background-color")||
+        localStorage.getItem("cortex-membrane-cytoplasm-color");
       if(stored)saved=stored;
     }catch(_){}
     setCytoplasmColor(saved,false);
