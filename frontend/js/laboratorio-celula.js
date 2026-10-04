@@ -916,6 +916,10 @@
     protein.classList.toggle("channel-closed",!open);
     var badge=protein.querySelector(".gate-state-badge");
     if(badge)badge.textContent=open?"ABERTO":"FECHADO";
+
+    if(isLigandGate(protein.dataset.type)&&protein.dataset.boundLigandId){
+      positionBoundLigand(protein);
+    }
   }
 
   function initializeProteinState(protein){
@@ -1720,15 +1724,36 @@
     return ligandType==="ligand-na"?"lg-na":ligandType==="ligand-k"?"lg-k":null;
   }
 
+  function ligandBindingPoint(channel){
+    var px=parseFloat(channel.style.left)||0;
+    var py=parseFloat(channel.style.top)||barrier().center;
+    var open=channel.dataset.open==="1";
+    var type=channel.dataset.type;
+
+    // Ratios adapted from the reference artwork dimensions (650x900).
+    // K ligand site sits very far to the extracellular-left edge.
+    if(type==="lg-k"){
+      return {
+        x:px-27.5,
+        y:py-55
+      };
+    }
+
+    // Na site shifts further left after the channel opens.
+    return {
+      x:px+(open?-21.8:-15.5),
+      y:py-51.5
+    };
+  }
+
   function positionBoundLigand(channel){
     if(!channel||!channel.dataset.boundLigandId)return;
     var ligand=layer.querySelector('[data-id="'+channel.dataset.boundLigandId+'"]');
     if(!ligand)return;
 
-    var b=barrier();
-    var px=parseFloat(channel.style.left)||0;
-    ligand.style.left=(px+(channel.dataset.type==="lg-na"?-17:17))+"px";
-    ligand.style.top=(b.top-34)+"px";
+    var p=ligandBindingPoint(channel);
+    ligand.style.left=p.x+"px";
+    ligand.style.top=p.y+"px";
   }
 
   function releaseBoundLigand(channel,naturally){
@@ -1781,7 +1806,7 @@
       channel.dataset.open="1";
       channel.dataset.openedAt=String(performance.now());
       syncProteinOpenState(channel);
-    },500);
+    },620);
 
     return true;
   }
@@ -1826,9 +1851,8 @@
     for(var i=0;i<channels.length;i++){
       var channel=channels[i];
       if(channel.dataset.boundLigandId)continue;
-      var px=parseFloat(channel.style.left)||0;
-      var bindingY=b.top-34;
-      var d=Math.hypot(px-x,bindingY-y);
+      var binding=ligandBindingPoint(channel);
+      var d=Math.hypot(binding.x-x,binding.y-y);
       if(d<(radius||115)&&d<bestD){best=channel;bestD=d}
     }
 
