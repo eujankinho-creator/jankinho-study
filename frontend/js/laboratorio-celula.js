@@ -1402,8 +1402,12 @@
 
   function buildBilayer(){
     if(!topRow||!bottomRow||!stage)return;
-    topRow.textContent="";bottomRow.textContent="";
-    var amount=Math.max(52,Math.min(120,Math.round(stage.clientWidth/11)));
+    var stageWidth=Math.round(stage.getBoundingClientRect().width||stage.clientWidth||0);
+    if(stageWidth<120)return;
+
+    topRow.textContent="";
+    bottomRow.textContent="";
+    var amount=Math.max(52,Math.min(140,Math.round(stageWidth/10.5)));
     var fragTop=document.createDocumentFragment();
     var fragBottom=document.createDocumentFragment();
     for(var i=0;i<amount;i++){
@@ -1412,6 +1416,26 @@
       fragBottom.appendChild(makeLipid(delay-.7,true));
     }
     topRow.appendChild(fragTop);bottomRow.appendChild(fragBottom);
+  }
+
+  var bilayerLayoutRaf=0;
+  function rebuildBilayerAfterLayout(){
+    if(bilayerLayoutRaf)cancelAnimationFrame(bilayerLayoutRaf);
+    bilayerLayoutRaf=requestAnimationFrame(function(){
+      bilayerLayoutRaf=requestAnimationFrame(function(){
+        bilayerLayoutRaf=0;
+        buildBilayer();
+        resizeParticleCanvas();
+        geometryDirty=true;
+        barrierCache=null;
+
+        if(bilayer&&stage){
+          bilayer.style.display="block";
+          bilayer.style.visibility="visible";
+          bilayer.style.opacity="1";
+        }
+      });
+    });
   }
 
   function barrier(){
@@ -4415,7 +4439,7 @@
     barrierCache=null;
     clearTimeout(resizeTimer);
     resizeTimer=setTimeout(function(){
-      buildBilayer();
+      rebuildBilayerAfterLayout();
       var b=barrier();
       layer.querySelectorAll('.placed-element[data-kind="protein"]').forEach(function(el){
         el.style.top=b.center+"px";
@@ -4424,6 +4448,15 @@
       });
     },160);
   });
+
+  if(typeof ResizeObserver!=="undefined"&&stage){
+    var stageResizeObserver=new ResizeObserver(function(entries){
+      var entry=entries&&entries[0];
+      var width=entry&&entry.contentRect?entry.contentRect.width:stage.clientWidth;
+      if(width>120)rebuildBilayerAfterLayout();
+    });
+    stageResizeObserver.observe(stage);
+  }
 
   async function loadUser(){
     try{
@@ -4453,6 +4486,7 @@
   }
 
   buildBilayer();
+  rebuildBilayerAfterLayout();
   resizeParticleCanvas();
   updateBuildSlotVisuals();
   setChargesVisible(false);
