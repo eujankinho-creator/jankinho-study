@@ -4354,3 +4354,42 @@ html[data-theme="black-white"] .ecg-lab {
   forced-color-adjust: none;
 }
 /* CORTEX ECG PATTERN THEME BACKGROUNDS V3 END */
+
+
+/* CORTEX ECG HUB BACKLINK */
+.ecg-back-hub {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  color: var(--theme-text-muted);
+  background: var(--theme-surface-soft);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  transition: transform .18s ease, color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.ecg-back-hub span {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ecg-back-hub:hover {
+  transform: translateX(-2px);
+  color: var(--theme-text);
+  border-color: color-mix(in srgb, var(--theme-text-muted) 38%, var(--theme-border));
+  background: var(--theme-surface);
+}
+
+@media (max-width: 720px) {
+  .ecg-back-hub {
+    margin-bottom: 10px;
+  }
+}
+/* CORTEX ECG HUB BACKLINK END */
