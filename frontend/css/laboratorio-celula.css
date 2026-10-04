@@ -3394,12 +3394,14 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   margin:0!important;
   padding:0!important;
   border-radius:50%!important;
-  background:rgba(0,49,41,.22)!important;
+  background:#069f85!important;
   color:transparent!important;
   opacity:0!important;
   visibility:hidden!important;
   pointer-events:none!important;
-  box-shadow:inset 0 0 0 2px rgba(12,22,20,.48)!important;
+  box-shadow:
+    inset 0 0 0 2px #111817,
+    inset 0 2px 5px rgba(0,0,0,.18)!important;
   transition:
     opacity .15s ease,
     visibility .15s ease,
@@ -3409,35 +3411,35 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 
 /* Na+ cavities follow the triangular/vertical layout in the reference. */
 .nak-pump-art .slot-na1{
-  left:36px!important;
+  left:40px!important;
   top:72px!important;
   right:auto!important;
   bottom:auto!important;
 }
 .nak-pump-art .slot-na2{
-  left:39px!important;
+  left:41px!important;
   top:99px!important;
   right:auto!important;
   bottom:auto!important;
   transform:none!important;
 }
 .nak-pump-art .slot-na3{
-  left:65px!important;
-  top:111px!important;
+  left:52px!important;
+  top:116px!important;
   right:auto!important;
   bottom:auto!important;
 }
 
 /* K+ cavities become visible only after the outward conformational change. */
 .nak-pump-art .slot-k1{
-  left:38px!important;
-  top:47px!important;
+  left:42px!important;
+  top:48px!important;
   right:auto!important;
   bottom:auto!important;
 }
 .nak-pump-art .slot-k2{
-  left:65px!important;
-  top:47px!important;
+  left:61px!important;
+  top:48px!important;
   right:auto!important;
   bottom:auto!important;
 }
@@ -3515,6 +3517,19 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
   visibility:visible!important;
 }
 
+/* Na-release state: the pump is already phosphorylated, Na+ leave,
+   but K+ cavities are still unavailable and the outward opening has not appeared yet. */
+.placed-protein[data-type="bomba"][data-pump-state="na-releasing"] .nak-cavity{
+  transform:scaleX(.72) scaleY(.94);
+}
+
+.placed-protein[data-type="bomba"][data-pump-state="na-releasing"] .nak-site-na,
+.placed-protein[data-type="bomba"][data-pump-state="na-releasing"] .nak-site-atp,
+.placed-protein[data-type="bomba"][data-pump-state="na-releasing"] .nak-site-k{
+  opacity:0!important;
+  visibility:hidden!important;
+}
+
 /* EC-facing state: same reference cavity flips upward and only K+ pockets remain. */
 .placed-protein[data-type="bomba"][data-pump-state="outside-open"] .nak-cavity{
   transform:rotate(180deg);
@@ -3565,7 +3580,10 @@ body[data-membrane-mode="simple"] .membrane-stage-card{
 .nak-pump-art .pump-slot.pump-site-active:not(.occupied){
   opacity:1!important;
   visibility:visible!important;
-  background:rgba(255,255,255,.015)!important;
+  background:#069f85!important;
+  box-shadow:
+    inset 0 0 0 2px #111817,
+    inset 0 2px 5px rgba(0,0,0,.18)!important;
 }
 
 /* Ghost uses exactly the same SVG shape. */
