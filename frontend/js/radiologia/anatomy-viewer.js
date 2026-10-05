@@ -103,6 +103,7 @@ export class AnatomyViewer {
     this.addLights();
     this.addReferenceFloor();
     this.createCutPlane();
+    this.createSelectionMarker();
 
     this.resizeObserver = new ResizeObserver(this.resize.bind(this));
     this.resizeObserver.observe(this.canvas.parentElement || this.canvas);
@@ -177,6 +178,92 @@ export class AnatomyViewer {
     this.scene.add(this.cutPlaneMesh);
 
     this.clippingPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
+  }
+
+  createSelectionMarker() {
+    const markerCanvas = document.createElement("canvas");
+    markerCanvas.width = 96;
+    markerCanvas.height = 96;
+    const context = markerCanvas.getContext("2d");
+
+    if (context) {
+      const gradient = context.createRadialGradient(48, 48, 4, 48, 48, 46);
+      gradient.addColorStop(0, "rgba(255,255,255,.95)");
+      gradient.addColorStop(.12, "rgba(114,210,255,.92)");
+      gradient.addColorStop(.28, "rgba(114,210,255,.18)");
+      gradient.addColorStop(.64, "rgba(114,210,255,.05)");
+      gradient.addColorStop(1, "rgba(114,210,255,0)");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, 96, 96);
+
+      context.strokeStyle = "rgba(226,247,255,.95)";
+      context.lineWidth = 3;
+      context.beginPath();
+      context.arc(48, 48, 18, 0, Math.PI * 2);
+      context.stroke();
+
+      context.lineWidth = 2;
+      context.beginPath();
+      context.moveTo(48, 18);
+      context.lineTo(48, 34);
+      context.moveTo(48, 62);
+      context.lineTo(48, 78);
+      context.moveTo(18, 48);
+      context.lineTo(34, 48);
+      context.moveTo(62, 48);
+      context.lineTo(78, 48);
+      context.stroke();
+    }
+
+    const texture = new THREE.CanvasTexture(markerCanvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+
+    const material = new THREE.SpriteMaterial({
+      map: texture,
+      color: 0xffffff,
+      transparent: true,
+      depthTest: false,
+      depthWrite: false,
+      opacity: 0.96
+    });
+
+    this.selectionMarker = new THREE.Sprite(material);
+    this.selectionMarker.visible = false;
+    this.selectionMarker.renderOrder = 80;
+    this.scene.add(this.selectionMarker);
+  }
+
+  setSelectionMarkerFraction(frac, color) {
+    if (!this.selectionMarker || !this.bodyBoundsValid) return;
+    if (!Array.isArray(frac) || frac.length < 3) {
+      this.selectionMarker.visible = false;
+      return;
+    }
+
+    const size = this.bodyBounds.getSize(new THREE.Vector3());
+    const markerSize = Math.max(size.x, size.y, size.z) * 0.055;
+
+    this.selectionMarker.position.set(
+      this.axisCoordinate("x", clamp(Number(frac[0]) || 0, 0, 1)),
+      this.axisCoordinate("y", clamp(Number(frac[2]) || 0, 0, 1)),
+      this.axisCoordinate("z", clamp(Number(frac[1]) || 0, 0, 1))
+    );
+    this.selectionMarker.scale.setScalar(markerSize);
+
+    if (color) {
+      this.selectionMarker.material.color.set(color);
+    }
+    else {
+      this.selectionMarker.material.color.set("#72d2ff");
+    }
+
+    this.selectionMarker.visible = true;
+  }
+
+  hideSelectionMarker() {
+    if (this.selectionMarker) {
+      this.selectionMarker.visible = false;
+    }
   }
 
   async loadAssets() {
