@@ -116,16 +116,18 @@ function parsePdb(text) {
     const atomName = line.slice(12, 16).trim();
     const resName = line.slice(17, 20).trim();
     const chain = line.slice(21, 22).trim() || "_";
+    const resSeq = Number(line.slice(22, 26).trim());
     const x = Number(line.slice(30, 38));
     const y = Number(line.slice(38, 46));
     const z = Number(line.slice(46, 54));
     const element = (line.slice(76, 78).trim() || atomName[0] || "C").toUpperCase();
 
     if (![x, y, z].every(Number.isFinite)) continue;
-    const atom = { atomName, resName, chain, x, y, z, element };
+    const atom = { atomName, resName, chain, resSeq, x, y, z, element };
     atoms.push(atom);
 
     if (atomName === "CA") {
+      if (chain === "R" && Number.isFinite(resSeq) && resSeq >= 1000) continue;
       if (!caByChain.has(chain)) caByChain.set(chain, []);
       caByChain.get(chain).push(atom);
     }
@@ -227,6 +229,7 @@ function buildAtomicRepresentation(parsed, center, axis, scale, chainAlias, root
     const alias = chainAlias[atom.chain];
     const spec = CHAIN_MAP[alias];
     if (!spec) continue;
+    if (spec.id === "gpcr" && Number.isFinite(atom.resSeq) && atom.resSeq >= 1000) continue;
     if (!byStructure.has(spec.id)) byStructure.set(spec.id, []);
     byStructure.get(spec.id).push(atom);
   }
@@ -262,6 +265,7 @@ function buildSurfaceRepresentation(parsed, center, axis, scale, chainAlias, roo
     const alias = chainAlias[atom.chain];
     const spec = CHAIN_MAP[alias];
     if (!spec) continue;
+    if (spec.id === "gpcr" && Number.isFinite(atom.resSeq) && atom.resSeq >= 1000) continue;
     if (!byStructure.has(spec.id)) byStructure.set(spec.id, []);
     byStructure.get(spec.id).push(atom);
   }
