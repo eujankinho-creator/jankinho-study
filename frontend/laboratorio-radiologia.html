@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radiologia 3D | Laboratório | Cortex</title>
+  <title>Atlas de Tomografia | Laboratório | Cortex</title>
 
   <script>
     (function () {
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-premium3">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-atlas1">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -66,7 +66,7 @@
     <header class="header">
       <div>
         <div class="header-title">Laboratório</div>
-        <span class="rad-header-subtitle">Atlas anatômico real · TC segmentada multiplanar</span>
+        <span class="rad-header-subtitle">Atlas de tomografia corporal · MPR sincronizado</span>
       </div>
 
       <div class="header-user">
@@ -85,17 +85,14 @@
             <span class="rad-status-dot"></span>
             <span>CORTEX LAB · RADIOLOGIA INTERATIVA</span>
           </div>
-          <h1>Radiologia <em>3D real</em></h1>
+          <h1>Atlas de <em>Tomografia</em></h1>
           <p>
-            Anatomia HRA em malhas reais de referência, volume de TC verdadeiro e planos
-            axial, coronal e sagital navegáveis no mesmo ambiente.
+            TC corporal navegável com cruz sincronizada e planos axial, coronal e sagital. Explore regiões e estruturas diretamente no mesmo exame.
           </p>
         </div>
 
         <div class="rad-heading-badge real-badge">
-          <span>MATERIAL REAL</span>
-          <strong>CT + SEG · MESMO EXAME</strong>
-          <small>atlas HRA real + CT/SEG co-registrados</small>
+          <span>ATLAS DIDÁTICO</span><strong>CT + MÁSCARAS · MESMO EXAME</strong><small>órgãos + cardiovascular + musculoesquelético</small>
         </div>
       </section>
 
@@ -129,14 +126,15 @@
 
       <section class="atlas-region-bar" aria-label="Regiões do atlas">
         <div class="atlas-region-title">
-          <strong>Explore o atlas</strong>
-          <span>HRA · Visible Human Female</span>
+          <strong>Explore o corpo</strong>
+          <span>TC corporal · MPR sincronizado</span>
         </div>
-        <button type="button" disabled>Cabeça <small>em breve</small></button>
-        <button type="button" disabled>Tórax <small>em breve</small></button>
-        <button type="button" class="active">Abdômen <small>ativo</small></button>
-        <button type="button" disabled>Pelve <small>em breve</small></button>
-        <button type="button" class="atlas-overview active">Visão geral</button>
+        <button type="button" data-region-target="head">Cabeça <small>encéfalo</small></button>
+        <button type="button" data-region-target="thorax">Tórax <small>coração / pulmões</small></button>
+        <button type="button" data-region-target="abdomen" class="active">Abdômen <small>órgãos</small></button>
+        <button type="button" data-region-target="pelvis">Pelve <small>vasos / bexiga</small></button>
+        <button type="button" data-region-target="thigh">Coxa <small>fêmur / músculos</small></button>
+        <button type="button" data-region-target="overview" class="atlas-overview">Visão geral</button>
       </section>
 
       <section class="rad-control-strip real-control-strip" aria-label="Controles principais">
@@ -163,9 +161,9 @@
           </div>
         </div>
 
-        <div class="rad-warning-chip real-warning exact-match-chip" title="Os cortes usam CT e segmentação do mesmo exame; o modelo anatômico 3D é um atlas humano real de referência.">
+        <div class="rad-warning-chip real-warning exact-match-chip" title="O CT e as máscaras anatômicas pertencem ao mesmo caso e usam o mesmo espaço voxel.">
           <span>✓</span>
-          CT + SEG exatos · atlas 3D de referência
+          CT + mapas co-registrados · cruz sincronizada
         </div>
       </section>
 
@@ -269,8 +267,8 @@
 
           <div class="panel-title-row">
             <div>
-              <span class="eyebrow">TC MULTIPLANAR REAL</span>
-              <h2 id="studyName">TC segmentada · mesmo exame 3D/MPR</h2>
+              <span class="eyebrow">TC CORPORAL MULTIPLANAR</span>
+              <h2 id="studyName">Atlas CT corporal · axial / coronal / sagital</h2>
             </div>
             <div class="study-chip real-study-chip">
               <span id="studyModality">TC + SEG</span>
@@ -310,7 +308,7 @@
             </div>
 
             <div class="image-instructions">
-              a tela grande é interativa · clique em uma tela menor para ampliá-la
+              axial permanece principal · clique em coronal ou sagital para ativar o eixo
             </div>
           </div>
 
@@ -373,7 +371,7 @@
 
         <article class="info-card slice-info-card">
           <div class="info-card-head">
-            <span>NO NÍVEL 3D ATUAL</span>
+            <span>NO CORTE ATUAL</span>
             <strong>interseção por voxels</strong>
           </div>
 
@@ -390,16 +388,13 @@
           </div>
 
           <dl>
-            <div><dt>3D</dt><dd>Human Reference Atlas · malhas anatômicas reais</dd></div>
             <div><dt>TC / SEG</dt><dd id="studySource">TotalSegmentator · arquivos de referência</dd></div>
-            <div><dt>Correspondência</dt><dd>CT + SEG exatos; atlas 3D usado como referência anatômica</dd></div>
+            <div><dt>Correspondência</dt><dd>CT e máscaras do mesmo caso · mesmo espaço voxel</dd></div>
             <div><dt>Licença / fonte</dt><dd id="studyLicense">Apache-2.0 · repositório TotalSegmentator</dd></div>
           </dl>
 
           <p class="metadata-note">
-            O CT e a segmentação pertencem ao mesmo exame e compartilham o mesmo espaço
-            voxel. O modelo 3D completo usa malhas reais do Human Reference Atlas para
-            recuperar ossos, vasos e órgãos que não existem no pequeno volume de teste.
+            O CT e os três mapas anatômicos compartilham o mesmo espaço voxel. A cruz e a seleção são propagadas em tempo real entre axial, coronal e sagital.
           </p>
         </article>
       </section>
@@ -410,9 +405,7 @@
           <strong>ver registro</strong>
         </summary>
         <div class="source-intro">
-          O laboratório baixa o CT/segmentação e as malhas HRA reais no build, mantendo
-          as atribuições das fontes. Nenhum órgão é desenhado com esfera, elipse ou
-          cilindro procedimental.
+          O laboratório usa CT e máscaras anatômicas públicas co-registradas e mantém as atribuições e licenças das fontes.
         </div>
         <div id="sourceRegistry" class="source-registry"></div>
       </details>
@@ -430,7 +423,7 @@
 
   <div id="anatomyTooltip" class="rad-tooltip" hidden></div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-premium3"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-atlas1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
