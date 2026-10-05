@@ -128,6 +128,13 @@ export class RadiologyMultiView {
     if (this.root) {
       this.root.dataset.primaryPlane = this.primaryPlane;
     }
+
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("resize"));
+      PLANES.forEach((plane) => {
+        this.viewers[plane]?.nv?.drawScene();
+      });
+    });
   }
 
   setPrimaryPlane(plane, silent) {
