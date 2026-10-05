@@ -163,9 +163,9 @@
           </div>
         </div>
 
-        <div class="rad-warning-chip real-warning" title="O atlas HRA e a TC são materiais reais, mas não pertencem ao mesmo sujeito.">
-          <span>≠</span>
-          HRA e TC reais · sujeitos diferentes · sem falso registro DICOM
+        <div class="rad-warning-chip real-warning exact-match-chip" title="O 3D e os cortes usam o mesmo volume e a mesma segmentação.">
+          <span>✓</span>
+          correspondência voxel a voxel · mesmo exame
         </div>
       </section>
 
@@ -369,9 +369,9 @@
           </dl>
 
           <p class="metadata-note">
-            A anatomia HRA e a TC são reais, mas não são do mesmo sujeito. O Cortex
-            não inventa uma transformação DICOM entre eles: a posição 3D ↔ TC é uma
-            correlação didática relativa até um dataset segmentado/co-registrado ser usado.
+            O 3D e os cortes desta visualização são derivados do mesmo CT e da mesma
+            segmentação NIfTI. Ao mover o cruzamento ou selecionar uma estrutura, a
+            posição é compartilhada diretamente no espaço voxel do exame.
           </p>
         </article>
       </section>
