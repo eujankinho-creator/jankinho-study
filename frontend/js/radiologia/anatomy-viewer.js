@@ -1,254 +1,52 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { STRUCTURES, ANATOMY_BOUNDS, getStructure } from "./data.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import {
+  ANATOMY_ASSET_BASE,
+  SYSTEMS,
+  STRUCTURES,
+  PLANE_CONFIG,
+  getStructure,
+  structureMatchesObject,
+  clamp
+} from "./data.js";
 
-const DEFAULT_CAMERA = Object.freeze({
-  position: [6.4, 4.7, 7.3],
-  target: [0, 0.1, 0]
-});
+const DEFAULT_BG = 0x070b10;
 
-function makeMaterial(structure) {
-  return new THREE.MeshStandardMaterial({
-    color: structure.color,
-    roughness: structure.kind === "vessel" ? 0.42 : 0.68,
-    metalness: 0.02,
-    transparent: true,
-    opacity: 0.92,
-    emissive: new THREE.Color(structure.color).multiplyScalar(0.08),
-    emissiveIntensity: 0.18,
-    side: THREE.DoubleSide
-  });
+function cloneMaterial(material) {
+  const cloned = material.clone();
+  cloned.transparent = true;
+  cloned.depthWrite = material.depthWrite !== false;
+  cloned.side = THREE.DoubleSide;
+  return cloned;
 }
 
-function organicGeometry(shape) {
-  const geometry = new THREE.SphereGeometry(1, 44, 32);
-  const position = geometry.attributes.position;
-  const vertex = new THREE.Vector3();
-
-  for (let i = 0; i < position.count; i += 1) {
-    vertex.fromBufferAttribute(position, i);
-    let x = vertex.x;
-    let y = vertex.y;
-    let z = vertex.z;
-
-    if (shape === "liver") {
-      const top = Math.max(0, y);
-      x *= 1 + 0.13 * top - 0.06 * z;
-      z *= 0.92 + 0.08 * (1 - Math.abs(x));
-      y = y > -0.52 ? y : -0.52 + (y + 0.52) * 0.35;
-      x += 0.08 * (1 - y) * z;
-    }
-
-    if (shape === "stomach") {
-      x += 0.22 * (0.35 - y) * (1 - Math.abs(z));
-      z += 0.11 * Math.sin((y + 1) * Math.PI * 0.8);
-      if (y > 0.45) x -= 0.12 * y;
-    }
-
-    if (shape === "kidney-right" || shape === "kidney-left") {
-      const medialSign = shape === "kidney-right" ? 1 : -1;
-      const medial = Math.max(0, x * medialSign);
-      const waist = Math.exp(-Math.pow(y * 1.9, 2)) * Math.exp(-Math.pow(z * 1.7, 2));
-      x -= medialSign * medial * waist * 0.36;
-      z *= 0.92 + 0.08 * Math.abs(y);
-    }
-
-    if (shape === "pancreas") {
-      y *= 0.86 + 0.10 * Math.cos(x * Math.PI);
-      z *= 0.84 + 0.13 * Math.sin((x + 1) * Math.PI * 0.5);
-      y += 0.07 * Math.sin(x * Math.PI);
-      z += 0.06 * Math.sin(x * Math.PI * 1.3);
-    }
-
-    position.setXYZ(i, x, y, z);
+function objectPath(object) {
+  const names = [];
+  let current = object;
+  while (current) {
+    if (current.name) names.push(current.name);
+    current = current.parent;
   }
-
-  position.needsUpdate = true;
-  geometry.computeVertexNormals();
-  return geometry;
+  return names.join(" ");
 }
 
-function makeTube(points, radius, material, segments) {
-  const curve = new THREE.CatmullRomCurve3(
-    points.map(function (point) {
-      return new THREE.Vector3(point[0], point[1], point[2]);
-    })
-  );
-
-  return new THREE.Mesh(
-    new THREE.TubeGeometry(curve, segments || 36, radius, 12, false),
-    material
-  );
-}
-
-function makeVesselGroup(structure, material) {
-  const group = new THREE.Group();
-
-  if (structure.shape === "aorta") {
-    const main = makeTube([
-      [0.20, 1.95, -0.68],
-      [0.20, 1.15, -0.67],
-      [0.21, 0.35, -0.66],
-      [0.20, -0.45, -0.68],
-      [0.16, -1.50, -0.66]
-    ], 0.17, material, 48);
-
-    const leftIliac = makeTube([
-      [0.16, -1.48, -0.66],
-      [0.45, -1.80, -0.62],
-      [0.72, -2.10, -0.55]
-    ], 0.105, material, 20);
-
-    const rightIliac = makeTube([
-      [0.16, -1.48, -0.66],
-      [-0.18, -1.80, -0.62],
-      [-0.48, -2.10, -0.55]
-    ], 0.105, material, 20);
-
-    group.add(main, leftIliac, rightIliac);
-  }
-
-  if (structure.shape === "ivc") {
-    const main = makeTube([
-      [-0.24, 1.98, -0.59],
-      [-0.24, 1.15, -0.60],
-      [-0.25, 0.34, -0.60],
-      [-0.22, -0.50, -0.59],
-      [-0.18, -1.52, -0.57]
-    ], 0.19, material, 48);
-
-    const left = makeTube([
-      [-0.18, -1.50, -0.57],
-      [0.14, -1.80, -0.52],
-      [0.42, -2.06, -0.48]
-    ], 0.115, material, 20);
-
-    const right = makeTube([
-      [-0.18, -1.50, -0.57],
-      [-0.52, -1.82, -0.53],
-      [-0.76, -2.08, -0.47]
-    ], 0.115, material, 20);
-
-    group.add(main, left, right);
-  }
-
-  if (structure.shape === "portal") {
-    const trunk = makeTube([
-      [0.12, 0.14, -0.18],
-      [-0.02, 0.30, -0.12],
-      [-0.18, 0.48, -0.05],
-      [-0.40, 0.61, 0.00]
-    ], 0.13, material, 28);
-
-    const rightBranch = makeTube([
-      [-0.39, 0.61, 0.00],
-      [-0.72, 0.72, 0.02],
-      [-1.02, 0.78, 0.08]
-    ], 0.085, material, 20);
-
-    const leftBranch = makeTube([
-      [-0.39, 0.61, 0.00],
-      [-0.10, 0.73, 0.08],
-      [0.16, 0.82, 0.12]
-    ], 0.078, material, 20);
-
-    group.add(trunk, rightBranch, leftBranch);
-  }
-
-  group.traverse(function (child) {
-    if (child.isMesh) {
-      child.userData.structureId = structure.id;
-    }
-  });
-
-  return group;
-}
-
-function makeOrganGroup(structure, material) {
-  const group = new THREE.Group();
-  const mesh = new THREE.Mesh(organicGeometry(structure.shape), material);
-
-  mesh.scale.set(structure.size[0], structure.size[1], structure.size[2]);
-  mesh.rotation.set(
-    structure.rotation[0],
-    structure.rotation[1],
-    structure.rotation[2]
-  );
-  mesh.position.set(
-    structure.center[0],
-    structure.center[1],
-    structure.center[2]
-  );
-  mesh.userData.structureId = structure.id;
-  group.add(mesh);
-
-  if (structure.id === "stomach") {
-    const lumen = new THREE.Mesh(
-      new THREE.SphereGeometry(0.82, 30, 20),
-      new THREE.MeshBasicMaterial({
-        color: 0x2a2022,
-        transparent: true,
-        opacity: 0.34,
-        side: THREE.BackSide
-      })
-    );
-    lumen.scale.set(0.56, 0.74, 0.41);
-    lumen.position.copy(mesh.position);
-    lumen.rotation.copy(mesh.rotation);
-    lumen.userData.structureId = structure.id;
-    group.add(lumen);
-  }
-
-  return group;
-}
-
-function makeCutPlane() {
-  const group = new THREE.Group();
-  const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(5.25, 5.25),
-    new THREE.MeshBasicMaterial({
-      color: 0x79cfff,
-      transparent: true,
-      opacity: 0.075,
-      depthWrite: false,
-      side: THREE.DoubleSide
-    })
-  );
-
-  const edges = new THREE.LineSegments(
-    new THREE.EdgesGeometry(plane.geometry),
-    new THREE.LineBasicMaterial({
-      color: 0x9cddff,
-      transparent: true,
-      opacity: 0.74
-    })
-  );
-
-  group.add(plane, edges);
-  group.renderOrder = 8;
-  return group;
+function hexColor(value) {
+  return new THREE.Color(value);
 }
 
 export class AnatomyViewer {
   constructor(canvas, options) {
     this.canvas = canvas;
     this.options = options || {};
-    this.structureGroups = new Map();
-    this.materials = new Map();
-    this.pickables = [];
-    this.selectedId = null;
-    this.hoveredId = null;
-    this.transparentMode = false;
-    this.plane = "axial";
-    this.sliceCoordinate = 0;
-    this.pointerDown = null;
+    this.loader = new GLTFLoader();
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x070b10);
-    this.scene.fog = new THREE.Fog(0x070b10, 10, 18);
+    this.scene.background = new THREE.Color(DEFAULT_BG);
+    this.scene.fog = new THREE.Fog(DEFAULT_BG, 2.4, 8.8);
 
-    this.camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-    this.camera.position.set.apply(this.camera.position, DEFAULT_CAMERA.position);
+    this.camera = new THREE.PerspectiveCamera(34, 1, 0.001, 1000);
+    this.camera.position.set(1.8, 1.1, 3.2);
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
@@ -256,30 +54,42 @@ export class AnatomyViewer {
       alpha: false,
       powerPreference: "high-performance"
     });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.08;
+    this.renderer.toneMappingExposure = 1.12;
+    this.renderer.localClippingEnabled = true;
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls = new OrbitControls(this.camera, this.canvas);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.075;
-    this.controls.enablePan = true;
     this.controls.screenSpacePanning = true;
-    this.controls.minDistance = 4.4;
-    this.controls.maxDistance = 16;
-    this.controls.target.set.apply(this.controls.target, DEFAULT_CAMERA.target);
+    this.controls.minDistance = 0.12;
+    this.controls.maxDistance = 12;
 
     this.raycaster = new THREE.Raycaster();
     this.pointer = new THREE.Vector2();
 
-    this.addLights();
-    this.addContextGeometry();
-    this.addStructures();
+    this.systemGroups = new Map();
+    this.structureMeshes = new Map();
+    this.pickables = [];
+    this.materialState = new WeakMap();
+    this.systemState = new Map();
 
-    this.cutPlane = makeCutPlane();
-    this.scene.add(this.cutPlane);
-    this.setPlane("axial", 0);
+    this.selectedId = null;
+    this.hoveredId = null;
+    this.transparentMode = false;
+    this.clippingEnabled = false;
+    this.planeVisible = true;
+    this.plane = "axial";
+    this.crosshairFrac = [0.5, 0.5, 0.5];
+    this.bodyBounds = new THREE.Box3();
+    this.bodyBoundsValid = false;
+    this.pointerDown = null;
+
+    this.addLights();
+    this.addReferenceFloor();
+    this.createCutPlane();
 
     this.resizeObserver = new ResizeObserver(this.resize.bind(this));
     this.resizeObserver.observe(this.canvas.parentElement || this.canvas);
@@ -288,101 +98,270 @@ export class AnatomyViewer {
     this.canvas.addEventListener("pointerleave", this.onPointerLeave.bind(this));
     this.canvas.addEventListener("pointerdown", this.onPointerDown.bind(this));
     this.canvas.addEventListener("pointerup", this.onPointerUp.bind(this));
+    this.canvas.addEventListener("dblclick", this.reset.bind(this));
 
     this.resize();
     this.animate();
+
+    this.ready = this.loadAssets();
   }
 
   addLights() {
-    const hemi = new THREE.HemisphereLight(0xc7e4ff, 0x181419, 1.9);
-    this.scene.add(hemi);
+    const hemisphere = new THREE.HemisphereLight(0xe7f5ff, 0x11151b, 2.25);
+    this.scene.add(hemisphere);
 
-    const key = new THREE.DirectionalLight(0xffffff, 2.4);
-    key.position.set(4, 7, 6);
+    const key = new THREE.DirectionalLight(0xffffff, 3.1);
+    key.position.set(3.2, 5.4, 4.2);
     this.scene.add(key);
 
-    const rim = new THREE.DirectionalLight(0x73b7ff, 1.5);
-    rim.position.set(-5, 2, -5);
-    this.scene.add(rim);
-
-    const fill = new THREE.PointLight(0xff9d82, 0.7, 12);
-    fill.position.set(-3, 0, 4);
+    const fill = new THREE.DirectionalLight(0x86bdff, 1.4);
+    fill.position.set(-4.0, 1.3, -2.8);
     this.scene.add(fill);
+
+    const warm = new THREE.DirectionalLight(0xffb79d, 0.72);
+    warm.position.set(1.2, -2.0, 3.5);
+    this.scene.add(warm);
   }
 
-  addContextGeometry() {
-    const torso = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 48, 34),
-      new THREE.MeshPhysicalMaterial({
-        color: 0x7d94a7,
-        roughness: 0.36,
-        transparent: true,
-        opacity: 0.045,
-        depthWrite: false,
-        side: THREE.DoubleSide
-      })
-    );
-    torso.scale.set(2.55, 2.92, 1.55);
-    torso.position.y = 0.04;
-    torso.renderOrder = -2;
-    this.scene.add(torso);
+  addReferenceFloor() {
+    this.floor = new THREE.GridHelper(2.2, 22, 0x2b455c, 0x142433);
+    this.floor.material.transparent = true;
+    this.floor.material.opacity = 0.18;
+    this.floor.visible = false;
+    this.scene.add(this.floor);
+  }
 
-    const bodyEdges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(new THREE.SphereGeometry(1, 28, 20), 24),
-      new THREE.LineBasicMaterial({
-        color: 0x5d7183,
-        transparent: true,
-        opacity: 0.09
-      })
-    );
-    bodyEdges.scale.copy(torso.scale);
-    bodyEdges.position.copy(torso.position);
-    this.scene.add(bodyEdges);
-
-    const spineMaterial = new THREE.MeshStandardMaterial({
-      color: 0xd9d3c3,
-      roughness: 0.9,
+  createCutPlane() {
+    const geometry = new THREE.PlaneGeometry(1, 1);
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x70cfff,
       transparent: true,
-      opacity: 0.32
+      opacity: 0.085,
+      depthWrite: false,
+      side: THREE.DoubleSide
     });
 
-    for (let i = 0; i < 10; i += 1) {
-      const vertebra = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.22 - i * 0.004, 0.23 - i * 0.004, 0.22, 18),
-        spineMaterial
-      );
-      vertebra.rotation.x = Math.PI / 2;
-      vertebra.position.set(0.05, 1.25 - i * 0.32, -1.05 + Math.sin(i * 0.34) * 0.035);
-      this.scene.add(vertebra);
-    }
+    this.cutPlaneMesh = new THREE.Mesh(geometry, material);
+    this.cutPlaneMesh.renderOrder = 30;
 
-    const axis = new THREE.AxesHelper(0.78);
-    axis.position.set(-2.15, -2.25, -1.20);
-    axis.material.transparent = true;
-    axis.material.opacity = 0.7;
-    this.scene.add(axis);
+    const border = new THREE.LineSegments(
+      new THREE.EdgesGeometry(geometry),
+      new THREE.LineBasicMaterial({
+        color: 0x9ce0ff,
+        transparent: true,
+        opacity: 0.70
+      })
+    );
+    border.renderOrder = 31;
+    this.cutPlaneMesh.add(border);
+    this.scene.add(this.cutPlaneMesh);
 
-    const floor = new THREE.GridHelper(7, 28, 0x23364a, 0x152230);
-    floor.position.y = -2.83;
-    floor.material.transparent = true;
-    floor.material.opacity = 0.22;
-    this.scene.add(floor);
+    this.clippingPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
   }
 
-  addStructures() {
-    STRUCTURES.forEach((structure) => {
-      const material = makeMaterial(structure);
-      const group = structure.kind === "vessel"
-        ? makeVesselGroup(structure, material)
-        : makeOrganGroup(structure, material);
+  async loadAssets() {
+    const settled = await Promise.allSettled(
+      SYSTEMS.map((system) => this.loadSystem(system))
+    );
 
-      group.userData.structureId = structure.id;
-      this.structureGroups.set(structure.id, group);
-      this.materials.set(structure.id, material);
-      group.traverse((child) => {
-        if (child.isMesh) this.pickables.push(child);
+    const failures = [];
+    settled.forEach(function (result, index) {
+      if (result.status === "rejected") {
+        failures.push({
+          system: SYSTEMS[index].id,
+          error: String(result.reason && result.reason.message || result.reason)
+        });
+      }
+    });
+
+    this.rebuildBounds();
+    this.rebuildStructureIndex();
+    this.applySystemStyles();
+    this.frameBody();
+    this.updateCutPlane();
+    this.refreshHighlights();
+
+    const report = {
+      systemsLoaded: Array.from(this.systemGroups.keys()),
+      failures,
+      structures: STRUCTURES.map((structure) => ({
+        id: structure.id,
+        meshCount: (this.structureMeshes.get(structure.id) || []).length
+      }))
+    };
+
+    if (typeof this.options.onReady === "function") {
+      this.options.onReady(report);
+    }
+
+    return report;
+  }
+
+  loadSystem(system) {
+    return new Promise((resolve, reject) => {
+      const url = ANATOMY_ASSET_BASE + "/" + system.file;
+      this.loader.load(
+        url,
+        (gltf) => {
+          const group = gltf.scene || gltf.scenes[0];
+          if (!group) {
+            reject(new Error("GLB sem cena: " + system.file));
+            return;
+          }
+
+          group.name = "hra-system-" + system.id;
+          group.userData.systemId = system.id;
+
+          group.traverse((object) => {
+            if (!object.isMesh) return;
+
+            object.frustumCulled = true;
+            object.castShadow = false;
+            object.receiveShadow = false;
+            object.userData.systemId = system.id;
+            object.userData.objectPath = objectPath(object);
+
+            const materials = Array.isArray(object.material)
+              ? object.material
+              : [object.material];
+
+            const cloned = materials.map((material) => {
+              const next = cloneMaterial(material);
+              this.materialState.set(next, {
+                color: next.color ? next.color.clone() : null,
+                emissive: next.emissive ? next.emissive.clone() : null,
+                emissiveIntensity:
+                  typeof next.emissiveIntensity === "number"
+                    ? next.emissiveIntensity
+                    : 0,
+                opacity: next.opacity,
+                depthWrite: next.depthWrite,
+                roughness:
+                  typeof next.roughness === "number"
+                    ? next.roughness
+                    : null
+              });
+              return next;
+            });
+
+            object.material = Array.isArray(object.material) ? cloned : cloned[0];
+            this.pickables.push(object);
+          });
+
+          this.systemGroups.set(system.id, group);
+          this.systemState.set(system.id, {
+            visible: system.defaultVisible,
+            opacity: system.opacity
+          });
+          group.visible = system.defaultVisible;
+          this.scene.add(group);
+          resolve(group);
+        },
+        undefined,
+        (error) => reject(error || new Error("Falha ao carregar " + system.file))
+      );
+    });
+  }
+
+  rebuildBounds() {
+    this.bodyBounds.makeEmpty();
+
+    const preferred = this.systemGroups.get("integumentary");
+    if (preferred) {
+      this.bodyBounds.setFromObject(preferred);
+    }
+
+    if (this.bodyBounds.isEmpty()) {
+      this.systemGroups.forEach((group) => {
+        const box = new THREE.Box3().setFromObject(group);
+        if (!box.isEmpty()) this.bodyBounds.union(box);
       });
-      this.scene.add(group);
+    }
+
+    this.bodyBoundsValid = !this.bodyBounds.isEmpty();
+  }
+
+  rebuildStructureIndex() {
+    this.structureMeshes.clear();
+    STRUCTURES.forEach((structure) => {
+      this.structureMeshes.set(structure.id, []);
+    });
+
+    this.pickables.forEach((mesh) => {
+      const systemId = mesh.userData.systemId;
+      const path = mesh.userData.objectPath || objectPath(mesh);
+      let assigned = null;
+
+      for (const structure of STRUCTURES) {
+        if (structureMatchesObject(structure, systemId, path)) {
+          assigned = structure;
+          break;
+        }
+      }
+
+      if (assigned) {
+        mesh.userData.structureId = assigned.id;
+        this.structureMeshes.get(assigned.id).push(mesh);
+      }
+    });
+  }
+
+  materialsForMesh(mesh) {
+    return Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+  }
+
+  restoreMaterial(material) {
+    const saved = this.materialState.get(material);
+    if (!saved) return;
+
+    if (saved.color && material.color) material.color.copy(saved.color);
+    if (saved.emissive && material.emissive) {
+      material.emissive.copy(saved.emissive);
+    }
+    if (typeof material.emissiveIntensity === "number") {
+      material.emissiveIntensity = saved.emissiveIntensity;
+    }
+    material.opacity = saved.opacity;
+    material.depthWrite = saved.depthWrite;
+    if (saved.roughness !== null && typeof material.roughness === "number") {
+      material.roughness = saved.roughness;
+    }
+  }
+
+  applySystemStyles() {
+    SYSTEMS.forEach((system) => {
+      const group = this.systemGroups.get(system.id);
+      if (!group) return;
+
+      group.visible = this.systemState.get(system.id)?.visible !== false;
+
+      group.traverse((object) => {
+        if (!object.isMesh) return;
+
+        this.materialsForMesh(object).forEach((material) => {
+          const saved = this.materialState.get(material);
+          if (!saved) return;
+
+          let opacity = system.opacity;
+          if (system.id === "integumentary") {
+            opacity = 0.09;
+            material.depthWrite = false;
+          }
+          else if (system.id === "skeletal") {
+            opacity = 0.34;
+            if (material.color) {
+              material.color.lerp(new THREE.Color(0xe7ddc5), 0.56);
+            }
+          }
+          else if (system.id === "cardiovascular") {
+            opacity = 0.82;
+          }
+
+          material.transparent = opacity < 0.999;
+          material.opacity = opacity;
+          material.needsUpdate = true;
+        });
+      });
     });
   }
 
@@ -390,17 +369,9 @@ export class AnatomyViewer {
     const parent = this.canvas.parentElement || this.canvas;
     const width = Math.max(1, parent.clientWidth);
     const height = Math.max(1, parent.clientHeight);
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-
-    if (
-      this.canvas.width !== Math.round(width * pixelRatio) ||
-      this.canvas.height !== Math.round(height * pixelRatio)
-    ) {
-      this.renderer.setPixelRatio(pixelRatio);
-      this.renderer.setSize(width, height, false);
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-    }
+    this.renderer.setSize(width, height, false);
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
   }
 
   animate() {
@@ -418,14 +389,17 @@ export class AnatomyViewer {
   hitTest(event) {
     this.pointerToNdc(event);
     this.raycaster.setFromCamera(this.pointer, this.camera);
-    const intersections = this.raycaster.intersectObjects(this.pickables, false);
 
-    for (let i = 0; i < intersections.length; i += 1) {
-      const id = intersections[i].object.userData.structureId;
-      const group = this.structureGroups.get(id);
-      if (id && group && group.visible) {
-        return { id: id, point: intersections[i].point };
-      }
+    const hits = this.raycaster.intersectObjects(this.pickables, false);
+    for (const hit of hits) {
+      const mesh = hit.object;
+      if (!mesh.visible) continue;
+
+      const system = this.systemGroups.get(mesh.userData.systemId);
+      if (!system || !system.visible) continue;
+
+      const id = mesh.userData.structureId || null;
+      if (id) return { id, point: hit.point, mesh };
     }
 
     return null;
@@ -433,17 +407,17 @@ export class AnatomyViewer {
 
   onPointerMove(event) {
     const hit = this.hitTest(event);
-    const id = hit ? hit.id : null;
+    const next = hit ? hit.id : null;
 
-    if (this.hoveredId !== id) {
-      this.hoveredId = id;
+    if (next !== this.hoveredId) {
+      this.hoveredId = next;
       this.refreshHighlights();
     }
 
-    this.canvas.style.cursor = id ? "pointer" : "grab";
+    this.canvas.style.cursor = next ? "pointer" : "grab";
 
     if (typeof this.options.onHover === "function") {
-      this.options.onHover(id ? getStructure(id) : null, event);
+      this.options.onHover(next ? getStructure(next) : null, event);
     }
   }
 
@@ -451,6 +425,7 @@ export class AnatomyViewer {
     this.hoveredId = null;
     this.refreshHighlights();
     this.canvas.style.cursor = "grab";
+
     if (typeof this.options.onHover === "function") {
       this.options.onHover(null, null);
     }
@@ -471,15 +446,14 @@ export class AnatomyViewer {
       event.clientX - this.pointerDown.x,
       event.clientY - this.pointerDown.y
     );
-
     this.pointerDown = null;
+
     if (distance > 6) return;
 
     const hit = this.hitTest(event);
     if (!hit) return;
 
     this.selectStructure(hit.id);
-
     if (typeof this.options.onSelect === "function") {
       this.options.onSelect(hit.id);
     }
@@ -491,19 +465,64 @@ export class AnatomyViewer {
   }
 
   refreshHighlights() {
-    STRUCTURES.forEach((structure) => {
-      const material = this.materials.get(structure.id);
-      if (!material) return;
+    const selected = this.selectedId;
+    const hovered = this.hoveredId;
 
-      const isSelected = structure.id === this.selectedId;
-      const isHovered = structure.id === this.hoveredId;
-      const baseOpacity = this.transparentMode ? 0.24 : 0.92;
+    SYSTEMS.forEach((system) => {
+      const group = this.systemGroups.get(system.id);
+      if (!group) return;
 
-      material.opacity = isSelected ? 0.96 : (isHovered ? Math.max(baseOpacity, 0.64) : baseOpacity);
-      material.emissive.set(structure.color);
-      material.emissiveIntensity = isSelected ? 0.72 : (isHovered ? 0.38 : 0.16);
-      material.roughness = isSelected ? 0.48 : (structure.kind === "vessel" ? 0.42 : 0.68);
-      material.needsUpdate = true;
+      group.traverse((object) => {
+        if (!object.isMesh) return;
+
+        const structureId = object.userData.structureId || null;
+        const isSelected = structureId && structureId === selected;
+        const isHovered = structureId && structureId === hovered;
+        const structure = structureId ? getStructure(structureId) : null;
+
+        this.materialsForMesh(object).forEach((material) => {
+          this.restoreMaterial(material);
+
+          let baseOpacity = system.opacity;
+          if (system.id === "integumentary") baseOpacity = 0.09;
+          if (system.id === "skeletal") baseOpacity = 0.34;
+
+          if (this.transparentMode && !isSelected) {
+            baseOpacity *= system.id === "integumentary" ? 0.38 : 0.28;
+          }
+          else if (selected && structureId && !isSelected) {
+            baseOpacity *= 0.48;
+          }
+
+          if (isHovered) baseOpacity = Math.max(baseOpacity, 0.76);
+          if (isSelected) baseOpacity = 0.96;
+
+          if (isSelected || isHovered) {
+            const accent = hexColor(structure?.color || "#72d2ff");
+            if (material.color) {
+              material.color.lerp(accent, isSelected ? 0.62 : 0.36);
+            }
+            if (material.emissive) {
+              material.emissive.copy(accent);
+              material.emissiveIntensity = isSelected ? 0.56 : 0.22;
+            }
+            if (typeof material.roughness === "number") {
+              material.roughness = Math.min(material.roughness, 0.55);
+            }
+          }
+
+          material.opacity = clamp(baseOpacity, 0.015, 1);
+          material.transparent = material.opacity < 0.999;
+          material.depthWrite =
+            system.id !== "integumentary" && material.opacity > 0.22;
+
+          material.clippingPlanes = this.clippingEnabled
+            ? [this.clippingPlane]
+            : [];
+          material.clipShadows = false;
+          material.needsUpdate = true;
+        });
+      });
     });
   }
 
@@ -512,93 +531,245 @@ export class AnatomyViewer {
     this.refreshHighlights();
   }
 
-  setVisibility(id, visible) {
-    const group = this.structureGroups.get(id);
+  setSystemVisibility(systemId, visible) {
+    const group = this.systemGroups.get(systemId);
     if (!group) return;
     group.visible = Boolean(visible);
 
-    if (!visible && this.hoveredId === id) this.hoveredId = null;
+    const state = this.systemState.get(systemId) || {};
+    state.visible = Boolean(visible);
+    this.systemState.set(systemId, state);
+  }
+
+  setCategoryVisibility(category, visible) {
+    SYSTEMS.filter(function (system) {
+      return system.category === category;
+    }).forEach((system) => {
+      this.setSystemVisibility(system.id, visible);
+    });
+  }
+
+  setStructureVisibility(id, visible) {
+    const meshes = this.structureMeshes.get(id) || [];
+    meshes.forEach(function (mesh) {
+      mesh.visible = Boolean(visible);
+    });
+
     if (!visible && this.selectedId === id) {
-      this.selectedId = null;
+      this.selectStructure(null);
       if (typeof this.options.onSelect === "function") {
         this.options.onSelect(null);
       }
     }
+  }
 
-    this.refreshHighlights();
+  structureBox(id) {
+    const meshes = this.structureMeshes.get(id) || [];
+    const box = new THREE.Box3();
+    box.makeEmpty();
+
+    meshes.forEach(function (mesh) {
+      mesh.updateWorldMatrix(true, false);
+      const meshBox = new THREE.Box3().setFromObject(mesh);
+      if (!meshBox.isEmpty()) box.union(meshBox);
+    });
+
+    return box;
   }
 
   focusStructure(id) {
-    const group = this.structureGroups.get(id);
-    if (!group) return;
-
-    const box = new THREE.Box3().setFromObject(group);
+    const box = this.structureBox(id);
     if (box.isEmpty()) return;
 
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
-    const radius = Math.max(size.x, size.y, size.z, 0.9);
-    const direction = new THREE.Vector3(1.15, 0.8, 1.3).normalize();
+    const diagonal = Math.max(size.length(), 0.04);
+    const direction = new THREE.Vector3(1.0, 0.55, 1.2).normalize();
 
     this.controls.target.copy(center);
-    this.camera.position.copy(center.clone().add(direction.multiplyScalar(radius * 4.3)));
+    this.camera.position.copy(
+      center.clone().add(direction.multiplyScalar(diagonal * 1.85))
+    );
+    this.camera.near = Math.max(0.001, diagonal / 300);
+    this.camera.far = Math.max(10, diagonal * 30);
+    this.camera.updateProjectionMatrix();
     this.controls.update();
+  }
+
+  frameBody() {
+    if (!this.bodyBoundsValid) return;
+
+    const center = this.bodyBounds.getCenter(new THREE.Vector3());
+    const size = this.bodyBounds.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const fov = THREE.MathUtils.degToRad(this.camera.fov);
+    const distance = maxDim / (2 * Math.tan(fov / 2)) * 1.15;
+
+    this.controls.target.copy(center);
+    this.camera.position.set(
+      center.x + maxDim * 0.48,
+      center.y + maxDim * 0.07,
+      center.z + distance
+    );
+    this.camera.near = Math.max(maxDim / 10000, 0.001);
+    this.camera.far = Math.max(distance * 12, maxDim * 20);
+    this.camera.updateProjectionMatrix();
+    this.controls.minDistance = Math.max(maxDim * 0.22, 0.02);
+    this.controls.maxDistance = Math.max(maxDim * 4.8, 4);
+    this.controls.update();
+
+    this.floor.position.set(
+      center.x,
+      this.bodyBounds.min.y - size.y * 0.025,
+      center.z
+    );
+    this.floor.scale.setScalar(Math.max(1, maxDim / 2));
   }
 
   reset() {
-    this.camera.position.set.apply(this.camera.position, DEFAULT_CAMERA.position);
-    this.controls.target.set.apply(this.controls.target, DEFAULT_CAMERA.target);
-    this.controls.reset();
-    this.camera.position.set.apply(this.camera.position, DEFAULT_CAMERA.position);
-    this.controls.target.set.apply(this.controls.target, DEFAULT_CAMERA.target);
-    this.controls.update();
+    this.frameBody();
   }
 
-  setPlane(plane, coordinate) {
+  axisCoordinate(axis, frac) {
+    if (!this.bodyBoundsValid) return 0;
+
+    const min = this.bodyBounds.min[axis];
+    const max = this.bodyBounds.max[axis];
+    return THREE.MathUtils.lerp(min, max, clamp(frac, 0, 1));
+  }
+
+  setCrosshairFraction(frac) {
+    if (!Array.isArray(frac) || frac.length < 3) return;
+
+    this.crosshairFrac = [
+      clamp(Number(frac[0]) || 0, 0, 1),
+      clamp(Number(frac[1]) || 0, 0, 1),
+      clamp(Number(frac[2]) || 0, 0, 1)
+    ];
+
+    this.updateCutPlane();
+  }
+
+  setPlane(plane, fraction) {
+    if (!PLANE_CONFIG[plane]) return;
     this.plane = plane;
-    this.sliceCoordinate = Number(coordinate) || 0;
 
-    const planeGroup = this.cutPlane;
-    planeGroup.rotation.set(0, 0, 0);
-    planeGroup.position.set(0, 0, 0);
-    planeGroup.scale.set(1, 1, 1);
-
-    if (plane === "axial") {
-      planeGroup.rotation.x = Math.PI / 2;
-      planeGroup.position.y = this.sliceCoordinate;
-      planeGroup.scale.set(1.0, 0.72, 1);
-    } else if (plane === "sagittal") {
-      planeGroup.rotation.y = Math.PI / 2;
-      planeGroup.position.x = this.sliceCoordinate;
-      planeGroup.scale.set(1.0, 1.1, 1);
-    } else {
-      planeGroup.position.z = this.sliceCoordinate;
-      planeGroup.scale.set(1.0, 1.1, 1);
+    if (typeof fraction === "number") {
+      const axis = PLANE_CONFIG[plane].fracAxis;
+      const next = this.crosshairFrac.slice();
+      next[axis] = clamp(fraction, 0, 1);
+      this.crosshairFrac = next;
     }
+
+    this.updateCutPlane();
+  }
+
+  updateCutPlane() {
+    if (!this.bodyBoundsValid || !this.cutPlaneMesh) return;
+
+    const size = this.bodyBounds.getSize(new THREE.Vector3());
+    const center = this.bodyBounds.getCenter(new THREE.Vector3());
+    const config = PLANE_CONFIG[this.plane];
+    const frac = this.crosshairFrac[config.fracAxis];
+
+    this.cutPlaneMesh.rotation.set(0, 0, 0);
+    this.cutPlaneMesh.position.copy(center);
+
+    if (this.plane === "axial") {
+      const y = this.axisCoordinate("y", frac);
+      this.cutPlaneMesh.rotation.x = Math.PI / 2;
+      this.cutPlaneMesh.position.y = y;
+      this.cutPlaneMesh.scale.set(size.x * 1.06, size.z * 1.06, 1);
+      this.clippingPlane.set(new THREE.Vector3(0, -1, 0), y);
+    }
+    else if (this.plane === "coronal") {
+      const z = this.axisCoordinate("z", frac);
+      this.cutPlaneMesh.position.z = z;
+      this.cutPlaneMesh.scale.set(size.x * 1.06, size.y * 1.06, 1);
+      this.clippingPlane.set(new THREE.Vector3(0, 0, -1), z);
+    }
+    else {
+      const x = this.axisCoordinate("x", frac);
+      this.cutPlaneMesh.rotation.y = Math.PI / 2;
+      this.cutPlaneMesh.position.x = x;
+      this.cutPlaneMesh.scale.set(size.z * 1.06, size.y * 1.06, 1);
+      this.clippingPlane.set(new THREE.Vector3(-1, 0, 0), x);
+    }
+
+    this.cutPlaneMesh.visible = this.planeVisible;
+    this.refreshHighlights();
   }
 
   setPlaneVisible(visible) {
-    this.cutPlane.visible = Boolean(visible);
+    this.planeVisible = Boolean(visible);
+    this.cutPlaneMesh.visible = this.planeVisible;
   }
 
-  getSelectedStructure() {
-    return this.selectedId ? getStructure(this.selectedId) : null;
+  setClippingEnabled(enabled) {
+    this.clippingEnabled = Boolean(enabled);
+    this.refreshHighlights();
+  }
+
+  fractionBoundsForStructure(id) {
+    if (!this.bodyBoundsValid) return null;
+
+    const box = this.structureBox(id);
+    if (box.isEmpty()) return null;
+
+    const size = this.bodyBounds.getSize(new THREE.Vector3());
+    const toFrac = (value, min, span) => {
+      if (span <= 0) return 0.5;
+      return clamp((value - min) / span, 0, 1);
+    };
+
+    return {
+      min: [
+        toFrac(box.min.x, this.bodyBounds.min.x, size.x),
+        toFrac(box.min.y, this.bodyBounds.min.y, size.y),
+        toFrac(box.min.z, this.bodyBounds.min.z, size.z)
+      ],
+      max: [
+        toFrac(box.max.x, this.bodyBounds.min.x, size.x),
+        toFrac(box.max.y, this.bodyBounds.min.y, size.y),
+        toFrac(box.max.z, this.bodyBounds.min.z, size.z)
+      ]
+    };
+  }
+
+  structuresAtFraction(plane, fraction) {
+    const config = PLANE_CONFIG[plane];
+    const axis = config.fracAxis;
+    const f = clamp(fraction, 0, 1);
+
+    return STRUCTURES.filter((structure) => {
+      const bounds = this.fractionBoundsForStructure(structure.id);
+      if (!bounds) return false;
+      return f >= bounds.min[axis] - 0.008 && f <= bounds.max[axis] + 0.008;
+    });
+  }
+
+  getCoverage() {
+    return STRUCTURES.map((structure) => ({
+      id: structure.id,
+      name: structure.name,
+      meshCount: (this.structureMeshes.get(structure.id) || []).length
+    }));
   }
 
   dispose() {
     cancelAnimationFrame(this.animationFrame);
-    if (this.resizeObserver) this.resizeObserver.disconnect();
+    this.resizeObserver?.disconnect();
     this.controls.dispose();
     this.renderer.dispose();
 
     this.scene.traverse(function (object) {
       if (object.geometry) object.geometry.dispose();
-      if (object.material) {
-        const materials = Array.isArray(object.material) ? object.material : [object.material];
-        materials.forEach(function (material) {
-          if (material && material.dispose) material.dispose();
-        });
-      }
+      const materials = object.material
+        ? (Array.isArray(object.material) ? object.material : [object.material])
+        : [];
+      materials.forEach(function (material) {
+        material.dispose?.();
+      });
     });
   }
 }
