@@ -187,6 +187,12 @@ export class Exam3DViewer {
     this.applySegmentationColormap();
   }
 
+  setCrosshairVisible(visible) {
+    if (!this.nv) return;
+    this.nv.opts.show3Dcrosshair = Boolean(visible);
+    this.nv.drawScene();
+  }
+
   setClipPlane(enabled) {
     if (!this.nv) return;
 
