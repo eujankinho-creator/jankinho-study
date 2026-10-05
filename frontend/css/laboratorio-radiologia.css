@@ -361,3 +361,28 @@
   .color-toggle{height:28px;padding:0 8px}
   .color-toggle span{font-size:8px}
 }
+
+
+/* v-stack10 · nome fora da imagem + realce forte com contorno */
+.plane-header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.plane-header-right b{
+  max-width:220px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#ff8f9b;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.01em;
+}
+.plane-header-right small{
+  flex:0 0 auto;
+}
+.image-stage .anatomy-tooltip{
+  display:none !important;
+}
