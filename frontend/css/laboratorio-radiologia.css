@@ -269,3 +269,51 @@
     grid-template-columns:1fr;
   }
 }
+
+
+/* v-stack7 · identificação anatômica por clique */
+.anatomy-tooltip{
+  position:absolute;
+  z-index:20;
+  min-width:176px;
+  max-width:220px;
+  padding:10px 12px;
+  border:1px solid rgba(121,211,255,.28);
+  border-radius:10px;
+  background:rgba(8,13,19,.94);
+  box-shadow:0 14px 38px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.02) inset;
+  backdrop-filter:blur(10px);
+  opacity:0;
+  transform:translateY(4px) scale(.98);
+  pointer-events:none;
+  transition:opacity .14s ease,transform .14s ease;
+}
+.anatomy-tooltip.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.anatomy-tooltip span{
+  display:block;
+  margin-bottom:3px;
+  color:var(--ct-accent);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.anatomy-tooltip strong{
+  display:block;
+  color:var(--ct-text);
+  font-size:13px;
+  line-height:1.2;
+}
+.anatomy-tooltip small{
+  display:block;
+  margin-top:3px;
+  color:var(--ct-muted);
+  font-size:8px;
+  line-height:1.35;
+}
+.anatomy-tooltip.is-empty{
+  border-color:rgba(255,255,255,.12);
+}
