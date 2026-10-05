@@ -229,6 +229,9 @@ function createStructureList(radiology) {
   if (!container) return;
   container.innerHTML = "";
 
+  const previousSearch = container.parentElement?.querySelector(".structure-search");
+  if (previousSearch) previousSearch.remove();
+
   const search = document.createElement("input");
   search.type = "search";
   search.className = "structure-search";
