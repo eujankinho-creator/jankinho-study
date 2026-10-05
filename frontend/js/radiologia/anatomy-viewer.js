@@ -3,8 +3,8 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { STRUCTURES, ANATOMY_BOUNDS, getStructure } from "./data.js";
 
 const DEFAULT_CAMERA = Object.freeze({
-  position: [6.4, 4.7, 7.3],
-  target: [0, 0.1, 0]
+  position: [8.4, 6.1, 9.8],
+  target: [0, 0.05, 0]
 });
 
 function makeMaterial(structure) {
@@ -21,7 +21,7 @@ function makeMaterial(structure) {
 }
 
 function organicGeometry(shape) {
-  const geometry = new THREE.SphereGeometry(1, 44, 32);
+  const geometry = new THREE.SphereGeometry(1, 32, 22);
   const position = geometry.attributes.position;
   const vertex = new THREE.Vector3();
 
@@ -76,7 +76,7 @@ function makeTube(points, radius, material, segments) {
   );
 
   return new THREE.Mesh(
-    new THREE.TubeGeometry(curve, segments || 36, radius, 12, false),
+    new THREE.TubeGeometry(curve, segments || 28, radius, 9, false),
     material
   );
 }
@@ -184,7 +184,7 @@ function makeOrganGroup(structure, material) {
 
   if (structure.id === "stomach") {
     const lumen = new THREE.Mesh(
-      new THREE.SphereGeometry(0.82, 30, 20),
+      new THREE.SphereGeometry(0.82, 24, 16),
       new THREE.MeshBasicMaterial({
         color: 0x2a2022,
         transparent: true,
@@ -245,7 +245,7 @@ export class AnatomyViewer {
 
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x070b10);
-    this.scene.fog = new THREE.Fog(0x070b10, 10, 18);
+    this.scene.fog = new THREE.Fog(0x070b10, 12, 26);
 
     this.camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
     this.camera.position.set.apply(this.camera.position, DEFAULT_CAMERA.position);
@@ -256,7 +256,7 @@ export class AnatomyViewer {
       alpha: false,
       powerPreference: "high-performance"
     });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.08;
@@ -266,8 +266,8 @@ export class AnatomyViewer {
     this.controls.dampingFactor = 0.075;
     this.controls.enablePan = true;
     this.controls.screenSpacePanning = true;
-    this.controls.minDistance = 4.4;
-    this.controls.maxDistance = 16;
+    this.controls.minDistance = 5.6;
+    this.controls.maxDistance = 22;
     this.controls.target.set.apply(this.controls.target, DEFAULT_CAMERA.target);
 
     this.raycaster = new THREE.Raycaster();
@@ -288,6 +288,10 @@ export class AnatomyViewer {
     this.canvas.addEventListener("pointerleave", this.onPointerLeave.bind(this));
     this.canvas.addEventListener("pointerdown", this.onPointerDown.bind(this));
     this.canvas.addEventListener("pointerup", this.onPointerUp.bind(this));
+
+    this.lastFrame = 0;
+    this.frameInterval = 1000 / 45;
+    this._animate = this.animate.bind(this);
 
     this.resize();
     this.animate();
@@ -312,7 +316,7 @@ export class AnatomyViewer {
 
   addContextGeometry() {
     const torso = new THREE.Mesh(
-      new THREE.SphereGeometry(1, 48, 34),
+      new THREE.SphereGeometry(1, 34, 24),
       new THREE.MeshPhysicalMaterial({
         color: 0x7d94a7,
         roughness: 0.36,
@@ -328,7 +332,7 @@ export class AnatomyViewer {
     this.scene.add(torso);
 
     const bodyEdges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(new THREE.SphereGeometry(1, 28, 20), 24),
+      new THREE.EdgesGeometry(new THREE.SphereGeometry(1, 22, 16), 24),
       new THREE.LineBasicMaterial({
         color: 0x5d7183,
         transparent: true,
@@ -348,7 +352,7 @@ export class AnatomyViewer {
 
     for (let i = 0; i < 10; i += 1) {
       const vertebra = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.22 - i * 0.004, 0.23 - i * 0.004, 0.22, 18),
+        new THREE.CylinderGeometry(0.22 - i * 0.004, 0.23 - i * 0.004, 0.22, 12),
         spineMaterial
       );
       vertebra.rotation.x = Math.PI / 2;
@@ -390,7 +394,7 @@ export class AnatomyViewer {
     const parent = this.canvas.parentElement || this.canvas;
     const width = Math.max(1, parent.clientWidth);
     const height = Math.max(1, parent.clientHeight);
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
 
     if (
       this.canvas.width !== Math.round(width * pixelRatio) ||
@@ -403,8 +407,15 @@ export class AnatomyViewer {
     }
   }
 
-  animate() {
-    this.animationFrame = requestAnimationFrame(this.animate.bind(this));
+  animate(timestamp) {
+    this.animationFrame = requestAnimationFrame(this._animate);
+
+    if (document.hidden) return;
+
+    const now = Number(timestamp) || performance.now();
+    if (now - this.lastFrame < this.frameInterval) return;
+    this.lastFrame = now;
+
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
@@ -541,7 +552,7 @@ export class AnatomyViewer {
     const direction = new THREE.Vector3(1.15, 0.8, 1.3).normalize();
 
     this.controls.target.copy(center);
-    this.camera.position.copy(center.clone().add(direction.multiplyScalar(radius * 4.3)));
+    this.camera.position.copy(center.clone().add(direction.multiplyScalar(radius * 5.0)));
     this.controls.update();
   }
 
