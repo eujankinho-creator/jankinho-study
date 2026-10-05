@@ -83,12 +83,20 @@ const manifest = {
     files: []
   },
   radiology: {
-    file: "CT_Abdo.nii.gz",
-    source: "NiiVue demo images / Slicer3D example dataset",
-    credit: "Steve Pieper",
-    originalDataset: "CTA-cardio.nrrd",
-    note:
-      "Public demonstration CT distributed by the NiiVue sample-image repository. It is not the same subject as the HRA 3D anatomy."
+    defaultExam: {
+      ct: "totalseg_example_ct.nii.gz",
+      segmentation: "totalseg_example_seg.nii.gz",
+      source: "TotalSegmentator repository reference files",
+      publisher: "University Hospital Basel / TotalSegmentator contributors",
+      license: "Apache-2.0 repository license",
+      registration: "exact voxel-space correspondence between CT and segmentation"
+    },
+    secondaryDemo: {
+      file: "CT_Abdo.nii.gz",
+      source: "NiiVue demo images / Slicer3D example dataset",
+      credit: "Steve Pieper",
+      originalDataset: "CTA-cardio.nrrd"
+    }
   },
   viewer: {
     name: "NiiVue",
@@ -151,10 +159,39 @@ await download(
   }
 );
 
+await download(
+  "https://raw.githubusercontent.com/wasserth/TotalSegmentator/master/tests/reference_files/example_ct.nii.gz",
+  path.join(dataTarget, "totalseg_example_ct.nii.gz"),
+  {
+    label: "TotalSegmentator example CT",
+    minBytes: 500000,
+    timeoutMs: 180000
+  }
+);
+
+await download(
+  "https://raw.githubusercontent.com/wasserth/TotalSegmentator/master/tests/reference_files/example_seg.nii.gz",
+  path.join(dataTarget, "totalseg_example_seg.nii.gz"),
+  {
+    label: "TotalSegmentator example segmentation",
+    minBytes: 10000,
+    timeoutMs: 180000
+  }
+);
+
+await download(
+  "https://raw.githubusercontent.com/wasserth/TotalSegmentator/master/LICENSE",
+  path.join(dataTarget, "TOTAL_SEGMENTATOR_LICENSE.txt"),
+  {
+    label: "TotalSegmentator Apache-2.0 license",
+    minBytes: 5000
+  }
+);
+
 await writeFile(
   path.join(dataTarget, "sources.json"),
   JSON.stringify(manifest, null, 2) + "\n",
   "utf8"
 );
 
-console.log("[radiology-assets] Anatomia HRA real + CT real + NiiVue preparados.");
+console.log("[radiology-assets] HRA + CT real + TotalSegmentator CT/seg co-registrados + NiiVue preparados.");

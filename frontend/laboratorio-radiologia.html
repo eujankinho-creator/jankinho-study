@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-real2">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-coreg1">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -66,7 +66,7 @@
     <header class="header">
       <div>
         <div class="header-title">Laboratório</div>
-        <span class="rad-header-subtitle">Atlas anatômico real ↔ TC multiplanar real</span>
+        <span class="rad-header-subtitle">Mesmo exame real · 3D segmentado ↔ TC multiplanar</span>
       </div>
 
       <div class="header-user">
@@ -94,8 +94,8 @@
 
         <div class="rad-heading-badge real-badge">
           <span>MATERIAL REAL</span>
-          <strong>HRA 3D + TC NIfTI</strong>
-          <small>sem órgãos desenhados por formas geométricas</small>
+          <strong>CT + SEG · MESMO EXAME</strong>
+          <small>3D derivado dos voxels reais e da segmentação</small>
         </div>
       </section>
 
@@ -159,13 +159,13 @@
           <span class="sync-pulse"></span>
           <div>
             <small>NO MODELO 3D</small>
-            <strong id="selectedPlaneState">Carregando anatomia HRA...</strong>
+            <strong id="selectedPlaneState">Carregando CT e segmentação...</strong>
           </div>
         </div>
 
-        <div class="rad-warning-chip real-warning" title="O atlas HRA e a TC são materiais reais, mas não pertencem ao mesmo sujeito.">
-          <span>≠</span>
-          HRA e TC reais · sujeitos diferentes · sem falso registro DICOM
+        <div class="rad-warning-chip real-warning exact-match-chip" title="O 3D e os cortes usam o mesmo volume e a mesma segmentação.">
+          <span>✓</span>
+          correspondência voxel a voxel · mesmo exame
         </div>
       </section>
 
@@ -174,7 +174,7 @@
           <div class="panel-title-row">
             <div>
               <span class="eyebrow">ANATOMIA DO EXAME · 3D</span>
-              <h2>Human Reference Atlas</h2>
+              <h2>Reconstrução 3D do exame</h2>
             </div>
             <div class="panel-meta">
               <span id="currentPlaneLabel">Axial</span>
@@ -184,7 +184,7 @@
 
           <div class="anatomy-category-tabs" aria-label="Camadas anatômicas">
             <button class="active" type="button" data-anatomy-category="bones" aria-pressed="true">
-              Ossos e cartilagens
+              Contexto ósseo
             </button>
             <button class="active" type="button" data-anatomy-category="vessels" aria-pressed="true">
               Vasos
@@ -193,7 +193,7 @@
               Órgãos
             </button>
             <button class="active" type="button" data-anatomy-category="body" aria-pressed="true">
-              Contorno corporal
+              Contorno CT
             </button>
           </div>
 
@@ -201,12 +201,12 @@
             <button id="resetAnatomy" type="button" title="Resetar câmera">↺ <span>Reset</span></button>
             <button id="focusAnatomy" type="button" title="Enquadrar estrutura">◎ <span>Enquadrar</span></button>
             <button id="transparencyToggle" type="button" aria-pressed="false">◐ <span>Transparência</span></button>
-            <button id="planeToggle" class="active" type="button" aria-pressed="true">▱ <span>Plano</span></button>
+            <button id="planeToggle" class="active" type="button" aria-pressed="true">⌖ <span>Cruzamento</span></button>
             <button id="clipToggle" type="button" aria-pressed="false">✂ <span>Corte no 3D</span></button>
           </div>
 
           <div class="anatomy-stage real-anatomy-stage">
-            <canvas id="anatomyCanvas" aria-label="Atlas anatômico 3D HRA interativo"></canvas>
+            <canvas id="anatomyCanvas" aria-label="Reconstrução 3D do mesmo exame CT segmentado"></canvas>
 
             <div class="anatomy-orientation" aria-hidden="true">
               <span class="orient-s">S</span>
@@ -218,8 +218,8 @@
             </div>
 
             <div class="real-model-seal">
-              <span>HRA</span>
-              <div><strong>Human Reference Atlas</strong><small>CC BY 4.0 · NIH / HuBMAP</small></div>
+              <span>CT</span>
+              <div><strong>Mesmo exame em 3D</strong><small>TotalSegmentator · voxel a voxel</small></div>
             </div>
 
             <div class="stage-tip">
@@ -239,10 +239,10 @@
           <div class="structure-dock">
             <div class="structure-dock-head">
               <div>
-                <span>ESTRUTURAS REAIS DO HRA</span>
+                <span>ESTRUTURAS SEGMENTADAS DO EXAME</span>
                 <strong>Selecionar / ocultar</strong>
               </div>
-              <small>malhas GLB</small>
+              <small>labels NIfTI</small>
             </div>
             <div id="structureList" class="structure-list"></div>
           </div>
@@ -252,21 +252,22 @@
           <div class="selected-radiology-bar">
             <div>
               <span>NESTE PONTO</span>
-              <strong id="selectedRadiologyName">Estrutura selecionada no HRA</strong>
+              <strong id="selectedRadiologyName">Clique em uma estrutura segmentada</strong>
             </div>
             <div class="selected-actions">
+              <button id="segmentationToggle" class="active" type="button" aria-pressed="true">Cor ligada</button>
               <button id="mprView" type="button">MPR</button>
-              <span id="voxelReadout">TC real carregando...</span>
+              <span id="voxelReadout">TC + SEG carregando...</span>
             </div>
           </div>
 
           <div class="panel-title-row">
             <div>
               <span class="eyebrow">TC MULTIPLANAR REAL</span>
-              <h2 id="studyName">TC Abdome · dataset real de demonstração</h2>
+              <h2 id="studyName">TC segmentada · mesmo exame 3D/MPR</h2>
             </div>
             <div class="study-chip real-study-chip">
-              <span id="studyModality">TC</span>
+              <span id="studyModality">TC + SEG</span>
               <strong id="studySlices">carregando voxels</strong>
             </div>
           </div>
@@ -277,7 +278,7 @@
             <div class="slice-readout real-slice-readout">
               <span>PLANO ATIVO</span>
               <strong><b id="sliceCurrent">1</b> / <b id="sliceTotal">1</b></strong>
-              <small id="ctDatasetLabel">CT_Abdo · NIfTI real</small>
+              <small id="ctDatasetLabel">CT + segmentação co-registrada</small>
             </div>
 
             <div class="image-instructions">
@@ -317,11 +318,11 @@
         <article class="info-card structure-info-card">
           <div class="info-card-head">
             <span>ESTRUTURA SELECIONADA</span>
-            <strong>malha HRA</strong>
+            <strong>label do mesmo exame</strong>
           </div>
 
           <div id="structureInfoEmpty" class="info-empty">
-            Clique em uma estrutura real do atlas.
+            Clique em uma estrutura segmentada do exame.
           </div>
 
           <div id="structureInfoContent" class="structure-info-content" hidden>
@@ -336,8 +337,8 @@
             <p id="structureDescription"></p>
 
             <div class="structure-facts">
-              <div><span>MATERIAL</span><strong id="structureStudies">HRA 3D · TC real</strong></div>
-              <div><span>GEOMETRIA</span><strong id="structureMeshCount">malhas HRA</strong></div>
+              <div><span>MATERIAL</span><strong id="structureStudies">Mesmo CT · mesma segmentação</strong></div>
+              <div><span>GEOMETRIA</span><strong id="structureMeshCount">voxels segmentados</strong></div>
             </div>
           </div>
         </article>
@@ -345,11 +346,11 @@
         <article class="info-card slice-info-card">
           <div class="info-card-head">
             <span>NO NÍVEL 3D ATUAL</span>
-            <strong>interseção pelas malhas</strong>
+            <strong>interseção por voxels</strong>
           </div>
 
           <p class="info-card-copy">
-            Estas estruturas reais do HRA cruzam o plano atualmente mostrado no modelo 3D.
+            Estas estruturas segmentadas no próprio exame cruzam o plano atualmente mostrado.
           </p>
           <div id="sliceStructures" class="slice-structures"></div>
         </article>
@@ -361,16 +362,16 @@
           </div>
 
           <dl>
-            <div><dt>Anatomia</dt><dd>Human Reference Atlas · HuBMAP / NIH</dd></div>
-            <div><dt>TC</dt><dd id="studySource">NiiVue demo images / Slicer3D example dataset</dd></div>
-            <div><dt>Crédito TC</dt><dd>Steve Pieper</dd></div>
-            <div><dt>Licença / fonte</dt><dd id="studyLicense">Proveniência pública documentada</dd></div>
+            <div><dt>3D</dt><dd>Reconstrução do próprio CT + segmentação</dd></div>
+            <div><dt>TC / SEG</dt><dd id="studySource">TotalSegmentator · arquivos de referência</dd></div>
+            <div><dt>Correspondência</dt><dd>mesmo espaço voxel · sem aproximação</dd></div>
+            <div><dt>Licença / fonte</dt><dd id="studyLicense">Apache-2.0 · repositório TotalSegmentator</dd></div>
           </dl>
 
           <p class="metadata-note">
-            A anatomia HRA e a TC são reais, mas não são do mesmo sujeito. O Cortex
-            não inventa uma transformação DICOM entre eles: a posição 3D ↔ TC é uma
-            correlação didática relativa até um dataset segmentado/co-registrado ser usado.
+            O 3D e os cortes desta visualização são derivados do mesmo CT e da mesma
+            segmentação NIfTI. Ao mover o cruzamento ou selecionar uma estrutura, a
+            posição é compartilhada diretamente no espaço voxel do exame.
           </p>
         </article>
       </section>
@@ -400,7 +401,7 @@
 
   <div id="anatomyTooltip" class="rad-tooltip" hidden></div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-real2"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-coreg1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
