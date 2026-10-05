@@ -2592,3 +2592,156 @@
     bottom: 42px;
   }
 }
+
+
+/* RADIOLOGIA PREMIUM v5 · referência lateral + zoom-out */
+
+.real-workspace {
+  grid-template-columns: minmax(420px, .86fr) minmax(720px, 1.52fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.real-anatomy-stage {
+  min-height: 540px;
+  height: clamp(540px, 61vh, 700px);
+}
+
+.radiology-multiview {
+  min-height: 640px;
+  height: clamp(640px, 69vh, 800px);
+  grid-template-columns: minmax(0, 1fr) clamp(185px, 25%, 260px);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  padding: 8px;
+  contain: layout paint;
+}
+
+.rad-view-tile.is-primary {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.rad-view-tile.secondary-top {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.rad-view-tile.secondary-bottom {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.rad-view-tile.is-primary,
+.rad-view-tile.is-secondary {
+  min-width: 0;
+  min-height: 0;
+}
+
+.rad-view-tile.is-secondary .rad-view-head {
+  min-height: 24px;
+}
+
+.rad-view-tile.is-secondary .rad-view-head strong {
+  font-size: 5.8px;
+}
+
+.rad-view-tile canvas {
+  image-rendering: auto;
+  will-change: auto;
+}
+
+.radiology-multiview .real-slice-readout {
+  left: 15px;
+  bottom: 15px;
+}
+
+.radiology-multiview .image-instructions {
+  right: calc(clamp(185px, 25%, 260px) + 24px);
+  bottom: 15px;
+  max-width: 46%;
+}
+
+@media (min-width: 1500px) {
+  .real-workspace {
+    grid-template-columns: minmax(470px, .84fr) minmax(820px, 1.58fr);
+  }
+
+  .radiology-multiview {
+    min-height: 680px;
+    height: clamp(680px, 70vh, 820px);
+    grid-template-columns: minmax(0, 1fr) clamp(205px, 24%, 275px);
+  }
+}
+
+@media (max-width: 1240px) {
+  .real-workspace {
+    grid-template-columns: minmax(390px, .9fr) minmax(590px, 1.4fr);
+  }
+
+  .radiology-multiview {
+    min-height: 590px;
+    height: 66vh;
+    grid-template-columns: minmax(0, 1fr) clamp(168px, 26%, 220px);
+  }
+
+  .real-anatomy-stage {
+    min-height: 500px;
+    height: 58vh;
+  }
+}
+
+@media (max-width: 1120px) {
+  .real-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .radiology-multiview {
+    min-height: 620px;
+    height: 68vh;
+    grid-template-columns: minmax(0, 1fr) clamp(180px, 25%, 240px);
+  }
+
+  .real-anatomy-stage {
+    min-height: 500px;
+    height: 59vh;
+  }
+}
+
+@media (max-width: 760px) {
+  .radiology-multiview {
+    min-height: 555px;
+    height: 67vh;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(330px, 1fr) 165px;
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .rad-view-tile.is-primary {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+
+  .rad-view-tile.secondary-top {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .rad-view-tile.secondary-bottom {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .radiology-multiview .image-instructions {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .radiology-multiview {
+    min-height: 500px;
+    height: 62vh;
+    grid-template-rows: minmax(320px, 1fr) 138px;
+  }
+}
