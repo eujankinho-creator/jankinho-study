@@ -1,4 +1,4 @@
-import { mkdir, cp, writeFile, readFile, stat } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -11,30 +11,6 @@ const dataTarget = path.join(frontend, "data", "radiology");
 await mkdir(vendorTarget, { recursive: true });
 await mkdir(modelTarget, { recursive: true });
 await mkdir(dataTarget, { recursive: true });
-
-const niivueCandidates = [
-  path.join(root, "node_modules", "@niivue", "niivue", "dist"),
-  path.join(root, "node_modules", "@niivue", "niivue", "build")
-];
-
-let niivueCopied = false;
-for (const candidate of niivueCandidates) {
-  try {
-    await stat(candidate);
-    if (candidate.endsWith("dist")) {
-      await cp(candidate, vendorTarget, { recursive: true, force: true });
-    }
-    else {
-      await cp(candidate, path.join(vendorTarget, "build"), { recursive: true, force: true });
-    }
-    niivueCopied = true;
-  }
-  catch (_) {}
-}
-
-if (!niivueCopied) {
-  throw new Error("Nao foi possivel localizar os arquivos do @niivue/niivue.");
-}
 
 async function download(url, destination, options = {}) {
   const label = options.label || path.basename(destination);
@@ -70,6 +46,16 @@ async function download(url, destination, options = {}) {
 
   return bytes.byteLength;
 }
+
+await download(
+  "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.69.0/dist/index.js",
+  path.join(vendorTarget, "index.js"),
+  {
+    label: "NiiVue 0.69.0 browser bundle",
+    minBytes: 500000,
+    timeoutMs: 180000
+  }
+);
 
 const ANATRIA_BASE =
   "https://raw.githubusercontent.com/Nurkan1/Anatria-3D/main/public/anatomy";
@@ -170,22 +156,5 @@ await writeFile(
   JSON.stringify(manifest, null, 2) + "\n",
   "utf8"
 );
-
-const distIndex = path.join(vendorTarget, "index.js");
-try {
-  await stat(distIndex);
-}
-catch (_) {
-  const minIndex = path.join(vendorTarget, "index.min.js");
-  try {
-    const bytes = await readFile(minIndex);
-    await writeFile(distIndex, bytes);
-  }
-  catch (_) {
-    throw new Error(
-      "O bundle ESM do NiiVue nao foi encontrado em dist/index.js nem dist/index.min.js."
-    );
-  }
-}
 
 console.log("[radiology-assets] Anatomia HRA real + CT real + NiiVue preparados.");
