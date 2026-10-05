@@ -23,7 +23,12 @@ const state = {
     ["vessels", true],
     ["organs", true],
     ["body", true]
-  ])
+  ]),
+  atlasCalibration: [
+    { a: 1, b: 0 },
+    { a: 1, b: 0 },
+    { a: 1, b: 0 }
+  ]
 };
 
 async function api(url, options) {
@@ -81,6 +86,76 @@ function showBootError(message) {
 
 function structureAvailable(id) {
   return state.availableIds.has(id);
+}
+
+function fitAxisCalibration(pairs) {
+  if (!Array.isArray(pairs) || pairs.length < 2) {
+    return { a: 1, b: 0 };
+  }
+
+  const meanX = pairs.reduce((sum, pair) => sum + pair.x, 0) / pairs.length;
+  const meanY = pairs.reduce((sum, pair) => sum + pair.y, 0) / pairs.length;
+
+  let covariance = 0;
+  let variance = 0;
+
+  pairs.forEach((pair) => {
+    covariance += (pair.x - meanX) * (pair.y - meanY);
+    variance += (pair.x - meanX) * (pair.x - meanX);
+  });
+
+  if (variance < 0.000001) return { a: 1, b: 0 };
+
+  const a = covariance / variance;
+  const b = meanY - a * meanX;
+
+  if (!Number.isFinite(a) || !Number.isFinite(b) || Math.abs(a) < 0.15 || Math.abs(a) > 3.2) {
+    return { a: 1, b: 0 };
+  }
+
+  return { a, b };
+}
+
+function buildAtlasCalibration(exam3d, radiology) {
+  const referenceViewer = radiology.viewers?.axial;
+  if (!referenceViewer?.labelCentroids) return;
+
+  const perAxis = [[], [], []];
+
+  STRUCTURES.forEach((structure) => {
+    const ctCenter = referenceViewer.labelCentroids.get(structure.label);
+    const atlasBounds = exam3d.fractionBoundsForStructure(structure.id);
+    if (!ctCenter || !atlasBounds) return;
+
+    const atlasCenter = atlasBounds.min.map((value, index) => {
+      return (value + atlasBounds.max[index]) / 2;
+    });
+
+    for (let axis = 0; axis < 3; axis += 1) {
+      perAxis[axis].push({
+        x: Number(ctCenter[axis]) || 0,
+        y: Number(atlasCenter[axis]) || 0
+      });
+    }
+  });
+
+  state.atlasCalibration = perAxis.map(fitAxisCalibration);
+}
+
+function mapExamFracToAtlas(frac) {
+  return frac.map((value, axis) => {
+    const calibration = state.atlasCalibration[axis] || { a: 1, b: 0 };
+    const mapped = calibration.a * value + calibration.b;
+    return Math.max(0, Math.min(1, mapped));
+  });
+}
+
+function syncAtlasToExam(exam3d) {
+  const mapped = mapExamFracToAtlas(state.frac);
+  const axis = PLANE_CONFIG[state.plane].fracAxis;
+
+  exam3d.setCrosshairFraction(mapped);
+  exam3d.setPlane(state.plane, mapped[axis]);
 }
 
 function updateStructureListSelection() {
@@ -233,6 +308,34 @@ function updateStructureInfo(radiology) {
   }
 }
 
+function updatePlaneHud(structures, radiology) {
+  const config = PLANE_CONFIG[state.plane];
+  const current = radiology.currentSliceIndex(state.plane) + 1;
+  const total = radiology.sliceCount(state.plane);
+  const selected = state.selectedId ? getStructure(state.selectedId) : null;
+  const selectedInPlane = selected
+    ? structures.some((structure) => structure.id === selected.id)
+    : false;
+
+  if ($("planeHudPlane")) {
+    $("planeHudPlane").textContent =
+      config.label.toUpperCase() + " · CORTE " + current + "/" + total;
+  }
+
+  if ($("planeHudTitle")) {
+    $("planeHudTitle").textContent = selectedInPlane
+      ? selected.name
+      : (structures[0]?.name || "Sem estrutura-alvo neste nível");
+  }
+
+  if ($("planeHudList")) {
+    const names = structures.slice(0, 5).map((structure) => structure.name);
+    $("planeHudList").textContent = names.length
+      ? names.join(" · ")
+      : "Mova o plano para explorar o exame";
+  }
+}
+
 function updateSlicePresence(exam3d, radiology) {
   const container = $("sliceStructures");
   if (!container) return;
@@ -241,6 +344,8 @@ function updateSlicePresence(exam3d, radiology) {
   const structures = radiology
     .structuresAtPlane(state.plane, state.frac[axis])
     .filter((structure) => structureAvailable(structure.id));
+
+  updatePlaneHud(structures, radiology);
 
   if (!structures.length) {
     container.innerHTML =
@@ -276,11 +381,19 @@ function selectStructure(id, exam3d, radiology, moveToStructure) {
   exam3d.selectStructure(structure.id);
   radiology.selectLabel(structure.label);
 
+  const ctCenter = radiology.viewers?.axial?.labelCentroids?.get(structure.label);
+  if (ctCenter) {
+    exam3d.setSelectionMarkerFraction(
+      mapExamFracToAtlas(ctCenter),
+      structure.color
+    );
+  }
+
   if (moveToStructure) {
     const moved = radiology.focusLabel(structure.label, true);
     if (moved) {
       state.frac = radiology.crosshairFrac.slice();
-      exam3d.setCrosshairFraction(state.frac, true);
+      syncAtlasToExam(exam3d);
     }
   }
 
@@ -289,6 +402,15 @@ function selectStructure(id, exam3d, radiology, moveToStructure) {
   updateSelectedStateBadge(radiology);
   updateSlicePresence(exam3d, radiology);
   syncSliceUi(exam3d, radiology);
+  const hraMeshes = exam3d.structureMeshes?.get(structure.id) || [];
+  if ($("selectedRadiologyName")) {
+    $("selectedRadiologyName").textContent =
+      structure.name +
+      (hraMeshes.length
+        ? " · marcado no exame e no atlas 3D"
+        : " · marcado no exame");
+  }
+
   announce(structure.name + " selecionado");
 }
 
@@ -328,11 +450,7 @@ function syncSliceUi(exam3d, radiology) {
       Math.round(state.frac[axis] * 100) + "% do eixo";
   }
 
-  exam3d.setCrosshairFraction(state.frac);
-  exam3d.setPlane(
-    state.plane,
-    state.frac[PLANE_CONFIG[state.plane].fracAxis]
-  );
+  syncAtlasToExam(exam3d);
   updateSelectedStateBadge(radiology);
   updateSlicePresence(exam3d, radiology);
 }
@@ -341,10 +459,7 @@ function setPlane(plane, exam3d, radiology) {
   if (!PLANE_CONFIG[plane]) return;
   state.plane = plane;
   radiology.setPlane(plane, true);
-  exam3d.setPlane(
-    plane,
-    state.frac[PLANE_CONFIG[plane].fracAxis]
-  );
+  syncAtlasToExam(exam3d);
   updatePlaneButtons();
   syncSliceUi(exam3d, radiology);
 }
@@ -449,21 +564,21 @@ function bindControls(exam3d, radiology) {
   $("sliceSlider")?.addEventListener("input", function () {
     radiology.setSlice(Number(this.value), true);
     state.frac = radiology.crosshairFrac.slice();
-    exam3d.setCrosshairFraction(state.frac, true);
+    syncAtlasToExam(exam3d);
     syncSliceUi(exam3d, radiology);
   });
 
   $("slicePrev")?.addEventListener("click", () => {
     radiology.setSlice(radiology.currentSliceIndex() - 1, true);
     state.frac = radiology.crosshairFrac.slice();
-    exam3d.setCrosshairFraction(state.frac, true);
+    syncAtlasToExam(exam3d);
     syncSliceUi(exam3d, radiology);
   });
 
   $("sliceNext")?.addEventListener("click", () => {
     radiology.setSlice(radiology.currentSliceIndex() + 1, true);
     state.frac = radiology.crosshairFrac.slice();
-    exam3d.setCrosshairFraction(state.frac, true);
+    syncAtlasToExam(exam3d);
     syncSliceUi(exam3d, radiology);
   });
 
@@ -551,11 +666,7 @@ async function boot() {
         state.frac = payload.frac.slice();
         state.plane = payload.plane || radiology.primaryPlane || state.plane;
 
-        exam3d.setCrosshairFraction(state.frac);
-        exam3d.setPlane(
-          state.plane,
-          state.frac[PLANE_CONFIG[state.plane].fracAxis]
-        );
+        syncAtlasToExam(exam3d);
 
         if (payload.intensityText && $("voxelReadout")) {
           $("voxelReadout").textContent = payload.intensityText;
@@ -567,10 +678,7 @@ async function boot() {
       },
       onPlaneChange: (plane) => {
         state.plane = plane;
-        exam3d.setPlane(
-          plane,
-          state.frac[PLANE_CONFIG[plane].fracAxis]
-        );
+        syncAtlasToExam(exam3d);
         updatePlaneButtons();
         syncSliceUi(exam3d, radiology);
       },
@@ -607,6 +715,7 @@ async function boot() {
   }
 
   state.availableIds = new Set(radiology.getAvailableStructureIds());
+  buildAtlasCalibration(exam3d, radiology);
 
   createStructureList(exam3d, radiology);
   bindControls(exam3d, radiology);
@@ -616,11 +725,7 @@ async function boot() {
 
   state.frac = radiology.crosshairFrac.slice();
   state.plane = radiology.primaryPlane || "axial";
-  exam3d.setCrosshairFraction(state.frac);
-  exam3d.setPlane(
-    state.plane,
-    state.frac[PLANE_CONFIG[state.plane].fracAxis]
-  );
+  syncAtlasToExam(exam3d);
   syncSliceUi(exam3d, radiology);
   updateStructureInfo(radiology);
 

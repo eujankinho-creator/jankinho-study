@@ -25,6 +25,7 @@ export class RadiologyMultiView {
       this.viewers[plane] = new RadiologyViewer(canvas, {
         plane,
         singlePlane: true,
+        qualityRole: plane === "axial" ? "primary" : "secondary",
         onLocationChange: (payload) => {
           this.handleViewerLocation(plane, payload);
         },
@@ -62,6 +63,7 @@ export class RadiologyMultiView {
     this.initializing = false;
 
     this.broadcastCrosshair(this.crosshairFrac, null);
+    this.applyQualityRoles();
 
     if (typeof this.options.onReady === "function") {
       this.options.onReady({
@@ -130,11 +132,27 @@ export class RadiologyMultiView {
     }
 
     requestAnimationFrame(() => {
-      window.dispatchEvent(new Event("resize"));
+      this.applyQualityRoles();
       PLANES.forEach((plane) => {
-        this.viewers[plane]?.nv?.drawScene();
+        const viewer = this.viewers[plane];
+        viewer?.syncCanvasResolution();
+        viewer?.nv?.drawScene();
       });
     });
+  }
+
+  applyQualityRoles() {
+    PLANES.forEach((plane) => {
+      const role = plane === this.primaryPlane ? "primary" : "secondary";
+      this.viewers[plane]?.setQualityRole(role);
+    });
+  }
+
+  getQualityReport() {
+    return PLANES.reduce((report, plane) => {
+      report[plane] = this.viewers[plane]?.getRenderQuality() || null;
+      return report;
+    }, {});
   }
 
   setPrimaryPlane(plane, silent) {
@@ -301,6 +319,7 @@ export class RadiologyMultiView {
 
   resetView() {
     this.activeViewer()?.resetView();
+    this.activeViewer()?.syncCanvasResolution();
   }
 
   setMultiplanar() {

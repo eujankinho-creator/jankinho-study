@@ -49,7 +49,7 @@ export class AnatomyViewer {
     this.scene.background = new THREE.Color(DEFAULT_BG);
     this.scene.fog = new THREE.Fog(DEFAULT_BG, 2.4, 8.8);
 
-    this.camera = new THREE.PerspectiveCamera(34, 1, 0.001, 1000);
+    this.camera = new THREE.PerspectiveCamera(32, 1, 0.001, 1000);
     this.camera.position.set(1.8, 1.1, 3.2);
 
     this.renderer = new THREE.WebGLRenderer({
@@ -62,7 +62,10 @@ export class AnatomyViewer {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.12;
     this.renderer.localClippingEnabled = true;
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const deviceRatio = window.devicePixelRatio || 1;
+    const hardwareThreads = Number(navigator.hardwareConcurrency || 8);
+    const maxPixelRatio = hardwareThreads <= 4 ? 1.25 : 1.55;
+    this.renderer.setPixelRatio(Math.min(deviceRatio, maxPixelRatio));
 
     this.controls = new OrbitControls(this.camera, this.canvas);
     this.controls.enableDamping = true;
@@ -90,13 +93,27 @@ export class AnatomyViewer {
     this.bodyBounds = new THREE.Box3();
     this.bodyBoundsValid = false;
     this.pointerDown = null;
+    this.hoverRaf = 0;
+    this.pendingPointer = null;
+    this.animationFrame = 0;
+    this.lastRenderAt = 0;
+    this.targetFrameMs = 1000 / 45;
+    this.isViewportVisible = true;
 
     this.addLights();
     this.addReferenceFloor();
     this.createCutPlane();
+    this.createSelectionMarker();
 
     this.resizeObserver = new ResizeObserver(this.resize.bind(this));
     this.resizeObserver.observe(this.canvas.parentElement || this.canvas);
+
+    if (typeof IntersectionObserver !== "undefined") {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        this.isViewportVisible = entries.some((entry) => entry.isIntersecting);
+      }, { threshold: 0.01 });
+      this.intersectionObserver.observe(this.canvas);
+    }
 
     this.canvas.addEventListener("pointermove", this.onPointerMove.bind(this));
     this.canvas.addEventListener("pointerleave", this.onPointerLeave.bind(this));
@@ -161,6 +178,92 @@ export class AnatomyViewer {
     this.scene.add(this.cutPlaneMesh);
 
     this.clippingPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
+  }
+
+  createSelectionMarker() {
+    const markerCanvas = document.createElement("canvas");
+    markerCanvas.width = 96;
+    markerCanvas.height = 96;
+    const context = markerCanvas.getContext("2d");
+
+    if (context) {
+      const gradient = context.createRadialGradient(48, 48, 4, 48, 48, 46);
+      gradient.addColorStop(0, "rgba(255,255,255,.95)");
+      gradient.addColorStop(.12, "rgba(114,210,255,.92)");
+      gradient.addColorStop(.28, "rgba(114,210,255,.18)");
+      gradient.addColorStop(.64, "rgba(114,210,255,.05)");
+      gradient.addColorStop(1, "rgba(114,210,255,0)");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, 96, 96);
+
+      context.strokeStyle = "rgba(226,247,255,.95)";
+      context.lineWidth = 3;
+      context.beginPath();
+      context.arc(48, 48, 18, 0, Math.PI * 2);
+      context.stroke();
+
+      context.lineWidth = 2;
+      context.beginPath();
+      context.moveTo(48, 18);
+      context.lineTo(48, 34);
+      context.moveTo(48, 62);
+      context.lineTo(48, 78);
+      context.moveTo(18, 48);
+      context.lineTo(34, 48);
+      context.moveTo(62, 48);
+      context.lineTo(78, 48);
+      context.stroke();
+    }
+
+    const texture = new THREE.CanvasTexture(markerCanvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+
+    const material = new THREE.SpriteMaterial({
+      map: texture,
+      color: 0xffffff,
+      transparent: true,
+      depthTest: false,
+      depthWrite: false,
+      opacity: 0.96
+    });
+
+    this.selectionMarker = new THREE.Sprite(material);
+    this.selectionMarker.visible = false;
+    this.selectionMarker.renderOrder = 80;
+    this.scene.add(this.selectionMarker);
+  }
+
+  setSelectionMarkerFraction(frac, color) {
+    if (!this.selectionMarker || !this.bodyBoundsValid) return;
+    if (!Array.isArray(frac) || frac.length < 3) {
+      this.selectionMarker.visible = false;
+      return;
+    }
+
+    const size = this.bodyBounds.getSize(new THREE.Vector3());
+    const markerSize = Math.max(size.x, size.y, size.z) * 0.055;
+
+    this.selectionMarker.position.set(
+      this.axisCoordinate("x", clamp(Number(frac[0]) || 0, 0, 1)),
+      this.axisCoordinate("y", clamp(Number(frac[2]) || 0, 0, 1)),
+      this.axisCoordinate("z", clamp(Number(frac[1]) || 0, 0, 1))
+    );
+    this.selectionMarker.scale.setScalar(markerSize);
+
+    if (color) {
+      this.selectionMarker.material.color.set(color);
+    }
+    else {
+      this.selectionMarker.material.color.set("#72d2ff");
+    }
+
+    this.selectionMarker.visible = true;
+  }
+
+  hideSelectionMarker() {
+    if (this.selectionMarker) {
+      this.selectionMarker.visible = false;
+    }
   }
 
   async loadAssets() {
@@ -378,8 +481,13 @@ export class AnatomyViewer {
     this.camera.updateProjectionMatrix();
   }
 
-  animate() {
+  animate(now = 0) {
     this.animationFrame = requestAnimationFrame(this.animate.bind(this));
+
+    if (document.hidden || !this.isViewportVisible) return;
+    if (now - this.lastRenderAt < this.targetFrameMs) return;
+
+    this.lastRenderAt = now;
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
@@ -410,19 +518,36 @@ export class AnatomyViewer {
   }
 
   onPointerMove(event) {
-    const hit = this.hitTest(event);
-    const next = hit ? hit.id : null;
+    this.pendingPointer = {
+      clientX: event.clientX,
+      clientY: event.clientY
+    };
 
-    if (next !== this.hoveredId) {
-      this.hoveredId = next;
-      this.refreshHighlights();
-    }
+    if (this.hoverRaf) return;
 
-    this.canvas.style.cursor = next ? "pointer" : "grab";
+    this.hoverRaf = requestAnimationFrame(() => {
+      this.hoverRaf = 0;
+      const pointerEvent = this.pendingPointer;
+      this.pendingPointer = null;
+      if (!pointerEvent) return;
 
-    if (typeof this.options.onHover === "function") {
-      this.options.onHover(next ? getStructure(next) : null, event);
-    }
+      const hit = this.hitTest(pointerEvent);
+      const next = hit ? hit.id : null;
+
+      if (next !== this.hoveredId) {
+        this.hoveredId = next;
+        this.refreshHighlights();
+      }
+
+      this.canvas.style.cursor = next ? "pointer" : "grab";
+
+      if (typeof this.options.onHover === "function") {
+        this.options.onHover(
+          next ? getStructure(next) : null,
+          pointerEvent
+        );
+      }
+    });
   }
 
   onPointerLeave() {
@@ -672,12 +797,12 @@ export class AnatomyViewer {
     const size = this.bodyBounds.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z);
     const fov = THREE.MathUtils.degToRad(this.camera.fov);
-    const distance = maxDim / (2 * Math.tan(fov / 2)) * 1.15;
+    const distance = maxDim / (2 * Math.tan(fov / 2)) * 1.03;
 
     this.controls.target.copy(center);
     this.camera.position.set(
-      center.x + maxDim * 0.48,
-      center.y + maxDim * 0.07,
+      center.x + maxDim * 0.24,
+      center.y + maxDim * 0.035,
       center.z + distance
     );
     this.camera.near = Math.max(maxDim / 10000, 0.001);
@@ -827,7 +952,9 @@ export class AnatomyViewer {
 
   dispose() {
     cancelAnimationFrame(this.animationFrame);
+    cancelAnimationFrame(this.hoverRaf);
     this.resizeObserver?.disconnect();
+    this.intersectionObserver?.disconnect();
     this.controls.dispose();
     this.renderer.dispose();
 

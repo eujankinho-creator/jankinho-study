@@ -17,6 +17,16 @@ export class RadiologyViewer {
       ? this.options.plane
       : "axial";
     this.singlePlane = Boolean(this.options.singlePlane);
+    this.qualityRole = this.options.qualityRole === "primary"
+      ? "primary"
+      : "secondary";
+    this.renderScale = Number(this.options.renderScale) ||
+      (this.qualityRole === "primary" ? 1.42 : 0.78);
+    this.maxBackingPixels = this.qualityRole === "primary"
+      ? 2600000
+      : 620000;
+    this.resizeObserver = null;
+    this.resizeRaf = 0;
     this.crosshairFrac = [0.5, 0.5, 0.5];
     this.windowWidth = 400;
     this.windowLevel = 50;
@@ -37,12 +47,15 @@ export class RadiologyViewer {
       show3Dcrosshair: true,
       isColorbar: false,
       dragAndDropEnabled: false,
+      isResizeCanvas: false,
       onLocationChange: (data) => this.handleLocationChange(data)
     });
 
     this.nv.setSliceMM(true);
     this.nv.setRadiologicalConvention(true);
     await this.nv.attachTo(this.canvas.id);
+    this.installResizeObserver();
+    this.syncCanvasResolution();
 
     this.nv.opts.multiplanarShowRender = niivue.SHOW_RENDER.NEVER;
     this.nv.opts.isColorbar = false;
@@ -89,6 +102,7 @@ export class RadiologyViewer {
     this.setWindow(this.windowWidth, this.windowLevel);
     this.setCrosshairFraction(this.crosshairFrac, true);
     this.resetView();
+    this.syncCanvasResolution();
 
     if (typeof this.options.onReady === "function") {
       this.options.onReady({
@@ -236,6 +250,78 @@ export class RadiologyViewer {
       : -1;
     this.nv.updateGLVolume();
     this.nv.drawScene();
+  }
+
+  installResizeObserver() {
+    if (typeof ResizeObserver === "undefined") return;
+
+    const target = this.canvas.parentElement || this.canvas;
+    this.resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(this.resizeRaf);
+      this.resizeRaf = requestAnimationFrame(() => {
+        this.syncCanvasResolution();
+      });
+    });
+    this.resizeObserver.observe(target);
+  }
+
+  setQualityRole(role) {
+    const next = role === "primary" ? "primary" : "secondary";
+    if (this.qualityRole === next) {
+      this.syncCanvasResolution();
+      return;
+    }
+
+    this.qualityRole = next;
+    this.renderScale = next === "primary" ? 1.42 : 0.78;
+    this.maxBackingPixels = next === "primary" ? 2600000 : 620000;
+    this.syncCanvasResolution();
+  }
+
+  syncCanvasResolution() {
+    if (!this.canvas || !this.nv) return;
+
+    const rect = this.canvas.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const minRatio = this.qualityRole === "primary" ? 1.0 : 0.68;
+    const maxRatio = this.qualityRole === "primary" ? 2.05 : 1.12;
+    let ratio = clamp(dpr * this.renderScale, minRatio, maxRatio);
+
+    let width = Math.max(2, Math.round(rect.width * ratio));
+    let height = Math.max(2, Math.round(rect.height * ratio));
+    const pixels = width * height;
+
+    if (pixels > this.maxBackingPixels) {
+      const reduce = Math.sqrt(this.maxBackingPixels / pixels);
+      ratio *= reduce;
+      width = Math.max(2, Math.round(rect.width * ratio));
+      height = Math.max(2, Math.round(rect.height * ratio));
+    }
+
+    if (this.canvas.width === width && this.canvas.height === height) {
+      this.nv.drawScene();
+      return;
+    }
+
+    this.canvas.width = width;
+    this.canvas.height = height;
+    this.nv.resizeListener();
+    this.nv.drawScene();
+  }
+
+  getRenderQuality() {
+    const rect = this.canvas?.getBoundingClientRect?.();
+    if (!rect) return null;
+
+    return {
+      role: this.qualityRole,
+      cssWidth: Math.round(rect.width),
+      cssHeight: Math.round(rect.height),
+      backingWidth: this.canvas.width,
+      backingHeight: this.canvas.height
+    };
   }
 
   setPlane(plane, silent) {
@@ -471,6 +557,11 @@ export class RadiologyViewer {
     return STRUCTURES
       .filter((structure) => this.labelCentroids.has(structure.label))
       .map((structure) => structure.id);
+  }
+
+  dispose() {
+    cancelAnimationFrame(this.resizeRaf);
+    this.resizeObserver?.disconnect();
   }
 
   getState() {
