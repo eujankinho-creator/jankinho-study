@@ -381,6 +381,14 @@ function selectStructure(id, exam3d, radiology, moveToStructure) {
   exam3d.selectStructure(structure.id);
   radiology.selectLabel(structure.label);
 
+  const ctCenter = radiology.viewers?.axial?.labelCentroids?.get(structure.label);
+  if (ctCenter) {
+    exam3d.setSelectionMarkerFraction(
+      mapExamFracToAtlas(ctCenter),
+      structure.color
+    );
+  }
+
   if (moveToStructure) {
     const moved = radiology.focusLabel(structure.label, true);
     if (moved) {
