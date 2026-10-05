@@ -570,7 +570,7 @@ function bindControls(exam3d, radiology) {
   $("sliceNext")?.addEventListener("click", () => {
     radiology.setSlice(radiology.currentSliceIndex() + 1, true);
     state.frac = radiology.crosshairFrac.slice();
-    exam3d.setCrosshairFraction(state.frac, true);
+    syncAtlasToExam(exam3d);
     syncSliceUi(exam3d, radiology);
   });
 
