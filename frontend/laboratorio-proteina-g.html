@@ -62,7 +62,7 @@
     <header class="header gp-header">
       <div>
         <div class="header-title">Proteína G</div>
-        <span class="gp-header-subtitle">Visualização estrutural · célula → membrana → GPCR → Gs</span>
+        <span class="gp-header-subtitle">Biologia celular · GPCR · Gs · Gi/o · Gq/11</span>
       </div>
       <div class="header-user">
         <div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div>
@@ -75,7 +75,7 @@
         <a class="gp-back" href="/laboratorio.html"><span>←</span> Laboratórios</a>
         <div class="gp-source-chip">
           <span class="gp-source-dot"></span>
-          <div><small>BASE ESTRUTURAL</small><strong>PDB 3SN6 · β2AR–Gs</strong></div>
+          <div><small>BASE ESTRUTURAL</small><strong id="sourcePdbId">3SN6</strong></div>
         </div>
       </div>
 
@@ -84,12 +84,12 @@
           <span class="gp-kicker">CORTEX LAB · SINALIZAÇÃO MOLECULAR</span>
           <h1>Entre na célula e acompanhe o sinal <em>até o nível molecular.</em></h1>
           <p>
-            Explore o GPCR e o heterotrímero Gs com base na estrutura experimental 3SN6,
-            acompanhe GDP → GTP e veja a cascata até cAMP e resposta celular.
+            Entre na célula, aproxime-se da membrana e acompanhe vias representativas de Gs, Gi/o e Gq/11
+            usando estruturas experimentais quando disponíveis e representações educacionais claramente identificadas.
           </p>
         </div>
         <div class="gp-hero-meta">
-          <div><small>ESTRUTURA REAL</small><strong>3SN6</strong><span>3,20 Å · X-ray</span></div>
+          <div><small>ESTRUTURA REAL</small><strong id="heroStructure">3SN6</strong><span id="heroStructureMeta">3,20 Å · X-ray</span></div>
           <div><small>MODO</small><strong id="heroMode">Guiado</strong><span id="heroScale">Nível celular</span></div>
         </div>
       </section>
@@ -99,13 +99,13 @@
           <span>Gs</span><strong>AC ↑</strong><small>cAMP ↑</small>
         </button>
         <button class="gp-path-option" data-pathway="gi" type="button">
-          <span>Gi/o</span><strong>AC ↓</strong><small>arquitetura preparada</small>
+          <span>Gi/o</span><strong>AC ↓</strong><small>PDB 6DDE</small>
         </button>
         <button class="gp-path-option" data-pathway="gq" type="button">
-          <span>Gq/11</span><strong>PLCβ</strong><small>arquitetura preparada</small>
+          <span>Gq/11</span><strong>PLCβ</strong><small>PDB 8UQO</small>
         </button>
         <button class="gp-path-option" data-pathway="g12" type="button">
-          <span>G12/13</span><strong>RhoGEF</strong><small>arquitetura preparada</small>
+          <span>G12/13</span><strong>RhoGEF</strong><small>expansão futura</small>
         </button>
       </section>
 
@@ -127,9 +127,9 @@
               <label class="gp-representation-select">
                 <span>Representação</span>
                 <select id="representationSelect">
-                  <option value="cartoon">Cartoon estrutural</option>
-                  <option value="surface">Nuvem molecular</option>
-                  <option value="atomic">Atômica</option>
+                  <option value="cartoon">Visão estrutural · cartoon</option>
+                  <option value="surface">Visão molecular · superfície</option>
+                  <option value="atomic">Visão detalhada · atômica</option>
                 </select>
               </label>
 
@@ -233,12 +233,14 @@
             </div>
           </div>
 
-          <details class="gp-science-details">
+          <details class="gp-science-details" open>
             <summary>Base científica desta cena</summary>
             <div>
-              <strong>PDB 3SN6</strong>
-              <p>Complexo cristalográfico β2-adrenérgico–Gs. O GPCR e Gα/Gβ/Gγ são derivados das coordenadas experimentais. A célula, membrana, agonista, nucleotídeos, efetor e mensageiros são representações educacionais.</p>
-              <a href="https://www.rcsb.org/structure/3SN6" target="_blank" rel="noopener noreferrer">Abrir referência RCSB ↗</a>
+              <strong id="sourceTitle">Crystal structure of the beta2 adrenergic receptor-Gs protein complex</strong>
+              <p id="sourceMethod">X-RAY DIFFRACTION · 3,20 Å</p>
+              <p id="pathwaySummary">GPCR → Gαs → adenilato ciclase → cAMP → PKA</p>
+              <p>Estruturas experimentais vêm do RCSB PDB. Membrana, organelas, nucleotídeos em trânsito e mensageiros são representações educacionais quando não correspondem diretamente ao modelo experimental selecionado.</p>
+              <a id="sourceLink" href="https://www.rcsb.org/structure/3SN6" target="_blank" rel="noopener noreferrer">Abrir referência RCSB ↗</a>
             </div>
           </details>
         </aside>
@@ -266,12 +268,12 @@
 
       <section class="gp-disclaimer">
         <span>i</span>
-        <p><strong>Visualização educacional.</strong> Estruturas marcadas como experimentais derivam do PDB 3SN6. Elementos celulares e transições são representações didáticas e não devem ser interpretados como reconstrução microscópica literal.</p>
+        <p><strong>Visualização científica educacional.</strong> 3SN6, 6DDE e 8UQO são usados como bases experimentais para contextos específicos. Composições celulares, transições e segundos mensageiros são representações didáticas e não constituem uma reconstrução microscópica quantitativa literal.</p>
       </section>
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-proteina-g.js?v=20261005-gprotein-lab5"></script>
+  <script type="module" src="/js/laboratorio-proteina-g.js?v=20261005-gprotein-lab6"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
