@@ -359,7 +359,7 @@ try {
   }
 
   const manifest = {
-    version: 4,
+    version: 5,
     generatedAt: new Date().toISOString(),
     source: {
       name: "TotalSegmentator / MedOtter · caso s0024",
