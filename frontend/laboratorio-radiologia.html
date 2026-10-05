@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-rad1">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-real2">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -33,7 +33,7 @@
   <script type="importmap">
     {
       "imports": {
-        "three": "/vendor/three/three.module.js?v=20261005-rad1",
+        "three": "/vendor/three/three.module.js?v=20261005-real2",
         "three/addons/": "/vendor/three/addons/"
       }
     }
@@ -66,7 +66,7 @@
     <header class="header">
       <div>
         <div class="header-title">Laboratório</div>
-        <span class="rad-header-subtitle">Anatomia 3D ↔ imagem radiológica</span>
+        <span class="rad-header-subtitle">Atlas anatômico real ↔ TC multiplanar real</span>
       </div>
 
       <div class="header-user">
@@ -78,24 +78,24 @@
       </div>
     </header>
 
-    <main class="radiology-page">
+    <main class="radiology-page radiology-real-page">
       <section class="rad-heading">
         <div>
           <div class="rad-status">
             <span class="rad-status-dot"></span>
-            <span>AMBIENTE INTERATIVO · ABDOME</span>
+            <span>CORTEX LAB · RADIOLOGIA INTERATIVA</span>
           </div>
-          <h1>Laboratório de <em>Radiologia 3D</em></h1>
+          <h1>Radiologia <em>3D real</em></h1>
           <p>
-            Selecione uma estrutura anatômica e veja onde ela aparece no corte.
-            Navegue pela imagem e acompanhe o plano se deslocando no corpo.
+            Anatomia HRA em malhas reais de referência, volume de TC verdadeiro e planos
+            axial, coronal e sagital navegáveis no mesmo ambiente.
           </p>
         </div>
 
-        <div class="rad-heading-badge">
-          <span>RADIOLOGIA</span>
-          <strong>3D ↔ TC / RM</strong>
-          <small>Atlas didático sintético · sem dados de paciente</small>
+        <div class="rad-heading-badge real-badge">
+          <span>MATERIAL REAL</span>
+          <strong>HRA 3D + TC NIfTI</strong>
+          <small>sem órgãos desenhados por formas geométricas</small>
         </div>
       </section>
 
@@ -110,86 +110,103 @@
 
         <a class="lab-mode-link" href="/laboratorio-ecg.html">
           <span class="mode-icon">ECG</span>
-          <span>
-            <strong>ECG 3D</strong>
-            <small>Coração, eixos e derivações</small>
-          </span>
+          <span><strong>ECG 3D</strong><small>Coração, eixos e derivações</small></span>
         </a>
 
         <a class="lab-mode-link" href="/laboratorio-celula.html">
           <span class="mode-icon">Vm</span>
-          <span>
-            <strong>Membrana Viva</strong>
-            <small>Íons, canais e potencial</small>
-          </span>
+          <span><strong>Membrana Viva</strong><small>Íons, canais e potencial</small></span>
         </a>
 
         <a class="lab-mode-link" href="/laboratorio-proteina-g.html">
           <span class="mode-icon">Gα</span>
-          <span>
-            <strong>Proteína G</strong>
-            <small>GPCRs e transdução de sinal</small>
-          </span>
+          <span><strong>Proteína G</strong><small>GPCRs e transdução de sinal</small></span>
         </a>
       </nav>
 
       <div id="labBootError" class="rad-boot-error" hidden></div>
       <div id="liveStatus" class="sr-only" aria-live="polite"></div>
 
-      <section class="rad-control-strip" aria-label="Controles principais">
-        <div class="rad-control-group">
-          <span class="control-label">PLANO</span>
-          <div class="segmented-control">
-            <button type="button" class="active" data-plane="axial" aria-pressed="true">Axial</button>
-            <button type="button" data-plane="coronal" aria-pressed="false">Coronal</button>
-            <button type="button" data-plane="sagittal" aria-pressed="false">Sagital</button>
-          </div>
+      <section class="atlas-region-bar" aria-label="Regiões do atlas">
+        <div class="atlas-region-title">
+          <strong>Explore o atlas</strong>
+          <span>HRA · Visible Human Female</span>
         </div>
+        <button type="button" disabled>Cabeça <small>em breve</small></button>
+        <button type="button" disabled>Tórax <small>em breve</small></button>
+        <button type="button" class="active">Abdômen <small>ativo</small></button>
+        <button type="button" disabled>Pelve <small>em breve</small></button>
+        <button type="button" class="atlas-overview active">Visão geral</button>
+      </section>
 
+      <section class="rad-control-strip real-control-strip" aria-label="Controles principais">
         <div class="rad-control-group">
-          <span class="control-label">ESTUDO</span>
-          <div class="segmented-control modality-control">
-            <button type="button" class="active" data-modality="CT" aria-pressed="true">TC</button>
-            <button type="button" data-modality="MRI" aria-pressed="false">RM</button>
+          <span class="control-label">PLANO ATIVO</span>
+          <div class="segmented-control plane-control">
+            <button type="button" class="active" data-plane="axial" aria-pressed="true">
+              <i class="plane-dot axial-dot"></i>Axial
+            </button>
+            <button type="button" data-plane="coronal" aria-pressed="false">
+              <i class="plane-dot coronal-dot"></i>Coronal
+            </button>
+            <button type="button" data-plane="sagittal" aria-pressed="false">
+              <i class="plane-dot sagittal-dot"></i>Sagital
+            </button>
           </div>
         </div>
 
         <div class="rad-control-group rad-sync-indicator">
           <span class="sync-pulse"></span>
           <div>
-            <small>SINCRONIZAÇÃO</small>
-            <strong id="selectedPlaneState">Selecione uma estrutura</strong>
+            <small>NO MODELO 3D</small>
+            <strong id="selectedPlaneState">Carregando anatomia HRA...</strong>
           </div>
         </div>
 
-        <div class="rad-warning-chip" title="Este primeiro atlas usa geometria sintética, não coordenadas DICOM reais.">
-          <span>≈</span>
-          Correspondência anatômica aproximada
+        <div class="rad-warning-chip real-warning" title="O atlas HRA e a TC são materiais reais, mas não pertencem ao mesmo sujeito.">
+          <span>≠</span>
+          HRA e TC reais · sujeitos diferentes · sem falso registro DICOM
         </div>
       </section>
 
-      <section class="rad-workspace">
-        <article class="rad-panel anatomy-panel">
+      <section class="rad-workspace real-workspace">
+        <article class="rad-panel anatomy-panel real-anatomy-panel">
           <div class="panel-title-row">
             <div>
-              <span class="eyebrow">ANATOMIA 3D</span>
-              <h2>Abdome interativo</h2>
+              <span class="eyebrow">ANATOMIA DO EXAME · 3D</span>
+              <h2>Human Reference Atlas</h2>
             </div>
             <div class="panel-meta">
               <span id="currentPlaneLabel">Axial</span>
-              <strong>Arraste · zoom · pan</strong>
+              <strong id="activePlaneReadout">Axial ativo para o corte 3D</strong>
             </div>
+          </div>
+
+          <div class="anatomy-category-tabs" aria-label="Camadas anatômicas">
+            <button class="active" type="button" data-anatomy-category="bones" aria-pressed="true">
+              Ossos e cartilagens
+            </button>
+            <button class="active" type="button" data-anatomy-category="vessels" aria-pressed="true">
+              Vasos
+            </button>
+            <button class="active" type="button" data-anatomy-category="organs" aria-pressed="true">
+              Órgãos
+            </button>
+            <button class="active" type="button" data-anatomy-category="body" aria-pressed="true">
+              Contorno corporal
+            </button>
           </div>
 
           <div class="anatomy-toolbar">
             <button id="resetAnatomy" type="button" title="Resetar câmera">↺ <span>Reset</span></button>
-            <button id="focusAnatomy" type="button" title="Focar estrutura selecionada">◎ <span>Focar</span></button>
+            <button id="focusAnatomy" type="button" title="Enquadrar estrutura">◎ <span>Enquadrar</span></button>
             <button id="transparencyToggle" type="button" aria-pressed="false">◐ <span>Transparência</span></button>
-            <button id="planeToggle" class="active" type="button" aria-pressed="true">▱ <span>Plano de corte</span></button>
+            <button id="planeToggle" class="active" type="button" aria-pressed="true">▱ <span>Plano</span></button>
+            <button id="clipToggle" type="button" aria-pressed="false">✂ <span>Corte no 3D</span></button>
           </div>
 
-          <div class="anatomy-stage">
-            <canvas id="anatomyCanvas" aria-label="Modelo anatômico 3D interativo do abdome"></canvas>
+          <div class="anatomy-stage real-anatomy-stage">
+            <canvas id="anatomyCanvas" aria-label="Atlas anatômico 3D HRA interativo"></canvas>
 
             <div class="anatomy-orientation" aria-hidden="true">
               <span class="orient-s">S</span>
@@ -200,82 +217,89 @@
               <span class="orient-p">P</span>
             </div>
 
-            <div class="axis-hud" aria-label="Eixos anatômicos">
-              <div class="axis-triad">
-                <i class="axis-x"></i>
-                <i class="axis-y"></i>
-                <i class="axis-z"></i>
-              </div>
-              <div>
-                <span><b>X</b> R ↔ L</span>
-                <span><b>Y</b> I ↔ S</span>
-                <span><b>Z</b> P ↔ A</span>
-              </div>
+            <div class="real-model-seal">
+              <span>HRA</span>
+              <div><strong>Human Reference Atlas</strong><small>CC BY 4.0 · NIH / HuBMAP</small></div>
             </div>
 
             <div class="stage-tip">
-              <strong>Clique</strong> para localizar no exame · passe o mouse para identificar
+              arraste = girar · roda = zoom · botão direito = pan · clique = identificar
             </div>
+          </div>
+
+          <div class="slice-controls anatomy-slice-control">
+            <button id="slicePrev" type="button" title="Corte anterior">−</button>
+            <div>
+              <span>Mover corte · <b id="sliceCoordinate">55% do eixo</b></span>
+              <input id="sliceSlider" type="range" min="0" max="100" value="55" aria-label="Mover plano de corte">
+            </div>
+            <button id="sliceNext" type="button" title="Próximo corte">+</button>
           </div>
 
           <div class="structure-dock">
             <div class="structure-dock-head">
               <div>
-                <span>ESTRUTURAS</span>
+                <span>ESTRUTURAS REAIS DO HRA</span>
                 <strong>Selecionar / ocultar</strong>
               </div>
-              <small>abdome v1</small>
+              <small>malhas GLB</small>
             </div>
             <div id="structureList" class="structure-list"></div>
           </div>
         </article>
 
-        <article class="rad-panel image-panel">
-          <div class="panel-title-row">
+        <article class="rad-panel image-panel real-image-panel">
+          <div class="selected-radiology-bar">
             <div>
-              <span class="eyebrow">IMAGEM RADIOLOGICA</span>
-              <h2 id="studyName">TC Abdome · Atlas sintético</h2>
+              <span>NESTE PONTO</span>
+              <strong id="selectedRadiologyName">Estrutura selecionada no HRA</strong>
             </div>
-            <div class="study-chip">
-              <span id="studyModality">CT</span>
-              <strong id="studySlices">120 cortes</strong>
+            <div class="selected-actions">
+              <button id="mprView" type="button">MPR</button>
+              <span id="voxelReadout">TC real carregando...</span>
             </div>
           </div>
 
-          <div class="radiology-stage">
-            <canvas id="radiologyCanvas" aria-label="Visualizador de cortes radiológicos didáticos"></canvas>
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">TC MULTIPLANAR REAL</span>
+              <h2 id="studyName">TC Abdome · dataset real de demonstração</h2>
+            </div>
+            <div class="study-chip real-study-chip">
+              <span id="studyModality">TC</span>
+              <strong id="studySlices">carregando voxels</strong>
+            </div>
+          </div>
 
-            <span id="orientTop" class="rad-orient rad-orient-top">Anterior</span>
-            <span id="orientBottom" class="rad-orient rad-orient-bottom">Posterior</span>
-            <span id="orientLeft" class="rad-orient rad-orient-left">Direita</span>
-            <span id="orientRight" class="rad-orient rad-orient-right">Esquerda</span>
+          <div class="radiology-stage real-radiology-stage">
+            <canvas id="radiologyCanvas" aria-label="TC real multiplanar com NiiVue"></canvas>
 
-            <div class="slice-readout">
-              <span>CORTE</span>
-              <strong><b id="sliceCurrent">61</b> / <b id="sliceTotal">120</b></strong>
-              <small id="sliceCoordinate">0.00 u anat.</small>
+            <div class="slice-readout real-slice-readout">
+              <span>PLANO ATIVO</span>
+              <strong><b id="sliceCurrent">1</b> / <b id="sliceTotal">1</b></strong>
+              <small id="ctDatasetLabel">CT_Abdo · NIfTI real</small>
             </div>
 
             <div class="image-instructions">
-              roda do mouse = cortes · Ctrl/Shift + roda = zoom · arraste = pan
+              clique nos cortes para mover o cruzamento · arraste para ajustar contraste/pan · roda para navegar
             </div>
           </div>
 
-          <div class="slice-controls">
-            <button id="slicePrev" type="button" title="Corte anterior">−</button>
-            <input id="sliceSlider" type="range" min="0" max="119" value="60" aria-label="Navegação pelos cortes">
-            <button id="sliceNext" type="button" title="Próximo corte">+</button>
-          </div>
+          <div class="viewer-tools real-viewer-tools">
+            <div class="window-preset-row" aria-label="Presets de janela">
+              <button class="active" type="button" data-window-preset="soft" data-width="400" data-level="50">Tecidos moles</button>
+              <button type="button" data-window-preset="bone" data-width="1800" data-level="450">Osso</button>
+              <button type="button" data-window-preset="lung" data-width="1500" data-level="-600">Pulmão</button>
+            </div>
 
-          <div class="viewer-tools">
             <div id="windowControls" class="window-controls">
               <label>
-                <span><b id="windowLabel">Janela</b><em id="windowWidthValue">400</em></span>
-                <input id="windowWidth" type="range" min="80" max="1600" step="10" value="400">
+                <span><b>Janela (WW)</b><em id="windowWidthValue">400</em></span>
+                <input id="windowWidth" type="range" min="40" max="2200" step="10" value="400">
               </label>
               <label>
-                <span><b id="levelLabel">Nível</b><em id="windowLevelValue">50</em></span>
-                <input id="windowLevel" type="range" min="-250" max="500" step="5" value="50">
+                <span><b>Nível (WL)</b><em id="windowLevelValue">50</em></span>
+                <input id="windowLevel" type="range" min="-1000" max="1000" step="5" value="50">
               </label>
             </div>
 
@@ -283,93 +307,83 @@
               <button id="radZoomOut" type="button" title="Reduzir zoom">−</button>
               <strong id="radZoomValue">100%</strong>
               <button id="radZoomIn" type="button" title="Aumentar zoom">+</button>
-              <button id="radReset" class="zoom-reset" type="button" title="Resetar imagem">↺</button>
+              <button id="radReset" class="zoom-reset" type="button" title="Resetar visualização">↺</button>
             </div>
           </div>
         </article>
       </section>
 
-      <section class="rad-info-grid">
+      <section class="rad-info-grid real-info-grid">
         <article class="info-card structure-info-card">
           <div class="info-card-head">
             <span>ESTRUTURA SELECIONADA</span>
-            <strong>3D → imagem</strong>
+            <strong>malha HRA</strong>
           </div>
 
           <div id="structureInfoEmpty" class="info-empty">
-            Clique em uma estrutura no modelo para abrir sua correlação radiológica.
+            Clique em uma estrutura real do atlas.
           </div>
 
           <div id="structureInfoContent" class="structure-info-content" hidden>
             <div class="structure-info-title">
               <div>
-                <h3 id="structureTitle">Fígado</h3>
-                <span id="structureEnglish">Liver</span>
+                <h3 id="structureTitle">Aorta</h3>
+                <span id="structureEnglish">Aorta</span>
               </div>
-              <span class="structure-region" id="structureRegion">Abdome</span>
+              <span class="structure-region" id="structureRegion">Retroperitônio</span>
             </div>
 
             <p id="structureDescription"></p>
 
             <div class="structure-facts">
-              <div>
-                <span>EXAMES</span>
-                <strong id="structureStudies">CT · MRI</strong>
-              </div>
-              <div>
-                <span>REGIÃO</span>
-                <strong>Abdome</strong>
-              </div>
+              <div><span>MATERIAL</span><strong id="structureStudies">HRA 3D · TC real</strong></div>
+              <div><span>GEOMETRIA</span><strong id="structureMeshCount">malhas HRA</strong></div>
             </div>
           </div>
         </article>
 
         <article class="info-card slice-info-card">
           <div class="info-card-head">
-            <span>NESTE CORTE</span>
-            <strong>imagem → 3D</strong>
+            <span>NO NÍVEL 3D ATUAL</span>
+            <strong>interseção pelas malhas</strong>
           </div>
 
           <p class="info-card-copy">
-            As estruturas abaixo intersectam o plano atual do atlas. Clique em uma para destacá-la no 3D.
+            Estas estruturas reais do HRA cruzam o plano atualmente mostrado no modelo 3D.
           </p>
-
           <div id="sliceStructures" class="slice-structures"></div>
         </article>
 
         <article class="info-card metadata-card">
           <div class="info-card-head">
-            <span>DADOS DO ESTUDO</span>
-            <strong>arquitetura DICOM-ready</strong>
+            <span>PROVENIÊNCIA</span>
+            <strong>sem material sintético</strong>
           </div>
 
           <dl>
-            <div><dt>Fonte</dt><dd id="studySource">Cortex Synthetic Radiology Atlas</dd></div>
-            <div><dt>Licença</dt><dd id="studyLicense">Conteúdo didático original do projeto</dd></div>
-            <div><dt>DICOM spatial tags</dt><dd>Não disponíveis neste atlas sintético</dd></div>
-            <div><dt>Precisão espacial</dt><dd>Correspondência anatômica aproximada</dd></div>
+            <div><dt>Anatomia</dt><dd>Human Reference Atlas · HuBMAP / NIH</dd></div>
+            <div><dt>TC</dt><dd id="studySource">NiiVue demo images / Slicer3D example dataset</dd></div>
+            <div><dt>Crédito TC</dt><dd>Steve Pieper</dd></div>
+            <div><dt>Licença / fonte</dt><dd id="studyLicense">Proveniência pública documentada</dd></div>
           </dl>
 
           <p class="metadata-note">
-            Quando um estudo DICOM real for conectado, o módulo está preparado para mapear
-            Image Position Patient, Image Orientation Patient, Pixel Spacing e Slice Thickness
-            sem inventar coordenadas.
+            A anatomia HRA e a TC são reais, mas não são do mesmo sujeito. O Cortex
+            não inventa uma transformação DICOM entre eles: a posição 3D ↔ TC é uma
+            correlação didática relativa até um dataset segmentado/co-registrado ser usado.
           </p>
         </article>
       </section>
 
       <details class="source-registry-wrap">
         <summary>
-          <span>Fontes, licenças e integridade dos assets</span>
+          <span>Fontes, licenças e atribuições dos materiais reais</span>
           <strong>ver registro</strong>
         </summary>
-
         <div class="source-intro">
-          Este primeiro módulo usa anatomia e cortes gerados localmente no navegador.
-          Nenhuma imagem de paciente é utilizada. Fontes externas são registradas somente
-          quando a licença é compatível e a atribuição pode ser preservada.
+          O laboratório baixa os assets reais no build e mantém as atribuições das fontes.
+          Nenhum órgão desta versão é desenhado com esfera, elipse ou cilindro procedimental.
         </div>
-
         <div id="sourceRegistry" class="source-registry"></div>
       </details>
 
@@ -377,17 +391,16 @@
         <span>i</span>
         <p>
           <strong>Uso educacional.</strong>
-          O atlas sintético ajuda a aprender orientação, planos e relações espaciais,
-          mas não substitui exames diagnósticos, laudos ou imagens DICOM de pacientes.
+          O visualizador usa material anatômico e radiológico real de referência,
+          porém continua não sendo ferramenta diagnóstica nem substituto de laudo.
         </p>
       </section>
     </main>
   </div>
 
   <div id="anatomyTooltip" class="rad-tooltip" hidden></div>
-  <div id="radiologyTooltip" class="rad-tooltip" hidden></div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-rad1"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-real2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

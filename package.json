@@ -7,12 +7,13 @@
     "build": "npm run security:sql && prisma generate && tsc --noEmit",
     "start": "tsx backend/src/server.ts",
     "lint": "tsc --noEmit",
-    "postinstall": "prisma generate && npm run prepare:ecg-assets",
+    "postinstall": "prisma generate && npm run prepare:ecg-assets && npm run prepare:radiology-assets",
     "db:seed": "tsx scripts/create-user.ts",
     "predev": "prisma db push",
     "prestart": "prisma db push",
     "security:sql": "node scripts/check-sql-safety.mjs",
-    "prepare:ecg-assets": "node scripts/prepare-ecg-assets.mjs"
+    "prepare:ecg-assets": "node scripts/prepare-ecg-assets.mjs",
+    "prepare:radiology-assets": "node scripts/prepare-radiology-assets.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
