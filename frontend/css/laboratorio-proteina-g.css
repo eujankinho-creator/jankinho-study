@@ -859,3 +859,44 @@
     min-width:180px;
   }
 }
+
+
+/* v-lab8 · exploração livre e fallback */
+.gp-detail-actions{
+  display:flex;
+  gap:6px;
+  margin-top:10px;
+}
+.gp-detail-actions button{
+  min-height:28px;
+  padding:0 9px;
+  border:1px solid var(--gp-border);
+  border-radius:8px;
+  background:var(--gp-soft);
+  color:var(--gp-text-soft);
+  font-size:8px;
+  font-weight:850;
+  cursor:pointer;
+}
+.gp-detail-actions button:hover{
+  border-color:var(--gp-border-strong);
+  color:var(--gp-text);
+}
+.gp-fallback-flow{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+  margin-top:12px;
+}
+.gp-fallback-flow span{
+  padding:6px 8px;
+  border:1px solid var(--gp-border);
+  border-radius:999px;
+  background:var(--gp-soft);
+  color:var(--gp-text-soft);
+  font-size:8px;
+}
+.gp-fallback-flow b{
+  color:var(--gp-accent2);
+}
