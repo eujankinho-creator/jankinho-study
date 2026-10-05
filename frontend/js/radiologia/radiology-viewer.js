@@ -59,26 +59,17 @@ export class RadiologyViewer {
     this.nv.graph.autoSizeMultiplanar = true;
     this.nv.graph.opacity = 1.0;
 
-    const volumes = [
-      { url: this.study.file, name: "ct.nii.gz", colormap: "gray", opacity: 1 },
-      ...this.study.segmentations.map((seg) => ({
-        url: seg.url,
-        name: seg.id + "_label.nii.gz",
-        opacity: seg.opacity
-      }))
-    ];
-
-    await this.nv.loadVolumes(volumes);
-    if (this.nv.volumes.length < 2) {
-      throw new Error("O CT corporal e as segmentações não foram carregados.");
+    if (this.options.baseVolume) {
+      this.nv.addVolume(this.options.baseVolume);
+    } else {
+      await this.nv.loadVolumes([
+        { url: this.study.file, name: "ct.nii.gz", colormap: "gray", opacity: 1 }
+      ]);
     }
 
-    this.study.segmentations.forEach((seg, index) => {
-      this.groupVolumeIndexes.set(seg.id, index + 1);
-    });
-
-    this.applySegmentationColormaps();
-    this.applySegmentationOpacity();
+    if (!this.nv.volumes.length) {
+      throw new Error("O CT corporal não foi carregado.");
+    }
     this.nv.setInterpolation(true);
     this.nv.setAtlasOutline(0.012);
 
@@ -92,7 +83,6 @@ export class RadiologyViewer {
       Math.max(1, Number(dims[3]) || 1)
     ];
 
-    this.computeLabelCentroids();
     this.setWindow(this.windowWidth, this.windowLevel);
     this.setCrosshairFraction(this.crosshairFrac, true);
     this.resetView();
@@ -107,6 +97,27 @@ export class RadiologyViewer {
       });
     }
     return this;
+  }
+
+  addSharedSegmentations(segmentationVolumes, computeAnatomy = false) {
+    if (!Array.isArray(segmentationVolumes) || !segmentationVolumes.length) return;
+
+    this.groupVolumeIndexes.clear();
+
+    segmentationVolumes.forEach((entry) => {
+      if (!entry?.volume || !entry?.id) return;
+      this.nv.addVolume(entry.volume);
+      this.groupVolumeIndexes.set(entry.id, this.nv.volumes.length - 1);
+    });
+
+    this.applySegmentationColormaps();
+    this.applySegmentationOpacity();
+
+    if (computeAnatomy) {
+      this.computeLabelCentroids();
+    }
+
+    this.nv.drawScene();
   }
 
   computeLabelCentroids() {
