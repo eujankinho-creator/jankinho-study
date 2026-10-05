@@ -171,3 +171,14 @@
   .secondary-stack .view-tile{height:220px}
   .viewer-help{display:none}
 }
+
+
+/* v-stack3 · interação direta do exame */
+.image-stage{
+  overscroll-behavior:contain;
+  touch-action:none;
+}
+.image-stage img,
+.image-stage canvas{
+  pointer-events:none;
+}
