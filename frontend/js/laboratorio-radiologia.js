@@ -292,44 +292,182 @@ function normalizeSearch(value) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
+}
+
+const SEARCH_ALIASES = Object.freeze({
+  liver: ["figado", "hepatico", "hepatica", "orgao direito abdomen"],
+  spleen: ["baco", "esplenico", "esplenica"],
+  pancreas: ["pancreas", "pancreatico", "pancreatica"],
+  stomach: ["estomago", "gastrico", "gastrica"],
+  gallbladder: ["vesicula", "vesicula biliar"],
+  urinary_bladder: ["bexiga", "bexiga urinaria"],
+  left_kidney: ["rim esquerdo", "rim esq", "rim e"],
+  right_kidney: ["rim direito", "rim dir", "rim d"],
+  aorta: ["aorta", "arteria principal", "grande vaso", "vaso grande", "vaso do peito"],
+  ivc: ["veia cava", "veia cava inferior", "cava inferior"],
+  pulmonary_artery: ["arteria pulmonar", "vaso pulmonar"],
+  portal_splenic_vein: ["veia porta", "porta hepatica", "veia esplenica"],
+  brain: ["cerebro", "encefalo", "cabeca", "sistema nervoso"],
+  myocardium: ["miocardio", "musculo do coracao", "parede do coracao"],
+  left_ventricle: ["ventriculo esquerdo", "camara esquerda coracao"],
+  right_ventricle: ["ventriculo direito", "camara direita coracao"],
+  left_atrium: ["atrio esquerdo"],
+  right_atrium: ["atrio direito"],
+  left_femur: ["femur esquerdo", "osso da coxa esquerda", "osso coxa esquerda"],
+  right_femur: ["femur direito", "osso da coxa direita", "osso coxa direita"],
+  left_humerus: ["umero esquerdo", "osso do braco esquerdo"],
+  right_humerus: ["umero direito", "osso do braco direito"],
+  left_clavicle: ["clavicula esquerda"],
+  right_clavicle: ["clavicula direita"],
+  left_scapula: ["escapula esquerda", "omoplata esquerda"],
+  right_scapula: ["escapula direita", "omoplata direita"],
+  left_hip: ["quadril esquerdo", "osso do quadril esquerdo", "pelve esquerda"],
+  right_hip: ["quadril direito", "osso do quadril direito", "pelve direita"],
+  left_iliopsoas: ["iliopsoas esquerdo", "psoas esquerdo"],
+  right_iliopsoas: ["iliopsoas direito", "psoas direito"],
+  left_gluteus_maximus: ["gluteo maximo esquerdo", "gluteo esquerdo"],
+  right_gluteus_maximus: ["gluteo maximo direito", "gluteo direito"],
+  trachea: ["traqueia", "via aerea"],
+  esophagus: ["esofago", "tubo digestivo torax"],
+  colon: ["colon", "intestino grosso"],
+  small_bowel: ["intestino delgado", "alcas intestinais"],
+  duodenum: ["duodeno"],
+  left_adrenal: ["suprarrenal esquerda", "adrenal esquerda"],
+  right_adrenal: ["suprarrenal direita", "adrenal direita"]
+});
+
+function genericAliases(structure) {
+  const aliases = [];
+  if (structure.category === "bones") aliases.push("osso", "ossos", "esqueleto");
+  if (structure.category === "muscles") aliases.push("musculo", "musculos");
+  if (structure.category === "vessels") aliases.push("vaso", "vasos", "arteria", "veia");
+  if (structure.category === "organs") aliases.push("orgao", "orgaos");
+  if (/vertebra/i.test(structure.id)) aliases.push("vertebra", "coluna", "espinha");
+  if (/rib/i.test(structure.id)) aliases.push("costela", "costelas", "torax");
+  return aliases;
+}
+
+function searchTextForStructure(structure) {
+  return normalizeSearch([
+    structure.name,
+    structure.englishName,
+    structure.region,
+    structure.category,
+    ...(SEARCH_ALIASES[structure.id] || []),
+    ...genericAliases(structure)
+  ].join(" "));
+}
+
+function levenshtein(a, b) {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+
+  const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  const curr = new Array(b.length + 1);
+
+  for (let i = 1; i <= a.length; i += 1) {
+    curr[0] = i;
+    for (let k = 1; k <= b.length; k += 1) {
+      curr[k] = Math.min(
+        curr[k - 1] + 1,
+        prev[k] + 1,
+        prev[k - 1] + (a[i - 1] === b[k - 1] ? 0 : 1)
+      );
+    }
+    for (let k = 0; k <= b.length; k += 1) prev[k] = curr[k];
+  }
+  return prev[b.length];
+}
+
+function tokenSimilarity(queryToken, candidateToken) {
+  if (!queryToken || !candidateToken) return 0;
+  if (candidateToken === queryToken) return 1;
+  if (candidateToken.startsWith(queryToken) || queryToken.startsWith(candidateToken)) return 0.92;
+  const maxLen = Math.max(queryToken.length, candidateToken.length);
+  if (maxLen <= 2) return 0;
+  const distance = levenshtein(queryToken, candidateToken);
+  const similarity = 1 - distance / maxLen;
+  const tolerance = maxLen <= 4 ? 0.72 : maxLen <= 7 ? 0.66 : 0.60;
+  return similarity >= tolerance ? similarity : 0;
+}
+
+function scoreStructureSearch(structure, rawQuery) {
+  const query = normalizeSearch(rawQuery);
+  if (!query) return 1;
+
+  const haystack = searchTextForStructure(structure);
+  if (haystack === query) return 100;
+  if (haystack.includes(query)) return 92;
+
+  const queryTokens = query.split(" ").filter(Boolean);
+  const candidateTokens = haystack.split(" ").filter(Boolean);
+  let total = 0;
+  let matched = 0;
+
+  for (const q of queryTokens) {
+    let best = 0;
+    for (const c of candidateTokens) best = Math.max(best, tokenSimilarity(q, c));
+    if (best > 0) {
+      matched += 1;
+      total += best;
+    }
+  }
+
+  if (!matched) return 0;
+  const coverage = matched / queryTokens.length;
+  if (coverage < 0.5) return 0;
+
+  let score = 55 * coverage + 35 * (total / queryTokens.length);
+
+  const name = normalizeSearch(structure.name);
+  const english = normalizeSearch(structure.englishName);
+  if (name.startsWith(query) || english.startsWith(query)) score += 10;
+
+  return score;
 }
 
 function createStructureList() {
   const container = $("structureList");
   if (!container) return;
   const structures = availableStructures();
-  container.innerHTML = structures.map((s) =>
-    '<button type="button" class="structure-row" data-structure="' + s.id + '" data-search="' +
-    (s.name + " " + s.englishName + " " + s.region).toLowerCase() + '">' +
-    '<span class="structure-swatch" style="--swatch:' + s.color + '"></span>' +
-    '<span class="structure-copy"><strong>' + s.name + '</strong><small>' + s.region + '</small></span></button>'
-  ).join("");
 
-  container.querySelectorAll("[data-structure]").forEach((button) => {
-    button.addEventListener("click", async () => {
-      await selectStructure(button.dataset.structure, true);
-      closeStructureSearchPanel();
+  const render = (rawQuery) => {
+    const query = normalizeSearch(rawQuery);
+    const ranked = structures
+      .map((structure) => ({ structure, score: scoreStructureSearch(structure, query) }))
+      .filter((item) => !query || item.score >= 45)
+      .sort((a, b) => b.score - a.score || a.structure.name.localeCompare(b.structure.name, "pt-BR"));
+
+    container.innerHTML = ranked.length
+      ? ranked.map(({ structure: s }) =>
+          '<button type="button" class="structure-row" data-structure="' + s.id + '">' +
+          '<span class="structure-swatch" style="--swatch:' + s.color + '"></span>' +
+          '<span class="structure-copy"><strong>' + s.name + '</strong><small>' + s.region + '</small></span></button>'
+        ).join("")
+      : '<div class="structure-search-empty"><strong>Nenhuma estrutura encontrada</strong><small>Tente outro nome, sinônimo ou uma escrita aproximada.</small></div>';
+
+    container.querySelectorAll("[data-structure]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        await selectStructure(button.dataset.structure, true);
+        closeStructureSearchPanel();
+      });
     });
-  });
 
-  if ($("structureCount")) {
-    $("structureCount").textContent = structures.length + " estruturas disponíveis";
-  }
-
-  $("structureSearch")?.addEventListener("input", function () {
-    const q = normalizeSearch(this.value);
-    let visible = 0;
-    container.querySelectorAll(".structure-row").forEach((row) => {
-      const hidden = Boolean(q && !row.dataset.search.includes(q));
-      row.hidden = hidden;
-      if (!hidden) visible += 1;
-    });
     if ($("structureCount")) {
-      $("structureCount").textContent = q
-        ? visible + " resultado" + (visible === 1 ? "" : "s")
+      $("structureCount").textContent = query
+        ? ranked.length + " resultado" + (ranked.length === 1 ? "" : "s")
         : structures.length + " estruturas disponíveis";
     }
+  };
+
+  render("");
+
+  $("structureSearch")?.addEventListener("input", function () {
+    render(this.value);
   });
 }
 
