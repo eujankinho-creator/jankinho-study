@@ -1126,3 +1126,53 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* staticcards1 · hub sem previews/animacoes, somente cards compactos */
+.lab-choice-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.lab-choice-card{
+  min-height:0;
+  padding:20px 22px 18px;
+  border-radius:22px;
+  transform:none !important;
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease !important;
+}
+.lab-choice-card::before,
+.lab-choice-card::after,
+.choice-glow,
+.choice-top,
+.ecg-preview,
+.membrane-preview,
+.gprotein-preview,
+.radiology-preview{
+  display:none !important;
+}
+.lab-choice-card:hover{
+  transform:none !important;
+  border-color:var(--theme-border-strong,rgba(255,255,255,.14));
+  box-shadow:var(--theme-shadow,0 18px 48px rgba(0,0,0,.28));
+}
+.choice-copy{
+  margin-top:0;
+  align-items:center;
+}
+.choice-copy p{
+  max-width:none;
+}
+.choice-footer{
+  margin-top:18px;
+  padding-top:16px;
+}
+.choice-footer b{
+  transform:none !important;
+}
+.choice-icon{
+  box-shadow:none !important;
+}
+@media(max-width:1080px){
+  .lab-choice-grid{grid-template-columns:1fr}
+  .lab-choice-card{min-height:0}
+}
