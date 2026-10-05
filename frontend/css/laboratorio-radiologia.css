@@ -860,3 +860,40 @@
   font-size:9px;
   line-height:1.45;
 }
+
+
+/* v-stack17 · nome selecionado dentro do exame */
+.selected-structure-badge{
+  position:absolute;
+  z-index:12;
+  top:12px;
+  left:12px;
+  max-width:min(72%,280px);
+  padding:6px 10px;
+  border:1px solid color-mix(in srgb,var(--structure-color) 42%,transparent);
+  border-radius:9px;
+  background:rgba(3,6,10,.34);
+  color:var(--structure-color);
+  font-size:11px;
+  font-weight:900;
+  line-height:1.2;
+  letter-spacing:.01em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  pointer-events:none;
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+  text-shadow:
+    0 0 8px color-mix(in srgb,var(--structure-color) 80%,transparent),
+    0 0 16px color-mix(in srgb,var(--structure-color) 46%,transparent);
+  box-shadow:
+    0 0 18px color-mix(in srgb,var(--structure-color) 20%,transparent),
+    inset 0 0 12px rgba(255,255,255,.018);
+}
+.selected-structure-badge[hidden]{
+  display:none !important;
+}
+.plane-header-right b[data-plane-structure]{
+  display:none !important;
+}
