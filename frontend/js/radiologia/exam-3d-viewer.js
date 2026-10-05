@@ -37,13 +37,13 @@ export class Exam3DViewer {
     await this.nv.loadVolumes([
       {
         url: this.study.file,
-        name: this.study.name,
+        name: "totalseg_example_ct.nii.gz",
         colormap: "gray",
         opacity: this.ctOpacity
       },
       {
         url: this.study.segmentationFile,
-        name: "TotalSegmentator · segmentação",
+        name: "totalseg_example_seg.nii.gz",
         opacity: this.segmentationOpacity
       }
     ]);
