@@ -12,7 +12,7 @@
 - **Arquivo usado no build:** https://files.rcsb.org/download/3SN6.pdb
 - **Licença dos dados do PDB:** CC0 1.0 Universal, conforme política do wwPDB/RCSB.
 - **Atribuição:** recomendada aos autores originais e ao RCSB PDB.
-- **Uso no Cortex:** as coordenadas experimentais orientam a geometria do receptor β2-adrenérgico e do heterotrímero Gs. A visualização “cartoon” do navegador é uma representação educacional derivada do backbone experimental.
+- **Uso no Cortex:** as coordenadas experimentais orientam a geometria do receptor β2-adrenérgico e do heterotrímero Gs. A visualização “cartoon” do navegador é uma representação educacional derivada do backbone experimental. A porção de T4-lisozima usada como construção de cristalização na cadeia R é excluída da representação do GPCR para evitar confusão didática.
 
 ## Representações educacionais
 
