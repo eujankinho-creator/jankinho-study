@@ -53,3 +53,297 @@
 @media(max-width:1250px){.gp-lab-grid{grid-template-columns:220px minmax(0,1fr)}.gp-learning-panel{grid-column:1/-1}.gp-step-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.gp-step-list li{min-width:0}.gp-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){.gp-page{width:min(100% - 18px,900px)}.gp-intro{align-items:flex-start;flex-direction:column}.gp-path-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.gp-lab-grid{grid-template-columns:1fr}.gp-control-panel{order:2}.gp-stage-card{order:1}.gp-learning-panel{order:3}.gp-stage{height:600px}.gp-step-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.gp-page{padding-top:14px}.gp-intro{padding:21px 18px}.gp-context-card,.gp-stage-toolbar{align-items:flex-start;flex-direction:column}.gp-path-tab{grid-template-columns:auto auto;}.gp-path-tab small{grid-column:1/-1}.gp-stage{height:560px}.gpcr{left:40%;transform:translateX(-50%) scale(.84)}.g-protein{left:38%;transform:scale(.78);transform-origin:left top}.gp-effector{right:2%;transform:scale(.82);transform-origin:right top}.gp-substrate-pool{right:8%;bottom:94px}.gp-summary-grid{grid-template-columns:1fr}.gp-step-list{grid-template-columns:1fr}.gp-learning-panel{padding:12px}}
+
+
+/* =========================================================
+   CORTEX G-PROTEIN ORGANIC ART V3
+   Visual biologico, simetrico e didatico inspirado na Membrana Viva.
+========================================================= */
+.gp-stage{
+  height:640px;
+  background:
+    radial-gradient(circle at 35% 34%,rgba(138,115,213,.065),transparent 23%),
+    radial-gradient(circle at 76% 70%,rgba(86,217,232,.045),transparent 28%),
+    linear-gradient(180deg,rgba(62,110,157,.065) 0 41%,rgba(14,18,26,.08) 41% 100%),
+    var(--theme-bg-secondary,#0a0d12);
+}
+
+/* Texto dentro do quadro: maior e legivel */
+.gp-compartment-label strong{font-size:12px;letter-spacing:.01em}
+.gp-compartment-label span{font-size:10px}
+.gp-ligand small{top:58px;font-size:10px;font-weight:800;color:#cfb7d8}
+.gpcr-label{bottom:-12px;font-size:12px;letter-spacing:.04em;color:#d4c3e8}
+.g-subunit-name{font-size:17px;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+.g-beta span,.g-gamma span{font-size:14px}
+.nucleotide-badge{right:8px;bottom:9px;padding:5px 8px;font-size:9px}
+.g-protein-caption{left:48px;top:120px;font-size:10px;font-weight:800;color:#a9aebb}
+.gp-nucleotide{font-size:9px}
+.effector-core>span{font-size:19px}
+.effector-core small{padding:0 10px;font-size:10px;line-height:1.2;font-weight:800;color:#a9c8e1}
+.effector-activity{bottom:-7px;font-size:9px;padding:6px 9px}
+.substrate-title{font-size:11px}
+.camp{font-size:9px;padding:6px 8px}
+.downstream-node strong{font-size:14px}
+.downstream-node small{font-size:9px}
+.pip2-pool span{font-size:9px;padding:6px 7px}
+.second-messenger{font-size:10px;padding:7px 9px}
+.er-head span{font-size:9px}
+.er-head strong{font-size:10px}
+.ip3-receptor{font-size:8px;padding:5px 6px}
+.calcium-cloud span{font-size:8px;padding:5px 6px}
+.rho-module .rho-node,.rho-module .rock-node,.rho-module .cytoskeleton-node{font-size:10px;line-height:1.25;text-align:center}
+.gp-stage-pills span{font-size:9.5px}
+.gp-stage-state small{font-size:9px}
+.gp-stage-state strong{font-size:12px}
+
+/* GPCR: 7 helices organicas e espelhadas em torno do eixo central */
+.gpcr{
+  left:35%;
+  top:178px;
+  width:154px;
+  height:190px;
+  transform:translateX(-50%);
+  filter:drop-shadow(0 9px 16px rgba(0,0,0,.20));
+}
+.gpcr::before,
+.gpcr::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  left:50%;
+  width:124px;
+  height:34px;
+  transform:translateX(-50%);
+  border:3px solid rgba(151,127,212,.44);
+  border-left-color:transparent;
+  border-right-color:transparent;
+  border-radius:50%;
+  pointer-events:none;
+}
+.gpcr::before{top:20px;border-bottom-color:transparent}
+.gpcr::after{top:134px;border-top-color:transparent}
+.gpcr-helix{
+  top:31px;
+  width:23px;
+  height:120px;
+  border:1px solid rgba(223,210,255,.12);
+  border-radius:52% 48% 50% 50% / 15% 18% 15% 18%;
+  background:
+    radial-gradient(circle at 38% 20%,rgba(255,255,255,.16),transparent 21%),
+    linear-gradient(90deg,#5c4d91,#8a73bf 48%,#5c4d91);
+  box-shadow:
+    inset 5px 0 10px rgba(255,255,255,.035),
+    inset -5px 0 10px rgba(0,0,0,.12),
+    0 0 14px rgba(142,115,213,.08);
+}
+.gpcr .h1{left:1px;transform:rotate(9deg)}
+.gpcr .h2{left:22px;transform:rotate(-6deg)}
+.gpcr .h3{left:43px;transform:rotate(3deg)}
+.gpcr .h4{left:65px;transform:rotate(0deg)}
+.gpcr .h5{left:87px;transform:rotate(-3deg)}
+.gpcr .h6{left:108px;transform:rotate(6deg)}
+.gpcr .h7{left:129px;transform:rotate(-9deg)}
+.gpcr-site{
+  top:-17px;
+  width:54px;
+  height:38px;
+  border:1px solid rgba(216,90,255,.26);
+  border-radius:52% 48% 46% 54% / 62% 62% 38% 38%;
+  background:
+    radial-gradient(ellipse at center,rgba(216,90,255,.13) 0 34%,transparent 37%),
+    rgba(83,38,112,.08);
+}
+.gpcr-site i{
+  width:11px;height:11px;
+  background:#d85aff;
+  box-shadow:0 0 14px rgba(216,90,255,.34);
+}
+.gp-stage.is-bound .gpcr-helix{
+  background:
+    radial-gradient(circle at 38% 20%,rgba(255,255,255,.18),transparent 21%),
+    linear-gradient(90deg,#66529f,#9b82d1 48%,#66529f);
+}
+
+/* Proteina G heterotrimerica: lobulos organicos, sem blocos */
+.g-protein{
+  left:43%;
+  top:346px;
+  width:218px;
+  height:142px;
+}
+.g-alpha,.g-beta,.g-gamma{
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 -8px 18px rgba(0,0,0,.10),
+    0 11px 24px rgba(0,0,0,.18);
+}
+.g-alpha{
+  left:0;top:6px;
+  width:112px;height:102px;
+  border-radius:46% 46% 43% 43% / 52% 52% 46% 46%;
+  background:
+    radial-gradient(circle at 32% 37%,rgba(255,255,255,.11) 0 15%,transparent 16%),
+    radial-gradient(circle at 68% 37%,rgba(255,255,255,.09) 0 15%,transparent 16%),
+    radial-gradient(ellipse at 50% 76%,rgba(53,27,86,.24) 0 23%,transparent 25%),
+    linear-gradient(145deg,#64479e,#8d68c8 50%,#604593);
+}
+.g-alpha::before,.g-alpha::after{
+  content:"";
+  position:absolute;
+  top:27px;
+  width:30px;height:44px;
+  border-radius:50%;
+  background:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  z-index:-1;
+}
+.g-alpha::before{left:-13px}
+.g-alpha::after{right:-13px}
+.g-beta{
+  left:104px;top:28px;
+  width:82px;height:82px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 12%,#4ca7c2 0 14%,transparent 15%),
+    radial-gradient(circle at 84% 35%,#3d94b0 0 14%,transparent 15%),
+    radial-gradient(circle at 80% 72%,#3487a2 0 14%,transparent 15%),
+    radial-gradient(circle at 50% 88%,#3b93ad 0 14%,transparent 15%),
+    radial-gradient(circle at 18% 70%,#337f99 0 14%,transparent 15%),
+    radial-gradient(circle at 16% 34%,#4298b1 0 14%,transparent 15%),
+    radial-gradient(circle,#347f98 0 44%,#2c6f86 70%);
+}
+.g-gamma{
+  left:166px;top:80px;
+  width:44px;height:31px;
+  border-radius:62% 38% 68% 32% / 52% 48% 52% 48%;
+  transform:rotate(18deg);
+  background:
+    radial-gradient(circle at 28% 32%,rgba(255,255,255,.16),transparent 22%),
+    linear-gradient(145deg,#d8ad55,#b8862e);
+}
+.g-subunit-name{
+  position:relative;
+  z-index:2;
+}
+.g-alpha::marker{display:none}
+.gp-stage[data-step="3"] .g-alpha,
+.gp-stage[data-step="4"] .g-alpha,
+.gp-stage[data-step="5"] .g-alpha,
+.gp-stage[data-step="6"] .g-alpha{transform:translate(188px,-2px) rotate(2deg)}
+.gp-stage[data-step="3"] .g-beta,
+.gp-stage[data-step="4"] .g-beta,
+.gp-stage[data-step="5"] .g-beta,
+.gp-stage[data-step="6"] .g-beta{transform:translate(-22px,10px)}
+.gp-stage[data-step="3"] .g-gamma,
+.gp-stage[data-step="4"] .g-gamma,
+.gp-stage[data-step="5"] .g-gamma,
+.gp-stage[data-step="6"] .g-gamma{transform:translate(-24px,12px) rotate(18deg)}
+
+/* Efetores com anatomia visual diferente por via */
+.gp-effector{
+  right:6%;
+  top:318px;
+  width:150px;
+  height:150px;
+}
+.effector-core{
+  position:relative;
+  width:116px;
+  height:118px;
+  overflow:visible;
+  border:1px solid rgba(100,181,255,.18);
+  border-radius:46% 46% 38% 38% / 40% 40% 54% 54%;
+  background:
+    radial-gradient(circle at 32% 29%,rgba(255,255,255,.09),transparent 18%),
+    radial-gradient(circle at 68% 29%,rgba(255,255,255,.07),transparent 18%),
+    linear-gradient(180deg,rgba(54,107,164,.26),rgba(28,58,91,.19));
+}
+.effector-core::before,
+.effector-core::after{
+  content:"";
+  position:absolute;
+  top:26px;
+  width:35px;height:64px;
+  border-radius:50%;
+  background:inherit;
+  border:1px solid rgba(100,181,255,.10);
+  z-index:-1;
+}
+.effector-core::before{left:-17px}
+.effector-core::after{right:-17px}
+.gp-stage[data-pathway="gs"] .effector-core,
+.gp-stage[data-pathway="gi"] .effector-core{
+  border-radius:48% 48% 36% 36% / 34% 34% 58% 58%;
+}
+.gp-stage[data-pathway="gq"] .effector-core{
+  width:124px;height:105px;
+  border-radius:55% 45% 58% 42% / 44% 56% 44% 56%;
+  background:
+    radial-gradient(circle at 35% 32%,rgba(255,255,255,.09),transparent 18%),
+    linear-gradient(145deg,rgba(116,83,155,.26),rgba(69,45,101,.18));
+  border-color:rgba(184,135,255,.18);
+}
+.gp-stage[data-pathway="gq"] .effector-core::before,
+.gp-stage[data-pathway="gq"] .effector-core::after{
+  top:31px;width:29px;height:45px;background:inherit;border-color:rgba(184,135,255,.10)
+}
+.gp-stage[data-pathway="g12"] .effector-core{
+  width:126px;height:94px;
+  border-radius:62% 38% 62% 38% / 52% 48% 52% 48%;
+  background:
+    radial-gradient(circle at 28% 35%,rgba(255,255,255,.08),transparent 18%),
+    linear-gradient(145deg,rgba(137,106,41,.28),rgba(83,62,25,.18));
+  border-color:rgba(244,201,93,.18);
+}
+.gp-stage[data-pathway="g12"] .effector-core::before,
+.gp-stage[data-pathway="g12"] .effector-core::after{
+  top:25px;width:30px;height:42px;background:inherit;border-color:rgba(244,201,93,.09)
+}
+
+/* Substratos e segundos mensageiros menos "caixas" */
+.gp-substrate-pool{
+  width:88px;height:72px;
+  border:1px solid rgba(244,201,93,.13);
+  border-radius:48% 52% 45% 55% / 55% 45% 55% 45%;
+  background:rgba(100,78,28,.055);
+}
+.substrate-dot{width:10px;height:10px;box-shadow:0 0 9px rgba(209,170,62,.14)}
+.downstream-node{
+  width:76px;height:60px;
+  border-radius:48% 52% 47% 53% / 55% 45% 55% 45%;
+}
+.er-store{
+  width:250px;height:92px;
+  border-radius:58% 42% 54% 46% / 62% 45% 55% 38%;
+}
+.rho-module .rho-node,
+.rho-module .rock-node{
+  width:80px;height:58px;
+  border-radius:52% 48% 55% 45% / 48% 54% 46% 52%;
+}
+.rho-module .cytoskeleton-node{
+  width:124px;height:86px;
+  border-radius:58% 42% 48% 52% / 52% 48% 55% 45%;
+}
+
+/* Ajustes de leitura dos paineis externos */
+.gp-panel-head p,.gp-learning-head p{font-size:11px}
+.gp-step-list strong{font-size:10px}
+.gp-step-list small{font-size:8.5px;line-height:1.35}
+.gp-lesson-card strong{font-size:12px}
+.gp-lesson-card p{font-size:9.5px}
+.gp-context-card p{font-size:11px}
+.gp-summary-card strong{font-size:10px}
+.gp-path-tab small{font-size:10px}
+
+@media(max-width:900px){
+  .gp-stage{height:620px}
+}
+@media(max-width:620px){
+  .gp-stage{height:590px}
+  .gpcr{left:41%;transform:translateX(-50%) scale(.82)}
+  .g-protein{left:35%;transform:scale(.74);transform-origin:left top}
+  .gp-effector{right:0;transform:scale(.78);transform-origin:right top}
+}
+/* CORTEX G-PROTEIN ORGANIC ART V3 END */
