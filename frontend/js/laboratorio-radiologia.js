@@ -28,7 +28,8 @@ const state = {
   dragStartX: 0,
   dragStartY: 0,
   dragMoved: false,
-  suppressClick: false
+  suppressClick: false,
+  colorEnabled: true
 };
 
 async function api(url, options) {
@@ -458,7 +459,7 @@ async function renderOverlayForPlane(plane) {
   canvas.style.height = rect.height + "px";
 
   const structure = state.selectedId ? getStructure(state.selectedId) : null;
-  if (!structure) {
+  if (!structure || !state.colorEnabled) {
     canvas.width = 1;
     canvas.height = 1;
     canvas.getContext("2d").clearRect(0,0,1,1);
@@ -691,6 +692,25 @@ function bindViewerClicks() {
   }, { passive: false, capture: true });
 }
 
+function bindColorToggle() {
+  const button = $("colorToggle");
+  if (!button) return;
+
+  const sync = () => {
+    button.classList.toggle("active", state.colorEnabled);
+    button.setAttribute("aria-pressed", String(state.colorEnabled));
+    const label = button.querySelector("span");
+    if (label) label.textContent = state.colorEnabled ? "Cor Ligada" : "Cor Desligada";
+  };
+
+  sync();
+  button.addEventListener("click", async () => {
+    state.colorEnabled = !state.colorEnabled;
+    sync();
+    await Promise.all(PLANES.map(renderOverlayForPlane));
+  });
+}
+
 function bindSliceControls() {
   $("sliceSlider")?.addEventListener("input", async function () {
     const values = planeInfo(state.activePlane).voxels;
@@ -760,6 +780,7 @@ async function boot() {
   setProgress(32, "Preparando visualizador", "baixando 3 imagens iniciais");
   createStructureList();
   bindViewerClicks();
+  bindColorToggle();
   bindSliceControls();
   bindRegions();
   setActivePlane("axial");
