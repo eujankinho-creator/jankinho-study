@@ -62,7 +62,10 @@ export class AnatomyViewer {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.12;
     this.renderer.localClippingEnabled = true;
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const deviceRatio = window.devicePixelRatio || 1;
+    const hardwareThreads = Number(navigator.hardwareConcurrency || 8);
+    const maxPixelRatio = hardwareThreads <= 4 ? 1.25 : 1.55;
+    this.renderer.setPixelRatio(Math.min(deviceRatio, maxPixelRatio));
 
     this.controls = new OrbitControls(this.camera, this.canvas);
     this.controls.enableDamping = true;
@@ -90,6 +93,12 @@ export class AnatomyViewer {
     this.bodyBounds = new THREE.Box3();
     this.bodyBoundsValid = false;
     this.pointerDown = null;
+    this.hoverRaf = 0;
+    this.pendingPointer = null;
+    this.animationFrame = 0;
+    this.lastRenderAt = 0;
+    this.targetFrameMs = 1000 / 45;
+    this.isViewportVisible = true;
 
     this.addLights();
     this.addReferenceFloor();
@@ -97,6 +106,13 @@ export class AnatomyViewer {
 
     this.resizeObserver = new ResizeObserver(this.resize.bind(this));
     this.resizeObserver.observe(this.canvas.parentElement || this.canvas);
+
+    if (typeof IntersectionObserver !== "undefined") {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        this.isViewportVisible = entries.some((entry) => entry.isIntersecting);
+      }, { threshold: 0.01 });
+      this.intersectionObserver.observe(this.canvas);
+    }
 
     this.canvas.addEventListener("pointermove", this.onPointerMove.bind(this));
     this.canvas.addEventListener("pointerleave", this.onPointerLeave.bind(this));
@@ -378,8 +394,13 @@ export class AnatomyViewer {
     this.camera.updateProjectionMatrix();
   }
 
-  animate() {
+  animate(now = 0) {
     this.animationFrame = requestAnimationFrame(this.animate.bind(this));
+
+    if (document.hidden || !this.isViewportVisible) return;
+    if (now - this.lastRenderAt < this.targetFrameMs) return;
+
+    this.lastRenderAt = now;
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
@@ -410,19 +431,36 @@ export class AnatomyViewer {
   }
 
   onPointerMove(event) {
-    const hit = this.hitTest(event);
-    const next = hit ? hit.id : null;
+    this.pendingPointer = {
+      clientX: event.clientX,
+      clientY: event.clientY
+    };
 
-    if (next !== this.hoveredId) {
-      this.hoveredId = next;
-      this.refreshHighlights();
-    }
+    if (this.hoverRaf) return;
 
-    this.canvas.style.cursor = next ? "pointer" : "grab";
+    this.hoverRaf = requestAnimationFrame(() => {
+      this.hoverRaf = 0;
+      const pointerEvent = this.pendingPointer;
+      this.pendingPointer = null;
+      if (!pointerEvent) return;
 
-    if (typeof this.options.onHover === "function") {
-      this.options.onHover(next ? getStructure(next) : null, event);
-    }
+      const hit = this.hitTest(pointerEvent);
+      const next = hit ? hit.id : null;
+
+      if (next !== this.hoveredId) {
+        this.hoveredId = next;
+        this.refreshHighlights();
+      }
+
+      this.canvas.style.cursor = next ? "pointer" : "grab";
+
+      if (typeof this.options.onHover === "function") {
+        this.options.onHover(
+          next ? getStructure(next) : null,
+          pointerEvent
+        );
+      }
+    });
   }
 
   onPointerLeave() {
@@ -827,7 +865,9 @@ export class AnatomyViewer {
 
   dispose() {
     cancelAnimationFrame(this.animationFrame);
+    cancelAnimationFrame(this.hoverRaf);
     this.resizeObserver?.disconnect();
+    this.intersectionObserver?.disconnect();
     this.controls.dispose();
     this.renderer.dispose();
 
