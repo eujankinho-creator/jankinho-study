@@ -13,6 +13,55 @@ export const STRUCTURES = Object.freeze({
     function: "Bicamada lipídica que separa os meios extracelular e intracelular.",
     role: "Hospeda o GPCR e organiza proteínas de sinalização."
   },
+  nucleus: {
+    id: "nucleus",
+    name: "Núcleo",
+    kind: "educational",
+    function: "Compartimento que abriga o material genético e organiza processos de expressão gênica.",
+    role: "Serve como referência espacial do interior celular nesta visualização."
+  },
+  mitochondria: {
+    id: "mitochondria",
+    name: "Mitocôndrias",
+    kind: "educational",
+    function: "Organelas associadas à produção de ATP e ao metabolismo energético.",
+    role: "Representam a organização energética do citoplasma."
+  },
+  er: {
+    id: "er",
+    name: "Retículo endoplasmático",
+    kind: "educational",
+    function: "Rede membranosa envolvida em síntese, processamento e transporte intracelular.",
+    role: "Ajuda a visualizar a continuidade e a compartimentalização do citoplasma."
+  },
+  golgi: {
+    id: "golgi",
+    name: "Complexo de Golgi",
+    kind: "educational",
+    function: "Conjunto de cisternas que modifica e direciona proteínas e lipídios.",
+    role: "Mostra a via secretora no interior celular."
+  },
+  ribosomes: {
+    id: "ribosomes",
+    name: "Ribossomos",
+    kind: "educational",
+    function: "Complexos responsáveis pela síntese proteica.",
+    role: "Representados como partículas distribuídas no citosol e próximas ao retículo."
+  },
+  vesicles: {
+    id: "vesicles",
+    name: "Vesículas",
+    kind: "educational",
+    function: "Pequenos compartimentos membranosos de transporte intracelular.",
+    role: "Conectam visualmente retículo, Golgi e membrana."
+  },
+  cytoskeleton: {
+    id: "cytoskeleton",
+    name: "Citoesqueleto",
+    kind: "educational",
+    function: "Rede estrutural de filamentos que organiza forma, tráfego e posicionamento celular.",
+    role: "Fornece profundidade e orientação ao interior da célula."
+  },
   gpcr: {
     id: "gpcr",
     name: "GPCR β2-adrenérgico",
@@ -140,7 +189,7 @@ export const STEPS = Object.freeze([
     title: "Célula em repouso",
     short: "Repouso",
     scale: "cell",
-    structures: ["cell", "membrane", "gpcr", "galpha", "gbeta", "ggamma", "gdp"],
+    structures: ["cell", "nucleus", "mitochondria", "er", "golgi", "membrane", "gpcr", "galpha", "gbeta", "ggamma", "gdp"],
     camera: "cell",
     duration: 2600,
     text: "O receptor está livre. Gαs contém GDP e permanece associada ao dímero Gβγ.",
@@ -284,7 +333,7 @@ export const STEPS = Object.freeze([
     title: "Retorno ao basal",
     short: "Reset",
     scale: "cell",
-    structures: ["cell", "membrane", "gpcr", "galpha", "gbeta", "ggamma", "gdp"],
+    structures: ["cell", "nucleus", "mitochondria", "er", "golgi", "membrane", "gpcr", "galpha", "gbeta", "ggamma", "gdp"],
     camera: "cell",
     duration: 1800,
     text: "A visualização retorna ao estado inicial.",
