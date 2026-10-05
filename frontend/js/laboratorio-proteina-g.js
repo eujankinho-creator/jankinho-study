@@ -32,7 +32,9 @@ const STATE = {
   pdbManifest: null,
   loaded: false,
   renderClock: new THREE.Clock(),
-  baseTransforms: new Map()
+  baseTransforms: new Map(),
+  visualTweens: [],
+  materialDefaults: new WeakMap()
 };
 
 const CHAIN_MAP = {
@@ -548,6 +550,193 @@ function resetObjectTransforms() {
   }
 }
 
+function getStructureId(object) {
+  let current = object;
+  while (current) {
+    if (current.userData?.structureId) return current.userData.structureId;
+    current = current.parent;
+  }
+  return null;
+}
+
+function rememberMaterial(material) {
+  if (!material || STATE.materialDefaults.has(material)) return;
+  STATE.materialDefaults.set(material, {
+    opacity: "opacity" in material ? material.opacity : 1,
+    transparent: Boolean(material.transparent),
+    depthWrite: "depthWrite" in material ? material.depthWrite : true,
+    color: material.color?.clone?.() || null,
+    emissive: material.emissive?.clone?.() || null,
+    emissiveIntensity: material.emissiveIntensity ?? 0
+  });
+}
+
+function forEachSceneMaterial(callback) {
+  STATE.scene?.traverse((object) => {
+    const id = getStructureId(object);
+    if (!id || !object.material) return;
+    const materials = Array.isArray(object.material) ? object.material : [object.material];
+    materials.forEach((material) => {
+      rememberMaterial(material);
+      callback(material, id, object);
+    });
+  });
+}
+
+function restoreSelectionMaterials() {
+  forEachSceneMaterial((material) => {
+    const base = STATE.materialDefaults.get(material);
+    if (!base) return;
+    if ("opacity" in material) material.opacity = base.opacity;
+    material.transparent = base.transparent;
+    if ("depthWrite" in material) material.depthWrite = base.depthWrite;
+    if (base.color && material.color) material.color.copy(base.color);
+    if (base.emissive && material.emissive) material.emissive.copy(base.emissive);
+    if ("emissiveIntensity" in material) material.emissiveIntensity = base.emissiveIntensity;
+  });
+}
+
+function applySelectionFocus(selectedId) {
+  forEachSceneMaterial((material, id) => {
+    const base = STATE.materialDefaults.get(material);
+    if (!base) return;
+    const selected = id === selectedId;
+
+    if ("opacity" in material) {
+      material.transparent = selected ? base.transparent : true;
+      material.opacity = selected ? Math.max(base.opacity, .96) : Math.min(base.opacity, .12);
+    }
+    if ("depthWrite" in material) material.depthWrite = selected ? base.depthWrite : false;
+
+    if (material.color && base.color) {
+      if (selected) {
+        material.color.copy(base.color);
+      } else {
+        material.color.copy(base.color).lerp(new THREE.Color(0x7a818c), .72);
+      }
+    }
+
+    if (material.emissive && base.emissive) {
+      if (selected) {
+        material.emissive.copy(base.color || base.emissive).multiplyScalar(.28);
+        material.emissiveIntensity = 1.15;
+      } else {
+        material.emissive.copy(base.emissive);
+        material.emissiveIntensity = 0;
+      }
+    }
+  });
+}
+
+function captureVisualState() {
+  const result = new Map();
+  for (const [id, object] of STATE.structureObjects) {
+    if (!object?.position) continue;
+    result.set(id, {
+      object,
+      position: object.position.clone(),
+      rotation: object.rotation.clone(),
+      scale: object.scale.clone(),
+      visible: object.visible
+    });
+  }
+  return result;
+}
+
+function restoreVisualState(snapshot) {
+  for (const state of snapshot.values()) {
+    state.object.position.copy(state.position);
+    state.object.rotation.copy(state.rotation);
+    state.object.scale.copy(state.scale);
+    state.object.visible = state.visible;
+  }
+}
+
+function animateStepVisual(stepIndex) {
+  if (STATE.reducedMotion) {
+    applyStepVisual(stepIndex);
+    if (STATE.selectedId) applySelectionFocus(STATE.selectedId);
+    return;
+  }
+
+  const from = captureVisualState();
+  applyStepVisual(stepIndex);
+  const to = captureVisualState();
+  restoreVisualState(from);
+
+  STATE.visualTweens.length = 0;
+  const now = performance.now();
+  const duration = Math.max(520, 920 / Math.max(.65, STATE.speed));
+
+  for (const [id, target] of to) {
+    const start = from.get(id);
+    if (!start) continue;
+    const object = target.object;
+
+    let startScale = start.scale.clone();
+    let endScale = target.scale.clone();
+    let hideAfter = false;
+
+    if (!start.visible && target.visible) {
+      object.visible = true;
+      startScale = target.scale.clone().multiplyScalar(.06);
+      object.scale.copy(startScale);
+    } else if (start.visible && !target.visible) {
+      object.visible = true;
+      endScale = start.scale.clone().multiplyScalar(.06);
+      hideAfter = true;
+    } else {
+      object.visible = target.visible;
+    }
+
+    STATE.visualTweens.push({
+      id,
+      object,
+      start: now,
+      duration,
+      fromPosition: object.position.clone(),
+      toPosition: target.position.clone(),
+      fromRotation: object.rotation.clone(),
+      toRotation: target.rotation.clone(),
+      fromScale: object.scale.clone(),
+      toScale: endScale,
+      targetScale: target.scale.clone(),
+      targetVisible: target.visible,
+      hideAfter
+    });
+  }
+}
+
+function updateVisualTweens(now) {
+  if (!STATE.visualTweens.length) return;
+  const remaining = [];
+
+  for (const tween of STATE.visualTweens) {
+    const p = Math.min(1, (now - tween.start) / tween.duration);
+    const eased = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+    tween.object.position.lerpVectors(tween.fromPosition, tween.toPosition, eased);
+    tween.object.scale.lerpVectors(tween.fromScale, tween.toScale, eased);
+
+    const qa = new THREE.Quaternion().setFromEuler(tween.fromRotation);
+    const qb = new THREE.Quaternion().setFromEuler(tween.toRotation);
+    const q = qa.slerp(qb, eased);
+    tween.object.rotation.setFromQuaternion(q);
+
+    if (p >= 1) {
+      tween.object.position.copy(tween.toPosition);
+      tween.object.scale.copy(tween.targetScale);
+      tween.object.rotation.copy(tween.toRotation);
+      tween.object.visible = tween.targetVisible;
+    } else {
+      remaining.push(tween);
+    }
+  }
+
+  STATE.visualTweens = remaining;
+  if (!remaining.length && STATE.selectedId) applySelectionFocus(STATE.selectedId);
+}
+
 function setRepresentation(mode) {
   STATE.representation=mode;
   if (!STATE.molecularRoot) return;
@@ -690,7 +879,12 @@ function applyStep(index,{camera=true,fromPlayback=false}={}){
   index=Math.max(0,Math.min(STEPS.length-1,index));
   STATE.stepIndex=index;
   const step=STEPS[index];
-  applyStepVisual(index);
+  if (fromPlayback) animateStepVisual(index);
+  else {
+    STATE.visualTweens.length = 0;
+    applyStepVisual(index);
+    if (STATE.selectedId) applySelectionFocus(STATE.selectedId);
+  }
   updateEducationalUi(index);
   if(camera && STATE.mode!=="free") animateCamera(step.camera);
   if(!fromPlayback && STATE.playing) scheduleNext();
@@ -765,15 +959,8 @@ function selectStructure(id,focus=false){
   $("detailSource").textContent=structure.source||"Cortex";
   $$(".gp-structure-chip").forEach((btn)=>btn.classList.toggle("is-active",btn.dataset.structureId===id));
 
-  for(const obj of STATE.selectable){
-    if(!obj.material) continue;
-    const selected=obj.userData.structureId===id;
-    if(Array.isArray(obj.material)) continue;
-    if("emissive" in obj.material){
-      obj.material.emissive.set(selected?0x223344:0x000000);
-      obj.material.emissiveIntensity=selected?.85:0;
-    }
-  }
+  restoreSelectionMaterials();
+  applySelectionFocus(id);
 
   if(focus){
     const preset = id==="gpcr"?"receptor":id==="galpha"||id==="gbeta"||id==="ggamma"?"gprotein":id==="gdp"||id==="gtp"?"nucleotide":id==="effector"?"effector":"complex";
@@ -898,7 +1085,7 @@ function bindUi(){
   $("playPauseButton")?.addEventListener("click",togglePlayback);
   $("prevStepButton")?.addEventListener("click",()=>{stopPlayback();applyStep(STATE.stepIndex-1);});
   $("nextStepButton")?.addEventListener("click",()=>{stopPlayback();applyStep(STATE.stepIndex+1);});
-  $("resetButton")?.addEventListener("click",()=>{stopPlayback();STATE.selectedId=null;applyStep(0);$("selectionBadge").hidden=true;});
+  $("resetButton")?.addEventListener("click",()=>{stopPlayback();STATE.selectedId=null;restoreSelectionMaterials();applyStep(0);$("selectionBadge").hidden=true;});
   $("timelineSlider")?.addEventListener("input",function(){stopPlayback();applyStep(Number(this.value));});
   $("speedSelect")?.addEventListener("change",function(){STATE.speed=Number(this.value)||1;if(STATE.playing)scheduleNext();});
   $("representationSelect")?.addEventListener("change",function(){setRepresentation(this.value);});
@@ -921,6 +1108,7 @@ function bindUi(){
 function renderLoop(now){
   requestAnimationFrame(renderLoop);
   updateCameraTween(now);
+  updateVisualTweens(now);
   STATE.controls?.update();
 
   if(STATE.loaded){
