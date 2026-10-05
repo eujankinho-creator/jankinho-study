@@ -21,16 +21,17 @@ export class RadiologyViewer {
       ? "primary"
       : "secondary";
     this.renderScale = Number(this.options.renderScale) ||
-      (this.qualityRole === "primary" ? 1.42 : 0.78);
+      (this.qualityRole === "primary" ? 1.12 : 0.62);
     this.maxBackingPixels = this.qualityRole === "primary"
-      ? 2600000
-      : 620000;
+      ? 1850000
+      : 420000;
     this.resizeObserver = null;
     this.resizeRaf = 0;
     this.crosshairFrac = [0.5, 0.5, 0.5];
     this.windowWidth = 400;
     this.windowLevel = 50;
-    this.zoom = 1;
+    this.defaultZoom = clamp(Number(this.options.defaultZoom) || 0.80, 0.58, 1.2);
+    this.zoom = this.defaultZoom;
     this.dims = [1, 1, 1];
     this.selectedLabel = 0;
     this.hiddenLabels = new Set();
@@ -273,8 +274,8 @@ export class RadiologyViewer {
     }
 
     this.qualityRole = next;
-    this.renderScale = next === "primary" ? 1.42 : 0.78;
-    this.maxBackingPixels = next === "primary" ? 2600000 : 620000;
+    this.renderScale = next === "primary" ? 1.12 : 0.62;
+    this.maxBackingPixels = next === "primary" ? 1850000 : 420000;
     this.syncCanvasResolution();
   }
 
@@ -285,8 +286,8 @@ export class RadiologyViewer {
     if (rect.width < 2 || rect.height < 2) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const minRatio = this.qualityRole === "primary" ? 1.0 : 0.68;
-    const maxRatio = this.qualityRole === "primary" ? 2.05 : 1.12;
+    const minRatio = this.qualityRole === "primary" ? 0.88 : 0.50;
+    const maxRatio = this.qualityRole === "primary" ? 1.62 : 0.90;
     let ratio = clamp(dpr * this.renderScale, minRatio, maxRatio);
 
     let width = Math.max(2, Math.round(rect.width * ratio));
@@ -301,7 +302,6 @@ export class RadiologyViewer {
     }
 
     if (this.canvas.width === width && this.canvas.height === height) {
-      this.nv.drawScene();
       return;
     }
 
@@ -453,7 +453,7 @@ export class RadiologyViewer {
   }
 
   setZoom(value) {
-    this.zoom = clamp(Number(value) || 1, 0.65, 4.5);
+    this.zoom = clamp(Number(value) || this.defaultZoom, 0.55, 4.0);
     if (!this.nv) return;
 
     const current = Array.from(this.nv.scene.pan2Dxyzmm || [0, 0, 0, 1]);
@@ -481,8 +481,8 @@ export class RadiologyViewer {
   resetView() {
     if (!this.nv) return;
 
-    this.zoom = 1;
-    const resetPan = [0, 0, 0, 1];
+    this.zoom = this.defaultZoom;
+    const resetPan = [0, 0, 0, this.defaultZoom];
 
     if (typeof this.nv.setPan2Dxyzmm === "function") {
       this.nv.setPan2Dxyzmm(resetPan);
