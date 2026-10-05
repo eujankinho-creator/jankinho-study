@@ -1835,6 +1835,44 @@ function showStudyTask(feedback="Selecione a estrutura diretamente na cena."){
   $("studyFeedback").textContent=feedback;
 }
 
+function hideSelectedStructure() {
+  if (!STATE.selectedId) return;
+  const object=STATE.structureObjects.get(STATE.selectedId);
+  if (object) object.visible=false;
+  restoreSelectionMaterials();
+  if($("selectionBadge")) $("selectionBadge").hidden=true;
+  STATE.selectedId=null;
+}
+
+function showAllStructures() {
+  restoreSelectionMaterials();
+  for (const object of STATE.structureObjects.values()) {
+    if (object) object.visible=true;
+  }
+  applyStepVisual(STATE.stepIndex);
+  if($("selectionBadge")) $("selectionBadge").hidden=true;
+  STATE.selectedId=null;
+}
+
+function handleViewerKeyboard(event) {
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    stopPlayback();
+    applyStep(STATE.stepIndex+1);
+  } else if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    stopPlayback();
+    applyStep(STATE.stepIndex-1);
+  } else if (event.key === " " || event.key === "Enter") {
+    event.preventDefault();
+    togglePlayback();
+  } else if (event.key.toLowerCase() === "r") {
+    event.preventDefault();
+    stopPlayback();
+    applyStep(0);
+  }
+}
+
 function selectStructure(id,focus=false){
   const structure=structureForPathway(id);
   if(!structure) return;
@@ -1988,6 +2026,9 @@ function bindUi(){
   $("representationSelect")?.addEventListener("change",function(){setRepresentation(this.value);});
   $("pharmacologySelect")?.addEventListener("change",function(){applyPharmacologyMode(this.value);});
   $("compareButton")?.addEventListener("click",()=>toggleComparePathways().catch(console.error));
+  $("hideSelectedButton")?.addEventListener("click",hideSelectedStructure);
+  $("showAllButton")?.addEventListener("click",showAllStructures);
+  $("gpViewerHost")?.addEventListener("keydown",handleViewerKeyboard);
   $("fullscreenButton")?.addEventListener("click",async()=>{if(!document.fullscreenElement) await $("gpViewerHost").requestFullscreen?.(); else await document.exitFullscreen?.();});
 
   $$("[data-mode]").forEach((btn)=>btn.addEventListener("click",()=>setMode(btn.dataset.mode)));
