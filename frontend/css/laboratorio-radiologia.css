@@ -2745,3 +2745,198 @@
     grid-template-rows: minmax(320px, 1fr) 138px;
   }
 }
+
+
+/* RADIOLOGIA ATLAS v6 · CT como foco único */
+.real-workspace {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  width: 100% !important;
+}
+
+.real-image-panel {
+  order: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.real-anatomy-panel {
+  order: 2 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.real-anatomy-panel > :not(.structure-dock) {
+  display: none !important;
+}
+
+.real-anatomy-panel .structure-dock {
+  margin: 0 !important;
+  padding: 14px !important;
+  border-radius: 16px !important;
+  background: rgba(8, 12, 18, .82) !important;
+  border: 1px solid rgba(140, 190, 235, .14) !important;
+}
+
+.structure-search {
+  width: 100%;
+  height: 42px;
+  margin: 0 0 10px;
+  padding: 0 14px;
+  border-radius: 11px;
+  border: 1px solid rgba(146, 199, 245, .18);
+  background: rgba(2, 6, 11, .78);
+  color: #edf7ff;
+  outline: none;
+}
+
+.structure-search:focus {
+  border-color: rgba(83, 183, 255, .62);
+  box-shadow: 0 0 0 3px rgba(62, 165, 240, .10);
+}
+
+.structure-list {
+  max-height: 320px !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 7px !important;
+  overflow: auto !important;
+}
+
+.structure-row {
+  min-width: 0;
+  border-radius: 11px !important;
+}
+
+.radiology-multiview {
+  min-height: 760px !important;
+  height: clamp(760px, 82vh, 980px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  grid-template-rows: minmax(440px, 1.55fr) minmax(250px, .85fr) !important;
+  gap: 10px !important;
+  padding: 10px !important;
+  contain: layout paint;
+}
+
+.radiology-multiview [data-rad-view-plane="axial"] {
+  grid-column: 1 / 3 !important;
+  grid-row: 1 !important;
+  min-height: 0 !important;
+}
+
+.radiology-multiview [data-rad-view-plane="coronal"] {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  min-height: 0 !important;
+}
+
+.radiology-multiview [data-rad-view-plane="sagittal"] {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  min-height: 0 !important;
+}
+
+.rad-view-tile {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  background: #000 !important;
+  border: 1px solid rgba(134, 189, 230, .14) !important;
+}
+
+.rad-view-tile.is-active-plane {
+  border-color: rgba(69, 179, 255, .72) !important;
+  box-shadow: inset 0 0 0 1px rgba(69, 179, 255, .20), 0 0 0 1px rgba(69, 179, 255, .08) !important;
+}
+
+.rad-view-tile canvas {
+  width: 100% !important;
+  height: 100% !important;
+  image-rendering: auto !important;
+}
+
+.rad-view-head {
+  z-index: 4 !important;
+}
+
+.real-slice-readout {
+  left: 22px !important;
+  right: auto !important;
+  bottom: 282px !important;
+}
+
+.image-instructions {
+  right: 22px !important;
+  bottom: 282px !important;
+}
+
+.atlas-region-bar {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.atlas-region-bar button {
+  flex: 0 0 auto;
+}
+
+@media (min-width: 1500px) {
+  .radiology-multiview {
+    height: clamp(800px, 84vh, 1040px) !important;
+    grid-template-rows: minmax(470px, 1.6fr) minmax(270px, .82fr) !important;
+  }
+
+  .structure-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .radiology-multiview {
+    height: 760px !important;
+    min-height: 760px !important;
+    grid-template-rows: 470px 280px !important;
+  }
+
+  .structure-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .radiology-multiview {
+    min-height: 900px !important;
+    height: 900px !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 430px 225px 225px !important;
+  }
+
+  .radiology-multiview [data-rad-view-plane="axial"] {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .radiology-multiview [data-rad-view-plane="coronal"] {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  }
+
+  .radiology-multiview [data-rad-view-plane="sagittal"] {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+  }
+
+  .real-slice-readout,
+  .image-instructions {
+    display: none !important;
+  }
+
+  .structure-list {
+    grid-template-columns: 1fr !important;
+  }
+}
