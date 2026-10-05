@@ -417,6 +417,34 @@ function currentSteps() {
   return PATHWAY_STEPS[STATE.pathway] || STEPS;
 }
 
+function structureForPathway(id) {
+  const base = STRUCTURES[id];
+  if (!base) return null;
+
+  if (STATE.pathway === "gi") {
+    const overrides = {
+      gpcr: { name:"Receptor μ-opioide", kind:"experimental", source:"PDB 6DDE", function:"GPCR associado experimentalmente ao heterotrímero Gi no complexo 6DDE.", role:"Ativa Gi/o após ligação do agonista no contexto representado." },
+      galpha: { name:"Gαi1", kind:"experimental", source:"PDB 6DDE", function:"Subunidade GTPase inibitória da proteína Gi.", role:"Modula negativamente determinadas isoformas de adenilato ciclase e troca GDP por GTP." },
+      gbeta: { name:"Gβ1", kind:"experimental", source:"PDB 6DDE" },
+      ggamma: { name:"Gγ2", kind:"experimental", source:"PDB 6DDE" }
+    };
+    return Object.assign({},base,overrides[id]||{});
+  }
+
+  if (STATE.pathway === "gq") {
+    const overrides = {
+      gpcr: { name:"GPCR representativo", kind:"educational", source:"Composição educacional · referência GPCR 3SN6", function:"Receptor GPCR mostrado como referência espacial para iniciar a via Gq/11.", role:"8UQO não contém GPCR; a composição combina referências distintas de forma explícita." },
+      galpha: { name:"Gαq", kind:"experimental", source:"PDB 8UQO", function:"Subunidade GTPase da família Gq.", role:"No estado ativo interage com PLCβ3 e favorece a hidrólise de PIP₂." },
+      gbeta: { name:"Gβ1", kind:"experimental", source:"PDB 8UQO" },
+      ggamma: { name:"Gγ", kind:"experimental", source:"PDB 8UQO" },
+      plc: { name:"PLCβ3", kind:"experimental", source:"PDB 8UQO" }
+    };
+    return Object.assign({},base,overrides[id]||{});
+  }
+
+  return base;
+}
+
 function rememberCurrentMolecularTransforms() {
   const ids = ["gpcr","galpha","gbeta","ggamma","plc"];
   ids.forEach((id) => {
@@ -1576,7 +1604,7 @@ function updateEducationalUi(index){
 
   const list=$("stepStructures");
   list.innerHTML=step.structures.map((id)=>{
-    const s=STRUCTURES[id];
+    const s=structureForPathway(id);
     return '<button class="gp-structure-chip'+(STATE.selectedId===id?' is-active':'')+'" data-structure-id="'+id+'" type="button">'+(s?.name||id)+'</button>';
   }).join("");
   $$("[data-structure-id]",list).forEach((btn)=>btn.addEventListener("click",()=>selectStructure(btn.dataset.structureId,true)));
@@ -1657,7 +1685,7 @@ function showStudyTask(feedback="Selecione a estrutura diretamente na cena."){
 }
 
 function selectStructure(id,focus=false){
-  const structure=STRUCTURES[id];
+  const structure=structureForPathway(id);
   if(!structure) return;
   STATE.selectedId=id;
 
