@@ -1,4 +1,4 @@
-import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas5";
+import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas6";
 import {
   STRUCTURES,
   SOURCE_REGISTRY,
@@ -6,7 +6,7 @@ import {
   PLANE_CONFIG,
   REGION_TARGETS,
   getStructure
-} from "./radiologia/data.js?v=20261005-atlas5";
+} from "./radiologia/data.js?v=20261005-atlas6";
 
 const $ = (id) => document.getElementById(id);
 const state = {
@@ -73,7 +73,7 @@ async function ensureStructures(radiology) {
 
   try {
     const ok = await radiology.ensureSegmentations();
-    state.availableIds = new Set();
+    state.availableIds = new Set(radiology.getAvailableStructureIds());
 
     if (button) {
       button.disabled = false;
@@ -101,6 +101,21 @@ async function ensureStructures(radiology) {
       $("voxelReadout").textContent = "CT pronto · falha ao carregar estruturas";
     }
     return false;
+  }
+}
+
+function updateExamProgress(payload) {
+  const percent = Math.max(0, Math.min(100, Math.round(Number(payload?.percent) || 0)));
+  const overlay = $("examLoadingOverlay");
+  const bar = $("examProgressBar");
+
+  if ($("examLoadingStage")) $("examLoadingStage").textContent = payload?.label || "Carregando exame";
+  if ($("examLoadingPercent")) $("examLoadingPercent").textContent = percent + "%";
+  if ($("examLoadingDetail")) $("examLoadingDetail").textContent = payload?.detail || "";
+  if (bar) bar.style.width = percent + "%";
+
+  if (overlay) {
+    overlay.classList.toggle("is-complete", percent >= 100);
   }
 }
 
@@ -411,6 +426,7 @@ async function boot() {
       sagittal: $("radiologySagittalCanvas")
     },
     {
+      onProgress: updateExamProgress,
       onFirstImageReady: ({ dims }) => {
         if ($("voxelReadout")) $("voxelReadout").textContent = "CT carregado · preparando outras vistas…";
         if ($("studySlices")) $("studySlices").textContent = dims.join("×") + " voxels";
@@ -454,7 +470,8 @@ async function boot() {
     await radiology.ready;
   } catch (error) {
     console.error(error);
-    showBootError("Não foi possível carregar o atlas de tomografia. Recarregue a página.");
+    showBootError("Não foi possível carregar a tomografia. Recarregue a página.");
+    updateExamProgress({ percent: 0, label: "Falha ao carregar", detail: "verifique a conexão e tente novamente" });
     throw error;
   }
 
