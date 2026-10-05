@@ -2,13 +2,10 @@ import { AnatomyViewer } from "./radiologia/anatomy-viewer.js";
 import { RadiologyViewer } from "./radiologia/radiology-viewer.js";
 import {
   STRUCTURES,
-  STUDIES,
   SOURCE_REGISTRY,
+  RADIOLOGY_STUDY,
   PLANE_CONFIG,
-  getStructure,
-  sliceForCoordinate,
-  structurePlaneCoordinate,
-  normalRadius
+  getStructure
 } from "./radiologia/data.js";
 
 const $ = function (id) {
@@ -16,14 +13,21 @@ const $ = function (id) {
 };
 
 const state = {
-  selectedId: null,
+  selectedId: "aorta",
   plane: "axial",
-  studyId: "abdomen_ct_atlas_001",
+  frac: [0.5, 0.5, 0.55],
+  coverage: new Map(),
   structureVisibility: new Map(
     STRUCTURES.map(function (structure) {
       return [structure.id, true];
     })
-  )
+  ),
+  categoryVisibility: new Map([
+    ["body", true],
+    ["bones", true],
+    ["vessels", true],
+    ["organs", true]
+  ])
 };
 
 async function api(url, options) {
@@ -62,9 +66,22 @@ async function logout() {
       method: "POST",
       credentials: "same-origin"
     });
-  } finally {
+  }
+  finally {
     location.href = "/login.html";
   }
+}
+
+function announce(message) {
+  const status = $("liveStatus");
+  if (status) status.textContent = message;
+}
+
+function showBootError(message) {
+  const element = $("labBootError");
+  if (!element) return;
+  element.hidden = false;
+  element.textContent = message;
 }
 
 function setTooltip(element, structure, event) {
@@ -89,13 +106,16 @@ function setTooltip(element, structure, event) {
   if (left + width + margin > window.innerWidth) {
     left = event.clientX - width - 18;
   }
-
   if (top + height + margin > window.innerHeight) {
     top = event.clientY - height - 18;
   }
 
   element.style.left = Math.max(margin, left) + "px";
   element.style.top = Math.max(margin, top) + "px";
+}
+
+function coverageCount(id) {
+  return state.coverage.get(id) || 0;
 }
 
 function createStructureList(anatomy, radiology) {
@@ -109,16 +129,24 @@ function createStructureList(anatomy, radiology) {
     row.className = "structure-row";
     row.dataset.structureId = structure.id;
 
+    if (coverageCount(structure.id) === 0) {
+      row.classList.add("is-unavailable");
+    }
+
     const select = document.createElement("button");
     select.type = "button";
     select.className = "structure-select";
     select.innerHTML =
-      '<span class="structure-swatch" style="--structure-color:#' +
-      structure.color.toString(16).padStart(6, "0") +
+      '<span class="structure-swatch" style="--structure-color:' +
+      structure.color +
       '"></span>' +
-      '<span class="structure-name"><strong>' + structure.name +
-      '</strong><small>' + structure.englishName + "</small></span>";
+      '<span class="structure-name"><strong>' +
+      structure.name +
+      '</strong><small>' +
+      structure.englishName +
+      "</small></span>";
 
+    select.disabled = coverageCount(structure.id) === 0;
     select.addEventListener("click", function () {
       selectStructure(structure.id, anatomy, radiology, true);
     });
@@ -129,11 +157,12 @@ function createStructureList(anatomy, radiology) {
     visibility.setAttribute("aria-label", "Ocultar " + structure.name);
     visibility.setAttribute("aria-pressed", "true");
     visibility.innerHTML = "<span></span>";
+    visibility.disabled = coverageCount(structure.id) === 0;
 
     visibility.addEventListener("click", function () {
       const next = !state.structureVisibility.get(structure.id);
       state.structureVisibility.set(structure.id, next);
-      anatomy.setVisibility(structure.id, next);
+      anatomy.setStructureVisibility(structure.id, next);
       visibility.classList.toggle("is-visible", next);
       visibility.setAttribute("aria-pressed", next ? "true" : "false");
       visibility.setAttribute(
@@ -147,6 +176,8 @@ function createStructureList(anatomy, radiology) {
     row.appendChild(visibility);
     container.appendChild(row);
   });
+
+  updateStructureListSelection();
 }
 
 function updateStructureListSelection() {
@@ -158,31 +189,53 @@ function updateStructureListSelection() {
   });
 }
 
-function selectStructure(id, anatomy, radiology, recenter) {
+function structureTargetFrac(structure, anatomy) {
+  const fallback = structure.focusFrac || state.frac;
+  const bounds = anatomy.fractionBoundsForStructure(structure.id);
+
+  if (!bounds) return fallback.slice();
+
+  const center = bounds.min.map(function (value, index) {
+    return (value + bounds.max[index]) / 2;
+  });
+
+  /*
+   * O atlas HRA e a TC são sujeitos/fontes diferentes.
+   * Mantemos o eixo corporal real do HRA no 3D e usamos um ponto radiológico
+   * didático curado para a TC quando disponível, sem fingir registro DICOM.
+   */
+  return [
+    fallback[0] ?? center[0],
+    fallback[1] ?? center[1],
+    fallback[2] ?? center[2]
+  ];
+}
+
+function selectStructure(id, anatomy, radiology, moveScan) {
+  const structure = id ? getStructure(id) : null;
+
+  if (id && (!structure || coverageCount(id) === 0)) {
+    return;
+  }
+
   state.selectedId = id || null;
   anatomy.selectStructure(state.selectedId);
-  radiology.setSelected(state.selectedId);
   updateStructureListSelection();
   updateStructureInfo();
-  updateSelectedStateBadge(radiology);
+  updateSelectedStateBadge(anatomy);
+  updateSlicePresence(anatomy, radiology);
 
-  if (!state.selectedId) return;
-
-  const structure = getStructure(state.selectedId);
   if (!structure) return;
 
-  if (recenter) {
-    const coordinate = structurePlaneCoordinate(structure, state.plane);
-    const slice = sliceForCoordinate(
-      state.plane,
-      coordinate,
-      radiology.study.slices
-    );
-
-    radiology.setSlice(slice, true);
+  if (moveScan) {
+    const target = structureTargetFrac(structure, anatomy);
+    state.frac = target.slice();
+    radiology.setCrosshairFraction(target, true);
+    anatomy.setCrosshairFraction(target);
     syncSliceUi(anatomy, radiology);
   }
 
+  anatomy.focusStructure(structure.id);
   announce(structure.name + " selecionado");
 }
 
@@ -207,20 +260,17 @@ function updateStructureInfo() {
   $("structureRegion").textContent = structure.region;
   $("structureDescription").textContent = structure.description;
 
-  const studyNames = structure.studies
-    .map(function (id) {
-      const study = STUDIES.find(function (item) {
-        return item.id === id;
-      });
-      return study ? study.modality : "";
-    })
-    .filter(Boolean);
+  if ($("structureStudies")) {
+    $("structureStudies").textContent = "HRA 3D · TC real";
+  }
 
-  $("structureStudies").textContent =
-    Array.from(new Set(studyNames)).join(" · ") || "Sem estudo associado";
+  if ($("structureMeshCount")) {
+    $("structureMeshCount").textContent =
+      coverageCount(structure.id) + " malhas HRA";
+  }
 }
 
-function updateSelectedStateBadge(radiology) {
+function updateSelectedStateBadge(anatomy) {
   const badge = $("selectedPlaneState");
   if (!badge) return;
 
@@ -231,37 +281,55 @@ function updateSelectedStateBadge(radiology) {
   }
 
   const structure = getStructure(state.selectedId);
-  const coordinate = radiology.coordinate();
-  const center = structurePlaneCoordinate(structure, state.plane);
-  const radius = normalRadius(structure, state.plane);
-  const visible = Math.abs(coordinate - center) <= radius * 1.08;
+  const bounds = anatomy.fractionBoundsForStructure(state.selectedId);
 
-  badge.textContent = visible
-    ? structure.name + " presente neste corte"
-    : structure.name + " fora deste corte";
+  if (!structure || !bounds) {
+    badge.textContent = "Estrutura sem malha carregada";
+    badge.classList.remove("in-plane");
+    badge.classList.add("out-plane");
+    return;
+  }
 
-  badge.classList.toggle("in-plane", visible);
-  badge.classList.toggle("out-plane", !visible);
+  const axis = PLANE_CONFIG[state.plane].fracAxis;
+  const fraction = state.frac[axis];
+  const present =
+    fraction >= bounds.min[axis] - 0.008 &&
+    fraction <= bounds.max[axis] + 0.008;
+
+  badge.textContent = present
+    ? structure.name + " cruza o plano 3D atual"
+    : structure.name + " fora do plano 3D atual";
+
+  badge.classList.toggle("in-plane", present);
+  badge.classList.toggle("out-plane", !present);
 }
 
-function updateSlicePresence(radiology) {
+function updateSlicePresence(anatomy, radiology) {
   const container = $("sliceStructures");
   if (!container) return;
 
-  const structures = radiology.structuresOnSlice();
+  const axis = PLANE_CONFIG[state.plane].fracAxis;
+  const structures = anatomy.structuresAtFraction(
+    state.plane,
+    state.frac[axis]
+  );
 
   if (!structures.length) {
     container.innerHTML =
-      '<span class="slice-empty">Nenhuma estrutura-alvo cruza este plano.</span>';
+      '<span class="slice-empty">Nenhuma estrutura-alvo do HRA cruza este nível 3D.</span>';
     return;
   }
 
   container.innerHTML = structures
     .map(function (structure) {
       const selected = structure.id === state.selectedId ? " active" : "";
-      return '<button type="button" class="slice-structure-chip' + selected +
-        '" data-id="' + structure.id + '">' +
-        structure.name + "</button>";
+      return '<button type="button" class="slice-structure-chip' +
+        selected +
+        '" data-id="' +
+        structure.id +
+        '">' +
+        structure.name +
+        "</button>";
     })
     .join("");
 }
@@ -277,14 +345,6 @@ function bindSlicePresence(anatomy, radiology) {
   });
 }
 
-function updateOrientationLabels() {
-  const config = PLANE_CONFIG[state.plane];
-  $("orientTop").textContent = config.top;
-  $("orientBottom").textContent = config.bottom;
-  $("orientLeft").textContent = config.left;
-  $("orientRight").textContent = config.right;
-}
-
 function updatePlaneButtons() {
   document.querySelectorAll("[data-plane]").forEach(function (button) {
     const active = button.dataset.plane === state.plane;
@@ -292,67 +352,76 @@ function updatePlaneButtons() {
     button.setAttribute("aria-pressed", active ? "true" : "false");
   });
 
-  $("currentPlaneLabel").textContent = PLANE_CONFIG[state.plane].label;
+  if ($("currentPlaneLabel")) {
+    $("currentPlaneLabel").textContent =
+      PLANE_CONFIG[state.plane].label;
+  }
+}
+
+function updateOrientationLabels() {
+  const config = PLANE_CONFIG[state.plane];
+  if ($("activePlaneReadout")) {
+    $("activePlaneReadout").textContent =
+      config.label + " ativo para o corte 3D";
+  }
 }
 
 function updateStudyUi(radiology) {
-  document.querySelectorAll("[data-modality]").forEach(function (button) {
-    const active = button.dataset.modality === radiology.study.modality;
-    button.classList.toggle("active", active);
-    button.setAttribute("aria-pressed", active ? "true" : "false");
-  });
+  if ($("studyName")) $("studyName").textContent = RADIOLOGY_STUDY.name;
+  if ($("studyModality")) $("studyModality").textContent = "TC";
+  if ($("studySource")) $("studySource").textContent = RADIOLOGY_STUDY.source;
+  if ($("studyLicense")) {
+    $("studyLicense").textContent =
+      "Proveniência pública documentada · Steve Pieper / Slicer3D";
+  }
 
-  $("studyName").textContent = radiology.study.name;
-  $("studyModality").textContent = radiology.study.modality;
-  $("studySlices").textContent = radiology.study.slices + " cortes";
-  $("studySource").textContent = radiology.study.source;
-  $("studyLicense").textContent = radiology.study.license;
-  $("windowControls").classList.toggle(
-    "is-mri",
-    radiology.study.modality === "MRI"
-  );
-  $("windowLabel").textContent =
-    radiology.study.modality === "CT" ? "Janela" : "Contraste";
-  $("levelLabel").textContent =
-    radiology.study.modality === "CT" ? "Nível" : "Brilho";
+  if ($("studySlices")) {
+    const dims = radiology.dims || [1, 1, 1];
+    $("studySlices").textContent =
+      dims[0] + "×" + dims[1] + "×" + dims[2] + " voxels";
+  }
+
+  if ($("ctDatasetLabel")) {
+    $("ctDatasetLabel").textContent = "CT_Abdo · volume NIfTI real";
+  }
 }
 
 function syncSliceUi(anatomy, radiology) {
   const slider = $("sliceSlider");
-  slider.max = String(radiology.study.slices - 1);
-  slider.value = String(radiology.sliceIndex);
+  if (!slider) return;
 
-  $("sliceCurrent").textContent = String(radiology.sliceIndex + 1);
-  $("sliceTotal").textContent = String(radiology.study.slices);
+  const total = radiology.sliceCount(state.plane);
+  const current = radiology.currentSliceIndex(state.plane);
 
-  const coordinate = radiology.coordinate();
-  anatomy.setPlane(state.plane, coordinate);
-  $("sliceCoordinate").textContent =
-    coordinate.toFixed(2) + " u anat.";
+  slider.max = String(Math.max(0, total - 1));
+  slider.value = String(current);
 
-  updateSlicePresence(radiology);
-  updateSelectedStateBadge(radiology);
+  if ($("sliceCurrent")) $("sliceCurrent").textContent = String(current + 1);
+  if ($("sliceTotal")) $("sliceTotal").textContent = String(total);
+
+  const axis = PLANE_CONFIG[state.plane].fracAxis;
+  const fraction = state.frac[axis];
+
+  if ($("sliceCoordinate")) {
+    $("sliceCoordinate").textContent =
+      Math.round(fraction * 100) + "% do eixo";
+  }
+
+  anatomy.setPlane(state.plane, fraction);
+  anatomy.setCrosshairFraction(state.frac);
+  updateSlicePresence(anatomy, radiology);
+  updateSelectedStateBadge(anatomy);
 }
 
 function setPlane(plane, anatomy, radiology) {
+  if (!PLANE_CONFIG[plane]) return;
+
   state.plane = plane;
   radiology.setPlane(plane);
-
-  if (state.selectedId) {
-    const structure = getStructure(state.selectedId);
-    const coordinate = structurePlaneCoordinate(structure, plane);
-    const slice = sliceForCoordinate(
-      plane,
-      coordinate,
-      radiology.study.slices
-    );
-    radiology.setSlice(slice, true);
-  } else {
-    radiology.setSlice(
-      Math.round((radiology.study.slices - 1) / 2),
-      true
-    );
-  }
+  anatomy.setPlane(
+    plane,
+    state.frac[PLANE_CONFIG[plane].fracAxis]
+  );
 
   updatePlaneButtons();
   updateOrientationLabels();
@@ -365,25 +434,57 @@ function renderSources() {
 
   container.innerHTML = SOURCE_REGISTRY.map(function (source) {
     const sourceLink = source.sourceUrl
-      ? '<a href="' + source.sourceUrl + '" target="_blank" rel="noopener">Fonte</a>'
+      ? '<a href="' + source.sourceUrl +
+        '" target="_blank" rel="noopener">Fonte</a>'
       : "";
     const licenseLink = source.licenseUrl
-      ? '<a href="' + source.licenseUrl + '" target="_blank" rel="noopener">Licença</a>'
+      ? '<a href="' + source.licenseUrl +
+        '" target="_blank" rel="noopener">Licença</a>'
       : "";
 
     return '<article class="source-item">' +
       '<div><strong>' + source.label + '</strong><span>' +
       source.role + '</span></div>' +
       '<p>' + source.license + '</p>' +
-      '<div class="source-links">' + sourceLink + licenseLink + "</div>" +
+      '<small>' + source.attribution + '</small>' +
+      '<div class="source-links">' +
+      sourceLink + licenseLink +
+      "</div>" +
       "</article>";
   }).join("");
 }
 
-function announce(message) {
-  const status = $("liveStatus");
-  if (!status) return;
-  status.textContent = message;
+function bindCategoryControls(anatomy) {
+  document.querySelectorAll("[data-anatomy-category]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const category = button.dataset.anatomyCategory;
+      const next = !state.categoryVisibility.get(category);
+      state.categoryVisibility.set(category, next);
+      anatomy.setCategoryVisibility(category, next);
+      button.classList.toggle("active", next);
+      button.setAttribute("aria-pressed", next ? "true" : "false");
+    });
+  });
+}
+
+function bindWindowPresets(radiology) {
+  document.querySelectorAll("[data-window-preset]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const width = Number(button.dataset.width);
+      const level = Number(button.dataset.level);
+
+      $("windowWidth").value = String(width);
+      $("windowLevel").value = String(level);
+      $("windowWidthValue").textContent = String(width);
+      $("windowLevelValue").textContent = String(level);
+
+      radiology.setWindow(width, level);
+
+      document.querySelectorAll("[data-window-preset]").forEach(function (item) {
+        item.classList.toggle("active", item === button);
+      });
+    });
+  });
 }
 
 function bindControls(anatomy, radiology) {
@@ -393,52 +494,25 @@ function bindControls(anatomy, radiology) {
     });
   });
 
-  document.querySelectorAll("[data-modality]").forEach(function (button) {
-    button.addEventListener("click", function () {
-      const modality = button.dataset.modality;
-      const study = STUDIES.find(function (item) {
-        return item.modality === modality;
-      });
-
-      if (!study) return;
-      state.studyId = study.id;
-      radiology.setStudy(study.id);
-
-      if (state.selectedId) {
-        const structure = getStructure(state.selectedId);
-        const coordinate = structurePlaneCoordinate(structure, state.plane);
-        radiology.setSlice(
-          sliceForCoordinate(
-            state.plane,
-            coordinate,
-            radiology.study.slices
-          ),
-          true
-        );
-      }
-
-      updateStudyUi(radiology);
-      syncSliceUi(anatomy, radiology);
-      announce(study.name + " carregado");
-    });
-  });
-
-  $("sliceSlider").addEventListener("input", function () {
+  $("sliceSlider")?.addEventListener("input", function () {
     radiology.setSlice(Number(this.value), true);
+    state.frac = radiology.crosshairFrac.slice();
     syncSliceUi(anatomy, radiology);
   });
 
-  $("slicePrev").addEventListener("click", function () {
-    radiology.setSlice(radiology.sliceIndex - 1, true);
+  $("slicePrev")?.addEventListener("click", function () {
+    radiology.setSlice(radiology.currentSliceIndex() - 1, true);
+    state.frac = radiology.crosshairFrac.slice();
     syncSliceUi(anatomy, radiology);
   });
 
-  $("sliceNext").addEventListener("click", function () {
-    radiology.setSlice(radiology.sliceIndex + 1, true);
+  $("sliceNext")?.addEventListener("click", function () {
+    radiology.setSlice(radiology.currentSliceIndex() + 1, true);
+    state.frac = radiology.crosshairFrac.slice();
     syncSliceUi(anatomy, radiology);
   });
 
-  $("windowWidth").addEventListener("input", function () {
+  $("windowWidth")?.addEventListener("input", function () {
     radiology.setWindow(
       Number(this.value),
       Number($("windowLevel").value)
@@ -446,7 +520,7 @@ function bindControls(anatomy, radiology) {
     $("windowWidthValue").textContent = this.value;
   });
 
-  $("windowLevel").addEventListener("input", function () {
+  $("windowLevel")?.addEventListener("input", function () {
     radiology.setWindow(
       Number($("windowWidth").value),
       Number(this.value)
@@ -454,90 +528,157 @@ function bindControls(anatomy, radiology) {
     $("windowLevelValue").textContent = this.value;
   });
 
-  $("radZoomIn").addEventListener("click", function () {
-    radiology.zoomBy(0.2);
-    $("radZoomValue").textContent =
-      Math.round(radiology.zoom * 100) + "%";
+  $("radZoomIn")?.addEventListener("click", function () {
+    radiology.zoomBy(0.16);
   });
 
-  $("radZoomOut").addEventListener("click", function () {
-    radiology.zoomBy(-0.2);
-    $("radZoomValue").textContent =
-      Math.round(radiology.zoom * 100) + "%";
+  $("radZoomOut")?.addEventListener("click", function () {
+    radiology.zoomBy(-0.16);
   });
 
-  $("radReset").addEventListener("click", function () {
+  $("radReset")?.addEventListener("click", function () {
     radiology.resetView();
-    $("radZoomValue").textContent = "100%";
   });
 
-  $("resetAnatomy").addEventListener("click", function () {
+  $("mprView")?.addEventListener("click", function () {
+    radiology.setMultiplanar();
+  });
+
+  $("resetAnatomy")?.addEventListener("click", function () {
     anatomy.reset();
   });
 
-  $("focusAnatomy").addEventListener("click", function () {
+  $("focusAnatomy")?.addEventListener("click", function () {
     if (state.selectedId) anatomy.focusStructure(state.selectedId);
   });
 
-  $("transparencyToggle").addEventListener("click", function () {
+  $("transparencyToggle")?.addEventListener("click", function () {
     const active = this.classList.toggle("active");
     this.setAttribute("aria-pressed", active ? "true" : "false");
     anatomy.setTransparent(active);
   });
 
-  $("planeToggle").addEventListener("click", function () {
+  $("planeToggle")?.addEventListener("click", function () {
     const active = this.classList.toggle("active");
     this.setAttribute("aria-pressed", active ? "true" : "false");
     anatomy.setPlaneVisible(active);
   });
+
+  $("clipToggle")?.addEventListener("click", function () {
+    const active = this.classList.toggle("active");
+    this.setAttribute("aria-pressed", active ? "true" : "false");
+    anatomy.setClippingEnabled(active);
+  });
+
+  bindCategoryControls(anatomy);
+  bindWindowPresets(radiology);
 }
 
-function boot() {
+async function boot() {
   const anatomyTooltip = $("anatomyTooltip");
-  const radiologyTooltip = $("radiologyTooltip");
+
+  let radiology = null;
 
   const anatomy = new AnatomyViewer($("anatomyCanvas"), {
     onHover: function (structure, event) {
       setTooltip(anatomyTooltip, structure, event);
     },
     onSelect: function (id) {
-      selectStructure(id, anatomy, radiology, true);
+      if (radiology) {
+        selectStructure(id, anatomy, radiology, true);
+      }
+    },
+    onReady: function (report) {
+      report.structures.forEach(function (item) {
+        state.coverage.set(item.id, item.meshCount);
+      });
+
+      if (report.failures.length) {
+        showBootError(
+          "Alguns sistemas anatômicos reais não carregaram: " +
+          report.failures.map(function (item) {
+            return item.system;
+          }).join(", ")
+        );
+      }
     }
   });
 
-  const radiology = new RadiologyViewer($("radiologyCanvas"), {
-    onSliceChange: function () {
-      syncSliceUi(anatomy, radiology);
-    },
-    onStructurePick: function (id) {
-      selectStructure(id, anatomy, radiology, false);
-      anatomy.focusStructure(id);
-    },
-    onHover: function (id, event) {
-      setTooltip(
-        radiologyTooltip,
-        id ? getStructure(id) : null,
-        id ? event : null
+  radiology = new RadiologyViewer($("radiologyCanvas"), {
+    onLocationChange: function (payload) {
+      if (!payload || !payload.frac) return;
+
+      state.frac = payload.frac.slice();
+      anatomy.setCrosshairFraction(state.frac);
+      anatomy.setPlane(
+        state.plane,
+        state.frac[PLANE_CONFIG[state.plane].fracAxis]
       );
+      syncSliceUi(anatomy, radiology);
+
+      if (payload.intensityText && $("voxelReadout")) {
+        $("voxelReadout").textContent = payload.intensityText;
+      }
+    },
+    onReady: function () {
+      updateStudyUi(radiology);
     },
     onZoomChange: function (zoom) {
-      $("radZoomValue").textContent =
-        Math.round(zoom * 100) + "%";
+      if ($("radZoomValue")) {
+        $("radZoomValue").textContent =
+          Math.round(zoom * 100) + "%";
+      }
     }
   });
+
+  const results = await Promise.allSettled([
+    anatomy.ready,
+    radiology.ready
+  ]);
+
+  if (results[0].status === "rejected") {
+    console.error(results[0].reason);
+    showBootError(
+      "Não foi possível carregar as malhas anatômicas HRA. Recarregue a página."
+    );
+  }
+
+  if (results[1].status === "rejected") {
+    console.error(results[1].reason);
+    showBootError(
+      "Não foi possível carregar o volume TC real. Recarregue a página."
+    );
+  }
 
   createStructureList(anatomy, radiology);
   bindSlicePresence(anatomy, radiology);
   bindControls(anatomy, radiology);
   renderSources();
+
   updatePlaneButtons();
   updateOrientationLabels();
   updateStudyUi(radiology);
+
+  state.frac = radiology.crosshairFrac.slice();
   syncSliceUi(anatomy, radiology);
   updateStructureInfo();
 
-  selectStructure("liver", anatomy, radiology, true);
-  anatomy.focusStructure("liver");
+  const firstAvailable =
+    STRUCTURES.find(function (structure) {
+      return coverageCount(structure.id) > 0 && structure.id === "aorta";
+    }) ||
+    STRUCTURES.find(function (structure) {
+      return coverageCount(structure.id) > 0;
+    });
+
+  if (firstAvailable) {
+    selectStructure(
+      firstAvailable.id,
+      anatomy,
+      radiology,
+      true
+    );
+  }
 
   window.addEventListener("beforeunload", function () {
     anatomy.dispose();
@@ -552,14 +693,9 @@ if ($("logoutSidebar")) {
   $("logoutSidebar").addEventListener("click", logout);
 }
 
-try {
-  boot();
-} catch (error) {
-  console.error("Falha ao iniciar Radiologia 3D:", error);
-  const fallback = $("labBootError");
-  if (fallback) {
-    fallback.hidden = false;
-    fallback.textContent =
-      "Não foi possível iniciar o motor 3D. Recarregue a página ou verifique a conexão com os módulos gráficos.";
-  }
-}
+boot().catch(function (error) {
+  console.error("Falha ao iniciar Radiologia 3D real:", error);
+  showBootError(
+    "Não foi possível iniciar o laboratório de Radiologia 3D. Verifique os assets reais e recarregue a página."
+  );
+});
