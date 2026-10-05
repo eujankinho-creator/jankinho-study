@@ -1376,8 +1376,11 @@ function applyStepVisual(stepIndex) {
   const steps = currentSteps();
   const step = steps[stepIndex];
   if (!step) return;
-  resetObjectTransforms();
 
+  resetObjectTransforms();
+  applyMolecularPathwayVisibility(STATE.pathway);
+
+  const id = step.id;
   const ligand=STATE.structureObjects.get("ligand");
   const galpha=STATE.structureObjects.get("galpha");
   const gbeta=STATE.structureObjects.get("gbeta");
@@ -1387,48 +1390,129 @@ function applyStepVisual(stepIndex) {
   const effector=STATE.structureObjects.get("effector");
   const camp=STATE.structureObjects.get("camp");
   const pka=STATE.structureObjects.get("pka");
+  const atp=STATE.structureObjects.get("atp");
+  const plc=STATE.structureObjects.get("plc");
+  const pip2=STATE.structureObjects.get("pip2");
+  const ip3=STATE.structureObjects.get("ip3");
+  const dag=STATE.structureObjects.get("dag");
+  const ip3r=STATE.structureObjects.get("ip3r");
+  const calcium=STATE.structureObjects.get("calcium");
+  const pkc=STATE.structureObjects.get("pkc");
+  const rgs=STATE.structureObjects.get("rgs");
 
-  setStructureVisibility("cell", stepIndex <= 1 || stepIndex >= 12);
-  if(STATE.cellGroup) STATE.cellGroup.visible = stepIndex <= 1 || stepIndex >= 12;
-  if(STATE.membraneGroup) STATE.membraneGroup.visible = true;
-  if(STATE.molecularRoot) STATE.molecularRoot.visible = true;
+  const isResting = /RESTING|INACTIVE|RESET$/.test(id);
+  const isLigand = /LIGAND/.test(id);
+  const isGdpRelease = /GDP_RELEASE/.test(id);
+  const isGtpBinding = /GTP_BINDING/.test(id);
+  const isActiveG = /ACTIVE|ACTIVATION|AC_INHIBITION|PLC_RECRUIT|PIP2|CLEAVAGE|IP3|CA_RELEASE|DAG|PKC|RESPONSE/.test(id);
+  const isTermination = /TERMINATION/.test(id);
+  const isReassembly = /REASSEMBLY/.test(id);
 
-  if(ligand){
-    ligand.visible=stepIndex>=1 && stepIndex<=3;
-    const baseLigand = STATE.baseTransforms.get("ligand");
-    if (ligand.userData.experimental && baseLigand) {
-      ligand.position.copy(baseLigand.position);
-      if(stepIndex===1) ligand.position.y += 2.3;
+  if (STATE.membraneGroup) STATE.membraneGroup.visible = true;
+
+  const organelleIds=["nucleus","mitochondria","er","golgi","ribosomes","vesicles","cytoskeleton"];
+  const showWholeCell = step.scale === "cell" || isResting;
+  if (STATE.cellGroup) STATE.cellGroup.visible = showWholeCell || STATE.pathway === "gq";
+
+  organelleIds.forEach((structureId) => {
+    const object=STATE.structureObjects.get(structureId);
+    if (!object) return;
+    if (STATE.pathway === "gq" && structureId === "er") {
+      object.visible = showWholeCell || /IP3|CA_RELEASE|RESPONSE/.test(id);
     } else {
-      if(stepIndex===1) ligand.position.set(0,3.5,0);
-      if(stepIndex>=2) ligand.position.set(.1,1.55,0);
+      object.visible = showWholeCell;
     }
-  }
-  if(gdp){
-    gdp.visible=stepIndex<=4 || stepIndex>=10;
-    if(stepIndex===4) gdp.position.set(1.7,-2.5,.8);
-  }
-  if(gtp){
-    gtp.visible=stepIndex>=5 && stepIndex<=10;
-    if(stepIndex===5) gtp.position.set(.8,-2.6,.1);
-  }
-  if(galpha && stepIndex>=6 && stepIndex<=10) galpha.position.x += 2.8;
-  if(gbeta && stepIndex>=6 && stepIndex<=10) gbeta.position.x -= .55;
-  if(ggamma && stepIndex>=6 && stepIndex<=10) ggamma.position.x -= .55;
-  if(effector) effector.visible=stepIndex>=7 && stepIndex<=9;
-  if(camp) camp.visible=stepIndex>=8 && stepIndex<=9;
-  if(pka) pka.visible=stepIndex===9;
+  });
 
-  if(stepIndex>=7 && galpha) galpha.position.x += 1.2;
-
-  if (STATE.cellGroup) {
-    ["nucleus","mitochondria","er","golgi","ribosomes","vesicles","cytoskeleton"].forEach((id) => {
-      const object = STATE.structureObjects.get(id);
-      if (object) object.visible = stepIndex === 0 || stepIndex === 12;
-    });
+  if (ligand) {
+    ligand.visible = isLigand || /RECRUITMENT|GPCR_ACTIVATED/.test(id);
+    const base = STATE.baseTransforms.get("ligand");
+    if (base) ligand.position.copy(base.position);
+    if (/APPROACH/.test(id) || id === "LIGAND_BINDING") ligand.position.y += 2.2;
+    if (/BINDING$|GPCR_ACTIVATED/.test(id)) ligand.position.y += .25;
   }
+
+  if (gdp) {
+    gdp.visible = isResting || isGdpRelease || isTermination || isReassembly;
+    const base=STATE.baseTransforms.get("gdp");
+    if(base) gdp.position.copy(base.position);
+    if (isGdpRelease) gdp.position.add(new THREE.Vector3(1.8,.3,.8));
+  }
+
+  if (gtp) {
+    gtp.visible = isGtpBinding || isActiveG || isTermination;
+    const base=STATE.baseTransforms.get("gtp");
+    if(base) gtp.position.copy(base.position);
+    if (isGtpBinding) gtp.position.set(.8,-2.6,.1);
+  }
+
+  if (galpha) {
+    const base=STATE.baseTransforms.get("galpha");
+    if(base) galpha.position.copy(base.position);
+    if (isActiveG || isTermination) galpha.position.x += STATE.pathway === "gq" ? 1.2 : 2.2;
+  }
+  if (gbeta) {
+    const base=STATE.baseTransforms.get("gbeta");
+    if(base) gbeta.position.copy(base.position);
+    if (isActiveG || isTermination) gbeta.position.x -= .45;
+  }
+  if (ggamma) {
+    const base=STATE.baseTransforms.get("ggamma");
+    if(base) ggamma.position.copy(base.position);
+    if (isActiveG || isTermination) ggamma.position.x -= .45;
+  }
+
+  if (effector) {
+    effector.visible = STATE.pathway !== "gq" && (
+      /EFFECTOR|AC_INHIBITION|SECOND_MESSENGER|CAMP_DOWN|CELLULAR_RESPONSE/.test(id)
+    );
+  }
+
+  if (atp) atp.visible = STATE.pathway === "gs" && /EFFECTOR|SECOND_MESSENGER/.test(id);
+  if (camp) {
+    camp.visible = STATE.pathway === "gs"
+      ? /SECOND_MESSENGER|CELLULAR_RESPONSE/.test(id)
+      : STATE.pathway === "gi" && /CAMP_DOWN/.test(id);
+    camp.scale.setScalar(STATE.pathway === "gi" ? .48 : 1);
+  }
+  if (pka) pka.visible = STATE.pathway === "gs" && /CELLULAR_RESPONSE/.test(id);
+
+  if (plc) {
+    plc.visible = STATE.pathway === "gq" && /PLC_RECRUIT|PIP2|CLEAVAGE|IP3|CA_RELEASE|DAG|PKC|RESPONSE/.test(id);
+  }
+  if (pip2) pip2.visible = STATE.pathway === "gq" && /PIP2|CLEAVAGE/.test(id);
+  if (dag) dag.visible = STATE.pathway === "gq" && /CLEAVAGE|DAG|PKC|RESPONSE/.test(id);
+  if (ip3) {
+    ip3.visible = STATE.pathway === "gq" && /CLEAVAGE|IP3/.test(id);
+    const base=STATE.baseTransforms.get("ip3");
+    if(base) ip3.position.copy(base.position);
+    if (/IP3_DIFFUSION/.test(id)) ip3.position.set(.2,-5.1,-.8);
+    if (/IP3R/.test(id)) ip3.position.set(-1.6,-8.0,-1.9);
+  }
+  if (ip3r) ip3r.visible = STATE.pathway === "gq" && /IP3R|CA_RELEASE/.test(id);
+  if (calcium) {
+    calcium.visible = STATE.pathway === "gq" && /CA_RELEASE|PKC|RESPONSE/.test(id);
+    const base=STATE.baseTransforms.get("calcium");
+    if(base) calcium.position.copy(base.position);
+    if (/CA_RELEASE/.test(id)) calcium.position.set(-1.1,-6.9,-1.5);
+    if (/PKC|RESPONSE/.test(id)) calcium.position.set(.6,-4.6,-.2);
+  }
+  if (pkc) {
+    pkc.visible = STATE.pathway === "gq" && /PKC|RESPONSE/.test(id);
+    const base=STATE.baseTransforms.get("pkc");
+    if(base) pkc.position.copy(base.position);
+    if (/PKC/.test(id)) pkc.position.set(1.9,-1.4,.45);
+  }
+  if (rgs) rgs.visible = isTermination;
+
+  if (STATE.pathway === "gi" && camp?.visible) {
+    camp.children.forEach((child,index)=>{ child.visible = index < 9; });
+  } else if (camp) {
+    camp.children.forEach((child)=>{ child.visible = true; });
+  }
+
+  setRepresentation(STATE.representation);
 }
-
 function animateCamera(presetName, immediate=false) {
   const preset=CAMERA_PRESETS[presetName] || CAMERA_PRESETS.cell;
   const camera=STATE.camera;
