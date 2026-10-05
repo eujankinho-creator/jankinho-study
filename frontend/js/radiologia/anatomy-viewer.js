@@ -487,6 +487,48 @@ export class AnatomyViewer {
           if (system.id === "integumentary") baseOpacity = 0.09;
           if (system.id === "skeletal") baseOpacity = 0.34;
 
+          /*
+           * Os GLBs femininos preservam a geometria HRA real, mas o pacote
+           * web remove os materiais de origem. A cor aqui é apenas uma camada
+           * didática de leitura — nunca substitui nem inventa a geometria.
+           */
+          if (material.color) {
+            const path = object.userData.objectPath || "";
+
+            if (structure) {
+              material.color.lerp(hexColor(structure.color), 0.66);
+            }
+            else if (system.id === "skeletal") {
+              material.color.lerp(new THREE.Color(0xe4d6b8), 0.78);
+            }
+            else if (system.id === "integumentary") {
+              material.color.lerp(new THREE.Color(0xc99d86), 0.46);
+            }
+            else if (system.id === "cardiovascular") {
+              if (/vein|vena|cava|portal/i.test(path)) {
+                material.color.lerp(new THREE.Color(0x557bc4), 0.72);
+              }
+              else if (/arter|aorta|trunk/i.test(path)) {
+                material.color.lerp(new THREE.Color(0xd45d66), 0.72);
+              }
+              else {
+                material.color.lerp(new THREE.Color(0xc96b75), 0.48);
+              }
+            }
+            else if (system.id === "digestive") {
+              material.color.lerp(new THREE.Color(0xb77a62), 0.36);
+            }
+            else if (system.id === "renal") {
+              material.color.lerp(new THREE.Color(0xaa665d), 0.44);
+            }
+            else if (system.id === "lymphatic") {
+              material.color.lerp(new THREE.Color(0x86506d), 0.48);
+            }
+            else if (system.id === "reproductive") {
+              material.color.lerp(new THREE.Color(0xb87893), 0.40);
+            }
+          }
+
           if (this.transparentMode && !isSelected) {
             baseOpacity *= system.id === "integumentary" ? 0.38 : 0.28;
           }
