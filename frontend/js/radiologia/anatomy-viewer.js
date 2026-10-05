@@ -64,7 +64,7 @@ export class AnatomyViewer {
     this.renderer.localClippingEnabled = true;
     const deviceRatio = window.devicePixelRatio || 1;
     const hardwareThreads = Number(navigator.hardwareConcurrency || 8);
-    const maxPixelRatio = hardwareThreads <= 4 ? 1.25 : 1.55;
+    const maxPixelRatio = hardwareThreads <= 4 ? 1.12 : 1.35;
     this.renderer.setPixelRatio(Math.min(deviceRatio, maxPixelRatio));
 
     this.controls = new OrbitControls(this.camera, this.canvas);
@@ -782,7 +782,7 @@ export class AnatomyViewer {
 
     this.controls.target.copy(center);
     this.camera.position.copy(
-      center.clone().add(direction.multiplyScalar(diagonal * 1.85))
+      center.clone().add(direction.multiplyScalar(diagonal * 2.55))
     );
     this.camera.near = Math.max(0.001, diagonal / 300);
     this.camera.far = Math.max(10, diagonal * 30);
@@ -797,12 +797,12 @@ export class AnatomyViewer {
     const size = this.bodyBounds.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z);
     const fov = THREE.MathUtils.degToRad(this.camera.fov);
-    const distance = maxDim / (2 * Math.tan(fov / 2)) * 1.03;
+    const distance = maxDim / (2 * Math.tan(fov / 2)) * 1.28;
 
     this.controls.target.copy(center);
     this.camera.position.set(
-      center.x + maxDim * 0.24,
-      center.y + maxDim * 0.035,
+      center.x + maxDim * 0.20,
+      center.y + maxDim * 0.025,
       center.z + distance
     );
     this.camera.near = Math.max(maxDim / 10000, 0.001);
