@@ -49,15 +49,29 @@ export class RadiologyViewer {
   constructor(canvas, options) {
     this.canvas = canvas;
     this.options = options || {};
-    this.context = canvas.getContext("2d");
-    this.noiseTexture = createNoiseTexture(280);
+    this.context = canvas.getContext("2d", {
+      alpha: false,
+      desynchronized: true
+    }) || canvas.getContext("2d");
+    this.interactive = this.options.interactive !== false;
+    this.compact = Boolean(this.options.compact);
+    this.fitScale = clamp(Number(this.options.fitScale) || 0.34, 0.26, 0.42);
+    this.initialZoom = clamp(Number(this.options.initialZoom) || 0.88, 0.62, 2);
+    this.minZoom = clamp(Number(this.options.minZoom) || 0.62, 0.5, 2);
+    this.maxZoom = clamp(Number(this.options.maxZoom) || 3.6, 1, 5);
+    this.pixelRatioCap = clamp(
+      Number(this.options.pixelRatioCap) || (this.compact ? 1.1 : 1.5),
+      1,
+      2
+    );
+    this.noiseTexture = createNoiseTexture(this.compact ? 144 : 220);
     this.study = STUDIES[0];
     this.plane = "axial";
     this.sliceIndex = 60;
     this.selectedId = null;
     this.windowWidth = 400;
     this.windowLevel = 50;
-    this.zoom = 1;
+    this.zoom = this.initialZoom;
     this.panX = 0;
     this.panY = 0;
     this.drag = null;
@@ -67,10 +81,12 @@ export class RadiologyViewer {
     this.resizeObserver = new ResizeObserver(this.resize.bind(this));
     this.resizeObserver.observe(this.canvas.parentElement || this.canvas);
 
-    this.canvas.addEventListener("wheel", this.onWheel.bind(this), { passive: false });
-    this.canvas.addEventListener("pointerdown", this.onPointerDown.bind(this));
-    window.addEventListener("pointermove", this.onPointerMove.bind(this));
-    window.addEventListener("pointerup", this.onPointerUp.bind(this));
+    if (this.interactive) {
+      this.canvas.addEventListener("wheel", this.onWheel.bind(this), { passive: false });
+      this.canvas.addEventListener("pointerdown", this.onPointerDown.bind(this));
+      window.addEventListener("pointermove", this.onPointerMove.bind(this));
+      window.addEventListener("pointerup", this.onPointerUp.bind(this));
+    }
 
     this.resize();
   }
@@ -91,7 +107,7 @@ export class RadiologyViewer {
     this.plane = plane;
     this.panX = 0;
     this.panY = 0;
-    this.zoom = 1;
+    this.zoom = this.initialZoom;
     this.draw();
   }
 
@@ -107,7 +123,9 @@ export class RadiologyViewer {
   }
 
   setSelected(id) {
-    this.selectedId = id || null;
+    const next = id || null;
+    if (next === this.selectedId) return;
+    this.selectedId = next;
     this.draw();
   }
 
@@ -118,7 +136,7 @@ export class RadiologyViewer {
   }
 
   setZoom(value) {
-    this.zoom = clamp(Number(value) || 1, 0.8, 4.5);
+    this.zoom = clamp(Number(value) || this.initialZoom, this.minZoom, this.maxZoom);
     this.draw();
   }
 
@@ -127,7 +145,7 @@ export class RadiologyViewer {
   }
 
   resetView() {
-    this.zoom = 1;
+    this.zoom = this.initialZoom;
     this.panX = 0;
     this.panY = 0;
     this.draw();
@@ -145,13 +163,17 @@ export class RadiologyViewer {
     const parent = this.canvas.parentElement || this.canvas;
     const width = Math.max(1, parent.clientWidth);
     const height = Math.max(1, parent.clientHeight);
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const ratio = Math.min(window.devicePixelRatio || 1, this.pixelRatioCap);
 
     this.canvas.width = Math.round(width * ratio);
     this.canvas.height = Math.round(height * ratio);
     this.canvas.style.width = width + "px";
     this.canvas.style.height = height + "px";
     this.context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    this.context.imageSmoothingEnabled = true;
+    if ("imageSmoothingQuality" in this.context) {
+      this.context.imageSmoothingQuality = "high";
+    }
     this.cssWidth = width;
     this.cssHeight = height;
     this.pixelRatio = ratio;
@@ -218,8 +240,8 @@ export class RadiologyViewer {
 
   toCanvas(point, bodyWidth, bodyHeight, width, height) {
     const fit = Math.min(
-      (width * 0.41) / Math.max(0.1, bodyWidth),
-      (height * 0.41) / Math.max(0.1, bodyHeight)
+      (width * this.fitScale) / Math.max(0.1, bodyWidth),
+      (height * this.fitScale) / Math.max(0.1, bodyHeight)
     );
 
     return {
@@ -487,17 +509,19 @@ export class RadiologyViewer {
     context.lineWidth = 1.2;
     context.stroke();
 
-    context.save();
-    context.globalAlpha = this.study.modality === "CT" ? 0.075 : 0.055;
-    context.globalCompositeOperation = "soft-light";
-    context.drawImage(
-      this.noiseTexture,
-      width / 2 - bodyProjected.rx,
-      height / 2 - bodyProjected.ry,
-      bodyProjected.rx * 2,
-      bodyProjected.ry * 2
-    );
-    context.restore();
+    if (!this.compact) {
+      context.save();
+      context.globalAlpha = this.study.modality === "CT" ? 0.065 : 0.05;
+      context.globalCompositeOperation = "soft-light";
+      context.drawImage(
+        this.noiseTexture,
+        width / 2 - bodyProjected.rx,
+        height / 2 - bodyProjected.ry,
+        bodyProjected.rx * 2,
+        bodyProjected.ry * 2
+      );
+      context.restore();
+    }
 
     this.drawBone(context, width, height, bodyWidth, bodyHeight);
 
@@ -544,9 +568,15 @@ export class RadiologyViewer {
     context.stroke();
     context.setLineDash([]);
 
-    context.fillStyle = "rgba(187,219,234,.58)";
-    context.font = "600 9px Inter, system-ui, sans-serif";
-    context.fillText(this.study.modality + " · " + PLANE_CONFIG[this.plane].label.toUpperCase(), 16, height - 17);
+    if (!this.compact) {
+      context.fillStyle = "rgba(187,219,234,.58)";
+      context.font = "600 9px Inter, system-ui, sans-serif";
+      context.fillText(
+        this.study.modality + " · " + PLANE_CONFIG[this.plane].label.toUpperCase(),
+        16,
+        height - 17
+      );
+    }
   }
 
   pointInProjected(item, x, y) {
