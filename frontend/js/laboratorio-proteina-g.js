@@ -1259,11 +1259,12 @@ function updateVisualTweens(now) {
 
 function setRepresentation(mode) {
   STATE.representation=mode;
-  if (!STATE.molecularRoot) return;
-  STATE.molecularRoot.traverse((obj)=>{
-    if (!obj.userData.kind) return;
-    obj.visible = obj.userData.kind === mode;
-  });
+  for (const root of STATE.pathwayRoots.values()) {
+    root.traverse((obj)=>{
+      if (!obj.userData.kind) return;
+      obj.visible = obj.userData.kind === mode;
+    });
+  }
   if ($("representationSelect")) $("representationSelect").value=mode;
 }
 
@@ -1273,7 +1274,9 @@ function setStructureVisibility(id, visible) {
 }
 
 function applyStepVisual(stepIndex) {
-  const step=STEPS[stepIndex];
+  const steps = currentSteps();
+  const step = steps[stepIndex];
+  if (!step) return;
   resetObjectTransforms();
 
   const ligand=STATE.structureObjects.get("ligand");
@@ -1374,10 +1377,12 @@ function updateCameraTween(now){
 }
 
 function updateEducationalUi(index){
-  const step=STEPS[index];
+  const steps=currentSteps();
+  const step=steps[index];
+  if(!step) return;
   $("stepEyebrow").textContent="ETAPA "+(index+1)+" · "+step.scale.toUpperCase();
   $("stepTitle").textContent=step.title;
-  $("timelineLabel").textContent=(index+1)+" / "+STEPS.length;
+  $("timelineLabel").textContent=(index+1)+" / "+steps.length;
   $("timelineState").textContent=step.id;
   $("timelineSlider").value=String(index);
   $("educationStep").textContent="ETAPA "+(index+1)+" · "+step.short.toUpperCase();
@@ -1397,9 +1402,10 @@ function updateEducationalUi(index){
 }
 
 function applyStep(index,{camera=true,fromPlayback=false}={}){
-  index=Math.max(0,Math.min(STEPS.length-1,index));
+  const steps=currentSteps();
+  index=Math.max(0,Math.min(steps.length-1,index));
   STATE.stepIndex=index;
-  const step=STEPS[index];
+  const step=steps[index];
   if (fromPlayback) animateStepVisual(index);
   else {
     STATE.visualTweens.length = 0;
@@ -1422,10 +1428,12 @@ function stopPlayback(){
 function scheduleNext(){
   clearTimeout(STATE.playTimer);
   if(!STATE.playing) return;
-  const step=STEPS[STATE.stepIndex];
+  const steps=currentSteps();
+  const step=steps[STATE.stepIndex];
+  if(!step) return;
   const delay=Math.max(650,step.duration/STATE.speed);
   STATE.playTimer=setTimeout(()=>{
-    if(STATE.stepIndex>=STEPS.length-1){
+    if(STATE.stepIndex>=steps.length-1){
       stopPlayback();
       return;
     }
@@ -1503,7 +1511,8 @@ function selectStructure(id,focus=false){
 }
 
 function buildStepStrip(){
-  $("stepStrip").innerHTML=STEPS.map((step,index)=>
+  const steps=currentSteps();
+  $("stepStrip").innerHTML=steps.map((step,index)=>
     '<button type="button" class="gp-step-button'+(index===0?' is-active':'')+'" data-step-index="'+index+'"><span>'+String(index+1).padStart(2,"0")+'</span><strong>'+step.short+'</strong></button>'
   ).join("");
   $$(".gp-step-button").forEach((btn)=>btn.addEventListener("click",()=>{
@@ -1573,13 +1582,13 @@ function createScene(){
 }
 
 async function loadScientificAssets(){
-  setLoading(10,"Preparando visualização científica","lendo metadados do PDB 3SN6");
-  const manifestResponse=await fetch("/data/gprotein/manifest.json?v=1",{cache:"no-cache"});
+  setLoading(10,"Preparando visualização científica","lendo metadados estruturais de Gs, Gi e Gq");
+  const manifestResponse=await fetch("/data/gprotein/manifest.json?v=2",{cache:"no-cache"});
   if(!manifestResponse.ok) throw new Error("Manifesto 3SN6 indisponível.");
   STATE.pdbManifest=await manifestResponse.json();
 
   setLoading(28,"Estrutura experimental","baixando coordenadas atômicas 3SN6");
-  const pdbResponse=await fetch("/data/gprotein/3SN6.pdb?v=1",{cache:"force-cache"});
+  const pdbResponse=await fetch("/data/gprotein/3SN6.pdb?v=2",{cache:"force-cache"});
   if(!pdbResponse.ok) throw new Error("Estrutura PDB 3SN6 indisponível.");
   const pdbText=await pdbResponse.text();
 
@@ -1595,8 +1604,12 @@ async function loadScientificAssets(){
 
   setLoading(86,"Finalizando interação","preparando câmera, seleção e estados da via");
   setRepresentation("cartoon");
+  applyMolecularPathwayVisibility("gs");
+  buildStepStrip();
+  if ($("timelineSlider")) $("timelineSlider").max=String(currentSteps().length-1);
+  updatePathwayScienceUi();
   applyStep(0,{camera:false});
-  setLoading(100,"Laboratório pronto","estrutura experimental e cena educacional carregadas");
+  setLoading(100,"Laboratório pronto","estruturas experimentais e cena educacional carregadas");
   STATE.loaded=true;
   setTimeout(()=>$("gpViewerLoading")?.classList.add("done"),180);
 }
@@ -1614,16 +1627,7 @@ function bindUi(){
 
   $$("[data-mode]").forEach((btn)=>btn.addEventListener("click",()=>setMode(btn.dataset.mode)));
   $$("[data-camera-preset]").forEach((btn)=>btn.addEventListener("click",()=>animateCamera(btn.dataset.cameraPreset)));
-  $$("[data-pathway]").forEach((btn)=>btn.addEventListener("click",()=>{
-    const id=btn.dataset.pathway;
-    $$("[data-pathway]").forEach((item)=>item.classList.toggle("is-active",item===btn));
-    if(id!=="gs"){
-      $("educationTitle").textContent=PATHWAYS[id].name+" preparada para expansão";
-      $("educationText").textContent="A arquitetura já separa receptor, proteína G, efetor, mensageiro, animação e conteúdo. A cena estrutural ativa nesta versão permanece focada em Gs/β2AR para preservar fidelidade visual.";
-    }else{
-      applyStep(STATE.stepIndex,{camera:false});
-    }
-  }));
+  $("[data-pathway]").forEach((btn)=>btn.addEventListener("click",()=>switchPathway(btn.dataset.pathway)));
 }
 
 function renderLoop(now){
