@@ -1,5 +1,5 @@
-import { Exam3DViewer } from "./radiologia/exam-3d-viewer.js";
-import { RadiologyViewer } from "./radiologia/radiology-viewer.js";
+import { AnatomyViewer } from "./radiologia/anatomy-viewer.js";
+import { RadiologyMultiView } from "./radiologia/radiology-multiview.js";
 import {
   STRUCTURES,
   SOURCE_REGISTRY,
@@ -19,8 +19,10 @@ const state = {
     STRUCTURES.map((structure) => [structure.id, true])
   ),
   categoryVisibility: new Map([
+    ["bones", true],
     ["vessels", true],
-    ["organs", true]
+    ["organs", true],
+    ["body", true]
   ])
 };
 
@@ -137,7 +139,7 @@ function createStructureList(exam3d, radiology) {
       const next = !state.structureVisibility.get(structure.id);
       state.structureVisibility.set(structure.id, next);
 
-      exam3d.setStructureVisibility(structure.label, next);
+      exam3d.setStructureVisibility(structure.id, next);
       radiology.setStructureVisibility(structure.label, next);
 
       visibility.classList.toggle("is-visible", next);
@@ -271,7 +273,7 @@ function selectStructure(id, exam3d, radiology, moveToStructure) {
   if (!structure || !structureAvailable(structure.id)) return;
 
   state.selectedId = structure.id;
-  exam3d.selectLabel(structure.label);
+  exam3d.selectStructure(structure.id);
   radiology.selectLabel(structure.label);
 
   if (moveToStructure) {
@@ -303,7 +305,7 @@ function updatePlaneButtons() {
 
   if ($("activePlaneReadout")) {
     $("activePlaneReadout").textContent =
-      PLANE_CONFIG[state.plane].label + " · mesmo espaço voxel";
+      PLANE_CONFIG[state.plane].label + " · atlas real + TC";
   }
 }
 
@@ -326,7 +328,11 @@ function syncSliceUi(exam3d, radiology) {
       Math.round(state.frac[axis] * 100) + "% do eixo";
   }
 
-  exam3d.setCrosshairFraction(state.frac, true);
+  exam3d.setCrosshairFraction(state.frac);
+  exam3d.setPlane(
+    state.plane,
+    state.frac[PLANE_CONFIG[state.plane].fracAxis]
+  );
   updateSelectedStateBadge(radiology);
   updateSlicePresence(exam3d, radiology);
 }
@@ -334,7 +340,11 @@ function syncSliceUi(exam3d, radiology) {
 function setPlane(plane, exam3d, radiology) {
   if (!PLANE_CONFIG[plane]) return;
   state.plane = plane;
-  radiology.setPlane(plane);
+  radiology.setPlane(plane, true);
+  exam3d.setPlane(
+    plane,
+    state.frac[PLANE_CONFIG[plane].fracAxis]
+  );
   updatePlaneButtons();
   syncSliceUi(exam3d, radiology);
 }
@@ -395,7 +405,7 @@ function bindCategoryControls(exam3d, radiology) {
       const next = !state.categoryVisibility.get(category);
       state.categoryVisibility.set(category, next);
 
-      exam3d.setCategoryVisibility(category, next, STRUCTURES);
+      exam3d.setCategoryVisibility(category, next);
 
       STRUCTURES
         .filter((structure) => structure.category === category)
@@ -476,7 +486,7 @@ function bindControls(exam3d, radiology) {
   $("radZoomIn")?.addEventListener("click", () => radiology.zoomBy(0.16));
   $("radZoomOut")?.addEventListener("click", () => radiology.zoomBy(-0.16));
   $("radReset")?.addEventListener("click", () => radiology.resetView());
-  $("mprView")?.addEventListener("click", () => radiology.setMultiplanar());
+  $("mprView")?.addEventListener("click", () => setPlane("axial", exam3d, radiology));
 
   $("resetAnatomy")?.addEventListener("click", () => exam3d.reset());
   $("focusAnatomy")?.addEventListener("click", () => exam3d.focusSelected());
@@ -490,13 +500,13 @@ function bindControls(exam3d, radiology) {
   $("planeToggle")?.addEventListener("click", function () {
     const active = this.classList.toggle("active");
     this.setAttribute("aria-pressed", active ? "true" : "false");
-    exam3d.setCrosshairVisible(active);
+    exam3d.setPlaneVisible(active);
   });
 
   $("clipToggle")?.addEventListener("click", function () {
     const active = this.classList.toggle("active");
     this.setAttribute("aria-pressed", active ? "true" : "false");
-    exam3d.setClipPlane(active);
+    exam3d.setClippingEnabled(active);
   });
 
   $("segmentationToggle")?.addEventListener("click", function () {
@@ -514,46 +524,68 @@ async function boot() {
   let radiology = null;
   let syncing = false;
 
-  exam3d = new Exam3DViewer($("anatomyCanvas"), {
-    onLocationChange: (payload) => {
-      if (!payload?.frac || syncing || !radiology) return;
-      syncing = true;
-      state.frac = payload.frac.slice();
-      radiology.setCrosshairFraction(state.frac, true);
-      syncSliceUi(exam3d, radiology);
-      syncing = false;
+  exam3d = new AnatomyViewer($("anatomyCanvas"), {
+    onSelect: (id) => {
+      if (!radiology || !id || !structureAvailable(id)) return;
+      selectStructure(id, exam3d, radiology, true);
     },
-    onStructureAtLocation: (structure) => {
-      if (!radiology || !structureAvailable(structure.id)) return;
-      selectStructure(structure.id, exam3d, radiology, false);
-    }
-  });
-
-  radiology = new RadiologyViewer($("radiologyCanvas"), {
-    onLocationChange: (payload) => {
-      if (!payload?.frac || syncing || !exam3d) return;
-      syncing = true;
-      state.frac = payload.frac.slice();
-      exam3d.setCrosshairFraction(state.frac, true);
-
-      if (payload.intensityText && $("voxelReadout")) {
-        $("voxelReadout").textContent = payload.intensityText;
-      }
-
-      syncSliceUi(exam3d, radiology);
-      syncing = false;
-    },
-    onStructureAtLocation: (structure) => {
-      if (!exam3d || !structureAvailable(structure.id)) return;
-      selectStructure(structure.id, exam3d, radiology, false);
-    },
-    onReady: () => updateStudyUi(radiology),
-    onZoomChange: (zoom) => {
-      if ($("radZoomValue")) {
-        $("radZoomValue").textContent = Math.round(zoom * 100) + "%";
+    onReady: (report) => {
+      if (report?.failures?.length) {
+        console.warn("Sistemas HRA com falha parcial:", report.failures);
       }
     }
   });
+
+  radiology = new RadiologyMultiView(
+    $("radiologyMultiView"),
+    {
+      axial: $("radiologyAxialCanvas"),
+      coronal: $("radiologyCoronalCanvas"),
+      sagittal: $("radiologySagittalCanvas")
+    },
+    {
+      onLocationChange: (payload) => {
+        if (!payload?.frac || syncing || !exam3d) return;
+
+        syncing = true;
+        state.frac = payload.frac.slice();
+        state.plane = payload.plane || radiology.primaryPlane || state.plane;
+
+        exam3d.setCrosshairFraction(state.frac);
+        exam3d.setPlane(
+          state.plane,
+          state.frac[PLANE_CONFIG[state.plane].fracAxis]
+        );
+
+        if (payload.intensityText && $("voxelReadout")) {
+          $("voxelReadout").textContent = payload.intensityText;
+        }
+
+        updatePlaneButtons();
+        syncSliceUi(exam3d, radiology);
+        syncing = false;
+      },
+      onPlaneChange: (plane) => {
+        state.plane = plane;
+        exam3d.setPlane(
+          plane,
+          state.frac[PLANE_CONFIG[plane].fracAxis]
+        );
+        updatePlaneButtons();
+        syncSliceUi(exam3d, radiology);
+      },
+      onStructureAtLocation: (structure) => {
+        if (!exam3d || !structureAvailable(structure.id)) return;
+        selectStructure(structure.id, exam3d, radiology, false);
+      },
+      onReady: () => updateStudyUi(radiology),
+      onZoomChange: (zoom) => {
+        if ($("radZoomValue")) {
+          $("radZoomValue").textContent = Math.round(zoom * 100) + "%";
+        }
+      }
+    }
+  );
 
   const results = await Promise.allSettled([
     exam3d.ready,
@@ -563,14 +595,14 @@ async function boot() {
   if (results[0].status === "rejected") {
     console.error(results[0].reason);
     showBootError(
-      "Não foi possível carregar o 3D do exame. Recarregue a página."
+      "Não foi possível carregar o atlas anatômico 3D. Recarregue a página."
     );
   }
 
   if (results[1].status === "rejected") {
     console.error(results[1].reason);
     showBootError(
-      "Não foi possível carregar o CT/segmentação co-registrados."
+      "Não foi possível carregar as vistas axial, coronal e sagital."
     );
   }
 
@@ -583,7 +615,12 @@ async function boot() {
   updateStudyUi(radiology);
 
   state.frac = radiology.crosshairFrac.slice();
-  exam3d.setCrosshairFraction(state.frac, true);
+  state.plane = radiology.primaryPlane || "axial";
+  exam3d.setCrosshairFraction(state.frac);
+  exam3d.setPlane(
+    state.plane,
+    state.frac[PLANE_CONFIG[state.plane].fracAxis]
+  );
   syncSliceUi(exam3d, radiology);
   updateStructureInfo(radiology);
 
