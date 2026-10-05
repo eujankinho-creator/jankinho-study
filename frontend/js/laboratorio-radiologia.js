@@ -482,7 +482,7 @@ async function renderOverlayForPlane(plane) {
         out.data[i] = r;
         out.data[i+1] = g;
         out.data[i+2] = b;
-        out.data[i+3] = 145;
+        out.data[i+3] = 78;
       }
     }
     canvas.getContext("2d").putImageData(out,0,0);
