@@ -1,4 +1,4 @@
-import { STRUCTURES, getStructure } from "./radiologia/data.js?v=20261005-stack1";
+import { STRUCTURES, getStructure } from "./radiologia/data.js?v=20261005-stack11";
 
 const $ = (id) => document.getElementById(id);
 const PLANES = ["axial", "coronal", "sagittal"];
@@ -370,23 +370,74 @@ async function loadMask(group, plane, ordinal) {
   return promise;
 }
 
+function nearestMaskLabel(mask, x, y, maxRadius) {
+  const width = mask.canvas.width;
+  const height = mask.canvas.height;
+  const data = mask.ctx.getImageData(0, 0, width, height).data;
+
+  const read = (px, py) => {
+    if (px < 0 || py < 0 || px >= width || py >= height) return 0;
+    return data[(px + py * width) * 4];
+  };
+
+  const exact = read(x, y);
+  if (exact) return { label: exact, distance: 0 };
+
+  for (let radius = 1; radius <= maxRadius; radius += 1) {
+    let best = null;
+    let bestDistance = Infinity;
+
+    for (let dy = -radius; dy <= radius; dy += 1) {
+      for (let dx = -radius; dx <= radius; dx += 1) {
+        if (Math.max(Math.abs(dx), Math.abs(dy)) !== radius) continue;
+
+        const label = read(x + dx, y + dy);
+        if (!label) continue;
+
+        const distance = Math.hypot(dx, dy);
+        if (distance < bestDistance) {
+          best = label;
+          bestDistance = distance;
+        }
+      }
+    }
+
+    if (best) return { label: best, distance: bestDistance };
+  }
+
+  return null;
+}
+
 async function labelsAtPoint(plane, u, v) {
   const ordinal = planeOrdinal(plane);
   const groups = state.manifest.groups || [];
-  const found = [];
+  const candidates = [];
+  const maxRadius = plane === "axial" ? 8 : 5;
 
   for (const group of groups) {
     try {
       const mask = await loadMask(group, plane, ordinal);
       const x = Math.max(0, Math.min(mask.canvas.width - 1, Math.floor(u * mask.canvas.width)));
       const y = Math.max(0, Math.min(mask.canvas.height - 1, Math.floor(v * mask.canvas.height)));
-      const label = mask.ctx.getImageData(x, y, 1, 1).data[0];
-      if (!label) continue;
-      const structure = STRUCTURES.find((s) => s.group === group && s.localLabel === label);
-      if (structure && !found.some((item) => item.id === structure.id)) found.push(structure);
+      const hit = nearestMaskLabel(mask, x, y, maxRadius);
+      if (!hit) continue;
+
+      const structure = STRUCTURES.find((s) => s.group === group && s.localLabel === hit.label);
+      if (!structure) continue;
+
+      candidates.push({ structure, distance: hit.distance });
     } catch (error) {}
   }
-  return found;
+
+  candidates.sort((a, b) => a.distance - b.distance);
+
+  if (!candidates.length) return [];
+  const bestDistance = candidates[0].distance;
+
+  return candidates
+    .filter((item, index) => index === 0 || item.distance <= bestDistance + 1.5)
+    .map((item) => item.structure)
+    .filter((item, index, array) => array.findIndex((candidate) => candidate.id === item.id) === index);
 }
 
 function renderPointStructures(items) {
