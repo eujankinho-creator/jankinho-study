@@ -12,6 +12,7 @@ export class RadiologyMultiView {
     this.plane = "axial";
     this.crosshairFrac = [0.5, 0.5, 0.5];
     this.syncing = false;
+    this.initializing = true;
     this.viewers = {};
     this.tiles = new Map();
 
@@ -58,6 +59,7 @@ export class RadiologyMultiView {
 
     const source = this.viewers.axial;
     this.crosshairFrac = source.crosshairFrac.slice();
+    this.initializing = false;
 
     this.broadcastCrosshair(this.crosshairFrac, null);
 
@@ -156,7 +158,7 @@ export class RadiologyMultiView {
   }
 
   handleViewerLocation(plane, payload) {
-    if (this.syncing || !payload?.frac) return;
+    if (this.initializing || this.syncing || !payload?.frac) return;
 
     this.syncing = true;
     this.crosshairFrac = payload.frac.slice();
