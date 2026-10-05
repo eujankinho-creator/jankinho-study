@@ -62,7 +62,9 @@ const state = {
     interactionPixelRatio: .55,
     idlePixelRatio: Math.min(window.devicePixelRatio || 1, .95),
     interactionActive: false,
-    lastRenderAt: 0
+    lastRenderAt: 0,
+    focusQualityActive: false,
+    focusPixelRatio: Math.min(window.devicePixelRatio || 1, 1.15)
   }
 };
 
@@ -1399,6 +1401,7 @@ async function replaceProxyWithAnatomicalMesh(structure) {
     old.material?.dispose?.();
   }
   apply3DVisibility();
+  update3DFocusQuality();
   apply3DSeparation();
   update3DClipping();
   update3DSelection();
@@ -1481,7 +1484,7 @@ function set3DInteractionQuality(active) {
     if(plane) plane.visible=!active;
   });
 
-  a.renderer.setPixelRatio(active?a.interactionPixelRatio:a.idlePixelRatio);
+  a.renderer.setPixelRatio(active?a.interactionPixelRatio:(a.focusQualityActive?a.focusPixelRatio:a.idlePixelRatio));
   if(a.host) a.renderer.setSize(a.host.clientWidth,Math.max(1,a.host.clientHeight),false);
 
   if(!active){
@@ -1600,6 +1603,7 @@ function apply3DVisibility() {
   }
   state.anatomy3d.selectable=Array.from(state.anatomy3d.meshes.values()).filter((mesh)=>mesh.visible);
   sync3DControls();
+  update3DFocusQuality();
   request3DRender();
 }
 
@@ -1679,6 +1683,7 @@ function bindAnatomy3DControls() {
       else state.anatomy3d.enabledCategories.add(category);
       state.anatomy3d.isolatedId=null;
       apply3DVisibility();
+      update3DFocusQuality();
     });
   });
 
@@ -1696,6 +1701,7 @@ function bindAnatomy3DControls() {
     if(!state.selectedId) return;
     state.anatomy3d.isolatedId=state.anatomy3d.isolatedId===state.selectedId?null:state.selectedId;
     apply3DVisibility();
+    update3DFocusQuality();
   });
 
   $("anatomy3dClip")?.addEventListener("click",()=>{
@@ -1713,6 +1719,30 @@ function bindAnatomy3DControls() {
     state.anatomy3d.separation=0;
     apply3DSeparation();
   });
+}
+
+function update3DFocusQuality() {
+  const a=state.anatomy3d;
+  const focusActive=Boolean(state.selectedId || a.isolatedId);
+  a.focusQualityActive=focusActive;
+
+  if(a.renderer && !a.interactionActive){
+    const targetRatio=focusActive?a.focusPixelRatio:a.idlePixelRatio;
+    if(Math.abs(a.renderer.getPixelRatio()-targetRatio)>.01){
+      a.renderer.setPixelRatio(targetRatio);
+      if(a.host) a.renderer.setSize(a.host.clientWidth,Math.max(1,a.host.clientHeight),false);
+    }
+  }
+
+  for(const [id,mesh] of a.meshes){
+    const material=mesh.material;
+    if(!material) continue;
+    const isFocused=(state.selectedId===id)||(a.isolatedId===id);
+    material.flatShading=!isFocused;
+    material.roughness=isFocused?.5:(mesh.userData.category==="bones"?.76:.64);
+    material.needsUpdate=true;
+  }
+  request3DRender(120);
 }
 
 function update3DSelection() {
