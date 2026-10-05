@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-coreg1">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-atlasmv1">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -66,7 +66,7 @@
     <header class="header">
       <div>
         <div class="header-title">Laboratório</div>
-        <span class="rad-header-subtitle">Mesmo exame real · 3D segmentado ↔ TC multiplanar</span>
+        <span class="rad-header-subtitle">Atlas anatômico real · TC segmentada multiplanar</span>
       </div>
 
       <div class="header-user">
@@ -163,9 +163,9 @@
           </div>
         </div>
 
-        <div class="rad-warning-chip real-warning exact-match-chip" title="O 3D e os cortes usam o mesmo volume e a mesma segmentação.">
+        <div class="rad-warning-chip real-warning exact-match-chip" title="Os cortes usam CT e segmentação do mesmo exame; o modelo anatômico 3D é um atlas humano real de referência.">
           <span>✓</span>
-          correspondência voxel a voxel · mesmo exame
+          CT + SEG exatos · atlas 3D de referência
         </div>
       </section>
 
@@ -173,8 +173,8 @@
         <article class="rad-panel anatomy-panel real-anatomy-panel">
           <div class="panel-title-row">
             <div>
-              <span class="eyebrow">ANATOMIA DO EXAME · 3D</span>
-              <h2>Reconstrução 3D do exame</h2>
+              <span class="eyebrow">ATLAS ANATÔMICO REAL · 3D</span>
+              <h2>Modelo anatômico completo</h2>
             </div>
             <div class="panel-meta">
               <span id="currentPlaneLabel">Axial</span>
@@ -184,7 +184,7 @@
 
           <div class="anatomy-category-tabs" aria-label="Camadas anatômicas">
             <button class="active" type="button" data-anatomy-category="bones" aria-pressed="true">
-              Contexto ósseo
+              Ossos
             </button>
             <button class="active" type="button" data-anatomy-category="vessels" aria-pressed="true">
               Vasos
@@ -193,7 +193,7 @@
               Órgãos
             </button>
             <button class="active" type="button" data-anatomy-category="body" aria-pressed="true">
-              Contorno CT
+              Contorno corporal
             </button>
           </div>
 
@@ -206,7 +206,7 @@
           </div>
 
           <div class="anatomy-stage real-anatomy-stage">
-            <canvas id="anatomyCanvas" aria-label="Reconstrução 3D do mesmo exame CT segmentado"></canvas>
+            <canvas id="anatomyCanvas" aria-label="Atlas anatômico 3D real HRA"></canvas>
 
             <div class="anatomy-orientation" aria-hidden="true">
               <span class="orient-s">S</span>
@@ -218,8 +218,8 @@
             </div>
 
             <div class="real-model-seal">
-              <span>CT</span>
-              <div><strong>Mesmo exame em 3D</strong><small>TotalSegmentator · voxel a voxel</small></div>
+              <span>HRA</span>
+              <div><strong>Human Reference Atlas</strong><small>ossos + vasos + órgãos reais</small></div>
             </div>
 
             <div class="stage-tip">
@@ -272,8 +272,30 @@
             </div>
           </div>
 
-          <div class="radiology-stage real-radiology-stage">
-            <canvas id="radiologyCanvas" aria-label="TC real multiplanar com NiiVue"></canvas>
+          <div id="radiologyMultiView" class="radiology-multiview" data-primary-plane="axial">
+            <section class="rad-view-tile is-primary" data-rad-view-plane="axial" aria-current="true">
+              <div class="rad-view-head">
+                <span><i class="plane-dot axial-dot"></i> Axial</span>
+                <strong data-expand-label>ampliado</strong>
+              </div>
+              <canvas id="radiologyAxialCanvas" aria-label="TC axial real"></canvas>
+            </section>
+
+            <section class="rad-view-tile is-secondary secondary-top" data-rad-view-plane="coronal" tabindex="0">
+              <div class="rad-view-head">
+                <span><i class="plane-dot coronal-dot"></i> Coronal</span>
+                <strong data-expand-label>clique para ampliar</strong>
+              </div>
+              <canvas id="radiologyCoronalCanvas" aria-label="TC coronal real"></canvas>
+            </section>
+
+            <section class="rad-view-tile is-secondary secondary-bottom" data-rad-view-plane="sagittal" tabindex="0">
+              <div class="rad-view-head">
+                <span><i class="plane-dot sagittal-dot"></i> Sagital</span>
+                <strong data-expand-label>clique para ampliar</strong>
+              </div>
+              <canvas id="radiologySagittalCanvas" aria-label="TC sagital real"></canvas>
+            </section>
 
             <div class="slice-readout real-slice-readout">
               <span>PLANO ATIVO</span>
@@ -282,7 +304,7 @@
             </div>
 
             <div class="image-instructions">
-              clique nos cortes para mover o cruzamento · arraste para ajustar contraste/pan · roda para navegar
+              a tela grande é interativa · clique em uma tela menor para ampliá-la
             </div>
           </div>
 
@@ -401,7 +423,7 @@
 
   <div id="anatomyTooltip" class="rad-tooltip" hidden></div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-coreg1"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-atlasmv1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
