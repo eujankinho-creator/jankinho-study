@@ -360,6 +360,33 @@ export class AnatomyViewer {
       this.scene.add(vertebra);
     }
 
+    const skeletalMaterial = new THREE.MeshStandardMaterial({
+      color: 0xd8d1bf,
+      roughness: 0.95,
+      transparent: true,
+      opacity: 0.24,
+      depthWrite: false
+    });
+
+    const ribGeometry = new THREE.TorusGeometry(1, 0.028, 5, 22);
+    for (let i = 0; i < 8; i += 1) {
+      const rib = new THREE.Mesh(ribGeometry, skeletalMaterial);
+      const t = i / 7;
+      rib.rotation.x = Math.PI / 2;
+      rib.scale.set(1.55 - t * 0.23, 1.0, 0.92 - t * 0.08);
+      rib.position.set(0, 1.58 - i * 0.30, -0.12 - t * 0.18);
+      this.scene.add(rib);
+    }
+
+    const pelvisGeometry = new THREE.SphereGeometry(1, 18, 12);
+    [-1, 1].forEach((side) => {
+      const pelvis = new THREE.Mesh(pelvisGeometry, skeletalMaterial);
+      pelvis.scale.set(0.78, 0.45, 0.46);
+      pelvis.position.set(side * 0.76, -1.88, -0.28);
+      pelvis.rotation.z = side * 0.18;
+      this.scene.add(pelvis);
+    });
+
     const axis = new THREE.AxesHelper(0.78);
     axis.position.set(-2.15, -2.25, -1.20);
     axis.material.transparent = true;
