@@ -47,6 +47,48 @@ const STRUCTURES = [
   }
 ];
 
+
+function compactPdb(pdb) {
+  const atoms = [];
+  const caByChain = {};
+  let atomIndex = 0;
+
+  for (const line of pdb.split(/\r?\n/)) {
+    if (!line.startsWith("ATOM") && !line.startsWith("HETATM")) continue;
+    const atomName = line.slice(12,16).trim();
+    const resName = line.slice(17,20).trim();
+    const chain = line.slice(21,22).trim() || "_";
+    const resSeq = Number(line.slice(22,26).trim());
+    const x = Number(line.slice(30,38));
+    const y = Number(line.slice(38,46));
+    const z = Number(line.slice(46,54));
+    const element = (line.slice(76,78).trim() || atomName[0] || "C").toUpperCase();
+    if (![x,y,z].every(Number.isFinite)) continue;
+
+    const atom = {
+      atomName,
+      resName,
+      chain,
+      resSeq: Number.isFinite(resSeq) ? resSeq : 0,
+      x: Math.round(x * 1000) / 1000,
+      y: Math.round(y * 1000) / 1000,
+      z: Math.round(z * 1000) / 1000,
+      element
+    };
+
+    if (atomName === "CA") {
+      if (!caByChain[chain]) caByChain[chain] = [];
+      caByChain[chain].push(atom);
+    }
+
+    const keep = atomName === "CA" || line.startsWith("HETATM") || atomIndex % 4 === 0;
+    if (keep) atoms.push(atom);
+    atomIndex += 1;
+  }
+
+  return { version: 1, atoms, caByChain };
+}
+
 async function fetchText(url) {
   const response = await fetch(url, {
     headers: { "user-agent": "Cortex-Study-Platform/1.0 educational visualization" }
@@ -65,7 +107,14 @@ async function main() {
       throw new Error("Arquivo " + structure.pdbId + " recebido não parece ser um PDB válido.");
     }
     await fs.writeFile(path.join(OUT, structure.file), pdb, "utf8");
-    console.log("[gprotein-assets] pronto:", path.join(OUT, structure.file));
+
+    const compact = compactPdb(pdb);
+    const compactFile = structure.pdbId + ".compact.json";
+    await fs.writeFile(path.join(OUT, compactFile), JSON.stringify(compact), "utf8");
+    structure.compactFile = compactFile;
+
+    const compactStats = await fs.stat(path.join(OUT, compactFile));
+    console.log("[gprotein-assets] pronto:", path.join(OUT, structure.file), "compact:", Math.round(compactStats.size / 1024) + " KB");
   }
 
   const manifest = {
