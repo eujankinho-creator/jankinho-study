@@ -43,7 +43,12 @@ const STATE = {
   pharmacologyMode: "agonist",
   compareMode: false,
   rootBasePositions: new Map(),
-  commonStructureObjects: new Map()
+  commonStructureObjects: new Map(),
+  guidedFocusId: null,
+  manualIsolationId: null,
+  opacityMode: null,
+  opacityRestoreRequested: false,
+  lastOcclusionUpdate: 0
 };
 
 const CHAIN_MAP = {
@@ -1465,6 +1470,152 @@ function applySelectionFocus(selectedId) {
   });
 }
 
+function getStructureWorldSphere(object) {
+  if (!object || !object.visible) return null;
+  try {
+    const box = new THREE.Box3().setFromObject(object);
+    if (box.isEmpty()) return null;
+    return box.getBoundingSphere(new THREE.Sphere());
+  } catch {
+    return null;
+  }
+}
+
+function setMaterialFaded(material, opacity) {
+  const base = STATE.materialDefaults.get(material);
+  if (!base) return;
+  if ("opacity" in material) {
+    material.transparent = true;
+    material.opacity = Math.min(base.opacity, opacity);
+  }
+  if ("depthWrite" in material) material.depthWrite = false;
+  if (base.color && material.color) {
+    material.color.copy(base.color).lerp(new THREE.Color(0x7f8792), .28);
+  }
+  if (base.emissive && material.emissive) {
+    material.emissive.copy(base.emissive);
+    material.emissiveIntensity = 0;
+  }
+  material.needsUpdate = true;
+}
+
+function highlightFocusTarget(targetId) {
+  forEachSceneMaterial((material, id) => {
+    if (id !== targetId) return;
+    const base = STATE.materialDefaults.get(material);
+    if (!base) return;
+    if ("opacity" in material) {
+      material.transparent = base.transparent;
+      material.opacity = Math.max(base.opacity, .96);
+    }
+    if ("depthWrite" in material) material.depthWrite = base.depthWrite;
+    if (base.color && material.color) material.color.copy(base.color);
+    if (material.emissive && base.color) {
+      material.emissive.copy(base.color).multiplyScalar(.18);
+      material.emissiveIntensity = .72;
+    }
+    material.needsUpdate = true;
+  });
+}
+
+function applyGuidedOcclusion(targetId) {
+  if (!STATE.camera || !targetId || STATE.opacityRestoreRequested || STATE.opacityMode === "manual") return;
+  const target = STATE.structureObjects.get(targetId);
+  const targetSphere = getStructureWorldSphere(target);
+  if (!targetSphere) return;
+
+  restoreSelectionMaterials();
+
+  const cameraPos = new THREE.Vector3();
+  STATE.camera.getWorldPosition(cameraPos);
+  const toTarget = targetSphere.center.clone().sub(cameraPos);
+  const targetDistance = toTarget.length();
+  if (!Number.isFinite(targetDistance) || targetDistance <= .001) return;
+
+  const direction = toTarget.clone().normalize();
+  const sightRay = new THREE.Ray(cameraPos, direction);
+  const fadedIds = new Set();
+
+  for (const [id, object] of STATE.structureObjects.entries()) {
+    if (!object || !object.visible || id === targetId || fadedIds.has(id)) continue;
+    const sphere = getStructureWorldSphere(object);
+    if (!sphere || !Number.isFinite(sphere.radius)) continue;
+
+    const toObject = sphere.center.clone().sub(cameraPos);
+    const alongRay = toObject.dot(direction);
+    if (alongRay <= 0 || alongRay >= targetDistance - Math.max(.08, targetSphere.radius * .12)) continue;
+
+    const perpendicularSq = sightRay.distanceSqToPoint(sphere.center);
+    const corridor = Math.max(.18, sphere.radius * .92 + targetSphere.radius * .12);
+    if (perpendicularSq > corridor * corridor) continue;
+
+    fadedIds.add(id);
+    forEachSceneMaterial((material, materialId) => {
+      if (materialId === id) setMaterialFaded(material, .14);
+    });
+  }
+
+  highlightFocusTarget(targetId);
+  STATE.guidedFocusId = targetId;
+  STATE.opacityMode = "guided";
+}
+
+function chooseStepFocusTarget(step) {
+  if (!step) return null;
+  const id = step.id || "";
+  if (/RESET|RESTING|INACTIVE/.test(id)) return null;
+
+  const rules = [
+    [/IP3R_OPEN|IP3R_BINDING|IP3R/, "ip3r"],
+    [/CA_RELEASE|CA_RISE/, "calcium"],
+    [/PIP2/, "pip2"],
+    [/PLC/, "plc"],
+    [/IP3/, "ip3"],
+    [/DAG/, "dag"],
+    [/PKC/, "pkc"],
+    [/SECOND_MESSENGER|CAMP/, "camp"],
+    [/CELLULAR_RESPONSE/, STATE.pathway === "gq" ? "pkc" : "pka"],
+    [/EFFECTOR|AC_INHIBITION/, "effector"],
+    [/GDP/, "gdp"],
+    [/GTP/, "gtp"],
+    [/LIGAND/, "ligand"],
+    [/GPCR/, "gpcr"],
+    [/ACTIVE|REASSEMBLY|GDP_RETURN|INTERACTION|RECRUIT/, "galpha"]
+  ];
+
+  for (const [pattern, structureId] of rules) {
+    if (pattern.test(id) && STATE.structureObjects.get(structureId)?.visible) return structureId;
+  }
+
+  const excluded = new Set(["cell","membrane","er","cytoskeleton","ribosomes","vesicles"]);
+  return (step.structures || []).find((structureId) => {
+    const object = STATE.structureObjects.get(structureId);
+    return object?.visible && !excluded.has(structureId);
+  }) || null;
+}
+
+function restoreOpacityAndSuspendGuidedFocus() {
+  restoreSelectionMaterials();
+  STATE.opacityMode = null;
+  STATE.manualIsolationId = null;
+  STATE.opacityRestoreRequested = true;
+}
+
+function applyManualIsolation(id) {
+  restoreSelectionMaterials();
+  applySelectionFocus(id);
+  STATE.manualIsolationId = id;
+  STATE.opacityMode = "manual";
+  STATE.opacityRestoreRequested = false;
+}
+
+function refreshGuidedOcclusion(now = performance.now()) {
+  if (STATE.mode !== "guided" || STATE.opacityMode === "manual" || STATE.opacityRestoreRequested || !STATE.guidedFocusId) return;
+  if (now - STATE.lastOcclusionUpdate < 110) return;
+  STATE.lastOcclusionUpdate = now;
+  applyGuidedOcclusion(STATE.guidedFocusId);
+}
+
 function captureVisualState() {
   const result = new Map();
   for (const [id, object] of STATE.structureObjects) {
@@ -1571,7 +1722,13 @@ function updateVisualTweens(now) {
   }
 
   STATE.visualTweens = remaining;
-  if (!remaining.length && STATE.selectedId) applySelectionFocus(STATE.selectedId);
+  if (!remaining.length) {
+    if (STATE.opacityMode === "manual" && STATE.manualIsolationId) {
+      applyManualIsolation(STATE.manualIsolationId);
+    } else if (STATE.mode === "guided" && STATE.guidedFocusId && !STATE.opacityRestoreRequested) {
+      applyGuidedOcclusion(STATE.guidedFocusId);
+    }
+  }
 }
 
 function setRepresentation(mode) {
@@ -1815,14 +1972,23 @@ function applyStep(index,{camera=true,fromPlayback=false}={}){
   const pharmacologyBlocked = STATE.pharmacologyMode === "antagonist" && index < requestedIndex;
   STATE.stepIndex=index;
   const step=steps[index];
+
+  STATE.manualIsolationId = null;
+  STATE.opacityRestoreRequested = false;
+  STATE.opacityMode = null;
+  restoreSelectionMaterials();
+
   if (fromPlayback) animateStepVisual(index);
   else {
     STATE.visualTweens.length = 0;
     applyStepVisual(index);
-    if (STATE.selectedId) applySelectionFocus(STATE.selectedId);
   }
+
   updateEducationalUi(index);
+  STATE.guidedFocusId = STATE.mode === "guided" ? chooseStepFocusTarget(step) : null;
+
   if(camera && STATE.mode!=="free") animateCamera(step.camera);
+  if (STATE.guidedFocusId && !fromPlayback) applyGuidedOcclusion(STATE.guidedFocusId);
   if(pharmacologyBlocked){
     stopPlayback();
     if($("educationWhy")) $("educationWhy").textContent="Nesta representação farmacológica genérica, o antagonista pode ocupar o receptor sem iniciar a ativação da proteína G.";
@@ -1870,7 +2036,13 @@ function togglePlayback(){
 
 function setMode(mode){
   STATE.mode=mode;
-  $$("[data-mode]").forEach((btn)=>btn.classList.toggle("is-active",btn.dataset.mode===mode));
+  restoreSelectionMaterials();
+  STATE.manualIsolationId=null;
+  STATE.opacityMode=null;
+  STATE.opacityRestoreRequested=false;
+  const activeStep=currentSteps()[STATE.stepIndex];
+  STATE.guidedFocusId=mode==="guided"?chooseStepFocusTarget(activeStep):null;
+  $("[data-mode]").forEach((btn)=>btn.classList.toggle("is-active",btn.dataset.mode===mode));
   if($("heroMode")) $("heroMode").textContent=mode==="guided"?"Guiado":mode==="free"?"Exploração livre":"Estudo";
   if($("studyPrompt")) $("studyPrompt").hidden=mode!=="study";
   STATE.controls.enableRotate=true;
@@ -1880,6 +2052,7 @@ function setMode(mode){
     STATE.studyIndex=0;
     showStudyTask();
   }
+  if(mode==="guided" && STATE.guidedFocusId) applyGuidedOcclusion(STATE.guidedFocusId);
 }
 
 function showStudyTask(feedback="Selecione a estrutura diretamente na cena."){
@@ -1894,6 +2067,9 @@ function hideSelectedStructure() {
   const object=STATE.structureObjects.get(STATE.selectedId);
   if (object) object.visible=false;
   restoreSelectionMaterials();
+  STATE.manualIsolationId=null;
+  STATE.opacityMode=null;
+  STATE.opacityRestoreRequested=true;
   if($("selectionBadge")) $("selectionBadge").hidden=true;
   STATE.selectedId=null;
 }
@@ -1903,6 +2079,9 @@ function showAllStructures() {
   for (const object of STATE.structureObjects.values()) {
     if (object) object.visible=true;
   }
+  STATE.manualIsolationId=null;
+  STATE.opacityMode=null;
+  STATE.opacityRestoreRequested=true;
   applyStepVisual(STATE.stepIndex);
   if($("selectionBadge")) $("selectionBadge").hidden=true;
   STATE.selectedId=null;
@@ -1930,20 +2109,24 @@ function handleViewerKeyboard(event) {
 function selectStructure(id,focus=false){
   const structure=structureForPathway(id);
   if(!structure) return;
+
+  const restoreRequested = STATE.selectedId===id && STATE.opacityMode==="manual" && STATE.manualIsolationId===id;
   STATE.selectedId=id;
 
   $("selectionBadge").hidden=false;
   $("selectionKind").textContent=structure.kind==="experimental"?"ESTRUTURA EXPERIMENTAL":"REPRESENTAÇÃO EDUCACIONAL";
   $("selectionName").textContent=structure.name;
-  $("selectionSource").textContent=structure.source||"Cortex · modelo didático";
+  $("selectionSource").textContent=restoreRequested
+    ? (structure.source||"Cortex · modelo didático")+" · opacidade restaurada"
+    : (structure.source||"Cortex · modelo didático")+" · toque novamente para restaurar";
   $("detailName").textContent=structure.name;
   $("detailFunction").textContent=structure.function+" "+structure.role;
   $("detailKind").textContent=structure.kind==="experimental"?"Experimental":"Educacional";
   $("detailSource").textContent=structure.source||"Cortex";
-  $$(".gp-structure-chip").forEach((btn)=>btn.classList.toggle("is-active",btn.dataset.structureId===id));
+  $(".gp-structure-chip").forEach((btn)=>btn.classList.toggle("is-active",btn.dataset.structureId===id));
 
-  restoreSelectionMaterials();
-  applySelectionFocus(id);
+  if (restoreRequested) restoreOpacityAndSuspendGuidedFocus();
+  else applyManualIsolation(id);
 
   if(focus){
     const preset = id==="gpcr"?"receptor":id==="galpha"||id==="gbeta"||id==="ggamma"?"gprotein":id==="gdp"||id==="gtp"?"nucleotide":id==="effector"?"effector":"complex";
@@ -2092,6 +2275,7 @@ function renderLoop(now){
   updateCameraTween(now);
   updateVisualTweens(now);
   STATE.controls?.update();
+  refreshGuidedOcclusion(now);
 
   if(STATE.loaded){
     const t=STATE.renderClock.getElapsedTime();
