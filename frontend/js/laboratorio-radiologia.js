@@ -54,7 +54,13 @@ const state = {
     enabledCategories: new Set(["bones","muscles","vessels","organs"]),
     isolatedId: null,
     clipEnabled: false,
-    separation: 0
+    separation: 0,
+    pointerDown: false,
+    pointerStartX: 0,
+    pointerStartY: 0,
+    pointerMoved: false,
+    interactionPixelRatio: .72,
+    idlePixelRatio: Math.min(window.devicePixelRatio || 1, 1)
   }
 };
 
@@ -1328,8 +1334,9 @@ function anatomicalMaterial(structure) {
     metalness:0,
     transparent:true,
     opacity:bones?.76:vessels?.72:muscles?.34:.58,
-    side:THREE.DoubleSide,
-    depthWrite:false
+    side:THREE.FrontSide,
+    depthWrite:false,
+    forceSinglePass:true
   });
 }
 
@@ -1703,7 +1710,7 @@ function initAnatomy3D() {
     powerPreference:"high-performance",
     precision:"mediump"
   });
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.1));
+  renderer.setPixelRatio(state.anatomy3d.idlePixelRatio);
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.localClippingEnabled=true;
   renderer.setSize(host.clientWidth,host.clientHeight,false);
@@ -1765,7 +1772,7 @@ function initAnatomy3D() {
   update3DPlanes();
   update3DSelection();
 
-  renderer.domElement.addEventListener("click",(event)=>{
+  const pickStructureAt=(event)=>{
     const rect=renderer.domElement.getBoundingClientRect();
     state.anatomy3d.pointer.set(
       ((event.clientX-rect.left)/rect.width)*2-1,
@@ -1775,6 +1782,36 @@ function initAnatomy3D() {
     const hit=state.anatomy3d.raycaster.intersectObjects(state.anatomy3d.selectable,false)[0];
     const id=hit?.object?.userData?.structureId;
     if(id) void selectStructure(id,true);
+  };
+
+  renderer.domElement.addEventListener("pointerdown",(event)=>{
+    if(event.button!==0) return;
+    state.anatomy3d.pointerDown=true;
+    state.anatomy3d.pointerStartX=event.clientX;
+    state.anatomy3d.pointerStartY=event.clientY;
+    state.anatomy3d.pointerMoved=false;
+  });
+
+  renderer.domElement.addEventListener("pointermove",(event)=>{
+    if(!state.anatomy3d.pointerDown||state.anatomy3d.pointerMoved) return;
+    const moved=Math.hypot(
+      event.clientX-state.anatomy3d.pointerStartX,
+      event.clientY-state.anatomy3d.pointerStartY
+    );
+    if(moved>5) state.anatomy3d.pointerMoved=true;
+  });
+
+  renderer.domElement.addEventListener("pointerup",(event)=>{
+    if(event.button!==0||!state.anatomy3d.pointerDown) return;
+    const wasDrag=state.anatomy3d.pointerMoved;
+    state.anatomy3d.pointerDown=false;
+    state.anatomy3d.pointerMoved=false;
+    if(!wasDrag) pickStructureAt(event);
+  });
+
+  renderer.domElement.addEventListener("pointercancel",()=>{
+    state.anatomy3d.pointerDown=false;
+    state.anatomy3d.pointerMoved=false;
   });
 
   $("anatomy3dReset")?.addEventListener("click",reset3DCamera);
@@ -1792,9 +1829,21 @@ function initAnatomy3D() {
     request3DRender();
   }).observe(host);
 
-  controls.addEventListener("start",()=>request3DRender(420));
-  controls.addEventListener("change",()=>request3DRender(180));
-  controls.addEventListener("end",()=>request3DRender(260));
+  controls.addEventListener("start",()=>{
+    // Durante rotação/zoom reduzimos apenas a resolução interna, não a geometria.
+    // Isso torna o arraste muito mais fluido e restaura nitidez ao soltar.
+    if(renderer.getPixelRatio()>state.anatomy3d.interactionPixelRatio){
+      renderer.setPixelRatio(state.anatomy3d.interactionPixelRatio);
+      renderer.setSize(host.clientWidth,Math.max(1,host.clientHeight),false);
+    }
+    request3DRender(120);
+  });
+  controls.addEventListener("change",()=>request3DRender(70));
+  controls.addEventListener("end",()=>{
+    renderer.setPixelRatio(state.anatomy3d.idlePixelRatio);
+    renderer.setSize(host.clientWidth,Math.max(1,host.clientHeight),false);
+    request3DRender(180);
+  });
 
   // Render sob demanda: evita um loop permanente de 60 FPS quando a anatomia está parada.
   request3DRender();
