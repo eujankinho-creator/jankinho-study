@@ -6,13 +6,62 @@ export const ANATOMY_ASSET_BASE = "/models/radiology";
  * Portanto, o 3D e os cortes compartilham exatamente o mesmo espaço voxel.
  */
 export const SYSTEMS = Object.freeze([
-  { id: "integumentary", file: "integumentary_female.glb", label: "Contorno corporal", category: "body" },
-  { id: "skeletal", file: "skeletal_female.glb", label: "Ossos e cartilagens", category: "bones" },
-  { id: "cardiovascular", file: "cardiovascular_female.glb", label: "Vasos", category: "vessels" },
-  { id: "digestive", file: "digestive_female.glb", label: "Digestório", category: "organs" },
-  { id: "renal", file: "renal_female.glb", label: "Urinário", category: "organs" },
-  { id: "lymphatic", file: "lymphatic_female.glb", label: "Linfático", category: "organs" },
-  { id: "reproductive", file: "reproductive_female.glb", label: "Pelve", category: "organs" }
+  {
+    id: "integumentary",
+    file: "integumentary_female.glb",
+    label: "Contorno corporal",
+    category: "body",
+    defaultVisible: true,
+    opacity: 0.10
+  },
+  {
+    id: "skeletal",
+    file: "skeletal_female.glb",
+    label: "Ossos e cartilagens",
+    category: "bones",
+    defaultVisible: true,
+    opacity: 0.62
+  },
+  {
+    id: "cardiovascular",
+    file: "cardiovascular_female.glb",
+    label: "Vasos",
+    category: "vessels",
+    defaultVisible: true,
+    opacity: 0.88
+  },
+  {
+    id: "digestive",
+    file: "digestive_female.glb",
+    label: "Digestório",
+    category: "organs",
+    defaultVisible: true,
+    opacity: 0.82
+  },
+  {
+    id: "renal",
+    file: "renal_female.glb",
+    label: "Urinário",
+    category: "organs",
+    defaultVisible: true,
+    opacity: 0.88
+  },
+  {
+    id: "lymphatic",
+    file: "lymphatic_female.glb",
+    label: "Linfático",
+    category: "organs",
+    defaultVisible: true,
+    opacity: 0.58
+  },
+  {
+    id: "reproductive",
+    file: "reproductive_female.glb",
+    label: "Pelve",
+    category: "organs",
+    defaultVisible: true,
+    opacity: 0.76
+  }
 ]);
 
 export const TOTAL_SEGMENTATOR_CLASS_NAMES = Object.freeze({
@@ -445,10 +494,104 @@ export function getSystem(id) {
   }) || null;
 }
 
+const HRA_STRUCTURE_MATCHERS = Object.freeze({
+  spleen: {
+    systems: ["lymphatic", "digestive"],
+    match: [/spleen/i]
+  },
+  right_kidney: {
+    systems: ["renal"],
+    match: [/kidney.*right/i, /right.*kidney/i]
+  },
+  left_kidney: {
+    systems: ["renal"],
+    match: [/kidney.*left/i, /left.*kidney/i]
+  },
+  gallbladder: {
+    systems: ["digestive"],
+    match: [/gall.?bladder/i]
+  },
+  liver: {
+    systems: ["digestive"],
+    match: [/liver/i]
+  },
+  stomach: {
+    systems: ["digestive"],
+    match: [/stomach/i]
+  },
+  pancreas: {
+    systems: ["digestive"],
+    match: [/pancreas/i]
+  },
+  right_adrenal: {
+    systems: ["renal"],
+    match: [/adrenal.*right/i, /right.*adrenal/i]
+  },
+  left_adrenal: {
+    systems: ["renal"],
+    match: [/adrenal.*left/i, /left.*adrenal/i]
+  },
+  small_bowel: {
+    systems: ["digestive"],
+    match: [/small.?intest/i, /jejun/i, /ileum/i]
+  },
+  duodenum: {
+    systems: ["digestive"],
+    match: [/duoden/i]
+  },
+  colon: {
+    systems: ["digestive"],
+    match: [/colon/i, /large.?intest/i]
+  },
+  urinary_bladder: {
+    systems: ["renal", "reproductive"],
+    match: [/urinary.?bladder/i, /bladder/i]
+  },
+  aorta: {
+    systems: ["cardiovascular"],
+    match: [/aorta/i]
+  },
+  ivc: {
+    systems: ["cardiovascular"],
+    match: [/inferior.?vena.?cava/i, /vena.?cava.*inferior/i]
+  },
+  portal_vein: {
+    systems: ["cardiovascular", "digestive"],
+    match: [/portal.?vein/i, /splenic.?vein/i]
+  },
+  iliac_artery_left: {
+    systems: ["cardiovascular"],
+    match: [/iliac.*arter.*left/i, /left.*iliac.*arter/i]
+  },
+  iliac_artery_right: {
+    systems: ["cardiovascular"],
+    match: [/iliac.*arter.*right/i, /right.*iliac.*arter/i]
+  },
+  iliac_vein_left: {
+    systems: ["cardiovascular"],
+    match: [/iliac.*vein.*left/i, /left.*iliac.*vein/i]
+  },
+  iliac_vein_right: {
+    systems: ["cardiovascular"],
+    match: [/iliac.*vein.*right/i, /right.*iliac.*vein/i]
+  }
+});
+
 export function structureMatchesObject(structure, systemId, objectName) {
-  if (!structure || !objectName || !Array.isArray(structure.match)) return false;
-  if (structure.systems && !structure.systems.includes(systemId)) return false;
-  return structure.match.some(function (matcher) {
+  if (!structure || !objectName) return false;
+
+  const fallback = HRA_STRUCTURE_MATCHERS[structure.id] || null;
+  const matchers = Array.isArray(structure.match)
+    ? structure.match
+    : (fallback ? fallback.match : []);
+  const systems = Array.isArray(structure.systems)
+    ? structure.systems
+    : (fallback ? fallback.systems : null);
+
+  if (!matchers.length) return false;
+  if (systems && !systems.includes(systemId)) return false;
+
+  return matchers.some(function (matcher) {
     return matcher.test(objectName);
   });
 }

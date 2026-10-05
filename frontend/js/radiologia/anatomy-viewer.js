@@ -348,11 +348,11 @@ export class AnatomyViewer {
 
           let opacity = system.opacity;
           if (system.id === "integumentary") {
-            opacity = 0.09;
+            opacity = 0.075;
             material.depthWrite = false;
           }
           else if (system.id === "skeletal") {
-            opacity = 0.34;
+            opacity = Math.max(Number(system.opacity) || 0.58, 0.58);
             if (material.color) {
               material.color.lerp(new THREE.Color(0xe7ddc5), 0.56);
             }
@@ -488,8 +488,8 @@ export class AnatomyViewer {
           this.restoreMaterial(material);
 
           let baseOpacity = system.opacity;
-          if (system.id === "integumentary") baseOpacity = 0.09;
-          if (system.id === "skeletal") baseOpacity = 0.34;
+          if (system.id === "integumentary") baseOpacity = 0.075;
+          if (system.id === "skeletal") baseOpacity = Math.max(Number(system.opacity) || 0.58, 0.58);
 
           /*
            * Os GLBs femininos preservam a geometria HRA real, mas o pacote
@@ -575,6 +575,29 @@ export class AnatomyViewer {
   setTransparent(enabled) {
     this.transparentMode = Boolean(enabled);
     this.refreshHighlights();
+  }
+
+  selectLabel(label) {
+    const structure = STRUCTURES.find(function (item) {
+      return item.label === Math.round(Number(label) || 0);
+    });
+    this.selectStructure(structure ? structure.id : null);
+  }
+
+  focusSelected() {
+    if (this.selectedId) {
+      this.focusStructure(this.selectedId);
+      return;
+    }
+    this.frameBody();
+  }
+
+  setCrosshairVisible(visible) {
+    this.setPlaneVisible(visible);
+  }
+
+  setClipPlane(enabled) {
+    this.setClippingEnabled(enabled);
   }
 
   setSystemVisibility(systemId, visible) {

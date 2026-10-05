@@ -13,7 +13,10 @@ export class RadiologyViewer {
     this.canvas = canvas;
     this.options = options || {};
     this.study = RADIOLOGY_STUDY;
-    this.plane = "axial";
+    this.plane = PLANE_CONFIG[this.options.plane]
+      ? this.options.plane
+      : "axial";
+    this.singlePlane = Boolean(this.options.singlePlane);
     this.crosshairFrac = [0.5, 0.5, 0.5];
     this.windowWidth = 400;
     this.windowLevel = 50;
@@ -68,7 +71,12 @@ export class RadiologyViewer {
     this.nv.setOpacity(1, this.segmentationOpacity);
     this.nv.setInterpolation(true);
     this.nv.setAtlasOutline(0.012);
-    this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
+    if (this.singlePlane) {
+      this.applySinglePlaneSliceType();
+    }
+    else {
+      this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
+    }
 
     const dims = this.nv.volumes[0].dims || [];
     this.dims = [
@@ -230,15 +238,21 @@ export class RadiologyViewer {
     this.nv.drawScene();
   }
 
-  setPlane(plane) {
+  setPlane(plane, silent) {
     if (!PLANE_CONFIG[plane]) return;
     this.plane = plane;
 
-    if (typeof this.options.onPlaneChange === "function") {
+    if (this.singlePlane && this.nv) {
+      this.applySinglePlaneSliceType();
+    }
+
+    if (!silent && typeof this.options.onPlaneChange === "function") {
       this.options.onPlaneChange(plane);
     }
 
-    this.notifyProgrammaticLocation();
+    if (!silent) {
+      this.notifyProgrammaticLocation();
+    }
   }
 
   setCrosshairFraction(frac, silent) {
@@ -391,7 +405,12 @@ export class RadiologyViewer {
       this.nv.scene.pan2Dxyzmm = resetPan;
     }
 
-    this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
+    if (this.singlePlane) {
+      this.applySinglePlaneSliceType();
+    }
+    else {
+      this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
+    }
     this.nv.drawScene();
 
     if (typeof this.options.onZoomChange === "function") {
@@ -399,20 +418,38 @@ export class RadiologyViewer {
     }
   }
 
+  applySinglePlaneSliceType() {
+    if (!this.nv || !PLANE_CONFIG[this.plane]) return;
+
+    if (this.plane === "axial") {
+      this.nv.setSliceType(this.nv.sliceTypeAxial);
+    }
+    else if (this.plane === "coronal") {
+      this.nv.setSliceType(this.nv.sliceTypeCoronal);
+    }
+    else {
+      this.nv.setSliceType(this.nv.sliceTypeSagittal);
+    }
+  }
+
   setMultiplanar() {
     if (!this.nv) return;
+    this.singlePlane = false;
     this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
     this.nv.drawScene();
   }
 
-  setSinglePlane(plane) {
+  setSinglePlane(plane, silent) {
     if (!this.nv || !PLANE_CONFIG[plane]) return;
 
-    this.setPlane(plane);
-    if (plane === "axial") this.nv.setSliceType(this.nv.sliceTypeAxial);
-    if (plane === "coronal") this.nv.setSliceType(this.nv.sliceTypeCoronal);
-    if (plane === "sagittal") this.nv.setSliceType(this.nv.sliceTypeSagittal);
+    this.singlePlane = true;
+    this.setPlane(plane, true);
+    this.applySinglePlaneSliceType();
     this.nv.drawScene();
+
+    if (!silent) {
+      this.notifyProgrammaticLocation();
+    }
   }
 
   labelIntersectsPlane(label, plane, fraction) {
