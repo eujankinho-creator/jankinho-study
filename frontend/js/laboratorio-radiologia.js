@@ -312,6 +312,10 @@ function createStructureList() {
 
 function updateStructureUi(structure) {
   document.querySelectorAll("[data-structure]").forEach((row) => row.classList.toggle("active", row.dataset.structure === structure?.id));
+  document.querySelectorAll("[data-plane-structure]").forEach((el) => {
+    el.textContent = structure ? structure.name : "";
+    el.hidden = !structure;
+  });
   if (!structure) {
     if ($("selectedStructureName")) $("selectedStructureName").textContent = "Explore o atlas";
     if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Clique no exame ou escolha uma estrutura.";
@@ -477,14 +481,34 @@ async function renderOverlayForPlane(plane) {
     const g = parseInt(hex.slice(2,4),16);
     const b = parseInt(hex.slice(4,6),16);
 
-    for (let i = 0; i < src.data.length; i += 4) {
-      if (src.data[i] === structure.localLabel) {
+    const width = mask.canvas.width;
+    const height = mask.canvas.height;
+    const label = structure.localLabel;
+
+    const isSelected = (x, y) => {
+      if (x < 0 || y < 0 || x >= width || y >= height) return false;
+      return src.data[(x + y * width) * 4] === label;
+    };
+
+    for (let y = 0; y < height; y += 1) {
+      for (let x = 0; x < width; x += 1) {
+        const pixel = x + y * width;
+        const i = pixel * 4;
+        if (src.data[i] !== label) continue;
+
+        const edge =
+          !isSelected(x - 1, y) ||
+          !isSelected(x + 1, y) ||
+          !isSelected(x, y - 1) ||
+          !isSelected(x, y + 1);
+
         out.data[i] = r;
         out.data[i+1] = g;
         out.data[i+2] = b;
-        out.data[i+3] = 78;
+        out.data[i+3] = edge ? 245 : 128;
       }
     }
+
     canvas.getContext("2d").putImageData(out,0,0);
   } catch (error) {
     canvas.width = 1;
@@ -643,14 +667,14 @@ function bindViewerClicks() {
           $("selectedStructureMeta").textContent =
             "Você clicou em: " + structure.name + " · " + categoryLabel(structure.category);
         }
-        showAnatomyTooltip(plane, event, structure);
+        
         await Promise.all(PLANES.map(renderOverlayForPlane));
         announce("Estrutura identificada: " + structure.name);
       } else {
         if ($("selectedStructureMeta")) {
           $("selectedStructureMeta").textContent = "Nenhuma estrutura identificada neste ponto.";
         }
-        showAnatomyTooltip(plane, event, null);
+        
       }
     });
 
