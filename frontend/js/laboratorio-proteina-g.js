@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { STRUCTURES, PATHWAYS, STEPS, STUDY_TASKS } from "./gprotein/data.js?v=20261005-gprotein-lab2";
+import { STRUCTURES, PATHWAYS, STEPS, STUDY_TASKS } from "./gprotein/data.js?v=20261005-gprotein-lab3";
 
 const $ = (id) => document.getElementById(id);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -1069,9 +1069,15 @@ function applyStepVisual(stepIndex) {
 
   if(stepIndex>=7 && galpha) galpha.position.x += 1.2;
 
-  if(STATE.cellGroup){
-    STATE.cellGroup.traverse((o)=>{
-      if(o.material && "opacity" in o.material) o.material.opacity = stepIndex===0 || stepIndex===12 ? .18 : .055;
+  if (STATE.cellGroup) {
+    const cellShell = STATE.structureObjects.get("cell");
+    if (cellShell?.material && "opacity" in cellShell.material) {
+      cellShell.material.opacity = stepIndex === 0 || stepIndex === 12 ? .075 : .028;
+    }
+
+    ["nucleus","mitochondria","er","golgi","ribosomes","vesicles","cytoskeleton"].forEach((id) => {
+      const object = STATE.structureObjects.get(id);
+      if (object) object.visible = stepIndex === 0 || stepIndex === 12;
     });
   }
 }
@@ -1389,6 +1395,15 @@ function renderLoop(now){
     }
     const ligand=STATE.structureObjects.get("ligand");
     if(ligand?.visible && STATE.stepIndex===1) ligand.rotation.y=t*.5;
+
+    if (STATE.stepIndex === 0 || STATE.stepIndex === 12) {
+      const mitochondria = STATE.structureObjects.get("mitochondria");
+      const vesicles = STATE.structureObjects.get("vesicles");
+      const ribosomes = STATE.structureObjects.get("ribosomes");
+      if (mitochondria) mitochondria.rotation.y = Math.sin(t * .22) * .035;
+      if (vesicles) vesicles.rotation.y = t * .025;
+      if (ribosomes) ribosomes.rotation.y = Math.sin(t * .16) * .025;
+    }
   }
   STATE.renderer?.render(STATE.scene,STATE.camera);
 }
