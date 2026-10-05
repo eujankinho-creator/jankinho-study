@@ -29,7 +29,10 @@ const state = {
   dragStartY: 0,
   dragMoved: false,
   suppressClick: false,
-  colorEnabled: true
+  colorEnabled: true,
+  liveIdentifyToken: 0,
+  liveIdentifyFrame: 0,
+  liveIdentifyTimer: 0
 };
 
 async function api(url, options) {
@@ -571,7 +574,15 @@ async function loadMask(group, plane, ordinal) {
       canvas.height = img.naturalHeight;
       const ctx = canvas.getContext("2d", { willReadFrequently: true });
       ctx.drawImage(img, 0, 0);
-      resolve({ img, canvas, ctx });
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      resolve({
+        img,
+        canvas,
+        ctx,
+        data: imageData.data,
+        width: canvas.width,
+        height: canvas.height
+      });
     };
     img.onerror = reject;
     img.src = url;
@@ -582,9 +593,9 @@ async function loadMask(group, plane, ordinal) {
 }
 
 function nearestMaskLabel(mask, x, y, maxRadius) {
-  const width = mask.canvas.width;
-  const height = mask.canvas.height;
-  const data = mask.ctx.getImageData(0, 0, width, height).data;
+  const width = mask.width || mask.canvas.width;
+  const height = mask.height || mask.canvas.height;
+  const data = mask.data || mask.ctx.getImageData(0, 0, width, height).data;
 
   const read = (px, py) => {
     if (px < 0 || py < 0 || px >= width || py >= height) return 0;
@@ -622,33 +633,76 @@ function nearestMaskLabel(mask, x, y, maxRadius) {
 async function labelsAtPoint(plane, u, v) {
   const ordinal = planeOrdinal(plane);
   const groups = state.manifest.groups || [];
-  const candidates = [];
   const maxRadius = plane === "axial" ? 8 : 5;
 
-  for (const group of groups) {
+  const candidates = (await Promise.all(groups.map(async (group) => {
     try {
       const mask = await loadMask(group, plane, ordinal);
-      const x = Math.max(0, Math.min(mask.canvas.width - 1, Math.floor(u * mask.canvas.width)));
-      const y = Math.max(0, Math.min(mask.canvas.height - 1, Math.floor(v * mask.canvas.height)));
+      const width = mask.width || mask.canvas.width;
+      const height = mask.height || mask.canvas.height;
+      const x = Math.max(0, Math.min(width - 1, Math.floor(u * width)));
+      const y = Math.max(0, Math.min(height - 1, Math.floor(v * height)));
       const hit = nearestMaskLabel(mask, x, y, maxRadius);
-      if (!hit) continue;
+      if (!hit) return null;
 
       const structure = STRUCTURES.find((s) => s.group === group && s.localLabel === hit.label);
-      if (!structure) continue;
-
-      candidates.push({ structure, distance: hit.distance });
-    } catch (error) {}
-  }
+      return structure ? { structure, distance: hit.distance } : null;
+    } catch (error) {
+      return null;
+    }
+  }))).filter(Boolean);
 
   candidates.sort((a, b) => a.distance - b.distance);
-
   if (!candidates.length) return [];
-  const bestDistance = candidates[0].distance;
 
+  const bestDistance = candidates[0].distance;
   return candidates
     .filter((item, index) => index === 0 || item.distance <= bestDistance + 1.5)
     .map((item) => item.structure)
     .filter((item, index, array) => array.findIndex((candidate) => candidate.id === item.id) === index);
+}
+
+function prefetchPlaneMasks(plane, ordinal = planeOrdinal(plane)) {
+  const groups = state.manifest?.groups || [];
+  groups.forEach((group) => {
+    loadMask(group, plane, ordinal).catch(() => {});
+  });
+}
+
+function setLiveSelectedStructure(structure, plane) {
+  const nextId = structure?.id || null;
+  if (state.selectedId === nextId) return;
+
+  state.selectedId = nextId;
+  updateStructureUi(structure || null);
+
+  if (structure) {
+    renderPointStructures([structure]);
+    announce("Estrutura identificada: " + structure.name);
+  } else {
+    renderPointStructures([]);
+  }
+
+  void renderOverlayForPlane(plane);
+  clearTimeout(state.liveIdentifyTimer);
+  state.liveIdentifyTimer = setTimeout(() => {
+    if (state.draggingPlane === plane) {
+      void Promise.all(PLANES.filter((item) => item !== plane).map(renderOverlayForPlane));
+    }
+  }, 48);
+}
+
+function scheduleLiveIdentification(plane, u, v) {
+  const token = ++state.liveIdentifyToken;
+  if (state.liveIdentifyFrame) cancelAnimationFrame(state.liveIdentifyFrame);
+
+  state.liveIdentifyFrame = requestAnimationFrame(() => {
+    state.liveIdentifyFrame = 0;
+    void labelsAtPoint(plane, u, v).then((items) => {
+      if (token !== state.liveIdentifyToken || state.draggingPlane !== plane) return;
+      setLiveSelectedStructure(items[0] || null, plane);
+    });
+  });
 }
 
 function renderPointStructures(items) {
@@ -736,7 +790,7 @@ async function renderOverlayForPlane(plane) {
     const mask = await loadMask(structure.group, plane, planeOrdinal(plane));
     canvas.width = mask.canvas.width;
     canvas.height = mask.canvas.height;
-    const src = mask.ctx.getImageData(0,0,mask.canvas.width,mask.canvas.height);
+    const srcData = mask.data || mask.ctx.getImageData(0,0,mask.canvas.width,mask.canvas.height).data;
     const out = canvas.getContext("2d").createImageData(mask.canvas.width, mask.canvas.height);
     const hex = structure.color.replace("#","");
     const r = parseInt(hex.slice(0,2),16);
@@ -749,14 +803,14 @@ async function renderOverlayForPlane(plane) {
 
     const isSelected = (x, y) => {
       if (x < 0 || y < 0 || x >= width || y >= height) return false;
-      return src.data[(x + y * width) * 4] === label;
+      return srcData[(x + y * width) * 4] === label;
     };
 
     for (let y = 0; y < height; y += 1) {
       for (let x = 0; x < width; x += 1) {
         const pixel = x + y * width;
         const i = pixel * 4;
-        if (src.data[i] !== label) continue;
+        if (srcData[i] !== label) continue;
 
         const edge =
           !isSelected(x - 1, y) ||
@@ -799,6 +853,7 @@ async function updateViews() {
 
 async function updateScrolledPlane(plane) {
   await setPlaneImage(plane);
+  prefetchPlaneMasks(plane);
   updateAllCrosshairs();
   syncSlider();
   await renderOverlayForPlane(plane);
@@ -868,7 +923,9 @@ function bindViewerClicks() {
 
       const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
+      prefetchPlaneMasks(plane);
       schedulePointerNavigation(plane);
+      scheduleLiveIdentification(plane, uv.u, uv.v);
     });
 
     stage?.addEventListener("pointermove", (event) => {
@@ -882,11 +939,13 @@ function bindViewerClicks() {
       const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
       schedulePointerNavigation(plane);
+      scheduleLiveIdentification(plane, uv.u, uv.v);
     });
 
     const finishDrag = (event) => {
       if (state.draggingPlane !== plane) return;
       state.draggingPlane = null;
+      state.liveIdentifyToken += 1;
       state.suppressClick = state.dragMoved;
       clearTimeout(state.pointerRefreshTimer);
       state.lastPointerPlane = null;
@@ -917,7 +976,7 @@ function bindViewerClicks() {
       const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
 
-      if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Identificando estrutura...";
+      prefetchPlaneMasks(plane);
       const items = await labelsAtPoint(plane, uv.u, uv.v);
       renderPointStructures(items);
 
@@ -1073,6 +1132,7 @@ async function boot() {
   setActivePlane("axial");
 
   await updateViews();
+  PLANES.forEach((plane) => prefetchPlaneMasks(plane));
   setProgress(86, "Quase pronto", "pré-carregando cortes vizinhos");
   PLANES.forEach((plane) => prefetchAround(plane, planeOrdinal(plane)));
   await new Promise((resolve) => setTimeout(resolve, 80));
