@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atlas de Tomografia | Laboratório | Cortex</title>
-
+  <title>Tomografia | Laboratório | Cortex</title>
   <script>
     (function () {
       var theme = "dark-orange";
@@ -15,34 +14,26 @@
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
-
   <link rel="stylesheet" href="/css/app.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/pratica-premium.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-atlas7">
-
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack1">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
-
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
   <meta name="theme-color" content="#07090d">
 </head>
-
 <body class="practice-view radiology-lab-view">
   <aside class="sidebar">
     <a href="/" class="sidebar-logo">
       <div class="logo-box">C</div>
       <div><strong>Cortex</strong><span>Study Platform</span></div>
     </a>
-
     <div class="sidebar-menu"></div>
-
     <div class="sidebar-user">
       <div id="avatarSidebar" class="avatar">U</div>
       <div class="user-info">
@@ -57,304 +48,146 @@
     <header class="header">
       <div>
         <div class="header-title">Tomografia</div>
-        <span class="rad-header-subtitle">Atlas de tomografia corporal · MPR sincronizado</span>
+        <span class="rad-header-subtitle">Atlas corporal progressivo · carregamento por cortes</span>
       </div>
-
       <div class="header-user">
-        <div>
-          <strong id="nomeHeader">Carregando...</strong>
-          <span>Cortex</span>
-        </div>
+        <div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div>
         <div id="avatarHeader" class="avatar header-avatar">U</div>
       </div>
     </header>
 
-    <main class="radiology-page radiology-real-page">
-      <section class="rad-heading">
-        <div>
-          <div class="rad-status">
-            <span class="rad-status-dot"></span>
-            <span>CORTEX LAB · RADIOLOGIA INTERATIVA</span>
-          </div>
-          <h1>Atlas de <em>Tomografia</em></h1>
-          <p>
-            TC corporal navegável com cruz sincronizada e planos axial, coronal e sagital. Explore regiões e estruturas diretamente no mesmo exame.
-          </p>
-        </div>
+    <main class="ct-page">
+      <a class="lab-back-link" href="/laboratorio.html">← Laboratório</a>
 
-        <div class="rad-heading-badge real-badge">
-          <span>ATLAS DIDÁTICO</span><strong>CT + MÁSCARAS · MESMO EXAME</strong><small>órgãos + cardiovascular + musculoesquelético</small>
+      <section class="ct-hero">
+        <div>
+          <span class="eyebrow">CORTEX LAB · ATLAS DE TOMOGRAFIA</span>
+          <h1>Reconheça estruturas na <em>tomografia</em></h1>
+          <p>Um atlas corporal leve: o navegador carrega somente os cortes visíveis e antecipa os próximos, sem baixar um volume NIfTI de dezenas de megabytes.</p>
+        </div>
+        <div class="ct-fast-badge">
+          <span>ARQUITETURA LEVE</span>
+          <strong>WebP progressivo</strong>
+          <small id="datasetStatus">preparando atlas...</small>
         </div>
       </section>
 
-      <nav class="lab-mode-nav lab-mode-nav-compact" aria-label="Voltar ao laboratório">
-        <a class="lab-back-link" href="/laboratorio.html" aria-label="Voltar ao hub do laboratório">← Laboratório</a>
-      </nav>
-
-      <div id="labBootError" class="rad-boot-error" hidden></div>
+      <div id="labBootError" class="ct-error" hidden></div>
       <div id="liveStatus" class="sr-only" aria-live="polite"></div>
 
-      <section class="atlas-region-bar" aria-label="Regiões do atlas">
-        <div class="atlas-region-title">
-          <strong>Explore o corpo</strong>
-          <span>TC corporal · MPR sincronizado</span>
-        </div>
-        <button type="button" data-region-target="head">Cabeça <small>encéfalo</small></button>
-        <button type="button" data-region-target="thorax">Tórax <small>coração / pulmões</small></button>
-        <button type="button" data-region-target="abdomen">Abdômen <small>órgãos</small></button>
-        <button type="button" data-region-target="pelvis">Pelve <small>vasos / bexiga</small></button>
-        <button type="button" data-region-target="thigh">Coxa <small>fêmur / músculos</small></button>
-        <button type="button" data-region-target="overview" class="atlas-overview active">Visão geral</button>
+      <section class="region-strip" aria-label="Regiões do corpo">
+        <button type="button" data-region="overview" class="active"><strong>Visão geral</strong><small>corpo inteiro</small></button>
+        <button type="button" data-region="head"><strong>Cabeça</strong><small>encéfalo</small></button>
+        <button type="button" data-region="thorax"><strong>Tórax</strong><small>coração / pulmões</small></button>
+        <button type="button" data-region="abdomen"><strong>Abdômen</strong><small>órgãos</small></button>
+        <button type="button" data-region="pelvis"><strong>Pelve</strong><small>vasos / bexiga</small></button>
+        <button type="button" data-region="thigh"><strong>Coxa</strong><small>fêmur / músculos</small></button>
       </section>
 
-      <section class="rad-control-strip real-control-strip" aria-label="Controles principais">
-        <div class="rad-control-group">
-          <span class="control-label">PLANO ATIVO</span>
-          <div class="segmented-control plane-control">
-            <button type="button" class="active" data-plane="axial" aria-pressed="true">
-              <i class="plane-dot axial-dot"></i>Axial
-            </button>
-            <button type="button" data-plane="coronal" aria-pressed="false">
-              <i class="plane-dot coronal-dot"></i>Coronal
-            </button>
-            <button type="button" data-plane="sagittal" aria-pressed="false">
-              <i class="plane-dot sagittal-dot"></i>Sagital
-            </button>
+      <section class="atlas-shell">
+        <aside class="atlas-sidebar">
+          <div class="atlas-sidebar-head">
+            <span>ESTRUTURAS</span>
+            <strong>Selecione para localizar</strong>
           </div>
-        </div>
+          <input id="structureSearch" class="structure-search" type="search" placeholder="Buscar: fígado, aorta, fêmur..." aria-label="Buscar estrutura">
+          <div id="structureList" class="structure-list"></div>
+        </aside>
 
-        <div class="rad-control-group rad-sync-indicator">
-          <span class="sync-pulse"></span>
-          <div>
-            <small>NO CORTE REAL</small>
-            <strong id="selectedPlaneState">Carregando CT e segmentação...</strong>
-          </div>
-        </div>
-
-        <div class="rad-warning-chip real-warning exact-match-chip" title="O CT e as máscaras anatômicas pertencem ao mesmo caso e usam o mesmo espaço voxel.">
-          <span>✓</span>
-          CT + mapas co-registrados · cruz sincronizada
-        </div>
-      </section>
-
-      <section class="rad-workspace real-workspace">
-        <article class="rad-panel ct-navigation-panel">
-          <div class="panel-title-row">
+        <section class="viewer-card">
+          <div class="viewer-topbar">
             <div>
-              <span class="eyebrow">NAVEGAÇÃO DO EXAME</span>
-              <h2>Corte e estruturas anatômicas</h2>
+              <span id="activePlaneLabel">AXIAL · CORTE</span>
+              <strong id="selectedStructureName">Explore o atlas</strong>
+              <small id="selectedStructureMeta">Clique no exame ou escolha uma estrutura.</small>
             </div>
-            <div class="panel-meta">
-              <span>TC corporal</span>
-              <strong>mesmo ponto nos três eixos</strong>
+            <div class="viewer-status">
+              <span class="status-dot"></span>
+              <b id="loadStatus">Carregando</b>
             </div>
           </div>
 
-          <div class="slice-controls anatomy-slice-control">
-            <button id="slicePrev" type="button" title="Corte anterior">−</button>
-            <div>
-              <span>Mover corte · <b id="sliceCoordinate">55% do eixo</b></span>
-              <input id="sliceSlider" type="range" min="0" max="100" value="55" aria-label="Mover corte">
+          <div id="atlasLoading" class="atlas-loading" aria-live="polite">
+            <div class="loading-card">
+              <div><span id="loadingStage">Abrindo atlas</span><strong id="loadingPercent">0%</strong></div>
+              <div class="loading-track"><i id="loadingBar"></i></div>
+              <small id="loadingDetail">baixando somente o primeiro corte</small>
             </div>
-            <button id="sliceNext" type="button" title="Próximo corte">+</button>
           </div>
 
-          <div class="structure-dock">
-            <div class="structure-dock-head">
-              <div>
-                <span>ESTRUTURAS SEGMENTADAS DO EXAME</span>
-                <strong>Buscar · selecionar · ocultar</strong>
+          <div class="viewer-grid">
+            <article class="view-tile primary active" data-plane-tile="axial">
+              <header><span>AXIAL</span><small data-plane-count="axial">—</small></header>
+              <div class="image-stage" data-stage="axial">
+                <img id="imgAxial" alt="Tomografia axial" draggable="false">
+                <canvas id="overlayAxial"></canvas>
+                <i class="crosshair-v"></i><i class="crosshair-h"></i>
               </div>
-              <small>máscaras co-registradas</small>
-            </div>
-            <div id="structureList" class="structure-list"></div>
-          </div>
-        </article>
+            </article>
 
-        <article class="rad-panel image-panel real-image-panel">
-          <div class="selected-radiology-bar">
-            <div>
-              <span>NESTE PONTO</span>
-              <strong id="selectedRadiologyName">Clique em uma estrutura segmentada</strong>
-            </div>
-            <div class="selected-actions">
-              <button id="segmentationToggle" type="button" aria-pressed="false">Carregar estruturas</button>
-              <button id="mprView" type="button">MPR</button>
-              <span id="voxelReadout">CT carregando...</span>
-            </div>
-          </div>
-
-          <div class="panel-title-row">
-            <div>
-              <span class="eyebrow">TC CORPORAL MULTIPLANAR</span>
-              <h2 id="studyName">Atlas CT corporal · axial / coronal / sagital</h2>
-            </div>
-            <div class="study-chip real-study-chip">
-              <span id="studyModality">TC + SEG</span>
-              <strong id="studySlices">carregando voxels</strong>
-            </div>
-          </div>
-
-          <div id="radiologyMultiView" class="radiology-multiview" data-primary-plane="axial">
-            <div id="examLoadingOverlay" class="exam-loading-overlay" aria-live="polite">
-              <div class="exam-loading-card">
-                <div class="exam-loading-head">
-                  <div>
-                    <span id="examLoadingStage">Preparando exame</span>
-                    <strong id="examLoadingPercent">0%</strong>
-                  </div>
-                  <small id="examLoadingDetail">iniciando visualizador</small>
+            <div class="secondary-stack">
+              <article class="view-tile" data-plane-tile="coronal" tabindex="0">
+                <header><span>CORONAL</span><small data-plane-count="coronal">—</small></header>
+                <div class="image-stage" data-stage="coronal">
+                  <img id="imgCoronal" alt="Tomografia coronal" draggable="false">
+                  <canvas id="overlayCoronal"></canvas>
+                  <i class="crosshair-v"></i><i class="crosshair-h"></i>
                 </div>
-                <div class="exam-progress-track" aria-hidden="true">
-                  <div id="examProgressBar" class="exam-progress-bar" style="width:0%"></div>
+              </article>
+
+              <article class="view-tile" data-plane-tile="sagittal" tabindex="0">
+                <header><span>SAGITAL</span><small data-plane-count="sagittal">—</small></header>
+                <div class="image-stage" data-stage="sagittal">
+                  <img id="imgSagittal" alt="Tomografia sagital" draggable="false">
+                  <canvas id="overlaySagittal"></canvas>
+                  <i class="crosshair-v"></i><i class="crosshair-h"></i>
                 </div>
-              </div>
-            </div>
-            <section class="rad-view-tile is-primary" data-rad-view-plane="axial" aria-current="true">
-              <div class="rad-view-head">
-                <span><i class="plane-dot axial-dot"></i> Axial</span>
-                <strong data-expand-label>ampliado</strong>
-              </div>
-              <canvas id="radiologyAxialCanvas" aria-label="TC axial real"></canvas>
-            </section>
-
-            <section class="rad-view-tile is-secondary secondary-top" data-rad-view-plane="coronal" tabindex="0">
-              <div class="rad-view-head">
-                <span><i class="plane-dot coronal-dot"></i> Coronal</span>
-                <strong data-expand-label>clique para ampliar</strong>
-              </div>
-              <canvas id="radiologyCoronalCanvas" aria-label="TC coronal real"></canvas>
-            </section>
-
-            <section class="rad-view-tile is-secondary secondary-bottom" data-rad-view-plane="sagittal" tabindex="0">
-              <div class="rad-view-head">
-                <span><i class="plane-dot sagittal-dot"></i> Sagital</span>
-                <strong data-expand-label>clique para ampliar</strong>
-              </div>
-              <canvas id="radiologySagittalCanvas" aria-label="TC sagital real"></canvas>
-            </section>
-
-            <div class="slice-readout real-slice-readout">
-              <span>PLANO ATIVO</span>
-              <strong><b id="sliceCurrent">1</b> / <b id="sliceTotal">1</b></strong>
-              <small id="ctDatasetLabel">CT corporal</small>
-            </div>
-
-            <div class="image-instructions">
-              axial permanece principal · clique em coronal ou sagital para ativar o eixo
+              </article>
             </div>
           </div>
 
-          <div class="viewer-tools real-viewer-tools">
-            <div class="window-preset-row" aria-label="Presets de janela">
-              <button class="active" type="button" data-window-preset="soft" data-width="400" data-level="50">Tecidos moles</button>
-              <button type="button" data-window-preset="bone" data-width="1800" data-level="450">Osso</button>
-              <button type="button" data-window-preset="lung" data-width="1500" data-level="-600">Pulmão</button>
+          <div class="slice-control">
+            <button id="slicePrev" type="button" aria-label="Corte anterior">−</button>
+            <div>
+              <span><b id="slicePlaneName">Axial</b><em id="sliceReadout">1 / 1</em></span>
+              <input id="sliceSlider" type="range" min="0" max="0" value="0" aria-label="Navegar pelos cortes">
             </div>
-
-            <div id="windowControls" class="window-controls">
-              <label>
-                <span><b>Janela (WW)</b><em id="windowWidthValue">400</em></span>
-                <input id="windowWidth" type="range" min="40" max="2200" step="10" value="400">
-              </label>
-              <label>
-                <span><b>Nível (WL)</b><em id="windowLevelValue">50</em></span>
-                <input id="windowLevel" type="range" min="-1000" max="1000" step="5" value="50">
-              </label>
-            </div>
-
-            <div class="zoom-tools">
-              <button id="radZoomOut" type="button" title="Reduzir zoom">−</button>
-              <strong id="radZoomValue">100%</strong>
-              <button id="radZoomIn" type="button" title="Aumentar zoom">+</button>
-              <button id="radReset" class="zoom-reset" type="button" title="Resetar visualização">↺</button>
-            </div>
+            <button id="sliceNext" type="button" aria-label="Próximo corte">+</button>
           </div>
+
+          <div class="viewer-help">
+            <span>Arraste a barra para navegar</span>
+            <span>Clique em coronal ou sagital para torná-lo o plano ativo</span>
+            <span>Clique sobre o exame para identificar estruturas segmentadas</span>
+          </div>
+        </section>
+      </section>
+
+      <section class="info-row">
+        <article>
+          <span>ESTRUTURA SELECIONADA</span>
+          <h3 id="infoTitle">Nenhuma estrutura selecionada</h3>
+          <p id="infoDescription">Selecione uma estrutura na lista ou clique diretamente sobre um corte.</p>
+        </article>
+        <article>
+          <span>NO PONTO ATUAL</span>
+          <div id="pointStructures" class="point-structures"><small>Navegue pelo exame para explorar.</small></div>
+        </article>
+        <article>
+          <span>FONTE</span>
+          <h3>TotalSegmentator · caso s0024</h3>
+          <p>CT e segmentações do mesmo paciente e espaço voxel. O Cortex converte tudo no deploy para cortes WebP/PNG leves.</p>
         </article>
       </section>
 
-      <section class="rad-info-grid real-info-grid">
-        <article class="info-card structure-info-card">
-          <div class="info-card-head">
-            <span>ESTRUTURA SELECIONADA</span>
-            <strong>label do mesmo exame</strong>
-          </div>
-
-          <div id="structureInfoEmpty" class="info-empty">
-            Clique em uma estrutura segmentada do exame.
-          </div>
-
-          <div id="structureInfoContent" class="structure-info-content" hidden>
-            <div class="structure-info-title">
-              <div>
-                <h3 id="structureTitle">Aorta</h3>
-                <span id="structureEnglish">Aorta</span>
-              </div>
-              <span class="structure-region" id="structureRegion">Retroperitônio</span>
-            </div>
-
-            <p id="structureDescription"></p>
-
-            <div class="structure-facts">
-              <div><span>MATERIAL</span><strong id="structureStudies">Mesmo CT · mesma segmentação</strong></div>
-              <div><span>GEOMETRIA</span><strong id="structureMeshCount">voxels segmentados</strong></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="info-card slice-info-card">
-          <div class="info-card-head">
-            <span>NO CORTE ATUAL</span>
-            <strong>interseção por voxels</strong>
-          </div>
-
-          <p class="info-card-copy">
-            Estas estruturas segmentadas no próprio exame cruzam o plano atualmente mostrado.
-          </p>
-          <div id="sliceStructures" class="slice-structures"></div>
-        </article>
-
-        <article class="info-card metadata-card">
-          <div class="info-card-head">
-            <span>PROVENIÊNCIA</span>
-            <strong>sem material sintético</strong>
-          </div>
-
-          <dl>
-            <div><dt>TC / SEG</dt><dd id="studySource">TotalSegmentator · arquivos de referência</dd></div>
-            <div><dt>Correspondência</dt><dd>CT e máscaras do mesmo caso · mesmo espaço voxel</dd></div>
-            <div><dt>Licença / fonte</dt><dd id="studyLicense">Apache-2.0 · repositório TotalSegmentator</dd></div>
-          </dl>
-
-          <p class="metadata-note">
-            O CT e os três mapas anatômicos compartilham o mesmo espaço voxel. A cruz e a seleção são propagadas em tempo real entre axial, coronal e sagital.
-          </p>
-        </article>
-      </section>
-
-      <details class="source-registry-wrap">
-        <summary>
-          <span>Fontes, licenças e atribuições dos materiais reais</span>
-          <strong>ver registro</strong>
-        </summary>
-        <div class="source-intro">
-          O laboratório usa CT e máscaras anatômicas públicas co-registradas e mantém as atribuições e licenças das fontes.
-        </div>
-        <div id="sourceRegistry" class="source-registry"></div>
-      </details>
-
-      <section class="rad-disclaimer">
+      <section class="ct-disclaimer">
         <span>i</span>
-        <p>
-          <strong>Uso educacional.</strong>
-          O visualizador usa material anatômico e radiológico real de referência,
-          porém continua não sendo ferramenta diagnóstica nem substituto de laudo.
-        </p>
+        <p><strong>Uso educacional.</strong> Este atlas não substitui avaliação radiológica ou laudo médico.</p>
       </section>
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-atlas7"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
