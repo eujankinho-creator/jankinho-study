@@ -83,3 +83,97 @@
 @media(max-width:900px){.lessons-page{width:min(100% - 20px,1480px);padding-top:14px}.lessons-hero{padding:18px}.lesson-stats{grid-template-columns:repeat(2,1fr)}.split-section{grid-template-columns:1fr}.lesson-card:hover{transform:none}}
 @media(max-width:620px){.lessons-page{width:calc(100% - 14px)}.lessons-hero{padding:15px;border-radius:15px}.lessons-hero h1{font-size:31px}.lesson-search{grid-template-columns:auto 1fr}.lesson-search button{grid-column:1/-1}.lesson-suggestions{overflow-x:auto;flex-wrap:nowrap}.lesson-suggestions button{white-space:nowrap}.lesson-grid{grid-template-columns:1fr}.lesson-row{grid-auto-columns:88%}.lesson-stats{gap:7px}.lesson-stats article{padding:12px}.lesson-filters{display:grid;grid-template-columns:1fr}.lesson-filters label{justify-content:space-between}.subject-row{grid-template-columns:90px 1fr 32px}.section-heading{align-items:center}}
 @media(prefers-reduced-motion:reduce){.lesson-card,.lesson-thumb img,.goal-progress i{transition:none!important}}
+
+
+/* aulas-search-polish-v2 · campo único premium e contraste consistente */
+.lessons-view .lesson-search{
+  position:relative;
+  overflow:hidden;
+  border-color:color-mix(in srgb,var(--theme-border-strong,var(--lesson-line)) 86%,transparent)!important;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--theme-surface-strong,var(--lesson-strong)) 96%,transparent),
+      color-mix(in srgb,var(--theme-surface,var(--lesson-panel)) 94%,transparent)
+    )!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 10px 26px rgba(0,0,0,.12)!important;
+}
+
+.lessons-view .lesson-search input,
+.lessons-view .lesson-search input[type="search"]{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  width:100%!important;
+  min-width:0!important;
+  height:42px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  color:var(--theme-text,var(--lesson-text))!important;
+  caret-color:var(--theme-accent-2,var(--lesson-accent2))!important;
+}
+
+.lessons-view .lesson-search input[type="search"]::-webkit-search-decoration,
+.lessons-view .lesson-search input[type="search"]::-webkit-search-cancel-button,
+.lessons-view .lesson-search input[type="search"]::-webkit-search-results-button,
+.lessons-view .lesson-search input[type="search"]::-webkit-search-results-decoration{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  display:none!important;
+}
+
+.lessons-view .lesson-search input::placeholder{
+  color:var(--theme-text-muted,var(--lesson-muted))!important;
+  opacity:.78!important;
+}
+
+.lessons-view .lesson-search>span{
+  display:grid!important;
+  place-items:center!important;
+  width:20px!important;
+  height:20px!important;
+  color:var(--theme-accent-2,var(--lesson-accent2))!important;
+  opacity:.92!important;
+}
+
+.lessons-view .lesson-search button[type="submit"]{
+  min-width:92px!important;
+  min-height:40px!important;
+  padding:0 18px!important;
+  border:1px solid color-mix(in srgb,var(--theme-text,#fff) 22%,transparent)!important;
+  border-radius:10px!important;
+  background:var(--theme-text,#f8fafc)!important;
+  color:var(--theme-bg,#070707)!important;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.22)!important;
+  font-weight:950!important;
+  letter-spacing:.01em!important;
+  text-shadow:none!important;
+}
+
+.lessons-view .lesson-search button[type="submit"]:hover{
+  transform:translateY(-1px);
+  background:color-mix(in srgb,var(--theme-text,#f8fafc) 92%,var(--theme-accent,#f97316))!important;
+  color:var(--theme-bg,#070707)!important;
+}
+
+.lessons-view .lesson-search:focus-within{
+  border-color:color-mix(in srgb,var(--theme-accent,var(--lesson-accent)) 55%,var(--theme-border-strong,var(--lesson-line)))!important;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb,var(--theme-accent,var(--lesson-accent)) 10%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 12px 30px rgba(0,0,0,.14)!important;
+}
+
+@media(max-width:620px){
+  .lessons-view .lesson-search button[type="submit"]{
+    width:100%!important;
+  }
+}
