@@ -95,7 +95,7 @@
         <div class="rad-heading-badge real-badge">
           <span>MATERIAL REAL</span>
           <strong>CT + SEG · MESMO EXAME</strong>
-          <small>3D derivado dos voxels reais e da segmentação</small>
+          <small>atlas HRA real + CT/SEG co-registrados</small>
         </div>
       </section>
 
@@ -384,16 +384,16 @@
           </div>
 
           <dl>
-            <div><dt>3D</dt><dd>Reconstrução do próprio CT + segmentação</dd></div>
+            <div><dt>3D</dt><dd>Human Reference Atlas · malhas anatômicas reais</dd></div>
             <div><dt>TC / SEG</dt><dd id="studySource">TotalSegmentator · arquivos de referência</dd></div>
-            <div><dt>Correspondência</dt><dd>mesmo espaço voxel · sem aproximação</dd></div>
+            <div><dt>Correspondência</dt><dd>CT + SEG exatos; atlas 3D usado como referência anatômica</dd></div>
             <div><dt>Licença / fonte</dt><dd id="studyLicense">Apache-2.0 · repositório TotalSegmentator</dd></div>
           </dl>
 
           <p class="metadata-note">
-            O 3D e os cortes desta visualização são derivados do mesmo CT e da mesma
-            segmentação NIfTI. Ao mover o cruzamento ou selecionar uma estrutura, a
-            posição é compartilhada diretamente no espaço voxel do exame.
+            O CT e a segmentação pertencem ao mesmo exame e compartilham o mesmo espaço
+            voxel. O modelo 3D completo usa malhas reais do Human Reference Atlas para
+            recuperar ossos, vasos e órgãos que não existem no pequeno volume de teste.
           </p>
         </article>
       </section>
@@ -404,8 +404,9 @@
           <strong>ver registro</strong>
         </summary>
         <div class="source-intro">
-          O laboratório baixa os assets reais no build e mantém as atribuições das fontes.
-          Nenhum órgão desta versão é desenhado com esfera, elipse ou cilindro procedimental.
+          O laboratório baixa o CT/segmentação e as malhas HRA reais no build, mantendo
+          as atribuições das fontes. Nenhum órgão é desenhado com esfera, elipse ou
+          cilindro procedimental.
         </div>
         <div id="sourceRegistry" class="source-registry"></div>
       </details>
