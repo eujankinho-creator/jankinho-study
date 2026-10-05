@@ -14,14 +14,16 @@ const oldModelTarget = path.join(frontend, "models", "radiology");
 const oldVendorTarget = path.join(frontend, "vendor", "niivue");
 const work = await mkdtemp(path.join(tmpdir(), "cortex-ct-atlas-"));
 
-const HF = "https://huggingface.co/datasets/MedOtter/totalsegmentator-cardiac/resolve/main/s0024/";
+const HF = "https://huggingface.co/datasets/MedOtter/totalsegmentator-vertebrae/resolve/main/s0024/";
 const X_STEP = 2;
 const Y_STEP = 2;
 const Z_STEP = 3;
 const GROUPS = [
   { id: "organs", file: "organs_label.nii.gz" },
   { id: "cardiac", file: "cardiac_label.nii.gz" },
-  { id: "muscles", file: "muscles_label.nii.gz" }
+  { id: "muscles", file: "muscles_label.nii.gz" },
+  { id: "ribs", file: "ribs_label.nii.gz" },
+  { id: "vertebrae", file: "vertebrae_label.nii.gz" }
 ];
 
 await rm(dataTarget, { recursive: true, force: true });
@@ -360,12 +362,12 @@ try {
   }
 
   const manifest = {
-    version: 5,
+    version: 6,
     generatedAt: new Date().toISOString(),
     source: {
-      name: "TotalSegmentator / MedOtter · caso s0024",
+      name: "TotalSegmentator / MedOtter · caso s0024 · órgãos, músculos, costelas e vértebras",
       license: "CC BY 4.0",
-      sourceUrl: "https://huggingface.co/datasets/MedOtter/totalsegmentator-cardiac"
+      sourceUrl: "https://huggingface.co/datasets/MedOtter/totalsegmentator-vertebrae"
     },
     architecture: "progressive-webp-slices",
     originalDims: ctHeader.dims,
