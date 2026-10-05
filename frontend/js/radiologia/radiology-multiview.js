@@ -1,11 +1,11 @@
 import * as niivue from "/vendor/niivue/index.js";
-import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-atlas6";
+import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-atlas7";
 import {
   RADIOLOGY_STUDY,
   PLANE_CONFIG,
   getStructureByLabel,
   clamp
-} from "./data.js?v=20261005-atlas6";
+} from "./data.js?v=20261005-atlas7";
 
 const PLANES = ["axial", "coronal", "sagittal"];
 
@@ -72,8 +72,9 @@ export class RadiologyMultiView {
     }
   }
 
-  async warmAsset(url, startPercent = 3, endPercent = 68) {
-    this.emitProgress(startPercent, "Baixando tomografia", "iniciando transferência");
+  async fetchCtFileWithProgress(url, startPercent = 3, endPercent = 68) {
+    const expectedBytes = 60738949;
+    this.emitProgress(startPercent, "Baixando tomografia", "conectando ao exame");
 
     const response = await fetch(url, {
       credentials: "same-origin",
@@ -84,41 +85,53 @@ export class RadiologyMultiView {
       throw new Error("Falha ao baixar o exame: HTTP " + response.status);
     }
 
-    const total = Number(response.headers.get("content-length")) || 0;
-    if (!response.body || !total) {
-      await response.arrayBuffer();
-      this.emitProgress(endPercent, "Tomografia recebida", "arquivo completo");
-      return;
-    }
-
-    const reader = response.body.getReader();
+    const headerBytes = Number(response.headers.get("content-length")) || 0;
+    const total = headerBytes > 0 ? headerBytes : expectedBytes;
+    const chunks = [];
     let received = 0;
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+    if (response.body) {
+      const reader = response.body.getReader();
 
-      received += value?.byteLength || 0;
-      const ratio = Math.max(0, Math.min(1, received / total));
-      const percent = startPercent + ratio * (endPercent - startPercent);
-      const receivedMb = received / 1024 / 1024;
-      const totalMb = total / 1024 / 1024;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        if (!value?.byteLength) continue;
 
-      this.emitProgress(
-        percent,
-        "Baixando tomografia",
-        receivedMb.toFixed(1) + " de " + totalMb.toFixed(1) + " MB"
-      );
+        chunks.push(value);
+        received += value.byteLength;
+
+        const ratio = Math.max(0, Math.min(1, received / total));
+        const percent = startPercent + ratio * (endPercent - startPercent);
+        const receivedMb = received / 1024 / 1024;
+        const totalMb = total / 1024 / 1024;
+
+        this.emitProgress(
+          percent,
+          "Baixando tomografia",
+          receivedMb.toFixed(1) + " de " + totalMb.toFixed(1) + " MB"
+        );
+      }
+    } else {
+      const buffer = await response.arrayBuffer();
+      chunks.push(new Uint8Array(buffer));
+      received = buffer.byteLength;
     }
 
-    this.emitProgress(endPercent, "Tomografia recebida", "preparando volume");
+    this.emitProgress(endPercent, "Tomografia recebida", "decodificando exame");
+
+    return new File(chunks, "ct.nii.gz", {
+      type: "application/octet-stream",
+      lastModified: Date.now()
+    });
   }
 
   async loadBaseVolume() {
-    await this.warmAsset(RADIOLOGY_STUDY.file, 3, 68);
+    const file = await this.fetchCtFileWithProgress(RADIOLOGY_STUDY.file, 3, 68);
     this.emitProgress(72, "Preparando tomografia", "descompactando e decodificando");
-    return niivue.NVImage.loadFromUrl({
-      url: RADIOLOGY_STUDY.file,
+
+    return niivue.NVImage.loadFromFile({
+      file,
       name: "ct.nii.gz",
       colormap: "gray",
       opacity: 1
