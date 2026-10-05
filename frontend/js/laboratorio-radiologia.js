@@ -1,20 +1,23 @@
-import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas7";
-import {
-  STRUCTURES,
-  SOURCE_REGISTRY,
-  RADIOLOGY_STUDY,
-  PLANE_CONFIG,
-  REGION_TARGETS,
-  getStructure
-} from "./radiologia/data.js?v=20261005-atlas7";
+import { STRUCTURES, getStructure } from "./radiologia/data.js?v=20261005-stack1";
 
 const $ = (id) => document.getElementById(id);
+const PLANES = ["axial", "coronal", "sagittal"];
+const REGION_STRUCTURE = {
+  head: "brain",
+  thorax: "myocardium",
+  abdomen: "liver",
+  pelvis: "urinary_bladder",
+  thigh: "left_femur"
+};
+
 const state = {
+  manifest: null,
+  activePlane: "axial",
+  coord: [0,0,0],
   selectedId: null,
-  plane: "axial",
-  frac: [0.5, 0.5, 0.5],
-  availableIds: new Set(),
-  visibility: new Map(STRUCTURES.map((s) => [s.id, true]))
+  imageCache: new Map(),
+  maskCache: new Map(),
+  latestPointStructures: []
 };
 
 async function api(url, options) {
@@ -48,454 +51,483 @@ function announce(message) {
   if ($("liveStatus")) $("liveStatus").textContent = message;
 }
 
-function showBootError(message) {
-  const element = $("labBootError");
-  if (!element) return;
-  element.hidden = false;
-  element.textContent = message;
+function fail(message) {
+  const el = $("labBootError");
+  if (el) {
+    el.hidden = false;
+    el.textContent = message;
+  }
+  if ($("loadStatus")) $("loadStatus").textContent = "Falha";
 }
 
-function structureAvailable(id) {
-  return state.availableIds.has(id);
+function setProgress(percent, stage, detail) {
+  const p = Math.max(0, Math.min(100, Math.round(percent)));
+  if ($("loadingPercent")) $("loadingPercent").textContent = p + "%";
+  if ($("loadingStage")) $("loadingStage").textContent = stage || "Carregando";
+  if ($("loadingDetail")) $("loadingDetail").textContent = detail || "";
+  if ($("loadingBar")) $("loadingBar").style.width = p + "%";
+  if (p >= 100 && $("atlasLoading")) setTimeout(() => $("atlasLoading").classList.add("done"), 180);
 }
 
-async function ensureStructures(radiology) {
-  if (radiology.segmentationsLoaded) return true;
-
-  const button = $("segmentationToggle");
-  if (button) {
-    button.disabled = true;
-    button.textContent = "Carregando estruturas…";
-  }
-  if ($("voxelReadout")) {
-    $("voxelReadout").textContent = "CT pronto · carregando estruturas sob demanda…";
-  }
-
-  try {
-    const ok = await radiology.ensureSegmentations();
-    state.availableIds = new Set(radiology.getAvailableStructureIds());
-
-    if (button) {
-      button.disabled = false;
-      button.classList.toggle("active", ok);
-      button.setAttribute("aria-pressed", ok ? "true" : "false");
-      button.textContent = ok ? "Estruturas ligadas" : "Carregar estruturas";
-    }
-
-    if ($("voxelReadout")) {
-      $("voxelReadout").textContent = ok
-        ? "CT + estruturas prontos"
-        : "CT pronto · estruturas indisponíveis";
-    }
-
-    createStructureList(radiology);
-    updateSlicePresence(radiology);
-    return ok;
-  } catch (error) {
-    console.error(error);
-    if (button) {
-      button.disabled = false;
-      button.textContent = "Tentar carregar estruturas";
-    }
-    if ($("voxelReadout")) {
-      $("voxelReadout").textContent = "CT pronto · falha ao carregar estruturas";
-    }
-    return false;
-  }
+function pad(index) {
+  return String(index).padStart(4, "0");
 }
 
-function updateExamProgress(payload) {
-  const percent = Math.max(0, Math.min(100, Math.round(Number(payload?.percent) || 0)));
-  const overlay = $("examLoadingOverlay");
-  const bar = $("examProgressBar");
-
-  if ($("examLoadingStage")) $("examLoadingStage").textContent = payload?.label || "Carregando exame";
-  if ($("examLoadingPercent")) $("examLoadingPercent").textContent = percent + "%";
-  if ($("examLoadingDetail")) $("examLoadingDetail").textContent = payload?.detail || "";
-  if (bar) bar.style.width = percent + "%";
-
-  if (overlay) {
-    overlay.classList.toggle("is-complete", percent >= 100);
-  }
+function planeInfo(plane) {
+  return state.manifest.planes[plane];
 }
 
-function updatePlaneButtons() {
-  document.querySelectorAll("[data-plane]").forEach((button) => {
-    const active = button.dataset.plane === state.plane;
-    button.classList.toggle("active", active);
-    button.setAttribute("aria-pressed", active ? "true" : "false");
+function imageUrl(plane, ordinal) {
+  return "/data/radiology-atlas/ct/" + plane + "/" + pad(ordinal) + ".webp";
+}
+
+function maskUrl(group, plane, ordinal) {
+  return "/data/radiology-atlas/mask/" + group + "/" + plane + "/" + pad(ordinal) + ".png";
+}
+
+function nearestOrdinal(values, target) {
+  let best = 0;
+  let dist = Infinity;
+  for (let i = 0; i < values.length; i += 1) {
+    const d = Math.abs(values[i] - target);
+    if (d < dist) {
+      best = i;
+      dist = d;
+    }
+  }
+  return best;
+}
+
+function planeOrdinal(plane) {
+  const values = planeInfo(plane).voxels;
+  const axis = plane === "axial" ? 2 : plane === "coronal" ? 1 : 0;
+  return nearestOrdinal(values, state.coord[axis]);
+}
+
+function planeLabel(plane) {
+  return plane === "axial" ? "Axial" : plane === "coronal" ? "Coronal" : "Sagital";
+}
+
+function getImg(plane) {
+  return $("img" + planeLabel(plane).replace("Sagital","Sagittal"));
+}
+
+function getOverlay(plane) {
+  return $("overlay" + planeLabel(plane).replace("Sagital","Sagittal"));
+}
+
+function preloadImage(url) {
+  if (state.imageCache.has(url)) return state.imageCache.get(url);
+  const promise = new Promise((resolve, reject) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = url;
   });
-  document.querySelectorAll("[data-rad-view-plane]").forEach((tile) => {
-    tile.classList.toggle("is-active-plane", tile.dataset.radViewPlane === state.plane);
-  });
-  if ($("selectedPlaneState")) {
-    $("selectedPlaneState").textContent = PLANE_CONFIG[state.plane].label + " · cruz sincronizada";
-  }
+  state.imageCache.set(url, promise);
+  return promise;
 }
 
-function updateStructureListSelection() {
-  document.querySelectorAll(".structure-row").forEach((row) => {
-    row.classList.toggle("active", row.dataset.structureId === state.selectedId);
+function prefetchAround(plane, ordinal) {
+  const total = planeInfo(plane).voxels.length;
+  [-3,-2,-1,1,2,3].forEach((delta) => {
+    const next = ordinal + delta;
+    if (next >= 0 && next < total) preloadImage(imageUrl(plane, next)).catch(() => {});
   });
 }
 
-function updateStructureInfo(radiology) {
-  const structure = state.selectedId ? getStructure(state.selectedId) : null;
-  const empty = $("structureInfoEmpty");
-  const content = $("structureInfoContent");
-
-  if (!structure) {
-    if (empty) empty.hidden = false;
-    if (content) content.hidden = true;
-    return;
-  }
-
-  if (empty) empty.hidden = true;
-  if (content) content.hidden = false;
-  if ($("structureTitle")) $("structureTitle").textContent = structure.name;
-  if ($("structureEnglish")) $("structureEnglish").textContent = structure.englishName;
-  if ($("structureRegion")) $("structureRegion").textContent = structure.region;
-  if ($("structureDescription")) $("structureDescription").textContent = structure.description;
-
-  const bounds = radiology.labelBounds?.get(structure.label);
-  if ($("structureStudies")) $("structureStudies").textContent = "Mesmo CT · máscara co-registrada";
-  if ($("structureMeshCount")) {
-    $("structureMeshCount").textContent = bounds?.voxelCount
-      ? bounds.voxelCount.toLocaleString("pt-BR") + " voxels"
-      : "estrutura segmentada";
-  }
+function containRect(img) {
+  const box = img.getBoundingClientRect();
+  const nw = img.naturalWidth || 1;
+  const nh = img.naturalHeight || 1;
+  const scale = Math.min(box.width / nw, box.height / nh);
+  const width = nw * scale;
+  const height = nh * scale;
+  return {
+    left: (box.width - width) / 2,
+    top: (box.height - height) / 2,
+    width,
+    height
+  };
 }
 
-function updateSlicePresence(radiology) {
-  const container = $("sliceStructures");
+function uvForPlane(plane) {
+  const [nx, ny, nz] = state.manifest.originalDims;
+  const [x,y,z] = state.coord;
+  if (plane === "axial") return [x / Math.max(1,nx-1), 1 - y / Math.max(1,ny-1)];
+  if (plane === "coronal") return [x / Math.max(1,nx-1), 1 - z / Math.max(1,nz-1)];
+  return [y / Math.max(1,ny-1), 1 - z / Math.max(1,nz-1)];
+}
+
+function updateCrosshair(plane) {
+  const stage = document.querySelector('[data-stage="' + plane + '"]');
+  const img = getImg(plane);
+  if (!stage || !img || !img.naturalWidth) return;
+  const rect = containRect(img);
+  const [u,v] = uvForPlane(plane);
+  const vertical = stage.querySelector(".crosshair-v");
+  const horizontal = stage.querySelector(".crosshair-h");
+
+  vertical.style.left = (rect.left + u * rect.width) + "px";
+  vertical.style.top = rect.top + "px";
+  vertical.style.height = rect.height + "px";
+  vertical.style.bottom = "auto";
+
+  horizontal.style.top = (rect.top + v * rect.height) + "px";
+  horizontal.style.left = rect.left + "px";
+  horizontal.style.width = rect.width + "px";
+  horizontal.style.right = "auto";
+}
+
+function updateAllCrosshairs() {
+  PLANES.forEach(updateCrosshair);
+}
+
+function setCoordFromClick(plane, event) {
+  const img = getImg(plane);
+  const stage = document.querySelector('[data-stage="' + plane + '"]');
+  if (!img || !stage) return null;
+  const stageRect = stage.getBoundingClientRect();
+  const contain = containRect(img);
+  const px = event.clientX - stageRect.left;
+  const py = event.clientY - stageRect.top;
+
+  if (px < contain.left || px > contain.left + contain.width || py < contain.top || py > contain.top + contain.height) {
+    return null;
+  }
+
+  const u = (px - contain.left) / contain.width;
+  const v = (py - contain.top) / contain.height;
+  const [nx,ny,nz] = state.manifest.originalDims;
+
+  if (plane === "axial") {
+    state.coord[0] = Math.round(u * (nx - 1));
+    state.coord[1] = Math.round((1 - v) * (ny - 1));
+  } else if (plane === "coronal") {
+    state.coord[0] = Math.round(u * (nx - 1));
+    state.coord[2] = Math.round((1 - v) * (nz - 1));
+  } else {
+    state.coord[1] = Math.round(u * (ny - 1));
+    state.coord[2] = Math.round((1 - v) * (nz - 1));
+  }
+
+  return { u, v };
+}
+
+function setActivePlane(plane) {
+  state.activePlane = plane;
+  document.querySelectorAll("[data-plane-tile]").forEach((tile) => {
+    tile.classList.toggle("active", tile.dataset.planeTile === plane);
+  });
+  if ($("activePlaneLabel")) $("activePlaneLabel").textContent = plane.toUpperCase() + " · CORTE";
+  syncSlider();
+}
+
+function syncSlider() {
+  const info = planeInfo(state.activePlane);
+  const ordinal = planeOrdinal(state.activePlane);
+  if ($("sliceSlider")) {
+    $("sliceSlider").max = String(Math.max(0, info.voxels.length - 1));
+    $("sliceSlider").value = String(ordinal);
+  }
+  if ($("sliceReadout")) $("sliceReadout").textContent = (ordinal + 1) + " / " + info.voxels.length;
+  if ($("slicePlaneName")) $("slicePlaneName").textContent = planeLabel(state.activePlane);
+}
+
+function structureStat(structure) {
+  return state.manifest?.structures?.[structure.group]?.[String(structure.localLabel)] || null;
+}
+
+function availableStructures() {
+  return STRUCTURES.filter((structure) => structureStat(structure));
+}
+
+function createStructureList() {
+  const container = $("structureList");
   if (!container) return;
-  const axis = PLANE_CONFIG[state.plane].fracAxis;
-  const structures = radiology
-    .structuresAtPlane(state.plane, state.frac[axis])
-    .filter((s) => structureAvailable(s.id))
-    .slice(0, 18);
-
-  if (!structures.length) {
-    container.innerHTML = '<span class="slice-empty">Mova a cruz para explorar as estruturas deste nível.</span>';
-    return;
-  }
-
+  const structures = availableStructures();
   container.innerHTML = structures.map((s) =>
-    '<button type="button" class="slice-structure-chip' +
-    (s.id === state.selectedId ? " active" : "") +
-    '" data-slice-structure="' + s.id + '">' + s.name + "</button>"
+    '<button type="button" class="structure-row" data-structure="' + s.id + '" data-search="' +
+    (s.name + " " + s.englishName + " " + s.region).toLowerCase() + '">' +
+    '<span class="structure-swatch" style="--swatch:' + s.color + '"></span>' +
+    '<span class="structure-copy"><strong>' + s.name + '</strong><small>' + s.region + '</small></span></button>'
   ).join("");
 
-  container.querySelectorAll("[data-slice-structure]").forEach((button) => {
-    button.addEventListener("click", () => selectStructure(button.dataset.sliceStructure, radiology, false));
+  container.querySelectorAll("[data-structure]").forEach((button) => {
+    button.addEventListener("click", () => selectStructure(button.dataset.structure, true));
+  });
+
+  $("structureSearch")?.addEventListener("input", function () {
+    const q = this.value.trim().toLowerCase();
+    container.querySelectorAll(".structure-row").forEach((row) => {
+      row.hidden = Boolean(q && !row.dataset.search.includes(q));
+    });
   });
 }
 
-function syncSliceUi(radiology) {
-  const slider = $("sliceSlider");
-  const total = radiology.sliceCount(state.plane);
-  const current = radiology.currentSliceIndex(state.plane);
-
-  if (slider) {
-    slider.max = String(Math.max(0, total - 1));
-    slider.value = String(current);
+function updateStructureUi(structure) {
+  document.querySelectorAll("[data-structure]").forEach((row) => row.classList.toggle("active", row.dataset.structure === structure?.id));
+  if (!structure) {
+    if ($("selectedStructureName")) $("selectedStructureName").textContent = "Explore o atlas";
+    if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Clique no exame ou escolha uma estrutura.";
+    if ($("infoTitle")) $("infoTitle").textContent = "Nenhuma estrutura selecionada";
+    if ($("infoDescription")) $("infoDescription").textContent = "Selecione uma estrutura na lista ou clique diretamente sobre um corte.";
+    return;
   }
-  if ($("sliceCurrent")) $("sliceCurrent").textContent = String(current + 1);
-  if ($("sliceTotal")) $("sliceTotal").textContent = String(total);
 
-  const axis = PLANE_CONFIG[state.plane].fracAxis;
-  if ($("sliceCoordinate")) {
-    $("sliceCoordinate").textContent = Math.round(state.frac[axis] * 100) + "% do eixo";
+  if ($("selectedStructureName")) $("selectedStructureName").textContent = structure.name;
+  if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = structure.region + " · " + structure.englishName;
+  if ($("infoTitle")) $("infoTitle").textContent = structure.name;
+  if ($("infoDescription")) {
+    const stat = structureStat(structure);
+    $("infoDescription").textContent = structure.description + (stat?.count ? " Aproximadamente " + Number(stat.count).toLocaleString("pt-BR") + " voxels amostrados." : "");
   }
-  updateSlicePresence(radiology);
 }
 
-async function selectStructure(id, radiology, moveToStructure) {
+async function selectStructure(id, move) {
   const structure = getStructure(id);
-  if (!structure) return;
-
-  if (!radiology.segmentationsLoaded) {
-    const ok = await ensureStructures(radiology);
-    if (!ok) return;
-  }
-
-  if (!structureAvailable(id)) return;
+  const stat = structure && structureStat(structure);
+  if (!structure || !stat) return;
 
   state.selectedId = id;
-  radiology.selectLabel(structure.label);
-
-  if (moveToStructure && radiology.focusLabel(structure.label, true)) {
-    state.frac = radiology.crosshairFrac.slice();
+  if (move && Array.isArray(stat.centroid)) {
+    state.coord = stat.centroid.slice();
   }
-
-  updateStructureListSelection();
-  updateStructureInfo(radiology);
-  syncSliceUi(radiology);
-
-  if ($("selectedRadiologyName")) {
-    $("selectedRadiologyName").textContent =
-      structure.name + " · " + structure.region + " · destacada nos três planos";
-  }
+  updateStructureUi(structure);
+  await updateViews();
   announce(structure.name + " selecionada");
 }
 
-function createStructureList(radiology) {
-  const container = $("structureList");
-  if (!container) return;
-  container.innerHTML = "";
+async function loadMask(group, plane, ordinal) {
+  const url = maskUrl(group, plane, ordinal);
+  if (state.maskCache.has(url)) return state.maskCache.get(url);
 
-  const previousSearch = container.parentElement?.querySelector(".structure-search");
-  if (previousSearch) previousSearch.remove();
-
-  const search = document.createElement("input");
-  search.type = "search";
-  search.className = "structure-search";
-  search.placeholder = "Buscar estrutura: fígado, encéfalo, fêmur, aorta…";
-  search.setAttribute("aria-label", "Buscar estrutura anatômica");
-  container.before(search);
-
-  const rows = [];
-  STRUCTURES.forEach((structure) => {
-
-    const row = document.createElement("div");
-    row.className = "structure-row";
-    row.dataset.structureId = structure.id;
-    row.dataset.search = (structure.name + " " + structure.englishName + " " + structure.region).toLowerCase();
-
-    const select = document.createElement("button");
-    select.type = "button";
-    select.className = "structure-select";
-    select.innerHTML =
-      '<span class="structure-swatch" style="--structure-color:' + structure.color + '"></span>' +
-      '<span class="structure-name"><strong>' + structure.name + '</strong><small>' +
-      structure.region + " · " + structure.englishName + "</small></span>";
-    select.addEventListener("click", () => { void selectStructure(structure.id, radiology, true); });
-
-    const visibility = document.createElement("button");
-    visibility.type = "button";
-    visibility.className = "structure-visibility is-visible";
-    visibility.setAttribute("aria-label", "Mostrar ou ocultar " + structure.name);
-    visibility.innerHTML = "<span></span>";
-    visibility.addEventListener("click", async () => {
-      if (!radiology.segmentationsLoaded) {
-        const ok = await ensureStructures(radiology);
-        if (!ok) return;
-      }
-      const next = !state.visibility.get(structure.id);
-      state.visibility.set(structure.id, next);
-      radiology.setStructureVisibility(structure.label, next);
-      visibility.classList.toggle("is-visible", next);
-      visibility.setAttribute("aria-pressed", next ? "true" : "false");
-    });
-
-    row.append(select, visibility);
-    container.appendChild(row);
-    rows.push(row);
+  const promise = new Promise((resolve, reject) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(img, 0, 0);
+      resolve({ img, canvas, ctx });
+    };
+    img.onerror = reject;
+    img.src = url;
   });
 
-  search.addEventListener("input", () => {
-    const q = search.value.trim().toLowerCase();
-    rows.forEach((row) => { row.hidden = q && !row.dataset.search.includes(q); });
-  });
+  state.maskCache.set(url, promise);
+  return promise;
 }
 
-function updateStudyUi(radiology) {
-  if ($("studyName")) $("studyName").textContent = RADIOLOGY_STUDY.name;
-  if ($("studyModality")) $("studyModality").textContent = "TC + 3 mapas";
-  if ($("studySource")) $("studySource").textContent = RADIOLOGY_STUDY.source;
-  if ($("studyLicense")) $("studyLicense").textContent = RADIOLOGY_STUDY.license;
-  if ($("studySlices")) {
-    const dims = radiology.dims || [1,1,1];
-    $("studySlices").textContent = dims[0] + "×" + dims[1] + "×" + dims[2] + " voxels";
+async function labelsAtPoint(plane, u, v) {
+  const ordinal = planeOrdinal(plane);
+  const groups = state.manifest.groups || [];
+  const found = [];
+
+  for (const group of groups) {
+    try {
+      const mask = await loadMask(group, plane, ordinal);
+      const x = Math.max(0, Math.min(mask.canvas.width - 1, Math.floor(u * mask.canvas.width)));
+      const y = Math.max(0, Math.min(mask.canvas.height - 1, Math.floor(v * mask.canvas.height)));
+      const label = mask.ctx.getImageData(x, y, 1, 1).data[0];
+      if (!label) continue;
+      const structure = STRUCTURES.find((s) => s.group === group && s.localLabel === label);
+      if (structure && !found.some((item) => item.id === structure.id)) found.push(structure);
+    } catch (error) {}
   }
-  if ($("ctDatasetLabel")) $("ctDatasetLabel").textContent = "CT corporal · estruturas co-registradas";
+  return found;
 }
 
-function renderSources() {
-  const container = $("sourceRegistry");
+function renderPointStructures(items) {
+  state.latestPointStructures = items;
+  const container = $("pointStructures");
   if (!container) return;
-  container.innerHTML = SOURCE_REGISTRY.map((source) =>
-    '<article class="source-item"><div><strong>' + source.label + '</strong><span>' + source.role +
-    '</span></div><p>' + source.license + '</p><small>' + source.attribution +
-    '</small><div class="source-links"><a href="' + source.sourceUrl +
-    '" target="_blank" rel="noopener">Fonte</a><a href="' + source.licenseUrl +
-    '" target="_blank" rel="noopener">Licença</a></div></article>'
-  ).join("");
+  if (!items.length) {
+    container.innerHTML = "<small>Nenhuma estrutura segmentada neste ponto.</small>";
+    return;
+  }
+  container.innerHTML = items.map((s) => '<button type="button" data-point-structure="' + s.id + '">' + s.name + "</button>").join("");
+  container.querySelectorAll("[data-point-structure]").forEach((button) => {
+    button.addEventListener("click", () => selectStructure(button.dataset.pointStructure, false));
+  });
 }
 
-function setPlane(plane, radiology) {
-  if (!PLANE_CONFIG[plane]) return;
-  state.plane = plane;
-  radiology.setPlane(plane, true);
-  updatePlaneButtons();
-  syncSliceUi(radiology);
+async function renderOverlayForPlane(plane) {
+  const canvas = getOverlay(plane);
+  const img = getImg(plane);
+  const stage = document.querySelector('[data-stage="' + plane + '"]');
+  if (!canvas || !img || !stage || !img.naturalWidth) return;
+
+  const rect = containRect(img);
+  canvas.style.left = rect.left + "px";
+  canvas.style.top = rect.top + "px";
+  canvas.style.width = rect.width + "px";
+  canvas.style.height = rect.height + "px";
+
+  const structure = state.selectedId ? getStructure(state.selectedId) : null;
+  if (!structure) {
+    canvas.width = 1;
+    canvas.height = 1;
+    canvas.getContext("2d").clearRect(0,0,1,1);
+    return;
+  }
+
+  try {
+    const mask = await loadMask(structure.group, plane, planeOrdinal(plane));
+    canvas.width = mask.canvas.width;
+    canvas.height = mask.canvas.height;
+    const src = mask.ctx.getImageData(0,0,mask.canvas.width,mask.canvas.height);
+    const out = canvas.getContext("2d").createImageData(mask.canvas.width, mask.canvas.height);
+    const hex = structure.color.replace("#","");
+    const r = parseInt(hex.slice(0,2),16);
+    const g = parseInt(hex.slice(2,4),16);
+    const b = parseInt(hex.slice(4,6),16);
+
+    for (let i = 0; i < src.data.length; i += 4) {
+      if (src.data[i] === structure.localLabel) {
+        out.data[i] = r;
+        out.data[i+1] = g;
+        out.data[i+2] = b;
+        out.data[i+3] = 145;
+      }
+    }
+    canvas.getContext("2d").putImageData(out,0,0);
+  } catch (error) {
+    canvas.width = 1;
+    canvas.height = 1;
+  }
 }
 
-function bindWindowPresets(radiology) {
-  document.querySelectorAll("[data-window-preset]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const width = Number(button.dataset.width);
-      const level = Number(button.dataset.level);
-      if ($("windowWidth")) $("windowWidth").value = String(width);
-      if ($("windowLevel")) $("windowLevel").value = String(level);
-      if ($("windowWidthValue")) $("windowWidthValue").textContent = String(width);
-      if ($("windowLevelValue")) $("windowLevelValue").textContent = String(level);
-      radiology.setWindow(width, level);
-      document.querySelectorAll("[data-window-preset]").forEach((item) => item.classList.toggle("active", item === button));
+async function setPlaneImage(plane) {
+  const ordinal = planeOrdinal(plane);
+  const img = getImg(plane);
+  const url = imageUrl(plane, ordinal);
+  const preloaded = await preloadImage(url);
+  if (img.src !== preloaded.src) img.src = preloaded.src;
+  await img.decode?.().catch(() => {});
+  prefetchAround(plane, ordinal);
+  const count = document.querySelector('[data-plane-count="' + plane + '"]');
+  if (count) count.textContent = (ordinal + 1) + " / " + planeInfo(plane).voxels.length;
+}
+
+async function updateViews() {
+  await Promise.all(PLANES.map(setPlaneImage));
+  updateAllCrosshairs();
+  syncSlider();
+  await Promise.all(PLANES.map(renderOverlayForPlane));
+}
+
+function bindViewerClicks() {
+  PLANES.forEach((plane) => {
+    const stage = document.querySelector('[data-stage="' + plane + '"]');
+    stage?.addEventListener("click", async (event) => {
+      setActivePlane(plane);
+      const uv = setCoordFromClick(plane, event);
+      if (!uv) return;
+      await updateViews();
+      if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Identificando estruturas neste ponto...";
+      const items = await labelsAtPoint(plane, uv.u, uv.v);
+      renderPointStructures(items);
+      if (items[0]) {
+        state.selectedId = items[0].id;
+        updateStructureUi(items[0]);
+        await Promise.all(PLANES.map(renderOverlayForPlane));
+      } else if ($("selectedStructureMeta")) {
+        $("selectedStructureMeta").textContent = "Nenhuma estrutura segmentada encontrada neste ponto.";
+      }
+    });
+
+    document.querySelector('[data-plane-tile="' + plane + '"]')?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") setActivePlane(plane);
     });
   });
 }
 
-function bindRegionControls(radiology) {
-  document.querySelectorAll("[data-region-target]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const region = button.dataset.regionTarget;
-      document.querySelectorAll("[data-region-target]").forEach((item) => item.classList.toggle("active", item === button));
+function bindSliceControls() {
+  $("sliceSlider")?.addEventListener("input", async function () {
+    const values = planeInfo(state.activePlane).voxels;
+    const ordinal = Math.max(0, Math.min(values.length - 1, Number(this.value)));
+    const axis = state.activePlane === "axial" ? 2 : state.activePlane === "coronal" ? 1 : 0;
+    state.coord[axis] = values[ordinal];
+    await updateViews();
+  });
 
+  $("slicePrev")?.addEventListener("click", () => moveSlice(-1));
+  $("sliceNext")?.addEventListener("click", () => moveSlice(1));
+}
+
+async function moveSlice(delta) {
+  const values = planeInfo(state.activePlane).voxels;
+  let ordinal = planeOrdinal(state.activePlane) + delta;
+  ordinal = Math.max(0, Math.min(values.length - 1, ordinal));
+  const axis = state.activePlane === "axial" ? 2 : state.activePlane === "coronal" ? 1 : 0;
+  state.coord[axis] = values[ordinal];
+  await updateViews();
+}
+
+function bindRegions() {
+  document.querySelectorAll("[data-region]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      document.querySelectorAll("[data-region]").forEach((item) => item.classList.toggle("active", item === button));
+      const region = button.dataset.region;
       if (region === "overview") {
-        radiology.setCrosshairFraction([0.5,0.5,0.5], true);
-        radiology.viewers.axial.setZoom(0.68);
-        state.frac = radiology.crosshairFrac.slice();
-        setPlane("axial", radiology);
+        const [nx,ny,nz] = state.manifest.originalDims;
+        state.coord = [Math.floor(nx/2),Math.floor(ny/2),Math.floor(nz/2)];
+        state.selectedId = null;
+        updateStructureUi(null);
+        await updateViews();
         return;
       }
-
-      const id = REGION_TARGETS[region];
-      if (id) void selectStructure(id, radiology, true);
+      const id = REGION_STRUCTURE[region];
+      if (id) await selectStructure(id, true);
     });
   });
-}
-
-function bindControls(radiology) {
-  document.querySelectorAll("[data-plane]").forEach((button) => {
-    button.addEventListener("click", () => setPlane(button.dataset.plane, radiology));
-  });
-
-  $("sliceSlider")?.addEventListener("input", function () {
-    radiology.setSlice(Number(this.value), true);
-    state.frac = radiology.crosshairFrac.slice();
-    syncSliceUi(radiology);
-  });
-  $("slicePrev")?.addEventListener("click", () => {
-    radiology.setSlice(radiology.currentSliceIndex() - 1, true);
-    state.frac = radiology.crosshairFrac.slice();
-    syncSliceUi(radiology);
-  });
-  $("sliceNext")?.addEventListener("click", () => {
-    radiology.setSlice(radiology.currentSliceIndex() + 1, true);
-    state.frac = radiology.crosshairFrac.slice();
-    syncSliceUi(radiology);
-  });
-
-  $("windowWidth")?.addEventListener("input", function () {
-    radiology.setWindow(Number(this.value), Number($("windowLevel").value));
-    $("windowWidthValue").textContent = this.value;
-  });
-  $("windowLevel")?.addEventListener("input", function () {
-    radiology.setWindow(Number($("windowWidth").value), Number(this.value));
-    $("windowLevelValue").textContent = this.value;
-  });
-
-  $("radZoomIn")?.addEventListener("click", () => radiology.zoomBy(0.12));
-  $("radZoomOut")?.addEventListener("click", () => radiology.zoomBy(-0.12));
-  $("radReset")?.addEventListener("click", () => radiology.resetView());
-  $("mprView")?.addEventListener("click", () => setPlane("axial", radiology));
-  $("segmentationToggle")?.addEventListener("click", async function () {
-    if (!radiology.segmentationsLoaded) {
-      await ensureStructures(radiology);
-      return;
-    }
-
-    const active = this.classList.toggle("active");
-    this.setAttribute("aria-pressed", active ? "true" : "false");
-    this.textContent = active ? "Estruturas ligadas" : "Estruturas ocultas";
-    radiology.setSegmentationVisible(active);
-  });
-
-  bindWindowPresets(radiology);
-  bindRegionControls(radiology);
 }
 
 async function boot() {
-  updateExamProgress({ percent: 1, label: "Preparando exame", detail: "iniciando carregamento" });
-  let syncing = false;
-  const radiology = new RadiologyMultiView(
-    $("radiologyMultiView"),
-    {
-      axial: $("radiologyAxialCanvas"),
-      coronal: $("radiologyCoronalCanvas"),
-      sagittal: $("radiologySagittalCanvas")
-    },
-    {
-      onProgress: updateExamProgress,
-      onFirstImageReady: ({ dims }) => {
-        if ($("voxelReadout")) $("voxelReadout").textContent = "CT carregado · preparando outras vistas…";
-        if ($("studySlices")) $("studySlices").textContent = dims.join("×") + " voxels";
-      },
-      onBaseViewsReady: () => {
-        if ($("voxelReadout")) $("voxelReadout").textContent = "CT pronto · estruturas sob demanda";
-      },
-      onLocationChange: (payload) => {
-        if (!payload?.frac || syncing) return;
-        syncing = true;
-        state.frac = payload.frac.slice();
-        state.plane = payload.plane || state.plane;
-        if (payload.intensityText && $("voxelReadout")) $("voxelReadout").textContent = payload.intensityText;
-        updatePlaneButtons();
-        syncSliceUi(radiology);
-        syncing = false;
-      },
-      onPlaneChange: (plane) => {
-        state.plane = plane;
-        updatePlaneButtons();
-        syncSliceUi(radiology);
-      },
-      onStructureAtLocation: (structure) => {
-        if (structure && structureAvailable(structure.id)) selectStructure(structure.id, radiology, false);
-      },
-      onSegmentationsReady: ({ availableLabels }) => {
-        state.availableIds = new Set(
-          STRUCTURES.filter((s) => availableLabels.includes(s.label)).map((s) => s.id)
-        );
-        createStructureList(radiology);
-        updateStudyUi(radiology);
-      },
-      onReady: () => updateStudyUi(radiology),
-      onZoomChange: (zoom) => {
-        if ($("radZoomValue")) $("radZoomValue").textContent = Math.round(zoom * 100) + "%";
-      }
-    }
-  );
+  setProgress(8, "Abrindo atlas", "carregando manifesto leve");
+  const response = await fetch("/data/radiology-atlas/manifest.json?v=20261005-stack1", { cache: "no-cache" });
+  if (!response.ok) throw new Error("Manifesto do atlas indisponível");
+  state.manifest = await response.json();
 
-  try {
-    await radiology.ready;
-  } catch (error) {
-    console.error(error);
-    showBootError("Não foi possível carregar a tomografia. Recarregue a página.");
-    updateExamProgress({ percent: 0, label: "Falha ao carregar", detail: "verifique a conexão e tente novamente" });
-    throw error;
+  const [nx,ny,nz] = state.manifest.originalDims;
+  state.coord = [Math.floor(nx/2),Math.floor(ny/2),Math.floor(nz/2)];
+
+  if ($("datasetStatus")) {
+    $("datasetStatus").textContent = state.manifest.architecture === "progressive-webp-slices"
+      ? "sem download do volume inteiro"
+      : "atlas pronto";
   }
 
-  state.availableIds = new Set(radiology.getAvailableStructureIds());
-  state.frac = radiology.crosshairFrac.slice();
-  state.plane = radiology.primaryPlane || "axial";
+  PLANES.forEach((plane) => {
+    const el = document.querySelector('[data-plane-count="' + plane + '"]');
+    if (el) el.textContent = planeInfo(plane).voxels.length + " cortes";
+  });
 
-  createStructureList(radiology);
-  bindControls(radiology);
-  renderSources();
-  updatePlaneButtons();
-  updateStudyUi(radiology);
-  updateStructureInfo(radiology);
-  syncSliceUi(radiology);
+  setProgress(32, "Preparando visualizador", "baixando 3 imagens iniciais");
+  createStructureList();
+  bindViewerClicks();
+  bindSliceControls();
+  bindRegions();
+  setActivePlane("axial");
 
-  if ($("selectedRadiologyName")) {
-    $("selectedRadiologyName").textContent = "CT pronto · clique em uma estrutura para carregar e identificar";
-  }
+  await updateViews();
+  setProgress(86, "Quase pronto", "pré-carregando cortes vizinhos");
+  PLANES.forEach((plane) => prefetchAround(plane, planeOrdinal(plane)));
+  await new Promise((resolve) => setTimeout(resolve, 80));
+  setProgress(100, "Atlas pronto", "os próximos cortes carregam sob demanda");
+  if ($("loadStatus")) $("loadStatus").textContent = "Pronto";
+  updateStructureUi(null);
 }
 
 loadUser().catch(console.error);
 $("logoutSidebar")?.addEventListener("click", logout);
 
 boot().catch((error) => {
-  console.error("Falha ao iniciar atlas de tomografia:", error);
+  console.error("Falha ao iniciar atlas:", error);
+  fail("Não foi possível carregar o atlas de tomografia. O deploy pode ainda estar preparando os cortes.");
+  setProgress(0, "Falha ao carregar", "tente novamente após o deploy terminar");
 });
