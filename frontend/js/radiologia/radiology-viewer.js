@@ -3,48 +3,44 @@ import {
   RADIOLOGY_STUDY,
   PLANE_CONFIG,
   STRUCTURES,
-  createSegmentationColormap,
+  SEGMENTATION_GROUPS,
+  createGroupSegmentationColormap,
   getStructureByLabel,
+  getStructureByGroupLabel,
   clamp
-} from "./data.js?v=20261005-premium3";
+} from "./data.js?v=20261005-atlas1";
 
 export class RadiologyViewer {
   constructor(canvas, options) {
     this.canvas = canvas;
     this.options = options || {};
     this.study = RADIOLOGY_STUDY;
-    this.plane = PLANE_CONFIG[this.options.plane]
-      ? this.options.plane
-      : "axial";
+    this.plane = PLANE_CONFIG[this.options.plane] ? this.options.plane : "axial";
     this.singlePlane = Boolean(this.options.singlePlane);
-    this.qualityRole = this.options.qualityRole === "primary"
-      ? "primary"
-      : "secondary";
-    this.renderScale = Number(this.options.renderScale) ||
-      (this.qualityRole === "primary" ? 1.12 : 0.62);
-    this.maxBackingPixels = this.qualityRole === "primary"
-      ? 1850000
-      : 420000;
+    this.qualityRole = this.options.qualityRole === "primary" ? "primary" : "secondary";
+    this.renderScale = Number(this.options.renderScale) || (this.qualityRole === "primary" ? 1.14 : 0.72);
+    this.maxBackingPixels = this.qualityRole === "primary" ? 2050000 : 760000;
     this.resizeObserver = null;
     this.resizeRaf = 0;
     this.crosshairFrac = [0.5, 0.5, 0.5];
     this.windowWidth = 400;
-    this.windowLevel = 50;
-    this.defaultZoom = clamp(Number(this.options.defaultZoom) || 0.80, 0.58, 1.2);
+    this.windowLevel = 40;
+    this.defaultZoom = clamp(Number(this.options.defaultZoom) || 0.68, 0.48, 1.2);
     this.zoom = this.defaultZoom;
     this.dims = [1, 1, 1];
     this.selectedLabel = 0;
     this.hiddenLabels = new Set();
     this.labelCentroids = new Map();
     this.labelBounds = new Map();
-    this.segmentationOpacity = 0.34;
+    this.groupVolumeIndexes = new Map();
+    this.segmentationVisible = true;
     this.ready = this.init();
   }
 
   async init() {
     this.nv = new niivue.Niivue({
       backColor: [0, 0, 0, 1],
-      crosshairColor: [0.42, 0.78, 1, 0.86],
+      crosshairColor: [0.25, 0.78, 1, 0.94],
       show3Dcrosshair: true,
       isColorbar: false,
       dragAndDropEnabled: false,
@@ -63,34 +59,31 @@ export class RadiologyViewer {
     this.nv.graph.autoSizeMultiplanar = true;
     this.nv.graph.opacity = 1.0;
 
-    await this.nv.loadVolumes([
-      {
-        url: this.study.file,
-        name: "totalseg_example_ct.nii.gz",
-        colormap: "gray",
-        opacity: 1
-      },
-      {
-        url: this.study.segmentationFile,
-        name: "totalseg_example_seg.nii.gz",
-        opacity: this.segmentationOpacity
-      }
-    ]);
+    const volumes = [
+      { url: this.study.file, name: "ct.nii.gz", colormap: "gray", opacity: 1 },
+      ...this.study.segmentations.map((seg) => ({
+        url: seg.url,
+        name: seg.id + "_label.nii.gz",
+        opacity: seg.opacity
+      }))
+    ];
 
+    await this.nv.loadVolumes(volumes);
     if (this.nv.volumes.length < 2) {
-      throw new Error("CT e segmentação do mesmo exame não foram carregados.");
+      throw new Error("O CT corporal e as segmentações não foram carregados.");
     }
 
-    this.applySegmentationColormap();
-    this.nv.setOpacity(1, this.segmentationOpacity);
+    this.study.segmentations.forEach((seg, index) => {
+      this.groupVolumeIndexes.set(seg.id, index + 1);
+    });
+
+    this.applySegmentationColormaps();
+    this.applySegmentationOpacity();
     this.nv.setInterpolation(true);
     this.nv.setAtlasOutline(0.012);
-    if (this.singlePlane) {
-      this.applySinglePlaneSliceType();
-    }
-    else {
-      this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
-    }
+
+    if (this.singlePlane) this.applySinglePlaneSliceType();
+    else this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
 
     const dims = this.nv.volumes[0].dims || [];
     this.dims = [
@@ -110,114 +103,105 @@ export class RadiologyViewer {
         study: this.study,
         dims: this.dims.slice(),
         volume: this.nv.volumes[0],
-        segmentation: this.nv.volumes[1],
         availableLabels: Array.from(this.labelCentroids.keys())
       });
     }
-
     return this;
   }
 
   computeLabelCentroids() {
-    const segmentation = this.nv?.volumes?.[1];
-    const image = segmentation?.img;
-    if (!image || !image.length) return;
+    this.labelCentroids.clear();
+    this.labelBounds.clear();
 
-    const dims = segmentation.dims || [];
-    const nx = Math.max(1, Number(dims[1]) || 1);
-    const ny = Math.max(1, Number(dims[2]) || 1);
-    const nz = Math.max(1, Number(dims[3]) || 1);
-    const targetLabels = new Set(STRUCTURES.map((structure) => structure.label));
-    const sums = new Map();
+    SEGMENTATION_GROUPS.forEach((group) => {
+      const volumeIndex = this.groupVolumeIndexes.get(group.id);
+      const segmentation = this.nv?.volumes?.[volumeIndex];
+      const image = segmentation?.img;
+      if (!image?.length) return;
 
-    const plane = nx * ny;
-    for (let index = 0; index < image.length; index += 1) {
-      const label = Math.round(Number(image[index]) || 0);
-      if (!targetLabels.has(label)) continue;
+      const dims = segmentation.dims || [];
+      const nx = Math.max(1, Number(dims[1]) || 1);
+      const ny = Math.max(1, Number(dims[2]) || 1);
+      const nz = Math.max(1, Number(dims[3]) || 1);
+      const structures = STRUCTURES.filter((s) => s.group === group.id);
+      const byLocal = new Map(structures.map((s) => [s.localLabel, s]));
+      const sums = new Map();
+      const plane = nx * ny;
 
-      const z = Math.floor(index / plane);
-      const remainder = index - z * plane;
-      const y = Math.floor(remainder / nx);
-      const x = remainder - y * nx;
+      for (let index = 0; index < image.length; index += 1) {
+        const localLabel = Math.round(Number(image[index]) || 0);
+        const structure = byLocal.get(localLabel);
+        if (!structure) continue;
 
-      let entry = sums.get(label);
-      if (!entry) {
-        entry = {
-          x: 0,
-          y: 0,
-          z: 0,
-          count: 0,
-          minX: x,
-          maxX: x,
-          minY: y,
-          maxY: y,
-          minZ: z,
-          maxZ: z
-        };
-        sums.set(label, entry);
+        const z = Math.floor(index / plane);
+        const remainder = index - z * plane;
+        const y = Math.floor(remainder / nx);
+        const x = remainder - y * nx;
+
+        let entry = sums.get(structure.label);
+        if (!entry) {
+          entry = { x:0,y:0,z:0,count:0,minX:x,maxX:x,minY:y,maxY:y,minZ:z,maxZ:z };
+          sums.set(structure.label, entry);
+        }
+        entry.x += x; entry.y += y; entry.z += z; entry.count += 1;
+        entry.minX = Math.min(entry.minX, x); entry.maxX = Math.max(entry.maxX, x);
+        entry.minY = Math.min(entry.minY, y); entry.maxY = Math.max(entry.maxY, y);
+        entry.minZ = Math.min(entry.minZ, z); entry.maxZ = Math.max(entry.maxZ, z);
       }
 
-      entry.x += x;
-      entry.y += y;
-      entry.z += z;
-      entry.count += 1;
-      entry.minX = Math.min(entry.minX, x);
-      entry.maxX = Math.max(entry.maxX, x);
-      entry.minY = Math.min(entry.minY, y);
-      entry.maxY = Math.max(entry.maxY, y);
-      entry.minZ = Math.min(entry.minZ, z);
-      entry.maxZ = Math.max(entry.maxZ, z);
-    }
-
-    sums.forEach((entry, label) => {
-      if (!entry.count) return;
-      const vox = [
-        entry.x / entry.count,
-        entry.y / entry.count,
-        entry.z / entry.count
-      ];
-      const frac = this.nv.vox2frac(vox);
-      this.labelCentroids.set(label, [
-        clamp(Number(frac[0]) || 0, 0, 1),
-        clamp(Number(frac[1]) || 0, 0, 1),
-        clamp(Number(frac[2]) || 0, 0, 1)
-      ]);
-
-      this.labelBounds.set(label, {
-        min: [
-          nx <= 1 ? 0 : entry.minX / (nx - 1),
-          ny <= 1 ? 0 : entry.minY / (ny - 1),
-          nz <= 1 ? 0 : entry.minZ / (nz - 1)
-        ],
-        max: [
-          nx <= 1 ? 1 : entry.maxX / (nx - 1),
-          ny <= 1 ? 1 : entry.maxY / (ny - 1),
-          nz <= 1 ? 1 : entry.maxZ / (nz - 1)
-        ],
-        voxelCount: entry.count
+      sums.forEach((entry, syntheticLabel) => {
+        if (!entry.count) return;
+        const frac = this.nv.vox2frac([
+          entry.x / entry.count,
+          entry.y / entry.count,
+          entry.z / entry.count
+        ]);
+        this.labelCentroids.set(syntheticLabel, [
+          clamp(Number(frac[0]) || 0, 0, 1),
+          clamp(Number(frac[1]) || 0, 0, 1),
+          clamp(Number(frac[2]) || 0, 0, 1)
+        ]);
+        this.labelBounds.set(syntheticLabel, {
+          min: [
+            nx <= 1 ? 0 : entry.minX / (nx - 1),
+            ny <= 1 ? 0 : entry.minY / (ny - 1),
+            nz <= 1 ? 0 : entry.minZ / (nz - 1)
+          ],
+          max: [
+            nx <= 1 ? 1 : entry.maxX / (nx - 1),
+            ny <= 1 ? 1 : entry.maxY / (ny - 1),
+            nz <= 1 ? 1 : entry.maxZ / (nz - 1)
+          ],
+          voxelCount: entry.count
+        });
       });
     });
   }
 
+  structureAtLocation(data) {
+    for (const group of SEGMENTATION_GROUPS) {
+      const volumeIndex = this.groupVolumeIndexes.get(group.id);
+      const localLabel = Math.round(Number(data?.values?.[volumeIndex]?.value || 0));
+      if (!localLabel) continue;
+      const structure = getStructureByGroupLabel(group.id, localLabel);
+      if (structure) return structure;
+    }
+    return null;
+  }
+
   handleLocationChange(data) {
     if (!this.nv) return;
-
     const next = Array.from(this.nv.scene.crosshairPos || this.crosshairFrac)
       .slice(0, 3)
       .map((value) => clamp(Number(value) || 0, 0, 1));
+    if (next.length === 3) this.crosshairFrac = next;
 
-    if (next.length === 3) {
-      this.crosshairFrac = next;
-    }
-
-    const label = Math.round(Number(data?.values?.[1]?.value || 0));
-    const structure = getStructureByLabel(label);
+    const structure = this.structureAtLocation(data);
+    const label = structure?.label || 0;
 
     if (structure && typeof this.options.onStructureAtLocation === "function") {
       this.options.onStructureAtLocation(structure, {
-        label,
-        frac: this.crosshairFrac.slice(),
-        data
+        label, frac: this.crosshairFrac.slice(), data
       });
     }
 
@@ -235,165 +219,123 @@ export class RadiologyViewer {
     }
   }
 
-  applySegmentationColormap() {
-    if (!this.nv?.volumes?.[1]) return;
-
-    const cmap = createSegmentationColormap({
-      selectedLabel: this.selectedLabel,
-      hiddenLabels: this.hiddenLabels,
-      showContext: false,
-      showAllTargetStructures: true
+  applySegmentationColormaps() {
+    SEGMENTATION_GROUPS.forEach((group) => {
+      const volumeIndex = this.groupVolumeIndexes.get(group.id);
+      const volume = this.nv?.volumes?.[volumeIndex];
+      if (!volume) return;
+      volume.setColormapLabel(createGroupSegmentationColormap(group.id, {
+        selectedLabel: this.selectedLabel,
+        hiddenLabels: this.hiddenLabels
+      }));
     });
-
-    this.nv.volumes[1].setColormapLabel(cmap);
-    this.nv.opts.atlasActiveIndex = this.selectedLabel > 0
-      ? this.selectedLabel
-      : -1;
     this.nv.updateGLVolume();
+    this.nv.drawScene();
+  }
+
+  applySegmentationOpacity() {
+    this.study.segmentations.forEach((seg) => {
+      const volumeIndex = this.groupVolumeIndexes.get(seg.id);
+      if (!volumeIndex) return;
+      this.nv.setOpacity(volumeIndex, this.segmentationVisible ? seg.opacity : 0);
+    });
     this.nv.drawScene();
   }
 
   installResizeObserver() {
     if (typeof ResizeObserver === "undefined") return;
-
     const target = this.canvas.parentElement || this.canvas;
     this.resizeObserver = new ResizeObserver(() => {
       cancelAnimationFrame(this.resizeRaf);
-      this.resizeRaf = requestAnimationFrame(() => {
-        this.syncCanvasResolution();
-      });
+      this.resizeRaf = requestAnimationFrame(() => this.syncCanvasResolution());
     });
     this.resizeObserver.observe(target);
   }
 
   setQualityRole(role) {
     const next = role === "primary" ? "primary" : "secondary";
-    if (this.qualityRole === next) {
-      this.syncCanvasResolution();
-      return;
-    }
-
     this.qualityRole = next;
-    this.renderScale = next === "primary" ? 1.12 : 0.62;
-    this.maxBackingPixels = next === "primary" ? 1850000 : 420000;
+    this.renderScale = next === "primary" ? 1.14 : 0.72;
+    this.maxBackingPixels = next === "primary" ? 2050000 : 760000;
     this.syncCanvasResolution();
   }
 
   syncCanvasResolution() {
     if (!this.canvas || !this.nv) return;
-
     const rect = this.canvas.getBoundingClientRect();
     if (rect.width < 2 || rect.height < 2) return;
-
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const minRatio = this.qualityRole === "primary" ? 0.88 : 0.50;
-    const maxRatio = this.qualityRole === "primary" ? 1.62 : 0.90;
+    const minRatio = this.qualityRole === "primary" ? 0.92 : 0.62;
+    const maxRatio = this.qualityRole === "primary" ? 1.70 : 1.10;
     let ratio = clamp(dpr * this.renderScale, minRatio, maxRatio);
-
     let width = Math.max(2, Math.round(rect.width * ratio));
     let height = Math.max(2, Math.round(rect.height * ratio));
     const pixels = width * height;
-
     if (pixels > this.maxBackingPixels) {
       const reduce = Math.sqrt(this.maxBackingPixels / pixels);
-      ratio *= reduce;
-      width = Math.max(2, Math.round(rect.width * ratio));
-      height = Math.max(2, Math.round(rect.height * ratio));
+      width = Math.max(2, Math.round(width * reduce));
+      height = Math.max(2, Math.round(height * reduce));
     }
-
-    if (this.canvas.width === width && this.canvas.height === height) {
-      return;
-    }
-
-    this.canvas.width = width;
-    this.canvas.height = height;
-    this.nv.resizeListener();
-    this.nv.drawScene();
+    if (this.canvas.width === width && this.canvas.height === height) return;
+    this.canvas.width = width; this.canvas.height = height;
+    this.nv.resizeListener(); this.nv.drawScene();
   }
 
   getRenderQuality() {
     const rect = this.canvas?.getBoundingClientRect?.();
     if (!rect) return null;
-
     return {
-      role: this.qualityRole,
-      cssWidth: Math.round(rect.width),
-      cssHeight: Math.round(rect.height),
-      backingWidth: this.canvas.width,
-      backingHeight: this.canvas.height
+      role:this.qualityRole, cssWidth:Math.round(rect.width), cssHeight:Math.round(rect.height),
+      backingWidth:this.canvas.width, backingHeight:this.canvas.height
     };
   }
 
   setPlane(plane, silent) {
     if (!PLANE_CONFIG[plane]) return;
     this.plane = plane;
-
-    if (this.singlePlane && this.nv) {
-      this.applySinglePlaneSliceType();
-    }
-
-    if (!silent && typeof this.options.onPlaneChange === "function") {
-      this.options.onPlaneChange(plane);
-    }
-
-    if (!silent) {
-      this.notifyProgrammaticLocation();
-    }
+    if (this.singlePlane && this.nv) this.applySinglePlaneSliceType();
+    if (!silent && typeof this.options.onPlaneChange === "function") this.options.onPlaneChange(plane);
+    if (!silent) this.notifyProgrammaticLocation();
   }
 
   setCrosshairFraction(frac, silent) {
     if (!Array.isArray(frac) || frac.length < 3) return;
-
     this.crosshairFrac = [
       clamp(Number(frac[0]) || 0, 0, 1),
       clamp(Number(frac[1]) || 0, 0, 1),
       clamp(Number(frac[2]) || 0, 0, 1)
     ];
-
     if (this.nv) {
       this.nv.scene.crosshairPos = this.crosshairFrac.slice();
       this.nv.drawScene();
     }
-
-    if (!silent) {
-      this.notifyProgrammaticLocation();
-    }
+    if (!silent) this.notifyProgrammaticLocation();
   }
 
   focusLabel(label, silent) {
     const numeric = Math.max(0, Math.round(Number(label) || 0));
     const frac = this.labelCentroids.get(numeric);
     if (!frac) return false;
-
     this.setCrosshairFraction(frac, true);
-
-    if (!silent) {
-      this.notifyProgrammaticLocation();
-    }
-
+    if (!silent) this.notifyProgrammaticLocation();
     return true;
   }
 
   selectLabel(label) {
     this.selectedLabel = Math.max(0, Math.round(Number(label) || 0));
-    this.applySegmentationColormap();
+    this.applySegmentationColormaps();
   }
 
   setStructureVisibility(label, visible) {
     const numeric = Math.max(0, Math.round(Number(label) || 0));
     if (!numeric) return;
-
-    if (visible) this.hiddenLabels.delete(numeric);
-    else this.hiddenLabels.add(numeric);
-
-    this.applySegmentationColormap();
+    if (visible) this.hiddenLabels.delete(numeric); else this.hiddenLabels.add(numeric);
+    this.applySegmentationColormaps();
   }
 
   setSegmentationVisible(visible) {
-    this.segmentationOpacity = visible ? 0.34 : 0;
-    if (!this.nv) return;
-    this.nv.setOpacity(1, this.segmentationOpacity);
-    this.nv.drawScene();
+    this.segmentationVisible = Boolean(visible);
+    if (this.nv) this.applySegmentationOpacity();
   }
 
   setSlice(index, silent) {
@@ -403,27 +345,17 @@ export class RadiologyViewer {
     const frac = count <= 1 ? 0.5 : safe / (count - 1);
     const next = this.crosshairFrac.slice();
     next[axis] = frac;
-
     this.setCrosshairFraction(next, true);
-
-    if (!silent) {
-      this.notifyProgrammaticLocation();
-    }
+    if (!silent) this.notifyProgrammaticLocation();
   }
 
   notifyProgrammaticLocation() {
-    if (typeof this.options.onLocationChange === "function") {
-      this.options.onLocationChange({
-        data: null,
-        frac: this.crosshairFrac.slice(),
-        plane: this.plane,
-        index: this.currentSliceIndex(),
-        total: this.sliceCount(),
-        intensityText: "",
-        label: this.selectedLabel,
-        structure: getStructureByLabel(this.selectedLabel)
-      });
-    }
+    if (typeof this.options.onLocationChange !== "function") return;
+    this.options.onLocationChange({
+      data:null, frac:this.crosshairFrac.slice(), plane:this.plane,
+      index:this.currentSliceIndex(), total:this.sliceCount(), intensityText:"",
+      label:this.selectedLabel, structure:getStructureByLabel(this.selectedLabel)
+    });
   }
 
   sliceCount(plane) {
@@ -440,82 +372,46 @@ export class RadiologyViewer {
   }
 
   setWindow(width, level) {
-    this.windowWidth = clamp(Number(width) || 400, 40, 2200);
-    this.windowLevel = clamp(Number(level) || 50, -1000, 1000);
-
-    if (!this.nv || !this.nv.volumes.length) return;
-
+    this.windowWidth = clamp(Number(width) || 400, 40, 3000);
+    this.windowLevel = clamp(Number(level) || 40, -1200, 1200);
+    if (!this.nv?.volumes?.length) return;
     const volume = this.nv.volumes[0];
     volume.cal_min = this.windowLevel - this.windowWidth / 2;
     volume.cal_max = this.windowLevel + this.windowWidth / 2;
-    this.nv.updateGLVolume();
-    this.nv.drawScene();
+    this.nv.updateGLVolume(); this.nv.drawScene();
   }
 
   setZoom(value) {
-    this.zoom = clamp(Number(value) || this.defaultZoom, 0.55, 4.0);
+    this.zoom = clamp(Number(value) || this.defaultZoom, 0.42, 4.0);
     if (!this.nv) return;
-
-    const current = Array.from(this.nv.scene.pan2Dxyzmm || [0, 0, 0, 1]);
+    const current = Array.from(this.nv.scene.pan2Dxyzmm || [0,0,0,1]);
     while (current.length < 4) current.push(0);
     current[3] = this.zoom;
-
-    if (typeof this.nv.setPan2Dxyzmm === "function") {
-      this.nv.setPan2Dxyzmm(current);
-    }
-    else {
-      this.nv.scene.pan2Dxyzmm = current;
-    }
-
+    if (typeof this.nv.setPan2Dxyzmm === "function") this.nv.setPan2Dxyzmm(current);
+    else this.nv.scene.pan2Dxyzmm = current;
     this.nv.drawScene();
-
-    if (typeof this.options.onZoomChange === "function") {
-      this.options.onZoomChange(this.zoom);
-    }
+    if (typeof this.options.onZoomChange === "function") this.options.onZoomChange(this.zoom);
   }
 
-  zoomBy(delta) {
-    this.setZoom(this.zoom + delta);
-  }
+  zoomBy(delta) { this.setZoom(this.zoom + delta); }
 
   resetView() {
     if (!this.nv) return;
-
     this.zoom = this.defaultZoom;
-    const resetPan = [0, 0, 0, this.defaultZoom];
-
-    if (typeof this.nv.setPan2Dxyzmm === "function") {
-      this.nv.setPan2Dxyzmm(resetPan);
-    }
-    else {
-      this.nv.scene.pan2Dxyzmm = resetPan;
-    }
-
-    if (this.singlePlane) {
-      this.applySinglePlaneSliceType();
-    }
-    else {
-      this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
-    }
+    const resetPan = [0,0,0,this.defaultZoom];
+    if (typeof this.nv.setPan2Dxyzmm === "function") this.nv.setPan2Dxyzmm(resetPan);
+    else this.nv.scene.pan2Dxyzmm = resetPan;
+    if (this.singlePlane) this.applySinglePlaneSliceType();
+    else this.nv.setSliceType(this.nv.sliceTypeMultiplanar);
     this.nv.drawScene();
-
-    if (typeof this.options.onZoomChange === "function") {
-      this.options.onZoomChange(this.zoom);
-    }
+    if (typeof this.options.onZoomChange === "function") this.options.onZoomChange(this.zoom);
   }
 
   applySinglePlaneSliceType() {
     if (!this.nv || !PLANE_CONFIG[this.plane]) return;
-
-    if (this.plane === "axial") {
-      this.nv.setSliceType(this.nv.sliceTypeAxial);
-    }
-    else if (this.plane === "coronal") {
-      this.nv.setSliceType(this.nv.sliceTypeCoronal);
-    }
-    else {
-      this.nv.setSliceType(this.nv.sliceTypeSagittal);
-    }
+    if (this.plane === "axial") this.nv.setSliceType(this.nv.sliceTypeAxial);
+    else if (this.plane === "coronal") this.nv.setSliceType(this.nv.sliceTypeCoronal);
+    else this.nv.setSliceType(this.nv.sliceTypeSagittal);
   }
 
   setMultiplanar() {
@@ -527,15 +423,11 @@ export class RadiologyViewer {
 
   setSinglePlane(plane, silent) {
     if (!this.nv || !PLANE_CONFIG[plane]) return;
-
     this.singlePlane = true;
     this.setPlane(plane, true);
     this.applySinglePlaneSliceType();
     this.nv.drawScene();
-
-    if (!silent) {
-      this.notifyProgrammaticLocation();
-    }
+    if (!silent) this.notifyProgrammaticLocation();
   }
 
   labelIntersectsPlane(label, plane, fraction) {
@@ -548,32 +440,20 @@ export class RadiologyViewer {
   }
 
   structuresAtPlane(plane, fraction) {
-    return STRUCTURES.filter((structure) => {
-      return this.labelIntersectsPlane(structure.label, plane, fraction);
-    });
+    return STRUCTURES.filter((structure) => this.labelIntersectsPlane(structure.label, plane, fraction));
   }
 
   getAvailableStructureIds() {
-    return STRUCTURES
-      .filter((structure) => this.labelCentroids.has(structure.label))
-      .map((structure) => structure.id);
+    return STRUCTURES.filter((structure) => this.labelCentroids.has(structure.label)).map((structure) => structure.id);
   }
 
-  dispose() {
-    cancelAnimationFrame(this.resizeRaf);
-    this.resizeObserver?.disconnect();
-  }
+  dispose() { cancelAnimationFrame(this.resizeRaf); this.resizeObserver?.disconnect(); }
 
   getState() {
     return {
-      study: this.study,
-      plane: this.plane,
-      frac: this.crosshairFrac.slice(),
-      sliceIndex: this.currentSliceIndex(),
-      slices: this.sliceCount(),
-      dims: this.dims.slice(),
-      zoom: this.zoom,
-      selectedLabel: this.selectedLabel
+      study:this.study, plane:this.plane, frac:this.crosshairFrac.slice(),
+      sliceIndex:this.currentSliceIndex(), slices:this.sliceCount(), dims:this.dims.slice(),
+      zoom:this.zoom, selectedLabel:this.selectedLabel
     };
   }
 }
