@@ -303,55 +303,325 @@ function buildSurfaceRepresentation(parsed, center, axis, scale, chainAlias, roo
 
 function createCellContext() {
   const group = new THREE.Group();
+  group.name = "cell-interior";
   STATE.cellGroup = group;
   STATE.scene.add(group);
+
+  const registerStructure = (id, object, selectableObjects = []) => {
+    object.userData.structureId = id;
+    STATE.structureObjects.set(id, object);
+    selectableObjects.forEach((item) => {
+      item.userData.structureId = id;
+      STATE.selectable.push(item);
+    });
+  };
 
   const shell = new THREE.Mesh(
     new THREE.SphereGeometry(14, 64, 40, 0, Math.PI * 1.55, .32, Math.PI * .74),
     new THREE.MeshPhysicalMaterial({
-      color: 0x1c3140,
-      roughness: .78,
-      transmission: .1,
+      color: 0x1d3443,
+      roughness: .72,
+      transmission: .14,
       transparent: true,
-      opacity: .11,
+      opacity: .075,
       side: THREE.DoubleSide,
       depthWrite: false
     })
   );
   shell.scale.set(1.2, .82, 1);
   shell.position.set(-3, -2, 0);
-  shell.userData.structureId = "cell";
   group.add(shell);
-  STATE.selectable.push(shell);
-  STATE.structureObjects.set("cell", shell);
+  registerStructure("cell", shell, [shell]);
 
-  const nucleus = new THREE.Mesh(
-    new THREE.SphereGeometry(3.5, 48, 32),
-    new THREE.MeshPhysicalMaterial({ color: 0x8b6cff, roughness: .72, transparent: true, opacity: .18, depthWrite: false })
+  const cytosol = new THREE.Mesh(
+    new THREE.SphereGeometry(12.9, 44, 30, 0, Math.PI * 1.55, .34, Math.PI * .71),
+    new THREE.MeshPhysicalMaterial({
+      color: 0x355263,
+      roughness: .88,
+      transparent: true,
+      opacity: .035,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    })
   );
-  nucleus.scale.set(1.1, .78, 1);
-  nucleus.position.set(-7.2, -4, -3.8);
-  group.add(nucleus);
+  cytosol.scale.set(1.2, .82, 1);
+  cytosol.position.set(-3, -2, 0);
+  group.add(cytosol);
 
-  const mitoMaterial = new THREE.MeshStandardMaterial({ color: 0xd75e68, roughness: .66, transparent: true, opacity: .36 });
-  [[-5,-4,4],[-7,-1,3],[-3,-6,-4],[5,-5,-5]].forEach((pos, index) => {
-    const mito = new THREE.Mesh(new THREE.CapsuleGeometry(.55,2.4,6,12), mitoMaterial);
-    mito.position.set(...pos);
-    mito.rotation.z = .6 + index * .43;
-    mito.rotation.x = .2 * index;
-    group.add(mito);
-  });
+  const nucleusGroup = new THREE.Group();
+  nucleusGroup.position.set(-6.7, -4.2, -3.6);
 
-  const erMaterial = new THREE.MeshStandardMaterial({ color: 0x5f8fd3, roughness: .75, transparent: true, opacity: .15, side: THREE.DoubleSide });
-  for (let i = 0; i < 5; i++) {
-    const torus = new THREE.Mesh(new THREE.TorusGeometry(4.2 + i * .28, .08, 6, 80, Math.PI * 1.25), erMaterial);
-    torus.position.set(-5.8, -3.6 + i * .18, -2.7 + i * .3);
-    torus.rotation.x = 1.1;
-    torus.rotation.z = -.5;
-    group.add(torus);
+  const nuclearEnvelope = new THREE.Mesh(
+    new THREE.SphereGeometry(3.45, 42, 30),
+    new THREE.MeshPhysicalMaterial({
+      color: 0x8773e9,
+      roughness: .62,
+      transparent: true,
+      opacity: .26,
+      transmission: .05,
+      depthWrite: false
+    })
+  );
+  nuclearEnvelope.scale.set(1.12, .78, .96);
+  nucleusGroup.add(nuclearEnvelope);
+
+  const chromatin = new THREE.Points(
+    new THREE.BufferGeometry(),
+    new THREE.PointsMaterial({
+      color: 0xb6a6ff,
+      size: .085,
+      transparent: true,
+      opacity: .42,
+      depthWrite: false
+    })
+  );
+  const chromatinPositions = [];
+  for (let i = 0; i < 260; i += 1) {
+    const a = i * 2.399963;
+    const r = 2.35 * Math.cbrt((i + .5) / 260);
+    const y = ((i % 37) / 36 - .5) * 3.3;
+    chromatinPositions.push(
+      Math.cos(a) * r,
+      y * .66,
+      Math.sin(a) * r * .88
+    );
   }
-}
+  chromatin.geometry.setAttribute("position", new THREE.Float32BufferAttribute(chromatinPositions, 3));
+  nucleusGroup.add(chromatin);
 
+  const nucleolus = new THREE.Mesh(
+    new THREE.SphereGeometry(.72, 24, 18),
+    new THREE.MeshStandardMaterial({
+      color: 0xd98cff,
+      roughness: .54,
+      transparent: true,
+      opacity: .62
+    })
+  );
+  nucleolus.position.set(.55, -.28, .35);
+  nucleusGroup.add(nucleolus);
+
+  group.add(nucleusGroup);
+  registerStructure("nucleus", nucleusGroup, [nuclearEnvelope, nucleolus, chromatin]);
+
+  const mitochondriaGroup = new THREE.Group();
+  const mitoPositions = [
+    [-4.7,-4.0,4.1,.55,.15,.55],
+    [-7.2,-.9,3.0,-.5,.25,.82],
+    [-2.8,-6.1,-4.1,.36,-.18,1.1],
+    [4.6,-5.1,-4.6,-.7,.42,.28],
+    [4.0,-2.7,4.5,.18,-.5,.95],
+    [0.2,-5.8,4.7,.82,.12,.25]
+  ];
+  mitoPositions.forEach((entry) => {
+    const [x,y,z,rz,rx,ry] = entry;
+    const mito = new THREE.Group();
+    mito.position.set(x,y,z);
+    mito.rotation.set(rx,ry,rz);
+
+    const outer = new THREE.Mesh(
+      new THREE.CapsuleGeometry(.58, 2.35, 7, 14),
+      new THREE.MeshPhysicalMaterial({
+        color: 0xe3666e,
+        roughness: .55,
+        transparent: true,
+        opacity: .6,
+        clearcoat: .15
+      })
+    );
+    mito.add(outer);
+
+    const cristaMaterial = new THREE.MeshStandardMaterial({
+      color: 0xffa0a5,
+      roughness: .58,
+      transparent: true,
+      opacity: .6
+    });
+    for (let c = -3; c <= 3; c += 1) {
+      const crista = new THREE.Mesh(
+        new THREE.TorusGeometry(.32, .035, 5, 22, Math.PI * 1.35),
+        cristaMaterial
+      );
+      crista.position.y = c * .31;
+      crista.rotation.x = Math.PI / 2;
+      crista.rotation.z = c * .33;
+      mito.add(crista);
+    }
+
+    mitochondriaGroup.add(mito);
+    mito.traverse((obj) => {
+      if (obj.isMesh) {
+        obj.userData.structureId = "mitochondria";
+        STATE.selectable.push(obj);
+      }
+    });
+  });
+  group.add(mitochondriaGroup);
+  registerStructure("mitochondria", mitochondriaGroup);
+
+  const erGroup = new THREE.Group();
+  erGroup.position.set(-5.2,-3.4,-2.4);
+  const erMaterial = new THREE.MeshStandardMaterial({
+    color: 0x6099d9,
+    roughness: .72,
+    transparent: true,
+    opacity: .23,
+    side: THREE.DoubleSide,
+    depthWrite: false
+  });
+  for (let i = 0; i < 8; i += 1) {
+    const curvePoints = [];
+    for (let p = 0; p < 18; p += 1) {
+      const t = p / 17;
+      curvePoints.push(new THREE.Vector3(
+        -1.2 + t * 7.2,
+        Math.sin(t * Math.PI * 3 + i * .52) * (.65 + i * .035),
+        (i - 3.5) * .42 + Math.cos(t * Math.PI * 2 + i) * .25
+      ));
+    }
+    const curve = new THREE.CatmullRomCurve3(curvePoints);
+    const mesh = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 42, .065, 6, false),
+      erMaterial
+    );
+    erGroup.add(mesh);
+  }
+  group.add(erGroup);
+  erGroup.traverse((obj) => {
+    if (obj.isMesh) {
+      obj.userData.structureId = "er";
+      STATE.selectable.push(obj);
+    }
+  });
+  registerStructure("er", erGroup);
+
+  const golgiGroup = new THREE.Group();
+  golgiGroup.position.set(2.5,-4.1,-2.2);
+  golgiGroup.rotation.z = -.22;
+  const golgiMaterial = new THREE.MeshStandardMaterial({
+    color: 0xe9b067,
+    roughness: .62,
+    transparent: true,
+    opacity: .5
+  });
+  for (let i = 0; i < 6; i += 1) {
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-1.7, i * .28, -.45),
+      new THREE.Vector3(-.8, i * .31, .08),
+      new THREE.Vector3(.2, i * .28, .32),
+      new THREE.Vector3(1.35, i * .25, -.16)
+    ]);
+    const cisterna = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 32, .115, 7, false),
+      golgiMaterial
+    );
+    golgiGroup.add(cisterna);
+  }
+  group.add(golgiGroup);
+  golgiGroup.traverse((obj) => {
+    if (obj.isMesh) {
+      obj.userData.structureId = "golgi";
+      STATE.selectable.push(obj);
+    }
+  });
+  registerStructure("golgi", golgiGroup);
+
+  const vesiclesGroup = new THREE.Group();
+  const vesicleMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x9ecff2,
+    roughness: .5,
+    transparent: true,
+    opacity: .32,
+    transmission: .08,
+    depthWrite: false
+  });
+  [
+    [3.9,-3.1,-1.5,.24],[4.5,-3.8,-2.3,.18],[3.4,-4.6,-.9,.2],
+    [-1.8,-2.2,3.3,.18],[-.7,-4.5,3.0,.15],[5.3,-2.7,1.5,.22],
+    [2.2,-5.7,1.8,.17],[1.2,-3.2,-4.8,.2]
+  ].forEach(([x,y,z,r]) => {
+    const vesicle = new THREE.Mesh(new THREE.SphereGeometry(r, 14, 10), vesicleMaterial);
+    vesicle.position.set(x,y,z);
+    vesiclesGroup.add(vesicle);
+    vesicle.userData.structureId = "vesicles";
+    STATE.selectable.push(vesicle);
+  });
+  group.add(vesiclesGroup);
+  registerStructure("vesicles", vesiclesGroup);
+
+  const ribosomeGroup = new THREE.Group();
+  const ribosomeGeometry = new THREE.SphereGeometry(.055, 6, 5);
+  const ribosomeMaterial = new THREE.MeshStandardMaterial({
+    color: 0xd8e5f0,
+    roughness: .7,
+    transparent: true,
+    opacity: .72
+  });
+  const ribosomes = new THREE.InstancedMesh(ribosomeGeometry, ribosomeMaterial, 150);
+  const matrix = new THREE.Matrix4();
+  for (let i = 0; i < 150; i += 1) {
+    const a = i * 2.399963;
+    const radial = 2.2 + (i % 11) * .38;
+    const x = -4.2 + Math.cos(a) * radial;
+    const y = -3.2 + ((i % 17) - 8) * .28;
+    const z = -1.6 + Math.sin(a) * radial * .62;
+    matrix.makeTranslation(x,y,z);
+    ribosomes.setMatrixAt(i,matrix);
+  }
+  ribosomes.instanceMatrix.needsUpdate = true;
+  ribosomes.userData.structureId = "ribosomes";
+  ribosomeGroup.add(ribosomes);
+  group.add(ribosomeGroup);
+  STATE.selectable.push(ribosomes);
+  registerStructure("ribosomes", ribosomeGroup);
+
+  const cytoskeletonGroup = new THREE.Group();
+  const filamentMaterial = new THREE.MeshBasicMaterial({
+    color: 0x63c6bd,
+    transparent: true,
+    opacity: .1,
+    depthWrite: false
+  });
+  for (let i = 0; i < 12; i += 1) {
+    const start = new THREE.Vector3(-7 + (i % 4) * 3.8, -7 + (i % 3) * 2.1, -5 + (i % 5) * 2.1);
+    const end = new THREE.Vector3(7 - (i % 5) * 2.4, -1 + (i % 4) * -1.4, 5 - (i % 3) * 2.7);
+    const mid = start.clone().lerp(end,.5);
+    mid.y += Math.sin(i * 1.3) * 2.1;
+    const curve = new THREE.CatmullRomCurve3([start,mid,end]);
+    const filament = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 28, .028, 5, false),
+      filamentMaterial
+    );
+    filament.userData.structureId = "cytoskeleton";
+    cytoskeletonGroup.add(filament);
+    STATE.selectable.push(filament);
+  }
+  group.add(cytoskeletonGroup);
+  registerStructure("cytoskeleton", cytoskeletonGroup);
+
+  const cytosolParticles = new THREE.Points(
+    new THREE.BufferGeometry(),
+    new THREE.PointsMaterial({
+      color: 0x9bc8d7,
+      size: .055,
+      transparent: true,
+      opacity: .16,
+      depthWrite: false
+    })
+  );
+  const particlePositions = [];
+  for (let i = 0; i < 420; i += 1) {
+    const a = i * 2.399963;
+    const r = 3.5 + (i % 19) * .34;
+    particlePositions.push(
+      -2.8 + Math.cos(a) * r,
+      -2.3 + ((i % 29) - 14) * .28,
+      Math.sin(a) * r * .72
+    );
+  }
+  cytosolParticles.geometry.setAttribute("position", new THREE.Float32BufferAttribute(particlePositions,3));
+  group.add(cytosolParticles);
+}
 function createMembrane() {
   const group = new THREE.Group();
   STATE.membraneGroup = group;
