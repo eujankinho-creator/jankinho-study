@@ -6,7 +6,7 @@ import {
   createSegmentationColormap,
   getStructureByLabel,
   clamp
-} from "./data.js";
+} from "./data.js?v=20261005-premium3";
 
 export class RadiologyViewer {
   constructor(canvas, options) {
