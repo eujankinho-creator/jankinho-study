@@ -83,15 +83,16 @@ export const STRUCTURES = Object.freeze(defs.map((item, index) => Object.freeze(
 })));
 
 const LOCAL_BASE = "/data/radiology/";
+const DATASET_VERSION = "s0024-v2";
 
 export const RADIOLOGY_STUDY = Object.freeze({
   id: "totalsegmentator_s0024_multiregion",
   name: "Atlas TC corporal · MPR sincronizado",
   modality: "CT",
-  file: LOCAL_BASE + "ct.nii.gz",
+  file: LOCAL_BASE + "ct.nii.gz?v=" + DATASET_VERSION,
   segmentations: SEGMENTATION_GROUPS.map((group) => ({
     id: group.id,
-    url: LOCAL_BASE + group.file,
+    url: LOCAL_BASE + group.file + "?v=" + DATASET_VERSION,
     opacity: group.opacity
   })),
   source: "TotalSegmentator · caso s0024 · cópia otimizada servida pelo Cortex",
