@@ -354,7 +354,7 @@ export const STEPS = Object.freeze([
     title: "Segundo mensageiro",
     short: "cAMP",
     scale: "subcellular",
-    structures: ["effector", "camp"],
+    structures: ["effector", "atp", "camp"],
     camera: "messenger",
     duration: 2300,
     text: "A adenilato ciclase converte ATP em cAMP, espalhando o sinal pelo citoplasma.",
