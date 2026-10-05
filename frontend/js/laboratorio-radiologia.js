@@ -401,6 +401,9 @@ function syncSliceUi(anatomy, radiology) {
 function setPlane(plane, anatomy, radiology) {
   state.plane = plane;
   radiology.setPlane(plane);
+  if ($("radZoomValue")) {
+    $("radZoomValue").textContent = Math.round(radiology.zoom * 100) + "%";
+  }
 
   if (state.selectedId) {
     const structure = getStructure(state.selectedId);
@@ -637,7 +640,6 @@ function boot() {
   updateStructureInfo();
 
   selectStructure("liver", anatomy, radiology, true);
-  anatomy.focusStructure("liver");
 
   window.addEventListener("beforeunload", function () {
     anatomy.dispose();
