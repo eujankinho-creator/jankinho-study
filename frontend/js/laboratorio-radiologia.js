@@ -287,6 +287,14 @@ function availableStructures() {
   return STRUCTURES.filter((structure) => structureStat(structure));
 }
 
+function normalizeSearch(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
 function createStructureList() {
   const container = $("structureList");
   if (!container) return;
@@ -310,7 +318,7 @@ function createStructureList() {
   }
 
   $("structureSearch")?.addEventListener("input", function () {
-    const q = this.value.trim().toLowerCase();
+    const q = normalizeSearch(this.value);
     let visible = 0;
     container.querySelectorAll(".structure-row").forEach((row) => {
       const hidden = Boolean(q && !row.dataset.search.includes(q));
