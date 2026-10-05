@@ -8,6 +8,8 @@ Os dados do PDB Archive são distribuídos sob **CC0 1.0 Universal**. Atribuiç�
 
 ## Gs — PDB 3SN6
 
+- **Data de verificação:** 2026-10-05
+
 - **PDB ID:** 3SN6
 - **Nome:** Crystal structure of the beta2 adrenergic receptor-Gs protein complex
 - **Método:** X-RAY DIFFRACTION
@@ -20,6 +22,8 @@ Os dados do PDB Archive são distribuídos sob **CC0 1.0 Universal**. Atribuiç�
 - **Limitação importante:** o complexo experimental representa um estado estrutural específico e não deve ser interpretado como todas as etapas dinâmicas da via.
 
 ## Gi/o — PDB 6DDE
+
+- **Data de verificação:** 2026-10-05
 
 - **PDB ID:** 6DDE
 - **Nome:** Mu Opioid Receptor-Gi Protein Complex
@@ -35,6 +39,8 @@ Os dados do PDB Archive são distribuídos sob **CC0 1.0 Universal**. Atribuiç�
 - **Limitação:** efeitos sobre adenilato ciclase e cAMP são representados educacionalmente e dependem de isoforma/contexto.
 
 ## Gq/11 — PDB 8UQO
+
+- **Data de verificação:** 2026-10-05
 
 - **PDB ID:** 8UQO
 - **Nome:** PLCb3-Gbg-Gaq complex on membranes
