@@ -1047,6 +1047,105 @@ function createEducationObjects(parsed, molecularContext) {
   p1.userData.structureId=p2.userData.structureId="pka";
   pka.add(p1,p2); pka.position.set(3,-6.5,-1.5); pka.visible=false;
   group.add(pka); STATE.structureObjects.set("pka",pka); STATE.selectable.push(p1,p2);
+
+  const atp=createNucleotide("ATP",0xffcf66);
+  atp.position.set(4.4,-2.2,.9);
+  atp.scale.setScalar(.9);
+  atp.visible=false;
+  atp.userData.structureId="atp";
+  atp.traverse(o=>{if(o.isMesh){o.userData.structureId="atp";STATE.selectable.push(o);}});
+  group.add(atp); STATE.structureObjects.set("atp",atp);
+
+  const pip2=new THREE.Group();
+  const pipHeadMat=new THREE.MeshStandardMaterial({color:0xf3cf6b,roughness:.42});
+  const pipTailMat=new THREE.MeshStandardMaterial({color:0xdba75f,roughness:.6});
+  const pipPhosphateMat=new THREE.MeshStandardMaterial({color:0xff7f8c,roughness:.4});
+  for(let i=0;i<6;i++){
+    const lipid=new THREE.Group();
+    lipid.position.set(1.6+(i%3)*.45,.15,((i/3)|0)*.52-.26);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(.11,8,6),pipHeadMat);
+    const pA=new THREE.Mesh(new THREE.SphereGeometry(.075,8,6),pipPhosphateMat);
+    const pB=new THREE.Mesh(new THREE.SphereGeometry(.075,8,6),pipPhosphateMat);
+    pA.position.set(-.11,.16,0); pB.position.set(.12,.18,.03);
+    const tail1=new THREE.Mesh(new THREE.CylinderGeometry(.026,.026,.48,5),pipTailMat);
+    const tail2=tail1.clone();
+    tail1.position.set(-.045,-.3,0); tail2.position.set(.055,-.3,.04);
+    [head,pA,pB,tail1,tail2].forEach(o=>{o.userData.structureId="pip2";STATE.selectable.push(o);lipid.add(o);});
+    pip2.add(lipid);
+  }
+  pip2.userData.structureId="pip2";
+  pip2.visible=false;
+  group.add(pip2); STATE.structureObjects.set("pip2",pip2);
+
+  const ip3=createNucleotide("IP3",0x7ed3ff);
+  ip3.position.set(2.1,-1.1,.15);
+  ip3.scale.setScalar(.72);
+  ip3.userData.structureId="ip3";
+  ip3.visible=false;
+  ip3.traverse(o=>{if(o.isMesh){o.userData.structureId="ip3";STATE.selectable.push(o);}});
+  group.add(ip3); STATE.structureObjects.set("ip3",ip3);
+
+  const dag=new THREE.Group();
+  const dagHead=new THREE.Mesh(new THREE.SphereGeometry(.12,10,8),new THREE.MeshStandardMaterial({color:0xffba6b,roughness:.45}));
+  const dagTailMat=new THREE.MeshStandardMaterial({color:0xd78b50,roughness:.65});
+  const dagTail1=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,.62,6),dagTailMat);
+  const dagTail2=dagTail1.clone();
+  dagTail1.position.set(-.05,-.34,0); dagTail2.position.set(.07,-.34,.05);
+  [dagHead,dagTail1,dagTail2].forEach(o=>{o.userData.structureId="dag";STATE.selectable.push(o);dag.add(o);});
+  dag.position.set(2.2,.28,-.35);
+  dag.userData.structureId="dag";
+  dag.visible=false;
+  group.add(dag); STATE.structureObjects.set("dag",dag);
+
+  const ip3r=new THREE.Group();
+  const ip3rMat=new THREE.MeshStandardMaterial({color:0x72b0e9,roughness:.48,transparent:true,opacity:.9});
+  for(let i=0;i<4;i++){
+    const sub=new THREE.Mesh(new THREE.CapsuleGeometry(.12,1.05,5,10),ip3rMat);
+    sub.position.set((i%2-.5)*.34,0,(Math.floor(i/2)-.5)*.34);
+    sub.userData.structureId="ip3r";
+    ip3r.add(sub); STATE.selectable.push(sub);
+  }
+  ip3r.position.set(-1.8,-8.2,-2.0);
+  ip3r.rotation.z=Math.PI/2;
+  ip3r.userData.structureId="ip3r";
+  ip3r.visible=false;
+  group.add(ip3r); STATE.structureObjects.set("ip3r",ip3r);
+
+  const calcium=new THREE.Group();
+  const calciumGeom=new THREE.SphereGeometry(.075,8,6);
+  const calciumMat=new THREE.MeshStandardMaterial({color:0x89d8ff,roughness:.35,emissive:0x102536,emissiveIntensity:.4});
+  for(let i=0;i<70;i++){
+    const ion=new THREE.Mesh(calciumGeom,calciumMat);
+    const a=i*2.399963;
+    const r=.4+(i%9)*.16;
+    ion.position.set(Math.cos(a)*r,(i%11-.5*10)*.1,Math.sin(a)*r*.7);
+    ion.userData.structureId="calcium";
+    calcium.add(ion); STATE.selectable.push(ion);
+  }
+  calcium.position.set(-1.8,-8.7,-2.0);
+  calcium.userData.structureId="calcium";
+  calcium.visible=false;
+  group.add(calcium); STATE.structureObjects.set("calcium",calcium);
+
+  const pkc=new THREE.Group();
+  const pkcMat=new THREE.MeshStandardMaterial({color:0xe99170,roughness:.48});
+  const pkcCore=new THREE.Mesh(new THREE.SphereGeometry(.46,20,14),pkcMat);
+  const pkcReg=new THREE.Mesh(new THREE.SphereGeometry(.28,18,12),new THREE.MeshStandardMaterial({color:0xf6c778,roughness:.5}));
+  pkcCore.position.x=.22; pkcReg.position.x=-.38;
+  [pkcCore,pkcReg].forEach(o=>{o.userData.structureId="pkc";STATE.selectable.push(o);pkc.add(o);});
+  pkc.position.set(1.9,-5.4,.8);
+  pkc.userData.structureId="pkc";
+  pkc.visible=false;
+  group.add(pkc); STATE.structureObjects.set("pkc",pkc);
+
+  const rgs=new THREE.Group();
+  const rgsMesh=new THREE.Mesh(new THREE.TorusKnotGeometry(.28,.085,48,8),new THREE.MeshStandardMaterial({color:0x9bcf9d,roughness:.54}));
+  rgsMesh.userData.structureId="rgs";
+  rgs.add(rgsMesh); STATE.selectable.push(rgsMesh);
+  rgs.position.set(2.6,-3.3,-.8);
+  rgs.userData.structureId="rgs";
+  rgs.visible=false;
+  group.add(rgs); STATE.structureObjects.set("rgs",rgs);
 }
 
 function rememberBaseTransforms() {
