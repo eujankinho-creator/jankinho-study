@@ -150,6 +150,50 @@ function parsePdb(text) {
   return { atoms, caByChain };
 }
 
+function decodeCompactStructure(payload) {
+  const caByChain = new Map();
+  for (const [chain, atoms] of Object.entries(payload?.caByChain || {})) {
+    caByChain.set(chain, Array.isArray(atoms) ? atoms : []);
+  }
+  return {
+    atoms: Array.isArray(payload?.atoms) ? payload.atoms : [],
+    caByChain
+  };
+}
+
+async function fetchStructureData(pdbId) {
+  const compactUrl = "/data/gprotein/" + pdbId + ".compact.json?v=3";
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12000);
+
+  try {
+    const compactResponse = await fetch(compactUrl, {
+      cache: "force-cache",
+      signal: controller.signal
+    });
+    if (compactResponse.ok) {
+      return decodeCompactStructure(await compactResponse.json());
+    }
+  } catch (error) {
+    console.warn("[gprotein] asset compacto indisponível, tentando PDB bruto", error);
+  } finally {
+    clearTimeout(timer);
+  }
+
+  const fallbackController = new AbortController();
+  const fallbackTimer = setTimeout(() => fallbackController.abort(), 15000);
+  try {
+    const response = await fetch("/data/gprotein/" + pdbId + ".pdb?v=2", {
+      cache: "force-cache",
+      signal: fallbackController.signal
+    });
+    if (!response.ok) throw new Error("Estrutura " + pdbId + " indisponível.");
+    return parsePdb(await response.text());
+  } finally {
+    clearTimeout(fallbackTimer);
+  }
+}
+
 function findReceptorChain(parsed) {
   if (parsed.caByChain.has("R")) return "R";
   const candidates = [...parsed.caByChain.entries()]
@@ -568,9 +612,7 @@ async function ensurePathwayStructure(pathway) {
       };
 
   const promise = (async () => {
-    const response = await fetch("/data/gprotein/" + config.pdbId + ".pdb?v=2",{cache:"force-cache"});
-    if (!response.ok) throw new Error("Estrutura " + config.pdbId + " indisponível.");
-    const parsed = parsePdb(await response.text());
+    const parsed = await fetchStructureData(config.pdbId);
     return buildExperimentalPathwayComplex(parsed,config);
   })();
 
@@ -2000,13 +2042,10 @@ async function loadScientificAssets(){
   if(!manifestResponse.ok) throw new Error("Manifesto 3SN6 indisponível.");
   STATE.pdbManifest=await manifestResponse.json();
 
-  setLoading(28,"Estrutura experimental","baixando coordenadas atômicas 3SN6");
-  const pdbResponse=await fetch("/data/gprotein/3SN6.pdb?v=2",{cache:"force-cache"});
-  if(!pdbResponse.ok) throw new Error("Estrutura PDB 3SN6 indisponível.");
-  const pdbText=await pdbResponse.text();
+  setLoading(28,"Estrutura experimental","carregando estrutura compacta 3SN6");
+  const parsed=await fetchStructureData("3SN6");
 
-  setLoading(50,"Reconstruindo complexo","gerando representação estrutural a partir do backbone experimental");
-  const parsed=parsePdb(pdbText);
+  setLoading(50,"Reconstruindo complexo","gerando representação estrutural otimizada");
   const molecularContext = buildMolecularComplex(parsed);
 
   setLoading(68,"Construindo contexto celular","criando bicamada lipídica e ambiente didático");
