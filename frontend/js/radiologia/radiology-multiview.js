@@ -1,5 +1,5 @@
-import { RadiologyViewer } from "./radiology-viewer.js";
-import { PLANE_CONFIG, getStructureByLabel, clamp } from "./data.js";
+import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-premium3";
+import { PLANE_CONFIG, getStructureByLabel, clamp } from "./data.js?v=20261005-premium3";
 
 const PLANES = ["axial", "coronal", "sagittal"];
 
