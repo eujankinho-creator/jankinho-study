@@ -24,7 +24,11 @@ const state = {
   pointerRefreshTimer: 0,
   lastPointerPlane: null,
   pointerNavToken: 0,
-  draggingPlane: null
+  draggingPlane: null,
+  dragStartX: 0,
+  dragStartY: 0,
+  dragMoved: false,
+  suppressClick: false
 };
 
 async function api(url, options) {
@@ -393,6 +397,53 @@ function renderPointStructures(items) {
   });
 }
 
+function categoryLabel(category) {
+  const labels = {
+    organs: "Órgão",
+    vessels: "Vaso sanguíneo",
+    bones: "Osso",
+    muscles: "Músculo"
+  };
+  return labels[category] || "Estrutura anatômica";
+}
+
+function showAnatomyTooltip(plane, event, structure) {
+  const stage = document.querySelector('[data-stage="' + plane + '"]');
+  if (!stage) return;
+
+  let tooltip = stage.querySelector(".anatomy-tooltip");
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+    tooltip.className = "anatomy-tooltip";
+    stage.appendChild(tooltip);
+  }
+
+  const rect = stage.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  if (structure) {
+    tooltip.innerHTML =
+      '<span>Estrutura identificada</span>' +
+      '<strong>' + structure.name + '</strong>' +
+      '<small>' + categoryLabel(structure.category) + ' · ' + structure.region + '</small>';
+    tooltip.classList.remove("is-empty");
+  } else {
+    tooltip.innerHTML =
+      '<span>Ponto selecionado</span>' +
+      '<strong>Sem identificação</strong>' +
+      '<small>Nenhuma estrutura segmentada neste ponto.</small>';
+    tooltip.classList.add("is-empty");
+  }
+
+  tooltip.style.left = Math.max(10, Math.min(rect.width - 200, x + 14)) + "px";
+  tooltip.style.top = Math.max(10, Math.min(rect.height - 86, y + 14)) + "px";
+  tooltip.classList.add("show");
+
+  clearTimeout(tooltip._hideTimer);
+  tooltip._hideTimer = setTimeout(() => tooltip.classList.remove("show"), structure ? 2600 : 1700);
+}
+
 async function renderOverlayForPlane(plane) {
   const canvas = getOverlay(plane);
   const img = getImg(plane);
@@ -521,6 +572,10 @@ function bindViewerClicks() {
       event.preventDefault();
       setActivePlane(plane);
       state.draggingPlane = plane;
+      state.dragStartX = event.clientX;
+      state.dragStartY = event.clientY;
+      state.dragMoved = false;
+      state.suppressClick = false;
       stage.setPointerCapture?.(event.pointerId);
 
       const uv = setCoordFromPointer(plane, event);
@@ -531,6 +586,11 @@ function bindViewerClicks() {
     stage?.addEventListener("pointermove", (event) => {
       if (state.draggingPlane !== plane || (event.buttons & 1) !== 1) return;
       event.preventDefault();
+
+      if (Math.hypot(event.clientX - state.dragStartX, event.clientY - state.dragStartY) > 4) {
+        state.dragMoved = true;
+      }
+
       const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
       schedulePointerNavigation(plane);
@@ -539,6 +599,7 @@ function bindViewerClicks() {
     const finishDrag = (event) => {
       if (state.draggingPlane !== plane) return;
       state.draggingPlane = null;
+      state.suppressClick = state.dragMoved;
       clearTimeout(state.pointerRefreshTimer);
       state.lastPointerPlane = null;
       state.pointerNavToken += 1;
@@ -559,21 +620,35 @@ function bindViewerClicks() {
     });
 
     stage?.addEventListener("click", async (event) => {
+      if (state.suppressClick) {
+        state.suppressClick = false;
+        return;
+      }
+
       setActivePlane(plane);
       const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
-      await updateViews();
 
-      if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Identificando estruturas neste ponto...";
+      if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Identificando estrutura...";
       const items = await labelsAtPoint(plane, uv.u, uv.v);
       renderPointStructures(items);
 
       if (items[0]) {
-        state.selectedId = items[0].id;
-        updateStructureUi(items[0]);
+        const structure = items[0];
+        state.selectedId = structure.id;
+        updateStructureUi(structure);
+        if ($("selectedStructureMeta")) {
+          $("selectedStructureMeta").textContent =
+            "Você clicou em: " + structure.name + " · " + categoryLabel(structure.category);
+        }
+        showAnatomyTooltip(plane, event, structure);
         await Promise.all(PLANES.map(renderOverlayForPlane));
-      } else if ($("selectedStructureMeta")) {
-        $("selectedStructureMeta").textContent = "Nenhuma estrutura segmentada encontrada neste ponto.";
+        announce("Estrutura identificada: " + structure.name);
+      } else {
+        if ($("selectedStructureMeta")) {
+          $("selectedStructureMeta").textContent = "Nenhuma estrutura identificada neste ponto.";
+        }
+        showAnatomyTooltip(plane, event, null);
       }
     });
 
