@@ -9,6 +9,7 @@ import sharp from "sharp";
 const root = process.cwd();
 const frontend = path.join(root, "frontend");
 const dataTarget = path.join(frontend, "data", "radiology-atlas");
+const meshTarget = path.join(dataTarget, "mesh");
 const oldRadiologyTarget = path.join(frontend, "data", "radiology");
 const oldModelTarget = path.join(frontend, "models", "radiology");
 const oldVendorTarget = path.join(frontend, "vendor", "niivue");
@@ -31,6 +32,7 @@ await rm(oldRadiologyTarget, { recursive: true, force: true });
 await rm(oldModelTarget, { recursive: true, force: true });
 await rm(oldVendorTarget, { recursive: true, force: true });
 await mkdir(dataTarget, { recursive: true });
+await mkdir(meshTarget, { recursive: true });
 
 function pad(value) {
   return String(value).padStart(4, "0");
@@ -141,6 +143,182 @@ function accumulateStat(stats, label, x, y, z) {
   item.max[0] = Math.max(item.max[0], x);
   item.max[1] = Math.max(item.max[1], y);
   item.max[2] = Math.max(item.max[2], z);
+}
+
+const CUBE_CORNERS = Object.freeze([
+  [0,0,0],[1,0,0],[1,1,0],[0,1,0],
+  [0,0,1],[1,0,1],[1,1,1],[0,1,1]
+]);
+
+const CUBE_TETS = Object.freeze([
+  [0,5,1,6],
+  [0,1,2,6],
+  [0,2,3,6],
+  [0,3,7,6],
+  [0,7,4,6],
+  [0,4,5,6]
+]);
+
+function sampledCoord(values, coordinate) {
+  const base = clamp(Math.floor(coordinate), 0, values.length - 1);
+  const next = clamp(base + 1, 0, values.length - 1);
+  const frac = clamp(coordinate - base, 0, 1);
+  return values[base] * (1 - frac) + values[next] * frac;
+}
+
+function createLabelMesh(volume, dims, label, stat, sampling, options = {}) {
+  const [dx,dy,dz] = dims;
+  const stride = Math.max(1, options.stride || 1);
+  const padCells = 2;
+  const minXi = clamp(Math.floor(stat.min[0] / X_STEP) - padCells, 0, dx - 2);
+  const maxXi = clamp(Math.ceil(stat.max[0] / X_STEP) + padCells, 1, dx - 1);
+  const minYi = clamp(Math.floor(stat.min[1] / Y_STEP) - padCells, 0, dy - 2);
+  const maxYi = clamp(Math.ceil(stat.max[1] / Y_STEP) + padCells, 1, dy - 1);
+  const minZi = clamp(Math.floor(stat.min[2] / Z_STEP) - padCells, 0, dz - 2);
+  const maxZi = clamp(Math.ceil(stat.max[2] / Z_STEP) + padCells, 1, dz - 1);
+
+  const vertices = [];
+  const indices = [];
+  const vertexMap = new Map();
+
+  const valueAt = (x,y,z) => {
+    const xi=clamp(x,0,dx-1), yi=clamp(y,0,dy-1), zi=clamp(z,0,dz-1);
+    return volume[xi + yi*dx + zi*dx*dy] === label ? 1 : 0;
+  };
+
+  const addVertex = (a,b) => {
+    const gx=(a[0]+b[0])*.5;
+    const gy=(a[1]+b[1])*.5;
+    const gz=(a[2]+b[2])*.5;
+    const key=(Math.round(gx*2))+","+(Math.round(gy*2))+","+(Math.round(gz*2));
+    let index=vertexMap.get(key);
+    if(index!==undefined) return index;
+
+    const ox=sampledCoord(sampling.xVals,gx);
+    const oy=sampledCoord(sampling.yVals,gy);
+    const oz=sampledCoord(sampling.zVals,gz);
+    index=vertices.length/3;
+    vertices.push(
+      Math.round(ox*1000)/1000,
+      Math.round(oy*1000)/1000,
+      Math.round(oz*1000)/1000
+    );
+    vertexMap.set(key,index);
+    return index;
+  };
+
+  const emitTet = (points,values,tet) => {
+    const inside=tet.filter((idx)=>values[idx]===1);
+    if(inside.length===0||inside.length===4) return;
+    const outside=tet.filter((idx)=>values[idx]===0);
+
+    if(inside.length===1){
+      const i=inside[0];
+      const a=addVertex(points[i],points[outside[0]]);
+      const b=addVertex(points[i],points[outside[1]]);
+      const c=addVertex(points[i],points[outside[2]]);
+      indices.push(a,b,c);
+      return;
+    }
+
+    if(inside.length===3){
+      const o=outside[0];
+      const a=addVertex(points[o],points[inside[0]]);
+      const b=addVertex(points[o],points[inside[1]]);
+      const c=addVertex(points[o],points[inside[2]]);
+      indices.push(a,c,b);
+      return;
+    }
+
+    const [i0,i1]=inside;
+    const [o0,o1]=outside;
+    const a=addVertex(points[i0],points[o0]);
+    const b=addVertex(points[i0],points[o1]);
+    const c=addVertex(points[i1],points[o0]);
+    const d=addVertex(points[i1],points[o1]);
+    indices.push(a,c,b,b,c,d);
+  };
+
+  for(let z=minZi;z<maxZi;z+=stride){
+    const z1=Math.min(z+stride,maxZi);
+    for(let y=minYi;y<maxYi;y+=stride){
+      const y1=Math.min(y+stride,maxYi);
+      for(let x=minXi;x<maxXi;x+=stride){
+        const x1=Math.min(x+stride,maxXi);
+        const points=[
+          [x,y,z],[x1,y,z],[x1,y1,z],[x,y1,z],
+          [x,y,z1],[x1,y,z1],[x1,y1,z1],[x,y1,z1]
+        ];
+        const values=[
+          valueAt(x,y,z),valueAt(x1,y,z),valueAt(x1,y1,z),valueAt(x,y1,z),
+          valueAt(x,y,z1),valueAt(x1,y,z1),valueAt(x1,y1,z1),valueAt(x,y1,z1)
+        ];
+        const sum=values.reduce((acc,v)=>acc+v,0);
+        if(sum===0||sum===8) continue;
+        for(const tet of CUBE_TETS) emitTet(points,values,tet);
+      }
+    }
+  }
+
+  if(indices.length<12||vertices.length<12) return null;
+  return { vertices, indices };
+}
+
+function smoothIndexedMesh(mesh, iterations = 1, factor = .18) {
+  if(!mesh||iterations<=0) return mesh;
+  const count=mesh.vertices.length/3;
+  const neighbors=Array.from({length:count},()=>new Set());
+  for(let i=0;i<mesh.indices.length;i+=3){
+    const a=mesh.indices[i],b=mesh.indices[i+1],c=mesh.indices[i+2];
+    neighbors[a].add(b);neighbors[a].add(c);
+    neighbors[b].add(a);neighbors[b].add(c);
+    neighbors[c].add(a);neighbors[c].add(b);
+  }
+
+  let current=Float64Array.from(mesh.vertices);
+  for(let iteration=0;iteration<iterations;iteration++){
+    const next=Float64Array.from(current);
+    for(let i=0;i<count;i++){
+      const list=neighbors[i];
+      if(list.size<3) continue;
+      let ax=0,ay=0,az=0;
+      for(const n of list){
+        ax+=current[n*3];ay+=current[n*3+1];az+=current[n*3+2];
+      }
+      const inv=1/list.size;
+      ax*=inv;ay*=inv;az*=inv;
+      next[i*3]=current[i*3]*(1-factor)+ax*factor;
+      next[i*3+1]=current[i*3+1]*(1-factor)+ay*factor;
+      next[i*3+2]=current[i*3+2]*(1-factor)+az*factor;
+    }
+    current=next;
+  }
+  mesh.vertices=Array.from(current,(value)=>Math.round(value*1000)/1000);
+  return mesh;
+}
+
+async function writeGroupMeshes(group, volume, dims, stats, sampling) {
+  const groupDir=path.join(meshTarget,group.id);
+  await mkdir(groupDir,{recursive:true});
+  const labels=Object.keys(stats).map(Number).filter((label)=>label>0).sort((a,b)=>a-b);
+  const thinGroup=group.id==="ribs"||group.id==="vertebrae"||group.id==="cardiac";
+
+  console.log("[radiology-atlas] gerando malhas low-poly reais",group.id,"labels",labels.length);
+  for(const label of labels){
+    const stat=stats[label];
+    const stride=thinGroup?1:(stat.count>130000?2:1);
+    let mesh=createLabelMesh(volume,dims,label,stat,sampling,{stride});
+    if(!mesh) continue;
+    mesh=smoothIndexedMesh(mesh,thinGroup?1:2,thinGroup?.12:.2);
+    const payload={
+      version:1,
+      coordinateSpace:"original-voxel",
+      label,
+      vertices:mesh.vertices,
+      indices:mesh.indices
+    };
+    await writeFile(path.join(groupDir,String(label)+".json"),JSON.stringify(payload),"utf8");
+  }
 }
 
 async function buildCt(ctPath, header, planeDirs) {
@@ -314,6 +492,8 @@ async function buildMask(group, niiPath, header, ctDims, sampling, targetRoot) {
     await encodeGray(raw, dy, dz, path.join(targetRoot, group.id, "sagittal", pad(xi) + ".png"), "mask");
   }
 
+  await writeGroupMeshes(group,down,[dx,dy,dz],stats,sampling);
+
   const normalized = {};
   for (const [label, item] of Object.entries(stats)) {
     normalized[label] = {
@@ -362,14 +542,15 @@ try {
   }
 
   const manifest = {
-    version: 6,
+    version: 7,
     generatedAt: new Date().toISOString(),
     source: {
       name: "TotalSegmentator / MedOtter · caso s0024 · órgãos, músculos, costelas e vértebras",
       license: "CC BY 4.0",
       sourceUrl: "https://huggingface.co/datasets/MedOtter/totalsegmentator-vertebrae"
     },
-    architecture: "progressive-webp-slices",
+    architecture: "progressive-webp-slices+precomputed-lowpoly-meshes",
+    meshBase: "/data/radiology-atlas/mesh",
     originalDims: ctHeader.dims,
     sampling: { xStep: X_STEP, yStep: Y_STEP, zStep: Z_STEP },
     planes: {

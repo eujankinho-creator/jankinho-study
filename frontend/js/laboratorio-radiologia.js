@@ -1313,19 +1313,55 @@ async function buildAnatomicalGeometry(structure) {
 function anatomicalMaterial(structure) {
   const bones=structure.category==="bones";
   const vessels=structure.category==="vessels";
+  const muscles=structure.category==="muscles";
   return new THREE.MeshStandardMaterial({
     color:new THREE.Color(structure.color),
-    roughness:bones?.72:.62,
+    roughness:bones?.76:vessels?.48:.64,
     metalness:0,
     transparent:true,
-    opacity:bones?.64:vessels?.58:.56,
+    opacity:bones?.76:vessels?.72:muscles?.34:.58,
     side:THREE.DoubleSide,
     depthWrite:false
   });
 }
 
 async function replaceProxyWithAnatomicalMesh(structure) {
-  const geometry=await buildAnatomicalGeometry(structure);
+  if(structure.id==="brain") return false;
+
+  let geometry=null;
+  try{
+    const response=await fetch(
+      "/data/radiology-atlas/mesh/"+structure.group+"/"+structure.localLabel+".json?v=7",
+      {cache:"force-cache"}
+    );
+    if(response.ok){
+      const payload=await response.json();
+      if(Array.isArray(payload.vertices)&&Array.isArray(payload.indices)&&payload.indices.length>=3){
+        const positions=new Float32Array(payload.vertices.length);
+        for(let i=0;i<payload.vertices.length;i+=3){
+          const world=voxelToWorld([
+            payload.vertices[i],
+            payload.vertices[i+1],
+            payload.vertices[i+2]
+          ]);
+          positions[i]=world.x;
+          positions[i+1]=world.y;
+          positions[i+2]=world.z;
+        }
+        geometry=new THREE.BufferGeometry();
+        geometry.setAttribute("position",new THREE.BufferAttribute(positions,3));
+        geometry.setIndex(payload.indices);
+        geometry.computeVertexNormals();
+        geometry.computeBoundingBox();
+        geometry.computeBoundingSphere();
+      }
+    }
+  }catch(error){
+    console.warn("[tomografia-3d] malha pré-computada indisponível",structure.id,error);
+  }
+
+  // Fallback apenas se um arquivo específico não tiver sido produzido.
+  if(!geometry) geometry=await buildAnatomicalGeometry(structure);
   if(!geometry) return false;
 
   const old=state.anatomy3d.meshes.get(structure.id);
@@ -1349,7 +1385,10 @@ async function replaceProxyWithAnatomicalMesh(structure) {
 }
 
 async function upgradeAnatomy3DMeshes() {
-  const structures=availableStructures().slice().sort((a,b)=>{
+  const structures=availableStructures()
+    .filter((structure)=>structure.id!=="brain")
+    .slice()
+    .sort((a,b)=>{
     const priority={organs:0,bones:1,vessels:2,muscles:3};
     return (priority[a.category]??4)-(priority[b.category]??4);
   });
@@ -1414,8 +1453,8 @@ function reset3DCamera() {
   const camera=state.anatomy3d.camera;
   const controls=state.anatomy3d.controls;
   if(!camera||!controls) return;
-  camera.position.set(12,7,15);
-  controls.target.set(0,0,0);
+  camera.position.set(11.5,3.2,15.5);
+  controls.target.set(0,-.6,0);
   controls.update();
 }
 
@@ -1456,14 +1495,7 @@ function initAnatomy3D() {
   state.anatomy3d.root=root;
   scene.add(root);
 
-  for(const structure of availableStructures()){
-    const stat=structureStat(structure);
-    if(!stat?.centroid||!stat?.min||!stat?.max) continue;
-    const mesh=createProxyGeometry(structure,stat);
-    root.add(mesh);
-    state.anatomy3d.meshes.set(structure.id,mesh);
-    state.anatomy3d.selectable.push(mesh);
-  }
+  // O 3D começa vazio: somente malhas derivadas das segmentações reais entram na cena.
 
   const axial=new THREE.Mesh(
     new THREE.PlaneGeometry(MODEL_AXES.width,MODEL_AXES.depth),
