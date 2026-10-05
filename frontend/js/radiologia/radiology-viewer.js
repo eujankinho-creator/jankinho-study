@@ -8,7 +8,7 @@ import {
   getStructureByLabel,
   getStructureByGroupLabel,
   clamp
-} from "./data.js?v=20261005-atlas2";
+} from "./data.js?v=20261005-atlas3";
 
 export class RadiologyViewer {
   constructor(canvas, options) {
@@ -139,51 +139,77 @@ export class RadiologyViewer {
       const sums = new Map();
       const plane = nx * ny;
 
-      for (let index = 0; index < image.length; index += 1) {
-        const localLabel = Math.round(Number(image[index]) || 0);
-        const structure = byLocal.get(localLabel);
-        if (!structure) continue;
+      // Em volumes corporais completos, varrer cada voxel congela o navegador.
+      // Mantemos no máximo ~1,2M amostras por máscara, distribuídas em 3D.
+      const totalVoxels = nx * ny * nz;
+      const step = Math.max(
+        1,
+        Math.ceil(Math.cbrt(totalVoxels / 1200000))
+      );
 
-        const z = Math.floor(index / plane);
-        const remainder = index - z * plane;
-        const y = Math.floor(remainder / nx);
-        const x = remainder - y * nx;
+      for (let z = 0; z < nz; z += step) {
+        const zBase = z * plane;
+        for (let y = 0; y < ny; y += step) {
+          const rowBase = zBase + y * nx;
+          for (let x = 0; x < nx; x += step) {
+            const index = rowBase + x;
+            const localLabel = Math.round(Number(image[index]) || 0);
+            const structure = byLocal.get(localLabel);
+            if (!structure) continue;
 
-        let entry = sums.get(structure.label);
-        if (!entry) {
-          entry = { x:0,y:0,z:0,count:0,minX:x,maxX:x,minY:y,maxY:y,minZ:z,maxZ:z };
-          sums.set(structure.label, entry);
+            let entry = sums.get(structure.label);
+            if (!entry) {
+              entry = {
+                x: 0, y: 0, z: 0, count: 0,
+                minX: x, maxX: x,
+                minY: y, maxY: y,
+                minZ: z, maxZ: z
+              };
+              sums.set(structure.label, entry);
+            }
+
+            entry.x += x;
+            entry.y += y;
+            entry.z += z;
+            entry.count += 1;
+            entry.minX = Math.min(entry.minX, x);
+            entry.maxX = Math.max(entry.maxX, x);
+            entry.minY = Math.min(entry.minY, y);
+            entry.maxY = Math.max(entry.maxY, y);
+            entry.minZ = Math.min(entry.minZ, z);
+            entry.maxZ = Math.max(entry.maxZ, z);
+          }
         }
-        entry.x += x; entry.y += y; entry.z += z; entry.count += 1;
-        entry.minX = Math.min(entry.minX, x); entry.maxX = Math.max(entry.maxX, x);
-        entry.minY = Math.min(entry.minY, y); entry.maxY = Math.max(entry.maxY, y);
-        entry.minZ = Math.min(entry.minZ, z); entry.maxZ = Math.max(entry.maxZ, z);
       }
 
       sums.forEach((entry, syntheticLabel) => {
         if (!entry.count) return;
+
         const frac = this.nv.vox2frac([
           entry.x / entry.count,
           entry.y / entry.count,
           entry.z / entry.count
         ]);
+
         this.labelCentroids.set(syntheticLabel, [
           clamp(Number(frac[0]) || 0, 0, 1),
           clamp(Number(frac[1]) || 0, 0, 1),
           clamp(Number(frac[2]) || 0, 0, 1)
         ]);
+
         this.labelBounds.set(syntheticLabel, {
           min: [
-            nx <= 1 ? 0 : entry.minX / (nx - 1),
-            ny <= 1 ? 0 : entry.minY / (ny - 1),
-            nz <= 1 ? 0 : entry.minZ / (nz - 1)
+            nx <= 1 ? 0 : Math.max(0, entry.minX - step) / (nx - 1),
+            ny <= 1 ? 0 : Math.max(0, entry.minY - step) / (ny - 1),
+            nz <= 1 ? 0 : Math.max(0, entry.minZ - step) / (nz - 1)
           ],
           max: [
-            nx <= 1 ? 1 : entry.maxX / (nx - 1),
-            ny <= 1 ? 1 : entry.maxY / (ny - 1),
-            nz <= 1 ? 1 : entry.maxZ / (nz - 1)
+            nx <= 1 ? 1 : Math.min(nx - 1, entry.maxX + step) / (nx - 1),
+            ny <= 1 ? 1 : Math.min(ny - 1, entry.maxY + step) / (ny - 1),
+            nz <= 1 ? 1 : Math.min(nz - 1, entry.maxZ + step) / (nz - 1)
           ],
-          voxelCount: entry.count
+          voxelCount: entry.count * step * step * step,
+          sampled: step > 1
         });
       });
     });
