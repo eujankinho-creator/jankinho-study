@@ -93,7 +93,8 @@ function imageUrl(plane, ordinal) {
 }
 
 function maskUrl(group, plane, ordinal) {
-  return "/data/radiology-atlas/mask/" + group + "/" + plane + "/" + pad(ordinal) + ".png";
+  const version = state.manifest?.version || 5;
+  return "/data/radiology-atlas/mask/" + group + "/" + plane + "/" + pad(ordinal) + ".png?v=" + version;
 }
 
 function nearestOrdinal(values, target) {
