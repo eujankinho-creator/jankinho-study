@@ -182,3 +182,90 @@
 .image-stage canvas{
   pointer-events:none;
 }
+
+
+/* v-stack5 · monitores retangulares no topo, conforme referência */
+.viewer-card{
+  margin-top:16px;
+  padding:10px;
+}
+.viewer-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:minmax(360px,42vw) minmax(230px,23vw);
+  gap:8px;
+  height:auto;
+}
+.viewer-grid>.view-tile.primary{
+  grid-column:1 / -1;
+  grid-row:1;
+}
+.secondary-stack{
+  grid-column:1 / -1;
+  grid-row:2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr;
+  gap:8px;
+  min-width:0;
+}
+.view-tile{
+  min-height:0;
+  border-radius:9px;
+}
+.view-tile header{
+  height:36px;
+}
+.image-stage{
+  height:calc(100% - 36px);
+}
+.region-strip{
+  margin:14px 0 10px;
+}
+.atlas-tools{
+  margin-top:0;
+}
+.atlas-sidebar{
+  min-height:0;
+  padding:12px;
+}
+.structure-list{
+  max-height:260px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.atlas-loading{
+  inset:58px 10px 78px;
+}
+
+@media(min-width:1500px){
+  .viewer-grid{
+    grid-template-rows:440px 260px;
+  }
+}
+@media(max-width:1100px){
+  .viewer-grid{
+    grid-template-rows:390px 230px;
+  }
+  .structure-list{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:760px){
+  .viewer-grid{
+    grid-template-columns:1fr;
+    grid-template-rows:360px 220px 220px;
+  }
+  .viewer-grid>.view-tile.primary{
+    grid-column:1;
+    grid-row:1;
+  }
+  .secondary-stack{
+    grid-column:1;
+    grid-row:2 / span 2;
+    grid-template-columns:1fr;
+    grid-template-rows:220px 220px;
+  }
+  .structure-list{
+    grid-template-columns:1fr;
+  }
+}
