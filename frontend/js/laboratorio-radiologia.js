@@ -233,6 +233,34 @@ function updateStructureInfo(radiology) {
   }
 }
 
+function updatePlaneHud(structures, radiology) {
+  const config = PLANE_CONFIG[state.plane];
+  const current = radiology.currentSliceIndex(state.plane) + 1;
+  const total = radiology.sliceCount(state.plane);
+  const selected = state.selectedId ? getStructure(state.selectedId) : null;
+  const selectedInPlane = selected
+    ? structures.some((structure) => structure.id === selected.id)
+    : false;
+
+  if ($("planeHudPlane")) {
+    $("planeHudPlane").textContent =
+      config.label.toUpperCase() + " · CORTE " + current + "/" + total;
+  }
+
+  if ($("planeHudTitle")) {
+    $("planeHudTitle").textContent = selectedInPlane
+      ? selected.name
+      : (structures[0]?.name || "Sem estrutura-alvo neste nível");
+  }
+
+  if ($("planeHudList")) {
+    const names = structures.slice(0, 5).map((structure) => structure.name);
+    $("planeHudList").textContent = names.length
+      ? names.join(" · ")
+      : "Mova o plano para explorar o exame";
+  }
+}
+
 function updateSlicePresence(exam3d, radiology) {
   const container = $("sliceStructures");
   if (!container) return;
@@ -241,6 +269,8 @@ function updateSlicePresence(exam3d, radiology) {
   const structures = radiology
     .structuresAtPlane(state.plane, state.frac[axis])
     .filter((structure) => structureAvailable(structure.id));
+
+  updatePlaneHud(structures, radiology);
 
   if (!structures.length) {
     container.innerHTML =
@@ -289,6 +319,15 @@ function selectStructure(id, exam3d, radiology, moveToStructure) {
   updateSelectedStateBadge(radiology);
   updateSlicePresence(exam3d, radiology);
   syncSliceUi(exam3d, radiology);
+  const hraMeshes = exam3d.structureMeshes?.get(structure.id) || [];
+  if ($("selectedRadiologyName")) {
+    $("selectedRadiologyName").textContent =
+      structure.name +
+      (hraMeshes.length
+        ? " · marcado no exame e no atlas 3D"
+        : " · marcado no exame");
+  }
+
   announce(structure.name + " selecionado");
 }
 
