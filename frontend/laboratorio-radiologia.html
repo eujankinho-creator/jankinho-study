@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack9">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack10">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
@@ -103,7 +103,7 @@
 
         <div class="viewer-grid">
           <article class="view-tile primary active" data-plane-tile="axial">
-            <header><span>AXIAL</span><small data-plane-count="axial">—</small></header>
+            <header><span>AXIAL</span><div class="plane-header-right"><b data-plane-structure hidden></b><small data-plane-count="axial">—</small></div></header>
             <div class="image-stage" data-stage="axial">
               <img id="imgAxial" alt="Tomografia axial" draggable="false">
               <canvas id="overlayAxial"></canvas>
@@ -113,7 +113,7 @@
 
           <div class="secondary-stack">
             <article class="view-tile" data-plane-tile="coronal" tabindex="0">
-              <header><span>CORONAL</span><small data-plane-count="coronal">—</small></header>
+              <header><span>CORONAL</span><div class="plane-header-right"><b data-plane-structure hidden></b><small data-plane-count="coronal">—</small></div></header>
               <div class="image-stage" data-stage="coronal">
                 <img id="imgCoronal" alt="Tomografia coronal" draggable="false">
                 <canvas id="overlayCoronal"></canvas>
@@ -122,7 +122,7 @@
             </article>
 
             <article class="view-tile" data-plane-tile="sagittal" tabindex="0">
-              <header><span>SAGITAL</span><small data-plane-count="sagittal">—</small></header>
+              <header><span>SAGITAL</span><div class="plane-header-right"><b data-plane-structure hidden></b><small data-plane-count="sagittal">—</small></div></header>
               <div class="image-stage" data-stage="sagittal">
                 <img id="imgSagittal" alt="Tomografia sagital" draggable="false">
                 <canvas id="overlaySagittal"></canvas>
@@ -192,7 +192,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack9"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack10"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
