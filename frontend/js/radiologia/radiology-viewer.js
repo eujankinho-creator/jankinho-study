@@ -8,7 +8,7 @@ import {
   getStructureByLabel,
   getStructureByGroupLabel,
   clamp
-} from "./data.js?v=20261005-atlas1";
+} from "./data.js?v=20261005-atlas2";
 
 export class RadiologyViewer {
   constructor(canvas, options) {
