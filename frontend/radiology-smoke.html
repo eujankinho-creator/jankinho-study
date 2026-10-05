@@ -3,50 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Radiology runtime smoke</title>
+  <title>Radiology full runtime smoke</title>
   <style>
     body{margin:0;background:#090d12;color:#e7eef5;font-family:monospace;padding:20px}
     pre{white-space:pre-wrap;word-break:break-word;padding:14px;border:1px solid #27313c;border-radius:10px;background:#0e141b}
-    canvas{display:block;width:min(900px,100%);height:560px;border:1px solid #27313c;margin-top:14px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .stage{height:500px;border:1px solid #27313c}
+    canvas{display:block;width:100%;height:100%}
   </style>
 </head>
 <body>
-  <h1>Radiology runtime smoke</h1>
+  <h1>Radiology full runtime smoke</h1>
   <pre id="status">boot</pre>
-  <canvas id="gl"></canvas>
+  <div class="grid">
+    <div class="stage"><canvas id="exam3d"></canvas></div>
+    <div class="stage"><canvas id="mpr"></canvas></div>
+  </div>
   <script type="module">
-    import * as niivue from "/vendor/niivue/index.js";
+    import { Exam3DViewer } from "/js/radiologia/exam-3d-viewer.js";
+    import { RadiologyViewer } from "/js/radiologia/radiology-viewer.js";
     const status=document.getElementById("status");
     const log=(value)=>{status.textContent += "\n"+value;};
     window.addEventListener("error",(e)=>log("window.error: "+(e.error?.stack||e.message)));
     window.addEventListener("unhandledrejection",(e)=>log("unhandledrejection: "+(e.reason?.stack||e.reason)));
     try{
-      log("Niivue export: "+typeof niivue.Niivue);
-      const nv=new niivue.Niivue({
-        backColor:[0,0,0,1],
-        dragAndDropEnabled:false,
-        onLocationChange:(data)=>{}
-      });
-      log("instance ok");
-      await nv.attachTo("gl");
-      log("attach ok");
-      await nv.loadVolumes([
-        {
-          url:"/data/radiology/totalseg_example_ct.nii.gz",
-          name:"totalseg_example_ct.nii.gz",
-          colormap:"gray",
-          opacity:1
-        },
-        {
-          url:"/data/radiology/totalseg_example_seg.nii.gz",
-          name:"totalseg_example_seg.nii.gz",
-          opacity:0.35
-        }
-      ]);
-      log("loadVolumes ok; count="+nv.volumes.length);
-      log("ct dims="+JSON.stringify(nv.volumes[0]?.dims));
-      log("seg dims="+JSON.stringify(nv.volumes[1]?.dims));
-      log("seg img length="+String(nv.volumes[1]?.img?.length||0));
+      log("construct");
+      const exam3d=new Exam3DViewer(document.getElementById("exam3d"),{});
+      const mpr=new RadiologyViewer(document.getElementById("mpr"),{});
+      log("await ready");
+      const [a,b]=await Promise.all([exam3d.ready,mpr.ready]);
+      log("exam3d ready="+Boolean(a));
+      log("mpr ready="+Boolean(b));
+      log("mpr dims="+JSON.stringify(mpr.dims));
+      log("available="+JSON.stringify(mpr.getAvailableStructureIds()));
+      log("state="+JSON.stringify(mpr.getState()));
       status.dataset.ok="1";
     }catch(error){
       status.dataset.ok="0";
