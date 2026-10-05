@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack21">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack25">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
@@ -96,7 +96,10 @@
             </div>
           </div>
           <div class="viewer-actions">
-                        <div class="structure-search-shell viewer-search-shell">
+                        <button id="overviewTopButton" class="overview-toggle active" type="button" data-region="overview">
+              <span>Visão geral</span>
+            </button>
+            <div class="structure-search-shell viewer-search-shell">
               <button id="openStructureSearch" class="structure-search-launcher compact" type="button" aria-expanded="false" aria-controls="structureSearchPanel">
                 <span class="search-lens" aria-hidden="true"></span>
                 <span>Buscar estruturas</span>
@@ -144,24 +147,59 @@
               <div>
                 <span>MESMO EXAME · MESMAS COORDENADAS</span>
                 <strong>Modelo anatômico 3D</strong>
-                <small>Os três planos seguem os cortes axial, coronal e sagital.</small>
+                <small>Coxa ao pescoço · sincronizado com os três cortes.</small>
               </div>
-              <button id="anatomy3dReset" type="button">Enquadrar</button>
             </div>
+
+            <div class="anatomy3d-plane-tabs" role="tablist" aria-label="Plano ativo do modelo 3D">
+              <button type="button" class="active axial" data-3d-plane="axial"><i></i>Axial</button>
+              <button type="button" class="coronal" data-3d-plane="coronal"><i></i>Coronal</button>
+              <button type="button" class="sagittal" data-3d-plane="sagittal"><i></i>Sagital</button>
+            </div>
+
+            <div class="anatomy3d-category-tabs" aria-label="Categorias visíveis no modelo">
+              <button type="button" class="active" data-3d-category="bones">Ossos e cartilagens</button>
+              <button type="button" class="active" data-3d-category="muscles">Músculos</button>
+              <button type="button" class="active" data-3d-category="vessels">Vasos</button>
+              <button type="button" class="active" data-3d-category="organs">Órgãos</button>
+            </div>
+
             <div id="anatomy3dHost" class="anatomy3d-host" tabindex="0" aria-label="Modelo 3D anatômico do mesmo exame">
               <div id="anatomy3dLoading" class="anatomy3d-loading">
                 <span>COXA → PESCOÇO · LOW-POLY</span>
                 <strong>Reconstruindo anatomia real</strong>
                 <small>malhas derivadas das segmentações do mesmo exame</small>
               </div>
-              <div class="anatomy3d-plane-key" aria-hidden="true">
-                <span class="axial">Axial</span>
-                <span class="coronal">Coronal</span>
-                <span class="sagittal">Sagital</span>
+              <div class="anatomy3d-selected-card">
+                <span>Mesmo exame · mesmas coordenadas</span>
+                <strong id="anatomy3dSelectedName">Explore as estruturas</strong>
               </div>
             </div>
+
+            <div class="anatomy3d-slice">
+              <div>
+                <span>Mover corte · <b id="anatomy3dPlaneName">Axial</b></span>
+                <em id="anatomy3dSliceReadout">1 / 1</em>
+              </div>
+              <input id="anatomy3dSliceSlider" type="range" min="0" max="0" value="0" aria-label="Mover corte no modelo 3D">
+            </div>
+
+            <div class="anatomy3d-actions">
+              <button id="anatomy3dIsolate" type="button" disabled>Isolar selecionada</button>
+              <button id="anatomy3dReset" type="button">Enquadrar</button>
+              <button id="anatomy3dClip" type="button">Corte no 3D</button>
+            </div>
+
+            <div class="anatomy3d-separation">
+              <div>
+                <span>Separar estruturas</span>
+                <button id="anatomy3dRecompose" type="button" disabled>Recompor</button>
+              </div>
+              <input id="anatomy3dSeparation" type="range" min="0" max="100" value="0" aria-label="Separar estruturas do modelo">
+            </div>
+
             <div class="anatomy3d-foot">
-              <span>Arraste para girar · scroll para zoom</span>
+              <span>Arraste para girar · clique para selecionar · scroll para zoom</span>
               <strong id="anatomy3dCoord">X 0 · Y 0 · Z 0</strong>
             </div>
           </aside>
@@ -220,10 +258,6 @@
         </div>
       </section>
 
-      <section class="region-strip single" aria-label="Regiões do corpo">
-        <button type="button" data-region="overview" class="active"><strong>Visão geral</strong><small>corpo inteiro</small></button>
-      </section>
-
       <section class="info-row">
         <article>
           <span>ESTRUTURA SELECIONADA</span>
@@ -248,7 +282,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack24"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack25"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

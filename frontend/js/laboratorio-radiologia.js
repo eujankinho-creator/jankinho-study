@@ -50,7 +50,11 @@ const state = {
     frame: 0,
     renderPending: false,
     dampingUntil: 0,
-    anatomicalFramed: false
+    anatomicalFramed: false,
+    enabledCategories: new Set(["bones","muscles","vessels","organs"]),
+    isolatedId: null,
+    clipEnabled: false,
+    separation: 0
   }
 };
 
@@ -290,6 +294,7 @@ function setActivePlane(plane) {
   if ($("activePlaneLabel")) $("activePlaneLabel").textContent = plane.toUpperCase() + " · CORTE";
   syncSlider();
   update3DPlanes();
+  sync3DControls();
 }
 
 function syncSlider() {
@@ -1370,6 +1375,7 @@ async function replaceProxyWithAnatomicalMesh(structure) {
   const old=state.anatomy3d.meshes.get(structure.id);
   const mesh=new THREE.Mesh(geometry,anatomicalMaterial(structure));
   mesh.userData.structureId=structure.id;
+  mesh.userData.category=structure.category;
   mesh.userData.baseOpacity=mesh.material.opacity;
   mesh.userData.fromMask=true;
 
@@ -1383,6 +1389,9 @@ async function replaceProxyWithAnatomicalMesh(structure) {
     old.geometry?.dispose?.();
     old.material?.dispose?.();
   }
+  apply3DVisibility();
+  apply3DSeparation();
+  update3DClipping();
   update3DSelection();
   request3DRender();
   return true;
@@ -1476,8 +1485,173 @@ function frameAnatomicalPosition() {
   request3DRender(320);
 }
 
+function sync3DControls() {
+  const info=state.manifest ? planeInfo(state.activePlane) : null;
+  const ordinal=state.manifest ? planeOrdinal(state.activePlane) : 0;
+
+  document.querySelectorAll("[data-3d-plane]").forEach((button)=>{
+    button.classList.toggle("active",button.dataset.plane3d===state.activePlane || button.dataset["3dPlane"]===state.activePlane);
+  });
+  document.querySelectorAll("[data-3d-category]").forEach((button)=>{
+    button.classList.toggle("active",state.anatomy3d.enabledCategories.has(button.dataset["3dCategory"]));
+  });
+
+  if($("anatomy3dPlaneName")) $("anatomy3dPlaneName").textContent=planeLabel(state.activePlane);
+  if($("anatomy3dSliceSlider")&&info){
+    $("anatomy3dSliceSlider").max=String(Math.max(0,info.voxels.length-1));
+    $("anatomy3dSliceSlider").value=String(ordinal);
+  }
+  if($("anatomy3dSliceReadout")&&info) $("anatomy3dSliceReadout").textContent=(ordinal+1)+" / "+info.voxels.length;
+
+  const selected=getStructure(state.selectedId);
+  const isolate=$("anatomy3dIsolate");
+  if(isolate){
+    isolate.disabled=!selected;
+    isolate.classList.toggle("active",Boolean(selected&&state.anatomy3d.isolatedId===selected.id));
+    isolate.textContent=state.anatomy3d.isolatedId?"Mostrar conjunto":"Isolar selecionada";
+  }
+
+  const clip=$("anatomy3dClip");
+  if(clip){
+    clip.classList.toggle("active",state.anatomy3d.clipEnabled);
+    clip.textContent=state.anatomy3d.clipEnabled?"Corte ativo":"Corte no 3D";
+  }
+
+  if($("anatomy3dSeparation")) $("anatomy3dSeparation").value=String(Math.round(state.anatomy3d.separation*100));
+  if($("anatomy3dRecompose")) $("anatomy3dRecompose").disabled=state.anatomy3d.separation<=.001;
+}
+
+function apply3DVisibility() {
+  const isolated=state.anatomy3d.isolatedId;
+  for(const [id,mesh] of state.anatomy3d.meshes){
+    const structure=getStructure(id);
+    const categoryVisible=structure ? state.anatomy3d.enabledCategories.has(structure.category) : true;
+    mesh.visible=isolated ? id===isolated : categoryVisible;
+  }
+  state.anatomy3d.selectable=Array.from(state.anatomy3d.meshes.values()).filter((mesh)=>mesh.visible);
+  sync3DControls();
+  request3DRender();
+}
+
+function update3DClipping() {
+  const enabled=state.anatomy3d.clipEnabled;
+  let clippingPlane=null;
+
+  if(enabled&&state.manifest){
+    const [nx,ny,nz]=state.manifest.originalDims;
+    const [x,y,z]=state.coord;
+    if(state.activePlane==="axial"){
+      const value=(z/Math.max(1,nz-1)-.5)*MODEL_AXES.height;
+      clippingPlane=new THREE.Plane(new THREE.Vector3(0,1,0),-value);
+    }else if(state.activePlane==="coronal"){
+      const value=-(y/Math.max(1,ny-1)-.5)*MODEL_AXES.depth;
+      clippingPlane=new THREE.Plane(new THREE.Vector3(0,0,1),-value);
+    }else{
+      const value=(x/Math.max(1,nx-1)-.5)*MODEL_AXES.width;
+      clippingPlane=new THREE.Plane(new THREE.Vector3(1,0,0),-value);
+    }
+  }
+
+  for(const mesh of state.anatomy3d.meshes.values()){
+    if(!mesh.material) continue;
+    mesh.material.clippingPlanes=clippingPlane?[clippingPlane]:[];
+    mesh.material.clipShadows=false;
+    mesh.material.needsUpdate=true;
+  }
+  request3DRender();
+}
+
+function apply3DSeparation() {
+  const amount=state.anatomy3d.separation*2.35;
+  const root=state.anatomy3d.root;
+  if(!root) return;
+
+  const bodyCenter=new THREE.Vector3(0,-.45,0);
+  for(const mesh of state.anatomy3d.meshes.values()){
+    mesh.geometry.computeBoundingBox();
+    const center=mesh.geometry.boundingBox.getCenter(new THREE.Vector3());
+    const direction=center.clone().sub(bodyCenter);
+    direction.y*=.3;
+    if(direction.lengthSq()<.0001) direction.set(.15,0,.1);
+    direction.normalize();
+    mesh.position.copy(direction.multiplyScalar(amount));
+  }
+
+  sync3DControls();
+  request3DRender();
+}
+
+function reset3DViewOptions() {
+  state.anatomy3d.enabledCategories=new Set(["bones","muscles","vessels","organs"]);
+  state.anatomy3d.isolatedId=null;
+  state.anatomy3d.clipEnabled=false;
+  state.anatomy3d.separation=0;
+  apply3DVisibility();
+  apply3DSeparation();
+  update3DClipping();
+  frameAnatomicalPosition();
+}
+
+function bindAnatomy3DControls() {
+  document.querySelectorAll("[data-3d-plane]").forEach((button)=>{
+    button.addEventListener("click",()=>{
+      const plane=button.dataset["3dPlane"];
+      if(!PLANES.includes(plane)) return;
+      setActivePlane(plane);
+      sync3DControls();
+    });
+  });
+
+  document.querySelectorAll("[data-3d-category]").forEach((button)=>{
+    button.addEventListener("click",()=>{
+      const category=button.dataset["3dCategory"];
+      if(state.anatomy3d.enabledCategories.has(category)) state.anatomy3d.enabledCategories.delete(category);
+      else state.anatomy3d.enabledCategories.add(category);
+      state.anatomy3d.isolatedId=null;
+      apply3DVisibility();
+    });
+  });
+
+  $("anatomy3dSliceSlider")?.addEventListener("input",async function(){
+    const values=planeInfo(state.activePlane).voxels;
+    const ordinal=Math.max(0,Math.min(values.length-1,Number(this.value)));
+    const axis=state.activePlane==="axial"?2:state.activePlane==="coronal"?1:0;
+    state.coord[axis]=values[ordinal];
+    update3DPlanes();
+    syncSlider();
+    await updateViews();
+  });
+
+  $("anatomy3dIsolate")?.addEventListener("click",()=>{
+    if(!state.selectedId) return;
+    state.anatomy3d.isolatedId=state.anatomy3d.isolatedId===state.selectedId?null:state.selectedId;
+    apply3DVisibility();
+  });
+
+  $("anatomy3dClip")?.addEventListener("click",()=>{
+    state.anatomy3d.clipEnabled=!state.anatomy3d.clipEnabled;
+    update3DClipping();
+    sync3DControls();
+  });
+
+  $("anatomy3dSeparation")?.addEventListener("input",function(){
+    state.anatomy3d.separation=Math.max(0,Math.min(1,Number(this.value)/100));
+    apply3DSeparation();
+  });
+
+  $("anatomy3dRecompose")?.addEventListener("click",()=>{
+    state.anatomy3d.separation=0;
+    apply3DSeparation();
+  });
+}
+
 function update3DSelection() {
   const selected=state.selectedId;
+  const selectedStructure=getStructure(selected);
+  if($("anatomy3dSelectedName")){
+    $("anatomy3dSelectedName").textContent=selectedStructure?.name||"Explore as estruturas";
+    $("anatomy3dSelectedName").style.color=selectedStructure?.color||"";
+  }
   for(const [id,mesh] of state.anatomy3d.meshes){
     const active=id===selected;
     mesh.material.opacity=selected?(active?.96:Math.min(mesh.userData.baseOpacity,.12)):mesh.userData.baseOpacity;
@@ -1486,6 +1660,7 @@ function update3DSelection() {
     mesh.material.emissiveIntensity=active?.18:0;
     mesh.renderOrder=active?4:1;
   }
+  sync3DControls();
   request3DRender();
 }
 
@@ -1510,6 +1685,8 @@ function update3DPlanes() {
     mesh.material.opacity=plane===active?.24:.09;
   });
   if($("anatomy3dCoord")) $("anatomy3dCoord").textContent="X "+x+" · Y "+y+" · Z "+z;
+  update3DClipping();
+  sync3DControls();
   request3DRender();
 }
 
@@ -1528,6 +1705,7 @@ function initAnatomy3D() {
   });
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.1));
   renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.localClippingEnabled=true;
   renderer.setSize(host.clientWidth,host.clientHeight,false);
   host.prepend(renderer.domElement);
 
@@ -1600,6 +1778,7 @@ function initAnatomy3D() {
   });
 
   $("anatomy3dReset")?.addEventListener("click",reset3DCamera);
+  bindAnatomy3DControls();
 
   const resize=()=>{
     const width=host.clientWidth;
@@ -1632,6 +1811,7 @@ function bindRegions() {
         state.coord = [Math.floor(nx/2),Math.floor(ny/2),Math.floor(nz/2)];
         state.selectedId = null;
         updateStructureUi(null);
+        reset3DViewOptions();
         await updateViews();
         return;
       }
