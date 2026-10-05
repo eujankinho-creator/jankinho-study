@@ -19,7 +19,10 @@ const state = {
   maskCache: new Map(),
   latestPointStructures: [],
   wheelAccumulator: { axial: 0, coronal: 0, sagittal: 0 },
-  interactionBusy: false
+  interactionBusy: false,
+  pointerFrame: 0,
+  pointerRefreshTimer: 0,
+  lastPointerPlane: null
 };
 
 async function api(url, options) {
@@ -460,17 +463,49 @@ async function updateScrolledPlane(plane) {
   await renderOverlayForPlane(plane);
 }
 
+async function updatePointerNavigation(plane) {
+  const orthogonal = PLANES.filter((item) => item !== plane);
+  await Promise.all(orthogonal.map(setPlaneImage));
+  updateAllCrosshairs();
+  syncSlider();
+  await Promise.all(orthogonal.map(renderOverlayForPlane));
+}
+
+function schedulePointerNavigation(plane) {
+  state.lastPointerPlane = plane;
+  if (state.pointerFrame) return;
+  state.pointerFrame = requestAnimationFrame(() => {
+    state.pointerFrame = 0;
+    updateAllCrosshairs();
+    syncSlider();
+
+    clearTimeout(state.pointerRefreshTimer);
+    state.pointerRefreshTimer = setTimeout(() => {
+      const currentPlane = state.lastPointerPlane;
+      if (currentPlane) void updatePointerNavigation(currentPlane);
+    }, 38);
+  });
+}
+
 function bindViewerClicks() {
   PLANES.forEach((plane) => {
     const stage = document.querySelector('[data-stage="' + plane + '"]');
 
+    stage?.addEventListener("pointerenter", () => {
+      setActivePlane(plane);
+    });
+
     stage?.addEventListener("pointermove", (event) => {
       setActivePlane(plane);
-      showCursorCrosshair(plane, event);
+      const uv = setCoordFromPointer(plane, event);
+      if (!uv) return;
+      schedulePointerNavigation(plane);
     });
 
     stage?.addEventListener("pointerleave", () => {
-      updateCrosshair(plane);
+      clearTimeout(state.pointerRefreshTimer);
+      state.lastPointerPlane = null;
+      updateAllCrosshairs();
     });
 
     stage?.addEventListener("click", async (event) => {
@@ -478,9 +513,11 @@ function bindViewerClicks() {
       const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
       await updateViews();
+
       if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Identificando estruturas neste ponto...";
       const items = await labelsAtPoint(plane, uv.u, uv.v);
       renderPointStructures(items);
+
       if (items[0]) {
         state.selectedId = items[0].id;
         updateStructureUi(items[0]);
@@ -489,24 +526,6 @@ function bindViewerClicks() {
         $("selectedStructureMeta").textContent = "Nenhuma estrutura segmentada encontrada neste ponto.";
       }
     });
-
-    stage?.addEventListener("wheel", async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      setActivePlane(plane);
-
-      state.wheelAccumulator[plane] += event.deltaY;
-      if (Math.abs(state.wheelAccumulator[plane]) < 24 || state.interactionBusy) return;
-
-      const direction = state.wheelAccumulator[plane] > 0 ? 1 : -1;
-      state.wheelAccumulator[plane] = 0;
-      state.interactionBusy = true;
-      try {
-        await moveSliceForPlane(plane, direction, true);
-      } finally {
-        state.interactionBusy = false;
-      }
-    }, { passive: false });
 
     document.querySelector('[data-plane-tile="' + plane + '"]')?.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") setActivePlane(plane);
@@ -520,6 +539,30 @@ function bindViewerClicks() {
       }
     });
   });
+
+  document.addEventListener("wheel", async (event) => {
+    const stage = event.target instanceof Element ? event.target.closest("[data-stage]") : null;
+    if (!stage) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const plane = stage.dataset.stage;
+    if (!PLANES.includes(plane)) return;
+    setActivePlane(plane);
+
+    state.wheelAccumulator[plane] += event.deltaY;
+    if (Math.abs(state.wheelAccumulator[plane]) < 18 || state.interactionBusy) return;
+
+    const direction = state.wheelAccumulator[plane] > 0 ? 1 : -1;
+    state.wheelAccumulator[plane] = 0;
+    state.interactionBusy = true;
+    try {
+      await moveSliceForPlane(plane, direction, true);
+    } finally {
+      state.interactionBusy = false;
+    }
+  }, { passive: false, capture: true });
 }
 
 function bindSliceControls() {
