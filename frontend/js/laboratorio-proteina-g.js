@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { STRUCTURES, PATHWAYS, STEPS, STUDY_TASKS } from "./gprotein/data.js?v=20261005-gprotein-lab3";
+import { STRUCTURES, PATHWAYS, STEPS, PATHWAY_STEPS, STUDY_TASKS } from "./gprotein/data.js?v=20261005-gprotein-lab6";
 
 const $ = (id) => document.getElementById(id);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -34,7 +34,12 @@ const STATE = {
   renderClock: new THREE.Clock(),
   baseTransforms: new Map(),
   visualTweens: [],
-  materialDefaults: new WeakMap()
+  materialDefaults: new WeakMap(),
+  pathway: "gs",
+  pathwayRoots: new Map(),
+  pathwayStructureMaps: new Map(),
+  pathwayContexts: new Map(),
+  pathwayLoading: new Map()
 };
 
 const CHAIN_MAP = {
@@ -225,6 +230,14 @@ function buildMolecularComplex(parsed) {
 
   root.position.copy(MEMBRANE_ANCHOR);
   root.rotation.y = -.18;
+  const structureMap = new Map();
+  ["gpcr","galpha","gbeta","ggamma"].forEach((id) => {
+    const object = STATE.structureObjects.get(id);
+    if (object) structureMap.set(id,object);
+  });
+  STATE.pathwayRoots.set("gs",root);
+  STATE.pathwayStructureMaps.set("gs",structureMap);
+  STATE.pathwayContexts.set("gs",{root,receptorCenter,axis,scale,pdbId:"3SN6"});
   return { root, receptorCenter, axis, scale };
 }
 
@@ -302,6 +315,246 @@ function buildSurfaceRepresentation(parsed, center, axis, scale, chainAlias, roo
     target.add(points);
     STATE.selectable.push(points);
   }
+}
+
+function buildExperimentalPathwayComplex(parsed, config) {
+  const chainEntries = Object.entries(config.chainMap || {});
+  const referenceChains = config.referenceChains?.length ? config.referenceChains : chainEntries.map(([chain]) => chain);
+  const referencePoints = referenceChains.flatMap((chain) =>
+    (parsed.caByChain.get(chain) || []).map((a) => new THREE.Vector3(a.x, a.y, a.z))
+  );
+  if (!referencePoints.length) throw new Error("Sem coordenadas de referência para " + config.pdbId);
+
+  const center = new THREE.Box3().setFromPoints(referencePoints).getCenter(new THREE.Vector3());
+  const axis = dominantAxis(referencePoints);
+  const scale = config.scale || .105;
+  const root = new THREE.Group();
+  root.name = "experimental-" + config.pdbId;
+  root.position.copy(MEMBRANE_ANCHOR).add(new THREE.Vector3(...(config.offset || [0,0,0])));
+  root.rotation.set(...(config.rotation || [0,-.18,0]));
+  root.visible = false;
+  STATE.scene.add(root);
+
+  const structureMap = new Map();
+
+  for (const [chain, spec] of chainEntries) {
+    const caAtoms = parsed.caByChain.get(chain) || [];
+    if (caAtoms.length < 4) continue;
+
+    const group = new THREE.Group();
+    group.name = config.pathway + "-" + spec.id + "-" + chain;
+    group.userData.structureId = spec.id;
+    root.add(group);
+    if (!structureMap.has(spec.id)) structureMap.set(spec.id, group);
+
+    const points = caAtoms.map((a) =>
+      orientPoint(new THREE.Vector3(a.x,a.y,a.z).sub(center), axis).multiplyScalar(scale)
+    );
+    const cartoon = createTube(points, spec.color, spec.radius || .19);
+    if (cartoon) {
+      cartoon.userData.structureId = spec.id;
+      cartoon.userData.kind = "cartoon";
+      group.add(cartoon);
+      STATE.selectable.push(cartoon);
+    }
+
+    const chainAtoms = parsed.atoms.filter((atom) => atom.chain === chain);
+    const atomicAtoms = chainAtoms.filter((_, index) => index % 3 === 0);
+    if (atomicAtoms.length) {
+      const geom = new THREE.SphereGeometry(.075,6,5);
+      const mat = new THREE.MeshStandardMaterial({ roughness:.5, metalness:.015 });
+      const inst = new THREE.InstancedMesh(geom,mat,atomicAtoms.length);
+      const matrix = new THREE.Matrix4();
+      const color = new THREE.Color();
+      atomicAtoms.forEach((atom,index) => {
+        const p = orientPoint(new THREE.Vector3(atom.x,atom.y,atom.z).sub(center),axis).multiplyScalar(scale);
+        matrix.makeTranslation(p.x,p.y,p.z);
+        inst.setMatrixAt(index,matrix);
+        color.setHex(ELEMENT_COLORS[atom.element] || spec.color || 0x9aa4b4);
+        inst.setColorAt(index,color);
+      });
+      inst.userData.structureId = spec.id;
+      inst.userData.kind = "atomic";
+      inst.visible = false;
+      group.add(inst);
+      STATE.selectable.push(inst);
+    }
+
+    const positions = [];
+    for (let index = 0; index < chainAtoms.length; index += 3) {
+      const atom = chainAtoms[index];
+      const p = orientPoint(new THREE.Vector3(atom.x,atom.y,atom.z).sub(center),axis).multiplyScalar(scale);
+      positions.push(p.x,p.y,p.z);
+    }
+    if (positions.length) {
+      const geom = new THREE.BufferGeometry();
+      geom.setAttribute("position",new THREE.Float32BufferAttribute(positions,3));
+      const pointsObj = new THREE.Points(
+        geom,
+        new THREE.PointsMaterial({
+          color: spec.color || 0xffffff,
+          size:.19,
+          transparent:true,
+          opacity:.48,
+          depthWrite:false
+        })
+      );
+      pointsObj.userData.structureId = spec.id;
+      pointsObj.userData.kind = "surface";
+      pointsObj.visible = false;
+      group.add(pointsObj);
+      STATE.selectable.push(pointsObj);
+    }
+  }
+
+  STATE.pathwayRoots.set(config.pathway,root);
+  STATE.pathwayStructureMaps.set(config.pathway,structureMap);
+  STATE.pathwayContexts.set(config.pathway,{ root,center,axis,scale,pdbId:config.pdbId });
+  return { root,structureMap,center,axis,scale };
+}
+
+function currentSteps() {
+  return PATHWAY_STEPS[STATE.pathway] || STEPS;
+}
+
+function rememberCurrentMolecularTransforms() {
+  const ids = ["gpcr","galpha","gbeta","ggamma","plc"];
+  ids.forEach((id) => {
+    const obj = STATE.structureObjects.get(id);
+    if (!obj?.position) return;
+    STATE.baseTransforms.set(id,{
+      position:obj.position.clone(),
+      rotation:obj.rotation.clone(),
+      scale:obj.scale.clone()
+    });
+  });
+}
+
+async function ensurePathwayStructure(pathway) {
+  if (pathway === "gs") return STATE.pathwayContexts.get("gs");
+  if (STATE.pathwayContexts.has(pathway)) return STATE.pathwayContexts.get(pathway);
+  if (STATE.pathwayLoading.has(pathway)) return STATE.pathwayLoading.get(pathway);
+
+  const config = pathway === "gi"
+    ? {
+        pathway:"gi", pdbId:"6DDE", referenceChains:["R"],
+        chainMap:{
+          R:{id:"gpcr",color:0x5f93ff,radius:.18},
+          A:{id:"galpha",color:0x70d5aa,radius:.22},
+          B:{id:"gbeta",color:0xb494ff,radius:.22},
+          C:{id:"ggamma",color:0x67d8ba,radius:.16}
+        },
+        scale:.11, offset:[0,0,0]
+      }
+    : {
+        pathway:"gq", pdbId:"8UQO", referenceChains:["A","Q"],
+        chainMap:{
+          A:{id:"galpha",color:0xf1b35f,radius:.22},
+          B:{id:"gbeta",color:0xb494ff,radius:.22},
+          D:{id:"ggamma",color:0x67d8ba,radius:.16},
+          Q:{id:"plc",color:0xf07aa8,radius:.2}
+        },
+        scale:.08, offset:[3.1,-1.3,0], rotation:[0,-.28,0]
+      };
+
+  const promise = (async () => {
+    const response = await fetch("/data/gprotein/" + config.pdbId + ".pdb?v=2",{cache:"force-cache"});
+    if (!response.ok) throw new Error("Estrutura " + config.pdbId + " indisponível.");
+    const parsed = parsePdb(await response.text());
+    return buildExperimentalPathwayComplex(parsed,config);
+  })();
+
+  STATE.pathwayLoading.set(pathway,promise);
+  try {
+    return await promise;
+  } finally {
+    STATE.pathwayLoading.delete(pathway);
+  }
+}
+
+function applyMolecularPathwayVisibility(pathway) {
+  const gsRoot = STATE.pathwayRoots.get("gs");
+  const giRoot = STATE.pathwayRoots.get("gi");
+  const gqRoot = STATE.pathwayRoots.get("gq");
+  if (gsRoot) gsRoot.visible = pathway === "gs" || pathway === "gq";
+  if (giRoot) giRoot.visible = pathway === "gi";
+  if (gqRoot) gqRoot.visible = pathway === "gq";
+
+  const gsMap = STATE.pathwayStructureMaps.get("gs");
+  if (gsMap && pathway === "gq") {
+    ["galpha","gbeta","ggamma"].forEach((id) => {
+      const group = gsMap.get(id);
+      if (group) group.visible = false;
+    });
+    const receptor = gsMap.get("gpcr");
+    if (receptor) receptor.visible = true;
+  } else if (gsMap) {
+    ["gpcr","galpha","gbeta","ggamma"].forEach((id) => {
+      const group = gsMap.get(id);
+      if (group) group.visible = true;
+    });
+  }
+
+  const activeMap = STATE.pathwayStructureMaps.get(pathway);
+  const fallbackGs = STATE.pathwayStructureMaps.get("gs");
+  ["gpcr","galpha","gbeta","ggamma","plc"].forEach((id) => {
+    const object = activeMap?.get(id) || (pathway === "gq" ? fallbackGs?.get(id) : null);
+    if (object) STATE.structureObjects.set(id,object);
+  });
+  rememberCurrentMolecularTransforms();
+  setRepresentation(STATE.representation);
+}
+
+async function switchPathway(pathway) {
+  if (!PATHWAYS[pathway] || pathway === "g12") return;
+  stopPlayback();
+  restoreSelectionMaterials();
+  STATE.selectedId = null;
+  if ($("selectionBadge")) $("selectionBadge").hidden = true;
+  STATE.pathway = pathway;
+  STATE.stepIndex = 0;
+
+  $(".gp-path-option").forEach((item) => item.classList.toggle("is-active",item.dataset.pathway === pathway));
+
+  if (pathway !== "gs") {
+    if ($("loadingTitle")) $("loadingTitle").textContent = "Carregando estrutura " + (PATHWAYS[pathway].pdbId || "");
+    $("gpViewerLoading")?.classList.remove("done");
+    try {
+      await ensurePathwayStructure(pathway);
+    } finally {
+      $("gpViewerLoading")?.classList.add("done");
+    }
+  }
+
+  applyMolecularPathwayVisibility(pathway);
+  buildStepStrip();
+  const steps = currentSteps();
+  if ($("timelineSlider")) {
+    $("timelineSlider").max = String(Math.max(0,steps.length - 1));
+    $("timelineSlider").value = "0";
+  }
+  applyStep(0,{camera:true});
+  updatePathwayScienceUi();
+}
+
+function updatePathwayScienceUi() {
+  const meta = PATHWAYS[STATE.pathway] || PATHWAYS.gs;
+  const source = STATE.pdbManifest?.structures?.find((item) => item.pathway === STATE.pathway);
+  if ($("viewerSourceBadge")) $("viewerSourceBadge").textContent = source ? source.pdbId + " · estrutura experimental" : "representação educacional";
+  if ($("sourcePdbId")) $("sourcePdbId").textContent = source?.pdbId || "—";
+  if ($("sourceMethod")) $("sourceMethod").textContent = source ? source.method + " · " + source.resolutionAngstrom.toFixed(2).replace(".",",") + " Å" : "Representação educacional";
+  if ($("sourceTitle")) $("sourceTitle").textContent = source?.title || meta.name;
+  if ($("sourceLink")) {
+    $("sourceLink").href = source?.sourceUrl || "#";
+    $("sourceLink").hidden = !source;
+  }
+  if ($("heroStructure")) $("heroStructure").textContent = source?.pdbId || "Educacional";
+  if ($("heroStructureMeta")) $("heroStructureMeta").textContent = source ? source.resolutionAngstrom.toFixed(2).replace(".",",") + " Å · " + (source.method.includes("ELECTRON") ? "cryo-EM" : "X-ray") : meta.name;
+  if ($("pathwaySummary")) $("pathwaySummary").textContent = STATE.pathway === "gs"
+    ? "GPCR → Gαs → adenilato ciclase → cAMP → PKA"
+    : STATE.pathway === "gi"
+      ? "GPCR → Gαi → modulação da adenilato ciclase → cAMP ↓"
+      : "Gαq → PLCβ3 → PIP₂ → IP₃ + DAG → Ca²⁺ / PKC";
 }
 
 function createCellContext() {
