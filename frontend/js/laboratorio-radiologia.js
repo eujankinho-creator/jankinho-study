@@ -937,7 +937,10 @@ function bindViewerClicks() {
       }
 
       const uv = setCoordFromPointer(plane, event);
-      if (!uv) return;
+      if (!uv) {
+        setLiveSelectedStructure(null, plane);
+        return;
+      }
       schedulePointerNavigation(plane);
       scheduleLiveIdentification(plane, uv.u, uv.v);
     });
@@ -945,7 +948,7 @@ function bindViewerClicks() {
     const finishDrag = (event) => {
       if (state.draggingPlane !== plane) return;
       state.draggingPlane = null;
-      state.liveIdentifyToken += 1;
+      if (state.dragMoved) state.liveIdentifyToken += 1;
       state.suppressClick = state.dragMoved;
       clearTimeout(state.pointerRefreshTimer);
       state.lastPointerPlane = null;
@@ -959,6 +962,7 @@ function bindViewerClicks() {
     stage?.addEventListener("lostpointercapture", () => {
       if (state.draggingPlane === plane) {
         state.draggingPlane = null;
+        state.liveIdentifyToken += 1;
         clearTimeout(state.pointerRefreshTimer);
         state.lastPointerPlane = null;
         state.pointerNavToken += 1;
