@@ -514,6 +514,13 @@ function bindStructureSearchPanel() {
 
 function updateStructureUi(structure) {
   document.querySelectorAll("[data-structure]").forEach((row) => row.classList.toggle("active", row.dataset.structure === structure?.id));
+
+  const summary = $("selectedStructureSummary");
+  if (summary) {
+    summary.classList.toggle("has-structure", Boolean(structure));
+    if (structure) summary.style.setProperty("--selected-structure-color", structure.color || "#ff8f9b");
+    else summary.style.removeProperty("--selected-structure-color");
+  }
   document.querySelectorAll("[data-plane-structure]").forEach((el) => {
     el.textContent = "";
     el.hidden = true;
