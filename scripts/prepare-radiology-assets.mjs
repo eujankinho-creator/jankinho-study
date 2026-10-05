@@ -1,101 +1,81 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
 const root = process.cwd();
 const frontend = path.join(root, "frontend");
 const vendorTarget = path.join(frontend, "vendor", "niivue");
-const modelTarget = path.join(frontend, "models", "radiology");
 const dataTarget = path.join(frontend, "data", "radiology");
+const oldModelTarget = path.join(frontend, "models", "radiology");
 
 await mkdir(vendorTarget, { recursive: true });
-await mkdir(modelTarget, { recursive: true });
 await mkdir(dataTarget, { recursive: true });
+
+// O atlas atual não usa mais o modelo 3D HRA. Removemos os assets antigos do build
+// para reduzir tamanho e tempo de deploy.
+await rm(oldModelTarget, { recursive: true, force: true });
 
 async function download(url, destination, options = {}) {
   const label = options.label || path.basename(destination);
   const minBytes = options.minBytes || 1024;
   const response = await fetch(url, {
     redirect: "follow",
-    headers: {
-      "User-Agent": "Cortex-Radiology-Lab/2.0"
-    },
-    signal: AbortSignal.timeout(options.timeoutMs || 120000)
+    headers: { "User-Agent": "Cortex-Radiology-Lab/3.0" },
+    signal: AbortSignal.timeout(options.timeoutMs || 240000)
   });
 
-  if (!response.ok) {
-    throw new Error(label + ": HTTP " + response.status);
-  }
+  if (!response.ok) throw new Error(label + ": HTTP " + response.status);
 
   const bytes = Buffer.from(await response.arrayBuffer());
   if (bytes.byteLength < minBytes) {
     throw new Error(label + ": arquivo inesperadamente pequeno (" + bytes.byteLength + " bytes)");
   }
 
-  if (options.magic && bytes.subarray(0, options.magic.length).toString("ascii") !== options.magic) {
-    throw new Error(label + ": assinatura de arquivo invalida");
-  }
-
   await writeFile(destination, bytes);
-  console.log(
-    "[radiology-assets]",
-    label + ":",
-    (bytes.byteLength / 1024 / 1024).toFixed(2),
-    "MB"
-  );
-
+  console.log("[radiology-assets]", label + ":", (bytes.byteLength / 1024 / 1024).toFixed(2), "MB");
   return bytes.byteLength;
 }
 
 await download(
   "https://cdn.jsdelivr.net/npm/@niivue/niivue@0.69.0/dist/index.js",
   path.join(vendorTarget, "index.js"),
-  {
-    label: "NiiVue 0.69.0 browser bundle",
-    minBytes: 500000,
-    timeoutMs: 180000
-  }
+  { label: "NiiVue 0.69.0 browser bundle", minBytes: 500000, timeoutMs: 180000 }
 );
 
-const ANATRIA_BASE =
-  "https://raw.githubusercontent.com/Nurkan1/Anatria-3D/main/public/anatomy";
+const HF =
+  "https://huggingface.co/datasets/MedOtter/totalsegmentator-cardiac/resolve/main/s0024/";
 
-const systems = [
-  "cardiovascular_female.glb",
-  "digestive_female.glb",
-  "integumentary_female.glb",
-  "lymphatic_female.glb",
-  "renal_female.glb",
-  "reproductive_female.glb",
-  "skeletal_female.glb"
+const files = [
+  ["ct.nii.gz", "CT corporal s0024", 40_000_000],
+  ["organs_label.nii.gz", "Órgãos s0024", 1_000_000],
+  ["cardiac_label.nii.gz", "Cardiovascular s0024", 500_000],
+  ["muscles_label.nii.gz", "Musculoesquelético + encéfalo s0024", 1_000_000]
 ];
+
+const prepared = [];
+for (const [filename, label, minBytes] of files) {
+  const bytes = await download(
+    HF + filename + "?download=true",
+    path.join(dataTarget, filename),
+    { label, minBytes, timeoutMs: 360000 }
+  );
+  prepared.push({ file: filename, bytes });
+}
 
 const manifest = {
   generatedAt: new Date().toISOString(),
-  anatomy: {
-    source: "Human Reference Atlas 3D Reference Organ Library",
-    publisher: "HuBMAP Consortium / NIH",
-    derivativePackaging: "Anatria-3D system GLBs",
-    license: "CC BY 4.0",
-    licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
-    attribution:
-      "Human Reference Atlas (HRA) 3D Reference Organ Library, HuBMAP Consortium / NIH, derived from Visible Human Female (U.S. National Library of Medicine).",
-    files: []
-  },
   radiology: {
     defaultExam: {
-      ct: "totalseg_example_ct.nii.gz",
-      segmentation: "totalseg_example_seg.nii.gz",
-      source: "TotalSegmentator repository reference files",
-      publisher: "University Hospital Basel / TotalSegmentator contributors",
-      license: "Apache-2.0 repository license",
-      registration: "exact voxel-space correspondence between CT and segmentation"
-    },
-    secondaryDemo: {
-      file: "CT_Abdo.nii.gz",
-      source: "NiiVue demo images / Slicer3D example dataset",
-      credit: "Steve Pieper",
-      originalDataset: "CTA-cardio.nrrd"
+      patient: "s0024",
+      ct: "ct.nii.gz",
+      segmentations: [
+        "organs_label.nii.gz",
+        "cardiac_label.nii.gz",
+        "muscles_label.nii.gz"
+      ],
+      source: "TotalSegmentator dataset mirror by MedOtter / Hugging Face",
+      registration: "same patient, same voxel space",
+      files: prepared
     }
   },
   viewer: {
@@ -105,93 +85,10 @@ const manifest = {
   }
 };
 
-for (const filename of systems) {
-  const bytes = await download(
-    ANATRIA_BASE + "/" + filename,
-    path.join(modelTarget, filename),
-    {
-      label: filename,
-      minBytes: 20000,
-      magic: "glTF"
-    }
-  );
-
-  manifest.anatomy.files.push({
-    file: filename,
-    bytes
-  });
-}
-
-await download(
-  ANATRIA_BASE + "/manifest_female.json",
-  path.join(modelTarget, "manifest_female.json"),
-  {
-    label: "HRA manifest feminino",
-    minBytes: 10000
-  }
-);
-
-await download(
-  ANATRIA_BASE + "/NOTICE",
-  path.join(modelTarget, "NOTICE.txt"),
-  {
-    label: "HRA/Anatria NOTICE",
-    minBytes: 1000
-  }
-);
-
-await download(
-  ANATRIA_BASE + "/LICENSE",
-  path.join(modelTarget, "LICENSE.txt"),
-  {
-    label: "HRA/Anatria LICENSE",
-    minBytes: 500
-  }
-);
-
-await download(
-  "https://raw.githubusercontent.com/niivue/niivue-demo-images/main/CT_Abdo.nii.gz",
-  path.join(dataTarget, "CT_Abdo.nii.gz"),
-  {
-    label: "CT_Abdo.nii.gz",
-    minBytes: 1000000,
-    timeoutMs: 180000
-  }
-);
-
-await download(
-  "https://raw.githubusercontent.com/wasserth/TotalSegmentator/master/tests/reference_files/example_ct.nii.gz",
-  path.join(dataTarget, "totalseg_example_ct.nii.gz"),
-  {
-    label: "TotalSegmentator example CT",
-    minBytes: 500000,
-    timeoutMs: 180000
-  }
-);
-
-await download(
-  "https://raw.githubusercontent.com/wasserth/TotalSegmentator/master/tests/reference_files/example_seg.nii.gz",
-  path.join(dataTarget, "totalseg_example_seg.nii.gz"),
-  {
-    label: "TotalSegmentator example segmentation",
-    minBytes: 10000,
-    timeoutMs: 180000
-  }
-);
-
-await download(
-  "https://raw.githubusercontent.com/wasserth/TotalSegmentator/master/LICENSE",
-  path.join(dataTarget, "TOTAL_SEGMENTATOR_LICENSE.txt"),
-  {
-    label: "TotalSegmentator Apache-2.0 license",
-    minBytes: 5000
-  }
-);
-
 await writeFile(
   path.join(dataTarget, "sources.json"),
   JSON.stringify(manifest, null, 2) + "\n",
   "utf8"
 );
 
-console.log("[radiology-assets] HRA + CT real + TotalSegmentator CT/seg co-registrados + NiiVue preparados.");
+console.log("[radiology-assets] CT corporal e 3 mapas co-registrados preparados localmente.");
