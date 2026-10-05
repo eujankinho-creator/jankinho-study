@@ -1,4 +1,4 @@
-import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas2";
+import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas3";
 import {
   STRUCTURES,
   SOURCE_REGISTRY,
@@ -6,7 +6,7 @@ import {
   PLANE_CONFIG,
   REGION_TARGETS,
   getStructure
-} from "./radiologia/data.js?v=20261005-atlas2";
+} from "./radiologia/data.js?v=20261005-atlas3";
 
 const $ = (id) => document.getElementById(id);
 const state = {
@@ -346,6 +346,13 @@ async function boot() {
       sagittal: $("radiologySagittalCanvas")
     },
     {
+      onFirstImageReady: ({ dims }) => {
+        if ($("voxelReadout")) $("voxelReadout").textContent = "CT carregado · preparando outras vistas…";
+        if ($("studySlices")) $("studySlices").textContent = dims.join("×") + " voxels";
+      },
+      onBaseViewsReady: () => {
+        if ($("voxelReadout")) $("voxelReadout").textContent = "3 vistas prontas · carregando mapas anatômicos…";
+      },
       onLocationChange: (payload) => {
         if (!payload?.frac || syncing) return;
         syncing = true;
