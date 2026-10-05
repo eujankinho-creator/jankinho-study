@@ -10,7 +10,7 @@ import {
   getStructure,
   structureMatchesObject,
   clamp
-} from "./data.js";
+} from "./data.js?v=20261005-premium3";
 
 const DEFAULT_BG = 0x070b10;
 
