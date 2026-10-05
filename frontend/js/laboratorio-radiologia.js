@@ -23,7 +23,8 @@ const state = {
   pointerFrame: 0,
   pointerRefreshTimer: 0,
   lastPointerPlane: null,
-  pointerNavToken: 0
+  pointerNavToken: 0,
+  draggingPlane: null
 };
 
 async function api(url, options) {
@@ -515,22 +516,46 @@ function bindViewerClicks() {
   PLANES.forEach((plane) => {
     const stage = document.querySelector('[data-stage="' + plane + '"]');
 
-    stage?.addEventListener("pointerenter", () => {
+    stage?.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      event.preventDefault();
       setActivePlane(plane);
-    });
+      state.draggingPlane = plane;
+      stage.setPointerCapture?.(event.pointerId);
 
-    stage?.addEventListener("pointermove", (event) => {
-      setActivePlane(plane);
       const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
       schedulePointerNavigation(plane);
     });
 
-    stage?.addEventListener("pointerleave", () => {
+    stage?.addEventListener("pointermove", (event) => {
+      if (state.draggingPlane !== plane || (event.buttons & 1) !== 1) return;
+      event.preventDefault();
+      const uv = setCoordFromPointer(plane, event);
+      if (!uv) return;
+      schedulePointerNavigation(plane);
+    });
+
+    const finishDrag = (event) => {
+      if (state.draggingPlane !== plane) return;
+      state.draggingPlane = null;
       clearTimeout(state.pointerRefreshTimer);
       state.lastPointerPlane = null;
       state.pointerNavToken += 1;
+      try { stage.releasePointerCapture?.(event.pointerId); } catch {}
       updateAllCrosshairs();
+    };
+
+    stage?.addEventListener("pointerup", finishDrag);
+    stage?.addEventListener("pointercancel", finishDrag);
+    stage?.addEventListener("lostpointercapture", () => {
+      if (state.draggingPlane === plane) {
+        state.draggingPlane = null;
+        clearTimeout(state.pointerRefreshTimer);
+        state.lastPointerPlane = null;
+        state.pointerNavToken += 1;
+        updateAllCrosshairs();
+      }
     });
 
     stage?.addEventListener("click", async (event) => {
