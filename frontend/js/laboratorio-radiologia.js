@@ -512,8 +512,20 @@ function bindStructureSearchPanel() {
 function updateStructureUi(structure) {
   document.querySelectorAll("[data-structure]").forEach((row) => row.classList.toggle("active", row.dataset.structure === structure?.id));
   document.querySelectorAll("[data-plane-structure]").forEach((el) => {
-    el.textContent = structure ? structure.name : "";
-    el.hidden = !structure;
+    el.textContent = "";
+    el.hidden = true;
+  });
+
+  document.querySelectorAll("[data-selected-structure-badge]").forEach((el) => {
+    if (!structure) {
+      el.textContent = "";
+      el.hidden = true;
+      el.style.removeProperty("--structure-color");
+      return;
+    }
+    el.textContent = structure.name;
+    el.style.setProperty("--structure-color", structure.color || "#ff8f9b");
+    el.hidden = false;
   });
   if (!structure) {
     if ($("selectedStructureName")) $("selectedStructureName").textContent = "Explore o atlas";
