@@ -1499,3 +1499,142 @@ body.cortex-app-shell
 
 
 
+
+
+/* =========================================================
+   CORTEX LESSON PLAYER · AULAS
+========================================================= */
+.global-lesson-player{
+  position:fixed;
+  z-index:2147482000;
+  right:18px;
+  bottom:18px;
+  width:min(420px,calc(100vw - 36px));
+  overflow:hidden;
+  border:1px solid var(--theme-border,rgba(255,255,255,.1));
+  border-radius:16px;
+  background:var(--theme-surface-strong,#0b0b0b);
+  color:var(--theme-text,#f8fafc);
+  box-shadow:0 24px 70px rgba(0,0,0,.48),0 0 0 1px rgba(255,255,255,.02) inset;
+  transition:
+    width .22s ease,
+    height .22s ease,
+    right .22s ease,
+    bottom .22s ease,
+    transform .22s ease,
+    opacity .18s ease;
+}
+.global-lesson-player.hidden{display:none!important}
+.global-lesson-player.expanded{
+  right:50%;
+  bottom:50%;
+  width:min(1040px,calc(100vw - 48px));
+  transform:translate(50%,50%);
+}
+.global-lesson-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 11px;
+  border-bottom:1px solid var(--theme-border,rgba(255,255,255,.08));
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--theme-accent,#f97316) 6%,transparent),transparent),
+    var(--theme-surface-strong,#0b0b0b);
+}
+.global-lesson-copy{min-width:0}
+.global-lesson-copy span{display:block;color:var(--theme-accent-2,#fb923c);font-size:7px;font-weight:950;letter-spacing:.14em}
+.global-lesson-copy strong{display:block;max-width:620px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}
+.global-lesson-copy small{display:block;margin-top:1px;color:var(--theme-text-muted,#89919b);font-size:7px}
+.global-lesson-window-actions{display:flex;gap:5px}
+.global-lesson-window-actions button,
+.global-lesson-controls button{
+  border:1px solid var(--theme-border,rgba(255,255,255,.08));
+  border-radius:8px;
+  background:var(--theme-surface-soft,rgba(255,255,255,.04));
+  color:var(--theme-text-soft,#d9dde2);
+  cursor:pointer;
+}
+.global-lesson-window-actions button{width:28px;height:28px}
+.global-lesson-video{
+  position:relative;
+  aspect-ratio:16/9;
+  background:#000;
+}
+.global-lesson-video iframe,
+#globalLessonYoutube{
+  width:100%!important;
+  height:100%!important;
+  display:block;
+}
+.global-lesson-controls{
+  display:grid;
+  grid-template-columns:auto auto auto minmax(130px,1fr) minmax(90px,130px);
+  gap:7px;
+  align-items:center;
+  padding:8px 9px;
+  border-top:1px solid var(--theme-border,rgba(255,255,255,.08));
+  background:var(--theme-surface,#0d0d0d);
+}
+.global-lesson-controls>button{min-width:32px;height:30px;padding:0 7px;font-size:8px;font-weight:900}
+.global-lesson-controls .global-lesson-main{
+  width:34px;
+  border-color:color-mix(in srgb,var(--theme-accent,#f97316) 38%,transparent);
+  background:var(--theme-gradient,var(--theme-accent,#f97316));
+  color:#fff;
+}
+.global-lesson-progress-wrap{display:grid;grid-template-columns:34px 1fr 34px;gap:5px;align-items:center}
+.global-lesson-progress-wrap span{color:var(--theme-text-muted,#89919b);font-size:7px;text-align:center}
+.global-lesson-progress-wrap input,
+.global-lesson-volume input{width:100%;accent-color:var(--theme-accent,#f97316)}
+.global-lesson-volume{display:grid;grid-template-columns:auto 1fr;gap:5px;align-items:center}
+.global-lesson-volume span{font-size:10px}
+.global-lesson-player:not(.expanded) .global-lesson-head{padding:8px 9px}
+.global-lesson-player:not(.expanded) .global-lesson-copy strong{font-size:9px}
+.global-lesson-player:not(.expanded) .global-lesson-controls{
+  grid-template-columns:auto auto auto 1fr;
+}
+.global-lesson-player:not(.expanded) .global-lesson-volume{display:none}
+.global-lesson-player:not(.expanded) .global-lesson-progress-wrap{grid-column:1/-1}
+.global-lesson-player.expanded .global-lesson-video{max-height:72vh}
+.global-lesson-player.lesson-minimized{
+  width:min(360px,calc(100vw - 28px));
+}
+body.lesson-player-expanded::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:2147481999;
+  background:rgba(0,0,0,.66);
+  backdrop-filter:blur(4px);
+}
+@media(max-width:760px){
+  .global-lesson-player,
+  .global-lesson-player.lesson-minimized{
+    left:8px;
+    right:8px;
+    bottom:max(8px,env(safe-area-inset-bottom));
+    width:auto;
+    border-radius:14px;
+  }
+  .global-lesson-player.expanded{
+    left:8px;
+    right:8px;
+    top:max(8px,env(safe-area-inset-top));
+    bottom:max(8px,env(safe-area-inset-bottom));
+    width:auto;
+    transform:none;
+    display:flex;
+    flex-direction:column;
+  }
+  .global-lesson-player.expanded .global-lesson-video{flex:1;max-height:none;aspect-ratio:auto}
+  .global-lesson-player:not(.expanded) .global-lesson-video{aspect-ratio:16/8.8}
+  .global-lesson-controls{grid-template-columns:auto auto auto 1fr;padding:7px}
+  .global-lesson-volume{display:none!important}
+  .global-lesson-progress-wrap{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){
+  .global-lesson-player{transition:none!important}
+  body.lesson-player-expanded::before{backdrop-filter:none}
+}
+/* CORTEX LESSON PLAYER END */

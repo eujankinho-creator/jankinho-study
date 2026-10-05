@@ -23,7 +23,13 @@ model Usuario {
   investigacoes InvestigacaoCaso[]
   movimentacoes Movimentacao[]
   questoes      Questao[]
-  respostas     Resposta[]
+  respostas       Resposta[]
+  aulasEstado     AulaEstado[]
+  aulasListas     AulaLista[]
+  aulasNotas      AulaNota[]
+  aulasMarcadores AulaMarcador[]
+  aulasEstudo     AulaEstudoDiario[]
+  aulaMeta        AulaMeta?
 }
 
 model Disciplina {
@@ -262,4 +268,105 @@ enum TipoMovimentacao {
   RECEITA
   DESPESA
   DIVIDA
+}
+
+
+model AulaEstado {
+  id                Int      @id @default(autoincrement())
+  usuarioId         Int
+  youtubeVideoId    String
+  title             String
+  channel           String?
+  thumbnail         String?  @db.Text
+  description       String?  @db.Text
+  durationSeconds   Int?
+  category          String?
+  subjects          Json?
+  progressSeconds   Int      @default(0)
+  watchedSeconds    Int      @default(0)
+  saved             Boolean  @default(false)
+  completed         Boolean  @default(false)
+  lastWatchedAt     DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  usuario           Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, youtubeVideoId])
+  @@index([usuarioId, lastWatchedAt])
+  @@index([usuarioId, saved])
+  @@index([usuarioId, completed])
+}
+
+model AulaLista {
+  id        Int             @id @default(autoincrement())
+  nome      String
+  usuarioId Int
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  usuario   Usuario         @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  itens     AulaListaItem[]
+
+  @@index([usuarioId, updatedAt])
+}
+
+model AulaListaItem {
+  id              Int       @id @default(autoincrement())
+  listaId         Int
+  youtubeVideoId  String
+  title           String
+  channel         String?
+  thumbnail       String?   @db.Text
+  durationSeconds Int?
+  category        String?
+  createdAt       DateTime  @default(now())
+  lista           AulaLista @relation(fields: [listaId], references: [id], onDelete: Cascade)
+
+  @@unique([listaId, youtubeVideoId])
+  @@index([listaId, createdAt])
+}
+
+model AulaMeta {
+  id        Int      @id @default(autoincrement())
+  usuarioId Int      @unique
+  tipo      String   @default("TIME")
+  valor     Int      @default(30)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+}
+
+model AulaEstudoDiario {
+  id               Int      @id @default(autoincrement())
+  usuarioId        Int
+  data             DateTime @db.Date
+  seconds          Int      @default(0)
+  lessonsCompleted Int      @default(0)
+  usuario          Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, data])
+  @@index([usuarioId, data])
+}
+
+model AulaNota {
+  id               Int      @id @default(autoincrement())
+  usuarioId        Int
+  youtubeVideoId   String
+  timestampSeconds Int      @default(0)
+  conteudo         String   @db.Text
+  createdAt        DateTime @default(now())
+  usuario          Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId, youtubeVideoId])
+}
+
+model AulaMarcador {
+  id               Int      @id @default(autoincrement())
+  usuarioId        Int
+  youtubeVideoId   String
+  timestampSeconds Int      @default(0)
+  titulo           String
+  createdAt        DateTime @default(now())
+  usuario          Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId, youtubeVideoId])
 }

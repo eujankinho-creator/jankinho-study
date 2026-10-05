@@ -1325,6 +1325,7 @@
     new Set([
       "/simulado",
       "/questoes",
+      "/aulas",
       "/flashcards",
       "/lousa",
       "/farmacos",
@@ -2181,6 +2182,311 @@
     navigateFrameFast;
 
 
+
+  /* =======================================================
+     CORTEX AULAS · PLAYER GLOBAL PERSISTENTE
+  ======================================================= */
+
+  const lessonState = {
+    player: null,
+    ready: false,
+    pending: null,
+    video: null,
+    playing: false,
+    dragging: false,
+    lastPosition: 0,
+    lastDuration: 0,
+    lastWatchTick: 0,
+    unsyncedWatched: 0,
+    syncBusy: false,
+  };
+
+  function lessonFormatTime(seconds) {
+    const total = Math.max(0,Math.floor(Number(seconds || 0)));
+    const hours = Math.floor(total / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+    const secs = String(total % 60).padStart(2,"0");
+    return hours > 0
+      ? hours + ":" + String(minutes).padStart(2,"0") + ":" + secs
+      : minutes + ":" + secs;
+  }
+
+  function lessonSafeMeta(video) {
+    return {
+      youtubeVideoId:String(video?.youtubeVideoId || "").trim(),
+      title:String(video?.title || "Videoaula").slice(0,300),
+      channel:String(video?.channel || "").slice(0,200),
+      thumbnail:String(video?.thumbnail || "").slice(0,1000),
+      description:String(video?.description || "").slice(0,5000),
+      durationSeconds:Number(video?.durationSeconds || 0),
+      category:String(video?.category || "").slice(0,120),
+      subjects:Array.isArray(video?.subjects)?video.subjects.slice(0,12):[],
+      startAt:Number(video?.startAt || 0),
+    };
+  }
+
+  function saveLessonLocal() {
+    if (!lessonState.video) return;
+    try {
+      const position = lessonState.ready && lessonState.player
+        ? Number(lessonState.player.getCurrentTime?.() || lessonState.lastPosition || 0)
+        : lessonState.lastPosition;
+      const duration = lessonState.ready && lessonState.player
+        ? Number(lessonState.player.getDuration?.() || lessonState.lastDuration || lessonState.video.durationSeconds || 0)
+        : lessonState.lastDuration;
+      localStorage.setItem("cortex_lesson_player_v1",JSON.stringify({
+        video:lessonState.video,
+        position,
+        duration,
+        mini:!$("globalLessonPlayer")?.classList.contains("expanded"),
+        savedAt:Date.now(),
+      }));
+    } catch {}
+  }
+
+  async function syncLessonProgress(forceCompleted) {
+    if (!lessonState.video || lessonState.syncBusy) return;
+    const player=lessonState.player;
+    const position=Number(player?.getCurrentTime?.() || lessonState.lastPosition || 0);
+    const duration=Number(player?.getDuration?.() || lessonState.lastDuration || lessonState.video.durationSeconds || 0);
+    const delta=Math.max(0,Math.min(60,Math.round(lessonState.unsyncedWatched)));
+    if (!delta && !forceCompleted && Math.abs(position-lessonState.lastPosition)<2) return;
+
+    lessonState.syncBusy=true;
+    lessonState.unsyncedWatched=0;
+    lessonState.lastPosition=position;
+    lessonState.lastDuration=duration;
+    try {
+      await fetch("/api/aulas/state",{
+        method:"POST",
+        credentials:"same-origin",
+        headers:{"Content-Type":"application/json"},
+        keepalive:true,
+        body:JSON.stringify({
+          ...lessonState.video,
+          durationSeconds:duration || lessonState.video.durationSeconds || 0,
+          progressSeconds:position,
+          watchedDeltaSeconds:delta,
+          completed:Boolean(forceCompleted || (duration>0 && position/duration>=.92)),
+        }),
+      });
+      try {
+        frame?.contentWindow?.postMessage({type:"cortex:lesson-progress-updated"},location.origin);
+      } catch {}
+    } catch {
+      lessonState.unsyncedWatched += delta;
+    } finally {
+      lessonState.syncBusy=false;
+      saveLessonLocal();
+    }
+  }
+
+  function lessonRenderMeta() {
+    const video=lessonState.video;
+    if (!video) return;
+    $("globalLessonTitle").textContent=video.title || "Videoaula";
+    $("globalLessonChannel").textContent=video.channel || "YouTube";
+  }
+
+  function lessonSetExpanded(expanded) {
+    const host=$("globalLessonPlayer");
+    if(!host) return;
+    host.classList.remove("hidden");
+    host.classList.toggle("expanded",Boolean(expanded));
+    host.classList.toggle("lesson-minimized",!expanded);
+    document.body.classList.toggle("lesson-player-expanded",Boolean(expanded));
+    saveLessonLocal();
+  }
+
+  function lessonHide() {
+    $("globalLessonPlayer")?.classList.add("hidden");
+    $("globalLessonPlayer")?.classList.remove("expanded","lesson-minimized");
+    document.body.classList.remove("lesson-player-expanded");
+  }
+
+  function ensureYouTubeApi() {
+    if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+    if (window.__cortexYoutubeApiPromise) return window.__cortexYoutubeApiPromise;
+
+    window.__cortexYoutubeApiPromise=new Promise((resolve,reject)=>{
+      const previous=window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady=function(){
+        if(typeof previous==="function"){
+          try{previous();}catch{}
+        }
+        resolve(window.YT);
+      };
+      const script=document.createElement("script");
+      script.src="https://www.youtube.com/iframe_api";
+      script.async=true;
+      script.onerror=()=>reject(new Error("YouTube indisponível."));
+      document.head.appendChild(script);
+      window.setTimeout(()=>{
+        if(window.YT?.Player) resolve(window.YT);
+      },3500);
+    });
+
+    return window.__cortexYoutubeApiPromise;
+  }
+
+  function createLessonPlayer(startAt=0,autoplay=true) {
+    if (!lessonState.video) return Promise.resolve();
+    return ensureYouTubeApi().then(()=>new Promise((resolve)=>{
+      if (lessonState.player && lessonState.ready) {
+        lessonState.player.loadVideoById({
+          videoId:lessonState.video.youtubeVideoId,
+          startSeconds:Math.max(0,startAt),
+        });
+        if(!autoplay) lessonState.player.pauseVideo();
+        resolve();
+        return;
+      }
+
+      lessonState.player=new window.YT.Player("globalLessonYoutube",{
+        videoId:lessonState.video.youtubeVideoId,
+        width:"100%",
+        height:"100%",
+        playerVars:{
+          autoplay:autoplay?1:0,
+          controls:0,
+          rel:0,
+          modestbranding:1,
+          playsinline:1,
+          start:Math.floor(Math.max(0,startAt)),
+          origin:location.origin,
+        },
+        events:{
+          onReady:function(event){
+            lessonState.ready=true;
+            event.target.setVolume(70);
+            if(startAt>0) event.target.seekTo(startAt,true);
+            if(autoplay) event.target.playVideo();
+            lessonRenderMeta();
+            resolve();
+          },
+          onStateChange:function(event){
+            lessonState.playing=event.data===window.YT.PlayerState.PLAYING;
+            $("globalLessonPlay").textContent=lessonState.playing?"❚❚":"▶";
+            if(lessonState.playing){
+              lessonState.lastWatchTick=performance.now();
+            }else{
+              lessonState.lastWatchTick=0;
+              void syncLessonProgress(event.data===window.YT.PlayerState.ENDED);
+            }
+            if(event.data===window.YT.PlayerState.ENDED){
+              void syncLessonProgress(true);
+            }
+            saveLessonLocal();
+          },
+          onError:function(){
+            $("globalLessonTitle").textContent="Esta aula não está mais disponível.";
+          }
+        }
+      });
+    }));
+  }
+
+  async function playLesson(video) {
+    const meta=lessonSafeMeta(video);
+    if(!/^[A-Za-z0-9_-]{11}$/.test(meta.youtubeVideoId)) return;
+
+    const same=lessonState.video?.youtubeVideoId===meta.youtubeVideoId;
+    lessonState.video=meta;
+    lessonRenderMeta();
+    $("globalLessonPlayer")?.classList.remove("hidden");
+
+    const startAt=Number(video?.startAt || (same ? lessonState.player?.getCurrentTime?.() : 0) || 0);
+    await createLessonPlayer(startAt,true).catch(console.error);
+    lessonSetExpanded(video?.expanded !== false);
+    saveLessonLocal();
+  }
+
+  function restoreLessonState() {
+    let saved=null;
+    try {
+      saved=JSON.parse(localStorage.getItem("cortex_lesson_player_v1") || "null");
+    } catch {}
+    if(!saved?.video?.youtubeVideoId) return;
+    lessonState.video=lessonSafeMeta(saved.video);
+    lessonState.lastPosition=Number(saved.position || 0);
+    lessonState.lastDuration=Number(saved.duration || lessonState.video.durationSeconds || 0);
+    lessonRenderMeta();
+    $("globalLessonPlayer")?.classList.remove("hidden");
+    lessonSetExpanded(false);
+    createLessonPlayer(lessonState.lastPosition,false).catch(console.error);
+  }
+
+  $("globalLessonMinimize")?.addEventListener("click",()=>lessonSetExpanded(false));
+  $("globalLessonExpand")?.addEventListener("click",()=>lessonSetExpanded(true));
+  $("globalLessonClose")?.addEventListener("click",()=>{
+    void syncLessonProgress(false);
+    try{lessonState.player?.stopVideo?.();}catch{}
+    lessonState.video=null;
+    lessonState.playing=false;
+    lessonHide();
+    try{localStorage.removeItem("cortex_lesson_player_v1");}catch{}
+  });
+  $("globalLessonPlay")?.addEventListener("click",()=>{
+    if(!lessonState.player) return;
+    if(lessonState.playing) lessonState.player.pauseVideo();
+    else lessonState.player.playVideo();
+  });
+  $("globalLessonBack")?.addEventListener("click",()=>{
+    const p=Number(lessonState.player?.getCurrentTime?.() || 0);
+    lessonState.player?.seekTo?.(Math.max(0,p-10),true);
+  });
+  $("globalLessonForward")?.addEventListener("click",()=>{
+    const p=Number(lessonState.player?.getCurrentTime?.() || 0);
+    const d=Number(lessonState.player?.getDuration?.() || 0);
+    lessonState.player?.seekTo?.(d?Math.min(d,p+10):p+10,true);
+  });
+  $("globalLessonVolume")?.addEventListener("input",function(){
+    lessonState.player?.setVolume?.(Number(this.value || 0));
+  });
+  $("globalLessonProgress")?.addEventListener("input",function(){
+    lessonState.dragging=true;
+    const duration=Number(lessonState.player?.getDuration?.() || lessonState.lastDuration || 0);
+    const position=duration*(Number(this.value || 0)/1000);
+    $("globalLessonCurrent").textContent=lessonFormatTime(position);
+  });
+  $("globalLessonProgress")?.addEventListener("change",function(){
+    const duration=Number(lessonState.player?.getDuration?.() || lessonState.lastDuration || 0);
+    const position=duration*(Number(this.value || 0)/1000);
+    lessonState.player?.seekTo?.(position,true);
+    lessonState.dragging=false;
+  });
+
+  window.setInterval(function(){
+    if(!lessonState.video||!lessonState.ready||!lessonState.player) return;
+    const now=performance.now();
+    const position=Number(lessonState.player.getCurrentTime?.() || 0);
+    const duration=Number(lessonState.player.getDuration?.() || 0);
+    lessonState.lastPosition=position;
+    lessonState.lastDuration=duration;
+
+    if(lessonState.playing){
+      if(lessonState.lastWatchTick){
+        const delta=(now-lessonState.lastWatchTick)/1000;
+        if(delta>0 && delta<3) lessonState.unsyncedWatched+=delta;
+      }
+      lessonState.lastWatchTick=now;
+    }
+
+    if(!lessonState.dragging){
+      $("globalLessonCurrent").textContent=lessonFormatTime(position);
+      $("globalLessonDuration").textContent=lessonFormatTime(duration);
+      $("globalLessonProgress").value=duration>0?String(Math.round(position/duration*1000)):"0";
+    }
+
+    saveLessonLocal();
+    if(lessonState.unsyncedWatched>=14) void syncLessonProgress(false);
+  },1000);
+
+  window.addEventListener("beforeunload",()=>{
+    saveLessonLocal();
+    void syncLessonProgress(false);
+  });
+
   window.addEventListener(
     "message",
     function (
@@ -2235,6 +2541,32 @@
         return;
       }
 
+
+      if (
+        data.type ===
+          "cortex:lesson-play"
+      ) {
+        void playLesson(
+          data.video || {}
+        );
+        return;
+      }
+
+      if (
+        data.type ===
+          "cortex:lesson-minimize"
+      ) {
+        lessonSetExpanded(false);
+        return;
+      }
+
+      if (
+        data.type ===
+          "cortex:lesson-expand"
+      ) {
+        lessonSetExpanded(true);
+        return;
+      }
 
       if (
         data.type !==
@@ -2698,6 +3030,7 @@
 
 
   configureFrame();
+  restoreLessonState();
 
 
   /*

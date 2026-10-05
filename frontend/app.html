@@ -49,7 +49,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/app-shell.css?v=20261001-nav-core5"
+    href="/css/app-shell.css?v=20261005-aulas1"
   >
 
   <link
@@ -275,7 +275,40 @@
   </footer>
 
 
-  <script src="/js/app-shell.js?v=20261002-profile-photo2"></script>
+
+  <section id="globalLessonPlayer" class="global-lesson-player hidden" aria-label="Videoaula ativa">
+    <div class="global-lesson-head">
+      <div class="global-lesson-copy">
+        <span>AULA ATIVA</span>
+        <strong id="globalLessonTitle">Videoaula</strong>
+        <small id="globalLessonChannel">YouTube</small>
+      </div>
+      <div class="global-lesson-window-actions">
+        <button id="globalLessonMinimize" type="button" title="Continuar navegando" aria-label="Minimizar aula">—</button>
+        <button id="globalLessonExpand" type="button" title="Expandir aula" aria-label="Expandir aula">↗</button>
+        <button id="globalLessonClose" type="button" title="Fechar aula" aria-label="Fechar aula">×</button>
+      </div>
+    </div>
+    <div class="global-lesson-video">
+      <div id="globalLessonYoutube"></div>
+    </div>
+    <div class="global-lesson-controls">
+      <button id="globalLessonBack" type="button" aria-label="Voltar 10 segundos">−10</button>
+      <button id="globalLessonPlay" class="global-lesson-main" type="button" aria-label="Play">▶</button>
+      <button id="globalLessonForward" type="button" aria-label="Avançar 10 segundos">+10</button>
+      <div class="global-lesson-progress-wrap">
+        <span id="globalLessonCurrent">0:00</span>
+        <input id="globalLessonProgress" type="range" min="0" max="1000" value="0" aria-label="Progresso da aula">
+        <span id="globalLessonDuration">0:00</span>
+      </div>
+      <div class="global-lesson-volume">
+        <span>🔊</span>
+        <input id="globalLessonVolume" type="range" min="0" max="100" value="70" aria-label="Volume">
+      </div>
+    </div>
+  </section>
+
+  <script src="/js/app-shell.js?v=20261005-aulas1"></script>
   <script src="/js/pink-pet.js?v=20261002-fluid-final4"></script>
 
 </body>

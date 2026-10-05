@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aulas | Cortex</title>
+  <script>
+    (function(){
+      var theme="dark-orange";
+      try{theme=localStorage.getItem("jankinho_theme_v1")||theme;}catch(e){}
+      document.documentElement.setAttribute("data-theme",theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/app.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261005-logo-global1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/aulas.css?v=20261005-aulas1">
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261005-aulas1"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
+</head>
+<body class="lessons-view">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box"></div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+    <div class="sidebar-menu"></div>
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info"><strong id="nomeSidebar">Carregando...</strong><span id="emailSidebar"></span></div>
+      <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header">
+      <div>
+        <div class="header-title">Aulas</div>
+        <span class="lessons-header-subtitle">Seu ambiente de estudo por videoaulas</span>
+      </div>
+      <div class="header-user">
+        <div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div>
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
+      </div>
+    </header>
+
+    <main class="lessons-page">
+      <section class="lessons-hero">
+        <div class="lessons-hero-copy">
+          <span class="lessons-kicker">CORTEX · AULAS</span>
+          <h1>O que você quer <em>aprender hoje?</em></h1>
+          <p>Pesquise videoaulas, acompanhe seu progresso, salve conteúdos e continue estudando enquanto navega pelo Córtex.</p>
+
+          <form id="lessonSearchForm" class="lesson-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="lessonSearchInput" type="search" placeholder="Fisiologia da contração muscular" autocomplete="off" required>
+            <button type="submit">Pesquisar</button>
+          </form>
+
+          <div class="lesson-suggestions" aria-label="Sugestões de pesquisa">
+            <button type="button" data-query="Ciclo cardíaco">Ciclo cardíaco</button>
+            <button type="button" data-query="Sistema renina angiotensina">Renina-angiotensina</button>
+            <button type="button" data-query="Imunidade inata">Imunidade inata</button>
+            <button type="button" data-query="Betabloqueadores farmacologia">Betabloqueadores</button>
+          </div>
+        </div>
+
+        <aside class="goal-card">
+          <div class="goal-head">
+            <div><span>META DE HOJE</span><strong id="goalLabel">30 min</strong></div>
+            <button id="editGoalButton" type="button">Ajustar</button>
+          </div>
+          <div class="goal-progress"><i id="goalProgressBar"></i></div>
+          <div class="goal-foot">
+            <strong id="goalProgressText">0 / 30 min</strong>
+            <span id="goalRemainingText">Comece uma aula</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="lesson-stats" aria-label="Seu estudo">
+        <article><span>Hoje</span><strong id="statToday">0 min</strong><small>tempo estudado</small></article>
+        <article><span>Semana</span><strong id="statWeek">0 min</strong><small>tempo estudado</small></article>
+        <article><span>Concluídas</span><strong id="statCompleted">0</strong><small>videoaulas</small></article>
+        <article><span>Sequência</span><strong id="statStreak">0 dias</strong><small>consistência</small></article>
+      </section>
+
+      <section id="continueSection" class="lesson-section" hidden>
+        <div class="section-heading">
+          <div><span>RETOMAR</span><h2>Continue assistindo</h2></div>
+          <button id="historyButton" type="button">Histórico</button>
+        </div>
+        <div id="continueGrid" class="lesson-row"></div>
+      </section>
+
+      <section id="savedSection" class="lesson-section" hidden>
+        <div class="section-heading">
+          <div><span>BIBLIOTECA</span><h2>Minhas aulas salvas</h2></div>
+          <button id="listsButton" type="button">Listas de estudo</button>
+        </div>
+        <div id="savedGrid" class="lesson-row"></div>
+      </section>
+
+      <section id="searchSection" class="lesson-section search-results-section" hidden>
+        <div class="section-heading">
+          <div><span>DESCOBRIR</span><h2 id="searchTitle">Resultados</h2></div>
+          <small id="searchCount"></small>
+        </div>
+
+        <div class="lesson-filters">
+          <label><span>Duração</span>
+            <select id="filterDuration">
+              <option value="">Qualquer duração</option>
+              <option value="short">Curta</option>
+              <option value="medium">Média</option>
+              <option value="long">Longa</option>
+            </select>
+          </label>
+          <label><span>Ordenação</span>
+            <select id="filterOrder">
+              <option value="relevance">Relevância</option>
+              <option value="recent">Mais recentes</option>
+              <option value="views">Mais visualizados</option>
+            </select>
+          </label>
+          <label><span>Tipo</span>
+            <select id="filterType">
+              <option value="">Aula</option>
+              <option value="revision">Revisão</option>
+              <option value="summary">Resumo</option>
+              <option value="questions">Questões</option>
+              <option value="practice">Prática</option>
+              <option value="conference">Conferência</option>
+              <option value="course">Curso</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="lessonSearchState" class="lesson-state" hidden></div>
+        <div id="lessonResults" class="lesson-grid"></div>
+      </section>
+
+      <section class="lesson-section split-section">
+        <article class="subject-progress-card">
+          <div class="section-heading compact"><div><span>PROGRESSO</span><h2>Meu progresso</h2></div></div>
+          <div id="subjectProgress" class="subject-progress">
+            <div class="empty-inline">Comece a assistir aulas para acompanhar seus temas.</div>
+          </div>
+        </article>
+
+        <article class="study-tools-card">
+          <span>ESTUDO INTEGRADO</span>
+          <h2>Aula + prática</h2>
+          <p>Minimize a aula e continue em Questões, Flashcards ou Laboratórios sem perder o ponto em que parou.</p>
+          <div>
+            <a href="/questoes">Praticar questões</a>
+            <a href="/flashcards">Revisar flashcards</a>
+            <a href="/laboratorio">Abrir laboratório</a>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="goalDialog" class="lesson-dialog">
+    <form method="dialog" id="goalForm">
+      <button class="dialog-close" value="cancel" aria-label="Fechar">×</button>
+      <span>CONFIGURAR META</span>
+      <h2>Meta diária de estudo</h2>
+      <div class="goal-type-tabs">
+        <button type="button" class="active" data-goal-type="TIME">Por tempo</button>
+        <button type="button" data-goal-type="LESSONS">Por aulas</button>
+      </div>
+      <label><span id="goalValueLabel">Minutos por dia</span><input id="goalValueInput" type="number" min="1" max="720" value="30"></label>
+      <button class="primary-dialog-action" id="saveGoalButton" value="default">Salvar meta</button>
+    </form>
+  </dialog>
+
+  <dialog id="listDialog" class="lesson-dialog list-dialog">
+    <form method="dialog" id="listForm">
+      <button class="dialog-close" value="cancel" aria-label="Fechar">×</button>
+      <span>LISTAS DE ESTUDO</span>
+      <h2>Organize suas aulas</h2>
+      <div class="create-list-row">
+        <input id="newListName" type="text" maxlength="120" placeholder="Ex.: Cardiovascular">
+        <button id="createListButton" type="button">Criar</button>
+      </div>
+      <div id="listsContainer" class="lists-container"></div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/js/aulas.js?v=20261005-aulas1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+</body>
+</html>

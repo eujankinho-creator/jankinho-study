@@ -105,6 +105,12 @@
         '<path d="M9 17h3"/>'
       ),
 
+    aulas:
+      icon(
+        '<rect x="4" y="5" width="16" height="14" rx="3"/>' +
+        '<path d="m10 9 5 3-5 3z"/>'
+      ),
+
     flashcards:
       icon(
         '<rect x="4" y="6" width="14" height="12" rx="2"/>' +
@@ -223,6 +229,12 @@
           href: "/questoes",
           key: "questoes",
           label: "Quest\u00f5es"
+        },
+
+        {
+          href: "/aulas",
+          key: "aulas",
+          label: "Aulas"
         },
 
         {
@@ -555,6 +567,7 @@
       new Set([
         "/simulado",
         "/questoes",
+        "/aulas",
         "/flashcards",
         "/lousa",
         "/farmacos",
@@ -804,6 +817,7 @@
     const routes =
       [
         "/questoes",
+        "/aulas",
         "/flashcards",
         "/sigaa",
         "/casos",

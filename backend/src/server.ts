@@ -36,6 +36,7 @@ import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerC
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { sincronizarCasosFaculdade } from "./casosFaculdade";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
+import { atenderAulas } from "./aulas";
 import { limparFlashcardsParaMetodologia } from "./flashcardsMetodologia";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
@@ -3283,10 +3284,30 @@ async function servirArquivo(
         ).toLowerCase();
 
 
-      const content =
+      let content =
         await readFile(
           arquivo
         );
+
+      if (extensao === ".html") {
+        const htmlAtualizado =
+          content
+            .toString("utf8")
+            .replace(
+              /\/js\/sidebar-standard\.js\?v=[^"']+/g,
+              "/js/sidebar-standard.js?v=20261005-aulas1"
+            )
+            .replace(
+              /\/css\/sidebar-standard\.css\?v=[^"']+/g,
+              "/css/sidebar-standard.css?v=20261005-logo-global1"
+            );
+
+        content =
+          Buffer.from(
+            htmlAtualizado,
+            "utf8"
+          );
+      }
 
 
       const etag =
@@ -3815,6 +3836,32 @@ const server =
 
           return;
         }
+
+        /* AULAS */
+
+        if (
+          caminho.startsWith("/api/aulas/")
+        ) {
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await atenderAulas(
+            request,
+            response,
+            url,
+            usuarioId
+          );
+
+          return;
+        }
+
 
         /* FLASHCARDS */
 
@@ -5146,6 +5193,19 @@ const server =
           await atualizarSenha(
             request,
             response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/aulas" &&
+          metodo === "GET"
+        ) {
+          redirect(
+            response,
+            "/aulas.html"
           );
 
           return;
