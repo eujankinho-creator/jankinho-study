@@ -129,10 +129,10 @@ export const STRUCTURES = Object.freeze([
     category: "organs",
     systems: ["renal"],
     match: [
-      /kidney.*_L$/i,
-      /renal_.*_L$/i,
-      /_kidney_L/i,
-      /_renal_.*_L/i
+      /kidney.*_L\\b/i,
+      /renal_.*_L\\b/i,
+      /_kidney_L\\b/i,
+      /_renal_.*_L\\b/i
     ],
     color: "#b56b60",
     focusFrac: [0.62, 0.48, 0.48]
@@ -147,10 +147,10 @@ export const STRUCTURES = Object.freeze([
     category: "organs",
     systems: ["renal"],
     match: [
-      /kidney.*_R$/i,
-      /renal_.*_R$/i,
-      /_kidney_R/i,
-      /_renal_.*_R/i
+      /kidney.*_R\\b/i,
+      /renal_.*_R\\b/i,
+      /_kidney_R\\b/i,
+      /_renal_.*_R\\b/i
     ],
     color: "#b56b60",
     focusFrac: [0.38, 0.48, 0.47]
