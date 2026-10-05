@@ -216,15 +216,33 @@ async function buildCt(ctPath, header, planeDirs) {
 }
 
 async function buildMask(group, niiPath, header, ctDims, sampling, targetRoot) {
-  const [mx, my, mz] = header.dims;
   const [cx, cy, cz] = ctDims;
+  const channelFirst = header.dim4 > 1 && header.dims[0] <= 64;
+  const channels = channelFirst ? header.dims[0] : 1;
+  const [mx, my, mz] = channelFirst
+    ? [header.dims[1], header.dims[2], header.dim4]
+    : header.dims;
   const { xVals, yVals, zVals } = sampling;
   const dx = xVals.length, dy = yVals.length, dz = zVals.length;
   const down = new Uint8Array(dx * dy * dz);
   const stats = {};
   const fd = await open(niiPath, "r");
-  const sliceBytes = mx * my * header.bytesPerVoxel;
+  const sliceBytes = channels * mx * my * header.bytesPerVoxel;
   const slice = Buffer.alloc(sliceBytes);
+
+  const readMaskLabel = (x, y) => {
+    if (!channelFirst) {
+      const off = (x + y * mx) * header.bytesPerVoxel;
+      return Math.round(readNumeric(slice, off, header));
+    }
+
+    const base = (x * channels) + (y * mx * channels);
+    for (let ch = 0; ch < channels; ch += 1) {
+      const off = (base + ch) * header.bytesPerVoxel;
+      if (readNumeric(slice, off, header) > 0) return ch + 1;
+    }
+    return 0;
+  };
 
   const mapCoord = (value, fromSize, toSize) => {
     if (fromSize <= 1 || toSize <= 1) return 0;
@@ -234,7 +252,7 @@ async function buildMask(group, niiPath, header, ctDims, sampling, targetRoot) {
   console.log(
     "[radiology-atlas] máscara",
     group.id,
-    "dims",
+    channelFirst ? ("4D canais=" + channels + " espaço") : "dims",
     mx + "x" + my + "x" + mz,
     "-> grade CT",
     cx + "x" + cy + "x" + cz
@@ -251,8 +269,7 @@ async function buildMask(group, niiPath, header, ctDims, sampling, targetRoot) {
       const outY = cy - 1 - y;
       for (let x = 0; x < cx; x += 1) {
         const mxIndex = mapCoord(x, cx, mx);
-        const off = (mxIndex + myIndex * mx) * header.bytesPerVoxel;
-        const label = Math.round(readNumeric(slice, off, header));
+        const label = readMaskLabel(mxIndex, myIndex);
         axial[x + outY * cx] = label;
       }
     }
@@ -264,8 +281,7 @@ async function buildMask(group, niiPath, header, ctDims, sampling, targetRoot) {
       for (let xi = 0; xi < dx; xi += 1) {
         const x = xVals[xi];
         const mxIndex = mapCoord(x, cx, mx);
-        const off = (mxIndex + myIndex * mx) * header.bytesPerVoxel;
-        const label = Math.round(readNumeric(slice, off, header));
+        const label = readMaskLabel(mxIndex, myIndex);
         down[xi + yi * dx + zi * dx * dy] = label;
         accumulateStat(stats, label, x, y, czIndex);
       }
