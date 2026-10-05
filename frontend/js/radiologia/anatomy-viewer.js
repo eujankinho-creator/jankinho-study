@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";\nimport { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import {
   ANATOMY_ASSET_BASE,
   SYSTEMS,
@@ -39,7 +40,10 @@ export class AnatomyViewer {
   constructor(canvas, options) {
     this.canvas = canvas;
     this.options = options || {};
-    this.loader = new GLTFLoader();\n    this.dracoLoader = new DRACOLoader();\n    this.dracoLoader.setDecoderPath("/vendor/three/addons/libs/draco/gltf/");\n    this.loader.setDRACOLoader(this.dracoLoader);
+    this.loader = new GLTFLoader();
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderPath("/vendor/three/addons/libs/draco/gltf/");
+    this.loader.setDRACOLoader(this.dracoLoader);
 
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(DEFAULT_BG);
