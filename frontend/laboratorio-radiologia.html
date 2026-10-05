@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack10">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack12">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
@@ -157,13 +157,28 @@
         <button type="button" data-region="thigh"><strong>Coxa</strong><small>fêmur / músculos</small></button>
       </section>
 
-      <section class="atlas-tools">
-        <aside class="atlas-sidebar">
-          <div class="atlas-sidebar-head">
-            <span>ESTRUTURAS</span>
-            <strong>Selecione para localizar</strong>
+      <section class="structure-search-shell">
+        <button id="openStructureSearch" class="structure-search-launcher" type="button" aria-expanded="false" aria-controls="structureSearchPanel">
+          <span class="search-lens" aria-hidden="true"></span>
+          <span>Buscar estruturas</span>
+          <small>órgãos, ossos, músculos, vasos...</small>
+        </button>
+
+        <aside id="structureSearchPanel" class="structure-search-panel" hidden aria-label="Buscar anatomia">
+          <div class="structure-panel-head">
+            <div>
+              <span>CONSULTAR ANATOMIA</span>
+              <strong>Buscar estruturas</strong>
+              <small id="structureCount">carregando estruturas...</small>
+            </div>
+            <button id="closeStructureSearch" type="button">Fechar</button>
           </div>
-          <input id="structureSearch" class="structure-search" type="search" placeholder="Buscar: fígado, aorta, fêmur..." aria-label="Buscar estrutura">
+
+          <label class="structure-search-field">
+            <span class="search-lens" aria-hidden="true"></span>
+            <input id="structureSearch" type="search" placeholder="Cerebelo, fígado, aorta, vértebra..." aria-label="Buscar estrutura">
+          </label>
+
           <div id="structureList" class="structure-list"></div>
         </aside>
       </section>
@@ -192,7 +207,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack11"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack12"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
