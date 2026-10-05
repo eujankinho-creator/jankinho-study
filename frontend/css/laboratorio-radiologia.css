@@ -3124,3 +3124,90 @@
     grid-row: 2 !important;
   }
 }
+
+
+/* RADIOLOGIA ATLAS v8 · progresso de carregamento */
+.exam-loading-overlay {
+  position: absolute;
+  z-index: 20;
+  inset: 7px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(var(--rad-accent-rgb), .07), transparent 42%),
+    rgba(1, 4, 7, .82);
+  backdrop-filter: blur(8px);
+  transition: opacity .28s ease, visibility .28s ease;
+}
+
+.exam-loading-overlay.is-complete {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.exam-loading-card {
+  width: min(520px, calc(100% - 42px));
+  display: grid;
+  gap: 12px;
+  padding: 16px 17px;
+  border: 1px solid rgba(var(--rad-accent-rgb), .18);
+  border-radius: 14px;
+  background: rgba(6, 11, 16, .9);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+
+.exam-loading-head {
+  display: grid;
+  gap: 6px;
+}
+
+.exam-loading-head > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.exam-loading-head span {
+  color: rgba(225, 241, 250, .9);
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.exam-loading-head strong {
+  color: var(--rad-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.exam-loading-head small {
+  color: rgba(169, 192, 205, .62);
+  font-size: 7px;
+}
+
+.exam-progress-track {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255,255,255,.055);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+.exam-progress-bar {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(92, 184, 255, .78), rgba(124, 220, 255, .96));
+  box-shadow: 0 0 16px rgba(var(--rad-accent-rgb), .28);
+  transition: width .16s linear;
+}
+
+@media (max-width: 680px) {
+  .exam-loading-card {
+    width: calc(100% - 24px);
+    padding: 13px;
+  }
+}
