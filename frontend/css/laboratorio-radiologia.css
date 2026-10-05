@@ -884,12 +884,8 @@
   pointer-events:none;
   backdrop-filter:blur(7px);
   -webkit-backdrop-filter:blur(7px);
-  text-shadow:
-    0 0 8px color-mix(in srgb,var(--structure-color) 80%,transparent),
-    0 0 16px color-mix(in srgb,var(--structure-color) 46%,transparent);
-  box-shadow:
-    0 0 18px color-mix(in srgb,var(--structure-color) 20%,transparent),
-    inset 0 0 12px rgba(255,255,255,.018);
+  text-shadow:none;
+  box-shadow:inset 0 0 12px rgba(255,255,255,.018);
 }
 .selected-structure-badge[hidden]{
   display:none !important;
@@ -1043,7 +1039,7 @@
 }
 .selected-structure-summary.has-structure .selected-structure-copy>strong{
   color:var(--selected-structure-color) !important;
-  text-shadow:0 0 12px color-mix(in srgb,var(--selected-structure-color) 34%,transparent);
+  text-shadow:none !important;
 }
 .selected-structure-copy>small{
   max-width:460px;
@@ -1060,4 +1056,14 @@
   .selected-structure-copy>small{
     max-width:66vw;
   }
+}
+
+
+/* v-stack20 · sem glow nos nomes das estruturas */
+.selected-structure-badge,
+.selected-structure-summary.has-structure .selected-structure-copy>strong{
+  text-shadow:none !important;
+}
+.selected-structure-badge{
+  box-shadow:inset 0 0 12px rgba(255,255,255,.018) !important;
 }
