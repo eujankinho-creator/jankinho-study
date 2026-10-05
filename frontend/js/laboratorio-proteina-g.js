@@ -580,8 +580,14 @@ function applyStepVisual(stepIndex) {
 
   if(ligand){
     ligand.visible=stepIndex>=1 && stepIndex<=3;
-    if(stepIndex===1) ligand.position.set(0,3.5,0);
-    if(stepIndex>=2) ligand.position.set(.1,1.55,0);
+    const baseLigand = STATE.baseTransforms.get("ligand");
+    if (ligand.userData.experimental && baseLigand) {
+      ligand.position.copy(baseLigand.position);
+      if(stepIndex===1) ligand.position.y += 2.3;
+    } else {
+      if(stepIndex===1) ligand.position.set(0,3.5,0);
+      if(stepIndex>=2) ligand.position.set(.1,1.55,0);
+    }
   }
   if(gdp){
     gdp.visible=stepIndex<=4 || stepIndex>=10;
