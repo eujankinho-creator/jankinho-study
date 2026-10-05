@@ -677,7 +677,7 @@ async function switchPathway(pathway) {
   STATE.pathway = pathway;
   STATE.stepIndex = 0;
 
-  $(".gp-path-option").forEach((item) => item.classList.toggle("is-active",item.dataset.pathway === pathway));
+  $$(".gp-path-option").forEach((item) => item.classList.toggle("is-active",item.dataset.pathway === pathway));
 
   if (pathway !== "gs") {
     if ($("loadingTitle")) $("loadingTitle").textContent = "Carregando estrutura " + (PATHWAYS[pathway].pdbId || "");
@@ -2084,7 +2084,7 @@ function bindUi(){
 
   $$("[data-mode]").forEach((btn)=>btn.addEventListener("click",()=>setMode(btn.dataset.mode)));
   $$("[data-camera-preset]").forEach((btn)=>btn.addEventListener("click",()=>animateCamera(btn.dataset.cameraPreset)));
-  $("[data-pathway]").forEach((btn)=>btn.addEventListener("click",()=>switchPathway(btn.dataset.pathway)));
+  $$("[data-pathway]").forEach((btn)=>btn.addEventListener("click",()=>switchPathway(btn.dataset.pathway)));
 }
 
 function renderLoop(now){
