@@ -47,7 +47,10 @@ const state = {
     planes: {},
     raycaster: new THREE.Raycaster(),
     pointer: new THREE.Vector2(),
-    frame: 0
+    frame: 0,
+    renderPending: false,
+    dampingUntil: 0,
+    anatomicalFramed: false
   }
 };
 
@@ -1381,6 +1384,7 @@ async function replaceProxyWithAnatomicalMesh(structure) {
     old.material?.dispose?.();
   }
   update3DSelection();
+  request3DRender();
   return true;
 }
 
@@ -1405,13 +1409,71 @@ async function upgradeAnatomy3DMeshes() {
       }catch(error){
         console.warn("[tomografia-3d] falha na malha",structure.id,error);
       }
-      if(completed>=6) $("anatomy3dLoading")?.classList.add("done");
+      if(completed>=6) {
+        $("anatomy3dLoading")?.classList.add("done");
+        if(!state.anatomy3d.anatomicalFramed) frameAnatomicalPosition();
+      }
       await new Promise((resolve)=>setTimeout(resolve,0));
     }
   };
 
   await Promise.all(Array.from({length:workers},runWorker));
   $("anatomy3dLoading")?.classList.add("done");
+  frameAnatomicalPosition();
+}
+
+function request3DRender(duration=0) {
+  const a=state.anatomy3d;
+  if(!a.renderer||!a.scene||!a.camera) return;
+  if(duration>0) a.dampingUntil=Math.max(a.dampingUntil,performance.now()+duration);
+  if(a.renderPending) return;
+  a.renderPending=true;
+
+  const draw=(now)=>{
+    a.renderPending=false;
+    if(!a.renderer||!a.scene||!a.camera) return;
+    const moving=Boolean(a.controls?.update?.());
+    a.renderer.render(a.scene,a.camera);
+    if(moving||now<a.dampingUntil){
+      a.renderPending=true;
+      a.frame=requestAnimationFrame(draw);
+    }
+  };
+  a.frame=requestAnimationFrame(draw);
+}
+
+function frameAnatomicalPosition() {
+  const root=state.anatomy3d.root;
+  const camera=state.anatomy3d.camera;
+  const controls=state.anatomy3d.controls;
+  if(!root||!camera||!controls) return;
+
+  const box=new THREE.Box3().setFromObject(root);
+  if(box.isEmpty()) {
+    camera.position.set(0,-.2,18);
+    controls.target.set(0,-.5,0);
+    controls.update();
+    request3DRender(260);
+    return;
+  }
+
+  const size=box.getSize(new THREE.Vector3());
+  const center=box.getCenter(new THREE.Vector3());
+  const vertical=Math.max(size.y,MODEL_AXES.height*.78);
+  const horizontal=Math.max(size.x,MODEL_AXES.width*.72);
+  const fov=THREE.MathUtils.degToRad(camera.fov);
+  const distanceByHeight=(vertical*.56)/Math.tan(fov*.5);
+  const distanceByWidth=(horizontal*.64)/(Math.tan(fov*.5)*Math.max(.7,camera.aspect));
+  const distance=Math.max(13.5,distanceByHeight,distanceByWidth);
+
+  // Posição anatômica: paciente ereto e visualização frontal, sem rotação oblíqua.
+  controls.target.set(center.x,center.y-.15,center.z);
+  camera.position.set(center.x,center.y-.15,center.z+distance);
+  camera.up.set(0,1,0);
+  camera.lookAt(controls.target);
+  controls.update();
+  state.anatomy3d.anatomicalFramed=true;
+  request3DRender(320);
 }
 
 function update3DSelection() {
@@ -1424,6 +1486,7 @@ function update3DSelection() {
     mesh.material.emissiveIntensity=active?.18:0;
     mesh.renderOrder=active?4:1;
   }
+  request3DRender();
 }
 
 function update3DPlanes() {
@@ -1447,22 +1510,23 @@ function update3DPlanes() {
     mesh.material.opacity=plane===active?.24:.09;
   });
   if($("anatomy3dCoord")) $("anatomy3dCoord").textContent="X "+x+" · Y "+y+" · Z "+z;
+  request3DRender();
 }
 
 function reset3DCamera() {
-  const camera=state.anatomy3d.camera;
-  const controls=state.anatomy3d.controls;
-  if(!camera||!controls) return;
-  camera.position.set(11.5,3.2,15.5);
-  controls.target.set(0,-.6,0);
-  controls.update();
+  frameAnatomicalPosition();
 }
 
 function initAnatomy3D() {
   const host=$("anatomy3dHost");
   if(!host||!state.manifest) return;
-  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.45));
+  const renderer=new THREE.WebGLRenderer({
+    antialias:devicePixelRatio<=1.25,
+    alpha:true,
+    powerPreference:"high-performance",
+    precision:"mediump"
+  });
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.1));
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.setSize(host.clientWidth,host.clientHeight,false);
   host.prepend(renderer.domElement);
@@ -1471,11 +1535,12 @@ function initAnatomy3D() {
   const camera=new THREE.PerspectiveCamera(34,host.clientWidth/Math.max(1,host.clientHeight),.05,80);
   const controls=new OrbitControls(camera,renderer.domElement);
   controls.enableDamping=true;
-  controls.dampingFactor=.075;
+  controls.dampingFactor=.11;
   controls.minDistance=7;
-  controls.maxDistance=28;
-  controls.rotateSpeed=.55;
-  controls.zoomSpeed=.7;
+  controls.maxDistance=30;
+  controls.rotateSpeed=.48;
+  controls.zoomSpeed=.66;
+  controls.panSpeed=.55;
 
   state.anatomy3d.host=host;
   state.anatomy3d.scene=scene;
@@ -1516,7 +1581,9 @@ function initAnatomy3D() {
 
   state.anatomy3d.planes={axial,coronal,sagittal};
   scene.add(axial,coronal,sagittal);
-  reset3DCamera();
+  camera.position.set(0,-.2,18);
+  controls.target.set(0,-.5,0);
+  controls.update();
   update3DPlanes();
   update3DSelection();
 
@@ -1541,14 +1608,17 @@ function initAnatomy3D() {
     camera.aspect=width/height;
     camera.updateProjectionMatrix();
   };
-  new ResizeObserver(resize).observe(host);
+  new ResizeObserver(()=>{
+    resize();
+    request3DRender();
+  }).observe(host);
 
-  const render=()=>{
-    state.anatomy3d.frame=requestAnimationFrame(render);
-    controls.update();
-    renderer.render(scene,camera);
-  };
-  render();
+  controls.addEventListener("start",()=>request3DRender(420));
+  controls.addEventListener("change",()=>request3DRender(180));
+  controls.addEventListener("end",()=>request3DRender(260));
+
+  // Render sob demanda: evita um loop permanente de 60 FPS quando a anatomia está parada.
+  request3DRender();
   void upgradeAnatomy3DMeshes();
 }
 
