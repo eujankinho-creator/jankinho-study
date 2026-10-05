@@ -215,39 +215,59 @@ async function buildCt(ctPath, header, planeDirs) {
   };
 }
 
-async function buildMask(group, niiPath, header, sampling, targetRoot) {
-  const [nx, ny, nz] = header.dims;
+async function buildMask(group, niiPath, header, ctDims, sampling, targetRoot) {
+  const [mx, my, mz] = header.dims;
+  const [cx, cy, cz] = ctDims;
   const { xVals, yVals, zVals } = sampling;
   const dx = xVals.length, dy = yVals.length, dz = zVals.length;
   const down = new Uint8Array(dx * dy * dz);
   const stats = {};
   const fd = await open(niiPath, "r");
-  const sliceBytes = nx * ny * header.bytesPerVoxel;
+  const sliceBytes = mx * my * header.bytesPerVoxel;
   const slice = Buffer.alloc(sliceBytes);
 
-  for (let zi = 0; zi < zVals.length; zi += 1) {
-    const z = zVals[zi];
-    await fd.read(slice, 0, sliceBytes, header.voxOffset + z * sliceBytes);
-    const axial = Buffer.alloc(nx * ny);
+  const mapCoord = (value, fromSize, toSize) => {
+    if (fromSize <= 1 || toSize <= 1) return 0;
+    return clamp(Math.round((value / (fromSize - 1)) * (toSize - 1)), 0, toSize - 1);
+  };
 
-    for (let y = 0; y < ny; y += 1) {
-      const outY = ny - 1 - y;
-      for (let x = 0; x < nx; x += 1) {
-        const off = (x + y * nx) * header.bytesPerVoxel;
+  console.log(
+    "[radiology-atlas] máscara",
+    group.id,
+    "dims",
+    mx + "x" + my + "x" + mz,
+    "-> grade CT",
+    cx + "x" + cy + "x" + cz
+  );
+
+  for (let zi = 0; zi < zVals.length; zi += 1) {
+    const czIndex = zVals[zi];
+    const mzIndex = mapCoord(czIndex, cz, mz);
+    await fd.read(slice, 0, sliceBytes, header.voxOffset + mzIndex * sliceBytes);
+
+    const axial = Buffer.alloc(cx * cy);
+    for (let y = 0; y < cy; y += 1) {
+      const myIndex = mapCoord(y, cy, my);
+      const outY = cy - 1 - y;
+      for (let x = 0; x < cx; x += 1) {
+        const mxIndex = mapCoord(x, cx, mx);
+        const off = (mxIndex + myIndex * mx) * header.bytesPerVoxel;
         const label = Math.round(readNumeric(slice, off, header));
-        axial[x + outY * nx] = label;
+        axial[x + outY * cx] = label;
       }
     }
-    await encodeGray(axial, nx, ny, path.join(targetRoot, group.id, "axial", pad(zi) + ".png"), "mask");
+    await encodeGray(axial, cx, cy, path.join(targetRoot, group.id, "axial", pad(zi) + ".png"), "mask");
 
     for (let yi = 0; yi < dy; yi += 1) {
       const y = yVals[yi];
+      const myIndex = mapCoord(y, cy, my);
       for (let xi = 0; xi < dx; xi += 1) {
         const x = xVals[xi];
-        const off = (x + y * nx) * header.bytesPerVoxel;
+        const mxIndex = mapCoord(x, cx, mx);
+        const off = (mxIndex + myIndex * mx) * header.bytesPerVoxel;
         const label = Math.round(readNumeric(slice, off, header));
         down[xi + yi * dx + zi * dx * dy] = label;
-        accumulateStat(stats, label, x, y, z);
+        accumulateStat(stats, label, x, y, czIndex);
       }
     }
   }
@@ -317,10 +337,7 @@ try {
     await downloadToFile(HF + group.file + "?download=true", gz, group.id);
     await inflateGzip(gz, nii);
     const header = await readHeader(nii);
-    if (header.dims.join("x") !== ctHeader.dims.join("x")) {
-      throw new Error("Máscara " + group.id + " não corresponde ao CT");
-    }
-    structures[group.id] = await buildMask(group, nii, header, sampling, maskRoot);
+    structures[group.id] = await buildMask(group, nii, header, ctHeader.dims, sampling, maskRoot);
     await rm(gz, { force: true });
     await rm(nii, { force: true });
   }
