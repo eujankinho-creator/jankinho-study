@@ -839,3 +839,24 @@
 .radiology-lab-view b{
   letter-spacing:inherit;
 }
+
+
+/* v-stack16 · busca semantica */
+.structure-search-empty{
+  grid-column:1 / -1;
+  display:grid;
+  gap:4px;
+  padding:16px;
+  border:1px dashed var(--theme-border);
+  border-radius:12px;
+  background:var(--theme-surface-soft);
+}
+.structure-search-empty strong{
+  color:var(--theme-text);
+  font-size:11px;
+}
+.structure-search-empty small{
+  color:var(--theme-text-muted);
+  font-size:9px;
+  line-height:1.45;
+}
