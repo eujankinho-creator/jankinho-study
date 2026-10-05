@@ -1,4 +1,4 @@
-import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas4";
+import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas5";
 import {
   STRUCTURES,
   SOURCE_REGISTRY,
@@ -6,7 +6,7 @@ import {
   PLANE_CONFIG,
   REGION_TARGETS,
   getStructure
-} from "./radiologia/data.js?v=20261005-atlas4";
+} from "./radiologia/data.js?v=20261005-atlas5";
 
 const $ = (id) => document.getElementById(id);
 const state = {
@@ -57,6 +57,51 @@ function showBootError(message) {
 
 function structureAvailable(id) {
   return state.availableIds.has(id);
+}
+
+async function ensureStructures(radiology) {
+  if (radiology.segmentationsLoaded) return true;
+
+  const button = $("segmentationToggle");
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Carregando estruturas…";
+  }
+  if ($("voxelReadout")) {
+    $("voxelReadout").textContent = "CT pronto · carregando estruturas sob demanda…";
+  }
+
+  try {
+    const ok = await radiology.ensureSegmentations();
+    state.availableIds = new Set();
+
+    if (button) {
+      button.disabled = false;
+      button.classList.toggle("active", ok);
+      button.setAttribute("aria-pressed", ok ? "true" : "false");
+      button.textContent = ok ? "Estruturas ligadas" : "Carregar estruturas";
+    }
+
+    if ($("voxelReadout")) {
+      $("voxelReadout").textContent = ok
+        ? "CT + estruturas prontos"
+        : "CT pronto · estruturas indisponíveis";
+    }
+
+    createStructureList(radiology);
+    updateSlicePresence(radiology);
+    return ok;
+  } catch (error) {
+    console.error(error);
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Tentar carregar estruturas";
+    }
+    if ($("voxelReadout")) {
+      $("voxelReadout").textContent = "CT pronto · falha ao carregar estruturas";
+    }
+    return false;
+  }
 }
 
 function updatePlaneButtons() {
@@ -150,9 +195,16 @@ function syncSliceUi(radiology) {
   updateSlicePresence(radiology);
 }
 
-function selectStructure(id, radiology, moveToStructure) {
+async function selectStructure(id, radiology, moveToStructure) {
   const structure = getStructure(id);
-  if (!structure || !structureAvailable(id)) return;
+  if (!structure) return;
+
+  if (!radiology.segmentationsLoaded) {
+    const ok = await ensureStructures(radiology);
+    if (!ok) return;
+  }
+
+  if (!structureAvailable(id)) return;
 
   state.selectedId = id;
   radiology.selectLabel(structure.label);
@@ -166,7 +218,8 @@ function selectStructure(id, radiology, moveToStructure) {
   syncSliceUi(radiology);
 
   if ($("selectedRadiologyName")) {
-    $("selectedRadiologyName").textContent = structure.name + " · marcada nos três planos";
+    $("selectedRadiologyName").textContent =
+      structure.name + " · " + structure.region + " · destacada nos três planos";
   }
   announce(structure.name + " selecionada");
 }
@@ -185,7 +238,6 @@ function createStructureList(radiology) {
 
   const rows = [];
   STRUCTURES.forEach((structure) => {
-    if (!structureAvailable(structure.id)) return;
 
     const row = document.createElement("div");
     row.className = "structure-row";
@@ -199,14 +251,18 @@ function createStructureList(radiology) {
       '<span class="structure-swatch" style="--structure-color:' + structure.color + '"></span>' +
       '<span class="structure-name"><strong>' + structure.name + '</strong><small>' +
       structure.region + " · " + structure.englishName + "</small></span>";
-    select.addEventListener("click", () => selectStructure(structure.id, radiology, true));
+    select.addEventListener("click", () => { void selectStructure(structure.id, radiology, true); });
 
     const visibility = document.createElement("button");
     visibility.type = "button";
     visibility.className = "structure-visibility is-visible";
     visibility.setAttribute("aria-label", "Mostrar ou ocultar " + structure.name);
     visibility.innerHTML = "<span></span>";
-    visibility.addEventListener("click", () => {
+    visibility.addEventListener("click", async () => {
+      if (!radiology.segmentationsLoaded) {
+        const ok = await ensureStructures(radiology);
+        if (!ok) return;
+      }
       const next = !state.visibility.get(structure.id);
       state.visibility.set(structure.id, next);
       radiology.setStructureVisibility(structure.label, next);
@@ -287,7 +343,7 @@ function bindRegionControls(radiology) {
       }
 
       const id = REGION_TARGETS[region];
-      if (id && structureAvailable(id)) selectStructure(id, radiology, true);
+      if (id) void selectStructure(id, radiology, true);
     });
   });
 }
@@ -326,9 +382,15 @@ function bindControls(radiology) {
   $("radZoomOut")?.addEventListener("click", () => radiology.zoomBy(-0.12));
   $("radReset")?.addEventListener("click", () => radiology.resetView());
   $("mprView")?.addEventListener("click", () => setPlane("axial", radiology));
-  $("segmentationToggle")?.addEventListener("click", function () {
+  $("segmentationToggle")?.addEventListener("click", async function () {
+    if (!radiology.segmentationsLoaded) {
+      await ensureStructures(radiology);
+      return;
+    }
+
     const active = this.classList.toggle("active");
     this.setAttribute("aria-pressed", active ? "true" : "false");
+    this.textContent = active ? "Estruturas ligadas" : "Estruturas ocultas";
     radiology.setSegmentationVisible(active);
   });
 
@@ -351,7 +413,7 @@ async function boot() {
         if ($("studySlices")) $("studySlices").textContent = dims.join("×") + " voxels";
       },
       onBaseViewsReady: () => {
-        if ($("voxelReadout")) $("voxelReadout").textContent = "3 vistas prontas · carregando mapas anatômicos…";
+        if ($("voxelReadout")) $("voxelReadout").textContent = "CT pronto · estruturas sob demanda";
       },
       onLocationChange: (payload) => {
         if (!payload?.frac || syncing) return;
@@ -370,6 +432,13 @@ async function boot() {
       },
       onStructureAtLocation: (structure) => {
         if (structure && structureAvailable(structure.id)) selectStructure(structure.id, radiology, false);
+      },
+      onSegmentationsReady: ({ availableLabels }) => {
+        state.availableIds = new Set(
+          STRUCTURES.filter((s) => availableLabels.includes(s.label)).map((s) => s.id)
+        );
+        createStructureList(radiology);
+        updateStudyUi(radiology);
       },
       onReady: () => updateStudyUi(radiology),
       onZoomChange: (zoom) => {
@@ -398,8 +467,9 @@ async function boot() {
   updateStructureInfo(radiology);
   syncSliceUi(radiology);
 
-  const initial = ["liver", "myocardium", "brain", "left_femur"].find((id) => structureAvailable(id));
-  if (initial) selectStructure(initial, radiology, true);
+  if ($("selectedRadiologyName")) {
+    $("selectedRadiologyName").textContent = "CT pronto · clique em uma estrutura para carregar e identificar";
+  }
 }
 
 loadUser().catch(console.error);
