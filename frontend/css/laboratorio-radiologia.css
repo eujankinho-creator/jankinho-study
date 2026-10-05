@@ -1432,3 +1432,167 @@
   .overview-toggle{height:28px;padding:0 9px}
   .anatomy3d-host{min-height:390px}
 }
+
+
+/* v-stack27 · performance visual + tema global no 3D */
+.anatomy3d-panel{
+  background:
+    radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--theme-accent) 7%,transparent),transparent 46%),
+    linear-gradient(180deg,var(--theme-surface-strong,var(--theme-surface)),var(--theme-bg)) !important;
+  border-color:var(--theme-border) !important;
+  box-shadow:var(--theme-panel-shadow,0 16px 45px rgba(0,0,0,.32));
+}
+.anatomy3d-head,
+.anatomy3d-category-tabs,
+.anatomy3d-slice,
+.anatomy3d-separation,
+.anatomy3d-foot{
+  border-color:var(--theme-border) !important;
+}
+.anatomy3d-host{
+  background:
+    radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--theme-accent) 6%,transparent),transparent 48%),
+    color-mix(in srgb,var(--theme-bg) 96%,#000 4%) !important;
+}
+.anatomy3d-loading{
+  background:color-mix(in srgb,var(--theme-bg) 94%,transparent) !important;
+}
+.anatomy3d-loading strong{
+  color:var(--theme-text) !important;
+}
+.anatomy3d-loading small{
+  color:var(--theme-text-muted) !important;
+}
+.anatomy3d-loading span,
+.anatomy3d-head span{
+  color:var(--theme-accent-2) !important;
+}
+.anatomy3d-plane-tabs button,
+.anatomy3d-category-tabs button,
+.anatomy3d-actions button,
+.anatomy3d-separation button,
+.overview-toggle{
+  background:var(--theme-chip-bg) !important;
+  border-color:var(--theme-chip-border) !important;
+  color:var(--theme-text-soft) !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.anatomy3d-plane-tabs button:hover,
+.anatomy3d-category-tabs button:hover,
+.anatomy3d-actions button:hover:not(:disabled),
+.anatomy3d-separation button:hover:not(:disabled),
+.overview-toggle:hover{
+  background:var(--theme-hover-bg) !important;
+  border-color:var(--theme-hover-border) !important;
+  color:var(--theme-text) !important;
+}
+.anatomy3d-plane-tabs button.active,
+.anatomy3d-category-tabs button.active,
+.anatomy3d-actions button.active,
+.overview-toggle.active{
+  background:var(--theme-gradient-soft) !important;
+  border-color:var(--theme-hover-border) !important;
+  color:var(--theme-text) !important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-accent) 8%,transparent) !important;
+}
+.anatomy3d-plane-tabs button i{
+  background:var(--theme-accent) !important;
+  box-shadow:none !important;
+}
+.anatomy3d-plane-tabs .coronal i{
+  background:var(--theme-accent-2) !important;
+}
+.anatomy3d-plane-tabs .sagittal i{
+  background:color-mix(in srgb,var(--theme-accent) 50%,var(--theme-text) 50%) !important;
+}
+.anatomy3d-selected-card{
+  border-left-color:var(--theme-accent) !important;
+  background:color-mix(in srgb,var(--theme-surface-strong,var(--theme-surface)) 92%,transparent) !important;
+  backdrop-filter:blur(8px);
+}
+.anatomy3d-selected-card span,
+.anatomy3d-slice>div,
+.anatomy3d-separation>div,
+.anatomy3d-foot{
+  color:var(--theme-text-muted) !important;
+}
+.anatomy3d-selected-card strong,
+.anatomy3d-slice b,
+.anatomy3d-slice em,
+.anatomy3d-foot strong{
+  color:var(--theme-text) !important;
+}
+.anatomy3d-slice input,
+.anatomy3d-separation input{
+  appearance:none;
+  -webkit-appearance:none;
+  height:18px;
+  background:transparent;
+  cursor:pointer;
+}
+.anatomy3d-slice input::-webkit-slider-runnable-track,
+.anatomy3d-separation input::-webkit-slider-runnable-track{
+  height:4px;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--theme-text) 14%,transparent);
+  border:1px solid var(--theme-border);
+}
+.anatomy3d-slice input::-webkit-slider-thumb,
+.anatomy3d-separation input::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:13px;
+  height:13px;
+  margin-top:-5px;
+  border:2px solid var(--theme-bg);
+  border-radius:50%;
+  background:var(--theme-accent);
+  box-shadow:0 0 0 1px var(--theme-hover-border);
+}
+.anatomy3d-slice input::-moz-range-track,
+.anatomy3d-separation input::-moz-range-track{
+  height:4px;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--theme-text) 14%,transparent);
+  border:1px solid var(--theme-border);
+}
+.anatomy3d-slice input::-moz-range-thumb,
+.anatomy3d-separation input::-moz-range-thumb{
+  width:11px;
+  height:11px;
+  border:2px solid var(--theme-bg);
+  border-radius:50%;
+  background:var(--theme-accent);
+  box-shadow:0 0 0 1px var(--theme-hover-border);
+}
+
+/* A logo lateral acompanha qualquer tema e não recebe caixa/glow fixo. */
+.radiology-lab-view .sidebar .logo-box.cortex-logo{
+  width:40px !important;
+  height:40px !important;
+  display:grid !important;
+  place-items:center !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+.radiology-lab-view .sidebar .logo-box.cortex-logo::before,
+.radiology-lab-view .sidebar .logo-box.cortex-logo::after{
+  display:none !important;
+  content:none !important;
+}
+.radiology-lab-view .sidebar .cortex-logo-core{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+}
+.radiology-lab-view .sidebar .cortex-brain-logo{
+  width:31px !important;
+  height:31px !important;
+  display:block;
+  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--theme-accent) 42%,transparent)) !important;
+}

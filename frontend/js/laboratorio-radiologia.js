@@ -59,8 +59,10 @@ const state = {
     pointerStartX: 0,
     pointerStartY: 0,
     pointerMoved: false,
-    interactionPixelRatio: .72,
-    idlePixelRatio: Math.min(window.devicePixelRatio || 1, 1)
+    interactionPixelRatio: .55,
+    idlePixelRatio: Math.min(window.devicePixelRatio || 1, .95),
+    interactionActive: false,
+    lastRenderAt: 0
   }
 };
 
@@ -1438,6 +1440,57 @@ async function upgradeAnatomy3DMeshes() {
   frameAnatomicalPosition();
 }
 
+function set3DInteractionQuality(active) {
+  const a=state.anatomy3d;
+  if(!a.renderer) return;
+  a.interactionActive=active;
+
+  for(const mesh of a.meshes.values()){
+    const material=mesh.material;
+    if(!material) continue;
+
+    if(active){
+      if(!material.userData.cortexInteractionBackup){
+        material.userData.cortexInteractionBackup={
+          transparent:material.transparent,
+          opacity:material.opacity,
+          depthWrite:material.depthWrite,
+          clippingPlanes:material.clippingPlanes
+        };
+      }
+      // Transparência de dezenas de malhas sobrepostas é o principal custo da cena.
+      // Durante o gesto, prioriza profundidade/opacidade para reduzir overdraw.
+      material.transparent=false;
+      material.opacity=1;
+      material.depthWrite=true;
+      material.clippingPlanes=[];
+    }else{
+      const backup=material.userData.cortexInteractionBackup;
+      if(backup){
+        material.transparent=backup.transparent;
+        material.opacity=backup.opacity;
+        material.depthWrite=backup.depthWrite;
+        material.clippingPlanes=backup.clippingPlanes || [];
+        delete material.userData.cortexInteractionBackup;
+      }
+    }
+    material.needsUpdate=true;
+  }
+
+  Object.values(a.planes).forEach((plane)=>{
+    if(plane) plane.visible=!active;
+  });
+
+  a.renderer.setPixelRatio(active?a.interactionPixelRatio:a.idlePixelRatio);
+  if(a.host) a.renderer.setSize(a.host.clientWidth,Math.max(1,a.host.clientHeight),false);
+
+  if(!active){
+    update3DClipping();
+    update3DSelection();
+  }
+  request3DRender(active?90:180);
+}
+
 function request3DRender(duration=0) {
   const a=state.anatomy3d;
   if(!a.renderer||!a.scene||!a.camera) return;
@@ -1448,8 +1501,18 @@ function request3DRender(duration=0) {
   const draw=(now)=>{
     a.renderPending=false;
     if(!a.renderer||!a.scene||!a.camera) return;
+
+    const minFrameMs=a.interactionActive?20:0;
+    if(minFrameMs && now-a.lastRenderAt<minFrameMs){
+      a.renderPending=true;
+      a.frame=requestAnimationFrame(draw);
+      return;
+    }
+
     const moving=Boolean(a.controls?.update?.());
     a.renderer.render(a.scene,a.camera);
+    a.lastRenderAt=now;
+
     if(moving||now<a.dampingUntil){
       a.renderPending=true;
       a.frame=requestAnimationFrame(draw);
@@ -1653,6 +1716,7 @@ function bindAnatomy3DControls() {
 }
 
 function update3DSelection() {
+  if(state.anatomy3d.interactionActive) return;
   const selected=state.selectedId;
   const selectedStructure=getStructure(selected);
   if($("anatomy3dSelectedName")){
@@ -1830,19 +1894,11 @@ function initAnatomy3D() {
   }).observe(host);
 
   controls.addEventListener("start",()=>{
-    // Durante rotação/zoom reduzimos apenas a resolução interna, não a geometria.
-    // Isso torna o arraste muito mais fluido e restaura nitidez ao soltar.
-    if(renderer.getPixelRatio()>state.anatomy3d.interactionPixelRatio){
-      renderer.setPixelRatio(state.anatomy3d.interactionPixelRatio);
-      renderer.setSize(host.clientWidth,Math.max(1,host.clientHeight),false);
-    }
-    request3DRender(120);
+    set3DInteractionQuality(true);
   });
-  controls.addEventListener("change",()=>request3DRender(70));
+  controls.addEventListener("change",()=>request3DRender(55));
   controls.addEventListener("end",()=>{
-    renderer.setPixelRatio(state.anatomy3d.idlePixelRatio);
-    renderer.setSize(host.clientWidth,Math.max(1,host.clientHeight),false);
-    request3DRender(180);
+    set3DInteractionQuality(false);
   });
 
   // Render sob demanda: evita um loop permanente de 60 FPS quando a anatomia está parada.
