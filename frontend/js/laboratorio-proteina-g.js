@@ -48,7 +48,9 @@ const STATE = {
   manualIsolationId: null,
   opacityMode: null,
   opacityRestoreRequested: false,
-  lastOcclusionUpdate: 0
+  lastOcclusionUpdate: 0,
+  compactPerf: window.matchMedia("(max-width: 900px), (pointer: coarse)").matches,
+  lastRenderAt: 0
 };
 
 const CHAIN_MAP = {
@@ -2174,8 +2176,14 @@ function createScene(){
   STATE.host=host;
 
   const canvas=document.createElement("canvas");
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:"high-performance"});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
+  const renderer=new THREE.WebGLRenderer({
+    canvas,
+    antialias:!STATE.compactPerf,
+    alpha:true,
+    powerPreference:"high-performance",
+    precision:STATE.compactPerf?"mediump":"highp"
+  });
+  renderer.setPixelRatio(Math.min(devicePixelRatio,STATE.compactPerf?1:1.45));
   renderer.setSize(host.clientWidth,host.clientHeight,false);
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -2272,10 +2280,13 @@ function bindUi(){
 
 function renderLoop(now){
   requestAnimationFrame(renderLoop);
+  if(document.hidden) return;
+  if(STATE.compactPerf && now-STATE.lastRenderAt<30) return;
+  STATE.lastRenderAt=now;
   updateCameraTween(now);
   updateVisualTweens(now);
   STATE.controls?.update();
-  refreshGuidedOcclusion(now);
+  if(!STATE.compactPerf || now-STATE.lastOcclusionUpdate>140) refreshGuidedOcclusion(now);
 
   if(STATE.loaded){
     const t=STATE.renderClock.getElapsedTime();

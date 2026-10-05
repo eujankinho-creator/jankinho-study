@@ -59,12 +59,12 @@ const state = {
     pointerStartX: 0,
     pointerStartY: 0,
     pointerMoved: false,
-    interactionPixelRatio: .55,
-    idlePixelRatio: Math.min(window.devicePixelRatio || 1, .95),
+    interactionPixelRatio: window.matchMedia("(max-width: 900px), (pointer: coarse)").matches ? .42 : .55,
+    idlePixelRatio: Math.min(window.devicePixelRatio || 1, window.matchMedia("(max-width: 900px), (pointer: coarse)").matches ? .72 : .95),
     interactionActive: false,
     lastRenderAt: 0,
     focusQualityActive: false,
-    focusPixelRatio: Math.min(window.devicePixelRatio || 1, 1.15)
+    focusPixelRatio: Math.min(window.devicePixelRatio || 1, window.matchMedia("(max-width: 900px), (pointer: coarse)").matches ? .9 : 1.15)
   }
 };
 
@@ -1420,7 +1420,8 @@ async function upgradeAnatomy3DMeshes() {
 
   let completed=0;
   let cursor=0;
-  const workers=Math.min(4,structures.length);
+  const compactPerf=window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+  const workers=Math.min(compactPerf?2:4,structures.length);
 
   const runWorker=async()=>{
     while(cursor<structures.length){

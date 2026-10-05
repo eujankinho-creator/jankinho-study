@@ -1,3 +1,6 @@
+const ECG_COMPACT_PERF = window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+let ECG_LAST_RENDER_MS = 0;
+let ECG_LABEL_TOGGLE = false;
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -1125,12 +1128,12 @@ function initHeart3D() {
   camera.position.set(0, 0.15, 7.4);
 
   renderer = new THREE.WebGLRenderer({
-    antialias: true,
+    antialias: !ECG_COMPACT_PERF,
     alpha: true,
     powerPreference: "high-performance"
   });
   renderer.domElement.className = "heart-webgl-layer";
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, ECG_COMPACT_PERF ? 1 : 1.6));
   renderer.setClearColor(0x000000, 0);
   renderer.localClippingEnabled = true;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -1715,12 +1718,16 @@ function stopHeartRenderLoop() {
   }
 }
 
-function animateThree() {
+function animateThree(now) {
   if (!heartRenderRunning || !simulatorIsVisible()) {
     stopHeartRenderLoop();
     return;
   }
-
+  if (ECG_COMPACT_PERF && now - ECG_LAST_RENDER_MS < 30) {
+    animationHandle = requestAnimationFrame(animateThree);
+    return;
+  }
+  ECG_LAST_RENDER_MS = now;
   const delta = threeClock.getDelta();
 
   if (
@@ -1738,7 +1745,8 @@ function animateThree() {
 
   renderer.render(scene, camera);
   if (labelRenderer) {
-    labelRenderer.render(scene, camera);
+    ECG_LABEL_TOGGLE = !ECG_LABEL_TOGGLE;
+    if (!ECG_COMPACT_PERF || ECG_LABEL_TOGGLE) labelRenderer.render(scene, camera);
   }
 
   animationHandle = requestAnimationFrame(animateThree);

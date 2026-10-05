@@ -340,7 +340,8 @@
 
     var width=Math.max(1,stage.clientWidth);
     var height=Math.max(1,stage.clientHeight);
-    var dpr=Math.min(1.25,window.devicePixelRatio||1);
+    var compactPerf=window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+    var dpr=Math.min(compactPerf?0.9:1.25,window.devicePixelRatio||1);
     var pixelWidth=Math.max(1,Math.round(width*dpr));
     var pixelHeight=Math.max(1,Math.round(height*dpr));
 
@@ -4781,7 +4782,10 @@
 
     ensureSceneCache(now);
     var visibleCount=cachedMolecules.length;
-    var targetFrameMs=visibleCount<=150?16.5:visibleCount<=260?19:visibleCount<=420?23:28;
+    var compactPerf=window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+    var targetFrameMs=compactPerf
+      ? (visibleCount<=150?25:visibleCount<=260?30:visibleCount<=420?36:42)
+      : (visibleCount<=150?16.5:visibleCount<=260?19:visibleCount<=420?23:28);
     var elapsed=now-lastPhysicsTime;
     if(elapsed<targetFrameMs)return;
 

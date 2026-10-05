@@ -1136,3 +1136,39 @@ body.cortex-mobile-menu-open {
 }
 
 /* CORTEX LAB NEW GLOW END */
+
+
+/* CORTEX LABS MOBILE PERFORMANCE V1 */
+@media (max-width: 900px), (pointer: coarse) {
+  body:is(.lab-hub-view,.radiology-lab-view,.gp-lab-view,.ecg-lab-view,.cell-lab-view,.membrane-lab-view) * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body:is(.lab-hub-view,.radiology-lab-view,.gp-lab-view,.ecg-lab-view,.cell-lab-view,.membrane-lab-view)
+  :is(.viewer-card,.anatomy3d-panel,.gp-viewer-shell,.gp-study-panel,.ecg-card,.lab-card,.membrane-stage,.transport-library,.control-panel,.selected-structure-summary,.structure-search-panel) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  body:is(.lab-hub-view,.radiology-lab-view,.gp-lab-view,.ecg-lab-view,.cell-lab-view,.membrane-lab-view)
+  :is(button,input,select,.menu-item,.structure-row) {
+    transition-duration: .10s !important;
+  }
+
+  body:is(.lab-hub-view,.radiology-lab-view,.gp-lab-view,.ecg-lab-view,.cell-lab-view,.membrane-lab-view)
+  :is(.anatomy3d-host,#gpViewerHost,#heart3dHost,.membrane-stage) {
+    contain: layout paint style;
+  }
+
+  body:is(.lab-hub-view,.radiology-lab-view,.gp-lab-view,.ecg-lab-view,.cell-lab-view,.membrane-lab-view)
+  :is(.anatomy3d-plane-tabs button:hover,.anatomy3d-category-tabs button:hover,.anatomy3d-actions button:hover,.gp-tool-button:hover) {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .radiology-lab-view .anatomy3d-host { min-height: 330px !important; }
+  .radiology-lab-view .tomography-mpr .viewer-grid { min-height: 520px !important; }
+}
+/* CORTEX LABS MOBILE PERFORMANCE V1 END */
