@@ -4804,7 +4804,6 @@ const server =
             "/login.html",
             "/cadastro",
             "/cadastro.html",
-            "/radiology-smoke.html",
           ]);
 
 
