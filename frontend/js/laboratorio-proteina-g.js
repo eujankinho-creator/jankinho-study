@@ -218,7 +218,7 @@ function buildMolecularComplex(parsed) {
 
   root.position.y = -.2;
   root.rotation.y = -.18;
-  return root;
+  return { root, receptorCenter, axis, scale };
 }
 
 function buildAtomicRepresentation(parsed, center, axis, scale, chainAlias, root) {
@@ -428,23 +428,48 @@ function createNucleotide(label, color) {
   return group;
 }
 
-function createEducationObjects() {
+function createEducationObjects(parsed, molecularContext) {
   const group = new THREE.Group();
   STATE.educationGroup = group;
   STATE.scene.add(group);
 
   const ligand = new THREE.Group();
-  const ligandMat = new THREE.MeshStandardMaterial({ color:0xf2c967, roughness:.42, metalness:.02 });
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(.36,.09,10,28), ligandMat);
-  ring.rotation.x = Math.PI/2;
-  ligand.add(ring);
-  const tip = new THREE.Mesh(new THREE.SphereGeometry(.14,12,8), new THREE.MeshStandardMaterial({color:0xff8d72}));
-  tip.position.x=.48; ligand.add(tip);
-  ligand.position.set(0,4.2,0);
+  const experimentalLigand = (parsed?.atoms || []).filter((atom) => atom.resName === "P0G");
+  if (experimentalLigand.length) {
+    const atomGeometry = new THREE.SphereGeometry(.105, 10, 8);
+    experimentalLigand.forEach((atom) => {
+      const raw = new THREE.Vector3(atom.x, atom.y, atom.z).sub(molecularContext.receptorCenter);
+      const p = orientPoint(raw, molecularContext.axis).multiplyScalar(molecularContext.scale);
+      const atomMesh = new THREE.Mesh(
+        atomGeometry,
+        new THREE.MeshStandardMaterial({
+          color: ELEMENT_COLORS[atom.element] || 0xd9dce3,
+          roughness: .38,
+          metalness: .01
+        })
+      );
+      atomMesh.position.copy(p);
+      atomMesh.userData.structureId = "ligand";
+      ligand.add(atomMesh);
+      STATE.selectable.push(atomMesh);
+    });
+    ligand.position.y = -.2;
+    ligand.rotation.y = -.18;
+    ligand.userData.experimental = true;
+  } else {
+    const ligandMat = new THREE.MeshStandardMaterial({ color:0xf2c967, roughness:.42, metalness:.02 });
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(.36,.09,10,28), ligandMat);
+    ring.rotation.x = Math.PI/2;
+    ligand.add(ring);
+    const tip = new THREE.Mesh(new THREE.SphereGeometry(.14,12,8), new THREE.MeshStandardMaterial({color:0xff8d72}));
+    tip.position.x=.48;
+    ligand.add(tip);
+    ring.userData.structureId="ligand";
+    tip.userData.structureId="ligand";
+    STATE.selectable.push(ring,tip);
+  }
   ligand.userData.structureId="ligand";
   group.add(ligand);
-  STATE.selectable.push(ring,tip);
-  ring.userData.structureId="ligand"; tip.userData.structureId="ligand";
   STATE.structureObjects.set("ligand",ligand);
 
   const gdp=createNucleotide("GDP",0x5fb4ff);
@@ -842,12 +867,12 @@ async function loadScientificAssets(){
 
   setLoading(50,"Reconstruindo complexo","gerando representação estrutural a partir do backbone experimental");
   const parsed=parsePdb(pdbText);
-  buildMolecularComplex(parsed);
+  const molecularContext = buildMolecularComplex(parsed);
 
   setLoading(68,"Construindo contexto celular","criando bicamada lipídica e ambiente didático");
   createCellContext();
   createMembrane();
-  createEducationObjects();
+  createEducationObjects(parsed, molecularContext);
   rememberBaseTransforms();
 
   setLoading(86,"Finalizando interação","preparando câmera, seleção e estados da via");
