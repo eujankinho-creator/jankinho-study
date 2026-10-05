@@ -1,11 +1,11 @@
 import * as niivue from "/vendor/niivue/index.js";
-import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-atlas3";
+import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-atlas4";
 import {
   RADIOLOGY_STUDY,
   PLANE_CONFIG,
   getStructureByLabel,
   clamp
-} from "./data.js?v=20261005-atlas3";
+} from "./data.js?v=20261005-atlas4";
 
 const PLANES = ["axial", "coronal", "sagittal"];
 
