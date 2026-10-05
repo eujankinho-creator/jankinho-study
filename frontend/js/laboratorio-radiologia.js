@@ -1,4 +1,4 @@
-import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas1";
+import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas2";
 import {
   STRUCTURES,
   SOURCE_REGISTRY,
@@ -6,7 +6,7 @@ import {
   PLANE_CONFIG,
   REGION_TARGETS,
   getStructure
-} from "./radiologia/data.js?v=20261005-atlas1";
+} from "./radiologia/data.js?v=20261005-atlas2";
 
 const $ = (id) => document.getElementById(id);
 const state = {
