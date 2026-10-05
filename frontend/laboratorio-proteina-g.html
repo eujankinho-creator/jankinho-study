@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261005-gprotein-lab2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261005-gprotein-lab2">
-  <link rel="stylesheet" href="/css/laboratorio-proteina-g.css?v=20261005-gprotein-lab7">
+  <link rel="stylesheet" href="/css/laboratorio-proteina-g.css?v=20261005-gprotein-lab8">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -157,8 +157,11 @@
             </div>
 
             <div id="webglFallback" class="gp-webgl-fallback" hidden>
-              <strong>Visualização 3D indisponível neste dispositivo.</strong>
-              <p>O conteúdo educacional continua acessível pelo painel lateral e pela linha do tempo.</p>
+              <strong>Modo visualização simplificada</strong>
+              <p>O dispositivo não conseguiu iniciar o 3D completo. O conteúdo educacional continua disponível.</p>
+              <div class="gp-fallback-flow">
+                <span>GPCR</span><b>→</b><span>Proteína G</span><b>→</b><span>Efetor</span><b>→</b><span>Segundo mensageiro</span><b>→</b><span>Resposta</span>
+              </div>
             </div>
 
             <div class="gp-scale-rail" aria-hidden="true">
@@ -243,6 +246,10 @@
               <span id="detailKind">—</span>
               <span id="detailSource">—</span>
             </div>
+            <div class="gp-detail-actions">
+              <button id="hideSelectedButton" type="button">Ocultar selecionada</button>
+              <button id="showAllButton" type="button">Mostrar tudo</button>
+            </div>
           </div>
 
           <details class="gp-science-details" open>
@@ -285,7 +292,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-proteina-g.js?v=20261005-gprotein-lab7"></script>
+  <script type="module" src="/js/laboratorio-proteina-g.js?v=20261005-gprotein-lab8"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
