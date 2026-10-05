@@ -1,11 +1,11 @@
 import * as niivue from "/vendor/niivue/index.js";
-import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-atlas5";
+import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-atlas6";
 import {
   RADIOLOGY_STUDY,
   PLANE_CONFIG,
   getStructureByLabel,
   clamp
-} from "./data.js?v=20261005-atlas5";
+} from "./data.js?v=20261005-atlas6";
 
 const PLANES = ["axial", "coronal", "sagittal"];
 
@@ -62,7 +62,61 @@ export class RadiologyMultiView {
     return viewer;
   }
 
+  emitProgress(percent, label, detail = "") {
+    if (typeof this.options.onProgress === "function") {
+      this.options.onProgress({
+        percent: Math.max(0, Math.min(100, Math.round(Number(percent) || 0))),
+        label,
+        detail
+      });
+    }
+  }
+
+  async warmAsset(url, startPercent = 3, endPercent = 68) {
+    this.emitProgress(startPercent, "Baixando tomografia", "iniciando transferência");
+
+    const response = await fetch(url, {
+      credentials: "same-origin",
+      cache: "force-cache"
+    });
+
+    if (!response.ok) {
+      throw new Error("Falha ao baixar o exame: HTTP " + response.status);
+    }
+
+    const total = Number(response.headers.get("content-length")) || 0;
+    if (!response.body || !total) {
+      await response.arrayBuffer();
+      this.emitProgress(endPercent, "Tomografia recebida", "arquivo completo");
+      return;
+    }
+
+    const reader = response.body.getReader();
+    let received = 0;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      received += value?.byteLength || 0;
+      const ratio = Math.max(0, Math.min(1, received / total));
+      const percent = startPercent + ratio * (endPercent - startPercent);
+      const receivedMb = received / 1024 / 1024;
+      const totalMb = total / 1024 / 1024;
+
+      this.emitProgress(
+        percent,
+        "Baixando tomografia",
+        receivedMb.toFixed(1) + " de " + totalMb.toFixed(1) + " MB"
+      );
+    }
+
+    this.emitProgress(endPercent, "Tomografia recebida", "preparando volume");
+  }
+
   async loadBaseVolume() {
+    await this.warmAsset(RADIOLOGY_STUDY.file, 3, 68);
+    this.emitProgress(72, "Preparando tomografia", "descompactando e decodificando");
     return niivue.NVImage.loadFromUrl({
       url: RADIOLOGY_STUDY.file,
       name: "ct.nii.gz",
@@ -139,12 +193,16 @@ export class RadiologyMultiView {
   }
 
   async init() {
+    this.emitProgress(1, "Preparando exame", "iniciando visualizador");
+
     // 1) Baixa/descompacta o CT uma única vez.
     const baseVolume = await this.loadBaseVolume();
 
     // 2) Axial aparece primeiro, sem esperar qualquer máscara.
+    this.emitProgress(78, "Montando visão axial", "primeira imagem");
     const axial = this.createViewer("axial", baseVolume);
     await axial.ready;
+    this.emitProgress(86, "Axial pronto", "preparando coronal e sagital");
     this.crosshairFrac = axial.crosshairFrac.slice();
 
     if (typeof this.options.onFirstImageReady === "function") {
@@ -159,6 +217,7 @@ export class RadiologyMultiView {
     const coronal = this.createViewer("coronal", baseVolume);
     const sagittal = this.createViewer("sagittal", baseVolume);
     await Promise.all([coronal.ready, sagittal.ready]);
+    this.emitProgress(96, "Sincronizando planos", "cruz e resolução");
 
     this.broadcastCrosshair(this.crosshairFrac, null);
     this.applyQualityRoles();
@@ -184,6 +243,7 @@ export class RadiologyMultiView {
     }
 
     this.emitLocation(null);
+    this.emitProgress(100, "Tomografia pronta", "axial, coronal e sagital");
     return this;
   }
 
