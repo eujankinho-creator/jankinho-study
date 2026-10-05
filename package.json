@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch backend/src/server.ts",
-    "build": "npm run security:sql && prisma generate && tsc --noEmit",
+    "build": "npm run test:gprotein-syntax && npm run security:sql && prisma generate && tsc --noEmit",
     "start": "tsx backend/src/server.ts",
     "lint": "tsc --noEmit",
     "postinstall": "prisma generate && npm run prepare:ecg-assets && npm run prepare:radiology-assets && npm run prepare:gprotein-assets",
@@ -14,7 +14,8 @@
     "security:sql": "node scripts/check-sql-safety.mjs",
     "prepare:ecg-assets": "node scripts/prepare-ecg-assets.mjs",
     "prepare:radiology-assets": "node scripts/prepare-radiology-assets.mjs",
-    "prepare:gprotein-assets": "node scripts/prepare-gprotein-assets.mjs"
+    "prepare:gprotein-assets": "node scripts/prepare-gprotein-assets.mjs",
+    "test:gprotein-syntax": "node scripts/check-gprotein-syntax.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
