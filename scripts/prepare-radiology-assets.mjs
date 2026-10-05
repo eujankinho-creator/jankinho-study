@@ -76,7 +76,7 @@ async function readHeader(filePath) {
 
   const i16 = (offset) => little ? header.readInt16LE(offset) : header.readInt16BE(offset);
   const f32 = (offset) => little ? header.readFloatLE(offset) : header.readFloatBE(offset);
-  const dims = [i16(42), i16(44), i16(46)];
+  const dims = [i16(42), i16(44), i16(46)];\n  const dim4 = i16(48) || 1;
   const datatype = i16(70);
   const bitpix = i16(72);
   const voxOffset = Math.max(352, Math.floor(f32(108) || 352));
@@ -88,7 +88,7 @@ async function readHeader(filePath) {
     throw new Error("Formato NIfTI não suportado");
   }
 
-  return { dims, datatype, bitpix, bytesPerVoxel, voxOffset, slope, inter, little };
+  return { dims, dim4, datatype, bitpix, bytesPerVoxel, voxOffset, slope, inter, little };
 }
 
 function readNumeric(buffer, offset, header) {
