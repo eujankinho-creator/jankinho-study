@@ -24,20 +24,11 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-atlas1">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-atlas2">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
-
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "/vendor/three/three.module.js?v=20261005-real2",
-        "three/addons/": "/vendor/three/addons/"
-      }
-    }
-  </script>
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
   <meta name="theme-color" content="#07090d">
@@ -168,66 +159,15 @@
       </section>
 
       <section class="rad-workspace real-workspace">
-        <article class="rad-panel anatomy-panel real-anatomy-panel">
+        <article class="rad-panel ct-navigation-panel">
           <div class="panel-title-row">
             <div>
-              <span class="eyebrow">ATLAS ANATÔMICO REAL · 3D</span>
-              <h2>Modelo anatômico completo</h2>
+              <span class="eyebrow">NAVEGAÇÃO DO EXAME</span>
+              <h2>Corte e estruturas anatômicas</h2>
             </div>
             <div class="panel-meta">
-              <span id="currentPlaneLabel">Axial</span>
-              <strong id="activePlaneReadout">Axial ativo para o corte 3D</strong>
-            </div>
-          </div>
-
-          <div class="anatomy-category-tabs" aria-label="Camadas anatômicas">
-            <button class="active" type="button" data-anatomy-category="bones" aria-pressed="true">
-              Ossos
-            </button>
-            <button class="active" type="button" data-anatomy-category="vessels" aria-pressed="true">
-              Vasos
-            </button>
-            <button class="active" type="button" data-anatomy-category="organs" aria-pressed="true">
-              Órgãos
-            </button>
-            <button class="active" type="button" data-anatomy-category="body" aria-pressed="true">
-              Contorno corporal
-            </button>
-          </div>
-
-          <div class="anatomy-toolbar">
-            <button id="resetAnatomy" type="button" title="Resetar câmera">↺ <span>Reset</span></button>
-            <button id="focusAnatomy" type="button" title="Enquadrar estrutura">◎ <span>Enquadrar</span></button>
-            <button id="transparencyToggle" type="button" aria-pressed="false">◐ <span>Transparência</span></button>
-            <button id="planeToggle" class="active" type="button" aria-pressed="true">⌖ <span>Cruzamento</span></button>
-            <button id="clipToggle" type="button" aria-pressed="false">✂ <span>Corte no 3D</span></button>
-          </div>
-
-          <div class="anatomy-stage real-anatomy-stage">
-            <canvas id="anatomyCanvas" aria-label="Atlas anatômico 3D real HRA"></canvas>
-
-            <div class="anatomy-orientation" aria-hidden="true">
-              <span class="orient-s">S</span>
-              <span class="orient-i">I</span>
-              <span class="orient-r">R</span>
-              <span class="orient-l">L</span>
-              <span class="orient-a">A</span>
-              <span class="orient-p">P</span>
-            </div>
-
-            <div class="real-model-seal">
-              <span>HRA</span>
-              <div><strong>Human Reference Atlas</strong><small>ossos + vasos + órgãos reais</small></div>
-            </div>
-
-            <div class="plane-anatomy-hud" aria-live="polite">
-              <span id="planeHudPlane">AXIAL · CORTE ATIVO</span>
-              <strong id="planeHudTitle">Carregando nível anatômico...</strong>
-              <small id="planeHudList">Sincronizando atlas e exame</small>
-            </div>
-
-            <div class="stage-tip">
-              arraste = girar · roda = zoom · botão direito = pan · clique = identificar
+              <span>TC corporal</span>
+              <strong>mesmo ponto nos três eixos</strong>
             </div>
           </div>
 
@@ -235,7 +175,7 @@
             <button id="slicePrev" type="button" title="Corte anterior">−</button>
             <div>
               <span>Mover corte · <b id="sliceCoordinate">55% do eixo</b></span>
-              <input id="sliceSlider" type="range" min="0" max="100" value="55" aria-label="Mover plano de corte">
+              <input id="sliceSlider" type="range" min="0" max="100" value="55" aria-label="Mover corte">
             </div>
             <button id="sliceNext" type="button" title="Próximo corte">+</button>
           </div>
@@ -244,9 +184,9 @@
             <div class="structure-dock-head">
               <div>
                 <span>ESTRUTURAS SEGMENTADAS DO EXAME</span>
-                <strong>Selecionar / ocultar</strong>
+                <strong>Buscar · selecionar · ocultar</strong>
               </div>
-              <small>labels NIfTI</small>
+              <small>máscaras co-registradas</small>
             </div>
             <div id="structureList" class="structure-list"></div>
           </div>
@@ -421,9 +361,7 @@
     </main>
   </div>
 
-  <div id="anatomyTooltip" class="rad-tooltip" hidden></div>
-
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-atlas1"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-atlas2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
