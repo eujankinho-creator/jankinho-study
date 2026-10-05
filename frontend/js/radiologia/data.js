@@ -82,19 +82,19 @@ export const STRUCTURES = Object.freeze(defs.map((item, index) => Object.freeze(
   description: item[3] + " segmentado no mesmo volume de TC usado nas vistas axial, coronal e sagital."
 })));
 
-const HF_BASE = "https://huggingface.co/datasets/MedOtter/totalsegmentator-cardiac/resolve/main/s0024/";
+const LOCAL_BASE = "/data/radiology/";
 
 export const RADIOLOGY_STUDY = Object.freeze({
   id: "totalsegmentator_s0024_multiregion",
   name: "Atlas TC corporal · MPR sincronizado",
   modality: "CT",
-  file: HF_BASE + "ct.nii.gz",
+  file: LOCAL_BASE + "ct.nii.gz",
   segmentations: SEGMENTATION_GROUPS.map((group) => ({
     id: group.id,
-    url: HF_BASE + group.file,
+    url: LOCAL_BASE + group.file,
     opacity: group.opacity
   })),
-  source: "TotalSegmentator · caso s0024 · espelho MedOtter/Hugging Face",
+  source: "TotalSegmentator · caso s0024 · cópia otimizada servida pelo Cortex",
   credit: "TotalSegmentator contributors / MedOtter dataset mirror",
   license: "CC BY 4.0 (dataset mirror)",
   spatialMode: "same-subject-coregistered",
