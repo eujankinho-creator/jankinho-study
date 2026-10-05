@@ -49,7 +49,7 @@ export class AnatomyViewer {
     this.scene.background = new THREE.Color(DEFAULT_BG);
     this.scene.fog = new THREE.Fog(DEFAULT_BG, 2.4, 8.8);
 
-    this.camera = new THREE.PerspectiveCamera(34, 1, 0.001, 1000);
+    this.camera = new THREE.PerspectiveCamera(32, 1, 0.001, 1000);
     this.camera.position.set(1.8, 1.1, 3.2);
 
     this.renderer = new THREE.WebGLRenderer({
@@ -710,12 +710,12 @@ export class AnatomyViewer {
     const size = this.bodyBounds.getSize(new THREE.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z);
     const fov = THREE.MathUtils.degToRad(this.camera.fov);
-    const distance = maxDim / (2 * Math.tan(fov / 2)) * 1.15;
+    const distance = maxDim / (2 * Math.tan(fov / 2)) * 1.03;
 
     this.controls.target.copy(center);
     this.camera.position.set(
-      center.x + maxDim * 0.48,
-      center.y + maxDim * 0.07,
+      center.x + maxDim * 0.24,
+      center.y + maxDim * 0.035,
       center.z + distance
     );
     this.camera.near = Math.max(maxDim / 10000, 0.001);
