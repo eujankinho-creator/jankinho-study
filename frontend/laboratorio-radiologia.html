@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack3">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack5">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
@@ -75,6 +75,74 @@
       <div id="labBootError" class="ct-error" hidden></div>
       <div id="liveStatus" class="sr-only" aria-live="polite"></div>
 
+      <section class="viewer-card">
+        <div class="viewer-topbar">
+          <div>
+            <span id="activePlaneLabel">AXIAL · CORTE</span>
+            <strong id="selectedStructureName">Explore o atlas</strong>
+            <small id="selectedStructureMeta">Clique no exame ou escolha uma estrutura.</small>
+          </div>
+          <div class="viewer-status">
+            <span class="status-dot"></span>
+            <b id="loadStatus">Carregando</b>
+          </div>
+        </div>
+
+        <div id="atlasLoading" class="atlas-loading" aria-live="polite">
+          <div class="loading-card">
+            <div><span id="loadingStage">Abrindo atlas</span><strong id="loadingPercent">0%</strong></div>
+            <div class="loading-track"><i id="loadingBar"></i></div>
+            <small id="loadingDetail">baixando somente o primeiro corte</small>
+          </div>
+        </div>
+
+        <div class="viewer-grid">
+          <article class="view-tile primary active" data-plane-tile="axial">
+            <header><span>AXIAL</span><small data-plane-count="axial">—</small></header>
+            <div class="image-stage" data-stage="axial">
+              <img id="imgAxial" alt="Tomografia axial" draggable="false">
+              <canvas id="overlayAxial"></canvas>
+              <i class="crosshair-v"></i><i class="crosshair-h"></i>
+            </div>
+          </article>
+
+          <div class="secondary-stack">
+            <article class="view-tile" data-plane-tile="coronal" tabindex="0">
+              <header><span>CORONAL</span><small data-plane-count="coronal">—</small></header>
+              <div class="image-stage" data-stage="coronal">
+                <img id="imgCoronal" alt="Tomografia coronal" draggable="false">
+                <canvas id="overlayCoronal"></canvas>
+                <i class="crosshair-v"></i><i class="crosshair-h"></i>
+              </div>
+            </article>
+
+            <article class="view-tile" data-plane-tile="sagittal" tabindex="0">
+              <header><span>SAGITAL</span><small data-plane-count="sagittal">—</small></header>
+              <div class="image-stage" data-stage="sagittal">
+                <img id="imgSagittal" alt="Tomografia sagital" draggable="false">
+                <canvas id="overlaySagittal"></canvas>
+                <i class="crosshair-v"></i><i class="crosshair-h"></i>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="slice-control">
+          <button id="slicePrev" type="button" aria-label="Corte anterior">−</button>
+          <div>
+            <span><b id="slicePlaneName">Axial</b><em id="sliceReadout">1 / 1</em></span>
+            <input id="sliceSlider" type="range" min="0" max="0" value="0" aria-label="Navegar pelos cortes">
+          </div>
+          <button id="sliceNext" type="button" aria-label="Próximo corte">+</button>
+        </div>
+
+        <div class="viewer-help">
+          <span>Arraste a barra para navegar</span>
+          <span>Clique em coronal ou sagital para torná-lo o plano ativo</span>
+          <span>Clique sobre o exame para identificar estruturas segmentadas</span>
+        </div>
+      </section>
+
       <section class="region-strip" aria-label="Regiões do corpo">
         <button type="button" data-region="overview" class="active"><strong>Visão geral</strong><small>corpo inteiro</small></button>
         <button type="button" data-region="head"><strong>Cabeça</strong><small>encéfalo</small></button>
@@ -84,7 +152,7 @@
         <button type="button" data-region="thigh"><strong>Coxa</strong><small>fêmur / músculos</small></button>
       </section>
 
-      <section class="atlas-shell">
+      <section class="atlas-tools">
         <aside class="atlas-sidebar">
           <div class="atlas-sidebar-head">
             <span>ESTRUTURAS</span>
@@ -93,74 +161,6 @@
           <input id="structureSearch" class="structure-search" type="search" placeholder="Buscar: fígado, aorta, fêmur..." aria-label="Buscar estrutura">
           <div id="structureList" class="structure-list"></div>
         </aside>
-
-        <section class="viewer-card">
-          <div class="viewer-topbar">
-            <div>
-              <span id="activePlaneLabel">AXIAL · CORTE</span>
-              <strong id="selectedStructureName">Explore o atlas</strong>
-              <small id="selectedStructureMeta">Clique no exame ou escolha uma estrutura.</small>
-            </div>
-            <div class="viewer-status">
-              <span class="status-dot"></span>
-              <b id="loadStatus">Carregando</b>
-            </div>
-          </div>
-
-          <div id="atlasLoading" class="atlas-loading" aria-live="polite">
-            <div class="loading-card">
-              <div><span id="loadingStage">Abrindo atlas</span><strong id="loadingPercent">0%</strong></div>
-              <div class="loading-track"><i id="loadingBar"></i></div>
-              <small id="loadingDetail">baixando somente o primeiro corte</small>
-            </div>
-          </div>
-
-          <div class="viewer-grid">
-            <article class="view-tile primary active" data-plane-tile="axial">
-              <header><span>AXIAL</span><small data-plane-count="axial">—</small></header>
-              <div class="image-stage" data-stage="axial">
-                <img id="imgAxial" alt="Tomografia axial" draggable="false">
-                <canvas id="overlayAxial"></canvas>
-                <i class="crosshair-v"></i><i class="crosshair-h"></i>
-              </div>
-            </article>
-
-            <div class="secondary-stack">
-              <article class="view-tile" data-plane-tile="coronal" tabindex="0">
-                <header><span>CORONAL</span><small data-plane-count="coronal">—</small></header>
-                <div class="image-stage" data-stage="coronal">
-                  <img id="imgCoronal" alt="Tomografia coronal" draggable="false">
-                  <canvas id="overlayCoronal"></canvas>
-                  <i class="crosshair-v"></i><i class="crosshair-h"></i>
-                </div>
-              </article>
-
-              <article class="view-tile" data-plane-tile="sagittal" tabindex="0">
-                <header><span>SAGITAL</span><small data-plane-count="sagittal">—</small></header>
-                <div class="image-stage" data-stage="sagittal">
-                  <img id="imgSagittal" alt="Tomografia sagital" draggable="false">
-                  <canvas id="overlaySagittal"></canvas>
-                  <i class="crosshair-v"></i><i class="crosshair-h"></i>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <div class="slice-control">
-            <button id="slicePrev" type="button" aria-label="Corte anterior">−</button>
-            <div>
-              <span><b id="slicePlaneName">Axial</b><em id="sliceReadout">1 / 1</em></span>
-              <input id="sliceSlider" type="range" min="0" max="0" value="0" aria-label="Navegar pelos cortes">
-            </div>
-            <button id="sliceNext" type="button" aria-label="Próximo corte">+</button>
-          </div>
-
-          <div class="viewer-help">
-            <span>Arraste a barra para navegar</span>
-            <span>Clique em coronal ou sagital para torná-lo o plano ativo</span>
-            <span>Clique sobre o exame para identificar estruturas segmentadas</span>
-          </div>
-        </section>
       </section>
 
       <section class="info-row">
