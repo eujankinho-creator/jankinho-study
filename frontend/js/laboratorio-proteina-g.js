@@ -53,16 +53,19 @@ const ELEMENT_COLORS = {
   H: 0xf4f7fb
 };
 
+const CELL_CENTER = new THREE.Vector3(-3, -2, 0);
+const MEMBRANE_ANCHOR = new THREE.Vector3(-3, 7.05, 0);
+
 const CAMERA_PRESETS = {
-  cell: { position: [16, 10, 18], target: [0, 0, 0], fov: 42, label: "Nível celular" },
-  membrane: { position: [8, 5.2, 10], target: [0, 0, 0], fov: 38, label: "Nível subcelular" },
-  receptor: { position: [4.8, 2.7, 6.3], target: [0, .2, 0], fov: 34, label: "Nível molecular" },
-  complex: { position: [6.8, 1.5, 8.2], target: [0, -1.2, 0], fov: 36, label: "Nível molecular" },
-  gprotein: { position: [7.2, -2.1, 8.4], target: [0, -2.8, 0], fov: 34, label: "Nível estrutural" },
-  nucleotide: { position: [3.6, -2.8, 4.2], target: [0.7, -2.7, 0], fov: 28, label: "Nível molecular detalhado" },
-  effector: { position: [9, -1.8, 6.5], target: [4.7, -1.6, 0], fov: 34, label: "Nível molecular" },
-  messenger: { position: [10, -4.5, 11], target: [3.8, -4.2, 0], fov: 38, label: "Nível subcelular" },
-  response: { position: [12, -5.8, 13], target: [3, -5.1, 0], fov: 40, label: "Nível subcelular" }
+  cell: { position: [16, 10, 18], target: [-3, -1, 0], fov: 42, label: "Nível celular" },
+  membrane: { position: [7.6, 11.3, 10.5], target: [-3, 7.05, 0], fov: 38, label: "Nível subcelular" },
+  receptor: { position: [2.2, 10.0, 6.6], target: [-3, 7.0, 0], fov: 34, label: "Nível molecular" },
+  complex: { position: [3.8, 8.2, 8.6], target: [-3, 5.8, 0], fov: 36, label: "Nível molecular" },
+  gprotein: { position: [4.2, 4.8, 8.7], target: [-3, 4.1, 0], fov: 34, label: "Nível estrutural" },
+  nucleotide: { position: [.8, 4.2, 4.5], target: [-2.3, 4.35, 0], fov: 28, label: "Nível molecular detalhado" },
+  effector: { position: [6.0, 5.2, 6.8], target: [1.7, 5.4, 0], fov: 34, label: "Nível molecular" },
+  messenger: { position: [7.0, 1.7, 11], target: [.8, 1.7, 0], fov: 38, label: "Nível subcelular" },
+  response: { position: [9, .2, 13], target: [0, .1, 0], fov: 40, label: "Nível subcelular" }
 };
 
 async function api(url, options) {
@@ -220,7 +223,7 @@ function buildMolecularComplex(parsed) {
   buildAtomicRepresentation(parsed, receptorCenter, axis, scale, chainAlias, root);
   buildSurfaceRepresentation(parsed, receptorCenter, axis, scale, chainAlias, root);
 
-  root.position.y = -.2;
+  root.position.copy(MEMBRANE_ANCHOR);
   root.rotation.y = -.18;
   return { root, receptorCenter, axis, scale };
 }
@@ -329,7 +332,7 @@ function createCellContext() {
     })
   );
   shell.scale.set(1.2, .82, 1);
-  shell.position.set(-3, -2, 0);
+  shell.position.copy(CELL_CENTER);
   group.add(shell);
   registerStructure("cell", shell, [shell]);
 
@@ -345,7 +348,7 @@ function createCellContext() {
     })
   );
   cytosol.scale.set(1.2, .82, 1);
-  cytosol.position.set(-3, -2, 0);
+  cytosol.position.copy(CELL_CENTER);
   group.add(cytosol);
 
   const nucleusGroup = new THREE.Group();
@@ -624,6 +627,8 @@ function createCellContext() {
 }
 function createMembrane() {
   const group = new THREE.Group();
+  group.name = "plasma-membrane-patch";
+  group.position.copy(MEMBRANE_ANCHOR);
   STATE.membraneGroup = group;
   STATE.scene.add(group);
 
@@ -706,6 +711,8 @@ function createNucleotide(label, color) {
 
 function createEducationObjects(parsed, molecularContext) {
   const group = new THREE.Group();
+  group.name = "membrane-signaling-context";
+  group.position.copy(MEMBRANE_ANCHOR);
   STATE.educationGroup = group;
   STATE.scene.add(group);
 
@@ -729,7 +736,7 @@ function createEducationObjects(parsed, molecularContext) {
       ligand.add(atomMesh);
       STATE.selectable.push(atomMesh);
     });
-    ligand.position.y = -.2;
+    ligand.position.y = 0;
     ligand.rotation.y = -.18;
     ligand.userData.experimental = true;
   } else {
