@@ -1067,3 +1067,180 @@
 .selected-structure-badge{
   box-shadow:inset 0 0 12px rgba(255,255,255,.018) !important;
 }
+
+
+/* v-stack21 · modelo 3D à esquerda + MPR à direita */
+.tomography-workspace{
+  display:grid;
+  grid-template-columns:minmax(320px,.78fr) minmax(0,1.52fr);
+  gap:10px;
+  padding:10px;
+  min-height:660px;
+}
+.tomography-mpr{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.tomography-mpr .viewer-grid{
+  flex:1;
+  min-height:570px;
+  margin:0;
+}
+.anatomy3d-panel{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  border:1px solid var(--theme-border);
+  border-radius:15px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 32%,color-mix(in srgb,var(--theme-accent) 5%,transparent),transparent 42%),
+    #030507;
+}
+.anatomy3d-head{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 13px;
+  border-bottom:1px solid var(--theme-border);
+}
+.anatomy3d-head span,
+.anatomy3d-head strong,
+.anatomy3d-head small{
+  display:block;
+}
+.anatomy3d-head span{
+  color:var(--theme-accent-2);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.anatomy3d-head strong{
+  margin-top:3px;
+  color:var(--theme-text);
+  font-size:13px;
+}
+.anatomy3d-head small{
+  margin-top:3px;
+  color:var(--theme-text-muted);
+  font-size:8px;
+}
+.anatomy3d-head button{
+  min-height:29px;
+  padding:0 9px;
+  border:1px solid var(--theme-border);
+  border-radius:8px;
+  background:var(--theme-surface-soft);
+  color:var(--theme-text-soft);
+  font-size:8px;
+  font-weight:850;
+  cursor:pointer;
+}
+.anatomy3d-host{
+  position:relative;
+  flex:1;
+  min-height:530px;
+  overflow:hidden;
+  outline:none;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(28,44,62,.2),transparent 44%),
+    linear-gradient(180deg,#030507,#010203);
+}
+.anatomy3d-host canvas{
+  position:absolute;
+  inset:0;
+  width:100%!important;
+  height:100%!important;
+  display:block;
+}
+.anatomy3d-loading{
+  position:absolute;
+  z-index:4;
+  inset:0;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:4px;
+  background:rgba(2,4,7,.92);
+  transition:opacity .2s ease,visibility .2s ease;
+  pointer-events:none;
+}
+.anatomy3d-loading.done{
+  opacity:0;
+  visibility:hidden;
+}
+.anatomy3d-loading span{
+  color:var(--theme-accent-2);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.anatomy3d-loading strong{
+  color:#fff;
+  font-size:13px;
+}
+.anatomy3d-loading small{
+  color:#7f8a97;
+  font-size:8px;
+}
+.anatomy3d-plane-key{
+  position:absolute;
+  z-index:3;
+  left:10px;
+  top:10px;
+  display:flex;
+  gap:5px;
+}
+.anatomy3d-plane-key span{
+  padding:5px 7px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+  background:rgba(3,5,8,.72);
+  font-size:7px;
+  font-weight:850;
+}
+.anatomy3d-plane-key .axial{color:#ff8da0}
+.anatomy3d-plane-key .coronal{color:#f1c760}
+.anatomy3d-plane-key .sagittal{color:#76aaff}
+.anatomy3d-foot{
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:0 12px;
+  border-top:1px solid var(--theme-border);
+  color:var(--theme-text-muted);
+  font-size:8px;
+}
+.anatomy3d-foot strong{
+  color:var(--theme-text-soft);
+  font-size:8px;
+}
+.tomography-mpr .slice-control{
+  margin:0;
+}
+@media(max-width:1180px){
+  .tomography-workspace{
+    grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);
+  }
+  .anatomy3d-host{min-height:480px}
+}
+@media(max-width:900px){
+  .tomography-workspace{
+    grid-template-columns:1fr;
+  }
+  .anatomy3d-panel{
+    min-height:500px;
+  }
+  .anatomy3d-host{
+    min-height:420px;
+  }
+  .tomography-mpr .viewer-grid{
+    min-height:620px;
+  }
+}

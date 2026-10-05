@@ -1,3 +1,5 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { STRUCTURES, getStructure } from "./radiologia/data.js?v=20261005-stack11";
 
 const $ = (id) => document.getElementById(id);
@@ -32,7 +34,21 @@ const state = {
   colorEnabled: true,
   liveIdentifyToken: 0,
   liveIdentifyFrame: 0,
-  liveIdentifyTimer: 0
+  liveIdentifyTimer: 0,
+  anatomy3d: {
+    scene: null,
+    camera: null,
+    renderer: null,
+    controls: null,
+    host: null,
+    root: null,
+    meshes: new Map(),
+    selectable: [],
+    planes: {},
+    raycaster: new THREE.Raycaster(),
+    pointer: new THREE.Vector2(),
+    frame: 0
+  }
 };
 
 async function api(url, options) {
@@ -259,6 +275,7 @@ function setCoordFromPointer(plane, event) {
     state.coord[2] = Math.round((1 - v) * (nz - 1));
   }
 
+  update3DPlanes();
   return { u, v };
 }
 
@@ -269,6 +286,7 @@ function setActivePlane(plane) {
   });
   if ($("activePlaneLabel")) $("activePlaneLabel").textContent = plane.toUpperCase() + " · CORTE";
   syncSlider();
+  update3DPlanes();
 }
 
 function syncSlider() {
@@ -514,6 +532,7 @@ function bindStructureSearchPanel() {
 
 function updateStructureUi(structure) {
   document.querySelectorAll("[data-structure]").forEach((row) => row.classList.toggle("active", row.dataset.structure === structure?.id));
+  update3DSelection();
 
   const summary = $("selectedStructureSummary");
   if (summary) {
@@ -852,6 +871,7 @@ async function setPlaneImage(plane) {
 }
 
 async function updateViews() {
+  update3DPlanes();
   await Promise.all(PLANES.map(setPlaneImage));
   updateAllCrosshairs();
   syncSlider();
@@ -859,6 +879,7 @@ async function updateViews() {
 }
 
 async function updateScrolledPlane(plane) {
+  update3DPlanes();
   await setPlaneImage(plane);
   prefetchPlaneMasks(plane);
   updateAllCrosshairs();
@@ -1094,6 +1115,203 @@ async function moveSlice(delta) {
   await moveSliceForPlane(state.activePlane, delta, false);
 }
 
+
+const MODEL_AXES = Object.freeze({
+  width: 8.2,
+  depth: 8.2,
+  height: 13.6
+});
+
+function voxelToWorld(coord) {
+  const [nx,ny,nz]=state.manifest.originalDims;
+  const x=(coord[0]/Math.max(1,nx-1)-.5)*MODEL_AXES.width;
+  const y=(coord[2]/Math.max(1,nz-1)-.5)*MODEL_AXES.height;
+  const z=-(coord[1]/Math.max(1,ny-1)-.5)*MODEL_AXES.depth;
+  return new THREE.Vector3(x,y,z);
+}
+
+function structureWorldBox(stat) {
+  const a=voxelToWorld(stat.min);
+  const b=voxelToWorld(stat.max);
+  const min=new THREE.Vector3(Math.min(a.x,b.x),Math.min(a.y,b.y),Math.min(a.z,b.z));
+  const max=new THREE.Vector3(Math.max(a.x,b.x),Math.max(a.y,b.y),Math.max(a.z,b.z));
+  return new THREE.Box3(min,max);
+}
+
+function createProxyGeometry(structure, stat) {
+  const box=structureWorldBox(stat);
+  const size=box.getSize(new THREE.Vector3());
+  const center=voxelToWorld(stat.centroid);
+  const geometry=new THREE.IcosahedronGeometry(1,1);
+  const mesh=new THREE.Mesh(
+    geometry,
+    new THREE.MeshStandardMaterial({
+      color:new THREE.Color(structure.color),
+      roughness:.66,
+      metalness:.02,
+      transparent:true,
+      opacity:structure.category==="bones"?.6:structure.category==="vessels"?.5:.48,
+      flatShading:true
+    })
+  );
+  mesh.position.copy(center);
+  mesh.scale.set(
+    Math.max(.08,size.x*.5),
+    Math.max(.08,size.y*.5),
+    Math.max(.08,size.z*.5)
+  );
+  mesh.userData.structureId=structure.id;
+  mesh.userData.baseOpacity=mesh.material.opacity;
+  return mesh;
+}
+
+function update3DSelection() {
+  const selected=state.selectedId;
+  for(const [id,mesh] of state.anatomy3d.meshes){
+    const active=id===selected;
+    mesh.material.opacity=selected?(active?.96:Math.min(mesh.userData.baseOpacity,.12)):mesh.userData.baseOpacity;
+    mesh.material.transparent=true;
+    mesh.material.emissive.set(active?mesh.material.color:new THREE.Color(0x000000));
+    mesh.material.emissiveIntensity=active?.18:0;
+    mesh.renderOrder=active?4:1;
+  }
+}
+
+function update3DPlanes() {
+  if(!state.manifest||!state.anatomy3d.scene) return;
+  const [nx,ny,nz]=state.manifest.originalDims;
+  const [x,y,z]=state.coord;
+  const axialY=(z/Math.max(1,nz-1)-.5)*MODEL_AXES.height;
+  const coronalZ=-(y/Math.max(1,ny-1)-.5)*MODEL_AXES.depth;
+  const sagittalX=(x/Math.max(1,nx-1)-.5)*MODEL_AXES.width;
+
+  const axial=state.anatomy3d.planes.axial;
+  const coronal=state.anatomy3d.planes.coronal;
+  const sagittal=state.anatomy3d.planes.sagittal;
+  if(axial) axial.position.y=axialY;
+  if(coronal) coronal.position.z=coronalZ;
+  if(sagittal) sagittal.position.x=sagittalX;
+
+  const active=state.activePlane;
+  Object.entries(state.anatomy3d.planes).forEach(([plane,mesh])=>{
+    if(!mesh?.material) return;
+    mesh.material.opacity=plane===active?.24:.09;
+  });
+  if($("anatomy3dCoord")) $("anatomy3dCoord").textContent="X "+x+" · Y "+y+" · Z "+z;
+}
+
+function reset3DCamera() {
+  const camera=state.anatomy3d.camera;
+  const controls=state.anatomy3d.controls;
+  if(!camera||!controls) return;
+  camera.position.set(12,7,15);
+  controls.target.set(0,0,0);
+  controls.update();
+}
+
+function initAnatomy3D() {
+  const host=$("anatomy3dHost");
+  if(!host||!state.manifest) return;
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.45));
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.setSize(host.clientWidth,host.clientHeight,false);
+  host.prepend(renderer.domElement);
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(34,host.clientWidth/Math.max(1,host.clientHeight),.05,80);
+  const controls=new OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true;
+  controls.dampingFactor=.075;
+  controls.minDistance=7;
+  controls.maxDistance=28;
+  controls.rotateSpeed=.55;
+  controls.zoomSpeed=.7;
+
+  state.anatomy3d.host=host;
+  state.anatomy3d.scene=scene;
+  state.anatomy3d.camera=camera;
+  state.anatomy3d.renderer=renderer;
+  state.anatomy3d.controls=controls;
+
+  scene.add(new THREE.HemisphereLight(0xc9dcff,0x17120f,1.35));
+  const key=new THREE.DirectionalLight(0xffffff,1.7);
+  key.position.set(8,13,10);
+  scene.add(key);
+  const rim=new THREE.DirectionalLight(0x7db3ff,.75);
+  rim.position.set(-8,4,-9);
+  scene.add(rim);
+
+  const root=new THREE.Group();
+  state.anatomy3d.root=root;
+  scene.add(root);
+
+  for(const structure of availableStructures()){
+    const stat=structureStat(structure);
+    if(!stat?.centroid||!stat?.min||!stat?.max) continue;
+    const mesh=createProxyGeometry(structure,stat);
+    root.add(mesh);
+    state.anatomy3d.meshes.set(structure.id,mesh);
+    state.anatomy3d.selectable.push(mesh);
+  }
+
+  const axial=new THREE.Mesh(
+    new THREE.PlaneGeometry(MODEL_AXES.width,MODEL_AXES.depth),
+    new THREE.MeshBasicMaterial({color:0xff8397,transparent:true,opacity:.12,side:THREE.DoubleSide,depthWrite:false})
+  );
+  axial.rotation.x=-Math.PI/2;
+
+  const coronal=new THREE.Mesh(
+    new THREE.PlaneGeometry(MODEL_AXES.width,MODEL_AXES.height),
+    new THREE.MeshBasicMaterial({color:0xf1c760,transparent:true,opacity:.09,side:THREE.DoubleSide,depthWrite:false})
+  );
+
+  const sagittal=new THREE.Mesh(
+    new THREE.PlaneGeometry(MODEL_AXES.depth,MODEL_AXES.height),
+    new THREE.MeshBasicMaterial({color:0x72aaff,transparent:true,opacity:.09,side:THREE.DoubleSide,depthWrite:false})
+  );
+  sagittal.rotation.y=Math.PI/2;
+
+  state.anatomy3d.planes={axial,coronal,sagittal};
+  scene.add(axial,coronal,sagittal);
+  reset3DCamera();
+  update3DPlanes();
+  update3DSelection();
+
+  renderer.domElement.addEventListener("click",(event)=>{
+    const rect=renderer.domElement.getBoundingClientRect();
+    state.anatomy3d.pointer.set(
+      ((event.clientX-rect.left)/rect.width)*2-1,
+      -((event.clientY-rect.top)/rect.height)*2+1
+    );
+    state.anatomy3d.raycaster.setFromCamera(state.anatomy3d.pointer,camera);
+    const hit=state.anatomy3d.raycaster.intersectObjects(state.anatomy3d.selectable,false)[0];
+    const id=hit?.object?.userData?.structureId;
+    if(id) void selectStructure(id,true);
+  });
+
+  $("anatomy3dReset")?.addEventListener("click",reset3DCamera);
+
+  const resize=()=>{
+    const width=host.clientWidth;
+    const height=Math.max(1,host.clientHeight);
+    renderer.setSize(width,height,false);
+    camera.aspect=width/height;
+    camera.updateProjectionMatrix();
+  };
+  new ResizeObserver(resize).observe(host);
+
+  const render=()=>{
+    state.anatomy3d.frame=requestAnimationFrame(render);
+    controls.update();
+    renderer.render(scene,camera);
+  };
+  render();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    $("anatomy3dLoading")?.classList.add("done");
+  }));
+}
+
 function bindRegions() {
   document.querySelectorAll("[data-region]").forEach((button) => {
     button.addEventListener("click", async () => {
@@ -1135,6 +1353,7 @@ async function boot() {
 
   setProgress(32, "Preparando visualizador", "baixando 3 imagens iniciais");
   createStructureList();
+  initAnatomy3D();
   bindStructureSearchPanel();
   bindViewerClicks();
   bindColorToggle();

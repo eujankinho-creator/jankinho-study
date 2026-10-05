@@ -20,12 +20,20 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack20">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-stack21">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261003-lab1"></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
   <meta name="theme-color" content="#07090d">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/three.module.js?v=20261002-1748",
+      "three/addons/": "/vendor/three/addons/"
+    }
+  }
+  </script>
 </head>
 <body class="practice-view radiology-lab-view">
   <aside class="sidebar">
@@ -130,7 +138,35 @@
           </div>
         </div>
 
-        <div class="viewer-grid">
+        <div class="tomography-workspace">
+          <aside class="anatomy3d-panel" aria-label="Modelo anatômico 3D sincronizado">
+            <div class="anatomy3d-head">
+              <div>
+                <span>MESMO EXAME · MESMAS COORDENADAS</span>
+                <strong>Modelo anatômico 3D</strong>
+                <small>Os três planos seguem os cortes axial, coronal e sagital.</small>
+              </div>
+              <button id="anatomy3dReset" type="button">Enquadrar</button>
+            </div>
+            <div id="anatomy3dHost" class="anatomy3d-host" tabindex="0" aria-label="Modelo 3D anatômico do mesmo exame">
+              <div id="anatomy3dLoading" class="anatomy3d-loading">
+                <span>MODELO LOW-POLY</span>
+                <strong>Montando anatomia</strong>
+                <small>usando as segmentações do mesmo exame</small>
+              </div>
+              <div class="anatomy3d-plane-key" aria-hidden="true">
+                <span class="axial">Axial</span>
+                <span class="coronal">Coronal</span>
+                <span class="sagittal">Sagital</span>
+              </div>
+            </div>
+            <div class="anatomy3d-foot">
+              <span>Arraste para girar · scroll para zoom</span>
+              <strong id="anatomy3dCoord">X 0 · Y 0 · Z 0</strong>
+            </div>
+          </aside>
+
+          <div class="tomography-mpr">        <div class="viewer-grid">
           <article class="view-tile primary active" data-plane-tile="axial">
             <header><span>AXIAL</span><div class="plane-header-right"><b data-plane-structure hidden></b><small data-plane-count="axial">—</small></div></header>
             <div class="image-stage" data-stage="axial">
@@ -164,14 +200,18 @@
           </div>
         </div>
 
-        <div class="slice-control">
+
+            <div class="slice-control">
           <button id="slicePrev" type="button" aria-label="Corte anterior">−</button>
           <div>
             <span><b id="slicePlaneName">Axial</b><em id="sliceReadout">1 / 1</em></span>
             <input id="sliceSlider" type="range" min="0" max="0" value="0" aria-label="Navegar pelos cortes">
           </div>
           <button id="sliceNext" type="button" aria-label="Próximo corte">+</button>
+            </div>
+          </div>
         </div>
+
 
         <div class="viewer-help">
           <span>Arraste a barra para navegar</span>
@@ -208,7 +248,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack19"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-stack21"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
