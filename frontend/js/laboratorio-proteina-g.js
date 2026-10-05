@@ -613,6 +613,15 @@ function applyMolecularPathwayVisibility(pathway) {
 
 async function switchPathway(pathway) {
   if (!PATHWAYS[pathway] || pathway === "g12") return;
+  if (STATE.compareMode) {
+    STATE.compareMode = false;
+    $("compareButton")?.classList.remove("is-active");
+    for (const [id,root] of STATE.pathwayRoots) {
+      const base=STATE.rootBasePositions.get(id);
+      if(base) root.position.copy(base);
+    }
+    if(STATE.educationGroup) STATE.educationGroup.visible=true;
+  }
   stopPlayback();
   restoreSelectionMaterials();
   STATE.selectedId = null;
@@ -1696,8 +1705,10 @@ function updateEducationalUi(index){
 
 function applyStep(index,{camera=true,fromPlayback=false}={}){
   const steps=currentSteps();
+  const requestedIndex=index;
   index=pharmacologyGateIndex(index);
   index=Math.max(0,Math.min(steps.length-1,index));
+  const pharmacologyBlocked = STATE.pharmacologyMode === "antagonist" && index < requestedIndex;
   STATE.stepIndex=index;
   const step=steps[index];
   if (fromPlayback) animateStepVisual(index);
@@ -1708,6 +1719,12 @@ function applyStep(index,{camera=true,fromPlayback=false}={}){
   }
   updateEducationalUi(index);
   if(camera && STATE.mode!=="free") animateCamera(step.camera);
+  if(pharmacologyBlocked){
+    stopPlayback();
+    if($("educationWhy")) $("educationWhy").textContent="Nesta representação farmacológica genérica, o antagonista pode ocupar o receptor sem iniciar a ativação da proteína G.";
+    if($("educationNext")) $("educationNext").textContent="Troque para agonista ou agonista parcial para observar a propagação do sinal.";
+    return;
+  }
   if(!fromPlayback && STATE.playing) scheduleNext();
 }
 
