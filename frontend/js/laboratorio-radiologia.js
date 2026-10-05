@@ -257,6 +257,10 @@ function updateStructureInfo() {
 
   $("structureTitle").textContent = structure.name;
   $("structureEnglish").textContent = structure.englishName;
+  if ($("selectedRadiologyName")) {
+    $("selectedRadiologyName").textContent =
+      structure.name + " · referência HRA → TC";
+  }
   $("structureRegion").textContent = structure.region;
   $("structureDescription").textContent = structure.description;
 
