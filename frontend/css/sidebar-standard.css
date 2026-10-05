@@ -1172,3 +1172,63 @@ body.cortex-mobile-menu-open {
   .radiology-lab-view .tomography-mpr .viewer-grid { min-height: 520px !important; }
 }
 /* CORTEX LABS MOBILE PERFORMANCE V1 END */
+
+
+/* =========================================================
+   CORTEX GLOBAL LOGO STANDARD V1
+   Um único símbolo em todas as sidebars/temas.
+========================================================= */
+.sidebar-logo .logo-box{
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 40px!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  color:transparent!important;
+  font-size:0!important;
+  text-shadow:none!important;
+}
+.sidebar-logo .logo-box>*{
+  display:none!important;
+}
+.sidebar-logo .logo-box::before{
+  content:""!important;
+  position:relative!important;
+  inset:auto!important;
+  display:block!important;
+  width:32px!important;
+  height:32px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:url("/favicon.svg?v=cortex-white-v3") center/contain no-repeat!important;
+  opacity:1!important;
+  box-shadow:none!important;
+  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--theme-accent) 35%,transparent))!important;
+}
+.sidebar-logo .logo-box::after{
+  content:none!important;
+  display:none!important;
+}
+.cortex-mobile-sidebar-header::before{
+  content:"";
+  display:block;
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  margin-right:8px;
+  background:url("/favicon.svg?v=cortex-white-v3") center/contain no-repeat;
+  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--theme-accent) 30%,transparent));
+}
+.cortex-mobile-sidebar-header>div:first-of-type{
+  margin-right:auto;
+}
+/* CORTEX GLOBAL LOGO STANDARD V1 END */

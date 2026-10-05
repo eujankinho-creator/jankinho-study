@@ -1798,6 +1798,12 @@ function reset3DCamera() {
 
 function initAnatomy3D() {
   const host=$("anatomy3dHost");
+  const compact3DDisabled=window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+  if(compact3DDisabled){
+    const panel=host?.closest(".anatomy3d-panel");
+    if(panel) panel.hidden=true;
+    return;
+  }
   if(!host||!state.manifest) return;
   const renderer=new THREE.WebGLRenderer({
     antialias:devicePixelRatio<=1.25,

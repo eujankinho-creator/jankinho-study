@@ -1750,3 +1750,131 @@
   .anatomy3d-plane-tabs button{min-height:35px!important}
   .anatomy3d-category-tabs button{min-height:29px!important}
 }
+
+
+/* v-stack29 · informações na barra superior + mobile sem 3D */
+.viewer-actions{
+  flex-wrap:wrap;
+}
+.viewer-info-menu{
+  position:relative;
+}
+.viewer-info-menu>summary{
+  list-style:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:30px;
+  padding:0 10px;
+  border:1px solid var(--theme-chip-border,var(--theme-border));
+  border-radius:999px;
+  background:var(--theme-chip-bg,var(--theme-surface-soft));
+  color:var(--theme-text-soft);
+  font-size:8px;
+  font-weight:900;
+  cursor:pointer;
+  white-space:nowrap;
+  user-select:none;
+}
+.viewer-info-menu>summary::-webkit-details-marker{display:none}
+.viewer-info-menu[open]>summary,
+.viewer-info-menu>summary:hover{
+  border-color:var(--theme-hover-border,var(--theme-border-strong));
+  background:var(--theme-gradient-soft,var(--theme-accent-soft));
+  color:var(--theme-text);
+}
+.viewer-info-popover{
+  position:absolute;
+  z-index:80;
+  top:38px;
+  right:0;
+  width:min(330px,80vw);
+  padding:12px;
+  border:1px solid var(--theme-border);
+  border-radius:12px;
+  background:var(--theme-surface-strong,var(--theme-surface));
+  box-shadow:0 18px 42px rgba(0,0,0,.32);
+}
+.viewer-info-popover>span{
+  display:block;
+  margin-bottom:5px;
+  color:var(--theme-accent);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.viewer-info-popover>strong{
+  display:block;
+  color:var(--theme-text);
+  font-size:11px;
+}
+.viewer-info-popover p{
+  margin:5px 0 0;
+  color:var(--theme-text-muted);
+  font-size:8px;
+  line-height:1.45;
+}
+.viewer-info-popover .point-structures{
+  margin-top:6px;
+}
+.info-row{display:none!important}
+
+@media(max-width:900px), (pointer:coarse){
+  .tomography-workspace{
+    display:block!important;
+    grid-template-columns:1fr!important;
+    padding:8px!important;
+    min-height:0!important;
+  }
+  .anatomy3d-panel{
+    display:none!important;
+  }
+  .tomography-mpr{
+    width:100%!important;
+  }
+  .viewer-info-menu>summary{
+    height:28px;
+    padding:0 8px;
+    font-size:7px;
+  }
+  .viewer-info-popover{
+    position:fixed;
+    left:12px;
+    right:12px;
+    top:auto;
+    bottom:calc(12px + env(safe-area-inset-bottom));
+    width:auto;
+    max-height:44vh;
+    overflow:auto;
+  }
+}
+
+/* radiologia usa o mesmo símbolo global da sidebar, sem caixa própria */
+.radiology-lab-view .sidebar-logo .logo-box,
+.radiology-lab-view .sidebar .logo-box.cortex-logo{
+  width:40px!important;
+  height:40px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.radiology-lab-view .sidebar-logo .logo-box::before,
+.radiology-lab-view .sidebar .logo-box.cortex-logo::before{
+  content:""!important;
+  display:block!important;
+  width:32px!important;
+  height:32px!important;
+  position:relative!important;
+  inset:auto!important;
+  border-radius:0!important;
+  background:url("/favicon.svg?v=cortex-white-v3") center/contain no-repeat!important;
+  opacity:1!important;
+  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--theme-accent) 35%,transparent))!important;
+}
+.radiology-lab-view .sidebar-logo .logo-box::after,
+.radiology-lab-view .sidebar .logo-box.cortex-logo::after,
+.radiology-lab-view .sidebar-logo .logo-box>*{
+  display:none!important;
+}
