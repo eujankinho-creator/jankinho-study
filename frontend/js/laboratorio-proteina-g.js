@@ -39,7 +39,10 @@ const STATE = {
   pathwayRoots: new Map(),
   pathwayStructureMaps: new Map(),
   pathwayContexts: new Map(),
-  pathwayLoading: new Map()
+  pathwayLoading: new Map(),
+  pharmacologyMode: "agonist",
+  compareMode: false,
+  rootBasePositions: new Map()
 };
 
 const CHAIN_MAP = {
@@ -415,6 +418,81 @@ function buildExperimentalPathwayComplex(parsed, config) {
 
 function currentSteps() {
   return PATHWAY_STEPS[STATE.pathway] || STEPS;
+}
+
+function studyTasksForPathway() {
+  if (STATE.pathway === "gi") return [
+    { prompt:"Selecione Gαi1.", target:"galpha", hint:"Procure a subunidade alfa do complexo Gi." },
+    { prompt:"Selecione Gβ1.", target:"gbeta", hint:"Gβ forma o núcleo do dímero Gβγ." },
+    { prompt:"Encontre a adenilato ciclase.", target:"effector", hint:"É o efetor cuja atividade é reduzida por Gi em contextos apropriados." },
+    { prompt:"Encontre o cAMP.", target:"camp", hint:"Observe o mensageiro cuja produção diminui." }
+  ];
+  if (STATE.pathway === "gq") return [
+    { prompt:"Selecione Gαq.", target:"galpha", hint:"A subunidade alfa que ativa PLCβ." },
+    { prompt:"Encontre PLCβ3.", target:"plc", hint:"Use a estrutura experimental 8UQO." },
+    { prompt:"Selecione PIP₂.", target:"pip2", hint:"Procure o fosfolipídio de membrana usado como substrato." },
+    { prompt:"Encontre IP₃.", target:"ip3", hint:"IP₃ deixa a membrana em direção ao RE." },
+    { prompt:"Mostre onde o Ca²⁺ estava armazenado.", target:"calcium", hint:"Observe a região do retículo endoplasmático." }
+  ];
+  return STUDY_TASKS;
+}
+
+function applyPharmacologyMode(mode) {
+  STATE.pharmacologyMode = mode;
+  const badge=$("pharmacologyBadge");
+  const labels={
+    agonist:"agonista · ativação plena educacional",
+    partial:"agonista parcial · resposta reduzida",
+    antagonist:"antagonista · ocupação sem ativação",
+    modulator:"modulador · efeito depende do composto"
+  };
+  if(badge) badge.textContent=labels[mode]||labels.agonist;
+  applyStep(STATE.stepIndex,{camera:false});
+}
+
+function pharmacologyGateIndex(requestedIndex) {
+  if (STATE.pharmacologyMode !== "antagonist") return requestedIndex;
+  const steps=currentSteps();
+  let ligandIndex=steps.findIndex((step)=>/LIGAND_BINDING|GQ_LIGAND_BINDING/.test(step.id));
+  if(ligandIndex<0) ligandIndex=Math.min(2,steps.length-1);
+  return Math.min(requestedIndex,ligandIndex);
+}
+
+async function toggleComparePathways() {
+  STATE.compareMode=!STATE.compareMode;
+  const button=$("compareButton");
+  if(button) button.classList.toggle("is-active",STATE.compareMode);
+  stopPlayback();
+
+  if(STATE.compareMode){
+    await Promise.all([ensurePathwayStructure("gi"),ensurePathwayStructure("gq")]);
+    for(const [id,root] of STATE.pathwayRoots){
+      if(!STATE.rootBasePositions.has(id)) STATE.rootBasePositions.set(id,root.position.clone());
+      root.visible=true;
+    }
+    const gs=STATE.pathwayRoots.get("gs");
+    const gi=STATE.pathwayRoots.get("gi");
+    const gq=STATE.pathwayRoots.get("gq");
+    if(gs) gs.position.copy(MEMBRANE_ANCHOR).add(new THREE.Vector3(-5.8,0,0));
+    if(gi) gi.position.copy(MEMBRANE_ANCHOR).add(new THREE.Vector3(0,0,0));
+    if(gq) gq.position.copy(MEMBRANE_ANCHOR).add(new THREE.Vector3(6.0,-1.0,0));
+    if(STATE.cellGroup) STATE.cellGroup.visible=false;
+    if(STATE.educationGroup) STATE.educationGroup.visible=false;
+    setRepresentation(STATE.representation);
+    animateCamera("cell");
+    if($("viewerSourceBadge")) $("viewerSourceBadge").textContent="comparação estrutural · 3SN6 · 6DDE · 8UQO";
+    if($("educationTitle")) $("educationTitle").textContent="Comparação integrada das vias";
+    if($("educationText")) $("educationText").textContent="Gs, Gi/o e Gq/11 são mostradas lado a lado com suas bases estruturais. A comparação destaca que as famílias usam efetores e segundos mensageiros diferentes.";
+  }else{
+    for(const [id,root] of STATE.pathwayRoots){
+      const base=STATE.rootBasePositions.get(id);
+      if(base) root.position.copy(base);
+    }
+    if(STATE.educationGroup) STATE.educationGroup.visible=true;
+    applyMolecularPathwayVisibility(STATE.pathway);
+    applyStep(STATE.stepIndex,{camera:true});
+    updatePathwayScienceUi();
+  }
 }
 
 function structureForPathway(id) {
@@ -1533,10 +1611,14 @@ function applyStepVisual(stepIndex) {
   }
   if (rgs) rgs.visible = isTermination;
 
-  if (STATE.pathway === "gi" && camp?.visible) {
-    camp.children.forEach((child,index)=>{ child.visible = index < 9; });
-  } else if (camp) {
-    camp.children.forEach((child)=>{ child.visible = true; });
+  if (camp) {
+    const limit = STATE.pathway === "gi" ? 9 : STATE.pharmacologyMode === "partial" ? 15 : camp.children.length;
+    camp.children.forEach((child,index)=>{ child.visible = index < limit; });
+  }
+  if (calcium?.visible && STATE.pharmacologyMode === "partial") {
+    calcium.children.forEach((child,index)=>{ child.visible = index < 36; });
+  } else if (calcium) {
+    calcium.children.forEach((child)=>{ child.visible = true; });
   }
 
   setRepresentation(STATE.representation);
@@ -1614,6 +1696,7 @@ function updateEducationalUi(index){
 
 function applyStep(index,{camera=true,fromPlayback=false}={}){
   const steps=currentSteps();
+  index=pharmacologyGateIndex(index);
   index=Math.max(0,Math.min(steps.length-1,index));
   STATE.stepIndex=index;
   const step=steps[index];
@@ -1679,7 +1762,8 @@ function setMode(mode){
 }
 
 function showStudyTask(feedback="Selecione a estrutura diretamente na cena."){
-  const task=STUDY_TASKS[STATE.studyIndex%STUDY_TASKS.length];
+  const tasks=studyTasksForPathway();
+  const task=tasks[STATE.studyIndex%tasks.length];
   $("studyPromptText").textContent=task.prompt;
   $("studyFeedback").textContent=feedback;
 }
@@ -1708,11 +1792,12 @@ function selectStructure(id,focus=false){
   }
 
   if(STATE.mode==="study"){
-    const task=STUDY_TASKS[STATE.studyIndex%STUDY_TASKS.length];
+    const tasks=studyTasksForPathway();
+    const task=tasks[STATE.studyIndex%tasks.length];
     if(id===task.target){
       showStudyTask("Correto. "+structure.name+" identificada.");
       setTimeout(()=>{
-        STATE.studyIndex=(STATE.studyIndex+1)%STUDY_TASKS.length;
+        STATE.studyIndex=(STATE.studyIndex+1)%tasks.length;
         showStudyTask();
       },1000);
     }else{
@@ -1834,6 +1919,8 @@ function bindUi(){
   $("timelineSlider")?.addEventListener("input",function(){stopPlayback();applyStep(Number(this.value));});
   $("speedSelect")?.addEventListener("change",function(){STATE.speed=Number(this.value)||1;if(STATE.playing)scheduleNext();});
   $("representationSelect")?.addEventListener("change",function(){setRepresentation(this.value);});
+  $("pharmacologySelect")?.addEventListener("change",function(){applyPharmacologyMode(this.value);});
+  $("compareButton")?.addEventListener("click",()=>toggleComparePathways().catch(console.error));
   $("fullscreenButton")?.addEventListener("click",async()=>{if(!document.fullscreenElement) await $("gpViewerHost").requestFullscreen?.(); else await document.exitFullscreen?.();});
 
   $$("[data-mode]").forEach((btn)=>btn.addEventListener("click",()=>setMode(btn.dataset.mode)));
