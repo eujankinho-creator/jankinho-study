@@ -22,6 +22,7 @@ export class RadiologyViewer {
     this.selectedLabel = 0;
     this.hiddenLabels = new Set();
     this.labelCentroids = new Map();
+    this.labelBounds = new Map();
     this.segmentationOpacity = 0.34;
     this.ready = this.init();
   }
@@ -118,7 +119,18 @@ export class RadiologyViewer {
 
       let entry = sums.get(label);
       if (!entry) {
-        entry = { x: 0, y: 0, z: 0, count: 0 };
+        entry = {
+          x: 0,
+          y: 0,
+          z: 0,
+          count: 0,
+          minX: x,
+          maxX: x,
+          minY: y,
+          maxY: y,
+          minZ: z,
+          maxZ: z
+        };
         sums.set(label, entry);
       }
 
@@ -126,6 +138,12 @@ export class RadiologyViewer {
       entry.y += y;
       entry.z += z;
       entry.count += 1;
+      entry.minX = Math.min(entry.minX, x);
+      entry.maxX = Math.max(entry.maxX, x);
+      entry.minY = Math.min(entry.minY, y);
+      entry.maxY = Math.max(entry.maxY, y);
+      entry.minZ = Math.min(entry.minZ, z);
+      entry.maxZ = Math.max(entry.maxZ, z);
     }
 
     sums.forEach((entry, label) => {
@@ -141,6 +159,20 @@ export class RadiologyViewer {
         clamp(Number(frac[1]) || 0, 0, 1),
         clamp(Number(frac[2]) || 0, 0, 1)
       ]);
+
+      this.labelBounds.set(label, {
+        min: [
+          nx <= 1 ? 0 : entry.minX / (nx - 1),
+          ny <= 1 ? 0 : entry.minY / (ny - 1),
+          nz <= 1 ? 0 : entry.minZ / (nz - 1)
+        ],
+        max: [
+          nx <= 1 ? 1 : entry.maxX / (nx - 1),
+          ny <= 1 ? 1 : entry.maxY / (ny - 1),
+          nz <= 1 ? 1 : entry.maxZ / (nz - 1)
+        ],
+        voxelCount: entry.count
+      });
     });
   }
 
@@ -381,6 +413,21 @@ export class RadiologyViewer {
     if (plane === "coronal") this.nv.setSliceType(this.nv.sliceTypeCoronal);
     if (plane === "sagittal") this.nv.setSliceType(this.nv.sliceTypeSagittal);
     this.nv.drawScene();
+  }
+
+  labelIntersectsPlane(label, plane, fraction) {
+    const bounds = this.labelBounds.get(Math.round(Number(label) || 0));
+    const config = PLANE_CONFIG[plane];
+    if (!bounds || !config) return false;
+    const axis = config.fracAxis;
+    const value = clamp(Number(fraction) || 0, 0, 1);
+    return value >= bounds.min[axis] && value <= bounds.max[axis];
+  }
+
+  structuresAtPlane(plane, fraction) {
+    return STRUCTURES.filter((structure) => {
+      return this.labelIntersectsPlane(structure.label, plane, fraction);
+    });
   }
 
   getAvailableStructureIds() {
