@@ -42,7 +42,8 @@ const STATE = {
   pathwayLoading: new Map(),
   pharmacologyMode: "agonist",
   compareMode: false,
-  rootBasePositions: new Map()
+  rootBasePositions: new Map(),
+  commonStructureObjects: new Map()
 };
 
 const CHAIN_MAP = {
@@ -502,6 +503,7 @@ function structureForPathway(id) {
   if (STATE.pathway === "gi") {
     const overrides = {
       gpcr: { name:"Receptor μ-opioide", kind:"experimental", source:"PDB 6DDE", function:"GPCR associado experimentalmente ao heterotrímero Gi no complexo 6DDE.", role:"Ativa Gi/o após ligação do agonista no contexto representado." },
+      ligand: { name:"DAMGO", kind:"experimental", source:"PDB 6DDE", function:"Agonista peptídico presente no complexo experimental 6DDE.", role:"Estabiliza o receptor μ-opioide em estado ativo no modelo estrutural." },
       galpha: { name:"Gαi1", kind:"experimental", source:"PDB 6DDE", function:"Subunidade GTPase inibitória da proteína Gi.", role:"Modula negativamente determinadas isoformas de adenilato ciclase e troca GDP por GTP." },
       gbeta: { name:"Gβ1", kind:"experimental", source:"PDB 6DDE" },
       ggamma: { name:"Gγ2", kind:"experimental", source:"PDB 6DDE" }
@@ -512,6 +514,7 @@ function structureForPathway(id) {
   if (STATE.pathway === "gq") {
     const overrides = {
       gpcr: { name:"GPCR representativo", kind:"educational", source:"Composição educacional · referência GPCR 3SN6", function:"Receptor GPCR mostrado como referência espacial para iniciar a via Gq/11.", role:"8UQO não contém GPCR; a composição combina referências distintas de forma explícita." },
+      ligand: { name:"Ligante GPCR", kind:"educational", source:"Representação educacional", function:"Ligante genérico usado para demonstrar a ativação de um GPCR acoplado a Gq/11.", role:"Nenhum ligante específico é inferido a partir de 8UQO." },
       galpha: { name:"Gαq", kind:"experimental", source:"PDB 8UQO", function:"Subunidade GTPase da família Gq.", role:"No estado ativo interage com PLCβ3 e favorece a hidrólise de PIP₂." },
       gbeta: { name:"Gβ1", kind:"experimental", source:"PDB 8UQO" },
       ggamma: { name:"Gγ", kind:"experimental", source:"PDB 8UQO" },
@@ -548,7 +551,8 @@ async function ensurePathwayStructure(pathway) {
           R:{id:"gpcr",color:0x5f93ff,radius:.18},
           A:{id:"galpha",color:0x70d5aa,radius:.22},
           B:{id:"gbeta",color:0xb494ff,radius:.22},
-          C:{id:"ggamma",color:0x67d8ba,radius:.16}
+          C:{id:"ggamma",color:0x67d8ba,radius:.16},
+          D:{id:"ligand",color:0xf2c967,radius:.115}
         },
         scale:.11, offset:[0,0,0]
       }
@@ -603,8 +607,10 @@ function applyMolecularPathwayVisibility(pathway) {
 
   const activeMap = STATE.pathwayStructureMaps.get(pathway);
   const fallbackGs = STATE.pathwayStructureMaps.get("gs");
-  ["gpcr","galpha","gbeta","ggamma","plc"].forEach((id) => {
-    const object = activeMap?.get(id) || (pathway === "gq" ? fallbackGs?.get(id) : null);
+  ["gpcr","galpha","gbeta","ggamma","plc","ligand"].forEach((id) => {
+    let object = activeMap?.get(id) || null;
+    if (!object && pathway === "gq" && ["gpcr"].includes(id)) object = fallbackGs?.get(id) || null;
+    if (!object) object = STATE.commonStructureObjects.get(id) || null;
     if (object) STATE.structureObjects.set(id,object);
   });
   rememberCurrentMolecularTransforms();
@@ -1311,6 +1317,11 @@ function createEducationObjects(parsed, molecularContext) {
   rgs.userData.structureId="rgs";
   rgs.visible=false;
   group.add(rgs); STATE.structureObjects.set("rgs",rgs);
+
+  ["ligand","gdp","gtp","effector","camp","pka","atp","pip2","ip3","dag","ip3r","calcium","pkc","rgs"].forEach((id)=>{
+    const object=STATE.structureObjects.get(id);
+    if(object) STATE.commonStructureObjects.set(id,object);
+  });
 }
 
 function rememberBaseTransforms() {
