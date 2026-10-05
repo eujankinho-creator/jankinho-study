@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261005-gprotein-lab2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261005-gprotein-lab2">
-  <link rel="stylesheet" href="/css/laboratorio-proteina-g.css?v=20261005-gprotein-lab3">
+  <link rel="stylesheet" href="/css/laboratorio-proteina-g.css?v=20261005-gprotein-lab7">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -133,6 +133,17 @@
                 </select>
               </label>
 
+              <label class="gp-representation-select gp-pharma-select">
+                <span>Farmacologia</span>
+                <select id="pharmacologySelect">
+                  <option value="agonist">Agonista</option>
+                  <option value="partial">Agonista parcial</option>
+                  <option value="antagonist">Antagonista</option>
+                  <option value="modulator">Modulador</option>
+                </select>
+              </label>
+
+              <button id="compareButton" class="gp-tool-button" type="button">Comparar vias</button>
               <button id="fullscreenButton" class="gp-tool-button" type="button">Ampliar ⛶</button>
             </div>
           </div>
@@ -160,6 +171,7 @@
 
             <div class="gp-viewer-badges">
               <span id="viewerSourceBadge">3SN6 · estrutura experimental</span>
+              <span id="pharmacologyBadge">agonista · ativação plena educacional</span>
               <span id="viewerInteractionBadge">arraste para girar · scroll para zoom</span>
             </div>
 
@@ -273,7 +285,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/laboratorio-proteina-g.js?v=20261005-gprotein-lab6"></script>
+  <script type="module" src="/js/laboratorio-proteina-g.js?v=20261005-gprotein-lab7"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
