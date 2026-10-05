@@ -1142,16 +1142,16 @@ function createProxyGeometry(structure, stat) {
   const box=structureWorldBox(stat);
   const size=box.getSize(new THREE.Vector3());
   const center=voxelToWorld(stat.centroid);
-  const geometry=new THREE.IcosahedronGeometry(1,1);
+  const geometry=new THREE.SphereGeometry(1,8,6);
   const mesh=new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial({
       color:new THREE.Color(structure.color),
-      roughness:.66,
-      metalness:.02,
+      roughness:.78,
+      metalness:0,
       transparent:true,
-      opacity:structure.category==="bones"?.6:structure.category==="vessels"?.5:.48,
-      flatShading:true
+      opacity:.035,
+      depthWrite:false
     })
   );
   mesh.position.copy(center);
@@ -1161,8 +1161,218 @@ function createProxyGeometry(structure, stat) {
     Math.max(.08,size.z*.5)
   );
   mesh.userData.structureId=structure.id;
-  mesh.userData.baseOpacity=mesh.material.opacity;
+  mesh.userData.baseOpacity=.035;
+  mesh.userData.placeholder=true;
   return mesh;
+}
+
+function axialOrdinalFromVoxel(z) {
+  const voxels=state.manifest?.planes?.axial?.voxels || [];
+  if(!voxels.length) return 0;
+  let lo=0,hi=voxels.length-1;
+  while(lo<hi){
+    const mid=(lo+hi)>>1;
+    if(voxels[mid]<z) lo=mid+1;
+    else hi=mid;
+  }
+  if(lo>0 && Math.abs(voxels[lo-1]-z)<Math.abs(voxels[lo]-z)) return lo-1;
+  return lo;
+}
+
+function ringFromMask(mask,label,zVoxel,stat,segments=22) {
+  if(!mask?.data) return null;
+  const width=mask.width;
+  const height=mask.height;
+  const minX=Math.max(1,Math.floor(stat.min[0])-2);
+  const maxX=Math.min(width-2,Math.ceil(stat.max[0])+2);
+  const minY=Math.max(1,height-2-Math.ceil(stat.max[1]));
+  const maxY=Math.min(height-2,height-2-Math.floor(stat.min[1]));
+
+  const boundary=[];
+  let sx=0,sy=0,count=0;
+  const data=mask.data;
+  const isLabel=(x,y)=>data[(x+y*width)*4]===label;
+
+  for(let py=minY;py<=maxY;py++){
+    for(let px=minX;px<=maxX;px++){
+      if(!isLabel(px,py)) continue;
+      sx+=px; sy+=py; count++;
+      if(!isLabel(px-1,py)||!isLabel(px+1,py)||!isLabel(px,py-1)||!isLabel(px,py+1)){
+        boundary.push([px,py]);
+      }
+    }
+  }
+  if(count<4||boundary.length<4) return null;
+
+  const cx=sx/count,cy=sy/count;
+  const bins=Array.from({length:segments},()=>null);
+  const radii=new Float32Array(segments);
+
+  for(const [px,py] of boundary){
+    const dx=px-cx,dy=py-cy;
+    const angle=(Math.atan2(dy,dx)+Math.PI*2)%(Math.PI*2);
+    const bin=Math.min(segments-1,Math.floor(angle/(Math.PI*2)*segments));
+    const r2=dx*dx+dy*dy;
+    if(!bins[bin]||r2>radii[bin]){
+      bins[bin]=[px,py];
+      radii[bin]=r2;
+    }
+  }
+
+  for(let i=0;i<segments;i++){
+    if(bins[i]) continue;
+    let best=null,bestDistance=Infinity;
+    for(let k=1;k<segments;k++){
+      const a=(i-k+segments)%segments;
+      const b=(i+k)%segments;
+      if(bins[a]&&k<bestDistance){best=bins[a];bestDistance=k;}
+      if(bins[b]&&k<bestDistance){best=bins[b];bestDistance=k;}
+      if(best) break;
+    }
+    bins[i]=best||[cx,cy];
+  }
+
+  const points=bins.map(([px,py])=>{
+    const originalY=(height-1)-py;
+    return voxelToWorld([px,originalY,zVoxel]);
+  });
+
+  // Suavização angular leve: mantém forma real do contorno, reduz serrilhado da máscara.
+  const smooth=points.map((point,i)=>{
+    const prev=points[(i-1+segments)%segments];
+    const next=points[(i+1)%segments];
+    return point.clone().multiplyScalar(.68)
+      .add(prev.clone().multiplyScalar(.16))
+      .add(next.clone().multiplyScalar(.16));
+  });
+  return smooth;
+}
+
+async function buildAnatomicalGeometry(structure) {
+  const stat=structureStat(structure);
+  if(!stat?.min||!stat?.max) return null;
+
+  const start=axialOrdinalFromVoxel(stat.min[2]);
+  const end=axialOrdinalFromVoxel(stat.max[2]);
+  if(end<start) return null;
+
+  const span=Math.max(1,end-start);
+  const targetRings=structure.category==="vessels"?24:structure.category==="bones"?28:22;
+  const step=Math.max(1,Math.ceil(span/targetRings));
+  const ordinals=[];
+  for(let ordinal=start;ordinal<=end;ordinal+=step) ordinals.push(ordinal);
+  if(ordinals[ordinals.length-1]!==end) ordinals.push(end);
+
+  const segments=structure.category==="vessels"?16:structure.category==="bones"?20:22;
+  const rings=[];
+
+  for(const ordinal of ordinals){
+    const mask=await loadMask(structure.group,"axial",ordinal);
+    const zVoxel=voxelFromOrdinal("axial",ordinal);
+    const ring=ringFromMask(mask,structure.label,zVoxel,stat,segments);
+    if(ring) rings.push(ring);
+  }
+
+  if(rings.length<2) return null;
+
+  const vertices=[];
+  const indices=[];
+  for(const ring of rings){
+    for(const point of ring) vertices.push(point.x,point.y,point.z);
+  }
+
+  for(let r=0;r<rings.length-1;r++){
+    const base=r*segments;
+    const next=(r+1)*segments;
+    for(let s=0;s<segments;s++){
+      const sn=(s+1)%segments;
+      const a=base+s,b=base+sn,c=next+s,d=next+sn;
+      indices.push(a,c,b,b,c,d);
+    }
+  }
+
+  const firstCenterIndex=vertices.length/3;
+  const firstCenter=rings[0].reduce((acc,p)=>acc.add(p),new THREE.Vector3()).multiplyScalar(1/segments);
+  vertices.push(firstCenter.x,firstCenter.y,firstCenter.z);
+  for(let s=0;s<segments;s++) indices.push(firstCenterIndex,(s+1)%segments,s);
+
+  const lastBase=(rings.length-1)*segments;
+  const lastCenterIndex=vertices.length/3;
+  const lastCenter=rings[rings.length-1].reduce((acc,p)=>acc.add(p),new THREE.Vector3()).multiplyScalar(1/segments);
+  vertices.push(lastCenter.x,lastCenter.y,lastCenter.z);
+  for(let s=0;s<segments;s++) indices.push(lastCenterIndex,lastBase+s,lastBase+((s+1)%segments));
+
+  const geometry=new THREE.BufferGeometry();
+  geometry.setAttribute("position",new THREE.Float32BufferAttribute(vertices,3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
+function anatomicalMaterial(structure) {
+  const bones=structure.category==="bones";
+  const vessels=structure.category==="vessels";
+  return new THREE.MeshStandardMaterial({
+    color:new THREE.Color(structure.color),
+    roughness:bones?.72:.62,
+    metalness:0,
+    transparent:true,
+    opacity:bones?.64:vessels?.58:.56,
+    side:THREE.DoubleSide,
+    depthWrite:false
+  });
+}
+
+async function replaceProxyWithAnatomicalMesh(structure) {
+  const geometry=await buildAnatomicalGeometry(structure);
+  if(!geometry) return false;
+
+  const old=state.anatomy3d.meshes.get(structure.id);
+  const mesh=new THREE.Mesh(geometry,anatomicalMaterial(structure));
+  mesh.userData.structureId=structure.id;
+  mesh.userData.baseOpacity=mesh.material.opacity;
+  mesh.userData.fromMask=true;
+
+  state.anatomy3d.root.add(mesh);
+  state.anatomy3d.meshes.set(structure.id,mesh);
+  state.anatomy3d.selectable=state.anatomy3d.selectable.filter((item)=>item!==old);
+  state.anatomy3d.selectable.push(mesh);
+
+  if(old){
+    state.anatomy3d.root.remove(old);
+    old.geometry?.dispose?.();
+    old.material?.dispose?.();
+  }
+  update3DSelection();
+  return true;
+}
+
+async function upgradeAnatomy3DMeshes() {
+  const structures=availableStructures().slice().sort((a,b)=>{
+    const priority={organs:0,bones:1,vessels:2,muscles:3};
+    return (priority[a.category]??4)-(priority[b.category]??4);
+  });
+
+  let completed=0;
+  let cursor=0;
+  const workers=Math.min(4,structures.length);
+
+  const runWorker=async()=>{
+    while(cursor<structures.length){
+      const structure=structures[cursor++];
+      try{
+        if(await replaceProxyWithAnatomicalMesh(structure)) completed++;
+      }catch(error){
+        console.warn("[tomografia-3d] falha na malha",structure.id,error);
+      }
+      if(completed>=6) $("anatomy3dLoading")?.classList.add("done");
+      await new Promise((resolve)=>setTimeout(resolve,0));
+    }
+  };
+
+  await Promise.all(Array.from({length:workers},runWorker));
+  $("anatomy3dLoading")?.classList.add("done");
 }
 
 function update3DSelection() {
@@ -1307,9 +1517,7 @@ function initAnatomy3D() {
     renderer.render(scene,camera);
   };
   render();
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    $("anatomy3dLoading")?.classList.add("done");
-  }));
+  void upgradeAnatomy3DMeshes();
 }
 
 function bindRegions() {
