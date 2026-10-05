@@ -811,3 +811,31 @@
   -webkit-appearance:none;
   appearance:none;
 }
+
+
+/* v-stack15 · tipografia global Cortex */
+.radiology-lab-view,
+.radiology-lab-view input,
+.radiology-lab-view button,
+.radiology-lab-view select,
+.radiology-lab-view textarea,
+.radiology-lab-view a,
+.radiology-lab-view small,
+.radiology-lab-view strong,
+.radiology-lab-view span,
+.radiology-lab-view p,
+.radiology-lab-view h1,
+.radiology-lab-view h2,
+.radiology-lab-view h3,
+.radiology-lab-view h4,
+.radiology-lab-view em,
+.radiology-lab-view b{
+  font-family:Inter,Arial,Helvetica,sans-serif !important;
+}
+.radiology-lab-view h1,
+.radiology-lab-view h2,
+.radiology-lab-view h3,
+.radiology-lab-view strong,
+.radiology-lab-view b{
+  letter-spacing:inherit;
+}
