@@ -201,12 +201,15 @@ function buildMolecularComplex(parsed) {
     if (!tube) continue;
     tube.userData.structureId = spec.id;
     tube.userData.kind = "cartoon";
-    root.add(tube);
 
-    const group = STATE.structureObjects.get(spec.id) || new THREE.Group();
-    group.name = spec.id;
+    let group = STATE.structureObjects.get(spec.id);
+    if (!group) {
+      group = new THREE.Group();
+      group.name = spec.id;
+      root.add(group);
+      STATE.structureObjects.set(spec.id, group);
+    }
     group.add(tube);
-    STATE.structureObjects.set(spec.id, group);
     STATE.selectable.push(tube);
   }
 
@@ -247,7 +250,8 @@ function buildAtomicRepresentation(parsed, center, axis, scale, chainAlias, root
     mesh.userData.structureId = id;
     mesh.userData.kind = "atomic";
     mesh.visible = false;
-    root.add(mesh);
+    const target = STATE.structureObjects.get(id) || root;
+    target.add(mesh);
     STATE.selectable.push(mesh);
   }
 }
@@ -285,7 +289,8 @@ function buildSurfaceRepresentation(parsed, center, axis, scale, chainAlias, roo
     points.userData.structureId = structure?.id || id;
     points.userData.kind = "surface";
     points.visible = false;
-    root.add(points);
+    const target = STATE.structureObjects.get(id) || root;
+    target.add(points);
     STATE.selectable.push(points);
   }
 }
