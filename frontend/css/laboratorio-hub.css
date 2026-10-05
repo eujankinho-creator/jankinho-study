@@ -183,7 +183,7 @@
 
 .lab-choice-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
   margin-top: 22px;
   perspective: 1400px;
@@ -318,7 +318,8 @@
 }
 
 .ecg-preview,
-.membrane-preview {
+.membrane-preview,
+.radiology-preview {
   position: relative;
   height: 224px;
   margin: 15px -24px 15px;
@@ -882,5 +883,185 @@
 
   .hub-tip {
     align-items: flex-start;
+  }
+}
+
+
+/* Radiologia 3D — preview do atlas abdominal sincronizado */
+.radiology-card {
+  --card-accent: #74d6ff;
+  --card-accent-rgb: 116, 214, 255;
+}
+
+.radiology-preview {
+  position: relative;
+  height: 224px;
+  margin: 15px -24px 15px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,.025);
+  border-bottom: 1px solid rgba(255,255,255,.035);
+  background:
+    radial-gradient(circle at 50% 55%, rgba(var(--card-accent-rgb), .075), transparent 38%),
+    linear-gradient(180deg, rgba(255,255,255,.012), rgba(0,0,0,.08));
+}
+
+.ct-frame {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  width: 196px;
+  height: 148px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(var(--card-accent-rgb), .12);
+  border-radius: 14px;
+  background: #05080a;
+  box-shadow:
+    0 14px 42px rgba(0,0,0,.28),
+    inset 0 0 36px rgba(var(--card-accent-rgb), .025);
+}
+
+.ct-body {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 139px;
+  height: 105px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 49% 51% 47% 53% / 53% 51% 49% 47%;
+  background:
+    radial-gradient(circle at 50% 54%, rgba(215,221,225,.17), rgba(130,138,144,.12) 48%, rgba(66,72,78,.14) 76%, rgba(26,31,35,.3));
+  box-shadow: inset 0 0 20px rgba(255,255,255,.025);
+}
+
+.ct-spine {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 62%;
+  width: 22px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  border-radius: 45%;
+  background: #c8d0d4;
+  box-shadow:
+    inset 0 0 0 6px #7c848a,
+    0 0 10px rgba(255,255,255,.11);
+  opacity: .74;
+}
+
+.ct-organ {
+  position: absolute;
+  z-index: 3;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(171,181,186,.27);
+  box-shadow: inset 0 0 10px rgba(255,255,255,.025);
+}
+
+.ct-liver {
+  left: 37px;
+  top: 51px;
+  width: 76px;
+  height: 48px;
+  transform: rotate(-7deg);
+  border-radius: 56% 42% 48% 38%;
+}
+
+.ct-kidney-r,
+.ct-kidney-l {
+  top: 84px;
+  width: 25px;
+  height: 34px;
+  border-radius: 48% 44% 52% 42%;
+  background: rgba(157,168,174,.32);
+}
+
+.ct-kidney-r {
+  left: 45px;
+  transform: rotate(8deg);
+}
+
+.ct-kidney-l {
+  right: 45px;
+  transform: rotate(-8deg);
+}
+
+.ct-plane-line {
+  position: absolute;
+  z-index: 5;
+  left: 11px;
+  right: 11px;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--card-accent-rgb), .77), transparent);
+  box-shadow: 0 0 12px rgba(var(--card-accent-rgb), .34);
+  animation: hubCtSweep 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes hubCtSweep {
+  from { transform: translateY(-32px); opacity: .55; }
+  to { transform: translateY(34px); opacity: 1; }
+}
+
+.radiology-readout {
+  position: absolute;
+  z-index: 6;
+  left: 24px;
+  right: 24px;
+  bottom: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: color-mix(in srgb, var(--theme-text-muted, #7f8792) 72%, transparent);
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.radiology-readout span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.radiology-readout i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  box-shadow: 0 0 11px rgba(var(--card-accent-rgb), .7);
+  animation: liveBlink 1.25s ease-in-out infinite;
+}
+
+.radiology-readout strong {
+  color: color-mix(in srgb, var(--card-accent) 68%, white);
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.radiology-icon {
+  border-color: rgba(var(--card-accent-rgb), .22) !important;
+  color: color-mix(in srgb, var(--card-accent) 82%, white) !important;
+  box-shadow: 0 0 22px rgba(var(--card-accent-rgb), .06);
+}
+
+@media (max-width: 1280px) {
+  .lab-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .radiology-card {
+    grid-column: 1 / -1;
+    min-height: 455px;
+  }
+}
+
+@media (max-width: 760px) {
+  .lab-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .radiology-card {
+    grid-column: auto;
   }
 }
