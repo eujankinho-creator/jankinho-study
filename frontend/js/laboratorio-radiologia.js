@@ -17,7 +17,9 @@ const state = {
   selectedId: null,
   imageCache: new Map(),
   maskCache: new Map(),
-  latestPointStructures: []
+  latestPointStructures: [],
+  wheelAccumulator: { axial: 0, coronal: 0, sagittal: 0 },
+  interactionBusy: false
 };
 
 async function api(url, options) {
@@ -184,10 +186,11 @@ function updateAllCrosshairs() {
   PLANES.forEach(updateCrosshair);
 }
 
-function setCoordFromClick(plane, event) {
+function pointerUv(plane, event) {
   const img = getImg(plane);
   const stage = document.querySelector('[data-stage="' + plane + '"]');
-  if (!img || !stage) return null;
+  if (!img || !stage || !img.naturalWidth) return null;
+
   const stageRect = stage.getBoundingClientRect();
   const contain = containRect(img);
   const px = event.clientX - stageRect.left;
@@ -197,8 +200,38 @@ function setCoordFromClick(plane, event) {
     return null;
   }
 
-  const u = (px - contain.left) / contain.width;
-  const v = (py - contain.top) / contain.height;
+  return {
+    u: Math.max(0, Math.min(1, (px - contain.left) / contain.width)),
+    v: Math.max(0, Math.min(1, (py - contain.top) / contain.height)),
+    contain
+  };
+}
+
+function showCursorCrosshair(plane, event) {
+  const stage = document.querySelector('[data-stage="' + plane + '"]');
+  const point = pointerUv(plane, event);
+  if (!stage || !point) return false;
+
+  const vertical = stage.querySelector(".crosshair-v");
+  const horizontal = stage.querySelector(".crosshair-h");
+  const rect = point.contain;
+
+  vertical.style.left = (rect.left + point.u * rect.width) + "px";
+  vertical.style.top = rect.top + "px";
+  vertical.style.height = rect.height + "px";
+  vertical.style.bottom = "auto";
+
+  horizontal.style.top = (rect.top + point.v * rect.height) + "px";
+  horizontal.style.left = rect.left + "px";
+  horizontal.style.width = rect.width + "px";
+  horizontal.style.right = "auto";
+  return true;
+}
+
+function setCoordFromPointer(plane, event) {
+  const point = pointerUv(plane, event);
+  if (!point) return null;
+  const { u, v } = point;
   const [nx,ny,nz] = state.manifest.originalDims;
 
   if (plane === "axial") {
@@ -420,12 +453,29 @@ async function updateViews() {
   await Promise.all(PLANES.map(renderOverlayForPlane));
 }
 
+async function updateScrolledPlane(plane) {
+  await setPlaneImage(plane);
+  updateAllCrosshairs();
+  syncSlider();
+  await renderOverlayForPlane(plane);
+}
+
 function bindViewerClicks() {
   PLANES.forEach((plane) => {
     const stage = document.querySelector('[data-stage="' + plane + '"]');
+
+    stage?.addEventListener("pointermove", (event) => {
+      setActivePlane(plane);
+      showCursorCrosshair(plane, event);
+    });
+
+    stage?.addEventListener("pointerleave", () => {
+      updateCrosshair(plane);
+    });
+
     stage?.addEventListener("click", async (event) => {
       setActivePlane(plane);
-      const uv = setCoordFromClick(plane, event);
+      const uv = setCoordFromPointer(plane, event);
       if (!uv) return;
       await updateViews();
       if ($("selectedStructureMeta")) $("selectedStructureMeta").textContent = "Identificando estruturas neste ponto...";
@@ -440,8 +490,34 @@ function bindViewerClicks() {
       }
     });
 
+    stage?.addEventListener("wheel", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      setActivePlane(plane);
+
+      state.wheelAccumulator[plane] += event.deltaY;
+      if (Math.abs(state.wheelAccumulator[plane]) < 24 || state.interactionBusy) return;
+
+      const direction = state.wheelAccumulator[plane] > 0 ? 1 : -1;
+      state.wheelAccumulator[plane] = 0;
+      state.interactionBusy = true;
+      try {
+        await moveSliceForPlane(plane, direction, true);
+      } finally {
+        state.interactionBusy = false;
+      }
+    }, { passive: false });
+
     document.querySelector('[data-plane-tile="' + plane + '"]')?.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") setActivePlane(plane);
+      if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        void moveSliceForPlane(plane, -1, true);
+      }
+      if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+        event.preventDefault();
+        void moveSliceForPlane(plane, 1, true);
+      }
     });
   });
 }
@@ -459,13 +535,18 @@ function bindSliceControls() {
   $("sliceNext")?.addEventListener("click", () => moveSlice(1));
 }
 
-async function moveSlice(delta) {
-  const values = planeInfo(state.activePlane).voxels;
-  let ordinal = planeOrdinal(state.activePlane) + delta;
+async function moveSliceForPlane(plane, delta, lightweight) {
+  const values = planeInfo(plane).voxels;
+  let ordinal = planeOrdinal(plane) + delta;
   ordinal = Math.max(0, Math.min(values.length - 1, ordinal));
-  const axis = state.activePlane === "axial" ? 2 : state.activePlane === "coronal" ? 1 : 0;
+  const axis = plane === "axial" ? 2 : plane === "coronal" ? 1 : 0;
   state.coord[axis] = values[ordinal];
-  await updateViews();
+  if (lightweight) await updateScrolledPlane(plane);
+  else await updateViews();
+}
+
+async function moveSlice(delta) {
+  await moveSliceForPlane(state.activePlane, delta, false);
 }
 
 function bindRegions() {
