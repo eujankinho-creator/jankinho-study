@@ -1,12 +1,12 @@
-import { AnatomyViewer } from "./radiologia/anatomy-viewer.js";
-import { RadiologyMultiView } from "./radiologia/radiology-multiview.js";
+import { AnatomyViewer } from "./radiologia/anatomy-viewer.js?v=20261005-premium3";
+import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-premium3";
 import {
   STRUCTURES,
   SOURCE_REGISTRY,
   RADIOLOGY_STUDY,
   PLANE_CONFIG,
   getStructure
-} from "./radiologia/data.js";
+} from "./radiologia/data.js?v=20261005-premium3";
 
 const $ = (id) => document.getElementById(id);
 
