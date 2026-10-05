@@ -139,6 +139,70 @@ export const STRUCTURES = Object.freeze({
     kind: "educational",
     function: "Proteína quinase dependente de cAMP.",
     role: "Executa parte da resposta celular por fosforilação."
+  },
+  plc: {
+    id: "plc",
+    name: "PLCβ3",
+    kind: "experimental",
+    function: "Fosfolipase C beta que hidrolisa PIP₂ quando ativada no contexto de Gq.",
+    role: "Gera os segundos mensageiros IP₃ e DAG.",
+    source: "PDB 8UQO"
+  },
+  pip2: {
+    id: "pip2",
+    name: "PIP₂",
+    kind: "educational",
+    function: "Fosfolipídio de membrana utilizado como substrato por PLCβ.",
+    role: "Sua hidrólise produz IP₃ e DAG."
+  },
+  ip3: {
+    id: "ip3",
+    name: "IP₃",
+    kind: "educational",
+    function: "Segundo mensageiro solúvel derivado de PIP₂.",
+    role: "Difunde-se pelo citosol e ativa receptores de IP₃ no retículo endoplasmático."
+  },
+  dag: {
+    id: "dag",
+    name: "DAG",
+    kind: "educational",
+    function: "Segundo mensageiro lipídico produzido pela hidrólise de PIP₂.",
+    role: "Permanece associado à membrana e coopera com Ca²⁺ na ativação de PKC."
+  },
+  ip3r: {
+    id: "ip3r",
+    name: "Receptor de IP₃",
+    kind: "educational",
+    function: "Canal de Ca²⁺ localizado no retículo endoplasmático.",
+    role: "Abre após ligação de IP₃ e libera Ca²⁺ armazenado no RE."
+  },
+  calcium: {
+    id: "calcium",
+    name: "Ca²⁺",
+    kind: "educational",
+    function: "Segundo mensageiro iônico com amplo papel regulatório.",
+    role: "É liberado do RE na via Gq/11 e participa da ativação de PKC."
+  },
+  pkc: {
+    id: "pkc",
+    name: "PKC",
+    kind: "educational",
+    function: "Família de quinases ativadas em contextos dependentes de DAG e Ca²⁺.",
+    role: "Executa respostas celulares por fosforilação de alvos."
+  },
+  atp: {
+    id: "atp",
+    name: "ATP",
+    kind: "educational",
+    function: "Nucleotídeo usado pela adenilato ciclase como substrato.",
+    role: "É convertido em cAMP na via Gs."
+  },
+  rgs: {
+    id: "rgs",
+    name: "RGS",
+    kind: "educational",
+    function: "Proteínas reguladoras que podem acelerar a atividade GTPase de Gα.",
+    role: "Participam da terminação de sinal em contextos apropriados."
   }
 });
 
@@ -157,19 +221,24 @@ export const PATHWAYS = Object.freeze({
   gi: {
     id: "gi",
     name: "Gi/o",
-    status: "prepared",
+    status: "active",
+    receptor: "Receptor μ-opioide",
+    gProtein: "Gαi1β1γ2",
     effector: "Adenilato ciclase",
     messenger: "cAMP ↓",
-    response: "Redução de sinalização dependente de cAMP",
+    response: "Redução da sinalização dependente de cAMP",
+    pdbId: "6DDE",
     color: "#74d4b0"
   },
   gq: {
     id: "gq",
     name: "Gq/11",
-    status: "prepared",
-    effector: "PLCβ",
+    status: "active",
+    gProtein: "Gαqβγ",
+    effector: "PLCβ3",
     messenger: "IP₃ + DAG",
     response: "Ca²⁺ / PKC",
+    pdbId: "8UQO",
     color: "#f0c56d"
   },
   g12: {
@@ -348,3 +417,45 @@ export const STUDY_TASKS = Object.freeze([
   { prompt: "Clique no dímero Gβ.", target: "gbeta", hint: "Gβ forma o núcleo do dímero Gβγ." },
   { prompt: "Identifique Gγ.", target: "ggamma", hint: "É a pequena subunidade associada a Gβ." }
 ]);
+
+
+export const GI_STEPS = Object.freeze([
+  { id:"GI_RESTING", title:"Gi/o em repouso", short:"Repouso", scale:"cell", structures:["cell","membrane","gpcr","galpha","gbeta","ggamma","gdp"], camera:"cell", duration:2200, text:"O receptor e o heterotrímero Gi/o estão em estado basal, com GDP ligado a Gαi.", why:"Estabelece a configuração inativa antes do estímulo.", next:"O agonista ocupa o receptor." },
+  { id:"GI_LIGAND", title:"Agonista se liga", short:"Ligante", scale:"membrane", structures:["ligand","gpcr"], camera:"membrane", duration:1900, text:"O agonista estabiliza uma conformação ativa do receptor.", why:"O receptor passa a favorecer o acoplamento de Gi.", next:"Gi aproxima-se do GPCR." },
+  { id:"GI_RECRUITMENT", title:"Gi é recrutada", short:"Acoplamento", scale:"molecular", structures:["gpcr","galpha","gbeta","ggamma","gdp"], camera:"complex", duration:2200, text:"O heterotrímero Gi interage com a face citoplasmática do GPCR.", why:"O receptor atua como catalisador da troca de nucleotídeo.", next:"GDP deixa Gαi." },
+  { id:"GI_GDP_RELEASE", title:"GDP é liberado", short:"GDP sai", scale:"detailed", structures:["galpha","gdp"], camera:"nucleotide", duration:1700, text:"A afinidade de Gαi pelo GDP diminui e o nucleotídeo deixa o sítio.", why:"A saída de GDP permite a ligação de GTP.", next:"GTP ocupa o sítio." },
+  { id:"GI_GTP_BINDING", title:"GTP se liga", short:"GTP entra", scale:"detailed", structures:["galpha","gtp"], camera:"nucleotide", duration:1700, text:"GTP liga-se a Gαi e estabiliza o estado ativo.", why:"A troca de nucleotídeo transforma o estado funcional de Gαi.", next:"Gαi-GTP e Gβγ sinalizam." },
+  { id:"GI_ACTIVE", title:"Gi/o ativa", short:"Gαi-GTP", scale:"molecular", structures:["galpha","gbeta","ggamma","gtp"], camera:"gprotein", duration:1900, text:"Gαi-GTP e Gβγ tornam-se superfícies funcionais para efetores.", why:"Gi/o não deve ser interpretada apenas como Gs invertida; Gβγ também pode sinalizar.", next:"Gαi modula a adenilato ciclase." },
+  { id:"GI_AC_INHIBITION", title:"Adenilato ciclase modulada", short:"AC ↓", scale:"molecular", structures:["galpha","effector"], camera:"effector", duration:2100, text:"Gαi reduz a atividade de determinadas isoformas de adenilato ciclase.", why:"Isso reduz a produção de cAMP em contextos celulares apropriados.", next:"A disponibilidade de cAMP diminui." },
+  { id:"GI_CAMP_DOWN", title:"cAMP reduzido", short:"cAMP ↓", scale:"subcellular", structures:["camp"], camera:"messenger", duration:2200, text:"A produção de cAMP diminui em relação ao estado estimulado por Gs.", why:"A resposta depende do receptor, da isoforma de AC e do contexto celular.", next:"O sinal é encerrado." },
+  { id:"GI_TERMINATION", title:"Hidrólise de GTP", short:"Término", scale:"detailed", structures:["galpha","gtp","gdp","rgs"], camera:"gprotein", duration:1900, text:"Gαi hidrolisa GTP para GDP; proteínas RGS podem acelerar esse processo.", why:"A hidrólise limita a duração do estado ativo.", next:"O heterotrímero se recompõe." },
+  { id:"GI_RESET", title:"Retorno ao basal", short:"Reset", scale:"cell", structures:["cell","membrane","gpcr","galpha","gbeta","ggamma","gdp"], camera:"cell", duration:1800, text:"Gαi-GDP volta a associar-se a Gβγ e o sistema retorna ao basal.", why:"O circuito fica pronto para novo estímulo.", next:"Pronto para outro ciclo." }
+]);
+
+export const GQ_STEPS = Object.freeze([
+  { id:"GQ_RESTING", title:"Gq/11 em repouso", short:"Repouso", scale:"cell", structures:["cell","membrane","gpcr","galpha","gbeta","ggamma","gdp","er"], camera:"cell", duration:2000, text:"O GPCR e Gq estão em estado basal. Ca²⁺ permanece armazenado no retículo endoplasmático.", why:"Define o estado inicial da via.", next:"O ligante aproxima-se do receptor." },
+  { id:"GQ_LIGAND_APPROACH", title:"Ligante se aproxima", short:"Ligante", scale:"membrane", structures:["ligand","gpcr"], camera:"membrane", duration:1600, text:"O agonista aproxima-se do GPCR.", why:"A via começa com reconhecimento extracelular.", next:"O ligante ocupa o receptor." },
+  { id:"GQ_LIGAND_BINDING", title:"Ligante se liga", short:"Ligação", scale:"molecular", structures:["ligand","gpcr"], camera:"receptor", duration:1600, text:"O ligante estabiliza o receptor em estado ativo.", why:"A mudança conformacional abre a interface citoplasmática.", next:"Gq aproxima-se." },
+  { id:"GQ_RECRUITMENT", title:"Gq é recrutada", short:"Gq chega", scale:"molecular", structures:["gpcr","galpha","gbeta","ggamma","gdp"], camera:"complex", duration:1800, text:"O heterotrímero Gq interage com o GPCR ativado.", why:"O receptor promove troca de nucleotídeo em Gαq.", next:"GDP é liberado." },
+  { id:"GQ_GDP_RELEASE", title:"GDP é liberado", short:"GDP sai", scale:"detailed", structures:["galpha","gdp"], camera:"nucleotide", duration:1500, text:"GDP deixa o sítio de Gαq.", why:"A saída de GDP permite a ligação de GTP.", next:"GTP entra." },
+  { id:"GQ_GTP_BINDING", title:"GTP se liga", short:"GTP entra", scale:"detailed", structures:["galpha","gtp"], camera:"nucleotide", duration:1500, text:"GTP ocupa o sítio de Gαq.", why:"Gαq passa ao estado ativo.", next:"Gαq-GTP interage com PLCβ." },
+  { id:"GQ_ACTIVE", title:"Gαq-GTP ativa", short:"Gαq-GTP", scale:"molecular", structures:["galpha","gtp","gbeta","ggamma"], camera:"gprotein", duration:1700, text:"Gαq-GTP assume conformação funcional ativa.", why:"A proteína G passa a reconhecer o efetor.", next:"PLCβ é recrutada." },
+  { id:"GQ_PLC_RECRUIT", title:"PLCβ3 na membrana", short:"PLCβ", scale:"molecular", structures:["galpha","plc","membrane"], camera:"effector", duration:1900, text:"Gαq-GTP interage com PLCβ3 em contexto de membrana.", why:"A estrutura 8UQO serve como referência para esta interação.", next:"PLCβ encontra PIP₂." },
+  { id:"GQ_PIP2", title:"PIP₂ reconhecido", short:"PIP₂", scale:"detailed", structures:["plc","pip2","membrane"], camera:"effector", duration:1700, text:"PLCβ posiciona-se para hidrolisar PIP₂ na membrana.", why:"PIP₂ é o substrato que origina os dois ramos do sinal.", next:"PIP₂ é hidrolisado." },
+  { id:"GQ_CLEAVAGE", title:"PIP₂ → IP₃ + DAG", short:"Clivagem", scale:"detailed", structures:["plc","pip2","ip3","dag"], camera:"effector", duration:1900, text:"PLCβ hidrolisa PIP₂ e produz IP₃ e DAG.", why:"Os produtos seguem destinos espaciais diferentes.", next:"IP₃ deixa a membrana." },
+  { id:"GQ_IP3_DIFFUSION", title:"IP₃ difunde-se", short:"IP₃", scale:"subcellular", structures:["ip3","er"], camera:"messenger", duration:2200, text:"IP₃ se afasta da membrana e difunde-se pelo citosol.", why:"IP₃ é solúvel e conecta a membrana ao retículo endoplasmático.", next:"IP₃ alcança seu receptor." },
+  { id:"GQ_IP3R", title:"IP₃ encontra o receptor", short:"IP₃R", scale:"subcellular", structures:["ip3","ip3r","er"], camera:"response", duration:1900, text:"IP₃ liga-se ao receptor de IP₃ no retículo endoplasmático.", why:"A ligação controla um canal de liberação de Ca²⁺.", next:"O canal se abre." },
+  { id:"GQ_CA_RELEASE", title:"Ca²⁺ é liberado", short:"Ca²⁺", scale:"subcellular", structures:["ip3r","calcium","er"], camera:"response", duration:2200, text:"O canal abre e Ca²⁺ armazenado no RE é liberado para o citosol.", why:"O aumento local de Ca²⁺ atua como segundo mensageiro.", next:"DAG permanece na membrana." },
+  { id:"GQ_DAG", title:"DAG permanece na membrana", short:"DAG", scale:"membrane", structures:["dag","membrane"], camera:"membrane", duration:1700, text:"DAG continua inserido na membrana enquanto IP₃ se dispersa no citosol.", why:"Essa diferença espacial é essencial para entender a via.", next:"DAG e Ca²⁺ convergem sobre PKC." },
+  { id:"GQ_PKC", title:"PKC é recrutada", short:"PKC", scale:"subcellular", structures:["dag","calcium","pkc"], camera:"response", duration:2100, text:"DAG e Ca²⁺ favorecem o recrutamento e ativação de isoformas de PKC apropriadas.", why:"A sinalização converge em uma quinase efetora.", next:"PKC modifica alvos celulares." },
+  { id:"GQ_RESPONSE", title:"Resposta celular", short:"Resposta", scale:"subcellular", structures:["pkc","calcium"], camera:"response", duration:2200, text:"PKC e Ca²⁺ modulam proteínas-alvo e respostas celulares.", why:"A resposta final depende do tipo celular e do receptor.", next:"Gαq encerra o sinal." },
+  { id:"GQ_TERMINATION", title:"GTP é hidrolisado", short:"Término", scale:"detailed", structures:["galpha","gtp","gdp","rgs"], camera:"gprotein", duration:1800, text:"Gαq hidrolisa GTP para GDP; RGS pode acelerar a reação.", why:"O mecanismo limita a duração do sinal.", next:"O heterotrímero é recomposto." },
+  { id:"GQ_REASSEMBLY", title:"Reassociação", short:"Reassociação", scale:"molecular", structures:["galpha","gbeta","ggamma","gdp"], camera:"complex", duration:1700, text:"Gαq-GDP volta a associar-se a Gβγ.", why:"A proteína G retorna ao estado basal.", next:"O sistema é resetado." },
+  { id:"GQ_RESET", title:"Retorno ao basal", short:"Reset", scale:"cell", structures:["cell","membrane","gpcr","galpha","gbeta","ggamma","gdp","er"], camera:"cell", duration:1700, text:"A cena retorna ao estado inicial e o Ca²⁺ é novamente representado no compartimento do RE.", why:"O ciclo de sinalização pode reiniciar.", next:"Pronto para novo estímulo." }
+]);
+
+export const PATHWAY_STEPS = Object.freeze({
+  gs: STEPS,
+  gi: GI_STEPS,
+  gq: GQ_STEPS
+});
