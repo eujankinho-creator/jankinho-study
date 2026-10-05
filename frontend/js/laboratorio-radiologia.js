@@ -1,4 +1,4 @@
-import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas6";
+import { RadiologyMultiView } from "./radiologia/radiology-multiview.js?v=20261005-atlas7";
 import {
   STRUCTURES,
   SOURCE_REGISTRY,
@@ -6,7 +6,7 @@ import {
   PLANE_CONFIG,
   REGION_TARGETS,
   getStructure
-} from "./radiologia/data.js?v=20261005-atlas6";
+} from "./radiologia/data.js?v=20261005-atlas7";
 
 const $ = (id) => document.getElementById(id);
 const state = {
@@ -417,6 +417,7 @@ function bindControls(radiology) {
 }
 
 async function boot() {
+  updateExamProgress({ percent: 1, label: "Preparando exame", detail: "iniciando carregamento" });
   let syncing = false;
   const radiology = new RadiologyMultiView(
     $("radiologyMultiView"),
