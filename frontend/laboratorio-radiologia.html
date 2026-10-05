@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-rad1">
+  <link rel="stylesheet" href="/css/laboratorio-radiologia.css?v=20261005-rad2">
 
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
@@ -234,22 +234,51 @@
             </div>
           </div>
 
-          <div class="radiology-stage">
-            <canvas id="radiologyCanvas" aria-label="Visualizador de cortes radiológicos didáticos"></canvas>
+          <div class="mpr-stage-grid">
+            <div class="radiology-stage radiology-stage-main">
+              <div class="mpr-view-badge">
+                <span>VISTA PRINCIPAL</span>
+                <strong id="mprMainPlaneLabel">Axial</strong>
+              </div>
 
-            <span id="orientTop" class="rad-orient rad-orient-top">Anterior</span>
-            <span id="orientBottom" class="rad-orient rad-orient-bottom">Posterior</span>
-            <span id="orientLeft" class="rad-orient rad-orient-left">Direita</span>
-            <span id="orientRight" class="rad-orient rad-orient-right">Esquerda</span>
+              <canvas id="radiologyCanvas" aria-label="Visualizador principal de cortes radiológicos didáticos"></canvas>
 
-            <div class="slice-readout">
-              <span>CORTE</span>
-              <strong><b id="sliceCurrent">61</b> / <b id="sliceTotal">120</b></strong>
-              <small id="sliceCoordinate">0.00 u anat.</small>
+              <span id="orientTop" class="rad-orient rad-orient-top">Anterior</span>
+              <span id="orientBottom" class="rad-orient rad-orient-bottom">Posterior</span>
+              <span id="orientLeft" class="rad-orient rad-orient-left">Direita</span>
+              <span id="orientRight" class="rad-orient rad-orient-right">Esquerda</span>
+
+              <div class="slice-readout">
+                <span>CORTE</span>
+                <strong><b id="sliceCurrent">61</b> / <b id="sliceTotal">120</b></strong>
+                <small id="sliceCoordinate">0.00 u anat.</small>
+              </div>
+
+              <div class="image-instructions">
+                roda do mouse = cortes · Ctrl/Shift + roda = zoom · arraste = pan
+              </div>
             </div>
 
-            <div class="image-instructions">
-              roda do mouse = cortes · Ctrl/Shift + roda = zoom · arraste = pan
+            <div class="mpr-preview-stack" aria-label="Vistas secundárias do exame">
+              <button type="button" class="mpr-preview-card" data-mpr-preview="0" data-preview-plane="coronal">
+                <div class="mpr-preview-head">
+                  <span id="mprPreviewLabelA">Coronal</span>
+                  <small>clique para ampliar</small>
+                </div>
+                <div class="mpr-preview-stage">
+                  <canvas id="radiologyPreviewA" aria-label="Vista radiológica secundária A"></canvas>
+                </div>
+              </button>
+
+              <button type="button" class="mpr-preview-card" data-mpr-preview="1" data-preview-plane="sagittal">
+                <div class="mpr-preview-head">
+                  <span id="mprPreviewLabelB">Sagital</span>
+                  <small>clique para ampliar</small>
+                </div>
+                <div class="mpr-preview-stage">
+                  <canvas id="radiologyPreviewB" aria-label="Vista radiológica secundária B"></canvas>
+                </div>
+              </button>
             </div>
           </div>
 
@@ -379,7 +408,7 @@
   <div id="anatomyTooltip" class="rad-tooltip" hidden></div>
   <div id="radiologyTooltip" class="rad-tooltip" hidden></div>
 
-  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-rad1"></script>
+  <script type="module" src="/js/laboratorio-radiologia.js?v=20261005-rad2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
