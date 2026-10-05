@@ -26,6 +26,68 @@ const state = {
   )
 };
 
+const MPR_PLANES = ["axial", "coronal", "sagittal"];
+let mprPreviews = [];
+
+function syncMprPreviews(radiology) {
+  const mainLabel = $("mprMainPlaneLabel");
+  if (mainLabel) {
+    mainLabel.textContent = PLANE_CONFIG[state.plane].label;
+  }
+
+  if (!mprPreviews.length) return;
+
+  const secondaryPlanes = MPR_PLANES.filter(function (plane) {
+    return plane !== state.plane;
+  });
+
+  mprPreviews.forEach(function (preview, index) {
+    const plane = secondaryPlanes[index] || "coronal";
+    const label = PLANE_CONFIG[plane].label;
+
+    preview.button.dataset.previewPlane = plane;
+    preview.button.setAttribute("aria-label", "Ampliar vista " + label);
+    preview.label.textContent = label;
+
+    if (preview.viewer.study.id !== radiology.study.id) {
+      preview.viewer.setStudy(radiology.study.id);
+    }
+
+    if (preview.viewer.plane !== plane) {
+      preview.viewer.setPlane(plane);
+    }
+
+    preview.viewer.setSelected(state.selectedId);
+
+    if (state.selectedId) {
+      const structure = getStructure(state.selectedId);
+      if (structure) {
+        const coordinate = structurePlaneCoordinate(structure, plane);
+        preview.viewer.setSlice(
+          sliceForCoordinate(plane, coordinate, preview.viewer.study.slices),
+          true
+        );
+      }
+    } else {
+      preview.viewer.setSlice(
+        Math.round((preview.viewer.study.slices - 1) / 2),
+        true
+      );
+    }
+  });
+}
+
+function bindMprPreviews(anatomy, radiology) {
+  mprPreviews.forEach(function (preview) {
+    preview.button.addEventListener("click", function () {
+      const plane = this.dataset.previewPlane;
+      if (!plane || plane === state.plane) return;
+      setPlane(plane, anatomy, radiology);
+      announce(PLANE_CONFIG[plane].label + " ampliado na vista principal");
+    });
+  });
+}
+
 async function api(url, options) {
   const response = await fetch(url, Object.assign({
     credentials: "same-origin"
@@ -165,6 +227,7 @@ function selectStructure(id, anatomy, radiology, recenter) {
   updateStructureListSelection();
   updateStructureInfo();
   updateSelectedStateBadge(radiology);
+  syncMprPreviews(radiology);
 
   if (!state.selectedId) return;
 
@@ -332,6 +395,7 @@ function syncSliceUi(anatomy, radiology) {
 
   updateSlicePresence(radiology);
   updateSelectedStateBadge(radiology);
+  syncMprPreviews(radiology);
 }
 
 function setPlane(plane, anatomy, radiology) {
@@ -468,7 +532,8 @@ function bindControls(anatomy, radiology) {
 
   $("radReset").addEventListener("click", function () {
     radiology.resetView();
-    $("radZoomValue").textContent = "100%";
+    $("radZoomValue").textContent =
+      Math.round(radiology.zoom * 100) + "%";
   });
 
   $("resetAnatomy").addEventListener("click", function () {
@@ -506,6 +571,11 @@ function boot() {
   });
 
   const radiology = new RadiologyViewer($("radiologyCanvas"), {
+    fitScale: 0.33,
+    initialZoom: 0.86,
+    minZoom: 0.62,
+    maxZoom: 3.4,
+    pixelRatioCap: 1.5,
     onSliceChange: function () {
       syncSliceUi(anatomy, radiology);
     },
@@ -526,6 +596,35 @@ function boot() {
     }
   });
 
+  mprPreviews = [
+    {
+      button: document.querySelector('[data-mpr-preview="0"]'),
+      label: $("mprPreviewLabelA"),
+      viewer: new RadiologyViewer($("radiologyPreviewA"), {
+        interactive: false,
+        compact: true,
+        fitScale: 0.36,
+        initialZoom: 0.82,
+        pixelRatioCap: 1.1
+      })
+    },
+    {
+      button: document.querySelector('[data-mpr-preview="1"]'),
+      label: $("mprPreviewLabelB"),
+      viewer: new RadiologyViewer($("radiologyPreviewB"), {
+        interactive: false,
+        compact: true,
+        fitScale: 0.36,
+        initialZoom: 0.82,
+        pixelRatioCap: 1.1
+      })
+    }
+  ].filter(function (preview) {
+    return preview.button && preview.label && preview.viewer;
+  });
+
+  bindMprPreviews(anatomy, radiology);
+
   createStructureList(anatomy, radiology);
   bindSlicePresence(anatomy, radiology);
   bindControls(anatomy, radiology);
@@ -533,6 +632,7 @@ function boot() {
   updatePlaneButtons();
   updateOrientationLabels();
   updateStudyUi(radiology);
+  $("radZoomValue").textContent = Math.round(radiology.zoom * 100) + "%";
   syncSliceUi(anatomy, radiology);
   updateStructureInfo();
 
