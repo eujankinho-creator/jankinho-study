@@ -299,14 +299,67 @@ function createStructureList() {
   ).join("");
 
   container.querySelectorAll("[data-structure]").forEach((button) => {
-    button.addEventListener("click", () => selectStructure(button.dataset.structure, true));
+    button.addEventListener("click", async () => {
+      await selectStructure(button.dataset.structure, true);
+      closeStructureSearchPanel();
+    });
   });
+
+  if ($("structureCount")) {
+    $("structureCount").textContent = structures.length + " estruturas disponíveis";
+  }
 
   $("structureSearch")?.addEventListener("input", function () {
     const q = this.value.trim().toLowerCase();
+    let visible = 0;
     container.querySelectorAll(".structure-row").forEach((row) => {
-      row.hidden = Boolean(q && !row.dataset.search.includes(q));
+      const hidden = Boolean(q && !row.dataset.search.includes(q));
+      row.hidden = hidden;
+      if (!hidden) visible += 1;
     });
+    if ($("structureCount")) {
+      $("structureCount").textContent = q
+        ? visible + " resultado" + (visible === 1 ? "" : "s")
+        : structures.length + " estruturas disponíveis";
+    }
+  });
+}
+
+function openStructureSearchPanel() {
+  const panel = $("structureSearchPanel");
+  const trigger = $("openStructureSearch");
+  if (!panel) return;
+  panel.hidden = false;
+  requestAnimationFrame(() => panel.classList.add("open"));
+  trigger?.setAttribute("aria-expanded", "true");
+  setTimeout(() => $("structureSearch")?.focus(), 60);
+}
+
+function closeStructureSearchPanel() {
+  const panel = $("structureSearchPanel");
+  const trigger = $("openStructureSearch");
+  if (!panel || panel.hidden) return;
+  panel.classList.remove("open");
+  trigger?.setAttribute("aria-expanded", "false");
+  setTimeout(() => {
+    if (!panel.classList.contains("open")) panel.hidden = true;
+  }, 150);
+}
+
+function bindStructureSearchPanel() {
+  $("openStructureSearch")?.addEventListener("click", openStructureSearchPanel);
+  $("closeStructureSearch")?.addEventListener("click", closeStructureSearchPanel);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeStructureSearchPanel();
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    const panel = $("structureSearchPanel");
+    const trigger = $("openStructureSearch");
+    if (!panel || panel.hidden) return;
+    if (panel.contains(event.target) || trigger?.contains(event.target)) return;
+    closeStructureSearchPanel();
   });
 }
 
@@ -854,6 +907,7 @@ async function boot() {
 
   setProgress(32, "Preparando visualizador", "baixando 3 imagens iniciais");
   createStructureList();
+  bindStructureSearchPanel();
   bindViewerClicks();
   bindColorToggle();
   bindSliceControls();
