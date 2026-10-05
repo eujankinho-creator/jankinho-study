@@ -990,8 +990,8 @@ function createMembrane() {
   STATE.membraneGroup = group;
   STATE.scene.add(group);
 
-  const grid = 15;
-  const spacing = .9;
+  const grid = 19;
+  const spacing = .72;
   const count = grid * grid * 2;
   const headGeom = new THREE.SphereGeometry(.16, 8, 6);
   const tailGeom = new THREE.CylinderGeometry(.045,.045,.52,6);
@@ -1029,8 +1029,58 @@ function createMembrane() {
   heads.count = hi;
   tails.count = ti;
   group.add(heads, tails);
+
+  // Colesterol: representação educacional do núcleo esteroide inserido entre as caudas.
+  const cholesterolGeometry = new THREE.CapsuleGeometry(.055,.27,4,6);
+  const cholesterolMaterial = new THREE.MeshStandardMaterial({
+    color:0xe9d6a3,
+    roughness:.5,
+    transparent:true,
+    opacity:.66
+  });
+  const cholesterol = new THREE.InstancedMesh(cholesterolGeometry,cholesterolMaterial,72);
+  const cm = new THREE.Matrix4();
+  const cq = new THREE.Quaternion();
+  const cs = new THREE.Vector3(1,.8,.7);
+  for(let i=0;i<72;i++){
+    const ix=(i*7)%17-8;
+    const iz=(i*11)%17-8;
+    const x=ix*spacing*.78;
+    const z=iz*spacing*.78;
+    const y=(i%2===0?.16:-.16);
+    cq.setFromEuler(new THREE.Euler((i%3)*.12,0,(i%5)*.08));
+    cm.compose(new THREE.Vector3(x,y,z),cq,cs);
+    cholesterol.setMatrixAt(i,cm);
+  }
+  cholesterol.instanceMatrix.needsUpdate=true;
+  cholesterol.userData.structureId="membrane";
+  group.add(cholesterol);
+
+  // Proteínas integrais secundárias dão contexto de densidade proteica sem competir com o GPCR principal.
+  const membraneProteinMaterial = new THREE.MeshStandardMaterial({
+    color:0x7897aa,
+    roughness:.58,
+    transparent:true,
+    opacity:.46
+  });
+  [[-4.7,3.6],[4.4,3.1],[-4.1,-3.8],[4.8,-3.4]].forEach(([x,z],proteinIndex)=>{
+    const bundle=new THREE.Group();
+    bundle.position.set(x,0,z);
+    for(let h=0;h<4;h++){
+      const helix=new THREE.Mesh(new THREE.CapsuleGeometry(.075,1.35,5,8),membraneProteinMaterial);
+      helix.position.set((h%2-.5)*.22,0,(Math.floor(h/2)-.5)*.22);
+      helix.rotation.z=(h%2?-.08:.08);
+      helix.userData.structureId="membrane";
+      bundle.add(helix);
+      STATE.selectable.push(helix);
+    }
+    bundle.rotation.y=proteinIndex*.7;
+    group.add(bundle);
+  });
+
   heads.userData.structureId = "membrane";
-  STATE.selectable.push(heads);
+  tails.userData.structureId = "membrane";
+  STATE.selectable.push(heads,cholesterol);
   STATE.structureObjects.set("membrane", group);
 }
 
