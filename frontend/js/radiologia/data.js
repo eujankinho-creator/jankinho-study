@@ -501,11 +501,23 @@ const HRA_STRUCTURE_MATCHERS = Object.freeze({
   },
   right_kidney: {
     systems: ["renal"],
-    match: [/kidney.*right/i, /right.*kidney/i]
+    match: [
+      /kidney.*right/i,
+      /right.*kidney/i,
+      /kidney.*_R\b/i,
+      /renal.*_R\b/i,
+      /\(right\)/i
+    ]
   },
   left_kidney: {
     systems: ["renal"],
-    match: [/kidney.*left/i, /left.*kidney/i]
+    match: [
+      /kidney.*left/i,
+      /left.*kidney/i,
+      /kidney.*_L\b/i,
+      /renal.*_L\b/i,
+      /\(left\)/i
+    ]
   },
   gallbladder: {
     systems: ["digestive"],
@@ -533,7 +545,7 @@ const HRA_STRUCTURE_MATCHERS = Object.freeze({
   },
   small_bowel: {
     systems: ["digestive"],
-    match: [/small.?intest/i, /jejun/i, /ileum/i]
+    match: [/small.?intest/i, /jejun/i, /jejenum/i, /ileum/i]
   },
   duodenum: {
     systems: ["digestive"],
