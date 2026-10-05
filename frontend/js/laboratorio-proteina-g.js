@@ -1580,9 +1580,9 @@ function applyStepVisual(stepIndex) {
   const isLigand = /LIGAND/.test(id);
   const isGdpRelease = /GDP_RELEASE/.test(id);
   const isGtpBinding = /GTP_BINDING/.test(id);
-  const isActiveG = /ACTIVE|ACTIVATION|AC_INHIBITION|PLC_RECRUIT|PIP2|CLEAVAGE|IP3|CA_RELEASE|DAG|PKC|RESPONSE/.test(id);
-  const isTermination = /TERMINATION/.test(id);
-  const isReassembly = /REASSEMBLY/.test(id);
+  const isActiveG = /G_PROTEIN_ACTIVE|GI_ACTIVE|GQ_ACTIVE|EFFECTOR_ACTIVATION|AC_INHIBITION|PLC_INTERACTION|PLC_RECRUIT|PIP2|CLEAVAGE|IP3|CA_RELEASE|CA_RISE|DAG|PKC|RESPONSE/.test(id);
+  const isTermination = /TERMINATION|GTP_HYDROLYSIS/.test(id);
+  const isReassembly = /REASSEMBLY|GDP_RETURN/.test(id);
 
   if (STATE.membraneGroup) STATE.membraneGroup.visible = true;
 
@@ -1594,14 +1594,14 @@ function applyStepVisual(stepIndex) {
     const object=STATE.structureObjects.get(structureId);
     if (!object) return;
     if (STATE.pathway === "gq" && structureId === "er") {
-      object.visible = showWholeCell || /IP3|CA_RELEASE|RESPONSE/.test(id);
+      object.visible = showWholeCell || /IP3|IP3R_OPEN|CA_RELEASE|CA_RISE|RESPONSE/.test(id);
     } else {
       object.visible = showWholeCell;
     }
   });
 
   if (ligand) {
-    ligand.visible = isLigand || /RECRUITMENT|GPCR_ACTIVATED/.test(id);
+    ligand.visible = isLigand || /RECRUITMENT|GPCR_ACTIVATED|GPCR_CONFORMATION|GQ_APPROACH|GQ_INTERACTION/.test(id);
     const base = STATE.baseTransforms.get("ligand");
     if (base) ligand.position.copy(base.position);
     if (/APPROACH/.test(id) || id === "LIGAND_BINDING") ligand.position.y += 2.2;
@@ -1654,7 +1654,7 @@ function applyStepVisual(stepIndex) {
   if (pka) pka.visible = STATE.pathway === "gs" && /CELLULAR_RESPONSE/.test(id);
 
   if (plc) {
-    plc.visible = STATE.pathway === "gq" && /PLC_RECRUIT|PIP2|CLEAVAGE|IP3|CA_RELEASE|DAG|PKC|RESPONSE/.test(id);
+    plc.visible = STATE.pathway === "gq" && /PLC_INTERACTION|PLC_RECRUIT|PIP2|CLEAVAGE|IP3|IP3R_OPEN|CA_RELEASE|CA_RISE|DAG|PKC|RESPONSE/.test(id);
   }
   if (pip2) pip2.visible = STATE.pathway === "gq" && /PIP2|CLEAVAGE/.test(id);
   if (dag) dag.visible = STATE.pathway === "gq" && /CLEAVAGE|DAG|PKC|RESPONSE/.test(id);
@@ -1665,13 +1665,14 @@ function applyStepVisual(stepIndex) {
     if (/IP3_DIFFUSION/.test(id)) ip3.position.set(.2,-5.1,-.8);
     if (/IP3R/.test(id)) ip3.position.set(-1.6,-8.0,-1.9);
   }
-  if (ip3r) ip3r.visible = STATE.pathway === "gq" && /IP3R|CA_RELEASE/.test(id);
+  if (ip3r) ip3r.visible = STATE.pathway === "gq" && /IP3R|IP3R_OPEN|CA_RELEASE/.test(id);
   if (calcium) {
-    calcium.visible = STATE.pathway === "gq" && /CA_RELEASE|PKC|RESPONSE/.test(id);
+    calcium.visible = STATE.pathway === "gq" && /IP3R_OPEN|CA_RELEASE|CA_RISE|PKC|RESPONSE/.test(id);
     const base=STATE.baseTransforms.get("calcium");
     if(base) calcium.position.copy(base.position);
+    if (/IP3R_OPEN/.test(id)) calcium.position.set(-1.8,-8.7,-2.0);
     if (/CA_RELEASE/.test(id)) calcium.position.set(-1.1,-6.9,-1.5);
-    if (/PKC|RESPONSE/.test(id)) calcium.position.set(.6,-4.6,-.2);
+    if (/CA_RISE|PKC|RESPONSE/.test(id)) calcium.position.set(.6,-4.6,-.2);
   }
   if (pkc) {
     pkc.visible = STATE.pathway === "gq" && /PKC|RESPONSE/.test(id);
