@@ -22,6 +22,8 @@ export class RadiologyMultiView {
     this.viewers = {};
     this.tiles = new Map();
     this.segmentationFailures = [];
+    this.segmentationsLoaded = false;
+    this.segmentationsLoading = null;
 
     PLANES.forEach((plane) => {
       if (!this.canvases[plane]) {
@@ -98,6 +100,44 @@ export class RadiologyMultiView {
     return loaded;
   }
 
+  async ensureSegmentations() {
+    if (this.segmentationsLoaded) return true;
+    if (this.segmentationsLoading) return this.segmentationsLoading;
+
+    this.segmentationsLoading = (async () => {
+      const segmentationVolumes = await this.loadSegmentations();
+
+      if (!segmentationVolumes.length) {
+        this.segmentationsLoading = null;
+        return false;
+      }
+
+      PLANES.forEach((plane) => {
+        this.viewers[plane]?.addSharedSegmentations(
+          segmentationVolumes,
+          plane === "axial"
+        );
+      });
+
+      this.segmentationsLoaded = true;
+      this.segmentationsLoading = null;
+
+      if (typeof this.options.onSegmentationsReady === "function") {
+        this.options.onSegmentationsReady({
+          availableLabels: Array.from(this.viewers.axial?.labelCentroids?.keys?.() || []),
+          segmentationFailures: this.segmentationFailures.slice()
+        });
+      }
+
+      return true;
+    })().catch((error) => {
+      this.segmentationsLoading = null;
+      throw error;
+    });
+
+    return this.segmentationsLoading;
+  }
+
   async init() {
     // 1) Baixa/descompacta o CT uma única vez.
     const baseVolume = await this.loadBaseVolume();
@@ -130,26 +170,16 @@ export class RadiologyMultiView {
       });
     }
 
-    // 4) Só depois baixa as máscaras. Falha de overlay não bloqueia o CT.
-    const segmentationVolumes = await this.loadSegmentations();
-
-    if (segmentationVolumes.length) {
-      PLANES.forEach((plane) => {
-        this.viewers[plane]?.addSharedSegmentations(
-          segmentationVolumes,
-          plane === "axial"
-        );
-      });
-    }
-
+    // 4) A interface fica pronta sem esperar as máscaras.
+    // As segmentações são carregadas apenas quando o usuário pedir estruturas.
     this.initializing = false;
 
     if (typeof this.options.onReady === "function") {
       this.options.onReady({
         study: axial.study,
         dims: axial.dims.slice(),
-        availableLabels: Array.from(axial.labelCentroids.keys()),
-        segmentationFailures: this.segmentationFailures.slice()
+        availableLabels: [],
+        segmentationFailures: []
       });
     }
 
