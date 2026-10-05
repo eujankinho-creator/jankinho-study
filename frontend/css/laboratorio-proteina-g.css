@@ -840,3 +840,22 @@
     scroll-behavior:auto!important;
   }
 }
+
+
+/* v-lab7 · farmacologia e comparação estrutural */
+.gp-tool-button.is-active{
+  border-color:color-mix(in srgb,var(--gp-accent) 46%,transparent);
+  background:var(--theme-accent-soft);
+  color:var(--gp-text);
+}
+.gp-pharma-select select{
+  min-width:110px;
+}
+#pharmacologyBadge{
+  color:var(--gp-text-soft);
+}
+@media(max-width:900px){
+  .gp-pharma-select{
+    min-width:180px;
+  }
+}
