@@ -1,5 +1,5 @@
-import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-premium3";
-import { PLANE_CONFIG, getStructureByLabel, clamp } from "./data.js?v=20261005-premium3";
+import { RadiologyViewer } from "./radiology-viewer.js?v=20261005-atlas1";
+import { PLANE_CONFIG, getStructureByLabel, clamp } from "./data.js?v=20261005-atlas1";
 
 const PLANES = ["axial", "coronal", "sagittal"];
 
@@ -107,23 +107,25 @@ export class RadiologyMultiView {
   }
 
   applyTileLayout() {
-    const secondary = PLANES.filter((plane) => plane !== this.primaryPlane);
-
     PLANES.forEach((plane) => {
       const tile = this.tiles.get(plane);
       if (!tile) return;
 
-      const primary = plane === this.primaryPlane;
-      tile.classList.toggle("is-primary", primary);
-      tile.classList.toggle("is-secondary", !primary);
-      tile.classList.toggle("secondary-top", plane === secondary[0]);
-      tile.classList.toggle("secondary-bottom", plane === secondary[1]);
-      tile.setAttribute("aria-current", primary ? "true" : "false");
-      tile.setAttribute("tabindex", primary ? "-1" : "0");
+      const axial = plane === "axial";
+      const active = plane === this.primaryPlane;
+      tile.classList.toggle("is-primary", axial);
+      tile.classList.toggle("is-secondary", !axial);
+      tile.classList.toggle("secondary-top", plane === "coronal");
+      tile.classList.toggle("secondary-bottom", plane === "sagittal");
+      tile.classList.toggle("is-active-plane", active);
+      tile.setAttribute("aria-current", active ? "true" : "false");
+      tile.setAttribute("tabindex", axial ? "-1" : "0");
 
       const expand = tile.querySelector("[data-expand-label]");
       if (expand) {
-        expand.textContent = primary ? "ampliado" : "clique para ampliar";
+        expand.textContent = axial
+          ? (active ? "principal · ativo" : "principal")
+          : (active ? "eixo ativo" : "clique para ativar");
       }
     });
 
@@ -143,8 +145,7 @@ export class RadiologyMultiView {
 
   applyQualityRoles() {
     PLANES.forEach((plane) => {
-      const role = plane === this.primaryPlane ? "primary" : "secondary";
-      this.viewers[plane]?.setQualityRole(role);
+      this.viewers[plane]?.setQualityRole(plane === "axial" ? "primary" : "secondary");
     });
   }
 
