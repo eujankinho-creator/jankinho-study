@@ -897,3 +897,58 @@
 .plane-header-right b[data-plane-structure]{
   display:none !important;
 }
+
+
+/* v-stack18 · busca na barra, preset enxuto e interação fluida */
+.viewer-actions{
+  position:relative;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.viewer-search-shell{
+  margin:0 !important;
+  position:relative;
+}
+.structure-search-launcher.compact{
+  width:auto;
+  min-width:142px;
+  min-height:30px;
+  height:30px;
+  padding:0 10px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.structure-search-launcher.compact>span:nth-child(2){
+  font-size:9px;
+}
+.viewer-search-shell .structure-search-panel{
+  top:38px;
+  right:0;
+  transform-origin:top right;
+}
+.region-strip.single{
+  grid-template-columns:minmax(180px,260px);
+  justify-content:start;
+}
+.region-strip.single button{
+  width:100%;
+}
+@media(max-width:720px){
+  .viewer-actions{
+    width:100%;
+    justify-content:flex-start;
+  }
+  .viewer-search-shell{
+    position:static;
+  }
+  .viewer-search-shell .structure-search-panel{
+    position:fixed;
+    top:auto;
+    right:10px;
+    left:10px;
+    bottom:12px;
+  }
+  .structure-search-launcher.compact{
+    min-width:0;
+  }
+}
