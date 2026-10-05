@@ -22,7 +22,8 @@ const state = {
   interactionBusy: false,
   pointerFrame: 0,
   pointerRefreshTimer: 0,
-  lastPointerPlane: null
+  lastPointerPlane: null,
+  pointerNavToken: 0
 };
 
 async function api(url, options) {
@@ -136,7 +137,7 @@ function preloadImage(url) {
 
 function prefetchAround(plane, ordinal) {
   const total = planeInfo(plane).voxels.length;
-  [-3,-2,-1,1,2,3].forEach((delta) => {
+  [-6,-5,-4,-3,-2,-1,1,2,3,4,5,6].forEach((delta) => {
     const next = ordinal + delta;
     if (next >= 0 && next < total) preloadImage(imageUrl(plane, next)).catch(() => {});
   });
@@ -463,27 +464,50 @@ async function updateScrolledPlane(plane) {
   await renderOverlayForPlane(plane);
 }
 
-async function updatePointerNavigation(plane) {
+function setPlaneImageFast(plane, token) {
+  const ordinal = planeOrdinal(plane);
+  const img = getImg(plane);
+  if (!img) return;
+
+  const url = imageUrl(plane, ordinal);
+  if (img.dataset.requestedUrl !== url) {
+    img.dataset.requestedUrl = url;
+    img.src = url;
+  }
+
+  prefetchAround(plane, ordinal);
+
+  const count = document.querySelector('[data-plane-count="' + plane + '"]');
+  if (count) count.textContent = (ordinal + 1) + " / " + planeInfo(plane).voxels.length;
+
+  img.onload = () => {
+    if (token !== state.pointerNavToken) return;
+    updateCrosshair(plane);
+  };
+}
+
+function updatePointerNavigationFast(plane) {
+  const token = ++state.pointerNavToken;
   const orthogonal = PLANES.filter((item) => item !== plane);
-  await Promise.all(orthogonal.map(setPlaneImage));
+  orthogonal.forEach((item) => setPlaneImageFast(item, token));
   updateAllCrosshairs();
   syncSlider();
-  await Promise.all(orthogonal.map(renderOverlayForPlane));
+
+  clearTimeout(state.pointerRefreshTimer);
+  state.pointerRefreshTimer = setTimeout(() => {
+    if (token !== state.pointerNavToken) return;
+    void Promise.all(orthogonal.map(renderOverlayForPlane));
+  }, 120);
 }
 
 function schedulePointerNavigation(plane) {
   state.lastPointerPlane = plane;
   if (state.pointerFrame) return;
+
   state.pointerFrame = requestAnimationFrame(() => {
     state.pointerFrame = 0;
-    updateAllCrosshairs();
-    syncSlider();
-
-    clearTimeout(state.pointerRefreshTimer);
-    state.pointerRefreshTimer = setTimeout(() => {
-      const currentPlane = state.lastPointerPlane;
-      if (currentPlane) void updatePointerNavigation(currentPlane);
-    }, 38);
+    if (!state.lastPointerPlane) return;
+    updatePointerNavigationFast(state.lastPointerPlane);
   });
 }
 
@@ -505,6 +529,7 @@ function bindViewerClicks() {
     stage?.addEventListener("pointerleave", () => {
       clearTimeout(state.pointerRefreshTimer);
       state.lastPointerPlane = null;
+      state.pointerNavToken += 1;
       updateAllCrosshairs();
     });
 
