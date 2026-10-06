@@ -12,7 +12,7 @@
       "pink-glitter"
     ) {
 
-      return "Pink Glitter";
+      return "Pink";
 
     }
 
@@ -22,7 +22,7 @@
       "blue-black"
     ) {
 
-      return "Blue Black";
+      return "Blue";
 
     }
 
@@ -32,12 +32,12 @@
       "black-white"
     ) {
 
-      return "Black & White";
+      return "White";
 
     }
 
 
-    return "Dark Orange";
+    return "Orange";
   }
 
 
