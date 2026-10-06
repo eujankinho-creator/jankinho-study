@@ -1,6 +1,27 @@
 const $=(id)=>document.getElementById(id);
 const state={dashboard:null,sources:[]};
 
+const EXAMS={
+  ENARE:{
+    label:"ENARE — Enfermagem",
+    search:"ENARE Enfermagem",
+    focus:"Residência multiprofissional/uniprofissional",
+    topics:["SAE e Processo de Enfermagem","SUS e Saúde Coletiva","Semiologia e Semiotécnica","Fundamentos de Enfermagem","Urgência e Emergência","Saúde do Adulto e Idoso","Saúde da Mulher","Saúde da Criança","Epidemiologia e Vigilância","Segurança do Paciente"]
+  },
+  EBSERH:{
+    label:"EBSERH — Enfermagem",
+    search:"EBSERH Enfermagem Área Assistencial",
+    focus:"Concurso hospitalar da rede HU Brasil",
+    topics:["Conhecimentos Específicos","SUS e Legislação em Saúde","Legislação EBSERH","Segurança do Paciente","Urgência e UTI","Controle de Infecção","Processo de Enfermagem","Português","Farmacologia","CME"]
+  },
+  MINISTERIO_SAUDE:{
+    label:"Ministério da Saúde — Enfermagem/Saúde",
+    search:"Ministério da Saúde concurso enfermagem CPNU",
+    focus:"Concursos e seleções do Ministério da Saúde",
+    topics:["SUS e Legislação","Políticas Públicas de Saúde","PNAB e Atenção Primária","Epidemiologia e Vigilância","Redes de Atenção","Conhecimentos de Enfermagem","Urgência e Emergência","Segurança do Paciente","Ética e Legislação","Gestão em Saúde"]
+  }
+};
+
 function esc(value){
   return String(value??"")
     .replaceAll("&","&amp;")
@@ -43,9 +64,12 @@ function actionForTask(task){
 }
 
 function sourceCard(source){
+  const badge=source.oficial
+    ? '<span class="source-badge">FONTE OFICIAL</span>'
+    : '<span class="source-badge reference">REFERÊNCIA DE ESTRUTURA</span>';
   return `<article class="source-card">
     <div>
-      ${source.oficial?'<span class="source-badge">FONTE OFICIAL</span>':""}
+      ${badge}
       <strong>${esc(source.titulo||source.title)}</strong>
       <span>${esc(source.dominio||source.domain||"")} ${source.pdf?"· PDF":""}</span>
     </div>
@@ -181,21 +205,36 @@ async function researchExam(prova){
   }
 }
 
+function selectedExam(){
+  const type=$("examType").value;
+  const exam=EXAMS[type]||EXAMS.ENARE;
+  const edition=$("examEdition").value.trim();
+  return {type,exam,prova:exam.label+(edition?" · "+edition:"")};
+}
+
+function renderExamBlueprint(){
+  const {exam}=selectedExam();
+  $("examBlueprint").innerHTML=
+    '<div><span>MATRIZ DE ESTUDO</span><strong>'+esc(exam.focus)+'</strong></div>'+
+    '<div class="exam-topic-list">'+exam.topics.map((topic)=>'<span>'+esc(topic)+'</span>').join("")+'</div>';
+}
+
 async function buildSchedule(event){
   event.preventDefault();
   const button=$("buildScheduleButton");
-  const prova=$("examName").value.trim();
-  if(!prova) return;
+  const selected=selectedExam();
+  const prova=selected.prova;
   button.disabled=true;
   const original=button.innerHTML;
   button.innerHTML="<b>Construindo plano…</b><small>pesquisa + pesos + desempenho</small>";
 
   try{
-    await researchExam(prova);
+    await researchExam(selected.exam.search+" "+($("examEdition").value.trim()||""));
     await api("/api/cronograma/generate",{
       method:"POST",
       body:JSON.stringify({
         prova,
+        tipoProva:selected.type,
         dataProva:$("examDate").value||null,
         horasPorDia:Number($("hoursPerDay").value||2),
         diasPorSemana:Number($("daysPerWeek").value||6),
@@ -227,15 +266,23 @@ function setDefaultDate(){
 }
 
 $("scheduleForm").addEventListener("submit",buildSchedule);
+$("examType").addEventListener("change",renderExamBlueprint);
+$("examEdition").addEventListener("input",renderExamBlueprint);
 $("newPlanButton").addEventListener("click",()=>{
   $("scheduleDashboard").hidden=true;
   $("scheduleEmpty").hidden=false;
   $("scheduleEmpty").scrollIntoView({behavior:"smooth",block:"start"});
 });
 setDefaultDate();
+renderExamBlueprint();
 loadDashboard();
 
 const params=new URLSearchParams(location.search);
 if(params.get("prova")){
-  $("examName").value=params.get("prova");
+  const incoming=params.get("prova").toUpperCase();
+  if(incoming.includes("EBSERH")) $("examType").value="EBSERH";
+  else if(incoming.includes("MINIST")||incoming.includes("CPNU")) $("examType").value="MINISTERIO_SAUDE";
+  else $("examType").value="ENARE";
+  $("examEdition").value=params.get("prova");
+  renderExamBlueprint();
 }
