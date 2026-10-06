@@ -47,6 +47,19 @@
         logo
       ) {
 
+        /*
+         * A sidebar tem um único dono: sidebar-standard.js.
+         * Evita que este script substitua a imagem global por
+         * outra implementação dependendo da ordem de carregamento.
+         */
+        if (
+          logo.closest(".sidebar-logo") ||
+          logo.closest(".cortex-mobile-sidebar-header") ||
+          logo.classList.contains("cortex-global-logo-box")
+        ) {
+          return;
+        }
+
         if (
           logo.classList
             .contains(
