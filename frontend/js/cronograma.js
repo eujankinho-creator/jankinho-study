@@ -1,5 +1,5 @@
 const $=(id)=>document.getElementById(id);
-const state={dashboard:null,sources:[]};
+const state={dashboard:null};
 
 const EXAMS={
   ENARE:{
@@ -195,33 +195,6 @@ async function loadDashboard(){
   }
 }
 
-async function researchExam(prova){
-  const status=$("researchStatus");
-  const sources=$("researchSources");
-  status.hidden=false;
-  status.className="research-status busy";
-  status.textContent="Pesquisando editais, provas e fontes institucionais…";
-  sources.hidden=true;
-  sources.innerHTML="";
-
-  const result=await api("/api/cronograma/research?q="+encodeURIComponent(prova));
-  state.sources=result.items||[];
-
-  status.className="research-status";
-  status.textContent=state.sources.length
-    ? state.sources.length+" fontes e referências encontradas. Editais oficiais definem o conteúdo; referências de estrutura ajudam a organizar ciclos e revisões."
-    : "Nenhuma fonte oficial indexada foi encontrada agora. O Córtex usará a matriz base da prova e seu desempenho.";
-
-  if(state.sources.length){
-    sources.hidden=false;
-    sources.innerHTML=state.sources.slice(0,8).map((item)=>sourceCard({
-      ...item,
-      titulo:item.title,
-      dominio:item.domain
-    })).join("");
-  }
-}
-
 function selectedExam(){
   const checked=document.querySelector('input[name="examType"]:checked');
   if(!checked) return null;
@@ -247,19 +220,21 @@ async function buildSchedule(event){
   event.preventDefault();
   const button=$("buildScheduleButton");
   const selected=selectedExam();
+  const message=$("scheduleFormMessage");
+  if(message) message.hidden=true;
   if(!selected){
-    $("researchStatus").hidden=false;
-    $("researchStatus").className="research-status";
-    $("researchStatus").textContent="Escolha ENARE, EBSERH ou Ministério da Saúde antes de montar o cronograma.";
+    if(message){
+      message.hidden=false;
+      message.textContent="Escolha ENARE, EBSERH ou Ministério da Saúde antes de montar o cronograma.";
+    }
     return;
   }
   const prova=selected.prova;
   button.disabled=true;
   const original=button.innerHTML;
-  button.innerHTML="<b>Construindo plano…</b><small>pesquisa + pesos + desempenho</small>";
+  button.innerHTML="<b>Construindo plano…</b><small>matriz + pesos + desempenho</small>";
 
   try{
-    await researchExam(selected.exam.search+" "+($("examEdition").value.trim()||""));
     await api("/api/cronograma/generate",{
       method:"POST",
       body:JSON.stringify({
@@ -270,16 +245,16 @@ async function buildSchedule(event){
         diasPorSemana:Number($("daysPerWeek").value||6),
         nivel:$("knowledgeLevel").value,
         dificuldades:splitTerms($("difficulties").value),
-        prioridades:splitTerms($("priorities").value),
-        sources:state.sources
+        prioridades:splitTerms($("priorities").value)
       })
     });
     await loadDashboard();
     $("scheduleDashboard").scrollIntoView({behavior:"smooth",block:"start"});
   }catch(error){
-    $("researchStatus").hidden=false;
-    $("researchStatus").className="research-status";
-    $("researchStatus").textContent=error.message;
+    if(message){
+      message.hidden=false;
+      message.textContent=error.message;
+    }
   }finally{
     button.disabled=false;
     button.innerHTML=original;
@@ -305,7 +280,6 @@ $("newPlanButton").addEventListener("click",()=>{
   $("examEdition").value="";
   $("difficulties").value="";
   $("priorities").value="";
-  state.sources=[];
   renderExamBlueprint();
   $("scheduleDashboard").hidden=true;
   $("scheduleEmpty").hidden=false;
