@@ -9,6 +9,7 @@ const state = {
   respondida: false,
   pontuacao: 0,
   corretaAtual: false,
+  temaCronograma: "",
   alternativasManual: [
     { texto: "", correta: false },
     { texto: "", correta: false },
@@ -566,6 +567,36 @@ async function carregarDados() {
 }
 
 
+function normalizarTextoBusca(valor) {
+  return t(valor)
+    .toLocaleLowerCase("pt-BR")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+
+function bateTemaCronograma(texto, tema) {
+  const haystack = normalizarTextoBusca(texto);
+  const query = normalizarTextoBusca(tema);
+
+  if (!query) return true;
+  if (haystack.includes(query)) return true;
+
+  const ignorar = new Set(["de","da","do","das","dos","e","em","a","o","para","com","no","na","nos","nas"]);
+  const tokens = query
+    .split(" ")
+    .filter((token) => token.length >= 3 && !ignorar.has(token));
+
+  if (!tokens.length) return false;
+
+  const matches = tokens.filter((token) => haystack.includes(token)).length;
+  const minimo = tokens.length <= 2 ? 1 : Math.max(2, Math.ceil(tokens.length * .45));
+  return matches >= minimo;
+}
+
+
 function aplicarFiltros() {
 
   const busca =
@@ -605,6 +636,13 @@ function aplicarFiltros() {
           !busca ||
           textoBusca.includes(
             busca
+          ) ||
+          (
+            state.temaCronograma &&
+            bateTemaCronograma(
+              textoBusca,
+              state.temaCronograma
+            )
           );
 
 
@@ -2271,6 +2309,7 @@ $("limparFiltros")
     function () {
 
       $("busca").value = "";
+      state.temaCronograma = "";
 
       $("filtroDisciplina")
         .value = "";
@@ -2465,6 +2504,41 @@ async function iniciar() {
       carregarUsuario(),
       carregarDados()
     ]);
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const temaCronograma =
+      t(
+        params.get("tema")
+      )
+        .trim();
+
+    if (temaCronograma) {
+
+      state.temaCronograma =
+        temaCronograma;
+
+      $("busca").value =
+        temaCronograma;
+
+      aplicarFiltros();
+
+      const filtros =
+        document.querySelector(
+          ".filters-card"
+        );
+
+      if (filtros) {
+        filtros.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+    }
 
   }
   catch (erro) {
