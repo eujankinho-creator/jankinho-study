@@ -398,7 +398,7 @@ function renderLista() {
               <div class="flashcard-top">
 
                 <span class="badge badge-orange">
-                  \${
+                  ${
                     card.origem ===
                       "questao"
                       ? "Questão"
