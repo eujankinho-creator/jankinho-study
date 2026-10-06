@@ -3,10 +3,7 @@
   "use strict";
 
 
-  const ALLOWED_USERS = [
-    "pedro henrique",
-    "beatriz valerio"
-  ];
+  const ALLOWED_USERS = [];
 
 
   let currentUser =
@@ -112,28 +109,9 @@
     user
   ) {
 
-    if (
-      !user
-    ) {
-
-      return false;
-
-    }
-
-
-    const name =
-      normalizeName(
-        user.nome ||
-        ""
-      );
-
-
-    return (
-      name === "pedro" ||
-      name === "pedro henrique" ||
-      name.startsWith("pedro henrique ") ||
-      name === "beatriz valerio" ||
-      name.startsWith("beatriz valerio ")
+    return Boolean(
+      user &&
+      user.id
     );
 
   }
@@ -311,202 +289,193 @@
 
 
   /* =======================================================
-     TEMA
+     VISIBILIDADE / PREFERENCIA DO PET
   ======================================================= */
 
-  function currentTheme() {
-
-    try {
-
-      const stored =
-        localStorage.getItem(
-          "jankinho_theme_v1"
-        );
-
-
-      if (
-        stored ===
-          "pink-glitter" ||
-        stored ===
-          "dark-orange" ||
-        stored ===
-          "blue-black" ||
-        stored ===
-          "black-white"
-      ) {
-
-        return stored;
-
-      }
-
-    }
-    catch (
-      error
-    ) {}
-
-
-    try {
-
-      if (
-        window.JankinhoTheme &&
-        typeof window
-          .JankinhoTheme
-          .getTheme ===
-          "function"
-      ) {
-
-        return window
-          .JankinhoTheme
-          .getTheme();
-
-      }
-
-    }
-    catch (
-      error
-    ) {}
-
+  function petModeKey() {
 
     return (
-      document.documentElement
-        .getAttribute(
-          "data-theme"
-        ) ||
-      "dark-orange"
+      "cortex_pet_mode_v1_" +
+      (
+        currentUser &&
+        currentUser.id
+          ? currentUser.id
+          : "local"
+      )
     );
 
   }
 
 
-  function updateVisibility() {
+  function getPetMode() {
 
-    const pet =
+    try {
+
+      const saved =
+        localStorage.getItem(
+          petModeKey()
+        );
+
+
+      if (
+        saved === "visible" ||
+        saved === "hidden" ||
+        saved === "removed"
+      ) {
+
+        return saved;
+
+      }
+
+    }
+    catch (
+      error
+    ) {}
+
+
+    return "hidden";
+
+  }
+
+
+  function savePetMode(
+    mode
+  ) {
+
+    try {
+
+      localStorage.setItem(
+        petModeKey(),
+        mode
+      );
+
+    }
+    catch (
+      error
+    ) {}
+
+  }
+
+
+  function applyPetMode(
+    requestedMode,
+    persist
+  ) {
+
+    const mode =
+      requestedMode === "visible" ||
+      requestedMode === "hidden" ||
+      requestedMode === "removed"
+        ? requestedMode
+        : "hidden";
+
+
+    if (
+      persist !== false
+    ) {
+
+      savePetMode(
+        mode
+      );
+
+    }
+
+
+    let pet =
       document.getElementById(
         "cortexPinkPet"
       );
 
 
     if (
+      mode === "removed"
+    ) {
+
+      if (
+        pet
+      ) {
+
+        pet.remove();
+
+      }
+
+
+      return mode;
+
+    }
+
+
+    if (
       !pet
     ) {
+
+      createPet();
+
+
+      pet =
+        document.getElementById(
+          "cortexPinkPet"
+        );
+
+    }
+
+
+    if (
+      pet
+    ) {
+
+      pet.hidden =
+        mode !== "visible";
+
+
+      pet.dataset.petMode =
+        mode;
+
+    }
+
+
+    return mode;
+
+  }
+
+
+  function updateVisibility() {
+
+    if (
+      !userAllowed(
+        currentUser
+      )
+    ) {
+
+      const pet =
+        document.getElementById(
+          "cortexPinkPet"
+        );
+
+
+      if (
+        pet
+      ) {
+
+        pet.remove();
+
+      }
+
 
       return;
 
     }
 
 
-    let documentTheme =
-      document.documentElement
-        .getAttribute(
-          "data-theme"
-        );
-
-
-    let storedTheme =
-      "";
-
-
-    let managerTheme =
-      "";
-
-
-    try {
-
-      storedTheme =
-        localStorage.getItem(
-          "jankinho_theme_v1"
-        ) ||
-        "";
-
-    }
-    catch (
-      error
-    ) {}
-
-
-    try {
-
-      if (
-        window.JankinhoTheme &&
-        typeof window
-          .JankinhoTheme
-          .getTheme ===
-          "function"
-      ) {
-
-        managerTheme =
-          window.JankinhoTheme
-            .getTheme() ||
-          "";
-
-      }
-
-    }
-    catch (
-      error
-    ) {}
-
-
-    const pink =
-      documentTheme ===
-        "pink-glitter" ||
-      storedTheme ===
-        "pink-glitter" ||
-      managerTheme ===
-        "pink-glitter";
-
-
-    const allowed =
-      userAllowed(
-        currentUser
-      );
-
-
-    pet.hidden =
-      !(
-        allowed &&
-        pink
-      );
-
-
-    pet.dataset.petAuthorized =
-      allowed
-        ? "yes"
-        : "no";
-
-
-    pet.dataset.petPink =
-      pink
-        ? "yes"
-        : "no";
+    applyPetMode(
+      getPetMode(),
+      false
+    );
 
   }
 
 
-  function watchTheme() {
-
-    if (
-      window.JankinhoTheme &&
-      typeof window
-        .JankinhoTheme
-        .subscribe ===
-        "function"
-    ) {
-
-      window.JankinhoTheme
-        .subscribe(
-          function () {
-
-            window.setTimeout(
-              updateVisibility,
-              20
-            );
-
-          }
-        );
-
-    }
-
+  function watchPetPreference() {
 
     window.addEventListener(
       "storage",
@@ -516,7 +485,7 @@
 
         if (
           event.key ===
-          "jankinho_theme_v1"
+          petModeKey()
         ) {
 
           updateVisibility();
@@ -527,30 +496,77 @@
     );
 
 
-    const observer =
-      new MutationObserver(
-        function () {
+    window.addEventListener(
+      "message",
+      function (
+        event
+      ) {
 
-          window.setTimeout(
-            updateVisibility,
-            80
+        if (
+          event.origin !==
+          window.location.origin
+        ) {
+
+          return;
+
+        }
+
+
+        const data =
+          event.data;
+
+
+        if (
+          !data ||
+          data.type !==
+            "cortex:pet-mode"
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          data.userId &&
+          currentUser &&
+          Number(data.userId) !==
+            Number(currentUser.id)
+        ) {
+
+          return;
+
+        }
+
+
+        applyPetMode(
+          data.mode,
+          true
+        );
+
+      }
+    );
+
+
+    window.CortexPetControl = {
+
+      getMode:
+        getPetMode,
+
+
+      setMode:
+        function (
+          mode
+        ) {
+
+          return applyPetMode(
+            mode,
+            true
           );
 
         }
-      );
 
-
-    observer.observe(
-      document.documentElement,
-      {
-        attributes:
-          true,
-
-        attributeFilter: [
-          "data-theme"
-        ]
-      }
-    );
+    };
 
   }
 
@@ -2438,25 +2454,14 @@
 
       loadState();
 
-      createPet();
-
-      updateVisibility();
-
-      window.setTimeout(
-        updateVisibility,
-        100
-      );
-
-      window.setTimeout(
-        updateVisibility,
-        500
-      );
-
-      watchTheme();
+      watchPetPreference();
 
       watchIframe();
 
-      updateVisibility();
+      applyPetMode(
+        getPetMode(),
+        false
+      );
 
 
       /*
