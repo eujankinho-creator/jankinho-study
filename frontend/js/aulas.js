@@ -442,6 +442,13 @@ async function boot() {
   });
 
   await loadDashboard();
+
+  const params = new URLSearchParams(location.search);
+  const queryFromUrl = String(params.get("q") || "").trim();
+  if (queryFromUrl) {
+    await runSearch(queryFromUrl);
+  }
+
   maybePlayFromUrl();
 
   try {
