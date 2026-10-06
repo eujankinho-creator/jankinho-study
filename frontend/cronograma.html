@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#070707">
+  <title>Cronograma de Estudos | Cortex</title>
+  <script>
+    (function(){
+      var theme="dark-orange";
+      try{theme=localStorage.getItem("jankinho_theme_v1")||theme;}catch(e){}
+      document.documentElement.setAttribute("data-theme",theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/app.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261006-globalperf1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma1">
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261006-globalperf1"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
+</head>
+<body class="schedule-view">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box"></div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+    <div class="sidebar-menu"></div>
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info"><strong id="nomeSidebar">Carregando...</strong><span id="emailSidebar"></span></div>
+      <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header schedule-header">
+      <div>
+        <div class="header-title">Cronograma de Estudos</div>
+        <span>Planejamento inteligente conectado ao seu desempenho</span>
+      </div>
+      <div class="header-user">
+        <div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div>
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
+      </div>
+    </header>
+
+    <main class="schedule-page">
+      <section class="schedule-hero">
+        <div>
+          <span class="schedule-kicker">PLANEJAMENTO INTELIGENTE</span>
+          <h1>Transforme seu objetivo em uma <em>rotina executável.</em></h1>
+          <p>O Córtex pesquisa fontes oficiais, cruza incidência, prioridade, dificuldade, seu histórico de questões e o tempo disponível para distribuir teoria, revisão, questões e simulados.</p>
+        </div>
+        <div class="schedule-hero-badges">
+          <span>Fontes oficiais primeiro</span>
+          <span>Revisão espaçada</span>
+          <span>Integração com Aulas e Questões</span>
+        </div>
+      </section>
+
+      <section id="scheduleEmpty" class="schedule-builder">
+        <div class="schedule-builder-head">
+          <div><span>NOVO PLANO</span><h2>Monte seu cronograma</h2></div>
+          <small>ENARE · EBSERH · residências · concursos de enfermagem</small>
+        </div>
+
+        <form id="scheduleForm" class="schedule-form">
+          <label class="wide"><span>Qual prova você quer fazer?</span><input id="examName" type="text" maxlength="180" placeholder="Ex.: ENARE Enfermagem 2027" required></label>
+          <label><span>Data da prova</span><input id="examDate" type="date"></label>
+          <label><span>Horas por dia</span><input id="hoursPerDay" type="number" min="0.5" max="12" step="0.5" value="2"></label>
+          <label><span>Dias por semana</span><input id="daysPerWeek" type="number" min="1" max="7" value="6"></label>
+          <label><span>Nível atual</span>
+            <select id="knowledgeLevel">
+              <option value="INICIANTE">Iniciante</option>
+              <option value="INTERMEDIARIO" selected>Intermediário</option>
+              <option value="AVANCADO">Avançado</option>
+            </select>
+          </label>
+          <label class="wide"><span>Maiores dificuldades</span><input id="difficulties" type="text" placeholder="Ex.: SUS, urgência, farmacologia"></label>
+          <label class="wide"><span>Prioridades</span><input id="priorities" type="text" placeholder="Ex.: saúde coletiva, cálculo de medicamentos"></label>
+
+          <div class="schedule-form-actions wide">
+            <button id="buildScheduleButton" type="submit"><b>Pesquisar e montar</b><small>fontes oficiais + seu desempenho</small></button>
+            <p>O cronograma não copia um plano pronto: ele reorganiza os conteúdos encontrados conforme seus dados.</p>
+          </div>
+        </form>
+
+        <div id="researchStatus" class="research-status" hidden></div>
+        <div id="researchSources" class="research-sources" hidden></div>
+      </section>
+
+      <section id="scheduleDashboard" class="schedule-dashboard" hidden>
+        <div class="schedule-overview">
+          <article class="schedule-main-progress">
+            <div class="overview-head">
+              <div><span>PLANO ATIVO</span><h2 id="activeExam">Cronograma</h2><small id="activeExamMeta"></small></div>
+              <button id="newPlanButton" type="button">Novo plano</button>
+            </div>
+            <div class="main-progress-row">
+              <strong id="mainProgressValue">0%</strong>
+              <div><div class="main-progress-track"><i id="mainProgressBar"></i></div><span id="mainProgressText">0 de 0 tarefas</span></div>
+            </div>
+          </article>
+          <article class="schedule-today-score">
+            <span>HOJE</span><strong id="todayScore">0/0</strong><small>tarefas concluídas</small>
+          </article>
+          <article class="schedule-countdown">
+            <span>ATÉ A PROVA</span><strong id="countdownValue">—</strong><small id="countdownLabel">sem data definida</small>
+          </article>
+        </div>
+
+        <section class="schedule-section">
+          <div class="section-heading"><div><span>FOCO DO DIA</span><h2>Hoje</h2></div><small id="todayDateLabel"></small></div>
+          <div id="todayTasks" class="task-grid"></div>
+        </section>
+
+        <section class="schedule-section">
+          <div class="section-heading"><div><span>PRÓXIMOS PASSOS</span><h2>Agenda inteligente</h2></div><small>adapta-se ao espaço disponível</small></div>
+          <div id="upcomingSchedule" class="schedule-timeline"></div>
+        </section>
+
+        <section class="schedule-split">
+          <article class="schedule-section">
+            <div class="section-heading"><div><span>BASE DO PLANO</span><h2>Fontes pesquisadas</h2></div></div>
+            <div id="activeSources" class="active-sources"></div>
+          </article>
+          <article class="schedule-section schedule-integration">
+            <span>CÓRTEX INTEGRADO</span>
+            <h2>Do planejamento à prática</h2>
+            <p>Cada bloco leva diretamente para Aulas, Questões, Flashcards ou Simulado. Seu histórico de questões também influencia a prioridade do próximo cronograma.</p>
+            <div><a href="/aulas">Aulas</a><a href="/questoes">Questões</a><a href="/flashcards">Flashcards</a><a href="/simulado">Simulado</a></div>
+          </article>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/js/cronograma.js?v=20261006-cronograma1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+</body>
+</html>
