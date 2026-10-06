@@ -2,27 +2,51 @@
   "use strict";
 
   const STORAGE_KEY = "jankinho_theme_v1";
-  const ONLY_THEME = "dark-orange";
+  const DEFAULT_THEME = "dark-orange";
+  const THEMES = new Set([
+    "dark-orange",
+    "dark-pink",
+    "dark-green",
+    "dark-purple",
+    "dark-black",
+  ]);
   const listeners = new Set();
 
-  function persistLocal() {
+  function normalizeTheme(value) {
+    const theme = String(value || "").trim();
+    return THEMES.has(theme) ? theme : DEFAULT_THEME;
+  }
+
+  function readLocalTheme() {
     try {
-      localStorage.setItem(STORAGE_KEY, ONLY_THEME);
+      return normalizeTheme(localStorage.getItem(STORAGE_KEY));
+    } catch {
+      return DEFAULT_THEME;
+    }
+  }
+
+  function persistLocal(theme) {
+    try {
+      localStorage.setItem(STORAGE_KEY, normalizeTheme(theme));
     } catch {}
   }
 
-  function notify() {
+  function notify(theme) {
     listeners.forEach(function (listener) {
       try {
-        listener(ONLY_THEME);
+        listener(theme);
       } catch (error) {
         console.error(error);
       }
     });
   }
 
-  function broadcast() {
-    const message = { type: "cortex-theme-change", theme: ONLY_THEME };
+  function broadcast(theme) {
+    const normalized = normalizeTheme(theme);
+    const message = {
+      type: "cortex-theme-change",
+      theme: normalized,
+    };
     const origin = window.location.origin;
 
     try {
@@ -40,74 +64,154 @@
     } catch {}
   }
 
-  function applyTheme(options) {
+  function applyTheme(theme, options) {
+    const normalized = normalizeTheme(theme);
     const settings = options || {};
-    document.documentElement.setAttribute("data-theme", ONLY_THEME);
-    persistLocal();
 
-    if (settings.notify !== false) notify();
-    if (settings.broadcast !== false) broadcast();
+    document.documentElement.setAttribute("data-theme", normalized);
+    persistLocal(normalized);
 
-    return ONLY_THEME;
+    if (settings.notify !== false) {
+      notify(normalized);
+    }
+
+    if (settings.broadcast !== false) {
+      broadcast(normalized);
+    }
+
+    return normalized;
   }
 
-  async function persistAccountTheme() {
+  async function persistAccountTheme(theme) {
+    const normalized = normalizeTheme(theme);
+
     try {
       const response = await fetch("/api/configuracoes/tema", {
         method: "PATCH",
         credentials: "same-origin",
         keepalive: true,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tema: ONLY_THEME }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          tema: normalized,
+        }),
       });
 
-      if (response.status === 401 || response.status === 403) return;
-    } catch {}
+      if (response.status === 401 || response.status === 403) {
+        return normalized;
+      }
+
+      return normalized;
+    } catch {
+      return normalized;
+    }
   }
 
   async function syncFromAccount() {
-    applyTheme({ broadcast: true, notify: true });
-    await persistAccountTheme();
+    let theme = readLocalTheme();
+
+    try {
+      const response = await fetch("/api/configuracoes", {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-store",
+      });
+
+      if (response.ok) {
+        const data = await response.json().catch(function () {
+          return {};
+        });
+
+        theme = normalizeTheme(
+          data &&
+          data.usuario &&
+          data.usuario.tema
+        );
+      }
+    } catch {}
+
+    return applyTheme(theme, {
+      broadcast: true,
+      notify: true,
+    });
   }
 
   window.addEventListener("storage", function (event) {
-    if (event.key !== STORAGE_KEY) return;
-    applyTheme({ broadcast: false, notify: true });
+    if (event.key !== STORAGE_KEY) {
+      return;
+    }
+
+    applyTheme(event.newValue, {
+      broadcast: false,
+      notify: true,
+    });
   });
 
   window.addEventListener("message", function (event) {
-    if (event.origin !== window.location.origin) return;
+    if (event.origin !== window.location.origin) {
+      return;
+    }
+
     const data = event.data;
-    if (!data || data.type !== "cortex-theme-change") return;
-    applyTheme({ broadcast: false, notify: true });
+
+    if (!data || data.type !== "cortex-theme-change") {
+      return;
+    }
+
+    applyTheme(data.theme, {
+      broadcast: false,
+      notify: true,
+    });
   });
 
   window.JankinhoTheme = {
+    themes: Array.from(THEMES),
+
     getTheme: function () {
-      return ONLY_THEME;
+      return normalizeTheme(
+        document.documentElement.getAttribute("data-theme") ||
+        readLocalTheme()
+      );
     },
 
-    setTheme: function () {
-      const theme = applyTheme({ broadcast: true, notify: true });
-      void persistAccountTheme();
-      return theme;
+    setTheme: function (theme) {
+      const normalized = applyTheme(theme, {
+        broadcast: true,
+        notify: true,
+      });
+
+      void persistAccountTheme(normalized);
+
+      return normalized;
     },
 
     syncFromAccount,
 
     subscribe: function (callback) {
-      if (typeof callback !== "function") return function () {};
+      if (typeof callback !== "function") {
+        return function () {};
+      }
+
       listeners.add(callback);
+
       return function () {
         listeners.delete(callback);
       };
     },
   };
 
-  applyTheme({ broadcast: false, notify: false });
+  applyTheme(readLocalTheme(), {
+    broadcast: false,
+    notify: false,
+  });
 
   document.addEventListener("DOMContentLoaded", function () {
-    applyTheme({ broadcast: false, notify: true });
+    applyTheme(readLocalTheme(), {
+      broadcast: false,
+      notify: true,
+    });
+
     if (window.parent === window) {
       void syncFromAccount();
     }
