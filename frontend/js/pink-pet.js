@@ -3803,6 +3803,16 @@
     applyColor(root, profile.color);
     applyOutfit(avatar, profile.outfit);
 
+    document
+      .querySelectorAll("[data-pet-custom-color]")
+      .forEach(function (button) {
+        const active =
+          button.dataset.petCustomColor === profile.color;
+
+        button.classList.toggle("selected", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
     if (panel) {
       const title = panel.querySelector(".cortex-pet-panel-head strong");
       if (title) {
