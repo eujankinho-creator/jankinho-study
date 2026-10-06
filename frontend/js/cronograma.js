@@ -1,5 +1,10 @@
 const $=(id)=>document.getElementById(id);
-const state={dashboard:null};
+const state={
+  dashboard:null,
+  calendar:null,
+  calendarCursor:null,
+  selectedCalendarDay:null
+};
 
 const EXAMS={
   ENARE:{
@@ -123,11 +128,20 @@ function bindTaskLinks(root){
   });
 }
 
+function findTaskById(id){
+  const dashboardTasks=[
+    ...(state.dashboard?.todayTasks||[]),
+    ...(state.dashboard?.week?.tasks||[])
+  ];
+  const calendarTasks=state.calendar?.tasks||[];
+  return [...dashboardTasks,...calendarTasks].find((item)=>Number(item.id)===Number(id));
+}
+
 function bindTaskButtons(root){
   root?.querySelectorAll("[data-complete-task]").forEach((button)=>{
     button.addEventListener("click",async ()=>{
       const id=Number(button.dataset.completeTask);
-      const task=[...(state.dashboard?.todayTasks||[]),...(state.dashboard?.upcoming||[])].find((item)=>item.id===id);
+      const task=findTaskById(id);
       if(!task) return;
       button.disabled=true;
       try{
@@ -147,7 +161,20 @@ function groupUpcoming(items){
     if(!map.has(key)) map.set(key,[]);
     map.get(key).push(item);
   }
-  return Array.from(map.entries()).slice(0,21);
+  return Array.from(map.entries());
+}
+
+function formatWeekRange(week){
+  if(!week?.start||!week?.end) return "segunda a domingo";
+  const start=new Date(week.start+"T12:00:00");
+  const end=new Date(week.end+"T12:00:00");
+  const sameMonth=start.getMonth()===end.getMonth();
+  if(sameMonth){
+    return start.getDate()+" a "+end.toLocaleDateString("pt-BR",{day:"2-digit",month:"long"});
+  }
+  return start.toLocaleDateString("pt-BR",{day:"2-digit",month:"short"})+
+    " a "+
+    end.toLocaleDateString("pt-BR",{day:"2-digit",month:"short"});
 }
 
 function renderDashboard(data){
@@ -209,7 +236,9 @@ function renderDashboard(data){
   bindTaskButtons($("todayTasks"));
   bindTaskLinks($("todayTasks"));
 
-  const groups=groupUpcoming(data.upcoming||[]);
+  const week=data.week||{tasks:[]};
+  $("weekRangeLabel").textContent=formatWeekRange(week);
+  const groups=groupUpcoming(week.tasks||[]);
   $("upcomingSchedule").innerHTML=groups.length?groups.map(([date,tasks])=>`
     <div class="timeline-day">
       <div class="timeline-date"><strong>${fmtDate(date+"T12:00:00")}</strong><span>${tasks.length} ${tasks.length===1?"tarefa":"tarefas"}</span></div>
