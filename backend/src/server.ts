@@ -3296,11 +3296,11 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261006-cronograma-only1"
+              "/js/sidebar-standard.js?v=20261006-cronograma-smart1"
             )
             .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
-              "/css/sidebar-standard.css?v=20261006-cronograma-only1"
+              "/css/sidebar-standard.css?v=20261006-cronograma-smart1"
             );
 
         content =
