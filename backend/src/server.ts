@@ -3338,6 +3338,14 @@ async function servirArquivo(
         const themeRuntimeTag =
           '<link rel="stylesheet" href="/css/theme-runtime.css?v=20261006-v7">';
 
+        const themeBootstrapTag =
+          '<script data-cortex-theme-bootstrap>(function(){var k="jankinho_theme_v1",a=["dark-orange","dark-pink","dark-green","dark-purple","dark-black"],m={"orange-black":"dark-orange","pink-glitter":"dark-pink","black-white":"dark-black","blue-black":"dark-black"},t="dark-orange";try{var s=localStorage.getItem(k)||"";t=m[s]||s;if(a.indexOf(t)<0)t="dark-orange";localStorage.setItem(k,t)}catch(e){}document.documentElement.setAttribute("data-theme",t)})();<\/script>';
+
+        const runtimeHead =
+          themeBootstrapTag +
+          "\n  " +
+          themeRuntimeTag;
+
         const htmlComTemaGlobal =
           htmlAtualizado.includes(
             "/css/theme-runtime.css"
@@ -3346,7 +3354,7 @@ async function servirArquivo(
             : htmlAtualizado.replace(
                 /<\/head>/i,
                 "  " +
-                themeRuntimeTag +
+                runtimeHead +
                 "\n</head>"
               );
 
