@@ -2454,67 +2454,63 @@ input[type="range"] {
 }
 
 
+
+
+
 /* =========================================================
-   CORTEX THICKNESS PREVIEW DOT V1
+   CORTEX BRUSH CURSOR V1
 ========================================================= */
 
-#strokeControls.tool-thickness-popover.thickness-popover-open {
-  grid-template-columns:
-    auto
-    minmax(90px,1fr)
-    34px
-    auto !important;
+.board-stage{
+  position:relative;
 }
 
-.brush-size-preview-shell {
-  width:30px;
-  height:30px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--theme-border);
-  border-radius:50%;
-  background:rgba(255,255,255,.025);
-  overflow:hidden;
-}
-
-#brushSizePreview {
-  display:block;
+.cortex-brush-cursor{
+  position:absolute;
+  z-index:28;
+  left:0;
+  top:0;
   width:8px;
   height:8px;
-  max-width:24px;
-  max-height:24px;
+  border:1px solid rgba(255,255,255,.92);
   border-radius:50%;
-  background:var(--theme-accent);
-  box-shadow:none;
+  background:rgba(249,115,22,.18);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  opacity:0;
+  box-sizing:border-box;
   transition:
-    width .08s ease,
-    height .08s ease,
-    background-color .08s ease,
-    opacity .08s ease;
+    width .05s linear,
+    height .05s linear,
+    opacity .08s ease,
+    border-color .08s ease,
+    background-color .08s ease;
+  mix-blend-mode:normal;
 }
 
-#strokeControls[data-preview-tool="highlighter"] #brushSizePreview {
-  opacity:.42;
+.cortex-brush-cursor.visible{
+  opacity:1;
 }
 
-#strokeControls[data-preview-tool="eraser"] #brushSizePreview {
-  background:var(--theme-text-soft);
-  opacity:.78;
+.cortex-brush-cursor[data-tool="highlighter"]{
+  border-color:rgba(255,255,255,.72);
 }
 
-@media(max-width:700px) {
-  #strokeControls.tool-thickness-popover.thickness-popover-open {
-    grid-template-columns:
-      auto
-      minmax(82px,1fr)
-      32px
-      auto !important;
+.cortex-brush-cursor[data-tool="eraser"]{
+  border:1px dashed rgba(255,255,255,.92);
+  background:rgba(255,255,255,.08)!important;
+}
+
+.board-stage[data-tool="select"] .cortex-brush-cursor,
+.board-stage[data-tool="hand"] .cortex-brush-cursor,
+.board-stage[data-tool="text"] .cortex-brush-cursor{
+  display:none!important;
+}
+
+@media(pointer:coarse){
+  .cortex-brush-cursor{
+    transition:none;
   }
-
-  .brush-size-preview-shell {
-    width:28px;
-    height:28px;
-  }
 }
 
-/* CORTEX THICKNESS PREVIEW DOT V1 END */
+/* CORTEX BRUSH CURSOR V1 END */
