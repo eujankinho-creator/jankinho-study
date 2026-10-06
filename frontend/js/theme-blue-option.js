@@ -7,16 +7,16 @@
     {
       theme: "blue-black",
       marker: "blue",
-      title: "Blue Black",
-      description: "Preto profundo com azul eletrico, seguindo a mesma logica visual do Pink.",
+      title: "Blue",
+      description: "Tema bem escuro com detalhes azuis sutis e confortáveis para os olhos.",
       chip: "Blue"
     },
     {
       theme: "black-white",
       marker: "mono",
-      title: "Black & White",
-      description: "Preto e branco minimalista, alto contraste e visual premium.",
-      chip: "Mono"
+      title: "White",
+      description: "Tema escuro monocromático com detalhes brancos suaves e visual premium.",
+      chip: "White"
     }
   ];
 
