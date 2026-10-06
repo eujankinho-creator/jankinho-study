@@ -3311,6 +3311,10 @@ async function servirArquivo(
               "/js/cortex-brand.js?v=20261006-ui-profile2"
             )
             .replace(
+              /\/css\/cortex-brand\.css\?v=[^"']+/g,
+              "/css/cortex-brand.css?v=20261006-logo-theme1"
+            )
+            .replace(
               /\/js\/configuracoes\.js\?v=[^"']+/g,
               "/js/configuracoes.js?v=20261006-multitheme-pet1"
             )
