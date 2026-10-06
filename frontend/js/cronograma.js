@@ -77,12 +77,20 @@ function sourceCard(source){
   </article>`;
 }
 
+function taskGoal(task){
+  if(task.tipo==="QUESTOES") return "Meta: "+Number(task.metaValor||10)+" questões";
+  if(task.tipo==="SIMULADO") return "Meta: "+Number(task.metaValor||25)+" questões";
+  if(task.tipo==="DESCANSO") return "Recuperação";
+  return "Meta: "+Number(task.duracaoMinutos||task.metaValor||0)+" min";
+}
+
 function taskCard(task){
   const action=actionForTask(task);
+  const topic=task.tema||"Descanso e recuperação";
   return `<article class="task-card ${task.concluida?"done":""}" data-task-id="${task.id}">
-    <div class="task-type"><span>${esc(task.tipo)}</span><small>${task.duracaoMinutos?task.duracaoMinutos+" min":""}</small></div>
-    <h3>${esc(task.titulo)}</h3>
-    <p>${esc(task.tema||"Recuperação")}</p>
+    <div class="task-type"><span>${esc(task.tipo)}</span><small>${esc(taskGoal(task))}</small></div>
+    <h3>${esc(topic)}</h3>
+    <p>${esc(task.titulo||"Atividade programada")}</p>
     <div class="task-actions">
       ${action?`<a href="${action.href}">${action.label}</a>`:""}
       ${task.tipo!=="DESCANSO"?`<button type="button" class="primary" data-complete-task="${task.id}">${task.concluida?"Desmarcar":"Concluir"}</button>`:""}
@@ -114,7 +122,7 @@ function groupUpcoming(items){
     if(!map.has(key)) map.set(key,[]);
     map.get(key).push(item);
   }
-  return Array.from(map.entries()).slice(0,12);
+  return Array.from(map.entries()).slice(0,21);
 }
 
 function renderDashboard(data){
@@ -122,11 +130,13 @@ function renderDashboard(data){
   if(!data.schedule){
     $("scheduleDashboard").hidden=true;
     $("scheduleEmpty").hidden=false;
+    if($("scheduleIntro")) $("scheduleIntro").hidden=false;
     return;
   }
 
   $("scheduleEmpty").hidden=true;
   $("scheduleDashboard").hidden=false;
+  if($("scheduleIntro")) $("scheduleIntro").hidden=true;
 
   const schedule=data.schedule;
   const stats=data.stats||{};
@@ -206,10 +216,13 @@ function selectedExam(){
 
 function renderExamBlueprint(){
   const selected=selectedExam();
+  const setup=$("planSetup");
   if(!selected){
-    $("examBlueprint").innerHTML='<div><span>NENHUM OBJETIVO DEFINIDO</span><strong>Escolha uma das três opções acima.</strong></div>';
+    if(setup) setup.hidden=true;
     return;
   }
+  if(setup) setup.hidden=false;
+  if($("selectedPlanTitle")) $("selectedPlanTitle").textContent=selected.exam.label;
   const {exam}=selected;
   $("examBlueprint").innerHTML=
     '<div><span>MATRIZ DE ESTUDO</span><strong>'+esc(exam.focus)+'</strong></div>'+
@@ -272,10 +285,15 @@ function setDefaultDate(){
 
 $("scheduleForm").addEventListener("submit",buildSchedule);
 document.querySelectorAll('input[name="examType"]').forEach((input)=>{
-  input.addEventListener("change",renderExamBlueprint);
+  input.addEventListener("change",()=>{
+    renderExamBlueprint();
+    window.requestAnimationFrame(()=>{
+      $("planSetup")?.scrollIntoView({behavior:"smooth",block:"nearest"});
+    });
+  });
 });
 $("examEdition").addEventListener("input",renderExamBlueprint);
-$("newPlanButton").addEventListener("click",()=>{
+function resetPlanChoice(){
   document.querySelectorAll('input[name="examType"]').forEach((input)=>{input.checked=false;});
   $("examEdition").value="";
   $("difficulties").value="";
@@ -283,8 +301,12 @@ $("newPlanButton").addEventListener("click",()=>{
   renderExamBlueprint();
   $("scheduleDashboard").hidden=true;
   $("scheduleEmpty").hidden=false;
+  if($("scheduleIntro")) $("scheduleIntro").hidden=false;
   $("scheduleEmpty").scrollIntoView({behavior:"smooth",block:"start"});
-});
+}
+
+$("newPlanButton").addEventListener("click",resetPlanChoice);
+$("changePlanButton")?.addEventListener("click",resetPlanChoice);
 setDefaultDate();
 renderExamBlueprint();
 loadDashboard();
