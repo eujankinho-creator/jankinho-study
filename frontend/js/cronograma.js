@@ -145,8 +145,22 @@ function bindTaskButtons(root){
       if(!task) return;
       button.disabled=true;
       try{
-        await api("/api/cronograma/task",{method:"PATCH",body:JSON.stringify({taskId:id,completed:!task.concluida,progress:task.concluida?0:100})});
+        const completed=!task.concluida;
+        await api("/api/cronograma/task",{method:"PATCH",body:JSON.stringify({taskId:id,completed,progress:completed?100:0})});
+        if(state.calendar?.tasks){
+          const calendarTask=state.calendar.tasks.find((item)=>Number(item.id)===id);
+          if(calendarTask){
+            calendarTask.concluida=completed;
+            calendarTask.progresso=completed?100:0;
+          }
+        }
         await loadDashboard();
+        if(state.calendar&&!$("fullPlanModal")?.hidden){
+          renderFullPlanCalendar();
+          if(state.selectedCalendarDay){
+            renderCalendarDayDetails(state.selectedCalendarDay);
+          }
+        }
       }finally{
         button.disabled=false;
       }
@@ -317,6 +331,7 @@ async function buildSchedule(event){
         prioridades:splitTerms($("priorities").value)
       })
     });
+    state.calendar=null;
     await loadDashboard();
     $("scheduleDashboard").scrollIntoView({behavior:"smooth",block:"start"});
   }catch(error){
@@ -350,6 +365,7 @@ document.querySelectorAll('input[name="examType"]').forEach((input)=>{
 });
 $("examEdition").addEventListener("input",renderExamBlueprint);
 function resetPlanChoice(){
+  state.calendar=null;
   document.querySelectorAll('input[name="examType"]').forEach((input)=>{input.checked=false;});
   $("examEdition").value="";
   $("difficulties").value="";
