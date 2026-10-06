@@ -135,7 +135,17 @@ function renderDashboard(data){
   if(schedule.dataProva) meta.push("Prova: "+new Date(schedule.dataProva).toLocaleDateString("pt-BR"));
   meta.push(schedule.horasPorDia+"h/dia");
   meta.push(schedule.diasPorSemana+" dias/semana");
+  if(schedule.tipoProva) meta.unshift(schedule.tipoProva==="MINISTERIO_SAUDE"?"MINISTÉRIO DA SAÚDE":schedule.tipoProva);
   $("activeExamMeta").textContent=meta.join(" · ");
+
+  const strategy=schedule.estrategia||{};
+  $("strategyTitle").textContent=strategy.provaBase||"Plano inteligente";
+  $("strategyFocus").textContent=strategy.foco||"O plano combina matriz da prova, fontes oficiais, seu desempenho e o tempo restante.";
+  $("strategyPhases").innerHTML=(strategy.fases||["BASE","CONSOLIDAÇÃO","RETA FINAL"]).map((phase)=>'<span>'+esc(String(phase).replaceAll("_"," "))+'</span>').join("");
+  const weakness=Array.isArray(strategy.fraquezasDetectadas)?strategy.fraquezasDetectadas.slice(0,5):[];
+  $("strategyWeakness").innerHTML=weakness.length
+    ? '<strong>Prioridade pelo seu histórico:</strong> '+weakness.map((item)=>esc(item.tema)+' ('+Math.round(Number(item.erro||0)*100)+'% de erro)').join(" · ")
+    : '<strong>Histórico:</strong> ainda sem volume suficiente de questões para ajustar por taxa de erro.';
 
   $("mainProgressValue").textContent=(stats.percent||0)+"%";
   $("mainProgressBar").style.width=(stats.percent||0)+"%";
@@ -192,7 +202,7 @@ async function researchExam(prova){
 
   status.className="research-status";
   status.textContent=state.sources.length
-    ? state.sources.length+" fontes oficiais/institucionais encontradas. O Córtex vai usar as mais relevantes para ponderar o plano."
+    ? state.sources.length+" fontes e referências encontradas. Editais oficiais definem o conteúdo; referências de estrutura ajudam a organizar ciclos e revisões."
     : "Nenhuma fonte oficial indexada foi encontrada agora. O Córtex usará a matriz base da prova e seu desempenho.";
 
   if(state.sources.length){
