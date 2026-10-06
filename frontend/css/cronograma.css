@@ -125,3 +125,16 @@
 .strategy-banks>strong{display:block;margin-bottom:7px;color:var(--sc-text)}
 .strategy-banks>div{display:flex;flex-wrap:wrap;gap:6px}
 .strategy-banks span{padding:6px 8px;border:1px solid var(--sc-line);border-radius:999px;background:var(--sc-soft);font-size:7px;font-weight:800}
+
+.exam-choice{border:0;padding:0;margin:0;min-width:0}
+.exam-choice legend{font-size:8px;font-weight:900;letter-spacing:.08em;color:var(--sc-text);margin-bottom:6px}
+.exam-choice>p{margin:0 0 10px;color:var(--sc-muted);font-size:8px;line-height:1.5}
+.exam-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.exam-choice-card{position:relative;display:block;cursor:pointer}
+.exam-choice-card input{position:absolute;opacity:0;pointer-events:none}
+.exam-choice-card>span{display:flex;min-height:84px;flex-direction:column;justify-content:center;gap:6px;padding:13px;border:1px solid var(--sc-line);border-radius:12px;background:var(--sc-soft);transition:border-color .18s ease,transform .18s ease,background .18s ease}
+.exam-choice-card>span b{font-size:10px;color:var(--sc-text)}
+.exam-choice-card>span small{font-size:7px;line-height:1.5;color:var(--sc-muted)}
+.exam-choice-card input:checked+span{border-color:var(--sc-accent);background:color-mix(in srgb,var(--sc-accent) 10%,var(--sc-soft));box-shadow:0 0 0 1px color-mix(in srgb,var(--sc-accent) 22%,transparent)}
+.exam-choice-card:active>span{transform:scale(.99)}
+@media(max-width:760px){.exam-choice-grid{grid-template-columns:1fr}}
