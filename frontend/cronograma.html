@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261006-ui-profile2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma5">
+  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma6">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261006-ui-profile2"></script>
@@ -137,7 +137,16 @@
         </section>
 
         <section class="schedule-section">
-          <div class="section-heading"><div><span>PLANEJAMENTO</span><h2>Próximos dias</h2></div><small>estudo → questões → revisão → simulado</small></div>
+          <div class="section-heading schedule-week-heading">
+            <div>
+              <span>AGENDA INTELIGENTE</span>
+              <h2>Esta semana</h2>
+              <small id="weekRangeLabel">segunda a domingo</small>
+            </div>
+            <button id="openFullPlanButton" class="schedule-calendar-button" type="button">
+              Ver plano completo
+            </button>
+          </div>
           <div id="upcomingSchedule" class="schedule-timeline"></div>
         </section>
 
@@ -166,7 +175,42 @@
     </main>
   </div>
 
-  <script type="module" src="/js/cronograma.js?v=20261006-cronograma5"></script>
+  <div id="fullPlanModal" class="schedule-calendar-modal" hidden>
+    <div class="schedule-calendar-backdrop" data-close-calendar></div>
+    <section class="schedule-calendar-panel" role="dialog" aria-modal="true" aria-labelledby="calendarTitle">
+      <header class="schedule-calendar-header">
+        <div>
+          <span>PLANO COMPLETO</span>
+          <h2 id="calendarTitle">Calendário de estudos</h2>
+          <small id="calendarExamLabel"></small>
+        </div>
+        <button id="closeFullPlanButton" class="schedule-calendar-close" type="button" aria-label="Fechar calendário">&times;</button>
+      </header>
+
+      <div class="schedule-calendar-toolbar">
+        <button id="calendarPrevButton" type="button" aria-label="Mês anterior">&#8249;</button>
+        <button id="calendarTodayButton" type="button">Hoje</button>
+        <strong id="calendarMonthLabel"></strong>
+        <button id="calendarNextButton" type="button" aria-label="Próximo mês">&#8250;</button>
+      </div>
+
+      <div class="schedule-calendar-weekdays" aria-hidden="true">
+        <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+      </div>
+
+      <div id="fullPlanCalendar" class="schedule-calendar-grid"></div>
+
+      <aside id="calendarDayDetails" class="schedule-calendar-day-details" hidden>
+        <div class="calendar-day-details-head">
+          <div><span>DIA SELECIONADO</span><h3 id="calendarDayTitle"></h3></div>
+          <button id="closeCalendarDayButton" type="button" aria-label="Fechar detalhes">&times;</button>
+        </div>
+        <div id="calendarDayTasks" class="calendar-day-tasks"></div>
+      </aside>
+    </section>
+  </div>
+
+  <script type="module" src="/js/cronograma.js?v=20261006-cronograma6"></script>
   <script src="/js/cortex-brand.js?v=20261006-darkthemes1"></script>
 </body>
 </html>
