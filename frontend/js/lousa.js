@@ -527,17 +527,62 @@
 
 
     setStatus(
-      "Salvando..."
+      "Alterações pendentes"
     );
 
 
     saveTimer =
       window.setTimeout(
         saveNow,
-        280
+        60 * 1000
       );
 
   }
+
+
+  function flushPendingSave() {
+
+    if (
+      saveTimer
+    ) {
+
+      window.clearTimeout(
+        saveTimer
+      );
+
+
+      saveTimer =
+        null;
+
+    }
+
+
+    saveNow();
+
+  }
+
+
+  window.addEventListener(
+    "pagehide",
+    flushPendingSave
+  );
+
+
+  document.addEventListener(
+    "visibilitychange",
+    function () {
+
+      if (
+        document.visibilityState ===
+        "hidden"
+      ) {
+
+        flushPendingSave();
+
+      }
+
+    }
+  );
 
 
   function migratePoint(
@@ -2027,6 +2072,37 @@
   }
 
 
+  let renderFrame =
+    0;
+
+
+  function scheduleRender() {
+
+    if (
+      renderFrame
+    ) {
+
+      return;
+
+    }
+
+
+    renderFrame =
+      window.requestAnimationFrame(
+        function () {
+
+          renderFrame =
+            0;
+
+
+          render();
+
+        }
+      );
+
+  }
+
+
   function resizeCanvas() {
 
     const rect =
@@ -2106,269 +2182,7 @@
   }
 
 
-  function effectivePreviewSize(
-    tool,
-    size
-  ) {
 
-    const value =
-      Number(size) || 1;
-
-
-    if (
-      tool === "highlighter"
-    ) {
-
-      return Math.max(
-        8,
-        value * 4
-      );
-
-    }
-
-
-    if (
-      tool === "eraser"
-    ) {
-
-      return Math.max(
-        8,
-        value * 3.5
-      );
-
-    }
-
-
-    return value;
-
-  }
-
-
-  function ensureBrushCursor() {
-
-    let cursor =
-      $("cortexBrushCursor");
-
-
-    if (
-      cursor
-    ) {
-
-      return cursor;
-
-    }
-
-
-    cursor =
-      document.createElement(
-        "span"
-      );
-
-
-    cursor.id =
-      "cortexBrushCursor";
-
-
-    cursor.className =
-      "cortex-brush-cursor";
-
-
-    cursor.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-
-    stage.appendChild(
-      cursor
-    );
-
-
-    return cursor;
-
-  }
-
-
-  function updateBrushCursorStyle(
-    tool,
-    size
-  ) {
-
-    const cursor =
-      ensureBrushCursor();
-
-
-    const activeTool =
-      tool ||
-      state.tool;
-
-
-    const activeSize =
-      Number(
-        size ??
-        state.size ??
-        1
-      );
-
-
-    const visualSize =
-      effectivePreviewSize(
-        activeTool,
-        activeSize
-      ) *
-      state.camera.zoom;
-
-
-    const diameter =
-      Math.max(
-        4,
-        Math.min(
-          96,
-          visualSize
-        )
-      );
-
-
-    cursor.style.width =
-      diameter +
-      "px";
-
-
-    cursor.style.height =
-      diameter +
-      "px";
-
-
-    cursor.dataset.tool =
-      activeTool;
-
-
-    if (
-      activeTool ===
-      "eraser"
-    ) {
-
-      cursor.style.background =
-        "rgba(255,255,255,.08)";
-
-    }
-    else if (
-      activeTool ===
-      "highlighter"
-    ) {
-
-      cursor.style.background =
-        state.color
-          .replace(
-            "#",
-            ""
-          )
-          .length ===
-          6
-          ? state.color +
-            "38"
-          : state.color;
-
-    }
-    else {
-
-      cursor.style.background =
-        state.color +
-        (
-          /^#[0-9a-f]{6}$/i.test(
-            state.color
-          )
-            ? "24"
-            : ""
-        );
-
-    }
-
-
-    cursor.style.borderColor =
-      activeTool ===
-      "eraser"
-        ? "rgba(255,255,255,.92)"
-        : state.color;
-
-  }
-
-
-  function updateBrushCursorFromEvent(
-    event
-  ) {
-
-    const cursor =
-      ensureBrushCursor();
-
-
-    if (
-      !thicknessTools.has(
-        state.tool
-      ) ||
-      state.panning ||
-      state.touchGesture
-    ) {
-
-      cursor.classList.remove(
-        "visible"
-      );
-
-      return;
-
-    }
-
-
-    const rect =
-      stage.getBoundingClientRect();
-
-
-    cursor.style.left =
-      (
-        event.clientX -
-        rect.left
-      ) +
-      "px";
-
-
-    cursor.style.top =
-      (
-        event.clientY -
-        rect.top
-      ) +
-      "px";
-
-
-    updateBrushCursorStyle(
-      state.tool,
-      state.size
-    );
-
-
-    cursor.classList.add(
-      "visible"
-    );
-
-  }
-
-
-  function hideBrushCursor() {
-
-    const cursor =
-      $("cortexBrushCursor");
-
-
-    if (
-      cursor
-    ) {
-
-      cursor.classList.remove(
-        "visible"
-      );
-
-    }
-
-  }
 
   function syncInterface() {
 
@@ -2450,12 +2264,6 @@
         state.size;
 
     }
-
-
-    updateBrushCursorStyle(
-      state.tool,
-      state.size
-    );
 
 
     if (
@@ -2910,12 +2718,6 @@
           }
 
 
-          updateBrushCursorStyle(
-            state.tool,
-            value
-          );
-
-
           queueSave();
 
         }
@@ -3147,12 +2949,6 @@
         size;
 
     }
-
-
-    updateBrushCursorStyle(
-      tool,
-      size
-    );
 
 
     if (
@@ -6713,11 +6509,6 @@
     event
   ) {
 
-    updateBrushCursorFromEvent(
-      event
-    );
-
-
     /* CORTEX CLOSE POPOVER ON CANVAS V7 */
 
     hideThicknessPopover();
@@ -7016,11 +6807,6 @@
     event
   ) {
 
-    updateBrushCursorFromEvent(
-      event
-    );
-
-
     /* CORTEX TOUCH MOVE V4 */
 
     if (
@@ -7188,7 +6974,7 @@
     }
 
 
-    render();
+    scheduleRender();
 
   }
 
@@ -7196,16 +6982,6 @@
   function pointerUp(
     event
   ) {
-
-    if (
-      event.pointerType !==
-      "mouse"
-    ) {
-
-      hideBrushCursor();
-
-    }
-
 
     /* CORTEX TOUCH UP V4 */
 
@@ -8180,12 +7956,6 @@
           }
 
 
-          updateBrushCursorStyle(
-            state.tool,
-            state.size
-          );
-
-
           queueSave();
 
         }
@@ -8371,11 +8141,6 @@
       pointerUp
     );
 
-
-    canvas.addEventListener(
-      "pointerleave",
-      hideBrushCursor
-    );
 
 
     /* CORTEX RIGHT CLICK PAN V5 */
@@ -8823,8 +8588,6 @@
 
 
     setupThicknessPopover();
-
-    ensureBrushCursor();
 
     syncInterface();
 
