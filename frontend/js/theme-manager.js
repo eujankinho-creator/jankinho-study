@@ -13,8 +13,20 @@
   const listeners = new Set();
 
   function normalizeTheme(value) {
-    const theme = String(value || "").trim();
-    return THEMES.has(theme) ? theme : DEFAULT_THEME;
+    const raw = String(value || "").trim();
+
+    const legacyMap = {
+      "orange-black": "dark-orange",
+      "pink-glitter": "dark-pink",
+      "black-white": "dark-black",
+      "blue-black": "dark-black",
+    };
+
+    const theme = legacyMap[raw] || raw;
+
+    return THEMES.has(theme)
+      ? theme
+      : DEFAULT_THEME;
   }
 
   function readLocalTheme() {
