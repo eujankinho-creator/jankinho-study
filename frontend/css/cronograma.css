@@ -170,6 +170,9 @@
 .schedule-builder-compact .exam-choice{
   grid-column:1/-1;
 }
+.schedule-builder-compact .plan-setup{
+  grid-column:1/-1;
+}
 .plan-setup{
   display:grid;
   gap:13px;
