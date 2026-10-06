@@ -4357,3 +4357,468 @@ html[data-theme] ::selection {
 }
 
 /* CORTEX ORANGE BLACK ONLY V1 END */
+
+
+/* =========================================================
+   CORTEX PREMIUM READABILITY V1
+   Camada visual somente de estilo: sem alterar carregamento.
+========================================================= */
+
+:root,
+html[data-theme] {
+  --cortex-font-body: 15px;
+  --cortex-font-small: 12px;
+  --cortex-font-label: 12px;
+  --cortex-font-control: 13px;
+  --cortex-radius-sm: 10px;
+  --cortex-radius-md: 14px;
+  --cortex-radius-lg: 18px;
+  --cortex-radius-xl: 24px;
+  --cortex-space-card: clamp(16px, 1.8vw, 24px);
+}
+
+html[data-theme] body {
+  font-size: var(--cortex-font-body) !important;
+  line-height: 1.55 !important;
+  letter-spacing: -0.005em;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-theme] :is(
+  p,
+  li,
+  td,
+  th,
+  label,
+  input,
+  textarea,
+  select,
+  button
+) {
+  line-height: 1.5;
+}
+
+html[data-theme] :is(
+  .subtitle,
+  .description,
+  .helper-text,
+  .card-subtitle,
+  .section-subtitle,
+  .panel-subtitle,
+  .muted,
+  .caption,
+  .hint,
+  .meta,
+  .theme-choice-description,
+  .settings-card p,
+  .settings-card small,
+  .content-card p,
+  .info-card p,
+  .question-card p,
+  .case-card p,
+  .caso-card p,
+  .finance-card p,
+  .history-card p
+) {
+  font-size: clamp(12px, .82vw, 14px) !important;
+  line-height: 1.62 !important;
+}
+
+html[data-theme] :is(
+  .small-label,
+  .section-label,
+  .hero-label,
+  .eyebrow,
+  .kicker,
+  .menu-title,
+  .heading-badge,
+  .orange-badge,
+  .badge,
+  .tag,
+  .chip,
+  .pill
+) {
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  letter-spacing: .09em !important;
+}
+
+html[data-theme] :is(
+  h1,
+  .page-title,
+  .hero-title
+) {
+  letter-spacing: -.035em !important;
+  line-height: 1.08 !important;
+}
+
+html[data-theme] h1 {
+  font-size: clamp(30px, 3.2vw, 48px) !important;
+}
+
+html[data-theme] :is(
+  h2,
+  .section-title,
+  .card-title
+) {
+  line-height: 1.2 !important;
+  letter-spacing: -.022em !important;
+}
+
+html[data-theme] h2 {
+  font-size: clamp(20px, 1.7vw, 28px) !important;
+}
+
+html[data-theme] h3 {
+  font-size: clamp(16px, 1.2vw, 20px) !important;
+  line-height: 1.28 !important;
+}
+
+html[data-theme] :is(
+  input,
+  textarea,
+  select,
+  button,
+  .button,
+  .btn
+) {
+  font-size: var(--cortex-font-control) !important;
+}
+
+html[data-theme] :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea
+) {
+  min-height: 44px;
+  border-radius: var(--cortex-radius-sm) !important;
+}
+
+html[data-theme] textarea {
+  min-height: 96px;
+}
+
+html[data-theme] :is(
+  button,
+  .button,
+  .btn,
+  .button-primary,
+  .primary-button,
+  .btn-primary,
+  .button-secondary,
+  .secondary-button,
+  .btn-secondary,
+  .ghost-button,
+  .action-button,
+  .main-action
+) {
+  min-height: 42px;
+  border-radius: var(--cortex-radius-sm) !important;
+  font-weight: 780 !important;
+}
+
+html[data-theme] :is(
+  .card,
+  .dashboard-card,
+  .summary-card,
+  .stats-card,
+  .stat-card,
+  .info-card,
+  .content-card,
+  .performance-card,
+  .ranking-card,
+  .history-card,
+  .settings-card,
+  .question-card,
+  .session-card,
+  .flashcard,
+  .flashcard-card,
+  .case-card,
+  .caso-card,
+  .finance-card,
+  .balance-card,
+  .section-card,
+  .section-panel,
+  .content-panel,
+  .filter-panel,
+  .filters-panel,
+  .controls-panel,
+  .controls-card,
+  .result-card,
+  .result-panel,
+  .details-card,
+  .details-panel,
+  .training-card,
+  .training-panel,
+  .mode-card,
+  .tip-card,
+  .loading-card,
+  .empty-state
+) {
+  border-radius: var(--cortex-radius-lg) !important;
+  border-color: rgba(255,255,255,.075) !important;
+}
+
+html[data-theme] :is(
+  .hero,
+  .dashboard-hero,
+  .questions-hero,
+  .questoes-hero,
+  .flashcards-hero,
+  .cases-hero,
+  .casos-hero,
+  .finance-hero,
+  .settings-hero,
+  .analysis-hero,
+  .practice-hero,
+  .laboratorio-hero,
+  .evolucao-hero,
+  .page-hero,
+  .hero-card,
+  .hero-panel,
+  .welcome-card,
+  .headline-card,
+  .intro-card,
+  .overview-card
+) {
+  border-radius: var(--cortex-radius-xl) !important;
+  border-color: rgba(255,255,255,.075) !important;
+}
+
+html[data-theme] .header {
+  min-height: 64px;
+}
+
+html[data-theme] .header-title {
+  font-size: 14px !important;
+  font-weight: 820 !important;
+  letter-spacing: -.01em !important;
+}
+
+html[data-theme] .header-user > div > strong {
+  font-size: 13px !important;
+}
+
+html[data-theme] .header-user > div > span {
+  font-size: 11px !important;
+}
+
+html[data-theme] .sidebar-logo > div:last-child strong {
+  font-size: 15px !important;
+  letter-spacing: -.01em !important;
+}
+
+html[data-theme] .sidebar-logo > div:last-child span {
+  margin-top: 3px !important;
+  font-size: 10px !important;
+  letter-spacing: .10em !important;
+}
+
+html[data-theme] .sidebar-menu .menu-title {
+  margin-bottom: 7px !important;
+  font-size: 10px !important;
+  font-weight: 850 !important;
+  letter-spacing: .13em !important;
+}
+
+html[data-theme] .sidebar-menu .menu-item {
+  min-height: 44px !important;
+  margin-bottom: 3px !important;
+  border-radius: 11px !important;
+  font-size: 13px !important;
+  font-weight: 680 !important;
+}
+
+html[data-theme] .sidebar-menu .cortex-nav-icon {
+  width: 32px !important;
+  height: 32px !important;
+  flex-basis: 32px !important;
+}
+
+html[data-theme] .sidebar-user {
+  min-height: 64px;
+}
+
+html[data-theme] .sidebar-user .user-info > strong {
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+}
+
+html[data-theme] .sidebar-user .user-info > span {
+  margin-top: 3px;
+  font-size: 10px !important;
+}
+
+html[data-theme] :is(
+  .avatar,
+  .header-avatar,
+  .user-avatar
+) {
+  min-width: 38px;
+  min-height: 38px;
+}
+
+html[data-theme] :is(
+  .settings-page,
+  .dashboard,
+  .questions-view,
+  .flashcards-view,
+  .cases-view,
+  .finance-view,
+  .analysis-view,
+  .practice-view,
+  .lab-view
+) {
+  color: var(--theme-text);
+}
+
+html[data-theme] .settings-card {
+  gap: 18px !important;
+}
+
+html[data-theme] .settings-card-content > h2,
+html[data-theme] .card-heading h2 {
+  margin-bottom: 7px !important;
+}
+
+html[data-theme] .field > label,
+html[data-theme] .settings-form label {
+  margin-bottom: 7px !important;
+  color: var(--theme-text-soft) !important;
+  font-size: 12px !important;
+  font-weight: 760 !important;
+}
+
+html[data-theme] :is(
+  table,
+  .data-table
+) {
+  font-size: 13px !important;
+}
+
+html[data-theme] :is(
+  th,
+  .table-head,
+  .table-header
+) {
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme] :is(
+  .filters,
+  .filter-bar,
+  .filter-box,
+  .toolbar,
+  .search-box,
+  .search-bar,
+  .controls-wrap
+) {
+  border-radius: var(--cortex-radius-md) !important;
+}
+
+html[data-theme] :is(
+  .question-text,
+  .question-title,
+  .session-question,
+  .flashcard-question,
+  .case-description,
+  .clinical-description,
+  .explanation-text,
+  .result-explanation
+) {
+  font-size: clamp(14px, 1vw, 17px) !important;
+  line-height: 1.68 !important;
+}
+
+html[data-theme] :is(
+  .option,
+  .alternative,
+  .answer-option,
+  .question-option,
+  .flashcard-answer
+) {
+  font-size: clamp(13px, .9vw, 15px) !important;
+  line-height: 1.55 !important;
+}
+
+html[data-theme] :is(
+  .metric-card,
+  .stat-card,
+  .summary-card
+) strong {
+  font-size: clamp(22px, 2vw, 32px);
+  letter-spacing: -.035em;
+}
+
+html[data-theme] :is(
+  .metric-card,
+  .stat-card,
+  .summary-card
+) :is(span,small,p) {
+  font-size: 12px !important;
+}
+
+html[data-theme] :focus-visible {
+  outline: 2px solid rgba(255,101,0,.78) !important;
+  outline-offset: 2px !important;
+}
+
+html[data-theme] :is(
+  a,
+  button,
+  input,
+  textarea,
+  select
+) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 900px) {
+  html[data-theme] body {
+    font-size: 15px !important;
+  }
+
+  html[data-theme] h1 {
+    font-size: clamp(28px, 8vw, 40px) !important;
+  }
+
+  html[data-theme] h2 {
+    font-size: clamp(20px, 5vw, 26px) !important;
+  }
+
+  html[data-theme] .header {
+    min-height: 58px;
+  }
+
+  html[data-theme] .cortex-mobile-sidebar-menu .menu-item {
+    min-height: 50px !important;
+    font-size: 14px !important;
+  }
+
+  html[data-theme] :is(
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+    select,
+    textarea
+  ) {
+    min-height: 48px;
+  }
+
+  html[data-theme] :is(
+    button,
+    .button,
+    .btn,
+    .button-primary,
+    .primary-button,
+    .btn-primary,
+    .button-secondary,
+    .secondary-button,
+    .btn-secondary,
+    .ghost-button,
+    .action-button
+  ) {
+    min-height: 46px;
+  }
+}
+
+/* CORTEX PREMIUM READABILITY V1 END */
