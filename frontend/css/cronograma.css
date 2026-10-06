@@ -276,3 +276,354 @@
   }
 }
 /* CORTEX CRONOGRAMA COMPACT V5 END */
+
+
+/* =========================================================
+   CORTEX CALENDAR PLAN V1
+========================================================= */
+.schedule-week-heading{
+  align-items:center;
+}
+.schedule-week-heading>div small{
+  display:block;
+  margin-top:4px;
+  color:var(--sc-muted);
+  font-size:8px;
+}
+.schedule-calendar-button{
+  min-height:36px;
+  padding:0 12px;
+  border:1px solid color-mix(in srgb,var(--sc-accent) 28%,var(--sc-line));
+  border-radius:9px;
+  background:var(--theme-accent-soft);
+  color:var(--sc-text);
+  font:inherit;
+  font-size:8px;
+  font-weight:900;
+  cursor:pointer;
+}
+.schedule-calendar-button:hover{
+  border-color:color-mix(in srgb,var(--sc-accent) 50%,var(--sc-line));
+  background:var(--theme-accent-medium);
+}
+
+body.calendar-modal-open{
+  overflow:hidden!important;
+}
+
+.schedule-calendar-modal[hidden]{
+  display:none!important;
+}
+.schedule-calendar-modal{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:grid;
+  place-items:center;
+  padding:18px;
+}
+.schedule-calendar-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.schedule-calendar-panel{
+  position:relative;
+  z-index:1;
+  width:min(1180px,calc(100vw - 36px));
+  max-height:calc(100dvh - 36px);
+  overflow:auto;
+  border:1px solid var(--sc-line);
+  border-radius:20px;
+  background:linear-gradient(145deg,var(--sc-strong),var(--theme-bg));
+  box-shadow:0 28px 90px rgba(0,0,0,.48);
+  padding:18px;
+}
+.schedule-calendar-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--sc-line);
+}
+.schedule-calendar-header>div>span{
+  color:var(--sc-accent2);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.14em;
+}
+.schedule-calendar-header h2{
+  margin:4px 0 3px;
+  font-size:22px;
+  letter-spacing:-.03em;
+}
+.schedule-calendar-header small{
+  color:var(--sc-muted);
+  font-size:8px;
+}
+.schedule-calendar-close,
+.calendar-day-details-head button{
+  width:36px;
+  height:36px;
+  border:1px solid var(--sc-line);
+  border-radius:10px;
+  background:var(--sc-soft);
+  color:var(--sc-text);
+  font-size:20px;
+  cursor:pointer;
+}
+
+.schedule-calendar-toolbar{
+  display:grid;
+  grid-template-columns:auto auto 1fr auto;
+  gap:7px;
+  align-items:center;
+  padding:14px 0 10px;
+}
+.schedule-calendar-toolbar strong{
+  text-align:center;
+  text-transform:capitalize;
+  font-size:13px;
+}
+.schedule-calendar-toolbar button{
+  min-width:38px;
+  min-height:34px;
+  padding:0 10px;
+  border:1px solid var(--sc-line);
+  border-radius:8px;
+  background:var(--sc-soft);
+  color:var(--sc-text);
+  font:inherit;
+  font-size:8px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.schedule-calendar-weekdays,
+.schedule-calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+}
+.schedule-calendar-weekdays{
+  border:1px solid var(--sc-line);
+  border-bottom:0;
+  border-radius:12px 12px 0 0;
+  overflow:hidden;
+}
+.schedule-calendar-weekdays span{
+  padding:8px 6px;
+  text-align:center;
+  color:var(--sc-muted);
+  font-size:7px;
+  font-weight:900;
+  border-right:1px solid var(--sc-line);
+}
+.schedule-calendar-weekdays span:last-child{
+  border-right:0;
+}
+.schedule-calendar-grid{
+  border-left:1px solid var(--sc-line);
+  border-top:1px solid var(--sc-line);
+}
+.schedule-calendar-day{
+  min-height:132px;
+  padding:8px;
+  border:0;
+  border-right:1px solid var(--sc-line);
+  border-bottom:1px solid var(--sc-line);
+  background:color-mix(in srgb,var(--sc-strong) 88%,transparent);
+  color:var(--sc-text);
+  text-align:left;
+  cursor:pointer;
+}
+.schedule-calendar-day:hover{
+  background:color-mix(in srgb,var(--sc-accent) 6%,var(--sc-strong));
+}
+.schedule-calendar-day.outside{
+  opacity:.35;
+}
+.schedule-calendar-day.today{
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--sc-accent) 60%,transparent);
+}
+.schedule-calendar-day.has-tasks{
+  background:color-mix(in srgb,var(--sc-accent) 3%,var(--sc-strong));
+}
+.calendar-day-number{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  margin-bottom:7px;
+}
+.calendar-day-number>span{
+  font-size:10px;
+  font-weight:950;
+}
+.calendar-day-number>small{
+  padding:3px 5px;
+  border-radius:999px;
+  background:var(--theme-accent-soft);
+  color:var(--sc-accent2);
+  font-size:6px;
+  font-weight:900;
+}
+.calendar-day-preview{
+  display:grid;
+  gap:5px;
+}
+.calendar-task-mini{
+  min-width:0;
+  padding:5px 6px;
+  border:1px solid color-mix(in srgb,var(--sc-accent) 16%,var(--sc-line));
+  border-radius:7px;
+  background:var(--sc-soft);
+}
+.calendar-task-mini.done{
+  opacity:.46;
+}
+.calendar-task-mini span,
+.calendar-task-mini strong{
+  display:block;
+}
+.calendar-task-mini span{
+  margin-bottom:2px;
+  color:var(--sc-accent2);
+  font-size:5px;
+  font-weight:950;
+  letter-spacing:.07em;
+}
+.calendar-task-mini strong{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:7px;
+}
+.calendar-day-preview em{
+  color:var(--sc-muted);
+  font-size:6px;
+  font-style:normal;
+}
+.calendar-loading{
+  grid-column:1/-1;
+  padding:28px;
+  text-align:center;
+  color:var(--sc-muted);
+  font-size:9px;
+}
+
+.schedule-calendar-day-details{
+  margin-top:14px;
+  padding:14px;
+  border:1px solid var(--sc-line);
+  border-radius:12px;
+  background:var(--sc-panel);
+}
+.schedule-calendar-day-details[hidden]{
+  display:none!important;
+}
+.calendar-day-details-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+.calendar-day-details-head span{
+  color:var(--sc-accent2);
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.1em;
+}
+.calendar-day-details-head h3{
+  margin:3px 0 0;
+  text-transform:capitalize;
+  font-size:15px;
+}
+.calendar-day-tasks{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+
+@media(max-width:900px){
+  .schedule-calendar-panel{
+    width:min(100%,calc(100vw - 16px));
+    max-height:calc(100dvh - 16px);
+    padding:12px;
+    border-radius:15px;
+  }
+  .schedule-calendar-day{
+    min-height:108px;
+    padding:6px;
+  }
+  .calendar-task-mini:nth-child(n+3){
+    display:none;
+  }
+  .calendar-day-tasks{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:640px){
+  .schedule-week-heading{
+    align-items:stretch!important;
+  }
+  .schedule-calendar-button{
+    width:100%;
+    min-height:42px;
+  }
+  .schedule-calendar-modal{
+    padding:0;
+  }
+  .schedule-calendar-panel{
+    width:100vw;
+    max-height:100dvh;
+    height:100dvh;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+    padding:10px;
+  }
+  .schedule-calendar-toolbar{
+    grid-template-columns:auto auto 1fr auto;
+  }
+  .schedule-calendar-weekdays span{
+    padding:7px 2px;
+    font-size:6px;
+  }
+  .schedule-calendar-day{
+    min-height:74px;
+    padding:4px;
+  }
+  .calendar-day-number{
+    margin-bottom:3px;
+  }
+  .calendar-day-number>span{
+    font-size:9px;
+  }
+  .calendar-day-number>small{
+    display:none;
+  }
+  .calendar-task-mini{
+    padding:3px 4px;
+  }
+  .calendar-task-mini span{
+    display:none;
+  }
+  .calendar-task-mini strong{
+    font-size:6px;
+  }
+  .calendar-task-mini:nth-child(n+2){
+    display:none;
+  }
+  .calendar-day-preview em{
+    font-size:5px;
+  }
+  .calendar-day-tasks{
+    grid-template-columns:1fr;
+  }
+}
+/* CORTEX CALENDAR PLAN V1 END */
