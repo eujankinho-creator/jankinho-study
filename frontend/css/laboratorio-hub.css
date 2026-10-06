@@ -1176,3 +1176,208 @@
   .lab-choice-grid{grid-template-columns:1fr}
   .lab-choice-card{min-height:0}
 }
+
+
+/* =========================================================
+   CORTEX LAB HUB THEMED PREMIUM V2
+========================================================= */
+
+.lab-hub-view{
+  background:
+    radial-gradient(circle at 82% 2%,var(--theme-accent-soft),transparent 30%),
+    radial-gradient(circle at 12% 92%,color-mix(in srgb,var(--theme-accent) 4%,transparent),transparent 24%),
+    var(--theme-bg)!important;
+}
+
+.lab-hub-view .header{
+  border-bottom-color:var(--theme-border)!important;
+  background:color-mix(in srgb,var(--theme-bg-secondary) 96%,transparent)!important;
+}
+
+.lab-header-subtitle{
+  color:var(--theme-text-muted)!important;
+  font-size:11px!important;
+}
+
+.lab-hub-hero{
+  min-height:250px;
+  border-color:var(--theme-border)!important;
+  background:
+    radial-gradient(circle at 86% 0%,var(--theme-accent-soft),transparent 34%),
+    linear-gradient(145deg,var(--theme-surface-strong),var(--theme-surface))!important;
+  box-shadow:
+    0 24px 72px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.018)!important;
+}
+
+.lab-hub-hero::before{
+  opacity:.10!important;
+  background-image:
+    linear-gradient(color-mix(in srgb,var(--theme-accent) 7%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--theme-accent) 7%,transparent) 1px,transparent 1px)!important;
+}
+
+.hub-orbit{
+  border-color:color-mix(in srgb,var(--theme-accent) 13%,transparent)!important;
+}
+
+.hub-orbit-two{
+  border-color:color-mix(in srgb,var(--theme-accent) 7%,transparent)!important;
+}
+
+.hub-kicker{
+  color:var(--theme-text-muted)!important;
+  font-size:11px!important;
+}
+
+.hub-kicker span{
+  background:var(--theme-accent)!important;
+  box-shadow:none!important;
+}
+
+.lab-hub-hero h1{
+  color:var(--theme-text)!important;
+}
+
+.lab-hub-hero h1 em{
+  color:var(--theme-accent-2)!important;
+}
+
+.lab-hub-hero p{
+  color:var(--theme-text-muted)!important;
+  font-size:14px!important;
+}
+
+.hub-status{
+  border-color:var(--theme-border)!important;
+  background:color-mix(in srgb,var(--theme-surface-strong) 86%,transparent)!important;
+}
+
+.hub-status-dot{
+  background:var(--theme-accent)!important;
+  box-shadow:0 0 0 5px var(--theme-accent-soft)!important;
+}
+
+.hub-status small{
+  color:var(--theme-text-muted)!important;
+  font-size:9px!important;
+}
+
+.hub-status strong{
+  color:var(--theme-text-soft)!important;
+  font-size:12px!important;
+}
+
+.lab-choice-card,
+.ecg-card,
+.membrane-card,
+.gprotein-card,
+.radiology-card{
+  --card-accent:var(--theme-accent)!important;
+  --card-accent-rgb:var(--theme-accent-rgb)!important;
+}
+
+.lab-choice-card{
+  border-color:var(--theme-border)!important;
+  background:
+    radial-gradient(circle at 90% -12%,var(--theme-accent-soft),transparent 30%),
+    linear-gradient(145deg,var(--theme-surface-strong),var(--theme-surface))!important;
+  box-shadow:
+    0 16px 46px rgba(0,0,0,.27),
+    inset 0 1px 0 rgba(255,255,255,.018)!important;
+}
+
+.lab-choice-card:hover{
+  border-color:var(--theme-border-strong)!important;
+  background:
+    radial-gradient(circle at 90% -12%,var(--theme-accent-medium),transparent 34%),
+    linear-gradient(145deg,var(--theme-surface-strong),var(--theme-surface))!important;
+  box-shadow:
+    0 22px 56px rgba(0,0,0,.34),
+    0 0 0 1px color-mix(in srgb,var(--theme-accent) 5%,transparent)!important;
+}
+
+.choice-icon,
+.choice-icon.membrane-icon,
+.choice-icon.gprotein-icon,
+.radiology-icon{
+  border-color:var(--theme-border-strong)!important;
+  color:var(--theme-accent-2)!important;
+  background:var(--theme-accent-soft)!important;
+  box-shadow:none!important;
+}
+
+.choice-eyebrow{
+  color:var(--theme-accent)!important;
+  font-size:9px!important;
+}
+
+.choice-copy h2{
+  color:var(--theme-text)!important;
+  font-size:28px!important;
+}
+
+.choice-copy p{
+  color:var(--theme-text-muted)!important;
+  font-size:13px!important;
+  line-height:1.7!important;
+}
+
+.choice-footer{
+  border-top-color:var(--theme-border)!important;
+}
+
+.choice-footer>span{
+  color:var(--theme-text-muted)!important;
+  font-size:10px!important;
+}
+
+.choice-footer strong{
+  color:var(--theme-accent-2)!important;
+  font-size:11px!important;
+}
+
+.hub-tip{
+  border-color:var(--theme-border)!important;
+  background:color-mix(in srgb,var(--theme-surface) 90%,transparent)!important;
+}
+
+.hub-tip-icon{
+  color:var(--theme-accent-2)!important;
+  background:var(--theme-accent-soft)!important;
+  border-color:var(--theme-border-strong)!important;
+}
+
+.hub-tip strong{
+  color:var(--theme-text-soft)!important;
+  font-size:11px!important;
+}
+
+.hub-tip p{
+  color:var(--theme-text-muted)!important;
+  font-size:10px!important;
+}
+
+@media(max-width:680px){
+  .lab-hub-hero{
+    padding:24px 20px!important;
+  }
+
+  .lab-hub-hero h1{
+    font-size:36px!important;
+  }
+
+  .lab-hub-hero p{
+    font-size:13px!important;
+  }
+
+  .choice-copy h2{
+    font-size:24px!important;
+  }
+
+  .choice-copy p{
+    font-size:12px!important;
+  }
+}
+
+/* CORTEX LAB HUB THEMED PREMIUM V2 END */
