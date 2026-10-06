@@ -2514,3 +2514,16 @@ input[type="range"] {
 }
 
 /* CORTEX BRUSH CURSOR V1 END */
+
+
+/* CORTEX BRUSH NATIVE CURSOR HIDE V1 */
+.board-stage[data-tool="pen"] #boardCanvas,
+.board-stage[data-tool="highlighter"] #boardCanvas,
+.board-stage[data-tool="eraser"] #boardCanvas,
+.board-stage[data-tool="line"] #boardCanvas,
+.board-stage[data-tool="arrow"] #boardCanvas,
+.board-stage[data-tool="rect"] #boardCanvas,
+.board-stage[data-tool="circle"] #boardCanvas{
+  cursor:none!important;
+}
+/* CORTEX BRUSH NATIVE CURSOR HIDE V1 END */
