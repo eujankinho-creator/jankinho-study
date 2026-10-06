@@ -1148,7 +1148,7 @@
           box.innerHTML="";
           image=document.createElement("img");
           image.className="cortex-global-logo-image";
-          image.src="/favicon.svg?v=cortex-global-brand-v2";
+          image.src="/favicon.svg?v=cortex-minimal-v4";
           image.alt="";
           image.setAttribute("aria-hidden","true");
           box.appendChild(image);
@@ -1162,7 +1162,7 @@
         if(!image){
           image=document.createElement("img");
           image.className="cortex-mobile-brand-image";
-          image.src="/favicon.svg?v=cortex-global-brand-v2";
+          image.src="/favicon.svg?v=cortex-minimal-v4";
           image.alt="";
           image.setAttribute("aria-hidden","true");
           header.insertBefore(image,header.firstChild);
