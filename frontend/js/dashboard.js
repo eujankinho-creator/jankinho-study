@@ -67,32 +67,32 @@ function mesmoDia(a, b) {
 
 function atualizarData() {
 
-  const elemento =
-    $("dashboardDate");
+  const data = new Date();
+  const elemento = $("dashboardDate");
+  const weekday = $("dashboardWeekday");
 
+  if (weekday) {
+    const nomeDia = new Intl.DateTimeFormat(
+      "pt-BR",
+      { weekday: "long" }
+    ).format(data);
 
-  if (!elemento) {
-    return;
+    weekday.textContent =
+      nomeDia.charAt(0).toUpperCase() +
+      nomeDia.slice(1);
   }
 
-
-  const texto =
-    new Intl.DateTimeFormat(
-      "pt-BR",
-      {
-        weekday: "long",
-        day: "2-digit",
-        month: "long"
-      }
-    )
-      .format(
-        new Date()
-      );
-
-
-  elemento.textContent =
-    texto.charAt(0).toUpperCase() +
-    texto.slice(1);
+  if (elemento) {
+    elemento.textContent =
+      new Intl.DateTimeFormat(
+        "pt-BR",
+        {
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        }
+      ).format(data);
+  }
 
 }
 
@@ -713,6 +713,465 @@ function renderHoje(
 }
 
 
+
+
+// CORTEX DASHBOARD PLAN + WEATHER V1
+
+function isoLocalDay(value) {
+  const data = new Date(value);
+  if (Number.isNaN(data.getTime())) return "";
+  const y = data.getFullYear();
+  const m = String(data.getMonth() + 1).padStart(2, "0");
+  const d = String(data.getDate()).padStart(2, "0");
+  return y + "-" + m + "-" + d;
+}
+
+function labelDiaSemana(value) {
+  const data = new Date(value);
+  if (Number.isNaN(data.getTime())) return "";
+  const dia = new Intl.DateTimeFormat(
+    "pt-BR",
+    { weekday: "short", day: "2-digit" }
+  ).format(data);
+  return dia.replace(".", "");
+}
+
+function renderPlanoDashboard(data) {
+  const container = $("dashboardWeekTasks");
+  const subtitle = $("dashboardPlanSubtitle");
+  const alerts = $("dashboardPlanAlerts");
+
+  if (!container || !subtitle || !alerts) return;
+
+  if (!data || !data.schedule) {
+    subtitle.textContent = "Nenhum plano ativo.";
+    alerts.innerHTML =
+      '<a class="dashboard-plan-empty-cta" href="/cronograma">' +
+      'Escolha seu objetivo e monte o cronograma <span>→</span></a>';
+    container.innerHTML =
+      '<div class="empty">Quando você criar um plano, as tarefas da semana aparecerão aqui.</div>';
+
+    ["dashboardWeekCompleted","dashboardWeekPending","dashboardTodayPlan","dashboardPlanPercent","dashboardWeekRate"]
+      .forEach(function (id) {
+        const el = $(id);
+        if (el) el.textContent = id === "dashboardTodayPlan" ? "0/0" : id.includes("Percent") || id.includes("Rate") ? "0%" : "0";
+      });
+
+    renderGraficoSemana([]);
+    return;
+  }
+
+  const weekTasks =
+    data.week && Array.isArray(data.week.tasks)
+      ? data.week.tasks
+      : [];
+
+  const studyTasks =
+    weekTasks.filter(function (task) {
+      return task.tipo !== "DESCANSO";
+    });
+
+  const done =
+    studyTasks.filter(function (task) {
+      return Boolean(task.concluida);
+    }).length;
+
+  const pending = Math.max(0, studyTasks.length - done);
+  const weekRate =
+    studyTasks.length
+      ? Math.round(done / studyTasks.length * 100)
+      : 0;
+
+  subtitle.textContent =
+    data.schedule.prova
+      ? data.schedule.prova
+      : "Plano de estudos ativo";
+
+  if ($("dashboardWeekCompleted")) $("dashboardWeekCompleted").textContent = String(done);
+  if ($("dashboardWeekPending")) $("dashboardWeekPending").textContent = String(pending);
+  if ($("dashboardTodayPlan")) {
+    $("dashboardTodayPlan").textContent =
+      String((data.stats && data.stats.todayCompleted) || 0) +
+      "/" +
+      String((data.stats && data.stats.todayTotal) || 0);
+  }
+  if ($("dashboardPlanPercent")) {
+    $("dashboardPlanPercent").textContent =
+      String((data.stats && data.stats.percent) || 0) + "%";
+  }
+  if ($("dashboardWeekRate")) {
+    $("dashboardWeekRate").textContent = String(weekRate) + "%";
+  }
+
+  const today = isoLocalDay(new Date());
+  const atrasadas =
+    studyTasks.filter(function (task) {
+      return !task.concluida && isoLocalDay(task.data) < today;
+    }).length;
+  const hojePendentes =
+    studyTasks.filter(function (task) {
+      return !task.concluida && isoLocalDay(task.data) === today;
+    }).length;
+
+  const avisos = [];
+
+  if (atrasadas > 0) {
+    avisos.push(
+      '<span class="dashboard-plan-alert warning">' +
+      '<b>' + atrasadas + '</b> pendência' + (atrasadas === 1 ? "" : "s") +
+      ' anterior' + (atrasadas === 1 ? "" : "es") + '</span>'
+    );
+  }
+
+  if (hojePendentes > 0) {
+    avisos.push(
+      '<span class="dashboard-plan-alert current">' +
+      '<b>' + hojePendentes + '</b> tarefa' + (hojePendentes === 1 ? "" : "s") +
+      ' para hoje</span>'
+    );
+  }
+
+  if (studyTasks.length > 0 && pending === 0) {
+    avisos.push(
+      '<span class="dashboard-plan-alert success">Semana concluída</span>'
+    );
+  }
+
+  if (data.schedule.dataProva) {
+    const prova = new Date(data.schedule.dataProva);
+    const agora = new Date();
+    prova.setHours(12,0,0,0);
+    agora.setHours(12,0,0,0);
+    const dias = Math.ceil((prova.getTime() - agora.getTime()) / 86400000);
+    if (Number.isFinite(dias) && dias >= 0) {
+      avisos.push(
+        '<span class="dashboard-plan-alert">' +
+        (dias === 0 ? "Prova hoje" : dias + " dias até a prova") +
+        '</span>'
+      );
+    }
+  }
+
+  alerts.innerHTML = avisos.join("");
+
+  if (weekTasks.length === 0) {
+    container.innerHTML =
+      '<div class="empty">Não há tarefas previstas para esta semana.</div>';
+    renderGraficoSemana([]);
+    return;
+  }
+
+  const grupos = new Map();
+
+  weekTasks.forEach(function (task) {
+    const key = isoLocalDay(task.data);
+    if (!grupos.has(key)) grupos.set(key, []);
+    grupos.get(key).push(task);
+  });
+
+  container.innerHTML =
+    Array.from(grupos.entries())
+      .map(function (entry) {
+        const dateKey = entry[0];
+        const tasks = entry[1];
+        const dataObj = new Date(dateKey + "T12:00:00");
+        const isToday = dateKey === today;
+
+        const items =
+          tasks.map(function (task) {
+            const concluida = Boolean(task.concluida);
+            const tema = task.tema || task.titulo || "Atividade";
+            const meta =
+              task.tipo === "QUESTOES" && task.metaValor
+                ? task.metaValor + " questões"
+                : task.duracaoMinutos
+                  ? task.duracaoMinutos + " min"
+                  : "";
+
+            return (
+              '<a class="dashboard-week-task ' +
+              (concluida ? "done" : "") +
+              '" href="/cronograma">' +
+              '<span class="dashboard-task-status">' +
+              (concluida ? "✓" : "") +
+              '</span>' +
+              '<div><strong>' +
+              escapeHtml(tema) +
+              '</strong><span>' +
+              escapeHtml(task.tipo || "ESTUDO") +
+              (meta ? " · " + escapeHtml(meta) : "") +
+              '</span></div>' +
+              '</a>'
+            );
+          }).join("");
+
+        return (
+          '<div class="dashboard-week-day ' + (isToday ? "today" : "") + '">' +
+          '<div class="dashboard-week-day-head">' +
+          '<span>' + escapeHtml(labelDiaSemana(dataObj)) + '</span>' +
+          '<strong>' + tasks.filter(function (task) { return task.concluida; }).length +
+          '/' + tasks.length + '</strong>' +
+          '</div>' +
+          '<div class="dashboard-week-day-list">' + items + '</div>' +
+          '</div>'
+        );
+      }).join("");
+
+  renderGraficoSemana(weekTasks);
+}
+
+function renderGraficoSemana(tasks) {
+  const chart = $("dashboardWeekChart");
+  if (!chart) return;
+
+  const dias = [];
+  const base = new Date();
+  const day = base.getDay();
+  const mondayOffset = day === 0 ? -6 : 1 - day;
+  base.setDate(base.getDate() + mondayOffset);
+  base.setHours(12,0,0,0);
+
+  for (let i = 0; i < 7; i += 1) {
+    const date = new Date(base);
+    date.setDate(base.getDate() + i);
+    const key = isoLocalDay(date);
+    const list = tasks.filter(function (task) {
+      return task.tipo !== "DESCANSO" && isoLocalDay(task.data) === key;
+    });
+    dias.push({
+      label: new Intl.DateTimeFormat("pt-BR", { weekday: "short" }).format(date).replace(".",""),
+      total: list.length,
+      done: list.filter(function (task) { return task.concluida; }).length
+    });
+  }
+
+  const max = Math.max(1, ...dias.map(function (item) { return item.total; }));
+
+  chart.innerHTML =
+    dias.map(function (item) {
+      const totalHeight = item.total ? Math.max(14, Math.round(item.total / max * 100)) : 5;
+      const doneHeight = item.total ? Math.round(item.done / item.total * 100) : 0;
+      return (
+        '<div class="dashboard-week-bar-item">' +
+        '<div class="dashboard-week-bar">' +
+        '<div class="dashboard-week-bar-total" style="height:' + totalHeight + '%">' +
+        '<span style="height:' + doneHeight + '%"></span>' +
+        '</div></div>' +
+        '<strong>' + escapeHtml(item.label) + '</strong>' +
+        '<small>' + item.done + '/' + item.total + '</small>' +
+        '</div>'
+      );
+    }).join("");
+}
+
+function renderTrajetoria(respostas) {
+  const line = $("dashboardTrajectoryLine");
+  const area = $("dashboardTrajectoryArea");
+  const empty = $("dashboardTrajectoryEmpty");
+  const recentAccuracy = $("dashboardRecentAccuracy");
+
+  if (!line || !area || !empty) return;
+
+  const dias = [];
+  const now = new Date();
+  now.setHours(12,0,0,0);
+
+  for (let offset = 13; offset >= 0; offset -= 1) {
+    const date = new Date(now);
+    date.setDate(now.getDate() - offset);
+    const key = isoLocalDay(date);
+    const list = respostas.filter(function (r) {
+      return r.respondidaAt && isoLocalDay(r.respondidaAt) === key;
+    });
+    const acertos = list.filter(function (r) { return Boolean(r.correta); }).length;
+    dias.push({
+      key,
+      total: list.length,
+      accuracy: list.length ? Math.round(acertos / list.length * 100) : null
+    });
+  }
+
+  const recentes = respostas.filter(function (r) {
+    if (!r.respondidaAt) return false;
+    const data = new Date(r.respondidaAt);
+    return now.getTime() - data.getTime() <= 14 * 86400000;
+  });
+  const acertosRecentes = recentes.filter(function (r) { return Boolean(r.correta); }).length;
+  const media =
+    recentes.length
+      ? Math.round(acertosRecentes / recentes.length * 100)
+      : 0;
+
+  if (recentAccuracy) recentAccuracy.textContent = media + "%";
+
+  const validos = dias.filter(function (item) { return item.accuracy !== null; });
+
+  if (validos.length < 2) {
+    line.setAttribute("points", "");
+    area.setAttribute("d", "");
+    empty.classList.remove("hidden");
+    return;
+  }
+
+  empty.classList.add("hidden");
+
+  const width = 720;
+  const height = 190;
+  const padX = 14;
+  const padY = 20;
+  const usableW = width - padX * 2;
+  const usableH = height - padY * 2;
+
+  const points = dias.map(function (item, index) {
+    const x = padX + usableW * (index / 13);
+    const value = item.accuracy === null ? null : item.accuracy;
+    const y = value === null ? null : padY + usableH * (1 - value / 100);
+    return { x, y, value };
+  });
+
+  const rendered = [];
+  let last = null;
+
+  points.forEach(function (point) {
+    if (point.y !== null) {
+      last = point;
+      rendered.push(point);
+    } else if (last) {
+      rendered.push({ x: point.x, y: last.y, value: last.value });
+    }
+  });
+
+  if (rendered.length < 2) return;
+
+  const pointString =
+    rendered.map(function (p) {
+      return p.x.toFixed(1) + "," + p.y.toFixed(1);
+    }).join(" ");
+
+  line.setAttribute("points", pointString);
+
+  const first = rendered[0];
+  const lastPoint = rendered[rendered.length - 1];
+  const areaPath =
+    "M " + first.x.toFixed(1) + " " + (height - padY) +
+    " L " +
+    rendered.map(function (p) {
+      return p.x.toFixed(1) + " " + p.y.toFixed(1);
+    }).join(" L ") +
+    " L " + lastPoint.x.toFixed(1) + " " + (height - padY) +
+    " Z";
+
+  area.setAttribute("d", areaPath);
+}
+
+function weatherDescription(code, isDay) {
+  const descriptions = {
+    0: isDay ? "Céu limpo" : "Noite limpa",
+    1: "Predominantemente limpo",
+    2: "Parcialmente nublado",
+    3: "Nublado",
+    45: "Neblina",
+    48: "Neblina com geada",
+    51: "Garoa leve",
+    53: "Garoa",
+    55: "Garoa intensa",
+    61: "Chuva leve",
+    63: "Chuva",
+    65: "Chuva forte",
+    71: "Neve leve",
+    73: "Neve",
+    75: "Neve forte",
+    80: "Pancadas leves",
+    81: "Pancadas de chuva",
+    82: "Pancadas fortes",
+    95: "Trovoadas",
+    96: "Trovoadas com granizo",
+    99: "Trovoadas fortes"
+  };
+  return descriptions[code] || "Condição atual";
+}
+
+function weatherIcon(code, isDay) {
+  if (code === 0) return isDay ? "☀" : "☾";
+  if (code <= 2) return isDay ? "◐" : "☾";
+  if (code === 3) return "☁";
+  if (code === 45 || code === 48) return "≋";
+  if ((code >= 51 && code <= 65) || (code >= 80 && code <= 82)) return "☂";
+  if (code >= 71 && code <= 75) return "✦";
+  if (code >= 95) return "ϟ";
+  return "•";
+}
+
+function setWeatherState(temp, text, icon, retry) {
+  if ($("dashboardWeatherTemp")) $("dashboardWeatherTemp").textContent = temp;
+  if ($("dashboardWeatherText")) $("dashboardWeatherText").textContent = text;
+  if ($("dashboardWeatherIcon")) $("dashboardWeatherIcon").textContent = icon;
+  const button = $("dashboardWeatherRetry");
+  if (button) button.classList.toggle("hidden", !retry);
+}
+
+function carregarClima() {
+  if (!navigator.geolocation) {
+    setWeatherState("Clima", "Localização indisponível", "•", false);
+    return;
+  }
+
+  setWeatherState("Clima", "Obtendo localização...", "·", false);
+
+  navigator.geolocation.getCurrentPosition(
+    async function (position) {
+      try {
+        const latitude = position.coords.latitude.toFixed(4);
+        const longitude = position.coords.longitude.toFixed(4);
+        const url =
+          "https://api.open-meteo.com/v1/forecast" +
+          "?latitude=" + encodeURIComponent(latitude) +
+          "&longitude=" + encodeURIComponent(longitude) +
+          "&current=temperature_2m,apparent_temperature,weather_code,is_day" +
+          "&temperature_unit=celsius&timezone=auto&forecast_days=1";
+
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) throw new Error("weather");
+
+        const data = await response.json();
+        const current = data && data.current ? data.current : {};
+        const temperature = Number(current.temperature_2m);
+        const apparent = Number(current.apparent_temperature);
+        const code = Number(current.weather_code);
+        const isDay = Number(current.is_day) === 1;
+
+        const tempText =
+          Number.isFinite(temperature)
+            ? Math.round(temperature) + "°C"
+            : "Clima";
+
+        let description = weatherDescription(code, isDay);
+        if (Number.isFinite(apparent)) {
+          description += " · sensação " + Math.round(apparent) + "°";
+        }
+
+        setWeatherState(
+          tempText,
+          description,
+          weatherIcon(code, isDay),
+          false
+        );
+      }
+      catch (error) {
+        setWeatherState("Clima", "Não foi possível atualizar agora", "•", true);
+      }
+    },
+    function () {
+      setWeatherState("Clima", "Ative a localização para ver o tempo", "•", true);
+    },
+    {
+      enableHighAccuracy: false,
+      timeout: 8000,
+      maximumAge: 15 * 60 * 1000
+    }
+  );
+}
+
 async function carregarDashboard() {
 
   try {
@@ -733,7 +1192,8 @@ async function carregarDashboard() {
       questoesResponse,
       respostasResponse,
       disciplinasResponse,
-      financeiroResponse
+      financeiroResponse,
+      cronogramaResponse
     ] =
       await Promise.all([
         usuarioPromise,
@@ -768,6 +1228,14 @@ async function carregarDashboard() {
             credentials:
               "same-origin"
           }
+        ),
+
+        fetch(
+          "/api/cronograma/dashboard",
+          {
+            credentials:
+              "same-origin"
+          }
         )
       ]);
 
@@ -782,7 +1250,8 @@ async function carregarDashboard() {
         questoesResponse,
         respostasResponse,
         disciplinasResponse,
-        financeiroResponse
+        financeiroResponse,
+        cronogramaResponse
       ];
 
 
@@ -810,7 +1279,8 @@ async function carregarDashboard() {
       questoes,
       respostas,
       disciplinas,
-      financeiro
+      financeiro,
+      cronograma
     ] =
       await Promise.all([
         questoesResponse.ok
@@ -833,6 +1303,12 @@ async function carregarDashboard() {
                 despesas: 0,
                 saldo: 0
               }
+            }),
+
+        cronogramaResponse.ok
+          ? cronogramaResponse.json()
+          : Promise.resolve({
+              schedule: null
             })
       ]);
 
@@ -981,6 +1457,14 @@ async function carregarDashboard() {
       listaRespostas
     );
 
+    renderPlanoDashboard(
+      cronograma
+    );
+
+    renderTrajetoria(
+      listaRespostas
+    );
+
 
     const resumo =
       financeiro &&
@@ -1071,4 +1555,14 @@ if (logoutSidebar) {
 }
 
 
+const dashboardWeatherRetry = $("dashboardWeatherRetry");
+
+if (dashboardWeatherRetry) {
+  dashboardWeatherRetry.addEventListener(
+    "click",
+    carregarClima
+  );
+}
+
+carregarClima();
 carregarDashboard();
