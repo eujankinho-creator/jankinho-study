@@ -57,7 +57,7 @@
     rel="stylesheet"
     href="/css/sidebar-standard.css?v=20261002-lab-new1"
   >
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261006-orangeblack1">
 
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
 
@@ -485,78 +485,103 @@
             </span>
 
             <h2>
-              Temas visuais
+              Orange Black
             </h2>
 
             <p>
-              Escolha o estilo visual da plataforma.
-              O tema selecionado &eacute; salvo na sua conta e sincronizado entre seus dispositivos.
+              O Cortex agora usa uma &uacute;nica identidade visual global:
+              preto profundo, superf&iacute;cies escuras, textos brancos e
+              laranja forte e saturado apenas nos pontos de destaque.
             </p>
 
-            <div class="theme-settings-grid">
-
-              <button
-                type="button"
-                class="theme-choice"
-                data-theme-choice="dark-orange"
-              >
-                <div class="theme-choice-preview dark">
-                  <div class="theme-preview-top">
-                    <div class="theme-preview-fill"></div>
-                  </div>
-                  <div class="theme-preview-card"></div>
+            <div class="orange-black-theme-preview" aria-label="Tema Orange Black ativo">
+              <div class="orange-black-preview-sidebar"></div>
+              <div class="orange-black-preview-main">
+                <div class="orange-black-preview-line accent"></div>
+                <div class="orange-black-preview-line"></div>
+                <div class="orange-black-preview-cards">
+                  <span></span><span></span><span></span>
                 </div>
-
-                <div class="theme-choice-title">
-                  Orange
-                </div>
-
-                <div class="theme-choice-description">
-                  Tema bem escuro com detalhes laranja sutis e confortáveis para estudo.
-                </div>
-
-                <div class="theme-choice-chip">
-                  Moderno
-                </div>
-              </button>
-
-              <button
-                type="button"
-                class="theme-choice"
-                data-theme-choice="pink-glitter"
-              >
-                <div class="theme-choice-preview pink">
-                  <div class="theme-preview-top">
-                    <div class="theme-preview-fill"></div>
-                  </div>
-                  <div class="theme-preview-card"></div>
-                </div>
-
-                <div class="theme-choice-title">
-                  Pink
-                </div>
-
-                <div class="theme-choice-description">
-                  Tema bem escuro com detalhes rosa discretos e elegantes.
-                </div>
-
-                <div class="theme-choice-chip">
-                  Fofo
-                </div>
-              </button>
-
+              </div>
             </div>
 
             <div class="theme-current-row">
               <div class="theme-current-label">
-                Tema atual
+                Tema global
               </div>
               <div
                 id="themeCurrentName"
                 class="theme-current-name"
               >
-                Dark Orange
+                Orange Black
               </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- PET -->
+
+        <section
+          id="petSettingsCard"
+          class="settings-card"
+        >
+
+          <div class="settings-icon">
+            &#128049;
+          </div>
+
+          <div class="settings-card-content">
+
+            <span class="small-label">
+              Cortex Pet
+            </span>
+
+            <h2>
+              Seu companheiro
+            </h2>
+
+            <p>
+              O pet &eacute; opcional e independente do tema. Voc&ecirc; pode
+              adicion&aacute;-lo, apenas ocult&aacute;-lo temporariamente ou remov&ecirc;-lo.
+            </p>
+
+            <div class="pet-settings-status">
+              <div>
+                <span>Estado atual</span>
+                <strong id="petSettingsStatus">Carregando...</strong>
+              </div>
+              <small id="petSettingsHint">A prefer&ecirc;ncia fica salva para esta conta neste navegador.</small>
+            </div>
+
+            <div class="pet-settings-actions">
+              <button
+                id="petAddButton"
+                type="button"
+                class="pet-setting-action primary"
+                data-pet-mode="visible"
+              >
+                Adicionar / mostrar
+              </button>
+
+              <button
+                id="petHideButton"
+                type="button"
+                class="pet-setting-action"
+                data-pet-mode="hidden"
+              >
+                Ocultar
+              </button>
+
+              <button
+                id="petRemoveButton"
+                type="button"
+                class="pet-setting-action danger"
+                data-pet-mode="removed"
+              >
+                Remover
+              </button>
             </div>
 
           </div>
@@ -755,11 +780,8 @@
   </script>
 
 <script defer src="/js/configuracoes-ui.js?v=20261002-profile-photo1"></script>
-  <script defer src="/js/configuracoes.js?v=20261006-ui-profile2"></script>
-
-  <script defer src="/js/theme-settings.js?v=20261006-darkthemes1"></script>
+  <script defer src="/js/configuracoes.js?v=20261006-orangeblack-pet1"></script>
   <script defer src="/js/cortex-brand.js?v=20261006-ui-profile2"></script>
-  <script defer src="/js/theme-blue-option.js?v=20261006-darkthemes1"></script>
 
 </body>
 </html>
