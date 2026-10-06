@@ -14,6 +14,36 @@ type ResearchItem = {
 };
 
 const researchCache = new Map<string, { at: number; items: ResearchItem[] }>();
+const CRONOGRAMA_RESET_KEY = "cronograma:objetivos-reset:2026-10-06-v1";
+
+async function ensureCronogramaResetOnce() {
+  try {
+    await prisma.$transaction(async (tx) => {
+      const marker = await tx.appConfig.findUnique({
+        where: { chave: CRONOGRAMA_RESET_KEY },
+      });
+
+      if (marker) return;
+
+      await tx.cronogramaEstudo.deleteMany({});
+
+      await tx.appConfig.create({
+        data: {
+          chave: CRONOGRAMA_RESET_KEY,
+          valor: {
+            resetAt: new Date().toISOString(),
+            reason: "Remover objetivos/cronogramas anteriores de todos os usuários",
+          },
+        },
+      });
+    });
+  } catch (error: any) {
+    const marker = await prisma.appConfig.findUnique({
+      where: { chave: CRONOGRAMA_RESET_KEY },
+    });
+    if (!marker) throw error;
+  }
+}
 
 const OFFICIAL_SEEDS: ResearchItem[] = [
   {
@@ -893,6 +923,8 @@ async function syncTodayTaskProgress(
 }
 
 async function dashboard(usuarioId: number): Promise<ApiResult> {
+  await ensureCronogramaResetOnce();
+
   const schedule = await prisma.cronogramaEstudo.findFirst({
     where: { usuarioId, ativo: true },
     orderBy: { updatedAt: "desc" },
@@ -948,8 +980,15 @@ async function dashboard(usuarioId: number): Promise<ApiResult> {
 }
 
 async function generate(usuarioId: number, body: any): Promise<ApiResult> {
+  await ensureCronogramaResetOnce();
+
+  const kind = inferKind("", body.tipoProva);
+  if (!["ENARE", "EBSERH", "MINISTERIO_SAUDE"].includes(kind) || !body.tipoProva) {
+    return { status: 400, data: { error: "Escolha ENARE, EBSERH ou Ministério da Saúde." } };
+  }
+
   const prova = text(body.prova, 180);
-  if (!prova) return { status: 400, data: { error: "Informe a prova desejada." } };
+  if (!prova) return { status: 400, data: { error: "Escolha seu objetivo antes de montar o cronograma." } };
 
   const sourceItems: ResearchItem[] = Array.isArray(body.sources)
     ? body.sources.slice(0, 20).map((item: any) => ({
@@ -966,7 +1005,6 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
   const dificuldades = Array.isArray(body.dificuldades) ? body.dificuldades.map((x: unknown) => text(x, 120)).filter(Boolean) : [];
   const prioridades = Array.isArray(body.prioridades) ? body.prioridades.map((x: unknown) => text(x, 120)).filter(Boolean) : [];
   const weakness = await userWeakness(usuarioId);
-  const kind = inferKind(prova, body.tipoProva);
   const blueprint = EXAM_BLUEPRINTS[kind] || EXAM_BLUEPRINTS.ENARE;
   const topics = planTopics(prova, sourceItems, dificuldades, prioridades, weakness, kind);
   const tasks = generateTasks(body, topics);
