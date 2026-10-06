@@ -4822,3 +4822,189 @@ html[data-theme] :is(
 }
 
 /* CORTEX PREMIUM READABILITY V1 END */
+
+
+/* =========================================================
+   CORTEX PREMIUM SECTIONS V1
+========================================================= */
+
+html[data-theme] :is(
+  .page-heading,
+  .settings-heading,
+  .dashboard-heading,
+  .questions-heading,
+  .flashcards-heading,
+  .cases-heading,
+  .analysis-heading,
+  .finance-heading
+) {
+  position:relative;
+  margin-bottom:22px !important;
+}
+
+html[data-theme] :is(
+  .page-heading,
+  .settings-heading,
+  .dashboard-heading,
+  .questions-heading,
+  .flashcards-heading,
+  .cases-heading,
+  .analysis-heading,
+  .finance-heading
+) > :is(span,.small-label,.orange-badge,.eyebrow) {
+  margin-bottom:9px !important;
+}
+
+html[data-theme] :is(
+  .page-heading,
+  .settings-heading,
+  .dashboard-heading,
+  .questions-heading,
+  .flashcards-heading,
+  .cases-heading,
+  .analysis-heading,
+  .finance-heading
+) > p {
+  max-width:760px;
+  margin-top:9px !important;
+  color:#9d958d !important;
+  font-size:14px !important;
+  line-height:1.68 !important;
+}
+
+html[data-theme] :is(
+  .section-heading,
+  .card-heading,
+  .panel-heading
+) {
+  gap:12px;
+}
+
+html[data-theme] :is(
+  .section-heading,
+  .card-heading,
+  .panel-heading
+) > div > :is(span,.small-label,.section-label) {
+  color:#ff7a00 !important;
+  font-size:10px !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+}
+
+html[data-theme] :is(
+  .section-heading,
+  .card-heading,
+  .panel-heading
+) > div > h2 {
+  margin-top:4px !important;
+}
+
+html[data-theme] :is(
+  .section-heading,
+  .card-heading,
+  .panel-heading
+) > small {
+  color:#8f877f !important;
+  font-size:11px !important;
+}
+
+html[data-theme] :is(
+  .page-message,
+  .research-status,
+  .loading-card,
+  .empty-state,
+  .empty-ranking,
+  .no-results,
+  .empty-message
+) {
+  font-size:13px !important;
+  line-height:1.6 !important;
+}
+
+html[data-theme] :is(
+  .quick-links,
+  .cards-grid,
+  .stats-grid,
+  .dashboard-grid,
+  .content-grid,
+  .settings-content
+) {
+  gap:14px;
+}
+
+html[data-theme] :is(
+  .quick-links a,
+  .case-card,
+  .caso-card,
+  .flashcard-card,
+  .mode-card,
+  .task-card
+) {
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    background-color .15s ease,
+    box-shadow .15s ease !important;
+}
+
+@media (hover:hover) {
+  html[data-theme] :is(
+    .quick-links a,
+    .case-card,
+    .caso-card,
+    .flashcard-card,
+    .mode-card
+  ):hover {
+    transform:translateY(-2px);
+    border-color:rgba(255,101,0,.20) !important;
+    box-shadow:
+      0 18px 44px rgba(0,0,0,.28),
+      0 0 0 1px rgba(255,101,0,.025) !important;
+  }
+}
+
+html[data-theme] * {
+  scrollbar-color:rgba(255,101,0,.36) rgba(255,255,255,.025);
+}
+
+html[data-theme] *::-webkit-scrollbar {
+  width:9px;
+  height:9px;
+}
+
+html[data-theme] *::-webkit-scrollbar-track {
+  background:rgba(255,255,255,.02);
+}
+
+html[data-theme] *::-webkit-scrollbar-thumb {
+  border:2px solid transparent;
+  border-radius:999px;
+  background:
+    linear-gradient(
+      rgba(255,101,0,.34),
+      rgba(255,101,0,.34)
+    ) padding-box;
+}
+
+html[data-theme] *::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      rgba(255,101,0,.52),
+      rgba(255,101,0,.52)
+    ) padding-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] :is(
+    .quick-links a,
+    .case-card,
+    .caso-card,
+    .flashcard-card,
+    .mode-card,
+    .task-card
+  ) {
+    transition:none !important;
+  }
+}
+
+/* CORTEX PREMIUM SECTIONS V1 END */
