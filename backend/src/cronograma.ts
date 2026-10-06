@@ -45,6 +45,10 @@ async function ensureCronogramaResetOnce() {
   }
 }
 
+void ensureCronogramaResetOnce().catch((error) => {
+  console.error("[cronograma-reset]", error);
+});
+
 const OFFICIAL_SEEDS: ResearchItem[] = [
   {
     title: "ENARE — página oficial do exame",
@@ -982,10 +986,11 @@ async function dashboard(usuarioId: number): Promise<ApiResult> {
 async function generate(usuarioId: number, body: any): Promise<ApiResult> {
   await ensureCronogramaResetOnce();
 
-  const kind = inferKind("", body.tipoProva);
-  if (!["ENARE", "EBSERH", "MINISTERIO_SAUDE"].includes(kind) || !body.tipoProva) {
+  const requestedKind = text(body.tipoProva, 40).toUpperCase();
+  if (!["ENARE", "EBSERH", "MINISTERIO_SAUDE"].includes(requestedKind)) {
     return { status: 400, data: { error: "Escolha ENARE, EBSERH ou Ministério da Saúde." } };
   }
+  const kind = requestedKind;
 
   const prova = text(body.prova, 180);
   if (!prova) return { status: 400, data: { error: "Escolha seu objetivo antes de montar o cronograma." } };
