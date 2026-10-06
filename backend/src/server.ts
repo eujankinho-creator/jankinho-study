@@ -37,6 +37,7 @@ import { listarCasos, gerarCasoClinico } from "./casos";
 import { sincronizarCasosFaculdade } from "./casosFaculdade";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { atenderAulas } from "./aulas";
+import { atenderCronograma } from "./cronograma";
 import { limparFlashcardsParaMetodologia } from "./flashcardsMetodologia";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
@@ -3295,11 +3296,11 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261005-aulas1"
+              "/js/sidebar-standard.js?v=20261006-safecron1"
             )
             .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
-              "/css/sidebar-standard.css?v=20261005-logo-global1"
+              "/css/sidebar-standard.css?v=20261006-safecron1"
             );
 
         content =
@@ -3313,7 +3314,7 @@ async function servirArquivo(
       const etag =
         'W/"' +
         String(
-          info.size
+          content.length
         ) +
         "-" +
         String(
@@ -3321,6 +3322,9 @@ async function servirArquivo(
             info.mtimeMs
           )
         ) +
+        (extensao === ".html"
+          ? "-safecron1"
+          : "") +
         '"';
 
 
@@ -3385,7 +3389,7 @@ async function servirArquivo(
     const cacheControl =
       cached.extensao ===
         ".html"
-        ? "private, max-age=30, stale-while-revalidate=120"
+        ? "private, max-age=0, must-revalidate"
         : versionado
           ? "public, max-age=31536000, immutable"
           : "private, max-age=60, must-revalidate";
@@ -3853,6 +3857,32 @@ const server =
           }
 
           await atenderAulas(
+            request,
+            response,
+            url,
+            usuarioId
+          );
+
+          return;
+        }
+
+
+        /* CRONOGRAMA DE ESTUDOS */
+
+        if (
+          caminho.startsWith("/api/cronograma/")
+        ) {
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await atenderCronograma(
             request,
             response,
             url,
@@ -4871,6 +4901,7 @@ const server =
             "/desempenho",
             "/ranking",
             "/configuracoes",
+            "/cronograma",
           ]);
 
 
@@ -5206,6 +5237,19 @@ const server =
           redirect(
             response,
             "/aulas.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/cronograma" &&
+          metodo === "GET"
+        ) {
+          redirect(
+            response,
+            "/cronograma.html"
           );
 
           return;
