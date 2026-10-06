@@ -249,7 +249,7 @@
         {
           href: "/cronograma",
           key: "cronograma",
-          label: "Cronograma de Estudos"
+          label: "Cronograma"
         },
 
         {
