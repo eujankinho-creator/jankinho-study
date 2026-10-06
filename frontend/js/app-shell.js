@@ -1326,6 +1326,7 @@
       "/simulado",
       "/questoes",
       "/aulas",
+      "/cronograma",
       "/flashcards",
       "/lousa",
       "/farmacos",
