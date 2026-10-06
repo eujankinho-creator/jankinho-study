@@ -2761,3 +2761,74 @@ small {
   }
 
 }
+
+
+/* =========================================================
+   CORTEX PET ORANGE BLACK V1
+========================================================= */
+
+#cortexPinkPet .cortex-pet-body {
+  background:linear-gradient(145deg,#ff9a3c,#ff6500 58%,#c84200) !important;
+  border-color:rgba(255,199,143,.48) !important;
+}
+#cortexPinkPet .cortex-pet-head {
+  background:linear-gradient(145deg,#ffb363,#ff781c 62%,#d84b00) !important;
+  border-color:rgba(255,210,163,.52) !important;
+}
+#cortexPinkPet .cortex-pet-ear {
+  background:#f66f1b !important;
+}
+#cortexPinkPet .cortex-pet-tail {
+  border-color:#e95b0c !important;
+}
+#cortexPinkPet .cortex-pet-eye {
+  background:#241006 !important;
+}
+#cortexPinkPet .cortex-pet-nose {
+  background:#7b2e08 !important;
+}
+#cortexPinkPet .cortex-pet-mouth-left,
+#cortexPinkPet .cortex-pet-mouth-right {
+  border-bottom-color:#71300f !important;
+}
+#cortexPinkPet .cortex-pet-panel {
+  border-color:rgba(255,116,24,.22) !important;
+  background:linear-gradient(145deg,rgba(27,17,10,.99),rgba(9,8,7,.995)) !important;
+  box-shadow:0 25px 75px rgba(0,0,0,.58) !important;
+}
+#cortexPinkPet .pet-panel-kicker,
+#cortexPinkPet .pet-action-icon,
+#cortexPinkPet .cortex-pet-particle {
+  color:#ff7a00 !important;
+}
+#cortexPinkPet .cortex-pet-panel-head strong,
+#cortexPinkPet .cortex-pet-actions button strong,
+#cortexPinkPet .pet-customizer-title strong {
+  color:#f5eee8 !important;
+}
+#cortexPinkPet .cortex-pet-actions button,
+#cortexPinkPet .cortex-food-item,
+#cortexPinkPet .cortex-pet-customizer,
+#cortexPinkPet .cortex-pet-outfit-option {
+  border-color:rgba(255,101,0,.12) !important;
+  background:rgba(255,101,0,.035) !important;
+  color:#d8c8ba !important;
+}
+#cortexPinkPet .cortex-pet-actions button:hover,
+#cortexPinkPet .cortex-food-item:hover,
+#cortexPinkPet .cortex-pet-outfit-option:hover,
+#cortexPinkPet .cortex-pet-outfit-option.selected {
+  border-color:rgba(255,101,0,.30) !important;
+  background:rgba(255,101,0,.09) !important;
+}
+#cortexPinkPet .cortex-pet-bar > span {
+  background:linear-gradient(90deg,#ff5b00,#ff8a1f) !important;
+}
+#cortexPinkPet .cortex-pet-avatar:hover,
+#cortexPinkPet .cortex-pet-avatar:focus-visible {
+  filter:
+    drop-shadow(0 5px 8px rgba(0,0,0,.30))
+    drop-shadow(0 0 10px rgba(255,101,0,.28)) !important;
+}
+
+/* CORTEX PET ORANGE BLACK V1 END */
