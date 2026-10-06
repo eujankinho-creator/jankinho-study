@@ -1819,3 +1819,88 @@ body.lesson-player-expanded::before{
   .global-lesson-resize-zones{display:none!important}
   .global-lesson-player:not(.expanded) .global-lesson-head{cursor:default}
 }
+
+
+/* CORTEX APP SHELL THEME TOKEN SYNC V3 */
+body.cortex-app-shell,
+.shell-workspace,
+.shell-frame{
+  background:var(--theme-bg,#050505)!important;
+}
+
+html[data-theme] .global-player-bubble{
+  border-color:var(--theme-border-strong)!important;
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--theme-glass-strong,#141414) 96%,transparent),
+      color-mix(in srgb,var(--theme-bg,#050505) 98%,transparent))!important;
+  color:var(--theme-accent-2)!important;
+  box-shadow:
+    0 14px 38px rgba(0,0,0,.34),
+    0 0 24px rgba(var(--theme-accent-rgb),.08)!important;
+}
+
+html[data-theme] .global-player-bubble:hover{
+  border-color:var(--theme-accent-strong)!important;
+  box-shadow:
+    0 17px 42px rgba(0,0,0,.38),
+    0 0 28px rgba(var(--theme-accent-rgb),.12)!important;
+}
+
+html[data-theme] .global-music-player{
+  --shell-accent:var(--theme-accent)!important;
+  --shell-accent-2:var(--theme-accent-2)!important;
+  border-color:var(--theme-border)!important;
+  background:color-mix(in srgb,var(--theme-glass-strong,#121212) 94%,transparent)!important;
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.44),
+    0 0 30px rgba(var(--theme-accent-rgb),.045)!important;
+  backdrop-filter:blur(22px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(118%)!important;
+}
+
+html[data-theme] .global-cover-wrap{
+  border-color:var(--theme-border)!important;
+  background:
+    radial-gradient(circle at 50% 20%,var(--theme-accent-soft),transparent 65%),
+    var(--theme-bg-secondary)!important;
+}
+
+html[data-theme] .global-music-page:hover{
+  border-color:var(--theme-border-strong)!important;
+  color:var(--theme-accent-2)!important;
+}
+
+html[data-theme] :is(
+  .global-progress input,
+  .global-volume input,
+  .global-lesson-progress-wrap input,
+  .global-lesson-volume input
+){
+  accent-color:var(--theme-accent)!important;
+}
+
+html[data-theme] .global-lesson-player{
+  border-color:var(--theme-border)!important;
+  background:color-mix(in srgb,var(--theme-glass-strong,#121212) 95%,transparent)!important;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.46),
+    0 0 28px rgba(var(--theme-accent-rgb),.04)!important;
+  backdrop-filter:blur(22px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(118%)!important;
+}
+
+html[data-theme] :is(
+  .global-lesson-main,
+  .global-lesson-window-actions button:hover
+){
+  border-color:var(--theme-border-strong)!important;
+}
+
+@media(max-width:900px){
+  html[data-theme] :is(.global-music-player,.global-lesson-player){
+    backdrop-filter:blur(10px) saturate(106%)!important;
+    -webkit-backdrop-filter:blur(10px) saturate(106%)!important;
+  }
+}
+/* END CORTEX APP SHELL THEME TOKEN SYNC V3 */
