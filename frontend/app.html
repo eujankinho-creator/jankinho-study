@@ -14,30 +14,10 @@
 
   <script>
     (function () {
-      var theme = "dark-orange";
-
       try {
-        var saved =
-          localStorage.getItem(
-            "jankinho_theme_v1"
-          );
-
-        if (
-          saved === "dark-orange" ||
-          saved === "pink-glitter" ||
-          saved === "blue-black" ||
-          saved === "black-white"
-        ) {
-          theme = saved;
-        }
-      }
-      catch (error) {}
-
-      document.documentElement
-        .setAttribute(
-          "data-theme",
-          theme
-        );
+        localStorage.setItem("jankinho_theme_v1","dark-orange");
+      } catch (error) {}
+      document.documentElement.setAttribute("data-theme","dark-orange");
     })();
   </script>
 
@@ -57,9 +37,9 @@
     href="/css/themes.css?v=20261002-fluid-final4"
   >
 
-  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261006-orangeblack1"></script>
 
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261006-orangeblack1">
 
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
   <link
@@ -74,7 +54,7 @@
   >
   <link
     rel="stylesheet"
-    href="/css/pink-pet.css?v=20261002-fluid-final4"
+    href="/css/pink-pet.css?v=20261006-orangeblack1"
   >
 
 </head>
@@ -320,7 +300,7 @@
   </section>
 
   <script src="/js/app-shell.js?v=20261006-cronograma-only1"></script>
-  <script src="/js/pink-pet.js?v=20261002-fluid-final4"></script>
+  <script src="/js/pink-pet.js?v=20261006-orangeblack1"></script>
 
 </body>
 </html>
