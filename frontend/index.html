@@ -19,30 +19,13 @@
 
   <script>
     (function () {
+      var allowed = ["dark-orange","dark-pink","dark-green","dark-purple","dark-black"];
       var theme = "dark-orange";
-
       try {
-        var saved =
-          localStorage.getItem(
-            "jankinho_theme_v1"
-          );
-
-        if (
-          saved === "dark-orange" ||
-          saved === "pink-glitter" ||
-          saved === "blue-black" ||
-          saved === "black-white"
-        ) {
-          theme = saved;
-        }
-      }
-      catch (error) {}
-
-      document.documentElement
-        .setAttribute(
-          "data-theme",
-          theme
-        );
+        var saved = localStorage.getItem("jankinho_theme_v1");
+        if (allowed.indexOf(saved) >= 0) theme = saved;
+      } catch (error) {}
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
 
@@ -106,7 +89,7 @@
     href="/css/themes.css?v=20261002-fluid-final4"
   >
 
-  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261006-multitheme2"></script>
 
   <link
     rel="stylesheet"
@@ -122,7 +105,7 @@
     href="/css/sidebar-standard.css?v=20261002-lab-new1"
   >
 
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261006-theme-v6">
 
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
 
