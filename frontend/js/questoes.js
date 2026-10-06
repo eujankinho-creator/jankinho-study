@@ -639,6 +639,8 @@ function aplicarFiltros() {
           ) ||
           (
             state.temaCronograma &&
+            normalizarTextoBusca(busca) ===
+              normalizarTextoBusca(state.temaCronograma) &&
             bateTemaCronograma(
               textoBusca,
               state.temaCronograma
