@@ -2199,6 +2199,12 @@
     lastWatchTick: 0,
     unsyncedWatched: 0,
     syncBusy: false,
+    chromeTimer: 0,
+    resizeActive: false,
+    resizeStartX: 0,
+    resizeStartY: 0,
+    resizeStartWidth: 0,
+    resizeStartHeight: 0,
   };
 
   function lessonFormatTime(seconds) {
@@ -2288,6 +2294,44 @@
     $("globalLessonChannel").textContent=video.channel || "YouTube";
   }
 
+  function lessonShowChrome() {
+    const host=$("globalLessonPlayer");
+    if(!host) return;
+    host.classList.remove("lesson-clean");
+    window.clearTimeout(lessonState.chromeTimer);
+    if(lessonState.playing){
+      lessonState.chromeTimer=window.setTimeout(()=>{
+        if(!lessonState.resizeActive && !$("globalLessonPlayer")?.classList.contains("expanded")){
+          host.classList.add("lesson-clean");
+        }
+      },1800);
+    }
+  }
+
+  function lessonPersistMiniSize() {
+    const host=$("globalLessonPlayer");
+    if(!host || host.classList.contains("expanded")) return;
+    try{
+      localStorage.setItem("cortex_lesson_player_size_v1",JSON.stringify({
+        width:Math.round(host.getBoundingClientRect().width),
+        height:Math.round(host.getBoundingClientRect().height)
+      }));
+    }catch{}
+  }
+
+  function lessonRestoreMiniSize() {
+    const host=$("globalLessonPlayer");
+    if(!host || matchMedia("(max-width: 760px)").matches) return;
+    try{
+      const saved=JSON.parse(localStorage.getItem("cortex_lesson_player_size_v1")||"null");
+      if(!saved) return;
+      const width=Math.max(320,Math.min(window.innerWidth-24,Number(saved.width)||0));
+      const height=Math.max(260,Math.min(window.innerHeight-24,Number(saved.height)||0));
+      if(width) host.style.width=width+"px";
+      if(height) host.style.height=height+"px";
+    }catch{}
+  }
+
   function lessonSetExpanded(expanded) {
     const host=$("globalLessonPlayer");
     if(!host) return;
@@ -2295,6 +2339,14 @@
     host.classList.toggle("expanded",Boolean(expanded));
     host.classList.toggle("lesson-minimized",!expanded);
     document.body.classList.toggle("lesson-player-expanded",Boolean(expanded));
+    if(expanded){
+      host.style.width="";
+      host.style.height="";
+      host.classList.remove("lesson-clean");
+    }else{
+      lessonRestoreMiniSize();
+      lessonShowChrome();
+    }
     saveLessonLocal();
   }
 
@@ -2352,6 +2404,10 @@
           rel:0,
           modestbranding:1,
           playsinline:1,
+          iv_load_policy:3,
+          cc_load_policy:0,
+          fs:0,
+          disablekb:1,
           start:Math.floor(Math.max(0,startAt)),
           origin:location.origin,
         },
@@ -2369,7 +2425,9 @@
             $("globalLessonPlay").textContent=lessonState.playing?"❚❚":"▶";
             if(lessonState.playing){
               lessonState.lastWatchTick=performance.now();
+              lessonShowChrome();
             }else{
+              $("globalLessonPlayer")?.classList.remove("lesson-clean");
               lessonState.lastWatchTick=0;
               void syncLessonProgress(event.data===window.YT.PlayerState.ENDED);
             }
@@ -2413,6 +2471,7 @@
     lessonRenderMeta();
     $("globalLessonPlayer")?.classList.remove("hidden");
     lessonSetExpanded(false);
+    lessonRestoreMiniSize();
     createLessonPlayer(lessonState.lastPosition,false).catch(console.error);
   }
 
@@ -2443,6 +2502,50 @@
   $("globalLessonVolume")?.addEventListener("input",function(){
     lessonState.player?.setVolume?.(Number(this.value || 0));
   });
+
+  const lessonHost=$("globalLessonPlayer");
+  lessonHost?.addEventListener("pointermove",lessonShowChrome,{passive:true});
+  lessonHost?.addEventListener("pointerenter",lessonShowChrome,{passive:true});
+  lessonHost?.addEventListener("touchstart",lessonShowChrome,{passive:true});
+
+  const resizeHandle=$("globalLessonResizeHandle");
+  resizeHandle?.addEventListener("pointerdown",(event)=>{
+    if(event.button!==0 || matchMedia("(max-width: 760px)").matches) return;
+    const host=$("globalLessonPlayer");
+    if(!host || host.classList.contains("expanded")) return;
+    lessonState.resizeActive=true;
+    lessonState.resizeStartX=event.clientX;
+    lessonState.resizeStartY=event.clientY;
+    const rect=host.getBoundingClientRect();
+    lessonState.resizeStartWidth=rect.width;
+    lessonState.resizeStartHeight=rect.height;
+    host.classList.remove("lesson-clean");
+    resizeHandle.setPointerCapture?.(event.pointerId);
+    event.preventDefault();
+  });
+
+  resizeHandle?.addEventListener("pointermove",(event)=>{
+    if(!lessonState.resizeActive) return;
+    const host=$("globalLessonPlayer");
+    if(!host) return;
+    const maxWidth=Math.max(340,window.innerWidth-24);
+    const maxHeight=Math.max(280,window.innerHeight-24);
+    const width=Math.max(320,Math.min(maxWidth,lessonState.resizeStartWidth+(event.clientX-lessonState.resizeStartX)));
+    const height=Math.max(260,Math.min(maxHeight,lessonState.resizeStartHeight+(event.clientY-lessonState.resizeStartY)));
+    host.style.width=width+"px";
+    host.style.height=height+"px";
+    event.preventDefault();
+  });
+
+  const finishLessonResize=(event)=>{
+    if(!lessonState.resizeActive) return;
+    lessonState.resizeActive=false;
+    try{resizeHandle?.releasePointerCapture?.(event.pointerId);}catch{}
+    lessonPersistMiniSize();
+    lessonShowChrome();
+  };
+  resizeHandle?.addEventListener("pointerup",finishLessonResize);
+  resizeHandle?.addEventListener("pointercancel",finishLessonResize);
   $("globalLessonProgress")?.addEventListener("input",function(){
     lessonState.dragging=true;
     const duration=Number(lessonState.player?.getDuration?.() || lessonState.lastDuration || 0);

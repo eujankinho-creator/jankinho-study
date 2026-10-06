@@ -49,7 +49,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/app-shell.css?v=20261005-aulas1"
+    href="/css/app-shell.css?v=20261005-aulas2"
   >
 
   <link
@@ -289,8 +289,9 @@
         <button id="globalLessonClose" type="button" title="Fechar aula" aria-label="Fechar aula">×</button>
       </div>
     </div>
-    <div class="global-lesson-video">
+    <div class="global-lesson-video" id="globalLessonVideoSurface">
       <div id="globalLessonYoutube"></div>
+      <div id="globalLessonInteractionLayer" class="global-lesson-interaction-layer" aria-hidden="true"></div>
     </div>
     <div class="global-lesson-controls">
       <button id="globalLessonBack" type="button" aria-label="Voltar 10 segundos">−10</button>
@@ -306,9 +307,10 @@
         <input id="globalLessonVolume" type="range" min="0" max="100" value="70" aria-label="Volume">
       </div>
     </div>
+    <button id="globalLessonResizeHandle" class="global-lesson-resize-handle" type="button" aria-label="Redimensionar mini player" title="Arraste para redimensionar"></button>
   </section>
 
-  <script src="/js/app-shell.js?v=20261005-aulas1"></script>
+  <script src="/js/app-shell.js?v=20261005-aulas2"></script>
   <script src="/js/pink-pet.js?v=20261002-fluid-final4"></script>
 
 </body>
