@@ -1,0 +1,450 @@
+/* =========================================================
+   CORTEX THEME RUNTIME V7
+   Camada final global para eliminar resíduos de cor fixa.
+========================================================= */
+
+:root,
+html[data-theme="dark-orange"]{
+  --theme-bg:#050505;
+  --theme-bg-secondary:#090909;
+  --theme-surface:rgba(17,17,17,.84);
+  --theme-surface-strong:rgba(23,23,23,.92);
+  --theme-surface-solid:#111111;
+  --theme-glass:rgba(14,14,14,.64);
+  --theme-glass-strong:rgba(19,19,19,.76);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(249,115,22,.28);
+  --theme-text:#f6f6f6;
+  --theme-text-soft:#d0d0d0;
+  --theme-text-muted:#8a8a8a;
+  --theme-accent:#f97316;
+  --theme-accent-2:#fb923c;
+  --theme-accent-rgb:249,115,22;
+  --theme-accent-2-rgb:251,146,60;
+  --theme-accent-soft:rgba(249,115,22,.10);
+  --theme-accent-medium:rgba(249,115,22,.18);
+  --theme-accent-strong:rgba(249,115,22,.34);
+  --theme-gradient:linear-gradient(135deg,#f97316,#fb923c);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(249,115,22,.16),rgba(251,146,60,.055));
+  --theme-button-text:#090909;
+}
+
+html[data-theme="dark-pink"]{
+  --theme-bg:#070407;
+  --theme-bg-secondary:#0c070a;
+  --theme-surface:rgba(23,13,19,.84);
+  --theme-surface-strong:rgba(31,16,26,.92);
+  --theme-surface-solid:#160d13;
+  --theme-glass:rgba(20,10,17,.64);
+  --theme-glass-strong:rgba(27,13,22,.76);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(255,73,166,.30);
+  --theme-text:#fff7fb;
+  --theme-text-soft:#e2cbd7;
+  --theme-text-muted:#a38695;
+  --theme-accent:#ff49a6;
+  --theme-accent-2:#ff86c3;
+  --theme-accent-rgb:255,73,166;
+  --theme-accent-2-rgb:255,134,195;
+  --theme-accent-soft:rgba(255,73,166,.10);
+  --theme-accent-medium:rgba(255,73,166,.18);
+  --theme-accent-strong:rgba(255,73,166,.35);
+  --theme-gradient:linear-gradient(135deg,#ff3f9f,#ff7fc0);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(255,73,166,.16),rgba(255,134,195,.055));
+  --theme-button-text:#12070d;
+}
+
+html[data-theme="dark-green"]{
+  --theme-bg:#030704;
+  --theme-bg-secondary:#060c08;
+  --theme-surface:rgba(11,23,15,.84);
+  --theme-surface-strong:rgba(15,30,20,.92);
+  --theme-surface-solid:#0a160f;
+  --theme-glass:rgba(8,20,13,.64);
+  --theme-glass-strong:rgba(11,27,18,.76);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(48,214,115,.30);
+  --theme-text:#f3fff7;
+  --theme-text-soft:#c7dfcf;
+  --theme-text-muted:#82988a;
+  --theme-accent:#30d673;
+  --theme-accent-2:#72e89e;
+  --theme-accent-rgb:48,214,115;
+  --theme-accent-2-rgb:114,232,158;
+  --theme-accent-soft:rgba(48,214,115,.10);
+  --theme-accent-medium:rgba(48,214,115,.18);
+  --theme-accent-strong:rgba(48,214,115,.35);
+  --theme-gradient:linear-gradient(135deg,#27c968,#65e594);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(48,214,115,.16),rgba(114,232,158,.055));
+  --theme-button-text:#031007;
+}
+
+html[data-theme="dark-purple"]{
+  --theme-bg:#050408;
+  --theme-bg-secondary:#09070e;
+  --theme-surface:rgba(18,13,27,.84);
+  --theme-surface-strong:rgba(25,17,37,.92);
+  --theme-surface-solid:#120d1c;
+  --theme-glass:rgba(16,11,24,.64);
+  --theme-glass-strong:rgba(22,15,32,.76);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(159,91,255,.31);
+  --theme-text:#faf7ff;
+  --theme-text-soft:#d7c9ea;
+  --theme-text-muted:#9487a6;
+  --theme-accent:#9f5bff;
+  --theme-accent-2:#bd8cff;
+  --theme-accent-rgb:159,91,255;
+  --theme-accent-2-rgb:189,140,255;
+  --theme-accent-soft:rgba(159,91,255,.10);
+  --theme-accent-medium:rgba(159,91,255,.18);
+  --theme-accent-strong:rgba(159,91,255,.36);
+  --theme-gradient:linear-gradient(135deg,#934cff,#b77fff);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(159,91,255,.16),rgba(189,140,255,.055));
+  --theme-button-text:#0d0715;
+}
+
+html[data-theme="dark-black"]{
+  --theme-bg:#020202;
+  --theme-bg-secondary:#050505;
+  --theme-surface:rgba(13,13,13,.86);
+  --theme-surface-strong:rgba(18,18,18,.94);
+  --theme-surface-solid:#0d0d0d;
+  --theme-glass:rgba(9,9,9,.66);
+  --theme-glass-strong:rgba(14,14,14,.78);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(255,255,255,.18);
+  --theme-text:#f7f7f7;
+  --theme-text-soft:#c9c9c9;
+  --theme-text-muted:#787878;
+  --theme-accent:#f0f0f0;
+  --theme-accent-2:#ffffff;
+  --theme-accent-rgb:240,240,240;
+  --theme-accent-2-rgb:255,255,255;
+  --theme-accent-soft:rgba(255,255,255,.075);
+  --theme-accent-medium:rgba(255,255,255,.12);
+  --theme-accent-strong:rgba(255,255,255,.20);
+  --theme-gradient:linear-gradient(135deg,#d7d7d7,#ffffff);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+  --theme-button-text:#050505;
+}
+
+html[data-theme]{
+  --orange:var(--theme-accent)!important;
+  --orange-light:var(--theme-accent-2)!important;
+  --accent:var(--theme-accent)!important;
+  --accent-2:var(--theme-accent-2)!important;
+  --accent-rgb:var(--theme-accent-rgb)!important;
+  --primary:var(--theme-accent)!important;
+  --primary-color:var(--theme-accent)!important;
+  --highlight:var(--theme-accent)!important;
+  --bg:var(--theme-bg)!important;
+  --sidebar:var(--theme-bg-secondary)!important;
+  --panel:var(--theme-surface)!important;
+  --border:var(--theme-border)!important;
+  --text:var(--theme-text)!important;
+  --muted:var(--theme-text-muted)!important;
+  color-scheme:dark;
+}
+
+html[data-theme] body{
+  color:var(--theme-text)!important;
+  background:
+    radial-gradient(circle at 88% -8%,var(--theme-accent-soft),transparent 30%),
+    radial-gradient(circle at 7% 108%,rgba(var(--theme-accent-rgb),.035),transparent 25%),
+    var(--theme-bg)!important;
+}
+
+html[data-theme] :is(.header,.topbar,.toolbar.glass,.floating-toolbar){
+  background:color-mix(in srgb,var(--theme-glass-strong) 92%,transparent)!important;
+  border-color:var(--theme-border)!important;
+  backdrop-filter:blur(18px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(118%)!important;
+}
+
+/* vidro fosco em superfícies secundárias */
+html[data-theme] :is(
+  .settings-card,.profile-card,.appearance-card,.security-card,.theme-box,
+  .metric-card,.summary-card,.stats-card,.info-card,.content-card,
+  .question-card,.session-card,.flashcard-card,.case-card,.caso-card,
+  .finance-card,.ranking-card,.history-card,.filter-panel,.filters-panel,
+  .controls-panel,.controls-card,.result-card,.result-panel,.details-card,
+  .details-panel,.mode-card,.tip-card,.hub-tip,.lab-choice-card,.pharma-section,
+  .drug-card,.receptor-card,.catalog-search-bar,.schedule-builder-compact,
+  .schedule-section,.schedule-main-progress,.schedule-today-score,.schedule-countdown,
+  .modal-card,.dialog-card,.loading-card,.empty-state
+){
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--theme-glass-strong) 95%,transparent),
+      color-mix(in srgb,var(--theme-glass) 95%,transparent))!important;
+  border-color:var(--theme-border)!important;
+  box-shadow:
+    0 16px 44px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.028)!important;
+  backdrop-filter:blur(15px) saturate(116%)!important;
+  -webkit-backdrop-filter:blur(15px) saturate(116%)!important;
+}
+
+/* superfícies principais permanecem mais sólidas */
+html[data-theme] :is(
+  .hero,.dashboard-hero,.questions-hero,.questoes-hero,.flashcards-hero,
+  .cases-hero,.casos-hero,.settings-hero,.analysis-hero,.practice-hero,
+  .laboratorio-hero,.page-hero,.hero-card,.hero-panel,.welcome-card,.intro-card,
+  .lab-hub-hero,.pharma-hero,.schedule-intro
+){
+  background:
+    radial-gradient(circle at 88% 4%,var(--theme-accent-soft),transparent 34%),
+    linear-gradient(145deg,var(--theme-surface-strong),var(--theme-surface-solid))!important;
+  border-color:var(--theme-border)!important;
+  box-shadow:0 22px 64px rgba(0,0,0,.28)!important;
+}
+
+/* textos de identidade: nenhuma cor fixa laranja */
+html[data-theme] :is(
+  .orange,.orange-text,.accent-text,.theme-accent-text,.small-label,.section-label,
+  .hero-label,.eyebrow,.kicker,.page-kicker,.panel-kicker,.heading-badge,.orange-badge,
+  .badge-orange,.schedule-kicker,.schedule-integration>span,.schedule-builder-head>span,
+  .section-heading small,.section-heading>span,.active-filter-label,.pharma-kicker,
+  .choice-eyebrow,.hub-kicker,.lab-header-subtitle,.catalog-search-status,
+  .catalog-status-detail,.catalog-result-count,.result-count,.resultCount,
+  #resultCount,#activeReceptorLabel,.course-code,.sigaa-kicker,.music-kicker,
+  .theme-current-name,.theme-current-label
+){
+  color:var(--theme-accent-2)!important;
+}
+
+/* barras, indicadores, ícones e linhas de destaque */
+html[data-theme] :is(
+  .pharma-kicker>span,.hub-kicker>span,.metric-accent,.hero-label>span,
+  .panel-kicker::before,.catalog-status-dot,.hub-status-dot,.live-pill i,
+  .progress-value,.progress-fill,.progress-bar>div,.theme-preview-fill,
+  .session-progress>div,.schedule-progress>span,.loading-progress>span,
+  .page-loader-bar>span,.ui-loading-bar>span,.top-loading-bar>span
+){
+  background:var(--theme-gradient)!important;
+  box-shadow:0 0 14px rgba(var(--theme-accent-rgb),.20)!important;
+}
+
+/* loaders e spinners */
+html[data-theme] :is(.loader,.spinner,.loading-spinner,.page-spinner,.research-status.busy)::before,
+html[data-theme] :is(.loader,.spinner,.loading-spinner,.page-spinner){
+  border-color:rgba(var(--theme-accent-rgb),.20)!important;
+  border-top-color:var(--theme-accent)!important;
+}
+
+html[data-theme] :is(
+  .ui-loading-bar,.ui-top-loading,.page-loading-bar,.page-loader-bar,.top-loading-bar,
+  .cortex-loading-bar,.cortex-page-loader,.global-loading-bar,.loading-progress-bar,
+  #uiLoadingBar,#pageLoadingBar,#cortexLoadingBar,#globalLoadingBar
+){
+  background:var(--theme-gradient)!important;
+  box-shadow:0 0 14px rgba(var(--theme-accent-rgb),.45)!important;
+}
+
+/* estados ativos */
+html[data-theme] :is(
+  .menu-item.active,.tab.active,.tab-button.active,.filter-button.active,.filter-chip.active,
+  .mode-button.active,.nav-item.active,.theme-choice.active,.theme-option.active,
+  .quick-link.active,.receptor-card.active,.drug-filter.active,.exam-choice-card input:checked+span
+){
+  color:var(--theme-accent-2)!important;
+  border-color:var(--theme-border-strong)!important;
+  background:
+    linear-gradient(90deg,var(--theme-accent-medium),rgba(var(--theme-accent-rgb),.025))!important;
+  box-shadow:0 0 0 1px rgba(var(--theme-accent-rgb),.06)!important;
+}
+
+html[data-theme] .menu-item.active::before{
+  background:var(--theme-accent)!important;
+  box-shadow:0 0 12px rgba(var(--theme-accent-rgb),.42)!important;
+}
+
+/* hover/glow segue tema */
+@media(hover:hover){
+  html[data-theme] :is(
+    .card,.action-card,.quick-links a,.question-card,.flashcard-card,.case-card,.caso-card,
+    .drug-card,.receptor-card,.lab-choice-card,.mode-card,.theme-choice,.exam-choice-card>span,
+    .resource-row,.notice-card,.course-card
+  ):hover{
+    border-color:var(--theme-border-strong)!important;
+    box-shadow:
+      0 18px 46px rgba(0,0,0,.28),
+      0 0 0 1px rgba(var(--theme-accent-rgb),.08),
+      0 0 28px rgba(var(--theme-accent-rgb),.08)!important;
+  }
+}
+
+/* botões */
+html[data-theme] :is(
+  button.primary,.primary-button,.btn-primary,.button-primary,.main-action,.submit-button,
+  .action-button.primary,button.cta,button.is-primary,.toolbar-button.primary
+){
+  border-color:transparent!important;
+  background:var(--theme-gradient)!important;
+  color:var(--theme-button-text)!important;
+  box-shadow:0 10px 28px rgba(var(--theme-accent-rgb),.16)!important;
+}
+
+/* foco */
+html[data-theme] :is(input,textarea,select):focus{
+  border-color:var(--theme-border-strong)!important;
+  box-shadow:0 0 0 3px var(--theme-accent-soft)!important;
+}
+html[data-theme] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){
+  accent-color:var(--theme-accent)!important;
+}
+html[data-theme] :focus-visible{
+  outline-color:var(--theme-accent)!important;
+}
+
+/* scrollbars */
+html[data-theme] *{
+  scrollbar-color:color-mix(in srgb,var(--theme-accent) 54%,#343434) var(--theme-bg-secondary)!important;
+}
+html[data-theme] *::-webkit-scrollbar-track{
+  background:var(--theme-bg-secondary)!important;
+}
+html[data-theme] *::-webkit-scrollbar-thumb{
+  border:2px solid var(--theme-bg-secondary)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--theme-accent) 56%,#303030)!important;
+}
+html[data-theme] *::-webkit-scrollbar-thumb:hover{
+  background:color-mix(in srgb,var(--theme-accent) 74%,#303030)!important;
+}
+
+/* Farmacologia */
+html[data-theme] .pharma-view :is(
+  .section-heading small,.active-filter-label,#resultCount,.catalog-search-status,
+  .catalog-search-field label,.catalog-status-detail,.pharma-actions-copy small
+){
+  color:var(--theme-accent-2)!important;
+}
+html[data-theme] .pharma-view :is(.pharma-section,.catalog-search-main,.catalog-search-bar){
+  background:color-mix(in srgb,var(--theme-glass-strong) 94%,transparent)!important;
+  border-color:var(--theme-border)!important;
+}
+html[data-theme] .pharma-view :is(.receptor-card,.filter-chip,.drug-card):hover{
+  border-color:var(--theme-border-strong)!important;
+}
+html[data-theme] .pharma-view :is(.receptor-card.active,.filter-chip.active){
+  color:var(--theme-accent-2)!important;
+  background:var(--theme-accent-soft)!important;
+  border-color:var(--theme-border-strong)!important;
+}
+
+/* Hub e laboratório */
+html[data-theme] .lab-hub-view :is(.hub-kicker,.choice-eyebrow,.choice-footer strong,.hub-tip-icon){
+  color:var(--theme-accent-2)!important;
+}
+html[data-theme] .lab-hub-view :is(.choice-icon,.membrane-icon,.gprotein-icon,.radiology-icon){
+  color:var(--theme-accent-2)!important;
+  border-color:var(--theme-border-strong)!important;
+  background:var(--theme-accent-soft)!important;
+  box-shadow:none!important;
+}
+html[data-theme] .lab-hub-view :is(.ecg-card,.membrane-card,.gprotein-card,.radiology-card){
+  --card-accent:var(--theme-accent)!important;
+  --card-accent-rgb:var(--theme-accent-rgb)!important;
+}
+html[data-theme] .lab-hub-view :is(.ecg-line,.radiology-line,.preview-line){
+  stroke:var(--theme-accent)!important;
+  filter:drop-shadow(0 0 5px rgba(var(--theme-accent-rgb),.34))!important;
+}
+
+/* Tomografia e atlas */
+html[data-theme] :is(
+  .radiology-view,.tomography-view,.ct-view,.atlas-view
+) :is(
+  .kicker,.eyebrow,.section-label,.atlas-label,.viewer-label,.plane-label,.structure-label,
+  .panel-label,.status-label,.tool-label
+){
+  color:var(--theme-accent-2)!important;
+}
+html[data-theme] :is(
+  .radiology-view,.tomography-view,.ct-view,.atlas-view
+) :is(
+  .viewer-card,.plane-card,.atlas-card,.tool-card,.structure-card,.panel
+){
+  border-color:var(--theme-border)!important;
+  background:color-mix(in srgb,var(--theme-glass-strong) 94%,transparent)!important;
+}
+
+/* Cronograma - neutraliza bloco legado hardcoded */
+html[data-theme] .schedule-intro::before{
+  background:
+    radial-gradient(ellipse at center,
+      rgba(var(--theme-accent-rgb),.14),
+      rgba(var(--theme-accent-rgb),.04) 34%,
+      transparent 72%)!important;
+}
+html[data-theme] .schedule-kicker{
+  color:var(--theme-accent-2)!important;
+  border-color:var(--theme-border-strong)!important;
+  background:var(--theme-accent-soft)!important;
+  box-shadow:0 8px 24px rgba(var(--theme-accent-rgb),.06)!important;
+}
+html[data-theme] .schedule-builder-compact::before{
+  background:linear-gradient(90deg,transparent,rgba(var(--theme-accent-rgb),.48),transparent)!important;
+}
+html[data-theme] .exam-choice-card>span{
+  border-color:var(--theme-border)!important;
+  background:
+    radial-gradient(circle at 85% 0%,rgba(var(--theme-accent-rgb),.055),transparent 38%),
+    linear-gradient(145deg,var(--theme-surface-strong),var(--theme-surface-solid))!important;
+}
+html[data-theme] .exam-choice-card>span::before{
+  background:var(--theme-accent)!important;
+  box-shadow:0 0 18px rgba(var(--theme-accent-rgb),.42)!important;
+}
+html[data-theme] .exam-choice-card:hover>span{
+  border-color:var(--theme-border-strong)!important;
+  background:
+    radial-gradient(circle at 85% 0%,rgba(var(--theme-accent-rgb),.10),transparent 40%),
+    linear-gradient(145deg,var(--theme-surface-strong),var(--theme-surface-solid))!important;
+}
+
+/* logo permanece minimalista e sem glow */
+html[data-theme] :is(
+  .sidebar-logo,.sidebar-logo .logo-box,.sidebar-logo .logo-box.cortex-logo,
+  .cortex-mobile-sidebar-panel .logo-box,.cortex-global-logo-image,.cortex-mobile-brand-image,
+  .cortex-brain-logo,.sidebar-logo img,.sidebar-logo svg
+){
+  filter:none!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+html[data-theme] :is(.sidebar-logo .logo-box,.cortex-mobile-sidebar-panel .logo-box){
+  background:transparent!important;
+  border:0!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-theme] :is(.sidebar-logo .logo-box,.cortex-mobile-sidebar-panel .logo-box)::before,
+html[data-theme] :is(.sidebar-logo .logo-box,.cortex-mobile-sidebar-panel .logo-box)::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* mobile: glass mais leve */
+@media(max-width:900px){
+  html[data-theme] :is(
+    .header,.settings-card,.profile-card,.appearance-card,.security-card,.theme-box,
+    .metric-card,.summary-card,.stats-card,.info-card,.content-card,.question-card,
+    .session-card,.flashcard-card,.case-card,.caso-card,.finance-card,.ranking-card,
+    .history-card,.filter-panel,.filters-panel,.controls-panel,.controls-card,.result-card,
+    .result-panel,.details-card,.details-panel,.mode-card,.tip-card,.hub-tip,.lab-choice-card,
+    .pharma-section,.drug-card,.receptor-card,.catalog-search-bar,.schedule-builder-compact
+  ){
+    backdrop-filter:blur(8px) saturate(106%)!important;
+    -webkit-backdrop-filter:blur(8px) saturate(106%)!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] *{
+    scroll-behavior:auto!important;
+  }
+}
+/* END CORTEX THEME RUNTIME V7 */
