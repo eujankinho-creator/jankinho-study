@@ -223,14 +223,21 @@ async function researchExam(prova){
 }
 
 function selectedExam(){
-  const type=$("examType").value;
-  const exam=EXAMS[type]||EXAMS.ENARE;
+  const checked=document.querySelector('input[name="examType"]:checked');
+  if(!checked) return null;
+  const type=checked.value;
+  const exam=EXAMS[type];
   const edition=$("examEdition").value.trim();
   return {type,exam,prova:exam.label+(edition?" · "+edition:"")};
 }
 
 function renderExamBlueprint(){
-  const {exam}=selectedExam();
+  const selected=selectedExam();
+  if(!selected){
+    $("examBlueprint").innerHTML='<div><span>NENHUM OBJETIVO DEFINIDO</span><strong>Escolha uma das três opções acima.</strong></div>';
+    return;
+  }
+  const {exam}=selected;
   $("examBlueprint").innerHTML=
     '<div><span>MATRIZ DE ESTUDO</span><strong>'+esc(exam.focus)+'</strong></div>'+
     '<div class="exam-topic-list">'+exam.topics.map((topic)=>'<span>'+esc(topic)+'</span>').join("")+'</div>';
@@ -240,6 +247,12 @@ async function buildSchedule(event){
   event.preventDefault();
   const button=$("buildScheduleButton");
   const selected=selectedExam();
+  if(!selected){
+    $("researchStatus").hidden=false;
+    $("researchStatus").className="research-status";
+    $("researchStatus").textContent="Escolha ENARE, EBSERH ou Ministério da Saúde antes de montar o cronograma.";
+    return;
+  }
   const prova=selected.prova;
   button.disabled=true;
   const original=button.innerHTML;
@@ -283,9 +296,17 @@ function setDefaultDate(){
 }
 
 $("scheduleForm").addEventListener("submit",buildSchedule);
-$("examType").addEventListener("change",renderExamBlueprint);
+document.querySelectorAll('input[name="examType"]').forEach((input)=>{
+  input.addEventListener("change",renderExamBlueprint);
+});
 $("examEdition").addEventListener("input",renderExamBlueprint);
 $("newPlanButton").addEventListener("click",()=>{
+  document.querySelectorAll('input[name="examType"]').forEach((input)=>{input.checked=false;});
+  $("examEdition").value="";
+  $("difficulties").value="";
+  $("priorities").value="";
+  state.sources=[];
+  renderExamBlueprint();
   $("scheduleDashboard").hidden=true;
   $("scheduleEmpty").hidden=false;
   $("scheduleEmpty").scrollIntoView({behavior:"smooth",block:"start"});
@@ -294,12 +315,3 @@ setDefaultDate();
 renderExamBlueprint();
 loadDashboard();
 
-const params=new URLSearchParams(location.search);
-if(params.get("prova")){
-  const incoming=params.get("prova").toUpperCase();
-  if(incoming.includes("EBSERH")) $("examType").value="EBSERH";
-  else if(incoming.includes("MINIST")||incoming.includes("CPNU")) $("examType").value="MINISTERIO_SAUDE";
-  else $("examType").value="ENARE";
-  $("examEdition").value=params.get("prova");
-  renderExamBlueprint();
-}
