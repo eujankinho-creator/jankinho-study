@@ -2106,6 +2106,121 @@
   }
 
 
+  function effectivePreviewSize(
+    tool,
+    size
+  ) {
+
+    const value =
+      Number(size) || 1;
+
+
+    if (
+      tool === "highlighter"
+    ) {
+
+      return Math.max(
+        8,
+        value * 4
+      );
+
+    }
+
+
+    if (
+      tool === "eraser"
+    ) {
+
+      return Math.max(
+        8,
+        value * 3.5
+      );
+
+    }
+
+
+    return value;
+
+  }
+
+
+  function updateThicknessPreview(
+    tool,
+    size
+  ) {
+
+    const preview =
+      $("brushSizePreview");
+
+
+    const panel =
+      $("strokeControls");
+
+
+    if (
+      !preview ||
+      !panel
+    ) {
+
+      return;
+
+    }
+
+
+    const activeTool =
+      tool ||
+      state.tool;
+
+
+    const activeSize =
+      Number(
+        size ??
+        state.size ??
+        1
+      );
+
+
+    const visualSize =
+      effectivePreviewSize(
+        activeTool,
+        activeSize
+      );
+
+
+    const dotSize =
+      Math.max(
+        4,
+        Math.min(
+          24,
+          3 +
+          visualSize *
+          .75
+        )
+      );
+
+
+    preview.style.width =
+      dotSize +
+      "px";
+
+
+    preview.style.height =
+      dotSize +
+      "px";
+
+
+    panel.dataset.previewTool =
+      activeTool;
+
+
+    preview.style.background =
+      activeTool === "eraser"
+        ? "var(--theme-text-soft)"
+        : state.color;
+
+  }
+
+
   function syncInterface() {
 
     stage.dataset.background =
@@ -2186,6 +2301,12 @@
         state.size;
 
     }
+
+
+    updateThicknessPreview(
+      state.tool,
+      state.size
+    );
 
 
     if (
@@ -2640,6 +2761,12 @@
           }
 
 
+          updateThicknessPreview(
+            state.tool,
+            value
+          );
+
+
           queueSave();
 
         }
@@ -2871,6 +2998,12 @@
         size;
 
     }
+
+
+    updateThicknessPreview(
+      tool,
+      size
+    );
 
 
     if (
@@ -7876,6 +8009,12 @@
               state.size;
 
           }
+
+
+          updateThicknessPreview(
+            state.tool,
+            state.size
+          );
 
 
           queueSave();
