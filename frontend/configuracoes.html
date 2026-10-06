@@ -14,10 +14,13 @@
 
   <script>
     (function () {
+      var allowed = ["dark-orange","dark-pink","dark-green","dark-purple","dark-black"];
+      var theme = "dark-orange";
       try {
-        localStorage.setItem("jankinho_theme_v1","dark-orange");
+        var saved = localStorage.getItem("jankinho_theme_v1");
+        if (allowed.indexOf(saved) >= 0) theme = saved;
       } catch (error) {}
-      document.documentElement.setAttribute("data-theme","dark-orange");
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
 
@@ -30,14 +33,14 @@
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
-  <script defer src="/js/theme-manager.js?v=20261006-orangeblack1"></script>
+  <script defer src="/js/theme-manager.js?v=20261006-multitheme1"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/configuracoes-premium.css?v=20261002-profile-photo1">
   <link
     rel="stylesheet"
     href="/css/sidebar-standard.css?v=20261002-lab-new1"
   >
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261006-orangeblack1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261006-multitheme1">
 
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
 
@@ -465,35 +468,50 @@
             </span>
 
             <h2>
-              Orange Black
+              Tema do Cortex
             </h2>
 
             <p>
-              O Cortex agora usa uma &uacute;nica identidade visual global:
-              preto profundo, superf&iacute;cies escuras, textos brancos e
-              laranja forte e saturado apenas nos pontos de destaque.
+              Todos os temas mant&ecirc;m a mesma base Dark premium e minimalista.
+              Apenas a cor de destaque muda em toda a plataforma.
             </p>
 
-            <div class="orange-black-theme-preview" aria-label="Tema Orange Black ativo">
-              <div class="orange-black-preview-sidebar"></div>
-              <div class="orange-black-preview-main">
-                <div class="orange-black-preview-line accent"></div>
-                <div class="orange-black-preview-line"></div>
-                <div class="orange-black-preview-cards">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
+            <div class="cortex-theme-grid" aria-label="Escolher tema">
+              <button type="button" class="cortex-theme-choice" data-theme-choice="dark-orange">
+                <strong>Orange</strong>
+                <small>Preto profundo + laranja saturado.</small>
+              </button>
+
+              <button type="button" class="cortex-theme-choice" data-theme-choice="dark-pink">
+                <strong>Rosa</strong>
+                <small>Preto profundo + rosa vibrante.</small>
+              </button>
+
+              <button type="button" class="cortex-theme-choice" data-theme-choice="dark-green">
+                <strong>Verde</strong>
+                <small>Preto profundo + verde intenso.</small>
+              </button>
+
+              <button type="button" class="cortex-theme-choice" data-theme-choice="dark-purple">
+                <strong>Roxo</strong>
+                <small>Preto profundo + roxo saturado.</small>
+              </button>
+
+              <button type="button" class="cortex-theme-choice" data-theme-choice="dark-black">
+                <strong>Dark Black</strong>
+                <small>Preto total + detalhes brancos.</small>
+              </button>
             </div>
 
             <div class="theme-current-row">
               <div class="theme-current-label">
-                Tema global
+                Tema atual
               </div>
               <div
                 id="themeCurrentName"
                 class="theme-current-name"
               >
-                Orange Black
+                Orange
               </div>
             </div>
 
@@ -523,8 +541,8 @@
             </h2>
 
             <p>
-              O pet &eacute; opcional e independente do tema. Voc&ecirc; pode
-              adicion&aacute;-lo, apenas ocult&aacute;-lo temporariamente ou remov&ecirc;-lo.
+              O pet funciona em qualquer tema. Ele pode seguir automaticamente
+              a cor do tema ou usar uma cor personalizada.
             </p>
 
             <div class="pet-settings-status">
@@ -562,6 +580,53 @@
               >
                 Remover
               </button>
+            </div>
+
+            <div class="pet-custom-settings">
+              <div class="pet-custom-row">
+                <span>Nome do pet</span>
+                <div class="pet-name-setting">
+                  <input
+                    id="petNameSetting"
+                    type="text"
+                    maxlength="16"
+                    autocomplete="off"
+                    placeholder="Ex.: Luna"
+                  >
+                  <button
+                    id="petNameSave"
+                    type="button"
+                    class="pet-setting-action"
+                  >
+                    Salvar nome
+                  </button>
+                </div>
+              </div>
+
+              <div class="pet-custom-row">
+                <span>Cor</span>
+                <div class="pet-color-grid">
+                  <button type="button" class="pet-color-option" data-pet-color="theme">Seguir tema</button>
+                  <button type="button" class="pet-color-option" data-pet-color="orange">Laranja</button>
+                  <button type="button" class="pet-color-option" data-pet-color="pink">Rosa</button>
+                  <button type="button" class="pet-color-option" data-pet-color="green">Verde</button>
+                  <button type="button" class="pet-color-option" data-pet-color="purple">Roxo</button>
+                  <button type="button" class="pet-color-option" data-pet-color="black">Preto</button>
+                  <button type="button" class="pet-color-option" data-pet-color="white">Branco</button>
+                </div>
+              </div>
+
+              <div class="pet-custom-row">
+                <span>Estilo</span>
+                <div class="pet-style-grid">
+                  <button type="button" class="pet-style-option" data-pet-outfit="none">Normal</button>
+                  <button type="button" class="pet-style-option" data-pet-outfit="bow">Gravata</button>
+                  <button type="button" class="pet-style-option" data-pet-outfit="hoodie">Moletom</button>
+                  <button type="button" class="pet-style-option" data-pet-outfit="scarf">Cachecol</button>
+                  <button type="button" class="pet-style-option" data-pet-outfit="glasses">&Oacute;culos</button>
+                  <button type="button" class="pet-style-option" data-pet-outfit="crown">Coroa</button>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -760,7 +825,7 @@
   </script>
 
 <script defer src="/js/configuracoes-ui.js?v=20261002-profile-photo1"></script>
-  <script defer src="/js/configuracoes.js?v=20261006-orangeblack-pet1"></script>
+  <script defer src="/js/configuracoes.js?v=20261006-multitheme-pet1"></script>
   <script defer src="/js/cortex-brand.js?v=20261006-ui-profile2"></script>
 
 </body>
