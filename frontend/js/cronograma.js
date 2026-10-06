@@ -367,3 +367,189 @@ setDefaultDate();
 renderExamBlueprint();
 loadDashboard();
 
+
+
+function isoDateLocal(date){
+  const year=date.getFullYear();
+  const month=String(date.getMonth()+1).padStart(2,"0");
+  const day=String(date.getDate()).padStart(2,"0");
+  return year+"-"+month+"-"+day;
+}
+
+function mondayIndex(jsDay){
+  return jsDay===0?6:jsDay-1;
+}
+
+function calendarTaskMini(task){
+  const topic=task.tema||task.titulo||"Atividade";
+  const type=String(task.tipo||"").replaceAll("_"," ");
+  return '<div class="calendar-task-mini '+(task.concluida?"done":"")+'">'+
+    '<span>'+esc(type)+'</span>'+
+    '<strong>'+esc(topic)+'</strong>'+
+  '</div>';
+}
+
+function renderCalendarDayDetails(dateKey){
+  const tasks=(state.calendar?.tasks||[]).filter((task)=>{
+    return new Date(task.data).toISOString().slice(0,10)===dateKey;
+  });
+  state.selectedCalendarDay=dateKey;
+  const panel=$("calendarDayDetails");
+  if(!panel) return;
+
+  const date=new Date(dateKey+"T12:00:00");
+  $("calendarDayTitle").textContent=date.toLocaleDateString("pt-BR",{
+    weekday:"long",day:"2-digit",month:"long",year:"numeric"
+  });
+
+  $("calendarDayTasks").innerHTML=tasks.length
+    ? tasks.map(taskCard).join("")
+    : '<div class="research-status">Nenhuma atividade programada para este dia.</div>';
+
+  panel.hidden=false;
+  bindTaskButtons($("calendarDayTasks"));
+  bindTaskLinks($("calendarDayTasks"));
+}
+
+function renderFullPlanCalendar(){
+  if(!state.calendarCursor||!state.calendar) return;
+
+  const cursor=new Date(
+    state.calendarCursor.getFullYear(),
+    state.calendarCursor.getMonth(),
+    1,
+    12
+  );
+  const year=cursor.getFullYear();
+  const month=cursor.getMonth();
+
+  $("calendarMonthLabel").textContent=cursor.toLocaleDateString("pt-BR",{
+    month:"long",year:"numeric"
+  });
+
+  const first=new Date(year,month,1,12);
+  const last=new Date(year,month+1,0,12);
+  const offset=mondayIndex(first.getDay());
+  const totalCells=Math.ceil((offset+last.getDate())/7)*7;
+  const tasksByDay=new Map();
+
+  for(const task of state.calendar.tasks||[]){
+    const key=new Date(task.data).toISOString().slice(0,10);
+    if(!tasksByDay.has(key)) tasksByDay.set(key,[]);
+    tasksByDay.get(key).push(task);
+  }
+
+  const todayKey=isoDateLocal(new Date());
+  const cells=[];
+
+  for(let cell=0;cell<totalCells;cell+=1){
+    const dayNumber=cell-offset+1;
+    const date=new Date(year,month,dayNumber,12);
+    const inMonth=date.getMonth()===month;
+    const key=isoDateLocal(date);
+    const tasks=tasksByDay.get(key)||[];
+    const done=tasks.filter((task)=>task.concluida).length;
+
+    const classes=[
+      "schedule-calendar-day",
+      !inMonth?"outside":"",
+      key===todayKey?"today":"",
+      tasks.length?"has-tasks":""
+    ].filter(Boolean).join(" ");
+
+    const preview=tasks.slice(0,3).map(calendarTaskMini).join("");
+    const extra=tasks.length>3
+      ? '<em>+'+(tasks.length-3)+' atividade'+(tasks.length-3===1?"":"s")+'</em>'
+      : "";
+
+    cells.push(
+      '<button type="button" class="'+classes+'" data-calendar-day="'+key+'">'+
+        '<div class="calendar-day-number">'+
+          '<span>'+date.getDate()+'</span>'+
+          (tasks.length?'<small>'+done+'/'+tasks.length+'</small>':"")+
+        '</div>'+
+        '<div class="calendar-day-preview">'+preview+extra+'</div>'+
+      '</button>'
+    );
+  }
+
+  $("fullPlanCalendar").innerHTML=cells.join("");
+  $("fullPlanCalendar").querySelectorAll("[data-calendar-day]").forEach((button)=>{
+    button.addEventListener("click",()=>{
+      renderCalendarDayDetails(button.dataset.calendarDay);
+    });
+  });
+}
+
+async function openFullPlanCalendar(){
+  const modal=$("fullPlanModal");
+  if(!modal) return;
+
+  modal.hidden=false;
+  document.body.classList.add("calendar-modal-open");
+  $("calendarDayDetails").hidden=true;
+
+  if(!state.calendar){
+    $("fullPlanCalendar").innerHTML='<div class="calendar-loading">Carregando plano completo…</div>';
+    try{
+      state.calendar=await api("/api/cronograma/calendar");
+    }catch(error){
+      $("fullPlanCalendar").innerHTML='<div class="research-status">'+esc(error.message)+'</div>';
+      return;
+    }
+  }
+
+  if(!state.calendar?.schedule){
+    $("fullPlanCalendar").innerHTML='<div class="research-status">Nenhum plano ativo.</div>';
+    return;
+  }
+
+  $("calendarExamLabel").textContent=state.calendar.schedule.prova||"";
+  const firstTask=state.calendar.tasks?.[0];
+  const baseDate=firstTask?new Date(firstTask.data):new Date();
+  const today=new Date();
+  const useToday=(state.calendar.tasks||[]).some((task)=>{
+    const date=new Date(task.data);
+    return date.getFullYear()===today.getFullYear()&&date.getMonth()===today.getMonth();
+  });
+  state.calendarCursor=useToday?today:baseDate;
+  renderFullPlanCalendar();
+}
+
+function closeFullPlanCalendar(){
+  const modal=$("fullPlanModal");
+  if(!modal) return;
+  modal.hidden=true;
+  document.body.classList.remove("calendar-modal-open");
+  state.selectedCalendarDay=null;
+}
+
+$("openFullPlanButton")?.addEventListener("click",openFullPlanCalendar);
+$("closeFullPlanButton")?.addEventListener("click",closeFullPlanCalendar);
+document.querySelector("[data-close-calendar]")?.addEventListener("click",closeFullPlanCalendar);
+$("closeCalendarDayButton")?.addEventListener("click",()=>{
+  $("calendarDayDetails").hidden=true;
+  state.selectedCalendarDay=null;
+});
+$("calendarPrevButton")?.addEventListener("click",()=>{
+  const base=state.calendarCursor||new Date();
+  state.calendarCursor=new Date(base.getFullYear(),base.getMonth()-1,1,12);
+  $("calendarDayDetails").hidden=true;
+  renderFullPlanCalendar();
+});
+$("calendarNextButton")?.addEventListener("click",()=>{
+  const base=state.calendarCursor||new Date();
+  state.calendarCursor=new Date(base.getFullYear(),base.getMonth()+1,1,12);
+  $("calendarDayDetails").hidden=true;
+  renderFullPlanCalendar();
+});
+$("calendarTodayButton")?.addEventListener("click",()=>{
+  state.calendarCursor=new Date();
+  $("calendarDayDetails").hidden=true;
+  renderFullPlanCalendar();
+});
+document.addEventListener("keydown",(event)=>{
+  if(event.key==="Escape"&&!$("fullPlanModal")?.hidden){
+    closeFullPlanCalendar();
+  }
+});
