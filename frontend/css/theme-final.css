@@ -5528,3 +5528,326 @@ html[data-theme] :is(
 }
 
 /* CORTEX MULTI DARK THEMES V4 END */
+
+
+/* CORTEX THEME SYSTEM V6 — TOKENIZED GLASS + LEGACY COLOR CLEANUP */
+:root,
+html[data-theme="dark-orange"]{
+  --theme-bg:#050505;
+  --theme-bg-secondary:#090909;
+  --theme-surface:rgba(18,18,18,.78);
+  --theme-surface-strong:rgba(24,24,24,.88);
+  --theme-surface-solid:#111111;
+  --theme-surface-soft:rgba(255,255,255,.035);
+  --theme-glass:rgba(16,16,16,.66);
+  --theme-glass-strong:rgba(20,20,20,.78);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(249,115,22,.28);
+  --theme-text:#f7f7f7;
+  --theme-text-soft:#cfcfcf;
+  --theme-text-muted:#888888;
+  --theme-accent:#f97316;
+  --theme-accent-2:#fb923c;
+  --theme-accent-deep:#ea580c;
+  --theme-accent-rgb:249,115,22;
+  --theme-accent-2-rgb:251,146,60;
+  --theme-accent-soft:rgba(249,115,22,.10);
+  --theme-accent-medium:rgba(249,115,22,.18);
+  --theme-accent-strong:rgba(249,115,22,.34);
+  --theme-gradient:linear-gradient(135deg,#f97316,#fb923c);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(249,115,22,.16),rgba(251,146,60,.055));
+  --theme-button-text:#090909;
+  --orange:var(--theme-accent);
+  --orange-light:var(--theme-accent-2);
+}
+
+html[data-theme="dark-pink"]{
+  --theme-bg:#080407;
+  --theme-bg-secondary:#0d070b;
+  --theme-surface:rgba(24,13,20,.78);
+  --theme-surface-strong:rgba(32,16,27,.88);
+  --theme-surface-solid:#160d13;
+  --theme-surface-soft:rgba(255,255,255,.035);
+  --theme-glass:rgba(22,11,18,.66);
+  --theme-glass-strong:rgba(28,13,23,.78);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(255,73,166,.30);
+  --theme-text:#fff7fb;
+  --theme-text-soft:#e4c9d7;
+  --theme-text-muted:#a88797;
+  --theme-accent:#ff49a6;
+  --theme-accent-2:#ff86c3;
+  --theme-accent-deep:#d92d86;
+  --theme-accent-rgb:255,73,166;
+  --theme-accent-2-rgb:255,134,195;
+  --theme-accent-soft:rgba(255,73,166,.10);
+  --theme-accent-medium:rgba(255,73,166,.18);
+  --theme-accent-strong:rgba(255,73,166,.35);
+  --theme-gradient:linear-gradient(135deg,#ff3f9f,#ff7fc0);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(255,73,166,.16),rgba(255,134,195,.055));
+  --theme-button-text:#12070d;
+  --orange:var(--theme-accent);
+  --orange-light:var(--theme-accent-2);
+}
+
+html[data-theme="dark-green"]{
+  --theme-bg:#030704;
+  --theme-bg-secondary:#060d08;
+  --theme-surface:rgba(12,24,16,.78);
+  --theme-surface-strong:rgba(15,31,21,.88);
+  --theme-surface-solid:#0b1710;
+  --theme-surface-soft:rgba(255,255,255,.035);
+  --theme-glass:rgba(9,22,14,.66);
+  --theme-glass-strong:rgba(11,27,18,.78);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(48,214,115,.30);
+  --theme-text:#f3fff7;
+  --theme-text-soft:#c7dfcf;
+  --theme-text-muted:#82988a;
+  --theme-accent:#30d673;
+  --theme-accent-2:#72e89e;
+  --theme-accent-deep:#18a954;
+  --theme-accent-rgb:48,214,115;
+  --theme-accent-2-rgb:114,232,158;
+  --theme-accent-soft:rgba(48,214,115,.10);
+  --theme-accent-medium:rgba(48,214,115,.18);
+  --theme-accent-strong:rgba(48,214,115,.35);
+  --theme-gradient:linear-gradient(135deg,#27c968,#65e594);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(48,214,115,.16),rgba(114,232,158,.055));
+  --theme-button-text:#031007;
+  --orange:var(--theme-accent);
+  --orange-light:var(--theme-accent-2);
+}
+
+html[data-theme="dark-purple"]{
+  --theme-bg:#050408;
+  --theme-bg-secondary:#09070e;
+  --theme-surface:rgba(19,14,28,.78);
+  --theme-surface-strong:rgba(25,17,37,.88);
+  --theme-surface-solid:#120d1c;
+  --theme-surface-soft:rgba(255,255,255,.035);
+  --theme-glass:rgba(17,12,25,.66);
+  --theme-glass-strong:rgba(22,15,32,.78);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(159,91,255,.31);
+  --theme-text:#faf7ff;
+  --theme-text-soft:#d7c9ea;
+  --theme-text-muted:#9487a6;
+  --theme-accent:#9f5bff;
+  --theme-accent-2:#bd8cff;
+  --theme-accent-deep:#7a35df;
+  --theme-accent-rgb:159,91,255;
+  --theme-accent-2-rgb:189,140,255;
+  --theme-accent-soft:rgba(159,91,255,.10);
+  --theme-accent-medium:rgba(159,91,255,.18);
+  --theme-accent-strong:rgba(159,91,255,.36);
+  --theme-gradient:linear-gradient(135deg,#934cff,#b77fff);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(159,91,255,.16),rgba(189,140,255,.055));
+  --theme-button-text:#0d0715;
+  --orange:var(--theme-accent);
+  --orange-light:var(--theme-accent-2);
+}
+
+html[data-theme="dark-black"]{
+  --theme-bg:#020202;
+  --theme-bg-secondary:#050505;
+  --theme-surface:rgba(14,14,14,.80);
+  --theme-surface-strong:rgba(19,19,19,.90);
+  --theme-surface-solid:#0d0d0d;
+  --theme-surface-soft:rgba(255,255,255,.032);
+  --theme-glass:rgba(10,10,10,.68);
+  --theme-glass-strong:rgba(15,15,15,.80);
+  --theme-border:rgba(255,255,255,.075);
+  --theme-border-strong:rgba(255,255,255,.18);
+  --theme-text:#f7f7f7;
+  --theme-text-soft:#c7c7c7;
+  --theme-text-muted:#777777;
+  --theme-accent:#f0f0f0;
+  --theme-accent-2:#ffffff;
+  --theme-accent-deep:#c8c8c8;
+  --theme-accent-rgb:240,240,240;
+  --theme-accent-2-rgb:255,255,255;
+  --theme-accent-soft:rgba(255,255,255,.075);
+  --theme-accent-medium:rgba(255,255,255,.12);
+  --theme-accent-strong:rgba(255,255,255,.20);
+  --theme-gradient:linear-gradient(135deg,#d7d7d7,#ffffff);
+  --theme-gradient-soft:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+  --theme-button-text:#050505;
+  --orange:var(--theme-accent);
+  --orange-light:var(--theme-accent-2);
+}
+
+/* Fundos e superfícies passam a obedecer exclusivamente ao tema ativo. */
+html[data-theme] body{
+  background:
+    radial-gradient(circle at 88% -8%,var(--theme-accent-soft),transparent 30%),
+    radial-gradient(circle at 8% 108%,color-mix(in srgb,var(--theme-accent) 4%,transparent),transparent 24%),
+    var(--theme-bg)!important;
+  color:var(--theme-text)!important;
+}
+
+html[data-theme] :is(.sidebar,.mobile-sidebar,.cortex-mobile-sidebar-panel){
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--theme-bg-secondary) 94%,black),
+      var(--theme-bg))!important;
+  border-color:var(--theme-border)!important;
+  box-shadow:14px 0 42px rgba(0,0,0,.20)!important;
+}
+
+html[data-theme] .header{
+  background:color-mix(in srgb,var(--theme-bg-secondary) 76%,transparent)!important;
+  border-color:var(--theme-border)!important;
+  backdrop-filter:blur(18px) saturate(120%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(120%)!important;
+}
+
+/* Vidro fosco apenas em superfícies secundárias. */
+html[data-theme] :is(
+  .settings-card,.theme-box,.profile-card,.appearance-card,.security-card,
+  .metric-card,.summary-card,.stats-card,.info-card,.content-card,
+  .question-card,.session-card,.flashcard-card,.case-card,.caso-card,
+  .finance-card,.ranking-card,.history-card,.filter-panel,.filters-panel,
+  .controls-panel,.controls-card,.details-card,.details-panel,
+  .result-card,.result-panel,.mode-card,.tip-card,.hub-tip,.lab-choice-card,
+  .modal-card,.dialog-card,.loading-card,.empty-state
+){
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--theme-glass-strong) 94%,transparent),
+      color-mix(in srgb,var(--theme-glass) 94%,transparent))!important;
+  border-color:var(--theme-border)!important;
+  box-shadow:
+    0 16px 44px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.028)!important;
+  backdrop-filter:blur(16px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(118%)!important;
+}
+
+html[data-theme] :is(
+  .hero,.dashboard-hero,.questions-hero,.questoes-hero,.flashcards-hero,
+  .cases-hero,.casos-hero,.settings-hero,.analysis-hero,.practice-hero,
+  .laboratorio-hero,.page-hero,.hero-card,.hero-panel,.welcome-card,.intro-card,
+  .lab-hub-hero
+){
+  background:
+    radial-gradient(circle at 88% 4%,var(--theme-accent-soft),transparent 34%),
+    linear-gradient(145deg,var(--theme-surface-strong),var(--theme-surface-solid))!important;
+  border-color:var(--theme-border)!important;
+  box-shadow:0 22px 66px rgba(0,0,0,.28)!important;
+}
+
+/* Elimina resíduos de identidade laranja em controles e navegação. */
+html[data-theme] :is(
+  .menu-item.active,.tab.active,.tab-button.active,.filter-button.active,
+  .filter-chip.active,.mode-button.active,.nav-item.active,.theme-choice.active,
+  .theme-option.active,.quick-link.active
+){
+  border-color:var(--theme-border-strong)!important;
+  background:linear-gradient(90deg,var(--theme-accent-medium),rgba(var(--theme-accent-rgb),.025))!important;
+  color:var(--theme-accent-2)!important;
+}
+
+html[data-theme] :is(
+  .menu-item.active::before,.progress-value,.progress-fill,.progress-bar>div,
+  .theme-preview-fill,.session-progress>div,.loader-progress,.loading-progress,
+  .loading-bar>span,.page-loader-bar>span,.skeleton-accent
+){
+  background:var(--theme-gradient)!important;
+  box-shadow:0 0 14px rgba(var(--theme-accent-rgb),.18)!important;
+}
+
+html[data-theme] :is(
+  .orange,.orange-text,.accent-text,.section-label,.hero-label,.small-label,
+  .eyebrow,.section-eyebrow,.hero-badge,.orange-badge,.badge-orange,.heading-badge,
+  .theme-current-label,.choice-eyebrow
+){
+  color:var(--theme-accent-2)!important;
+}
+
+html[data-theme] :is(
+  .orange-badge,.badge-orange,.heading-badge,.hero-badge,.small-badge,
+  .pill.active,.chip.active,.tag.active
+){
+  border-color:var(--theme-border-strong)!important;
+  background:var(--theme-gradient-soft)!important;
+}
+
+/* Botões e foco acompanham o tema atual. */
+html[data-theme] :is(
+  .button-primary,.primary-button,.btn-primary,.main-action,.submit-button,
+  .action-button.primary,button.primary,button.cta,button.is-primary,
+  .profile-photo-button:not(.subtle)
+){
+  border-color:transparent!important;
+  background:var(--theme-gradient)!important;
+  color:var(--theme-button-text)!important;
+  box-shadow:0 10px 28px rgba(var(--theme-accent-rgb),.16)!important;
+}
+
+html[data-theme] :is(input,textarea,select):focus{
+  border-color:var(--theme-border-strong)!important;
+  box-shadow:0 0 0 3px var(--theme-accent-soft)!important;
+}
+
+html[data-theme] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){
+  accent-color:var(--theme-accent)!important;
+}
+
+html[data-theme] ::selection{
+  background:var(--theme-accent-medium);
+  color:var(--theme-text);
+}
+
+html[data-theme] :is(a,.link,.text-link):not(.menu-item):hover{
+  color:var(--theme-accent-2);
+}
+
+/* Scrollbars e loaders antigos não ficam mais presos ao Orange. */
+html[data-theme] *{
+  scrollbar-color:var(--theme-accent-strong) rgba(255,255,255,.035);
+}
+html[data-theme] *::-webkit-scrollbar-thumb{
+  background:color-mix(in srgb,var(--theme-accent) 56%,#2a2a2a)!important;
+  border:2px solid var(--theme-bg)!important;
+}
+html[data-theme] *::-webkit-scrollbar-track{
+  background:color-mix(in srgb,var(--theme-bg-secondary) 94%,black)!important;
+}
+html[data-theme] :is(.loader,.spinner,.loading-spinner,.page-spinner){
+  border-color:color-mix(in srgb,var(--theme-accent) 18%,transparent)!important;
+  border-top-color:var(--theme-accent)!important;
+}
+
+/* Compatibilidade com classes antigas que ainda usam o nome orange. */
+html[data-theme]{
+  --accent:var(--theme-accent)!important;
+  --accent-2:var(--theme-accent-2)!important;
+  --accent-rgb:var(--theme-accent-rgb)!important;
+  --primary:var(--theme-accent)!important;
+  --primary-color:var(--theme-accent)!important;
+  --highlight:var(--theme-accent)!important;
+}
+
+/* Em mobile reduzimos blur para preservar fluidez. */
+@media(max-width:900px){
+  html[data-theme] :is(
+    .header,.settings-card,.theme-box,.profile-card,.appearance-card,.security-card,
+    .metric-card,.summary-card,.stats-card,.info-card,.content-card,
+    .question-card,.session-card,.flashcard-card,.case-card,.caso-card,
+    .finance-card,.ranking-card,.history-card,.filter-panel,.filters-panel,
+    .controls-panel,.controls-card,.details-card,.details-panel,
+    .result-card,.result-panel,.mode-card,.tip-card,.hub-tip,.lab-choice-card
+  ){
+    backdrop-filter:blur(9px) saturate(108%)!important;
+    -webkit-backdrop-filter:blur(9px) saturate(108%)!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] *{
+    scroll-behavior:auto!important;
+  }
+}
+
+/* END CORTEX THEME SYSTEM V6 */
