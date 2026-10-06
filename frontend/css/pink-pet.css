@@ -2832,3 +2832,46 @@ small {
 }
 
 /* CORTEX PET ORANGE BLACK V1 END */
+
+
+/* CORTEX PET ORANGE OUTFITS V1 */
+#cortexPinkPet .pet-outfit-bow i {
+  background:linear-gradient(145deg,#ff6500,#ff9a3c) !important;
+  box-shadow:0 2px 6px rgba(255,79,0,.22) !important;
+}
+#cortexPinkPet .pet-outfit-bow b {
+  background:#ffd0a6 !important;
+}
+#cortexPinkPet .cortex-pet-avatar[data-pet-outfit="hoodie"] .cortex-pet-body {
+  background:linear-gradient(145deg,#b84400,#7f2b00) !important;
+  border-color:rgba(255,166,94,.38) !important;
+}
+#cortexPinkPet .pet-outfit-hoodie-ring {
+  border-color:#d7550b !important;
+}
+#cortexPinkPet .pet-outfit-scarf {
+  background:linear-gradient(90deg,#ff6500,#ff9a3c) !important;
+  box-shadow:0 2px 5px rgba(90,28,0,.24) !important;
+}
+#cortexPinkPet .pet-outfit-scarf i {
+  background:#ef5e0a !important;
+}
+#cortexPinkPet .pet-outfit-glasses i {
+  border-color:#3a2114 !important;
+  background:rgba(255,147,74,.08) !important;
+}
+#cortexPinkPet .pet-outfit-glasses b {
+  background:#3a2114 !important;
+}
+#cortexPinkPet .pet-outfit-crown,
+#cortexPinkPet .pet-outfit-crown i {
+  background:linear-gradient(180deg,#ffad3d,#f06a00) !important;
+}
+#cortexPinkPet .pet-outfit-crown::after {
+  background:rgba(255,238,220,.38) !important;
+}
+#cortexPinkPet .outfit-option-preview {
+  background:rgba(255,101,0,.10) !important;
+  color:#ff8a1f !important;
+}
+/* CORTEX PET ORANGE OUTFITS V1 END */
