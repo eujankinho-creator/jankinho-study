@@ -2144,27 +2144,58 @@
   }
 
 
-  function updateThicknessPreview(
+  function ensureBrushCursor() {
+
+    let cursor =
+      $("cortexBrushCursor");
+
+
+    if (
+      cursor
+    ) {
+
+      return cursor;
+
+    }
+
+
+    cursor =
+      document.createElement(
+        "span"
+      );
+
+
+    cursor.id =
+      "cortexBrushCursor";
+
+
+    cursor.className =
+      "cortex-brush-cursor";
+
+
+    cursor.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    stage.appendChild(
+      cursor
+    );
+
+
+    return cursor;
+
+  }
+
+
+  function updateBrushCursorStyle(
     tool,
     size
   ) {
 
-    const preview =
-      $("brushSizePreview");
-
-
-    const panel =
-      $("strokeControls");
-
-
-    if (
-      !preview ||
-      !panel
-    ) {
-
-      return;
-
-    }
+    const cursor =
+      ensureBrushCursor();
 
 
     const activeTool =
@@ -2184,42 +2215,160 @@
       effectivePreviewSize(
         activeTool,
         activeSize
-      );
+      ) *
+      state.camera.zoom;
 
 
-    const dotSize =
+    const diameter =
       Math.max(
         4,
         Math.min(
-          24,
-          3 +
-          visualSize *
-          .75
+          96,
+          visualSize
         )
       );
 
 
-    preview.style.width =
-      dotSize +
+    cursor.style.width =
+      diameter +
       "px";
 
 
-    preview.style.height =
-      dotSize +
+    cursor.style.height =
+      diameter +
       "px";
 
 
-    panel.dataset.previewTool =
+    cursor.dataset.tool =
       activeTool;
 
 
-    preview.style.background =
-      activeTool === "eraser"
-        ? "var(--theme-text-soft)"
+    if (
+      activeTool ===
+      "eraser"
+    ) {
+
+      cursor.style.background =
+        "rgba(255,255,255,.08)";
+
+    }
+    else if (
+      activeTool ===
+      "highlighter"
+    ) {
+
+      cursor.style.background =
+        state.color
+          .replace(
+            "#",
+            ""
+          )
+          .length ===
+          6
+          ? state.color +
+            "38"
+          : state.color;
+
+    }
+    else {
+
+      cursor.style.background =
+        state.color +
+        (
+          /^#[0-9a-f]{6}$/i.test(
+            state.color
+          )
+            ? "24"
+            : ""
+        );
+
+    }
+
+
+    cursor.style.borderColor =
+      activeTool ===
+      "eraser"
+        ? "rgba(255,255,255,.92)"
         : state.color;
 
   }
 
+
+  function updateBrushCursorFromEvent(
+    event
+  ) {
+
+    const cursor =
+      ensureBrushCursor();
+
+
+    if (
+      !thicknessTools.has(
+        state.tool
+      ) ||
+      state.panning ||
+      state.touchGesture
+    ) {
+
+      cursor.classList.remove(
+        "visible"
+      );
+
+      return;
+
+    }
+
+
+    const rect =
+      stage.getBoundingClientRect();
+
+
+    cursor.style.left =
+      (
+        event.clientX -
+        rect.left
+      ) +
+      "px";
+
+
+    cursor.style.top =
+      (
+        event.clientY -
+        rect.top
+      ) +
+      "px";
+
+
+    updateBrushCursorStyle(
+      state.tool,
+      state.size
+    );
+
+
+    cursor.classList.add(
+      "visible"
+    );
+
+  }
+
+
+  function hideBrushCursor() {
+
+    const cursor =
+      $("cortexBrushCursor");
+
+
+    if (
+      cursor
+    ) {
+
+      cursor.classList.remove(
+        "visible"
+      );
+
+    }
+
+  }
 
   function syncInterface() {
 
@@ -2303,7 +2452,7 @@
     }
 
 
-    updateThicknessPreview(
+    updateBrushCursorStyle(
       state.tool,
       state.size
     );
@@ -2761,7 +2910,7 @@
           }
 
 
-          updateThicknessPreview(
+          updateBrushCursorStyle(
             state.tool,
             value
           );
@@ -3000,7 +3149,7 @@
     }
 
 
-    updateThicknessPreview(
+    updateBrushCursorStyle(
       tool,
       size
     );
@@ -6564,6 +6713,11 @@
     event
   ) {
 
+    updateBrushCursorFromEvent(
+      event
+    );
+
+
     /* CORTEX CLOSE POPOVER ON CANVAS V7 */
 
     hideThicknessPopover();
@@ -6862,6 +7016,11 @@
     event
   ) {
 
+    updateBrushCursorFromEvent(
+      event
+    );
+
+
     /* CORTEX TOUCH MOVE V4 */
 
     if (
@@ -7037,6 +7196,16 @@
   function pointerUp(
     event
   ) {
+
+    if (
+      event.pointerType !==
+      "mouse"
+    ) {
+
+      hideBrushCursor();
+
+    }
+
 
     /* CORTEX TOUCH UP V4 */
 
@@ -8011,7 +8180,7 @@
           }
 
 
-          updateThicknessPreview(
+          updateBrushCursorStyle(
             state.tool,
             state.size
           );
@@ -8200,6 +8369,12 @@
     canvas.addEventListener(
       "pointercancel",
       pointerUp
+    );
+
+
+    canvas.addEventListener(
+      "pointerleave",
+      hideBrushCursor
     );
 
 
@@ -8648,6 +8823,8 @@
 
 
     setupThicknessPopover();
+
+    ensureBrushCursor();
 
     syncInterface();
 
