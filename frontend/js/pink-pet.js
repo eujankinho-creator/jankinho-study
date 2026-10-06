@@ -2684,7 +2684,10 @@
         "",
 
       outfit:
-        "none"
+        "none",
+
+      color:
+        "theme"
     };
 
 
@@ -2719,7 +2722,22 @@
             saved.outfit
           ]
             ? saved.outfit
-            : "none"
+            : "none",
+
+        color:
+          [
+            "theme",
+            "orange",
+            "pink",
+            "green",
+            "purple",
+            "black",
+            "white"
+          ].includes(
+            saved.color
+          )
+            ? saved.color
+            : "theme"
       };
 
     }
@@ -3494,3 +3512,279 @@
   }
 
 })();
+
+
+
+/* CORTEX PET THEME BRIDGE V1 */
+(function () {
+  "use strict";
+
+  const COLORS = {
+    orange: {
+      accent: "#ff6500",
+      accent2: "#ff9a3c",
+      dark: "#b84400",
+      rgb: "255,101,0",
+    },
+    pink: {
+      accent: "#ff3d8d",
+      accent2: "#ff78b4",
+      dark: "#b51f61",
+      rgb: "255,61,141",
+    },
+    green: {
+      accent: "#22d36b",
+      accent2: "#68e69b",
+      dark: "#128a43",
+      rgb: "34,211,107",
+    },
+    purple: {
+      accent: "#9b5cff",
+      accent2: "#c092ff",
+      dark: "#6130b7",
+      rgb: "155,92,255",
+    },
+    black: {
+      accent: "#282828",
+      accent2: "#4a4a4a",
+      dark: "#111111",
+      rgb: "40,40,40",
+    },
+    white: {
+      accent: "#ececec",
+      accent2: "#ffffff",
+      dark: "#bdbdbd",
+      rgb: "236,236,236",
+    },
+  };
+
+  const OUTFITS = {
+    none: "",
+    bow:
+      '<span class="pet-outfit-bow">' +
+        '<i></i><i></i><b></b>' +
+      '</span>',
+    hoodie:
+      '<span class="pet-outfit-hoodie-ring"></span>',
+    scarf:
+      '<span class="pet-outfit-scarf"><i></i></span>',
+    glasses:
+      '<span class="pet-outfit-glasses">' +
+        '<i class="left"></i><i class="right"></i><b></b>' +
+      '</span>',
+    crown:
+      '<span class="pet-outfit-crown"><i></i><i></i><i></i></span>',
+  };
+
+  let userId = null;
+  let profileKey = "cortex_pet_profile_v1_local";
+
+  function normalizeProfile(value) {
+    const input = value && typeof value === "object" ? value : {};
+    const color = input.color === "theme" || COLORS[input.color]
+      ? input.color
+      : "theme";
+    const outfit = Object.prototype.hasOwnProperty.call(OUTFITS, input.outfit)
+      ? input.outfit
+      : "none";
+
+    return {
+      name: String(input.name || "")
+        .replace(/[<>]/g, "")
+        .trim()
+        .slice(0, 16),
+      color,
+      outfit,
+    };
+  }
+
+  function loadProfile() {
+    try {
+      return normalizeProfile(
+        JSON.parse(localStorage.getItem(profileKey) || "null")
+      );
+    } catch {
+      return normalizeProfile(null);
+    }
+  }
+
+  function saveProfile(profile) {
+    const normalized = normalizeProfile(profile);
+    try {
+      localStorage.setItem(profileKey, JSON.stringify(normalized));
+    } catch {}
+    return normalized;
+  }
+
+  function ensureAccessory(avatar) {
+    let accessory = avatar.querySelector("#cortexPetOutfit");
+
+    if (!accessory) {
+      accessory = document.createElement("span");
+      accessory.id = "cortexPetOutfit";
+      accessory.className = "cortex-pet-outfit";
+      avatar.appendChild(accessory);
+    }
+
+    return accessory;
+  }
+
+  function applyOutfit(avatar, outfit) {
+    const selected = Object.prototype.hasOwnProperty.call(OUTFITS, outfit)
+      ? outfit
+      : "none";
+
+    avatar.dataset.petOutfit = selected;
+
+    const accessory = ensureAccessory(avatar);
+    accessory.dataset.outfit = selected;
+    accessory.innerHTML = OUTFITS[selected];
+
+    document
+      .querySelectorAll(".cortex-pet-outfit-option")
+      .forEach(function (button) {
+        const active = button.dataset.outfit === selected;
+        button.classList.toggle("selected", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+  }
+
+  function applyColor(root, color) {
+    if (color === "theme") {
+      root.style.removeProperty("--pet-accent");
+      root.style.removeProperty("--pet-accent-2");
+      root.style.removeProperty("--pet-accent-dark");
+      root.style.removeProperty("--pet-accent-rgb");
+      root.dataset.petColor = "theme";
+      return;
+    }
+
+    const palette = COLORS[color] || COLORS.orange;
+
+    root.style.setProperty("--pet-accent", palette.accent);
+    root.style.setProperty("--pet-accent-2", palette.accent2);
+    root.style.setProperty("--pet-accent-dark", palette.dark);
+    root.style.setProperty("--pet-accent-rgb", palette.rgb);
+    root.dataset.petColor = color;
+  }
+
+  function applyProfile(profileInput) {
+    const root = document.getElementById("cortexPinkPet");
+    const avatar = document.getElementById("cortexPetAvatar");
+    const panel = document.getElementById("cortexPetPanel");
+
+    if (!root || !avatar) {
+      return false;
+    }
+
+    const profile = normalizeProfile(profileInput || loadProfile());
+
+    applyColor(root, profile.color);
+    applyOutfit(avatar, profile.outfit);
+
+    if (panel) {
+      const title = panel.querySelector(".cortex-pet-panel-head strong");
+      if (title) {
+        title.textContent = profile.name || "Seu companheiro";
+      }
+
+      const nameInput = panel.querySelector("#cortexPetNameInput");
+      if (nameInput && document.activeElement !== nameInput) {
+        nameInput.value = profile.name || "";
+      }
+    }
+
+    return true;
+  }
+
+  function applySoon() {
+    let tries = 0;
+    const timer = window.setInterval(function () {
+      tries += 1;
+
+      if (applyProfile() || tries >= 16) {
+        window.clearInterval(timer);
+      }
+    }, 180);
+  }
+
+  async function resolveUser() {
+    try {
+      const response = await fetch("/api/auth/me", {
+        credentials: "include",
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
+      userId = data && data.usuario ? data.usuario.id : null;
+      profileKey = "cortex_pet_profile_v1_" + (userId || "local");
+    } catch {}
+  }
+
+  window.addEventListener("message", function (event) {
+    if (event.origin !== window.location.origin) {
+      return;
+    }
+
+    const data = event.data;
+
+    if (!data) {
+      return;
+    }
+
+    if (data.type === "cortex:pet-profile") {
+      if (
+        data.userId &&
+        userId &&
+        Number(data.userId) !== Number(userId)
+      ) {
+        return;
+      }
+
+      const profile = saveProfile(data.profile);
+      applyProfile(profile);
+      return;
+    }
+
+    if (data.type === "cortex:pet-mode" && data.mode === "visible") {
+      window.setTimeout(function () {
+        applyProfile();
+      }, 80);
+    }
+  });
+
+  window.addEventListener("storage", function (event) {
+    if (event.key === profileKey) {
+      applyProfile();
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    void resolveUser().then(function () {
+      applySoon();
+    });
+  }, { once: true });
+
+  if (document.readyState !== "loading") {
+    void resolveUser().then(function () {
+      applySoon();
+    });
+  }
+
+  if (
+    window.JankinhoTheme &&
+    typeof window.JankinhoTheme.subscribe === "function"
+  ) {
+    window.JankinhoTheme.subscribe(function () {
+      const profile = loadProfile();
+      if (profile.color === "theme") {
+        applyProfile(profile);
+      }
+    });
+  }
+})();
+/* CORTEX PET THEME BRIDGE V1 END */
