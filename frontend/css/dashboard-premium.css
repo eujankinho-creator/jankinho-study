@@ -3743,3 +3743,138 @@ html[data-theme="pink-glitter"]
   }
 }
 /* END CORTEX DASHBOARD PLAN + WEATHER V2 */
+
+
+/* CORTEX DASHBOARD CONTEXT SUBTLE V3 */
+.dashboard-context-strip{
+  gap:6px!important;
+  opacity:.86;
+}
+
+.dashboard-date-card,
+.dashboard-weather-card{
+  min-height:34px!important;
+  border-color:transparent!important;
+  border-radius:9px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+.dashboard-date-card{
+  min-width:auto!important;
+  padding:3px 7px 3px 9px!important;
+  border-right:1px solid var(--theme-border)!important;
+  border-radius:0!important;
+}
+
+.dashboard-date-card span{
+  color:var(--theme-text-muted)!important;
+  font-size:7px!important;
+  font-weight:760!important;
+  letter-spacing:.08em!important;
+}
+
+.dashboard-date-card strong{
+  margin-top:3px!important;
+  color:var(--theme-text-soft)!important;
+  font-size:10px!important;
+  font-weight:720!important;
+}
+
+.dashboard-weather-card{
+  min-width:auto!important;
+  gap:6px!important;
+  padding:3px 6px!important;
+}
+
+.dashboard-weather-icon{
+  width:22px!important;
+  height:22px!important;
+  flex-basis:22px!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  color:var(--theme-accent-2)!important;
+  font-size:13px!important;
+  opacity:.82;
+}
+
+.dashboard-weather-card strong{
+  font-size:10px!important;
+  font-weight:760!important;
+  color:var(--theme-text-soft)!important;
+}
+
+.dashboard-weather-card div span{
+  max-width:124px!important;
+  color:var(--theme-text-muted)!important;
+  font-size:7px!important;
+  opacity:.78;
+}
+
+.dashboard-weather-retry{
+  min-height:22px!important;
+  border:0!important;
+  background:transparent!important;
+  padding:0 4px!important;
+  color:var(--theme-text-muted)!important;
+  font-size:7px!important;
+}
+
+.dashboard-view .study-timer-button{
+  min-height:36px!important;
+}
+
+@media(max-width:900px){
+  .dashboard-context-strip{
+    gap:2px!important;
+    opacity:.82;
+  }
+
+  .dashboard-date-card{
+    display:none!important;
+  }
+
+  .dashboard-weather-card{
+    width:auto!important;
+    min-width:54px!important;
+    height:34px!important;
+    padding:2px 5px!important;
+  }
+
+  .dashboard-weather-card>div{
+    display:block!important;
+  }
+
+  .dashboard-weather-card div span{
+    display:none!important;
+  }
+
+  .dashboard-weather-card strong{
+    font-size:9px!important;
+  }
+
+  .dashboard-weather-retry{
+    display:none!important;
+  }
+
+  .dashboard-weather-icon{
+    width:18px!important;
+    height:18px!important;
+    flex-basis:18px!important;
+    font-size:11px!important;
+  }
+}
+
+@media(max-width:600px){
+  .dashboard-context-strip{
+    display:flex!important;
+  }
+
+  .dashboard-weather-card{
+    min-width:48px!important;
+  }
+}
+/* END CORTEX DASHBOARD CONTEXT SUBTLE V3 */
