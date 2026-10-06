@@ -1463,3 +1463,53 @@ html[data-theme="black-white"] .cortex-mobile-brand-image{
 }
 
 /* CORTEX LOGO MINIMAL NO GLOW V1 END */
+
+
+/* =========================================================
+   CORTEX BRAND ABSOLUTE NO GLOW V2
+========================================================= */
+.sidebar-logo,
+.sidebar-logo .logo-box,
+.sidebar-logo .logo-box.cortex-logo,
+.sidebar-logo .cortex-global-logo-box,
+.cortex-mobile-sidebar-header,
+.cortex-mobile-sidebar-panel .logo-box{
+  filter:none!important;
+  text-shadow:none!important;
+}
+
+.sidebar-logo .logo-box,
+.sidebar-logo .logo-box.cortex-logo,
+.sidebar-logo .cortex-global-logo-box,
+.cortex-mobile-sidebar-panel .logo-box{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+.sidebar-logo .logo-box::before,
+.sidebar-logo .logo-box::after,
+.sidebar-logo .logo-box.cortex-logo::before,
+.sidebar-logo .logo-box.cortex-logo::after,
+.cortex-mobile-sidebar-panel .logo-box::before,
+.cortex-mobile-sidebar-panel .logo-box::after{
+  content:none!important;
+  display:none!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+.cortex-global-logo-image,
+.cortex-mobile-brand-image,
+.sidebar-logo img,
+.sidebar-logo svg,
+.cortex-brain-logo,
+.cortex-brain-logo *{
+  filter:none!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+/* CORTEX BRAND ABSOLUTE NO GLOW V2 END */
