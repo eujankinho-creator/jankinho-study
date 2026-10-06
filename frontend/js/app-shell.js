@@ -2205,6 +2205,14 @@
     resizeStartY: 0,
     resizeStartWidth: 0,
     resizeStartHeight: 0,
+    resizeEdge: "",
+    resizeStartLeft: 0,
+    resizeStartTop: 0,
+    moveActive: false,
+    moveStartX: 0,
+    moveStartY: 0,
+    moveStartLeft: 0,
+    moveStartTop: 0,
   };
 
   function lessonFormatTime(seconds) {
@@ -2313,10 +2321,29 @@
     if(!host || host.classList.contains("expanded")) return;
     try{
       localStorage.setItem("cortex_lesson_player_size_v1",JSON.stringify({
-        width:Math.round(host.getBoundingClientRect().width),
-        height:Math.round(host.getBoundingClientRect().height)
+        width:Math.round(host.getBoundingClientRect().width)
       }));
     }catch{}
+  }
+
+  function lessonPersistMiniPosition() {
+    const host=$("globalLessonPlayer");
+    if(!host || host.classList.contains("expanded") || matchMedia("(max-width: 760px)").matches) return;
+    const rect=host.getBoundingClientRect();
+    try{
+      localStorage.setItem("cortex_lesson_player_position_v1",JSON.stringify({
+        left:Math.round(rect.left),
+        top:Math.round(rect.top)
+      }));
+    }catch{}
+  }
+
+  function lessonClampMiniPosition(left,top,width,height) {
+    const margin=8;
+    return {
+      left:Math.max(margin,Math.min(window.innerWidth-width-margin,left)),
+      top:Math.max(margin,Math.min(window.innerHeight-height-margin,top))
+    };
   }
 
   function lessonRestoreMiniSize() {
@@ -2326,10 +2353,35 @@
       const saved=JSON.parse(localStorage.getItem("cortex_lesson_player_size_v1")||"null");
       if(!saved) return;
       const width=Math.max(320,Math.min(window.innerWidth-24,Number(saved.width)||0));
-      const height=Math.max(260,Math.min(window.innerHeight-24,Number(saved.height)||0));
       if(width) host.style.width=width+"px";
-      if(height) host.style.height=height+"px";
+      host.style.height="";
     }catch{}
+  }
+
+  function lessonRestoreMiniPosition() {
+    const host=$("globalLessonPlayer");
+    if(!host || matchMedia("(max-width: 760px)").matches) return;
+    try{
+      const saved=JSON.parse(localStorage.getItem("cortex_lesson_player_position_v1")||"null");
+      if(!saved) return;
+      const rect=host.getBoundingClientRect();
+      const pos=lessonClampMiniPosition(
+        Number(saved.left)||rect.left,
+        Number(saved.top)||rect.top,
+        rect.width,
+        rect.height
+      );
+      host.style.left=pos.left+"px";
+      host.style.top=pos.top+"px";
+      host.style.right="auto";
+      host.style.bottom="auto";
+      host.style.transform="none";
+    }catch{}
+  }
+
+  function lessonRestoreMiniGeometry() {
+    lessonRestoreMiniSize();
+    requestAnimationFrame(()=>lessonRestoreMiniPosition());
   }
 
   function lessonSetExpanded(expanded) {
@@ -2342,9 +2394,14 @@
     if(expanded){
       host.style.width="";
       host.style.height="";
+      host.style.left="";
+      host.style.top="";
+      host.style.right="";
+      host.style.bottom="";
+      host.style.transform="";
       host.classList.remove("lesson-clean");
     }else{
-      lessonRestoreMiniSize();
+      lessonRestoreMiniGeometry();
       lessonShowChrome();
     }
     saveLessonLocal();
@@ -2471,7 +2528,7 @@
     lessonRenderMeta();
     $("globalLessonPlayer")?.classList.remove("hidden");
     lessonSetExpanded(false);
-    lessonRestoreMiniSize();
+    lessonRestoreMiniGeometry();
     createLessonPlayer(lessonState.lastPosition,false).catch(console.error);
   }
 
@@ -2508,44 +2565,170 @@
   lessonHost?.addEventListener("pointerenter",lessonShowChrome,{passive:true});
   lessonHost?.addEventListener("touchstart",lessonShowChrome,{passive:true});
 
-  const resizeHandle=$("globalLessonResizeHandle");
-  resizeHandle?.addEventListener("pointerdown",(event)=>{
-    if(event.button!==0 || matchMedia("(max-width: 760px)").matches) return;
-    const host=$("globalLessonPlayer");
-    if(!host || host.classList.contains("expanded")) return;
-    lessonState.resizeActive=true;
-    lessonState.resizeStartX=event.clientX;
-    lessonState.resizeStartY=event.clientY;
-    const rect=host.getBoundingClientRect();
-    lessonState.resizeStartWidth=rect.width;
-    lessonState.resizeStartHeight=rect.height;
-    host.classList.remove("lesson-clean");
-    resizeHandle.setPointerCapture?.(event.pointerId);
-    event.preventDefault();
-  });
+  const lessonHeader=$("globalLessonPlayer")?.querySelector(".global-lesson-head");
 
-  resizeHandle?.addEventListener("pointermove",(event)=>{
-    if(!lessonState.resizeActive) return;
+  lessonHeader?.addEventListener("pointerdown",(event)=>{
+    if(
+      event.button!==0 ||
+      matchMedia("(max-width: 760px)").matches ||
+      event.target.closest("button,input,a") ||
+      $("globalLessonPlayer")?.classList.contains("expanded")
+    ) return;
+
     const host=$("globalLessonPlayer");
     if(!host) return;
-    const maxWidth=Math.max(340,window.innerWidth-24);
-    const maxHeight=Math.max(280,window.innerHeight-24);
-    const width=Math.max(320,Math.min(maxWidth,lessonState.resizeStartWidth+(event.clientX-lessonState.resizeStartX)));
-    const height=Math.max(260,Math.min(maxHeight,lessonState.resizeStartHeight+(event.clientY-lessonState.resizeStartY)));
-    host.style.width=width+"px";
-    host.style.height=height+"px";
+    const rect=host.getBoundingClientRect();
+
+    lessonState.moveActive=true;
+    lessonState.moveStartX=event.clientX;
+    lessonState.moveStartY=event.clientY;
+    lessonState.moveStartLeft=rect.left;
+    lessonState.moveStartTop=rect.top;
+
+    host.style.left=rect.left+"px";
+    host.style.top=rect.top+"px";
+    host.style.right="auto";
+    host.style.bottom="auto";
+    host.style.transform="none";
+    host.classList.add("lesson-moving");
+    host.classList.remove("lesson-clean");
+
+    lessonHeader.setPointerCapture?.(event.pointerId);
     event.preventDefault();
   });
 
-  const finishLessonResize=(event)=>{
-    if(!lessonState.resizeActive) return;
-    lessonState.resizeActive=false;
-    try{resizeHandle?.releasePointerCapture?.(event.pointerId);}catch{}
-    lessonPersistMiniSize();
+  lessonHeader?.addEventListener("pointermove",(event)=>{
+    if(!lessonState.moveActive) return;
+    const host=$("globalLessonPlayer");
+    if(!host) return;
+    const rect=host.getBoundingClientRect();
+    const pos=lessonClampMiniPosition(
+      lessonState.moveStartLeft+(event.clientX-lessonState.moveStartX),
+      lessonState.moveStartTop+(event.clientY-lessonState.moveStartY),
+      rect.width,
+      rect.height
+    );
+    host.style.left=pos.left+"px";
+    host.style.top=pos.top+"px";
+    event.preventDefault();
+  });
+
+  const finishLessonMove=(event)=>{
+    if(!lessonState.moveActive) return;
+    lessonState.moveActive=false;
+    const host=$("globalLessonPlayer");
+    host?.classList.remove("lesson-moving");
+    try{lessonHeader?.releasePointerCapture?.(event.pointerId);}catch{}
+    lessonPersistMiniPosition();
     lessonShowChrome();
   };
-  resizeHandle?.addEventListener("pointerup",finishLessonResize);
-  resizeHandle?.addEventListener("pointercancel",finishLessonResize);
+  lessonHeader?.addEventListener("pointerup",finishLessonMove);
+  lessonHeader?.addEventListener("pointercancel",finishLessonMove);
+
+  const lessonResizeZones=Array.from(document.querySelectorAll("[data-lesson-resize]"));
+
+  lessonResizeZones.forEach((zone)=>{
+    zone.addEventListener("pointerdown",(event)=>{
+      if(
+        event.button!==0 ||
+        matchMedia("(max-width: 760px)").matches ||
+        $("globalLessonPlayer")?.classList.contains("expanded")
+      ) return;
+
+      const host=$("globalLessonPlayer");
+      if(!host) return;
+      const rect=host.getBoundingClientRect();
+
+      lessonState.resizeActive=true;
+      lessonState.resizeEdge=zone.dataset.lessonResize||"se";
+      lessonState.resizeStartX=event.clientX;
+      lessonState.resizeStartY=event.clientY;
+      lessonState.resizeStartWidth=rect.width;
+      lessonState.resizeStartHeight=rect.height;
+      lessonState.resizeStartLeft=rect.left;
+      lessonState.resizeStartTop=rect.top;
+
+      host.style.left=rect.left+"px";
+      host.style.top=rect.top+"px";
+      host.style.right="auto";
+      host.style.bottom="auto";
+      host.style.transform="none";
+      host.style.height="";
+      host.classList.add("lesson-resizing");
+      host.classList.remove("lesson-clean");
+
+      zone.setPointerCapture?.(event.pointerId);
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    zone.addEventListener("pointermove",(event)=>{
+      if(!lessonState.resizeActive) return;
+      const host=$("globalLessonPlayer");
+      if(!host) return;
+
+      const edge=lessonState.resizeEdge;
+      const dx=event.clientX-lessonState.resizeStartX;
+      const dy=event.clientY-lessonState.resizeStartY;
+      const horizontal=edge.includes("e") ? dx : edge.includes("w") ? -dx : 0;
+      const vertical=edge.includes("s") ? dy : edge.includes("n") ? -dy : 0;
+      const verticalAsWidth=vertical*1.55;
+      const delta=Math.abs(horizontal)>=Math.abs(verticalAsWidth) ? horizontal : verticalAsWidth;
+
+      const maxWidth=Math.max(320,Math.min(920,window.innerWidth-16));
+      const nextWidth=Math.max(320,Math.min(maxWidth,lessonState.resizeStartWidth+delta));
+      host.style.width=nextWidth+"px";
+      host.style.height="";
+
+      requestAnimationFrame(()=>{
+        const nextRect=host.getBoundingClientRect();
+        let left=lessonState.resizeStartLeft;
+        let top=lessonState.resizeStartTop;
+
+        if(edge.includes("w")){
+          left=lessonState.resizeStartLeft+(lessonState.resizeStartWidth-nextRect.width);
+        }
+        if(edge.includes("n")){
+          top=lessonState.resizeStartTop+(lessonState.resizeStartHeight-nextRect.height);
+        }
+
+        const pos=lessonClampMiniPosition(left,top,nextRect.width,nextRect.height);
+        host.style.left=pos.left+"px";
+        host.style.top=pos.top+"px";
+      });
+
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    const finish=(event)=>{
+      if(!lessonState.resizeActive) return;
+      lessonState.resizeActive=false;
+      lessonState.resizeEdge="";
+      const host=$("globalLessonPlayer");
+      host?.classList.remove("lesson-resizing");
+      try{zone.releasePointerCapture?.(event.pointerId);}catch{}
+      lessonPersistMiniSize();
+      lessonPersistMiniPosition();
+      lessonShowChrome();
+    };
+
+    zone.addEventListener("pointerup",finish);
+    zone.addEventListener("pointercancel",finish);
+  });
+
+  window.addEventListener("resize",()=>{
+    const host=$("globalLessonPlayer");
+    if(!host || host.classList.contains("expanded") || matchMedia("(max-width: 760px)").matches) return;
+    requestAnimationFrame(()=>{
+      const rect=host.getBoundingClientRect();
+      const pos=lessonClampMiniPosition(rect.left,rect.top,rect.width,rect.height);
+      host.style.left=pos.left+"px";
+      host.style.top=pos.top+"px";
+      lessonPersistMiniPosition();
+    });
+  });
+
   $("globalLessonProgress")?.addEventListener("input",function(){
     lessonState.dragging=true;
     const duration=Number(lessonState.player?.getDuration?.() || lessonState.lastDuration || 0);

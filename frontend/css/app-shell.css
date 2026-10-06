@@ -1739,3 +1739,83 @@ body.lesson-player-expanded::before{
     pointer-events:auto;
   }
 }
+
+
+/* CORTEX LESSON PLAYER · free move + proportional edge resize v3 */
+.global-lesson-player:not(.expanded){
+  height:auto!important;
+  resize:none!important;
+}
+.global-lesson-player:not(.expanded) .global-lesson-video{
+  flex:0 0 auto!important;
+  width:100%;
+  aspect-ratio:16/9!important;
+}
+.global-lesson-player.lesson-moving,
+.global-lesson-player.lesson-resizing{
+  transition:none!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+}
+.global-lesson-player:not(.expanded) .global-lesson-head{
+  cursor:grab;
+}
+.global-lesson-player.lesson-moving .global-lesson-head{
+  cursor:grabbing;
+}
+.global-lesson-window-actions{
+  cursor:default;
+}
+.global-lesson-resize-handle{
+  display:none!important;
+}
+.global-lesson-resize-zones{
+  position:absolute;
+  inset:0;
+  z-index:10;
+  pointer-events:none;
+}
+.global-lesson-resize-zones>span{
+  position:absolute;
+  display:block;
+  pointer-events:auto;
+  background:transparent;
+}
+.global-lesson-resize-zones [data-lesson-resize="n"]{
+  left:12px;right:12px;top:0;height:8px;cursor:ns-resize;
+}
+.global-lesson-resize-zones [data-lesson-resize="s"]{
+  left:12px;right:12px;bottom:0;height:8px;cursor:ns-resize;
+}
+.global-lesson-resize-zones [data-lesson-resize="e"]{
+  top:12px;bottom:12px;right:0;width:8px;cursor:ew-resize;
+}
+.global-lesson-resize-zones [data-lesson-resize="w"]{
+  top:12px;bottom:12px;left:0;width:8px;cursor:ew-resize;
+}
+.global-lesson-resize-zones [data-lesson-resize="ne"]{
+  top:0;right:0;width:14px;height:14px;cursor:nesw-resize;
+}
+.global-lesson-resize-zones [data-lesson-resize="se"]{
+  right:0;bottom:0;width:14px;height:14px;cursor:nwse-resize;
+}
+.global-lesson-resize-zones [data-lesson-resize="sw"]{
+  left:0;bottom:0;width:14px;height:14px;cursor:nesw-resize;
+}
+.global-lesson-resize-zones [data-lesson-resize="nw"]{
+  left:0;top:0;width:14px;height:14px;cursor:nwse-resize;
+}
+.global-lesson-player.lesson-resizing::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:9;
+  pointer-events:none;
+  border:1px solid color-mix(in srgb,var(--theme-accent,#f97316) 55%,transparent);
+  border-radius:inherit;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-accent,#f97316) 8%,transparent);
+}
+@media(max-width:760px){
+  .global-lesson-resize-zones{display:none!important}
+  .global-lesson-player:not(.expanded) .global-lesson-head{cursor:default}
+}
