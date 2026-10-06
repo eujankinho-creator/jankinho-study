@@ -1178,20 +1178,22 @@
 
     if(photo){
       element.textContent="";
-      element.style.backgroundImage='url("'+photo+'")';
-      element.style.backgroundSize="cover";
-      element.style.backgroundPosition="center";
-      element.style.backgroundRepeat="no-repeat";
-      element.style.color="transparent";
+      element.style.setProperty("--cortex-profile-photo","url("+JSON.stringify(String(photo))+")");
+      element.style.removeProperty("background-image");
+      element.style.removeProperty("background-size");
+      element.style.removeProperty("background-position");
+      element.style.removeProperty("background-repeat");
+      element.style.removeProperty("color");
       element.style.overflow="hidden";
       element.style.borderRadius="50%";
       element.classList.add("has-profile-photo");
     }else{
-      element.style.backgroundImage="";
-      element.style.backgroundSize="";
-      element.style.backgroundPosition="";
-      element.style.backgroundRepeat="";
-      element.style.color="";
+      element.style.removeProperty("--cortex-profile-photo");
+      element.style.removeProperty("background-image");
+      element.style.removeProperty("background-size");
+      element.style.removeProperty("background-position");
+      element.style.removeProperty("background-repeat");
+      element.style.removeProperty("color");
       element.textContent=initial;
       element.classList.remove("has-profile-photo");
     }
@@ -1212,19 +1214,27 @@
     const email=String(user.email||"");
 
     document
-      .querySelectorAll("#nomeSidebar, #nomeHeader, [data-cortex-user-name]")
+      .querySelectorAll(
+        "#nomeSidebar, #nomeHeader, [data-cortex-user-name], " +
+        ".sidebar-user .user-info > strong, .header-user > div > strong"
+      )
       .forEach(function(node){
         node.textContent=name;
       });
 
     document
-      .querySelectorAll("#emailSidebar, [data-cortex-user-email]")
+      .querySelectorAll(
+        "#emailSidebar, [data-cortex-user-email], .sidebar-user .user-info > span"
+      )
       .forEach(function(node){
         node.textContent=email;
       });
 
     document
-      .querySelectorAll("#avatarSidebar, #avatarHeader, [data-profile-avatar=\"current\"]")
+      .querySelectorAll(
+        "#avatarSidebar, #avatarHeader, [data-profile-avatar=\"current\"], " +
+        ".sidebar-user > .avatar, .header-user > .avatar"
+      )
       .forEach(function(node){
         applyUserAvatar(node,user);
       });
@@ -1891,6 +1901,12 @@
       }else{
         void loadCortexUserProfile();
       }
+    }
+    if(data.type==="cortex:profile-updated"&&data.usuario){
+      applyCortexUserProfile({
+        ...(cortexGlobalUser||{}),
+        ...data.usuario
+      });
     }
   });
 
