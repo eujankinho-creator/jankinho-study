@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#070707">
-  <title>Cronograma de Estudos | Cortex</title>
+  <title>Cronograma | Cortex</title>
   <script>
     (function(){
       var theme="dark-orange";
@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261006-globalperf1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma1">
+  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma2">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261006-globalperf1"></script>
@@ -41,7 +41,7 @@
   <div class="main-area">
     <header class="header schedule-header">
       <div>
-        <div class="header-title">Cronograma de Estudos</div>
+        <div class="header-title">Cronograma</div>
         <span>Planejamento inteligente conectado ao seu desempenho</span>
       </div>
       <div class="header-user">
@@ -53,25 +53,33 @@
     <main class="schedule-page">
       <section class="schedule-hero">
         <div>
-          <span class="schedule-kicker">PLANEJAMENTO INTELIGENTE</span>
-          <h1>Transforme seu objetivo em uma <em>rotina executável.</em></h1>
-          <p>O Córtex pesquisa fontes oficiais, cruza incidência, prioridade, dificuldade, seu histórico de questões e o tempo disponível para distribuir teoria, revisão, questões e simulados.</p>
+          <span class="schedule-kicker">ENARE · EBSERH · MINISTÉRIO DA SAÚDE</span>
+          <h1>Um plano de estudo feito para <em>provas reais da saúde.</em></h1>
+          <p>O Córtex usa editais e portais oficiais para definir o conteúdo e referências estruturadas de preparação para organizar ciclos, revisões, questões e simulados. Seu histórico de erros altera automaticamente a prioridade dos temas.</p>
         </div>
         <div class="schedule-hero-badges">
-          <span>Fontes oficiais primeiro</span>
-          <span>Revisão espaçada</span>
-          <span>Integração com Aulas e Questões</span>
+          <span>Edital oficial como fonte principal</span>
+          <span>Ciclos Base → Consolidação → Reta final</span>
+          <span>Integração com Aulas, Questões e Simulados</span>
         </div>
       </section>
 
       <section id="scheduleEmpty" class="schedule-builder">
         <div class="schedule-builder-head">
           <div><span>NOVO PLANO</span><h2>Monte seu cronograma</h2></div>
-          <small>ENARE · EBSERH · residências · concursos de enfermagem</small>
+          <small>Exclusivo para ENARE · EBSERH · Ministério da Saúde</small>
         </div>
 
         <form id="scheduleForm" class="schedule-form">
-          <label class="wide"><span>Qual prova você quer fazer?</span><input id="examName" type="text" maxlength="180" placeholder="Ex.: ENARE Enfermagem 2027" required></label>
+          <label class="wide"><span>Objetivo</span>
+            <select id="examType" required>
+              <option value="ENARE">ENARE — Enfermagem</option>
+              <option value="EBSERH">EBSERH — Enfermagem</option>
+              <option value="MINISTERIO_SAUDE">Ministério da Saúde — Enfermagem/Saúde</option>
+            </select>
+          </label>
+          <label class="wide"><span>Edição / observação</span><input id="examEdition" type="text" maxlength="80" placeholder="Ex.: 2027, CPNU, Área Assistencial"></label>
+          <div id="examBlueprint" class="exam-blueprint wide" aria-live="polite"></div>
           <label><span>Data da prova</span><input id="examDate" type="date"></label>
           <label><span>Horas por dia</span><input id="hoursPerDay" type="number" min="0.5" max="12" step="0.5" value="2"></label>
           <label><span>Dias por semana</span><input id="daysPerWeek" type="number" min="1" max="7" value="6"></label>
@@ -87,7 +95,7 @@
 
           <div class="schedule-form-actions wide">
             <button id="buildScheduleButton" type="submit"><b>Pesquisar e montar</b><small>fontes oficiais + seu desempenho</small></button>
-            <p>O cronograma não copia um plano pronto: ele reorganiza os conteúdos encontrados conforme seus dados.</p>
+            <p>O edital define o que estudar. A estrutura do ciclo define quando estudar, revisar, praticar e simular.</p>
           </div>
         </form>
 
@@ -121,7 +129,7 @@
         </section>
 
         <section class="schedule-section">
-          <div class="section-heading"><div><span>PRÓXIMOS PASSOS</span><h2>Agenda inteligente</h2></div><small>adapta-se ao espaço disponível</small></div>
+          <div class="section-heading"><div><span>CICLO DE PREPARAÇÃO</span><h2>Agenda inteligente</h2></div><small>base → consolidação → reta final</small></div>
           <div id="upcomingSchedule" class="schedule-timeline"></div>
         </section>
 
@@ -133,7 +141,7 @@
           <article class="schedule-section schedule-integration">
             <span>CÓRTEX INTEGRADO</span>
             <h2>Do planejamento à prática</h2>
-            <p>Cada bloco leva diretamente para Aulas, Questões, Flashcards ou Simulado. Seu histórico de questões também influencia a prioridade do próximo cronograma.</p>
+            <p>Cada bloco leva diretamente para Aulas, Questões, Flashcards ou Simulado. Assuntos com mais erros ganham prioridade, e a reta final reduz teoria nova para aumentar revisão e simulados.</p>
             <div><a href="/aulas">Aulas</a><a href="/questoes">Questões</a><a href="/flashcards">Flashcards</a><a href="/simulado">Simulado</a></div>
           </article>
         </section>
@@ -141,7 +149,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/cronograma.js?v=20261006-cronograma1"></script>
+  <script type="module" src="/js/cronograma.js?v=20261006-cronograma2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
