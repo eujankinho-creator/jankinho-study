@@ -3300,11 +3300,11 @@ async function servirArquivo(
             )
             .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
-              "/css/sidebar-standard.css?v=20261006-ui-profile2"
+              "/css/sidebar-standard.css?v=20261006-logo-min1"
             )
             .replace(
               /\/css\/theme-final\.css\?v=[^"']+/g,
-              "/css/theme-final.css?v=20261006-premium1"
+              "/css/theme-final.css?v=20261006-logo-min1"
             )
             .replace(
               /\/js\/cortex-brand\.js\?v=[^"']+/g,
