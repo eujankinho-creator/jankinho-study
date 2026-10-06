@@ -3735,7 +3735,11 @@ html[data-theme="pink-glitter"]
   }
 
   .dashboard-context-strip {
-    display: none;
+    display: flex;
+  }
+
+  .dashboard-weather-card {
+    display: flex;
   }
 }
 /* END CORTEX DASHBOARD PLAN + WEATHER V2 */
