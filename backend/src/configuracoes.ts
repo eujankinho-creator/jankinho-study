@@ -17,33 +17,12 @@ import {
 const TEMAS_PERMITIDOS =
   new Set([
     "dark-orange",
-    "pink-glitter",
-    "blue-black",
-    "black-white",
   ]);
 
 
 function normalizarTema(
-  value: unknown
+  _value: unknown
 ) {
-
-  const tema =
-    String(
-      value ||
-      ""
-    )
-      .trim();
-
-
-  if (
-    TEMAS_PERMITIDOS.has(
-      tema
-    )
-  ) {
-
-    return tema;
-  }
-
 
   return "dark-orange";
 }
@@ -678,30 +657,7 @@ export async function atualizarTema(
 
 
     const tema =
-      String(
-        body.tema ||
-        ""
-      )
-        .trim();
-
-
-    if (
-      !TEMAS_PERMITIDOS.has(
-        tema
-      )
-    ) {
-
-      json(
-        response,
-        400,
-        {
-          error:
-            "Tema invalido.",
-        }
-      );
-
-      return;
-    }
+      "dark-orange";
 
 
     const usuario =
