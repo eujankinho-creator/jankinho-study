@@ -57,7 +57,7 @@ function fmtDate(value){
 function actionForTask(task){
   const tema=encodeURIComponent(task.tema||"");
   if(task.tipo==="TEORIA") return {label:"Abrir aula",href:"/aulas?q="+tema};
-  if(task.tipo==="QUESTOES") return {label:"Praticar",href:"/questoes?tema="+tema};
+  if(task.tipo==="QUESTOES") return {label:"Fazer questões",href:"/questoes?tema="+tema};
   if(task.tipo==="REVISAO") return {label:"Revisar",href:"/flashcards?tema="+tema};
   if(task.tipo==="SIMULADO") return {label:"Simulado",href:"/simulado"};
   return null;
