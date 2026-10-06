@@ -17,42 +17,82 @@ const researchCache = new Map<string, { at: number; items: ResearchItem[] }>();
 
 const OFFICIAL_SEEDS: ResearchItem[] = [
   {
-    title: "Exame Nacional de Residência (Enare) — HU Brasil",
+    title: "ENARE — página oficial do exame",
     url: "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare",
-    snippet: "Página oficial do Enare com edições, editais e informações para residência multiprofissional e uniprofissional.",
+    snippet: "Portal oficial do ENARE com editais, edições e documentos da residência multiprofissional e uniprofissional.",
+    domain: "gov.br",
+    official: true,
+    pdf: false,
+    score: 100,
+  },
+  {
+    title: "ENARE — conteúdo programático de Enfermagem",
+    url: "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2024-2025/anexos-residencia-multi-e-uniprofissional/anexo-iii-cha_enare_24_25_res_mult_uni_v-sgpos-09-07-2024.pdf",
+    snippet: "Anexo oficial com conteúdos de Enfermagem: ética e bioética, processo de enfermagem/SAE, semiologia, fundamentos, biossegurança, CME, controle de infecção, administração e medicamentos.",
+    domain: "gov.br",
+    official: true,
+    pdf: true,
+    score: 99,
+  },
+  {
+    title: "EBSERH / HU Brasil — Área Assistencial",
+    url: "https://www.gov.br/hubrasil/pt-br/acesso-a-informacao/agentes-publicos/concursos-e-selecoes/concursos/2024/editais/editais-area-assistencial",
+    snippet: "Página oficial dos editais da área assistencial do concurso nacional da EBSERH/HU Brasil.",
+    domain: "gov.br",
+    official: true,
+    pdf: false,
+    score: 98,
+  },
+  {
+    title: "EBSERH / HU Brasil — Editais 2026",
+    url: "https://www.gov.br/hubrasil/pt-br/acesso-a-informacao/agentes-publicos/concursos-e-selecoes/concursos/2026/editais",
+    snippet: "Página oficial com editais e atualizações do concurso nacional da rede HU Brasil/EBSERH.",
+    domain: "gov.br",
+    official: true,
+    pdf: false,
+    score: 97,
+  },
+  {
+    title: "Ministério da Saúde — Concursos e Seleções",
+    url: "https://www.gov.br/saude/pt-br/acesso-a-informacao/concursos-e-selecoes",
+    snippet: "Portal oficial do Ministério da Saúde para concursos, seleções, editais, cronogramas e resultados.",
+    domain: "gov.br",
+    official: true,
+    pdf: false,
+    score: 98,
+  },
+  {
+    title: "Ministério da Saúde — CPNU 2025",
+    url: "https://www.gov.br/saude/pt-br/acesso-a-informacao/concursos-e-selecoes/concursos/edital-cpnu-2025",
+    snippet: "Página oficial do concurso unificado com vagas e especialidades relacionadas à saúde e enfermagem.",
     domain: "gov.br",
     official: true,
     pdf: false,
     score: 96,
   },
-  {
-    title: "Inscrever-se no Exame Nacional de Residência — gov.br",
-    url: "https://www.gov.br/pt-br/servicos/inscrever-se-no-exame-nacional-de-residencia-enare-candidato",
-    snippet: "Serviço oficial com acesso aos editais e etapas do Enare.",
-    domain: "gov.br",
-    official: true,
-    pdf: false,
-    score: 94,
-  },
-  {
-    title: "Concursos EBSERH / HU Brasil — Editais",
-    url: "https://www.gov.br/hubrasil/pt-br/acesso-a-informacao/agentes-publicos/concursos-e-selecoes/concursos/2026/editais",
-    snippet: "Página oficial de editais nacionais da rede de hospitais universitários.",
-    domain: "gov.br",
-    official: true,
-    pdf: false,
-    score: 92,
-  },
-  {
-    title: "Residência em Área Profissional da Saúde — Ministério da Saúde",
-    url: "https://www.gov.br/saude/pt-br/composicao/sgtes/residencias-em-saude/residencia-em-area-profissional-da-saude",
-    snippet: "Referência oficial do Ministério da Saúde sobre residências multiprofissionais e uniprofissionais.",
-    domain: "gov.br",
-    official: true,
-    pdf: false,
-    score: 90,
-  }
 ];
+
+const STRUCTURE_REFERENCE_SEEDS: ResearchItem[] = [
+  {
+    title: "EBSERH Enfermagem — ciclo de revisão e simulados",
+    url: "https://www.estrategiaconcursos.com.br/curso/ebserh-enfermagem-passo-estrategico-de-conhecimentos-especificos/",
+    snippet: "Referência de estrutura de estudo com blocos de SUS, legislação, enfermagem, revisões e simulados intercalados.",
+    domain: "estrategiaconcursos.com.br",
+    official: false,
+    pdf: false,
+    score: 58,
+  },
+  {
+    title: "ENARE / Residências — sequência de conteúdos de Enfermagem",
+    url: "https://www.estrategiaconcursos.com.br/curso/ebserh-enare-residencias-multiprofissionais-enfermagem-pacote-202512231114/",
+    snippet: "Referência de sequência pedagógica com legislação, procedimentos, doenças transmissíveis, urgência, saúde do idoso, saúde mental, imunização, epidemiologia, farmacologia, gestão e SAE.",
+    domain: "estrategiaconcursos.com.br",
+    official: false,
+    pdf: false,
+    score: 56,
+  },
+];
+
 const OFFICIAL_DOMAINS = [
   "gov.br",
   "ebserh.gov.br",
@@ -198,15 +238,15 @@ async function searchWeb(query: string) {
   const merged = new Map<string, ResearchItem>();
 
   const normalizedQuery = query.toLowerCase();
-  for (const seed of OFFICIAL_SEEDS) {
+  for (const seed of [...OFFICIAL_SEEDS, ...STRUCTURE_REFERENCE_SEEDS]) {
     const relevant =
       normalizedQuery.includes("enare")
         ? /enare|residência/i.test(seed.title + " " + seed.snippet)
         : normalizedQuery.includes("ebserh")
-          ? /ebserh|concurso/i.test(seed.title + " " + seed.snippet)
-          : /resid|enfermagem/i.test(normalizedQuery)
-            ? /residência|enare|ministério da saúde/i.test(seed.title + " " + seed.snippet)
-            : false;
+          ? /ebserh|hu brasil/i.test(seed.title + " " + seed.snippet)
+          : /minist|cpnu/i.test(normalizedQuery)
+            ? /ministério da saúde|cpnu|sus/i.test(seed.title + " " + seed.snippet)
+            : /enfermagem|saúde/i.test(seed.title + " " + seed.snippet);
     if (relevant) merged.set(seed.url, seed);
   }
 
@@ -219,64 +259,94 @@ async function searchWeb(query: string) {
   }
 
   const items = Array.from(merged.values())
-    .filter((item) => item.official)
-    .sort((a, b) => b.score - a.score)
+    .filter((item) => item.official || item.domain === "estrategiaconcursos.com.br")
+    .sort((a, b) => Number(b.official) - Number(a.official) || b.score - a.score)
     .slice(0, 18);
 
   researchCache.set(key, { at: Date.now(), items });
   return items;
 }
 
-const TEMPLATES: Record<string, Array<{ tema: string; peso: number; tipo?: string }>> = {
-  ENARE: [
-    { tema: "SUS e políticas públicas de saúde", peso: 10 },
-    { tema: "Saúde coletiva e epidemiologia", peso: 9 },
-    { tema: "Fundamentos e processo de enfermagem", peso: 9 },
-    { tema: "Saúde do adulto e do idoso", peso: 9 },
-    { tema: "Urgência e emergência", peso: 8 },
-    { tema: "Saúde da mulher", peso: 8 },
-    { tema: "Saúde da criança e do adolescente", peso: 8 },
-    { tema: "Ética, legislação e segurança do paciente", peso: 7 },
-    { tema: "Farmacologia e cálculo de medicamentos", peso: 7 },
-    { tema: "Controle de infecções e biossegurança", peso: 7 },
-  ],
-  EBSERH: [
-    { tema: "Conhecimentos específicos de enfermagem", peso: 10 },
-    { tema: "SUS e legislação em saúde", peso: 9 },
-    { tema: "Legislação e regimento EBSERH", peso: 9 },
-    { tema: "Segurança do paciente", peso: 8 },
-    { tema: "Urgência e emergência", peso: 8 },
-    { tema: "Português e interpretação de texto", peso: 6 },
-    { tema: "Ética e legislação profissional", peso: 7 },
-    { tema: "Controle de infecções", peso: 7 },
-  ],
-  RESIDENCIA: [
-    { tema: "SUS e saúde coletiva", peso: 9 },
-    { tema: "Processo de enfermagem e SAE", peso: 9 },
-    { tema: "Semiologia e semiotécnica", peso: 9 },
-    { tema: "Saúde do adulto", peso: 8 },
-    { tema: "Urgência e emergência", peso: 8 },
-    { tema: "Saúde da mulher", peso: 7 },
-    { tema: "Saúde da criança", peso: 7 },
-    { tema: "Ética e legislação", peso: 6 },
-  ],
-  CONCURSO: [
-    { tema: "Conhecimentos específicos de enfermagem", peso: 10 },
-    { tema: "SUS e políticas de saúde", peso: 9 },
-    { tema: "Português", peso: 6 },
-    { tema: "Ética e legislação profissional", peso: 7 },
-    { tema: "Saúde coletiva", peso: 8 },
-    { tema: "Urgência e emergência", peso: 8 },
-    { tema: "Segurança do paciente e controle de infecção", peso: 7 },
-  ],
+type TopicTemplate = {
+  tema: string;
+  peso: number;
+  grupo: string;
 };
 
-function inferKind(prova: string) {
+const EXAM_BLUEPRINTS: Record<string, { label: string; foco: string; topics: TopicTemplate[] }> = {
+  ENARE: {
+    label: "ENARE — Enfermagem",
+    foco: "Residência multiprofissional/uniprofissional com base no conteúdo oficial de Enfermagem e revisão por ciclos.",
+    topics: [
+      { tema: "Processo de Enfermagem, SAE, NANDA e NIC", peso: 10, grupo: "núcleo específico" },
+      { tema: "SUS, políticas públicas e saúde coletiva", peso: 10, grupo: "núcleo comum" },
+      { tema: "Semiologia e semiotécnica adulta e pediátrica", peso: 9, grupo: "núcleo específico" },
+      { tema: "Fundamentos de Enfermagem e procedimentos", peso: 9, grupo: "núcleo específico" },
+      { tema: "Saúde do adulto e do idoso", peso: 9, grupo: "assistência" },
+      { tema: "Urgência, emergência e paciente crítico", peso: 9, grupo: "assistência" },
+      { tema: "Saúde da mulher", peso: 8, grupo: "assistência" },
+      { tema: "Saúde da criança e do adolescente", peso: 8, grupo: "assistência" },
+      { tema: "Epidemiologia, vigilância e imunização", peso: 8, grupo: "saúde coletiva" },
+      { tema: "Segurança do paciente, biossegurança e IRAS", peso: 8, grupo: "qualidade" },
+      { tema: "Farmacologia e cálculo de medicamentos", peso: 8, grupo: "núcleo específico" },
+      { tema: "Ética, bioética e legislação profissional", peso: 7, grupo: "legislação" },
+      { tema: "Central de Material e Esterilização", peso: 7, grupo: "assistência" },
+      { tema: "Administração e gestão em Enfermagem", peso: 6, grupo: "gestão" },
+      { tema: "Saúde mental e atenção psicossocial", peso: 6, grupo: "assistência" },
+    ],
+  },
+  EBSERH: {
+    label: "EBSERH — Enfermagem",
+    foco: "Concurso hospitalar com forte peso em conhecimentos específicos, SUS/políticas públicas, legislação EBSERH e Português.",
+    topics: [
+      { tema: "Conhecimentos específicos de Enfermagem", peso: 10, grupo: "específicos" },
+      { tema: "SUS: Leis 8.080/90, 8.142/90 e Decreto 7.508/11", peso: 10, grupo: "SUS" },
+      { tema: "Segurança do paciente e qualidade assistencial", peso: 9, grupo: "específicos" },
+      { tema: "Urgência, emergência e terapia intensiva", peso: 9, grupo: "específicos" },
+      { tema: "Controle de infecção, biossegurança e precauções", peso: 9, grupo: "específicos" },
+      { tema: "Saúde da mulher, criança, adulto e idoso", peso: 8, grupo: "específicos" },
+      { tema: "Processo de Enfermagem, SAE e legislação profissional", peso: 8, grupo: "específicos" },
+      { tema: "Legislação EBSERH: Lei 12.550/2011 e normas institucionais", peso: 8, grupo: "EBSERH" },
+      { tema: "Políticas públicas, vigilância e redes de atenção", peso: 8, grupo: "SUS" },
+      { tema: "Português e interpretação de textos", peso: 7, grupo: "básicos" },
+      { tema: "Farmacologia, medicamentos e cálculo", peso: 7, grupo: "específicos" },
+      { tema: "CME, centro cirúrgico e processamento de materiais", peso: 7, grupo: "específicos" },
+      { tema: "Gestão em saúde e administração de Enfermagem", peso: 6, grupo: "gestão" },
+      { tema: "Ética, bioética e Código de Ética", peso: 6, grupo: "legislação" },
+    ],
+  },
+  MINISTERIO_SAUDE: {
+    label: "Ministério da Saúde — Enfermagem/Saúde",
+    foco: "Concursos e seleções do Ministério da Saúde, com prioridade para SUS, políticas públicas, vigilância, epidemiologia e conhecimentos profissionais.",
+    topics: [
+      { tema: "SUS: princípios, diretrizes e legislação estruturante", peso: 10, grupo: "SUS" },
+      { tema: "Políticas públicas de saúde e Reforma Sanitária", peso: 10, grupo: "SUS" },
+      { tema: "Atenção Primária, PNAB e Estratégia Saúde da Família", peso: 9, grupo: "atenção à saúde" },
+      { tema: "Epidemiologia, vigilância em saúde e sistemas de informação", peso: 9, grupo: "saúde coletiva" },
+      { tema: "Redes de Atenção à Saúde e organização do cuidado", peso: 9, grupo: "SUS" },
+      { tema: "Conhecimentos específicos de Enfermagem", peso: 9, grupo: "específicos" },
+      { tema: "Fundamentos, processo de Enfermagem e SAE", peso: 8, grupo: "específicos" },
+      { tema: "Urgência, emergência e cuidados ao paciente crítico", peso: 8, grupo: "específicos" },
+      { tema: "Saúde da mulher, criança, adulto e idoso", peso: 8, grupo: "assistência" },
+      { tema: "Segurança do paciente, biossegurança e controle de infecção", peso: 8, grupo: "qualidade" },
+      { tema: "Ética, bioética e legislação profissional", peso: 7, grupo: "legislação" },
+      { tema: "Farmacologia e cálculo de medicamentos", peso: 7, grupo: "específicos" },
+      { tema: "Português e interpretação de textos", peso: 6, grupo: "básicos" },
+      { tema: "Gestão, planejamento e educação em saúde", peso: 6, grupo: "gestão" },
+    ],
+  },
+};
+
+function inferKind(prova: string, explicit?: unknown) {
+  const requested = text(explicit, 40).toUpperCase();
+  if (requested === "ENARE" || requested === "EBSERH" || requested === "MINISTERIO_SAUDE") {
+    return requested;
+  }
   const normalized = prova.toUpperCase();
-  if (normalized.includes("ENARE") || normalized.includes("ENAMED")) return "ENARE";
-  if (normalized.includes("EBSERH")) return "EBSERH";
-  if (normalized.includes("RESID")) return "RESIDENCIA";
-  return "CONCURSO";
+  if (normalized.includes("ENARE")) return "ENARE";
+  if (normalized.includes("EBSERH") || normalized.includes("HU BRASIL")) return "EBSERH";
+  if (normalized.includes("MINIST") || normalized.includes("CPNU")) return "MINISTERIO_SAUDE";
+  return "ENARE";
 }
 
 function extractSourceTerms(items: ResearchItem[]) {
@@ -297,6 +367,17 @@ function extractSourceTerms(items: ResearchItem[]) {
     "controle de infecção",
     "português",
     "EBSERH",
+    "processo de enfermagem",
+    "SAE",
+    "semiologia",
+    "biossegurança",
+    "CME",
+    "vigilância",
+    "imunização",
+    "atenção primária",
+    "PNAB",
+    "redes de atenção",
+    "saúde mental",
   ];
   for (const item of items) {
     const haystack = (item.title + " " + item.snippet).toLowerCase();
@@ -359,16 +440,17 @@ function planTopics(
   sources: ResearchItem[],
   dificuldades: string[],
   prioridades: string[],
-  weakness: Awaited<ReturnType<typeof userWeakness>>
+  weakness: Awaited<ReturnType<typeof userWeakness>>,
+  explicitKind?: unknown
 ) {
-  const kind = inferKind(prova);
+  const kind = inferKind(prova, explicitKind);
   const sourceTerms = extractSourceTerms(sources);
-  const base = (TEMPLATES[kind] || TEMPLATES.CONCURSO).map((item) => ({ ...item }));
+  const blueprint = EXAM_BLUEPRINTS[kind] || EXAM_BLUEPRINTS.ENARE;
+  const base = blueprint.topics.map((item) => ({ ...item }));
 
   for (const [term, count] of sourceTerms) {
     const found = base.find((item) => similarity(item.tema, term) > 0);
-    if (found) found.peso += Math.min(4, count);
-    else base.push({ tema: term, peso: 6 + Math.min(3, count) });
+    if (found) found.peso += Math.min(3, count);
   }
 
   return base
@@ -377,8 +459,8 @@ function planTopics(
       if (prioridades.some((term) => similarity(item.tema, term) > 0)) score += 5;
       if (dificuldades.some((term) => similarity(item.tema, term) > 0)) score += 4;
       const weak = weakness.find((row) => similarity(item.tema, row.tema) > 0);
-      if (weak) score += Math.round(weak.erro * 6);
-      return { tema: item.tema, score };
+      if (weak) score += Math.round(weak.erro * 7);
+      return { tema: item.tema, score, grupo: item.grupo };
     })
     .sort((a, b) => b.score - a.score);
 }
@@ -392,16 +474,21 @@ function isoDay(date: Date) {
   return date.toISOString().slice(0, 10);
 }
 
-function generateTasks(input: any, topics: Array<{ tema: string; score: number }>) {
+function generateTasks(
+  input: any,
+  topics: Array<{ tema: string; score: number; grupo?: string }>
+) {
   const hoursPerDay = clamp(input.horasPorDia, 0.5, 12);
   const daysPerWeek = Math.round(clamp(input.diasPorSemana, 1, 7));
   const examDateRaw = text(input.dataProva, 30);
   const now = new Date();
   const defaultEnd = new Date(now);
-  defaultEnd.setDate(defaultEnd.getDate() + 56);
+  defaultEnd.setDate(defaultEnd.getDate() + 84);
   const examDate = examDateRaw ? new Date(examDateRaw + "T12:00:00") : defaultEnd;
-  const maxDays = 180;
-  const totalDays = Math.max(7, Math.min(maxDays, Math.ceil((examDate.getTime() - now.getTime()) / 86400000)));
+  const totalDays = Math.max(
+    14,
+    Math.min(240, Math.ceil((examDate.getTime() - now.getTime()) / 86400000))
+  );
 
   const studyWeekdays = new Set<number>();
   for (let i = 0; i < daysPerWeek; i += 1) studyWeekdays.add((1 + i) % 7);
@@ -409,8 +496,15 @@ function generateTasks(input: any, topics: Array<{ tema: string; score: number }
   const tasks: Array<any> = [];
   const minutesPerDay = Math.round(hoursPerDay * 60);
   const slotsPerDay = Math.max(2, Math.min(5, Math.round(minutesPerDay / 45)));
+  const finalWindow = Math.min(28, Math.max(14, Math.round(totalDays * 0.2)));
+  const consolidationStart = Math.round(totalDays * 0.5);
+  const recentTopics: string[] = [];
   let topicCursor = 0;
   let studyIndex = 0;
+
+  const pickTopic = (offset = 0) =>
+    topics[(topicCursor + offset) % Math.max(1, topics.length)] ||
+    { tema: "SUS e conhecimentos de Enfermagem", score: 1, grupo: "geral" };
 
   for (let dayOffset = 0; dayOffset <= totalDays; dayOffset += 1) {
     const date = new Date(now);
@@ -422,7 +516,7 @@ function generateTasks(input: any, topics: Array<{ tema: string; score: number }
         tasks.push({
           data: isoDay(date),
           tipo: "DESCANSO",
-          titulo: "Descanso e recuperação",
+          titulo: "Descanso programado",
           tema: null,
           duracaoMinutos: 0,
           metaValor: 0,
@@ -433,37 +527,94 @@ function generateTasks(input: any, topics: Array<{ tema: string; score: number }
     }
 
     studyIndex += 1;
-    const isReviewDay = studyIndex % 4 === 0;
-    const isSimulationDay = studyIndex % 10 === 0;
+    const daysLeft = Math.max(0, totalDays - dayOffset);
+    const phase =
+      daysLeft <= finalWindow ? "RETA_FINAL" :
+      dayOffset >= consolidationStart ? "CONSOLIDACAO" :
+      "BASE";
+
+    const dailyMinutes = Math.max(30, minutesPerDay);
+    const slotDuration = Math.max(20, Math.floor(dailyMinutes / slotsPerDay));
+    const isWeeklySimulation = studyIndex % Math.max(5, daysPerWeek) === 0;
+    const isFullSimulation =
+      phase === "RETA_FINAL" && studyIndex % Math.max(3, Math.ceil(daysPerWeek / 2)) === 0;
+
+    const dayTasks: Array<any> = [];
 
     for (let slot = 0; slot < slotsPerDay; slot += 1) {
-      const topic = topics[topicCursor % Math.max(1, topics.length)] || { tema: "Conhecimentos específicos de enfermagem", score: 1 };
-      topicCursor += slot === slotsPerDay - 1 ? 0 : 1;
+      let tipo = "TEORIA";
+      let titulo = "Estudo teórico orientado";
+      let topic = pickTopic(slot);
 
-      let tipo = slot === 0 ? "TEORIA" : slot === 1 ? "QUESTOES" : "REVISAO";
-      if (isReviewDay && slot === 0) tipo = "REVISAO";
-      if (isSimulationDay && slot === slotsPerDay - 1) tipo = "SIMULADO";
+      if (phase === "BASE") {
+        if (slot === 1) {
+          tipo = "QUESTOES";
+          titulo = "Questões do assunto estudado";
+        } else if (slot >= 2) {
+          tipo = "REVISAO";
+          titulo = "Revisão 24h / 7 dias";
+          const reviewTopic = recentTopics[Math.max(0, recentTopics.length - 2 - slot)] || topic.tema;
+          topic = { ...topic, tema: reviewTopic };
+        }
+      } else if (phase === "CONSOLIDACAO") {
+        if (slot === 0) {
+          tipo = "QUESTOES";
+          titulo = "Bloco dirigido de questões";
+        } else if (slot === 1) {
+          tipo = "REVISAO";
+          titulo = "Revisão por erros e pontos fracos";
+        } else if (slot === slotsPerDay - 1 && isWeeklySimulation) {
+          tipo = "SIMULADO";
+          titulo = "Mini simulado temático";
+        } else {
+          tipo = slot % 2 === 0 ? "TEORIA" : "QUESTOES";
+          titulo = tipo === "TEORIA" ? "Teoria de reforço" : "Questões de consolidação";
+        }
+      } else {
+        if (isFullSimulation && slot === 0) {
+          tipo = "SIMULADO";
+          titulo = "Simulado de reta final";
+        } else if (slot === 0) {
+          tipo = "QUESTOES";
+          titulo = "Questões de alta incidência";
+        } else {
+          tipo = "REVISAO";
+          titulo = slot === 1 ? "Caderno de erros" : "Revisão rápida de alta prioridade";
+        }
+      }
 
-      const duration = Math.max(20, Math.floor(minutesPerDay / slotsPerDay));
-      tasks.push({
+      const duration =
+        tipo === "SIMULADO"
+          ? Math.max(60, slotDuration)
+          : slotDuration;
+
+      dayTasks.push({
         data: isoDay(date),
         tipo,
-        titulo:
-          tipo === "QUESTOES" ? "Praticar questões" :
-          tipo === "REVISAO" ? "Revisão espaçada" :
-          tipo === "SIMULADO" ? "Bloco de simulado" :
-          "Estudo teórico",
+        titulo,
         tema: topic.tema,
-        duracaoMinutos: tipo === "SIMULADO" ? Math.max(45, duration) : duration,
-        metaValor: tipo === "QUESTOES" ? Math.max(10, Math.round(duration / 2)) : tipo === "SIMULADO" ? 20 : duration,
+        duracaoMinutos: duration,
+        metaValor:
+          tipo === "QUESTOES"
+            ? Math.max(12, Math.round(duration / 2))
+            : tipo === "SIMULADO"
+              ? (phase === "RETA_FINAL" ? 50 : 25)
+              : duration,
         ordem: slot + 1,
+        fase: phase,
       });
     }
 
-    topicCursor += 1;
+    tasks.push(...dayTasks);
+
+    const primaryTopic = pickTopic(0).tema;
+    recentTopics.push(primaryTopic);
+    if (recentTopics.length > 24) recentTopics.shift();
+
+    topicCursor += phase === "BASE" ? Math.max(1, slotsPerDay - 1) : 1;
   }
 
-  return tasks.slice(0, 620);
+  return tasks.slice(0, 760);
 }
 
 async function research(url: URL): Promise<ApiResult> {
@@ -475,7 +626,7 @@ async function research(url: URL): Promise<ApiResult> {
     data: {
       query,
       items,
-      policy: "Fontes oficiais e institucionais priorizadas automaticamente.",
+      policy: "Editais e portais oficiais definem o conteúdo; referências especializadas servem apenas para organizar ciclos, revisões e simulados.",
     },
   };
 }
@@ -630,7 +781,9 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
   const dificuldades = Array.isArray(body.dificuldades) ? body.dificuldades.map((x: unknown) => text(x, 120)).filter(Boolean) : [];
   const prioridades = Array.isArray(body.prioridades) ? body.prioridades.map((x: unknown) => text(x, 120)).filter(Boolean) : [];
   const weakness = await userWeakness(usuarioId);
-  const topics = planTopics(prova, sourceItems, dificuldades, prioridades, weakness);
+  const kind = inferKind(prova, body.tipoProva);
+  const blueprint = EXAM_BLUEPRINTS[kind] || EXAM_BLUEPRINTS.ENARE;
+  const topics = planTopics(prova, sourceItems, dificuldades, prioridades, weakness, kind);
   const tasks = generateTasks(body, topics);
 
   await prisma.cronogramaEstudo.updateMany({
@@ -642,7 +795,7 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
     data: {
       usuarioId,
       prova,
-      tipoProva: inferKind(prova),
+      tipoProva: kind,
       dataProva: body.dataProva ? new Date(String(body.dataProva) + "T12:00:00") : null,
       horasPorDia: clamp(body.horasPorDia, 0.5, 12),
       diasPorSemana: Math.round(clamp(body.diasPorSemana, 1, 7)),
@@ -650,7 +803,11 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
       dificuldades,
       prioridades,
       estrategia: {
-        algoritmo: "peso + incidência + dificuldade + histórico + proximidade",
+        algoritmo: "matriz da prova + fontes oficiais + incidência + dificuldade + histórico + proximidade",
+        provaBase: blueprint.label,
+        foco: blueprint.foco,
+        fases: ["BASE", "CONSOLIDACAO", "RETA_FINAL"],
+        revisoes: ["24h", "7 dias", "21 dias / caderno de erros"],
         temas: topics.slice(0, 20),
         fraquezasDetectadas: weakness,
       },
@@ -680,7 +837,16 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
     include: { fontes: true },
   });
 
-  return { status: 201, data: { scheduleId: schedule.id, topics: topics.slice(0, 16), sources: schedule.fontes } };
+  return {
+    status: 201,
+    data: {
+      scheduleId: schedule.id,
+      tipoProva: kind,
+      blueprint: { label: blueprint.label, foco: blueprint.foco },
+      topics: topics.slice(0, 16),
+      sources: schedule.fontes,
+    },
+  };
 }
 
 async function updateTask(usuarioId: number, request: IncomingMessage): Promise<ApiResult> {
