@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261006-ui-profile2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma4">
+  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma5">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261006-ui-profile2"></script>
@@ -51,29 +51,16 @@
     </header>
 
     <main class="schedule-page">
-      <section class="schedule-hero">
-        <div>
-          <span class="schedule-kicker">ENARE · EBSERH · MINISTÉRIO DA SAÚDE</span>
-          <h1>Um plano de estudo feito para <em>provas reais da saúde.</em></h1>
-          <p>O Córtex usa editais e portais oficiais para definir o conteúdo e referências estruturadas de preparação para organizar ciclos, revisões, questões e simulados. Seu histórico de erros altera automaticamente a prioridade dos temas.</p>
-        </div>
-        <div class="schedule-hero-badges">
-          <span>Edital oficial como fonte principal</span>
-          <span>Ciclos Base → Consolidação → Reta final</span>
-          <span>Integração com Aulas, Questões e Simulados</span>
-        </div>
+      <section id="scheduleIntro" class="schedule-intro">
+        <span class="schedule-kicker">CRONOGRAMA</span>
+        <h1>Qual prova você está preparando?</h1>
+        <p>Escolha o objetivo. O restante do planejamento aparece somente depois.</p>
       </section>
 
-      <section id="scheduleEmpty" class="schedule-builder">
-        <div class="schedule-builder-head">
-          <div><span>NOVO PLANO</span><h2>Monte seu cronograma</h2></div>
-          <small>Exclusivo para ENARE · EBSERH · Ministério da Saúde</small>
-        </div>
-
+      <section id="scheduleEmpty" class="schedule-builder schedule-builder-compact">
         <form id="scheduleForm" class="schedule-form">
           <fieldset class="exam-choice wide">
-            <legend>Escolha seu objetivo</legend>
-            <p>Cada usuário começa sem objetivo definido e escolhe o plano que deseja seguir.</p>
+            <legend>Escolha seu plano</legend>
             <div class="exam-choice-grid">
               <label class="exam-choice-card">
                 <input type="radio" name="examType" value="ENARE" required>
@@ -81,7 +68,7 @@
               </label>
               <label class="exam-choice-card">
                 <input type="radio" name="examType" value="EBSERH" required>
-                <span><b>EBSERH</b><small>Concurso hospitalar da rede HU Brasil</small></span>
+                <span><b>EBSERH</b><small>Enfermeiro · rede HU Brasil</small></span>
               </label>
               <label class="exam-choice-card">
                 <input type="radio" name="examType" value="MINISTERIO_SAUDE" required>
@@ -89,24 +76,35 @@
               </label>
             </div>
           </fieldset>
-          <label class="wide"><span>Edição / observação</span><input id="examEdition" type="text" maxlength="80" placeholder="Ex.: 2027, CPNU, Área Assistencial"></label>
-          <div id="examBlueprint" class="exam-blueprint wide" aria-live="polite"></div>
-          <label><span>Data da prova</span><input id="examDate" type="date"></label>
-          <label><span>Horas por dia</span><input id="hoursPerDay" type="number" min="0.5" max="12" step="0.5" value="2"></label>
-          <label><span>Dias por semana</span><input id="daysPerWeek" type="number" min="1" max="7" value="6"></label>
-          <label><span>Nível atual</span>
-            <select id="knowledgeLevel">
-              <option value="INICIANTE">Iniciante</option>
-              <option value="INTERMEDIARIO" selected>Intermediário</option>
-              <option value="AVANCADO">Avançado</option>
-            </select>
-          </label>
-          <label class="wide"><span>Maiores dificuldades</span><input id="difficulties" type="text" placeholder="Ex.: SUS, urgência, farmacologia"></label>
-          <label class="wide"><span>Prioridades</span><input id="priorities" type="text" placeholder="Ex.: saúde coletiva, cálculo de medicamentos"></label>
 
-          <div class="schedule-form-actions wide">
-            <button id="buildScheduleButton" type="submit"><b>Montar cronograma</b><small>matriz da prova + seu desempenho</small></button>
-            <p>O Córtex usa a matriz da prova, suas dificuldades e seu desempenho para montar o plano automaticamente.</p>
+          <div id="planSetup" class="plan-setup wide" hidden>
+            <div class="plan-setup-head">
+              <div><span>CONFIGURAR PLANO</span><h2 id="selectedPlanTitle">Seu cronograma</h2></div>
+              <button id="changePlanButton" type="button">Trocar prova</button>
+            </div>
+
+            <div id="examBlueprint" class="exam-blueprint" aria-live="polite"></div>
+
+            <div class="plan-fields">
+              <label class="wide"><span>Edição / observação</span><input id="examEdition" type="text" maxlength="80" placeholder="Ex.: 2027, Área Assistencial, CPNU"></label>
+              <label><span>Data da prova</span><input id="examDate" type="date"></label>
+              <label><span>Horas por dia</span><input id="hoursPerDay" type="number" min="0.5" max="12" step="0.5" value="2"></label>
+              <label><span>Dias por semana</span><input id="daysPerWeek" type="number" min="1" max="7" value="6"></label>
+              <label><span>Nível atual</span>
+                <select id="knowledgeLevel">
+                  <option value="INICIANTE">Iniciante</option>
+                  <option value="INTERMEDIARIO" selected>Intermediário</option>
+                  <option value="AVANCADO">Avançado</option>
+                </select>
+              </label>
+              <label class="wide"><span>Maiores dificuldades</span><input id="difficulties" type="text" placeholder="Ex.: SUS, urgência, farmacologia"></label>
+              <label class="wide"><span>Prioridades</span><input id="priorities" type="text" placeholder="Ex.: saúde coletiva, cálculo de medicamentos"></label>
+            </div>
+
+            <div class="schedule-form-actions">
+              <button id="buildScheduleButton" type="submit"><b>Montar meu cronograma</b><small>dias + assuntos + revisões + questões + metas</small></button>
+              <p>O plano usa a matriz da prova, os cronogramas de referência enviados e seu histórico de questões.</p>
+            </div>
           </div>
         </form>
 
@@ -133,8 +131,18 @@
           </article>
         </div>
 
+        <section class="schedule-section schedule-today-section">
+          <div class="section-heading"><div><span>FOCO DO DIA</span><h2>Hoje</h2></div><small id="todayDateLabel"></small></div>
+          <div id="todayTasks" class="task-grid"></div>
+        </section>
+
+        <section class="schedule-section">
+          <div class="section-heading"><div><span>PLANEJAMENTO</span><h2>Próximos dias</h2></div><small>estudo → questões → revisão → simulado</small></div>
+          <div id="upcomingSchedule" class="schedule-timeline"></div>
+        </section>
+
         <section id="scheduleStrategy" class="schedule-section schedule-strategy">
-          <div class="section-heading"><div><span>ESTRATÉGIA DA PROVA</span><h2 id="strategyTitle">Plano inteligente</h2></div><small>edital + desempenho + proximidade</small></div>
+          <div class="section-heading"><div><span>ESTRATÉGIA</span><h2 id="strategyTitle">Plano inteligente</h2></div><small>matriz + desempenho + proximidade</small></div>
           <p id="strategyFocus"></p>
           <div id="strategyReference" class="strategy-reference"></div>
           <div id="strategyPhases" class="strategy-chips"></div>
@@ -142,25 +150,15 @@
           <div id="strategyWeakness" class="strategy-weakness"></div>
         </section>
 
-        <section class="schedule-section">
-          <div class="section-heading"><div><span>FOCO DO DIA</span><h2>Hoje</h2></div><small id="todayDateLabel"></small></div>
-          <div id="todayTasks" class="task-grid"></div>
-        </section>
-
-        <section class="schedule-section">
-          <div class="section-heading"><div><span>CICLO DE PREPARAÇÃO</span><h2>Agenda inteligente</h2></div><small>base → consolidação → reta final</small></div>
-          <div id="upcomingSchedule" class="schedule-timeline"></div>
-        </section>
-
         <section class="schedule-split">
           <article class="schedule-section">
-            <div class="section-heading"><div><span>BASE DO PLANO</span><h2>Fontes usadas pelo plano</h2></div></div>
+            <div class="section-heading"><div><span>REFERÊNCIAS</span><h2>Base usada no plano</h2></div></div>
             <div id="activeSources" class="active-sources"></div>
           </article>
           <article class="schedule-section schedule-integration">
             <span>CÓRTEX INTEGRADO</span>
-            <h2>Do planejamento à prática</h2>
-            <p>Cada bloco leva diretamente para Aulas, Questões, Flashcards ou Simulado. Assuntos com mais erros ganham prioridade, e a reta final reduz teoria nova para aumentar revisão e simulados.</p>
+            <h2>Estude direto do cronograma</h2>
+            <p><b>Abrir aula</b> envia o nome exato do assunto para a busca de videoaulas. <b>Fazer questões</b> abre o banco já filtrado pelo mesmo tema.</p>
             <div><a href="/aulas">Aulas</a><a href="/questoes">Questões</a><a href="/flashcards">Flashcards</a><a href="/simulado">Simulado</a></div>
           </article>
         </section>
@@ -168,7 +166,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/cronograma.js?v=20261006-cronograma4"></script>
-  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+  <script type="module" src="/js/cronograma.js?v=20261006-cronograma5"></script>
+  <script src="/js/cortex-brand.js?v=20261006-darkthemes1"></script>
 </body>
 </html>
