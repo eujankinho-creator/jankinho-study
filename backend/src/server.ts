@@ -3296,11 +3296,23 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261006-cronograma-smart1"
+              "/js/sidebar-standard.js?v=20261006-ui-profile2"
             )
             .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
-              "/css/sidebar-standard.css?v=20261006-cronograma-smart1"
+              "/css/sidebar-standard.css?v=20261006-ui-profile2"
+            )
+            .replace(
+              /\/css\/theme-final\.css\?v=[^"']+/g,
+              "/css/theme-final.css?v=20261006-ui-profile2"
+            )
+            .replace(
+              /\/js\/cortex-brand\.js\?v=[^"']+/g,
+              "/js/cortex-brand.js?v=20261006-ui-profile2"
+            )
+            .replace(
+              /\/js\/configuracoes\.js\?v=[^"']+/g,
+              "/js/configuracoes.js?v=20261006-ui-profile2"
             );
 
         content =
