@@ -2457,73 +2457,7 @@ input[type="range"] {
 
 
 
-/* =========================================================
-   CORTEX BRUSH CURSOR V1
-========================================================= */
-
-.board-stage{
-  position:relative;
-}
-
-.cortex-brush-cursor{
-  position:absolute;
-  z-index:28;
-  left:0;
-  top:0;
-  width:8px;
-  height:8px;
-  border:1px solid rgba(255,255,255,.92);
-  border-radius:50%;
-  background:rgba(249,115,22,.18);
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  opacity:0;
-  box-sizing:border-box;
-  transition:
-    width .05s linear,
-    height .05s linear,
-    opacity .08s ease,
-    border-color .08s ease,
-    background-color .08s ease;
-  mix-blend-mode:normal;
-}
-
-.cortex-brush-cursor.visible{
-  opacity:1;
-}
-
-.cortex-brush-cursor[data-tool="highlighter"]{
-  border-color:rgba(255,255,255,.72);
-}
-
-.cortex-brush-cursor[data-tool="eraser"]{
-  border:1px dashed rgba(255,255,255,.92);
-  background:rgba(255,255,255,.08)!important;
-}
-
-.board-stage[data-tool="select"] .cortex-brush-cursor,
-.board-stage[data-tool="hand"] .cortex-brush-cursor,
-.board-stage[data-tool="text"] .cortex-brush-cursor{
-  display:none!important;
-}
-
-@media(pointer:coarse){
-  .cortex-brush-cursor{
-    transition:none;
-  }
-}
-
-/* CORTEX BRUSH CURSOR V1 END */
 
 
-/* CORTEX BRUSH NATIVE CURSOR HIDE V1 */
-.board-stage[data-tool="pen"] #boardCanvas,
-.board-stage[data-tool="highlighter"] #boardCanvas,
-.board-stage[data-tool="eraser"] #boardCanvas,
-.board-stage[data-tool="line"] #boardCanvas,
-.board-stage[data-tool="arrow"] #boardCanvas,
-.board-stage[data-tool="rect"] #boardCanvas,
-.board-stage[data-tool="circle"] #boardCanvas{
-  cursor:none!important;
-}
-/* CORTEX BRUSH NATIVE CURSOR HIDE V1 END */
+
+
