@@ -98,7 +98,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/dashboard-premium.css?v=20261006-plan-dashboard1"
+    href="/css/dashboard-premium.css?v=20261006-plan-weather2"
   >
   <link
     rel="stylesheet"
@@ -601,15 +601,29 @@
 
 
     <header class="header">
-      <div class="header-copy">
+      <div class="header-copy dashboard-header-copy">
 
         <div class="header-title">
           Dashboard
         </div>
 
-        <span id="dashboardDate">
-          Cortex
-        </span>
+        <div class="dashboard-context-strip">
+          <div class="dashboard-date-card" aria-label="Data atual">
+            <span id="dashboardWeekday">Hoje</span>
+            <strong id="dashboardDate">--</strong>
+          </div>
+
+          <div id="dashboardWeather" class="dashboard-weather-card" aria-live="polite">
+            <span class="dashboard-weather-icon" id="dashboardWeatherIcon">·</span>
+            <div>
+              <strong id="dashboardWeatherTemp">Clima</strong>
+              <span id="dashboardWeatherText">Usar localização atual</span>
+            </div>
+            <button id="dashboardWeatherRetry" class="dashboard-weather-retry hidden" type="button">
+              Ativar
+            </button>
+          </div>
+        </div>
 
       </div>
 
@@ -1560,7 +1574,7 @@
   </script>
 
 <script defer src="/js/dashboard-ui.js?v=20261002-fluid-final4"></script>
-  <script defer src="/js/dashboard.js?v=20261006-plan-dashboard1"></script>
+  <script defer src="/js/dashboard.js?v=20261006-plan-weather2"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 
 
