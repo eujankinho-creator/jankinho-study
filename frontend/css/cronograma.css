@@ -100,3 +100,15 @@
   .task-actions a,.task-actions button,.overview-head button,.schedule-form-actions button{min-height:44px}
 }
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.exam-blueprint{display:grid;gap:10px;padding:13px;border:1px solid var(--sc-line);border-radius:12px;background:linear-gradient(145deg,color-mix(in srgb,var(--sc-accent) 7%,var(--sc-soft)),var(--sc-soft))}
+.exam-blueprint>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.exam-blueprint>div:first-child span{color:var(--sc-accent2);font-size:7px;font-weight:950;letter-spacing:.12em}
+.exam-blueprint>div:first-child strong{font-size:9px;text-align:right}
+.exam-topic-list{display:flex;flex-wrap:wrap;gap:6px}
+.exam-topic-list span{padding:6px 8px;border:1px solid var(--sc-line);border-radius:999px;background:var(--sc-soft);color:var(--theme-text-soft);font-size:7px;font-weight:800}
+.source-badge.reference{background:color-mix(in srgb,var(--theme-text-muted,#888) 12%,transparent);color:var(--theme-text-muted,#aaa)!important}
+@media(max-width:640px){
+  .exam-blueprint>div:first-child{align-items:flex-start;flex-direction:column}
+  .exam-blueprint>div:first-child strong{text-align:left}
+}
