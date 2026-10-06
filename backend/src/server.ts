@@ -37,6 +37,7 @@ import { listarCasos, gerarCasoClinico } from "./casos";
 import { sincronizarCasosFaculdade } from "./casosFaculdade";
 import { listarFlashcards, criarFlashcard } from "./flashcards";
 import { atenderAulas } from "./aulas";
+import { atenderCronograma } from "./cronograma";
 import { limparFlashcardsParaMetodologia } from "./flashcardsMetodologia";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
@@ -3295,11 +3296,11 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261005-aulas1"
+              "/js/sidebar-standard.js?v=20261006-cronograma-only1"
             )
             .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
-              "/css/sidebar-standard.css?v=20261005-logo-global1"
+              "/css/sidebar-standard.css?v=20261006-cronograma-only1"
             );
 
         content =
@@ -3853,6 +3854,32 @@ const server =
           }
 
           await atenderAulas(
+            request,
+            response,
+            url,
+            usuarioId
+          );
+
+          return;
+        }
+
+
+        /* CRONOGRAMA DE ESTUDOS */
+
+        if (
+          caminho.startsWith("/api/cronograma/")
+        ) {
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          await atenderCronograma(
             request,
             response,
             url,
@@ -4871,6 +4898,7 @@ const server =
             "/desempenho",
             "/ranking",
             "/configuracoes",
+            "/cronograma",
           ]);
 
 
@@ -5206,6 +5234,19 @@ const server =
           redirect(
             response,
             "/aulas.html"
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/cronograma" &&
+          metodo === "GET"
+        ) {
+          redirect(
+            response,
+            "/cronograma.html"
           );
 
           return;
