@@ -2886,6 +2886,95 @@
       ].accessory;
 
 
+    function syncColorButtons() {
+
+      document
+        .querySelectorAll("[data-pet-custom-color]")
+        .forEach(function (button) {
+
+          const active =
+            button.dataset.petCustomColor ===
+            (profile.color || "theme");
+
+
+          button.classList.toggle(
+            "selected",
+            active
+          );
+
+
+          button.setAttribute(
+            "aria-pressed",
+            active ? "true" : "false"
+          );
+
+        });
+
+    }
+
+
+    document
+      .querySelectorAll("[data-pet-custom-color]")
+      .forEach(function (button) {
+
+        button.addEventListener(
+          "click",
+          function (event) {
+
+            event.stopPropagation();
+
+
+            const color =
+              button.dataset.petCustomColor;
+
+
+            if (
+              ![
+                "theme",
+                "orange",
+                "pink",
+                "green",
+                "purple",
+                "black",
+                "white"
+              ].includes(color)
+            ) {
+
+              return;
+
+            }
+
+
+            profile.color =
+              color;
+
+
+            saveProfile(
+              key,
+              profile
+            );
+
+
+            syncColorButtons();
+
+
+            window.postMessage(
+              {
+                type: "cortex:pet-profile",
+                profile: profile
+              },
+              window.location.origin
+            );
+
+          }
+        );
+
+      });
+
+
+    syncColorButtons();
+
+
     document
       .querySelectorAll(
         ".cortex-pet-outfit-option"
@@ -3081,6 +3170,38 @@
             Salvar
           </button>
 
+        </div>
+
+      </div>
+
+
+      <div class="pet-customizer-divider"></div>
+
+
+      <div class="pet-customizer-block pet-color-customizer">
+
+        <div class="pet-customizer-title">
+
+          <div>
+            <strong>
+              Cor
+            </strong>
+
+            <span>
+              Siga o tema ou escolha uma cor
+            </span>
+          </div>
+
+        </div>
+
+        <div class="cortex-pet-color-grid">
+          <button type="button" data-pet-custom-color="theme"><i></i><small>Tema</small></button>
+          <button type="button" data-pet-custom-color="orange"><i></i><small>Laranja</small></button>
+          <button type="button" data-pet-custom-color="pink"><i></i><small>Rosa</small></button>
+          <button type="button" data-pet-custom-color="green"><i></i><small>Verde</small></button>
+          <button type="button" data-pet-custom-color="purple"><i></i><small>Roxo</small></button>
+          <button type="button" data-pet-custom-color="black"><i></i><small>Preto</small></button>
+          <button type="button" data-pet-custom-color="white"><i></i><small>Branco</small></button>
         </div>
 
       </div>
