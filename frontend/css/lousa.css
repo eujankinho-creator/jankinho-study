@@ -2452,3 +2452,69 @@ input[type="range"] {
   }
 
 }
+
+
+/* =========================================================
+   CORTEX THICKNESS PREVIEW DOT V1
+========================================================= */
+
+#strokeControls.tool-thickness-popover.thickness-popover-open {
+  grid-template-columns:
+    auto
+    minmax(90px,1fr)
+    34px
+    auto !important;
+}
+
+.brush-size-preview-shell {
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--theme-border);
+  border-radius:50%;
+  background:rgba(255,255,255,.025);
+  overflow:hidden;
+}
+
+#brushSizePreview {
+  display:block;
+  width:8px;
+  height:8px;
+  max-width:24px;
+  max-height:24px;
+  border-radius:50%;
+  background:var(--theme-accent);
+  box-shadow:none;
+  transition:
+    width .08s ease,
+    height .08s ease,
+    background-color .08s ease,
+    opacity .08s ease;
+}
+
+#strokeControls[data-preview-tool="highlighter"] #brushSizePreview {
+  opacity:.42;
+}
+
+#strokeControls[data-preview-tool="eraser"] #brushSizePreview {
+  background:var(--theme-text-soft);
+  opacity:.78;
+}
+
+@media(max-width:700px) {
+  #strokeControls.tool-thickness-popover.thickness-popover-open {
+    grid-template-columns:
+      auto
+      minmax(82px,1fr)
+      32px
+      auto !important;
+  }
+
+  .brush-size-preview-shell {
+    width:28px;
+    height:28px;
+  }
+}
+
+/* CORTEX THICKNESS PREVIEW DOT V1 END */
