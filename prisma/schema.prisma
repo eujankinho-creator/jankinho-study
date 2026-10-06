@@ -30,6 +30,7 @@ model Usuario {
   aulasMarcadores AulaMarcador[]
   aulasEstudo     AulaEstudoDiario[]
   aulaMeta        AulaMeta?
+  cronogramas      CronogramaEstudo[]
 }
 
 model Disciplina {
@@ -369,4 +370,65 @@ model AulaMarcador {
   usuario          Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
   @@index([usuarioId, youtubeVideoId])
+}
+
+
+model CronogramaEstudo {
+  id             Int                @id @default(autoincrement())
+  usuarioId      Int
+  prova          String
+  tipoProva      String
+  dataProva      DateTime?
+  horasPorDia    Float
+  diasPorSemana  Int
+  nivel          String
+  dificuldades   Json?
+  prioridades    Json?
+  estrategia     Json?
+  ativo          Boolean            @default(true)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  usuario        Usuario            @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  tarefas        CronogramaTarefa[]
+  fontes         CronogramaFonte[]
+
+  @@index([usuarioId, ativo])
+  @@index([usuarioId, updatedAt])
+}
+
+model CronogramaTarefa {
+  id              Int              @id @default(autoincrement())
+  cronogramaId    Int
+  data            DateTime
+  tipo            String
+  titulo          String
+  tema            String?
+  duracaoMinutos  Int              @default(0)
+  metaValor       Int              @default(0)
+  ordem           Int              @default(0)
+  concluida       Boolean          @default(false)
+  progresso       Int              @default(0)
+  concluidaAt     DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  cronograma      CronogramaEstudo @relation(fields: [cronogramaId], references: [id], onDelete: Cascade)
+
+  @@index([cronogramaId, data])
+  @@index([cronogramaId, concluida])
+}
+
+model CronogramaFonte {
+  id           Int              @id @default(autoincrement())
+  cronogramaId Int
+  titulo       String
+  url          String           @db.Text
+  dominio      String?
+  resumo       String?          @db.Text
+  oficial      Boolean          @default(false)
+  pdf          Boolean          @default(false)
+  score        Int              @default(0)
+  createdAt    DateTime         @default(now())
+  cronograma   CronogramaEstudo @relation(fields: [cronogramaId], references: [id], onDelete: Cascade)
+
+  @@index([cronogramaId, score])
 }
