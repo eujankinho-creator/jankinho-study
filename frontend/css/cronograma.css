@@ -118,3 +118,10 @@
 .strategy-chips span{padding:7px 9px;border:1px solid color-mix(in srgb,var(--sc-accent) 24%,var(--sc-line));border-radius:999px;background:var(--theme-accent-soft);color:var(--sc-accent2);font-size:7px;font-weight:950;letter-spacing:.06em}
 .strategy-weakness{margin-top:11px;padding:10px;border:1px dashed var(--sc-line);border-radius:9px;color:var(--sc-muted);font-size:8px;line-height:1.55}
 .strategy-weakness strong{color:var(--sc-text)}
+
+.strategy-reference{margin-top:10px;padding:9px 10px;border-left:3px solid var(--sc-accent);background:var(--sc-soft);color:var(--sc-muted);font-size:8px;line-height:1.5}
+.strategy-reference strong{color:var(--sc-text)}
+.strategy-banks{margin-top:11px;color:var(--sc-muted);font-size:8px}
+.strategy-banks>strong{display:block;margin-bottom:7px;color:var(--sc-text)}
+.strategy-banks>div{display:flex;flex-wrap:wrap;gap:6px}
+.strategy-banks span{padding:6px 8px;border:1px solid var(--sc-line);border-radius:999px;background:var(--sc-soft);font-size:7px;font-weight:800}
