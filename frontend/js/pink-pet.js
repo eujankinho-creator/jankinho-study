@@ -3745,6 +3745,14 @@
         return;
       }
 
+      if (
+        data.userId &&
+        !userId
+      ) {
+        userId = Number(data.userId);
+        profileKey = "cortex_pet_profile_v1_" + userId;
+      }
+
       const profile = saveProfile(data.profile);
       applyProfile(profile);
       return;
