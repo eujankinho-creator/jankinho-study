@@ -3304,7 +3304,7 @@ async function servirArquivo(
             )
             .replace(
               /\/css\/theme-final\.css\?v=[^"']+/g,
-              "/css/theme-final.css?v=20261006-orangeblack1"
+              "/css/theme-final.css?v=20261006-premium1"
             )
             .replace(
               /\/js\/cortex-brand\.js\?v=[^"']+/g,
