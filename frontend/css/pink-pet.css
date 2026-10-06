@@ -2875,3 +2875,218 @@ small {
   color:#ff8a1f !important;
 }
 /* CORTEX PET ORANGE OUTFITS V1 END */
+
+
+/* =========================================================
+   CORTEX PET THEMEABLE V2
+========================================================= */
+
+#cortexPinkPet{
+  --pet-accent:var(--theme-accent,#ff6500);
+  --pet-accent-2:var(--theme-accent-2,#ff8a1f);
+  --pet-accent-dark:color-mix(in srgb,var(--pet-accent) 64%,black);
+  --pet-accent-rgb:var(--theme-accent-rgb,255,101,0);
+}
+
+#cortexPinkPet .cortex-pet-body{
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb,var(--pet-accent-2) 90%,white 10%),
+      var(--pet-accent) 58%,
+      var(--pet-accent-dark)
+    )!important;
+  border-color:
+    color-mix(in srgb,var(--pet-accent-2) 42%,white 16%)!important;
+}
+
+#cortexPinkPet .cortex-pet-head{
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb,var(--pet-accent-2) 82%,white 18%),
+      color-mix(in srgb,var(--pet-accent) 86%,white 14%) 62%,
+      var(--pet-accent-dark)
+    )!important;
+  border-color:
+    color-mix(in srgb,var(--pet-accent-2) 48%,white 18%)!important;
+}
+
+#cortexPinkPet .cortex-pet-ear{
+  background:
+    color-mix(in srgb,var(--pet-accent) 88%,white 12%)!important;
+}
+
+#cortexPinkPet .cortex-pet-tail{
+  border-color:
+    color-mix(in srgb,var(--pet-accent) 82%,black 18%)!important;
+}
+
+#cortexPinkPet .cortex-pet-eye{
+  background:#17110e!important;
+}
+
+#cortexPinkPet[data-pet-color="black"] .cortex-pet-eye,
+#cortexPinkPet[data-pet-color="white"] .cortex-pet-eye{
+  background:#151515!important;
+}
+
+#cortexPinkPet .cortex-pet-nose{
+  background:
+    color-mix(in srgb,var(--pet-accent-dark) 74%,#4a1d14 26%)!important;
+}
+
+#cortexPinkPet .cortex-pet-mouth-left,
+#cortexPinkPet .cortex-pet-mouth-right{
+  border-bottom-color:
+    color-mix(in srgb,var(--pet-accent-dark) 70%,#3a2419 30%)!important;
+}
+
+#cortexPinkPet .cortex-pet-panel{
+  border-color:
+    color-mix(in srgb,var(--theme-accent) 22%,var(--theme-border))!important;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb,var(--theme-surface-strong) 96%,black),
+      color-mix(in srgb,var(--theme-bg) 97%,black)
+    )!important;
+  box-shadow:
+    0 25px 75px rgba(0,0,0,.58)!important;
+}
+
+#cortexPinkPet .pet-panel-kicker,
+#cortexPinkPet .pet-action-icon,
+#cortexPinkPet .cortex-pet-particle{
+  color:var(--theme-accent)!important;
+}
+
+#cortexPinkPet .cortex-pet-panel-head strong,
+#cortexPinkPet .cortex-pet-actions button strong,
+#cortexPinkPet .pet-customizer-title strong{
+  color:var(--theme-text)!important;
+}
+
+#cortexPinkPet .cortex-pet-actions button,
+#cortexPinkPet .cortex-food-item,
+#cortexPinkPet .cortex-pet-customizer,
+#cortexPinkPet .cortex-pet-outfit-option{
+  border-color:
+    color-mix(in srgb,var(--theme-accent) 12%,var(--theme-border))!important;
+  background:
+    color-mix(in srgb,var(--theme-accent) 3.5%,var(--theme-surface))!important;
+  color:var(--theme-text-soft)!important;
+}
+
+#cortexPinkPet .cortex-pet-actions button:hover,
+#cortexPinkPet .cortex-food-item:hover,
+#cortexPinkPet .cortex-pet-outfit-option:hover,
+#cortexPinkPet .cortex-pet-outfit-option.selected{
+  border-color:
+    color-mix(in srgb,var(--theme-accent) 32%,var(--theme-border))!important;
+  background:var(--theme-accent-soft)!important;
+}
+
+#cortexPinkPet .cortex-pet-bar > span{
+  background:
+    linear-gradient(
+      90deg,
+      var(--theme-accent),
+      var(--theme-accent-2)
+    )!important;
+}
+
+#cortexPinkPet .cortex-pet-avatar:hover,
+#cortexPinkPet .cortex-pet-avatar:focus-visible{
+  filter:
+    drop-shadow(0 5px 8px rgba(0,0,0,.30))!important;
+}
+
+#cortexPinkPet .pet-outfit-bow i{
+  background:
+    linear-gradient(
+      145deg,
+      var(--pet-accent),
+      var(--pet-accent-2)
+    )!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.20)!important;
+}
+
+#cortexPinkPet .pet-outfit-bow b{
+  background:
+    color-mix(in srgb,var(--pet-accent-2) 54%,white)!important;
+}
+
+#cortexPinkPet .cortex-pet-avatar[data-pet-outfit="hoodie"] .cortex-pet-body{
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb,var(--pet-accent) 70%,black 30%),
+      color-mix(in srgb,var(--pet-accent-dark) 82%,black 18%)
+    )!important;
+  border-color:
+    color-mix(in srgb,var(--pet-accent-2) 30%,transparent)!important;
+}
+
+#cortexPinkPet .pet-outfit-hoodie-ring{
+  border-color:
+    color-mix(in srgb,var(--pet-accent) 80%,black 20%)!important;
+}
+
+#cortexPinkPet .pet-outfit-scarf{
+  background:
+    linear-gradient(
+      90deg,
+      var(--pet-accent),
+      var(--pet-accent-2)
+    )!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.22)!important;
+}
+
+#cortexPinkPet .pet-outfit-scarf i{
+  background:
+    color-mix(in srgb,var(--pet-accent) 84%,black 16%)!important;
+}
+
+#cortexPinkPet .pet-outfit-glasses i{
+  border-color:
+    color-mix(in srgb,var(--pet-accent-dark) 64%,#1d1d1d 36%)!important;
+  background:
+    color-mix(in srgb,var(--pet-accent) 8%,transparent)!important;
+}
+
+#cortexPinkPet .pet-outfit-glasses b{
+  background:
+    color-mix(in srgb,var(--pet-accent-dark) 64%,#1d1d1d 36%)!important;
+}
+
+#cortexPinkPet .pet-outfit-crown,
+#cortexPinkPet .pet-outfit-crown i{
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--pet-accent-2) 65%,white 35%),
+      var(--pet-accent)
+    )!important;
+}
+
+#cortexPinkPet .pet-outfit-crown::after{
+  background:rgba(255,255,255,.34)!important;
+}
+
+#cortexPinkPet .outfit-option-preview{
+  background:var(--theme-accent-soft)!important;
+  color:var(--theme-accent-2)!important;
+}
+
+#cortexPinkPet[data-pet-color="white"] .cortex-pet-body,
+#cortexPinkPet[data-pet-color="white"] .cortex-pet-head{
+  border-color:rgba(255,255,255,.34)!important;
+}
+
+#cortexPinkPet[data-pet-color="black"] .cortex-pet-body,
+#cortexPinkPet[data-pet-color="black"] .cortex-pet-head{
+  border-color:rgba(255,255,255,.12)!important;
+}
+
+/* CORTEX PET THEMEABLE V2 END */
