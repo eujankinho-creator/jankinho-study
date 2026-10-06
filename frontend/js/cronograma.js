@@ -141,7 +141,14 @@ function renderDashboard(data){
   const strategy=schedule.estrategia||{};
   $("strategyTitle").textContent=strategy.provaBase||"Plano inteligente";
   $("strategyFocus").textContent=strategy.foco||"O plano combina matriz da prova, fontes oficiais, seu desempenho e o tempo restante.";
+  $("strategyReference").innerHTML=strategy.referenciaEstrutural
+    ? '<strong>Referência estrutural:</strong> '+esc(strategy.referenciaEstrutural)
+    : "";
   $("strategyPhases").innerHTML=(strategy.fases||["BASE","CONSOLIDAÇÃO","RETA FINAL"]).map((phase)=>'<span>'+esc(String(phase).replaceAll("_"," "))+'</span>').join("");
+  const banks=Array.isArray(strategy.bancos)?strategy.bancos:[];
+  $("strategyBanks").innerHTML=banks.length
+    ? '<strong>Bancos e revisões recomendados:</strong><div>'+banks.map((item)=>'<span>'+esc(item)+'</span>').join("")+'</div>'
+    : "";
   const weakness=Array.isArray(strategy.fraquezasDetectadas)?strategy.fraquezasDetectadas.slice(0,5):[];
   $("strategyWeakness").innerHTML=weakness.length
     ? '<strong>Prioridade pelo seu histórico:</strong> '+weakness.map((item)=>esc(item.tema)+' ('+Math.round(Number(item.erro||0)*100)+'% de erro)').join(" · ")
