@@ -986,7 +986,23 @@ async function dashboard(usuarioId: number): Promise<ApiResult> {
   const completed = tasks.filter((task) => task.concluida).length;
   const studyTasks = tasks.filter((task) => task.tipo !== "DESCANSO");
 
-  const upcoming = tasks.filter((task) => isoDay(task.data) >= today).slice(0, 140);
+  const todayDate = new Date(now);
+  todayDate.setHours(12, 0, 0, 0);
+  const day = todayDate.getDay();
+  const mondayOffset = day === 0 ? -6 : 1 - day;
+  const weekStartDate = new Date(todayDate);
+  weekStartDate.setDate(todayDate.getDate() + mondayOffset);
+  const weekEndDate = new Date(weekStartDate);
+  weekEndDate.setDate(weekStartDate.getDate() + 6);
+
+  const weekStart = isoDay(weekStartDate);
+  const weekEnd = isoDay(weekEndDate);
+
+  const weekTasks = tasks.filter((task) => {
+    const date = isoDay(task.data);
+    return date >= weekStart && date <= weekEnd;
+  });
+
   const todayTasks = tasks.filter((task) => isoDay(task.data) === today);
 
   return {
@@ -1005,10 +1021,62 @@ async function dashboard(usuarioId: number): Promise<ApiResult> {
         todayTotal: todayTasks.length,
       },
       todayTasks,
-      upcoming,
+      week: {
+        start: weekStart,
+        end: weekEnd,
+        tasks: weekTasks,
+      },
     },
   };
 }
+
+async function calendarPlan(usuarioId: number): Promise<ApiResult> {
+  await ensureCronogramaResetOnce();
+
+  const schedule = await prisma.cronogramaEstudo.findFirst({
+    where: { usuarioId, ativo: true },
+    orderBy: { updatedAt: "desc" },
+    select: {
+      id: true,
+      prova: true,
+      dataProva: true,
+      tipoProva: true,
+      tarefas: {
+        orderBy: [{ data: "asc" }, { ordem: "asc" }],
+        select: {
+          id: true,
+          data: true,
+          tipo: true,
+          titulo: true,
+          tema: true,
+          duracaoMinutos: true,
+          metaValor: true,
+          progresso: true,
+          concluida: true,
+          ordem: true,
+        },
+      },
+    },
+  });
+
+  if (!schedule) {
+    return { status: 200, data: { schedule: null, tasks: [] } };
+  }
+
+  return {
+    status: 200,
+    data: {
+      schedule: {
+        id: schedule.id,
+        prova: schedule.prova,
+        dataProva: schedule.dataProva,
+        tipoProva: schedule.tipoProva,
+      },
+      tasks: schedule.tarefas,
+    },
+  };
+}
+
 
 async function generate(usuarioId: number, body: any): Promise<ApiResult> {
   await ensureCronogramaResetOnce();
@@ -1161,6 +1229,8 @@ export async function atenderCronograma(
       result = await research(url);
     } else if (path === "/api/cronograma/dashboard" && request.method === "GET") {
       result = await dashboard(usuarioId);
+    } else if (path === "/api/cronograma/calendar" && request.method === "GET") {
+      result = await calendarPlan(usuarioId);
     } else if (path === "/api/cronograma/generate" && request.method === "POST") {
       result = await generate(usuarioId, await readJson(request));
     } else if (path === "/api/cronograma/task" && request.method === "PATCH") {
