@@ -710,20 +710,33 @@ function generateTasks(
   );
 
   const studyWeekdays = new Set<number>();
-  for (let i = 0; i < daysPerWeek; i += 1) studyWeekdays.add((1 + i) % 7);
+  for (let i = 0; i < daysPerWeek; i += 1) {
+    studyWeekdays.add((1 + i) % 7);
+  }
 
   const tasks: Array<any> = [];
-  const minutesPerDay = Math.round(hoursPerDay * 60);
-  const slotsPerDay = Math.max(2, Math.min(5, Math.round(minutesPerDay / 45)));
+  const minutesPerDay = Math.max(30, Math.round(hoursPerDay * 60));
   const finalWindow = Math.min(28, Math.max(14, Math.round(totalDays * 0.2)));
   const consolidationStart = Math.round(totalDays * 0.5);
-  const recentTopics: string[] = [];
+  const studied: Array<{ tema: string; dayOffset: number; grupo?: string }> = [];
   let topicCursor = 0;
   let studyIndex = 0;
 
-  const pickTopic = (offset = 0) =>
-    topics[(topicCursor + offset) % Math.max(1, topics.length)] ||
-    { tema: "SUS e conhecimentos de Enfermagem", score: 1, grupo: "geral" };
+  const nextTopic = () => {
+    const topic =
+      topics[topicCursor % Math.max(1, topics.length)] ||
+      { tema: "SUS e conhecimentos de Enfermagem", score: 1, grupo: "Geral" };
+    topicCursor += 1;
+    return topic;
+  };
+
+  const reviewTarget = (dayOffset: number, distance: number) => {
+    const exact = studied
+      .slice()
+      .reverse()
+      .find((item) => item.dayOffset <= dayOffset - distance);
+    return exact || studied[studied.length - 1] || null;
+  };
 
   for (let dayOffset = 0; dayOffset <= totalDays; dayOffset += 1) {
     const date = new Date(now);
@@ -740,6 +753,7 @@ function generateTasks(
           duracaoMinutos: 0,
           metaValor: 0,
           ordem: 1,
+          fase: "RECUPERACAO",
         });
       }
       continue;
@@ -748,94 +762,107 @@ function generateTasks(
     studyIndex += 1;
     const daysLeft = Math.max(0, totalDays - dayOffset);
     const phase =
-      daysLeft <= finalWindow ? "RETA_FINAL" :
-      dayOffset >= consolidationStart ? "CONSOLIDACAO" :
-      "BASE";
+      daysLeft <= finalWindow
+        ? "RETA_FINAL"
+        : dayOffset >= consolidationStart
+          ? "CONSOLIDACAO"
+          : "BASE";
 
-    const dailyMinutes = Math.max(30, minutesPerDay);
-    const slotDuration = Math.max(20, Math.floor(dailyMinutes / slotsPerDay));
-    const isWeeklySimulation = studyIndex % Math.max(5, daysPerWeek) === 0;
-    const isFullSimulation =
-      phase === "RETA_FINAL" && studyIndex % Math.max(3, Math.ceil(daysPerWeek / 2)) === 0;
+    const topic = nextTopic();
+    const group = topic.grupo || "Enfermagem";
+    const review24h = reviewTarget(dayOffset, 1);
+    const review7d = reviewTarget(dayOffset, 7);
+    const isSimulationDay =
+      studyIndex % Math.max(5, daysPerWeek) === 0 ||
+      (phase === "RETA_FINAL" && studyIndex % 3 === 0);
 
     const dayTasks: Array<any> = [];
+    let order = 1;
 
-    for (let slot = 0; slot < slotsPerDay; slot += 1) {
-      let tipo = "TEORIA";
-      let titulo = "Estudo teórico orientado";
-      let topic = pickTopic(slot);
-
-      if (phase === "BASE") {
-        if (slot === 1) {
-          tipo = "QUESTOES";
-          titulo = "Questões do assunto estudado";
-        } else if (slot >= 2) {
-          tipo = "REVISAO";
-          titulo = "Revisão 24h / 7 dias";
-          const reviewTopic = recentTopics[Math.max(0, recentTopics.length - 2 - slot)] || topic.tema;
-          topic = { ...topic, tema: reviewTopic };
-        }
-      } else if (phase === "CONSOLIDACAO") {
-        if (slot === 0) {
-          tipo = "QUESTOES";
-          titulo = "Bloco dirigido de questões";
-        } else if (slot === 1) {
-          tipo = "REVISAO";
-          titulo = "Revisão por erros e pontos fracos";
-        } else if (slot === slotsPerDay - 1 && isWeeklySimulation) {
-          tipo = "SIMULADO";
-          titulo = "Mini simulado temático";
-        } else {
-          tipo = slot % 2 === 0 ? "TEORIA" : "QUESTOES";
-          titulo = tipo === "TEORIA" ? "Teoria de reforço" : "Questões de consolidação";
-        }
-      } else {
-        if (isFullSimulation && slot === 0) {
-          tipo = "SIMULADO";
-          titulo = "Simulado de reta final";
-        } else if (slot === 0) {
-          tipo = "QUESTOES";
-          titulo = "Questões de alta incidência";
-        } else {
-          tipo = "REVISAO";
-          titulo = slot === 1 ? "Caderno de erros" : "Revisão rápida de alta prioridade";
-        }
-      }
-
-      const duration =
-        tipo === "SIMULADO"
-          ? Math.max(60, slotDuration)
-          : slotDuration;
-
+    if (phase !== "RETA_FINAL") {
+      const theoryMinutes = Math.max(25, Math.round(minutesPerDay * (phase === "BASE" ? 0.46 : 0.32)));
       dayTasks.push({
         data: isoDay(date),
-        tipo,
-        titulo,
+        tipo: "TEORIA",
+        titulo: "Estudar: " + topic.tema,
         tema: topic.tema,
-        duracaoMinutos: duration,
-        metaValor:
-          tipo === "QUESTOES"
-            ? Math.max(12, Math.round(duration / 2))
-            : tipo === "SIMULADO"
-              ? (phase === "RETA_FINAL" ? 50 : 25)
-              : duration,
-        ordem: slot + 1,
+        duracaoMinutos: theoryMinutes,
+        metaValor: theoryMinutes,
+        ordem: order++,
         fase: phase,
+        grupo: group,
+      });
+
+      const questionMinutes = Math.max(20, Math.round(minutesPerDay * (phase === "BASE" ? 0.30 : 0.38)));
+      dayTasks.push({
+        data: isoDay(date),
+        tipo: "QUESTOES",
+        titulo: "Treino: " + topic.tema,
+        tema: topic.tema,
+        duracaoMinutos: questionMinutes,
+        metaValor: Math.max(10, Math.round(questionMinutes / 2)),
+        ordem: order++,
+        fase: phase,
+        grupo: group,
+      });
+    } else {
+      const questionMinutes = Math.max(35, Math.round(minutesPerDay * 0.48));
+      dayTasks.push({
+        data: isoDay(date),
+        tipo: "QUESTOES",
+        titulo: "Questões de alta prioridade: " + topic.tema,
+        tema: topic.tema,
+        duracaoMinutos: questionMinutes,
+        metaValor: Math.max(20, Math.round(questionMinutes / 1.8)),
+        ordem: order++,
+        fase: phase,
+        grupo: group,
+      });
+    }
+
+    const review = review7d || review24h;
+    if (review) {
+      const reviewMinutes = Math.max(15, Math.round(minutesPerDay * 0.20));
+      dayTasks.push({
+        data: isoDay(date),
+        tipo: "REVISAO",
+        titulo:
+          (review7d ? "Revisão de 7 dias: " : "Revisão de 24 horas: ") +
+          review.tema,
+        tema: review.tema,
+        duracaoMinutos: reviewMinutes,
+        metaValor: reviewMinutes,
+        ordem: order++,
+        fase: phase,
+        grupo: review.grupo || group,
+      });
+    }
+
+    if (isSimulationDay) {
+      const simulationMinutes = Math.max(45, Math.round(minutesPerDay * 0.35));
+      dayTasks.push({
+        data: isoDay(date),
+        tipo: "SIMULADO",
+        titulo:
+          phase === "RETA_FINAL"
+            ? "Simulado de reta final — " + group
+            : "Mini simulado — " + group,
+        tema: group,
+        duracaoMinutos: simulationMinutes,
+        metaValor: phase === "RETA_FINAL" ? 50 : 25,
+        ordem: order++,
+        fase: phase,
+        grupo: group,
       });
     }
 
     tasks.push(...dayTasks);
-
-    const primaryTopic = pickTopic(0).tema;
-    recentTopics.push(primaryTopic);
-    if (recentTopics.length > 24) recentTopics.shift();
-
-    topicCursor += phase === "BASE" ? Math.max(1, slotsPerDay - 1) : 1;
+    studied.push({ tema: topic.tema, dayOffset, grupo: group });
+    if (studied.length > 90) studied.shift();
   }
 
-  return tasks.slice(0, 760);
+  return tasks.slice(0, 900);
 }
-
 async function research(url: URL): Promise<ApiResult> {
   const query = text(url.searchParams.get("q"), 180);
   if (!query) return { status: 400, data: { error: "Informe a prova ou seleção." } };
@@ -959,7 +986,7 @@ async function dashboard(usuarioId: number): Promise<ApiResult> {
   const completed = tasks.filter((task) => task.concluida).length;
   const studyTasks = tasks.filter((task) => task.tipo !== "DESCANSO");
 
-  const upcoming = tasks.filter((task) => isoDay(task.data) >= today).slice(0, 45);
+  const upcoming = tasks.filter((task) => isoDay(task.data) >= today).slice(0, 140);
   const todayTasks = tasks.filter((task) => isoDay(task.data) === today);
 
   return {
@@ -995,17 +1022,31 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
   const prova = text(body.prova, 180);
   if (!prova) return { status: 400, data: { error: "Escolha seu objetivo antes de montar o cronograma." } };
 
-  const sourceItems: ResearchItem[] = Array.isArray(body.sources)
-    ? body.sources.slice(0, 20).map((item: any) => ({
-        title: text(item.title, 500),
-        url: text(item.url, 1200),
-        snippet: text(item.snippet, 2000),
-        domain: text(item.domain, 220),
-        official: Boolean(item.official),
-        pdf: Boolean(item.pdf),
-        score: Number(item.score || 0),
-      }))
-    : await searchWeb(prova);
+  const sourceItems: ResearchItem[] = [
+    ...OFFICIAL_SEEDS.filter((item) => {
+      const haystack = (item.title + " " + item.snippet).toUpperCase();
+      if (kind === "ENARE") return haystack.includes("ENARE");
+      if (kind === "EBSERH") return haystack.includes("EBSERH") || haystack.includes("HU BRASIL");
+      return haystack.includes("MINISTÉRIO") || haystack.includes("CPNU");
+    }),
+    {
+      title:
+        kind === "EBSERH"
+          ? "Rômulo Passos — Plano de Estudo Enfermeiro EBSERH 2026 Pré-edital"
+          : kind === "ENARE"
+            ? "Rômulo Passos — Plano de Estudo ENARE 2025 Pré-edital"
+            : "Matriz Córtex — Ministério da Saúde",
+      url: "https://www.romulopassos.com.br/",
+      snippet:
+        kind === "MINISTERIO_SAUDE"
+          ? "Matriz organizada pelo Córtex com base nos conteúdos de saúde, SUS e enfermagem usados em concursos públicos."
+          : "Referência estrutural fornecida pelo usuário para sequência de estudo, revisão, bancos de questões e simulados.",
+      domain: "romulopassos.com.br",
+      official: false,
+      pdf: true,
+      score: 82,
+    },
+  ];
 
   const dificuldades = Array.isArray(body.dificuldades) ? body.dificuldades.map((x: unknown) => text(x, 120)).filter(Boolean) : [];
   const prioridades = Array.isArray(body.prioridades) ? body.prioridades.map((x: unknown) => text(x, 120)).filter(Boolean) : [];
@@ -1031,7 +1072,7 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
       dificuldades,
       prioridades,
       estrategia: {
-        algoritmo: "matriz da prova + fontes oficiais + incidência + dificuldade + histórico + proximidade",
+        algoritmo: "matriz do plano + dificuldade + histórico + proximidade",
         provaBase: blueprint.label,
         foco: blueprint.foco,
         referenciaEstrutural: blueprint.sourceLabel,
