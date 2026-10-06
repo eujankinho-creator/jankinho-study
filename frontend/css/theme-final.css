@@ -5008,3 +5008,107 @@ html[data-theme] *::-webkit-scrollbar-thumb:hover {
 }
 
 /* CORTEX PREMIUM SECTIONS V1 END */
+
+
+/* =========================================================
+   CORTEX LOGO MINIMAL NO GLOW V1
+   Logo global sem halo, caixa, brilho ou reação ao hover.
+========================================================= */
+.sidebar-logo .logo-box,
+.sidebar-logo .logo-box.cortex-logo,
+.sidebar-logo .cortex-global-logo-box,
+.sidebar .logo-box,
+.cortex-mobile-sidebar-panel .logo-box,
+.cortex-mobile-sidebar-panel .logo-box.cortex-logo {
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  overflow:visible!important;
+}
+
+.sidebar-logo .logo-box::before,
+.sidebar-logo .logo-box::after,
+.sidebar-logo .logo-box.cortex-logo::before,
+.sidebar-logo .logo-box.cortex-logo::after,
+.sidebar .logo-box::before,
+.sidebar .logo-box::after,
+.cortex-mobile-sidebar-panel .logo-box::before,
+.cortex-mobile-sidebar-panel .logo-box::after,
+.cortex-mobile-sidebar-header::before {
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  opacity:0!important;
+}
+
+.sidebar-logo .cortex-global-logo-image,
+.cortex-mobile-brand-image,
+.sidebar-logo .cortex-brain-logo,
+.sidebar .cortex-brain-logo,
+.cortex-mobile-sidebar-panel .cortex-brain-logo,
+.cortex-brain-logo {
+  filter:none!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+
+.sidebar-logo .cortex-brain-logo,
+.sidebar .cortex-brain-logo,
+.cortex-mobile-sidebar-panel .cortex-brain-logo,
+.cortex-brain-logo {
+  stroke:#f4f4f4!important;
+}
+
+.sidebar-logo .cortex-brain-logo *,
+.sidebar .cortex-brain-logo *,
+.cortex-mobile-sidebar-panel .cortex-brain-logo *,
+.cortex-brain-logo * {
+  stroke:#f4f4f4!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+.sidebar-logo:hover .cortex-global-logo-image,
+.sidebar-logo:hover .cortex-brain-logo,
+.sidebar-logo:focus-visible .cortex-global-logo-image,
+.sidebar-logo:focus-visible .cortex-brain-logo {
+  transform:none!important;
+  filter:none!important;
+}
+
+.logo-box.cortex-logo .cortex-logo-letter {
+  color:#f4f4f4!important;
+  text-shadow:none!important;
+}
+
+.logo-box.cortex-logo .cortex-logo-ring {
+  border-color:rgba(255,255,255,.34)!important;
+  box-shadow:none!important;
+}
+
+.logo-box.cortex-logo .cortex-logo-spark,
+.logo-box.cortex-logo .cortex-logo-dot {
+  background:#f4f4f4!important;
+  box-shadow:none!important;
+}
+
+.sidebar-logo .logo-box > .cortex-global-logo-image {
+  width:32px!important;
+  height:32px!important;
+}
+
+.cortex-mobile-brand-image {
+  width:28px!important;
+  height:28px!important;
+  flex-basis:28px!important;
+}
+
+/* CORTEX LOGO MINIMAL NO GLOW V1 END */
