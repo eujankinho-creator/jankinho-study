@@ -3734,3 +3734,114 @@ textarea {
   -webkit-text-size-adjust: 100%;
 }
 /* CORTEX GLOBAL TYPOGRAPHY STANDARD V1 END */
+
+
+/* =========================================================
+   CORTEX CANONICAL SIDEBAR + PROFILE V1
+   Corrige conflitos de tema com logo, icones e foto do perfil.
+========================================================= */
+
+html[data-theme] .sidebar-logo .logo-box,
+html[data-theme] .sidebar-logo .logo-box.cortex-logo,
+html[data-theme] .sidebar-logo .cortex-global-logo-box {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  overflow: visible !important;
+  isolation: auto !important;
+}
+
+html[data-theme] .sidebar-logo .logo-box::before,
+html[data-theme] .sidebar-logo .logo-box::after,
+html[data-theme] .sidebar-logo .logo-box.cortex-logo::before,
+html[data-theme] .sidebar-logo .logo-box.cortex-logo::after {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-theme] .sidebar-logo .logo-box > * {
+  display: none !important;
+}
+
+html[data-theme] .sidebar-logo .logo-box > .cortex-global-logo-image {
+  display: block !important;
+  width: 34px !important;
+  height: 34px !important;
+  object-fit: contain !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  filter: drop-shadow(
+    0 0 5px
+    color-mix(in srgb, var(--theme-accent, #f97316) 30%, transparent)
+  ) !important;
+}
+
+html[data-theme="black-white"] .sidebar-logo .cortex-global-logo-image {
+  filter: none !important;
+}
+
+html[data-theme] .cortex-mobile-brand-image {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  object-fit: contain !important;
+}
+
+html[data-theme="black-white"] .cortex-mobile-brand-image {
+  filter: none !important;
+}
+
+html[data-theme] .sidebar-menu .cortex-nav-icon svg {
+  fill: none !important;
+  stroke: currentColor !important;
+}
+
+html[data-theme] :is(
+  .sidebar-user .avatar.has-profile-photo,
+  .header-user .avatar.has-profile-photo,
+  [data-profile-avatar="current"].has-profile-photo
+) {
+  background-color: transparent !important;
+  background-image: var(--cortex-profile-photo) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  color: transparent !important;
+  overflow: hidden !important;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+}
+
+html[data-theme] .sidebar-user .user-info > strong,
+html[data-theme] .header-user > div > strong {
+  color: var(--theme-text) !important;
+}
+
+html[data-theme] .sidebar-user .user-info > span,
+html[data-theme] .header-user > div > span {
+  color: var(--theme-text-muted) !important;
+}
+
+html[data-theme] .sidebar-menu .menu-item:focus-visible,
+html[data-theme] .cortex-mobile-sidebar-button:focus-visible,
+html[data-theme] .cortex-mobile-sidebar-close:focus-visible {
+  outline: 2px solid var(--theme-accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* CORTEX CANONICAL SIDEBAR + PROFILE V1 END */
