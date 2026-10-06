@@ -7,6 +7,7 @@ const state = {
   temSenha: true,
   fotoPerfil: null,
   usuarioId: null,
+  tema: "dark-orange",
 };
 
 
@@ -25,6 +26,197 @@ function getPetMode() {
   catch (error) {}
 
   return "hidden";
+}
+
+
+const THEME_NAMES = {
+  "dark-orange": "Orange",
+  "dark-pink": "Rosa",
+  "dark-green": "Verde",
+  "dark-purple": "Roxo",
+  "dark-black": "Dark Black",
+};
+
+const PET_COLORS = new Set([
+  "theme",
+  "orange",
+  "pink",
+  "green",
+  "purple",
+  "black",
+  "white",
+]);
+
+const PET_OUTFITS = new Set([
+  "none",
+  "bow",
+  "hoodie",
+  "scarf",
+  "glasses",
+  "crown",
+]);
+
+
+function normalizeTheme(theme) {
+  return Object.prototype.hasOwnProperty.call(THEME_NAMES, theme)
+    ? theme
+    : "dark-orange";
+}
+
+
+function renderThemeSettings(theme) {
+  const normalized = normalizeTheme(theme);
+  state.tema = normalized;
+
+  const current = $("themeCurrentName");
+  if (current) {
+    current.textContent = THEME_NAMES[normalized];
+  }
+
+  document
+    .querySelectorAll("[data-theme-choice]")
+    .forEach(function (button) {
+      const active =
+        button.getAttribute("data-theme-choice") === normalized;
+
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+}
+
+
+function setThemeFromSettings(theme) {
+  const normalized = normalizeTheme(theme);
+
+  if (window.JankinhoTheme && typeof window.JankinhoTheme.setTheme === "function") {
+    window.JankinhoTheme.setTheme(normalized);
+  }
+  else {
+    document.documentElement.setAttribute("data-theme", normalized);
+    try {
+      localStorage.setItem("jankinho_theme_v1", normalized);
+    }
+    catch (error) {}
+  }
+
+  renderThemeSettings(normalized);
+  showMessage("Tema " + THEME_NAMES[normalized] + " aplicado.");
+}
+
+
+function petProfileKey() {
+  return "cortex_pet_profile_v1_" + (state.usuarioId || "local");
+}
+
+
+function getPetProfile() {
+  const fallback = {
+    name: "",
+    color: "theme",
+    outfit: "none",
+  };
+
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem(petProfileKey()) || "null"
+    );
+
+    if (!saved || typeof saved !== "object") {
+      return fallback;
+    }
+
+    return {
+      name: String(saved.name || "")
+        .replace(/[<>]/g, "")
+        .trim()
+        .slice(0, 16),
+
+      color: PET_COLORS.has(saved.color)
+        ? saved.color
+        : "theme",
+
+      outfit: PET_OUTFITS.has(saved.outfit)
+        ? saved.outfit
+        : "none",
+    };
+  }
+  catch (error) {
+    return fallback;
+  }
+}
+
+
+function savePetProfile(profile) {
+  const normalized = {
+    name: String(profile.name || "")
+      .replace(/[<>]/g, "")
+      .trim()
+      .slice(0, 16),
+
+    color: PET_COLORS.has(profile.color)
+      ? profile.color
+      : "theme",
+
+    outfit: PET_OUTFITS.has(profile.outfit)
+      ? profile.outfit
+      : "none",
+  };
+
+  try {
+    localStorage.setItem(
+      petProfileKey(),
+      JSON.stringify(normalized)
+    );
+  }
+  catch (error) {}
+
+  try {
+    const target = window.parent !== window ? window.parent : window;
+
+    target.postMessage(
+      {
+        type: "cortex:pet-profile",
+        profile: normalized,
+        userId: state.usuarioId,
+      },
+      window.location.origin
+    );
+  }
+  catch (error) {}
+
+  renderPetCustomization(normalized);
+
+  return normalized;
+}
+
+
+function renderPetCustomization(profileInput) {
+  const profile = profileInput || getPetProfile();
+  const nameInput = $("petNameSetting");
+
+  if (nameInput) {
+    nameInput.value = profile.name || "";
+  }
+
+  document
+    .querySelectorAll("[data-pet-color]")
+    .forEach(function (button) {
+      const active =
+        button.getAttribute("data-pet-color") === profile.color;
+
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+  document
+    .querySelectorAll("[data-pet-outfit]")
+    .forEach(function (button) {
+      const active =
+        button.getAttribute("data-pet-outfit") === profile.outfit;
+
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
 }
 
 
@@ -827,12 +1019,38 @@ async function loadSettings() {
       null;
 
 
+    state.tema =
+      normalizeTheme(
+        user.tema
+      );
+
+
     updateUserUI(
       user
     );
 
 
+    renderThemeSettings(
+      state.tema
+    );
+
+
+    if (
+      window.JankinhoTheme &&
+      typeof window.JankinhoTheme.setTheme === "function" &&
+      window.JankinhoTheme.getTheme() !== state.tema
+    ) {
+
+      window.JankinhoTheme.setTheme(
+        state.tema
+      );
+
+    }
+
+
     renderPetSettings();
+
+    renderPetCustomization();
 
 
     $("nome").value =
@@ -1261,3 +1479,67 @@ document
       );
     });
   });
+
+
+
+document
+  .querySelectorAll("[data-theme-choice]")
+  .forEach(function (button) {
+    button.addEventListener("click", function () {
+      setThemeFromSettings(
+        button.getAttribute("data-theme-choice")
+      );
+    });
+  });
+
+
+document
+  .querySelectorAll("[data-pet-color]")
+  .forEach(function (button) {
+    button.addEventListener("click", function () {
+      const profile = getPetProfile();
+      profile.color = button.getAttribute("data-pet-color");
+      savePetProfile(profile);
+      showMessage("Cor do pet atualizada.");
+    });
+  });
+
+
+document
+  .querySelectorAll("[data-pet-outfit]")
+  .forEach(function (button) {
+    button.addEventListener("click", function () {
+      const profile = getPetProfile();
+      profile.outfit = button.getAttribute("data-pet-outfit");
+      savePetProfile(profile);
+      showMessage("Estilo do pet atualizado.");
+    });
+  });
+
+
+$("petNameSave")?.addEventListener("click", function () {
+  const profile = getPetProfile();
+  profile.name = $("petNameSetting") ? $("petNameSetting").value : "";
+  savePetProfile(profile);
+  showMessage("Nome do pet salvo.");
+});
+
+
+$("petNameSetting")?.addEventListener("keydown", function (event) {
+  if (event.key !== "Enter") {
+    return;
+  }
+
+  event.preventDefault();
+  $("petNameSave")?.click();
+});
+
+
+if (
+  window.JankinhoTheme &&
+  typeof window.JankinhoTheme.subscribe === "function"
+) {
+  window.JankinhoTheme.subscribe(function (theme) {
+    renderThemeSettings(theme);
+  });
+}
