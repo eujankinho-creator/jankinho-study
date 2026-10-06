@@ -3296,15 +3296,15 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261006-ui-profile2"
+              "/js/sidebar-standard.js?v=20261006-logo-theme1"
             )
             .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
-              "/css/sidebar-standard.css?v=20261006-logo-min1"
+              "/css/sidebar-standard.css?v=20261006-logo-theme1"
             )
             .replace(
               /\/css\/theme-final\.css\?v=[^"']+/g,
-              "/css/theme-final.css?v=20261006-logo-min1"
+              "/css/theme-final.css?v=20261006-multitheme1"
             )
             .replace(
               /\/js\/cortex-brand\.js\?v=[^"']+/g,
@@ -3312,19 +3312,23 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/configuracoes\.js\?v=[^"']+/g,
-              "/js/configuracoes.js?v=20261006-orangeblack-pet1"
+              "/js/configuracoes.js?v=20261006-multitheme-pet1"
             )
             .replace(
               /\/js\/theme-manager\.js\?v=[^"']+/g,
-              "/js/theme-manager.js?v=20261006-orangeblack1"
+              "/js/theme-manager.js?v=20261006-multitheme1"
             )
             .replace(
               /\/css\/pink-pet\.css\?v=[^"']+/g,
-              "/css/pink-pet.css?v=20261006-orangeblack1"
+              "/css/pink-pet.css?v=20261006-pet-theme1"
             )
             .replace(
               /\/js\/pink-pet\.js\?v=[^"']+/g,
-              "/js/pink-pet.js?v=20261006-orangeblack1"
+              "/js/pink-pet.js?v=20261006-pet-theme1"
+            )
+            .replace(
+              /\/favicon\.svg\?v=[^"']+/g,
+              "/favicon.svg?v=cortex-minimal-v4"
             );
 
         content =
