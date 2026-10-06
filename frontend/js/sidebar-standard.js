@@ -111,6 +111,15 @@
         '<path d="m10 9 5 3-5 3z"/>'
       ),
 
+    cronograma:
+      icon(
+        '<rect x="4" y="5" width="16" height="15" rx="3"/>' +
+        '<path d="M8 3v4"/>' +
+        '<path d="M16 3v4"/>' +
+        '<path d="M4 9h16"/>' +
+        '<path d="m8 13 2 2 5-5"/>'
+      ),
+
     flashcards:
       icon(
         '<rect x="4" y="6" width="14" height="12" rx="2"/>' +
@@ -235,6 +244,12 @@
           href: "/aulas",
           key: "aulas",
           label: "Aulas"
+        },
+
+        {
+          href: "/cronograma",
+          key: "cronograma",
+          label: "Cronograma de Estudos"
         },
 
         {
@@ -568,6 +583,7 @@
         "/simulado",
         "/questoes",
         "/aulas",
+        "/cronograma",
         "/flashcards",
         "/lousa",
         "/farmacos",
@@ -818,6 +834,7 @@
       [
         "/questoes",
         "/aulas",
+        "/cronograma",
         "/flashcards",
         "/sigaa",
         "/casos",
@@ -1113,6 +1130,150 @@
 
   }
 
+
+  /* =======================================================
+     CORTEX GLOBAL BRAND + PROFILE
+  ======================================================= */
+
+  let cortexGlobalUser = null;
+  let cortexGlobalProfilePromise = null;
+
+  function applyCortexLogo() {
+    document
+      .querySelectorAll(".sidebar-logo .logo-box")
+      .forEach(function(box){
+        box.classList.add("cortex-global-logo-box");
+        let image=box.querySelector(".cortex-global-logo-image");
+        if(!image){
+          box.innerHTML="";
+          image=document.createElement("img");
+          image.className="cortex-global-logo-image";
+          image.src="/favicon.svg?v=cortex-global-brand-v2";
+          image.alt="";
+          image.setAttribute("aria-hidden","true");
+          box.appendChild(image);
+        }
+      });
+
+    document
+      .querySelectorAll(".cortex-mobile-sidebar-header")
+      .forEach(function(header){
+        let image=header.querySelector(".cortex-mobile-brand-image");
+        if(!image){
+          image=document.createElement("img");
+          image.className="cortex-mobile-brand-image";
+          image.src="/favicon.svg?v=cortex-global-brand-v2";
+          image.alt="";
+          image.setAttribute("aria-hidden","true");
+          header.insertBefore(image,header.firstChild);
+        }
+      });
+  }
+
+  function applyUserAvatar(element,user){
+    if(!element||!user) return;
+    const name=String(user.nome||"Usuario");
+    const initial=(name.charAt(0)||"U").toUpperCase();
+    const photo=user.fotoPerfil||null;
+
+    if(photo){
+      element.textContent="";
+      element.style.backgroundImage='url("'+photo+'")';
+      element.style.backgroundSize="cover";
+      element.style.backgroundPosition="center";
+      element.style.backgroundRepeat="no-repeat";
+      element.style.color="transparent";
+      element.style.overflow="hidden";
+      element.style.borderRadius="50%";
+      element.classList.add("has-profile-photo");
+    }else{
+      element.style.backgroundImage="";
+      element.style.backgroundSize="";
+      element.style.backgroundPosition="";
+      element.style.backgroundRepeat="";
+      element.style.color="";
+      element.textContent=initial;
+      element.classList.remove("has-profile-photo");
+    }
+  }
+
+  function applyCortexUserProfile(user){
+    if(!user) return;
+    cortexGlobalUser=user;
+    try{
+      sessionStorage.setItem("cortex_user_profile_v3",JSON.stringify({
+        nome:user.nome||"Usuario",
+        email:user.email||"",
+        fotoPerfil:user.fotoPerfil||null
+      }));
+    }catch{}
+
+    const name=String(user.nome||"Usuario");
+    const email=String(user.email||"");
+
+    document
+      .querySelectorAll("#nomeSidebar, #nomeHeader, [data-cortex-user-name]")
+      .forEach(function(node){
+        node.textContent=name;
+      });
+
+    document
+      .querySelectorAll("#emailSidebar, [data-cortex-user-email]")
+      .forEach(function(node){
+        node.textContent=email;
+      });
+
+    document
+      .querySelectorAll("#avatarSidebar, #avatarHeader, [data-profile-avatar=\"current\"]")
+      .forEach(function(node){
+        applyUserAvatar(node,user);
+      });
+
+    document
+      .querySelectorAll(".sidebar-user")
+      .forEach(function(node){
+        node.classList.add("cortex-profile-ready");
+      });
+
+    try{
+      window.parent?.postMessage({
+        type:"cortex:profile-data-ready",
+        usuario:{
+          nome:name,
+          email:email,
+          fotoPerfil:user.fotoPerfil||null
+        }
+      },window.location.origin);
+    }catch{}
+  }
+
+  async function loadCortexUserProfile(){
+    if(cortexGlobalProfilePromise) return cortexGlobalProfilePromise;
+
+    try{
+      const cached=JSON.parse(sessionStorage.getItem("cortex_user_profile_v3")||"null");
+      if(cached) applyCortexUserProfile(cached);
+    }catch{}
+
+    cortexGlobalProfilePromise=fetch("/api/auth/me",{
+      credentials:"same-origin",
+      cache:"no-store"
+    })
+      .then(function(response){
+        if(!response.ok) throw new Error("profile");
+        return response.json();
+      })
+      .then(function(data){
+        const user=data&&data.usuario?data.usuario:data;
+        if(user) applyCortexUserProfile(user);
+        return user||null;
+      })
+      .catch(function(){
+        return cortexGlobalUser||null;
+      });
+
+    return cortexGlobalProfilePromise;
+  }
 
   /* =======================================================
      MOBILE - IMPLEMENTACAO UNICA
@@ -1579,6 +1740,9 @@
         overlay
       );
 
+    applyCortexLogo();
+    if(cortexGlobalUser) applyCortexUserProfile(cortexGlobalUser);
+
 
     const close =
       function () {
@@ -1714,6 +1878,23 @@
   }
 
 
+  window.addEventListener("message",function(event){
+    if(event.origin!==window.location.origin) return;
+    const data=event.data||{};
+    if(data.type==="cortex:profile-data-ready"&&data.usuario){
+      applyCortexUserProfile(data.usuario);
+    }
+    if(data.type==="cortex:profile-photo-updated"){
+      if(cortexGlobalUser){
+        cortexGlobalUser.fotoPerfil=data.fotoPerfil||null;
+        applyCortexUserProfile(cortexGlobalUser);
+      }else{
+        void loadCortexUserProfile();
+      }
+    }
+  });
+
+
   window.addEventListener(
       "pageshow",
       function () {
@@ -1802,6 +1983,7 @@
     cleanupLegacyMobileArtifacts();
 
     applySidebar();
+    applyCortexLogo();
 
     enhanceFastNavigation();
 
@@ -1819,6 +2001,8 @@
     cleanupLegacyMobileArtifacts();
 
     ensureMobileMenu();
+    applyCortexLogo();
+    void loadCortexUserProfile();
 
     enhanceFastNavigation();
 
