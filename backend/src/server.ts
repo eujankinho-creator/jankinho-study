@@ -3304,7 +3304,7 @@ async function servirArquivo(
             )
             .replace(
               /\/css\/theme-final\.css\?v=[^"']+/g,
-              "/css/theme-final.css?v=20261006-darkthemes1"
+              "/css/theme-final.css?v=20261006-orangeblack1"
             )
             .replace(
               /\/js\/cortex-brand\.js\?v=[^"']+/g,
@@ -3312,7 +3312,19 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/configuracoes\.js\?v=[^"']+/g,
-              "/js/configuracoes.js?v=20261006-ui-profile2"
+              "/js/configuracoes.js?v=20261006-orangeblack-pet1"
+            )
+            .replace(
+              /\/js\/theme-manager\.js\?v=[^"']+/g,
+              "/js/theme-manager.js?v=20261006-orangeblack1"
+            )
+            .replace(
+              /\/css\/pink-pet\.css\?v=[^"']+/g,
+              "/css/pink-pet.css?v=20261006-orangeblack1"
+            )
+            .replace(
+              /\/js\/pink-pet\.js\?v=[^"']+/g,
+              "/js/pink-pet.js?v=20261006-orangeblack1"
             );
 
         content =
