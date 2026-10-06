@@ -6,7 +6,97 @@ const $ = function (id) {
 const state = {
   temSenha: true,
   fotoPerfil: null,
+  usuarioId: null,
 };
+
+
+function petModeKey() {
+  return "cortex_pet_mode_v1_" + (state.usuarioId || "local");
+}
+
+
+function getPetMode() {
+  try {
+    const mode = localStorage.getItem(petModeKey());
+    if (mode === "visible" || mode === "hidden" || mode === "removed") {
+      return mode;
+    }
+  }
+  catch (error) {}
+
+  return "hidden";
+}
+
+
+function renderPetSettings() {
+  const status = $("petSettingsStatus");
+  const hint = $("petSettingsHint");
+  const mode = getPetMode();
+
+  if (status) {
+    status.textContent =
+      mode === "visible"
+        ? "Visível"
+        : mode === "hidden"
+          ? "Oculto"
+          : "Removido";
+  }
+
+  if (hint) {
+    hint.textContent =
+      mode === "visible"
+        ? "O pet está ativo no canto da plataforma."
+        : mode === "hidden"
+          ? "O pet continua salvo, mas não aparece na interface."
+          : "O pet foi retirado da interface. Você pode adicioná-lo novamente quando quiser.";
+  }
+
+  document
+    .querySelectorAll("[data-pet-mode]")
+    .forEach(function (button) {
+      const active =
+        button.getAttribute("data-pet-mode") === mode;
+
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+}
+
+
+function setPetMode(mode) {
+  if (mode !== "visible" && mode !== "hidden" && mode !== "removed") {
+    return;
+  }
+
+  try {
+    localStorage.setItem(petModeKey(), mode);
+  }
+  catch (error) {}
+
+  if (window.parent !== window) {
+    try {
+      window.parent.postMessage(
+        {
+          type: "cortex:pet-mode",
+          mode: mode,
+          userId: state.usuarioId
+        },
+        window.location.origin
+      );
+    }
+    catch (error) {}
+  }
+
+  renderPetSettings();
+
+  showMessage(
+    mode === "visible"
+      ? "Pet adicionado e visível."
+      : mode === "hidden"
+        ? "Pet ocultado. Você pode mostrá-lo novamente a qualquer momento."
+        : "Pet removido da interface."
+  );
+}
 
 
 async function api(
@@ -727,6 +817,11 @@ async function loadSettings() {
       );
 
 
+    state.usuarioId =
+      user.id ||
+      null;
+
+
     state.fotoPerfil =
       user.fotoPerfil ||
       null;
@@ -735,6 +830,9 @@ async function loadSettings() {
     updateUserUI(
       user
     );
+
+
+    renderPetSettings();
 
 
     $("nome").value =
@@ -1152,3 +1250,14 @@ $("logoutButton")
 
 
 loadSettings();
+
+
+document
+  .querySelectorAll("[data-pet-mode]")
+  .forEach(function (button) {
+    button.addEventListener("click", function () {
+      setPetMode(
+        button.getAttribute("data-pet-mode")
+      );
+    });
+  });
