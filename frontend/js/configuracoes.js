@@ -135,22 +135,30 @@ function applyProfilePhoto(
 
   if (photo) {
 
-    element.style.backgroundImage =
-      'url("' +
-      photo +
-      '")';
+    element.style.setProperty(
+      "--cortex-profile-photo",
+      "url(" + JSON.stringify(String(photo)) + ")"
+    );
 
-    element.style.backgroundSize =
-      "cover";
+    element.style.removeProperty(
+      "background-image"
+    );
 
-    element.style.backgroundPosition =
-      "center";
+    element.style.removeProperty(
+      "background-size"
+    );
 
-    element.style.backgroundRepeat =
-      "no-repeat";
+    element.style.removeProperty(
+      "background-position"
+    );
 
-    element.style.color =
-      "transparent";
+    element.style.removeProperty(
+      "background-repeat"
+    );
+
+    element.style.removeProperty(
+      "color"
+    );
 
     element.style.overflow =
       "hidden";
@@ -166,20 +174,29 @@ function applyProfilePhoto(
   }
 
 
-  element.style.backgroundImage =
-    "";
+  element.style.removeProperty(
+    "--cortex-profile-photo"
+  );
 
-  element.style.backgroundSize =
-    "";
+  element.style.removeProperty(
+    "background-image"
+  );
 
-  element.style.backgroundPosition =
-    "";
+  element.style.removeProperty(
+    "background-size"
+  );
 
-  element.style.backgroundRepeat =
-    "";
+  element.style.removeProperty(
+    "background-position"
+  );
 
-  element.style.color =
-    "";
+  element.style.removeProperty(
+    "background-repeat"
+  );
+
+  element.style.removeProperty(
+    "color"
+  );
 
   element.classList.remove(
     "has-profile-photo"
@@ -283,6 +300,41 @@ function renderProfilePhoto() {
 
       }
     );
+}
+
+
+function notifyGlobalProfile(user) {
+
+  if (
+    window.parent !==
+    window
+  ) {
+
+    window.parent.postMessage(
+      {
+        type:
+          "cortex:profile-updated",
+
+        usuario: {
+          nome:
+            user && user.nome
+              ? user.nome
+              : ($("nome") ? $("nome").value.trim() : "Usuario"),
+
+          email:
+            user && user.email
+              ? user.email
+              : ($("email") ? $("email").value.trim() : ""),
+
+          fotoPerfil:
+            state.fotoPerfil || null
+        }
+      },
+      window.location.origin
+    );
+
+  }
+
 }
 
 
@@ -796,7 +848,9 @@ $("profileForm")
         renderProfilePhoto();
 
 
-        notifyGlobalProfilePhoto();
+        notifyGlobalProfile(
+          data.usuario
+        );
 
 
         $("nome").value =
