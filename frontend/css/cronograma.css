@@ -138,3 +138,138 @@
 .exam-choice-card input:checked+span{border-color:var(--sc-accent);background:color-mix(in srgb,var(--sc-accent) 10%,var(--sc-soft));box-shadow:0 0 0 1px color-mix(in srgb,var(--sc-accent) 22%,transparent)}
 .exam-choice-card:active>span{transform:scale(.99)}
 @media(max-width:760px){.exam-choice-grid{grid-template-columns:1fr}}
+
+
+/* =========================================================
+   CORTEX CRONOGRAMA COMPACT V5
+========================================================= */
+.schedule-intro{
+  max-width:760px;
+  margin:18px auto 0;
+  text-align:center;
+}
+.schedule-intro h1{
+  margin:8px 0 7px;
+  font-size:clamp(26px,3.2vw,42px);
+  letter-spacing:-.04em;
+}
+.schedule-intro p{
+  margin:0;
+  color:var(--sc-muted);
+  font-size:10px;
+  line-height:1.6;
+}
+.schedule-builder-compact{
+  max-width:900px;
+  margin:16px auto 0;
+  padding:18px;
+}
+.schedule-builder-compact .schedule-form{
+  margin-top:0;
+}
+.schedule-builder-compact .exam-choice{
+  grid-column:1/-1;
+}
+.plan-setup{
+  display:grid;
+  gap:13px;
+  margin-top:4px;
+  padding-top:16px;
+  border-top:1px solid var(--sc-line);
+}
+.plan-setup[hidden]{
+  display:none!important;
+}
+.plan-setup-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.plan-setup-head span{
+  color:var(--sc-accent2);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.plan-setup-head h2{
+  margin:4px 0 0;
+  font-size:18px;
+}
+.plan-setup-head button{
+  min-height:34px;
+  padding:0 10px;
+  border:1px solid var(--sc-line);
+  border-radius:8px;
+  background:var(--sc-soft);
+  color:var(--theme-text-soft);
+  font:inherit;
+  font-size:8px;
+  font-weight:900;
+  cursor:pointer;
+}
+.plan-fields{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+.plan-fields .wide{
+  grid-column:span 2;
+}
+.schedule-builder-compact .exam-choice-card>span{
+  min-height:94px;
+}
+.schedule-builder-compact .exam-choice-card>span b{
+  font-size:13px;
+}
+.schedule-builder-compact .exam-choice-card>span small{
+  font-size:8px;
+}
+.schedule-today-section{
+  border-color:color-mix(in srgb,var(--sc-accent) 22%,var(--sc-line));
+}
+.task-card h3{
+  font-size:12px;
+  line-height:1.35;
+}
+.task-card p{
+  min-height:0;
+  margin-top:5px;
+}
+.timeline-day{
+  padding:10px 0;
+  border-top:1px solid color-mix(in srgb,var(--sc-line) 70%,transparent);
+}
+.timeline-day:first-child{
+  border-top:0;
+  padding-top:0;
+}
+.timeline-date strong{
+  text-transform:capitalize;
+}
+@media(max-width:1100px){
+  .plan-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  .schedule-intro{
+    margin-top:8px;
+    padding:0 10px;
+  }
+  .schedule-builder-compact{
+    padding:12px;
+    border-radius:14px;
+  }
+  .plan-fields{
+    grid-template-columns:1fr;
+  }
+  .plan-fields .wide{
+    grid-column:auto;
+  }
+  .plan-setup-head{
+    align-items:flex-start;
+  }
+  .exam-choice-card>span{
+    min-height:76px!important;
+  }
+}
+/* CORTEX CRONOGRAMA COMPACT V5 END */
