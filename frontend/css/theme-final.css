@@ -4045,3 +4045,315 @@ html[data-theme="pink-glitter"] body::before{
 }
 
 /* CORTEX DARK PALETTES V3 END */
+
+
+/* =========================================================
+   CORTEX ORANGE BLACK ONLY V1
+   Identidade visual única e global.
+========================================================= */
+
+:root,
+html,
+html[data-theme] {
+  color-scheme: dark !important;
+
+  --theme-bg: #050505 !important;
+  --theme-bg-secondary: #080706 !important;
+  --theme-surface: #0d0c0b !important;
+  --theme-surface-strong: #12100e !important;
+  --theme-surface-soft: rgba(255, 104, 0, .045) !important;
+
+  --theme-border: rgba(255,255,255,.075) !important;
+  --theme-border-strong: rgba(255,106,0,.32) !important;
+
+  --theme-text: #f5f3f0 !important;
+  --theme-text-soft: #d5d0ca !important;
+  --theme-text-muted: #8b837b !important;
+
+  --theme-accent: #ff6500 !important;
+  --theme-accent-2: #ff8a1f !important;
+  --theme-accent-rgb: 255,101,0 !important;
+  --theme-accent-2-rgb: 255,138,31 !important;
+
+  --theme-accent-soft: rgba(255,101,0,.09) !important;
+  --theme-accent-medium: rgba(255,101,0,.16) !important;
+  --theme-accent-strong: rgba(255,101,0,.34) !important;
+
+  --theme-gradient:
+    linear-gradient(135deg,#ff5c00 0%,#ff7a00 55%,#ff9b32 100%) !important;
+
+  --theme-gradient-soft:
+    linear-gradient(135deg,rgba(255,101,0,.14),rgba(255,101,0,.025)) !important;
+
+  --theme-hero:
+    radial-gradient(circle at 88% -6%,rgba(255,101,0,.12),transparent 30%),
+    linear-gradient(145deg,#12100e,#060606) !important;
+
+  --theme-shadow: 0 16px 46px rgba(0,0,0,.42) !important;
+  --theme-glow:
+    0 0 0 1px rgba(255,101,0,.08),
+    0 14px 36px rgba(255,84,0,.075) !important;
+
+  --theme-button-text: #090705 !important;
+
+  --bg: #050505 !important;
+  --sidebar: #070605 !important;
+  --panel: #0d0c0b !important;
+  --orange: #ff6500 !important;
+  --orange-light: #ff8a1f !important;
+  --border: rgba(255,255,255,.075) !important;
+  --text: #f5f3f0 !important;
+  --muted: #8b837b !important;
+}
+
+html,
+html[data-theme],
+html[data-theme="dark-orange"],
+html[data-theme="pink-glitter"],
+html[data-theme="blue-black"],
+html[data-theme="black-white"] {
+  background: #050505 !important;
+}
+
+html body,
+html[data-theme] body {
+  background:
+    radial-gradient(circle at 92% -12%,rgba(255,101,0,.085),transparent 28%),
+    #050505 !important;
+  color: var(--theme-text) !important;
+}
+
+html[data-theme] :is(
+  .sidebar,
+  .mobile-sidebar,
+  .cortex-mobile-sidebar-panel
+) {
+  background:
+    linear-gradient(180deg,#090806 0%,#060606 55%,#050505 100%) !important;
+  border-color: rgba(255,255,255,.065) !important;
+  box-shadow: 12px 0 40px rgba(0,0,0,.28) !important;
+}
+
+html[data-theme] .header {
+  background: rgba(8,7,6,.96) !important;
+  border-color: rgba(255,255,255,.065) !important;
+  box-shadow: 0 8px 28px rgba(0,0,0,.18) !important;
+}
+
+html[data-theme] :is(
+  .card,.dashboard-card,.stat-card,.stats-card,.summary-card,.metric-card,.info-card,.content-card,
+  .question-card,.flashcard,.flashcard-card,.case-card,.caso-card,.finance-card,.balance-card,
+  .ranking-card,.podium-card,.settings-card,.performance-card,.history-card,.theme-box,.user-row,
+  .panel,.box,.section-box,.filter-box,.toolbar,.filters,.filter-bar,.search-box,.table-container,
+  .list-container,.content-box,.result-container,.details-box,.loading-card,.loading-state,.empty-state,
+  .schedule-builder,.schedule-section,.schedule-main-progress,.schedule-today-score,.schedule-countdown
+) {
+  background:
+    linear-gradient(145deg,#11100e 0%,#0b0a09 100%) !important;
+  border-color: rgba(255,255,255,.07) !important;
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.26),
+    inset 0 1px 0 rgba(255,255,255,.018) !important;
+}
+
+html[data-theme] :is(h1,h2,h3,h4,h5,h6,strong,.title,.header-title) {
+  color: #f7f4f1 !important;
+}
+
+html[data-theme] :is(
+  .orange-badge,.small-label,.eyebrow,.kicker,.menu-item.active,
+  .schedule-kicker,.section-heading span,.task-type span
+) {
+  color: #ff7a00 !important;
+}
+
+html[data-theme] .menu-item {
+  color: #8f877f !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme] .menu-item:hover {
+  color: #f2ede8 !important;
+  background: rgba(255,101,0,.07) !important;
+}
+
+html[data-theme] .menu-item.active {
+  color: #ff8a1f !important;
+  background:
+    linear-gradient(90deg,rgba(255,101,0,.18),rgba(255,101,0,.025)) !important;
+  border-color: rgba(255,101,0,.24) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme] .menu-item.active::before {
+  background: #ff6500 !important;
+  box-shadow: 0 0 14px rgba(255,101,0,.65) !important;
+}
+
+html[data-theme] :is(
+  button.primary,
+  .primary-button,
+  .btn-primary,
+  .button-primary
+) {
+  background:
+    linear-gradient(135deg,#ff5c00,#ff7a00) !important;
+  border-color: rgba(255,133,41,.55) !important;
+  color: #090705 !important;
+  box-shadow:
+    0 9px 24px rgba(255,88,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+
+html[data-theme] :is(input,select,textarea) {
+  background: #0b0a09 !important;
+  border-color: rgba(255,255,255,.085) !important;
+  color: #f2efeb !important;
+}
+
+html[data-theme] :is(input,select,textarea):focus {
+  border-color: rgba(255,101,0,.62) !important;
+  box-shadow: 0 0 0 3px rgba(255,101,0,.09) !important;
+}
+
+html[data-theme] a {
+  text-decoration-color: rgba(255,101,0,.45);
+}
+
+html[data-theme] ::selection {
+  background: rgba(255,101,0,.34);
+  color: #fff;
+}
+
+/* Configuração: tema único */
+.orange-black-theme-preview {
+  display:grid;
+  grid-template-columns:72px 1fr;
+  min-height:150px;
+  overflow:hidden;
+  margin-top:16px;
+  border:1px solid rgba(255,101,0,.20);
+  border-radius:16px;
+  background:#070605;
+  box-shadow:0 18px 42px rgba(0,0,0,.30);
+}
+.orange-black-preview-sidebar {
+  background:
+    linear-gradient(180deg,#0c0907,#060606);
+  border-right:1px solid rgba(255,101,0,.14);
+}
+.orange-black-preview-main {
+  padding:20px;
+}
+.orange-black-preview-line {
+  width:60%;
+  height:7px;
+  margin-bottom:9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+}
+.orange-black-preview-line.accent {
+  width:34%;
+  background:#ff6500;
+  box-shadow:0 0 18px rgba(255,101,0,.26);
+}
+.orange-black-preview-cards {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:22px;
+}
+.orange-black-preview-cards span {
+  min-height:56px;
+  border:1px solid rgba(255,255,255,.065);
+  border-radius:10px;
+  background:linear-gradient(145deg,#12100e,#0a0908);
+}
+
+/* Configuração do pet */
+.pet-settings-status {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:16px;
+  padding:14px;
+  border:1px solid rgba(255,101,0,.14);
+  border-radius:13px;
+  background:rgba(255,101,0,.035);
+}
+.pet-settings-status span,
+.pet-settings-status strong,
+.pet-settings-status small {
+  display:block;
+}
+.pet-settings-status span {
+  color:#8b837b;
+  font-size:8px;
+}
+.pet-settings-status strong {
+  margin-top:4px;
+  color:#ff8a1f;
+  font-size:12px;
+}
+.pet-settings-status small {
+  max-width:420px;
+  color:#8b837b;
+  font-size:8px;
+  line-height:1.5;
+  text-align:right;
+}
+.pet-settings-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.pet-setting-action {
+  min-height:38px;
+  padding:0 13px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;
+  background:#0c0b0a;
+  color:#d7d1ca;
+  font:inherit;
+  font-size:8px;
+  font-weight:900;
+  cursor:pointer;
+}
+.pet-setting-action:hover,
+.pet-setting-action.active {
+  border-color:rgba(255,101,0,.38);
+  background:rgba(255,101,0,.10);
+  color:#ff8a1f;
+}
+.pet-setting-action.primary {
+  border-color:rgba(255,101,0,.30);
+}
+.pet-setting-action.danger {
+  color:#c9c1ba;
+}
+.pet-setting-action.danger.active {
+  color:#ffb06c;
+}
+
+@media(max-width:640px) {
+  .pet-settings-status {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .pet-settings-status small {
+    text-align:left;
+  }
+  .pet-settings-actions {
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .orange-black-theme-preview {
+    grid-template-columns:54px 1fr;
+  }
+}
+
+/* CORTEX ORANGE BLACK ONLY V1 END */
