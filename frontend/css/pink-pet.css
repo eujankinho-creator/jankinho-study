@@ -3090,3 +3090,65 @@ small {
 }
 
 /* CORTEX PET THEMEABLE V2 END */
+
+
+/* =========================================================
+   CORTEX PET COLOR CUSTOMIZER V1
+========================================================= */
+
+#cortexPinkPet .cortex-pet-color-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;
+  margin-top:9px;
+}
+
+#cortexPinkPet .cortex-pet-color-grid button{
+  min-height:44px;
+  display:grid;
+  place-items:center;
+  gap:4px;
+  padding:6px;
+  border:1px solid var(--theme-border);
+  border-radius:9px;
+  background:color-mix(in srgb,var(--theme-surface) 94%,transparent);
+  color:var(--theme-text-muted);
+  font:inherit;
+  cursor:pointer;
+}
+
+#cortexPinkPet .cortex-pet-color-grid button i{
+  width:13px;
+  height:13px;
+  display:block;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.17);
+  background:var(--pet-color-preview,var(--theme-accent));
+}
+
+#cortexPinkPet .cortex-pet-color-grid button small{
+  font-size:7px;
+  font-weight:800;
+}
+
+#cortexPinkPet .cortex-pet-color-grid button.selected{
+  border-color:var(--theme-border-strong);
+  background:var(--theme-accent-soft);
+  color:var(--theme-accent-2);
+}
+
+#cortexPinkPet [data-pet-custom-color="theme"]{--pet-color-preview:var(--theme-accent)}
+#cortexPinkPet [data-pet-custom-color="orange"]{--pet-color-preview:#ff6500}
+#cortexPinkPet [data-pet-custom-color="pink"]{--pet-color-preview:#ff3d8d}
+#cortexPinkPet [data-pet-custom-color="green"]{--pet-color-preview:#22d36b}
+#cortexPinkPet [data-pet-custom-color="purple"]{--pet-color-preview:#9b5cff}
+#cortexPinkPet [data-pet-custom-color="black"]{--pet-color-preview:#202020}
+#cortexPinkPet [data-pet-custom-color="white"]{--pet-color-preview:#efefef}
+
+@media(max-width:600px){
+  #cortexPinkPet .cortex-pet-color-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+
+/* CORTEX PET COLOR CUSTOMIZER V1 END */
