@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261006-globalperf1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma2">
+  <link rel="stylesheet" href="/css/cronograma.css?v=20261006-cronograma3">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
   <script defer src="/js/sidebar-standard.js?v=20261006-globalperf1"></script>
@@ -71,13 +71,24 @@
         </div>
 
         <form id="scheduleForm" class="schedule-form">
-          <label class="wide"><span>Objetivo</span>
-            <select id="examType" required>
-              <option value="ENARE">ENARE — Enfermagem</option>
-              <option value="EBSERH">EBSERH — Enfermagem</option>
-              <option value="MINISTERIO_SAUDE">Ministério da Saúde — Enfermagem/Saúde</option>
-            </select>
-          </label>
+          <fieldset class="exam-choice wide">
+            <legend>Escolha seu objetivo</legend>
+            <p>Cada usuário começa sem objetivo definido e escolhe o plano que deseja seguir.</p>
+            <div class="exam-choice-grid">
+              <label class="exam-choice-card">
+                <input type="radio" name="examType" value="ENARE" required>
+                <span><b>ENARE</b><small>Residências multiprofissionais e uniprofissionais</small></span>
+              </label>
+              <label class="exam-choice-card">
+                <input type="radio" name="examType" value="EBSERH" required>
+                <span><b>EBSERH</b><small>Concurso hospitalar da rede HU Brasil</small></span>
+              </label>
+              <label class="exam-choice-card">
+                <input type="radio" name="examType" value="MINISTERIO_SAUDE" required>
+                <span><b>Ministério da Saúde</b><small>Concursos e seleções da área da saúde</small></span>
+              </label>
+            </div>
+          </fieldset>
           <label class="wide"><span>Edição / observação</span><input id="examEdition" type="text" maxlength="80" placeholder="Ex.: 2027, CPNU, Área Assistencial"></label>
           <div id="examBlueprint" class="exam-blueprint wide" aria-live="polite"></div>
           <label><span>Data da prova</span><input id="examDate" type="date"></label>
@@ -158,7 +169,7 @@
     </main>
   </div>
 
-  <script type="module" src="/js/cronograma.js?v=20261006-cronograma2"></script>
+  <script type="module" src="/js/cronograma.js?v=20261006-cronograma3"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
