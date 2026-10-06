@@ -98,7 +98,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/dashboard-premium.css?v=20261002-mobile-cta1"
+    href="/css/dashboard-premium.css?v=20261006-plan-dashboard1"
   >
   <link
     rel="stylesheet"
@@ -1162,6 +1162,93 @@
 
 
 
+
+      <!-- CORTEX DASHBOARD PLANO INTELIGENTE V1 -->
+      <section class="dashboard-plan-grid" data-reveal>
+
+        <article class="panel weekly-plan-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-kicker">Agenda inteligente</div>
+              <strong>O que fazer nesta semana</strong>
+              <span id="dashboardPlanSubtitle">Carregando seu plano...</span>
+            </div>
+            <a href="/cronograma">Abrir cronograma <span>&rarr;</span></a>
+          </div>
+
+          <div id="dashboardPlanAlerts" class="dashboard-plan-alerts"></div>
+
+          <div class="dashboard-week-summary">
+            <div>
+              <span>Concluídas</span>
+              <strong id="dashboardWeekCompleted">0</strong>
+            </div>
+            <div>
+              <span>Pendentes</span>
+              <strong id="dashboardWeekPending">0</strong>
+            </div>
+            <div>
+              <span>Hoje</span>
+              <strong id="dashboardTodayPlan">0/0</strong>
+            </div>
+            <div>
+              <span>Plano total</span>
+              <strong id="dashboardPlanPercent">0%</strong>
+            </div>
+          </div>
+
+          <div id="dashboardWeekTasks" class="dashboard-week-tasks">
+            <div class="empty">Carregando agenda...</div>
+          </div>
+        </article>
+
+        <article class="panel trajectory-panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-kicker">Trajetória</div>
+              <strong>Seu ritmo de evolução</strong>
+              <span>Execução do plano e desempenho recente.</span>
+            </div>
+            <a href="/desempenho">Ver análise <span>&rarr;</span></a>
+          </div>
+
+          <div class="trajectory-kpis">
+            <div>
+              <span>Semana cumprida</span>
+              <strong id="dashboardWeekRate">0%</strong>
+            </div>
+            <div>
+              <span>Aproveitamento 14 dias</span>
+              <strong id="dashboardRecentAccuracy">0%</strong>
+            </div>
+          </div>
+
+          <div class="dashboard-chart-block">
+            <div class="dashboard-chart-title">
+              <span>Plano por dia</span>
+              <small>tarefas concluídas / previstas</small>
+            </div>
+            <div id="dashboardWeekChart" class="dashboard-week-chart" aria-label="Execução semanal do cronograma"></div>
+          </div>
+
+          <div class="dashboard-chart-block">
+            <div class="dashboard-chart-title">
+              <span>Desempenho recente</span>
+              <small>acertos por dia nos últimos 14 dias</small>
+            </div>
+            <div class="trajectory-line-wrap">
+              <svg id="dashboardTrajectoryChart" class="trajectory-line-chart" viewBox="0 0 720 190" preserveAspectRatio="none" aria-label="Trajetória recente de desempenho">
+                <path id="dashboardTrajectoryArea" class="trajectory-area" d=""></path>
+                <polyline id="dashboardTrajectoryLine" class="trajectory-line" points=""></polyline>
+              </svg>
+              <div id="dashboardTrajectoryEmpty" class="trajectory-empty hidden">Ainda não há respostas suficientes para formar a trajetória.</div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+      <!-- END CORTEX DASHBOARD PLANO INTELIGENTE V1 -->
+
       <!-- =================================================
            INFERIOR
       ================================================== -->
@@ -1473,7 +1560,7 @@
   </script>
 
 <script defer src="/js/dashboard-ui.js?v=20261002-fluid-final4"></script>
-  <script defer src="/js/dashboard.js?v=20261002-fluid-final4"></script>
+  <script defer src="/js/dashboard.js?v=20261006-plan-dashboard1"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 
 
