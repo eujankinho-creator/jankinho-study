@@ -3304,7 +3304,7 @@ async function servirArquivo(
             )
             .replace(
               /\/css\/theme-final\.css\?v=[^"']+/g,
-              "/css/theme-final.css?v=20261006-multitheme1"
+              "/css/theme-final.css?v=20261006-multitheme2"
             )
             .replace(
               /\/js\/cortex-brand\.js\?v=[^"']+/g,
@@ -3320,7 +3320,7 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/theme-manager\.js\?v=[^"']+/g,
-              "/js/theme-manager.js?v=20261006-multitheme1"
+              "/js/theme-manager.js?v=20261006-multitheme2"
             )
             .replace(
               /\/css\/pink-pet\.css\?v=[^"']+/g,
@@ -3335,9 +3335,24 @@ async function servirArquivo(
               "/favicon.svg?v=cortex-minimal-v4"
             );
 
+        const themeRuntimeTag =
+          '<link rel="stylesheet" href="/css/theme-runtime.css?v=20261006-v7">';
+
+        const htmlComTemaGlobal =
+          htmlAtualizado.includes(
+            "/css/theme-runtime.css"
+          )
+            ? htmlAtualizado
+            : htmlAtualizado.replace(
+                /<\/head>/i,
+                "  " +
+                themeRuntimeTag +
+                "\n</head>"
+              );
+
         content =
           Buffer.from(
-            htmlAtualizado,
+            htmlComTemaGlobal,
             "utf8"
           );
       }
