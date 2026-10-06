@@ -98,6 +98,31 @@ function taskCard(task){
   </article>`;
 }
 
+function bindTaskLinks(root){
+  root?.querySelectorAll(".task-actions a").forEach((link)=>{
+    link.addEventListener("click",(event)=>{
+      if(
+        event.defaultPrevented ||
+        event.button > 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) return;
+
+      const href=link.getAttribute("href");
+      if(!href || window.parent===window) return;
+
+      try{
+        if(typeof window.parent.CortexShellNavigate==="function"){
+          event.preventDefault();
+          window.parent.CortexShellNavigate(href);
+        }
+      }catch{}
+    });
+  });
+}
+
 function bindTaskButtons(root){
   root?.querySelectorAll("[data-complete-task]").forEach((button)=>{
     button.addEventListener("click",async ()=>{
@@ -182,6 +207,7 @@ function renderDashboard(data){
   const today=data.todayTasks||[];
   $("todayTasks").innerHTML=today.length?today.map(taskCard).join(""):'<div class="research-status">Hoje é um dia livre ou de recuperação. Use o tempo para descansar ou revisar algo leve.</div>';
   bindTaskButtons($("todayTasks"));
+  bindTaskLinks($("todayTasks"));
 
   const groups=groupUpcoming(data.upcoming||[]);
   $("upcomingSchedule").innerHTML=groups.length?groups.map(([date,tasks])=>`
@@ -191,6 +217,7 @@ function renderDashboard(data){
     </div>
   `).join(""):'<div class="research-status">Nenhuma tarefa futura.</div>';
   bindTaskButtons($("upcomingSchedule"));
+  bindTaskLinks($("upcomingSchedule"));
 
   $("activeSources").innerHTML=(schedule.fontes||[]).length
     ? schedule.fontes.slice(0,10).map(sourceCard).join("")
