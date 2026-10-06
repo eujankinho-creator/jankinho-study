@@ -1232,3 +1232,177 @@ body.cortex-mobile-menu-open {
   margin-right:auto;
 }
 /* CORTEX GLOBAL LOGO STANDARD V1 END */
+
+
+/* =========================================================
+   CORTEX GLOBAL BRAND + PROFILE V2
+   Fonte única para todas as páginas, abas e temas.
+========================================================= */
+.sidebar-logo{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+}
+
+.sidebar-logo .logo-box,
+.sidebar-logo .logo-box.cortex-logo,
+.sidebar-logo .cortex-global-logo-box{
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 40px!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  color:transparent!important;
+  font-size:0!important;
+  text-shadow:none!important;
+  isolation:isolate;
+}
+
+.sidebar-logo .logo-box::before,
+.sidebar-logo .logo-box::after,
+.sidebar-logo .logo-box.cortex-logo::before,
+.sidebar-logo .logo-box.cortex-logo::after{
+  content:none!important;
+  display:none!important;
+}
+
+.sidebar-logo .logo-box > *{
+  display:none!important;
+}
+
+.sidebar-logo .logo-box > .cortex-global-logo-image{
+  display:block!important;
+  width:34px!important;
+  height:34px!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  visibility:visible!important;
+  filter:drop-shadow(
+    0 0 5px
+    color-mix(in srgb,var(--theme-accent,#f97316) 32%,transparent)
+  )!important;
+  transform:none!important;
+}
+
+.sidebar-logo > div:last-child{
+  min-width:0!important;
+}
+
+.sidebar-logo > div:last-child strong,
+.sidebar-logo > div:last-child span{
+  display:block!important;
+}
+
+.cortex-mobile-sidebar-header{
+  display:flex!important;
+  align-items:center!important;
+}
+
+.cortex-mobile-sidebar-header::before{
+  content:none!important;
+  display:none!important;
+}
+
+.cortex-mobile-brand-image{
+  display:block!important;
+  width:30px!important;
+  height:30px!important;
+  flex:0 0 30px!important;
+  margin-right:9px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(
+    0 0 4px
+    color-mix(in srgb,var(--theme-accent,#f97316) 28%,transparent)
+  )!important;
+}
+
+.sidebar-user{
+  transition:opacity .14s ease;
+}
+
+.sidebar-user #nomeSidebar,
+.sidebar-user #emailSidebar,
+.header-user #nomeHeader{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.sidebar-user .avatar,
+.header-user .avatar{
+  background-color:color-mix(
+    in srgb,
+    var(--theme-accent,#f97316) 12%,
+    var(--theme-surface,#111)
+  );
+  border-color:color-mix(
+    in srgb,
+    var(--theme-accent,#f97316) 34%,
+    var(--theme-border,rgba(255,255,255,.08))
+  );
+}
+
+html[data-theme="black-white"] .sidebar-logo .cortex-global-logo-image,
+html[data-theme="black-white"] .cortex-mobile-brand-image{
+  filter:none!important;
+}
+/* CORTEX GLOBAL BRAND + PROFILE V2 END */
+
+
+/* =========================================================
+   CORTEX GLOBAL LOGO FIX V2
+   Corrige conflito antigo que escondia a imagem dentro do logo-box.
+========================================================= */
+.sidebar-logo .logo-box.cortex-global-logo-box{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.sidebar-logo .logo-box.cortex-global-logo-box::before,
+.sidebar-logo .logo-box.cortex-global-logo-box::after{
+  content:none!important;
+  display:none!important;
+}
+.sidebar-logo .logo-box.cortex-global-logo-box>.cortex-global-logo-image{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:32px!important;
+  height:32px!important;
+  max-width:32px!important;
+  max-height:32px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--theme-accent,#f97316) 30%,transparent))!important;
+}
+.cortex-mobile-brand-image{
+  display:block!important;
+  width:30px!important;
+  height:30px!important;
+  object-fit:contain!important;
+  flex:0 0 30px!important;
+}
+.sidebar-user.cortex-profile-ready #nomeSidebar,
+.sidebar-user.cortex-profile-ready [data-cortex-user-name]{
+  opacity:1!important;
+}
