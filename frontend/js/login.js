@@ -37,6 +37,34 @@ function limparErro() {
 }
 
 
+
+function accountThemeKey(email) {
+  return "cortex_account_theme_v1:" + String(email || "").trim().toLowerCase();
+}
+
+function applyRememberedAccountTheme(email) {
+  try {
+    const remembered = localStorage.getItem(accountThemeKey(email));
+    if (!remembered) return;
+
+    if (window.JankinhoTheme && typeof window.JankinhoTheme.setTheme === "function") {
+      window.JankinhoTheme.setTheme(remembered);
+    } else {
+      document.documentElement.setAttribute("data-theme", remembered);
+      localStorage.setItem("jankinho_theme_v1", remembered);
+    }
+  } catch {}
+}
+
+emailInput.addEventListener("change", function () {
+  applyRememberedAccountTheme(emailInput.value);
+});
+
+emailInput.addEventListener("blur", function () {
+  applyRememberedAccountTheme(emailInput.value);
+});
+
+
 function prepareDashboardAfterLogin(
   theme
 ) {
@@ -173,6 +201,27 @@ form.addEventListener(
         dados.usuario
           ? dados.usuario.tema
           : null;
+
+
+      try {
+        if (dados && dados.usuario) {
+          sessionStorage.setItem(
+            "cortex_user_profile_v3",
+            JSON.stringify({
+              nome: dados.usuario.nome || "Usuario",
+              email: dados.usuario.email || email,
+              fotoPerfil: dados.usuario.fotoPerfil || null
+            })
+          );
+
+          if (accountTheme) {
+            localStorage.setItem(
+              accountThemeKey(dados.usuario.email || email),
+              accountTheme
+            );
+          }
+        }
+      } catch {}
 
 
       prepareDashboardAfterLogin(
