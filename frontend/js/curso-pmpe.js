@@ -172,6 +172,7 @@ function saveQ(){try{localStorage.setItem(QSTORE,JSON.stringify(qstate));}catch(
 function setTab(name){
   document.querySelectorAll("[data-pmpe-tab]").forEach(b=>b.classList.toggle("active",b.dataset.pmpeTab===name));
   document.querySelectorAll("[data-pmpe-panel]").forEach(p=>p.hidden=p.dataset.pmpePanel!==name);
+  document.querySelectorAll(".pmpe-course,.pmpe-week").forEach(p=>p.hidden=name!=="plano");
   if(name==="questoes")populateQuestionSelectors();
   window.scrollTo({top:0,behavior:"smooth"});
 }
