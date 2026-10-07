@@ -333,7 +333,7 @@
     ) {}
 
 
-    return "hidden";
+    return "visible";
 
   }
 
@@ -367,7 +367,7 @@
       requestedMode === "hidden" ||
       requestedMode === "removed"
         ? requestedMode
-        : "hidden";
+        : "visible";
 
 
     if (
