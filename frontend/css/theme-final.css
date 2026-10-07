@@ -1328,27 +1328,16 @@ html[data-theme="blue-black"]
    PINK CAT + MUSIC BUTTON
 ========================================================= */
 
-html[data-theme="pink-glitter"]
-body.cortex-app-shell
+body.cortex-app-shell:has(#cortexPinkPet:not([hidden]))
 .global-player-bubble {
-  /*
-   * Cat = canto direito.
-   * Music = imediatamente ao lado.
-   */
-  right:
-    124px !important;
+  right:124px !important;
 }
 
-
-@media (max-width: 700px) {
-
-  html[data-theme="pink-glitter"]
-  body.cortex-app-shell
+@media (max-width:700px) {
+  body.cortex-app-shell:has(#cortexPinkPet:not([hidden]))
   .global-player-bubble {
-    right:
-      104px !important;
+    right:104px !important;
   }
-
 }
 
 
@@ -3598,10 +3587,7 @@ html[data-theme="blue-black"] .global-music-player {
   }
 }
 
-/* Pet remains exclusive to Pink Glitter. */
-html:not([data-theme="pink-glitter"]) #cortexPinkPet {
-  display:none !important;
-}
+/* Pet global: visibilidade passa a depender apenas da preferencia do usuario. */
 
 /* CORTEX CANONICAL THEMES V7 END */
 
@@ -5991,4 +5977,15 @@ html {
   outline: 2px solid var(--theme-accent) !important;
   outline-offset: 2px !important;
   box-shadow: 0 0 0 4px var(--theme-accent-soft) !important;
+}
+
+
+/* CORTEX PET GLOBAL THEMES V10 */
+html[data-theme] #cortexPinkPet {
+  --pet-accent:var(--theme-accent) !important;
+  --pet-accent-2:var(--theme-accent-2) !important;
+  --pet-accent-rgb:var(--theme-accent-rgb) !important;
+}
+html[data-theme] #cortexPinkPet:not([hidden]) {
+  display:block !important;
 }
