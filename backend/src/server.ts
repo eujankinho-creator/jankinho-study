@@ -40,6 +40,7 @@ import { atenderAulas } from "./aulas";
 import { atenderCronograma } from "./cronograma";
 import { limparFlashcardsParaMetodologia } from "./flashcardsMetodologia";
 import { gerarQuestoesIA } from "./iaQuestoes";
+import { responderAssistenteVoz } from "./voiceAssistant";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import { sincronizarQuestoesDiego } from "./questoesDiego";
 import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
@@ -3730,6 +3731,48 @@ const server =
             {
               sucesso: true,
             }
+          );
+
+          return;
+        }
+
+
+        /* CORTEX VOICE */
+
+        if (
+          caminho ===
+            "/api/voice-assistant" &&
+          metodo === "POST"
+        ) {
+
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+
+          const body =
+            await lerJson(
+              request
+            );
+
+
+          const resultado =
+            await responderAssistenteVoz(
+              usuarioId,
+              body
+            );
+
+
+          json(
+            response,
+            resultado.status,
+            resultado.data
           );
 
           return;
