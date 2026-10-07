@@ -18,26 +18,10 @@
 
   <script>
     (function () {
-      var theme = "dark-purple";
-
-      try {
-        var saved =
-          localStorage.getItem(
-            "jankinho_theme_v1"
-          );
-
-        if (
-          ["dark-orange","dark-pink","dark-green","dark-purple","dark-black"].indexOf(saved) >= 0
-        ) {
-          theme = saved;
-        }
-      }
-      catch (error) {}
-
       document.documentElement
         .setAttribute(
           "data-theme",
-          theme
+          "dark-purple"
         );
     })();
   </script>
@@ -45,12 +29,12 @@
 
   <link
     rel="stylesheet"
-    href="/css/auth.css?v=20261007-theme-auth5"
+    href="/css/auth.css?v=20261007-purple-cinema6"
   >
 
   <link
     rel="stylesheet"
-    href="/css/auth-cinema.css?v=20261007-theme-sync4"
+    href="/css/auth-cinema.css?v=20261007-page-bg5"
   >
 
   <link
@@ -77,6 +61,84 @@
 
   <main class="auth-page">
 
+    <div
+      class="auth-cinema-stage"
+      aria-hidden="true"
+    >
+
+      <div class="cinema-grid"></div>
+
+      <div class="cinema-book cinema-book-one">
+        <div class="cinema-book-shadow"></div>
+        <div class="cinema-book-back"></div>
+        <div class="cinema-book-pages">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="cinema-book-front">
+          <span class="cinema-book-mark"></span>
+          <span class="cinema-book-line"></span>
+          <span class="cinema-book-line short"></span>
+        </div>
+      </div>
+
+      <div class="cinema-book cinema-book-two">
+        <div class="cinema-book-shadow"></div>
+        <div class="cinema-book-back"></div>
+        <div class="cinema-book-pages">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="cinema-book-front">
+          <span class="cinema-book-mark"></span>
+          <span class="cinema-book-line"></span>
+          <span class="cinema-book-line short"></span>
+        </div>
+      </div>
+
+      <div class="cinema-book cinema-book-three">
+        <div class="cinema-book-shadow"></div>
+        <div class="cinema-book-back"></div>
+        <div class="cinema-book-pages">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="cinema-book-front">
+          <span class="cinema-book-mark"></span>
+          <span class="cinema-book-line"></span>
+          <span class="cinema-book-line short"></span>
+        </div>
+      </div>
+
+      <div class="cinema-morph-field cinema-morph-one">
+        <span class="cinema-morph-label">IDEIA</span>
+        <span class="cinema-morph-line"></span>
+        <span class="cinema-morph-glyph" data-from="A" data-to="7">A</span>
+        <span class="cinema-morph-glyph" data-from="B" data-to="2">B</span>
+        <span class="cinema-morph-glyph" data-from="C" data-to="9">C</span>
+      </div>
+
+      <div class="cinema-morph-field cinema-morph-two">
+        <span class="cinema-morph-label">CONHECIMENTO</span>
+        <span class="cinema-morph-line"></span>
+        <span class="cinema-morph-glyph" data-from="X" data-to="4">X</span>
+        <span class="cinema-morph-glyph" data-from="Y" data-to="8">Y</span>
+        <span class="cinema-morph-glyph" data-from="Z" data-to="1">Z</span>
+      </div>
+
+      <div class="cinema-symbol cinema-symbol-one">Σ</div>
+      <div class="cinema-symbol cinema-symbol-two">∆</div>
+      <div class="cinema-symbol cinema-symbol-three">π</div>
+      <div class="cinema-symbol cinema-symbol-four">∞</div>
+
+      <div class="cinema-orbit cinema-orbit-one"></div>
+      <div class="cinema-orbit cinema-orbit-two"></div>
+
+    </div>
+
     <div class="auth-noise"></div>
 
     <div class="auth-orb auth-orb-one"></div>
@@ -93,83 +155,7 @@
 
       <aside class="auth-showcase">
 
-        <div
-          class="auth-cinema-stage"
-          aria-hidden="true"
-        >
 
-          <div class="cinema-grid"></div>
-
-          <div class="cinema-book cinema-book-one">
-            <div class="cinema-book-shadow"></div>
-            <div class="cinema-book-back"></div>
-            <div class="cinema-book-pages">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="cinema-book-front">
-              <span class="cinema-book-mark"></span>
-              <span class="cinema-book-line"></span>
-              <span class="cinema-book-line short"></span>
-            </div>
-          </div>
-
-          <div class="cinema-book cinema-book-two">
-            <div class="cinema-book-shadow"></div>
-            <div class="cinema-book-back"></div>
-            <div class="cinema-book-pages">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="cinema-book-front">
-              <span class="cinema-book-mark"></span>
-              <span class="cinema-book-line"></span>
-              <span class="cinema-book-line short"></span>
-            </div>
-          </div>
-
-          <div class="cinema-book cinema-book-three">
-            <div class="cinema-book-shadow"></div>
-            <div class="cinema-book-back"></div>
-            <div class="cinema-book-pages">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="cinema-book-front">
-              <span class="cinema-book-mark"></span>
-              <span class="cinema-book-line"></span>
-              <span class="cinema-book-line short"></span>
-            </div>
-          </div>
-
-          <div class="cinema-morph-field cinema-morph-one">
-            <span class="cinema-morph-label">IDEIA</span>
-            <span class="cinema-morph-line"></span>
-            <span class="cinema-morph-glyph" data-from="A" data-to="7">A</span>
-            <span class="cinema-morph-glyph" data-from="B" data-to="2">B</span>
-            <span class="cinema-morph-glyph" data-from="C" data-to="9">C</span>
-          </div>
-
-          <div class="cinema-morph-field cinema-morph-two">
-            <span class="cinema-morph-label">CONHECIMENTO</span>
-            <span class="cinema-morph-line"></span>
-            <span class="cinema-morph-glyph" data-from="X" data-to="4">X</span>
-            <span class="cinema-morph-glyph" data-from="Y" data-to="8">Y</span>
-            <span class="cinema-morph-glyph" data-from="Z" data-to="1">Z</span>
-          </div>
-
-          <div class="cinema-symbol cinema-symbol-one">Σ</div>
-          <div class="cinema-symbol cinema-symbol-two">∆</div>
-          <div class="cinema-symbol cinema-symbol-three">π</div>
-          <div class="cinema-symbol cinema-symbol-four">∞</div>
-
-          <div class="cinema-orbit cinema-orbit-one"></div>
-          <div class="cinema-orbit cinema-orbit-two"></div>
-
-        </div>
 
 
         <div class="showcase-top">
