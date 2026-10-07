@@ -1302,6 +1302,61 @@
   }
 
   /* =======================================================
+     LOGOUT GLOBAL
+  ======================================================= */
+
+  let cortexLogoutRunning = false;
+
+  async function cortexGlobalLogout(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (cortexLogoutRunning) return;
+    cortexLogoutRunning = true;
+
+    const buttons = document.querySelectorAll("#logoutSidebar, .logout-button");
+    buttons.forEach(function(button){
+      button.disabled = true;
+      button.setAttribute("aria-busy","true");
+    });
+
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "same-origin",
+        keepalive: true
+      });
+    } catch {}
+
+    try {
+      sessionStorage.removeItem("cortex_user_profile_v3");
+      sessionStorage.removeItem("cortex_auth_me_v1");
+      sessionStorage.removeItem("cortexDesktopIntroSeen");
+      sessionStorage.removeItem("cortexDashboardFreshLogin");
+    } catch {}
+
+    try {
+      const target = window.top && window.top !== window ? window.top : window;
+      target.location.replace("/login.html");
+    } catch {
+      window.location.replace("/login.html");
+    }
+  }
+
+  document.addEventListener("click", function(event){
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const button = target.closest("#logoutSidebar, .logout-button");
+    if (!button) return;
+
+    void cortexGlobalLogout(event);
+  }, true);
+
+
+  /* =======================================================
      MOBILE - IMPLEMENTACAO UNICA
   ======================================================= */
 
