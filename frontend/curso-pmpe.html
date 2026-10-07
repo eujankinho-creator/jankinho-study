@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261005-logo-global1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261006-theme-v6">
-  <link rel="stylesheet" href="/css/curso-pmpe.css?v=20261007-pmpe-bank5">
+  <link rel="stylesheet" href="/css/curso-pmpe.css?v=20261007-pmpe-ux6">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261006-multitheme2"></script>
   <script defer src="/js/sidebar-standard.js?v=20261006-pmpe1"></script>
@@ -102,18 +102,6 @@
         <div class="pmpe-filter-row" id="pmpeFilters"></div>
       </section>
 
-      <section class="pmpe-plan">
-        <div class="pmpe-section-title">
-          <div><span>PLANO DE ATAQUE</span><h2>Rotina recomendada</h2></div>
-        </div>
-        <div class="pmpe-plan-grid">
-          <article><strong>1. Teoria</strong><p>1 tópico do edital por bloco de estudo. Use a aula gratuita sugerida e confira o texto do edital.</p></article>
-          <article><strong>2. Lei seca</strong><p>Constitucional e legislação: leia diretamente a norma depois da aula e marque artigos recorrentes.</p></article>
-          <article><strong>3. AOCP</strong><p>Feche cada tópico com 15–30 questões da banca. Registre a sessão aqui sem misturar com o banco geral.</p></article>
-          <article><strong>4. Revisão</strong><p>24h, 7 dias e 30 dias. Marque “Revisado” após recuperar o conteúdo sem consultar.</p></article>
-        </div>
-      </section>
-
       </section>
 
       <section data-pmpe-panel="questoes" hidden>
@@ -124,7 +112,7 @@
         <div class="pmpe-question-controls">
           <label>Matéria<select id="pmpeQuestionSubject"></select></label>
           <label>Tópico<select id="pmpeQuestionTopic"></select></label>
-          <label>Quantidade<select id="pmpeQuestionAmount"><option value="5">5</option><option value="10">10</option><option value="20">20</option><option value="0">Todas disponíveis</option></select></label>
+          <label>Quantidade<select id="pmpeQuestionAmount"><option value="5">5</option><option value="10">10</option><option value="20">20</option><option value="0" selected>Todas disponíveis</option></select></label>
           <button id="pmpeStartQuestions" type="button">Começar treino</button>
         </div>
         <div id="pmpeQuestionRunner" class="pmpe-question-runner"></div>
@@ -207,6 +195,18 @@
           <article><span>SÁB</span><strong>História + Informática + Redação</strong><small>Revisão da semana + mini simulado</small></article>
         </div>
       </section>
+      <section class="pmpe-plan">
+        <div class="pmpe-section-title">
+          <div><span>PLANO DE ATAQUE</span><h2>Rotina recomendada</h2></div>
+        </div>
+        <div class="pmpe-plan-grid">
+          <article><strong>1. Teoria</strong><p>1 tópico do edital por bloco de estudo. Use a aula gratuita sugerida e confira o texto do edital.</p></article>
+          <article><strong>2. Lei seca</strong><p>Constitucional e legislação: leia diretamente a norma depois da aula e marque artigos recorrentes.</p></article>
+          <article><strong>3. AOCP</strong><p>Feche cada tópico com 15–30 questões da banca. Registre a sessão aqui sem misturar com o banco geral.</p></article>
+          <article><strong>4. Revisão</strong><p>24h, 7 dias e 30 dias. Marque “Revisado” após recuperar o conteúdo sem consultar.</p></article>
+        </div>
+      </section>
+
     </main>
   </div>
 
@@ -266,7 +266,7 @@
   <script src="/js/pmpe-questoes-lote-54-pessoa-idosa.js?v=20261007-b54"></script>
   <script src="/js/pmpe-questoes-lote-55-juventude.js?v=20261007-b55"></script>
   <script src="/js/pmpe-questoes-lote-56-jurisprudencia-dh.js?v=20261007-b56"></script>
-  <script src="/js/curso-pmpe.js?v=20261007-b56"></script>
+  <script src="/js/curso-pmpe.js?v=20261007-ux6"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
