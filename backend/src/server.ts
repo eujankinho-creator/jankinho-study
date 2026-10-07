@@ -83,6 +83,56 @@ const FRONTEND_DIR =
   );
 
 
+const PMPE_PUBLIC_PDFS: Record<string, string> = {
+  sim2026: "https://drive.google.com/uc?export=download&id=1Gt9Sw4Ykf15OJlKKjljyI80CjwYoTr4d",
+  gabarito2026: "https://drive.google.com/uc?export=download&id=1Jy75ZglIF_6L78_knCBadlL_zsYxyktZ",
+};
+
+async function servirPmpePdf(
+  response: ServerResponse,
+  documento: string
+) {
+  const origem = PMPE_PUBLIC_PDFS[documento];
+
+  if (!origem) {
+    json(response, 404, { error: "Simulado não encontrado." });
+    return;
+  }
+
+  try {
+    const remoto = await fetch(origem, {
+      redirect: "follow",
+      headers: {
+        "User-Agent": "Cortex-PMPE/1.0",
+      },
+    });
+
+    if (!remoto.ok) {
+      throw new Error("Falha ao carregar PDF PMPE.");
+    }
+
+    const buffer = Buffer.from(
+      await remoto.arrayBuffer()
+    );
+
+    response.writeHead(200, {
+      "Content-Type": "application/pdf",
+      "Content-Length": String(buffer.length),
+      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+      "Content-Disposition": 'inline; filename="pmpe-simulado.pdf"',
+    });
+
+    response.end(buffer);
+  }
+  catch (error) {
+    console.error("Erro ao carregar simulado PMPE:", error);
+    json(response, 502, {
+      error: "Não foi possível carregar o simulado PMPE agora.",
+    });
+  }
+}
+
+
 /* =========================================================
    RESPOSTAS HTTP
 ========================================================= */
@@ -3598,6 +3648,22 @@ const server =
               backend:
                 "typescript",
             }
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/api/pmpe/pdf" &&
+          metodo === "GET"
+        ) {
+          await servirPmpePdf(
+            response,
+            String(
+              url.searchParams.get("doc") ||
+              ""
+            )
           );
 
           return;
