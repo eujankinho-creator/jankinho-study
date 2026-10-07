@@ -1327,6 +1327,7 @@
       "/questoes",
       "/aulas",
       "/cronograma",
+      "/curso-pmpe",
       "/flashcards",
       "/lousa",
       "/farmacos",
