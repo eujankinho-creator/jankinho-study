@@ -172,13 +172,19 @@ function populateTopics(){
   const s=SUBJECTS.find(x=>x.key===ss.value);
   ts.innerHTML='<option value="all">Todos os tópicos</option>'+(s?s.topics.map((t,i)=>'<option value="'+i+'">'+esc(t)+'</option>').join(""):"");
 }
+function shuffledQuestion(q){
+  const items=q.options.map((text,index)=>({text,index}));
+  for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]];}
+  return {...q,options:items.map(x=>x.text),answer:items.findIndex(x=>x.index===q.answer)};
+}
 function selectedQuestions(){
   const subject=document.getElementById("pmpeQuestionSubject")?.value||"all";
   const topic=document.getElementById("pmpeQuestionTopic")?.value||"all";
   let list=BANK.filter(q=>(subject==="all"||q.subject===subject)&&(topic==="all"||String(q.topicIndex)===topic));
+  for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
   const n=Number(document.getElementById("pmpeQuestionAmount")?.value||5);
   if(n>0)list=list.slice(0,n);
-  return list;
+  return list.map(shuffledQuestion);
 }
 let session=[],current=0,answers={};
 function startQuestions(){
