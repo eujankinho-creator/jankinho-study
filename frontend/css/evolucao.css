@@ -1569,3 +1569,42 @@
   }
 
 }
+
+
+/* EVOLUCAO THEME SYNC V5 */
+html[data-theme] .training-badge {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent-2) !important;
+}
+html[data-theme] :is(.mode-icon,.config-icon,.tip-icon,.task-icon) {
+  color: var(--theme-accent-2) !important;
+  background: var(--theme-accent-soft) !important;
+}
+html[data-theme] .field select:focus {
+  border-color: var(--theme-border-strong) !important;
+  box-shadow: 0 0 0 3px var(--theme-accent-soft) !important;
+}
+html[data-theme] .primary-button {
+  border-color: var(--theme-accent) !important;
+  background: var(--theme-gradient) !important;
+  color: var(--theme-button-text) !important;
+  box-shadow: 0 10px 26px rgba(var(--theme-accent-rgb),.15) !important;
+}
+html[data-theme] .primary-button:hover {
+  border-color: var(--theme-accent-2) !important;
+  background: var(--theme-gradient) !important;
+  filter: brightness(1.06);
+}
+html[data-theme] .secondary-button:hover {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-text) !important;
+}
+html[data-theme] :is(.section-label,.patient-box span) {
+  color: var(--theme-accent-2) !important;
+}
+html[data-theme] .patient-box {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+}
