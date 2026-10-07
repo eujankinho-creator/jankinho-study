@@ -42,29 +42,6 @@ function accountThemeKey(email) {
   return "cortex_account_theme_v1:" + String(email || "").trim().toLowerCase();
 }
 
-function applyRememberedAccountTheme(email) {
-  try {
-    const remembered = localStorage.getItem(accountThemeKey(email));
-    if (!remembered) return;
-
-    if (window.JankinhoTheme && typeof window.JankinhoTheme.setTheme === "function") {
-      window.JankinhoTheme.setTheme(remembered);
-    } else {
-      document.documentElement.setAttribute("data-theme", remembered);
-      localStorage.setItem("jankinho_theme_v1", remembered);
-    }
-  } catch {}
-}
-
-emailInput.addEventListener("change", function () {
-  applyRememberedAccountTheme(emailInput.value);
-});
-
-emailInput.addEventListener("blur", function () {
-  applyRememberedAccountTheme(emailInput.value);
-});
-
-
 function prepareDashboardAfterLogin(
   theme
 ) {
