@@ -143,6 +143,15 @@ const BANK=[
 {id:"dh:16",subject:"dh",subjectName:"Direitos Humanos e Legislação Extravagante",topicIndex:16,topic:SUBJECTS[5].topics[16],source:"Autoral Cortex · padrão AOCP/PMPE",prompt:"Para a preparação em Direitos Humanos e Legislação Extravagante, o edital também exige súmulas, jurisprudência dominante e legislação relacionada. Nessa perspectiva, assinale a alternativa correta.",options:["Somente o texto literal das leis pode ser cobrado, ainda que o edital mencione jurisprudência.","Entendimentos dos Tribunais Superiores devem ser estudados de forma atualizada e relacionados aos temas expressamente previstos.","Qualquer decisão isolada de primeiro grau equivale a súmula vinculante.","Jurisprudência é imutável.","Atualizações legislativas posteriores ao edital nunca podem afetar a interpretação da matéria."],answer:1,explanation:"Quando o edital inclui jurisprudência dominante, é necessário estudar entendimentos atualizados e pertinentes aos temas."}
 ];
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+const extras=Array.isArray(window.PMPE_EXTRA_QUESTIONS)?window.PMPE_EXTRA_QUESTIONS:[];
+const existingIds=new Set(BANK.map(q=>q.id));
+for(const candidate of extras){
+  const subject=SUBJECTS.find(s=>s.key===candidate.subject);
+  if(!subject||!Number.isInteger(candidate.topicIndex)||candidate.topicIndex<0||candidate.topicIndex>=subject.topics.length)continue;
+  if(!candidate.id||existingIds.has(candidate.id)||!Array.isArray(candidate.options)||candidate.options.length!==5||new Set(candidate.options).size!==5||!Number.isInteger(candidate.answer)||candidate.answer<0||candidate.answer>4||!candidate.prompt||!candidate.explanation)continue;
+  existingIds.add(candidate.id);
+  BANK.push({...candidate,subjectName:subject.name,topic:subject.topics[candidate.topicIndex]});
+}
 let qstate={};
 try{qstate=JSON.parse(localStorage.getItem(QSTORE)||"{}")||{};}catch(e){}
 function saveQ(){try{localStorage.setItem(QSTORE,JSON.stringify(qstate));}catch(e){}}
