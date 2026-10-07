@@ -1216,3 +1216,36 @@ body.calendar-modal-open{
 }
 
 /* CORTEX CRONOGRAMA PREMIUM ENTRY V1 END */
+
+
+/* CRONOGRAMA THEME ACCENT FIX V6 */
+html[data-theme] .schedule-view {
+  --sc-accent: var(--theme-accent) !important;
+  --sc-accent2: var(--theme-accent-2) !important;
+}
+html[data-theme] .schedule-view :is(
+  .schedule-kicker,
+  .schedule-builder-head span,
+  .section-heading span,
+  .schedule-integration > span,
+  .schedule-overview article > span,
+  .task-type span,
+  .plan-setup-head span,
+  .source-badge
+) {
+  color: var(--theme-accent-2) !important;
+}
+html[data-theme] .schedule-view .task-actions button.primary {
+  background: var(--theme-accent-soft) !important;
+  border-color: var(--theme-border-strong) !important;
+  color: var(--theme-text) !important;
+}
+html[data-theme] .schedule-view :is(.task-actions a,.task-actions button,.overview-head button):hover {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent-2) !important;
+}
+html[data-theme] .schedule-view :is(.schedule-form input,.schedule-form select):focus {
+  border-color: var(--theme-border-strong) !important;
+  box-shadow: 0 0 0 3px var(--theme-accent-soft) !important;
+}
