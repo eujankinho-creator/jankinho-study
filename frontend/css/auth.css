@@ -23,10 +23,13 @@
     #626262;
 
   --auth-accent:
-    var(--auth-accent);
+    #f97316;
 
   --auth-accent-two:
-    var(--auth-accent-two);
+    #fb923c;
+
+  --auth-accent-rgb:
+    249,115,22;
 
   --auth-accent-soft:
     rgba(var(--auth-accent-rgb),.10);
