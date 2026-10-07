@@ -14,7 +14,7 @@
 
   <script>
     (function () {
-      var theme = "dark-orange";
+      var theme = "dark-purple";
 
       try {
         var saved =
@@ -23,10 +23,7 @@
           );
 
         if (
-          saved === "dark-orange" ||
-          saved === "pink-glitter" ||
-          saved === "blue-black" ||
-          saved === "black-white"
+          ["dark-orange","dark-pink","dark-green","dark-purple","dark-black"].indexOf(saved) >= 0
         ) {
           theme = saved;
         }
