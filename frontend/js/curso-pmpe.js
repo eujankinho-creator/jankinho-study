@@ -50,18 +50,17 @@ function topicKey(s,i){return s.key+":"+i;}
 function getTopicState(key){return state[key]||{};}
 function toggle(key,field){const next={...getTopicState(key)};next[field]=!next[field];state[key]=next;state.last=key;saveState();render();}
 function qSearch(subject,topic){return "https://www.youtube.com/results?search_query="+encodeURIComponent("PMPE 2026 "+subject+" "+topic+" Instituto AOCP aula");}
-function qQuestions(subject,topic){return "https://www.google.com/search?q="+encodeURIComponent("questões Instituto AOCP "+subject+" "+topic+" grátis");}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 function renderFilters(){const el=document.getElementById("pmpeFilters");el.innerHTML=[["all","Todas"],...SUBJECTS.map(s=>[s.key,s.name])].map(([k,n])=>'<button type="button" data-filter="'+k+'" class="'+(activeFilter===k?"active":"")+'">'+esc(n)+'</button>').join("");el.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;render();}));}
 function render(){
 renderFilters();
 const host=document.getElementById("pmpeSubjects");let visible=0;
 host.innerHTML=SUBJECTS.filter(s=>activeFilter==="all"||s.key===activeFilter).map((s,si)=>{
-const rows=s.topics.map((topic,i)=>{const key=topicKey(s,i),t=getTopicState(key);const match=!searchTerm||(s.name+" "+topic).toLowerCase().includes(searchTerm);if(!match)return "";visible++;const law=LAW_LINKS[topic];return '<article class="pmpe-topic '+(t.studied?"complete":"")+'" data-topic-key="'+key+'"><div class="pmpe-topic-index">'+String(i+1).padStart(2,"0")+'</div><div><h3>'+esc(topic)+'</h3><p>'+esc(s.block)+' · tópico '+(i+1)+' de '+s.topics.length+'</p><div class="pmpe-topic-links"><a href="'+qSearch(s.name,topic)+'" target="_blank" rel="noopener">Aula gratuita ↗</a><a href="'+qQuestions(s.name,topic)+'" target="_blank" rel="noopener">Questões AOCP ↗</a>'+(SPECIAL[s.key]?'<a href="'+SPECIAL[s.key]+'" target="_blank" rel="noopener">Material selecionado ↗</a>':"")+(law?'<a href="'+law+'" target="_blank" rel="noopener">Lei seca ↗</a>':"")+'</div></div><div class="pmpe-topic-actions"><button type="button" data-action="studied" class="'+(t.studied?"active":"")+'">✓ Estudado</button><button type="button" data-action="reviewed" class="'+(t.reviewed?"active":"")+'">↻ Revisado</button><button type="button" data-action="questions" class="'+(t.questions?"active":"")+'">◎ Questões</button></div></article>';}).join("");
+const rows=s.topics.map((topic,i)=>{const key=topicKey(s,i),t=getTopicState(key);const match=!searchTerm||(s.name+" "+topic).toLowerCase().includes(searchTerm);if(!match)return "";visible++;const law=LAW_LINKS[topic];return '<article class="pmpe-topic '+(t.studied?"complete":"")+'" data-topic-key="'+key+'"><div class="pmpe-topic-index">'+String(i+1).padStart(2,"0")+'</div><div><h3>'+esc(topic)+'</h3><p>'+esc(s.block)+' · tópico '+(i+1)+' de '+s.topics.length+'</p><div class="pmpe-topic-links"><a href="'+qSearch(s.name,topic)+'" target="_blank" rel="noopener">Aula gratuita ↗</a><button type="button" class="pmpe-topic-question-link" data-topic-question="'+key+'">Questões AOCP <span>→</span></button>'+(SPECIAL[s.key]?'<a href="'+SPECIAL[s.key]+'" target="_blank" rel="noopener">Material selecionado ↗</a>':"")+(law?'<a href="'+law+'" target="_blank" rel="noopener">Lei seca ↗</a>':"")+'</div></div><div class="pmpe-topic-actions"><button type="button" data-action="studied" class="pmpe-status-btn done '+(t.studied?"active":"")+'"><span class="pmpe-status-icon">'+(t.studied?"✓":"○")+'</span><span>'+(t.studied?"Concluído":"Marcar como concluído")+'</span></button><button type="button" data-action="reviewed" class="pmpe-status-btn review '+(t.reviewed?"active":"")+'"><span class="pmpe-status-icon">'+(t.reviewed?"★":"↻")+'</span><span>'+(t.reviewed?"Marcado para revisar":"Revisar depois")+'</span></button></div></article>';}).join("");
 const completed=s.topics.filter((_,i)=>getTopicState(topicKey(s,i)).studied).length;const pct=Math.round(completed/s.topics.length*100);if(!rows)return "";
 return '<section class="pmpe-subject '+((activeFilter===s.key||searchTerm)?"open":"")+'" data-subject="'+s.key+'"><div class="pmpe-subject-head"><div class="pmpe-subject-badge">'+(si+1)+'</div><div class="pmpe-subject-copy"><strong>'+esc(s.name)+'</strong><small>'+esc(s.block)+' · '+s.topics.length+' tópicos · '+completed+' concluídos</small></div><div class="pmpe-subject-progress"><i style="width:'+pct+'%"></i></div><div class="pmpe-subject-toggle">⌄</div></div><div class="pmpe-topic-list">'+rows+'</div></section>';}).join("")||'<div class="pmpe-empty">Nenhum tópico encontrado.</div>';
 host.querySelectorAll(".pmpe-subject-head").forEach(h=>h.addEventListener("click",e=>{if(e.target.closest("a,button"))return;h.parentElement.classList.toggle("open");}));
-host.querySelectorAll("[data-action]").forEach(b=>b.addEventListener("click",()=>{const key=b.closest(".pmpe-topic").dataset.topicKey;if(b.dataset.action==="questions"&&typeof window.PMPEOpenQuestions==="function"){window.PMPEOpenQuestions(key);return;}toggle(key,b.dataset.action);}));
+host.querySelectorAll("[data-action]").forEach(b=>b.addEventListener("click",()=>{const key=b.closest(".pmpe-topic").dataset.topicKey;toggle(key,b.dataset.action);}));host.querySelectorAll("[data-topic-question]").forEach(b=>b.addEventListener("click",()=>{if(typeof window.PMPEOpenQuestions==="function")window.PMPEOpenQuestions(b.dataset.topicQuestion);}));
 document.getElementById("pmpeVisibleCount").textContent=visible+" tópicos";updateStats();
 }
 function updateStats(){let studied=0,reviewed=0,questions=0,total=0;SUBJECTS.forEach(s=>s.topics.forEach((_,i)=>{total++;const t=getTopicState(topicKey(s,i));if(t.studied)studied++;if(t.reviewed)reviewed++;if(t.questions)questions++;}));const pct=Math.round(studied/total*100);document.getElementById("pmpeProgressValue").textContent=pct+"%";document.getElementById("pmpeProgressText").textContent=studied+" de "+total+" tópicos";document.getElementById("pmpeStudied").textContent=studied;document.getElementById("pmpeReviewed").textContent=reviewed;document.getElementById("pmpeQuestions").textContent=questions;}
@@ -143,6 +142,7 @@ const BANK=[
 {id:"dh:15",subject:"dh",subjectName:"Direitos Humanos e Legislação Extravagante",topicIndex:15,topic:SUBJECTS[5].topics[15],source:"Autoral Cortex · Lei 12.852/2013",prompt:"O Estatuto da Juventude (Lei nº 12.852/2013) estabelece",options:["direitos dos jovens e diretrizes de políticas públicas de juventude.","normas exclusivamente penais militares.","apenas regras de direito eleitoral.","somente deveres, sem previsão de direitos.","normas restritas a pessoas com mais de 60 anos."],answer:0,explanation:"A lei institui o Estatuto da Juventude e dispõe sobre direitos dos jovens e políticas públicas."},
 {id:"dh:16",subject:"dh",subjectName:"Direitos Humanos e Legislação Extravagante",topicIndex:16,topic:SUBJECTS[5].topics[16],source:"Autoral Cortex · padrão AOCP/PMPE",prompt:"Para a preparação em Direitos Humanos e Legislação Extravagante, o edital também exige súmulas, jurisprudência dominante e legislação relacionada. Nessa perspectiva, assinale a alternativa correta.",options:["Somente o texto literal das leis pode ser cobrado, ainda que o edital mencione jurisprudência.","Entendimentos dos Tribunais Superiores devem ser estudados de forma atualizada e relacionados aos temas expressamente previstos.","Qualquer decisão isolada de primeiro grau equivale a súmula vinculante.","Jurisprudência é imutável.","Atualizações legislativas posteriores ao edital nunca podem afetar a interpretação da matéria."],answer:1,explanation:"Quando o edital inclui jurisprudência dominante, é necessário estudar entendimentos atualizados e pertinentes aos temas."}
 ];
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 let qstate={};
 try{qstate=JSON.parse(localStorage.getItem(QSTORE)||"{}")||{};}catch(e){}
 function saveQ(){try{localStorage.setItem(QSTORE,JSON.stringify(qstate));}catch(e){}}
@@ -159,6 +159,7 @@ window.PMPEOpenQuestions=function(key){
   const [subject,idx]=String(key).split(":");
   const ss=document.getElementById("pmpeQuestionSubject"),ts=document.getElementById("pmpeQuestionTopic");
   if(ss){ss.value=subject;populateTopics();if(ts)ts.value=idx;}
+  const amount=document.getElementById("pmpeQuestionAmount");if(amount)amount.value="0";
   startQuestions();
 };
 function populateQuestionSelectors(){
@@ -170,7 +171,7 @@ function populateQuestionSelectors(){
 function populateTopics(){
   const ss=document.getElementById("pmpeQuestionSubject"),ts=document.getElementById("pmpeQuestionTopic");if(!ss||!ts)return;
   const s=SUBJECTS.find(x=>x.key===ss.value);
-  ts.innerHTML='<option value="all">Todos os tópicos</option>'+(s?s.topics.map((t,i)=>'<option value="'+i+'">'+esc(t)+'</option>').join(""):"");
+  ts.innerHTML='<option value="all">Todos os tópicos ('+BANK.filter(q=>!s||q.subject===s.key).length+')</option>'+(s?s.topics.map((t,i)=>{const count=BANK.filter(q=>q.subject===s.key&&q.topicIndex===i).length;return '<option value="'+i+'">'+esc(t)+' ('+count+')</option>';}).join(""):"");
 }
 function shuffledQuestion(q){
   const items=q.options.map((text,index)=>({text,index}));
@@ -230,5 +231,47 @@ document.getElementById("pmpeReaderNext")?.addEventListener("click",()=>{if(pdfD
 document.getElementById("pmpeReaderClose")?.addEventListener("click",()=>{document.getElementById("pmpePdfReader").hidden=true;pdfDoc=null;});
 document.getElementById("pmpeOpenAnswerSheet")?.addEventListener("click",()=>openPdf(pdfDocName==="gabarito2026"?"sim2026":"gabarito2026",pdfDocName==="gabarito2026"?"Simulado gratuito EBN · PMPE 2026":"Gabarito · PMPE 2026"));
 let touchX=null;const stage=document.getElementById("pmpeCanvasStage");stage?.addEventListener("pointerdown",e=>{touchX=e.clientX;});stage?.addEventListener("pointerup",e=>{if(touchX===null)return;const d=e.clientX-touchX;touchX=null;if(Math.abs(d)<60)return;if(d<0&&pdfDoc&&pdfPage<pdfDoc.numPages){pdfPage++;renderPdfPage();}if(d>0&&pdfDoc&&pdfPage>1){pdfPage--;renderPdfPage();}});
+
+const CALSTORE="cortex_pmpe_2026_calendar";
+let calDate=new Date();calDate=new Date(calDate.getFullYear(),calDate.getMonth(),1);
+function calendarPlan(){
+  const topics=[];SUBJECTS.forEach(s=>s.topics.forEach((topic,i)=>topics.push({key:s.key+":"+i,subject:s.name,topic})));
+  const start=new Date(2026,9,7), exam=new Date(2027,1,21), studyDays=[];
+  for(let d=new Date(start);d<exam;d.setDate(d.getDate()+1)){const day=d.getDay();if(day!==0)studyDays.push(new Date(d));}
+  const plan={};
+  topics.forEach((t,i)=>{
+    const d=studyDays[Math.floor(i*studyDays.length/topics.length)]||studyDays[i%studyDays.length];
+    const k=[d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
+    (plan[k]||(plan[k]=[])).push({...t,type:"study"});
+    [1,7,30].forEach(delta=>{const r=new Date(d);r.setDate(r.getDate()+delta);if(r<exam){const rk=[r.getFullYear(),String(r.getMonth()+1).padStart(2,"0"),String(r.getDate()).padStart(2,"0")].join("-");(plan[rk]||(plan[rk]=[])).push({...t,type:"review"});}});
+  });
+  return plan;
+}
+const CALPLAN=calendarPlan();
+function renderCalendar(){
+  const host=document.getElementById("pmpeCalendarGrid"),label=document.getElementById("pmpeCalendarLabel");if(!host||!label)return;
+  const y=calDate.getFullYear(),m=calDate.getMonth();label.textContent=calDate.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
+  const first=new Date(y,m,1),last=new Date(y,m+1,0),start=(first.getDay()+6)%7;
+  const today=new Date(),names=["SEG","TER","QUA","QUI","SEX","SÁB","DOM"];
+  let html=names.map(n=>'<div class="pmpe-cal-weekday">'+n+'</div>').join("");
+  for(let i=0;i<start;i++)html+='<div class="pmpe-cal-day muted"></div>';
+  for(let day=1;day<=last.getDate();day++){
+    const d=new Date(y,m,day),key=[y,String(m+1).padStart(2,"0"),String(day).padStart(2,"0")].join("-"),items=CALPLAN[key]||[];
+    const isToday=d.toDateString()===today.toDateString(),hasStudy=items.some(x=>x.type==="study"),hasReview=items.some(x=>x.type==="review");
+    html+='<button type="button" class="pmpe-cal-day '+(isToday?"today ":"")+(items.length?"has-events ":"")+'" data-cal-day="'+key+'"><span class="pmpe-cal-num">'+day+'</span><span class="pmpe-cal-dots">'+(hasStudy?'<i class="study"></i>':"")+(hasReview?'<i class="review"></i>':"")+'</span>'+(items.length?'<small>'+items.length+' tarefa'+(items.length>1?"s":"")+'</small>':"")+'</button>';
+  }
+  host.innerHTML=html;
+  host.querySelectorAll("[data-cal-day]").forEach(b=>b.addEventListener("click",()=>renderCalendarDay(b.dataset.calDay)));
+}
+function renderCalendarDay(key){
+  const detail=document.getElementById("pmpeCalendarDetail");if(!detail)return;const items=CALPLAN[key]||[];
+  const [y,m,d]=key.split("-");const title=new Date(Number(y),Number(m)-1,Number(d)).toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long"});
+  detail.innerHTML='<div class="pmpe-cal-detail-head"><strong>'+title+'</strong><span>'+items.length+' tarefa'+(items.length!==1?"s":"")+'</span></div>'+(items.length?items.map(x=>'<button type="button" class="pmpe-cal-task '+x.type+'" data-cal-topic="'+x.key+'"><span>'+(x.type==="study"?"Estudo":"Revisão")+'</span><strong>'+esc(x.subject)+'</strong><small>'+esc(x.topic)+'</small></button>').join(""):'<div class="pmpe-cal-empty">Dia livre no cronograma.</div>');
+  detail.querySelectorAll("[data-cal-topic]").forEach(b=>b.addEventListener("click",()=>{setTab("plano");const [subject]=b.dataset.calTopic.split(":");const filter=document.querySelector('[data-filter="'+subject+'"]');if(filter)filter.click();setTimeout(()=>document.querySelector('[data-topic-key="'+CSS.escape(b.dataset.calTopic)+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}),80);}));
+}
+document.getElementById("pmpeCalendarPrev")?.addEventListener("click",()=>{calDate.setMonth(calDate.getMonth()-1);renderCalendar();});
+document.getElementById("pmpeCalendarNext")?.addEventListener("click",()=>{calDate.setMonth(calDate.getMonth()+1);renderCalendar();});
+document.getElementById("pmpeCalendarToday")?.addEventListener("click",()=>{const n=new Date();calDate=new Date(n.getFullYear(),n.getMonth(),1);renderCalendar();renderCalendarDay([n.getFullYear(),String(n.getMonth()+1).padStart(2,"0"),String(n.getDate()).padStart(2,"0")].join("-"));});
+renderCalendar();
 populateQuestionSelectors();
 })();
