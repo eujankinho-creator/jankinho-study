@@ -3,6 +3,7 @@ import {
   atualizarPerfil,
   atualizarSenha,
   atualizarTema,
+  atualizarPet,
 } from "./configuracoes";
 import { atenderRanking } from "./ranking";
 import { atenderDesempenho } from "./desempenho";
@@ -703,6 +704,8 @@ async function me(
           email: true,
           tema: true,
           fotoPerfil: true,
+          petMode: true,
+          petProfile: true,
           createdAt: true,
         },
       });
@@ -5326,6 +5329,20 @@ const server =
         ) {
 
           await atualizarPerfil(
+            request,
+            response
+          );
+
+          return;
+        }
+
+
+        if (
+          caminho === "/api/configuracoes/pet" &&
+          metodo === "PATCH"
+        ) {
+
+          await atualizarPet(
             request,
             response
           );
