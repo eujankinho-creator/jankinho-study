@@ -5851,3 +5851,144 @@ html[data-theme]{
 }
 
 /* END CORTEX THEME SYSTEM V6 */
+
+
+/* =========================================================
+   CORTEX GLOBAL ACCENT CLEANUP V7
+   Remove residuos de laranja fora do tema laranja.
+========================================================= */
+
+html {
+  --orange: var(--theme-accent);
+  --orange-light: var(--theme-accent-2);
+  --accent: var(--theme-accent);
+  --accent-2: var(--theme-accent-2);
+  --accent-rgb: var(--theme-accent-rgb);
+}
+
+/* Rotulos e textos de destaque antigos */
+:is(
+  .badge-orange,
+  .training-badge,
+  .section-label,
+  .panel-kicker,
+  .lessons-kicker,
+  .schedule-kicker,
+  .hub-kicker,
+  .goal-head span,
+  .section-heading > div > span,
+  .study-tools-card > span,
+  .lesson-dialog form > span,
+  .questions-view .hero-badges .badge-orange,
+  .evolution-view .patient-box span
+) {
+  color: var(--theme-accent-2) !important;
+}
+
+:is(
+  .badge-orange,
+  .training-badge,
+  .evolution-view .patient-box
+) {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+}
+
+/* Botoes principais que ainda tinham #f97316 gravado no CSS local */
+.questions-view :is(.answer-question,.primary-button,.start-button,.answer-button),
+.evolution-view .primary-button,
+.practice-view .primary-button {
+  border-color: var(--theme-accent) !important;
+  background: var(--theme-gradient) !important;
+  color: var(--theme-button-text) !important;
+  box-shadow: 0 10px 28px rgba(var(--theme-accent-rgb),.14) !important;
+}
+
+.questions-view :is(.answer-question,.primary-button,.start-button,.answer-button):hover,
+.evolution-view .primary-button:hover,
+.practice-view .primary-button:hover {
+  border-color: var(--theme-accent-2) !important;
+  background: var(--theme-gradient) !important;
+  filter: brightness(1.06);
+  box-shadow: 0 12px 34px rgba(var(--theme-accent-rgb),.20) !important;
+}
+
+/* Campos/filtros legados */
+:is(
+  .questions-view input,
+  .questions-view select,
+  .evolution-view input,
+  .evolution-view select,
+  .lessons-view input,
+  .lessons-view select,
+  .schedule-view input,
+  .schedule-view select
+):focus {
+  border-color: var(--theme-border-strong) !important;
+  box-shadow: 0 0 0 3px var(--theme-accent-soft) !important;
+  outline: none !important;
+}
+
+/* Hovers e glows que ainda usavam rgba(249,115,22,...) */
+.questions-view :is(.action-card,.question-card,.filter-chip,.bank-card):hover,
+.lessons-view :is(.lesson-card,.lesson-suggestions button,.section-heading > button):hover,
+.evolution-view :is(.secondary-button,.mode-card,.evolution-panel):hover,
+.schedule-view :is(.exam-choice-card,.schedule-card,.schedule-section):hover {
+  border-color: var(--theme-border-strong) !important;
+  box-shadow:
+    0 0 0 1px rgba(var(--theme-accent-rgb),.06),
+    0 14px 34px rgba(var(--theme-accent-rgb),.09) !important;
+}
+
+/* Evolucao */
+.evolution-view :is(.mode-icon,.config-icon,.tip-icon,.task-icon) {
+  color: var(--theme-accent-2) !important;
+  background: var(--theme-accent-soft) !important;
+}
+.evolution-view .secondary-button:hover {
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-text) !important;
+}
+
+/* Aulas */
+.lessons-view {
+  --lesson-accent: var(--theme-accent) !important;
+  --lesson-accent2: var(--theme-accent-2) !important;
+}
+.lessons-view :is(.lessons-hero h1 em,.lesson-search > span,.section-heading span,.goal-head span,.study-tools-card > span) {
+  color: var(--theme-accent-2) !important;
+}
+.lessons-view .goal-progress > i {
+  background: var(--theme-gradient) !important;
+}
+
+/* Cronograma */
+.schedule-view {
+  --sc-accent: var(--theme-accent) !important;
+  --sc-accent2: var(--theme-accent-2) !important;
+}
+
+/* Laboratorio / cards com brilho por ponteiro */
+.lab-hub-view :is(.hub-kicker span,.lab-choice-card .choice-eyebrow) {
+  color: var(--theme-accent-2) !important;
+}
+.lab-hub-view .hub-kicker span {
+  background: var(--theme-accent) !important;
+  box-shadow: 0 0 12px rgba(var(--theme-accent-rgb),.50) !important;
+}
+.lab-hub-view .lab-choice-card:hover {
+  border-color: var(--theme-border-strong) !important;
+}
+
+/* Evita halo laranja residual em controles genericos */
+:is(
+  .questions-view,
+  .lessons-view,
+  .evolution-view,
+  .schedule-view,
+  .lab-hub-view
+) :is(button,a,[role="button"]):focus-visible {
+  outline: 2px solid var(--theme-accent) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px var(--theme-accent-soft) !important;
+}
