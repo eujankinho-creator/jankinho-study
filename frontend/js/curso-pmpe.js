@@ -67,7 +67,7 @@ document.getElementById("pmpeVisibleCount").textContent=visible+" tópicos";upda
 }
 function updateStats(){let studied=0,reviewed=0,questions=0,total=0;SUBJECTS.forEach(s=>s.topics.forEach((_,i)=>{total++;const t=getTopicState(topicKey(s,i));if(t.studied)studied++;if(t.reviewed)reviewed++;if(t.questions)questions++;}));const pct=Math.round(studied/total*100);document.getElementById("pmpeProgressValue").textContent=pct+"%";document.getElementById("pmpeProgressText").textContent=studied+" de "+total+" tópicos";document.getElementById("pmpeStudied").textContent=studied;document.getElementById("pmpeReviewed").textContent=reviewed;document.getElementById("pmpeQuestions").textContent=questions;}
 function countdown(){const exam=new Date("2027-02-21T08:00:00-03:00"),now=new Date(),days=Math.max(0,Math.ceil((exam-now)/86400000));document.getElementById("pmpeCountdown").textContent=days+" dias";}
-document.getElementById("pmpeSearch").addEventListener("input",e=>{searchTerm=e.target.value.trim();render();});
+document.getElementById("pmpeSearch").addEventListener("input",e=>{searchTerm=e.target.value.trim();if(searchTerm)activeFilter="all";render();});
 document.getElementById("pmpeResumeBtn").addEventListener("click",()=>{if(!state.last){document.querySelector(".pmpe-course").scrollIntoView({behavior:"smooth"});return;}const subject=state.last.split(":")[0];activeFilter=subject;searchTerm="";document.getElementById("pmpeSearch").value="";render();setTimeout(()=>{const el=document.querySelector('[data-topic-key="'+CSS.escape(state.last)+'"]');if(el)el.scrollIntoView({behavior:"smooth",block:"center"});},50);});
 countdown();render();
 })();
