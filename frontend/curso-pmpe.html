@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261005-logo-global1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261006-theme-v6">
-  <link rel="stylesheet" href="/css/curso-pmpe.css?v=20261006-pmpe1">
+  <link rel="stylesheet" href="/css/curso-pmpe.css?v=20261007-pmpe-bank1">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261006-multitheme2"></script>
   <script defer src="/js/sidebar-standard.js?v=20261006-pmpe1"></script>
@@ -85,6 +85,14 @@
         </div>
       </section>
 
+      <nav class="pmpe-tabs" aria-label="Áreas do curso PMPE">
+        <button type="button" class="active" data-pmpe-tab="plano">Plano de estudo</button>
+        <button type="button" data-pmpe-tab="questoes">Questões</button>
+        <button type="button" data-pmpe-tab="simulados">Simulados</button>
+        <button type="button" data-pmpe-tab="materiais">Materiais</button>
+      </nav>
+
+      <section data-pmpe-panel="plano">
       <section class="pmpe-toolbar">
         <div class="pmpe-search">
           <span>⌕</span>
@@ -105,6 +113,48 @@
         </div>
       </section>
 
+      </section>
+
+      <section data-pmpe-panel="questoes" hidden>
+        <section class="pmpe-question-hero">
+          <div><span class="pmpe-kicker">BANCO PMPE</span><h2>Treino por matéria e tópico</h2><p>Banco independente do Córtex geral. Cada tópico do edital possui treino próprio e o histórico fica somente nesta área.</p></div>
+          <div class="pmpe-question-source"><strong>Fontes</strong><span>Questões autorais + materiais enviados + provas públicas AOCP</span></div>
+        </section>
+        <div class="pmpe-question-controls">
+          <label>Matéria<select id="pmpeQuestionSubject"></select></label>
+          <label>Tópico<select id="pmpeQuestionTopic"></select></label>
+          <label>Quantidade<select id="pmpeQuestionAmount"><option value="5">5</option><option value="10">10</option><option value="20">20</option><option value="0">Todas disponíveis</option></select></label>
+          <button id="pmpeStartQuestions" type="button">Começar treino</button>
+        </div>
+        <div id="pmpeQuestionRunner" class="pmpe-question-runner"></div>
+      </section>
+
+      <section data-pmpe-panel="simulados" hidden>
+        <div class="pmpe-section-title"><div><span>CADERNOS</span><h2>Simulados PMPE</h2></div><small>modo página + deslize lateral</small></div>
+        <div class="pmpe-sim-grid">
+          <article class="pmpe-sim-card"><span>2026 · PÓS-EDITAL</span><h3>Simulado gratuito EBN</h3><p>Caderno completo com 60 questões e proposta de redação. Visualização preservada em páginas.</p><button type="button" data-open-sim="gratuito2026">Abrir simulado</button></article>
+          <article class="pmpe-sim-card"><span>2025 · PRÉ-EDITAL</span><h3>Simulado 01 EBN</h3><p>Questões do PDF enviado incorporadas como fonte do banco PMPE e referência de estilo.</p><button type="button" data-open-bank="all">Treinar questões</button></article>
+          <article class="pmpe-sim-card"><span>2025 · PRÉ-EDITAL</span><h3>Simulado 02 EBN</h3><p>Segundo caderno enviado, usado para ampliar temas, dificuldade e padrão de alternativas.</p><button type="button" data-open-bank="all">Treinar questões</button></article>
+        </div>
+        <section id="pmpePdfReader" class="pmpe-pdf-reader" hidden>
+          <div class="pmpe-reader-head"><div><span id="pmpeReaderLabel">SIMULADO</span><strong id="pmpeReaderTitle">Caderno PMPE</strong></div><div><button id="pmpeReaderPrev" type="button">←</button><span id="pmpeReaderPage">1 / 1</span><button id="pmpeReaderNext" type="button">→</button><button id="pmpeReaderClose" type="button">×</button></div></div>
+          <div id="pmpeCanvasStage" class="pmpe-canvas-stage"><canvas id="pmpePdfCanvas"></canvas></div>
+          <div class="pmpe-reader-foot"><span>Arraste para o lado ou use as setas</span><button id="pmpeOpenAnswerSheet" type="button">Folha / gabarito</button></div>
+        </section>
+      </section>
+
+      <section data-pmpe-panel="materiais" hidden>
+        <div class="pmpe-section-title"><div><span>BIBLIOTECA PMPE</span><h2>Materiais incorporados</h2></div></div>
+        <div class="pmpe-material-grid">
+          <article><strong>Português</strong><span>BIZU EBN · teoria + questões comentadas</span></article>
+          <article><strong>História de Pernambuco</strong><span>BIZU EBN · conteúdo completo + questões</span></article>
+          <article><strong>Raciocínio Lógico</strong><span>BIZU EBN · lógica, diagramas e contagem</span></article>
+          <article><strong>Informática</strong><span>BIZU EBN · internet, segurança, Windows e Office</span></article>
+          <article><strong>Direito Constitucional</strong><span>BIZU EBN · CF/88 e organização dos poderes</span></article>
+          <article><strong>Direitos Humanos</strong><span>BIZU EBN · teoria + legislação extravagante</span></article>
+          <article><strong>Edital verticalizado</strong><span>Mapa oficial dos tópicos para controlar cobertura</span></article>
+        </div>
+
       <section class="pmpe-resources">
         <div class="pmpe-section-title">
           <div><span>FONTES GRATUITAS</span><h2>Biblioteca essencial</h2></div>
@@ -119,6 +169,8 @@
           <a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank" rel="noopener"><span>LEI SECA</span><strong>Constituição Federal</strong><small>Texto oficial atualizado</small></a>
           <a href="https://www.pm.pe.gov.br/historico/" target="_blank" rel="noopener"><span>HISTÓRIA</span><strong>Histórico oficial da PMPE</strong><small>Fonte institucional complementar</small></a>
         </div>
+      </section>
+
       </section>
 
       <section class="pmpe-course">
@@ -143,7 +195,7 @@
     </main>
   </div>
 
-  <script src="/js/curso-pmpe.js?v=20261006-pmpe1"></script>
+  <script src="/js/curso-pmpe.js?v=20261007-pmpe-bank1"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
