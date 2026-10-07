@@ -23,7 +23,7 @@ function normalizeHistory(value: unknown): HistoryItem[] {
   return value
     .slice(-8)
     .map(function (item: any) {
-      const role =
+      const role: HistoryItem["role"] =
         item && item.role === "assistant"
           ? "assistant"
           : "user";
