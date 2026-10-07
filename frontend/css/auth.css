@@ -3835,3 +3835,89 @@ html[data-theme] .auth-brand .brain-mark {
   border-color: rgba(var(--auth-accent-rgb),.28) !important;
   background: rgba(var(--auth-accent-rgb),.09) !important;
 }
+
+
+/* =========================================================
+   AUTH LOGIN PURPLE FIXED V6
+   Identidade própria da tela de login.
+========================================================= */
+
+body.auth-login-premium{
+  --auth-bg:#060308!important;
+  --auth-panel:rgba(20,12,29,.80)!important;
+  --auth-panel-strong:rgba(30,18,43,.94)!important;
+  --auth-border:rgba(184,133,255,.16)!important;
+  --auth-border-hover:rgba(184,133,255,.38)!important;
+  --auth-text:#faf6ff!important;
+  --auth-text-soft:#ded2ee!important;
+  --auth-text-muted:#998aa8!important;
+  --auth-accent:#9b5cff!important;
+  --auth-accent-two:#c08cff!important;
+  --auth-accent-rgb:155,92,255!important;
+  --auth-accent-soft:rgba(155,92,255,.11)!important;
+  --auth-accent-glow:rgba(155,92,255,.22)!important;
+  --auth-gradient:linear-gradient(135deg,#8243ed 0%,#9b5cff 55%,#c08cff 100%)!important;
+}
+
+body.auth-login-premium .auth-page{
+  background:
+    radial-gradient(circle at 9% 12%,rgba(155,92,255,.10),transparent 26%),
+    radial-gradient(circle at 92% 78%,rgba(192,140,255,.055),transparent 24%),
+    linear-gradient(180deg,#050207,#08040d)!important;
+}
+
+body.auth-login-premium .auth-shell{
+  border-color:rgba(184,133,255,.15)!important;
+  background:rgba(9,6,13,.82)!important;
+  box-shadow:
+    0 34px 110px rgba(0,0,0,.48),
+    0 0 0 1px rgba(184,133,255,.025) inset!important;
+}
+
+body.auth-login-premium .auth-showcase{
+  background:
+    radial-gradient(circle at 18% 36%,rgba(155,92,255,.12),transparent 38%),
+    linear-gradient(145deg,rgba(24,15,34,.97),rgba(9,7,13,.98))!important;
+}
+
+body.auth-login-premium .auth-form-side{
+  background:
+    linear-gradient(145deg,rgba(17,11,24,.94),rgba(8,6,11,.97))!important;
+}
+
+body.auth-login-premium :is(
+  .showcase-kicker,.showcase-content h1 em,.auth-eyebrow,.auth-switch a,
+  .form-link,.brand-copy strong
+){
+  color:var(--auth-accent-two)!important;
+}
+
+body.auth-login-premium :is(.showcase-kicker span,.status-dot){
+  background:var(--auth-gradient)!important;
+  box-shadow:0 0 14px var(--auth-accent-glow)!important;
+}
+
+body.auth-login-premium .btn-primary{
+  border-color:rgba(184,133,255,.42)!important;
+  background:var(--auth-gradient)!important;
+  color:#0b0610!important;
+  box-shadow:0 14px 38px rgba(155,92,255,.20)!important;
+}
+
+body.auth-login-premium .input-shell:focus-within{
+  border-color:rgba(184,133,255,.42)!important;
+  box-shadow:0 0 0 3px rgba(155,92,255,.09)!important;
+}
+
+body.auth-login-premium .brain-mark{
+  border-color:rgba(184,133,255,.24)!important;
+  background:rgba(155,92,255,.09)!important;
+  box-shadow:none!important;
+}
+
+body.auth-login-premium .brain-mark svg{
+  stroke:#c9a2ff!important;
+  filter:none!important;
+}
+
+/* AUTH LOGIN PURPLE FIXED V6 END */
