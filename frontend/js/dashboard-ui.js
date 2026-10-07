@@ -397,111 +397,8 @@
 
     let focusTimer =
       0;
-
-
-    let voiceTimer =
-      0;
-
-
     let finished =
       false;
-
-
-    let introWelcomeName = "";
-    let introVoiceSpoken = false;
-
-    async function resolveIntroWelcomeName() {
-      try {
-        const cached = JSON.parse(
-          sessionStorage.getItem("cortex_user_profile_v3") || "null"
-        );
-        if (cached && cached.nome) {
-          introWelcomeName = String(cached.nome).trim();
-          return;
-        }
-      } catch {}
-
-      const visibleName = document.getElementById("nomeHeader");
-      if (
-        visibleName &&
-        visibleName.textContent &&
-        !/carregando/i.test(visibleName.textContent)
-      ) {
-        introWelcomeName = visibleName.textContent.trim();
-        return;
-      }
-
-      try {
-        const response = await fetch("/api/auth/me", {
-          credentials: "same-origin",
-          cache: "no-store"
-        });
-        if (!response.ok) return;
-        const data = await response.json();
-        const user = data && data.usuario ? data.usuario : data;
-        if (user && user.nome) {
-          introWelcomeName = String(user.nome).trim();
-        }
-      } catch {}
-    }
-
-    function speakIntroWelcome() {
-      if (
-        introVoiceSpoken ||
-        !introWelcomeName ||
-        !("speechSynthesis" in window) ||
-        typeof SpeechSynthesisUtterance === "undefined"
-      ) {
-        return;
-      }
-
-      introVoiceSpoken = true;
-
-      try {
-        const utterance = new SpeechSynthesisUtterance(
-          "Seja bem-vindo, " + introWelcomeName + "."
-        );
-        utterance.lang = "pt-BR";
-        utterance.rate = 0.90;
-        utterance.pitch = 1.01;
-        utterance.volume = 0.92;
-
-        const voices = window.speechSynthesis.getVoices();
-        const ranked = voices
-          .filter(function (voice) {
-            return /^pt/i.test(voice.lang || "");
-          })
-          .map(function (voice) {
-            const name = String(voice.name || "").toLowerCase();
-            const lang = String(voice.lang || "").toLowerCase();
-            let score = 0;
-
-            if (lang === "pt-br") score += 120;
-            else if (lang.startsWith("pt")) score += 55;
-
-            if (!voice.localService) score += 22;
-            if (/natural|neural|online|premium/.test(name)) score += 100;
-            if (/francisca|antonio|antônio/.test(name)) score += 70;
-            if (/google.*portugu[eê]s.*brasil/.test(name)) score += 65;
-            if (/microsoft.*portugu[eê]s.*brasil/.test(name)) score += 45;
-            if (/desktop|compact|espeak/.test(name)) score -= 55;
-
-            return { voice: voice, score: score };
-          })
-          .sort(function (a, b) {
-            return b.score - a.score;
-          });
-
-        if (ranked.length) {
-          utterance.voice = ranked[0].voice;
-        }
-
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(utterance);
-      } catch {}
-    }
-
-    void resolveIntroWelcomeName();
 
 
     const cleanupFocusEvents =
@@ -547,17 +444,7 @@
         window.clearTimeout(
           focusTimer
         );
-
-
-        window.clearTimeout(
-          voiceTimer
-        );
-
-
-        cleanupFocusEvents();
-
-        /* Fallback: se a voz ainda nao iniciou, fala ao entrar na saida. */
-        speakIntroWelcome();
+cleanupFocusEvents();
 
 
         intro.classList.add(
@@ -617,14 +504,7 @@
       window.clearTimeout(
         finishTimer
       );
-
-
-      window.clearTimeout(
-        voiceTimer
-      );
-
-
-      if (runningSince) {
+if (runningSince) {
 
         remaining =
           Math.max(
@@ -682,19 +562,6 @@
 
       runningSince =
         performance.now();
-
-
-      if (!introVoiceSpoken) {
-        window.clearTimeout(voiceTimer);
-        voiceTimer = window.setTimeout(
-          function () {
-            if (!document.hidden && pageHasFocus()) {
-              speakIntroWelcome();
-            }
-          },
-          Math.max(0, remaining - 900)
-        );
-      }
 
 
       finishTimer =
