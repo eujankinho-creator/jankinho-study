@@ -403,6 +403,83 @@
       false;
 
 
+    let introWelcomeName = "";
+    let introVoiceSpoken = false;
+
+    async function resolveIntroWelcomeName() {
+      try {
+        const cached = JSON.parse(
+          sessionStorage.getItem("cortex_user_profile_v3") || "null"
+        );
+        if (cached && cached.nome) {
+          introWelcomeName = String(cached.nome).trim();
+          return;
+        }
+      } catch {}
+
+      const visibleName = document.getElementById("nomeHeader");
+      if (
+        visibleName &&
+        visibleName.textContent &&
+        !/carregando/i.test(visibleName.textContent)
+      ) {
+        introWelcomeName = visibleName.textContent.trim();
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/auth/me", {
+          credentials: "same-origin",
+          cache: "no-store"
+        });
+        if (!response.ok) return;
+        const data = await response.json();
+        const user = data && data.usuario ? data.usuario : data;
+        if (user && user.nome) {
+          introWelcomeName = String(user.nome).trim();
+        }
+      } catch {}
+    }
+
+    function speakIntroWelcome() {
+      if (
+        introVoiceSpoken ||
+        !introWelcomeName ||
+        !("speechSynthesis" in window) ||
+        typeof SpeechSynthesisUtterance === "undefined"
+      ) {
+        return;
+      }
+
+      introVoiceSpoken = true;
+
+      try {
+        const utterance = new SpeechSynthesisUtterance(
+          "Seja bem-vindo, " + introWelcomeName
+        );
+        utterance.lang = "pt-BR";
+        utterance.rate = 0.94;
+        utterance.pitch = 0.98;
+        utterance.volume = 0.88;
+
+        const voices = window.speechSynthesis.getVoices();
+        const ptBrVoice = voices.find(function (voice) {
+          return /^pt-BR$/i.test(voice.lang || "");
+        }) || voices.find(function (voice) {
+          return /^pt/i.test(voice.lang || "");
+        });
+
+        if (ptBrVoice) {
+          utterance.voice = ptBrVoice;
+        }
+
+        window.speechSynthesis.speak(utterance);
+      } catch {}
+    }
+
+    void resolveIntroWelcomeName();
+
+
     const cleanupFocusEvents =
       function () {
 
@@ -449,6 +526,9 @@
 
 
         cleanupFocusEvents();
+
+        /* A voz entra exatamente no trecho final da animacao. */
+        speakIntroWelcome();
 
 
         intro.classList.add(
