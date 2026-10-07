@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261005-logo-global1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261006-theme-v6">
-  <link rel="stylesheet" href="/css/curso-pmpe.css?v=20261007-pmpe-bank3">
+  <link rel="stylesheet" href="/css/curso-pmpe.css?v=20261007-pmpe-bank4">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261006-multitheme2"></script>
   <script defer src="/js/sidebar-standard.js?v=20261006-pmpe1"></script>
@@ -90,6 +90,7 @@
         <button type="button" data-pmpe-tab="questoes">Questões</button>
         <button type="button" data-pmpe-tab="simulados">Simulados</button>
         <button type="button" data-pmpe-tab="materiais">Materiais</button>
+        <button type="button" data-pmpe-tab="calendario">Calendário</button>
       </nav>
 
       <section data-pmpe-panel="plano">
@@ -141,6 +142,20 @@
           <div id="pmpeCanvasStage" class="pmpe-canvas-stage"><canvas id="pmpePdfCanvas"></canvas></div>
           <div class="pmpe-reader-foot"><span>Arraste para o lado ou use as setas</span><button id="pmpeOpenAnswerSheet" type="button">Folha / gabarito</button></div>
         </section>
+      </section>
+
+      <section data-pmpe-panel="calendario" hidden>
+        <div class="pmpe-calendar-shell">
+          <div class="pmpe-calendar-head">
+            <div><span class="pmpe-kicker">CRONOGRAMA PMPE</span><h2>Calendário de estudos e revisões</h2><p>Distribuição automática dos 60 tópicos até a prova, com revisões programadas em 24h, 7 dias e 30 dias.</p></div>
+            <div class="pmpe-calendar-nav"><button id="pmpeCalendarPrev" type="button">←</button><strong id="pmpeCalendarLabel"></strong><button id="pmpeCalendarNext" type="button">→</button><button id="pmpeCalendarToday" type="button">Hoje</button></div>
+          </div>
+          <div class="pmpe-calendar-legend"><span><i class="study"></i> Estudo</span><span><i class="review"></i> Revisão</span></div>
+          <div class="pmpe-calendar-layout">
+            <div id="pmpeCalendarGrid" class="pmpe-calendar-grid"></div>
+            <aside id="pmpeCalendarDetail" class="pmpe-calendar-detail"><div class="pmpe-cal-empty">Selecione um dia para ver as tarefas.</div></aside>
+          </div>
+        </div>
       </section>
 
       <section data-pmpe-panel="materiais" hidden>
@@ -195,7 +210,7 @@
     </main>
   </div>
 
-  <script src="/js/curso-pmpe.js?v=20261007-pmpe-bank3"></script>
+  <script src="/js/curso-pmpe.js?v=20261007-pmpe-bank4"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
