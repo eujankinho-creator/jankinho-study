@@ -333,7 +333,7 @@
     ) {}
 
 
-    return "visible";
+    return "removed";
 
   }
 
@@ -367,7 +367,7 @@
       requestedMode === "hidden" ||
       requestedMode === "removed"
         ? requestedMode
-        : "visible";
+        : "removed";
 
 
     if (
@@ -2452,6 +2452,38 @@
       }
 
 
+      const accountMode =
+        currentUser.petMode === "visible" ||
+        currentUser.petMode === "hidden" ||
+        currentUser.petMode === "removed"
+          ? currentUser.petMode
+          : "removed";
+
+
+      savePetMode(
+        accountMode
+      );
+
+
+      try {
+        localStorage.setItem(
+          "cortex_pet_profile_v1_" +
+          currentUser.id,
+          JSON.stringify(
+            currentUser.petProfile &&
+            typeof currentUser.petProfile === "object"
+              ? currentUser.petProfile
+              : {
+                  name: "",
+                  color: "theme",
+                  outfit: "none",
+                }
+          )
+        );
+      }
+      catch (error) {}
+
+
       loadState();
 
       watchPetPreference();
@@ -2459,7 +2491,7 @@
       watchIframe();
 
       applyPetMode(
-        getPetMode(),
+        accountMode,
         false
       );
 
@@ -3853,6 +3885,17 @@
       const data = await response.json();
       userId = data && data.usuario ? data.usuario.id : null;
       profileKey = "cortex_pet_profile_v1_" + (userId || "local");
+
+      if (
+        userId &&
+        data.usuario &&
+        data.usuario.petProfile &&
+        typeof data.usuario.petProfile === "object"
+      ) {
+        saveProfile(
+          data.usuario.petProfile
+        );
+      }
     } catch {}
   }
 
