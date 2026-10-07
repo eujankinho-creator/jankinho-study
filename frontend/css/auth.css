@@ -3743,3 +3743,117 @@ body.auth-register-premium {
 }
 
 /* CORTEX AUTH THEME SYNC V2 END */
+
+
+/* =========================================================
+   CORTEX AUTH THEME SYNC V3
+   Usa os cinco temas globais atuais sem residuos laranja.
+========================================================= */
+
+html[data-theme="dark-pink"] {
+  --auth-bg:#10060d;
+  --auth-panel:rgba(40,12,33,.84);
+  --auth-panel-strong:rgba(55,16,45,.96);
+  --auth-border:rgba(255,105,180,.18);
+  --auth-border-hover:rgba(255,159,208,.34);
+  --auth-text:#fff4fb;
+  --auth-text-soft:#ffd0e8;
+  --auth-text-muted:#c58aa9;
+  --auth-accent:#ff69b4;
+  --auth-accent-two:#ff9fd0;
+  --auth-accent-soft:rgba(255,105,180,.12);
+  --auth-accent-glow:rgba(255,105,180,.24);
+  --auth-accent-rgb:255,105,180;
+  --auth-gradient:linear-gradient(135deg,#f153a5,#ff69b4 56%,#ff9fd0);
+}
+
+html[data-theme="dark-green"] {
+  --auth-bg:#040906;
+  --auth-panel:rgba(8,28,16,.84);
+  --auth-panel-strong:rgba(10,38,21,.96);
+  --auth-border:rgba(34,211,107,.17);
+  --auth-border-hover:rgba(85,227,141,.34);
+  --auth-text:#f2fff7;
+  --auth-text-soft:#c9f5da;
+  --auth-text-muted:#81ae92;
+  --auth-accent:#22d36b;
+  --auth-accent-two:#55e38d;
+  --auth-accent-soft:rgba(34,211,107,.11);
+  --auth-accent-glow:rgba(34,211,107,.22);
+  --auth-accent-rgb:34,211,107;
+  --auth-gradient:linear-gradient(135deg,#14bd59,#22d36b 56%,#5be694);
+}
+
+html[data-theme="dark-purple"] {
+  --auth-bg:#070509;
+  --auth-panel:rgba(25,16,33,.86);
+  --auth-panel-strong:rgba(35,22,47,.96);
+  --auth-border:rgba(155,92,255,.19);
+  --auth-border-hover:rgba(184,133,255,.36);
+  --auth-text:#faf5ff;
+  --auth-text-soft:#dfd1f6;
+  --auth-text-muted:#9d8caf;
+  --auth-accent:#9b5cff;
+  --auth-accent-two:#b885ff;
+  --auth-accent-soft:rgba(155,92,255,.12);
+  --auth-accent-glow:rgba(155,92,255,.25);
+  --auth-accent-rgb:155,92,255;
+  --auth-gradient:linear-gradient(135deg,#8243ed,#9b5cff 56%,#bd8fff);
+}
+
+html[data-theme="dark-black"] {
+  --auth-bg:#030303;
+  --auth-panel:rgba(12,12,12,.86);
+  --auth-panel-strong:rgba(17,17,17,.97);
+  --auth-border:rgba(255,255,255,.13);
+  --auth-border-hover:rgba(255,255,255,.28);
+  --auth-text:#f7f7f7;
+  --auth-text-soft:#d2d2d2;
+  --auth-text-muted:#8d8d8d;
+  --auth-accent:#ededed;
+  --auth-accent-two:#fff;
+  --auth-accent-soft:rgba(255,255,255,.08);
+  --auth-accent-glow:rgba(255,255,255,.15);
+  --auth-accent-rgb:237,237,237;
+  --auth-gradient:linear-gradient(135deg,#d7d7d7,#f3f3f3 58%,#fff);
+}
+
+.auth-login-premium .auth-showcase::before,
+.auth-register-premium .auth-showcase::before {
+  border-color:rgba(var(--auth-accent-rgb),.10) !important;
+  box-shadow:
+    0 0 0 60px rgba(var(--auth-accent-rgb),.018),
+    0 0 0 120px rgba(var(--auth-accent-rgb),.010) !important;
+}
+
+.auth-login-premium .auth-showcase::after,
+.auth-register-premium .auth-showcase::after {
+  background:radial-gradient(circle,rgba(var(--auth-accent-rgb),.10),transparent 68%) !important;
+}
+
+.auth-login-premium .brain-mark,
+.auth-register-premium .brain-mark {
+  border-color:rgba(var(--auth-accent-rgb),.26) !important;
+  background:var(--auth-accent-soft) !important;
+  color:var(--auth-accent-two) !important;
+  box-shadow:0 0 28px var(--auth-accent-glow) !important;
+}
+
+.auth-login-premium :is(.auth-kicker,.auth-eyebrow,.auth-switch a,.form-link),
+.auth-register-premium :is(.auth-kicker,.auth-eyebrow,.auth-switch a,.form-link) {
+  color:var(--auth-accent-two) !important;
+}
+
+.auth-login-premium :is(input,select,textarea):focus,
+.auth-register-premium :is(input,select,textarea):focus {
+  border-color:var(--auth-border-hover) !important;
+  box-shadow:0 0 0 3px var(--auth-accent-soft) !important;
+}
+
+.auth-login-premium .btn-primary,
+.auth-register-premium .btn-primary {
+  border-color:color-mix(in srgb,var(--auth-accent) 55%,transparent) !important;
+  background:var(--auth-gradient) !important;
+  color:var(--theme-button-text,#09060e) !important;
+  box-shadow:0 15px 36px var(--auth-accent-glow) !important;
+}
