@@ -47,3 +47,49 @@
 .pmpe-cal-task{display:flex;flex-direction:column;width:100%;gap:4px;margin-top:9px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.065);background:rgba(255,255,255,.025);color:inherit;text-align:left;cursor:pointer}.pmpe-cal-task>span{font-size:.62rem;letter-spacing:.1em;font-weight:900;color:var(--accent,#ff7a00)}.pmpe-cal-task.review>span{color:#a89bff}.pmpe-cal-task small{color:var(--muted,#999);line-height:1.35}.pmpe-cal-empty{display:grid;place-items:center;min-height:180px;color:var(--muted,#888);text-align:center}
 @media(max-width:900px){.pmpe-topic-actions{grid-column:2;min-width:0;max-width:none;grid-template-columns:repeat(2,minmax(0,1fr))}.pmpe-calendar-head{display:block}.pmpe-calendar-nav{justify-content:flex-start;margin-top:16px}.pmpe-calendar-layout{grid-template-columns:1fr}.pmpe-calendar-detail{min-height:0}.pmpe-cal-day{min-height:76px}.pmpe-cal-day small{display:none}}
 @media(max-width:560px){.pmpe-topic-actions{grid-column:1;grid-template-columns:1fr}.pmpe-calendar-shell{padding:13px}.pmpe-calendar-grid{gap:4px}.pmpe-cal-weekday{padding:5px 1px;font-size:.56rem}.pmpe-cal-day{min-height:58px;padding:6px;border-radius:9px}.pmpe-cal-num{font-size:.75rem}.pmpe-cal-dots{top:auto;bottom:7px;right:7px}.pmpe-cal-dots i{width:6px;height:6px}.pmpe-calendar-nav strong{min-width:120px}}
+
+
+/* PMPE UX 2026-10-07 */
+.pmpe-topic-links {
+  gap: 6px !important;
+}
+.pmpe-topic-links :is(a,button) {
+  min-height: 30px !important;
+  padding: 6px 10px !important;
+  border-radius: 9px !important;
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  gap: 0 !important;
+}
+.pmpe-topic-question-link span {
+  display: none !important;
+}
+.pmpe-plan {
+  margin-top: 26px !important;
+  margin-bottom: 0 !important;
+}
+.pmpe-search {
+  border-color: var(--theme-border) !important;
+  background: color-mix(in srgb,var(--theme-surface) 92%,transparent) !important;
+}
+.pmpe-search:focus-within {
+  border-color: var(--theme-border-strong) !important;
+  box-shadow: 0 0 0 3px var(--theme-accent-soft) !important;
+}
+.pmpe-search > span {
+  color: var(--theme-accent-2) !important;
+}
+.pmpe-filter-row button:hover,
+.pmpe-topic-links :is(a,button):hover {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent-2) !important;
+  box-shadow: none !important;
+}
+@media (max-width: 700px) {
+  .pmpe-topic-links :is(a,button) {
+    min-height: 28px !important;
+    padding: 5px 8px !important;
+    font-size: 9px !important;
+  }
+}
