@@ -49,6 +49,108 @@ function normalizarTema(
   return "dark-orange";
 }
 
+function normalizarPetMode(
+  value: unknown
+) {
+  const mode =
+    String(
+      value ||
+      ""
+    )
+      .trim();
+
+  return (
+    mode === "visible" ||
+    mode === "hidden" ||
+    mode === "removed"
+  )
+    ? mode
+    : "removed";
+}
+
+
+function normalizarPetProfile(
+  value: unknown
+) {
+  const fallback = {
+    name: "",
+    color: "theme",
+    outfit: "none",
+  };
+
+  if (
+    !value ||
+    typeof value !== "object" ||
+    Array.isArray(value)
+  ) {
+    return fallback;
+  }
+
+  const input =
+    value as Record<string, unknown>;
+
+  const cores =
+    new Set([
+      "theme",
+      "orange",
+      "pink",
+      "green",
+      "purple",
+      "black",
+      "white",
+    ]);
+
+  const roupas =
+    new Set([
+      "none",
+      "bow",
+      "hoodie",
+      "scarf",
+      "glasses",
+      "crown",
+    ]);
+
+  const color =
+    String(
+      input.color ||
+      "theme"
+    );
+
+  const outfit =
+    String(
+      input.outfit ||
+      "none"
+    );
+
+  return {
+    name:
+      String(
+        input.name ||
+        ""
+      )
+        .replace(
+          /[<>]/g,
+          ""
+        )
+        .trim()
+        .slice(
+          0,
+          16
+        ),
+
+    color:
+      cores.has(color)
+        ? color
+        : "theme",
+
+    outfit:
+      roupas.has(outfit)
+        ? outfit
+        : "none",
+  };
+}
+
+
 function normalizarFotoPerfil(
   value: unknown
 ) {
@@ -369,6 +471,8 @@ export async function obterConfiguracoes(
           senhaHash: true,
           tema: true,
           fotoPerfil: true,
+          petMode: true,
+          petProfile: true,
         },
       });
 
@@ -418,6 +522,16 @@ export async function obterConfiguracoes(
           fotoPerfil:
             usuario.fotoPerfil ||
             null,
+
+          petMode:
+            normalizarPetMode(
+              usuario.petMode
+            ),
+
+          petProfile:
+            normalizarPetProfile(
+              usuario.petProfile
+            ),
         },
       }
     );
@@ -752,6 +866,140 @@ export async function atualizarTema(
       {
         error:
           "Nao foi possivel salvar o tema.",
+      }
+    );
+  }
+}
+
+
+export async function atualizarPet(
+  request: IncomingMessage,
+  response: ServerResponse
+) {
+  try {
+    const usuarioId =
+      await obterUsuarioId(
+        request
+      );
+
+    if (!usuarioId) {
+      json(
+        response,
+        401,
+        {
+          error:
+            "Nao autenticado.",
+        }
+      );
+
+      return;
+    }
+
+    const body =
+      await lerJson(
+        request
+      );
+
+    const possuiMode =
+      Object.prototype
+        .hasOwnProperty
+        .call(
+          body,
+          "mode"
+        );
+
+    const possuiProfile =
+      Object.prototype
+        .hasOwnProperty
+        .call(
+          body,
+          "profile"
+        );
+
+    if (
+      !possuiMode &&
+      !possuiProfile
+    ) {
+      json(
+        response,
+        400,
+        {
+          error:
+            "Nenhuma configuracao do pet foi informada.",
+        }
+      );
+
+      return;
+    }
+
+    const data: {
+      petMode?: string;
+      petProfile?: {
+        name: string;
+        color: string;
+        outfit: string;
+      };
+    } = {};
+
+    if (possuiMode) {
+      data.petMode =
+        normalizarPetMode(
+          body.mode
+        );
+    }
+
+    if (possuiProfile) {
+      data.petProfile =
+        normalizarPetProfile(
+          body.profile
+        );
+    }
+
+    const usuario =
+      await prisma.usuario.update({
+        where: {
+          id: usuarioId,
+        },
+
+        data,
+
+        select: {
+          id: true,
+          petMode: true,
+          petProfile: true,
+        },
+      });
+
+    json(
+      response,
+      200,
+      {
+        sucesso: true,
+
+        petMode:
+          normalizarPetMode(
+            usuario.petMode
+          ),
+
+        petProfile:
+          normalizarPetProfile(
+            usuario.petProfile
+          ),
+      }
+    );
+  }
+  catch (error) {
+    console.error(
+      "Erro ao atualizar pet:",
+      error
+    );
+
+    json(
+      response,
+      500,
+      {
+        error:
+          "Nao foi possivel salvar o pet.",
       }
     );
   }
