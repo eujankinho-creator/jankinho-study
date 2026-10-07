@@ -204,6 +204,14 @@
         '<circle cx="16.5" cy="16" r="2.5"/>'
       ),
 
+    pmpe:
+      icon(
+        '<path d="M5 5h14v14H5z"/>' +
+        '<path d="M8 9h8"/>' +
+        '<path d="M8 13h5"/>' +
+        '<path d="M15.5 15.5 18 18"/>'
+      ),
+
     configuracoes:
       icon(
         '<circle cx="12" cy="12" r="3"/>' +
@@ -250,6 +258,12 @@
           href: "/cronograma",
           key: "cronograma",
           label: "Cronograma"
+        },
+
+        {
+          href: "/curso-pmpe",
+          key: "pmpe",
+          label: "Curso PMPE"
         },
 
         {
@@ -584,6 +598,7 @@
         "/questoes",
         "/aulas",
         "/cronograma",
+        "/curso-pmpe",
         "/flashcards",
         "/lousa",
         "/farmacos",
@@ -835,6 +850,7 @@
         "/questoes",
         "/aulas",
         "/cronograma",
+        "/curso-pmpe",
         "/flashcards",
         "/sigaa",
         "/casos",
