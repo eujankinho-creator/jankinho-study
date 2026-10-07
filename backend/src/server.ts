@@ -3369,7 +3369,7 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/configuracoes\.js\?v=[^"']+/g,
-              "/js/configuracoes.js?v=20261006-multitheme-pet1"
+              "/js/configuracoes.js?v=20261007-pet-account1"
             )
             .replace(
               /\/js\/theme-manager\.js\?v=[^"']+/g,
@@ -3381,7 +3381,7 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/pink-pet\.js\?v=[^"']+/g,
-              "/js/pink-pet.js?v=20261006-pet-theme1"
+              "/js/pink-pet.js?v=20261007-pet-account1"
             )
             .replace(
               /\/favicon\.svg\?v=[^"']+/g,
