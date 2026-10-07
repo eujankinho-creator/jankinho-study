@@ -44,6 +44,8 @@ historia:"https://www.pm.pe.gov.br/historico/"
 };
 
 let state=loadState(),activeFilter="all",searchTerm="";
+function normalizeSearch(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();}
+function topicMatchesSearch(subject,topic){if(!searchTerm)return true;const aliases={portugues:"lingua portuguesa gramatica",historia:"historia pernambuco pmpe",rlm:"raciocinio logico matematica logica",informatica:"computacao windows office internet",constitucional:"direito constitucional constituicao cf88",dh:"direitos humanos legislacao leis"};const haystack=normalizeSearch([subject.name,subject.block,subject.key,topic,aliases[subject.key]||"",LAW_LINKS[topic]?"lei legislacao norma":"",SPECIAL[subject.key]?"material aula":""] .join(" "));const terms=normalizeSearch(searchTerm).split(" ").filter(Boolean);return terms.every(term=>haystack.includes(term));}
 function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")||{};}catch(e){return {};}}
 function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
 function topicKey(s,i){return s.key+":"+i;}
@@ -56,7 +58,7 @@ function render(){
 renderFilters();
 const host=document.getElementById("pmpeSubjects");let visible=0;
 host.innerHTML=SUBJECTS.filter(s=>activeFilter==="all"||s.key===activeFilter).map((s,si)=>{
-const rows=s.topics.map((topic,i)=>{const key=topicKey(s,i),t=getTopicState(key);const match=!searchTerm||(s.name+" "+topic).toLowerCase().includes(searchTerm);if(!match)return "";visible++;const law=LAW_LINKS[topic];return '<article class="pmpe-topic '+(t.studied?"complete":"")+'" data-topic-key="'+key+'"><div class="pmpe-topic-index">'+String(i+1).padStart(2,"0")+'</div><div><h3>'+esc(topic)+'</h3><p>'+esc(s.block)+' · tópico '+(i+1)+' de '+s.topics.length+'</p><div class="pmpe-topic-links"><a href="'+qSearch(s.name,topic)+'" target="_blank" rel="noopener">Aula gratuita ↗</a><button type="button" class="pmpe-topic-question-link" data-topic-question="'+key+'">Questões AOCP <span>→</span></button>'+(SPECIAL[s.key]?'<a href="'+SPECIAL[s.key]+'" target="_blank" rel="noopener">Material selecionado ↗</a>':"")+(law?'<a href="'+law+'" target="_blank" rel="noopener">Lei seca ↗</a>':"")+'</div></div><div class="pmpe-topic-actions"><button type="button" data-action="studied" class="pmpe-status-btn done '+(t.studied?"active":"")+'"><span class="pmpe-status-icon">'+(t.studied?"✓":"○")+'</span><span>'+(t.studied?"Concluído":"Marcar como concluído")+'</span></button><button type="button" data-action="reviewed" class="pmpe-status-btn review '+(t.reviewed?"active":"")+'"><span class="pmpe-status-icon">'+(t.reviewed?"★":"↻")+'</span><span>'+(t.reviewed?"Marcado para revisar":"Revisar depois")+'</span></button></div></article>';}).join("");
+const rows=s.topics.map((topic,i)=>{const key=topicKey(s,i),t=getTopicState(key);const match=topicMatchesSearch(s,topic);if(!match)return "";visible++;const law=LAW_LINKS[topic];return '<article class="pmpe-topic '+(t.studied?"complete":"")+'" data-topic-key="'+key+'"><div class="pmpe-topic-index">'+String(i+1).padStart(2,"0")+'</div><div><h3>'+esc(topic)+'</h3><p>'+esc(s.block)+' · tópico '+(i+1)+' de '+s.topics.length+'</p><div class="pmpe-topic-links"><a href="'+qSearch(s.name,topic)+'" target="_blank" rel="noopener">Aula gratuita</a><button type="button" class="pmpe-topic-question-link" data-topic-question="'+key+'">Questões AOCP</button>'+(SPECIAL[s.key]?'<a href="'+SPECIAL[s.key]+'" target="_blank" rel="noopener">Material selecionado</a>':"")+(law?'<a href="'+law+'" target="_blank" rel="noopener">Lei seca</a>':"")+'</div></div><div class="pmpe-topic-actions"><button type="button" data-action="studied" class="pmpe-status-btn done '+(t.studied?"active":"")+'"><span class="pmpe-status-icon">'+(t.studied?"✓":"○")+'</span><span>'+(t.studied?"Concluído":"Marcar como concluído")+'</span></button><button type="button" data-action="reviewed" class="pmpe-status-btn review '+(t.reviewed?"active":"")+'"><span class="pmpe-status-icon">'+(t.reviewed?"★":"↻")+'</span><span>'+(t.reviewed?"Marcado para revisar":"Revisar depois")+'</span></button></div></article>';}).join("");
 const completed=s.topics.filter((_,i)=>getTopicState(topicKey(s,i)).studied).length;const pct=Math.round(completed/s.topics.length*100);if(!rows)return "";
 return '<section class="pmpe-subject '+((activeFilter===s.key||searchTerm)?"open":"")+'" data-subject="'+s.key+'"><div class="pmpe-subject-head"><div class="pmpe-subject-badge">'+(si+1)+'</div><div class="pmpe-subject-copy"><strong>'+esc(s.name)+'</strong><small>'+esc(s.block)+' · '+s.topics.length+' tópicos · '+completed+' concluídos</small></div><div class="pmpe-subject-progress"><i style="width:'+pct+'%"></i></div><div class="pmpe-subject-toggle">⌄</div></div><div class="pmpe-topic-list">'+rows+'</div></section>';}).join("")||'<div class="pmpe-empty">Nenhum tópico encontrado.</div>';
 host.querySelectorAll(".pmpe-subject-head").forEach(h=>h.addEventListener("click",e=>{if(e.target.closest("a,button"))return;h.parentElement.classList.toggle("open");}));
@@ -65,7 +67,7 @@ document.getElementById("pmpeVisibleCount").textContent=visible+" tópicos";upda
 }
 function updateStats(){let studied=0,reviewed=0,questions=0,total=0;SUBJECTS.forEach(s=>s.topics.forEach((_,i)=>{total++;const t=getTopicState(topicKey(s,i));if(t.studied)studied++;if(t.reviewed)reviewed++;if(t.questions)questions++;}));const pct=Math.round(studied/total*100);document.getElementById("pmpeProgressValue").textContent=pct+"%";document.getElementById("pmpeProgressText").textContent=studied+" de "+total+" tópicos";document.getElementById("pmpeStudied").textContent=studied;document.getElementById("pmpeReviewed").textContent=reviewed;document.getElementById("pmpeQuestions").textContent=questions;}
 function countdown(){const exam=new Date("2027-02-21T08:00:00-03:00"),now=new Date(),days=Math.max(0,Math.ceil((exam-now)/86400000));document.getElementById("pmpeCountdown").textContent=days+" dias";}
-document.getElementById("pmpeSearch").addEventListener("input",e=>{searchTerm=e.target.value.trim().toLowerCase();render();});
+document.getElementById("pmpeSearch").addEventListener("input",e=>{searchTerm=e.target.value.trim();render();});
 document.getElementById("pmpeResumeBtn").addEventListener("click",()=>{if(!state.last){document.querySelector(".pmpe-course").scrollIntoView({behavior:"smooth"});return;}const subject=state.last.split(":")[0];activeFilter=subject;searchTerm="";document.getElementById("pmpeSearch").value="";render();setTimeout(()=>{const el=document.querySelector('[data-topic-key="'+CSS.escape(state.last)+'"]');if(el)el.scrollIntoView({behavior:"smooth",block:"center"});},50);});
 countdown();render();
 })();
@@ -158,8 +160,8 @@ function saveQ(){try{localStorage.setItem(QSTORE,JSON.stringify(qstate));}catch(
 function setTab(name){
   document.querySelectorAll("[data-pmpe-tab]").forEach(b=>b.classList.toggle("active",b.dataset.pmpeTab===name));
   document.querySelectorAll("[data-pmpe-panel]").forEach(p=>p.hidden=p.dataset.pmpePanel!==name);
-  document.querySelectorAll(".pmpe-course,.pmpe-week").forEach(p=>p.hidden=name!=="plano");
-  if(name==="questoes")populateQuestionSelectors();
+  document.querySelectorAll(".pmpe-course,.pmpe-week,.pmpe-plan").forEach(p=>p.hidden=name!=="plano");
+  if(name==="questoes"){populateQuestionSelectors();const amount=document.getElementById("pmpeQuestionAmount");if(amount)amount.value="0";}
   window.scrollTo({top:0,behavior:"smooth"});
 }
 document.querySelectorAll("[data-pmpe-tab]").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.pmpeTab)));
@@ -192,7 +194,7 @@ function selectedQuestions(){
   const topic=document.getElementById("pmpeQuestionTopic")?.value||"all";
   let list=BANK.filter(q=>(subject==="all"||q.subject===subject)&&(topic==="all"||String(q.topicIndex)===topic));
   for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
-  const n=Number(document.getElementById("pmpeQuestionAmount")?.value||5);
+  const n=Number(document.getElementById("pmpeQuestionAmount")?.value||0);
   if(n>0)list=list.slice(0,n);
   return list.map(shuffledQuestion);
 }
