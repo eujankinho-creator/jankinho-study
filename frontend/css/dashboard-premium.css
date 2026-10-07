@@ -3878,3 +3878,23 @@ html[data-theme="pink-glitter"]
   }
 }
 /* END CORTEX DASHBOARD CONTEXT SUBTLE V3 */
+
+
+/* DASHBOARD POINTER GLOW THEME FIX V6 */
+html[data-theme] .dashboard-view :is(
+  .hero-insight::before,
+  .metric-card::after,
+  .panel::after
+) {
+  background:
+    radial-gradient(
+      220px circle at
+      var(--mx, 80%)
+      var(--my, 0%),
+      color-mix(in srgb,var(--theme-accent) 10%,transparent),
+      transparent 62%
+    ) !important;
+}
+html[data-theme] .dashboard-view .hero-glow {
+  background: var(--theme-accent) !important;
+}
