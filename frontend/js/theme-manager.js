@@ -2,7 +2,7 @@
   "use strict";
 
   const STORAGE_KEY = "jankinho_theme_v1";
-  const DEFAULT_THEME = "dark-orange";
+  const DEFAULT_THEME = "dark-purple";
   const THEMES = new Set([
     "dark-orange",
     "dark-pink",
