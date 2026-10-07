@@ -15,6 +15,8 @@ model Usuario {
   email         String             @unique
   tema          String             @default("dark-orange")
   fotoPerfil    String?            @db.Text
+  petMode       String             @default("removed")
+  petProfile    Json?
   createdAt     DateTime           @default(now())
   senhaHash     String?
   casosCriados  CasoClinico[]
