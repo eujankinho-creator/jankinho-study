@@ -695,3 +695,168 @@ html[data-theme] .auth-heading h2,
 html[data-theme] .showcase-content h1 {
   color: var(--auth-text) !important;
 }
+
+
+/* =========================================================
+   AUTH CINEMA OUTSIDE SHELL V5
+   Elementos decorativos vivem no fundo da página, não no card.
+========================================================= */
+
+.auth-login-premium .auth-page > .auth-cinema-stage{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  opacity:.94!important;
+  perspective:1300px!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-grid{
+  inset:-10%!important;
+  opacity:.15!important;
+  mask-image:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(0,0,0,.58) 0%,
+      rgba(0,0,0,.42) 42%,
+      transparent 82%
+    )!important;
+  transform:
+    rotateX(66deg)
+    translate3d(0,120px,-180px)
+    scale(1.55)!important;
+}
+
+.auth-login-premium .auth-shell{
+  z-index:4!important;
+}
+
+/* livros espalhados pelas áreas externas */
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-book-one{
+  top:7%!important;
+  left:3.5%!important;
+  right:auto!important;
+  width:112px!important;
+  height:77px!important;
+  opacity:.72!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-book-two{
+  top:11%!important;
+  right:3.5%!important;
+  bottom:auto!important;
+  width:88px!important;
+  height:61px!important;
+  opacity:.58!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-book-three{
+  left:5%!important;
+  bottom:7%!important;
+  width:72px!important;
+  height:50px!important;
+  opacity:.42!important;
+}
+
+/* palavras/letras ficam fora do quadro principal */
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-morph-one{
+  top:23%!important;
+  right:2.2%!important;
+  opacity:.48!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-morph-two{
+  left:2.8%!important;
+  right:auto!important;
+  bottom:22%!important;
+  opacity:.34!important;
+  transform:scale(.82)!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-symbol-one{
+  left:1.8%!important;
+  top:34%!important;
+  font-size:22px!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-symbol-two{
+  left:8%!important;
+  bottom:3.5%!important;
+  font-size:13px!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-symbol-three{
+  right:7%!important;
+  top:4%!important;
+  font-size:13px!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-symbol-four{
+  right:2.5%!important;
+  bottom:8%!important;
+  font-size:18px!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-orbit-one{
+  width:190px!important;
+  height:190px!important;
+  right:-92px!important;
+  top:52%!important;
+  opacity:.30!important;
+}
+
+.auth-login-premium .auth-page > .auth-cinema-stage .cinema-orbit-two{
+  width:138px!important;
+  height:138px!important;
+  left:-69px!important;
+  top:24%!important;
+  opacity:.21!important;
+}
+
+/* impede qualquer decoração de reaparecer dentro do painel */
+.auth-login-premium .auth-showcase > .auth-cinema-stage{
+  display:none!important;
+}
+
+@media (max-width:1440px){
+  .auth-login-premium .auth-page > .auth-cinema-stage .cinema-book-one{
+    left:1.2%!important;
+    transform:scale(.82) rotateX(56deg) rotateZ(-13deg)!important;
+  }
+
+  .auth-login-premium .auth-page > .auth-cinema-stage .cinema-book-two{
+    right:1%!important;
+    transform:scale(.78) rotateX(58deg) rotateZ(12deg)!important;
+  }
+
+  .auth-login-premium .auth-page > .auth-cinema-stage .cinema-morph-one{
+    right:.4%!important;
+    transform:scale(.72)!important;
+  }
+
+  .auth-login-premium .auth-page > .auth-cinema-stage .cinema-morph-two{
+    left:.6%!important;
+    transform:scale(.68)!important;
+  }
+}
+
+@media (max-width:1180px){
+  .auth-login-premium .auth-page > .auth-cinema-stage{
+    opacity:.56!important;
+  }
+
+  .auth-login-premium .auth-page > .auth-cinema-stage :is(
+    .cinema-book-one,.cinema-book-two,.cinema-morph-one,.cinema-morph-two
+  ){
+    opacity:.22!important;
+  }
+}
+
+@media (max-width:900px){
+  .auth-login-premium .auth-page > .auth-cinema-stage{
+    display:none!important;
+  }
+}
+
+/* AUTH CINEMA OUTSIDE SHELL V5 END */
