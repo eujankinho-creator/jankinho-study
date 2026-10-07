@@ -636,3 +636,62 @@ html.cortex-cinema-paused
   animation-play-state:
     paused !important;
 }
+
+
+/* AUTH CINEMA THEME SYNC V4 */
+html[data-theme] body.auth-login-premium,
+html[data-theme] body.auth-register-premium {
+  background:
+    radial-gradient(circle at 18% 45%, rgba(var(--auth-accent-rgb),.10), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb,var(--auth-bg) 88%,black), var(--auth-bg)) !important;
+}
+html[data-theme] :is(.auth-showcase,.auth-form-side) {
+  border-color: var(--auth-border) !important;
+}
+html[data-theme] .auth-showcase {
+  background:
+    radial-gradient(circle at 18% 38%, rgba(var(--auth-accent-rgb),.12), transparent 38%),
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--auth-panel-strong) 96%,transparent),
+      color-mix(in srgb,var(--auth-panel) 96%,transparent)
+    ) !important;
+}
+html[data-theme] :is(
+  .showcase-kicker,
+  .showcase-content h1 em,
+  .auth-eyebrow,
+  .auth-switch a,
+  .form-link,
+  .brand-copy strong,
+  .cinema-morph-label,
+  .cinema-symbol
+) {
+  color: var(--auth-accent-two) !important;
+}
+html[data-theme] :is(.showcase-kicker span,.status-dot) {
+  background: var(--auth-accent) !important;
+  box-shadow: 0 0 14px var(--auth-accent-glow) !important;
+}
+html[data-theme] :is(.feature-icon,.brain-mark) {
+  border-color: rgba(var(--auth-accent-rgb),.28) !important;
+  background: var(--auth-accent-soft) !important;
+  color: var(--auth-accent-two) !important;
+  box-shadow: 0 0 24px var(--auth-accent-glow) !important;
+}
+html[data-theme] :is(
+  .cinema-book-back,
+  .cinema-book-front,
+  .cinema-morph-glyph
+) {
+  border-color: rgba(var(--auth-accent-rgb),.24) !important;
+}
+html[data-theme] :is(
+  .cinema-book-line,
+  .cinema-morph-line
+) {
+  background: rgba(var(--auth-accent-rgb),.42) !important;
+}
+html[data-theme] .auth-heading h2,
+html[data-theme] .showcase-content h1 {
+  color: var(--auth-text) !important;
+}
