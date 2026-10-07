@@ -447,7 +447,7 @@
     "subject": "portugues",
     "topicIndex": 6,
     "source": "Autoral Córtex · gramática aplicada · estilo concurso",
-    "context": "O condutor entregou lhe a chave?",
+    "context": "O condutor lhe entregou a chave.",
     "prompt": "No período apresentado, a palavra ou expressão destacada (lhe) exerce, no contexto, a função de",
     "options": [
       "advérbio de modo",
