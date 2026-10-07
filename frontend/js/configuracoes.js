@@ -8,6 +8,8 @@ const state = {
   fotoPerfil: null,
   usuarioId: null,
   tema: "dark-orange",
+  petMode: "removed",
+  petProfile: null,
 };
 
 
@@ -25,7 +27,7 @@ function getPetMode() {
   }
   catch (error) {}
 
-  return "hidden";
+  return "removed";
 }
 
 
@@ -184,6 +186,34 @@ function savePetProfile(profile) {
   }
   catch (error) {}
 
+  state.petProfile =
+    normalized;
+
+  if (state.usuarioId) {
+    void api(
+      "/api/configuracoes/pet",
+      {
+        method:
+          "PATCH",
+
+        body:
+          JSON.stringify({
+            profile:
+              normalized,
+          }),
+      }
+    )
+      .catch(
+        function (error) {
+          showMessage(
+            error.message ||
+            "Nao foi possivel salvar a personalizacao do pet.",
+            "error"
+          );
+        }
+      );
+  }
+
   renderPetCustomization(normalized);
 
   return normalized;
@@ -255,39 +285,90 @@ function renderPetSettings() {
 }
 
 
-function setPetMode(mode) {
-  if (mode !== "visible" && mode !== "hidden" && mode !== "removed") {
+async function setPetMode(mode) {
+  if (
+    mode !== "visible" &&
+    mode !== "hidden" &&
+    mode !== "removed"
+  ) {
     return;
   }
 
   try {
-    localStorage.setItem(petModeKey(), mode);
-  }
-  catch (error) {}
-
-  if (window.parent !== window) {
-    try {
-      window.parent.postMessage(
+    const data =
+      await api(
+        "/api/configuracoes/pet",
         {
-          type: "cortex:pet-mode",
-          mode: mode,
-          userId: state.usuarioId
+          method:
+            "PATCH",
+
+          body:
+            JSON.stringify({
+              mode,
+            }),
+        }
+      );
+
+    const savedMode =
+      data &&
+      (
+        data.petMode === "visible" ||
+        data.petMode === "hidden" ||
+        data.petMode === "removed"
+      )
+        ? data.petMode
+        : "removed";
+
+    state.petMode =
+      savedMode;
+
+    try {
+      localStorage.setItem(
+        petModeKey(),
+        savedMode
+      );
+    }
+    catch (error) {}
+
+    const target =
+      window.parent !== window
+        ? window.parent
+        : window;
+
+    try {
+      target.postMessage(
+        {
+          type:
+            "cortex:pet-mode",
+
+          mode:
+            savedMode,
+
+          userId:
+            state.usuarioId,
         },
         window.location.origin
       );
     }
     catch (error) {}
+
+    renderPetSettings();
+
+    showMessage(
+      savedMode === "visible"
+        ? "Pet ativado nesta conta."
+        : savedMode === "hidden"
+          ? "Pet ocultado. Ele continua salvo na sua conta."
+          : "Pet removido da sua conta."
+    );
   }
-
-  renderPetSettings();
-
-  showMessage(
-    mode === "visible"
-      ? "Pet adicionado e visível."
-      : mode === "hidden"
-        ? "Pet ocultado. Você pode mostrá-lo novamente a qualquer momento."
-        : "Pet removido da interface."
-  );
+  catch (error) {
+    showMessage(
+      error.message ||
+      "Nao foi possivel atualizar o pet.",
+      "error"
+    );
+  }
 }
 
 
@@ -1012,6 +1093,43 @@ async function loadSettings() {
     state.usuarioId =
       user.id ||
       null;
+
+
+    state.petMode =
+      (
+        user.petMode === "visible" ||
+        user.petMode === "hidden" ||
+        user.petMode === "removed"
+      )
+        ? user.petMode
+        : "removed";
+
+
+    state.petProfile =
+      user.petProfile &&
+      typeof user.petProfile === "object"
+        ? user.petProfile
+        : {
+            name: "",
+            color: "theme",
+            outfit: "none",
+          };
+
+
+    try {
+      localStorage.setItem(
+        petModeKey(),
+        state.petMode
+      );
+
+      localStorage.setItem(
+        petProfileKey(),
+        JSON.stringify(
+          state.petProfile
+        )
+      );
+    }
+    catch (error) {}
 
 
     state.fotoPerfil =
