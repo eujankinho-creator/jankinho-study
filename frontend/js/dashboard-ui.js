@@ -459,24 +459,44 @@
 
       try {
         const utterance = new SpeechSynthesisUtterance(
-          "Seja bem-vindo, " + introWelcomeName
+          "Seja bem-vindo, " + introWelcomeName + "."
         );
         utterance.lang = "pt-BR";
-        utterance.rate = 0.94;
-        utterance.pitch = 0.98;
-        utterance.volume = 0.88;
+        utterance.rate = 0.90;
+        utterance.pitch = 1.01;
+        utterance.volume = 0.92;
 
         const voices = window.speechSynthesis.getVoices();
-        const ptBrVoice = voices.find(function (voice) {
-          return /^pt-BR$/i.test(voice.lang || "");
-        }) || voices.find(function (voice) {
-          return /^pt/i.test(voice.lang || "");
-        });
+        const ranked = voices
+          .filter(function (voice) {
+            return /^pt/i.test(voice.lang || "");
+          })
+          .map(function (voice) {
+            const name = String(voice.name || "").toLowerCase();
+            const lang = String(voice.lang || "").toLowerCase();
+            let score = 0;
 
-        if (ptBrVoice) {
-          utterance.voice = ptBrVoice;
+            if (lang === "pt-br") score += 120;
+            else if (lang.startsWith("pt")) score += 55;
+
+            if (!voice.localService) score += 22;
+            if (/natural|neural|online|premium/.test(name)) score += 100;
+            if (/francisca|antonio|antônio/.test(name)) score += 70;
+            if (/google.*portugu[eê]s.*brasil/.test(name)) score += 65;
+            if (/microsoft.*portugu[eê]s.*brasil/.test(name)) score += 45;
+            if (/desktop|compact|espeak/.test(name)) score -= 55;
+
+            return { voice: voice, score: score };
+          })
+          .sort(function (a, b) {
+            return b.score - a.score;
+          });
+
+        if (ranked.length) {
+          utterance.voice = ranked[0].voice;
         }
 
+        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(utterance);
       } catch {}
     }
