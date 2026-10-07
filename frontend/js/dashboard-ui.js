@@ -399,6 +399,10 @@
       0;
 
 
+    let voiceTimer =
+      0;
+
+
     let finished =
       false;
 
@@ -525,9 +529,14 @@
         );
 
 
+        window.clearTimeout(
+          voiceTimer
+        );
+
+
         cleanupFocusEvents();
 
-        /* A voz entra exatamente no trecho final da animacao. */
+        /* Fallback: se a voz ainda nao iniciou, fala ao entrar na saida. */
         speakIntroWelcome();
 
 
@@ -590,6 +599,11 @@
       );
 
 
+      window.clearTimeout(
+        voiceTimer
+      );
+
+
       if (runningSince) {
 
         remaining =
@@ -648,6 +662,19 @@
 
       runningSince =
         performance.now();
+
+
+      if (!introVoiceSpoken) {
+        window.clearTimeout(voiceTimer);
+        voiceTimer = window.setTimeout(
+          function () {
+            if (!document.hidden && pageHasFocus()) {
+              speakIntroWelcome();
+            }
+          },
+          Math.max(0, remaining - 900)
+        );
+      }
 
 
       finishTimer =
