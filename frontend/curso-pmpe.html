@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso PMPE 2026 | Cortex</title>
+  <script>
+    (function(){
+      var allowed=["dark-orange","dark-pink","dark-green","dark-purple","dark-black"];
+      var theme="dark-orange";
+      try{var saved=localStorage.getItem("jankinho_theme_v1");if(allowed.indexOf(saved)>=0)theme=saved;}catch(e){}
+      document.documentElement.setAttribute("data-theme",theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/app.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261005-logo-global1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261006-theme-v6">
+  <link rel="stylesheet" href="/css/curso-pmpe.css?v=20261006-pmpe1">
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261006-multitheme2"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261006-pmpe1"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-minimal-v4">
+</head>
+<body class="pmpe-view">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo">
+      <div class="logo-box"></div>
+      <div><strong>Cortex</strong><span>Study Platform</span></div>
+    </a>
+    <div class="sidebar-menu"></div>
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info"><strong id="nomeSidebar">Carregando...</strong><span id="emailSidebar"></span></div>
+      <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header pmpe-header">
+      <div>
+        <div class="header-title">Curso PMPE</div>
+        <span>Preparação independente · Soldado QPMG · Edital 001/2026</span>
+      </div>
+      <div class="header-user">
+        <div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div>
+        <div id="avatarHeader" class="avatar header-avatar">U</div>
+      </div>
+    </header>
+
+    <main class="pmpe-page">
+      <section class="pmpe-hero">
+        <div class="pmpe-hero-copy">
+          <span class="pmpe-kicker">CORTEX · PMPE 2026</span>
+          <h1>Seu curso gratuito para <em>Soldado da PMPE</em></h1>
+          <p>Trilha construída em cima do edital publicado, com 60 tópicos, materiais gratuitos, lei seca, aulas abertas, revisões e prática direcionada ao Instituto AOCP.</p>
+          <div class="pmpe-actions">
+            <a href="https://www.institutoaocp.org.br/concursos/714" target="_blank" rel="noopener">Edital oficial</a>
+            <a href="https://www.monsterconcursos.com.br/edital-verticalizado-pmpe" target="_blank" rel="noopener">Edital verticalizado</a>
+            <button id="pmpeResumeBtn" type="button">Continuar de onde parei</button>
+          </div>
+        </div>
+        <aside class="pmpe-exam-card">
+          <span>PROVA OBJETIVA + REDAÇÃO</span>
+          <strong>21 FEV 2027</strong>
+          <div class="pmpe-countdown" id="pmpeCountdown">-- dias</div>
+          <small>1.250 vagas · Instituto AOCP · 60 questões</small>
+        </aside>
+      </section>
+
+      <section class="pmpe-stats">
+        <article><span>Progresso</span><strong id="pmpeProgressValue">0%</strong><small id="pmpeProgressText">0 de 60 tópicos</small></article>
+        <article><span>Estudados</span><strong id="pmpeStudied">0</strong><small>tópicos concluídos</small></article>
+        <article><span>Revisados</span><strong id="pmpeReviewed">0</strong><small>revisões marcadas</small></article>
+        <article><span>Questões</span><strong id="pmpeQuestions">0</strong><small>sessões registradas</small></article>
+      </section>
+
+      <section class="pmpe-isolation-note">
+        <div>◈</div>
+        <div>
+          <strong>Ambiente independente</strong>
+          <p>O progresso desta área fica salvo apenas no espaço <code>cortex_pmpe_2026</code> do navegador. Não usa nem altera o banco, desempenho, cronograma, flashcards ou questões gerais do Córtex.</p>
+        </div>
+      </section>
+
+      <section class="pmpe-toolbar">
+        <div class="pmpe-search">
+          <span>⌕</span>
+          <input id="pmpeSearch" type="search" placeholder="Buscar tópico, matéria ou lei...">
+        </div>
+        <div class="pmpe-filter-row" id="pmpeFilters"></div>
+      </section>
+
+      <section class="pmpe-plan">
+        <div class="pmpe-section-title">
+          <div><span>PLANO DE ATAQUE</span><h2>Rotina recomendada</h2></div>
+        </div>
+        <div class="pmpe-plan-grid">
+          <article><strong>1. Teoria</strong><p>1 tópico do edital por bloco de estudo. Use a aula gratuita sugerida e confira o texto do edital.</p></article>
+          <article><strong>2. Lei seca</strong><p>Constitucional e legislação: leia diretamente a norma depois da aula e marque artigos recorrentes.</p></article>
+          <article><strong>3. AOCP</strong><p>Feche cada tópico com 15–30 questões da banca. Registre a sessão aqui sem misturar com o banco geral.</p></article>
+          <article><strong>4. Revisão</strong><p>24h, 7 dias e 30 dias. Marque “Revisado” após recuperar o conteúdo sem consultar.</p></article>
+        </div>
+      </section>
+
+      <section class="pmpe-resources">
+        <div class="pmpe-section-title">
+          <div><span>FONTES GRATUITAS</span><h2>Biblioteca essencial</h2></div>
+        </div>
+        <div class="pmpe-resource-grid">
+          <a href="https://www.institutoaocp.org.br/concursos/714" target="_blank" rel="noopener"><span>OFICIAL</span><strong>Instituto AOCP · PMPE</strong><small>Edital, publicações e atualizações oficiais</small></a>
+          <a href="https://www.monsterconcursos.com.br/edital-verticalizado-pmpe" target="_blank" rel="noopener"><span>EDITAL</span><strong>Verticalizado gratuito</strong><small>60 tópicos organizados por disciplina</small></a>
+          <a href="https://profrafaelcardoso.com.br/pm-pe/raio-x-aocp/" target="_blank" rel="noopener"><span>RLM</span><strong>Raio-X AOCP</strong><small>Aula gratuita + análise das questões da banca</small></a>
+          <a href="https://escola.mpu.mp.br/plataforma-aprender/acervo-educacional/conteudo/direito-constitucional-modulo-1-teoria-da-constituicao" target="_blank" rel="noopener"><span>CONSTITUCIONAL</span><strong>ESMPU · Módulo 1</strong><small>Curso público com videoaulas gratuitas</small></a>
+          <a href="https://escola.mpu.mp.br/plataforma-aprender/acervo-educacional/conteudo/direito-constitucional-modulo-2-organizacao-do-estado-brasileiro" target="_blank" rel="noopener"><span>CONSTITUCIONAL</span><strong>ESMPU · Módulo 2</strong><small>Organização do Estado em aulas abertas</small></a>
+          <a href="https://escola.mpu.mp.br/plataforma-aprender/acervo-educacional/conteudo/direito-constitucional-modulo-3-direitos-fundamentais" target="_blank" rel="noopener"><span>CONSTITUCIONAL</span><strong>ESMPU · Módulo 3</strong><small>Direitos fundamentais em videoaulas</small></a>
+          <a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank" rel="noopener"><span>LEI SECA</span><strong>Constituição Federal</strong><small>Texto oficial atualizado</small></a>
+          <a href="https://www.pm.pe.gov.br/historico/" target="_blank" rel="noopener"><span>HISTÓRIA</span><strong>Histórico oficial da PMPE</strong><small>Fonte institucional complementar</small></a>
+        </div>
+      </section>
+
+      <section class="pmpe-course">
+        <div class="pmpe-section-title">
+          <div><span>EDITAL COMPLETO</span><h2>60 tópicos em 6 matérias</h2></div>
+          <small id="pmpeVisibleCount">60 tópicos</small>
+        </div>
+        <div id="pmpeSubjects" class="pmpe-subjects"></div>
+      </section>
+
+      <section class="pmpe-week">
+        <div class="pmpe-section-title"><div><span>CICLO SEMANAL</span><h2>Modelo de 6 dias</h2></div></div>
+        <div class="pmpe-week-grid">
+          <article><span>SEG</span><strong>Português + RLM</strong><small>Teoria + 20 questões de cada</small></article>
+          <article><span>TER</span><strong>História + Constitucional</strong><small>Teoria + revisão de lei seca</small></article>
+          <article><span>QUA</span><strong>Informática + DH/Legislação</strong><small>Teoria + prática AOCP</small></article>
+          <article><span>QUI</span><strong>Português + RLM</strong><small>Continuação + revisão 24h/7d</small></article>
+          <article><span>SEX</span><strong>Constitucional + Legislação</strong><small>Lei seca + questões</small></article>
+          <article><span>SÁB</span><strong>História + Informática + Redação</strong><small>Revisão da semana + mini simulado</small></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/curso-pmpe.js?v=20261006-pmpe1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+</body>
+</html>
