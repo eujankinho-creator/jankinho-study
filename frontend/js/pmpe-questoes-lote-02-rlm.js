@@ -29,7 +29,7 @@ invalidCases.forEach(([p,q],i)=>{
 });
 for(let i=0;i<12;i++){
  const a=34+i*3,b=25+i*2,overlap=8+(i%6)*2,total=a+b-overlap;
- add(2,'Em um curso de formação, '+a+' alunos estudaram Informática, '+b+' estudaram Direito Constitucional e '+overlap+' estudaram ambas. Todos estudaram pelo menos uma dessas disciplinas. Quantos alunos participaram da atividade?',N(total),[total+overlap,total-overlap,a+b,total+2],"Pelo princípio da inclusão-exclusão: |A ∪ B| = "+a+" + "+b+" − "+overlap+" = "+total+".");
+ add(2,'Em um curso de formação, '+a+' alunos estudaram Informática, '+b+' estudaram Direito Constitucional e '+overlap+' estudaram ambas. Todos estudaram pelo menos uma dessas disciplinas. Quantos alunos participaram da atividade?',N(total),[total+overlap,total-overlap,total+5,total+2],"Pelo princípio da inclusão-exclusão: |A ∪ B| = "+a+" + "+b+" − "+overlap+" = "+total+".");
 }
 for(let i=0;i<9;i++){
  const all=95+5*i,a=42+2*i,b=37+i,both=9+(i%4),none=all-(a+b-both);
@@ -37,7 +37,7 @@ for(let i=0;i<9;i++){
 }
 for(let i=0;i<8;i++){
  const a=25+i*3,b=20+i*2,ab=6+(i%4),onlyA=a-ab;
- add(2,'Em uma unidade, '+a+' profissionais possuem certificado A, '+b+' possuem certificado B e '+ab+' possuem ambos. Quantos possuem somente o certificado A?',N(onlyA),[a,b,ab,onlyA+ab],"Para obter somente A, descontam-se de A os participantes comuns a A e B: "+a+" − "+ab+" = "+onlyA+".");
+ add(2,'Em uma unidade, '+a+' profissionais possuem certificado A, '+b+' possuem certificado B e '+ab+' possuem ambos. Quantos possuem somente o certificado A?',N(onlyA),[a,b,ab,onlyA+2],"Para obter somente A, descontam-se de A os participantes comuns a A e B: "+a+" − "+ab+" = "+onlyA+".");
 }
 for(let i=0;i<10;i++){
  const n=6+i,k=2+(i%3),result=ch(n,k);
