@@ -102,6 +102,10 @@
   >
   <link
     rel="stylesheet"
+    href="/css/dashboard-voice.css?v=20261007-voiceblob1"
+  >
+  <link
+    rel="stylesheet"
     href="/css/sidebar-standard.css?v=20261002-lab-new1"
   >
 
@@ -729,6 +733,111 @@
 </div>
 
 
+        </div>
+
+
+        <div
+          id="cortexVoiceAssistant"
+          class="cortex-voice-orb-slot"
+          aria-label="Assistente de voz Cortex"
+        >
+          <button
+            class="cortex-voice-orb"
+            type="button"
+            data-state="idle"
+            aria-label="Abrir Cortex Voice"
+            title="Abrir Cortex Voice"
+          >
+            <span class="cortex-voice-core" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/>
+                <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/>
+                <path d="M12 18v3"/>
+                <path d="M9 21h6"/>
+              </svg>
+            </span>
+          </button>
+
+          <div class="cortex-voice-caption" aria-hidden="true">
+            <strong>Cortex Voice</strong>
+            Clique e fale comigo
+          </div>
+
+          <section
+            class="cortex-voice-panel"
+            aria-hidden="true"
+            aria-label="Conversa com Cortex Voice"
+          >
+            <div class="cortex-voice-panel-head">
+              <div>
+                <span>Assistente de voz</span>
+                <strong>Cortex Voice</strong>
+              </div>
+
+              <button
+                class="cortex-voice-close"
+                type="button"
+                aria-label="Fechar assistente"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div
+              class="cortex-voice-transcript"
+              aria-live="polite"
+            >
+              <div class="cortex-voice-empty">
+                Clique no microfone e fale normalmente.
+                Você também pode digitar sua pergunta.
+              </div>
+            </div>
+
+            <div
+              class="cortex-voice-status"
+              aria-live="polite"
+            ></div>
+
+            <div class="cortex-voice-controls">
+              <button
+                class="cortex-voice-mic"
+                type="button"
+                aria-label="Ativar microfone"
+                title="Ativar microfone"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/>
+                  <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/>
+                  <path d="M12 18v3"/>
+                </svg>
+              </button>
+
+              <input
+                type="text"
+                maxlength="1400"
+                autocomplete="off"
+                placeholder="Pergunte ao Cortex..."
+                aria-label="Mensagem para o Cortex Voice"
+              >
+
+              <button
+                class="cortex-voice-send"
+                type="button"
+                aria-label="Enviar mensagem"
+                title="Enviar"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="m4 4 16 8-16 8 3-8-3-8Z"/>
+                  <path d="M7 12h13"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="cortex-voice-unsupported">
+              O reconhecimento de voz não está disponível neste navegador.
+              Você ainda pode conversar digitando.
+            </div>
+          </section>
         </div>
 
 
@@ -1575,6 +1684,7 @@
 
 <script defer src="/js/dashboard-ui.js?v=20261007-no-voice5"></script>
   <script defer src="/js/dashboard.js?v=20261006-plan-weather2"></script>
+  <script defer src="/js/dashboard-voice.js?v=20261007-voiceblob1"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 
 
