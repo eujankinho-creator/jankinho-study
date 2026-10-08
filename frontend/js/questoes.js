@@ -2496,26 +2496,6 @@ $("abrirManual")
   );
 
 
-$("abrirDisciplina")
-  .addEventListener(
-    "click",
-    function () {
-
-      abrirModal(
-        "modalDisciplina"
-      );
-
-      setTimeout(
-        function () {
-          $("novaDisciplina")
-            .focus();
-        },
-        50
-      );
-    }
-  );
-
-
 document
   .querySelectorAll(
     "[data-close]"
@@ -2565,45 +2545,6 @@ $("modalManual")
         fecharModal(
           "modalManual"
         );
-      }
-    }
-  );
-
-
-$("modalDisciplina")
-  .addEventListener(
-    "mousedown",
-    function (event) {
-
-      if (
-        event.target ===
-        $("modalDisciplina")
-      ) {
-        fecharModal(
-          "modalDisciplina"
-        );
-      }
-    }
-  );
-
-
-$("criarDisciplina")
-  .addEventListener(
-    "click",
-    criarDisciplina
-  );
-
-
-$("novaDisciplina")
-  .addEventListener(
-    "keydown",
-    function (event) {
-
-      if (
-        event.key ===
-        "Enter"
-      ) {
-        criarDisciplina();
       }
     }
   );
