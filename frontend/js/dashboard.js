@@ -1177,69 +1177,93 @@ function carregarClima() {
 
 async function carregarDashboard() {
 
+  atualizarData();
+
+  /*
+   * Mostra a estrutura da Dashboard imediatamente.
+   * Os dados entram progressivamente, sem bloquear a interface
+   * esperando módulos secundários.
+   */
+  document.body.classList.add(
+    "dashboard-loaded"
+  );
+
+
   try {
 
-    atualizarData();
+    const usuarioPromise =
+      carregarUsuario();
 
 
     /*
-     * Usuario e dados comecam a carregar
-     * ao mesmo tempo para reduzir espera.
+     * A Dashboard não precisa carregar milhares de questões.
+     * Busca somente uma página mínima para obter o total global.
      */
-    const usuarioPromise =
-      carregarUsuario();
+    const questoesResumoPromise =
+      fetch(
+        "/api/questoes?pagina=1&limite=10",
+        {
+          credentials:
+            "same-origin"
+        }
+      );
+
+
+    const respostasPromise =
+      fetch(
+        "/api/respostas?modo=dashboard",
+        {
+          credentials:
+            "same-origin"
+        }
+      );
+
+
+    const disciplinasPromise =
+      fetch(
+        "/api/disciplinas",
+        {
+          credentials:
+            "same-origin"
+        }
+      );
+
+
+    /*
+     * Financeiro e cronograma começam ao mesmo tempo,
+     * mas não bloqueiam a primeira renderização.
+     */
+    const financeiroPromise =
+      fetch(
+        "/api/financeiro",
+        {
+          credentials:
+            "same-origin"
+        }
+      );
+
+
+    const cronogramaPromise =
+      fetch(
+        "/api/cronograma/dashboard",
+        {
+          credentials:
+            "same-origin"
+        }
+      );
 
 
     const [
       usuario,
       questoesResponse,
       respostasResponse,
-      disciplinasResponse,
-      financeiroResponse,
-      cronogramaResponse
+      disciplinasResponse
     ] =
       await Promise.all([
         usuarioPromise,
-
-        fetch(
-          "/api/questoes",
-          {
-            credentials:
-              "same-origin"
-          }
-        ),
-
-        fetch(
-          "/api/respostas",
-          {
-            credentials:
-              "same-origin"
-          }
-        ),
-
-        fetch(
-          "/api/disciplinas",
-          {
-            credentials:
-              "same-origin"
-          }
-        ),
-
-        fetch(
-          "/api/financeiro",
-          {
-            credentials:
-              "same-origin"
-          }
-        ),
-
-        fetch(
-          "/api/cronograma/dashboard",
-          {
-            credentials:
-              "same-origin"
-          }
-        )
+        questoesResumoPromise,
+        respostasPromise,
+        disciplinasPromise
       ]);
 
 
@@ -1248,25 +1272,18 @@ async function carregarDashboard() {
     }
 
 
-    const respostasApi =
+    const respostasPrincipais =
       [
         questoesResponse,
         respostasResponse,
-        disciplinasResponse,
-        financeiroResponse,
-        cronogramaResponse
+        disciplinasResponse
       ];
 
 
     if (
-      respostasApi.some(
+      respostasPrincipais.some(
         function (response) {
-
-          return (
-            response.status ===
-            401
-          );
-
+          return response.status === 401;
         }
       )
     ) {
@@ -1279,16 +1296,17 @@ async function carregarDashboard() {
 
 
     const [
-      questoes,
+      questoesResumo,
       respostas,
-      disciplinas,
-      financeiro,
-      cronograma
+      disciplinas
     ] =
       await Promise.all([
         questoesResponse.ok
           ? questoesResponse.json()
-          : Promise.resolve([]),
+          : Promise.resolve({
+              total: 0,
+              itens: []
+            }),
 
         respostasResponse.ok
           ? respostasResponse.json()
@@ -1296,30 +1314,8 @@ async function carregarDashboard() {
 
         disciplinasResponse.ok
           ? disciplinasResponse.json()
-          : Promise.resolve([]),
-
-        financeiroResponse.ok
-          ? financeiroResponse.json()
-          : Promise.resolve({
-              resumo: {
-                receitas: 0,
-                despesas: 0,
-                saldo: 0
-              }
-            }),
-
-        cronogramaResponse.ok
-          ? cronogramaResponse.json()
-          : Promise.resolve({
-              schedule: null
-            })
+          : Promise.resolve([])
       ]);
-
-
-    const listaQuestoes =
-      Array.isArray(questoes)
-        ? questoes
-        : [];
 
 
     const listaRespostas =
@@ -1335,7 +1331,14 @@ async function carregarDashboard() {
 
 
     const totalQuestoes =
-      listaQuestoes.length;
+      Number(
+        questoesResumo &&
+        !Array.isArray(questoesResumo)
+          ? questoesResumo.total
+          : Array.isArray(questoesResumo)
+            ? questoesResumo.length
+            : 0
+      ) || 0;
 
 
     const totalRespondidas =
@@ -1345,11 +1348,9 @@ async function carregarDashboard() {
     const totalAcertos =
       listaRespostas.filter(
         function (resposta) {
-
           return Boolean(
             resposta.correta
           );
-
         }
       ).length;
 
@@ -1381,49 +1382,65 @@ async function carregarDashboard() {
         : 0;
 
 
-    $("totalQuestoes")
-      .textContent =
-      totalQuestoes;
+    if ($("totalQuestoes")) {
+      $("totalQuestoes")
+        .textContent =
+        totalQuestoes;
+    }
 
 
-    $("totalRespondidas")
-      .textContent =
-      totalRespondidas;
+    if ($("totalRespondidas")) {
+      $("totalRespondidas")
+        .textContent =
+        totalRespondidas;
+    }
 
 
-    $("totalAcertos")
-      .textContent =
-      totalAcertos;
+    if ($("totalAcertos")) {
+      $("totalAcertos")
+        .textContent =
+        totalAcertos;
+    }
 
 
-    $("percentual")
-      .textContent =
-      percentual +
-      "%";
+    if ($("percentual")) {
+      $("percentual")
+        .textContent =
+        percentual +
+        "%";
+    }
 
 
-    $("mensagemHero")
-      .textContent =
-      mensagemDashboard(
-        totalRespondidas,
-        percentual
-      );
+    if ($("mensagemHero")) {
+      $("mensagemHero")
+        .textContent =
+        mensagemDashboard(
+          totalRespondidas,
+          percentual
+        );
+    }
 
 
-    $("progressoPercentual")
-      .textContent =
-      progresso +
-      "%";
+    if ($("progressoPercentual")) {
+      $("progressoPercentual")
+        .textContent =
+        progresso +
+        "%";
+    }
 
 
-    $("progressoRespondidas")
-      .textContent =
-      totalRespondidas;
+    if ($("progressoRespondidas")) {
+      $("progressoRespondidas")
+        .textContent =
+        totalRespondidas;
+    }
 
 
-    $("progressoDisponiveis")
-      .textContent =
-      totalQuestoes;
+    if ($("progressoDisponiveis")) {
+      $("progressoDisponiveis")
+        .textContent =
+        totalQuestoes;
+    }
 
 
     const circunferencia =
@@ -1439,10 +1456,12 @@ async function carregarDashboard() {
       );
 
 
-    $("progressCircle")
-      .style
-      .strokeDashoffset =
-      String(offset);
+    if ($("progressCircle")) {
+      $("progressCircle")
+        .style
+        .strokeDashoffset =
+        String(offset);
+    }
 
 
     renderDisciplinas(
@@ -1460,50 +1479,119 @@ async function carregarDashboard() {
       listaRespostas
     );
 
-    renderPlanoDashboard(
-      cronograma
-    );
 
     renderTrajetoria(
       listaRespostas
     );
 
 
-    const resumo =
-      financeiro &&
-      financeiro.resumo
-        ? financeiro.resumo
-        : {
-            receitas: 0,
-            despesas: 0,
-            saldo: 0
-          };
+    /*
+     * Atualizações secundárias não seguram mais a Dashboard.
+     */
+    void financeiroPromise
+      .then(
+        async function (response) {
+
+          if (
+            response.status ===
+            401
+          ) {
+            return;
+          }
 
 
-    $("saldo")
-      .textContent =
-      moeda(
-        resumo.saldo
+          const financeiro =
+            response.ok
+              ? await response.json()
+              : {
+                  resumo: {
+                    receitas: 0,
+                    despesas: 0,
+                    saldo: 0
+                  }
+                };
+
+
+          const resumo =
+            financeiro &&
+            financeiro.resumo
+              ? financeiro.resumo
+              : {
+                  receitas: 0,
+                  despesas: 0,
+                  saldo: 0
+                };
+
+
+          if ($("saldo")) {
+            $("saldo").textContent =
+              moeda(
+                resumo.saldo
+              );
+          }
+
+
+          if ($("receitas")) {
+            $("receitas").textContent =
+              moeda(
+                resumo.receitas
+              );
+          }
+
+
+          if ($("despesas")) {
+            $("despesas").textContent =
+              moeda(
+                resumo.despesas
+              );
+          }
+
+        }
+      )
+      .catch(
+        function (erro) {
+          console.warn(
+            "Financeiro da Dashboard carregou com atraso:",
+            erro
+          );
+        }
       );
 
 
-    $("receitas")
-      .textContent =
-      moeda(
-        resumo.receitas
+    void cronogramaPromise
+      .then(
+        async function (response) {
+
+          if (
+            response.status ===
+            401
+          ) {
+            return;
+          }
+
+
+          const cronograma =
+            response.ok
+              ? await response.json()
+              : {
+                  schedule: null
+                };
+
+
+          renderPlanoDashboard(
+            cronograma
+          );
+
+        }
+      )
+      .catch(
+        function (erro) {
+          console.warn(
+            "Cronograma da Dashboard carregou com atraso:",
+            erro
+          );
+        }
       );
-
-
-    $("despesas")
-      .textContent =
-      moeda(
-        resumo.despesas
-      );
-
-
-    document.body.classList.add(
-      "dashboard-loaded"
-    );
 
   }
   catch (erro) {
@@ -1516,7 +1604,6 @@ async function carregarDashboard() {
   }
 
 }
-
 
 async function sair() {
 
