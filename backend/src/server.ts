@@ -50,7 +50,7 @@ import { sincronizarQuestoesConcursosPublicos } from "./questoesConcursosPublico
 import { sincronizarQuestoesResidenciasFederais } from "./questoesResidenciasFederais";
 import { sincronizarQuestoesEnareEbserh500 } from "./questoesEnareEbserh500";
 import { sincronizarQuestoesSusLegislacao200 } from "./questoesSusLegislacao200";
-import { sincronizarMatrizQuestoes30PorAssunto } from "./questoesMatriz30PorAssunto";
+import { sincronizarMatrizQuestoes30PorAssunto, obterMatrizQuestoes30PorAssunto } from "./questoesMatriz30PorAssunto";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -4366,6 +4366,21 @@ const server =
 
 
         /* QUESTÕES */
+
+        if (
+          caminho === "/api/questoes/matriz" &&
+          metodo === "GET"
+        ) {
+          const usuarioId = await exigirUsuario(request, response);
+          if (!usuarioId) return;
+
+          json(
+            response,
+            200,
+            obterMatrizQuestoes30PorAssunto()
+          );
+          return;
+        }
 
         const matchQuestaoImagem =
           caminho.match(
