@@ -740,6 +740,20 @@
 
 
     sourceScopedQuestions()
+      .filter(
+        function (
+          question
+        ) {
+          return (
+            state.selectedAreas.size === 0 ||
+            state.selectedAreas.has(
+              questionArea(
+                question
+              )
+            )
+          );
+        }
+      )
       .forEach(
         function (
           question
@@ -1240,6 +1254,46 @@
       .textContent =
       count +
       " dispon\u00edveis";
+
+
+    const startButton =
+      $("startSimulation");
+
+
+    if (startButton) {
+      const startLabel =
+        startButton.querySelector(
+          "span"
+        );
+
+
+      const noArea =
+        state.selectedAreas.size ===
+        0;
+
+
+      const noDifficulty =
+        selectedDifficulties().length ===
+        0;
+
+
+      startButton.disabled =
+        noArea ||
+        noDifficulty ||
+        count === 0;
+
+
+      if (startLabel) {
+        startLabel.textContent =
+          noArea
+            ? "Selecione uma disciplina"
+            : noDifficulty
+              ? "Selecione uma dificuldade"
+              : count === 0
+                ? "Nenhuma questao disponivel"
+                : "Iniciar simulado";
+      }
+    }
 
     const emptyHint =
       $("romuloEmptyHint");
@@ -1889,6 +1943,35 @@
 
         }
       );
+
+
+    const areaSection =
+      $("areasGrid")
+        ? $("areasGrid").closest(
+            ".config-section"
+          )
+        : null;
+
+
+    const topicSection =
+      $("topicsGrid")
+        ? $("topicsGrid").closest(
+            ".config-section"
+          )
+        : null;
+
+
+    if (
+      areaSection &&
+      topicSection &&
+      areaSection.parentNode ===
+        topicSection.parentNode
+    ) {
+      topicSection.parentNode.insertBefore(
+        areaSection,
+        topicSection
+      );
+    }
 
 
     $("closeSimulationSetup")
