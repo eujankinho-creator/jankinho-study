@@ -1515,35 +1515,3 @@ html[data-theme="black-white"] .cortex-mobile-brand-image{
 /* CORTEX BRAND ABSOLUTE NO GLOW V2 END */
 
 
-/* =========================================================
-   CORTEX BRAND CREDIT V1
-========================================================= */
-.sidebar-logo .cortex-brand-credit,
-.cortex-mobile-sidebar-header .cortex-brand-credit{
-  display:block!important;
-  margin-top:3px!important;
-  color:color-mix(
-    in srgb,
-    var(--theme-text-muted,#8b8b95) 82%,
-    transparent
-  )!important;
-  font-size:7px!important;
-  font-weight:650!important;
-  line-height:1.15!important;
-  letter-spacing:.055em!important;
-  text-transform:none!important;
-  white-space:nowrap!important;
-  opacity:.78!important;
-}
-
-.sidebar-logo .cortex-brand-credit{
-  max-width:150px!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-}
-
-.cortex-mobile-sidebar-header .cortex-brand-credit{
-  font-size:7px!important;
-  margin-top:2px!important;
-}
-/* CORTEX BRAND CREDIT V1 END */
