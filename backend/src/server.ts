@@ -36,10 +36,10 @@ import { prisma } from "../../lib/prisma";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { sincronizarCasosFaculdade } from "./casosFaculdade";
-import { listarFlashcards, criarFlashcard } from "./flashcards";
+import { listarFlashcards, criarFlashcard, registrarRevisaoFlashcard, alternarFavoritoFlashcard, estatisticasFlashcards } from "./flashcards";
 import { atenderAulas } from "./aulas";
 import { atenderCronograma } from "./cronograma";
-import { limparFlashcardsParaMetodologia } from "./flashcardsMetodologia";
+import { sincronizarFlashcardsInteligentes } from "./flashcardsInteligentes";
 import { gerarQuestoesIA } from "./iaQuestoes";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import { sincronizarQuestoesDiego } from "./questoesDiego";
@@ -4018,64 +4018,75 @@ const server =
         /* FLASHCARDS */
 
         if (
-          caminho ===
-          "/api/flashcards"
+          caminho === "/api/flashcards/estatisticas" &&
+          metodo === "GET"
         ) {
+          const usuarioId = await exigirUsuario(request, response);
+          if (!usuarioId) return;
 
-          const usuarioId =
-            await exigirUsuario(
-              request,
-              response
-            );
+          const resultado = await estatisticasFlashcards(usuarioId);
+          json(response, resultado.status, resultado.data);
+          return;
+        }
 
-          if (!usuarioId) {
+        const matchFlashcardRevisao =
+          caminho.match(/^\/api\/flashcards\/(\d+)\/revisao$/);
+
+        if (
+          matchFlashcardRevisao &&
+          metodo === "POST"
+        ) {
+          const usuarioId = await exigirUsuario(request, response);
+          if (!usuarioId) return;
+
+          const body = await lerJson(request);
+          const resultado = await registrarRevisaoFlashcard(
+            usuarioId,
+            Number(matchFlashcardRevisao[1]),
+            Boolean(body.correta)
+          );
+
+          json(response, resultado.status, resultado.data);
+          return;
+        }
+
+        const matchFlashcardFavorito =
+          caminho.match(/^\/api\/flashcards\/(\d+)\/favorito$/);
+
+        if (
+          matchFlashcardFavorito &&
+          metodo === "PATCH"
+        ) {
+          const usuarioId = await exigirUsuario(request, response);
+          if (!usuarioId) return;
+
+          const body = await lerJson(request);
+          const resultado = await alternarFavoritoFlashcard(
+            usuarioId,
+            Number(matchFlashcardFavorito[1]),
+            Boolean(body.favorito)
+          );
+
+          json(response, resultado.status, resultado.data);
+          return;
+        }
+
+        if (
+          caminho === "/api/flashcards"
+        ) {
+          const usuarioId = await exigirUsuario(request, response);
+          if (!usuarioId) return;
+
+          if (metodo === "GET") {
+            const resultado = await listarFlashcards(usuarioId, url);
+            json(response, resultado.status, resultado.data);
             return;
           }
 
-
-          if (
-            metodo === "GET"
-          ) {
-
-            const resultado =
-              await listarFlashcards(
-                usuarioId
-              );
-
-
-            json(
-              response,
-              resultado.status,
-              resultado.data
-            );
-
-            return;
-          }
-
-
-          if (
-            metodo === "POST"
-          ) {
-
-            const body =
-              await lerJson(
-                request
-              );
-
-
-            const resultado =
-              await criarFlashcard(
-                usuarioId,
-                body
-              );
-
-
-            json(
-              response,
-              resultado.status,
-              resultado.data
-            );
-
+          if (metodo === "POST") {
+            const body = await lerJson(request);
+            const resultado = await criarFlashcard(usuarioId, body);
+            json(response, resultado.status, resultado.data);
             return;
           }
         }
@@ -5622,7 +5633,7 @@ server.listen(
 
         await sincronizarMatrizQuestoes30PorAssunto();
 
-        await limparFlashcardsParaMetodologia();
+        await sincronizarFlashcardsInteligentes();
 
       }
     )()

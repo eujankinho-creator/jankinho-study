@@ -22,6 +22,7 @@ model Usuario {
   casosCriados  CasoClinico[]
   disciplinas   Disciplina[]
   flashcards    Flashcard[]
+  flashcardProgressos FlashcardProgresso[]
   investigacoes InvestigacaoCaso[]
   movimentacoes Movimentacao[]
   questoes      Questao[]
@@ -93,18 +94,54 @@ model Resposta {
 }
 
 model Flashcard {
-  id          Int      @id @default(autoincrement())
-  frente      String
-  verso       String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  usuarioId   Int
-  questaoId   Int?
-  origem      String   @default("manual")
-  tema        String?
-  disciplina  String?
-  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-  questao     Questao? @relation(fields: [questaoId], references: [id], onDelete: Cascade)
+  id                 Int      @id @default(autoincrement())
+  frente             String
+  verso              String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  usuarioId          Int
+  questaoId          Int?
+  origem             String   @default("manual")
+  tema               String?
+  subassunto         String?
+  disciplina         String?
+  dificuldade        String?  @default("medio")
+  status             String   @default("ATIVO")
+  referenciasQuestoes Json?
+  conhecimentoChave  String?
+  usuario            Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  questao            Questao? @relation(fields: [questaoId], references: [id], onDelete: Cascade)
+  progressos         FlashcardProgresso[]
+
+  @@index([disciplina, tema])
+  @@index([tema])
+  @@index([origem])
+  @@index([status])
+  @@index([conhecimentoChave])
+}
+
+model FlashcardProgresso {
+  id                 Int      @id @default(autoincrement())
+  usuarioId          Int
+  flashcardId        Int
+  revisoes           Int      @default(0)
+  acertos            Int      @default(0)
+  erros              Int      @default(0)
+  favorito           Boolean  @default(false)
+  ultimaRevisaoAt    DateTime?
+  ultimaRespostaCorreta Boolean?
+  intervaloDias      Int      @default(0)
+  facilidade         Float    @default(2.5)
+  proximaRevisaoAt   DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  usuario            Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  flashcard          Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, flashcardId])
+  @@index([usuarioId, proximaRevisaoAt])
+  @@index([usuarioId, favorito])
+  @@index([usuarioId, erros])
 }
 
 model Movimentacao {
