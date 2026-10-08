@@ -727,6 +727,94 @@
   }
 
 
+  function populateTopicFilter() {
+
+    const select =
+      $("simTopic");
+
+
+    if (!select) {
+      return;
+    }
+
+
+    const previous =
+      select.value;
+
+
+    const topics =
+      Array.from(
+        new Set(
+          sourceScopedQuestions()
+            .map(
+              function (
+                question
+              ) {
+
+                return String(
+                  question.tema ||
+                  ""
+                ).trim();
+
+              }
+            )
+            .filter(Boolean)
+        )
+      )
+        .sort(
+          function (
+            a,
+            b
+          ) {
+
+            return a.localeCompare(
+              b,
+              "pt-BR"
+            );
+
+          }
+        );
+
+
+    select.innerHTML =
+      '<option value="">Todos os tópicos</option>' +
+      topics
+        .map(
+          function (
+            topic
+          ) {
+
+            return (
+              '<option value="' +
+              escapeHtml(
+                topic
+              ) +
+              '">' +
+              escapeHtml(
+                topic
+              ) +
+              '</option>'
+            );
+
+          }
+        )
+        .join("");
+
+
+    if (
+      topics.includes(
+        previous
+      )
+    ) {
+
+      select.value =
+        previous;
+
+    }
+
+  }
+
+
   function renderAreas() {
 
     const map =
@@ -892,6 +980,8 @@
       areas.length;
 
 
+    populateTopicFilter();
+
     updateAvailable();
 
   }
@@ -925,13 +1015,30 @@
       selectedDifficulties();
 
 
-    return state.questions
+    const selectedTopic =
+      $("simTopic")
+        ? normalize(
+            $("simTopic").value
+          )
+        : "";
+
+
+    return sourceScopedQuestions()
       .filter(
         function (
           question
         ) {
 
+          const topicMatches =
+            !selectedTopic ||
+            normalize(
+              question.tema
+            ) ===
+              selectedTopic;
+
+
           return (
+            topicMatches &&
             state.selectedAreas.has(
               questionArea(
                 question
@@ -1524,6 +1631,173 @@
   }
 
 
+  function ensureSimulationSetupModal() {
+
+    let modal =
+      $("simSetupModal");
+
+
+    if (modal) {
+      return modal;
+    }
+
+
+    modal =
+      document.createElement(
+        "div"
+      );
+
+
+    modal.id =
+      "simSetupModal";
+
+
+    modal.className =
+      "sim-setup-modal";
+
+
+    modal.innerHTML =
+      `
+        <div
+          class="sim-setup-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="simSetupTitle"
+        >
+          <div class="sim-setup-dialog-header">
+            <div>
+              <span class="sim-kicker">
+                CONFIGURAR SIMULADO
+              </span>
+
+              <h2 id="simSetupTitle">
+                Monte sua sessão
+              </h2>
+
+              <p>
+                Escolha tópicos, quantidade de questões,
+                tempo, modo e dificuldade.
+              </p>
+            </div>
+
+            <button
+              id="closeSimulationSetup"
+              class="sim-setup-close"
+              type="button"
+              aria-label="Fechar configuração"
+            >
+              &times;
+            </button>
+          </div>
+
+          <div
+            id="simSetupBody"
+            class="sim-setup-body"
+          ></div>
+        </div>
+      `;
+
+
+    document.body.appendChild(
+      modal
+    );
+
+
+    const body =
+      $("simSetupBody");
+
+
+    document
+      .querySelectorAll(
+        ".sim-setup-source"
+      )
+      .forEach(
+        function (
+          node
+        ) {
+
+          body.appendChild(
+            node
+          );
+
+        }
+      );
+
+
+    $("closeSimulationSetup")
+      .addEventListener(
+        "click",
+        closeSimulationSetup
+      );
+
+
+    modal.addEventListener(
+      "mousedown",
+      function (
+        event
+      ) {
+
+        if (
+          event.target ===
+          modal
+        ) {
+
+          closeSimulationSetup();
+
+        }
+
+      }
+    );
+
+
+    return modal;
+
+  }
+
+
+  function openSimulationSetup() {
+
+    const modal =
+      ensureSimulationSetupModal();
+
+
+    populateTopicFilter();
+
+    updateAvailable();
+
+
+    modal.classList.add(
+      "open"
+    );
+
+
+    document.body.classList.add(
+      "sim-setup-open"
+    );
+
+  }
+
+
+  function closeSimulationSetup() {
+
+    const modal =
+      $("simSetupModal");
+
+
+    if (modal) {
+      modal.classList.remove(
+        "open"
+      );
+    }
+
+
+    document.body.classList.remove(
+      "sim-setup-open"
+    );
+
+  }
+
+
   function startWithQuestions(
     questions
   ) {
@@ -1603,6 +1877,9 @@
 
     state.secondsRemaining =
       state.initialSeconds;
+
+
+    closeSimulationSetup();
 
 
     $("configView")
@@ -3373,6 +3650,20 @@
       );
 
 
+    $("openSimulationSetup")
+      .addEventListener(
+        "click",
+        openSimulationSetup
+      );
+
+
+    $("simTopic")
+      .addEventListener(
+        "change",
+        updateAvailable
+      );
+
+
     $("startSimulation")
       .addEventListener(
         "click",
@@ -3455,6 +3746,8 @@
 
 
   async function init() {
+
+    ensureSimulationSetupModal();
 
     bindEvents();
 
