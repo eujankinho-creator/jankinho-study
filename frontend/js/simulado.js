@@ -977,6 +977,8 @@
                 );
 
 
+              renderTopics();
+
               updateAvailable();
 
             }
@@ -1141,7 +1143,7 @@
                 );
 
 
-              updateAvailable();
+              renderAreas();
 
             }
           );
@@ -3957,7 +3959,7 @@
             );
 
 
-          updateAvailable();
+          renderAreas();
 
         }
       );
