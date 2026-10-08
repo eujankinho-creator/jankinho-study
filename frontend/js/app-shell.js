@@ -3501,16 +3501,23 @@
 
 
   /* =======================================================
-     CORTEX VOICE · OPENAI REALTIME / WEBRTC
+     CORTEX VOICE · GEMINI LIVE / WEBSOCKET
   ======================================================= */
 
   const cortexVoiceState = {
-    pc: null,
-    dc: null,
+    ws: null,
     stream: null,
+    inputContext: null,
+    inputSource: null,
+    inputProcessor: null,
+    inputGain: null,
+    outputContext: null,
+    outputNextTime: 0,
+    outputSources: new Set(),
     active: false,
     connecting: false,
     muted: false,
+    ready: false,
     assistantTranscript: "",
   };
 
@@ -3574,26 +3581,339 @@
 
 
   function cortexVoiceSend(
-    event
+    payload
   ) {
-    const dc =
-      cortexVoiceState.dc;
+    const ws =
+      cortexVoiceState.ws;
 
     if (
-      !dc ||
-      dc.readyState !==
-        "open"
+      !ws ||
+      ws.readyState !==
+        WebSocket.OPEN
     ) {
       return false;
     }
 
-    dc.send(
+    ws.send(
       JSON.stringify(
-        event
+        payload
       )
     );
 
     return true;
+  }
+
+
+  function cortexVoiceToBase64(
+    arrayBuffer
+  ) {
+    const bytes =
+      new Uint8Array(
+        arrayBuffer
+      );
+
+    let binary =
+      "";
+
+    const chunk =
+      0x8000;
+
+    for (
+      let i = 0;
+      i < bytes.length;
+      i += chunk
+    ) {
+      binary +=
+        String.fromCharCode(
+          ...bytes.subarray(
+            i,
+            Math.min(
+              i + chunk,
+              bytes.length
+            )
+          )
+        );
+    }
+
+    return btoa(
+      binary
+    );
+  }
+
+
+  function cortexVoiceFromBase64(
+    value
+  ) {
+    const binary =
+      atob(
+        String(
+          value ||
+          ""
+        )
+      );
+
+    const bytes =
+      new Uint8Array(
+        binary.length
+      );
+
+    for (
+      let i = 0;
+      i < binary.length;
+      i += 1
+    ) {
+      bytes[i] =
+        binary.charCodeAt(
+          i
+        );
+    }
+
+    return bytes.buffer;
+  }
+
+
+  function cortexVoiceFloatToPcm16(
+    input,
+    inputRate,
+    outputRate =
+      16000
+  ) {
+    const ratio =
+      inputRate /
+      outputRate;
+
+    const outputLength =
+      Math.max(
+        1,
+        Math.round(
+          input.length /
+          ratio
+        )
+      );
+
+    const buffer =
+      new ArrayBuffer(
+        outputLength *
+        2
+      );
+
+    const view =
+      new DataView(
+        buffer
+      );
+
+    for (
+      let i = 0;
+      i < outputLength;
+      i += 1
+    ) {
+      const start =
+        Math.floor(
+          i *
+          ratio
+        );
+
+      const end =
+        Math.min(
+          input.length,
+          Math.floor(
+            (
+              i +
+              1
+            ) *
+            ratio
+          )
+        );
+
+      let sum =
+        0;
+
+      let count =
+        0;
+
+      for (
+        let j = start;
+        j < end;
+        j += 1
+      ) {
+        sum +=
+          input[j];
+
+        count +=
+          1;
+      }
+
+      const sample =
+        Math.max(
+          -1,
+          Math.min(
+            1,
+            count
+              ? sum /
+                count
+              : input[
+                  start
+                ] ||
+                0
+          )
+        );
+
+      view.setInt16(
+        i *
+          2,
+        sample <
+          0
+          ? sample *
+            0x8000
+          : sample *
+            0x7fff,
+        true
+      );
+    }
+
+    return buffer;
+  }
+
+
+  async function cortexVoiceEnsureOutputContext() {
+    if (
+      !cortexVoiceState.outputContext
+    ) {
+      cortexVoiceState.outputContext =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+    }
+
+    if (
+      cortexVoiceState.outputContext.state ===
+      "suspended"
+    ) {
+      await cortexVoiceState.outputContext
+        .resume()
+        .catch(
+          function () {}
+        );
+    }
+
+    return cortexVoiceState.outputContext;
+  }
+
+
+  function cortexVoiceClearOutput() {
+    cortexVoiceState.outputSources
+      .forEach(
+        function (
+          source
+        ) {
+          try {
+            source.stop();
+          }
+          catch {}
+        }
+      );
+
+    cortexVoiceState.outputSources
+      .clear();
+
+    cortexVoiceState.outputNextTime =
+      0;
+  }
+
+
+  async function cortexVoicePlayPcm(
+    base64,
+    sampleRate =
+      24000
+  ) {
+    if (!base64) {
+      return;
+    }
+
+    const context =
+      await cortexVoiceEnsureOutputContext();
+
+    const raw =
+      cortexVoiceFromBase64(
+        base64
+      );
+
+    const view =
+      new DataView(
+        raw
+      );
+
+    const length =
+      Math.floor(
+        raw.byteLength /
+        2
+      );
+
+    const audioBuffer =
+      context.createBuffer(
+        1,
+        length,
+        sampleRate
+      );
+
+    const channel =
+      audioBuffer.getChannelData(
+        0
+      );
+
+    for (
+      let i = 0;
+      i < length;
+      i += 1
+    ) {
+      channel[i] =
+        view.getInt16(
+          i *
+            2,
+          true
+        ) /
+        32768;
+    }
+
+    const source =
+      context.createBufferSource();
+
+    source.buffer =
+      audioBuffer;
+
+    source.connect(
+      context.destination
+    );
+
+    const startAt =
+      Math.max(
+        context.currentTime +
+          0.015,
+        cortexVoiceState.outputNextTime ||
+          0
+      );
+
+    source.start(
+      startAt
+    );
+
+    cortexVoiceState.outputNextTime =
+      startAt +
+      audioBuffer.duration;
+
+    cortexVoiceState.outputSources
+      .add(
+        source
+      );
+
+    source.onended =
+      function () {
+        cortexVoiceState.outputSources
+          .delete(
+            source
+          );
+      };
   }
 
 
@@ -3764,113 +4084,176 @@
   }
 
 
-  async function cortexVoiceHandleFunctionCall(
-    event
+  async function cortexVoiceHandleToolCall(
+    toolCall
   ) {
-    let args = {};
+    const calls =
+      Array.isArray(
+        toolCall?.functionCalls
+      )
+        ? toolCall.functionCalls
+        : [];
 
-    try {
-      args =
-        event.arguments
-          ? JSON.parse(
-              event.arguments
-            )
-          : {};
+    const responses =
+      [];
+
+    for (
+      const call
+      of calls
+    ) {
+      const result =
+        await cortexVoiceExecuteTool(
+          call.name,
+          call.args ||
+            {}
+        );
+
+      responses.push({
+        id:
+          call.id,
+        name:
+          call.name,
+        response: {
+          result,
+        },
+      });
     }
-    catch {}
 
-    const result =
-      await cortexVoiceExecuteTool(
-        event.name,
-        args
-      );
-
-    cortexVoiceSend({
-      type:
-        "conversation.item.create",
-      item: {
-        type:
-          "function_call_output",
-        call_id:
-          event.call_id,
-        output:
-          JSON.stringify(
-            result
-          ),
-      },
-    });
-
-    cortexVoiceSend({
-      type:
-        "response.create",
-    });
+    if (
+      responses.length
+    ) {
+      cortexVoiceSend({
+        toolResponse: {
+          functionResponses:
+            responses,
+        },
+      });
+    }
   }
 
 
-  function cortexVoiceHandleEvent(
+  function cortexVoiceHandleMessage(
     event
   ) {
-    if (
-      !event ||
-      !event.type
-    ) {
+    let message;
+
+    try {
+      message =
+        JSON.parse(
+          event.data
+        );
+    }
+    catch {
       return;
     }
 
 
     if (
-      event.type ===
-      "input_audio_buffer.speech_started"
+      message.setupComplete
     ) {
+      cortexVoiceState.ready =
+        true;
+
+      cortexVoiceState.active =
+        true;
+
+      cortexVoiceState.connecting =
+        false;
+
+      $("cortexVoiceButton")
+        ?.classList.add(
+          "connected"
+        );
+
+      cortexVoiceSetStatus(
+        "Pode falar",
+        "Gemini Live conectado. Estou ouvindo.",
+        "ready"
+      );
+
+      cortexVoiceStartInput();
+
+      return;
+    }
+
+
+    if (
+      message.toolCall
+    ) {
+      void cortexVoiceHandleToolCall(
+        message.toolCall
+      );
+
+      return;
+    }
+
+
+    const content =
+      message.serverContent;
+
+    if (!content) {
+      return;
+    }
+
+
+    if (
+      content.interrupted
+    ) {
+      cortexVoiceClearOutput();
+
       cortexVoiceSetStatus(
         "Estou ouvindo",
-        "Pode falar normalmente.",
+        "Pode continuar.",
         "listening"
       );
-
-      return;
     }
 
 
-    if (
-      event.type ===
-      "input_audio_buffer.speech_stopped"
-    ) {
+    const interim =
+      String(
+        content.interimInputTranscription?.text ||
+        ""
+      )
+        .trim();
+
+    if (interim) {
+      cortexVoiceSetStatus(
+        "Estou ouvindo",
+        interim.slice(
+          -220
+        ),
+        "listening"
+      );
+    }
+
+
+    const inputText =
+      String(
+        content.inputTranscription?.text ||
+        ""
+      )
+        .trim();
+
+    if (inputText) {
       cortexVoiceSetStatus(
         "Pensando",
-        "Entendendo o que você disse...",
+        inputText.slice(
+          -220
+        ),
         "thinking"
       );
-
-      return;
     }
 
 
-    if (
-      event.type ===
-        "response.output_audio.delta" ||
-      event.type ===
-        "response.output_audio_transcript.delta"
-    ) {
-      cortexVoiceSetStatus(
-        "Cortex está falando",
-        $("cortexVoiceCaption")
-          ?.textContent ||
-          "Respondendo...",
-        "speaking"
+    const outputText =
+      String(
+        content.outputTranscription?.text ||
+        ""
       );
-    }
 
-
-    if (
-      event.type ===
-      "response.output_audio_transcript.delta"
-    ) {
+    if (outputText) {
       cortexVoiceState.assistantTranscript +=
-        String(
-          event.delta ||
-          ""
-        );
+        outputText;
 
       $("cortexVoiceCaption").textContent =
         cortexVoiceState.assistantTranscript
@@ -3878,52 +4261,80 @@
             -220
           );
 
-      return;
+      cortexVoiceSetStatus(
+        "Cortex está falando",
+        $("cortexVoiceCaption").textContent,
+        "speaking"
+      );
     }
 
 
-    if (
-      event.type ===
-      "response.output_audio_transcript.done"
-    ) {
-      const transcript =
-        String(
-          event.transcript ||
-          cortexVoiceState.assistantTranscript ||
-          ""
-        )
-          .trim();
+    const parts =
+      Array.isArray(
+        content.modelTurn?.parts
+      )
+        ? content.modelTurn.parts
+        : [];
 
-      if (transcript) {
-        $("cortexVoiceCaption").textContent =
-          transcript.slice(
-            -220
+    parts.forEach(
+      function (
+        part
+      ) {
+        const inline =
+          part.inlineData;
+
+        if (
+          !inline?.data
+        ) {
+          return;
+        }
+
+        const mime =
+          String(
+            inline.mimeType ||
+            ""
           );
-      }
 
+        if (
+          mime.startsWith(
+            "audio/pcm"
+          )
+        ) {
+          const rateMatch =
+            mime.match(
+              /rate=(\d+)/
+            );
+
+          const rate =
+            rateMatch
+              ? Number(
+                  rateMatch[1]
+                )
+              : 24000;
+
+          void cortexVoicePlayPcm(
+            inline.data,
+            rate
+          );
+
+          cortexVoiceSetStatus(
+            "Cortex está falando",
+            $("cortexVoiceCaption")
+              ?.textContent ||
+              "Respondendo...",
+            "speaking"
+          );
+        }
+      }
+    );
+
+
+    if (
+      content.turnComplete
+    ) {
       cortexVoiceState.assistantTranscript =
         "";
 
-      return;
-    }
-
-
-    if (
-      event.type ===
-      "response.function_call_arguments.done"
-    ) {
-      void cortexVoiceHandleFunctionCall(
-        event
-      );
-
-      return;
-    }
-
-
-    if (
-      event.type ===
-      "response.done"
-    ) {
       if (
         cortexVoiceState.active
       ) {
@@ -3933,33 +4344,274 @@
             : "Pode falar",
           $("cortexVoiceCaption")
             ?.textContent ||
-            "Conversa em tempo real ativa.",
+            "Conversa ativa.",
           cortexVoiceState.muted
             ? "muted"
             : "ready"
         );
       }
+    }
+  }
 
+
+  async function cortexVoiceStartInput() {
+    const stream =
+      cortexVoiceState.stream;
+
+    if (
+      !stream ||
+      cortexVoiceState.inputContext
+    ) {
       return;
     }
 
+    const AudioContextCtor =
+      window.AudioContext ||
+      window.webkitAudioContext;
 
-    if (
-      event.type ===
-      "error"
-    ) {
-      console.error(
-        "Cortex Voice realtime:",
-        event
+    const context =
+      new AudioContextCtor();
+
+    const source =
+      context.createMediaStreamSource(
+        stream
       );
 
-      cortexVoiceSetStatus(
-        "Erro na conversa",
-        event.error?.message ||
-          "Tente encerrar e iniciar novamente.",
-        "error"
+    const processor =
+      context.createScriptProcessor(
+        2048,
+        1,
+        1
       );
-    }
+
+    const gain =
+      context.createGain();
+
+    gain.gain.value =
+      0;
+
+    source.connect(
+      processor
+    );
+
+    processor.connect(
+      gain
+    );
+
+    gain.connect(
+      context.destination
+    );
+
+    processor.onaudioprocess =
+      function (
+        audioEvent
+      ) {
+        if (
+          !cortexVoiceState.ready ||
+          cortexVoiceState.muted
+        ) {
+          return;
+        }
+
+        const input =
+          audioEvent.inputBuffer
+            .getChannelData(
+              0
+            );
+
+        const pcm =
+          cortexVoiceFloatToPcm16(
+            input,
+            context.sampleRate,
+            16000
+          );
+
+        cortexVoiceSend({
+          realtimeInput: {
+            audio: {
+              data:
+                cortexVoiceToBase64(
+                  pcm
+                ),
+              mimeType:
+                "audio/pcm;rate=16000",
+            },
+          },
+        });
+      };
+
+    cortexVoiceState.inputContext =
+      context;
+
+    cortexVoiceState.inputSource =
+      source;
+
+    cortexVoiceState.inputProcessor =
+      processor;
+
+    cortexVoiceState.inputGain =
+      gain;
+
+    await context
+      .resume()
+      .catch(
+        function () {}
+      );
+  }
+
+
+  function cortexVoiceSetupPayload(
+    model
+  ) {
+    const instructions =
+      [
+        "Você é o Cortex Voice, assistente de voz da plataforma educacional Cortex.",
+        "Fale sempre em português brasileiro, de forma humana, natural, calorosa e objetiva.",
+        "Evite tom robótico, listas longas e frases artificiais.",
+        "Você pode ser interrompido enquanto fala e deve continuar naturalmente.",
+        "Quando o usuário pedir para abrir uma área ou iniciar questões ou flashcards, use as ferramentas disponíveis.",
+        "Nunca afirme que executou uma ação antes do resultado da ferramenta.",
+        "Em dúvidas de estudo, responda como tutor didático e rigoroso.",
+        "A plataforma possui Dashboard, Questões, Simulado, Flashcards, Cronograma, Aulas, Acadêmico/SIGAA, Desempenho, Ranking e Configurações.",
+      ].join(
+        " "
+      );
+
+    return {
+      setup: {
+        model:
+          "models/" +
+          String(
+            model ||
+            "gemini-3.8-live"
+          )
+            .replace(
+              /^models\//,
+              ""
+            ),
+        generationConfig: {
+          responseModalities: [
+            "AUDIO",
+          ],
+          speechConfig: {
+            voiceConfig: {
+              prebuiltVoiceConfig: {
+                voiceName:
+                  "Aoede",
+              },
+            },
+          },
+        },
+        systemInstruction: {
+          parts: [
+            {
+              text:
+                instructions,
+            },
+          ],
+        },
+        realtimeInputConfig: {
+          automaticActivityDetection: {
+            disabled:
+              false,
+            prefixPaddingMs:
+              120,
+            silenceDurationMs:
+              650,
+          },
+          activityHandling:
+            "START_OF_ACTIVITY_INTERRUPTS",
+        },
+        inputAudioTranscription: {
+          mode:
+            "SMART",
+        },
+        outputAudioTranscription: {},
+        tools: [
+          {
+            functionDeclarations: [
+              {
+                name:
+                  "navigate_cortex",
+                description:
+                  "Abre uma área principal do Cortex.",
+                parameters: {
+                  type:
+                    "OBJECT",
+                  properties: {
+                    destination: {
+                      type:
+                        "STRING",
+                      enum: [
+                        "dashboard",
+                        "questoes",
+                        "simulado",
+                        "flashcards",
+                        "cronograma",
+                        "aulas",
+                        "academico",
+                        "desempenho",
+                        "ranking",
+                        "configuracoes",
+                      ],
+                    },
+                  },
+                  required: [
+                    "destination",
+                  ],
+                },
+              },
+              {
+                name:
+                  "start_questions",
+                description:
+                  "Inicia uma sessão de questões, opcionalmente filtrada por tema.",
+                parameters: {
+                  type:
+                    "OBJECT",
+                  properties: {
+                    theme: {
+                      type:
+                        "STRING",
+                    },
+                    quantity: {
+                      type:
+                        "INTEGER",
+                    },
+                  },
+                  required: [
+                    "quantity",
+                  ],
+                },
+              },
+              {
+                name:
+                  "start_flashcards",
+                description:
+                  "Inicia uma revisão de flashcards, opcionalmente filtrada por tema.",
+                parameters: {
+                  type:
+                    "OBJECT",
+                  properties: {
+                    theme: {
+                      type:
+                        "STRING",
+                    },
+                    quantity: {
+                      type:
+                        "INTEGER",
+                    },
+                  },
+                  required: [
+                    "quantity",
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    };
   }
 
 
@@ -3973,16 +4625,47 @@
     cortexVoiceState.connecting =
       false;
 
+    cortexVoiceState.ready =
+      false;
+
     cortexVoiceState.assistantTranscript =
       "";
 
+    cortexVoiceClearOutput();
+
     try {
-      cortexVoiceState.dc?.close();
+      cortexVoiceState.inputProcessor
+        ?.disconnect();
     }
     catch {}
 
     try {
-      cortexVoiceState.pc?.close();
+      cortexVoiceState.inputSource
+        ?.disconnect();
+    }
+    catch {}
+
+    try {
+      cortexVoiceState.inputGain
+        ?.disconnect();
+    }
+    catch {}
+
+    try {
+      cortexVoiceState.inputContext
+        ?.close();
+    }
+    catch {}
+
+    try {
+      cortexVoiceState.outputContext
+        ?.close();
+    }
+    catch {}
+
+    try {
+      cortexVoiceState.ws
+        ?.close();
     }
     catch {}
 
@@ -4003,25 +4686,32 @@
         );
     }
 
-    cortexVoiceState.pc =
-      null;
-
-    cortexVoiceState.dc =
+    cortexVoiceState.ws =
       null;
 
     cortexVoiceState.stream =
       null;
 
+    cortexVoiceState.inputContext =
+      null;
+
+    cortexVoiceState.inputSource =
+      null;
+
+    cortexVoiceState.inputProcessor =
+      null;
+
+    cortexVoiceState.inputGain =
+      null;
+
+    cortexVoiceState.outputContext =
+      null;
+
+    cortexVoiceState.outputNextTime =
+      0;
+
     cortexVoiceState.muted =
       false;
-
-    const audio =
-      $("cortexVoiceAudio");
-
-    if (audio) {
-      audio.srcObject =
-        null;
-    }
 
     $("cortexVoiceMute")
       ?.setAttribute(
@@ -4056,7 +4746,6 @@
       return;
     }
 
-
     if (
       cortexVoiceState.active
     ) {
@@ -4065,23 +4754,25 @@
       return;
     }
 
-
     if (
       !navigator.mediaDevices ||
       !navigator.mediaDevices.getUserMedia ||
-      !window.RTCPeerConnection
+      !window.WebSocket ||
+      !(
+        window.AudioContext ||
+        window.webkitAudioContext
+      )
     ) {
       cortexVoiceOpenPanel();
 
       cortexVoiceSetStatus(
         "Navegador incompatível",
-        "Use um navegador moderno com suporte a microfone e WebRTC.",
+        "Use um navegador moderno com suporte a microfone, áudio e WebSocket.",
         "error"
       );
 
       return;
     }
-
 
     cortexVoiceState.connecting =
       true;
@@ -4090,12 +4781,29 @@
 
     cortexVoiceSetStatus(
       "Conectando",
-      "Preparando microfone e voz natural...",
+      "Preparando o Gemini Live...",
       "connecting"
     );
 
-
     try {
+      const stream =
+        await navigator.mediaDevices
+          .getUserMedia({
+            audio: {
+              channelCount:
+                1,
+              echoCancellation:
+                true,
+              noiseSuppression:
+                true,
+              autoGainControl:
+                true,
+            },
+          });
+
+      cortexVoiceState.stream =
+        stream;
+
       const tokenResponse =
         await fetch(
           "/api/voice/token",
@@ -4109,7 +4817,6 @@
           }
         );
 
-
       const tokenData =
         await tokenResponse
           .json()
@@ -4118,7 +4825,6 @@
               return {};
             }
           );
-
 
       if (
         !tokenResponse.ok ||
@@ -4137,201 +4843,104 @@
         throw error;
       }
 
-
-      const stream =
-        await navigator.mediaDevices
-          .getUserMedia({
-            audio: {
-              echoCancellation:
-                true,
-              noiseSuppression:
-                true,
-              autoGainControl:
-                true,
-            },
-          });
-
-
-      const pc =
-        new RTCPeerConnection();
-
-
-      cortexVoiceState.pc =
-        pc;
-
-      cortexVoiceState.stream =
-        stream;
-
-
-      const audio =
-        $("cortexVoiceAudio");
-
-
-      pc.ontrack =
-        function (
-          event
-        ) {
-          if (
-            audio &&
-            event.streams &&
-            event.streams[0]
-          ) {
-            audio.srcObject =
-              event.streams[0];
-
-            audio
-              .play()
-              .catch(
-                function () {}
-              );
-          }
-        };
-
-
-      stream
-        .getAudioTracks()
-        .forEach(
-          function (
-            track
-          ) {
-            pc.addTrack(
-              track,
-              stream
-            );
-          }
+      const endpoint =
+        "wss://generativelanguage.googleapis.com/ws/" +
+        "google.ai.generativelanguage.v1beta.GenerativeService." +
+        "BidiGenerateContentConstrained?access_token=" +
+        encodeURIComponent(
+          tokenData.value
         );
 
-
-      const dc =
-        pc.createDataChannel(
-          "oai-events"
+      const ws =
+        new WebSocket(
+          endpoint
         );
 
+      cortexVoiceState.ws =
+        ws;
 
-      cortexVoiceState.dc =
-        dc;
-
-
-      dc.addEventListener(
+      ws.addEventListener(
         "open",
         function () {
-          cortexVoiceState.active =
-            true;
-
-          cortexVoiceState.connecting =
-            false;
-
-          $("cortexVoiceButton")
-            ?.classList.add(
-              "connected"
-            );
+          cortexVoiceSend(
+            cortexVoiceSetupPayload(
+              tokenData.model
+            )
+          );
 
           cortexVoiceSetStatus(
-            "Pode falar",
-            "Diga o que você precisa no Córtex.",
-            "ready"
+            "Inicializando",
+            "Configurando voz e detecção de fala...",
+            "connecting"
           );
         }
       );
 
-
-      dc.addEventListener(
+      ws.addEventListener(
         "message",
+        cortexVoiceHandleMessage
+      );
+
+      ws.addEventListener(
+        "error",
         function (
-          message
+          error
         ) {
-          try {
-            cortexVoiceHandleEvent(
-              JSON.parse(
-                message.data
-              )
-            );
-          }
-          catch (
+          console.error(
+            "Cortex Voice Gemini websocket:",
             error
-          ) {
-            console.warn(
-              "Cortex Voice event:",
-              error
-            );
-          }
+          );
         }
       );
 
-
-      dc.addEventListener(
+      ws.addEventListener(
         "close",
-        function () {
+        function (
+          event
+        ) {
+          const reason =
+            String(
+              event.reason ||
+              ""
+            );
+
+          const quota =
+            /quota|resource exhausted|rate limit/i
+              .test(
+                reason
+              );
+
           if (
-            cortexVoiceState.active
+            cortexVoiceState.active ||
+            cortexVoiceState.connecting
           ) {
             cortexVoiceDisconnect(
               false
             );
 
+            cortexVoiceOpenPanel();
+
             cortexVoiceSetStatus(
-              "Conversa encerrada",
-              "Clique no botão para iniciar novamente.",
-              "idle"
+              quota
+                ? "Limite gratuito atingido"
+                : "Conversa encerrada",
+              quota
+                ? "O Gemini Live atingiu o limite gratuito. Tente novamente mais tarde."
+                : "Clique no botão para iniciar novamente.",
+              quota
+                ? "error"
+                : "idle"
             );
           }
         }
       );
-
-
-      const offer =
-        await pc.createOffer();
-
-
-      await pc.setLocalDescription(
-        offer
-      );
-
-
-      const sdpResponse =
-        await fetch(
-          "https://api.openai.com/v1/realtime/calls",
-          {
-            method:
-              "POST",
-            body:
-              offer.sdp,
-            headers: {
-              Authorization:
-                "Bearer " +
-                tokenData.value,
-              "Content-Type":
-                "application/sdp",
-            },
-          }
-        );
-
-
-      const answerSdp =
-        await sdpResponse.text();
-
-
-      if (!sdpResponse.ok) {
-        throw new Error(
-          answerSdp ||
-          "Falha ao abrir a sessão de voz."
-        );
-      }
-
-
-      await pc.setRemoteDescription({
-        type:
-          "answer",
-        sdp:
-          answerSdp,
-      });
 
     }
     catch (
       error
     ) {
       console.error(
-        "Cortex Voice connect:",
+        "Cortex Voice Gemini connect:",
         error
       );
 
@@ -4350,27 +4959,38 @@
             "PermissionDeniedError"
         );
 
-
-      const creditsExhausted =
+      const missingKey =
         error?.code ===
-          "VOICE_CREDITS_EXHAUSTED";
+          "VOICE_GEMINI_KEY_MISSING";
+
+      const freeLimit =
+        error?.code ===
+          "VOICE_FREE_LIMIT_REACHED";
 
       cortexVoiceSetStatus(
         denied
           ? "Microfone bloqueado"
           : (
-              creditsExhausted
-                ? "Créditos da API esgotados"
-                : "Não foi possível conectar"
+              missingKey
+                ? "Gemini ainda não configurado"
+                : (
+                    freeLimit
+                      ? "Limite gratuito atingido"
+                      : "Não foi possível conectar"
+                  )
             ),
         denied
           ? "Permita o uso do microfone no navegador e tente novamente."
           : (
-              creditsExhausted
-                ? "Adicione créditos na Plataforma de API da OpenAI. A assinatura do ChatGPT é separada."
+              missingKey
+                ? "Adicione a variável GEMINI_API_KEY no Railway para ativar o Free Tier."
                 : (
-                    error?.message ||
-                    "Tente novamente em alguns segundos."
+                    freeLimit
+                      ? "Aguarde a renovação do limite gratuito do Gemini Live."
+                      : (
+                          error?.message ||
+                          "Tente novamente em alguns segundos."
+                        )
                   )
             ),
         "error"
@@ -4421,7 +5041,6 @@
         cortexVoiceState.muted =
           !cortexVoiceState.muted;
 
-
         cortexVoiceState.stream
           ?.getAudioTracks()
           .forEach(
@@ -4433,12 +5052,22 @@
             }
           );
 
+        if (
+          cortexVoiceState.muted &&
+          cortexVoiceState.ready
+        ) {
+          cortexVoiceSend({
+            realtimeInput: {
+              audioStreamEnd:
+                true,
+            },
+          });
+        }
 
         this.classList.toggle(
           "muted",
           cortexVoiceState.muted
         );
-
 
         this.setAttribute(
           "aria-pressed",
@@ -4447,14 +5076,13 @@
             : "false"
         );
 
-
         cortexVoiceSetStatus(
           cortexVoiceState.muted
             ? "Microfone desativado"
             : "Pode falar",
           cortexVoiceState.muted
             ? "A conversa continua conectada."
-            : "Estou ouvindo.",
+            : "Gemini Live está ouvindo.",
           cortexVoiceState.muted
             ? "muted"
             : "ready"
