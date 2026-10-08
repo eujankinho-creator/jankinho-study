@@ -7,7 +7,16 @@
 
   <script>
     (function () {
-      var theme = "dark-orange";
+      var allowed = [
+        "dark-orange",
+        "dark-pink",
+        "dark-green",
+        "dark-purple",
+        "dark-black"
+      ];
+
+      var theme =
+        "dark-purple";
 
       try {
         var saved =
@@ -16,12 +25,12 @@
           );
 
         if (
-          saved === "dark-orange" ||
-          saved === "pink-glitter" ||
-          saved === "blue-black" ||
-          saved === "black-white"
+          allowed.indexOf(
+            saved
+          ) >= 0
         ) {
-          theme = saved;
+          theme =
+            saved;
         }
       }
       catch (error) {}
@@ -39,12 +48,12 @@
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/sigaa-premium.css?v=20261002-fluid-final4">
+  <link rel="stylesheet" href="/css/sigaa-premium.css?v=20261008-theme-realfile1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
 
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
-  <script defer src="/js/theme-manager.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
   <script src="/js/sidebar-standard.js?v=20261001-nav-core6" defer></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-white-v3">
   <meta name="theme-color" content="#090909">
@@ -276,7 +285,7 @@
     })();
   </script>
 
-<script defer src="/js/sigaa.js?v=20261008-fast-sync1"></script>
+<script defer src="/js/sigaa.js?v=20261008-real-file2"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>
 </html>
