@@ -589,7 +589,7 @@ function urlQuestoesPaginada() {
   if (busca) params.set("busca", busca);
   if (disciplina) params.set("disciplina", disciplina);
   if (assunto) params.set("assunto", assunto);
-  if (dificuldade) params.set("dificuldade", nomeDificuldade(dificuldade));
+  if (dificuldade) params.set("dificuldade", dificuldade);
 
   return "/api/questoes?" + params.toString();
 }
