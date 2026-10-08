@@ -55,6 +55,12 @@ type SigaaSession = {
   lessonsByCourse?:
     Map<string, any[]>;
 
+  lessonsLoadingByCourse?:
+    Map<
+      string,
+      Promise<any[]>
+    >;
+
   detailCache?:
     Map<
       string,
@@ -1194,6 +1200,9 @@ async function loadCourseLessons(
   session.lessonsByCourse ??=
     new Map();
 
+  session.lessonsLoadingByCourse ??=
+    new Map();
+
 
   if (
     !force &&
@@ -1212,23 +1221,67 @@ async function loadCourseLessons(
   }
 
 
-  const lessons =
-    Array.from(
-      await withTimeout(
-        course.getLessons(),
-        22000,
-        "Timeout ao carregar aulas e anexos."
-      ) as any[]
+  if (
+    !force &&
+    session.lessonsLoadingByCourse.has(
+      courseId
+    )
+  ) {
+
+    return (
+      session.lessonsLoadingByCourse.get(
+        courseId
+      ) as Promise<any[]>
     );
 
+  }
 
-  session.lessonsByCourse.set(
+
+  const promise =
+    withTimeout(
+      course.getLessons(),
+      22000,
+      "Timeout ao carregar aulas e anexos."
+    )
+      .then(
+        function (
+          value
+        ) {
+
+          const lessons =
+            Array.from(
+              value as any[]
+            );
+
+
+          session.lessonsByCourse?.set(
+            courseId,
+            lessons
+          );
+
+
+          return lessons;
+
+        }
+      )
+      .finally(
+        function () {
+
+          session.lessonsLoadingByCourse?.delete(
+            courseId
+          );
+
+        }
+      );
+
+
+  session.lessonsLoadingByCourse.set(
     courseId,
-    lessons
+    promise
   );
 
 
-  return lessons;
+  return promise;
 
 }
 
@@ -1992,505 +2045,503 @@ export async function sigaaCourseDetail(
     }
 
 
-    const grades =
-      await safeCourseSection(
-        "notas",
-        async function () {
-
-          const groups =
-            await course
-              .getGrades();
-
-
-          return serializeGrades(
-            Array.from(
-              groups as any[]
-            )
-          );
-
-        }
-      );
-
-
-    const absences =
-      await safeCourseSection(
-        "frequencia",
-        async function () {
-
-          const value =
-            await course
-              .getAbsence();
-
-
-          return {
-            totalAbsences:
-              Number(
-                value.totalAbsences ||
-                0
+    const [
+      grades,
+      absences,
+      files,
+      exams,
+      homeworks,
+      lessons,
+      syllabus,
+    ] =
+      await Promise.all([
+        safeCourseSection(
+                "notas",
+                async function () {
+        
+                  const groups =
+                    await course
+                      .getGrades();
+        
+        
+                  return serializeGrades(
+                    Array.from(
+                      groups as any[]
+                    )
+                  );
+        
+                }
               ),
 
-            maxAbsences:
-              Number(
-                value.maxAbsences ||
-                0
+        safeCourseSection(
+                "frequencia",
+                async function () {
+        
+                  const value =
+                    await course
+                      .getAbsence();
+        
+        
+                  return {
+                    totalAbsences:
+                      Number(
+                        value.totalAbsences ||
+                        0
+                      ),
+        
+                    maxAbsences:
+                      Number(
+                        value.maxAbsences ||
+                        0
+                      ),
+        
+                    list:
+                      Array.isArray(
+                        value.list
+                      )
+                        ? value.list
+                            .slice(
+                              0,
+                              100
+                            )
+                            .map(
+                              function (
+                                item:
+                                  any
+                              ) {
+        
+                                return {
+                                  date:
+                                    isoDate(
+                                      item.date
+                                    ),
+        
+                                  numOfAbsences:
+                                    Number(
+                                      item.numOfAbsences ||
+                                      0
+                                    ),
+                                };
+        
+                              }
+                            )
+                        : [],
+                  };
+        
+                }
               ),
 
-            list:
-              Array.isArray(
-                value.list
-              )
-                ? value.list
+        safeCourseSection(
+                "arquivos",
+                async function () {
+        
+                  let directFiles:
+                    any[] = [];
+        
+        
+                  let rawLessons:
+                    any[] = [];
+        
+        
+                  try {
+        
+                    directFiles =
+                      Array.from(
+                        await withTimeout(
+                          course.getFiles(),
+                          20000,
+                          "Timeout ao carregar a aba de arquivos."
+                        ) as any[]
+                      )
+                        .filter(
+                          isDownloadableSigaaFile
+                        );
+        
+                  }
+                  catch (
+                    error
+                  ) {
+        
+                    console.warn(
+                      "SIGAA direct files detail:",
+                      error instanceof Error
+                        ? error.message
+                        : String(
+                            error
+                          )
+                    );
+        
+                  }
+        
+        
+                  try {
+        
+                    rawLessons =
+                      await loadCourseLessons(
+                        session,
+                        course,
+                        courseId,
+                        force
+                      );
+        
+                  }
+                  catch (
+                    error
+                  ) {
+        
+                    console.warn(
+                      "SIGAA lesson files detail:",
+                      error instanceof Error
+                        ? error.message
+                        : String(
+                            error
+                          )
+                    );
+        
+                  }
+        
+        
+                  const serialized:
+                    any[] = [];
+        
+        
+                  const used =
+                    new Set<string>();
+        
+        
+                  const add =
+                    function (
+                      file:
+                        any,
+                      sourceKind:
+                        "course" |
+                        "lesson",
+                      lessonId:
+                        string |
+                        null
+                    ) {
+        
+                      const id =
+                        safeText(
+                          file?.id,
+                          200
+                        );
+        
+        
+                      const title =
+                        safeText(
+                          file?.title,
+                          240
+                        );
+        
+        
+                      const key =
+                        [
+                          sourceKind,
+                          lessonId ||
+                            "",
+                          id,
+                          normalizeSigaaFileTitle(
+                            title
+                          ),
+                        ].join(
+                          ":"
+                        );
+        
+        
+                      if (
+                        !id ||
+                        used.has(
+                          key
+                        )
+                      ) {
+                        return;
+                      }
+        
+        
+                      used.add(
+                        key
+                      );
+        
+        
+                      serialized.push(
+                        serializeCourseFile(
+                          file,
+                          sourceKind,
+                          lessonId
+                        )
+                      );
+        
+                    };
+        
+        
+                  directFiles
+                    .forEach(
+                      function (
+                        file:
+                          any
+                      ) {
+        
+                        add(
+                          file,
+                          "course",
+                          null
+                        );
+        
+                      }
+                    );
+        
+        
+                  rawLessons
+                    .forEach(
+                      function (
+                        lesson:
+                          any
+                      ) {
+        
+                        const lessonId =
+                          safeText(
+                            lesson?.id,
+                            200
+                          );
+        
+        
+                        const attachments =
+                          Array.isArray(
+                            lesson?.attachments
+                          )
+                            ? lesson.attachments
+                            : [];
+        
+        
+                        attachments
+                          .filter(
+                            isDownloadableSigaaFile
+                          )
+                          .forEach(
+                            function (
+                              file:
+                                any
+                            ) {
+        
+                              add(
+                                file,
+                                "lesson",
+                                lessonId ||
+                                  null
+                              );
+        
+                            }
+                          );
+        
+                      }
+                    );
+        
+        
+                  return serialized
                     .slice(
                       0,
-                      100
+                      250
+                    );
+        
+                }
+              ),
+
+        safeCourseSection(
+                "avaliacoes",
+                async function () {
+        
+                  const list =
+                    Array.from(
+                      await course
+                        .getExamCalendar() as any[]
+                    );
+        
+        
+                  return list
+                    .slice(
+                      0,
+                      40
                     )
                     .map(
                       function (
-                        item:
+                        exam:
                           any
                       ) {
-
+        
                         return {
+                          description:
+                            safeText(
+                              exam.description,
+                              500
+                            ),
+        
                           date:
                             isoDate(
-                              item.date
-                            ),
-
-                          numOfAbsences:
-                            Number(
-                              item.numOfAbsences ||
-                              0
+                              exam.date
                             ),
                         };
-
+        
                       }
+                    );
+        
+                }
+              ),
+
+        safeCourseSection(
+                "tarefas",
+                async function () {
+        
+                  const list =
+                    Array.from(
+                      await course
+                        .getHomeworks() as any[]
+                    );
+        
+        
+                  return list
+                    .slice(
+                      0,
+                      60
                     )
-                : [],
-          };
-
-        }
-      );
-
-
-    const files =
-      await safeCourseSection(
-        "arquivos",
-        async function () {
-
-          let directFiles:
-            any[] = [];
-
-
-          let rawLessons:
-            any[] = [];
-
-
-          try {
-
-            directFiles =
-              Array.from(
-                await withTimeout(
-                  course.getFiles(),
-                  20000,
-                  "Timeout ao carregar a aba de arquivos."
-                ) as any[]
-              )
-                .filter(
-                  isDownloadableSigaaFile
-                );
-
-          }
-          catch (
-            error
-          ) {
-
-            console.warn(
-              "SIGAA direct files detail:",
-              error instanceof Error
-                ? error.message
-                : String(
-                    error
-                  )
-            );
-
-          }
-
-
-          try {
-
-            rawLessons =
-              await loadCourseLessons(
-                session,
-                course,
-                courseId,
-                force
-              );
-
-          }
-          catch (
-            error
-          ) {
-
-            console.warn(
-              "SIGAA lesson files detail:",
-              error instanceof Error
-                ? error.message
-                : String(
-                    error
-                  )
-            );
-
-          }
-
-
-          const serialized:
-            any[] = [];
-
-
-          const used =
-            new Set<string>();
-
-
-          const add =
-            function (
-              file:
-                any,
-              sourceKind:
-                "course" |
-                "lesson",
-              lessonId:
-                string |
-                null
-            ) {
-
-              const id =
-                safeText(
-                  file?.id,
-                  200
-                );
-
-
-              const title =
-                safeText(
-                  file?.title,
-                  240
-                );
-
-
-              const key =
-                [
-                  sourceKind,
-                  lessonId ||
-                    "",
-                  id,
-                  normalizeSigaaFileTitle(
-                    title
-                  ),
-                ].join(
-                  ":"
-                );
-
-
-              if (
-                !id ||
-                used.has(
-                  key
-                )
-              ) {
-                return;
-              }
-
-
-              used.add(
-                key
-              );
-
-
-              serialized.push(
-                serializeCourseFile(
-                  file,
-                  sourceKind,
-                  lessonId
-                )
-              );
-
-            };
-
-
-          directFiles
-            .forEach(
-              function (
-                file:
-                  any
-              ) {
-
-                add(
-                  file,
-                  "course",
-                  null
-                );
-
-              }
-            );
-
-
-          rawLessons
-            .forEach(
-              function (
-                lesson:
-                  any
-              ) {
-
-                const lessonId =
-                  safeText(
-                    lesson?.id,
-                    200
-                  );
-
-
-                const attachments =
-                  Array.isArray(
-                    lesson?.attachments
-                  )
-                    ? lesson.attachments
-                    : [];
-
-
-                attachments
-                  .filter(
-                    isDownloadableSigaaFile
-                  )
-                  .forEach(
-                    function (
-                      file:
-                        any
-                    ) {
-
-                      add(
-                        file,
-                        "lesson",
-                        lessonId ||
-                          null
-                      );
-
-                    }
-                  );
-
-              }
-            );
-
-
-          return serialized
-            .slice(
-              0,
-              250
-            );
-
-        }
-      );
-
-    const exams =
-      await safeCourseSection(
-        "avaliacoes",
-        async function () {
-
-          const list =
-            Array.from(
-              await course
-                .getExamCalendar() as any[]
-            );
-
-
-          return list
-            .slice(
-              0,
-              40
-            )
-            .map(
-              function (
-                exam:
-                  any
-              ) {
-
-                return {
-                  description:
-                    safeText(
-                      exam.description,
-                      500
-                    ),
-
-                  date:
-                    isoDate(
-                      exam.date
-                    ),
-                };
-
-              }
-            );
-
-        }
-      );
-
-
-    const homeworks =
-      await safeCourseSection(
-        "tarefas",
-        async function () {
-
-          const list =
-            Array.from(
-              await course
-                .getHomeworks() as any[]
-            );
-
-
-          return list
-            .slice(
-              0,
-              60
-            )
-            .map(
-              function (
-                homework:
-                  any
-              ) {
-
-                return {
-                  id:
-                    String(
-                      homework.id ||
-                      ""
-                    ),
-
-                  title:
-                    safeText(
-                      homework.title ||
-                      "Tarefa",
-                      300
-                    ),
-
-                  startDate:
-                    isoDate(
-                      homework.startDate
-                    ),
-
-                  endDate:
-                    isoDate(
-                      homework.endDate
-                    ),
-                };
-
-              }
-            );
-
-        }
-      );
-
-
-    const lessons =
-      await safeCourseSection(
-        "aulas",
-        async function () {
-
-          const list =
-            await loadCourseLessons(
-              session,
-              course,
-              courseId,
-              force
-            );
-
-
-          return list
-            .slice(
-              0,
-              120
-            )
-            .map(
-              function (
-                lesson:
-                  any
-              ) {
-
-                return {
-                  id:
-                    String(
-                      lesson.id ||
-                      ""
-                    ),
-
-                  title:
-                    safeText(
-                      lesson.title ||
-                      "Aula",
-                      300
-                    ),
-
-                  content:
-                    safeText(
-                      lesson.contentText,
-                      3500
-                    ),
-
-                  startDate:
-                    isoDate(
-                      lesson.startDate
-                    ),
-
-                  endDate:
-                    isoDate(
-                      lesson.endDate
-                    ),
-
-                  attachments:
-                    Array.isArray(
-                      lesson.attachments
+                    .map(
+                      function (
+                        homework:
+                          any
+                      ) {
+        
+                        return {
+                          id:
+                            String(
+                              homework.id ||
+                              ""
+                            ),
+        
+                          title:
+                            safeText(
+                              homework.title ||
+                              "Tarefa",
+                              300
+                            ),
+        
+                          startDate:
+                            isoDate(
+                              homework.startDate
+                            ),
+        
+                          endDate:
+                            isoDate(
+                              homework.endDate
+                            ),
+                        };
+        
+                      }
+                    );
+        
+                }
+              ),
+
+        safeCourseSection(
+                "aulas",
+                async function () {
+        
+                  const list =
+                    await loadCourseLessons(
+                      session,
+                      course,
+                      courseId,
+                      force
+                    );
+        
+        
+                  return list
+                    .slice(
+                      0,
+                      120
                     )
-                      ? lesson.attachments
-                          .slice(
-                            0,
-                            50
-                          )
-                          .map(
-                            function (
-                              attachment:
-                                any
-                            ) {
+                    .map(
+                      function (
+                        lesson:
+                          any
+                      ) {
+        
+                        return {
+                          id:
+                            String(
+                              lesson.id ||
+                              ""
+                            ),
+        
+                          title:
+                            safeText(
+                              lesson.title ||
+                              "Aula",
+                              300
+                            ),
+        
+                          content:
+                            safeText(
+                              lesson.contentText,
+                              3500
+                            ),
+        
+                          startDate:
+                            isoDate(
+                              lesson.startDate
+                            ),
+        
+                          endDate:
+                            isoDate(
+                              lesson.endDate
+                            ),
+        
+                          attachments:
+                            Array.isArray(
+                              lesson.attachments
+                            )
+                              ? lesson.attachments
+                                  .slice(
+                                    0,
+                                    50
+                                  )
+                                  .map(
+                                    function (
+                                      attachment:
+                                        any
+                                    ) {
+        
+                                      return serializeLessonAttachment(
+                                        attachment,
+                                        String(
+                                          lesson.id ||
+                                          ""
+                                        ) ||
+                                        null
+                                      );
+        
+                                    }
+                                  )
+                              : [],
+                        };
+        
+                      }
+                    );
+        
+                }
+              ),
 
-                              return serializeLessonAttachment(
-                                attachment,
-                                String(
-                                  lesson.id ||
-                                  ""
-                                ) ||
-                                null
-                              );
-
-                            }
-                          )
-                      : [],
-                };
-
-              }
-            );
-
-        }
-      );
-
-
-    const syllabus =
-      await safeCourseSection(
-        "plano de ensino",
-        async function () {
-
-          return serializeSyllabus(
-            await course
-              .getSyllabus()
-          );
-
-        }
-      );
-
+        safeCourseSection(
+                "plano de ensino",
+                async function () {
+        
+                  return serializeSyllabus(
+                    await course
+                      .getSyllabus()
+                  );
+        
+                }
+              ),
+      ]);
 
     const detail = {
       connected:
