@@ -957,6 +957,48 @@ async function listarQuestoes(
         ""
       ).trim();
 
+    const busca =
+      String(
+        url.searchParams.get("busca") ||
+        ""
+      ).trim();
+
+    const dificuldade =
+      String(
+        url.searchParams.get("dificuldade") ||
+        ""
+      ).trim();
+
+    const paginaRaw =
+      String(
+        url.searchParams.get("pagina") ||
+        ""
+      ).trim();
+
+    const limiteRaw =
+      String(
+        url.searchParams.get("limite") ||
+        ""
+      ).trim();
+
+    const paginado =
+      Boolean(paginaRaw);
+
+    const pagina =
+      Math.max(
+        1,
+        Number(paginaRaw) || 1
+      );
+
+    const limite =
+      Math.max(
+        10,
+        Math.min(
+          100,
+          Number(limiteRaw) || 50
+        )
+      );
+
     const ano =
       Number(anoRaw);
 
@@ -1027,6 +1069,53 @@ async function listarQuestoes(
       };
     }
 
+    if (dificuldade) {
+      where.dificuldade = {
+        equals:
+          dificuldade,
+        mode:
+          "insensitive",
+      };
+    }
+
+    if (busca) {
+      where.OR = [
+        {
+          enunciado: {
+            contains:
+              busca,
+            mode:
+              "insensitive",
+          },
+        },
+        {
+          tema: {
+            contains:
+              busca,
+            mode:
+              "insensitive",
+          },
+        },
+        {
+          disciplina: {
+            nome: {
+              contains:
+                busca,
+              mode:
+                "insensitive",
+            },
+          },
+        },
+      ];
+    }
+
+    const total =
+      paginado
+        ? await prisma.questao.count({
+            where,
+          })
+        : 0;
+
     const questoes =
       await prisma.questao.findMany({
         where,
@@ -1039,6 +1128,17 @@ async function listarQuestoes(
         orderBy: {
           createdAt: "desc",
         },
+
+        ...(paginado
+          ? {
+              skip:
+                (pagina - 1) *
+                limite,
+
+              take:
+                limite,
+            }
+          : {}),
       });
 
     const publicas =
@@ -1071,7 +1171,27 @@ async function listarQuestoes(
     json(
       response,
       200,
-      publicas
+      paginado
+        ? {
+            itens:
+              publicas,
+
+            total,
+
+            pagina,
+
+            limite,
+
+            paginas:
+              Math.max(
+                1,
+                Math.ceil(
+                  total /
+                  limite
+                )
+              ),
+          }
+        : publicas
     );
   }
   catch (error) {
