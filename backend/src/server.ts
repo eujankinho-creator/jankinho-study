@@ -4763,9 +4763,13 @@ const server =
           if (
             metodo === "POST"
           ) {
-            await criarDisciplina(
-              request,
-              response
+            json(
+              response,
+              403,
+              {
+                error:
+                  "Cadastro de disciplinas por usuarios foi desativado."
+              }
             );
 
             return;
