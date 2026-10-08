@@ -2215,3 +2215,54 @@ html[data-theme="pink-glitter"]
 .questions-view .question-card:has(.question-done-badge) {
   border-color: rgba(34, 197, 94, .10);
 }
+
+
+/* Paginação do banco global */
+.questions-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 26px 0 10px;
+  padding: 12px 0;
+}
+
+.questions-pager.hidden {
+  display: none;
+}
+
+.questions-page-indicator {
+  min-width: 92px;
+  text-align: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  opacity: .88;
+}
+
+.questions-pager button {
+  min-width: 118px;
+}
+
+@media (max-width: 640px) {
+  .questions-pager {
+    gap: 8px;
+    position: sticky;
+    bottom: 10px;
+    z-index: 8;
+    padding: 10px;
+    border-radius: 16px;
+    backdrop-filter: blur(14px);
+    background: rgba(10,10,14,.82);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+
+  .questions-pager button {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .questions-page-indicator {
+    min-width: 64px;
+  }
+}
