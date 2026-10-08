@@ -1340,19 +1340,30 @@ function isDownloadableSigaaFile(
     );
 
 
+  const hasNativeDownload =
+    typeof file?.download ===
+      "function";
+
+
   /*
-   * So expomos como arquivo baixavel o item que possui
-   * dados suficientes para refazer o download autenticado
-   * diretamente no SIGAA.
+   * Materiais do SIGAA podem vir tanto pela aba Arquivos quanto
+   * anexados aos topicos/aulas. Nem todos expoem a sessao HTTP
+   * interna diretamente, mas muitos trazem download() funcional.
+   * O conteudo final continua sendo validado antes de ser enviado.
    */
   return Boolean(
     file?.type ===
       "file" &&
     id &&
-    hasAuthenticatedSession &&
     (
-      hasPostDownload ||
-      hasKeyDownload
+      hasNativeDownload ||
+      (
+        hasAuthenticatedSession &&
+        (
+          hasPostDownload ||
+          hasKeyDownload
+        )
+      )
     )
   );
 
@@ -2045,17 +2056,8 @@ export async function sigaaCourseDetail(
     }
 
 
-    const [
-      grades,
-      absences,
-      files,
-      exams,
-      homeworks,
-      lessons,
-      syllabus,
-    ] =
-      await Promise.all([
-        safeCourseSection(
+    const grades =
+      await safeCourseSection(
                 "notas",
                 async function () {
         
@@ -2071,9 +2073,10 @@ export async function sigaaCourseDetail(
                   );
         
                 }
-              ),
+              );
 
-        safeCourseSection(
+    const absences =
+      await safeCourseSection(
                 "frequencia",
                 async function () {
         
@@ -2129,9 +2132,10 @@ export async function sigaaCourseDetail(
                   };
         
                 }
-              ),
+              );
 
-        safeCourseSection(
+    const files =
+      await safeCourseSection(
                 "arquivos",
                 async function () {
         
@@ -2345,9 +2349,10 @@ export async function sigaaCourseDetail(
                     );
         
                 }
-              ),
+              );
 
-        safeCourseSection(
+    const exams =
+      await safeCourseSection(
                 "avaliacoes",
                 async function () {
         
@@ -2386,9 +2391,10 @@ export async function sigaaCourseDetail(
                     );
         
                 }
-              ),
+              );
 
-        safeCourseSection(
+    const homeworks =
+      await safeCourseSection(
                 "tarefas",
                 async function () {
         
@@ -2439,9 +2445,10 @@ export async function sigaaCourseDetail(
                     );
         
                 }
-              ),
+              );
 
-        safeCourseSection(
+    const lessons =
+      await safeCourseSection(
                 "aulas",
                 async function () {
         
@@ -2528,9 +2535,10 @@ export async function sigaaCourseDetail(
                     );
         
                 }
-              ),
+              );
 
-        safeCourseSection(
+    const syllabus =
+      await safeCourseSection(
                 "plano de ensino",
                 async function () {
         
@@ -2540,8 +2548,7 @@ export async function sigaaCourseDetail(
                   );
         
                 }
-              ),
-      ]);
+              );
 
     const detail = {
       connected:
@@ -3351,19 +3358,55 @@ async function downloadResolvedSigaaFile(
     string
 ) {
 
-  /*
-   * Importante: o Cortex so entrega arquivos que conseguiu
-   * baixar diretamente pela sessao HTTP autenticada do SIGAA.
-   *
-   * O fallback file.download() da biblioteca foi removido
-   * porque ele pode salvar respostas intermediarias/HTML com
-   * o nome do arquivo, fazendo parecer um PDF/Word real quando
-   * o conteudo nao corresponde ao material do SIGAA.
-   */
-  return directAuthenticatedSigaaDownload(
-    file,
-    tempDirectory
-  );
+  try {
+
+    return await directAuthenticatedSigaaDownload(
+      file,
+      tempDirectory
+    );
+
+  }
+  catch (
+    directError
+  ) {
+
+    console.warn(
+      "SIGAA direct authenticated download:",
+      directError instanceof Error
+        ? directError.message
+        : String(
+            directError
+          )
+    );
+
+
+    if (
+      typeof file?.download ===
+        "function"
+    ) {
+
+      /*
+       * Alguns anexos publicados dentro dos topicos da turma
+       * so expoem o metodo download() da sigaa-api.
+       * Ainda assim o arquivo resultante e validado por assinatura
+       * binaria antes de ser devolvido ao navegador.
+       */
+      return withTimeout<string>(
+        file.download(
+          tempDirectory,
+          undefined,
+          false
+        ) as Promise<string>,
+        45000,
+        "Timeout ao baixar arquivo."
+      );
+
+    }
+
+
+    throw directError;
+
+  }
 
 }
 
