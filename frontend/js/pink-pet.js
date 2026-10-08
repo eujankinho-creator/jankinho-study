@@ -3,6 +3,7 @@
   "use strict";
 
 
+  // O pet só é exibido após ativação explícita nas Configurações.
   const ALLOWED_USERS = [];
 
 
