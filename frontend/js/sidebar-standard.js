@@ -1192,7 +1192,7 @@
             "cortex-brand-credit";
 
           credit.textContent=
-            "Criado por Pedro Henrique";
+            "Por Pedro Henrique";
 
           copy.appendChild(credit);
         }
@@ -1216,7 +1216,7 @@
               "cortex-brand-credit";
 
             credit.textContent=
-              "Criado por Pedro Henrique";
+              "Por Pedro Henrique";
 
             copy.appendChild(credit);
           }
