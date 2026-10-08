@@ -2215,7 +2215,133 @@
     moveStartY: 0,
     moveStartLeft: 0,
     moveStartTop: 0,
+    desiredQuality: "default",
+    desiredRate: 1,
   };
+
+
+  try {
+    const prefs =
+      JSON.parse(
+        localStorage.getItem(
+          "cortex_lesson_playback_prefs_v1"
+        ) ||
+        "null"
+      );
+
+    if (
+      prefs &&
+      typeof prefs ===
+        "object"
+    ) {
+      const quality =
+        String(
+          prefs.quality ||
+          "default"
+        );
+
+      const rate =
+        Number(
+          prefs.rate ||
+          1
+        );
+
+      lessonState.desiredQuality =
+        quality ||
+        "default";
+
+      lessonState.desiredRate =
+        Number.isFinite(
+          rate
+        )
+          ? rate
+          : 1;
+    }
+  }
+  catch {}
+
+
+  function lessonSavePlaybackPrefs() {
+    try {
+      localStorage.setItem(
+        "cortex_lesson_playback_prefs_v1",
+        JSON.stringify({
+          quality:
+            lessonState.desiredQuality,
+          rate:
+            lessonState.desiredRate,
+        })
+      );
+    }
+    catch {}
+  }
+
+
+  function lessonApplyPlaybackPreferences(
+    player =
+      lessonState.player
+  ) {
+    if (!player) {
+      return;
+    }
+
+    try {
+      const rates =
+        player.getAvailablePlaybackRates?.() ||
+        [];
+
+      if (
+        !rates.length ||
+        rates.includes(
+          Number(
+            lessonState.desiredRate
+          )
+        )
+      ) {
+        player.setPlaybackRate?.(
+          Number(
+            lessonState.desiredRate
+          )
+        );
+      }
+    }
+    catch {}
+
+    try {
+      const quality =
+        lessonState.desiredQuality ||
+        "default";
+
+      player.setPlaybackQualityRange?.(
+        quality
+      );
+
+      player.setPlaybackQuality?.(
+        quality
+      );
+    }
+    catch {}
+
+    const qualitySelect =
+      $("globalLessonQuality");
+
+    const rateSelect =
+      $("globalLessonRate");
+
+    if (qualitySelect) {
+      qualitySelect.value =
+        lessonState.desiredQuality ||
+        "default";
+    }
+
+    if (rateSelect) {
+      rateSelect.value =
+        String(
+          lessonState.desiredRate ||
+          1
+        );
+    }
+  }
 
   function lessonFormatTime(seconds) {
     const total = Math.max(0,Math.floor(Number(seconds || 0)));
@@ -2311,7 +2437,11 @@
     window.clearTimeout(lessonState.chromeTimer);
     if(lessonState.playing){
       lessonState.chromeTimer=window.setTimeout(()=>{
-        if(!lessonState.resizeActive && !$("globalLessonPlayer")?.classList.contains("expanded")){
+        if(
+          !lessonState.resizeActive &&
+          !$("globalLessonPlayer")?.classList.contains("expanded") &&
+          !host.classList.contains("lesson-settings-open")
+        ){
           host.classList.add("lesson-clean");
         }
       },1800);
@@ -2410,6 +2540,7 @@
   }
 
   function lessonHide() {
+    closeLessonSettings?.();
     $("globalLessonPlayer")?.classList.add("hidden");
     $("globalLessonPlayer")?.classList.remove("expanded","lesson-minimized");
     document.body.classList.remove("lesson-player-expanded");
@@ -2449,6 +2580,16 @@
           startSeconds:Math.max(0,startAt),
         });
         if(!autoplay) lessonState.player.pauseVideo();
+
+        window.setTimeout(
+          function () {
+            lessonApplyPlaybackPreferences(
+              lessonState.player
+            );
+          },
+          120
+        );
+
         resolve();
         return;
       }
@@ -2473,7 +2614,17 @@
         events:{
           onReady:function(event){
             lessonState.ready=true;
-            event.target.setVolume(70);
+            event.target.setVolume(
+              Number(
+                $("globalLessonVolume")?.value ||
+                70
+              )
+            );
+
+            lessonApplyPlaybackPreferences(
+              event.target
+            );
+
             if(startAt>0) event.target.seekTo(startAt,true);
             if(autoplay) event.target.playVideo();
             lessonRenderMeta();
@@ -2494,6 +2645,47 @@
               void syncLessonProgress(true);
             }
             saveLessonLocal();
+          },
+          onPlaybackRateChange:function(event){
+            const value=
+              Number(
+                event.data ||
+                1
+              );
+
+            if(
+              Number.isFinite(
+                value
+              )
+            ){
+              lessonState.desiredRate=
+                value;
+
+              const select=
+                $("globalLessonRate");
+
+              if(select){
+                select.value=
+                  String(
+                    value
+                  );
+              }
+            }
+          },
+          onPlaybackQualityChange:function(event){
+            const quality=
+              String(
+                event.data ||
+                ""
+              );
+
+            const host=
+              $("globalLessonPlayer");
+
+            if(host){
+              host.dataset.quality=
+                quality;
+            }
           },
           onError:function(){
             $("globalLessonTitle").textContent="Esta aula não está mais disponível.";
@@ -2561,6 +2753,137 @@
   $("globalLessonVolume")?.addEventListener("input",function(){
     lessonState.player?.setVolume?.(Number(this.value || 0));
   });
+
+
+  const lessonSettingsButton=
+    $("globalLessonSettingsButton");
+
+  const lessonSettingsMenu=
+    $("globalLessonSettingsMenu");
+
+
+  function closeLessonSettings() {
+    if(!lessonSettingsMenu) return;
+
+    lessonSettingsMenu.hidden=
+      true;
+
+    lessonSettingsButton?.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    $("globalLessonPlayer")?.classList.remove(
+      "lesson-settings-open"
+    );
+  }
+
+
+  lessonSettingsButton?.addEventListener(
+    "click",
+    function(event){
+      event.stopPropagation();
+
+      const opening=
+        Boolean(
+          lessonSettingsMenu?.hidden
+        );
+
+      if(lessonSettingsMenu){
+        lessonSettingsMenu.hidden=
+          !opening;
+      }
+
+      this.setAttribute(
+        "aria-expanded",
+        opening
+          ? "true"
+          : "false"
+      );
+
+      $("globalLessonPlayer")?.classList.toggle(
+        "lesson-settings-open",
+        opening
+      );
+
+      lessonShowChrome();
+    }
+  );
+
+
+  $("globalLessonQuality")?.addEventListener(
+    "change",
+    function(){
+      lessonState.desiredQuality=
+        String(
+          this.value ||
+          "default"
+        );
+
+      lessonSavePlaybackPrefs();
+      lessonApplyPlaybackPreferences();
+      lessonShowChrome();
+    }
+  );
+
+
+  $("globalLessonRate")?.addEventListener(
+    "change",
+    function(){
+      const value=
+        Number(
+          this.value ||
+          1
+        );
+
+      lessonState.desiredRate=
+        Number.isFinite(
+          value
+        )
+          ? value
+          : 1;
+
+      lessonSavePlaybackPrefs();
+      lessonApplyPlaybackPreferences();
+      lessonShowChrome();
+    }
+  );
+
+
+  document.addEventListener(
+    "click",
+    function(event){
+      if(
+        !lessonSettingsMenu ||
+        lessonSettingsMenu.hidden
+      ){
+        return;
+      }
+
+      if(
+        event.target.closest(
+          ".global-lesson-settings"
+        )
+      ){
+        return;
+      }
+
+      closeLessonSettings();
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    function(event){
+      if(
+        event.key ===
+        "Escape"
+      ){
+        closeLessonSettings();
+      }
+    }
+  );
 
   const lessonHost=$("globalLessonPlayer");
   lessonHost?.addEventListener("pointermove",lessonShowChrome,{passive:true});
