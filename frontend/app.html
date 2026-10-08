@@ -32,7 +32,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/app-shell.css?v=20261006-theme-v3"
+    href="/css/app-shell.css?v=20261008-miniplayer-minimal1"
   >
 
   <link
@@ -289,6 +289,54 @@
         <span>🔊</span>
         <input id="globalLessonVolume" type="range" min="0" max="100" value="70" aria-label="Volume">
       </div>
+
+      <div class="global-lesson-settings">
+        <button
+          id="globalLessonSettingsButton"
+          class="global-lesson-settings-button"
+          type="button"
+          aria-label="Ajustes da videoaula"
+          aria-expanded="false"
+          title="Ajustes"
+        >
+          ⚙
+        </button>
+
+        <div
+          id="globalLessonSettingsMenu"
+          class="global-lesson-settings-menu"
+          hidden
+        >
+          <label>
+            <span>Qualidade</span>
+            <select id="globalLessonQuality" aria-label="Qualidade do vídeo">
+              <option value="default">Auto</option>
+              <option value="hd1080">1080p</option>
+              <option value="hd720">720p</option>
+              <option value="large">480p</option>
+              <option value="medium">360p</option>
+              <option value="small">240p</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Velocidade</span>
+            <select id="globalLessonRate" aria-label="Velocidade de reprodução">
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
+              <option value="1">1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="1.75">1.75x</option>
+              <option value="2">2x</option>
+            </select>
+          </label>
+
+          <div class="global-lesson-settings-note">
+            O YouTube pode ajustar a qualidade automaticamente conforme rede e dispositivo.
+          </div>
+        </div>
+      </div>
     </div>
     <div class="global-lesson-resize-zones" aria-hidden="true">
       <span data-lesson-resize="n"></span>
@@ -302,7 +350,7 @@
     </div>
   </section>
 
-  <script src="/js/app-shell.js?v=20261006-pmpe2"></script>
+  <script src="/js/app-shell.js?v=20261008-miniplayer-minimal1"></script>
   <script src="/js/pink-pet.js?v=20261007-pet-account1"></script>
 
 </body>

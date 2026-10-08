@@ -1904,3 +1904,352 @@ html[data-theme] :is(
   }
 }
 /* END CORTEX APP SHELL THEME TOKEN SYNC V3 */
+
+
+/* =========================================================
+   CORTEX LESSON MINIPLAYER · MINIMAL PRO V4
+========================================================= */
+
+.global-lesson-player{
+  --lesson-accent:var(--theme-accent);
+  --lesson-accent-rgb:var(--theme-accent-rgb);
+  border:1px solid var(--theme-border)!important;
+  border-radius:16px!important;
+  background:#0b0b0d!important;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.42),
+    0 0 0 1px rgba(255,255,255,.02)!important;
+  overflow:visible!important;
+}
+
+.global-lesson-player:not(.expanded){
+  width:min(390px,calc(100vw - 32px))!important;
+  min-width:300px!important;
+}
+
+.global-lesson-player .global-lesson-head{
+  min-height:48px;
+  padding:9px 10px 8px 12px!important;
+  border-bottom:1px solid rgba(255,255,255,.055)!important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.025),
+      rgba(255,255,255,0)
+    )!important;
+}
+
+.global-lesson-copy{
+  min-width:0;
+  display:grid;
+  gap:1px;
+}
+
+.global-lesson-copy>span{
+  color:var(--theme-accent-2)!important;
+  font-size:6px!important;
+  font-weight:900!important;
+  letter-spacing:.15em!important;
+  opacity:.82;
+}
+
+.global-lesson-copy strong{
+  min-width:0;
+  overflow:hidden;
+  color:var(--theme-text)!important;
+  font-size:9px!important;
+  font-weight:760!important;
+  letter-spacing:-.01em!important;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.global-lesson-copy small{
+  color:var(--theme-text-muted)!important;
+  font-size:7px!important;
+}
+
+.global-lesson-window-actions{
+  display:flex!important;
+  gap:3px!important;
+}
+
+.global-lesson-window-actions button,
+.global-lesson-controls>button,
+.global-lesson-settings-button{
+  border:0!important;
+  background:transparent!important;
+  color:var(--theme-text-muted)!important;
+  box-shadow:none!important;
+  transition:
+    color .15s ease,
+    background .15s ease,
+    transform .15s ease!important;
+}
+
+.global-lesson-window-actions button{
+  width:28px!important;
+  height:28px!important;
+  border-radius:8px!important;
+  font-size:12px!important;
+}
+
+.global-lesson-window-actions button:hover,
+.global-lesson-controls>button:hover,
+.global-lesson-settings-button:hover{
+  background:rgba(255,255,255,.055)!important;
+  color:var(--theme-text)!important;
+}
+
+.global-lesson-window-actions button:active,
+.global-lesson-controls>button:active,
+.global-lesson-settings-button:active{
+  transform:scale(.95);
+}
+
+.global-lesson-video{
+  position:relative;
+  background:#000!important;
+}
+
+.global-lesson-player:not(.expanded) .global-lesson-video{
+  border-radius:0!important;
+}
+
+.global-lesson-controls{
+  position:relative;
+  display:grid!important;
+  grid-template-columns:30px 36px 30px minmax(0,1fr) 92px 30px!important;
+  gap:5px!important;
+  align-items:center!important;
+  padding:8px 9px!important;
+  border-top:1px solid rgba(255,255,255,.055)!important;
+  background:#0b0b0d!important;
+}
+
+.global-lesson-controls>button{
+  min-width:0!important;
+  width:30px!important;
+  height:30px!important;
+  padding:0!important;
+  border-radius:8px!important;
+  font-size:8px!important;
+  font-weight:800!important;
+}
+
+.global-lesson-controls .global-lesson-main{
+  width:36px!important;
+  height:30px!important;
+  color:var(--theme-text)!important;
+  background:rgba(var(--theme-accent-rgb),.14)!important;
+  border:1px solid rgba(var(--theme-accent-rgb),.24)!important;
+}
+
+.global-lesson-controls .global-lesson-main:hover{
+  background:rgba(var(--theme-accent-rgb),.20)!important;
+  border-color:rgba(var(--theme-accent-rgb),.34)!important;
+}
+
+.global-lesson-progress-wrap{
+  display:grid!important;
+  grid-template-columns:31px minmax(70px,1fr) 31px!important;
+  gap:5px!important;
+  align-items:center!important;
+  min-width:0;
+}
+
+.global-lesson-progress-wrap span{
+  color:var(--theme-text-muted)!important;
+  font-size:6.5px!important;
+  font-variant-numeric:tabular-nums;
+}
+
+.global-lesson-progress-wrap input,
+.global-lesson-volume input{
+  height:14px;
+  accent-color:var(--theme-accent)!important;
+  cursor:pointer;
+}
+
+.global-lesson-volume{
+  display:grid!important;
+  grid-template-columns:14px minmax(42px,1fr)!important;
+  gap:4px!important;
+  align-items:center!important;
+  min-width:0;
+}
+
+.global-lesson-volume span{
+  color:var(--theme-text-muted)!important;
+  font-size:8px!important;
+  line-height:1;
+  filter:grayscale(1);
+  opacity:.8;
+}
+
+.global-lesson-settings{
+  position:relative;
+}
+
+.global-lesson-settings-button{
+  width:30px!important;
+  height:30px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  border-radius:8px!important;
+  font-size:12px!important;
+  cursor:pointer;
+}
+
+.global-lesson-settings-menu[hidden]{
+  display:none!important;
+}
+
+.global-lesson-settings-menu{
+  position:absolute;
+  right:0;
+  bottom:38px;
+  z-index:40;
+  width:210px;
+  padding:10px;
+  border:1px solid var(--theme-border);
+  border-radius:13px;
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-surface-strong) 96%,
+      #000
+    );
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.48),
+    0 0 0 1px rgba(255,255,255,.02);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+
+.global-lesson-settings-menu label{
+  display:grid;
+  grid-template-columns:68px minmax(0,1fr);
+  gap:8px;
+  align-items:center;
+  min-height:36px;
+}
+
+.global-lesson-settings-menu label+label{
+  margin-top:4px;
+}
+
+.global-lesson-settings-menu label>span{
+  color:var(--theme-text-muted);
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.global-lesson-settings-menu select{
+  width:100%;
+  min-width:0;
+  height:32px;
+  border:1px solid var(--theme-border);
+  border-radius:8px;
+  outline:0;
+  padding:0 8px;
+  background:var(--theme-surface-soft);
+  color:var(--theme-text);
+  font:inherit;
+  font-size:8px;
+  cursor:pointer;
+}
+
+.global-lesson-settings-menu select:focus{
+  border-color:var(--theme-border-strong);
+  box-shadow:0 0 0 2px var(--theme-accent-soft);
+}
+
+.global-lesson-settings-note{
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid var(--theme-border);
+  color:var(--theme-text-muted);
+  font-size:6.5px;
+  line-height:1.45;
+}
+
+.global-lesson-player.lesson-settings-open{
+  overflow:visible!important;
+}
+
+.global-lesson-player.lesson-settings-open .global-lesson-head,
+.global-lesson-player.lesson-settings-open .global-lesson-controls{
+  opacity:1!important;
+  max-height:96px!important;
+  pointer-events:auto!important;
+}
+
+.global-lesson-player:not(.expanded).lesson-clean .global-lesson-video{
+  border-radius:15px!important;
+}
+
+.global-lesson-player:not(.expanded):not(.lesson-clean) .global-lesson-video{
+  border-radius:0!important;
+}
+
+.global-lesson-player.lesson-resizing::after{
+  border-color:rgba(var(--theme-accent-rgb),.32)!important;
+  box-shadow:0 0 0 2px rgba(var(--theme-accent-rgb),.06)!important;
+}
+
+.global-lesson-player.expanded{
+  border-radius:18px!important;
+}
+
+.global-lesson-player.expanded .global-lesson-controls{
+  grid-template-columns:34px 40px 34px minmax(160px,1fr) 120px 34px!important;
+}
+
+@media(max-width:760px){
+  .global-lesson-player,
+  .global-lesson-player.lesson-minimized{
+    border-radius:14px!important;
+  }
+
+  .global-lesson-controls{
+    grid-template-columns:30px 36px 30px minmax(0,1fr) 30px!important;
+    padding:7px!important;
+  }
+
+  .global-lesson-volume{
+    display:none!important;
+  }
+
+  .global-lesson-progress-wrap{
+    grid-column:1 / -1!important;
+    grid-row:2;
+  }
+
+  .global-lesson-settings{
+    grid-column:5;
+    grid-row:1;
+  }
+
+  .global-lesson-settings-menu{
+    right:0;
+    width:min(220px,calc(100vw - 34px));
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .global-lesson-window-actions button,
+  .global-lesson-controls>button,
+  .global-lesson-settings-button{
+    transition:none!important;
+  }
+
+  .global-lesson-settings-menu{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+}
+/* CORTEX LESSON MINIPLAYER · MINIMAL PRO V4 END */
