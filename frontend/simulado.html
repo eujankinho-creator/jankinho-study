@@ -654,19 +654,34 @@
 
 
             <div class="config-section">
-              <label
-                class="config-label"
-                for="simTopic"
-              >
-                Tópico / assunto
-              </label>
+              <div class="areas-heading">
+                <label class="config-label">
+                  Tópicos / assuntos
+                </label>
 
-              <select
-                id="simTopic"
-                class="sim-select"
-              >
-                <option value="">Todos os tópicos</option>
-              </select>
+                <div>
+                  <button
+                    id="selectAllTopics"
+                    class="tiny-action"
+                    type="button"
+                  >
+                    Todos
+                  </button>
+
+                  <button
+                    id="clearTopics"
+                    class="tiny-action"
+                    type="button"
+                  >
+                    Limpar
+                  </button>
+                </div>
+              </div>
+
+              <div
+                id="topicsGrid"
+                class="areas-grid topics-grid"
+              ></div>
             </div>
 
 
