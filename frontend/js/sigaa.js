@@ -6,6 +6,9 @@
   let currentCourseId = null;
   let currentCourseData = null;
 
+  const courseDetailCache =
+    new Map();
+
   function escapeHtml(value) {
     return String(value == null ? "" : value)
       .replace(/&/g, "&amp;")
@@ -770,6 +773,66 @@
       </div>`;
   }
 
+  function renderCourseShell(course) {
+    const data =
+      course ||
+      {};
+
+    $("workspaceCourseCode").textContent =
+      data.code ||
+      "TURMA";
+
+    $("workspaceCourseName").textContent =
+      data.name ||
+      "Disciplina";
+
+    $("workspaceCourseMeta").textContent =
+      [
+        data.period,
+        data.schedule
+      ]
+        .filter(Boolean)
+        .join("  ·  ") ||
+      "Carregando dados da turma...";
+
+    $("workspaceUpdated").textContent =
+      "Sincronizando...";
+
+    $("gradeCount").textContent =
+      "…";
+
+    $("absenceCount").textContent =
+      "…";
+
+    $("fileCount").textContent =
+      "…";
+
+    $("activityCount").textContent =
+      "…";
+
+    const loading =
+      '<div class="empty-state">Carregando dados do SIGAA...</div>';
+
+    $("tab-overview").innerHTML =
+      loading;
+
+    $("tab-grades").innerHTML =
+      loading;
+
+    $("tab-files").innerHTML =
+      loading;
+
+    $("tab-attendance").innerHTML =
+      loading;
+
+    $("tab-activities").innerHTML =
+      loading;
+
+    $("tab-syllabus").innerHTML =
+      loading;
+  }
+
+
   function renderCourseDetail(data) {
     currentCourseData = data;
     const course = data.course || {};
@@ -828,24 +891,125 @@
   }
 
   async function openCourse(courseId, force) {
-    if (!courseId) return;
-    currentCourseId = courseId;
-    $("academicDashboard").classList.add("hidden");
-    $("courseWorkspace").classList.remove("hidden");
-    $("courseLoading").classList.remove("hidden");
-    $("courseContent").classList.add("loading-content");
-    setTab("overview");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (!courseId) {
+      return;
+    }
+
+    currentCourseId =
+      courseId;
+
+    $("academicDashboard").classList.add(
+      "hidden"
+    );
+
+    $("courseWorkspace").classList.remove(
+      "hidden"
+    );
+
+    setTab(
+      "overview"
+    );
+
+    const courseSummary =
+      (overviewData?.courses || [])
+        .find(
+          function (
+            course
+          ) {
+            return String(
+              course.id
+            ) ===
+            String(
+              courseId
+            );
+          }
+        ) ||
+      {
+        id:
+          courseId,
+        name:
+          "Disciplina"
+      };
+
+    renderCourseShell(
+      courseSummary
+    );
+
+    window.scrollTo({
+      top:
+        0,
+      behavior:
+        "auto"
+    });
+
+    const cached =
+      !force
+        ? courseDetailCache.get(
+            String(
+              courseId
+            )
+          )
+        : null;
+
+    if (cached) {
+      renderCourseDetail(
+        cached
+      );
+      return;
+    }
+
+    $("courseLoading").classList.remove(
+      "hidden"
+    );
+
+    /*
+     * Mantemos o conteudo visivel enquanto sincroniza.
+     * Nao bloqueia mais a disciplina inteira com opacity/pointer-events.
+     */
+    $("courseContent").classList.remove(
+      "loading-content"
+    );
 
     try {
-      const data = await api("/api/sigaa/courses/" + encodeURIComponent(courseId) + (force ? "?force=1" : ""));
-      renderCourseDetail(data);
-      showMessage("", "");
-    } catch (error) {
-      showMessage(error.message, "error");
-    } finally {
-      $("courseLoading").classList.add("hidden");
-      $("courseContent").classList.remove("loading-content");
+      const data =
+        await api(
+          "/api/sigaa/courses/" +
+          encodeURIComponent(
+            courseId
+          ) +
+          (
+            force
+              ? "?force=1"
+              : ""
+          )
+        );
+
+      courseDetailCache.set(
+        String(
+          courseId
+        ),
+        data
+      );
+
+      renderCourseDetail(
+        data
+      );
+
+      showMessage(
+        "",
+        ""
+      );
+    }
+    catch (error) {
+      showMessage(
+        error.message,
+        "error"
+      );
+    }
+    finally {
+      $("courseLoading").classList.add(
+        "hidden"
+      );
     }
   }
 
@@ -882,7 +1046,15 @@
 
       $("sigaaPassword").value = "";
       setConnected(true, data.name);
-      await loadOverview(true);
+
+      showMessage(
+        "Conta conectada. Sincronizando disciplinas em segundo plano...",
+        "info"
+      );
+
+      void loadOverview(
+        true
+      );
     } catch (error) {
       $("sigaaPassword").value = "";
       showMessage(error.message, "error");
@@ -896,7 +1068,11 @@
     overviewRefreshAttempts = 0;
     loadOverview(true);
   });
-  $("refreshCourseButton").addEventListener("click", () => currentCourseId && openCourse(currentCourseId, true));
+  $("refreshCourseButton").addEventListener("click", () => {
+    if (!currentCourseId) return;
+    courseDetailCache.delete(String(currentCourseId));
+    openCourse(currentCourseId, true);
+  });
   $("backToDashboard").addEventListener("click", () => {
     $("courseWorkspace").classList.add("hidden");
     $("academicDashboard").classList.remove("hidden");
@@ -931,6 +1107,7 @@
 
   $("disconnectButton").addEventListener("click", async () => {
     try { await api("/api/sigaa/disconnect", { method: "POST" }); } catch {}
+    courseDetailCache.clear();
     setConnected(false);
     showMessage("SIGAA desconectado.", "info");
   });
