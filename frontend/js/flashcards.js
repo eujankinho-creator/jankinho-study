@@ -213,6 +213,7 @@ async function carregarFlashcards() {
     atualizarFiltrosMeta();
     atualizarResumo();
     renderLista();
+    renderPaginacao();
   } catch (erro) {
     console.error(erro);
     mostrarErro(erro.message || "Nao foi possivel carregar os flashcards.");
@@ -250,6 +251,54 @@ function dificuldadeNome(valor) {
   if (v === "dificil") return "Difícil";
   return "Médio";
 }
+
+function garantirPaginacao() {
+  let pager = $("flashcardPager");
+  if (pager) return pager;
+
+  const lista = $("flashcardsLista");
+  pager = document.createElement("div");
+  pager.id = "flashcardPager";
+  pager.className = "flashcard-pager";
+  lista.insertAdjacentElement("afterend", pager);
+  return pager;
+}
+
+function renderPaginacao() {
+  const pager = garantirPaginacao();
+
+  if (state.paginas <= 1) {
+    pager.innerHTML = "";
+    pager.classList.add("hidden");
+    return;
+  }
+
+  pager.classList.remove("hidden");
+  pager.innerHTML = `
+    <button id="flashPrevPage" class="button-secondary" type="button" ${state.pagina <= 1 ? "disabled" : ""}>
+      ← Anterior
+    </button>
+    <span>Página ${state.pagina} de ${state.paginas} · ${state.total} cards</span>
+    <button id="flashNextPage" class="button-secondary" type="button" ${state.pagina >= state.paginas ? "disabled" : ""}>
+      Próxima →
+    </button>
+  `;
+
+  $("flashPrevPage").addEventListener("click", async () => {
+    if (state.pagina <= 1) return;
+    state.pagina -= 1;
+    await carregarFlashcards();
+    window.scrollTo({ top: $("flashcardsLista").offsetTop - 100, behavior: "smooth" });
+  });
+
+  $("flashNextPage").addEventListener("click", async () => {
+    if (state.pagina >= state.paginas) return;
+    state.pagina += 1;
+    await carregarFlashcards();
+    window.scrollTo({ top: $("flashcardsLista").offsetTop - 100, behavior: "smooth" });
+  });
+}
+
 
 function renderLista() {
   const container = $("flashcardsLista");
