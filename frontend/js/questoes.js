@@ -15,6 +15,9 @@ const state = {
   paginas: 1,
   totalQuestoes: 0,
   limitePagina: 50,
+  cronogramaTaskId: null,
+  sessaoCronogramaAtiva: false,
+  cronogramaConcluido: false,
   alternativasManual: [
     { texto: "", correta: false },
     { texto: "", correta: false },
@@ -1703,7 +1706,23 @@ async function confirmarResposta() {
 }
 
 
+async function concluirTarefaCronogramaDaSessao() {
+  if (!state.sessaoCronogramaAtiva || state.cronogramaConcluido || !Number.isInteger(Number(state.cronogramaTaskId))) return;
+  try {
+    await api("/api/cronograma/task", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ taskId: Number(state.cronogramaTaskId), completed: true, progress: 100 })
+    });
+    state.cronogramaConcluido = true;
+  } catch (erro) {
+    console.error("Nao foi possivel concluir automaticamente a tarefa do cronograma:", erro);
+  }
+}
+
 function renderResultado() {
+
+  void concluirTarefaCronogramaDaSessao();
 
   const total =
     state.sessao.length;
@@ -2714,6 +2733,14 @@ async function iniciar() {
       )
         .trim();
 
+    const cronogramaTaskId = Number(params.get("cronogramaTaskId"));
+    const quantidadeCronograma = Math.max(1, Math.min(50, Number(params.get("quantidade")) || 10));
+    const autoIniciarCronograma = params.get("auto") === "1";
+
+    if (Number.isInteger(cronogramaTaskId) && cronogramaTaskId > 0) {
+      state.cronogramaTaskId = cronogramaTaskId;
+    }
+
     if (temaCronograma) {
 
       state.temaCronograma =
@@ -2780,6 +2807,13 @@ async function iniciar() {
           await aplicarFiltros(
             true
           );
+
+          if (autoIniciarCronograma && state.cronogramaTaskId && state.questoes.length) {
+            state.sessaoCronogramaAtiva = true;
+            state.cronogramaConcluido = false;
+            iniciarComQuestoes(embaralhar(state.questoes).slice(0, quantidadeCronograma));
+            return;
+          }
         }
         else {
           $("busca").value =
@@ -2788,6 +2822,13 @@ async function iniciar() {
           await aplicarFiltros(
             true
           );
+
+          if (autoIniciarCronograma && state.cronogramaTaskId && state.questoes.length) {
+            state.sessaoCronogramaAtiva = true;
+            state.cronogramaConcluido = false;
+            iniciarComQuestoes(embaralhar(state.questoes).slice(0, quantidadeCronograma));
+            return;
+          }
         }
       }
       catch (erroResolver) {
