@@ -19,6 +19,9 @@
     selectedAreas:
       new Set(),
 
+    selectedTopics:
+      new Set(),
+
     questionSource:
       "all",
 
@@ -727,39 +730,48 @@
   }
 
 
-  function populateTopicFilter() {
+  function renderTopics() {
 
-    const select =
-      $("simTopic");
-
-
-    if (!select) {
-      return;
-    }
+    const counts =
+      new Map();
 
 
-    const previous =
-      select.value;
+    sourceScopedQuestions()
+      .forEach(
+        function (
+          question
+        ) {
+
+          const topic =
+            String(
+              question.tema ||
+              ""
+            ).trim();
+
+
+          if (!topic) {
+            return;
+          }
+
+
+          counts.set(
+            topic,
+            (
+              counts.get(
+                topic
+              ) ||
+              0
+            ) +
+            1
+          );
+
+        }
+      );
 
 
     const topics =
       Array.from(
-        new Set(
-          sourceScopedQuestions()
-            .map(
-              function (
-                question
-              ) {
-
-                return String(
-                  question.tema ||
-                  ""
-                ).trim();
-
-              }
-            )
-            .filter(Boolean)
-        )
+        counts.keys()
       )
         .sort(
           function (
@@ -776,44 +788,168 @@
         );
 
 
-    select.innerHTML =
-      '<option value="">Todos os tópicos</option>' +
+    if (
+      state.selectedTopics.size ===
+      0
+    ) {
+
+      topics.forEach(
+        function (
+          topic
+        ) {
+
+          state.selectedTopics.add(
+            topic
+          );
+
+        }
+      );
+
+    }
+    else {
+
+      state.selectedTopics =
+        new Set(
+          Array.from(
+            state.selectedTopics
+          )
+            .filter(
+              function (
+                topic
+              ) {
+
+                return counts.has(
+                  topic
+                );
+
+              }
+            )
+        );
+
+
+      if (
+        state.selectedTopics.size ===
+        0
+      ) {
+
+        topics.forEach(
+          function (
+            topic
+          ) {
+
+            state.selectedTopics.add(
+              topic
+            );
+
+          }
+        );
+
+      }
+
+    }
+
+
+    const grid =
+      $("topicsGrid");
+
+
+    if (!grid) {
+      return;
+    }
+
+
+    grid.innerHTML =
       topics
         .map(
           function (
             topic
           ) {
 
-            return (
-              '<option value="' +
-              escapeHtml(
+            const selected =
+              state.selectedTopics.has(
                 topic
-              ) +
-              '">' +
-              escapeHtml(
-                topic
-              ) +
-              '</option>'
-            );
+              );
+
+
+            return `
+              <label
+                class="area-option topic-option ${selected ? "active" : ""}"
+              >
+                <input
+                  type="checkbox"
+                  data-topic="${escapeHtml(topic)}"
+                  ${selected ? "checked" : ""}
+                >
+
+                <strong>
+                  ${escapeHtml(topic)}
+                </strong>
+
+                <span>
+                  ${counts.get(topic)} quest.
+                </span>
+              </label>
+            `;
 
           }
         )
         .join("");
 
 
-    if (
-      topics.includes(
-        previous
+    grid
+      .querySelectorAll(
+        "[data-topic]"
       )
-    ) {
+      .forEach(
+        function (
+          input
+        ) {
 
-      select.value =
-        previous;
+          input.addEventListener(
+            "change",
+            function () {
 
-    }
+              const topic =
+                input.dataset.topic;
+
+
+              if (
+                input.checked
+              ) {
+
+                state.selectedTopics.add(
+                  topic
+                );
+
+              }
+              else {
+
+                state.selectedTopics.delete(
+                  topic
+                );
+
+              }
+
+
+              input
+                .closest(
+                  ".topic-option"
+                )
+                .classList.toggle(
+                  "active",
+                  input.checked
+                );
+
+
+              updateAvailable();
+
+            }
+          );
+
+        }
+      );
 
   }
-
 
   function renderAreas() {
 
@@ -980,7 +1116,7 @@
       areas.length;
 
 
-    populateTopicFilter();
+    renderTopics();
 
     updateAvailable();
 
@@ -1015,26 +1151,25 @@
       selectedDifficulties();
 
 
-    const selectedTopic =
-      $("simTopic")
-        ? normalize(
-            $("simTopic").value
-          )
-        : "";
-
-
     return sourceScopedQuestions()
       .filter(
         function (
           question
         ) {
 
+          const topic =
+            String(
+              question.tema ||
+              ""
+            ).trim();
+
+
           const topicMatches =
-            !selectedTopic ||
-            normalize(
-              question.tema
-            ) ===
-              selectedTopic;
+            state.selectedTopics.size ===
+              0 ||
+            state.selectedTopics.has(
+              topic
+            );
 
 
           return (
@@ -1761,7 +1896,7 @@
       ensureSimulationSetupModal();
 
 
-    populateTopicFilter();
+    renderTopics();
 
     updateAvailable();
 
@@ -3657,10 +3792,80 @@
       );
 
 
-    $("simTopic")
+    $("selectAllTopics")
       .addEventListener(
-        "change",
-        updateAvailable
+        "click",
+        function () {
+
+          state.selectedTopics.clear();
+
+          sourceScopedQuestions()
+            .forEach(
+              function (
+                question
+              ) {
+
+                const topic =
+                  String(
+                    question.tema ||
+                    ""
+                  ).trim();
+
+
+                if (topic) {
+                  state.selectedTopics.add(
+                    topic
+                  );
+                }
+
+              }
+            );
+
+
+          renderTopics();
+
+          updateAvailable();
+
+        }
+      );
+
+
+    $("clearTopics")
+      .addEventListener(
+        "click",
+        function () {
+
+          state.selectedTopics.clear();
+
+
+          $("topicsGrid")
+            .querySelectorAll(
+              "[data-topic]"
+            )
+            .forEach(
+              function (
+                input
+              ) {
+
+                input.checked =
+                  false;
+
+
+                input
+                  .closest(
+                    ".topic-option"
+                  )
+                  .classList.remove(
+                    "active"
+                  );
+
+              }
+            );
+
+
+          updateAvailable();
+
+        }
       );
 
 
