@@ -2897,3 +2897,35 @@ html[data-theme="pink-glitter"]
     gap: 5px;
   }
 }
+
+
+.flashcard-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px 0 8px;
+  flex-wrap: wrap;
+}
+
+.flashcard-pager span {
+  font-size: .85rem;
+  opacity: .72;
+}
+
+.flashcard-pager.hidden {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .flashcard-pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .flashcard-pager span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    text-align: center;
+  }
+}
