@@ -1172,56 +1172,8 @@
       });
 
     document
-      .querySelectorAll(".sidebar-logo")
-      .forEach(function(brand){
-        const copy=
-          brand.querySelector(":scope > div:last-child");
-
-        if(!copy){
-          return;
-        }
-
-        let credit=
-          copy.querySelector(".cortex-brand-credit");
-
-        if(!credit){
-          credit=
-            document.createElement("span");
-
-          credit.className=
-            "cortex-brand-credit";
-
-          credit.textContent=
-            "Por Pedro Henrique";
-
-          copy.appendChild(credit);
-        }
-      });
-
-    document
       .querySelectorAll(".cortex-mobile-sidebar-header")
       .forEach(function(header){
-        const copy=
-          header.querySelector(":scope > div:first-of-type");
-
-        if(copy){
-          let credit=
-            copy.querySelector(".cortex-brand-credit");
-
-          if(!credit){
-            credit=
-              document.createElement("span");
-
-            credit.className=
-              "cortex-brand-credit";
-
-            credit.textContent=
-              "Por Pedro Henrique";
-
-            copy.appendChild(credit);
-          }
-        }
-
         let image=header.querySelector(".cortex-mobile-brand-image");
 
         if(!image){
