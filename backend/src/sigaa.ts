@@ -52,6 +52,12 @@ type SigaaSession = {
   filesByCourse?:
     Map<string, any[]>;
 
+  rawFilesByCourse?:
+    Map<
+      string,
+      Map<string, any>
+    >;
+
   lessonsByCourse?:
     Map<string, any[]>;
 
@@ -1764,6 +1770,190 @@ function normalizeSigaaFileTitle(
 }
 
 
+function rawFileRegistryKey(
+  file:
+    any,
+  sourceKind:
+    "course" |
+    "lesson",
+  lessonId:
+    string |
+    null = null
+) {
+
+  return [
+    sourceKind,
+    lessonId ||
+      "",
+    safeText(
+      file?.id,
+      200
+    ),
+    normalizeSigaaFileTitle(
+      file?.title ||
+      file?.name
+    ),
+  ].join(
+    "::"
+  );
+
+}
+
+
+function registerRawCourseFile(
+  session:
+    SigaaSession,
+  courseId:
+    string,
+  file:
+    any,
+  sourceKind:
+    "course" |
+    "lesson",
+  lessonId:
+    string |
+    null = null
+) {
+
+  session.rawFilesByCourse ??=
+    new Map();
+
+
+  let registry =
+    session.rawFilesByCourse.get(
+      courseId
+    );
+
+
+  if (!registry) {
+
+    registry =
+      new Map();
+
+
+    session.rawFilesByCourse.set(
+      courseId,
+      registry
+    );
+
+  }
+
+
+  registry.set(
+    rawFileRegistryKey(
+      file,
+      sourceKind,
+      lessonId
+    ),
+    file
+  );
+
+}
+
+
+function findRegisteredRawCourseFile(
+  session:
+    SigaaSession,
+  courseId:
+    string,
+  fileId:
+    string,
+  sourceKind:
+    "course" |
+    "lesson" |
+    null,
+  lessonId:
+    string |
+    null,
+  expectedTitle:
+    string |
+    null
+) {
+
+  const registry =
+    session.rawFilesByCourse?.get(
+      courseId
+    );
+
+
+  if (!registry) {
+    return null;
+  }
+
+
+  const normalizedExpected =
+    expectedTitle
+      ? normalizeSigaaFileTitle(
+          expectedTitle
+        )
+      : "";
+
+
+  for (
+    const [
+      key,
+      file
+    ]
+    of registry
+  ) {
+
+    if (
+      String(
+        file?.id ||
+        ""
+      ) !==
+      fileId
+    ) {
+      continue;
+    }
+
+
+    if (
+      normalizedExpected &&
+      normalizeSigaaFileTitle(
+        file?.title ||
+        file?.name
+      ) !==
+        normalizedExpected
+    ) {
+      continue;
+    }
+
+
+    const parts =
+      key.split(
+        "::"
+      );
+
+
+    if (
+      sourceKind &&
+      parts[0] !==
+        sourceKind
+    ) {
+      continue;
+    }
+
+
+    if (
+      lessonId &&
+      parts[1] !==
+        lessonId
+    ) {
+      continue;
+    }
+
+
+    return file;
+
+  }
+
+
+  return null;
+
+}
+
+
 function serializeCourseFile(
   file:
     any,
@@ -1990,6 +2180,11 @@ export async function sigaaCourseDetail(
 
 
     session.filesByCourse?.delete(
+      courseId
+    );
+
+
+    session.rawFilesByCourse?.delete(
       courseId
     );
 
@@ -2265,6 +2460,15 @@ export async function sigaaCourseDetail(
         
                       used.add(
                         key
+                      );
+
+
+                      registerRawCourseFile(
+                        session,
+                        courseId,
+                        file,
+                        sourceKind,
+                        lessonId
                       );
         
         
@@ -3683,10 +3887,18 @@ export async function downloadSigaaCourseFile(
 
     let file:
       any =
-      null;
+      findRegisteredRawCourseFile(
+        session,
+        courseId,
+        fileId,
+        source,
+        lessonId,
+        expectedTitle
+      );
 
 
     if (
+      !file &&
       source ===
       "lesson"
     ) {
@@ -3703,6 +3915,7 @@ export async function downloadSigaaCourseFile(
 
     }
     else if (
+      !file &&
       source ===
       "course"
     ) {
@@ -3715,7 +3928,9 @@ export async function downloadSigaaCourseFile(
         );
 
     }
-    else {
+    else if (
+      !file
+    ) {
 
       /*
        * Compatibilidade com links antigos: primeiro procura
@@ -3826,6 +4041,24 @@ export async function downloadSigaaCourseFile(
               lessonId,
               expectedTitle
             );
+
+
+      if (
+        refreshed
+      ) {
+
+        registerRawCourseFile(
+          session,
+          courseId,
+          refreshed,
+          source ===
+            "course"
+            ? "course"
+            : "lesson",
+          lessonId
+        );
+
+      }
 
 
       if (!refreshed) {
