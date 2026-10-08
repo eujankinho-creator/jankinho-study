@@ -3747,7 +3747,7 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261008-pedro-credit2"
+              "/js/sidebar-standard.js?v=20261008-pedro-credit3"
             )
             .replace(
               /\/css\/ui-enhancements\.css\?v=[^"']+/g,
