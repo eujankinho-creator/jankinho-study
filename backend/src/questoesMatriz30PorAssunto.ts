@@ -399,7 +399,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
       let indiceLote = 0;
 
       while (faltam > 0) {
-        const quantidade = Math.min(faltam, 15);
+        const quantidade = Math.min(faltam, 30);
         const geradas = await gerarLote(
           item.disciplina,
           assunto,
