@@ -186,7 +186,7 @@ function atualizarFiltrosMeta() {
 function queryFlashcards() {
   const params = new URLSearchParams();
   params.set("pagina", String(state.pagina));
-  params.set("limite", "100");
+  params.set("limite", "24");
 
   Object.entries(state.filtros).forEach(([chave, valor]) => {
     if (!valor) return;
