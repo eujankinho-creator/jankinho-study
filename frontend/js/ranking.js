@@ -731,7 +731,7 @@ async function loadRanking() {
        * mantemos a lista geral abaixo
        * se existirem usuarios.
        */
-      if (users.length) {
+      if (ranking.length) {
 
         $("conteudo")
           .classList.remove(
@@ -746,7 +746,7 @@ async function loadRanking() {
 
 
         renderUsers(
-          users
+          ranking.slice(0, 3)
         );
 
 
@@ -773,22 +773,13 @@ async function loadRanking() {
 
 
     renderUsers(
-      users
+      ranking.slice(0, 3)
     );
 
 
-    const hasNotEligible =
-      users.some(
-        function (item) {
-          return !item.elegivel;
-        }
-      );
-
-
     $("avisoMinimo")
-      .classList.toggle(
-        "hidden",
-        !hasNotEligible
+      .classList.add(
+        "hidden"
       );
 
 
