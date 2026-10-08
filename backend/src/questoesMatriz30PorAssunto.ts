@@ -553,7 +553,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
               "Banco autoral Cortex",
 
             usuarioId:
-              usuario.id,
+              usuarioId,
 
             disciplinaId:
               disciplina.id,
