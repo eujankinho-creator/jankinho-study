@@ -868,7 +868,6 @@ async function iniciar() {
     const taskId = Number(params.get("cronogramaTaskId"));
     const quantidade = Math.max(1, Math.min(24, Number(params.get("quantidade")) || 10));
     const auto = params.get("auto") === "1";
-    const iniciarPorVoz = params.get("voice") === "1";
 
     if (Number.isInteger(taskId) && taskId > 0) {
       state.cronogramaTaskId = taskId;
@@ -899,40 +898,22 @@ async function iniciar() {
 
       await carregarFlashcards();
 
-      if (auto && (state.cronogramaTaskId || iniciarPorVoz)) {
+      if (auto && state.cronogramaTaskId) {
         if (state.flashcards.length < quantidade) {
           mostrarErro(
             "Ainda nao ha " + quantidade +
-            " flashcards disponiveis para esta revisao."
+            " flashcards disponiveis para concluir esta revisao do cronograma."
           );
           return;
         }
 
-        state.cronogramaAuto = Boolean(state.cronogramaTaskId);
+        state.cronogramaAuto = true;
         state.cronogramaConcluido = false;
         iniciarEstudo(quantidade);
         return;
       }
     }
 
-    if (
-      iniciarPorVoz &&
-      auto &&
-      !temaCronograma
-    ) {
-      if (state.flashcards.length < quantidade) {
-        mostrarErro(
-          "Ainda nao ha " + quantidade +
-          " flashcards disponiveis para esta revisao."
-        );
-        return;
-      }
-
-      state.cronogramaAuto = false;
-      state.cronogramaConcluido = false;
-      iniciarEstudo(quantidade);
-      return;
-    }
 
     atualizarModalEstudo();
   } catch (erro) {

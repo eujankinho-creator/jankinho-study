@@ -2781,7 +2781,6 @@ async function iniciar() {
     const cronogramaTaskId = Number(params.get("cronogramaTaskId"));
     const quantidadeCronograma = Math.max(1, Math.min(50, Number(params.get("quantidade")) || 10));
     const autoIniciarCronograma = params.get("auto") === "1";
-    const iniciarPorVoz = params.get("voice") === "1";
 
     if (Number.isInteger(cronogramaTaskId) && cronogramaTaskId > 0) {
       state.cronogramaTaskId = cronogramaTaskId;
@@ -2854,8 +2853,8 @@ async function iniciar() {
             true
           );
 
-          if (autoIniciarCronograma && (state.cronogramaTaskId || iniciarPorVoz) && state.questoes.length) {
-            state.sessaoCronogramaAtiva = Boolean(state.cronogramaTaskId);
+          if (autoIniciarCronograma && state.cronogramaTaskId && state.questoes.length) {
+            state.sessaoCronogramaAtiva = true;
             state.cronogramaConcluido = false;
             iniciarComQuestoes(embaralhar(state.questoes).slice(0, quantidadeCronograma));
             return;
@@ -2869,8 +2868,8 @@ async function iniciar() {
             true
           );
 
-          if (autoIniciarCronograma && (state.cronogramaTaskId || iniciarPorVoz) && state.questoes.length) {
-            state.sessaoCronogramaAtiva = Boolean(state.cronogramaTaskId);
+          if (autoIniciarCronograma && state.cronogramaTaskId && state.questoes.length) {
+            state.sessaoCronogramaAtiva = true;
             state.cronogramaConcluido = false;
             iniciarComQuestoes(embaralhar(state.questoes).slice(0, quantidadeCronograma));
             return;
@@ -2905,24 +2904,6 @@ async function iniciar() {
 
     }
 
-    if (
-      iniciarPorVoz &&
-      autoIniciarCronograma &&
-      !temaCronograma &&
-      state.questoes.length
-    ) {
-      state.sessaoCronogramaAtiva = false;
-      state.cronogramaConcluido = false;
-      iniciarComQuestoes(
-        embaralhar(
-          state.questoes
-        ).slice(
-          0,
-          quantidadeCronograma
-        )
-      );
-      return;
-    }
 
   }
   catch (erro) {

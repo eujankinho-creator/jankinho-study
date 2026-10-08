@@ -41,7 +41,6 @@ import { atenderAulas } from "./aulas";
 import { atenderCronograma } from "./cronograma";
 import { sincronizarFlashcardsInteligentes } from "./flashcardsInteligentes";
 import { gerarQuestoesIA } from "./iaQuestoes";
-import { criarCortexVoiceClientSecret } from "./cortexVoice";
 import { sincronizarQuestoesFarmacocineticaHaggi } from "./questoesFarmacocinetica";
 import { sincronizarQuestoesDiego } from "./questoesDiego";
 import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
@@ -4175,38 +4174,6 @@ const server =
             {
               sucesso: true,
             }
-          );
-
-          return;
-        }
-
-
-        /* CORTEX VOICE */
-
-        if (
-          caminho ===
-            "/api/voice/token" &&
-          metodo === "POST"
-        ) {
-          const usuarioId =
-            await exigirUsuario(
-              request,
-              response
-            );
-
-          if (!usuarioId) {
-            return;
-          }
-
-          const resultado =
-            await criarCortexVoiceClientSecret(
-              usuarioId
-            );
-
-          json(
-            response,
-            resultado.status,
-            resultado.data
           );
 
           return;
