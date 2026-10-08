@@ -48,7 +48,7 @@
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/sigaa-premium.css?v=20261008-theme-realfile1">
+  <link rel="stylesheet" href="/css/sigaa-premium.css?v=20261008-remember-login1">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261002-lab-new1">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261002-fluid-final4">
 
@@ -121,10 +121,19 @@
         </div>
         <form id="sigaaForm" class="sigaa-form">
           <div class="form-brand"><span>UFPB</span><strong>Acesso acadêmico</strong></div>
-          <label>Usuário SIGAA<input id="sigaaUsername" type="text" autocomplete="username" required placeholder="Seu usuário"></label>
-          <label>Senha<input id="sigaaPassword" type="password" autocomplete="current-password" required placeholder="Sua senha"></label>
+          <label>Usuário SIGAA<input id="sigaaUsername" name="username" type="text" autocomplete="username" required placeholder="Seu usuário"></label>
+          <label>Senha<input id="sigaaPassword" name="password" type="password" autocomplete="current-password" required placeholder="Sua senha"></label>
+
+          <label class="sigaa-remember">
+            <input id="sigaaRememberLogin" type="checkbox">
+            <span>
+              <strong>Lembrar login neste dispositivo</strong>
+              <small>O usuário fica salvo no Córtex. A senha usa o gerenciador seguro do navegador quando disponível.</small>
+            </span>
+          </label>
+
           <button id="connectButton" type="submit">Conectar com segurança</button>
-          <small class="form-footnote">A sessão expira ao reiniciar o servidor ou ao desconectar.</small>
+          <small class="form-footnote">A sessão do SIGAA continua temporária e pode expirar normalmente.</small>
         </form>
       </section>
 
@@ -285,7 +294,7 @@
     })();
   </script>
 
-<script defer src="/js/sigaa.js?v=20261008-real-file2"></script>
+<script defer src="/js/sigaa.js?v=20261008-remember-login1"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>
 </html>
