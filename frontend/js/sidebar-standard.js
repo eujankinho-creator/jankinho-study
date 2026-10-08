@@ -1223,8 +1223,7 @@
         }
 
         let image=header.querySelector(".cortex-mobile-brand-image");
-      .forEach(function(header){
-        let image=header.querySelector(".cortex-mobile-brand-image");
+
         if(!image){
           image=document.createElement("img");
           image.className="cortex-mobile-brand-image";
