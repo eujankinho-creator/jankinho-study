@@ -67,7 +67,7 @@
 
   <link
     rel="stylesheet"
-    href="/css/simulado-premium.css?v=20261008-launch-modal1"
+    href="/css/simulado-premium.css?v=20261008-efficient-filters2"
   >
 
   <link
@@ -678,6 +678,22 @@
                 </div>
               </div>
 
+              <div class="sim-filter-search-row">
+                <div class="sim-filter-search">
+                  <span>&#8981;</span>
+                  <input
+                    id="topicSearch"
+                    type="search"
+                    placeholder="Pesquisar tema ou tópico..."
+                    autocomplete="off"
+                  >
+                </div>
+
+                <span id="selectedTopicsCount" class="sim-selection-count">
+                  Todos os tópicos
+                </span>
+              </div>
+
               <div
                 id="topicsGrid"
                 class="areas-grid topics-grid"
@@ -775,6 +791,22 @@
 
               </div>
 
+
+              <div class="sim-filter-search-row">
+                <div class="sim-filter-search">
+                  <span>&#8981;</span>
+                  <input
+                    id="areaSearch"
+                    type="search"
+                    placeholder="Pesquisar disciplina ou área..."
+                    autocomplete="off"
+                  >
+                </div>
+
+                <span id="selectedAreasCount" class="sim-selection-count">
+                  0 selecionadas
+                </span>
+              </div>
 
               <div
                 id="areasGrid"
@@ -1248,7 +1280,7 @@
     })();
   </script>
 
-<script defer src="/js/simulado.js?v=20261008-launch-modal1"></script>
+<script defer src="/js/simulado.js?v=20261008-efficient-filters2"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 
 </body>
