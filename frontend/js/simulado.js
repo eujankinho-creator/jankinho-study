@@ -740,6 +740,20 @@
 
 
     sourceScopedQuestions()
+      .filter(
+        function (
+          question
+        ) {
+          return (
+            state.selectedAreas.size === 0 ||
+            state.selectedAreas.has(
+              questionArea(
+                question
+              )
+            )
+          );
+        }
+      )
       .forEach(
         function (
           question
@@ -789,6 +803,30 @@
 
           }
         );
+
+
+    const topicQuery =
+      normalize(
+        $("topicSearch")
+          ? $("topicSearch").value
+          : ""
+      );
+
+
+    const visibleTopics =
+      topicQuery
+        ? topics.filter(
+            function (
+              topic
+            ) {
+              return normalize(
+                topic
+              ).includes(
+                topicQuery
+              );
+            }
+          )
+        : topics;
 
 
     if (
@@ -846,7 +884,7 @@
 
 
     grid.innerHTML =
-      topics
+      visibleTopics
         .map(
           function (
             topic
@@ -881,6 +919,17 @@
           }
         )
         .join("");
+
+
+    if ($("selectedTopicsCount")) {
+      $("selectedTopicsCount").textContent =
+        state.selectedTopics.size === topics.length
+          ? "Todos os tópicos"
+          : state.selectedTopics.size +
+            (state.selectedTopics.size === 1
+              ? " tópico marcado"
+              : " tópicos marcados");
+    }
 
 
     grid
@@ -928,6 +977,8 @@
                 );
 
 
+              renderTopics();
+
               updateAvailable();
 
             }
@@ -964,30 +1015,33 @@
         );
 
 
-    if (
-      state.selectedAreas.size ===
-      0
-    ) {
-
-      areas.forEach(
-        function (
-          area
-        ) {
-
-          state.selectedAreas
-            .add(
-              area
-            );
-
-        }
+    const areaQuery =
+      normalize(
+        $("areaSearch")
+          ? $("areaSearch").value
+          : ""
       );
 
-    }
+
+    const visibleAreas =
+      areaQuery
+        ? areas.filter(
+            function (
+              area
+            ) {
+              return normalize(
+                area
+              ).includes(
+                areaQuery
+              );
+            }
+          )
+        : areas;
 
 
     $("areasGrid")
       .innerHTML =
-      areas
+      visibleAreas
         .map(
           function (
             area
@@ -1089,7 +1143,7 @@
                 );
 
 
-              updateAvailable();
+              renderAreas();
 
             }
           );
@@ -1101,6 +1155,15 @@
     $("simTotalAreas")
       .textContent =
       areas.length;
+
+
+    if ($("selectedAreasCount")) {
+      $("selectedAreasCount").textContent =
+        state.selectedAreas.size +
+        (state.selectedAreas.size === 1
+          ? " selecionada"
+          : " selecionadas");
+    }
 
 
     renderTopics();
@@ -1193,6 +1256,46 @@
       .textContent =
       count +
       " dispon\u00edveis";
+
+
+    const startButton =
+      $("startSimulation");
+
+
+    if (startButton) {
+      const startLabel =
+        startButton.querySelector(
+          "span"
+        );
+
+
+      const noArea =
+        state.selectedAreas.size ===
+        0;
+
+
+      const noDifficulty =
+        selectedDifficulties().length ===
+        0;
+
+
+      startButton.disabled =
+        noArea ||
+        noDifficulty ||
+        count === 0;
+
+
+      if (startLabel) {
+        startLabel.textContent =
+          noArea
+            ? "Selecione uma disciplina"
+            : noDifficulty
+              ? "Selecione uma dificuldade"
+              : count === 0
+                ? "Nenhuma questao disponivel"
+                : "Iniciar simulado";
+      }
+    }
 
     const emptyHint =
       $("romuloEmptyHint");
@@ -1844,6 +1947,35 @@
       );
 
 
+    const areaSection =
+      $("areasGrid")
+        ? $("areasGrid").closest(
+            ".config-section"
+          )
+        : null;
+
+
+    const topicSection =
+      $("topicsGrid")
+        ? $("topicsGrid").closest(
+            ".config-section"
+          )
+        : null;
+
+
+    if (
+      areaSection &&
+      topicSection &&
+      areaSection.parentNode ===
+        topicSection.parentNode
+    ) {
+      topicSection.parentNode.insertBefore(
+        areaSection,
+        topicSection
+      );
+    }
+
+
     $("closeSimulationSetup")
       .addEventListener(
         "click",
@@ -1881,7 +2013,19 @@
       ensureSimulationSetupModal();
 
 
-    renderTopics();
+    if ($("areaSearch")) {
+      $("areaSearch").value = "";
+    }
+
+
+    if ($("topicSearch")) {
+      $("topicSearch").value = "";
+    }
+
+
+    state.selectedAreas.clear();
+
+    renderAreas();
 
     updateAvailable();
 
@@ -3720,10 +3864,34 @@
       );
 
 
+    $("areaSearch")
+      .addEventListener(
+        "input",
+        function () {
+          renderAreas();
+        }
+      );
+
+
+    $("topicSearch")
+      .addEventListener(
+        "input",
+        function () {
+          renderTopics();
+        }
+      );
+
+
     $("selectAllAreas")
       .addEventListener(
         "click",
         function () {
+
+          const query =
+            normalize(
+              $("areaSearch").value
+            );
+
 
           areaMap()
             .forEach(
@@ -3732,10 +3900,19 @@
                 area
               ) {
 
-                state.selectedAreas
-                  .add(
+                if (
+                  !query ||
+                  normalize(
                     area
-                  );
+                  ).includes(
+                    query
+                  )
+                ) {
+                  state.selectedAreas
+                    .add(
+                      area
+                    );
+                }
 
               }
             );
@@ -3782,7 +3959,7 @@
             );
 
 
-          updateAvailable();
+          renderAreas();
 
         }
       );
@@ -3805,6 +3982,12 @@
           state.topicsInitialized =
             true;
 
+          const query =
+            normalize(
+              $("topicSearch").value
+            );
+
+
           sourceScopedQuestions()
             .forEach(
               function (
@@ -3818,7 +4001,17 @@
                   ).trim();
 
 
-                if (topic) {
+                if (
+                  topic &&
+                  (
+                    !query ||
+                    normalize(
+                      topic
+                    ).includes(
+                      query
+                    )
+                  )
+                ) {
                   state.selectedTopics.add(
                     topic
                   );

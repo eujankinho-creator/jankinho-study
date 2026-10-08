@@ -1377,3 +1377,123 @@ a.sim-question-source:hover {
   }
 }
 /* CORTEX SIMULADO LAUNCH + SETUP MODAL V2 END */
+
+
+/* =========================================================
+   CORTEX SIMULADO FILTER UX V3
+========================================================= */
+.sim-filter-search-row {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 9px;
+}
+
+.sim-filter-search {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 28px minmax(0,1fr);
+  align-items: center;
+  min-height: 42px;
+  border: 1px solid var(--theme-border);
+  border-radius: 12px;
+  background: color-mix(in srgb,var(--theme-surface-soft) 94%,transparent);
+  overflow: hidden;
+}
+
+.sim-filter-search:focus-within {
+  border-color: var(--theme-border-strong);
+  box-shadow: 0 0 0 3px var(--theme-accent-soft);
+}
+
+.sim-filter-search > span {
+  display: grid;
+  place-items: center;
+  color: var(--theme-text-muted);
+  font-size: 11px;
+}
+
+.sim-filter-search input {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--theme-text);
+  font: inherit;
+  font-size: 9px;
+}
+
+.sim-filter-search input::placeholder {
+  color: var(--theme-text-muted);
+}
+
+.sim-selection-count {
+  min-width: max-content;
+  padding: 6px 8px;
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  background: var(--theme-surface-soft);
+  color: var(--theme-text-muted);
+  font-size: 7px;
+  font-weight: 800;
+}
+
+.sim-setup-body .areas-grid,
+.sim-setup-body .topics-grid {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 7px;
+  max-height: 190px;
+}
+
+.sim-setup-body .area-option {
+  min-height: 42px;
+  padding: 8px 10px;
+}
+
+.sim-setup-body .area-option strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.start-simulation:disabled {
+  cursor: not-allowed;
+  opacity: .48;
+  filter: saturate(.65);
+  box-shadow: none;
+}
+
+.sim-setup-body .config-row {
+  gap: 10px;
+}
+
+.sim-setup-body .config-section + .config-section {
+  margin-top: 15px;
+}
+
+@media (max-width:900px) {
+  .sim-setup-body .areas-grid,
+  .sim-setup-body .topics-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+}
+
+@media (max-width:620px) {
+  .sim-filter-search-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sim-selection-count {
+    justify-self: start;
+  }
+
+  .sim-setup-body .areas-grid,
+  .sim-setup-body .topics-grid {
+    grid-template-columns: 1fr;
+    max-height: 220px;
+  }
+}
+/* CORTEX SIMULADO FILTER UX V3 END */

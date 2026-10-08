@@ -901,6 +901,9 @@ function renderPlanoDashboard(data) {
               escapeHtml(task.tipo || "ESTUDO") +
               (meta ? " · " + escapeHtml(meta) : "") +
               '</span></div>' +
+              (concluida
+                ? '<span class="dashboard-task-done-label">Concluído</span>'
+                : '') +
               '</a>'
             );
           }).join("");
