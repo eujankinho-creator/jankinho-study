@@ -2620,6 +2620,189 @@ function contentTypeForFile(
 }
 
 
+function validarArquivoSigaaBaixado(
+  buffer:
+    Buffer,
+  filename:
+    string
+) {
+
+  if (
+    !buffer ||
+    buffer.length <
+      4
+  ) {
+    return false;
+  }
+
+
+  const inicioTexto =
+    buffer
+      .subarray(
+        0,
+        Math.min(
+          buffer.length,
+          512
+        )
+      )
+      .toString(
+        "utf8"
+      )
+      .trimStart()
+      .toLowerCase();
+
+
+  /*
+   * Nunca aceitar pagina HTML, tela de login, erro ou
+   * redirecionamento salvo com nome de PDF/Word.
+   */
+  if (
+    inicioTexto.startsWith(
+      "<!doctype html"
+    ) ||
+    inicioTexto.startsWith(
+      "<html"
+    ) ||
+    inicioTexto.includes(
+      "<form"
+    ) &&
+    (
+      inicioTexto.includes(
+        "login"
+      ) ||
+      inicioTexto.includes(
+        "senha"
+      ) ||
+      inicioTexto.includes(
+        "sigaa"
+      )
+    )
+  ) {
+    return false;
+  }
+
+
+  const extension =
+    path.extname(
+      filename
+    )
+      .toLowerCase();
+
+
+  const startsWith =
+    function (
+      signature:
+        number[]
+    ) {
+
+      return signature.every(
+        function (
+          value,
+          index
+        ) {
+
+          return (
+            buffer[index] ===
+            value
+          );
+
+        }
+      );
+
+    };
+
+
+  if (
+    extension ===
+      ".pdf"
+  ) {
+    return buffer
+      .subarray(
+        0,
+        5
+      )
+      .toString(
+        "ascii"
+      ) ===
+      "%PDF-";
+  }
+
+
+  if (
+    extension ===
+      ".docx" ||
+    extension ===
+      ".xlsx" ||
+    extension ===
+      ".pptx" ||
+    extension ===
+      ".zip"
+  ) {
+    return startsWith([
+      0x50,
+      0x4b,
+    ]);
+  }
+
+
+  if (
+    extension ===
+      ".doc" ||
+    extension ===
+      ".xls" ||
+    extension ===
+      ".ppt"
+  ) {
+    return startsWith([
+      0xd0,
+      0xcf,
+      0x11,
+      0xe0,
+      0xa1,
+      0xb1,
+      0x1a,
+      0xe1,
+    ]);
+  }
+
+
+  if (
+    extension ===
+      ".png"
+  ) {
+    return startsWith([
+      0x89,
+      0x50,
+      0x4e,
+      0x47,
+    ]);
+  }
+
+
+  if (
+    extension ===
+      ".jpg" ||
+    extension ===
+      ".jpeg"
+  ) {
+    return startsWith([
+      0xff,
+      0xd8,
+      0xff,
+    ]);
+  }
+
+
+  /*
+   * Para outros formatos, a verificacao principal e nao ser
+   * HTML/login e ter conteudo real.
+   */
+  return buffer.length >
+    16;
+
+}
+
+
 async function directAuthenticatedSigaaDownload(
   file:
     any,
@@ -3068,49 +3251,19 @@ async function downloadResolvedSigaaFile(
     string
 ) {
 
-  try {
-
-    return await directAuthenticatedSigaaDownload(
-      file,
-      tempDirectory
-    );
-
-  }
-  catch (
-    directError
-  ) {
-
-    console.warn(
-      "SIGAA direct authenticated download:",
-      directError instanceof Error
-        ? directError.message
-        : String(
-            directError
-          )
-    );
-
-
-    if (
-      typeof file?.download ===
-      "function"
-    ) {
-
-      return withTimeout<string>(
-        file.download(
-          tempDirectory,
-          undefined,
-          false
-        ) as Promise<string>,
-        45000,
-        "Timeout ao baixar arquivo."
-      );
-
-    }
-
-
-    throw directError;
-
-  }
+  /*
+   * Importante: o Cortex so entrega arquivos que conseguiu
+   * baixar diretamente pela sessao HTTP autenticada do SIGAA.
+   *
+   * O fallback file.download() da biblioteca foi removido
+   * porque ele pode salvar respostas intermediarias/HTML com
+   * o nome do arquivo, fazendo parecer um PDF/Word real quando
+   * o conteudo nao corresponde ao material do SIGAA.
+   */
+  return directAuthenticatedSigaaDownload(
+    file,
+    tempDirectory
+  );
 
 }
 
@@ -3613,6 +3766,36 @@ export async function downloadSigaaCourseFile(
         "arquivo",
         180
       );
+
+
+    if (
+      !validarArquivoSigaaBaixado(
+        buffer,
+        filename
+      )
+    ) {
+
+      console.warn(
+        "SIGAA file rejected: conteudo nao corresponde a um arquivo real.",
+        {
+          courseId,
+          fileId,
+          filename,
+          bytes:
+            buffer.length,
+        }
+      );
+
+
+      return {
+        status:
+          502,
+
+        error:
+          "O SIGAA nao entregou o arquivo real. Atualize a disciplina e tente novamente.",
+      };
+
+    }
 
 
     return {
