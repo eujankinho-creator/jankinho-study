@@ -457,3 +457,55 @@
   }
 }
 /* CORTEX ACADEMIC PRIORITY V2 END */
+
+
+/* =========================================================
+   CORTEX SIGAA REMEMBER LOGIN V1
+========================================================= */
+.sigaa-remember{
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:10px;
+  align-items:flex-start;
+  padding:10px 11px;
+  border:1px solid var(--theme-border);
+  border-radius:11px;
+  background:var(--theme-surface-soft);
+  cursor:pointer;
+}
+
+.sigaa-remember input{
+  width:15px!important;
+  height:15px!important;
+  min-height:0!important;
+  margin:1px 0 0!important;
+  accent-color:var(--theme-accent);
+}
+
+.sigaa-remember span{
+  min-width:0;
+}
+
+.sigaa-remember strong,
+.sigaa-remember small{
+  display:block;
+}
+
+.sigaa-remember strong{
+  color:var(--theme-text-soft);
+  font-size:8px;
+  font-weight:850;
+}
+
+.sigaa-remember small{
+  margin-top:3px;
+  color:var(--theme-text-muted);
+  font-size:7px;
+  line-height:1.45;
+}
+
+.sigaa-remember:has(input:checked){
+  border-color:var(--theme-border-strong);
+  background:var(--theme-accent-soft);
+}
+/* CORTEX SIGAA REMEMBER LOGIN V1 END */
