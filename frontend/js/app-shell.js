@@ -4124,10 +4124,17 @@
         !tokenResponse.ok ||
         !tokenData.value
       ) {
-        throw new Error(
-          tokenData.error ||
-          "Não foi possível iniciar o Cortex Voice."
-        );
+        const error =
+          new Error(
+            tokenData.error ||
+            "Não foi possível iniciar o Cortex Voice."
+          );
+
+        error.code =
+          tokenData.code ||
+          "VOICE_SESSION_ERROR";
+
+        throw error;
       }
 
 
@@ -4344,15 +4351,27 @@
         );
 
 
+      const creditsExhausted =
+        error?.code ===
+          "VOICE_CREDITS_EXHAUSTED";
+
       cortexVoiceSetStatus(
         denied
           ? "Microfone bloqueado"
-          : "Não foi possível conectar",
+          : (
+              creditsExhausted
+                ? "Créditos da API esgotados"
+                : "Não foi possível conectar"
+            ),
         denied
           ? "Permita o uso do microfone no navegador e tente novamente."
           : (
-              error?.message ||
-              "Tente novamente em alguns segundos."
+              creditsExhausted
+                ? "Adicione créditos na Plataforma de API da OpenAI. A assinatura do ChatGPT é separada."
+                : (
+                    error?.message ||
+                    "Tente novamente em alguns segundos."
+                  )
             ),
         "error"
       );
