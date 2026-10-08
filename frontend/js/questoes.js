@@ -1,6 +1,7 @@
 const state = {
   questoes: [],
   disciplinas: [],
+  matriz: [],
   respondidasIds: new Set(),
   filtradas: [],
   sessao: [],
@@ -442,6 +443,13 @@ function popularDisciplinas() {
   );
 
 
+  state.matriz.forEach(
+    function (item) {
+      adicionar(item && item.disciplina);
+    }
+  );
+
+
   const nomes =
     Array.from(
       mapa.values()
@@ -505,6 +513,64 @@ function popularDisciplinas() {
 }
 
 
+
+function popularAssuntos() {
+  const select = $("filtroAssunto");
+  if (!select) return;
+
+  const disciplinaSelecionada =
+    t($("filtroDisciplina") && $("filtroDisciplina").value)
+      .trim()
+      .toLocaleLowerCase("pt-BR");
+
+  const mapa = new Map();
+
+  function adicionar(nome) {
+    const valor = t(nome).trim();
+    if (!valor) return;
+    const chave = valor.toLocaleLowerCase("pt-BR");
+    if (!mapa.has(chave)) mapa.set(chave, valor);
+  }
+
+  state.matriz.forEach(function (item) {
+    const nomeDisciplina = t(item && item.disciplina).trim();
+    const bate =
+      !disciplinaSelecionada ||
+      nomeDisciplina.toLocaleLowerCase("pt-BR") === disciplinaSelecionada;
+
+    if (bate && Array.isArray(item && item.assuntos)) {
+      item.assuntos.forEach(adicionar);
+    }
+  });
+
+  state.questoes.forEach(function (questao) {
+    const nomeDisciplina =
+      t(questao && questao.disciplina && questao.disciplina.nome).trim();
+    const bate =
+      !disciplinaSelecionada ||
+      nomeDisciplina.toLocaleLowerCase("pt-BR") === disciplinaSelecionada;
+
+    if (bate) adicionar(questao && questao.tema);
+  });
+
+  const atual = select.value;
+  select.innerHTML = '<option value="">Todos os assuntos</option>';
+
+  Array.from(mapa.values())
+    .sort(function (a, b) { return a.localeCompare(b, "pt-BR"); })
+    .forEach(function (nome) {
+      const option = document.createElement("option");
+      option.value = nome;
+      option.textContent = nome;
+      select.appendChild(option);
+    });
+
+  if (Array.from(select.options).some(function (o) { return o.value === atual; })) {
+    select.value = atual;
+  }
+}
+
+
 async function carregarDados() {
 
   try {
@@ -516,7 +582,8 @@ async function carregarDados() {
       await Promise.all([
         api("/api/questoes"),
         api("/api/disciplinas"),
-        api("/api/respostas")
+        api("/api/respostas"),
+        api("/api/questoes/matriz")
       ]);
 
 
@@ -536,6 +603,11 @@ async function carregarDados() {
         : [];
 
 
+    state.matriz =
+      Array.isArray(resultados[3])
+        ? resultados[3]
+        : [];
+
     state.respondidasIds =
       new Set(
         (
@@ -551,6 +623,7 @@ async function carregarDados() {
 
 
     popularDisciplinas();
+    popularAssuntos();
 
     aplicarFiltros();
 
@@ -615,6 +688,11 @@ function aplicarFiltros() {
     $("filtroDificuldade")
       .value;
 
+  const assunto =
+    $("filtroAssunto")
+      ? $("filtroAssunto").value
+      : "";
+
 
   state.filtradas =
     state.questoes.filter(
@@ -667,6 +745,15 @@ function aplicarFiltros() {
           );
 
 
+        const bateAssunto =
+          !assunto ||
+          t(questao.tema)
+            .trim()
+            .toLocaleLowerCase("pt-BR") ===
+          assunto
+            .trim()
+            .toLocaleLowerCase("pt-BR");
+
         const bateDificuldade =
           !dificuldade ||
           normalizarDificuldade(
@@ -680,6 +767,7 @@ function aplicarFiltros() {
         return (
           bateBusca &&
           bateDisciplina &&
+          bateAssunto &&
           bateDificuldade
         );
 
@@ -710,6 +798,7 @@ function aplicarFiltros() {
     Boolean(
       busca ||
       disciplina ||
+      assunto ||
       dificuldade
     );
 
@@ -2555,3 +2644,32 @@ async function iniciar() {
 
 
 iniciar();
+
+
+/* Matriz global: disciplina -> assunto */
+(function () {
+  function bindMatrizFiltros() {
+    const disciplina = $("filtroDisciplina");
+    const assunto = $("filtroAssunto");
+
+    if (disciplina && !disciplina.dataset.matrizBound) {
+      disciplina.dataset.matrizBound = "1";
+      disciplina.addEventListener("change", function () {
+        if (assunto) assunto.value = "";
+        popularAssuntos();
+        aplicarFiltros();
+      });
+    }
+
+    if (assunto && !assunto.dataset.matrizBound) {
+      assunto.dataset.matrizBound = "1";
+      assunto.addEventListener("change", aplicarFiltros);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindMatrizFiltros);
+  } else {
+    bindMatrizFiltros();
+  }
+})();
