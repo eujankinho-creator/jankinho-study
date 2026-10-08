@@ -15,6 +15,7 @@ const state = {
   paginas: 1,
   totalQuestoes: 0,
   limitePagina: 50,
+  quantidadeSessao: 10,
   cronogramaTaskId: null,
   sessaoCronogramaAtiva: false,
   cronogramaConcluido: false,
@@ -1123,6 +1124,214 @@ function embaralhar(array) {
 }
 
 
+
+function garantirModalSessaoQuestoes() {
+  let modal = $("questionSessionSetup");
+  if (modal) return modal;
+
+  modal = document.createElement("div");
+  modal.id = "questionSessionSetup";
+  modal.className = "question-session-modal";
+  modal.innerHTML = `
+    <div class="question-session-dialog" role="dialog" aria-modal="true" aria-labelledby="questionSessionTitle">
+      <div class="question-session-header">
+        <div>
+          <span>CONFIGURAR SESSÃO</span>
+          <h2 id="questionSessionTitle">Escolha o que praticar</h2>
+          <p>Defina área, disciplina, assunto, dificuldade e quantidade de questões.</p>
+        </div>
+        <button id="fecharQuestionSessionSetup" type="button" aria-label="Fechar">&times;</button>
+      </div>
+
+      <div class="question-session-grid">
+        <label>
+          <span>Área / disciplina</span>
+          <select id="questionSetupDisciplina"></select>
+        </label>
+
+        <label>
+          <span>Assunto / tópico</span>
+          <select id="questionSetupAssunto"></select>
+        </label>
+
+        <label>
+          <span>Dificuldade</span>
+          <select id="questionSetupDificuldade">
+            <option value="">Todas</option>
+            <option value="Facil">Fácil</option>
+            <option value="Medio">Médio</option>
+            <option value="Dificil">Difícil</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Quantidade</span>
+          <select id="questionSetupQuantidade">
+            <option value="10">10 questões</option>
+            <option value="20">20 questões</option>
+            <option value="30">30 questões</option>
+            <option value="50">50 questões</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="question-session-footer">
+        <span id="questionSetupDisponiveis"></span>
+        <button id="confirmarQuestionSessionSetup" class="button-primary" type="button">
+          Iniciar sessão
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  $("fecharQuestionSessionSetup").addEventListener("click", fecharModalSessaoQuestoes);
+  modal.addEventListener("mousedown", function(event) {
+    if (event.target === modal) fecharModalSessaoQuestoes();
+  });
+
+  $("questionSetupDisciplina").addEventListener("change", atualizarAssuntosModalQuestoes);
+  $("confirmarQuestionSessionSetup").addEventListener("click", iniciarSessaoConfigurada);
+
+  return modal;
+}
+
+function preencherSelectSessaoQuestoes(id, itens, placeholder, atual) {
+  const select = $(id);
+  if (!select) return;
+
+  select.innerHTML =
+    '<option value="">' + escapeHtml(placeholder) + '</option>' +
+    (itens || []).map(function(item) {
+      return '<option value="' + escapeHtml(item) + '">' + escapeHtml(item) + '</option>';
+    }).join("");
+
+  if (atual && Array.from(select.options).some(function(option) { return option.value === atual; })) {
+    select.value = atual;
+  }
+}
+
+function disciplinasSessaoQuestoes() {
+  const mapa = new Map();
+
+  state.matriz.forEach(function(item) {
+    const nome = t(item && item.disciplina).trim();
+    if (nome) mapa.set(nome.toLocaleLowerCase("pt-BR"), nome);
+  });
+
+  state.questoes.forEach(function(questao) {
+    const nome = t(questao && questao.disciplina && questao.disciplina.nome).trim();
+    if (nome) mapa.set(nome.toLocaleLowerCase("pt-BR"), nome);
+  });
+
+  return Array.from(mapa.values()).sort(function(a,b) {
+    return a.localeCompare(b,"pt-BR");
+  });
+}
+
+function assuntosSessaoQuestoes(disciplina) {
+  const mapa = new Map();
+  const normalizada = t(disciplina).trim().toLocaleLowerCase("pt-BR");
+
+  state.matriz.forEach(function(item) {
+    const nomeDisciplina = t(item && item.disciplina).trim().toLocaleLowerCase("pt-BR");
+    if (normalizada && nomeDisciplina !== normalizada) return;
+
+    (Array.isArray(item && item.assuntos) ? item.assuntos : []).forEach(function(assunto) {
+      const nome = t(assunto).trim();
+      if (nome) mapa.set(nome.toLocaleLowerCase("pt-BR"), nome);
+    });
+  });
+
+  state.questoes.forEach(function(questao) {
+    const nomeDisciplina = t(questao && questao.disciplina && questao.disciplina.nome).trim().toLocaleLowerCase("pt-BR");
+    if (normalizada && nomeDisciplina !== normalizada) return;
+
+    const nome = t(questao && questao.tema).trim();
+    if (nome) mapa.set(nome.toLocaleLowerCase("pt-BR"), nome);
+  });
+
+  return Array.from(mapa.values()).sort(function(a,b) {
+    return a.localeCompare(b,"pt-BR");
+  });
+}
+
+function atualizarAssuntosModalQuestoes() {
+  const disciplina = $("questionSetupDisciplina")?.value || "";
+  preencherSelectSessaoQuestoes(
+    "questionSetupAssunto",
+    assuntosSessaoQuestoes(disciplina),
+    "Todos os assuntos",
+    $("filtroAssunto")?.value || ""
+  );
+}
+
+function atualizarModalSessaoQuestoes() {
+  garantirModalSessaoQuestoes();
+
+  preencherSelectSessaoQuestoes(
+    "questionSetupDisciplina",
+    disciplinasSessaoQuestoes(),
+    "Todas as disciplinas",
+    $("filtroDisciplina")?.value || ""
+  );
+
+  atualizarAssuntosModalQuestoes();
+  $("questionSetupDificuldade").value = $("filtroDificuldade")?.value || "";
+  $("questionSetupQuantidade").value = String(state.quantidadeSessao || 10);
+  $("questionSetupDisponiveis").textContent =
+    state.totalQuestoes + (state.totalQuestoes === 1 ? " questão disponível" : " questões disponíveis");
+}
+
+function abrirModalSessaoQuestoes() {
+  atualizarModalSessaoQuestoes();
+  $("questionSessionSetup").classList.add("open");
+  document.body.classList.add("question-session-modal-open");
+}
+
+function fecharModalSessaoQuestoes() {
+  const modal = $("questionSessionSetup");
+  if (modal) modal.classList.remove("open");
+  document.body.classList.remove("question-session-modal-open");
+}
+
+async function iniciarSessaoConfigurada() {
+  $("filtroDisciplina").value = $("questionSetupDisciplina")?.value || "";
+  popularAssuntos();
+
+  const assunto = $("questionSetupAssunto")?.value || "";
+  if (
+    assunto &&
+    Array.from($("filtroAssunto").options).some(function(option) { return option.value === assunto; })
+  ) {
+    $("filtroAssunto").value = assunto;
+  }
+
+  $("filtroDificuldade").value = $("questionSetupDificuldade")?.value || "";
+  $("busca").value = "";
+  state.quantidadeSessao = Math.max(
+    1,
+    Math.min(50, Number($("questionSetupQuantidade")?.value) || 10)
+  );
+
+  await aplicarFiltros(true);
+
+  fecharModalSessaoQuestoes();
+
+  if (!state.filtradas.length) {
+    mostrarErro("Nao ha questoes disponiveis para essa configuracao.");
+    return;
+  }
+
+  iniciarComQuestoes(
+    embaralhar(state.filtradas).slice(
+      0,
+      Math.min(state.quantidadeSessao, state.filtradas.length)
+    )
+  );
+}
+
 function iniciarComQuestoes(
   questoes
 ) {
@@ -1176,34 +1385,7 @@ function iniciarComQuestoes(
 
 
 function iniciarSessao() {
-
-  if (
-    state.filtradas.length === 0
-  ) {
-
-    mostrarErro(
-      "Nao ha questoes disponiveis para iniciar uma sessao."
-    );
-
-    return;
-  }
-
-
-  const quantidade =
-    Math.min(
-      10,
-      state.filtradas.length
-    );
-
-
-  iniciarComQuestoes(
-    embaralhar(
-      state.filtradas
-    ).slice(
-      0,
-      quantidade
-    )
-  );
+  abrirModalSessaoQuestoes();
 }
 
 
@@ -2581,6 +2763,9 @@ async function iniciar() {
       carregarUsuario(),
       carregarDados()
     ]);
+
+    garantirModalSessaoQuestoes();
+    atualizarModalSessaoQuestoes();
 
     const params =
       new URLSearchParams(

@@ -2929,3 +2929,193 @@ html[data-theme="pink-glitter"]
     text-align: center;
   }
 }
+
+
+/* CORTEX FLASHCARDS SESSION SETUP V2 */
+.flash-study-modal-open {
+  overflow: hidden !important;
+}
+
+.flash-study-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300000;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(0,0,0,.72);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .16s ease, visibility .16s ease;
+}
+
+.flash-study-modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.flash-study-dialog {
+  width: min(760px,calc(100vw - 44px));
+  border: 1px solid var(--theme-border);
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 88% 0,rgba(var(--theme-accent-rgb),.12),transparent 30%),
+    color-mix(in srgb,var(--theme-surface-strong) 97%,black);
+  box-shadow:
+    0 34px 100px rgba(0,0,0,.58),
+    0 0 40px rgba(var(--theme-accent-rgb),.05);
+  transform: translateY(10px) scale(.985);
+  transition: transform .18s ease;
+}
+
+.flash-study-modal.open .flash-study-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.flash-study-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 24px 24px 19px;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.flash-study-dialog-header > div > span {
+  display: block;
+  color: var(--theme-accent-2);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+
+.flash-study-dialog-header h2 {
+  margin: 7px 0 5px;
+  color: var(--theme-text);
+  font-size: 23px;
+  letter-spacing: -.035em;
+}
+
+.flash-study-dialog-header p {
+  margin: 0;
+  color: var(--theme-text-muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+#fecharFlashStudySetup {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--theme-border);
+  border-radius: 12px;
+  background: var(--theme-surface-soft);
+  color: var(--theme-text-muted);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#fecharFlashStudySetup:hover {
+  border-color: var(--theme-border-strong);
+  color: var(--theme-text);
+  background: var(--theme-accent-soft);
+}
+
+.flash-study-config-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
+  padding: 22px 24px;
+}
+
+.flash-study-config-grid label {
+  display: grid;
+  gap: 8px;
+}
+
+.flash-study-config-grid label > span {
+  color: var(--theme-text-muted);
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.flash-study-config-grid select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--theme-border);
+  border-radius: 13px;
+  background: color-mix(in srgb,var(--theme-surface) 96%,black);
+  color: var(--theme-text);
+  padding: 0 13px;
+  font: inherit;
+  font-size: 11px;
+  outline: none;
+}
+
+.flash-study-config-grid select:focus {
+  border-color: var(--theme-border-strong);
+  box-shadow: 0 0 0 3px var(--theme-accent-soft);
+}
+
+.flash-study-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px 22px;
+  border-top: 1px solid var(--theme-border);
+}
+
+#flashSetupDisponiveis {
+  color: var(--theme-text-muted);
+  font-size: 10px;
+}
+
+#confirmarFlashStudySetup {
+  min-width: 180px;
+  min-height: 46px;
+}
+
+@media (max-width:700px) {
+  .flash-study-modal {
+    align-items: end;
+    padding: 0;
+  }
+
+  .flash-study-dialog {
+    width: 100%;
+    border-radius: 22px 22px 0 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .flash-study-dialog-header {
+    padding: 18px 16px 15px;
+  }
+
+  .flash-study-config-grid {
+    grid-template-columns: 1fr;
+    max-height: 58vh;
+    overflow-y: auto;
+    padding: 16px;
+  }
+
+  .flash-study-dialog-footer {
+    padding: 14px 16px 20px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #confirmarFlashStudySetup {
+    width: 100%;
+  }
+}
+/* CORTEX FLASHCARDS SESSION SETUP V2 END */
