@@ -3750,6 +3750,10 @@ async function servirArquivo(
               "/js/sidebar-standard.js?v=20261006-pmpe2"
             )
             .replace(
+              /\/css\/ui-enhancements\.css\?v=[^"']+/g,
+              "/css/ui-enhancements.css?v=20261008-timer-premium3"
+            )
+            .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
               "/css/sidebar-standard.css?v=20261006-logo-theme1"
             )
@@ -4763,9 +4767,13 @@ const server =
           if (
             metodo === "POST"
           ) {
-            await criarDisciplina(
-              request,
-              response
+            json(
+              response,
+              403,
+              {
+                error:
+                  "Cadastro de disciplinas por usuarios foi desativado."
+              }
             );
 
             return;

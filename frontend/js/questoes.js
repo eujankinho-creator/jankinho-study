@@ -1879,87 +1879,6 @@ function fecharModal(id) {
 }
 
 
-async function criarDisciplina() {
-
-  const input =
-    $("novaDisciplina");
-
-
-  const nome =
-    input.value.trim();
-
-
-  if (!nome) {
-    return;
-  }
-
-
-  const botao =
-    $("criarDisciplina");
-
-
-  try {
-
-    botao.disabled = true;
-    botao.textContent =
-      "Criando...";
-
-
-    const dados =
-      await api(
-        "/api/disciplinas",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-              nome
-            })
-        }
-      );
-
-
-    input.value = "";
-
-    fecharModal(
-      "modalDisciplina"
-    );
-
-
-    await carregarDados();
-
-
-    $("disciplinaIA")
-      .value =
-      dados.nome || nome;
-
-
-    $("disciplinaManual")
-      .value =
-      dados.nome || nome;
-
-  }
-  catch (erro) {
-
-    mostrarErro(
-      erro.message ||
-      "Nao foi possivel criar a disciplina."
-    );
-  }
-  finally {
-
-    botao.disabled = false;
-    botao.textContent =
-      "Criar disciplina";
-  }
-}
-
-
 function renderAlternativasEditor() {
 
   const container =
@@ -2577,26 +2496,6 @@ $("abrirManual")
   );
 
 
-$("abrirDisciplina")
-  .addEventListener(
-    "click",
-    function () {
-
-      abrirModal(
-        "modalDisciplina"
-      );
-
-      setTimeout(
-        function () {
-          $("novaDisciplina")
-            .focus();
-        },
-        50
-      );
-    }
-  );
-
-
 document
   .querySelectorAll(
     "[data-close]"
@@ -2646,45 +2545,6 @@ $("modalManual")
         fecharModal(
           "modalManual"
         );
-      }
-    }
-  );
-
-
-$("modalDisciplina")
-  .addEventListener(
-    "mousedown",
-    function (event) {
-
-      if (
-        event.target ===
-        $("modalDisciplina")
-      ) {
-        fecharModal(
-          "modalDisciplina"
-        );
-      }
-    }
-  );
-
-
-$("criarDisciplina")
-  .addEventListener(
-    "click",
-    criarDisciplina
-  );
-
-
-$("novaDisciplina")
-  .addEventListener(
-    "keydown",
-    function (event) {
-
-      if (
-        event.key ===
-        "Enter"
-      ) {
-        criarDisciplina();
       }
     }
   );

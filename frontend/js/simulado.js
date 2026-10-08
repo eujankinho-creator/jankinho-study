@@ -19,6 +19,12 @@
     selectedAreas:
       new Set(),
 
+    selectedTopics:
+      new Set(),
+
+    topicsInitialized:
+      false,
+
     questionSource:
       "all",
 
@@ -727,6 +733,211 @@
   }
 
 
+  function renderTopics() {
+
+    const counts =
+      new Map();
+
+
+    sourceScopedQuestions()
+      .forEach(
+        function (
+          question
+        ) {
+
+          const topic =
+            String(
+              question.tema ||
+              ""
+            ).trim();
+
+
+          if (!topic) {
+            return;
+          }
+
+
+          counts.set(
+            topic,
+            (
+              counts.get(
+                topic
+              ) ||
+              0
+            ) +
+            1
+          );
+
+        }
+      );
+
+
+    const topics =
+      Array.from(
+        counts.keys()
+      )
+        .sort(
+          function (
+            a,
+            b
+          ) {
+
+            return a.localeCompare(
+              b,
+              "pt-BR"
+            );
+
+          }
+        );
+
+
+    if (
+      !state.topicsInitialized
+    ) {
+
+      topics.forEach(
+        function (
+          topic
+        ) {
+
+          state.selectedTopics.add(
+            topic
+          );
+
+        }
+      );
+
+
+      state.topicsInitialized =
+        true;
+
+    }
+    else {
+
+      state.selectedTopics =
+        new Set(
+          Array.from(
+            state.selectedTopics
+          )
+            .filter(
+              function (
+                topic
+              ) {
+
+                return counts.has(
+                  topic
+                );
+
+              }
+            )
+        );
+
+
+    }
+
+
+    const grid =
+      $("topicsGrid");
+
+
+    if (!grid) {
+      return;
+    }
+
+
+    grid.innerHTML =
+      topics
+        .map(
+          function (
+            topic
+          ) {
+
+            const selected =
+              state.selectedTopics.has(
+                topic
+              );
+
+
+            return `
+              <label
+                class="area-option topic-option ${selected ? "active" : ""}"
+              >
+                <input
+                  type="checkbox"
+                  data-topic="${escapeHtml(topic)}"
+                  ${selected ? "checked" : ""}
+                >
+
+                <strong>
+                  ${escapeHtml(topic)}
+                </strong>
+
+                <span>
+                  ${counts.get(topic)} quest.
+                </span>
+              </label>
+            `;
+
+          }
+        )
+        .join("");
+
+
+    grid
+      .querySelectorAll(
+        "[data-topic]"
+      )
+      .forEach(
+        function (
+          input
+        ) {
+
+          input.addEventListener(
+            "change",
+            function () {
+
+              const topic =
+                input.dataset.topic;
+
+
+              if (
+                input.checked
+              ) {
+
+                state.selectedTopics.add(
+                  topic
+                );
+
+              }
+              else {
+
+                state.selectedTopics.delete(
+                  topic
+                );
+
+              }
+
+
+              input
+                .closest(
+                  ".topic-option"
+                )
+                .classList.toggle(
+                  "active",
+                  input.checked
+                );
+
+
+              updateAvailable();
+
+            }
+          );
+
+        }
+      );
+
+  }
+
   function renderAreas() {
 
     const map =
@@ -892,6 +1103,8 @@
       areas.length;
 
 
+    renderTopics();
+
     updateAvailable();
 
   }
@@ -925,13 +1138,27 @@
       selectedDifficulties();
 
 
-    return state.questions
+    return sourceScopedQuestions()
       .filter(
         function (
           question
         ) {
 
+          const topic =
+            String(
+              question.tema ||
+              ""
+            ).trim();
+
+
+          const topicMatches =
+            state.selectedTopics.has(
+              topic
+            );
+
+
           return (
+            topicMatches &&
             state.selectedAreas.has(
               questionArea(
                 question
@@ -1524,6 +1751,173 @@
   }
 
 
+  function ensureSimulationSetupModal() {
+
+    let modal =
+      $("simSetupModal");
+
+
+    if (modal) {
+      return modal;
+    }
+
+
+    modal =
+      document.createElement(
+        "div"
+      );
+
+
+    modal.id =
+      "simSetupModal";
+
+
+    modal.className =
+      "sim-setup-modal";
+
+
+    modal.innerHTML =
+      `
+        <div
+          class="sim-setup-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="simSetupTitle"
+        >
+          <div class="sim-setup-dialog-header">
+            <div>
+              <span class="sim-kicker">
+                CONFIGURAR SIMULADO
+              </span>
+
+              <h2 id="simSetupTitle">
+                Monte sua sessão
+              </h2>
+
+              <p>
+                Escolha tópicos, quantidade de questões,
+                tempo, modo e dificuldade.
+              </p>
+            </div>
+
+            <button
+              id="closeSimulationSetup"
+              class="sim-setup-close"
+              type="button"
+              aria-label="Fechar configuração"
+            >
+              &times;
+            </button>
+          </div>
+
+          <div
+            id="simSetupBody"
+            class="sim-setup-body"
+          ></div>
+        </div>
+      `;
+
+
+    document.body.appendChild(
+      modal
+    );
+
+
+    const body =
+      $("simSetupBody");
+
+
+    document
+      .querySelectorAll(
+        ".sim-setup-source"
+      )
+      .forEach(
+        function (
+          node
+        ) {
+
+          body.appendChild(
+            node
+          );
+
+        }
+      );
+
+
+    $("closeSimulationSetup")
+      .addEventListener(
+        "click",
+        closeSimulationSetup
+      );
+
+
+    modal.addEventListener(
+      "mousedown",
+      function (
+        event
+      ) {
+
+        if (
+          event.target ===
+          modal
+        ) {
+
+          closeSimulationSetup();
+
+        }
+
+      }
+    );
+
+
+    return modal;
+
+  }
+
+
+  function openSimulationSetup() {
+
+    const modal =
+      ensureSimulationSetupModal();
+
+
+    renderTopics();
+
+    updateAvailable();
+
+
+    modal.classList.add(
+      "open"
+    );
+
+
+    document.body.classList.add(
+      "sim-setup-open"
+    );
+
+  }
+
+
+  function closeSimulationSetup() {
+
+    const modal =
+      $("simSetupModal");
+
+
+    if (modal) {
+      modal.classList.remove(
+        "open"
+      );
+    }
+
+
+    document.body.classList.remove(
+      "sim-setup-open"
+    );
+
+  }
+
+
   function startWithQuestions(
     questions
   ) {
@@ -1603,6 +1997,9 @@
 
     state.secondsRemaining =
       state.initialSeconds;
+
+
+    closeSimulationSetup();
 
 
     $("configView")
@@ -3206,6 +3603,12 @@
               state.selectedAreas
                 .clear();
 
+              state.selectedTopics
+                .clear();
+
+              state.topicsInitialized =
+                false;
+
               renderAreas();
 
             }
@@ -3230,6 +3633,12 @@
 
               state.selectedAreas
                 .clear();
+
+              state.selectedTopics
+                .clear();
+
+              state.topicsInitialized =
+                false;
 
               renderAreas();
 
@@ -3264,6 +3673,12 @@
 
             state.selectedAreas
               .clear();
+
+            state.selectedTopics
+              .clear();
+
+            state.topicsInitialized =
+              false;
 
             renderAreas();
 
@@ -3373,6 +3788,96 @@
       );
 
 
+    $("openSimulationSetup")
+      .addEventListener(
+        "click",
+        openSimulationSetup
+      );
+
+
+    $("selectAllTopics")
+      .addEventListener(
+        "click",
+        function () {
+
+          state.selectedTopics.clear();
+
+          state.topicsInitialized =
+            true;
+
+          sourceScopedQuestions()
+            .forEach(
+              function (
+                question
+              ) {
+
+                const topic =
+                  String(
+                    question.tema ||
+                    ""
+                  ).trim();
+
+
+                if (topic) {
+                  state.selectedTopics.add(
+                    topic
+                  );
+                }
+
+              }
+            );
+
+
+          renderTopics();
+
+          updateAvailable();
+
+        }
+      );
+
+
+    $("clearTopics")
+      .addEventListener(
+        "click",
+        function () {
+
+          state.selectedTopics.clear();
+
+          state.topicsInitialized =
+            true;
+
+
+          $("topicsGrid")
+            .querySelectorAll(
+              "[data-topic]"
+            )
+            .forEach(
+              function (
+                input
+              ) {
+
+                input.checked =
+                  false;
+
+
+                input
+                  .closest(
+                    ".topic-option"
+                  )
+                  .classList.remove(
+                    "active"
+                  );
+
+              }
+            );
+
+
+          updateAvailable();
+
+        }
+      );
+
+
     $("startSimulation")
       .addEventListener(
         "click",
@@ -3455,6 +3960,8 @@
 
 
   async function init() {
+
+    ensureSimulationSetupModal();
 
     bindEvents();
 

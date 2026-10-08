@@ -1094,3 +1094,286 @@ a.sim-question-source:hover {
 }
 
 /* CORTEX SIMULADO VISUAL QUESTIONS V1 END */
+
+
+/* =========================================================
+   CORTEX SIMULADO LAUNCH + SETUP MODAL V2
+========================================================= */
+
+.sim-launch-card {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 18px;
+  padding: 28px;
+  border: 1px solid var(--theme-border);
+  border-radius: 22px;
+  background:
+    radial-gradient(
+      circle at 86% 18%,
+      rgba(var(--theme-accent-rgb),.13),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb,var(--theme-surface-strong) 96%,black),
+      color-mix(in srgb,var(--theme-surface) 98%,black)
+    );
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.sim-launch-copy h2 {
+  margin: 7px 0 7px;
+  color: var(--theme-text);
+  font-size: clamp(22px,2.4vw,32px);
+  letter-spacing: -.035em;
+}
+
+.sim-launch-copy p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--theme-text-muted);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.sim-launch-button {
+  min-width: 210px;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid color-mix(in srgb,var(--theme-accent) 54%,transparent);
+  border-radius: 15px;
+  padding: 0 18px;
+  background: var(--theme-gradient);
+  color: var(--theme-button-text);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow:
+    0 12px 32px rgba(var(--theme-accent-rgb),.16),
+    inset 0 1px 0 rgba(255,255,255,.12);
+  transition:
+    transform .16s ease,
+    filter .16s ease,
+    box-shadow .16s ease;
+}
+
+.sim-launch-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow:
+    0 16px 38px rgba(var(--theme-accent-rgb),.20),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+.sim-launch-button strong {
+  font-size: 17px;
+}
+
+.sim-setup-source {
+  display: none !important;
+}
+
+.sim-setup-open {
+  overflow: hidden !important;
+}
+
+.sim-setup-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0,0,0,.70);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity .16s ease,
+    visibility .16s ease;
+}
+
+.sim-setup-modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.sim-setup-dialog {
+  width: min(980px,calc(100vw - 48px));
+  max-height: min(88vh,900px);
+  overflow: hidden;
+  border: 1px solid var(--theme-border);
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      circle at 85% 0,
+      rgba(var(--theme-accent-rgb),.11),
+      transparent 28%
+    ),
+    color-mix(in srgb,var(--theme-surface-strong) 97%,black);
+  box-shadow:
+    0 36px 110px rgba(0,0,0,.62),
+    0 0 0 1px rgba(var(--theme-accent-rgb),.035),
+    0 0 52px rgba(var(--theme-accent-rgb),.055);
+  transform: translateY(10px) scale(.985);
+  transition: transform .18s ease;
+}
+
+.sim-setup-modal.open .sim-setup-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.sim-setup-dialog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.sim-setup-dialog-header h2 {
+  margin: 6px 0 5px;
+  color: var(--theme-text);
+  font-size: 21px;
+  letter-spacing: -.03em;
+}
+
+.sim-setup-dialog-header p {
+  margin: 0;
+  color: var(--theme-text-muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.sim-setup-close {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--theme-border);
+  border-radius: 12px;
+  background: var(--theme-surface-soft);
+  color: var(--theme-text-muted);
+  font: inherit;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sim-setup-close:hover {
+  border-color: var(--theme-border-strong);
+  color: var(--theme-text);
+  background: var(--theme-accent-soft);
+}
+
+.sim-setup-body {
+  max-height: calc(min(88vh,900px) - 96px);
+  overflow-y: auto;
+  padding: 20px 24px 24px;
+}
+
+.sim-setup-body .quick-modes.sim-setup-source {
+  display: grid !important;
+  margin-bottom: 14px;
+}
+
+.sim-setup-body .sim-config-grid.sim-setup-source {
+  display: grid !important;
+  grid-template-columns: 1fr;
+}
+
+.sim-setup-body .sim-side-column {
+  display: none !important;
+}
+
+.sim-setup-body .main-config {
+  padding: 20px;
+  border-color: var(--theme-border);
+  background: color-mix(in srgb,var(--theme-surface) 97%,black);
+}
+
+.sim-setup-body .config-section {
+  margin-top: 18px;
+}
+
+.sim-setup-body .areas-grid {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.sim-setup-body .start-simulation {
+  min-height: 52px;
+  margin-top: 22px;
+  font-size: 11px;
+}
+
+@media (max-width:700px) {
+  .sim-launch-card {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .sim-launch-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .sim-setup-modal {
+    align-items: end;
+    padding: 0;
+    background: rgba(0,0,0,.76);
+  }
+
+  .sim-setup-dialog {
+    width: 100%;
+    max-height: 94vh;
+    border-radius: 22px 22px 0 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    box-shadow: 0 -18px 50px rgba(0,0,0,.42);
+  }
+
+  .sim-setup-dialog-header {
+    padding: 18px 16px 15px;
+  }
+
+  .sim-setup-body {
+    max-height: calc(94vh - 90px);
+    padding: 14px 14px 24px;
+  }
+
+  .sim-setup-body .quick-modes.sim-setup-source {
+    grid-template-columns: 1fr;
+  }
+
+  .sim-setup-body .areas-grid {
+    grid-template-columns: 1fr;
+    max-height: 250px;
+  }
+
+  .sim-setup-body .main-config {
+    padding: 15px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .sim-setup-dialog,
+  .sim-setup-modal,
+  .sim-launch-button {
+    transition: none !important;
+  }
+}
+/* CORTEX SIMULADO LAUNCH + SETUP MODAL V2 END */

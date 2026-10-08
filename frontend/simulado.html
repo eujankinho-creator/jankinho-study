@@ -15,7 +15,7 @@
   <script>
     (function () {
       var allowed = ["dark-orange","dark-pink","dark-green","dark-purple","dark-black"];
-      var theme = "dark-orange";
+      var theme = "dark-purple";
       try {
         var saved = localStorage.getItem("jankinho_theme_v1");
         if (allowed.indexOf(saved) >= 0) theme = saved;
@@ -53,7 +53,7 @@
     href="/css/themes.css?v=20261002-fluid-final4"
   >
 
-  <script defer src="/js/theme-manager.js?v=20261006-multitheme2"></script>
+  <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
 
   <link
     rel="stylesheet"
@@ -67,12 +67,12 @@
 
   <link
     rel="stylesheet"
-    href="/css/simulado-premium.css?v=20261002-romulo1"
+    href="/css/simulado-premium.css?v=20261008-launch-modal1"
   >
 
   <link
     rel="stylesheet"
-    href="/css/theme-final.css?v=20261006-theme-v6"
+    href="/css/theme-final.css?v=20261007-theme-global7"
   >
 
   <link rel="stylesheet" href="/css/semantic-states.css?v=20261002-fluid-final4">
@@ -229,8 +229,28 @@
 
         </section>
 
+        <section class="sim-launch-card">
+          <div class="sim-launch-copy">
+            <span class="sim-kicker">SIMULADO PERSONALIZADO</span>
+            <h2>Pronto para começar?</h2>
+            <p>
+              Escolha os tópicos, quantidade de questões, tempo e modo
+              antes de iniciar sua prova.
+            </p>
+          </div>
 
-        <section class="quick-modes">
+          <button
+            id="openSimulationSetup"
+            class="sim-launch-button"
+            type="button"
+          >
+            <span>Iniciar simulado</span>
+            <strong>&rarr;</strong>
+          </button>
+        </section>
+
+
+        <section class="quick-modes sim-setup-source">
 
           <button
             class="quick-mode-card"
@@ -309,7 +329,7 @@
         </section>
 
 
-        <section class="sim-config-grid">
+        <section class="sim-config-grid sim-setup-source">
 
 
           <div class="sim-config-card main-config">
@@ -630,6 +650,38 @@
 
               </div>
 
+            </div>
+
+
+            <div class="config-section">
+              <div class="areas-heading">
+                <label class="config-label">
+                  Tópicos / assuntos
+                </label>
+
+                <div>
+                  <button
+                    id="selectAllTopics"
+                    class="tiny-action"
+                    type="button"
+                  >
+                    Todos
+                  </button>
+
+                  <button
+                    id="clearTopics"
+                    class="tiny-action"
+                    type="button"
+                  >
+                    Limpar
+                  </button>
+                </div>
+              </div>
+
+              <div
+                id="topicsGrid"
+                class="areas-grid topics-grid"
+              ></div>
             </div>
 
 
@@ -1196,7 +1248,7 @@
     })();
   </script>
 
-<script defer src="/js/simulado.js?v=20261002-romulo1"></script>
+<script defer src="/js/simulado.js?v=20261008-launch-modal1"></script>
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 
 </body>
