@@ -11,6 +11,10 @@ const state = {
   pontuacao: 0,
   corretaAtual: false,
   temaCronograma: "",
+  pagina: 1,
+  paginas: 1,
+  totalQuestoes: 0,
+  limitePagina: 50,
   alternativasManual: [
     { texto: "", correta: false },
     { texto: "", correta: false },
@@ -571,6 +575,184 @@ function popularAssuntos() {
 }
 
 
+function urlQuestoesPaginada() {
+  const params = new URLSearchParams();
+
+  params.set("pagina", String(state.pagina));
+  params.set("limite", String(state.limitePagina));
+
+  const busca = $("busca") ? $("busca").value.trim() : "";
+  const disciplina = $("filtroDisciplina") ? $("filtroDisciplina").value : "";
+  const assunto = $("filtroAssunto") ? $("filtroAssunto").value : "";
+  const dificuldade = $("filtroDificuldade") ? $("filtroDificuldade").value : "";
+
+  if (busca) params.set("busca", busca);
+  if (disciplina) params.set("disciplina", disciplina);
+  if (assunto) params.set("assunto", assunto);
+  if (dificuldade) params.set("dificuldade", nomeDificuldade(dificuldade));
+
+  return "/api/questoes?" + params.toString();
+}
+
+function aplicarResultadoPaginado(dados) {
+  state.questoes =
+    dados && Array.isArray(dados.itens)
+      ? dados.itens
+      : [];
+
+  state.filtradas = [...state.questoes];
+
+  state.totalQuestoes =
+    Number(dados && dados.total || 0);
+
+  state.pagina =
+    Number(dados && dados.pagina || 1);
+
+  state.paginas =
+    Number(dados && dados.paginas || 1);
+
+  $("statQuestoes").textContent =
+    state.totalQuestoes;
+
+  $("resultadoContagem").textContent =
+    state.totalQuestoes +
+    (state.totalQuestoes === 1
+      ? " questão encontrada"
+      : " questões encontradas");
+
+  const temFiltro =
+    Boolean(
+      ($("busca") && $("busca").value.trim()) ||
+      ($("filtroDisciplina") && $("filtroDisciplina").value) ||
+      ($("filtroAssunto") && $("filtroAssunto").value) ||
+      ($("filtroDificuldade") && $("filtroDificuldade").value)
+    );
+
+  $("limparFiltros").classList.toggle(
+    "visible",
+    temFiltro
+  );
+
+  renderLista();
+  renderPaginacaoQuestoes();
+}
+
+function garantirPaginacaoQuestoes() {
+  let pager = $("questoesPager");
+
+  if (pager) {
+    return pager;
+  }
+
+  const lista = $("questoesLista");
+
+  pager = document.createElement("div");
+  pager.id = "questoesPager";
+  pager.className = "questions-pager";
+
+  lista.insertAdjacentElement(
+    "afterend",
+    pager
+  );
+
+  return pager;
+}
+
+function renderPaginacaoQuestoes() {
+  const pager = garantirPaginacaoQuestoes();
+
+  if (state.paginas <= 1) {
+    pager.classList.add("hidden");
+    pager.innerHTML = "";
+    return;
+  }
+
+  pager.classList.remove("hidden");
+
+  pager.innerHTML = `
+    <button
+      id="questoesPaginaAnterior"
+      class="button-secondary"
+      type="button"
+      ${state.pagina <= 1 ? "disabled" : ""}
+    >
+      ← Anterior
+    </button>
+
+    <span class="questions-page-indicator">
+      ${state.pagina}/${state.paginas}
+    </span>
+
+    <button
+      id="questoesProximaPagina"
+      class="button-secondary"
+      type="button"
+      ${state.pagina >= state.paginas ? "disabled" : ""}
+    >
+      Próxima →
+    </button>
+  `;
+
+  $("questoesPaginaAnterior")
+    .addEventListener(
+      "click",
+      async function () {
+        if (state.pagina <= 1) return;
+        state.pagina -= 1;
+        await carregarPaginaQuestoes();
+      }
+    );
+
+  $("questoesProximaPagina")
+    .addEventListener(
+      "click",
+      async function () {
+        if (state.pagina >= state.paginas) return;
+        state.pagina += 1;
+        await carregarPaginaQuestoes();
+      }
+    );
+}
+
+async function carregarPaginaQuestoes() {
+  try {
+    limparErro();
+
+    const dados =
+      await api(
+        urlQuestoesPaginada()
+      );
+
+    aplicarResultadoPaginado(
+      dados
+    );
+
+    const lista =
+      $("questoesLista");
+
+    if (lista) {
+      window.scrollTo({
+        top:
+          Math.max(
+            0,
+            lista.getBoundingClientRect().top +
+            window.scrollY -
+            120
+          ),
+        behavior:
+          "smooth"
+      });
+    }
+  }
+  catch (erro) {
+    console.error(erro);
+    mostrarErro(
+      erro.message ||
+      "Nao foi possivel carregar as questoes."
+    );
+  }
+}
+
 async function carregarDados() {
 
   try {
@@ -580,7 +762,7 @@ async function carregarDados() {
 
     const resultados =
       await Promise.all([
-        api("/api/questoes"),
+        api("/api/questoes?pagina=1&limite=50"),
         api("/api/disciplinas"),
         api("/api/respostas"),
         api("/api/questoes/matriz")
@@ -588,11 +770,33 @@ async function carregarDados() {
 
 
     state.questoes =
+      resultados[0] &&
       Array.isArray(
-        resultados[0]
+        resultados[0].itens
       )
-        ? resultados[0]
+        ? resultados[0].itens
         : [];
+
+    state.totalQuestoes =
+      Number(
+        resultados[0] &&
+        resultados[0].total ||
+        0
+      );
+
+    state.pagina =
+      Number(
+        resultados[0] &&
+        resultados[0].pagina ||
+        1
+      );
+
+    state.paginas =
+      Number(
+        resultados[0] &&
+        resultados[0].paginas ||
+        1
+      );
 
 
     state.disciplinas =
@@ -625,7 +829,22 @@ async function carregarDados() {
     popularDisciplinas();
     popularAssuntos();
 
-    aplicarFiltros();
+    state.filtradas =
+      [...state.questoes];
+
+    $("statQuestoes").textContent =
+      state.totalQuestoes;
+
+    $("resultadoContagem").textContent =
+      state.totalQuestoes +
+      (
+        state.totalQuestoes === 1
+          ? " questão encontrada"
+          : " questões encontradas"
+      );
+
+    renderLista();
+    renderPaginacaoQuestoes();
 
   }
   catch (erro) {
@@ -670,149 +889,15 @@ function bateTemaCronograma(texto, tema) {
 }
 
 
-function aplicarFiltros() {
+async function aplicarFiltros(
+  resetarPagina = true
+) {
+  if (resetarPagina) {
+    state.pagina = 1;
+  }
 
-  const busca =
-    $("busca")
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const disciplina =
-    $("filtroDisciplina")
-      .value;
-
-
-  const dificuldade =
-    $("filtroDificuldade")
-      .value;
-
-  const assunto =
-    $("filtroAssunto")
-      ? $("filtroAssunto").value
-      : "";
-
-
-  state.filtradas =
-    state.questoes.filter(
-      function (questao) {
-
-        const textoBusca =
-          [
-            questao.enunciado,
-            questao.tema,
-            questao.disciplina
-              ? questao.disciplina.nome
-              : ""
-          ]
-            .join(" ")
-            .toLowerCase();
-
-
-        const bateBusca =
-          !busca ||
-          textoBusca.includes(
-            busca
-          ) ||
-          (
-            state.temaCronograma &&
-            normalizarTextoBusca(busca) ===
-              normalizarTextoBusca(state.temaCronograma) &&
-            bateTemaCronograma(
-              textoBusca,
-              state.temaCronograma
-            )
-          );
-
-
-        const bateDisciplina =
-          !disciplina ||
-          (
-            questao.disciplina &&
-            t(
-              questao.disciplina.nome
-            )
-              .trim()
-              .toLocaleLowerCase(
-                "pt-BR"
-              ) ===
-            disciplina
-              .trim()
-              .toLocaleLowerCase(
-                "pt-BR"
-              )
-          );
-
-
-        const bateAssunto =
-          !assunto ||
-          t(questao.tema)
-            .trim()
-            .toLocaleLowerCase("pt-BR") ===
-          assunto
-            .trim()
-            .toLocaleLowerCase("pt-BR");
-
-        const bateDificuldade =
-          !dificuldade ||
-          normalizarDificuldade(
-            questao.dificuldade
-          ) ===
-          normalizarDificuldade(
-            dificuldade
-          );
-
-
-        return (
-          bateBusca &&
-          bateDisciplina &&
-          bateAssunto &&
-          bateDificuldade
-        );
-
-      }
-    );
-
-
-  $("statQuestoes")
-    .textContent =
-    state.filtradas.length;
-
-
-  const total =
-    state.filtradas.length;
-
-
-  $("resultadoContagem")
-    .textContent =
-    total +
-    (
-      total === 1
-        ? " quest\u00e3o encontrada"
-        : " quest\u00f5es encontradas"
-    );
-
-
-  const temFiltro =
-    Boolean(
-      busca ||
-      disciplina ||
-      assunto ||
-      dificuldade
-    );
-
-
-  $("limparFiltros")
-    .classList.toggle(
-      "visible",
-      temFiltro
-    );
-
-
-  renderLista();
+  await carregarPaginaQuestoes();
 }
-
 
 function renderLista() {
 
@@ -2373,24 +2458,48 @@ async function sair() {
 }
 
 
+let buscaQuestoesTimer = null;
+
 $("busca")
   .addEventListener(
     "input",
-    aplicarFiltros
+    function () {
+      clearTimeout(
+        buscaQuestoesTimer
+      );
+
+      buscaQuestoesTimer =
+        setTimeout(
+          function () {
+            aplicarFiltros(
+              true
+            );
+          },
+          280
+        );
+    }
   );
 
 
 $("filtroDisciplina")
   .addEventListener(
     "change",
-    aplicarFiltros
+    function () {
+      aplicarFiltros(
+        true
+      );
+    }
   );
 
 
 $("filtroDificuldade")
   .addEventListener(
     "change",
-    aplicarFiltros
+    function () {
+      aplicarFiltros(
+        true
+      );
+    }
   );
 
 
@@ -2408,7 +2517,16 @@ $("limparFiltros")
       $("filtroDificuldade")
         .value = "";
 
-      aplicarFiltros();
+      if ($("filtroAssunto")) {
+        $("filtroAssunto")
+          .value = "";
+      }
+
+      popularAssuntos();
+
+      aplicarFiltros(
+        true
+      );
     }
   );
 
@@ -2615,7 +2733,9 @@ async function iniciar() {
       $("busca").value =
         temaCronograma;
 
-      aplicarFiltros();
+      await aplicarFiltros(
+        true
+      );
 
       const filtros =
         document.querySelector(
@@ -2657,13 +2777,19 @@ iniciar();
       disciplina.addEventListener("change", function () {
         if (assunto) assunto.value = "";
         popularAssuntos();
-        aplicarFiltros();
+        aplicarFiltros(
+          true
+        );
       });
     }
 
     if (assunto && !assunto.dataset.matrizBound) {
       assunto.dataset.matrizBound = "1";
-      assunto.addEventListener("change", aplicarFiltros);
+      assunto.addEventListener("change", function () {
+        aplicarFiltros(
+          true
+        );
+      });
     }
   }
 
