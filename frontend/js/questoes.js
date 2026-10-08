@@ -2719,12 +2719,90 @@ async function iniciar() {
       state.temaCronograma =
         temaCronograma;
 
-      $("busca").value =
-        temaCronograma;
+      try {
+        const resolvido =
+          await api(
+            "/api/questoes/resolver-tema?tema=" +
+            encodeURIComponent(
+              temaCronograma
+            )
+          );
 
-      await aplicarFiltros(
-        true
-      );
+        if (
+          resolvido &&
+          resolvido.assunto
+        ) {
+          const disciplinaSelect =
+            $("filtroDisciplina");
+
+          if (
+            disciplinaSelect &&
+            Array.from(
+              disciplinaSelect.options
+            ).some(
+              function (option) {
+                return (
+                  option.value ===
+                  resolvido.disciplina
+                );
+              }
+            )
+          ) {
+            disciplinaSelect.value =
+              resolvido.disciplina;
+          }
+
+          popularAssuntos();
+
+          const assuntoSelect =
+            $("filtroAssunto");
+
+          if (
+            assuntoSelect &&
+            Array.from(
+              assuntoSelect.options
+            ).some(
+              function (option) {
+                return (
+                  option.value ===
+                  resolvido.assunto
+                );
+              }
+            )
+          ) {
+            assuntoSelect.value =
+              resolvido.assunto;
+          }
+
+          $("busca").value =
+            "";
+
+          await aplicarFiltros(
+            true
+          );
+        }
+        else {
+          $("busca").value =
+            temaCronograma;
+
+          await aplicarFiltros(
+            true
+          );
+        }
+      }
+      catch (erroResolver) {
+        console.warn(
+          "Falha ao resolver tema do cronograma:",
+          erroResolver
+        );
+
+        $("busca").value =
+          temaCronograma;
+
+        await aplicarFiltros(
+          true
+        );
+      }
 
       const filtros =
         document.querySelector(
