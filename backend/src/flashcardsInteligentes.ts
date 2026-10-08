@@ -40,12 +40,14 @@ function validarCard(value: any, questaoIds: Set<number>): CardGerado | null {
       ? dificuldadeRaw
       : "medio";
 
-  const referencias = Array.isArray(value.referencias)
-    ? [...new Set(
-        value.referencias
-          .map((id: any) => Number(id))
-          .filter((id: number) => Number.isInteger(id) && questaoIds.has(id))
-      )].slice(0, 8)
+  const referencias: number[] = Array.isArray(value.referencias)
+    ? Array.from(
+        new Set<number>(
+          value.referencias
+            .map((id: any) => Number(id))
+            .filter((id: number) => Number.isInteger(id) && questaoIds.has(id))
+        )
+      ).slice(0, 8)
     : [];
 
   if (!frente || !verso || !conhecimentoChave) return null;
@@ -233,6 +235,8 @@ export async function sincronizarFlashcardsInteligentes() {
     return;
   }
 
+  const usuarioId = usuario.id;
+
   const grupos = await prisma.questao.groupBy({
     by: ["disciplinaId", "tema"],
     where: {
@@ -380,7 +384,7 @@ export async function sincronizarFlashcardsInteligentes() {
           data: {
             frente: card.frente,
             verso: card.verso,
-            usuarioId: usuario.id,
+            usuarioId,
             questaoId: referenciaPrincipal,
             origem: ORIGEM,
             tema: tarefa.assunto,
