@@ -3747,7 +3747,7 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261006-pmpe2"
+              "/js/sidebar-standard.js?v=20261008-pedro-credit1"
             )
             .replace(
               /\/css\/ui-enhancements\.css\?v=[^"']+/g,
@@ -3755,7 +3755,7 @@ async function servirArquivo(
             )
             .replace(
               /\/css\/sidebar-standard\.css\?v=[^"']+/g,
-              "/css/sidebar-standard.css?v=20261006-logo-theme1"
+              "/css/sidebar-standard.css?v=20261008-pedro-credit1"
             )
             .replace(
               /\/css\/theme-final\.css\?v=[^"']+/g,
