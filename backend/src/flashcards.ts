@@ -26,7 +26,7 @@ export async function listarFlashcards(
     const busca = texto(url?.searchParams.get("busca"));
     const estado = texto(url?.searchParams.get("estado"));
     const pagina = Math.max(1, inteiro(url?.searchParams.get("pagina"), 1));
-    const limite = Math.max(10, Math.min(100, inteiro(url?.searchParams.get("limite"), 60)));
+    const limite = Math.max(10, Math.min(60, inteiro(url?.searchParams.get("limite"), 24)));
 
     const where: any = {
       status: "ATIVO",
