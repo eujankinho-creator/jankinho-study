@@ -50,6 +50,7 @@ import { sincronizarQuestoesConcursosPublicos } from "./questoesConcursosPublico
 import { sincronizarQuestoesResidenciasFederais } from "./questoesResidenciasFederais";
 import { sincronizarQuestoesEnareEbserh500 } from "./questoesEnareEbserh500";
 import { sincronizarQuestoesSusLegislacao200 } from "./questoesSusLegislacao200";
+import { sincronizarMatrizQuestoes30PorAssunto } from "./questoesMatriz30PorAssunto";
 import { resetAllPerformanceIfRequested } from "./resetPerformance";
 import {
   iniciarSpotifyAuth,
@@ -5558,6 +5559,8 @@ server.listen(
         await sincronizarQuestoesEnareEbserh500();
 
         await sincronizarQuestoesSusLegislacao200();
+
+        await sincronizarMatrizQuestoes30PorAssunto();
 
         await limparFlashcardsParaMetodologia();
 
