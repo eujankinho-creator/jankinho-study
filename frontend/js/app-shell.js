@@ -3501,6 +3501,961 @@
 
 
   /* =======================================================
+     CORTEX VOICE · OPENAI REALTIME / WEBRTC
+  ======================================================= */
+
+  const cortexVoiceState = {
+    pc: null,
+    dc: null,
+    stream: null,
+    active: false,
+    connecting: false,
+    muted: false,
+    assistantTranscript: "",
+  };
+
+
+  const cortexVoiceRoutes = {
+    dashboard: "/index.html",
+    questoes: "/questoes",
+    simulado: "/simulado",
+    flashcards: "/flashcards",
+    cronograma: "/cronograma",
+    aulas: "/aulas",
+    academico: "/sigaa",
+    desempenho: "/desempenho",
+    ranking: "/ranking",
+    configuracoes: "/configuracoes",
+  };
+
+
+  function cortexVoiceSetStatus(
+    status,
+    caption,
+    mode
+  ) {
+    const panel =
+      $("cortexVoicePanel");
+
+    if (!panel) {
+      return;
+    }
+
+    $("cortexVoiceStatus").textContent =
+      status ||
+      "Cortex Voice";
+
+    if (
+      typeof caption ===
+      "string"
+    ) {
+      $("cortexVoiceCaption").textContent =
+        caption;
+    }
+
+    panel.dataset.state =
+      mode ||
+      "idle";
+
+    $("cortexVoiceButton")?.classList.toggle(
+      "active",
+      mode === "listening" ||
+      mode === "thinking" ||
+      mode === "speaking"
+    );
+  }
+
+
+  function cortexVoiceOpenPanel() {
+    $("cortexVoicePanel")?.classList.remove(
+      "hidden"
+    );
+  }
+
+
+  function cortexVoiceSend(
+    event
+  ) {
+    const dc =
+      cortexVoiceState.dc;
+
+    if (
+      !dc ||
+      dc.readyState !==
+        "open"
+    ) {
+      return false;
+    }
+
+    dc.send(
+      JSON.stringify(
+        event
+      )
+    );
+
+    return true;
+  }
+
+
+  async function cortexVoiceExecuteTool(
+    name,
+    args
+  ) {
+    const safeArgs =
+      args &&
+      typeof args ===
+        "object"
+        ? args
+        : {};
+
+    if (
+      name ===
+      "navigate_cortex"
+    ) {
+      const destination =
+        String(
+          safeArgs.destination ||
+          ""
+        );
+
+      const href =
+        cortexVoiceRoutes[
+          destination
+        ];
+
+      if (!href) {
+        return {
+          ok: false,
+          error:
+            "Área não reconhecida.",
+        };
+      }
+
+      navigateFrameFast(
+        href
+      );
+
+      return {
+        ok: true,
+        destination,
+      };
+    }
+
+
+    if (
+      name ===
+      "start_questions"
+    ) {
+      const theme =
+        String(
+          safeArgs.theme ||
+          ""
+        )
+          .trim();
+
+      const quantity =
+        Math.max(
+          1,
+          Math.min(
+            50,
+            Number(
+              safeArgs.quantity
+            ) ||
+            10
+          )
+        );
+
+      const params =
+        new URLSearchParams({
+          quantidade:
+            String(
+              quantity
+            ),
+          auto:
+            "1",
+          voice:
+            "1",
+        });
+
+      if (theme) {
+        params.set(
+          "tema",
+          theme
+        );
+      }
+
+      navigateFrameFast(
+        "/questoes?" +
+        params.toString()
+      );
+
+      return {
+        ok: true,
+        quantity,
+        theme:
+          theme ||
+          null,
+      };
+    }
+
+
+    if (
+      name ===
+      "start_flashcards"
+    ) {
+      const theme =
+        String(
+          safeArgs.theme ||
+          ""
+        )
+          .trim();
+
+      const quantity =
+        Math.max(
+          1,
+          Math.min(
+            24,
+            Number(
+              safeArgs.quantity
+            ) ||
+            10
+          )
+        );
+
+      const params =
+        new URLSearchParams({
+          quantidade:
+            String(
+              quantity
+            ),
+          auto:
+            "1",
+          voice:
+            "1",
+        });
+
+      if (theme) {
+        params.set(
+          "tema",
+          theme
+        );
+      }
+
+      navigateFrameFast(
+        "/flashcards?" +
+        params.toString()
+      );
+
+      return {
+        ok: true,
+        quantity,
+        theme:
+          theme ||
+          null,
+      };
+    }
+
+
+    return {
+      ok: false,
+      error:
+        "Ferramenta não implementada.",
+    };
+  }
+
+
+  async function cortexVoiceHandleFunctionCall(
+    event
+  ) {
+    let args = {};
+
+    try {
+      args =
+        event.arguments
+          ? JSON.parse(
+              event.arguments
+            )
+          : {};
+    }
+    catch {}
+
+    const result =
+      await cortexVoiceExecuteTool(
+        event.name,
+        args
+      );
+
+    cortexVoiceSend({
+      type:
+        "conversation.item.create",
+      item: {
+        type:
+          "function_call_output",
+        call_id:
+          event.call_id,
+        output:
+          JSON.stringify(
+            result
+          ),
+      },
+    });
+
+    cortexVoiceSend({
+      type:
+        "response.create",
+    });
+  }
+
+
+  function cortexVoiceHandleEvent(
+    event
+  ) {
+    if (
+      !event ||
+      !event.type
+    ) {
+      return;
+    }
+
+
+    if (
+      event.type ===
+      "input_audio_buffer.speech_started"
+    ) {
+      cortexVoiceSetStatus(
+        "Estou ouvindo",
+        "Pode falar normalmente.",
+        "listening"
+      );
+
+      return;
+    }
+
+
+    if (
+      event.type ===
+      "input_audio_buffer.speech_stopped"
+    ) {
+      cortexVoiceSetStatus(
+        "Pensando",
+        "Entendendo o que você disse...",
+        "thinking"
+      );
+
+      return;
+    }
+
+
+    if (
+      event.type ===
+        "response.output_audio.delta" ||
+      event.type ===
+        "response.output_audio_transcript.delta"
+    ) {
+      cortexVoiceSetStatus(
+        "Cortex está falando",
+        $("cortexVoiceCaption")
+          ?.textContent ||
+          "Respondendo...",
+        "speaking"
+      );
+    }
+
+
+    if (
+      event.type ===
+      "response.output_audio_transcript.delta"
+    ) {
+      cortexVoiceState.assistantTranscript +=
+        String(
+          event.delta ||
+          ""
+        );
+
+      $("cortexVoiceCaption").textContent =
+        cortexVoiceState.assistantTranscript
+          .slice(
+            -220
+          );
+
+      return;
+    }
+
+
+    if (
+      event.type ===
+      "response.output_audio_transcript.done"
+    ) {
+      const transcript =
+        String(
+          event.transcript ||
+          cortexVoiceState.assistantTranscript ||
+          ""
+        )
+          .trim();
+
+      if (transcript) {
+        $("cortexVoiceCaption").textContent =
+          transcript.slice(
+            -220
+          );
+      }
+
+      cortexVoiceState.assistantTranscript =
+        "";
+
+      return;
+    }
+
+
+    if (
+      event.type ===
+      "response.function_call_arguments.done"
+    ) {
+      void cortexVoiceHandleFunctionCall(
+        event
+      );
+
+      return;
+    }
+
+
+    if (
+      event.type ===
+      "response.done"
+    ) {
+      if (
+        cortexVoiceState.active
+      ) {
+        cortexVoiceSetStatus(
+          cortexVoiceState.muted
+            ? "Microfone desativado"
+            : "Pode falar",
+          $("cortexVoiceCaption")
+            ?.textContent ||
+            "Conversa em tempo real ativa.",
+          cortexVoiceState.muted
+            ? "muted"
+            : "ready"
+        );
+      }
+
+      return;
+    }
+
+
+    if (
+      event.type ===
+      "error"
+    ) {
+      console.error(
+        "Cortex Voice realtime:",
+        event
+      );
+
+      cortexVoiceSetStatus(
+        "Erro na conversa",
+        event.error?.message ||
+          "Tente encerrar e iniciar novamente.",
+        "error"
+      );
+    }
+  }
+
+
+  function cortexVoiceDisconnect(
+    hidePanel =
+      true
+  ) {
+    cortexVoiceState.active =
+      false;
+
+    cortexVoiceState.connecting =
+      false;
+
+    cortexVoiceState.assistantTranscript =
+      "";
+
+    try {
+      cortexVoiceState.dc?.close();
+    }
+    catch {}
+
+    try {
+      cortexVoiceState.pc?.close();
+    }
+    catch {}
+
+    if (
+      cortexVoiceState.stream
+    ) {
+      cortexVoiceState.stream
+        .getTracks()
+        .forEach(
+          function (
+            track
+          ) {
+            try {
+              track.stop();
+            }
+            catch {}
+          }
+        );
+    }
+
+    cortexVoiceState.pc =
+      null;
+
+    cortexVoiceState.dc =
+      null;
+
+    cortexVoiceState.stream =
+      null;
+
+    cortexVoiceState.muted =
+      false;
+
+    const audio =
+      $("cortexVoiceAudio");
+
+    if (audio) {
+      audio.srcObject =
+        null;
+    }
+
+    $("cortexVoiceMute")
+      ?.setAttribute(
+        "aria-pressed",
+        "false"
+      );
+
+    $("cortexVoiceMute")
+      ?.classList.remove(
+        "muted"
+      );
+
+    $("cortexVoiceButton")
+      ?.classList.remove(
+        "active",
+        "connected"
+      );
+
+    if (hidePanel) {
+      $("cortexVoicePanel")
+        ?.classList.add(
+          "hidden"
+        );
+    }
+  }
+
+
+  async function cortexVoiceConnect() {
+    if (
+      cortexVoiceState.connecting
+    ) {
+      return;
+    }
+
+
+    if (
+      cortexVoiceState.active
+    ) {
+      cortexVoiceOpenPanel();
+
+      return;
+    }
+
+
+    if (
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia ||
+      !window.RTCPeerConnection
+    ) {
+      cortexVoiceOpenPanel();
+
+      cortexVoiceSetStatus(
+        "Navegador incompatível",
+        "Use um navegador moderno com suporte a microfone e WebRTC.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    cortexVoiceState.connecting =
+      true;
+
+    cortexVoiceOpenPanel();
+
+    cortexVoiceSetStatus(
+      "Conectando",
+      "Preparando microfone e voz natural...",
+      "connecting"
+    );
+
+
+    try {
+      const tokenResponse =
+        await fetch(
+          "/api/voice/token",
+          {
+            method:
+              "POST",
+            credentials:
+              "same-origin",
+            cache:
+              "no-store",
+          }
+        );
+
+
+      const tokenData =
+        await tokenResponse
+          .json()
+          .catch(
+            function () {
+              return {};
+            }
+          );
+
+
+      if (
+        !tokenResponse.ok ||
+        !tokenData.value
+      ) {
+        throw new Error(
+          tokenData.error ||
+          "Não foi possível iniciar o Cortex Voice."
+        );
+      }
+
+
+      const stream =
+        await navigator.mediaDevices
+          .getUserMedia({
+            audio: {
+              echoCancellation:
+                true,
+              noiseSuppression:
+                true,
+              autoGainControl:
+                true,
+            },
+          });
+
+
+      const pc =
+        new RTCPeerConnection();
+
+
+      cortexVoiceState.pc =
+        pc;
+
+      cortexVoiceState.stream =
+        stream;
+
+
+      const audio =
+        $("cortexVoiceAudio");
+
+
+      pc.ontrack =
+        function (
+          event
+        ) {
+          if (
+            audio &&
+            event.streams &&
+            event.streams[0]
+          ) {
+            audio.srcObject =
+              event.streams[0];
+
+            audio
+              .play()
+              .catch(
+                function () {}
+              );
+          }
+        };
+
+
+      stream
+        .getAudioTracks()
+        .forEach(
+          function (
+            track
+          ) {
+            pc.addTrack(
+              track,
+              stream
+            );
+          }
+        );
+
+
+      const dc =
+        pc.createDataChannel(
+          "oai-events"
+        );
+
+
+      cortexVoiceState.dc =
+        dc;
+
+
+      dc.addEventListener(
+        "open",
+        function () {
+          cortexVoiceState.active =
+            true;
+
+          cortexVoiceState.connecting =
+            false;
+
+          $("cortexVoiceButton")
+            ?.classList.add(
+              "connected"
+            );
+
+          cortexVoiceSetStatus(
+            "Pode falar",
+            "Diga o que você precisa no Córtex.",
+            "ready"
+          );
+        }
+      );
+
+
+      dc.addEventListener(
+        "message",
+        function (
+          message
+        ) {
+          try {
+            cortexVoiceHandleEvent(
+              JSON.parse(
+                message.data
+              )
+            );
+          }
+          catch (
+            error
+          ) {
+            console.warn(
+              "Cortex Voice event:",
+              error
+            );
+          }
+        }
+      );
+
+
+      dc.addEventListener(
+        "close",
+        function () {
+          if (
+            cortexVoiceState.active
+          ) {
+            cortexVoiceDisconnect(
+              false
+            );
+
+            cortexVoiceSetStatus(
+              "Conversa encerrada",
+              "Clique no botão para iniciar novamente.",
+              "idle"
+            );
+          }
+        }
+      );
+
+
+      const offer =
+        await pc.createOffer();
+
+
+      await pc.setLocalDescription(
+        offer
+      );
+
+
+      const sdpResponse =
+        await fetch(
+          "https://api.openai.com/v1/realtime/calls",
+          {
+            method:
+              "POST",
+            body:
+              offer.sdp,
+            headers: {
+              Authorization:
+                "Bearer " +
+                tokenData.value,
+              "Content-Type":
+                "application/sdp",
+            },
+          }
+        );
+
+
+      const answerSdp =
+        await sdpResponse.text();
+
+
+      if (!sdpResponse.ok) {
+        throw new Error(
+          answerSdp ||
+          "Falha ao abrir a sessão de voz."
+        );
+      }
+
+
+      await pc.setRemoteDescription({
+        type:
+          "answer",
+        sdp:
+          answerSdp,
+      });
+
+    }
+    catch (
+      error
+    ) {
+      console.error(
+        "Cortex Voice connect:",
+        error
+      );
+
+      cortexVoiceDisconnect(
+        false
+      );
+
+      cortexVoiceOpenPanel();
+
+      const denied =
+        error &&
+        (
+          error.name ===
+            "NotAllowedError" ||
+          error.name ===
+            "PermissionDeniedError"
+        );
+
+
+      cortexVoiceSetStatus(
+        denied
+          ? "Microfone bloqueado"
+          : "Não foi possível conectar",
+        denied
+          ? "Permita o uso do microfone no navegador e tente novamente."
+          : (
+              error?.message ||
+              "Tente novamente em alguns segundos."
+            ),
+        "error"
+      );
+    }
+    finally {
+      cortexVoiceState.connecting =
+        false;
+    }
+  }
+
+
+  $("cortexVoiceButton")
+    ?.addEventListener(
+      "click",
+      function () {
+        void cortexVoiceConnect();
+      }
+    );
+
+
+  $("cortexVoiceEnd")
+    ?.addEventListener(
+      "click",
+      function () {
+        cortexVoiceDisconnect(
+          true
+        );
+      }
+    );
+
+
+  $("cortexVoiceStop")
+    ?.addEventListener(
+      "click",
+      function () {
+        cortexVoiceDisconnect(
+          true
+        );
+      }
+    );
+
+
+  $("cortexVoiceMute")
+    ?.addEventListener(
+      "click",
+      function () {
+        cortexVoiceState.muted =
+          !cortexVoiceState.muted;
+
+
+        cortexVoiceState.stream
+          ?.getAudioTracks()
+          .forEach(
+            function (
+              track
+            ) {
+              track.enabled =
+                !cortexVoiceState.muted;
+            }
+          );
+
+
+        this.classList.toggle(
+          "muted",
+          cortexVoiceState.muted
+        );
+
+
+        this.setAttribute(
+          "aria-pressed",
+          cortexVoiceState.muted
+            ? "true"
+            : "false"
+        );
+
+
+        cortexVoiceSetStatus(
+          cortexVoiceState.muted
+            ? "Microfone desativado"
+            : "Pode falar",
+          cortexVoiceState.muted
+            ? "A conversa continua conectada."
+            : "Estou ouvindo.",
+          cortexVoiceState.muted
+            ? "muted"
+            : "ready"
+        );
+      }
+    );
+
+
+  window.addEventListener(
+    "beforeunload",
+    function () {
+      cortexVoiceDisconnect(
+        false
+      );
+    }
+  );
+
+
+
+  /* =======================================================
      CORTEX FLOATING PLAYER
   ======================================================= */
 
