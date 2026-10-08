@@ -3,6 +3,10 @@ const state = {
   respostas: {},
   estudoCards: [],
   estudoIndex: 0,
+  estudoQuantidade: 10,
+  cronogramaTaskId: null,
+  cronogramaAuto: false,
+  cronogramaConcluido: false,
   total: 0,
   pagina: 1,
   paginas: 1,
@@ -461,11 +465,195 @@ async function criarFlashcard(event) {
   }
 }
 
+
+function garantirModalEstudo() {
+  let modal = $("flashStudySetup");
+  if (modal) return modal;
+
+  modal = document.createElement("div");
+  modal.id = "flashStudySetup";
+  modal.className = "flash-study-modal";
+  modal.innerHTML = `
+    <div class="flash-study-dialog" role="dialog" aria-modal="true" aria-labelledby="flashStudyTitle">
+      <div class="flash-study-dialog-header">
+        <div>
+          <span>CONFIGURAR REVISÃO</span>
+          <h2 id="flashStudyTitle">Escolha o que revisar</h2>
+          <p>Defina disciplina, assunto, dificuldade e quantidade de flashcards.</p>
+        </div>
+        <button id="fecharFlashStudySetup" type="button" aria-label="Fechar">&times;</button>
+      </div>
+
+      <div class="flash-study-config-grid">
+        <label>
+          <span>Área / disciplina</span>
+          <select id="flashSetupDisciplina"></select>
+        </label>
+
+        <label>
+          <span>Assunto / tópico</span>
+          <select id="flashSetupAssunto"></select>
+        </label>
+
+        <label>
+          <span>Dificuldade</span>
+          <select id="flashSetupDificuldade">
+            <option value="">Todas</option>
+            <option value="facil">Fácil</option>
+            <option value="medio">Médio</option>
+            <option value="dificil">Difícil</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Quantidade</span>
+          <select id="flashSetupQuantidade">
+            <option value="10">10 flashcards</option>
+            <option value="15">15 flashcards</option>
+            <option value="20">20 flashcards</option>
+            <option value="24">24 flashcards</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="flash-study-dialog-footer">
+        <span id="flashSetupDisponiveis"></span>
+        <button id="confirmarFlashStudySetup" class="button-primary" type="button">
+          Iniciar revisão
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  $("fecharFlashStudySetup").addEventListener("click", fecharModalEstudo);
+  modal.addEventListener("mousedown", function(event) {
+    if (event.target === modal) fecharModalEstudo();
+  });
+
+  $("flashSetupDisciplina").addEventListener("change", function() {
+    atualizarAssuntosModalEstudo();
+  });
+
+  $("confirmarFlashStudySetup").addEventListener("click", iniciarEstudoConfigurado);
+
+  return modal;
+}
+
+function preencherSelectEstudo(id, itens, placeholder, atual) {
+  const select = $(id);
+  if (!select) return;
+
+  select.innerHTML =
+    '<option value="">' + escapeHtml(placeholder) + '</option>' +
+    (itens || []).map((item) =>
+      '<option value="' + escapeHtml(item) + '">' + escapeHtml(item) + '</option>'
+    ).join("");
+
+  if (atual && Array.from(select.options).some((option) => option.value === atual)) {
+    select.value = atual;
+  }
+}
+
+function atualizarAssuntosModalEstudo() {
+  const disciplina = $("flashSetupDisciplina")?.value || "";
+  const assuntos = new Set();
+
+  if (!disciplina) {
+    (state.filtrosMeta.assuntos || []).forEach((item) => assuntos.add(item));
+  } else {
+    state.flashcards.forEach((card) => {
+      if (String(card.disciplina || "") === disciplina && card.tema) {
+        assuntos.add(card.tema);
+      }
+    });
+
+    if (!assuntos.size) {
+      (state.filtrosMeta.assuntos || []).forEach((item) => assuntos.add(item));
+    }
+  }
+
+  preencherSelectEstudo(
+    "flashSetupAssunto",
+    Array.from(assuntos).sort((a,b) => a.localeCompare(b,"pt-BR")),
+    "Todos os assuntos",
+    state.filtros.assunto
+  );
+}
+
+function atualizarModalEstudo() {
+  garantirModalEstudo();
+
+  preencherSelectEstudo(
+    "flashSetupDisciplina",
+    state.filtrosMeta.disciplinas,
+    "Todas as disciplinas",
+    state.filtros.disciplina
+  );
+
+  atualizarAssuntosModalEstudo();
+
+  $("flashSetupDificuldade").value = state.filtros.dificuldade || "";
+  $("flashSetupQuantidade").value = String(state.estudoQuantidade || 10);
+  $("flashSetupDisponiveis").textContent =
+    state.total + (state.total === 1 ? " flashcard disponível" : " flashcards disponíveis");
+}
+
+function abrirModalEstudo() {
+  atualizarModalEstudo();
+  $("flashStudySetup").classList.add("open");
+  document.body.classList.add("flash-study-modal-open");
+}
+
+function fecharModalEstudo() {
+  const modal = $("flashStudySetup");
+  if (modal) modal.classList.remove("open");
+  document.body.classList.remove("flash-study-modal-open");
+}
+
+async function iniciarEstudoConfigurado() {
+  state.filtros.disciplina = $("flashSetupDisciplina")?.value || "";
+  state.filtros.assunto = $("flashSetupAssunto")?.value || "";
+  state.filtros.subassunto = "";
+  state.filtros.dificuldade = $("flashSetupDificuldade")?.value || "";
+  state.filtros.busca = "";
+  state.pagina = 1;
+  state.estudoQuantidade = Math.max(1, Math.min(24, Number($("flashSetupQuantidade")?.value) || 10));
+
+  await carregarFlashcards();
+
+  fecharModalEstudo();
+  iniciarEstudo(state.estudoQuantidade);
+}
+
+async function concluirTarefaCronogramaFlashcards() {
+  if (
+    !state.cronogramaAuto ||
+    !state.cronogramaTaskId ||
+    state.cronogramaConcluido
+  ) {
+    return;
+  }
+
+  await api("/api/cronograma/task", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      taskId: state.cronogramaTaskId,
+      completed: true,
+      progress: 100
+    })
+  });
+
+  state.cronogramaConcluido = true;
+}
+
 function cardsEmEstudo() {
   return state.estudoCards;
 }
 
-function iniciarEstudo() {
+function iniciarEstudo(quantidade = state.estudoQuantidade || 10) {
   if (!state.flashcards.length) {
     mostrarErro("Nao ha flashcards para estudar com os filtros atuais.");
     return;
@@ -483,7 +671,7 @@ function iniciarEstudo() {
       Number(b.progresso?.erros || 0) - Number(a.progresso?.erros || 0)
     ),
     ...outros
-  ];
+  ].slice(0, Math.max(1, Math.min(Number(quantidade) || 10, state.flashcards.length)));
 
   state.estudoIndex = 0;
   $("bibliotecaView").classList.add("hidden");
@@ -600,13 +788,19 @@ async function registrarResultado(correta) {
   }
 }
 
-function proximoCard() {
+async function proximoCard() {
   const cards = cardsEmEstudo();
   if (!cards.length) return;
 
   if (state.estudoIndex >= cards.length - 1) {
+    try {
+      await concluirTarefaCronogramaFlashcards();
+    } catch (erro) {
+      console.error("Falha ao concluir revisão no cronograma:", erro);
+    }
+
     sairEstudo();
-    carregarFlashcards();
+    await carregarFlashcards();
     return;
   }
 
@@ -649,8 +843,8 @@ $("abrirFormulario").addEventListener("click", abrirFormulario);
 $("fecharFormulario").addEventListener("click", fecharFormulario);
 $("cancelarFormulario").addEventListener("click", fecharFormulario);
 $("flashcardForm").addEventListener("submit", criarFlashcard);
-$("iniciarEstudoTopo").addEventListener("click", iniciarEstudo);
-$("iniciarEstudoCard").addEventListener("click", iniciarEstudo);
+$("iniciarEstudoTopo").addEventListener("click", abrirModalEstudo);
+$("iniciarEstudoCard").addEventListener("click", abrirModalEstudo);
 $("sairEstudo").addEventListener("click", sairEstudo);
 $("proximoCard").addEventListener("click", proximoCard);
 $("cardAnterior").addEventListener("click", cardAnterior);
@@ -661,11 +855,57 @@ $("logoutSidebar").addEventListener("click", sair);
 async function iniciar() {
   try {
     garantirFiltrosPremium();
+    garantirModalEstudo();
 
     await Promise.all([
       carregarUsuario(),
       carregarFlashcards()
     ]);
+
+    const params = new URLSearchParams(window.location.search);
+    const temaCronograma = String(params.get("tema") || "").trim();
+    const taskId = Number(params.get("cronogramaTaskId"));
+    const quantidade = Math.max(1, Math.min(24, Number(params.get("quantidade")) || 10));
+    const auto = params.get("auto") === "1";
+
+    if (Number.isInteger(taskId) && taskId > 0) {
+      state.cronogramaTaskId = taskId;
+    }
+
+    if (temaCronograma) {
+      try {
+        const resolvido = await api(
+          "/api/questoes/resolver-tema?tema=" + encodeURIComponent(temaCronograma)
+        );
+
+        if (resolvido && resolvido.assunto) {
+          state.filtros.disciplina = resolvido.disciplina || "";
+          state.filtros.assunto = resolvido.assunto || "";
+        } else {
+          state.filtros.assunto = temaCronograma;
+        }
+      } catch (erroResolver) {
+        console.warn("Falha ao resolver tema para flashcards:", erroResolver);
+        state.filtros.assunto = temaCronograma;
+      }
+
+      state.filtros.busca = "";
+      state.filtros.subassunto = "";
+      state.filtros.dificuldade = "";
+      state.pagina = 1;
+      state.estudoQuantidade = quantidade;
+
+      await carregarFlashcards();
+
+      if (auto && state.cronogramaTaskId && state.flashcards.length) {
+        state.cronogramaAuto = true;
+        state.cronogramaConcluido = false;
+        iniciarEstudo(quantidade);
+        return;
+      }
+    }
+
+    atualizarModalEstudo();
   } catch (erro) {
     console.error(erro);
   }
