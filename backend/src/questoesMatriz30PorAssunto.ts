@@ -337,8 +337,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
     return;
   }
 
-  let totalInseridas = 0;
-  let assuntosCompletos = 0;
+  const disciplinasBanco = new Map<string, Awaited<ReturnType<typeof obterDisciplinaBase>>>();
 
   for (const item of MATRIZ) {
     const disciplina = await obterDisciplinaBase(
@@ -346,68 +345,120 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
       item.disciplina
     );
 
-    for (const assunto of item.assuntos) {
-      const existentes = await prisma.questao.findMany({
-        where: {
-          disciplina: {
-            nome: {
-              equals: item.disciplina,
-              mode: "insensitive",
-            },
-          },
-          tema: {
-            equals: assunto,
+    disciplinasBanco.set(
+      item.disciplina,
+      disciplina
+    );
+  }
+
+  const tarefas = MATRIZ.flatMap((item) =>
+    item.assuntos.map((assunto) => ({
+      item,
+      assunto,
+    }))
+  );
+
+  let proximaTarefa = 0;
+  let totalInseridas = 0;
+  let assuntosCompletos = 0;
+
+  async function processarTarefa(
+    item: MatrizDisciplina,
+    assunto: string
+  ) {
+    const disciplina =
+      disciplinasBanco.get(
+        item.disciplina
+      );
+
+    if (!disciplina) {
+      throw new Error(
+        "Disciplina não preparada: " +
+        item.disciplina
+      );
+    }
+
+    const existentes = await prisma.questao.findMany({
+      where: {
+        disciplina: {
+          nome: {
+            equals: item.disciplina,
             mode: "insensitive",
           },
         },
-        select: {
-          id: true,
-          enunciado: true,
-          origemId: true,
+        tema: {
+          equals: assunto,
+          mode: "insensitive",
         },
-        orderBy: { id: "desc" },
-      });
+      },
+      select: {
+        id: true,
+        enunciado: true,
+        origemId: true,
+      },
+      orderBy: { id: "desc" },
+    });
 
-      if (existentes.length >= META_POR_ASSUNTO) {
-        assuntosCompletos += 1;
-        console.log(
-          "[questoes-30]",
-          item.disciplina,
-          "/",
-          assunto,
-          "já possui",
-          existentes.length,
-          "questões."
-        );
-        continue;
-      }
-
-      let faltam = META_POR_ASSUNTO - existentes.length;
-      const contexto = existentes
-        .slice(0, 18)
-        .map((questao) => questao.enunciado.slice(0, 180));
+    if (existentes.length >= META_POR_ASSUNTO) {
+      assuntosCompletos += 1;
 
       console.log(
-        "[questoes-30] gerando",
-        faltam,
-        "para",
+        "[questoes-30]",
         item.disciplina,
         "/",
-        assunto
+        assunto,
+        "já possui",
+        existentes.length,
+        "questões."
       );
 
-      let indiceLote = 0;
+      return;
+    }
 
-      while (faltam > 0) {
-        const quantidade = Math.min(faltam, 30);
-        const geradas = await gerarLote(
+    let faltam =
+      META_POR_ASSUNTO -
+      existentes.length;
+
+    const contexto = existentes
+      .slice(0, 18)
+      .map((questao) =>
+        questao.enunciado.slice(
+          0,
+          180
+        )
+      );
+
+    console.log(
+      "[questoes-30] gerando",
+      faltam,
+      "para",
+      item.disciplina,
+      "/",
+      assunto
+    );
+
+    let indiceLote = 0;
+    let tentativasSemInsercao = 0;
+
+    while (faltam > 0) {
+      const quantidade =
+        Math.min(
+          faltam,
+          30
+        );
+
+      const geradas =
+        await gerarLote(
           item.disciplina,
           assunto,
           quantidade,
           contexto
         );
 
-        if (!geradas.length) {
+      if (!geradas.length) {
+        tentativasSemInsercao += 1;
+
+        if (tentativasSemInsercao >= 3) {
           throw new Error(
             "Nenhuma questão válida gerada para " +
             item.disciplina +
@@ -416,90 +467,220 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
           );
         }
 
-        for (const questao of geradas) {
-          const duplicada = await prisma.questao.findFirst({
+        continue;
+      }
+
+      let inseridasNesteLote = 0;
+
+      for (const questao of geradas) {
+        const duplicada =
+          await prisma.questao.findFirst({
             where: {
-              disciplinaId: disciplina.id,
+              disciplinaId:
+                disciplina.id,
+
               tema: {
                 equals: assunto,
                 mode: "insensitive",
               },
+
               enunciado: {
-                equals: questao.enunciado,
+                equals:
+                  questao.enunciado,
                 mode: "insensitive",
               },
             },
-            select: { id: true },
-          });
 
-          if (duplicada) continue;
-
-          indiceLote += 1;
-
-          await prisma.questao.create({
-            data: {
-              enunciado: questao.enunciado,
-              explicacao: questao.explicacao,
-              dificuldade: questao.dificuldade,
-              tema: assunto,
-              fonte: FONTE,
-              origemId:
-                FONTE +
-                "-" +
-                slug(item.disciplina) +
-                "-" +
-                slug(assunto) +
-                "-" +
-                Date.now().toString(36) +
-                "-" +
-                indiceLote.toString(36),
-              banca: "Cortex - estilo concursos/ENARE/EBSERH",
-              ano: 2026,
-              cargo:
-                item.disciplina === "Enfermagem" ||
-                item.disciplina === "Legislação do COFEN" ||
-                item.disciplina === "Legislação do SUS"
-                  ? "Enfermagem / Área da Saúde"
-                  : "Conhecimentos Gerais",
-              orgao: "Banco autoral Cortex",
-              usuarioId: usuario.id,
-              disciplinaId: disciplina.id,
-              alternativas: {
-                create: questao.alternativas,
-              },
+            select: {
+              id: true,
             },
           });
 
-          contexto.push(questao.enunciado.slice(0, 180));
-          faltam -= 1;
-          totalInseridas += 1;
-
-          if (faltam <= 0) break;
+        if (duplicada) {
+          continue;
         }
 
-        if (geradas.length < quantidade && faltam > 0) {
-          console.warn(
-            "[questoes-30] lote retornou menos itens válidos; tentando novamente:",
-            item.disciplina,
-            assunto,
-            faltam,
-            "restantes."
-          );
+        indiceLote += 1;
+
+        await prisma.questao.create({
+          data: {
+            enunciado:
+              questao.enunciado,
+
+            explicacao:
+              questao.explicacao,
+
+            dificuldade:
+              questao.dificuldade,
+
+            tema:
+              assunto,
+
+            fonte:
+              FONTE,
+
+            origemId:
+              FONTE +
+              "-" +
+              slug(
+                item.disciplina
+              ) +
+              "-" +
+              slug(
+                assunto
+              ) +
+              "-" +
+              Date.now().toString(36) +
+              "-" +
+              indiceLote.toString(36),
+
+            banca:
+              "Cortex - estilo concursos/ENARE/EBSERH",
+
+            ano:
+              2026,
+
+            cargo:
+              item.disciplina === "Enfermagem" ||
+              item.disciplina === "Legislação do COFEN" ||
+              item.disciplina === "Legislação do SUS"
+                ? "Enfermagem / Área da Saúde"
+                : "Conhecimentos Gerais",
+
+            orgao:
+              "Banco autoral Cortex",
+
+            usuarioId:
+              usuario.id,
+
+            disciplinaId:
+              disciplina.id,
+
+            alternativas: {
+              create:
+                questao.alternativas,
+            },
+          },
+        });
+
+        contexto.push(
+          questao.enunciado.slice(
+            0,
+            180
+          )
+        );
+
+        faltam -= 1;
+        totalInseridas += 1;
+        inseridasNesteLote += 1;
+
+        if (faltam <= 0) {
+          break;
         }
       }
 
-      assuntosCompletos += 1;
+      if (inseridasNesteLote === 0) {
+        tentativasSemInsercao += 1;
 
-      console.log(
-        "[questoes-30] completo:",
-        item.disciplina,
-        "/",
-        assunto,
-        "=",
-        META_POR_ASSUNTO
-      );
+        if (tentativasSemInsercao >= 3) {
+          throw new Error(
+            "Lotes repetidos demais para " +
+            item.disciplina +
+            " / " +
+            assunto
+          );
+        }
+      }
+      else {
+        tentativasSemInsercao = 0;
+      }
+    }
+
+    assuntosCompletos += 1;
+
+    console.log(
+      "[questoes-30] completo:",
+      item.disciplina,
+      "/",
+      assunto,
+      "=",
+      META_POR_ASSUNTO
+    );
+  }
+
+  async function worker(
+    workerId: number
+  ) {
+    while (true) {
+      const indice =
+        proximaTarefa++;
+
+      if (
+        indice >=
+        tarefas.length
+      ) {
+        return;
+      }
+
+      const tarefa =
+        tarefas[indice];
+
+      try {
+        await processarTarefa(
+          tarefa.item,
+          tarefa.assunto
+        );
+      }
+      catch (error) {
+        console.error(
+          "[questoes-30] falha worker",
+          workerId,
+          tarefa.item.disciplina,
+          "/",
+          tarefa.assunto,
+          ":",
+          error instanceof Error
+            ? error.message
+            : String(error)
+        );
+      }
     }
   }
+
+  const concorrencia =
+    Math.max(
+      1,
+      Math.min(
+        Number(
+          process.env.QUESTION_SEED_CONCURRENCY ||
+          3
+        ) || 3,
+        4
+      )
+    );
+
+  console.log(
+    "[questoes-30] iniciando matriz:",
+    tarefas.length,
+    "assuntos;",
+    META_POR_ASSUNTO,
+    "questões por assunto;",
+    concorrencia,
+    "workers."
+  );
+
+  await Promise.all(
+    Array.from(
+      {
+        length:
+          concorrencia,
+      },
+      (_, indice) =>
+        worker(
+          indice + 1
+        )
+    )
+  );
 
   console.log(
     "[questoes-30] matriz concluída:",
