@@ -2146,7 +2146,8 @@ async function importarQuestoesInternas(
 
 async function listarRespostas(
   request: IncomingMessage,
-  response: ServerResponse
+  response: ServerResponse,
+  url?: URL
 ) {
   const usuarioId =
     await exigirUsuario(
@@ -2159,25 +2160,63 @@ async function listarRespostas(
   }
 
   try {
+    const modoDashboard =
+      url?.searchParams.get(
+        "modo"
+      ) ===
+      "dashboard";
+
+
     const respostas =
-      await prisma.resposta.findMany({
-        where: {
-          usuarioId,
-        },
-
-        include: {
-          questao: {
-            include: {
-              disciplina: true,
+      modoDashboard
+        ? await prisma.resposta.findMany({
+            where: {
+              usuarioId,
             },
-          },
-        },
 
-        orderBy: {
-          respondidaAt:
-            "desc",
-        },
-      });
+            select: {
+              id: true,
+              correta: true,
+              respondidaAt: true,
+              questaoId: true,
+
+              questao: {
+                select: {
+                  enunciado: true,
+
+                  disciplina: {
+                    select: {
+                      id: true,
+                      nome: true,
+                    },
+                  },
+                },
+              },
+            },
+
+            orderBy: {
+              respondidaAt:
+                "desc",
+            },
+          })
+        : await prisma.resposta.findMany({
+            where: {
+              usuarioId,
+            },
+
+            include: {
+              questao: {
+                include: {
+                  disciplina: true,
+                },
+              },
+            },
+
+            orderBy: {
+              respondidaAt:
+                "desc",
+            },
+          });
 
     json(
       response,
@@ -4943,7 +4982,8 @@ const server =
           ) {
             await listarRespostas(
               request,
-              response
+              response,
+              url
             );
 
             return;
