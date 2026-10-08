@@ -310,14 +310,41 @@
     renderCourses(data.courses);
   }
 
-  async function loadOverview(force) {
-    showMessage("Sincronizando dados acadêmicos...", "info");
+  let overviewRefreshTimer = 0;
+  let overviewRefreshAttempts = 0;
+
+  async function loadOverview(force, silent = false) {
+    if (!silent) {
+      showMessage("Sincronizando dados acadêmicos...", "info");
+    }
+
     try {
       const data = await api("/api/sigaa/overview" + (force ? "?force=1" : ""));
       renderOverview(data);
-      showMessage("", "");
+
+      if (data.syncing) {
+        if (!silent) {
+          showMessage("Dados principais atualizados. Finalizando avisos e prioridades em segundo plano...", "info");
+        }
+
+        window.clearTimeout(overviewRefreshTimer);
+
+        if (overviewRefreshAttempts < 4) {
+          overviewRefreshAttempts += 1;
+          overviewRefreshTimer = window.setTimeout(
+            () => loadOverview(false, true),
+            overviewRefreshAttempts === 1 ? 900 : 1600
+          );
+        }
+      } else {
+        overviewRefreshAttempts = 0;
+        window.clearTimeout(overviewRefreshTimer);
+        showMessage("", "");
+      }
     } catch (error) {
-      showMessage(error.message, "error");
+      if (!silent) {
+        showMessage(error.message, "error");
+      }
     }
   }
 
@@ -579,7 +606,10 @@
     }
   });
 
-  $("refreshButton").addEventListener("click", () => loadOverview(true));
+  $("refreshButton").addEventListener("click", () => {
+    overviewRefreshAttempts = 0;
+    loadOverview(true);
+  });
   $("refreshCourseButton").addEventListener("click", () => currentCourseId && openCourse(currentCourseId, true));
   $("backToDashboard").addEventListener("click", () => {
     $("courseWorkspace").classList.add("hidden");

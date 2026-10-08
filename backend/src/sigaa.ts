@@ -76,6 +76,12 @@ type SigaaSession = {
         SigaaOverview;
     };
 
+  enriching?:
+    boolean;
+
+  enrichmentPromise?:
+    Promise<void>;
+
 };
 
 
@@ -581,29 +587,38 @@ async function readNotice(
     any
 ): Promise<SigaaNotice> {
 
+  const [
+    dateResult,
+    contentResult,
+  ] =
+    await Promise.allSettled([
+      withTimeout<any>(
+        notice.getDate(),
+        4500,
+        "Timeout em aviso."
+      ),
+      withTimeout(
+        notice.getContent(),
+        4500,
+        "Timeout no conteudo."
+      ),
+    ]);
+
+
   let date:
     string |
     null =
     null;
 
 
-  let content =
-    "";
-
-
-  try {
-
-    const rawDate =
-      await withTimeout<any>(
-        notice.getDate(),
-        6000,
-        "Timeout em aviso."
-      );
-
+  if (
+    dateResult.status ===
+    "fulfilled"
+  ) {
 
     const parsed =
       new Date(
-        rawDate
+        dateResult.value
       );
 
 
@@ -619,44 +634,25 @@ async function readNotice(
     }
 
   }
-  catch {
-
-    // Avisos sem data continuam validos.
-
-  }
 
 
-  try {
-
-    const rawContent =
-      await withTimeout(
-        notice.getContent(),
-        6000,
-        "Timeout no conteudo."
-      );
-
-
-    content =
-      String(
-        rawContent ||
-        ""
-      )
-        .replace(
-          /\s+/g,
-          " "
+  const content =
+    contentResult.status ===
+      "fulfilled"
+      ? String(
+          contentResult.value ||
+          ""
         )
-        .trim()
-        .slice(
-          0,
-          1200
-        );
-
-  }
-  catch {
-
-    // Conteudo detalhado pode nao estar disponivel.
-
-  }
+          .replace(
+            /\s+/g,
+            " "
+          )
+          .trim()
+          .slice(
+            0,
+            1200
+          )
+      : "";
 
 
   return {
@@ -4205,6 +4201,211 @@ async function loadUpcomingPriorities(
 }
 
 
+async function loadRecentNoticesFast(
+  courseObjects:
+    any[]
+) {
+
+  const groups =
+    await Promise.all(
+      courseObjects
+        .slice(
+          0,
+          10
+        )
+        .map(
+          async function (
+            course:
+              any
+          ) {
+
+            try {
+
+              const rawNotices =
+                await withTimeout(
+                  course.getNews(),
+                  6500,
+                  "Timeout ao carregar avisos."
+                );
+
+
+              const recentNotices =
+                Array
+                  .from(
+                    rawNotices as any[]
+                  )
+                  .slice(
+                    0,
+                    3
+                  );
+
+
+              return await Promise.all(
+                recentNotices.map(
+                  function (
+                    notice:
+                      any
+                  ) {
+
+                    return readNotice(
+                      notice,
+                      course
+                    );
+
+                  }
+                )
+              );
+
+            }
+            catch {
+
+              return [];
+
+            }
+
+          }
+        )
+    );
+
+
+  const notices =
+    groups.flat();
+
+
+  notices.sort(
+    function (
+      a,
+      b
+    ) {
+
+      const aTime =
+        a.date
+          ? new Date(
+              a.date
+            ).getTime()
+          : 0;
+
+
+      const bTime =
+        b.date
+          ? new Date(
+              b.date
+            ).getTime()
+          : 0;
+
+
+      return (
+        bTime -
+        aTime
+      );
+
+    }
+  );
+
+
+  return notices.slice(
+    0,
+    20
+  );
+
+}
+
+
+function startOverviewEnrichment(
+  session:
+    SigaaSession,
+  courseObjects:
+    any[],
+  baseOverview:
+    SigaaOverview
+) {
+
+  if (
+    session.enrichmentPromise
+  ) {
+
+    return;
+  }
+
+
+  session.enriching =
+    true;
+
+
+  session.enrichmentPromise =
+    Promise.all([
+      loadRecentNoticesFast(
+        courseObjects
+      ),
+      loadUpcomingPriorities(
+        courseObjects
+      ),
+    ])
+      .then(
+        function ([
+          notices,
+          priorities,
+        ]) {
+
+          const enriched:
+            SigaaOverview = {
+
+            ...baseOverview,
+
+            notices,
+
+            priorities,
+
+            updatedAt:
+              new Date()
+                .toISOString(),
+
+          };
+
+
+          session.cache = {
+
+            createdAt:
+              Date.now(),
+
+            value:
+              enriched,
+
+          };
+
+        }
+      )
+      .catch(
+        function (
+          error
+        ) {
+
+          console.warn(
+            "SIGAA background sync:",
+            error instanceof Error
+              ? error.message
+              : String(
+                  error
+                )
+          );
+
+        }
+      )
+      .finally(
+        function () {
+
+          session.enriching =
+            false;
+
+          session.enrichmentPromise =
+            undefined;
+
+        }
+      );
+
+}
+
+
 export async function sigaaOverview(
   userId:
     number,
@@ -4261,6 +4462,11 @@ export async function sigaaOverview(
 
         cached:
           true,
+
+        syncing:
+          Boolean(
+            session.enriching
+          ),
 
       },
 
@@ -4319,22 +4525,24 @@ export async function sigaaOverview(
     }
 
 
-    const currentPeriod =
-      await withTimeout(
-        studentBond
-          .getCurrentPeriod(),
-        12000,
-        "Timeout ao carregar periodo."
-      );
-
-
-    const rawCourses =
-      await withTimeout(
-        studentBond
-          .getCourses(),
-        18000,
-        "Timeout ao carregar turmas."
-      );
+    const [
+      currentPeriod,
+      rawCourses,
+    ] =
+      await Promise.all([
+        withTimeout(
+          studentBond
+            .getCurrentPeriod(),
+          9000,
+          "Timeout ao carregar periodo."
+        ),
+        withTimeout(
+          studentBond
+            .getCourses(),
+          12000,
+          "Timeout ao carregar turmas."
+        ),
+      ]);
 
 
     const courseObjects =
@@ -4401,111 +4609,8 @@ export async function sigaaOverview(
       );
 
 
-    const notices:
-      SigaaNotice[] = [];
-
-
-    /*
-     * Limitamos a leitura inicial para
-     * evitar excesso de requisicoes no SIGAA.
-     */
-
-    for (
-      const course
-      of courseObjects.slice(
-        0,
-        10
-      )
-    ) {
-
-      try {
-
-        const rawNotices =
-          await withTimeout(
-            course.getNews(),
-            10000,
-            "Timeout ao carregar avisos."
-          );
-
-
-        const recentNotices =
-          Array
-            .from(
-              rawNotices as any[]
-            )
-            .slice(
-              0,
-              3
-            );
-
-
-        for (
-          const notice
-          of recentNotices
-        ) {
-
-          notices.push(
-            await readNotice(
-              notice,
-              course
-            )
-          );
-
-        }
-
-      }
-      catch (
-        error
-      ) {
-
-        console.warn(
-          "SIGAA news:",
-          String(
-            course?.title ||
-            "turma"
-          )
-        );
-
-      }
-
-    }
-
-
-    notices.sort(
-      function (
-        a,
-        b
-      ) {
-
-        const aTime =
-          a.date
-            ? new Date(
-                a.date
-              ).getTime()
-            : 0;
-
-
-        const bTime =
-          b.date
-            ? new Date(
-                b.date
-              ).getTime()
-            : 0;
-
-
-        return (
-          bTime -
-          aTime
-        );
-
-      }
-    );
-
-
-    const priorities =
-      await loadUpcomingPriorities(
-        courseObjects
-      );
+    const previous =
+      session.cache?.value;
 
 
     const overview:
@@ -4542,12 +4647,12 @@ export async function sigaaOverview(
       courses,
 
       notices:
-        notices.slice(
-          0,
-          20
-        ),
+        previous?.notices ||
+        [],
 
-      priorities,
+      priorities:
+        previous?.priorities ||
+        [],
 
       schedule:
         parseSchedule(
@@ -4572,6 +4677,13 @@ export async function sigaaOverview(
     };
 
 
+    startOverviewEnrichment(
+      session,
+      courseObjects,
+      overview
+    );
+
+
     return {
 
       status:
@@ -4583,6 +4695,9 @@ export async function sigaaOverview(
 
         cached:
           false,
+
+        syncing:
+          true,
 
       },
 
