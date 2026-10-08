@@ -22,6 +22,9 @@
     selectedTopics:
       new Set(),
 
+    topicsInitialized:
+      false,
+
     questionSource:
       "all",
 
@@ -789,8 +792,7 @@
 
 
     if (
-      state.selectedTopics.size ===
-      0
+      !state.topicsInitialized
     ) {
 
       topics.forEach(
@@ -804,6 +806,10 @@
 
         }
       );
+
+
+      state.topicsInitialized =
+        true;
 
     }
     else {
@@ -826,25 +832,6 @@
             )
         );
 
-
-      if (
-        state.selectedTopics.size ===
-        0
-      ) {
-
-        topics.forEach(
-          function (
-            topic
-          ) {
-
-            state.selectedTopics.add(
-              topic
-            );
-
-          }
-        );
-
-      }
 
     }
 
@@ -1165,8 +1152,6 @@
 
 
           const topicMatches =
-            state.selectedTopics.size ===
-              0 ||
             state.selectedTopics.has(
               topic
             );
@@ -3618,6 +3603,12 @@
               state.selectedAreas
                 .clear();
 
+              state.selectedTopics
+                .clear();
+
+              state.topicsInitialized =
+                false;
+
               renderAreas();
 
             }
@@ -3642,6 +3633,12 @@
 
               state.selectedAreas
                 .clear();
+
+              state.selectedTopics
+                .clear();
+
+              state.topicsInitialized =
+                false;
 
               renderAreas();
 
@@ -3676,6 +3673,12 @@
 
             state.selectedAreas
               .clear();
+
+            state.selectedTopics
+              .clear();
+
+            state.topicsInitialized =
+              false;
 
             renderAreas();
 
@@ -3799,6 +3802,9 @@
 
           state.selectedTopics.clear();
 
+          state.topicsInitialized =
+            true;
+
           sourceScopedQuestions()
             .forEach(
               function (
@@ -3836,6 +3842,9 @@
         function () {
 
           state.selectedTopics.clear();
+
+          state.topicsInitialized =
+            true;
 
 
           $("topicsGrid")
