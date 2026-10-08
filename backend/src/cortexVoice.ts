@@ -200,15 +200,39 @@ export async function criarCortexVoiceClientSecret(
         data
       );
 
+      const rawMessage =
+        String(
+          data?.error?.message ||
+          ""
+        );
+
+      const noCredits =
+        /no credits remaining|credit_balance_exhausted|insufficient_quota/i
+          .test(
+            rawMessage
+          );
+
       return {
         status:
-          response.status >= 500
-            ? 502
-            : 400,
+          noCredits
+            ? 402
+            : (
+                response.status >= 500
+                  ? 502
+                  : 400
+              ),
         data: {
           error:
-            data?.error?.message ||
-            "Não foi possível iniciar o Cortex Voice.",
+            noCredits
+              ? "Os créditos da API da OpenAI acabaram. O ChatGPT Plus não inclui saldo da API."
+              : (
+                  rawMessage ||
+                  "Não foi possível iniciar o Cortex Voice."
+                ),
+          code:
+            noCredits
+              ? "VOICE_CREDITS_EXHAUSTED"
+              : "VOICE_SESSION_ERROR",
         },
       };
     }
