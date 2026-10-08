@@ -2481,17 +2481,6 @@ $("busca")
   );
 
 
-$("filtroDisciplina")
-  .addEventListener(
-    "change",
-    function () {
-      aplicarFiltros(
-        true
-      );
-    }
-  );
-
-
 $("filtroDificuldade")
   .addEventListener(
     "change",
