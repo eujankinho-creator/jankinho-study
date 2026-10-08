@@ -5539,6 +5539,51 @@ server.listen(
   PORT,
   function () {
 
+    void (
+      async function auditarQuestoesGlobais() {
+        const agrupadas = await prisma.questao.groupBy({
+          by: ["disciplinaId", "tema"],
+          _count: { _all: true },
+          orderBy: [
+            { disciplinaId: "asc" },
+            { tema: "asc" },
+          ],
+        });
+
+        const disciplinas = await prisma.disciplina.findMany({
+          select: { id: true, nome: true },
+        });
+
+        const nomes = new Map(
+          disciplinas.map((item) => [item.id, item.nome])
+        );
+
+        const linhas = agrupadas.map((item) => ({
+          disciplina: nomes.get(item.disciplinaId) || ("#" + item.disciplinaId),
+          assunto: item.tema || "Sem assunto",
+          quantidade: item._count._all,
+        }));
+
+        console.log(
+          "[questoes-stats] RESUMO " +
+          JSON.stringify({
+            assuntosGlobais: linhas.length,
+            questoesComAssunto: linhas.reduce((soma, item) => soma + item.quantidade, 0),
+          })
+        );
+
+        for (let i = 0; i < linhas.length; i += 20) {
+          console.log(
+            "[questoes-stats] LOTE " +
+            JSON.stringify(linhas.slice(i, i + 20))
+          );
+        }
+      }
+    )().catch(function (error) {
+      console.error("[questoes-stats] Falha:", error);
+    });
+
+
     void resetAllPerformanceIfRequested()
       .catch(
         function (error) {
