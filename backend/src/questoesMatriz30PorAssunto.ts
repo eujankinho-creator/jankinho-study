@@ -5,8 +5,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const FONTE = "cortex-matriz-concursos-30-assunto-v1";
-const META_POR_ASSUNTO = 30;
+const FONTE = "cortex-matriz-romulo-topicos-50-assunto-v2";
+const META_POR_ASSUNTO = 50;
 
 type MatrizDisciplina = {
   disciplina: string;
@@ -38,13 +38,23 @@ const MATRIZ: MatrizDisciplina[] = [
       "Controle de Infecção e Biossegurança",
       "Administração de Medicamentos e Cálculos",
       "Urgência e Emergência",
-      "Saúde do Adulto e do Idoso",
+      "Saúde do Adulto",
+      "Saúde do Idoso",
       "Saúde da Mulher",
       "Saúde da Criança e do Adolescente",
+      "Imunização",
+      "Hipertensão Arterial",
+      "Diabetes Mellitus",
+      "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)",
+      "Tuberculose",
+      "Hanseníase",
+      "Raiva Humana",
       "Saúde Mental",
       "Atenção Primária à Saúde",
-      "Epidemiologia, Vigilância e Imunização",
-      "Centro Cirúrgico e CME",
+      "Epidemiologia e Vigilância em Saúde",
+      "Centro Cirúrgico",
+      "Centro de Material e Esterilização (CME)",
+      "Gerenciamento de Resíduos de Serviços de Saúde (GRSS)",
       "Gestão em Enfermagem",
       "Ética e Legislação em Enfermagem",
     ],
@@ -100,12 +110,18 @@ const MATRIZ: MatrizDisciplina[] = [
       "Interpretação de Textos",
       "Semântica e Significação",
       "Classes de Palavras",
+      "Ortografia e Acentuação",
+      "Estrutura e Formação de Palavras",
       "Sintaxe da Oração e do Período",
+      "Coordenação e Subordinação",
+      "Flexão Nominal e Verbal",
+      "Tempos, Modos e Vozes Verbais",
       "Concordância Verbal e Nominal",
       "Regência Verbal e Nominal",
       "Crase",
+      "Uso dos Porquês",
       "Pontuação",
-      "Ortografia e Acentuação",
+      "Figuras de Linguagem e Vícios de Linguagem",
       "Coesão e Coerência",
     ],
   },
@@ -117,9 +133,15 @@ const MATRIZ: MatrizDisciplina[] = [
       "Equivalências e Negações",
       "Argumentação Lógica",
       "Conjuntos",
+      "Conjuntos Numéricos",
+      "Equações de 1º e 2º Grau",
+      "Funções do 1º e 2º Grau",
+      "Função Exponencial e Logarítmica",
+      "Sistemas Lineares",
       "Razão, Proporção e Porcentagem",
       "Regra de Três e Problemas Aritméticos",
       "Sequências e Padrões",
+      "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
       "Análise Combinatória",
       "Probabilidade",
     ],
@@ -323,7 +345,7 @@ async function obterDisciplinaBase(
 
 export async function sincronizarMatrizQuestoes30PorAssunto() {
   if (process.env.SEED_QUESTOES_30_ASSUNTO === "0") {
-    console.log("[questoes-30] sincronização desativada por ambiente.");
+    console.log("[questoes-50] sincronização desativada por ambiente.");
     return;
   }
 
@@ -333,7 +355,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
   });
 
   if (!usuario) {
-    console.warn("[questoes-30] Nenhum usuário encontrado para vincular o banco global.");
+    console.warn("[questoes-50] Nenhum usuário encontrado para vincular o banco global.");
     return;
   }
 
@@ -405,7 +427,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
       assuntosCompletos += 1;
 
       console.log(
-        "[questoes-30]",
+        "[questoes-50]",
         item.disciplina,
         "/",
         assunto,
@@ -431,7 +453,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
       );
 
     console.log(
-      "[questoes-30] gerando",
+      "[questoes-50] gerando",
       faltam,
       "para",
       item.disciplina,
@@ -601,7 +623,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
     assuntosCompletos += 1;
 
     console.log(
-      "[questoes-30] completo:",
+      "[questoes-50] completo:",
       item.disciplina,
       "/",
       assunto,
@@ -635,7 +657,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
       }
       catch (error) {
         console.error(
-          "[questoes-30] falha worker",
+          "[questoes-50] falha worker",
           workerId,
           tarefa.item.disciplina,
           "/",
@@ -662,7 +684,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
     );
 
   console.log(
-    "[questoes-30] iniciando matriz:",
+    "[questoes-50] iniciando matriz:",
     tarefas.length,
     "assuntos;",
     META_POR_ASSUNTO,
@@ -685,7 +707,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
   );
 
   console.log(
-    "[questoes-30] matriz concluída:",
+    "[questoes-50] matriz concluída:",
     assuntosCompletos,
     "assuntos;",
     totalInseridas,
