@@ -631,7 +631,8 @@ async function concluirTarefaCronogramaFlashcards() {
   if (
     !state.cronogramaAuto ||
     !state.cronogramaTaskId ||
-    state.cronogramaConcluido
+    state.cronogramaConcluido ||
+    state.estudoCards.length < 10
   ) {
     return;
   }
@@ -897,7 +898,15 @@ async function iniciar() {
 
       await carregarFlashcards();
 
-      if (auto && state.cronogramaTaskId && state.flashcards.length) {
+      if (auto && state.cronogramaTaskId) {
+        if (state.flashcards.length < quantidade) {
+          mostrarErro(
+            "Ainda nao ha " + quantidade +
+            " flashcards disponiveis para concluir esta revisao do cronograma."
+          );
+          return;
+        }
+
         state.cronogramaAuto = true;
         state.cronogramaConcluido = false;
         iniciarEstudo(quantidade);
