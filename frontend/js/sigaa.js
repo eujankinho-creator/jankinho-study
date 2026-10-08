@@ -32,45 +32,188 @@
     return plain ? plain[1] : (fallback || "arquivo");
   }
 
-  function downloadSigaaFile(url, fallbackName, button) {
-    const targetUrl = String(url || "").trim();
+  async function downloadSigaaFile(
+    url,
+    fallbackName,
+    button
+  ) {
+    const targetUrl =
+      String(
+        url ||
+        ""
+      ).trim();
+
+
     if (!targetUrl) {
-      showMessage("Link de download indisponível.", "error");
+      showMessage(
+        "Link de download indisponível.",
+        "error"
+      );
       return;
     }
 
+
     if (button) {
-      button.setAttribute("aria-busy", "true");
+      button.setAttribute(
+        "aria-busy",
+        "true"
+      );
+      button.disabled =
+        true;
     }
 
+
     showMessage(
-      "Enviando " + (fallbackName || "arquivo") + " para o dispositivo...",
+      "Baixando o arquivo real do SIGAA...",
       "info"
     );
 
-    /*
-     * Download direto: preserva o gesto do usuario e deixa o
-     * Content-Disposition: attachment do backend controlar o arquivo.
-     * Isso e mais confiavel em mobile do que fetch -> Blob -> click().
-     */
+
     try {
-      const topWindow =
-        window.top &&
-        window.top !== window &&
-        window.top.location.origin === window.location.origin
-          ? window.top
-          : window;
+      const response =
+        await fetch(
+          targetUrl,
+          {
+            credentials:
+              "same-origin",
+            cache:
+              "no-store"
+          }
+        );
 
-      topWindow.location.href = targetUrl;
 
-      window.setTimeout(() => {
-        if (button) {
-          button.removeAttribute("aria-busy");
-        }
-        showMessage("", "");
-      }, 1800);
-    } catch {
-      window.location.href = targetUrl;
+      const contentType =
+        String(
+          response.headers.get(
+            "content-type"
+          ) ||
+          ""
+        ).toLowerCase();
+
+
+      if (
+        !response.ok ||
+        contentType.includes(
+          "application/json"
+        )
+      ) {
+        const data =
+          await response
+            .json()
+            .catch(
+              function () {
+                return {};
+              }
+            );
+
+
+        throw new Error(
+          data.error ||
+          "O SIGAA não entregou o arquivo real."
+        );
+      }
+
+
+      const blob =
+        await response.blob();
+
+
+      if (
+        !blob.size
+      ) {
+        throw new Error(
+          "O SIGAA retornou um arquivo vazio."
+        );
+      }
+
+
+      const filename =
+        filenameFromDisposition(
+          response.headers.get(
+            "content-disposition"
+          ),
+          fallbackName ||
+          "arquivo"
+        );
+
+
+      const objectUrl =
+        URL.createObjectURL(
+          blob
+        );
+
+
+      const anchor =
+        document.createElement(
+          "a"
+        );
+
+
+      anchor.href =
+        objectUrl;
+
+      anchor.download =
+        filename;
+
+      anchor.style.display =
+        "none";
+
+
+      document.body.appendChild(
+        anchor
+      );
+
+
+      anchor.click();
+
+
+      anchor.remove();
+
+
+      window.setTimeout(
+        function () {
+          URL.revokeObjectURL(
+            objectUrl
+          );
+        },
+        3000
+      );
+
+
+      showMessage(
+        "Arquivo real do SIGAA baixado.",
+        "success"
+      );
+
+
+      window.setTimeout(
+        function () {
+          showMessage(
+            "",
+            ""
+          );
+        },
+        1800
+      );
+
+    }
+    catch (error) {
+      showMessage(
+        error &&
+        error.message
+          ? error.message
+          : "Não foi possível baixar o arquivo real do SIGAA.",
+        "error"
+      );
+    }
+    finally {
+      if (button) {
+        button.removeAttribute(
+          "aria-busy"
+        );
+        button.disabled =
+          false;
+      }
     }
   }
 
@@ -401,7 +544,7 @@
         query.toString();
       const source = file.source || "SIGAA";
       const description = file.description ||
-        "Arquivo confirmado no SIGAA e disponível para download.";
+        "Arquivo identificado no SIGAA. O conteúdo é validado no momento do download.";
       const kind = file.kind || "ARQUIVO";
       const downloadLabel =
         kind === "PDF" ? "Baixar PDF" :
@@ -414,7 +557,7 @@
           <div class="resource-copy">
             <strong>${escapeHtml(file.title || "Arquivo")}</strong>
             <span>${escapeHtml(description)}</span>
-            <span class="resource-source">${escapeHtml(source)} · arquivo confirmado</span>
+            <span class="resource-source">${escapeHtml(source)} · arquivo identificado no SIGAA</span>
           </div>
           <a class="download-button" href="${escapeHtml(url)}"
             data-sigaa-download="${escapeHtml(url)}"
@@ -515,7 +658,7 @@
     $("tab-overview").innerHTML = `
       <div class="overview-cards">
         <article class="overview-feature"><small>DESEMPENHO</small><h3>Notas</h3><p>${gradeCount ? gradeCount + " lançamento(s) de nota disponíveis." : "Nenhuma nota lançada ou seção indisponível."}</p><button type="button" data-open-tab="grades">Ver boletim →</button></article>
-        <article class="overview-feature"><small>MATERIAIS</small><h3>Arquivos</h3><p>${files.length ? files.length + " arquivo(s) real(is) confirmado(s) para download." : "Nenhum arquivo encontrado."}</p><button type="button" data-open-tab="files">Abrir materiais →</button></article>
+        <article class="overview-feature"><small>MATERIAIS</small><h3>Arquivos</h3><p>${files.length ? files.length + " arquivo(s) identificado(s) no SIGAA." : "Nenhum arquivo encontrado."}</p><button type="button" data-open-tab="files">Abrir materiais →</button></article>
         <article class="overview-feature"><small>FREQUÊNCIA</small><h3>Presença</h3><p>${sections.absences?.available === false ? "Seção indisponível." : (sections.absences?.data?.totalAbsences || 0) + " falta(s) registrada(s)."}</p><button type="button" data-open-tab="attendance">Ver frequência →</button></article>
         <article class="overview-feature"><small>AGENDA</small><h3>Atividades</h3><p>${homeworks.length + exams.length ? homeworks.length + exams.length + " atividade(s) ou avaliação(ões)." : "Nenhuma atividade encontrada."}</p><button type="button" data-open-tab="activities">Ver agenda →</button></article>
       </div>
