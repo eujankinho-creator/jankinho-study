@@ -899,6 +899,283 @@ async function criarDisciplina(
    QUESTÕES
 ========================================================= */
 
+
+function normalizarTemaCronograma(
+  valor: unknown
+) {
+  return String(valor || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const TEMA_CRONOGRAMA_ALIASES: Array<{
+  termos: string[];
+  destino: string;
+  disciplina?: string;
+}> = [
+  { termos: ["sus na constituicao federal", "constituicao federal saude"], destino: "Constituição Federal - Saúde", disciplina: "Legislação do SUS" },
+  { termos: ["lei 8 080", "lei 8080", "lei nº 8 080"], destino: "Lei 8.080/1990 - Princípios e Diretrizes", disciplina: "Legislação do SUS" },
+  { termos: ["lei 8 142", "lei 8142", "controle social"], destino: "Controle Social no SUS", disciplina: "Legislação do SUS" },
+  { termos: ["decreto 7 508", "decreto 7508"], destino: "Decreto 7.508/2011", disciplina: "Legislação do SUS" },
+  { termos: ["redes de atencao a saude", "ras"], destino: "Redes de Atenção à Saúde", disciplina: "Legislação do SUS" },
+  { termos: ["vigilancia em saude", "notificacao compulsoria", "epidemiologia", "estudos epidemiologicos", "indicadores epidemiologicos"], destino: "Vigilância em Saúde", disciplina: "Legislação do SUS" },
+  { termos: ["pacto pela saude", "financiamento do sus", "lei complementar 141", "lc 141"], destino: "Financiamento do SUS e LC 141/2012", disciplina: "Legislação do SUS" },
+  { termos: ["atencao basica", "pnab", "temas de atencao basica"], destino: "Atenção Primária e PNAB", disciplina: "Legislação do SUS" },
+  { termos: ["saude da crianca e do adolescente", "saude integral da crianca"], destino: "Saúde da Criança e do Adolescente", disciplina: "Enfermagem" },
+  { termos: ["imunizacao"], destino: "Imunização", disciplina: "Enfermagem" },
+  { termos: ["saude da mulher", "saude integral da mulher"], destino: "Saúde da Mulher", disciplina: "Enfermagem" },
+  { termos: ["hipertensao arterial"], destino: "Hipertensão Arterial", disciplina: "Enfermagem" },
+  { termos: ["diabetes mellitus"], destino: "Diabetes Mellitus", disciplina: "Enfermagem" },
+  { termos: ["saude do idoso", "saude da pessoa idosa"], destino: "Saúde do Idoso", disciplina: "Enfermagem" },
+  { termos: ["fundamentos de enfermagem", "semiotecnica"], destino: "Fundamentos e Semiotécnica", disciplina: "Enfermagem" },
+  { termos: ["administracao e calculo de medicamentos", "calculo de medicamentos", "administracao de medicamentos"], destino: "Administração de Medicamentos e Cálculos", disciplina: "Enfermagem" },
+  { termos: ["enfermagem cirurgica", "centro cirurgico"], destino: "Centro Cirúrgico", disciplina: "Enfermagem" },
+  { termos: ["urgencias clinicas", "suporte basico e avancado de vida", "urgencias traumaticas", "trauma"], destino: "Urgência e Emergência", disciplina: "Enfermagem" },
+  { termos: ["uti", "unidade de tratamento intensivo", "clinica medica", "saude do adulto"], destino: "Saúde do Adulto", disciplina: "Enfermagem" },
+  { termos: ["saude mental", "politica nacional de saude mental"], destino: "Saúde Mental", disciplina: "Enfermagem" },
+  { termos: ["sae", "processo de enfermagem"], destino: "Processo de Enfermagem e SAE", disciplina: "Enfermagem" },
+  { termos: ["administracao em enfermagem", "gestao em enfermagem"], destino: "Gestão em Enfermagem", disciplina: "Enfermagem" },
+  { termos: ["seguranca do paciente"], destino: "Segurança do Paciente", disciplina: "Enfermagem" },
+  { termos: ["biosseguranca", "iras", "controle de infeccao"], destino: "Controle de Infecção e Biossegurança", disciplina: "Enfermagem" },
+  { termos: ["cme", "residuos solidos", "residuos de servicos de saude"], destino: "Centro de Material e Esterilização (CME)", disciplina: "Enfermagem" },
+  { termos: ["legislacao de enfermagem", "cepe", "bioetica", "codigo de etica"], destino: "Ética e Legislação em Enfermagem", disciplina: "Enfermagem" },
+  { termos: ["dengue", "zika", "chikungunya", "oropouche", "arbovirose"], destino: "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)", disciplina: "Enfermagem" },
+  { termos: ["tuberculose"], destino: "Tuberculose", disciplina: "Enfermagem" },
+  { termos: ["hanseniase"], destino: "Hanseníase", disciplina: "Enfermagem" },
+  { termos: ["raiva humana"], destino: "Raiva Humana", disciplina: "Enfermagem" }
+];
+
+function pontuarTemaCronograma(
+  consulta: string,
+  candidato: string
+) {
+  const q = normalizarTemaCronograma(consulta);
+  const c = normalizarTemaCronograma(candidato);
+
+  if (!q || !c) return 0;
+  if (q === c) return 1000;
+  if (c.includes(q) || q.includes(c)) return 700;
+
+  const ignorar = new Set([
+    "de", "da", "do", "das", "dos", "e", "em", "a", "o", "as", "os",
+    "para", "com", "no", "na", "nos", "nas", "n", "nº"
+  ]);
+
+  const qt = q.split(" ").filter((x) => x.length >= 3 && !ignorar.has(x));
+  const ct = new Set(c.split(" ").filter((x) => x.length >= 3 && !ignorar.has(x)));
+
+  if (!qt.length) return 0;
+
+  let matches = 0;
+  for (const token of qt) {
+    if (ct.has(token)) matches += 1;
+  }
+
+  return Math.round((matches / qt.length) * 500) + matches * 20;
+}
+
+async function resolverTemaQuestoesCronograma(
+  tema: string
+) {
+  const consultaNormalizada =
+    normalizarTemaCronograma(tema);
+
+  const agrupados =
+    await prisma.questao.groupBy({
+      by: ["disciplinaId", "tema"],
+      where: {
+        tema: {
+          not: null,
+        },
+      },
+      _count: {
+        _all: true,
+      },
+    });
+
+  const disciplinas =
+    await prisma.disciplina.findMany({
+      select: {
+        id: true,
+        nome: true,
+      },
+    });
+
+  const nomes =
+    new Map(
+      disciplinas.map(
+        (item) => [
+          item.id,
+          item.nome,
+        ]
+      )
+    );
+
+  const candidatos =
+    agrupados
+      .filter(
+        (item) =>
+          Boolean(
+            String(
+              item.tema ||
+              ""
+            ).trim()
+          )
+      )
+      .map(
+        (item) => ({
+          assunto:
+            String(
+              item.tema
+            ),
+
+          disciplina:
+            nomes.get(
+              item.disciplinaId
+            ) ||
+            "Geral",
+
+          quantidade:
+            item._count._all,
+        })
+      );
+
+  // 1. Correspondência exata.
+  const exato =
+    candidatos.find(
+      (item) =>
+        normalizarTemaCronograma(
+          item.assunto
+        ) ===
+        consultaNormalizada
+    );
+
+  if (exato) {
+    return {
+      ...exato,
+      tipo:
+        "exato",
+      temaOriginal:
+        tema,
+    };
+  }
+
+  // 2. Mapeamentos curriculares ENARE -> matriz Rômulo/Córtex.
+  for (const alias of TEMA_CRONOGRAMA_ALIASES) {
+    const bate =
+      alias.termos.some(
+        (termo) => {
+          const n =
+            normalizarTemaCronograma(
+              termo
+            );
+
+          return (
+            consultaNormalizada.includes(
+              n
+            ) ||
+            n.includes(
+              consultaNormalizada
+            )
+          );
+        }
+      );
+
+    if (!bate) continue;
+
+    const encontrado =
+      candidatos.find(
+        (item) =>
+          normalizarTemaCronograma(
+            item.assunto
+          ) ===
+          normalizarTemaCronograma(
+            alias.destino
+          ) &&
+          (
+            !alias.disciplina ||
+            normalizarTemaCronograma(
+              item.disciplina
+            ) ===
+            normalizarTemaCronograma(
+              alias.disciplina
+            )
+          )
+      );
+
+    if (encontrado) {
+      return {
+        ...encontrado,
+        tipo:
+          "matriz-romulo",
+        temaOriginal:
+          tema,
+      };
+    }
+  }
+
+  // 3. Melhor tema global por similaridade textual.
+  const ranqueados =
+    candidatos
+      .map(
+        (item) => ({
+          ...item,
+          score:
+            pontuarTemaCronograma(
+              tema,
+              item.assunto
+            ),
+        })
+      )
+      .filter(
+        (item) =>
+          item.score >= 170
+      )
+      .sort(
+        (a, b) =>
+          b.score -
+            a.score ||
+          b.quantidade -
+            a.quantidade
+      );
+
+  if (ranqueados.length) {
+    const melhor =
+      ranqueados[0];
+
+    return {
+      assunto:
+        melhor.assunto,
+      disciplina:
+        melhor.disciplina,
+      quantidade:
+        melhor.quantidade,
+      tipo:
+        "relacionado",
+      temaOriginal:
+        tema,
+    };
+  }
+
+  return {
+    assunto:
+      null,
+    disciplina:
+      null,
+    quantidade:
+      0,
+    tipo:
+      "indisponivel",
+    temaOriginal:
+      tema,
+  };
+}
+
+
 async function listarQuestoes(
   request: IncomingMessage,
   response: ServerResponse,
@@ -4497,6 +4774,52 @@ const server =
 
 
         /* QUESTÕES */
+
+        if (
+          caminho === "/api/questoes/resolver-tema" &&
+          metodo === "GET"
+        ) {
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          const tema =
+            String(
+              url.searchParams.get("tema") ||
+              ""
+            ).trim();
+
+          if (!tema) {
+            json(
+              response,
+              400,
+              {
+                error:
+                  "Tema obrigatório.",
+              }
+            );
+            return;
+          }
+
+          const resultado =
+            await resolverTemaQuestoesCronograma(
+              tema
+            );
+
+          json(
+            response,
+            200,
+            resultado
+          );
+          return;
+        }
+
 
         if (
           caminho === "/api/questoes/matriz" &&
