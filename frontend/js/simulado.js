@@ -791,6 +791,30 @@
         );
 
 
+    const topicQuery =
+      normalize(
+        $("topicSearch")
+          ? $("topicSearch").value
+          : ""
+      );
+
+
+    const visibleTopics =
+      topicQuery
+        ? topics.filter(
+            function (
+              topic
+            ) {
+              return normalize(
+                topic
+              ).includes(
+                topicQuery
+              );
+            }
+          )
+        : topics;
+
+
     if (
       !state.topicsInitialized
     ) {
@@ -846,7 +870,7 @@
 
 
     grid.innerHTML =
-      topics
+      visibleTopics
         .map(
           function (
             topic
@@ -881,6 +905,17 @@
           }
         )
         .join("");
+
+
+    if ($("selectedTopicsCount")) {
+      $("selectedTopicsCount").textContent =
+        state.selectedTopics.size === topics.length
+          ? "Todos os tópicos"
+          : state.selectedTopics.size +
+            (state.selectedTopics.size === 1
+              ? " tópico marcado"
+              : " tópicos marcados");
+    }
 
 
     grid
@@ -964,30 +999,33 @@
         );
 
 
-    if (
-      state.selectedAreas.size ===
-      0
-    ) {
-
-      areas.forEach(
-        function (
-          area
-        ) {
-
-          state.selectedAreas
-            .add(
-              area
-            );
-
-        }
+    const areaQuery =
+      normalize(
+        $("areaSearch")
+          ? $("areaSearch").value
+          : ""
       );
 
-    }
+
+    const visibleAreas =
+      areaQuery
+        ? areas.filter(
+            function (
+              area
+            ) {
+              return normalize(
+                area
+              ).includes(
+                areaQuery
+              );
+            }
+          )
+        : areas;
 
 
     $("areasGrid")
       .innerHTML =
-      areas
+      visibleAreas
         .map(
           function (
             area
@@ -1101,6 +1139,15 @@
     $("simTotalAreas")
       .textContent =
       areas.length;
+
+
+    if ($("selectedAreasCount")) {
+      $("selectedAreasCount").textContent =
+        state.selectedAreas.size +
+        (state.selectedAreas.size === 1
+          ? " selecionada"
+          : " selecionadas");
+    }
 
 
     renderTopics();
@@ -1881,7 +1928,19 @@
       ensureSimulationSetupModal();
 
 
-    renderTopics();
+    if ($("areaSearch")) {
+      $("areaSearch").value = "";
+    }
+
+
+    if ($("topicSearch")) {
+      $("topicSearch").value = "";
+    }
+
+
+    state.selectedAreas.clear();
+
+    renderAreas();
 
     updateAvailable();
 
@@ -3720,10 +3779,34 @@
       );
 
 
+    $("areaSearch")
+      .addEventListener(
+        "input",
+        function () {
+          renderAreas();
+        }
+      );
+
+
+    $("topicSearch")
+      .addEventListener(
+        "input",
+        function () {
+          renderTopics();
+        }
+      );
+
+
     $("selectAllAreas")
       .addEventListener(
         "click",
         function () {
+
+          const query =
+            normalize(
+              $("areaSearch").value
+            );
+
 
           areaMap()
             .forEach(
@@ -3732,10 +3815,19 @@
                 area
               ) {
 
-                state.selectedAreas
-                  .add(
+                if (
+                  !query ||
+                  normalize(
                     area
-                  );
+                  ).includes(
+                    query
+                  )
+                ) {
+                  state.selectedAreas
+                    .add(
+                      area
+                    );
+                }
 
               }
             );
@@ -3805,6 +3897,12 @@
           state.topicsInitialized =
             true;
 
+          const query =
+            normalize(
+              $("topicSearch").value
+            );
+
+
           sourceScopedQuestions()
             .forEach(
               function (
@@ -3818,7 +3916,17 @@
                   ).trim();
 
 
-                if (topic) {
+                if (
+                  topic &&
+                  (
+                    !query ||
+                    normalize(
+                      topic
+                    ).includes(
+                      query
+                    )
+                  )
+                ) {
                   state.selectedTopics.add(
                     topic
                   );
