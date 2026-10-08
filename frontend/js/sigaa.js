@@ -15,6 +15,146 @@
       .replace(/'/g, "&#039;");
   }
 
+  const SIGAA_REMEMBER_USER_KEY =
+    "cortex_sigaa_remember_user_v1";
+
+  const SIGAA_REMEMBER_ENABLED_KEY =
+    "cortex_sigaa_remember_enabled_v1";
+
+
+  function carregarLoginLembrado() {
+    try {
+      const enabled =
+        localStorage.getItem(
+          SIGAA_REMEMBER_ENABLED_KEY
+        ) ===
+        "1";
+
+      const username =
+        localStorage.getItem(
+          SIGAA_REMEMBER_USER_KEY
+        ) ||
+        "";
+
+      $("sigaaRememberLogin").checked =
+        enabled;
+
+      if (
+        enabled &&
+        username
+      ) {
+        $("sigaaUsername").value =
+          username;
+      }
+    }
+    catch (error) {}
+  }
+
+
+  async function tentarPreencherSenhaDoNavegador() {
+    if (
+      !("credentials" in navigator) ||
+      typeof window.PasswordCredential !==
+        "function"
+    ) {
+      return;
+    }
+
+    try {
+      const credential =
+        await navigator.credentials.get({
+          password: true,
+          mediation: "optional"
+        });
+
+      if (
+        credential &&
+        credential.type ===
+          "password"
+      ) {
+        if (
+          credential.id &&
+          !$("sigaaUsername").value
+        ) {
+          $("sigaaUsername").value =
+            credential.id;
+        }
+
+        if (
+          credential.password &&
+          $("sigaaRememberLogin").checked
+        ) {
+          $("sigaaPassword").value =
+            credential.password;
+        }
+      }
+    }
+    catch (error) {}
+  }
+
+
+  async function salvarLoginComSeguranca() {
+    const lembrar =
+      Boolean(
+        $("sigaaRememberLogin").checked
+      );
+
+    const username =
+      $("sigaaUsername").value.trim();
+
+    try {
+      if (lembrar) {
+        localStorage.setItem(
+          SIGAA_REMEMBER_ENABLED_KEY,
+          "1"
+        );
+
+        localStorage.setItem(
+          SIGAA_REMEMBER_USER_KEY,
+          username
+        );
+      }
+      else {
+        localStorage.removeItem(
+          SIGAA_REMEMBER_ENABLED_KEY
+        );
+
+        localStorage.removeItem(
+          SIGAA_REMEMBER_USER_KEY
+        );
+      }
+    }
+    catch (error) {}
+
+    if (
+      !lembrar ||
+      !("credentials" in navigator) ||
+      typeof window.PasswordCredential !==
+        "function"
+    ) {
+      return;
+    }
+
+    try {
+      const credential =
+        new PasswordCredential(
+          $("sigaaForm")
+        );
+
+      await navigator.credentials.store(
+        credential
+      );
+    }
+    catch (error) {
+      /*
+       * Alguns navegadores nao oferecem Credential Management API.
+       * O autocomplete=username/current-password continua permitindo
+       * que o gerenciador de senhas nativo ofereca o salvamento.
+       */
+    }
+  }
+
+
   async function api(url, options) {
     const response = await fetch(url, { credentials: "same-origin", ...options });
     const data = await response.json().catch(() => ({}));
@@ -737,6 +877,9 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
       });
+
+      await salvarLoginComSeguranca();
+
       $("sigaaPassword").value = "";
       setConnected(true, data.name);
       await loadOverview(true);
@@ -797,6 +940,27 @@
     if (window.top && window.top !== window) window.top.location.href = "/login.html";
     else location.href = "/login.html";
   });
+
+  carregarLoginLembrado();
+
+  tentarPreencherSenhaDoNavegador();
+
+  $("sigaaRememberLogin").addEventListener(
+    "change",
+    function () {
+      if (!this.checked) {
+        try {
+          localStorage.removeItem(
+            SIGAA_REMEMBER_ENABLED_KEY
+          );
+          localStorage.removeItem(
+            SIGAA_REMEMBER_USER_KEY
+          );
+        }
+        catch (error) {}
+      }
+    }
+  );
 
   loadStatus();
 })();
