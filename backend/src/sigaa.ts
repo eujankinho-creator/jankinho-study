@@ -1245,13 +1245,62 @@ function isDownloadableSigaaFile(
     );
 
 
+  const key =
+    safeText(
+      file?.key,
+      1000
+    );
+
+
+  const form =
+    file?.form;
+
+
+  const httpSession =
+    file?.http
+      ?.httpSession;
+
+
+  const hasAuthenticatedSession =
+    Boolean(
+      httpSession &&
+      typeof httpSession
+        .getURL ===
+        "function" &&
+      typeof httpSession
+        .afterHTTPOptions ===
+        "function"
+    );
+
+
+  const hasPostDownload =
+    Boolean(
+      form?.action?.href &&
+      form?.postValues
+    );
+
+
+  const hasKeyDownload =
+    Boolean(
+      id &&
+      key
+    );
+
+
+  /*
+   * So expomos como arquivo baixavel o item que possui
+   * dados suficientes para refazer o download autenticado
+   * diretamente no SIGAA.
+   */
   return Boolean(
     file?.type ===
       "file" &&
     id &&
-    typeof file
-      ?.download ===
-      "function"
+    hasAuthenticatedSession &&
+    (
+      hasPostDownload ||
+      hasKeyDownload
+    )
   );
 
 }
