@@ -1211,7 +1211,7 @@ async function carregarDashboard() {
 
     const respostasPromise =
       fetch(
-        "/api/respostas",
+        "/api/respostas?modo=dashboard",
         {
           credentials:
             "same-origin"
