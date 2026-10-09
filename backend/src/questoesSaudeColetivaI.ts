@@ -522,13 +522,17 @@ function escolherDistratores(
   tema: TemaFonte,
   alvo: string,
   corretas: string[],
+  modo:
+    "correta" |
+    "incorreta",
   quantidade = 4
 ) {
   const candidatas =
-    [
-      ...tema.falsas,
-      ...tema.verdades
-    ]
+    (
+      modo === "correta"
+        ? tema.falsas
+        : tema.verdades
+    )
       .filter(function(texto) {
         return (
           texto !== alvo &&
@@ -609,6 +613,7 @@ function gerarQuestoes(
           alvo,
           ...alvosUsados
         ],
+        modo,
         4
       );
 
