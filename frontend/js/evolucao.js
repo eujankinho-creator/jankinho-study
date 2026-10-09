@@ -1740,6 +1740,402 @@ function semanticPhraseScore(
 }
 
 
+
+const PDF_EVOLUCAO_BASE = {
+  geral: [
+    {
+      id: "pdf_estado",
+      name: "Estado geral, exame e condicoes atuais",
+      words: [
+        "consciente",
+        "orientado",
+        "orientada",
+        "sonolento",
+        "sonolenta",
+        "sedado",
+        "sedada",
+        "estado geral",
+        "exame fisico",
+        "condicoes fisicas",
+        "condicoes emocionais"
+      ],
+      points: 12
+    },
+    {
+      id: "pdf_sinais",
+      name: "Sinais vitais e dados objetivos",
+      words: [
+        "pa",
+        "pressao",
+        "fc",
+        "fr",
+        "temperatura",
+        "tax",
+        "spo2",
+        "saturacao",
+        "glicemia"
+      ],
+      points: 12
+    },
+    {
+      id: "pdf_problemas",
+      name: "Problemas, queixas ou alteracoes identificadas",
+      words: [
+        "refere",
+        "queixa",
+        "dor",
+        "dispneia",
+        "alteracao",
+        "problema",
+        "intercorrencia",
+        "apresenta"
+      ],
+      points: 12
+    },
+    {
+      id: "pdf_cuidados",
+      name: "Cuidados, condutas e resposta do paciente",
+      words: [
+        "cuidados",
+        "conduta",
+        "monitorar",
+        "monitorizacao",
+        "mantido",
+        "mantida",
+        "orientado",
+        "orientada",
+        "administrado",
+        "realizado",
+        "realizada"
+      ],
+      points: 12
+    }
+  ],
+
+  dispositivos: {
+    words: [
+      "avp",
+      "acesso venoso",
+      "cvc",
+      "cateter",
+      "sonda",
+      "dreno",
+      "tot",
+      "tubo orotraqueal",
+      "ventilacao mecanica",
+      "oxigen"
+    ],
+    criterion: {
+      id: "pdf_dispositivos",
+      name: "Dispositivos, acessos, sondas ou drenos",
+      words: [
+        "avp",
+        "acesso venoso",
+        "cvc",
+        "cateter",
+        "sonda",
+        "dreno",
+        "tot",
+        "tubo",
+        "ventilacao mecanica",
+        "oxigen"
+      ],
+      points: 12
+    }
+  },
+
+  eliminacoes: {
+    words: [
+      "diurese",
+      "urina",
+      "evacuacao",
+      "eliminacoes",
+      "sonda vesical",
+      "svd",
+      "dieta",
+      "alimentacao"
+    ],
+    criterion: {
+      id: "pdf_eliminacoes",
+      name: "Alimentacao, hidratacao e eliminacoes",
+      words: [
+        "dieta",
+        "alimentacao",
+        "hidratacao",
+        "diurese",
+        "urina",
+        "evacuacao",
+        "eliminacoes"
+      ],
+      points: 10
+    }
+  },
+
+  posOperatorio: [
+    {
+      id: "pdf_posop_sintomas",
+      name: "Pos-operatorio: sinais, sintomas e dor",
+      words: [
+        "dor",
+        "nausea",
+        "vomito",
+        "palidez",
+        "cianose",
+        "hipotensao",
+        "tremor"
+      ],
+      points: 12
+    },
+    {
+      id: "pdf_posop_curativo",
+      name: "Pos-operatorio: curativo e ferida cirurgica",
+      words: [
+        "curativo",
+        "ferida",
+        "incisao",
+        "limpo",
+        "seca",
+        "seco",
+        "sangramento"
+      ],
+      points: 12
+    }
+  ],
+
+  uti: [
+    {
+      id: "pdf_uti_consciencia",
+      name: "UTI: nivel de consciencia e suporte",
+      words: [
+        "sedado",
+        "rass",
+        "glasgow",
+        "nivel de consciencia",
+        "consciente"
+      ],
+      points: 12
+    },
+    {
+      id: "pdf_uti_ventilacao",
+      name: "UTI: assistencia ventilatoria",
+      words: [
+        "ventilacao mecanica",
+        "ventilador",
+        "fio2",
+        "peep",
+        "tot",
+        "tubo",
+        "oxigen"
+      ],
+      points: 12
+    }
+  ],
+
+  emergencia: [
+    {
+      id: "pdf_emergencia_causa",
+      name: "Emergencia: causa do atendimento e condicao clinica",
+      words: [
+        "causa",
+        "queixa",
+        "hipotese",
+        "tontura",
+        "fraqueza",
+        "dor",
+        "dispneia"
+      ],
+      points: 12
+    },
+    {
+      id: "pdf_emergencia_conduta",
+      name: "Emergencia: problemas detectados e condutas",
+      words: [
+        "comunicado",
+        "comunicada",
+        "equipe",
+        "medico",
+        "medica",
+        "conduta",
+        "monitorizacao"
+      ],
+      points: 12
+    }
+  ]
+};
+
+
+function textHasAny(text, words) {
+
+  const normalized = normalize(text);
+
+  return words.some(
+    function (word) {
+      return normalized.includes(
+        normalize(word)
+      );
+    }
+  );
+}
+
+
+function pdfCriteriaForCase(item) {
+
+  const criteria =
+    PDF_EVOLUCAO_BASE
+      .geral
+      .map(
+        function (criterion) {
+          return {
+            ...criterion,
+            source:
+              "Manual Evolucao e Anotacao de Enfermagem"
+          };
+        }
+      );
+
+
+  const sourceText =
+    [
+      item.caseText,
+      item.title,
+      item.type,
+      item.sector
+    ]
+      .filter(Boolean)
+      .join(" ");
+
+
+  if (
+    textHasAny(
+      sourceText,
+      PDF_EVOLUCAO_BASE
+        .dispositivos
+        .words
+    )
+  ) {
+    criteria.push({
+      ...PDF_EVOLUCAO_BASE
+        .dispositivos
+        .criterion,
+
+      source:
+        "Manual Evolucao e Anotacao de Enfermagem"
+    });
+  }
+
+
+  if (
+    textHasAny(
+      sourceText,
+      PDF_EVOLUCAO_BASE
+        .eliminacoes
+        .words
+    )
+  ) {
+    criteria.push({
+      ...PDF_EVOLUCAO_BASE
+        .eliminacoes
+        .criterion,
+
+      source:
+        "Manual Evolucao e Anotacao de Enfermagem"
+    });
+  }
+
+
+  if (
+    normalize(item.type)
+      .includes("pos") ||
+    normalize(item.title)
+      .includes("pos")
+  ) {
+    criteria.push(
+      ...PDF_EVOLUCAO_BASE
+        .posOperatorio
+        .map(
+          function (criterion) {
+            return {
+              ...criterion,
+              source:
+                "Manual Evolucao e Anotacao de Enfermagem"
+            };
+          }
+        )
+    );
+  }
+
+
+  if (
+    normalize(item.sector) ===
+    "uti"
+  ) {
+    criteria.push(
+      ...PDF_EVOLUCAO_BASE
+        .uti
+        .map(
+          function (criterion) {
+            return {
+              ...criterion,
+              source:
+                "Manual Evolucao e Anotacao de Enfermagem"
+            };
+          }
+        )
+    );
+  }
+
+
+  if (
+    normalize(item.sector)
+      .includes("emergencia") ||
+    normalize(item.type)
+      .includes("intercorrencia")
+  ) {
+    criteria.push(
+      ...PDF_EVOLUCAO_BASE
+        .emergencia
+        .map(
+          function (criterion) {
+            return {
+              ...criterion,
+              source:
+                "Manual Evolucao e Anotacao de Enfermagem"
+            };
+          }
+        )
+    );
+  }
+
+
+  const unique = new Map();
+
+  criteria.forEach(
+    function (criterion) {
+      if (!unique.has(criterion.id)) {
+        unique.set(
+          criterion.id,
+          criterion
+        );
+      }
+    }
+  );
+
+
+  return [
+    ...unique.values()
+  ];
+}
+
+
+function combinedCriteria(item) {
+
+  return [
+    ...item.criteria,
+    ...pdfCriteriaForCase(item)
+  ];
+}
+
+
 function analyzeAnswer() {
 
   const item =
@@ -1755,7 +2151,9 @@ function analyzeAnswer() {
     $("resposta").value;
 
 
-  return item.criteria.map(
+  return combinedCriteria(
+    item
+  ).map(
     function (criterion) {
 
       let bestScore = 0;
@@ -1835,7 +2233,7 @@ function renderResult() {
     );
 
 
-  const score =
+  const earnedPoints =
     criteria.reduce(
       function (
         total,
@@ -1853,6 +2251,34 @@ function renderResult() {
       },
       0
     );
+
+
+  const possiblePoints =
+    criteria.reduce(
+      function (
+        total,
+        criterion
+      ) {
+
+        return (
+          total +
+          criterion.points
+        );
+      },
+      0
+    );
+
+
+  const score =
+    possiblePoints
+      ? Math.round(
+          (
+            earnedPoints /
+            possiblePoints
+          ) *
+          100
+        )
+      : 0;
 
 
   const criteriaHtml =
@@ -1958,8 +2384,9 @@ function renderResult() {
           </h2>
 
           <p>
-            A correcao e feita localmente, considerando termos equivalentes,
-            contexto e negacoes, sem consumir creditos de IA.
+            A correcao e feita localmente com os criterios do caso e com a
+            base tecnica do manual de Evolucao e Anotacao de Enfermagem,
+            considerando termos equivalentes, contexto e negacoes.
           </p>
 
         </div>
@@ -1972,7 +2399,7 @@ function renderResult() {
           </strong>
 
           <span>
-            pontos
+            / 100
           </span>
 
         </div>
