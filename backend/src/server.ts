@@ -46,6 +46,7 @@ import { sincronizarQuestoesDiego } from "./questoesDiego";
 import { sincronizarQuestoesSemiotecnica } from "./questoesSemiotecnica";
 import { sincronizarQuestoesCalculoMedicamentos } from "./questoesCalculoMedicamentos";
 import { sincronizarQuestoesLaboratorioEcg } from "./questoesLaboratorioEcg";
+import { sincronizarQuestoesSaudeColetivaI, obterMatrizSaudeColetivaI } from "./questoesSaudeColetivaI";
 import { sincronizarQuestoesConcursosPublicos } from "./questoesConcursosPublicos";
 import { sincronizarQuestoesResidenciasFederais } from "./questoesResidenciasFederais";
 import { sincronizarQuestoesEnareEbserh500 } from "./questoesEnareEbserh500";
@@ -4429,6 +4430,32 @@ const server =
         }
 
 
+        if (
+          caminho ===
+            "/api/questoes/saude-coletiva-i/matriz" &&
+          metodo ===
+            "GET"
+        ) {
+          const usuarioId =
+            await exigirUsuario(
+              request,
+              response
+            );
+
+          if (!usuarioId) {
+            return;
+          }
+
+          json(
+            response,
+            200,
+            obterMatrizSaudeColetivaI()
+          );
+
+          return;
+        }
+
+
         /* CRONOGRAMA DE ESTUDOS */
 
         if (
@@ -6113,6 +6140,8 @@ server.listen(
         await sincronizarQuestoesCalculoMedicamentos();
 
         await sincronizarQuestoesLaboratorioEcg();
+
+        await sincronizarQuestoesSaudeColetivaI();
 
         await sincronizarQuestoesConcursosPublicos();
 
