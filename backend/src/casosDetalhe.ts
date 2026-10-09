@@ -143,25 +143,150 @@ function tokensSemanticos(
 }
 
 
+function distanciaEdicao(
+  a: string,
+  b: string
+): number {
+
+  const anterior =
+    Array.from(
+      {
+        length:
+          b.length + 1,
+      },
+      function (
+        _,
+        index
+      ) {
+        return index;
+      }
+    );
+
+
+  for (
+    let i = 1;
+    i <= a.length;
+    i += 1
+  ) {
+
+    const atual = [
+      i,
+    ];
+
+
+    for (
+      let j = 1;
+      j <= b.length;
+      j += 1
+    ) {
+
+      atual[j] =
+        Math.min(
+          atual[j - 1] + 1,
+          anterior[j] + 1,
+          anterior[j - 1] +
+            (
+              a[i - 1] === b[j - 1]
+                ? 0
+                : 1
+            )
+        );
+    }
+
+
+    for (
+      let j = 0;
+      j < atual.length;
+      j += 1
+    ) {
+
+      anterior[j] =
+        atual[j];
+    }
+  }
+
+
+  return anterior[
+    b.length
+  ];
+}
+
+
+function tokensParecidos(
+  a: string,
+  b: string
+): boolean {
+
+  if (a === b) {
+    return true;
+  }
+
+
+  if (
+    a.length >= 5 &&
+    b.length >= 5 &&
+    (
+      a.startsWith(b) ||
+      b.startsWith(a)
+    )
+  ) {
+    return true;
+  }
+
+
+  const maior =
+    Math.max(
+      a.length,
+      b.length
+    );
+
+
+  if (maior < 6) {
+    return false;
+  }
+
+
+  return (
+    distanciaEdicao(
+      a,
+      b
+    ) <=
+    (
+      maior >= 10
+        ? 2
+        : 1
+    )
+  );
+}
+
+
 function similaridadeSemantica(
   esquerda: unknown,
   direita: unknown
 ): number {
 
   const a =
-    new Set(
-      tokensSemanticos(esquerda)
-    );
+    [
+      ...new Set(
+        tokensSemanticos(
+          esquerda
+        )
+      ),
+    ];
 
   const b =
-    new Set(
-      tokensSemanticos(direita)
-    );
+    [
+      ...new Set(
+        tokensSemanticos(
+          direita
+        )
+      ),
+    ];
 
 
   if (
-    !a.size ||
-    !b.size
+    !a.length ||
+    !b.length
   ) {
     return 0;
   }
@@ -169,13 +294,45 @@ function similaridadeSemantica(
 
   let intersecao = 0;
 
+  const usados =
+    new Set<
+      number
+    >();
+
 
   for (
-    const token
+    const tokenA
     of a
   ) {
 
-    if (b.has(token)) {
+    const indice =
+      b.findIndex(
+        function (
+          tokenB,
+          index
+        ) {
+
+          return (
+            !usados.has(
+              index
+            ) &&
+            tokensParecidos(
+              tokenA,
+              tokenB
+            )
+          );
+        }
+      );
+
+
+    if (
+      indice >= 0
+    ) {
+
+      usados.add(
+        indice
+      );
+
       intersecao += 1;
     }
   }
@@ -183,11 +340,11 @@ function similaridadeSemantica(
 
   const precisao =
     intersecao /
-    a.size;
+    a.length;
 
   const revocacao =
     intersecao /
-    b.size;
+    b.length;
 
   const f1 =
     (
@@ -512,23 +669,12 @@ function avaliarCasoLocalmente(
     );
 
 
-  if (
-    !corretaClara &&
-    !diferencialClaro &&
-    !contradicaoClara
-  ) {
-
-    return {
-      resolvido:
-        false,
-
-      confianca:
-        Math.max(
-          similaridadeDiagnostico,
-          melhorDiferencial
-        ),
-    };
-  }
+  const ambiguo =
+    (
+      !corretaClara &&
+      !diferencialClaro &&
+      !contradicaoClara
+    );
 
 
   const hipoteseCorreta =
@@ -798,12 +944,35 @@ function avaliarCasoLocalmente(
 
   return {
     resolvido:
-      true,
+      !ambiguo,
 
     confianca:
       avaliacao.confiancaLocal,
 
-    avaliacao,
+    avaliacao:
+      {
+        ...avaliacao,
+
+        classificacao:
+          ambiguo
+            ? "Avaliacao local conservadora"
+            : avaliacao.classificacao,
+
+        avaliacaoGeral:
+          ambiguo
+            ? "A resposta nao atingiu confianca suficiente para uma classificacao automatica definitiva. A nota foi estimada de forma conservadora pelos dados objetivos do caso."
+            : avaliacao.avaliacaoGeral,
+
+        feedbackEducacional:
+          ambiguo
+            ? "A avaliacao foi concluida localmente sem IA. Revise a relacao entre o diagnostico proposto e os achados investigados."
+            : avaliacao.feedbackEducacional,
+
+        metodoCorrecao:
+          ambiguo
+            ? "local_fallback"
+            : avaliacao.metodoCorrecao,
+      },
   };
 }
 
@@ -2068,14 +2237,68 @@ export async function avaliarHipoteseCaso(
 
     if (!chave) {
 
-      return {
-        status: 500,
+      const avaliacaoLocal =
+        resultadoLocal.avaliacao;
 
-        data: {
-          error:
-            "OPENAI_API_KEY nao configurada.",
-        },
-      };
+
+      if (
+        avaliacaoLocal
+      ) {
+
+        const avaliacaoFinal = {
+          ...avaliacaoLocal,
+
+          avaliadoEm:
+            new Date()
+              .toISOString(),
+        };
+
+
+        await prisma
+          .investigacaoCaso
+          .update({
+            where: {
+              id:
+                investigacao.id,
+            },
+
+            data: {
+              hipotese,
+              justificativa,
+
+              avaliacao:
+                avaliacaoFinal as any,
+
+              status:
+                "FINALIZADA",
+
+              finalizado:
+                true,
+            },
+          });
+
+
+        return {
+          status: 200,
+
+          data: {
+            sucesso:
+              true,
+
+            investigacao:
+              await obterInvestigacao(
+                usuarioId,
+                casoId
+              ),
+
+            avaliacao:
+              avaliacaoFinal,
+
+            correcao:
+              "local_fallback",
+          },
+        };
+      }
     }
 
 
@@ -2086,28 +2309,33 @@ export async function avaliarHipoteseCaso(
       });
 
 
-    const response =
-      await openai
-        .responses
-        .create({
-          model:
-            process.env.OPENAI_CASE_MODEL ||
-            "gpt-5.6-luna",
+    let response: any;
 
-          reasoning: {
-            effort:
-              "none",
-          },
 
-          max_output_tokens:
-            2500,
+    try {
 
-          input: [
-            {
-              role:
-                "system",
+      const response =
+        await openai
+          .responses
+          .create({
+            model:
+              process.env.OPENAI_CASE_MODEL ||
+              "gpt-5.6-luna",
 
-              content: `
+            reasoning: {
+              effort:
+                "none",
+            },
+
+            max_output_tokens:
+              2500,
+
+            input: [
+              {
+                role:
+                  "system",
+
+                content: `
 Voce e um professor universitario experiente em raciocinio clinico
 para estudantes de Enfermagem e Medicina.
 
@@ -2133,13 +2361,13 @@ Regras:
 16. Raciocinio esperado: no maximo 5 frases.
 17. Feedback educacional: no maximo 4 frases.
 `,
-            },
+              },
 
-            {
-              role:
-                "user",
+              {
+                role:
+                  "user",
 
-              content: `
+                content: `
 CASO
 
 Titulo:
@@ -2182,172 +2410,272 @@ ${justificativa}
 
 Avalie o raciocinio clinico.
 `,
-            },
-          ],
+              },
+            ],
 
-          text: {
-            format: {
-              type:
-                "json_schema",
-
-              name:
-                "avaliacao_caso",
-
-              strict:
-                true,
-
-              schema: {
+            text: {
+              format: {
                 type:
-                  "object",
+                  "json_schema",
 
-                properties: {
-                  nota: {
-                    type:
-                      "number",
-                  },
+                name:
+                  "avaliacao_caso",
 
-                  classificacao: {
-                    type:
-                      "string",
-                  },
+                strict:
+                  true,
 
-                  hipoteseCorreta: {
-                    type:
-                      "boolean",
-                  },
+                schema: {
+                  type:
+                    "object",
 
-                  diagnosticoFinal: {
-                    type:
-                      "string",
-                  },
+                  properties: {
+                    nota: {
+                      type:
+                        "number",
+                    },
 
-                  avaliacaoGeral: {
-                    type:
-                      "string",
-                  },
-
-                  pontosFortes: {
-                    type:
-                      "array",
-
-                    items: {
+                    classificacao: {
                       type:
                         "string",
                     },
-                  },
 
-                  pontosFracos: {
-                    type:
-                      "array",
+                    hipoteseCorreta: {
+                      type:
+                        "boolean",
+                    },
 
-                    items: {
+                    diagnosticoFinal: {
                       type:
                         "string",
                     },
-                  },
 
-                  achadosImportantes: {
-                    type:
-                      "array",
-
-                    items: {
+                    avaliacaoGeral: {
                       type:
-                        "object",
+                        "string",
+                    },
 
-                      properties: {
-                        achado: {
-                          type:
-                            "string",
-                        },
+                    pontosFortes: {
+                      type:
+                        "array",
 
-                        importancia: {
-                          type:
-                            "string",
-                        },
+                      items: {
+                        type:
+                          "string",
                       },
-
-                      required: [
-                        "achado",
-                        "importancia"
-                      ],
-
-                      additionalProperties:
-                        false,
                     },
-                  },
 
-                  informacoesNaoInvestigadas: {
-                    type:
-                      "array",
+                    pontosFracos: {
+                      type:
+                        "array",
 
-                    items: {
+                      items: {
+                        type:
+                          "string",
+                      },
+                    },
+
+                    achadosImportantes: {
+                      type:
+                        "array",
+
+                      items: {
+                        type:
+                          "object",
+
+                        properties: {
+                          achado: {
+                            type:
+                              "string",
+                          },
+
+                          importancia: {
+                            type:
+                              "string",
+                          },
+                        },
+
+                        required: [
+                          "achado",
+                          "importancia"
+                        ],
+
+                        additionalProperties:
+                          false,
+                      },
+                    },
+
+                    informacoesNaoInvestigadas: {
+                      type:
+                        "array",
+
+                      items: {
+                        type:
+                          "string",
+                      },
+                    },
+
+                    diagnosticosDiferenciais: {
+                      type:
+                        "array",
+
+                      items: {
+                        type:
+                          "object",
+
+                        properties: {
+                          diagnostico: {
+                            type:
+                              "string",
+                          },
+
+                          justificativa: {
+                            type:
+                              "string",
+                          },
+                        },
+
+                        required: [
+                          "diagnostico",
+                          "justificativa"
+                        ],
+
+                        additionalProperties:
+                          false,
+                      },
+                    },
+
+                    raciocinioEsperado: {
+                      type:
+                        "string",
+                    },
+
+                    feedbackEducacional: {
                       type:
                         "string",
                     },
                   },
 
-                  diagnosticosDiferenciais: {
-                    type:
-                      "array",
+                  required: [
+                    "nota",
+                    "classificacao",
+                    "hipoteseCorreta",
+                    "diagnosticoFinal",
+                    "avaliacaoGeral",
+                    "pontosFortes",
+                    "pontosFracos",
+                    "achadosImportantes",
+                    "informacoesNaoInvestigadas",
+                    "diagnosticosDiferenciais",
+                    "raciocinioEsperado",
+                    "feedbackEducacional"
+                  ],
 
-                    items: {
-                      type:
-                        "object",
-
-                      properties: {
-                        diagnostico: {
-                          type:
-                            "string",
-                        },
-
-                        justificativa: {
-                          type:
-                            "string",
-                        },
-                      },
-
-                      required: [
-                        "diagnostico",
-                        "justificativa"
-                      ],
-
-                      additionalProperties:
-                        false,
-                    },
-                  },
-
-                  raciocinioEsperado: {
-                    type:
-                      "string",
-                  },
-
-                  feedbackEducacional: {
-                    type:
-                      "string",
-                  },
+                  additionalProperties:
+                    false,
                 },
-
-                required: [
-                  "nota",
-                  "classificacao",
-                  "hipoteseCorreta",
-                  "diagnosticoFinal",
-                  "avaliacaoGeral",
-                  "pontosFortes",
-                  "pontosFracos",
-                  "achadosImportantes",
-                  "informacoesNaoInvestigadas",
-                  "diagnosticosDiferenciais",
-                  "raciocinioEsperado",
-                  "feedbackEducacional"
-                ],
-
-                additionalProperties:
-                  false,
               },
             },
+          });
+
+    }
+    catch (
+      error: any
+    ) {
+
+      const codigo =
+        String(
+          error &&
+          (
+            error.code ||
+            error.error?.code ||
+            ""
+          )
+        );
+
+      const status =
+        Number(
+          error?.status ||
+          0
+        );
+
+
+      if (
+        resultadoLocal.avaliacao &&
+        (
+          status === 429 ||
+          codigo ===
+            "credit_balance_exhausted" ||
+          codigo ===
+            "insufficient_quota"
+        )
+      ) {
+
+        const avaliacaoFinal = {
+          ...resultadoLocal.avaliacao,
+
+          metodoCorrecao:
+            "local_fallback",
+
+          classificacao:
+            resultadoLocal.avaliacao
+              .classificacao ||
+            "Avaliacao local conservadora",
+
+          avaliadoEm:
+            new Date()
+              .toISOString(),
+        };
+
+
+        await prisma
+          .investigacaoCaso
+          .update({
+            where: {
+              id:
+                investigacao.id,
+            },
+
+            data: {
+              hipotese,
+              justificativa,
+
+              avaliacao:
+                avaliacaoFinal as any,
+
+              status:
+                "FINALIZADA",
+
+              finalizado:
+                true,
+            },
+          });
+
+
+        return {
+          status: 200,
+
+          data: {
+            sucesso:
+              true,
+
+            investigacao:
+              await obterInvestigacao(
+                usuarioId,
+                casoId
+              ),
+
+            avaliacao:
+              avaliacaoFinal,
+
+            correcao:
+              "local_fallback",
           },
-        });
+        };
+      }
+
+
+      throw error;
+    }
 
 
     if (
