@@ -1,600 +1,439 @@
 import { prisma } from "../../lib/prisma";
 
 const DISCIPLINA = "Saúde Coletiva I";
-const FONTE = "cortex-saude-coletiva-i-avaliacao1-v1";
+const FONTE_PREFIXO = "cortex-saude-coletiva-i-";
+const FONTE = "cortex-saude-coletiva-i-fontes-reais-v2";
 const QUESTOES_POR_TEMA = 20;
 
-type Conceito = {
-  foco: string;
-  correta: string;
-  distratores: [string, string, string, string];
-  explicacao: string;
+type TemaFonte = {
+  tema: string;
+  fonteTitulo: string;
+  fonteUrl: string;
+  verdades: string[];
+  falsas: string[];
+  explicacaoBase: string;
 };
 
-type Grupo = {
-  nome: string;
-  conceitos: Conceito[];
-};
-
-const GRUPOS: Record<string, Grupo> = {
-  dss: {
-    nome: "Processo saúde-doença, DSS e iniquidades",
-    conceitos: [
-      {
-        foco: "o processo saúde-doença",
-        correta: "O processo saúde-doença resulta da interação de condições biológicas, sociais, econômicas, culturais e ambientais.",
-        distratores: [
-          "É explicado somente pela genética individual.",
-          "Depende exclusivamente de escolhas pessoais de estilo de vida.",
-          "É determinado apenas pela presença ou ausência de agentes infecciosos.",
-          "É um fenômeno estático e igual em diferentes períodos históricos."
-        ],
-        explicacao: "Na perspectiva da Saúde Coletiva, o processo saúde-doença é dinâmico, histórico e multicausal."
-      },
-      {
-        foco: "os Determinantes Sociais da Saúde",
-        correta: "Os DSS incluem fatores sociais, econômicos, culturais, étnico-raciais, psicológicos e comportamentais que influenciam saúde e riscos.",
-        distratores: [
-          "Os DSS correspondem apenas a fatores genéticos.",
-          "Os DSS são somente condições ambientais naturais.",
-          "Os DSS se restringem ao acesso a hospitais.",
-          "Os DSS são sinônimo de hábitos individuais."
-        ],
-        explicacao: "A formulação cobrada na Avaliação I apresenta os DSS como um conjunto amplo de fatores sociais e relacionados."
-      },
-      {
-        foco: "iniquidades em saúde",
-        correta: "Iniquidades em saúde são desigualdades consideradas injustas, evitáveis e socialmente produzidas.",
-        distratores: [
-          "Toda diferença em saúde é automaticamente uma iniquidade.",
-          "Iniquidade significa diversidade biológica entre indivíduos.",
-          "Iniquidade é sinônimo de diferença etária natural.",
-          "O conceito se refere apenas a erros médicos."
-        ],
-        explicacao: "A Avaliação I diferencia diferença, diversidade, desigualdade e iniquidade, relacionando iniquidade à justiça."
-      },
-      {
-        foco: "determinação social",
-        correta: "A determinação social analisa processos e relações sociais que produzem diferentes condições de saúde, e não apenas fatores isolados.",
-        distratores: [
-          "Determinação social é apenas outro nome para genética.",
-          "A determinação social rejeita qualquer análise histórica.",
-          "Refere-se somente a comportamentos individuais.",
-          "Aplica-se apenas a doenças infecciosas."
-        ],
-        explicacao: "A determinação social amplia a análise para processos históricos, econômicos, políticos e territoriais."
-      },
-      {
-        foco: "mudanças históricas na saúde",
-        correta: "As formas de adoecer e cuidar mudam conforme o contexto histórico, científico e social.",
-        distratores: [
-          "As formas de adoecer permanecem idênticas em todas as sociedades.",
-          "Somente tecnologias médicas alteram o perfil de adoecimento.",
-          "Mudanças sociais não interferem nos padrões de saúde.",
-          "A história não influencia a compreensão atual de doença."
-        ],
-        explicacao: "O processo saúde-doença e seus modelos explicativos se modificam ao longo da história."
-      }
-    ]
+const TEMAS: TemaFonte[] = [
+  {
+    tema: "Estudo dirigido sobre DSS e Processo Saúde-Doença",
+    fonteTitulo: "Avaliação I + A saúde e seus determinantes sociais",
+    fonteUrl: "https://bvsms.saude.gov.br/determinantes-sociais-da-saude/",
+    verdades: [
+      "O processo saúde-doença é dinâmico e resulta de múltiplas dimensões, não apenas de fatores biológicos.",
+      "Condições de vida, trabalho, renda, educação e ambiente podem influenciar padrões de saúde e adoecimento.",
+      "Os modelos explicativos do processo saúde-doença mudam ao longo da história.",
+      "A análise do processo saúde-doença pode considerar fatores individuais e coletivos simultaneamente.",
+      "Determinantes sociais ajudam a explicar diferenças de saúde entre grupos populacionais.",
+      "Intervenções sobre condições sociais podem produzir efeitos sobre a saúde da população."
+    ],
+    falsas: [
+      "O processo saúde-doença é determinado exclusivamente por escolhas individuais.",
+      "As condições sociais não interferem na ocorrência de doenças.",
+      "O processo saúde-doença permanece igual em todos os períodos históricos.",
+      "Apenas fatores genéticos explicam diferenças de saúde entre populações.",
+      "Determinantes sociais dizem respeito somente ao acesso a hospitais.",
+      "A análise coletiva é incompatível com a compreensão do processo saúde-doença."
+    ],
+    explicacaoBase: "A prova enviada enfatiza a compreensão multicausal, histórica e social do processo saúde-doença e dos DSS."
   },
-
-  aps: {
-    nome: "Atenção Primária à Saúde",
-    conceitos: [
-      {
-        foco: "a definição de Atenção Primária à Saúde",
-        correta: "A APS reúne ações integrais voltadas a indivíduos, famílias e comunidade em território definido, com responsabilidade sanitária.",
-        distratores: [
-          "A APS é apenas atendimento de baixa complexidade para doenças simples.",
-          "A APS se limita a encaminhar usuários para especialistas.",
-          "A APS atua somente com vacinação.",
-          "A APS não trabalha com promoção nem prevenção."
-        ],
-        explicacao: "A Avaliação I cobra a APS como conjunto de ações integrais, multiprofissionais e territorializadas."
-      },
-      {
-        foco: "o atributo primeiro contato",
-        correta: "A APS deve funcionar como porta de entrada preferencial e ponto de primeiro contato para necessidades comuns de saúde.",
-        distratores: [
-          "Primeiro contato significa que todo usuário deve ir primeiro ao hospital.",
-          "A APS só atende usuários encaminhados por especialistas.",
-          "Primeiro contato é sinônimo de consulta única.",
-          "Urgências nunca podem ser acolhidas na APS."
-        ],
-        explicacao: "Primeiro contato é atributo essencial da APS e se relaciona ao acesso."
-      },
-      {
-        foco: "a longitudinalidade",
-        correta: "Longitudinalidade é o acompanhamento continuado da pessoa ao longo do tempo por uma fonte regular de cuidado.",
-        distratores: [
-          "Longitudinalidade significa internação prolongada.",
-          "É o encaminhamento imediato para qualquer especialista.",
-          "É atendimento apenas de doenças crônicas.",
-          "É a repetição de consultas sem vínculo."
-        ],
-        explicacao: "Longitudinalidade envolve vínculo e continuidade do cuidado."
-      },
-      {
-        foco: "a integralidade",
-        correta: "Integralidade implica reconhecer e responder a necessidades de promoção, prevenção, tratamento e reabilitação.",
-        distratores: [
-          "Integralidade significa realizar todos os procedimentos dentro da UBS.",
-          "É atender apenas a queixa principal.",
-          "É separar prevenção de tratamento.",
-          "É excluir necessidades sociais do cuidado."
-        ],
-        explicacao: "A integralidade amplia o olhar sobre as necessidades do usuário e da população."
-      },
-      {
-        foco: "a coordenação do cuidado",
-        correta: "A coordenação organiza informações, encaminhamentos e continuidade entre diferentes pontos da rede.",
-        distratores: [
-          "Coordenação significa impedir acesso a outros serviços.",
-          "É função exclusiva do hospital.",
-          "É apenas marcar consultas.",
-          "Não envolve troca de informações entre serviços."
-        ],
-        explicacao: "Na Avaliação I, coordenação aparece como organização do percurso do usuário na rede."
-      }
-    ]
+  {
+    tema: "DSS — Texto Paulo Buss",
+    fonteTitulo: "Buss e Pellegrini Filho — A saúde e seus determinantes sociais",
+    fonteUrl: "https://bvsms.saude.gov.br/determinantes-sociais-da-saude/",
+    verdades: [
+      "Os DSS abrangem condições sociais, econômicas, culturais, étnico-raciais, psicológicas e comportamentais relacionadas à saúde.",
+      "O texto discute diferentes níveis de determinantes sociais e sua relação com a situação de saúde.",
+      "O enfrentamento das iniquidades exige ações que ultrapassem o setor saúde.",
+      "A CNDSS foi criada para promover estudos, recomendar políticas e mobilizar a sociedade em torno dos DSS.",
+      "Os DSS ajudam a compreender por que grupos sociais apresentam diferentes riscos de adoecer e morrer.",
+      "A abordagem dos DSS permite discutir intervenções sobre condições de vida e desigualdades."
+    ],
+    falsas: [
+      "Para Buss e Pellegrini Filho, DSS significam apenas fatores genéticos.",
+      "O texto limita os DSS ao comportamento individual.",
+      "A CNDSS foi criada exclusivamente para organizar hospitais.",
+      "O enfrentamento das iniquidades depende apenas de atendimento médico.",
+      "Os DSS não possuem relação com diferenças entre grupos sociais.",
+      "Condições econômicas e culturais são excluídas da análise dos DSS."
+    ],
+    explicacaoBase: "O texto de Buss e Pellegrini Filho apresenta os DSS, seus níveis explicativos e o enfrentamento das iniquidades."
   },
-
-  pnh: {
-    nome: "Política Nacional de Humanização",
-    conceitos: [
-      {
-        foco: "humanização no SUS",
-        correta: "A humanização valoriza usuários, trabalhadores e gestores como sujeitos na produção de saúde.",
-        distratores: [
-          "Humanização significa apenas melhorar a decoração dos serviços.",
-          "A humanização se limita à cordialidade no atendimento.",
-          "Somente o usuário participa da humanização.",
-          "Humanização exclui organização do trabalho."
-        ],
-        explicacao: "A PNH trata humanização como modo de produzir cuidado e gestão."
-      },
-      {
-        foco: "acolhimento",
-        correta: "Acolhimento envolve escuta qualificada, responsabilização e resposta às necessidades apresentadas.",
-        distratores: [
-          "Acolhimento é apenas uma sala de recepção.",
-          "Acolhimento serve para selecionar quem merece atendimento.",
-          "Acolhimento é sinônimo de triagem burocrática.",
-          "Acolhimento ocorre apenas na chegada do usuário."
-        ],
-        explicacao: "Acolhimento é uma postura e tecnologia relacional no cuidado."
-      },
-      {
-        foco: "cogestão",
-        correta: "Cogestão amplia a participação de diferentes sujeitos nas decisões e na organização do trabalho.",
-        distratores: [
-          "Cogestão concentra decisões exclusivamente na direção.",
-          "Cogestão significa ausência de liderança.",
-          "Usuários nunca participam de espaços de gestão.",
-          "Cogestão elimina responsabilidades profissionais."
-        ],
-        explicacao: "A PNH incentiva participação, corresponsabilização e gestão compartilhada."
-      },
-      {
-        foco: "ambiência",
-        correta: "Ambiência envolve condições físicas, sociais e relacionais que favorecem cuidado, conforto e encontros.",
-        distratores: [
-          "Ambiência se restringe à pintura das paredes.",
-          "Ambiência não interfere no trabalho em saúde.",
-          "É apenas climatização do serviço.",
-          "Ambiência é responsabilidade exclusiva da manutenção."
-        ],
-        explicacao: "Na PNH, ambiência considera espaço físico e relações produzidas nele."
-      },
-      {
-        foco: "clínica ampliada",
-        correta: "Clínica ampliada integra diferentes saberes e considera singularidade, contexto e autonomia do usuário.",
-        distratores: [
-          "Clínica ampliada reduz o cuidado ao diagnóstico biomédico.",
-          "Exclui trabalho interdisciplinar.",
-          "Dispensa evidências clínicas.",
-          "Substitui toda terapêutica por conversa."
-        ],
-        explicacao: "A clínica ampliada articula dimensões biológicas, subjetivas e sociais."
-      }
-    ]
+  {
+    tema: "História do processo saúde-doença",
+    fonteTitulo: "História do conceito de saúde + evolução dos modelos explicativos",
+    fonteUrl: "https://www.scielo.br/j/physis/a/WNtwLvWQRFbscbzCywV9wGq/?format=html&lang=pt",
+    verdades: [
+      "Concepções de saúde e doença variam conforme contexto histórico, cultural, social e científico.",
+      "Explicações mágico-religiosas fizeram parte de períodos históricos da compreensão da doença.",
+      "O desenvolvimento da teoria microbiana modificou fortemente a explicação de muitas doenças infecciosas.",
+      "A medicina social contribuiu para relacionar condições de vida e adoecimento.",
+      "Modelos multicausais ampliaram explicações centradas em uma única causa.",
+      "O conceito de saúde passou por transformações e não permaneceu restrito à ausência de doença."
+    ],
+    falsas: [
+      "A compreensão de saúde e doença sempre foi idêntica ao longo da história.",
+      "A teoria microbiana eliminou definitivamente a importância de fatores sociais.",
+      "A medicina social considera irrelevantes as condições de vida.",
+      "Modelos multicausais defendem uma única causa para cada doença.",
+      "Concepções culturais nunca influenciaram ideias sobre doença.",
+      "O conceito moderno de saúde é apenas ausência de enfermidade."
+    ],
+    explicacaoBase: "A evolução histórica mostra mudanças de paradigmas, da explicação única para abordagens mais amplas e contextualizadas."
   },
-
-  pacs: {
-    nome: "PACS",
-    conceitos: [
-      {
-        foco: "o papel histórico do PACS",
-        correta: "O PACS ampliou ações de acompanhamento comunitário e aproximou serviços de saúde e território.",
-        distratores: [
-          "O PACS foi criado como programa hospitalar.",
-          "O PACS atua exclusivamente em laboratórios.",
-          "O PACS exclui visitas domiciliares.",
-          "O PACS não utiliza território."
-        ],
-        explicacao: "O PACS fortaleceu a presença comunitária e o acompanhamento das famílias."
-      },
-      {
-        foco: "a atuação do agente comunitário",
-        correta: "O ACS atua como elo entre equipe e comunidade, desenvolvendo cadastro, acompanhamento, educação e identificação de necessidades.",
-        distratores: [
-          "O ACS substitui todos os profissionais da equipe.",
-          "O ACS realiza apenas tarefas administrativas internas.",
-          "O ACS não pode conhecer o território.",
-          "O ACS atua somente quando há epidemias."
-        ],
-        explicacao: "A atuação territorial e comunitária é característica central do ACS."
-      },
-      {
-        foco: "a visita domiciliar no PACS",
-        correta: "A visita domiciliar permite acompanhar condições de vida, orientar e identificar necessidades no contexto familiar.",
-        distratores: [
-          "A visita domiciliar serve apenas para fiscalização.",
-          "Só pode ocorrer após internação hospitalar.",
-          "Não deve considerar condições sociais.",
-          "É incompatível com promoção da saúde."
-        ],
-        explicacao: "A visita aproxima o cuidado da realidade das famílias."
-      },
-      {
-        foco: "a relação entre PACS e ESF",
-        correta: "A experiência do PACS contribuiu para a consolidação de estratégias mais amplas de atenção à família e ao território.",
-        distratores: [
-          "O PACS surgiu depois da ESF e não teve relação com ela.",
-          "O PACS foi substituído por atenção exclusivamente hospitalar.",
-          "A ESF eliminou a atuação comunitária.",
-          "PACS e ESF têm objetivos opostos."
-        ],
-        explicacao: "A trajetória do PACS integra a história da reorganização da atenção básica."
-      },
-      {
-        foco: "o foco comunitário",
-        correta: "O PACS enfatiza ações preventivas, promocionais e de acompanhamento vinculadas à comunidade.",
-        distratores: [
-          "O foco principal do PACS é cirurgia ambulatorial.",
-          "Seu objetivo é centralizar o cuidado em hospitais.",
-          "O programa não realiza educação em saúde.",
-          "O foco comunitário exclui vigilância."
-        ],
-        explicacao: "A atuação comunitária combina acompanhamento, promoção e identificação precoce de riscos."
-      }
-    ]
+  {
+    tema: "Complexidade do Processo Saúde-Doença",
+    fonteTitulo: "Processo saúde-doença e complexidade",
+    fonteUrl: "https://bvsms.saude.gov.br/determinantes-sociais-da-saude/",
+    verdades: [
+      "A complexidade do processo saúde-doença envolve interação entre fatores biológicos, sociais, ambientais e subjetivos.",
+      "Uma mesma exposição pode produzir efeitos diferentes conforme contexto e vulnerabilidade.",
+      "Causalidade em saúde coletiva pode envolver cadeias e redes de determinação.",
+      "Condições de vida podem modificar riscos mesmo diante de fatores biológicos semelhantes.",
+      "A compreensão de problemas complexos exige integração de diferentes níveis de análise.",
+      "O processo saúde-doença pode ser entendido como resultado de relações e não apenas de fatores isolados."
+    ],
+    falsas: [
+      "Complexidade significa que não existem relações causais em saúde.",
+      "Fatores sociais e biológicos devem ser analisados separadamente e nunca interagem.",
+      "Uma exposição produz exatamente o mesmo efeito em todas as pessoas.",
+      "Problemas complexos podem ser explicados sempre por uma única variável.",
+      "Vulnerabilidade não modifica risco de adoecimento.",
+      "A análise de relações entre fatores é desnecessária em Saúde Coletiva."
+    ],
+    explicacaoBase: "A noção de complexidade amplia a compreensão para interações, contextos e diferentes níveis de determinação."
   },
-
-  esf: {
-    nome: "Estratégia Saúde da Família e PSF",
-    conceitos: [
-      {
-        foco: "a ESF como estratégia de APS",
-        correta: "A Estratégia Saúde da Família organiza a APS a partir de equipes responsáveis por território e população adscrita.",
-        distratores: [
-          "A ESF é serviço de atenção especializada.",
-          "A ESF existe apenas para vacinação.",
-          "A ESF substitui toda a rede de atenção.",
-          "A ESF não trabalha com famílias."
-        ],
-        explicacao: "A ESF é estratégia de organização da APS no SUS."
-      },
-      {
-        foco: "família e território",
-        correta: "A ESF considera indivíduo, família e contexto territorial no planejamento e no cuidado.",
-        distratores: [
-          "A ESF analisa apenas diagnósticos individuais.",
-          "Família não é unidade de atenção.",
-          "Território é irrelevante para o planejamento.",
-          "A equipe atua sem população definida."
-        ],
-        explicacao: "Família e território orientam o acompanhamento longitudinal."
-      },
-      {
-        foco: "o trabalho da equipe de saúde da família",
-        correta: "A equipe desenvolve ações clínicas, de promoção, prevenção, vigilância e acompanhamento no território.",
-        distratores: [
-          "A equipe atua somente dentro da unidade.",
-          "Promoção não faz parte da ESF.",
-          "Vigilância é responsabilidade exclusiva de outro setor.",
-          "A equipe não acompanha condições crônicas."
-        ],
-        explicacao: "A ESF integra diferentes ações no cotidiano do território."
-      },
-      {
-        foco: "adscrição e vínculo",
-        correta: "A adscrição favorece conhecimento da população e construção de vínculo longitudinal.",
-        distratores: [
-          "Adscrição significa impedir atendimento fora do território em qualquer situação.",
-          "Vínculo é desnecessário para coordenação.",
-          "A equipe não precisa conhecer as famílias acompanhadas.",
-          "Adscrição é apenas um dado cadastral sem uso assistencial."
-        ],
-        explicacao: "Conhecer a população apoia planejamento, vínculo e continuidade."
-      },
-      {
-        foco: "coordenação na rede",
-        correta: "A ESF deve acompanhar o usuário mesmo quando ele utiliza outros pontos de atenção, articulando informações e continuidade.",
-        distratores: [
-          "Ao encaminhar, a ESF encerra sua responsabilidade.",
-          "Coordenação é função exclusiva do especialista.",
-          "A equipe não deve receber contrarreferência.",
-          "A rede substitui o acompanhamento territorial."
-        ],
-        explicacao: "A APS permanece como coordenadora do cuidado ao longo da rede."
-      }
-    ]
+  {
+    tema: "Determinação Social da Saúde",
+    fonteTitulo: "Determinação ou Determinantes? Uma discussão com base na Teoria da Produção Social da Saúde",
+    fonteUrl: "https://www.scielo.br/j/reeusp/a/4Ndw5mtQzq4DG67WgZmFxRj/abstract/?lang=pt",
+    verdades: [
+      "Determinação social da saúde e determinantes sociais não são necessariamente conceitos equivalentes.",
+      "A determinação social enfatiza processos históricos e relações sociais na produção da saúde e da doença.",
+      "O debate possui raízes importantes na medicina social latino-americana.",
+      "A análise da determinação social procura evitar a simples soma de fatores isolados.",
+      "Estruturas sociais e relações de produção podem fazer parte da explicação das condições de saúde.",
+      "O debate entre determinação e determinantes possui implicações teóricas e para ações em saúde."
+    ],
+    falsas: [
+      "Determinação social é apenas uma lista de fatores de risco independentes.",
+      "O conceito surgiu sem relação com a medicina social latino-americana.",
+      "A determinação social exclui a historicidade dos processos.",
+      "Determinantes e determinação são obrigatoriamente sinônimos em qualquer abordagem.",
+      "Relações sociais não têm papel na produção de condições de saúde.",
+      "O debate é puramente terminológico e não possui implicações para ações em saúde."
+    ],
+    explicacaoBase: "O artigo discute diferenças entre modelos de determinantes e a perspectiva de determinação social, com ênfase histórica e relacional."
   },
-
-  intersetorialidade: {
-    nome: "Intersetorialidade",
-    conceitos: [
-      {
-        foco: "o conceito de intersetorialidade",
-        correta: "Intersetorialidade é a articulação entre diferentes setores para enfrentar problemas complexos que ultrapassam a capacidade isolada da saúde.",
-        distratores: [
-          "Intersetorialidade é encaminhar casos e encerrar o acompanhamento.",
-          "Significa unir apenas profissionais da saúde.",
-          "Exclui participação comunitária.",
-          "É necessária somente em epidemias."
-        ],
-        explicacao: "Problemas sociais e de saúde frequentemente exigem ação coordenada entre setores."
-      },
-      {
-        foco: "a atuação territorial da ESF",
-        correta: "A ESF pode articular saúde, educação, assistência social e outras políticas a partir das necessidades do território.",
-        distratores: [
-          "A ESF deve evitar contato com outros setores.",
-          "Territorialização impede parcerias.",
-          "A escola não pode participar de ações de saúde.",
-          "Assistência social e saúde não compartilham problemas comuns."
-        ],
-        explicacao: "O território evidencia problemas que pedem respostas intersetoriais."
-      },
-      {
-        foco: "planejamento compartilhado",
-        correta: "Ações intersetoriais são mais consistentes quando objetivos, responsabilidades e acompanhamento são pactuados.",
-        distratores: [
-          "Basta realizar reuniões sem definição de responsabilidades.",
-          "Cada setor deve agir isoladamente.",
-          "Planejamento conjunto reduz efetividade.",
-          "Intersetorialidade dispensa avaliação."
-        ],
-        explicacao: "Pactuação e acompanhamento sustentam a ação intersetorial."
-      },
-      {
-        foco: "fragmentação institucional",
-        correta: "A fragmentação de políticas, fluxos e responsabilidades é um desafio importante à intersetorialidade.",
-        distratores: [
-          "A fragmentação sempre facilita a coordenação.",
-          "Setores diferentes possuem automaticamente os mesmos objetivos.",
-          "Fluxos independentes dispensam comunicação.",
-          "Responsabilidades difusas melhoram a execução."
-        ],
-        explicacao: "Fragmentação pode gerar duplicidades, lacunas e dificuldade de coordenação."
-      },
-      {
-        foco: "avaliação conjunta",
-        correta: "Indicadores e avaliação compartilhada ajudam a verificar se a articulação produz resultados no território.",
-        distratores: [
-          "Cada setor deve ignorar resultados comuns.",
-          "Indicadores dificultam cooperação.",
-          "Avaliação só pode ocorrer depois de muitos anos.",
-          "Resultados territoriais não podem ser monitorados."
-        ],
-        explicacao: "Avaliação compartilhada permite ajustar estratégias intersetoriais."
-      }
-    ]
+  {
+    tema: "História do Conceito de Saúde",
+    fonteTitulo: "Moacyr Scliar — História do conceito de saúde",
+    fonteUrl: "https://www.scielo.br/j/physis/a/WNtwLvWQRFbscbzCywV9wGq/?format=html&lang=pt",
+    verdades: [
+      "O conceito de saúde possui relação com contextos culturais, sociais, políticos e econômicos.",
+      "A definição de saúde mudou ao longo do tempo.",
+      "A formulação da OMS ampliou a ideia de saúde para além da ausência de doença.",
+      "Diferentes sociedades construíram diferentes explicações para saúde e enfermidade.",
+      "Mudanças científicas influenciaram a maneira de definir e enfrentar doenças.",
+      "O conceito de saúde pode refletir valores e condições históricas de cada sociedade."
+    ],
+    falsas: [
+      "O conceito de saúde é universal e imutável desde a Antiguidade.",
+      "Contextos culturais não interferem na definição de saúde.",
+      "A OMS definiu saúde exclusivamente como ausência de doença.",
+      "Mudanças científicas não alteraram a compreensão de saúde.",
+      "Condições políticas e econômicas são irrelevantes para conceitos de saúde.",
+      "Todas as sociedades explicaram a doença da mesma forma."
+    ],
+    explicacaoBase: "Scliar analisa historicamente saúde e doença e mostra sua relação com contextos sociais e culturais."
   },
-
-  redes: {
-    nome: "Redes sociais e Redes de Atenção à Saúde",
-    conceitos: [
-      {
-        foco: "redes sociais no cuidado",
-        correta: "Redes sociais incluem vínculos entre pessoas, famílias, grupos e instituições que podem oferecer apoio, informação e recursos.",
-        distratores: [
-          "Rede social em saúde significa apenas internet.",
-          "Rede social é sinônimo de rede hospitalar.",
-          "Somente profissionais formam redes sociais.",
-          "Vínculos comunitários não interferem no cuidado."
-        ],
-        explicacao: "Analisar redes sociais ajuda a compreender apoio e circulação de recursos no território."
-      },
-      {
-        foco: "apoio social",
-        correta: "Apoio emocional, material, informacional e instrumental pode influenciar capacidade de cuidado e enfrentamento.",
-        distratores: [
-          "Apoio social é apenas ajuda financeira.",
-          "Apoio emocional não tem relação com saúde.",
-          "Informação nunca circula por redes familiares.",
-          "Apoio instrumental é sinônimo de prescrição médica."
-        ],
-        explicacao: "Diferentes tipos de apoio podem ser mobilizados no cuidado."
-      },
-      {
-        foco: "o conceito de Redes de Atenção à Saúde",
-        correta: "As RAS articulam serviços de diferentes densidades tecnológicas para garantir cuidado contínuo e integral.",
-        distratores: [
-          "RAS é apenas uma lista de hospitais.",
-          "Cada serviço deve funcionar isoladamente.",
-          "RAS substitui a APS.",
-          "A rede é definida somente por proximidade geográfica."
-        ],
-        explicacao: "As RAS organizam relações entre pontos de atenção para continuidade do cuidado."
-      },
-      {
-        foco: "o papel da APS nas RAS",
-        correta: "A APS exerce papel de coordenação do cuidado e ordenação dos fluxos na rede.",
-        distratores: [
-          "A APS não participa de redes de atenção.",
-          "Coordenação é responsabilidade exclusiva do hospital.",
-          "A APS apenas encaminha e encerra acompanhamento.",
-          "Atenção especializada substitui o vínculo da APS."
-        ],
-        explicacao: "A APS acompanha o usuário ao longo dos diferentes pontos da rede."
-      },
-      {
-        foco: "referência e contrarreferência",
-        correta: "Fluxos de referência e retorno de informações favorecem continuidade entre serviços.",
-        distratores: [
-          "Encaminhamento dispensa retorno de informações.",
-          "Contrarreferência é desnecessária quando há prontuário.",
-          "Serviços não devem compartilhar planos de cuidado.",
-          "Referência significa transferência definitiva de responsabilidade."
-        ],
-        explicacao: "Comunicação entre pontos é essencial para coordenação."
-      }
-    ]
+  {
+    tema: "Iniquidade e Saúde — Rita Barata",
+    fonteTitulo: "Rita Barradas Barata — Iniquidade e saúde: a determinação social do processo saúde-doença",
+    fonteUrl: "https://revistas.usp.br/revusp/article/view/35108",
+    verdades: [
+      "Desigualdades sociais em saúde podem refletir condições de vida e inserção social distintas.",
+      "Iniquidade envolve uma dimensão de injustiça nas desigualdades em saúde.",
+      "Estudos históricos já relacionavam pobreza, trabalho e diferentes riscos de adoecimento e morte.",
+      "A posição social pode influenciar exposição a riscos e acesso a recursos protetores.",
+      "Diferenças de saúde entre grupos podem ser socialmente produzidas.",
+      "A epidemiologia social investiga padrões desiguais de adoecimento entre grupos sociais."
+    ],
+    falsas: [
+      "Toda diferença biológica entre indivíduos é necessariamente uma iniquidade.",
+      "A posição social não tem relação com exposição a riscos.",
+      "Desigualdades em saúde surgem exclusivamente de diferenças genéticas.",
+      "Pesquisas históricas nunca relacionaram pobreza e adoecimento.",
+      "Iniquidade é sinônimo de qualquer diversidade observada.",
+      "Condições de trabalho são irrelevantes para desigualdades em saúde."
+    ],
+    explicacaoBase: "Rita Barata discute desigualdade, iniquidade e a determinação social do processo saúde-doença."
   },
-
-  visita: {
-    nome: "Visita domiciliar e autocuidado",
-    conceitos: [
-      {
-        foco: "a visita domiciliar",
-        correta: "A visita domiciliar permite compreender condições reais de vida, barreiras e recursos que influenciam o autocuidado.",
-        distratores: [
-          "A visita domiciliar serve apenas para fiscalizar adesão.",
-          "O domicílio não fornece informação relevante.",
-          "Visitas devem ocorrer sem planejamento.",
-          "Somente pessoas acamadas podem receber visita."
-        ],
-        explicacao: "A visita pode revelar contexto, rotinas, apoio e barreiras ao cuidado."
-      },
-      {
-        foco: "empoderamento no autocuidado",
-        correta: "Empoderamento envolve ampliar conhecimento, capacidade de decisão e participação da pessoa no manejo da condição.",
-        distratores: [
-          "Empoderamento significa transferir toda responsabilidade ao usuário.",
-          "É fazer o paciente obedecer sem questionar.",
-          "Exclui apoio profissional.",
-          "É sinônimo de entregar material educativo."
-        ],
-        explicacao: "Empoderamento busca fortalecer autonomia com suporte da equipe."
-      },
-      {
-        foco: "educação dialógica",
-        correta: "Educação em saúde efetiva considera saberes, dúvidas, objetivos e possibilidades da pessoa e da família.",
-        distratores: [
-          "Educação deve ser apenas transmissão vertical de ordens.",
-          "As experiências do usuário não devem ser consideradas.",
-          "Uma mesma orientação serve igualmente para todos.",
-          "Perguntas do usuário atrapalham o cuidado."
-        ],
-        explicacao: "A abordagem dialógica favorece construção compartilhada do autocuidado."
-      },
-      {
-        foco: "metas de autocuidado",
-        correta: "Metas devem ser negociadas e compatíveis com rotina, recursos e prioridades da pessoa.",
-        distratores: [
-          "Metas devem ser definidas apenas pelo profissional.",
-          "Quanto mais metas simultâneas, melhor.",
-          "Recursos financeiros não precisam ser considerados.",
-          "Planos ideais devem ser mantidos mesmo quando inviáveis."
-        ],
-        explicacao: "Metas factíveis aumentam possibilidade de adesão e autonomia."
-      },
-      {
-        foco: "rede de apoio",
-        correta: "Família e rede de apoio podem colaborar com autocuidado quando respeitam autonomia e preferências da pessoa.",
-        distratores: [
-          "A família deve controlar todas as escolhas do usuário.",
-          "Rede de apoio sempre substitui o profissional.",
-          "Apoio familiar é irrelevante em condições crônicas.",
-          "Autonomia significa excluir familiares de qualquer participação."
-        ],
-        explicacao: "Apoio pode facilitar rotinas quando é acordado e não coercitivo."
-      }
-    ]
+  {
+    tema: "APS 1 — Estudo dirigido",
+    fonteTitulo: "Avaliação I + atributos da Atenção Primária à Saúde",
+    fonteUrl: "https://bvsms.saude.gov.br/bvs/publicacoes/instrumento_avaliacao_atencao_primaria_saude.pdf",
+    verdades: [
+      "Primeiro contato, longitudinalidade, integralidade e coordenação são atributos essenciais da APS.",
+      "A APS deve acompanhar pessoas ao longo do tempo e não apenas episódios isolados.",
+      "Coordenação envolve integrar informações e cuidados recebidos em diferentes serviços.",
+      "Integralidade requer reconhecer diferentes necessidades de saúde e oferecer ou articular respostas.",
+      "A APS atua sobre indivíduos, famílias e comunidade em território definido.",
+      "A responsabilidade sanitária sobre uma população é compatível com a organização territorial da APS."
+    ],
+    falsas: [
+      "A APS existe apenas para encaminhar usuários a especialistas.",
+      "Longitudinalidade significa internação prolongada.",
+      "Coordenação encerra quando o usuário é encaminhado.",
+      "Integralidade significa atender apenas a queixa principal.",
+      "A APS não realiza promoção e prevenção.",
+      "Território e população adscrita são irrelevantes para a APS."
+    ],
+    explicacaoBase: "A Avaliação I cobra diretamente definição de APS e atributos essenciais, especialmente coordenação."
   },
-
-  familia: {
-    nome: "Família(s) no campo da saúde",
-    conceitos: [
-      {
-        foco: "a pluralidade de famílias",
-        correta: "O cuidado em saúde deve reconhecer diferentes configurações familiares sem restringir família a um único modelo.",
-        distratores: [
-          "Família válida é somente a nuclear heterossexual.",
-          "Configurações familiares diferentes não devem ser consideradas.",
-          "Família é definida exclusivamente por parentesco biológico.",
-          "Somente pessoas que moram juntas podem formar família."
-        ],
-        explicacao: "A noção de família no cuidado precisa contemplar diversidade de vínculos e arranjos."
-      },
-      {
-        foco: "família como contexto de cuidado",
-        correta: "Relações familiares podem influenciar proteção, adoecimento, decisões e suporte ao cuidado.",
-        distratores: [
-          "Família nunca interfere no processo saúde-doença.",
-          "O cuidado deve ignorar relações domésticas.",
-          "Família importa apenas em pediatria.",
-          "Conflitos familiares não têm efeito sobre saúde."
-        ],
-        explicacao: "Família pode ser fonte de apoio, tensão e organização do cuidado."
-      },
-      {
-        foco: "vínculos significativos",
-        correta: "Vínculos afetivos e funções desempenhadas podem ser tão relevantes quanto parentesco formal.",
-        distratores: [
-          "Somente documentos legais definem quem participa do cuidado.",
-          "Vínculo afetivo não tem valor em saúde.",
-          "Amigos próximos nunca podem ser rede significativa.",
-          "Funções de cuidado independem das relações reais."
-        ],
-        explicacao: "Compreender quem é significativo para a pessoa melhora a abordagem familiar."
-      },
-      {
-        foco: "abordagem não normativa",
-        correta: "Profissionais devem evitar julgamentos morais sobre arranjos familiares e buscar compreender dinâmica e necessidades.",
-        distratores: [
-          "O profissional deve corrigir configurações familiares consideradas inadequadas.",
-          "Uma família deve seguir um modelo ideal para receber cuidado.",
-          "Julgamentos facilitam vínculo terapêutico.",
-          "Diversidade familiar impede planejamento."
-        ],
-        explicacao: "Abordagem respeitosa e não normativa favorece vínculo."
-      },
-      {
-        foco: "família e território na APS",
-        correta: "Conhecer famílias e suas redes ajuda a compreender necessidades, recursos e vulnerabilidades do território.",
-        distratores: [
-          "Cadastro familiar substitui acompanhamento.",
-          "Família deve ser analisada sem considerar território.",
-          "Território não influencia organização familiar.",
-          "Somente indivíduos devem ser acompanhados na ESF."
-        ],
-        explicacao: "A perspectiva familiar e territorial é central na Estratégia Saúde da Família."
-      }
-    ]
+  {
+    tema: "Atenção Primária à Saúde",
+    fonteTitulo: "Ministério da Saúde — Instrumento de Avaliação da APS / Starfield",
+    fonteUrl: "https://bvsms.saude.gov.br/bvs/publicacoes/instrumento_avaliacao_atencao_primaria_saude.pdf",
+    verdades: [
+      "A APS pode ser entendida como nível de entrada para novas necessidades e problemas de saúde.",
+      "A atenção na APS é orientada para a pessoa ao longo do tempo e não apenas para doenças específicas.",
+      "A APS coordena ou integra cuidados recebidos em outros pontos do sistema.",
+      "O acesso de primeiro contato é um dos atributos essenciais da APS.",
+      "Longitudinalidade pressupõe relação continuada entre população e fonte regular de cuidado.",
+      "Integralidade e coordenação são atributos fundamentais para a qualidade da APS."
+    ],
+    falsas: [
+      "A APS deve atender somente doenças de baixa gravidade e nunca condições crônicas.",
+      "Primeiro contato significa obrigatoriedade de consulta hospitalar inicial.",
+      "Longitudinalidade é incompatível com vínculo profissional.",
+      "A APS não deve coordenar cuidados especializados.",
+      "Integralidade se limita a prescrever medicamentos.",
+      "A orientação para a pessoa é incompatível com a APS."
+    ],
+    explicacaoBase: "O referencial de Starfield destaca primeiro contato, longitudinalidade, integralidade e coordenação."
+  },
+  {
+    tema: "Política Nacional de Humanização (PNH)",
+    fonteTitulo: "Ministério da Saúde — HumanizaSUS",
+    fonteUrl: "https://bvsms.saude.gov.br/bvs/humanizacao/pub_destaques.php",
+    verdades: [
+      "A PNH propõe humanização tanto na atenção quanto na gestão do SUS.",
+      "Acolhimento envolve escuta, responsabilização e resposta às necessidades apresentadas.",
+      "Cogestão amplia participação de trabalhadores e usuários em processos de decisão.",
+      "Ambiência considera espaço físico, relações e condições que favorecem cuidado.",
+      "Clínica ampliada procura integrar diferentes saberes e dimensões do sujeito.",
+      "A participação de usuários e trabalhadores na gestão é coerente com diretrizes da PNH."
+    ],
+    falsas: [
+      "Humanização se resume a cordialidade e decoração do serviço.",
+      "A PNH trata apenas da relação médico-paciente.",
+      "Cogestão significa concentrar decisões exclusivamente na direção.",
+      "Acolhimento é apenas uma sala de recepção.",
+      "Ambiência se restringe à cor das paredes.",
+      "A PNH separa completamente atenção e gestão."
+    ],
+    explicacaoBase: "A PNH articula acolhimento, cogestão, ambiência, clínica ampliada e participação na produção do cuidado."
+  },
+  {
+    tema: "Origem e evolução do PACS",
+    fonteTitulo: "Ministério da Saúde — trajetória do PACS",
+    fonteUrl: "https://bvsms.saude.gov.br/bvs/publicacoes/educacao_profissional_docencia_saude_v5.pdf",
+    verdades: [
+      "Experiências com agentes comunitários antecederam a institucionalização nacional do PACS.",
+      "O Programa Nacional de Agentes Comunitários de Saúde foi criado em 1991.",
+      "Em 1992, a denominação PACS passou a ser utilizada.",
+      "O PACS inicialmente teve forte foco materno-infantil e em populações de maior risco.",
+      "A experiência do PACS contribuiu para a formulação do Programa Saúde da Família.",
+      "A atuação comunitária ajudou a aproximar serviços de saúde e território."
+    ],
+    falsas: [
+      "O PACS surgiu originalmente como programa hospitalar.",
+      "O PACS foi criado depois do Programa Saúde da Família.",
+      "A atuação dos agentes sempre se limitou ao trabalho administrativo interno.",
+      "O PACS não possuía relação com saúde materno-infantil.",
+      "Experiências comunitárias anteriores não tiveram influência sobre o programa.",
+      "O PACS foi concebido sem vínculo com território ou famílias."
+    ],
+    explicacaoBase: "A trajetória do PACS inclui experiências precursoras, institucionalização em 1991/1992 e influência sobre o PSF."
+  },
+  {
+    tema: "APS e Estratégia Saúde da Família",
+    fonteTitulo: "Programa Saúde da Família no Brasil — pressupostos, operacionalização e vantagens",
+    fonteUrl: "https://www.scielo.br/j/sausoc/a/TtG3vHtK7wSZcbZVHjHsGQH/?format=html&lang=pt",
+    verdades: [
+      "A Saúde da Família utiliza a família e o território como referências importantes para o cuidado.",
+      "O trabalho multiprofissional é característica da Estratégia Saúde da Família.",
+      "A vigilância à saúde pode integrar a organização do trabalho das equipes.",
+      "A ESF busca reorganizar a atenção básica e ampliar vínculo com a população.",
+      "A atuação da equipe combina ações clínicas, preventivas e de promoção da saúde.",
+      "O conhecimento da população adscrita apoia planejamento e acompanhamento."
+    ],
+    falsas: [
+      "A ESF foi criada para substituir toda a rede hospitalar.",
+      "A Estratégia Saúde da Família não trabalha com território.",
+      "A equipe de saúde da família deve atuar exclusivamente dentro da unidade.",
+      "Promoção e prevenção são incompatíveis com a ESF.",
+      "O trabalho multiprofissional é dispensável na Saúde da Família.",
+      "A família não possui papel na organização do cuidado da ESF."
+    ],
+    explicacaoBase: "A Saúde da Família articula território, família, equipe multiprofissional, vigilância e reorganização da atenção básica."
+  },
+  {
+    tema: "História do PSF",
+    fonteTitulo: "Programa Saúde da Família no Brasil — retrospectiva histórica",
+    fonteUrl: "https://www.scielo.br/j/sausoc/a/TtG3vHtK7wSZcbZVHjHsGQH/?format=html&lang=pt",
+    verdades: [
+      "O PSF foi implantado na década de 1990 como estratégia de reorganização da atenção básica.",
+      "A experiência do PACS contribuiu para o desenvolvimento do PSF.",
+      "O foco na família ampliou abordagens anteriormente centradas apenas no indivíduo.",
+      "A proposta do PSF incorporou atuação territorial e equipe multiprofissional.",
+      "A expansão do PSF acompanhou o fortalecimento da atenção básica no SUS.",
+      "Com o tempo, a denominação Estratégia Saúde da Família reforçou seu caráter estruturante."
+    ],
+    falsas: [
+      "O PSF foi criado antes do SUS.",
+      "O PSF não teve relação histórica com o PACS.",
+      "A proposta original do PSF era exclusivamente hospitalar.",
+      "O PSF rejeitava equipes multiprofissionais.",
+      "O programa foi concebido sem referência a famílias.",
+      "A Saúde da Família perdeu completamente relação com a atenção básica."
+    ],
+    explicacaoBase: "A história do PSF está ligada à expansão da atenção básica, ao PACS e à organização territorial do cuidado."
+  },
+  {
+    tema: "Intersetorialidade e Estratégia Saúde da Família",
+    fonteTitulo: "Intersetorialidade aplicada ao território e à Saúde da Família",
+    fonteUrl: "https://www.scielo.br/j/physis/a/wcqNQQKzjKH7jM4hyRDCYVc/?lang=pt",
+    verdades: [
+      "Problemas complexos do território podem exigir articulação entre saúde, educação, assistência social e outros setores.",
+      "A ESF pode atuar como participante de redes intersetoriais construídas no território.",
+      "Planejamento compartilhado pode reduzir fragmentação de respostas a necessidades sociais.",
+      "A intersetorialidade não significa que um setor substitua responsabilidades de outro.",
+      "Participação comunitária pode contribuir para definição de prioridades territoriais.",
+      "A articulação entre setores requer comunicação, pactuação e acompanhamento."
+    ],
+    falsas: [
+      "Intersetorialidade significa transferir todos os problemas para outro setor.",
+      "A ESF deve evitar contato com escolas e assistência social.",
+      "Planejamento conjunto é incompatível com autonomia institucional.",
+      "Intersetorialidade elimina a necessidade de responsabilidades definidas.",
+      "Problemas sociais complexos devem ser tratados por um único setor.",
+      "Participação comunitária prejudica necessariamente ações intersetoriais."
+    ],
+    explicacaoBase: "A intersetorialidade busca articular respostas a necessidades multifacetadas sem apagar responsabilidades específicas."
+  },
+  {
+    tema: "Desafios da intersetorialidade nas políticas públicas",
+    fonteTitulo: "Carmo e Guizardi — Desafios da intersetorialidade nas políticas públicas de saúde e assistência social",
+    fonteUrl: "https://www.scielo.br/j/physis/a/wcqNQQKzjKH7jM4hyRDCYVc/?lang=pt",
+    verdades: [
+      "Polissemia do conceito de intersetorialidade é apontada como um desafio.",
+      "Burocracia e trajetórias institucionais podem dificultar articulação entre políticas.",
+      "Participação social aparece como dimensão relevante no debate intersetorial.",
+      "A intersetorialidade pode reduzir efeitos da fragmentação setorial.",
+      "A intersetorialidade não é apresentada como solução automática para todo problema de gestão.",
+      "Equidade é uma dimensão relacionada ao debate sobre articulação entre saúde e assistência social."
+    ],
+    falsas: [
+      "O artigo conclui que intersetorialidade resolve qualquer problema público automaticamente.",
+      "A burocracia não interfere na articulação entre setores.",
+      "Participação social é considerada incompatível com intersetorialidade.",
+      "A fragmentação setorial sempre melhora respostas sociais.",
+      "Polissemia não aparece entre os desafios discutidos.",
+      "Equidade é tratada como tema sem relação com intersetorialidade."
+    ],
+    explicacaoBase: "O artigo destaca polissemia, burocracia, ciclo de políticas, participação social e equidade como dimensões importantes."
+  },
+  {
+    tema: "Redes sociais na Atenção Primária à Saúde",
+    fonteTitulo: "Análise de redes sociais na atenção primária em saúde: revisão integrativa",
+    fonteUrl: "https://www.scielo.br/j/ape/a/rjMqh9Lz3NCpMxSKy58LQSx/",
+    verdades: [
+      "Redes sociais podem ser entendidas como relações que conectam pessoas, grupos ou instituições.",
+      "A análise de redes sociais pode investigar relações entre profissionais e entre usuários.",
+      "Redes primárias e organizações de apoio podem influenciar trajetórias de cuidado.",
+      "A APS pode ser analisada a partir de fluxos e relações entre diferentes atores.",
+      "A análise de redes pode evidenciar centralidade, intermediação e estrutura relacional.",
+      "O enfermeiro pode exercer papel mediador relevante em redes de atenção e apoio."
+    ],
+    falsas: [
+      "Rede social em saúde significa apenas redes sociais digitais.",
+      "Análise de redes sociais estuda somente indivíduos isolados.",
+      "Relações entre profissionais não podem ser analisadas como redes.",
+      "Organizações de apoio não influenciam acesso a serviços.",
+      "Centralidade não é um conceito utilizado em análise de redes.",
+      "A APS não possui relações interinstitucionais relevantes."
+    ],
+    explicacaoBase: "A revisão mostra aplicações da análise de redes sociais na APS envolvendo profissionais, usuários e organizações de apoio."
+  },
+  {
+    tema: "Redes de Atenção à Saúde no SUS",
+    fonteTitulo: "Configuração das Redes de Atenção à Saúde no SUS",
+    fonteUrl: "https://www.scielo.br/j/csc/a/kVHyS985TPQQtskzd34FS9K/abstract/?lang=pt",
+    verdades: [
+      "Redes de Atenção à Saúde articulam diferentes pontos e níveis de atenção.",
+      "Cobertura, qualidade e resolubilidade podem ser analisadas para avaliar configurações de redes.",
+      "A atenção básica possui papel relevante na organização e coordenação da rede.",
+      "Diferenças regionais podem produzir configurações distintas de redes de atenção.",
+      "A existência de cobertura elevada não garante, por si só, alta qualidade da atenção.",
+      "Governança e articulação interfederativa são relevantes para organização das redes."
+    ],
+    falsas: [
+      "Rede de atenção significa apenas reunir hospitais de uma região.",
+      "Cobertura elevada garante automaticamente alta qualidade.",
+      "A atenção básica não participa da organização das redes.",
+      "Todas as regiões apresentam exatamente a mesma configuração de serviços.",
+      "Resolubilidade e qualidade são conceitos idênticos.",
+      "Governança não influencia a organização de redes."
+    ],
+    explicacaoBase: "O estudo analisa redes considerando cobertura, qualidade, resolubilidade e diferenças entre macrorregiões."
+  },
+  {
+    tema: "Visita domiciliar e autocuidado em diabetes",
+    fonteTitulo: "Avaliação da visita domiciliar para o empoderamento do autocuidado em diabetes",
+    fonteUrl: "https://www.scielo.br/j/ape/a/t3zhVsXRxyQKChPpDCBYMRj/?lang=pt",
+    verdades: [
+      "O estudo avaliou a visita domiciliar como estratégia para adesão e empoderamento no autocuidado do diabetes tipo 2.",
+      "A pesquisa utilizou desenho de ensaio clínico randomizado por clusters.",
+      "Participaram 145 usuários com diabetes mellitus tipo 2.",
+      "O grupo intervenção apresentou aumento significativo na adesão às práticas de autocuidado.",
+      "Também houve aumento significativo nos escores de empoderamento no grupo intervenção.",
+      "A visita domiciliar permite aproximação com a realidade de vida e apoio a decisões informadas."
+    ],
+    falsas: [
+      "O estudo avaliou exclusivamente pessoas com diabetes tipo 1.",
+      "A pesquisa foi apenas uma revisão de literatura sem participantes.",
+      "O estudo concluiu que a visita domiciliar reduziu o empoderamento.",
+      "Nenhuma mudança de autocuidado foi observada no grupo intervenção.",
+      "A visita domiciliar foi tratada apenas como fiscalização.",
+      "O estudo excluiu qualquer abordagem educativa."
+    ],
+    explicacaoBase: "O estudo encontrou melhora de adesão ao autocuidado e empoderamento após intervenção por visita domiciliar."
+  },
+  {
+    tema: "Família(s) no campo da saúde brasileira",
+    fonteTitulo: "Noção de família(s) no campo da saúde brasileira: ensaio teórico-reflexivo",
+    fonteUrl: "https://www.scielo.br/j/ean/a/7vTPNwPvQzbHxczhX6js35s/?format=html&lang=pt",
+    verdades: [
+      "O conceito de família é histórico, polissêmico e sofreu transformações no Brasil.",
+      "O artigo problematiza definições cristalizadas de família no campo da saúde.",
+      "Arranjos familiares não hegemônicos também precisam ser reconhecidos nas práticas de saúde.",
+      "Concepções rígidas de família podem produzir preconceitos e negligências no cuidado.",
+      "A discussão relaciona família, atenção básica e Política Nacional de Atenção Básica.",
+      "Compreender vínculos e funções familiares pode ser mais útil do que impor um único modelo ideal."
+    ],
+    falsas: [
+      "O artigo defende que existe apenas um modelo legítimo de família.",
+      "Família é um conceito imutável e sem relação com transformações históricas.",
+      "Configurações não hegemônicas devem ser excluídas do cuidado.",
+      "Definições cristalizadas de família não produzem qualquer efeito na prática profissional.",
+      "A atenção básica não utiliza a família como referência de cuidado.",
+      "O artigo reduz família exclusivamente ao parentesco biológico."
+    ],
+    explicacaoBase: "O ensaio propõe problematizar definições rígidas e reconhecer transformações e pluralidade das famílias."
   }
-};
-
-const TEMAS = [
-  { tema: "Estudo dirigido sobre DSS e Processo Saúde-Doença", grupo: "dss" },
-  { tema: "DSS — Texto Paulo Buss", grupo: "dss" },
-  { tema: "História do processo saúde-doença", grupo: "dss" },
-  { tema: "Complexidade do Processo Saúde-Doença", grupo: "dss" },
-  { tema: "Determinação Social da Saúde", grupo: "dss" },
-  { tema: "História do Conceito de Saúde", grupo: "dss" },
-  { tema: "Iniquidade e Saúde — Rita Barata", grupo: "dss" },
-
-  { tema: "APS 1 — Estudo dirigido", grupo: "aps" },
-  { tema: "Atenção Primária à Saúde", grupo: "aps" },
-
-  { tema: "Política Nacional de Humanização (PNH)", grupo: "pnh" },
-
-  { tema: "Origem e evolução do PACS", grupo: "pacs" },
-
-  { tema: "APS e Estratégia Saúde da Família", grupo: "esf" },
-  { tema: "História do PSF", grupo: "esf" },
-
-  { tema: "Intersetorialidade e Estratégia Saúde da Família", grupo: "intersetorialidade" },
-  { tema: "Desafios da intersetorialidade nas políticas públicas", grupo: "intersetorialidade" },
-
-  { tema: "Redes sociais na Atenção Primária à Saúde", grupo: "redes" },
-  { tema: "Redes de Atenção à Saúde no SUS", grupo: "redes" },
-
-  { tema: "Visita domiciliar e autocuidado em diabetes", grupo: "visita" },
-  { tema: "Família(s) no campo da saúde brasileira", grupo: "familia" }
-] as const;
+];
 
 function slug(value: string) {
   return value
@@ -610,127 +449,302 @@ function rotacionar<T>(
   deslocamento: number
 ) {
   const n = itens.length;
-  const d =
-    ((deslocamento % n) + n) % n;
-
-  return itens
-    .slice(d)
-    .concat(
-      itens.slice(0, d)
-    );
+  const d = ((deslocamento % n) + n) % n;
+  return itens.slice(d).concat(itens.slice(0, d));
 }
 
-function enunciadoVariante(
-  tema: string,
-  foco: string,
-  variante: number
+function sequenciaVF(
+  flags: boolean[]
 ) {
-  const moldes = [
-    `Sobre ${tema}, assinale a alternativa correta a respeito de ${foco}.`,
-    `Em uma questão no estilo da Avaliação I de Saúde Coletiva I, qual alternativa expressa corretamente ${foco}?`,
-    `Considere o conteúdo de ${tema}. Qual afirmação melhor representa ${foco}?`,
-    `Ao revisar ${tema} para a primeira avaliação, qual opção está correta sobre ${foco}?`
+  return flags
+    .map(function(flag) {
+      return flag ? "V" : "F";
+    })
+    .join(" – ");
+}
+
+function gerarQuestaoDireta(
+  tema: TemaFonte,
+  indice: number
+) {
+  const verdade =
+    tema.verdades[
+      indice %
+      tema.verdades.length
+    ];
+
+  const falsas =
+    rotacionar(
+      tema.falsas,
+      indice
+    ).slice(0, 4);
+
+  const alternativas =
+    rotacionar(
+      [
+        { texto: verdade, correta: true },
+        ...falsas.map(function(texto) {
+          return { texto, correta: false };
+        })
+      ],
+      indice % 5
+    );
+
+  return {
+    enunciado:
+      "Sobre " +
+      tema.tema +
+      ", assinale a alternativa CORRETA.",
+    explicacao:
+      tema.explicacaoBase,
+    dificuldade:
+      indice < 4
+        ? "facil"
+        : "medio",
+    alternativas
+  };
+}
+
+function gerarQuestaoIncorreta(
+  tema: TemaFonte,
+  indice: number
+) {
+  const falsa =
+    tema.falsas[
+      indice %
+      tema.falsas.length
+    ];
+
+  const verdades =
+    rotacionar(
+      tema.verdades,
+      indice + 1
+    ).slice(0, 4);
+
+  const alternativas =
+    rotacionar(
+      [
+        { texto: falsa, correta: true },
+        ...verdades.map(function(texto) {
+          return { texto, correta: false };
+        })
+      ],
+      (indice + 2) % 5
+    );
+
+  return {
+    enunciado:
+      "Em relação a " +
+      tema.tema +
+      ", marque a alternativa INCORRETA.",
+    explicacao:
+      "A alternativa marcada como resposta é a afirmação incorreta. " +
+      tema.explicacaoBase,
+    dificuldade:
+      "medio",
+    alternativas
+  };
+}
+
+function gerarQuestaoVF(
+  tema: TemaFonte,
+  indice: number
+) {
+  const v1 =
+    tema.verdades[
+      indice %
+      tema.verdades.length
+    ];
+
+  const f1 =
+    tema.falsas[
+      (indice + 1) %
+      tema.falsas.length
+    ];
+
+  const v2 =
+    tema.verdades[
+      (indice + 2) %
+      tema.verdades.length
+    ];
+
+  const f2 =
+    tema.falsas[
+      (indice + 3) %
+      tema.falsas.length
+    ];
+
+  const padroes = [
+    [true, false, true, false],
+    [false, true, true, false],
+    [true, true, false, false],
+    [false, true, false, true],
+    [true, false, false, true]
   ];
 
-  return moldes[
-    variante %
-    moldes.length
+  const padrao =
+    padroes[
+      indice %
+      padroes.length
+    ];
+
+  const poolV =
+    [v1, v2];
+
+  const poolF =
+    [f1, f2];
+
+  let vi = 0;
+  let fi = 0;
+
+  const afirmacoes =
+    padrao.map(function(flag) {
+      if (flag) {
+        const texto =
+          poolV[
+            vi %
+            poolV.length
+          ];
+        vi += 1;
+        return texto;
+      }
+
+      const texto =
+        poolF[
+          fi %
+          poolF.length
+        ];
+      fi += 1;
+      return texto;
+    });
+
+  const correta =
+    sequenciaVF(
+      padrao
+    );
+
+  const opcoes = [
+    correta,
+    sequenciaVF(
+      padrao.map(function(flag, i) {
+        return i === 0 ? !flag : flag;
+      })
+    ),
+    sequenciaVF(
+      padrao.map(function(flag, i) {
+        return i === 1 ? !flag : flag;
+      })
+    ),
+    sequenciaVF(
+      padrao.map(function(flag) {
+        return !flag;
+      })
+    ),
+    sequenciaVF(
+      [true, true, true, true]
+    )
   ];
+
+  const alternativas =
+    Array.from(
+      new Set(opcoes)
+    )
+      .slice(0, 5)
+      .map(function(texto) {
+        return {
+          texto,
+          correta:
+            texto === correta
+        };
+      });
+
+  while (alternativas.length < 5) {
+    const fallback =
+      ["F – F – F – F", "V – V – F – V", "F – V – V – V"][
+        alternativas.length % 3
+      ];
+
+    if (
+      !alternativas.some(function(item) {
+        return item.texto === fallback;
+      })
+    ) {
+      alternativas.push({
+        texto: fallback,
+        correta: fallback === correta
+      });
+    }
+  }
+
+  return {
+    enunciado:
+      "Julgue V (verdadeiro) ou F (falso) sobre " +
+      tema.tema +
+      " e assinale a sequência correta:\n\n" +
+      afirmacoes
+        .map(function(texto, i) {
+          return String(i + 1) + ". " + texto;
+        })
+        .join("\n"),
+    explicacao:
+      "Sequência correta: " +
+      correta +
+      ". " +
+      tema.explicacaoBase,
+    dificuldade:
+      "dificil",
+    alternativas:
+      rotacionar(
+        alternativas,
+        indice % 5
+      )
+  };
 }
 
 function gerarQuestoes(
-  tema: string,
-  grupoId: string
+  tema: TemaFonte
 ) {
-  const grupo =
-    GRUPOS[grupoId];
+  const questoes = [];
 
-  if (!grupo) {
-    throw new Error(
-      "Grupo de conteúdo inexistente: " +
-      grupoId
+  for (let i = 0; i < 10; i += 1) {
+    questoes.push(
+      gerarQuestaoDireta(
+        tema,
+        i
+      )
     );
   }
 
-  return grupo.conceitos.flatMap(
-    (
-      conceito,
-      indiceConceito
-    ) =>
-      [0, 1, 2, 3].map(
-        function (
-          variante
-        ) {
-          const alternativas =
-            [
-              {
-                texto:
-                  conceito.correta,
-                correta:
-                  true
-              },
-              ...conceito.distratores.map(
-                function (
-                  texto
-                ) {
-                  return {
-                    texto,
-                    correta:
-                      false
-                  };
-                }
-              )
-            ];
-
-          return {
-            enunciado:
-              enunciadoVariante(
-                tema,
-                conceito.foco,
-                variante
-              ),
-
-            explicacao:
-              conceito.explicacao,
-
-            dificuldade:
-              variante === 0
-                ? "facil"
-                : (
-                    variante === 3
-                      ? "dificil"
-                      : "medio"
-                  ),
-
-            alternativas:
-              rotacionar(
-                alternativas,
-                (
-                  indiceConceito +
-                  variante *
-                    2
-                ) %
-                  5
-              )
-          };
-        }
+  for (let i = 0; i < 5; i += 1) {
+    questoes.push(
+      gerarQuestaoIncorreta(
+        tema,
+        i
       )
-  );
+    );
+  }
+
+  for (let i = 0; i < 5; i += 1) {
+    questoes.push(
+      gerarQuestaoVF(
+        tema,
+        i
+      )
+    );
+  }
+
+  return questoes;
 }
 
 export async function
 sincronizarQuestoesSaudeColetivaI() {
-
   const usuario =
     await prisma.usuario.findFirst({
       orderBy: {
-        id:
-          "asc"
+        id: "asc"
       },
-
       select: {
-        id:
-          true
+        id: true
       }
     });
 
@@ -746,11 +760,9 @@ sincronizarQuestoesSaudeColetivaI() {
       where: {
         usuarioId:
           usuario.id,
-
         nome: {
           equals:
             DISCIPLINA,
-
           mode:
             "insensitive"
         }
@@ -763,7 +775,6 @@ sincronizarQuestoesSaudeColetivaI() {
         data: {
           usuarioId:
             usuario.id,
-
           nome:
             DISCIPLINA
         }
@@ -779,27 +790,27 @@ sincronizarQuestoesSaudeColetivaI() {
       where: {
         disciplinaId:
           disciplina.id,
-
-        fonte:
-          FONTE
+        fonte: {
+          startsWith:
+            FONTE_PREFIXO
+        }
       },
-
       select: {
-        id:
-          true,
-
-        tema:
-          true
+        id: true,
+        fonte: true,
+        tema: true
       }
+    });
+
+  const atuais =
+    existentes.filter(function(item) {
+      return item.fonte === FONTE;
     });
 
   const contagem =
     new Map<string, number>();
 
-  for (
-    const questao
-    of existentes
-  ) {
+  for (const questao of atuais) {
     const tema =
       String(
         questao.tema ||
@@ -809,40 +820,29 @@ sincronizarQuestoesSaudeColetivaI() {
     contagem.set(
       tema,
       (
-        contagem.get(
-          tema
-        ) ||
+        contagem.get(tema) ||
         0
-      ) +
-        1
+      ) + 1
     );
   }
 
   const completo =
-    existentes.length ===
+    atuais.length ===
       totalEsperado &&
-    TEMAS.every(
-      function (
-        item
-      ) {
-        return (
-          contagem.get(
-            item.tema
-          ) ===
-          QUESTOES_POR_TEMA
-        );
-      }
-    );
+    TEMAS.every(function(item) {
+      return (
+        contagem.get(item.tema) ===
+        QUESTOES_POR_TEMA
+      );
+    }) &&
+    existentes.length === atuais.length;
 
   if (completo) {
     console.log(
       "[saude-coletiva-i] " +
       totalEsperado +
-      " questões já sincronizadas em " +
-      TEMAS.length +
-      " temas."
+      " questões com fontes reais já sincronizadas."
     );
-
     return;
   }
 
@@ -851,33 +851,29 @@ sincronizarQuestoesSaudeColetivaI() {
       where: {
         disciplinaId:
           disciplina.id,
-
-        fonte:
-          FONTE
+        fonte: {
+          startsWith:
+            FONTE_PREFIXO
+        }
       }
     });
   }
 
-  let inseridas =
-    0;
+  let inseridas = 0;
 
-  for (
-    const item
-    of TEMAS
-  ) {
+  for (const tema of TEMAS) {
     const questoes =
       gerarQuestoes(
-        item.tema,
-        item.grupo
+        tema
       );
 
     if (
       questoes.length !==
-        QUESTOES_POR_TEMA
+      QUESTOES_POR_TEMA
     ) {
       throw new Error(
         "Tema " +
-        item.tema +
+        tema.tema +
         " gerou " +
         questoes.length +
         " questões; esperado " +
@@ -898,49 +894,39 @@ sincronizarQuestoesSaudeColetivaI() {
         data: {
           enunciado:
             questao.enunciado,
-
           explicacao:
             questao.explicacao,
-
           dificuldade:
             questao.dificuldade,
-
           tema:
-            item.tema,
-
+            tema.tema,
           fonte:
             FONTE,
-
           origemId:
             FONTE +
             "-" +
             slug(
-              item.tema
+              tema.tema
             ) +
             "-" +
             String(
-              i +
-              1
+              i + 1
             ).padStart(
               2,
               "0"
             ),
-
           banca:
             "Córtex — estilo Avaliação I",
-
           ano:
             2026,
-
           orgao:
             "Saúde Coletiva I",
-
+          fonteUrl:
+            tema.fonteUrl,
           usuarioId:
             usuario.id,
-
           disciplinaId:
             disciplina.id,
-
           alternativas: {
             create:
               questao.alternativas
@@ -948,15 +934,14 @@ sincronizarQuestoesSaudeColetivaI() {
         }
       });
 
-      inseridas +=
-        1;
+      inseridas += 1;
     }
   }
 
   console.log(
     "[saude-coletiva-i] " +
     inseridas +
-    " questões inseridas: " +
+    " questões inseridas com bibliografia pesquisada: " +
     QUESTOES_POR_TEMA +
     " por tema em " +
     TEMAS.length +
@@ -969,27 +954,25 @@ obterMatrizSaudeColetivaI() {
   return {
     disciplina:
       DISCIPLINA,
-
     fonte:
       FONTE,
-
     questoesPorTema:
       QUESTOES_POR_TEMA,
-
     totalTemas:
       TEMAS.length,
-
     totalQuestoes:
       TEMAS.length *
       QUESTOES_POR_TEMA,
-
     temas:
-      TEMAS.map(
-        function (
-          item
-        ) {
-          return item.tema;
-        }
-      )
+      TEMAS.map(function(item) {
+        return {
+          tema:
+            item.tema,
+          fonteTitulo:
+            item.fonteTitulo,
+          fonteUrl:
+            item.fonteUrl
+        };
+      })
   };
 }
