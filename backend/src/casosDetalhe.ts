@@ -96,6 +96,718 @@ function textoSeguro(
 }
 
 
+
+const PALAVRAS_VAZIAS =
+  new Set([
+    "a","o","as","os","um","uma","uns","umas","de","da","do","das","dos",
+    "e","ou","em","no","na","nos","nas","para","por","com","sem","que","se",
+    "ao","aos","à","às","pela","pelo","pelas","pelos","ser","estar","tem","ter",
+    "foi","sao","são","como","mais","menos","muito","muita","muitos","muitas"
+  ]);
+
+
+function normalizarSemantica(
+  valor: unknown
+): string {
+
+  return textoSeguro(valor)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+
+function tokensSemanticos(
+  valor: unknown
+): string[] {
+
+  return normalizarSemantica(valor)
+    .split(" ")
+    .map(
+      function (token) {
+        return token
+          .replace(/(mente|coes|cao|icos|icas|ico|ica|ados|adas|ado|ada|idos|idas|ido|ida|oes|ais|al|es|s)$/g, "");
+      }
+    )
+    .filter(
+      function (token) {
+        return (
+          token.length >= 3 &&
+          !PALAVRAS_VAZIAS.has(token)
+        );
+      }
+    );
+}
+
+
+function similaridadeSemantica(
+  esquerda: unknown,
+  direita: unknown
+): number {
+
+  const a =
+    new Set(
+      tokensSemanticos(esquerda)
+    );
+
+  const b =
+    new Set(
+      tokensSemanticos(direita)
+    );
+
+
+  if (
+    !a.size ||
+    !b.size
+  ) {
+    return 0;
+  }
+
+
+  let intersecao = 0;
+
+
+  for (
+    const token
+    of a
+  ) {
+
+    if (b.has(token)) {
+      intersecao += 1;
+    }
+  }
+
+
+  const precisao =
+    intersecao /
+    a.size;
+
+  const revocacao =
+    intersecao /
+    b.size;
+
+  const f1 =
+    (
+      precisao +
+      revocacao
+    )
+      ? (
+          2 *
+          precisao *
+          revocacao /
+          (
+            precisao +
+            revocacao
+          )
+        )
+      : 0;
+
+
+  const textoA =
+    normalizarSemantica(
+      esquerda
+    );
+
+  const textoB =
+    normalizarSemantica(
+      direita
+    );
+
+
+  const contem =
+    (
+      textoA.length >= 5 &&
+      textoB.length >= 5 &&
+      (
+        textoA.includes(
+          textoB
+        ) ||
+        textoB.includes(
+          textoA
+        )
+      )
+    )
+      ? 0.18
+      : 0;
+
+
+  return Math.min(
+    1,
+    f1 + contem
+  );
+}
+
+
+function respostaNegaConceito(
+  resposta: string,
+  conceito: string
+): boolean {
+
+  const texto =
+    normalizarSemantica(
+      resposta
+    );
+
+  const tokens =
+    tokensSemanticos(
+      conceito
+    )
+      .slice(0, 4);
+
+
+  if (!tokens.length) {
+    return false;
+  }
+
+
+  const padroesNegacao = [
+    "nao ",
+    "nega ",
+    "negou ",
+    "sem ",
+    "ausencia de ",
+    "ausente ",
+    "descarta ",
+    "descartado "
+  ];
+
+
+  for (
+    const token
+    of tokens
+  ) {
+
+    const indice =
+      texto.indexOf(
+        token
+      );
+
+
+    if (
+      indice === -1
+    ) {
+      continue;
+    }
+
+
+    const contexto =
+      texto.slice(
+        Math.max(
+          0,
+          indice - 36
+        ),
+        indice
+      );
+
+
+    if (
+      padroesNegacao.some(
+        function (padrao) {
+          return contexto.includes(
+            padrao
+          );
+        }
+      )
+    ) {
+      return true;
+    }
+  }
+
+
+  return false;
+}
+
+
+function itensJson(
+  valor: unknown
+): any[] {
+
+  if (
+    Array.isArray(valor)
+  ) {
+    return valor;
+  }
+
+
+  return [];
+}
+
+
+function avaliarCasoLocalmente(
+  caso: any,
+  hipotese: string,
+  justificativa: string,
+  informacoes: any[]
+) {
+
+  const diagnostico =
+    textoSeguro(
+      caso.diagnosticoFinal
+    );
+
+  const similaridadeDiagnostico =
+    similaridadeSemantica(
+      hipotese,
+      diagnostico
+    );
+
+  const negouDiagnostico =
+    respostaNegaConceito(
+      hipotese,
+      diagnostico
+    );
+
+
+  const diferenciais =
+    itensJson(
+      caso.diagnosticosDiferenciais
+    );
+
+
+  let melhorDiferencial =
+    0;
+
+  let nomeDiferencial =
+    "";
+
+
+  for (
+    const item
+    of diferenciais
+  ) {
+
+    const nome =
+      textoSeguro(
+        item &&
+        (
+          item.diagnostico ??
+          item.nome ??
+          item
+        )
+      );
+
+    const similaridade =
+      similaridadeSemantica(
+        hipotese,
+        nome
+      );
+
+
+    if (
+      similaridade >
+      melhorDiferencial
+    ) {
+      melhorDiferencial =
+        similaridade;
+
+      nomeDiferencial =
+        nome;
+    }
+  }
+
+
+  const referenciaRaciocinio =
+    [
+      textoSeguro(
+        caso.explicacaoDiagnostico
+      ),
+
+      textoSeguro(
+        caso.pontosChave
+      ),
+
+      textoSeguro(
+        informacoes
+      ),
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+
+  const tokensReferencia =
+    new Set(
+      tokensSemanticos(
+        referenciaRaciocinio
+      )
+    );
+
+  const tokensJustificativa =
+    new Set(
+      tokensSemanticos(
+        justificativa
+      )
+    );
+
+
+  let cobertura = 0;
+
+
+  if (
+    tokensReferencia.size &&
+    tokensJustificativa.size
+  ) {
+
+    let encontrados = 0;
+
+
+    for (
+      const token
+      of tokensJustificativa
+    ) {
+
+      if (
+        tokensReferencia.has(
+          token
+        )
+      ) {
+        encontrados += 1;
+      }
+    }
+
+
+    cobertura =
+      encontrados /
+      Math.max(
+        1,
+        Math.min(
+          14,
+          tokensJustificativa.size
+        )
+      );
+  }
+
+
+  cobertura =
+    Math.min(
+      1,
+      cobertura
+    );
+
+
+  const corretaClara =
+    (
+      !negouDiagnostico &&
+      similaridadeDiagnostico >=
+        0.72
+    );
+
+
+  const diferencialClaro =
+    (
+      melhorDiferencial >=
+        0.76 &&
+      similaridadeDiagnostico <
+        0.55
+    );
+
+
+  const contradicaoClara =
+    (
+      negouDiagnostico &&
+      similaridadeDiagnostico >=
+        0.35
+    );
+
+
+  if (
+    !corretaClara &&
+    !diferencialClaro &&
+    !contradicaoClara
+  ) {
+
+    return {
+      resolvido:
+        false,
+
+      confianca:
+        Math.max(
+          similaridadeDiagnostico,
+          melhorDiferencial
+        ),
+    };
+  }
+
+
+  const hipoteseCorreta =
+    corretaClara;
+
+
+  let nota =
+    hipoteseCorreta
+      ? (
+          6.5 +
+          cobertura *
+          3.5
+        )
+      : (
+          diferencialClaro
+            ? (
+                3.5 +
+                cobertura *
+                2.0
+              )
+            : (
+                1.5 +
+                cobertura *
+                1.5
+              )
+        );
+
+
+  nota =
+    Math.round(
+      Math.min(
+        10,
+        Math.max(
+          0,
+          nota
+        )
+      ) *
+      10
+    ) /
+    10;
+
+
+  const pontosFortes:
+    string[] = [];
+
+
+  if (
+    hipoteseCorreta
+  ) {
+
+    pontosFortes.push(
+      "A hipotese diagnostica corresponde ao diagnostico principal do caso."
+    );
+  }
+  else if (
+    diferencialClaro
+  ) {
+
+    pontosFortes.push(
+      "A hipotese e clinicamente relacionada ao caso e aparece como diagnostico diferencial."
+    );
+  }
+
+
+  if (
+    cobertura >=
+    0.45
+  ) {
+
+    pontosFortes.push(
+      "A justificativa recupera achados presentes no caso investigado."
+    );
+  }
+
+
+  const pontosFracos:
+    string[] = [];
+
+
+  if (
+    !hipoteseCorreta
+  ) {
+
+    pontosFracos.push(
+      diferencialClaro
+        ? (
+            "A hipotese se aproxima de " +
+            nomeDiferencial +
+            ", mas nao corresponde ao diagnostico principal."
+          )
+        : "A hipotese contradiz o diagnostico principal do caso."
+    );
+  }
+
+
+  if (
+    cobertura <
+    0.35
+  ) {
+
+    pontosFracos.push(
+      "A justificativa usa poucos achados objetivos do caso."
+    );
+  }
+
+
+  const pontosChave =
+    itensJson(
+      caso.pontosChave
+    )
+      .slice(0, 4)
+      .map(
+        function (item) {
+
+          return {
+            achado:
+              textoSeguro(
+                item &&
+                (
+                  item.achado ??
+                  item.nome ??
+                  item
+                )
+              ),
+
+            importancia:
+              textoSeguro(
+                item &&
+                item.importancia
+              ) ||
+              "Achado relevante para o raciocinio clinico.",
+          };
+        }
+      )
+      .filter(
+        function (item) {
+          return Boolean(
+            item.achado
+          );
+        }
+      );
+
+
+  const avaliacao = {
+    nota,
+
+    classificacao:
+      hipoteseCorreta
+        ? (
+            cobertura >= 0.55
+              ? "Correta e bem fundamentada"
+              : "Correta, com justificativa parcial"
+          )
+        : (
+            diferencialClaro
+              ? "Plausivel, mas nao principal"
+              : "Nao compativel"
+          ),
+
+    hipoteseCorreta,
+
+    diagnosticoFinal:
+      diagnostico,
+
+    avaliacaoGeral:
+      hipoteseCorreta
+        ? (
+            cobertura >= 0.55
+              ? "A hipotese esta correta e a justificativa utiliza dados coerentes com o caso."
+              : "A hipotese esta correta, mas a justificativa pode relacionar melhor os achados investigados."
+          )
+        : (
+            diferencialClaro
+              ? "A hipotese e plausivel como diferencial, mas nao explica o conjunto de achados tao bem quanto o diagnostico final."
+              : "A hipotese apresentada entra em conflito com o diagnostico principal esperado."
+          ),
+
+    pontosFortes:
+      pontosFortes.slice(
+        0,
+        3
+      ),
+
+    pontosFracos:
+      pontosFracos.slice(
+        0,
+        3
+      ),
+
+    achadosImportantes:
+      pontosChave,
+
+    informacoesNaoInvestigadas:
+      [],
+
+    diagnosticosDiferenciais:
+      diferenciais
+        .slice(0, 3)
+        .map(
+          function (item) {
+
+            return {
+              diagnostico:
+                textoSeguro(
+                  item &&
+                  (
+                    item.diagnostico ??
+                    item.nome ??
+                    item
+                  )
+                ),
+
+              justificativa:
+                textoSeguro(
+                  item &&
+                  (
+                    item.justificativa ??
+                    item.porqueNaoEPrincipal
+                  )
+                ),
+            };
+          }
+        )
+        .filter(
+          function (item) {
+            return Boolean(
+              item.diagnostico
+            );
+          }
+        ),
+
+    raciocinioEsperado:
+      textoSeguro(
+        caso.explicacaoDiagnostico
+      ) ||
+      (
+        "Relacionar os achados investigados com " +
+        diagnostico +
+        "."
+      ),
+
+    feedbackEducacional:
+      hipoteseCorreta
+        ? "Mantenha o foco em justificar a hipotese com dados objetivos coletados durante a investigacao."
+        : "Revise quais achados discriminam o diagnostico principal dos diagnosticos diferenciais.",
+
+    metodoCorrecao:
+      "local",
+
+    confiancaLocal:
+      Math.round(
+        (
+          hipoteseCorreta
+            ? similaridadeDiagnostico
+            : Math.max(
+                melhorDiferencial,
+                contradicaoClara
+                  ? similaridadeDiagnostico
+                  : 0
+              )
+        ) *
+        100
+      ) /
+      100,
+  };
+
+
+  return {
+    resolvido:
+      true,
+
+    confianca:
+      avaliacao.confiancaLocal,
+
+    avaliacao,
+  };
+}
+
+
 function normalizarExames(
   valor: unknown
 ): any[] {
@@ -1200,24 +1912,6 @@ export async function avaliarHipoteseCaso(
     }
 
 
-    const chave =
-      process.env
-        .OPENAI_API_KEY;
-
-
-    if (!chave) {
-
-      return {
-        status: 500,
-
-        data: {
-          error:
-            "OPENAI_API_KEY nao configurada.",
-        },
-      };
-    }
-
-
     const informacoes =
       investigacao
         .registros
@@ -1239,6 +1933,150 @@ export async function avaliarHipoteseCaso(
             };
           }
         );
+
+
+    const resultadoLocal =
+      avaliarCasoLocalmente(
+        caso,
+        hipotese,
+        justificativa,
+        informacoes
+      );
+
+
+    if (
+      resultadoLocal.resolvido &&
+      resultadoLocal.avaliacao
+    ) {
+
+      const avaliacaoFinal = {
+        ...resultadoLocal.avaliacao,
+
+        avaliadoEm:
+          new Date()
+            .toISOString(),
+      };
+
+
+      await prisma
+        .investigacaoCaso
+        .update({
+          where: {
+            id:
+              investigacao.id,
+          },
+
+          data: {
+            hipotese,
+            justificativa,
+
+            avaliacao:
+              avaliacaoFinal as any,
+
+            status:
+              "FINALIZADA",
+
+            finalizado:
+              true,
+          },
+        });
+
+
+      const maiorOrdem =
+        investigacao
+          .registros
+          .reduce(
+            function (
+              maior,
+              registro
+            ) {
+
+              return Math.max(
+                maior,
+                registro.ordem ||
+                0
+              );
+            },
+
+            0
+          );
+
+
+      await prisma
+        .registroInvestigacao
+        .create({
+          data: {
+            investigacaoId:
+              investigacao.id,
+
+            tipo:
+              "HIPOTESE",
+
+            titulo:
+              "Hipotese diagnostica final",
+
+            pergunta:
+              "Qual e sua hipotese diagnostica?",
+
+            resposta:
+              "Hipotese: " +
+              hipotese +
+              "\n\nJustificativa: " +
+              justificativa,
+
+            ordem:
+              maiorOrdem + 1,
+          },
+        });
+
+
+      investigacao =
+        (
+          await obterInvestigacao(
+            usuarioId,
+            casoId
+          )
+        )!;
+
+
+      return {
+        status: 200,
+
+        data: {
+          sucesso:
+            true,
+
+          jaFinalizada:
+            false,
+
+          investigacao,
+
+          avaliacao:
+            avaliacaoFinal,
+
+          correcao:
+            "local",
+        },
+      };
+    }
+
+
+    const chave =
+      process.env
+        .OPENAI_API_KEY;
+
+
+    if (!chave) {
+
+      return {
+        status: 500,
+
+        data: {
+          error:
+            "OPENAI_API_KEY nao configurada.",
+        },
+      };
+    }
 
 
     const openai =
