@@ -2,8 +2,7 @@ import { prisma } from "../../lib/prisma";
 
 const DISCIPLINA = "Saúde Coletiva I";
 const FONTE_PREFIXO = "cortex-saude-coletiva-i-";
-const FONTE = "cortex-saude-coletiva-i-fontes-reais-v2";
-const QUESTOES_POR_TEMA = 20;
+const FONTE = "cortex-saude-coletiva-i-fontes-reais-v3-semantic-dedup";
 
 type TemaFonte = {
   tema: string;
@@ -453,288 +452,290 @@ function rotacionar<T>(
   return itens.slice(d).concat(itens.slice(0, d));
 }
 
-function sequenciaVF(
-  flags: boolean[]
+function normalizarSemantica(
+  value: string
 ) {
-  return flags
-    .map(function(flag) {
-      return flag ? "V" : "F";
-    })
-    .join(" – ");
-}
+  const stopwords =
+    new Set([
+      "a","o","as","os","de","da","do","das","dos",
+      "e","em","para","por","com","um","uma","que",
+      "se","na","no","nas","nos","ao","aos","à","às"
+    ]);
 
-function gerarQuestaoDireta(
-  tema: TemaFonte,
-  indice: number
-) {
-  const verdade =
-    tema.verdades[
-      indice %
-      tema.verdades.length
-    ];
-
-  const falsas =
-    rotacionar(
-      tema.falsas,
-      indice
-    ).slice(0, 4);
-
-  const alternativas =
-    rotacionar(
-      [
-        { texto: verdade, correta: true },
-        ...falsas.map(function(texto) {
-          return { texto, correta: false };
-        })
-      ],
-      indice % 5
-    );
-
-  return {
-    enunciado:
-      "Sobre " +
-      tema.tema +
-      ", assinale a alternativa CORRETA.",
-    explicacao:
-      tema.explicacaoBase,
-    dificuldade:
-      indice < 4
-        ? "facil"
-        : "medio",
-    alternativas
-  };
-}
-
-function gerarQuestaoIncorreta(
-  tema: TemaFonte,
-  indice: number
-) {
-  const falsa =
-    tema.falsas[
-      indice %
-      tema.falsas.length
-    ];
-
-  const verdades =
-    rotacionar(
-      tema.verdades,
-      indice + 1
-    ).slice(0, 4);
-
-  const alternativas =
-    rotacionar(
-      [
-        { texto: falsa, correta: true },
-        ...verdades.map(function(texto) {
-          return { texto, correta: false };
-        })
-      ],
-      (indice + 2) % 5
-    );
-
-  return {
-    enunciado:
-      "Em relação a " +
-      tema.tema +
-      ", marque a alternativa INCORRETA.",
-    explicacao:
-      "A alternativa marcada como resposta é a afirmação incorreta. " +
-      tema.explicacaoBase,
-    dificuldade:
-      "medio",
-    alternativas
-  };
-}
-
-function gerarQuestaoVF(
-  tema: TemaFonte,
-  indice: number
-) {
-  const v1 =
-    tema.verdades[
-      indice %
-      tema.verdades.length
-    ];
-
-  const f1 =
-    tema.falsas[
-      (indice + 1) %
-      tema.falsas.length
-    ];
-
-  const v2 =
-    tema.verdades[
-      (indice + 2) %
-      tema.verdades.length
-    ];
-
-  const f2 =
-    tema.falsas[
-      (indice + 3) %
-      tema.falsas.length
-    ];
-
-  const padroes = [
-    [true, false, true, false],
-    [false, true, true, false],
-    [true, true, false, false],
-    [false, true, false, true],
-    [true, false, false, true]
-  ];
-
-  const padrao =
-    padroes[
-      indice %
-      padroes.length
-    ];
-
-  const poolV =
-    [v1, v2];
-
-  const poolF =
-    [f1, f2];
-
-  let vi = 0;
-  let fi = 0;
-
-  const afirmacoes =
-    padrao.map(function(flag) {
-      if (flag) {
-        const texto =
-          poolV[
-            vi %
-            poolV.length
-          ];
-        vi += 1;
-        return texto;
-      }
-
-      const texto =
-        poolF[
-          fi %
-          poolF.length
-        ];
-      fi += 1;
-      return texto;
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]+/g, " ")
+    .split(/\s+/)
+    .filter(function(token) {
+      return (
+        token.length > 2 &&
+        !stopwords.has(token)
+      );
     });
+}
 
-  const correta =
-    sequenciaVF(
-      padrao
+
+function similaridadeSemantica(
+  a: string,
+  b: string
+) {
+  const setA =
+    new Set(
+      normalizarSemantica(a)
     );
 
-  const opcoes = [
-    correta,
-    sequenciaVF(
-      padrao.map(function(flag, i) {
-        return i === 0 ? !flag : flag;
-      })
-    ),
-    sequenciaVF(
-      padrao.map(function(flag, i) {
-        return i === 1 ? !flag : flag;
-      })
-    ),
-    sequenciaVF(
-      padrao.map(function(flag) {
-        return !flag;
-      })
-    ),
-    sequenciaVF(
-      [true, true, true, true]
-    )
-  ];
+  const setB =
+    new Set(
+      normalizarSemantica(b)
+    );
 
-  const alternativas =
-    Array.from(
-      new Set(opcoes)
-    )
-      .slice(0, 5)
-      .map(function(texto) {
-        return {
-          texto,
-          correta:
-            texto === correta
-        };
-      });
+  if (
+    !setA.size ||
+    !setB.size
+  ) {
+    return 0;
+  }
 
-  while (alternativas.length < 5) {
-    const fallback =
-      ["F – F – F – F", "V – V – F – V", "F – V – V – V"][
-        alternativas.length % 3
-      ];
+  let intersecao = 0;
 
-    if (
-      !alternativas.some(function(item) {
-        return item.texto === fallback;
-      })
-    ) {
-      alternativas.push({
-        texto: fallback,
-        correta: fallback === correta
-      });
+  for (const token of setA) {
+    if (setB.has(token)) {
+      intersecao += 1;
     }
   }
 
-  return {
-    enunciado:
-      "Julgue V (verdadeiro) ou F (falso) sobre " +
-      tema.tema +
-      " e assinale a sequência correta:\n\n" +
-      afirmacoes
-        .map(function(texto, i) {
-          return String(i + 1) + ". " + texto;
-        })
-        .join("\n"),
-    explicacao:
-      "Sequência correta: " +
-      correta +
-      ". " +
-      tema.explicacaoBase,
-    dificuldade:
-      "dificil",
-    alternativas:
-      rotacionar(
-        alternativas,
-        indice % 5
-      )
-  };
+  const uniao =
+    new Set([
+      ...setA,
+      ...setB
+    ]).size;
+
+  return uniao
+    ? intersecao / uniao
+    : 0;
 }
+
+
+function escolherDistratores(
+  tema: TemaFonte,
+  alvo: string,
+  corretas: string[],
+  quantidade = 4
+) {
+  const candidatas =
+    [
+      ...tema.falsas,
+      ...tema.verdades
+    ]
+      .filter(function(texto) {
+        return (
+          texto !== alvo &&
+          !corretas.includes(texto)
+        );
+      });
+
+  const unicas: string[] = [];
+
+  for (const texto of candidatas) {
+    if (
+      unicas.some(function(existente) {
+        return (
+          similaridadeSemantica(
+            existente,
+            texto
+          ) >= 0.72
+        );
+      })
+    ) {
+      continue;
+    }
+
+    unicas.push(texto);
+
+    if (
+      unicas.length >=
+      quantidade
+    ) {
+      break;
+    }
+  }
+
+  return unicas;
+}
+
 
 function gerarQuestoes(
   tema: TemaFonte
 ) {
-  const questoes = [];
+  const questoes: Array<{
+    enunciado: string;
+    explicacao: string;
+    dificuldade: string;
+    alvoSemantico: string;
+    alternativas: Array<{
+      texto: string;
+      correta: boolean;
+    }>;
+  }> = [];
 
-  for (let i = 0; i < 10; i += 1) {
-    questoes.push(
-      gerarQuestaoDireta(
+  const alvosUsados: string[] = [];
+
+  function adicionar(
+    alvo: string,
+    modo:
+      "correta" |
+      "incorreta"
+  ) {
+    if (
+      alvosUsados.some(function(existente) {
+        return (
+          similaridadeSemantica(
+            existente,
+            alvo
+          ) >= 0.68
+        );
+      })
+    ) {
+      return;
+    }
+
+    const distratores =
+      escolherDistratores(
         tema,
-        i
-      )
+        alvo,
+        [
+          alvo,
+          ...alvosUsados
+        ],
+        4
+      );
+
+    if (
+      distratores.length <
+      4
+    ) {
+      return;
+    }
+
+    const alternativas =
+      rotacionar(
+        [
+          {
+            texto:
+              alvo,
+            correta:
+              true
+          },
+          ...distratores.map(
+            function(texto) {
+              return {
+                texto,
+                correta:
+                  false
+              };
+            }
+          )
+        ],
+        questoes.length %
+          5
+      );
+
+    questoes.push({
+      enunciado:
+        modo === "correta"
+          ? (
+              "Sobre " +
+              tema.tema +
+              ", assinale a alternativa CORRETA."
+            )
+          : (
+              "Em relação a " +
+              tema.tema +
+              ", marque a alternativa INCORRETA."
+            ),
+
+      explicacao:
+        modo === "correta"
+          ? tema.explicacaoBase
+          : (
+              "A alternativa marcada é a afirmação incorreta. " +
+              tema.explicacaoBase
+            ),
+
+      dificuldade:
+        questoes.length <
+          4
+          ? "facil"
+          : (
+              questoes.length <
+                9
+                ? "medio"
+                : "dificil"
+            ),
+
+      alvoSemantico:
+        alvo,
+
+      alternativas
+    });
+
+    alvosUsados.push(
+      alvo
     );
   }
 
-  for (let i = 0; i < 5; i += 1) {
-    questoes.push(
-      gerarQuestaoIncorreta(
-        tema,
-        i
-      )
+  for (
+    const verdade
+    of tema.verdades
+  ) {
+    adicionar(
+      verdade,
+      "correta"
     );
   }
 
-  for (let i = 0; i < 5; i += 1) {
-    questoes.push(
-      gerarQuestaoVF(
-        tema,
-        i
-      )
+  for (
+    const falsa
+    of tema.falsas
+  ) {
+    adicionar(
+      falsa,
+      "incorreta"
     );
   }
 
   return questoes;
 }
+
+
+function quantidadeEsperadaTema(
+  tema: TemaFonte
+) {
+  return gerarQuestoes(
+    tema
+  ).length;
+}
+
+
+function totalEsperadoBanco() {
+  return TEMAS.reduce(
+    function(
+      total,
+      tema
+    ) {
+      return (
+        total +
+        quantidadeEsperadaTema(
+          tema
+        )
+      );
+    },
+    0
+  );
+}
+
 
 export async function
 sincronizarQuestoesSaudeColetivaI() {
@@ -782,8 +783,7 @@ sincronizarQuestoesSaudeColetivaI() {
   }
 
   const totalEsperado =
-    TEMAS.length *
-    QUESTOES_POR_TEMA;
+    totalEsperadoBanco();
 
   const existentes =
     await prisma.questao.findMany({
@@ -832,7 +832,9 @@ sincronizarQuestoesSaudeColetivaI() {
     TEMAS.every(function(item) {
       return (
         contagem.get(item.tema) ===
-        QUESTOES_POR_TEMA
+        quantidadeEsperadaTema(
+          item
+        )
       );
     }) &&
     existentes.length === atuais.length;
@@ -866,21 +868,6 @@ sincronizarQuestoesSaudeColetivaI() {
       gerarQuestoes(
         tema
       );
-
-    if (
-      questoes.length !==
-      QUESTOES_POR_TEMA
-    ) {
-      throw new Error(
-        "Tema " +
-        tema.tema +
-        " gerou " +
-        questoes.length +
-        " questões; esperado " +
-        QUESTOES_POR_TEMA +
-        "."
-      );
-    }
 
     for (
       let i = 0;
@@ -941,9 +928,7 @@ sincronizarQuestoesSaudeColetivaI() {
   console.log(
     "[saude-coletiva-i] " +
     inseridas +
-    " questões inseridas com bibliografia pesquisada: " +
-    QUESTOES_POR_TEMA +
-    " por tema em " +
+    " questões únicas inseridas após deduplicação semântica em " +
     TEMAS.length +
     " temas."
   );
@@ -957,12 +942,11 @@ obterMatrizSaudeColetivaI() {
     fonte:
       FONTE,
     questoesPorTema:
-      QUESTOES_POR_TEMA,
+      null,
     totalTemas:
       TEMAS.length,
     totalQuestoes:
-      TEMAS.length *
-      QUESTOES_POR_TEMA,
+      totalEsperadoBanco(),
     temas:
       TEMAS.map(function(item) {
         return {
