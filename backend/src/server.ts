@@ -6131,6 +6131,8 @@ server.listen(
 
         await sincronizarCasosFaculdade();
 
+        await sincronizarQuestoesSaudeColetivaI();
+
         await sincronizarQuestoesSemiotecnica();
 
         await sincronizarQuestoesDiego();
@@ -6140,8 +6142,6 @@ server.listen(
         await sincronizarQuestoesCalculoMedicamentos();
 
         await sincronizarQuestoesLaboratorioEcg();
-
-        await sincronizarQuestoesSaudeColetivaI();
 
         await sincronizarQuestoesConcursosPublicos();
 
