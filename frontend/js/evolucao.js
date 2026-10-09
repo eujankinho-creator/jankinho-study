@@ -1529,6 +1529,217 @@ function updateAnswerInfo() {
 }
 
 
+function semanticTokens(value) {
+
+  return normalize(value)
+    .replace(
+      /[^a-z0-9\\s]/g,
+      " "
+    )
+    .split(
+      /\\s+/
+    )
+    .map(
+      function (token) {
+
+        return token
+          .replace(
+            /(mente|coes|cao|icos|icas|ico|ica|ados|adas|ado|ada|idos|idas|ido|ida|oes|ais|al|es|s)$/g,
+            ""
+          );
+      }
+    )
+    .filter(
+      function (token) {
+
+        return (
+          token.length >= 3
+        );
+      }
+    );
+}
+
+
+function phraseIsNegated(
+  text,
+  phrase
+) {
+
+  const normalizedText =
+    normalize(text);
+
+  const normalizedPhrase =
+    normalize(phrase);
+
+  const phraseTokens =
+    semanticTokens(
+      normalizedPhrase
+    );
+
+
+  if (!phraseTokens.length) {
+    return false;
+  }
+
+
+  const negations = [
+    "nao ",
+    "nega ",
+    "negou ",
+    "sem ",
+    "ausencia de ",
+    "ausente ",
+    "descarta ",
+    "descartado "
+  ];
+
+
+  for (
+    const token
+    of phraseTokens.slice(0, 3)
+  ) {
+
+    const index =
+      normalizedText.indexOf(
+        token
+      );
+
+
+    if (index < 0) {
+      continue;
+    }
+
+
+    const before =
+      normalizedText.slice(
+        Math.max(
+          0,
+          index - 34
+        ),
+        index
+      );
+
+
+    if (
+      negations.some(
+        function (item) {
+          return before.includes(item);
+        }
+      )
+    ) {
+      return true;
+    }
+  }
+
+
+  return false;
+}
+
+
+function semanticPhraseScore(
+  text,
+  phrase
+) {
+
+  const normalizedText =
+    normalize(text);
+
+  const normalizedPhrase =
+    normalize(phrase);
+
+
+  if (
+    !normalizedPhrase
+  ) {
+    return 0;
+  }
+
+
+  if (
+    normalizedText.includes(
+      normalizedPhrase
+    )
+  ) {
+
+    return phraseIsNegated(
+      normalizedText,
+      normalizedPhrase
+    )
+      ? 0
+      : 1;
+  }
+
+
+  const phraseTokens =
+    semanticTokens(
+      normalizedPhrase
+    );
+
+  const textTokens =
+    new Set(
+      semanticTokens(
+        normalizedText
+      )
+    );
+
+
+  if (
+    !phraseTokens.length ||
+    !textTokens.size
+  ) {
+    return 0;
+  }
+
+
+  let matches = 0;
+
+
+  phraseTokens
+    .forEach(
+      function (token) {
+
+        if (
+          textTokens.has(
+            token
+          )
+        ) {
+          matches += 1;
+        }
+      }
+    );
+
+
+  const coverage =
+    matches /
+    phraseTokens.length;
+
+
+  if (
+    phraseTokens.length === 1
+  ) {
+
+    return coverage === 1 &&
+      !phraseIsNegated(
+        normalizedText,
+        normalizedPhrase
+      )
+        ? 0.86
+        : 0;
+  }
+
+
+  return (
+    coverage >= 0.75 &&
+    !phraseIsNegated(
+      normalizedText,
+      normalizedPhrase
+    )
+  )
+    ? coverage
+    : 0;
+}
+
+
 function analyzeAnswer() {
 
   const item =
@@ -1540,34 +1751,58 @@ function analyzeAnswer() {
   }
 
 
-  const text =
-    normalize(
-      $("resposta").value
-    );
+  const rawText =
+    $("resposta").value;
 
 
   return item.criteria.map(
     function (criterion) {
 
-      const found =
-        criterion.words.some(
+      let bestScore = 0;
+
+      let matchedWord = "";
+
+
+      criterion.words
+        .forEach(
           function (word) {
 
-            return text.includes(
-              normalize(word)
-            );
+            const score =
+              semanticPhraseScore(
+                rawText,
+                word
+              );
+
+
+            if (
+              score >
+              bestScore
+            ) {
+
+              bestScore =
+                score;
+
+              matchedWord =
+                word;
+            }
           }
         );
 
 
+      const found =
+        bestScore >= 0.75;
+
+
       return {
         ...criterion,
-        found
+        found,
+        confidence:
+          bestScore,
+        matchedWord
       };
     }
   );
 }
-
 
 function renderResult() {
 
@@ -1723,8 +1958,8 @@ function renderResult() {
           </h2>
 
           <p>
-            A correcao verifica se os principais elementos
-            do contexto foram registrados.
+            A correcao e feita localmente, considerando termos equivalentes,
+            contexto e negacoes, sem consumir creditos de IA.
           </p>
 
         </div>
