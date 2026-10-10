@@ -7,13 +7,13 @@
   <script>
     (function(){var t="dark-purple";try{var s=localStorage.getItem("jankinho_theme_v1");if(s)t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();
   </script>
-  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds-fluid4">
-  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds-fluid4">
-  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds-fluid4">
-  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds-fluid4">
-  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds-fluid4">
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds-fluid4">
-  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds-fluid4">
+  <link rel="stylesheet" href="/css/app.css?v=20261010-clinical-photo5">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-clinical-photo5">
+  <link rel="stylesheet" href="/css/themes.css?v=20261010-clinical-photo5">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-clinical-photo5">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-clinical-photo5">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-clinical-photo5">
+  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-clinical-photo5">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
   <script defer src="/js/sidebar-standard.js?v=20261007-logout-global3"></script>
@@ -71,17 +71,19 @@
           </div>
 
           <div class="skin-stage skin-stage-clinical" id="skinStage" data-wound="lpp2">
-            <canvas id="clinicalWoundCanvas" width="960" height="650" role="img" aria-label="Simulação clínica detalhada da ferida: examine profundidade, exsudato, bordas e pele perilesional"></canvas>
+            <img id="clinicalReferencePhoto" class="clinical-reference-photo" src="https://upload.wikimedia.org/wikipedia/commons/9/90/Decubitus_01.JPG" alt="Fotografia clínica real de lesão por pressão, utilizada como referência visual" decoding="async" fetchpriority="high">
+            <canvas id="clinicalWoundCanvas" width="960" height="650" role="img" aria-label="Ilustração alternativa da ferida; consulte preferencialmente a fotografia clínica para avaliar tecidos"></canvas>
             <canvas id="fluidWoundCanvas" width="960" height="650" aria-hidden="true"></canvas>
             <canvas id="procedureCanvas" width="960" height="650" aria-hidden="true"></canvas>
             <div id="stageTreatmentHint" class="stage-treatment-hint">Observe os tecidos • Avalie a ferida antes de iniciar</div>
-            <div class="clinical-controls"><span>SIMULAÇÃO ANATÔMICA · TECIDOS</span><div><button id="zoomOutWound" type="button" aria-label="Reduzir zoom">−</button><span id="zoomWoundLabel">100%</span><button id="zoomInWound" type="button" aria-label="Aumentar zoom">+</button><button id="inspectWound" type="button" aria-pressed="false">Identificar</button></div></div>
+            <div class="clinical-controls"><span id="clinicalViewLabel">FOTOGRAFIA CLÍNICA · REFERÊNCIA REAL</span><div><button id="clinicalPhotoMode" class="clinical-mode-button" type="button" aria-pressed="true" title="Fotografia clínica original">Foto real</button><button id="clinicalIllustrationMode" class="clinical-mode-button" type="button" aria-pressed="false" title="Representação interativa sem fotografia">Esquema</button><button id="zoomOutWound" type="button" aria-label="Reduzir zoom">−</button><span id="zoomWoundLabel">100%</span><button id="zoomInWound" type="button" aria-label="Aumentar zoom">+</button><button id="inspectWound" type="button" aria-pressed="false">Identificar</button></div></div>
             <div class="case-vitals">
               <span id="casePain">Dor 4/10</span><span id="caseTemp">Afebril</span><span id="caseTime">Há 3 dias</span>
             </div>
           </div>
 
-          <p class="wound-image-note" id="woundImageNote">Simulação anatômica ilustrativa · Observe borda, cavidade e fluido. Não equivale a fotografia clínica.</p>
+          <p class="wound-image-note" id="woundImageNote">Fotografia clínica original, creditada abaixo; o cenário é uma simulação didática e não o prontuário do paciente fotografado.</p>
+          <div class="clinical-photo-credit" id="clinicalPhotoCredit">Foto: <a id="clinicalPhotoSource" href="https://commons.wikimedia.org/wiki/File:Decubitus_01.JPG" target="_blank" rel="noopener noreferrer">AfroBrazilian · Wikimedia Commons</a> · CC BY-SA 3.0. Ao aplicar coberturas, os efeitos são uma simulação gráfica.</div>
           <div class="clinical-inspection" id="clinicalInspection" hidden aria-live="polite">Selecione uma região da ferida para explorar a estrutura.</div>
           <div class="case-brief">
             <div><small>HISTÓRIA</small><p id="caseHistory"></p></div>
@@ -154,7 +156,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-feridas.js?v=20261010-wounds-fluid4"></script>
+  <script src="/js/laboratorio-feridas.js?v=20261010-clinical-photo5"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>

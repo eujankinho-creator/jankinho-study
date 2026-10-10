@@ -16,7 +16,7 @@ function loadCase(key){
  qsa(".case-pill").forEach(b=>b.classList.toggle("is-active",b.dataset.case===current.key));
  setText("caseEyebrow",current.eyebrow);setText("caseTitle",current.title);setText("casePain",current.pain);setText("caseTemp",current.temp);setText("caseTime",current.time);setText("caseHistory",current.history);setText("caseObjective",current.objective);
  $("skinStage").dataset.wound=current.key;
- drawClinicalWound();setClinicalZoom(1);clinicalInspect=false;$("inspectWound").setAttribute("aria-pressed","false");$("clinicalInspection").hidden=true;
+ loadClinicalReference();drawClinicalWound();setClinicalZoom(1);clinicalInspect=false;$("inspectWound").setAttribute("aria-pressed","false");$("clinicalInspection").hidden=true;
  ["bedSelect","exudateSelect","skinSelect","infectionSelect"].forEach(id=>$(id).value="");
  hideFeedback("assessmentFeedback");hideFeedback("treatmentFeedback");renderSequence();
  qsa(".product-card").forEach(b=>b.classList.remove("is-selected"));
@@ -236,6 +236,7 @@ function drawClinicalWound(){
 }
 function drawFluidFrame(t){
  if(!fluidCtx)return;
+ if(clinicalPhotoMode){fluidCtx.clearRect(0,0,960,650);return;}
  const ctx=fluidCtx,k=current.key,wet=k!=="dry",isVenous=k==="venous",isInfected=k==="infected";
  const {cx,cy,rx,ry}=clinicalGeometry();
  ctx.clearRect(0,0,960,650);if(!wet)return;
@@ -285,7 +286,7 @@ function drawFluidFrame(t){
  }
 }
 
-function setClinicalZoom(value){clinicalZoom=Math.max(1,Math.min(2.25,Math.round(value*100)/100));clinicalCanvas.style.transform="scale("+clinicalZoom+")";clinicalCanvas.style.transformOrigin="center 49%";$("procedureCanvas").style.transform="scale("+clinicalZoom+")";fluidCanvas.style.transform="scale("+clinicalZoom+")";setText("zoomWoundLabel",Math.round(clinicalZoom*100)+"%")}
+function setClinicalZoom(value){clinicalZoom=Math.max(1,Math.min(2.25,Math.round(value*100)/100));clinicalCanvas.style.transform="scale("+clinicalZoom+")";clinicalCanvas.style.transformOrigin="center 49%";$("procedureCanvas").style.transform="scale("+clinicalZoom+")";fluidCanvas.style.transform="scale("+clinicalZoom+")";referencePhoto.style.transform="scale("+clinicalZoom+")";setText("zoomWoundLabel",Math.round(clinicalZoom*100)+"%")}
 $("zoomOutWound").addEventListener("click",()=>setClinicalZoom(clinicalZoom-.25));
 $("zoomInWound").addEventListener("click",()=>setClinicalZoom(clinicalZoom+.25));
 $("inspectWound").addEventListener("click",()=>{clinicalInspect=!clinicalInspect;$("inspectWound").setAttribute("aria-pressed",String(clinicalInspect));$("clinicalInspection").hidden=!clinicalInspect;if(clinicalInspect)setText("clinicalInspection","Toque no leito, bordas ou pele ao redor para identificar estruturas.")});
@@ -527,6 +528,60 @@ if(!reduceFluidMotion)window.setInterval(()=>{
  if(document.hidden||!fluidVisible||!current||!["venous","infected"].includes(current.key)||procedure.dressing)return;
  drawFluidFrame(performance.now());
 },window.matchMedia&&window.matchMedia("(max-width: 820px)").matches?330:170);
+
+
+/* Fotografias originais, identificadas e licenciadas. Não simulam evolução real após curativos. */
+const clinicalReferences={
+ lpp2:{url:"https://upload.wikimedia.org/wikipedia/commons/9/90/Decubitus_01.JPG",
+  source:"https://commons.wikimedia.org/wiki/File:Decubitus_01.JPG",author:"AfroBrazilian",license:"CC BY-SA 3.0",
+  alt:"Fotografia original de lesão por pressão estágio 2 na região sacral.",
+  note:"Fotografia real de LPP estágio 2: inspecione a perda parcial de pele e a derme exposta. O histórico e a técnica são simulados."},
+ venous:{url:"https://upload.wikimedia.org/wikipedia/commons/3/38/Venous_ulcer_dorsal_leg.jpg",
+  source:"https://commons.wikimedia.org/wiki/File:Venous_ulcer_dorsal_leg.jpg",author:"Jonathan Moore",license:"CC BY 3.0",
+  alt:"Fotografia clínica de úlcera venosa real em membro inferior.",
+  note:"Fotografia real de úlcera venosa: observe bordas e alterações locais. A quantidade de exsudato da atividade é definida pelo caso didático."},
+ infected:{url:"https://upload.wikimedia.org/wikipedia/commons/9/94/Decubitus_03.JPG",
+  source:"https://commons.wikimedia.org/wiki/File:Decubitus_03.JPG",author:"AfroBrazilian",license:"CC BY-SA 4.0",
+  alt:"Fotografia clínica real de lesão sacral profunda com tecido de granulação, fibrose, infecção e maceração.",
+  note:"Referência clínica real de lesão sacral profunda com infecção e maceração. A fotografia NÃO permite, isoladamente, confirmar infecção."},
+ dry:{url:"https://upload.wikimedia.org/wikipedia/commons/e/e1/Ulcus_01.JPG",
+  source:"https://commons.wikimedia.org/wiki/File:Ulcus_01.JPG",author:"AfroBrazilian",license:"CC BY-SA 3.0",
+  alt:"Fotografia real de uma úlcera cutânea na região do joelho, usada apenas como comparação de morfologia.",
+  note:"Fotografia comparativa de úlcera no joelho, NÃO necessariamente fibrinosa ou seca. Para avaliar a classificação deste caso, considere também a história clínica e o esquema."}
+};
+let clinicalPhotoMode=true;
+let photoGeneration=0;
+const referencePhoto=$("clinicalReferencePhoto");
+function updatePhotoMode(){
+ const stage=$("skinStage");stage.classList.toggle("is-photo-mode",clinicalPhotoMode);
+ $("clinicalPhotoMode").setAttribute("aria-pressed",String(clinicalPhotoMode));
+ $("clinicalIllustrationMode").setAttribute("aria-pressed",String(!clinicalPhotoMode));
+ $("clinicalPhotoCredit").hidden=!clinicalPhotoMode;
+ setText("clinicalViewLabel",clinicalPhotoMode?"FOTOGRAFIA CLÍNICA ORIGINAL":"ILUSTRAÇÃO DIDÁTICA INTERATIVA");
+ if(clinicalPhotoMode){if(fluidCtx)fluidCtx.clearRect(0,0,960,650)}
+ else drawFluidFrame(0);
+}
+function loadClinicalReference(){
+ const reference=clinicalReferences[current.key],generation=++photoGeneration;
+ const stage=$("skinStage");stage.classList.remove("is-photo-loaded");
+ referencePhoto.alt=reference.alt;
+ referencePhoto.onload=()=>{if(generation!==photoGeneration)return;stage.classList.add("is-photo-loaded");updatePhotoMode()};
+ referencePhoto.onerror=()=>{if(generation!==photoGeneration)return;stage.classList.remove("is-photo-loaded");setText("woundImageNote","Fotografia temporariamente indisponível. O esquema local permanece disponível.");};
+ referencePhoto.src=reference.url;
+ $("clinicalPhotoSource").textContent=reference.author+" · Wikimedia Commons";
+ $("clinicalPhotoSource").href=reference.source;
+ setText("clinicalPhotoCredit", ""); // repopulate as safe DOM children, preserving actual source URL
+ const host=$("clinicalPhotoCredit"),prefix=document.createElement("span"),anchor=document.createElement("a"),suffix=document.createElement("span");
+ prefix.textContent="Foto original:";
+ anchor.href=reference.source;anchor.target="_blank";anchor.rel="noopener noreferrer";
+ anchor.textContent=reference.author+" · Wikimedia Commons";
+ suffix.textContent="· "+reference.license+" · efeitos de curativo simulados";
+ host.append(prefix,anchor,suffix);
+ setText("woundImageNote",reference.note);
+ updatePhotoMode();
+}
+$("clinicalPhotoMode").addEventListener("click",()=>{clinicalPhotoMode=true;updatePhotoMode()});
+$("clinicalIllustrationMode").addEventListener("click",()=>{clinicalPhotoMode=false;updatePhotoMode()});
 
 loadCase("lpp2");
 })();
