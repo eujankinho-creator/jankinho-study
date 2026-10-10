@@ -12,7 +12,7 @@ const $=id=>document.getElementById(id);
 const qsa=s=>Array.from(document.querySelectorAll(s));
 function setText(id,v){const el=$(id);if(el)el.textContent=v}
 function loadCase(key){
- current=cases[key]||cases.lpp2;selected=[];assessmentConfirmed=false;resetProcedure();
+ current=cases[key]||cases.lpp2;selected=[];assessmentConfirmed=false;resetProcedure();activateWorkflow("assessment");
  qsa(".case-pill").forEach(b=>b.classList.toggle("is-active",b.dataset.case===current.key));
  setText("caseEyebrow",current.eyebrow);setText("caseTitle",current.title);setText("casePain",current.pain);setText("caseTemp",current.temp);setText("caseTime",current.time);setText("caseHistory",current.history);setText("caseObjective",current.objective);
  $("skinStage").dataset.wound=current.key;
@@ -31,8 +31,8 @@ function assessmentScore(){
 function confirmAssessment(){
  const vals=["bedSelect","exudateSelect","skinSelect","infectionSelect"].map(id=>$(id).value);
  const fb=$("assessmentFeedback");
- if(vals.some(v=>!v)){fb.hidden=false;fb.classList.add("is-warn");fb.textContent="Complete todos os campos antes de confirmar.";return}
- const r=assessmentScore();assessmentConfirmed=true;fb.hidden=false;
+ if(vals.some(v=>!v)){fb.hidden=false;fb.className="feedback-box is-warn";fb.textContent="Complete todos os campos antes de confirmar.";return}
+ const r=assessmentScore();assessmentConfirmed=true;fb.hidden=false;fb.className="feedback-box";activateWorkflow("procedure");
  if(r.correct===4){fb.classList.add("is-good");fb.innerHTML="<strong>Avaliação correta.</strong> Você identificou os quatro elementos essenciais deste caso."}
  else{fb.classList.add("is-warn");fb.innerHTML="<strong>"+r.correct+"/4 itens corretos.</strong> Revise a imagem e a história clínica antes de montar a cobertura."}
 }
@@ -53,6 +53,7 @@ function renderSequence(){
 }
 function finishTreatment(){
  const fb=$("treatmentFeedback");fb.hidden=false;fb.className="feedback-box treatment-feedback";
+ if(procedure.finished){fb.scrollIntoView({block:"nearest",behavior:"smooth"});return}
  if(!assessmentConfirmed){fb.classList.add("is-warn");fb.textContent="Confirme a avaliação antes do procedimento.";return}
  const notes=[];let score=assessmentScore().correct*10;
  if(procedure.cleaned)score+=20;else notes.push("Limpeza não concluída: prepare a gaze e passe suavemente pelo leito.");
@@ -91,71 +92,200 @@ $("showRationale").addEventListener("click",showRationale);
 /* Renderização sob demanda: nenhuma dependência WebGL nem loop de animação. */
 const clinicalCanvas=$("clinicalWoundCanvas");
 const clinicalCtx=clinicalCanvas.getContext("2d",{alpha:false});
+const fluidCanvas=$("fluidWoundCanvas"),fluidCtx=fluidCanvas.getContext("2d",{alpha:true});
 let clinicalZoom=1,clinicalInspect=false;
 const clinicalSeed={lpp2:17,venous:31,infected:51,dry:79};
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296}}
+
+function boundaryPoint(angle,cx,cy,rx,ry,seed){
+ const phase=seed*.13;
+ // Frequency-limited coastal contour: the edge is asymmetrical and continuous, not a regular oval.
+ const wave=1+.105*Math.sin(3*angle+phase)+.062*Math.sin(5*angle-phase*.8)
+   +.037*Math.sin(9*angle+phase*1.7)+.017*Math.sin(17*angle-phase*.6);
+ const lean=1+.10*Math.cos(angle-1.5);
+ return [cx+Math.cos(angle)*rx*wave*lean+Math.sin(2*angle+phase)*6,
+         cy+Math.sin(angle)*ry*wave*(1+.045*Math.sin(angle*2-.6))-Math.cos(3*angle)*3];
+}
+function organicPath(ctx,cx,cy,rx,ry,seed){
+ const n=160;
+ for(let i=0;i<=n;i++){
+   const p=boundaryPoint(i/n*Math.PI*2,cx,cy,rx,ry,seed);
+   if(!i)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);
+ }
+ ctx.closePath();
+}
 function regionPath(ctx,cx,cy,rx,ry,seed){
- const rnd=mulberry32(seed),nodes=[],n=90;
- for(let i=0;i<n;i++){const ang=i*Math.PI*2/n;const wave=1+.09*Math.sin(ang*3+2)+.065*Math.sin(ang*7+.9)+.04*(rnd()-.5);nodes.push([cx+Math.cos(ang)*rx*wave,cy+Math.sin(ang)*ry*wave])}
- ctx.beginPath();ctx.moveTo((nodes[n-1][0]+nodes[0][0])/2,(nodes[n-1][1]+nodes[0][1])/2);
- for(let i=0;i<n;i++){const p=nodes[i],q=nodes[(i+1)%n];ctx.quadraticCurveTo(p[0],p[1],(p[0]+q[0])/2,(p[1]+q[1])/2)}ctx.closePath()
+ ctx.beginPath();organicPath(ctx,cx,cy,rx,ry,seed);
+}
+function organicStipple(ctx,rnd,cx,cy,rx,ry,n,palette,minR,maxR){
+ for(let i=0;i<n;i++){
+   const x=cx+(rnd()*2-1)*rx,y=cy+(rnd()*2-1)*ry,rad=minR+rnd()*(maxR-minR);
+   ctx.fillStyle=palette[Math.floor(rnd()*palette.length)];
+   ctx.beginPath();ctx.moveTo(x-rad,y);
+   ctx.quadraticCurveTo(x+rad*(rnd()-.5),y-rad*(.45+rnd()),x+rad,y-rad*.1);
+   ctx.quadraticCurveTo(x+rad*.6,y+rad*(.3+rnd()),x-rad,y);
+   ctx.fill();
+ }
 }
 function drawClinicalWound(){
  if(!clinicalCtx)return;
- const ctx=clinicalCtx,w=960,h=650,k=current.key,rnd=mulberry32(clinicalSeed[k]),cx=478,cy=318,rx=k==="venous"?255:k==="dry"?174:214,ry=k==="venous"?163:k==="dry"?112:147;
- ctx.save();ctx.clearRect(0,0,w,h);
- const base=ctx.createLinearGradient(0,0,960,650);base.addColorStop(0,"#c99078");base.addColorStop(.35,"#d7a28b");base.addColorStop(.7,"#b77860");base.addColorStop(1,"#a96956");ctx.fillStyle=base;ctx.fillRect(0,0,w,h);
- // Epidermis: pores, subtle freckles and soft fold lines, without synthetic stripes.
- for(let i=0;i<27000;i++){const x=rnd()*w,y=rnd()*h,rad=.35+rnd()*1.15;ctx.fillStyle=rnd()>.55?"rgba(91,46,42,.085)":"rgba(255,239,218,.12)";ctx.beginPath();ctx.ellipse(x,y,rad,rad*.75,0,0,Math.PI*2);ctx.fill()}
- for(let i=0;i<140;i++){const x=rnd()*w,y=rnd()*h,sz=1+rnd()*5;ctx.fillStyle="rgba(101,51,38,.09)";ctx.beginPath();ctx.ellipse(x,y,sz,sz*.7,0,0,Math.PI*2);ctx.fill()}
- for(let i=0;i<75;i++){const x=rnd()*w,y=rnd()*h;ctx.beginPath();ctx.moveTo(x,y);ctx.bezierCurveTo(x+18,y-6,x+22,y+5,x+40+rnd()*35,y-2);ctx.strokeStyle="rgba(103,52,47,.045)";ctx.lineWidth=.6+rnd();ctx.stroke()}
- // surrounding tissue edema, erythema, venous discoloration, inflammation
- ctx.save();ctx.translate(cx,cy);ctx.scale(1.28,1.32);const peri=ctx.createRadialGradient(0,0,rx*.5,0,0,rx*1.1);
- const e=k==="infected"?"rgba(165,27,39,.58)":k==="venous"?"rgba(104,65,68,.4)":"rgba(166,58,59,.36)";
- peri.addColorStop(0,e);peri.addColorStop(.68,k==="venous"?"rgba(121,68,73,.25)":"rgba(166,55,54,.16)");peri.addColorStop(1,"rgba(158,64,55,0)");
- ctx.fillStyle=peri;ctx.beginPath();ctx.ellipse(0,0,rx*1.18,ry*1.35,0,0,Math.PI*2);ctx.fill();ctx.restore();
- if(k==="venous"){for(let i=0;i<95;i++){const x=rnd()*w,y=rnd()*h;ctx.fillStyle="rgba(100,60,55,.055)";ctx.beginPath();ctx.ellipse(x,y,8+rnd()*25,4+rnd()*15,0,0,Math.PI*2);ctx.fill()}}
- // Wound cavity with irregular border and recessed shading
- ctx.save();ctx.shadowColor="rgba(72,23,27,.82)";ctx.shadowBlur=25;ctx.shadowOffsetY=12;regionPath(ctx,cx,cy,rx+11,ry+10,clinicalSeed[k]);ctx.fillStyle=k==="dry"?"#795044":"#873c41";ctx.fill();ctx.restore();
- regionPath(ctx,cx,cy,rx+12,ry+11,clinicalSeed[k]);ctx.strokeStyle=k==="venous"?"rgba(241,207,169,.65)":"rgba(237,145,132,.77)";ctx.lineWidth=k==="venous"?19:12;ctx.stroke();
- regionPath(ctx,cx,cy,rx,ry,clinicalSeed[k]);ctx.save();ctx.clip();
- const bed=ctx.createRadialGradient(cx-65,cy-48,10,cx,cy,rx+55);
- if(k==="dry"){bed.addColorStop(0,"#b9a074");bed.addColorStop(.55,"#a18b65");bed.addColorStop(1,"#7d574a")}
- else if(k==="infected"){bed.addColorStop(0,"#a24e4c");bed.addColorStop(.58,"#84393b");bed.addColorStop(1,"#5e242d")}
- else {bed.addColorStop(0,"#d76462");bed.addColorStop(.65,"#ad4347");bed.addColorStop(1,"#682a38")}
- ctx.fillStyle=bed;ctx.fillRect(cx-rx-30,cy-ry-30,rx*2+60,ry*2+60);
- // Tissue-rich granulation: micro-lobules, capillaries and irregular wet specular reflections
- const n=k==="dry"?550:3500;
- for(let i=0;i<n;i++){
-  const x=cx+(rnd()*2-1)*rx*1.07,y=cy+(rnd()*2-1)*ry*1.11,z=1+rnd()*5.2;
-  ctx.fillStyle=k==="dry"?(rnd()>.5?"rgba(213,175,103,.44)":"rgba(103,59,43,.19)"):(rnd()>.54?"rgba(238,114,104,.42)":"rgba(93,15,32,.26)");
-  ctx.beginPath();ctx.ellipse(x,y,z,z*(.5+rnd()*.55),rnd()*Math.PI,0,Math.PI*2);ctx.fill();
+ const ctx=clinicalCtx,k=current.key,rnd=mulberry32(clinicalSeed[k]),g=clinicalGeometry();
+ const {cx,cy,rx,ry}=g,w=960,h=650;
+ ctx.clearRect(0,0,w,h);
+ ctx.save();
+ const bg=ctx.createLinearGradient(110,0,840,h);
+ bg.addColorStop(0,"#cc9780");bg.addColorStop(.47,"#bf806c");bg.addColorStop(1,"#aa7164");
+ ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+ // Dermal topography: low-contrast pores, mottling, folds and matte lighting.
+ for(let i=0;i<24000;i++){
+   const x=rnd()*w,y=rnd()*h,v=rnd();
+   ctx.fillStyle=v>.61?"rgba(91,54,49,.095)":"rgba(255,228,204,.075)";
+   ctx.fillRect(x,y,.3+rnd()*1.4,.4+rnd()*1.4);
  }
- // Coherent islands of slough over granular bed
- const sloughCount=k==="infected"?14:k==="dry"?15:k==="venous"?5:0;
- for(let i=0;i<sloughCount;i++){
-   const x=cx+(rnd()-.5)*rx*1.3,y=cy+(rnd()-.5)*ry*1.3,s=13+rnd()*(k==="dry"?47:34);
-   const g=ctx.createRadialGradient(x,y,2,x,y,s);g.addColorStop(0,k==="infected"?"rgba(231,218,144,.92)":"rgba(229,206,139,.87)");g.addColorStop(.57,"rgba(194,166,108,.75)");g.addColorStop(1,"rgba(148,116,82,0)");
-   ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x,y,s,s*(.3+rnd()*.5),rnd()*3,0,Math.PI*2);ctx.fill();
+ for(let i=0;i<170;i++){
+   const x=rnd()*w,y=rnd()*h;
+   ctx.strokeStyle="rgba(94,45,42,.04)";ctx.lineWidth=.6+rnd()*.9;
+   ctx.beginPath();ctx.moveTo(x,y);
+   ctx.bezierCurveTo(x+13,y-5,x+23,y+8,x+32+rnd()*32,y+2);ctx.stroke();
  }
- if(k!=="dry"){
-  for(let i=0;i<(k==="venous"?120:k==="infected"?100:45);i++){
-   const x=cx+(rnd()-.5)*rx*1.65,y=cy+(rnd()-.5)*ry*1.55;
-   ctx.fillStyle=k==="infected"?"rgba(235,217,145,.2)":"rgba(255,224,187,.16)";
-   ctx.beginPath();ctx.ellipse(x,y,1+rnd()*8,.5+rnd()*2,rnd()*3,0,Math.PI*2);ctx.fill()
-  }
+ // Discoloured perilesional skin: distributed capillary redness, edema/maceration according to case.
+ const ringScale=k==="infected"?1.65:k==="lpp2"?1.55:k==="venous"?1.5:1.12;
+ regionPath(ctx,cx,cy,rx*ringScale,ry*ringScale,clinicalSeed[k]);ctx.save();ctx.clip();
+ const ery=ctx.createRadialGradient(cx,cy,rx*.64,cx,cy,rx*1.65);
+ const red=k==="infected"?"rgba(161,37,49,.55)":k==="lpp2"?"rgba(172,55,59,.43)":k==="venous"?"rgba(125,62,60,.36)":"rgba(144,81,69,.13)";
+ ery.addColorStop(0,red);ery.addColorStop(.6,red);ery.addColorStop(1,"rgba(160,45,50,0)");
+ ctx.fillStyle=ery;ctx.fillRect(cx-rx*2,cy-ry*2,rx*4,ry*4);
+ for(let i=0;i<(k==="dry"?650:2900);i++){
+   const x=cx+(rnd()*2-1)*rx*ringScale,y=cy+(rnd()*2-1)*ry*ringScale;
+   const d=Math.sqrt(((x-cx)/rx)**2+((y-cy)/ry)**2);
+   if(d<.93||d>ringScale)returnFill();
+   function returnFill(){return}
+   if(d>.93&&d<ringScale){
+     ctx.fillStyle=rnd()>.49?(k==="infected"?"rgba(114,24,36,.13)":"rgba(124,49,48,.1)"):"rgba(242,176,153,.12)";
+     ctx.fillRect(x,y,1+rnd()*4,1+rnd()*2);
+   }
  }
  ctx.restore();
- // Delicate epithelial rim, not identical to slough
- regionPath(ctx,cx,cy,rx+2,ry+1,clinicalSeed[k]);ctx.strokeStyle="rgba(245,165,156,.45)";ctx.lineWidth=5;ctx.stroke();
- // Clinical illumination and microtopography
- const light=ctx.createLinearGradient(0,0,850,650);light.addColorStop(0,"rgba(255,243,218,.10)");light.addColorStop(.55,"rgba(255,255,255,0)");light.addColorStop(1,"rgba(27,11,16,.18)");ctx.fillStyle=light;ctx.fillRect(0,0,w,h);
- // Dark side vignette for physical depth
- const vign=ctx.createRadialGradient(w/2,h/2,170,w/2,h/2,620);vign.addColorStop(0,"rgba(20,8,11,0)");vign.addColorStop(1,"rgba(31,11,14,.24)");ctx.fillStyle=vign;ctx.fillRect(0,0,w,h);
- drawClinicalSigns(ctx,cx,cy,rx,ry,k,rnd);
+ if(k==="venous"){
+   for(let i=0;i<115;i++){
+     const x=cx+(rnd()*2-1)*rx*1.8,y=cy+(rnd()*2-1)*ry*1.8;
+     ctx.strokeStyle="rgba(105,69,68,.055)";ctx.lineWidth=5+rnd()*16;
+     ctx.beginPath();ctx.moveTo(x,y);ctx.quadraticCurveTo(x+12,y+13,x+37,y+3);ctx.stroke();
+   }
+ }
+ // Undercut boundary and layered sloping tissue walls: shallow in stage 2, deeper in infected/dry.
+ const deep=k==="lpp2"?9:k==="venous"?18:k==="dry"?25:34;
+ ctx.save();ctx.shadowColor="rgba(56,17,20,.74)";ctx.shadowBlur=27;ctx.shadowOffsetY=deep*.5;
+ regionPath(ctx,cx,cy+deep*.3,rx+7,ry+8,clinicalSeed[k]);ctx.fillStyle="#683638";ctx.fill();ctx.restore();
+ const wallStops=k==="lpp2"?["#a85d5c","#9a4f50","#8d4349"]:["#c17a67","#9c5047","#71363c","#51252d","#76353a"];
+ for(let i=0;i<wallStops.length;i++){
+   const t=i/(wallStops.length-1),scale=1.08-t*.16;
+   regionPath(ctx,cx+(t-.4)*3,cy+t*deep,rx*scale,ry*scale,clinicalSeed[k]);
+   ctx.fillStyle=wallStops[i];ctx.fill();
+ }
+ // Textured, irregular epithelial ridge follows the eroded contour.
+ ctx.save();regionPath(ctx,cx,cy,rx*1.06,ry*1.07,clinicalSeed[k]);ctx.clip();
+ organicStipple(ctx,rnd,cx,cy,rx*1.2,ry*1.15,900,
+   ["rgba(246,176,153,.12)","rgba(77,25,31,.09)","rgba(255,227,204,.12)"],.8,5);
  ctx.restore();
+ // True wound bed lies below the skin's upper plane.
+ const floorCy=cy+deep*.46,floorRx=rx*.90,floorRy=ry*.87;
+ regionPath(ctx,cx,floorCy,floorRx,floorRy,clinicalSeed[k]);ctx.save();ctx.clip();
+ const bed=ctx.createLinearGradient(cx-50,cy-ry,cx+30,cy+ry);
+ if(k==="lpp2"){bed.addColorStop(0,"#dc7f75");bed.addColorStop(.58,"#c76262");bed.addColorStop(1,"#ad5055")}
+ else if(k==="venous"){bed.addColorStop(0,"#d36d66");bed.addColorStop(.55,"#a94145");bed.addColorStop(1,"#77333c")}
+ else if(k==="infected"){bed.addColorStop(0,"#ac5852");bed.addColorStop(.5,"#894348");bed.addColorStop(1,"#673b3c")}
+ else{bed.addColorStop(0,"#c2a07a");bed.addColorStop(.6,"#a58b6d");bed.addColorStop(1,"#765b4e")}
+ ctx.fillStyle=bed;ctx.fillRect(cx-rx,cy-ry-30,rx*2,ry*2+90);
+ // Fine organic granules — irregular embedded tissue, not separate polished spheres.
+ organicStipple(ctx,rnd,cx,floorCy,floorRx,floorRy,k==="dry"?650:k==="lpp2"?1150:3800,
+   k==="dry"?["rgba(200,169,124,.31)","rgba(106,72,57,.13)"]:
+   ["rgba(236,115,111,.33)","rgba(88,22,35,.24)","rgba(236,150,131,.16)"],1.5,6.5);
+ // Adherent stringy slough lies across the bed in uneven connective streaks.
+ const patches=k==="infected"?15:k==="dry"?16:k==="venous"?4:0;
+ for(let i=0;i<patches;i++){
+   const x=cx+(rnd()-.5)*rx*1.35,y=floorCy+(rnd()-.5)*ry*1.34,size=12+rnd()*(k==="dry"?45:36);
+   ctx.save();ctx.translate(x,y);ctx.rotate((rnd()-.5)*1.8);
+   ctx.beginPath();ctx.moveTo(-size,0);
+   ctx.bezierCurveTo(-size*.6,-size*.5,size*.1,-size*.6,size*.8,-size*.13);
+   ctx.bezierCurveTo(size*.95,size*.19,size*.5,size*.35,-size*.5,size*.25);
+   ctx.closePath();ctx.fillStyle=i%3===0?"rgba(231,212,148,.76)":"rgba(185,155,105,.72)";ctx.fill();
+   ctx.strokeStyle="rgba(231,220,163,.26)";ctx.lineWidth=2;
+   for(let z=0;z<3;z++){const yy=(z-1)*5;ctx.beginPath();ctx.moveTo(-size*.7,yy);ctx.quadraticCurveTo(0,yy+5,size*.55,yy-4);ctx.stroke()}
+   ctx.restore();
+ }
+ ctx.restore();
+ // Inner pocket shadow, irregular and feathered; no geometric glow rings.
+ for(let i=0;i<3;i++){
+   regionPath(ctx,cx,cy+deep*.3,rx*(.98-i*.013),ry*(.99-i*.013),clinicalSeed[k]);
+   ctx.strokeStyle=["rgba(64,24,32,.35)","rgba(77,29,35,.18)","rgba(93,35,41,.09)"][i];
+   ctx.lineWidth=k==="lpp2"?2.5:4+i;
+   ctx.stroke();
+ }
+ // Detached epithelial fragments and subtle maceration flakes on selected sections only.
+ for(let i=0;i<(k==="venous"?180:k==="infected"?90:60);i++){
+   const a=rnd()*Math.PI*2,p=boundaryPoint(a,cx,cy,rx*(1.03+rnd()*.045),ry*(1.02+rnd()*.08),clinicalSeed[k]);
+   ctx.strokeStyle=k==="venous"?"rgba(238,215,197,.25)":"rgba(236,166,155,.23)";
+   ctx.lineWidth=.7+rnd()*2.5;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(p[0]+(rnd()-.5)*7,p[1]-1-rnd()*4);ctx.stroke();
+ }
+ const shade=ctx.createLinearGradient(0,0,w,h);
+ shade.addColorStop(0,"rgba(255,242,216,.05)");shade.addColorStop(.6,"rgba(20,5,6,0)");shade.addColorStop(1,"rgba(27,9,10,.11)");
+ ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);
+ ctx.restore();
+ drawFluidFrame(0);
 }
-function setClinicalZoom(value){clinicalZoom=Math.max(1,Math.min(2.25,Math.round(value*100)/100));clinicalCanvas.style.transform="scale("+clinicalZoom+")";clinicalCanvas.style.transformOrigin="center 49%";$("procedureCanvas").style.transform="scale("+clinicalZoom+")";setText("zoomWoundLabel",Math.round(clinicalZoom*100)+"%")}
+function drawFluidFrame(t){
+ if(!fluidCtx)return;
+ const ctx=fluidCtx,k=current.key,wet=k!=="dry",isVenous=k==="venous",isInfected=k==="infected";
+ const {cx,cy,rx,ry}=clinicalGeometry();
+ ctx.clearRect(0,0,960,650);if(!wet)return;
+ ctx.save();regionPath(ctx,cx,cy,rx*.88,ry*.86,clinicalSeed[k]);ctx.clip();
+ const opacity=(procedure.cleaned?.55:1)*(isVenous?1:isInfected?.8:.35);
+ ctx.globalAlpha=opacity;
+ // Translucent gravity-fed film bounded by uneven shorelines; no separate circular puddles.
+ const surface=cy+ry*(isVenous?-.15:isInfected?.10:.40);
+ const phase=t/2900;
+ const grad=ctx.createLinearGradient(0,surface-30,0,cy+ry*.9);
+ grad.addColorStop(0,"rgba(237,185,123,0)");
+ grad.addColorStop(.42,isInfected?"rgba(209,156,103,.18)":"rgba(252,218,174,.16)");
+ grad.addColorStop(1,isVenous?"rgba(228,180,112,.52)":"rgba(236,188,143,.32)");
+ ctx.beginPath();
+ for(let i=0;i<=30;i++){
+   const x=cx-rx+i*(rx*2/30);
+   const y=surface+10*Math.sin(i*.56+phase)+4.5*Math.sin(i*1.8-phase*.6)+(i%4===0?1:0);
+   if(!i)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+ }
+ ctx.lineTo(cx+rx,cy+ry+60);ctx.lineTo(cx-rx,cy+ry+60);ctx.closePath();
+ ctx.fillStyle=grad;ctx.fill();
+ // A thin contact meniscus is irregular, opaque only where the film meets uncovered tissue.
+ ctx.lineWidth=1.6;ctx.strokeStyle=isVenous?"rgba(255,232,195,.34)":"rgba(244,212,179,.25)";
+ ctx.beginPath();
+ for(let i=0;i<=38;i++){
+   const x=cx-rx+i*(rx*2/38),y=surface+10*Math.sin(i*.44+phase)+4.5*Math.sin(i*1.44-phase*.6);
+   if(!i)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+ }ctx.stroke();
+ // Irregular vertical channels and translucent thin wet streaks reflect the tilted examination light.
+ ctx.lineCap="round";
+ for(let i=0;i<(isVenous?11:isInfected?7:3);i++){
+   const x=cx-rx*.76+i*rx*.15,y=surface+15+i%3*12;
+   const shift=Math.sin(phase+i)*3;
+   ctx.beginPath();ctx.moveTo(x,y);ctx.bezierCurveTo(x-6+shift,y+23,x+8-shift,y+35,x-4+shift,y+51);
+   ctx.strokeStyle=i%3===0?"rgba(249,226,187,.22)":"rgba(240,199,156,.12)";
+   ctx.lineWidth=2+i%2*2;ctx.stroke();
+ }
+ ctx.restore();
+ // Subtle transudate following the lower wound edge only for high-exudate cases.
+ if(isVenous&&!procedure.cleaned){
+   ctx.save();ctx.globalAlpha=.36;
+   for(let i=0;i<3;i++){
+     const angle=.8+(i*.34),p=boundaryPoint(angle,cx,cy,rx,ry,clinicalSeed[k]);
+     ctx.strokeStyle="#dfbb91";ctx.lineCap="round";ctx.lineWidth=2.3;
+     ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.bezierCurveTo(p[0]-1,p[1]+11,p[0]+6,p[1]+22+Math.sin(t/3000+i)*3,p[0]+2,p[1]+29);ctx.stroke();
+   }ctx.restore();
+ }
+}
+
+function setClinicalZoom(value){clinicalZoom=Math.max(1,Math.min(2.25,Math.round(value*100)/100));clinicalCanvas.style.transform="scale("+clinicalZoom+")";clinicalCanvas.style.transformOrigin="center 49%";$("procedureCanvas").style.transform="scale("+clinicalZoom+")";fluidCanvas.style.transform="scale("+clinicalZoom+")";setText("zoomWoundLabel",Math.round(clinicalZoom*100)+"%")}
 $("zoomOutWound").addEventListener("click",()=>setClinicalZoom(clinicalZoom-.25));
 $("zoomInWound").addEventListener("click",()=>setClinicalZoom(clinicalZoom+.25));
 $("inspectWound").addEventListener("click",()=>{clinicalInspect=!clinicalInspect;$("inspectWound").setAttribute("aria-pressed",String(clinicalInspect));$("clinicalInspection").hidden=!clinicalInspect;if(clinicalInspect)setText("clinicalInspection","Toque no leito, bordas ou pele ao redor para identificar estruturas.")});
@@ -170,69 +300,6 @@ clinicalCanvas.addEventListener("click",event=>{
 
 
 /* Realce de sinais clinicamente legíveis — eritema periférico, maceração, profundidade e exsudato */
-function drawClinicalSigns(ctx,cx,cy,rx,ry,k,rnd){
- const inflamed=k==="infected",venous=k==="venous",dry=k==="dry",stage2=k==="lpp2";
- ctx.save();
- // Intensidade heterogênea e não circular do eritema, sobretudo no cenário infeccioso.
- const count=inflamed?34:stage2?20:venous?13:3;
- for(let i=0;i<count;i++){
-   const angle=i*Math.PI*2/count+(rnd()-.5)*.45,ring=1.1+(rnd()-.5)*.34;
-   const x=cx+Math.cos(angle)*rx*ring,y=cy+Math.sin(angle)*ry*ring;
-   const rad=(inflamed?62:stage2?51:42)*(0.6+rnd()*.55);
-   const g=ctx.createRadialGradient(x,y,0,x,y,rad);
-   g.addColorStop(0,inflamed?"rgba(177,29,40,.33)":stage2?"rgba(181,35,51,.27)":"rgba(112,43,49,.13)");
-   g.addColorStop(1,"rgba(166,47,46,0)");
-   ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x,y,rad,rad*.72,angle,0,Math.PI*2);ctx.fill();
- }
- // Bordas com depressão física: sombra interna escura e parede lateral com brilho na crista.
- ctx.save();ctx.shadowColor="rgba(58,15,23,.8)";ctx.shadowBlur=20;ctx.shadowOffsetY=11;
- regionPath(ctx,cx,cy,rx+1,ry+1,clinicalSeed[k]);ctx.lineWidth=stage2?11:venous?24:23;
- ctx.strokeStyle=stage2?"rgba(97,39,44,.66)":"rgba(73,25,31,.84)";ctx.stroke();ctx.restore();
- regionPath(ctx,cx,cy,rx-7,ry-7,clinicalSeed[k]);ctx.lineWidth=stage2?6:17;
- ctx.strokeStyle=dry?"rgba(158,105,75,.48)":"rgba(194,103,100,.53)";ctx.stroke();
- regionPath(ctx,cx,cy-3,rx+8,ry+8,clinicalSeed[k]);ctx.lineWidth=4;
- ctx.strokeStyle=venous?"rgba(240,221,198,.8)":"rgba(250,172,155,.68)";ctx.stroke();
- if(venous){
-   // Bordas maceradas: irregularidade esbranquiçada localizada, não uniformemente saudável.
-   for(let i=0;i<55;i++){const a=rnd()*Math.PI*2,x=cx+Math.cos(a)*(rx+9+rnd()*13),y=cy+Math.sin(a)*(ry+10+rnd()*10);
-     ctx.fillStyle="rgba(246,231,207,.29)";ctx.beginPath();ctx.ellipse(x,y,2+rnd()*7,1.3+rnd()*4,a,0,Math.PI*2);ctx.fill();
-   }
- }
- // Exsudato realçado por película de fluido, menisco e microreflexos especulares.
- if(!dry){
-  ctx.save();regionPath(ctx,cx,cy,rx-13,ry-12,clinicalSeed[k]);ctx.clip();
-  const pools=venous?4:inflamed?3:1,fluidAlpha=venous?.7:inflamed?.55:.24;
-  for(let i=0;i<pools;i++){
-    const x=cx+(rnd()-.5)*rx*.95,y=cy+ry*(.12+rnd()*.57),pw=(venous?90:inflamed?65:40)*(0.65+rnd()*.6),ph=(venous?33:inflamed?26:17)*(0.65+rnd()*.5);
-    ctx.save();ctx.translate(x,y);ctx.rotate((rnd()-.5)*.32);
-    const g=ctx.createLinearGradient(0,-ph,0,ph);
-    g.addColorStop(0,"rgba(255,249,231,0)");
-    g.addColorStop(.42,venous?"rgba(239,204,136,.17)":inflamed?"rgba(229,188,102,.29)":"rgba(255,235,206,.09)");
-    g.addColorStop(1,venous?"rgba(236,188,91,.53)":inflamed?"rgba(208,168,74,.5)":"rgba(255,210,185,.2)");
-    ctx.fillStyle=g;ctx.globalAlpha=fluidAlpha+.15;
-    ctx.beginPath();ctx.ellipse(0,0,pw,ph,0,0,2*Math.PI);ctx.fill();
-    ctx.globalAlpha=fluidAlpha;ctx.strokeStyle="rgba(255,248,227,.62)";ctx.lineWidth=2.1;ctx.beginPath();ctx.ellipse(0,-ph*.34,pw*.76,ph*.43,0,Math.PI*.97,Math.PI*1.86);ctx.stroke();ctx.restore();
-  }
-  const drops=venous?95:inflamed?55:15;
-  for(let i=0;i<drops;i++){
-    const x=cx+(rnd()-.5)*rx*1.68,y=cy+(rnd()-.5)*ry*1.55;
-    ctx.fillStyle=venous?"rgba(255,245,213,.46)":"rgba(255,244,222,.33)";
-    ctx.beginPath();ctx.ellipse(x,y,.6+rnd()*2.6,.3+rnd()*1.15,rnd()*2,0,2*Math.PI);ctx.fill();
-  }
-  ctx.restore();
-  if(venous){
-    // Escorrimento superficial translúcido na borda inferior (sem simular hemorragia).
-    for(let i=0;i<3;i++){
-      const x=cx-78+i*63,top=cy+ry*.82;
-      ctx.strokeStyle=i===1?"rgba(229,189,104,.33)":"rgba(255,225,171,.24)";
-      ctx.lineWidth=5+i*2;ctx.lineCap="round";
-      ctx.beginPath();ctx.moveTo(x,top);ctx.bezierCurveTo(x-10,top+22,x+6,top+37,x-4,top+45+i*8);ctx.stroke();
-      ctx.strokeStyle="rgba(255,248,221,.31)";ctx.lineWidth=1.5;ctx.stroke();
-    }
-  }
- }
- ctx.restore();
-}
 /* Bancada procedural: estado persiste durante o caso e é reiniciado ao trocar de caso */
 let procedure={tool:null,fluid:null,prepared:false,cleaned:false,wipeDistance:0,
  barrier:false,periDistance:0,dressing:null,phmbUsed:false,misapplications:0,actions:[],finished:false,
@@ -350,7 +417,7 @@ function wipeStroke(from,to){
  if(!procedure.cleaned&&procedure.wipeDistance>160){
    procedure.cleaned=true;recordAction(procedure.fluid);
    if(procedure.fluid==="phmb")procedure.phmbUsed=true;
-   drawClinicalWound(); // only once after meaningful cleaning, no rendering loop
+   drawFluidFrame(0); // após a limpeza, reduzir visualmente o líquido superficial
    procedureMessage("Leito limpo","Limpeza simulada concluída. Continue com proteção perilesional e cobertura.");
  }
 }
@@ -431,6 +498,35 @@ function finishStageGesture(ev){
 }
 $("skinStage").addEventListener("pointerup",finishStageGesture);
 $("skinStage").addEventListener("pointercancel",()=>stageGesture=null);
+
+
+function activateWorkflow(view){
+ const assessment=view==="assessment";
+ $("assessmentPanel").hidden=!assessment;$("procedurePanel").hidden=assessment;
+ for(const [id,on] of [["tabAssessment",assessment],["tabProcedure",!assessment]]){
+  const b=$(id);b.classList.toggle("is-active",on);b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1;
+ }
+}
+$("tabAssessment").addEventListener("click",()=>activateWorkflow("assessment"));
+$("tabProcedure").addEventListener("click",()=>activateWorkflow("procedure"));
+for(const [id,v] of [["tabAssessment","assessment"],["tabProcedure","procedure"]]){
+ $(id).addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+   e.preventDefault();const to=v==="assessment"?"procedure":"assessment";
+   activateWorkflow(to);$(to==="assessment"?"tabAssessment":"tabProcedure").focus();
+  }
+ });
+}
+let fluidVisible=true;
+const reduceFluidMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if("IntersectionObserver" in window){
+ const fluidObserver=new IntersectionObserver(entries=>fluidVisible=entries.some(x=>x.isIntersecting),{threshold:.02});
+ fluidObserver.observe($("skinStage"));
+}
+if(!reduceFluidMotion)window.setInterval(()=>{
+ if(document.hidden||!fluidVisible||!current||!["venous","infected"].includes(current.key)||procedure.dressing)return;
+ drawFluidFrame(performance.now());
+},window.matchMedia&&window.matchMedia("(max-width: 820px)").matches?330:170);
 
 loadCase("lpp2");
 })();

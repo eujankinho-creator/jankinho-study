@@ -7,13 +7,13 @@
   <script>
     (function(){var t="dark-purple";try{var s=localStorage.getItem("jankinho_theme_v1");if(s)t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();
   </script>
-  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds-game3">
-  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds-game3">
-  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds-game3">
-  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds-game3">
-  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds-game3">
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds-game3">
-  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds-game3">
+  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds-fluid4">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds-fluid4">
+  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds-fluid4">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds-fluid4">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds-fluid4">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds-fluid4">
+  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds-fluid4">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
   <script defer src="/js/sidebar-standard.js?v=20261007-logout-global3"></script>
@@ -72,6 +72,7 @@
 
           <div class="skin-stage skin-stage-clinical" id="skinStage" data-wound="lpp2">
             <canvas id="clinicalWoundCanvas" width="960" height="650" role="img" aria-label="Simulação clínica detalhada da ferida: examine profundidade, exsudato, bordas e pele perilesional"></canvas>
+            <canvas id="fluidWoundCanvas" width="960" height="650" aria-hidden="true"></canvas>
             <canvas id="procedureCanvas" width="960" height="650" aria-hidden="true"></canvas>
             <div id="stageTreatmentHint" class="stage-treatment-hint">Observe os tecidos • Avalie a ferida antes de iniciar</div>
             <div class="clinical-controls"><span>SIMULAÇÃO ANATÔMICA · TECIDOS</span><div><button id="zoomOutWound" type="button" aria-label="Reduzir zoom">−</button><span id="zoomWoundLabel">100%</span><button id="zoomInWound" type="button" aria-label="Aumentar zoom">+</button><button id="inspectWound" type="button" aria-pressed="false">Identificar</button></div></div>
@@ -80,7 +81,7 @@
             </div>
           </div>
 
-          <p class="wound-image-note" id="woundImageNote">Imagem clínica simulada: identifique os tecidos pela aparência, não apenas pela cor. Utilize a história do caso para complementar a avaliação.</p>
+          <p class="wound-image-note" id="woundImageNote">Simulação anatômica ilustrativa · Observe borda, cavidade e fluido. Não equivale a fotografia clínica.</p>
           <div class="clinical-inspection" id="clinicalInspection" hidden aria-live="polite">Selecione uma região da ferida para explorar a estrutura.</div>
           <div class="case-brief">
             <div><small>HISTÓRIA</small><p id="caseHistory"></p></div>
@@ -88,7 +89,12 @@
           </div>
         </article>
 
-        <aside class="assessment-card">
+        <div class="workflow-side">
+          <div class="workflow-tabs" role="tablist" aria-label="Etapa do laboratório">
+            <button id="tabAssessment" class="workflow-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="assessmentPanel">01 · Avaliar</button>
+            <button id="tabProcedure" class="workflow-tab" type="button" role="tab" aria-selected="false" aria-controls="procedurePanel">02 · Tratar</button>
+          </div>
+        <aside class="assessment-card" id="assessmentPanel" role="tabpanel" aria-labelledby="tabAssessment">
           <div class="panel-heading"><span>ETAPA 1</span><strong>Avaliação da ferida</strong><p>Selecione o que você observa antes de iniciar o tratamento.</p></div>
 
           <div class="assessment-grid">
@@ -101,9 +107,8 @@
           <button id="confirmAssessment" class="primary-button" type="button">Confirmar avaliação</button>
           <div id="assessmentFeedback" class="feedback-box" hidden></div>
         </aside>
-      </section>
 
-      <section class="treatment-card">
+      <section class="treatment-card" id="procedurePanel" role="tabpanel" aria-labelledby="tabProcedure" hidden>
         <div class="panel-heading treatment-heading"><div><span>ETAPA 2 · PROCEDIMENTO INTERATIVO</span><strong>Bancada de curativos</strong><p>Escolha um material, prepare a gaze e aplique diretamente na ferida com o mouse ou o dedo. No computador, você também pode arrastar os materiais.</p></div><button id="clearTreatment" class="ghost-button" type="button">Reiniciar técnica</button></div>
         <div class="procedure-dashboard" aria-label="Etapas do procedimento">
           <div class="procedure-step" id="stepAssessment"><span>01</span><strong>Avaliar</strong><small>Inspeção clínica</small></div>
@@ -139,6 +144,8 @@
         </div>
         <div id="treatmentFeedback" class="feedback-box treatment-feedback" hidden></div>
       </section>
+        </div>
+      </section>
 
       <section class="wound-reference">
         <div><span class="reference-icon">i</span><div><strong>Regra do laboratório</strong><p>Antimicrobianos tópicos não são “obrigatórios” em toda ferida. O simulador considera biocarga/sinais de infecção, quantidade de exsudato, objetivo de cicatrização e proteção da pele ao redor.</p></div></div>
@@ -147,7 +154,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-feridas.js?v=20261010-wounds-game3"></script>
+  <script src="/js/laboratorio-feridas.js?v=20261010-wounds-fluid4"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
