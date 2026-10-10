@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feridas | Laboratório | Cortex</title>
+  <script>
+    (function(){var t="dark-purple";try{var s=localStorage.getItem("jankinho_theme_v1");if(s)t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();
+  </script>
+  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds1">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds1">
+  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds1">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds1">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds1">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds1">
+  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds1">
+  <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
+  <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
+  <script defer src="/js/sidebar-standard.js?v=20261007-logout-global3"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=cortex-minimal-v4">
+  <meta name="theme-color" content="#07090d">
+</head>
+<body class="practice-view wound-lab-view">
+  <aside class="sidebar">
+    <a href="/" class="sidebar-logo"><div class="logo-box">C</div><div><strong>Cortex</strong><span>Study Platform</span></div></a>
+    <div class="sidebar-menu"></div>
+    <div class="sidebar-user">
+      <div id="avatarSidebar" class="avatar">U</div>
+      <div class="user-info"><strong id="nomeSidebar">Carregando...</strong><span id="emailSidebar"></span></div>
+      <button id="logoutSidebar" class="logout-button" type="button" title="Sair" aria-label="Sair">&#8618;</button>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="header wound-header">
+      <div><div class="header-title">Feridas</div><span class="wound-header-subtitle">Avaliação · leito · exsudato · cobertura</span></div>
+      <div class="header-user"><div><strong id="nomeHeader">Carregando...</strong><span>Cortex</span></div><div id="avatarHeader" class="avatar header-avatar">U</div></div>
+    </header>
+
+    <main class="wound-page">
+      <div class="wound-topbar">
+        <a class="wound-back" href="/laboratorio.html"><span>←</span> Laboratórios</a>
+        <div class="wound-mode"><span class="wound-mode-dot"></span><strong>SIMULAÇÃO EDUCACIONAL</strong><small>não substitui protocolo institucional ou avaliação profissional</small></div>
+      </div>
+
+      <section class="wound-hero">
+        <div>
+          <span class="wound-kicker">CORTEX LAB · CUIDADO DE FERIDAS</span>
+          <h1>Avalie primeiro. <em>Trate depois.</em></h1>
+          <p>Observe o leito, o exsudato, as bordas, a pele perilesional e os sinais de infecção. Depois escolha limpeza, antisséptico e cobertura conforme a necessidade do caso.</p>
+        </div>
+        <div class="wound-progress">
+          <small>DESEMPENHO DA SESSÃO</small>
+          <strong id="sessionScore">0 pts</strong>
+          <span id="sessionMeta">0 casos concluídos</span>
+        </div>
+      </section>
+
+      <section class="case-strip" aria-label="Casos de feridas">
+        <button class="case-pill is-active" data-case="lpp2" type="button"><span>01</span><b>LPP estágio 2</b><small>sacro · exsudato baixo</small></button>
+        <button class="case-pill" data-case="venous" type="button"><span>02</span><b>Úlcera venosa</b><small>perna · exsudato alto</small></button>
+        <button class="case-pill" data-case="infected" type="button"><span>03</span><b>Ferida infectada</b><small>biocarga · exsudato moderado</small></button>
+        <button class="case-pill" data-case="dry" type="button"><span>04</span><b>Ferida seca</b><small>baixo exsudato · fibrina</small></button>
+      </section>
+
+      <section class="wound-workspace">
+        <article class="skin-card">
+          <div class="skin-card-head">
+            <div><span id="caseEyebrow">CASO 01 · LPP</span><strong id="caseTitle">Lesão por pressão em região sacral</strong></div>
+            <button id="randomCaseButton" class="ghost-button" type="button">Caso aleatório</button>
+          </div>
+
+          <div class="skin-stage" id="skinStage" data-wound="lpp2">
+            <div class="skin-layer skin-epidermis"></div>
+            <div class="skin-layer skin-dermis"></div>
+            <div class="skin-layer skin-subcut"></div>
+            <div class="wound-simulation">
+              <div class="wound-halo"></div>
+              <div class="wound-bed"><i></i><i></i><i></i><i></i></div>
+              <div class="wound-exudate"></div>
+            </div>
+            <div class="skin-label label-epi">Epiderme</div>
+            <div class="skin-label label-dermis">Derme</div>
+            <div class="skin-label label-subcut">Subcutâneo</div>
+            <div class="case-vitals">
+              <span id="casePain">Dor 4/10</span><span id="caseTemp">Afebril</span><span id="caseTime">Há 3 dias</span>
+            </div>
+          </div>
+
+          <div class="case-brief">
+            <div><small>HISTÓRIA</small><p id="caseHistory"></p></div>
+            <div><small>OBJETIVO</small><p id="caseObjective"></p></div>
+          </div>
+        </article>
+
+        <aside class="assessment-card">
+          <div class="panel-heading"><span>ETAPA 1</span><strong>Avaliação da ferida</strong><p>Selecione o que você observa antes de iniciar o tratamento.</p></div>
+
+          <div class="assessment-grid">
+            <label><span>Leito predominante</span><select id="bedSelect"><option value="">Selecione</option><option value="granulation">Granulação</option><option value="slough">Fibrina/esfacelo</option><option value="necrosis">Necrose</option><option value="epithelial">Epitelização</option></select></label>
+            <label><span>Exsudato</span><select id="exudateSelect"><option value="">Selecione</option><option value="none">Ausente</option><option value="low">Baixo</option><option value="moderate">Moderado</option><option value="high">Alto</option></select></label>
+            <label><span>Pele perilesional</span><select id="skinSelect"><option value="">Selecione</option><option value="intact">Íntegra</option><option value="erythema">Eritema</option><option value="maceration">Macerada</option><option value="dry">Ressecada</option></select></label>
+            <label><span>Sinais locais de infecção</span><select id="infectionSelect"><option value="">Selecione</option><option value="absent">Ausentes</option><option value="suspected">Suspeitos/presentes</option></select></label>
+          </div>
+
+          <button id="confirmAssessment" class="primary-button" type="button">Confirmar avaliação</button>
+          <div id="assessmentFeedback" class="feedback-box" hidden></div>
+        </aside>
+      </section>
+
+      <section class="treatment-card">
+        <div class="panel-heading treatment-heading"><div><span>ETAPA 2</span><strong>Tratamento e cobertura</strong><p>Monte a sequência. Alguns produtos podem ser úteis, desnecessários ou inadequados dependendo do leito e do exsudato.</p></div><button id="clearTreatment" class="ghost-button" type="button">Limpar seleção</button></div>
+
+        <div class="product-grid" id="productGrid">
+          <button class="product-card" data-product="saline" type="button"><span class="product-icon">NaCl</span><div><strong>Soro fisiológico 0,9%</strong><small>limpeza/irrigação</small></div><b>+</b></button>
+          <button class="product-card" data-product="phmb" type="button"><span class="product-icon">PHMB</span><div><strong>PHMB</strong><small>solução antimicrobiana</small></div><b>+</b></button>
+          <button class="product-card" data-product="alginate" type="button"><span class="product-icon">ALG</span><div><strong>Alginato de cálcio</strong><small>absorção de exsudato</small></div><b>+</b></button>
+          <button class="product-card" data-product="silver" type="button"><span class="product-icon">Ag</span><div><strong>Alginato com prata</strong><small>absorção + ação antimicrobiana</small></div><b>+</b></button>
+          <button class="product-card" data-product="barrier" type="button"><span class="product-icon">CB</span><div><strong>Creme barreira</strong><small>proteção da pele perilesional</small></div><b>+</b></button>
+          <button class="product-card" data-product="hydrogel" type="button"><span class="product-icon">H₂O</span><div><strong>Hidrogel</strong><small>doação de umidade</small></div><b>+</b></button>
+          <button class="product-card" data-product="foam" type="button"><span class="product-icon">ESP</span><div><strong>Espuma</strong><small>proteção e manejo do exsudato</small></div><b>+</b></button>
+        </div>
+
+        <div class="treatment-sequence">
+          <div><small>SEQUÊNCIA ESCOLHIDA</small><div id="sequenceList" class="sequence-list"><span class="empty-sequence">Nenhum produto selecionado.</span></div></div>
+          <button id="finishTreatment" class="primary-button finish-button" type="button">Finalizar conduta</button>
+        </div>
+        <div id="treatmentFeedback" class="feedback-box treatment-feedback" hidden></div>
+      </section>
+
+      <section class="wound-reference">
+        <div><span class="reference-icon">i</span><div><strong>Regra do laboratório</strong><p>Antimicrobianos tópicos não são “obrigatórios” em toda ferida. O simulador considera biocarga/sinais de infecção, quantidade de exsudato, objetivo de cicatrização e proteção da pele ao redor.</p></div></div>
+        <button id="showRationale" type="button">Ver raciocínio do caso</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/laboratorio-feridas.js?v=20261010-wounds1"></script>
+  <script src="/js/cortex-brand.js?v=20260930-global4"></script>
+</body>
+</html>
