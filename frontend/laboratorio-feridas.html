@@ -7,13 +7,13 @@
   <script>
     (function(){var t="dark-purple";try{var s=localStorage.getItem("jankinho_theme_v1");if(s)t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();
   </script>
-  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds-real2">
-  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds-real2">
-  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds-real2">
-  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds-real2">
-  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds-real2">
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds-real2">
-  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds-real2">
+  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds-game3">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds-game3">
+  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds-game3">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds-game3">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds-game3">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds-game3">
+  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds-game3">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
   <script defer src="/js/sidebar-standard.js?v=20261007-logout-global3"></script>
@@ -71,7 +71,9 @@
           </div>
 
           <div class="skin-stage skin-stage-clinical" id="skinStage" data-wound="lpp2">
-            <canvas id="clinicalWoundCanvas" width="960" height="650" role="img" aria-label="Ilustração clínica detalhada da ferida e pele ao redor"></canvas>
+            <canvas id="clinicalWoundCanvas" width="960" height="650" role="img" aria-label="Simulação clínica detalhada da ferida: examine profundidade, exsudato, bordas e pele perilesional"></canvas>
+            <canvas id="procedureCanvas" width="960" height="650" aria-hidden="true"></canvas>
+            <div id="stageTreatmentHint" class="stage-treatment-hint">Observe os tecidos • Avalie a ferida antes de iniciar</div>
             <div class="clinical-controls"><span>SIMULAÇÃO ANATÔMICA · TECIDOS</span><div><button id="zoomOutWound" type="button" aria-label="Reduzir zoom">−</button><span id="zoomWoundLabel">100%</span><button id="zoomInWound" type="button" aria-label="Aumentar zoom">+</button><button id="inspectWound" type="button" aria-pressed="false">Identificar</button></div></div>
             <div class="case-vitals">
               <span id="casePain">Dor 4/10</span><span id="caseTemp">Afebril</span><span id="caseTime">Há 3 dias</span>
@@ -102,9 +104,25 @@
       </section>
 
       <section class="treatment-card">
-        <div class="panel-heading treatment-heading"><div><span>ETAPA 2</span><strong>Tratamento e cobertura</strong><p>Monte a sequência. Alguns produtos podem ser úteis, desnecessários ou inadequados dependendo do leito e do exsudato.</p></div><button id="clearTreatment" class="ghost-button" type="button">Limpar seleção</button></div>
+        <div class="panel-heading treatment-heading"><div><span>ETAPA 2 · PROCEDIMENTO INTERATIVO</span><strong>Bancada de curativos</strong><p>Escolha um material, prepare a gaze e aplique diretamente na ferida com o mouse ou o dedo. No computador, você também pode arrastar os materiais.</p></div><button id="clearTreatment" class="ghost-button" type="button">Reiniciar técnica</button></div>
+        <div class="procedure-dashboard" aria-label="Etapas do procedimento">
+          <div class="procedure-step" id="stepAssessment"><span>01</span><strong>Avaliar</strong><small>Inspeção clínica</small></div>
+          <div class="procedure-step" id="stepPreparation"><span>02</span><strong>Preparar</strong><small>Gaze + solução</small></div>
+          <div class="procedure-step" id="stepCleaning"><span>03</span><strong>Limpar</strong><small>Passadas suaves</small></div>
+          <div class="procedure-step" id="stepCover"><span>04</span><strong>Proteger</strong><small>Perilesão e cobertura</small></div>
+        </div>
+        <div class="procedure-guide" id="procedureGuide" role="status" aria-live="polite"><strong>Como jogar</strong><span>Após avaliar, escolha soro ou PHMB, leve até a bancada de preparo, selecione a gaze e deslize sobre o leito.</span></div>
 
+        <div class="supply-prep-row">
+          <button class="gauze-tray" id="gauzePrepZone" type="button" aria-label="Bancada de preparo da gaze">
+            <span class="gauze-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span><strong>Preparo da gaze</strong><small id="gauzeState">Gaze seca — solte soro ou PHMB aqui</small></span>
+            <b id="gauzePrepBadge">AGUARDANDO</b>
+          </button>
+          <div class="prep-hint"><strong>Aplicação por toque ou arraste</strong><span>Arraste até a gaze ou selecione um produto e toque na bancada. Para limpar, selecione a gaze preparada e deslize no leito. Passe o creme somente na pele ao redor.</span></div>
+        </div>
         <div class="product-grid" id="productGrid">
+          <button class="product-card product-gauze" data-product="gauze" type="button" aria-pressed="false"><span class="product-icon">GZ</span><div><strong>Gaze estéril</strong><small>preparar e limpar suavemente</small></div><b>↗</b></button>
           <button class="product-card" data-product="saline" type="button"><span class="product-icon">NaCl</span><div><strong>Soro fisiológico 0,9%</strong><small>limpeza/irrigação</small></div><b>+</b></button>
           <button class="product-card" data-product="phmb" type="button"><span class="product-icon">PHMB</span><div><strong>PHMB</strong><small>solução antimicrobiana</small></div><b>+</b></button>
           <button class="product-card" data-product="alginate" type="button"><span class="product-icon">ALG</span><div><strong>Alginato de cálcio</strong><small>absorção de exsudato</small></div><b>+</b></button>
@@ -114,6 +132,7 @@
           <button class="product-card" data-product="foam" type="button"><span class="product-icon">ESP</span><div><strong>Espuma</strong><small>proteção e manejo do exsudato</small></div><b>+</b></button>
         </div>
 
+        <div class="wound-workflow-help"><span><b>LEITO</b> limpeza e cobertura</span><span><b>PERILESÃO</b> creme barreira</span><span><b>BANCADA</b> gaze + solução</span></div>
         <div class="treatment-sequence">
           <div><small>SEQUÊNCIA ESCOLHIDA</small><div id="sequenceList" class="sequence-list"><span class="empty-sequence">Nenhum produto selecionado.</span></div></div>
           <button id="finishTreatment" class="primary-button finish-button" type="button">Finalizar conduta</button>
@@ -128,7 +147,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-feridas.js?v=20261010-wounds-real2"></script>
+  <script src="/js/laboratorio-feridas.js?v=20261010-wounds-game3"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
