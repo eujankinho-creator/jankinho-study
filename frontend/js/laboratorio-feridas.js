@@ -292,13 +292,18 @@ $("zoomInWound").addEventListener("click",()=>setClinicalZoom(clinicalZoom+.25))
 $("inspectWound").addEventListener("click",()=>{clinicalInspect=!clinicalInspect;$("inspectWound").setAttribute("aria-pressed",String(clinicalInspect));$("clinicalInspection").hidden=!clinicalInspect;if(clinicalInspect)setText("clinicalInspection","Toque no leito, bordas ou pele ao redor para identificar estruturas.")});
 clinicalCanvas.addEventListener("click",event=>{
  if(!clinicalInspect)return;
- const rect=clinicalCanvas.getBoundingClientRect();
- const x=(event.clientX-rect.left)/rect.width*960,y=(event.clientY-rect.top)/rect.height*650;
- const d=Math.sqrt(Math.pow((x-478)/215,2)+Math.pow((y-318)/147,2));
- let text=d<.75?(current.key==="dry"?"Leito: predominam depósitos amarelados de fibrina/esfacelo com pouca umidade.":current.key==="infected"?"No esquema, o leito apresenta áreas viáveis e tecido desvitalizado. Na foto clínica real, observe granulação, fibrose e maceração.":"Leito: tecido vermelho/rosado viável e úmido. Na LPP estágio 2 há exposição da derme, sem tecido de granulação."):(d<1.2?"Bordas: transição epitelial e possível alteração pela umidade; observe irregularidade e coloração.":"Pele perilesional: inspecione eritema, maceração, edema e integridade cutânea.");
- setText("clinicalInspection",text);
+ const pos=stagePosition(event);if(!pos)return;
+ const g=clinicalGeometry();
+ const d=Math.sqrt(((pos.x-g.cx)/g.rx)**2+((pos.y-g.cy)/g.ry)**2);
+ const descriptions={
+  lpp2:"Leito superficial: perda parcial da pele e derme viável exposta, vermelha/rosada. LPP estágio 2 não apresenta granulação, esfacelo nem escara.",
+  venous:"Leito de úlcera venosa: examine o tecido granular vermelho, umidade do leito e limites irregulares; exsudato e maceração dependem da avaliação completa.",
+  infected:"Leito de lesão sacral com granulação e fibrose. A suspeita de infecção se apoia também em dor, odor e alteração do exsudato, não só na fotografia.",
+  dry:clinicalPhotoMode?"Fotografia comparativa de outra úlcera cutânea. Não permite comprovar esfacelo seco; utilize a história e o modo Esquema para esse exercício.":"Leito com esfacelo/fibrina aderida e baixa umidade, sem película líquida abundante."
+ };
+ const border=d<1.30?"Borda: observe continuidade do epitélio, maceração ou irregularidade de transição; nem todas as alterações podem ser vistas numa foto.":"Pele perilesional: observe coloração, eritema, integridade e maceração; não classifique infecção somente pela imagem.";
+ setText("clinicalInspection",d<.86?descriptions[current.key]:border);
 });
-
 
 /* Realce de sinais clinicamente legíveis — eritema periférico, maceração, profundidade e exsudato */
 /* Bancada procedural: estado persiste durante o caso e é reiniciado ao trocar de caso */
