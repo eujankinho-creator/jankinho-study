@@ -7,13 +7,13 @@
   <script>
     (function(){var t="dark-purple";try{var s=localStorage.getItem("jankinho_theme_v1");if(s)t=s}catch(e){}document.documentElement.setAttribute("data-theme",t)})();
   </script>
-  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds1">
-  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds1">
-  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds1">
-  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds1">
-  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds1">
-  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds1">
-  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds1">
+  <link rel="stylesheet" href="/css/app.css?v=20261010-wounds-real2">
+  <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261010-wounds-real2">
+  <link rel="stylesheet" href="/css/themes.css?v=20261010-wounds-real2">
+  <link rel="stylesheet" href="/css/cortex-brand.css?v=20261010-wounds-real2">
+  <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261010-wounds-real2">
+  <link rel="stylesheet" href="/css/theme-final.css?v=20261010-wounds-real2">
+  <link rel="stylesheet" href="/css/laboratorio-feridas.css?v=20261010-wounds-real2">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
   <script defer src="/js/sidebar-standard.js?v=20261007-logout-global3"></script>
@@ -70,23 +70,16 @@
             <button id="randomCaseButton" class="ghost-button" type="button">Caso aleatório</button>
           </div>
 
-          <div class="skin-stage" id="skinStage" data-wound="lpp2">
-            <div class="skin-layer skin-epidermis"></div>
-            <div class="skin-layer skin-dermis"></div>
-            <div class="skin-layer skin-subcut"></div>
-            <div class="wound-simulation">
-              <div class="wound-halo"></div>
-              <div class="wound-bed"><i></i><i></i><i></i><i></i></div>
-              <div class="wound-exudate"></div>
-            </div>
-            <div class="skin-label label-epi">Epiderme</div>
-            <div class="skin-label label-dermis">Derme</div>
-            <div class="skin-label label-subcut">Subcutâneo</div>
+          <div class="skin-stage skin-stage-clinical" id="skinStage" data-wound="lpp2">
+            <canvas id="clinicalWoundCanvas" width="960" height="650" role="img" aria-label="Ilustração clínica detalhada da ferida e pele ao redor"></canvas>
+            <div class="clinical-controls"><span>SIMULAÇÃO ANATÔMICA · TECIDOS</span><div><button id="zoomOutWound" type="button" aria-label="Reduzir zoom">−</button><span id="zoomWoundLabel">100%</span><button id="zoomInWound" type="button" aria-label="Aumentar zoom">+</button><button id="inspectWound" type="button" aria-pressed="false">Identificar</button></div></div>
             <div class="case-vitals">
               <span id="casePain">Dor 4/10</span><span id="caseTemp">Afebril</span><span id="caseTime">Há 3 dias</span>
             </div>
           </div>
 
+          <p class="wound-image-note" id="woundImageNote">Imagem clínica simulada: identifique os tecidos pela aparência, não apenas pela cor. Utilize a história do caso para complementar a avaliação.</p>
+          <div class="clinical-inspection" id="clinicalInspection" hidden aria-live="polite">Selecione uma região da ferida para explorar a estrutura.</div>
           <div class="case-brief">
             <div><small>HISTÓRIA</small><p id="caseHistory"></p></div>
             <div><small>OBJETIVO</small><p id="caseObjective"></p></div>
@@ -135,7 +128,7 @@
     </main>
   </div>
 
-  <script src="/js/laboratorio-feridas.js?v=20261010-wounds1"></script>
+  <script src="/js/laboratorio-feridas.js?v=20261010-wounds-real2"></script>
   <script src="/js/cortex-brand.js?v=20260930-global4"></script>
 </body>
 </html>
