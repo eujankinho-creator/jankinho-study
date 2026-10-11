@@ -301,6 +301,7 @@ async function loadScheduleHistory(){
           await api("/api/cronograma/restore",{method:"POST",body:JSON.stringify({scheduleId:id})});
           state.calendar=null;
           await loadDashboard();
+          scheduleHistoryLoading=false;
           await loadScheduleHistory();
           $("historyToggleButton").setAttribute("aria-expanded","false");
           $("scheduleHistoryPanel").hidden=true;
