@@ -1249,3 +1249,23 @@ html[data-theme] .schedule-view :is(.schedule-form input,.schedule-form select):
   border-color: var(--theme-border-strong) !important;
   box-shadow: 0 0 0 3px var(--theme-accent-soft) !important;
 }
+
+
+/* Cronogramas preservados e recuperação de progresso */
+.schedule-history-section{margin:12px 0 16px;padding:14px 16px;border-radius:17px;border:1px solid var(--theme-border);background:var(--theme-surface);color:var(--theme-text);box-shadow:0 10px 25px rgba(0,0,0,.08)}
+.schedule-history-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.schedule-history-head>div{display:grid;gap:4px;min-width:0}
+.schedule-history-head span{font-size:9px;font-weight:900;letter-spacing:.12em;color:var(--theme-accent-2)}
+.schedule-history-head strong{font-size:14px;color:var(--theme-text)}
+.schedule-history-head small{font-size:11px;color:var(--theme-text-muted)}
+.schedule-history-head button,.schedule-history-item button,.schedule-form-safeguard button{border-radius:11px;padding:10px 12px;border:1px solid var(--theme-border-strong);color:var(--theme-text);background:var(--theme-accent-soft);font:inherit;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0}
+.schedule-history-item button:hover,.schedule-history-head button:hover{filter:brightness(1.12)}
+.schedule-history-panel{margin-top:12px;padding-top:12px;border-top:1px solid var(--theme-border)}
+.schedule-history-list{display:grid;gap:8px;max-height:350px;overflow-y:auto;overscroll-behavior:contain}
+.schedule-history-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid var(--theme-border);border-radius:12px;background:var(--theme-surface-strong)}
+.schedule-history-item>div{display:grid;gap:5px;min-width:0}
+.schedule-history-item strong{font-size:12px;overflow-wrap:anywhere;color:var(--theme-text)}
+.schedule-history-item small{font-size:10px;color:var(--theme-text-muted)}
+.schedule-history-active{font-size:10px;font-weight:850;color:var(--theme-accent-2)}
+.schedule-form-safeguard{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0;color:var(--theme-text-muted);font-size:10px}
+@media(max-width:620px){.schedule-history-head,.schedule-history-item,.schedule-form-safeguard{align-items:stretch;flex-direction:column}.schedule-history-head button,.schedule-history-item button{width:100%;min-height:42px}.schedule-history-section{padding:12px}.schedule-history-item{gap:9px}}

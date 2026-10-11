@@ -267,6 +267,66 @@ function renderDashboard(data){
     : '<div class="research-status">Este plano não possui fontes salvas.</div>';
 }
 
+
+let scheduleHistory=[];
+let scheduleHistoryLoading=false;
+async function loadScheduleHistory(){
+  if(scheduleHistoryLoading)return;
+  scheduleHistoryLoading=true;
+  try{
+    const data=await api("/api/cronograma/history");
+    scheduleHistory=Array.isArray(data.plans)?data.plans:[];
+    $("scheduleHistorySection").hidden=scheduleHistory.length===0;
+    const old=scheduleHistory.filter(p=>!p.ativo);
+    $("scheduleHistorySummary").textContent=old.length
+      ? old.length+" plano(s) anterior(es) preservado(s). Selecione para recuperar seu progresso."
+      : "Seu plano atual está salvo. Novos planos serão arquivados aqui.";
+    $("historyToggleButton").textContent="Ver "+scheduleHistory.length+" plano(s)";
+    $("scheduleHistoryList").innerHTML=scheduleHistory.map(p=>{
+      const date=new Date(p.createdAt).toLocaleDateString("pt-BR");
+      const info=p.completedTasks+" / "+p.totalTasks+" tarefas concluídas";
+      return '<article class="schedule-history-item">'+
+        '<div><strong>'+esc(p.prova)+'</strong><small>Criado em '+esc(date)+' · '+esc(info)+'</small></div>'+
+        (p.ativo?'<span class="schedule-history-active">Plano ativo</span>':
+        '<button type="button" data-restore-schedule="'+p.id+'">Restaurar este plano</button>')+
+        '</article>';
+    }).join("");
+    $("scheduleHistoryList").querySelectorAll("[data-restore-schedule]").forEach(button=>{
+      button.addEventListener("click",async()=>{
+        const id=Number(button.dataset.restoreSchedule),chosen=scheduleHistory.find(p=>p.id===id);
+        if(!chosen)return;
+        if(!window.confirm("Restaurar o cronograma '"+chosen.prova+"' com as atividades e conclusões originais? Seu plano atual será arquivado, sem ser apagado."))return;
+        button.disabled=true;
+        try{
+          await api("/api/cronograma/restore",{method:"POST",body:JSON.stringify({scheduleId:id})});
+          state.calendar=null;
+          await loadDashboard();
+          await loadScheduleHistory();
+          $("historyToggleButton").setAttribute("aria-expanded","false");
+          $("scheduleHistoryPanel").hidden=true;
+          window.scrollTo({top:0,behavior:"smooth"});
+        }catch(e){
+          $("scheduleHistoryMessage").hidden=false;
+          $("scheduleHistoryMessage").textContent=e.message;
+        }finally{button.disabled=false}
+      });
+    });
+  }catch(err){console.warn("[cronograma] histórico indisponível",err)}
+  finally{scheduleHistoryLoading=false}
+}
+$("historyToggleButton").addEventListener("click",()=>{
+  const open=$("scheduleHistoryPanel").hidden;
+  $("scheduleHistoryPanel").hidden=!open;
+  $("historyToggleButton").setAttribute("aria-expanded",String(open));
+});
+$("cancelNewPlanButton").addEventListener("click",()=>{
+  if(state.dashboard?.schedule){
+    renderDashboard(state.dashboard);
+    $("cancelNewPlanButton").hidden=true;
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+});
+
 async function loadDashboard(){
   try{
     renderDashboard(await api("/api/cronograma/dashboard"));
@@ -313,6 +373,7 @@ async function buildSchedule(event){
     return;
   }
   const prova=selected.prova;
+  if(state.dashboard?.schedule && !window.confirm("Gerar outro plano? O cronograma atual e as tarefas concluídas serão preservados no histórico. Você poderá restaurá-lo depois."))return;
   button.disabled=true;
   const original=button.innerHTML;
   button.innerHTML="<b>Construindo plano…</b><small>matriz + pesos + desempenho</small>";
@@ -333,6 +394,8 @@ async function buildSchedule(event){
     });
     state.calendar=null;
     await loadDashboard();
+    await loadScheduleHistory();
+    $("cancelNewPlanButton").hidden=true;
     $("scheduleDashboard").scrollIntoView({behavior:"smooth",block:"start"});
   }catch(error){
     if(message){
@@ -374,6 +437,7 @@ function resetPlanChoice(){
   $("scheduleDashboard").hidden=true;
   $("scheduleEmpty").hidden=false;
   if($("scheduleIntro")) $("scheduleIntro").hidden=false;
+  $("cancelNewPlanButton").hidden=!Boolean(state.dashboard?.schedule);
   $("scheduleEmpty").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
@@ -381,7 +445,7 @@ $("newPlanButton").addEventListener("click",resetPlanChoice);
 $("changePlanButton")?.addEventListener("click",resetPlanChoice);
 setDefaultDate();
 renderExamBlueprint();
-loadDashboard();
+loadDashboard().then(loadScheduleHistory);
 
 
 

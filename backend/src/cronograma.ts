@@ -14,41 +14,6 @@ type ResearchItem = {
 };
 
 const researchCache = new Map<string, { at: number; items: ResearchItem[] }>();
-const CRONOGRAMA_RESET_KEY = "cronograma:objetivos-reset:2026-10-06-v1";
-
-async function ensureCronogramaResetOnce() {
-  try {
-    await prisma.$transaction(async (tx) => {
-      const marker = await tx.appConfig.findUnique({
-        where: { chave: CRONOGRAMA_RESET_KEY },
-      });
-
-      if (marker) return;
-
-      await tx.cronogramaEstudo.deleteMany({});
-
-      await tx.appConfig.create({
-        data: {
-          chave: CRONOGRAMA_RESET_KEY,
-          valor: {
-            resetAt: new Date().toISOString(),
-            reason: "Remover objetivos/cronogramas anteriores de todos os usuários",
-          },
-        },
-      });
-    });
-  } catch (error: any) {
-    const marker = await prisma.appConfig.findUnique({
-      where: { chave: CRONOGRAMA_RESET_KEY },
-    });
-    if (!marker) throw error;
-  }
-}
-
-void ensureCronogramaResetOnce().catch((error) => {
-  console.error("[cronograma-reset]", error);
-});
-
 const OFFICIAL_SEEDS: ResearchItem[] = [
   {
     title: "ENARE — página oficial do exame",
@@ -953,8 +918,96 @@ async function syncTodayTaskProgress(
   }
 }
 
+
+/* Preservação e recuperação: nenhum plano ou progresso é excluído ao gerar outro. */
+async function listScheduleHistory(usuarioId: number): Promise<ApiResult> {
+  const plans = await prisma.cronogramaEstudo.findMany({
+    where: { usuarioId },
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+    take: 30,
+    select: { id: true, prova: true, tipoProva: true, ativo: true, createdAt: true, updatedAt: true,
+      _count: { select: { tarefas: true } } },
+  });
+  const ids = plans.map((plan) => plan.id);
+  const counts = ids.length
+    ? await prisma.cronogramaTarefa.groupBy({
+        by: ["cronogramaId"],
+        where: { cronogramaId: { in: ids }, concluida: true },
+        _count: { _all: true },
+      })
+    : [];
+  const completed = new Map(counts.map((entry) => [entry.cronogramaId, entry._count._all]));
+  return { status: 200, data: {
+    plans: plans.map((plan) => ({
+      id: plan.id, prova: plan.prova, tipoProva: plan.tipoProva,
+      ativo: plan.ativo, createdAt: plan.createdAt, updatedAt: plan.updatedAt,
+      totalTasks: plan._count.tarefas, completedTasks: completed.get(plan.id) || 0,
+    })),
+  } };
+}
+
+async function restoreSchedule(usuarioId: number, body: any): Promise<ApiResult> {
+  const scheduleId = Number(body.scheduleId);
+  if (!Number.isSafeInteger(scheduleId) || scheduleId < 1) {
+    return { status: 400, data: { error: "Cronograma inválido." } };
+  }
+  const restored = await prisma.$transaction(async (tx) => {
+    const target = await tx.cronogramaEstudo.findFirst({ where: { id: scheduleId, usuarioId } });
+    if (!target) return null;
+    if (target.ativo) return target;
+    await tx.cronogramaEstudo.updateMany({ where: { usuarioId, ativo: true }, data: { ativo: false } });
+    return tx.cronogramaEstudo.update({ where: { id: target.id }, data: { ativo: true } });
+  });
+  if (!restored) return { status: 404, data: { error: "Não foi encontrado esse plano na sua conta." } };
+  return { status: 200, data: { restored: true, scheduleId: restored.id, message: "Cronograma restaurado com o progresso original." } };
+}
+
+/* Recuperação cautelosa, uma única vez, para a conta reportada:
+   só reativa um plano arquivado COM tarefas concluídas se o atual estiver zerado.
+   Nenhuma tarefa é recriada, nenhum plano é eliminado. */
+async function recoverPedroScheduleOnce(usuarioId: number): Promise<void> {
+  const user = await prisma.usuario.findUnique({ where: { id: usuarioId }, select: { nome: true } });
+  const name = (user?.nome || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().replace(/\s+/g, " ").toLowerCase();
+  if (!/^pedro henrique(?:\s|$)/.test(name)) return;
+  const key = "cronograma:recovery-pedro-henrique:2026-10-11:" + usuarioId;
+  if (await prisma.appConfig.findUnique({ where: { chave: key } })) return;
+  const plans = await prisma.cronogramaEstudo.findMany({
+    where: { usuarioId }, orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+    take: 25, select: { id: true, ativo: true, createdAt: true },
+  });
+  const active = plans.find((p) => p.ativo);
+  let candidateId: number | null = null;
+  if (!active || (await prisma.cronogramaTarefa.count({ where: { cronogramaId: active.id, concluida: true } })) === 0) {
+    for (const plan of plans) {
+      if (plan.ativo || (active && plan.createdAt >= active.createdAt)) continue;
+      const count = await prisma.cronogramaTarefa.count({ where: { cronogramaId: plan.id, concluida: true } });
+      if (count > 0) { candidateId = plan.id; break; }
+    }
+  }
+  await prisma.$transaction(async (tx) => {
+    if (await tx.appConfig.findUnique({ where: { chave: key } })) return;
+    let result = "sem alteracao";
+    if (candidateId !== null) {
+      const target = await tx.cronogramaEstudo.findFirst({ where: { id: candidateId, usuarioId, ativo: false } });
+      const current = await tx.cronogramaEstudo.findFirst({ where: { usuarioId, ativo: true } });
+      const progressNow = current
+        ? await tx.cronogramaTarefa.count({ where: { cronogramaId: current.id, concluida: true } })
+        : 0;
+      if (target && progressNow === 0) {
+        await tx.cronogramaEstudo.updateMany({ where: { usuarioId, ativo: true }, data: { ativo: false } });
+        await tx.cronogramaEstudo.update({ where: { id: target.id }, data: { ativo: true } });
+        result = "plano anterior com progresso reativado";
+      }
+    }
+    await tx.appConfig.create({ data: {
+      chave: key, valor: { result, evaluatedAt: new Date().toISOString() },
+    } });
+    console.info("[cronograma-recovery]", result);
+  });
+}
+
 async function dashboard(usuarioId: number): Promise<ApiResult> {
-  await ensureCronogramaResetOnce();
+  await recoverPedroScheduleOnce(usuarioId);
 
   const schedule = await prisma.cronogramaEstudo.findFirst({
     where: { usuarioId, ativo: true },
@@ -1031,7 +1084,6 @@ async function dashboard(usuarioId: number): Promise<ApiResult> {
 }
 
 async function calendarPlan(usuarioId: number): Promise<ApiResult> {
-  await ensureCronogramaResetOnce();
 
   const schedule = await prisma.cronogramaEstudo.findFirst({
     where: { usuarioId, ativo: true },
@@ -1079,7 +1131,6 @@ async function calendarPlan(usuarioId: number): Promise<ApiResult> {
 
 
 async function generate(usuarioId: number, body: any): Promise<ApiResult> {
-  await ensureCronogramaResetOnce();
 
   const requestedKind = text(body.tipoProva, 40).toUpperCase();
   if (!["ENARE", "EBSERH", "MINISTERIO_SAUDE"].includes(requestedKind)) {
@@ -1123,12 +1174,12 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
   const topics = planTopics(prova, sourceItems, dificuldades, prioridades, weakness, kind);
   const tasks = generateTasks(body, topics);
 
-  await prisma.cronogramaEstudo.updateMany({
-    where: { usuarioId, ativo: true },
-    data: { ativo: false },
-  });
-
-  const schedule = await prisma.cronogramaEstudo.create({
+  const schedule = await prisma.$transaction(async (tx) => {
+    await tx.cronogramaEstudo.updateMany({
+      where: { usuarioId, ativo: true },
+      data: { ativo: false },
+    });
+    return tx.cronogramaEstudo.create({
     data: {
       usuarioId,
       prova,
@@ -1179,6 +1230,7 @@ async function generate(usuarioId: number, body: any): Promise<ApiResult> {
       },
     },
     include: { fontes: true },
+    });
   });
 
   return {
@@ -1231,6 +1283,10 @@ export async function atenderCronograma(
       result = await dashboard(usuarioId);
     } else if (path === "/api/cronograma/calendar" && request.method === "GET") {
       result = await calendarPlan(usuarioId);
+    } else if (path === "/api/cronograma/history" && request.method === "GET") {
+      result = await listScheduleHistory(usuarioId);
+    } else if (path === "/api/cronograma/restore" && request.method === "POST") {
+      result = await restoreSchedule(usuarioId, await readJson(request));
     } else if (path === "/api/cronograma/generate" && request.method === "POST") {
       result = await generate(usuarioId, await readJson(request));
     } else if (path === "/api/cronograma/task" && request.method === "PATCH") {

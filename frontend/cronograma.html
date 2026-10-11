@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261005-theme-logo2">
   <link rel="stylesheet" href="/css/sidebar-standard.css?v=20261006-ui-profile2">
   <link rel="stylesheet" href="/css/theme-final.css?v=20261007-theme-global7">
-  <link rel="stylesheet" href="/css/cronograma.css?v=20261007-themefix6">
+  <link rel="stylesheet" href="/css/cronograma.css?v=20261011-restore1">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
   <script defer src="/js/sidebar-standard.js?v=20261007-logout-global3"></script>
@@ -55,6 +55,18 @@
         <span class="schedule-kicker">CRONOGRAMA</span>
         <h1>Qual prova você está preparando?</h1>
         <p>Escolha o objetivo. O restante do planejamento aparece somente depois.</p>
+      </section>
+
+
+      <section id="scheduleHistorySection" class="schedule-history-section" hidden>
+        <div class="schedule-history-head">
+          <div><span>SEUS DADOS PRESERVADOS</span><strong>Histórico de cronogramas</strong><small id="scheduleHistorySummary">Veja planos antigos e recupere as tarefas concluídas.</small></div>
+          <button id="historyToggleButton" type="button" aria-expanded="false" aria-controls="scheduleHistoryPanel">Ver planos anteriores</button>
+        </div>
+        <div id="scheduleHistoryPanel" class="schedule-history-panel" hidden>
+          <div id="scheduleHistoryList" class="schedule-history-list"></div>
+          <div id="scheduleHistoryMessage" class="research-status" hidden role="status"></div>
+        </div>
       </section>
 
       <section id="scheduleEmpty" class="schedule-builder schedule-builder-compact">
@@ -108,6 +120,7 @@
           </div>
         </form>
 
+        <div class="schedule-form-safeguard"><span>Os planos anteriores e suas conclusões são preservados no histórico.</span><button id="cancelNewPlanButton" type="button" hidden>Voltar ao meu plano atual</button></div>
         <div id="scheduleFormMessage" class="research-status" hidden></div>
       </section>
 
@@ -116,7 +129,7 @@
           <article class="schedule-main-progress">
             <div class="overview-head">
               <div><span>PLANO ATIVO</span><h2 id="activeExam">Cronograma</h2><small id="activeExamMeta"></small></div>
-              <button id="newPlanButton" type="button">Novo plano</button>
+              <button id="newPlanButton" type="button">Criar outro plano</button>
             </div>
             <div class="main-progress-row">
               <strong id="mainProgressValue">0%</strong>
@@ -210,7 +223,7 @@
     </section>
   </div>
 
-  <script type="module" src="/js/cronograma.js?v=20261008-autoquest10"></script>
+  <script type="module" src="/js/cronograma.js?v=20261011-restore1"></script>
   <script src="/js/cortex-brand.js?v=20261006-darkthemes1"></script>
 </body>
 </html>
