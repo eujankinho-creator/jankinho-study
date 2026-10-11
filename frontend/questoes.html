@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
   <script defer src="/js/theme-manager.js?v=20261007-purple-default3"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
-  <link rel="stylesheet" href="/css/questoes-premium.css?v=20261008-session-setup2">
+  <link rel="stylesheet" href="/css/questoes-premium.css?v=20261011-official-library1">
   <link
     rel="stylesheet"
     href="/css/sidebar-standard.css?v=20261002-lab-new1"
@@ -387,6 +387,22 @@
 
         </section>
 
+
+        <section class="official-exam-library" id="officialExamLibrary" aria-labelledby="officialExamTitle">
+          <div class="official-exam-heading">
+            <div><span>PROVAS ANTERIORES · FONTES ORIGINAIS</span><h2 id="officialExamTitle">Acervo público de provas</h2><p>Consulte provas e gabaritos publicados pelas instituições. Filtre por exame, banca e tema do cronograma, ou pratique questões relacionadas já disponíveis no Córtex.</p></div>
+            <button id="officialExamExpand" type="button" aria-expanded="false" aria-controls="officialExamBody">Explorar acervo</button>
+          </div>
+          <div class="official-exam-body" id="officialExamBody" hidden>
+            <div class="official-exam-filters">
+              <label><span>Exame</span><select id="officialExamKind"><option value="">Todos</option><option value="ENARE">ENARE / Residências</option><option value="EBSERH">EBSERH</option><option value="MS">Ministério da Saúde / SUS</option><option value="VEST">Vestibulares e avaliações</option></select></label>
+              <label><span>Assunto do cronograma</span><input type="search" id="officialExamTopic" list="officialExamTopics" placeholder="Ex.: Enfermagem, SUS, epidemiologia"><datalist id="officialExamTopics"><option value="SUS"><option value="Enfermagem"><option value="Saúde Coletiva"><option value="Ética"><option value="Epidemiologia"><option value="Português"><option value="Biologia"><option value="Matemática"><option value="Farmacologia"></datalist></label>
+              <label><span>Banca / organizadora</span><select id="officialExamBoard"><option value="">Todas</option><option value="FGV">FGV</option><option value="HU Brasil">HU Brasil</option><option value="Inep">Inep</option><option value="Fuvest">Fuvest</option></select></label>
+            </div>
+            <div class="official-exam-results"><small id="officialExamCount"></small><div class="official-exam-grid" id="officialExamGrid"></div></div>
+            <p class="official-exam-disclaimer">Catálogo de fontes oficiais, não importação integral de questões. Os cadernos permanecem na instituição de origem; a reprodução integral depende de licença ou autorização. Questões do banco Córtex podem ser autorais ou adaptadas e não devem ser confundidas com transcrições oficiais.</p>
+          </div>
+        </section>
 
         <section class="filters-card">
 
@@ -893,6 +909,7 @@
 
 <script defer src="/js/questoes-ui.js?v=20261002-fluid-final4"></script>
   <script defer src="/js/questoes.js?v=20261008-no-voice1"></script>
+  <script defer src="/js/questoes-provas-oficiais.js?v=20261011-catalog1"></script>
 
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>
