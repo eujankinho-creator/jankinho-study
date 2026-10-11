@@ -1006,6 +1006,25 @@ async function recoverPedroScheduleOnce(usuarioId: number): Promise<void> {
   });
 }
 
+/* Executa a tentativa de recuperação na inicialização, sem aguardar novo login. */
+async function recoverReportedPedroOnBoot() {
+  const users = await prisma.usuario.findMany({
+    where: { nome: { contains: "Pedro", mode: "insensitive" } },
+    select: { id: true, nome: true },
+  });
+  const matches = users.filter((user) => /^pedro henrique(?:\s|$)/.test(
+    user.nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().replace(/\s+/g, " ").toLowerCase()
+  ));
+  if (matches.length === 1) {
+    await recoverPedroScheduleOnce(matches[0].id);
+  } else {
+    console.info("[cronograma-recovery] contas correspondentes:", matches.length, "nenhuma recuperação automática por segurança");
+  }
+}
+void recoverReportedPedroOnBoot().catch((error) => {
+  console.error("[cronograma-recovery] verificação inicial indisponível", error);
+});
+
 async function dashboard(usuarioId: number): Promise<ApiResult> {
   await recoverPedroScheduleOnce(usuarioId);
 
