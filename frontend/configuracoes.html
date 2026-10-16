@@ -14,7 +14,7 @@
 
   <script>
     (function () {
-      var allowed = ["dark-orange","dark-pink","dark-green","dark-purple","dark-black"];
+      var allowed = ["dark-orange","dark-pink","dark-green","dark-purple","dark-black","light-white"];
       var theme = "dark-orange";
       try {
         var saved = localStorage.getItem("jankinho_theme_v1");
@@ -472,8 +472,7 @@
             </h2>
 
             <p>
-              Todos os temas mant&ecirc;m a mesma base Dark premium e minimalista.
-              Apenas a cor de destaque muda em toda a plataforma.
+              Escolha entre os temas escuros e o novo White claro, mantendo a identidade do Cortex em toda a plataforma.
             </p>
 
             <div class="cortex-theme-grid" aria-label="Escolher tema">
@@ -500,6 +499,11 @@
               <button type="button" class="cortex-theme-choice" data-theme-choice="dark-black">
                 <strong>Dark Black</strong>
                 <small>Preto total + detalhes brancos.</small>
+              </button>
+
+              <button type="button" class="cortex-theme-choice" data-theme-choice="light-white">
+                <strong>White</strong>
+                <small>Branco premium + contraste suave.</small>
               </button>
             </div>
 
