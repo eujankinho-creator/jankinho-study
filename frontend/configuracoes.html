@@ -14,7 +14,7 @@
 
   <script>
     (function () {
-      var allowed = ["dark-orange","dark-pink","dark-green","dark-purple","dark-black"];
+      var allowed = ["dark-orange","dark-pink","dark-green","dark-purple","dark-black","light-white"];
       var theme = "dark-orange";
       try {
         var saved = localStorage.getItem("jankinho_theme_v1");
@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="/css/ui-enhancements.css?v=20261002-fluid-final4">
   <script defer src="/js/ui-enhancements.js?v=20261001-nav-core8"></script>
   <link rel="stylesheet" href="/css/themes.css?v=20261002-fluid-final4">
-  <script defer src="/js/theme-manager.js?v=20261006-multitheme2"></script>
+  <script defer src="/js/theme-manager.js?v=20261016-white1"></script>
   <link rel="stylesheet" href="/css/cortex-brand.css?v=20261002-fluid-final4">
   <link rel="stylesheet" href="/css/configuracoes-premium.css?v=20261002-profile-photo1">
   <link
@@ -472,8 +472,7 @@
             </h2>
 
             <p>
-              Todos os temas mant&ecirc;m a mesma base Dark premium e minimalista.
-              Apenas a cor de destaque muda em toda a plataforma.
+              Escolha entre os temas escuros e o novo White claro, mantendo a identidade do Cortex em toda a plataforma.
             </p>
 
             <div class="cortex-theme-grid" aria-label="Escolher tema">
@@ -500,6 +499,11 @@
               <button type="button" class="cortex-theme-choice" data-theme-choice="dark-black">
                 <strong>Dark Black</strong>
                 <small>Preto total + detalhes brancos.</small>
+              </button>
+
+              <button type="button" class="cortex-theme-choice" data-theme-choice="light-white">
+                <strong>White</strong>
+                <small>Branco premium + contraste suave.</small>
               </button>
             </div>
 

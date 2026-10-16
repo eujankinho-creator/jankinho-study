@@ -2341,3 +2341,8 @@ html[data-theme="blue-black"]
   }
 
 }
+
+/* Hierarquia tipográfica suave: gráficos sem negrito exagerado. */
+.finance-view :is(.chart-heading h2,.history-header h2,.summary-card h3,.summary-top span,.chart-summary,.chart-legend,.history-actions,.finance-footer) { font-weight: 500 !important; }
+.finance-view :is(.finance-chart-svg text,.finance-chart-svg tspan,.chart-axis-label,.chart-value-label,.chart-month-label) { font-weight: 400 !important; }
+.finance-view :is(.summary-value,.summary-amount,.stat-value,.finance-value) { font-weight: 600 !important; }
