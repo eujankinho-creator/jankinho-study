@@ -12,15 +12,7 @@
     "light-white",
   ]);
   const listeners = new Set();
-
-  function loadWhiteStyles() {
-    if (document.getElementById("cortex-white-theme-styles")) return;
-    const link = document.createElement("link");
-    link.id = "cortex-white-theme-styles";
-    link.rel = "stylesheet";
-    link.href = "/css/theme-white.css?v=20261016-white-orange2";
-    document.head.appendChild(link);
-  }
+  let changeVersion = 0;
 
   function normalizeTheme(value) {
     const raw = String(value || "").trim();
@@ -90,7 +82,6 @@
     const normalized = normalizeTheme(theme);
     const settings = options || {};
 
-    if (normalized === "light-white") loadWhiteStyles();
     document.documentElement.setAttribute("data-theme", normalized);
     persistLocal(normalized);
 
@@ -132,6 +123,7 @@
   }
 
   async function syncFromAccount() {
+    const versionAtStart = changeVersion;
     let theme = readLocalTheme();
 
     try {
@@ -154,6 +146,7 @@
       }
     } catch {}
 
+    if (changeVersion !== versionAtStart) return readLocalTheme();
     return applyTheme(theme, {
       broadcast: true,
       notify: true,
@@ -204,6 +197,7 @@
         notify: true,
       });
 
+      changeVersion += 1;
       void persistAccountTheme(normalized);
 
       return normalized;
