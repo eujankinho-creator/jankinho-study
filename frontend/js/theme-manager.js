@@ -18,7 +18,7 @@
     const link = document.createElement("link");
     link.id = "cortex-white-theme-styles";
     link.rel = "stylesheet";
-    link.href = "/css/theme-white.css?v=20261016-white1";
+    link.href = "/css/theme-white.css?v=20261016-white-orange2";
     document.head.appendChild(link);
   }
 
