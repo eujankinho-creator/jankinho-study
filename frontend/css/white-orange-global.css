@@ -263,3 +263,175 @@ html[data-theme="light-white"] :is(.header,.sidebar,.panel,.card,.settings-card)
   backdrop-filter:none !important;
   -webkit-backdrop-filter:none !important;
 }
+
+
+/* WHITE ORANGE INVERTED V5 START */
+/* A preview itself always depicts White Orange, even in a dark current theme. */
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"],
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"]:hover,
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"]:focus-visible,
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"].active {
+  --choice-color:#ef741d !important;
+  background:#fff !important;
+  background-image:linear-gradient(145deg,#fff 0%,#fff9f4 100%) !important;
+  color:#161616 !important;
+  border:1px solid #e6d8cc !important;
+  box-shadow:0 6px 20px rgba(0,0,0,.12) !important;
+}
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"].active {
+  border-color:#eb721b !important;
+  box-shadow:0 0 0 2px rgba(230,98,20,.23),0 6px 20px rgba(0,0,0,.08) !important;
+}
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"]::before {
+  background:#ef741d !important;
+  box-shadow:none !important;
+}
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"] strong {
+  color:#171717 !important;
+  font-size:14px !important;
+  text-shadow:none !important;
+}
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"] small {
+  color:#51453b !important;
+  font-size:12px !important;
+  line-height:1.5 !important;
+  text-shadow:none !important;
+}
+
+/* Whole interface is white, black and orange when White Orange is selected. */
+html[data-theme="light-white"] {
+  color-scheme:light !important;
+  --theme-bg:#fff !important;
+  --theme-bg-secondary:#fff !important;
+  --theme-surface:#fff !important;
+  --theme-surface-strong:#fff !important;
+  --theme-surface-solid:#fff !important;
+  --theme-surface-soft:#fff8f2 !important;
+  --theme-glass:rgba(255,255,255,.97) !important;
+  --theme-glass-strong:rgba(255,255,255,.98) !important;
+  --theme-text:#161616 !important;
+  --theme-text-soft:#38322e !important;
+  --theme-text-muted:#655b53 !important;
+  --theme-accent:#e76811 !important;
+  --theme-accent-2:#bd4e06 !important;
+  --theme-accent-rgb:231,104,17 !important;
+  --theme-accent-2-rgb:189,78,6 !important;
+  --theme-border:#e8ded6 !important;
+  --theme-border-strong:#ebb18a !important;
+  --theme-gradient:linear-gradient(135deg,#e76811,#f08735) !important;
+  --theme-gradient-soft:linear-gradient(135deg,rgba(231,104,17,.14),rgba(240,135,53,.035)) !important;
+  --theme-button-text:#fff !important;
+  --orange:#e76811 !important;
+  --orange-light:#bd4e06 !important;
+  --bg:#fff !important;
+  --sidebar:#fff !important;
+  --panel:#fff !important;
+  --text:#161616 !important;
+  --muted:#655b53 !important;
+}
+html[data-theme="light-white"] body,
+html[data-theme="light-white"] :is(
+  .main-area,.main-content,.main-container,.page,.page-content,.page-wrapper,
+  .dashboard,.dashboard-page,.settings-page,.finance-page,.questions-page,
+  .flashcards-page,.cases-page,.schedule-page,.ranking-page,.performance-page,
+  .pharma-view,.sigaa-page,.cortex-app-shell,.shell-workspace,.shell-frame
+) {
+  background-color:#fff !important;
+  background-image:none !important;
+  color:#161616 !important;
+}
+/* Navigation / header, including persistent shell. */
+html[data-theme="light-white"] :is(
+  .sidebar,.sidebar-menu,.sidebar-user,.mobile-sidebar,
+  .cortex-mobile-sidebar-panel,.header,.topbar,.toolbar,.app-header,
+  .app-sidebar,.account-toolbar,.navigation,.nav-bar
+) {
+  background:#fff !important;
+  background-image:none !important;
+  color:#171717 !important;
+  border-color:#e8ded6 !important;
+  box-shadow:none !important;
+}
+html[data-theme="light-white"] :is(
+  .card,.panel,.premium-panel,.hero,.card-surface,.settings-card,
+  .finance-card,.info-card,.stat-card,.stats-card,.summary-card,.metric-card,
+  .question-card,.flashcard-card,.case-card,.caso-card,.ranking-card,
+  .history-card,.course-card,.course-hero,.courses-section,.course-tab-panels,
+  .activity-card,.lesson-card,.drug-card,.receptor-card,.pharma-section,
+  .catalog-search-bar,.catalog-search-main,.module-card,.dashboard-hero,
+  .dashboard-hero-premium,.hero-card,.welcome-card,.schedule-intro,
+  .schedule-section,.filter-panel,.filters-panel,.dialog-card,.modal-card,
+  .content-panel,.task-card,.theme-box,.cortex-theme-choice
+) {
+  background-color:#fff !important;
+  background-image:none !important;
+  border-color:#e8ded6 !important;
+  color:#171717 !important;
+  box-shadow:0 6px 24px rgba(44,31,19,.045) !important;
+}
+html[data-theme="light-white"] :is(
+  .dashboard-hero,.dashboard-hero-premium,.hero-card,.page-hero,
+  .welcome-card,.schedule-intro,.settings-heading,.academic-hero
+) {
+  background:linear-gradient(135deg,#fff,#fff8f0) !important;
+}
+html[data-theme="light-white"] :is(
+  h1,h2,h3,h4,h5,h6,.header-title,.hero-title,.card-title,.section-title,
+  .course-card h3,.settings-heading h1,.panel-header strong,
+  .metric-card strong,.stat-card strong,.result-value,.account-name
+) {
+  color:#171717 !important;
+  text-shadow:none !important;
+}
+html[data-theme="light-white"] :is(
+  p,.description,.subtitle,.caption,.hint,.helper-text,.meta,.muted,
+  .panel-subtitle,.course-meta,.metric-label,.metric-card small,
+  .settings-heading p,.card-description,.settings-card-content>p,
+  .sidebar-logo span,.user-info span,.finance-footer,.theme-current-label
+) { color:#4b433e !important; }
+html[data-theme="light-white"] :is(
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+  select,textarea,.search-box,.search-field,.search-input
+) {
+  color:#171717 !important;
+  background-color:#fff !important;
+  background-image:none !important;
+  border-color:#dfd5cc !important;
+}
+html[data-theme="light-white"] :is(
+  .menu-item,.nav-item,.sidebar-link,.tab-button,.filter-chip
+) {
+  color:#302b27 !important;
+  text-shadow:none !important;
+}
+html[data-theme="light-white"] :is(
+  .menu-item.active,.nav-item.active,.sidebar-link.active,
+  .tab-button.active,.filter-chip.active,.mode-button.active,
+  .cortex-theme-choice.active
+) {
+  color:#aa4304 !important;
+  background:#fff0e2 !important;
+  border-color:#f0c19d !important;
+  box-shadow:none !important;
+}
+html[data-theme="light-white"] :is(
+  .button-primary,.btn-primary,.primary-button,
+  button.primary,.main-action,.submit-button
+) {
+  background:linear-gradient(135deg,#e76811,#ef812f) !important;
+  color:#fff !important;
+  border-color:#df671a !important;
+}
+html[data-theme="light-white"] :is(
+  .badge,.chip,.tag,.pill,.orange-badge,.section-label,.hero-label,
+  .small-label,.panel-kicker
+) {
+  color:#aa4304 !important;
+  border-color:#f0c19d !important;
+}
+/* Preserve dark scientific renderers and multimedia screens rather than overpainting data. */
+html[data-theme="light-white"] :is(
+  .ecg-monitor,.ct-canvas,.radiology-viewport,.waveform-screen,
+  .ct-viewport,.viewer-canvas,canvas,video
+) { color-scheme:dark; }
+/* WHITE ORANGE INVERTED V5 END */
