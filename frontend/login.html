@@ -21,7 +21,7 @@
       document.documentElement
         .setAttribute(
           "data-theme",
-          "dark-purple"
+          (function(){try{return localStorage.getItem("jankinho_theme_v1")==="light-white"?"light-white":"dark-purple";}catch(e){return "dark-purple";}})()
         );
     })();
   </script>
@@ -42,6 +42,7 @@
     href="/css/themes.css?v=20261002-fluid-final4"
   >
   <link rel="stylesheet" href="/css/theme-final.css?v=20261007-pet-global10">
+  <script defer src="/js/theme-manager.js?v=20261016-white1"></script>
   <link
     rel="icon"
     type="image/svg+xml"
