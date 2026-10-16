@@ -147,6 +147,8 @@ html[data-theme]{
   color-scheme:dark;
 }
 
+html[data-theme="light-white"] { color-scheme:light !important; }
+
 html[data-theme] body{
   color:var(--theme-text)!important;
   background:

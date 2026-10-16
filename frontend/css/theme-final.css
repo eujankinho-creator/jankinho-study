@@ -5225,7 +5225,7 @@ html[data-theme="dark-black"]{
   --theme-button-text:#050505!important;
 }
 
-html[data-theme]{
+html[data-theme]:not([data-theme="light-white"]){
   color-scheme:dark!important;
   --bg:var(--theme-bg)!important;
   --sidebar:var(--theme-bg-secondary)!important;
