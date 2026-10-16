@@ -1,0 +1,265 @@
+/* Camada final exclusiva ao White Orange, após TODOS os estilos de página. */
+/* =========================================================
+   CORTEX WHITE ORANGE — LIGHT CASCADE (2026-10-16)
+   Exclusivo ao tema claro. O antigo dark-orange segue intacto.
+   Vinculado a theme-final para carregar em todas as rotas/iframes
+   antes da execução do JavaScript.
+========================================================= */
+html[data-theme="light-white"] {
+  color-scheme: light !important;
+  background: #fff !important;
+  --theme-bg: #fff !important;
+  --theme-bg-secondary: #fff !important;
+  --theme-surface: #fff !important;
+  --theme-surface-solid: #fff !important;
+  --theme-surface-strong: #fff !important;
+  --theme-surface-soft: #fff7f0 !important;
+  --theme-glass: #fff !important;
+  --theme-glass-strong: #fff !important;
+  --theme-border: #e9e2dd !important;
+  --theme-border-strong: #f4b68a !important;
+  --theme-text: #202020 !important;
+  --theme-text-soft: #4a4440 !important;
+  --theme-text-muted: #716963 !important;
+  --theme-accent: #dc6010 !important;
+  --theme-accent-2: #e76b1b !important;
+  --theme-accent-deep: #aa4306 !important;
+  --theme-accent-rgb: 220,96,16 !important;
+  --theme-accent-2-rgb: 231,107,27 !important;
+  --theme-accent-soft: rgba(220,96,16,.075) !important;
+  --theme-accent-medium: rgba(220,96,16,.12) !important;
+  --theme-accent-strong: rgba(220,96,16,.23) !important;
+  --theme-gradient: linear-gradient(135deg,#dc6010,#f18b3b) !important;
+  --theme-gradient-soft: linear-gradient(135deg,rgba(220,96,16,.10),rgba(241,139,59,.035)) !important;
+  --theme-hero: linear-gradient(135deg,#fff,#fff9f4) !important;
+  --theme-panel-shadow: 0 8px 28px rgba(55,40,28,.045) !important;
+  --theme-backdrop: none !important;
+  --theme-button-text: #fff !important;
+  --bg: #fff !important;
+  --sidebar: #fff !important;
+  --panel: #fff !important;
+  --border: #e9e2dd !important;
+  --text: #202020 !important;
+  --muted: #716963 !important;
+  --orange: #dc6010 !important;
+  --orange-light: #e76b1b !important;
+  --accent: #dc6010 !important;
+  --accent-2: #e76b1b !important;
+  --accent-rgb: 220,96,16 !important;
+}
+html[data-theme="light-white"] body {
+  background: #fff !important;
+  background-image: none !important;
+  color: #202020 !important;
+}
+html[data-theme="light-white"] :is(
+  .shell-workspace,.shell-frame,.shell-frame-active,.shell-frame-standby,
+  .cortex-app-shell,.app-shell,.app-layout,.app-container,.app-main,.main-content,
+  .main-container,.main-area,.page,.page-content,.page-wrapper,.content-area,
+  .content-wrapper,.workspace,.workspace-main,.dashboard-page,.dashboard-content,
+  .finance-page,.settings-page,.questions-page,.lessons-page,.evolution-page,
+  .practice-page,.cases-page,.flashcards-page,.ranking-page,.schedule-page
+) {
+  background: #fff !important;
+  background-image: none !important;
+  color: #202020 !important;
+}
+html[data-theme="light-white"] :is(
+  .sidebar,.header,.topbar,.app-header,.app-sidebar,.cortex-mobile-sidebar-panel,
+  .mobile-sidebar,.cortex-mobile-sidebar,.cortex-mobile-sidebar-overlay,
+  .sidebar-user,.sidebar-menu,.sidebar-logo,.cortex-nav,.menu-group
+) {
+  background: #fff !important;
+  background-image: none !important;
+  border-color: #e9e2dd !important;
+  box-shadow: none !important;
+}
+html[data-theme="light-white"] :is(
+  .panel,.card,.card-surface,.premium-card,.glass-card,.content-card,.content-box,
+  .content-panel,.section-card,.section-box,.section-panel,.info-card,.stat-card,
+  .stats-card,.summary-card,.metric-card,.metric-panel,.widget-card,.widget-panel,
+  .settings-card,.theme-box,.ranking-card,.history-card,.finance-card,
+  .income-card,.expense-card,.balance-card,.chart-panel,.history-panel,.debt-panel,
+  .dashboard-card,.dashboard-panel,.dashboard-hero,.dashboard-hero-premium,
+  .dashboard-widget,.dashboard-section,.overview-card,.quick-links-card,
+  .page-hero,.hero,.hero-card,.hero-panel,.welcome-card,.intro-card,
+  .finance-hero,.finance-summary,.finance-analytics-grid,
+  .filters,.filter-bar,.filters-panel,.filter-panel,.filter-box,
+  .controls-panel,.controls-card,.details-panel,.details-card,
+  .question-card,.questions-card,.session-card,.flashcard-card,
+  .case-card,.caso-card,.result-card,.result-panel,.loading-card,.loading-state,
+  .empty-state,.empty-ranking,.mode-card,.tip-card,.hub-tip,.lab-choice-card,
+  .lesson-card,.course-card,.task-card,.schedule-card,.schedule-section,
+  .pharma-section,.drug-card,.receptor-card,.catalog-search-bar,
+  .schedule-builder,.schedule-builder-compact,.schedule-main-progress,
+  .schedule-today-score,.schedule-countdown,.study-timer-panel,
+  .modal-card,.modal-content,.dialog-card,.dialog-content,.popover-content,
+  .table-container,.table-wrapper,.list-container,.cortex-theme-choice
+) {
+  background: #fff !important;
+  background-image: none !important;
+  border-color: #e9e2dd !important;
+  color: #202020 !important;
+  box-shadow: 0 5px 22px rgba(45,34,26,.05) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-theme="light-white"] :is(
+  .hero,.dashboard-hero,.dashboard-hero-premium,.page-hero,.hero-card,.hero-panel,
+  .welcome-card,.intro-card,.schedule-intro,.lab-hub-hero,.finance-hero
+) {
+  background: linear-gradient(135deg,#fff,#fffaf5) !important;
+}
+html[data-theme="light-white"] :is(
+  h1,h2,h3,h4,h5,h6,.header-title,.card-title,.hero-title,
+  .sidebar-logo strong,.sidebar-logo,.metric-value,.summary-value,
+  .chart-heading h2,.history-header h2,.settings-card-content h2
+) {
+  color: #202020 !important;
+  text-shadow: none !important;
+}
+html[data-theme="light-white"] :is(
+  .muted,.hint,.caption,.subtitle,.description,.menu-title,.sidebar-logo span,
+  .sidebar-user .user-info span,.user-info span,.chart-legend,.chart-summary,
+  .finance-footer,.theme-choice-description,.theme-current-label
+) { color: #716963 !important; }
+html[data-theme="light-white"] :is(
+  .menu-item,.nav-item,.sidebar-link,.menu-item span,.sidebar-user .user-info strong
+) { color: #534e49 !important; text-shadow: none !important; }
+html[data-theme="light-white"] :is(.menu-item,.nav-item,.sidebar-link):hover {
+  background: #fff4e9 !important; color: #9e430b !important;
+}
+html[data-theme="light-white"] :is(
+  .menu-item.active,.nav-item.active,.sidebar-link.active,.tab.active,
+  .tab-button.active,.filter-chip.active,.mode-button.active
+) {
+  background: #fff0e1 !important;
+  background-image: none !important;
+  color: #ab4809 !important;
+  border-color: #f9d2b3 !important;
+  box-shadow: none !important;
+}
+html[data-theme="light-white"] :is(
+  .btn-primary,.button-primary,.primary-button,.main-action,.submit-button,
+  .action-button.primary,button.primary,button.cta,button.is-primary
+) {
+  background: linear-gradient(135deg,#dc6010,#ed7e2a) !important;
+  border-color: #dc6010 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 16px rgba(220,96,16,.13) !important;
+}
+html[data-theme="light-white"] :is(
+  .btn-secondary,.button-secondary,.secondary-button,.ghost-button
+) {
+  background: #fff !important;
+  color: #4a4038 !important;
+  border-color: #e7ddd5 !important;
+  box-shadow: none !important;
+}
+html[data-theme="light-white"] :is(
+  input,select,textarea,.input,.form-control,.search-input,.search-field,.search-box
+) {
+  background: #fff !important;
+  background-image: none !important;
+  color: #202020 !important;
+  border-color: #e3dad3 !important;
+  box-shadow: none !important;
+}
+html[data-theme="light-white"] :is(input,textarea)::placeholder {
+  color: #81766e !important;
+  opacity: 1;
+}
+html[data-theme="light-white"] :is(input,textarea,select,button,a):focus-visible {
+  outline: 2px solid #dc6010 !important;
+  outline-offset: 2px;
+}
+html[data-theme="light-white"] :is(
+  .badge,.chip,.tag,.pill,.badge-orange,.orange-badge,.section-eyebrow
+) {
+  background: #fff0e1 !important;
+  color: #a7470a !important;
+  border-color: #f3c5a2 !important;
+}
+html[data-theme="light-white"] :is(
+  .finance-chart-svg text,.finance-chart-svg tspan,.chart-axis-label,.chart-value-label
+) { fill: #655c55 !important; font-weight: 400 !important; }
+html[data-theme="light-white"] .finance-chart-svg .chart-grid {
+  stroke: #ece6e1 !important;
+}
+html[data-theme="light-white"] .finance-chart-svg .chart-zero {
+  stroke: #d1c6bd !important;
+}
+html[data-theme="light-white"] .finance-chart-svg .chart-balance-line {
+  stroke: #dc6010 !important;
+}
+html[data-theme="light-white"] .finance-chart-svg .chart-balance-area {
+  fill: rgba(220,96,16,.07) !important;
+}
+html[data-theme="light-white"] .finance-chart-svg .chart-balance-point {
+  stroke: #fff !important;
+}
+html[data-theme="light-white"] :is(
+  table,thead,tbody,tr,th,td,.table,.table-responsive
+) {
+  border-color: #e9e2dd !important;
+}
+html[data-theme="light-white"] :is(th,thead) {
+  background: #fff8f2 !important;
+  color: #433b36 !important;
+}
+html[data-theme="light-white"] :is(.sidebar-logo svg,.cortex-brain-logo,.cortex-brain-logo *) {
+  stroke: #dc6010 !important;
+}
+html[data-theme="light-white"] :is(
+  .cortex-global-logo-image,.cortex-mobile-brand-image,.cortex-brain-logo
+) { filter: none !important; }
+html[data-theme] .cortex-theme-choice[data-theme-choice="light-white"] {
+  --choice-color: #ed7e2a;
+}
+html[data-theme="light-white"] .cortex-theme-choice[data-theme-choice="light-white"].active {
+  border-color: #dc6010 !important;
+  box-shadow: 0 0 0 1px rgba(220,96,16,.15) !important;
+}
+/* Experimentos visuais de alto contraste continuam escuros quando
+   essa é a representação científica correta (CT, ECG, 3D, vídeo). */
+html[data-theme="light-white"] :is(
+  canvas,.ct-canvas,.radiology-viewport,.ecg-monitor,.global-lesson-video,video
+) { color-scheme: dark; }
+@media (max-width:900px) {
+  html[data-theme="light-white"] :is(
+    .header,.sidebar,.settings-card,.theme-box,.finance-card,.lab-choice-card
+  ) {
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+}
+
+/* Autenticação: contraste claro sem interferir nos fluxos do formulário. */
+html[data-theme="light-white"] :is(
+ .auth-page,.auth-login-premium,.auth-cinema-stage,.auth-shell,
+ .auth-form-side,.auth-form-wrap,.auth-showcase,.feature-item
+) {
+  background:#fff !important;
+  background-image:none !important;
+  color:#202020 !important;
+  border-color:#e9e2dd !important;
+}
+html[data-theme="light-white"] :is(
+ .auth-heading h1,.auth-heading h2,.showcase-content h1,.auth-brand,.brand-copy strong
+) { color:#202020 !important; }
+html[data-theme="light-white"] :is(
+ .auth-heading p,.showcase-content p,.showcase-kicker,.feature-item p,.brand-copy span
+) { color:#716963 !important; }
+html[data-theme="light-white"] :is(.auth-orb,.auth-noise,.auth-cinema-stage,.cinema-grid) {
+  opacity:.08 !important;
+}
+html[data-theme="light-white"] .shell-workspace,
+html[data-theme="light-white"] .shell-frame {
+  background-color:#fff !important;
+  background-image:none !important;
+}
+/* Em dispositivos móveis, remove blur caro das superfícies brancas. */
+html[data-theme="light-white"] :is(.header,.sidebar,.panel,.card,.settings-card) {
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
