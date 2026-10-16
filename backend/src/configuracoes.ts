@@ -21,6 +21,7 @@ const TEMAS_PERMITIDOS =
     "dark-green",
     "dark-purple",
     "dark-black",
+    "light-white",
   ]);
 
 
