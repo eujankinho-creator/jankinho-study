@@ -77,3 +77,21 @@ html[data-theme] .cortex-theme-choice[data-theme-choice="light-white"]{--choice-
 html[data-theme="light-white"] .cortex-theme-choice[data-theme-choice="light-white"].active{border-color:#355ac8!important;box-shadow:0 0 0 1px rgba(53,90,200,.16)!important;}
 html[data-theme="light-white"] .cortex-theme-grid{grid-template-columns:repeat(auto-fit,minmax(125px,1fr));}
 @media(max-width:700px){html[data-theme="light-white"] :is(.sidebar,.header,.mobile-sidebar,.cortex-mobile-sidebar-panel){box-shadow:none!important;}}
+
+/* Autenticação preserva composição original, com superfícies e leitura claras. */
+html[data-theme="light-white"] :is(.auth-page,.auth-login-premium,.auth-cinema-stage){
+ background:#f6f8fb!important;color:#172033!important;
+}
+html[data-theme="light-white"] :is(.auth-shell,.auth-showcase,.auth-form-side,.auth-form-wrap,.feature-item){
+ background:#fff!important;color:#172033!important;border-color:#e1e6ee!important;
+ box-shadow:0 10px 32px rgba(27,43,75,.06)!important;
+}
+html[data-theme="light-white"] :is(.auth-heading h1,.auth-heading h2,.showcase-content h1,.brand-copy strong,.auth-brand){
+ color:#172033!important;
+}
+html[data-theme="light-white"] :is(.auth-heading p,.showcase-content p,.showcase-kicker,.feature-item p,.brand-copy span){
+ color:#657389!important;
+}
+html[data-theme="light-white"] :is(.auth-cinema-stage,.auth-noise,.auth-orb,.cinema-grid){
+ opacity:.15!important;
+}
