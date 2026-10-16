@@ -37,7 +37,7 @@ const THEME_NAMES = {
   "dark-green": "Verde",
   "dark-purple": "Roxo",
   "dark-black": "Dark Black",
-  "light-white": "White",
+  "light-white": "White Orange",
 };
 
 const PET_COLORS = new Set([
