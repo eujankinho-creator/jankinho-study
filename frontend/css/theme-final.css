@@ -4142,7 +4142,8 @@ html[data-theme] :is(
     inset 0 1px 0 rgba(255,255,255,.018) !important;
 }
 
-html[data-theme] :is(h1,h2,h3,h4,h5,h6,strong,.title,.header-title) {
+/* Tema claro usa sua própria hierarquia tipográfica; branco fixo apenas nos escuros. */
+html[data-theme]:not([data-theme="light-white"]) :is(h1,h2,h3,h4,h5,h6,strong,.title,.header-title) {
   color: #f7f4f1 !important;
 }
 

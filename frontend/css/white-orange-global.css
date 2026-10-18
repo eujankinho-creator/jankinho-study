@@ -634,3 +634,154 @@ html[data-theme="light-white"] .finance-view .chart-empty {
     -webkit-backdrop-filter: none !important;
   }
 }
+
+
+
+/* ==========================================================
+   WHITE ORANGE V4 · LEGIBILIDADE GLOBAL
+   Evita títulos, negritos e descrições brancos herdados de
+   CSS dark. Mantém textos brancos em ações laranjas e overlays
+   realmente escuros (player / laboratórios científicos).
+   ========================================================== */
+html[data-theme="light-white"] {
+  --light-text-heading: #151d27;
+  --light-text-main: #26313e;
+  --light-text-secondary: #485565;
+  --light-text-tertiary: #626f7f;
+  --text-primary: #151d27;
+  --text-secondary: #485565;
+  --text-muted: #626f7f;
+}
+
+/* Títulos, valores e negritos: antes forçados a branco pelo tema dark. */
+html[data-theme="light-white"] :is(
+  h1,h2,h3,h4,h5,h6,strong,b,.title,.header-title,
+  .section-title,.page-title,.card-title,.panel-title,
+  .block-title,.module-title,.widget-title,.card-heading,
+  .section-heading h2,.panel-heading h2,.metric-value,
+  .stat-value,.summary-value,.account-name,.user-name,
+  .result-value,.profile-name,.finance-value,
+  .settings-card h3,.settings-card h4
+):not(:is(
+  .btn-primary *, .button-primary *, .primary-button *,
+  .main-action *, .submit-button *, .action-primary *,
+  button.primary *, button.cta *, button.is-primary *,
+  .video-overlay *, .global-lesson-video *,
+  .radiology-viewport *, .ct-viewport *, .ecg-monitor *
+)) {
+  color: var(--light-text-heading) !important;
+  text-shadow: none !important;
+}
+
+/* Textos corridos e descrições: o cinza escuro aumenta a leitura,
+   sem transformar informações secundárias em preto absoluto. */
+html[data-theme="light-white"] :is(
+  p,small,label,legend,dt,dd,figcaption,caption,summary,
+  .description,.card-description,.page-description,
+  .section-description,.panel-description,.widget-description,
+  .helper-text,.help-text,.hint,.caption,.subtitle,
+  .subheading,.sub-title,.page-subtitle,.section-subtitle,
+  .panel-subtitle,.card-subtitle,.widget-subtitle,
+  .meta,.muted,.text-muted,.secondary-text,.supporting-text,
+  .intro-text,.body-copy,.empty-message,.empty-description,
+  .settings-description,.settings-card p,.theme-choice-description,
+  .form-help,.form-hint,.field-help,.field-description,
+  .course-description,.lesson-description,.question-description,
+  .schedule-description,.dashboard-description,.finance-description,
+  .history-description,.course-meta,.lesson-meta,.date-label
+):not(:is(
+  button *, .btn-primary *, .button-primary *,
+  .primary-button *, .main-action *, .submit-button *,
+  .action-primary *, [role="button"] *,
+  .video-overlay *, .global-lesson-video *,
+  .radiology-viewport *, .ct-viewport *, .ecg-monitor *,
+  .global-lesson-player .video-stage *,
+  .lesson-player-viewport *
+)) {
+  color: var(--light-text-secondary) !important;
+  text-shadow: none !important;
+}
+
+/* Textos sem classe em cards e blocos de conteúdo precisam herdar a
+   paleta clara mesmo quando a página original define branco via span. */
+html[data-theme="light-white"] :is(
+  .card,.dashboard-card,.metric-card,.summary-card,.info-card,
+  .content-card,.section-card,.question-card,.flashcard-card,
+  .case-card,.caso-card,.settings-card,.finance-card,
+  .chart-panel,.history-card,.ranking-card,.result-card,
+  .lesson-card,.course-card,.schedule-card,.task-card,
+  .lab-choice-card,.pharma-section,.drug-card,.receptor-card,
+  .filter-panel,.filters-panel,.details-card,.details-panel,
+  .empty-state,.dashboard-hero,.hero-card,.page-hero
+) :is(
+  span:not([class]),small:not([class]),div[class*="description"],
+  span[class*="description"],span[class*="subtitle"],
+  span[class*="label"],div[class*="subtitle"],
+  [class*="helper-text"]
+):not(:is(
+  button *,a.button-primary *,a.primary-button *,
+  .btn-primary *, .button-primary *, .primary-button *,
+  .submit-button *, .main-action *, .action-primary *,
+  .badge *, .chip *, .pill *, .tag *,
+  .video-overlay *, .radiology-viewport *,
+  .ct-viewport *, .ecg-monitor *
+)) {
+  color: var(--light-text-secondary) !important;
+}
+
+/* Campos de formulário, linhas de tabelas e metadados */
+html[data-theme="light-white"] :is(
+  .table-cell,.table-row,.table-wrapper td,
+  .form-label,.input-label,.field-label,.profile-label,
+  .settings-label,.account-label,.list-item-title,
+  .list-item-description,.history-item-label,
+  .filter-label,.table-description
+) {
+  color: var(--light-text-main) !important;
+}
+html[data-theme="light-white"] :is(
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,textarea,.search-input,.form-control
+) {
+  color: var(--light-text-heading) !important;
+  caret-color: #c6530b;
+}
+html[data-theme="light-white"] :is(input,textarea,.search-input)::placeholder {
+  color: #657282 !important;
+  opacity: 1;
+}
+
+/* Estados e botões coloridos preservam texto branco para contraste. */
+html[data-theme="light-white"] :is(
+  button.primary,.btn-primary,.button-primary,.primary-button,
+  .main-action,.submit-button,.action-primary,button.cta,
+  button.is-primary,a.btn-primary,a.button-primary,
+  a.primary-button
+),
+html[data-theme="light-white"] :is(
+  button.primary,.btn-primary,.button-primary,.primary-button,
+  .main-action,.submit-button,.action-primary,button.cta,
+  button.is-primary,a.btn-primary,a.button-primary,
+  a.primary-button
+) :is(span,strong,b,small,em,i) {
+  color: #fff !important;
+}
+
+/* Rótulos de destaque sobre superfícies claras devem usar laranja escuro,
+   evitando tons muito pálidos originalmente desenhados para fundo preto. */
+html[data-theme="light-white"] :is(
+  .badge-orange,.orange-badge,.section-eyebrow,.hero-eyebrow,
+  .panel-kicker,.page-kicker,.section-kicker,.schedule-kicker,
+  .highlight-text,.accent-text,.hero-label,.small-label
+) {
+  color: #9b410b !important;
+}
+
+/* Preserva títulos de telas e vídeos internos sem afetar exames. */
+html[data-theme="light-white"] :is(
+  .video-overlay,.lesson-player-viewport,.radiology-viewport,
+  .ct-viewport,.ecg-monitor
+) :is(p,small,label,strong,b,span) {
+  color: inherit;
+}
+

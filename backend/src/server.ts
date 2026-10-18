@@ -3837,7 +3837,7 @@ async function servirArquivo(
           '<script data-cortex-theme-bootstrap>(function(){var k="jankinho_theme_v1",a=["dark-orange","dark-pink","dark-green","dark-purple","dark-black","light-white"],m={"orange-black":"dark-orange","pink-glitter":"dark-pink","black-white":"dark-black","blue-black":"dark-black"},t="dark-orange";try{var s=localStorage.getItem(k)||"";t=m[s]||s;if(a.indexOf(t)<0)t="dark-orange";localStorage.setItem(k,t)}catch(e){}document.documentElement.setAttribute("data-theme",t)})();<\/script>';
 
         const lightThemeTag =
-          '<link rel="stylesheet" href="/css/white-orange-global.css?v=20261018-light-composition3">';
+          '<link rel="stylesheet" href="/css/white-orange-global.css?v=20261018-light-readable4">';
 
         // Remove versões antigas, carregadas antes do runtime, para evitar
         // que suas regras sejam sobrescritas nas páginas e iframes.
