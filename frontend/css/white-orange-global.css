@@ -293,3 +293,344 @@ html[data-theme="light-white"] :is(
     -webkit-backdrop-filter: none !important;
   }
 }
+
+
+
+/* ============================================================
+   WHITE ORANGE · DESIGN SYSTEM V3 (2026-10-18)
+   Composição própria, não uma inversão: canvas frio, cards brancos,
+   bordas definidas, superfícies em níveis e acentos quentes.
+   ============================================================ */
+html[data-theme="light-white"] {
+  --cortex-light-canvas: #f4f6f9;
+  --cortex-light-canvas-raised: #f8f9fb;
+  --cortex-light-card: #ffffff;
+  --cortex-light-stroke: #cfd6df;
+  --cortex-light-stroke-soft: #dce2e9;
+  --cortex-light-ink: #1a2029;
+  --cortex-light-shadow: 0 4px 17px rgba(26,38,57,.055), 0 1px 3px rgba(26,38,57,.035);
+  --theme-bg: #f4f6f9 !important;
+  --theme-bg-secondary: #ffffff !important;
+  --theme-surface: #ffffff !important;
+  --theme-surface-solid: #ffffff !important;
+  --theme-surface-strong: #ffffff !important;
+  --theme-surface-soft: #fff5eb !important;
+  --theme-glass: #ffffff !important;
+  --theme-glass-strong: #ffffff !important;
+  --theme-border: #cfd6df !important;
+  --theme-border-strong: #b4bfcd !important;
+  --theme-text: #1a2029 !important;
+  --theme-text-soft: #46515f !important;
+  --theme-text-muted: #626e7c !important;
+  --theme-shadow: var(--cortex-light-shadow) !important;
+  --theme-panel-shadow: var(--cortex-light-shadow) !important;
+  --theme-hero: linear-gradient(145deg, #ffffff 0%, #fff8f1 100%) !important;
+  --theme-backdrop: none !important;
+  --bg: #f4f6f9 !important;
+  --sidebar: #fff !important;
+  --panel: #fff !important;
+  --border: #cfd6df !important;
+  --text: #1a2029 !important;
+  --muted: #626e7c !important;
+  background: var(--cortex-light-canvas) !important;
+}
+html[data-theme="light-white"] body {
+  background: var(--cortex-light-canvas) !important;
+  background-image: none !important;
+  color: var(--cortex-light-ink) !important;
+}
+html[data-theme="light-white"] :is(
+  .cortex-app-shell,.app-shell,.app-layout,.app-container,.app-main,
+  .shell-workspace,.shell-frame,.shell-frame-active,.shell-frame-standby,
+  .main-area,.main-container,.main-content,.content-area,.content-wrapper,
+  .page,.page-content,.page-wrapper,.workspace,.workspace-main,
+  .dashboard-page,.dashboard-content,.finance-page,.settings-page,
+  .questions-page,.lessons-page,.evolution-page,.practice-page,
+  .cases-page,.flashcards-page,.ranking-page,.schedule-page
+) {
+  background-color: var(--cortex-light-canvas) !important;
+  background-image: none !important;
+  color: var(--cortex-light-ink) !important;
+}
+/* Sidebar, cabeçalho, separadores e barra lateral mobile */
+html[data-theme="light-white"] :is(
+  .sidebar,.mobile-sidebar,.cortex-mobile-sidebar-panel,.app-sidebar,
+  .sidebar-menu,.sidebar-user,.sidebar-logo,.header,.topbar,.toolbar,
+  .app-header,.nav-bar,.navigation,.account-toolbar
+) {
+  background-color: #fff !important;
+  background-image: none !important;
+  border-color: #d5dce5 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-theme="light-white"] :is(.sidebar,.mobile-sidebar,.cortex-mobile-sidebar-panel) {
+  border-right: 1px solid #d5dce5 !important;
+  box-shadow: 3px 0 18px rgba(30,41,59,.035) !important;
+}
+html[data-theme="light-white"] :is(.header,.topbar,.app-header) {
+  border-bottom: 1px solid #d5dce5 !important;
+  box-shadow: 0 2px 12px rgba(30,41,59,.035) !important;
+}
+/* Bordas reais com espessura e raio definidos, sem glow artificial. */
+html[data-theme="light-white"] :is(
+  .card,.panel,.box,.widget,.premium-card,.premium-panel,.glass-card,
+  .card-surface,.content-card,.content-box,.content-panel,.section-card,
+  .section-box,.section-panel,.info-card,.stat-card,.stats-card,.summary-card,
+  .metric-card,.metric-panel,.widget-card,.widget-panel,.dashboard-card,
+  .dashboard-panel,.dashboard-widget,.overview-card,.quick-links-card,
+  .settings-card,.theme-box,.ranking-card,.history-card,.finance-card,
+  .income-card,.expense-card,.balance-card,.chart-panel,.history-panel,
+  .debt-panel,.question-card,.questions-card,.session-card,.flashcard,
+  .flashcard-card,.case-card,.caso-card,.result-card,.result-panel,
+  .mode-card,.tip-card,.hub-tip,.lab-choice-card,.lesson-card,.course-card,
+  .task-card,.schedule-card,.schedule-section,.pharma-section,
+  .drug-card,.receptor-card,.catalog-search-bar,.filter-panel,.filters-panel,
+  .controls-panel,.controls-card,.details-panel,.details-card,
+  .modal-card,.modal-content,.dialog-card,.dialog-content,.popover-content,
+  .table-container,.table-wrapper,.list-container,.study-timer-panel
+) {
+  background-color: #fff !important;
+  background-image: none !important;
+  border: 1px solid var(--cortex-light-stroke) !important;
+  border-radius: 19px !important;
+  box-shadow: var(--cortex-light-shadow) !important;
+  color: var(--cortex-light-ink) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html[data-theme="light-white"] :is(
+  .dashboard-hero,.dashboard-hero-premium,.hero,.hero-card,.hero-panel,
+  .page-hero,.welcome-card,.intro-card,.finance-hero,.schedule-intro,
+  .academic-hero,.lab-hub-hero,.settings-heading
+) {
+  border: 1px solid #d8dbe2 !important;
+  border-radius: 23px !important;
+  background: var(--theme-hero) !important;
+  box-shadow: var(--cortex-light-shadow) !important;
+}
+html[data-theme="light-white"] :is(
+  .filter-bar,.filter-box,.filters,.toolbar,.table-wrapper,.table-container,
+  .history-panel,.list-container
+) {
+  border-radius: 16px !important;
+}
+html[data-theme="light-white"] :is(
+  .menu-item,.sidebar-link,.nav-item,.tab-button,.filter-chip
+) {
+  border-radius: 12px !important;
+}
+html[data-theme="light-white"] :is(
+  .menu-item.active,.sidebar-link.active,.nav-item.active,
+  .tab-button.active,.filter-chip.active,.mode-button.active
+) {
+  color: #a64009 !important;
+  background: #fff0e2 !important;
+  border-color: #e3bc9c !important;
+  box-shadow: inset 0 0 0 1px rgba(197,83,11,.06) !important;
+}
+@media (hover:hover) {
+  html[data-theme="light-white"] :is(
+    .card,.panel,.premium-card,.metric-card,.summary-card,.question-card,
+    .flashcard-card,.case-card,.caso-card,.finance-card,.settings-card,
+    .lab-choice-card,.course-card
+  ):hover {
+    border-color: #b9c3d0 !important;
+    box-shadow: 0 8px 22px rgba(30,41,59,.09), 0 1px 3px rgba(30,41,59,.035) !important;
+  }
+}
+html[data-theme="light-white"] :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,select,.form-control,.input,.search-input,.search-field,.search-box
+) {
+  border: 1px solid #c8d1dc !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  box-shadow: inset 0 1px 1px rgba(15,23,42,.02) !important;
+  color: #1a2029 !important;
+}
+html[data-theme="light-white"] :is(
+  .btn-secondary,.button-secondary,.secondary-button,.ghost-button
+) {
+  border: 1px solid #ccd4de !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  color: #92400e !important;
+}
+html[data-theme="light-white"] :is(
+  .btn-primary,.button-primary,.primary-button,.main-action,.submit-button
+) {
+  border-radius: 12px !important;
+}
+html[data-theme="light-white"] :is(
+  .theme-box,.cortex-theme-choice,.settings-card
+) { border-color: #d1d9e3 !important; }
+html[data-theme="light-white"] .cortex-theme-grid .cortex-theme-choice {
+  border-radius: 16px !important;
+  min-height: 92px;
+}
+html[data-theme="light-white"] :is(
+  .theme-choice-description,.chart-legend,.finance-footer,.metric-label,.muted,
+  .subtitle,.helper-text,.chart-summary
+) { color: #606b78 !important; }
+html[data-theme="light-white"] :is(h1,h2,h3,h4,h5,h6) {
+  color: #1a2029 !important;
+  text-shadow: none !important;
+}
+/* Logo do Córtex: SVG existente é branco; o preto é aplicado só no tema claro. */
+html[data-theme="light-white"] :is(
+  .sidebar-logo .cortex-global-logo-image,
+  .cortex-mobile-sidebar-header .cortex-mobile-brand-image,
+  .cortex-mobile-brand-image,
+  .sidebar-logo .logo-box > img
+) {
+  filter: brightness(0) !important;
+  -webkit-filter: brightness(0) !important;
+  opacity: 1 !important;
+}
+html[data-theme="light-white"] :is(
+  .sidebar-logo .cortex-brain-logo,
+  .sidebar .cortex-brain-logo,
+  .cortex-mobile-sidebar-panel .cortex-brain-logo,
+  .cortex-brain-logo
+),
+html[data-theme="light-white"] :is(
+  .sidebar-logo .cortex-brain-logo *,
+  .sidebar .cortex-brain-logo *,
+  .cortex-mobile-sidebar-panel .cortex-brain-logo *,
+  .cortex-brain-logo *
+) {
+  stroke: #121820 !important;
+  filter: none !important;
+}
+html[data-theme="light-white"] .logo-box.cortex-logo .cortex-logo-letter {
+  color: #121820 !important;
+  text-shadow: none !important;
+}
+/* Monitores e dados técnicos não são invertidos por filtros genéricos. */
+
+/* FINANÇAS: plotagem clara com tipografia fina, grid e contraste coerentes.
+   Corrige o fundo cinza criado por rgba(5,5,5,.46) sobre página branca.
+   Corrige os traços herdados de .finance-view svg, que engrossavam os números. */
+html[data-theme="light-white"] body.finance-view {
+  --finance-card: #fff;
+  --finance-border: #cfd6df;
+  --finance-accent: #c6530b;
+  --finance-accent-2: #ce5b11;
+}
+html[data-theme="light-white"] .finance-view :is(
+  .summary-card,.chart-panel,.finance-main-grid > .panel,.debt-panel,.history-panel
+) {
+  border: 1px solid #ccd5df !important;
+  background: #fff !important;
+  border-radius: 22px !important;
+  box-shadow: 0 6px 22px rgba(24,39,57,.065) !important;
+}
+html[data-theme="light-white"] .finance-view .chart-panel {
+  padding: clamp(16px,2vw,24px) !important;
+}
+html[data-theme="light-white"] .finance-view .chart-heading h2 {
+  color: #18212c !important;
+  font-size: clamp(19px,2vw,23px) !important;
+  font-weight: 600 !important;
+  letter-spacing: -.035em !important;
+  line-height: 1.25 !important;
+}
+html[data-theme="light-white"] .finance-view .chart-heading p {
+  color: #6a7380 !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}
+html[data-theme="light-white"] .finance-view .chart-summary {
+  border: 1px solid #e4d9ce !important;
+  border-radius: 999px !important;
+  background: #fff8f1 !important;
+  color: #756258 !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart {
+  background: #f8fafc !important;
+  background-image: none !important;
+  color: #586473 !important;
+  border: 1px solid #d9e1e9 !important;
+  border-radius: 17px !important;
+  box-shadow: inset 0 1px 3px rgba(30,41,59,.035) !important;
+  scrollbar-color: #d2d8df #f8fafc !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart::-webkit-scrollbar-track {
+  background: #f8fafc !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart::-webkit-scrollbar-thumb {
+  background: #bdc8d3 !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg {
+  background: transparent !important;
+  stroke: none !important;
+  fill: none !important;
+}
+/* Crítico: stroke herdado engrossa os eixos e textos dos SVG. */
+html[data-theme="light-white"] .finance-view .finance-chart-svg :is(text,tspan) {
+  stroke: none !important;
+  stroke-width: 0 !important;
+  paint-order: normal !important;
+  fill: #586575 !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg .chart-grid {
+  stroke: #dae1e9 !important;
+  stroke-width: 1 !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg .chart-zero {
+  stroke: #aeb8c4 !important;
+  stroke-width: 1.3 !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg .chart-income-bar {
+  fill: #22b68d !important;
+  stroke: none !important;
+  opacity: .93 !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg .chart-expense-bar {
+  fill: #e26b84 !important;
+  stroke: none !important;
+  opacity: .91 !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg .chart-balance-area {
+  fill: rgba(198,83,11,.10) !important;
+  stroke: none !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg .chart-balance-line {
+  fill: none !important;
+  stroke: #c6530b !important;
+  stroke-width: 2.4 !important;
+}
+html[data-theme="light-white"] .finance-view .finance-chart-svg .chart-balance-point {
+  fill: #c6530b !important;
+  stroke: #fff !important;
+  stroke-width: 2 !important;
+}
+html[data-theme="light-white"] .finance-view .chart-legend {
+  color: #626e7c !important;
+  font-weight: 400 !important;
+  font-size: 10.5px !important;
+}
+html[data-theme="light-white"] .finance-view .chart-legend :is(span,small) {
+  font-weight: 400 !important;
+}
+html[data-theme="light-white"] .finance-view .chart-empty {
+  color: #697787 !important;
+  background: #f8fafc !important;
+  font-weight: 400 !important;
+}
+@media(max-width:900px) {
+  html[data-theme="light-white"] :is(.card,.panel,.settings-card,.chart-panel) {
+    box-shadow: 0 2px 10px rgba(30,41,59,.045) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}

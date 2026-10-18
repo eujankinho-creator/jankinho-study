@@ -2346,3 +2346,19 @@ html[data-theme="blue-black"]
 .finance-view :is(.chart-heading h2,.history-header h2,.summary-card h3,.summary-top span,.chart-summary,.chart-legend,.history-actions,.finance-footer) { font-weight: 500 !important; }
 .finance-view :is(.finance-chart-svg text,.finance-chart-svg tspan,.chart-axis-label,.chart-value-label,.chart-month-label) { font-weight: 400 !important; }
 .finance-view :is(.summary-value,.summary-amount,.stat-value,.finance-value) { font-weight: 600 !important; }
+
+
+/* SVG de gráficos não é ícone: remove o stroke genérico do container
+   .finance-view svg para evitar contorno/negrito artificial nos eixos,
+   nos labels e nas barras em qualquer tema. */
+.finance-view svg.finance-chart-svg { stroke: none; fill: none; }
+.finance-view .finance-chart-svg :is(text,tspan) {
+  stroke: none !important;
+  stroke-width: 0 !important;
+  paint-order: normal !important;
+  font-weight: 400 !important;
+  text-shadow: none !important;
+}
+.finance-view .finance-chart-svg :is(.chart-income-bar,.chart-expense-bar) {
+  stroke: none !important;
+}
