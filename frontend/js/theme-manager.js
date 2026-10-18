@@ -13,6 +13,7 @@
   ]);
   const listeners = new Set();
   let changeVersion = 0;
+  let pendingAccountWrite = Promise.resolve();
 
   function normalizeTheme(value) {
     const raw = String(value || "").trim();
@@ -191,6 +192,12 @@
       );
     },
 
+    getRevision: function () { return changeVersion; },
+
+    applyFromAccount: function (theme) {
+      return applyTheme(theme, { broadcast: true, notify: true });
+    },
+
     setTheme: function (theme) {
       const normalized = applyTheme(theme, {
         broadcast: true,
@@ -198,7 +205,9 @@
       });
 
       changeVersion += 1;
-      void persistAccountTheme(normalized);
+      pendingAccountWrite = pendingAccountWrite
+        .catch(function () {})
+        .then(function () { return persistAccountTheme(normalized); });
 
       return normalized;
     },

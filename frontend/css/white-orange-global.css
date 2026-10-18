@@ -1,437 +1,295 @@
-/* Camada final exclusiva ao White Orange, após TODOS os estilos de página. */
-/* =========================================================
-   CORTEX WHITE ORANGE — LIGHT CASCADE (2026-10-16)
-   Exclusivo ao tema claro. O antigo dark-orange segue intacto.
-   Vinculado a theme-final para carregar em todas as rotas/iframes
-   antes da execução do JavaScript.
-========================================================= */
+/* CÓRTEX — WHITE ORANGE (reconstruído em 2026-10-18)
+   Contraparte clara do Black Orange. Carregar após theme-final e theme-runtime.
+   Sem inversão por filter: preserva conteúdo científico, imagens e vídeo.
+   NÃO afeta os demais temas. */
+
 html[data-theme="light-white"] {
   color-scheme: light !important;
-  background: #fff !important;
-  --theme-bg: #fff !important;
-  --theme-bg-secondary: #fff !important;
-  --theme-surface: #fff !important;
-  --theme-surface-solid: #fff !important;
-  --theme-surface-strong: #fff !important;
-  --theme-surface-soft: #fff7f0 !important;
-  --theme-glass: #fff !important;
-  --theme-glass-strong: #fff !important;
-  --theme-border: #e9e2dd !important;
-  --theme-border-strong: #f4b68a !important;
-  --theme-text: #202020 !important;
-  --theme-text-soft: #4a4440 !important;
-  --theme-text-muted: #716963 !important;
-  --theme-accent: #dc6010 !important;
-  --theme-accent-2: #e76b1b !important;
-  --theme-accent-deep: #aa4306 !important;
-  --theme-accent-rgb: 220,96,16 !important;
-  --theme-accent-2-rgb: 231,107,27 !important;
-  --theme-accent-soft: rgba(220,96,16,.075) !important;
-  --theme-accent-medium: rgba(220,96,16,.12) !important;
-  --theme-accent-strong: rgba(220,96,16,.23) !important;
-  --theme-gradient: linear-gradient(135deg,#dc6010,#f18b3b) !important;
-  --theme-gradient-soft: linear-gradient(135deg,rgba(220,96,16,.10),rgba(241,139,59,.035)) !important;
-  --theme-hero: linear-gradient(135deg,#fff,#fff9f4) !important;
-  --theme-panel-shadow: 0 8px 28px rgba(55,40,28,.045) !important;
+  --theme-bg: #ffffff !important;
+  --theme-bg-secondary: #ffffff !important;
+  --theme-surface: #ffffff !important;
+  --theme-surface-solid: #ffffff !important;
+  --theme-surface-strong: #fffdfb !important;
+  --theme-surface-soft: #fff5ec !important;
+  --theme-glass: rgba(255,255,255,.97) !important;
+  --theme-glass-strong: rgba(255,255,255,.99) !important;
+  --theme-border: #e8e1da !important;
+  --theme-border-strong: #e8b68e !important;
+  --theme-text: #1c1917 !important;
+  --theme-text-soft: #443c36 !important;
+  --theme-text-muted: #665c54 !important;
+  --theme-accent: #c6530b !important;
+  --theme-accent-2: #db691c !important;
+  --theme-accent-deep: #9c3904 !important;
+  --theme-accent-rgb: 198,83,11 !important;
+  --theme-accent-2-rgb: 219,105,28 !important;
+  --theme-accent-soft: rgba(198,83,11,.09) !important;
+  --theme-accent-medium: rgba(198,83,11,.14) !important;
+  --theme-accent-strong: rgba(198,83,11,.26) !important;
+  --theme-gradient: linear-gradient(135deg,#b94604,#d86411) !important;
+  --theme-gradient-soft: linear-gradient(135deg,rgba(198,83,11,.11),rgba(219,105,28,.03)) !important;
+  --theme-hero: linear-gradient(135deg,#fff,#fff6ee) !important;
+  --theme-shadow: 0 12px 32px rgba(64,42,22,.07) !important;
+  --theme-panel-shadow: 0 12px 32px rgba(64,42,22,.07) !important;
+  --theme-glow: 0 0 0 1px rgba(198,83,11,.08) !important;
   --theme-backdrop: none !important;
   --theme-button-text: #fff !important;
+  --theme-chip-bg: #fff6ef !important;
+  --theme-chip-border: #ecd9ca !important;
+  --theme-input-bg: #fff !important;
+  --theme-hover-bg: #fff2e6 !important;
+  --theme-hover-border: #d99967 !important;
   --bg: #fff !important;
   --sidebar: #fff !important;
   --panel: #fff !important;
-  --border: #e9e2dd !important;
-  --text: #202020 !important;
-  --muted: #716963 !important;
-  --orange: #dc6010 !important;
-  --orange-light: #e76b1b !important;
-  --accent: #dc6010 !important;
-  --accent-2: #e76b1b !important;
-  --accent-rgb: 220,96,16 !important;
+  --border: #e8e1da !important;
+  --text: #1c1917 !important;
+  --muted: #665c54 !important;
+  --orange: #c6530b !important;
+  --orange-light: #db691c !important;
+  --accent: #c6530b !important;
+  --accent-2: #db691c !important;
+  --accent-rgb: 198,83,11 !important;
+  --primary: #c6530b !important;
+  --primary-color: #c6530b !important;
+  --highlight: #c6530b !important;
+  background: #fff !important;
 }
+
 html[data-theme="light-white"] body {
+  color: var(--theme-text) !important;
   background: #fff !important;
   background-image: none !important;
-  color: #202020 !important;
 }
+
+/* Superfícies principais (inclusive shell/iframes): nada de fundos pretos herdados. */
 html[data-theme="light-white"] :is(
+  .cortex-app-shell,.app-shell,.app-layout,.app-container,.app-main,
   .shell-workspace,.shell-frame,.shell-frame-active,.shell-frame-standby,
-  .cortex-app-shell,.app-shell,.app-layout,.app-container,.app-main,.main-content,
-  .main-container,.main-area,.page,.page-content,.page-wrapper,.content-area,
-  .content-wrapper,.workspace,.workspace-main,.dashboard-page,.dashboard-content,
-  .finance-page,.settings-page,.questions-page,.lessons-page,.evolution-page,
-  .practice-page,.cases-page,.flashcards-page,.ranking-page,.schedule-page
+  .main-area,.main-container,.main-content,.content-area,.content-wrapper,
+  .page,.page-content,.page-wrapper,.workspace,.workspace-main,
+  .dashboard-page,.dashboard-content,.finance-page,.settings-page,
+  .questions-page,.lessons-page,.evolution-page,.practice-page,
+  .cases-page,.flashcards-page,.ranking-page,.schedule-page
 ) {
   background: #fff !important;
   background-image: none !important;
-  color: #202020 !important;
+  color: var(--theme-text) !important;
 }
+
 html[data-theme="light-white"] :is(
-  .sidebar,.header,.topbar,.app-header,.app-sidebar,.cortex-mobile-sidebar-panel,
-  .mobile-sidebar,.cortex-mobile-sidebar,.cortex-mobile-sidebar-overlay,
-  .sidebar-user,.sidebar-menu,.sidebar-logo,.cortex-nav,.menu-group
+  .sidebar,.mobile-sidebar,.cortex-mobile-sidebar-panel,.app-sidebar,
+  .sidebar-menu,.sidebar-user,.sidebar-logo,.header,.topbar,.toolbar,
+  .app-header,.nav-bar,.navigation,.account-toolbar
 ) {
   background: #fff !important;
   background-image: none !important;
-  border-color: #e9e2dd !important;
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border) !important;
   box-shadow: none !important;
 }
+
+/* Cartões comuns: não recolorir o conteúdo interno de monitores científicos. */
 html[data-theme="light-white"] :is(
-  .panel,.card,.card-surface,.premium-card,.glass-card,.content-card,.content-box,
-  .content-panel,.section-card,.section-box,.section-panel,.info-card,.stat-card,
-  .stats-card,.summary-card,.metric-card,.metric-panel,.widget-card,.widget-panel,
-  .settings-card,.theme-box,.ranking-card,.history-card,.finance-card,
-  .income-card,.expense-card,.balance-card,.chart-panel,.history-panel,.debt-panel,
-  .dashboard-card,.dashboard-panel,.dashboard-hero,.dashboard-hero-premium,
-  .dashboard-widget,.dashboard-section,.overview-card,.quick-links-card,
-  .page-hero,.hero,.hero-card,.hero-panel,.welcome-card,.intro-card,
-  .finance-hero,.finance-summary,.finance-analytics-grid,
-  .filters,.filter-bar,.filters-panel,.filter-panel,.filter-box,
-  .controls-panel,.controls-card,.details-panel,.details-card,
-  .question-card,.questions-card,.session-card,.flashcard-card,
-  .case-card,.caso-card,.result-card,.result-panel,.loading-card,.loading-state,
-  .empty-state,.empty-ranking,.mode-card,.tip-card,.hub-tip,.lab-choice-card,
-  .lesson-card,.course-card,.task-card,.schedule-card,.schedule-section,
+  .card,.panel,.box,.widget,.premium-card,.premium-panel,.glass-card,
+  .card-surface,.content-card,.content-box,.content-panel,.section-card,
+  .section-box,.section-panel,.info-card,.stat-card,.stats-card,.summary-card,
+  .metric-card,.metric-panel,.widget-card,.widget-panel,.dashboard-card,
+  .dashboard-panel,.dashboard-widget,.dashboard-section,.overview-card,
+  .quick-links-card,.settings-card,.theme-box,.ranking-card,.history-card,
+  .finance-card,.income-card,.expense-card,.balance-card,.chart-panel,
+  .history-panel,.debt-panel,.question-card,.questions-card,.session-card,
+  .flashcard,.flashcard-card,.case-card,.caso-card,.result-card,.result-panel,
+  .loading-card,.loading-state,.empty-state,.empty-ranking,.mode-card,.tip-card,
+  .hub-tip,.lab-choice-card,.lesson-card,.course-card,.task-card,.schedule-card,
+  .schedule-section,.schedule-builder,.schedule-builder-compact,
+  .schedule-main-progress,.schedule-today-score,.schedule-countdown,
   .pharma-section,.drug-card,.receptor-card,.catalog-search-bar,
-  .schedule-builder,.schedule-builder-compact,.schedule-main-progress,
-  .schedule-today-score,.schedule-countdown,.study-timer-panel,
-  .modal-card,.modal-content,.dialog-card,.dialog-content,.popover-content,
-  .table-container,.table-wrapper,.list-container,.cortex-theme-choice
+  .filter-panel,.filters-panel,.filters,.filter-box,.controls-panel,
+  .controls-card,.details-panel,.details-card,.modal-card,.modal-content,
+  .dialog-card,.dialog-content,.popover-content,.table-container,.table-wrapper,
+  .list-container,.study-timer-panel,.cortex-theme-choice
 ) {
+  color: var(--theme-text) !important;
   background: #fff !important;
   background-image: none !important;
-  border-color: #e9e2dd !important;
-  color: #202020 !important;
-  box-shadow: 0 5px 22px rgba(45,34,26,.05) !important;
+  border-color: var(--theme-border) !important;
+  box-shadow: var(--theme-panel-shadow) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 html[data-theme="light-white"] :is(
-  .hero,.dashboard-hero,.dashboard-hero-premium,.page-hero,.hero-card,.hero-panel,
-  .welcome-card,.intro-card,.schedule-intro,.lab-hub-hero,.finance-hero
+  .dashboard-hero,.dashboard-hero-premium,.hero,.hero-card,.hero-panel,
+  .page-hero,.welcome-card,.intro-card,.finance-hero,.schedule-intro,
+  .academic-hero,.lab-hub-hero,.settings-heading
 ) {
-  background: linear-gradient(135deg,#fff,#fffaf5) !important;
+  background: var(--theme-hero) !important;
+  border-color: var(--theme-border) !important;
+  color: var(--theme-text) !important;
 }
+
+/* Tipografia: textos pretos, detalhes em laranja, secundários legíveis. */
 html[data-theme="light-white"] :is(
-  h1,h2,h3,h4,h5,h6,.header-title,.card-title,.hero-title,
-  .sidebar-logo strong,.sidebar-logo,.metric-value,.summary-value,
-  .chart-heading h2,.history-header h2,.settings-card-content h2
+  h1,h2,h3,h4,h5,h6,.header-title,.hero-title,.card-title,.section-title,
+  .sidebar-logo strong,.sidebar-user strong,.metric-value,.summary-value,
+  .stat-value,.result-value,.theme-current-name,.account-name,.user-name strong,
+  .panel-header strong,.settings-heading h1,.question-text
 ) {
-  color: #202020 !important;
+  color: #1c1917 !important;
   text-shadow: none !important;
 }
 html[data-theme="light-white"] :is(
-  .muted,.hint,.caption,.subtitle,.description,.menu-title,.sidebar-logo span,
-  .sidebar-user .user-info span,.user-info span,.chart-legend,.chart-summary,
-  .finance-footer,.theme-choice-description,.theme-current-label
-) { color: #716963 !important; }
+  p,.description,.subtitle,.caption,.hint,.helper-text,.meta,.muted,
+  .panel-subtitle,.card-description,.theme-choice-description,
+  .theme-current-label,.sidebar-logo span,.sidebar-user small,
+  .user-info span,.chart-legend,.chart-summary,.finance-footer,
+  .metric-label,.metric-card small,.settings-heading p
+) {
+  color: #5e554e !important;
+  text-shadow: none !important;
+}
 html[data-theme="light-white"] :is(
-  .menu-item,.nav-item,.sidebar-link,.menu-item span,.sidebar-user .user-info strong
-) { color: #534e49 !important; text-shadow: none !important; }
-html[data-theme="light-white"] :is(.menu-item,.nav-item,.sidebar-link):hover {
-  background: #fff4e9 !important; color: #9e430b !important;
+  .menu-item,.nav-item,.sidebar-link,.sidebar-item,.tab-button,.filter-chip,
+  .menu-item span,.sidebar-user .user-info strong
+) {
+  color: #27221e !important;
+  text-shadow: none !important;
+}
+html[data-theme="light-white"] :is(
+  .menu-item,.nav-item,.sidebar-link,.tab-button,.filter-chip
+):hover {
+  color: #a83e05 !important;
+  background: #fff2e6 !important;
+  border-color: #edd2bf !important;
 }
 html[data-theme="light-white"] :is(
   .menu-item.active,.nav-item.active,.sidebar-link.active,.tab.active,
   .tab-button.active,.filter-chip.active,.mode-button.active
 ) {
-  background: #fff0e1 !important;
-  background-image: none !important;
-  color: #ab4809 !important;
-  border-color: #f9d2b3 !important;
-  box-shadow: none !important;
+  color: #a83e05 !important;
+  background: #ffefe2 !important;
+  border-color: #efc6a6 !important;
 }
 html[data-theme="light-white"] :is(
-  .btn-primary,.button-primary,.primary-button,.main-action,.submit-button,
-  .action-button.primary,button.primary,button.cta,button.is-primary
+  a:not([class]),.text-link,.section-eyebrow,.hero-eyebrow,
+  .kicker,.accent-text,.highlight-text,.stat-icon,.metric-icon
 ) {
-  background: linear-gradient(135deg,#dc6010,#ed7e2a) !important;
-  border-color: #dc6010 !important;
+  color: #a84206 !important;
+}
+
+/* Botões: contraste branco/laranja, secundários contornados. */
+html[data-theme="light-white"] :is(
+  .btn-primary,.button-primary,.primary-button,button.primary,
+  .main-action,.submit-button,.action-primary
+) {
+  background: var(--theme-gradient) !important;
   color: #fff !important;
-  box-shadow: 0 6px 16px rgba(220,96,16,.13) !important;
+  border-color: #ae4307 !important;
+  box-shadow: 0 6px 18px rgba(185,70,4,.13) !important;
 }
 html[data-theme="light-white"] :is(
-  .btn-secondary,.button-secondary,.secondary-button,.ghost-button
+  .btn-secondary,.button-secondary,.secondary-button,.ghost-button,.logout-button
 ) {
   background: #fff !important;
-  color: #4a4038 !important;
-  border-color: #e7ddd5 !important;
-  box-shadow: none !important;
+  color: #a84206 !important;
+  border-color: #edd5c4 !important;
 }
 html[data-theme="light-white"] :is(
-  input,select,textarea,.input,.form-control,.search-input,.search-field,.search-box
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,select,.form-control,.input,.search-input,.search-field,.search-box
 ) {
   background: #fff !important;
   background-image: none !important;
-  color: #202020 !important;
-  border-color: #e3dad3 !important;
-  box-shadow: none !important;
+  color: #1c1917 !important;
+  border-color: #dcd2c9 !important;
 }
 html[data-theme="light-white"] :is(input,textarea)::placeholder {
-  color: #81766e !important;
+  color: #786d64 !important;
   opacity: 1;
 }
-html[data-theme="light-white"] :is(input,textarea,select,button,a):focus-visible {
-  outline: 2px solid #dc6010 !important;
-  outline-offset: 2px;
+html[data-theme="light-white"] :is(input,select,textarea,button,a):focus-visible {
+  outline: 2px solid #c6530b !important;
+  outline-offset: 2px !important;
 }
 html[data-theme="light-white"] :is(
-  .badge,.chip,.tag,.pill,.badge-orange,.orange-badge,.section-eyebrow
+  .badge,.chip,.tag,.pill,.orange-badge,.section-label,.panel-kicker
 ) {
-  background: #fff0e1 !important;
-  color: #a7470a !important;
-  border-color: #f3c5a2 !important;
+  color: #a84206 !important;
+  background-color: #fff3e7 !important;
+  border-color: #efc6a6 !important;
+}
+html[data-theme="light-white"] :is(
+  table,.table,.table-wrapper,.table-responsive
+) {
+  background-color: #fff !important;
+  border-color: var(--theme-border) !important;
+}
+html[data-theme="light-white"] :is(th,thead) {
+  color: #443b34 !important;
+  background: #fff4ea !important;
+  border-color: var(--theme-border) !important;
+}
+html[data-theme="light-white"] :is(td,tr) {
+  color: var(--theme-text) !important;
+  border-color: var(--theme-border) !important;
 }
 html[data-theme="light-white"] :is(
   .finance-chart-svg text,.finance-chart-svg tspan,.chart-axis-label,.chart-value-label
-) { fill: #655c55 !important; font-weight: 400 !important; }
-html[data-theme="light-white"] .finance-chart-svg .chart-grid {
-  stroke: #ece6e1 !important;
-}
-html[data-theme="light-white"] .finance-chart-svg .chart-zero {
-  stroke: #d1c6bd !important;
-}
-html[data-theme="light-white"] .finance-chart-svg .chart-balance-line {
-  stroke: #dc6010 !important;
-}
-html[data-theme="light-white"] .finance-chart-svg .chart-balance-area {
-  fill: rgba(220,96,16,.07) !important;
-}
-html[data-theme="light-white"] .finance-chart-svg .chart-balance-point {
-  stroke: #fff !important;
-}
-html[data-theme="light-white"] :is(
-  table,thead,tbody,tr,th,td,.table,.table-responsive
-) {
-  border-color: #e9e2dd !important;
-}
-html[data-theme="light-white"] :is(th,thead) {
-  background: #fff8f2 !important;
-  color: #433b36 !important;
-}
-html[data-theme="light-white"] :is(.sidebar-logo svg,.cortex-brain-logo,.cortex-brain-logo *) {
-  stroke: #dc6010 !important;
-}
+) { fill: #514940 !important; }
+html[data-theme="light-white"] .finance-chart-svg .chart-grid { stroke: #ebe5df !important; }
+html[data-theme="light-white"] .finance-chart-svg .chart-balance-line { stroke: var(--theme-accent) !important; }
+html[data-theme="light-white"] .finance-chart-svg .chart-balance-area { fill: rgba(198,83,11,.09) !important; }
 html[data-theme="light-white"] :is(
   .cortex-global-logo-image,.cortex-mobile-brand-image,.cortex-brain-logo
 ) { filter: none !important; }
-html[data-theme] .cortex-theme-choice[data-theme-choice="light-white"] {
-  --choice-color: #ed7e2a;
-}
-html[data-theme="light-white"] .cortex-theme-choice[data-theme-choice="light-white"].active {
-  border-color: #dc6010 !important;
-  box-shadow: 0 0 0 1px rgba(220,96,16,.15) !important;
-}
-/* Experimentos visuais de alto contraste continuam escuros quando
-   essa é a representação científica correta (CT, ECG, 3D, vídeo). */
-html[data-theme="light-white"] :is(
-  canvas,.ct-canvas,.radiology-viewport,.ecg-monitor,.global-lesson-video,video
-) { color-scheme: dark; }
-@media (max-width:900px) {
-  html[data-theme="light-white"] :is(
-    .header,.sidebar,.settings-card,.theme-box,.finance-card,.lab-choice-card
-  ) {
-    backdrop-filter:none !important;
-    -webkit-backdrop-filter:none !important;
-  }
-}
 
-/* Autenticação: contraste claro sem interferir nos fluxos do formulário. */
-html[data-theme="light-white"] :is(
- .auth-page,.auth-login-premium,.auth-cinema-stage,.auth-shell,
- .auth-form-side,.auth-form-wrap,.auth-showcase,.feature-item
-) {
-  background:#fff !important;
-  background-image:none !important;
-  color:#202020 !important;
-  border-color:#e9e2dd !important;
-}
-html[data-theme="light-white"] :is(
- .auth-heading h1,.auth-heading h2,.showcase-content h1,.auth-brand,.brand-copy strong
-) { color:#202020 !important; }
-html[data-theme="light-white"] :is(
- .auth-heading p,.showcase-content p,.showcase-kicker,.feature-item p,.brand-copy span
-) { color:#716963 !important; }
-html[data-theme="light-white"] :is(.auth-orb,.auth-noise,.auth-cinema-stage,.cinema-grid) {
-  opacity:.08 !important;
-}
-html[data-theme="light-white"] .shell-workspace,
-html[data-theme="light-white"] .shell-frame {
-  background-color:#fff !important;
-  background-image:none !important;
-}
-/* Em dispositivos móveis, remove blur caro das superfícies brancas. */
-html[data-theme="light-white"] :is(.header,.sidebar,.panel,.card,.settings-card) {
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-}
-
-
-/* WHITE ORANGE INVERTED V5 START */
-/* A preview itself always depicts White Orange, even in a dark current theme. */
-html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"],
-html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"]:hover,
-html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"]:focus-visible,
-html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"].active {
-  --choice-color:#ef741d !important;
-  background:#fff !important;
-  background-image:linear-gradient(145deg,#fff 0%,#fff9f4 100%) !important;
-  color:#161616 !important;
-  border:1px solid #e6d8cc !important;
-  box-shadow:0 6px 20px rgba(0,0,0,.12) !important;
-}
-html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"].active {
-  border-color:#eb721b !important;
-  box-shadow:0 0 0 2px rgba(230,98,20,.23),0 6px 20px rgba(0,0,0,.08) !important;
-}
-html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"]::before {
-  background:#ef741d !important;
-  box-shadow:none !important;
+/* A opção clara é branca mesmo enquanto o tema ativo é escuro. */
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"] {
+  --choice-color: #c6530b !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  background: linear-gradient(145deg,#fff,#fff6ed) !important;
+  color: #1c1917 !important;
+  border: 1px solid #e5d7cc !important;
+  box-shadow: 0 5px 18px rgba(25,19,13,.08) !important;
 }
 html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"] strong {
-  color:#171717 !important;
-  font-size:14px !important;
-  text-shadow:none !important;
+  color: #1c1917 !important;
+  text-shadow: none !important;
 }
 html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"] small {
-  color:#51453b !important;
-  font-size:12px !important;
-  line-height:1.5 !important;
-  text-shadow:none !important;
+  color: #5e554e !important;
+  text-shadow: none !important;
+}
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"]::before {
+  background: #ce5d13 !important;
+}
+html[data-theme] .cortex-theme-grid .cortex-theme-choice[data-theme-choice="light-white"].active {
+  border-color: #c6530b !important;
+  box-shadow: 0 0 0 2px rgba(198,83,11,.24) !important;
+}
+html[data-theme="light-white"] .cortex-theme-choice.active {
+  border-color: var(--theme-accent) !important;
+  background: #fff2e6 !important;
+  box-shadow: 0 0 0 2px rgba(198,83,11,.14) !important;
 }
 
-/* Whole interface is white, black and orange when White Orange is selected. */
-html[data-theme="light-white"] {
-  color-scheme:light !important;
-  --theme-bg:#fff !important;
-  --theme-bg-secondary:#fff !important;
-  --theme-surface:#fff !important;
-  --theme-surface-strong:#fff !important;
-  --theme-surface-solid:#fff !important;
-  --theme-surface-soft:#fff8f2 !important;
-  --theme-glass:rgba(255,255,255,.97) !important;
-  --theme-glass-strong:rgba(255,255,255,.98) !important;
-  --theme-text:#161616 !important;
-  --theme-text-soft:#38322e !important;
-  --theme-text-muted:#655b53 !important;
-  --theme-accent:#e76811 !important;
-  --theme-accent-2:#bd4e06 !important;
-  --theme-accent-rgb:231,104,17 !important;
-  --theme-accent-2-rgb:189,78,6 !important;
-  --theme-border:#e8ded6 !important;
-  --theme-border-strong:#ebb18a !important;
-  --theme-gradient:linear-gradient(135deg,#e76811,#f08735) !important;
-  --theme-gradient-soft:linear-gradient(135deg,rgba(231,104,17,.14),rgba(240,135,53,.035)) !important;
-  --theme-button-text:#fff !important;
-  --orange:#e76811 !important;
-  --orange-light:#bd4e06 !important;
-  --bg:#fff !important;
-  --sidebar:#fff !important;
-  --panel:#fff !important;
-  --text:#161616 !important;
-  --muted:#655b53 !important;
-}
-html[data-theme="light-white"] body,
+/* Overlay deve continuar translúcido; monitores devem manter suas cores. */
 html[data-theme="light-white"] :is(
-  .main-area,.main-content,.main-container,.page,.page-content,.page-wrapper,
-  .dashboard,.dashboard-page,.settings-page,.finance-page,.questions-page,
-  .flashcards-page,.cases-page,.schedule-page,.ranking-page,.performance-page,
-  .pharma-view,.sigaa-page,.cortex-app-shell,.shell-workspace,.shell-frame
+  .modal-backdrop,.dialog-backdrop,.cortex-mobile-sidebar-overlay
 ) {
-  background-color:#fff !important;
-  background-image:none !important;
-  color:#161616 !important;
-}
-/* Navigation / header, including persistent shell. */
-html[data-theme="light-white"] :is(
-  .sidebar,.sidebar-menu,.sidebar-user,.mobile-sidebar,
-  .cortex-mobile-sidebar-panel,.header,.topbar,.toolbar,.app-header,
-  .app-sidebar,.account-toolbar,.navigation,.nav-bar
-) {
-  background:#fff !important;
-  background-image:none !important;
-  color:#171717 !important;
-  border-color:#e8ded6 !important;
-  box-shadow:none !important;
+  background-color: rgba(21,18,15,.42) !important;
 }
 html[data-theme="light-white"] :is(
-  .card,.panel,.premium-panel,.hero,.card-surface,.settings-card,
-  .finance-card,.info-card,.stat-card,.stats-card,.summary-card,.metric-card,
-  .question-card,.flashcard-card,.case-card,.caso-card,.ranking-card,
-  .history-card,.course-card,.course-hero,.courses-section,.course-tab-panels,
-  .activity-card,.lesson-card,.drug-card,.receptor-card,.pharma-section,
-  .catalog-search-bar,.catalog-search-main,.module-card,.dashboard-hero,
-  .dashboard-hero-premium,.hero-card,.welcome-card,.schedule-intro,
-  .schedule-section,.filter-panel,.filters-panel,.dialog-card,.modal-card,
-  .content-panel,.task-card,.theme-box,.cortex-theme-choice
-) {
-  background-color:#fff !important;
-  background-image:none !important;
-  border-color:#e8ded6 !important;
-  color:#171717 !important;
-  box-shadow:0 6px 24px rgba(44,31,19,.045) !important;
+  .ecg-monitor,.radiology-viewport,.ct-viewport,.ct-canvas,
+  .viewer-canvas,.waveform-screen,video,canvas
+) { color-scheme: dark; }
+
+@media (max-width:900px) {
+  html[data-theme="light-white"] :is(
+    .sidebar,.header,.card,.panel,.settings-card,.lab-choice-card
+  ) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
 }
-html[data-theme="light-white"] :is(
-  .dashboard-hero,.dashboard-hero-premium,.hero-card,.page-hero,
-  .welcome-card,.schedule-intro,.settings-heading,.academic-hero
-) {
-  background:linear-gradient(135deg,#fff,#fff8f0) !important;
-}
-html[data-theme="light-white"] :is(
-  h1,h2,h3,h4,h5,h6,.header-title,.hero-title,.card-title,.section-title,
-  .course-card h3,.settings-heading h1,.panel-header strong,
-  .metric-card strong,.stat-card strong,.result-value,.account-name
-) {
-  color:#171717 !important;
-  text-shadow:none !important;
-}
-html[data-theme="light-white"] :is(
-  p,.description,.subtitle,.caption,.hint,.helper-text,.meta,.muted,
-  .panel-subtitle,.course-meta,.metric-label,.metric-card small,
-  .settings-heading p,.card-description,.settings-card-content>p,
-  .sidebar-logo span,.user-info span,.finance-footer,.theme-current-label
-) { color:#4b433e !important; }
-html[data-theme="light-white"] :is(
-  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
-  select,textarea,.search-box,.search-field,.search-input
-) {
-  color:#171717 !important;
-  background-color:#fff !important;
-  background-image:none !important;
-  border-color:#dfd5cc !important;
-}
-html[data-theme="light-white"] :is(
-  .menu-item,.nav-item,.sidebar-link,.tab-button,.filter-chip
-) {
-  color:#302b27 !important;
-  text-shadow:none !important;
-}
-html[data-theme="light-white"] :is(
-  .menu-item.active,.nav-item.active,.sidebar-link.active,
-  .tab-button.active,.filter-chip.active,.mode-button.active,
-  .cortex-theme-choice.active
-) {
-  color:#aa4304 !important;
-  background:#fff0e2 !important;
-  border-color:#f0c19d !important;
-  box-shadow:none !important;
-}
-html[data-theme="light-white"] :is(
-  .button-primary,.btn-primary,.primary-button,
-  button.primary,.main-action,.submit-button
-) {
-  background:linear-gradient(135deg,#e76811,#ef812f) !important;
-  color:#fff !important;
-  border-color:#df671a !important;
-}
-html[data-theme="light-white"] :is(
-  .badge,.chip,.tag,.pill,.orange-badge,.section-label,.hero-label,
-  .small-label,.panel-kicker
-) {
-  color:#aa4304 !important;
-  border-color:#f0c19d !important;
-}
-/* Preserve dark scientific renderers and multimedia screens rather than overpainting data. */
-html[data-theme="light-white"] :is(
-  .ecg-monitor,.ct-canvas,.radiology-viewport,.waveform-screen,
-  .ct-viewport,.viewer-canvas,canvas,video
-) { color-scheme:dark; }
-/* WHITE ORANGE INVERTED V5 END */

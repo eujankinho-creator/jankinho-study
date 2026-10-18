@@ -32,7 +32,7 @@ function getPetMode() {
 
 
 const THEME_NAMES = {
-  "dark-orange": "Orange",
+  "dark-orange": "Black Orange",
   "dark-pink": "Rosa",
   "dark-green": "Verde",
   "dark-purple": "Roxo",
@@ -1069,6 +1069,11 @@ async function loadSettings() {
     );
 
 
+  const themeRevisionAtLoad =
+    window.JankinhoTheme && typeof window.JankinhoTheme.getRevision === "function"
+      ? window.JankinhoTheme.getRevision()
+      : -1;
+
   try {
 
     const data =
@@ -1138,33 +1143,30 @@ async function loadSettings() {
       null;
 
 
-    state.tema =
-      normalizeTheme(
-        user.tema
-      );
-
-
-    updateUserUI(
-      user
-    );
-
-
-    renderThemeSettings(
-      state.tema
-    );
-
-
-    if (
+    // Não permita que uma resposta antiga desfaça um tema clicado
+    // enquanto as configurações estavam sendo carregadas.
+    const revisedWhileLoading =
       window.JankinhoTheme &&
-      typeof window.JankinhoTheme.setTheme === "function" &&
-      window.JankinhoTheme.getTheme() !== state.tema
-    ) {
+      typeof window.JankinhoTheme.getRevision === "function" &&
+      window.JankinhoTheme.getRevision() !== themeRevisionAtLoad;
 
-      window.JankinhoTheme.setTheme(
-        state.tema
-      );
-
+    if (!revisedWhileLoading) {
+      state.tema = normalizeTheme(user.tema);
+      if (
+        window.JankinhoTheme &&
+        typeof window.JankinhoTheme.applyFromAccount === "function" &&
+        window.JankinhoTheme.getTheme() !== state.tema
+      ) {
+        window.JankinhoTheme.applyFromAccount(state.tema);
+      }
     }
+
+    updateUserUI(user);
+    renderThemeSettings(
+      window.JankinhoTheme && typeof window.JankinhoTheme.getTheme === "function"
+        ? window.JankinhoTheme.getTheme()
+        : state.tema
+    );
 
 
     renderPetSettings();

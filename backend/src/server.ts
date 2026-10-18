@@ -3811,11 +3811,11 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/configuracoes\.js\?v=[^"']+/g,
-              "/js/configuracoes.js?v=20261007-pet-account1"
+              "/js/configuracoes.js?v=20261018-lightorange1"
             )
             .replace(
               /\/js\/theme-manager\.js\?v=[^"']+/g,
-              "/js/theme-manager.js?v=20261006-multitheme2"
+              "/js/theme-manager.js?v=20261018-lightorange1"
             )
             .replace(
               /\/css\/pink-pet\.css\?v=[^"']+/g,
@@ -3834,24 +3834,27 @@ async function servirArquivo(
           '<link rel="stylesheet" href="/css/theme-runtime.css?v=20261006-v7">';
 
         const themeBootstrapTag =
-          '<script data-cortex-theme-bootstrap>(function(){var k="jankinho_theme_v1",a=["dark-orange","dark-pink","dark-green","dark-purple","dark-black"],m={"orange-black":"dark-orange","pink-glitter":"dark-pink","black-white":"dark-black","blue-black":"dark-black"},t="dark-orange";try{var s=localStorage.getItem(k)||"";t=m[s]||s;if(a.indexOf(t)<0)t="dark-orange";localStorage.setItem(k,t)}catch(e){}document.documentElement.setAttribute("data-theme",t)})();<\/script>';
+          '<script data-cortex-theme-bootstrap>(function(){var k="jankinho_theme_v1",a=["dark-orange","dark-pink","dark-green","dark-purple","dark-black","light-white"],m={"orange-black":"dark-orange","pink-glitter":"dark-pink","black-white":"dark-black","blue-black":"dark-black"},t="dark-orange";try{var s=localStorage.getItem(k)||"";t=m[s]||s;if(a.indexOf(t)<0)t="dark-orange";localStorage.setItem(k,t)}catch(e){}document.documentElement.setAttribute("data-theme",t)})();<\/script>';
 
-        const runtimeHead =
-          themeBootstrapTag +
-          "\n  " +
-          themeRuntimeTag;
+        const lightThemeTag =
+          '<link rel="stylesheet" href="/css/white-orange-global.css?v=20261018-rebuilt1">';
 
-        const htmlComTemaGlobal =
-          htmlAtualizado.includes(
-            "/css/theme-runtime.css"
-          )
-            ? htmlAtualizado
-            : htmlAtualizado.replace(
-                /<\/head>/i,
-                "  " +
-                runtimeHead +
-                "\n</head>"
-              );
+        // Remove versões antigas, carregadas antes do runtime, para evitar
+        // que suas regras sejam sobrescritas nas páginas e iframes.
+        const htmlSemTemaAntigo = htmlAtualizado.replace(
+          /<link\b[^>]*href=["']\/css\/white-orange-global\.css(?:\?[^"']*)?["'][^>]*>/gi,
+          ""
+        );
+        const runtimeHead = [
+          ...(htmlSemTemaAntigo.includes("data-cortex-theme-bootstrap") ? [] : [themeBootstrapTag]),
+          ...(htmlSemTemaAntigo.includes("/css/theme-runtime.css") ? [] : [themeRuntimeTag]),
+          lightThemeTag,
+        ].join("\n  ");
+
+        const htmlComTemaGlobal = htmlSemTemaAntigo.replace(
+          /<\/head>/i,
+          "  " + runtimeHead + "\n</head>"
+        );
 
         content =
           Buffer.from(
