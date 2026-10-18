@@ -3798,6 +3798,10 @@ async function servirArquivo(
               "/css/sidebar-standard.css?v=20261008-no-credit1"
             )
             .replace(
+              /\/css\/auth\.css\?v=[^"']+/g,
+              "/css/auth.css?v=20261018-orange-login-v7"
+            )
+            .replace(
               /\/css\/theme-final\.css\?v=[^"']+/g,
               "/css/theme-final.css?v=20261006-multitheme2"
             )
@@ -3815,7 +3819,7 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/theme-manager\.js\?v=[^"']+/g,
-              "/js/theme-manager.js?v=20261018-lightorange1"
+              "/js/theme-manager.js?v=20261018-orange-default1"
             )
             .replace(
               /\/css\/pink-pet\.css\?v=[^"']+/g,
@@ -3834,7 +3838,13 @@ async function servirArquivo(
           '<link rel="stylesheet" href="/css/theme-runtime.css?v=20261006-v7">';
 
         const themeBootstrapTag =
-          '<script data-cortex-theme-bootstrap>(function(){var k="jankinho_theme_v1",a=["dark-orange","dark-pink","dark-green","dark-purple","dark-black","light-white"],m={"orange-black":"dark-orange","pink-glitter":"dark-pink","black-white":"dark-black","blue-black":"dark-black"},t="dark-orange";try{var s=localStorage.getItem(k)||"";t=m[s]||s;if(a.indexOf(t)<0)t="dark-orange";localStorage.setItem(k,t)}catch(e){}document.documentElement.setAttribute("data-theme",t)})();<\/script>';
+          '<script data-cortex-theme-bootstrap>(function(){' +
+          'var k="jankinho_theme_v1",a=["dark-orange","dark-pink","dark-green","dark-purple","dark-black","light-white"],' +
+          'm={"orange-black":"dark-orange","pink-glitter":"dark-pink","black-white":"dark-black","blue-black":"dark-black"},' +
+          'publicAuth=/^\\/(?:login|cadastro)(?:\\.html)?\\/?$/.test(location.pathname),t="dark-orange";' +
+          'if(!publicAuth){try{var s=localStorage.getItem(k)||"";t=m[s]||s;if(a.indexOf(t)<0)t="dark-orange";localStorage.setItem(k,t)}catch(e){}}' +
+          'document.documentElement.setAttribute("data-theme",t)' +
+          '})();</script>';
 
         const lightThemeTag =
           '<link rel="stylesheet" href="/css/white-orange-global.css?v=20261018-light-readable4">';

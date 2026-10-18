@@ -2,7 +2,8 @@
   "use strict";
 
   const STORAGE_KEY = "jankinho_theme_v1";
-  const DEFAULT_THEME = "dark-purple";
+  const DEFAULT_THEME = "dark-orange";
+  const IS_PUBLIC_AUTH_PAGE = /^\/(?:login|cadastro)(?:\.html)?\/?$/.test(window.location.pathname);
   const THEMES = new Set([
     "dark-orange",
     "dark-pink",
@@ -155,7 +156,7 @@
   }
 
   window.addEventListener("storage", function (event) {
-    if (event.key !== STORAGE_KEY) {
+    if (IS_PUBLIC_AUTH_PAGE || event.key !== STORAGE_KEY) {
       return;
     }
 
@@ -166,7 +167,7 @@
   });
 
   window.addEventListener("message", function (event) {
-    if (event.origin !== window.location.origin) {
+    if (IS_PUBLIC_AUTH_PAGE || event.origin !== window.location.origin) {
       return;
     }
 
@@ -227,18 +228,24 @@
     },
   };
 
-  applyTheme(readLocalTheme(), {
-    broadcast: false,
-    notify: false,
-  });
+  // Login e cadastro têm identidade Black Orange pública.
+  // NÃO altera localStorage nem a preferência salva da conta.
+  // O tema do usuário é restaurado no dashboard após autenticar.
+  function applyInitialTheme() {
+    if (IS_PUBLIC_AUTH_PAGE) {
+      document.documentElement.setAttribute("data-theme", DEFAULT_THEME);
+      notify(DEFAULT_THEME);
+      return;
+    }
+    applyTheme(readLocalTheme(), { broadcast: false, notify: true });
+  }
+
+  applyInitialTheme();
 
   document.addEventListener("DOMContentLoaded", function () {
-    applyTheme(readLocalTheme(), {
-      broadcast: false,
-      notify: true,
-    });
+    applyInitialTheme();
 
-    if (window.parent === window) {
+    if (!IS_PUBLIC_AUTH_PAGE && window.parent === window) {
       void syncFromAccount();
     }
   });

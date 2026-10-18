@@ -17,29 +17,8 @@
   <title>Cadastro | Cortex</title>
 
   <script>
-    (function () {
-      var theme = "dark-purple";
-
-      try {
-        var saved =
-          localStorage.getItem(
-            "jankinho_theme_v1"
-          );
-
-        if (
-          ["dark-orange","dark-pink","dark-green","dark-purple","dark-black","light-white"].indexOf(saved) >= 0
-        ) {
-          theme = saved;
-        }
-      }
-      catch (error) {}
-
-      document.documentElement
-        .setAttribute(
-          "data-theme",
-          theme
-        );
-    })();
+    // Identidade pública; a preferência pessoal continua intacta.
+    document.documentElement.setAttribute("data-theme", "dark-orange");
   </script>
 
 
