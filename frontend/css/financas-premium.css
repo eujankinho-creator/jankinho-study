@@ -2362,3 +2362,43 @@ html[data-theme="blue-black"]
 .finance-view .finance-chart-svg :is(.chart-income-bar,.chart-expense-bar) {
   stroke: none !important;
 }
+
+/* ===========================================================
+   FINANCAS - GRAFICOS COM TIPOGRAFIA REGULAR (TODOS OS TEMAS)
+   Independente de data-theme: eixos, numeros, labels e legendas
+   jamais herdam stroke ou font-weight dos SVG de icones e cards.
+   =========================================================== */
+html[data-theme] body.finance-view .chart-panel :is(
+  .chart-heading p,.chart-summary,.chart-legend,.chart-legend span,
+  .chart-empty,.chart-axis-label,.chart-value-label,.chart-month-label
+) {
+  font-weight: 400 !important;
+  font-synthesis: none;
+  text-shadow: none !important;
+}
+html[data-theme] body.finance-view .chart-panel .chart-heading h2 {
+  font-weight: 500 !important;
+  text-shadow: none !important;
+}
+html[data-theme] body.finance-view svg.finance-chart-svg {
+  font-weight: 400 !important;
+  font-style: normal !important;
+  stroke: none !important;
+  paint-order: normal !important;
+}
+html[data-theme] body.finance-view svg.finance-chart-svg :is(text,tspan) {
+  font-family: inherit !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  stroke: none !important;
+  stroke-width: 0 !important;
+  paint-order: normal !important;
+  text-shadow: none !important;
+}
+html[data-theme] body.finance-view svg.finance-chart-svg :is(
+  .chart-income-bar,.chart-expense-bar,.chart-balance-area
+) {
+  stroke: none !important;
+}
+/* Mantem as linhas de grade e de saldo; nao remove strokes funcionais. */
