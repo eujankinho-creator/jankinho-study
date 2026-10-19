@@ -178,7 +178,7 @@ async function sincronizarFGVSES2024Complementares(usuarioId: number) {
   for (const lote of LOTES_SESMT_COMPLEMENTARES) {
     for (const q of lote.items) {
       if (!q.q.trim() || q.a.length !== 4 || !["A","B","C","D"].includes(q.k) ||
-          q.a.some(a => !a.trim()) || new Set(q.a.map(normalizar)).size !== 4)
+          q.a.some(a => !a.trim()) || new Set(q.a.map(a => a.normalize("NFD").toLowerCase().replace(/\s+/g, " ").trim())).size !== 4)
         throw new Error("[sesmt-complementares] Questão inválida: " + lote.key + ":" + q.n);
       const origemId = lote.prefix + String(q.n).padStart(2, "0");
       const existente = await prisma.questao.findFirst({
