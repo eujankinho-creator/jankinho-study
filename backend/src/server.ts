@@ -46,6 +46,7 @@ import { sincronizarFGVLotesComplementares } from "./questoesFGVComplementaresSe
 import { sincronizarFGVSES2024 } from "./questoesFGVSES2024Seed";
 import { sincronizarFGVFhemig2023 } from "./questoesFGVFhemig2023Seed";
 import { sincronizarFGVSaudeLote2025 } from "./questoesFGVSaudeLote2025Seed";
+import { sincronizarFGVAletoMacae2024 } from "./questoesFGVAletoMacae2024Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6189,6 +6190,8 @@ server.listen(
         await sincronizarFGVFhemig2023();
         // São José dos Campos 2025 e Técnico FHEMIG 2023, gabaritos oficiais.
         await sincronizarFGVSaudeLote2025();
+        // Questões originais FGV MACAEPREV e ALETO, provas e gabaritos definitivos.
+        await sincronizarFGVAletoMacae2024();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
