@@ -47,6 +47,7 @@ import { sincronizarFGVSES2024 } from "./questoesFGVSES2024Seed";
 import { sincronizarFGVFhemig2023 } from "./questoesFGVFhemig2023Seed";
 import { sincronizarFGVSaudeLote2025 } from "./questoesFGVSaudeLote2025Seed";
 import { sincronizarFGVAletoMacae2024 } from "./questoesFGVAletoMacae2024Seed";
+import { sincronizarFGVNovaIguacu2025 } from "./questoesFGVNovaIguacu2025Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6192,6 +6193,8 @@ server.listen(
         await sincronizarFGVSaudeLote2025();
         // Questões originais FGV MACAEPREV e ALETO, provas e gabaritos definitivos.
         await sincronizarFGVAletoMacae2024();
+        // Provas oficiais FGV SMS Nova Iguaçu 2025, quatro cargos.
+        await sincronizarFGVNovaIguacu2025();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
