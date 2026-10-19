@@ -4,7 +4,7 @@ import { obterMatrizQuestoes30PorAssunto } from "./questoesMatriz30PorAssunto";
 /**
  * Medição baseada no banco REAL do usuário, não em uma lista de demonstração.
  * Questões antigas, autorais ou "estilo FGV" nunca contam como prova original.
- * Os originais são respondidos dentro do Córtex, com enunciado e alternativas completos.
+ * Os originais são respondidos dentro do Córtex, com enunciado e alternativas completos (A-D ou A-E).
  */
 const FONTE_OFICIAL_VERIFICADA = "cortex-prova-original-verificada-v1";
 const META = 30;
@@ -87,7 +87,7 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
     const assunto = String(q.tema || "").trim();
     if (!disciplina || !assunto || !q.origemId?.trim() || !q.enunciado?.trim() ||
         !q.fonteUrl?.startsWith("https://") || !q.banca?.trim() ||
-        !q.ano || !q.cargo?.trim() || q.alternativas.length !== 5 ||
+        !q.ano || !q.cargo?.trim() || (q.alternativas.length !== 4 && q.alternativas.length !== 5) ||
         q.alternativas.some((a) => !a.texto?.trim()) ||
         q.alternativas.filter((a) => a.correta).length !== 1) continue;
     const origem = q.banca.toLowerCase() + "|" + q.ano + "|" + q.origemId.toLowerCase();
@@ -109,7 +109,7 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
     metaTotal: META * linhas.length,
     questoesVerificadas: linhas.reduce((sum, x) => sum + Math.min(META,x.originaisVerificadas),0),
     questoesNoBanco: linhas.reduce((sum, x) => sum + x.totalBanco,0),
-    criterio: "Questões oficiais com fonte primária, enunciado, cinco alternativas e gabarito definitivo, respondidas dentro do Córtex.",
+    criterio: "Questões oficiais com fonte primária, enunciado, quatro ou cinco alternativas e gabarito definitivo, respondidas dentro do Córtex.",
     itens: linhas,
   };
 }
