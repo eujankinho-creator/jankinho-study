@@ -39,6 +39,8 @@ import { preencherQuestoesOriginaisFGV2025 } from "./questoesFGV2025Completar";
 import { sincronizarFGVAbreuLimaEnfermagem2024 } from "./questoesFGVAbreuLima2024Seed";
 import { sincronizarFGVCamaraEnfermeiro2023 } from "./questoesFGVCamara2023Seed";
 import { sincronizarFGVCaraguatatuba2024 } from "./questoesFGVCaragua2024Seed";
+import { sincronizarFGVCanaaEnfermagem2025 } from "./questoesFGVCanaa2025Seed";
+import { sincronizarFGVCanaaTecnico2025 } from "./questoesFGVCanaaTecnico2025Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6168,6 +6170,10 @@ server.listen(
         await sincronizarFGVCamaraEnfermeiro2023();
         // 28 itens específicos de Enfermagem — FGV Caraguatatuba 2024.
         await sincronizarFGVCaraguatatuba2024();
+        // 30 questões FGV Canaã 2025, cargo Enfermeiro — saúde/SUS.
+        await sincronizarFGVCanaaEnfermagem2025();
+        // 20 questões FGV Canaã 2025, cargo Técnico em Enfermagem.
+        await sincronizarFGVCanaaTecnico2025();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
