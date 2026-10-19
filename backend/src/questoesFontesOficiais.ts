@@ -4,7 +4,7 @@ import { obterMatrizQuestoes30PorAssunto } from "./questoesMatriz30PorAssunto";
 /**
  * Medição baseada no banco REAL do usuário, não em uma lista de demonstração.
  * Questões antigas, autorais ou "estilo FGV" nunca contam como prova original.
- * Importações oficiais precisam de revisão documental e da licença de reprodução.
+ * Os originais são respondidos pelo PDF externo, sem reproduzir o texto integral da banca.
  */
 const FONTE_OFICIAL_VERIFICADA = "cortex-prova-original-verificada-v1";
 const META = 30;
@@ -13,24 +13,27 @@ function normalizar(value: string) {
   return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 }
 
-export async function obterCoberturaQuestoesOficiais(usuarioId: number) {
-  const [disciplinas, agrupamento, candidatos] = await Promise.all([
+export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
+  const [disciplinas, agrupamento, candidatos, inventario] = await Promise.all([
     prisma.disciplina.findMany({
-      where: { usuarioId },
       select: { id: true, nome: true },
     }),
     prisma.questao.groupBy({
       by: ["disciplinaId", "tema", "fonte"],
-      where: { usuarioId },
+      where: { fonte: FONTE_OFICIAL_VERIFICADA },
       _count: { _all: true },
     }),
     prisma.questao.findMany({
-      where: { usuarioId, fonte: FONTE_OFICIAL_VERIFICADA },
+      where: { fonte: FONTE_OFICIAL_VERIFICADA },
       select: {
         disciplinaId: true, tema: true, origemId: true, fonteUrl: true,
         banca: true, ano: true, cargo: true,
         alternativas: { select: { correta: true } },
       },
+    }),
+    prisma.appConfig.findUnique({
+      where: { chave: "cortex-questoes-legado-arquivado-v1-inventario" },
+      select: { valor: true },
     }),
   ]);
 
@@ -53,6 +56,19 @@ export async function obterCoberturaQuestoesOficiais(usuarioId: number) {
   // Inclui todo o currículo conhecido, mesmo sem nenhuma questão no banco.
   for (const d of obterMatrizQuestoes30PorAssunto()) {
     for (const assunto of d.assuntos) obter(d.disciplina, assunto);
+  }
+  // Preserva a árvore curricular do banco anterior depois do arquivo.
+  const valor = inventario?.valor;
+  if (valor && typeof valor === "object" && !Array.isArray(valor)) {
+    const assuntos = (valor as { assuntos?: unknown }).assuntos;
+    if (Array.isArray(assuntos)) {
+      for (const row of assuntos) {
+        if (!row || typeof row !== "object") continue;
+        const dado = row as { disciplina?: unknown; assunto?: unknown };
+        const d = String(dado.disciplina || "").trim(), a = String(dado.assunto || "").trim();
+        if (d && a && a !== "Sem assunto") obter(d,a);
+      }
+    }
   }
   // Inclui os temas reais de todas as disciplinas deste usuário.
   for (const g of agrupamento) {
@@ -92,7 +108,7 @@ export async function obterCoberturaQuestoesOficiais(usuarioId: number) {
     metaTotal: META * linhas.length,
     questoesVerificadas: linhas.reduce((sum, x) => sum + Math.min(META,x.originaisVerificadas),0),
     questoesNoBanco: linhas.reduce((sum, x) => sum + x.totalBanco,0),
-    criterio: "Originais documentados em prova/gabarito; autorais e simuladas excluídas da contagem.",
+    criterio: "Questões com prova primária e gabarito definitivo, respondidas por consulta ao PDF externo.",
     itens: linhas,
   };
 }

@@ -2508,3 +2508,7 @@ html[data-theme="light-white"] .official-coverage{border-color:#cbd5e1;backgroun
 html[data-theme="light-white"] .official-coverage-item{border-color:#d6dce5}
 @media(max-width:800px){.official-coverage-list{grid-template-columns:1fr}.official-coverage-head{flex-direction:column}.official-coverage-stats{white-space:normal}}
 @media(max-width:560px){.official-coverage{padding:14px}.official-coverage-controls{grid-template-columns:1fr}.official-coverage-list{max-height:540px}}
+
+/* Novo banco exclusivo de questões oficiais: um único CTA de prática. */
+.questions-view .action-grid { grid-template-columns: minmax(0,1fr); }
+.questions-view .action-grid > [hidden] { display:none!important; }

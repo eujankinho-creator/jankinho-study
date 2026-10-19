@@ -4226,24 +4226,11 @@ const server =
             return;
           }
 
-          const body =
-            await lerJson(
-              request
-            );
-
-          const resultado =
-            await gerarQuestoesIA(
-              usuarioId,
-              body
-            );
-
-
-          json(
-            response,
-            resultado.status,
-            resultado.data
-          );
-
+          // Acervo migrado para questões primárias verificáveis.
+          // Não criar questões sintéticas com atribuição a bancas.
+          json(response, 403, {
+            error: "Geração por IA desativada no banco oficial. Utilize provas públicas verificadas."
+          });
           return;
         }
 
@@ -5007,14 +4994,12 @@ const server =
             return;
           }
 
-          if (
-            metodo === "POST"
-          ) {
-            await criarQuestao(
-              request,
-              response
-            );
-
+          if (metodo === "POST") {
+            const usuarioId = await exigirUsuario(request, response);
+            if (!usuarioId) return;
+            json(response, 403, {
+              error: "Banco oficial de provas: cadastro manual desativado para evitar questões sem origem verificada."
+            });
             return;
           }
         }
