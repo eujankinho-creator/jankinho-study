@@ -363,7 +363,7 @@ export async function sincronizarMatrizQuestoes30PorAssunto() {
     return;
   }
 
-  const usuarioId = usuario.id;
+  const usuarioId = usuario!.id;
 
   const disciplinasBanco = new Map<string, Awaited<ReturnType<typeof obterDisciplinaBase>>>();
 
