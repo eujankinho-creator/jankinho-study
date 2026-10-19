@@ -4,7 +4,7 @@ import { obterMatrizQuestoes30PorAssunto } from "./questoesMatriz30PorAssunto";
 /**
  * Medição baseada no banco REAL do usuário, não em uma lista de demonstração.
  * Questões antigas, autorais ou "estilo FGV" nunca contam como prova original.
- * Os originais são respondidos pelo PDF externo, sem reproduzir o texto integral da banca.
+ * Os originais são respondidos dentro do Córtex, com enunciado e alternativas completos.
  */
 const FONTE_OFICIAL_VERIFICADA = "cortex-prova-original-verificada-v1";
 const META = 30;
@@ -26,9 +26,9 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
     prisma.questao.findMany({
       where: { fonte: FONTE_OFICIAL_VERIFICADA },
       select: {
-        disciplinaId: true, tema: true, origemId: true, fonteUrl: true,
+        disciplinaId: true, tema: true, origemId: true, fonteUrl: true, enunciado: true,
         banca: true, ano: true, cargo: true,
-        alternativas: { select: { correta: true } },
+        alternativas: { select: { correta: true, texto: true } },
       },
     }),
     prisma.appConfig.findUnique({
@@ -85,9 +85,10 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
   for (const q of candidatos) {
     const disciplina = nomes.get(q.disciplinaId);
     const assunto = String(q.tema || "").trim();
-    if (!disciplina || !assunto || !q.origemId?.trim() ||
+    if (!disciplina || !assunto || !q.origemId?.trim() || !q.enunciado?.trim() ||
         !q.fonteUrl?.startsWith("https://") || !q.banca?.trim() ||
-        !q.ano || !q.cargo?.trim() || q.alternativas.length < 2 ||
+        !q.ano || !q.cargo?.trim() || q.alternativas.length !== 5 ||
+        q.alternativas.some((a) => !a.texto?.trim()) ||
         q.alternativas.filter((a) => a.correta).length !== 1) continue;
     const origem = q.banca.toLowerCase() + "|" + q.ano + "|" + q.origemId.toLowerCase();
     if (ids.has(origem)) continue;
@@ -108,7 +109,7 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
     metaTotal: META * linhas.length,
     questoesVerificadas: linhas.reduce((sum, x) => sum + Math.min(META,x.originaisVerificadas),0),
     questoesNoBanco: linhas.reduce((sum, x) => sum + x.totalBanco,0),
-    criterio: "Questões com prova primária e gabarito definitivo, respondidas por consulta ao PDF externo.",
+    criterio: "Questões oficiais com fonte primária, enunciado, cinco alternativas e gabarito definitivo, respondidas dentro do Córtex.",
     itens: linhas,
   };
 }
