@@ -125,61 +125,24 @@ function renderQuestionVisual(
 }
 
 
-function renderQuestionSource(
-  questao
-) {
+function renderQuestionSource(questao) {
+  const fonte=String(questao&&questao.fonte||"").trim();
+  if(!fonte) return "";
 
-  const fonte =
-    String(
-      questao &&
-      questao.fonte
-        ? questao.fonte
-        : ""
-    )
-      .trim();
-
-
-  if (!fonte) {
-    return "";
+  const url=String(questao.fonteUrl||"").trim();
+  const official=fonte==="cortex-prova-original-verificada-v1" &&
+    /^https:\/\//i.test(url) && questao.origemId &&
+    questao.banca && questao.ano && questao.cargo;
+  const descriptor=official
+    ? "Questão original — "+[questao.banca,questao.orgao,questao.ano,questao.origemId].filter(Boolean).join(" · ")
+    : "Material de estudo do Córtex · "+fonte+" (não confirmado como transcrição de prova oficial)";
+  if(/^https:\/\//i.test(url)) {
+    return '<a class="question-source" href="'+escapeHtml(url)+
+      '" target="_blank" rel="noopener noreferrer">'+
+      escapeHtml(descriptor)+" · Abrir referência ↗</a>";
   }
-
-
-  const url =
-    String(
-      questao.fonteUrl ||
-      ""
-    )
-      .trim();
-
-
-  if (
-    /^https:\/\//i.test(
-      url
-    )
-  ) {
-
-    return `
-      <a
-        class="question-source"
-        href="${escapeHtml(url)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Fonte: ${escapeHtml(fonte)}
-      </a>
-    `;
-
-  }
-
-
-  return `
-    <span class="question-source">
-      Fonte: ${escapeHtml(fonte)}
-    </span>
-  `;
-
+  return '<span class="question-source">'+escapeHtml(descriptor)+"</span>";
 }
-
 
 function mostrarErro(mensagem) {
 
