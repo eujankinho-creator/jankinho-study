@@ -6,7 +6,7 @@ const openai = new OpenAI({
 });
 
 const FONTE = "cortex-matriz-romulo-topicos-50-assunto-v2";
-const META_POR_ASSUNTO = 50;
+const META_POR_ASSUNTO = 30;
 
 type MatrizDisciplina = {
   disciplina: string;
@@ -344,6 +344,10 @@ async function obterDisciplinaBase(
 }
 
 export async function sincronizarMatrizQuestoes30PorAssunto() {
+  // O banco oficial aceita apenas itens verificados em provas reais.
+  // Não preencher lacunas por geração de IA: a meta é de 30 questões ORIGINAIS.
+  console.warn("[questoes-oficiais] Seed autoral bloqueado: usar apenas provas oficiais verificadas.");
+  return;
   if (process.env.SEED_QUESTOES_30_ASSUNTO === "0") {
     console.log("[questoes-50] sincronização desativada por ambiente.");
     return;
