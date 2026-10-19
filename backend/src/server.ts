@@ -37,6 +37,7 @@ import { obterCoberturaQuestoesOficiais } from "./questoesFontesOficiais";
 import { sincronizarProvasOficiaisFGV2025, FONTE_PROVAS_REAIS } from "./questoesOficiaisFGV2025";
 import { preencherQuestoesOriginaisFGV2025 } from "./questoesFGV2025Completar";
 import { sincronizarFGVAbreuLimaEnfermagem2024 } from "./questoesFGVAbreuLima2024Seed";
+import { sincronizarFGVCamaraEnfermeiro2023 } from "./questoesFGVCamara2023Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6162,6 +6163,8 @@ server.listen(
         await preencherQuestoesOriginaisFGV2025();
         // 49 questões reais de saúde, FGV Abreu e Lima 2024 (Tipo 1).
         await sincronizarFGVAbreuLimaEnfermagem2024();
+        // 68 questões de Enfermagem e SUS da FGV Câmara dos Deputados 2023.
+        await sincronizarFGVCamaraEnfermeiro2023();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
