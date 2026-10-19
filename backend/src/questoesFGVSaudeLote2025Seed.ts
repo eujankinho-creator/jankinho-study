@@ -11,13 +11,25 @@ export async function sincronizarFGVSaudeLote2025() {
  const originais=await prisma.questao.findMany({where:{fonte:FONTE_PROVAS_REAIS},select:{enunciado:true}});
  const hashes=new Set(originais.map(x=>normalizar(x.enunciado)));
  const disciplinas=new Map<string,number>();
- let inseridas=0,existentes=0,repetidas=0;
+ let inseridas=0,existentes=0,repetidas=0,assuntosCorrigidos=0;
  for(const prova of LOTES)for(const q of prova.itens){
    const origemId="fgv-"+prova.codigo+"-tipo1-q"+String(q.n).padStart(2,"0");
    if(!q.enunciado.trim()||q.alternativas.length!==5||q.alternativas.some(t=>!t.trim())||
       !["A","B","C","D","E"].includes(q.gabarito)||new Set(q.alternativas.map(t=>t.trim().toLowerCase())).size!==5)
      throw new Error("[fgv-saude-lote] Item inválido "+origemId);
-   if(await prisma.questao.findFirst({where:{fonte:FONTE_PROVAS_REAIS,origemId},select:{id:true}})){existentes++;continue;}
+   const anterior=await prisma.questao.findFirst({
+     where:{fonte:FONTE_PROVAS_REAIS,origemId},select:{id:true,tema:true}
+   });
+   if(anterior){
+     // Os arquivos podem ser recategorizados em revisões posteriores.
+     // Corrigir somente o assunto; preservar respostas, alternativas e histórico.
+     if(anterior.tema!==q.tema){
+       await prisma.questao.update({where:{id:anterior.id},data:{tema:q.tema}});
+       assuntosCorrigidos++;
+     }
+     existentes++;
+     continue;
+   }
    const k=normalizar(q.enunciado);if(hashes.has(k)){repetidas++;continue;}
    let disciplinaId=disciplinas.get(q.disciplina);
    if(!disciplinaId){
@@ -34,6 +46,6 @@ export async function sincronizarFGVSaudeLote2025() {
    }});
    inseridas++;hashes.add(k);
  }
- console.log("[fgv-saude-lote-2025] "+inseridas+" inseridas; "+existentes+" existentes; "+repetidas+" duplicadas ignoradas.");
- return {inseridas,existentes,repetidas};
+ console.log("[fgv-saude-lote-2025] "+inseridas+" inseridas; "+existentes+" existentes; "+repetidas+" duplicadas ignoradas; "+assuntosCorrigidos+" assuntos corrigidos.");
+ return {inseridas,existentes,repetidas,assuntosCorrigidos};
 }
