@@ -41,6 +41,7 @@ import { sincronizarFGVCamaraEnfermeiro2023 } from "./questoesFGVCamara2023Seed"
 import { sincronizarFGVCaraguatatuba2024 } from "./questoesFGVCaragua2024Seed";
 import { sincronizarFGVCanaaEnfermagem2025 } from "./questoesFGVCanaa2025Seed";
 import { sincronizarFGVCanaaTecnico2025 } from "./questoesFGVCanaaTecnico2025Seed";
+import { sincronizarFGVSaoJoseCampos2023 } from "./questoesFGVSJC2023Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6174,6 +6175,8 @@ server.listen(
         await sincronizarFGVCanaaEnfermagem2025();
         // 20 questões FGV Canaã 2025, cargo Técnico em Enfermagem.
         await sincronizarFGVCanaaTecnico2025();
+        // 68 itens FGV São José dos Campos, Enfermeiro + Técnico 2023, gabarito definitivo.
+        await sincronizarFGVSaoJoseCampos2023();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
