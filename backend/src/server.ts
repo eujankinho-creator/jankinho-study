@@ -43,6 +43,7 @@ import { sincronizarFGVCanaaEnfermagem2025 } from "./questoesFGVCanaa2025Seed";
 import { sincronizarFGVCanaaTecnico2025 } from "./questoesFGVCanaaTecnico2025Seed";
 import { sincronizarFGVSaoJoseCampos2023 } from "./questoesFGVSJC2023Seed";
 import { sincronizarFGVLotesComplementares } from "./questoesFGVComplementaresSeed";
+import { sincronizarFGVSES2024 } from "./questoesFGVSES2024Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6180,6 +6181,8 @@ server.listen(
         await sincronizarFGVSaoJoseCampos2023();
         // Provas oficiais FGV Abreu Técnico 2024 e ALERJ Enfermagem 2026.
         await sincronizarFGVLotesComplementares();
+        // Primeiro lote SES-MT 2024, Enfermeiro Tipo 1, com gabarito definitivo.
+        await sincronizarFGVSES2024();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
