@@ -130,9 +130,15 @@ function renderQuestionSource(questao) {
   if (!fonte) return "";
   if (fonte === "cortex-prova-original-verificada-v1") {
     const n = getOfficialQuestionNumber(questao);
+    const banca = escapeHtml(questao.banca || "FGV");
+    const orgao = escapeHtml(questao.orgao || "Instituição pública");
+    const ano = escapeHtml(questao.ano || "");
+    const cargo = escapeHtml(questao.cargo || "");
     return '<div class="question-source official-source-label" role="note">'+
-      'Fonte: FGV · EBSERH · Edital 03/2024 · Prova 16/03/2025 · Tipo 1'+
-      (n ? ' · Questão '+n : '')+' · Gabarito definitivo da banca</div>';
+      'Fonte: '+banca+' · '+orgao+' · '+ano+
+      (cargo ? ' · '+cargo : '')+
+      (n ? ' · Questão '+n : '')+
+      ' · Gabarito definitivo da banca</div>';
   }
   return '<span class="question-source">'+escapeHtml(fonte)+'</span>';
 }
@@ -144,7 +150,7 @@ const CORTEX_OFFICIAL_SOURCE = "cortex-prova-original-verificada-v1";
 
 function isOfficialExamQuestion(q) {
   return Boolean(q && q.fonte === CORTEX_OFFICIAL_SOURCE &&
-    /^fgv-ebserh-2025-grupo-enfermagem-tipo1-q\d{2}$/.test(String(q.origemId || "")));
+    /^fgv-(?:ebserh-2025-grupo-enfermagem-tipo1|abreu-lima-2024-enfermeiro-tipo1)-q\d{2}$/.test(String(q.origemId || "")));
 }
 
 function getOfficialQuestionNumber(q) {
@@ -170,8 +176,11 @@ function renderOfficialQuestionHeading(q, compact=false) {
   const numero = getOfficialQuestionNumber(q);
   const assunto = escapeHtml(q.tema || "Enfermagem");
   const legacy = /^QUESTÃO OFICIAL Nº /i.test(String(q.enunciado || ""));
+  const credencial = escapeHtml(
+    [q.banca || "FGV", q.orgao || "", q.ano || "", q.cargo || ""].filter(Boolean).join(" · ")
+  );
   if (compact) return '<h3 class="official-exam-list-title">Questão '+numero+' · '+assunto+'</h3>'+
-    '<p class="official-exam-list-note">FGV / EBSERH 2025 · Enunciado e alternativas disponíveis no Córtex</p>';
+    '<p class="official-exam-list-note">'+credencial+' · Texto e alternativas disponíveis no Córtex</p>';
   const paragraphs = String(q.enunciado || "").trim().split(/\n\s*\n/).filter(Boolean);
   const content = legacy
     ? '<p class="official-original-loading">O texto original está sendo sincronizado. Atualize em instantes.</p>'
@@ -179,7 +188,7 @@ function renderOfficialQuestionHeading(q, compact=false) {
         return '<p>'+escapeHtml(p).replace(/\n/g, ' ')+'</p>';
       }).join('')+'</div>';
   return '<div class="official-question-intro">'+
-    '<span class="official-question-kicker">FGV · EBSERH 2025 · ENFERMAGEM · TIPO 1</span>'+
+    '<span class="official-question-kicker">'+credencial+'</span>'+
     '<h2>Questão '+numero+' <span>· '+assunto+'</span></h2>'+
     '</div>'+content;
 }
