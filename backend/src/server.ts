@@ -45,6 +45,7 @@ import { sincronizarFGVSaoJoseCampos2023 } from "./questoesFGVSJC2023Seed";
 import { sincronizarFGVLotesComplementares } from "./questoesFGVComplementaresSeed";
 import { sincronizarFGVSES2024 } from "./questoesFGVSES2024Seed";
 import { sincronizarFGVFhemig2023 } from "./questoesFGVFhemig2023Seed";
+import { sincronizarFGVSaudeLote2025 } from "./questoesFGVSaudeLote2025Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6186,6 +6187,8 @@ server.listen(
         await sincronizarFGVSES2024();
         // Lote FGV/FHEMIG 2023: cinco provas, gabarito definitivo e sem duplicações.
         await sincronizarFGVFhemig2023();
+        // São José dos Campos 2025 e Técnico FHEMIG 2023, gabaritos oficiais.
+        await sincronizarFGVSaudeLote2025();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
