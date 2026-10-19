@@ -3651,6 +3651,7 @@ function compressibleExtension(
     ".js",
     ".json",
     ".svg",
+    ".webmanifest",
   ].includes(
     extensao
   );
@@ -3681,6 +3682,9 @@ function contentType(
 
       ".svg":
         "image/svg+xml",
+
+      ".webmanifest":
+        "application/manifest+json; charset=utf-8",
 
       ".png":
         "image/png",
@@ -3787,7 +3791,7 @@ async function servirArquivo(
             .toString("utf8")
             .replace(
               /\/js\/sidebar-standard\.js\?v=[^"']+/g,
-              "/js/sidebar-standard.js?v=20261008-no-credit1"
+              "/js/sidebar-standard.js?v=20261019-pwa-logo1"
             )
             .replace(
               /\/css\/ui-enhancements\.css\?v=[^"']+/g,
@@ -3819,7 +3823,7 @@ async function servirArquivo(
             )
             .replace(
               /\/js\/theme-manager\.js\?v=[^"']+/g,
-              "/js/theme-manager.js?v=20261018-orange-default1"
+              "/js/theme-manager.js?v=20261019-pwa-logo1"
             )
             .replace(
               /\/css\/pink-pet\.css\?v=[^"']+/g,
@@ -3847,7 +3851,7 @@ async function servirArquivo(
           '})();</script>';
 
         const lightThemeTag =
-          '<link rel="stylesheet" href="/css/white-orange-global.css?v=20261018-light-readable4">';
+          '<link rel="stylesheet" href="/css/white-orange-global.css?v=20261019-dark-logo1">';
 
         // Remove versões antigas, carregadas antes do runtime, para evitar
         // que suas regras sejam sobrescritas nas páginas e iframes.
@@ -3855,10 +3859,19 @@ async function servirArquivo(
           /<link\b[^>]*href=["']\/css\/white-orange-global\.css(?:\?[^"']*)?["'][^>]*>/gi,
           ""
         );
+        const appInstallTags = [
+          '<link rel="manifest" href="/manifest.webmanifest?v=20261019-cortex-app1">',
+          '<link rel="apple-touch-icon" sizes="180x180" href="/icons/cortex-180.png?v=20261019-cortex-app1">',
+          '<meta name="apple-mobile-web-app-capable" content="yes">',
+          '<meta name="apple-mobile-web-app-title" content="Córtex">',
+          '<meta name="apple-mobile-web-app-status-bar-style" content="black">'
+        ].join("\n  ");
+
         const runtimeHead = [
           ...(htmlSemTemaAntigo.includes("data-cortex-theme-bootstrap") ? [] : [themeBootstrapTag]),
           ...(htmlSemTemaAntigo.includes("/css/theme-runtime.css") ? [] : [themeRuntimeTag]),
           lightThemeTag,
+          appInstallTags,
         ].join("\n  ");
 
         const htmlComTemaGlobal = htmlSemTemaAntigo.replace(

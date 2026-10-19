@@ -85,6 +85,16 @@
     const settings = options || {};
 
     document.documentElement.setAttribute("data-theme", normalized);
+
+    // Favicon escuro para contrastar com o tema branco (não altera o ícone
+    // instalado do app, que é uma imagem própria de alto contraste).
+    const favicon = normalized === "light-white"
+      ? "/favicon-dark.svg?v=cortex-dark-logo-v1"
+      : "/favicon.svg?v=cortex-minimal-v4";
+    document.querySelectorAll('link[rel="icon"]').forEach(function(link) {
+      if (link.getAttribute("href") !== favicon) link.setAttribute("href", favicon);
+    });
+
     persistLocal(normalized);
 
     if (settings.notify !== false) {

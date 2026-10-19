@@ -785,3 +785,34 @@ html[data-theme="light-white"] :is(
   color: inherit;
 }
 
+
+
+/* White Orange: logo escura de verdade, mesmo com regras globais de
+   imagem/hover e ícones SVG injetados no sidebar ou no menu mobile. */
+html[data-theme="light-white"] body :is(
+  .sidebar-logo .cortex-global-logo-image,
+  .sidebar-logo .logo-box img,
+  .cortex-mobile-sidebar-header .cortex-mobile-brand-image,
+  .cortex-mobile-brand-image
+) {
+  filter: brightness(0) !important;
+  -webkit-filter: brightness(0) !important;
+  opacity: 1 !important;
+}
+html[data-theme="light-white"] body :is(
+  .sidebar-logo:hover .cortex-global-logo-image,
+  .sidebar-logo:focus-visible .cortex-global-logo-image,
+  .cortex-mobile-sidebar-header .cortex-mobile-brand-image
+) {
+  filter: brightness(0) !important;
+  -webkit-filter: brightness(0) !important;
+}
+html[data-theme="light-white"] body :is(
+  svg.cortex-brain-logo,
+  svg.cortex-brain-logo *,
+  .sidebar-logo svg.cortex-brain-logo *,
+  .cortex-mobile-sidebar-panel svg.cortex-brain-logo *
+) {
+  stroke: #101820 !important;
+  filter: none !important;
+}

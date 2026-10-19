@@ -1155,6 +1155,10 @@
   let cortexGlobalProfilePromise = null;
 
   function applyCortexLogo() {
+    // Fonte independente por tema; evita a logo branca no fundo branco.
+    var logoSrc = document.documentElement.getAttribute("data-theme") === "light-white"
+      ? "/favicon-dark.svg?v=cortex-dark-logo-v1"
+      : "/favicon.svg?v=cortex-minimal-v4";
     document
       .querySelectorAll(".sidebar-logo .logo-box")
       .forEach(function(box){
@@ -1164,11 +1168,12 @@
           box.innerHTML="";
           image=document.createElement("img");
           image.className="cortex-global-logo-image";
-          image.src="/favicon.svg?v=cortex-minimal-v4";
+          image.src=logoSrc;
           image.alt="";
           image.setAttribute("aria-hidden","true");
           box.appendChild(image);
         }
+        if(image.getAttribute("src") !== logoSrc) image.setAttribute("src", logoSrc);
       });
 
     document
@@ -1179,12 +1184,21 @@
         if(!image){
           image=document.createElement("img");
           image.className="cortex-mobile-brand-image";
-          image.src="/favicon.svg?v=cortex-minimal-v4";
+          image.src=logoSrc;
           image.alt="";
           image.setAttribute("aria-hidden","true");
           header.insertBefore(image,header.firstChild);
         }
+        if(image.getAttribute("src") !== logoSrc) image.setAttribute("src", logoSrc);
       });
+  }
+
+  // Observa apenas a troca de tema, sem loop nem observação da árvore inteira.
+  if (typeof MutationObserver === "function") {
+    new MutationObserver(applyCortexLogo).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
   }
 
   function applyUserAvatar(element,user){
