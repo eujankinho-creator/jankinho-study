@@ -34,6 +34,8 @@ import {
 
 import { prisma } from "../../lib/prisma";
 import { obterCoberturaQuestoesOficiais } from "./questoesFontesOficiais";
+import { sincronizarProvasOficiaisFGV2025, FONTE_PROVAS_REAIS } from "./questoesOficiaisFGV2025";
+import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { sincronizarCasosFaculdade } from "./casosFaculdade";
@@ -1281,16 +1283,13 @@ async function listarQuestoes(
     const ano =
       Number(anoRaw);
 
+    // Banco ativo: somente questões autênticas com proveniência conferida.
     const where:
-      any = {};
+      any = { fonte: FONTE_PROVAS_REAIS };
 
-    if (fonte) {
-      where.fonte = {
-        startsWith:
-          fonte,
-        mode:
-          "insensitive",
-      };
+    if (fonte && fonte !== FONTE_PROVAS_REAIS) {
+      // Nenhum filtro pode reativar o conteúdo legado.
+      where.fonte = "__fonte_desativada__";
     }
 
     if (banca) {
@@ -6155,29 +6154,15 @@ server.listen(
 
         await sincronizarCasosFaculdade();
 
-        await sincronizarQuestoesSaudeColetivaI();
+        // Migração oficial: insere lote verificado antes de qualquer exclusão.
+        await sincronizarProvasOficiaisFGV2025();
+        // Arquiva questões, alternativas e respostas em transações atômicas;
+        // depois retira o legado ativo preservando flashcards desvinculados.
+        await arquivarESubstituirBancoLegado();
 
-        await sincronizarQuestoesSemiotecnica();
+        // Os seeders de questões geradas (IA/autorais/estilo concursos)
+        // NÃO devem mais ser executados no novo banco oficial.
 
-        await sincronizarQuestoesDiego();
-
-        await sincronizarQuestoesFarmacocineticaHaggi();
-
-        await sincronizarQuestoesCalculoMedicamentos();
-
-        await sincronizarQuestoesLaboratorioEcg();
-
-        await sincronizarQuestoesConcursosPublicos();
-
-        await sincronizarQuestoesResidenciasFederais();
-
-        await sincronizarQuestoesEnareEbserh500();
-
-        await sincronizarQuestoesSusLegislacao200();
-
-        await sincronizarMatrizQuestoes30PorAssunto();
-
-        await sincronizarFlashcardsInteligentes();
 
       }
     )()
