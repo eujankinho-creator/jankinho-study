@@ -49,6 +49,7 @@ import { sincronizarFGVSaudeLote2025 } from "./questoesFGVSaudeLote2025Seed";
 import { sincronizarFGVAletoMacae2024 } from "./questoesFGVAletoMacae2024Seed";
 import { sincronizarFGVNovaIguacu2025 } from "./questoesFGVNovaIguacu2025Seed";
 import { sincronizarFGVEBserhTecnicos2025 } from "./questoesFGVEBserhTecnicos2025Seed";
+import { sincronizarFGVAleamTjms2026 } from "./questoesFGVAleamTjms2026Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6198,6 +6199,8 @@ server.listen(
         await sincronizarFGVNovaIguacu2025();
         // EBSERH 2025: grupos técnico de enfermagem e saúde do trabalhador, gabarito definitivo.
         await sincronizarFGVEBserhTecnicos2025();
+        // ALEAM 2025 e TJMS 2026: Enfermagem, gabaritos definitivos e deduplicação.
+        await sincronizarFGVAleamTjms2026();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
