@@ -33,6 +33,7 @@ import {
 } from "jose";
 
 import { prisma } from "../../lib/prisma";
+import { obterCoberturaQuestoesOficiais } from "./questoesFontesOficiais";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
 import { sincronizarCasosFaculdade } from "./casosFaculdade";
@@ -4920,6 +4921,18 @@ const server =
           return;
         }
 
+
+        if (caminho === "/api/questoes/cobertura-oficial" && metodo === "GET") {
+          const usuarioId = await exigirUsuario(request, response);
+          if (!usuarioId) return;
+          try {
+            json(response, 200, await obterCoberturaQuestoesOficiais(usuarioId));
+          } catch (erro) {
+            console.error("[questoes-oficiais] erro na cobertura:", erro);
+            json(response, 500, { error: "Não foi possível consultar a cobertura oficial." });
+          }
+          return;
+        }
 
         if (
           caminho === "/api/questoes/matriz" &&

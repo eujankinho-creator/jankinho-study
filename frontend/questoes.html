@@ -405,6 +405,24 @@
           </div>
         </section>
 
+        <section class="official-coverage" id="officialCoverage" aria-labelledby="officialCoverageTitle">
+          <div class="official-coverage-head">
+            <div>
+              <span class="official-coverage-eyebrow">QUESTÕES REAIS · FONTES DOCUMENTADAS</span>
+              <h2 id="officialCoverageTitle">30 questões oficiais por assunto</h2>
+              <p>Inventário dos assuntos cadastrados e do currículo Córtex. Questões autorais ou apenas no estilo de concursos não são contadas como originais.</p>
+            </div>
+            <span class="official-coverage-stats" id="officialCoverageStats">Consultando banco...</span>
+          </div>
+          <div class="official-coverage-controls">
+            <input id="officialCoverageSearch" type="search" placeholder="Filtrar por assunto ou disciplina..." aria-label="Filtrar assuntos">
+            <select id="officialCoverageDiscipline" aria-label="Disciplina da cobertura"><option value="">Todas as disciplinas</option></select>
+          </div>
+          <p class="official-coverage-count" id="officialCoverageCount" aria-live="polite">Carregando assuntos...</p>
+          <div class="official-coverage-list" id="officialCoverageList"></div>
+          <p class="official-coverage-notice">As referências numeradas são itens reais localizados nas provas, não transcrições autorizadas. Para ler e responder ao original, abra o caderno e consulte o gabarito. A meta aumenta somente quando uma questão original completa, verificada e com direito de reprodução é importada.</p>
+        </section>
+
         <section class="filters-card">
 
           <div class="search-wrapper">
@@ -911,6 +929,7 @@
 <script defer src="/js/questoes-ui.js?v=20261002-fluid-final4"></script>
   <script defer src="/js/questoes.js?v=20261019-fonte-transparente1"></script>
   <script defer src="/js/questoes-provas-oficiais.js?v=20261011-catalog1"></script>
+  <script defer src="/js/questoes-cobertura-oficial.js?v=20261019-cobertura2"></script>
 
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>
