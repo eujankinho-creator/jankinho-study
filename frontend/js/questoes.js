@@ -137,11 +137,75 @@ function renderQuestionSource(questao) {
     ? "Questão original — "+[questao.banca,questao.orgao,questao.ano,questao.origemId].filter(Boolean).join(" · ")
     : "Material de estudo do Córtex · "+fonte+" (não confirmado como transcrição de prova oficial)";
   if(/^https:\/\//i.test(url)) {
+    if(official) return '<a class="question-source official-source-link" href="'+escapeHtml(url)+
+      '" target="_blank" rel="noopener noreferrer">FGV / EBSERH · 2025 · Caderno original ↗</a>';
     return '<a class="question-source" href="'+escapeHtml(url)+
       '" target="_blank" rel="noopener noreferrer">'+
       escapeHtml(descriptor)+" · Abrir referência ↗</a>";
   }
   return '<span class="question-source">'+escapeHtml(descriptor)+"</span>";
+}
+
+
+/* Questões de origem oficial são exibidas com a prova verdadeira,
+   sem trocar a posição A-E nem repetir instruções longas no enunciado. */
+const CORTEX_OFFICIAL_SOURCE = "cortex-prova-original-verificada-v1";
+
+function isOfficialExamQuestion(q) {
+  return Boolean(q && q.fonte === CORTEX_OFFICIAL_SOURCE &&
+    /^fgv-ebserh-2025-grupo-enfermagem-tipo1-q\d{2}$/.test(String(q.origemId || "")));
+}
+
+function getOfficialQuestionNumber(q) {
+  const match = String(q && q.origemId || "").match(/-q(\d{2})$/);
+  return match ? Number(match[1]) : 0;
+}
+
+function getOfficialLetter(alt) {
+  const match = String(alt && alt.texto || "").match(/^Alternativa\s+([A-E])(?:\s|$)/i);
+  return match ? match[1].toUpperCase() : "";
+}
+
+function orderOfficialAnswers(q) {
+  const alternatives = Array.isArray(q.alternativas) ? q.alternativas : [];
+  if (!isOfficialExamQuestion(q)) return embaralhar(alternatives);
+  return [...alternatives].sort((a,b) => {
+    const la=getOfficialLetter(a), lb=getOfficialLetter(b);
+    return (la ? la.charCodeAt(0) : 99) - (lb ? lb.charCodeAt(0) : 99);
+  });
+}
+
+function getOfficialExamLink(q) {
+  if (!isOfficialExamQuestion(q)) return "";
+  try {
+    const url = new URL(String(q.fonteUrl || ""), window.location.origin);
+    if (url.protocol !== "https:" ||
+        url.hostname !== "conhecimento.fgv.br" ||
+        !/^\/sites\/default\/files\/concursos\/[a-z0-9-]+\.pdf$/i.test(url.pathname)) return "";
+    const page = Number(url.hash.match(/page=(\d+)/)?.[1]) || 1;
+    url.hash = "page=" + Math.max(1, Math.min(page,100));
+    return url.href;
+  } catch (_) { return ""; }
+}
+
+function renderOfficialQuestionHeading(q, compact=false) {
+  const number = getOfficialQuestionNumber(q);
+  const title = escapeHtml(q.tema || "Conteúdo de Enfermagem");
+  if (compact) return '<h3 class="official-exam-list-title">Questão '+number+' · '+title+'</h3>'+
+    '<p class="official-exam-list-note">FGV / EBSERH 2025 · Enfermagem · Tipo 1 · Enunciado na prova original</p>';
+  const link = getOfficialExamLink(q);
+  return '<div class="official-question-intro">'+
+    '<span class="official-question-kicker">FGV · EBSERH 2025 · ENFERMAGEM · TIPO 1</span>'+
+    '<h2>Questão '+number+' <span>· '+title+'</span></h2>'+
+    '<p>Leia o enunciado e as alternativas originais no caderno da banca. Depois marque a mesma letra abaixo.</p>'+
+    '</div>'+
+    (link ? '<details class="official-exam-embed" open>'+
+      '<summary>Visualizar questão no caderno original</summary>'+
+      '<div class="official-exam-frame-wrap"><iframe class="official-exam-frame" loading="lazy" title="Prova original da FGV/EBSERH, questão '+number+'" src="'+escapeHtml(link)+'"></iframe></div>'+
+      '<div class="official-exam-embed-footer"><span>Localize a <strong>questão '+number+'</strong> na página indicada. O documento é fornecido pela FGV.</span>'+
+      '<a href="'+escapeHtml(link)+'" target="_blank" rel="noopener noreferrer">Abrir PDF oficial ↗</a></div>'+
+      '</details>' :
+      '<p class="official-pdf-unavailable">Documento externo indisponível. Consulte a referência oficial abaixo.</p>');
 }
 
 function mostrarErro(mensagem) {
@@ -956,11 +1020,9 @@ function renderLista() {
               </div>
 
 
-              <h3>
-                ${escapeHtml(
-                  questao.enunciado
-                )}
-              </h3>
+              ${isOfficialExamQuestion(questao)
+                ? renderOfficialQuestionHeading(questao, true)
+                : '<h3>' + escapeHtml(questao.enunciado) + '</h3>'}
 
 
               ${renderQuestionVisual(
@@ -1306,14 +1368,7 @@ function iniciarComQuestoes(
         return {
           ...questao,
 
-          alternativas:
-            embaralhar(
-              Array.isArray(
-                questao.alternativas
-              )
-                ? questao.alternativas
-                : []
-            )
+          alternativas: orderOfficialAnswers(questao)
         };
 
       }
@@ -1516,9 +1571,9 @@ function renderSessao() {
           </span>
 
           <span class="option-text">
-            ${escapeHtml(
-              alternativa.texto
-            )}
+            ${isOfficialExamQuestion(questao)
+              ? "Marcar alternativa " + escapeHtml(getOfficialLetter(alternativa) || String.fromCharCode(65 + indice))
+              : escapeHtml(alternativa.texto)}
           </span>
 
           ${estadoResposta}
@@ -1630,11 +1685,9 @@ function renderSessao() {
           </div>
 
 
-          <h2>
-            ${escapeHtml(
-              questao.enunciado
-            )}
-          </h2>
+          ${isOfficialExamQuestion(questao)
+            ? renderOfficialQuestionHeading(questao)
+            : '<h2>' + escapeHtml(questao.enunciado) + '</h2>'}
 
 
           ${renderQuestionSource(
@@ -1724,13 +1777,22 @@ function renderSessao() {
             }
 
 
-            state.selecionada =
-              Number(
-                botao.dataset.option
-              );
+            state.selecionada = Number(botao.dataset.option);
 
-
-            renderSessao();
+            if (isOfficialExamQuestion(questao)) {
+              // Trocar seleção sem reconstruir o iframe da prova:
+              // evita perda da página e novo download do PDF.
+              document.querySelectorAll("#sessaoQuestao .session-option")
+                .forEach(function(option) {
+                  const chosen = Number(option.dataset.option) === state.selecionada;
+                  option.classList.toggle("selected", chosen);
+                  option.setAttribute("aria-pressed", String(chosen));
+                });
+              const confirmar = document.getElementById("confirmarResposta");
+              if (confirmar) confirmar.disabled = false;
+            } else {
+              renderSessao();
+            }
           }
         );
       }
