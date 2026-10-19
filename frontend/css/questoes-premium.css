@@ -2631,3 +2631,45 @@ html[data-theme="light-white"] body.questions-view .official-exam-embed-footer a
   .questions-view .official-question-intro h2 {font-size:21px;}
   .questions-view .session-option {min-height:54px;}
 }
+
+
+/* QUESTÕES NATIVAS - texto integral e opções no Córtex */
+.questions-view .official-question-intro {margin-bottom:16px;}
+.questions-view .official-question-body {
+  max-width:870px;margin:0;padding:0;
+  font-size:clamp(13px,1.28vw,15px);
+  font-weight:430;line-height:1.85;letter-spacing:0;
+  color:var(--theme-text,#e7e9ed);overflow-wrap:anywhere;
+}
+.questions-view .official-question-body p {margin:0 0 17px;font:inherit;color:inherit;}
+.questions-view .official-question-body p:last-child {margin-bottom:0;}
+.questions-view .official-original-loading {font-size:13px;line-height:1.6;color:var(--theme-text-muted,#a1a1aa);}
+.questions-view .official-source-label {
+  display:block;max-width:870px;margin-top:18px;
+  font-size:11px;line-height:1.65;font-weight:450;
+  color:var(--theme-text-muted,#b6bac3)!important;
+}
+.questions-view .session-option .option-text {
+  font-size:clamp(12.5px,1.2vw,14px);
+  line-height:1.65;font-weight:450;white-space:normal;overflow-wrap:break-word;
+}
+.questions-view .session-option .option-letter {flex:0 0 36px;text-align:center;font-weight:650;}
+.questions-view .official-reference-tag {
+  display:inline-flex;font-size:10px;padding:5px 8px;border-radius:8px;
+  color:var(--theme-text);border:1px solid var(--theme-border-strong);
+  background:var(--theme-surface);
+}
+html[data-theme="light-white"] body.questions-view .official-question-body,
+html[data-theme="light-white"] body.questions-view .official-question-body p {
+  color:#1d2939!important;font-weight:430!important;
+}
+html[data-theme="light-white"] body.questions-view .official-source-label,
+html[data-theme="light-white"] body.questions-view .official-original-loading {color:#465568!important;}
+html[data-theme="light-white"] body.questions-view .session-option .option-text {
+  color:#253144!important;font-weight:440!important;
+}
+@media(max-width:650px) {
+  .questions-view .official-question-body {font-size:13.5px;line-height:1.75;}
+  .questions-view .session-question {padding:19px 16px;}
+  .questions-view .session-alternatives {padding:16px 14px;}
+}

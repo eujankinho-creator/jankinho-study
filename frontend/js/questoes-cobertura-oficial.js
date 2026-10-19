@@ -76,19 +76,18 @@ function render(){
     a.disciplina.localeCompare(b.disciplina,"pt-BR") ||
     a.assunto.localeCompare(b.assunto,"pt-BR"));
  $("officialCoverageCount").textContent=linhas.length+" assunto(s) exibido(s) · "+
-   referencias.length+" questões numeradas do caderno oficial FGV/EBSERH indexadas como referências externas.";
+   referencias.length+" questões originais catalogadas; os itens incorporados são respondidos no próprio Córtex.";
  $("officialCoverageList").innerHTML=linhas.map(item=>{
   const n=Math.min(item.meta,item.originaisVerificadas);
-  const urls=item.refs.slice(0,5).map(q=>
-   '<a target="_blank" rel="noopener noreferrer" title="'+esc(q.resumo)+'" href="'+esc(q.prova)+'">FGV/EBSERH 2025 · Q'+q.numero+'</a>'
-  ).join("");
+  const refs=item.refs.slice(0,5).map(q=>
+   '<span class="official-reference-tag" title="'+esc(q.resumo)+'">FGV/EBSERH 2025 · Q'+q.numero+'</span>'
+ ).join("");
   return '<article class="official-coverage-item"><small>'+esc(item.disciplina)+'</small>'+
   '<strong>'+esc(item.assunto)+'</strong>'+
   '<small>'+n+' / '+item.meta+' originais incorporadas · '+item.totalBanco+' questões totais no banco</small>'+
   '<progress value="'+n+'" max="'+item.meta+'"></progress>'+
-  (item.refs.length ? '<small>'+item.refs.length+' referência(s) documental(is) localizada(s) no caderno FGV 2025 (não contam como importação):</small>'+
-   '<div class="official-coverage-ref">'+urls+
-   '<a href="'+esc(gabarito)+'" target="_blank" rel="noopener noreferrer">Gabarito definitivo ↗</a></div>' :
+  (item.refs.length ? '<small>'+item.refs.length+' referência(s) documentais desta prova:</small>'+
+   '<div class="official-coverage-ref">'+refs+'</div>' :
    '<small>Sem referência individual indexada neste lote. A pesquisa continuará por outras provas.</small>')+
   '</article>';
  }).join("")||'<p>Nenhum assunto corresponde aos filtros.</p>';

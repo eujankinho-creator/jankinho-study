@@ -126,24 +126,15 @@ function renderQuestionVisual(
 
 
 function renderQuestionSource(questao) {
-  const fonte=String(questao&&questao.fonte||"").trim();
-  if(!fonte) return "";
-
-  const url=String(questao.fonteUrl||"").trim();
-  const official=fonte==="cortex-prova-original-verificada-v1" &&
-    /^https:\/\//i.test(url) && questao.origemId &&
-    questao.banca && questao.ano && questao.cargo;
-  const descriptor=official
-    ? "Questão original — "+[questao.banca,questao.orgao,questao.ano,questao.origemId].filter(Boolean).join(" · ")
-    : "Material de estudo do Córtex · "+fonte+" (não confirmado como transcrição de prova oficial)";
-  if(/^https:\/\//i.test(url)) {
-    if(official) return '<a class="question-source official-source-link" href="'+escapeHtml(url)+
-      '" target="_blank" rel="noopener noreferrer">FGV / EBSERH · 2025 · Caderno original ↗</a>';
-    return '<a class="question-source" href="'+escapeHtml(url)+
-      '" target="_blank" rel="noopener noreferrer">'+
-      escapeHtml(descriptor)+" · Abrir referência ↗</a>";
+  const fonte = String(questao && questao.fonte || "").trim();
+  if (!fonte) return "";
+  if (fonte === "cortex-prova-original-verificada-v1") {
+    const n = getOfficialQuestionNumber(questao);
+    return '<div class="question-source official-source-label" role="note">'+
+      'Fonte: FGV · EBSERH · Edital 03/2024 · Prova 16/03/2025 · Tipo 1'+
+      (n ? ' · Questão '+n : '')+' · Gabarito definitivo da banca</div>';
   }
-  return '<span class="question-source">'+escapeHtml(descriptor)+"</span>";
+  return '<span class="question-source">'+escapeHtml(fonte)+'</span>';
 }
 
 
@@ -162,7 +153,7 @@ function getOfficialQuestionNumber(q) {
 }
 
 function getOfficialLetter(alt) {
-  const match = String(alt && alt.texto || "").match(/^Alternativa\s+([A-E])(?:\s|$)/i);
+  const match = String(alt && alt.texto || "").match(/^(?:Alternativa\s+)?([A-E])(?:\)|\s*[-—:]|\s+)/i);
   return match ? match[1].toUpperCase() : "";
 }
 
@@ -175,37 +166,22 @@ function orderOfficialAnswers(q) {
   });
 }
 
-function getOfficialExamLink(q) {
-  if (!isOfficialExamQuestion(q)) return "";
-  try {
-    const url = new URL(String(q.fonteUrl || ""), window.location.origin);
-    if (url.protocol !== "https:" ||
-        url.hostname !== "conhecimento.fgv.br" ||
-        !/^\/sites\/default\/files\/concursos\/[a-z0-9-]+\.pdf$/i.test(url.pathname)) return "";
-    const page = Number(url.hash.match(/page=(\d+)/)?.[1]) || 1;
-    url.hash = "page=" + Math.max(1, Math.min(page,100));
-    return url.href;
-  } catch (_) { return ""; }
-}
-
 function renderOfficialQuestionHeading(q, compact=false) {
-  const number = getOfficialQuestionNumber(q);
-  const title = escapeHtml(q.tema || "Conteúdo de Enfermagem");
-  if (compact) return '<h3 class="official-exam-list-title">Questão '+number+' · '+title+'</h3>'+
-    '<p class="official-exam-list-note">FGV / EBSERH 2025 · Enfermagem · Tipo 1 · Enunciado na prova original</p>';
-  const link = getOfficialExamLink(q);
+  const numero = getOfficialQuestionNumber(q);
+  const assunto = escapeHtml(q.tema || "Enfermagem");
+  const legacy = /^QUESTÃO OFICIAL Nº /i.test(String(q.enunciado || ""));
+  if (compact) return '<h3 class="official-exam-list-title">Questão '+numero+' · '+assunto+'</h3>'+
+    '<p class="official-exam-list-note">FGV / EBSERH 2025 · Enunciado e alternativas disponíveis no Córtex</p>';
+  const paragraphs = String(q.enunciado || "").trim().split(/\n\s*\n/).filter(Boolean);
+  const content = legacy
+    ? '<p class="official-original-loading">O texto original está sendo sincronizado. Atualize em instantes.</p>'
+    : '<div class="official-question-body">'+paragraphs.map(function(p) {
+        return '<p>'+escapeHtml(p).replace(/\n/g, ' ')+'</p>';
+      }).join('')+'</div>';
   return '<div class="official-question-intro">'+
     '<span class="official-question-kicker">FGV · EBSERH 2025 · ENFERMAGEM · TIPO 1</span>'+
-    '<h2>Questão '+number+' <span>· '+title+'</span></h2>'+
-    '<p>Leia o enunciado e as alternativas originais no caderno da banca. Depois marque a mesma letra abaixo.</p>'+
-    '</div>'+
-    (link ? '<details class="official-exam-embed" open>'+
-      '<summary>Visualizar questão no caderno original</summary>'+
-      '<div class="official-exam-frame-wrap"><iframe class="official-exam-frame" loading="lazy" title="Prova original da FGV/EBSERH, questão '+number+'" src="'+escapeHtml(link)+'"></iframe></div>'+
-      '<div class="official-exam-embed-footer"><span>Localize a <strong>questão '+number+'</strong> na página indicada. O documento é fornecido pela FGV.</span>'+
-      '<a href="'+escapeHtml(link)+'" target="_blank" rel="noopener noreferrer">Abrir PDF oficial ↗</a></div>'+
-      '</details>' :
-      '<p class="official-pdf-unavailable">Documento externo indisponível. Consulte a referência oficial abaixo.</p>');
+    '<h2>Questão '+numero+' <span>· '+assunto+'</span></h2>'+
+    '</div>'+content;
 }
 
 function mostrarErro(mensagem) {
@@ -1572,7 +1548,7 @@ function renderSessao() {
 
           <span class="option-text">
             ${isOfficialExamQuestion(questao)
-              ? "Marcar alternativa " + escapeHtml(getOfficialLetter(alternativa) || String.fromCharCode(65 + indice))
+              ? escapeHtml(String(alternativa.texto || "").replace(/^\s*[A-E]\)\s*/i, ""))
               : escapeHtml(alternativa.texto)}
           </span>
 

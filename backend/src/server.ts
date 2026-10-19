@@ -35,6 +35,7 @@ import {
 import { prisma } from "../../lib/prisma";
 import { obterCoberturaQuestoesOficiais } from "./questoesFontesOficiais";
 import { sincronizarProvasOficiaisFGV2025, FONTE_PROVAS_REAIS } from "./questoesOficiaisFGV2025";
+import { preencherQuestoesOriginaisFGV2025 } from "./questoesFGV2025Completar";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6156,6 +6157,8 @@ server.listen(
 
         // Migração oficial: insere lote verificado antes de qualquer exclusão.
         await sincronizarProvasOficiaisFGV2025();
+        // Transforma os registros existentes em questões integralmente respondíveis no Córtex.
+        await preencherQuestoesOriginaisFGV2025();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
