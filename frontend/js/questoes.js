@@ -150,7 +150,7 @@ const CORTEX_OFFICIAL_SOURCE = "cortex-prova-original-verificada-v1";
 
 function isOfficialExamQuestion(q) {
   return Boolean(q && q.fonte === CORTEX_OFFICIAL_SOURCE &&
-    /^fgv-(?:ebserh-2025-grupo-enfermagem-tipo1|abreu-lima-2024-enfermeiro-tipo1|camara-2023-enfermeiro-tarde-tipo1)-q\d{2}$/.test(String(q.origemId || "")));
+    /^fgv-(?:ebserh-2025-grupo-enfermagem-tipo1|abreu-lima-2024-enfermeiro-tipo1|camara-2023-enfermeiro-tarde-tipo1|caraguatatuba-2024-enfermeiro-tipo1)-q\d{2}$/.test(String(q.origemId || "")));
 }
 
 function getOfficialQuestionNumber(q) {

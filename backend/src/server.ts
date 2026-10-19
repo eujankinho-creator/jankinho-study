@@ -38,6 +38,7 @@ import { sincronizarProvasOficiaisFGV2025, FONTE_PROVAS_REAIS } from "./questoes
 import { preencherQuestoesOriginaisFGV2025 } from "./questoesFGV2025Completar";
 import { sincronizarFGVAbreuLimaEnfermagem2024 } from "./questoesFGVAbreuLima2024Seed";
 import { sincronizarFGVCamaraEnfermeiro2023 } from "./questoesFGVCamara2023Seed";
+import { sincronizarFGVCaraguatatuba2024 } from "./questoesFGVCaragua2024Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6165,6 +6166,8 @@ server.listen(
         await sincronizarFGVAbreuLimaEnfermagem2024();
         // 68 questões de Enfermagem e SUS da FGV Câmara dos Deputados 2023.
         await sincronizarFGVCamaraEnfermeiro2023();
+        // 28 itens específicos de Enfermagem — FGV Caraguatatuba 2024.
+        await sincronizarFGVCaraguatatuba2024();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
