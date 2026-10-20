@@ -99,7 +99,7 @@ export function validarManifesto(value: unknown, arquivo: string): Manifesto {
           !stringValida(questao.assunto, 2, 200) || !stringValida(questao.enunciado, 25, 10000) ||
           !Array.isArray(questao.alternativas) ||
           (questao.alternativas.length !== 4 && questao.alternativas.length !== 5) ||
-          !questao.alternativas.every((a: unknown) => stringValida(a, 2, 3500)) ||
+          !questao.alternativas.every((a: unknown) => stringValida(a, 1, 3500)) ||
           typeof questao.correta !== "string" ||
           !("ABCDE".slice(0, questao.alternativas.length)).includes(questao.correta)) {
         erro(arquivo + ": questão inválida em " + prova.codigo + " nº " + numero);
