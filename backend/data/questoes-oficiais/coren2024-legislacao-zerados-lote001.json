@@ -208,6 +208,253 @@
       "gabaritoDefinitivo": true,
       "questoes": [
         {
+          "numero": 11,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "A CPU de um computador de uso pessoal é composta de diversas partes funcionais. Um dos componentes de hardware de uma CPU é:",
+          "alternativas": [
+            "a Unidade Lógica e Aritmética",
+            "o Gabinete e sua fonte de alimentação",
+            "o Basic Input-Output Subsystem (BIOS)",
+            "o Peripheral Component Interconnect (PCI)"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Informática",
+          "assunto": "Windows",
+          "enunciado": "Durante o uso do sistema operacional Windows 10 em português, por vezes, um usuário precisa obter a lista dos serviços que estão em execução no momento. Um dos utilitários que pode fornecer essa informação é o:",
+          "alternativas": [
+            "Defender",
+            "Microsoft Store",
+            "Explorador de arquivos",
+            "Gerenciador de Tarefas"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Para proteger a rede interna da empresa, pode-se utilizar equipamentos que monitoram e filtram o tráfego de entrada e saída da rede, baseando-se em um conjunto definido de regras de segurança. Esse tipo de equipamento é denominado:",
+          "alternativas": [
+            "Hub",
+            "Bridge",
+            "Firewall",
+            "Antivírus"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Um usuário do sistema operacional Windows que conhece o nome e o IP de um computador da rede interna precisa investigar se esse computador está ativo e respondendo a comandos. Para isso, pode iniciar sua investigação fazendo uso do utilitário:",
+          "alternativas": [
+            "tree",
+            "ping",
+            "ifconfig",
+            "ipconfig"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Com relação à ética do servidor público no exercício de suas funções, caracteriza-se como um dever fundamental do servidor público:",
+          "alternativas": [
+            "dar o seu concurso a qualquer instituição que atente contra a moral",
+            "exercer com estrita moderação as prerrogativas funcionais que lhe sejam atribuídas",
+            "fazer uso de informações privilegiadas obtidas no âmbito interno de seu serviço",
+            "deixar de utilizar os avanços técnicos e científicos do seu conhecimento para atendimento do seu mister"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "Os serviços públicos que atendem às necessidades coletivas, em que o Estado assume e executa, direta ou indiretamente, usando de supremacia sobre os administrados, são classificados como:",
+          "alternativas": [
+            "próprios",
+            "delegados",
+            "impróprios",
+            "contratos de gestão"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Atos Administrativos",
+          "enunciado": "O ato administrativo, quanto ao seu conteúdo que é unilateral e vinculado, em que a Administração reconhece ao particular o direito de prestação de um serviço público, quando preenchidos todos os requisitos legais, denomina-se:",
+          "alternativas": [
+            "cessão",
+            "utilização",
+            "admissão",
+            "aprovação"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Poderes Administrativos",
+          "enunciado": "O procedimento pelo qual o Poder Público transfere para si a propriedade de terceiro mediante pagamento em dinheiro por razões de necessidade ou utilidade pública ou por interesse social é conhecido como:",
+          "alternativas": [
+            "requisição administrativa da propriedade",
+            "inviolabilidade domiciliar",
+            "direito de propriedade",
+            "desapropriação"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Enfermagem",
+          "assunto": "Gerenciamento de Resíduos de Serviços de Saúde (GRSS)",
+          "enunciado": "Para efeito da Resolução n.⁰ 222/2018, a definição “guarda do resíduo contendo produto químico ou rejeito radioativo na área de trabalho, em condições definidas pela legislação e normas aplicáveis a essa atividade” refere-se a:",
+          "alternativas": [
+            "abrigo externo",
+            "abrigo temporário",
+            "acondicionamento",
+            "armazenamento interno"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Cabe à organização, quanto ao Equipamento de Proteção Individual – EPI, fornecer ao empregado, gratuitamente, EPI adequado ao risco, em perfeito estado de conservação e funcionamento. T al determinação está prevista na Norma Regulamentadora:",
+          "alternativas": [
+            "NR-6",
+            "NR-8",
+            "NR-10",
+            "NR-12"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Educação Permanente em Saúde",
+          "enunciado": "Segundo a RDC 63/2011, o serviço de saúde deve promover a capacitação de seus profissionais antes do início das atividades e de forma permanente em conformidade com as atividades desenvolvidas. T al capacitação deve incluir:",
+          "alternativas": [
+            "saúde",
+            "conteúdo de gestão",
+            "conteúdo de capacitação profissional",
+            "medidas de controle que minimizem a exposição aos agentes"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Uma das atividades de profissionais de saúde ou responsáveis pelos estabelecimentos de saúde públicos ou privados é a notificação compulsória que é a comunicação obrigatória à autoridade de saúde sobre a ocorrência de suspeita ou confirmação de doença, agravo ou evento de saúde pública previsto em Lei, podendo ser imediata ou semanal. Uma patologia que deve ser notificada é a:",
+          "alternativas": [
+            "fibromialgia",
+            "fibrose cística",
+            "doença de cronh",
+            "doença de Creutzfeldt-Jakob"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "A Norma Regulamentadora – NR que tem por finalidade estabelecer as diretrizes básicas para a implementação de medidas de proteção à segurança e à saúde dos trabalhadores dos serviços de saúde, bem como daqueles que exercem atividades de promoção e assistência à saúde em geral é a NR:",
+          "alternativas": [
+            "35",
+            "32",
+            "25",
+            "10"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Segundo a Resolução - RDC Nº 63/2011, o serviço de saúde deve garantir mecanismos de orientação aos trabalhadores sobre imunização contra:",
+          "alternativas": [
+            "tétano, hepatite B, covid19",
+            "tétano, difteria, hepatite B",
+            "tétano, difteria, hepatite B e contra outros agentes biológicos a que os trabalhadores possam estar expostos",
+            "tétano, hepatite B, covid19 e contra outros agentes biológicos a que os trabalhadores possam estar expostos"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "A tuberculose é um dos agravos fortemente influenciados pelos determinantes sociais, apresentando relação direta com a pobreza e a exclusão social. A principal maneira de prevenir a tuberculose é com a vacina BCG (Bacillus Calmette-Guérin), disponível gratuitamente no SUS. Essa vacina protege contra as formas mais graves da doença e deve ser dada às crianças ao nascer, ou, no máximo, até:",
+          "alternativas": [
+            "02 anos, 11 meses e 29 dias",
+            "04 anos, 11 meses e 29 dias",
+            "05 anos, 11 meses e 29 dias",
+            "06 anos, 11 meses e 29 dias"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Na avaliação de risco dos agentes biológicos, é de suma importância a estimativa do risco, o dimensionamento da estrutura para a contenção e a tomada de decisão para o gerenciamento dos riscos identificados. Para tanto, consideram-se alguns critérios, entre os quais, destacam-se:",
+          "alternativas": [
+            "risco, ambiente e atividade",
+            "risco, ambiente e virulência",
+            "virulência, atividade e ambiente",
+            "virulência, concentração e volume"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "As vacinas são seguras e estimulam o sistema imunológico a proteger a pessoa contra doenças transmissíveis. Quando adotada como estratégia de saúde pública, elas são consideradas um dos melhores investimentos em saúde em relação ao custobenefício. O Programa Nacional de Imunizações do Brasil é um dos maiores do mundo, ofertando diferentes imunobiológicos para toda a população em diversas faixas etárias. Conforme as indicações do Calendário Nacional de Vacinação do Adulto e Idoso, na faixa etária entre 20 e 29 anos, a vacina a ser tomada é:",
+          "alternativas": [
+            "tríplice viral – duas doses",
+            "tríplice viral – uma dose",
+            "poliomielite – uma dose",
+            "varicela – duas doses"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "A Norma Regulamentadora - NR que estabelece os requisitos para aprovação, comercialização, fornecimento e utilização de Equipamentos de Proteção Individual – EPI é a NR:",
+          "alternativas": [
+            "1",
+            "2",
+            "4",
+            "6"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Segurança do Paciente",
+          "enunciado": "De acordo com a Resolução n.⁰ 7/2010, a combinação da probabilidade de ocorrência de um dano com a gravidade de tal dano refere-se à definição de:",
+          "alternativas": [
+            "risco",
+            "ocorrência",
+            "prevalência",
+            "patogenicidade"
+          ],
+          "correta": "A"
+        },
+        {
           "numero": 37,
           "disciplina": "Legislação do COFEN",
           "assunto": "Sistema COFEN/COREN",
@@ -219,6 +466,45 @@
             "Enfermeiro Responsável Técnico"
           ],
           "correta": "D"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Segundo a Resolução COFEN n.⁰ 736/2024, o elemento que deve estar fundamentado em suporte teórico, como teorias e modelos de cuidado, sistemas de linguagens padronizadas, instrumentos de avaliação de predição de risco validados, protocolos baseados em evidências e outros conhecimentos correlatos, como estruturas teóricas conceituais e operacionais que fornecem propriedades descritivas, explicativas, preditivas e prescritivas que lhe servem de base é o:",
+          "alternativas": [
+            "processo de enfermagem",
+            "cuidado de enfermagem",
+            "serviço de enfermagem",
+            "sistema de enfermagem"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Controle Social no SUS",
+          "enunciado": "O Conselho de Saúde, em caráter permanente e deliberativo, órgão colegiado que atua na formulação de estratégias e no controle da execução da política de saúde na instância correspondente, inclusive nos aspectos econômicos e financeiros, cujas decisões serão homologadas pelo chefe do poder legalmente constituído em cada esfera do governo, é composto por representantes do governo, prestadores de serviço, profissionais de saúde e:",
+          "alternativas": [
+            "políticos",
+            "usuários",
+            "hospitais",
+            "laboratórios"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Nos casos de precauções por aerossóis, os profissionais de saúde deverão utilizar as medidas da precaução padrão e:",
+          "alternativas": [
+            "luvas",
+            "luvas estéreis",
+            "máscara PFF2",
+            "máscara cirúrgica"
+          ],
+          "correta": "C"
         }
       ]
     }
