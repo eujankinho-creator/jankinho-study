@@ -40,18 +40,21 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
 
   const nomes = new Map(disciplinas.map((d) => [d.id, d.nome]));
   type Linha = {
-    disciplina: string; assunto: string; totalBanco: number;
+    disciplina: string; disciplinas: string[]; assunto: string; totalBanco: number;
     originaisVerificadas: number; meta: number; faltam: number;
   };
   const itens = new Map<string, Linha>();
   const obter = (disciplina: string, assunto: string) => {
     const disciplinaUnica = disciplinaCanonica(disciplina);
     const temaUnico = assuntoCanonico(disciplinaUnica, assunto);
-    const chave = normalizar(disciplinaUnica) + "|" + normalizar(temaUnico);
+    // Unifica nomes iguais (inclusive seus aliases) entre disciplinas.
+    const chave = normalizar(temaUnico);
     let linha = itens.get(chave);
     if (!linha) {
-      linha = { disciplina: disciplinaUnica, assunto: temaUnico, totalBanco: 0, originaisVerificadas: 0, meta: META, faltam: META };
+      linha = { disciplina: disciplinaUnica, disciplinas: [disciplinaUnica], assunto: temaUnico, totalBanco: 0, originaisVerificadas: 0, meta: META, faltam: META };
       itens.set(chave, linha);
+    } else if (!linha.disciplinas.some(d => normalizar(d) === normalizar(disciplinaUnica))) {
+      linha.disciplinas.push(disciplinaUnica);
     }
     return linha;
   };
@@ -102,9 +105,10 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
   }
 
   const linhas = [...itens.values()].map((item) => ({
-    ...item, faltam: Math.max(0, META - item.originaisVerificadas),
+    ...item,
+    disciplinas: [...item.disciplinas].sort((a,b) => a.localeCompare(b, "pt-BR")),
+    faltam: Math.max(0, META - item.originaisVerificadas),
   })).sort((a,b) =>
-    a.disciplina.localeCompare(b.disciplina, "pt-BR") ||
     a.assunto.localeCompare(b.assunto, "pt-BR")
   );
   return {
@@ -114,7 +118,7 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
     faltamPara9000: Math.max(0, 9000 - ids.size),
     questoesPorArquivoMassivo: 1000,
     assuntos: linhas.length,
-    disciplinas: new Set(linhas.map((x) => x.disciplina)).size,
+    disciplinas: new Set(linhas.flatMap((x) => x.disciplinas)).size,
     metaTotal: META * linhas.length,
     questoesVerificadas: linhas.reduce((sum, x) => sum + Math.min(META,x.originaisVerificadas),0),
     questoesNoBanco: linhas.reduce((sum, x) => sum + x.totalBanco,0),

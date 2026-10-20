@@ -70,7 +70,7 @@ function render(){
  const needle=norm($("officialCoverageSearch").value);
  const disciplina=$("officialCoverageDiscipline").value;
  const linhas=dados.itens.map(item=>({...item,refs:refsPara(item.assunto)}))
-  .filter(item=>(!disciplina||item.disciplina===disciplina)&&
+  .filter(item=>(!disciplina||(item.disciplinas||[item.disciplina]).includes(disciplina))&&
     (!needle||norm(item.assunto+" "+item.disciplina).includes(needle)))
   .sort((a,b)=>b.refs.length-a.refs.length ||
     a.disciplina.localeCompare(b.disciplina,"pt-BR") ||
@@ -82,7 +82,7 @@ function render(){
   const refs=item.refs.slice(0,5).map(q=>
    '<span class="official-reference-tag" title="'+esc(q.resumo)+'">FGV/EBSERH 2025 · Q'+q.numero+'</span>'
  ).join("");
-  return '<article class="official-coverage-item"><small>'+esc(item.disciplina)+'</small>'+
+  return '<article class="official-coverage-item"><small>'+esc((item.disciplinas||[item.disciplina]).join(" · "))+'</small>'+
   '<strong>'+esc(item.assunto)+'</strong>'+
   '<small>'+n+' / '+item.meta+' originais incorporadas · '+item.totalBanco+' questões totais no banco</small>'+
   '<progress value="'+n+'" max="'+item.meta+'"></progress>'+
@@ -99,7 +99,7 @@ async function carregar(){
   dados=await r.json();
   if(!Array.isArray(dados.itens))throw Error("Resposta inválida");
   $("officialCoverageStats").textContent=dados.questoesVerificadas+" / "+dados.metaTotal+" questões originais validadas";
-  const disciplinas=[...new Set(dados.itens.map(x=>x.disciplina))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
+  const disciplinas=[...new Set(dados.itens.flatMap(x=>x.disciplinas||[x.disciplina]))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
   $("officialCoverageDiscipline").innerHTML='<option value="">Todas as disciplinas</option>'+
    disciplinas.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join("");
   render();
