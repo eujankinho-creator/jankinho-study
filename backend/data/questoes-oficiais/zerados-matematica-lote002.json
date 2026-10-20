@@ -1,0 +1,103 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "prioridade-assuntos-zerados-matematica-lote002",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "fgv-canaa-carajas-2025-professor-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Prefeitura de Canaã dos Carajás",
+      "cargo": "Professor de Matemática — Tipo 1 — Manhã",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-de-matematicacns311-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/prefcanaa202402_gabarito_definitivo_-compilado-30.03_0.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 42,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Considere o sistema de equações do 1º grau, com incógnitas x e y, dado por x + ay = 1 e bx + y = 2. Se a e b são números reais, é correto afirmar que haverá mais de uma solução para o sistema se",
+          "alternativas": [
+            "a = 0 e b = 1",
+            "a = 1 e b = 2",
+            "a = 2 e b = 0,5",
+            "a = 0,5 e b = 2",
+            "a = 2 e b = 2"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Considere uma sequência infinita de números reais (aₙ)ₙ∈ℕ. Se essa sequência é uma Progressão Geométrica, é necessariamente verdadeiro que",
+          "alternativas": [
+            "a₂ × a₇ = a₃ × a₆",
+            "a₅ + a₈ = a₃ + a₁₀",
+            "a₂ × a₇ = a₃ × a₈",
+            "a₅ + a₈ = a₃ + a₆",
+            "a₂² × a₄² = a₃"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Considere a função f: ℝ → ℝ tal que f(x) = 0,5 × (x − π)² + √2. É correto afirmar que f(π − ∛7) é igual a",
+          "alternativas": [
+            "f(∛7 − π)",
+            "f(π + ∛7)",
+            "−f(π − ∛7)",
+            "−f(π + ∛7)",
+            "−f(∛7 − π)"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "No plano cartesiano, considere a única reta que passa simultaneamente pelos pontos de coordenadas (2,5) e (4,11). Essa mesma reta certamente passa pelo ponto de coordenadas",
+          "alternativas": [
+            "(5,15)",
+            "(6,18)",
+            "(7,20)",
+            "(8,24)",
+            "(9,25)"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "O valor de uma grandeza M depende de outra grandeza P, de tal forma que M aumenta 20% a cada aumento em P de 3 unidades. Dessa forma, um aumento em P de 6 unidades faz com que M aumente",
+          "alternativas": [
+            "36%",
+            "40%",
+            "42%",
+            "44%",
+            "48%"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Quatro números formam uma progressão aritmética crescente. A soma desses números é igual a 40. O produto do 2º termo pelo 3º termo é 51. A diferença entre o 4º termo e o 1º termo é igual a",
+          "alternativas": [
+            "20",
+            "28",
+            "34",
+            "42",
+            "48"
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}
