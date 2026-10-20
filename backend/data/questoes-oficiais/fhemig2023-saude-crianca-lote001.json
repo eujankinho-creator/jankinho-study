@@ -1,0 +1,1502 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "FHEMIG2023-Saúde da Criança e do Adolescente",
+  "provas": [
+    {
+      "codigo": "fhemig2023-medico-med-pediatria-nivel-iiicns237",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — pediatria",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-pediatria-nivel-iiicns237-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Segundo a última versão da Caderneta da Criança do Ministério da Saúde, a um lactente hígido de quatro meses, em aleitamento materno exclusivo, que mora em lugar de clima quente, deve -se oferecer",
+          "alternativas": [
+            "soro oral entre as mamadas ao peito.",
+            "sucos entre as mamadas ao peito.",
+            "água entre as mamadas ao peito.",
+            "chás entre as mamadas ao peito.",
+            "o peito mais vezes"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Segundo o Guia Alimentar para crianças brasileiras menores de dois anos, do Ministério da Saúd e, 2019, um dos 12 passos para uma alimentação saudável é",
+          "alternativas": [
+            "oferecer alimentos in natura ou minimamente processados, além do leite materno, a partir dos seis meses.",
+            "amamentar até dois anos ou mais, oferecendo somente o leite materno até quatro meses.",
+            "oferecer, excepcionalmente, alimentos ultra processados para a criança.",
+            "oferecer água e sucos à criança, em vez de refrigerantes e outras bebidas açucaradas.",
+            "cozinhar comidas diferentes para a criança e para a família"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um neonato apresenta, no primeiro minuto de vida, pontuação 4 na escala de Apgar. Assinale a opção que apresenta a descrição possível para frequência cardíaca, o esforço respiratório, o tônus muscular, a resposta ao cateter nasal e a cor, respectivamente.",
+          "alternativas": [
+            "40 batimentos por minuto, apneia, flacidez, ausência de resposta e coloração pálida.",
+            "140 batimentos por minuto, respiração irregular, flacidez, careta e coloração rósea no corpo com extremidades cianóticas.",
+            "120 batimentos por minuto, respiração irregular, flexão discreta das extremidades, ausência de resposta e coloração rósea no corpo com extremidades cianóticas.",
+            "85 batimentos por minuto, respiração irregular, flexão discreta das extremidades, ausência de resposta e coloração rósea no corpo com extremidades cianóticas.",
+            "110 batimentos por minuto, respiração forte com choro vigoroso, flexão discreta das extremidades, careta e coloração rósea no corpo com extremidades cianóticas"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a causa mais co mum de hipoglicemia por hiperinsulinêmica transitória em neonato.",
+          "alternativas": [
+            "Sepses.",
+            "Oferta tardia de leite materno.",
+            "Hipoglicemia do neonato de mãe diabética.",
+            "Hiperplasia difusa de células beta do pâncreas.",
+            "Microadenoma focal de células beta do pâncreas"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Dois reflexos primitivos diminuem em torno de quatro meses de idade. O desaparecimento do primeiro permite à criança examinar um objeto na linha média e manipulá -lo com ambas as mãos; o desaparecimento do segundo permite que a criança possa segurar um objeto e larga-lo voluntariamente. Esses dois reflexos são, respectivamente,",
+          "alternativas": [
+            "tônico-cervical assimétrico / postural labiríntico.",
+            "tônico cervical assimétrico / preensão palmar.",
+            "Landau / postural labiríntico.",
+            "Moro / preensão palmar.",
+            "Moro / Landau"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "A última versão da Caderneta da Criança do Ministério da Saúde apresenta marcos do desenvolvimento infantil por faixas etárias. A faixa etária em que o lactente já é capaz de brincar de “esconde-achou”, transferir objetos de uma mão para outra, duplicar sílabas e sentar -se sem apoio, é apresentada graficamente neste documento como sendo a de",
+          "alternativas": [
+            "quatro a seis meses.",
+            "cinco a oito meses.",
+            "seis a nove meses.",
+            "sete a dez meses.",
+            "nove a doze meses"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a causa mais comum de sufocamento por broncoaspiração em um lactente hígido de menos de seis meses.",
+          "alternativas": [
+            "Dentes.",
+            "Líquidos.",
+            "Pequenos objetos.",
+            "Pedaços de alimentos.",
+            "Secreções de vias aéreas superiores"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um escolar que sofreu acidente automobilístico dá entrada em setor de emergência cianótico; taquipneico; com retrações de fúrcula, intercostais e subcostais; assimetria de tórax; desvio da traqueia para o lado esq uerdo; bons pulsos; boa perfusão capilar periférica; ritmo cardíaco regular; pressão arterial 100 x 40 mmHg e diminuição do murmúrio vesicular bilateralmente, maior à direita. Na radiografia de tórax o pulmão direito está compactado, o mediastino está de sviado para o lado esquerdo e o coração, os grandes vasos da base e o pulmão esquerdo estão comprimidos. O pediatria emergencista imediatamente assegurou ventilação e infusão endovenosa de fluidos. Assinale a opção que indica o próximo procedimento.",
+          "alternativas": [
+            "Toracostomia com inserção de dreno.",
+            "Ultrassonografia abdome.",
+            "Massagem cardíaca.",
+            "Ecocardiograma.",
+            "Toracocentese"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um escolar previamente hígido, residente em uma casa de dois cômodos, onde coabitam quatro adultos e três crianças, é acompanhado na Unidade Básica de Saúde há três semanas, com diagnóstico de pneumonia. Está com esquema vacinal completo para as vacinas do Programa Nacional de Imunização. Desacelerou o crescimento nos últimos meses. Nas três semanas em acompanhamento, apresenta perda de peso, anorexia, adinamia, sudorese noturna, febre acima de 38 C ao final da tarde e tosse com expectoração. O quadro tem mostrado piora progressiva, apesar de ter feito uso correto de broncodilatador, amoxicilina com ácido clavulânico, seguido de azitromicina. Ao exame, conjuntivite flictenular, eritema nodoso, ausculta pulmonar normal e fígado discretamente amentado. O res tante do exame físico está normal. A radiografia de tórax inicial mostra pequena condensação pulmonar, e a de seguimento, realizada após duas semanas, a mesma condensação, além de adenomegalia hilar e redução do lobo médio. Nesse caso, o diagnóstico mais provável é",
+          "alternativas": [
+            "asma.",
+            "linfoma.",
+            "tuberculose pulmonar.",
+            "pneumonia estafilocócica.",
+            "pneumonia por mycoplasma"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um pré -escolar hígido com prurido, eczema facial e nas regiões extensoras dos membros, com característica crônica e períodos de exacerbação, e história familiar para lesões do mesmo tipo. Assinale a opção que apresenta o diagnóstico mais provável.",
+          "alternativas": [
+            "Ictiose vulgar.",
+            "Dermatite atópica.",
+            "Deficiência de zinco.",
+            "Dermatite seborreica.",
+            "Dermatite de contato"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica condições associadas a níveis muito elevados de proteína C reativa.",
+          "alternativas": [
+            "Infecção bacteriana aguda e exercício vigoroso.",
+            "Vasculite sistêmica e gengivite.",
+            "Obesidade e gripe.",
+            "Cirurgia e trauma maior.",
+            "Cistite e convulsão"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Uma menina de nove anos, previamente saudável, apresenta quadro de artrite assimétrica de médias e pequenas articulações, estas típicas de dactilite; unha em dedal; uveíte; e lesões de pele papulosas eritematosas coalescentes formando placas de bordas nitidamente demarcadas e irregulares, com áreas brancacentas que, ao serem retiradas, resultam em pequenos pontos de sangramento. Na investigação laboratorial, os seguintes exames alterados: anticorpo antinuclear positivo; velocidade de hemossedimentação e pr oteína C reativa discretamente aumentadas; anemia discreta. As opções terapêuticas para este subtipo de artrite idiopática juvenil (AIJ) são: droga anti-inflamatória não hormonal; corticoide intra-articular; metotrexato e agente anti-TNF. Nesse caso, o diagnóstico mais provável é AIJ do subtipo",
+          "alternativas": [
+            "psoriática.",
+            "oligoartrite.",
+            "sistêmica.",
+            "relacionada a entesite.",
+            "poliartrite fator reumatoide negativo"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Uma criança de sete meses, recebendo prednisona na dose diária de 1mg há 1 5 dias, vai à Unidade Básica de Saúde (UBS) para vacinação conforme o calendário de vacinação do Programa Nacional de Imunização (PNI). Ela está com sua vacinação atrasada. Essa criança",
+          "alternativas": [
+            "não deve receber vacinas do PNI com vírus vivo.",
+            "não deve receber nenhum tipo de vacina do PNI.",
+            "deve receber imunização passiva em um Centro de Referência de Imunobiológicos Especiais.",
+            "deve ser vacinada com todas as vacinas do PNI em um Centro de Referência de Imunobiológicos Especiais.",
+            "deve ser vacinada com todas as vacinas do PNI na UBS, para colocar seu calendário vacinal em dia"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-neonatologia-nivel-vicns228",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — neonatologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neonatologia-nivel-vicns228-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "O sinal chave para avaliação de um recém -nascido que nasceu deprimido, após as primeiras medidas para estabilização, é:",
+          "alternativas": [
+            "frequência respiratória.",
+            "frequência cardíaca.",
+            "saturação de HB.",
+            "tônus.",
+            "cor"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Fetos e recém-nascidos não respondem a certos anticorpos como o polissacarídeo do pneumococo. Entretanto, eles respondem ao Antígeno da Rubéola, ao CMV e à toxoplasmose produzindo anticorpos predominantemente da classe",
+          "alternativas": [
+            "IgA.",
+            "IgE.",
+            "IgG.",
+            "IgM.",
+            "IgS"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a primeira manobra a ser aplicada durante ressuscitação do recém-nascido a termo.",
+          "alternativas": [
+            "Oferta de oxigênio imediata.",
+            "Massagem cardíaca.",
+            "Ventilação com pressão positiva.",
+            "Volume usando solução salina.",
+            "Desfibrilação"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação à infecção urinária no recém -nascido, após a primeira semana de vida, assinale a afirmativa correta.",
+          "alternativas": [
+            "A infecção urinária no recém -nascido não está associada a malformações congênitas urinárias na primeira semana de vida, já que o recém-nascido vem de um ambiente estéril.",
+            "A infecção urinária no recém -nascido ocorre apenas por via ascendente, por isto é mais comum nas meninas no período neonatal.",
+            "A infecçã o urinária mais comum no recém -nascido é pelo estreptococo do grupo B.",
+            "A análise da urina (EAS) tem alta especificidade e sensibilidade para infecção urinária no recém-nascido.",
+            "A hemocultura deve ser obtida na suspeita de infecção urinária porque o recém-nascido pode ter bacteremia pela mesma bactéria"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "A obstrução intestinal é a emergência abdominal mais comum no período neonatal. Os sinais clínicos podem incluir dificuldade para alimentar, vômitos, distensão abdominal, entre outr os, exigindo um exame de imagem para avaliação do diagnóstico. Assinale a opção que indica o primeiro exame de imagem indicado na suspeita de obstrução intestinal.",
+          "alternativas": [
+            "Enema opaco.",
+            "Ultrassom abdominal.",
+            "Radiografia de abdome.",
+            "Seriografia abdominal.",
+            "Tomografia abdominal"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "A doença pelo Estreptococos do Grupo B (GBS) de início tardio ocorre após a primeira semana de vida. Nesse caso, é correto afirmar que",
+          "alternativas": [
+            "a profilaxia intraparto não tem efeito na ocorrência da GBS de início tardio.",
+            "a clindamicina é o tratamento de escolha.",
+            "as apresentações clínicas mais comuns são a pneumonia e a conjuntivite.",
+            "em todas as apresentações da doença, o tempo de tratamento é de 14 dias.",
+            "a doença pelo GB S não se repete em uma nova gestação, já que a mãe fica imune"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a droga associada à nefrocalcinose em recém-nascidos pré-termo.",
+          "alternativas": [
+            "Vitamina C.",
+            "Vitamina A.",
+            "Corticoide.",
+            "Furosemida.",
+            "Taurina"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "O fenômeno de catch up pode ocorrer em fetos ou recém - nascido com privação nutricional que afete o seu crescimento. Catch up em egressos de unidades neonatais é uma fase de",
+          "alternativas": [
+            "crescimento rápido, que se segue a um crescimento restrito por privação nutricional.",
+            "aumento do peso em detrimento do comprimento.",
+            "diminuição da velocidade do crescimento do perímetro cefálico.",
+            "poda de neurônios, que acontece após o nascimento.",
+            "apoptose de neurônios, que acontece após a diminuição da oferta de proteína. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "A administração de lipídeos na nutrição parenteral para o recém - nascido é uma importante fonte de energia. Entretanto, alguns cuidados são importantes durante a administração de lipídeo. Em relação ao uso do lipídeo, assinale a afirmativa correta.",
+          "alternativas": [
+            "O uso da carnitina pode melhorar a ação da lipoproteína lipase facilitando o aproveitamento do lipídeo.",
+            "A taxa de infusão de lipídeo maior que 0,25 g/Kg/hora pode estar associado à diminuição da oxigenação.",
+            "O uso da heparina pode melhorar a solubilidade do lipídeo com cálcio e fosforo, facilitando a administração destes elementos.",
+            "A glutamina facilita o transporte de ácidos graxos de cadeia longa pela membrana do miocárdio e tem um papel importante na oxidação de ácidos graxos.",
+            "A concentração de triglicerídeos é usada como marcador da tolerância aos lipídeos e por isto proteger as soluções de lipídeo da luz é importante"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Nos casos de hidropsia fetal, a grávida pode desenvolver um quadro semelhante, cursando com edema importante. Essa condição é conhecida como Síndrome de Ballantyne e a conduta correta é",
+          "alternativas": [
+            "prescrever imunoglobulina inespecífica para a grávida.",
+            "prescrever imunoglobulina ant-Rh para o feto.",
+            "realizar uma transfusão intrauterina no feto.",
+            "prescrever albumina para a grávida.",
+            "interromper a gravidez"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "O ventilador de alta frequência do tipo oscilatório pode ser uma vantagem quando usado em pré -termos com enfisema pulmonar por extravasamento de ar. Nesses casos, ao mudar de ventilação convencional para alta frequência, deve-se, incialmente,",
+          "alternativas": [
+            "aumentar a frequência através da diminuição da amplitude.",
+            "diminuir o tempo inspiratório através do aumento da MAP.",
+            "usar uma MAP alta para melhorar o retorno cardíaco.",
+            "usar uma amplitude alta para melhorar a oxigenação.",
+            "manter a mesma MAP da ventilação convencional"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação a peça em T, usada na ressuscitação, é correto afirmar que",
+          "alternativas": [
+            "o tempo inspiratório é fixo na peça em T.",
+            "o pico de pressão PIP é atingido com aumento do fluxo de gás.",
+            "é necessário o suprimento contínuo de gás para gerar pressão positiva.",
+            "a peça em T pode fornecer automaticamente PEEP e frequência da ventilação.",
+            "a peça em T é de uso complicado e só é indicado para neonatologistas experientes"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação ao óxido nítrico (NO), é correto afirmar que",
+          "alternativas": [
+            "é aprovado para uso em qualquer idade gestacional.",
+            "é usado como gás contínuo inalado e tem uma meia vida de 5 a 6 horas.",
+            "está indicado apenas quando o índice de oxigenação é baixo (< 10).",
+            "pode causar edema pulmonar se usado em recém -nascido com disfunção ventricular esquerda.",
+            "pode estar presente naturalmente no pulmão se for ofertado taurina para o recém-nascido"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Macrossomia é uma condição que pode trazer distocias de ombro e outros problemas no nascimento. Assinale a opção que apresenta a correta definição de macrossomia.",
+          "alternativas": [
+            "É o termo usado para fetos maiores que 4.000g.",
+            "É o termo usado para fetos com índice de massa corporal maior que 25.",
+            "É o termo usado para todos os fetos que são grandes para a idade gestacional.",
+            "É o termo usado para fetos com mais de 7.000g.",
+            "É o termo usado para fetos acima do percentil 97 na curva de distribuição peso para comprimento"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-cirurgia-pediatrica-nivel-vicns207",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — cirurgia pediatrica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-pediatrica-nivel-vicns207-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Criança com fístula branquial do 2º arco pode ter comunicação com",
+          "alternativas": [
+            "o ouvido interno.",
+            "o ouvido externo.",
+            "o pilar amigdaliano.",
+            "a base da língua.",
+            "a fúrcula esternal"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Recém-nascido apresenta falo, ausência bilateral de gônadas palpáveis, cariótipo 46xx e cromatina sexual positiva. Esse quadro, provavelmente, ocorre devido",
+          "alternativas": [
+            "ao aumento de gonadotrofina coriônica.",
+            "ao aumento de 21-hidroxilase.",
+            "ao aumento de 17-hidroxiprogesterona.",
+            "à diminuição de 21-hidroxilase.",
+            "ao coriocarcinoma"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Durante correção de hérnia inguinal em um menino de 1 ano notou-se ausência de ductos deferentes bilateralmente. Nesse caso, suspeita-se de",
+          "alternativas": [
+            "fibrose cística.",
+            "síndrome de Klinefelter.",
+            "tumor adrenal.",
+            "disgenesia gonadal mista.",
+            "tumor de Wilms"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "A respeito de paciente com anus imperfurado sem fístula, assinale a afirmativa correta.",
+          "alternativas": [
+            "É frequente e tem associação com síndrome de Edwards.",
+            "É raro e tem associação com síndrome de Patau.",
+            "É raro e tem associação com síndrome de Down.",
+            "É raro e não tem associação com nenhuma síndrome genética.",
+            "É frequente e não tem associação com nenhuma síndrome genética"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a causa mais frequente de estenose de junção pieloureteral.",
+          "alternativas": [
+            "Refluxo vésico-ureteral de alto grau.",
+            "Vaso polar.",
+            "Obstrução intrínseca.",
+            "Duplicação ureteral.",
+            "Dobra ureteral"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em recém -nascidos portadores de hérnia diafragmática congênita, a utilização do óxido nítrico está indicada porque",
+          "alternativas": [
+            "age como broncodilatador, melhorando a hipoplasia pulmonar.",
+            "age como vasoconstritor sistêmico, melhorando o shunt arteriovenoso.",
+            "não deve ser utilizado em casos de hipoplasia pulmonar grave.",
+            "age como bloqueador beta, com efeito inotrópico cardíaco, com melhora da hipertensão pulmonar.",
+            "age como vasodilatador pulmonar"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica o tratament o cirúrgico recomendado para recém -nascidos com hiperinsulinismo refratário ao tratamento clínico.",
+          "alternativas": [
+            "Duodenopancreatectomia.",
+            "Gastroenteroanastomose em y de Roux.",
+            "Pancreatectomia 95%.",
+            "Pancreatectomia subtotal 65%.",
+            "Pancreatectomia corpo caudal"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em crianças com atresia de vias biliares, submetidas à cirurgia de Kasai, a complicação pós-operatória precoce mais frequente é",
+          "alternativas": [
+            "deiscência da anastomose bíleo-digestiva.",
+            "hemobilia.",
+            "hemorragia digestiva por varizes esofágicas.",
+            "colangite.",
+            "trombose de veia porta"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "A técnica cirúrgica descrita por Bianchi, para tratamento de crianças com intestino curto, consiste em",
+          "alternativas": [
+            "plicaturas diversas no intestino remanescente.",
+            "sutura em barra grega do segmento dilatado com grampeadores lineares.",
+            "confecção de uma válvula invaginando um segmento intestinal, para prolongar o trânsito intestinal.",
+            "reversão de um segmento do intestino remanescente para torná-lo antiperistáltico.",
+            "divisão longitudinal de um segmento intestinal remanescente para aumentar seu comprimento"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "O achado histopatológico mais característico de atresia de v ias biliares é",
+          "alternativas": [
+            "a proliferação ductular.",
+            "a hematopoiese extracelular.",
+            "a transformação giganto-celular.",
+            "o desarranjo lobular.",
+            "a inflamação portal"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "A malformação mais comum do trato gastrintestinal é",
+          "alternativas": [
+            "a atresia de esôfago.",
+            "a atresia duodenal.",
+            "a atresia intestinal.",
+            "a duplicação intestinal.",
+            "o divertículo de Meckel"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Criança com ultrassonografia abdominal que mostra veia porta pré-duodenal e poliesplenia, suspeita-se de",
+          "alternativas": [
+            "má rotação intestinal.",
+            "atresia de vias biliares.",
+            "pâncreas anular.",
+            "pâncreas divisum.",
+            "volvo gástrico"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Criança com risco de desenvolver hipertermia maligna, deve -se evitar, na anestesia, o uso de",
+          "alternativas": [
+            "morfina.",
+            "propofol.",
+            "halotano.",
+            "dipirona.",
+            "lidocaína"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-infectologia-pediatrica-nivel-vicns220",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — infectologia pediatrica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-infectologia-pediatrica-nivel-vicns220-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "RN, dois dias de vida, nascido PV/AT sem intercorrências, assintomático, filho de mãe com teste rápido para sífilis positivo no momento do parto. VDRL da mãe negativo em dois exames durante a gestação. Foram realizados novos exames maternos no 1º dia após o parto: VDRL negativo e novo teste rápido positivo, sem tratamento prévio para sífilis. Assinale a opção que indica a conduta adequada para o caso descrito.",
+          "alternativas": [
+            "Considerar os testes rápidos falsos positivos e dar alta par após 48h.",
+            "Realizar VDRL do RN, se negativo alta em 48h.",
+            "Considerar a mãe inadequadamente tratada, rastrear RN com VDRL no sangue e líquor, punção lombar, RX de ossos longos e tratar de acordo com resultados.",
+            "Considerar a mãe inadequadamente tratada, rastrear RN com VDRL no sangue e líquor, punção lombar, RX de ossos longos e tratar com penicilina cristalina, independentemente do resultado.",
+            "Considerar a mãe inadequadamente tratada, colher VDRL do RN, se negativo, administrar penicil ina Benzatina e encaminhar para seguimento ambulatorial, sem necessidade de outros exames"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente masculino, 14 anos, com febre há 1 (um) mês, emagrecimento e discreta tosse seca. RX de tórax evidenciou derrame pleural volumoso, sendo realizada toracocentese com saída líquido amarelo citrino, sem acometimento de parênquima pulmonar. O exame com mais chance de confirmar a principal suspeita diagnóstica, considerando sensibilidade e especificidade, é",
+          "alternativas": [
+            "BAAR no líquido pleural.",
+            "adenosina deaminase (ADA ) do liquido pleural.",
+            "ensaio de liberação de interferon gama (IGRA) sérico.",
+            "análise histopatológica e cultura do fragmento de pleura.",
+            "GeneXpert no líquido pleural"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Lactente 2 meses, com IgM positivo pra To xoplasmose no teste do pezinho e IgM e IgG positivos no exame sorológico de sangue periférico, realizado posteriormente. USG trasnfontanela, fundoscopia e hemograma realizados aos 45 dias de vida sem alterações. Mãe com IgG para toxoplasmose positivo com 8 semanas de gestação, considerada não suscetível. Assinale a opção que indica a conduta adequada para o caso descrito.",
+          "alternativas": [
+            "Considerar o exame do lactente falso positivo, pois a mãe foi infectada antes da gestação.",
+            "Acompanhamento do laboratorial da queda de anticorpos, por, provavelmente, se tratar de anticorpos maternos, já que a mãe teve a infecção antes da gestação.",
+            "Acompanhamento clínico, com fundoscopia e imagem de sistema nervoso central semestrais para, no caso de surgimento de sintomas, i niciar tratamento, pelo risco de infecção do lactente, devido à reativação de infecção materna prévia ou reinfecção da mãe na gestação.",
+            "Tratamento com sulfadiazina, pirimetamina e ácido folínico por 6 meses, pois se trata de infecção congênita do lacte nte por reativação de infecção materna prévia ou reinfecção da mãe na gestação.",
+            "Tratamento com sulfadiazina, piremitamina e ácido folínico por 1 ano, pois se trata de infecção congênita do lactente por reativação de infecção materna prévia ou reinfecçã o da mãe na gestação"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre o tratamento das infecções pneumocócicas, assinale a afirmativa correta.",
+          "alternativas": [
+            "Devido ao aumento de pneumococo resistente a penicilina, o tratamento antibiótico de escolha no Brasil para pneumonia comunitária em crianças com critérios de internação é ceftriaxone.",
+            "A vacina pneumocócica fez com que o Haemophilus influenza seja atualmente o agente etiológico de aproximadamente 50% das pneumonias comunitárias em crianças, justificando o uso de amoxicilina + clavu lanato como primeira escolha de tratamento.",
+            "A incidência aproximada de penumococo com suscetibilidade intermediária (MIC 0,12 – 2mg/mL) e resistência (MIC > 4mg/mL) à penicilina em quadros sem meningite no Brasil é, respectivamente 25% e 46% em menores de 5 anos e 30% e 24%, em crianças de 5 a 14 anos.",
+            "A diminuição da proporção de otite média aguda por pneumococo e o aumento proporcional de outros agentes etiológicos é a razão pela qual a dose de 90mh/kg/dia de amoxicilina é recomendada para lactentes.",
+            "As pneumonias complicadas com derrame pleural necessitam de tratamento com cefalosporina de 4ª ou 5ª geração. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre HIV na infância, analise as afirmativas a seguir. I. O principal fator de risco para a transmissão vertical é a carga viral materna. Assim, RNs de mães com CV positiva na gestação devem receber profilaxia com três drogas antirretrovirais por 28 dias, sendo 2 inibidores de transcripitase reversa nucleosídeos mais um inibidor de integrasse ou inibidor de protease. II. Em parturientes soropositivas, o AZT deve ser administrado por via venosa durante o trabalho de parto, independentemente da via de parto ou da condição virológica da mãe. III. A terapia antirretroviral deve ser iniciada para todas as crianças vivendo com HIV, independentemente da Carga Viral ou contagem de CD4, e o esquema inicial recomendado, atualmente, é com 2 inibidores da transcriptase reversa análogos de nucleosídeo (ITRN) e um inibidor de integrasse. IV. A falha imunológica com queda do percentual CD4, sem falha virológica é uma indicação de troca de esquema antirretroviral imediato sem genotipagem. Está correto o que se afirma em",
+          "alternativas": [
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "I e IV, apenas.",
+            "II e III, apenas.",
+            "III e IV, apenas"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre imunizações, assinale a afirmativa correta.",
+          "alternativas": [
+            "As vacinas virais vivas atenuadas de sarampo, caxumba e rubéola não devem ser aplicadas simultaneamente à vacina de febre amarela, na primovacinação, em crianças menores de dois anos de idade.",
+            "Reações alérgicas de tipo tardio, que ocorram após 48 a 96 horas da vacinação, representam risco de vida e contraindicam o uso das vacinas.",
+            "Nas situações de imunodepressão programada, como transplante de órgãos sólidos, quimioterapia, uso d e drogas modificadoras da resposta imune e outras, a imunização com vacinas de antígenos não vivos deve ser realizada duas semanas antes da imunossupressão e as vacinas de antígenos vivos devem ser suspensas.",
+            "Crianças com alergia a ovo têm contraindica ção de receber a vacina para o vírus influenza, devido ao risco de reação anafilática ao componente da vacina.",
+            "Crianças expostas ao HIV não devem receber vacinas vivas atenuadas como BCG, vacina oral de rotavírus humano e vacina oral para poliomielite"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente em internação hospitalar prolongada apresenta sepse de foco cutâneo, após infiltração de acesso periférico, em uso de cefepime e vancomicina. Após resultado de hemocultura positiva para Staphilococus aureus meticiliana resistente, a conduta correta é",
+          "alternativas": [
+            "manter o esquema antibiótico.",
+            "trocar o esquema antibiótico para oxacilina + vancomicina.",
+            "trocar o esquema antibiótico para monoterapia com clindamicina.",
+            "descalonar o esquema para monoterapoia com vancomicina.",
+            "trocar o esquema para vacomicina + gentamicina"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre as arboviroses, analise as afirmativas a seguir. I. O choque da dengue se caracteriza por extravasamento vascular com baixa resistência vascular periférica e taquicardia. II. A trombocitopenia é o marcador laboratorial mais importante de dengue grave, pois indica extravasamento plasmático e sangramento. III. O paciente com dengue e dor abdominal intensa é considerado Grupo C pelo manual do Ministério da Saúde e deve receber hidratação venosa. IV. Para o paciente em choque persistente após etapas de expansão volêmica e hematócrito em ascensão, é recomendado administração de solução de albumina. Está correto o que se afirma em",
+          "alternativas": [
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "I e IV, apenas.",
+            "II e III, apenas.",
+            "III e IV, apenas"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 15 meses com parada de crescimento e ausência de ganho ponderal há 3 meses, atraso do desenvolvimento, hepatomegalia, episódios de hipoglicemia, hipertrigliceridemia e alteração de transaminases. O(s) exame(s) que deve(m) ser solicitado(s) para investigação da hipótese mais provável é(são)",
+          "alternativas": [
+            "sorologia para HIV e hepatites virais.",
+            "PPD, RX de tórax e testes molecular pra M. tuberculosis.",
+            "painel genético molecular para análise de mutações.",
+            "perfil de aminoácidos no sangue e na urina.",
+            "cariótipo"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação às infecções maternas e amamentação, assinale a afirmativa correta.",
+          "alternativas": [
+            "Mães com tuberculose ativa devem ser orientadas a interromper a amamentação até completarem 2 semanas de tratamento, pois, nesse período, o Mycobacterium pode ser transmitido pelo leite materno.",
+            "Na doença de Chagas, o parasita pode ser excretado no lei te humano e a infecção aguda no lactente causa sequelas cardíaca tardias. Assim, a amamentação deverá ser contraindicada, mesmo na fase crônica a da doença.",
+            "O vírus da hepatite C pode ser transmitido por fissuras mamárias e pelo colostro. Portanto, evi tar a amamentação diminui significativamente o risco de transmissão vertical da doença.",
+            "A infecção por HTLV contraindica o aleitamento materno, porém uma vez que amamentação esteja estabelecida, não deve ser interrompida, que já o risco de transmissão não tem relação com a duração da amamentação.",
+            "O citomegalovírus pode ser transmitido pelo leite materno. Entretanto, a infeção materna não contraindica a amamentação de recém -nascidos a termo, devido ao caráter benigno da infecção adquirida nesses lactentes. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Lactente de 1 ano e 8 meses, com quadro de IVAS há 2 dias, apresenta crise tônico -clônica generalizada, com duração de menos de 5 minutos, em vigência de febre. É levado à emergência em estado pós-ictal, Tax de 38,5C e com sinais vitais estáveis. Após 30 minutos, lactente desperta em BEG, ativo, reativo, com coriza nasal, discreta hiperemia de orofaringe e roncos de transmissão à ausculta, sem outras alterações no exame físico. Assinale a opção que indica a conduta correta para o caso descrito.",
+          "alternativas": [
+            "Alta com orientações.",
+            "Punção lombar e início de ceftriaxona até resultado cultura de líquor.",
+            "Punção lombar e decisão de antibiótico terapia a partir da análise do líquor.",
+            "Coleta de hemograma e PCR e avaliação de punção lombar de acordo com resultado.",
+            "TC de crânio e avaliação de punção lombar de acordo com resultado"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica o tratamento antibiótico adequado para Infecções graves por Streptococcus pyogenes , como a síndrome do choque tóxico, com germe isolado em hemocultura.",
+          "alternativas": [
+            "Cefepima + Vancomicina.",
+            "Penicilina Cristalina em monoterapia.",
+            "Clindamicina em monoterapia.",
+            "Penicilina Cristalina + Clindamicina.",
+            "Oxacilina + Vancomicina"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Acerca da infecção por hepatite C na infância, assinale a afirmativa correta.",
+          "alternativas": [
+            "Pacientes com HCV adquirido na infância têm menos chance de evoluir para o óbito por doença hepática, quando adultos, do que aqueles que adquirem o vírus já na idade adulta.",
+            "Crianças com genóti po 3 têm maiores níveis de aminotransferases nos primeiros dois anos de vida, mas podem eliminar espontaneamente o vírus antes dos cinco anos de idade.",
+            "A resolução espontânea da infecção ocorre em menos de 10% dos lactentes, sendo indicado o tratamento precoce em menores de 3 anos com carga viral positiva.",
+            "O diagnóstico de Hepatite C em lactentes filhos de mães portadoras do vírus se dá com 2 testes de detecção de anticorpos positivos, sejam testes sorológicos tipo Elisa ou testes rápidos.",
+            "O est adiamento da doença hepática em pacientes assintomáticos deve ser feito pela dosagem de transaminases e ultrassonografia de abdome"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "A respeito das diarreias agudas, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) No paciente com diarreia aguda desidratado, mas sem critério de internação, deve ser administrada terapia de reposição oral com uma solução com 75 a 90 mmol de sódio por litro. Ao passo que, na prevenção da desidratação, deve - se optar por soros com menor concentração de sódio. ( ) De acordo com a OMS, Zinco deve ser usado em menores de cinco anos, durante 10 a 14 dias, sendo iniciado a partir do momento da caracterização da diarreia ( ) Nos casos de desinteria, antoibiotocoterapia es tá recomendada com cefetriaxona ou azitromicina, devido à alta taxa de resistência da Shiguela ao ciprofloxacino . ( ) Clostridium difficile é uma causa importante de diarreia associada ao uso de antibiótico em ambiente hospitalar, o tratamento se dá com suspensão do tratamento antibiótico, se possível , e vancomicina oral até cultura de fezes negativa para Clostridium . ( ) Quando a diarreia aguda é causada por giardíase ou amebíase comprovada, o tratamento deve ser feito com nitazoxanida, uma vez que metronidazol ou análogos vem perdendo eficácia contra esses agentes. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – F – V – F – F.",
+            "F – V – F – F – V.",
+            "V – V – F – F – F.",
+            "V – V – F – V – F.",
+            "F – V – F – V – V"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-medicina-intensiva-pediatrica-nivel-vicns225",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — medicina intensiva pediatrica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-medicina-intensiva-pediatrica-nivel-vicns225-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente é internado com quadro clínico que se iniciou com dor e dormência em membros inferiores, e que evoluiu, rapidamente, com parestesia com arreflexia bilateral. Refere que há 4 semanas, apresentou infecção respiratória alta. A esse respeito, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Os nervos cranianos, incluindo o facial, o bulbar e o oculomotor, são frequentemente afetados. ( ) Os músculos respiratórios não são afetados. ( ) Observa-se diminuição da concentração de proteína com celularidade aumentada no líquido cerebroespinhal. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F.",
+            "F – V – V.",
+            "V – F – F.",
+            "V – V – F.",
+            "F – F – V"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "No pós-operatório de cirurgia cardíaca devemos estar atentos as possíveis complicações como arritmias, hipoxemia, baixo devido cardíaco. Acerca das as complicações, analise as afirmativas a seguir. I. Em casos refratários, de taquicardia juncional ectópica no pós operatório, a medicação antiarrítmica de escolha é a amiodarona. II. Na crise de hipertensão pulmonar, a administração de óxido nítrico inalatório reduz a resistência vascular pulmonar, causando hipotensão sistêmica. III. O uso de milrinona reduz o risco de síndrome de baixo débito no pós-operatório. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Algumas crianças, no curso da pneumonia, podem ter complicações como necrose de liquefação e evoluírem para pneumonia necrosante. Assinale a opção que indica os germes mais comuns causadores dessa complicação.",
+          "alternativas": [
+            "Streptococcus pneumoniae e Staphylococcus aureus.",
+            "Haemophilus influenzae e Streptococcus pneumoniae.",
+            "Klebsiella pneumoniae e Streptococcus pneumoniae.",
+            "Staphylococcus aureus e Klebsiella pneumoniae.",
+            "Chlamydia pneumoniae e Staphylococcus aureus"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Na crise hipertensiva em crianças com coart ação da aorta com dilatação, a medicação mais adequada para o tratamento é o",
+          "alternativas": [
+            "Inibidor da Enzima Conversora de Angiotensina (IECA ).",
+            "Bloqueador de Receptor de Angiotensina (BRA).",
+            "Bloqueador de Canais de Cálcio (BCC).",
+            "Beta-bloqueador.",
+            "Tiazídico"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "A aspergilose invasiva é uma causa importante de mortalidade em pacientes imunocomprometidos, principalmente, pacientes com leucemia. A respeito dessa doença, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) A tomografia de pulmão apresenta imagem em crescente e sinal do halo. ( ) O uso de antibióticos betalactâmicos podem resultar em resultado falso positivo para pesquisa de galactomanana. ( ) A primeira escolha de tratamento é o fluconazol. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F.",
+            "V – V – F.",
+            "V – F – F.",
+            "F – V – V.",
+            "F – F – V"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente com quadro de insuficiência respiratória com padrão obstrutivo pulmonar, necessita de suporte ventilatório. Assinale a opção que indica a melhor maneira de ventilar esse tipo de patologia.",
+          "alternativas": [
+            "Aumentar a FR e a PEEP.",
+            "Diminuir o TI.",
+            "Diminuir a PIP.",
+            "Diminuir a FR e a PEEP.",
+            "Aumentar FiO2"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "As opções a seguir a presentam causas de falha de extubação orotraqueal, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Delirium.",
+            "Fraqueza muscular.",
+            "Broncoespasmo.",
+            "Tosse.",
+            "Hipofosfatemia"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Delirium deve fazer parte do diagnóstico em pacientes com alteração súbita de comportamento, com doenças graves que necessitam de sedação. A respeito dessa patologia, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Pacientes internados em UTI geralmente apresentam delirium do tipo hiperativo ou misto. ( ) Os antipsicóticos podem ter efeitos colaterais, como o prolongamento do intervalo Qtc. ( ) O uso de dexmedetomidina como sedativo tem sido indicado na prevenção do delirium. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F.",
+            "F – V – V.",
+            "V – F – F.",
+            "V – V – F.",
+            "F – F – V. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente com parada cardíaca por taquicardia ventricular deve proceder imediatamente à de sfibrilação e a manobras iniciais de reanimação. O paciente evoluiu com taquicardia ventricular polimórfica associada a intervalo QT prolongado. Para o caso descrito, assinale a opção quer indica a medicação a ser incluída.",
+          "alternativas": [
+            "Gluconato de cálcio.",
+            "Epinefrina.",
+            "Amiodarona.",
+            "Bicarbonato de sódio.",
+            "Sulfato de magnésio"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente com choque séptico recebeu reposição volêmica e catecolaminas, mas evoluiu com choque refratário, necessitando de vasopressina. Assinale a opção que indica a alteração hidroeletrolítica que essa droga pode causar, quando usada por mais de 24h.",
+          "alternativas": [
+            "Hiponatremia.",
+            "Hipocalcemia.",
+            "Hipocalemia.",
+            "Hipomagnesemia.",
+            "Hipernatremia"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "A dengue é uma doença endêmica podendo evoluir de casos leves a graves. Acerca dessa doença, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Na USG abdominal, a presença de ascite e o aumento da espessura da parede da vesícula biliar demonstra extravasamento plasmático. ( ) Os pacientes com choque podem apresentar disfunção cardíaca biventricular de caráter transitório. ( ) O derrame pleural deve ser drenado na grande maioria das vezes. As afirmativas são,na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F.",
+            "F – V – V.",
+            "V – F – F.",
+            "V – V – F.",
+            "F – F – V"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "A curva pressão -volume durante a ventilação mecânica, avalia a complacência pulmonar. Assinale a opção que apresenta a patologia em que ocorre complacência aumentada.",
+          "alternativas": [
+            "Fibrose pulmonar.",
+            "Atelectasias.",
+            "Edema alveolar.",
+            "Asma grave.",
+            "Enfisema pulmonar"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "As doenças reumatológicas podem causar alta mortalidade, devendo ter reconhecimento rápido e tratamento precoce. Acerca da Síndrome de Ativação Macro fágica (SAM), analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) A SAM ocorre nas doenças reumáticas, principalmente, na artrite reumatóide juvenil. ( ) A SAM, laboratorialmente, apresenta citopenias, hiperferritinemia, hipotrigliceridemia e diminuição do D - dímero. ( ) No aspirado de medula óssea encontra -se a presença de macrófagos fagocitando hemácias, sendo fundamental para o diagnóstico. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F.",
+            "F – V – V.",
+            "V – F – F.",
+            "V – V – F.",
+            "F – F – V"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-nefrologia-pediatrica-nivel-vicns227",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — nefrologia pediatrica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-nefrologia-pediatrica-nivel-vicns227-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "A respeito do diagnóstico da causa de microangiopatia trombótica em crianças, assinale a afirmativa correta.",
+          "alternativas": [
+            "Níveis reduzidos na atividade do ADAMTS13 indicam a púrpura trombocitopênica trombótica.",
+            "A SHU típica apresenta teste de Coombs positivo.",
+            "Os níveis séricos de desidrogenase lática encontram -se reduzidos ao contrário da haptoglobina, que se apresenta elevada.",
+            "O defeito da cobalamina apresenta níveis reduzidos de homocisteína sérica.",
+            "As crianças com diarreia necessariamente apresentam a forma típica da SHU"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "De acordo com as diretrizes estabelecidas pelo Kidney Disease: Improving Global Outcome (KDIGO) sobre o tratamento da síndrome nefrótica em crianças, assinale a afirmativa correta.",
+          "alternativas": [
+            "A indução da remissão inicial baseia -se no uso de prednisona na dose de 60 mg/m² diária por mais de 8 semanas.",
+            "No caso de recidiva, recomenda -se o uso de prednisona na dose de 60 mg/m² diária, até a normalização do exame de urina por 3 dias consecutivos.",
+            "A redução do tempo de tratamento implica na maior incidência de recidivas da doença.",
+            "Medicamentos como a ciclofosfamida e o levamisole são indicados nos casos de síndrome nefrótica corticorresistentes.",
+            "O rituximabe po de ser utilizado nos casos de síndrome nefrótica com evidências de mutações genéticas, não responsiva à prednisona e aos inibidores da calcineurina"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre os fatores envolvidos na formação de cálculos urinários , assinale a afirmativa correta.",
+          "alternativas": [
+            "As restrições importantes na ingesta de cálcio promovem uma diminuição da incidência de litíase em crianças.",
+            "O uso de indinavir em crianças portadoras do HIV promove a diminuição da formação de cálculos renais.",
+            "O excesso de ingestão prote ica na dieta não influencia na excreção de cálcio urinário.",
+            "A ingestão de refrigerantes acidificados pode aumentar a excreção de citrato urinário, fator protetor na formação de cálculos urinários.",
+            "A ingestão excessiva de sódio na dieta promove a excreção aumentada de sódio e cálcio urinários"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Uma das queixas mais prevalentes nos ambulatórios de nefrologia pediátrica é a perda urinária em crianças acima dos 5 anos de idade. A utilização de medidas comportamentais é de grande valia no manejo e tratamento destas crianças. Entre essas medidas, está correto indicar a estimulação",
+          "alternativas": [
+            "de medidas de contenção na criança.",
+            "do hábito dietético noturno com frutas e sucos cítricos.",
+            "do hábito miccional regular a cada 3 horas.",
+            "do uso de colinomiméticos para enurese não monossintomática.",
+            "do uso do vaso sanitário sem apoio para os pés, semelhante aos hábitos dos adultos"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "A HAS secundária pode ocorrer na faixa neonatal sendo mais frequentemente associada à(ao)",
+          "alternativas": [
+            "trombose da artéria renal.",
+            "glomerulonefrite aguda.",
+            "feocromocitoma.",
+            "hipertireoidismo.",
+            "síndrome de Cushing"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Entre as causas congênitas não hereditári as de doença renal cística encontramos a seguinte patologia:",
+          "alternativas": [
+            "doença renal policística.",
+            "rim multicístico displásico.",
+            "nefronoftise.",
+            "esclerose tuberosa.",
+            "síndrome de Bardet-Biedl"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "O médico avaliou um escolar de 10 anos de idade, vítima de projetil de arma de fogo na região craniana, indicando a possível morte cerebral do paciente. Após a comunicação com a Comissão Intra -Hospitalar de doação de órgãos e tecidos para transplante, em relação ao Código de Ética Médica, o médico",
+          "alternativas": [
+            "deve realizar os exames e intervenções cirúrgicas no possível doador sem o consentimento de seu representante legal.",
+            "deve suspender os meios para prolongar a vida do possível doador, por participar de equipe de transplante.",
+            "deve comercializar órgãos e tecidos do possível doador para beneficiar receptor conhecido.",
+            "não deve participar do diagnóstico de morte cerebral do possível doador, no caso de pertencer à equipe de transplante.",
+            "deve impedir a utilização de recursos do hospital para retirada de órgãos e tecidos para transplante, por médicos não pertencentes à sua unidade"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Na análise dos elementos anormais na urina , é correto afirmar que",
+          "alternativas": [
+            "a presença de bactérias produtoras de urease podem reduzir o pH urinário.",
+            "a presença de nitritos na urina pode acentuar a presença de hemoglobinúria.",
+            "a presença de proteínas e glicose na urina aumenta a densidade urinária.",
+            "o uso de ácido ascórbico pode intensificar a presença de glicose e nitrito na urina.",
+            "a c ontaminação com fezes pode mascarar a presença de bilirrubina na urina"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "A presença de alterações na regulação do sistema complemento pode causar síndrome nefrótica, estando associada à sua recorrência no transplante renal. Entre as glomerulonefrites listadas a seguir, assinale a que não se relaciona com esta desregulação do complemento.",
+          "alternativas": [
+            "Glomerulonefrite por C3.",
+            "Glomeruloesclerose segmentar e focal.",
+            "Glomerulonefrite membranosa.",
+            "Glomerulonefrite por IgA.",
+            "Glomerulonefrite membranoproliferativa tipo 1. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "A Alcalose metabólica hipocalêmica e a hipoclorêmica associada a hipomagnesemia descrevem a doença tubular renal denominada",
+          "alternativas": [
+            "Síndrome de Bartter.",
+            "Hipomagnesemia familiar com hipercalciúria e nefrocalcinose.",
+            "Síndrome de Gitelman.",
+            "Hipomagnesemia mitocondrial.",
+            "Hipomagnesemia isolada dominante ou recessiva"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Uma adolescente, com lúpus eritematoso sistêmico e piora da função renal, foi submetida à bióp sia renal para melhor manejo do seu quadro clínico. O laudo da biópsia revela esclerose de mais de 90% dos glomérulos biopsiados, sem evidência de lesão ativa. Segundo a Sociedade Internacional de Nefrologia e a Sociedade Internacional de Patologia revista em 2018, essa nefrite lúpica , pertence à Classe",
+          "alternativas": [
+            "II.",
+            "III.",
+            "I.",
+            "V.",
+            "IV"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que associa corretamente as complicações na diálise peritoneal e a respectiva abordagem.",
+          "alternativas": [
+            "Presença de líquido hemorrágico – manter a heparina no líquido de diálise.",
+            "Distensão abdominal e vômitos – aumentar o volume de líquido de diálise infundido.",
+            "Baixa eficiência da diálise – diminuir o volume de líquido de diálise infundido.",
+            "Falta de drenagem do dialisato – aumentar o volume de líquido de diálise infundido.",
+            "Líquido de diálise turvo – aumentar o tempo de permanência do líquido de diálise na cavidade"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a droga, aplicada por via inalatória, usada no tratamento da hipercalemia.",
+          "alternativas": [
+            "Furosemida.",
+            "Salbutamol.",
+            "Fenoterol.",
+            "Gluconato de cálcio,",
+            "Poliestireno sulfonato de cálcio"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica o exame que confirma o diagnóstico de infecção urinária.",
+          "alternativas": [
+            "EAS com nitrito positivo.",
+            "EAS com hematúria microscópica.",
+            "Pesquisa de Gram na urina não centrifugada com presença de bactéria.",
+            "Cultura de urina por saco coletor com menos de 10 mil colônias bacterianas.",
+            "Cultura de urina por jato médio acima de 50 mil colônias bacterianas"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-neurologia-pediatrica-nivel-vicns231",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — neurologia pediatrica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neurologia-pediatrica-nivel-vicns231-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "A marcha de um paciente com hiperlordose lombar, com a base ligeiramente alargada e com a báscu la da bacia decorrente de fraqueza proximal dos membros inferiores e da cintura pélvica, deve ser classificada como",
+          "alternativas": [
+            "miopática ou anserina.",
+            "escarvante.",
+            "espástica.",
+            "parkinsoniana.",
+            "talonante"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "A síndrome convulsiva febril epiléptica crônica (FIRES), caracteriza-se por crises convulsivas",
+          "alternativas": [
+            "benignas pós-vacinação.",
+            "após traumatismo crânio-encefálico.",
+            "em crianças com encefalopatia crônica da infância.",
+            "relacionadas a erros inatos do metabolismo.",
+            "em crianças pr eviamente saudáveis, na vigência ou após um quadro febril inespecífico, que evoluem para estado de mal epiléptico"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "As mucopolissacaridoses, as glicoproteinoses e as esfingolipidoses são classificadas como",
+          "alternativas": [
+            "doenças peroxissomais.",
+            "doenças lisossomais.",
+            "doenças mitocondriais.",
+            "defeitos biossintéticos.",
+            "defeitos de receptores"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que mantém estreita correlação com as alucinações hipnagógicas ou hipnopompicas.",
+          "alternativas": [
+            "Migranea.",
+            "Cefaleia em salva.",
+            "Narcolepsia.",
+            "Cefaleia tipo tensional.",
+            "Síndrome das pernas inquietas"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "A síndrome dos vômitos cíclicos, a vertigem paroxística benigna da infância e o torcicolo paroxístico benigno são algumas das condições que compõem a cha mada síndrome periódica da infância. Considera-se que esta síndrome possa ser precursora da",
+          "alternativas": [
+            "cefaleia numular.",
+            "cefaleia em salva.",
+            "cefaleia crônica diária.",
+            "enxaqueca / migranea.",
+            "cefaleia tipo tensional"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "A doença de Wer dnig-Hoffmann e a de Wohlfart -Kugelberg- Welander são classificadas como",
+          "alternativas": [
+            "miopatias.",
+            "atrofia muscular espinhal.",
+            "neuropatias periféricas adquiridas.",
+            "neuropatias periféricas hereditárias.",
+            "doenças da placa motora"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "A Esclerose Lateral Amiotrófica (ELA) juvenil é rara. Um de seus genótipos, a ELA familial tipo 4, decorre de mutações no gene",
+          "alternativas": [
+            "SETX.",
+            "Spatacsina.",
+            "SIGMAR1.",
+            "SLC52A3.",
+            "SLC52A2"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "As opções a seguir apresentam fármacos que causam cer ebelite aguda de origem tóxica, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Lítio.",
+            "Fenitoína.",
+            "Dipirona.",
+            "Carbamazepina.",
+            "Anti-Histamínicos"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "A tétrade de Perlstein , caracterizada por coroeatetose, oftalmoplegia supranuclear, perda auditiva e displasia do esmalte dentário, está ligada à(ao)",
+          "alternativas": [
+            "rubéola.",
+            "sifilis congênita.",
+            "citomegalovírus.",
+            "toxoplasmose congênita.",
+            "encefalopatia bilirrubínica (kernicterus)"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "A neuromielite óptica está associada à presença dos anticorpos",
+          "alternativas": [
+            "Antiaquaporina 4.",
+            "AMPAR.",
+            "mGluR5.",
+            "NMDAR.",
+            "CASPR2"
+          ],
+          "correta": "A",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Ao pesquisarmos o reflexo córneo -palpebral em um paciente comatoso, estamos avaliando os seguintes nervos cranianos:",
+          "alternativas": [
+            "V e IV.",
+            "II e VII.",
+            "III e VII.",
+            "III e V.",
+            "V e VI. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a arteriopatia na Doença de Moyamoya.",
+          "alternativas": [
+            "É traumática.",
+            "É ateromatosa.",
+            "Não tem natureza bem estabelecida.",
+            "Decorre de irradiação intracraniana.",
+            "Resulta da proliferação de células musculares lisas com infiltrado inflamatório reforçando o papel do sistema imune"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "A Doença de Wilson tem seus sinais e sintomas resultantes de um defeito no metabolismo do",
+          "alternativas": [
+            "ferro.",
+            "zinco.",
+            "cobre.",
+            "chumbo.",
+            "mercúrio"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Analise o fragmento a seguir. Em crianças com atraso de desenvolvimento, em uma primeira abordagem, devemos avaliar a acuidade auditiva e visual, solicitar a análise citogenéti ca, afastar hipotireoidismo e os erros inatos do metabolismo, assim como solicitar exame de neuroimagem e eletroencefalograma. Segundo a Academia Americana de Pediatria devemos, também, afastar a intoxicação por metais pesados, especialmente o _____, que d eve ser dosado quando as crianças forem expostas à poeira ou ao solo contaminado. Assinale a opção que completa corretamente a lacuna do fragmento.",
+          "alternativas": [
+            "cromo.",
+            "chumbo.",
+            "níquel.",
+            "vanádio.",
+            "rutênio"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-pneumologia-pediatrica-nivel-vicns239",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — pneumologia pediatrica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-pneumologia-pediatrica-nivel-vicns239-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Adolescente do sexo masculino admitido na emergência com história de 5 dias de febre de 38,5 -39C, dor abdominal e diarreia. Evoluiu com cansaço aos pequenos esforços, tosse e esforço respiratório há 12 horas. Apre sentava desconforto respiratório moderado (FR=38 inc/min), tiragem subcostal, hipoatividade e sonolência. A saturação de oxigênio em ar ambiente era de 91% e, com máscara de oxigênio, 93%. O cartão de vacinação encontrava -se atualizado. A mãe havia apresentado RT -PCR para SARS Cov2 positivo em swab nasofaríngeo há aproximadamente 20 dias. Resultado dos exames iniciais: VHS: 90 mm/h; PCR: 19mg/dL e D - Dímero: 2.450ng/mL; Ecocardiograma: fração de ejeção 25%. Com base nos dados clínicos e laboratoriais apresen tados, assinale a conduta adequada para o caso descrito.",
+          "alternativas": [
+            "Imunoglobulina 2g/kg/dia e aspirina 100mg/kg/dia.",
+            "Oseltamivir.",
+            "Imunoglobulina 2g/kg/dia e metilprednisolona.",
+            "Metilprednisolona.",
+            "Imunoglobulina 2g/kg/dia"
+          ],
+          "correta": "C",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "A resp eito da síndrome da morte súbita do lactente , analise as afirmativas a seguir. I. Ocorre com maior frequência nas 4 primeiras semanas de vida. II. O risco é maior no sexo masculino, em prematuros e com baixo peso ao nascimento. III. O risco é maior em filh os de mãe tabagista e usuárias de drogas. IV. Há uma associação entre Apparent Life -Threatening Event (ALTE) /BRUE e a síndrome da morte súbita. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III, apenas.",
+            "II e III, apenas.",
+            "II, III e IV, apenas.",
+            "I, II e IV, apenas.",
+            "II e IV, apenas"
+          ],
+          "correta": "B",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente com 36 semanas de idade gestacional corrigida, nascido de parto pré -termo com 30 semanas de gestação, com doença pulmonar parenquimatosa persistente. Permaneceu em uso de oxigenioterapia de sde o nascimento, atualmente em uso de Continous Positive Airway Pressure (CPAP) com FiO 2 de 40% para manter SatO2 entre 90-95%. Quanto à displasia broncopulmonar, é correto considerar que",
+          "alternativas": [
+            "não há critério para displasia broncopulmonar.",
+            "o paciente apresenta displasia broncopulmonar leve.",
+            "o paciente apresenta displasia broncopulmonar moderada.",
+            "o paciente apresenta displasia broncopulmonar moderada a grave.",
+            "o paciente apresenta displasia broncopulmonar"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "A pneumonia por Pneumocystis jiroveci é a mais frequente infecção oportunista (IO) em crianças infectadas pelo HIV. A doença pode manifestar -se rapidamente, causando insuficiência respiratória com alta letalidade. Quanto à quimioprofilaxia para Pneumocystis jiroveci em crianças expostas ao HIV durante a gestação, assinale a opção que indica a conduta correta.",
+          "alternativas": [
+            "Indicar a profilaxia se a contagem de LT -CD4+ for menor que 200 céls/mm3 ou LT -CD4 < 25% até 1 ano de idade, em crianças infectadas.",
+            "Indicar a profilaxi a se a contagem de LT -CD4+ for menor que 350 céls/mm3 ou LT -CD4 < 25% até 1 ano de idade, em crianças infectadas.",
+            "Indicar a profilaxia se a contagem de LT -CD4+ for menor que 200 céls/mm3 ou LT -CD4 < 25% até 2 anos de idade, em crianças infectadas.",
+            "Indicar a profilaxia a partir de quatro semanas de vida, até que tenham duas CV indetectáveis; em crianças infectadas, manter até um ano de idade, independentemente da contagem de LT-CD4+.",
+            "Indicar a profilaxia, a partir oito semanas de vida, até que tenham duas CV indetectáveis; em crianças infectadas, manter até um ano de idade, independentemente da contagem de LT-CD4+"
+          ],
+          "correta": "D",
+          "assunto": "Saúde da Criança e do Adolescente"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "A profilaxia com palivizumabe é usada durante a sazonalidade do vírus sincial respiratório (VSR) para a prevenção d e infecção do trato respiratório inferior causado por este vírus. De acordo com o protocolo do Ministério da Saúde sobre o uso do palivizumabe (anticorpo monoclonal para VSR) durante a sazonalidade, assinale a opção que apresenta as indicações corretas para seu uso.",
+          "alternativas": [
+            "Prematuros com idade gestacional ≤ 28 semanas com idade inferior a 1 ano e imunossuprimidos com idade inferior a 1 ano.",
+            "Imunossuprimidos com idade inferior a 1 ano e portadores de displasia broncopulmonar) ou doença cardíaca congênita com repercussão hemodinâmica com idade inferior a 1 ano.",
+            "Doença cardíaca congênita e broncodisplasia com idade inferior a 2 anos e fibrose cística com idade inferior a 1 ano.",
+            "Prematuros com idade gestacional ≤ 29 semanas com idade inferior a 1 ano e fibrose cística com idade inferior a 1 ano.",
+            "Prematuros com idade gestacional ≤ 28 semanas com idade inferior a 1 ano; portadores de displ asia broncopulmonar) ou doença cardíaca congênita com repercussão hemodinâmica com idade inferior a 2 anos"
+          ],
+          "correta": "E",
+          "assunto": "Saúde da Criança e do Adolescente"
+        }
+      ]
+    }
+  ]
+}

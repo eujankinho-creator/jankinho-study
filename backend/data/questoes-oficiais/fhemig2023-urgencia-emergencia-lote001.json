@@ -1,0 +1,1502 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "FHEMIG2023-Urgência e Emergência",
+  "provas": [
+    {
+      "codigo": "fhemig2023-medico-med-medicina-de-emergencia-nivel-iiicns222",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — medicina de emergencia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-medicina-de-emergencia-nivel-iiicns222-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Recentemente, a cidade de Campinas, no estado de São Paulo, notificou diversos casos de febre maculosa, doença transmitida pelo carrapato-estrela. Assinale a opção que indica apenas opções válidas de tratamento antimicrobiano para essa condição.",
+          "alternativas": [
+            "Ceftriaxona e doxiciclina.",
+            "Ceftriaxona e penicilina.",
+            "Cloranfenicol e doxiciclina.",
+            "Cloranfenicol e penicilina.",
+            "Cloranfenicol e ceftriaxona"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 78 anos, do sexo masculino, com antecedent e de hipertensão arterial e diabetes, dá entrada no Pronto -Socorro, após ter sido trazido por familiares. Segundo relato, o paciente estava no banheiro de casa, caído há pelo menos 24 horas, sem movimentar o lado esquerdo do corpo. Realizada TC de crânio que confirmou o achado de acidente vascular isquêmico de território de artéria cerebral média direita, com edema citotóxico peri -isquemia, sem sinais de sangramento. O paciente foi internado em ambiente de enfermaria e não houve indicação de estratégia de reperfusão. Na prescrição deste paciente, devem estar presentes todos os itens elencados a seguir, à exceção de um. Assinale-o.",
+          "alternativas": [
+            "Ácido acetil-salicílico, 100mg 1x/dia, por via oral ou enteral.",
+            "Atorvastatina, 40mg 1x/dia, por via oral ou enteral.",
+            "Enoxaparina, 40mg 1x/dia, por via subcutânea.",
+            "Controle glicêmico, quatro vezes ao dia.",
+            "Dexametasona, 4mg 6/6h, por via intravenosa"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente do sexo feminino, de 16 anos, é trazida à sala de emergência por familiares após aprese ntar crise convulsiva tônico-clônico generalizada. Paciente sabidamente epiléptica, sem outras comorbidades. Prescritos fenitoína e fenobarbital em regime ambulatorial pelo neurologista que a acompanha. Paciente chega ao pronto - socorro já em pós -ictal. Nega quaisquer outros sintomas, exceto pela crise, que foi única e de curta duração. Nesse caso, assinale a opção que indica o exame que mais provavelmente diagnosticará a causa do escape convulsivo.",
+          "alternativas": [
+            "Tomografia computadorizada de crânio.",
+            "Dosagens de nível sérico de fenitoína e de fenobarbital.",
+            "Bioquímica, celularidade e culturas de líquido cefalorraquidiano.",
+            "Glicemia capilar.",
+            "Toxicológico completo"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Considere pacientes trazidos à sala de emergência sob insuficiência respiratória. Assinale a opção que indica a situação clínica que apresenta, segundo a literatura médica, o maior benefício à utilização de ventilação não invasiva (VNI) nesse cenário.",
+          "alternativas": [
+            "Paciente com o diagnóstico de edema agudo de pulmão (EAP) hipertensivo.",
+            "Paciente com o diagnóstico de tromboembolismo pulmonar (TEP) maciço.",
+            "Paciente com o diagnóstico de doença pulmonar obstrutiva crônica (DPOC) exacerbada, com a seguinte gasometria arterial em ar ambiente: pH: 7,41; pO 2: 50; pCO 2: 60; HCO 3 :35; BE: +11; SatO2: 84%.",
+            "Paciente com o diagnóstico de doença pulmonar obstrutiva crônica (DPOC) exacerbada, com a seguinte gasometria arterial em ar ambiente: pH: 7,13; pO 2: 65; pCO 2: 80; HCO 3: 23; BE: -1, SatO2: 91%.",
+            "Paciente portador de Síndrome de Imu nodeficiência Adquirida (SIDA) e suspeita de pneumocistose"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Considere os pacientes admitidos em sala de emergência com as seguintes condições: I. Pneumonia comunitária bacteriana grave, com necessidade de intubação orotraqueal e ventilação mecânica. II. Choque séptico de foco urinário, em uso de noradrenalina à vazão de 0,7mcg/kg/min. III. Traumatismo craniano grave, com tomografia de crânio demonstrando sinais de hipertensão intracraniana. Com relação à prescrição de glicocorticoides, assinale a opção que indica a(s) patologia(s) elencada(s) acima que tem(êm) benefíci o bem estabelecido com a sua utilização.",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "As drogas vasoativas indicadas a seguir apresentam efeito inotrópico, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Dobutamina.",
+            "Milrinona.",
+            "Levosimendana.",
+            "Vasopressina.",
+            "Epinefrina"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "A utiliz ação da capnografia em forma de onda tem ficado cada vez mais comum nas salas de emergência pelo Brasil. Sobre sua utilização durante as manobras de ressuscitação em um cenário de parada cardiorrespiratória, assinale a afirmativa incorreta.",
+          "alternativas": [
+            "A ausência de curva de capnografia em formato característico pode indicar intubação esofágica.",
+            "A normalização da capnografia para valores de EtCO 2 entre 35-45mmHg pode indicar retorno de circulação espontânea.",
+            "Uma vez ocorrendo o retorno da circulação espontâ nea, pode-se objetivar à meta de EtCO2 entre 35-40mmHg.",
+            "Durante a condução das manobras de ressuscitação, deve -se visar à obtenção de valores de EtCO 2 maiores que 20mmHg, pois indicam compressões torácicas efetivas.",
+            "A obtenção de valores de capnografia muito baixos por mais de 20 minutos indica mau prognóstico e pode balizar a interrupção das manobras de reanimação"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica o distúrbio eletrolítico que não cursa, por si só, com rebaixamento de nível de consciência.",
+          "alternativas": [
+            "Hiperpotassemia moderada a grave.",
+            "Hipercalcemia moderada a grave.",
+            "Acidose metabólica grave.",
+            "Hipernatremia moderada a grave.",
+            "Hiponatremia moderada a grave"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um dos subtipos de dor referidos por paciente com neoplasias avançadas é a dor neuropática. As medicações a seguir têm ação para o tratamento desse tipo de dor, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Morfina.",
+            "Metadona.",
+            "Tramadol.",
+            "Pregabalina.",
+            "Amitriptilina"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-medicina-intensiva-nivel-iiicns224",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — medicina intensiva",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-medicina-intensiva-nivel-iiicns224-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Recentemente, alguns hospitais brasileiros viveram um surto de infecções nosocomiais pelo fungo Candida auris , que apresenta resistência a diversos antifúngicos e é de difícil erradicação. Sobre as infecções por Candida em Terapia Intensiva , assinale a afirmativa correta.",
+          "alternativas": [
+            "Infecção urinária por Candida krusei deve ser tratada com micafungina.",
+            "As equinocandinas têm ação no metabolismo do ergosterol fúngico, interferindo na síntese da membrana celular.",
+            "Pacientes com candidemia estão sob risco de endocardite fúngica. O tratamento para essa condição, além da infusão de antifúngico sistêmico, é cirúrgico.",
+            "Nos últimos anos, as infecções fúngicas por Candidas de espécies não-albicans vêm diminuindo.",
+            "O fluconazol é um antifúngico cuja dose não necessita de correção para a função renal"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica o antibiótico usado no tratamento de infecções nosocomiais que não tem ação contra germes anaeróbios.",
+          "alternativas": [
+            "Gentamicina.",
+            "Tigeciclina.",
+            "Ampicilina-Sulbactam.",
+            "Piperacilina-Tazobactam.",
+            "Meropenem"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre infecções nosocomiais por Clostridioides difficile em UTI , analise as afirmativas a seguir. I. Os pacientes com alta probabilidade pré -teste dessa infecção devem receber tratamento, mesmo que o exame de suas toxinas A e B seja negativo, dado a baixa sensibilidade desse método diagnóstico. II. Os pacientes com diagnóstico suspeito ou confirmado de colite pseudomembranosa devem ser submetidos a precaução de contato e os profissionais que os assistem devem ser orientados a realizar lavagem de mãos com água e sabão, visto que álcool gel não mata os esporos dessa bactéria. III. Os casos graves dessa infec ção devem receber dupla terapia antimicrobiana, com vancomicina e metronidazol, ambos por via intravenosa. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente do sexo masculino de 30 anos, renal crônico dialítico, foi internado na UTI com diagnóstico de infecção de corrente sanguínea relacionada a cateter de diálise de longa permanência. No terceiro dia de internação, identificado que se tratava de infecção por Staphylococcus aureus oxacilina-sensível, sendo ajustado tratamento para oxacilina. Em seguida, realizado ecocardiograma transtorácico, que flagrou presença de vegetação extensa em valva aórtica. No sétimo dia de internação, paciente já estava e m programação de alta, quando subitamente evolui com hipotensão, rebaixamento de nível de consciência e insuficiência respiratória, sendo intubado e necessitando de início de noradrenalina para estabilização hemodinâmica. Na curva da pressão arterial invasiva (PAI), observa -se aumento da pressão de pulso e perda do nó dicrótico. Nesse caso, o diagnóstico mais provável é",
+          "alternativas": [
+            "taquicardia ventricular.",
+            "bloqueio atrioventricular total.",
+            "embolização séptica.",
+            "estenose aórtica aguda.",
+            "insuficiência aórtica aguda"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Médico da UTI se acidenta com bisturi em procedimento realizado em paciente sabidamente HIV positivo. O instrumento estava contaminado com sangue do paciente e provocou pequeno corte em um dos dedos do profissional, que esta va com luvas. O paciente está consciente e orientado e relata ter carga viral indetectável. Logo após se acidentar, o médico realizou lavagem de mãos vigorosa. Assinale a opção que indica a profilaxia que deve ser adotada para esse caso.",
+          "alternativas": [
+            "Tenofovir, lamivudina e atazanavir/ritonavir por 28 dias.",
+            "Tenofovir, lamivudina e dolutegravir por 28 dias.",
+            "Tenofovir, lamivudina e lopinavir/ritonavir por 28 dias.",
+            "Tenofovir, lamivudina e efavirenz por 28 dias.",
+            "Não é necessária a profilaxia, visto que paciente relata carga viral indetectável e, por isso, não transmite o vírus. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 25 anos, sexo feminino com o diagnóstico de cardiomiopatia dilatada de etiologia idiopática, com fração de ejeção do ventrículo esquerdo de 12%, já listada para transplante cardíaco. Internada há 30 dias na UTI com o diagnóstico de insuficiência cardíaca descompensada, perfil C INTERMACS 3, estável às custas de dobutamina 10mcg/kg/min e nitroprussiato 1mcg/kg/min, além de vasodilatadores por via oral , aguardando surgimento de doador de coração. Paciente evolui com piora clínica, há cerca de 12 horas, com rebaixamento de nível de consciência, congestão pulmonar, anúria, piora de exames laboratoriais de micro -hemodinâmica e piora das escores nitrogenadas. Não há qualquer sinal de infecção para essa paciente e a piora é exclusivamente cardíaca. Foi necessário elevar a dose de dobutamina para 20mcg/kg/min, desligar o nitroprussiato e suspender a vasodilatação oral e iniciar noradrenalina na dose de 0,4mcg/kg/min. Há 30 minutos, paciente apresentou pressão arterial média (PAM) de 50mmHg, sendo aumentada a noradrenalina para 0,5mcg/kg/min, havendo elevação da PAM apenas para 56mmHg. Sobre esse quadro clínico na UTI e sua evolu ção, assinale a afirmativa correta.",
+          "alternativas": [
+            "Paciente evoluiu para INTERMACS 1 e deve ser submetida a transplante cardíaco de emergência.",
+            "Paciente evoluiu para INTERMACS 1 e deve ser submetida à passagem de ECMO venoarterial e então ser urgenciada na lista de transplante diante do uso de dispositivo de assistência circulatória.",
+            "Paciente evoluiu para INTERMACS 2 e deve ser associado um segundo inotrópico, como milrinona.",
+            "Paciente evoluiu para INTERMACS 2 e deve ser submetida à passagem de balão intra -aórtico e então ser urgenciada na lista de transplante diante do uso de dispositivo de assistência circulatória.",
+            "Paciente se encontra em processo ativo de morte, independentemente da evolução no INTERMACS, devendo ser instituídas medidas de conforto"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 70 anos, sexo feminino, com diagnóstico de pielonefrite complicada, evoluindo com choque séptico. No momento, encontra -se na UTI em estado grave, febril, intubada sob ventilação mecânica, sedada e recebendo noradrenalina à va zão de 0,6mcg/kg/min visando a garantir adequada estabilidade hemodinâmica. Sobre esse caso, analise as afirmativas a seguir. I. Paciente tem indicação de receber hidrocortisona em dose de estresse, na dose de 200mg/dia. II. Deve-se realizar um ecocardiogr ama à beira -leito para essa paciente, de forma a definir, por exemplo, se paciente teria indicação de expansão volêmica ou de associação de inotrópico ou segundo vasopressor. III. Visando à melhora hemodinâmica, paciente deve ter febre corrigida, preferencialmente por métodos físicos. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica o parâmetro que não deve ser ajustado no modo ventilatório de pressão de suporte (PSV).",
+          "alternativas": [
+            "A fração inspirada de oxigênio (FiO2).",
+            "O percentual de pico de fluxo (ciclagem).",
+            "A pressão expiratória final (PEEP).",
+            "A frequência respiratória (FR).",
+            "O alarme de apneia"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Considere o escore PESI, utilizado para determinar a gravidade de pacientes com tromboembolismo pulmonar. Assinale a opção que indica, à exceção da idade, os três fatores que estão associados à maior pontuação e, portanto, ao pio r prognóstico.",
+          "alternativas": [
+            "Hipotensão, status mental alterado e doença oncológica.",
+            "Hipotensão, hipoxemia e taquicardia.",
+            "Hipotensão, hipoxemia e hipotermia.",
+            "Taquicardia, hipoxemia e insuficiência cardíaca.",
+            "Taquicardia, frequência respiratória e status mental alterado"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 70 anos, sexo masculino, trófico e bem nutrido à avaliação pré-operatória, evolui com choque vasoplégico e difícil desmame ventilatório às custas de síndrome do desconforto respiratório em pós -operatório d e cirurgia cardíaca de revascularização do miocárdio. O paciente algo melhor do ponto de vista respiratório e hemodinâmico, 48 horas após o procedimento, mantém baixa tolerância à dieta enteral, apresentando vômitos e distensão gástrica ao receber mais de 30% da meta nutricional de volume da dieta. Estão listadas a seguir opções nutricionais para um doente crítico cirúrgico. Assinale a opção que indica a melhor estratégia para esse caso.",
+          "alternativas": [
+            "Trocar totalmente a dieta enteral para nutrição parenteral e deixar volume correspondente a 100% da meta.",
+            "Manter dieta enteral no volume atual e associar dieta parenteral, de forma que a soma dos dois volumes corresponda a 100% da meta para esse paciente.",
+            "Insistir no aumento do volume da dieta enteral para 100% da meta, mesmo que paciente apresente vômitos e estase.",
+            "Manter dieta enteral trófica no volume tolerado por ainda mais alguns dias, ainda que fora da meta, visto que paciente não tinha alto risco nutricional na avaliação pré-operatória.",
+            "Suspender d ieta enteral e deixar infusão intravenosa de aporte calórico com soro glicosado a 5%, 2 litros por dia"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "O ultrassom pulmonar é utilizado para avaliar diagnósticos diferenciais de insuficiência respiratória e, nos últimos anos, seu uso tem ficado cada vez mais frequente no ambiente de terapia intensiva. Assinale a opção que indica causas de insuficiência respiratória nas quais se espera apenas o aparecimento das chamadas linhas A por meio desse método diagnóstico.",
+          "alternativas": [
+            "Edema agudo pulmonar e asma exacerbada.",
+            "Edema agudo pulmonar e pneumotórax hipertensivo.",
+            "Tromboembolismo pulmonar e asma exacerbada.",
+            "DPOC exacerbada e pneumonia viral.",
+            "DPOC exacerbada e síndrome do desconforto respiratório. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre a utilizaç ão de diuréticos em UTI , analise as afirmativas a seguir. I. Não há grande diferença em desfechos duros na utilização de furosemida em doses altas de maneira intermitente em comparação ao seu uso em bomba de infusão contínua. II. A hidroclorotiazida, na do se de 100mg/dia, pode ser utilizada para doentes que estejam com hipernatremia e hipervolêmicos de maneira a aumentar a natriurese, ainda que a evidência para tal prática não seja robusta. III. A acetazolamida é um diurético que pode ser utilizado no tratamento conservador das fístulas liquóricas e seu principal efeito colateral é o advento de acidose metabólica. Está correto o que se afirma em",
+          "alternativas": [
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre sedoanalgesia em UTI, assinale a afirmativa correta.",
+          "alternativas": [
+            "A dexmedetomidina possui boa ação para controle álgico, além de atividade simpaticomimética.",
+            "A síndrome de infusão de propofol é caracterizada por acidose metabólica, hipert rigliceridemia, bradicardia e hipotensão, sendo um efeito adverso que pode ocorrer independentemente da dose utilizada.",
+            "A quetamina é a medicação que apresenta contraindicação absoluta à sua utilização em pacientes com suspeita de hipertensão intracraniana.",
+            "A complicação possível na utilização do fentanil, ainda que rara, é o advento de síndrome do tórax rígido.",
+            "Uma das opções viáveis para sedação é a utilização de etomidato em bomba de infusão contínua"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Na unidade de terapia intensiva, o paciente hepatopata crônico pode ter perfil pró -trombótico, neutro ou pró -sangramento. Considerando as alterações laboratoriais a seguir, I. Fibrinogênio < 150, II. Plaquetas < 50.000, III. INR ou RNI > 1,5, assinale a opção que indica as alte rações que estão associadas a maior risco de sangramento nesse paciente.",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-profissional-de-enfermagem-penf-enfermeiro-de-terapia-intensiva-nivel-vicns303",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Enfermeiro — enfermeiro de terapia intensiva",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/profissional-de-enfermagem-penf-enfermeiro-de-terapia-intensiva-nivel-vicns303-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com base na fisiologia do sistema respiratório , analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) A complacência pulmonar é definida como a maior ou menor capacidade de distensibilidade do pulmão, a uma dada variação de pressão. ( ) O volume corrente é o volume de ar inspirado ou expirado, em cada respiração normal. ( ) A capacidade vital corresponde ao volume máximo de ar movimentado nos pulmões (volume de reser va inspiratório + volume corrente + volume de reserva expiratório). As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – F – F.",
+            "V – F – V.",
+            "F – V – F.",
+            "V – V – V.",
+            "F – V – V"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Considerando os mecanismos de equil íbrio ácido-básico e controle do pH do sangue, analise as afirmativas a seguir. I. A acidose metabólica é a acidez excessiva do sangue, caracterizada por uma concentração anormalmente baixa de bicarbonato. II. Em pacientes com hiperventilação instala -se a acidose respiratória, na qual há o aumento de pCO 2 e a diminuição do pH. III. O termo alcalose refere -se à remoção excessiva de H + dos líquidos corporais. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Acerca do tratamento medicamentoso de um paciente com choque séptico, internado em uma Unidade de Terapia Intensiva adulta, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Recomenda-se fazer a ressuscitação volêmica com cristaloides ou coloides, antes de usar o vasopressor. ( ) Nos adultos com choque séptico, a vasopressina ou epinefrina são as drogas de primeira escolha para aumentar a pressão arterial. ( ) A noradrenalina deve ser diluída em soro fisiológico ou ringer lactato, pois o soro glicosado causa instabilidade do medicamento. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – F – F.",
+            "F – F – F.",
+            "V – F – V.",
+            "F – V – V.",
+            "V – V – F"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Uma Gestante de 27 anos, 21ª semana de gestação, foi internada em uma unidade hospitalar apresentando um quadro de Hipertensão Gestacional Grave. Assinale a opção que indica uma característica dessa síndrome hipertensiva.",
+          "alternativas": [
+            "A presença de proteinúria.",
+            "A ocorrência de trombocitopenia.",
+            "Episódios de convulsões tônico-clônicas.",
+            "PAS ≥ 140mmHg e/ou PAD ≥ 90mmHg, ou ambos, medida em duas ocasiões com pelo menos 4 horas de intervalo.",
+            "PAS ≥ 160 mmHg e/ou PAD ≥ 110mmHg, ou ambos, medida em duas ocasiões com pelo menos 4 horas de intervalo"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "O cateter de Swan -Ganz é um cateter de acesso venoso central, utilizado para a monitorização invasiva e que permite medir alguns parâmetros hemodinâmicos do paciente. Com base nas ca racterísticas desse cateter, relacione suas vias às respectivas funções. 1. Via do balão 2. Via proximal do lúmen 3. Via distal do lúmen 4. Via do lúmen do termistor ( ) Permite verificar a pressão da artéria pulmonar e a coleta de sangue venoso misto. ( ) Permite a injeção para determinação do débito cardíaco (DC) e é utilizada também para a medição da PVC. ( ) Usada para monitorar continuamente a temperatura sanguínea na artéria pulmonar. ( ) Permite o encunhamento do cateter e a medição da pressã o capilar pulmonar. Assinale a opção que apresenta a relação correta, na ordem apresentada.",
+          "alternativas": [
+            "2 – 4 – 1 – 3.",
+            "4 – 1 – 3 – 2.",
+            "3 – 2 – 4 – 1.",
+            "1 – 4 – 2 – 3.",
+            "2 – 3 – 1 – 4"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Acerca dos cuidados de enfermagem a um paciente co m intubação endotraqueal, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Antes da intubação deve -se garantir a pré -oxigenação do paciente, que pode ser ofertada através de cateter nasal a 5 litros por minuto por 3 minutos. ( ) Recomenda-se verificar a pressão do balonete ( cuff) a cada 6 a 8 horas e mantê -la entre 18 a 22mmHg ou 25 a 30mmH2O, para evitar a excessiva pressão na mucosa traqueal. ( ) Deve-se avaliar continuamente o TOT para evitar torções, bloqueios e desconexão acidental que impeçam o fluxo de ar. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – V.",
+            "V – F – V.",
+            "F – V – F.",
+            "V – V – V.",
+            "F – F – F. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um dos cuidados de enfermagem na administração da nutrição parenteral é verificar a compatibilidade entre o acesso venoso do paciente e a osmolaridade recomendada. Segundo a Sociedade Americana de Nutrição Enteral e Parenteral, a osmolaridade máxima recomendada, no caso da Nutrição Parenteral Periférica, é de",
+          "alternativas": [
+            "200mOsm/L.",
+            "400mOsm/L.",
+            "700mOsm/L.",
+            "900mOsm/L.",
+            "1200mOsm/L"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "De acordo com a Resolução do Ministério da Saúde que dispõe sobre os requisitos mínimos para o funcionamento das Unidades de Terapia Intens iva – UTI, cada unidade deve dispor de alguns equipamentos específicos, em quantidades determinadas. Com base nessa normativa, as quantidades mínimas de eletrocardiógrafo portátil e desfibrilador em uma UTI, devem ser de, respectivamente,",
+          "alternativas": [
+            "1 para cada 5 leitos e 1 para cada 1 leito.",
+            "1 para cada 6 leitos e 1 para cada 3 leitos.",
+            "1 para cada 7 leitos e 1 para cada 1 leito.",
+            "1 para cada 8 leitos e 1 para cada 2 leitos.",
+            "1 para cada 10 leitos e 1 para cada 5 leitos"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação à Comissão Hospitalar de Organização e Qualificação da Atenção ao Paciente Crítico (COHPAC), assinale a afirmativa correta.",
+          "alternativas": [
+            "É responsável, entre outras coisas, pela regulação e avaliação das políticas públicas voltadas ao paciente crítico.",
+            "É responsável por elaborar e implementar o Plano Hospitalar de Atenção ao Paciente Crítico.",
+            "Deve ser composta minimamente pelo diretor técnico e pelo diretor administrativo da Instituição de Saúde.",
+            "É obrigatória para os estabelecimentos de Saúde da rede pública e facultativa para as instituições privadas.",
+            "A comissão, a critério de cada instituição, poderá apresentar relatório periódico de resultados aos gestores do SUS"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Na monitorização de um paciente, a capnografia permite medir",
+          "alternativas": [
+            "a profundidade da sedação.",
+            "o nível de óxido nitroso e de agentes halogenados.",
+            "a pressão parcial de CO2 durante o ciclo respiratório.",
+            "o bloqueio e a reversão do bloqueio neuromuscular.",
+            "o volume de sangue bombeado pelo coração em um minuto"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um paciente que sofreu múltiplas fraturas devido a uma queda durante a atividade laboral, apresentou entre outros sinais e sintomas, otorreia, sinal do duplo halo e equimose na região mastoidea. Esses sinais são característicos de",
+          "alternativas": [
+            "concussão.",
+            "lesão axonal difusa.",
+            "hematoma subdural agudo.",
+            "fratura de base de crânio.",
+            "fraturas lineares não deprimidas"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "No monitoramento do ciclo respiratório de um ventilador mecânico, o parâmetro que corresponde à pressão de acomodação dos alvéolos no final da inspiração (pressão inspiratória final), é denominado",
+          "alternativas": [
+            "drive pressure.",
+            "pressão de platô.",
+            "volume corrente.",
+            "fração inspirada de oxigênio.",
+            "pico de pressão inspiratório (PIP)"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Considerando as recomendações da ANVISA acerca das medidas de prevenção de infecção relacionada à assistência à saúde, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) A utilização da cânula orotraqueal, com um sistema de aspiração de secreção subglótica contínua ou intermitente, é recomendada para pacientes que irão permanecer sob Ventilação Mecânica acima de 48h ou 72h. ( ) Nos cateteres semi -implantáveis ou tunelizados, deve -se manter o sítio de inserção coberto, mesm o após a cicatrização do óstio. ( ) A punção do reservatório do cateter totalmente implantável deve ser realizada com agulha angulada (tipo Huber), própria para uso na membrana do reservatório. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – F – V.",
+            "F – F – F.",
+            "V – F – F.",
+            "F – V – F.",
+            "V – V – V"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "No atendimento a um paciente com suspeita de Infarto Agudo do Miocárdio - IAM, uma das condutas é a dosagem sérica de biomarcadores cardíacos para confirmação do diagnóstico. Nesse caso, o biomarcador mais específico e sensível para o diagnóstico de lesão isquêmica do miocárdio é a enzima",
+          "alternativas": [
+            "CK-MB.",
+            "Troponina.",
+            "Mioglobina.",
+            "Transaminase.",
+            "Desidrogenase Lática"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-anestesiologia-nivel-iiicns201",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — anestesiologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-anestesiologia-nivel-iiicns201-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "As opções a seguir apresentam procedimentos vedados ao médico no exercício da profissão, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Indicar o procedimento adequado ao paciente, observadas as práticas cientificamente reconhecidas e respeitada a legislação vigente.",
+            "Assumir responsabilidade por ato médico que não praticou ou do qual não participou.",
+            "Desrespeitar o pudor de qualquer pessoa sob seus cuidados",
+            "Abreviar a vida do paciente, ainda que a pedido deste ou de seu representante legal.",
+            "Oferecer seus serviços profissionais como prêmio, qualquer que seja sua natureza. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Por meio da concentração expirada de um anestésico inalatório, pode-se refletir a concentração deste anestésico no",
+          "alternativas": [
+            "músculo brônquico.",
+            "ventrículo direito.",
+            "átrio direito.",
+            "sistema nervoso central.",
+            "no alvéolo do pulmão não dominante"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "O propofol pode ser utilizado por seus efeitos terapêuticos não hipnóticos, como por exemplo, o efeito ansiolítico ou mesmo o antiemético, úteis na prática anestésica. Para estas finalidades, deve ser usado em bolus, na dose de",
+          "alternativas": [
+            "50mg.",
+            "40mg.",
+            "30mg.",
+            "20mg.",
+            "10mg"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Quando a anestesia geral está associada a mudanças significativas na mecânica respiratória e troca de gases pulmonares, numerosos fatores int erferem na dinâmica pulmonar perioperatória e acarretam riscos de complicações. Esse processo resulta em",
+          "alternativas": [
+            "aumento do volume pulmonar.",
+            "formação de rolhas de muco.",
+            "abertura acentuada da via aérea.",
+            "aumento do tônus muscular.",
+            "abertura exacerbada de alvéolos"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em exame pré -anestésico de paciente a ser submetido à anestesia devem ser considerados os preditores de ventilação. Assinale a opção que apresenta dois ou mais preditores de dificuldade de ventilação sob máscara facial.",
+          "alternativas": [
+            "Dentição completa, barba e 48 anos de idade.",
+            "Protusão mandibular limitada, 53 anos de idade e IMC = 25kg.m2.",
+            "Ausência de dentes, barba e 58 anos de idade.",
+            "Histórico de roncos, dentição completa e Mallampati II.",
+            "Protusão mandibular limitada, Mallanpati II e IMC = 25kg.m2"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Eventos relacionados à circulação e ao metabolismo, com equipamentos e com a própria ventilação de um paciente sob anestesia geral, podem ser observados por alterações apontadas pelo",
+          "alternativas": [
+            "capnógrafo.",
+            "oxímetro de pulso.",
+            "monitor de função neuromuscular.",
+            "monitor de profundidade da anestesia.",
+            "monitor da mecânica ventilatória"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "A utilização de opioides no espaço peridural é consagrada como uma técnica para a pro moção de analgesia pós -operatória, segura e eficiente em diversos procedimentos cirúrgicos. A analgesia é o resultado da ação da morfina sobre diversos receptores. O receptor µ, especificamente, além de participar do processo da desejável analgesia, é responsável pela(o)",
+          "alternativas": [
+            "insônia.",
+            "disforia.",
+            "ritmo juncional.",
+            "aumento da frequência respiratória.",
+            "redução da motilidade gastrointestinal"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "O diâmetro do tubo traqueal deve ser o maior possível para evitar fluxos turbilhonares na s vias aéreas do paciente, em tubos e traqueias de ventilação. Em fluxos laminares, com a diminuição do raio de um tubo à metade, desejando -se manter o fluxo, a pressão deverá ser aumentada em",
+          "alternativas": [
+            "2 vezes.",
+            "4 vezes.",
+            "8 vezes.",
+            "16 vezes.",
+            "32 vezes"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Homem, 64 anos, sem hipertensão arterial, cardiopatia ou diabetes, será submetido a prostatectomia radical por robótica. Na avaliação pré -anestésica é fundamental conhecer o histórico de cirurgias prévias, patologias existentes, me dicações em uso, avaliação das vias aéreas, entre outros exames e informações importantes. Considerando patologias existentes e mencionadas na avaliação pré-anestésica, as oftálmicas, em geral, não são devidamente valorizadas. Assinale a opção que indica a alteração oftalmológica que faz com que o paciente possa ter prescrição de medicações que poderão interferir no transcurso da anestesia.",
+          "alternativas": [
+            "ceratocone.",
+            "catarata.",
+            "estrabismo convergente.",
+            "glaucoma.",
+            "miopia de alto grau. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Gestante, 42 semanas, foi submetida à artrodese lombo -sacra pós-trauma grave de coluna, sendo colocada haste de fixação entre T10 e S1, além de placas de fixação entre L4-L5 e L5-S1. Após a cirurgia permanece com parestesias em MMII, nas regiões abaixo do joelho, bilateralmente. Após conversar com a paciente e sua família, o anestesiologista atende ao pedido da paciente para realizar anestesia geral, com a concordância, também, de sua ginecologista/obstetra. O anestesiologista sabe que deve ofertar uma Fi O2 durante a anestesia geral que previna a ocorrência de hipoxemia, mas que, por sua vez, também evite os riscos inerentes à hiperoxia no binômio mãe-feto. Para atingir esses objetivos, habitualmente, deve -se manter a FiO2 durante a cesariana sob anestesia geral, em torno de",
+          "alternativas": [
+            "0,5 a 0,7.",
+            "0,4 a 0,6.",
+            "0,3 a 0,5.",
+            "0,2 a 0,4.",
+            "0,1 a 0,3"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "O delirium ao despertar é uma complicação que pode ocorrer no despertar de uma anestesia geral, sendo as crianças uma população ainda mais sujeita a ela. Assinale a opção que indica o principal fator de risco para o delirium ao despertar e o fármaco que melhor o pre vine e o trata em crianças, respectivamente.",
+          "alternativas": [
+            "anestesia inalatória / propofol.",
+            "anestesia venosa e inalatória combinadas / droperidol.",
+            "anestesia venosa / dexmedetomidina.",
+            "anestesia inalatória / droperidol.",
+            "anestesia venosa / propofol"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Mulher, 78 anos, com politraumatismo e traumatismo crânio encefálico (TCE) devido a um atropelamento, é encaminhada à emergência. Diante desta situação crítica, assinale a opção que apresenta os fatores que pioram o desfecho do traumatismo crânio encefálico dessa paciente politraumatizada.",
+          "alternativas": [
+            "Hipotermia, hipertensão arterial e hipernatremia.",
+            "Lesões na carótida, alcalose e hipertensão arterial.",
+            "Hipertermia, hipotensão intracraniana e hipernatremia.",
+            "Hiponatremia, hipertensão arter ial e hipotensão intracraniana.",
+            "Hipotensão arterial, anemia e hiponatremia"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "O benzodiazepínico usado na manutenção da anestesia geral nas cirurgias cardíacas, em conjunto com opioides e outros fármacos anestésicos, devido às suas propriedades como hidrossolubilidade, ausência de metabólitos cumulativos e maior capacidade de amnésia retrógrada, entre outras, é o",
+          "alternativas": [
+            "lorazepam.",
+            "alprazolam.",
+            "midazolam.",
+            "diazepam.",
+            "clonazepam"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-toxicologia-medica-nivel-vicns245",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — toxicologia medica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-toxicologia-medica-nivel-vicns245-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Reações idiossincráticas ocorrem imprevisivelmente em indivíduos suscetíveis na forma de uma resposta não usual a presença de uma determinada substância. POWERS, R.H.; DEAN, D.E. Forensic Toxicology: mechanisms and pathology. Boca Raton: CRC Press, 2016. p.27. Acerca das reações idiossincráticas, analise as afirmativa a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Ocorrem em casos de sensibilidade extre ma a doses baixas de um fármaco. ( ) Ocorrem em casos de insensibilidade extrema a doses altas de um fármaco. ( ) Podem ser atribuídas a polimorfismos genéticos no indivíduo. ( ) Não estão relacionadas ao mecanismo das interações fármaco-receptor. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – V – V.",
+            "V – V – F – F.",
+            "V – F – F – V.",
+            "V – F – V – F.",
+            "V – V – V – F"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "A tolerância é um estado que se desenvolve em consequência da adaptação produzida pelo reajuste dos mecanismos homeostáticos em resposta ao uso repetido de uma droga. BRUNTON, L. L.; CHABNER, B. A.; KNOLLMANN, B. C. As bases farmacológicas da terapêutica - Goodman & Gilman. 12ª ed. Porto Alegre: McGraw Hill/ Artmed, 2012. A respeito da tolerância desenvolvida pelo uso de opioides, analise os itens a seguir. I. A tolerância é acompanhada invariavelmente pela dependência. II. A tolerância ocorre com a mesma velocidade para todos os efeitos dos opioides. III. Em geral, não apresentam alto grau de tolerância cruzada, exceto para pouquíssimos compostos de estrutura química semelhante. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I, apenas.",
+            "I e III, apenas"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Muitos artrópodes como escorpiões e aranhas, são predadores que utilizam seu próprio veneno para imobilizar sua presa. A tityustoxina, toxina de interesse médico proveniente de escorpiões do gênero Tityus, possui atividade neurotóxica tecidual devido à sua ação nos canais de sódio pós-ganglionares. ANDRADE FILHO, A.; CAMPOLINA, D.; DIAS, M. B. Toxicologia na prática clínica. Belo Horizonte: Folium, 2001. p. 156-156. Acerca do tratamento de acidentes por picada de escorpião do gênero supracitado, analise os itens a seguir. I. Casos leves devem permanecer em observação, sendo tratados, a princípio, somente com analgésicos para combater a dor. II. Em casos moderados é indicado o uso de duas ampolas de soro antiescorpiônico por via intramuscular e tratamento da dor e distúrbios eletrolíticos. III. Em casos graves é indicado o uso de quatro ampolas de soro antiescorpiônico, sendo que a dose não varia de acordo com a idade ou o peso do paciente. Está correto o que se afirma em",
+          "alternativas": [
+            "II, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em casos específicos de grande suspeita ou confirmação clínica de dosagem excessiva de opioides, pode -se utilizar a terapia com antídotos. Assinale a opção que descreve o antídoto para opiáceos e seu mecanismo de ação.",
+          "alternativas": [
+            "Naloxona age por meio do mecanismo de antagonismo não competitivo, ligando-se nos sítios receptores µ e k.",
+            "Naloxona age por meio do mecanismo de antagonismo competitivo, deslocando os opioides dos seu s sítios receptores µ, k e δ.",
+            "Flumazenil age por meio do mecanismo de antagonismo não competitivo, ligando-se nos sítios receptores µ e k.",
+            "Naloxona age por meio do mecanismo de antagonismo competitivo, deslocando os opioides dos seus sítios receptores k e δ.",
+            "Flumazenil age por meio do mecanismo de antagonismo não competitivo, ligando-se nos sítios receptores µ, k e δ. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Álcool é a droga lícita mais consumida no mundo. No Brasil, as estatísticas apontam a influência do álcool em 39,4% dos acidentes fatais de trânsito, com 56% dos motoristas fatalmente feridos em acidentes sob efeito de álcool. PONCE, J.C. et al. Alcohol-related traffic accidents with fatal outcomes on the city of São Paulo. Accid Anal Prev. 2011: 43(3):782-7. Na detecção e quantificação post mortem de álcool de um determinado indivíduo, os critérios usados objetivam diferenciar o etanol endógeno produzido por bactérias durante o processo de decomposição, do etanol exógeno, ingerido em bebidas alcoólicas quando em vida. Ante o exposto, assinale a opção que contém metabólitos ante mortem do etanol utilizados como marcadores pela toxicologia analítica.",
+          "alternativas": [
+            "Dietil glucoronídeo e trisulfato e etila.",
+            "Benzil glucoronídeo e sulfato e etila.",
+            "Dietil glucoronídeo e bisulfato e etila.",
+            "Etil glucoronídeo e sulfato e etila.",
+            "Benzil glucoronídeo e bisulfato e etila"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "O alto consumo de pescado contaminado por mercúrio e exposição direta e prolongada a esse metal por habitantes de áreas onde predo mina a extração de minério, bem como pelos próprios agentes envolvidos com o seu manuseio, tem resultado em elevadas concentrações de Hg no cabelo e no sangue, manifestações neurológicas e casos de anemia. NUNES, M.S.B. et al. Impacto do consumo de peixes contaminados por mercúrio na saúde humana em habitantes da Amazônia brasileira: revisão sistemática . Braz J Hea Rev. 2023: 6(4), 15111–24). A respeito do mercúrio, analise os itens a seguir. I. A exposição ocorre principalmente pela inalação de vapores de Hg0 e, pela dieta, por ingestão de metilHg. II. Uma vez no organismo, o metilHg pode se acumular nos rins, fígado e, principalmente, no sistema nervoso central. III. Quadro de estresse oxidativo é frequentemente observado na exposição ao mercúrio, podendo gerar danos ao DNA, membranas celulares e proteínas, ocasionando por sua vez apoptose e necrose. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "As intoxicações são causas frequentes de procura de atendimento médico em serviços de urgência e de emergência em todo o mundo. Acerca da abordagem inicial do paciente, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Petéquias e equimoses de maior dimensão na pele podem indicar distúrbios de coagulação secundários a toxinas de serpentes e a cumarínicos. ( ) Benzodiazepínicos são efetivos no controle de taquicardias causadas por drogas simpaticomiméticas. ( ) Betabloqueadores não seletivos como o propranolol são indicados no tratamento da hipertensão em casos de overdoses por drogas simpaticomiméticas. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – V – V",
+            "V – V – F.",
+            "V – F – V.",
+            "F – F – V.",
+            "F – V – F. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Leia o trecho a seguir. O metanol, tamb ém conhecido como álcool met ílico, é um reagente industrial importante e um solvente encontrado em removedores de tintas, flu ídos automotivos e verniz. Tamb ém pode ser acrescentado ao etanol de uso industrial de forma a torná-lo impr óprio para ingestão. Intoxicações com o metanol podem ocorrer pela ingestão de etanol industrial, bem como pela ingestão de bebidas falsificadas ou que não tenham passado por adequado controle de qualidade no proce sso de destilação. No organismo, o metanol provoca depressão do sistema nervoso central e toxicidade ocular que pode resultar em cegueira. BRUNTON, L. L.; CHABNER, B. A.; KNOLLMANN, B. C. As bases farmacológicas da terapêutica - Goodman & Gilman. 12ª ed. Porto Alegre: McGraw Hill/ Artmed, 2012. A respeito da farmacologia do metanol , assinale a afirmativa correta.",
+          "alternativas": [
+            "A eliminação do metanol ocorre cerca de dez vezes mais rápida que a do etanol.",
+            "O formaldeído é o metabólito do metanol que possui meia vida longa, sendo o responsável pelos efeitos tóxicos no organismo.",
+            "O ácido fórmico é lentamente metabolizado no organismo, causando seu acúmulo nos tecidos e levando a casos de intoxicação.",
+            "A eliminação do metanol ocorre predominantemente pelos pulmões e pelos rins.",
+            "A presença de etanol no organismo acelera a biotransformação do metanol"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Os barbitúricos são depressores não seletivos do Sistema Nervoso Central e utilizados como hipnótico -sedativos e anticonvulsivantes. Produze m com facilidade dependência psicológica e física e, mesmo com uma sobredose relativamente pequena, podem causar depressão respiratória e cardiovascular. Apesar destas características, ainda são utilizados atualmente na anestesia intravenosa e no tratamento da epilepsia. PEREZ, M.M. et al. Intoxicación por barbitúricos, una mirada toxicológica. Horiz Sanit. 2019, 18(2):111-18. Acerca dos barbitúricos, analise as afirmativas a seguir. I. Diante de um quadro de intoxicação grave, a lavagem gástrica e a indução de vômito podem ser realizados. II. São achados clínicos da intoxicação grave por fenobarbital: coma, arreflexia, miose, insuficiência respiratória e hipotermia. III. A alcalinizarão da urina aumenta a excreção do fenobarbital em cerca de cinco a dez vezes. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "As alterações neurofisiológicas causadas pelo uso da cocaína, principalmente por sua ação nas vias dopaminérgicas, resultam em complicações psiquiátricas, sendo os episódios psicóticos e a dependência os que mais geram impacto na sociedade. No caso da cocaína fumada, tais complicações parecem ser de maior gravidade ainda. DORTA, D.J. et al. Toxicologia Forense. 1ª ed. São Paulo: Blucher, 2018. p. 152. Assinale a opção que indica o produto da queima da cocaína quando a via de administração é a respiratória (fumada).",
+          "alternativas": [
+            "Éster metilanidroecgonina.",
+            "Diéster etilmetilecgonina.",
+            "Alquil benzoilecgonina.",
+            "Nitro benzoilecgonina.",
+            "Nor etilmetilecgonina"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "As sulfoniluréias são utilizadas para estimular a liberação de insulina pelo pâncreas em portadores de diabetes do tipo 2. Elas também reduzem a depuração hepática da insulina, aumentando ainda mais os níveis plasmáticos de insulina. Entre as sulfoniluréias, a clorpropamida rec ebe uma atenção especial, principalmente em pacientes idosos com comprometimento da função renal ou hepática, pois sua meia -vida é bem mais longa que os demais (por volta de 35 horas) e seus metabólitos que também possuem atividade hipoglicemiante a tornam potencialmente perigosa, podendo causar reações hipoglicêmicas, incluindo o coma. BRUNTON, L. L.; CHABNER, B. A.; KNOLLMANN, B. C. As bases farmacológicas da terapêutica - Goodman & Gilman. 12ª ed. Porto Alegre: McGraw Hill/ Artmed, 2012. p.1255-6. Com relação aos casos de intoxicação por clorpropamida, assinale a afirmativa correta.",
+          "alternativas": [
+            "A administração de carvão ativado não é indicada.",
+            "A lavagem gástrica só é recomendada duas horas após a ingestão.",
+            "O paciente deve permanecer em observação ri gorosa por, no mínimo, 6 horas.",
+            "A alcaliniza ção da urina pode ser útil na aceleração da eliminação da droga.",
+            "O glucagon pode ser usado, às vezes, na intoxicaçã o por sulfonilureias, com exceção da clorpropamida"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-cirurgia-toracica-nivel-vicns209",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — cirurgia toracica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-toracica-nivel-vicns209-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "O estreito torácico superior tem como limites ósseos: lateralmente, a primeira costela; posteriormente, a primeira vértebra torácica e, anteriormente, o manúbrio esternal. Nesse espaço rígido, transitam as estruturas anatômicas listadas a seguir, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Artéria subclávia.",
+            "Veia subclávia.",
+            "Troncos superior e médio plexo braquial.",
+            "Ducto torácico.",
+            "Cadeia simpática"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "O termo síndrome da cimitarra refere-se à",
+          "alternativas": [
+            "presença de brônquio traqueal à direita.",
+            "estenose esofageana congênita, com presença de fístula entre a porção distal do esôfago e a traqueia.",
+            "má-formação esternal, com projeção anterior da junção entre o manúbrio e o esterno.",
+            "drenagem venosa anômala do p ulmão direito, na veia cava superior.",
+            "ausência congênita do músculo diafragma direito"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "O estadiamento linfático preciso da neoplasia pulmonar malígna é de grande importância na determinação da melhor forma de tratamento a ser adotada, além de estabelecer critérios de ressecabilidade e prognóstico. É considerada comprometimento “N1”, a extensão neoplásica que compromete a estação linfática",
+          "alternativas": [
+            "6.",
+            "7 ou subcarinal.",
+            "8 ipsilateral.",
+            "9 ou do ligamento pulmonar, ipsilateral.",
+            "10 ipsilateral"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "O pneumotórax espontâneo primário está relacionado à",
+          "alternativas": [
+            "linfangioleiomiomatose.",
+            "Síndrome de Marfan.",
+            "presença de “blebs” subpleurais.",
+            "fibrose pulmonar.",
+            "DPOC, com enfisema bolhoso"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação aos tumores neuroendócrinos pulmonares, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) O tumor carcinoide típico apresenta baixo índice mitótico. ( ) O carcinoide atípico é, mais freque ntemente, de localização periférica, diferente do típico, produz menos sintomas e sinais obstrutivos. ( ) Os tumores carcinoides típicos não apresentam qualquer relação com o história prévia de tabagismo. ( ) Os tumores carcinoides típicos, em conjunto com os atípicos, representam a maioria dos tumores neuroendócrinos pulmonares. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – V – V – F.",
+            "V – V – V – V.",
+            "V – F – V – V.",
+            "V – V – F – V.",
+            "V – F – V – F"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "No tratamento cirúrgico das metástases para o pulmão, assinale a opção que não é um fator prognóstico.",
+          "alternativas": [
+            "Comprometimento de linfonodos mediastinais.",
+            "Intervalo livre de doença.",
+            "Número de lesões pulmonares.",
+            "Lateralidade ou bilateralidade.",
+            "Ressecção completa das lesões pulmonares"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "A embolia aérea é um diagnóstico difícil que deve ser pensado, em pacientes com trauma penetrante de tórax, nas situações a seguir. I. Em pacientes previamente lúcidos, que desenvolvem quadro neurológico súbito. II. Nas lesões penetrantes com comprometimento hilar. III. Em pacientes com colapso circulatório grave, de instalação súbita, sem perda volêmica significativa. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "II e III, apenas.",
+            "I e III, apenas.",
+            "I e II, apenas.",
+            "II, apenas. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação ao divertículo de Zenker , analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) É classificado como divertículo de pulsão. ( ) Sua forma ção é secundária à disfunção do músculo cricofaríngeo. ( ) Em pacientes sintomáticos, o tratamento pode ser cirúrgico convencional ou endoscópico. ( ) A ressecção cirúrgica rente à base da herniação mucosa, confere, de forma isolada, elevado índice de sucesso no tratamento cirúrgico convencional. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – V – V – V.",
+            "V – V – V – F.",
+            "F – V – V – V.",
+            "V – V – F – V.",
+            "F – F – F – F"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um paciente com diagnóstico de acalasia, com 8 anos de evolução, foi tratado ao longo deste período com múltiplas dilatações pneumáticas, sem sucesso. Há um ano submeteu -se a uma miotomia extensa, com fundoplicatura a Nissen. Atualmente, persiste com disfagia intensa e perda de peso progressiva. A endoscopia digestiva alta revela esôfago muito dilatado, com resíduo alimentar presente e sinais de estenose cicatricial em esôfago distal, provavelmente secundária à esofagite de refluxo. Nesse caso, assinale a opção que indica a conduta mais adequada.",
+          "alternativas": [
+            "Adequar a dieta e repetir a endoscopia em três semanas.",
+            "Adequar a dieta, repetir a endoscopia em três semanas e fazer nova dilatação pneumática durante a endoscopia.",
+            "Programar miotomia endoscópica.",
+            "Cirurgia convencional para desfazer a fundoplicatura.",
+            "Preparar para esofagectomia"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Na hérnia de hiato paraesofageana do tipo II, observa-se",
+          "alternativas": [
+            "a junção esofagogástrica tópica, com herniação parcial do estômago.",
+            "o deslocamento da junção esofagogástrica com deslizamento de porção do estômago.",
+            "a junção esofagogástrica acima do diafragma com herniação parcial do estômago.",
+            "a junção esofagogástrica acima do diafragma, com herniação de outras vísceras abdominais além do estômago.",
+            "apenas deslizamento d e porção do estômago, por fragilidade circunferencial do ligamento freno-esofageano"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Cistos mediastinais causadas por falhas no desenvolvimento embriológico do intestino anterior são lesões benignas incomuns, comumente assintomáticas, ma s que podem se manifestar principalmente pela compressão de estruturas adjacentes. Entre as principais entidades deste grupo temos o cisto broncogênico e o cisto de duplicação esofágica. Na distinção entre eles, é importante considerar: I. o tipo de epitélio de revestimento, quando presente. II. a presença de cartilagem na parede do cisto broncogênico. III. a presença de músculo liso na parede do cisto de duplicação enterógeno. IV. A localização em relação às outras estruturas mediastinais. Está correto o que se afirma em",
+          "alternativas": [
+            "I e II, apenas.",
+            "III e IV, apenas.",
+            "II, III e IV, apenas.",
+            "I, II e III, apenas.",
+            "I, II, III e IV"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "No tratamento do empiema pleural pós -lobectomia, com encarceramento pulmonar na presença de fístula broncopleural ativa, não é indicado(a)",
+          "alternativas": [
+            "a mioplastia.",
+            "a pleurostomia.",
+            "a omentoplastia.",
+            "o procedimento de Clagett.",
+            "a drenagem tubular aberta crônica"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "O fator etiológico, atualmente mais aceito na gênese do Pectus Excavatum, está relacionado",
+          "alternativas": [
+            "à alteração intrínseca do desenvolvimento do esterno.",
+            "ao crescimento descoordenado e excessivo das cartilagens costais.",
+            "à compressão intrauterina.",
+            "ao desvio do eixo cardíaco.",
+            "à presença de banda ligamentar retroesternal congênita"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "No tratamento da síndrome do desfiladeiro torácico de etiologia venosa, em presença de trombose de veia subclávia, não está indicado(a)",
+          "alternativas": [
+            "trombólise na fase aguda.",
+            "a descompressão cirúrgica após resolução completa do quadro agudo.",
+            "o uso de stent como forma de prevenção de novos episódios tromboembólicos.",
+            "o uso de anticoagulação por períodos prolongados, e seguimento com estudo de imagem.",
+            "evitar atividade física intensa e repetitiva, envolvendo principalmente membros superiores. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-cirurgia-cardiovascular-nivel-iiicns203",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — cirurgia cardiovascular",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-cardiovascular-nivel-iiicns203-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Os aneurismas da aorta ascendente têm, na angio -tomografia da aorta, um método preciso de avaliação. No que diz respeito à velocidade de aumento do diâmetro da aorta, é correto indicar a abordagem cirúrgica do aneurisma quando ocorre",
+          "alternativas": [
+            "aumento do diâmetro maior do que 1mm em 12 meses.",
+            "aumento do diâmetro de 5mm em 12 meses.",
+            "estabilização do diâmetro abaixo de 45mm, com aparecimento de insuficiência aórtica mínima.",
+            "aumento do diâmetro de 10mm em 12 meses.",
+            "estabilização do diâmetro em 40mm, com o aparecimento de insuficiência aórtica leve"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com o envelhecimento da população, o aparecimento de um número maior de casos de estenose aórtica é uma situação que se torna cada vez mais frequente. Com relação à avaliação do grau de estenose valvar aórtica é correto afirmar que os principais parâmetros ecocardiográficos são",
+          "alternativas": [
+            "gradiente trans -valvar, diâmetro sistólico final do VE e volume do AE.",
+            "gradiente trans-valvar, velocidade do fluxo trans-valvar e área do orifício valvar.",
+            "diâmetro sistólico final do VE, velocidade de fluxo trans - valvar e área do orifício valvar.",
+            "área do orifício valvar, diâmetro diastólico final do VE e volume do AE.",
+            "Velocidade de fluxo trans -valvar, área do ori fício valvar e diâmetro diastólico final do VE"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "A plastia valvar mitral é considerada uma boa opção no tratamento da insuficiência mitral, desde que realizada por grupos cirúrgicos experientes, onde haja monitorização por ecocardiografia trans-esofágica per -operatória, entre outros requisitos. Devemos considerar a possibilidade de plastia valvar mitral quando",
+          "alternativas": [
+            "houver dilatação do anel mitral e falha de coaptação em P2.",
+            "o folheto anterior perde totalmente sua sustentação pelas cordoalhas.",
+            "o aparato sub -valvar do folheto posterior está totalmente fundido.",
+            "houver ruptura das cordoalhas em A1 e A2.",
+            "o folheto posterior é calcificado e retraído"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "O uso do enxerto de artéria radial no lugar do enxerto de veia safena não é recomendado",
+          "alternativas": [
+            "por apresentar patência superior.",
+            "por levar à redução de eventos cardíacos adversos.",
+            "por melhorar a sobrevida.",
+            "na segunda artéria mais importante após a coronária descendente anterior.",
+            "por levar à redução no tempo de clampeamento aórtico"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Os casos de pacientes com doença coronária multi -arterial e diabetes devem ser levados à avaliação do heart-team, de acordo com as Diretrizes de Revascularização Coronariana do ACC/AHA de 2021. Nos casos de doença tri -arterial, diabetes e disfunção moderada do VE, essa diretriz orienta que, preferencialmente, o paciente",
+          "alternativas": [
+            "receba tratamento clínico otimizado.",
+            "seja submetido a angioplastia coronária com stents farmacológicos.",
+            "seja submetido a revascularização cirúrgica do miocárdio.",
+            "seja encaminhado a um serviço de reabilitação cardíaca.",
+            "seja submetido a angioplastia por balão ou com stents convencionais"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Apesar das melhorias nas técnicas de proteção miocárdica e nas soluções cardioplégicas, a Síndrome do Baixo Débito Cardíaco (SBDC) ainda pode se apresentar e está relacionada a piores prognósticos. Na ausência de complicações técnicas a causa mais comum de SBDC é a proteção miocárdica inadequada. Com relação às cardioplegias cristaloides , assinale a afirmativa incorreta.",
+          "alternativas": [
+            "Induzem uma rápida parada cardíaca utilizando potássio ou magnésio.",
+            "Reduzem a demanda de energia e preservam as reservas de ATP utilizando a hipotermia.",
+            "Mantém a homeostase iônica e metaból ica no meio intracelular.",
+            "Diminuem o consumo de oxigênio pelo miocárdio.",
+            "Limitam a hemo-diluição quando grandes volumes de solução cardioplégica são usados"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "O Triângulo de Koch é uma área de grande importância anatômica por conter o nódulo átrio-ventricular. Assinale a opção que apresenta as estruturas que demarcam o triângulo de Koch.",
+          "alternativas": [
+            "O apêndice atrial esquerdo, o anel posterior da válvula mitral e a fossa oval.",
+            "O orifício do seio coronário, o folheto septal da válvula tricúspide e o septo inter-atrial.",
+            "O apêndice atrial direito, a veia cava superior e o músculo pectíneo.",
+            "O orifício do seio coronário, o tendão de Todaro e o folheto septal da válvula tricúspide.",
+            "O tendão de Todaro, a veia cava inferior e o orifício do seio coronário"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "A Tetralogia de Fallot é a forma mais comum de cardiopatia congênita cianótica após 1 ano de idade, com incidência de aproximadamente 10% entre todas as formas de ca rdiopatia congênita. Sua apresentação clínica pode variar de acordo com o grau de obstrução da via de saída do ventrículo direito. Os chamados Fallots acianóticos ou Pink Fallots são aqueles que apresentam, como característica anatômica,",
+          "alternativas": [
+            "uma importante hipertrofia ventricular direita.",
+            "um amplo defeito do septo inter-ventricular.",
+            "uma leve obstrução da via de saída do ventrículo direito.",
+            "uma importante hipertrofia ventricular esquerda.",
+            "a presença de válvula aórtica bicúspide. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "O aumento do número de dispositivos implantáveis e a maior invasividade das terapias na medicina moderna estão entre as causas que têm levado ao aumento do número de casos de Endocardite Infecciosa. As opções a seguir representam indicações para abordagem cirúrgica de um paciente com endocardite infecciosa, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Sepsis persistente.",
+            "Endocardite por estreptococos.",
+            "Embolia arterial periférica de repetição.",
+            "Abcesso de anel valvar de etiologia fúngica.",
+            "Insuficiência cardíaca refratária"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "As possíveis estratégias de abordagens cirúrgicas para um paciente com indicação de transplante cardíaco, que apresenta sinais de hipertensão arterial pulmonar fixa, sem resposta ao teste farmacológico com vasodilatadores, são: I. transplante cardíaco ortotópico; II. transplante cardíaco heterotópico; III. transplante cardiopulmonar. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "O evento da pandemia de Covid -19 resultou em uma expressiva redução no processo de doação de órgãos para transplante nos últimos anos. A definição de doadores limítrofes inclui um grupo heterogêneo de doadores que tenham apresentado aspectos sistêmicos ou órgão -específicos previamente considerados como uma contraindicação ao transplante. Considerando as estratégias para avaliação da condição do órgão para a captação de coração, estabelecidas pela Diretriz de Transplante Cardíaco da S BC, assinale a opção que não implicaria em uma provável recusa da captação do órgão.",
+          "alternativas": [
+            "Tempo de isquemia menor de 4hs.",
+            "Relato de PCR revertida.",
+            "Doador com Septicemia.",
+            "Doador em uso de doses elevadas de catecolaminas.",
+            "Doador com evidências de disfunção ventricular esquerda grave ao ecocardiograma"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a complicação mecânica que, após o infarto agudo do miocárdio, apresenta maior incidência.",
+          "alternativas": [
+            "Comunicação interventricular.",
+            "Ruptura da parede livre do VE.",
+            "Trombo apical de VE.",
+            "Insuficiência mitral aguda.",
+            "Tamponamento cardíaco"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 32 anos deu entrada na emergência com quadro de dor torácica de início súbito, de forte intensidade, localizada na região precordial com irradiação para o dorso e para a região abdominal. O paciente apresenta biotipo longilíneo, acromegalia e s ignificativa desproporção entre os membros e o tórax. No raio -X de tórax apresenta alargamento do mediastino. No ecocardiograma apresenta válvula aórtica bicúspide e sopro diastólico de insuficiência aórtica. A esse respeito, assinale a opção que indica, respectivamente, o provável diagnóstico sindrômico desse paciente, o diagnóstico clínico, os sinais do exame físico a serem valorizados para definir tal diagnóstico, a principal abordagem, visando à estabilização hemodinâmica do paciente e a melhor aborda gem a ser realizada (clinica ou cirúrgica).",
+          "alternativas": [
+            "Síndrome de Marfan / dissecção de aorta / assimetria dos pulsos e diferencial da PAS ≥ 20mmHg / controle do duplo produto / cirúrgica.",
+            "Síndrome de Marfan / síndrome coronariana aguda / Simetria dos pulsos e diferencial da PAS ≥ 20mmHg / reperfusão coronária(trombólise) / clínica.",
+            "Síndrome de Takotsubo / insuficiência cardíaca congestiva / assimetria dos pulsos e diferencial da pas ≥ 20mmhg / controle do duplo produto / clínica.",
+            "Síndrome de Takayass u /dissecção de aorta / assimetria dos pulsos e PAS ≥ 20mmHg / controle do duplo produto / clínica.",
+            "Síndrome de Ehlers –Danlos /síndrome coronariana aguda / déficit dos pulsos e diferencial da PAS ≥ 20mmHg / reperfusão coronária (trombólise) / cirúrgica"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 58 anos, hipertenso e diabético tipo II, deu entrada na emergência com quadro de dor precordial intensa. Realizado diagnóstico de síndrome coronariana aguda (SCA) após ECG com supra-desnivelamento em derivações (D2/D3 e AVF ) e marcadores de necrose miocárdica positivos. Imediatamente encaminhado para ser submetido ao cateterismo cardíaco, sendo diagnosticada a presença de placa obstrutiva no terço distal da coronária direita (80%) próximo à origem do ramo interventricular p osterior. Após a angioplastia o paciente apresenta bloqueio átrio ventricular total (BAVT). Considerando a anatomia dos vasos coronarianos, assinale a possível artéria comprometida e a indicação de tratamento definitivo para esse paciente.",
+          "alternativas": [
+            "Artéria do Nódulo Sinusal / Atropina.",
+            "Artéria do Nódulo Atrio – ventricular / Marcapasso transvenoso.",
+            "Artéria Diagonal / Atropina.",
+            "Artérias septais / Aminas Vaso-ativas.",
+            "Artéria do Nódulo Atrioventricular / Marcapasso transcutâneo"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-neurocirurgia-nivel-iiicns229",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — neurocirurgia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neurocirurgia-nivel-iiicns229-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "A lesão traumática do nervo periférico, na qual há lesão das fibras mielínica em um segmento do nervo e há preservação da continuidade axonal, é conhecida como",
+          "alternativas": [
+            "axonotmese.",
+            "neuropraxia.",
+            "neurotmese.",
+            "neurólise.",
+            "neuralgia"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "De acordo com a Classificação da ASIA ( American Spinal Injury Association), o paciente que após um trauma raqui -medular encontra-se, ao exame físico, com manutenção de percepção sensorial, porém sem função motora (incluin do segmentos sacrais S4 -S5) abaixo do nível medular lesionado, classifica -se como",
+          "alternativas": [
+            "ASIA A.",
+            "ASIA D.",
+            "ASIA B.",
+            "ASIA E.",
+            "ASIA C"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "O paciente, vítima de trauma crânio -encefálico grave, que apresenta à tomografia computadorizad a de crânio cisternas de base comprimidas ou ausentes e um desvio de linha média entre 0-5 mm, sem lesão de densidade alta ou mista > 25mL, apresenta-se à classificação tomográfica de Marshall como",
+          "alternativas": [
+            "Difusa Tipo IV.",
+            "Difusa Tipo II.",
+            "Difusa Tipo I.",
+            "Difusa Tipo III.",
+            "Tipo V"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "A junção das suturas lambdoidea, parietomastoidea e occiptomastoidea, origina o seguinte ponto craniométrico:",
+          "alternativas": [
+            "glabela.",
+            "inion.",
+            "lambda.",
+            "bregma.",
+            "astério"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica Meningiomas Grau II , segundo a Organização Mundial de Saúde – OMS.",
+          "alternativas": [
+            "Meningiomas de células claras e cordoide.",
+            "Meningiomas rabdoide e metaplásico.",
+            "Meningiomas transicional e atípico.",
+            "Meningiomas papilar e cordoide.",
+            "Meningiomas psamomatoso e microcístico"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "No contexto da estimulação cerebral profunda para o tratamento da Doença de Parkinson, o núcleo alvo que promove uma maior diminuição na dosagem de Levodopa, utilizada pelos pacientes no pós-operatório, é",
+          "alternativas": [
+            "putâmen.",
+            "núcleo subtalâmico.",
+            "globo pálido interno.",
+            "substância negra.",
+            "núcleo ventral intermédio"
+          ],
+          "correta": "B",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Muito import ante na avaliação imaginológica das patologias da junção crânio-cervical, a linha que é traçada da margem posterior do palato duro à margem posterior do forame magno (Opístion) é denominada",
+          "alternativas": [
+            "Linha de McRae.",
+            "Linha de McGregor.",
+            "Linha de Chamberlain.",
+            "Linha interlaminar espinhosa.",
+            "Linha do canal clival de Wackenheim"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um paciente, durante a investigação de uma hemorragia intracerebral, é diagnosticado com uma malformação arteriovenosa cerebral com as seguintes características: localização em área motora esquerda, diâmetro de 5cm e drenagem venosa profunda. Na classific ação de Spetzler -Martin, esta malformação arteriovenosa cerebral é definida como",
+          "alternativas": [
+            "Grau I.",
+            "Grau II.",
+            "Grau III.",
+            "Grau IV.",
+            "Grau V. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "D",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "O fechamento de precoce de ambas as suturas coronais resulta no seguinte tipo de cranioestenose:",
+          "alternativas": [
+            "Oxicefalia.",
+            "Escafocefalia.",
+            "Trigonocefalia.",
+            "Plagiocefalia.",
+            "Braquicefalia"
+          ],
+          "correta": "E",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "No contexto do tratamento do glioblastoma multiforme , a ocorrência de metilação no gene da O -6-metilguanina-DNA metiltransferase (MGMT) pode acarretar",
+          "alternativas": [
+            "melhora do prognóstico, pela maior susceptibilidade à ação da Temozolamida.",
+            "piora do prognóstico, em virtude de maior resistência à ação da Temozolamida.",
+            "piora do prognóstico, por uma promoção da neoangiogênese.",
+            "piora do prognóstico, por induzir radioresistência.",
+            "a metilação do gene da MGMT não acarreta alterações relativas ao prognóstico do paciente"
+          ],
+          "correta": "A",
+          "assunto": "Urgência e Emergência"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Na classificação de Anderson e Montesano, as fraturas do côndilo occipital, aquelas em que se observa a avulsão de um fragmento do mesmo, são classificadas como",
+          "alternativas": [
+            "Tipo I.",
+            "Tipo II.",
+            "Tipo III.",
+            "Tipo IV.",
+            "Tipo V"
+          ],
+          "correta": "C",
+          "assunto": "Urgência e Emergência"
+        }
+      ]
+    }
+  ]
+}

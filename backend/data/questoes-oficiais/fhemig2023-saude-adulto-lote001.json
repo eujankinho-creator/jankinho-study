@@ -1,0 +1,1502 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "FHEMIG2023-Saúde do Adulto",
+  "provas": [
+    {
+      "codigo": "fhemig2023-medico-med-clinica-medica-nivel-iiicns211",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — clinica medica",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-clinica-medica-nivel-iiicns211-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente feminina, 62 anos, procura atendimento na emergência com queixa de fadiga, dispneia aos pequenos esforços e ortopneia. História prévia de hipertensão arterial, dislipidemia e infarto agudo do miocárdio. Parou de tomar as medicações porque achava que não deveria tomar tantos remédios. Ao exame, apresentava PA: 170 x 110mmHg, FC: 92 BPM, ritmo cardíaco regular em galope, estertores bilaterais na ausculta pulmonar e edema bilateral de membros inferiores. Após estabilização do quadro clínico e otimização do tratamento, a paciente deve receber alta com medicações de uso contínuo. Na condição apresentada pel a paciente, assinale a opção que indica a medicação que reduz a mortalidade.",
+          "alternativas": [
+            "Digoxina.",
+            "Anlodipina.",
+            "Enalapril.",
+            "Hidroclorotiazida.",
+            "Furosemida"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente masculino, 66 anos, obeso, tabagista, com diagnóstico de diabetes mellitus, procura atendimento na emergência com quadro de dor torácica ventilatória -dependente no hemitórax esquerdo. O quadro iniciou há 4 dias com febre alta, tosse secretiva e dispneia. Ao exame: paciente lúcido, orientado no tempo e no espaco, afebril, corado, PA = 100 x 60mmHG, FC 89 BPM, FR 19 IRPM, Sat O2 97%, exame cardiovascular normal, ausculta pulmonar com presença de estertores crepitantes em base esquerda. Exames laboratoriais – glicemia: 156mg/dL, creatinina: 1,0, ureia: 45, hematócrito: 45%, leucócitos: 14.300 e plaquetas: 280 mil. Avalie o escore de risco desse paciente e assinale a conduta correta, considerando o diagnóstico mais provável para esse quadro clínico.",
+          "alternativas": [
+            "Pelo fato de ser tabagista, ele deve ser internado para oxigenoterapia.",
+            "Pelo fato de ser diabético, ele deve ser internado para tratamento com antibiótico venoso.",
+            "Pelo resultado do escore de risco, ele pode ser tratado no domicílio.",
+            "Pelo resultado do escore de risco, o paciente deve ser internado numa UTI.",
+            "O paciente deve fazer uma tomografia de tórax para avaliação do risco"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "A sepse é uma doença grave que, se não identificada e tratada corretamente, pode ter uma evolução desfavorável. Em relação à sepse, analise as afirmativas a seguir e a ssinale (V) para a verdadeira e (F) para a falsa. ( ) Sepse é uma disfunção de órgãos potencialmente fatal, causada por uma resposta desregulada e exagerada do hospedeiro perante uma infecção. ( ) Choque séptico é a sepse associada a hipotensão arteria l, responsivo à reposição volêmica. ( ) A disfunção de órgãos é um importante parâmetro na graduação do estado de gravidade da sepse. As afirmativas são, na ordem apresentada, respectivamente.",
+          "alternativas": [
+            "F – F – F.",
+            "V – F – V.",
+            "F – V – F.",
+            "V – V – F.",
+            "F – F – V. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Relacione o tipo de envenenamento à respetiva serpente. 1. Brotópico 2. Laquético 3. Crotálico 4. Elapídico ( ) Surucucu ( ) Jararaca ( ) Coral verdadeira ( ) Cascavel Assinale a opção que indica a relação correta, na ordem apresentada.",
+          "alternativas": [
+            "1 – 2 – 3 – 4.",
+            "2 – 4 – 3 – 1.",
+            "1 – 4 – 3 – 2.",
+            "2 – 1 – 4 – 3.",
+            "3 – 4 – 2 – 1"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre urgência hipertensiva e emergência hipertensiva, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Urgência hipertensiva caracteriza -se por uma elevação acentuada da pressão arterial, com lesão progressiva de órgão alvo, com maior risco de óbito. ( ) Emergência hipertensiva caracteriza -se por uma elevação pressórica acentuad a, sem lesão aguda e progressiva de órgão alvo. ( ) Eclampsia e síndrome HELLP são exemplos de urgências hipertensivas. ( ) Pré-eclampsia e hipertensão associada a aneurisma de aorta não dissecante são exemplos de emergências hipertensivas. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F – V.",
+            "F – F – F – F.",
+            "V – F – V – V.",
+            "V – V – V – V.",
+            "V – F – V – F"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente feminina, 18 anos, estudante de Medicina, é levada para atendimento no Pronto Socorro com queixa de dispneia, placas avermelhadas difusas pelo corpo, após comer amendoim. Ao exame encontra -se lúcida, orientada no tempo e no espaço, afebril, agitada taquipneica, PA: 85 x 50mmHg e FC: 118 bpm. Assinale a opção que apresenta a medicação de escolha para esse quadro.",
+          "alternativas": [
+            "Fenoterol.",
+            "Adrenalina.",
+            "Hidrocortisona.",
+            "Prometazina.",
+            "Predisona"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente masculino, 69 anos, é levado para emergência devido a quadro de dor abdominal dilacerante, com irradiação para região sacra seguida por episódio de síncope. A dor é intensa, sem queixas gastrointestinais ou urinárias. História prévia de tratament o de hipertensão arterial sistêmica, diabetes mellitus tipo 2 e dislipidemia. Tabagista, 40 maços/ano. Ao exame: lúcido, orientado no tempo e no espaço, afebril, pálido, sudoreico, anictérico. PA: 90 x 50mmHg; FC: 105 BPM; FR: 17 IRPM. Ausculta cardíaca e pulmonar sem alterações. Exame abdominal doloroso, sem sinais de irritação peritoneal. Assinale a opção que indica o diagnóstico mais provável para esse quadro clínico.",
+          "alternativas": [
+            "Apendicite.",
+            "Diverticulite aguda.",
+            "Isquemia mesentérica aguda.",
+            "Aneurisma de aorta abdominal roto.",
+            "Pielonefrite aguda"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente feminina, 59 anos, história prévia de hipertensão arterial sistêmica, dislipidemia, hipotireoidismo e obesidade, em uso de losartana, anlodipina, sinvastatina e levotiroxina. Pro cura atendimento na emergência com quadro de dor torácica tipo aperto com irradiação para membro superior esquerdo, que dura mais de 30 minutos, de forte intensidade, associada a sudorese e náuseas. Tem história familiar de corononariopatia. Ao exame está lúcida, orientada no tempo e no espaço, corada, febril, eupneica. PA: 130 x 70mmHg; FC: 85bpm; FR: 16irpm. Exame cardiovascular e respiratório sem alterações. Eletrocardiograma evidenciou supradesnivelamento de ST de V1 a V3. Assinale a opção que indica a parede cardíaca provavelmente acometida nesse quadro.",
+          "alternativas": [
+            "Antero-septal.",
+            "Posterior.",
+            "Inferior.",
+            "Apical.",
+            "Lateral. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente masculino, 64 anos, internado com diagnóstico de infarto agudo do miocárdio, com boa resposta à trombólise, evoluiu um dia após o início dos sintomas de infarto com dor torácica, ventilatório -dependente, agravada por inspiração profunda e aliviada quando o paciente flete o tórax anteriormente, além de febre baixa. Ao exame paciente com fácies de dor, hemodinamicamente estável, sem esforço respiratório. Presença de atrito cardíaco no exame cardiovascular e sem alterações no exame pulmonar. Assinale a opção que indica o diagnóstico mais provável para esse quadro clínico.",
+          "alternativas": [
+            "Pneumonia.",
+            "Miocardite.",
+            "Pericardite.",
+            "Endocardite.",
+            "Dissecção da aorta torácica"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente feminina, 32 anos, procura atendimento relatando dor pélvica, corrimento vaginal, dispareunia e disúria. Ao exame físico: dor abdominal à palpação, presença de sinais de cervicite mucopurulenta ao exame especular e dor à mobilização do colo uterino; PA: 120x70 mmHg; FC: 87 bpm; FR: 17 irpm. Assinale a opção que indica o esquema terapêutico preferencial para esse caso.",
+          "alternativas": [
+            "Amoxicilina e azitromicina.",
+            "Ciprofloxacina e metronidazol.",
+            "Penicilina benzatina e norfloxacina.",
+            "Ceftriaxone e doxiciclina.",
+            "Ceftazidima e tetraciclina"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente masculino, 58 anos, procura atendimento com relato de emagrecimento importante e cansaço. Sem outras queixas. História de tabagismo, sedentarismo, baixa ingesta de frutas e verduras. Sem outras comorbidades. Ao exame físico: discretamente hipocor ado, emagrecido, sem outras alterações significativas. Exames complementares: hemograma apresentando anemia hipocrômica e microcítica. Pesquisa de sangue oculto nas fezes, positiva. Solicitada colonoscopia para investigação diagnóstica. Assinale a opção que indica o diagnóstico mais provável para esse quadro.",
+          "alternativas": [
+            "Síndrome do colon irritável.",
+            "Diverticulose.",
+            "Doença de Crohn.",
+            "Câncer de colon esquerdo.",
+            "Câncer de colon direito"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente masculino, 33 anos, com diagnóstico de HI V em tratamento irregular, procura atendimento com relato de febre e dor ao engolir. Ao exame: apresenta-se lúcido, orientado no tempo e no espaço, emagrecido, febril, anictérico, acianótico, sem esforço respiratório. Orofaringe com candidíase oral. Auscu lta cardíaca e pulmonar sem alterações. O resultado da Endoscopia Digestiva Alta evidenciou candidíase esofágica. Diante esse quadro, o paciente deve iniciar profilaxia de",
+          "alternativas": [
+            "Citomegalovírus.",
+            "Herpes simplex.",
+            "Toxoplasma gondii.",
+            "Cryptococcus SP.",
+            "Pneumocystis jirovecci"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-cardiologia-nivel-vicns202",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — cardiologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cardiologia-nivel-vicns202-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "A miocardite é uma doença que pode ser definida como processo inflamatório do miocárdio, diagnosticada por critérios histológicos, imunológicos e imuno-histoquímicos. Segundo a Diretriz de Miocardites da Sociedade Brasileira de Cardiologia de 2022, assinale a opção que apresenta a principal indicação de biópsia endomiocárdica para o diagnóstico de miocardite.",
+          "alternativas": [
+            "Paciente com suspeita clínica de miocardite após métodos diagnósticos não invasivos.",
+            "Paciente com arritmias ve ntriculares frequentes, na presença ou não de sintomas, porém sem causa definida.",
+            "Paciente com insuficiência cardíaca decorrente de cardiomiopatia dilatada de qualquer duração, com suspeita de reação alérgica e/ou eosinofilia.",
+            "Paciente com insufici ência cardíaca de início recente, sem causa definida, não responsiva ao tratamento usual e com deterioração hemodinâmica.",
+            "Paciente com insuficiência cardíaca com início há mais de 3 meses e menos de 12 meses, sem causa definida, não responsiva à terapia padrão otimizada"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Segundo a Diretriz Brasileira de Dispositivos Cardíacos Eletrônicos Implantáveis, de 2023, assinale a opção que apresenta recomendação IA para indicação de cardiodesfibrilador implantável (CDI) na prevenção primária em paciente cardiopata.",
+          "alternativas": [
+            "Cardiopatia arritmogênica do ventrículo direito e síncope presumidamente por arritmia ventricular, se sobrevida esperada maior que 1 ano.",
+            "Cardiopatia chagásica crônica com episódios de taquicardia ventricular sustentada está vel com fração de ejeção de ventrículo esquerdo < 35% em tratamento clínico otimizado.",
+            "Cardiopatia isquêmica com história de infarto agudo do miocárdio > 40 dias, sob tratamento farmacológico otimizado, sem isquemia passível de revascularização e expectativa de vida de, pelo menos, 1 ano, associada à fração de ejeção de ventrículo esquerdo ≤ 35% e Classe Funcional II-III.",
+            "Cardiomiopatia hipertrófica com hipotensão anormal no esforço, na presença de fatores de risco adicionais, desde que expectativa de vida > 1 ano.",
+            "Cardiopatia não isquêmica na presença de alterações genéticas de alto risco associado a dois ou mais fatores: fração de ejeção do ventrículo esquerdo ≤ 45%, taquicardia ventricular não sustentada, mutação de alto risco e sexo masculino"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Você é o médico do ambulatório de Insuficiência Cardíaca do Hospital Terciário em que trabalha. Chega para consulta de primeira vez, “Seu” João: sexo masculino, 59 anos, natural de São Sebastião da Boa Vista (PA). Refere história de morte súbita em familiares de primeiro grau. Encaminhado ao ambulatório por queixa crônica de falta de ar ao pendurar as roupas no varal. Ao exame físico, o que você notou de alterado foi um íctus cardíaco desviado à esquerda, presença de extrassístoles e , à ausculta, sopro sugestivo de insuficiência mitral. Membros inferiores com edema 3+/4+ em terço distal. Seu João trouxe para a consulta alguns exames realizados recentemente.  Eletrocardiograma: ritmo sinusal, eixo elétrico desviado à esquerda, com bloqueio do ramo direito.  Radiografia de tórax: cardiomegalia.  Ecocardiograma transtorácico: disfunção sistólica biventricular, com aneurisma apical em “dedo de luva”. Assinale a opção que indica a cardiomiopatia mais provável para este paciente.",
+          "alternativas": [
+            "Hipertrófica.",
+            "Amiloidose.",
+            "Endomiocardiofibrose.",
+            "Chagásica.",
+            "Arritmogênica do ventrículo direito"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Baseado na 3ª Diretriz Brasileira de Transplante Cardíaco, publicada em 2018, assinale a opção que consiste em potencial contraindicação para transplante cardíaco.",
+          "alternativas": [
+            "Idade > 60 anos.",
+            "Infecção sistêmica ativa.",
+            "História de embolia pulmonar há 5 anos.",
+            "Ex-tabagismo (período de abstenção: mais de 1 ano).",
+            "IMC > 30 kg/m²"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Você recebe o seguinte encam inhamento para o ambulatório de triagem cardiológica: “Paciente de 61 anos, com sopro cardíaco e dispneia aos esforços.” Após anamnese, você confirma que o paciente possui dispneia aos moderados esforços e no exame físico pulso carotídeo com aumento lento e baixa amplitude, além de sopro cardíaco sistólico com pico tardio, irradiação para artérias carótidas e ápice cardíaco (nesta topografia, com alta frequência). A esse respeito, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) O paciente apresenta pulso “ parvus tardus” e fenômeno de Gallavardin. ( ) O teste ergométrico deve ser evitado nesse paciente. ( ) O sopro desse paciente aumenta de intensidade com manobra de Valsalva. ( ) O gradiente médio de pressão ≥ 40mmHg no ecocardiograma indica lesão valvar grave. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – V – F – F.",
+            "F – V – F – V.",
+            "V – V – F – V.",
+            "V – F – V – F.",
+            "V – V – V – V. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 32 anos, sexo mascu lino, fisicamente ativo, sem comorbidades conhecidas e acompanhamento médico regular. História familiar: pai hipertenso, diabético, com doença arterial coronariana conhecida. Sem outro histórico relevante. Relata em consulta que há meses apresenta dor ret roesternal, em aperto, com duração de 10 minutos, quando atinge velocidade de 10km/h na esteira, com alívio após 5 minutos de repouso. Refere dor esporádica em repouso. Após extensa investigação, realiza o seguinte exame: A BRAUNWALD, Tratado de Doenças Cardiovasculares – 9ª Ed., pg. 441. Com base na história e no exame complementar apresentado, a causa mais provável da dor, a artéria acometida e o tratamento farmacológico inicial de escolha são, respectivamente,",
+          "alternativas": [
+            "doença aterosclerótica, artéria circunflexa e betabloqueador.",
+            "ponte miocárdica, artéria circunflexa e betabloqueador.",
+            "doença aterosclerótica, artéria descendente anterior e propatilnitrato.",
+            "ponte miocárdica, artéria descendente anterior e propatilnitrato.",
+            "ponte miocárdica, artéria descendente anterior e betabloqueador"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "No hospital em que você trabalha, encontra -se internada, há 3 dias, na Unidade Cardiointensiva, paciente do sexo feminino, 32 anos, com história de troca valvar mitral metálica ocorrida há 8 meses por estenose mitral grave sintomática, de etiologia reumática. Antes da internação atual, mantinha acompanhamento médico irregular. Desta vez, foi internada por quadro de dispneia aos mínimos esforços, ocorrendo há mais de 2 semanas. Durante inte rnação, a despeito de anticoagulação plena, paciente evolui com hemiparesia esquerda. Exames complementares: hemoculturas negativas; ecocardiograma transesofágico demonstrou imagem aditiva em face atrial da prótese, restringindo mobilização dos folhetos, c om densidade aumentada, medindo 15mm no maior diâmetro; tomografia computadorizada de crânio demonstrava hipodensidade do parênquima em topografia frontoparietal direita. No momento, a paciente se encontra estável clinicamente. O diagnóstico mais provável e a melhor conduta para o caso são, respectivamente,",
+          "alternativas": [
+            "trombose de prótese e cirurgia de troca valvar.",
+            "endocardite infecciosa e cirurgia de troca valvar.",
+            "endocardite infecciosa e antibiótico parenteral.",
+            "trombose de prótese e trombólise.",
+            "mixoma atrial e cirurgia cardíaca"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Entre os critérios menores para o diagnóstico de Endocardite Infecciosa, listados a seguir, assinale o que consiste em fenômeno imunológico.",
+          "alternativas": [
+            "Aneurisma micótico.",
+            "Hemorragia conjuntival.",
+            "Lesões de Janeway.",
+            "Infartos pulmonares sépticos.",
+            "Manchas de Roth"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Acerca do implante transcateter de válvula aórtica (TAVI), analise as afirmativas a seguir e assinale (V) para verdadeira e (F) para a falsa. ( ) Bloqueio atrioventricular total, leak paravalvar, AVC isquêmico e oclusão coronariana são possíveis complicações que podem surgir durante ou após procedimento de TAVI. ( ) Pacientes com estenose aórtica sintomática e escore STS > 8% são possíveis candidatos a TAVI. ( ) Nos estudos mais recentes, em pacientes de alto risco para troca valvar aórtica convencional, ao comparar TAVI com terapia medicamentosa não houve redução na mortalidade e na hospitalização. ( ) A incidência de fibrilação atrial nova após procedimento é maior nos submetidos a TAVI em relação à cirurgia de troca valvar convencional. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – V – F – V.",
+            "V – F – V – F.",
+            "F – V – V – F.",
+            "V – V – F – F.",
+            "F – F – V – V"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente do ambulatório de valvopatias, 30 anos, sexo feminino, queixa-se de dispneia aos mínimos esforços. Encontra -se em uso regular de furosemida 40mg duas vezes ao dia e betabloqueador. À ausculta cardíaca: sopro mesodiastólico em ru flar, precedido por estalido de abertura (próximo de B2), com B1 e B2 hiperfonéticas. O ecocardiografista do hospital alega que a paciente apresenta lesão grave e que o aspecto valvar durante a diástole é em “domo”. Escore de Wilkins-Block calculado: 12. Com base no caso acima, o diagnóstico da valvopatia e a conduta mais indicada são, respectivamente,",
+          "alternativas": [
+            "Insuficiência aórtica e cirurgia convencional.",
+            "Estenose mitral e cirurgia convencional.",
+            "Estenose mitral e valvoplastia mitral por cateter-balão.",
+            "Estenose mitral e otimização medicamentosa e reavaliação em 6 meses.",
+            "Insuficiência aórtica e otimização medicamentosa e reavaliação em 6 meses. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Relacione os fármacos listados a seguir aos seus possíveis efeitos colaterais fetais, se utilizados durante a gestação. 1. Captopril 2. Varfarina 3. Amiodarona 4. Digoxina ( ) Embriopatia fetal, hemorragia placentária e fetal, anormalidades do sistema nervoso central. ( ) Uso seguro, sem efeitos adversos. ( ) Há contraindicação. Reta rdo do crescimento intrauterino, oligoidrâmnio, ossificação anormal. ( ) Bócio, hipotireoidismo e hipertireoidismo, retardo do crescimento intrauterino. Assinale a opção que indica a relação correta, na ordem apresentada.",
+          "alternativas": [
+            "2 – 4 – 1 – 3.",
+            "2 – 3 – 1 – 4.",
+            "2 – 4 – 3 – 1.",
+            "1 – 4 – 2 – 3.",
+            "1 – 3 – 2 – 4"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "As antraciclinas constituem componentes essenciais em muitos esquemas quimioterápicos, tendo demonstrado eficácia em linfomas e muitos tumores sólidos. Porém, essa é uma cl asse conhecidamente cardiotóxica. Sobre as antraciclinas e a cardiotoxicidade, assinale a afirmativa correta.",
+          "alternativas": [
+            "A cardiotoxicidade não é dependente da dose.",
+            "A cardiomiopatia por antraciclina ocorre geralmente após o primeiro ano de tratamento em adultos.",
+            "Idade (avançada ou jovem) constitui fator de risco para desenvolvimento de cardiotoxicidade por antracíclicos.",
+            "A elevação dos níveis de troponina frequentemente é a primeira anormalidade a ser notada.",
+            "A principal alteração cardiovascul ar do uso de antraciclinas é a ocorrência de trombose venosa"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Homem, 78 anos, com história de hipertensão arterial e insuficiência renal crônica, apresenta-se com dispneia progressiva ao esforço, além de episódios de síncope após estresse emocional e lipotímia ao se levantar rapidamente da cama. Eletrocardiograma demonstra fibrilação atrial e complexo QRS de baixa amplitude. Ecocardiograma transtorácico com aumento da espessura das paredes ventriculares, dilatação dos átrios e espessamento do septo interatrial. Disfunção biventricular. Válvulas cardíacas espessadas, mas normofuncionantes. Realizou Ressonância Magnética Cardíaca com as seguintes imagens e padrão de realce tardio: IBRAUNWALD – Tratado de Doenças Cardiovasculares – 9ª Ed. – Pg. 365. A partir do quadro clínico acima, o diagnóstico mais provável é",
+          "alternativas": [
+            "Doença de Fabry.",
+            "Cardiomiopatia hipertrófica.",
+            "Sarcoidose.",
+            "Endomiocardiofibrose.",
+            "Amiloidose"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-endocrinologia-e-metabologia-nivel-vicns214",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — endocrinologia e metabologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-endocrinologia-e-metabologia-nivel-vicns214-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "O Diabetes é uma doença endócrina que pode cursar com múltiplas complicações, se não tratada adequadamente. Uma delas é a neuroartropatia de Charcot. A respeito desse quadro, assinale a afirmativa correta.",
+          "alternativas": [
+            "É uma complicação comum nos portadores de Diabetes, cursando com dores transitórias em ambos os membros inferiores, influenciada pela má postura do indivíduo.",
+            "Esta condição acomete mais precocemente os indivíduos com Diabetes Insulino -resistentes do que os diabéticos insulino - dependentes.",
+            "Induz a uma resposta pró -inflamatória com a liberação de citocinas e a posterior ação osteoblástica sobre o osso acometido.",
+            "É uma condição unilateral na maioria dos casos e pode ocorrer o desabamento ósseo no médio pé.",
+            "Não cursa com desfechos graves, como a amputação do membro"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a síndrome autoimune que tem maior associação com o quadro de hipofisite linfocítica.",
+          "alternativas": [
+            "Tireoidite de Hashimoto.",
+            "Doença de Graves.",
+            "Síndrome de Sjogren.",
+            "Síndrome Poliglandular Autoimune.",
+            "Diabetes Melito Tipo 1"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a etiologia de maior frequência no hiperparatireoidismo primário.",
+          "alternativas": [
+            "Hiperplasia.",
+            "Inflamação.",
+            "Carcinoma das paratireoides.",
+            "Adenoma duplo das paratireoides.",
+            "Adenoma único das paratireoides"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a causa principal da insuficiência adrenal primária.",
+          "alternativas": [
+            "Destruição bilateral do córtex adrenal.",
+            "Defeito ou inibição da esteroidogênese adrenal.",
+            "Insensibilidade dos córtices adrenais ao ACTH.",
+            "Adrenalectomia bilateral.",
+            "Tuberculose Adrenal"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "As opções a seguir apresentam indicações de rastreio para diabetes Tipo 2, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Homem, 45 anos, HAS+, sedentário, com circunferência abdominal de 97cm.",
+            "Mulher de 44 anos, em uso de TARV há 10 anos, fumante.",
+            "Homem de 29 de idade, diagnosticado com doença psiquiátrica grave, em crônico de antipsicóticos.",
+            "Rapaz de 22 anos, com 1,70 de altura e 68kg, sedentário, pais com DM2 e hipertensos, assintomático.",
+            "Puérpera, amamentando exclusivamente ao seio materno, que relata que seu bebê teve “muito líquido na bolsa” por um exame que acusou “diabetes gestacional” em sua gravidez"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Para o teste de TOTG, quando indi cado para crianças, a posologia indicada seria sobrecarga de glicose de",
+          "alternativas": [
+            "0,75mg/kg, até no máximo 65g.",
+            "0,50mg/kg, até no máximo 60g",
+            "1,75g/kg, até no máximo 75g.",
+            "1,65g/kg, até no máximo 70g.",
+            "1,70g/kg, até no máximo 65g"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em puérperas diagnosticadas com HIV, assinale a o pção que indica a dose correta da medicação usada para inibir o eixo hipotálamo-hipófise-glândula mamária.",
+          "alternativas": [
+            "Cabergolina 0,5mg VO dose única.",
+            "Cabergolina 0,5mg, 2 comprimidos.",
+            "Cabergolina 5mg, dose única VO.",
+            "Cabergolina 10mg, dose única VO.",
+            "Cabergolina 0,5 mg EV, dose única"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "As opções a seguir apresentam exames diagnósticos para obesidade, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Pesagem hidrostática.",
+            "Bioimpedância.",
+            "Absorciometria de raios X de dupla energia.",
+            "Ressonância magnética.",
+            "Teste ergométrico. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "As opções a seguir apresentam grupos que possuem indicação para dosagem da 25-OHD, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Pessoas com IMC>30.",
+            "Criança de 5 anos que se queixa de dor óssea persistente.",
+            "Grávidas.",
+            "Lactentes.",
+            "Usuários de drogas injetáveis apresentando hipotrofia muscular"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Você está de plantão em uma UPA quando, de madrugada, chega um paciente de 12 anos de idade, diagnosticado com DM1, desacordado, irresponsivo aos chamados. A mãe relata alimentação adequada e boa adesão ao uso da insulina. Pontua que deixou o filho ir a uma festa com os amigos e que recebeu uma ligação telefônica da mãe do amigo pois ele tinha “desmaiado”. SPO2: 92%. A unidade é sucateada e, no momento, está sem fitas para o aparelho de HGT. Nesse caso, como primeiros procedimentos, você deve",
+          "alternativas": [
+            "aplicar insulina SC, monitorizar, ofertar O 2 e reposição volêmica.",
+            "aplicar insulina EV, monitorizar, reposição volêmica e aguardar",
+            "aplicar flush de glicose EV, colocar o paciente em posição Trendelemburg e o entubar.",
+            "posicionar o paciente adequadamente, verificar permeabilidade de vias aéreas, ofertar O 2 e realizar flush de glicose EV.",
+            "realizar reidratação EV, aguardar dosagem de potássio e solicitar transferência"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a faixa etária para a triagem universal de lipidograma em crianças e adolescentes, independente de fatores de risco.",
+          "alternativas": [
+            "5 a 7 anos",
+            "7 a 9 anos",
+            "9 a 11 anos",
+            "11 aos 13 anos",
+            "13 aos 15 anos"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-gastroenterologia-nivel-vicns215",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — gastroenterologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-gastroenterologia-nivel-vicns215-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação à doença hepática gordurosa não alcoólica (DHGNA), analise as afirmativas a seguir e assinale (V) para a alternativa verdadeira e (F) para a falsa. ( ) A esteatohepatite é a forma progressiva da doença e e leva o risco de desenvolvimento de doenças cardiovasculares e do carcinoma hepatocelular (CHC). ( ) São fatores de risco para desenvolvimento da DHGNA o diabetes tipo 2, a síndrome metabólica e a obesidade. ( ) O fator determinante do prognóstico hepát ico são o grau de inflamação crônica do parênquima hepático e a gravidade das doenças associadas. ( ) O tratamento da esteatohepatite se baseia na mudança do estilo de vida, tratamento das doenças associadas e uso de fármacos, como a pioglitazona e a vitamina E. ( ) A esteatohepatite é a forma mais comum da doença e necessita de equipe multidisciplinar para seu tratamento. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – V – V – V – V.",
+            "F – F – F – F – V.",
+            "V – V – F – V – F.",
+            "F – V – F – V – V.",
+            "V – F – V – F – V"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente do sexo feminino, 59 anos, com diagnóstico de carcinoma de bexiga metastático, em uso de imunoterapia (immune checkpoint inhibitor ), interna com história de diarreia líquida há 13 dias, sem muco ou sangue, odor fétido, associada a dor abdominal, distensão do abdome e febre. À admissão relatava tratamento recente para sinusite bacteriana. A tomografia computadorizada de abdome e pelve revelou pancolite. A esse respeito, assinale a afirmativa correta.",
+          "alternativas": [
+            "Trata-se de paciente em tratamento oncológico com quadro de diarreia aguda e a etiologia mais provável é retocolite ulcerativa inespecífica.",
+            "Trata-se de paciente em tratamento oncológico com quadro de diarreia persistente e a etiolog ia infecciosa é a mais provável.",
+            "Trata-se de paciente em tratamento oncológico com diarreia aguda secundária ao tratamento imunoterápico.",
+            "Trata-se de paciente em tratamento oncológico com quadro de diarreia persistente e a causa mais provável é a infecção pelo C. difficile.",
+            "Trata-se de paciente em tratamento oncológico com quadro de diarreia aguda e as causas mais prováveis são a infecçã o pelo C. difficile e efeito adverso da imunoterapia"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "A nutrição clínica é o ramo da nutrição responsável pela prevenção, diagnóstico e tratamento das alterações metabólicas decorrentes da doença e do envelhecimento. Sendo assim, a integridade do trato digestivo tem papel fundamental nos processos de digestão e absorção. A esse respeito, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) São indicações de vias alternativas para nutrição a ingesta oral superior a dois terços das necessidades nutricionais diárias do indivíduo. ( ) Na pancreatite aguda grave, desde que o paciente esteja estável hemodinamicamente, há indicação de iniciar terapia nutricional tardia, após 48h da admissão, e preferencialmente por via parenteral. ( ) São contraindicações da terapia nutricional enteral: instabilidade hemodinâmica/choque, obstrução intestinal e doença de Crohn de delgado com fístula de alto débito. ( ) No paciente submetido à cirurgia bariátrica ( by-pass gástrico) a via preferencial de reposição de vitamina B12 deve ser a via oral. ( ) Desnutrição grave pode ser definida como a perda de peso involuntária igual ou superior a 10% do peso corporal num período igual ou menor que 6 meses. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – F – V – F – V.",
+            "F – F – F – V – V.",
+            "V – V – V – F – F.",
+            "V – F – V – F – F.",
+            "F – V – F – F – V"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Relacione as doenças relacionadas a seguir às suas características. 1. Hepatite auto-imune (HAI) 2. Colangite esclerosante primária (CEP) 3. Colangite biliar primária (CBP) 4. Síndromes híbridas ( ) Caracterizada por colestase, ductopenia, predomina no sexo feminino e exerce impacto negativo importante na qualidade de vida. ( ) São fatores de mau prognóstico: presença de cirrose no diagnóstico, idade jovem ao diagnóstico e múltiplos episódios de recaída. ( ) Predomina em homens jovens e está associada a doença inflamatória intestinal – RCUI. ( ) Coexistência de características cl ínicas, laboratoriais e/ou histológicas de mais de uma doença hepática autoimune num mesmo paciente. Assinale a opção que indica a relação correta, na ordem apresentada.",
+          "alternativas": [
+            "1 – 2 – 3 – 4.",
+            "3 – 1 – 2 – 4.",
+            "4 – 2 – 3 – 1.",
+            "1 – 3 – 2 – 4.",
+            "2 – 1 – 3 – 4. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente do sexo feminino, 49 anos, procurou o Pronto Socorro com história de ter iniciado quadro de mal -estar geral, mialgia e febre há cerca de uma semana, com piora há 03 dias, agora com náuseas e vômitos e “olhos amarelos”. Referia viagem recente para a Bahia. Os exames de laboratório revelaram: AST 3.000 (VR: 5 -34) / ALT 4.000 (VR: até 55) / FA 700 (VR: 40 a 150) / Gama GT 800 (VR: 9 – 36) / BT 18,0 (VR: 0,2 a 1,2) / BD 16,0 (VR: até 0,5) / BI 2,0 (VR: 0,2 a 0,7) / Fator V 70% (VR: > 60) / Anti HAV IgG não reagente / Anti HAV IgM reagente / Anti HBs reagente / Anti HBc total reagente e anti HCV não reagente. Após uma semana da admissão, a paciente evoluiu com confusão mental, rebaixamento do nível de consciência, tremores f inos de extremidades, alargamento do tempo de protrombina e queda do Fator V, sendo transferida para a unidade de terapia intensiva e você é chamado para avaliação e conduta. Acerca do caso descrito, assinale a afirmativa correta.",
+          "alternativas": [
+            "Trata-se de paciente com a forma colestática da hepatite A, evoluindo com encefalopatia hepática e a conduta mais adequada é instituir o tratamento para encefalopatia e investigar possível quadro infeccioso associado.",
+            "O diagnóstico mais provável é hepatite aguda A e B, for ma colestática, complicada com encefalopatia. A conduta mais adequada é tratar a encefalopatia hepática.",
+            "Trata-se de paciente com hepatite fulminante pelo vírus da hepatite A e o tratamento mais adequado é associar medidas para encefalopatia e incluir em lista de transplante hepático após melhora clínica.",
+            "Trata-se de paciente com hepatite viral A e a conduta mais adequada é monitorar as enzimas hepáticas, uma vez que a hepatite A não evolui para a fase crônica.",
+            "Trata-se de paciente com hepatite fulminante pelo vírus da hepatite A e a conduta mais adequada é solicitar prioridade para transplante hepático"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente do sexo feminino, 50 anos, interna com lesão ulcerada em mama direita, cuja investigação revelou tratar -se de pioderma gangrenoso. Relatava, ainda, episódios de diarreia com muco e sangue que tiveram início há um ano. A colonoscopia revelou retossigmoidite – Escore 2 de Mayo e a dosagem da calprotectina fecal: 3.000 (VR: < 50mcg/g fezes). A esse respeito, assinale a afirmativa correta.",
+          "alternativas": [
+            "O diagnóstico mais provável é retocolite ulcerativa inespecífica em atividade moderada e a melhor opção terapêutica é iniciar mesalazina por via oral e retal.",
+            "O diagnóstico mais provável é doença inflamatória intestinal com ativi dade severa, não se podendo diferenciar se é doença Crohn colônica ou retocolite ulcerativa inespecífica.",
+            "O diagnóstico mais provável é retocolite ulcerativa inespecífica em atividade severa, associada a manifestação extra-intestinal e a melhor condut a terapêutica é inciar corticóide endovenoso, mesalazina e imunossupressor.",
+            "O diagnóstico mais provável é retocolite ulcerativa inespecífica com atividade moderada, com manifestação extra intestinal e a melhor opção terapêutica é iniciar imunobiológico.",
+            "O diagnóstico mais provável é a forma colônica da doença de Crohn com manifestação extra intestinal e a melhor opção terapêutica é iniciar imunobiológico"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Relacione as lesões císticas pancreáticas listadas a seguir às suas características. 1. Neoplasia cística serosa 2. Neoplasia cística mucinosa 3. Neoplasia intraductal produtora de mucina ( ) Predomina no sexo feminino, na grande maioria dos casos é achado incidental e não acomete o ducto pancreático principal. ( ) Ocorre igualmente ambos os sexos, dilatação do ducto pancreático principal e/ou secundários, únicos ou múltiplos. ( ) Mais comum em mulheres (90 -95% dos casos), não acomete o ducto pancreático principal, geralmente solitário, risco de malignização. Assinale a opção que indica a relação correta, na ordem apresentada.",
+          "alternativas": [
+            "1 – 2 – 3.",
+            "1 – 3 – 2.",
+            "3 – 1 – 2.",
+            "3 – 2 – 1.",
+            "2 – 3 – 1. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação às pancreatites, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) A pancreatite crônica é um síndrome fibro -inflamatória do pâncreas exócrino, de causa multifatorial, caracterizada pela presença de inflamação crônica e fibrose. ( ) A pancreatite aguda é a doença pancreática mais co mum e o seu diagnóstico se baseia nos critérios de Atlanta. ( ) Aproximadamente 80% dos pacientes com pancreatite aguda desenvolvem a forma leve a moderada. ( ) A causa mais comum da pancreatite aguda é o consumo abusivo do álcool. ( ) A dor abdomina l é o sintoma mais comum da pancreatite crônica, estando presente em 76% dos casos, exercendo impacto negativo na qualidade de vida. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F – V – V.",
+            "V – F – V – F – F.",
+            "V – V – V – F – V.",
+            "F – F – V – F – F.",
+            "V – V – F – V – V"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "JCK, sexo feminino, 27 anos procura o consultório com história de alteração do hábito intestinal há seis meses, com diarreia líquida, com presença de restos alimentares, associada a dor abdominal bloating e perda de 8% do peso corporal nesse período. Há um mês houve piora do quadro, agora com esteatorreia. Ao exame físico encontrava -se em regular estado geral, emagrecida, pele seca e com presença de dermatite herpertiforme. Assinale a opção que indica o diagnóstico mais provável para o caso descrito.",
+          "alternativas": [
+            "Síndrome de má absorção secundária à pancreatite crônica hereditária pois o paciente apresenta esteatorreia.",
+            "Diarreia crônica secundária à desnutrição.",
+            "Síndrome do intestino irr itável, levando à síndrome de má absorção.",
+            "Síndrome de má absorção secundária à doença celíaca em atividade.",
+            "Insuficiência pancreática exócrina secundária à pancreatite crônica"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 60 anos, sexo masculino, admitido no setor de emergência do Pronto Socorro com quadro de hematoquezia. Tem antecedente de insuficiência coronariana com colocação de stent coronariano há 7 meses e vinha em uso de Clopidogrel 75mg/dia e AAS 100mg/dia. Ao exame: consciente e orientado, descorado (++/4+), PA 70 X 50mmHg. Hemoglobina 6,0g/dL / INR 2,3 / Plaq 160.000. A esse respeito, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) O tratamento inicial compr eende ressuscitação hemodinâmica com expansão volêmica, hemotransfusão de concentrado de hemácias e colonoscopia após estabilização hemodinâmica. ( ) O tratamento inicial compreende internação em unidade de terapia intensiva, ressuscitação hemodinâmica, hemotransfusão de concentrado de hemácias e, após estabilização hemodinâmica, iniciar a investigação do sangramento com endoscopia digestiva alta. ( ) A hematoquezia, quando associada à instabilidade hemodinâmica, é indicativa de hemorragia digestiva baixa. ( ) A hemostasia endoscópica, caso seja necessária, pode ser realizada segura e eficaz nesse caso, mesmo com INR 2,3. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F – V.",
+            "F – V – V – V.",
+            "V – V – V – F.",
+            "F – F – F – V.",
+            "V – F – F – F"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação à esofagite eosinofílica e sua relação com as alterações da motilidade esofágica, assinale a afirmativa correta.",
+          "alternativas": [
+            "As alterações da motilidade esofágica ocorrem em cerca de 90% dos casos e são decorrentes da infiltração de eosinófilos na mucosa esofágica.",
+            "As alterações da motilidade esofágica ocorrem em cerca de 90% dos casos e prevalecem as desordens motoras majors, como a ausência de contratilidade esofágica.",
+            "As alterações da motilidade esofágica ocorrem em cerca de 50% dos casos e prevalecem as alterações não específicas, como a motilidade esofágica ineficaz.",
+            "As alterações da motilidade esofágica ocorrem em cerca de 90% dos casos e prevalecem as alterações não específicas, como a motilidade esofágica ineficaz.",
+            "As alterações da motilidade esofágica ocorrem em cerca de 50% dos casos e prevalecem as alterações majors, como a ausência de contratalidade esofágica. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação às teorias sobre o mecanismo da tosse crônica em pacientes com doença do refluxo gastroesofágico, analise os itens a seguir. I. Segundo a teoria do refluxo , também conhecida como teoria do refluxo proximal ou microaspiração maior, a tosse seria decorrente das anormalidades estruturais e funcionais do esôfago inferior, que levariam ao refluxo do conteúdo gástrico. II. Segundo a teoria do reflexo, a tosse crônica é decorrente do reflexo traqueobrônquico, mediado pelo nervo esôfago aferente distal. III. Segundo a teoria da dismotilidade esofágica, os episódios de tosse crônica são decorrentes da motilidade esofágica ineficaz e de rupturas esofágicas maciças. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação à gastrite autoimune, analise os itens a seguir. I. É restrita ao corpo gástrico. II. Exibe níveis séricos baixos de vitamina B12. III. Está associada à anemia microcítica. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação ao diagnóstico diferencial entre acalasia e esclerodermia pelo exame de suspensão de bário, para os achados relevantes de um quadro clínico moderado a avançado de acalasi a, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Dilatação esofágica evidente. ( ) Peristaltismo ausente na porção esofágica com predomínio de musculatura lisa. ( ) Peristaltismo fraco, incompleto ou ausente na porção esofágica com predomínio de musculatura lisa. ( ) Junção esofagogástrica com aspecto em bico suave, concêntrico, cônico, flexível; sem hérnia de hiato. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "V – V – F – V.",
+            "V – F – V – F.",
+            "F – V – V – V.",
+            "V – V – F – F.",
+            "V – F – F – F"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-hematologia-e-hemoterapia-nivel-vicns218",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — hematologia e hemoterapia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-hematologia-e-hemoterapia-nivel-vicns218-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Criança de 2 anos de idade, sexo masculino, portadora de hemofilia A grave, vinha em tratamento profilático com fator VIII de origem plasmática. Como começou a apresentar episódios de hemartrose, foi feita a pesquisa de inibidor de fator VIII, que foi positiva, com um título de 400 Unidades Bethesda (UB). Foi tentado tratamento de imunotolerância, com o uso de concentrados de fator VIII de origem plasmática para supressão do anticorpo anti-fator VIII, por 6 meses, sem sucesso, já que o título de inibidor subiu para 580 UB. Segundo as diretrizes clínicas e protocolos do Ministério da Saúde, assinale a opção que corresponde ao tratamento de escolha para esta criança.",
+          "alternativas": [
+            "Tratamento profilático, com emicizumabe.",
+            "Novo ciclo de imunotolerância com fator VIII recombinante de longa duração.",
+            "Tratamento de demanda, com uso de complexo protrombínico parcialmente ativado.",
+            "Terapia genética.",
+            "Tratamento profilático com o uso de concentrado de fator VII recombinante e ativado"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "A respeito da reposição de ferro para a correção da anemia causada por perda menstrual excessiva, assinale a afirmativa correta.",
+          "alternativas": [
+            "A reposição de ferro por via intravenosa está indicada sempre que a paciente tiver anemia sintomática.",
+            "A reposição, por via oral, de doses elevadas de ferro – 2 a 3 comprimidos por dia – não são recomendadas.",
+            "A transfusão de concentrados de hemácias neste tipo de anemia está indicada apenas como preparação para cirurgias eletivas.",
+            "O uso da carboximaltose férrica por via intravenosa é hoje considerado o padrão -ouro para o tratamento deste tipo de anemia.",
+            "A eritropoietina é uma alternativa de tratamento adjuvante para os casos de resposta insuficiente, isto nos casos em que os n íveis séricos de ferritina não se elevarem com o tratamento com ferro oral ou venoso"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 65 anos de idade, hipertenso, com doença cardíaca coronariana grave, é diagnosticado com leucemia mieloide crônica. Apresenta ausência de resposta após o tratamento inicial com imatinibe. Assinale a opção que apresenta o tratamento de escolha para esse paciente.",
+          "alternativas": [
+            "Ponatinibe.",
+            "Dasatinibe.",
+            "Transplante de medula óssea.",
+            "Nilotinibe.",
+            "Venetoclax"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "A respeito da fisiopatologia da Púrpura Trombocitopênica Trombótica (PTT), assinale a afirmativa correta.",
+          "alternativas": [
+            "A presença de anticorpos anti -fator de Von Willebrand exclui o diagnóstico.",
+            "A elevação súbita e idiopática dos níveis séricos de ADAMTS - 13 desencadeia o surgimento dos sintomas da doença.",
+            "A agregação das plaquetas, que resulta em trombose e em trombocitopenia, é causada por lesão endoletial sistêmica, associada à síndrome de vazamento capilar.",
+            "Autoanticorpos anti -GP-IIB-IIIA plaquetários dão início à fisiopatologia da doença.",
+            "O surgimento de autoanticorpos anti -ADAMTS-13 é o gatilho para o desenvolvimento das alterações clínicas da PTT"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Relacione o tipo de imunodeficiência congênita listadas a seguir, às alterações primordiais para o seu desenvolvimento. 1. Imunodeficiência severa e combinada (SCID) 2. Síndrome de Wiskott-Aldrich 3. Síndrome de Chediak-Higashi 4. Síndrome de Barth ( ) Ausência de funcionamento dos linfócitos T e B ( ) Lise deficiente de bactérias fagocitadas ( ) Trombocitopenia congênita ( ) Neutropenia congênita Assinale a opção que indica a relação correta, na ordem apresentada.",
+          "alternativas": [
+            "1 – 3 – 2 – 4.",
+            "1 – 4 – 2 – 3.",
+            "4 – 2 – 3 – 1.",
+            "2 – 4 – 3 – 1.",
+            "4 – 3 – 2 – 1"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação à síndrome de hiper -hemólise associada à doença falciforme, analise as afirmativas a seguir. I. Corresponde à hemólise pós -transfusional tanto das hemácias transfundidas quanto das hemácias do próprio indivíduo. II. A presença de múltiplos alo-anticorpos anti-eritrocitários está quase sempre presente no plasma das pessoas que desenvolveram a complicação. III. Uma das medidas básicas em pacientes que desenvolveram a complicação é evitar ao máximo novas transfusões no paciente. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "A respeito da púrpura neonatal fulminante , assinale a afirmativa correta.",
+          "alternativas": [
+            "É causada pelo uso de heparina por parte da mãe, durante a gestação.",
+            "Deve-se ao déficit congênito e grave da proteína C.",
+            "É desencadeada pela presença de alo -anticorpos contra antígenos plaquetários específicos (sobretudo anti -HPA-1a) desenvolvidos pela mãe e que cruzam a barreira placentária.",
+            "É causada pelo déficit concomitante de antitrombina e de proteína S.",
+            "A presença de petéquias disseminadas, que surgem após o 15º dia de vida do recém -nascido, é a característica mais típica da doença"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação ao diagnóstico de Le ucemia Linfocítica Crônica (LLC), assinale a afirmativa correta.",
+          "alternativas": [
+            "A presença de linfocitose no sangue periférico é suficiente para o estabelecimento do diagnóstico.",
+            "A biópsia de medula óssea é o padrão -ouro para a confirmação do diagnóstico.",
+            "A imunofenotipagem do sangue periférico por citometria de fluxo pode confirmar definitivamente o diagnóstico.",
+            "Linfocitose acompanhada de adenomegalia generalizada confirma o diagnóstico.",
+            "Linfocitose sem linfócitos atípicos exclui o diagnóstico de LLC"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Relacione os tipos de reação transfusional imediata listadas a seguir, ao quadro clínico descrito. 1. Dispneia súbita, acompanhada de hipóxia e infiltrados pulmonares bilaterais, que surgem até 6 horas após o início da transfusão. 2. Ansiedade, dispneia, hipotensão e estridor respiratório intenso que surgem até 45 minutos após o início da transfusão. 3. Dispneia intensa e edema pulmonar cardiogênico. 4. Febre alta, calafrios, hipotensão. ( ) Sepse pós-transfsuional ( ) Sobrecarga circulatória (TACO) ( ) Reação anafilática ( ) TRALI Assinale a opção que indica a relação correta, segundo a ordem apresentada.",
+          "alternativas": [
+            "1 – 3 – 2 – 4.",
+            "1 – 4 – 2 – 3.",
+            "4 – 2 – 3 – 1.",
+            "2 – 4 – 3 – 1.",
+            "4 – 3 – 2 – 1"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação às síndromes mielodisplásicas, analise as afirmativas a seguir. I. A síndrome mielodisplásica com poucos blastos (< 5%) e deleção isolada do 5q (SMD -5q-) caracteriza -se por evoluir inexoravalmente para leucemia aguda. II. A síndrome mielodisplá sica com sideroblastos em anel caracteriza-se por anemia, ausência de blastos e mais de 15% de precursosres eritroides com sideroblastos em anel na medula óssea. III. Nos casos de síndrome mielodisplásica com sideroblastos em anel > 15%, na medula óssea, e anemia sintomática, pode estar indicado o uso de luspatercept. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Pacientes com doença falciforme politransfundidos e que apresentam positividade para o antí geno e (Rh5) desenvolvem, com alguma frequência, anticorpos anti-e (anti-Rh5). Assinale a opção que corresponde à explicação para este fenômeno.",
+          "alternativas": [
+            "Autoimunidade.",
+            "Erro na fenotipagem do paciente.",
+            "Mutação no antígeno e (Rh5) do paciente.",
+            "Transfusão de hemácias desprovidas do antígeno e (Rh5).",
+            "Uso de medicamentos que induzem à formação de autoanticorpos. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação ao prognóstico da leucemia linfoblástica aguda do adulto, assinale a afirmativa correta.",
+          "alternativas": [
+            "Mais de 50% dos pacientes apresentam sobrevida livre de doença superior a 5 anos.",
+            "Pacientes que também expressam antígenos mieloides têm um prognóstico mais favorável.",
+            "Translocações t(9;22) e t(4;11) não são critérios de mau prognóstico.",
+            "Primeira remissão completa dentro de 4 meses do início do tratamento é um critério para baixo risco.",
+            "Leucometria abaixo de 50.000 por microlitro é considerada critério de baixo risco"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com base no Código de Ética do Conselho Federal de Medicina analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Ocorrendo fatos que, a critério do médico prejudiquem o bom relacionamento com o paciente ou o pleno desempenho profissional, o médico tem o direito de renunciar ao atendimento, devendo para isto comunicar previamente decisão ao paciente ou a seu representante legal, para então se afastar do caso. ( ) O médico deve informar ao paciente o diagnóstico, o prognóstico, os riscos e os objetivos do tratamento, salvo quando se tr atar de caso de câncer, fora de possibilidade terapêutica, situação em que o médico deve comunicar o fato apenas a um representante legal do paciente. ( ) Nos casos de doença incurável e terminal, deve o médico oferecer todos os cuidados paliativos dispo níveis sem empreender ações diagnósticas ou terapêuticas inúteis ou obstinadas, levando sempre em consideração a vontade expressa do paciente ou, na sua impossibilidade, a de seu representante legal. As afirmativas são, na ordem apresentada, respectivamente,",
+          "alternativas": [
+            "F – V – F",
+            "F – V – V.",
+            "V – F – F.",
+            "V – V – F.",
+            "F – F – V"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-nefrologia-nivel-vicns226",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — nefrologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-nefrologia-nivel-vicns226-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação à insuficiência renal aguda pré -renal, assinale a afirmativa correta.",
+          "alternativas": [
+            "A osmolaridade urinária está baixa e a fração de excreção de sódio elevada.",
+            "A osmolaridade urinária está elevada e a fração de excreção de sódio está baixa.",
+            "A osmolaridade urinária está baixa e a fração de excreção de sódio está baixa.",
+            "A fração de excreção de ureia urinária está elevada.",
+            "A fração de excreção do sódio está normal"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Sobre a necrose tubular aguda, assinale a afirmativa correta.",
+          "alternativas": [
+            "A osmolaridade urinaria está baixa e a fração de excreção de sódio elevada.",
+            "A osmolaridade urinária está elevada e a fração de excreção de sódio está baixa.",
+            "A osmolaridade urinaria está baixa e a fração de excre ção de sódio está baixa.",
+            "A fração de excreção de ureia urinária está abaixo de 35%.",
+            "A fração de excreção de sódio está normal"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente jovem, do sexo feminino, procura a emergência com quadro de anasarca iniciada há cerca de 5 dias. No exame físico, apresenta -se em regular/estado geral, normotensa, sem outros comemorativos. Não possui comorbidade, porém refere ser portadora de transtorno afetivo bipolar, sem acompanhamento regular, mas com uso contínuo de medicação, que no momento não consegue se lembrar. Assinale a opção que indica corretamente a hipótese diagnóstica para esse caso.",
+          "alternativas": [
+            "Glomerulonefrite lúpica.",
+            "Sindrome nefrótica por nefropatia membranosa.",
+            "Glomerulonefrite por lesão mínima.",
+            "Nefropatia por IgA.",
+            "Glomerulonefrite por depósito de C3"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente idosa, em uso contínuo de bloqueador de bomba de próton por ulcera péptica duodenal, apresentou quadro de fraqueza muscular. Durante a investigação, identificou -se hipocalemia, de difícil tratamento, apesar da mesma não fazer uso de diuréticos. Para esse caso, assinale a opção que apresenta a conduta terapêutica mais indicada.",
+          "alternativas": [
+            "Associar espirinolactona.",
+            "Iniciar reposição de magnésio.",
+            "Otimizar a reposição oral de potássio.",
+            "Investigar Síndrome Paraneoplásica.",
+            "Investigar Síndrome de Batter"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente do sexo masculino, 45 anos, inicia quadro de síndrome nefrótica, com trombose de veia renal. Foram descartadas, a princípio, causas de glomerulopatia secundária. Encontra-se, no momento, com anticoagulação plena. Nesse caso, para auxílio diagnóstico, deve-se solicitar",
+          "alternativas": [
+            "dosagem sérica de IgA.",
+            "dosagem de anticorpo anti-PLA2R.",
+            "angiotomografia de veia renal.",
+            "dosagem do fator anti Xa.",
+            "a repetição da investigação de causas secundárias"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a complicação vascular mais comum no pôs transplante renal.",
+          "alternativas": [
+            "Trombose da artéria renal.",
+            "Trombose da veia renal.",
+            "Estenose da artéria renal.",
+            "Estenose da veia renal.",
+            "Linfocele"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 67 anos de idade, tabagista de longa data, foi diagnosticado com neoplasia pulmonar, cuja histopatologia foi definida como carcinoma de pequenas células. Logo após o diagnóstico, passou a apresentar epi sódio de desorientação severa, sendo internado para investigar quadro neurológico associado. A tomografia computadorizada foi normal, e os exames laboratoriais demonstraram: ureia: 23; creatinina: 0,6; sódio: 109mEq/L; e ácido úrico: 2,1mg%. É importante ressaltar que, no exame físico, o estado volêmico do paciente sugeria euvolemia. Para esse caso, assinale a opção que indica a hipótese diagnóstica mais provável.",
+          "alternativas": [
+            "Síndrome da secreção inadequada de hormônio antidiurético.",
+            "Síndrome perdedora de sal.",
+            "Diabetes insipitus.",
+            "Implante neoplásico secundário.",
+            "Hipovolemia severa"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente portador de doença renal crônica estágio 5, secundária à glomerulonefrite crônica e coronariopatia grave, apresenta dores ósseas. O exame laboratorial demonstra: cálcio: 9,7mg%; albumina sérica: 3g%; fósforo: 7,2mg%; e PTH molécula intacta de 840mcg. Para esse caso, assinale a opção que indica a melhor terapêutica.",
+          "alternativas": [
+            "Carbonato de cálcio/ pulso oral de calcitriol.",
+            "Sevelamer/ paracalcitol.",
+            "Dihidróxido de alumínio/ paracalcitol.",
+            "Sevelamer/cinacalcete.",
+            "Paratireoidectomia. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente masculino de 30 anos, de baixa renda, comparece ao ambulatório, com quadro de insuficiência renal estágio 3A, identificado em exame de admissão laboral. Trouxe também urina de 24 horas com proteinúria de 1g e hematúria microscópica. No seu exame físico meticuloso, observou -se que o mesmo se apresentava hipertenso, com um certo grau de déficit auditivo e, na fundoscopia, presença de granulações amarelas bilaterais localizadas superficialmente na retina ao redor da área foveal. O paciente referiu história de familiares em hemodiálise. Para esse caso, assinale a opção que indica a hipótese dignóstica mais provável.",
+          "alternativas": [
+            "Nefroesclerose hipertensiva.",
+            "Nefropatia por IgA.",
+            "Doença de Fabry.",
+            "Síndrome de Alport.",
+            "Glomeruloesclerose segmentar e focal"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica o diurético indicado para tratamento de calculose renal por hipercalciuria idiopática.",
+          "alternativas": [
+            "Tiazídico.",
+            "Diurético de alça.",
+            "Espirinolactona.",
+            "Diuréticos osmóticos.",
+            "Inibidores da anidrase carbônica"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação ao rim esponja medular , assinale a afirmativa correta.",
+          "alternativas": [
+            "É uma condição grave, de caráter recessivo, caracterizada por cistos corticais.",
+            "Está geralmente associada à fibrose periportal.",
+            "A alteração genética está relacionada às alterações do gen PKHD1.",
+            "Geralmente progride para doença renal crônica, a partir da 5ª década de vida.",
+            "A maioria dos pacientes é assintomática e a doença é diagnosticada com base em achados incidentais de imagem"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Com relação às diretrizes de transplante renal, assinale a opção que indica o contexto em que a doação tem contraindi cação absoluta para o receptor.",
+          "alternativas": [
+            "Crianças com peso inferior a 15kg.",
+            "Doadores com idade superior a 65 anos.",
+            "Doadores com Diabetes Mellitus.",
+            "Doadores com hipertensão arterial sistêmica.",
+            "Portadores de neoplasia maligna em atividade"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente na 26ª semana de gestação é encaminhada para ambulatório de nefrologia. Realiza o pré -natal rigorosamente, mantendo a gestação sem complicações. Apresenta presença de glicosuria no EAS, mas sem albuminurias. Para esse caso, assinale a opção que indica o procedimento mais provável.",
+          "alternativas": [
+            "Solicitar curva glicêmica.",
+            "Iniciar investigação para tubulopatia.",
+            "Iniciar tratamento para infecção urinaria.",
+            "A glicosuria pode ocorrer no último trimestre da gestação, sem representar patologia.",
+            "Solicitar que retorne após o término da gestação para iniciar investigação de tubulopatia"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a causa da doença de Fabry.",
+          "alternativas": [
+            "Deficiência da enzima glicose 6 fosfato desidroginase.",
+            "Alteração do gene da cadeia 5 do colágeno tipo IV.",
+            "Deficiência ou ausência da enzima alfa-galactosidase.",
+            "Variação no gene PKHD1.",
+            "Variação no gene MUC1"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-neurologia-nivel-iiicns230",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — neurologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neurologia-nivel-iiicns230-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "Ao pesquisarmos o reflexo córneo-palpebral, estamos testando a aferência e a eferência dos nervos cranianos",
+          "alternativas": [
+            "V e VII.",
+            "II e VII.",
+            "III e VII.",
+            "V e III.",
+            "V e VI"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Um infarto lacunar no território da artéria lentículo estriada, na maioria dos casos, manifesta -se com uma síndrome muito característica. Assinale a opção que a indica.",
+          "alternativas": [
+            "Ataxia pura.",
+            "Disartria e ataxia.",
+            "Hemiparesia-ataxia.",
+            "Hemiplegia motora pura.",
+            "Comprometimento sensitivo puro dos membros superior e inferior"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente, 15 anos, apresenta ao acordar, pela manhã, abalos musculares que acometem todos os segmentos corporais há, aproximadamente, seis meses. Esses eventos são rela cionados, também, à ingesta alcoólica. Foi realizado eletroencefalograma que revelou ponta-ondas de 4 a 6 Hz. Nesse caso, o diagnóstico mais provável é o de",
+          "alternativas": [
+            "crises uncinadas.",
+            "espasmos infantis.",
+            "epilepsia mioclônica juvenil.",
+            "síndrome de Lennox-Gastaut.",
+            "síndrome de Panayiotopoulos"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente, masculino, 50 anos, apresenta há 3 meses dor, unilateral, orbital, definida como “profunda”, em ataques, geralmente, noturnos, uma a duas horas após o início do sono. Estas cris es são acompanhadas de rinorreia, miose, lacrimejamento e discreta ptose palpebral do mesmo lado da face em que a dor ocorre. Os episódios podem ser desencadeados por ingesta alcoólica e cessam com inalação de oxigênio a 100%. O provável diagnóstico deste paciente é o de cefaleia",
+          "alternativas": [
+            "hípnica.",
+            "numular.",
+            "em salva.",
+            "clavus hystericus.",
+            "tipo tensional ou tensional"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Pacientes comatosos, em decorrência de traumatismo cranioencefálico grave, podem apresentar episódios que duram de minutos a uma hora, manifestos por hipertensão arterial, taquicardia, diaforese e postura extensora vigorosa. Estas manifestações são indicativas de",
+          "alternativas": [
+            "quadro infeccioso.",
+            "hematoma epidural.",
+            "hematoma subdural.",
+            "fratura de base de crânio.",
+            "comprometimento autonômico"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "A doença com ou por grãos argirofílicos é um tipo raro de",
+          "alternativas": [
+            "cefaleia primária.",
+            "cefaleia secundária.",
+            "doença desmielinizante.",
+            "erro inato do metabolismo.",
+            "demência de natureza degenerativa. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Os acrônimos AMAN (neuropatia axonal motora aguda) e AMSAN (neuropatia axonal sensitivo -motora aguda) são variantes da síndrome de",
+          "alternativas": [
+            "Charcot.",
+            "Guillain-Barré.",
+            "Churg-Strauss.",
+            "Wartenberg.",
+            "POEMS (polineuropatia, organomegalia, endocrinopatia, gamopatia monoclonal e alterações cutâneas)"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "A chamada hipótese de Braak e colaboradores que, em 2003, propôs o estagiamento neuropatológico da doença de Parkinson baseou-se na presença de",
+          "alternativas": [
+            "LRRK2.",
+            "placa amiloide.",
+            "proteína Tau.",
+            "corpos de Lewy neuríticos e/ou globulares.",
+            "proteína Tau hiperfosforilada"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a principal causa de comprometimento bulbar manifesto com disfonia, disartria e disfagia.",
+          "alternativas": [
+            "Miastenia gravis.",
+            "Degeneração corticobasal.",
+            "Degeneração estriatonigral.",
+            "Atrofia de múltiplos sistemas.",
+            "Paralisia supranuclear progressiva"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação à morte encefálica, a Resolução nº 2.173/17 substitui a Resolução nº 1.480/97 e atende o que determina a Lei nº 9.434/97 e o Decreto Presidencial nº 9.175/17, que regulamentam o transplante de órgãos no Brasil. As opções a seguir apresentam pré -requisitos para início do protocolo de morte encefálica no Brasil, à exceção de uma . Assinale-a.",
+          "alternativas": [
+            "Temperatura corporal superior a 35 graus.",
+            "Presença de familiar no momento da abertura do protocolo.",
+            "Ausência de fatores tratáveis que confundiriam o diagnóstico.",
+            "Presença de lesão encefálica de causa conhecida e irreversível.",
+            "Tratamento e observação em hospital pelo período mínimo de seis horas"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "enunciado": "O distúrbio comportamental do sono REM, um dos sintomas pré - motores da doença de Parkinson, é uma parassonia, que tem como fármaco de primeira linha para o seu tratamento",
+          "alternativas": [
+            "a sertalina.",
+            "a duloxetina.",
+            "o clonazepam.",
+            "a gabapentina.",
+            "a pregabalina"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-medico-med-pneumologia-nivel-vicns238",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — pneumologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-pneumologia-nivel-vicns238-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "enunciado": "O Global Initiative for Chronic Obstructive Lung Disease (GOLD) publica diretrizes e recomendações sobre a definição, manejo, classificação de gravidade e tratamento da Doença Pulmonar Obstrutiva Crônica (DPOC) e esses critérios são consultados e usados no mundo inteiro, inclusive no Brasil. Em 2023, foram publicadas novas diretrizes com uma nova classificação da doença. Agora, de acordo com a gravidade da doença, a DPOC está dividida nas classes",
+          "alternativas": [
+            "A – B – C – D.",
+            "A – B – C – D – E.",
+            "A – B.",
+            "A – B – E.",
+            "A – B – D"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação à reabilitação pulmonar no enfisema, é correto afirmar que",
+          "alternativas": [
+            "não está indicada em paciente com doença grave.",
+            "diminui a mortalidade da doença.",
+            "é a primeira escolha no tratamento da doença.",
+            "somente indicada em pacientes com doença muito grave.",
+            "não pode ser realizada em paciente em uso de corticoide inalatório"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação ao diagnóstico de pneumotórax, assinale a opção que indica o método com maior sensibilidade.",
+          "alternativas": [
+            "Ultrassom torácico não cardíaco.",
+            "Radiografia de tórax no leito a AP.",
+            "Radiografia de tórax em PA e perfil.",
+            "Ecobroncoscopia linear (EBUS setorial).",
+            "Ultrassonografia endobrônquica radial (EBUS radial)"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "enunciado": "O Global Strategy for Asthma Management and Prevention (GINA) recomenda o uso de imunobiológicos em asma severa. Recentemente foram incorporados ao SUS (Sistema Único de Saúde) alguns desses imunobiológicos. Assinale a opção que indica o imunobiológico que é recomendado pelo GINA para asma severa eosinofílica.",
+          "alternativas": [
+            "Secuquinumabe.",
+            "Omalizumabe.",
+            "Tezepelumabe.",
+            "Tocilizumabe.",
+            "Mepolizumabe"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "enunciado": "A tuberculose é uma das patologias infectocontagiosas mais prevalentes no mundo e, particularmente, no Brasil. Ela pode ser dividida em tuberculose pulmonar e extrapulmonar. Assinale a opção que indica a forma mais prevalente da tuberculose extrapulmonar no Brasil.",
+          "alternativas": [
+            "Tuberculose renal.",
+            "Meningite tuberculosa.",
+            "Tuberculose óssea.",
+            "Tuberculose pleural.",
+            "Tuberculose pericárdica"
+          ],
+          "correta": "D",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 50 anos de idade, ex -tabagista de 40 maços/ano, apresenta-se no consultório com queixas de tosse e dispneia. Apresenta na tomografia computadorizada de alta resolução de tórax: faveolamento, bronquiectasias / bronquiolectasias de tração, espessamento septal interlobular irregular e interf aces irregulares. Assinale a opção que indica a patologia mais provável desse paciente.",
+          "alternativas": [
+            "Fibrose pulmonar idiopática.",
+            "Linfangite carcinomatosa.",
+            "Linfangioleiomiomatose.",
+            "Silicose pulmonar.",
+            "Sarcoidose"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a patologia que pode estar associada à apneia obstrutiva do sono.",
+          "alternativas": [
+            "Pneumonia.",
+            "Amigdalite.",
+            "DPOC.",
+            "Tuberculose laríngea.",
+            "Sarcoidose"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que apresenta o método diagnóstico com maior sensibilidade para detectar um caso novo de tuberculose pulmonar.",
+          "alternativas": [
+            "Radiografia de tórax em PA e perfil.",
+            "Pesquisa de B.A.A.R.",
+            "Cultura para M.tuberculosis em meio solido.",
+            "Xpert MTB/RIF (teste rápido molecular para tuberculose).",
+            "Xpert MTB/RIF Ultra (teste rápido molecular para tuberculose)"
+          ],
+          "correta": "E",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 70 anos, tabagista, apresenta tosse e dor torácica à direita. Tomografia de tórax evidencia massa pulmonar de 4cm no lobo superior direito associada à linfadenomegalia em cadeia infracarinal (cadeia 7). Punção transtorácica guiada por tomografia estabeleceu diagnóstico de carcinoma de pulmão não pequenas células. Segundo o estágio clínico TNM , esse paciente deve ser classificado como",
+          "alternativas": [
+            "T3N1M0.",
+            "T4N2M1.",
+            "T2bN2M0.",
+            "T1bN3M0.",
+            "T2bN1M0. FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "enunciado": "Paciente de 43 anos, sexo feminino, história de obesidade, realizou cirurgia plástica abdominal há 4 dias. Retorna ao hospital com quadro clínico de dor torácica tipo pleurítica, início súbito após levantar da cama, dispneia e taquicardia. Na emergência, o exame complementar mais indicado inicialmente é",
+          "alternativas": [
+            "a angiotomografia de tórax.",
+            "o d-dímero.",
+            "o Doppler de membros inferiores.",
+            "o Rx de tórax PA e perfil.",
+            "a cintilografia de ventilação e perfusão. Atenção: o caso clínico a seguir refere -se às duas próximas questões. Homem de 27 anos, quadro clínico caracterizado por dor pleurítica à esquerda, febre baixa e sudorese noturna há 15 dias. Rx de tórax evidencia derrame pleural à esquerda"
+          ],
+          "correta": "A",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "enunciado": "Assinale a opção que indica a conduta mais adequada para o caso descrito.",
+          "alternativas": [
+            "Drenagem pleural com dreno tubular.",
+            "Toracocentese e biópsia de pleura.",
+            "Início de esquema antituberculostático empírico (RHZE).",
+            "Antibioticoterapia empírica com amoxicilina/clavulanato.",
+            "Toracocentese e início de tratamento para pneumonia comunitária complicada com derrame pleural"
+          ],
+          "correta": "B",
+          "assunto": "Saúde do Adulto"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "enunciado": "Em relação ao caso, assinale a opção que indica os achados esperados do líquido pleural, caso seja realizada a toracocentese, considerando LDH de 100 e proteínas totais de 5 no sangue periférico.",
+          "alternativas": [
+            "LDH 45, Proteína 1.5, Glicose 70, GRAM sem presença de bactérias, ADA 20, citopatologia sem células malignas.",
+            "LDH 1000, Proteína 7, Glicose 5, GRAM co m presença de bactérias, ADA 15, citopatologia sem células malignas.",
+            "LDH 150, Proteína 5, Glicose 40, GRAM sem presença de bactérias, ADA 40, citopatologia sem células malignas.",
+            "LDH 130, Proteína 4, Glicose 40, GRAM sem presença de bactérias, ADA 15, citopatologia sem células malignas.",
+            "LDH 250, Proteína 6, Glicose 50, GRAM sem presença de bactérias, citopatologia positiva para células malignas"
+          ],
+          "correta": "C",
+          "assunto": "Saúde do Adulto"
+        }
+      ]
+    }
+  ]
+}
