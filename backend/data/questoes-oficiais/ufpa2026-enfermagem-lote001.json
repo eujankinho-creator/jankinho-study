@@ -1,0 +1,215 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "ufpa-2026-enfermagem-sub30-lote001",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "ufpa-psrmps-2026-enfermagem-oncologia-idoso-critico-tipo1",
+      "banca": "UFPA / CEPS",
+      "ano": 2026,
+      "orgao": "Universidade Federal do Pará",
+      "cargo": "Residência Multiprofissional em Enfermagem (PSRMPS 2026)",
+      "cadernoUrl": "https://www.ceps.ufpa.br/images/conteudo/residencia/Multiprofissional%202026/provas%20gabaritos/Prova/Prova_Enfermagem.pdf",
+      "gabaritoUrl": "https://www.ceps.ufpa.br/images/conteudo/residencia/Multiprofissional%202026/provas%20gabaritos/GabaritoDefinitivo/Gabarito%20Definitivo_Enfermagem.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 3,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A.L.C, mulher transexual de 60 anos, busca assistência na Unidade Básica de Saúde do seu território devido a apresentar níveis pressóricos elevados. Diante disso, a referida usuária tem garantido o acesso à atenção primária a partir do atendimento das suas necessidades individuais de saúde, assegurado pelo seguinte princípio do Sistema Único de Saúde e da Rede de Atenção à Saúde operacionalizada na Atenção Básica:",
+          "alternativas": [
+            "Territorialização e adscrição.",
+            "População adscrita.",
+            "Cuidado centrado na pessoa.",
+            "Longitudinalidade do cuidado.",
+            "Equidade."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.142/1990",
+          "enunciado": "A Lei nº 8.142, de 28 de dezembro de 1990, que dispõe sobre a participação da comunidade na gestão do Sistema Único de Saúde (SUS) e sobre as transferências intergovernamentais de recursos financeiros na área, apresenta determinadas deliberações. Em relação a essas deliberações, analise as afirmativas seguintes. I. O Conselho de Saúde e a Conferência de Saúde, em cada esfera de governo, são as instâncias que compõem a gestão do SUS. II. O recurso alocado para despesas de custeio terá origem no Fundo Municipal de Saúde (FMS). III. Será paritária a participação dos usuários em relação aos seguimentos trabalhadores e gestores no conselho e na conferência de saúde na proporção de 25%, 50% e 25%, respectivamente. Está(ão) corretas(s)",
+          "alternativas": [
+            "I, II e III.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "I, apenas.",
+            "III, apenas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Saúde Mental",
+          "enunciado": "J.H.M., 32 anos, desempregado, pai de cinco crianças na idade escolar, usuário da Rede de Atenção Psicossocial - RAPS, comparece à Unidade de S aúde da Cremação em Belém, com problema de saúde bucal, com necessidade de cirurgia. Durante a entrevista, refere que mudou há 1 ano para o bairro e que, neste período, seus filhos não tiveram atendimento odontológico. Sobre a Política Nacional de saúde bucal vigente e suas diretrizes para o atendimento integral a esta família, avalie as afirmativas a seguir e assinale V para as Verdadeiras e F para as Falsas. (_) A lei nº 14.572, de 8 de maio de 2022, do Ministério da Saúde, institui a Política Nacional de Saúde Bucal no âmbito do Sistema Único de Saúde (SUS) e altera a Lei nº 8.080, de 19 de setembro de 1990, garantindo que as ações e os serviços de saúde bucal devem compor todas as redes de atenção à saúde, nos diversos níveis de complexidade. (_) As ações e os serviços de saúde bucal devem compor todas as redes de atenção à saúde com a finalidade de garantir a integralidade da atenção à saúde, consequentemente a fragmentação do cuidado. (_) Cabe ao poder público o controle sobre as ações de vigilância sanitária de fluoretação das águas de abastecimento público, bem como ações complementares nos locais em que se fizerem necessárias. A sequência correta é",
+          "alternativas": [
+            "F – V – V.",
+            "F – F – V.",
+            "F – F – F.",
+            "V – F – F.",
+            "V – V – F."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Decreto 7.508/2011",
+          "enunciado": "O Contrato Organizativo de Ação Pública da Saúde – Coap é o instrumento jurídico que explicita os compromissos pactuados em cada Região de Saúde, firmado entre entes federativos com a finalidade de organizar e integrar as ações e os serviços de saúde na rede regionalizada e hierarquizada. Quanto às disposições essenciais do Contrato, analise os itens seguintes. I. Identificação das necessidades de saúde locais e regionais. II. Indicadores e metas de saúde. III. Estratégias para a melhoria das ações e dos serviços de saúde. IV. Critérios de avaliação dos resultados e forma de monitoramento permanente. Estão corretos",
+          "alternativas": [
+            "I, III e IV, apenas.",
+            "I e II, apenas.",
+            "II e IV, apenas.",
+            "II e III, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "As diretrizes para a estruturação da Rede de Atenção à Saúde - RAS foram estabelecidas pela Portaria nº 4.279, de 30 de dezembro de 2010 e seu anexo. Sobre os conceitos, a estrutura e os objetivos apresentados nesta portaria, julgue as afirmativas a seguir. I. A Rede de Atenção à Saúde são arranjos organizativos de ações e serviços de saúde, de diferentes densidades tecnológicas. II. Os pontos de atenção à saúde são entendidos como espaços onde se ofertam determinados serviços de saúde, por meio de uma produção singular. III. Todos os pontos de atenção à saúde são hierarquizados por importância para o cumprimento dos objetivos da rede de atenção à saúde e pelas distintas densidades tecnológicas que os caracterizam. IV. O objetivo da RAS é promover a integração sistêm ica de ações e serviços de saúde com provisão de atenção contínua, integral, de qualidade, responsável e humanizada. Estão corretas",
+          "alternativas": [
+            "I e II, somente.",
+            "I e III, somente.",
+            "I, II e IV, somente.",
+            "II e IV, somente.",
+            "II e III, somente."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "O Art. 7º da Lei 8080, do Ministério da Saúde, delibera que as ações e serviços públicos de saúde e os serviços privados contratados ou conveniados que integram o Sistema Único de Saúde - SUS são desenvolvidos de acordo com as diretrizes previstas no art. 198 da Constituição Federal, obedecendo a XVI princípios. Um desses princípios é a uti lização da epidemiologia para o estabelecimento de prioridades, a alocação de recursos e a orientação programática. Isso porque a epidemiologia",
+          "alternativas": [
+            "fornece uma cesta de ferramentas específicas para a mudança organizacional.",
+            "está relacionada com o planejamento orçamentário e financeiro.",
+            "possibilita a participação da comunidade na gestão do SUS.",
+            "está centrada nos estudos de capacidade de oferta dos serviços de saúde.",
+            "permite conhecer, acompanhar e definir as causas dos problemas de saúde de uma população."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "A Resolução da Diretoria Colegiada (RDC) nº 15/ 2012 da ANVISA define requisitos de boas práticas para os serviços de saúde. No que se refere ao processamento de produtos para a saúde na central de material e esterilização (CME), a enfermeir a que realiza capacitação dos recursos humanos da CME deverá orientar algumas medidas como boas práticas. Em relação a essas boas práticas, analise as afirmativas seguintes. I. Produtos para saúde passíveis de processamento fabricado a partir de matérias-primas e conformação estrutural, que permitem repetidos processos de limpeza, preparo e desinfecção ou esterilização, até que percam a sua eficácia e funcionalidade. II. As capacitações orientam que o monitoramento de processos deve ser realizado por indicadores químicos, biológicos e físicos. III. Limpeza de produto para saúde de conformação não complexa cujas superfícies internas e externas podem ser atingidas apenas por escovação simples e possuam diâmetros inferiores a cinco milímetros nas estruturas tubulares. IV. Sobre a microbiologia, a carga microbiana da água deve ser realizada pela própria equipe da CME. V. Todo material perfurocortante produzido pela CME deverá ser descartado em saco de resíduos comuns. Estão corretas",
+          "alternativas": [
+            "I, II, III, IV e V.",
+            "I, II e III, apenas.",
+            "I e II, apenas.",
+            "II, III e IV, apenas.",
+            "II e V, apenas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Enfermagem",
+          "assunto": "Gerenciamento de Resíduos de Serviços de Saúde (GRSS)",
+          "enunciado": "De acordo com os princípios que regem a RDC 222/2018, no que se refere ao Plano de Gerenciamento de Resíduos de Serviços de Saúde (PGRSS), a etapa inicial essencial para a correta implementação de um plano de gerenciamento, visando à segurança e à minimização de riscos, está em conformidade com a/o",
+          "alternativas": [
+            "classificação detalhada de todos os resíduos em um inventário diário, antes do descarte.",
+            "disposição final dos resíduos em aterros sanitários licenciados, priorizando os recicláveis.",
+            "desativação microbiana por autoclavação ou incineração dos materiais biológicos descartados.",
+            "transporte dos resíduos para áreas de armazenamento centralizadas antes de sua coleta externa.",
+            "segregação dos resíduos na fonte, categorizando-os conforme o grupo de risco e suas características específicas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro Cirúrgico",
+          "enunciado": "Uma das responsabilidades do enfermeiro que atua em enfermagem cirúrgica é realizar a previsão de artigos médicos hospitalares, assegurar a esterilização desses artigos e orientar a organização do material para o ato cirúrgico. Com base no assunto, correlacione os instrumentais cirúrgicos da coluna A à sua respectiva função/característica e tempo cirúrgico da coluna B. Coluna A Coluna B 1- Afastador Doyen 2- Porta-agulha 3- Pinças kelly 4- Tesoura Metzenbaum (__) É utilizado no tempo cirúrgico denominado síntese. (__) É utilizado para promover uma melhor visualização do campo cirúrgico e no tempo exérese. (__) É utilizado no tempo cirúrgico denominado diérese. (__) É utilizado para controlar sangramento e no tempo cirúrgico denominado hemostasia. A sequência correta é",
+          "alternativas": [
+            "4 – 2 – 3 – 1.",
+            "1 – 3 – 4 – 2.",
+            "3 – 2 – 1 – 4.",
+            "2 – 1 – 4 – 3.",
+            "4 – 3 – 1 – 2."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "A morfina é um opioide forte, comumente administrado pela enfermagem na prática clínica. Quanto aos cuidados de enfermagem a um paciente idoso em uso de morfina sob infusão contínua, analise as assertivas seguintes. I. Avaliar o risco de intoxicação por opioide na busca de miose bilateral, sedação e depressão respiratória (FR < 10 ipm). II. Avaliar sinais vitais, ausculta pulmonar e avaliar a necessidade de aspiração. III. Checar o funcionamento e a programação de bomba infusora. IV. Avaliar a frequência e o aspecto das fezes diante do risco de constipação. V. Avaliar as queixas de náuseas e vômitos e a aceitação da dieta em pacientes sedados. Sobre as assertivas, é correto afirmar:",
+          "alternativas": [
+            "Todas são verdadeiras.",
+            "Todas são falsas.",
+            "Apenas a I é falsa.",
+            "Apenas a IV é falsa.",
+            "Apenas a V é falsa."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "A identificação de um diagnóstico de enfermagem envolve a decisão e a priorização dos principais diagnósticos. Apesar de poder utilizá-los de form a simultânea, é necessário levar em consideração a realidade da carga de trabalho do profissional. Uma das formas de priorizar os diagnósticos está relacionada à Hierarquia de Necessidades de Maslow (NANDA 2024-2026). Com base na ordem de priorização de Maslow, analise o caso clínico hipotético abaixo. “Paciente, 55 anos, casado, foi internado após queda, apresentou fratura de fêmur. No momento está inapetente, sentindo-se impotente devido à fratura, ansioso por não estar com a família e não tem conseguido dormir”. O diagnóstico de enfermagem mais adequado e a necessidade humana básica nesse caso são:",
+          "alternativas": [
+            "Risco de queda no adulto/ Necessidade de segurança.",
+            "Ingestão nutricional inadequada/Necessidade fisiológica.",
+            "Risco de solidão excessiva/Necessidade de autorrealização.",
+            "Autoestima inadequada situacional/ Necessidade de autoestima.",
+            "Ansiedade excessiva/ Necessidade psicológica."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "O diagnóstico laboratorial de Diabetes Mellitus tipo 2 baseia-se na detecção de hiperglicemia. O enfermeiro deve orientar quais são os cuidados necessários antes da realização dos exames. Em um dos exames, o paciente deve ingerir, no mínimo, 150 gramas de carboidrato por dia nos três dias prévios ao exame, para conferir confiabilidade na interpretação do resultado desse teste (Brasil, 2024/Portaria Nº 7/2024). Assinale a alternativa que apresenta o tipo de exame a ser realizado nesse caso.",
+          "alternativas": [
+            "Glicemia em jejum.",
+            "Teste oral de tolerância à glicose.",
+            "Hemoglobina glicada.",
+            "Glicemia pós-prandial.",
+            "Glicemia casual."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "O envelhecimento é um processo dinâmico e progressivo que, em cada organismo, tem seu próprio ritmo, sendo influenciado por fatores genéticos, condições de saúde física e mental e condições ambientais e sociais. No envelhecimento, há um declínio progressivo na reserva fisiológica dos sistemas orgânicos, com consequente perda das reservas homeostáticas (FREITAS, 2022). Com base no assunto, assinale a alternativa que apresenta as alterações fisiológicas do envelhecimento.",
+          "alternativas": [
+            "Redução da síntese de vitamina D e do número de papilas gustativas.",
+            "Flexibilidade do cristalino sem alteração e diminuição da resposta à eritropoetina.",
+            "Perda de fibras motoras, sensoriais e sem alterações autonômicas.",
+            "Redução da absorção de vitamina B12 e cálcio e diminuição do volume do átrio esquerdo.",
+            "Diminuição dos níveis de hormônio antidiurético (ADH) e redução da taxa de filtração glomerular."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente, 70 anos, sexo masculino, reside em uma instituição de longa permanência para idosos. Está acamado há 25 dias devido a um acidente vascular encefálico. Foram solicitados alguns exames identificando déficit cognitivo médio e múltiplas contraturas, lesão por pressão na região sacral e disfagia leve. Com base no caso clínico hipotético e nas alterações encontradas após os exames, é correto afirmar que esse paciente apresenta",
+          "alternativas": [
+            "imobilidade.",
+            "síndrome da imobilidade.",
+            "alteração de humor.",
+            "sarcopenia.",
+            "declínio da atividades de vida diária."
+          ],
+          "correta": "B"
+        }
+      ]
+    }
+  ]
+}

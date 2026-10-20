@@ -2,6 +2,7 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { prisma } from "../../lib/prisma";
 import { FONTE_PROVAS_REAIS } from "./questoesOficiaisFGV2025";
+import { assuntoCanonico } from "./questoesTaxonomia";
 
 /**
  * Acervo oficial em lotes: até 1.000 questões por arquivo JSON;
@@ -38,6 +39,7 @@ type Manifesto = {
   formato: "cortex-questoes-oficiais-v1";
   lote: string;
   provas: ProvaLote[];
+  limitarA30?: boolean;
 };
 type Registro = {
   origemId: string;
@@ -51,6 +53,7 @@ export type ResultadoImportacaoMassa = {
   inseridas: number;
   existentes: number;
   repetidas: number;
+  limiteAtingido: number;
 };
 
 function normalizar(value: string): string {
@@ -147,7 +150,7 @@ async function lerManifestos(): Promise<Array<{ nome: string; manifesto: Manifes
 export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImportacaoMassa> {
   const arquivos = await lerManifestos();
   const resumo: ResultadoImportacaoMassa = {
-    arquivos: arquivos.length, candidatas: 0, inseridas: 0, existentes: 0, repetidas: 0,
+    arquivos: arquivos.length, candidatas: 0, inseridas: 0, existentes: 0, repetidas: 0, limiteAtingido: 0,
   };
   if (!arquivos.length) {
     console.log("[lotes-massivos] Importador pronto: 1.000 questões por arquivo, vários arquivos por deploy.");
@@ -160,12 +163,20 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
   const [questoesExistentes, disciplinasExistentes] = await Promise.all([
     prisma.questao.findMany({
       where: { fonte: FONTE_PROVAS_REAIS },
-      select: { origemId: true, enunciado: true },
+      select: { origemId: true, enunciado: true, tema: true, disciplina: { select: { nome: true } } },
     }),
     prisma.disciplina.findMany({ where: { usuarioId: usuario.id }, select: { id: true, nome: true } }),
   ]);
   const origens = new Set(questoesExistentes.map((q) => q.origemId).filter((x): x is string => !!x));
   const textos = new Set(questoesExistentes.map((q) => normalizar(q.enunciado)));
+  // Questões já existentes de todas as disciplinas contam juntas por assunto canônico.
+  const porAssunto = new Map<string, number>();
+  for (const q of questoesExistentes) {
+    const tema = assuntoCanonico(q.disciplina.nome, q.tema || "", q.enunciado);
+    if (!tema) continue;
+    const chave = normalizar(tema);
+    porAssunto.set(chave, (porAssunto.get(chave) || 0) + 1);
+  }
   const disciplinas = new Map(disciplinasExistentes.map((d) => [normalizar(d.nome), d.id]));
   const preparadas: Registro[] = [];
   const codigoProvas = new Set<string>();
@@ -181,6 +192,12 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
         const texto = normalizar(q.enunciado);
         if (textos.has(texto)) { resumo.repetidas++; continue; }
 
+        const assuntoUnico = assuntoCanonico(q.disciplina, q.assunto, q.enunciado);
+        const chaveAssunto = normalizar(assuntoUnico);
+        if (manifesto.limitarA30 && (porAssunto.get(chaveAssunto) || 0) >= 30) {
+          resumo.limiteAtingido++;
+          continue;
+        }
         const disciplinaKey = normalizar(q.disciplina);
         let disciplinaId = disciplinas.get(disciplinaKey);
         if (!disciplinaId) {
@@ -191,6 +208,7 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
           disciplinas.set(disciplinaKey, disciplinaId);
         }
         preparadas.push({ origemId, prova, questao: q, disciplinaId });
+        porAssunto.set(chaveAssunto, (porAssunto.get(chaveAssunto) || 0) + 1);
         origens.add(origemId); textos.add(texto);
       }
     }
@@ -204,7 +222,7 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
       await tx.questao.createMany({
         data: bloco.map(({ origemId, prova, questao: q, disciplinaId }) => ({
           usuarioId: usuario.id, disciplinaId, fonte: FONTE_PROVAS_REAIS, origemId,
-          enunciado: q.enunciado, tema: q.assunto, dificuldade: "medio",
+          enunciado: q.enunciado, tema: assuntoCanonico(q.disciplina, q.assunto, q.enunciado), dificuldade: "medio",
           banca: prova.banca, ano: prova.ano, orgao: prova.orgao, cargo: prova.cargo,
           fonteUrl: prova.cadernoUrl, imagemUrl: q.imagemUrl ?? null, imagemAlt: q.imagemAlt ?? null,
           explicacao: "Fonte: " + prova.banca + ", " + prova.orgao + ", " + prova.ano +
