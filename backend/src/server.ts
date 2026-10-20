@@ -50,6 +50,7 @@ import { sincronizarFGVAletoMacae2024 } from "./questoesFGVAletoMacae2024Seed";
 import { sincronizarFGVNovaIguacu2025 } from "./questoesFGVNovaIguacu2025Seed";
 import { sincronizarFGVEBserhTecnicos2025 } from "./questoesFGVEBserhTecnicos2025Seed";
 import { sincronizarFGVAleamTjms2026 } from "./questoesFGVAleamTjms2026Seed";
+import { sincronizarFGVComplementoSjcCaragua } from "./questoesFGVComplementoSjcCaraguaSeed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6201,6 +6202,8 @@ server.listen(
         await sincronizarFGVEBserhTecnicos2025();
         // ALEAM 2025 e TJMS 2026: Enfermagem, gabaritos definitivos e deduplicação.
         await sincronizarFGVAleamTjms2026();
+        // Lote complementar FGV SJC 2023 e Caraguatatuba 2024, gabaritos finais.
+        await sincronizarFGVComplementoSjcCaragua();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
