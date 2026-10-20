@@ -1,5 +1,6 @@
 import { prisma } from "../../lib/prisma";
 import { obterMatrizQuestoes30PorAssunto } from "./questoesMatriz30PorAssunto";
+import { disciplinaCanonica, assuntoCanonico, assuntosInventarioCanonicos } from "./questoesTaxonomia";
 
 /**
  * Medição baseada no banco REAL do usuário, não em uma lista de demonstração.
@@ -44,10 +45,12 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
   };
   const itens = new Map<string, Linha>();
   const obter = (disciplina: string, assunto: string) => {
-    const chave = normalizar(disciplina) + "|" + normalizar(assunto);
+    const disciplinaUnica = disciplinaCanonica(disciplina);
+    const temaUnico = assuntoCanonico(disciplinaUnica, assunto);
+    const chave = normalizar(disciplinaUnica) + "|" + normalizar(temaUnico);
     let linha = itens.get(chave);
     if (!linha) {
-      linha = { disciplina, assunto, totalBanco: 0, originaisVerificadas: 0, meta: META, faltam: META };
+      linha = { disciplina: disciplinaUnica, assunto: temaUnico, totalBanco: 0, originaisVerificadas: 0, meta: META, faltam: META };
       itens.set(chave, linha);
     }
     return linha;
@@ -66,7 +69,9 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
         if (!row || typeof row !== "object") continue;
         const dado = row as { disciplina?: unknown; assunto?: unknown };
         const d = String(dado.disciplina || "").trim(), a = String(dado.assunto || "").trim();
-        if (d && a && a !== "Sem assunto") obter(d,a);
+        if (d && a && a !== "Sem assunto") {
+          for (const tema of assuntosInventarioCanonicos(d, a)) obter(d, tema);
+        }
       }
     }
   }

@@ -149,27 +149,56 @@ function renderQuestionSource(questao) {
 const CORTEX_OFFICIAL_SOURCE = "cortex-prova-original-verificada-v1";
 
 function isOfficialExamQuestion(q) {
-  return Boolean(q && q.fonte === CORTEX_OFFICIAL_SOURCE &&
-    /^fgv-(?:ebserh-2025-grupo-enfermagem-tipo1|abreu-lima-2024-enfermeiro-tipo1|camara-2023-enfermeiro-tarde-tipo1|caraguatatuba-2024-enfermeiro-tipo1|canaa-2025-enfermeiro-tipo1|canaa-2025-tecnico-enfermagem-tipo1|sjc-2023-enfermeiro-tipo1|sjc-2023-tecnico-enfermagem-tipo1|abreu-tecnico-2024-tipo1|alerj-2026-tipo1|mpu-analista-2025-tipo1|mpu-tecnico-2025-tipo1|sjc-analista-2025-tipo1|sjc-tecnico-2025-tipo1)-q\d{2}$/.test(String(q.origemId || "")));
+  return Boolean(q && q.fonte === CORTEX_OFFICIAL_SOURCE);
 }
-
 function getOfficialQuestionNumber(q) {
-  const match = String(q && q.origemId || "").match(/-q(\d{2})$/);
-  return match ? Number(match[1]) : 0;
+  const m = String(q && q.origemId || "").match(/-q(\d{1,4})$/i);
+  return m ? Number(m[1]) : 0;
 }
-
 function getOfficialLetter(alt) {
-  const match = String(alt && alt.texto || "").match(/^(?:Alternativa\s+)?([A-E])(?:\)|\s*[-—:]|\s+)/i);
-  return match ? match[1].toUpperCase() : "";
+  const m = String(alt && alt.texto || "").match(
+    /^\s*(?:Alternativa\s*)?(?:\(\s*([A-E])\s*\)|([A-E])\s*[\).:—–-])\s*/i
+  );
+  return m ? (m[1] || m[2]).toUpperCase() : "";
 }
-
+function alternativeCleanText(alt) {
+  // A letra já consta no círculo visual; nunca duplicá-la.
+  return String(alt && alt.texto || "").replace(
+    /^\s*(?:Alternativa\s*)?(?:\(\s*[A-E]\s*\)|[A-E]\s*[\).:—–-])\s*/i, ""
+  ).trim();
+}
 function orderOfficialAnswers(q) {
-  const alternatives = Array.isArray(q.alternativas) ? q.alternativas : [];
-  if (!isOfficialExamQuestion(q)) return embaralhar(alternatives);
-  return [...alternatives].sort((a,b) => {
-    const la=getOfficialLetter(a), lb=getOfficialLetter(b);
-    return (la ? la.charCodeAt(0) : 99) - (lb ? lb.charCodeAt(0) : 99);
-  });
+  const alternativas = Array.isArray(q.alternativas) ? q.alternativas : [];
+  const labels = alternativas.map(getOfficialLetter);
+  if (labels.every(Boolean) && new Set(labels).size === alternativas.length) {
+    // Ordena pelo rótulo da prova, SEM dissociar a flag correta do objeto.
+    return [...alternativas].sort((a,b) =>
+      getOfficialLetter(a).localeCompare(getOfficialLetter(b)));
+  }
+  if (isOfficialExamQuestion(q)) {
+    // Provas oficiais não são embaralhadas, mesmo sem prefixo A-E.
+    return [...alternativas].sort((a,b) => Number(a.id || 0) - Number(b.id || 0));
+  }
+  return embaralhar(alternativas);
+}
+function explicacaoDidatica(q) {
+  const raw = String(q && q.explicacao || "").trim();
+  if (!raw) return "";
+  const texto = raw.replace(/\s+/g, " ").trim();
+  const normalizar = x => String(x || "").normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+  // Fonte, número da questão e gabarito não são explicação do conteúdo.
+  if (/^(?:fonte\s*:|fgv(?:\s*[/,:—–-]|\s+20\d{2}\b)|gabarito\s*(?:definitivo|oficial)?\s*:|caderno\s*:|prova\s*:|quest[aã]o\s+\d+\s+da\s+prova\b)/i.test(texto)) return "";
+  if (isOfficialExamQuestion(q) &&
+      /(?:gabarito\s+(?:definitivo|oficial)|fonte\s*:|caderno\s*:|prova\s*:)/i.test(texto) &&
+      /(?:https?:\/\/|fgv\b|concurso\b)/i.test(texto)) return "";
+  const marcador = texto.search(/\s+(?:fonte|caderno|prova)\s*:\s*https?:\/\//i);
+  const explicacao = marcador > 0 ? texto.slice(0, marcador).trim() : texto;
+  const pergunta = normalizar(q && q.enunciado), textoExplicacao = normalizar(explicacao);
+  if (!textoExplicacao || (pergunta.length > 40 &&
+      (textoExplicacao === pergunta || textoExplicacao.includes(pergunta)))) return "";
+  if (/^(?:gabarito|alternativa\s+[a-e]|letra\s+[a-e])\s*[:\-]?\s*[a-e]?[.]?$/i.test(explicacao)) return "";
+  return explicacao;
 }
 
 function renderOfficialQuestionHeading(q, compact=false) {
@@ -945,10 +974,8 @@ function renderLista() {
               : "Sem disciplina";
 
 
-          const explicacao =
-            questao.explicacao
-              ? "Com explica\u00e7\u00e3o"
-              : "Sem explica\u00e7\u00e3o";
+          const explicacao = explicacaoDidatica(questao)
+            ? "Com explicação" : "Sem explicação";
 
 
           const quantidade =
@@ -1556,9 +1583,7 @@ function renderSessao() {
           </span>
 
           <span class="option-text">
-            ${isOfficialExamQuestion(questao)
-              ? escapeHtml(String(alternativa.texto || "").replace(/^\s*[A-E]\)\s*/i, ""))
-              : escapeHtml(alternativa.texto)}
+            ${escapeHtml(alternativeCleanText(alternativa))}
           </span>
 
           ${estadoResposta}
@@ -1570,10 +1595,8 @@ function renderSessao() {
   );
 
 
-  const explicacao =
-    state.respondida &&
-    questao.explicacao
-      ? `
+  const explicacaoReal = explicacaoDidatica(questao);
+  const explicacao = state.respondida && explicacaoReal ? `
         <div class="session-explanation">
 
           <strong>
@@ -1581,9 +1604,7 @@ function renderSessao() {
           </strong>
 
           <p>
-            ${escapeHtml(
-              questao.explicacao
-            )}
+            ${escapeHtml(explicacaoReal)}
           </p>
 
         </div>

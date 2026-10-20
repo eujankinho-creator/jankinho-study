@@ -34,6 +34,7 @@ import {
 
 import { prisma } from "../../lib/prisma";
 import { obterCoberturaQuestoesOficiais } from "./questoesFontesOficiais";
+import { disciplinaCanonica, sincronizarTaxonomiaQuestoes } from "./questoesTaxonomia";
 import { sincronizarProvasOficiaisFGV2025, FONTE_PROVAS_REAIS } from "./questoesOficiaisFGV2025";
 import { preencherQuestoesOriginaisFGV2025 } from "./questoesFGV2025Completar";
 import { sincronizarFGVAbreuLimaEnfermagem2024 } from "./questoesFGVAbreuLima2024Seed";
@@ -805,11 +806,14 @@ async function listarDisciplinas(
         },
       });
 
-    json(
-      response,
-      200,
-      disciplinas
-    );
+    // Disciplinas históricas não aparecem duplicadas no filtro.
+    const unicas = new Map<string, typeof disciplinas[number]>();
+    for (const d of disciplinas) {
+      const nome = disciplinaCanonica(d.nome);
+      const chave = nome.toLocaleLowerCase("pt-BR");
+      if (!unicas.has(chave) || d.nome === nome) unicas.set(chave, { ...d, nome });
+    }
+    json(response, 200, [...unicas.values()].sort((a,b) => a.nome.localeCompare(b.nome, "pt-BR")));
   }
   catch (error) {
     console.error(
@@ -1420,7 +1424,7 @@ async function listarQuestoes(
 
         include: {
           disciplina: true,
-          alternativas: true,
+          alternativas: { orderBy: { id: "asc" } },
         },
 
         orderBy: {
@@ -6219,6 +6223,8 @@ server.listen(
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
+        // Converte aliases sem perder IDs, respostas ou acertos anteriores.
+        await sincronizarTaxonomiaQuestoes();
 
         // Os seeders de questões geradas (IA/autorais/estilo concursos)
         // NÃO devem mais ser executados no novo banco oficial.
