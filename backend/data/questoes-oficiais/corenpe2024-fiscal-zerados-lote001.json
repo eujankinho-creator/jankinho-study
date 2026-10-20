@@ -1,0 +1,173 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "corenpe2024-fiscal-zerados-legislacao-lote001",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "sustente-coren-pe-2024-enfermeiro-fiscal",
+      "banca": "Instituto Sustente",
+      "ano": 2024,
+      "orgao": "Conselho Regional de Enfermagem de Pernambuco",
+      "cargo": "Enfermeiro Fiscal",
+      "cadernoUrl": "https://sustente.org.br/download/verDocumento?documento.id=1623",
+      "gabaritoUrl": "https://sustente.org.br/download/verDocumento?documento.id=1651",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 21,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Sistema COFEN/COREN",
+          "enunciado": "O Conselho Federal de Enfermagem (COFEN) e os seus respectivos Conselhos Regionais (CORENs) foram criados em 12 de julho de 1973, por meio da Lei 5.905. Antes deste acontecimento, a função de fiscalizar, em todo o território nacional, diretamente ou por intermédio das repartições sanitárias correspondentes nos Estados e Territórios, tudo que se relacionava com o exercício da enfermagem era responsabilidade do:",
+          "alternativas": [
+            "Departamento Nacional de Saúde.",
+            "Serviço Nacional de Fiscalização da Medicina.",
+            "Congresso Nacional.",
+            "Ministério da Saúde.",
+            "Conselho Federal de Educação."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "O Decreto nº 94.406, de 08 de junho de 1987, regulamenta a Lei nº 7.498, de 25 de junho de 1986, que dispõe sobre o exercício da enfermagem. Em relação à referida lei, marque a alternativa correta:",
+          "alternativas": [
+            "a atividade de enfermagem é facultativa no planejamento e programação das instituições e serviços de saúde.",
+            "ao Enfermeiro incumbe, privativamente, a participação em programas e atividades de educação sanitária, visando à melhoria de saúde do indivíduo, da família e da população em geral.",
+            "as atividades relacionadas ao Auxiliar de Enfermagem poderão ser exercidas sob supervisão, orientação e direção do Técnico de Enfermagem.",
+            "apenas para a administração pública direta será exigida, como condição essencial para provimento de cargos e funções e contratação de pessoal de enfermagem, de todos os graus, a prova de inscrição no Conselho Regional de Enfermagem da respectiva região.",
+            "incumbe a todo o pessoal de enfermagem, quando for o caso, anotar no prontuário do paciente as atividades da assistência de enfermagem, para fins estatísticos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "A Resolução COFEN Nº 186/1995 dispõe sobre a definição e especificação das atividades elementares de Enfermagem, executadas pelo pessoal sem formação específica regulada em Lei. Considerando a afirmativa, marque a alternativa que corresponde a uma atividade elementar, que poderá ser executada pelo atendente de Enfermagem:",
+          "alternativas": [
+            "auxiliar a equipe de enfermagem no transporte de clientes de alto risco.",
+            "participar da orientação e supervisão do trabalho de enfermagem em grau auxiliar.",
+            "Levar, aos serviços de diagnóstico e de tratamento, o material e os pedidos de exames complementares e tratamentos.",
+            "executar todas as ações assistenciais de enfermagem, exceto as privativas do Enfermeiro.",
+            "participar na elaboração, execução e avaliação dos planos assistenciais de saúde."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo Ético-Disciplinar",
+          "enunciado": "A caracterização das infrações éticas e disciplinares, bem como a aplicação das respectivas penalidades regem-se pelo Código de Ética dos Profissionais de Enfermagem, sem prejuízo das sanções previstas em outros dispositivos legais. Considerando este contexto, leia as afirmativas abaixo: I. A infração é apurada em processo instaurado e conduzido nos termos do Código de Processo Ético - Disciplinar vigente, aprovado pelo Conselho Federal de Enfermagem. II. As penalidades, referentes à advertência verbal, multa, censura, suspensão e cassação do direito ao exercício profissional, são da responsabilidade do Conselho Regional de Enfermagem, serão registradas no prontuário do profissional de Enfermagem. III. A multa consiste na obrigatoriedade de pagamento de 01 (um) a 10 (dez) vezes o valor da anuidade da categoria profissional à qual pertence o infrator, em vigor no ato do pagamento. IV. Nas penalidades de suspensão e cassação, o profissional terá sua carteira retida no ato da notificação, em todas as categorias em que for inscrito, sendo devolvida após o cumprimento da pena e, no caso da cassação, após o processo de reabilitação. Estão corretas apenas as afirmativas:",
+          "alternativas": [
+            "I, II e IV.",
+            "I, III e IV.",
+            "II, III e IV.",
+            "III e IV.",
+            "II e IV."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo Ético-Disciplinar",
+          "enunciado": "Pelo Código de Ética dos Profissionais de Enfermagem, as infrações serão consideradas leves, moderadas, graves ou gravíssimas, segundo a natureza do ato e a circunstância de cada caso. São consideradas circunstâncias agravantes neste processo, EXCETO:",
+          "alternativas": [
+            "facilitar ou assegurar a execução, a ocultação, a impunidade ou a vantagem de outra infração.",
+            "cometer a infração com abuso de autoridade ou violação do dever inerente ao cargo ou função ou exercício profissional.",
+            "realizar atos sob coação e/ou intimidação ou grave ameaça.",
+            "cometer infração dolosamente.",
+            "alterar ou falsificar provas, ou concorrer para a desconstrução de fato que se relacione com o apurado na denúncia durante a condução do processo ético."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo Ético-Disciplinar",
+          "enunciado": "Interdição ética é definida como a suspensão do exercício profissional quando as condições em que a assistência de enfermagem é prestada colocam em risco a vida dos usuários e/ou da equipe de enfermagem, quando no local de trabalho não existirem condições mínimas para a prática segura das ações de enfermagem. No entanto, a interdição ética deverá ser sempre precedida de:",
+          "alternativas": [
+            "sindicância.",
+            "relatório de fiscalização.",
+            "emissão de parecer.",
+            "notificação.",
+            "Processo Administrativo (PAD)."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo Ético-Disciplinar",
+          "enunciado": "De acordo com a Resolução COFEN Nº 565/2017, quando d ecretada a Interdição Ética pelo Plenário, em até 03 (três) dias deverá ser publicada a Decisão na imprensa oficial e em outros meios, e lavrado o Termo de Interdição Ética. Sobre esse processo, é correto afirmar que:",
+          "alternativas": [
+            "o Termo de Interdição Ética deverá ser exposto na Instituição, em local visível, pelo representante legal do serviço de saúde.",
+            "o Conselheiro Regional Enfermeiro se incumbirá de comunicar, a todos os profissionais de enfermagem da instituição, a interdição ética.",
+            "a instituição deverá garantir, aos pacientes admitidos até a data da interdição, a transferência de cuidados em outro serviço de saúde.",
+            "o Termo de Interdição Ética deverá conter o número da Decisão, a(s) inconformidade(s) e as condições para desinterdição.",
+            "quando a abrangência da interdição atingir mais de um setor/unidade da instituição, só poderá ser solicitada a desinterdição ética em conjunto (todos os setores/unidades)."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Inscrição, Registro e Especialidades",
+          "enunciado": "As normas contidas na Resolução COFEN Nº 545/2017, definem que a anotação do número de inscrição dos profissionais de Enfermagem é feita com:",
+          "alternativas": [
+            "a Unidade da Federação onde está sediado o Conselho Regional, acompanhada da sigla do Coren, seguida do número de inscrição, separados todos os elementos por hífen.",
+            "a sigla do Coren, acompanhada do número de inscrição, seguida da sigla da Unidade da Federação onde está sediado o Conselho Regional, separados todos os elementos por espaço duplo e ponto final.",
+            "o número de inscrição, acompanhado da sigla do Coren, seguida da sigla da Unidade da Federação onde está sediado o Conselho Regional, separados os elementos por dois pontos, seguidos de ponto final.",
+            "a sigla do Coren, acompanhada do número de inscrição, seguida da sigla da Unidade da Federação onde está sediado o Conselho Regional, separados todos os elementos por hífen.",
+            "a sigla do Coren, acompanhada da sigla da Unidade da Federação onde está sediado o Conselho Regional, seguida do número de inscrição, separados todos os elementos por hífen."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Inscrição, Registro e Especialidades",
+          "enunciado": "De acordo com a Resolução COFEN Nº 727/2023, considera-se Anotação de Responsabilidade Técnica (ART):",
+          "alternativas": [
+            "documento emitido pelo Conselho Federal de Enfermagem (Cofen), pelo qual se materializa o ato administrativo de ART pelo Serviço de Enfermagem em empresa/instituição/organização.",
+            "ato administrativo concedido pelo Conselho Regional de Enfermagem (Coren), a partir do preenchimento de requisitos previstos nesta norma, que licencia o Enfermeiro Responsável Técnico para atuar na referência e relação entre o Serviço de Enfermagem da empr esa/instituição/organização e o Coren.",
+            "registro das ações relacionadas aos cuidados assistenciais diretos e indiretos de enfermagem ao indivíduo, família ou coletividade, em todos os pontos de atenção à saúde.",
+            "relação nominal atualizada dos profissionais de Enfermagem da empresa/instituição/organização e que estão sob a supervisão do Enfermeiro Responsável Técnico.",
+            "planejamento e a programação de Enfermagem com o quantitativo necessário de pessoal para prestar uma assistência segura e de qualidade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "Sobre as atribuições do Enfermeiro Responsável Técnico (ERT), leia as afirmativas abaixo: I. O ERT deverá afastar, de imediato, das atividades de assistência de Enfermagem os profissionais que não estão legalmente habilitados e inscritos para realização dos serviços de Enfermagem, bem como informar ao Representante Legal da empresa/instituição/organização e ao Coren. II. É imprescindível ao ERT criar, comissões, grupos de trabalhos e/ou núcleos para apoiar na promoção das atividades previstas nesta resolução, coordenadas por ele. III. O ERT deverá colaborar com todas as atividades de fiscalização do Coren, bem como fazer cumprir, no prazo estabelecido, todas as notificações, citações, convocações e intimações que lhes forem demandadas pela Autarquia. IV. O ERT deverá assegurar que a prestação da assistência de enfermagem a pacientes graves seja realizada somente pelo Enfermeiro, Técnico de Enfermagem e Auxiliar de Enfermagem, sob supervisão. Estão corretas apenas as afirmativas:",
+          "alternativas": [
+            "I, II e IV.",
+            "I, III e IV.",
+            "I e III.",
+            "II e IV.",
+            "II e III."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Sistema COFEN/COREN",
+          "enunciado": "O cargo de Chefia do Departamento de Fiscalização, do Sistema de Fiscalização do Exercício Profissional da Enfermagem, é:",
+          "alternativas": [
+            "privativo de Enfermeiro, com no mínimo 03 (três) anos de experiência profissional e registro na respectiva categoria, admitido por concurso público de prova e títulos, nos termos da legislação vigente, sendo exercido, preferencialmente, em regime de dedicação exclusiva.",
+            "privativo de Enfermeiro, com no mínimo 02 (dois) anos de experiência profissional, e registro na respectiva categoria.",
+            "privativo de Enfermeiro, com no mínimo 03 (três) anos de experiência profissional, registro na respectiva categoria e jornada de trabalho mínima de 20 (vinte) horas semanais.",
+            "privativo de profissional Enfermeiro, com no mínimo 05 (cinco) anos de experiência profissional, e registro na respectiva categoria.",
+            "privativo de Enfermeiro, com no mínimo 04 (quatro) anos de experiência profissional e registro na respectiva categoria, admitido por concurso público de prova e títulos, nos termos da legislação vigente, sendo exercido, preferencialmente, em regime de dedicação exclusiva."
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}
