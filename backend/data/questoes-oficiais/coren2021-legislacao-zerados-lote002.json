@@ -1,0 +1,148 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "coren-2021-legislacao-zerados-002",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "cebraspe-coren-se-2021-enfermeiro-fiscal",
+      "banca": "CEBRASPE",
+      "ano": 2021,
+      "orgao": "COREN-SE",
+      "cargo": "Enfermeiro Fiscal",
+      "cadernoUrl": "https://cdn.cebraspe.org.br/concursos/coren_se_21/arquivos/585_COREN_SE_001_01.PDF",
+      "gabaritoUrl": "https://cdn.cebraspe.org.br/concursos/coren_se_21/arquivos/GAB_DEFINITIVO_585_COREN_SE_001_01.PDF",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 46,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Sistema COFEN/COREN",
+          "enunciado": "O sistema formado pelo Conselho Federal de Enfermagem (COFEN) e pelos conselhos regionais de enfermagem (COREN) é",
+          "alternativas": [
+            "uma organização da sociedade civil de interesse público.",
+            "uma fundação.",
+            "uma autarquia.",
+            "um conjunto de associações sem fins econômicos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Sistema COFEN/COREN",
+          "enunciado": "De acordo com a legislação vigente, o Conselho Regional de Enfermagem de Sergipe",
+          "alternativas": [
+            "deve manter o número de conselheiros que o Conselho Federal de Enfermagem fixar.",
+            "precisa repassar um quinto do valor arrecadado com anuidades ao Conselho Federal de Enfermagem.",
+            "pode transferir sua sede para o município de São Cristóvão, limítrofe a Aracaju.",
+            "pode ter um membro de nacionalidade estrangeira, desde que haja alteração em seu regimento interno."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Inscrição, Registro e Especialidades",
+          "enunciado": "Com base na legislação nacional que regulamenta o exercício da enfermagem, é correto afirmar que",
+          "alternativas": [
+            "entidades de direito privado que mantenham atividades de formação de recursos humanos em enfermagem devem se registrar no Conselho Regional de Enfermagem local.",
+            "enfermeiros podem participar de projetos de construção de unidades de internação.",
+            "apenas enfermeiros podem coordenar cursos para formação de recursos humanos em enfermagem.",
+            "titulares de diplomas estrangeiros em enfermagem, ainda que revalidados no Brasil, não podem ser considerados enfermeiros."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "De acordo com os dispositivos que regulam direitos e obrigações de profissionais de enfermagem, é correto afirmar que é",
+          "alternativas": [
+            "dever profissional participar em movimentos reivindicatórios da categoria.",
+            "permitido delegar a acompanhantes dos pacientes atribuições de profissionais de enfermagem em alguns casos de atenção domiciliar.",
+            "facultado ao profissional comunicar externamente caso de violência contra idoso.",
+            "obrigatório ao profissional identificar as instituições envolvidas quando publicar resultados de suas pesquisas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "Considere que uma enfermeira fiscal do Conselho Regional de Enfermagem de Sergipe tenha observado cada uma das quatro situações mencionadas nas opções a seguir. Assinale a opção que corresponde à situação que representa infração aos parâmetros mínimos de quantitativo de profissionais das diferentes categorias de enfermagem para serviços de enfermagem, o que requer a ação da enfermeira fiscal.",
+          "alternativas": [
+            "Unidade de cuidados intermediários com um terço dos profissionais de enfermagem sendo enfermeiros.",
+            "Unidade de hemodiálise convencional com um profissional de enfermagem para cada três pacientes.",
+            "UTI psiquiátrica com o mesmo cálculo e quantitativo de profissionais de enfermagem exigido em uma UTI convencional.",
+            "Centro de diagnóstico por imagem, com setor de mamografias e raios X convencionais sem enfermeiros dedicados, havendo apenas convocação do enfermeiro do centro em momentos de urgência, de emergência e de supervisão dos técnicos de enfermagem."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "cebraspe-coren-ce-2021-enfermeiro-fiscal",
+      "banca": "CEBRASPE",
+      "ano": 2021,
+      "orgao": "COREN-CE",
+      "cargo": "Enfermeiro Fiscal",
+      "cadernoUrl": "https://cdn.cebraspe.org.br/concursos/coren_ce_21/arquivos/CARGO_1.PDF",
+      "gabaritoUrl": "https://cdn.cebraspe.org.br/concursos/coren_ce_21/arquivos/GAB_DEFINITIVO_MATRIZ_599_COREN_CE_001_00.PDF",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 44,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Sistema COFEN/COREN",
+          "enunciado": "De acordo com a Lei n.º 5.905/1973, que dispõe sobre a criação do Conselho Federal de Enfermagem (COFEN) e dos conselhos regionais de enfermagem (COREN), assinale a opção correta.",
+          "alternativas": [
+            "O COFEN e os COREN constituem, em seu conjunto, uma monarquia, vinculada ao Ministério do Trabalho e Previdência Social.",
+            "O COFEN, em sua primeira reunião, elege apenas o presidente, devendo os demais cargos ser votados pelos enfermeiros inscritos.",
+            "Compete ao COFEN instalar os COREN.",
+            "A receita do COFEN não poderá ser composta de doações e legados."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "De acordo com a Resolução n.º 543/2017 do COFEN, para o referencial mínimo do quadro de profissionais de enfermagem, para as 24 horas de cada unidade de internação (UI), o Sistema de Classificação de Pacientes (SCP) considera as horas de assistência de enfermagem, a distribuição percentual do total de profissionais de enfermagem e a proporção profissional/paciente. Para efeito de cálculo, devem ser consideradas como horas de enfermagem, por paciente, nas 24 horas,",
+          "alternativas": [
+            "6 horas de enfermagem no cuidado mínimo.",
+            "2 horas de enfermagem no cuidado intermediário.",
+            "10 horas de enfermagem no cuidado de alta dependência.",
+            "20 horas de enfermagem no cuidado intensivo."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Inscrição, Registro e Especialidades",
+          "enunciado": "De acordo com a Resolução COFEN n.º 626/2020, que dispõe sobre a atuação do enfermeiro na área da estética, assinale a opção correta.",
+          "alternativas": [
+            "Os cuidados domiciliares não podem ser prescritos por enfermeiros, por isso caracteriza ato médico.",
+            "Após ingressar em um curso de especialização, o enfermeiro poderá iniciar sua jornada na área da estética.",
+            "Dermopigmentação, vacuoterapia e prescrição de cosméticos são atividades preconizadas na atuação do enfermeiro esteta.",
+            "A carboxiterapia não é um procedimento liberado pelo COFEN na atuação do enfermeiro esteta."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "Entre as atividades privativas do enfermeiro inclui-se",
+          "alternativas": [
+            "preparar o paciente para consultas e exames.",
+            "ministrar medicamentos via parenteral.",
+            "colher material para exames laboratoriais.",
+            "assumir a direção do órgão de enfermagem integrante da estrutura básica da instituição de saúde, pública ou privada."
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}
