@@ -1,0 +1,484 @@
+{
+  "versao": 1,
+  "acervo": "Córtex — índice de fontes oficiais FHEMIG 2023",
+  "concurso": "FHEMIG — concurso público 2023",
+  "banca": "FGV",
+  "status": "catálogo de proveniência; não contém enunciados e não deve ser importado como questões",
+  "gabaritoDefinitivo": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+  "finalidade": "Conferência editorial antes de integrar material com direitos de reprodução confirmados",
+  "fontes": [
+    {
+      "ordem": 1,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-anestesiologia-nivel-iiicns201-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 2,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cardiologia-nivel-vicns202-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 3,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-cardiovascular-nivel-iiicns203-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 4,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-geral-nivel-iiicns206-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 5,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-pediatrica-nivel-vicns207-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 6,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-toracica-nivel-vicns209-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 7,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-vascular-nivel-vicns210-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 8,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-clinica-medica-nivel-iiicns211-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 9,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-coloproctologia-nivel-vicns212-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 10,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-dermatologia-nivel-iiicns213-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 11,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-endocrinologia-e-metabologia-nivel-vicns214-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 12,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-gastroenterologia-nivel-vicns215-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 13,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-ginecologia-e-obstetricia-nivel-iiicns217-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 14,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-hematologia-e-hemoterapia-nivel-vicns218-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 15,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-infectologia-nivel-iiicns219-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 16,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-infectologia-pediatrica-nivel-vicns220-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 17,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-mastologia-nivel-vicns221-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 18,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-medicina-de-emergencia-nivel-iiicns222-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 19,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-medicina-fetal-nivel-vicns223-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 20,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-medicina-intensiva-nivel-iiicns224-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 21,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-medicina-intensiva-pediatrica-nivel-vicns225-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 22,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-nefrologia-nivel-vicns226-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 23,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-nefrologia-pediatrica-nivel-vicns227-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 24,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neonatologia-nivel-vicns228-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 25,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neurocirurgia-nivel-iiicns229-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 26,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neurologia-nivel-iiicns230-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 27,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-neurologia-pediatrica-nivel-vicns231-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 28,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-nutrologia-nivel-vicns232-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 29,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-oncologia-clinica-nivel-vicns234-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 30,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-ortopedia-e-traumatologia-nivel-iiicns235-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 31,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-pediatria-nivel-iiicns237-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 32,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-pneumologia-nivel-vicns238-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 33,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-pneumologia-pediatrica-nivel-vicns239-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 34,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-psiquiatria-nivel-iiicns240-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 35,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-psiquiatria-da-infancia-e-adolescencia-nivel-vicns241-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 36,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-radiologia-e-diagnostico-por-imagem-nivel-iiicns242-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 37,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-reumatologia-nivel-vicns243-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 38,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-reumatologia-pediatrica-nivel-vicns244-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 39,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-toxicologia-medica-nivel-vicns245-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 40,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/profissional-de-enfermagem-penf-enfermeiro-de-terapia-intensiva-nivel-vicns303-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 41,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/profissional-de-enfermagem-penf-enfermeiro-neonatologista-nivel-vicns304-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 42,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/profissional-de-enfermagem-penf-enfermeiro-obstetra-nivel-vicns305-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    },
+    {
+      "ordem": 43,
+      "caderno": "https://conhecimento.fgv.br/sites/default/files/concursos/profissional-de-enfermagem-penf-enfermeiro-oncologista-nivel-vicns306-tipo-1.pdf",
+      "intervaloSugerido": [
+        31,
+        45
+      ],
+      "assuntoProvisorio": "a classificar por enunciado",
+      "status": "pendente de revisão e autorização",
+      "questoesImportadasPorEsteCatalogo": 0
+    }
+  ]
+}
