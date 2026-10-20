@@ -72,11 +72,13 @@ function render(){
  const linhas=dados.itens.map(item=>({...item,refs:refsPara(item.assunto)}))
   .filter(item=>(!disciplina||(item.disciplinas||[item.disciplina]).includes(disciplina))&&
     (!needle||norm(item.assunto+" "+item.disciplina).includes(needle)))
-  .sort((a,b)=>b.refs.length-a.refs.length ||
+  .sort((a,b)=>Number(a.originaisVerificadas>0)-Number(b.originaisVerificadas>0) ||
+    a.originaisVerificadas-b.originaisVerificadas ||
     a.disciplina.localeCompare(b.disciplina,"pt-BR") ||
     a.assunto.localeCompare(b.assunto,"pt-BR"));
- $("officialCoverageCount").textContent=linhas.length+" assunto(s) exibido(s) · "+
-   referencias.length+" questões originais catalogadas; os itens incorporados são respondidos no próprio Córtex.";
+ const zerados=linhas.filter(item=>item.originaisVerificadas===0).length;
+ const incompletos=linhas.filter(item=>item.originaisVerificadas>0&&item.originaisVerificadas<item.meta).length;
+ $("officialCoverageCount").textContent=linhas.length+" assuntos exibidos · "+zerados+" zerados · "+incompletos+" incompletos · prioridade aos zerados.";
  $("officialCoverageList").innerHTML=linhas.map(item=>{
   const n=Math.min(item.meta,item.originaisVerificadas);
   const refs=item.refs.slice(0,5).map(q=>
@@ -98,7 +100,7 @@ async function carregar(){
   if(!r.ok)throw Error("HTTP "+r.status);
   dados=await r.json();
   if(!Array.isArray(dados.itens))throw Error("Resposta inválida");
-  $("officialCoverageStats").textContent=dados.questoesVerificadas+" / "+dados.metaTotal+" questões originais validadas";
+  $("officialCoverageStats").textContent=dados.questoesVerificadas+" / "+dados.metaTotal+" questões contabilizadas na meta (limite de 30 por assunto)";
   const disciplinas=[...new Set(dados.itens.flatMap(x=>x.disciplinas||[x.disciplina]))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
   $("officialCoverageDiscipline").innerHTML='<option value="">Todas as disciplinas</option>'+
    disciplinas.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join("");

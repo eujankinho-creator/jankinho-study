@@ -1,0 +1,303 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "prioridade-assuntos-zerados-matematica-saude-lote001",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "cebraspe-pmsc-soldado-2023-caderno-001-tipo1",
+      "banca": "CEBRASPE",
+      "ano": 2023,
+      "orgao": "Polícia Militar de Santa Catarina",
+      "cargo": "Soldado da Polícia Militar",
+      "cadernoUrl": "https://cdn.cebraspe.org.br/concursos/pm_sc_23_soldado/arquivos/862_PMSC_SOLDADO_001_01.PDF",
+      "gabaritoUrl": "https://cdn.cebraspe.org.br/concursos/pm_sc_23_soldado/arquivos/GAB_DEFINITIVO_862_PMSC_SOLDADO_001_01.PDF",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 51,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Tabelas-Verdade",
+          "enunciado": "Considere os conjuntos C, L e W de pessoas de uma cidade, com as sentenças abertas c(x): 'a pessoa confunde crime com liberdade de expressão'; l(x): 'a pessoa confunde liberdade de expressão com crime'; e w(x): 'a pessoa que confunde crime com liberdade de expressão confunde liberdade de expressão com crime'. A partir desse texto, e considerando que João seja um cidadão da cidade, assinale o número de linhas da tabela-verdade da proposição w(João).",
+          "alternativas": [
+            "2",
+            "4",
+            "8",
+            "16",
+            "32"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Tabelas-Verdade",
+          "enunciado": "Assinale a opção em que é apresentada uma tautologia.",
+          "alternativas": [
+            "Gosto do trabalho, mas não gosto de trabalhar.",
+            "Conserto o computador se, e somente se, o computador estragar.",
+            "Sou feliz ou não com quem eu sou.",
+            "Não me lembro se molhei ou não a grama.",
+            "Se eu estudar, então serei aprovado, e se eu fui aprovado, então estudei."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "cebraspe-banrisul-2025-cb1-tipo1",
+      "banca": "CEBRASPE",
+      "ano": 2025,
+      "orgao": "Banrisul",
+      "cargo": "Técnico em Tecnologia da Informação II — Conhecimentos Básicos",
+      "cadernoUrl": "https://cdn.cebraspe.org.br/concursos/banrisul_25/arquivos/077_BANRISUL_CB1_01.pdf",
+      "gabaritoUrl": "https://cdn.cebraspe.org.br/concursos/banrisul_25/arquivos/Gab_Definitivo_077_BANRISUL_CB1_01.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 16,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Tabelas-Verdade",
+          "enunciado": "Considere a tabela-verdade com três proposições P, Q e R, na ordem de linhas (V,V,V); (V,V,F); (V,F,V); (V,F,F); (F,V,V); (F,V,F); (F,F,V); (F,F,F). Com base nas três colunas, assinale a sequência de valores V ou F da última coluna da proposição lógica P ⇔ (Q ∨ R), tomados de cima para baixo.",
+          "alternativas": [
+            "V V F V F V V F",
+            "V F V V F F V F",
+            "V V V F F F F V",
+            "V V V F F V F F",
+            "V V F F V F V F"
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-famema-2022-enfermagem-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Faculdade de Medicina de Marília (FAMEMA)",
+      "cargo": "Vestibular 2022 — Enfermagem e Medicina — Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/famema2022_tipo1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/famema2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 11,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Estudando uma espécie de grilos, biólogos descobriram que o gráfico da relação entre o número de vezes que o grilo canta por minuto e a temperatura é aproximadamente uma reta. Essa espécie canta 96 vezes por minuto à temperatura de 18 °C e 186 vezes por minuto à temperatura de 30 °C. Se os grilos cantam 141 vezes por minuto, a temperatura aproximada, em graus Celsius, é",
+          "alternativas": [
+            "20",
+            "22",
+            "24",
+            "26",
+            "28"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Considere o sistema linear: x + 2y − z = 4; −x + y + 2z = 3; x − y + az = b, onde a e b são constantes reais. Sobre esse sistema, assinale a afirmativa correta.",
+          "alternativas": [
+            "Se a = −3 e b = −2, então o sistema é impossível.",
+            "Se a = −2 e b = −2, então o sistema é possível indeterminado.",
+            "Se a = −2 e b = −3, então o sistema é impossível.",
+            "Se a = −3 e b = −3, então o sistema é possível determinado.",
+            "Se a ≠ −3 e b = −2, então o sistema é possível determinado."
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-macae-2024-professor-c-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Prefeitura de Macaé",
+      "cargo": "Professor C — Matemática — Tipo 1 (manhã)",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-c-matematicacns102-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ed.-1-macaeadm2024_gabarito_definitivo_compilado.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 46,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Partindo-se de uma progressão aritmética (aₙ) de 15 termos, constrói-se uma nova sequência numérica (bₙ) de 11 termos, tal que bₙ = aₙ + 2aₙ₊₄. Se r é a razão de (aₙ), então (bₙ)",
+          "alternativas": [
+            "é uma progressão geométrica de razão 2.",
+            "é uma progressão geométrica de razão 2r.",
+            "é uma progressão aritmética de razão 2r.",
+            "é uma progressão aritmética de razão 3r.",
+            "não é progressão aritmética e nem progressão geométrica."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Sejam r₁ e r₂ as raízes da equação abx² − (a² + b²)x + ab = 0, com a e b reais não nulos. Assim, (r₁)² + (r₂)² vale",
+          "alternativas": [
+            "[(a²+b²)/(2ab)]² − 1",
+            "[(a²+b²)/(ab)]² − 2",
+            "[(a²−b²)/(2ab)]² − 1",
+            "[(a²−b²)/(ab)]² − 2",
+            "[(a+b)/(ab)]² − 2"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "O sistema linear 3x + 2y + z = 1; 2x + y + z = 1; 2x + 2y = k só possui solução se k vale",
+          "alternativas": [
+            "2",
+            "1",
+            "0",
+            "−1",
+            "−2"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Uma função polinomial de 1º grau, real de variável real, f é tal que x₁ > x₂ implica f(x₁) < f(x₂), para todos os reais x₁ e x₂. Se o gráfico de f intersecta o eixo das abscissas em um ponto cuja soma das coordenadas é menor que zero, então é correto afirmar que",
+          "alternativas": [
+            "os coeficientes angular e linear de f são ambos positivos.",
+            "os coeficientes angular e linear de f são ambos negativos.",
+            "o coeficiente angular de f é positivo e o linear é negativo.",
+            "o coeficiente angular de f é negativo e o linear é positivo.",
+            "o coeficiente angular de f é negativo e o linear é nulo."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "Considere a função real de variável real dada por f(x) = 200 × 1,69^(x/6). Nesse caso, é correto afirmar que o valor da função f aumenta",
+          "alternativas": [
+            "69% a cada acréscimo de uma unidade em x.",
+            "69% a cada acréscimo de três unidades em x.",
+            "30% a cada acréscimo de uma unidade em x.",
+            "30% a cada acréscimo de três unidades em x.",
+            "30% a cada acréscimo de seis unidades em x."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Em uma progressão geométrica de 20 termos, a razão entre o 8º termo e o 4º termo é 4. Se o 6º termo vale π, então o 20º termo é igual a",
+          "alternativas": [
+            "52π",
+            "64π",
+            "108π",
+            "128π",
+            "256π"
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-vitoria-2024-peb-iii-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Prefeitura Municipal de Vitória — Secretaria de Educação",
+      "cargo": "Professor de Educação Básica III — Matemática — Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/peb-iii-matematicacns308-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/smevitoria2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 33,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Em uma progressão aritmética, o 13º termo é −9 e o 63º é 25. A soma dos 75 primeiros termos dessa progressão aritmética é igual a",
+          "alternativas": [
+            "225",
+            "300",
+            "450",
+            "600",
+            "1275"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Em uma progressão geométrica, a diferença entre o 16º termo e o 1º termo é igual a 60, e a soma dos seus 15 primeiros termos é igual a 360. Assim, a razão dessa progressão geométrica é igual a",
+          "alternativas": [
+            "1/6",
+            "6/7",
+            "7/6",
+            "4/3",
+            "3/2"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "Certo vídeo de uma rede social viralizou, de forma que seu alcance pode ser modelado pela expressão algébrica p(t) = 1000 × 3^(2t), em que t é o tempo, dado em horas, após a publicação e p(t) é a quantidade de pessoas que visualizaram o vídeo. O vídeo alcançou um milhão de visualizações após um tempo entre",
+          "alternativas": [
+            "2 e 3 horas.",
+            "3 e 4 horas.",
+            "4 e 5 horas.",
+            "5 e 6 horas.",
+            "6 e 7 horas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Ao solucionar o sistema linear a + b + c = 0; 4a + 2b + c = 7; 9a + 3b + c = 20, obtêm-se os coeficientes da função f(x) = ax² + bx + c. Assim, o valor de f(0) é",
+          "alternativas": [
+            "3",
+            "1",
+            "0",
+            "−1",
+            "−2"
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-ebserh-2025-grupo-infectologia-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Empresa Brasileira de Serviços Hospitalares — EBSERH",
+      "cargo": "Grupo Infectologia — Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/grupo-infectologiae2cnsgp10-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ebserhmedico2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "assunto": "Raiva Humana",
+          "enunciado": "Em 2 de janeiro de 2025, o CIEVS Nacional foi notificado de caso suspeito de raiva humana em Pernambuco, com histórico de mordedura por sagui em novembro de 2024. Uma mulher de 56 anos apresentou sintomas neurológicos e dificuldade para deglutir. A PCR de amostras de saliva e tecido foi positiva para o vírus da raiva com variante de sagui/soim. As orientações do CIEVS Nacional às unidades da rede e aos Núcleos Hospitalares de Epidemiologia devem incluir a",
+          "alternativas": [
+            "intensificação da vigilância, com foco na detecção de casos, coleta oportuna de exames laboratoriais e uso oportuno e adequado da profilaxia antirrábica humana.",
+            "instituição de profilaxia pré-exposição para a população habitante do local provável de infecção como medida de controle imediata.",
+            "notificação semanal de todo caso suspeito ou confirmado pelo profissional de saúde ou serviço assistencial.",
+            "busca ativa quanto à detecção de espoliação em animais e humanos e de moradias sem proteção adequada.",
+            "vacinação de cães e gatos e recolhimento de animais errantes e sem controle como única medida recomendada."
+          ],
+          "correta": "B"
+        }
+      ]
+    }
+  ]
+}
