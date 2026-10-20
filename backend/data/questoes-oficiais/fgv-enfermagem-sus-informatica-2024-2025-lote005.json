@@ -1,0 +1,1777 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "fgv-enfermagem-sus-informatica-2024-2025-lote005",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "fgv-ebserh2025-enfermeiro-grupo04-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Empresa Brasileira de Serviços Hospitalares - EBSERH",
+      "cargo": "Grupo Enfermagem — Enfermeiro — Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/grupo-4-enfermageme3cnsgp04-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ebserrhassistencial2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 16,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Controle Social no SUS",
+          "enunciado": "O controle social democrático das políticas de saúde no Brasil se dá, sobretudo, no âmbito dos Conselhos de Saúde e das Conferências de Saúde. Assinale a opção correta no que diz respeito às características e atribuições desses espaços.",
+          "alternativas": [
+            "Os Conselhos de Saúde são organizados de maneira centralizada, respondendo diretamente às determinações do governo via Conselho Nacional de Saúde.",
+            "As Conferências de Saúde ocorrem com regularidade anual no nível nacional, abordando temas determinados em cada evento do ano anterior.",
+            "Os Conselhos de Saúde são órgãos colegiados e permanentes, responsáveis diretamente pela execução dos serviços de saúde no território nacional.",
+            "As Conferências de Saúde municipais e estaduais ocorrem como etapas prévias da Conferência Nacional, aprovando propostas a serem discutidas nesta.",
+            "Os Conselhos de Saúde estão distribuídos nos níveis federal, estadual e municipal, funcionando de maneira subordinada ao executivo de cada unidade administrativa."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Constituição Federal - Saúde",
+          "enunciado": "Com relação à construção histórica do Sistema Único de Saúde (SUS), avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) O SUS foi cr iado inicialmente durante o Governo Vargas, voltado, a princípio, apenas para o atendimento aos trabalhadores da economia formal e suas famílias. ( ) A Constituição Federal de 1988 introduziu o fundamento da universalização do SUS e estabeleceu a integração dos serviços públicos de saúde em uma rede regionalizada e hierarquizada. ( ) O projeto inicial do sistema previa a sua evolução para o Sistema Unificado e Descentralizado de Saúde (SUDS), cuja execução permanece em aberto e em progresso. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – V – F.",
+            "F – V – V.",
+            "V – F – F.",
+            "V – V – F.",
+            "F – F – V."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Sobre os determinantes sociais da saúde, analise o texto seguir. Podemos afirmar que na efetivação e desenvolvimento de si os indivíduos organizam e transformam grupos humanos nos mais diversos níveis e, de um modo ou de outro, a própria humanidade. Dessa forma, para os próprios indivíduos, que são concentr ações vivas e pontos de interação da rede social, a transformação da sociedade resulta em novas condições de ser, novas condições de sua existência, inclusive psicofisiológica; portanto, de sua saúde. BRONZO, Carla; FLEURY-TEIXEIRA, Paulo. “Determinação social da saúde pública”. In: Determinação Social da Saúde e Reforma Sanitária. Rio de Janeiro: Cebes, 2010. Assinale a opção que identifica corretamente a ideia central do texto.",
+          "alternativas": [
+            "A melhoria na saúde do indivíduo ocorre como tradução fisiológica de mudanças de postura psicológica.",
+            "O indivíduo é subordinado às características de sua realidade social, o que inclui seus modos de vida e sua saúde.",
+            "A ciência médica substitui as mudanças sociais como principal fator para o aumento da qualidade de vida da população.",
+            "O funcionamento do organismo humano molda as regras de convivência, determinando os comportamentos coletivos.",
+            "A saúde faz parte dos efeitos do engajamento humano, o qual gera transformações históricas no âmbito da vida social."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Princípios e Diretrizes",
+          "enunciado": "A política regulatória do s planos privados explicita de maneira legal e institucional o fato de que os princípios do SUS de universalidade e igualdade eram formais. O modelo regulatório, da forma como foi adotado, é suplementar e não uma articulação. Sua implantação, de qualquer f orma, foi separada: o modelo regula esse mercado, enquanto o SUS é outra história, com outra regulação e mecanismos decisórios totalmente díspares. São modelos e concepções diferentes: um é direito do consumidor e defende o mercado; o outro é direito de ci dadania, obrigação do Estado. MENICUCCI, T. M. G. História da reforma sanitária brasileira e do Sistema Único de Saúde. História, Ciências, Saúde – Manguinhos, Rio de Janeiro, v. 21, n. 1, 2014. A criação de um sistema nacional de saúde envolve uma série d e decisões políticas e organizacionais. Com base no trecho, é correto afirmar que o sistema brasileiro",
+          "alternativas": [
+            "adota um modelo híbrido, no qual a regulação dos planos de saúde privados se integra aos serviços públicos e forma um sistema único e coordenado em seu funcionamento.",
+            "opera com base na universalização plena da saúde, garantindo que o sistema público e os planos privados sejam regulados pelos mesmos mecanismos e princípios.",
+            "descaracteriza os princípios da universalidade e da igualdade, tornando o acesso aos serviços de saúde condicionado à contratação de assistência suplementar.",
+            "formaliza um sistema único de assistência, no qual os planos de saúde privados são considerados complementares ao serviço público e seguem sua mesma lógica de gestão.",
+            "funciona como um sistema segmentado, no qual os planos de saúde privados operam de forma paralela ao serviço público, com regulações e princípios distintos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "A respeito dos limites entre ciência ética, leia o relato a seguir. Em 201 8, o cientista chinês He Jiankui causou controvérsia na comunidade científica quando revelou ter editado o código genético de dois embriões saudáveis com o objetivo de torná -los imunes à transmissão do HIV contraído pelos pais. O resultado foi o nascimento de duas meninas gêmeas geneticamente modificadas com a técnica de CRISPR -cas9, uma ferramenta genética que corta a sequência do DNA e o reconfigura para obter a modificação desejada. A repercussão do experimento levou à demissão e à condenação a três anos de prisão na China. Experimento chinês confronta limites entre ética e ciência , 2019, In: https://www.ipea.gov.br/. Adaptado. Considerando os princípios da bioética, assinale a afirmativa que identifica problemas éticos suscitados pelo experimento citado.",
+          "alternativas": [
+            "O desrespeito às normas comerciais, pois a alteração genética das bebês pode impactar o mercado de vacinas.",
+            "A inviabilidade econômica da técnica, que exige um alto investimento sem benefícios significativos.",
+            "Os riscos imprevisíveis de alterações genéticas em seres humanos, que vão produzir óvulos e espermatozoides com essa mutação.",
+            "A falha metodológica do estudo, que não seguiu protocolos científicos rigorosos para garantir a eficácia.",
+            "O comprometimento da viabilidade das futuras gerações, pois as edições genéticas causam instabilidade no DNA."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Enfermagem",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Com relação à Atenção Primária à Saúde (APS), avalie as afirmativas a seguir. I. A APS tem o foco na diagnose e no tratamento das enfermidades, dada a dificuldade de ações preventivas na escala de sua atuação. II. A APS otimiza os atendimentos com equipes capazes de abordar as situações menos graves, evitando o encaminhamento a especialistas. III. A APS é o foco principal das iniciativas voltada s para a educação em saúde, dado que é a porta de entrada preferencial no sistema de saúde. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "III, apenas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Política Nacional de Humanização",
+          "enunciado": "A Política Naci onal de Humanização (PNH), ou HumanizaSUS, busca qualificar a saúde pública no Brasil com um foco na organização das dinâmicas de trabalho. A PNH comporta as características indicadas a seguir, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "A valorização dos gestores d e saúde como parte essencial da implementação da humanização no SUS.",
+            "A autonomia do usuário no cuidado em saúde, garantindo participação ativa no próprio tratamento.",
+            "A transferência de responsabilidade para as famílias, atribuindo-lhes papel central na condução dos cuidados.",
+            "A articulação entre formação e serviços, promovendo uma educação permanente para profissionais da saúde.",
+            "A participação de profissionais e usuários nas ações de saúde junto a gestores, criando espaços de escuta e cogestão."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Enfermagem",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Estratégia de Saúde da Família (ESF) é uma orientação fundamental do oferecimento de atenção básica à população. Assinale a afirmativa que apresenta corretamente uma característica da ESF.",
+          "alternativas": [
+            "Prioriza a prevenção de enfermidades entre indivíduos saudáveis, responsáveis pela sustentação material da família.",
+            "É operacionalizada por equipes multiprofissionais que atendem um número definido de pessoas em um território.",
+            "Executa um serviço ass istencial centralizado em unidades de saúde de grande porte estrategicamente posicionadas.",
+            "É orientada ao atendimento de coletividades em vez de indivíduos devido à natureza social de sua atuação.",
+            "Opera com equipes itinerantes de assistência social , que diminuem a necessidade de atendimento médico."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "As Redes de Atenção à Saúde (RAS) são estruturas organizacionais projetadas para superar a fragmentação dos serviços de saúde. Sobre o tema, avalie os itens a seguir. I. Os serviços são organizados de maneira hierárquica, com funções definidas e de acordo com a complexidade dos casos. II. As RAS podem ser estruturadas de maneira temática, especializando-se no atendimento de um grupo populacional específico. III. O paciente mantém um vínculo com a rede, estendendo seu tratamento ao longo do tempo, em vez de ser atendido de maneira pontual. Está correto o que se afirma em",
+          "alternativas": [
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Com relação às orientações da Política Nacional de Saúde Integral da População Negra, avalie as afirmativas a seguir. I. Incluir o quesito cor no levantamento de informações relativas à saúde da população e no estabelecimento de iniciativas e metas. II. Substituir as práticas populares e religiosas de cuidado e saúde por técnicas e protocolos de medicina avançada e baseada em evidências. III. Ampliar a participação de movimentos sociais organizados nas instâncias de controle social do sistema de saúde. Está em consonância com a Política Nacional de Saúde Integral da População Negra o que se indica em",
+          "alternativas": [
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "O Centro de Atenção Psicossocial (CAPS) é um dos serviços de referência para o cuidado com as pessoas que têm Transtornos do Espectro do Autismo (TEA). Como parte da equipe de profissionais de saúde, o enfermeiro desenvolve ações de cuidado com as pessoas que têm TEA e suas famílias. Sobre esse tema, avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Um Projeto Terapêutico Singular (PTS), voltado à pessoa com TEA, deve considerar ações que estimulem a sua autonomia e independência cotidiana. ( ) Entre as tecnologias recomendadas no cuidado com as pessoas que têm TEA, a enfermeira pode aplicar a comun icação suplementar e alternativa, tais como gestos, símbolos e figuras. ( ) No caso de pessoas com TEA, o PTS deve ser construído com a família, sem a participação da pessoa com TEA, pois o processo de construção pode acarretar crises dissociativas. ( ) No caso de a pessoa com TEA usar psicofármacos, a enfermeira deve incluir no planejamento e nas ações de cuidado a orientação sobre os efeitos colaterais e, se for o caso, ajudar na escolha dos melhores horários para o uso dos medicamentos. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – V – V – F.",
+            "V – V – F – V.",
+            "F – F – V – V.",
+            "V – F – F – V.",
+            "F – V – V – F."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "A saúde é um conceito complexo que envolve diferentes dimensões que se inter -relacionam: biológicas, psicológicas e sociais. A promoção da saúde integral abrange a compreensão do funcionamento da Rede de Atenção Psicossocial (RAPS) e o domínio sobre os transtornos e cuidados voltados à saúde mental. Sobre o atendimento e o cuidado com as pessoas em relação à saúde mental, avalie os procedimentos a seguir. I. De acordo com o protocolo clínico e as diretrizes terapêuticas do Transtorno Afetivo Bipolar do tipo I (TAB), do Ministério da Saúde (2016), o TAB é um transtorno de humor e é uma doença crônica que compromete a qualidade de vida do paciente. Entre as intervenções psicossociais que fazem parte da reabilitação do paciente, o enfermeiro deve incluir no atendimento: a discussão dos sinais precoces de recaída, as medidas a serem tomadas nessa situação e o ensino de técnicas de controle do estresse. II. Um paciente com Transtorno Esquizoafetivo está em tratamento medicamentoso com Risperidona, em doses de 3 mg, duas vezes ao dia. O frasco disponível na farmácia tem 30 mL com 1 mg/mL. Para o período de 30 dias, a enferm eira explicou ao paciente que ele precisará de seis frascos. III. No atendimento ao paciente em sofrimento psíquico e a seu familiar, a enfermeira aplicou a Teoria das Relações Interpessoais de Hildegard Peplau, em suas quatro fases. Na segunda fase, que t rata da identificação, ela selecionou a assistência profissional aplicada ao caso. IV. De acordo com o Instrutivo Técnico da RAPS do SUS (2022), os leitos em hospitais especializados em psiquiatria (hospitais psiquiátricos) devem atender a crises e agudiza ções, em internações de curta permanência (inferior a 90 dias), excluindo-se as situações de urgência/emergência relativas ao consumo ou abstinência de álcool, crack e outras drogas, pois para tais situações os pacientes devem ser encaminhados para os leitos de Unidades de Referência Especializada em Hospital Geral. Os procedimentos corretos são apenas",
+          "alternativas": [
+            "II, III e IV.",
+            "II e III.",
+            "I, II e III.",
+            "II e IV.",
+            "I, II e IV."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Alterações no clima do planeta têm sido um tema preocupante e vêm ocupando as agendas dos líderes mundiais e de vários segmentos sociais. Esses eventos ameaçam a vida e geram múltiplos problemas, mobilizando debates para a proposição de políticas e programas, em especial na saúde pública. Grandes enchentes e ondas de calor são consequências atribuídas às alterações climáticas. Nessas situações, problemas de saúde física e mental são pontos de atenç ão dos governantes e dos profissionais de saúde. Para o caso de eventos que envolvam alterações climáticas, avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) A leptospirose é uma doença infecciosa preocupante, pois a lama de enchentes tem alto poder infectante. A transmissão se dá por meio da exposição à urina de animais infectados quando a pessoa possui lesões na pele. Com a pele íntegra não há risco de infecção. ( ) Para evitar o tétano acidental, a pessoa deve acessar os lugares acometidos por enchentes usando botas e luvas. Em caso de ferimento durante ou após uma enchente, deve -se verificar a data da última dose da vacina e, se for necessário, procurar o serviço de saúde/profissional de saúde para avaliar a necessidade de reforço. ( ) Ondas de calor são eventos cada vez mais frequentes e a intensa exposição ao sol pode causar problemas de variados graus de gravidade. Uma pessoa com transpiração, fraqueza, tonturas, desmaios, náuseas, dor de cabeça, cãibras musculares e diarreias pode estar sofrendo de exaustão térmica. No caso de insolação, entre as medidas de primeiros socorros estão a aplicação de compressas de água fria na testa, pescoço, axilas e virilhas e, se possível, deve -se borrifar delicadamente água fria em todo o corpo da pessoa. ( ) No atendimento na unidade de saúde de um paciente de 25 anos, sexo masculino, que enfrentou uma enchente em casa e apresenta doença diarreica aguda, deve -se fazer a avaliação do estado de hidratação do paciente. Consta tada a desidratação, deve-se administrar continuamente a solução de sais de reidratação oral, até que desapareçam os sinais de desidratação. No plano de educação em saúde devem constar as medidas de higiene pessoal, domiciliar e dos alimentos. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – V – F – V.",
+            "V – F – V – F.",
+            "F – V – F – F.",
+            "F – V – V – V.",
+            "V – F – F – V."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "A Resolução Cofen nº 710/2022 atualiza a norma técnica referente à atuação da equipe de enfermagem no processo de doação, captação e transplante de órgãos, tecidos e células. Sobre essa atuação, avalie as afirmativas a seguir. I. Compete privativamente ao enfermeiro planejar, coordenar, executar, supervisionar e avaliar as ações do técnico de enfermagem, prestadas ao doador vivo ou falecido, a seus familiares e ao receptor, bem como ao material biológico para fins de transplante. II. A entrevista familiar, com a finalidade de doação de órgãos, tecidos e células, compete à equipe de enfermagem, podendo ser realizada pelo técnico de enfermagem ou enfermeiro. III. A assistência de enfermagem no processo de doação, captação e transplante de órgãos, tecidos e células deve seguir protocolos institucionais baseados em evidências científicas, conforme legislação vigente. Está correto o que se afirma em",
+          "alternativas": [
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I e III, apenas.",
+            "II, apenas.",
+            "I, II e III."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Enfermagem",
+          "assunto": "Gerenciamento de Resíduos de Serviços de Saúde (GRSS)",
+          "enunciado": "A RDC nº 222, de 28 de março de 2018, que regulamenta as boas práticas de gerenciamento dos Resíduos de Serviços de Saúde (RSS), pretende minimizar os riscos inerentes ao gerenciamento de resíduos no país no que diz respeito à saúde humana e animal, bem como à proteção ao meio ambiente e aos recursos naturais renováveis. Tendo por base essa RDC, assinale a afirmativa correta sobre o gerenciamento dos Resíduos de Serviços de Saúde (RSS).",
+          "alternativas": [
+            "Os sacos para o acondicionamento de RSS do grupo A devem ser substituídos ao atingirem o limite de 2/3 de sua capacidade ou então a cada 48 horas, independentemente do volume, visando ao conforto ambiental e à segurança dos usuários e profissionais.",
+            "O esvaziamento ou reaproveitamento dos sacos podem ser feitos quando não houver sacos suficientes na instituição.",
+            "Os sacos contendo RSS do grupo A de fácil putrefação devem ser substituídos no máximo a cada 48 horas, independentemente do volume.",
+            "Os RSS do grupo A que não precisam ser obrigatoriamente tratados e os RSS após o tratamento são considerados rejeitos e devem ser acondicionados em saco preto.",
+            "Os RSS do grupo A que obrigatoriamente precisam ser tratados devem ser acondicionados em sacos pretos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "O processo de enfermagem é um mé todo que orienta o pensamento crítico e o julgamento clínico do enfermeiro direcionando a equipe de enfermagem para o cuidado. De acordo com a Resolução Cofen nº 736/2024, o objetivo da etapa de evolução de enfermagem é",
+          "alternativas": [
+            "avaliar os resultados alcançado s de enfermagem e saúde, permitindo a análise e revisão de todo o processo de enfermagem.",
+            "registrar as condições iniciais de saúde do paciente, permitindo a análise e revisão de todo o processo de enfermagem.",
+            "formular os diagnósticos de enfermagem, permitindo a análise e revisão de todo o processo de enfermagem.",
+            "implementar as intervenções de enfermagem, permitindo a análise e revisão de todo o processo de enfermagem.",
+            "realizar o registro no prontuário do paciente, permitindo a análise e revisão de todo o processo de enfermagem."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "O processo de enfermagem deve ser realizado de forma deliberada e sistemática em todos os contextos socioambientais em que ocorre o cuidado de enfermagem. De acordo com a Resolução Cofen nº 736/2024, na etapa de planejamento de enfermagem, há elementos que devem ser considerados para o desenvolvimento de um plano assistencial eficaz, direcionado ao paciente, à família, à coletividade ou aos grupos especiais e compartilhado com a equipe de saúde. Avalie se tais elementos incluem: I. priorização de diagnósticos de enfermagem; II. determinação de resultados esperados e exequíveis de enfermagem e de saúde; III. tomada de decisão terapêutica, declarada pela prescrição de enfermagem das intervenções, ações/atividades e protocolos assistenciais; IV. priorização da prescrição médica. Estão corretos os itens",
+          "alternativas": [
+            "II, III e IV, apenas.",
+            "I, II e III, apenas.",
+            "I, II, III e IV.",
+            "I e IV, apenas.",
+            "III e IV, apenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro Cirúrgico",
+          "enunciado": "Durante as etapas do período perioperatório, o enfermeiro desempenha papéis específicos para garantir a segurança e o bemestar do paciente. Assinale a opção que descreve corretamente uma ação correspondente ao período transoperatório.",
+          "alternativas": [
+            "Orientar o paciente e sua família sobre os cuidados necessários no domicílio após a alta hospitalar.",
+            "Verificar se o paciente realizou o jejum pré -operatório conforme recomendado.",
+            "Monitorar continuamente os sinais vitais e manter a segurança do paciente durante o procedimento cirúrgico.",
+            "Avaliar a dor e administrar analgésicos no período imediato após o procedimento.",
+            "Revisar exames pré -operatórios e obter o consentimento informado."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "A Agência Nacional de Vigilância Sanitária (Anvisa), na RDC nº 15/2012, dispõe sobre requisitos de boas práticas para o processamento de produtos para saúde. Com base nessas diretrizes, avalie as afirmativas a seguir. I. O monitoramento do processo de esterilização com indicadores físicos deve ser registrado a cada ciclo de esterilização. II. O monitoramento com indicadores físicos é opcional, sendo realizado apenas quando houver falhas nos testes químicos ou biológicos. III. O uso de indicador biológico em produtos implantáveis é obrigatório em todas as cargas, e a liberação do material só deve ocorrer após a leitura negativa do indicador. IV. O indicador biológico deve ser utilizado diariamente e posicionado no ponto mai s crítico da carga, conforme os estudos térmicos da qualificação do equipamento. Estão corretas as afirmativas",
+          "alternativas": [
+            "II e III, apenas.",
+            "I e III, apenas.",
+            "I, III e IV, apenas.",
+            "I e IV, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Um idoso de 78 a nos chega à unidade básica de saúde acompanhado por sua filha, que relata que o pai apresenta perda de interesse por atividades e dificuldade em realizar tarefas simples do dia a dia. Durante a consulta, o enfermeiro identifica que o paciente apresenta len tidão ao caminhar e sinais de perda de peso recente. A ação prioritária na avaliação inicial do enfermeiro, considerando as síndromes geriátricas, é iniciar com a",
+          "alternativas": [
+            "identificação de sinais de desnutrição e realizar uma avaliação nutricional completa.",
+            "investigação de sinais de depressão utilizando um instrumento de rastreio validado.",
+            "avaliação de sinais de comprometimento cognitivo para investigar demência.",
+            "realização de triagem para síndrome da fragilidade.",
+            "avaliação do risco de quedas utilizando uma escala apropriada."
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-ebserh2025-tecnico-enfermagem-grupo15-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Empresa Brasileira de Serviços Hospitalares - EBSERH",
+      "cargo": "Grupo 15 — Técnico em Enfermagem — Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/grupo-15-tecnico-em-enfermageme3cnmgp15-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ebserrhassistencial2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Assinale a frase em que não há a presença de um interlocutor.",
+          "alternativas": [
+            "Vamos, crianças, silêncio na classe!",
+            "Eu estou te dizendo que a festa será hoje!",
+            "Outras informações, na secretaria, por favor!",
+            "Por favor, não fumem!",
+            "Vocês, João e Pedro, vão passear?"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Observe o seguinte texto argumentativo: “Os médicos algumas vezes não respeitam seu horário de trabalho fixado na porta do posto médico. Ontem fui consultar o médico de plantão, mas ele estava ausente!” Nesse caso, a argumentação do emissor utiliza",
+          "alternativas": [
+            "uma comparação.",
+            "um exemplo.",
+            "uma explicação.",
+            "um apelo à inteligência.",
+            "um apelo à emoção."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Pontuação",
+          "enunciado": "Assinale a frase em que, comparativamente, as reticências mostram a expressão de uma emoção intensa.",
+          "alternativas": [
+            "O quadro não é ... um pouco ... como dizer?",
+            "Mas a barata ... a barata ... você a matou?",
+            "Quem diria...",
+            "Você já sabe, né? O casamento dele...",
+            "Comprei o carro barato... barato ..."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Assinale a frase que mostra um termo que indica a participação pessoal do autor na mensagem da frase.",
+          "alternativas": [
+            "A população aplaudiu a inauguração do mercado.",
+            "Os impostos sobre a água não aumentarão.",
+            "O Rio, como São Paulo, enfrenta problemas.",
+            "O acusado foi, felizmente, preso.",
+            "As máquinas interditaram a pista."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tempos, Modos e Vozes Verbais",
+          "enunciado": "Assinale a frase que não mostra uma ordem de forma direta ou indireta.",
+          "alternativas": [
+            "Tente não gastar todo o seu dinheiro.",
+            "Lembre-me daqui a dois dias.",
+            "Que ela venha aqui amanhã de manhã.",
+            "A chuva vai continuar por todo o dia.",
+            "Tome um comprimido a cada dia."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "A interrogação direta numa frase é a que leva a uma resposta de sim ou não. Assinale a frase que está nesse caso.",
+          "alternativas": [
+            "Será que vai chover no final de semana?",
+            "Quando haverá novas eleições?",
+            "Como ele conseguiu essa proeza?",
+            "Onde fica a nova agência do banco?",
+            "Por que tudo está tão caro?"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Assinale a frase em que a palavra sublinhada está empregada corretamente.",
+          "alternativas": [
+            "Chegamos meios cansados.",
+            "Ela estava meia abatida.",
+            "As frutas estavam meio caras.",
+            "Nos meio tempos, os times mudam.",
+            "Ficaram todos meios tristes com o ocorrido."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase em que a colocação do pronome oblíquo está correta.",
+          "alternativas": [
+            "Me mostraram a prova do crime.",
+            "Deram-me três dias de prazo.",
+            "Não deu-me a menor importância.",
+            "Quem viu-me fazer isso?",
+            "Ninguém observou-me durante a corrida."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Pontuação",
+          "enunciado": "Assinale a frase cuja pontuação está correta.",
+          "alternativas": [
+            "A verdade, como todos sabem incomoda.",
+            "Você Paulo, me deve um grande favor.",
+            "Eis a verdade: nada dura a vida toda.",
+            "Eu, cumpri o meu dever.",
+            "Nós, graças a Deus, estamos, bem."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Assinale o vocábulo que mostra correta grafia.",
+          "alternativas": [
+            "analizar.",
+            "democratisar.",
+            "concretizar.",
+            "gazeificar.",
+            "civilisar. Legislação EBSERH"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "A Portaria GM/MS nº 230, de 7 de março de 2023, institui o Programa Nacional de Equidade de Gênero, Raça e Valorização das Trabalhadoras no Sistema Único de Saúde (SUS). Avalie se as diretrizes da referida Portaria incluem: I. transversalizar os princípios do Programa Nacional de Equidade de Gênero e Ra ça e Valorização das Trabalhadoras no SUS para que estejam presentes nas demais políticas públicas; II. articular, no âmbito federal, a definição de estratégias de equidade de gênero e raça no trabalho na área da saúde; III. fomentar programas de prevenção e combate ao assédio moral e sexual no trabalho compreendendo a dimensão de gênero e raça. Está correto o que se afirma em",
+          "alternativas": [
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "III, apenas",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Controle Social no SUS",
+          "enunciado": "A Resolução CNS nº 453, de 10 de maio de 2012, aprova diretrizes para a instituição, a reformulação, a reestruturação e o funcionamento dos Conselhos de Saúde. De acordo com essa Resolução, o Conselho de Saúde será composto por representantes de entidades, instituições e movimentos representativos de usuários, de entidades representativas de trabalhadores da área da saúde, do governo e de entidades representativas de prestadores de serviços de saúde, sendo o seu presidente eleito entre os membros do Conselho, em reunião plenária. A referida Resolução preconiza que, de acordo com o que propõem as Resoluções nº 33/92 e nº 333/03 do CNS e de acordo com as Recomendações da 10ª e da 11ª Conferências Nacionais de Saúde, a seguinte distribuição de número de conselheiros está correta:",
+          "alternativas": [
+            "15% de representantes sindicais.",
+            "30% de entidades e movimentos representativos de usuários.",
+            "40% de representação de prestadores de serviços privados conveniados, ou sem fins lucrativos.",
+            "50% de representantes do governo.",
+            "25% de entidades representativas dos trabalhadores da área de saúde."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Enfermagem",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Política Nacional de Atenção Básica (PNAB) é resultado da experiência acumulada pelo conjunto de atores envolvidos historicamente com o desenvolvimento e a consolidação do Sistema Único de Saúde (SUS), como movimentos sociais, usuários, trabalhadores e gestores das três esferas de governo. Avalie se as competências das Secretarias Estaduais de Saúde e do Distrito Federal incluem: I. prestar apoio institucional aos gestores dos Estados, ao Distrito Federal e aos Municípios no processo de qualificação e de consolidação da atenção básica; II. estabelecer, de forma tripartite, as diretrizes nacionais e disponibilizar instrumentos técnicos e pedagógicos que facilitem o processo de gestão, formação e educação permanente dos gestores e profissionais da atenção básica; III. consolidar, analisar e transferir para o Ministério da Saúde os arquivos dos sistemas de informação enviados pelos Municípios de acordo com os fluxos e prazos estabelecidos para cada sistema. Está correto o que se afirma em",
+          "alternativas": [
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Financiamento do SUS e LC 141/2012",
+          "enunciado": "A Lei Complementar nº 141/2012 dispõe, em seu Capítulo III, sobre a aplicação de recursos em ações e serviços públicos de saúde. Com base na lei, avalie as afirmativas a seguir acerca dos recursos mínimos. I. A União aplicará, anualmente, em ações e serviços públicos de saúde, o montante correspondente ao valor empenhado no exercício financeiro anterior, apurado nos termos desta Lei Complementar, acrescido de, no mínimo, o percentual correspondente à variação nominal do Produto Interno Bruto (PIB) ocorrida no ano anterior ao da Lei Orçamentária Anual (LOA). II. Em caso de variação negativa do PIB, o valor de que trata o item I acima poderá ser reduzido, em termos nominais, de um exercício financeiro para o outro. III. Os Estados, o Distrito Federal e os Municípios deverão observar o disposto nas respectivas Constituições ou Leis Orgânicas sempre que os percentuais nelas estabelecidos forem superiores aos fixados nesta Lei Complementar para a aplicação em ações e serviços públicos de saúde. Está correto o que se afirma em",
+          "alternativas": [
+            "I e II, apenas.",
+            "I, II e III.",
+            "II e III, apenas.",
+            "I e III, apenas",
+            "III, apenas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "As Redes de Atenção à Saúde (RAS) são c onjuntos de serviços de saúde que se organizam para garantir a integralidade do cuidado e o acesso dos usuários do Sistema Único de Saúde (SUS). O objetivo é que cada pessoa seja atendida pelo serviço mais adequado à sua situação de saúde, de forma contínua, integral, de qualidade e humanizada. A Portaria de Consolidação GM/MS nº 3/2017 apresenta os fundamentos para que as Redes de Atenção à Saúde sejam efetivadas de forma eficiente e com qualidade. Acerca do tema, considere a sentença a seguir. Os serviço s de menor densidade tecnológica, como os das Unidades Básicas de Saúde (UBS), são ofertados de forma dispersa, uma vez que se beneficiam menos dela, enquanto os serviços com maior densidade tecnológica se beneficiam mais. A sentença se refere à seguinte diretriz/estratégia:",
+          "alternativas": [
+            "economia de escala.",
+            "suficiência e qualidade.",
+            "disponibilidade de recursos.",
+            "integração vertical.",
+            "integração horizontal."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "A Portaria GM/MS nº 1.526, de 11 de outubro de 2023 altera as Portarias de Consolidação GM/MS nº 2, nº 3 e nº 6, de 28 de setembro de 2017, para dispor sobre a Política Nacional de Atenção Integral à Saúde da Pessoa com Deficiência (PNAISPD) e Rede de Cuidados à Pessoa com Deficiência (RCPD) no âmbito do Sistema Único de Saúde (SUS). A PNAISPD tem por objetivo promover e proteger a saúde da pessoa com deficiência, por meio da ampliação do acesso ao cuidado integral no âmbito do SUS, em articulação com as demais políticas e ações intersetoriais, contribuindo para sua a utonomia, qualidade de vida e inclusão social, bem como prevenindo diferentes agravos à saúde em todos os ciclos de vida. Avalie se os princípios ou as diretrizes estabelecidos pela Política Nacional de Atenção Integral à Saúde da Pessoa com Deficiência (PNAISPD) incluem: I. Gestão federativa das ações de saúde voltadas à pessoa com deficiência. II. Estímulo à isonomia dos cuidados com as pessoas com deficiência. III. Promoção da acessibilidade em suas diferentes dimensões. Está correto o que se apresenta em",
+          "alternativas": [
+            "I, II e III.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II, apenas.",
+            "III, apenas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "A Política Nacional de Vigilância em Saúde (PNVS) é um guia que orienta as ações de vigilância em saúde no Brasil. A PNVS define os princípios, as diretrizes e as estratégias para o desenvolvimento da vigilância em saúde, sob a gestão do SUS. Em relação à PNVS, é correto afirmar que",
+          "alternativas": [
+            "é uma política pública de Estado e função essencial do SUS, tendo caráter universal, horizontal e orientador do modelo de atenção nos territórios, sendo a sua gestão de responsabilidade exclusiva do Poder Público.",
+            "incide sobre todos os níveis e todas as formas de atenção à saúde, abrangendo os serviços de saúde públicos, além de estabelecimentos r elacionados à produção e circulação de bens de consumo e tecnologias que, direta ou indiretamente, se relacionem com a saúde.",
+            "compreende a articulação dos saberes, dos processos e das práticas relacionados à vigilância epidemiológica, vigilância em saúde ambiental, vigilância em saúde do trabalhador e vigilância sanitária e alinha -se com o conjunto de políticas de saúde no âmbito do SUS, considerando a transversalidade das ações de vigilância em saúde sobre a determinação do processo saúde-doença.",
+            "tem como finalidade definir os princípios, as diretrizes e as estratégias a serem observados pela esfera federal de gestão do SUS para o desenvolvimento da vigilância em saúde, objetivando a promoção e a proteção da saúde e a prevenção de doenças e agravos.",
+            "a análise de situação de saúde e as ações laboratoriais são atividades horizontais e essenciais no processo de trabalho da Vigilância em Saúde."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "No Brasil, a vigilância de eventos adversos relacionados ao uso dos produtos que estão sob a vigilância sanitária inclui o monitoramento do uso desses produtos e tem como objetivo fundamental a detecção precoce de problemas relacionados a esse uso para desencadear as medidas pertinentes para que o risco seja interrompido ou minimizado. Em relação ao tema, avalie as afirmativas a seguir acerca do Sistema de Notificação de Eventos Adversos no Brasil. I. A notificação do cidadão é obrigatória, os dados sobre os notificadores são confidenciais, obedecidos os dispositivos legais, e sua guarda é de responsabilidade do Sistema Nacional de Vigilância Sanitária (SNVS). II. As notificações estarão acessíveis à unidade de saúde envolvida no relato para o devido tratamento. III. A linguagem a ser utilizada na notificação deve ser adaptada e amigável, de forma a promover a participação dos diferentes públicos. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I e II, apenas.",
+            "III, apenas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Educação Permanente em Saúde",
+          "enunciado": "A Política Nacional de Educação Permanente em Saúde (PNEPS - SUS) reafirma o compromisso com a universalidade, a equidade, a integralidade e a efetiva participação popular no SUS e propõe uma prática político -pedagógica que perpassa as ações voltadas para a promoção, proteção e recuperação da saúde, a partir do diálogo entre a diversidade de saberes, valorizando os saberes populares, a ancestralidade, o incentivo à produção individual e coletiva de conhecimentos e a inserção destes no SUS. Conforme a Portaria nº 2.761, de 19 de novembro de 2013, compete ao Ministério da Saúde",
+          "alternativas": [
+            "estabelecer estratégias e ações de planejamento, monitoramento e avaliação da PNEPS -SUS construídas de forma participativa com atores da sociedade civil implicados com a Educação Popular em Saúde.",
+            "estabelecer e stratégias e ações de planejamento, monitoramento e avaliação da PNEPS -SUS construídas no âmbito do Comitê Nacional de Educação Popular em Saúde (CNEPS).",
+            "garantir a inclusão da PNEPS -SUS nos respectivos Planos Municipais Plurianuais de Saúde, em conson ância com as realidades, demandas e necessidades locais.",
+            "estabelecer e implementar estratégias e ações de planejamento, monitoramento e avaliação da PNEPS -SUS construídas de forma participativa com atores da sociedade civil implicados com a Educação Popular em Saúde.",
+            "garantir financiamento complementar aos Municípios para a implantação da PNEPS-SUS."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Decreto 7.508/2011",
+          "enunciado": "O Decreto nº 7.508, de 28 de junho de 2011, regulamenta a Lei nº 8.080, de 19 de setembro de 1990, que trata do Sistema Único de Sa úde (SUS). O referido decreto dispõe sobre a organização do SUS, o planejamento da saúde, a assistência à saúde e a articulação interfederativa. Com base nesse decreto, em relação ao planejamento da saúde, é correto afirmar que",
+          "alternativas": [
+            "o planejamento da saúde em âmbito municipal deve ser realizado de maneira regionalizada, a partir das necessidades dos Municípios, considerando o estabelecimento de metas de saúde.",
+            "o Mapa da Saúde será utilizado na identificação das necessidades de saúde e orientará o planejamento integrado dos Municípios, contribuindo para o estabelecimento de metas de saúde.",
+            "o planejamento da saúde é obrigatório para os entes privados e será indutor de políticas para a iniciativa da saúde pública.",
+            "o processo de planejamento da saúde será ascendente e integrado, do nível local até o federal, ouvidos os respectivos Conselhos de Saúde, compatibilizando-se as necessidades das políticas de saúde com a disponibilidade de recursos financeiros.",
+            "compete à Comissão Intergestores Tripartite pactuar as etapas do processo e os prazos do planejamento municipal em consonância com os planejamentos municipal, estadual e nacional."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Constituição Federal - Saúde",
+          "enunciado": "Conforme a Constituição Federal de 1988, no seu Art. 194: A seguridade so cial compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência e à assistência social. Parágrafo único. Compete ao Poder Público, nos termos da lei, organizar a seguridade social... Avalie se os objetivos que baseiam a organização da seguridade social incluem: I. Irredutibilidade do valor dos benefícios. II. Universalidade da cobertura e do atendimento. III. Caráter democrático e descentralizado da Administração. IV. Uniformidade e equivalência dos benefícios e serviços às populações urbanas e rurais. Estão corretos os itens",
+          "alternativas": [
+            "I e II, apenas.",
+            "III e IV, apenas.",
+            "I, II e III, apenas.",
+            "II, III e IV, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Política Nacional de Humanização",
+          "enunciado": "A Resolução CNS nº 553, de 9 de agosto de 2017, dispõe sobre a carta dos direitos e deveres da pessoa usuária da saúde. Conforme a sua terceira diretriz, toda pessoa tem direito ao atendimento inclusivo, humanizado e acolhedor, realizado por profissionais q ualificados, em ambiente limpo, confortável e acessível. Avalie, com base nessa diretriz, as afirmativas a seguir: I. Nos serviços de saúde, será dada igual visibilidade aos direitos e deveres das pessoas usuárias e das pessoas que trabalham no serviço de saúde. II. A Rede de Serviços do SUS utilizará as tecnologias disponíveis para facilitar o agendamento de procedimentos nos serviços de saúde em todos os níveis de complexidade. III. Os serviços de saúde serão organizados de acordo com a demanda da populaç ão, e não limitados por produção ou quantidades de atendimento predeterminados. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas. Conhecimentos Específicos"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Lei 7.498/1986",
+          "enunciado": "O exercício de enfermagem é regulamentado pela Lei nº 7498/86 e pelo Decreto nº 94.406/87 do Cofen. De acordo com esses dispositivos legais, avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) O Art. 10 do Decreto citado dispõe que o técnico de enfermagem exerce atividades auxiliares, de nível médio, atribuídas à equipe de Enfermagem. ( ) Cabe ao técnico de enfermagem assistir ao enfermeiro na prevenção e no controle sistemático da infecção hospitalar. ( ) De acordo com o Art. 14 do Decreto citado, é privativo do enfermeiro o cumprimento do Código de Deontologia da Enfermagem. ( ) A partir de 2022, a Lei do Exercício Profissional da Enfermagem sofreu alteração para contempl ar condições adequadas de repouso durante todo o horário de trabalho. No entanto, essa alteração abrange, apenas, as instituições de saúde públicas. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – V – F – V.",
+            "V – F – F – V.",
+            "F – V – V – F.",
+            "V – V – F – F.",
+            "V – F – V – F."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Código de Ética dos Profissionais de Enfermagem",
+          "enunciado": "O Código de Ética Profissional é um instrumento legal que deve ser de amplo conhecimento e dominado pela equipe de enfermagem, pois, entre outras funções, orienta a conduta e abrange os direitos e deveres dos profissionais. Tomando como base a Resolução Cofen nº 564/2017, que aprova o novo Código de Ética dos Profissionais de Enfermagem e seu anexo, é correto afirmar que",
+          "alternativas": [
+            "é proibido à equipe de enfermagem cooperar em prática destinada a interromper a gestação, mas em casos permitidos por lei a atuação é obrigatória.",
+            "entre as penalidades a serem impostas ao técnico de enfermagem, em caso de infração, estão a advertência verbal, a suspensão ou cassação do direito ao exercício profissional. As multas são impostas apenas aos enfermeiros, em razão do piso salarial.",
+            "no âmbito da assistência de enfermagem, um dano que provoque debilidade temporária de membro, sentido ou função na pessoa é considerada uma infração grave.",
+            "a c omunicação formal ao Cofen e ao Coren de fatos que infrinjam dispositivos éticos -legais ocorridos na equipe cabe ao enfermeiro e não ao técnico de enfermagem.",
+            "é proibido negar assistência de enfermagem em situações de epidemia, desastre e catástrofe, desde que não ofereçam risco à integridade física do profissional."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "A notificação compulsória é a comunicação obrigatória à autoridade de saúde realizada por meio do Sistema de Informação de Agravos de Notificação (Sinan), que é alimentado, principalmente, pela n otificação e investigação de casos de doenças e agravos que constam da Lista Nacional de Notificação Compulsória de doenças, agravos e eventos em de saúde pública. A respeito da notificação compulsória de casos de doenças e agravos, analise as afirmativas a seguir. I. A portaria GM/MS nº 5.201, de 15 de agosto de 2024 incluiu as seguintes doenças na Lista Nacional de Notificação Compulsória de doenças, agravos e eventos em de saúde pública, nos serviços de saúde públicos e privados em todo o território naci onal: I - Câncer relacionado ao trabalho; II - Dermatose ocupacional; III - Distúrbio de voz relacionado ao trabalho; IV - Infecção pelo vírus da hepatite B em gestante, parturiente ou puérpera e criança exposta ao risco de transmissão vertical da hepatit e B; V - Lesões por Esforços Repetitivos/Distúrbios Osteomusculares Relacionados ao Trabalho (LER/DORT); VI - Perda auditiva relacionada ao trabalho; VII - Pneumoconioses relacionadas ao trabalho; e VIII - Transtornos mentais relacionados ao trabalho. II. A portaria GM/MS nº 5.201, de 15 de agosto de 2024 excluiu as seguintes doenças na Lista Nacional de Notificação Compulsória de doenças, agravos e eventos em de saúde pública, nos serviços de saúde públicos e privados em todo o território nacional: acident e de trabalho com exposição a material biológico, acidente por animal peçonhento e dengue – óbitos, doença de Chagas crônica. III. A notificação compulsória é a comunicação obrigatória à autoridade de saúde, realizada pelos médicos, profissionais de saúde ou responsáveis pelos estabelecimentos de saúde, públicos ou privados, sobre a ocorrência de suspeita ou confirmação de doença, agravo ou evento de saúde pública, podendo ser imediata ou semanal. IV. Para incorporar um agravo ou uma doença à Lista Nacional de Notificação Compulsória de doenças, agravos e eventos em de saúde pública, é necessário considerar alguns aspectos, como características que possam apresentar riscos à saúde pública: potencial para surto ou epidemia; doença ou agravo de causa desconhecida; alteração no padrão clínico-epidemiológico das doenças conhecidas, considerando o potencial de disseminação, a magnitude, a gravidade, a severidade, a transcendência e a vulnerabilidade na população. V. A notificação compulsória é a comunicaçã o obrigatória à autoridade de saúde, que deve ser realizada apenas pelos médicos e enfermeiros, sobre a ocorrência de suspeita ou confirmação de doença, agravo ou evento de saúde pública. Está correto o que se afirma em",
+          "alternativas": [
+            "I, III e IV, apenas.",
+            "I, III e V, apenas.",
+            "II, III e V, apenas.",
+            "II, III, IV e V.",
+            "I, II, III e IV."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "assunto": "Hanseníase",
+          "enunciado": "A hanseníase e a tuberculose são doenças crônicas que podem causar complicações graves e sequelas se não tratadas adequadamente. O técnico de enfermagem, como integrante da equipe de saúde, desempenha um papel importante no controle dessas doenças, no acompanhamento contínuo dos pacientes e na prevenção à transmissão. Considerando o atendimento aos pacientes com hanseníase e tuberculose, analise as afirmativas a seguir. I. O tratamento da hanseníase é realizado por meio da associação de medicamentos denominada poliquimioterapia - PQT. II. A hanseníase acomete principalmente os nervos superficiais da pele e troncos nervosos periféricos (localizados na face, no pescoço, no terço médio do braço e abaixo do cotovelo e dos joelhos), mas também pode afetar os olhos e órgãos internos (mucosas, testículos, ossos, baço, fígado etc.). III. Em relação às orientações é importante enfatizar que ambas as doenças têm cura, que o tratamento é gratuito pelo Sistema Único de Saúde, alertando sobre a importância da adesão ao tratamento para evitar a resistência e a falência. IV. A transmissão da tuberculose acontece por via respiratória, pela eliminação de aerossóis pr oduzidos pela tosse, pela fala ou pelo espirro de uma pessoa com tuberculose ativa (pulmonar ou laríngea), sem tratamento. A tuberculose também é transmitida por objetos compartilhados, assim como a hanseníase. V. Para a prevenção de todas as formas de tub erculose e da hanseníase deve -se administrar a vacina BCG (bacilo Calmette-Guérin) em crianças e adultos, disponível nas salas de vacinação das Unidades Básicas de Saúde (UBS) e em algumas maternidades. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II, III e IV.",
+            "I, II e III, apenas.",
+            "I, II, III e V.",
+            "II, III e IV, apenas.",
+            "I, II e V, apenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "As doenças crônicas não transmissíveis (DCNT) estão entre os principais problemas de saúde pública do Brasil e do mundo. Um novo relatório da Organização Pan -Americana da Saúde (OPAS), divulgado em junho de 2024, revela que, embora a expectativa de vida tenha aumentado nas Américas, também aumentou o número de pessoas que vivem com doenças crônicas não transmissíveis, incluindo o Brasil. Sobre as DCNT, assinale a afirmativa correta.",
+          "alternativas": [
+            "A prevenção das doenças renais crônicas não está diretamente relacionada a estilos e condições de vida das pessoas, pois os fatores de risco preponderantes, como diabetes e hipertensão, são de origem genética.",
+            "A causa do tipo de diabetes é apenas genética e a melhor forma de preveni -la é com práticas de vida saudáveis (alimentação, atividades físicas e evitando álcool, tabaco e outras drogas).",
+            "A ausência de hábitos saudáveis, juntamente com outros fatores de risco, pode contribuir para o desenvolvimento do diabetes, tais como sobrepeso, principalmente se a gordura estiver concentrada em volta da cintura; doenças renais crônicas; diagnóstico de pré -diabetes; colesterol alto ou alterações na taxa de triglicerídeos no sangue, entre outros.",
+            "O monitoramento frequente dos níveis de glicose sanguínea e pressão arterial dos pacientes com diabetes e hipertensão devem ser feitos apenas pelo médico, uma vez que essas condições podem contribuir para o agravam ento da doença renal crônica, que é diagnosticada por este profissional.",
+            "A orientação do paciente hipertenso sobre a importância de reduzir a ingestão de sal, realizar exercícios físicos regulares e adotar uma dieta balanceada deve ser feita, apenas, quando aparecer os primeiros sinais de complicação da hipertensão arterial sistêmica."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Enfermagem",
+          "assunto": "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)",
+          "enunciado": "A dengue faz parte de um grupo de doenças denominadas arboviroses, que se caracterizam por serem causadas por vírus transmitidos por vetores artrópodes. No Brasil, o vetor da dengue é a fêmea do mosquito Aedes aegypti . A q uase totalidade dos óbitos por dengue é evitável e depende, na maioria das vezes, da qualidade da assistência prestada e organização da rede de serviços de saúde. A equipe de enfermagem desempenha um papel muito importante na prevenção, na promoção e no tratamento de saúde, sendo fundamental o conhecimento da doença para oferecer cuidados adequados e eficazes aos pacientes, além da oferta de educação à comunidade para evitar a proliferação do mosquito transmissor. Sobre a dengue, assinale a afirmativa correta.",
+          "alternativas": [
+            "Todas as faixas etárias são igualmente suscetíveis à doença, e indivíduos com condições preexistentes, como mulheres grávidas, lactentes, crianças (até dois anos) e pessoas com mais de 65 anos, não apresentam maiores riscos de desenvolver complicações pela doença.",
+            "As formas mais comuns de transmissão são por via vertical (de mãe para filho durante a gestação) e por transfusão de sangue.",
+            "O tratamento mais indicado é a automedicação com uso de analgésicos e antitérmicos para controle da dor e da febre.",
+            "Em períodos fora da sazonalidade da doença, as ações preventivas que devem ser adotadas são uso de telas nas janelas e repelentes em áreas de reconhecida transmissão; remoção de recipientes nos domicílios que possam se transformar em criadour os de mosquitos; vedação dos reservatórios e caixas de água; desobstrução de calhas, lajes e ralos; participação na fiscalização das ações de prevenção e controle da dengue executadas pelo Sistema Único de Saúde.",
+            "A urbanização, o crescimento desordenad o da população, o saneamento básico deficitário e os fatores climáticos não afetam a presença do vetor e nem a dinâmica de transmissão desses arbovírus, pois a dengue possui padrão constante, com controle do número de casos e risco para epidemias em todos os meses do ano."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "Quanto à aferição da pressão arterial não invasiva, de acordo com as Diretrizes Brasileiras de Hipertensão Arterial (2020), avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Indica-se estimar o nível da pressão arterial sistólica pela palpação do pulso radial. ( ) Deve-se determinar a pressão sistólica no aparecimento dos sons (fase I de Korotkoff). ( ) Deve-se determinar a pressão diastólica no desaparecimento dos sons (fase V de Korotkoff). ( ) É indicado arredondar os valores aferidos para dígitos terminados em zero ou cinco (Ex.: 120/80 mmHg). As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – V – F – F.",
+            "V – V – F – F.",
+            "V – F – V – V.",
+            "V – V – V – F.",
+            "F – F – F – F."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "Os produtos para a saúde utilizados em procedimentos diagnósticos e terapêuticos são classificados de acordo com o risco de transmissão de infecção. Com base na RDC nº 15/2012 da Anvisa, avalie as afirmativas a seguir que tratam dos tipos de produtos processáveis para saúde. I. Os produtos para saúde semicríticos devem ser submetidos à limpeza e desinfecção de alto nível. II. Os produtos para saúde semicríticos são aqueles que entram em contato com mucosas ou pele não íntegra. III. Os produtos para saúde críticos devem ser obrigatoriamente limpos e esterilizados. IV. Os produtos para saúde não críticos são aqueles que entram em contato com a pele íntegra e devem ser limpos e esterilizados. Estão corretas as afirmativas",
+          "alternativas": [
+            "I, II e III, apenas.",
+            "II e IV, apenas.",
+            "I e II, apenas.",
+            "III e IV, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "Leia as situações a seguir e analise a adequação dos métodos de desinfecção empregados. Nessa análise, considere os conceitos de desinfecção de alto nível e de nível intermediário, conforme definidos na RDC nº 15/2012 da Anvisa, que regulamenta o processamento de produtos para a saúde. I. Um endoscópio flexível foi submetido à limpeza manual, seguida de desinfecção química com um agente que destrói microbactérias e esporos bacterianos. II. Uma cama hospitalar foi desinfetada com solução à base de hipoclorito de sódio 0,5%. III. Um nebulizador utilizado foi desinfetado com álcool etílico 70%. IV. Um termômetro digital foi desinfetado com álcool etílico 70%. Estão corretas, de acordo com a RDC nº 15/2012 da ANVISA, as situações",
+          "alternativas": [
+            "I, II e III, apenas.",
+            "I, II e IV, apenas.",
+            "II e III, apenas.",
+            "I, II, III e IV.",
+            "I, III e IV, apenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "Sobre os requisitos para o processamento de produtos para saúde, de acordo com a RDC nº 15/2012 da Anvisa, analise as afirmativas a seguir. I. Não é permitido o uso de embalagens de papel kraft, assim como de envelopes de plástico transpar ente, que não sejam especificamente destinados ao uso em equipamentos de esterilização. II. Não é permitido o uso de caixas metálicas sem furos para esterilização de produtos para saúde. III. O papel grau cirúrgico não é compatível com esterilização a vapor. IV. As embalagens utilizadas para esterilização devem estar regularizadas junto à Anvisa para o uso específico. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I e III, apenas.",
+            "I, II e IV.",
+            "II, III e IV.",
+            "III e IV, apenas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "Um paciente foi diagnosticado com tuberculose pulmonar ativa e está internado em um hospital. A conduta do técnico de enfermagem que reflete corretamente o controle de infecção na situação citada é",
+          "alternativas": [
+            "usar máscara N95 ou equivalente, avental descartável e luvas, realizando a higienização das mãos antes e após o contato com o paciente.",
+            "usar apenas luvas descartáveis durante o atendimento, uma vez que o contato direto com secreções é mínimo.",
+            "higienizar as mãos antes e após o contato com o paciente, utilizando máscara cirúrgica comum e luvas para proteger -se de partículas respiratórias.",
+            "manter o paciente em quarto coletivo com outros pacientes que tenham diagnósticos similares, utilizando apenas avental descartável durante o atendimento.",
+            "colocar o paciente em precaução de contato apenas se ele apresentar secreções visíveis, não sendo necessário o uso de máscara pelo técnico de enfermagem."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro Cirúrgico",
+          "enunciado": "A atuação do técnico de enfermagem nos períodos pré-operatório, transoperatório e pós-operatório é essencial para a segurança do paciente e o sucesso do procedimento cirúrgico. Assinale a afirmativa que representa uma prática a ser aplicada na situação descrita.",
+          "alternativas": [
+            "No pré -operatório, realizar a tricotomia no centro cirúrgico imediatamente antes da indução anestésica, utilizando lâmina de barbear.",
+            "No transoperatório, garantir que as contagens de compressas e instrumentos sejam realizadas exclusivamente pelo enfermeiro circulante, sem necessidade de acompanhamento do técnico de enfermagem.",
+            "No pós -operatório imediato, priorizar a aplicação de cobertores térmicos para prevenir hipotermia, mesmo antes de avaliar os sinais vitais do paciente.",
+            "No pré-operatório, dispensar a confirmação da lateralidade ou do local cirúrgico, considerando que isso já é verificado pelo cirurgião antes do procedimento.",
+            "No pós -operatório, auxiliar na mobilização precoce do paciente, sempre respeitando as orientações específicas da equipe médica e da de enfermagem. Realização"
+          ],
+          "correta": "E"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-abreu-e-lima2024-enfermeiro-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Prefeitura Municipal de Abreu e Lima",
+      "cargo": "Enfermeiro — Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/enfermeirocns201-tipo-1_0.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/pref_abreuelima_gabarito_definitivo_da0a4fs131.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Os adjetivos podem ser empregados com gradação, nos graus comparativo e superlativo. Assinale a frase que se mostra no grau comparativo.",
+          "alternativas": [
+            "O presidente é mais falante que atuante.",
+            "O ministro é o mais simpático do grupo.",
+            "Os batedores de carteira são rapidíssimos.",
+            "Todos os alunos são muito inteligentes.",
+            "Nem todos os secretários são bastante cultos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Observe o seguinte texto descritivo: “O pessegueiro estava alto, mas suas folhas mostravam uma coloração amarelada, que parecia problemática; os galhos estavam cobertos de uma espécie de farinha branca e os poucos frutos ainda estavam pequenos”. Sobre esse pequeno texto, assinale a afirmativa correta.",
+          "alternativas": [
+            "Texto de conteúdo concreto acumulativo, o que dificulta a apreensão de uma unidade global.",
+            "Texto de conteúdo abstrato, com justaposição de ideias para a construção da ideia global do objeto descrito.",
+            "Texto cujo observador segue uma estratégia de movimento de longe para perto.",
+            "Texto em que predomina a inform ação de fatos, situações e acontecimentos.",
+            "Texto cujos segmentos mostram relação lógica de causa e efeito, mostrando sequência cronológica."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "As frases abaixo falam de um aspecto da arte de escrever. Assinale a opção em que esse aspe cto não está corretamente identificado.",
+          "alternativas": [
+            "O mais importante não é o número de ideias agrupadas em seu texto, mas o vínculo que as une / as relações de coesão e coerência entre as partes do texto.",
+            "O que é bem-dito, diz-se com rapidez / a concisão text ual, ou seja, utilização somente dos elementos textuais necessários.",
+            "Devemos falar como nos testamentos: quanto menos palavras, menos questões / o texto deve ser construído com verdades e não com a imaginação.",
+            "A chave para a criatividade é fazer co nexões inusitadas / um texto criativo é o que busca a originalidade.",
+            "Palavras são uma barreira à comunicação / as palavras não conseguem expressar o conteúdo individual do enunciador."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase abaixo em que o vocábulo melhor mostra uma classe gramatical diferente das demais.",
+          "alternativas": [
+            "Dinheiro é o melhor cosmético.",
+            "A melhor forma de emagrecer é ser mãe em tempo integral.",
+            "Se há alguma coisa que queremos mudar em uma criança, devemos primeiro verificar se não é melhor fazer essa mudança em nós mesmos.",
+            "Não há melhor amigo nem parente do que nós mesmos.",
+            "As aulas presenciais ensinam melhor que as aulas à distância."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Entre as frases abaixo, assinale aquela em que a substituição proposta é adequada, por tratar -se do único caso de adjunto adnominal.",
+          "alternativas": [
+            "Poetas são engarrafadores de nuvens (nebulosos).",
+            "A arte, mesmo a mais pessimista, é uma proposição de felicidade (feliz).",
+            "Como faço uma escultura? Simp lesmente retiro do bloco de mármore (marmóreo) tudo o que não é necessário.",
+            "A necessidade de dinheiro (monetária) traz grandes dificuldades às famílias pobres.",
+            "A arte é a busca do dispensável (inútil)."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "As formas de particípio sã o classificadas, em muitos casos, como adjetivos. Assinale a frase em que a forma sublinhada corresponde à de um particípio, sem equivaler a um adjetivo, substantivado ou não.",
+          "alternativas": [
+            "Não é raro ver -se, nas grandes crises da vida, os órgãos humanos adquirirem uma sensibilidade desconhecida.",
+            "Ainda bem que você é meu filho, senão eu iria me sentir desconfortável emprestando todo este dinheiro a um desconhecido.",
+            "Descobri que eu era um bebê não desejado quando vi meus brinquedos de banheira: uma torradeira e um rádio.",
+            "Um irmão é um amigo dado pela natureza.",
+            "Só conheço três maneiras de existir na sociedade: sendo mendigo, ladrão ou assalariado."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Nas frases abaixo há dois adjetivos sublinhados. Assinale a frase em que esses adjetivos exercem uma função sintática diferente.",
+          "alternativas": [
+            "Afinal, o que é Deus? Uma eterna criança brincando eternamente no jardim eterno.",
+            "Eu tive uma grande vantagem que meus filhos não tiveram. Eu nasci pobre.",
+            "A juventude é coisa suspeita mesmo quando a fidelidade é certa.",
+            "Com dinheiro pode-se construir uma casa esplêndida, mas não uma boa família.",
+            "Mães são necessidade biológica. Os pais, uma intervenção social."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Nas abreviaturas comuns há uma série de princípios que são seguidos no uso. Assinale a opção abaixo em que o exemplo dado corresponde ao princípio colocado anteriormente.",
+          "alternativas": [
+            "A ordem das letras do vocábulo deve ser obedecida: general / gal.",
+            "Por motivo de clareza, devem -se incluir na abreviatura todas as consoantes finais na parte abreviada: superfície / super.",
+            "O plural de uma abreviatura é feito com a repetição dessa letra: páginas / pp.",
+            "As abreviaturas mantêm os acentos das palavras originais: árabe / ar.",
+            "Uma abreviatura não deve terminar em vogal: Vossa Excelência / V. Exa."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase abaixo que não exemplifica a substantivação de um adjetivo.",
+          "alternativas": [
+            "O permitido não me agrada; o proibido excita o meu desejo.",
+            "Para conseguir o maravilhoso, faça o impensável.",
+            "A sorte nem sempre favorece os mais dignos.",
+            "Não há solidão mais solitária do que a desconfiança.",
+            "O arranhado da mesa foi causado pela transportadora."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Segundo o gramático Celso Cunha, os adjetivos mostram os seguintes valores: uma qualidade, uma característica, um estado ou uma relação. Assinale a frase em que o adjetivo sublinhado é classificado como adjetivo de estado.",
+          "alternativas": [
+            "Nunca se deite irritado. Levante-se e lute.",
+            "Nada há tão difícil que, procurando -o, não possa ser encontrado.",
+            "Considerando-se eles sábios, tornaram-se imbecis.",
+            "É instintivo da mente humana que aquilo que mais se proíbe ao homem, mais ele deseja.",
+            "Os homens sábios não perdem tempo com insetos. Raciocínio Lógico Matemático"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Argumentação Lógica",
+          "enunciado": "Numa aula de raciocínio lógico o professor afirma que tem um gato, um cachorro e um papagaio. Ele propõe à turma o seguinte desafio. “Um dos animais se chama Farinha, ou outro, Farofa, e o terceiro, Farelo. Considerem que, das três afirmações I, II e III, a seguir, apenas uma é verdadeira: I. Farinha é o gato. II. Farofa não é o gato. III. Farelo não é o cachorro. Identifiquem os nomes do gato, do cachorro e do papagaio.” Flávia, a aluna mais esperta, respondeu corretamente que Farinha, Farofa e Farelo são, respectivamente, os nomes",
+          "alternativas": [
+            "do gato, do cachorro e do papagaio.",
+            "do cachorro, do gato e do papagaio.",
+            "do gato, do papagaio e do cachorro.",
+            "do papagaio, do gato e do cachorro.",
+            "do cachorro, do papagaio e do gato."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Uma urna contém 5 bolas azuis, 6 bolas brancas, 7 bolas verdes e 7 bolas pretas. O número mínimo de bolas que devem ser retiradas, às cegas, para que se possa garantir que, entre as bolas retiradas, há ao menos uma de cada cor é igual a",
+          "alternativas": [
+            "17.",
+            "18.",
+            "19.",
+            "20.",
+            "21."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "No jogo de basquetebol, cada cesta conseguida pode valer 1, 2 ou 3 pontos para a equipe que marcou a cesta. Ganha a partida a equipe que consegue mais pontos. Em uma determinada partida, Jorge “M ão de Ouro” fez 17 cestas e anotou, no total, 36 pontos. Sabe -se, ainda que o número de cestas de 2 pontos que Jorge marcou foi o triplo do número de cestas de 1 ponto que ele conseguiu. Se x é o número de cestas de 1 ponto, y é o número de cestas de 2 pontos e z, o de cestas de 3 pontos conseguidos por Jorge, então o produto xyz é igual",
+          "alternativas": [
+            "108.",
+            "120.",
+            "134.",
+            "135.",
+            "180."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Em uma família composta por dez pessoas, seis torcem para o Vainafé F.C. e quatro torcem para o Contrarolo F.C. A família ganhou quatro ingressos para o próximo jogo da seleção brasileira e vai escolher dois torcedores do Vainafé e dois do Contrarolo para irem ao referido jogo. O número de diferentes possibilidades de se escolher os quatro membros é igual a",
+          "alternativas": [
+            "18.",
+            "24.",
+            "48.",
+            "60.",
+            "90."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos",
+          "enunciado": "Se nem todo A é B, mas todo B é C, avalie se é verdade que I. Nem todo C é B. II. Pode ser que todo A seja C. III. Todo B é A. Está correto o que se afirma em",
+          "alternativas": [
+            "II, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Daqui a 16 anos, João terá a idade que Fábio tem hoje. Daqui a 32 anos, Fábio terá o dobro da idade atual de João. Se dividirmos a idade atual de João pela idade atual de Fábio obtemos",
+          "alternativas": [
+            "0,50.",
+            "0,66.",
+            "0,75.",
+            "0,80.",
+            "0,82."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sequências e Padrões",
+          "enunciado": "Na sequência a seguir, cada termo a partir do terceiro é obtido a partir dos dois termos anteriores com base em uma mesma regra aritmética. 3, 4, 7, 11, 18, 29, ... Assim, o décimo quinto termo dessa sequência é igual a",
+          "alternativas": [
+            "1364.",
+            "1876.",
+            "2207.",
+            "3571.",
+            "6778."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Uma ‘capicua’ é um número que lido de trás para a frente é igual ao número original. Por exemplo, 121 e 234432 são ‘capicuas’. O número de ‘capicuas’ de quatro algarismos que podem ser formados usando-se os algarismos 0, 1, 2, 3, 4 e 5 é igual a",
+          "alternativas": [
+            "16.",
+            "30.",
+            "48.",
+            "60.",
+            "90."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equivalências e Negações",
+          "enunciado": "A negação de “Se x > 0 então y > 3” é",
+          "alternativas": [
+            "x ≤ 0 e y ≤ 3.",
+            "x > 0 e y ≤ 3.",
+            "x > 0 ou y > 3.",
+            "y ≤ 3.",
+            "x ≤ 0 ou y ≤ 3."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Os objetivos específicos da Política Nacional de Promoção da Saúde incluem os seguintes, à exceção de um. Assinale-o.",
+          "alternativas": [
+            "Incorporar e implementar ações de promoção da saúde, com ênfase na atenção especializada.",
+            "Ampliar a autonomia e a corresponsabilidade de sujeitos e coletividades, inclusive o poder público, no cuidado integral à saúde e minimizar e/ou extinguir as desigualdades de toda e qualquer ordem (étnica, racial, social, regional, de gênero, de orientação/opção sexual, entre outras).",
+            "Promover o entendimento da concepção ampliada de saúde, entre os trabalhadores de saúde, tanto das atividades -meio, como os da atividades-fim.",
+            "Contribuir para o aumento da resolubilidade do Sistema, garantindo qualidade, eficácia, eficiência e segurança das ações de promoção da saúde.",
+            "Valorizar e otimizar o uso dos espaços públicos de convivência e de produção de saúde para o desenvolvimento das ações de promoção da saúde."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Enfermagem",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Avalie as afirmativas a seguir, relativas à Atenção Primária à Saúde: I. É o primeiro nível de atenção em saúde e se caracteriza por um conjunto de ações de saúde, no âmbito individual e coletivo, que abrange a promoção e a proteção da saúde, a prevenção de agravos, o diagnóstico, o tratamento, a reabilitação, a redução de danos e a manutenção da saúde com o objetivo de desenvolver uma atenção integral que impacte positivamente na situação de saúde das coletividades. II. Trata-se de uma porta secundária de entrada do Sistema Único de Saúde (SUS) e do centro de comunicação com toda a Rede de Atenção dos SUS. III. Deve se orientar pelos princípios da universalidade, da acessibilidade, da continuidade do cuidado, da integralidade da atenção, da responsabilização, da humanização e da equidade. IV. Há diversas estratégias governamentais relacionadas, sendo uma delas a Estratégia de Saúde da Família (ESF), que leva serviços multidisciplinares às comunidades por meio das Unidades de Saúde da Família (USF), por exemplo. Consultas, exames, vacinas, radiografias e outros procedimentos são disponibilizados aos usuários nas USF. Estão corretas as afirmativas",
+          "alternativas": [
+            "I e II, apenas.",
+            "I, III e IV, apenas.",
+            "II, III e IV, apenas.",
+            "I, II e III, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Controle Social no SUS",
+          "enunciado": "Avalie se os direitos dos usuários do SUS incluem, entre outros: I. Todo cidadão tem direito ao acesso ordenado e organizado aos sistemas de saúde. II. Todo cidadão tem direito a tratamento adequado e efetivo para seu problema. III. Todo cidadão tem direito ao atendimento humanizado, acolhedor e livre de qualquer discriminação. IV. Todo cidadão tem direito a atendimento que respeite a sua pessoa, seus valores e seus direitos. V. Todo cidadão também tem responsabilidades para que seu tratamento aconteça da forma adequada. VI. Todo cidadão tem direito ao comprometimento dos gestores da saúde para que os princípios anteriores sejam cumpridos. Estão corretos:",
+          "alternativas": [
+            "I, II, III e IV, apenas.",
+            "III, IV, V e VI, apenas.",
+            "I, III, IV, V e VI, apenas.",
+            "II, III, IV, V e VI, apenas.",
+            "I, II, III, IV, V e VI."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Política Nacional de Humanização",
+          "enunciado": "Avalie se a Política Nacional de Humanização é norteada pelos seguintes princípios: I. Horizontalidade. II. Indissociabilidade entre atenção e gestão. III. Protagonismo, corresponsabilidade e autonomia dos sujeitos e coletivos. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Constituição Federal - Saúde",
+          "enunciado": "Em relação ao acompanhamento de mulheres nos serviços de saúde, com base na Lei nº 8.080/90, avalie se as afirmativas a seguir são falsas (F) ou verdadeiras (V): ( ) Em consultas, exames e procedimentos realizados em unidades de saúde públicas ou privadas, toda mulher tem o direito de fazer -se acompanhar por pessoa maior de idade, durante todo o período do atendimento, independentemente de notificação prévia. ( ) No caso de atendimento que envolva qualquer tipo de sedação ou rebaixamento do nível de consciência, caso a paciente não indique acompanhante, a unidade de saúde responsável pelo atendimento indicar á pessoa para acompanh á-la, preferencialmente profiss ional de saúde do sexo feminino, sem custo adicional para a paciente, que poderá recusar o nome indicado e solicitar a indicação de outro, independentemente de justificativa, registrando -se o nome escolhido no documento gerado durante o atendimento. ( ) No caso de atendimento realizado em centro cirúrgico ou unidade de terapia intensiva com restrições relacionadas à segurança ou à saúde dos pacientes, devidamente justificadas pelo corpo clínico, somente será admitido acompanhante que seja profissional de saúde. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – F – F.",
+            "F – V – V.",
+            "V – F – V.",
+            "F – V – F.",
+            "V – V – V."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Teorias de Enfermagem",
+          "enunciado": "A teoria de enfermagem que consiste na visão de que o mundo dos indivíduos e as estruturas sociais e culturais influenciam diretamente no seu estado de saúde, doença ou bem estar foi desenvolvida por",
+          "alternativas": [
+            "Wanda Horta.",
+            "Dorothea Orem.",
+            "Imogene M. King.",
+            "Virginia Henderson.",
+            "Madeleine Leininger."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "A Avaliação de Enfermagem é a etapa do Processo de Enfermagem que compreende",
+          "alternativas": [
+            "a análise dos resultados alcançados.",
+            "a coleta de dados subjetivos e objetivos.",
+            "o desenvolvimento de um plano assistencial.",
+            "a identificação de problemas existentes e condições de vulnerabilidades.",
+            "a realização das intervenções, ações e atividades previstas no planejamento assistencial."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Com base na classificação de intervenções de enfe rmagem NIC, uma intervenção do domínio fisiológico complexo é (são)",
+          "alternativas": [
+            "o apoio nutricional.",
+            "os primeiros socorros.",
+            "o controle da eliminação.",
+            "a assistência no autocuidado.",
+            "a administração de medicamentos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "Na Rede de Atenção Psicossocial, a inclusão social das pessoas com transtornos mentais, usuários de drogas e álcool, por meio da construção de espaços de convívio e sustentação das diferenças na comunidade e em variados espaços da cidade, está relacionada ao seguinte componente:",
+          "alternativas": [
+            "Consultório na rua.",
+            "Centro de convivência.",
+            "Unidade de acolhimento.",
+            "Programa de volta para casa.",
+            "Serviços de residências terapêuticas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "O transtorno de Borderline é uma psicopatologia caracterizada por sintomas que incluem",
+          "alternativas": [
+            "fadiga, alucinações auditivas, pensamentos suicidas, estupor hipertônico e hipersomnia.",
+            "ideação negativa, déficit de atenção e concentração, delírio de culpa, diminuição da libido e insônia.",
+            "instabilidade emocional, sensação de inutilidade, insegurança, impulsividade e relações sociais prejudicadas.",
+            "tristeza, delírio hipocondríaco, apatia, sentimento de tédio e irritabilidade aumentada a ruídos.",
+            "estupor hipertônico, lentificação psicomotora, mutismo, delírio de inexistência e choro fácil."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Enfermagem",
+          "assunto": "Eletrocardiograma (ECG)",
+          "enunciado": "No atendimento a um paciente com sinais e sintomas sugestivos de Síndrome Coronariana Aguda, uma das condutas recomendadas é a realização de ECG de 12 derivações em até",
+          "alternativas": [
+            "5 minutos da admissão.",
+            "7 minutos da admissão.",
+            "10 minutos da admissão.",
+            "12 minutos da admissão.",
+            "15 minutos da admissão."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Com base na avaliação e manejo do paciente idoso com diabetes, a meta de glicemia em jejum para um paciente frágil ou comprometido que apresente, entre outros sinais clínicos, limitação funcional e alterações cognitivas é",
+          "alternativas": [
+            "60 – 100 mg/dL.",
+            "70 – 120 mg/dL.",
+            "80 – 130 mg/dL.",
+            "90 – 150 mg/dL.",
+            "100 – 180 mg/dL."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "De acordo com as disposições da ANVISA, um produto médico enquadrado como de uso único cujo reprocessamento é proibido é",
+          "alternativas": [
+            "o ambu.",
+            "a cânula de Guedel.",
+            "o macronebulizador.",
+            "a máscara de nebulização.",
+            "o cateter de balão intra-aórtico."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo Ético-Disciplinar",
+          "enunciado": "Um profissional de enfermagem cometeu uma infração e foi punido com multa correspondente a 6 vezes o valor da anuidade da sua categoria profissional, em vigor no ato do pagamento. Nesse caso, é correto afirmar que a punição está",
+          "alternativas": [
+            "de acordo com o Código de Ética, que estabelece multa de até 10 vezes o valor da anuidade da categoria profissional, em vigor no ato do pagamento.",
+            "em desacordo com o Código de Ética, pois a multa deveria ser de até 5 vezes o valor da anuidade da sua categoria profissional, em vigor no ato da infração.",
+            "de acordo com o Código de Ética que estabelece multa de até 6 vezes o valor da anuidade da categoria profissional, em vigor no ato da infração.",
+            "em desacordo com o Código de Ética, pois a multa não deveria ultrapassar 4 vezes o valor da anuidade da sua categoria profissional, em vigor no ato do pagamento.",
+            "de acordo com o Código de Ética que estabelece multa de até 9 vezes o valor da anuidade da categoria profissional, em vigor no ato do pagamento."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Enfermagem",
+          "assunto": "Gerenciamento de Resíduos de Serviços de Saúde (GRSS)",
+          "enunciado": "Acerca do descarte dos Resíduos de Serviços de Saúde resultantes de atividades de vacinação com microrganismos vivos, atenuados ou inativados, de bolsas de sangue e de amostra biológicas, assinale V para a verdadeira e F para a falsa. ( ) As agulhas e o conjunto seringa-agulha utilizados na aplicação de vac inas, quando não desconectadas, devem atender às regras de manejo dos resíduos perfurocortantes. ( ) As bolsas de sangue e de hemocomponentes rejeitadas por contaminação ou por má conservação devem ser tratadas antes da disposição final ambientalmente adequada. ( ) As sobras de amostras de laboratório contendo sangue ou líquidos corpóreos podem ser descartadas diretamente no sistema de coleta de esgotos, desde que atendam as regras estabelecidas pelos órgãos competentes. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – F – V.",
+            "F – V – F.",
+            "V – V – V.",
+            "F – F – F.",
+            "V – V – F. Realização"
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-canaa2025-enfermeiro-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Prefeitura Municipal de Canaã dos Carajás",
+      "cargo": "Enfermeiro — Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/enfermeirocns201-tipo-1_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/prefcanaa202403_gabarito_definitivo-compilado-06.04_0.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "A respeito da frase “A rua serve para a criança como uma escola preparatória.” Assinale a afirmativa correta.",
+          "alternativas": [
+            "Serve de justificativa para a afirmação anterior.",
+            "Faz uma analogia explicativa.",
+            "Mostra a educação como uma prioridade.",
+            "É construída com a linguagem de sentido lógico.",
+            "Indica uma possível saída da vida violenta."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tempos, Modos e Vozes Verbais",
+          "enunciado": "Sobre o segmento do texto “Do menino marginal esculpe-se o adulto marginal, talhado diariamente por uma sociedade violenta que lhe nega condições básicas de vida.” Assinale a afirmativa correta.",
+          "alternativas": [
+            "Os vocábulos “esculpe-se” e “talhado” pertencem ao mesmo campo semântico.",
+            "Os pronomes “que” e “lhe” referem-se ao mesmo antecedente (coesão).",
+            "O termo “marginal” mostra sentidos diferentes nas duas ocorrências.",
+            "Os termos “menino marginal” e “adulto marginal” mostram uma relação de oposição.",
+            "O termo “nega condições básicas de vida” mostra uma consequência da violência."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "O segundo parágrafo do texto repete ou se refere a termos do primeiro parágrafo. Assinale a opção que indica os termos que não mostram correspondência.",
+          "alternativas": [
+            "menino marginal / garoto abandonado.",
+            "adulto marginal / adulto abandonado.",
+            "sociedade violenta / sociedade injusta.",
+            "nega condições básicas de vida / não consegue garantir um mínimo de paz social.",
+            "diariamente / de amanhã."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Uso dos Porquês",
+          "enunciado": "Há duas passagens do texto em que o termo porque está corretamente empregado. - “Paz social significa poder andar na rua sem ser incomodado por pivetes. Isso porque num país civilizado não existe pivete.” - “ Entender a infância marginal significa entender por que um menino vai para a rua e não para a escola.” Assinale a opção em que esse termo é usado de forma incorreta.",
+          "alternativas": [
+            "O ponto de vista por que se analisa essa questão é bastante diferente.",
+            "Por que um país do Terceiro Mundo é tão diferente?",
+            "Não se sabe o porquê de tantas diferenças.",
+            "Queria saber por que alguns países são tão infelizes.",
+            "O Brasil não pertence ao Terceiro Mundo por que quer."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Sintaxe da Oração e do Período",
+          "enunciado": "Analise a frase a seguir. “E essa é a diferença entre um país desenvolvido e um país de Terceiro Mundo.” Sobre a estruturação e o significado dessa frase, assinale a afirmativa correta.",
+          "alternativas": [
+            "A frase final mostra uma conclusão reducionista.",
+            "O demonstrativo “essa” deveria ser substituído por “esta”.",
+            "A frase se refere a todas as diferenças apontadas no texto.",
+            "“Um país do Terceiro Mundo” se refere a qualquer país da América Latina.",
+            "A oposição entre “desenvolvido” e “Terceiro Mundo” é feita com antônimos. Raciocínio Lógico Matemático"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Aline, Berenice e Cristiana estão paradas, com Aline entre as outras duas, em linha reta. A distância de Aline até Berenice é o triplo da distância de Aline até Cristiana. A distância de Berenice até Cristiana é de 14 metros, portanto a distância que separa Aline de Berenice é de",
+          "alternativas": [
+            "12,0 metros.",
+            "10,5 metros.",
+            "8,0 metros.",
+            "7,0 metros.",
+            "3,5 metros."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "A partir de um conjunto de 5 atletas {A, B, C, D e E}, serão formadas duas duplas para jogarem uma contra a outra e um dos atletas não jogará por ficar sem dupla. Isso pode ser feito de mais de uma forma, como, por exemplo: {D, B} contra {C, A} ou seja, os atletas B e D compõem uma das duplas, os atletas A e C formam a outra dupla e o jogador E ficará sem jogar. A quantidade total de formas distintas de se dividir os atletas de acordo com a descrição acima é",
+          "alternativas": [
+            "15.",
+            "16.",
+            "30.",
+            "32.",
+            "36."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "A média aritmética de 3 números inteiros positivos distintos é 16. Suprimindo-se o menor deles, a média aritmética dos dois números remanescentes é 18. Suprimindo-se o maior deles, a média aritmética dos dois números remanescentes é 14,5. A mediana desses três números é",
+          "alternativas": [
+            "13.",
+            "14.",
+            "15.",
+            "16.",
+            "17."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Em uma urna inicialmente vazia, foram colocadas 3 bolas azuis, 2 bolas vermelhas e N bolas pretas. Nessas condições, se uma bola for sorteada ao acaso, a probabilidade de ela não ser azul é 80%. É correto afirmar que N é igual a",
+          "alternativas": [
+            "3.",
+            "4.",
+            "5.",
+            "8.",
+            "10."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Uma indústria produz caixas em 3 tamanhos diferentes: pequena, média e grande. A massa em gramas de três caixas médias é igual às massas em gramas de uma caixa grande e uma caixa pequena somadas. A massa em gramas de uma caixa grande equivale à massa em gramas de cinco caixas pequenas juntas. Se uma caixa média tem 360 gramas, a massa de uma caixa pequena é",
+          "alternativas": [
+            "210 g.",
+            "180 g.",
+            "120 g.",
+            "90 g.",
+            "60 g."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos",
+          "enunciado": "Em certo país, 60% das pessoas falam apenas o idioma nativo. O restante da população fala o idioma nativo e, pelo menos, mais um idioma: francês ou italiano. Entre os que falam mais de um idioma 75% falam francês. Se nenhum habitante desse país fala qualquer outro idioma além dos três citados, a porcentagem da população desse país que fala apenas italiano, além da língua nativa, é",
+          "alternativas": [
+            "4%.",
+            "5%.",
+            "6%.",
+            "8%.",
+            "10%."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Um torneio de tênis de mesa será disputado por 65 jogadores. Em cada partida, dois jogadores se enfrentam e o vencedor continua no torneio, enquanto o perdedor é eliminado. Os jogos continuam até que um dos jogadores seja o campeão. Assim, esse torneio terá a seguinte quantidade de jogos:",
+          "alternativas": [
+            "32.",
+            "38.",
+            "64.",
+            "92.",
+            "124."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equivalências e Negações",
+          "enunciado": "Considere verdadeira a seguinte proposição: “Se hoje é terça-feira, então hoje eu não trabalho.” Essa proposição é equivalente à proposição",
+          "alternativas": [
+            "“Se hoje não é terça-feira, então hoje eu trabalho.”",
+            "“Se hoje não é terça-feira, então hoje eu não trabalho.”",
+            "“Se hoje eu não trabalho, então hoje é terça-feira.”",
+            "“Se hoje eu trabalho, então hoje não é terça-feira.”",
+            "“Hoje é terça-feira e hoje eu não trabalho.”"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Um psicólogo assistiu no Youtube um podcast sobre noções de informática. O apresentador informou que um byte é composto por 8 bits contíguos, e perguntou aos expectadores qual era o número máximo de combinações possíveis de bits em um único byte. Assinale a resposta correta.",
+          "alternativas": [
+            "128.",
+            "256.",
+            "512.",
+            "1024.",
+            "2048."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Informática",
+          "assunto": "Windows",
+          "enunciado": "O recurso de múltiplas áreas de trabalho do Windows 10 permite que os usuários compartimentalizem suas tarefas, reduzindo a desordem e minimizando distrações. Assinale a opção que indica a tecla usada para acionar o recurso.",
+          "alternativas": [
+            "Alt + Tab.",
+            "Alt + Shift.",
+            "logotipo do Windows + S.",
+            "logotipo do Windows + Tab.",
+            "logotipo do Windows + Shift."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Informática",
+          "assunto": "Correio Eletrônico",
+          "enunciado": "Um estagiário da Secretaria de Saúde digitava um e-mail no Outlook em que todas as letras do e-mail apareciam em letras maiúsculas. Ele mantinha pressionada a tecla SHIFT enquanto digitava seu texto. Outra forma de fazer isso, seria pressionar uma única vez a tecla",
+          "alternativas": [
+            "Tab.",
+            "AltGr.",
+            "Num Lock.",
+            "Caps Lock.",
+            "Scroll Lock."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Informática",
+          "assunto": "Microsoft Word",
+          "enunciado": "Um profissional de saúde necessita proteger um laudo com exames médicos em um arquivo no MS Word (versão Office 365). Considerando como referencial a opção proteger documento do menu informações e um arquivo .docx, analise as afirmativas a seguir. I. A opção sempre abrir como somente leitura evita alterações acidentais, pedindo aos leitores que optem pela edição. II. A opção criptografar com senha protege o documento com uma senha. III. A opção adicionar uma assinatura digital garante a integridade do documento adicionando uma assinatura digital invisível. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Com relação aos arquivos do tipo gráfico , analise as afirmativas a seguir I. Gráficos rasterizados guardam e exibem uma imagem como elementos geométricos simples tais como linhas, círculos, e polígonos em vez de uma coleção de pixels. II. Gráficos vetoriais são imagens feitas de pixels, pequenos quadrados coloridos que, em grande quantidade, podem formar imagens altamente detalhadas, como fotografias. III. Arquivos com extensão JPEG, GIF e PNG são gráficos do tipo rasterizados. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "III, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Writer é o componente de processamento de textos do LibreOffice. Para evitar que duas palavras sejam separadas no final de uma linha, as teclas a serem acionadas quando for teclar o espaço entre as duas palavras é",
+          "alternativas": [
+            "Backspace.",
+            "Ctrl+Shift.",
+            "Alt+Shift.",
+            "Space.",
+            "Tab."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "O Impress é o programa de apresentação de slides incluído no LibreOffice. Assinale a opção que apresenta o formato de arquivo padrão adotado pelo programa.",
+          "alternativas": [
+            "PPTX.",
+            "PPT.",
+            "ODT.",
+            "ODP.",
+            "ODI."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Leia atentamente o trecho a seguir. Dispositivo de armazenamento de dados portátil e removível constituído por uma memória flash com possibilidade de conexão a uma porta USB do computador. As capacidades de armazenamento variam de MB até GB. Assinale a opção que indica o dispositivo descrito no trecho acima.",
+          "alternativas": [
+            "Memória cache.",
+            "Pen drive.",
+            "Disquete.",
+            "CD-ROM.",
+            "DVD."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "A memória não volátil que pode ser programada fora da fábrica em que é produzida e pode ter seu conteúdo apagado e regravado por meio de processos especiais pela aplicação de luz ultravioleta, é conhecida como",
+          "alternativas": [
+            "RAM.",
+            "SRAM.",
+            "DRAM.",
+            "ROM.",
+            "EPROM. Módulo II – Conhecimentos Específicos"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Princípios e Diretrizes",
+          "enunciado": "A respeito das diretrizes para a promoção, proteção e recuperação da saúde, bem como a organização e o funcionamento do Sistema Único de Saúde (SUS), considerando as disposições da Lei nº 8.080/1990, assinale a afirmativa correta.",
+          "alternativas": [
+            "A participação direta ou indireta, inclusive controle, de empresas ou de capital estrangeiro na assistência à saúde é vedada em qualquer caso.",
+            "A participação da comunidade na gestão do SUS é facultativa, podendo ser implementada conforme a disponibilidade de cada município.",
+            "Uma das competências da gestão municipal do SUS é participar da execução, do controle e da avaliação das ações referentes às condições e aos ambientes de trabalho.",
+            "A descentralização político-administrativa tem como objetivo a organização dos serviços públicos de modo a evitar duplicidade de meios para fins idênticos.",
+            "Entre os princípios do SUS está a identificação e a divulgação dos fatores condicionantes e determinantes da saúde."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Acerca das estratégias, ações e programas do Sistema Único de Saúde (SUS), assinale a afirmativa correta.",
+          "alternativas": [
+            "O Programa Nacional de Imunizações (PNI) inclui a vacinação contra a maioria das doenças negligenciadas, com exceção de hanseníase e tuberculose.",
+            "O Programa Farmácia Popular do Brasil oferece medicamento de forma subsidiada para o tratamento de diabetes mellitus associada à doença cardiovascular, além de fraldas geriátricas para incontinência.",
+            "O Programa Saúde da Família (PSF), agora denominado Estratégia Saúde da Família (ESF), é a porta de entrada mais importante do SUS, com foco na promoção da saúde e na média complexidade.",
+            "Os Centros de Convivência são residências temporárias para pessoas com necessidades decorrentes do uso de álcool e outras drogas, acompanhadas nos CAPS, que necessitem de acolhimento terapêutico.",
+            "O Método Canguru é considerado a abordagem mais adequada para atenção ao recém-nascido (RN) pré-termo, porém é inadequado para recém-nascidos de baixo peso e muito baixo peso."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Princípios e Diretrizes",
+          "enunciado": "Embora todas as pessoas tenham direito aos serviços de saúde, elas não são iguais e, portanto, possuem necessidades diferentes. Nesse sentido, assinale a opção que indica o princípio do SUS que trata desigualmente os desiguais, investindo mais onde a carência é maior.",
+          "alternativas": [
+            "Equidade.",
+            "Igualdade.",
+            "Integralidade.",
+            "Universalidade.",
+            "Descentralização."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "assunto": "Teorias de Enfermagem",
+          "enunciado": "Assinale a opção que indica o nome da teórica de Enfermagem que propôs que o cuidado de enfermagem deveria ser centrado no atendimento das necessidades humanas básicas, segundo a hierarquia de necessidades de Abraham Maslow.",
+          "alternativas": [
+            "Wanda Horta.",
+            "Imogene King.",
+            "Dorothea Orem.",
+            "Hildegard Peplau.",
+            "Florence Nightingale."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "Uma paciente com transtorno bipolar, que faz uso de Clorpromazina, apresentou queixas como inquietação, movimentos involuntários, espasmos musculares e lentidão dos movimentos. Esses sintomas são característicos de uma reação adversa comum nos neurolépticos. Assinale a opção que a indica.",
+          "alternativas": [
+            "Ataxia sensitiva.",
+            "Discinesia tardia.",
+            "Efeito anticolinérgico.",
+            "Polineuropatia periférica.",
+            "Síndrome extrapiramidal."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Segundo a Classificação Internacional para a Prática de Enfermagem (CIPE), a orientação anatômica ou espacial de um diagnóstico ou intervenção diz respeito ao seguinte eixo:",
+          "alternativas": [
+            "foco.",
+            "ação.",
+            "tempo.",
+            "localização.",
+            "julgamento."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "De acordo com as Diretrizes da Sociedade Brasileira de Diabetes, um dos critérios laboratoriais para o estabelecimento do diagnóstico de pré-diabetes é uma glicemia em jejum entre",
+          "alternativas": [
+            "90-115 mg/dL.",
+            "98-120 mg/dL.",
+            "100-125 mg/dL.",
+            "115-127 mg/dL.",
+            "120-129 mg/dL."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "Os sons de Korotkoff ocorrem durante a medição da pressão arterial por meio do método auscultatório, e indicam o momento em que a artéria é ocluída e liberada. São divididos em fases que representam sua evolução durante a aferição da pressão arterial. Nesse sentido, assinale a opção que corresponde à fase IV.",
+          "alternativas": [
+            "Os sons tornam-se mais crispados.",
+            "Os sons diminuem de intensidade (abafamento).",
+            "Os sons são suaves e longos como um murmúrio intermitente.",
+            "Ocorre o desaparecimento dos sons, que corresponde à PA diastólica.",
+            "Ocorre o aparecimento do primeiro som, que é fraco, seguido por batidas regulares, que corresponde à PA sistólica."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)",
+          "enunciado": "Com base nas manifestações clínicas e no diagnóstico diferencial entre dengue, zika e chikungunya, avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Pacientes com dengue e zika apresentam febre alta (> 38°C), que dura de 2 a 7 dias, enquanto que os pacientes com chikungunya apresentam febre baixa que dura, no máximo, 2 dias. ( ) A ocorrência de exantema e de conjuntivite é comum em pacientes com dengue e rara em pacientes com zika e chikungunya. ( ) Pacientes com chikungunya e dengue normalmente apresentam artralgia e edema articular moderado/intenso. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – V – F.",
+            "F – V – F.",
+            "V – F – V.",
+            "F – F – F.",
+            "V – V – V."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Enfermagem",
+          "assunto": "Gerenciamento de Resíduos de Serviços de Saúde (GRSS)",
+          "enunciado": "Com base nas disposições acerca das Boas Práticas de Gerenciamento dos Resíduos de Serviços de Saúde – RSS, analise as afirmativas a seguir. I. O armazenamento temporário de resíduos deve ser feito em local ventilado, sinalizado e de acesso restrito, até que seja realizada a coleta. II. É permitida a separação do conjunto seringa/agulha com auxílio de dispositivos de segurança, sendo vedada a desconexão e o reencape manual de agulhas. III. Os sacos para acondicionamento de RSS infectantes (grupo A) devem ser substituídos ao atingirem o limite de 2/3 de sua capacidade ou a cada 48 horas. É correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "Sobre os princípios fundamentais da bioética e sua aplicação na prática da Enfermagem, avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) O princípio da beneficência refere-se à obrigação de respeitar a autonomia do paciente, permitindo que ele tome decisões sobre seu próprio tratamento, independentemente das consequências. ( ) O princípio da não maleficência orienta os profissionais de saúde a evitar causar dano ao paciente, buscando sempre promover o bem-estar e minimizar riscos. ( ) O princípio da justiça está relacionado ao dever de priorizar os pacientes com maior gravidade, independentemente de recursos disponíveis ou necessidades individuais. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – F – V.",
+            "F – V – F.",
+            "V – V – V.",
+            "F – F – F.",
+            "V – V – F."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "Em relação ao processamento de produtos para saúde , assinale a afirmativa correta.",
+          "alternativas": [
+            "A esterilização realizada com soluções químicas é ineficaz na eliminação de microrganismos resistentes, como esporos bacterianos.",
+            "A esterilização por óxido de etileno é eficaz para produtos sensíveis ao calor, mas requer cuidados e controles específicos devido à toxicidade do gás.",
+            "Os indicadores químicos são utilizados para monitorar a eficácia do processo de esterilização, garantindo a eliminação de microrganismos altamente resistentes.",
+            "Os indicadores químicos são suficientes para garantir a esterilização de artigos críticos, dispensando o uso de indicadores biológicos em procedimentos de controle de qualidade.",
+            "A esterilização por calor seco é recomendada para produtos de vidro e metal, mas não deve ser utilizada para materiais plásticos, pois esses podem derreter ou deformar devido à alta temperatura."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "De acordo com o Protocolo Clínico e as Diretrizes Terapêuticas para Atenção Integral às Pessoas com Infecções Sexualmente Transmissíveis – IST, o rastreamento para HIV em pessoas com diagnóstico de tuberculose deve ser realizado",
+          "alternativas": [
+            "anualmente.",
+            "semestralmente.",
+            "trimestralmente.",
+            "no momento do diagnóstico.",
+            "antes de iniciar o tratamento."
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}
