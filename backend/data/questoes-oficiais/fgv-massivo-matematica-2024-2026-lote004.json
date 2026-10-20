@@ -1,0 +1,1147 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "fgv-massivo-matematica-2024-2026-lote004",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "fgv-massivo-macae2024-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Prefeitura Municipal de Macaé",
+      "cargo": "Professor C - Matemática - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-c-matematicacns102-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ed.-1-macaeadm2024_gabarito_definitivo_compilado.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 11,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Argumentação Lógica",
+          "enunciado": "Na cidade de Fermentolândia, todos os padeiros são solteiros ou têm ascendência italiana. Considerando essa afirmativa como verdadeira, é correto concluir que,",
+          "alternativas": [
+            "se um cidadão de Fermentolândia é solteiro, mas não tem ascendência italiana, então é padeiro.",
+            "se um cidadão de Fermentolândia tem ascendência italiana, mas não é solteiro, então é padeiro.",
+            "se um cidadão de Fermentolândia é solteiro e tem ascendência italiana, então não é padeiro.",
+            "se um cidadão de Fermentolândia não é solteiro e não tem ascendência italiana, então é padeiro.",
+            "se um cidadão de Fermentolândia não é solteiro e não tem ascendência italiana, então não é padeiro."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Antônio, Benedito e Celestino tinham quantidades distintas de bolas de gude. Antônio passou 5 de suas bolas para Benedito de modo que ambos passaram a ter a mesma quantidade de bolas. Em seguida, Benedito passou 3 de suas bolas para Celestino de modo que cada um dos dois passou a ter 10 bolas de gude. É correto afirmar que, originalmente,",
+          "alternativas": [
+            "Antônio tinha 11 bolas a mais que Celestino.",
+            "Antônio tinha 8 bolas a mais que Benedito.",
+            "Benedito tinha 4 bolas a mais que Celestino.",
+            "Benedito tinha mais de 10 bolas.",
+            "Celestino tinha menos de 5 bolas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sequências e Padrões",
+          "enunciado": "Em uma sequência de números inteiros, a soma dos 𝒏 primeiros números dessa sequência é dada pela fórmula 𝑺𝒏 = 𝟒 − 𝟑𝒏 + 𝒏𝟐 É correto afirmar que tal sequência",
+          "alternativas": [
+            "é estritamente crescente.",
+            "é estritamente decrescente.",
+            "tem algum termo nulo.",
+            "tem algum termo negativo.",
+            "tem algum termo ímpar."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Alípio entra em uma loja de eletrodomésticos para comprar uma cafeteira elétrica e um liquidificador. O vendedor oferece desconto de 10% sobre o preço da cafeteira, que passa a custar o dobro do preço do liquidificador. Alípio aceita a oferta e paga R$ 675,00 pelos dois produtos. O preço original da cafeteira é/está",
+          "alternativas": [
+            "menor que R$ 493,00.",
+            "entre R$ 493,00 e R$ 497,00.",
+            "entre R$ 497,00 e R$ 501,00.",
+            "entre R$ 501,00 e R$ 505,00.",
+            "maior que R$ 505,00."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Considere 3 pontos A, B e C no plano. Se a distância entre os pontos A e B é 80 cm e a distância entre os pontos A e C é 60 cm, então a distância entre os pontos B e C pode valer",
+          "alternativas": [
+            "no mínimo 30 cm e no máximo 150 cm.",
+            "no mínimo 20 cm e no máximo 150 cm.",
+            "no mínimo 30 cm e no máximo 140 cm.",
+            "no mínimo 20 cm e no máximo 140 cm.",
+            "no mínimo 30 cm e no máximo 130 cm."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "O sistema monetário de certo lugar é composto, exclusivamente, por notas de $1, $3, $5 e $15. Com 4 dessas notas nunca será possível obter",
+          "alternativas": [
+            "$20.",
+            "$22.",
+            "$24.",
+            "$25.",
+            "$26."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Em um hexágono regular, a distância entre dois vértices opostos é 5 cm. É correto afirmar que o perímetro desse polígono é",
+          "alternativas": [
+            "12 cm.",
+            "15 cm.",
+            "18 cm.",
+            "24 cm.",
+            "30 cm."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos",
+          "enunciado": "Um conjunto A possui 7 elementos. Outro conjunto B possui 4 elementos. Se a união desses dois conjuntos tem exatos 9 elementos, a interseção de A e B",
+          "alternativas": [
+            "é um conjunto vazio.",
+            "é um conjunto unitário.",
+            "é um conjunto com apenas 2 elementos.",
+            "é um conjunto com apenas 3 elementos.",
+            "é um conjunto com apenas 4 elementos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Em uma caixa, há 2 bolas brancas, 3 bolas azuis e 4 bolas pretas. Celso fecha os olhos para retirar, de forma aleatória, uma a uma, certa quantidade de bolas dessa caixa. Para ter certeza de que, entre as bolas retiradas, haverá pelo menos uma bola de cada cor, Celso deverá retirar, no mínimo,",
+          "alternativas": [
+            "3 bolas.",
+            "4 bolas.",
+            "5 bolas.",
+            "7 bolas.",
+            "8 bolas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Considere as matrizes quadradas com duas linhas e duas colunas cujos elementos são escolhidos no conjunto {–1, 0, 1}. Uma matriz com essas características, em que a soma de todos os seus elementos é positiva,",
+          "alternativas": [
+            "pode ter a mesma quantidade de 0 e de –1.",
+            "pode ter a mesma quantidade de 1 e de –1.",
+            "não pode ter três elementos 0.",
+            "pode ter dois elementos –1.",
+            "tem que ter mais 0 do que –1. Legislação Municipal"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Analítica",
+          "enunciado": "Uma reta 𝒓, perpendicular à reta 𝒔 dada por 𝟐𝒚 − 𝒙 + 𝟐 = 𝟎, contém o ponto (𝟕, 𝟎). O ponto de interseção de 𝒓 e 𝒔 está",
+          "alternativas": [
+            "a duas unidades de comprimento do eixo x.",
+            "a duas unidades de comprimento do eixo y.",
+            "a seis unidades de comprimento do eixo x.",
+            "a seis unidades de comprimento da origem.",
+            "a oito unidades de comprimento da origem."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Um retângulo com dimensões 240cm × 96cm deverá ser completamente coberto por quadrados congruentes, de modo a não ocorrer sobreposição ou espaço entre eles. Uma das possibilidades é cobrir o retângulo com 23.424 quadrados de lado 1cm. Outras possibilidades são usar quadrados menores ou até mesmo usar quadrados maiores. Nesse caso, é correto afirmar que tais quadrados não podem ter seus lados medindo",
+          "alternativas": [
+            "12cm.",
+            "16cm.",
+            "18cm.",
+            "24cm.",
+            "48cm."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Em um jogo de tabuleiro, é necessário avançar 60 casas, desde a casa inicial até a casa final. Só há 2 tipos de movimento: avançar 5 casas ou retroceder 3 casas. A cada jogada, o jogador só pode fazer um tipo de movimento. Sabe-se que só se chega à casa f inal quando, antes do último movimento, o jogador está a 5 casas do fim, ou seja, é necessário percorrer as 5 casas nesse último movimento. Nessas condições, é possível avançar as 60 casas com",
+          "alternativas": [
+            "32 jogadas.",
+            "36 jogadas.",
+            "42 jogadas.",
+            "46 jogadas.",
+            "50 jogadas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Deseja-se produzir 2.000 peças em uma oficina onde há apenas 3 máquinas: uma do modelo super e duas do modelo standard. A máquina super produz exatas 25 peças por minuto, ao passo que as máquinas standard produzem, cada uma, exatas 20 peças, nesse mesmo intervalo de tempo. Para atingir o objetivo, as máquinas trabalharão combinadas em 3 etapas: na primeira etapa, as três são ligadas simul taneamente e permanecem trabalhando juntas durante 18 minutos. Findo esse intervalo, passa-se à segunda etapa, na qual uma das máquinas standard é desligada enquanto as outras duas continuam trabalhando, simultaneamente, durante 12 minutos. Ao fim desse intervalo, começará a terceira e última etapa. Nela, a máquina que fora desligada será religada e a máquina super será desligada. Assim, as duas máquinas standard continuarão trabalhando juntas até que o quantitativo desejado seja alcançado. Nesse caso, a duração da terceira etapa será de",
+          "alternativas": [
+            "8 minutos e 40 segundos.",
+            "8 minutos e 20 segundos.",
+            "7 minutos e 25 segundos.",
+            "7 minutos e 15 segundos.",
+            "6 minutos e 50 segundos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Partindo-se de uma progressão aritmética (𝒂𝒏) de 15 termos constrói-se uma nova sequência numérica (𝒃𝒏) de 11 termos, tal que 𝒃𝒏 = 𝒂𝒏 + 𝟐𝒂𝒏+𝟒. Se 𝒓 é a razão de (𝒂𝒏), então (𝒃𝒏)",
+          "alternativas": [
+            "é uma progressão geométrica de razão 2.",
+            "é uma progressão geométrica de razão 2𝑟.",
+            "é uma progressão aritmética de razão 2𝑟.",
+            "é uma progressão aritmética de razão 3𝑟.",
+            "não é progressão aritmética e nem progressão geométrica."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Um bem pode ser comprado à vista ou em dois pagamentos mensais, iguais e consecutivos, no valor de R$ 2.650,00, sendo o primeiro deles pago no ato da compra. Se o vendedor cobra juros de 6% ao mês no pagamento a prazo, o preço do bem, à vista, é",
+          "alternativas": [
+            "R$ 5.250,00.",
+            "R$ 5.200,00.",
+            "R$ 5.150,00.",
+            "R$ 5.100,00.",
+            "R$ 5.000,00"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Considere os conjuntos de valores inteiros A = {1, 2, 5, 8} e B = {2, 3 ,5, 6}. A respeito das medidas de tendência central e de dispersão, assinale a afirmativa correta.",
+          "alternativas": [
+            "A média de 𝐴 é maior que a de 𝐵, assim como o desvio-padrão de 𝐴 é maior que o de 𝐵.",
+            "A média de 𝐴 é maior que a de 𝐵, mas o desvio-padrão de 𝐵 é maior que o de 𝐴.",
+            "A média de 𝐴 é igual à de 𝐵, assim como o desvio-padrão de 𝐴 é igual ao de 𝐵.",
+            "A média de 𝐴 é igual à de 𝐵, mas o desvio-padrão de 𝐵 é maior que o de 𝐴.",
+            "A média de 𝐴 é igual à de 𝐵, mas o desvio-padrão de 𝐴 é maior que o de 𝐵."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Em um cubo 𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯, as arestas 𝑨𝑩 e 𝑮𝑯 são paralelas, mas não pertencem a uma mesma face do cubo. Se 𝑷 é o ponto médio de 𝑮𝑯, a razão entre os comprimentos do segmento 𝑨𝑷 e da diagonal interna do cubo 𝑨𝑮, nessa ordem, é igual a",
+          "alternativas": [
+            "√2 2⁄",
+            "√3 4⁄",
+            "√3 2⁄",
+            "√5 2⁄",
+            "3 2⁄"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Sejam 𝒓𝟏 e 𝒓𝟐 as raízes da equação 𝒂𝒃𝒙𝟐 − (𝒂𝟐 + 𝒃𝟐)𝒙 + 𝒂𝒃 = 𝟎. Assim, (𝒓𝟏)𝟐 + (𝒓𝟐)𝟐 vale",
+          "alternativas": [
+            "( 𝑎2+𝑏2 2𝑎𝑏 ) 2 − 1",
+            "( 𝑎2+𝑏2 𝑎𝑏 ) 2 − 2",
+            "( 𝑎2−𝑏2 2𝑎𝑏 ) 2 − 1",
+            "( 𝑎2−𝑏2 𝑎𝑏 ) 2 − 2",
+            "( 𝑎+𝑏 𝑎𝑏 ) 2 − 2"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Uma urna contém exatamente seis bolas brancas e duas bolas pretas. Três dessas bolas serão retiradas, simultaneamente, ao acaso. A probabilidade de que, entre as bolas r etiradas, haja ao menos uma branca é",
+          "alternativas": [
+            "maior que 70%.",
+            "maior que 50% e menor que 70%.",
+            "maior que 30% e menor que 50%.",
+            "maior que 10% e menor que 30%.",
+            "menor que 10%."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Em um mapa, um segmento de 25 mm de comprimento representa uma distância real de 8,75 km. A escala desse mapa é de 1 para",
+          "alternativas": [
+            "3.500.",
+            "7.000.",
+            "35.000.",
+            "70.000.",
+            "350.000."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "Sobre os conjuntos numéricos, considere as afirmativas a seguir. I. O produto de dois números irracionais distintos é sempre um irracional. II. O produto de dois números racionais é sempre um racional. III. Todo número racional tem sucessor. Está correto o que se afirma em",
+          "alternativas": [
+            "II, apenas.",
+            "I e II apenas.",
+            "I e III apenas.",
+            "II e III apenas.",
+            "I, II e III."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "O sistema linear { 𝟑𝒙 + 𝟐𝒚 + 𝒛 = 𝟏 𝟐𝒙 + 𝒚 + 𝒛 = 𝟏 𝟐𝒙 + 𝟐𝒚 = 𝒌 só possui solução se 𝒌 vale",
+          "alternativas": [
+            "2",
+            "1",
+            "0",
+            "−1.",
+            "−2."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Um polinômio 𝑷(𝒙), quando dividido por 𝒙 − 𝟏, deixa resto 𝟏 e, quando dividido por 𝒙 + 𝟏, deixa resto −𝟏. Dividindo-se 𝑷(𝒙) por 𝒙𝟐 − 𝟏, o resto obtido é",
+          "alternativas": [
+            "𝑥 − 1",
+            "−1",
+            "1",
+            "−𝑥",
+            "𝑥"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Analítica",
+          "enunciado": "Uma circunferência 𝑪 tem centro em (5,4). Se o ponto (2,0) pertence a 𝑪, então tal circunferência",
+          "alternativas": [
+            "tangencia o eixo das ordenadas em (0,5) e intersecta o eixo das abscissas em (4,0).",
+            "tangencia o eixo das ordenadas em (0,4) e intersecta o eixo das abscissas em (8,0).",
+            "tangencia o eixo das abscissas em (2,0) e intersecta o eixo das ordenadas em (0,4).",
+            "intersecta o eixo das ordenadas nos pontos (0,2) e (0,8).",
+            "intersecta o eixo das ordenadas nos pontos (0,3) e (0,5)."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Uma função polinomial de 1º grau real de variável real 𝒇 é tal que 𝒙𝟏 > 𝒙𝟐 implica 𝒇(𝒙𝟏) < 𝒇(𝒙𝟐), ∀𝒙 ∈ ℝ. Se o gráfico de 𝒇 intersecta o eixo das abscissas em um ponto cuja soma das coordenadas é menor que zero, então é correto afirmar que",
+          "alternativas": [
+            "os coeficientes angular e linear de 𝑓 são ambos positivos.",
+            "os coeficientes angular e linear de 𝑓 são ambos negativos.",
+            "o coeficiente angular de 𝑓 é positivo e o linear é negativo.",
+            "o coeficiente angular de 𝑓 é negativo e o linear é positivo.",
+            "o coeficiente angular de 𝑓 é negativo e o linear é nulo."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "Considere a função real de variável real dada por 𝒇(𝒙) = 𝟐𝟎𝟎 × 𝟏, 𝟔𝟗𝒙/𝟔. Nesse caso, é correto afirmar que o valor da função 𝒇 aumenta",
+          "alternativas": [
+            "69% a cada acréscimo de uma unidade em 𝑥.",
+            "69% a cada acréscimo de três unidades em 𝑥.",
+            "30% a cada acréscimo de uma unidade em 𝑥.",
+            "30% a cada acréscimo de três unidades em 𝑥.",
+            "30% a cada acréscimo de seis unidades em 𝑥."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos",
+          "enunciado": "Considere três conjuntos finitos 𝑨, 𝑩 e 𝑪, tais que 𝒏(𝑨 ∩ 𝑩) = 𝟓 𝒏(𝑨 ∩ 𝑪) = 𝟒 𝒏(𝑪 ∩ 𝑩) = 𝟕 𝒏[𝑩 ∩ (𝑨 ∪ 𝑪)] = 𝟗 Se 𝒏(𝑿) representa a cardinalidade do conjunto 𝑿, é correto concluir que 𝒏(𝑨 ∩ 𝑩 ∩ 𝑪) vale",
+          "alternativas": [
+            "3.",
+            "4.",
+            "5.",
+            "6.",
+            "7."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Considere o octógono regular convexo 𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯. As retas 𝑨𝑩 e 𝑫𝑬 se intersectam no ponto 𝑷, de modo que o ponto 𝑩 está entre 𝑨 e 𝑷 e o ponto 𝑫 está entre 𝑬 e 𝑷. Se os lados do octógono medem √𝟐 cm, a medida do segmento 𝑩𝑷, em cm, é",
+          "alternativas": [
+            "2 + √2.",
+            "2 + 2√2.",
+            "4 + √2.",
+            "4 + 2√2.",
+            "4 + 3√2."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-massivo-vitoria2024-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Secretaria Municipal de Educação de Vitória",
+      "cargo": "PEB III - Matemática - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/peb-iii-matematicacns308-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/smevitoria2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 42,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Em uma partida de tênis, um tenista venceu um set por 6 a 3. Isto é, ele ganhou 6 games e seu adversário ganhou 3. Sabe-se que: – set é uma sequência de games jogados, com um jogador precisando vencer um número específico de games para ganhar o set. – é jogado um game por vez. Assim, a evolução do placar de 0 a 0 até 6 a 3 em um Set pode ocorrer de diferentes formas. – obrigatoriamente, o vencedor do Set é o vencedor do último game. A quantidade de maneiras de evolução do placar do referido set é igual a",
+          "alternativas": [
+            "84.",
+            "56.",
+            "28.",
+            "24.",
+            "18."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "O professor desafia: “Um saco contém n bolas azuis e m bolas brancas. Quantas bolas vermelhas devem ser colocadas no saco, de modo que a probabilidade de retirarmos dele, aleatoriamente, uma bola vermelha, seja de 50%?” Você responde corretamente:",
+          "alternativas": [
+            "𝑛",
+            "𝑚",
+            "𝑛+𝑚 2",
+            "𝑛 + 𝑚",
+            "2(𝑛 + 𝑚)"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Em uma Progressão Geométrica:  a diferença entre o 16º termo e o 1º termo é igual a 60;  a soma dos seus 15 primeiros termos é igual a 360. Assim, a razão dessa Progressão Geométrica é igual a",
+          "alternativas": [
+            "1 6.",
+            "6 7 .",
+            "7 6 .",
+            "4 3 .",
+            "3 2 ."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "Viralizar é um verbo utilizado para designar conteúdos que ganham rápida repercussão em redes sociais digitais. Certo vídeo em determinada rede social viralizou, de forma que seu alcance pode ser modelado pela seguinte expressão algébrica: p(t) = 1000.3 2t, em que t é o tempo, dado em horas, após a publicação do conteúdo e p(t) é a quantidade de pessoas que visualizaram o vídeo. Contando a partir do momento da sua publicação, o vídeo alcançou 1 milhão de visualizações transcorridas entre",
+          "alternativas": [
+            "2 e 3 horas.",
+            "3 e 4 horas.",
+            "4 e 5 horas.",
+            "5 e 6 horas.",
+            "6 e 7 horas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Ao solucionar o sistema linear abaixo, obtém -se os coeficientes da lei de formação da função 𝑓: ℝ → ℝ definida por 𝑓(𝑥) = 𝑦 = 𝑎𝑥2 + 𝑏𝑥 + 𝑐, com a, b e c números inteiros. { 𝑎 + 𝑏 + 𝑐 = 0 4𝑎 + 2𝑏 + 𝑐 = 7 9𝑎 + 3𝑏 + 𝑐 = 20 Assim, o valor de 𝑓(0) é",
+          "alternativas": [
+            "3.",
+            "1.",
+            "0.",
+            "–1.",
+            "–2."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Analítica",
+          "enunciado": "Considere o triângulo PQR cujos vértices no plano cartesiano correspondem aos pontos P(1,2), Q(7,0) e R(5,6). O perímetro desse triângulo é igual a",
+          "alternativas": [
+            "√10 + √2 .",
+            "√10 + 2√2.",
+            "2(√10 + 2√2).",
+            "2(√10 + √2) .",
+            "4(√10 + √2) ."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Considere as idades de 5 pessoas, dadas em anos e representadas por números inteiros positivos. Sabe -se que os números foram organizados em uma lista unimodal, que a mediana dessa lista é 21, que a moda é 22 e que a média é 20,2. Nessas condições, avalie se as afirmativas a seguir são verdadeiras (V) ou falsas (F). ( ) Todas as pessoas têm mais de 15 anos de idade. ( ) Não é possível que uma dessas pessoas tenha 18 anos de idade. ( ) Se a pessoa mais velha for retirada da lista, a média passará a ser igual a 19. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – V – V.",
+            "V – V – F.",
+            "F – V – V.",
+            "V – F – F.",
+            "F – F – F."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Suponha que uma investidora tenha realizado hoje a aplicação de determinada quantia em um fundo de investimento cujo rendimento, em juros compostos, é de 5% ao mês. Após cinco meses, o percentual de aumento do montante em relação à quantia inicial será um valor entre",
+          "alternativas": [
+            "24,5% e 26%.",
+            "26% e 27,5%.",
+            "27,5% e 28,5%.",
+            "28,5% e 29,5%.",
+            "29,5% e 30,5%."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Considere um triângulo cujos lados medem 4, 6 e 8. A tangente do maior ângulo interno deste triângulo mede",
+          "alternativas": [
+            "√15 .",
+            "4 3 .",
+            "− √15 16 .",
+            "− 4 3 .",
+            "−√15."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Em uma caixa há 7 bolas e cada bola tem o registro de uma das letras da palavra VITORIA. Sabe -se também que cada bola foi pintada com uma das cores da bandeira da cidade: azul, branco e rosa, nesta ordem. Isto é, a primeira letra da palavra foi pintada de azul e as demais seguiram a ordem apresentada. Ao serem retiradas duas bolas da caixa, a probabilidade de que essas bolas sejam de cores diferentes e tenham vogais diferentes registradas é de",
+          "alternativas": [
+            "4 21 .",
+            "5 21 .",
+            "8 21 .",
+            "2 7 .",
+            "1 7 ."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Considere a represent ação de um número binomial conforme a seguir: (𝑛 𝑝) , 𝑐𝑜𝑚 𝑛, 𝑝 ∈ ℕ 𝑒 0 ≤ 𝑝 ≤ 𝑛. Assinale a alternativa que apresenta uma expressão que corresponde à soma (23 13) + (23 12) + (24 11).",
+          "alternativas": [
+            "(24 14)",
+            "(23 12)",
+            "(24 13)",
+            "2 × (23 12)",
+            "2 × (24 13)"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "A função 𝑓: ℝ → ℝ é tal que 𝑓(𝑥) = 𝑎𝑥2 + 𝑏𝑥 + 𝑐, com 𝑎, 𝑏, 𝑐 ∈ ℝ e 𝑎 ≠ 0. Considere que a função f possua zeros da função, identificados por 𝑥𝐴 𝑒 𝑥𝐵. Observe os procedimentos a seguir: 𝑓(𝑥) = 𝑐 𝑎𝑥2 + 𝑏𝑥 + 𝑐 = 𝑐 𝑎𝑥2 + 𝑏𝑥 = 0 𝑥(𝑎𝑥 + 𝑏) = 0 𝑥 = 0 𝑜𝑢 𝑎𝑥 + 𝑏 = 0 𝑥1 = 0 𝑜𝑢 𝑥2 = − 𝑏 𝑎 Assim, 𝑥1+ 𝑥2 2 é igual a",
+          "alternativas": [
+            "𝑥𝐴+ 𝑥𝐵 4 .",
+            "𝑥𝐴+ 𝑥𝐵 2 .",
+            "𝑥𝐴 + 𝑥𝐵 .",
+            "2(𝑥𝐴 + 𝑥𝐵).",
+            "𝑥𝐴∙ 𝑥𝐵 2 ."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-massivo-sjc2026-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Prefeitura de São José dos Campos",
+      "cargo": "Professor II - Matemática - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cnsp0207-professor-ii-matematica-cnsp0207-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-prefeitura-de-sao-jose-dos-campos-educacao-v2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 41,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "A expressão 67− 66 93 é igual a",
+          "alternativas": [
+            "32.",
+            "64.",
+            "120.",
+            "240.",
+            "320."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "André e Bruno são irmãos e possuem suas poupanças que, juntas, dão 1200 reais. Eles compraram um jogo contribuindo, cada um, com a mesma quantia. Essa quantia é equivalente à quarta parte da poupança de André e, também, equivalente à sexta parte da poupança de Bruno mais 25 reais. O preço do jogo comprado pelos irmãos foi de",
+          "alternativas": [
+            "160 reais.",
+            "180 reais.",
+            "240 reais.",
+            "270 reais.",
+            "290 reais."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Maria ganhou certa quantia. Dessa quantia, retirou 30% para colocar na poupança. Do restante, retirou 20% para compras de que precisava e, do que sobrou, retirou 10% para a manutenção da casa. Da quantia inicial, Maria ficou ainda com cerca de",
+          "alternativas": [
+            "40%.",
+            "44%.",
+            "47%.",
+            "50%.",
+            "54%."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Em uma das provas de certo concurso as notas dos dez candidatos foram as seguintes: 7 | 7 | 7 | 7 | 7 | 7 | 7 | 8 | 9 | 10 O desvio padrão dessas notas é",
+          "alternativas": [
+            "0,92.",
+            "0,95.",
+            "0,98.",
+            "1,02.",
+            "1,05."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Uma pirâmide regular tem base quadrada e suas faces laterais são triângulos isósceles, cada um com base medindo 4 cm e dois lados iguais medindo 6 cm cada um. O volume dessa pirâmide em cm3 é aproximadamente (Use se necessário: √3 = 1,73; √5 = 2,24; √7 = 2,65)",
+          "alternativas": [
+            "24.",
+            "26.",
+            "28.",
+            "31.",
+            "33."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Analítica",
+          "enunciado": "A reta r passa pelos pontos (−4, 2) e (2, 6). O ponto da reta r que possui coordenadas iguais é",
+          "alternativas": [
+            "(10, 10).",
+            "(11, 11).",
+            "(12, 12).",
+            "(13, 13).",
+            "(14, 14)."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Uma escola possui 2 professores de matemática, 3 professores de português e 4 professores de ciências. Dois desses professores são escolhidos por sorteio. A probabilidade de que os dois professores sorteados sejam da mesma matéria é",
+          "alternativas": [
+            "1/3.",
+            "2/9.",
+            "3/10.",
+            "5/12.",
+            "5/18."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "O conjunto 𝐶 é formado por todos os números inteiros N maiores que 1000 e menores que 2000 com a seguinte propriedade: N é formado por três algarismos diferentes, entre os quais um se repete. Por exemplo, 1383, 1200 e 1451 são elementos de 𝐶. O número de elementos de 𝐶 é:",
+          "alternativas": [
+            "216.",
+            "336.",
+            "432.",
+            "504.",
+            "1512."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "O conjunto C = {11, 13, 17, 19, 23, 25, ..., 95, 97} é formado pelos números naturais de dois algarismos que não são múltiplos nem de 2 e nem de 3. A soma dos elementos de C é",
+          "alternativas": [
+            "1620.",
+            "1636.",
+            "1650.",
+            "1668.",
+            "1680."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Analítica",
+          "enunciado": "Os números reais 𝑥 e 𝑦 são tais que 𝑥2 + 𝑦2 = 6𝑥 + 2𝑦. O maior valor possível de 𝑥 é",
+          "alternativas": [
+            "7.",
+            "8.",
+            "9.",
+            "10.",
+            "11."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Sejam 𝑥 e 𝑦 números naturais não nulos tais que 𝑦 = 30−2𝑥 6 . A soma dos possíveis valores de 𝑥 é",
+          "alternativas": [
+            "60.",
+            "45.",
+            "30.",
+            "25.",
+            "20."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Considere uma função quadrática 𝑓(𝑥), real de variável real, tal que 𝑓(0) = 2 e 𝑓(−1) = 𝑓(3) = 0. O valor máximo dessa função é",
+          "alternativas": [
+            "3.",
+            "8/3.",
+            "7/3.",
+            "2.",
+            "5/3."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Sobre 3 funções reais de variável real 𝑓, 𝑔 e ℎ sabe-se que: • 𝑔(𝑥) = 5𝑥 − 1 • ℎ(𝑥) = 𝑔(𝑓(𝑥)) = 3𝑥 − 5 O valor de 𝑓(5) é",
+          "alternativas": [
+            "3/5.",
+            "4/5.",
+            "7/5.",
+            "9/5.",
+            "11/5."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "Considere a função real de variável real 𝑓(𝑥) = log2(3𝑥 + 1). O valor de 𝑓−1(1) é",
+          "alternativas": [
+            "1/3.",
+            "2/3.",
+            "1.",
+            "3/2.",
+            "3/4."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Considere a equação modular |2 − |3 − 𝑥|| = 1, em que 𝑥 é real. A soma das raízes dessa equação é",
+          "alternativas": [
+            "0.",
+            "5.",
+            "6.",
+            "10.",
+            "12."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "Uma colônia de bactérias cresce exponencialmente, de modo que sua população pode ser modelada por uma função exponencial 𝑃(𝑡) = 𝑃0 ∙ 𝑒𝑘𝑡, onde 𝑃0 e 𝑘 são constantes e 𝑡 é o tempo medido em horas após um certo instante inicial. Sabe-se que 𝑃(1) = 1500 e 𝑃(4) = 40500. Duas horas após o instante inicial, a população dessa colônia era",
+          "alternativas": [
+            "3000.",
+            "4500.",
+            "6000.",
+            "14500.",
+            "15000."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Em um círculo de raio 4, considere um diâmetro 𝐴𝐵 e uma corda 𝐴𝐶 de comprimento igual a 5. A área do triângulo 𝐴𝐵𝐶 é",
+          "alternativas": [
+            "6.",
+            "20.",
+            "5√3.",
+            "5√39/2.",
+            "5√41/2."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Considere o sistema linear { 𝑥 + 𝑦 + 𝑧 = 2 𝑥 + 3𝑦 + 9𝑧 = 16 𝑥 + 5𝑦 + 25𝑧 = 46 . Sendo 𝑥 = 𝑎, 𝑦 = 𝑏, 𝑧 = 𝑐 a solução desse sistema, o valor de 𝑎2 + 𝑏2 + 𝑐2 é",
+          "alternativas": [
+            "6.",
+            "10.",
+            "16.",
+            "26.",
+            "36."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Considere os anagramas da palavra ARIRANHA. O número desses anagramas que não possuem vogais juntas é",
+          "alternativas": [
+            "1440.",
+            "720.",
+            "480.",
+            "240.",
+            "120."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Dois números 𝑋 e 𝑌 são tais que 30% de 𝑋 correspondem a 45% de 𝑌. O percentual que 𝑋 corresponde de 𝑌 é",
+          "alternativas": [
+            "180%.",
+            "150%.",
+            "135%.",
+            "120%.",
+            "115%."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 69,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Sabe-se que a amostra de medidas inteiras (3, 6, 4, 6, X, 3, 10) tem moda única e a média é maior do que a mediana. A soma da média com a mediana é",
+          "alternativas": [
+            "9.",
+            "11.",
+            "13.",
+            "15.",
+            "17."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Você compra um produto cujo valor à vista é de R$ 360,00 e paga em duas prestações iguais de R$ 216,00 cada uma, sendo a primeira no ato da compra e a segunda um mês após. A taxa de juros compostos mensais que você pagou é de",
+          "alternativas": [
+            "10%.",
+            "20%.",
+            "25%.",
+            "30%.",
+            "50%."
+          ],
+          "correta": "E"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-massivo-canaa2025-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Prefeitura Municipal de Canaã dos Carajás",
+      "cargo": "Professor - Matemática - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-de-matematicacns311-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/prefcanaa202402_gabarito_definitivo_-compilado-30.03_0.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 42,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Considere o sistema de equações de 1º grau, com incógnitas 𝑥 e 𝑦, dado por ൜𝑥 + 𝑎𝑦 = 1 𝑏𝑥 + 𝑦 = 2 Se 𝑎 e 𝑏 são números reais, é correto afirmar que haverá mais de uma solução para o sistema se",
+          "alternativas": [
+            "𝑎 = 0 e 𝑏 = 1",
+            "𝑎 = 1 e 𝑏 = 2",
+            "𝑎 = 2 e 𝑏 = 0,5",
+            "𝑎 = 0,5 e 𝑏 = 2",
+            "𝑎 = 2 e 𝑏 = 2"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "O polinômio 𝑃(𝑥) = 12𝑥ଷ − 25𝑥ଶ + 𝑥 + 2 tem valor numérico nulo quando 𝑥 = 2. Existem ainda outros dois valores racionais que, atribuídos a 𝑥, anulam o polinômio. O produto desses dois números pode ser encontrado dividindo-se 𝑃(𝑥) por",
+          "alternativas": [
+            "(𝑥 − 2), pois ele corresponde ao termo independente do polinômio quociente obtido nessa divisão.",
+            "(𝑥 + 2), pois ele corresponde ao simétrico do termo independente do polinômio quociente obtido nessa divisão.",
+            "(𝑥 − 2), pois ele corresponde à metade do termo independente do polinômio quociente obtido nessa divisão.",
+            "(𝑥 + 2), pois ele corresponde à quarta parte do termo independente do polinômio quociente obtido nessa divisão.",
+            "(𝑥 − 2), pois ele corresponde a um doze avos do termo independente do polinômio quociente obtido nessa divisão."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Considere uma sequência infinita de números reais (𝑎௡)௡∈ℕ. Se essa sequência é uma Progressão Geométrica, é necessariamente verdadeiro que",
+          "alternativas": [
+            "𝑎ଶ ∙ 𝑎଻ = 𝑎ଷ ∙ 𝑎଺",
+            "𝑎ହ + 𝑎଼ = 𝑎ଷ + 𝑎ଵ଴",
+            "𝑎ଶ ∙ 𝑎଻ = 𝑎ଷ ∙ 𝑎଼",
+            "𝑎ହ + 𝑎଼ = 𝑎ଷ + 𝑎଺",
+            "𝑎ଶ ଶ ∙ 𝑎ସ ଶ = 𝑎ଷ"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "Considere a matriz 𝐴 = ൥ 0 1 0 1 0 0 0 0 1 ൩. Dada uma matriz 𝐵ଷ×ଵ, o produto 𝐴 ∙ 𝐵 dá como resultado uma nova matriz 𝐶ଷ×ଵ, em que",
+          "alternativas": [
+            "𝑐ଵ,ଵ = 𝑏ଵ,ଵ.",
+            "𝑐ଶ,ଵ = 𝑏ଶ,ଵ.",
+            "𝑐ଷ,ଵ = 𝑏ଷ,ଵ.",
+            "𝑐ଵ,ଵ = 𝑏ଷ,ଵ.",
+            "𝑐ଷ,ଵ = 𝑏ଶ,ଵ."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Em uma caixa há determinada quantidade de bolas, que têm cor única: ou a bola é preta ou é branca. A quantidade de bolas brancas está para a quantidade de bolas pretas, assim como 2 está para 3. Se adicionarmos a essas bolas uma nova bola branca e uma nova bola preta, a probabilidade de que uma bola sorteada ao acaso seja branca passa a ser de 13 32ൗ . É correto concluir que, antes da inclusão das duas bolas, a quantidade de bolas pretas superava a quantidade de brancas em",
+          "alternativas": [
+            "5 unidades.",
+            "6 unidades.",
+            "7 unidades.",
+            "8 unidades.",
+            "9 unidades."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "Suponha um sistema de numeração em que: ⋋ representa uma unidade; ⋉ representa três unidades; ⋈ representa sete unidades; ∸ representa quinze unidades. Nesse sistema de numeração, que é composto apenas por esses quatro símbolos, uma dada quantidade é representada da seguinte forma: 1º. Primeiramente, agrupam-se as unidades, enquanto possível, de 15 em 15, sendo cada um desses grupos representados por um símbolo ∸. 2º. Quando não há mais unidades suficientes para um novo grupo de 15, passam-se a agrupar as unidades remanescentes, se houver, de 7 em 7, sendo cada um desses grupos representado por um símbolo ⋈. 3º. Quando não há mais unidades suficientes para um novo grupo de 7, passam-se a agrupar as unidades remanescentes, se houver, de 3 em 3, sendo cada um desses grupos representado por um símbolo ⋉. 4º. Quando não há mais unidades suficientes para um novo grupo de 3, cada unidade restante, se houver, é representada por um símbolo ⋋. A representação de 57 nesse sistema de numeração é",
+          "alternativas": [
+            "∸ ∸ ⋈ ⋈ ⋈ ⋉ ⋉",
+            "∸ ∸ ⋈ ⋈ ⋈ ⋉ ⋋ ⋋ ⋋",
+            "∸ ∸ ∸ ⋈ ⋉ ⋋ ⋋",
+            "∸ ∸ ∸ ⋈ ⋈ ⋋ ⋋",
+            "∸ ∸ ∸ ⋈ ⋈ ⋉"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Maurílio desejava aplicar certo capital de forma diversificada. Para isso, repartiu esse capital em duas partes. A primeira delas foi colocada no investimento 𝐼ଵ. A parte restante, que correspondia ao dobro da primeira parte, foi colocada no investimento 𝐼ଶ. Os dois investimentos tiveram o mesmo tempo de duração e, ao fim desse período, 𝐼ଵ e 𝐼ଶ proporcionaram rentabilidades de 11% e 5%, respectivamente. Com isso, a aplicação diversificada proporcionou a Maurílio um rendimento total de",
+          "alternativas": [
+            "7,0%.",
+            "7,5%.",
+            "8,0%.",
+            "8,5%.",
+            "10,5%."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Considere a função 𝑓: ℝ → ℝ tal que 𝑓(𝑥) = 0,5 ∙(𝑥 − 𝜋)ଶ + √2. É correto afirmar que 𝑓൫𝜋 − √7 య ൯ é igual a",
+          "alternativas": [
+            "𝑓൫√7 య − 𝜋൯",
+            "𝑓൫𝜋 + √7 య ൯",
+            "−𝑓൫𝜋 − √7 య ൯",
+            "−𝑓൫𝜋 + √7 య ൯",
+            "−𝑓൫√7 య − 𝜋൯"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Uma haste rígida e retilínea tem 12 m de comprimento. Uma das suas duas extremidades está fixada ao solo horizontal de modo que a haste forma, com o piso, um ângulo de 80. Devido a uma ventania, essa haste sofreu rompimento parcial a 4 m da sua extremidade mais elevada, de modo que parte da haste ficou pendurada verticalmente, presa à outra parte, que ficou intacta. Após esse evento, o ponto da haste que era a sua extremidade mais alta passou a ficar a uma distância do solo igual a Considere: sen 80 = 0,98 cos 80 = 0,17 tan 80 = 5,67",
+          "alternativas": [
+            "3,98 m.",
+            "3,84 m.",
+            "2,64 m.",
+            "2,37 m.",
+            "1,67 m."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "No plano cartesiano, considere a única reta que passa simultaneamente pelos pontos de coordenadas (2,5) e (4,11). Essa mesma reta certamente passa pelo ponto de coordenadas",
+          "alternativas": [
+            "(5,15).",
+            "(6,18).",
+            "(7,20).",
+            "(8,24).",
+            "(9,25)."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Anagramas são ordenações das letras de uma palavra (ou de uma expressão) utilizando todas as letras originais exatamente uma vez, desconsiderando-se acentos. Para ser um anagrama, não é necessário que tal ordenação configure uma palavra ou sequer que tenha sentido. De todos os anagramas da palavra CARAJÁS, aqueles que começam com a letra A totalizam",
+          "alternativas": [
+            "଻! ଷ!",
+            "଻! ଶ!",
+            "଺! ଷ!",
+            "଺! ଶ!",
+            "ହ! ଷ!"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "O valor de uma grandeza M depende de outra grandeza P, de tal forma que M aumenta 20% a cada aumento em P de 3 unidades. Dessa forma, um aumento em P de 6 unidades faz com que M aumente",
+          "alternativas": [
+            "36%.",
+            "40%.",
+            "42%.",
+            "44%.",
+            "48%."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "No mapa de uma região, o campo de futebol do clube da cidade é representado por um retângulo de área 4 cm2. Sabendo-se que a escala desse mapa é 1:5.000, conclui-se, corretamente, que o campo de futebol tem, na realidade, área igual a",
+          "alternativas": [
+            "20.000 m 2.",
+            "10.000 m 2.",
+            "2.000 m 2.",
+            "1.000 m 2.",
+            "200 m 2."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "O número racional 3,32 pode ser representado pela fração contínua finita 3 + 1 3 + ଵ ఒ sendo 𝜆 um número inteiro. O valor de 𝜆 é",
+          "alternativas": [
+            "cubo perfeito.",
+            "quadrado perfeito.",
+            "primo.",
+            "ímpar.",
+            "negativo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Quatro números formam uma progressão aritmética crescente. A soma desses números é igual a 40. O produto do 2º termo pelo 3º termo é 51. A diferença entre o 4º termo e o 1º termo é igual a",
+          "alternativas": [
+            "20.",
+            "28.",
+            "34.",
+            "42.",
+            "48."
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}

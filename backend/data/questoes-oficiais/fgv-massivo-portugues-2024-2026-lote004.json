@@ -1,0 +1,2015 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "fgv-massivo-portugues-2024-2026-lote004",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "fgv-massivo-macae2024-portugues-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Prefeitura Municipal de Macaé",
+      "cargo": "Professor C - Língua Portuguesa - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-c-lingua-portuguesacns101-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ed.-1-macaeadm2024_gabarito_definitivo_compilado.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "As frases a seguir mostram uma relação lógica entre segmentos destacados. Assinale a frase em que essa relação está corretamente identificada.",
+          "alternativas": [
+            "Se cortares o núcleo do átomo, / dentro dele encontrarás o sol. Relação de tempo.",
+            "Jamais descobriríamos alguma coisa, / caso nos contentássemos com o que está descoberto. Relação de causa.",
+            "Tu, que ensinas aos outros, / não ensinas a ti mesmo. Relação de oposição.",
+            "Tudo no mundo é estranho e maravilhoso, / para aquelas pupilas que estão bem abertas. Relação de finalidade.",
+            "Uma coisa é ver muito, / e outra coisa é ver pouco. Relação de adição."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "As frases a seguir estruturam-se a partir de uma comparação. Assinale a frase em que a comparação está explicitada.",
+          "alternativas": [
+            "O universo se parece mais com um grande pensamento do que com uma grande máquina.",
+            "Do mesmo modo que o médico ignorante peca ao querer curar, o advogado inepto peca ao tomar uma defesa.",
+            "O Binômio de Newton é tão belo quanto a Vênus de Milo, mas pouca gente se dá conta disso.",
+            "A rosa é um jardim no qual se escondem as árvores.",
+            "As músicas de hoje são como brigas no escuro."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Nas frases a seguir há a repetição de um mesmo termo. Assinale a frase em que o termo repetido mostra significados diferentes.",
+          "alternativas": [
+            "O desejo da ordem é a única ordem do mundo.",
+            "Todo homem toma os limites de sua visão como os limites do mundo.",
+            "Uma coisa é ver muito e outra coisa é ver tudo.",
+            "Estuda-se mais na velhice para bem morrer do que na mocidade para bem viver.",
+            "A correção nos textos não constrói a correção nos hábitos sociais."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Estrutura e Formação de Palavras",
+          "enunciado": "As frases a seguir mostram um termo na forma diminutiva. Assinale a frase em que esse diminutivo tem o valor de intensidade.",
+          "alternativas": [
+            "Em um Universo que já tem 10 ou 15 bilhões de anos, estamos constantemente esbarrando em surpresinhas.",
+            "Todos correm rapidinho para os bancos no momento da devolução do imposto de renda, com medo de qu e o governo se arrependa.",
+            "Se concentrássemos nossa atenção nos probleminhas terrestres, estaríamos limitando o espírito humano.",
+            "Simplificar, eis o principal segredinho do mestre.",
+            "O melhor método de educação para uma criancinha é arranjarlhe uma boa mãe."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Leia a frase a seguir. Toda vez que o trem da vida faz uma curva, os filósofos caem pela janela. A crítica nessa frase se dirige ao/à",
+          "alternativas": [
+            "distanciamento do mundo real.",
+            "desprezo pelo conhecimento.",
+            "vaidade de mostrar conhecimento.",
+            "orgulho de saber mais que os outros.",
+            "ausência de conhecimento filosófico."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Leia a seguinte frase: “Se fiz algumas descobertas valiosas, isso se deve mais a uma atenção paciente do que a qualquer outro talento.” Assinale a opção que apresenta a modificação proposta na estruturação dessa frase que é inadequada.",
+          "alternativas": [
+            "“Se fiz” pode ser substituído por “Caso tenha feito”.",
+            "O pronome “algumas” pode ser retirado da frase sem modificação de sentido.",
+            "O demonstrativo “isso” se refere a terem sido feitas descobertas valiosas.",
+            "A atenção paciente é o único motivo de terem sido feitas descobertas valiosas.",
+            "A primeira oração do texto poderia ser expressa na passiva: Se algumas descobertas valiosas foram feitas por mim."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Assinale a frase que mostra uma redundância desnecessária.",
+          "alternativas": [
+            "É fácil ter novas ideias; o difícil é deixar o que funcionou dois anos atrás, mas logo estará ultrapassado.",
+            "As pessoas dizem que seria terrível se a engenharia genética produzisse só mulheres bonitas. Eu acho que seria genial.",
+            "A tecnologia ensinou uma lição à humanidade. Nada é impossível.",
+            "Só defendo hoje uma única opinião: não acredite em milagres, mas confie nele.",
+            "Se você consultar muitos especialistas, poderá confirmar qualquer opinião."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase que se estrutura com base em uma oposição de termos.",
+          "alternativas": [
+            "A revolução digital sugere uma solução simples (computador) para um problema historicamente muito complexo (a pobreza).",
+            "Como todas as outras pessoas, historiadores são mais perceptivos depois que as coisas acontecem.",
+            "Preocupe-se não com o que você tentou e falhou, mas com o que ainda é possível fazer.",
+            "Erros têm de ser corrigidos rapidamente.",
+            "Uma das funções sociais da ciência é a de libertar as pessoas das superstições."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Observe as duas primeiras estrofes de um poema de Carlos Drummond de Andrade: A linguagem na ponta da língua, tão fácil de falar e de entender. A linguagem na superfície estrelada de letras, sabe lá o que ela quer dizer? Nessas estrofes há referência a dois tipos de linguagem, que são, respectivamente,",
+          "alternativas": [
+            "escrita e falada.",
+            "formal e informal.",
+            "popular e literária.",
+            "não-verbal e verbal.",
+            "culta e erudita."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Os filmes do cinema mudo mostravam comunicação entre pessoas em linguagem não-verbal. Assinale a opção que não corresponde a esse tipo de linguagem.",
+          "alternativas": [
+            "Os movimentos dos personagens.",
+            "Os gestos feitos pelos atores.",
+            "A expressão corporal das pessoas.",
+            "As imagens presentes nas cenas.",
+            "Os cartazes que explicavam as cenas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Um professor da Universidade de Coimbra, em Portugal, olhando para as estantes da biblioteca da universidade, disse aos alunos: Vejam bem os séculos de conhecimento que vos contemplam. Nesse caso, a linguagem é vista com a função de",
+          "alternativas": [
+            "transferência do ato comunicativo para outro local ou momento.",
+            "preservação de informações através dos tempos.",
+            "memorização de dados necessários para uma situação específica.",
+            "valor artístico, realizado nas obras literárias do país.",
+            "construir culturalmente uma nação."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Assinale a opção que apresenta a marca que pertence à língua falada e não à língua escrita.",
+          "alternativas": [
+            "As conexões entre as palavras são feitas de forma bastante diversificada.",
+            "A predominância da estrutura topicaliz ada, com o destaque inicial de um termo.",
+            "A utilização de palavras variadas e sinônimas, a fim de evitar - se a repetição de termos idênticos.",
+            "A necessidade de uma preparação prévia, sendo mais organizada e precisa.",
+            "A ausência de interlocutores no momento de sua realização."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Um professor de Língua Portuguesa, em uma de suas aulas, declarou: Vocês precisam aprender muito bem a nossa língua a fim de que possam utilizá-la da forma mais eficiente possível. A concepção de linguagem presente nessa frase é a de linguagem como",
+          "alternativas": [
+            "expressão do pensamento.",
+            "instrumento de comunicação.",
+            "meio de ascensão social.",
+            "forma de interação social.",
+            "processo de construção de conhecimento."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Estrutura e Formação de Palavras",
+          "enunciado": "Sobre o surgimento da linguagem humana, leia o texto a seguir. Embora não exista uma resposta fechada para a pergunta de como surgiu a linguagem humana, há alguns experimentos e teorias que sugerem que o início do processo se deu entre os antepassados do Homo Sapiens há 1,5 milhão de anos. A hipótese mais considerada pelos especialistas é a antropológica, ou seja, o processo resultou da necessidade de o homem, além de se comunicar socialmente, garantir sua sobrevivência. Sobre o texto, assinale a afirmativa correta.",
+          "alternativas": [
+            "A opinião dada no texto sobre a origem da linguagem humana apoia-se na opinião pessoal do autor.",
+            "Não há ainda uma resposta definitiva sobre a origem de nossa linguagem, mas sim hipóteses variadas.",
+            "A hipótese antropológica sobre a origem da linguagem humana mostra uma visão definitiva do tema.",
+            "Experimentos e teorias definem, pelo menos, a época do início do processo.",
+            "A necessidade de sobrevivência é o argumento menos forte na hipótese antropológica do surgimento da linguagem humana"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Um jornalista moderno escreveu: Nossa juventude está mal preparada para a sociedade civilizada se insistirmos em uma educação que produz uma competência linguística pouco expressiva. Assinale a opção que apresenta a tese do autor desse texto.",
+          "alternativas": [
+            "A linguística ainda não se desenvolveu plenamente como ciência.",
+            "A competência inexpressiva de nossa juventude, no terreno da linguagem, se deve a maus professores.",
+            "A juventude está mal preparada para nossa civilização por problemas de ensino.",
+            "A competência linguística de nossa juventude está além das expectativas.",
+            "O mau preparo de nossa juventude para a civilização atual é visível na comunicação social."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Leia a primeira estrofe de um poema de alusões linguísticas. Quando um rio corta, corta-se de vez o discurso-rio de água que ele fazia; cortado, a água se quebra em pedaços, em poços de água, em água paralítica. Em situação de poço, a água equivale a uma palavra em situação dicionária: isolada, estanque no poço dela mesma, e porque assim estanque, estancada; e mais: porque assim estancada, muda, e muda porque com nenhuma comunica, porque cortou-se a _____ desse rio, o fio de água que por ele discorria. MELO NETO, João Cabral de. Antologia Poética. 7ª ed. Rio de Janeiro: J. Olympio, 1989. Consoante o significado da estrofe, o vocábulo que preenche corretamente o penúltimo verso, é",
+          "alternativas": [
+            "sintaxe.",
+            "morfologia.",
+            "semântica.",
+            "fonética.",
+            "estilística."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Interpretar não é o mesmo que compreender um texto. Interpretar é decodificar os significados, enquanto compreender é construir esses significados. Observe, por exemplo, a frase abaixo, de autoria da ex-atriz Tônia Carrero: Ser uma mulher muito bonita nunca atrapalha, só ajuda. Beleza abre as portas, fortalece o caráter e nos torna mais condescendentes. Assinale a opção que apresenta a pergunta sobre essa frase que se filia à compreensão de texto.",
+          "alternativas": [
+            "Qual o significado de “abrir portas” na frase?",
+            "“fortalecer o caráter” e “tornar mais condescendente” pertencem ao mesmo espaço semântico?",
+            "Qual o processo gramatical empregado no texto para intensificar a beleza de uma mulher?",
+            "Essa frase se contrapõe a que opinião?",
+            "Como se denomina termos como “atrapalha X ajuda”?"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Leia o fragmento textual a seguir. Praga é uma cidade belíssima. Não só a velha arquitetura boêmia e os surpr eendentes acréscimos em art nouveau que foram poupados da guerra como tudo foi restaurado e é conservado com cuidado exemplar. VERÍSSIMO, Luís Fernando. O texto acima deve ser classificado como",
+          "alternativas": [
+            "dissertativo-argumentativo.",
+            "dissertativo-expositivo.",
+            "narrativo.",
+            "descritivo.",
+            "Injuntivo."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "Assinale a frase que, em função da forma de particípio empregada, mostra problema de correção.",
+          "alternativas": [
+            "O bandido foi morto no confronto com a polícia.",
+            "Antes de partir, ele havia pagado as contas.",
+            "Todos tínhamos pego o ônibus adequado.",
+            "Os meninos foram salvos do mar furioso.",
+            "Os alunos tinham feito os trabalhos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Entre os pares de palavras abaixo, assinale o que mostra uma pronúncia equivocada.",
+          "alternativas": [
+            "hieróglifo ou hieroglifo.",
+            "gratuito ou gratuíto.",
+            "projétil ou projetil.",
+            "réptil ou reptil.",
+            "bêbedo ou bêbado."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "As frases a seguir têm dois adjetivos sublinhados; assinale a frase em que esses adjetivos exercem uma função sintática diferente.",
+          "alternativas": [
+            "Afinal, o que é Deus? Uma eterna criança brincando eternamente no jardim eterno.",
+            "Eu tive uma grande vantagem que meus filhos não tiveram. Eu nasci pobre.",
+            "A juventude é coisa suspeita mesmo quando a fidelidade é certa.",
+            "Com dinheiro pode-se construir uma casa esplêndida, mas não uma boa família.",
+            "Mães são necessidade biológica. Os pais, uma intervenção social."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "As frases a seguir mostram um adjetivo sublinhado; assinale a frase em que esse adjetivo tem valor de característica.",
+          "alternativas": [
+            "O que é trabalho e o que não é trabalho são questões que deixam perplexos mesmo os homens mais sábios.",
+            "Mexericos e papo depois do expediente! Isso é o que há de divertido no trabalho.",
+            "Tudo por uma vida sossegada, como disse o homem quando assumiu o emprego no farol.",
+            "As janelas azuis são marca inconfundível do estilo colon ial brasileiro.",
+            "Dívida de dinheiro e dívida de gratidão são coisas diferentes."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "As frases a seguir mostram locuções adjetivas. Assinale a frase que possui um adjetivo semanticamente equivalente.",
+          "alternativas": [
+            "Achamos que conjuntos de guitarristas não têm futuro.",
+            "A apatia crescente dos leitores não é inexplicável, dado o crescimento absurdo do número de escritores.",
+            "A ponta do cigarro não deve ser jogada ao chão.",
+            "Fiz uma tempestade no fundo do tinteiro.",
+            "Mande-me fazer uma música sobre a cabeça de um alfinete , mas não me dê tema livre. Isso me mata do coração."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Leia a frase a seguir. Enquanto os socialistas gostam de falar das imperfeições do mercado, os liberais têm medo das imperfeições do governo. Sobre os termos sublinhados na frase acima, assinale a afirmativa correta.",
+          "alternativas": [
+            "Os termos sublinhados funcionam como adjuntos adnominais e adjuntos adverbiais.",
+            "A locução “do mercado” equivale ao adjetivo “mercantis”.",
+            "As únicas locuções adjetivas da frase são “do mercado” e “do governo”.",
+            "O termo “das imperfeições” em “têm medo das imperfeições” equivale ao adjetivo “imperfeito”.",
+            "O termo “do governo” equivale ao adjetivo “governantes”."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase que não exemplifica o caso de um adjetivo com valor adverbial.",
+          "alternativas": [
+            "Comecei de cima e trabalhei duro até chegar embaixo.",
+            "Você não aprende a manter firme sua posição no mundo ficando de guarda, mas atacando e sendo atacado",
+            "Por que com tão curta a vida organizamos tantos projetos?",
+            "Tão rápido foge a vida que toda sorte é boa, em tão breve jornada.",
+            "As crianças envelhecem mais rápido que a gente."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "Assinale a frase que apresenta o adjetivo sem variação de grau.",
+          "alternativas": [
+            "O jumento é humilde e paciente, tanto quando o cavalo é orgulhoso e impetuoso.",
+            "O cão é afetuoso, mais fiel que o gato e menos irascível.",
+            "O político ma is amado pelo povo nem sempre deseja a sua felicidade.",
+            "Caxias, notável estrategista, era tão modesto quanto valente.",
+            "Há notáveis escritores em nossa literatura, que provocam inveja em outros países"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase que não exemplifica a substantivação de um adjetivo.",
+          "alternativas": [
+            "O permitido não me agrada; o proibido excita o meu desejo.",
+            "Para conseguir o maravilhoso, faça o impensável.",
+            "A sorte nem sempre favorece os mais dignos.",
+            "Não há solidão mais solitária do que a desconfiança.",
+            "O arranhado da mesa foi causado pela transportadora."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase em que o termo sublinhado não tem valor adjetivo.",
+          "alternativas": [
+            "Ser criança é pular.",
+            "A mãe é a mais bela obra de Deus.",
+            "Estranhos são apenas amigos que a gente ainda não conhece.",
+            "A insanidade é hereditária – você pode pegá-la de seus filhos.",
+            "Beneficiar vilões é deitar água no mar."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Regência Verbal e Nominal",
+          "enunciado": "Leia a frase a seguir. É na educação dos filhos que se revelam as virtudes dos pais. Sobre os termos nela sublinhados, assinale a afirmativa correta.",
+          "alternativas": [
+            "As funções sintáticas dos dois termos são diferentes.",
+            "Os dois termos equivalem a locuções adjetivas.",
+            "Os dois termos são pacientes dos termos anteriores.",
+            "O primeiro termo equivale ao adjetivo “filial”.",
+            "Os dois termos exercem as funções de adjuntos adnominais."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o texto descritivo a seguir. Havia uma laranjeira logo que subia ao terreno e, atrás dela, duas ou três tangerineiras; ao fundo duas jabuticabeiras e uma pequena goiabeira, que já fazia sombra sobre o gramado. Aponte a opção em que a característica assinalada se refere a um texto narrativo e não a um texto descritivo.",
+          "alternativas": [
+            "O texto representa objetos fixos, justapostos no espaço e sem evolução temporal.",
+            "O texto nos proporciona uma visão contemplativa e estática da realidade.",
+            "A unidade textual provém do conjunto de traços, qualidades e características que formam a cena.",
+            "A descrição m ostra preferência por verbos de ação e de movimento.",
+            "As descrições não constituem em si mesmas textos completos, participando de outros modos de organização discursiva."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia os dois textos descritivos a seguir. Texto I Os dois menino s estavam juntos no parque; o mais alto estava próximo a um balanço de madeira, logo à entrada; o outro, muito branco, permanecia sentado com bolas de gude que jogava continuamente na parede. Texto II Os dois meninos estavam juntos no parque; o mais simpát ico estava no balanço antiquado e antigo logo à entrada; o outro, mais tímido, ficava sentado com bolas de gude coloridas e atraentes, que jogava continuamente na parede. Assinale a afirmativa que só se aplica ao Texto II.",
+          "alternativas": [
+            "Atitude imparcial e precisão léxica.",
+            "Emprego de adjetivos especificativos.",
+            "Explicação das qualidades sugeridas pelas realidades.",
+            "Tratamento objetivo das realidades descritas.",
+            "Função referencial na linguagem empregada."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Assinale a opção que exemplifica um narrador do tipo onisciente.",
+          "alternativas": [
+            "O turista aproximou-se do guichê da companhia aérea e pediu que lhe trocassem a passagem, mas o pedido não pôde ser atendido.",
+            "O mendigo, não se sabe por quê, avançou contra a mulher que lhe tinha dado uma esmola.",
+            "O atleta, ansioso por chegar e temeroso de que o ultrapassassem, pedalou sem descanso até a chegada.",
+            "Os passageiros entraram no ônibus um a um e sentaram-se nas poltronas que lhes eram destinadas, de forma ordeira e calma.",
+            "Os clientes da livraria aproveitaram a redução de preços e compraram vários livros durante todo o dia."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase na qual a palavra se é um pronome reflexivo.",
+          "alternativas": [
+            "Para se entender algo, você precisa repetir uma ideia até cansar.",
+            "Os jovens não têm nada a dizer e os velhos se repetem.",
+            "O público é como o leão; se a gente tem medo, ele engole.",
+            "Quando não se tem talento, dizer algo é perigoso",
+            "Só se guardam segredos daquilo que é desconhecido."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Leia o segmento expositivo a seguir. No Curso de Linguística Geral, Saussure estabeleceu a possibilidade de uma língua ser estudada sob dois aspectos: I. Sincrônico – procura analisar o sistema de uma língua numa determinada época ou período; II. Diacrônico – estudo da língua através do tempo, analisando-se as diversas fases. Assinale a opção que apresenta a classificação adequada do segmento, segundo sua estruturação.",
+          "alternativas": [
+            "Exposição científica.",
+            "Exposição didática.",
+            "Exposição informativa.",
+            "Exposição técnica.",
+            "Exposição humanística."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 68,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia a frase a seguir. Uma noite, trabalhava eu no silêncio do meu gabinete, quando fui procurado por uma velhinha, toda engelhada e trêmula, que me disse em voz misteriosa ter uma carta para mim. AZEVEDO, Aluísio. A Condessa Vésper. Sobre a estruturação dessa frase, assinale a afirmativa correta.",
+          "alternativas": [
+            "A expressão “Uma noite” situa o fato narrado de modo específico, numa situação temporal determinada.",
+            "O emprego do pretérito imperfeito “trabalhava” mostra uma ação contínua que é interrompida pela ação seguinte.",
+            "Os vocábulos “eu”, “meu”, “fui procurado”, “que”, “me” e “mim” mostram a presença da primeira pessoa, referente ao narrador-personagem do texto.",
+            "O inf initivo “ter” poderia ser substituído pela forma desenvolvida “que teve”.",
+            "Os adjetivos “engelhada”, “trêmula” e “misteriosa” indicam qualidades atribuídas pelo narrador."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 69,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Leia a frase a seguir. Os computadores são maravilhosos. Fazem os seus erros aparecerem muito mais depressa. Sobre a estruturação dessa frase, assinale a afirmativa correta.",
+          "alternativas": [
+            "O adjetivo “maravilhosos” deve ser visto como uma ironia.",
+            "Entre os dois períodos que formam a frase há uma relação respectivamente de causa e consequência.",
+            "O sujeito oculto do verbo “fazer” no segundo período é “as pessoas”.",
+            "O pronome possessivo “seus” tem valor reflexivo, indicando os erros do próprio computador.",
+            "A descoberta rápida dos erros cometidos é vista na frase como uma vantagem do computador."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Leia a frase a seguir. Um computador consegue fazer com que você cometa mais erros do que qualquer outra invenção – com as possíveis exceções do revólver e da cachaça. Sobre a significação e a estruturação dessa frase, assinale a afirmativa correta.",
+          "alternativas": [
+            "A exceção do revólver se fundamenta no cometimento de suicídios.",
+            "A exceção da cachaça se fundamenta no alcoolismo, que traz prejuízos à saúde do usuário.",
+            "A inclusão da cachaça como “in venção” traz problemas de coerência para a frase.",
+            "O computador é considerado uma má ferramenta para a correção de erros humanos.",
+            "Os erros humanos são criados pelas próprias invenções do homem, o que as torna desprezíveis Realização"
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-massivo-vitoria2024-portugues-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Secretaria Municipal de Educação de Vitória",
+      "cargo": "PEB III - Língua Portuguesa - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/peb-iii-lingua-portuguesacns307-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/smevitoria2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "O célebre orador Padre Antônio Vieira escreveu em um dos seus fantásticos sermões: “Os dias, soma -os a vida, diminui -os a morte, multiplica -os a ressurreição”. Assinale a afirmação inadequada em relação ao significado e à estruturação dessa frase.",
+          "alternativas": [
+            "O enunciador da frase prefe riu a forma pleonástica, antecipando o substantivo “os dias” e repetindo -o nos pronomes pessoais oblíquos “os”.",
+            "As frases que compõem esse pequeno texto obedecem a rigoroso paralelismo sintático.",
+            "A temática que envolve a frase está ligada ao campo semântico da religião.",
+            "A sequência dos termos “vida”, “morte” e “ressurreição” recria o caminho do homem na visão cristã.",
+            "A sequência dos termos “soma”, “diminui” e “multiplica” indica uma visão materialista da existência humana."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Observe os dois primeiros parágrafos do romance Uma Lágrima de Mulher, de Aluísio Azevedo: “Numa das formosas ilhas de Lípari branquejava solitária uma casinha térrea, meio encravada nos rochedos, que as águas do mar da Sicília batem constantemente. Ao la do esquerdo da modesta habitação corria uma farta alameda de oliveiras, que, juntamente com os resultados da pesca do coral, constituía os meios escassos de vida de Maffei e sua família”. Assinale a afirmação adequada em relação ao significado e à estruturação dessa frase.",
+          "alternativas": [
+            "Como faz parte de um romance, o segmento acima está inserido entre os textos narrativos.",
+            "As observações do enunciador mostram sua preocupação de não emitir opiniões pessoais sobre o que vê.",
+            "O texto é exclusivamente descritivo, tendo por objeto uma pequena casa e a família que a habita.",
+            "A casa presente na descrição do texto é vista somente externamente, com poucos detalhes de sua localização e arredores.",
+            "O fragmento textual destacado mistura descrição e narração."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Pensamento de um ganhador do Prêmio Nobel da Paz: “Vivemos em uma época perigosa. O homem domina a natureza, antes que tenha aprendido a dominar a si mesmo”. Assinale a afirmação adequada em relação ao significado e à estruturação desse pequeno texto.",
+          "alternativas": [
+            "O segundo período do texto traz uma explicação da afirmação dada no primeiro período.",
+            "A forma verbal “Vivemos” se justifica pelo fato de referir -se exclusivamente ao leitor e ao enunciador.",
+            "O perigo anunciado no primeiro período se refer e à possibilidade de desastres naturais.",
+            "O segmento “dominar a si mesmo” poderia ser adequadamente substituído por um só verbo: altodominar.",
+            "As duas ocorrências do verbo “dominar” mostram diferentes sentidos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Nossa grande romancista Rachel de Queiroz escreveu: “Não é preciso pressa na literatura. Um romance é como gravidez: aquilo fica dentro de você, crescendo, crescendo, incomodando, até sair.” Sobre a estruturação ou a significação desse pequeno texto, é correto afirmar que",
+          "alternativas": [
+            "o primeiro período do texto afirma algo cuja explicação é dada no período seguinte.",
+            "a comparação entre um romance e a gravidez se fundamenta na surpresa do que é produzido.",
+            "a repetição da forma verbal “crescendo, crescendo” mostra uma ação progressivamente mais lenta.",
+            "a forma verbal “incomodando” se refere a sacrifícios físicos na gestação de um filho ou de uma obra literária.",
+            "a semelhança entre a produção de uma obra e de um bebê também se fundamenta no prazo fixo de produção."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "Observe os versos de Vinicius de Moraes: “Para que vieste na minha janela meter o nariz? / Se foi por um verso, não sou mais poeta. / Ando tão feliz!” Assinale a afirmação correta sobre a estruturação ou a significação desse pequeno texto.",
+          "alternativas": [
+            "A utilização da linguagem popular nesses versos mostra o desprezo que os autores modernistas tinham pela própria poesia.",
+            "Os versos de Vinicius mostram o cuidado com a norma culta, que os poetas sempre preservaram.",
+            "Segundo o texto, a infelicidade é indispensável à produção poética.",
+            "A preposição “por” no segmento “Se foi por um verso” tem o valor de causa.",
+            "O verbo “andar”, no último verso do poema, indica um movimento lento e progressivo."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Nas opções abaixo há exemplos de metáforas; assinale a opção em que essa metáfora se encontra explicitada.",
+          "alternativas": [
+            "O moço que não chorou é um selvagem, e o velho que não quer rir é um tolo.",
+            "O suicídio é um roubo ao gênero humano.",
+            "Nossa morte é nossa boda com a eternidade.",
+            "O povo é como uma cera mole, tudo depende da mão que o modele.",
+            "A verdadeira pátria do homem é a infância."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Nas opções a seguir, ocorrem comparações entre dois elementos. Assinale a opção em que esses dois elementos estão corretamente identificados.",
+          "alternativas": [
+            "Uma casa sem gato é como um aquário sem peixe / gato e peixe.",
+            "As aves constituem, talvez, com sua vida, os melhores educadores dos homens / aves e homens.",
+            "O limão é uma laranja de mau-humor / limão e mau-humor.",
+            "A parte mais sensível d o corpo humano é o bolso / parte e corpo humano.",
+            "O salário -mínimo é como menstruação: vem todos os meses e acaba em quatro dias /salário-mínimo e menstruação."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Em todas as frases a seguir está presente o vocábulo “maior”. Assinale a fr ase em que ele é um adjetivo de qualificação e não uma caracterização.",
+          "alternativas": [
+            "Os estrangeiros terão de comer muito feijão para chegar à posição de maior banco do mundo.",
+            "Não se acomode com a maré mansa, uma onda maior pode estar se preparando.",
+            "A indiferença é a melhor aliada da burocracia. E a burocracia é a maior fábrica de indiferença, uma doença incurável.",
+            "A forma como se fazem as coisas é igual ao zero na matemática, não vale muito em si mesmo, mas é capaz de dar maior valor a tudo.",
+            "Quanto m ais e mais pessoas são despedidas do trabalho, maior é a taxa de desemprego."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase em que o termo sublinhado mostra uma classe gramatical diferente das demais.",
+          "alternativas": [
+            "O inútil, aqui, é o mais necessário.",
+            "Percorra os parques da cidade com mais tempo e você encontrará belas estátuas históricas.",
+            "Seja sempre mais esperta que as pessoas que a contrataram.",
+            "Pensar é o trabalho mais duro que há.",
+            "Se você quer ficar mais rico, acorde cedo, trabalhe muito e ache petróleo."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Assinale o segmento que exemplifica o modo narrativo de organização discursiva.",
+          "alternativas": [
+            "Todos os carros estavam parados no sinal, um menino vendia pacotes de balas enquanto um grupo de estu dantes atravessava calmamente a rua.",
+            "A paciência é uma virtude. A maturidade nos faz tolerantes e experientes. A vida é bela.",
+            "O objetivo maior é que tudo o que toca o seu coração faça diferença para você.",
+            "O temporal havia caído há mais de uma h ora quando o Serviço de Meteorologia anunciou o mau tempo.",
+            "A vida é como uma escada rolante: você pode se mover para a frente ou para trás, mas não pode permanecer parado. Legislação Educacional"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "O foco da BNCC é proporcionar ao estudante de Língua Portuguesa do Ensino Fundamental o contato com o letramento. Dessa forma, o estudante passa a experienciar um mundo com vários gêneros textuais e cada vez mais multissemióticos e multimidiáticos. Assim, ao final do Ensino Fundamental, o estudante deve ser capaz de uma série de ações. Assinale a única dessas ações, entre as que estão listadas a seguir, que não se coaduna com esse foco da BNCC.",
+          "alternativas": [
+            "Compreender a língua como fenômeno cultural, histórico, social, variável, heterogêneo e sensível aos contextos de uso, reconhecendo-a como meio de construção de identidades de seus usuários e da comunidade a que pertencem.",
+            "Apropriar-se da linguagem escrita, reconhecendo -a como forma de interação nos diferentes campos de atuação da vida social.",
+            "Ler, escutar e produzir textos orais, escritos e multissemióticos que circulam em diferentes campos de atuação e mídias, com compreensão, autonomia, fluência e criticidade.",
+            "Compreender o fenômeno da variação li nguística, demonstrando atitude respeitosa diante de variedades linguísticas e rejeitando preconceitos linguísticos.",
+            "Empregar, nas interações sociais, a variedade culta da linguagem mostrando a sua eficiência e o seu valor histórico - cultural, superior às demais variedades."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Uma revista especializada em temas culturais mostrava o seguinte texto: “A leitura realça o pensamento. Expande e força os músculos mentais. Martela nossas opiniões frágeis, limitadas e intolerantes com novas ideias e fatos sólidos. Estimula o crescimento, em vez do envelhecimento.” Assinale a afirmação correta sobre a estruturação ou a significação desse pequeno texto.",
+          "alternativas": [
+            "Segundo o texto, a leitura mostra aspectos positivos e negativos.",
+            "Os períodos do texto est ão construídos de forma a apresentarem paralelismo sintático.",
+            "O principal objetivo da leitura é combater o envelhecimento mental e cultural.",
+            "Um dos aspectos mais importantes da leitura é a dinamização de nossa atividade mental.",
+            "O segundo períod o do texto corresponde a uma explicitação do período anterior."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase abaixo que não explora a mesma temática que as demais.",
+          "alternativas": [
+            "A maioria não tem apreço pelo que entende, e o que não compreendem, veneram. Para serem estimadas, as coisas têm que custar: será celebrado tudo o que não entendido.",
+            "Quanto mais bem formuladas estejam as ideias, quanto mais explícitas elas forem, menor será sua eficácia: uma ideia clara é uma ideia sem futuro.",
+            "Foi pela obscuridade de sua lingua gem que Heráclito conquistou a veneração dos ignorantes. Os tolos, com efeito, só estimam o que se lhes apresenta em termos enigmáticos.",
+            "Um autor como o inglês James Joyce sempre foi admirado por seu obscurantismo e espanta o número de edições de um de seus livros enigmáticos, já que quase ninguém o entende.",
+            "Aquele que explica a passagem de um autor “mais profundamente” do que era a intenção da passagem não explica o autor, apenas o torna mais obscuro."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase que se mostra incoerente.",
+          "alternativas": [
+            "O pior mal é aquele ao qual nos acostumamos.",
+            "Estresse é quando você acorda gritando e percebe que ainda não dormiu.",
+            "Você pode prender o cantor, mas não a canção.",
+            "Você existe apenas no que você faz.",
+            "Realidade deixa muito para a imaginação."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Observe o seguinte fragmento, início do capítulo V do romance O Primo Basílio, de Eça de Queiroz: “A manhã estava abrasadora. Um pouco depois do meio -dia, Joana, estirada numa velha cadeira de vime da Ilha da Madeira que havia na cozinha, dormitava a sesta. Como madrugava muito, àquela hora da calma vinha-lhe sempre uma quebreira.” O modo de organização discursiva desse segmento é:",
+          "alternativas": [
+            "texto narrativo com fragmentos descritivos.",
+            "texto integralmente narrativo.",
+            "texto integralmente descritivo.",
+            "texto expositivo inserido numa narrativa.",
+            "texto descritivo inserido numa exposição."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Assinale a opção em que as duas palavras nela apresentadas recebem acento gráfico corretamente.",
+          "alternativas": [
+            "azíago / porém.",
+            "rêfrega / décano.",
+            "leucemía / protótipo.",
+            "álcali / aerólito.",
+            "tótens / Fênix."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "O grande pensador francês Michel de Montaigne escreveu: “É bom nascermos num século bem depravado, pois, pela comparação com os demais, somos, sem esforço, considerados virtuosos”. Assinale a afirmação inadequada em relação ao significado e à estruturação dessa frase.",
+          "alternativas": [
+            "A estrutura da frase mostra uma opinião do autor, seguida de uma explicação que a justifica.",
+            "A forma verbal “nascermos” está na primeira pessoa do plural porque engloba o autor e o seu interlocutor naquele momento.",
+            "O advérbio “bem”, na expressão “bem depravado” tem valor intensificador.",
+            "O segmento “pela comparação com os demais” tem id eia de causa cuja consequência é dada a seguir.",
+            "O termo “os demais” tem função coesiva e de coerência, estabelecendo uma relação com o termo anterior “século”."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "O escritor Oscar Wilde escreveu: “Todo o retrato pintado artisticamente é um retrato do pintor e não do modelo. O modelo é puramente um incidente, na ocasião.” Assinale a afirmação correta sobre a estruturação ou a significação desse pequeno texto.",
+          "alternativas": [
+            "A expressão “Todo o retrato” se refere à totalidade do retrato pintado.",
+            "O segmento “Todo o retrato” mostra um erro, pois a expressão correta, no caso, seria “Todo retrato”.",
+            "Segundo o texto, um retrato pintado artisticamente mostra mais o modelo que o pintor.",
+            "O termo “incidente” deveria ser substituído adequadamente por “acidente”.",
+            "A “ocasião” referida no texto se liga ao momento da escolha do modelo para a elaboração do retrato."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Nas opções listadas a seguir, há comparações entre dois elementos. Assinale a opção em que o fator de comparação entre esses elementos está corretamente identificado.",
+          "alternativas": [
+            "Cada ave, com asas estendidas, é um livro de duas folhas aberto no céu / o colorido.",
+            "O céu é o pão de cada dia dos olhos / a religiosidade.",
+            "A terra é o provável paraíso perdido / a solidão.",
+            "A natureza tem o macaco, e a igreja, o diabo / a maldade.",
+            "Para quem está morto, todos os dias são domingos / a diversão."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Nas opções listadas a seguir, assinale a estrutura que é identificada como metáfora.",
+          "alternativas": [
+            "A vida é só uma tigela de cerejas.",
+            "Sê prudente como as serpentes e simples como as pombas.",
+            "A morte é assim como um passo para a frente.",
+            "A gasolina se assemelha ao incenso da civilização.",
+            "A vida é tal qual uma calamidade em prestações."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Certos textos provocam riso, tristeza, exaltação, emoções... Tais textos mostram um tom, isto é, características que provocam um estado afetivo particular. Entre os pensamentos listados a seguir, assinale aquele que mostra um tom lírico.",
+          "alternativas": [
+            "Estou de acordo com os tr oianos, que lutavam por uma mulher.",
+            "Quanto mais conheço os homens, mais gosto das mulheres.",
+            "Estou solteira porque ninguém me merece.",
+            "Casei-me com a mesma mulher todas as vezes.",
+            "Nada mais belo do que ser o primeiro amor de uma mulher."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Assinale a frase que apresenta um modo de organização discursiva diferente do injuntivo.",
+          "alternativas": [
+            "Não machuque a terra, nem o mar, nem as árvores.",
+            "O céu é o pão de cada dia dos olhos.",
+            "Sê prudente como as serpentes e simples como as pombas.",
+            "Viva desconhecido.",
+            "Precisamos cuidar do mundo que não veremos."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Quase todos os vocábulos de um dicionário são explicados por meio de uma definição; assinale a opção que mostra um verbete incorretamente definido.",
+          "alternativas": [
+            "Estágio. Período de aprendizado prático para o exercício de certas profissões.",
+            "Esquivar. Evitar, fugir a, furtar-se a desviar-se de.",
+            "Estada. Permanência de uma pessoa em algum lugar.",
+            "Entorse. Estiramento ou distensão dos ligamentos de uma articulação.",
+            "Coadunar. Juntar para formar um todo, combinar."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Para sabermos o significado das palavras precisamos ter certo conhecimento de mundo, incluindo conhecimentos sobre o uso da linguagem. O conhecimento de mundo necessário para a apreensão do sentido do verbo “estar” nas frases abaixo está indicado ao final de cada frase; assinale a frase em que o conhecimento apontado não está adequado à situação da frase.",
+          "alternativas": [
+            "A tempestade rugia lá fora; os dois cães da casa estavam debaixo da cama. / Os c ães temem os barulhos da tempestade e se escondem.",
+            "Com a greve, os aeroportos estavam cheios de passageiros irritados. / As greves interrompem os serviços usuais.",
+            "O aluno explicou que não sabia da existência do trabalho de casa e a professora expli cou que os exercícios estavam no quadro-negro. / Os professores escrevem no quadro -negro para que os alunos copiem.",
+            "O marido disse à mulher que não encontrava suas camisas e ela explicou pacientemente que elas estavam no armário. / Armários são empregados para ocultarem -se coisas importantes.",
+            "Os quadros estavam nas paredes, encantando os visitantes. / Os quadros (pinturas) são pendurados nas paredes, para exibição."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "O dicionário de sinônimos de Antônio Houaiss aponta os seguintes vocábulos como possíveis sinônimos: – fato – acontecimento – ocorrência – acidente – sucesso – Assinale a frase em que um desses vocábulos está bem selecionado, segundo os usos da língua.",
+          "alternativas": [
+            "As ocorrências policiais durante o carnaval carioca são numerosas e preocupantes.",
+            "Os sucessos relatados pelos camelôs não pareciam verdadeiros aos ouvidos dos policiais.",
+            "Os investigadores viram que os fatos narrados eram frutos da imaginação dos turistas.",
+            "Os acontecimentos tinham ocorrido por pura imp erícia dos motoristas.",
+            "Todos os acidentes históricos estão hoje registrados."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "Em todas as frases abaixo está presente a conjunção E; o significado dessa conjunção em cada caso está indicado ao final das frases. Assinale a frase em que esse significado está indicado erradamente.",
+          "alternativas": [
+            "Em algumas manifestações, os participantes gritam e gritam até cansar / intensificação.",
+            "Nos passeios, os turistas saem dos ônibus e caminham pelas cidades que desconhecem / sucessão cronológica.",
+            "Os idosos devem ter cuidado ao caminhar, pois correm o risco de tropeçar e cair / causa.",
+            "Ao começarem as aulas, os estudantes gastam muito dinheiro em livros e cadernos / adição.",
+            "Muita gente nasce em berço de ouro e morre na pobreza / oposição."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase em que a classificação do vocábulo SE está correta.",
+          "alternativas": [
+            "Se os fatos contradizem os profetas, pior para os fatos. / conjunção comparativa.",
+            "A fé move montanhas, mas não se esqueça de ficar empurrando enquanto você reza. / pronome apassivador.",
+            "Os deuses só ajudam quem se ajuda. / pronome recíproco.",
+            "Vou-lhe dizer um grande segredo, meu amigo. Não espere o juízo final. Ele se realiza todos os dias. / pronome reflexivo.",
+            "Julgai se é justo aos olhos de Deus obedecer m ais a vós que a Deus. / conjunção integrante."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Assinale a opção em que o exemplo dado corresponde à informação teórica inicial.",
+          "alternativas": [
+            "Narrador como personagem: “Todos os dias a mesma coisa: os animais o acordavam cedo e ele tinha que alimen tá-los o mais rápido possível, antes da chegada dos patrões. Passava o dia cuidando de todos, mas descuidando-se de si próprio”.",
+            "Focalização interna: o leitor conhece por meio do olhar de um personagem: “O outro passageiro, que vi no final do ônibus, era uma figura simpática, parecia já ter passado dos quarenta”.",
+            "A narrativa é composta de ações e acontecimentos em ordem cronológica: “Como tinha chovido na noite anterior, as ruas estavam cheias, os bueiros entupiram e a água acumulada descia em catarata até a praça”.",
+            "Narração externa, sem interferência no narrado: “Tudo estava acumulado no final do galpão, mas, pouco a pouco, os empregados deram conta de arrumar tudo – um trabalho eficiente, elogiado por dona Julieta – para que o casamento ocorresse de forma elegante”.",
+            "Duração prolongada dos fatos narrativos: “Organizou os livros sobre a mesa, sentou -se diante do computador e começou o trabalho”."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Observe o seguinte fragmento narrativo: “Gilberto enfiou o material na pasta, en goliu o último pedaço de pão, abriu a porta e saiu para a escola. Meia hora mais tarde já estava sentado em sua carteira habitual, esperando a professora. De repente, ruídos estranhos surgiram da porta de entrada, seguidos de gritos apavorados. Gilberto fo i até a porta da sala e viu, na extremidade do corredor, duas pessoas caídas, com sangue ao redor e observou alguém, coberto por um grande capuz, com um revólver na mão, atirando...”. A afirmação inadequada sobre esse pequeno segmento é:",
+          "alternativas": [
+            "a história é c onhecida por focalização interna, ou seja, pelo olhar e pensamentos de um só personagem.",
+            "o primeiro período do texto exemplifica o que se chama “sumário”, um resumo rápido de alguns acontecimentos.",
+            "a parte inicial do texto, ocultando informações, p rovoca suspense no leitor.",
+            "o segmento “meia hora mais tarde” exemplifica uma elipse, ou seja, quando alguns fatos não são narrados.",
+            "os acontecimentos são narrados em ordem cronológica, sem inversões temporais."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Certos textos provocam riso, tristeza, exaltação, emoções... Tais textos mostram um tom, isto é, características que provocam um estado afetivo particular. Entre os pensamentos listados a seguir, assinale aquele que mostra um tom trágico.",
+          "alternativas": [
+            "A popularidade é como a juventude, uma vez ida, não volta.",
+            "Na África, todo ancião que morre é uma biblioteca que arde.",
+            "A pobreza não é necessariamente vergonhosa.",
+            "Bom é ter fama, melhor é ter dinheiro.",
+            "Paixão e resfriado, a gente pega quando menos espera."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "O grande pensador francês La Rochefoucauld escreveu o seguinte: “Neste mundo há três espécies de ignorância: não saber o que se devia saber; saber mal o que se devia saber, e saber o que não se devia saber.” Sobre a estruturação desse texto, assinale a afirmativa incorreta.",
+          "alternativas": [
+            "As três ocorrências do pronome SE exercem a função de pronome apassivador.",
+            "A forma do demonstrativo em “Neste mundo” se justifica pela proximidade temporal e espacial.",
+            "O emprego de dois pontos é justificado, no texto, pela enumeração seguinte.",
+            "“não saber” e “saber mal” são expressões sinônimas, já que ambas exemplificam ignorância.",
+            "Todas as ocorrências do verbo saber mostram o mesmo significado."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "A preposição POR apresenta diferentes valores semânticos. Assinale a frase em que o valor semântico dessa preposição está corretamente indicado.",
+          "alternativas": [
+            "Daria todas as minhas posses por uma fração de tempo. / em troca de.",
+            "A História é escrita por pessoas imparciais. / em nome de.",
+            "Deixe que os outros elogiem os tempos antigos; estou muito feliz por ter nascido agora. / condição.",
+            "O show foi cancelado quando por umas cinquenta pessoas já estavam no estádio. / em relação a.",
+            "A realização do comício está por uma autorização do ministro da economia. / ao lado de."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "O incêndio, que ainda não havia chegado à sala da biblioteca, jogava sobre o teto um reflexo rosa... Todos os esplendores surgiam: a hidra negra e o dragão escarlate apareciam na fumaça disforme, exageradamente escur a e vermelha. Longas chamas brilhavam ao longe e iluminavam a sombra, como cometas combatentes correndo uns atrás dos outros. Já tinham sido feitos na parede do terceiro andar buracos enormes por onde as brasas derramavam cascatas de pedrarias. (Victor Hugo) Nesse texto há um conjunto de comparações ou metáforas; assinale a opção na qual o segundo elemento não se mostra como elemento de uma comparação ou metáfora.",
+          "alternativas": [
+            "Um reflexo rosa.",
+            "A hidra negra.",
+            "O dragão escarlate.",
+            "Cometas combatentes.",
+            "Cascatas de pedrarias."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Assinale a frase que, ao contrário das demais, não mostra uma visão negativa do ato de adiar.",
+          "alternativas": [
+            "Pela rua do “já vou” chega-se à casa do “nunca”.",
+            "Adie por um dia e dez dias se passarão.",
+            "Enquanto nós estamos adiando, vamos levando a vida.",
+            "Adiamento é a arte de ficar em dia com o ontem.",
+            "Enquanto nós estamos adiando, a vida passa."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase a seguir que mostra uma contradição interna.",
+          "alternativas": [
+            "O exagero é uma verdade que perdeu a calma.",
+            "Muita luz é como muita sombra: não deixa ver.",
+            "Muitas vezes o medo de um mal nos leva a um pior.",
+            "Eu disse um milhão de vezes para você não exagerar.",
+            "Não use um canhão para matar um mosquito."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "O célebre Simón Bolívar é o autor do seguinte pensamento: “Um povo ignorante é instrumento cego de sua própria destruição.” Assinale a afirmação incorreta sobre a estruturação ou a significação desse pequeno texto.",
+          "alternativas": [
+            "O segmento “Um povo ignorante” poderia ser substituído de forma adequada por “A ignorância de um povo”.",
+            "Há uma redundância desnecessária em “sua própria destruição”.",
+            "Ao dizer que o povo ignorante é um instrumento “cego” o texto mostra que esse povo não tem consciência de suas ações.",
+            "A destruição de um povo é devida, segundo o texto, à própria ignorância desse povo.",
+            "O termo “sua” é um pronome possessivo que mostra ambiguidade, pois tem mais de um antecedente possível."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Um romancista americano declarou: “Eu sou otimista sobre o futuro, não em relação a esta civilização. Eu sou otimista sobre a civilização que substituirá essa”. Assinale a afirmação adequada em relação ao significado e à estruturação desse pequeno texto.",
+          "alternativas": [
+            "A afirmação inicial “Eu sou otimista” mostra -se contraditória em relação às afirmações seguintes.",
+            "O segmento “não em relação a esta civilização” mostra uma ressalva em relação à afirmação anterior.",
+            "Entre os dois períodos do texto há uma relação lógica de, respectivamente, causa e consequência.",
+            "As duas ocorrências da palavra “civilização” mostram significados diferentes.",
+            "As duas formas dos pronomes demonstrativos deveriam assumir a forma “essa”."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Um romancista inglês declarou o seguinte: “Não foi o mundo que piorou. As coberturas jo rnalísticas é que melhoraram muito”. Assinale a afirmação inadequada em relação ao significado e à estruturação desse pequeno texto.",
+          "alternativas": [
+            "O primeiro período do texto nega algo que parece ser um pensamento generalizado.",
+            "Segundo o texto, as coberturas jor nalísticas passaram a abordar todos os temas, os positivos e os negativos.",
+            "Os jornais, segundo o afirmado no texto, fazem atualmente reportagens mais precisas e objetivas.",
+            "A expressão “é que” tem a função de dar ênfase à expressão seguinte.",
+            "Os dois períodos do texto mostram, respectivamente, uma opinião e uma justificativa dessa opinião."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Crase",
+          "enunciado": "Diz uma regra de emprego do acento grave indicativo da crase que, com nomes próprios de lugares, só se pode empregar esse acento se o nome próprio exigir o artigo A. No entanto, há casos em que isso é possível, como na seguinte opção:",
+          "alternativas": [
+            "Fui a Roma no ano passado, durante as férias de julho.",
+            "Dirigi-me a Roma somente para visitar o Coliseu.",
+            "Voltei a Roma de Nero só para comprar antiguidades.",
+            "Fui conduzido a Roma para experimentar os sorvetes.",
+            "O guia nos levou a Roma para comer massa italiana."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "Assinale a única palavra em que a letra A desempenha o papel de desinência modo-temporal.",
+          "alternativas": [
+            "Competiria.",
+            "Pretendia.",
+            "Alugar.",
+            "Pronunciar.",
+            "Colava."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-massivo-sjc2026-portugues-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Prefeitura de São José dos Campos",
+      "cargo": "Professor II - Língua Portuguesa - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cnsp0208-professor-ii-portugues-cnsp0208-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-prefeitura-de-sao-jose-dos-campos-educacao-v2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o texto a seguir: “Ninguém sabe. Mas tem teorias, e cada linguista acredita em uma. Sim, tem gangues de linguistas e elas brigam sobre esse assunto (a verdade não é bem assim, mas eu gosto de falar em gangues de linguistas porque faz parecer que a faculdade de Letras foi ma is animada do que ela de fato era). A primeira gangue defende que a função primordial da linguagem era apelativa. O macaco queria pedir algo. “Pega ali aquela banana?”. Ou seja, a linguagem nasce na segunda pessoa: pega. Faz. Sai. Volta. Nessa teoria, o se r humano é um macaco preguiçoso. Mas outros linguistas defendem que a função primordial da língua é a expressiva. A linguagem nasce da vontade do macaco de falar o que tá sentindo. “Que vontade de comer uma banana”. Ou seja, ela nasce na primeira pessoa. Eu. Nessa teoria, o ser humano é um macaco carente. Mas outros linguistas dizem que não é uma coisa nem outra. Ela é referencial. Para eles, a fala nasce na terceira pessoa: “Eles tão brigando por causa da banana”. Nessa teoria, o ser humano é sobretudo um fofoqueiro. Ele fala porque não consegue segurar o ímpeto de comentar a vida alheia. Mas tem uma quarta teoria, que é a minha preferida. A função primordial da língua não é nem apelativa nem expressiva nem referencial: ela é fática. Fático é tudo aquilo que a gente diz só pra fazer barulho. Tudo aquilo que não significa nada além de Tô aqui. Alô. Som. Testando. Fala. Podecrer. Tamo junto. É. Ô! Ihh. Ãrrã. Complicado. É cada uma que me aparece. Não repara a bagunça. Calor, né? E esse tempo que não firma? A g ente vai se falando. Pra essa gangue, a principal função da linguagem é preencher o silêncio insuportável da existência.” (DUVIVIER, Gregório. O céu da Língua. Rio de Janeiro, Paddock, 2025.p. 23 -24.) A pontuação pode servir como recurso expressivo em um t exto e, mesmo sua ausência, pode manifestar intenções discursivas. Considerando isso, assinale a afirmativa em que se comenta adequadamente a presença ou a ausência de sinais de pontuação no texto de Gregório Duvivier em análise nesta questão.",
+          "alternativas": [
+            "O uso de frases mais curtas marcadas pelo ponto final, nas duas primeiras linhas do texto, revela a necessidade do narrador em expor sua opinião.",
+            "A presença dos parênteses, nas linhas 3 -5, funciona como pausa na linha de raciocínio a fim de revelar um comentário do narrador.",
+            "O uso das aspas, nas linhas 7-8, 12-13 e 16-17, ocorre para dar voz a um personagem que, nesse caso, assume o contorno de protagonista.",
+            "A ausência de vírgulas na enumeração presente na linha 21 traduz a desimportância dada pelo n arrador aos itens enumerados.",
+            "A ausência de aspas nas frases -exemplo que aparecem entre as linhas 24 e 27 funciona como uma forma de diminuir sua importância dada a raridade de seus usos."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Leia o texto: Por que caem tantas árvores em São Paulo? Moradores da cidade de São Paulo enfrentam transtornos com o grande número de quedas de árvore após a forte chuva da segunda-feira (16). A tempestade com rajadas de vento de mais de 50 km/h deixou uma pessoa morta e pelo menos oito feridas. O Corpo de Bombeiros registrou a queda de ao menos 177 árvores durante a tarde. Mas por que tantas quedas? Especialistas consultados pelo UOL apontam os motivos que provocam tamanha destruição. A combinação de chuva e vento fortes tem um potencial arrasador. \"Vent os acima de 60 km por hora podem derrubar árvores boas e ruins\", afirma o agrônomo Demóstenes Ferreira da Silva Filho, professor do Departamento de Ciências Florestais da Esalq-USP (Escola Superior de Agricultura Luiz de Queiroz - Universidade de São Paulo). RAMALHOSO, Wellington. Disponível em: http://noticias.uol.com.br/cotidiano/ultimas -noticias/2016/05/17/por-que-tantasarvores-caem-em-sao-paulo.htm. Acesso em 17/02/2022. A reportagem é um gênero textual jornalístico de caráter informativo. Dada essa ca racterística, assinale a opção em que se revela a função da linguagem predominante no trecho de reportagem em análise nesta questão.",
+          "alternativas": [
+            "Conativa.",
+            "Metalinguística.",
+            "Fática.",
+            "Referencial.",
+            "Poética."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "O texto a seguir é o início de uma crônica. Leia-o: Notícia de jornal Fernando Sabino Leio no jornal a notícia de que um homem morreu de fome. Um homem de cor branca, trinta anos presumíveis, pobremente vestido, morreu de fome, sem socorros, em pleno centro da cidade, permanecendo deitado na calçada durante setenta e duas horas, para finalmente morrer de fome. Morreu de fome. Depois de insistentes pedidos de comerciantes, uma ambulância do Pronto Socorro e uma radiopatrulha foram ao local, mas regressaram sem prestar auxílio ao homem, que acabou morrendo de fome. Um homem que morreu de fome. O comissário de plantão (um homem) afirmou que o caso (morrer de fome) era alçada da Delegacia de Mendicância, especialista em homens que morrem de fome. E o homem morreu de fome. (...) (https://cronicabrasileira.org.br/cronicas/15836/noticia -de-jornal. Acesso em 22.1.26) Dentre as opções a seguir, assinale aquela que reescreve a oração sublinhada no primeiro parágrafo do texto acima, mantendo -se o sentido que ela expressa no contexto do período.",
+          "alternativas": [
+            "a fim de que finalmente morresse de fome.",
+            "depois de finalmente morrer de fome.",
+            "assim que finalmente morrera de fome.",
+            "quando finalmente morresse de fome.",
+            "até que finalmente morreu de fome."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o texto a seguir. É sancionada lei que inclui bullying e cyberbullying no Código Penal A Lei nº 14.811/2024 inclui os crimes de bullying e cyberbullying no Código Penal e transforma crimes previstos no Estatuto da Criança e do Adolescente (ECA) em hediondos, como o sequestro e a indução à automutilação. O bullying é uma ação de violência repetida que ocorre em ambiente escolar, praticada por um agressor ou um grupo com intenção de causar mal a uma ou mais vítimas; já o cyberbullying é uma forma de agressão repetida, mas realizada por meio da internet. Ambas as prát icas foram incluídas no Código Penal por meio de lei sancionada em 15 de janeiro de 2024. https://www12.senado.leg.br/radio/1/noticia/2024/01/15/e -sancionada-lei-queinclui-bullying-e-cyberbullying-no-codigo-penal acesso em 12.4.25 Assinale a opção em que se substitui o substantivo “automutilação”, presente no subtítulo da notícia, mantendo-se a necessidade do acento grave, indicativo de crase, na expressão nominal",
+          "alternativas": [
+            "indução à ferimentos.",
+            "indução à bullying.",
+            "indução à essa prática.",
+            "indução à lesão.",
+            "indução à penalidades."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "Leia o fragmento de poema a seguir: Receita de ano novo Carlos Drummond de Andrade (...) Para ganhar um Ano Novo que mereça este nome, você, meu caro, tem de merecê-lo, tem de fazê-lo novo, eu sei que não é fácil, mas tente, experimente, consciente. É dentro de você que o Ano Novo cochila e espera desde sempre. (http://www.jornaldepoesia.jor.br/drumm.html#receita acesso em 22.1.26) Ao construir seu poema, Drummond organiza elementos linguísticos em torno da metáfora anunciada já no título (“Receita de ano novo”). Essa inovação deve-se, nesse caso, à aproximação do texto poético com o modo de organização discursiva:",
+          "alternativas": [
+            "narrativo.",
+            "descritivo.",
+            "expositivo.",
+            "injuntivo.",
+            "dissertativo."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o texto a seguir. Bola de meia, bola de gude Marcelo Barreto Gosto de ver futebol de criança. E não estou falando dos campeonatos, que atingem faixas etárias cada vez menores — outro dia, conheci um atleta do sub-7 de um grande time do Rio. É pelada mesmo, raiz. Pode ser na rua, na praia, com bola de plástico (no meu tempo se chamava Dente de Leite) ou chinelos no lugar das traves e aquela discussão sobre chutes altos: entrou, não entrou. Passo por uma e meu olhar é hipnotizado. Os melhores momentos são os primeiros, antes de cair na armadilha da racionalização e começar a procurar o craque ou ver como os times se organizam. Segundos — minutos, às vezes — dedicados ao prazer de acompanhar o fluxo dos movimentos, sempre na direção do ataque. (...) Parar para ver pelada de criança explica de que lado estou. Até consigo entender que há beleza na arte de se defender. Mas odeio zero a zero (e acho errado dar um ponto a cada time quando ele acontece; como pontuar sem botar a bola na rede?). Sou desses: não precisa ser de placa, eu quero ver gol. Por mim, toda bola na mão dentro da área seria pênalti e impedimentos só seriam marcados em casos extremos. (...) A bola não entra por acaso, diz o título de um livro. Ok, mas também não pode entrar só por mérit o. Treinadores e jogadores costumam atribuir os gols que sofrem a dois fatores: falta de atenção ou erro de posicionamento. Pois vivam os desatentos e os mal posicionados! (...) (http://infoglobo.pressreader.com/o-globo/20190512 acesso em 20.10.25) A crôni ca de Marcelo Barreto, publicada em 2019 no jornal O Globo, constrói-se em torno da defesa de um ponto de vista. Nesse sentido, assinale a opção em que melhor se interpreta, no contexto da crônica, a frase final que aparece no fragmento selecionado nesta questão: “ Pois vivam os desatentos e os mal posicionados!”.",
+          "alternativas": [
+            "A aparente contradição da frase associa -se à defesa apaixonada do chamado “futebol de criança”.",
+            "Ao comemorar a desatenção, Barreto defende o futebol amador em detrimento do profissional.",
+            "O verbo “vivam” adquire duplo sentido, contribuindo para a defesa da opinião do cronista.",
+            "Barreto inicia a frase com o conectivo “pois” a fim de indicar, enfaticamente, a conclusão de seu texto.",
+            "A frase é emblemática porque val oriza os responsáveis por marcar o gol em uma partida de futebol."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tempos, Modos e Vozes Verbais",
+          "enunciado": "Leia o texto a seguir. Aristóteles introduz e desenvolve o tema do amor em sua obra “Ética a Nicômaco”, escrita por volta de 340 a.C. Ali, o filósofo desloca o tema de onde seu mestre o havia posto e o aborda como um dos temas principais da moral e da filosofia prática. Para ele , o amor é uma emoção complexa, que envolve a descoberta e o apreço da beleza, da virtude e da perfeição, sim, mas no contato com outra pessoa. Isso mostra como sua abordagem é mais voltada para um amor que está nas relações e não nas idealizações. https://filosofares.com.br/os-amores-de-platao-e-de-aristoteles/ Acesso em 4.11.2025 Ao apresentar a definição de “amor” de acordo com o filósofo Aristóteles, predomina, no texto, o uso do presente do indicativo. Marque, dentre as opções a seguir, aquela que melh or explica o uso desse tempo e desse modo verbal no contexto.",
+          "alternativas": [
+            "O presente do indicativo é usado nesse contexto porque tratase de fatos verdadeiros em qualquer época.",
+            "O presente do indicativo é usado nesse contexto para representar ações que se inic iam no passado e permanecem na atualidade.",
+            "O presente do indicativo é usado nesse contexto a fim de expor ações que ocorrem no momento em que se fala.",
+            "O presente do indicativo é usado nesse contexto para expor projeções futuras previstas pelo filósofo.",
+            "O presente do indicativo é usado nesse contexto pois trata -se de uma notícia, gênero textual que se pretende atual."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "No trecho “Pois sejamos felizes de uma vez, antes que o leitor pegue em si, m orto de esperar, e vá espairecer a outra parte; casemo-nos.”, há uma alusão indireta a um tipo de leitor, que é o leitor",
+          "alternativas": [
+            "interessado principalmente por fatos de grande impacto emocional.",
+            "atraído por fatos de intenso suspense, provocado pela ausência de informação sobre os fatos narrados.",
+            "seduzido essencialmente pelas ações e acontecimentos do enredo.",
+            "levado à leitura do romance em função do interesse histórico pelos acontecimentos da narrativa.",
+            "sentimentalmente ligado a fatos românticos, idealizados e pouco objetivos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "O segmento “Pois sejamos felizes de uma vez, antes que o leitor pegue em si, morto de esperar, e vá espairecer a outra parte; casemo-nos.” indica algo sobre a estrutura narrativa do texto. Podemos afirmar que o narrador do romance é",
+          "alternativas": [
+            "o tipo tradicional do narrador -autor, em que ocorre o relato dos fatos sem a presença de opiniões pessoais.",
+            "o narrador observador externo dos fatos, sem interferência opinativa nos fatos narrados.",
+            "um personag em que, apesar de não participar dos fatos, participa deles com suas opiniões.",
+            "um personagem atuante no enredo, indicando não a verdade dos fatos, mas sua visão dos mesmos.",
+            "o próprio autor do texto, narrando os fatos a partir de interesses pessoais nos fatos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia com atenção o fragmento do texto: “Depois, visitamos uma parte daquele lugar infinito. Descansa que não farei descrição alguma, nem a língua humana possui formas idôneas para tanto.” Assinale a afirmação correta sobre a estruturação descritiva de um texto, com base nesse segmento.",
+          "alternativas": [
+            "Um texto descritivo é sempre precedido de outro segmento que o prepara, fato que aparece exposto em “Descansa que não farei descrição alguma”.",
+            "Todo texto descritivo, como o que aparece nesse segmento, tem por objeto uma paisagem.",
+            "Um texto narrativo, como um romance, não pode incluir fragmentos descritivos, daí a recusa de o narrador incluir este tipo textual.",
+            "O narrador declara não realizar um texto descritivo pelo fato de a linguagem só poder descrever o que é real e não o que é fruto de ficção.",
+            "A frase final do segmento acima é um recado do autor do texto ao leitor que pretendia abandonar a leitura do romance."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Concordância Verbal e Nominal",
+          "enunciado": "Uma das marcas mais fortes da literatura machadiana é a correção gramatical. Assinale a frase abaixo que respeita integralmente a norma culta.",
+          "alternativas": [
+            "Os jogadores parecem que estavam divertindo-se.",
+            "Fui eu quem procedi ao sorteio dos prêmios.",
+            "O artista esqueceu seu óculos sobre o piano.",
+            "Como será a festa, senão vierem os músicos.",
+            "Os turistas só bebiam champanhe francês. ATENÇÃO: use o fragmento textual abaixo, retirado do Sermão da Sexagésima , que aborda o tema do estilo dos pregadores, para responder às próximas duas questões. “O pregador há de ser como quem semeia e não como quem ladrilha ou azuleja. Ordenado, mas como as estrelas: As estrelas, permanecendo na sua ordem. Todas as estrelas estão por sua ordem; mas é ordem que faz influência, não é ordem que faça lavor. Não fez Deus o céu em xadrez de estrelas, como os pregadores fazem o céu em xadrez de palavras. Se de uma parte há de estar branco, da outra há de estar negro; se de uma parte dizem luz, da outra hão de dizem sombra; se de uma parte dizem desceu, da outra hão de dizer subiu. Basta que não havemos de ver num sermão duas palavras em paz? Todas hão de estar sempre em fronteira com seu contrário?”"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Esse segmento critica um estilo de época. Assinale a opção que identifica corretamente esse estilo e a razão básica de ser criticado.",
+          "alternativas": [
+            "Barroco: exagero de cuidado formal.",
+            "Arcadismo: emprego repetido de linguagem figurada.",
+            "Romantismo: preferência por palavras eruditas.",
+            "Classicismo: falta de criatividade.",
+            "Parnasianismo: presença constante de temas mitológicos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "No fragmento, há uma referência específica ao seguinte tipo de linguagem figurada:",
+          "alternativas": [
+            "o paradoxo.",
+            "o pleonasmo.",
+            "a antítese.",
+            "a metáfora.",
+            "a metonímia. ATENÇÃO: O texto abaixo é o início de uma pequena narrativa de Stanislaw Ponte Preta. Use -o para responder às duas próximas questões. “Diz que era uma velhinha que sabia andar de lambreta. Todo dia ela passava na fronteira montada na lambreta, com um bruto saco atrás da lambreta. O pessoal da alfândega – tudo malandro velho – começou a desconfiar da velhinha. Um dia, quando ela vinha na lambreta com o saco atrás, o fiscal da alfândega mandou ela parar. A velhinha parou e então o fiscal perguntou assim pra ela: Escuta aqui, vovozinha, a senhora passa por aqui todo dia, com esse saco aí atrás. Que diabo a senhora leva nesse saco? A velhinha sorriu com os poucos dentes que lhe restavam e mais os outros, que ela adquirira no odontólogo, e respondeu: É areia! Aí quem sorriu foi o fiscal.”"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Uma das marcas do Modernismo é a penetração da oralidade e da linguagem popular na língua escrita literária. Assinale a frase abaixo que se mostra isenta dessa penetração.",
+          "alternativas": [
+            "Diz que era uma velhinha que sabia andar de lambreta.",
+            "Todo dia ela passava na fronteira montada na lambreta, com um bruto saco atrás da lambreta.",
+            "O pessoal da alfândega – tudo malandro velho – começou a desconfiar da velhinha.",
+            "Um dia, quando ela vinha na lambreta com o saco atrás, o fiscal da alfândega mandou ela parar.",
+            "A velhinha sorriu com os poucos dentes que lhe restavam e mais os outros, que ela adquirira no odontólogo."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "O texto de Stanislaw Ponte Preta é classificado como uma narrativa, estrutura textual caracterizada pela evolução cronológica de ações. Assinale a opção em que os segmentos destacados estão em sequência cronológica.",
+          "alternativas": [
+            "Diz que era uma velhinha / que sabia andar de lambreta.",
+            "Todo dia ela passava pela fronteira / montada na lambreta, com um bruto saco atrás da lambreta.",
+            "O pessoal da Alfândega – tudo malandro velho / começou a desconfiar da velhinha.",
+            "Um dia, quando ela vinha na lambreta com o saco atrás / o fiscal da alfândega mandou ela parar.",
+            "A velhinha parou / e então o fiscal perguntou assim para ela."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Os segmentos abaixo, retirados da crônica de Stanislaw, tiveram termos substituídos por equivalentes. Assinale a frase em que essa substituição foi realizada de forma correta e conveniente.",
+          "alternativas": [
+            "Todo dia ela passava pela fronteira / Periodicamente ela passava pela fronteira.",
+            "O pessoal da Alfândega – tudo malandro velho / O pessoal da Alfândega – tudo velho malandro.",
+            "o fiscal mandou ela parar / mandou-a parar.",
+            "com esse saco aí atrás / com este saco aí atrás.",
+            "que ela adquirira no odontólogo / que ela adquiria no odontólogo."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "O termo “odontólogo”, presente na crônica de Stanislaw, é um termo erudito, equivalente a “dentista”. Entre os termos a seguir, assinale aquele que mostra significação correta.",
+          "alternativas": [
+            "Filólogo / que estuda as relações de amizade.",
+            "Arqueólogo / que estuda a história antiga.",
+            "Oftalmólogo / que estuda o interior dos ouvidos.",
+            "Zoólogo / que estuda estruturas animais.",
+            "Dermatólogo / que estuda as unhas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Alfabetização é o mesmo que letramento? A alfabetização é o processo de aprender a ler e escrever, algo que já conhecemos há bastante tempo. As crianças na faixa dos seis anos vão à escola, no Ensino Fundamental I, para aprender a ler e escrever. Jovens e adultos que ainda nã o adquiriram esse conhecimento também podem frequentar aulas para se alfabetizarem, sem importar a idade. Já o letramento é uma habilidade um pouco mais complexa. A palavra “letramento” vem da expressão em inglês literacy, que remete ao latim littera, que significa letra. Antigamente, a ideia dizia respeito apenas a alguém conhecedor das “Letras”, ou seja, da literatura. Com o decorrer da história e a modernização da sociedade, o conceito foi influenciado por diversas transformações, quando se tornou imprescindível que os indivíduos desenvolvessem habilidades para ler e escrever no cenário das práticas sociais, algo além da simples leitura e escrita de palavras. (ICL-Notícias / 31/01/2026) Sobre a estruturação desse pequeno texto, assinale a afirmação correta.",
+          "alternativas": [
+            "A pergunta no título é respondida de forma objetiva no corpo do texto.",
+            "Enquanto o primeiro parágrafo se volta para a alfabetização, o segundo tem por finalidade esclarecer o significado de “letramento”.",
+            "O termo “letramento” se refere a uma ação anterior à da alfabetização.",
+            "O segmento “algo além da simples leitura” mostra uma visão depreciativa da alfabetização em face do letramento.",
+            "O texto deve ser classificado como publicitário , já que se preocupa em mostrar a superioridade de uma coisa sobre outra."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Observe com atenção o início de uma crônica de Mário de Andrade. A pesca do dourado “Quando chegamos na barranca do Mogi, andadas oito léguas de cabriolante forde, er a madrugada franca. O rio fumava no inverninho delicioso. Vento, nada. E a névoa do rio meio que arroxeava, guardando na brancura as cores do sol futuro. Estivemos por ali, esquentando no foguinho caipira que é o cobertor da nossa gente. Estivemos por ali, esfregando as mãos, tomando café, preparando as varas. Eu, como não tinha esperança mesmo de pescar nenhum dourado, fui pescar iscas no ceveiro. Nove bastavam, me falaram. E a rodada principiou.” Há um conjunto de características da linguagem empregada nesse texto. Assinale a característica apontada que mostra um exemplo adequado.",
+          "alternativas": [
+            "Emprego incoerente de forma diminutivas: “o rio fumava no inverninho delicioso.”",
+            "Desrespeito à norma culta da língua portuguesa: “Quando chegamos na barranca do Mogi”.",
+            "Utilização equivocada da pontuação: “Vento, nada”.",
+            "Ordem inadequada de frases: “Nova bastavam, me falaram.”",
+            "Uso exclusivo da linguagem lógica: “esquentando no foguinho caipira que é o cobertor da nossa gente”."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Assinale a frase em que a palavra sublinhada não é paroxítona (as palavras estão propositalmente sem acento gráfico).",
+          "alternativas": [
+            "O mestre disse: O pródigo é arrogante e o avaro é mesquinho. É preferível a mesquinhez à arrogância.",
+            "Mas, se o assunto é ação, \"God of War 3\" ainda parece monopolizar a audiência: embora a versão em demonstração fosse a mesma apresentada na E3, a empolgação nos olhos de quem jogou era idêntica especialmente em uma cena na qual Kratos arranca o olho de um gigantesco ciclope.",
+            "Eles confiscaram uma garrafa de vinho contendo o tranquilizante e, em outra ocasião, conseguiram pegar os acusados em flagrante levando um turista suíço, já tropego, para o parque, onde roubaram seu dinheiro e outros pertences.",
+            "Se tivesse dúvidas, o ministro decano não teria nem sequer participado do início das discussões, como fez nesta semana.",
+            "O presidente da câmara baixa, Yohei Kono, leu hoje o edito do imperador Akihito que ordena sua dissolução, a qual foi ordenada em sessão plenária depois de Aso e seu Gabine te a terem aprovado na manhã desta terça-feira"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "Entre as palavras destacadas nas frases a seguir, assinale aquela em que, na forma plural, a pronúncia é feita com O aberto (ó).",
+          "alternativas": [
+            "O aeroporto mais prejudicado é o de Heathrow, onde centenas de pessoas passaram a noite no terminal.",
+            "Segundo Yigit, o produto não tem o objetivo de ser um mero adorno decorativo: também tem a pretensão de dialogar com o conjunto arquitetônico do espaço.",
+            "Considero como uma das felicidades da minha vida não escrever nos jornais; isto faz mal ao meu bolso, mas faz bem à minha consciência.",
+            "O planeta, porém, está longe demais para que astrônomos consigam enxergar seu contorno diretamente.",
+            "O clássico é também um esboço para 2013, ano em que as duas equipes podem polarizar a rivalidade estadual."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Assinale a frase em que a palavra sublinhada está corretamente grafada.",
+          "alternativas": [
+            "Esse previlégio de sentir -se em casa em qualquer lugar pertence apenas aos reis, às prostitutas e aos ladrões.",
+            "Erudição é a poeira sacudida de um livro para dentro de um crânio vazio.",
+            "\"Há um trabalho de composição interessante; não é ruim\", comenta ele, vendo um registro de um páteo andaluz.",
+            "O novo espetáculo em cartaz é \"O riso é nosso 2009\", um show de humor que tem como proposta relembrar o tempo áurio do teatro de revista e das radionovelas",
+            "Como se diz nos filmes de tribunal: sem mais perguntas, meretíssimo."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase abaixo em que não foi empregada uma construção redundante, o que se deve evitar na língua escrita.",
+          "alternativas": [
+            "Responda a esse pedido e ganhe grátis um livro.",
+            "Os operários receberão um prêmio adicional a mais.",
+            "Ontem à noite os turistas saíram protegidos e cobertos por capas de chuva.",
+            "Ficamos zangados com os que nos invejam, e aflitos se ninguém nos inveja.",
+            "Não há nada tão irreal e inverossímil como os acontecimentos da vida real"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase abaixo em que o vocábulo “se” sublinhado funciona como partícula expletiva.",
+          "alternativas": [
+            "Sentar-se à sombra, num belo dia, e repousar o olhar sobre a verdura é o repouso mais perfeito.",
+            "Digo-vos que assim haverá maior júbilo no céu por um pecador que se arrepende, do que por noventa e nove justos que não necessitam de arrependimento.",
+            "Libório riu-se com as gengivas, tentando apalpar as coxas da Baiana, por caçoada, afetando luxúria.",
+            "Sempre que se produz legislação baseada na r eligião, abre-se caminho a todo tipo de intolerância.",
+            "De nada adiantará venerarmos belas imagens de Cristo se não identificarmos o Cristo na criatura humana a ser arrancada do subdesenvolvimento."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "Há uma série de locuções conjuntivas que terminam com o vocábulo “que”. Assinale a frase abaixo em que a locução sublinhada tem seu significado erradamente indicado.",
+          "alternativas": [
+            "A gente distorce a forma a fim de que criemos espaço. / finalidade.",
+            "O sinal certo de um bom livro é que ele nos agrada cad a vez mais à medida que envelhecemos. / tempo.",
+            "Todas as palavras são pinos para que nelas se pendurem as ideias. / direção.",
+            "Sou a favor da liberdade de pensamento, desde que não se transforme em palavras. / condição.",
+            "Escrever é simplesmente um modo de falar sem que interrompam a gente. / modo."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Entre as frases abaixo, assinale aquela que mostra uma visão positiva dos conhecimentos gramaticais.",
+          "alternativas": [
+            "A mera preocupação gramatical só produz escritores entanguidos, enfezados, pesadões e desluzidos.",
+            "Pode-se ser um gênio em gramática e um cretino a escrever.",
+            "Escrever é uma questão de colocar acentos.",
+            "Há muitos literatos que, pretendendo castigar os erros gramaticais, castigam os leitores.",
+            "Considero a gramática como parte da arte de pensar."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Assinale a frase abaixo em que os termos sublinhados exemplificam antônimos.",
+          "alternativas": [
+            "As gravadoras só contratam bandas que tenham pelo menos um integrante homossexual. Somos um dos ú ltimos grupos heterossexuais do Brasil.",
+            "Eu pego as lendas e as transformo em coisas comuns. Mozart pega as coisas comuns e as transforma em lendas.",
+            "Por que você insiste em tocar enquanto eu estou a reger?",
+            "Na arte não existe passado nem futuro. A arte que não está no presente não existirá nunca.",
+            "Há muitos literatos que, pretendendo castigar o estilo, castigam os leitores."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "O quiasmo é uma figura de sintaxe em que ocorre a repetição simétrica das mesmas palavras, com termos invertidos. As frases abaixo apresentam quiasmos; o único exemplo em que um dos termos repetidos muda de sentido na segunda ocorrência, é:",
+          "alternativas": [
+            "As duas coisas mais envolventes de um escritor são tornar familiares as coisas novas e tornar novas as coisas familiares.",
+            "A luz é para todos os olhos, mas nem todos os olhos são para a luz.",
+            "Antigamente a cidade era o mundo, hoje o mundo é uma cidade.",
+            "O automóvel resolve os problemas dos homens, mas os homens não resolvem os problemas dos automóveis.",
+            "A função da ciência não é acrescentar mais anos à vida, mas acrescentar mais vida aos anos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Nos fragmentos textuais abaixo – retirados do livro O Livro dos Erros – é necessário apresentar pela primeira vez a entidade a que depois se faz referência. Assinale a forma dessa apresentação, considerada a mais conveniente por ser a mais textualmente informativa.",
+          "alternativas": [
+            "José Ramos Tinhorão, polêmico historiador e crítico de música popular, ficou famoso ao escrever as fotolegendas da capa do Caderno B, do Jornal do Brasil. Foi quando começaram a me chamar de o legendário Tinhorão – goza o próprio.",
+            "Em Paris, em fevereiro de 1982, o ministro Antônio Delfim Netto respondeu aos jornalistas estrangeiros que o interrogavam sobre a dívida externa brasileira: - Pode ser até a maior, mas é a mais bem administrada.",
+            "Os diálogos de Nélson Rodrigues são de uma pobreza franciscana – denunciou um crítico – Só São Francisco sabe quanto me custa empobrecê-los – respondeu Nélson.",
+            "Malcolm Little, ou Malcolm X, o líder dos negros americanos, ensinava como expressar -se: - Se falas ao branco uma linguagem não violenta, ele não te entenderá.",
+            "O próprio ator Arnold Schwarzenegger concordava: - Dizem que os cavalos que apareciam no filme Conan, o B árbaro, tinham uma cara mais expressiva do que a minha."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase em que o referente do pronome demonstrativo destacado está corretamente indicado.",
+          "alternativas": [
+            "Tudo aquilo que não é prosa é verso; e tudo o que não é verso é prosa. / que não é verso.",
+            "Criar o que nunca iremos ver: isso é a poesia. / o que nunca iremos ver.",
+            "O maior suspiro é o que faz o verso mais belo./ o maior suspiro.",
+            "Mande-me fazer uma música sobre a cabeça de um alfinete, mas não me dê tema li vre. Isso me mata do coração. / fazer uma música sobre a cabeça de um alfinete.",
+            "Os ingleses vendem pólvora a todo mundo; venderiam ao diabo se este tivesse dinheiro. / todo mundo."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Nas frases abaixo, a palavra sublinhada é referida na continuidade da frase por uma palavra cognata. Assinale a opção em que essa referência mostra um cognato adequado.",
+          "alternativas": [
+            "Morrer por uma causa não faz com que essa mortandade seja justa.",
+            "Infeliz o homem que não tem quem o admoeste quando precisa de admoestação.",
+            "Colecionar coisas torna-se uma mania quando a coleta vicia.",
+            "Cozer é uma arte, mas a cozinha pode ser um problema quando os fregueses são exigentes.",
+            "Não se pode ver tudo, mas é importante ter uma correta visagem do possível."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Pontuação",
+          "enunciado": "Nas frases abaixo os sinais de pontuação foram substituídos por conectores. Assinale a frase em que isso foi feito de forma adequada.",
+          "alternativas": [
+            "À pobreza faltam muitas coisas, à avareza falta tudo. / conquanto.",
+            "Os avarentos não cr eem numa vida por vir, para eles o presente é tudo. / portanto.",
+            "“Quem me dera asas como de pomba! Voaria e acharia pouso. / pois.",
+            "“O artista é mentiroso, a arte é verdade.” (Mauriac) / logo",
+            "Nenhum artista deve ser julgado pelo que diz e pensa: o que conta são sua arte e suas obras. / embora."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase em que o termo sublinhado não é omitido por elipse na continuidade do texto.",
+          "alternativas": [
+            "Quando tem alguma coisa de que eu não gosto, chamo para conversar e mostro como melhor ar. Na terceira vez, eu demito.",
+            "O remédio caseiro é perigoso, porque, se malogra, pode piorar a doença.",
+            "A maioria dos homens é mais capaz de grandes ações do que de boas",
+            "Tanto se adoece por comer em excesso como por definhar à míngua.",
+            "O brasileiro detesta andar. Nossos compatriotas só andam a pé por prescrição médica."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Na estruturação de um texto podem ocorrer casos em que um substantivo ou expressão seja referida por um advérbio (pronome adverbial) ou locução adverbial. Assinale a frase em que isso não ocorre em relação ao termo sublinhado.",
+          "alternativas": [
+            "Todo homem deveria ser incendiário até os 25 anos de idade e bombeiro daí em diante.",
+            "Eu fui para lugares onde a mão do homem aí não chegou.",
+            "O mar é só este conselho: sempre avançar, nunca chegar.",
+            "Por que subir ao cume da montanha? Porque ele está lá.",
+            "Outrora os analfabetos eram os que não iam à escola; hoje são os que lá estão."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 68,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Compreender um texto não é o mesmo que interpretar um texto; o texto abaixo – retirado do romance O Crime do Padre Amaro, de Eça de Queirós - é objeto de cinco questões indicadas nas opções a seguir. “Dois meses depois soube-se em Leiria que estava nomeado outro pároco. Dizia-se que era um homem muito novo, saído apenas do seminário. O seu nome era Amaro Vieira. Atribuía-se a sua escolha a influências políticas, e o jornal de Leiria, A Voz do Distrito, que estava na oposição, falou com amargura, citando o Gólgota, no favoritismo da corte e na reação clerical. Alguns padres tinham-se escandalizado com o artigo; conversou -se sobre isso, acremente, diante do senhor chantre.” Assinale a pergunta que se refere à compreensão e não à interpretação do texto.",
+          "alternativas": [
+            "O que significa a expressão “saído apenas do seminário”?",
+            "Qual a razão de o texto comentar que o novo pároco era muito novo?",
+            "Qual a razão de o novo pároco ter sido o escolhido?",
+            "O que significa “estar na oposição”?",
+            "Por que o jornal A Voz do Distrito comentou o fato com amargura?"
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-massivo-canaa2025-portugues-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Prefeitura Municipal de Canaã dos Carajás",
+      "cargo": "Professor - Língua Portuguesa - Tipo 1",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-de-lingua-portuguesacns310-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/prefcanaa202402_gabarito_definitivo_-compilado-30.03_0.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tempos, Modos e Vozes Verbais",
+          "enunciado": "As frases a seguir apresentam, corretamente, o emprego do gerúndio, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Entrarei na sala, sentando-me no sofá.",
+            "Ficarei sentado, emocionando-me com os lances.",
+            "Eu estou ansioso, pensando na final do campeonato.",
+            "O juiz deve ficar atento, apitando as faltas cometidas.",
+            "Os atletas entram em campo, caminhando lentamente."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Um enunciado está sempre conectado a uma situação de enunciação. Assinale a opção em que o termo sublinhado se refere ao tempo da enunciação.",
+          "alternativas": [
+            "Parada Ideal. 15 minutos para lanche!",
+            "Alô, seu Francisco, aqui é seu motorista.",
+            "João, você deve pedir ajuda a seu vizinho.",
+            "Habitualmente, havia mais gente nos comícios.",
+            "Venha de imediato à cozinha para ajudar sua mãe."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "Assinale a frase iniciada pela conjunção se, que indica uma interrogação e não uma hipótese.",
+          "alternativas": [
+            "Tudo correrá bem, se não chover.",
+            "Se ele prestar atenção, vai progredir.",
+            "Se tiver valido a pena, agradeceremos.",
+            "Eu me pergunto se meu filho me escuta.",
+            "Se não trabalharmos, ficaremos sem dinheiro."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Assinale a opção que mostra um termo ou segmento da linguagem popular corrente.",
+          "alternativas": [
+            "A atitude desses torcedores foi lastimável.",
+            "Em que ocupação você ocupou o seu tempo?",
+            "José não tem esperanças sobre o sucesso na prova.",
+            "Nunca se sabe quando a gente vai sofrer um acidente.",
+            "Eu lhe peço humildemente de aceitar minhas desculpas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Assinale a única frase a seguir que representa um enunciado de caráter subjetivo.",
+          "alternativas": [
+            "A taxa de eletricidade está em baixa este mês.",
+            "O maestro e os músicos sorriam em resposta ao público.",
+            "Os artistas pareciam viver um belo momento em sua carreira.",
+            "O último filme de Spielberg vai ser apresentado no final do mês.",
+            "O público manifestou seu apoio com vinte minutos de aplausos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Assinale a opção que apresenta a frase interrogativa que tem valor de uma ordem.",
+          "alternativas": [
+            "Está chovendo muito por aí?",
+            "É assim que você me agradece?",
+            "Qual é o limite de velocidade aqui?",
+            "Alguém aí vai aceitar o convite para o almoço?",
+            "Os que estão presentes podem fazer silêncio, por favor?"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Assinale a frase que manifesta o discurso indireto.",
+          "alternativas": [
+            "Eu devia ter mais paciência com ela.",
+            "O livreiro me disse que eu o acharia apaixonante.",
+            "Minha irmã tentou perturbar a minha leitura, mas eu a enxotei.",
+            "Eu comecei a ler o livro no primeiro momento de tranquilidade.",
+            "O livro que comprei na semana passada é um romance de ficção científica."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "As frases a seguir mostram uma retomada coesiva do termo sublinhado anteriormente. Assinale a frase em que essa retomada é feita por um hiperônimo.",
+          "alternativas": [
+            "A vítima ficou paralisada de medo. O terror a deixou fora de ação.",
+            "Minha mulher não suporta os mosquitos no quarto; esses insetos a põem louca.",
+            "Ele se entende muito bem com o cunhado. O marido de sua irmã tornou-se seu melhor amigo.",
+            "Seu irmão consultou um dermatologista, mas o especialista de doenças da pele não ajudou muito.",
+            "Meu primo me recomendou um livro de Guimarães Rosa; o grande autor mineiro o deixa encantado."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a opção que apresenta a frase em que o pronome demonstrativo foi adequadamente empregado.",
+          "alternativas": [
+            "Esta magnífica obra é essa de que me falou Madalena.",
+            "Eu não consigo acreditar que você aprendeu tudo isso com ele.",
+            "Quando Francisco encontrar José, esse devolverá os meus livros.",
+            "Esta praia é ainda mais bela que esta de sua lembrança, que você me descreveu ontem.",
+            "Maria e Pedro decidiram almoçar na cidade; este no restaurante da esquina e aquele no restaurante do clube. Raciocínio Lógico Matemático"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Assinale a opção que apresenta a frase que exemplifica um caso de linguagem popular.",
+          "alternativas": [
+            "Quero entender para crer e, preciso crer, para entender melhor.",
+            "A compreensão e o equívoco não se excluem completamente.",
+            "Talvez o amor seja como a sorte. Você tem que ir com tudo para encontrá-lo.",
+            "Um dia nós vamos perceber que não podemos prender pássaros nem corações.",
+            "O amor é um ribeiro no qual as águas de dois ribeiros se misturam sem se confundir."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tempos, Modos e Vozes Verbais",
+          "enunciado": "Muitos verbos mostram a mesma forma verbal para o infinitivo e o futuro do subjuntivo. Assinale a frase a seguir em que a forma verbal sublinhada corresponde à do futuro do subjuntivo.",
+          "alternativas": [
+            "Dar amor é fazer, e há sempre mais a fazer.",
+            "Você não pode obrigar alguém a amar você.",
+            "Amizade é como dinheiro: mais fácil de conseguir do que de manter.",
+            "Convém tratar as amizades como os vinhos, desconfiando das misturas.",
+            "Se chover amanhã, todas as comemorações serão transferidas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase em que os dois adjetivos nela destacados são características.",
+          "alternativas": [
+            "O que é necessário jamais é ridículo.",
+            "Água mole em pedra dura tanto bate até que fura.",
+            "Como são poucas as nossas necessidades reais e como são imensas as nossas aspirações.",
+            "Trabalhe mais pela eliminação das maldades concretas do que pela realização do bem imaginário.",
+            "Se alguém diz a você que está tomando uma decisão realista, você logo entende que ele resolveu fazer algo ruim."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Regência Verbal e Nominal",
+          "enunciado": "Assinale a frase a seguir em que a preposição a – sozinha ou combinada - é uma exigência da regência de um outro termo (preposição gramatical).",
+          "alternativas": [
+            "Devemos ter sempre algo a que aspirar.",
+            "Só quem é superficial conhece a si mesmo.",
+            "Felicidade nunca diminui ao ser compartilhada.",
+            "Ao perceber que o carro se aproximava, correu.",
+            "No fim tudo dá certo; se não deu certo, é porque ainda não chegou ao fim."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "Assinale a opção que apresenta o par de palavras em que o a final é identificado como desinência de gênero.",
+          "alternativas": [
+            "fala / página.",
+            "caixa / boca.",
+            "larga / professora.",
+            "bela / letra.",
+            "multa / égua."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Estrutura e Formação de Palavras",
+          "enunciado": "Assinale a opção que indica a palavra que exemplifica o a protético, sem valor semântico.",
+          "alternativas": [
+            "Aparar.",
+            "Abraçar.",
+            "Atenuar.",
+            "Amostrar.",
+            "Aguardar."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "Assinale a opção que apresenta a palavra em que a letra a desempenha o papel de desinência modo-temporal.",
+          "alternativas": [
+            "Alugar.",
+            "Colava.",
+            "Pretendia.",
+            "Pronunciar.",
+            "Competiria."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "Assinale a opção que mostra dois vocábulos proparoxítonos (os vocábulos estão, propositadamente, sem acento gráfico).",
+          "alternativas": [
+            "aziago / avaro.",
+            "catedra / faceta.",
+            "interim / rubrica.",
+            "decano / hieroglifo.",
+            "etiope / aerodromo."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a opção que apresenta a frase em que o adjetivo sublinhado mostra uma função sintática diferente das demais.",
+          "alternativas": [
+            "Um rosto bonito altera-se depressa.",
+            "Um homem belo é um homem insignificante.",
+            "Por fora bela viola, por dentro pão bolorento.",
+            "Tiradentes, heroico, tentou organizar uma revolução.",
+            "Eu não podia acreditar que existem múmias tão lindas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o texto a seguir. A CASA INCA. Uma casa inca em uma cidade como Machu Picchu era feita de blocos de pedra. O granito branco, muito duro e sólido, era o melhor material. Os tetos das casas eram muito inclinados para que as fortes chuvas dessa região montanhosa escoassem rapidamente. Os caibros eram solidamente fixados e sustentados por uma base de madeira. O conjunto era em seguida recoberto de uma erva chamada ichu. A maioria das casas só tinha um nível, mas algumas tinham dois ou três, aos quais se acessava por meio de escadas ou blocos de pedra inseridos na parede externa. A maior parte tinha uma só porta de entrada, fechada por um tecido ou uma pele de animal. Algumas tinham uma abertura em uma das paredes. Cada construção era habitada por uma só família e fazia parte de uma comunidade que podia agrupar até seis casas. Todos os prédios pertenciam, em regra, a famílias de um mesmo clã. No texto estão sublinhados segmentos que se referem à “casa inca”. Assinale a opção em que o tipo de retomada (coesão) não mostra o mesmo tipo dos demais.",
+          "alternativas": [
+            "o granito branco",
+            "os tetos das casas",
+            "os caibros",
+            "uma base de madeira",
+            "o conjunto"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Crase",
+          "enunciado": "Entre as frases abaixo, assinale aquela que mostra o acento grave indicativo da crase em um contexto em que seu uso não é optativo.",
+          "alternativas": [
+            "Entregamos, Senhor, nosso destino à sua vontade.",
+            "Na França, atribui-se à Joana d’Arc um heroísmo insuperável.",
+            "À roda imaginária da fortuna atribuímos a inconstância de nossa sorte.",
+            "Na formatura, mandaram-se convites às nossas antigas professoras.",
+            "Nos evangelhos, deu-se à Maria Madalena pouca importância."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Leia o trecho a seguir. O incêndio, que ainda não havia chegado à sala da biblioteca, jogava sobre o teto um reflexo rosa... Todos os esplendores surgiam: a hidra negra e o dragão escarlate apareciam na fumaça disforme, exageradamente escura e vermelha. Longas chamas brilhavam ao longe e iluminavam a sombra, como cometas combatentes correndo uns atrás dos outros. Já tinham sido feitos na parede do terceiro andar buracos enormes por onde as brasas derramavam cascatas de pedrarias. Victor Hugo. A função das comparações e das metáforas desse texto é, predominantemente,",
+          "alternativas": [
+            "explicativa.",
+            "avaliativa irônica.",
+            "criativa ou poética.",
+            "avaliativa valorizadora.",
+            "avaliativa desvalorizadora."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "Assinale a frase abaixo, retirada do romance Ressurreição, de Machado de Assis, ou do romance O Cortiço, de Aluísio Azevedo, que mostra a palavra mais na classe gramatical da preposição.",
+          "alternativas": [
+            "“Jurar-lhe! De que serve um juramento mais entre nós?”",
+            "“Na opinião da mãe, havia alguma coisa mais do que o nome e a moléstia; havia uma inexplicável melancolia, anterior à doença...”.",
+            "“João Romão não saía nunca a passeio, nem ia à missa aos domingos; tudo que rendia a sua venda e mais a quitanda seguia direitinho para a caixa econômica e daí então para o banco.” (1890-AA8).",
+            "“João Romão observava durante o dia quais as obras em que ficava material para o dia seguinte, e à noite, lá estava ele rente, mais a Bertoleza, a removerem tábuas, tijolos, telhas, sacos de cal, para o meio da rua...” (1890-AA8).",
+            "“— Oh! Por mim não! Respondeu a boa senhora; o direito das velhas tem um limite no direito das moças. Vá, doutor, e mais tarde volte cá, se o não agarrarem por aí...” (1872-MA2)."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Assinale a opção em que o tipo de narrativa indicado está caracterizado corretamente.",
+          "alternativas": [
+            "Narrativa Autobiográfica: a atenção do narrador se volta para fatos futuros, com projeções científicas.",
+            "Narrativa Realista : o narrador concentra-se em sua própria história, revivendo episódios de seu passado.",
+            "Narrativa Fantástica: o narrador mantém um duplo olhar sobre a realidade, com fatos estranhos e de difícil explicação.",
+            "Narrativa de Aventuras: o narrador aborda fatos do cotidiano, com dados precisos, localizados em um local e em determinada época.",
+            "Narrativa Histórica : o narrador indica fatos intrigantes e misteriosos, resolvidos, ou não, pela investigação feita por um personagem destacado."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o texto a seguir. Quando entrei no terrível vagão, ele estava ocupado por duas pessoas. Uma, dobrada, coberta, dormia profundamente. A coberta superior estava manchada, de fundo amarelado, como pele de leopardo. Vendem-se muitas mantas assim nas lojas de artigos de viagens, mas pude notar logo depois que se tratava realmente da pele de um animal selvagem; do mesmo modo, o boné da pessoa adormecida me pareceu ser de feltro branco bastante delicado. O outro viajante, uma aparência simpática, parecia ter passado dos trinta anos e mostrava-se como figura insignificante que passa confortavelmente as noites em estradas de ferro. Assinale a opção que apresenta a estratégia que o narrador usa nesse fragmento textual para criar sinais de história realista e verdadeira.",
+          "alternativas": [
+            "Mostra detalhes variados e bastante pitorescos dos objetos descritos.",
+            "Indica traços descritivos do ambiente, mostrando-o como se nada houvesse nele de excepcional.",
+            "Seleciona uma situação banal da qual não precisa fornecer muitos detalhes, exatamente por sua banalidade.",
+            "Dá ao leitor informações sobre personagens e ambiente, mostrando-os como bastante conhecidos do narrador.",
+            "Fornece algumas marcas caracterizadoras dos dois personagens presentes no texto, destacando sua banalidade."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "A adjetivação pode ser realizada por meios linguísticos variados; assinale a opção que apresenta a frase em que a adjetivação é efetivada na entoação da frase.",
+          "alternativas": [
+            "Messi é o jogador!",
+            "O cenário parecia o do fim do mundo.",
+            "Comprou um casebre no alto da favela.",
+            "Comprou o livro que estava na prateleira mais alta.",
+            "Possuía a cara de um herói de história em quadrinhos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Num julgamento, o advogado de defesa, referindo-se ao réu, acusado de assassinato, declarou: O acusado, senhores jurados, é um engenheiro famoso, ótimo funcionário da empresa em que trabalha, além de pai de família exemplar, e não deve ser colocado na prisão! A argumentação do advogado se apoia em uma falácia argumentativa, que é:",
+          "alternativas": [
+            "círculo vicioso.",
+            "fuga do assunto.",
+            "argumento autoritário.",
+            "generalização excessiva.",
+            "simplificação exagerada."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a frase que não contém termos redundantes.",
+          "alternativas": [
+            "Os fatos reais não são bem recebidos.",
+            "Os livros estavam superpostos na estante.",
+            "Minha própria opinião pessoal não é válida.",
+            "Os soldados displicentes recebem castigos e punições.",
+            "Cada estudante, individualmente, tem direito a prêmios."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Assinale a opção que apresenta a frase sem possibilidade de ambiguidade.",
+          "alternativas": [
+            "Abandonou a sala vazia.",
+            "Adquiriu o carro rápido.",
+            "Comprei o livro com rapidez.",
+            "O juiz expulsou o jogador errado.",
+            "O chofer entristecido trancou a porta do carro."
+          ],
+          "correta": "C"
+        }
+      ]
+    }
+  ]
+}
