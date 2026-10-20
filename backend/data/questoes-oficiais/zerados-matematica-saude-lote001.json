@@ -284,18 +284,18 @@
       "gabaritoDefinitivo": true,
       "questoes": [
         {
-          "numero": 36,
+          "numero": 37,
           "disciplina": "Enfermagem",
           "assunto": "Raiva Humana",
-          "enunciado": "Em 2 de janeiro de 2025, o CIEVS Nacional foi notificado de caso suspeito de raiva humana em Pernambuco, com histórico de mordedura por sagui em novembro de 2024. Uma mulher de 56 anos apresentou sintomas neurológicos e dificuldade para deglutir. A PCR de amostras de saliva e tecido foi positiva para o vírus da raiva com variante de sagui/soim. As orientações do CIEVS Nacional às unidades da rede e aos Núcleos Hospitalares de Epidemiologia devem incluir a",
+          "enunciado": "Em 02 de janeiro de 2025, o CIEVS Nacional foi notificado pelo CIEVS/PE sobre caso suspeito de raiva humana em Santa Maria do Cambucá (PE), com histórico de mordedura na mão esquerda por sagui, em 28 de novembro de 2024. A paciente é uma mulher de 56 anos de idade, sem comorbidades, agricultora aposentada, que deu entrada no Hospital Universitário Oswaldo Cruz em 31 de dezembro de 2024, com queixa de dor e dormência em membro superior esquerdo, com irradiação em hemitórax esquerdo e dormência no membro superior direito, iniciados no dia 24 de dezembro de 2024. Apresentou quadro de astenia, tontura, febre baixa e dificuldade para deglutição. Foram coletadas amostras de soro, saliva, fragmento de tecido e líquor no dia 03 de janeiro. Em 08 de janeiro, as análises em Reação em Cadeia da Polimerase (PCR) das amostras de saliva e fragmento de tecido da paciente apresentaram resultados detectáveis para o vírus da raiva, com determinação da variante do sagui/soim (Callithrix jacchus). A paciente permanece internada em Unidade de Terapia Intensiva, em estado grave, mas mantendo quadro estável. As orientações do CIEVS Nacional para as Unidades da Rede CIEVS e/ou para os Núcleos Hospitalares de Epidemiologia (NHE) do Estado de Pernambuco devem incluir a",
           "alternativas": [
-            "intensificação da vigilância, com foco na detecção de casos, coleta oportuna de exames laboratoriais e uso oportuno e adequado da profilaxia antirrábica humana.",
-            "instituição de profilaxia pré-exposição para a população habitante do local provável de infecção como medida de controle imediata.",
-            "notificação semanal de todo caso suspeito ou confirmado pelo profissional de saúde ou serviço assistencial.",
-            "busca ativa quanto à detecção de espoliação em animais e humanos e de moradias sem proteção adequada.",
-            "vacinação de cães e gatos e recolhimento de animais errantes e sem controle como única medida recomendada."
+            "intensificação da vigilância, com foco especial na detecção de casos, coleta oportuna de exames laboratoriais e uso oportuno e adequado dos esquemas de profilaxia antirrábica humana.",
+            "instituição de profilaxia pré-exposição para a população habitante do local provável de infecção (LPI), como medida de controle imediata.",
+            "notificação semanal de todo caso suspeito ou confirmado pelo profissional de saúde ou responsável pelo serviço assistencial que prestar atendimento a pacientes.",
+            "realização de busca ativa e sensibilização dos profissionais de saúde quanto à detecção da presença de espoliação em animais e/ou humanos e presença de moradias sem proteção adequada.",
+            "recomendação para realizar-se vacinação de cães e gatos, recolhimento de animais errantes e sem controle, a fim de se limitar a disseminação da infecção."
           ],
-          "correta": "B"
+          "correta": "A"
         }
       ]
     }
