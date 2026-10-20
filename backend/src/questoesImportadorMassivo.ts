@@ -106,7 +106,7 @@ export function validarManifesto(value: unknown, arquivo: string): Manifesto {
       }
       numeros.add(numero);
       const alternativas = questao.alternativas as string[];
-      if (new Set(alternativas.map(normalizar)).size !== alternativas.length) {
+      if (new Set(alternativas.map(a => a.normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim())).size !== alternativas.length) {
         erro(arquivo + ": alternativas semanticamente iguais em " + prova.codigo + " nº " + numero);
       }
       const textoCompleto = (questao.enunciado as string) + " " + alternativas.join(" ");
