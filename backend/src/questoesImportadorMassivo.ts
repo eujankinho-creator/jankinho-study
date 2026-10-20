@@ -236,6 +236,29 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
     resumo.inseridas += bloco.length;
     console.log("[lotes-massivos] Bloco gravado: " + resumo.inseridas + "/" + preparadas.length);
   }
+  // Saneia resíduos de cabeçalhos do PDF nas alternativas já gravadas.
+  const cabecalhoFhemig = "FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS - FHEMIG FGV";
+  const sujas = await prisma.alternativa.findMany({
+    where: { texto: { contains: cabecalhoFhemig } },
+    select: { id: true, texto: true },
+  });
+  let higienizadas = 0;
+  for (const alternativa of sujas) {
+    const texto = alternativa.texto.replace(
+      /\s*FUNDAÇÃO HOSPITALAR DO ESTADO DE MINAS GERAIS\s*-\s*FHEMIG\s+FGV\s*$/gi, ""
+    ).trim();
+    if (texto === alternativa.texto) continue;
+    await prisma.alternativa.update({ where: { id: alternativa.id }, data: { texto } });
+    higienizadas++;
+  }
+  console.log("[lotes-massivos] Alternativas higienizadas: " + higienizadas);
+  const resumosPorAssunto = await prisma.questao.groupBy({
+    by: ["tema"],
+    where: { fonte: FONTE_PROVAS_REAIS, origemId: { startsWith: "oficial-fhemig2023-" } },
+    _count: { _all: true },
+  });
+  console.log("[lotes-massivos] POR_ASSUNTO " +
+    JSON.stringify(resumosPorAssunto.map((x) => ({ assunto: x.tema, quantidade: x._count._all }))));
   console.log("[lotes-massivos] RESUMO " + JSON.stringify(resumo));
   return resumo;
 }
