@@ -1,0 +1,224 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "FGV FHEMIG 2023 Urgências Complementares",
+  "provas": [
+    {
+      "codigo": "fhemig2023-complemento-medico-med-cirurgia-geral-nivel-iiicns206",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — Cirurgia Geral",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-cirurgia-geral-nivel-iiicns206-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente feminina, 48 anos deu entrada no Pront o Socorro, com quadro de dor abdominal de início súbito, tipo cólica, a aproximadamente 36 horas, acompanhada de náuseas, vômitos e parada de eliminação de gases e fezes. Fez uso de sintomáticos com pouca melhora e, nas últimas seis horas, a dor ficou constante, associada a acentuada queda do estado geral. Na história patológica pregressa relatou hipertensão arterial controlada com uso de Anlodipino, além de apendicectomia convencional aos 17 anos. Foi submetida a exames laboratoriais que evidenciou 27.800 leucócitos com 18 bastões e desvio até metamielócitos, e ácido lático de 35,3mg/dL. A tomografia computadorizada demonstrou distenção acentuada do delgado, com níveis hidroaéreos e sinais sugestivos de pneumatose. Diante desse quadro foi submetida a lapar otomia exploradora sendo encontrado obstrução intestinal por brida, com necrose de grande parte do intestino delgado, iniciando a 15cm do ângulo de Treitz e indo até 35cm da válvula íleo cecal, com preservação do intestino grosso. Foi realizado ressecção e anastomose jejuno ileal com o remanescente do delgado. Foi encaminhada ao CTI em uso de amina em dose moderada, assistência ventilatória mecânica e antibioticoterapia de larga escala. Diante desse quadro, assinale a afirmativa correta.",
+          "alternativas": [
+            "A paciente evoluirá com falência da função intestinal e deverá iniciar nas próximas 12 horas nutrição parenteral total plena.",
+            "A paciente, se após 2 anos, término da fase adaptativa da insuficiência intestinal, permanecer dependente de nutrição parenteral, deverá ser indicado o transplante intestinal.",
+            "Pacientes que evoluem com insuficiência da função intestinal e que apresentam distensão do segmento de delgado remanescente podem ser submetidos à enteroplastia transversa seriada.",
+            "O uso de dieta enteral contínua por meio de cateter naso - gástrico, deve ser iniciada no pós -operatório imediato, permitindo a saturação das proteínas de transporte, o que facilitará a adaptação intestinal.",
+            "À paciente, devido ao pequeno remanescente de superfície intestinal funcional, tão logo tenha condições de ingesta oral, preconiza-se o uso de soluções hipertônicas para manutenção do equilíbrio hidroeletrolítico"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente de 32 anos de idade, sexo masculino, sofreu acid ente de motocicleta. Na emergência apresenta -se gemente, não responsivo às solicitações verbais, hipocorado 3+/4+, PA 82 x 37mmHg, FC 135bpm, FR 26irpm, SatO2 78%. Na inspeção, observa-se colapso jugular bilateral, além de grande equimose com crepitação à compressão, sem enfisema subcutâneo, em parede torácica esquerda. À ausculta cardíaca, com hipofonese, e à respiratória, com abolimento do murmúrio à esquerda, além de macicez à percussão torácica. Discreta resposta a estímulos álgicos. Pupilas isocóricas e fotorreagentes. Diante desse quadro, assinale a opção que indica a melhor medida inicial a ser tomada.",
+          "alternativas": [
+            "Toracotomia imediata, antero lateral esquerda no 6º EIC.",
+            "Proceder com protocolo E-FAST, se inconclusivo, tomografar.",
+            "Drenagem torácica co m dreno tubular no 5º EIC, linha axilar média.",
+            "Intubação orotraqueal, com proteção da coluna, associada à manobra de Sellick.",
+            "Toracocentese de alívio com Gelco® 16 no 2º EIC na linha hemi clavicular anterior"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente adolescente é levado para atendimento na emergência, devido a dor abdominal de forte intensidade, associada a náuseas, vômitos e prostração. Relata que vinha apresentando perda de peso e aumento da frequência de micções. A rotina radiológica de abdome aguda evidenciou distensão difusa do delgado. O leucograma apresentava discreta leucocitose sem desvio para esquerda; pH: 7,25; HCO 3: 12 mEq/L; PaCO2:25 mmHg; Na: 128mEq/L; K: 3,5mEq/L; Glicose: 422mg/dL; e Creatinina 1,2mg/dL. Diante desses achados, assinale a opção que apresenta a melhor conduta.",
+          "alternativas": [
+            "Hidratação com reposição hidroeletrolítica, seguida de laparotomia exploradora.",
+            "Antiemético, analgesia, hidratação com reposição hidroeletrolítica e insulinoterapia.",
+            "Cateterismo vesical, hidratação com reposição hidroeletrolítica e antibioticoterapia de largo espectro.",
+            "Cateter nasogástrico, antiemético, antinflamatório não hormonal e hidratação com reposição hidroeletrolítica.",
+            "Antiemético, antinflamatório não hormonal, hidratação com reposição hidroeletrolítica e antibioticoterapia para germes do trato urinário"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente masculino, 65 anos, procurou o Pronto Socorro devido à dor abdominal de início insidioso, tornando -se muito intensa, há mais de 12 horas, de localização difusa, acompanhado de episódios de êmese e diarreia com traços de sangue. Relata ter diabetes tipo II, fibrilação atrial crônica e ser ex -tabagista. No exame clínico encontrava -se com facie de dor, sem posição no leito, com PA: 90 x 50mmHg; FC: 152bpm; e SatO2: 87%. O exame de tomografia computadorizada, sem contraste venoso, evidenciou alguns foc os de pneumatocele em alças de delgado e moderada quantidade de líquido livre na pelve. Diante desse quadro, a melhor conduta é",
+          "alternativas": [
+            "dripping de amiodarona, hidratação venosa e antieméticos.",
+            "cardioversão e angiotomografia para confirmação diagnóstica.",
+            "abordagem cirúrgica, com ressecção dos segmentos intestinais inviáveis.",
+            "heparinização plena e revascularização da artéria mesentérica superior por via endovascular.",
+            "abordagem cirúrgica com ressecção dos segmentos intestinais inviáveis e trombo embolectomia dos seguimentos comprometidos, mas viáveis"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente do sexo feminino, 58 anos, com quadro de dor abdominal em andar inferior há 3 dias, maior à esquerda, febre e queda do estado geral. PA: 115x67mmHg; FC: 112bpm; FR: 23irpm; e SatO2: 96% em ar ambiente. Extremidades mal perfundidas. Abdome globoso, pouco depressível, difusamente doloroso à palpação, mais intensamente em fossa ilíaca esquerda, com sinais de irritação peritoneal nesta topografia. Laboratório: Leucócitos: 17.5 00; Bastões: 7%. Tomografia de abdome e pelve evidência doença diverticular colônica difusa, mais intensa em sigmoide, focos de pneumoperitôneo e moderada quantidade de líquido livre nos quatro quadrantes da cavidade peritoneal. Para esse caso, assinale a opção que indica a melhor conduta.",
+          "alternativas": [
+            "Antibioticoterapia, dieta oral zero e Mesacol.",
+            "Antibioticoterapiae e sigmoidectomia com anastomose primária.",
+            "Antibioticoterapia e colocação guiada por imagem de dreno tipo pigtail na pelve.",
+            "Antibioticoterapia e sigmoidectomia com anastomose primária com estoma derivativo.",
+            "Antibioticoterapia e sigmoidectomia com colostomia terminal com o descendente e fechamento do coto retal"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente de 35 anos, na 28ª semana de gestação, vem há doi s dias apresentando dor abdominal em cólica, mais evidente em hipocôndrio direito e epigástrio, associada a náuseas e vômitos, principalmente após a ingesta de alimentos gordurosos. Procurou seu médico obstetra que a encaminhou para a maternidade. Diante desse quadro, assinale a afirmativa correta.",
+          "alternativas": [
+            "O primeiro exame de imagem a ser feito é a ressonância magnética.",
+            "Adotar tratamento conservador com antibióticos, hidratação, antieméticos e analgésicos.",
+            "A conduta a ser seguida, caso confirmada colecistite aguda, é a de cirurgia imediata pelos riscos de morte fetal.",
+            "A presença do útero acima da cicatriz umbilical é contraindicação formal para cirurgia videolaparoscópica.",
+            "Optando pela cirurgia, não fazer colangiografia per operatória devido à alta dose de radiação ionizante associada à leucemia"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente masculino, 25 anos, procurou o Serviço de Emergência devido à dor abdominal, náuseas, vômitos e parada de eliminação de gases e fezes, com evolução de 24 horas. Relata achar que tem intestino irritáve l devido a episódios diarreicos frequentes, e um episódio a cerca de 6 meses de uveíte no olho direito. Sem outras patologias pregressas. Ao exame clínico, lúcido, orientado, normotenso, eupneico. Apresentava distensão abdominal, com dor à palpação difusa , sem sinais de irritação peritoneal, peristaltismo exacerbado. A tomografia de abdome evidenciou distensão de delgado com sinais de empilhamento de moeda, cólon vazio e ausência de gás no reto. Hemograma com 15.600 leucócitos e 6 bastões. Diante desse qua dro, assinale a opção que indica a melhor conduta.",
+          "alternativas": [
+            "Colonoscopia terapêutica descompressiva.",
+            "Laparotomia exploradora por incisão mediana.",
+            "Dieta zero, cateter naso-gástrico, antibioticoterapia.",
+            "Estabilização clínica e vídeo-laparoscopia diagnóstica.",
+            "Dieta zero, hidratação venosa, cateter naso -gástrico, corticoide"
+          ],
+          "correta": "E"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-complemento-medico-med-ortopedia-e-traumatologia-nivel-iiicns235",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Médico — Ortopedia e Traumatologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-med-ortopedia-e-traumatologia-nivel-iiicns235-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "No tratamento das fraturas desviadas do colo femoral, a qualidade da redução pode ser avaliada pelo critério descrito por Garden. Segundo Garden: I. no pós operatório, na incidência em AP, o ângulo formado pelo eixo do colo do fêmur e o eixo formado pela diáfise do fêmur deve ser de 160 graus. II. no pós operatório, na incidência em AP, o ângulo formado pelo eixo do colo do fêmur e o eixo formado pela diáfise do fêmur deve ser de 125 graus. III. no pós operatório, na incidência em AP, o ângulo formado pelo eixo central do sistema trabecular medial da cabeça e cortical medial deve ser 160 graus. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "III, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "A fratura do proximal da tíbia que apresenta cisalhamento lateral com depressão, é classificada como",
+          "alternativas": [
+            "OTA B 1 e Schatzker tipo 1.",
+            "OTA B 2 e Schatzker tipo 3.",
+            "OTA B 3 e Schatzker tipo 4.",
+            "OTA B 3 e Schatzker tipo 2.",
+            "OTA B 2 e Schatzker tipo 1"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "A lesão traumática, conhecida como tríade maldita do cotovelo, consiste em",
+          "alternativas": [
+            "fratura do olecrânio + fratura da cúpula radial + fratura do coronoide.",
+            "luxação posterior do cotovelo + fratura do olecrânio + fratura da cúpula radial.",
+            "luxação posterior do cotovelo + fratura do coronoide + fratura da cúpula radial.",
+            "luxação antero lateral do cotovelo + lesão do ligamento medial do cotovelo + fratura do coronoide.",
+            "luxação antero lateral do cotovelo + lesão do ligamento medial do cotovelo + fratura do olecrânio"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Criança do sexo feminino de 7 anos de idade, após queda, sofreu uma fratura distal do úmero fechada. Ao exame era incapaz de fletir a articulação inter falangeana distal do indicador e a inter falangeana do polegar. Esses achados demonstram déficit de fibras no nervo",
+          "alternativas": [
+            "ulnar.",
+            "radial.",
+            "músculo cutâneo.",
+            "interósseo anterior.",
+            "interósseo posterior"
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "fhemig2023-complemento-profissional-de-enfermagem-penf-enfermeiro-obstetra-nivel-vicns305",
+      "banca": "FGV",
+      "ano": 2023,
+      "orgao": "Fundação Hospitalar do Estado de Minas Gerais — FHEMIG",
+      "cargo": "Enfermeiro Obstetra",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/profissional-de-enfermagem-penf-enfermeiro-obstetra-nivel-vicns305-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-fhemig-retificado-01.11.2023.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Uma gestante na 26ª semana de gestação deu entrada na unidade de saúde apresentando padrão respiratório ineficaz; saturação de O² = 94% em ar ambiente; PAS = 165 e PAD = 110mmHg, dor de cabeça, de estômago, e temperatura axilar = 40C. De acordo com o protocolo de acolhimento e classificação de risco em obstetrícia, essa gestante deve receber a classificação",
+          "alternativas": [
+            "vermelha (atendimento imediato).",
+            "laranja (atendimento em até 15 minutos).",
+            "amarela (atendimento em até 30 minutos).",
+            "verde (atendimento em até 120 minutos).",
+            "azul (atendimento não prioritário)"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Uma das medidas que deve ser garantida à mulher vítima de violência sexual é a Profilaxia Pós-Exposição ao HIV (PEP). Essa medida deve ser realizada no máximo em até",
+          "alternativas": [
+            "12 horas.",
+            "24 horas.",
+            "48 horas.",
+            "72 horas.",
+            "96 horas"
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}
