@@ -1,0 +1,383 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "corenrr2024-tecnico-informatica-temas-deficitarios-lote001",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "selecon-corenrr-2024-tecnico-informatica-tipo1",
+      "banca": "Instituto Selecon",
+      "ano": 2024,
+      "orgao": "Conselho Regional de Enfermagem de Roraima",
+      "cargo": "Técnico de Informática — Área de Informática (401)",
+      "cadernoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/57JfaJfyHKG8MymVi17jIAnIFoXJKbI2EZB52cTP.pdf",
+      "gabaritoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/vSdnipfq713HvDbn5BirXNzLsFgoPTEQy1gV9AM6.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 12,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Sérgio possui cinco notas de valores diferentes de dólar (5, 10, 20, 50 e 100 dólares) e quatro notas de distintos valores de libra esterlina (5, 10, 20 e 50 libras). Ele vai escolher uma nota de libra esterlina e outra de dólar para mostrar a um amigo, mas elas devem ter diferentes números estampados. Por exemplo, um par pode ter uma nota de 10 dólares com uma de 20 libras, mas não pode ter uma de 50 dólares com uma de 50 libras. Assim, o número máximo de distintos pares de notas que Sérgio poderá mostrar a seu amigo é igual a:",
+          "alternativas": [
+            "14",
+            "16",
+            "18",
+            "20"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Proposições e Conectivos",
+          "enunciado": "Considere que a proposição “Gilda não está grávida” é verdadeira e que a proposição “Marcondes sabe lógica” é falsa. Dessa forma, as proposições “Se Gilda está grávida, então Marcondes não sabe lógica” e “Marcondes sabe lógica ou Gilda está grávida” possuem, respectivamente, os seguintes valores lógicos:",
+          "alternativas": [
+            "falsa e falsa",
+            "falsa e verdadeira",
+            "verdadeira e falsa",
+            "verdadeira e verdadeira"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equivalências e Negações",
+          "enunciado": "Uma antiga e famosa frase, supostamente dita por uma rainha, destaca a falta de conexão de algumas pessoas com a realidade dos mais necessitados. Tal ideia é aqui apresentada com adaptações: “Se eles não têm pão, então devem comer brioche”. A negação lógica da frase apresentada é:",
+          "alternativas": [
+            "Eles têm pão e devem comer brioche.",
+            "Eles não têm pão e devem comer brioche.",
+            "Eles têm pão e não devem comer brioche.",
+            "Eles não têm pão e não devem comer brioche."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Quatro pessoas dividiram a quantia de 108 reais da seguinte forma: a segunda recebeu oito reais a mais que a primeira, a terceira recebeu oito reais a mais que a segunda, e a quarta recebeu oito reais a mais que a terceira. Dessa forma, a terceira pessoa recebeu, em reais, o valor de:",
+          "alternativas": [
+            "31",
+            "33",
+            "35",
+            "37"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Normalmente, em um computador, temos diferentes tipos e tecnologias de armazenamento, para diversos fins. Um meio de armazenamento dito volátil, ou seja, cujos dados são apagados quando não há fornecimento de energia é o/a:",
+          "alternativas": [
+            "pendrive",
+            "disco rígido",
+            "memória RAM",
+            "Solid State Drive (SSD)"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Informática",
+          "assunto": "Windows",
+          "enunciado": "Ao registrar um chamado técnico, um usuário de um computador instalado com o sistema operacional Windows 10 em português precisou fornecer algumas informações sobre as unidades de disco instaladas em seu computador, tais como modelo e driver. Para obter essas informações, pode-se usar o aplicativo denominado:",
+          "alternativas": [
+            "Visualizador de Eventos",
+            "Gerenciador de Tarefas",
+            "Explorador de Arquivos",
+            "Gerenciador de Dispositivos"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Ao se instalar um Firewall entre a rede interna da empresa e a Internet, estamos estabelecendo um modo de:",
+          "alternativas": [
+            "limitar o número de usuários dos computadores",
+            "ter backups atualizados de forma automática",
+            "controlar o acesso à rede interna",
+            "eliminar os vírus da rede"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Um protocolo seguro para transferir mensagens e conteúdo de páginas entre os navegadores locais e os servidores Web é o:",
+          "alternativas": [
+            "POP",
+            "ICMP",
+            "PING",
+            "HTTPS"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo Ético-Disciplinar",
+          "enunciado": "De acordo com o Código de Ética dos Empregados Públicos do Sistema Cofen/Conselhos Regionais de Enfermagem, são penalidades disciplinares: advertência; suspensão; demissão; destituição de cargo ou função comissionada. A penalidade de demissão também será aplicada no caso em que o empregado:",
+          "alternativas": [
+            "manutenção sob a sua chefia imediata cônjuge, companheiro ou parente até o terceiro grau civil",
+            "procedimento desidioso, assim entendido a falta ao dever de diligência no cumprimento de suas atribuições",
+            "retirada sem prévia autorização da autoridade competente, qualquer documento ou objeto da repartição",
+            "prática de comércio de compra e venda de bens ou serviços no recinto da repartição, ainda que fora do horário normal de expediente"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Processo Ético-Disciplinar",
+          "enunciado": "Na apuração de irregularidade, o empregado pode receber afastamento preventivo determinado pela autoridade instauradora do processo disciplinar. Essa medida é adotada:",
+          "alternativas": [
+            "para que empregado não venha a influir na apuração da irregularidade",
+            "para que o empregado tenha prazo adequado para preparar sua defesa técnica",
+            "quando a Administração tiver indícios suficientes de que o empregado tenha cometido a conduta que lhe foi imputada",
+            "a fim de que o empregado obtenha tempo para, se necessário, buscar nova oportunidade no mercado de trabalho"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Sistema COFEN/COREN",
+          "enunciado": "Cada Conselho Regional de Enfermagem deve eleger seu Presidente, Secretário e Tesoureiro, admitida a criação de cargos de Vice-Presidente, Segundo Secretário e Segundo Tesoureiro para os Conselhos com mais de doze membros. De acordo com a lei que dispõe sobre a criação dos Conselhos Federal e Regionais de Enfermagem, o mandato dos membros dos Conselhos Regionais:",
+          "alternativas": [
+            "será exercido após realização de eleição por voto secreto e facultativo",
+            "terá a duração de quatro anos",
+            "admite uma reeleição",
+            "será remunerado"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Código de Ética dos Profissionais de Enfermagem",
+          "enunciado": "As sanções administrativas previstas em lei para os infratores do Código de Deontologia de Enfermagem variam em natureza e gravidade, de acordo com o contexto. Após ouvido o Conselho Regional interessado, é uma pena de competência do Conselho Federal:",
+          "alternativas": [
+            "censura",
+            "advertência",
+            "suspensão do exercício profissional",
+            "cassação do direito ao exercício profissional"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Lei 7.498/1986",
+          "enunciado": "O exercício da enfermagem é feito privativamente pelo enfermeiro, pelo técnico de enfermagem, pelo auxiliar de enfermagem e pela parteira, respeitados os respectivos graus de habilitação. Ao auxiliar de enfermagem, cabe especialmente:",
+          "alternativas": [
+            "prestar cuidados de higiene e conforto ao paciente",
+            "participar da programação da assistência de enfermagem",
+            "prestar assistência de enfermagem à gestante e à parturiente",
+            "participar da supervisão do trabalho de enfermagem em grau auxiliar"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Na operação de microcomputadores e notebooks, são utilizados dispositivos que podem operar tanto na entrada de dados para processamento, como na saída dos dados já processados, mudando apenas o momento em que são empregados. Três exemplos de dispositivo que se enquadram nessa categoria são:",
+          "alternativas": [
+            "scanner, plotter e impressoras inkjet",
+            "mouse, teclado e impressoras matriciais",
+            "webcam, joystick e impressoras bubblejet",
+            "pendrives, discos rígidos e impressoras multifuncionais"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Na medida do desempenho de um HD, o tempo de busca é o gasto pela cabeça de leitura no trajeto que vai de uma trilha à outra do disco. Esse tempo é importante, pois representa o fator que mais influencia no tempo de acesso e, consequentemente, na performance geral do HD. Existem três índices diferentes para o cálculo do tempo de busca, o primeiro indica o tempo que a cabeça de leitura demora para se deslocar da primeira até a última trilha do HD, o que normalmente demora entre 15 e 20 milissegundos; o segundo é aquele em que a cabeça demora para mudar de uma trilha para a seguinte; o terceiro indica o tempo médio que a cabeça demora para se locomover até um setor aleatório do HD. Esses três índices são conhecidos, respectivamente, como tempos:",
+          "alternativas": [
+            "Full stroke, Track-to-Track e Average",
+            "Full stroke, Average e Track-to-Track",
+            "Track-to-Track, Average e Full stroke",
+            "Track-to-Track, Full stroke e Average"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "No que concerne à configuração, à administração e ao gerenciamento de serviços de rede em ambiente Linux, o diretório raiz é aquele com maior hierarquia entre todos do sistema, significando que todos os diretórios do Linux ficam abaixo dele. No Linux, um diretório armazena as definições dos dispositivos de entrada/saída, outro, os arquivos de configuração do sistema, e um terceiro, os aplicativos usados na administração do sistema. Esses três diretórios são, respectivamente:",
+          "alternativas": [
+            "dev, etc e sbin",
+            "dev, lib e boot",
+            "sys, etc e boot",
+            "sys, lib e sbin"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "De acordo com a Microsoft, atualmente, o Windows Server 2022 BR é uma plataforma para compilar uma infraestrutura de aplicativos, redes e serviços Web conectados, do grupo de trabalho ao data center. No que diz respeito à configuração, administração e gerenciamento de serviços, deve-se atentar para determinados requisitos mínimos no que diz respeito ao hardware. Nesse sentido, os requisitos mínimos em termos de processador, RAM e espaço de armazenamento no disco rígido são, respectivamente:",
+          "alternativas": [
+            "3.2 GHz 64-bit, 512 MB e 480GB",
+            "1,4 GHz 64-bit, 512 MB e 32 GB",
+            "1,4 GHz 64-bit, 16 GB e 480 GB",
+            "3.2 GHz 64-bit, 16 GB e 32 GB"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Atualmente, a virtualização consiste em uma prática que viabiliza a criação de várias máquinas virtuais diferentes a partir de um equipamento físico. Entre os tipos de virtualização, um se caracteriza por usar um software com a meta de identificar espaço de armazenamento em outros dispositivos e agrupálo em somente um recurso para as máquinas acessarem os dados. Nesse modelo, os administradores podem gerir o armazenamento utilizando um console central, muito usado na virtualização de Data Center, que também pode explorar outros dispositivos virtualizados, como a rede e recursos de computação, possibilitando que o ambiente suporte a demanda com maior facilidade. São vantagens dessa virtualização: a administração simplificada, o aumento da performance, a expansão do nível de confiabilidade e a diminuição de gastos com hardware. Essa descrição caracteriza a virtualização do tipo:",
+          "alternativas": [
+            "rede",
+            "desktop",
+            "aplicativos",
+            "armazenamento"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "As redes de computadores cabeadas são implementadas em conformidade com o padrão Ethernet. O cabeamento estruturado segue um dos padrões T-568A ou T-568B, no que se refere ao uso das cores dos fios e guias. Nesse sentido, considere os identificadores V para verde, L para laranja, A para azul, M para marrom, BV para branco-do-verde, BL para branco-do-laranja, BA para branco-do-azul e BM para branco-do-marrom. No cabeamento RJ45 em 100 Mbps - Fast Ethernet, apenas os pinos 1-2 para transmissão e 3-6 são recepção. De acordo com o padrão T-568A, para esses pinos, são utilizadas, respectivamente, as cores:",
+          "alternativas": [
+            "BV – V e BL – L",
+            "BL – L e BV – V",
+            "BA – A e BM – M",
+            "BM – M e BA – A"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Do ponto de vista conceitual, o Modelo OSI/ISO é usado para entender e descrever as funcionalidades e interações entre os diferentes protocolos de rede, em um sistema de comunicação de dados. T endo por foco esse modelo, uma camada tem por função verificar se os dados recebidos do meio físico possuem algum erro e, caso positivo, se esse erro pode ser corrigido. Dessa forma, as camadas superiores podem assumir uma transmissão praticamente sem erros. Essa camada é conhecida como:",
+          "alternativas": [
+            "enlace",
+            "aplicação",
+            "transporte",
+            "apresentação"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Como um protocolo com conexão, o TCP estabelece e mantém um link entre aplicativos ou dispositivos, até que eles concluam o intercâmbio de dados. É um protocolo que opera em uma camada do modelo OSI/ISO e arquitetura TCP/IP , que busca assegurar a integridade dos dados, utiliza uma técnica no seu funcionamento para controle do fluxo de pacotes e implementa um modo de transmissão eficiente. A camada, a técnica e o modo de transmissão são, respectivamente:",
+          "alternativas": [
+            "transporte, Spanning Tree e half-duplex",
+            "transporte, Sliding Windows e full-duplex",
+            "apresentação, Spanning Tree e full-duplex",
+            "apresentação, Sliding Windows e half-duplex"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A Internet opera com base na execução de transações por meio do funcionamento cooperativo entre os protocolos TCP/ IP , que realizam o processo de comunicação por meio de portas conhecidas. Por exemplo, (embora uma mesma porta seja utilizada para a comunicação do DNS com os protocolos UDP e TCP , os tipos de conexão são diferentes . As portas TCP atendem aos protocolos de controle de transmissão, enquanto as portas UDP atendem aos protocolos de datagramas do usuário. Nesse caso, a porta utilizada é a de número:",
+          "alternativas": [
+            "53",
+            "67",
+            "125",
+            "443"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "No que se refere aos equipamentos de interconexão de redes, dois equipamentos realizam filtro de tráfego, o primeiro opera na camada de enlace do modelo OSI/ISO e direciona frames MAC com função de segmentação, o segundo opera na camada de rede com a função de rotear pacotes IP e, finalmente, o terceiro atua unicamente na camada física, sem realizar qualquer função de filtragem. Esses três equipamentos são, respectivamente, conhecidos por:",
+          "alternativas": [
+            "switch de nível 3, bridge e repeater",
+            "switch de nível 3, router e gateway",
+            "switch de nível 2, router e repeater",
+            "switch de nível 2, bridge e gateway"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Um novo padrão Wi-Fi é a etapa mais recente de uma jornada de inovação ininterrupta. Baseia-se nos pontos fortes do 802.11ac, aumentando a eficiência, a flexibilidade e a escalabilidade, o que permite que as redes atuais e as novas tenham mais velocidade e maior capacidade com aplicações de próxima geração. Cabe destacar que o novo padrão suporta as frequências de 2,4 e 5 GHz. Esses padrões suportam uma tecnologia recente, descrita a seguir: • as antenas omnidirecionais dos roteadores comuns funcionam irradiando o sinal Wi-Fi de forma igual para todos os lados. Na prática, isso quer dizer que todos os dispositivos que estiverem no raio de alcance do sinal vão conseguir trocar informações com o roteador; • a nova tecnologia age de uma forma diferente, focando o sinal em uma direção específica, em que um ou mais dispositivos estão conectados. Com isso, a transmissão entre o smartphone e o roteador, por exemplo, tem uma qualidade melhor, menos suscetível a interferências e com alcance ampliado. O novo padrão e essa tecnologia são conhecidos, respectivamente, como:",
+          "alternativas": [
+            "IEEE-802.11/ad (Wifi-5) e slipforming",
+            "IEEE-802.11/ax (Wifi-6) e slipforming",
+            "IEEE-802.11/ad (Wifi-5) e beamforming",
+            "IEEE-802.11/ax (Wifi-6) e beamforming"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "OSPF é a sigla para um protocolo de roteamento que observa as rotas para chegar a um determinado destino e opta por aquela que será concluída em menor tempo ou sem trânsito. O OSPF é conhecido como protocolo de estado de um tipo específico e utiliza um determinado algoritmo para determinar a melhor rota. O tipo específico e o nome pelo qual é conhecido o algoritmo são, respectivamente:",
+          "alternativas": [
+            "enlace e Path Vector",
+            "transporte e Path Vector",
+            "enlace e Shortest Path First",
+            "transporte e Shortest Path First"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "O termo storage é frequentemente usado para descrever os dispositivos de armazenamento conectados ao computador, mas são também sistemas corporativos de armazenamento com grande capacidade de processamento, utilizados nos servidores de arquivos em redes locais ou mesmo em nuvem. Dentre os tipos existentes, dois são descritos a seguir: I. são equipamentos que possuem sistemas operacionais incorporados, não precisando de um servidor para funcionar, sendo conectados diretamente em qualquer rede local. Conceitualmente, é um grande HD conectado à rede, com recursos profissionais de gerenciamento, componentes redundantes para maior proteção dos dados e capaz de centralizar dados de forma organizada. São equipamentos que permitem armazenar, compartilhar, acessar e gerenciar todos os dados armazenados por todos os usuários autorizados via rede, utilizando recursos como acesso protegido por login, senha e recursos para registrar as atividades de cada usuário; II. é uma rede corporativa voltada para conectar e manter disponíveis servidores e storages via LAN dentro de um ambiente seguro, redundante e de alta performance. Utilizada em infraestruturas de TI corporativas, é uma rede de armazenamento composta exclusivamente por servidores e storages, interligados através de conexões IP (iSCSI) ou Fibre Channel (FC). Ela centraliza e melhora o gerenciamento das informações, proporcionando mais segurança e velocidade no acesso aos dados em grandes infraestruturas de TI e datacenters. Esses tipos de storages são conhecidos, respectivamente, pelas siglas:",
+          "alternativas": [
+            "DAS e NAS",
+            "SAN e DAS",
+            "SAN E NAS",
+            "NAS e SAN"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Informática",
+          "assunto": "Windows",
+          "enunciado": "Active Directory (AD) é um serviço de diretório criado pela Microsoft. Ele fornece todos os tipos de funcionalidades como autenticação de grupo e gerenciamento de usuários, administração de políticas e muito mais. Active Directory é um servidor de diretório que usa o protocolo LDAP . Por sua vez, LDAP é um protocolo de Internet que e-mails e outros programas usam para procurar informações de um servidor. Trata-se de um protocolo de aplicação aberto, livre de fornecedor e padrão de indústria para acessar e manter serviços de informação de diretório distribuído sobre uma rede IP . LDAP é baseado no modelo cliente/servidor, com uma dada topologia e um tipo de estrutura. A topologia e a estrutura são, respectivamente:",
+          "alternativas": [
+            "árvore e descentralizada",
+            "anel e descentralizada",
+            "árvore e centralizada",
+            "anel e centralizada"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "O protocolo IPv6 apresenta, como principal característica e justificativa para o seu desenvolvimento, o aumento no espaço para endereçamento, que passou de 32 bits no IPv4 para 128 bits. O IPv6 suporta três tipos de endereços, descritos a seguir: (1) um (?) identifica uma única interface, de modo que um pacote enviado a esse tipo de endereço é entregue a uma única interface; (2) outro (?) identifica um conjunto de interfaces, sendo que um pacote encaminhado a esse tipo de endereço é entregue à interface pertencente a esse conjunto mais próximo da origem, de acordo com distância medida pelos protocolos de roteamento. Um endereço desse tipo é utilizado em comunicações de um-para-um-de-muitos; (3) um terceiro identifica um conjunto de interfaces, entretanto, um pacote enviado a um endereço desse tipo é entregue a todas as interfaces associadas a esse endereço. Um endereço desse é utilizado em comunicações de um-para-muitos. Os tipos descritos são conhecidos, respectivamente, como:",
+          "alternativas": [
+            "Unicast, Anycast e Multicast",
+            "Unicast, Multicast e Anycast",
+            "Multicast, Anycast e Unicast",
+            "Multicast, Unicast e Anycast"
+          ],
+          "correta": "A"
+        }
+      ]
+    }
+  ]
+}
