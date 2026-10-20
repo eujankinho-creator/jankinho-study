@@ -14,6 +14,132 @@
       "gabaritoDefinitivo": true,
       "questoes": [
         {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "“[...] envolvendo intervenção efetiva do poder público e a participação ativa da população na eliminação dos focos do Aedes aegypti, vetor da doença, em áreas de residências e quintais, além de parques e praças, pois se trata de um mosquito que coabita com humanos.” Nesse trecho, o conectivo “pois”",
+          "alternativas": [
+            "exprime uma relação semântica conclusiva.",
+            "pode ser substituído pelo conectivo “por isso”.",
+            "constitui-se de um argumento com valor concessivo.",
+            "pode ser substituído pelo conectivo “porque”.",
+            "expressa uma relação de condicionalidade."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Sintaxe da Oração e do Período",
+          "enunciado": "“Trata-se de uma doença complexa causada por quatro vírus [...].” O sujeito, nessa frase, é corretamente classificado como:",
+          "alternativas": [
+            "sujeito simples - uma doença complexa.",
+            "sujeito composto - uma doença complexa.",
+            "sujeito composto - quatro vírus.",
+            "sujeito indeterminado.",
+            "oração sem sujeito."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "“[...] todas as regiões do país têm potencial para o registro d o aumento de casos, já que o vírus circula em todo o território brasileiro [...].” A vírgula nessa frase separa",
+          "alternativas": [
+            "oração principal e oração subordinada adjetiva explicativa.",
+            "oração principal e oração subordinada adverbial causal.",
+            "oração principal e oração subordinada substantiva.",
+            "oração coordenada assindética e sindética explicativa.",
+            "orações coordenadas assindéticas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Concordância Verbal e Nominal",
+          "enunciado": "“Existem estratégias alternativas importantes como o uso de mosquitos [...].” Desconsideradas as alterações de sentido, assinale a alternativa em que aparece erro gramatical.",
+          "alternativas": [
+            "Parece haver estratégias alternativas importantes como o uso de mosquitos [...].",
+            "Devem existir estratégias alternativas importantes como o uso de mosquitos [...].",
+            "Há estratégias alternativas importantes como o uso de mosquitos [...].",
+            "Faz anos que surgiram estratégias alternativas importantes como o uso de mosquitos [...].",
+            "Devem haver estratégias alternativas importantes como o uso de mosquitos [...]."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Ortografia e Acentuação",
+          "enunciado": "A palavra sublinhada está corretamente empregada na seguinte frase:",
+          "alternativas": [
+            "Flagrante de larvas em piscina revela negligência de moradora.",
+            "A paralização de investimentos atrasou vacina da dengue.",
+            "Identifiquei os locais aonde permanecem os focos do mosquito.",
+            "Nesta seção trabalham somente mulheres. Isso é descriminação.",
+            "A dengue pode matar. Infectologistas explicam o porque."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Enfermagem",
+          "assunto": "Gerenciamento de Resíduos de Serviços de Saúde (GRSS)",
+          "enunciado": "Sobre os Resíduos de Serviços de Saúde (RSS) do Grupo A (Subgrupo A1) é correto afirmar:",
+          "alternativas": [
+            "As culturas e os estoques de microrganismos, bem como os meios de cultura e os instrumentais utilizados para transferência, inoculação ou mistura de culturas, contendo microrganismos das classes de risco 1 e 2 não podem ser tratados fora da unidade geradora.",
+            "As agulhas e o conjunto seringa-agulha utilizadas na aplicação de vacinas, quando não desconectadas, devem atender às regras de manejo dos resíduos perfurocortantes.",
+            "As culturas e os estoques de microrganismos, bem como os meios de cultura e os instrumentais utilizados para transferência, inoculação ou mistura de culturas, contendo microrganismos das classes de risco 3 e 4 podem ser tratados fora da unidade geradora, desde que este tratamento ocorra nas dependências do serviço de saúde.",
+            "Os RSS resultantes de atividades de vacinação com microrganismos vivos, atenuados ou inativados, podem ser descartados diretamente no sistema de coleta de esgotos.",
+            "Os RSS do Subgrupo A1 devem ser destinados para sepultamento, cremação, incineração ou outra destinação licenciada pelo órgão ambiental competente."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "A Tuberculose é uma doença de transmissão aérea e pode ser propagada enquanto a pessoa estiver eliminando bacilos. Considerando o manejo do paciente que está iniciando o tratamento para a doença, em ambiente hospitalar, e as medidas de precaução, é correto afirmar:",
+          "alternativas": [
+            "é necessário manter a porta do quarto sempre fechada e colocar a máscara assim que entrar no quarto.",
+            "o paciente deverá usar máscara cirúrgica durante toda sua permanência fora do quarto, quando sua movimentação não puder ser evitada.",
+            "na indisponibilidade de quarto privativo, o paciente poderá ser internado com outros pacientes com infecção por microrganismos diferentes.",
+            "pacientes com suspeita de tuberculose resistente ao tratamento podem dividir o mesmo quarto com outros pacientes com tuberculose.",
+            "no transporte do paciente, o profissional deverá atentar-se para o uso dos óculos, do avental e da máscara cirúrgica."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "Sobre os requisitos de boas práticas para o processamento de produtos para saúde, marque a alternativa correta:",
+          "alternativas": [
+            "produtos para saúde, utilizados na assistência ventilatória e inaloterapia, deverão ser submetidos à desinfecção por métodos de imersão química líquida com a utilização de saneantes à base de aldeídos.",
+            "produtos para saúde classificados como não críticos devem ser submetidos, no mínimo, ao processo de desinfecção.",
+            "o processamento de produtos para saúde não críticos pode ser realizado em outras unidades do serviço de saúde, desde que, de acordo com Procedimento Operacional Padronizado - POP definido pelo setor executante.",
+            "o processamento dos produtos para saúde pode ser terceirizado para empresa processadora desde que esta esteja regularizada junto aos órgãos sanitários.",
+            "o serviço de saúde não responde por eventuais danos, ao paciente, causados pela empresa processadora contratada, no que se refere às atividades relacionadas ao processamento dos produtos para saúde."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Registros de Enfermagem",
+          "enunciado": "As Boas Práticas de Funcionamento (BPF) dos serviços de saúde são os componentes da garantia da qualidade que asseguram que os serviços são ofertados com padrões adequados. Neste contexto, marque a alternativa INCORRETA relacionada ao prontuário do paciente:",
+          "alternativas": [
+            "a responsabilidade pelo registro, em prontuário, cabe aos profissionais de saúde que prestam o atendimento.",
+            "a guarda do prontuário é de responsabilidade do serviço de saúde, devendo obedecer às normas vigentes.",
+            "o serviço de saúde deve assegurar a guarda dos prontuários no que se refere à confidencialidade e integridade.",
+            "os dados que compõem o prontuário pertencem ao paciente e devem estar permanentemente disponíveis aos mesmos ou aos seus representantes legais, única e exclusivamente.",
+            "o serviço de saúde deve garantir que o prontuário contenha registros relativos à identificação e a todos os procedimentos prestados ao paciente."
+          ],
+          "correta": "D"
+        },
+        {
           "numero": 21,
           "disciplina": "Legislação do COFEN",
           "assunto": "Sistema COFEN/COREN",
@@ -126,6 +252,90 @@
           "correta": "E"
         },
         {
+          "numero": 31,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "Considerando o Regulamento Técnico da Atuação dos Profissionais de Enfermagem em Quimioterapia Antineoplásica, marque a alternativa correspondente a um dos seus objetivos específicos:",
+          "alternativas": [
+            "Promover e difundir medidas de prevenção de riscos e agravos através da educação dos pacientes e familiares.",
+            "Normatizar a consulta de Enfermagem a pacientes submetidos ao tratamento com quimioterápico antineoplásico.",
+            "Proporcionar condições para o aprimoramento dos profissionais de Enfermagem atuantes na área.",
+            "Estabelecer relações técnico-científicas com as unidades afins, desenvolvendo estudos investigacionais e de pesquisa.",
+            "Elaborar protocolos terapêuticos de Enfermagem na prevenção, tratamento e minimização dos efeitos colaterais."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Código de Ética dos Profissionais de Enfermagem",
+          "enunciado": "A prática da auto-hemoterapia por parte dos profissionais de enfermagem caracteriza:",
+          "alternativas": [
+            "uma tarefa privativa do Enfermeiro.",
+            "uma tarefa que requer prescrição médica.",
+            "uma infração ética sujeita às sanções disciplinares.",
+            "uma prática profissional que demanda consentimento prévio do paciente.",
+            "uma infração gravíssima, independente do tipo de dano causado ao paciente."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "Sobre a participação da Equipe de Enfermagem na atividade de Classificação de Risco, leia a afirmativa abaixo e marque a alternativa que a completa de forma correta: Para garantir a segurança do paciente e do profissional responsável pela classificação, deverá ser observado o tempo médio de _____________ por classificação de risco, com limite de até ________________ classificações por ________.",
+          "alternativas": [
+            "10 (dez) minutos; 06 (seis); hora.",
+            "04 (quatro) minutos; 15 (quinze); hora.",
+            "05 (cinco) minutos; 12 (doze); hora.",
+            "15 (quinze) minutos; 32 (trinta e dois); dia.",
+            "02 (dois) minutos; 30 (trinta); hora."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "A Resolução COFEN Nº 678/2021 aprova a atuação da Equipe de Enfermagem em Saúde Mental e em Enfermagem Psiquiátrica. Neste contexto, leia as definições abaixo: I. Atendimento de orientação: aconselhamento ou instrução, individual ou em grupo, sobre algum tema específico, de acordo com a necessidade do usuário. II. Centro de Atenção Psicossocial (CAPS) II: atendimento a todas as faixas etárias para transtornos mentais graves e persistentes, inclusive pelo uso de substâncias psicoativas, atende cidades e ou regiões com pelo menos 70 (setenta) mil habitantes. III. Projeto Terapêutico Singular: ferramenta para planejar estratégias de intervenção para o usuário em situação de vulnerabilidade, considerando os recursos disponíveis da equipe, do território a que pertence e as necessidades do usuário, baseados nos conceit os de corresponsabilização e gestão integrada do cuidado. IV. Redução de danos: processo que determina o aumento da capacidade do usuário de utilizar oportunidades e recursos num percurso que faça crescer sua contratualidade psicológica e social, construindo o direito pleno da cidadania e a constituição material de tal direito. Estão corretas apenas as afirmativas:",
+          "alternativas": [
+            "I, II e III.",
+            "I, III e IV.",
+            "II, III e IV.",
+            "II e III.",
+            "III e IV."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "Compete, ao Enfermeiro, cuidados de Enfermagem de maior complexidade técnica e que exijam conhecimentos científicos adequados e capacidade de tomar decisões imediatas. Considerando a afirmativa, marque a alternativa que poderá ser realizada apenas pelo Enfermeiro com pós -graduação em Saúde Mental, Enfermagem Psiquiátrica ou Atenção Psicossocial:",
+          "alternativas": [
+            "prescrever cuidados de enfermagem voltados à saúde do indivíduo em sofrimento mental.",
+            "programar e gerenciar planos de cuidados para usuários com transtornos mentais persistentes; leves e/ou graves.",
+            "realizar atendimento individual e/ou em grupo com os usuários em sofrimento psíquico e seus familiares.",
+            "prescrever medicamentos e solicitar exames descritos nos protocolos de saúde pública e/ou rotinas institucionais.",
+            "estabelecer o dimensionamento da equipe de Enfermagem em saúde mental."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "Considerando a normativa para a atuação dos Profissionais de Enfermagem na utilização do equipamento de desfibrilação, no cuidado ao indivíduo em parada cardiorrespiratória, marque a alternativa INCORRETA:",
+          "alternativas": [
+            "na indisponibilidade do desfibrilador externo automático (DEA), no âmbito da equipe de Enfermagem, é privativo do Enfermeiro, o manejo do desfibrilador manual para ministrar o choque elétrico.",
+            "nos serviços de saúde e nas unidades pré -hospitalares móveis, o teste funcional do desfibrilador manual, no âmbito da equipe de enfermagem, é atividade privativa do enfermeiro.",
+            "a realização dos procedimentos assistenciais deverá ser executada no contexto do Processo de Enfermagem.",
+            "a avaliação periódica da operacionalidade do desfibrilador externo automático (DEA), no âmbito da equipe de Enfermagem, é privativa do Enfermeiro.",
+            "os casos omissos serão avaliados e decididos pelo Conselho Federal de Enfermagem."
+          ],
+          "correta": "D"
+        },
+        {
           "numero": 37,
           "disciplina": "Legislação do COFEN",
           "assunto": "Inscrição, Registro e Especialidades",
@@ -166,6 +376,132 @@
             "privativo de Enfermeiro, com no mínimo 04 (quatro) anos de experiência profissional e registro na respectiva categoria, admitido por concurso público de prova e títulos, nos termos da legislação vigente, sendo exercido, preferencialmente, em regime de dedicação exclusiva."
           ],
           "correta": "D"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Código de Ética dos Profissionais de Enfermagem",
+          "enunciado": "Considerando os critérios norteadores das práticas de uso e de comportamento dos profissionais de enfermagem, nos meios de comunicação de massa: na mídia impressa, em peças publicitárias, de mobiliário urbano e nas mídias sociais, é vedado ao Profissional de Enfermagem, EXCETO:",
+          "alternativas": [
+            "prestar informações, dar entrevistas e publicar artigos científicos, versando sobre assuntos de enfermagem.",
+            "fazer propaganda de método ou técnica sem comprovação científica e que esteja vedado pela legislação de enfermagem vigente.",
+            "oferecer consultoria a pacientes e familiares por mídia social, como substituição da consulta de enfermagem presencial.",
+            "expor a imagem de pacientes em redes sociais e grupos sociais, tais como o WhatsApp.",
+            "expor imagens de exames de pacientes onde conste a identificação nominal dos mesmos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Registros de Enfermagem",
+          "enunciado": "Considerando as diretrizes que devem ser seguidas para se certificar de que as anotações de Enfermagem, relacionadas aos cuidados prestados ao paciente, sejam comunicadas correta e integralmente, marque a alternativa que caracteriza a concisão:",
+          "alternativas": [
+            "os registros devem conter informações completas e pertinentes para a continuidade da assistência ou para condutas a serem tomadas.",
+            "uma anotação curta e bem redigida é mais facilmente assimilada do que uma longa e irrelevante.",
+            "as decisões e condutas sobre a assistência e os cuidados de um paciente são baseadas em informações atuais.",
+            "registrar todas as informações em formato adequado e em ordem cronológica.",
+            "a lei protege as informações sobre um cliente que esteja sob cuidados profissionais de saúde."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Registros de Enfermagem",
+          "enunciado": "Como documento legal, os registros de enfermagem somente terão valor se forem datados e assinados e, evidentemente, se forem legíveis e não apresentarem rasuras. Neste contexto, a responsabilidade do profissional fundamentada na Constituição Federal, determina que:",
+          "alternativas": [
+            "cuidados de enfermagem de maior complexidade técnica e que exijam conhecimentos de base científica e capacidade de tomar decisões imediatas, são privativos do enfermeiro.",
+            "as declarações constantes do documento particular, escrito e assinado, ou somente assinado, presumem-se verdadeiras em relação ao signatário.",
+            "aquele que, por ação ou omissão voluntária, negligência ou imprudência, violar direito e causar dano a outrem, ainda que exclusivamente moral, comete ato ilícito.",
+            "diz-se o crime culposo, quando o agente deu causa ao resultado por imprudência, negligência ou imperícia.",
+            "são invioláveis a intimidade, a vida privada, a honra e a imagem das pessoas, assegurado o direito à indenização pelo dano material ou moral decorrente de sua violação."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "Considerando as condições técnicas para a implementação de diretrizes assistenciais e a administração de medicamentos, pela equipe de Enfermagem no Suporte Básico de Vida (SBV) e no Suporte Intermediário de Vida (SIV), sob orientação da Central de Regulação das Urgências (CRU), leia as afirmativas abaixo: I. Cabe à equipe de Enfermagem do Atendimento Pré -hospitalar Móvel (APH), realizar a comunicação sistematizada das informações relativas ao atendimento do paciente, para garantir a continuidade da assistência, sendo obrigatória a entrega da cópia da ficha de atendimento (impressa ou eletrônica), devidamente preenchida e assinada, à equipe da unidade. II. O desenvolvimento de protocolos deve considerar os princípios éticos e legais da profissão articulados com as prerrogativas e atribuições das diferentes categorias de enfermagem envolvidas. III. Os protocolos que contemplarem a utilização de medicamentos no Suporte Básico de Vida (SBV) e no Suporte Intermediário de Vida (SIV) devem considerar a escolha racional e criteriosa de medicamentos, segundo as melhores evidências científicas e a segurança do paciente, pactuada com a gestão dos serviços. IV. Os serviços devem garantir condições técnicas apropriadas para que o atendimento seja transmitido, gravado, armazenado e descrito na ficha de atendimento nos serviços de urgência e emergência, assegurando ainda o cumprimento integral à Lei Geral de Proteção de Dados (LGPD). Estão corretas apenas as afirmativas:",
+          "alternativas": [
+            "I, III e IV.",
+            "II, III e IV.",
+            "I, II e III.",
+            "III e IV.",
+            "I e II."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "De acordo com as normas para a atuação da equipe de enfermagem no processo de transporte de pacientes, em ambiente interno aos serviços de saúde, e o nível de complexidade da assistência requerida, considera-se paciente de cuidados de alta dependência:",
+          "alternativas": [
+            "paciente crônico, incluindo o de cuidado paliativo, estável sob o ponto de vista clínico, porém com total dependência das ações de enfermagem para o atendimento das necessidades humanas básicas.",
+            "paciente passível de instabilidade das funções vitais, recuperável, sem risco iminente de morte, requerendo assistência de enfermagem e médica permanente e especializada.",
+            "paciente estável sob o ponto de vista clínico e de enfermagem, com parcial dependência dos profissionais de enfermagem para o atendimento das necessidades humanas básicas.",
+            "paciente grave e recuperável, com risco iminente de morte, sujeito à instabilidade das funções vitais, requerendo assistência de enfermagem e médica permanente e especializada.",
+            "paciente estável sob o ponto de vista clínico e de enfermagem e autossuficiente quanto ao atendimento das necessidades humanas básicas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Leia as afirmativas abaixo. A administração pública direta e indireta de qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios obedecerá aos princípios de legalidade, impessoalidade, moralidade, publicidade e eficiência e, ainda, ao seguinte: I – os cargos, empregos e funções públicas são acessíveis aos brasileiros que preencham os requisitos estabelecidos em lei, assim como aos estrangeiros, na forma da lei. II – o prazo de validade do concurso público será de até dois anos, prorrogável uma vez, por igual período. III – é garantido ao servidor público civil o direito à livre associação sindical. IV – os vencimentos dos cargos do Poder Legislativo e do Poder Judiciário não poderão ser superiores aos pagos pelo Poder Executivo. Estão corretas apenas as afirmativas:",
+          "alternativas": [
+            "I e III.",
+            "II e IV.",
+            "I, II e III.",
+            "II, III e IV.",
+            "Todas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Princípios da Administração Pública",
+          "enunciado": "A administração pública brasileira é norteada por princípios fundamentais que visam assegurar a eficácia, a moralidade e a transparência na gestão pública. Entre os princípios listados, qual destaca a importância de tornar acessíveis as informações sobre a atuação do Estado, garantindo assim a transparência administrativa?",
+          "alternativas": [
+            "Legalidade.",
+            "Impessoalidade.",
+            "Moralidade.",
+            "Publicidade.",
+            "Eficiência."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Poderes Administrativos",
+          "enunciado": "Os Poderes Administrativos são prerrogativas / instrumentos que o Estado tem para a perseguição do interesse público. As resoluções são instrumentos de Manifestação do Poder Administrativo",
+          "alternativas": [
+            "Disciplinar.",
+            "de Polícia.",
+            "Regulamentar.",
+            "Hierárquico.",
+            "Legislativo"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "Sobre administração pública direta e indireta, marque V (verdadeiro) ou F(falso), assinalando em seguida, a única alternativa correta. ( ) A administração direta é constituída pelos órgãos relacionados aos entes da federação, como a União, os estados, o Distrito Federal e os municípios, por exemplo. Eles estão subordinados ao chefe do poder ao qual pertencem. ( ) Alguns exemplos da administração pública são a Presidência da República (nível federal), a Assembleia Legislativa (nível estadual) e a Câmara dos Vereadores (nível municipal). ( ) A administração indireta pode ser entendida como o conjunto de órgãos que prestam serviços públicos, ligados à administração direta, com CNPJ próprio. ( ) Para os órgãos da administração indireta não existe uma hierarquia ou um controle hierárquico. Assim, essas entidades estão subordinadas ao controle do Estado.",
+          "alternativas": [
+            "F – V – V – V",
+            "V – F – V – V",
+            "V – V – F – F",
+            "V – V – V – F",
+            "V – V – V – V"
+          ],
+          "correta": "E"
         }
       ]
     }
