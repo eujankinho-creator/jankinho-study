@@ -1,0 +1,229 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "ufpa-2025-enfermagem-sub30-lote001",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "ufpa-psrmps-2025-enfermagem-geral-tipo1",
+      "banca": "UFPA / CEPS",
+      "ano": 2025,
+      "orgao": "Universidade Federal do Pará",
+      "cargo": "Residência Multiprofissional em Enfermagem (PSRMPS 2025)",
+      "cadernoUrl": "https://ceps.ufpa.br/images/conteudo/residencia/Multiprofissional%202025/provas%20gabaritos/PROVA%20DE%20ENFERMAGEM.pdf",
+      "gabaritoUrl": "https://ceps.ufpa.br/images/conteudo/residencia/Multiprofissional%202025/provas%20gabaritos/definitivo/GABARITO%20DEFINITIVO%20DE%20ENFERMAGEM.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "No que se refere às ações a serem executadas pelo Sistema Único de Saúde (SUS), avalie as assertivas abaixo como verdadeiras (V) ou falsas (F). (__) ações de vigilância sanitária. (__) ações de vigilância epidemiológica. (__) ações de educação permanente. (__) ações de saúde do trabalhador. (__) ações de assistência terapêutica integral, inclusive farmacêutica. A sequência correta é",
+          "alternativas": [
+            "F, V, V, V, V.",
+            "V, F, V, V, F.",
+            "V, F, V, V, V.",
+            "V, V, F, V, F.",
+            "V, V, F, V, V."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "A estrutura do Sistema Único de Saúde (SUS), instituído pela Lei nº 8.080, de 19 de setembro de 1990, é fundamental para o cumprimento dos princípios de universalidade, equidade e integralidade. Essa Lei delibera que a gestão das ações e dos serviços de saúde deve ser solidária e participativa entre os três entes da Federação: a União, os Estados e os Municípios. Quanto ao assunto, analise as afirmativas seguintes. I. A implementação de Políticas Municipais de Saúde depende da aprovação e deliberação do Controle Social exercido por meio do Conselho Municipal de Saúde. II. O Conselho Nacional de Saúde, instância colegiada, deliberativa e permanente do SUS, tem como missão fiscalizar, acompanhar e monitorar as políticas públicas de saúde nas suas mais diferentes áreas, levando as demandas da população ao poder público, por isso é chamado de controle social na saúde. III. Para garantia da integralidade do cuidado, municípios como Abaetetuba, que não dispõem de uma rede que atenda às necessidades de saúde da sua população, devem articula r pactuações com outros gestores municipais e estaduais, por meio da Comissão Intergestores Bipartite (CIB). Está(ão) correta(s)",
+          "alternativas": [
+            "I, II e III.",
+            "II e III, somente.",
+            "I e III, somente.",
+            "I e II, somente.",
+            "I, somente."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Enfermagem",
+          "assunto": "Política Nacional de Humanização",
+          "enunciado": "Correlacione as Diretrizes Específicas da Política Nacional de Humanização – HumanizaSUS (primeira coluna) aos seus respectivos níveis de atenção (segunda coluna). I. Comprometer-se com o trabalho em equipe, de modo a aumentar o grau de corresponsabilidade, e com a rede de apoio profissional, visando a maior eficácia na atenção em saúde. a. Atenção Básica b. Urgência e Emergência c. Atenção Especializada II. Acolher a demanda por meio de critérios de avaliação de risco, garantindo o acesso referenciado aos demais níveis de assistência. III. Incentivar práticas promocionais de saúde. IV. Otimizar o atendimento ao usuário, articulando a agenda multiprofissional em ações diagnósticas e terapêuticas que impliquem diferentes saberes e terapêuticas de reabilitação. A associação correta é",
+          "alternativas": [
+            "I-a, II-b, III-c e IV-b.",
+            "I-a, II-b, III-a e IV-c.",
+            "I-b, II-c, III-a e IV-b.",
+            "I-b, II-b, III-c e IV-a.",
+            "I-a, II-c, III-a e IV-b."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "A Lei nº 8.080/1990 estabelece que o SUS deve executar ações de assistência terapêutica integral, incluindo a farmacêutica. Nesse sentido, a Programação Geral da Ações e dos Serviços de Saúde – PGASS, no que se refere à fase de monitoramento que garanta a disponibilidade dos medicamentos selecionados nas quantidades adequadas e no tempo oportuno, possui instrumentos de gestão. Quanto aos principais instrumentos para gestão do componente Assistência Farmacêutica na PGASS, analise os itens seguintes. I. Relação Nacional de Medicamentos Essenciais – Rename. II. Relação Nacional de Ações e Serviços de Saúde – Renases. III. Resolução CIT n. 10/2013. IV. Lei n. 12.401, de 28 de abril de 2011. V. Decreto n. 7.646, de 21 de dezembro de 2013. Estão corretos",
+          "alternativas": [
+            "I, III e IV, apenas.",
+            "I, II e V, apenas.",
+            "I, II e IV, apenas.",
+            "II, IV e V, apenas.",
+            "I, III e V, apenas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "A Rede de Atenção à Saúde (RAS) é definida como arranjos organizativos de ações e serviços de saúde, de diferentes densidades tecnológicas, que, integradas por meio de sistemas de apoio técnico, logístico e de gestão, buscam garantir a integralidade do cuidado com o objetivo de promover a integração sistêmica de ações e serviços de saúde. Nesse sentido, assinale a alternativa que NÃO é atributo essencial para o funcionamento da RAS.",
+          "alternativas": [
+            "População e território definidos com amplo conhecimento de suas necessidades e preferências que determinam a oferta de serviços de saúde.",
+            "Atenção à saúde centrada no indivíduo, na família e na comunidade, tendo em conta as particularidades culturais, gênero, assim como a diversidade da população.",
+            "Prestação de serviços generalizados em lugar adequado.",
+            "Participação social ampla.",
+            "Gestão integrada dos sistemas de apoio administrativo, clínico e logístico."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Financiamento do SUS e LC 141/2012",
+          "enunciado": "A população brasileira tem seu direito à saúde pública garantido por lei. Contudo, o financiamento tem sido motivo de discussões frequentes entre os gestores envolvidos na construção do Sistema Único de Saúde (SUS). O financiamento do SUS provém do",
+          "alternativas": [
+            "Orçamento de Investimento.",
+            "Orçamento da Seguridade Social.",
+            "Orçamento Fiscal.",
+            "Orçamento de Pessoal e Encargos de Contingência.",
+            "Orçamento de Segurança Pública."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "A Política Nacional de Regulação do Sistema Único de Saúde (SUS) está organizada em três dimensões de atuação. A alternativa que se refere corretamente à dimensão e sua respectiva competência é",
+          "alternativas": [
+            "Regulação de Sistemas de Saúde: cadastramento de estabelecimentos e profissionais de saúde no Sistema de Cadastro Nacional de Estabelecimentos de Saúde.",
+            "Regulação da Atenção à Saúde: garantir a adequada prestação de serviços à população e produzir ações de auditoria, avaliação e incorporação de tecnologias em saúde.",
+            "Regulação do Acesso à Assistência : organização, controle, gerenciamento e priorização do acesso e dos fluxos assistenciais no âmbito do SUS.",
+            "Regulação da Atenção à Saúde: Avaliação e Incorporação de Tecnologias em Saúde.",
+            "Regulação de Acesso à Vigilância Sanitária e Epidemiológica: organização, controle, gerenciamento e priorização do sistema assistencial no âmbito do SUS."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "A Organização Mundial da Saúde (OMS) definiu, em 22 de janeiro, que “saúde é estado dinâmico de completo bem-estar físico, mental, espiritual e social e não só a ausência de doença”. Os profissionais de saúde, atentos às dimensões que envolvem a saúde/doença devem prestar atendimento humanizado, reconhecendo as singularidades do usuário. Nesse sentido, o princípio norteador da política de humanização no SUS, que favoreça o atendimento humanizado pelo profissional de saúde é",
+          "alternativas": [
+            "valorização da dimensão subjetiva e social da gestão, em contextos específicos, dos serviços de saúde.",
+            "fortalecimento do trabalho em equipe multiprofissional, estimulando a transdisciplinaridade e a grupalidade.",
+            "atuação em rede em alta complexidade, de modo cooperativo e solidário, em conformidade com as diretrizes de cada instituição.",
+            "fortalecimento da vigilância epidemiológica com caráter participativo em todas as instâncias gestoras do SUS.",
+            "estímulo a processos subjet ivos, comprometidos com a produção de bens e serviços relacionados à saúde."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "A rifampicina é um fármaco essencial no tratamento padronizado de primeira linha para tuberculose (esquema básico). Em relação a esse fármaco , assinale V (verdadeiro) ou F (falso) nas afirmativas a seguir. (__) A rifampicina tem como função a inibição da síntese de RNA, atuando no meio intracelular (macrófago), nas lesões caseosas e na cavidade pulmonar. (__) O teste rápido molecular para tuberculose (TRM-TB) é indicado para triagem de resistência à rifampicina nos casos de retratamento e para triagem de resistência à rifampicina nos casos com suspeita de falência. (__) Em se tratando de resistência à rifampicina detectada por meio de diagnósti co de casos novos de tuberculose pulmonar e laríngea em adultos e adolescentes baseado no TRM -TB, deve-se repetir o TRM-TB, fazer cultura, teste de sensibilidade e encaminhar para referência terciária. (__) A rifampicina pode causar reações adversas menores que não indicam, normalmente, a suspensão do tratamento como epigastralgia, suor ou urina de cor avermelhada, artralgia e neuropatia periférica. (__) A rifampicina pode causar reações adversas maiores que, normalmente, indicam suspensão do tratamento como exantema, psicose, hepatotoxicidade, nefrite intersticial e rabdomiólise. A sequência correta é",
+          "alternativas": [
+            "V – V – V – F – F.",
+            "F – F – F – V – V.",
+            "F – V – F – V – F.",
+            "V – V – V – V– V.",
+            "F – F – F – F – F."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Segundo o Ministério da Saúde, a sífilis tem apresentado uma reemergência em várias partes do mundo, inclusive no Brasil. Diante disso, os profissionais de saúde devem estar aptos a identificar as manifestações clínicas para condução do diagnóstico e controle do tratamento da doença. Dessa forma, a sífilis é dividida em estágio s que orientam o seu tratamento e monitoramento. Sobre os estágios da sífilis, analise as afirmativas a seguir. I. Na sífilis primária, a primeira manifestação é caracterizada por uma úlcera rica em treponemas, geralmente única e dolorosa, com bordas irregulares, base endurecida e fundo limpo, que surge no local de entrada da bactéria sendo denominada “cancro duro”. II. Na sífilis secundária, inicialmente apresenta -se uma erupção macular eritematosa pouco visível (roséola), principalmente no tronco e raiz dos mem bros. Nessa fase, são comuns as placas em mucosas, assim como lesões acinzentadas e pouco visíveis nas mucosas. As lesões cutâneas progridem para lesões mais evidentes, papulosas e eritematoacastanhadas, que podem atingir todo o tegumento, sendo frequentes nos genitais. III. Na sífilis terciária, a inflamação causada nesse estágio provoca destruição tecidual. É comum o acometimento dos sistemas nervoso e cardiovascular. Além disso, verifica -se a formação de gomas sifilíticas na pele, mucosas, ossos ou qualquer t ecido. As lesões podem causar desfiguração, incapacidade e até morte. IV. A sífilis latente corresponde ao período em que não se observa nenhum sinal ou sintoma. O diagnóstico faz-se exclusivamente pela reatividade dos testes treponêmicos e não treponêmicos. A maioria dos diagnósticos ocorre nesse estágio. Estão corretas",
+          "alternativas": [
+            "I, II e III, apenas.",
+            "II, III e IV, apenas.",
+            "I, II e IV, apenas.",
+            "II e III, apenas.",
+            "I e IV, apenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Paciente, 70 anos, com diabetes tipo 2 há 12 anos, é admitido na clínica para avaliação de rotina. Há histórico de úlcera no pé. No momento tem neuropatia periférica confirmada por ausência de sensibilidade ao monofilamento e dedos em formato de martelo, a lém de sinais de doença arterial periférica (DAP) com pulso pedial diminuído. Com base no caso clínico hipotético, considera -se como classificação do risco de ulceração e atribuição do enfermeiro:",
+          "alternativas": [
+            "Risco de ulceração alto. Deve orientar a realização das visitas trimestrais à clínica para monitoramento e inspeção diária dos pés.",
+            "Risco de ulceração alto. Deve orientar a realização do acompanhamento de 6 em 6 meses para monitoramento contínuo, a fim de evitar úlceras e outras complicações.",
+            "Risco de ulceração baixo. Indicação de consultas anuais e ser encaminhado para um especialista em pé diabético e realizar educação sobre como cuidar dos pés.",
+            "Risco de ulceração moderado. Orientar sobre cuidados preventivos, como inspeção diária dos pés, higiene adequada e escolha de calçados.",
+            "Risco de ulceração moderado. Ajustar o plano de cuidados para prevenir recidivas e monitorar os sinais de DAP, além de garantir a orientação sobre o uso de prótese."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Paciente, 60 anos, diabético, chega à clínica com queixas de parestesia e perda de sensibilidade nos pés. Tem histórico de úlceras, mas o enfermeiro deseja avaliar o risco de neuropatia periférica utilizando o monofilamento de Semmes -Weinstein 10 g. Quanto à realização do procedimento, analise as afirmativas a seguir. I. A sensibilidade protetora estará presente se em cada local o paciente responder corretamente em uma aplicação. II. Aplica-se o monofilamento perpendicularmente à superfície da pele com força suficiente para curvá-lo, não deixando que o filamento deslize pela pele. III. Cada aplicação e remoção do filamento deve ser de aproximadamente 2 segundos, não aplicando o filamento diretamente sobre úlcera ou calo. IV. Deve-se repetir a aplicação quatro vezes no mesm o local, mas alternando com pelo menos uma aplicação “simulada” na qual o filamento não é aplicado. Estão corretas",
+          "alternativas": [
+            "I e IV, apenas.",
+            "II e III, apenas.",
+            "III e IV, apenas.",
+            "I, II e III, apenas.",
+            "I, II e IV, apenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente, 67 anos, sexo feminino, histórico de hipertensão controlada com medicação e artrite que limita suas atividades físicas. Tem perdido peso sem motivo aparente, apresenta insônia frequente e queixas de fadiga constante. A filha relata que, nos últimos 6 meses, a mãe está progressivamente mais apática, não sente mais prazer em suas atividades diárias (costumava gostar de fazer compras e viajar) . Ela também menciona que se sente \"inútil\" e \"sem vontade de viver\", mas nega qualquer ideia de suicídio. A enfermeira utilizou a “Escala de Depressão Geriátrica” com 15 perguntas, respondendo positivamente a 9 perguntas. Considerando o caso clínico hipotético, analise as afirmativas a seguir. I. A idosa não realiza duas atividades instrumentais de vida diária (AIVD’s) ( fazer compras e viajar); sendo assim, deve-se aplicar a Escala de Lawton para avaliação mais detalhada das outras AIVD’s. II. O resultado da escala de depressão geriátrica evidencia suspeita de depressão, além disso apresenta algumas manifestações clínicas evidentes como se sentir inútil e sem vontade de viver. III. Deve ser monitorada regularmente, observando qualquer alteração em seu comportamento, especialmente relacionado a sentimentos de inutilidade e sem vontade de viver. IV. A idosa já tem perda de suas atividades básicas de vida diária como a não realização de atividade física, o que facilita os sentimentos negativos. Estão corretas",
+          "alternativas": [
+            "I e IV, apenas.",
+            "II e III, apenas.",
+            "III e IV, apenas.",
+            "I, II e III, apenas.",
+            "I, II e IV, apenas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente, 70 anos, com histórico de hipertensão arterial controlada e diabetes tipo 2. Relata episódios frequentes de desequilíbrio e duas quedas nos últimos três meses, uma delas resultando em uma fratura no punho. Relata uso de bengala para caminhar, mas apresenta insegurança ao andar e, por isso, evita sair de casa. Queixa-se de fraqueza nas pernas e dificuldades ao se levantar da cadeira ou caminhar longas distâncias. Não faz uso regular de exercícios físicos e se sente cada vez mais dependente da esposa para atividades diárias. Considerando a necessidade da utilização de instrumento para avaliar o equilíbrio e a marcha deste paciente, é correto afirmar que ele deverá fazer uso do(da)",
+          "alternativas": [
+            "escala de Katz.",
+            "cartão de Jaeguer.",
+            "escala de Lachs.",
+            "triagem rápida - Prisma 7.",
+            "escala de Tineti."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Paciente, 65 anos, relata dificuldade para evacuar, com evacuações escassas e ressecadas, além de dor abdominal ocasional e desconforto. Faz uso indevido de laxante e de supositório, espera evacuar sempre pela manhã, antes de sair de casa para trabalhar. N ão tem conhecimento do padrão de evacuação normal, desconhece as complicações que o uso de laxante e supositórios rotineiramente podem provocar em seu organismo. De acordo com Nanda (2021-2023), considera-se como diagnóstico de enfermagem mais adequado para esse caso:",
+          "alternativas": [
+            "Risco de constipação.",
+            "Constipação.",
+            "Constipação funcional crônica.",
+            "Risco de constipação funcional crônica",
+            "Constipação percebida."
+          ],
+          "correta": "E"
+        }
+      ]
+    }
+  ]
+}

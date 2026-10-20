@@ -1,0 +1,201 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "ufpa-2024-enfermagem-sub30-lote001",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "ufpa-psrmps-2024-enfermagem-oncologia-idoso-tipo1",
+      "banca": "UFPA / CEPS",
+      "ano": 2024,
+      "orgao": "Universidade Federal do Pará",
+      "cargo": "Residência Multiprofissional em Enfermagem (PSRMPS 2024)",
+      "cadernoUrl": "https://www.ceps.ufpa.br/images/conteudo/residencia/Multiprofissional%202024/provas%20gabaritos/3-PROVA%20DE%20ENFERMAGEM%20-%20ASIST.%20SAUDE%20DO%20IDOSO.pdf",
+      "gabaritoUrl": "https://www.ceps.ufpa.br/images/conteudo/residencia/Multiprofissional%202024/provas%20gabaritos/definitivo/GABARITO_DEFINITIVO_DE_ENFERMAGEM_ONCOLOGIA.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "A Lei nº 8.080, de 19 de setembro de 1990, que instituiu o Sistema Único de Saúde, delibera que gestão das ações e dos serviços de saúde devem ser solidárias e participativas entre os três entes da Federação: a União, os estados e os municípios. A rede que compõe o SUS é ampla e abrange tanto ações quanto os serviços de saúde. O Sistema Único de Saúde (SUS) é composto pelo Ministério da Saúde, estados e municípios, conforme determina a Constituição Federal. Cada ente tem suas corresponsabilidades. A estrutura do Sistema Único de Saúde é fundamental para o cumprimento dos princípios de universalidade, equidade e integralidade. Analise as afirmações a seguir. I. Para a Secretaria de Saúde de Belém implementar qualquer política municipal de saúde é necessária a aprovação e deliberação no Conselho Municipal de Saúde, que é um órgão colegiado composto por representantes do gover no, prestadores de serviço e usuários e que atua na formulação de estratégias e no controle da execução da política de saúde na instância correspondente, inclusive nos aspectos econômicos e financeiros, cujas decisões serão homologadas pelo chefe do poder legalmente constituído de Belém. II. No Município de Cametá, que não dispõe de uma rede de atenção que atenda às necessidades da sua população e necessita de articulação e pactuação com outros municípios e com o Estado para garantia da integralidade do cuidado, essas negociações se dão na Comissão Intergestores Bipartite (CIB), que é o foro de negociação e pactuação entre gestores estadual e municipais quanto aos aspectos operacionais do Sistema Único de Saúde. III. O Ministério da Saúde é o gestor nacional do Sist ema Único de Saúde, formula, normatiza, fiscaliza, monitora e avalia políticas e ações, em articulação com o Conselho Nacional de Saúde. Atua no âmbito da Comissão Intergestores Tripartite (CIT) para pactuar o Plano Nacional de Saúde. Integram sua estrutura Fiocruz, Funasa, Anvisa, ANS, Hemobrás, Inca, Into e oito hospitais federais. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "II e III, apenas.",
+            "I e III, apenas.",
+            "I e II, apenas.",
+            "I, apenas. 2"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "Ao longo do tempo, a Lei n. 8.080/1990 foi alterada pelas Leis n. 9.836, de 23 de setembro de 1995; n. 10.424, de 15 de abril de 2006; n. 11.108, de 7 de abril de 2007; n. 12.401, de 12 de abril de 2011; n. 12.466, de 24 de agosto de 2011; n. 12.895, de 18 de dezembro de 201310; e pela LC n. 141, de 13 de janeiro de 2012 (BRASIL, 2015). Os instrumentos para o planejamento e a gestão no âmbito do SUS são o Plano de Saúde e as respectivas programações anuais e o relatório de gestão. Esses instrumentos interligam-se sequencialmente, compondo um processo cíclico de planejamento e gestão para operacionalização integrada, solidária e sistêmica do SUS. Analise as afirmações a seguir. I. Belém necessita de um Plano de Saúde Municipal para nortear a elaboração do orçamento do governo no tocante aos investimentos com a saúde. Pois este é instrumento central de planejamento para definição e implementação de todas as iniciativas no âmbito da saúde da gestão municipal do Sistema Único de Saúde para o período de seis anos. II. A Elaboração do Plano de Saúde de Abaetetuba e dos demais municípios do Pará deve ser orientado pelas necessidades de saúde da população, considerando a análise situacional, orientada pelos temas contidos no Mapa da Saúde: estrutura do sistema de saúde; Redes de Atenção à Saúde; condições sociossanitárias; fluxos de acesso; recursos financeiros; gestão do trabalho e da educação na saúde; ciência, tecnologia, produção e inovação em saúde; e gestão; definição de diretrizes, objetivos, metas e indicadores; processo de monitoramento e avaliação. III. O Plano Estadual de Saúde do Pará deverá, além de todos os aspectos presentes nos planos municipais, explicitar a metodologia de alocação dos recursos estaduais e a previsão anual de recursos aos municípios, pactuada pelos gestores estaduais e municipais na CIB antes de serem aprovadas pelo Conselho Estadual de Saúde. Está INCORRETO o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "III, apenas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "Sobre a rede de atenção à saúde julgue verdadeira (V) ou falsa (F) cada uma das afirmações a seguir. (__) A rede de atenção à saúde consiste em arranjos organizativos de ações e serviços de saúde, de diferentes densidades tecnológicas, que, integradas por meio de sistemas de apoio técnico, logístico e de gestão, buscam garantir a integralidade do cuidado. (__) Um dos objetivos da rede de atenção à saúde é incrementar o desempenho do Sistema, em termos de acesso, equidade, eficácia clínica e sanitária e eficiência econômica. (__) A rede de atenção à saúde caracteriza- se pela formação de relações horizontais entre os pontos de atenção e o centro de comunicação na atenção primária à saúde (APS). (__) São alguns dos atributos da rede de atenção à saúde população e território definidos, prestação de serviços es pecializados em lugar adequado, participação social ampla, sistema de informação integrado e gestão baseada em resultados. A sequência correta é",
+          "alternativas": [
+            "V, V, V, F.",
+            "V, V, F, V.",
+            "V, F, V, V.",
+            "F, V, V, F.",
+            "V, V, V, V."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "O princípio de descentralização passa a ser associado à regionalização da assistência, que requer a articulação dos gestores municipais para a negociação e a pactuação de referências intermunicipais, sob coordenação e regulação estadual, por meio da programação pactuada e integrada. Julgue verdadeira (V) ou falsa (F) cada uma das afirmações a seguir. (__) A regionalização deve ser entendida como uma articulação e mobilização municipal que leve em consideração características geográficas, fluxo de demanda, perfil epidemiológico, oferta de serviços. (__) Cabe às s ecretarias de estado da saúde e do Distrito Federal a elaboração do plano diretor de regionalização, em consonância com o Plano Estadual de Saúde, sua submissão à aprovação da Comissão Intergestores Bipartite – CIB – e do Conselho Estadual de Saúde – CES – e o encaminhamento ao Ministério da Saúde. (__) O processo de regionalização deve ser estabelecido como estratégia de hierarquização dos serviços de saúde e de busca de maior equidade. A sequência correta é",
+          "alternativas": [
+            "V – V – F.",
+            "V – F – V.",
+            "F – V – V.",
+            "V – F – F.",
+            "V – V – V."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Pacientes com diabetes mellitus tipo 2 (DM2) normalmente não utilizam a insulina logo após o diagnóstico da patologia. Seu uso acontece no decorrer dos anos , à medida que a doença se prolonga. Tal situação está relacionada com um declínio progressivo da função da célula β. Com relação ao esquema de insulinização no diabetes mellitus 2, analise as afirmativas a seguir. I. É recomendado, inicialmente, o uso de insulina basal em combinação com outros medicamentos hipoglicemiantes para o controle da doença. II. Na presença de hiperglicemia pós-prandial significativa, não controlada, mesmo com a associação de insulina basal e outros medicamentos, realiza-se a insulina prandial. III. A escolha da insulina acontece quando o paciente está utilizando duas ou mais drogas orais, mas não consegue atingir as metas glicêmicas. IV. A escolha inicial para insulinoterapia é o uso de uma insulina prandial em tratamento combinado com outros agentes hipoglicemiantes (orais ou injetáveis). Está correto apenas o que se afirma em",
+          "alternativas": [
+            "I e IV.",
+            "II e III.",
+            "III e IV.",
+            "I, II e III.",
+            "I, II e IV."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "A senhora S.S.A, sexo feminino, 60 anos, tem histórico de diabetes mellitus há cerca de 15 anos, deu entrada no serviço de atendimento de um hospital apresentando dor, eritema, edema e aumento de temperatura no pé direito após trauma leve. Fazia uso irregular de metformina, na dose de 2000 mg ao dia, sem outras medicações. Ao exame físico, apresentava um bom estado geral. Foram realizados alguns exames nos pés , identificando presença de neuropatia, aliada à presença de alteração nos pés, como dedos em martelo e proeminências em antepé. Pulsos pedioso e tibial posterior presentes em ambos os pés. Não tinha doença arterial per iférica. Nesse caso clínico hipotético, considera- se como classificação do risco de pé diabético",
+          "alternativas": [
+            "Grau 0.",
+            "Grau 1.",
+            "Grau 2.",
+            "Grau 3.",
+            "Grau 4. 11"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Na realização das práticas de enfermagem, os sistemas de classificações de diagnósticos são fundamentais para guiar o raciocínio clínico do enfermeiro. Entre estes sistemas está a NANDA, que consiste em uma linguagem padronizada para melhorar e possibilitar a comunicação sobre o estado de saúde dos indivíduos (NANDA, 2021) . No que se refere à NANDA -I e aos diagnósticos de enfermagem, analise as afirmativas a seguir. I. Apresenta vários níveis de granularidade para apoiar o raciocínio clínico dos enfermeiros, orientando a categorização dos dados clínicos, desde o abstrato até o mais concreto. II. Os diagnósticos que são focados no problema nem sempre são os principais, à s vezes o diagnóstico de risco tem maior prioridade para um paciente. III. Os diagnósticos de enferm agem incluem os sintomas (fatores relacionados) e as evidências, consideradas as causas (características definidoras). IV. Deve-se atentar aos fatores relacionados na construção de um diagnóstico, pois é um componente integral de todos os enfermeiros focados no problema. Está correto apenas o que se afirma em",
+          "alternativas": [
+            "I e IV.",
+            "II e III.",
+            "III e IV.",
+            "I, II e III.",
+            "I, II e IV."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "A hipertensão arterial (HA) é um problema grave de saúde pública no Brasil e no mundo, considerada doença crônica não transmissível (DCNT) e uma das responsáveis pelo desenvolvimento de doenças cardiovasculares. Quanto às medidas de prevenção da hipertensão arterial sistêmica, analise as afirmativas a seguir. I. A suplementação de potássio é uma opção para prevenção do aparecimento da HAS. II. Utilizam-se alguns suplementos como vitamina C, fibras dietéticas, entre outros. III. Recomenda-se que a ingestão de sódio seja limitada a aproximadamente 850 g/dia. IV. Realiza-se treinamento aeróbico, resistido, dinâmico e resistido isométrico. Está correto apenas o que se afirma em",
+          "alternativas": [
+            "I e IV.",
+            "II e III.",
+            "III e IV.",
+            "I, II e III.",
+            "I, II e IV. 13"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "De acordo com NANDA (2021- 2023), o diagnóstico de enfermagem “termorregulação ineficaz” é definido como “flutuação de temperatura entre hipotermia e hipertermia”. Considera(m) -se como característica(s) definidora(s)",
+          "alternativas": [
+            "piloereção.",
+            "ansiedade.",
+            "transferência de calor condutiva excessiva.",
+            "baixa temperatura ambiente.",
+            "danos ao hipotálamo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "O teste rápido molecular para tuberculose – TRM-TB – é de amplificação de ácidos nucleicos, utilizado para a detecção de DNA dos bacilos do complexo M.tuberculosis e a triagem de cepas resistentes à rifampicina pela técnica de reação em cadeia de polimerase (PCR) em tempo real (WHO, 2011). Sobre o TRM-TB analise as afirmações a seguir. I. A sensibilidade do TRM -TB em amostras de escarro de adultos é de cerca de 70%, in ferior à da baciloscopia. II. O TRM-TB está indicado em diagnóstico de casos novos de TB pulmonar e laríngea em adultos e adolescentes de populações de maior vulnerabilidade. III. O TRM-TB também pode detectar bacilos mortos ou inviáveis. IV. O TRM-TB não é utilizado para diagnóstico nos casos de retratamento (reingresso após abandono e recidivas). Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III, somente.",
+            "I, II e IV, somente.",
+            "I, III e IV, somente.",
+            "II, III e IV, somente.",
+            "I, II, III e IV. 15"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "Classicamente as principais formas de apresentação da tuberculose pulmonar são a primária, a pós - primária (ou secundária) e a miliar. Nesse sentido considerando os sintomas clássicos das principais formas de apresentação da tuberculose pulmonar. Sobre os sintomas clássicos destas apresentações julgue verdadeira (V) ou falsa (F) cada uma das afirmações a seguir. ( ) A tuberculose primária pode ocorrer em qualquer idade, mas é mais comum no adolescente e no adulto jovem. ( ) A tuberculose secundária tem como característica principal a tosse seca ou produtiva. A febre vespertina, sem calafrios, não costuma ultrapassar os 38,5 C. A sudorese noturna e a anorexia são comuns. ( ) A tuberculose secundária é uma forma grave da doença, que é mais comum em pac ientes imunocomprometidos, como pessoas infectadas pelo HIV. ( ) A tuberculose miliar refere -se a um aspecto radiológico pulmonar específico, que pode ocorrer tanto na forma primária quanto na secundária. ( ) A tuberculose primária normalmente ocorre em seguida ao primeiro contato do indivíduo com o bacilo e, por isso, é mais comum em crianças. A sequência correta é",
+          "alternativas": [
+            "F – V – V – F – V.",
+            "F – F – V – F – V.",
+            "V – V – F – V – F.",
+            "V – V – F – V – V.",
+            "F – V – F – V – V."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "A Organização Mundial da Saúde – OMS – estima que um quarto da população mundial tenha infecção latente de tuberculose – ILTB. Esses indivíduos não apresentam nenhum sintoma e não transmitem a doença, mas são reconhecidos por teste que detecta a imunidade contra o bacilo. O teste utilizado para diagnóstico da ILTB é o/a",
+          "alternativas": [
+            "teste Mitsuda.",
+            "prova tuberculínica.",
+            "teste rápido molecular – TRM.",
+            "teste de ELISA.",
+            "VDRL."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Decreto 94.406/1987",
+          "enunciado": "O Decreto do Conselho Federal de Enfermagem – COFEN – no 94406/87, que regulamenta a Lei nº 7.498/86 e dispõe sobre o exercício profissional, incumbe o enfermeiro, privativamente,",
+          "alternativas": [
+            "da prevenção e do controle sistemático da infecção hospitalar, inclusive como membro das respectivas comissões.",
+            "dos cuidados de enfermagem de maior complexidade técnica e que exijam conhecimentos científicos adequados e capacidade de tomar decisões imediatas.",
+            "de participação no planejamento, na execução e na avaliação da programação de saúde.",
+            "da prescrição de medicamentos previamente estabelecidos em programas de saúde pública e em rotina aprovada pela instituição de saúde.",
+            "da prestação de assistência de enfermagem a gestante, parturiente, puérpera e a recém-nascido. 16"
+          ],
+          "correta": "B"
+        }
+      ]
+    }
+  ]
+}
