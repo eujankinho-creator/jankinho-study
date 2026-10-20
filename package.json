@@ -15,7 +15,8 @@
     "prepare:ecg-assets": "node scripts/prepare-ecg-assets.mjs",
     "prepare:radiology-assets": "node scripts/prepare-radiology-assets.mjs",
     "prepare:gprotein-assets": "node scripts/prepare-gprotein-assets.mjs",
-    "test:gprotein-syntax": "node scripts/check-gprotein-syntax.mjs"
+    "test:gprotein-syntax": "node scripts/check-gprotein-syntax.mjs",
+    "questoes:importar-lote": "tsx scripts/importar-questoes-oficiais.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",

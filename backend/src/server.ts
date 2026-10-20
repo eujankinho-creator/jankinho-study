@@ -54,6 +54,7 @@ import { sincronizarFGVComplementoSjcCaragua } from "./questoesFGVComplementoSjc
 import { sincronizarFGVAbreuCanaaComplemento } from "./questoesFGVAbreuCanaaComplementoSeed";
 import { sincronizarFGVEbserhFhemigSaude2025 } from "./questoesFGVEbserhFhemigSaude2025Seed";
 import { sincronizarFGVMPU2025Enfermagem } from "./questoesFGVMPU2025EnfermagemSeed";
+import { sincronizarLotesQuestoesEmMassa } from "./questoesImportadorMassivo";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6213,6 +6214,8 @@ server.listen(
         await sincronizarFGVEbserhFhemigSaude2025();
         // MPU 2025: questões originais FGV de Técnico e Analista de Enfermagem.
         await sincronizarFGVMPU2025Enfermagem();
+        // Lotes JSON oficiais: até 1.000 questões/arquivo e várias provas por deploy.
+        await sincronizarLotesQuestoesEmMassa();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();

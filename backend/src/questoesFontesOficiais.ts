@@ -104,6 +104,10 @@ export async function obterCoberturaQuestoesOficiais(_usuarioId: number) {
   );
   return {
     metaPorAssunto: META,
+    metaAcervoTotal: 9000,
+    questoesOriginaisNoAcervo: ids.size,
+    faltamPara9000: Math.max(0, 9000 - ids.size),
+    questoesPorArquivoMassivo: 1000,
     assuntos: linhas.length,
     disciplinas: new Set(linhas.map((x) => x.disciplina)).size,
     metaTotal: META * linhas.length,
