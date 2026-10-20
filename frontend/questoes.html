@@ -391,6 +391,31 @@
         </section>
 
 
+        <section id="importadorOficialPanel" hidden class="importador-oficial-panel" aria-labelledby="tituloImportadorOficial">
+          <style>
+            .importador-oficial-panel { margin: 18px 0 24px; padding: 23px; border-radius: 20px; border: 1px solid var(--border-color, rgba(130,130,160,.3)); background: var(--card-bg, rgba(80,80,100,.08)); color: inherit; }
+            .importador-oficial-panel h2 { margin: 0 0 8px; font-size: 1.15rem; }
+            .importador-oficial-panel p { opacity: .8; line-height: 1.55; }
+            .importador-oficial-panel .importador-form { display: grid; gap: 13px; margin-top: 14px; }
+            .importador-oficial-panel label { display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+            .importador-oficial-panel input[type="checkbox"] { margin-top: 5px; flex: 0 0 auto; }
+            .importador-oficial-panel input[type="file"] { padding: 12px; width: 100%; max-width: 100%; border: 1px solid #8885; border-radius: 12px; }
+            .importador-oficial-panel button { justify-self: start; border-radius: 12px; padding: 11px 18px; font-weight: 700; cursor: pointer; }
+            .importador-oficial-panel button:disabled { opacity: .55; cursor: wait; }
+            .importador-oficial-panel output { display: block; white-space: pre-wrap; font-weight: 600; overflow-wrap: anywhere; }
+          </style>
+          <h2 id="tituloImportadorOficial">Importação de provas autorizadas</h2>
+          <p>Exclusivo da conta proprietária. Envie um arquivo JSON com até 1.000 questões de provas cujos enunciados você tem permissão para reproduzir. O Córtex confere a estrutura, evita duplicatas e grava alternativas com gabarito.</p>
+          <form id="formImportarProvas" class="importador-form">
+            <label for="arquivoQuestoesManifesto">Arquivo JSON de questões oficiais</label>
+            <input id="arquivoQuestoesManifesto" type="file" accept=".json,application/json" required>
+            <label><input id="confirmacaoDireitosQuestoes" type="checkbox" required> Tenho permissão para reproduzir integralmente os enunciados e alternativas deste arquivo.</label>
+            <label><input id="confirmacaoGabaritoQuestoes" type="checkbox" required> Conferi cada gabarito com a versão definitiva da prova oficial.</label>
+            <button type="submit" id="botaoImportacaoQuestoes" class="button-primary">Importar questões no Córtex</button>
+            <output id="resultadoImportacaoQuestoes" role="status" aria-live="polite"></output>
+          </form>
+        </section>
+
         <section class="official-exam-library" id="officialExamLibrary" hidden aria-hidden="true" style="display:none" aria-labelledby="officialExamTitle">
           <div class="official-exam-heading">
             <div><span>PROVAS ANTERIORES · FONTES ORIGINAIS</span><h2 id="officialExamTitle">Acervo público de provas</h2><p>Consulte provas e gabaritos publicados pelas instituições. Filtre por exame, banca e tema do cronograma, ou pratique questões relacionadas já disponíveis no Córtex.</p></div>
@@ -932,6 +957,7 @@
   <script defer src="/js/questoes.js?v=20261019-fgv-complementares-lot3"></script>
   <script defer src="/js/questoes-provas-oficiais.js?v=20261011-catalog1"></script>
   <script defer src="/js/questoes-cobertura-oficial.js?v=20261019-native-questions1"></script>
+  <script defer src="/js/questoes-importador-oficial.js?v=20261020-primeiro"></script>
 
   <script defer src="/js/cortex-brand.js?v=20261001-nav-core3"></script>
 </body>

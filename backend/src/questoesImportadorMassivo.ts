@@ -67,7 +67,7 @@ function urlHttps(value: unknown): value is string {
 }
 function erro(message: string): never { throw new Error("[lotes-massivos] " + message); }
 
-function validarManifesto(value: unknown, arquivo: string): Manifesto {
+export function validarManifesto(value: unknown, arquivo: string): Manifesto {
   if (!value || typeof value !== "object" || Array.isArray(value)) erro(arquivo + " não é objeto JSON");
   const m = value as Record<string, unknown>;
   if (m.formato !== "cortex-questoes-oficiais-v1" || !stringValida(m.lote, 4, 120) ||
