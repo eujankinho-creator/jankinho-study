@@ -52,6 +52,7 @@ import { sincronizarFGVEBserhTecnicos2025 } from "./questoesFGVEBserhTecnicos202
 import { sincronizarFGVAleamTjms2026 } from "./questoesFGVAleamTjms2026Seed";
 import { sincronizarFGVComplementoSjcCaragua } from "./questoesFGVComplementoSjcCaraguaSeed";
 import { sincronizarFGVAbreuCanaaComplemento } from "./questoesFGVAbreuCanaaComplementoSeed";
+import { sincronizarFGVEbserhFhemigSaude2025 } from "./questoesFGVEbserhFhemigSaude2025Seed";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -6207,6 +6208,8 @@ server.listen(
         await sincronizarFGVComplementoSjcCaragua();
         // Complemento FGV Abreu e Lima 2024 e Canaã 2025: enfermagem e vigilância.
         await sincronizarFGVAbreuCanaaComplemento();
+        // Lote oficial complementar EBSERH 2025 e FHEMIG 2023.
+        await sincronizarFGVEbserhFhemigSaude2025();
         // Arquiva questões, alternativas e respostas em transações atômicas;
         // depois retira o legado ativo preservando flashcards desvinculados.
         await arquivarESubstituirBancoLegado();
