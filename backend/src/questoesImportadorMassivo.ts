@@ -167,7 +167,8 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
     }),
     prisma.disciplina.findMany({ where: { usuarioId: usuario.id }, select: { id: true, nome: true } }),
   ]);
-  const origens = new Set(questoesExistentes.map((q) => q.origemId).filter((x): x is string => !!x));
+  const questaoPorOrigem = new Map(questoesExistentes.filter(q => q.origemId).map(q => [q.origemId!, q]));
+  const origens = new Set(questaoPorOrigem.keys());
   const textos = new Set(questoesExistentes.map((q) => normalizar(q.enunciado)));
   // Questões já existentes de todas as disciplinas contam juntas por assunto canônico.
   const porAssunto = new Map<string, number>();
@@ -188,7 +189,22 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
       for (const q of prova.questoes) {
         resumo.candidatas++;
         const origemId = "oficial-" + prova.codigo + "-q" + String(q.numero).padStart(4, "0");
-        if (origens.has(origemId)) { resumo.existentes++; continue; }
+        if (origens.has(origemId)) {
+          // Corrige eventual reclassificação editorial da prova oficial, sem
+          // excluir ou reinserir a questão (IDs e respostas são preservados).
+          const atual = questaoPorOrigem.get(origemId);
+          if (manifesto.limitarA30 && atual) {
+            const novoTema = assuntoCanonico(q.disciplina, q.assunto, q.enunciado);
+            if (atual.tema !== novoTema) {
+              await prisma.questao.updateMany({
+                where: { fonte: FONTE_PROVAS_REAIS, origemId },
+                data: { tema: novoTema },
+              });
+            }
+          }
+          resumo.existentes++;
+          continue;
+        }
         const texto = normalizar(q.enunciado);
         if (textos.has(texto)) { resumo.repetidas++; continue; }
 
