@@ -55,7 +55,6 @@ import { sincronizarFGVAbreuCanaaComplemento } from "./questoesFGVAbreuCanaaComp
 import { sincronizarFGVEbserhFhemigSaude2025 } from "./questoesFGVEbserhFhemigSaude2025Seed";
 import { sincronizarFGVMPU2025Enfermagem } from "./questoesFGVMPU2025EnfermagemSeed";
 import { sincronizarLotesQuestoesEmMassa } from "./questoesImportadorMassivo";
-import { podeImportarQuestoes, importarLoteDoProprietario } from "./questoesImportacaoPainel";
 import { arquivarESubstituirBancoLegado } from "./questoesArquivoLegado";
 import { buscarCasoDetalhe, investigarCasoClinico, avaliarHipoteseCaso, refazerCasoClinico } from "./casosDetalhe";
 import { listarCasos, gerarCasoClinico } from "./casos";
@@ -4928,68 +4927,6 @@ const server =
           return;
         }
 
-
-        if (caminho === "/api/questoes/importar-lote/status" && metodo === "GET") {
-          const usuarioId = await exigirUsuario(request, response);
-          if (!usuarioId) return;
-          const permitido = await podeImportarQuestoes(usuarioId);
-          json(response, 200, { permitido, maximoPorArquivo: 1000 });
-          return;
-        }
-
-        if (caminho === "/api/questoes/importar-lote" && metodo === "POST") {
-          const usuarioId = await exigirUsuario(request, response);
-          if (!usuarioId) return;
-          if (!(await podeImportarQuestoes(usuarioId))) {
-            json(response, 403, { error: "Somente a conta proprietária pode importar questões." });
-            return;
-          }
-          // Bloqueia submissões cross-origin com cookies de sessão.
-          const origem = request.headers.origin;
-          if (origem) {
-            let mesmaOrigem = false;
-            try { mesmaOrigem = new URL(origem).host === request.headers.host; } catch {}
-            if (!mesmaOrigem) {
-              json(response, 403, { error: "Origem da requisição não permitida." });
-              return;
-            }
-          }
-          if (!String(request.headers["content-type"] || "").includes("application/json")) {
-            json(response, 415, { error: "Envie um manifesto JSON." });
-            return;
-          }
-          try {
-            const body = await new Promise<any>((resolve, reject) => {
-              let chunks: Buffer[] = [];
-              let tamanho = 0;
-              request.on("data", (part: Buffer) => {
-                tamanho += part.length;
-                if (tamanho > 12_000_000) {
-                  reject(new Error("Arquivo excede 12 MB; divida em lotes menores."));
-                  request.pause();
-                  return;
-                }
-                chunks.push(part);
-              });
-              request.on("end", () => {
-                try { resolve(JSON.parse(Buffer.concat(chunks).toString("utf8"))); }
-                catch { reject(new Error("JSON inválido.")); }
-                chunks = [];
-              });
-              request.on("error", reject);
-            });
-            if (body?.confirmoDireitos !== true || body?.confirmeiGabarito !== true) {
-              json(response, 400, { error: "Confirme sua permissão de reprodução e a revisão do gabarito definitivo." });
-              return;
-            }
-            const resultado = await importarLoteDoProprietario(body.manifesto, usuarioId);
-            json(response, 200, resultado);
-          } catch (error) {
-            console.error("[importacao-autorizada] Erro:", error);
-            json(response, 400, { error: error instanceof Error ? error.message : "Erro ao importar manifesto." });
-          }
-          return;
-        }
 
         if (caminho === "/api/questoes/cobertura-oficial" && metodo === "GET") {
           const usuarioId = await exigirUsuario(request, response);
