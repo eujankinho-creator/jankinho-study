@@ -23,7 +23,7 @@
             "II e III, apenas.",
             "I e III, apenas.",
             "I e II, apenas.",
-            "I, apenas. 2"
+            "I, apenas."
           ],
           "correta": "B"
         },
@@ -70,6 +70,48 @@
           "correta": "E"
         },
         {
+          "numero": 9,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "J.A.P. verificou que a regulação assistencial que tem como objeto o processo de organização, controle, gerenciamento e priorização do acesso e dos fluxos assistenciais no âmbito do SUS, possui a seguinte ação, que pode ser aplicada a sua comunidade:",
+          "alternativas": [
+            "elaboração de decretos, normas e portarias que dizem respeito às funções de gestão.",
+            "planejamento, financiamento e fiscalização de sistemas de saúde.",
+            "auditoria assistencial ou clínica.",
+            "programação pactuada e integrada – PPI.",
+            "regulação médica da atenção pré-hospitalar e hospitalar às urgências."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "A incorporação, exclusão ou alteração pelo Sistema Único de Saúde de medicam entos, produtos e procedimentos, bem como a constituição ou a alteração de protocolo clínico ou de diretriz terapêutica é estabelecida pela(o)",
+          "alternativas": [
+            "Programa Nacional de Segurança do Paciente.",
+            "Comissão Nacional de Incorporação de Tecnologias no Sistema Único de Saúde.",
+            "Política Nacional de Regulação do Sistema Único de Saúde.",
+            "Conselho Nacional de Secretários de Saúde.",
+            "Núcleo Técnico da Política Nacional de Humanização."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Enfermagem",
+          "assunto": "Eletrocardiograma (ECG)",
+          "enunciado": "A classificação das arritmias cardíacas depende da frequência cardíaca, do local de origem , do mecanismo de formação e condução do impulso elétrico (VIANA, 2020). Caracteriza- se por três ou mais batimentos ventriculares sequenciados, com complexo QRS > 0,12 s, e ausência da onda P a/o",
+          "alternativas": [
+            "Torsades de Pointes.",
+            "taquicardia ventricular.",
+            "flutter ventricular.",
+            "fibrilação ventricular.",
+            "bloqueio atrioventricular."
+          ],
+          "correta": "B"
+        },
+        {
           "numero": 25,
           "disciplina": "Enfermagem",
           "assunto": "Diabetes Mellitus",
@@ -93,7 +135,7 @@
             "Grau 1.",
             "Grau 2.",
             "Grau 3.",
-            "Grau 4. 11"
+            "Grau 4."
           ],
           "correta": "B"
         },
@@ -121,7 +163,7 @@
             "II e III.",
             "III e IV.",
             "I, II e III.",
-            "I, II e IV. 13"
+            "I, II e IV."
           ],
           "correta": "E"
         },
@@ -149,7 +191,7 @@
             "I, II e IV, somente.",
             "I, III e IV, somente.",
             "II, III e IV, somente.",
-            "I, II, III e IV. 15"
+            "I, II, III e IV."
           ],
           "correta": "D"
         },
@@ -191,7 +233,7 @@
             "dos cuidados de enfermagem de maior complexidade técnica e que exijam conhecimentos científicos adequados e capacidade de tomar decisões imediatas.",
             "de participação no planejamento, na execução e na avaliação da programação de saúde.",
             "da prescrição de medicamentos previamente estabelecidos em programas de saúde pública e em rotina aprovada pela instituição de saúde.",
-            "da prestação de assistência de enfermagem a gestante, parturiente, puérpera e a recém-nascido. 16"
+            "da prestação de assistência de enfermagem a gestante, parturiente, puérpera e a recém-nascido."
           ],
           "correta": "B"
         }

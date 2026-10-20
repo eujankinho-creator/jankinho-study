@@ -163,7 +163,7 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
   const [questoesExistentes, disciplinasExistentes] = await Promise.all([
     prisma.questao.findMany({
       where: { fonte: FONTE_PROVAS_REAIS },
-      select: { origemId: true, enunciado: true, tema: true, disciplina: { select: { nome: true } } },
+      select: { id: true, origemId: true, enunciado: true, tema: true, disciplina: { select: { nome: true } } },
     }),
     prisma.disciplina.findMany({ where: { usuarioId: usuario.id }, select: { id: true, nome: true } }),
   ]);
@@ -200,6 +200,27 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
                 where: { fonte: FONTE_PROVAS_REAIS, origemId },
                 data: { tema: novoTema },
               });
+            }
+          }
+          // Corrige apenas a formatação das alternativas dos lotes oficiais
+          // versionados, preservando quais eram corretas e IDs das respostas.
+          if (manifesto.limitarA30 && atual) {
+            const existentes = await prisma.alternativa.findMany({
+              where: { questaoId: atual.id },
+              orderBy: { id: "asc" },
+              select: { id: true, texto: true, correta: true },
+            });
+            if (existentes.length === q.alternativas.length &&
+                existentes.every((a, i) => a.correta === ("ABCDE"[i] === q.correta))) {
+              for (let i = 0; i < existentes.length; i++) {
+                const texto = "ABCDE"[i] + ") " + q.alternativas[i];
+                if (existentes[i].texto !== texto) {
+                  await prisma.alternativa.update({
+                    where: { id: existentes[i].id },
+                    data: { texto },
+                  });
+                }
+              }
             }
           }
           resumo.existentes++;

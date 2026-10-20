@@ -84,6 +84,34 @@
           "correta": "C"
         },
         {
+          "numero": 6,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "A Portaria nº 1.559, de 1º de agosto de 2008, institui a Política Nacional de Regulação (PNH) do Sistema Único de Saúde (SUS). Em relação a essa Política, leia as afirmativas a seguir e assinale Verdadeiro ou Falso. (__) As ações de que trata a referida política estão organizadas em três dimensões de atuação, necessariamente integradas entre si. (__) O cadastramento de usuários do SUS deverá ser realizado no Sistema de Cadastro Nacional de Estabelecimentos de Saúde – SCNES. (__) Fazer a gestão da ocupação de leitos e agendas das unidade s de saúde é uma das atribuições do complexo regulador. (__) As autorizações para Tratamento Fora de Domicílio – TFD serão definidas pela área técnica da regulação do acesso. A sequência correta é",
+          "alternativas": [
+            "F, V, V e F.",
+            "F, F, F e V.",
+            "V, V, V e F.",
+            "V, F, V e V.",
+            "V, V, F e V."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "P.F.F.N., residente em Abaetetuba, realizou o uso dos serviços de saúde em seu município. Os serviços de saúde são ofertados pelos municípios respeitando a necessidade dos serviços locais, regionalização e hierarquização da rede de serviços de saúde. O pri ncípio do Sistema Único de Saúde relacionado a esta conduta político-administrativa, com direção única em cada esfera do governo, é",
+          "alternativas": [
+            "descentralização.",
+            "preservação da autonomia das pessoas na defesa de sua integridade física e moral.",
+            "direito à informação, às pessoas assistidas, sobre sua saúde.",
+            "integração em nível executivo das ações no meio ambiente e saneamento básico.",
+            "direito à informação."
+          ],
+          "correta": "A"
+        },
+        {
           "numero": 10,
           "disciplina": "Legislação do SUS",
           "assunto": "Financiamento do SUS e LC 141/2012",
@@ -96,6 +124,20 @@
             "Orçamento de Segurança Pública."
           ],
           "correta": "B"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Enfermagem",
+          "assunto": "Prática Baseada em Evidências",
+          "enunciado": "B.P.D., profissional da área da saúde, acredita que um protocolo pode ter um bom resultado terapêutico. Porém, para a elaboração e incorporação deste protocolo, deve seguir o fluxo de trabalho dos Protocolos Clínicos e Diretrizes Terapêuticas (PCDT) no âmbito da Comissão Nacional de Incorporação de Tecnologias no Sistema Único de Saúde (Conitec), para posteriormente possível implantação nos serviços de saúde. Quando não existe minuta do protocolo, este deverá ser analisado por um Comitê Gestor, após designar um Grupo Elaborador responsável pel a construção do texto. É atribuição do Grupo Elaborador",
+          "alternativas": [
+            "selecionar a representação da Secretaria-Executiva da Conitec como opinião científica central.",
+            "emitir nota técnica expondo os motivos para constituição ou alteração de PCDT.",
+            "apresentar, no ato da protocolização, a documentação minuta de PCDT.",
+            "executar ações e programas estratégicos.",
+            "selecionar as evidências científicas encontradas na busca, de acordo com critérios previamente definidos na formulação das perguntas."
+          ],
+          "correta": "E"
         },
         {
           "numero": 12,
@@ -180,6 +222,20 @@
             "I, II e IV, apenas."
           ],
           "correta": "B"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "Paciente, 60 anos, sexo masculino, hipertenso há 12 anos e com diagnóstico de hiperplasia prostática benigna (HPB). Está em uso de doxazosina, há 1 mês, prescrito para o manejo da HPB e para ajudar no controle da pressão arterial e losartana 50 mg/dia. Relata que, desde o início do tratamento, tem apresentado episódios de tontura ao se levantar e quedas frequentes. O exame físico identificou PA em repouso (decúbito dorsal) (130/80 mmHg), PA em pé (após 1 minuto) (105/65 mmHg) e PA em pé (após 3 minutos) (95/60 mmHg), frequência cardíaca: 88 bpm (repouso) e 105 bpm (em pé). Foi diagnosticado com hipotensão ortostática. Considerando o caso clínico hipotético, assinale Verdadeiro (V) ou Falso (F) nas afirmativas a seguir. (__) O exame físico evidencia características de hipotensão ortostática, devido à mudança rápida entre as pressões aferidas em repouso e em pé. (__) Os idosos têm menor resposta dos barorreceptores à hipotensão, por isso são mais propensos à hipotensão ortostática. (__) O uso de determinados anti -hipertensivos, como o diurético doxazosina, pode provocar ou piorar a hipotensão ortostática. (__) Deve -se utilizar medidas não medicamentosas como hidratação adequada, dieta normossódica, mudança lenta de decúbito e elevação da cabeceira. A sequência correta é",
+          "alternativas": [
+            "F – F – V – V.",
+            "F – V – F – V.",
+            "V – F – V – F.",
+            "V – V – F – V.",
+            "F – V – F – F."
+          ],
+          "correta": "D"
         },
         {
           "numero": 44,
