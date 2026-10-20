@@ -1,0 +1,329 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "corenrr2024-portugues-direito-administrativo-lote001",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "selecon-corenrr-2024-501-complementar",
+      "banca": "Instituto Selecon",
+      "ano": 2024,
+      "orgao": "Conselho Regional de Enfermagem de Roraima",
+      "cargo": "Analista Administrativo — Advogado (501)",
+      "cadernoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/YZzxF636oSKVDWwcZ2rlzK3sCnSKLT59bk8abFlf.pdf",
+      "gabaritoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/vSdnipfq713HvDbn5BirXNzLsFgoPTEQy1gV9AM6.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Em “Mas quanto mais esforço cada tarefa exige, mais seu cérebro terá de lidar com informações concorrentes e objetivos diferentes” (11º parágrafo), os conectivos destacados veiculam o sentido de:",
+          "alternativas": [
+            "adição",
+            "contraste",
+            "proporção",
+            "alternância"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "“De acordo com especialistas, não é possível fazer duas coisas ao mesmo tempo – a menos que consigamos fazer uma delas sem pensar muito (como dar um passeio enquanto conversamos com um amigo)” (6º parágrafo). Uma forma possível de reescrita do trecho destacado, sem alteração de sentido, é:",
+          "alternativas": [
+            "“exceto se conseguirmos fazer uma delas sem pensar muito”",
+            "“apesar de conseguirmos fazer uma delas sem pensar muito”",
+            "“quando conseguimos fazer uma delas sem pensar muito”",
+            "“mas conseguimos fazer uma delas sem pensar muito”"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Classes de Palavras",
+          "enunciado": "“Esse nosso hábito coletivo tem algumas razões, acrescenta ela. A maioria das pessoas evita o tédio” (3º parágrafo). Nesse trecho, há quatro pronomes. São eles:",
+          "alternativas": [
+            "nosso – tem – ela - o",
+            "esse – nosso – das – o",
+            "nosso – algumas – das – o",
+            "esse – nosso – algumas – ela"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Sintaxe da Oração e do Período",
+          "enunciado": "Em “Vejamos o que acontece quando você se dedica a uma única tarefa, como preparar o jantar” (8º parágrafo), há:",
+          "alternativas": [
+            "três orações",
+            "quatro orações",
+            "cinco orações",
+            "seis orações"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "Organizações sociais são pessoas jurídicas de direito sem fins lucrativos que prestam atividades de interesse público. As organizações sociais:",
+          "alternativas": [
+            "atuam sem fins lucrativos",
+            "pertencem à Administração Pública",
+            "prestam serviços públicos delegados",
+            "são pessoas jurídicas de direito público"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "A investidura em cargo público é um ato administrativo complexo, composto de diversas etapas, entre as quais, estão a posse e o exercício. A respeito dessas duas fases distintas é correto afirmar que:",
+          "alternativas": [
+            "só haverá posse nos casos de provimento de cargo por nomeação e reintegração",
+            "é de 15 dias o prazo para o servidor empossado em cargo público entrar em exercício, contados da data da posse",
+            "será tornado sem validade o ato de provimento se a posse não ocorrer no prazo de 30 dias contados da sua publicação",
+            "o início do exercício de função de confiança se dá no primeiro dia útil após a data de publicação do ato de designação"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "O Regime Diferenciado de Contratações Públicas (RDC) é aplicável exclusivamente às licitações e aos contratos nas situações previstas em lei específica. De acordo com essa norma, é vedada na execução indireta de obras e serviços de engenharia a adoção do seguinte regime:",
+          "alternativas": [
+            "empreitada por preço unitário",
+            "empreitada por preço global",
+            "contratação semi-integrada",
+            "contratação por tarefa"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Poderes Administrativos",
+          "enunciado": "A Declaração de Direitos de Liberdade Econômica estabelece normas de proteção à livre iniciativa e ao livre exercício de atividade econômica e disposições sobre a atuação do Estado como agente normativo e regulador. São princípios que norteiam o disposto na norma em questão:",
+          "alternativas": [
+            "a defesa do consumidor",
+            "a função social da propriedade",
+            "a boa-fé objetiva da Administração perante o particular",
+            "o reconhecimento da vulnerabilidade do particular perante o Estado"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "O agente público que deixar de prestar contas quando esteja obrigado a fazê-lo, desde que disponha das condições para isso, com vistas a ocultar irregularidades, comete ato de improbidade administrativa que atenta contra os princípios da administração pública. De acordo com a Lei de Improbidade Administrativa, a conduta descrita viola os deveres de:",
+          "alternativas": [
+            "eficiência, neutralidade e publicidade",
+            "moralidade, impessoalidade e legalidade",
+            "honestidade, imparcialidade e legalidade",
+            "impessoalidade, imparcialidade e moralidade"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "A Lei Geral de Proteção de Dados dispõe sobre o tratamento de dados pessoais, inclusive nos meios digitais, por pessoa natural ou por pessoa jurídica de direito público ou privado, com o objetivo de proteger os direitos fundamentais de liberdade e de privacidade e o livre desenvolvimento da personalidade da pessoa natural. A disciplina da proteção de dados pessoais tem como um dos seus fundamentos:",
+          "alternativas": [
+            "a qualidade dos dados",
+            "o livre acesso aos dados",
+            "a autodeterminação informativa",
+            "a responsabilização e a prestação de contas"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "T oda concessão ou permissão pressupõe a prestação de serviço adequado ao pleno atendimento dos usuários. De acordo com a lei que dispõe sobre o regime de concessão e permissão da prestação de serviços públicos, uma das condições que deve ser satisfeita por um serviço adequado é a:",
+          "alternativas": [
+            "celeridade",
+            "pontualidade",
+            "especificidade",
+            "modicidade das tarifas"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "O Selo de Desburocratização e Simplificação, instituído por lei, é destinado a reconhecer e a estimular projetos, programas e práticas que simplifiquem o funcionamento da administração pública e melhorem o atendimento aos usuários dos serviços públicos. Para a concessão do Selo deverá ser observado o seguinte critério:",
+          "alternativas": [
+            "a economicidade de processos e procedimentos administrativos",
+            "os benefícios difusos provenientes das inciativas de simplificação",
+            "a redução do tempo de espera no atendimento dos serviços públicos",
+            "a redução de todas as formalidades necessárias para as finalidades almejadas"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "A Administração Pública Indireta é composta de entidades responsáveis pela execução de atividades administrativas que necessitam ser desenvolvidas de forma descentralizadas. É uma característica comum dos entes da administração indireta:",
+          "alternativas": [
+            "não possuir patrimônio próprio",
+            "possuir personalidade jurídica própria",
+            "prescindir de lei específica para sua criação",
+            "ter finalidade de interesse difuso, público e privado"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A parceria público-privada é o contrato administrativo de concessão, na modalidade patrocinada ou administrativa. É autorizada a adoção desse modelo no caso de:",
+          "alternativas": [
+            "fornecimento de mão-de-obra cujo valor do contrato seja inferior a R$ 10.000.000,00",
+            "fornecimento e instalação de equipamentos cuja prestação do serviço seja inferior a 5 (cinco) anos",
+            "concessão de serviço público envolver contraprestação pecuniária do parceiro público ao parceiro privado",
+            "ter como único objeto o fornecimento de mão-de-obra, o fornecimento e a instalação de equipamentos ou a execução de obra pública."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "selecon-corenrr-2024-505-complementar",
+      "banca": "Instituto Selecon",
+      "ano": 2024,
+      "orgao": "Conselho Regional de Enfermagem de Roraima",
+      "cargo": "Analista Administrativo — Administrador (505)",
+      "cadernoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/YZzxF636oSKVDWwcZ2rlzK3sCnSKLT59bk8abFlf.pdf",
+      "gabaritoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/vSdnipfq713HvDbn5BirXNzLsFgoPTEQy1gV9AM6.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 35,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "De acordo com a previsão do Art. 28 da Lei n.º 14.133/2021 (Nova Lei de Licitações), são modalidades de licitação:",
+          "alternativas": [
+            "pregão e concorrência",
+            "tomada de preços e convite",
+            "convite e diálogo competitivo",
+            "tomada de preços e concorrência"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "De acordo com o Art. 114 da Lei n.º 14.133/2021, o contrato que tem a previsão de operação continuada de sistemas estruturantes de tecnologia da informação poderá ter vigência máxima de:",
+          "alternativas": [
+            "10 anos",
+            "15 anos",
+            "24 anos",
+            "30 anos"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "De acordo com o Art. 62 da Lei n.º 14.133/2021, a fase do processo licitatório em que ocorre a verificação da documentação necessária e do conjunto de informações consideradas suficientes para demonstrar a capacidade do licitante de realizar o objeto da licitação é denominada:",
+          "alternativas": [
+            "homologação",
+            "preparatória",
+            "habilitação",
+            "julgamento"
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "selecon-corenrr-2024-401-complementar",
+      "banca": "Instituto Selecon",
+      "ano": 2024,
+      "orgao": "Conselho Regional de Enfermagem de Roraima",
+      "cargo": "Técnico de Informática (401)",
+      "cadernoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/57JfaJfyHKG8MymVi17jIAnIFoXJKbI2EZB52cTP.pdf",
+      "gabaritoUrl": "https://anexos.cdn.selecao.net.br/uploads/779/concursos/21/anexos/vSdnipfq713HvDbn5BirXNzLsFgoPTEQy1gV9AM6.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Pontuação",
+          "enunciado": "Em “[...] visitará três lugares que vivem uma situação de emergência por surto de dengue: Brasília, São Paulo e Rio de Janeiro” (1º parágrafo), o sinal gráfico de dois-pontos foi empregado com a função de:",
+          "alternativas": [
+            "indicar o uso de um vocativo",
+            "introduzir uma citação no texto",
+            "inserir uma oração apositiva no texto",
+            "apresentar uma enumeração de itens"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Concordância Verbal e Nominal",
+          "enunciado": "“Houve 715 mortes - a maior parte delas no Distrito Federal, com 152 vítimas fatais” (2º parágrafo). Uma possível reescrita dessa frase, à luz da norma-padrão, sem alteração de sentido, seria:",
+          "alternativas": [
+            "Ocorreram 715 mortes - a maior parte delas no Distrito Federal, com 152 vítimas fatais.",
+            "Houveram 715 mortes - a maior parte delas no Distrito Federal, com 152 vítimas fatais.",
+            "Tiveram 715 mortes - a maior parte delas no Distrito Federal, com 152 vítimas fatais.",
+            "Teve 715 mortes - a maior parte delas no Distrito Federal, com 152 vítimas fatais."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "Em “havia motivo para preocupação e cuidados, embora não tenha certeza de que o próprio Macron esteja ciente da gravidade dos casos” (3º parágrafo), o termo destacado indica valor de:",
+          "alternativas": [
+            "concessão",
+            "condição",
+            "causa",
+            "tempo"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "“ Entrou no radar das autoridades de Paris o risco de contrair a dengue e outras doenças transmitidas por mosquitos no Brasil” (5º parágrafo). No pretérito imperfeito do modo indicativo, a forma verbal destacada seria flexionada como:",
+          "alternativas": [
+            "entra",
+            "entrava",
+            "entraria",
+            "entrasse"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tempos, Modos e Vozes Verbais",
+          "enunciado": "“O país já registrou 2 milhões de casos de dengue” (2º parágrafo). Na voz passiva, sem alteração de sentido, à luz da norma-padrão, essa frase passaria a:",
+          "alternativas": [
+            "O país já tem registrados dois milhões de casos de dengue.",
+            "Dois milhões de casos de dengue já foram registrados no país.",
+            "No país, já foram registrados dois milhões de casos de dengue.",
+            "Dois milhões de casos de dengue já foram registrados pelo país."
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}
