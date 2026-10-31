@@ -1,0 +1,2019 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "cpnu2-2025-seguridade-saude-fgv-lote010",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "cpnu2-2025-bloco8-saude-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Ministério da Gestão e da Inovação em Serviços Públicos - CPNU 2",
+      "cargo": "Bloco 8 - Nível Intermediário - Saúde",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/b8801.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cpnu_gabarito_oficial_definitivo_retificado_21.11.2025.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 12,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "A respeito da relação entre desenvolvimento sustentável e matriz energética, leia o trecho a seguir. “O maior desafio da agenda climática ainda está relacionado ao uso de fontes fósseis de energia. No entanto, a contribuição do sistema agroalimentar é igualmente decisiva – e vai além do aquecimento global. As atividades desse setor já impactam diretamente pelo menos seis dos nove limites planetários identificados pelos cientistas do clima, incluindo a perda de biodiversidade, a escassez de recursos hídricos e os desequilíbrios nos ciclos de elementos químicos essenciais à produção agropecuária, como nitrogênio e fósforo. Além disso, há uma forte interdependência entre a transição energética e a agroalimentar, especialmente diante da perspectiva de ampliação do uso da biomassa para a produção de combustíveis, o que gera implicações significativas sobre o uso da terra e outros insumos produtivos.” (Adaptado de “O impacto dos sistemas agroalimentares nas mudanças climáticas”, Nexo Jornal, Entrevista de Arilson Favareto a Lucas Zacari, 25 de jun. 2025) De acordo com o trecho citado, é correto afirmar que:",
+          "alternativas": [
+            "os impactos do sistema agroalimentar são mais danosos para o clima do que o uso de fontes fósseis;",
+            "a expansão do uso de biomassa garante a transição energética para os sistemas agroalimentares;",
+            "a pressão do setor energético sobre o sistema agroalimentar tem efeito indireto sobre o aquecimento global;",
+            "a substituição de combustíveis fósseis por biomassa ass egura a transição energética e a proteção ambiental;",
+            "as crises ambientais globais são interconectadas, mas seus impactos locais variam conforme os contextos socioeconômicos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Segundo dados do FMI (2024), o Brasil figura entre as 10 maiores economias do mundo. No entanto, mantém um Índice de Gini elevado, o que o coloca entre os 15 países mais desiguais do planeta. Nos últimos anos, o debate público tem resgatado controvérsias em torno do papel do Estado na redução das desigualdades, tema que também se articula com discussões internacionais sobre a necessidade de um novo modelo de tributação global, frente à crescente concentração de riqueza. Considerando a estrutura tributária brasileira e os mecanismos de financiamento estatal, analise as afirmativas a seguir. I. O modelo tributário brasileiro é reconhecido por sua regressividade, pois concentra a arrecadação em tributos sobre o consumo. II. No Brasil, os efeitos redistributivos das políticas públicas são limitados pelo condicionamento dos custos sociais ao teto de gastos. III. No debate internacional, a taxação de grandes fortunas é rejeitada por organismos multilaterais, que a consideram ineficaz e prejudicial ao crescimento econômico. Está correto o que se afirma em:",
+          "alternativas": [
+            "I, apenas;",
+            "I e II, apenas;",
+            "I e III, apenas;",
+            "II e III, apenas;",
+            "I, II e III."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Leia o trecho a seguir. “O conceito de transição energética está associado ao processo de substituição da base de recursos e/ou tecnologias usada para gerar energia por outros(as). Esse processo pode ocorrer por diversas razões, como a escassez de um recurso energético ou o aparecimento de tecnologias mais eficientes.” (Fonte: https://www.gov.br/aneel/pt-br/assuntos/transicao- energetica/a-transicao-energetica-no-brasil) Com base no conceito de transição energética, é corre to afirmar que o Brasil:",
+          "alternativas": [
+            "possui vantagens comparativas no processo de transição energética por apresentar menor volume de subsídios federais destinados aos combustíveis fósseis e maior es incentivos para as fontes renováveis;",
+            "lida com pressões exter nas, principalmente no setor elétrico, devido à baixa participação de fontes renováveis em sua matriz energética em comparação com outros países;",
+            "enfrenta o desafio de tornar a matriz energética mais resiliente frente à emergência climática, já que eve ntos extremos podem comprometer a estabilidade das fontes renováveis;",
+            "destaca-se internacionalmente por liderar a transição energética e a descarbonização no setor de transportes, com ampla adoção de tecnologias limpas;",
+            "apresenta como diferencial u ma infraestrutura avançada de transmissão de energia, com redes modernas e amplas que conectam regiões produtoras de fontes renováveis aos principais centros consumidores."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "“Um estudo realizado no Ceará, em 2017, revelou que a população LGBTQIAPN+ está entre as mais afetadas pelas dificuldades de acesso aos serviços de saúde, sobretudo em razão do preconceito demonstrado por alguns profissionais durante o atendimento. Um dos participantes da pesquisa, diretamente impactado por essa situação, relatou que ‘a forma que ela [profissional da saúde] me atendeu foi totalmente diferente da forma como ela estava me atendendo antes de ela sabe r da minha orientação sexual. Não gostei, também não voltei mais de jeito nenhum para ela. Para mim, foi triste’.” (Adaptado de SILVA, Caik et al . “Sobreviver é preciso: A diversidade de gênero no acesso aos serviços de saúde ”. Gênero, v. 22, n. 1, 2021, p. 10) Diante da situação apresentada, uma medida eficaz para reduzir as barreiras de acesso à saúde enfrentadas por esses grupos consiste em o profissional de saúde:",
+          "alternativas": [
+            "abster-se de perguntas sobre as práticas sexuais do paciente, pois os processos de cur a e adoecimento são independentes da orientação afetivo-sexual e da identidade de gênero;",
+            "reconhecer os pacientes pelo nome social, mediante a comprovação médica da mudança de sexo, pois essa é uma forma de respeitar sua identidade de gênero e seus direitos;",
+            "adotar padrões culturais heteronormativos para entender a identidade de gênero e a orientação sexual dos pacientes, pois enquadrá-los em categorias preestabelecidas otimiza os atendimentos;",
+            "focar o atendimento nos aspectos sexuais dos pacien tes, pois assim promove uma abordagem uniforme dos riscos gerais enfrentados por usuários homossexuais;",
+            "considerar as particularidades dos pacientes, pois a discriminação vivenciada por eles impacta a forma como o sofrimento e a doença são socialmente determinados."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Em 2024, o Brasil atingiu um recorde histórico no consumo de energia elétrica, com um aumento de 5,3% em comparação com 2023. Ao mesmo tempo, crescem as preocupações em torno da transição da matriz energética nacional devido às mudanças climáticas. Segundo os dados mais recentes, a fonte de geração de energia que mais cresce no Brasil é a:",
+          "alternativas": [
+            "termoelétrica, diante da necessidade de garantir segurança energética em períodos de seca;",
+            "nuclear, com avanços no programa de ampliaç ão da usina de Angra 3;",
+            "hidrelétrica, com o aumento da capacidade de usinas já existentes e novos projetos na Amazônia Legal;",
+            "eólica, devido à expansão de parques no Nordeste e no Sul do país;",
+            "solar, com forte expansão tanto da geração distribu ída em residências quanto da centralizada em grandes usinas solares."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Segundo informe técnico do Observatório Brasileiro de Políticas Públicas com a População em Situação de Rua (OBPopRua), da Universidade Federal de Minas Gerais, 335.151 pessoas viviam em situação de rua no Brasil, em março de 2025. O número marca um aumento de 0,37% em relação a dezembro de 2024 e é 14,6 vezes maior do que o registrado em dezembro de 2013. Com relação ao tema, é correto afirmar que:",
+          "alternativas": [
+            "a maior parte das pessoas em situação de rua no Brasil são crianças e idosos, o que evidencia um deslocamento etário da crise social;",
+            "mulheres representam a maior parte das pessoas afetadas pela situação de rua, destacando os efeitos profundos da disparidade de gênero;",
+            "o aumento do número de pessoas em situação de rua oco rre a despeito dos investimentos em políticas públicas de moradia e educação;",
+            "mais da metade da população em situação de rua concluiu o ensino médio, o que indica que a escolaridade não é fator relevante no fenômeno;",
+            "a pesquisa mostra que houve um aumento de 14,6 vezes nas rupturas de vínculo familiar desde 2013."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "“Segundo levantamento do IBGE, entre 2004 e 2013, o Brasil apresentou avanços na segurança alimentar, com redução nos níveis de insegurança. No entanto, a partir de 2013, os índices voltaram a crescer, atingindo seu pico em 2022. Em 2023, houve uma leve melhora, mas a insegurança alimentar — leve, moderada ou grave — ainda afeta uma parcela expressiva da população.” (Fonte: https://agenciadenoticias.ibge.gov.br/agencia-noticias /2012-agencia-de-noticias/noticias/39838-seguranca-alimentar- nos-domicilios-brasileiros-volta-a-crescer-em-2023) No final de julho de 2025, a Organização das Nações Unidas para a Alimentação e a Agricultura (FAO/ONU) anunciou que o Brasil não está mais no Mapa da Fome. Apesar disso, e a despeito do fato de que o Brasil está entre os maiores produtores de alimentos do mundo, a insegurança alimentar é um problema estrutural ainda existente no país. Em relação a esse tema, é correto afirmar que:",
+          "alternativas": [
+            "a falta de educação alimentar é a responsável pela desnutrição da população, que opta por dietas hipercalóricas e com baixo valor nutricional;",
+            "as falhas na distribuição de alimentos comprometem o abastecimento e reduzem a disponibilidade de produtos essenciais para uma alimentação adequada;",
+            "as recentes restrições ao uso de agrotóxicos têm impactado a eficiência da produção de alimentos, uma vez que dificultam o controle das pragas;",
+            "a crise climática é responsável por destruir a produção nacional de alimentos e por afetar principalmente as zonas urbanas, que sofrem mais com a insegurança alimentar grave;",
+            "o aumento das taxas percentuais do crescimento demográfico nos últimos anos é responsável por reduzir a oferta e o acesso à comida."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "A expectativa de vida no Brasil vem aumentando progressivamente, tendo alcançado 76,4 anos em 2023, segundo o IBGE. Transformações na área da saúde, da tecnologia e no âmbito socioeconômico contribuem para que as pessoas vivam mais, o que, por outro lado, traz novas preocupações, já que novos desafios se colocam no planejamento da vida. Em relação aos desafios enfrentados pelo Brasil em razão do aumento da expectativa de vida, é correto afirmar que:",
+          "alternativas": [
+            "a elevação da idade média da população tem contribuído para o aumento da rotatividade no mercado de trabalho, dificultando a renovação de postos;",
+            "o crescimento da população idosa tem contribuído para o colapso dos transportes públicos urbanos, sobrecarregando os sistemas viários nos horários de pico;",
+            "o envelhecimento populacional tem gerado conflitos geracionais dentro dos núcleos familiares, especialmente relacionados à dependência financeira dos mais velhos;",
+            "a falta de educação financeira desde a juventude compromete a segurança econômica dos idosos, dificultando o planejamento de longo prazo;",
+            "o aumento do número de idosos tem levado à redução de oportunidades educacionais para jovens, à medida que os recursos públicos são redirecionados para a terceira idade."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Após ser aprovada em um árduo concurso público, Maria tomou posse, estando em exercício em um cargo público de provimento efetivo, junto ao Poder Executivo Federal , há dois anos, sem qualquer interrupção. Em determinado dia, Maria tomou conhecimento de que está sendo investigada por ter praticado ilícito administrativo. Nesse cenário, considerando as disposições da Constituição Federal, é correto afirmar que:",
+          "alternativas": [
+            "na qualidade de ocupante de cargo público na administração pública federal direta, a servidora Maria tem direito à vitaliciedade, de forma que só perderá o cargo em virtude de sentença judicial transitada em julgado ou mediante processo administrativo em que lhe seja assegurada a ampla defesa;",
+            "apesar de os ocupantes de cargos públicos de provim ento efetivo poderem obter a estabilidade, fato é que a servidora Maria ainda não preencheu os requisitos constitucionais para fazer jus ao referido direito;",
+            "em razão da estabilidade constitucionalmente garantida e já obtida, Maria, na qualidade de ser vidora pública, poderá perder o cargo mediante processo administrativo em que lhe seja assegurada a ampla defesa;",
+            "por ser Maria ocupante de um cargo público, não há que se falar no direito à estabilidade, por se tratar de prerrogativa aplicável, apenas, aos empregados públicos;",
+            "por ser considerada servidora pública estável, Maria só perderá o cargo em virtude de sentença judicial transitada em julgado."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "Em maio de 2025, João, primário, servidor público federal, liberou verba pública sem a estrita observância das normas pertinentes, ensejando prejuízo mediano ao erário. Registre -se que o próprio agente público procurou os seus superiores hierárquicos, narrando o ocorrido e deixando claro que agiu de forma culposa, em razã o de uma atuação negligente, o que foi devidamente comprovado. Nesse cenário, considerando as disposições da Lei nº 8.429/1992 e da Lei nº 14.230/2021, é correto afirmar que:",
+          "alternativas": [
+            "os órgãos públicos competentes, em razão da primariedade de João, podem deixar de responsabilizá-lo por sua ação caso ele ressarça integralmente os danos causados à Administração Pública federal, embora sua conduta caracterize ato de improbidade administrativa;",
+            "João não poderá responder pela conduta praticada, apesar de ser adm issível a caracterização de ato culposo de improbidade administrativa, já que a ação não ensejou prejuízo de grande relevância para a Administração Pública federal;",
+            "a conduta de João caracteriza, cumulativamente, atos de improbidade administrativa que causa prejuízo ao erário e que atentam contra os princípios da Administração Pública;",
+            "o ato de improbidade administrativa não restou caracterizado, na medida em que o servidor João agiu de forma culposa, por meio de uma conduta negligente;",
+            "o servidor João poderá ser responsabilizado, pelo Ministério Público Federal, pela prática de ato de improbidade administrativa que causa prejuízo ao erário."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Fábio, residente e domiciliado no Município Alfa, no interior do Estado do Amazonas, tomou conhecimento de que o prefeito da municipalidade editou ato administrativo ilegal e lesivo ao meio ambiente ecologicamente equilibrado. Preocupado com a situação posta, Fábio buscou informações sobre o que ele poderia fazer para contribuir para a anulação da referida medida. Nesse cenário, em tema de controle judicial da Administração Pública, considerando as disposições da Co nstituição Federal, é correto afirmar que:",
+          "alternativas": [
+            "Fábio, ainda que comprove a sua qualidade de cidadão, não poderá ingressar com ações em juízo, apesar de se tratar de ato administrativo ilegal e lesivo, já que esta é uma atribuição exclusiva dos órgãos e das entidades públicas;",
+            "Fábio não dispõe de instrumentos legais para, por conta própria, buscar a anulação judicial do ato administrativo, apesar da legítima preocupação, cabendo -lhe, no máximo, notificar o Ministério Público;",
+            "o manejo de uma ação civil pública é a via adequada para que Fábio postule, em juízo, a anulação do ato administrativo, juntando, ao processo, o comprovante de que é residente e domiciliado no Município Alfa;",
+            "Fábio pode ajuizar uma ação civil pública visando à anulação do ato administrativo, devendo demonstrar, para tanto, ser maior e capaz;",
+            "Fábio poderá manejar uma ação popular, desde que comprove a sua qualidade de cidadão."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "O órgão de pesquisa Alfa entrou em contato com José e Maria, genitores de Vicente, com 13 anos de idade, demonstrando interesse na realização de estudos que pressupõem o tratamento dos dados pessoais do adolescente. Registre-se que José e Maria são pais presentes que exercem, em conjunto, o poder familiar sobre o filho comum. Nesse cenário, considerando as disposições da Lei nº 13.709/2018, é correto afirmar que:",
+          "alternativas": [
+            "salvo se houver consentimento compartilhado de José e Maria, por meio de documento assinado e com firma reconhecida em um tabelionato de notas, não se admitirá o tratamento dos dados pessoais de Vicente;",
+            "para que se proceda ao tratamento dos dados pessoais de Vicente, é necessário que José e Maria, con juntamente, consintam, de forma específica, com a medida, observado o melhor interesse do adolescente;",
+            "embora, em tese, seja admissível o tratamento dos dados pessoais de Vicente, exige -se prévia autorização por parte do Conselho Tutelar localizado na cidade onde o adolescente tem domicílio;",
+            "para que haja o tratamento dos dados pessoais de Vicente, basta o consentimento específico e em destaque dado por José ou por Maria ou, ainda, por ambos os genitores em conjunto;",
+            "para que o tratamento dos da dos pessoais de Vicente seja admissível, pressupõe -se a autorização judicial, observado o seu melhor interesse."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Lucas e Caio, estudantes da Universidade Federal do Pará, organizaram e convocaram pacífica manifestação, mediante reunião de centenas de pessoas em uma praça pública de Belém, em defesa dos direitos dos povos originários. Nesse cenário, considerando as d isposições da Constituição Federal, é correto afirmar que:",
+          "alternativas": [
+            "o encontro pacífico, organizado e convocado por Lucas e Caio, em uma praça pública localizada em Belém, poderá ocorrer sem intercorrências, após autorização da autoridade competente, caso não h aja a frustração de outra reunião anteriormente convocada para o mesmo local;",
+            "nada impede a realização da reunião pacífica, organizada e convocada por Lucas e Caio, em uma praça pública localizada em Belém, desde que não se frustre outra reunião anteriormente convocada para o mesmo local, exigindo -se prévio aviso à autoridade competente;",
+            "a reunião pacífica organizada por Lucas e Caio, reunindo centenas de pessoas em defesa dos direitos dos povos originários, deverá ser realizada em um final de seman a ou feriado, de forma a não prejudicar o direito de ir e vir da população local;",
+            "a reunião pacífica, organizada por Lucas e Caio, poderá ocorrer em uma praça pública localizada em Belém, independentemente de prévio aviso à autoridade competente;",
+            "a reunião pacífica, organizada por Lucas e Caio, pode ocorrer em uma praça pública localizada em Belém, desde que haja autorização da administração pública local."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Carolina, jornalista, apresentou, por meio anônimo, pedido de acesso a informações públicas atinentes à administração pública federal. Contudo, o requerimento foi negado por Cloves, autoridade administrativa competente, sob os fundamentos de que a postulação não continha a identificação da requerente, tampouco elencava os motivos determinantes da solicitação. Nesse cenário, considerando as disposições da Lei nº 12.527/2011, é correto afirmar que:",
+          "alternativas": [
+            "a negativa ao requerimento f ormulado por Carolina está em desconformidade com a ordem jurídica, já que a Administração Pública federal não pode exigir a identificação da requerente, tampouco a delimitação dos motivos determinantes da solicitação;",
+            "a ausência de previsão legal expr essa faz com que caiba à autoridade administrativa competente definir, fundamentadamente, os requisitos que devem ser preenchidos para que haja o acesso a informações públicas, motivo pelo qual a atuação de Cloves se deu de forma regular;",
+            "a atuação do servidor Cloves está parcialmente correta, já que o pedido de acesso a informações demanda a delimitação dos motivos determinantes da solicitação, muito embora não seja exigível a identificação da requerente;",
+            "o servidor Cloves agiu acertadamente, já qu e o pedido de acesso a informações públicas demanda a identificação da requerente e a delimitação dos motivos determinantes da solicitação;",
+            "o pedido de acesso a informações não exige a delimitação dos motivos determinantes da solicitação, mas pressupõe a identificação da requerente."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Rodrigo, maior e capaz, tomou conhecimento de que a autoridade judicial competente decretou a sua prisão preventiva, sob o fundamento de que ele teria praticado um crime de roubo no interior de uma Agência dos Correios, localizada em Brasília, no Distrito Federal. Contudo, Rodrigo, que ainda não foi preso, tem inúmeros comprovantes de que, no horário do cometimento do delito, se encontrava em Salvador, na Bahia. Nesse cenário, considerando as disposições da Constituição Federal, é correto afirmar que:",
+          "alternativas": [
+            "a utilização do remédio constitucional do habeas data por parte de Rodrigo, com o objetivo de combater a coação ilegal em sua liberdade de locomoção, só será cabível após a sua efetiva prisão;",
+            "Rodrigo poderá, desde lo go, impetrar um habeas data para sanar a situação posta, ainda que não tenha sofrido efetiva coação ilegal em sua liberdade de locomoção;",
+            "a impetração, junto ao Poder Judiciário, de um habeas corpus é plenamente cabível, já que Rodrigo está ameaçado de sofrer coação ilegal em sua liberdade de locomoção;",
+            "a impetração de um habeas corpus por Rodrigo não é cabível antes da efetiva prisão, já que ele ainda não sofreu coação ilegal em sua liberdade de locomoção;",
+            "Rodrigo poderá impetrar, em juízo, um mandado de segurança, por estar ameaçado de sofrer coação ilegal em sua liberdade de locomoção."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Eduardo, maior e capaz, empresário de sucesso com elevado patrimônio, adquiriu, para a sua casa de praia, uma máquina de lavar roupa, avaliada em R$ 3.000,00, na qualidade de destinatário final do produto. Por sua vez, a entidade privada Alfa, pessoa juríd ica, utilizou determinados serviços como destinatária final. Registre -se, por fim, que Eduardo e a entidade privada Alfa estão insatisfeitos, respectivamente, com o produto adquirido e com os serviços prestados. Nesse cenário, considerando as disposições do Código de Defesa do Consumidor, é correto afirmar que:",
+          "alternativas": [
+            "apesar de Eduardo e da entidade privada Alfa não serem enquadrados, nos termos da lei, como consumidores, é possível que, em eventual demanda judicial, o juiz, de forma fundamentada e excepciona l, aplique os regramentos do Código de Defesa do Consumidor em benefício de ambos;",
+            "como pessoa jurídica, a entidade privada Alfa não pode ser considerada consumidora; igualmente, Eduardo não se caracteriza como consumidor, já que não é pessoa economicamente vulnerável;",
+            "por não ser hipossuficiente econômico, Eduardo não pode ser enquadrado como consumidor, mas a entidade privada Alfa, sendo a destinatária final dos serviços prestados, é consumidora;",
+            "por ser uma pessoa jurídica, a entidade privada Alfa, não é tida como consumidora, mas Eduardo, na qualidade de destinatário final do produto adquirido, é tido como consumidor;",
+            "por serem destinatários finais, respectivamente, do produto adquirido e dos serviços prestados, tanto Eduardo quanto a entidade privada Alfa são considerados consumidores."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Em razão de intensas chuvas que atingiram o Estado do Rio Grande do Sul, causando fortes enchentes, agentes públicos federais competentes, em situação de iminente perigo público, se depararam com a necessidade de utilizar o imóvel particular de Joana para efetuar o salvamento da população local. Nesse cenário, considerando as disposições da Constituição Federal, é correto afirmar que:",
+          "alternativas": [
+            "o consentimento de Joana é necessário para que os agentes públicos federais competentes possam utilizar o seu imóvel ainda que haja situação de iminente perigo público, por se tratar de propriedade particular;",
+            "os agentes públicos federais competentes não poderão utilizar o imóvel de Joana sem o consentimento desta, ainda que se trate de s ituação de iminente perigo público, salvo se a proprietária não estiver no local;",
+            "o imóvel de Joana poderá ser utilizado pelos agentes públicos federais competentes, em razão da situação de iminente perigo público, sendo certo que caberá indenização ul terior se houver dano;",
+            "a autorização judicial é necessária para que os agentes públicos federais competentes possam, sem o consentimento de Joana, utilizar o seu imóvel em situação de iminente perigo público;",
+            "os agentes públicos federais competente s, diante de situação de iminente perigo público, poderão utilizar o imóvel de Joana, sem direito à indenização, ainda que haja dano."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Maria tem 17 anos e acabou de ingressar na faculdade de Direito. Por sua vez, José é um historiador aposentado, com 67 anos. Por fim, Lucas, com 32 anos, é um brilhante mecânico de automóveis, que, por particularidades da vida, é analfabeto. Sabedores da importância do processo eleitoral no Estado Democrático de Direito, os três indivíduos pretendem exercer o direito ao voto em hipotética eleição a ser realizada na corrente data. Nesse cenário, considera ndo as disposições da Constituição Federal, é correto afirmar que o voto é:",
+          "alternativas": [
+            "obrigatório para José e facultativo para Maria e Lucas;",
+            "obrigatório para Maria e facultativo para José e Lucas;",
+            "obrigatório para Lucas e facultativo para Maria e José;",
+            "obrigatório para Maria, José e Lucas;",
+            "facultativo para Maria, José e Lucas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Lucas, adolescente com 13 anos de idade e devidamente matriculado na rede municipal de ensino, pretende, após as aulas matinais, exercer atividade laborativa para contribuir na renda mensal do seu núcleo familiar, composto pelos seus pais e por um irmão mais novo. Nesse cenário, considerando as disposições expressas da Constituição Federal, em tema de direitos sociais, é correto afirmar que:",
+          "alternativas": [
+            "por ter apenas 13 anos de idade, Lucas, ainda que esteja devidamente matriculado na rede municipal de ensino, não poderá exercer qualquer trabalho, nem mesmo na condição de aprendiz;",
+            "com a concordância dos seus pais, Lucas poderá trabalhar na qualidade de aprendiz, vedando -se, apenas, atividades laborativas noturnas ou perigosas;",
+            "como está matriculado na rede municipal de ensino, Lucas poderá exercer atividade laborativa, salvo trabalho noturno, perigoso ou insalubre;",
+            "caso haja a concordância expressa dos seus pais, Lucas poderá exercer atividade laborativa, ainda que se tr ate de trabalho noturno;",
+            "salvo na condição de aprendiz, o adolescente Lucas não poderá exercer qualquer trabalho."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "João contou os N números inteiros de 1 a 2025 que são múltiplos simultâneos de 2 e de 3, mas que não são múltiplos de 8. O valor de N é:",
+          "alternativas": [
+            "337;",
+            "253;",
+            "168;",
+            "84;",
+            "42."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Com relação aos funcionários de uma certa empresa, a razão entre o número de homens e o número de mulheres é 3/5. Uma pesquisa interna revelou que 1/4 dos homens e 1/5 das mulheres têm animais de estimação. Nessa empresa, a razão entre o número de homens que têm animais de estimação e o número total de funcionários que têm animais de estimação é:",
+          "alternativas": [
+            "3/4;",
+            "2/5;",
+            "3/5;",
+            "2/7;",
+            "3/7."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Duas cidades A e B estão conectadas por uma ferrovia de 270 km de comprimento. Um trem com velocidade constante de 120 km/h parte da cidade A em direção à cidade B. Quinze minutos depois, um outro trem, com velocidade constante de N km/h, parte da cidade B em direção à cidade A. Os dois trens se cruzam em um ponto a 140 km da cidade B. O valor de N é:",
+          "alternativas": [
+            "168;",
+            "180;",
+            "188;",
+            "210;",
+            "220."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Cinco velas acesas são dispostas em círculo. De repente, uma rajada de vento sopra e cada vela tem 2/3 de probabilidade de apagar. A probabilidade de que, após a rajada de vento, cada vela ainda esteja acesa ou esteja ao lado de, pelo menos, uma vela acesa é:",
+          "alternativas": [
+            "17/81;",
+            "32/81;",
+            "64/81;",
+            "91/243;",
+            "152/243."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos",
+          "enunciado": "Fernanda tem uma coleção de N medalhas e quer dividi -las igualmente em um certo número de potes. Quando ela divide as medalhas em 4 potes, sobra 1 medalha. Quando ela divide as medalhas em 5 potes, sobram 2 medalhas. Quando ela divide as medalhas em 6 potes, sobram 3 medalhas. A soma dos algarismos do menor valor possível de N é:",
+          "alternativas": [
+            "6;",
+            "8;",
+            "10;",
+            "12;",
+            "14."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Marli comprou um vestido por R$ 440,00 e parcelou o pagamento em duas parcelas mensais, sendo a primeira parcela paga um mês após a compra. A loja onde Marli fez a compra cobra juros mensais de 5%, em regime de juros compostos. A primeira parcela paga por Marli foi de R$ 242,00. A segunda parcela paga por Marli foi de:",
+          "alternativas": [
+            "R$ 241,00;",
+            "R$ 240,00;",
+            "R$ 234,00;",
+            "R$ 231,00;",
+            "R$ 224,00."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Em uma fazenda, um terreno será preparado para plantação. O administrador sabe que 5 operários trabalhando 5 horas por dia durante 5 dias preparam 5000 m2 de terreno. A área que 6 operários trabalhando 6 horas por dia durante 6 dias conseguem preparar é de:",
+          "alternativas": [
+            "6000 m2;",
+            "6300 m2;",
+            "7410 m2;",
+            "8640 m2;",
+            "9510 m2."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Nos EUA, as unidades de massa usadas na vida cotidiana são a libra e a onça. Sabe -se que 1 libra equivale a 16 onças e que 1 quilograma equivale a 2,2 libras. Certo objeto tem massa de 3 libras e 10 onças. Seu valor equivalente em gramas é, aproximadamente:",
+          "alternativas": [
+            "1610;",
+            "1630;",
+            "1650;",
+            "1670;",
+            "1690."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Proposições e Conectivos",
+          "enunciado": "Considere o texto a seguir. \"A divisão celular binária ocorre quando uma bactéria duplica o seu material genético e logo em seguida se divide, originando duas bactérias idênticas a ela. Uma bactéria, quando em condições ideais de temperatura e nutrientes, leva aproximadamente vinte minutos para completar todo o processo de divisão.\" Uma cultura com 30 bactérias foi iniciada às 7 horas de certo dia em condições ideais de temperatura e nutrientes. Utilizando a aproximação 210 ≅ 103, a quantidade de bactérias dessa cultura às 19 horas desse dia era de aproximadamente:",
+          "alternativas": [
+            "2 bilhões;",
+            "20 bilhões;",
+            "200 bilhões;",
+            "2 trilhões;",
+            "20 trilhões."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Do conjunto {1, 2, 3, 4, 5, 6}, Joana sorteia aleatoriamente dois números diferentes e, de forma independente, Laura sorteia aleatoriamente, também, dois números diferentes. Em cada sorteio, todos os pares de números diferentes têm a mesma probabilidade de serem sorteados. A probabilidade de que elas tenham sorteado ex atamente um número em comum é:",
+          "alternativas": [
+            "2/3;",
+            "3/5;",
+            "5/9;",
+            "7/12;",
+            "8/15."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Em uma bandeja, há 11 empadas, sendo 5 de frango e as demais de palmito. Todas têm exatamente o mesmo tamanho e aparência. Sofia pega, aleatoriamente, 3 dessas empadas. A probabilidade de que as 3 empadas de Sofia tenham o mesmo recheio é de, aproximadamente:",
+          "alternativas": [
+            "12%;",
+            "15%;",
+            "18%;",
+            "21%;",
+            "25%. Saúde"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Um grupo cultural comunitário decide participar de projetos de promoção de saúde que desenvolvam tecnologias sociais por meio de cultura e arte. Tomando por base a Política Nacional de Promoção da Saúde, esse grupo poderá divulgar, no seu trabalho , a seguinte informação:",
+          "alternativas": [
+            "todos os hipertensos têm direito a quatro consultas anuais;",
+            "todas as crianças têm direito a fazer exame de fezes para a prevenção de parasitose intestinal;",
+            "todos os doentes renais em estágio avançado têm acesso ao tratamento específico (hemodiálise);",
+            "todas as pessoas com cefaleia têm direito à realização de tomografia computadorizada cerebral;",
+            "todas as pessoas idosas têm o direi to de fazer uma ressonância magnética cerebral anual como prevenção da demência."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Em uma unidade básica de saúde , h á estudantes da área de saúde que participam do atendimento, sob preceptoria de profissionais que não são professores das suas escolas de origem. Esses mesmos estudantes também coletam dados para pesquisas científicas. Os professores das suas escolas de or igem visitam a unidade de saúde uma vez por mês. Essa situação é:",
+          "alternativas": [
+            "inapropriada, uma vez que não deve haver atividades de pesquisa na unidade básica;",
+            "apropriada, uma vez que os estudantes estão sob preceptoria dos profissionais da unidade básica;",
+            "apropriada, uma vez que a unidade recebe visitas mensais dos professores das escolas de origem dos estudantes;",
+            "inapropriada, uma vez que os professores das escolas das áreas de saúde devem estar presentes nos atendimentos dos estudantes;",
+            "inapropriada, uma vez que os professores das escolas das áreas de saúde devem estar presentes nas atividades de pesquisa dos estudantes."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "Uma senhora é atendida em consulta de rotina na unidade básica de saúde onde controla uma hipertensão arterial sistêmica. Ela solicita à médica que faça um pedido de ecocardiograma, porque sua vizinha, que também controla a hipertensão arterial, faz um ecocardiograma por ano. A médica explica que, no caso da senhora, não é indicado fazer o exame anualmente. A senhora, porém, retruca: “Se ela faz, eu também tenho esse direito”. Diante dessa situação, s egundo as diretrizes e princípios do Sistema Único de Saúde, a médica agiu:",
+          "alternativas": [
+            "corretamente, dado o princípio da integralidade da atenção;",
+            "incorretamente, dado o princípio do acesso universal aos serviços de saúde;",
+            "corretamente, dada a orientação para contenção de gastos no Sistema Único de Saúde;",
+            "corretamente, dada a importância de se privilegiar a atenção primária na unidade básica de saúde;",
+            "corretamente, dado o caráter excessivamente especializado do ecocardiograma, o que o torna inapropriado para uma unidade básica."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "A mãe de uma criança de 11 anos procura a unidade de saúde e diz: “Meu filho precisa tomar umas vitaminas, pois toda criança toma para evitar doenças”. A criança é totalmente saudável, está dentro do peso normal para a idade, não tem qualquer sintoma e não pratica atividade física. Diante dessa situação, espera-se que o profissional de saúde:",
+          "alternativas": [
+            "prescreva suplementos vitamínicos, pois eles ajudam a prevenir doenças;",
+            "prescreva suplementos vitamínicos, pois eles ajudam no crescimento das crianças;",
+            "encaminhe o paciente para a atenção especializada, para que se chegue a uma decisão sobre o uso de vitaminas;",
+            "não prescrev a suplementos vitamínicos, uma vez que a criança não pratica atividade física;",
+            "não prescrev a suplementos vitamínicos, pois a criança não tem carências nutricionais específicas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "João, que tem uma alimentação saudável e equilibrada, decide deixar de ser sedentário e passar a frequentar a academia. Diante disso, ele procura a unidade básica de saúde do seu bairro, onde participa de reuniões sobre alimentação saudável para praticantes de atividade física. Nessas reuniões, João é corretamente orientado a:",
+          "alternativas": [
+            "manter sua alimentação habitual;",
+            "iniciar a ingestão de suplementos vitamínicos;",
+            "privilegiar a ingestão de alimentos com alto teor de proteínas;",
+            "alimentar-se imediatam ente após o treino, ainda dentro da academia;",
+            "passar a usar medicamentos que contenham os nutrientes individuais essenciais para a prática de atividade física."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Uma pessoa de 32 anos faz todo o trabalho de casa: cuida das plantas, corta a grama, faz compras, dá banho na criança e no animal de estimação, varre, esfrega e lava. Vai de metrô para o trabalho, onde serve café. Retorna para casa de metrô e usa seu pouco tempo livre para descansar. Em relação à rotina dessa pessoa, é correto afirmar que:",
+          "alternativas": [
+            "ela não faz atividade física;",
+            "tarefas domésticas não trazem benefícios para a saúde;",
+            "atividade física requer tempo e local específico s para trazer benefícios para a saúde;",
+            "tarefas no trabalho que exijam esforço físico não trazem benefícios para a saúde;",
+            "a prática de qualquer atividade física , mesmo em períodos curtos do dia, traz benefícios para a saúde."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Considere um rapaz que sofreu um acidente automobilístico e foi recebido em uma Unidade de Pronto Atendimento (UPA). Esse rapaz foi atendido na:",
+          "alternativas": [
+            "atenção primária à saúde;",
+            "atenção terciária à saúde;",
+            "atenção domiciliar à saúde;",
+            "atenção hospitalar à saúde;",
+            "atenção especializada à saúde."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Um homem de 32 anos é atendido pela equipe de um centro de referência em HIV, aids e infecções sexualmente transmissíveis. Na equipe , há interação e integração tão profunda s entre os profissionais de saúde, com seus conhecimentos e qualificações distintos, que é produzido um novo conhecimento não redutível a nenhuma das disciplinas envolvidas. Esse novo conhecimento está intimamente ligado à experiência e essência do cuidado às pessoas que vivem com o HIV, e não ligado às disciplinas isoladamente. Esse atendimento é realizado sob a lógica:",
+          "alternativas": [
+            "unidisciplinar;",
+            "pluridisciplinar;",
+            "multidisciplinar;",
+            "interdisciplinar;",
+            "transdisciplinar."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Prática Baseada em Evidências",
+          "enunciado": "Um pesquisador convida um paciente para participar de uma pesquisa sobre um novo tratamento para a doença causada pelo coronavírus. No que se refere ao consentimento livre e esclarecido, é correto afirmar que esse participante:",
+          "alternativas": [
+            "deve receber a informação de que os riscos previsíveis não podem ser minimizados;",
+            "deve receber informações sobre os procedimentos alternativos de tratamento;",
+            "deve rece ber informações breves, generalizadas e sintéticas sobre os procedimentos da pesquisa;",
+            "deve julgar se deve ou não participar da pesquisa, segundo os valores morais da comunidade científica;",
+            "não tem capacidade de avaliar de forma adequada, como um cientista, as consequências da pesquisa para si e para os outros."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Recentemente, houve o recolhimento e a suspensão de lotes de canela em pó, após verificação, por meio de uma análise, da presença de amido, que não é um componente característico da canela. O produto teve ainda resultado insatisfatório na avaliação de elem entos histológicos e na pesquisa de matérias estranhas macroscópicas e microscópicas. Os parâmetros identificados não estão de acordo com a legislação. O monitoramento da qualidade e segurança dos alimentos é de responsabilidade da:",
+          "alternativas": [
+            "vigilância sanitária;",
+            "vigilância ambiental;",
+            "vigilância epidemiológica;",
+            "Agência Brasil de Alimentos;",
+            "vigilância em saúde do trabalhador."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Um profissional de saúde decide realizar pesquisa sobre a letalidade da toxoplasmose, tendo como campo de estudo o ambulatório de recém-nascidos de um hospital universitário. Para isso, será necessário comparar os dados obtidos nesse hospital com dados nacionais. Para obter os dados nacionais, com recortes por municípios e sexo, o pesquisador poderá acessar o:",
+          "alternativas": [
+            "Sistema de Informação Hospitalar;",
+            "Sistema de Informação Ambulatorial;",
+            "Sistema de Informação sobre Nascidos Vivos;",
+            "Sistema de Informação sobre Mortalidade;",
+            "Sistema de Informação de Agravos de Notificação."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Um profissional de saúde que atua na assistência ao paciente apresentou feridas nos membros superiores. Com base nas disposições da Norma Regulamentadora 32 a esse respeito, é correto afirmar que esse trabalhador:",
+          "alternativas": [
+            "pode retomar suas atividades normalmente, desde que apresente atestado médico, sem necessidade de avaliação ocupacional adicional;",
+            "deve ser alocado em outra função, de preferência administrativa, até que as feridas cicatrizem totalmente;",
+            "pode retornar a o trabalho mesmo sem liberação médica, desde que as feridas sejam periodicamente limpas e estejam protegidas;",
+            "poderá reiniciar suas atividades apenas após avaliação médica obrigatória , seguida de emissão de documento de liberação para o trabalho;",
+            "pode retornar ao trabalho mesmo sem liberação médica, uma vez que a avaliação médica só é exigida para trabalhadores com doenças infectocontagiosas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Ao realizar uma inspeção em um laboratório de análises clínicas, os fiscais constataram, entre outras coisas, que os exames automatizados não passavam por controle externo d a qualidade (CEQ). Nesse caso, de acordo com as disposições da Anvisa acerca da gestão da qualidade em laboratórios, é correto afirmar que:",
+          "alternativas": [
+            "os exames automatizados só precisam passar por controle interno da qualidade;",
+            "os exames automatizados são dispensados de contro les interno e externo da qualidade;",
+            "o CEQ é indicado apenas para exames manuais, não sendo obrigatório para exames automatizados;",
+            "os exames automatizados devem obrigatoriamente passar por programas de CEQ, quando disponíveis;",
+            "a participação em programas de CEQ é opcional, desde que o laboratório possua validação própria dos seus resultados."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Um profissional de saúde sofreu acidente de trabalho com exposição a material biológico. Com base nas normas e protocolos do Ministério da Saúde, caso haja indicação de profilaxia pós-exposição (PEP), esta deve ser iniciada em até:",
+          "alternativas": [
+            "12 horas após a exposição;",
+            "24 horas após a exposição;",
+            "36 horas após a exposição;",
+            "48 horas após a exposição;",
+            "72 horas após a exposição."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Um determinado município iniciou uma ação integrada para realização de mamografia de rotina em mulheres na faixa etária recomendada. Considerando as orientações do Ministério da Saúde, o rastreamento do câncer de mama deve ser realizado:",
+          "alternativas": [
+            "bienalmente em mulheres a partir dos 35 anos;",
+            "anualmente em mulheres a partir dos 40 anos;",
+            "bienalmente em mulheres a partir dos 45 anos;",
+            "anualmente em mulheres de 49 a 70 anos;",
+            "bienalmente em mulheres de 50 a 69 anos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "A vigilância em saúde do trabalhador (VISAT) é um conjunto de ações que integram a atenção à saúde da população trabalhadora. Considerando as diretrizes da Política Nacional de Saúde do Trabalhador e da Trabalhadora (PNSTT), é correto afirmar que:",
+          "alternativas": [
+            "a VISAT tem como foco a vigilância dos acidentes graves ou óbitos relacionados ao trabalho, não atuando de forma preventiva;",
+            "a responsabilidade pela saúde do trabalhador está limitada às ações realizadas nos ambientes ambulator iais voltadas para a promoção da saúde;",
+            "a VISAT é executada prioritariamente pelos Centros de Referência em Saúde do Trabalhador (CEREST);",
+            "as ações de VISAT são voltadas apenas aos trabalhadores com vínculo formal de emprego, conforme as normas regulamentadoras do Ministério do Trabalho;",
+            "a VISAT deve contemplar ações de promoção e prevenção e ser integrada aos demais componentes da vigilância em saúde."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Uma equipe de saúde realizou ações voltadas para o rastreamento de doenças crônicas , como hipertensão e diabetes, e para o diagnóstico precoce de alguns tipos de cânceres. Essas atividades são classificadas como ações de:",
+          "alternativas": [
+            "promoção da saúde;",
+            "prevenção primária;",
+            "prevenção secundária;",
+            "prevenção terciária;",
+            "prevenção quaternária."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Durante uma ação de saúde em uma determinada comunidade, a equipe multidisciplinar identificou alta incidência de infecções respiratórias em crianças menores de 5 anos. Ao analisar os dados coletados, foram observadas as seguintes condições: casas com ventilação inadequada, uso de fogão a lenha em ambiente fechado, baixa escolaridade das mães, ausência de coleta regular de lixo e dificuldade de acesso aos serviços de saúde. Considerando os determinantes e condicionantes do processo saúde-doença, é correto afirmar que:",
+          "alternativas": [
+            "a baixa escolaridade das mães interfere na alfabetização das crianças, mas não tem impacto sobre os problemas de saúde;",
+            "o acesso limitado aos serviç os de saúde é um problema estrutural, que não faz parte dos determinantes sociais de saúde, apesar de influenciá-los;",
+            "as condições descritas representam determinantes sociais e ambientais da saúde, que interagem entre si e impactam diretamente o processo saúde-doença;",
+            "a ausência de coleta regular de lixo é um problema sanitário isolado, que não influencia na saúde respiratória das crianças nem se relaciona a outros determinantes sociais;",
+            "os fatores observados configuram condições biológicas, individuais e comportamentais que atuam de maneira integrada na determinação do adoecimento infantil."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "No contexto da prevenção e controle do diabetes mellitus, é importante compreender os fatores de risco que contribuem para o seu desenvolvimento. Esses fatores podem ser classificados como modificáveis ou não modificáveis. Os fatores de risco modificáveis para o diabetes mellitus tipo 2 são:",
+          "alternativas": [
+            "etnia, idade e predisposição genética;",
+            "sexo, histórico familiar e hipertensão arterial;",
+            "idade avançada, histórico familiar e obesidade;",
+            "sedentarismo, alimentação inadequada e excesso de peso;",
+            "hereditariedade, idade e histórico de diabetes gestacional."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Um estudo hipotético de coorte com gestantes cadastradas em uma unidade básica de saúde da Zona Norte do Rio de Janeiro avaliou o risco de infecção do trato urinário (ITU) e parto prematuro (PP). Foram calculadas as taxas de incidência de parto prematuro nas gestantes com ITU (Iexp) e sem ITU (Inexp), bem como o risco relativo (RR) de parto prematuro, tendo sido obtidos os seguintes valores: Iexp = 0,625, Inexp = 0,058 e RR = 10,77. A partir dessas informações, é correto concluir que:",
+          "alternativas": [
+            "não há associação entre ITU e PP;",
+            "o RR indica o efeito absoluto da exposição à ITU;",
+            "a probabilidade de PP em gestantes com ITU é 10,77 vezes maior;",
+            "o RR = 10,77 representa o excesso de risco de PP em gestantes com ITU;",
+            "não há d iferença de magnitude de efeito no PP entre gestantes com ou sem ITU."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Prática Baseada em Evidências",
+          "enunciado": "Em um hospital universitário , um grupo de pesquisa deseja desenvolver um estudo em uma amostra representativa de trabalhadores de Unidade de Terapia Intensiva para determinar a chance de acidentes com materiais perfurocortantes, tendo como exposições de interesse: turno de trabalho, t empo de experiência, ocupação, entre outras variáveis. Considerando os desenhos de estudo em epidemiologia e os determinantes de saúde, o estudo deverá ser:",
+          "alternativas": [
+            "ecológico;",
+            "transversal;",
+            "caso-controle;",
+            "coorte retrospectivo;",
+            "ensaio clínico randomizado."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Quando se trata da análise sobre as relações entre determinantes sociais e saúde, um dos principais desafios é estabelecer uma hierarquia de determinações entre, de um lado, os fatores mais gerais de natureza social, econômica e política e, de outro, as mediações por meio das quais esses fatores incidem sobre a situação de saúde de grupos e pessoas, já que a relação de determinação não é uma simples relação direta de causa -efeito. Dentre os diversos enfoques adotados para esses estudos, o modelo de Dahlgren e Whitehead inclui os Determinantes Sociais da Saúde (DSS) dispostos em diferentes camadas, desde uma camada mais próxima dos determinantes individuais até uma camada distal, onde se situam os macrodeterminantes. Considerando a abordagem dos DSS para mud ança de comportamentos de risco, é correto afirmar que:",
+          "alternativas": [
+            "a mudança de comportamentos de risco independe de mudança nas normas culturais que os influenciam;",
+            "a mudança de comportamentos individuais requer prioritariamente a atuação sobre os indivíduos;",
+            "comportamento e estilo de vida são fatores individuais e não são considerados parte dos DSS;",
+            "programas educativos e comunicação social para mudança de comportamentos de risco são secundários nos DSS;",
+            "a atuação nos DSS para mudança de comporta mentos individuais requer políticas de abrangência populacional."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "A biossegurança envolve a análise dos riscos a que os profissionais de saúde e de laboratórios estão constantemente expostos em suas atividades e ambientes de trabalho. A avaliação de tais riscos engloba vários aspectos, relacionados, por exemplo, aos procedimentos adotados ; às chamadas boas práticas em laboratório (BPLs); aos agentes biológicos manipulados; à infraestrutura dos laboratórios; ou a questões informacionais, como a qualificação das equipes (Brasil, 2006). Nesse campo, no que se refere às boas práticas laboratoriais em relação ao trabalhador, é correto afirmar que:",
+          "alternativas": [
+            "devem ser utilizados calças compridas e quaisquer sapatos fechados;",
+            "pode ser dispensada a lavagem das mãos em caso de uso de luva na atividade;",
+            "devem ser usadas cabines de segurança biológica em experimentos que envolvam produtos tóxicos ou compostos carcinogênicos;",
+            "não devem ser usadas lentes de contato, pois elas podem manter agentes infecciosos na mucosa ocular;",
+            "vidraria quebrad a e pipetas descartáveis, após descontaminação, devem ser colocadas em caixas com paredes rígidas e rotuladas “vidro quebrado”, não podendo ser descartadas como lixo geral."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 68,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Indicadores de saúde são ferramentas para avaliar e monitorar a situação de saúde de uma população, permitindo identificar perfis, variação, tendências, eficácia e efetividade de intervenções, bem como subsidiar políticas e tomadas de decisão. Em relação aos indicadores de saúde, é correto afirmar que:",
+          "alternativas": [
+            "a letalidade é calculada pelo número de óbitos por uma doença dividido pelo total da população;",
+            "o índice de envelhecimento é resultado da razão entre população > 60 anos e população total;",
+            "a mortalidade geral é calculada pela razão entre número de óbitos totais e número de pessoas na população geral;",
+            "a mortalidade infantil é calculada pela razão entre o número de óbitos em crianças até 5 anos e o número de nascid os vivos;",
+            "a incidência de uma determinada doença é calculada pelo número de casos totais na população dividido pela população total. Concurso Público Nacional Unificado - 2ª Edição FGV Conhecimento Bloco Temático 8"
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "cpnu2-2025-bloco1-seguridade-tipo1",
+      "banca": "FGV",
+      "ano": 2025,
+      "orgao": "Ministério da Gestão e da Inovação em Serviços Públicos - CPNU 2",
+      "cargo": "Bloco 1 - Seguridade Social, Saúde e Previdência",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/b1101.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cpnu_gabarito_oficial_definitivo_retificado_21.11.2025.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Em determinado Ministério, foi criado um grupo de trabalho com o objetivo de formar a agenda de uma política pública que seria caracterizada pela oferta de alguns auxílios de ordem material oferecidos pelo poder público. Essa política pública privilegiaria certos grupos historicamente excluídos, o que ocorreria em detrimento de outros grupo s historicamente beneficiados. No entanto, havia dúvidas quanto à correção da referida agenda, o que poderia acarretar a judicialização da política pública. Antes de confirmar a agenda e individualizar os contornos das medidas passíveis de serem adotadas, o grupo concluiu corretamente que:",
+          "alternativas": [
+            "a democracia, baseada na soberania do povo, impede que certos grupos sejam beneficiados e outros não, indicativo da incorreção da referida agenda;",
+            "um dos princípios fundamentais do Estado de Direito é o da igualdade, salientando que os seres humanos devem ser contemplados de modo idêntico pelas políticas públicas, indicativo da incorreção da referida agenda;",
+            "a autonomia política da União permite que ela defina livremente os beneficiários de suas políticas públ icas, independentemente do grupo a que pertençam, indicativo da possibilidade de a referida agenda ser adotada;",
+            "apesar de as políticas públicas não poderem contemplar arbitrariamente certos grupos em detrimento de outros, é possível privilegiar grupos historicamente excluídos, em prejuízo daqueles historicamente beneficiados;",
+            "como a representação política de agentes eleitos não é segmentada em grupos específicos, estando alicerçada na integralidade da população, está errada a segmentação da política pública, indicativo da incorreção da referida agenda."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "No contexto da reparação das violações históricas aos direitos humanos, decorrentes de rupturas com a democracia e de perseguições sistemáticas a minorias étnicas e culturais, têm sido recorrentes as práticas de justiça restaurativa, que buscam sedimentar a verdade histórica e têm impactos diretos no ambiente sociopolítico. Além disso, ainda que não seja possível o restabelecimento da situação anterior, são definidas estimativas pecuniárias quando i dentificada a afronta a bens que não possuem propriamente um preço, mas um valor. Considerando os balizamentos estabelecidos para essa modalidade de justiça, é correto afirmar que ela:",
+          "alternativas": [
+            "busca apagar as marcas do passado, de modo que o presente seja esta bilizado e o futuro seja projetado de maneira idealística;",
+            "busca não só recompor a esfera jurídica individual e estabilizar o ambiente sociopolítico, como também efetivar o direito à memória;",
+            "está comprometida com um padrão de justiça social, de modo a solucionar carências individuais em prol do desenvolvimento coletivo;",
+            "está associada à realização da justiça individual, não propriamente à realização de objetivos coletivos, que são contingentes, não essenciais;",
+            "está comprometida, em sua essê ncia, com o direito ao esquecimento e à recomposição da esfera jurídica individual, estabilizando o ambiente sociopolítico com a reconciliação de vítimas e algozes."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Benjamin Constant (1767 -1830), no contexto da diferenciação entre a liberdade dos modern os e a liberdade dos antigos, afirmou o seguinte: \"Perguntai-vos, Senhores, o que em nossos dias um inglês, um francês ou um habitante dos Estados Unidos da América entende pela palavra liberdade? É para cada um o direito de não ser submetido senão às lei s, de não poder ser preso, detido, condenado à morte nem maltratado de maneira alguma pela só vontade arbitrária de um ou de vários indivíduos. (...) Enfim, é o direito de cada um influir sobre a administração do governo, seja pela nomeação de todos ou de certos funcionários, seja pelas representações, petições e requerimentos que a autoridade é mais ou menos obrigada a levar em consideração. Comparai agora àquela liberdade dita dos antigos. Esta última consistia em exercer coletivamente, mas de forma direta, muitas partes da própria soberania, em deliberar, em praça pública, sobre a guerra e a paz (...) Mas ao mesmo tempo em que isso era denominado pelos antigos de liberdade, eles admitiam, como compatível com essa liberdade coletiva, a sujeição comple ta do indivíduo à autoridade do conjunto. Não encontrareis entre eles quase nenhum dos benefícios que queremos que faça parte da liberdade dos modernos”. (CONSTANT, Benjamin. A liberdade dos antigos comparada à dos modernos. São Paulo: Editora Atlas, 2015, p. 77-78) À luz da correlação do texto de Constant com o alicerce de sustentação da atuação estatal, na perspectiva da democracia e dos direitos individuais, é correto afirmar que:",
+          "alternativas": [
+            "para os antigos, a democracia representativa não é um instrumento adequado ao exercício do poder;",
+            "para os modernos, o interesse coletivo deve se sobrepor ao individual, que apenas o instrumentaliza;",
+            "para os modernos, a liberdade política é a verdadeira liberdade, que se sobrepõe aos direitos individuais;",
+            "para os antigos, a atuação estatal estava essencialmente comprometida com a plena realização da personalidade individual;",
+            "tanto os antigos como os modernos buscam legitimar o poder na vontade popular e direcionar o seu exercício à realização dos direitos individuais."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Em determinada legislatura, em discurso apresentado no âmbito de uma das Casas Legislativas do Congresso Nacional, o parlamentar João sustentou que um dos desafios do crescimento do bloco de governo consistia em conjugar os referenciais de governabilidade e controle, de modo que o crescimento do primeiro não importe na correlata redução do segundo. Para tanto, seria necessária uma atuação combativa do bloco de oposição, independentemente dos referenciais ideológicos que o impulsionam. Na perspect iva das relações entre os Poderes Executivo e Legislativo, consoante o discurso de João, é correto afirmar que:",
+          "alternativas": [
+            "a divisão entre os referidos blocos é contextualizada exclusivamente no âmbito do Legislativo, considerando o seu caráter colegiado, não influindo na atuação do Executivo;",
+            "a governabilidade, em um presidencialismo de coalizão, é definida pela divisão de competências entre o Executivo e o Legislativo, não pelo conflito de ideias entre os referidos blocos;",
+            "as relações entre o Executivo e o Legislativo são balizadas pelo processo formativo e pelo robustecimento, ou não, da divisão entre os referidos blocos, que pode, no extremo, comprometer o controle;",
+            "a governabilidade é direcionada pela formação de coligações partidárias nas eleições para o Executivo e o Legislativo, de modo a uniformizar interesses políticos nos juízos de valor realizados por essas estruturas;",
+            "o presidencialismo de coalizão está alicerçado na alternância ideológica e na necessidade de serem encontradas soluções compromissórias, não sendo influenciado, na perspectiva do controle, pela divisão entre os referidos blocos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "De acordo com Reinhold Zippelius: \"[A] tendência para o liberalismo é a tendência oposta para o totalitarismo. A maioria dos Estados situa -se algures entre o tipo ideal do Estado totalitário e o Estado liberal. Para a compreensão dessa polaridade é importante não confundir o conceito de liberdade do liberalismo com o conceito democrático de liberdade. Aquele designa a liberdade do status negativus, ou seja, o espaço de liberdade de actuação individual face ao Estado. Este refere -se à liberdade do status activus , ou seja, à liberdade de participação na formação da vontade comum (...). Ambas as liberdades não convergem necessariamente. A maioria democ rática pode exercer uma tirania muito pouco liberal. A liberdade democrática, quando não associada à liberdade liberal, consiste num domínio da multidão sem garantia da liberdade contra ela (...)\". (ZIPPELIUS, Reinhold. Teoria Geral do Estado. 3ª ed. Lisboa: Fundação Calouste Gulbenkian, 1997) Ao se contextualizarem as observações de Zippelius no processo de formação histórica do Estado Democrático de Direito, conclui-se corretamente que:",
+          "alternativas": [
+            "a ausência de uma preeminência de fato da liberdade individual, em ambientes democráticos, é uma contradição, constatação que decorre do processo formativo do poder;",
+            "a proteção idealística oferecida pelos direitos fundamentais, obstando o avanço da maioria em detrimento da minoria, pode não se mostrar e fetiva na perspectiva do exercício do poder;",
+            "as influências democráticas, ao se instalarem no Estado de Direito, asseguram a efetividade do ideário da Revolução Francesa, presente na liberdade, na igualdade e na solidariedade;",
+            "o ambiente democrátic o permite o reconhecimento da pessoa humana enquanto valor, sendo a sua projeção na realidade e o seu pleno desenvolvimento características indissociáveis do Estado Democrático de Direito;",
+            "a presença dos elementos estruturais do Estado Democrático de Direito, com o reconhecimento da separação dos poderes e dos direitos fundamentais, assegura a efetividade das normas que reconhecem as referidas liberdades."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "Como orienta o Guia Prático de Análise ex ante das Políticas Públicas disponibilizado pela Controladoria -Geral da União e elaborado pelo Comitê Interministerial de Governança do Governo Federal, é fundamental o uso de evidências, pois assim se permite fundamentar a tomada de decisão, constituindo -se essa prática em insumo que potencializa os resultados do processo de formulação das políticas públicas. Com relação ao levantamento de dados acerca do problema público e para o desenho das políticas, é correto afirmar que:",
+          "alternativas": [
+            "a fonte de dados deve ter qual idade, recomendando -se ter como referência a proposta pela estrutura de governança e gestão do COBIT;",
+            "o levantamento de dados quanto a políticas similares existentes no próprio país e que foram descontinuadas não é representativo, considerando o insucesso dessas políticas;",
+            "a análise SWOT, também conhecida como análise FOFA, é uma ferramenta para avaliar os dados e seu valor para a construção das evidências;",
+            "as bases de dados de organismos internacionais devem ser utilizadas subsidiariamente, poi s elas não refletem as peculiaridades locais;",
+            "os indicadores criados segundo o modelo SMART devem ser considerados na formulação das políticas públicas, pela sua qualidade."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "O ciclo das políticas públicas, como concebido classicamente, pode ser mais bem compreendido se considerarmos que as várias etapas se sobrepõem e não se colocam de forma linear na prática das políticas públicas. No que tange à avaliação das políticas públicas, é correto afirmar que:",
+          "alternativas": [
+            "a avaliação do impacto da política pode ser feita desde o momento da sua formulação;",
+            "a elaboração de uma árvore do problema é um recurso interessante para medir a eficiência econômica da política;",
+            "não se pode confundir a avaliação com o monitoramento da política pública, ainda que possam oc orrer concomitantemente;",
+            "para a avaliação da eficiência operacional, a utilização da análise comparativa com outras políticas ( benchmarking) deve ser feita de forma criteriosa, pois não se podem excluir possíveis repercussões, em se tratando de uma política social;",
+            "a avaliação da governança da política pública é conduzida exclusivamente pelo Tribunal de Contas da União, considerando que a implementação das políticas é cada vez mais multinível e intersetorial."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "Quando se leva em conta a necessidade de formulação e implementação de políticas públicas voltadas para os grupos sociais em situação de vulnerabilidade, grupos que são discriminados e aos quais, muitas vezes, é negada a própria condição de sujeito de dire ito, a transversalidade se constitui como uma diretriz política a ser seguida. Sobre a transversalidade, é correto afirmar que:",
+          "alternativas": [
+            "a integração ou a articulação entre políticas dos vários ministérios depende da existência de expressa previsão legal;",
+            "a criação de ministérios e secretarias especiais transversais se mostra uma prática de gestão inadequada;",
+            "a incorporação de pautas dos grupos em situação de vulnerabilidade na agenda pública torna a transversalidade menos relevante;",
+            "a capacitação e sensibilização de agentes públicos e a institucionalização de mecanismos adequados de gestão interministerial podem ser formas de transversalidade;",
+            "a existência de conselhos, conferências e espaços de articulação com a sociedade civil torna desnecessá rio o diálogo intragovernamental."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "O Brasil tem obtido posições históricas no ranking do índice de serviços on -line da Organização das Nações Unidas. A transformação digital vem se acelerando, sendo de extrema relevância a publicação, em 29 de março de 2 021, da Lei nº 14.129, que estabeleceu princípios e diretrizes para o governo digital. Esse processo traz evidente repercussão sobre as políticas públicas na sua formulação, implementação e avaliação. Da transformação digital em andamento e considerando os princípios que a norteiam, é correto esperar:",
+          "alternativas": [
+            "a imediata transformação digital do governo federal, sem gradações;",
+            "a proteção de todos os dados, para que não haja vazamento de informações;",
+            "a interação com o cidadão e a troca de informações entr e entes governamentais;",
+            "a desburocratização, a simplificação e o sigilo da atuação do poder público, sem restrições, por meio dos serviços digitais;",
+            "a produção de impactos negativos na eficiência das políticas públicas e na economia com a prestação dos serviços públicos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "A Política Nacional para a População em Situação de Rua, criada pelo Decreto nº 7.053/2009, contém, entre outras inovações, a criação de um Comitê Intersetorial de Acompanhamento e Monitoramento. Para dar consecução a essa polít ica, o governo federal criou o Plano Ruas Visíveis – Pelo direito ao futuro da população em situação de rua. Com relação ao Comitê Intersetorial, levando em conta o modelo usual encontrado, é correto afirmar que:",
+          "alternativas": [
+            "o Comitê Intersetorial implementará as políticas para a área;",
+            "a participação de representantes de outros ministérios não é própria de um Comitê Intersetorial;",
+            "o Comitê Intersetorial pode estabelecer recomendações para autoridades estaduais e municipais, sendo ele nacional;",
+            "o Comitê Intersetorial tem a importante competência de determinar quais estados e municípios serão beneficiados pela política pública;",
+            "o Comitê Intersetorial, pela função que desempenha, não pode contar com representantes da sociedade civil, ainda que deva estar atento aos seus reclamos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "João, servidor ocupante de cargo de provimento efetivo, foi lotado em um setor responsável pela apresentação de respostas aos requerimentos de acesso à informação mantida pelo poder público. Ao chegar ao set or, João foi informado a respeito da existência de três diretrizes fundamentais a serem observadas na análise dos requerimentos, sem prejuízo de outras a serem consideradas a partir da análise de normas específicas. As diretrizes passadas a João foram as seguintes: I. as informações pessoais devem ser obtidas junto aos respectivos titulares, não podendo ser requeridas ao poder público; II. a classificação da informação como secreta é realizada conforme o juízo de valor da autoridade administrativa, observadas as diretrizes legais; e III. o sigilo da informação, como regra geral, deve ser assegurado, salvo se o seu fornecimento for necessário para a defesa de interesse individual ou coletivo. Após analisar a compatibilidade dessas diretrizes com as normas afetas à temática, João concluiu corretamente que:",
+          "alternativas": [
+            "todas as diretrizes estão corretas;",
+            "apenas a diretriz I está correta;",
+            "apenas a diretriz II está correta;",
+            "apenas as diretrizes I e III estão corretas;",
+            "apenas as diretrizes II e III estão corretas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "Pedro, servidor público federal, entendia fazer jus a um direito previsto no regime jurídico da categoria, o que o levou a formular requerimento, à autoridade competente, visando à implementação do referido direito. Para sua surpresa, o seu requerimento foi indeferido sob o argumento de que não tinha amparo legal. Em uma situação dessa natureza, é correto afirmar que:",
+          "alternativas": [
+            "somente resta a Pedro submeter o seu pedido ao Poder Judiciário;",
+            "somente resta a Pedro interpor recurso a ser aprecia do pela autoridade hierarquicamente superior;",
+            "Pedro pode ingressar com um único pedido de reconsideração e apresentar recursos das decisões proferidas nos recursos sucessivamente interpostos;",
+            "diversamente do pedido de reconsideração, cabível em qualquer hipótese, a interposição de recurso pressupõe a demonstração de ilegalidade ou de abuso de poder;",
+            "Pedro pode apresentar tantos pedidos de reconsideração quantos entender necessários, desde que cada um deles seja direcionado especificamente à decisão a ser modificada."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "Determinado gestor, integrante do alto escalão da administração pública federal direta, formulou consulta à sua assessoria imediata em relação à possibilidade, ou não, de serem inseridas três ordens de informações afetas aos servi dores públicos, devidamente individualizados e independentemente de prévio consentimento, no Portal da Transparência do Governo Federal. Esses dados consistiriam em: I. remuneração; II. aplicação da sanção de demissão ou de cassação de aposentadoria; e III. filiação a um sindicato. Considerando a natureza das informações indicadas, a assessoria respondeu corretamente que:",
+          "alternativas": [
+            "todas devem ser inseridas;",
+            "apenas deve ser inserida a informação referida em I;",
+            "apenas devem ser inseridas as informações referidas em I e II;",
+            "apenas devem ser inseridas as informações referidas em I e III;",
+            "apenas devem ser inseridas as informações referidas em II e III."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "No estudo da ética para a Administração Pública, costuma -se, na literatura internacional, pensar a integridade não apenas como virtude do agente público como profissional que atua na Administração Pública, como também do próprio sistema organizacional. Ess a perspectiva leva à indicação de elementos essenciais de políticas de integridade no setor público, dentre os quais se incluiriam a definição de códigos de conduta, a formação em ética como parte da estratégia anticorrupção, a existência de comissões de é tica independentes que apoiem a implementação efetiva do código e, finalmente, a prevenção e a regulação dos conflitos de interesses. Com relação à experiência brasileira, é correto afirmar que:",
+          "alternativas": [
+            "o aprimoramento do sistema de prevenção e regulação do conflito de interesses é importante, o que pode envolver novas restrições ao exercício de empregos adicionais ao principal emprego público, a apresentação de declarações de renda e patrimônio do agente público e de seus familiares e o aperfeiçoamento da quarentena;",
+            "as comissões de ética são obrigatórias na estrutura da Administração Federal, tendo um decreto estabelecido a sua criação, com atribuições atinentes à aplicação do Código de Ética, como parte do programa de integridade; no entanto, não há controle do cumprimento de tal exigência;",
+            "existe, em nível federal, um Código de Ética aplicável a todos os servidores públicos, não sendo possível o estabelecimento de códigos de ética setoriais que levem em conta as peculiaridades de cada instituição;",
+            "os programas de mentoria e de desenvolvimento profissional são muito relevantes, mas não têm qualquer relação com as políticas de integridade no serviço público;",
+            "a formação em ética compreende a adoção de vários métodos de ensino, devendo ser previst a exclusivamente para os novos servidores empossados."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "O Decreto nº 9.203/2017, que dispõe sobre a política de governança da administração pública federal direta, autárquica e fundacional, foi inspirado na literatura internacional sobre governança (prin cipalmente de organizações multilaterais e de referência nas áreas de controle e auditoria) e contém uma série de princípios que funcionam como valores interdependentes. Esses mesmos princípios se encontram esmiuçados no Referencial Básico de Governança Pú blica do Tribunal de Contas da União. Com relação a esses princípios, é correto afirmar que:",
+          "alternativas": [
+            "o princípio da transparência significa disponibilizar na forma de dados abertos, para os interessados, as informações de seu interesse, enquanto o princípio da equidade supõe promover tratamento justo aos agentes públicos, para que eles não possam ser responsabilizados;",
+            "a accountability é um princípio que exige que os agentes públicos prestem contas quando forem cobrados, enquanto a confiabilidade guarda relação com a coerência na atuação das instituições públicas, o que gera insegurança para os cidadãos;",
+            "o cultivo da integridade moral, que deve ser uma virtude do agente público, deve se sustentar em programas de integridade bastante rígidos e insensíveis aos contextos de atuação, conforme orientação da OCDE;",
+            "o princípio da capacidade de resposta está vinculado à busca da eficiência, não guardando qualquer relação com o princípio da participação;",
+            "a participação efetiva das partes interessadas é um dos princípios do governo aberto e facilita a equidade no processo de tomada de decisão."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Mariana, pessoa que utiliza cadeira de rodas, compareceu diversas vezes a um órgão público para tratar de um benefício previdenciário. No local, o acesso ao públi co era feito exclusivamente por escadas, sem alternativa de entrada acessível. Mesmo após apresentar reclamação formal, recebeu como resposta do órgão que, para ser mais bem atendida, deveria buscar outra unidade administrativa, localizada em outro município. Diante da situação, Mariana acionou o Ministério Público. Nos termos da Convenção Internacional sobre os Direitos das Pessoas com Deficiência, promulgada pelo Decreto nº 6.949/2009, é correto afirmar que:",
+          "alternativas": [
+            "a adaptação só seria exigível se Mariana comprovasse prejuízo concreto ao seu atendimento ou violação a direito subjetivo;",
+            "não há violação aos direitos de Mariana, pois a administração ofereceu alternativa razoável ao indicar outra unidade acessível, ainda que em outro município;",
+            "a obrigação de garantir acessibilidade não se aplica a unidades antigas de atendimento público, desde que sejam anteriores à promulgação da Convenção;",
+            "a acessibilidade em estabelecimentos públicos é exigível apenas nos casos em que a pessoa com deficiê ncia tenha previamente comunicado sua necessidade;",
+            "o Estado tem o dever de garantir a Mariana adaptações razoáveis, sendo a acessibilidade condição para o exercício de todos os direitos e liberdades fundamentais."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Cláudia, uma mulher transexual, deseja retificar seu prenome e a designação de sexo em sua certidão de nascimento. À luz da legislação vigente e dos direitos reconhecidos às pessoas trans, é correto afirmar que:",
+          "alternativas": [
+            "a mudança de prenome e da identificação de sexo é admitida, desde que haja realização prévia de cirurgia de redesignação sexual;",
+            "o pedido de Cláudia deverá ser negado, visto que o nome e o sexo integram documento essencial à identificação civil, sem prejuízo do uso do nome social;",
+            "o procedimento solicitado por Cláudia exige decisão judicial, pois o registro civil de nascimento só pode ser alterado mediante autorização do Poder Judiciário;",
+            "Cláudia tem direito à retificação diretamente em cartório, sem necessidade de autorização judicial, cirurgia ou apresentação de laudos médicos ou psicológicos;",
+            "Cláudia deverá apresentar laudos médicos e psicológicos que atestem disforia de gênero, para que o cartório possa encaminhar seu pedido à Vara de Registros Públicos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Uma determinada comunidade quilombola, localizada em território rural, tem buscado compreender os direitos que lhe são assegurados por políticas públicas federais voltadas à garantia da dignidade, da identidade étnico -racial e da sustentabilidade de seus modos de vida. Considerando o reconhecim ento constitucional dos povos quilombolas e as políticas públicas voltadas a esses grupos no âmbito federal, como o Programa Aquilomba Brasil, é correto afirmar que a comunidade quilombola:",
+          "alternativas": [
+            "deve comprovar vínculo formal com entidade cultural reconhecida pelo Ministério da Cultura para acessar políticas públicas voltadas à preservação de suas manifestações culturais;",
+            "enfrentará impedimentos para exercer seus direitos educacionais enquanto não houver regularização fundiária do território, condição nec essária para a implementação da educação quilombola;",
+            "terá acesso a políticas públicas educacionais universais voltadas à assimilação das comunidades quilombolas ao restante da população;",
+            "poderá acessar políticas públicas de saúde por intermédio dos entes subnacionais, em razão da ausência de diretrizes federais voltadas à população quilombola no âmbito do Sistema Único de Saúde;",
+            "deve ter seus direitos territoriais reconhecidos por meio de titulação das terras tradicionalmente ocupadas, assegurad a a partir do processo de certificação pela Fundação Cultural Palmares e posterior atuação do Incra."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Joana é uma mulher negra que trabalha como empregada doméstica desde os 14 anos. Apesar de ter se alfabetizado ainda criança, Joana não teve acesso à educação formal contínua, por ser a principal provedora de renda em sua família. A trajetória de Joana reflete o fenômeno da:",
+          "alternativas": [
+            "discriminação de gênero, caracterizada por desigualdades baseadas no fato de a pessoa ser mulher;",
+            "discriminação racial, relacionada ao preconceito e à exclusão baseados na raça ou identidade étnico-racial;",
+            "discriminação etária, identificada quando pessoas são prejudicadas em razão da sua idade, especialmente no acesso a direitos e oportunidades;",
+            "discriminação de classe, que se refere às desigualdades econômicas e sociais decorrentes da posição que o indivíduo ocupa na estrutura produtiva;",
+            "discriminação múltipla ou agravada, que ocorre quando diferentes fatores, como raça, gênero e classe, interagem concomitantemente na produção de desigualdades."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Gabriela e Flávia vivem em união estável há cinco anos. Gabriela é professora e trabalha em dois turnos, enquanto Flávia, mulher trans, que não exerce atividade remunerada, cuida das tarefas domésticas. Nas últi mas semanas, Flávia passou a relatar episódios frequentes em que Gabriela a empurra e arremessa objetos durante discussões. Além disso, Gabriela zomba de sua aparência, diz que ninguém mais a aceitaria por ser mulher trans e ameaça constantemente expulsá-la de casa. Flávia também tem seu acesso ao cartão bancário controlado por Gabriela, que exige justificativas para cada gasto, recusa -se a dividir o saldo da conta conjunta e faz transferências para a própria família sem consultar a companheira. Diante desse contexto, é correto afirmar que:",
+          "alternativas": [
+            "como se trata de uma relação entre duas mulheres, há igualdade entre as partes, sendo inadequado aplicar o conceito de violência à relação;",
+            "sendo Gabriela a principal provedora da casa, o controle dos recursos financeiros por ela não configura forma de violência;",
+            "o caso envolve práticas de violência física, psicológica e patrimonial reconhecidas pela legislação brasileira como formas de violência doméstica;",
+            "o fato de Flávia ser uma pessoa trans impede que s ejam caracterizados como violência doméstica os atos praticados por Gabriela;",
+            "a situação descrita não caracteriza violência psicológica, pois não há registro de sofrimento mental clinicamente diagnosticado."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "Joana, servidora pública federal, recebe u a incumbência, do seu superior hierárquico, de adotar determinadas medidas no âmbito de um dos sistemas que integram o rol de sistemas estruturantes de gestão de pessoal da administração pública federal. Para cumprir a determinação recebida, Joana anali sou os aspectos estruturais e a funcionalidade dos referidos sistemas, tendo concluído corretamente que:",
+          "alternativas": [
+            "podem ser utilizados apenas pelos órgãos do Poder Executivo federal, cabendo aos demais poderes o uso dos seus próprios sistemas;",
+            "buscam centralizar em plataformas tecnológicas a execução de atividades de gestão de pessoal gerenciadas pelo órgão central federal;",
+            "foram concebidos para que haja um único órgão gestor, sendo de adesão obrigatória para os órgãos da administração pública dire ta e para os entes da administração pública indireta;",
+            "buscam operacionalizar os mecanismos de gestão orçamentária, de modo que haja uma correspondência recíproca entre as despesas de pessoal e as dotações disponíveis;",
+            "configuram arranjos instituc ionais direcionados à atuação conjunta dos órgãos públicos em projetos de interesse comum, maximizando os recursos humanos disponíveis."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "O setor competente do Ministério Y foi instado a realizar a identificação dos projetos a serem conduzidos e implemen tados no âmbito dessa pasta no próximo exercício financeiro, bem como a promover o levantamento dos respectivos custos, de modo a subsidiar a elaboração da proposta orçamentária anual do Poder Executivo federal. Um desses projetos deveria se estender por m ais de um exercício financeiro, o que gerou dúvidas na forma de retratá -lo na programação orçamentária do Ministério Y. Após analisar a sistemática vigente e considerar as características do projeto, o setor concluiu corretamente que as despesas com o projeto para os exercícios financeiros seguintes:",
+          "alternativas": [
+            "podem ser previstas na lei orçamentária anual;",
+            "somente podem ser previstas no plano plurianual;",
+            "somente devem ser objeto da lei de diretrizes orçamentárias que abranja o respectivo período;",
+            "devem ser objeto de créditos adicionais tão logo finde o primeiro exercício financeiro de sua execução;",
+            "devem ser previstas no plano plurianual e contempladas na lei orçamentária anual de cada exercício financeiro, sendo vedado que lei desta natureza abranja mais de um exercício."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "Determinado gestor teve grande dedicação na estruturação e correlata implementação de política pública direcionada à população em situação de vulnerabilidade socioeconômica, o que, a seu ver, deveria ser objeto de ampla divul gação, de modo a permitir a fruição dos respectivos benefícios pelos seus destinatários em potencial. Logo após o início da campanha publicitária, que teve caráter informativo, sem promoção pessoal, diversos setores da sociedade civil organizada a criticaram. Afinal, para ele, considerando a realização de eleições no ano subsequente, a campanha terminaria naturalmente por acarretar benefícios indiretos ao gestor, que já se apresentava nas redes sociais como pré-candidato. Na situação descrita, é correto afi rmar que a campanha publicitária:",
+          "alternativas": [
+            "não poderia ser realizada, por afrontar a moralidade administrativa;",
+            "não poderia ser realizada, por configurar publicidade de política pública;",
+            "poderia ser realizada, considerando o objetivo almejado com a sua realização;",
+            "não poderia ser realizada, por afrontar o princípio da impessoalidade;",
+            "poderia ser realizada, considerando a plena liberdade do gestor na definição dos objetivos a serem alcançados com a publicidade institucional."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "A reforma administrativa promovida pela Emenda Constitucional nº 19/1998 promoveu profundas alterações na sistemática afeta às funções de confiança e aos cargos em comissão, considerando a forma como foram originalmente disciplinados pela Constituição de 1988. Considerando o novo modelo estabelecido por essa reforma constitucional, é correto afirmar que:",
+          "alternativas": [
+            "as funções de confiança e os cargos em comissão são destinados apenas a atribuições de direção;",
+            "os cargos em comissão são privativos de servidores ocupantes de cargos de provimento efetivo;",
+            "o percentual mínimo de cargos em comissão a ser ocupado por servidores de carreira deve ser previsto em lei;",
+            "o acesso às funções de confiança foi democratizado, sendo permitido o seu exercício por qualquer pessoa, s ervidora ou não;",
+            "os cargos em comissão devem ser ocupados preferencialmente por servidores ocupantes de carreira técnica ou profissional."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "Em um evento organizado por diversas estruturas de poder, foi debatido o potencial expansivo do termo sustenta bilidade na perspectiva da dívida pública. O objetivo era o de verificar a compatibilidade entre os conceitos na perspectiva constitucional, considerando os impactos que o crescimento da dívida gera na implementação de políticas públicas, pois a diminuição de recursos disponíveis aumenta a necessidade de realização de escolhas trágicas. Ao final do debate, concluiu-se corretamente que:",
+          "alternativas": [
+            "a concepção de sustentabilidade é direcionada à preservação do meio ambiente, não às finanças públicas;",
+            "a sustentabilidade contribuirá para aferir a trajetória de convergência do montante da dívida com os limites definidos na legislação;",
+            "a ausência de previsão constitucional da sustentabilidade não obsta que o conceito seja introduzido pela legislação af eta às finanças públicas;",
+            "a concepção de sustentabilidade é incompatível com a discricionariedade do Poder Executivo na governança financeira e na realização de políticas públicas;",
+            "a correlação é equivocada entre o crescimento da dívida pública e a implementação de políticas públicas, considerando a possibilidade de serem abertos créditos adicionais."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Ana, diretora de Gestão de Recursos Humanos, trabalha em um prédio em que o restaurante irá entrar em obras. Como os restaurantes da região são de difícil acesso, por causa da distância, Ana pensou em solicitar aos agentes públicos do seu órgão que trabalh em na modalidade teletrabalho durante o período da obra. Em relação à modalidade de teletrabalho, é correto afirmar que:",
+          "alternativas": [
+            "a estrutura necessária, física e tecnológica, deve ser providenciada e custeada pelo órgão público;",
+            "o regime de execução deve ser integral com controle de tempo on-line da equipe para que ela tenha foco no trabalho;",
+            "o teletrabalho fica condicionado à compatibilidade com as atividades a serem desenvolvidas pelo agente público e à ausência de prejuízo para a administração;",
+            "a formalização do acordo unilateral deve ser registrada em um termo de ciência e responsabilidade, e deverá ser usado um aplicativo de mensagens instantâneas ( WhatsApp) como ferramenta de comunicação e organização das tarefas;",
+            "a avaliação de desempenh o do agente público fica suspensa no período do teletrabalho, mesmo que sejam utilizadas as opções de status ( on-line, ocupado, offline etc.) da ferramenta de comunicação da equipe."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Antônio e a maioria de seus colegas de equipe gastam mais de uma hora para chegar ao local de trabalho. O chefe da equipe de Antônio está buscando melhorar o desempenho da equipe oferecendo alternativas de modalidade de trabalho. Antônio optou por uma modalidade que alterna entre o trabalho dentro e fora das instalações da organização, buscando combinar a flexibilidade do trabalho à distância com a interação e a colaboração proporcionada pelo ambiente físico da organização. Antônio deve optar pela modalidade de trabalho:",
+          "alternativas": [
+            "híbrido;",
+            "remoto;",
+            "síncrono;",
+            "assíncrono;",
+            "home office."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "João elaborou o seguinte texto para enviar ao chefe do seu setor por e-mail: “A gente do depósito de material tá passando por perrengue mó de que não tem uma coisa pra mó de sentar”. Na sequência, João utilizou uma solução de Inte ligência Artificial (IA) para revisar seu texto e sugerir alterações. O resultado foi: “A equipe do depósito de materiais está passando por dificuldades porque não há móveis adequados para sentar”. Para a IA realizar a revisão com o objetivo de obter um texto bem estruturado, rico em vocabulário, a partir de comandos claros e específicos, João utilizou um:",
+          "alternativas": [
+            "prompt;",
+            "big data;",
+            "helpdesk;",
+            "script low-code;",
+            "corretor ortográfico e gramatical."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "O trabalho que José executa todos os dias é ace ssar o site do Detran, baixar extratos e incluí -los no sistema de procuradorias para subsidiar análises sobre dívida ativa. Para otimizar esse trabalho, o Departamento de Tecnologia da Informação implementou uma solução que automatiza as tarefas repetitiva s do processo que José executa. Para iniciar o processo, José deve dar um clique em um botão para que as tarefas programadas na solução sejam executadas. A solução implementada no órgão em que José trabalha é do tipo:",
+          "alternativas": [
+            "orquestrador;",
+            "robô assistido;",
+            "robô não assistido;",
+            "modelo de imagem;",
+            "aprendizado de máquina."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "Pedro está usando uma Inteligência Artificial (IA) para apoiar as decisões que toma diariamente na execução do seu trabalho de atendimento ao público em um órgão da Administração Pública federal. No entanto, ele se preocupa com os riscos associados a essa prática. Para minimizar os riscos relativos ao uso da IA para apoiar as suas decisões, Pedro deve:",
+          "alternativas": [
+            "usar modelos de imagem seguros;",
+            "automatizar o processo decisório;",
+            "assumir a responsabilidade pela decisão;",
+            "optar por aprendizado profundo sempre que possível;",
+            "utilizar ferramentas de controle de acesso confiáveis. CONHECIMENTOS ESPECÍFICOS Eixo Temático 1 -"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "A Constituição Federal estabelece princípios fundamentais que orientam a estrutura do Estado brasileiro, consagrando valores, diretrizes e objetivos para as dimensões política, econômica, social e jurídica do país. Em relação à seguridade social, a Constituição Federal também traça objetivos. Sobre eles, é correto afirmar que:",
+          "alternativas": [
+            "a equidade na forma de participação no custeio da seguridade social dispensa a contribuição de pessoas consideradas de baixa renda, mesmo na previdência social;",
+            "a seletividade e a distributividade das prestações às populações urbanas e rurais visam a romper a distinção de tratamento que outrora vigorava entre esses segmentos;",
+            "a universalidade da cobertura e do atendimento desdobra -se em dois aspectos, que significam, respectivamente, ampliar o número de pessoas amparadas e excluir a cobertura de idade avançada;",
+            "o valor dos benefícios previdenciários é protegido pela vedação de sua redução, garantindo-se o reajustamento a fim de manter, em caráter permanente, o valor originário da prestação;",
+            "o caráter democrático e descentralizado da administração materializa-se pela gestão quadripartite, com participação dos trabalhadores, dos empregadores, dos aposentados e do poder público nos órgãos colegiados."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "O reconhecimento e a garantia de di reitos representam conquistas essenciais em uma sociedade democrática. No entanto, não há direitos sem custos. A concretização de garantias constitucionais vincula-se à capacidade do Estado de mobilizar e gerir recursos adequados. À vista do exposto e das fontes que custeiam a seguridade social, é correto afirmar que:",
+          "alternativas": [
+            "a pessoa jurídica em débito com o sistema de seguridade social não pode contratar com o poder público, embora possa receber dele quaisquer incentivos fiscais ou creditícios;",
+            "o ônus con tributivo do trabalhador e dos demais segurados do Regime Geral de Previdência Social não autoriza a incidência de contribuição sobre suas respectivas aposentadorias;",
+            "a contribuição a cargo do empregador sobre a remuneração paga ou creditada ao trabalh ador não inclui aquele trabalhador contratado sem vínculo de emprego;",
+            "o lucro é uma grandeza econômica tributada pelo imposto sobre a renda da pessoa jurídica, razão pela qual não pode ser objeto também de contribuição social;",
+            "as receitas dos estad os e municípios devem integrar o orçamento da União Federal, a fim de melhorar a gestão dos recursos disponíveis para o financiamento da seguridade social."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Constituição Federal - Saúde",
+          "enunciado": "O Título VIII da Constituição Federal regula a “Ordem Social”, que se refere ao conjunto de disposições, princípios e instituições que visam a promover o bem -estar, a dignidade humana e a justiça social. No contexto específico da seguridade social, é correto afirmar que esse sistema protetivo se destina a:",
+          "alternativas": [
+            "assegurar os direitos relativos à sa úde, à educação, à previdência e à assistência social, com especial atenção e prioridade a crianças e adolescentes;",
+            "expandir a malha de proteção social, permitindo-se, inclusive, diante de restrições orçamentárias, a instituição de outras contribuições sociais, por decreto presidencial;",
+            "oferecer proteção à família, à maternidade, à infância, à adolescência e à velhice no âmbito das ações assistenciais, a toda e qualquer pessoa que alcance 65 anos de idade;",
+            "proteger o trabalhador em face de riscos sociais do trabalho e de outros eventos, inclusive o pequeno produtor rural, ainda que exerça suas atividades em regime de economia familiar;",
+            "universalizar o atendimento às ações e serviços de saúde, dispensando-se a comprovação de contribuição do usuário do Sistema Único de Saúde (SUS), exceto em relação aos estrangeiros em trânsito no país."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "A necessidade de equilíbrio financeiro na seguridade social é um princípio constitucional fundamental, que acarreta profundas repercussões na organização e sustentabilidade do sistema brasileiro de proteção social. Acerca desse tema, está de acordo com a Constituição Federal:",
+          "alternativas": [
+            "a vedação de criar, majorar ou estender benefício ou serviço da seguridade social sem a correspondente fonte de custeio total;",
+            "a obrigatoriedade de instituir outras contribuições sociais para garantir a expansão da seguridade social, desde que por lei ordinária ou medida provisória;",
+            "a dispensa de recolher contribuição social pelas entidades privadas sem fins lucrativos, desde que voltadas a atividades educacionais, somente;",
+            "a vedação de recolher contribuição pelo segurado do Regime Geral de Previdência Social na condição de segurado facultativo, caso não possua atividade remunerada;",
+            "a possiblidade de se adotarem, em rel ação às contribuições sociais a cargo das empresas, alíquotas diferenciadas em razão da atividade econômica, desde que limitadas a 20% da remuneração total."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "A trajetória da proteção social brasileira é traçada por distintas fases, que refletem as transformações econômicas, políticas e sociais ao longo do tempo. Sobre o tema, é correto afirmar que:",
+          "alternativas": [
+            "na fase mutualista (1888 -1930), destacam -se a proliferação das sociedades de socorro mútuo e das Caixas de Aposentadorias e Pensões (CAPs) para deter minadas categorias profissionais, de caráter público e organizadas por empresas, além da edição da primeira lei sobre acidentes de trabalho;",
+            "na fase corporativista (1930 -1945), destacam -se a intervenção do Estado em assuntos sociais, a criação dos Institutos de Aposentadorias e Pensões (IAPs), a previsão de proteção ao trabalhador na Constituição de 1934 e a edição na Consolidação das Leis do Trabalho (CLT);",
+            "na fase de unificação e expansão (1945 -1966), destacam-se o aumento da cobertura previdenciária dos IAPs e a promulgação da Lei Orgânica da Previdência Social (LOPS), que representou a primeira tentativa de sistematização, dando origem, ao mesmo tempo, ao Instituto Nacional de Previdência Social (INPS), ao unificar os antigos IAPs;",
+            "na fase do sistema nacional (1966 -1988), destacam -se a inclusão dos trabalhadores rurais nas ações protetivas por meio do Programa de Assistência ao Trabalhador Rural (Prorural), o qual, assim como o sistema urbano de proteção social, foi submetido às mesmas regras de contribuição e aposentadoria;",
+            "na fase da seguridade social, a partir de 1988, destacam -se a consagração de um modelo de proteção social de caráter universal e tripartite, bem como a criação do Instituto Nacional do Seguro Social (INSS) –decorrente da fusão do INPS, do Instituto de Administração Financeira da Previdência e Assistência Social (Iapas) e do Instituto Nacional de Assistência Médica da Previdência Social (Inamps)."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "O sistema protetivo brasileiro é calcado em diversos valores, os quais orientam a elaboração e aplicação de normas variadas. Entre eles, há a solidariedade social, na qual a sociedade, mediante ações variadas, propicia proteção recíproca. Sobre a solidariedade social, é correto afirmar que:",
+          "alternativas": [
+            "requer o financiamento da seguridade social brasileira por toda a sociedade, de forma direta e indireta, nos termos da lei, e de contribuições sociais previstas na Constituição Federal;",
+            "orienta o Sistema Único de Saúde (SUS), ao garantir, sob certas hipóteses, acesso universal, independentemente da contribuição financeira direta do usuário, exceto para pessoas com planos privados de saúde;",
+            "manifesta-se no custeio coletivo da previdência soc ial, pois trabalhadores ativos e empresas contribuem para financiar os benefícios pagos aos beneficiários. Esse formato está na base do chamado regime de capitalização;",
+            "constitui objetivo fundamental da República Brasileira, manifestando-se em particul ar na seguridade social, para a promoção do bem -estar coletivo, inclusive no regime de previdência privada, com maior destaque;",
+            "atua na assistência social ao proteger pessoas em situação de vulnerabilidade, independentemente de contribuição prévia ao s istema. Já o beneficiário do Benefício de Prestação Continuada (BPC) deve contribuir sobre a prestação assistencial."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "Paulo e Ana são casados. Ele é aposentado, de forma lícita, pelo Regime Geral de Previdência Social (RGPS) e pelo Regime de Próprio de Previdência Social (RPPS) na União Federal. Paulo continua exercendo atividade remunerada, ministrando aulas particulares de matemática em sua casa. Ana não exerce atividade remunerada no momento. A renda de Ana provém do aluguel de uma grande loja comerci al. O casal possui uma filha, Júlia, de 3 anos de idade, com deficiência em grau elevado. Considerando-se a situação -problema, está de acordo com a legislação sustentar que:",
+          "alternativas": [
+            "Paulo, a depender do valor dos proventos, terá que contribuir para o RPPS da U nião, mas não sobre os proventos pagos pelo RGPS;",
+            "Ana poderá contribuir como segurada facultativa no RGPS, ainda que venha a desempenhar atividades remuneradas como autônoma;",
+            "Paulo, ao falecer, instituirá três pensões por morte em favor de Ana e Júlia, suas dependentes previdenciárias, por ter contribuído para todas;",
+            "Júlia poderá fazer jus ao Benefício de Prestação Continuada (BPC) da assistência social, pois não disporá de renda própria, a partir de 18 anos de idade;",
+            "Paulo deverá contribuir para o RGPS em razão do exercício da atividade remunerada autônoma, mas não fará jus a prestação alguma da previdência social em decorrência dessa atividade."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Financiamento do SUS e LC 141/2012",
+          "enunciado": "A Lei nº 8.212/1991 é intitulada Lei Orgânica da Seguridade Social. Conforme consta de sua ementa, dispõe sobre a organização da seguridade social, institui plano de custeio e dá outras providências. Quanto às fontes de financiamento disciplinadas na referida Lei, é correto afirmar que:",
+          "alternativas": [
+            "o orçamento da seguridade social, em âmbito federal , compõe-se de diversos recursos, que podem ser resumidos em receitas da União, das contribuições sociais e de outras fontes;",
+            "100% do resultado dos leilões dos bens apreendidos pela Secretaria Especial da Receita Federal do Brasil constituem receita da seguridade social;",
+            "a integralidade das receitas advindas de concursos de prognósticos promovidos pelo poder público destina -se à seguridade social, desde que aprovados por decreto legislativo;",
+            "a contribuição da União para a seguridade social é constituída de recursos adicionais do orçamento fiscal, não se responsabilizando pela cobertura de eventuais insuficiências financeiras de qualquer ordem;",
+            "o Sistema Único de Saúde poderá receber, por repasse, até 100% do valor do prêmio recolhido em favor do Seguro Obrigatório para Proteção de Vítimas de Acidentes de Trânsito (SPVAT)."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "O Estado Democrático de Direito fundado pela Constituição Federal rege -se por princípios fundamentais que orientam a atuação dos Poderes da República. Entre outros objeti vos, visa a construir uma sociedade livre, justa e solidária. Coerente com tais finalidades, a Constituição Federal reserva um capítulo destinado a tratar dos “Direitos Sociais”. A respeito deles, é correto afirmar que:",
+          "alternativas": [
+            "a saúde, a previdência social, a proteção à maternidade e à infância e a assistência aos desamparados estão expressamente previstos na Constituição Federal, enquanto o direito à educação, à alimentação, à moradia, ao transporte e ao lazer são deduzidos implicitamente;",
+            "o poder públic o garante a todo brasileiro em situação de vulnerabilidade social, nos termos da lei, o direito a uma renda básica familiar, em programa permanente de transferência de renda, efetivado majoritariamente pelo Programa Bolsa Família;",
+            "os trabalhadores urba nos e rurais, incluindo os autônomos, têm assegurada a proteção do mercado de trabalho da mulher, mediante incentivos específicos, seguro contra acidentes de trabalho e salário-família;",
+            "o salário-maternidade, com duração de 120 dias, que poderá ser cum ulado com o trabalho e a manutenção do próprio salário, está entre os direitos sociais garantidos pela Constituição Federal;",
+            "alguns dos direitos sociais garantidos aos trabalhadores pela Constituição Federal são de natureza previdenciária, como aposentadoria, Benefício de Prestação Continuada (BPC) e bolsa família."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "Apesar dos avanços das últimas décadas, a desigualdade e a pobreza permanecem elevadas tanto no Brasil quanto em escala global, apontam organismos oficiais nacionais e internacionais. O envelhecimento populacional, a informalidade do mercado de trabalho, a fragilidade fiscal dos Estados, os desastres naturais e as mudanças climáticas a um só tempo demandam e dificultam a implantação de políticas sociais efetivas. Com relação aos desafios na implementação das políticas sociais no Brasil, é correto afirmar que:",
+          "alternativas": [
+            "a garantia de fontes de financiamento estáveis e suficientes para políticas sociais é um dos problemas a equacionar, especialmente em contextos de crise econômica. A sustentabilidade fiscal não foi prestigiada pela última reforma da previdência, encampada pela Emenda Constitucional nº 103/2019;",
+            "a persistência da desigualdade social exige políticas que combinem universalização e direcionamento. O modelo brasileiro, em geral, alterna entre programas amplos (como o bolsa família) e direcionados (como o Sistema Único de Saúde), o que vai ao encontro de resultados distributivos;",
+            "as transformações no mercado laboral, como o crescimento do trabalho informal e por platafor mas e o fenômeno da “pejotização”, dificultam o acesso à proteção previdenciária e aos direitos trabalhistas, desafiando o modelo securitário, cuja base de financiamento radica precipuamente na folha de salário e nos demais rendimentos do trabalho;",
+            "a articulação das ações dos diversos segmentos de proteção social em estratégias convergentes enfrenta dificuldade ainda hoje, levando a desperdício de recursos, sobreposição de iniciativas e lacunas na tutela social, apesar de a União Federal exercer a compe tência privativa no combate às causas da pobreza e aos fatores de marginalização;",
+            "grupos como população em situação de rua, povos indígenas, migrantes, pessoas com deficiência e idosos ainda enfrentam obstáculos para acesso pleno aos direitos sociais. Essa realidade reflete insuficiências estruturais e institucionais, apesar da instituição do “sistema especial de inclusão previdenciária”, destinado a integrar esses segmentos historicamente excluídos ao seguro social."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Financiamento do SUS e LC 141/2012",
+          "enunciado": "A Lei nº 8.212/1991, entre outra s providências, traça as linhas gerais sobre o financiamento da seguridade social, concebida pela Constituição Federal. De acordo com a citada Lei e as disposições constitucionais vigentes, constituem contribuições sociais:",
+          "alternativas": [
+            "as das empresas e equiparada s, incidentes sobre a remuneração paga ou creditada aos segurados a seu serviço. Assim, se um trabalhador autônomo contratar outra pessoa com vínculo empregatício, aquele deverá recolher contribuição como equiparado a uma empresa;",
+            "as dos trabalhadores, incidentes sobre o seu salário de contribuição, inclusive e obrigatoriamente para o pescador artesanal, o qual qualifica -se como segurado facultativo do sistema previdenciário nacional;",
+            "as dos empregadores domésticos, homem ou mulher, pois são equipar ados a empresas para efeitos da Lei nº 8.212/1991 e, nessa condição, poderão obter benefícios previdenciários, incluindo acidentários;",
+            "as do importador de bens ou serviços do exterior. Por isso, se uma pessoa adquirir um produto proveniente do estrange iro para uso próprio, sem ânimo de lucro, não estará sujeito ao pagamento do tributo;",
+            "as das empresas, incidentes sobre o faturamento e lucro, mas não sobre a receita estranha à venda de produtos e prestação de serviços, em razão de falta de previsão constitucional."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "O modelo de seguridade social esboçado pela Constituição Federal, nas suas áreas de atuação, é objeto de leis específicas, que regulamentarão sua organização e funcionamento. Nesse contexto, de acordo com a Constituição Federal e a Lei nº 8.212/1991, é correto afirmar que:",
+          "alternativas": [
+            "a centralização político -administrativa, como técnica de gestão eficiente, é uma das diretrizes da assistência social, de tal maneira que a União Federal centralizará todas as ações e recursos da seguridade social;",
+            "o acesso às ações de saúde orienta -se pela igualdade e universalidade, com prioridade para as atividades reparadoras, de tal maneira que idosos possuem prioridade absoluta e exclusiva no cuidado médico;",
+            "o seguro social tem como uma de suas diretri zes a previdência complementar facultativa, custeada por contribuição adicional, a qual deverá ser fixada em lei complementar federal e disciplinada pelo Poder Executivo;",
+            "o orçamento anual da seguridade social será elaborado e aprovado por comissão int egrada com participação dos trabalhadores, dos empregadores, dos aposentados e do governo, haja vista o princípio democrático e da gestão quadripartite;",
+            "a previdência social tem por fim assegurar aos seus beneficiários meios indispensáveis de manutençã o, como, por exemplo, em razão de incapacidade laboral, idade avançada e reclusão ou morte daqueles de quem dependiam economicamente. Eixo Temático 2 - Saúde"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Direitos dos Usuários do SUS",
+          "enunciado": "João leva sua filha para ser atendida na emergência de um grande hospital filantrópico, que participa do Sistema Único de Saúde. Percebe, porém, que há estudantes da área da saúde que participam do atendimento a sua filha, sob preceptoria de profissionais que não são professores de escolas da área da saúde. Um desses estudantes mostra a João um formulário de consentimento para coleta de dados para pesquisa. Em relação a situações como essa, é correto afirmar que:",
+          "alternativas": [
+            "os serviços de saúde públicos não devem servir como campos de prática para pesquisa;",
+            "os serviços de saúde públicos não devem servir como ambientes de formação profissional;",
+            "a ordenação da formação de recursos humanos na área da saúde cabe ao Ministério da Educação;",
+            "Comissões Permane ntes de integração entre os serviços de saúde e as instituições de ensino profissional e superior devem ser criadas;",
+            "as condições de funcionamento das entidades filantrópicas de saúde devem seguir princípios éticos e normas distintos daqueles dos serviços públicos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "Numa roda social, a reclamação sobre o sistema de saúde é geral. Muitas pessoas alegam que a população não é ouvida na formulação de políticas e na construção de instrumentos de ação de saúde. Em relação à legislação sobre controle social, é correto afirmar que:",
+          "alternativas": [
+            "as instâncias colegiadas não existem na esfera federal;",
+            "as instâncias colegiadas municipais são representadas pelas associações de bairros;",
+            "as instâncias colegiadas estaduais são representadas pelas organizações não governamentais;",
+            "representantes do governo não devem atuar nas instâncias colegiadas, para não coibir a participação popular;",
+            "a Conferência de Saúde pode ser convocada pelo Poder Executivo, por uma própria Conferência ou pelo Conselho d e Saúde."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Uma pessoa de 47 anos, totalmente assintomática, é diagnosticada com infecção pelo HIV numa unidade de atenção primária de seu bairro. Após receber todas as orientações, é informada de que seguirá seu atendimento na própria unidade de atenção primária. No que se refere a essa situação, é correto afirmar que:",
+          "alternativas": [
+            "o ponto de apoio dessa pessoa, desde o início do processo, deveria ter sido um hospital universitário;",
+            "o atendimento dessa pessoa deve ser baseado em equipe unidisciplinar médica;",
+            "o atendimento dessa pessoa deveria ser feito, desde o início, por especialista em HIV/aids do adulto;",
+            "a atenção primária deve ser a gestora dos fluxos assistenciais, responsabilizando-se pela coordenação do cuidado;",
+            "a condução do atendimento foi adequada, uma vez que todas as pessoas com diagnóstico inicial de infecção pelo HIV devem começar seu atendimento pela atenção primária."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Um professor universitário de 52 anos é atendido em um check-up. O profissional de saúde consegue perceber que o professor não quer fazer exames de colesterol, pois não pretende mudar o seu estilo de vida e não quer ter provas documentais do risco que corre. Diante dessa situação, o profissional de saúde deve:",
+          "alternativas": [
+            "solicitar o exame de colesterol, pois há risco de culpabilização caso ele não o faça;",
+            "encaminhar o paciente para atenção especializada para solicitação do exame de colesterol;",
+            "solicitar o exame de colesterol, pois ele faz parte do protocolo de prevenção e promoção da saúde;",
+            "encaminhar o paciente para outro profissional da equipe, que deverá tentar convencê-lo a fazer o exame;",
+            "fortalecer o vínculo com o paciente, para que a questão possa ser abordada novamente em consultas futuras."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Durante uma campanha de prevenção, uma pessoa recebe o diagnóstico de diabetes. Começa, então, seu controle na unidade básica de saúde. Nesse acompanhamento, realiza consultas especializadas quando necessário. Sobre esse acompanhamento, é correto afirmar que:",
+          "alternativas": [
+            "o paciente não deveria ter sido referenciado para consultas especializadas, pois isso enfraquece o papel da atenção primária;",
+            "o paciente deveria ter iniciado seu controle na atenção especializada;",
+            "o referenciamento a consultas especializadas não implica falta de efetividade do sistema de atenção à saúde;",
+            "o referenciamento a consultas especializadas mostra menor eficiência do sistema de atenção na aplicação de recursos;",
+            "o paciente pode buscar os serviços de urgência e emergência quando necessário, pois eles fazem parte da atenção primária."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Segurança do Paciente",
+          "enunciado": "Um senhor de 52 anos, acompanhado por sua esposa, é hospitalizado para uma cirurgia de hérnia umbilical bem cedo, pela manhã. O anestesiologista não passa no quarto ant es da cirurgia, deixando para conhecer o senhor e conversar com ele no próprio centro cirúrgico. Tudo corre bem na cirurgia e no pós-operatório, e o senhor recebe alta hospitalar no meio da tarde, com excelente recuperação. Em relação à segurança do pacie nte nessa situação, é correto afirmar que:",
+          "alternativas": [
+            "o fato de o anestesiologista não ter passado no quarto antes da cirurgia é um evento adverso;",
+            "a visita do anestesiologista ao quarto pode ser dispensada, para que sejam cumpridas as metas financeiras;",
+            "a visita do anestesiologista ao quarto pode ser dispensada, para que sejam cumpridas as metas operacionais;",
+            "a visita do anestesiologista ao quarto pode ser dispensada, pois ele conversou com o senhor no centro cirúrgico;",
+            "o fato de o anestesiologist a não ter passado no quarto antes da cirurgia deve servir como gatilho para a promoção de aprendizado organizacional."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "Uma equipe de gestão precisou realizar o diagnóstico situacional da saúde de uma população com foco em doenças crônicas não transmissíveis (DCNT), analisando aspectos como óbitos, morbidade e dados de vigilância em saúde. Para isso, foi necessário integrar diferentes fontes de dados do SUS. Nesse sentido, considerando os principais Sistemas de Informação em Saúde à disposição da equipe, é correto afirmar que:",
+          "alternativas": [
+            "o Sistema de Informações sobre Nascidos Vivos (SINASC) fornece dados de internações hospitalares por causas externas, sendo essencial para analisar morbidade e letalidade das DCNT;",
+            "o Sistema de Informações sobre Mortalidade (SIM) é a principal base de dados para análise de óbitos por causa básica, idade e local de ocorrência, sendo fundamental para estudos de carga de doença;",
+            "o Sistema de Informações Hospitalares (SIH -SUS) possibilita a análise de internações, mas não per mite estimativas por diagnóstico, não sendo útil para esse tipo de levantamento;",
+            "o Cadastro Nacional de Estabelecimentos de Saúde (CNES) possibilita o levantamento de dados clínicos de pacientes atendidos no SUS, sendo um sistema importante nas análise s de vigilância em saúde;",
+            "o Sistema de Informação de Agravos de Notificação (Sinan) é voltado à gestão hospitalar de média e alta complexidade, fornecendo dados relacionados à internação, mortalidade e morbidade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Em uma capacitação com várias equipes de saúde que atuavam em diferentes áreas, foi discutido o uso das tecnologias em saúde no cotidiano assistencial e nas ações de promoção e prevenção. Nesse sentido, com base na classificação de Merhy (2002), é correto afirmar que:",
+          "alternativas": [
+            "tecnologias leves estão relacionais à interação humana, como acolhimento, vínculo, comunicação e gestão de processos de trabalho;",
+            "as tecnologias duras são as únicas capazes de produzir impacto real na saúde dos usuários, pois são baseadas em evidências e possuem respaldo científico;",
+            "a principal diferença entre as tecnologias leve-duras e duras é que as primeiras não exigem nenhum conhecimento técnico, apenas habilidades sociais dos profissionais;",
+            "tecnologias leves e duras são semelhantes, pois ambas envolvem estruturas organizacionais e equipamentos que garantem a qualidade técnica do atendimento;",
+            "tecnologias leves -duras referem -se aos equipamentos utilizados nos serviços de saúde, como tomógrafos e respiradores, sendo essenciais para o diagnóstico."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "Durante uma reunião para planejamento das ações de saúde, os profissionais discutiram a crescente demanda por acompanhamento de pacientes com Doenças Crônicas Não Transmissíveis (DCNT), como hipertensão, diabetes, câncer e doenças respiratórias crônicas. U m dos participantes comentou que isso reflete o atual cenário epidemiológico do Brasil. A esse respeito, é correto afirmar que:",
+          "alternativas": [
+            "o envelhecimento da população e as predisposições genéticas são os principais fatores responsáveis pelo aumento das DCNTs no Brasil;",
+            "a transição demográfica no Brasil é caracterizada pelo crescimento populacional e pelo aumento das taxas de natalidade e fecundidade e da mortalidade infantil;",
+            "a transição epidemiológica no Brasil é influenciada, entre outros fatores, pela redução das causas de morte por doenças infecciosas e parasitárias e materno -infantis e pelo envelhecimento da população;",
+            "mesmo com o crescimento das DCNTs, o Brasil ainda vive uma fase inicial da transição epidemiológica, com predominância de doenças infecciosas e parasitárias em todas as faixas etárias;",
+            "atualmente as doenças crônicas não transmissíveis, embora persistentes, apresentam forte tendência de declínio, graças ao avanço da tecnologia, da medicina preventiva e das ações de promoção de saúde."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Saúde Mental",
+          "enunciado": "Em uma discussão sobre a rede de atenção psicossocial (RAPS), uma equipe multiprofissional debateu sobre o papel dos dispositivos e dos pontos de atenção no cuidado a pessoas com transtornos mentais e uso abusivo de substâncias. Acerca dos serviço s que compõem a Rede de Atenção Psicossocial, é correto afirmar que:",
+          "alternativas": [
+            "os Centros de Atenção Psicossocial (CAPS) são destinados apenas ao atendimento de casos leves de sofrimento psíquico, enquanto os casos moderados e graves devem ser tratados em hospitais psiquiátricos;",
+            "o Programa de Volta para Casa (PVC) inclui a disponibilização de moradias, destinadas a acolher e cuidar das pessoas em sofrimento psíquico grave e persistente, egressas de internações psiquiátricas de longa permanência em hospitais psiquiátricos;",
+            "os Serviços Residenciais Terapêuticos (SRT) foram criados para abrigar pessoas com deficiência intelectual em situação de rua, independentemente de histórico de institucionalização;",
+            "a atuação da Estratégia Saúde da Família na saúde mental envolve o encaminhamento de usuários aos serviços especializados, não sendo prevista a atenção direta na atenção básica;",
+            "a RAPS é composta por unidades de acolhimento (UAs), que oferecem cuidado residencial transitório para pessoas com necessidades decorrentes do uso de álcool e outras drogas, em situações de vulnerabilidade social e que demandem acolhimento terapêutico e protetivo."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Os clássicos estudos de Doll & Hill (1950 -1952) sobre a etiologia do câncer de pulmão foram desenvolvidos com base na seleção de indivíduos entre abril de 1948 e fevereiro de 1952. Dos 3.446 pacientes com câncer nesse período, os autores estudaram 1.357 homens e 108 mulheres com car cinoma de pulmão, em comparação com igual número de controles pareados por sexo, idade e por hospital onde eram tratados. Os autores concluíram pela associação entre hábito de fumar cigarros e desenvolvimento de carcinoma de pulmão entre homens (DOLL, R. & HILL, A. B., 1950). Analisando as informações e considerando os desenhos de estudos epidemiológicos para investigação de doenças e agravos, é correto afirmar que esse estudo foi do tipo:",
+          "alternativas": [
+            "coorte;",
+            "seccional;",
+            "ecológico;",
+            "ensaio clínico;",
+            "caso-controle. Eixo Temático 3 - Assistência Social"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Direitos dos Usuários do SUS",
+          "enunciado": "De acordo com o Decreto nº 6.949/2009, que promulgou a Convenção Internacional sobre os Direitos das Pessoas com Deficiência, a deficiência é compreendida como um conceito:",
+          "alternativas": [
+            "social, baseado na ideia de que cabe à comunidade o dever de contribuir com as pessoas com deficiência, em vez de esperar delas uma participação ativa na vida comunitária;",
+            "político, que compreende as pessoas com deficiência a partir de suas dependências e incapacidades biológicas, justificando a necessidade de maior apoio em relação aos demais cidadãos;",
+            "permanente, que reconhece a imutabilidade das questões relacionadas ao convívio social com as pessoas com deficiência;",
+            "unificado, que generaliza dependê ncias e necessidades das pessoas com deficiência, com o objetivo de assegurar e proteger seus direitos humanos de forma ampla e global;",
+            "evolutivo, resultado da interação entre pessoas com deficiência e barreiras ambientais e atitudinais que impedem sua participação plena e igualitária na sociedade."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Leia o trecho a seguir. “Em 2004, foi elaborada a Política Nacional de Assistência Social (PNAS), documento que estabeleceu as diretrizes para a constituição futura de um sistema único nessa área. Dentre as principais diretivas da PNAS, estava a definição de dois graus de complexidade no atendimento – a proteção social básica e a especial – e dos equipamentos responsáveis pelos serviços em cada um desses graus: Centros de Referência de Assistência Social para a proteção básica e Centro de Referência Especial de Assistência Social para a proteção especial. Em 2011, a partir dos preceitos da PNAS, por intermédio da Lei nº 12.435, esse modo de organização se consolidou com a constituição do Sistema Único de Assistência Social (SUAS).” (Adaptado de MARGARITES, Gustavo. “A Constituição da Assistência Social como um campo de ação estratégica no Estado Brasileiro”, Tese de doutorado, Universidade Federal do Rio Grande do Sul, 2019, p. 17) Sobre os conceitos de Pr oteção Social Básica e Proteção Social Especial, segundo a PNAS, analise as afirmativas a seguir, considerando V para a(s) verdadeira(s) e F para a(s) falsa(s). ( ) A Proteção Social Básica tem por objetivo prevenir situações de risco, por meio do desenvolvimento de potencialidades, da ampliação de aquisições e do fortalecimento dos vínculos familiares e comunitários. ( ) A Proteção Social Especial tem como finalidade atuar em situações de exclusão social marcadas não apenas pela ausência de renda ou por fatores socioeconômicos, mas também pela ocorrência de violências e violações de direitos. ( ) As duas modalidades de proteção social direcionam suas ações para o planejamento e a execução de medidas preventivas, antecipando -se às situações de ri sco social e vulnerabilidades que possam dificultar o acesso da população aos seus direitos sociais. A sequência correta é:",
+          "alternativas": [
+            "V, V, F;",
+            "V, F, V;",
+            "F, F, V;",
+            "F, V, F;",
+            "V, V, V."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "De acordo com a Lei Orgânica da Assistência Social (Lei nº 8.742/1993), a assistência social é regida, dentre outros, pelo seguinte princípio:",
+          "alternativas": [
+            "a centralização político-administrativa da União se materializa na condução da política de assistência social e na gestão dos recursos públicos, promovendo a unificação ent re regiões e municípios;",
+            "a priorização da rentabilidade econômica em relação às necessidades sociais garante o uso responsável e eficiente dos recursos públicos;",
+            "a seletividade na distribuição dos recursos pelo poder público, com base na comprovaçã o rigorosa da necessidade extrema dos beneficiários, assegura a justa aplicação das políticas públicas;",
+            "a concessão de benefícios de forma singular ao destinatário evita acúmulos e assegura o uso racional e coordenado dos recursos oferecidos pelo poder público;",
+            "a divulgação pelo poder público dos benefícios, serviços e projetos assistenciais, bem como dos recursos oferecidos e dos critérios para sua concessão, facilita o acesso da população às políticas sociais."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "A respeito das iniquidades raciai s na atenção às puérperas no Brasil, leia o trecho a seguir. “As puérperas de cor preta apresentaram maior risco de terem um pré -natal inadequado, falta de vinculação à maternidade, ausência de acompanhante e peregrinação para o parto, em comparação às puérperas brancas. As pretas também receberam menos orientação durante o pré -natal sobre o início do trabalho de parto e sobre possíveis complicações na gravidez. Apesar de terem menor chance para uma cesariana e de intervenções dolorosas no parto vaginal, em comparação às brancas, as mulheres pretas receberam com menor frequência anestesia local.” (Adaptado de LEAL, Maria, et. al. “A cor da dor: iniquidades raciais na atenção pré -natal e ao parto no Brasil”. Cadernos de Saúde Pública 2017; 33 Sup. 1, p. 5) A situação descrita expõe um caso de desigualdade racial no atendimento a mulheres grávidas no serviço de saúde. Esse tipo de situação ilustra o fenômeno conceituado como:",
+          "alternativas": [
+            "racismo científico, que se expressa na avaliação negativa da capacidade física d as mulheres afrodescendentes ao classificá-las como mais fracas e débeis;",
+            "racismo cultural, que desconsidera as práticas tradicionais próprias das mulheres afrodescendentes, como a escolha de realizar o parto em casa, de acordo com seus costumes;",
+            "racismo institucional, que se manifesta na oferta de um atendimento inferior e inadequado às mulheres afrodescendentes, em razão de sua cor;",
+            "racismo estrutural, que se revela de forma pontual nas condutas individuais e varia conforme as experiências das mulheres afrodescendentes;",
+            "racismo recreativo, que se apresenta por meio de expressões supostamente humorísticas que reforçam estereótipos negativos e contribuem para a inferiorização das mulheres afrodescendentes."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Considere a situação a seguir. João possui uma deficiência de natureza física que compromete sua autonomia, exigindo atenção constante à sua saúde. Ao tomar conhecimento de que poderia ser beneficiário do Benefício de Prestação Continuada (BPC), passou a recebê -lo durante cinco meses. Com o apoio de sessões de fisioterapia, apresentou uma melhora parcial em suas capacidades motoras, o que lhe permitiu iniciar atividades laborais em seu próprio comércio. Diante da situação descrita, o benefício de João deve ser suspenso, uma vez que:",
+          "alternativas": [
+            "a melhora parcial das funções motoras demonstra que João não se enquadra mais nos critérios de impedimento de longo prazo, exigidos para a caracterização da deficiência;",
+            "o exercício de atividade remunerada contraria os critérios para a concessão do ben efício, ao indicar que João possui meios de prover a própria subsistência;",
+            "a redução do grau de deficiência para um nível moderado impede o recebimento, já que o benefício é destinado apenas a pessoas com deficiência de alta complexidade;",
+            "a partici pação em programas de habilitação ou reabilitação profissional constitui critério automático para cessação, por indicar processo de recuperação e redução de dependência do auxílio social;",
+            "a manutenção da deficiência para além do prazo de revisão previsto em lei configura causa direta para a suspensão do auxílio, que tem caráter temporário."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Política Nacional de Humanização",
+          "enunciado": "Leia o trecho a seguir. “O Sistema Único de Assistência Social (SUAS), ao afirmar a necessidade de equipes de referência na proteção social básica e especial no s coloca diante de perguntas desafiadoras, como: 1) O que significa construir referência? 2) A referência é válida para quem? 3) Como funciona uma equipe de referência?” (Adaptado de Secretaria Nacional de Assistência Social. NOB-RH/SUAS: Anotada e Comentada. Brasília, 2011, p. 25) Com base no trecho citado, analise as afirmativas a seguir relacionadas às três perguntas. I. A construção da referência baseia -se na oferta contínua dos serviços socioassistenciais, assegurando que o cidadão, ao necessitar de proteção, encontre atendimento disponível e adequado no âmbito da assistência social. II. A referência é válida para famílias e indivíduos que residem em territórios marcados por situações de vulnerabilidade social, definidos com base em indi cadores estabelecidos por órgãos federais e pactuados no âmbito do SUAS. III. A equipe de referência atua de forma integrada, com profissionais de diferentes áreas de atuação, que definem juntos os objetivos estratégicos, conforme a realidade do território e os recursos disponíveis. Está correto o que se afirma em:",
+          "alternativas": [
+            "I, apenas;",
+            "I e II, apenas;",
+            "I e III, apenas;",
+            "II e III, apenas;",
+            "I, II e III."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Na história recente do Brasil, a assistência social deixa, em dado momento, de ser uma prática privada e passa a ser reconhecida institucionalmente como direito social. O marco histórico do reconhecimento da assistência social como um direito é:",
+          "alternativas": [
+            "a criação da Legião Brasileira de Assistência (LBA), em 1942, que estabelece a assistência social com o política estatal, voltada para a população em situação de pobreza;",
+            "a promulgação da Constituição Federal de 1988, que insere a assistência social no sistema de seguridade social e a reconhece como direito do cidadão e dever do Estado;",
+            "a publicação da Lei Orgânica da Assistência Social (LOAS), em 1993, que pela primeira vez introduz a assistência social como política pública no Brasil, ainda sem esteio constitucional;",
+            "a implantação do Sistema Único de Assistência Social (SUAS), em 2005, que cri a as bases para o reconhecimento da assistência social como um direito universal;",
+            "a criação do Conselho Nacional de Serviço Social (CNSS), em 1938, que estabelece formalmente a assistência social como direito no Brasil, vinculando-a à proteção social estatal."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "O Benefício de Prestação Continuada (BPC) garante um salário mínimo ao idoso com 65 anos ou mais e à pessoa com deficiência (PcD), desde que comprovada a ausência de meios próprios ou familiares para a própria manutenção. O benefício é não vitalício, estando sujeito à suspensão ou à cessação em algumas hipóteses. Um motivo previsto para a cessação direta do BPC é:",
+          "alternativas": [
+            "o recebimento simultâneo de outro benefício do INSS, como a pensão;",
+            "a desatualização do Cadastro Único por parte do benef iciário da política;",
+            "o início do exercício de atividade remunerada por parte do beneficiário;",
+            "o desenvolvimento das capacidades cognitivas ou motoras por parte da PcD;",
+            "a ausência de saque do valor do benefício por período superior a 60 dias."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "No âmbito do Sistema Único de Assistência Social (SUAS), os Benefícios Eventuais constituem uma p restação provisória destinada a responder a certas ocorrências inesperadas, como morte, nascimento ou calamidade pública. Os Benefícios Eventuais no SUAS se caracterizam por:",
+          "alternativas": [
+            "serem desvinculados de exigências de contribuição ou de contrapartidas por integrarem a lógica da proteção social não contributiva;",
+            "considerarem a condição de pobreza como requisito central, independentemente da gravidade do evento que motivou a solicitação;",
+            "serem prestados quando não há possibilidade de atendimento pela rede de serviços socioassistenciais, como medida de último recurso;",
+            "corresponderem a transferências financeiras com valores e critérios uniformemente definidos para todo o âmbito nacional;",
+            "serem destinados a famílias que já recebem outros benefícios sociais, funcionando como suplemento à renda obtida em outros programas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "O processo de reconhecimento da assistência social como direito universal no Brasil passa pela sua progressiva distinção em relação a práticas arcaicas como o a ssistencialismo, o paternalismo e o clientelismo, que servem para a manutenção das estruturas desiguais de poder. Uma prática própria do clientelismo é:",
+          "alternativas": [
+            "a prestação de serviços por uma entidade privada que fornece cestas básicas e atendimentos sociais mediante pagamento de mensalidade pelos usuários;",
+            "a realização de campanhas beneficentes por instituições religiosas, que arrecadam roupas e alimentos para doar às famílias pobres dos bairros em que se localizam;",
+            "a concessão de benefícios sociais a os moradores que apoiam politicamente um gestor local, vinculando o acesso à ajuda social à troca de favores e ao apoio eleitoral;",
+            "a entrega de alimentos feita por um agente público que escolhe quem considera merecedor da ajuda, sem critérios claros ou envolvimento da comunidade na decisão;",
+            "a criação de um programa municipal de transferência de renda, com critérios definidos por lei e acessível a qualquer cidadão que se enquadre nos critérios técnicos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "O Sistema Único de Assistência Social (SUAS ) organiza sua oferta de serviços de acordo com uma escala de complexidade (baixa, média ou alta). Essa escala tem por base a avaliação da gravidade da situação do público atendido e, portanto, da intensidade de proteção social requerida. Um exemplo de caso de alta complexidade é:",
+          "alternativas": [
+            "a participação de famílias em situação de vulnerabilidade social em grupos socioeducativos, com foco no fortalecimento de vínculos;",
+            "o atendimento especializado às famílias em que houve denúncia de violência psicológica e c ujos vínculos estão fragilizados;",
+            "o acompanhamento de adolescentes em cumprimento de medida socioeducativa em meio aberto, articulando apoio psicossocial e rede comunitária;",
+            "a intervenção junto a crianças vítimas de negligência leve, visando a orie ntar os responsáveis e a fortalecer a função protetiva da família;",
+            "o acolhimento provisório de adultos em situação de rua, sem vínculos familiares, que necessitam de moradia, alimentação e higienização. Eixo Temático 4 - Previdência Social"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Jorge, engenheiro civil, é contratado pelo regime celetista, com dedicação exclusiva, pela construtora ABC, sediada no Distrito Federal, em janeiro de 2025. Jorge inicia suas atividades imediatamente, coordenando importante revitalização de prédios urbanos, mediante projeto devidamente aprovado pelas autoridades competentes. Diante da situação hipotética narrada, é correto afirmar que Jorge:",
+          "alternativas": [
+            "é segurado obrigatório do Regime Geral de Previdência Social, na qualidade de segurado empregado, e contribui facultativamente ao Instituto Nacional do Seguro Social – INSS;",
+            "poderá obter aposentadoria especial, nos termos da legislação, desde que comprove ter desempenhado atividade perigosa por 25 anos, com a respectiva contribuição, sempre no mesmo empregador e em construção civil;",
+            "viabilizará a concessão de pensão por morte para sua mãe na hipótese de óbito em atividade profissional, desde que comprovada a dependência econômica, mesmo que já seja casado e tenha filhos menores de 21 anos de idade;",
+            "poderá obter benefício previdenciário caso sofra acidente de trabalho na mesma semana em que foi contratado, uma vez identificada a incapacidade nos termos da lei, mesmo sem o adimplemento de carência;",
+            "é segurado facultativo do Regime Geral de Previdência Soc ial, pois, na condição de engenheiro civil, prestará seus serviços na condição de pessoa jurídica, em fenômeno conhecido como “pejotização”."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 68,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Maria, trabalhadora rural, desempenha suas atividades em gleba rural no interior do Mato Grosso, com apoio de seu esposo e dois empregados. Estes são contratados pelo regime celetista e desempenham suas atividades continuadamente, durante todo o ano, junto à propriedade rural de Maria. Nesse cenário hipotético, é correto afirmar que:",
+          "alternativas": [
+            "Maria é qualificada como s egurada especial do Regime Geral de Previdência Social, sendo, na condição de empregadora, responsável pelas obrigações previdenciárias relativas aos empregados em sua propriedade;",
+            "Maria é empregadora rural e, por desempenhar atividade profissional em gleba rural nas condições descritas, qualifica - se como segurada contribuinte individual do Regime Geral de Previdência Social;",
+            "Maria é segurada contribuinte individual do Regime Geral de Previdência Social, devendo realizar inscrição previdenciária junto ao INCRA, informando as dimensões de sua propriedade rural;",
+            "Maria, caso venha a falecer, não viabilizará pensão por morte para seus dependentes, pois não se qualifica como segurada especial, salvo se, em vida, tiver optado por inscrever -se como seg urada facultativa do Regime Geral de Previdência Social;",
+            "Maria e seu esposo não poderão vincular -se, simultaneamente, ao Regime Geral de Previdência Social, sendo a inscrição, na qualidade de segurado obrigatório, restrita ao titular da propriedade rural."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 69,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "A seguridade social brasileira, prevista na Constituição de 1988, possui particularidades relevantes, especialmente dentro dos subsistemas que a integram: previdência social, assistência social e saúde. Sobre tais subsistemas, é correto afirmar que:",
+          "alternativas": [
+            "tanto o modelo previdenciário dos trabalhadores privados quanto o sistema protetivo de servidores públicos, por expresso comando constitucional, são de índole contributiva;",
+            "a previdência social, no sistema nacional, é dotada de ampla cobertura, em prol de toda e qualquer pessoa, dispensada qualquer forma de contribuição prévia, haja vista a natureza gratuita do sistema;",
+            "a previdência social assim como a saúde pública car ecem de aportes contributivos mensais mínimos, denominados legalmente de carência, os quais garantem o atendimento integral;",
+            "a assistência social brasileira permite a todo e qualquer brasileiro, ao completar a idade de 65 anos, a obtenção de aposentadoria por velhice, no valor ordinário de um salário mínimo;",
+            "a previdência social de servidores públicos, independente do ente federado a que sejam vinculados, gera a necessária vinculação automática ao Regime Geral de Previdência Social – RGPS."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "José Célio, médico oftalmologista, é aprovado em concurso público federal para ocupar cargo público de provimento efetivo. Ele tem sua nomeação devidamente formalizada e ingressa em atividade nos termos da lei. Diante da situação hipotética apresentada, é cor reto afirmar que José:",
+          "alternativas": [
+            "restará vinculado ao Regime Geral de Previdência Social, na qualidade de segurado contribuinte individual, haja vista a inexistência de relação de emprego entre o médico e seu contratante, público ou privado;",
+            "é vinculado, ob rigatoriamente, ao Regime Próprio de Previdência Social dos servidores públicos federais, com os encargos legais daí derivados, incluindo contribuições previdenciárias;",
+            "terá em seu favor, a depender da data de ingresso no serviço público federal, somen te a possibilidade de adesão à previdência complementar, nos termos da lei, em fundos de pensão públicos;",
+            "terá ingresso compulsório do Regime Geral de Previdência Social, na condição de segurado empregado, caso tenha ingressado no cargo público após a reforma previdenciária de 2019;",
+            "poderá, uma vez em atividade no cargo público de provimento efetivo, verter contribuições ao Regime Geral de Previdência Social, na condição de segurado facultativo, podendo obter dupla aposentadoria."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 71,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Maria José, pessoa com deficiência e servidora pública federal, desempenha suas atividades profissionais regularmente após aprovação em concurso público. Maria não possuía qualquer atividade remunerada prévia antes da aprovação no concurso e início da atividade em car go público federal de provimento efetivo. Diante dessa situação hipotética, é correto afirmar que Maria José:",
+          "alternativas": [
+            "somente poderá aposentar -se por idade, nos termos da legislação vigente, aos 62 anos, e desde que tenha 20 anos de contribuição;",
+            "poderá, a depender do grau de deficiência, aposentar -se concluídos 20 anos de atividade, após regular avaliação pericial;",
+            "poderá obter aposentadoria antecipada, sendo, no caso, irrelevante a avaliação do Índice de Funcionalidade Brasileiro Modificado;",
+            "possui a possibilidade de aposentadoria antecipada por incapacidade permanente, haja vista a presunção de invalidez após 15 anos de atividade;",
+            "poderá aposentar -se após 20 anos de contribuição, independentemente de idade, caso sua deficiência seja qualificada como leve."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 72,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Jorge, segurado empregado do Regime Geral de Previdência Social, atua em regime de dedicação exclusiva a empresa metalúrgica. Em sua atividade profissional, é exposto a ruído intenso, de forma contínua e em grau de exposição acima dos limites de tolerância previstos na legislação trabalhista. Nessa situação hipotética, é correto afirmar que Jorge:",
+          "alternativas": [
+            "poderá aposentar -se por incapacidade permanente após 15 anos de atividade, em virtude da invalidez presumida;",
+            "poderá exigir de seu empregador complemento de aposentadoria junto ao Regime Geral de Previdência Social, na forma de abono anual;",
+            "poderá obter aposentadoria especial, na forma da legislação, desde que atendidos os requisitos de tempo mínimo de exposição e idade;",
+            "poderá aposentar -se antecipadamente, após 15 anos de atividade, desde que comprovada a efetiva perda auditiva na atividade;",
+            "poderá aposentar -se após 20 anos de atividade, desde que demonstrada a ineficácia dos equipamentos de proteção fornecidos pelo empregador."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 73,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Antônia, dona de casa, sem desempenho de qualquer atividade remunerada, busca orientação sobre seus direitos junto ao sistema previdenciário brasileiro. Diante da situação hipotética narrada, é correto afirmar que Antônia:",
+          "alternativas": [
+            "poderá aposentar -se aos 65 anos de idade, independentemente de contribuição previdenciária, desde que comprove renda familiar reduzida, nos termos da legislação;",
+            "poderá obter cobertura previdenciária junto ao Regime Geral de Previdência Social, desde que realize inscrição e recolhimentos na condição de segurada facultativa;",
+            "poderá inscrever -se como segurada autônoma, independentemente de atividade remunerada, assegurando, na forma da lei, todos os benefícios previdenciários, incluindo aposentadorias;",
+            "poderá vincular -se a regime privado de previdência, que permite a obtenção de aposentadorias nas mesmas condições do Regime Geral de Previdência Social;",
+            "tem a possibilidade de aderir ao sistema previdenciário como microempreendedora individua l (MEI), devendo verter os recolhimentos previstos na legislação específica."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 74,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Maria, empresária do setor de moda, desempenha suas atividades profissionais de forma autônoma, em sua própria residência. Ela se utiliza dos serviços de Carla, contratada co mo empregada doméstica, para os cuidados familiares, sem envolver Carla em sua atividade profissional de moda. Diante da situação hipotética narrada, é correto afirmar que:",
+          "alternativas": [
+            "Carla e Maria são excluídas da cobertura do Regime Geral de Previdência Social, haja vista a ausência de relação de emprego na forma celetista, o que representa requisito para a filiação previdenciária;",
+            "Maria é qualificada como empregadora doméstica e, nessa condição, é segurada obrigatória do Regime Geral de Previdência Social, devendo verter as contribuições devidas na forma da lei;",
+            "Carla é segurada empregada do Regime Geral de Previdência Social, fazendo jus a prestações previdenciárias diversas, incluindo aposentadoria aos 55 anos de idade ou por tempo de contribuição, após 25 anos;",
+            "Maria, na condição de empresária, é segurada obrigatória do Regime Geral de Previdência Social, sendo também qualificada como empregadora, assumindo ambas as responsabilidades legais;",
+            "Carla é qualificada como segurada empregada doméstica, sendo irrelevante o fato de sua empregadora não demandar sua mão de obra para a atividade profissional de moda."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 75,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Mário é empregado celetista de indústria localizada em sua cidade. Ele está rigorosamente em dia com seus recolhimentos previdenciários. Em virtude de um acidente enquanto desempenha suas atividades profissionais, Mário fica afastado do trabalho por alguns meses , recebendo o benefício previdenciário cabível à situação. Após ser considerado apto para o retorno ao trabalho, entende que tem direito a nova prestação previdenciária, haja vista a sequela definitiva resultante do acidente, a qual, na sua perspectiva, im plica redução da capacidade laborativa. Nesse cenário, o benefício previdenciário a que Mário acredita fazer jus é:",
+          "alternativas": [
+            "auxílio-acidente;",
+            "auxílio-doença acidentário;",
+            "benefício por incapacidade temporária;",
+            "aposentadoria por invalidez acidentária;",
+            "benefício por incapacidade permanente."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 76,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Amanda, trabalhadora autônoma, sofre acidente durante o final de semana, sem qualquer conexão com sua atividade remunerada. Em vi rtude do infortúnio, afasta -se de suas atividades profissionais, recebendo o b enefício previdenciário devido pelo INSS. Durante o recebimento da prestação previdenciária temporária, Amanda é convocada pelo INSS para realizar reabilitação profissional, pois o INSS entende que Amanda é insuscetível de recuperação para sua atividade habitual. A conduta do INSS é:",
+          "alternativas": [
+            "incorreta, pois a reabilitação profissional é serviço previdenciário limitado a segurados empregados, avulsos e especiais, não sendo extensível a contribuintes individuais, como é o caso de Amanda;",
+            "correta, pois Amanda, se não devidamente reabilitada dentro de dois anos, será automaticamente aposentada por incapacidade permanente, recebendo proventos integrais pelo INSS;",
+            "incorreta, pois Amanda tem a prerrogativa de recusar a reabilitação profissional, assim como tra nsfusão de sangue e intervenção cirúrgica, em prestígio ao princípio da dignidade humana;",
+            "correta, pois a reabilitação profissional é obrigatória em situações como a exposta, de forma a viabilizar o retorno da segurada ao mercado de trabalho, ainda que em atividade diversa;",
+            "incorreta, pois, se Amanda é insuscetível de recuperação para sua atividade profissional, deve ser aposentada por invalidez, nos termos da lei, devendo se afastar de toda e qualquer atividade remunerada."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 77,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Carlos, servidor público federal, vinculado ao regime próprio de previdência da União Federal, toma posse em janeiro de 2025, após aprovação regular em concurso público. Ao ingressar na carreira pública, ele contava com 30 anos de idade. Antes da função pública, C arlos foi médico autônomo, durante exatos dez anos. Diante da situação narrada, é correto afirmar que Carlos:",
+          "alternativas": [
+            "perde, ao abandonar sua atividade privada, o tempo de contribuição anteriormente realizado junto ao Regime Geral de Previdência Social;",
+            "poderá, em sua nova atividade, em função pública, aposentar-se após 35 anos de contribuição, desde que tenha, também, a idade mínima de 55 anos;",
+            "poderá manter seus recolhimentos ao Regime Geral de Previdência Social, na condição de segurado facultativo, de forma a ter a possibilidade de dupla aposentadoria;",
+            "receberá, caso sofra acidente durante a função pública, que gere incapacidade temporária, a prestação cabível por meio do regime previdenciário dos servidores federais;",
+            "poderá aposentar -se a os 65 anos de idade, salvo se comprovada atividade insalubre, situação na qual há a possibilidade de aposentadoria antecipada."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 78,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Humberto, empregado celetista em indústria de sua região, desenvolve suas atividades em ambiente de trabalho reconhecidamente insalubre, conforme documentos laborais respectivos. Após alguns anos de atividade, Humberto adoece, sendo necessário seu afastamento temporário do trabalho, com o respectivo benefício previdenciário. Nessa situação, é correto afirmar que o afastamento de Humberto:",
+          "alternativas": [
+            "é decorrente dos agentes nocivos que existiam no meio ambiente do trabalho, sendo devido o auxílio -acidente ao segurado durante o período de incapacidade;",
+            "poderá ser qualificado como acidente do trabalho, desde que evidenciada a exposiç ão ao agente nocivo no meio ambiente do trabalho como causa determinante para a incapacidade;",
+            "é de responsabilidade exclusiva do empregador, o qual deverá manter o salário de Humberto durante todo o tempo de afastamento, sem prejuízo de eventuais indenizações;",
+            "somente será qualificado como acidente do trabalho na hipótese de aplicação do nexo técnico epidemiológico previdenciário (NTEP), realizado pela perícia médica federal;",
+            "é limitado a 36 meses, período que, uma vez ultrapassado, propicia aposentadoria por incapacidade permanente, além de indenização trabalhista. Eixo Temático 5 - Saúde e Segurança do Trabalho"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 79,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "A atividade de garimpo ilegal, principalmente na Região Norte do Brasil, implica atividades que promovem danos sérios para a saúde humana e para o meio ambiente tanto para os próprios garimpeiros como para a população da região contaminada, com destaque para a população ribeirinha. Essa atividade econômica irregular pode implicar:",
+          "alternativas": [
+            "desmatamento e intoxicação por chumbo metálico nos trabalhadores;",
+            "intoxicação por mercúrio metálico nos trabalhadores e por metil-mercúrio nas populações próximas;",
+            "desmatamento e intoxicação po r mercúrio metálico nas populações próximas;",
+            "intoxicação por mercúrio metálico nas populações próximas e por metil-mercúrio nos trabalhadores;",
+            "desmatamento e intoxicação por metil -mercúrio nos trabalhadores."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 80,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Um trabalhador servidor público, com cargo de motorista numa universidade federal, sofre um acidente de trabalho, deixando -o com cegueira total em ambos os olhos, sem outras sequelas graves. Nesse caso, após a alta hospitalar, o servidor deverá proceder aos seguintes processos:",
+          "alternativas": [
+            "readaptação e reintegração;",
+            "reabilitação física e reversão;",
+            "reabilitação física e readaptação;",
+            "reabilitação física e reabilitação profissional;",
+            "reabilitação física, reabilitação profissional e reintegração."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 81,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Uma trabalhadora de uma joalheria, com diagnóstico anterior de cardiopatia, sofre enfarto do miocárdio ao vivenciar assalto à mão armada no seu local de trabalho, o que ensejou o seu afastamento por 60 dias, retornando às mesmas funções após ter passado pela perícia médica previdenciária oficial do INSS. Nesse caso, a trabalhadora faz jus ao:",
+          "alternativas": [
+            "auxílio-doença e ao auxílio-acidente;",
+            "benefício por incapacidade temporária acidentário;",
+            "benefício por incapacidade temporária previdenciário;",
+            "benefício por incapacidade permanente previdenciário;",
+            "auxílio-doença e ao benefício por incapacidade permanente previdenciário."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 82,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Uma professora de ensino médio, com histórico de conflitos com seus alunos, começou a apresentar sinais de desesperança, baixo controle emocional, condutas de fuga e evasão, frieza, insensibilidade, dificuldade de concentração, distúrbios gastrointestinais, cefaleia. Ao procurar um médico psiquiatra, ele lhe receitou uma medicação ansiolítica e a afastou por 30 dias. Considerando o exposto, esse quadro pode estar relacionado com o seguinte transtorno mental:",
+          "alternativas": [
+            "estado de stress pós-traumático;",
+            "síndrome do esgotamento profissional;",
+            "transtorno psicótico relacionado ao trabalho;",
+            "transtorno depressivo relacionado ao trabalho;",
+            "ansiedade generalizada relacionada ao trabalho."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 83,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Uma trabalhadora de um frigorífico de abate de frangos, exposta a movimentos repetitivos com membros superiores no trabalho, adquiriu síndrome do túnel do carpo, não podendo mais retornar às funções exigidas pelo seu trabalho. A trabalhadora solicitou abertura de Comunicação de Acidente de Trabalho (CAT) e foi demitida p ela empresa, que justificou que a doença não foi adquirida no ambiente de trabalho. Considerando o exposto, é correto afirmar que a doença e a situação atual do quadro clínico deverão ser caracterizadas por meio de relatório médico e eventuais exames subs idiários, além de ser necessário que:",
+          "alternativas": [
+            "essa documentação seja encaminhada para o INSS, para a emissão da CAT e avaliação pericial para confirmação do nexo causal;",
+            "essa documentação seja encaminhada para o INSS, com fotocópia da Carteira de Trabalho, para a emissão da CAT e avaliação pericial para confirmação do nexo causal;",
+            "o médico assistente, ou o sindicato, ou a própria trabalhadora emita a CAT, e que essa documentação seja encaminhada para o INSS para confirmação do nexo causal;",
+            "exclusivamente o médico assistente ou outra autoridade pública faça a emissão da CAT, e que essa documentação seja encaminhada para o INSS para confirmação do nexo causal;",
+            "o próprio médico assistente da paciente emita a CAT, e que essa documentação seja encami nhada para o INSS, para avaliação pericial para confirmação do nexo causal."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 84,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Um gestor municipal de saúde, ao implementar as ações da Política Nacional de Saúde do Trabalhador e da Trabalhadora, deve obedecer aos princípios do SUS. Nesse sentido, a parcela da população trabalhadora que deve ser priorizada é a seguinte:",
+          "alternativas": [
+            "aqueles com maior risco de acidentes e doenças relacionadas ao trabalho;",
+            "aqueles inseridos em atividades ou em relações informais e precárias de trabalho;",
+            "aqueles de categorias profissionais com maior incidência de acidentes de trabalho graves e fatais;",
+            "aqueles de categorias profissionais com maior taxa de mortalidade específica por acidentes de trabalho;",
+            "aqueles de categorias profissionais com maio r incidência de acidentes de trabalho graves e fatais e maior prevalência de doenças relacionadas ao trabalho."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 85,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Um trabalhador de escritório, ao ir ao banco a serviço da empresa para realizar um depósito bancário, no final do expediente, já terminada sua jornada, participa de uma discussão na fila do banco e é agredido, resultando em ferimentos corpóreos. Em relação ao caso, é correto afirmar que:",
+          "alternativas": [
+            "é considerado um acidente de trabalho e deve ser aberta a CAT;",
+            "não é considerado acidente de trabal ho por ter ocorrido fora da empresa;",
+            "poderá ser considerado acidente de trabalho após perícia médica no INSS;",
+            "não é considerado acidente de trabalho por se tratar de desentendimento pessoal;",
+            "não é considerado acidente de trabalho por ter ocorri do fora da empresa e fora do horário de trabalho."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 86,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Observe o seguinte depoimento de um jornal local: “Durante sete anos, trabalhei em uma clínica privada da cidade. Os últimos três anos foram horríveis; inclusive, já não queria ir trabalhar. Me levanta r ao acordar era um martírio. Fui vítima de gritos e insultos por parte de minha chefe imediata. Meus companheiros também passavam frequentemente por isso. Por exemplo, se ela (a chefe) tinha qualquer indisposição com alguém de sua equipe, ela convocava um a reunião com todos, mas não chamava a pessoa com quem teve a discórdia. E nessa reunião, falava mal da pessoa, pressionava todos os companheiros para que a deixássemos à margem. E, se alguém negava, era uma perseguição indireta eterna. Era comum também qu e pedisse para fazermos horas extras na última hora, e havia muito maltrato quando alguém se negava. Muitas vezes passei a noite trabalhando para evitar situações embaraçosas. Ao solicitar ao departamento de Recursos Humanos para mudar de área, a chefe do departamento pediu que eu aguardasse, porque certamente era passageira a situação”. A responsabilidade pelo assédio cabe:",
+          "alternativas": [
+            "à chefe imediata (como agressora ativa), apenas;",
+            "à chefe imediata (como agressora ativa) e à chefe de Recursos Humanos (como sustento);",
+            "à chefe imediata (como agressora ativa) e aos companheiros da vítima (que sustentam a situação);",
+            "à chefe imediata (como agressora ativa), aos companheiros da vítima (como apoiadores) e à chefe de Recursos Humanos (como sustento);",
+            "à chefe imediata (como agressora ativa), aos companheiros da vítima (como seguidores) e à chefe de Recursos Humanos (como sustento)."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 87,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "Para a psicodinâmica do trabalho, a saúde mental no trabalho está diretamente ligada à maneira como os t rabalhadores lidam com suas atividades laborais; em consequência, a organização do trabalho é uma das preocupações centrais. Em uma instituição de saúde, o responsável pela saúde e segurança no trabalho, recém-empossado, lê, com preocupação, o relatório de um levantamento feito no último ano que destaca os seguintes aspectos: • alta sensibilidade nas questões pessoais e relacionais entre os colegas de trabalho, gerando um ambiente tenso; • a distribuição de atividades e a infraestrutura disponível são precárias e afetam o dia a dia do trabalhador; • as relações estão afetadas pelo contexto político, econômico e social; • há uma lógica de produtividade que tem exigido dos trabalhadores resultados acima das metas planificadas. Antes de preparar uma proposta de preven ção de adoecimento na instituição, o responsável decide, corretamente, priorizar os seguintes aspectos da dinâmica psicossocial:",
+          "alternativas": [
+            "relações de trabalho; divisão do trabalho; tipo de contrato; rotação de postos;",
+            "trabalho prescrito e trabalho real; tip o de contrato; responsabilidades; rotação de postos;",
+            "relações de trabalho; divisão do trabalho; conteúdo da tarefa; responsabilidades;",
+            "trabalho prescrito e trabalho real; tipo de contrato; modalidades de comando; divisão do trabalho;",
+            "divisão do trabalho; sistema hierárquico e modalidades de comando; relações de trabalho; tipo de contrato."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 88,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "O responsável por promover a saúde e segurança do trabalho em uma instituição pública decide avaliar os fatores de risco na saúde, aplicando um questionári o a 35 funcionários que trabalham diretamente com o público e usam computador. Na análise dos resultados, as dimensões que se destacaram como fatores de risco foram: a demanda mental, a exigência emocional e a pressão de tempo. Possivelmente esse resultad o se devia ao fato de que os funcionários tinham uma meta de atendimento e eram avaliados pela eficiência e qualidade de atendimento. Com menor relevância, como esperado, estava a demanda física. Adicionalmente, observou -se que a carga mental dos funcionários com tempo de serviço de até 12 meses era bem menor do que a carga mental de funcionários com vínculo mais antigo. Não houve diferença significativa quando comparados os resultados de homens e mulheres. Acrescenta -se que, nos últimos meses, o absenteísmo aumentou, assim como as licenças por motivo de saúde. Com esse resultado, entendendo que a gestão da carga mental é um processo que envolve diversas ações, mas que o cenário requer medidas urgentes, o responsável decide, corretamente:",
+          "alternativas": [
+            "reduzir de imediato a carga horária de trabalho de todos os funcionários, dar uma bonificação e contratar uma entidade externa para elaborar um diagnóstico neutro e corroborar os resultados;",
+            "reduzir de imediato a carga horária de trabalho dos funcionários mais antigos e instituir uma bonificação para deixá-los satisfeitos;",
+            "reduzir de imedia to a carga horária de trabalho de todos os funcionários e contratar uma entidade externa para elaborar um diagnóstico neutro e corroborar os resultados;",
+            "reduzir de imediato a carga horária de trabalho dos funcionários com vínculo mais recente e desenhar um programa participativo de promoção de saúde mental e prevenção de desgaste emocional;",
+            "reduzir a carga de trabalho de todos os funcionários e desenhar um programa participativo de promoção de saúde mental e prevenção de desgaste emocional."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 89,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Durante a movimentação de um arquivo pesado, um trabalhador lesionou a coluna e precisou ser afastado por dois dias. Ao ser questionado, o gestor da empresa alegou que o afastamento foi curto e que, por isso, não emitiu a CAT. Considerando esse contexto, o correto seria a empresa:",
+          "alternativas": [
+            "emitir a CAT apenas se o afastamento ultrapassar 15 dias;",
+            "comunicar o acidente ao sindicato e aguardar orientação;",
+            "emitir a CAT até o primeiro dia útil após a ocorrência do acidente;",
+            "registrar internamente o fato e a rquivar o prontuário do atendimento;",
+            "encaminhar o trabalhador ao INSS somente se houver agravamento do quadro."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 90,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Em uma empresa de médio porte, foi realizada uma avaliação das condições ambientais de trabalho. Identificaram -se exposições a agentes qu ímicos, mas o empregador não tomou nenhuma providência imediata. Com base nesse cenário, a medida mais adequada, conforme o Programa de Gerenciamento de Riscos (PGR), é:",
+          "alternativas": [
+            "aguardar a próxima auditoria do Ministério do Trabalho;",
+            "comunicar a exposição aos órgãos de vigilância sanitária;",
+            "planejar ações de controle e registrar as medidas no inventário de riscos;",
+            "solicitar que os empregados usem protetores respiratórios por iniciativa própria;",
+            "transferir os trabalhadores expostos para outro setor até o problema ser resolvido. Concurso Público Nacional Unificado - 2ª Edição FGV Conhecimento Bloco Temático 1"
+          ],
+          "correta": "C"
+        }
+      ]
+    }
+  ]
+}
