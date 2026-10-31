@@ -1,0 +1,1343 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "uff-coremu-enfermagem-saude-coletiva-2024-2026-lote014",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "uff-coremu2026-enfermagem-saude-coletiva",
+      "banca": "COSEAC/UFF",
+      "ano": 2026,
+      "orgao": "Universidade Federal Fluminense (COREMU)",
+      "cargo": "Enfermagem em Saúde Coletiva",
+      "cadernoUrl": "https://portal.coseac.uff.br/wp-content/uploads/2026/01/UFF-COREMU2026-PROVA-RESIDENCIA_EM_ENFERMAGEM_EM_SAUDE_COLETIVA.pdf",
+      "gabaritoUrl": "https://portal.coseac.uff.br/wp-content/uploads/2026/01/UFF-COREMU2026-GABARITOAPOSRECURSOS-RESIDENCIA-ENFERMAGEM_SAUDE_COLETIVA.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "A participação complementar do setor privado no Sistema Único de Saúde (SUS), prevista na Lei no 8.080/1990, ocorre quando o poder público recorre à iniciativa privada para garantir a assistência à saúde da população. Sobre esse instituto, é correto afirmar que a participação complementar",
+          "alternativas": [
+            "ocorre exclusivamente para consultas eletivas, desde que aprovadas pelo Conselho Municipal de Saúde.",
+            "é permitida apenas para serviços de média e alta complexidade, uma vez que a Atenção Primária é de responsabilidade exclusiva do Estado.",
+            "implica terceirização da gestão dos serviços, transferindo ao prestador privado a coordenação das políticas de saúde em âmbito municipal.",
+            "permite a contratação de serviços privados quando houver insuficiência de oferta pública, devendo-se priorizar as entidades filantrópicas e sem fins lucrativos, com contratos sujeitos à regulação, controle, avaliação e fiscalização pelo gestor do SUS."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Enfermagem",
+          "assunto": "Telessaúde no SUS",
+          "enunciado": "Com base no Título III -A da Lei no 8.080/1990 (incluído pela Lei no 14.510/2022), que regulamenta a prestação de serviços por telessaúde no âmbito do SUS, assinale a opção correta.",
+          "alternativas": [
+            "A telessaúde é permitida exclusivamente aos profissionais médicos, não sendo autorizada às demais categorias da saúde.",
+            "A telessaúde exige consentimento livre e esclarecido, assegura ao usuário o direito de recusar essa modalidade com garantia de atendimento presencial, e deve observar princípios como universalidade, integralidade, responsabilidade profissio- nal, confidencialidade e proteção de dados.",
+            "A telessaúde só pode ser utilizada após uma consulta presencial inicial, sendo vedada sua aplicação em ações de promoção ou prevenção à saúde.",
+            "Os atos realizados por telessaúde têm validade apenas no município de origem, exigindo registro secundário para atua - ção em outras jurisdições."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Com base na Política Nacional de Atenção Básica (Portaria n o 2.436/2017), assinale a opção correta acerca da composição e características da Equipe de Saúde da Família (eSF).",
+          "alternativas": [
+            "A composição mínima da eSF inclui apenas médico e enfermeiro, sendo facultativa a presença de Agentes Comunitários de Saúde.",
+            "Os Agentes Comunitários de Saúde podem ser substituídos por profissionais administrativos ou de vigilância ambien - tal.",
+            "A eSF é estratégia prioritária de reorganização da Atenção Básica, com foco territorial, vínculo, responsabilização e trabalho multiprofissional, composta, no mínimo, por médico, enfermeiro, auxiliar ou técnico de enfermagem e Agentes Comunitários de Saúde.",
+            "Os profissionais da eSF podem estar vinculados simultaneamente a mais de uma equipe, desde que cumpram carga horária mínima de 20 horas semanais."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.142/1990",
+          "enunciado": "De acordo com a Lei no 8.142/1990, que dispõe sobre a participação da comunidade na gestão do SUS e sobre as transferências intergovernamentais de recursos financeiros, marque a opção correta.",
+          "alternativas": [
+            "O Conselho de Saúde é órgão permanente e deliberativo, composto por representantes do governo, trabalhado - res da saúde, prestadores de serviços e usuários, atuando na formulação de estratégias e no controle da execução das políticas de saúde, inclusive nos aspectos econômicos e financeiros.",
+            "A Conferência de Saúde é permanente e deliberativa, composta apenas por representantes do governo e trabalha - dores da saúde.",
+            "A representação dos usuários deve ser inferior à soma dos demais segmentos, para garantir equilíbrio técnico -adminis- trativo.",
+            "Os recursos do Fundo Nacional de Saúde só podem ser transferidos mediante autorização específica do Ministério da Saúde, não havendo repasses automá - ticos. 4"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "Considerando os princípios e diretrizes da vigilância, monitoramento e avaliação no âmbito das políticas de controle do câncer, analise as seguintes afirmativas: I A vigilância do câncer deve incorporar dados epidemiológicos, assistenciais, demográficos e socioeconômicos, produ - zidos por diferentes sistemas de informação, registros e inquéritos, subsi - diando o planejamento e monitoramento das ações de controle. II O monitoramento de tempo de espera para tratamento, acessibilidade aos serviços e satisfação do usuário é uma diretriz explícita, pois permite avaliar qualidade e desempenho da atenção. III A realização de inquéritos populacionais não compõe as diretrizes da política, pois as informações devem ser obtidas exclusivamente por registros hospitalares e sistemas oficiais. IV A produção e divulgação permanente de informações qualificadas são essenciais para orientar o planejamento e a prevenção do câncer. Dessas afirmativas, estão corretas",
+          "alternativas": [
+            "apenas I e II.",
+            "apenas I, II e IV.",
+            "apenas II e III.",
+            "todas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "A Saúde Coletiva é caracterizada como um espaço interdisciplinar que articula diferentes racionalidades científicas e práticas sociais. Nesse contexto, a conformação da Saúde Coletiva envolve dimensões que estruturam tanto a produção de conhecimento quanto a atuação nos serviços. Tendo em conta essas informações, a ssinale a opção que representa corretamente essas dimensões, considerando sua função e inter-relação.",
+          "alternativas": [
+            "Dimensão conceitual, ligada à construção epistemológica; d imensão político - institucional, relacionada às políticas públicas e direitos sociais; dimensão técnico-operacional, que orienta práticas, organização dos serviços e tecnologias em saúde.",
+            "Dimensão sanitarista, voltada às ações de vigilância; dimensão assis tencial, centrada na clínica; dimensão organiza - cional, relacionada à gestão dos serviços.",
+            "Dimensão biomédica, responsável pela investigação etiológica; dimensão sanita- ria, responsável pelo controle de doenças; dimensão social, voltada às desigualdades.",
+            "Dimensão normativa, baseada nas legislações de saúde; dimensão clínica, relacionada ao cuidado individual; dimensão educativa, centrada em ações de promoção da saúde."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "A concepção de determinação social do processo saúde-doença, discutida por Medronho (2025) e prevista na Lei no 8080/1990, supera a visão biologicista ao considerar que a saúde é um fenômeno produzido nas relações sociais, econômicas e ambientais. Assinale a opção que expressa corretamente essa concepção.",
+          "alternativas": [
+            "A saúde é determinada principalmente por fatores de risco comportamentais e escolhas individuais, como alimentação inadequada, sedentarismo e tabagismo.",
+            "A ocorrência de doenças depende predominantemente da presença de microrganismos patogênicos, sendo explicada por modelos de causalidade unicausal.",
+            "A saúde -doença é definida como ausência de enfermidades segundo os critérios clínicos, sendo fundamental - mente uma questão de diagnóstico individual.",
+            "A saúde de indivíduos e coletividades resulta das condições de vida, incluindo trabalho, renda, educação, moradia, alimentação, ambiente e acesso aos serviços, os quais condicionam e determinam a distribuição dos agravos na população. 5"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Os modelos de atenção à saúde refletem diferentes concepções de saúde, formas de organização dos serviços e práticas profissionais. O Sistema Único de Saúde (SUS), ao adotar a Estratégia Saúde da Família (ESF), propõe uma mudança do modelo assistencial centrado no hospital e no tratamento da doença. Nesse contexto, a opção que mais bem caracteriza o modelo de atenção proposto pelo SUS apresenta a seguinte definição:",
+          "alternativas": [
+            "modelo organizacional centrado em especialistas, baseado na demanda espontânea, com foco no atendimento curativo, hospitalar e de alta complexi - dade.",
+            "abordagem clínica individual, com ações fragmentadas e voltadas à resolução imediata de agravos, fortalecendo a verticalização da assistência.",
+            "modelo de atenção orientado pela promoção da saúde, prevenção de agravos, abordagem familiar, trabalho territorializado, vínculo, responsabiliza - ção sanitária e atuação multiprofissional, priorizando a Atenção Primária como coordenadora do cuidado.",
+            "modelo tradicional sanitarista que prioriza campanhas epidemiológicas e ações pontuais de vigilância, sem articulação com práticas assistenciais."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "Os níveis de prevenção em saúde orientam as práticas de cuidado, promovendo ações que vão desde a promoção da saúde até a recuperação e reabilitação. Considerando a atuação do enfermeiro na Atenção Primária à Saúde, identifique a opção que representa corretamente uma ação de prevenção primária.",
+          "alternativas": [
+            "Campanha comunitária de vacinação contra HPV em adolescentes, realizada em articulação com escolas e equipes da APS.",
+            "Consulta de enfermagem para avaliação de sequelas motoras após acidente vascular cerebral, com encaminhamento para reabilitação.",
+            "Reabilitação de paciente após acidente vascular cerebral.",
+            "Tratamento medicamentoso de pacientes hipertensos para controle dos níveis pressóricos e prevenção de complica - ções."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Política Nacional da Atenção Básica (PNAB), instituída pela Portaria 2.436/2017, define a Atenção Primária à Saúde (APS) como o nível de atenção responsável pela coordenação do cuidado e ordenação das Redes de Atenção à Saúde (RAS). Com base nessa normativa, assinale a opção que apresenta corretamente os atributos e diretrizes da APS no SUS.",
+          "alternativas": [
+            "A APS tem como foco principal o atendimento da demanda espontânea, priorizando condições agudas e situa - ções clínicas de baixa complexidade, sem articulação com outros níveis de atenção.",
+            "A APS deve restringir -se a ações programáticas e epidemiológicas, com predominância de campanhas, sem vínculo com usuários e famílias.",
+            "A APS é organizada prioritariamente por programas verticalizados, com ações restritas à vigilância epidemiológica e imunização, sem envolver equipe multiprofissional.",
+            "A APS deve ser baseada nos atributos de acessibilidade, longitudinalidade, inte - gralidade e coordenação do cuidado, articulando ações de promoção, prevenção, tratamento e reabilitação, com atuação multiprofissional e respon - sabilidade sanitária sobre território definido."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Educação Permanente em Saúde",
+          "enunciado": "A Política Nacional de Educação Permanente em Saúde (PNEPS) estabelece que a formação em saúde deve estar articulada às necessidades reais dos serviços e das populações, promovendo processos educa - tivos no cotidiano do trabalho. Nesse contexto, a Educação Permanente em Saúde",
+          "alternativas": [
+            "consiste na oferta de cursos pontuais e treinamentos breves desvinculados da realidade local, com foco normativo e transmissivo.",
+            "baseia-se na problematização do processo de trabalho, na aprendizagem significativa e na construção coletiva do conhecimento, considerando os sujeitos, os territórios e as necessidades de saúde da população.",
+            "corresponde à educação continuada oferecida por instituições de ensino superior, realizada exclusivamente em ambientes acadêmicos formais.",
+            "prioriza a atualização técnica individual do profissional, sendo desvinculada da gestão, do planejamento e das práticas interdisciplinares no SUS."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Política Nacional de Promoção da Saúde",
+          "enunciado": "A Política Nacional de Promoção da Saúde (PNPS), revisada em 2018, reafirma a promoção da saúde como estratégia intersetorial para melhoria da qualidade de vida e redução de vulnerabilidades. Tendo em vista o contexto da Atenção Primária, assinale a opção que apresenta corretamente um de seus princípios e diretrizes.",
+          "alternativas": [
+            "A promoção da saúde concentra -se em ações educativas individuais, com foco na mudança de comportamento dos usuários, sem articulação com políticas sociais.",
+            "As ações de promoção da saúde restringem-se a campanhas sazonais, com caráter informativo e alcance comunitário limitado.",
+            "A promoção da saúde deve considerar os determinantes sociais, a intersetoriali - dade, a participação social, a equidade e a articulação de ações nos territórios, fortalecendo práticas de autocuidado e ambientes saudáveis.",
+            "A PNPS define a promoção da saúde como responsabilidade exclusiva das equipes de vigilância em saúde, não envolvendo a rede de Atenção Primária."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "O Plano Nacional de Saúde (PNS) 2024–2027 é o principal instrumento de planejamento estratégico do SUS em âmbito federal, constituindo -se como referência para os planos estaduais e municipais, especial - mente no que se refere à regionalização, à redução de desigualdades e ao monitoramento de resultados. Nesse contexto, assinale a opção que expressa corretamente a finalidade e o papel do PNS:",
+          "alternativas": [
+            "Restringe-se à projeção orçamentária quadrienal federal, não sendo integrado aos instrumentos de planejamento estaduais e municipais, que possuem autonomia plena sobre suas prioridades.",
+            "É coordenado pelo Ministério da Saúde, com participação técnica de estados e municípios, podendo ser utilizado como instrumento consultivo, sem caráter vincu- lante para os planos estaduais e municipais.",
+            "Prioriza metas nacionais, especialmente aquelas associadas a programas estraté- gicos e indicadores epidemiológicos, mas sua aplicação depende da capacidade local, não exigindo necessariamente pactuação regional ou articulação com instrumentos de monitoramento e participação social.",
+            "Orienta prioridades, metas e indicadores nacionais com base em necessidades de saúde, determinantes sociais, desigualda- des regionais e participação social, sendo referência obrigatória para os planos estaduais e municipais e para a avaliação da gestão do SUS."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Financiamento do SUS e LC 141/2012",
+          "enunciado": "O financiamento no Sistema Único de Saúde (SUS) compõe uma dimensão estratégica da gestão, pois influencia a implementação de políticas, a regionalização e a capacidade dos municípios em garantir integralidade, equidade e qualidade das ações de saúde. Nesse contexto, assinale a opção que representa corretamente um pr incípio ou diretriz relacionada ao financiamento do SUS.",
+          "alternativas": [
+            "A responsabilidade pelo financiamento do SUS é prioritariamente municipal, já que os municípios executam as ações e possuem autonomia administrativa para alocação de recursos conforme suas prioridades.",
+            "Os recursos federais destinados ao SUS são definidos exclusivamente pelo Ministério da Saúde, de forma centralizada, sem articulação com estados e municípios no âmbito do planejamento local e regional.",
+            "O financiamento do SUS tem como foco principal os serviços hospitalares e de alta complexidade, visto que os serviços de atenção básica e vigilância em saúde são financiados apenas com recursos estaduais.",
+            "O financiamento do SUS é tripartite, com responsabilidades compartilhadas entre União, estados e municípios, sendo pactuado nas instâncias interfederativas, vinculado aos instrumentos de planeja - mento e condicionado às necessidades epidemiológicas e demográficas dos territórios. 7"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "A regionalização é um dos eixos estratégicos do Sistema Único de Saúde (SUS), pois permite organizar redes de atenção com base nas necessidades dos territórios, garantindo acesso, qualidade e racionalização de recursos. Nesse contexto, as instâncias de pactuação interfederativa exercem papel fundamental na coordenação e gestão compar- tilhada. Assinale a opção que apresenta corretamente a função dessas instâncias.",
+          "alternativas": [
+            "As comissões interfederativas têm caráter consultivo, sem poder de pactuação, atuando apenas como espaços de disseminação de normas emitidas pelo Ministério da Saúde.",
+            "As instâncias interfederativas (CIT, CIB e CIR) são espaços de negociação entre os entes federativos que pactuam diretrizes, metas, responsabilidades e critérios de financiamento, articulando planejamento, regionalização e monitoramento das ações de saúde.",
+            "As instâncias interfederativas são respon- sáveis exclusivamente pela regulação da assistência hospitalar e distribuição de recursos de alta complexidade.",
+            "As comissões interfederativas concentram- se no apoio técnico aos municípios, não possuindo competência para pactuar metas, elaborar planos regionais ou propor diretrizes operacionais para o SUS."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Controle Social no SUS",
+          "enunciado": "O controle social no Sistema Único de Saúde (SUS) constitui um princípio organizativo e político essencial para a gestão participativa do sistema, sendo operaciona - lizado por meio dos Conselhos e Conferências de Saúde. Considerando sua natureza deliberativa, sua relação com o planejamento em saúde e seu papel na fiscalização das ações públicas, indique a opção correta:",
+          "alternativas": [
+            "Os Conselhos de Saúde têm caráter consultivo, participando de reuniões periódicas, sem competência para deliberar sobre planos de saúde, contratos, prestação de contas ou definição de prioridades orçamentárias.",
+            "As Conferências de Saúde são etapas preparatórias para atualização dos planos estaduais e municipais, porém não possuem função de avaliação, controle ou monitoramento das ações executadas.",
+            "A participação social no SUS ocorre predominantemente nas instâncias administrativas dos serviços e não se relaciona diretamente aos instrumentos oficiais de planejamento, como o Plano de Saúde.",
+            "Os Conselhos e Conferências de Saúde são espaços deliberativos e permanentes de participação social, responsáveis por influenciar diretamente o planejamento, avaliar metas e indicadores, fiscalizar a aplicação dos recursos e monitorar a execução das políti cas de saúde nos territórios."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Portaria 635/2023 instituiu incentivo financeiro federal para implantação, custeio e desempenho das modalidades de equipes multiprofissionais na Atenção Primária à Saúde, ampliando o escopo assistencial e fortalecendo a coordenação do cuidado. Considerando os objetivos dessa portaria e sua interface com o trabalho do enfermeiro, indique a opção correta:",
+          "alternativas": [
+            "Propõe a ampliação de equipes multiprofissionais apenas em regiões metropolitanas, priorizando ações espe - cializadas e desvinculadas da Estratégia Saúde da Família.",
+            "Restringe o papel das equipes multiprofissionais ao suporte adminis - trativo, sem atuação direta no cuidado clínico ou participação na construção de projetos terapêuticos singulares.",
+            "Amplia a composição das equipes multiprofissionais na APS, fortalece a atuação territorial, o cuidado longitudinal, a gestão compartilhada dos casos e o apoio matricial, permitindo maior reso - lutividade e integração entre vigilância, promoção e cuidado clínico.",
+            "Define as equipes multiprofissionais como estruturas temporárias, vinculadas exclusivamente a programas federais, sem se incorporar aos instrumentos de planejamento e financiamento da APS."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Na Estratégia Saúde da Família, o enfermeiro tem papel central na articulação das dimensões clínica, educativa, gerencial e de vigilância, orientando a organização do cuidado territorializado. Considerando a Política Nacional de Atenção Básica (Portaria 2.436/2017), assinale a opção que exp ressa corretamente essa atuação.",
+          "alternativas": [
+            "Desenvolver ações clínicas por meio da consulta de enfermagem e prescrição conforme protocolos; coordenar a equipe multiprofissional; realizar planejamento territorial; monitorar indicadores e vigilância epidemiológica; construir proje- tos terapêuticos singulares; exercer responsabilidade sanitária sobre indiví - duos, famílias e coletividade.",
+            "Supervisionar agentes comunitários de saúde, realizar procedimentos de enfer - magem e acompanhar gestantes e crian- ças, sendo essas as principais atribui - ções clínicas e gerenciais do enfermeiro na APS.",
+            "Conduzir atividades predominantemente educativas, voltadas à promoção da saúde e prevenção de doenças, sendo o cuidado clínico e o planejamento territorial de responsabilidade do médico e do gestor municipal.",
+            "Atuar como apoio técnico -administrativo, auxiliando no agendamento dos usuários, organização de prontuários e encaminha- mento para outros níveis de atenção, sem autonomia clínica ou responsabilidade sanitária sobre o território."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Saúde Mental",
+          "enunciado": "O Projeto Terapêutico Singular (PTS) é uma ferramenta que visa integrar diferentes saberes e práticas no cuidado, especialmente para casos complexos, articulando clínica ampliada, responsabilização e trabalho em equipe. Sobre a aplicação do PTS no âmbito da Atenção Primária à Saúde, assinale a opção correta.",
+          "alternativas": [
+            "Corresponde a um plano clínico elaborado individualmente pelo enfermeiro ou pelo médico, com foco no diagnóstico e no tratamento medicamentoso de condições crônicas.",
+            "Envolve a construção coletiva de propostas de cuidado para usuários ou famílias com demandas complexas, articulando equipe multiprofissional, clínica ampliada, vínculo, corresponsabilização e participação ativa do usuário no plano terapêutico.",
+            "É uma ferramenta exclusiva da saúde mental e não se aplica ao acompanhamento de condições crônicas, agravos sociais ou situações de vulnerabilidade familiar na Atenção Primária.",
+            "Configura-se como protocolo padronizado utilizado para organizar a lista de encaminhamentos e registros clínicos, sem interferência na gestão do cuidado ou participação dos usuários."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Redes de Atenção à Saúde",
+          "enunciado": "As Linhas de Cuidado estruturam-se como arranjos organizativos que orientam a atenção integral em saúde, articulando ações de promoção, prevenção, tratamento, reabilitação e vigilância ao longo do ciclo vital e da trajetória do usuário no sistema. Consider ando-se esse conceito, é correto afirmar que as Linhas de Cuidado",
+          "alternativas": [
+            "são conjuntos de protocolos clínicos padronizados, aplicados exclusivamente nos serviços de média e alta complexidade, sem articulação com a Atenção Primária nem interface intersetorial.",
+            "têm como objetivo principal ordenar a oferta de serviços especializados, priorizando os atendimentos hospitalares e os encami - nhamentos para centros de referência.",
+            "organizam o percurso assistencial dos usuários, articulando a Atenção Primária à Saúde como coordenadora do cuidado com os demais pontos da Rede, promovendo continuidade, vínculo, integralidade e responsabilização sanitária, com atuação multiprofissional e intersetorial.",
+            "priorizam a gestão de condições crônicas e situações de maior complexidade clínica, direcionando ações para grupos prioritários, como gestantes, idosos e pessoas com doenças crônicas, a partir de estratégias assistenciais e gerenciais específicas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A territorialização e a responsabilização sanitária são princípios estruturantes da Atenção Primária à Saúde e orientam o processo d e trabalho das equipes da ESF (Estratégia Saúde da Família). Sobre essa temática, analise as afirmativas a seguir. I A territorialização consiste na identificação das características sociais, epidemiológi - cas, culturais e ambientais de uma população adscrita, permitindo que a equipe planeje ações de saúde adequadas ao contexto local. II A responsabilização sanitária pressupõe o acompanhamento longitudinal das pessoas, famílias e coletividades, articu - lando cuidado clínico, vigilância em saúde, intersetorialidade e participação social. III O vínculo implica reconhecimento mútuo entre usuários e equipe, favorecendo continuidade do cuidado, confiança, escuta qualificada e corresponsabilização entre profissionais, usuários e rede de atenção. IV Territorialização e vínculo são ferramentas operacionais voltadas principalmente para a delimitação geográfica das áreas de atuação, não interferindo diretamente na organização do cuidado nem na gestão clínica. Estão corretas:",
+          "alternativas": [
+            "apenas I, II e III.",
+            "apenas I e IV.",
+            "apenas II e IV.",
+            "todas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A visita domiciliar (VD) é uma estratégia essencial da Atenção Primária à Saúde, especialmente no trabalho da equipe da ESF, articulando ações de cuidado, vigilância, educação e responsabilização sanitária. Considerando os princípios do Sistema Único de Saúde (SUS), as diretrizes da PNAB (Portaria o 2.436/2017) e as atribuições do enfermeiro, assinale a opção correta.",
+          "alternativas": [
+            "A finalidade principal da VD é a ampliação da cobertura assistencial para procedimen- tos técnicos e curativos realizados fora da unidade, concentrando-se nas demandas prioritárias definidas pela equipe.",
+            "A realização de visitas domiciliares está restrita aos casos de acamados, gestantes de risco e pessoas com doenças crônicas, sendo dispensável em situações relaciona- das à promoção da saúde e vigilância epidemiológica.",
+            "A VD tem função predominantemente educativa, concentrando-se na transmissão de orientações aos usuários e familiares, sem implicar tomada de decisão clínica ou articulação intersetorial.",
+            "A VD é uma prática estratégica que possibilita a avaliação das condições sociais, ambientais e familiares, favorecen- do a construção de diagnósticos situa - cionais, a elaboração de Projetos Terapêuticos Singulares e o fortalecimento do vínculo entre a equipe e o território."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "A vigilância epidemiológica integra o processo contínuo e sistemático de coleta, análise e interpretação de dados, orientando ações de prevenção, controle e promoção da saúde no SUS. Considerando-se os princípios, objetivos e atribuições da vigilância epidemiológica, assinale a opção correta.",
+          "alternativas": [
+            "A vigilância epidemiológica monitora a ocorrência de eventos de saúde pública, identifica situações de risco, orienta a tomada de decisão e subsidia ações intersetoriais, articulando-se com a atenção básica, vigilância ambiental, sanitária e saúde do trabalhador.",
+            "A vigilância epidemiológica tem como principal função investigar casos confirma- dos e agravos de notificação compulsória, com ênfase na produção de boletins epidemiológicos e elaboração de indicadores nacionais para o Ministério da Saúde.",
+            "A vigilância epidemiológica atua priorita - riamente após a ocorrência dos casos, analisando a magnitude dos eventos de saúde, realizando ações pontuais de bloqueio vacinal e estabelecendo estraté- gias corretivas no território.",
+            "A vigilância epidemiológica é uma ação restrita à esfera municipal, sendo executada pelo enfermeiro e pelo médico das equipes de APS, com foco na notificação e encaminhamento dos casos suspeitos às unidades de vigilância estadual."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A malária é uma doença parasitária de grande relevância para a saúde pública brasileira, exigindo ações integradas de vigilância, diagnóstico e controle. Considerando os princípios do SUS e a organização das ações de vigilância epidemiológica, indique a opção correta.",
+          "alternativas": [
+            "Nas áreas endêmicas, o diagnóstico presuntivo baseado em sinais clínicos é suficiente, sendo o tratamento imediato do caso a principal estratégia para a interrupção da transmissão, sem necessidade de investigação ambiental ou vetorial.",
+            "A Atenção Primária tem papel limitado no manejo da malária, uma vez que a doença está restrita a áreas rurais e florestais, cabendo aos centros especia - lizados a condução diagnóstica e terapêutica.",
+            "A vigilância da malária envolve identificação precoce dos casos, diagnóstico laboratorial específico, notificação compulsória ime - diata, orientação do tratamento conforme a espécie parasitária, investigação do local provável de infecção e controle vetorial integrado a ações educativas e interse - toriais.",
+            "A notificação dos casos de malária é obrigatória apenas quando há transmissão local, sendo dispensada nos casos importados, desde que os pacientes iniciem o tratamento nas primeiras 48 horas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Saúde Mental",
+          "enunciado": "A Saúde Mental na Atenção Primária à Saúde (APS) constitui uma estratégia fundamental do SUS, articulando ações clínicas, preventivas, comunitárias e interse - toriais, com enfoque na integralidade, no acolhimento e na responsabilização sanitária. Considerando as diretrizes da Política Nacional de Saúde Mental e as orientações da APS, assinale a opção correta.",
+          "alternativas": [
+            "A atenção à saúde mental é responsabilidade exclusiva dos Centros de Atenção Psicossocial (CAPS), sendo dispensável a atuação da APS no acompanhamento clínico, na escuta qualificada, na vigilância ou na construção de rede de cuidado comunitário.",
+            "Os usuários com sofrimento mental devem ser encaminhados diretamente aos serviços especializados, sem necessidade de acompanhamento longitudinal na APS, pois o acompanhamento requer equipe exclusivamente psiquiátrica.",
+            "A intervenção breve, o matriciamento, a visita domiciliar e a responsabilização territorial não são estratégias aplicáveis à saúde mental, uma vez que os cuidados exigem protocolos clínicos padronizados e consulta exclusiva com especialista.",
+            "A APS deve desenvolver ações de acolhimento, escuta qualificada, acompa- nhamento territorial, matriciamento com os CAPS, identificação de situações de risco, intervenção breve, apoio às famílias e construção de Projetos Terapêuticos Singulares em casos complexos, como uso abusivo de álcool e outras drogas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "O Guia de Tratamento da Malária no Brasil descreve estratégias fundamentais para reduzir a gravidade, mortalidade e transmissão da doença. Considerando o papel da Atenção Primária à Saúde, a identificação de grupos vulneráveis e os riscos associados ao atraso do diagnóstico, analise as afirmativas a seguir. I O atraso na suspeita clínica e no diagnóstico pode levar à manifestação de formas graves da doença, especialmente em regiões onde a malária não é endêmica, tornando essencial o acesso ao serviço de saúde em menos de 24 horas após o início dos sintomas. II Gestantes, crianças menores de cinco anos, idosos, indivíduos primoinfectados e pessoas imunodeficientes são considerados grupos com maior risco de evolução para formas graves da doença e devem ser acompa - nhados preferencialmente por médico, sobretudo em casos por Plasmodium falciparum. III As ações de controle da malária estão restritas às equipes médicas e bioquímicas especializadas, não sendo recomendada a participação de profissionais de nível médio ou da Estratégia Saúde da Família, visto que o diagnóstico exige tecnologia laboratorial complexa. IV A Atenção Primária, por meio da Estratégia Saúde da Família, tem papel central no controle da malária, integrando -se aos programas municipais com ações de orientação, busca ativa, diagnóstico e tratamento, inclusive em áreas remotas com carência de médicos. Sobre essas afirmativas, pode -se afirmar que estão corretas apenas",
+          "alternativas": [
+            "I e II.",
+            "I, II e IV.",
+            "I e III.",
+            "II e III."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Enfermagem",
+          "assunto": "Prática Baseada em Evidências",
+          "enunciado": "Em uma população adscrita de 4.000 adultos acompanhados por uma Unidade de Saúde da Família, foram registrados, em 2024, 60 novos casos de tuberculose entre indivíduos previamente livres da doença. Ao final do mesmo ano, havia 95 pessoas vivendo com tuberculose, considerando-se casos novos e casos em tratamento (prevalentes). Com base nessas informações, identifique a opção correta.",
+          "alternativas": [
+            "A incidência acumulada de tuberculose em 2024 foi de 1,5%, e a prevalência pontual ao final do ano foi de 2,4%.",
+            "A incidência acumulada de tuberculose foi de 2,4%, e a prevalência ao final do ano foi de 1,5%, pois esse indicador mede apenas os casos novos na população.",
+            "A prevalência expressa exclusivamente o número de casos novos identificados no período, permitindo estimar o risco de adoecimento por tuberculose.",
+            "A incidência acumulada independe da população em risco, utilizando apenas o número total de casos existentes para medir a magnitude do problema."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Sobre os indicadores de mortalidade utilizados em vigilância epidemiológica e planejamento em saúde, analise as afirmativas a seguir. I A taxa de mortalidade infantil expressa o risco de morte de crianças menores de um ano, sendo calculada pelo número de óbitos infantis dividido pelo total de nascidos vivos. Trata-se de um indicador sensível às condições socioeconômicas e à qualidade da atenção materno-infantil. II A letalidade mede a proporção de óbitos em relação ao total da população residente, sendo útil para avaliar a magnitude dos agravos e comparar riscos entre diferentes regiões. III A mortalidade proporcional por causa indica a participação percentual de uma causa específica no total de óbitos, auxiliando na identificação de prioridades em saúde pública. IV A taxa de mortalidade geral pode sofrer distorções quando utilizada para comparar populações com estruturas etárias diferentes, exigindo técnicas de padronização para análises mais adequadas. Considerando V para verdadeira e F para falsa, marque a opção com a sequência correta, de cima para baixo, para as afirmativas.",
+          "alternativas": [
+            "V – V – V – F",
+            "F – F – V – V",
+            "V – F – V – V",
+            "V – F – F – V"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Os indicadores compostos são ferramentas estratégicas para a análise da situação de saúde, por integrarem múltiplas dimensões como morbidade, mortalidade, acesso, equidade, qualidade assistencial, vulnerabilidades sociais e desempenho do sistema. Sobre esse tipo de indicador, assinale a opção correta.",
+          "alternativas": [
+            "A razão de mortalidade materna é um indicador composto e sensível aos determinantes sociais, estruturais e assistenciais, refletindo não apenas eventos clínicos, mas também a capacidade de resposta da rede de atenção, a qualidade do cuidado pré - natal, part o e puerpério, além das desigualdades sociais e territoriais.",
+            "O coeficiente de mortalidade proporcional por causa é considerado um indicador composto por permitir estimar a participação de uma causa no total de óbitos e, portanto, ser suficiente para avaliar o desempenho dos serviços de saúde.",
+            "Indicadores compostos não são adequados para análises locais ou regionais, pois dependem exclusivamente de bases nacionais consolidadas e de métodos padronizados, sem possibilidade de adaptação às especificidades territoriais.",
+            "A razão de mortalidade materna avalia prioritariamente a letalidade associada às causas obstétricas, sendo um indicador clínico, pouco influenciado por fatores socioeconômicos, acesso aos serviços ou organização da atenção à saúde."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Uma equipe de Saúde da Família identificou queda na cobertura vacinal de crianças menores de um ano em seu território. Em 2022, a cobertura para a vacina pentavalente estava em 92%, mas em 2024 caiu para 76%, abaixo da meta de 95% recomendada pelo PNI. A equipe observou ainda grande variação entre microáreas, com coberturas entre 63% e 88%, além do aumento de faltosos, migração intraurbana e registros incompletos no SI-PNI. Considerando o conceito epidemiológico de cobertura vacinal, seus determinantes e implicações para a vigilância em saúde, assinale a opção correta.",
+          "alternativas": [
+            "A queda da cobertura vacinal reflete apenas falhas no registro do SI -PNI, não sendo suficiente para orientar ações de busca ativa, já que a vigilância epidemiológica depende exclusivamente do número de doses aplicadas.",
+            "A cobertura vacinal expressa a proporção de indivíduos vacinados em relação à população-alvo, permitindo identificar bolsões de suscetíveis, analisar hetero - geneidades entre microáreas e subsidiar estratégias de busca ativa e vacinação de bloqueio.",
+            "A análise de cobertura vacinal é suficiente para definir a situação de proteção coletiva, não sendo necessário monitorar o abandono vacinal, a homogeneidade territorial ou os eventos adversos pós-vacinação (ESAVI).",
+            "Como a cobertura vacinal é um indicador assistencial, ela não está diretamente relacionada à vigilância epidemiológica nem ao planejamento territorial, sendo interpretada apenas como desempenho administrativo da APS."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Em relação às equipes m ultiprofissionais na Atenção Primária à Saúde (eMulti), instituídas pela Portaria GM/MS 635/2023, analise as afirmativas a seguir. I As modalidades de eMulti diferenciam-se entre si quanto à carga horária mínima semanal, número de equipes vinculadas e limite máximo de horas por categoria profissional, sendo que a eMulti Ampliada deve cumprir no mínimo 300 horas semanais, enquanto a eMulti Complementar e a Estratégica devem cumprir, respectivamente, 200 e 100 horas semanais. II Em nenhuma hipótese é permitida a vinculação de uma eMulti a mais de uma tipologia de equipe APS, pois cada eMulti deve estar vinculada exclusivamente a uma equipe de Saúde da Família. III A Portaria prevê repasses federais mensais distintos para cada modalidade de eMulti, sendo R$ 36.000,00 para a eMulti Ampliada, R$ 24.000,00 para a Complementar e R$ 12.000,00 para a Estratégica, além de prever incentivos adicionais quando houver oferta de atendimento remoto assistido mediado por TIC. IV A participação do mesmo profissional em mais de uma equipe eMulti não configura duplicidade profissional, desde que haja compatibilidade da carga horária entre as equipes e respeitados os limites máximos por categoria profissional. Estão corretas apenas",
+          "alternativas": [
+            "I e II.",
+            "I, III e IV.",
+            "II e III.",
+            "III e IV."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "A Política Nacional de Atenção Integral à Saúde da Mulher (PNAISM) e os Protocolos da Atenção Básica: Saúde das Mulheres (2016) orientam a organização do cuidado na Atenção Primária, articulando ações de promoção, prevenção, assistência e vigilância em saúde . Sobre a atenção à saúde da mulher no SUS, assinale a opção correta.",
+          "alternativas": [
+            "As ações de saúde da mulher na APS concentram-se no pré-natal, no puerpério e no planejamento familiar, não sendo consideradas responsabilidades da equipe os agravos crônicos, a saúde mental ou o enfrentamento das violências de gênero.",
+            "A atenção à saúde da mulher deve contemplar todas as fases do ciclo de vida, incluindo saúde sexual e reprodutiva, planejamento familiar, pré-natal, prevenção de agravos, promoção da saúde, rastreamento de cânceres e enfrentamento das violências, de forma territorializada e articulada à Rede de Atenção à Saúde.",
+            "Segundo os protocolos, o rastreamento do câncer do colo do útero deve ser realizado apenas mediante presença de fatores de risco clínicos, não sendo recomendado como estratégia populacional.",
+            "A assistência obstétrica e ginecológica é atribuição exclusiva do profissional médico, não cabendo ao enfermeiro a realização de exames preventivos, consultas e acompanhamento clínico conforme protocolos assistenciais."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Política Nacional de Atenção à Saúde dos Povos Indígenas (PNASPI), instituída pelo Ministério da Saúde e Fundação Nacional de Saúde (FUNASA), estabelece princípios e diretrizes para a organização da atenção diferenciada em saúde aos povos indígenas, considerando suas especificidades sociocultu - rais, epidemiológicas e territoriais. Sobre essa política, indique a opção correta.",
+          "alternativas": [
+            "A atenção à saúde indígena é restrita aos serviços ofertados nos Distritos Sanitá - rios Especiais Indígenas, não havendo previsão de articulação com os serviços municipais e estaduais do SUS.",
+            "A atenção diferenciada deve considerar os aspectos socioculturais, epidemiológi- cos, ambientais e territoriais, com participação dos Agentes Indígenas de Saúde, equipes multiprofissionais e articulação entre os Distritos Sanitários Especiais Indígenas (DSEI) e o Sistema Único de Saúde.",
+            "A PNASPI determina que ações de cuidado devem seguir exclusivamente protocolos biomédicos, sem considerar práticas tradicionais ou saberes indígenas.",
+            "A política prioriza apenas o controle de doenças transmissíveis, sem integrar ações de promoção da saúde, vigilância epidemiológica, educação, saneamento e participação comunitária."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "A tuberculose permanece como um problema prioritário de saúde pública no Brasil, com elevada magnitude, forte relação com determinantes sociais e implicações para a vigilância e organização da atenção no SUS. Considerando os princípios da vigilância epidemiológica, o papel da Atenção Primária e as diretrizes do Ministério da Saúde, assinale a opção correta.",
+          "alternativas": [
+            "A vigilância da tuberculose envolve busca ativa de sintomáticos respiratórios, diagnós- tico laboratorial específico, notificação compulsória, acompanhamento dos casos, tratamento supervisionado (TDO) e ações intersetoriais voltadas aos determinantes sociais.",
+            "A tuberculose é considerada agravo de baixa prioridade na vigilância epidemioló- gica, não sendo necessária a investigação dos comunicantes domiciliares, pois a transmissibilidade é baixa em ambientes fechados.",
+            "A atenção à tuberculose é responsabilidade exclusiva dos centros especializados, sendo dispensável o acompanhamento pela Atenção Primária, que atua apenas na notificação dos casos confirmados.",
+            "A vigilância da tuberculose se restringe ao monitoramento de casos novos, não contemplando ações de prevenção, edu- cação em saúde ou articulação com serviços de assistência social e habitação."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "assunto": "Prática Baseada em Evidências",
+          "enunciado": "Em um estudo de coorte desenvolvido em uma Unidade de Saúde da Família, 500 indivíduos sem diabetes foram acompanhados por quatro anos para investigar a associação entre obesidade e desenvolvimento de diabetes mellitus tipo 2. Ao final do seguimento, 80 participantes desenvolveram diabetes, sendo 56 entre os obesos e 24 entre os não obesos. Sobre o cálculo do risco relativo (RR) e sua interpretação, assinale a opção correta.",
+          "alternativas": [
+            "O risco relativo estimado é 2,8, indicando que os obesos tiveram quase três vezes mais risco de desenvolver diabetes quando comparados aos não obesos, sugerindo associação positiva entre obesidade e diabetes.",
+            "O risco relativo estimado é menor que 1, indicando que a obesidade pode ser um fator de proteção contra o diabetes mellitus tipo 2, embora sem significância estatística.",
+            "O cálculo do risco relativo é inadequado nesse tipo de delineamento, sendo mais apropriado utilizar a razão de chances (odds ratio).",
+            "Não é possível estimar associação entre obesidade e diabetes nesse tipo de estudo, pois a coorte não permite estabelecer temporalidade entre exposi - ção e desfecho."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "uff-coremu2025-enfermagem-saude-coletiva",
+      "banca": "COSEAC/UFF",
+      "ano": 2025,
+      "orgao": "Universidade Federal Fluminense (COREMU)",
+      "cargo": "Enfermagem em Saúde Coletiva",
+      "cadernoUrl": "https://portal.coseac.uff.br/wp-content/uploads/2025/02/UFF-COREMU2025-PROVA-RESIDENCIA-EM-ENFERMAGEM-EM-SAUDE-COLETIVA.pdf",
+      "gabaritoUrl": "https://portal.coseac.uff.br/wp-content/uploads/2025/02/UFF-COREMU2025-GABARITO-APOSRECURSO-RESIDENCIAMULTIPROFISSIONAL-ENFERMAGEMEMSAUDECOLETIVA.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "De acordo com a Lei Orgânica da Saúde (Lei n o 8.080/1990), identifique, dentre as opções a seguir, o princípio fundamental para a organização do Sistema Único de Saúde (SUS).",
+          "alternativas": [
+            "Privatização de serviços para aumento da cobertura.",
+            "Restrição da universalidade ao atendimento ambulatorial.",
+            "Exclusão do setor privado da participação no sistema público.",
+            "Descentralização, com direção única em cada esfera de governo."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Política Nacional de Atenção Básica (Portaria n o 2.436/2017) estabelece diretrizes fundamentais para a organização da Atenção Básica no SUS, sendo um dos objetivos principais dessa política",
+          "alternativas": [
+            "a ampliação do acesso equitativo e contínuo às ações de saúde na atenção básica.",
+            "o reforço à atenção hospitalar como porta de entrada preferencial no sistema de saúde.",
+            "a centralização da gestão da saúde em nível estadual, limitando a autonomia municipal.",
+            "a redução do papel da estratégia saúde da família na organização dos serviços básicos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.142/1990",
+          "enunciado": "De acordo com a Lei n o 8.142/1990, um dos principais instrumentos para a participação da comunidade na gestão do Sistema Único de Saúde (SUS) é a",
+          "alternativas": [
+            "criação dos Conselhos e Conferências de Saúde em todas as esferas de governo.",
+            "terceirização dos serviços públicos para organizações sociais.",
+            "eliminação da contribuição do setor privado na formulação de políticas públicas.",
+            "centralização das decisões em âmbito federal, excluindo o controle social local."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "O objetivo da Lei n o 8080/90, conhecida como Lei Orgânica da Saúde, é",
+          "alternativas": [
+            "promover programas de educação em saúde exclusivamente para profis - sionais da área.",
+            "estabelecer direitos de saúde para grupos minoritários.",
+            "regular as ações e serviços de saúde em todo o território nacional.",
+            "definir as penalidades legais para infrações de saúde pública."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "De acordo com a Lei n o 8080/90, a execução das ações de saúde inclui",
+          "alternativas": [
+            "o desen volvimento de medicamentos exclusivamente nacionais.",
+            "a vigilância sanitária e epidemiológica, além de saúde do trabalhador.",
+            "a supervisão de planos de saúde privados.",
+            "a prestação de serviços de saúde apenas por entidades privadas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Política Nacional de Humanização",
+          "enunciado": "Conforme a Política Nacional de Humanização (HumanizaSUS), identifique, dentre as opções a seguir, o eixo norteador das práticas de atenção e gestão em saúde.",
+          "alternativas": [
+            "Valorização das relações entre trabalhadores, usuários e gestores, promovendo um atendimento acolhedor e resolutivo.",
+            "Foco exclusivo na tecnologia e modernização dos equipamentos de saúde.",
+            "Terceirização completa das unidades de saúde para garantir maior eficiência.",
+            "Fortalecimento exclusivo de medidas de vigilância em saúde coletiva."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Segundo o manual técnico do Ministério da Saúde \"Pré -natal e Puerpério: atenção qualificada e humanizada\" (2005), uma diretriz central para a atenção à saúde da mulher no ciclo gravídico-puerperal consiste na",
+          "alternativas": [
+            "realização de consultas exclusivas no nível hospitalar para gestantes de alto risco.",
+            "priorização do atendimento domiciliar como único modelo de assistência.",
+            "exclusão da participação do acompanhante no processo de atenção ao parto.",
+            "oferta de acompanhamento multidisciplinar para gestantes, garantindo ações de promoção, proteção e recuperação da saúde. 4"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Planejamento em Saúde",
+          "enunciado": "O documento \"Indicadores Básicos para a Saúde no Brasil\" da Rede Interagencial de Informação para a Saúde (RIPSA) define indicadores como ferramentas essenciais para a análise da situação de saúde. Sobre essa temática, é correto afirmar que uma das características fundamentais desses indicadores denota que eles",
+          "alternativas": [
+            "devem permitir comparações temporais e espaciais, possibilitando a avaliação das políticas de saúde.",
+            "devem ser utilizados apenas para análises qualitativ as, focando em percepções subjetivas das condições de saúde.",
+            "são voltados exclusivamente para análises em nível nacional, sem aplicação prática nos contextos estaduais ou municipais.",
+            "dispensam a necessidade de padronização, pois podem ser adaptados livremente a cada situação ou estudo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Conforme as \"Diretrizes nacionais para a atenção integral à saúde de adolescentes e jovens na promoção, proteção e recuperação da saúde\" (2010 ) o objetivo principal dessa política é",
+          "alternativas": [
+            "restringir o atendimento a adolescentes em situação de vulnerabilidade.",
+            "focar exclusivamente no tratamento de doenças crônicas e infecções sexual - mente transmissíveis.",
+            "promover ações integradas de saúde, educação e assistência social para adolescentes e jovens.",
+            "priorizar a saúde men tal em detrimento de outras áreas de cuidado."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Segundo a Portaria n o 2.528/2006, que institui a Política Nacional de Saúde da Pessoa Idosa, o principal objetivo dessa política é",
+          "alternativas": [
+            "priorizar o atendimento hospitalar para idosos com doenças crônicas.",
+            "garantir o envelhecimento ativo e saudável por meio de ações de promoção, proteção e recuperação da saúde.",
+            "criar instituições de longa permanência como única alternativa de assistência.",
+            "centralizar a atenção à saúde do idoso no nível secundário."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Segundo o \"Guia de Vigilância em Saúde\" (2017), o objetivo principal da vigilância em saúde no Brasil é",
+          "alternativas": [
+            "restringir a atuação da vigilância às grandes cidades.",
+            "concentrar os esforços exclusivamente no combate a doenças transmissíveis.",
+            "reduzir a interação entre vigilância epidemiológica e atenção básica.",
+            "monitorar, prevenir e controlar riscos e danos à saúde da população."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Política Nacional de Atenção à Saúde dos Povos Indígenas estabelece",
+          "alternativas": [
+            "a garantia ao acesso dos povos indígenas à atenção integral à saúde.",
+            "o fornecimento do atendimento de saúde exclusivamente por profissionais indígenas.",
+            "a criação de hospitais especializados para tratamentos de alta complexidade em terras indígenas.",
+            "a limitação da participação dos povos indígenas na gestão da saúde."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Com relação à Política Nacional de Atenção à Saúde dos Povos Indígenas, é correto afirmar que ela visa integrar os serviços de saúde",
+          "alternativas": [
+            "implementando hospitais gerais em todas as terras indígenas.",
+            "através de Distritos Sanitários Especiais Indígenas para organizar localmente a atenção primária.",
+            "centralizando todos os serviços de saúde indígena em capitais estaduais.",
+            "ofertando o atendimento à saúde dos povos indígenas nas unidades básicas municipais."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Um dos principais focos da atenção básica conforme a Política Nacional de Atenção Básica de 2012 é:",
+          "alternativas": [
+            "Promover a universalidade, equidade e integralidade dos serviços.",
+            "Ampliar o acesso a tratamentos especializados e de alta complexidade como prioridade central.",
+            "Reavaliar o papel da participação comunitária n o planejamento da saúde, considerando suas limitações em alguns contextos.",
+            "Direcionar esforços prioritariamente para as áreas urbanas, onde há maior concentração de recursos e demandas. 5"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Identifique, dentre as opções a seguir, a relação da saúde com outros fatores segundo a Lei no 8080/90.",
+          "alternativas": [
+            "A saúde é amplamente autônoma, com pouca ou nenhuma influência de fatores externos.",
+            "A saúde é predominantemente determinada por aspectos genéticos, com menor relevância para fatores sociais ou ambientais.",
+            "A saúde depende prioritariamente das escolhas e atitudes individuais, sendo responsabilidade direta de cada pessoa.",
+            "A saúde tem como fatores determinantes a alimentação, o trabalho, a renda, entre outros."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Com relação ao modelo de organização dos serviços de sa úde, a Política Nacional de Atenção à Saúde dos Povos Indígenas estabelece",
+          "alternativas": [
+            "a manutenção exclusiva por entidades privadas de saúde.",
+            "a centralização dos serviços de saúde em grandes centros urbanos.",
+            "o desenvolvimento de um modelo diferenciado e complementar.",
+            "a terceirização de serviços de saúde para organizações internacionais."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Segundo a Lei n o 8.080/90, a função do SUS, em relação à saúde do trabalhador, é",
+          "alternativas": [
+            "desconsiderar os riscos ocupacionais ao avaliar fatores determinantes e condicio - nantes da saúde.",
+            "delegar integralmente a responsabilidade pela saúde do trabalhador ao setor empregador.",
+            "limitar sua atuação a ações pontuais, sem integrar políticas de saúde do trabalhador.",
+            "executar ações de saúde do trabalhador como parte da vigilância epidemiológica."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Política Nacional de Atenção à Saúde dos Povos Indígenas recomenda, para o tratamento de saúde,",
+          "alternativas": [
+            "uma abordagem que priorize exclusivamente profissionais externos às comunidades indígenas.",
+            "uma abordagem que integre os sistemas tradicionais indígenas de saúde.",
+            "a adoção de tecnologias biomédicas avançadas, desconsiderando os saberes tradicionais.",
+            "a exclusão de medicamentos alopáticos, limitando-se às práticas tradicionais indígenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "O papel das equipes multiprofissionais na atenção primária à saúde, como estabelecido pelas diretrizes mais recentes, é",
+          "alternativas": [
+            "atuar apenas em situações de emergência.",
+            "promover um atendimento integral e contínuo aos pacientes.",
+            "focar exclusivamente em consultas de rotina.",
+            "substituir completamente o atendimento médico especializado."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Política Nacional de Promoção da Saúde",
+          "enunciado": "A Política Nacional de Promoção da Saúde (PNPS) visa, conforme as diretrizes de 2010,",
+          "alternativas": [
+            "priorizar intervenções voltadas exclusiva- mente para doenças com alta letalidade.",
+            "focar em ações pontuais de curto prazo, voltadas apenas para grupos populacionais específicos.",
+            "concentrar-se no enfrentamento de problemas de saúde já instalados, com ênfase no tratamento medicamentoso.",
+            "reforçar as ações que promovam a saúde integral e preventiva."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Direitos dos Usuários do SUS",
+          "enunciado": "O objetivo principal da Política Nacional de At enção Integral à Saúde das Pessoas Privadas de Liberdade no Sistema Prisional é",
+          "alternativas": [
+            "assegurar o acesso à saúde no sistema prisional conforme os princípios do SUS.",
+            "estabelecer critérios específicos que restrinjam o acesso dos detentos a serviços de saúde.",
+            "focar exclusivamente no atendimento de situações de urgência, sem estratégias de prevenção ou promoção da saúde.",
+            "transferir a responsabilidade pela saúde da população prisional a entidades privadas, fora do âmbito do SUS. 6"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "De acordo com a Lei no 8080/90, a diretriz para a participação complementar dos serviços privados no SUS determina que",
+          "alternativas": [
+            "os serviços privados devem operar independentemente do SUS.",
+            "os serviços privados são prioritários em relação aos serviços públicos.",
+            "a participação privada dev e ser condicionada à direção do SUS.",
+            "todos os serviços de saúde devem ser providos por entidades privadas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "O princípio enfatizado na Política Nacional do Idoso, segundo o Instituto de Pesquisa Econômica Aplicada (IPEA), está baseado na",
+          "alternativas": [
+            "redução de gastos públicos com a saúde do idoso.",
+            "exclusão dos idosos de programas de saúde comunitária.",
+            "promoção de uma vida independente e ativa para os idosos.",
+            "atenção exclusiva aos cuidados em instituições de longa permanência."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Educação Permanente em Saúde",
+          "enunciado": "O papel da educação permanente em saúde, como descrito na Política Nacional de Educação Permanente em Saúde de 2009, é",
+          "alternativas": [
+            "promover ações formativas desconectadas das práticas diárias dos serviços de saúde.",
+            "focar apenas em treinamentos teóricos de curta duração, sem impacto no processo de trabalho.",
+            "priorizar capacitações para áreas especí- ficas, sem considerar a integralidade do cuidado no SUS.",
+            "desenvolver competências dos profissionais para melhorar o SUS."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Segundo a Política Nacional de Saúde do Trabalhador de 2011, a abordagem para l idar com os riscos ocupacionais consiste na",
+          "alternativas": [
+            "atenção prioritariamente em ações reativas, como intervenções apenas após a ocorrência de acidentes.",
+            "transferência da responsabilidade pelo controle de riscos exclusivamente para os empregadores ou trabalhadores.",
+            "priorização das ações em grandes indústrias, com menor atenção às pequenas empresas e trabalhadores informais.",
+            "promoção da saúde e na prevenção de riscos e doenças relacionadas ao trabalho."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Política Nacional de Promoção da Saúde",
+          "enunciado": "A Política Nacional de Promoção da Saúde (PNPS), revisada em 2018, enfatiza",
+          "alternativas": [
+            "a importância de práticas saudáveis e estilos de vida preventivos, considerando os determinantes sociais de saúde.",
+            "a redução do escopo das políticas de saúde, com exclusão de ações voltadas à saúde mental.",
+            "a transferência das iniciativas de promoção da saúde para o setor privado, com foco na sustentabilidade econômica.",
+            "a restrição das ações de promoção da saúde a faixas etárias específicas, como adultos em idade produtiva."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "De acordo com a Portaria n o 2.436 de 2017, o foco na revisão d as diretrizes da Atenção Básica é",
+          "alternativas": [
+            "reforçar a resolutividade e a coordenação do cuidado.",
+            "diminuir o número de profissionais de saúde na atenção básica.",
+            "excluir a participação da comunidade no planejamento da saúde.",
+            "centralizar a gestão da atenção básica em nível federal."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Dentre as opções a seguir, assinale a que apresenta o agente etiológico da sífilis.",
+          "alternativas": [
+            "Neisseria gonorrhoeae",
+            "Chlamydia trachomatis",
+            "Treponema pallidum",
+            "Human Papilloma Virus"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Enfermagem",
+          "assunto": "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)",
+          "enunciado": "A doença caracterizada por febre alta, dores musculares e manchas vermelhas no corpo, comumente confundida com outras doenças febris agudas, denomina-se",
+          "alternativas": [
+            "zika.",
+            "dengue.",
+            "febre amarela.",
+            "chikungunya. 7"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "assunto": "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)",
+          "enunciado": "Indique a opção correta para o controle do vetor da dengue.",
+          "alternativas": [
+            "Vacinação e uso de repelentes.",
+            "Eliminação de criadouros e educação comunitária.",
+            "Oferta de teste rápido para diagnóstico precoce da dengue.",
+            "Tratamento antiviral em massa."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Em relação à transmissão do HIV, considere as medidas: I Terapia antirretroviral preventiva. II Educação sobre saúde sexual. III Uso consistente de preservativos. Podem ser usadas para reduzir a transmissão do HIV:",
+          "alternativas": [
+            "Apenas I e II",
+            "Apenas I e III",
+            "Apenas II e III",
+            "I, II e III"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Um evento supostamente atribuído à vacinação (ESAVI), se caracteriza como",
+          "alternativas": [
+            "um efeito colateral comprovadamente causado pelo componente da vacina.",
+            "uma falha na aplicação da vacina que resulta em ausência de imunização.",
+            "um estudo clínico para avaliar a eficácia de novas vacinas.",
+            "um evento adverso que ocorre após a vacinação e que pode ou não ter relação causal com a imunização."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "João, 11 anos, deseja se vacinar contra o HPV. De acordo com o esquema vacinal atualizado recomendado pelo Ministério da Saúde do Brasil, indique o número de doses dessa vacina que o menino deve receber.",
+          "alternativas": [
+            "Duas doses, com intervalo de 6 meses entre elas.",
+            "Três doses, administradas nos meses 0,2 e 6.",
+            "Apenas uma dose, sem necessidade de reforço.",
+            "Duas doses, com intervalo de 2 meses entre elas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Segundo o Guia de Vigilância em Saúde (6a edição, 2023), o objetivo central da vigilância epidemiológica da COVID-19 é",
+          "alternativas": [
+            "focar na investigação apenas de casos notificados espontaneamente, sem a necessidade de ações contínuas de monitoramento.",
+            "monitorar a ocorrência de casos e óbitos, identificar fatores de risco e orientar medidas de controle para prevenir a disseminação do SARS-CoV-2.",
+            "desenvolver estratégias de enfrentamento baseadas exclusivamente na imunização, sem integrar outras medidas de controle.",
+            "priorizar intervenções de emergência em situações de surtos, sem a necessidade de acompanhar a evolução da transmissão."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "uff-coremu2024-enfermagem-saude-coletiva",
+      "banca": "COSEAC/UFF",
+      "ano": 2024,
+      "orgao": "Universidade Federal Fluminense (COREMU)",
+      "cargo": "Enfermagem em Saúde Coletiva",
+      "cadernoUrl": "https://portal.coseac.uff.br/wp-content/uploads/2024/01/UFF-COREMU2024-PROVA_RESIDENCIAENFERMAGEMSAUDECOLETIVA.pdf",
+      "gabaritoUrl": "https://portal.coseac.uff.br/wp-content/uploads/2024/02/UFF-COREMU2024-GABARITO_FINAL_RESIDENCIAEMENFERMAGEMSAUDECOLETIVA.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "De acordo com a Lei n o 8080/90, a iniciativa privada poderá participar do Sistema Único de Saúde em caráter:",
+          "alternativas": [
+            "Suplementar",
+            "Participativo",
+            "Concorrente",
+            "Complementar"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Com relação à saúde dos povos indígenas, leia as assertivas a seguir. I Caberá aos Estados, com seus recursos próprios, financiar o Subsistema de Atenção à Saúde Indígena. II As populações indígenas devem ter acesso garantido ao SUS, em âmbito local, regional e de centros especializados, de acordo com suas necessidades, compreendendo a atenção primária, secundária e terciária à saúde. III As populações indígenas terão direito a participar dos organismos colegiados de formulação, acompanhamento e avaliação das polí ticas de saúde, tais como o Conselho Nacional de Saúde e os Conselhos Estaduais e Municipais de Saúde, quando for o caso. É correto dizer que",
+          "alternativas": [
+            "apenas I é verdadeira.",
+            "apenas I e II são verdadeiras.",
+            "apenas II e III são verdadeiras.",
+            "todas são verdadeiras."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Revisão Geral do SUS",
+          "enunciado": "Em relação a situações emergenciais ou de calamidade pública, considere as afirmações: I A União deverá assegurar aporte adicional de recursos não previstos nos planos de saúde dos Distritos Sanitários Especiais Indígenas (DSEI) ao Subsistema de Atenção à Saúde Indígena. II A União poderá executar ações de vigilância epidemiológica e sanitária em circunstâncias especiais, como na ocorrência de agravos inusitados à saúde, que possam escapar do controle da direção estadual do Sistema Único de Saúde (SUS) ou que representem risco de disseminação nacional. III A inclusão dos povos indígenas nos planos emergenciais para atendimento dos pacientes graves das Secretarias Municipais e Estaduais de Saúde deverá ser garantida, explicitados os fluxos e as referências para o atendimento em tempo oportuno. IV A transferência de recursos para o financiamento de ações não previstas nos planos de saúde é permitida nessas situações. São verdadeiras:",
+          "alternativas": [
+            "apenas II e IV",
+            "apenas I e II",
+            "apenas II e III",
+            "todas"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "Considere as ações de I vigilância epidemiológica II saúde do trabalhador III saúde climática/ambiental IV assistência terapêutica i ntegral, inclusive farmacêutica No campo de atuação do Sistema Único de Saúde, está incluída a execução de apenas",
+          "alternativas": [
+            "I, II e III.",
+            "I, II e IV.",
+            "I, III e IV.",
+            "II, III e IV."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Constituição Federal - Saúde",
+          "enunciado": "De acordo com o artigo 198 da constituição de 1988 todas as opções apresentam diretrizes do SUS, EXCETO:",
+          "alternativas": [
+            "Universalidade de acesso aos serviços de saúde em todos os níveis de assistência.",
+            "Descentralização, com direção única em cada esfera de governo.",
+            "Atendimento integral, com prioridade para as atividades preventivas, sem prejuízo dos serviços assistenciais.",
+            "Participação da comunidade."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Em relação a Leptospirose, leia com atenção as seguintes assertivas: I Trata-se de uma doença infecciosa febril aguda que é transmitida a partir da exposição direta ou indireta à urina de animais (principalmente ratos) infectados pelo vírus Leptospira. II No Brasil, é uma doença endêmica; torna - se epidêmica em perío dos chuvosos, principalmente nas capitais e nas regiões metropolitanas, devido às enchentes associadas à aglomeração da população de baixa renda, condições inadequadas de saneamento e alta infestação de roedores infectados. III As medidas de prevenção e contro le devem ser direcionadas aos reservatórios (roedores e outros animais), à melhoria das condições de proteção dos trabalhadores expostos e das condições higiênico e sanitárias da população, e às medidas corretivas sobre o meio ambiente, diminuindo sua capa cidade de suporte para a instalação e proliferação de roedores. IV Os animais infectados podem eliminar a leptospira através da urina durante meses, anos ou por toda a vida, segundo a espécie animal e o sorovar envolvido. Estão corretas apenas as assertivas",
+          "alternativas": [
+            "I e II.",
+            "I, III e IV.",
+            "II e III.",
+            "II, III e IV."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A malária é a parasitose mais importante do mundo, caracterizada como uma doença febril aguda, potencialmente grave e de evolução fatal se não tratada de forma oportuna e adequada. A espécie mais prevalente dessa patologia no Brasil é causada pelo protozoário denominado",
+          "alternativas": [
+            "Plasmodium malariae.",
+            "Plasmodium vivax.",
+            "Plasmodium falciparum.",
+            "Plasmodium brasilianum."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "Homem, 57 anos, apresentou tosse, febre, expectoração e perda de peso (6Kg) por três meses. Foi atendido em Unidade Básica de Saúde, com diagnóstico de tuberculose pulmonar, tendo, então, realizado tratamento com esquema RIPE – rifampicina, isoniazida, pirazinamida e etambutol – há 30 dias. Hoje nega febre e refere persistência da tosse e expectoração. Exame físico: regular estado geral. Oroscopia: placas esbranquiçadas em palato, língua e mucosa jugal. Emagrecido, descorado +/4, afebril. Peso: 54Kg. Altura 1,66m. Aparelho Respiratório: murmúrio vesicular bilateralmente sem ruídos adventícios. frequência respiratória = 22 ipm. Aparelho cardiovascular: Bulhas rítmicas em dois tempos, normofonéticas sem sopros. frequência cardíaca: 84 bpm, pressão arterial: 100 x 70 mmHg. Abdome: plano indolor, sem massas e sem visceromegalias. Teste rápido para HIV: negativo. Gasometria arterial: pH: 7,40/pO2: 61,4/pCO2: 34,9/HCO3: 21,5/BE: 2,5/SatO2: 90,8%. Para dar seguimento e controle de cura desse paciente, o exame mais indicado é",
+          "alternativas": [
+            "prova tuberculínica.",
+            "raio X de tórax.",
+            "baciloscopia no escarro.",
+            "teste rápido molecular no escarro."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Enfermagem",
+          "assunto": "Tuberculose",
+          "enunciado": "Em relação à transmissão da tuberculose, assinale a opção INCORRETA.",
+          "alternativas": [
+            "Os pacientes com exame bacteriológico de escarro positivo sustentam a cadeia de transmissão da doença. Aqueles com BAAR negativo no escarro são os que mais transmitem a doença.",
+            "No Brasil, os grupos populaciona is com maior vulnerabilidade à t uberculose são pessoas em situação de rua, pessoas HIV+, pessoas privadas de liberdade, profissionais de saúde, povos indígenas e contatos de TB DR.",
+            "Os sinais e os sintomas sugestivos de TB são: febre vespertina, sudorese noturna, emagrecimento e inapetência. Se a doença estiver localizada em outra parte do corpo (TB extrapulmonar), os sintomas dependerão da área acometida.",
+            "O M. tuberculosis é transmitido por via aérea, de uma pessoa com TB pulmonar ou laríngea, que elimina bacilos no ambiente (caso fonte), a outra pessoa, por exalação de aerossóis oriundos da tosse, fala ou espirro. Os bacilos que se depositam em roupas, lençóis e outros objetos dificilmente se dispersam em aerossóis e, por isso, não têm papel na transmissão da doença."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A profilaxia pós-exposição ao HIV (PEP) utiliza medicamentos antirretrovirais , oferecidos gratuitamente pelo SUS, que agem evitando a sobrevivência e a multiplicação do vírus no organismo e, por isso, deve ser iniciada o mais rápido possível. Com base nesse fato, a recomen dação correta sobre o tempo de início do tratamento com antirretroviral em casos de suspeita de infecção pelo HIV é de , preferencialmente, nas duas primeiras horas após a exposição ao vírus e no máximo em até",
+          "alternativas": [
+            "24 horas.",
+            "48 horas.",
+            "72 horas.",
+            "96 horas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Enfermagem",
+          "assunto": "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)",
+          "enunciado": "A presença dos sinais e sintomas a seguir são indicativos de dengue, EXCETO:",
+          "alternativas": [
+            "febre com duração de ate sete dias, mialgia, cefaleia e prostração.",
+            "febre com duração de até dez dias, mialgia e cefaleia.",
+            "febre com três dias de evolução, artralgia e petéquias.",
+            "febre com seis dias de evolução, cefaleia, exantema e petéquias."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A infecção pelo vírus da imunodeficiência humana (HIV) e sua manifestação clínica em fase avançada, a síndrome da imunodeficiência adquirida (AIDS), ainda representam um problema de saúde pública de grande relevância na atualidade, em função de sua transcendência e seu caráter pandêmico. A infecção pelo HIV, sem tratamento, pode evoluir para AIDS, resultando em grave disfunção do sistema imunológico à medida que vão sendo destruídos os linfócitos T-CD4+, uma das principais células -alvo do HIV. Em relação ao HIV/AIDS, é correto afirmar que:",
+          "alternativas": [
+            "O HIV-1 e HIV-2 são retrovírus da família Lentiviridae. Pertencem ao grupo dos retrovírus citopáticos e não oncogênicos. Para se multiplicarem, nec essitam de uma enzima (transcriptase reversa) responsável pela transcrição do ácido ribonucleico (RNA) viral para uma cópia do ácido desoxirribonucleico (DNA), tornam-se capazes de se integrar ao genoma do hospedeiro.",
+            "O HIV-1 e HIV-2 são retrovírus da família Flaviviridae. Pertencem ao grupo dos retrovírus citopáticos e não oncogênicos. Para se multiplicarem, necessitam de uma enzima (transcriptase reversa) responsável pela transcrição do ácido ribonucleico (RNA) viral para uma cópia do ácido desoxirribonucleico (DNA), tornam-se capazes de se integrar ao genoma do hospedeiro.",
+            "O HIV-1 e HIV-2 são retrovírus da família Lentiviridae. Pertencem ao grupo dos retrovírus citopáticos e oncogênicos. Para se multiplicarem, necessitam de uma enzima (trans criptase reversa) responsável pela transcrição do ácido ribonucleico (RNA) viral para uma cópia do ácido desoxirribonucleico (DNA), tornam-se capazes de se integrar ao genoma do hospedeiro.",
+            "O HIV-1 e HIV-2 são retrovírus da família Lentiviridae. Pertencem ao grupo dos retrovírus citopáticos e não oncogênicos. Para se multiplicarem, necessitam de uma enzima (transcriptase reversa) responsável pela transcrição do ácido ribonucleico (DNA) viral para uma cópia do ácido desoxirribonucleico (RNA), tornam-se capaz es de se integrar ao genoma do hospedeiro."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A história natural da infecção pelo HIV vem sendo alterada, consideravelmente, pela terapia antirretroviral (TARV), iniciada no Brasil em 1996, e pelo tratamento para todas as pessoas vivendo com o vírus, independentemente da carga viral, em 2013, o que resultou em aumento da sobrevida das pessoas, mediante reconstituição das funções do sistema imunológico e redução de doenças secundárias. Em relação ao HIV/AIDS, assinale a opção correta.",
+          "alternativas": [
+            "Após a infecção agu da, o tempo de desenvolvimento de sinais e de sintomas da AIDS é em média doze meses. Entretanto sinais e sintomas de imunodeficiência associada à infecção pelo HIV, não AIDS, podem aparecer com período de latência variável após a infecção aguda.",
+            "O tempo e ntre a infecção pelo HIV e o aparecimento de sinais e de sintomas da fase aguda, denominada síndrome retroviral aguda (SRA), é de uma a três semanas.",
+            "A transmissão vertical do HIV acontece pela passagem do vírus para a criança durante a gestação, o parto ou a amamentação. Até o momento não existem medidas capazes de reduzir este risco.",
+            "Em relação às gestantes vivendo com HIV, a TARV deve ser suspensa independentemente de critérios clínicos e imunológicos, devido ao seu risco de teratogenicidade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "As hepatites virais são doenças causadas por diferentes vírus hepatotrópicos que apresentam características epidemiológicas, clínicas e laboratoriais distintas. Têm distribuição universal, sendo observadas diferenças regionais de acordo com o agente etiológico. Com o objetivo de evitar a contaminação pelo vírus da hepatite A, a orientação mais adequada para um adulto não vacinado é",
+          "alternativas": [
+            "usar preservativo nas relações sexuais.",
+            "não compartilhar seringas e agulhas.",
+            "não se vacinar.",
+            "higienizar os alimentos, especialmente os ingeridos crus."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "A sífilis é uma infecção sistêmica, de evolução crônica. Quando não tratada, progride ao longo dos anos por vários estágios clínicos, que se dividem em sífilis recente (primária, secundária, latente recente) e tardia (laten te tardia e terciária). Em relação a essa enfermidade , ass inale a opção correta.",
+          "alternativas": [
+            "A suscetibilidade à infecção pelo Treponema pallidum é universal e os anticorpos produzidos em infecções anteriores são protetores.",
+            "Seu agente etiológico é o Treponema pallidum, é uma bactéria Gram -negativa, do grupo das espiroquetas, de alta patogenicidade.",
+            "O Treponema pallidum, quando presente na corrente sanguínea da gestante, não é capaz de atravessar a barreira placentária e penetrar na corrente sanguínea do feto.",
+            "A benzilpenicilinabenzatina não é mais considerada o medicamento de escolha para o tratamento da sifilis adquirida em gestantes, pois não se trata de uma opção segura e eficaz para o tratamento adequado desse grupo populacional."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Política Nacional de Promoção da Saúde",
+          "enunciado": "Assinale a opção que contém uma das diretrizes gerais da Política Nacional de Saúde Integral da População Negra: uma política para o SUS de 2013.",
+          "alternativas": [
+            "Incrementar as disparidades étnico - raciais no acesso aos serviços de saúde.",
+            "Garantir e ampliar o acesso da população negra do campo e da floresta, em particular as populações quilombolas, às ações e aos serviços de saúde.",
+            "Inclusão dos temas Racismo e Saúde da População Negra nos processos de formação e educação permanente dos trabalhadores da saúde e no exercício do controle social na saúde.",
+            "Promover o reconhecimento dos saberes e práticas populares de saúde, excluindo aqueles preservados pelas religiões de matrizes africanas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Trabalhador",
+          "enunciado": "Dentre os princípios e diretrizes da Política Nacional de Saúde do Trabalhador e da Trabalhadora de 2012, descarta-se a",
+          "alternativas": [
+            "precaução.",
+            "ergonomia.",
+            "hierarquização.",
+            "integralidade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Assinale a opção que corresponde ao método padrão ouro para diagnóstico da malária.",
+          "alternativas": [
+            "Hemograma",
+            "Parasitológico",
+            "Hemocultura",
+            "Microscopia de gota espessa de sangue"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Determinação Social da Saúde",
+          "enunciado": "Considerando os determinantes distais, intermediários e proximais na análise das condições de vida de uma população, é correto afirmar que determinantes distais",
+          "alternativas": [
+            "abrangem o desenvolvimento e a riqueza de um país; determinantes intermediários compreendem as condições de vida e de trabalho, o acesso à alimentação, à educação, à produção cultural, ao emprego, à habitação, ao saneamento; determinantes proximais incluem às características dos indivíduos, que exercem influência sobre seu potencial, sua condição de saúde.",
+            "referem-se às características dos indivíduos; determinantes intermediários envolvem as condições socioeconômicas; determinantes proximais incluem fatores como acesso à alimentação e habitação.",
+            "representam as condições de vid a e de trabalho; determinantes intermediários estão relacionados às características dos indivíduos; determinantes proximais envolvem aspectos como desenvolvimento e riqueza de um país.",
+            "são influenciados por características individuais; determinantes intermediários referem-se a o acesso à educação e emprego; determinantes proximais incluem as condições socioeconômicas e culturais."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Segundo o Caderno de Atenção Básica no 32 de 2013, estão entre os exames solicitados no primeiro trimestre do Pré -Natal de baixo risco:",
+          "alternativas": [
+            "teste de tolerância para glicose com 75g, se a glicemia estiver acima de 85mg/dl ou se houver fator de risco e Coombs indireto (se for Rh negativo).",
+            "bacterioscopia de secreção vaginal e hemograma.",
+            "urocultura mais urina tipo I e toxoplasmose se o IgG não for reagente.",
+            "toxoplasmose IgM e IgG e teste rápido diagnóstico anti-HIV."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "De acordo com o Programa Nacional de Imunizações, a temperatura controlada de armazenamento de imunobiológicos deve estar entre",
+          "alternativas": [
+            "+2ºC a +8 ºC e -20 ºC a -15 ºC.",
+            "-8ºC a -2 ºC e +15 ºC a +20 ºC.",
+            "+5ºC a +10 ºC e -25 ºC a -10 ºC.",
+            "-10ºC a -5 ºC e +10 ºC a +25 ºC. 8"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Saúde Mental",
+          "enunciado": "Segundo o documento Prev enção do Suicídio: Um manual para profissionais da saúde em atenção primária de 2018, o “Suicídio é um problema complexo para o qual não existe uma única causa ou uma única razão. Ele resulta de uma complexa interação de fatores biológicos, genéticos, psicológicos, so ciais, culturais e ambientais”. Assim sendo, leia os itens relacionados a seguir. 1 Estado mental atual e pensamentos sobre morte e suicídio. 2 Plano su icida atual – quão preparada a pessoa está e quão cedo o ato está para ser realizado. 3 Sistema de apoio social da pessoa (família, amigos, etc.). É correto afirmar que são aspectos que necessitam ser avaliados pelo profissional de saúde os itens",
+          "alternativas": [
+            "1 e 2 apenas.",
+            "1, 2 e 3.",
+            "1 e 3 apenas",
+            "2 e 3 apenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Assinale a opção que representa o sistema de informação onde são registrados eventos adversos relacionados a imunobiológicos.",
+          "alternativas": [
+            "SIPNI",
+            "SINAN",
+            "SI-EAPV",
+            "SINASN"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Enfermagem",
+          "assunto": "Prática Baseada em Evidências",
+          "enunciado": "Um pesquisador pretende investigar a relação entre o consumo regular de cafeína em adultos e o desenvolvimento de hipertensão arterial ao longo de 10 anos. Ele planeja recrutar indivíduos que consomem cafeína regularmente e um grupo que não a consome. Todos serão acompanhados ao longo do tempo para av aliar a ocorrência de hipertensão arterial. Tendo essas informações, o delineamento de estudo epidemiológico mais apropriado para essa investigação é o",
+          "alternativas": [
+            "estudo de caso-controle.",
+            "estudo de coorte.",
+            "estudo transversal.",
+            "ensaio clínico."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Aponte o tipo viral oncogênico que está associado a aproximadamente 70% dos c asos de câncer do colo do útero.",
+          "alternativas": [
+            "HPV 16 e 18",
+            "HPV 6 e 11",
+            "HPV 12 e 14",
+            "HPV 11 e 14"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Política Nacional de Promoção da Saúde",
+          "enunciado": "Qual das opções abaixo melhor descreve a Medicina Antroposófica?",
+          "alternativas": [
+            "Abordagem médico -terapêutica isolada, focada apenas em tratamentos específicos.",
+            "Abordagem de base mecanicista, que se baseia principalmente em processos biológicos e físicos para compreender e tratar as condições de saúde.",
+            "Prática disciplinar específica, limitada a uma única área de atuação no campo da saúde.",
+            "Abordagem médico-terapêutica complementar, de base vitalista, com organização transdisciplinar, visando à integralidade do cuidado em saúde."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "O indicador antropométrico considerado o melhor para avaliar o cresc imento de uma criança entre dois e dez anos de idade, sendo também o deficit antropométri co mais significativo no Brasil, é",
+          "alternativas": [
+            "circunferência da cabeça.",
+            "peso corporal.",
+            "altura para a idade.",
+            "índice de massa corporal (IMC)."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "A abordagem recomendada pelo Ministério da Saúde em 2006 para a implantação da triagem auditiva neonatal no Sistema Único de Saúde (SUS) foi",
+          "alternativas": [
+            "implementar a triagem auditiva neonatal de forma universal para todos os recém - nascidos.",
+            "iniciar a triagem auditiva neonatal apenas para recém -nascidos com deficiência auditiva confirmada.",
+            "excluir a triagem auditiva neonatal das recomendações do Pacto pela Saúde.",
+            "realizar a triagem auditiva neonatal de forma gradativa, começando por crianças com risco para deficiência a uditiva e expandindo para outros recém -nascidos à medida que a estrutura para diagnóstico e intervenção é estabelecida."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "No município de Cabo Frio, foram notificados ao departamento de vigilância em saúde cerca de 80 casos novos de dengue durante os mes es de março de 2019 a dezembro de 2022. Por se tratar de uma doença infecciosa, a medida epidemiológica que deve ser utilizada para quantificar a frequência desse agravo à saúde é",
+          "alternativas": [
+            "a incidência.",
+            "a razão de prevalência.",
+            "a prevalência.",
+            "o risco relativo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Segundo o Caderno de Atenção Básica no 32, no que diz re speito à vacina BCG , marque a opção correta.",
+          "alternativas": [
+            "Essa vacina fornece proteção para todas as formas de tuberculose.",
+            "Para os prematuros com menos de 36 semanas, administre a vacina depois que eles complet arem um mês de vida e atingirem 2kg de peso.",
+            "Para a criança HIV positiva, a vacina deve ser administrada 30 dias após o nascimento.",
+            "Essa vacina é eficaz contra todas as infecções respiratórias, incluindo gripes e resfriados."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "A Portaria GM/MS no 635, de 22 de maio de 2023 , estabelece diretrizes para custeio e implantação das equipes multiprofissionais (eMulti). Sendo assim, assinale a opção correta sobre a classificação das eMulti de acordo com a carga horária, vincu lação e composição profissional.",
+          "alternativas": [
+            "Equipe Multiprofissional Ampliada (400 horas semanais e dez a doze equipes vinculadas).",
+            "Equipe Multiprofissional Complementar (100 horas semanais e cinco a nove equipes vinculadas).",
+            "Equipe Multiprofissional Estratégica (100 horas semanais e uma a quatro equipes vinculadas).",
+            "Equipe Multiprofissional P rincipal (250 horas semanais e oito a dez equipes vinculadas)."
+          ],
+          "correta": "C"
+        }
+      ]
+    }
+  ]
+}
