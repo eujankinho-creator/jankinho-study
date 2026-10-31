@@ -1,0 +1,1467 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "corenpe-macae-2024-2026-complemento-lote013",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "macae2026-infectologista-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Prefeitura Municipal de Macaé",
+      "cargo": "Médico Diarista Infectologista",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-diarista-infectologista-cns203-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-def-completo-prefeitura-de-macae-2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A evolução dos métodos diagnósticos tem facilitado o diagnóstico de muitas doenças infecciosas e parasitárias. Os métodos baseados em biologia molecular, como a reação em cadeia da polimerase (PCR) e o sequenciamento metagenômico têm impacto no aumento da sensibilidade diagnóstica, e possibilitam a compreensão e o estudo de patógenos de forma mais aprofundada que métodos tradicionais. Ganha -se, ainda, praticidade e agilidade diagnóstica, particularmente em patógenos de difícil cultivo ou isolamento. Quanto ao uso da tecnologia de PCR no diagnóstico das doenças infecto-parasitárias, assinale a afirmativa correta.",
+          "alternativas": [
+            "A detecção de CMV em amostra de sangue de paciente vivendo com HIV é marcador de doença pelo vírus e deverá motivar tratamento específico obrigatório.",
+            "Para o HIV e hepatites virais, a PCR tem papel essencial para o diagnóstico da doença, principalmente na forma aguda, mas não no controle de tratamento.",
+            "No rastreio do câncer do colo do útero, a PCR para detecção de HPV de alto risco pode ser utilizado como método primário de rastreamento em protocolos validados.",
+            "Para o diagnóstico da Doença de Chagas na forma crônica, a PCR para Trypanosoma cruzi em amostra de sangue periférico apresenta sensibilidade maior que os métodos sorológicos.",
+            "No caso da tuberculose, o tes te rápido molecular, uma modalidade de PCR, tem sido usado para agilizar o diagnóstico e o controle de tratamento da doença, com elevada sensibilidade."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "A avaliação do status sorológico para diversas doenças no início da gestação é de sum a importância para a avaliação do risco de transmissão vertical dessas doenças em gestantes previamente infectadas, bem como para a orientação de gestantes suscetíveis quanto à prevenção. Uma gestante, na sua décima semana de gestação, retornou em consulta médica de rotina de pré -natal com os seguintes resultados sorológicos: Quanto aos resultados apresentados e ao risco de transmissão gestacional, assinale a afirmativa correta.",
+          "alternativas": [
+            "O resultado não reagente de HBsAg indica que a paciente é suscetível à hepatite B, sendo indicada a vacinação na gestação.",
+            "A presença de IgG reagente e de IgM não reagente para HSV indica infecção prévia pelo vírus, o que torna o risco de transmissão vertical nulo.",
+            "A presença de IgG reagente para rubéola e sarampo indica, necessariamente, a ocorrência de doença prévia, o que torna o risco de transmissão vertical nulo.",
+            "A presença de IgG reagente para toxoplasmose, mesmo na presença de IgM reagente, é indicativa de infecção prévia, o que torna o risco de transmissão vertical nulo.",
+            "O resultado sorológico não reagente de IgG e IgM para CMV indica que a paciente é suscetível para CMV, com risco de transmissão vertical em caso de primo-infecção."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A história do tratamento do HIV passou po r diversas fases, desde tratamentos com fármacos únicos, que resultaram em muitas falhas terapêuticas, passando por tratamentos combinados com alta frequência de efeitos adversos e baixa eficácia, chegando finalmente à tratamentos combinados altamente efic azes, que permitiram o controle adequado da doença na população infectada pelo vírus, usualmente baseados no uso de pelo menos três fármacos. Atualmente, o esquema preferencial recomendado no Brasil está baseado no uso de Tenofovir, Lamivudina e Dolutegravir. Com o desenvolvimento de novos antirretrovirais de alta eficácia, no entanto, paradigmas quanto à necessidade de três medicamentos ativos para o tratamento do HIV foram quebrados e, atualmente, é disponível no Brasil a terapia dupla para a infecção, que apresenta como grande vantagem a diminuição dos efeitos adversos e menor interação medicamentosa. Segundo orientação do Ministério da Saúde do Brasil, admitida a história de boa adesão e a ausência de falha terapêutica prévia, assinale a opção que mostr a o grupo com indicação de uso de terapia dupla com dolutegravir/lamivudina.",
+          "alternativas": [
+            "Gestantes e lactantes.",
+            "Coinfectados HIV-TB.",
+            "Coinfectados HIV-HBV.",
+            "Portadores de osteoporose.",
+            "Renais crônicos com TFGe < 30 mL/min."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A Neisseria gonorrhoeae (gonococo) é um diplococo Gram negativo intracelular e configura uma importante causa de infecção sexualmente transmissível (ISTs), sendo uma importante etiologia dos corrimentos uretrais. Quanto à infecção gonocócica no contexto de ISTs na população masculina, assinale a afirmativa correta.",
+          "alternativas": [
+            "A infecção por gonococo é usualmente assintomática (cerca de 90% dos casos).",
+            "A taxa de transmissão de gonorreia é baixa, sendo em torno de 5% por ato sexual.",
+            "O período de incubação da doença é longo, de aproximadamente quatro semanas.",
+            "A transmissão ocorre no sexo vaginal e anal, sem risco de transmissão no sexo oral.",
+            "O Gram de secreção uretral tem alta sensibilidade para diagnosticar uretrite gonocócica."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Em pa cientes vivendo com HIV, a meningite criptocócica é um importante diagnóstico diferencial das síndromes neurológicas de evolução subaguda, devendo sempre ser considerada naqueles que apresentem cefaleia, febre inexplicada e confusão mental. A realização d a punção lombar, excluído critério de contraindicação, é uma etapa importante da investigação e, uma vez confirmado o diagnóstico, é mandatório o tratamento adequado e precoce, tendo em vista a alta letalidade associada à doença. Em pacientes vivendo com HIV, são fatores implicados em pior prognóstico da neurocriptococose:",
+          "alternativas": [
+            "os baixos títulos de antígeno específico no LCR.",
+            "a baixa resposta inflamatória no LCR (< 20 células/mm3).",
+            "a preservação do nível sensorial na apresentação da doença.",
+            "a ocorrência da doença a despeito de imunossupressão leve (CD4 > 200).",
+            "a ausência de lesões invasivas fora do SNC (pulmões, pele, dentre outros)."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "O Pneumocystis foi descoberto por Carlos Chagas em 1909. Sua importância clínica, no entant o, passou a ser observada somente a partir da década de 1940, com casos de pneumonia intersticial em indivíduos imunossuprimidos. A partir da pandemia de HIV, na década de 1980, esse fungo ganhou destaque no meio médico, mantendo -se até hoje como a principal infecção oportunista nessa população. Em pacientes vivendo com HIV com formas graves de pneumocistose (definidos como PaO 2 < 70 mmHg em gasometria arterial), é primeira linha do tratamento a associação de",
+          "alternativas": [
+            "Fluconazol e flucitosina.",
+            "Anfotericina B e corticoide.",
+            "Anfotericina B e flucitosina.",
+            "Sulfametoxazol-trimetoprim e corticoide.",
+            "Sulfametoxazol-trimetoprim e fluconazol."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "O Streptococcus pyogenes é um dos patógenos bacterianos mais importantes em humanos. Essa bactéria é responsável por quadros infecciosos simples, como impetigo e faringite, até infecções sistêmicas graves. Adicionalmente, complicações pós - infecciosas podem ocorrer, o que adiciona complexidade à infecção estreptocócica. Quanto às formas de manifestação da doença e às suas complicações, assinale a afirmativa correta.",
+          "alternativas": [
+            "A glomerulonefrite pós -estreptocócica é uma complicação não-supurativa, tardia, e pode ocorrer a despeito de antibioticoterapia adequada.",
+            "As infecções de feridas operatórias por estreptococos costumam manifestar-se tardiamente, com progressão lenta e raras complicações locais.",
+            "As complicações supurativas, como abscessos retrofaríngeos, são frequentes e ocorrem devido à invasão tecidual, apesar da antibioticoterapia adequada.",
+            "A febre reumática já foi um importante problema de saúde pública, mas atualmente foi erradicada pela disponibilidade de antibioticoterapia adequada.",
+            "A escarlatina é resultante da i nfecção orofaríngea por cepas produtoras de exotoxinas pirogênicas e não ocorre como complicação de infecções estreptocócicas cutâneas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Sabe-se que as pessoas com imunodeficiências representam um grupo especial quando o assunto é imuniza ção, tanto pelas suas contraindicações quanto pelas suas indicações especiais. Assinale a opção que representa uma combinação de categoria de imunodeficiência e a vacina contraindicada.",
+          "alternativas": [
+            "Síndrome de Di George completa - todas as vacinas.",
+            "Linfócitos T CD4 com contagem <250 - todas as vacinas.",
+            "Deficiência de complemento - vacinas com agentes virais atenuados.",
+            "Defeito de barreira anatômica do SNC - vacinas pneumocócicas conjugadas.",
+            "Doença granulomatosa crônica - vacinas com agentes bacterianos atenuados."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "O Vírus Sincicial Respiratório (VSR) é um dos agentes mais comuns de infecção do trato respiratório inferior em crianças menores de 2 anos de idade e uma importante causa de bronquiolite viral aguda nessa faixa etária. Os lactentes, especialmente os com menos de 6 meses, apresentam maior risco de desenvolver formas graves da doença. Visando prevenir a doença, particularmente nessa faixa etária, o Ministério da Saúde incorporou duas novas tecnologias para sua prevenção: i) a vacina recombinante VSR A e B; e ii) o anticorpo monoclonal nirsevimabe. Essas estratégias foram estabelecidas, pelo Ministério da Saúde do Brasil, de forma que",
+          "alternativas": [
+            "A vacina VSR A e B é oferecida para recém -nascidos prematuros, com peso superior a 1.500g.",
+            "O nirsevimabe é oferecido a bebês prematuros com idade gestacional menor ou igual a 28 semanas.",
+            "O nirsevimabe é oferecido a gestantes até a 28ª semana de gestação, sem restrição de idade materna.",
+            "A vacina VSR A e B é oferecida para ges tantes com idade inferior a 40 anos, após a 28ª semana de gestação.",
+            "O nirsevimabe é oferecido para crianças de até 24 meses com comorbidades associadas a alto risco de doença grave."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente de 43 anos, do sexo masculino, natural d e Teresina (Piauí), apresentou febre de padrão irregular há 3 meses, perda ponderal, astenia e aumento abdominal progressivo. Ao exame físico, observou -se fígado palpável a 4 cm abaixo do rebordo costal direito e baço palpável a 10 cm abaixo do rebordo costal esquerdo, ambos de consistência firme e indolor. Exames laboratoriais evidenciam: • hemoglobina 8,2 g/dL (referência: 13,5–17,5 g/dL). • leucócitos 2.100/mm³ (referência: 4.000–11.000/mm³) . • plaquetas 78.000/mm³ (referência: 150.000–450.000/mm³). Considerando a principal hipótese diagnóstica, assinale a afirmativa correta.",
+          "alternativas": [
+            "A hemocultura é o método mais específico para detecção do parasita e permite determinar a sensibilidade aos antimicrobianos.",
+            "A confirmação diagnóstica deve ser feita por sorologia (ELISA), que apresenta maior especificidade que os métodos parasitológicos.",
+            "A pesquisa direta de formas amastigotas é o padrão-ouro para confirmação diagnóstica, podendo ser realizada em diferentes materiais clínicos.",
+            "A frequente reatividade cruzada com espécies de tripanossomas torna o uso de biologia molecular limitado em cenários em que os parasitas coexistem.",
+            "Testes rápidos imunocromatográficos positivos apresentam elevada acurácia e determinam a confirmação do diagnóstico em regiões endêmicas da doença."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "As hepatites virais são causadas por diferentes vírus hepatotrópicos e divergem em características genéticas, epidemiológicas, clínicas e laboratoriais. A prevenção é multidimensional, fundamentando-se em quatro pilares: imunização, estratégias de redução de danos, incentivo ao sexo seguro e conscientização populacional. Quanto à suscetibilidade e à imunidade para os vírus das hepatites virais, assinale a afirmativa correta.",
+          "alternativas": [
+            "O único tipo viral que possui vacina disponível no Sistema Único de Saúde é o vírus da hepatite B.",
+            "A imunidade adquirida por doença, no caso da hepatite B, é marcada pela presença exclusiva de anti-HBc IgG reagente.",
+            "Indivíduos adequadamente tratados para h epatite C que apresentem anti -HCV reagente, poderão apresentar reinfecção pelo vírus.",
+            "A dosagem de anti -HAV IgG deverá ser sistematicamente solicitada após a vacinação para avaliar se a resposta vacinal foi adequada.",
+            "O vírus da hepatite D é defecti vo e depende da presença do vírus da hepatite C para causar infecção, de forma que somente os portadores crônicos do vírus C são suscetíveis a essa infecção."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente de 24 anos, sexo feminino, procura atendimento em Clínica da Família, para seguimento pós -tratamento de sífilis realizado há 12 meses. À época, apresentava úlcera vulvar única e indolor (cancro duro), sendo tratada com dose única de penicilina G benzatina (2,4 milhões de UI). A paciente permanece assintomática e afirma abst inência sexual desde o diagnóstico, devido ao forte abalo emocional relatado. Nega comorbidades e possui rastreio negativo para demais ISTs. Traz os seguintes resultados de exames sorológicos realizados: Data do tratamento: 12/04/2025. Quanto ao quadro exposto, assinale a afirmativa correta.",
+          "alternativas": [
+            "Não é possível afirmar se a resposta terapêutica foi adequada ou inadequada, pois não houve repetição do ELISA ao longo do monitoramento.",
+            "A resposta ao tratamento foi adequada, não devendo a ascensão do título entre o penúltimo e o último exame de monitoramento ser valorizada.",
+            "A resposta ao tratamento foi inadequada e está provavelmente associada à presença de neurossífilis, sendo recomendada punção lombar para sua investigação.",
+            "A resposta ao tratamento foi inadequada e está provavelmente associada à reexposição entre o penúltimo e o último exame, sendo indicado retratar imediatamente.",
+            "A resposta ao tratamento foi inadequada e está associada à resistência do Treponema pallidum à penicilina G benzatina, sendo indicado retratar com ceftriaxona, imediatamente."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Lactente de 5 meses, sexo masculino, previamente hígido, é levado à unidade de saúde com febre alta e exantema maculopapular difuso. O responsável relata que os sintomas se iniciaram quatro dias antes, com tosse, coriza e conjuntivite evoluindo com elevação da febre e surgimento de “manchinhas vermelhas” na face e pescoço que, rapidamente, se espalharam para o resto do corpo. A criança apresenta calendário vacinal atualizado conforme a idade. Considerando a hipótese diagnóstica principal, em relação às medidas de vigilância em saúde pública, assinale a afirmativa correta.",
+          "alternativas": [
+            "A notificação deve aguardar a confirmação laboratorial, com a investigação epidemiológica iniciada apenas após a definição diagnóstica, a fim de evitar sobrecarga do sistema de vigilância e custos desnecessários decorrentes da investigação de casos não confirmados.",
+            "A notificação deve ser imediata, com início concomitante da investigação epidemiológica, incluindo a busca ativa de casos, a identificação e o monitoramento de contatos, a implementação de bloqueio vacinal e a adoção de medidas de comunicação de risco e de educação em saúde.",
+            "A investigação epidemiológica deve priorizar contatos que estejam sintomáticos com manifestações clínicas compatíveis, podendo a avaliação de ind ivíduos contactantes assintomáticos ser postergada, dada a menor probabilidade de transmissão na ausência de sintomas respiratórios.",
+            "As ações de comunicação de risco devem ser preferencialmente centralizadas em nível federal, a fim de garantir uniformidade de mensagens institucionais, devendo - se evitar intervenções locais descentralizadas que possam gerar interpretações divergentes e potencial alarme coletivo.",
+            "As ações de educação em saúde devem ser implementadas de forma gradual e direcionadas aos grupos de maior risco, podendo ser postergadas na comunidade até a confirmação definitiva do caso, a fim de evitar mobilização desnecessária de recursos e desgaste das estratégias de vigilância."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente de 35 anos, sexo masculino, procu rou atendimento por ferimento na mão. Relatou que 12 horas antes, envolveu -se em uma briga e machucou sua mão direita após desferir um soco na boca do seu vizinho, apresentando dor local, edema discreto e limitação de movimento do segundo dedo. Ao exame, há uma laceração sobre a articulação metacarpofalângea direita, sem secreção purulenta evidente. Sobre o manejo adequado da lesão, assinale a afirmativa correta.",
+          "alternativas": [
+            "A baixa carga bacteriana em mordeduras humanas permite manejo conservador, com vigilância clínica, desde que não haja comprometimento articular evidente ao exame físico.",
+            "Na ausência de sinais sistêmicos ou secreção purulenta, o início de antibióticos pode ser postergado, sendo indicado, se houver progressão clínica, nas primeiras 24–48 horas.",
+            "As lesões devem ser suturadas após limpeza e irrigação adequadas, com o objetivo de reduzir o risco de infecção, favorecer a cicatrização e melhorar o resultado funcional e estético.",
+            "Lesões do tipo clenched-fist injury apresentam maior potencial de complicações infecciosas quando comparadas às lesões oclusivas e é comum o envolvimento de tendões e articulações.",
+            "A antibioticoterapia empírica deve priorizar cobertura para Staphylococcus aureus e estreptococos, com a inclusão de cobertura para anaeróbios reservada para casos com sinais de infecção estabelecida."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente de 58 anos, sexo masculino, é internado com suspeita de pneumonia adquirida na comunidade. Durante a investigação, são coletadas amostras de escarro para análise microbiológica. Considerando os princípios racionais de solicitação e interpretação de exames complementares em doenças infecciosas, assinale a afirmativa correta.",
+          "alternativas": [
+            "A adequação do material clínico para análise microbiológica depende da representatividade da amostra em relação ao sítio de infecção e das condições de coleta e transporte.",
+            "A análise microbiológica de amostras contaminadas por microbiota comensal mantém alta especificidade diagnóstica, desde que associada a métodos automa tizados de identificação.",
+            "A coleta de material clínico após o início da antibioticoterapia não interfere no rendimento dos exames microbiológicos, podendo ser realizada sem prejuízo do rendimento diagnóstico.",
+            "A validade do material clínico independe das condições de coleta e transporte, desde que o processamento laboratorial seja realizado em tempo oportuno e por laboratório especializado.",
+            "A presença de grande quantidade de células epiteliais escamosas no escarro indica boa representativ idade do trato respiratório inferior, validando a amostra para análise microbiológica."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A epidemiologia é a ciência básica da prevenção de doenças e desempenha papel relevante no delineamento e na avaliação de políticas públicas relacionadas à saúde e às questões sociais. Com base nos conceitos fundamentais da epidemiologia aplicados às doenças infecciosas, assinale a afirmativa correta.",
+          "alternativas": [
+            "Epidemia corresponde à ocorrência simultânea de casos em diferentes continentes, como observado na disseminação global da Covid-19.",
+            "A endemicidade caracteriza-se pela ocorrência de casos em níveis habituais em determinada região, como a hanseníase na região Centro-Oeste do Brasil.",
+            "Pandemia caracteriza-se pelo aumento inesperado de casos em uma população, com evidência de disseminação geográfica restrita, como o surto de sarampo em São Paulo.",
+            "A incidência corresponde ao número total de casos de uma doença em um determinado período, sendo influenciada pela duração da doença, como observado na infecção pelo HIV em Porto Alegre.",
+            "A prevalência reflete a ocorrência de casos novos de uma doença em uma população ao longo do tempo, sendo o principal indicador utilizado para monitorar surtos agudos, como na Zika no Recife."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 69,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "A escolha da antibioticoterapia correta depende do conhecimento sobre os mecanismos de ação dos antibióticos, bem como do conhecimento sobre seus mecanismos de resistência. Os beta-lactâmicos, por exemplo, são antibióticos que têm como mecanismo de ação a ligação às proteínas de ligação à penicilina (PBPs), enzimas bacterianas essenciais que catalisam a síntese da parede celular, impedindo seu funcionamento adequado. Diversas classes de medicamentos incluem -se nesse grupo, como as penicilinas natu rais, as penicilinas semissintéticas, as cefalosporinas, e os carbapenêmicos. Quanto aos mecanismos de resistência dessa classe de medicamentos, assinale a afirmativa correta.",
+          "alternativas": [
+            "Alteração em porinas e bombas de efluxo não tem impacto na resistência bacteriana por essa classe de medicamentos, visto que sua ação é na parede bacteriana externa à membrana.",
+            "A resistência do Staphylococcus aureus a essa classe de medicamentos está ligada a alterações na PBP originadas no gene mecA, e pode ser contornada pe lo uso de carbapenêmicos.",
+            "Apesar de apresentarem eficácia in vitro contra Enterococcus faecalis, novas cefalosporinas, como a ceftarolina, só devem ser usadas em terapia combinada para tratamento de infecções por esse patógeno.",
+            "Inibidores de beta lactamase não são usados rotineiramente no tratamento de pneumococos resistentes em infecções no sistema nervoso central, pois não ultrapassam adequadamente a barreira hemato-encefálica.",
+            "A resistência de bacilos Gram -negativos não fermentadores é mediada por beta -lactamases de espectro expandido, que pode ser facilmente contornada pelo uso de inibidores de beta-lactamases como o clavulanato."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente do sexo masculino, 60 anos, interna para tratamento de herpes zoster em face, com acometimento de ramos oftálmico e maxilar. Optou -se pelo tratamento inicial com aciclovir venoso. Dentre os efeitos adversos associados a esse medicamento, a insuficiência renal aguda (IRA) é uma importante complicação, que exige monitorização. Considerando a lesão renal ocasionada pelo uso de aciclovir, assinale a afirmativa correta.",
+          "alternativas": [
+            "A velocidade de infusão intravenosa do medicamento pode influenciar no risco de desenvolvimento de disfunção renal.",
+            "A disfunção renal não ocorre com ganciclovir, que é uma alternativa terapêutica em indivíduos que desenvolveram IRA.",
+            "A hidratação adequada do paciente no período pré-infusão do medicamento não tem impacto na prevenção da lesão renal.",
+            "O principal mecanismo de lesão é a nefrite intersticial aguda, com padrão inflamatório exacerbado no exame de elementos anormais do sedimento urinário.",
+            "O principal mecanismo de lesão é a necrose tubular aguda, que ocorre de forma tempo-dependente, sendo a IRA mais comum após o quinto dia de tratamento."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 71,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "O Histoplasma capsulatum é um fungo dimórfico, adquirido por inalação de microconídios presentes em solos contaminados por fezes de aves ou morcegos, podendo causar diferentes formas clínicas, a depender da intensidade da exposi ção e do estado imunológico do hospedeiro. Considerando as manifestações clínicas e os recursos para o diagnóstico e o tratamento da histoplasmose, assinale a afirmativa correta.",
+          "alternativas": [
+            "A forma pulmonar aguda leva frequentemente à formação de cavitações pulmonares disseminadas.",
+            "O diagnóstico da forma aguda baseia -se prioritariamente na cultura do fungo, sendo os testes de detecção de antígeno pouco úteis nessa fase inicial.",
+            "A histoplasmose disseminada ocorre predominantemente em indivíduos com déficit de imunidade humoral e suas manifestações dependem da carga fúngica inalada.",
+            "A forma pulmonar aguda ocorre tipicamente em indivíduos imunocompetentes, sendo frequentemente autolimitada e raramente requer tratamento antifúngico específico.",
+            "A histop lasmose crônica leve deve ser tratada, preferencialmente, com antifúngicos tópicos, reservando a terapia sistêmica para formas agudas ou disseminadas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 72,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Paciente de 8 anos, sexo masculino, previamente hígido, é levado ao pronto atendimento com história de febre alta, mal -estar e cefaleia há 24 horas. Nas últimas 8 horas, evoluiu com sonolência progressiva e aparecimento de múltiplas lesões cutâneas purpúricas em membros inferiores. Considerando o quadro clínico descrito e as medidas de isolamento e controle de transmissão pertinentes, assinale a afirmativa correta.",
+          "alternativas": [
+            "Na presença de lesões purpúricas, o paciente deverá permanecer em isolamento de contato, devido à alta carga bacteriana presente nas lesões.",
+            "A quimioprofilaxia deve ser iniciada apenas após a confirmação laboratorial do caso índice, a fim de evitar o uso desnecessário de antibióticos.",
+            "A quimioprofilaxia está indicada para todos os profissionais de saúde envolvidos no atendimento do paciente q ue não estejam previamente vacinados.",
+            "O isolamento por gotículas deve ser instituído imediatamente na suspeita clínica e pode ser suspenso após 24 horas do início de antibioticoterapia adequada.",
+            "A rifampicina é a droga de escolha para quimioprofila xia em todos os contatos, exceto gestantes, que deverão receber imunoglobulina específica imediatamente."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 73,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Paciente de 23 anos, do sexo feminino, portadora de lupus eritematoso sistêmica, em uso de corticoterapia em altas doses e metotrexate. Apresenta quadro agudo de cefaleia, febre e rebaixamento do nível de consciência. Ao exame, apresenta rigidez de nuca. É realizada punção lombar com os seguintes achados no líquido cefalorraquidiano (LCR): • Aspecto: turvo. • Leucócitos: 980 células/mm³ (76% polimorfonucleares). • Proteína: 150 mg/dL. • Glicose: 25 mg/dL. • Bacterioscopia pelo Gram: numerosos diplococos Gram - positivos. Assinale a opção que apresenta a interpretação correta do resultado da análise do LCR.",
+          "alternativas": [
+            "Pleocitose com neutrofilia, proteína normal, glicose baixa e bacterioscopia compatível com meningite por Listeria monocytogenes.",
+            "Pleocitose com neutrofilia, proteína elevada, glicose baixa e bacterioscopia compatível com meningite por Neisseria meningitidis.",
+            "Pleocitose com neutrofilia, proteína elevada, glicose baixa e bacterioscopia compatível com meningite por Streptococcus pneumoniae.",
+            "Contagem normal de leucócitos, proteína normal, glicose baixa e bacterioscopia compatível com meningite por Streptococcus pneumoniae.",
+            "Contagem normal de leucócitos, proteína elevada, glicose normal e bacterioscopia compatível com meningi te por Listeria monocytogenes."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 74,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Paciente feminina, 93 anos, internada em enfermaria para tratamento de pneumonia, encontra-se em uso de cateter vesical de demora há três dias e acesso venoso periférico para administração de medicações. Durante a visita, a equipe clínica discutiu medidas relevantes para prevenção de infecções relacionadas à assistência à saúde (IRAS). Sobre o caso narrado, assinale a afirmativa correta.",
+          "alternativas": [
+            "A higienização das mãos é a medida mais simples e menos dispendiosa para a prevenção de IRAS.",
+            "O cateter vesical de demora deve ser mantido enquanto o paciente estiver internado, a fim de facilitar o controle do débito urinário.",
+            "A troca rotineira do cateter vesical em intervalos fixos reduz significativamente o risco de infecção do trato urinário associada ao cateter.",
+            "A higienização das mãos pode ser dispensada quando o profissional usa luvas estéreis durante a manipulação do paciente e de dispositivos invasivos.",
+            "A manipulação do acesso venoso periférico dispensa a higienização prévia das mãos, desde que sejam usadas luvas de procedimento e não haja sinais locais de infecção."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 75,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Paciente masculino, 64 anos, com nefropatia hipertensiva, em hemodiálise há dois anos por meio de cateter venoso central tunelizado de longa permanência. Evoluiu com episódios de calafrios, febre e mal -estar nas últimas duas sessões de diálise. Nega outros sintomas. Foram coletados dois pares de hemoculturas periféricas, com identificação de crescimento de leveduras. Considerando o quadro clínico descrito, assinale a afirmativa correta.",
+          "alternativas": [
+            "A negativação das hemoculturas após o início da terapia antifúngica, permite a abreviação do tratamento para 7 dias de antifúngico sistêmico.",
+            "A presença de candidemia impõe investigação de focos secundários, incluindo endoca rdite, sendo recomendada a avaliação ecocardiográfica conforme o contexto clínico.",
+            "A candidemia associada ao cateter venoso central deve ser manejada com manutenção do dispositivo, desde que seja iniciada prontamente terapia antifúngica sistêmica.",
+            "O tratamento empírico inicial desse paciente deve ser realizado preferencialmente com fluconazol, considerando a prevalência global de espécies de Candida com sensibilidade reduzida às equinocandinas.",
+            "A presença de leveduras em hemoculturas periféricas , na ausência de sinais de instabilidade hemodinâmica, representa colonização transitória, sendo recomendável novas coletas antes de instituir tratamento antifúngico."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 76,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A endocardite infecciosa é uma infecção da superfície endocárdica do c oração e implica na presença de microrganismos na lesão. Tradicionalmente associada com valvulopatias congênitas e dano valvular por doença reumática, emergiu progressivamente como patologia associada ao uso de drogas injetáveis e cuidados de saúde. Quanto à etiologia da endocardite infecciosa, assinale a afirmativa correta.",
+          "alternativas": [
+            "Staphylococcus lugdunensis é a principal causa de endocardite aguda em adultos.",
+            "Streptococcus pneumoniae é uma causa frequente de endocardite direita em indivíduos confinados.",
+            "Candida tropicalis é atualmente a causa mais comum de endocardite fúngica, superando a C.albicans.",
+            "Bartonella spp é uma das causas frequentes de endocardite com cultura negativa nos países industrializados.",
+            "Streptococcus pyogenes é o causador mais frequente de endocardite em portadores de lesão valvar reumática."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 77,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente de 40 anos, sexo feminino, sem comorbidades ou alergias conhecidas, apresenta quadro clínico de febre associada a dor lombar há três dias. Após a avaliação clínica foi internada com o diagnóstico presumido de pielonefrite; coletada urinocultura, foi iniciado o tratamento parenteral com ceftriaxone. Em 48h de tratamento, a paciente apresentava-se afebril e estável clinicamente. Nesse momento, foi liberado pelo laboratório o resultado da urinocultura e antibiograma coletada na admissão, conforme disposto a seguir: Tipo de amostra: Urina | Nome do organismo: Escherichia coli | Número de colônias: >105 Teste de susceptibilidade a antimicrobianos *S: Sensível; I: Intermediário; R: Resistente Considerando o uso racional de antibióticos e a segurança terapêutica, a escolha mais adequada para complementar o tratamento vigente é",
+          "alternativas": [
+            "Cefepima.",
+            "Ertapenem.",
+            "Ceftriaxona.",
+            "Ciprofloxacino.",
+            "Sulfametoxazol/Trimetoprim."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 78,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A osteomielite é uma infecção grave, cuja incidência tem aumentado ao longo dos anos em decorrência do envelhecimento populacional, da maior prevalência de fatores de risco (como o Diabetes mellitus) e dos avanços nos métodos diagnósticos. Seu tratamento envolve diversos desafios, relacionados à baixa penetração de antibióticos no tecido ósseo e à frequente necessidade de abordagem cirúrgica para o controle da infecção, o que pode resultar em morbidade significativa. Quanto ao diagnóstico e tratamento da o steomielite, assinale a afirmativa correta.",
+          "alternativas": [
+            "O tratamento da osteomielite crônica deve ser iniciado de forma empírica após coleta de hemocultura.",
+            "O tratamento empírico de osteomielites agudas em pacientes com hemoglobinopatia deverá incluir cobertura para bacilos Gram-negativos.",
+            "Quando indicada a coleta de material, o swab de secreção oriunda de fístula recente (menos de sete dias) poderá ser usado para investigação microbiológica.",
+            "Em osteomielite de origem hematogênica, o tratamento cirúrgico é proscrito, sendo a antibioticoterapia adequada o suficiente para o controle da infecção.",
+            "Após uma semana de tratamento antimicrobiano combinado, a rifampicina pode ser mantida em monoterapia para infecções de próteses envolvendo Staphylococcus aureus."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 79,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente de 29 anos, sexo feminino, retorna da Nigéria após viagem de seis meses a trabalho. Três semanas após chegar no Rio de Janeiro, iniciou episódios de febre intermitente, associados a calafrios e sudorese profusa, a cada 48 horas. Exames laboratoriais no 5º dia de sintomas, evidenciaram anemia leve e trombocitopenia discreta. Considerando a suspeita de malária, assinale a afirmativa correta.",
+          "alternativas": [
+            "A identificação da espécie é mais precisa na gota espessa do que na distensão sanguínea, especialmente em casos de baixa parasitemia.",
+            "A periodicidade da febre a cada 48 horas afasta o diagnóstico de malária por P. falciparum , sendo mais compatível com infecção por P. malariae.",
+            "A confirmação diagnóstica depende de PCR, uma vez que métodos microscópicos não permitem diferenciar as espécies de plasmódios da região.",
+            "Dada a elevada sensibilidade do método, a ausência de parasitas na gota espessa inicial permite excluir o diagnóstico de malária por P. ovale.",
+            "Os testes rá pidos antigênicos para malária não devem ser usados para controle de cura, pois podem permanecer positivos após a resolução da infecção."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 80,
+          "disciplina": "Enfermagem",
+          "assunto": "Arboviroses (Dengue, Zika, Chikungunya, Febre Amarela, Oropouche e Nilo Ocidental)",
+          "enunciado": "Paciente de 63 anos, sexo feminino, residente no Rio de Janeiro, diabética tipo 2 insulino -dependente, procurou atendimento em uma Unidade de Pronto Atendimento com quadro de 3 dias de febre de aproximadamente 38 oC, mal -estar, mialgia, dor retro - orbitária e cefaleia. No quarto dia de sintomas, concomitantemente ao desaparecimento da febre, notou o surgi mento de rash maculopapular difuso associado a uma dor abdominal intensa e contínua. Nega viagens recentes ou contato com animais. Quanto à investigação laboratorial inicial, considerando a recomendação atual do Ministério da Saúde, assinale a afirmativa correta.",
+          "alternativas": [
+            "A presença de hematócrito normal exclui o diagnóstico de dengue.",
+            "A ausência de IgM sérica para dengue exclui o diagnóstico de dengue.",
+            "A presença do antígeno NS1 em amostra de sangue total confirma o diagnóstico de dengue.",
+            "A presença de IgG sérica associada à elevação do hematócrito confirma o diagnóstico de dengue.",
+            "Não é possível confirmar laboratorialmente o diagnóstico de dengue na primeira semana de sintomas."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "macae2026-cardiologista-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Prefeitura Municipal de Macaé",
+      "cargo": "Médico I - Diarista Cardiologista",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-i-diarista-cardiologista-cns205-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-def-completo-prefeitura-de-macae-2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Na estratificação do risco cardiova scular na prevenção primária, alguns fatores adicionais podem modificar a estimativa de eventos. Nesse contexto, assinale a opção que não corresponde a um fator amplificador do risco.",
+          "alternativas": [
+            "Lipoproteína(a) ≥125 nmol/L.",
+            "Apolipoproteína B ≥120mg/dL.",
+            "Doenças inflamatórias crônicas como lúpus eritematoso sistêmico e artrite reumatoide.",
+            "História familiar de evento cardiovascular, independente da faixa etária do parente durante o evento.",
+            "Dosagem persistentemente e levada de triglicerídeos (≥150 mg/dL em jejum ou ≥175 mg/dL sem jejum)."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Diversas complicações cardiovasculares podem ocorrer durante a gravidez e requerem particularidades diagnósticas e terapêuticas. Em relação à ocorrência da Fibrilação Atrial (FA) durante a gestação, analise as afirmativas a seguir. I. Quando a FA ocorre na gravidez, a arritmia está frequentemente associada a alguma outra condição subjacente, como tireotoxicose, valvulopatia ou distú rbio eletrolítico. II. A decisão de iniciar anticoagulação sistêmica neste contexto segue os mesmos critérios de pacientes fora da gestação. III. A cardioversão elétrica é contraindicada em todas as fases da gravidez, devido aos riscos para o feto. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "O manejo terapêutico de pacientes com Estenose Aórtica (EA) significativa envolve uma abordagem multifatorial, com diversas particularidades. Em relação a esse tema, as opções a seguir estão corretas, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "A hipertensão arterial sistêmica é comum em pacientes com EA.",
+            "Até 1/3 dos pacientes com EA desenvolvem fibrilação ou flutter atrial.",
+            "Em pacientes com EA e insuficiência cardíaca, diuréticos podem reduzir os sintomas associados à congestão.",
+            "Quando pacientes com EA desenvolvem sintomas relacionados à valvulopatia, a única opção terapêutica eficaz com benefício prognóstico é a substituição valvar.",
+            "Ensaios clínicos randomizados demonstraram que estatinas de alta potência podem mudar o curso da doença em pacientes com EA leve, reduzindo a progressão da valvulopatia. Atenção: o caso apresentado a seguir, refere-se às duas próximas questões. Paciente masculino, 16 anos, sem comorbidades conhecidas ou uso de medicamentos apresentou episódio de síncope enquanto jogava basquete. Após recuperar a consciência, ainda apresentava queixa de palpitação e desconforto torácico, sendo levado pelos pais à emergência mais próxima. A família relatou que o paciente era filho único e tinha apresentado 2 episódios semelhantes durante atividades esportivas nos últimos 3 meses, que atribuíram à desidratação. Ao exame: Lúcido, orientado, mantendo desconforto torácico, sudoreico e taquidispneico em ar ambiente, acianótico, FC: 170 bpm (regular), PA: 84x54 mmHg, FR 28 irpm, SatO2: 94%. Ausculta respiratória com crepitação fina nas bases. O eletrocardiograma de admissão encontra-se abaixo."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Considere o exame físico descrito a seguir. Ausência de turgência jugular patológica a 90º, com pulso venoso sem onda ‘a’ visível. Pulsos carotídeos de amplitude normal. Impulso do VD impalpável. Ictus do VE visível e palpável em decúbito dorsal no 5º espaço intercostal esquerdo na linha axilar média, globoso, com 3cm de diâmetro e frêmito palpável. Ritmo cardíaco irregularmente irregular, em 3 tempos (B3), com sopro mesossistólico 2+/6+ mais audível foco aórtico, sem irradiação, que não se modifica com a mano bra isométrica de handgrip. Presença também de sopro holossistólico 4+/6+ mais audível em foco mitral, com irradiação axilar posterior, que aumenta com a manobra isométrica de handgrip. Há ainda um sopro protodiastólico mitral +/6+, sem reforço pré-sistólico. Assinale a opção que indica, corretamente, a provável valvulopatia primária predominante subjacente e as possíveis complicações associadas.",
+          "alternativas": [
+            "Insuficiência mitral grave. / Sobrecarga volumétrica do ventrículo esquerdo. / Fibrilação atrial.",
+            "Estenose mitral grave. / Ausência de sobrecarga ventricular esquerda. / Fibrilação atrial.",
+            "Estenose aórtica grave. / Sobrecarga pressórica do ventrículo esquerdo. / Ritmo sinusal.",
+            "Insuficiência aórtica grave / Sobrecarga volumétrica do ventrículo esquerdo / Fibrilação atrial.",
+            "Dupla lesão aórtica grave. / Sobrecarga volumétrica e pressórica do ventrículo esquerdo. / Fibrilação atrial."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Eletrocardiograma (ECG)",
+          "enunciado": "As diferentes etiologias de Taquicardia Ventricular (TV) apresentam mecanismos fisiopatológicos di stintos, com implicações diretas no tratamento. Considerando um paciente hemodinamicamente estável, assinale a opção que indica o contexto no qual a taquicardia ventricular sustentada pode tipicamente reverter com a administração de bloqueadores dos canais de cálcio intravenosos.",
+          "alternativas": [
+            "TV idiopática fascicular.",
+            "TV na fase aguda da miocardite viral.",
+            "TV associada à Síndrome de Brugada.",
+            "TV associada à miocardiopatia chagásica.",
+            "TV nas primeiras 24 horas de uma síndrome coronariana aguda."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "O manejo terapêutico de pacientes com Insuficiência Cardíaca (IC) descompensada demanda uma abordagem multifatorial que envolve a correta identificação dos fatores desencadeantes, do perfil hemodinâmico e das opções farmacológicas mais adequadas. Neste contexto, em relação ao tratamento de pacientes com IC descompensada, assinale a afirmativa incorreta.",
+          "alternativas": [
+            "Na ausência de hipotensão, vasodilatadores podem ser associados aos diuréticos na IC aguda para aliviar sintomas congestivos.",
+            "Na presença de resistência aos diuréticos de alça, a adição de um diurético tiazídico pode potencializar significativamente o efeito diurético.",
+            "A avaliação da natriurese por meio do sódio urinário após a administração de diuréticos de alça, não possui utili dade na titulação da dose.",
+            "A dose inicial intravenosa de diuréticos de alça na IC descompensada deve basear -se, preferencialmente, na dose oral crônica previamente utilizada.",
+            "Doses elevadas de diuréticos de alça podem induzir ativação neuro-hormonal e distúrbios eletrolíticos, associando -se em estudos observacionais à piora da função renal e à menor sobrevida."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A ivabradina é uma droga bloqueadora do canal If, que pode ser usada para reduzir o risco de hospitalização e m alguns subgrupos específicos de pacientes com insuficiência cardíaca e fração de ejeção reduzida. Entretanto, é um medicamento com potenciais efeitos adversos significativos. Entre as opções a seguir, assinale a que não representa uma potencial complicação associada ao uso de ivabradina.",
+          "alternativas": [
+            "Anosmia.",
+            "Fibrilação atrial.",
+            "Distúrbios visuais.",
+            "Graus variados de bloqueio atrioventricular.",
+            "Torsades de pointes quando associada a fármacos que causam bradicardia ou prolongam o QT."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Enfermagem",
+          "assunto": "Eletrocardiograma (ECG)",
+          "enunciado": "Em pacientes com tromboembolismo pulmonar, assinale a opção que indica, corretamente, o achado eletrocardiográfico mais frequente.",
+          "alternativas": [
+            "Padrão S1Q3T3.",
+            "Fibrilação atrial.",
+            "Taquicardia sinusal.",
+            "Desvio do eixo frontal para a direita.",
+            "Bloqueio incompleto de ramo direito."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Leia o fragmento a seguir. Inibe o metabolismo de ácidos graxos, desviando o metabolismo miocárdico para vias mais efi cientes em termos de consumo de oxigênio, reduzindo a frequência da angina sem efeitos hemodinâmicos, em pacientes com angina estável crônica. Assinale a opção que indica o antianginoso ao qual o mecanismo de ação descrito está relacionado.",
+          "alternativas": [
+            "Atenolol.",
+            "Verapamil.",
+            "Ranolazina.",
+            "Trimetazidina.",
+            "Mononitrato de isossorbida."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Considerando a doença de base descrita, assinal e a opção que indica a substância, cuja produção se encontra aumentada nesse cenário, que está diretamente relacionada ao desenvolvimento da lesão cardíaca observada no ecocardiograma.",
+          "alternativas": [
+            "Dopamina.",
+            "Serotonina.",
+            "Angiotensina.",
+            "Metanefrinas.",
+            "Noradrenalina."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Diferenças biológicas e socioculturais influenciam a ocorrência e os desfechos das doenças cardiovasculares entre mulheres e homens, resultado de múltiplos fatores, entre eles a variação no impacto dos fatores de risco tradicionais. Neste contexto, analise as afirmativas a seguir. I. A prevalência de DCV aumenta com a idade em ambos os sexos, mas os eventos de DAC nas mulheres ocor rem, em média, cerca de 10 anos mais cedo que nos homens. II. O diabetes confere um aumento proporcionalmente maior do risco coronariano em mulheres do que em homens. III. O risco de AVC ao longo da vida é maior nas mulheres, provavelmente pela maior longe vidade e pelo aumento da incidência com a idade. AVC: acidente vascular cerebral; DAC: doença arterial coronariana; DCV: doenças cardiovasculares; Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 71,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Em geral, as Doenças Cardiovasculares (DCV) em idosos são mais complexas do que em pacientes jovens, especialmente devido à associação de comorbidades e limitações de aplicabilidade das principais diretrizes clínicas. Sobre as particularidades das DCV nesse grupo de pacientes, assinale a afirmativa incorreta.",
+          "alternativas": [
+            "Em pacientes hipertensos com mais de 70 anos, a hipertensão diastólica isolada é forma de apresentação predominante.",
+            "Exercício regular, alimentação com horários definidos e engajamento social podem reduzir o ritmo do envelhecimento e a maior vulnerabilidade às DCV.",
+            "Idosos com menor expectativa de vida, alta carga medicamentosa e múltiplas comorbidades podem se beneficiar especialmente da desprescrição.",
+            "O escore de cálcio coronariano elevado tem menos valor prognóstico em idosos do que em indivíduos mais jovens, embora um escore de zero indique um risco relativo mais baixo em todas as idades.",
+            "Diversos ensaios clínicos mostraram ausência de benefício ou até aumento da mortalidade em idosos submetidos a controle glicêmico intensivo, resultando na recomendação de metas menos rigorosas de HbA1c nessa população. Atenção: o caso apresentado a seguir, refere-se às duas próximas questões. Homem de 64 anos, hipertenso e dislipidêmico, sedentário, apresenta dor retroesternal súbita de forte intensidade, iniciada há cerca de 1 hora durante situação de estresse, com irradiação para o ombro esquerdo, associada a sudorese e palidez. Ao exame, encontra -se lúcido, hemodinamicamente estável, com frequência cardíaca de 64 bpm, pressão arterial de 110x80 mmHg e sem alterações significativas na ausculta cardíaca e pulmonar. Após a realização de eletrocardiograma, o paciente foi medicado e rapidamente encaminhado para a coronariografia, cuja única alteração está demonstrada na figura A. A figura B representa o resultado final após a realização de angioplastia coronariana com implante de stent farmacológico."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 74,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Os distúrbios hipertensivos da gestação estão entre as principais causas de mortalidade materna e perinatal no mundo. Embora essas con dições sejam geralmente conduzidas por obstetras, cardiologistas também devem conhecer os principais aspectos do manejo diagnóstico e terapêutico. Nesse contexto, assinale a alternativa correta.",
+          "alternativas": [
+            "A aspirina deve ser iniciada em todas as gestantes imediatamente após o diagnóstico da gravidez e mantida até o parto para a prevenção de eclâmpsia.",
+            "A hipertensão arterial na gestação é definida por pressão arterial sistólica ≥140 mmHg ou diastólica ≥90 mmHg, em duas medidas, com intervalo de pelo menos 4 horas.",
+            "Entre os critérios de pré-eclâmpsia, a hipertensão no primeiro trimestre da gestação em pacientes previamente normotensas é o mais frequentemente identificado.",
+            "A Síndrome HELLP (hemólise, elevação de enzimas hepáticas e plaquetopenia) é a f orma de apresentação de pré -eclâmpsia com o melhor prognóstico.",
+            "O diagnóstico de eclâmpsia baseia -se na presença de proteinúria associada à hipertensão, podendo ocorrer na ausência de manifestações neurológicas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 75,
+          "disciplina": "Enfermagem",
+          "assunto": "Eletrocardiograma (ECG)",
+          "enunciado": "A abordagem terapêuti ca do paciente com síncope depende principalmente da sua causa e do mecanismo envolvido. Entretanto, a presença de alguns fatores auxilia a identificar pacientes com alto risco de eventos adversos, que deverão ser hospitalizados para uma investigação diagnóstica minuciosa. Nesse contexto, assinale a opção que não está associada a um pior prognóstico em pacientes com síncope de etiologia indefinida.",
+          "alternativas": [
+            "Síncope durante esforço físico.",
+            "Fração de ejeção do ventrículo esquerdo <40%.",
+            "História familiar de morte súbita em parente de primeiro grau.",
+            "Prolongamento do intervalo QTc no eletrocardiograma de repouso.",
+            "Bloqueio de ramo direito incompleto no eletrocardiograma de repouso."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 76,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A endocardite infecciosa é uma doença com múltiplas formas de apresentações clínicas, além de estar associada a diversas alterações em exames de imagem e laboratoriais. Alguns destes achados inclusive contribuem para o diagnóstico da doença. Conforme as últimas diretrizes internacionais da Sociedade Europeia de Cardiologia e da Sociedade Internacional de Doenças Infecciosas Cardiovasculares, assinale a opção que apresenta um critério menor para o diagnóstico da doença.",
+          "alternativas": [
+            "Anti-CCP positivo.",
+            "Fator antinuclear positivo.",
+            "Fator reumatoide positivo.",
+            "Anti-estreptolisina O positiva.",
+            "Sorologia para Coxiella burnetii positiva (IgG fase I >1:800)."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 77,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Leia o fragmento a seguir. Doença por sobrecarga d e ferro caracterizada pelo depósito do metal em órgãos como fígado, coração, pâncreas e glândulas endócrinas, podendo causar cirrose, cardiomiopatia, diabetes e disfunções hormonais. As manifestações cardiovasculares são semelhantes independentemente da ca usa e podem ser a forma inicial de apresentação. Em relação à condição descrita, assinale a afirmativa correta.",
+          "alternativas": [
+            "Todas as alterações cardíacas são irreversíveis, mesmo com a depleção dos estoques de ferro.",
+            "A doença tem origem exclusivamente genética , caracterizada por uma transmissão autossômica dominante.",
+            "A minoria dos pacientes apresenta arritmias ou distúrbios de condução, mesmo com a progressão da doença.",
+            "A ressonância cardíaca é um método de imagem pouco sensível para detectar a deposição de ferro miocárdico.",
+            "A disfunção cardíaca geralmente inicia -se com um padrão restritivo não dilatado, progredindo posteriormente para disfunção sistólica."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 78,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "A cardio -oncologia é uma área multidisciplinar baseada na colaboração entre cardiologistas e oncologistas, abrangendo diversos campos clínicos, e que permanece em constante evolução. Em relação a este tópico, considere as afirmativas a seguir. I. Terapias hormonais estão associadas ao aumento do risco cardiovascular, especialmente em homens com câncer de próstata. II. Os efeitos adversos da radioterapia sobre o coração incluem DAC, insuficiência cardíaca, valvulopatias, arritmias e doenças do pericárdio. III. A redução da FEVE associada ao trastuzumabe, um anticorpo monoclonal utilizado em subtipos de câncer de mama, é geralmente irreversível e ocorre tipicamente vários anos após o tratamento. DAC: doença arterial coronariana; FEVE: fração de ejeção do ventrículo esquerdo Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 79,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "As opções a seguir apresentam condições que estão associadas ao desenvolvimento de aneurismas de aorta torácica, exceto uma . Assinale-a.",
+          "alternativas": [
+            "Sífilis terciária.",
+            "Febre reumática.",
+            "Doença de Behçet.",
+            "Síndrome de Marfan.",
+            "Válvula aórtica bicúspide."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 80,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "A hipertensão arterial sistêmica em pacientes com insuficiência renal crônica em terapia dialítica apresenta particularidades fisiopatológicas, diagnósticas e terapêuticas próprias. Sobre este contexto, assinale a opção incorreta.",
+          "alternativas": [
+            "Atenolol e metoprolol são parcialmente dializáveis, o que pode atenuar o efeito da dose habitual.",
+            "A sobrecarga de sódio e volume é o principal mecanismo de hipertensão arterial em pacientes em diálise.",
+            "A pressão arterial mais representativa para guiar o manejo clínico deverá ser aferida, preferenci almente, imediatamente antes da sessão de diálise.",
+            "Estudos epidemiológicos mostram que, em pacientes em diálise de manutenção, níveis baixos de pressão arterial estão associados à maior mortalidade em comparação a valores normais ou moderadamente elevados.",
+            "Os dados retrospectivos e de um ensaio clínico randomizado sugerem que, em pacientes hipertensos em hemodiálise, os betabloqueadores são superiores ao bloqueio do sistema renina-angiotensina-aldosterona na redução da morbidade cardiovascular e das hospitalizações por todas as causas."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "macae2026-geriatra-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Prefeitura Municipal de Macaé",
+      "cargo": "Médico I - Diarista Geriátrico",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-i-diarista-geriatrico-cns206-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-def-completo-prefeitura-de-macae-2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino, 62 anos, com quadro crônico e progressivo de alterações cognitivas e perda de funcionalidade, apresenta, como manifestações clínicas, flutuações cognitivas com discurso incoerente e a in capacidade de reconhecer o ambiente que o rodeia, alucinações visuais complexas, quedas frequentes, delírios sistematizados e sinais de parkinsonismo. Assinale a opção que indica, corretamente, o quadro clínico descrito.",
+          "alternativas": [
+            "Demência Vascular.",
+            "Demência de Alzheimer.",
+            "Demência frontotemporal.",
+            "Doença de Creutzfeldt-Jakob.",
+            "Demência por corpúsculos de Lewy."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "A história clínica de um paciente masculino de 68 anos, advogado, casado, evoluiu com perda progressiva do contro le da urina, associada à alteração da marcha e perda cognitiva e funcional. Ao exame, o paciente apresentou passos lentos e curtos com perda de equilíbrio, incontinência urinária e alterações cognitivas na memória e atenção. Considerando que o principal diagnóstico é de hidrocefalia normobárica, assinale a afirmativa correta.",
+          "alternativas": [
+            "É uma das causas irreversíveis das síndromes demenciais.",
+            "As alterações cognitivas deveriam vir antes das outras manifestações.",
+            "A demência relacionada a este diagnóstico é grave e rapidamente progressiva.",
+            "Condições que interferem na absorção do líquor, como doenças meníngeas, nunca se relacionam.",
+            "A principal forma de tratamento é a implantação de uma válvula de derivação ventrículo-peritoneal (DVP)."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "A avaliação cognitiva é parte da avaliação geriátrica ampla (AGA). Dentre as funções cognitivas, a função atencional (ou atenção) seleciona e foca em condições específicas, excluindo os distratores irrelevantes para processar informações. A atenção direciona os recursos mentais sobre os aspectos mais relevantes do meio, mantendo um estado de observação e de alerta que permite ter consciência do que ocorre no entorno. Essa função cognitiva pode ser subdividida em alguns tipos descritivos. Assinale a opção que apresenta a definição correta de atenção alternada.",
+          "alternativas": [
+            "Ritmo no qual o cérebro realiza uma tarefa.",
+            "Capacidade de se concentrar em algo, sem permitir que outros estímulos interfiram.",
+            "Capacidade de manter o foco de atenção em uma tarefa durante um período de tempo prolongado.",
+            "Capacidade de mudar o foco de atenção de uma tarefa para outra, mantendo a eficiência do desempenho em ambas as atividades.",
+            "Grande dificuldade ou incapacidade para direcionar a atenção para um dos lados, tanto em relação ao próprio corpo como ao espaço."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino de 85 anos, com diagnóstico de adenocarcinoma de próstata de alto risco foi submetido a uma Avaliação Geriátrica Ampla (AGA). Durante a entrevista, foi percebido que o paciente, apesar de independente para as atividades básicas e instrumentais de vida diária, apresentava restrição apenas para a realização de atividades físicas rigorosas/extenuantes, pois os sinto mas da doença impactavam sua rotina habitual. Apresenta hipertensão e diabetes bem controlados, sem perda ponderal significativa nos últimos seis meses, com mobilidade preservada e com escala de fragilidade clínica (CFS) de 4 pontos. A família, ao discuti r radioterapia como proposta terapêutica de intenção curativa, demonstrou preocupação com a idade avançada do paciente. Sobre o caso apresentado, assinale a opção que, baseada nas recomendações atuais, indica a melhor interpretação.",
+          "alternativas": [
+            "A idade avançada contraindica radioterapia curativa.",
+            "A decisão deve ser baseada principalmente na idade cronológica.",
+            "A radioterapia deve ser evitada, devido à maior toxicidade relacionada à idade cronológica.",
+            "A radioterapia pode ser uma opção terapêutica benéfic a e factível, conforme os achados da AGA do paciente.",
+            "A melhor evidência disponível não sustenta que a radioterapia em idosos pode oferecer benefícios clínicos relevantes."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente feminina de 72 anos, aposentada, com hipertensão arterial sistêmica controlada, participa regularmente de atividades comunitárias, mantém prática de atividade física leve e relata satisfação com sua vida, apesar de limitações financeiras. Durante a consulta, ela demonstrou preocupação por não se encaixar no que acredita ser “envelhecimento bem-sucedido”, por possuir doença crônica. Com base no conceito contemporâneo de envelhecimento bem - sucedido, assinale a afirmativa correta.",
+          "alternativas": [
+            "O envelhecimen to bem -sucedido é definido principalmente pela ausência de doenças crônicas.",
+            "A presença de comorbidades exclui o indivíduo da classificação de envelhecimento bem-sucedido.",
+            "Os fatores biológicos são os únicos determinantes relevantes no processo de envelhecimento bem-sucedido.",
+            "O envelhecimento bem-sucedido estabelece categorias rígidas entre idosos bem-sucedidos e malsucedidos.",
+            "O conceito envolve múltiplas dimensões, incluindo qualidade de vida e engajamento, não se limitando à saúde física."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino, 82 anos, vive em sua casa com apoio parcial de um cuidador. Ele tem limitações, com necessidade de auxílio em algumas atividades instrumentais de vida diária (como fazer compras e preparar refeições), mas consegue exe cutar atividades básicas, como alimentar -se e cuidar da própria higiene, com mínima assistência. Cognitivamente preservado, o paciente toma decisões sobre sua rotina, finanças e cuidados de saúde, expressando claramente suas preferências. Ele relata satisf ação com a sua vida, apesar das limitações, mantendo vínculos sociais ativos. Sobre o caso apresentado, com base nos conceitos de autonomia, independência, qualidade de vida e expectativa de vida saudável, assinale a afirmativa correta.",
+          "alternativas": [
+            "O paciente apresenta independência total, pois mantém sua capacidade cognitiva e sua autonomia decisória.",
+            "O paciente tem sua autonomia preservada e sua percepção de qualidade de vida permanece positiva, apesar das limitações funcionais.",
+            "O pacienta te ve reduzida sua capacidade funcional em atividades instrumentais, o que implica, necessariamente, em baixa qualidade de vida.",
+            "O paciente mostra dependência em atividades instrumentais, o que elimina a possibilidade de envelhecimento ativo.",
+            "A expectativa de vida saudável do paciente é irrelevante, pois não está diretamente relacionada à sua funcionalidade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino, 84 anos, foi internado por pneumonia. No terceiro dia de internação, passou a apresentar desatenção, fala desconexa, inversão do ciclo sono -vigília e períodos de agitação alternados com sonolência. Segundo seus familiares, era previamente independente e sem alterações cognitivas significativas. Durante a avaliação, observou -se início agudo e curso flutuante dos sintomas. A respeito desse quadro clínico, com base nos princípios de prevenção e diagnóstico diferencial, assinale a afirmativa correta.",
+          "alternativas": [
+            "A presença de delirium exclui completamente a possibilidade de demência associada.",
+            "O tratamento do delirium baseia-se no uso de sedativos para controle da agitação, independentemente da causa de base.",
+            "A adoção de medidas preventivas, como reorientação, manutenção do ciclo sono-vigília e mobilização precoce, reduz o risco de delirium.",
+            "O delirium apresenta início insidioso e progressivo, sendo irreversível na maioria dos casos, o que dispensa investi gação de causas precipitantes.",
+            "O quadro é compatível com demência, caracterizada por início agudo e flutuação dos sintomas, devendo ser iniciado tratamento com antipsicóticos de forma rotineira."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente feminina, 82 anos, hipertens a, diabética e com osteoartrite, faz uso contínuo de 8 medicamentos prescritos por diferentes médicos em acompanhamento regular. Nos últimos meses, apresentou episódios de tontura, queda e confusão mental leve. Sobre o caso, com base nos princípios da far macologia em geriatria, assinale a afirmativa correta.",
+          "alternativas": [
+            "O uso de múltiplos medicamentos reduz o risco de eventos adversos por melhor controle das doenças.",
+            "A polifarmácia está associada ao aumento do risco de iatrogenia, interações medicamentosas e quedas.",
+            "A polifarmácia é segura quando todos os medicamentos são prescritos por especialistas de áreas diferentes.",
+            "A ocorrência de sintomas como tontura n ão está relacionada ao uso de medicamentos em idosos.",
+            "A suspensão de medicamentos não deve ser considerada em idosos com múltiplas doenças crônicas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Sobre os critérios de Beers e STOPP/START, assinale a afirmativa correta.",
+          "alternativas": [
+            "Substituem completamente o julgamento clínico do médico.",
+            "São aplicáveis em contexto ambulatorial, não se estendendo à internação hospitalar.",
+            "Avaliam as interações medicamentosas, sem considerar omissões terapêuticas.",
+            "São utilizados para definir doses máximas de medicamentos em adultos a partir dos 50 anos.",
+            "Servem para identificar medicamentos potencialmente inapropriados e otimizar prescrições em idosos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino, 81 anos, sedentário, com diagnóstico de sarcopenia leve, inicia acompanhamento para melhora da funcionalidade. Sobre o caso, assinale a afirmativa correta.",
+          "alternativas": [
+            "A prática de exercícios aumenta o risco de fragilidade em idosos.",
+            "A atividade física deve ser evitada em idosos com perda muscular.",
+            "Os exercícios de resistência (força) são importantes para melhorar a massa e a força muscular.",
+            "Os exercícios aeróbicos são mais indicados para idosos com sarcopenia, desde que acima de 100 minutos semanais.",
+            "Os idosos com idade superior a 80 anos e com histórico de sedentarismo não se beneficiam de programas de exercício físico, pelo risco cardiovascular."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Sobre os mecanismos biológicos do envelhecimento , assinale a afirmativa correta.",
+          "alternativas": [
+            "A senescência celular não tem impacto clínico relevante.",
+            "O envelhecimento resulta de um único mecanismo central.",
+            "O envelhecimento envolve processos como estresse oxidativo, inflamação e disfunção mitocondrial.",
+            "A capacidade de reparo celular aumenta com a idade, em decorrência do fenômeno do Inflammaging.",
+            "O processo de imunosenescência é fisiológico e irreversível, envolvendo o envelhecimento programado, em decorrência do prolongamento de telômeros."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente idosa com Demência de Alzheimer CDR 1 ( Clinical Dementia Rating ) e doença do refluxo gastroesofágico, fazendo uso regular de Donepezila, Omeprazol e Domperidona, apresentou períodos de agitação psicomotora e crises vertiginosas, sendo iniciado o uso regular de Clorpromazina e Flunarizina, após descartadas as causas de delirium. Meses após, a paciente evoluiu com rigidez, quedas e piora cognitiva, sendo diagnosticada com doença de Parkinson e iniciada terapia com Levodopa/Carbidopa. Sobre o caso acima, assinale a afirmativa correta.",
+          "alternativas": [
+            "Não há relação entre os eventos e o diagnóstico de Demência por Corpos de Lewy deve ser afastado.",
+            "Trata-se de evolução natural da demência de Alzheimer; nessa fase, está indicada a retirada dos medicamentos.",
+            "Mostra uma cascata iatrogênica marcada por parkinsonismo medicamentoso, sendo indicada a suspensão de drogas, como antipsicótico e antivertiginoso.",
+            "O tratamento de ve ser ampliado com novos fármacos, incluindo anticolinérgicos, como o Biperideno, sendo mais seguro para idosos do que a Levodopa.",
+            "Está adequada associação medicamentosa, mas drogas como a Donepezila e o Omeprazol devem ser descontinuadas, devido aos seus efeitos colaterais motores a longo prazo."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "A Diretriz Brasileira de Hipertensão Arterial de 2025, publicada pela Sociedade Brasileira de Cardiologia (SBC), estabelece mudanças significativas no manejo da pressão arterial (PA), especialmente no que diz respeito às metas terapêuticas para idosos. Em idosos frágeis ou com intolerância ao tratamento anti - hipertensivo, assinale a opção que indica a orientação correta.",
+          "alternativas": [
+            "Individualizar metas terapêuticas.",
+            "Manter meta rígida sem exceções.",
+            "Suspender tratamento em todos os casos.",
+            "Utilizar apenas monoterapia anti-hipertensiva.",
+            "Aumentar a meta de controle pressórico para PA <160/100 mmHg."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente feminina de 80 anos com diabetes mellitus tipo 2 (DM2), doença renal crônica (DRC estágio 3b) com taxa de filtração glomerular (TFG) em 38 mL/min/1,73m², sem demais comorbidades, fazendo uso de enalapril 10 mg por dia, espironolactona 25 mg por dia, anlodipino 5 mg por dia e furosemida 40 mg por dia. Na consulta, apresentou pressão arterial de 118/70 mmHg, sem sintomas de hipotensão. Os exames laboratoriais mostraram potássio de 5,6 mEq/L. Sobre o caso, assinale a opção que indica, corretamente, a melhor conduta inicial.",
+          "alternativas": [
+            "Reduzir anlodipino.",
+            "Suspender Enalapril.",
+            "Suspender Espironolactona.",
+            "Manter esquema pela proteção cardiovascular.",
+            "Intensificar tratamento anti -hipertensivo para alcance das metas terapêuticas ideais."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 68,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Uma paciente feminina, 82 anos, foi trazida pela filha para consulta geriátrica. Ela tem histórico de diabetes mellitus tipo 2 há 18 anos, hipertensão arterial, doença renal crônica estágio 3b (Taxa de Filtração Glomerular: 34 mL/min/1,73m²) e síndrome dem encial em fase moderada. Já teve duas internações no último ano por quedas. Está em uso de metformina 1000 mg/dia, Glimepirida 4 mg/dia, Insulina NPH 20 UI à noite. Exames recentes mostraram: hemoglobina glicada (HbA1c: 7,1%) e glicemias capilares com epi sódios frequentes de hipoglicemias (glicemia capilar <70 mg/dL). Sua pressão arterial está em 130/70 mmHg e apresenta escala de Katz de 3 pontos. Sobre o caso apresentado, com base nas diretrizes atuais da Sociedade Brasileira de Diabetes, assinale a opçã o que indica, corretamente, a melhor conduta.",
+          "alternativas": [
+            "Manter o tratamento atual, pois a HbA1c está dentro da meta.",
+            "Iniciar inibidor de SGLT2 e manter todos os medicamentos atuais.",
+            "Substituir insulina atual por esquema basal -bolus para maior controle.",
+            "Desintensificar o tratamento, suspendendo sulfonilureia e reduzindo insulina.",
+            "Intensificar o controle glicêmico com aumento da insulina para atingir HbA1c <6,5%."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Em busca de atualização de seu esquema vacinal, um paciente masculino de 69 anos comparece à consulta. Seu histórico de saúde inclui: hipertensão arterial e diabetes mellitus tipo 2, bem controlado, sem histórico de imunossupressão. Refere ter recebido esquema completo de vacinação contra Covid -19 com a última dose há 14 meses. Não sabe informar se já recebeu a vacina pneumocócica. Nunca recebeu vacina contra herpes-zoster. Recebeu a última dose de dT (dupla adulto) há mais de 12 anos. Nega alergias graves. De acordo com as recomendações da Sociedade Brasileira de Imunizações para idosos 2025, assinale a opção que indica, corretamente, a conduta mais adequada.",
+          "alternativas": [
+            "Administrar apenas reforço de dT e aguardar confirmação do histórico vacinal antes de qualquer outra vacinação.",
+            "Administrar apenas vacinas herpes -zoster e Covid -19, pois as demais dependem de comprovação documental prévia.",
+            "Administrar a vacina pneumocócica pol issacarídica isoladamente, pois é suficiente para idosos sem comorbidades graves.",
+            "Administrar o esquema vacinal pneumocócico, além da vacina para herpes-zoster, o reforço de dT (preferencialmente dTpa) e o reforço de Covid-19.",
+            "Evitar múltiplas vacinas na mesma consulta em idosos devido ao maior risco de eventos adversos, devendo espaçar todas em intervalos mínimos de 6 meses."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 71,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente feminina de 76 anos, residente na comunidade, é levada ao pronto atendimento com história de 3 d ias de prostração, inapetência e piora funcional (dificuldade para deambular). Não apresenta febre referida. Ao exame: pressão arterial de 100 x 60 mmHg; frequência cardíaca de 96 bpm; frequência respiratória de 28 irpm; temperatura axilar de 37,5 °C; sat uração de O₂ em ar ambiente de 91%. Está desorientada no tempo. Ausculta pulmonar com crepitações discretas na base direita. Sem rigidez de nuca. Exames laboratoriais mostraram leucocitose discreta. Radiografia de tórax evidenciou infiltrado no lobo inferior direito. Considerando as diretrizes atuais para manejo da Pneumonia Adquirida na Comunidade em idosos, assinale a opção que indica, corretamente, a conduta mais adequada.",
+          "alternativas": [
+            "Tratar ambulatorialmente com antibiótico oral, pois não há febre alta nem instabilidade hemodinâmica significativa.",
+            "Iniciar antibiótico apenas se houver piora da saturação ou necessidade de oxigenioterapia suplementar.",
+            "Aguardar confirmação microbiológica antes de iniciar antibiótico, devido ao risco de uso inadequado em idosos.",
+            "Internar a paciente, considerando critérios de gravidade como confusão mental e taquipneia, mesmo na ausência de febre.",
+            "Utilizar o critério laboratorial (leucocitose) para decisão de internação, já que sinais clínicos são pouco confiáveis em idosos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 72,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Uma paciente de 81 anos é levada à unidade básica de saúde pelo neto, que relata “quedas frequentes” e esquecimento. Durante a consulta, a paciente mostra -se retraída, evita contato visual e responde de forma hesitante quando questionada sobre o ambiente domiciliar. Ao exame físico, observam -se equimoses em diferentes estágios de cicatrização em braços e dorso, além de sinais de desnutrição leve. O neto responde pela maior parte das perguntas e demonstra impaciência. A paciente não possui diagnóstico forma l de demência. Considerando as diretrizes brasileiras sobre violência contra a pessoa idosa, incluindo o Estatuto do Idoso e normas do Ministério da Saúde, assinale a opção que apresenta, corretamente, a conduta mais adequada a ser seguida pelo profissional de saúde.",
+          "alternativas": [
+            "Solicitar autorização do familiar acompanhante antes de proceder com qualquer notificação formal.",
+            "Registrar apenas no prontuário e orientar retorno precoce, pois não há confirmação objetiva de violência.",
+            "Notificar o caso apenas ap ós confirmação pericial de maus - tratos, evitando possíveis implicações legais indevidas.",
+            "Encaminhar diretamente para internação hospitalar, independentemente da gravidade clínica, como medida padrão.",
+            "Fazer uma notificação compulsória de suspeita de violência conforme normativa vigente, garantir a proteção da paciente e acionar a rede intersetorial."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 73,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino de 84 anos, com insuficiência cardíaca avançada e Doença de Alzheimer em estágio moderado, é acompanhado na atenção domiciliar de seu bairro. O paciente apresenta múltiplas internações no último ano, perda funcional importante e episódios recorrentes de dispneia e agitação. Encontra -se em uso de terapia medicamentosa otimizada, porém com progressão da doença cardíaca e da doença de Alzheimer. A família relata incerteza quanto às decisões futuras e solicita “fazer tudo o que for possível” em caso de piora. Não há registro prévio de diretivas antecipadas de vontade. Seguindo os princípios de cuidados paliativos em idosos, assinale a opção que indica, corretamente, a conduta mais adequada para o caso.",
+          "alternativas": [
+            "Suspender todos os tratamentos modificadores da doença imediatamente, substituindo-os exclusivamente por medidas de conforto.",
+            "Iniciar sedação paliativa de forma prec oce para prevenir sofrimento, independentemente da presença de sintomas refratários.",
+            "Delegar à família todas as decisões terapêuticas sem necessidade de mediação da equipe de saúde, respeitando o desejo de “fazer tudo”.",
+            "Priorizar medidas curativas intensivas e evitar discutir prognóstico para não causar sofrimento emocional ao paciente e familiares.",
+            "Realizar comunicação estruturada sobre prognóstico, iniciar planejamento antecipado de cuidados e considerar diretivas antecipadas, com foco no controle de sintomas e suporte à família."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 74,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente feminina de 65 anos, independente, com hipertensão arterial e diabética, sem demais comorbidades, apresenta quadro de lipotímia recorrente. Faz uso crônico de Atenolol, Losartana, Hidroclorotiazida, Clonidina e Metformina. Ela compareceu à emergência lúcida e orientada, com frequência cardíaca de 40 bpm e pressão arterial de 110 x 70 mmHg, apresentando ausculta pulmonar sem alterações e débito urinário de 0,8 ml/kg/hora. O eletrocardiogr ama realizado na emergência mostrou bloqueio atrioventricular de segundo grau Mobitz 1, com complexo QRS estreito. Com base no quadro clínico apresentado, a respeito do manejo inicial do caso, assinale a afirmativa incorreta.",
+          "alternativas": [
+            "A paciente tem indicação do uso de marcapasso provisório emergencial em decorrência de bloqueio atrioventricular descrito.",
+            "A paciente deve ser orientada quanto à suspensão do uso do Atenolol, com monitorização clínica de pressão e frequência cardíaca.",
+            "A paciente deve ser orientada quanto à suspensão do uso da Clonidina, com monitorização clínica de pressão e frequência cardíaca.",
+            "Mesmo tendo causa medicamentosa associada, é prudente a coleta de exames para descartar distúrbio eletrolítico como causa associada para o bloqueio atrioventricular.",
+            "Na avaliação de um paciente bradicárdico, é importante avaliar sinais e sintomas de baixo débito cardíaco, como desmaio, confusão mental, hipotensão e oligúria."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 75,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino de 85 anos, com hipe rtensão arterial, diabético e portador de hiperplasia prostática benigna, em uso de Indapamida, Enalapril, Dapagliflozina e Doxazosina queixa -se de quadro recorrente de quedas e tonturas, piores ao passar da posição sentado para a ortostática. Segundo seus familiares, há um mês, o paciente tem apresentado episódios de síncope, logo após o almoço, com resolução rápida. Ao exame, paciente em bom estado geral, apresentando hipotensão postural, sem outras alterações relevantes ao exame físico. Sobre o caso clínico apresentado, assinale a afirmativa incorreta.",
+          "alternativas": [
+            "O quadro clínico descrito sugere síncope pós -prandial e pode ter como fatores agravantes o uso de alfa bloqueador.",
+            "A paciente deve ser orientada quanto à importância de fracionar as refeições e reduzir o consumo de carboidratos.",
+            "A principal hipótese diagnóstica é a de síncope pós -prandial, relacionada ao aumento da atividade barorreceptora reflexa nos idosos.",
+            "A paciente deve ser orientada a aumentar a ingesta de líquidos antes das refeições e permanecer mais tempo sentada após se alimentar.",
+            "O evento descrito está relacionado ao aumento do fluxo sanguíneo esplâncnico pós -prandial, não compensatório no idoso, culminando com redução do retorno venoso e hipoperfusão cerebral."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 77,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Sobre as patologias de cavidade oral comuns no idoso, assinale a afirmativa correta.",
+          "alternativas": [
+            "O uso de medicamentos, como anticolinesterásicos, pode estar relacionado com a redução da produção de saliva.",
+            "A xerostomia ocorre em idosos de forma fisiológica majoritariamente, por perda da produção salivar pelas glândulas salivares e parótidas.",
+            "A retração gengival é fisiológica do envelhecimento e pode ser um fator de risco para surgimento de cáries, infecções herpéticas e neoplasia maligna de gengiva.",
+            "Neoplasias malignas de cavidade oral são mais prevalentes em idosos do sexo masculino, sendo carcinoma escamocelular o tipo histológico mais frequente. Os principais fatores de risco são tabagismo e etilismo.",
+            "Disgeusia, distorção do paladar, é uma cond ição rara e considerada patológica nos idosos e tem como causas o uso de determinados medicamentos, como antibióticos e anticonvulsivantes, a deficiência de vitamina B12 e as doenças neurodegenerativas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 78,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Paciente masculino de 65 anos, hip ertenso, portador de doença renal crônica em tratamento conservador há cerca de 2 anos, apresenta queixa de dor crônica em coluna lombossacra, que piora à movimentação. Faz uso de anti -inflamatório de longa data e, conforme lhe foi orientado, por esse moti vo, desenvolveu a doença renal. O paciente procurou atendimento médico ambulatorial por piora das dores, acompanhadas de formigamentos em membros inferiores. Foi diagnosticado com colapso vertebral de muro posterior de L1 -L2 em tomografia computadorizada de coluna, sem histórico de traumas. Densitometria óssea mostrava osteoporose grave com T -score de -3,9 em coluna lombar e osteopenia em colo de fêmur com T-score de -2,4. Submetido à análise laboratorial, que mostrou os seguintes resultados: Hemoglobina 9,8 g/dL; Hematócrito: 30%; Volume Corpuscular Médio: 90 fL; Leucócitos: 7.500 células/mm³; Plaquetas: 160.000/mm³; Ureia: 89 mg/dL; Creatinina: 2,6 mg/dL; Sódio: 136 mEq/L; Potássio: 4,9 mEq/L; Cálcio total: 10,9 mg/dL; Albumina: 4,0 g/dL; TSH: 2,3 mUI/L ; T4 livre: 1,3 ng/dL; Glicose: 102 mg/dL; e Hemoglobina glicada: 5,5%. Diante do quadro clínico descrito, assinale a afirmativa correta.",
+          "alternativas": [
+            "O quadro de doença renal crônica é justificado pela hipertensão e pelo uso crônico de anti-inflamatório, não sendo necessária a avaliação complementar.",
+            "O quadro em questão pode ser relacionado à gamopatia monoclonal de significado indeterminado, não indicando biópsia de medula óssea nesse momento.",
+            "O quadro de colapso vertebral com evidência de osteoporose na densitometria óssea corresponde à fratura por fragilidade, o que não justifica a investigação complementar de fraturas patológicas.",
+            "O quadro de dor crônica óssea com evidência de doença osteoporótica, associado à doença renal, hipercalcemia e anemia p ode estar relacionado à possibilidade de mieloma múltiplo, sendo necessária a realização de eletroforese de proteínas séricas e urinárias com imunofixação.",
+            "O quadro de doença renal poderia ser justificado pela hipertensão arterial sistêmica e pelo diabetes mellitus, potencializado pelo uso de anti -inflamatórios. Na avaliação complementar, o paciente deve ser submetido à pesquisa de microalbuminúria e endoscopia digestiva alta, visto que a causa da anemia mais provável é a gastrite por estresse."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 79,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Calcificações podem ser visualizadas em radiografia simples de tórax e abdômen de pacientes idosos, sem significado patológico. Assinale a opção que apresenta calcificações comuns do envelhecimento, consideradas benignas e frequentemente incidentais.",
+          "alternativas": [
+            "Calcificações pancreática e biliar.",
+            "Calcificações aórticas e coronarianas",
+            "Calcificações costocondrais e nefrocalcinose.",
+            "Calcificações costocondrais e flebolitos.",
+            "Flebolitos e calcificações de suprarrenais."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 80,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "A sarcopenia confirmada é definida como redução de força e de massa muscular esquelética, sendo condição clínica frequente na população geriátrica. Como ferramentas de avaliação da massa muscular, na indisponibilidade dos métodos de eleição — Bioimpedância (BIA) e Absorciometria por Raios X de Dupla Energia (DXA) —, a fórmula de Lee pode ser utilizada como alternativa de triagem em pacientes com índice de massa corporal inferior a 30 kg/m². Para o cálculo estimativo da massa muscular esquelética por meio d a fórmula de Lee, são utilizadas todas as variáveis abaixo, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Peso.",
+            "Idade.",
+            "Altura.",
+            "Gênero.",
+            "Força de preensão palmar."
+          ],
+          "correta": "E"
+        }
+      ]
+    },
+    {
+      "codigo": "macae2026-endocrinologista-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Prefeitura Municipal de Macaé",
+      "cargo": "Médico I - Diarista Endocrinologista",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/medico-i-diarista-endocrinologista-cns204-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-def-completo-prefeitura-de-macae-2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Mulher, 52 anos, com IMC= 38 kg/m², DM2 há 5 anos, HbA 1c =8,9%, em uso de metformina 2g/dia isolada. Apresenta insuficiência cardíaca com fração de ejeção reduzida (FEr, FEVE= 35%), classe funcional NYHA II. TFGe =52 mL/min/1,73m². Assinale a opção que indica a combinação terapêutica que melhor atenderia para o caso em questão.",
+          "alternativas": [
+            "Inibidor de SGLT2 + agonista de GLP-1.",
+            "Sulfonilureia de segunda geração + inibidor de DPP-4.",
+            "Insulina glargina para controle rápido da HbA1c + iSGLT2.",
+            "Pioglitazona para sensibilização insulínica e inibidor de DPP-4.",
+            "Insulinização plena com esquema basa l bolus para controle glicêmico efetivo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Mulher, 32 anos, DM1 com desejo de gestação, em uso de bomba de insulina com HbA1c = 6,3%. Anti-TPO positivo (130 UI/mL), TSH = 2,2 mUI/L, T4L = 1,1 ng/dL. Creatinina= 0,7 mg/dL, relação albumina creatinina = 18mg/g. Fundo de olho: retinopatia não proliferativa leve. Para fins de orientações antes de engravidar deve-se",
+          "alternativas": [
+            "iniciar levotiroxina apenas se TSH >10 mUI/L; manter HbA1c <7,5%.",
+            "associar metformina para melhora glicêmica; sem necessidade de ajuste de TSH.",
+            "manter HbA1c atual e iniciar ácido fólico 5 mg; TSH está adequado, reavaliar fundo de olho.",
+            "apenas manter acompanhamento e engravidar quando desejar, já que a HbA1c está <7,5%.",
+            "reduzir HbA1c para <6,0%; iniciar levotiroxi na para meta de TSH <2,0 mUI/L pré-concepcional; ácido fólico 5 mg."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Mulher, 45 anos, com lipodistrofia parcial familiar (tipo Dunnigan/FPLD2 – mutação LMNA). IMC 27 kg/m², com perda de tecido adiposo em membros e glúteos, acúmulo em face e pescoço. Triglicerídeos (TG) = 1090 mg/dL, HbA1c = 9,3%, esteatose hepática grave e história de pancreatite aguda. Leptina sérica = 3,2 ng/mL (baixa). Sobre o caso, assinale a opção que indica o procedimento correto.",
+          "alternativas": [
+            "Cirurgia bariátrica para melhora metabólica e redução de risco de complicações.",
+            "Estatinas em dose máxima como terapia principal e uso de fibratos associados.",
+            "Transplante de tecido adiposo com células tronco diante de mutação comprovada.",
+            "Insulina Regular em altas doses é o melhor tratamento para compensação glicêmica efetiva.",
+            "Metreleptina (leptina recombinante) deve ser considerada; associar fibratos para TG e insulina, conforme necessário."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Mulher, 32 anos, com diabetes tipo L ADA ( Latent Autoimmune Diabetes in Adults ) diagnosticado há 2 anos. Anti -GAD positivo (título moderado = 45 UI/mL). Peptídeo C = 1,2 ng/mL. HbA1c =7,7%. Em uso atual de metformina 1,5g/dia. Assinale a opção que indica a conduta a ser considerada.",
+          "alternativas": [
+            "Adicionar sulfonilureia para estimular secreção de insulina.",
+            "Iniciar insulina basal precoce para preservação de função beta residual.",
+            "Trocar metformina por pioglitazona pela potência no controle glicêmico.",
+            "Manter metformina pois apresenta ainda boa função de células beta.",
+            "Iniciar imunoterapia com ciclosporina na tentativa de redução de perda residual de célula beta."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "Menino, 13 anos, DM1 há 2 anos já em tratamento, apresenta irmão de 10 anos que foi rastreado com verificação de 2 autoanticorpos positivos (anti-GAD e anti-ZnT8); glicemia de jejum = 102 mg/dL, 2h = 128 mg/dL, HbA1c = 5,8%. Com base nesses dados, com relação ao estadiamento do irmão e a conduta a ser seguida, assinale a afirmativa correta.",
+          "alternativas": [
+            "Normal – realizar acompanhamento anual e seguir com HbA1c.",
+            "Pré-diabetes convencional – iniciar metformina e monitorar HbA1.",
+            "Falso positivo – repetir exames em 5 anos e avaliar estudo genético.",
+            "DM1 estágio 2 – acompanhar em centro especializado e elegibilidade para Teplizumab.",
+            "DM1 estágio 3 – iniciar insulina imediatamente e monitorar aparecimento de complicações."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Mulher de 35 anos, assintomática, com nódulo tireoidiano de 0,9 cm em lobo direito, sólido, hipoecoico, regular, sem extensão extratireoidiana ou linfonodos suspeitos. A punção aspirativa por agulha fina (PAAF) revelou carcinoma papilífero de tireoide (Bethesda VI). Sem história familiar de câncer de tireoide ou exposição prévia à radiação. Como tratamento, assinale a opção que indica a melhor conduta a ser considerada.",
+          "alternativas": [
+            "Tireoidectomia total seguida de radioiodoterapia empírica.",
+            "Tireoidectomia total com dissecção do compartimento central profilática.",
+            "Ablação térmica por radiofrequência como tratamento definitivo e mais indicado.",
+            "Vigilância ativa com ultrassonografia seriada como alternativa aceitável à cirurgia imediata.",
+            "Lobectomia tireoidiana direita com istmectomia e dissecção do compartimento central complementar."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Homem, 52 anos, com nódulo tireoidiano d e 2,3 cm em lobo direito, cuja PAAF revelou atipia/lesão folicular de significado indeterminado. Apresenta resultado de teste molecular com mutação BRAF V600E. Diante deste cenário, assinale a opção que indica a conduta mais apropriada.",
+          "alternativas": [
+            "Realizar nova PAAF em 12 semanas antes de qualquer decisão cirúrgica.",
+            "Solicitar PET -CT para estadiamento antes da decisão terapêutica.",
+            "Optar por lobectomia diagnóstica, pois o teste molecular não é definitivo em Bethesda III.",
+            "Manter vigilância ultrassonográfica semestral, pois Bethesda III tem baixo risco de malignidade.",
+            "Proceder com lobectomia ou tireoidectomia total, pois a mutação BRAF V600E confere alto valor preditivo positivo para malignidade."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "Homem, 75 anos, com TSH= 6,2 mUI/L, T4L 1,2 ng/dL, anti -TPO negativo. Assintomático, sem dislipidemia ou doença cardiovascular. Para esse paciente, assinale a opção que indica o procedimento correto a ser seguido.",
+          "alternativas": [
+            "Iniciar levotiroxina 2 µg/kg/dia e monitorar TSH.",
+            "Tratar o paciente, pois tem hipotireoidismo subclínico.",
+            "Prescrever hormônio T3 associado ao uso da levotiroxina.",
+            "Iniciar levotiroxina 25 µg e titular rapidamente para TSH <1.",
+            "Monitorar TSH, e se evoluir para >10 ou sintomas atribuíveis, iniciar tratamento."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Paciente de 28 anos, portadora de mutação no gene RET (códon 634), diagnosticada no rastreamento familiar de Neoplasia Endócrina Múltipla (NEM) 2A. Apresenta Calcitonina basal = 300 pg/mL (VR = < 10). US de tireoide sem nódulos evidentes. Assinale a opção que indica a melhor conduta para esta paciente.",
+          "alternativas": [
+            "Tireoidectomia parcial e monitorar nível de calcitonina.",
+            "Só indicar cirurgia se a calcitonina aumentar em 10x o valor de referência.",
+            "Tireoidectomia total profilática e acompanhar no seguimento com calcitonina.",
+            "Observar, repetir calcitonina em 1 ano e manter vigilância ultrasonográfica.",
+            "Iniciar vandetanibe profilaticamente e avaliar a necessidade de tratamento cirúrgico posterior."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Homem, 52 anos, apresenta oftalmopatia de Graves com CAS = 5/7 (Clinical Activity Score), proptose bilateral, diplopia intermitente e quemose. Em uso de metimazol 20mg/dia encontra -se em eutireoidismo laboratorial. Para esse paciente, assinale a melhor opção de tratamento.",
+          "alternativas": [
+            "Descompressão cirúrgica como primeira linha e avaliar evolução.",
+            "Apenas colírio lubrificant e e observação da evolução da oftalmopatia.",
+            "Metilprednisolona IV em pulsos e, como alternativa, teprotumumabe.",
+            "Radioterapia orbital imediata e monitorar a evolução cuidadosamente.",
+            "Corticoides orais em altas doses por 6 meses, reavaliar e repetir o ciclo, caso necessário."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Mulher de 48 anos, em pós-operatório imediato de tireoidectomia total, apresenta formigamento perioral, sinal de Chevostek positivo, cálcio iônico = 0,85 mmol/L (normal: 1,12 -1,32), PTH = 5 pg/mL (normal: 15-65). Diante deste quadro, considera-se",
+          "alternativas": [
+            "Hipocalcemia transitória, manter apenas observação.",
+            "Tetania por hiperventilação, observar e acalmar a paciente.",
+            "Deficiência de vitamina D – repor colecalciferol a longo prazo.",
+            "Hipoparatireoidismo definitivo, com necessidade de 4 -6g de cálcio.",
+            "Hipoparatireoidismo pós -cirúrgico – tratar com cálcio IV, calcitriol + carbonato de cálcio."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Mulher, 50 anos, com síndrome de Cushing ectópica por tumor neuroendócrino oculto, n ão localizado em TC, RNM ou PET -CT convencional. ACTH sérico=180 pg/mL. Apresenta hipercortisolismo grave com hipocalemia, miopatia e hiperglicemia. Diante do quadro deve-se:",
+          "alternativas": [
+            "Esperar localizar o tumor e repetir PET -CT antes de qualquer tratamento.",
+            "Iniciar terapia medicamentosa para o controle do Cushing; osilodrostat ou cetoconazol são opções.",
+            "Controlar a hipocalemia com reposição de potássio e tratar a hipeglicemia, sem medicação para o Cushing.",
+            "Realizar radioterapia empírica em mediastin o como tratamento alternativo.",
+            "Iniciar octreotida para suprimir ACTH ectópico como monoterapia."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 72,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Homem de 53 anos, com DM2 há 8 anos, HbA1c 7,5%, em uso de metformina + dapagliflozina + semaglutida semanal. Triglicerídeos 168 mg/dL, LDL= 45 mg/dL (em uso de rosuvastatina 20 mg), HDL = 42 mg/dL. Apresentou IAM há 7 meses. Ecocardiograma com FE 54%. Para a meta de LDL deve-se considerar",
+          "alternativas": [
+            "LDL < 70 mg/dL — já atingido; manter.",
+            "LDL < 50 mg/dL, está na meta; manter rosuvastatina.",
+            "LDL < 100 mg/dL — meta para DM2.",
+            "LDL < 70 mg/dL — trocar para atorvastatina 80 mg.",
+            "Suspender estatina — LDL já está muito baixo, risco de efeitos adversos."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 73,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Homem, 42 anos com diagnóstico de acromegalia apresenta GH basal = 15 ng/mL, IGF -1 = 3x o valor da normalidade, nadir de GH no TOTG = 8,2 ng/mL. A ressonância nuclear magnética revelou macroadenoma de 2,1 cm, com extensão para seio cavernoso. Assinale a opção que indica, corretamente, a conduta inicial.",
+          "alternativas": [
+            "Iniciar octreotida LAR; sem necessidade de cirurgia.",
+            "Cirurgia seguida de cabergolina em doses elevadas.",
+            "Radioterapia como primeira linha, seguido de octreotida LAR ou lanreotida.",
+            "Cirurgia transesfenoidal e análogo de somatostatina (octreotida LAR ou lanreotida).",
+            "Iniciar pasireotida e adicionar pegvisomante na falta de reposta, sem necessidade de cirurgia."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 76,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Homem, 68 anos, apresenta-se com cálcio total = 11 mg/dL; cálcio iônico = 1,48 mmol/L; PTH = 188 pg/mL; fósforo 2,1 mg/dL; vitamina D = 28 ng/mL; calciúria 24h: 380 mg/24h; TFGe 72 mL/min. Us cervical sugere adenoma paratireoidiano inferior esquerdo. A cintilografia com ⁹⁹mTc-sestamibi (MIBI) mostrou captação no mesmo local. Assinale a opção que apresenta a conduta a seguir.",
+          "alternativas": [
+            "Repor Vitamina D3 e reavaliar possibilidade de normalização do PTH.",
+            "Conduta expectante, pois, a cirurgia só estaria indicada se cálcio > 14 mg/dL.",
+            "Tratar com cinacalcete para melhor controle clínico e reavaliação posterior.",
+            "Paratireoidectomia minimamente invasiva com dosagem de PTH intraoperatório.",
+            "Paratiroidectomia com implante de paratireoide para evitar risco de hipoparatireoidismo pós cirúrgico."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 77,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Homem de 41 anos apresenta cálcio total = 10,9 mg/dL; PTH = 85 pg/mL (VR 15 -65); fósforo = 2,3 mg/dL; vitamina D = 28 ng/mL; calciúria 24h: 80 mg/24h; e creatinina 1,0 mg/dL. Densitometria normal. Para este paciente, o diagnóstico mais provável é",
+          "alternativas": [
+            "Hiperparatireoidismo primário.",
+            "Síndrome de leite-álcali — história dietética.",
+            "Hipercalcemia Hipocalciúrica Familiar (HHF).",
+            "Hipercalcemia humoral da malignidade — dosar PTHrP.",
+            "Hiperparatireoidismo secundário por deficiência de vitamina D."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 78,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Homem de 28 anos com queixa de redução da libido, disfunção erétil, fadiga e ginecomastia bilateral e IMC=27 kg/m2. Testosterona total = 100 ng/dL (ref. 280 -800). SHBG normal. Testosterona livre calculada = baixa. FSH = 1,8 mUI/mL . LH = 1,0 mUI/mL . Prolactina = 12 ng/mL. TSH, T4L, cortisol, IGF-1 normais. RNM de hipófise revela um microadenoma de 4 mm. Ferritina sérica = 1.850 ng/mL (ref. < 300). Saturação de transferrina = 68% (ref. < 45%). Assinale a opção que apresenta o diagnóstico mais provável.",
+          "alternativas": [
+            "Hipogonadismo hipogonadotrófico por microadenoma hipofisário.",
+            "Hipogonadismo hipogonadotrófico por hemocromatose hereditária.",
+            "Hipogonadismo primário por hemocromatose testicular.",
+            "Hipogonadismo funcional por sobrepeso/obesidade.",
+            "Síndrome de Klinefelter."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 79,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Adolescente de 13 anos, sexo masculino, estatura 152 cm (abaixo do percentil 3 para idade), velocidade de crescimento 4 cm/ano nos últimos 2 anos, idade óssea 11 anos, retardo puberal (Tanner I). Estatura alvo de 175 cm. Após a exclusão de doenças crônicas, deve-se",
+          "alternativas": [
+            "iniciar tratamento com GH e testosterona simultaneamente.",
+            "realizar os testes de estímulo para GH e complementar com RNM de hipófise.",
+            "solicitar exame de cariótipo, para avaliar a po ssibilidade de síndrome de Noonan.",
+            "solicitar a dosagem de GH basal — se > 10 ng/mL exclui a hipótese de deficiência.",
+            "iniciar reposição com testosterona dose plena para induzir puberdade e avaliar crescimento."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 80,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Mulher, 48 anos, HIV positivo, uso de dolutegravir/lamivudina, evolui com hipotireoidismo primário necessitando de levotiroxina 125 mcg/dia. Está programada a permuta de esquema para bictegravir/TAF/emtricitabina devido a osteopenia. Assinale a opção que indica a orientação mais apropriada.",
+          "alternativas": [
+            "Orientar para um intervalo mínimo de 4 horas entre levotiroxina e antirretrovirais contendo cátions.",
+            "Os inibidores de integrase não apresentam uma interação significativa com levotiroxina.",
+            "A biodisponibilidade da levotiroxina é reduzida em 50% com todos os esquemas de TARV.",
+            "Usar levotiroxina simultaneamente com os antirretrovirais para melhor adesão.",
+            "Aumentar empiricamente a dose de levotiroxina em 25 -50% ao iniciar TAF."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "corenpe2024-enfermeiro-fiscal-complemento-2026",
+      "banca": "Instituto Sustente",
+      "ano": 2024,
+      "orgao": "Conselho Regional de Enfermagem de Pernambuco",
+      "cargo": "Enfermeiro Fiscal — itens complementares",
+      "cadernoUrl": "https://sustente.org.br/download/verDocumento?documento.id=1623",
+      "gabaritoUrl": "https://sustente.org.br/download/verDocumento?documento.id=1651",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 12,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Considerando a Portaria MS nº 2616/98, leia as afirmativas abaixo: I. para a adequada execução do Programa de Controle de Infecções Hospitalares (PCIH) os hospitais deverão constituir Comissão de Controle de Infecção Hospitalar (CCIH), órgão de assessoria à autori- dade máxima da instituição e de execução das ações de controle de infecção hospitalar. II. os membros executores da CCIH serão, no mínimo, 2 (dois) técnicos de nível superior da área de saúde para cada 200 (duzentos) leitos ou fração deste número com carga horária diária, mínima, de 6 (seis) horas para o enfermeiro e 4 (quatro) horas para os demais profissionais. CONSELHO REGIONAL DE ENFERMAGEM DE PERNAMBUCO CONCURSO PÚBLICO 2024 III. caberá à autoridade máxima da instituição estabelecer critérios, parâmetros e métodos para o controle de infecção hospitalar. IV. a taxa de letalidade, associada à infecção hospitalar, é calculada, tendo como numerador o número de óbitos ocorridos de pacientes com infecção hospitalar no período considerado, e, como denominador, o número de pacientes que desenvolveram infecção hospitalar no período. Estão corretas apenas as afirmativas:",
+          "alternativas": [
+            "Todas.",
+            "I e IV.",
+            "I, II e IV.",
+            "I, II e III.",
+            "III e IV."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "De acordo com o calendário nacional de vacinação, gestantes devem receber uma dose de dTpa – acelular (difteria, tétano e coqueluche), a cada gravidez:",
+          "alternativas": [
+            "a qualquer momento no pré-natal.",
+            "até a 20ª semana de gestação.",
+            "a partir da 20ª semana de gestação.",
+            "entre 45 e 60 dias do puerpério.",
+            "imediatamente após o parto."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "“Reconhecer as necessidades de saúde da população sob sua responsabilidade, organizando as necessi- dades dessa população em relação aos outros pontos de atenção à saúde, contribuindo para que o plane- jamento das ações, assim como, a programação dos serviços de saúde, parta das necessidades de saúde das pessoas”, caracteriza a seguinte diretriz da Atenção Básica:",
+          "alternativas": [
+            "longitudinalidade do cuidado.",
+            "resolutividade.",
+            "cuidado Centrado na Pessoa",
+            "integralidade.",
+            "ordenar as redes."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Os seguintes serviços abaixo citados devem ser garantidos, por meios próprios ou terceirizados, à beira do leito nas Unidades de Terapia Intensiva (UTI):",
+          "alternativas": [
+            "terapia nutricional - assistência psicológica - assistência clínica neurológica - serviço de radiografia móvel.",
+            "assistência fonoaudiológica - tomografia computadorizada - serviço de laboratório clínico - assis- tência psicológica.",
+            "assistência clínica de infectologia - serviço de ultrassonografia portátil - cirurgia ortopédica - ser- viço de laboratório clínico.",
+            "serviço de endoscopia digestiva alta e baixa - assistência clínica ginecológica - exame comproba- tório de fluxo sanguíneo encefálico - assistência clínica hematológica.",
+            "anatomia patológica - cirurgia buco-maxilo-facial - serviço de fibrobroncoscopia - serviço de diag- nóstico clínico e notificação compulsória de morte encefálica."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Para o estabelecimento de saúde habilitado como \"Atenção Especializada em Doença Renal Crônica com hemodiálise\" deverá ser obedecida, no mínimo, a proporção de:",
+          "alternativas": [
+            "1 (um) enfermeiro para cada 50 (cinquenta) pacientes.",
+            "1 (um) enfermeiro para cada 40 (quarenta) pacientes.",
+            "1 (um) enfermeiro para cada 25 (vinte e cinco) pacientes.",
+            "1 (um) enfermeiro para cada 45 (quarenta e cinco) pacientes.",
+            "1 (um) enfermeiro para cada 35 (trinta e cinco) pacientes."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Entende-se por vigilância epidemiológica um conjunto de:",
+          "alternativas": [
+            "ações que proporcionam o conhecimento, a detecção ou prevenção de qualquer mudança nos fatores determinantes e condicionantes de saúde individual ou coletiva, com a finalidade de reco- mendar e adotar as medidas de prevenção e de controle das doenças ou agravos.",
+            "ações capazes de eliminar, diminuir ou prevenir riscos à saúde e de intervir nos problemas sanitá- rios decorrentes do meio ambiente, da produção e circulação de bens e da prestação de serviços de interesse da saúde.",
+            "atividades que se destinam à promoção e à proteção da saúde dos trabalhadores, às mudanças nos fatores determinantes e condicionantes de saúde individual ou coletiva e visa à recuperação e à reabilitação da saúde. CONSELHO REGIONAL DE ENFERMAGEM DE PERNAMBUCO CONCURSO PÚBLICO 2024",
+            "ações que proporcionam o conhecimento para diminuir ou prevenir riscos à saúde e de intervir nos problemas decorrentes do meio ambiente.",
+            "ações que proporcionam a assistência às pessoas por intermédio de ações de promoção, proteção e recuperação da saúde, com a realização integrada das ações assistenciais e das atividades preventivas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Código de Ética dos Profissionais de Enfermagem",
+          "enunciado": "O Código de Ética dos Profissionais de Enfermagem (Resolução COFEN Nº 564/2017), em seus princípios fundamentais, distingue o profissional de Enfermagem como membro da equipe de saúde, na defesa das Políticas Públicas. Neste contexto, será dada ênfase às políticas de saúde que garantam, EXCETO:",
+          "alternativas": [
+            "universalidade de acesso.",
+            "integralidade da assistência.",
+            "participação da comunidade.",
+            "hierarquização e centralização político-administrativa dos serviços de saúde.",
+            "preservação da autonomia das pessoas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Supervisão e Delegação",
+          "enunciado": "Na composição de equipe de Suporte Básico de Vida (SBV) com, no mínimo, um técnico de Enfermagem ou um Enfermeiro, cabe administrar medicações prescritas conforme protocolos institucionais e sob regula- ção, nos seguintes agravos, EXCETO:",
+          "alternativas": [
+            "exacerbação da Asma e DPOC.",
+            "crise hipertensiva.",
+            "anafilaxia.",
+            "hipoglicemia.",
+            "controle da dor (exceto com o uso de opioides)."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Princípios da Administração Pública",
+          "enunciado": "Acerca dos Princípios Fundamentais garantidos pela Constituição Federal, é INCORRETO afirmar que:",
+          "alternativas": [
+            "é objetivo fundamental da República Federativa do Brasil garantir o desenvolvimento nacional.",
+            "não são fundamentos do Estado Democrático de Direito os valores sociais do trabalho e da livre iniciativa.",
+            "são Poderes da União, independentes e harmônicos entre si: o Legislativo, o Executivo e o Judi- ciário.",
+            "a República Federativa do Brasil buscará a integração econômica, política, social e cultural dos povos da América Latina.",
+            "A República Federativa do Brasil rege-se, nas suas relações internacionais, pelos princípios: in- dependência nacional; prevalência dos direitos humanos; autodeterminação dos povos, além de outros."
+          ],
+          "correta": "B"
+        }
+      ]
+    }
+  ]
+}
