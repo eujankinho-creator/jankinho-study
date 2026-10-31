@@ -163,7 +163,7 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
   const [questoesExistentes, disciplinasExistentes] = await Promise.all([
     prisma.questao.findMany({
       where: { fonte: FONTE_PROVAS_REAIS },
-      select: { id: true, origemId: true, enunciado: true, tema: true, disciplina: { select: { nome: true } } },
+      select: { id: true, origemId: true, enunciado: true, tema: true, disciplinaId: true, disciplina: { select: { nome: true } } },
     }),
     prisma.disciplina.findMany({ where: { usuarioId: usuario.id }, select: { id: true, nome: true } }),
   ]);
@@ -200,6 +200,27 @@ export async function sincronizarLotesQuestoesEmMassa(): Promise<ResultadoImport
                 where: { fonte: FONTE_PROVAS_REAIS, origemId },
                 data: { tema: novoTema },
               });
+            }
+            // O lote CPNU2 teve classificações editoriais corrigidas depois da
+            // primeira importação. Corrige também a disciplina sem substituir
+            // questão, gabarito, ID ou qualquer resposta já registrada.
+            if (manifesto.lote === "cpnu2-2025-seguridade-saude-fgv-lote010") {
+              const chaveDisciplina = normalizar(q.disciplina);
+              let disciplinaDestino = disciplinas.get(chaveDisciplina);
+              if (!disciplinaDestino) {
+                const nova = await prisma.disciplina.create({
+                  data: { usuarioId: usuario.id, nome: q.disciplina },
+                  select: { id: true },
+                });
+                disciplinaDestino = nova.id;
+                disciplinas.set(chaveDisciplina, disciplinaDestino);
+              }
+              if (atual.disciplinaId !== disciplinaDestino) {
+                await prisma.questao.updateMany({
+                  where: { fonte: FONTE_PROVAS_REAIS, origemId },
+                  data: { disciplinaId: disciplinaDestino },
+                });
+              }
             }
           }
           // Corrige apenas a formatação das alternativas dos lotes oficiais
