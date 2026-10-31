@@ -1,0 +1,1801 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "fgv-tjsc-amazul-2026-lote008",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "fgv-tjsc2026-enfermeiro-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Tribunal de Justiça do Estado de Santa Catarina",
+      "cargo": "Enfermeiro - Tipo 1 - Manhã",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/prova-17.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tribunal-de-justica-do-estado-de-santa-catarina.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 17,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "João e Maria, servidores públicos ocupantes de cargos de provimento efetivo no Estado Sigma, que não se conhecem e jamais praticaram qualquer ato em comunhão de ações e desígnios, respondem a ações de improbidade administrativa com base na Lei nº 8.429/1992, cada qual pela prática dos próprios atos. João desviou recursos públicos enquanto atuava como ordenador de despesas. Ma ria, por sua vez, revelou fato de que tinha ciência em razão de suas atribuições e que deveria permanecer em segredo, colocando em risco a segurança do Estado. À luz da sistemática vigente, é correto afirmar que",
+          "alternativas": [
+            "as condutas de João e Maria podem acarre tar a aplicação da sanção de perda da função pública.",
+            "as condutas de João e Maria foram enquadradas em uma tipologia legal de caráter exemplificativo, não taxativo.",
+            "a conduta de João pode acarretar a aplicação da sanção de suspensão dos direitos políticos por até 14 (quatorze) anos.",
+            "a conduta de Maria pode acarretar a aplicação da sanção de vedação ao recebimento de incentivos fiscais por até 12 (doze) anos.",
+            "as ações ajuizadas em face de João e Maria são de autoria do Ministério P úblico, considerando sua legitimidade privativa nessa seara."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A sociedade empresária Alfa teria praticado atos lesivos ao Estado Beta, consistentes em alegada fraude à licitação praticada em detrimento da Secretaria de Estado de Educação do Poder Executivo do referido ente federativo. No curso do processo administrativo instaurado para a apuração dos fatos, o representante legal de Alfa cogitou a celebração de ajuste no âmbito da consensualidade de colaboração, conforme disciplina estabelecida na Lei nº 12.846/2013. Em relação ao ajuste cogitado pelo representante legal de Alfa, é correto afirmar que",
+          "alternativas": [
+            "é vedado, considerando a indisponibilidade dos interesses envolvidos.",
+            "deve ser celebrado no plano administrativo e homologado pelo Poder Judiciário.",
+            "exime Alfa, caso celebrado, da obrigação de reparar integralmente o dano causado.",
+            "deve ser celebrado no plano processual, pelo Ministério Público, com a correlata homologação pelo Poder Judiciário.",
+            "independe de homologação pelo Poder Judiciário e não afasta a possibilidade de suspensão ou interdição parcial das atividades de Alfa."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "João, servidor público ocupante de cargo de provimento efetivo da Administração Pública indireta do Estado Delta, aceitou vantagem indevida dada pela sociedade empresária Sigma, para que fosse favorecida em determinada licitação. Para que seja atribuído ato ilícito a Sigma, na perspectiva da Lei nº 12.846/2013, é correto afirmar que",
+          "alternativas": [
+            "deve ocorrer a prévia condenação de João pela prát ica de ato de improbidade administrativa.",
+            "deve ser previamente demonstrada a responsabilidade individual de um dirigente a ela vinculado.",
+            "pode ser perquirida a responsabilização de Sigma, independentemente da culpabilidade de um dos seus dirigentes.",
+            "pode ser perquirida a responsabilidade administrativa de Sigma, independentemente do elemento subjetivo do agir, mas não a responsabilidade na instância civil.",
+            "deve ser demonstrada a existência de cláusula de anuência à responsabilização, no edital da licitação, paralelamente à responsabilização com base na Lei nº 8.429/1992. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "A navegação segura na internet via protocolo HTTPS ( Hypertext Transfer Protocol Secure ) exige uma interação complexa entre hardware, software e protocolos de rede. Considerando o fluxo de processamento de uma requisição HTTPS em um sistema computacional moderno, é correto afirmar que",
+          "alternativas": [
+            "o protocolo HTTPS opera exclusivamente na camada de transporte do modelo OSI, substituindo o TCP para garantir que a criptografia seja processada diretamente pelo hardware da placa de rede (NIC).",
+            "durante o handshake do TLS, o sistema operacional utiliza chamadas de sistema para acessar funções criptográficas e gerenciar sockets de rede, permitindo que o navegad or estabeleça um canal seguro sobre a pilha TCP/IP.",
+            "a criptografia assimétrica utilizada no HTTPS é uma função nativa do firmware do roteador, o que desonera a CPU do computador cliente de realizar cálculos matemáticos complexos.",
+            "o endereçamento IP (camada de rede do modelo OSI) é o responsável por garantir a integridade dos certificados digitais, enquanto o protocolo HTTPS gerencia o endereçamento físico (MAC Address).",
+            "ao utilizar HTTPS, o sistema operacional desativa a memória virtual para impedir que chaves criptográficas sejam gravadas em disco (swap), priorizando o processamento na Unidade de Controle."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Um Analista de Tecnologia da Informação do Tribunal de Justiça de Santa Catarina foi encarregado de adequar os sistemas corporativos às exigências da Lei Geral de Proteção de Dados Pessoais (LGPD). Para reduzir os riscos decorrentes de eventual incidente de segurança envolvendo dados processuais e administrativos, ele adotou duas ações distintas: 1. aplicou um algoritmo pa ra transformar o campo \"Informação Sigilosa\" em um código cifrado, de modo que o conteúdo original somente possa ser acessado mediante o uso da chave apropriada; e 2. no campo \"Nome da Parte\", substituiu as identidades reais por códigos alfanuméricos aleat órios, mantendo a tabela de correspondência entre os códigos e as identidades em ambiente segregado e seguro, permitindo que equipes de estatística e inteligência de dados realizem análises sem identificar diretamente os indivíduos, embora a associação possa ser restabelecida pelo Tribunal quando necessário. As técnicas aplicadas pelo analista nas ações 1 e 2 são, respectivamente,",
+          "alternativas": [
+            "Hash Robusto e Pseudonimização.",
+            "Criptografia Assimétrica e Pseudonimização.",
+            "Criptografia Simétrica e Anonimização Irreversível.",
+            "Esteganografia e Tokenização de Sessão.",
+            "Codificação de Base64 e Criptografia de Chave Única."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Os quimioterápicos antineoplásicos somente devem ser preparados em área ex clusiva e com acesso restrito aos profissionais diretamente envolvidos. Acerca da cabine de preparo desses medicamentos, assinale a afirmativa correta.",
+          "alternativas": [
+            "Deve permanecer ligada por 15 minutos, após a conclusão do trabalho.",
+            "Deve permanecer ligada por 20 minutos, após a conclusão do trabalho.",
+            "Deve estar em funcionamento, no mínimo, por 15 minutos antes do início do trabalho de manipulação.",
+            "Deve estar em funcionamento, no mínimo, por 20 minutos antes do início do trabalho de manipulação.",
+            "Deve estar em funcionamento, no mínimo, por 30 minutos antes do início do trabalho de manipulação. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A notificação compulsória de doenças e agravos relacionados ao trabalho constitui, na Vigilância em Saúde do Trabalhador (VISAT), importante instrumento para o monitoramento, a prevenção e o controle dos riscos ocupacionais. Acerca dessa notificação, assinale a afirmativa correta.",
+          "alternativas": [
+            "É obrigatória apenas para os acidentes com exposição a material biológico.",
+            "Abrange os acidentes de trabalho, o câncer relacionado ao trabalho e as dermatites ocupacionais.",
+            "Deve ser realizada prioritariamente pelo médico responsável pelo atendimento inicial.",
+            "É obrigatória nos casos que resultem em afastamento do trabalhador e facultativa, nos demais.",
+            "Deve ocorrer somente após a confirmação pericial do nexo causal com a atividade laboral."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "Um funcionário passou a apresentar exaustão extrema, irritabilidade, dificuldade de concentração e perda progressiva do interesse pelas atividades profissionais após período prolongado de sobrecarga ocupacional. O quadro descrito é característico de",
+          "alternativas": [
+            "transtorno adaptativo.",
+            "síndrome de burnout.",
+            "episódio depressivo maior.",
+            "fadiga ocupacional aguda.",
+            "transtorno de ansiedade generalizada."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Com base nas recomendações acerca da conduta em caso de acidentes com material biológico ou perfurocortantes, analise as afirmativas a seguir e assinale (V) para verdadeira e (F) para a falsa. ( ) Nos casos de exposição percutânea ou cutânea, deve-se lavar exaustivamente o local exposto apenas com água ou com solução fisiológica. ( ) A profilaxia Pós-Exposição de Risco (PEP) é indicada em todos os acidentes com material biológico, independentemente do status sorológico do paciente-fonte. ( ) A profilaxia Pós -Exposição de Risco (PEP) não é indicada nos casos em que o atendimento tenha ocorrido após 72 horas da exposição. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – F – V.",
+            "F – F – F.",
+            "V – F – F.",
+            "F – F – V.",
+            "V – V – V."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "A bactéria Pseudomonas aeruginosa é frequentemente associada a infecções relacionadas à assistência à saúde, sobretudo em pacientes imunossuprimidos. Em determinados contextos clínicos, as infecções causadas por esse microrganismo podem apresentar elevada letalidade. Nesse caso, o conceito epidemiológico de letalidade refere-se à",
+          "alternativas": [
+            "capacidade do microrganismo de disseminar -se rapidamente entre indivíduos suscetíveis.",
+            "proporção de indivíduos expostos que desenvolveram sinais e sintomas clínicos da doença.",
+            "capacidade do microrganis mo de causar doença em um hospedeiro suscetível.",
+            "proporção de indivíduos infectados pelo microrganismo que evoluíram para óbito em decorrência da infecção.",
+            "capacidade do microrganismo de permanecer viável em superfícies e equipamentos médicos por longos períodos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Em maio de 2026, o Estado do Paraná confirmou 2 casos de Hantavirose que, de acordo com a Secretaria Estadual de Saúde, não tem relação com as contaminações por hantavírus no navio de cruzeiro MV Hondius. Acerca dessa doença, assinale a afirmativa correta.",
+          "alternativas": [
+            "A infecção humana se dá principalmente pelo consumo de alimentos contaminados.",
+            "O período de incubação do vírus dura, em média, de 1 a 5 semanas, podendo variar de 3 a 60 dias.",
+            "A principal forma de prevenção baseia -se na vacinação específica realizada durante a infância.",
+            "Os quadros clínicos apresentam evolução predominantemente leve, sem associação frequente com insuficiência respiratória.",
+            "O tratamento específico consiste na administração de soro imunológico e medicamentos antirretrovirais."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Durante uma programação voltada para a promoção da saúde, a equipe de saúde organizou ações voltadas para a prevenção do câncer de mama. Com base nas recomendações atualizadas acerca do diagnóstico precoce e rastreamento desse tipo de câncer, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Entre os sinais e sintomas suspeitos de câncer de mama, que devem ser referenciados co m urgência para a confirmação diagnóstica, está o nódulo mamário fixo e de consistência endurecida, em mulheres adultas de qualquer idade. ( ) A faixa etária prioritária para o rastreamento do câncer de mama foi modificada para 50 a 74 anos, sendo contraindicado que mulheres entre 40 e 49 anos e acima de 74 anos realizem o exame de forma rotineira. ( ) A mamografia continua sendo o único exame cuja aplicação em programas de rastreamento apresenta eficácia comprovada na redução da mortalidade por câncer de mama. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – F – F.",
+            "V – F – V.",
+            "V – V – F.",
+            "V – V – V.",
+            "F – V – V."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "As Políticas de Promoção da Equidade em Saúde são formadas por um conjunto de programas e ações governamentais de saúde, no âmbito do SUS. Acerca dessas políticas, assinale a afirmativa correta.",
+          "alternativas": [
+            "Visam à inserção de novas práticas integrativas nas unidades da Atenção Básica.",
+            "Concentram-se na ampliação das Equipes de Saúde da Família e nos territórios com baixa cobertura.",
+            "São direcionadas exclusivamente para as populações cadastradas em programas federais de transferência de renda.",
+            "Têm como foco expandir o alcance do Sistema Único de Saúde para toda a população.",
+            "Visam garantir o atendimento integral às populações em situação de vulnerabilidade e desigualdade social."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Em 2026, a Agência Nacional de Vigilância Sanitária (ANVISA) aprovou novas recomendações para a vacina contra o papilomavírus humano (HPV). Acerca dessas recomendações, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Para os adolescentes sem histórico vacinal contra HPV, na faixa etária de 15 a 19 anos, 11 meses e 29 dias, recomenda -se a realização de estratégia de resgate. ( ) Foi ampliado o uso do imunizante para incluir a prevenção dos cânceres de cabeça e pescoço. ( ) A vacina passou a ser recomendada para mulheres tratadas por lesões intraepiteliais cervicais de alto grau (NIC 2+ e AIS), independentemente da idade. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – F – V.",
+            "F – F – V.",
+            "V – V – V.",
+            "F – V – V.",
+            "V – V – F."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Enfermagem",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "De acordo com a Política Nacional de Atenção Básica (PNAB), um princípio organizacional da Atenção Primária à Saúde é a vinculação de pessoas e famílias aos profissionais e às equipes de referência res ponsáveis pelo acompanhamento contínuo do cuidado, em determinado território. Assinale a opção que o indica.",
+          "alternativas": [
+            "Acesso universal.",
+            "Território adstrito.",
+            "Adscrição dos usuários.",
+            "Integralidade das ações.",
+            "Participação dos usuários. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Um paciente adulto com doença autoimune necessita realizar infusão medicamentosa mensal em uma unidade hospitalar, permanecendo no serviço por, aproximadamente, 10 horas, para monitorização clínica e recebimento da terapêutica prescrita. Assinale a opção que indica a modalidade assistencial que corresponde a essas características.",
+          "alternativas": [
+            "Hospital Dia.",
+            "Atenção Domiciliar.",
+            "Unidade Semi-Intensiva.",
+            "Ambulatório de Especialidades.",
+            "Unidade de Pronto Atendimento."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A Política Nacional de Vigilância em Saúde (PNVS), que orienta as ações de vigilância no Brasil, é norteada por alguns princípios. Sobre o princípio da universalidade, assinale a afirmativa correta.",
+          "alternativas": [
+            "As ações de vigilância estão integradas ao atendimento em saúde, desde a prevenção até o tratamento.",
+            "O acesso aos serviços de vigilância em saúde é direito de todos, sem discriminação.",
+            "A vigilância deve estar integrada às redes de saúde regionais, respeitando as peculiaridades de cada área.",
+            "A saúde deve utilizar a epidemiologia e a avaliação de risco para definir prioridades e alocar recursos de maneira eficiente.",
+            "As políticas de saúde devem entender as necessidades locais e estabelecer metas com base nos dados epidemiológicos. Enfermagem Clínica"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Durante a internação de um paciente idoso, a Enfermeira realizou uma avaliação, que envolvia oxigenação, hidratação, eliminação, padrão do sono, ansiedade e interação familiar. Com base nesses dados, ela organizou o pl ano assistencial considerando aspectos biológicos, psicossociais e espirituais do paciente. Nesse caso, assinale a opção que apesenta a teoria de Enfermagem que fundamentou o plano assistencial.",
+          "alternativas": [
+            "Teoria da Adaptação , centrada nas respostas desenvolvida s frente aos estímulos ambientais internos e externos.",
+            "Teoria do Déficit de Autocuidado , baseada na capacidade funcional do indivíduo para a",
+            "Teoria das Necessidades Humanas Básicas , estruturada na identificação de nec essidades afetadas em diferentes dimensões humanas.",
+            "Teoria Ambientalista , centrada na influência das condições ambientais na recuperação do paciente.",
+            "Teoria do Cuidado Transpessoal, direcionada à valorização das experiências subjetivas relacionadas ao processo de cuidar."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Durante a assistência em uma unidade de internação, o Enfermeiro entrevistou e realizou o exame físico de um paciente recém-admitido. No processo de enfermagem, essas ações correspondem à etapa de",
+          "alternativas": [
+            "evolução.",
+            "avaliação.",
+            "diagnóstico.",
+            "planejamento.",
+            "implementação."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
+          "enunciado": "Durante uma oficina de educação permanente, a Enfermeira explicou à equipe que a construção de diagnósticos, intervenções e resultados na CIPE® ocorre por meio da combinação de termos organizados em diferentes eixos da classificação. Nesse sentido, ao elaborar o diagnóstico dor aguda em membro inferior, os termos dor e aguda correspondem, respectivamente, aos eixos",
+          "alternativas": [
+            "meios e tempo.",
+            "localização e foco.",
+            "ação e localização.",
+            "foco e julgamento.",
+            "julgamento e foco."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "Leia o fragmento a seguir. A Enfermeira, durante o atendimento a um paciente com transtorno depressivo, permaneceu atenta ao relato, evitou interrupções e retomou algumas falas para demonstrar compreensão do que estava sendo expressado. Com base no caso descrito, assinale a opção que indica, corretamente, a técnica de comunicação terapêutica adotada.",
+          "alternativas": [
+            "Empatia.",
+            "Validação.",
+            "Clarificação.",
+            "Escuta ativa.",
+            "Comunicação diretiva."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde Mental",
+          "enunciado": "Avalie o trecho a seguir. Um paciente adulto, em uso contínuo de antipsicótico passou a apresentar marcha lenta, rigidez muscular, redução da expressão facial e tremores finos em repouso, sem história prévia de doença neurológica. Assinale a opção que apresenta, corretamente, o efeito adverso dos antipsicóticos compatível com o quadro descrito.",
+          "alternativas": [
+            "Discinesia tardia.",
+            "Síndrome serotoninérgicas",
+            "Intoxicação anticolinérgica.",
+            "Reações dissociativas agudas.",
+            "Parkinsonismo medicamentoso."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Uma paciente com câncer de mama localmente avançado iniciou tratamento quimioterápico antes da realização do procedimento cirúrgico, com o objetivo de reduzir o tamanho tumoral e aumentar a possibilidade de p reservação mamária durante a cirurgia planejada. A modalidade terapêutica descrita corresponde à quimioterapia",
+          "alternativas": [
+            "paliativa.",
+            "profilática.",
+            "adjuvante.",
+            "neoadjuvante.",
+            "concomitante. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "O Enfermeiro, durante a ausculta cardíaca d e um paciente adulto em posição supina, identificou um som adicional de baixa frequência, logo após a segunda bulha (B2), melhor audível com a campânula do estetoscópio no foco mitral. Esse achado é compatível com",
+          "alternativas": [
+            "terceira bulha (B3), associada ao enc himento ventricular rápido e podendo indicar disfunção ventricular.",
+            "quarta bulha (B4), associada à contração atrial em ventrículo complacente e fisiológico.",
+            "desdobramento fisiológico de B2, relacionado ao fechamento simultâneo das valvas semilunares.",
+            "sopro sistólico ejetivo, decorrente de fluxo turbulento durante a diástole ventricular.",
+            "atrito pericárdico, caracterizado por som único, suave e contínuo na fase sistólica."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Com base nas recomendações acerca do monitoramento d e um paciente submetido à trombólise após Acidente Vascular Cerebral Isquêmico Agudo, analise as afirmativas a seguir. I. Pacientes submetidos à terapia trombolítica devem permanecer em dieta zero, incluindo medicamentos por via oral, durante 24 horas. II. Após a realização da trombólise, a glicemia deve ser monitorizada e mantida em níveis inferiores a 200 mg/dL. III. A temperatura axilar deve ser monitorizada continuamente, devendo ser tratada somente se atingir valores superiores a 38°C. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Durante a consulta, uma mulher de 27 anos relatou prurido vaginal intenso, desconforto durante as relações sexuais e corrimento abundante de coloração amarelo -esverdeada com odor desagradável. Ao exame ginecológico, observou -se hiperemia vaginal e colo uterino com aspecto puntiforme avermelhado. O quadro clínico apresentado é característico de",
+          "alternativas": [
+            "Tricomoníase.",
+            "Herpes genital.",
+            "Candidíase vaginal.",
+            "Vaginose bacteriana.",
+            "Cervicite gonocócica."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Acerca das contraindicações para o aleitamento materno, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Infecções pelo HIV e pelo HTLV I e II são contraindicações relativas para o aleitamento materno. ( ) O recém -nascido com galactosemia clássica não deve ser amamentado, pois não consegue metabolizar a galactose. ( ) No caso de mães contaminadas por herpes simples, a amamentação deve ser suspensa se houver vesículas na mama. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – V – F.",
+            "V – F – V.",
+            "F – V – V.",
+            "V – V – V.",
+            "F – V – F."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Analise o texto a seguir. Uma criança de 2 anos foi levada à unidade básica de saúde apresentando diarreia líquida há dois dias, diminuição do apetite e irritabilidade. Duran te a avaliação, observou -se mucosa oral discretamente seca, sede aumentada e presença de lágrimas ao chorar, sem alteração do nível de consciência. De acordo com as recomendações do Ministério da Saúde, assinale a opção que apresenta a conduta adequada par a o quadro apresentado.",
+          "alternativas": [
+            "Iniciar a reidratação por via endovenosa.",
+            "Suspender temporariamente a alimentação.",
+            "Iniciar a hidratação endovenosa e antibioticoterapia.",
+            "Tratar a desidratação por via oral no ambiente de saúde.",
+            "Liberar a criança e orientar a hidratação oral em domicílio."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "De acordo com as recomendações da Sociedade Brasileira de Diabetes, assinale a opção que indica a meta de glicemia em jejum para uma pessoa idosa com diabetes e com boa saúde geral.",
+          "alternativas": [
+            "60 – 90 mg/dL.",
+            "70 – 100 mg/dL.",
+            "80 – 130 mg/dL.",
+            "90 – 150 mg/dL.",
+            "100 – 180 mg/dL. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Durante um procedimento de ressuscitação cardiopulmonar de um paciente em parada respiratória foi observada a presença de ritmo cardíaco chocável. Assinale a opção que corresponde a um desses ritmos.",
+          "alternativas": [
+            "Assistolia.",
+            "Flutter atrial.",
+            "Dissociação eletromecânica.",
+            "Atividade elétrica sem pulso.",
+            "Taquicardia ventricular sem pulso."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "A cadeia de sobrevivência é um conjunto de seis elos fundamentais e interligados, que representam as ações cruciais a serem seguidas para aumentar a s chances de sobrevivência de uma vítima de Parada Cardiorrespiratória (PCR). Acerca dessa cadeia, assinale a afirmativa correta.",
+          "alternativas": [
+            "O reconhecimento e a ativação de emergência é um elo presente apenas na cadeia de sobrevivência extra-hospitalar.",
+            "A desfibrilação, quando recomendada, deve ser realizada após a Ressuscitação Cardiopulmonar (RCP) de alta qualidade.",
+            "A ressuscitação avançada deve ser realizada apenas no ambiente hospitalar.",
+            "Os cuidados pós -PCR concentram -se prioritariamente na prevenção de novas arritmias ventriculares malignas.",
+            "A cadeia de sobrevivência não deve ser aplicada em crianças e gestantes."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Durante o atendimento a um paciente com suspeita de pancreatite aguda, o Enfermeiro identificou a presença do sinal de Grey Turner. Esse sinal é caracterizado pela ocorrência de",
+          "alternativas": [
+            "equimose nos flancos.",
+            "equimose periumbilical.",
+            "esplenomegalia e icterícia.",
+            "massa palpável no quadrante superior direito.",
+            "dor à descompressão súbita no ponto de Mcburney."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Acerca dos procedimentos para acesso à via aérea por enfermeiros em situações de urgência e emergência, an alise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) É privativo do Enfermeiro, no âmbito da equipe de enfermagem, a utilização da pinça Magill com auxílio de laringoscopia para a retirada de corpo estranho em pacientes inconscientes. ( ) O tubo combinado traqueo -esofágico e o tubo laríngeo são considerados dispositivos supraglóticos (DSG), enquanto a máscara laríngea é um dispositivo retroglótico (DRG). ( ) A cricotireoidostomia por punção é contraindicada na obstrução completa da via aérea por OVACE ou edema das estruturas orofaríngeas. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – F – V.",
+            "F – F – F.",
+            "V – F – F.",
+            "F – V – F.",
+            "F – V – V."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Após um incêndio em ambiente fechado, um trabalhador foi encaminhado ao serviço de emergência apresentando rebaixamento do nível de consciência, dispneia intensa, acidose metabólica grave e instabilidade hemodinâmica. A equipe suspeitou de intoxicação agu da por cianeto decorrente da inalação de fumaça tóxica. Assinale a opção que indica o antídoto mais adequado para o tratamento desse tipo de intoxicação.",
+          "alternativas": [
+            "Atropina.",
+            "Naloxona.",
+            "Flumazenil.",
+            "Azul de metileno.",
+            "Hidroxocobalamina."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "O Enfermeiro, durante o atendimento pré -hospitalar a uma senhora de 65 anos com suspeita de AVC, iniciou coleta rápida de informações, usando o método SAMPLER para direcionar a avaliação clínica e auxiliar na tomada de decisão da equipe de emergência. Entre as informações coletadas consta que a senhora mora sozinha e tem dificuldade de locomoção. Assinale a opção que indica o componente do histórico SAMPLER a que essas informações correspondem.",
+          "alternativas": [
+            "Sintomas.",
+            "Fatores de risco.",
+            "Passado médico.",
+            "Histórico clínico.",
+            "Eventos precedentes. Biossegurança e Infecção"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 68,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Com base nas medidas de precaução que devem ser adotadas na assistência a um paciente internado com suspeita de rubéola, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) O paciente deve ser internado em quarto privativo ou comum para o mesmo microrganismo, mantendo a porta fechada e a distância mínima de 1 metro entre os leitos. ( ) Os profissionais de saúde devem usar mascara tipo N95 durante o período de transmissibilidade da doença e as demais pessoas que entrarem no quarto devem usar máscara cirúrgica. ( ) O transporte do paciente deve ser restrito ao mínimo necessário, e, quando houver necessidade de deslocamento, o paciente deve utilizar máscara cirúrgica durante todo o trajeto. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – F – V.",
+            "V – V – F.",
+            "V – V – V.",
+            "V – F – V.",
+            "F – V – V. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 69,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Acerca das medidas de prevenção de infecção relacion adas a Assistência à Saúde da ANVISA, assinale a afirmativa correta.",
+          "alternativas": [
+            "Os equipos de nutrição parenteral devem ser trocados a cada 72 horas.",
+            "Os recipientes de soluções parenterais podem ser reutilizados no mesmo paciente.",
+            "Os equipos de administração intermitente devem ser trocados a cada 24 horas.",
+            "Os equipos de infusão contínua devem ser trocados a cada 96 horas.",
+            "Os conectores venosos devem ser desinfectados somente após o uso."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Enfermagem",
+          "assunto": "Segurança do Paciente",
+          "enunciado": "Em um laboratório clínico, a equipe de biossegurança investigou a possível relação entre o número de procedimentos realizados e a ocorrência de acidentes com perfurocortantes. Para essa análise, decidiu utilizar uma ferramenta capaz de verificar a associação entre duas variáveis quantitativas. Assinale a opção que indica a ferramenta que corresponde a essa análise.",
+          "alternativas": [
+            "Gráfico de Pareto.",
+            "Histograma estatístico.",
+            "Diagrama de dispersão.",
+            "Diagrama de afinidades.",
+            "Fluxograma operacional."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 71,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "O processamento de produtos para a saúde constitui uma etapa fundamental para a prevenção e o controle das infecções relacionadas à Assistência à Saúde, devendo ser realizado de acordo com normas e diretrizes específicas. Com base nas regulamentações que orientam esse processo, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) A proibição do uso de autoclaves gravitacionais com capacidade superior a 100 litros visa garantir a segurança da esterilização, pois esse mé todo tem baixa eficiência na remoção do ar em câmaras grandes. ( ) O Teste Bowie -Dick deve ser realizado diariamente em autoclaves do tipo pré -vácuo, com a finalidade de verificar a eficiência da remoção de ar da câmara e a adequada penetração do vapor. ( ) A limpeza dos produtos para saúde, seja manual ou automatizada, deve ser avaliada sempre por testes químicos disponíveis no mercado. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – V – F.",
+            "F – V – V.",
+            "V – F – V.",
+            "F – F – V.",
+            "V – V – V."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 72,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Uma das medidas de precaução recomendadas no controle de infecções relacionadas à Assistência à Saúde é o sistema de coorte de pacientes. Sobre esse sistema, assinale a afirmativa correta.",
+          "alternativas": [
+            "Isola os pacientes infectados em quartos priva tivos, com acesso restrito.",
+            "Utiliza câmaras com pressão negativa para permanência contínua dos pacientes colonizados.",
+            "Adota medidas de barreira rigorosas e proteção específica durante toda a assistência.",
+            "Separa os pacientes conforme o tempo de internação, priorizando aqueles com maior risco infeccioso.",
+            "Agrupa os pacientes infectados pelo mesmo microrganismo, em área específica. Legislação e Ética"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 73,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Princípios e Diretrizes",
+          "enunciado": "O Sistema Único de Saúde (SUS) é uma política pública de inclusão social, garantindo atendimento universal, gratuito e integral para milhões de brasileiros. Mais do que um sistema de saúde, o SUS representa dignidade, cidadania e o direito à vida para toda a população. Nesse contexto, de acordo com as disposições da Cons tituição Federal, é correto afirmar que as ações e os serviços públicos de saúde integram uma rede regionalizada e hierarquizada e constituem um sistema único. Assinale a opção que apresenta as diretrizes do Sistema Único.",
+          "alternativas": [
+            "Descentralização, com direção única em cada esfera de governo; atendimento integral, com prioridade para as atividades preventivas, sem prejuízo dos serviços assistenciais; e participação da comunidade.",
+            "Centralização, com direção única em cada esfera d e governo; atendimento proporcional, com prioridade para as atividades preventivas, sem prejuízo dos serviços assistenciais; e participação parlamentar.",
+            "Descentralização, com direção única em cada esfera de governo; atendimento proporcional, com priori dade para as atividades preventivas, sem prejuízo dos serviços assistenciais; e participação da sociedade civil organizada.",
+            "Centralização, com direção única em cada esfera de governo; atendimento seletivizado, com prioridade para as atividades preventivas, sem prejuízo dos serviços assistenciais; e participação da comunidade.",
+            "Descentralização, com direção única em cada esfera de governo; atendimento integral, com prioridade para as atividades preventivas, sem prejuízo dos serviços assistenciais; e participação da sociedade civil organizada. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 74,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Constituição Federal - Saúde",
+          "enunciado": "Assinale a opção que apresenta, nos termos das disposições da Constituição Federal de 1988, além de outras atribuições previstas em lei, uma competência do SUS.",
+          "alternativas": [
+            "Incrementar em sua área de at uação o desenvolvimento social, econômico e cultural.",
+            "Executar as ações de vigilância sanitária e epidemiológica, bem como as de saúde do trabalhador.",
+            "Ordenar a formação de técnicos de enfermagem, para sanar o déficit de médicos e enfermeiros nos hospitais.",
+            "Participar da formulação da política de saneamento básico, vedada sua atuação na execução direta das ações e serviços correspondentes.",
+            "Controlar e fiscalizar procedimentos, produtos e substâncias de interesse para a saúde, vedada sua participação na produção de medicamentos, equipamentos, hemoderivados e outros insumos."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 75,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Lei 7.498/1986",
+          "enunciado": "A Lei nº 7.498/1986 prevê que a enfermagem e suas atividades auxiliares somente podem ser exercidas por pessoas legalmente habilitadas e inscritas no Conselho Regional de Enfermagem com jurisdição na área onde ocorre o exercício. Nesse contexto, nos termos de referida lei, assinale a opção que indica uma atividade privativa do Enfermeiro.",
+          "alternativas": [
+            "Participar da orientação e supervisão do trabalho de enfermagem em grau auxiliar.",
+            "Prestar consultoria, auditoria e emissão de parecer sobre matéria de Enfermagem.",
+            "Observar, reconhecer e descrever sinais e sintomas observados no paciente.",
+            "Prestar cuidados de higiene e conforto ao paciente.",
+            "Executar ações de tratamento simples."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 76,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Lei 7.498/1986",
+          "enunciado": "Luciana é parteira, titular de diploma da respectiva categoria, e foi contratada por Cláudia, grávida de 8 meses, para assistência ao seu parto normal. Considerando que o parto será realizado em instituição de saúde, com base no Decreto nº 94.406/87, que regulamenta a Lei nº 7.498/86, é correto afirmar que à parteira incumbe assistir ao parto normal, sendo sua atividade exercida",
+          "alternativas": [
+            "sob supervisão de enfermeira(o) obstetra.",
+            "sob supervisão de técnicas(os) de enfermagem.",
+            "sob supervisão da(o) médica(o) obstetra, exclusivamente.",
+            "sob supervisão de auxiliares de enfermagem.",
+            "independentemente de auxílio ou supervisão, visto que se trata de profissional portadora de diploma da respectiva categoria."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 77,
+          "disciplina": "Enfermagem",
+          "assunto": "Gestão em Enfermagem",
+          "enunciado": "Jonas é Enfermeiro -chefe da Instituição de Saúde Alfa e, após voltar de férias, verificou que, diante de alterações realizadas pelo setor administrativo nesse período, o local de trabalho não oferece mais condições seguras para o exercício p rofissional dos enfermeiros, técnicos e auxiliares de enfermagem, além de desrespeitar a legislação vigente. Nesse sentido, considerando as disposições do Código de Ética do Enfermeiro (Resolução COFEN nº 564/2017), assinale a opção que apresenta, corretamente, o procedimento que ele deverá assumir.",
+          "alternativas": [
+            "Suspender as atividades, individuais ou coletivas da equipe de Enfermagem, inclusive nas situações de urgência e emergência, independentemente de comunicação ao Conselho Regional de Enfermagem.",
+            "Não suspender as atividades, individuais ou coletivas da equipe de Enfermagem, ainda que constatadas condições inadequadas de trabalho, devendo apenas comunicar o fato ao superior hierárquico.",
+            "Em nenhuma hipótese, suspender as atividades da equipe de Enfermagem, mesmo diante de grave risco à segurança dos pacientes ou dos profissionais, salvo autorização expressa da direção da unidade de saúde, nos termos da lei.",
+            "Suspender as atividades, individuais ou coletivas da equipe de Enfermagem, ressalvadas as s ituações de urgência e emergência, devendo formalizar imediatamente sua decisão por escrito e/ou por meio de correio eletrônico à instituição e ao Conselho Regional de Enfermagem.",
+            "Suspender as atividades, individuais ou coletivas da equipe de Enfermagem, devendo comunicar sua decisão apenas verbalmente à instituição, dispensada formalização escrita ou eletrônica ao Conselho Regional de Enfermagem."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 78,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "Jorge, lúcido e capaz, é paciente do Hospital Alfa e se encontra em estado grave decorrente de neoplasia maligna, sendo assistido por Pedro, Enfermeiro de referida instituição de saúde. Já prevendo a piora da sua saúde, Jorge estabeleceu diretivas antecipadas acerca dos cuidados e tratamentos que deseja ou não receber, quando estiver incapaci tado de expressar, livre e autonomamente, sua vontade. Nesse contexto, considerando as disposições do Código de Ética do Enfermeiro (Resolução COFEN nº 564/2017), estando Jorge incapacitado nos termos supramencionados, assinale a opção que apresenta um dever de Pedro, como enfermeiro.",
+          "alternativas": [
+            "Desconsiderar as diretivas antecipadas de vontade do paciente sempre que houver oposição dos familiares, ainda que inexista decisão judicial nesse sentido.",
+            "Submeter obrigatoriamente as diretivas antecipadas de vontade à autorização prévia do Conselho Regional de Enfermagem, antes de cumpri-las.",
+            "Não observar as diretivas antecipadas de vontade do paciente, pois a decisão sobre interrupção ou limitação de tratamento compete, exclusivamente, ao médico responsável.",
+            "Deixar de cumprir as diretivas antecipadas de vontade do paciente sempre que entender, subjetivamente, que o tratamento recusado aumentaria a expectativa de vida do enfermo.",
+            "Respeitar as diretivas antecipadas de vontade do paciente, sobre cuidados e tr atamentos que deseja ou não receber, quando estiver incapacitado de manifestar livre e autonomamente sua vontade. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 79,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "João, enfermeiro do Hospital Beta , durante plantão noturno, se deparou com a ausência de médicos no hospital, ante uma grev e geral que envolveu essa categoria. Uma das pacientes, Maria, necessitou de cirurgia de emergência, estando sua vida em risco imediato. Ante a ausência de médicos no local e a situação de emergência estabelecida, João, que tinha competência técnico -científica necessária, realizou por conta própria o referido procedimento, logrando êxito em salvar a vida de Maria. Nesses termos, considerando as disposições do Código de Ética do Enfermeiro, acerca da conduta de João de realizar a cirurgia, assinale a afirmativa correta.",
+          "alternativas": [
+            "Ele pode praticar o ato cirúrgico, independentemente da existência de situação de emergência, bastando possuir experiência profissional na área.",
+            "Ele não pode praticar o ato cirúrgico, ainda que presente uma situação de emergência e possuindo capacidade técnico - científica para o procedimento.",
+            "Ele pode praticar o ato cirúrgico, visto que presente uma situação de emergência e que possuía a capacidade técnico - científica necessária para o procedimento.",
+            "Ele não pode praticar o ato cirúrgico, pois tal conduta depende exclusivamente de autorização judicial prévia, ainda que em situação de emergência.",
+            "Ele pode praticar o ato cirúrgico, mesmo sem possuir capacidade técnico -científica necessária, desde que inexistente médico disponível no hospital."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 80,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Responsabilidade Profissional",
+          "enunciado": "Fernanda, advogada, recebeu diagnóstico de Esclerose Lateral Amiotrófica (ELA), doença neurológica degenerativa progressiva que afeta os neurônios motores, impedindo o controle dos movimentos voluntários do corpo. Com o avanço da doença, Fernanda contratou Joana, enfermeira, para realizar procedimento de eutanásia, com o objetivo de antecipar sua morte e lhe proporcionar maior conforto físico e psicológico. Nesses termos, acerca da realização da eutanásia, considerando as disposições da Resolução COFEN nº 564/2017 (Código de Ética do Enfermeiro), assinale a opção que indica, corretamente, o procedimento que Joana deve adotar.",
+          "alternativas": [
+            "Ela não pode participar da prática de eutanásia, ainda que Fernanda estivesse e m estágio terminal da doença e tivesse manifestado livremente sua vontade.",
+            "Ela pode participar da prática de eutanásia, pois o princípio da dignidade da pessoa humana autoriza a antecipação da morte de paciente terminal que manifeste consentimento livr e e esclarecido.",
+            "Ela pode realizar a eutanásia, considerando que Fernanda, na condição de advogada, possuía plena capacidade civil e discernimento para decidir sobre a própria morte.",
+            "Ela pode participar da prática de eutanásia em razão do direito à autonomia privada e da liberdade individual da paciente quanto às decisões sobre o próprio corpo e tratamento.",
+            "Ela não poderia participar da prática de eutanásia se houvesse oposição dos familiares da paciente, sendo admissível a antecipação da morte quando existe consentimento expresso da pessoa enferma."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-tjsc2026-analista-administrativo-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Tribunal de Justiça do Estado de Santa Catarina",
+      "cargo": "Analista Administrativo - Tipo 1 - Manhã",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/prova-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tribunal-de-justica-do-estado-de-santa-catarina.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 57,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "O Tribunal de Justiça do Estado Alfa, embora dispusesse de sistema eletrônico plenamente operacional, manteve, sem justificativa técnica, a tramitação exclusivamente em papel de processos administrativos de baixa complexidade, o que resultou em atrasos reiterados, retrabalho, custos elevados e demora injustificada no atendimento aos cidadãos, sem qualquer ganho compensatório em termos de qualidade ou segurança jurídica. A conduta descrita afronta diretamente o princípio da Administração Pública, expresso no art. 37, caput, da Constituição Federal de 1988, denominado",
+          "alternativas": [
+            "legalidade.",
+            "impessoalidade.",
+            "moralidade.",
+            "publicidade.",
+            "eficiência."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "O Tribunal de Justiça do Estado Alfa, ao constatar elevados índices de congestionamento processual e morosidade no acesso à justiça, nas comarcas do interior, instaurou grupo de trabalho para diagnosticar as causas do fenômeno, mensurar sua abrangência e provocar a inclusão do tema entre as prioridades institucionais a serem enfrentadas pela Presidência do Tribunal. Conforme o ciclo de políticas públicas, as atividades descritas correspondem, respectivamente, às fases de",
+          "alternativas": [
+            "identificação do problema e formação da agenda.",
+            "formulação de alternativas e tomada de decisão.",
+            "tomada de decisão e implementação da política.",
+            "implementação da política e avaliação dos resultados.",
+            "avaliação dos resultados e extinção da política. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "Em determinado órgão público, no âmbito da política de governança pública instituída pelo Decreto nº 9.203/2017, foram implementados processos estruturados destinados a mitigar riscos, com vistas ao alcance dos objetivos institucionais e a garantir a execução ordenada, ética, econômica, eficiente e eficaz das atividades da organização, com preservação da legalidade e da economicidade no dispêndio de recursos públicos. A iniciativa descr ita corresponde ao mecanismo de governança pública denominado",
+          "alternativas": [
+            "liderança.",
+            "estratégia.",
+            "gestão de riscos.",
+            "controle.",
+            "integridade."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "No campo da gestão pública, os conceitos de governabilidade e accountability constituem categorias distintas, embora complementares. A respeito dos conceitos de governabilidade e accountability, é correto afirmar que",
+          "alternativas": [
+            "governabilidade refere-se à capacid ade política do Estado de governar e decidir, originada de sua legitimidade democrática perante a sociedade, ao passo que accountability designa o dever de os agentes de governança prestarem contas de sua atuação e assumirem as consequências de seus atos e omissões.",
+            "governabilidade e accountability são expressões sinônimas, ambas designando os mecanismos institucionais de prestação de contas dos governantes perante o Poder Legislativo e os órgãos de controle externo.",
+            "governabilidade corresponde ao d ever do agente público de prestar contas de modo claro, conciso e tempestivo, ao passo que accountability designa a capacidade administrativa do Estado de implementar suas políticas.",
+            "governabilidade traduz a fiscalização exercida pelos órgãos de controle interno sobre a Administração Pública, enquanto accountability designa o conjunto de mecanismos de liderança, estratégia e controle aplicados à gestão.",
+            "governabilidade e accountability constituem dimensões da gestão de riscos, voltadas à identificação e ao monitoramento de eventos potenciais que possam afetar o alcance dos objetivos institucionais."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "As parcerias público -privadas (PPPs) constituem estratégia governamental destinada a viabilizar empreendimentos e serviços públicos por meio da articulação entre a Administração Pública e o setor privado, apresentando potencial para superar limitações estruturais do setor estatal. A respeito das vantagens das PPPs para a Administração Pública, analise as afirmativas a seguir. I. Viabilizam empreendimentos que, sob a ótica estritamente financeira, não seriam sustentáveis apenas com a cobrança de tarifa dos usuários, ao admitir contraprestação do parceiro público ao parceiro privado. II. Geram complementaridade às capacidades e aos recursos do governo, mediante a aprendizagem de novas habilidades, o acesso a ferramentas de gestão da informação e o desenvolvimento de capacidade gerencial. III. Devem ser concebidas pelos gestores como mecanismo de viabilização de aportes financeiros privados, d ispensando a busca de eficiência no uso de recursos públicos. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, apenas. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "Na Administração Pública federal direta, autárquica e fundacional, a terceirização é disciplinada pelo Decreto nº 9.507/2018, que enumera, em seu art. 3º, hipóteses em que se veda a execução indireta de serviços, em razão da natureza nuclear ou indelegável das atividades envolvidas. Dentre as hip óteses em que o Decreto nº 9.507/2018 veda a execução indireta de serviços na Administração Pública federal direta, autárquica e fundacional, encontra -se a contratação de serviços de",
+          "alternativas": [
+            "conservação, limpeza e copeiragem.",
+            "recepção e telecomunicações.",
+            "manutenção predial e de equipamentos.",
+            "regulação e outorga de serviços públicos.",
+            "transporte de cargas e de passageiros."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "A Lei nº 13.019/2014, denominada Marco Regulatório das Organizações da Sociedade Civil (MROSC), estabelece o regime jurídico das parcerias entre a Administração Pública e as organizações da sociedade civil, instituindo três instrumentos jurídicos distintos para a formalização dessas parcerias. Relacione os instrumentos jurídicos previstos no MROSC às respectivas características. Instrumento Característica 1. Termo de colaboração ( ) Adotado em parcerias que envolvem transferência de recursos financeiros e cujo plano de trabalho é proposto pela Administração Pública 2. Termo de fomento ( ) Adotado em parcerias que não envolvem transferência de recursos financeiros entre os parceiros 3. Acordo de cooperação ( ) Adotado em parcerias que envolvem transferência de recursos financeiros e cujo plano de trabalho é proposto pela organização da sociedade civil Assinale a opção que indica a relação correta, na ordem apresentada.",
+          "alternativas": [
+            "1 – 2 – 3.",
+            "2 – 3 – 1.",
+            "1 – 3 – 2.",
+            "3 – 1 – 2.",
+            "2 – 1 – 3."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "O neoweberianismo é um paradigma de reforma da Administração Pública que surge no início dos anos 2000, no contexto continental europeu, como alternativa ao gerencialismo. Ao longo das primeiras décadas do século XXI, evoluiu de tipo ideal a modelo normativo, consolidando -se como referência paradigmática voltada a mitigar problemas deco rrentes do neoliberalismo e das reformas gerenciais, notadamente o esvaziamento do Estado e sua incapacidade para enfrentar problemas sociais complexos e crises econômicas. Sobre a caracterização do Estado Neoweberiano como modelo de reforma administrativa, é correto afirmar que",
+          "alternativas": [
+            "constitui aprofundamento da New Public Management (NPM), promovendo o esvaziamento do Estado, a redução de seus papéis centrais e a generalização da lógica de mercado como mecanismo predominante de coordenação.",
+            "consiste em a tualização do modelo burocrático weberiano clássico, mediante incorporação de tecnologias digitais aos procedimentos internos, mantendo a orientação processual centrada no cumprimento de normas.",
+            "corresponde a paradigma puramente gerencial, fundado na substituição da burocracia estatal por arranjos contratuais flexíveis e por mecanismos de mercado, em ruptura com a tradição weberiana.",
+            "adota a lógica reticular da Nova Governança Pública (NPG) como mecanismo predominante de coordenação institucional, deslocando a hierarquia estatal para função subsidiária na articulação entre atores públicos e privados.",
+            "caracteriza-se como modelo híbrido, que articula legados burocráticos clássicos com aprendizados da NPM e da NPG, traduzindo-se em um arranjo instit ucional que preserva a coordenação estatal e simultaneamente incorpora lógicas de resultados e de participação cidadã. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 77,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "Em audiência pública promovida por determinada Secretaria Estadual, o Secretário afirmou aos presentes que a div ulgação ampla de dados sobre execução orçamentária, contratos e despesas correntes não constitui mera formalidade administrativa, mas pressuposto para que a comunidade exerça efetivo acompanhamento sobre os gastos públicos. Acrescentou que o desenvolviment o de condições e arranjos institucionais voltados a aproximar a Administração Pública do cidadão é expediente necessário ao combate à corrupção. A manifestação do Secretário guarda correspondência com a noção de transparência pública, na medida em que se a ssenta, fundamentalmente, na",
+          "alternativas": [
+            "exigência de participação da comunidade no controle dos gastos públicos, mediante o desenvolvimento de condições institucionais que permitam o acompanhamento da atuação administrativa pela sociedade.",
+            "atribuição da fiscalização dos atos do administrador público à estrutura interna de controle do próprio ente federativo, no exercício de suas competências institucionais ordinárias.",
+            "consolidação de sigilo amplo sobre informações financeiras e orçamentárias, de modo a preservar a estabilidade institucional da Administração Pública.",
+            "restrição do acesso a informações administrativas aos cidadãos previamente cadastrados em sistemas de identificação biométrica.",
+            "atuação técnico -fiscalizatória dos Trib unais de Contas, cujo aparato especializado supre, em sede de controle externo, as exigências do princípio republicano, cabendo à divulgação à sociedade função meramente subsidiária."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 78,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "A Lei nº 12.527/2011 (Lei de Acesso à Informação) e a Lei Complementar nº 131/2009, que acrescentou dispositivos à Lei de Responsabilidade Fiscal, estabelecem deveres de divulgação de informações pelos órgãos e entidades públicos, distinguindo -se duas modalidades de prestação dessas informaçõe s, conforme exista ou não provocação do interessado. Na Secretaria Estadual de Planejamento, foram registradas, em determinada semana, as seguintes ocorrências: I. publicação espontânea, no portal eletrônico do órgão, dos dados relativos à execução orçamen tária e financeira, com atualização em tempo real, contendo informações pormenorizadas sobre receitas e despesas; II. fornecimento de cópia integral de contrato administrativo a cidadão que apresentou requerimento formal por meio do Serviço de Informação a o Cidadão (SIC), no prazo legal de resposta; e III. divulgação, em sítio oficial, do rol de competências, da estrutura organizacional, dos endereços e telefones das respectivas unidades e dos horários de atendimento ao público, independentemente de qualquer solicitação. As ocorrências I, II e III correspondem, respectivamente, às hipóteses de transparência",
+          "alternativas": [
+            "passiva, ativa e passiva.",
+            "ativa, passiva e ativa.",
+            "ativa, ativa e passiva.",
+            "passiva, passiva e ativa.",
+            "ativa, passiva e passiva."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 79,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "O Portal da Transparência do governo federal brasileiro, criado em 2004, constitui hoje a mais popular e premiada solução de transparência do governo brasileiro, cuja finalidade é franquear informações on-line sobre a máquina estatal no país. Sua trajetória se insere no ciclo de reformas para a transparência na América Latina, impulsionado pelo discurso da boa governança e pela associação entre opacidade estatal e práticas corruptas. Sobre o Portal da Transparência como instrumento de controle social, é correto afirmar que",
+          "alternativas": [
+            "constitui instrumento de transparência passiva, pois condiciona o acesso às informações sobre a máquina estatal à apresentação de requerimento prévio pelo cidadão interessado.",
+            "foi desenvolvido pelo Tribunal de Contas da União, no exercício de suas competências constitucionais de fiscalização contábil, financeira e orçamentária da Administração Pública Federal.",
+            "representa instrumento de transparência ativa que franqueia, em formato on -line, informações sobre receitas, despesas, salários e contratos, fortalecendo simultaneamente o controle social e o controle governamental.",
+            "corresponde ao canal eletrônico de divulgação periódica do Relatório Resumido de Execução Orçamentária e do Relatório de Gestão Fiscal, em ciclo s quadrimestrais de prestação de contas dirigidos primariamente aos órgãos de controle externo.",
+            "opera como sistema eletrônico destinado ao recebimento e ao processamento de pedidos individuais de acesso à informação dirigidos aos órgãos e entidades da Administração Pública federal, com posterior encaminhamento das respostas aos requerentes."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 80,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "As limitações dos mecanismos eleitorais e dos controles intraestatais para assegurar a responsividade dos governantes têm levado a literatura especializada a reconhecer a dimensão de accountability societal. Constitui exemplo de mecanismo de fiscalização e controle típico da accountability societal",
+          "alternativas": [
+            "o julgamento das contas anuais do Chefe do Poder Executivo pelo Poder Legislativo, com auxílio do Tribunal de Contas competente.",
+            "a aplicação de sanções a agentes públicos por improbidade administrativa pelos órgãos do Ministério Público e do Poder Judiciário.",
+            "o exercício do voto pelos eleitores em pleitos periódicos para a renovação dos mandatos eletivos no Poder Executivo e no Poder Legislativo.",
+            "a atuação de observatórios sociais e de organizações da sociedade civil organizada que monitoram contratos públicos e mobilizam a opinião pública por meio da mídia.",
+            "a fiscalização das despesas públicas pelas Controladorias - Gerais no exercício do controle interno da Administração Pública."
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-tjsc2026-analista-sistemas-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Tribunal de Justiça do Estado de Santa Catarina",
+      "cargo": "Analista de Sistemas - Tipo 1 - Manhã",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/prova-7.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tribunal-de-justica-do-estado-de-santa-catarina.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 59,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Com relação aos fundamentos, características e arquitetura da computação em nuvem, assinale (V) para afirmativa verdadeira e (F) para falsa. ( ) A resiliência na computação em nuvem pode abranger a disponibilidade de recursos em uma única nuvem ou entre múltiplas nuvens. ( ) A arquitetura de computação em nuvem não contempla virtualização, pois os recursos são fisicamente dedicados a cada usuário. ( ) A elasticidade é uma característica da computação em nuvem que permite o redimensionamento dos recursos de TI na nuvem conforme a demanda. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – V – F.",
+            "F – F – V.",
+            "V – F – V.",
+            "F – V – V.",
+            "V – F – F."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Considerando os modelos de serviço em computação em nuvem — também denominados modelos de entrega de nuvem ou modelos de entrega de serviços em nuvem —, assinale a afirmativa correta.",
+          "alternativas": [
+            "Um provedor de nuvem pode oferecer serviços co nforme os modelos IaaS, PaaS ou SaaS, os quais possuem escopos exclusivos e não relacionados entre si.",
+            "O modelo IaaS oferece um serviço pronto para uso, cuja configuração não é facultada ao consumidor.",
+            "O consumidor de nuvem em um modelo PaaS possui acesso integral aos recursos de TI.",
+            "O modelo SaaS permite a oferta de um serviço reutilizável.",
+            "Em ambos os modelos, PaaS e SaaS, o provedor de nuvem fornece acesso à infraestrutura física aos consumidores."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Com relação aos tipos de nuvens, no contexto da computação em nuvem, analise os itens a seguir. I. Uma nuvem tipo híbrida é uma combinação de dois ou mais modelos de implantação de nuvem. II. Uma nuvem tipo pública é aquela que provê os serviços do setor público do Estado, de forma gratuita aos cidadãos. III. Um provedor de serviço em nuvem do tipo privada não oferece o modelo SaaS. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "A computação em nuvem é um modelo que permite o acesso sob demanda a recursos computacionais, como rede, servidores e armazenamento. No contexto de desenvolvimento de software em nuvem e uso de containers, considere os itens a seguir. I. Recurso que pode ser compartilhado pelos containers com o sistema operacional do hospedeiro, mas não pelas máquinas virtuais. II. Orquestrador de containers. III. Novo modelo de desenvolvimento em que as aplicações são feitas para a nuvem, e não adaptadas a ela. Assinale a opção que apresenta, respectivamente, os recursos ou conceitos listados.",
+          "alternativas": [
+            "Kernel, Docker, IaaS.",
+            "Cluster, Node, Microserviços.",
+            "Kernel, Kubernetes, Cloud Native.",
+            "Hardware, Hypervisor, Cluster.",
+            "Sistema de arquivos base, Kubernetes, DevOps."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Considerando o modelo de referência OSI para redes de computadores, assinale a afirmativa correta.",
+          "alternativas": [
+            "O TCP ( Transmission Control Protocol ) é um protocolo da camada de controle responsável pela transmissão confiável.",
+            "O protocolo I P ( Internet Protocol ) é o único protocolo responsável por endereçamento em redes de computadores.",
+            "A camada física é responsável por garantir que os dados sejam transmitidos corretamente.",
+            "O roteamento de pacotes é uma das funções da camada de aplicação, em especial para navegação web.",
+            "O controle de fluxo é uma das funções da camada de enlace de dados. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "O modelo OSI para redes de computadores é uma abstração para organizar as responsabilidades em camadas que encapsulam a informação a ser transmitida, da camada mais superior (aplicação) até a mais inferior (física). No contexto do modelo OSI, analise as afirmativas a seguir. I. A camada de rede é a responsável por determinar, passo a passo, qual será o próximo nó da rede a que será enviado o datagrama, em um processo chamado de roteamento. II. A camada de enlace é a responsável pelo encaminhamento de um frame ponto a ponto, utilizando o endereçamento IP para garantir que está sendo enviado o frame para o próximo destino correto. III. A camada de transporte pode implementar o protocolo TCP, que garante a entrega fim a fim dos pacotes entre origem e destino. Nesse protocolo, estabelece -se uma conexão, e eventuais perdas de pacotes são tratadas por meio de retransmissões na própria camada de transporte. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Na arquitetura clássica descrita por Von Neumann, o computador é representado por um processador, barramentos, uma memória principal e dispositivos de entrada e saída. Entretanto, os computadores atuais executam múltiplos processos, possuem diversos núcleos de processamento, e possuem arquiteturas multinível de memória. Para organi zar todos esses recursos, utiliza-se um programa especial chamado de Sistema Operacional. Com relação ao Sistema Operacional e à alocação de recursos computacionais, assinale (V) para afirmativa verdadeira e (F) para falsa. ( ) O sistema operacional utiliza um escalonador para conceder e revogar acesso ao processador a cada processo em execução, por meio da implementação de algoritmos como FIFO ou round-robin. ( ) A arquitetura multinível de memória visa diminuir a latência de acesso à memória, sendo co mposta por caches de diferentes velocidades de acesso, pela memória RAM e pela memória virtual. ( ) Os dispositivos de entrada e saída permitem que o computador interaja com o mundo exterior, e o sistema operacional é responsável por conceder acesso a es ses dispositivos para os processos, por meio de programas conhecidos como daemons. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "F – V – F.",
+            "V – F – F.",
+            "F – F – V.",
+            "F – V – V.",
+            "V – V – F."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 66,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Sobre o processo de virtualização de computadores, é correto afirmar que",
+          "alternativas": [
+            "para realizar a virtualização, utiliza -se um software chamado hypervisor, responsável por gerenciar máquinas virtuais e abstrair os recursos de hardware para os sistemas operacionais convidados.",
+            "o processo de virtualização traz benefícios no tempo de processamento, pois a latência de resposta dos processos virtualizados é menor do que nos sistemas não virtualizados.",
+            "a virtualização traz ganhos econômicos, pois é possível virtualizar diversas c ópias de sistemas proprietários, como o Windows ou iOS em máquinas Linux com apenas acesso a uma licença.",
+            "um dos benefícios da virtualização é a escalabilidade, pois ela permite que processadores de diversos servidores distintos sejam usados em um único sistema virtual.",
+            "os containers são sistemas operacionais generalistas virtualizados, que permitem flexibilidade na utilização dos recursos de hardware e facilitam o deployment de soluções. Segurança da Informação e Governança de TI"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Relacione os conceitos de Segurança da Informação às respectivas definições, quando houver. 1. Confidencialidade 2. Integridade 3. Disponibilidade 4. Autenticação 5. Autorização ( ) Propriedade de proteger a exatidão da informação. ( ) Processo de concessão de permissões. ( ) Propriedade em que a informação não é disponibilizada ou divulgada para pessoas, entidades ou processos não autorizados. ( ) Propriedade de ser acessí vel e utilizável sob demanda por uma entidade autorizada. Assinale a opção que indica a relação correta, na ordem apresentada",
+          "alternativas": [
+            "1 – 4 – 5 – 2.",
+            "2 – 4 – 1 – 3.",
+            "4 – 5 – 3 – 1.",
+            "2 – 5 – 1 – 3.",
+            "4 – 2 – 3 – 1. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 68,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Analise as seguintes afirmativas relacionadas à proteção de dados pessoais e Gestão de Identidade: I. Para implementar a proteção dos dados pessoais em repouso, deve-se manter os dados criptografados e liberar sua decifração apenas mediante autenticação e validação d o direito ao acesso. II. O conceito de Multi-factor Authentication - MFA (preferencialmente solicitando algo que o usuário sabe, algo que possui e algo que é), serve para reforçar o processo de autenticação. III. Para o correto funcionamento do Controle de Acesso baseado em papéis – RBAC, é importante que apenas permissões necessárias sejam associadas a cada usuário, e que cada papel seja associado a um usuário distinto. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 69,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "No complexo e conectado ambiente de serviços disponíveis na rede mundial, garantir a autenticidade de um usuário para que possa acessar apenas os conteúdos a ele disponíveis é um processo fundamental. Com a proliferação da necessidade de se autenticar a cada interação, surgiu a tecnologia de Single-Sign on (SSO). Assim sendo, o SSO é",
+          "alternativas": [
+            "uma solução integradora, que permite que um servidor autentique diversos usuários para acessá-lo simultaneamente.",
+            "uma instanciação do Keycloak, protocolo de autenticação remota padronizada pela RFC 6749.",
+            "um serviço que reduz o número de autenticações em múltiplos sistemas.",
+            "um processo que garante autenticação segura com apenas um fator.",
+            "uma tecnologia que deve ser instalada em um servidor singular da rede, para acesso remoto de vários sistemas a esse servidor."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 71,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Uma aplicação em produção foi comprometida por meio da exploração de uma biblioteca com CVE conhecido, que permite execução remota de código. O pipeline da aplicação possui SAST durante a fase de desenvolvimento, DAST em ambiente de homologação e, ainda, possui monitoramento em produção. Após investigação, verificouse que a vulnerabilidade estava em uma dependência indireta, não houve alerta durante o pipeline e a exploração ocorreu imediatamente após o deploy. Com base nesse contexto, assinale a afirmativa que explica corretamente a falha de detecção.",
+          "alternativas": [
+            "Ausência de análise de composição de software (SCA) no pipeline para identificação de vulnerabilidades em dependências transitivas.",
+            "Limitação do SAST na análise de fluxos dinâmicos de execução da aplicação.",
+            "Dependência do DAST de cobertura de testes para identificação de vulnerabilidades exploráveis.",
+            "Natureza reativa do monitoramento em produção, voltada à detecção pós-exploração.",
+            "Ausência de testes funcionais capazes de exercitar cenários de falha na aplicação. TRIBUNAL DE JUSTIÇA DO ESTADO DE SANTA CATARINA"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 72,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Uma organização mantém um sistema legado crítico, mas com forte dependência de tecnologia obsoleta. Foi identificado um risco relacionado tanto ao comprometimento da segurança quanto à futura indisponibilidade do sistema. Para tratar esse risco, foram propostas as seguintes ações: P1: migrar as funcionalidades para uma plataforma SaaS moderna, desativando o servidor antigo; P2: terceirizar a gestão do legado para um parceiro especializado, com foco em cláusulas de responsabilidade civil em contrato, sem a lteração dos controles técnicos ou operacionais do sistema; P3: isolar o sistema em uma VLAN sem acesso à internet e exigir VPN com MFA para qualquer acesso; e P4: manter a operação do sistema legado, estabelecendo um fundo de reserva financeira para cobrir eventuais multas e definindo um plano de resposta a incidentes para recuperação manual, em caso de falha catastrófica. Assinale a opção que associa corretamente cada proposta a uma estratégia de tratamento de risco.",
+          "alternativas": [
+            "P1: evitar; P2: transferir; P3: mitigar; P4: aceitar.",
+            "P1: evitar; P2: mitigar; P3: mitigar; P4: aceitar.",
+            "P1: mitigar; P2: transferir; P3: mitigar; P4: transferir.",
+            "P1: evitar; P2: transferir; P3: mitigar; P4: transferir.",
+            "P1: mitigar; P2: mitigar; P3: mitigar; P4: aceitar."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 73,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Uma arquitetura utiliza: • aplicação primária on-premise; • réplica em nuvem atualizada continuamente; • mecanismo de failover por DNS, com troca auto mática de endpoint; e • pequeno atraso na propagação do DNS. Considerando esse cenário, é correto afirmar que essa arquitetura",
+          "alternativas": [
+            "usa redundância ativa-ativa com RPO e RTO nulos.",
+            "adota uma estratégia híbrida com failover automático, sujeita a pequenas janelas de indisponibilidade.",
+            "caracteriza uma estratégia de Warm Site, cuja ativação do endpoint em nuvem exige intervenção na camada de aplicação.",
+            "implementa tolerância a falhas, garantindo a persistência de sessões de usuário durante o failover.",
+            "emprega replicação assíncrona, cujo RTO é limitado exclusivamente pela largura de banda do link de sincronismo."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-amazul2026-assistente-administrativo-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Amazônia Azul Tecnologias de Defesa S.A. (AMAZUL)",
+      "cargo": "Assistente Administrativo - Tipo 1 - Tarde",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ok-assistente-administrativo-cnm101-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-atualizado_amazulv2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 11,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "Um número natural N deixa resto 1 na divisão por 2 se, e somente se, deixa resto",
+          "alternativas": [
+            "0 ou 2, na divisão por 4.",
+            "1 ou 3, na divisão por 4.",
+            "2 ou 5, na divisão por 6.",
+            "1 ou 3 na divisão por 6.",
+            "2 ou 5, na divisão por 7."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Em março de 2025, o tempo médio de atendimento em um posto de serviços era de 2h 45min. Em abril, o tempo médio de atendimento foi reduzido em 30%. O tempo médio de atendimento em abril foi de",
+          "alternativas": [
+            "1h 55min 30s.",
+            "1h 50min 30s.",
+            "49min 30s.",
+            "2h 15min.",
+            "1h 15min."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Proposições e Conectivos",
+          "enunciado": "Considere as seguintes premissas: • Se apenas um entre João e Maria mora no bairro do Butantã, então o elefante é azul. • Se João não mora do bairro do Butantã, então a galinha é verde. • Se Maria mora no bairro do Butantã, então o cavalo é amarelo. • O elefante não é azul. Logo,",
+          "alternativas": [
+            "nem Maria, nem João, moram no bairro do Butantã.",
+            "ou a galinha é amarela, ou o cavalo é verde.",
+            "Maria e João moram no bairro do Butantã.",
+            "os três animais não possuem a mesma cor.",
+            "a galinha é verde ou o cavalo é amarelo."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Um operador precisa executar 5 procedimentos, A, B, C, D e E, um por vez, em sequência, mas ainda não decidiu a ordem que seguirá. Ele já sabe, todavia, que não começará pelo procedimento C. O número total de sequências dos cinco procedimentos, que atendem a restrição determinada pelo operador, é",
+          "alternativas": [
+            "120",
+            "119",
+            "96",
+            "86",
+            "24"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Uma urna contém bolas idênticas, exceto pelas suas cores: algumas bolas são vermelhas e as restantes são azuis. Sabe-se que a probabilidade de uma bola retirada ao acaso da urna ser azul é igual a 10%. Uma bola foi retirada ao acaso da urna e devolvida. Em seguida, repetiu-se o procedimento. Qual é a probabilidad e de as cores das bolas retiradas serem diferentes?",
+          "alternativas": [
+            "0,9%",
+            "1,8%",
+            "9,0%",
+            "18%",
+            "50% Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Sabe-se que se cada um dos dados numéricos de uma distribuição é menor ou igual a M, então a média aritmética dos dados da distribuição é menor, ou igual, a M. Ou seja, se a média aritmética dos dados numéricos de uma distribuição é maior que 7, então",
+          "alternativas": [
+            "cada um dos dados da distribuição é maior que 7.",
+            "nenhum dos dados da distribuição é maior que 7.",
+            "algum dos dados da distribuição é maior que 7.",
+            "algum dos dados da distribuição é menor que 7.",
+            "todos os dados da distribuição são iguais a 7."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Analítica",
+          "enunciado": "No plano cartesiano xy, considere os seguintes pontos: A(9,3), B(12,7), C(4,4), D(14,5) e E(11,-1). Entre os pontos B, C, D e E, quantos são os que distam menos que 5 do ponto A?",
+          "alternativas": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos",
+          "enunciado": "Dois conjuntos A e B são tais que: A possui, no mínimo, 15 elementos e, no máximo, 27 elementos. B possui, no mínimo, 8 elementos e, no máximo, 10 elementos. Considere o conjunto 𝐴 − 𝐵 = {𝑥/𝑥 ∈ 𝐴 𝑒 𝑥 ∉ 𝐵}. A quantidade mínima de elementos que o conjunto A – B pode ter é",
+          "alternativas": [
+            "2.",
+            "5.",
+            "7.",
+            "10.",
+            "17. Noções de Informática"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Em um setor administrativo, uma impressora de rede, configurada para obter endereço IP automaticamente, deixa de funcionar repentinamente. Todos os computadores do setor continuam acessando a Internet normalmente, porém nenhum deles consegue enviar documentos para impressão – inclusive quando a tentativa é feita utilizando diretamente o endereço IP previamente configurado da impressora. Ao verificar o equipamento, constata -se que a impressora está ligada, conectada fisicamente à rede e sem falhas aparentes de hardware. Não há servidor de impressão intermediário, e a comunicação ocorre diretamente entre os computadores e a impressora na rede local. Nessa situação, o serviço de rede cuja indisponibilidade ou falha na concessão explica de forma direta a interrupção do funcionamento da impressora é o",
+          "alternativas": [
+            "DHCP – Dynamic Host Configuration Protocol.",
+            "DNS – Domain Name System.",
+            "FTP – File Transfer Protocol.",
+            "HTTP – Hypertext Transfer Protocol.",
+            "NAT – Network Address Translation."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Durante a navegação na Internet, por meio de navegadores, são utilizados identificadores textuais padronizados para localizar e acessar recursos disponibilizados em servidores, como páginas HTML, imagens e serviços Web. Esse identificador, que define onde o recurso está localizado e como pode ser acessado no contexto da Web, é denominado(a)",
+          "alternativas": [
+            "mecanismo de busca empregado para localizar o recurso.",
+            "navegador utilizado pelo usuário.",
+            "protocolo de comunicação utilizado.",
+            "serviço de hospedagem do recurso.",
+            "URL (Uniform Resource Locator) associada ao recurso."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Informática",
+          "assunto": "Windows",
+          "enunciado": "Durante a organização de arquivos em um computador com o sistema operacional Windows versão 11 BR, um usuário seleciona um arquivo, pressiona a combinação de teclas SHIFT+DELETE e confirma a ação solicitada pelo sistema. Em seguida, ele não encontra mais o arquivo no diretório onde estava e tenta entender o que ocorreu. Nessa situação, a ação executada pelo sistema foi",
+          "alternativas": [
+            "bloquear o arquivo para edição.",
+            "criar automaticamente uma cópia do arquivo.",
+            "excluir o arquivo permanentemente.",
+            "mover o arquivo para a lixeira do Windows.",
+            "transportar o arquivo para a pasta temporária c:\\windows\\temp. Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Informática",
+          "assunto": "Microsoft Excel",
+          "enunciado": "Um usuário de um software de edição de planilhas eletrônicas precisa inserir, em uma determinada planilha, um valor exatamente no ponto onde se cruzam a sua terceira linha e sua segunda coluna. Nesse tipo de aplicativo, essa posição corresponde a uma",
+          "alternativas": [
+            "anotação.",
+            "célula.",
+            "intervalo.",
+            "link.",
+            "pasta de trabalho. Língua Inglesa READ THE TEXT AND ANSWER THE FOLLOWING QUESTIONS Brazil Uses AI Surveillance to Protect the Amazon Rainforest Illegal logging, land grabbing, and deforestation have long posed challenges for enforcement agencies. Now, AI -powered surveillance systems are helping track these activities in real time, making forest protection more efficient and inclusive. Using data from satellites, drones, and ground sensors, Brazil’s AI systems monitor changes in tree cover, land use, and movement patterns. When suspicious activity is detected —such as sudden clearing or unauthorized vehicle entry —alerts are sent to authorities for quick action. This reduces the time between detection and response. Machine learning models analyze long -term data to ide ntify patterns and predict where future illegal activities might occur. These insights help guide patrols and resource planning, improving safety for rangers and increasing the chances of stopping environmental crimes before they happen. AI also helps dist inguish between natural changes —like seasonal plant shifts —and human -caused damage. This reduces false reports and improves accuracy, saving time and effort. The technology supports transparency by providing visual evidence and data trails that can be used in legal investigations. Several Brazilian tech startups and global partners are collaborating with the government to expand this effort. Their goal is to ensure that forest protection tools are accessible, sustainable, and respectful of indigenous communities who live in the Amazon. By using AI responsibly, Brazil is showing how technology can serve both the planet and the people. This approach helps balance development with conservation, offering a model for other countries working to protect natural resources through innovation. Adapted from: https://techknow.africa/brazil-uses-ai-surveillance-to-protect-theamazon-rainforest/"
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-amazul2026-tecnico-informatica-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Amazônia Azul Tecnologias de Defesa S.A. (AMAZUL)",
+      "cargo": "Técnico de Informática - Tipo 1 - Tarde",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ok-tecnico-de-informatica-cnm115-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-atualizado_amazulv2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 31,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Com base nos mecanismos de memória virtual adotados pelos sistemas operacionais, assinale a alternativa correta.",
+          "alternativas": [
+            "A alta taxa de faltas de página de um processo causada pela insuficiência de quadros implica no aumento de sua prioridade de CPU, aumentando seu tempo de execução e reduzindo ocorrências de thrashing.",
+            "A estratégia de frequência de erros de página (PFF - page-fault frequency) regula a taxa de faltas de página de cada processo, adaptando o número de quadros alocados conforme necessário para evitar thrashing.",
+            "O algoritmo de segunda chance pode ser implementado como uma variação do método LIFO ( Last In, First Out ), priorizando a remoção das páginas carregadas mais recentemente quando o bit de referência esteja limpo.",
+            "O modelo do conjunto do trabalho no âmbito da gestão de atividade improdutiva ( thrashing) é baseado no princípio da proporcionalidade de uso.",
+            "Os sistemas de acesso não uniforme à memória (NUMA) são mais lentos do que os que possuem memória e CPUs localizadas na mesma placa-mãe."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Nos sistemas operacionais modernos, o uso de threads permite dividir a execução de programas em fluxos independentes, favorecendo responsividade e melhor aproveitamento de recursos do processador. Considerando as características e modelos de uso de threads em sistemas operacionais e linguagens de programa ção, assinale a alternativa correta.",
+          "alternativas": [
+            "A compilação de programas em Java dispensa a utilização de threads, caso o código seja especificado somente com o método main().",
+            "A fim de superar dificuldades operacionais tais como correção dos programas, a téc nica de threading implícito transfere a criação de threads nativa dos compiladores para os desenvolvedores de aplicações.",
+            "O padrão POSIX (IEEE 1003.1c) define Pthreads como uma implementação paralela do comportamento dos threads, a fim de otimizar desempenho em sistemas multicore.",
+            "Threads oferecem dois níveis de suporte: usuário e kernel. Threads do nível usuário são gerenciadas com o suporte do kernel e do sistema operacional, implementando, assim, o paralelismo de código.",
+            "Uma possível técnica de criação de threads em programas escritos na linguagem Java define uma classe que implementa a interface Runnable."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Nos sistemas computacionais modernos, a crescente exigência por maior largura de banda e comunicação eficiente entre dispositivos levou ao desenvolvimento de padrões de interconexão de al to desempenho. Entre esses padrões destaca-se o PCI Express (PCIe). Sobre barramentos PCI Express (PCIe), assinale a alternativa correta.",
+          "alternativas": [
+            "Barramentos PCIe apresentam grande largura de banda dependente da organização do computador, criada para operar como barramento de dados da memória ou contador de instrução.",
+            "Pacotes de controle de fluxo regulam a taxa em que TLPs (Transaction Layer Packets ) e DLLPs ( Data Link Layer Packet ) podem ser transmitidas pelas ligações do tipo NAK ( Negative Acknowledgment).",
+            "PCIe implementa um esquema de interconexão ponto a ponto, sendo capaz de suportar as necessidades de dispositivos de entrada e saída com demandas de taxas de transmissão mais altas.",
+            "Pedidos de leitura e escrita são enviados para camada de física do PCIe partindo dos softwares em níveis inferiores dessa camada, sendo que os pacotes enviados possuem o mesmo identificador de sessão.",
+            "Uma das limitações do barramento PCIe encontra -se na compatibilidade entre diferentes arquiteturas d e microcomputadores e periféricos, dada pela inobservância de especificações do padrão."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Em um determinado sistema computacional, a memória principal tem capacidade máxima de 16 GB e a memória cache possui 1 GB. Cada palavra de memória possui 64 bits (8 bytes), cada bloco da memória principal é formado por 4 palavras, e cada linha da memória cache armazena exatamente um bloco da memória principal. Considere ainda que os endereços gerados pela UCP se referem ao número da palavra na memória prin cipal (endereçamento por palavra) e que a memória cache é mapeada diretamente (mapeamento direto), de modo que cada bloco da memória principal é mapeado em exatamente uma linha da cache. Nessa situação, a decomposição de um endereço de memória da UCP em campos de TAG, ÍNDICE e DESLOCAMENTO (palavra dentro do bloco) é corretamente dada por",
+          "alternativas": [
+            "TAG com 4 bits, ÍNDICE com 25 bits e DESLOCAMENTO com 2 bits.",
+            "TAG com 4 bits, ÍNDICE com 26 bits e DESLOCAMENTO com 1 bit.",
+            "TAG com 5 bits, ÍNDICE com 24 bits e DESLOCAMENTO com 2 bits.",
+            "TAG com 6 bits, ÍNDICE com 23 bits e DESLOCAMENTO com 2 bits.",
+            "TAG com 7 bits, ÍNDICE com 22 bits e DESLOCAMENTO com 2 bits."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Os firewalls Cisco baseados em zonas ( Zone-Based Policy Firewall – ZFW) adotam um modelo de controle de tráfego que organiza interfaces em zonas de segurança e aplica políticas de inspeção entre essas zonas, substituindo o antigo paradigma baseado diretamente em interfaces. Esse modelo permite granularidade superior e maior consistência no tratamento do tráfego entre regiões da rede. Considerando exclusivamente as características do Zone-Based Policy Firewall (ZFW), assinale a alternativa correta.",
+          "alternativas": [
+            "A Interface de Túnel Virtual (VTI) IPSec e o GRE+IPSec permitem o con finamento de conexões VPN site-to-site e de clientes em zonas de segurança multicast, posicionando as interfaces de túnel em nichos de segurança compatíveis com o protocolo.",
+            "Firewalls com políticas baseadas em zonas demandam que a configuração da zona deve ser realizada antes da atribuição de interfaces a elas, sendo uma interface atribuída a apenas uma zona de segurança.",
+            "Firewalls que utilizam política baseada em zonas (ZFW) adotam um modelo de configuração baseado na aplicação de uma política de i nspeção em interface empregada a todo tráfego que pela interface passa.",
+            "O conjunto de interfaces atribuídas a uma mesma zona, que integra regiões de segurança relativas em uma rede, apresentam proteção com níveis de segurança distintos, mutuamente exclusivos e complementares.",
+            "O esquema de configuração de inspeções de um firewall baseados em zona mantém compatibilidade com a abordagem adotada pelos firewalls Cisco IOS Classic com controle de acesso baseados em contexto."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Nos modelos de referência utilizados para descrever a comunicação entre sistemas computacionais, o modelo OSI (Open Systems Interconnection ) organiza as funções de rede em camadas, cada qual com responsabilidades bem definidas no processo de transmissão de dados entre dispositivos distintos. Considerando as atribuições dessas camadas, é correto afirmar que a camada",
+          "alternativas": [
+            "de apresentação realiza a interface entre a pilha de protocolos e os aplicativos alvo da informação na rede.",
+            "de enlace converte o formato do dado rece bido pela camada de aplicação em um formato entendido pelo protocolo usado.",
+            "de rede viabiliza que duas aplicações em computadores diferentes estabeleçam uma sessão de comunicação, com a definição da forma de transmissão de dados.",
+            "de transporte recebe os dados da camada de sessão e os divide em segmentos de dados a serem repassados à camada de rede.",
+            "física traduz endereços lógicos em físicos, sendo o endereçamento lógico independente da arquitetura de rede sendo usada. Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "O Trivial File Transfer Protocol (TFTP) é um protocolo extremamente simples, voltado para transferências básicas de arquivos em ambientes de rede, especialmente em dispositivos que necessitam de inicialização remota ou atualização de firmware. Sobre o protocolo TFTP ( Trivial File Transfer Protocol ), assinale a opção correta.",
+          "alternativas": [
+            "Divide os dados a serem transmitidos em blocos de 1 MB e os envia em lote único.",
+            "Não possui qualquer sistema de autenticação.",
+            "O primeiro bloco transmitido config ura as portas de comunicação.",
+            "Opera com o SSH, criptografando os dados transferidos.",
+            "Utiliza o protocolo de transporte TCP."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "O uso de programas maliciosos (malwares) em crimes cibernéticos é cada vez mais associado a objetivos bem esp ecíficos, como espionagem, fraude financeira, controle remoto de máquinas e fraudes correlatas. Considerando os diferentes tipos de malware e seus objetivos principais, assinale a opção que corretamente indica o nome do malware que tem como propósito seque strar a máquina e exigir, por extorsão, o pagamento de resgate.",
+          "alternativas": [
+            "Backdoor.",
+            "Banking Trojans.",
+            "Bots.",
+            "Malware APT.",
+            "Ransomware."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Nos sistemas criptográficos, os algoritmos podem ser classificados, entre outros critérios, pelo número de chaves utilizadas nos processos de cifração e decifração. Com relação aos tipos de criptografia, aquela que se caracteriza pelo uso de uma mesma chave para cifrar (criptografar) e decifrar (decriptar) a mensagem é conhecida como criptografia",
+          "alternativas": [
+            "assimétrica.",
+            "assinatura digital.",
+            "de curvas elípticas (ECC).",
+            "envelope digital.",
+            "simétrica. Considere o seguinte script SQL ANSI para responder às próximas duas questões Se considerarmos que um script de inserção de dados nas duas tabelas acima seja bem-sucedido, na qual 10 linhas sejam inseridas na tabela PROJETO_PESQUISA e 24 linhas na tabela DESENVOLVIMENTO_TECNOLOGICO. Na referida inserção, considere que apenas uma tup la da tabela PROJETO_PESQUISA não está associada a alguma tupla da tabela DESENVOLVIMENTO_TECNOLOGICO, e que duas tuplas da tabela DESENVOLVIMENTO_TECNOLOGICO não estão associadas à tabela PROJETO_PESQUISA."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Durante um treinamento técnico, discutiu -se porque os processadores modernos passaram a utilizar múltiplos núcleos em vez de aumentar continuamente a frequência de clock. O fator histórico que levou a essa mudança na indústria foi",
+          "alternativas": [
+            "a continuidade do aumento das frequências de clock sem limitações.",
+            "a eliminação de todos os problemas de dissipação térmica.",
+            "a estagnação no aumento da frequência devido ao limite térmico e ao consumo de energia.",
+            "a interrupção completa da miniaturização dos transistores.",
+            "o abandono do uso de caches avançados nos processadores modernos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Durante uma análise de desempenho, um engenheiro percebe que o processador está apresentando gargalos na etapa de decodificação e no envio de sinais para componentes internos, como ALU, registradores e unidades de acesso à memória. Considerando o funcionamento interno do ciclo de instruçã o, o componente da Unidade Central de Processamento (UCP) que é responsável por interpretar o código da instrução, gerar os sinais de controle adequados e coordenar a execução das operações internas, influenciando diretamente esse tipo de gargalo é",
+          "alternativas": [
+            "a Unidade Lógico-Aritmética (ALU).",
+            "o Conjunto de registradores gerais.",
+            "a Unidade de Controle.",
+            "o Cache de primeiro nível (L1).",
+            "o Barramento interno da UCP."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Um técnico precisa reinstalar o sistema operacional em um computador com falhas constantes e decide realizar a formatação completa do disco. Após apagar e recriar as partições, a etapa imediata anterior ao início da instalação do sistema é",
+          "alternativas": [
+            "baixar atualizações do Windows.",
+            "selecionar a partição onde o sistema será instalado.",
+            "instalar drivers essenciais.",
+            "criar a conta de usuário.",
+            "ativar o recurso de restauração do sistema. Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Durante a investigação de um problema de acesso, um administrador analisa o seguinte cenário em um servidor Linux: O usuário analista pertence ao grupo projetos. O diretório /dados/relatórios possui as seguintes permissões: dr--r-x---+ 3 root projetos 4096 Jan 8 10:20 relatorios Uma ACL adicional está configurada: Mesmo assim, o usuário analista consegue listar os arquivos com ls, mas não consegue acessar os subdiretórios internos usando cd. Considerando as permissões POSIX tradicionais e o impacto combinado da máscara da ACL, o ajuste é necessário para permitir que o usuário acesse os subdiretórios é",
+          "alternativas": [
+            "alterar a permissão do grupo para rwx",
+            "alterar apenas a ACL do grupo projetos para r-x",
+            "alterar a máscara da ACL para incluir x",
+            "remover todas as ACLs e manter somente r--",
+            "conceder permissão de leitura e escrita ao usuário analista."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Um usuário do sistema operacional LINUX recebe erro de permissão ao tentar acessar ( cd) um diretório. O administrador verifica que o diretório possui permissões restritas. A permissão que é obrigatória para permitir que o usuário consiga entrar no diretório é",
+          "alternativas": [
+            "r (read).",
+            "w (write).",
+            "rw (read/write).",
+            "x (execute).",
+            "rxw (ordem obrigatória)."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Um administrador precisa criar rapidamente uma estrutura de diretórios aninhados ( conf/app/logs) no sistema operacional LINUX, garantindo que todos os diretórios intermediários sejam criados automaticamente. O comando que realiza essa tarefa em uma única execução na linha de comando do sistema operacional LINUX é",
+          "alternativas": [
+            "mkdir conf && mkdir conf/app",
+            "mkdir -p conf/app/logs",
+            "mkdir --parents=false conf/app/logs",
+            "touch conf/app/logs",
+            "rm -r conf/app/logs && mkdir conf/app/logs"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Durante um incidente, a equipe detecta um programa que se replica automaticamente explorando falhas em serviços de rede internos. O tipo de malware descrito por esse comportamento é",
+          "alternativas": [
+            "Worm.",
+            "Vírus.",
+            "Cavalo de Tróia.",
+            "Spyware.",
+            "Backdoori."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Um administrador precisa orientar usuários sobre criação de senhas fortes após diversos incidentes de invasão por tentativas de adivinhação e uso de senhas fracas em contas corporativas. A prática que fortalece significativamente uma senha é",
+          "alternativas": [
+            "utilizar senhas longas somente sem números repetidos.",
+            "utilizar combinações longas com múltiplos tipos de caracteres.",
+            "usar somente letras minúsculas, de sde que não em ordem alfabética.",
+            "reutilizar a mesma senha em contas diferentes, para manter conformidade.",
+            "criar senhas baseadas no nome do usuário junto com caracteres especiais."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Para reduzir vulnerabilidades exploráveis remotamente em dispositivos móveis corporativos, o administrador deve adotar práticas de segurança adequadas. Assinale a opção que contribui diretamente para mitigar esses riscos.",
+          "alternativas": [
+            "Atualizar somente aplicativos instalados.",
+            "Instalar aplicativos de fontes não verificadas.",
+            "Manter o sistema operacional e os aplicativos sempre atualizados.",
+            "Alterar configurações estéticas do dispositivo.",
+            "Utilizar versões antigas do sistema operacional."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "fgv-amazul2026-tecnico-enfermagem-trabalho-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "Amazônia Azul Tecnologias de Defesa S.A. (AMAZUL)",
+      "cargo": "Técnico de Enfermagem do Trabalho - Tipo 1 - Tarde",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/ok-tecnico-de-enfermagem-do-trabalho-cnm114-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-atualizado_amazulv2.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "A NR 32 é a Norma Regulamentadora do Ministério do Trabalho e Emprego do Brasil que estabelece as diretrizes básicas para a implementação de medidas de proteção à segurança e à saúde dos trabalhadores em serviços de saúde. Conforme a NR 32, assinale a opção corre ta de acordo com as diretrizes do Programa de Controle Médico de Saúde Ocupacional (PCMSO)",
+          "alternativas": [
+            "com relação à possibilidade de exposição acidental aos agentes biológicos, não é necessário constar do PCMSO as medidas para descontaminação do local de trabalho",
+            "em toda ocorrência de acidente envolvendo riscos biológicos, deve ser emitida a Comunicação de Acidente de Trabalho - CAT, desde que tenha ocorrido afastamento do trabalho",
+            "o PCMSO deve estar à disposição dos trabalhadores, mas não necessariamente da inspeção do trabalho",
+            "o PCMSO, além do previsto na NR -07, deve contemplar o programa de vacinação",
+            "sempre que houver transferência permanente (não ocasional) de um trabalhador para um outro posto de trabalho, que implique em mudança de risco, esta deve ser comunicada de imediato ao médico coordenador ou responsável pelo PCMSO"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Agentes biológicos que representam risco individual elevado para o trabalhador e com probabilidade de disseminação para a coletividade. Podem causar doenças e i nfecções graves ao ser humano, para as quais nem sempre existem meios eficazes de profilaxia ou tratamento. Conforme o Anexo I da NR 32, assinale a opção que representa a classe de risco acima descrita.",
+          "alternativas": [
+            "Classe I",
+            "Classe II",
+            "Classe III",
+            "Classe IV",
+            "Classe V"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Analise as sentenças a seguir, conforme o ANEXO III da NR 32 (PLANO DE PREVENÇÃO DE RISCOS DE ACIDENTES COM MATERIAIS PERFUROCORTANTES): I. O dispositivo de segurança é um item integrado a um conjunto do qual faça parte o elemento perfurocortante ou uma tecnologia capaz de reduzir o risco de acidente, seja qual for o mecanismo de ativação do mesmo. II. O empregador deve constituir uma comissão gestora multidisciplinar, que tem como objetivo reduzir os riscos de acidentes com materiais perfurocortantes, com probabilidade de exposição a agentes biológicos, por meio da elaboração, implementação e atualização de plano de prevenção de riscos de acidentes com materiais perfurocortantes. III. A Comissão Gestora deve analisa r as informações existentes no PGR e no PCMSO, além das referentes aos acidentes do trabalho ocorridos com materiais perfurocortantes. Está correto o que se afirma em",
+          "alternativas": [
+            "III, apenas.",
+            "I, II e III.",
+            "II e III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas. Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "A Comissão de Biossegurança em Saúde (CBS) é responsável por definir estratégias e regulamentações para garantir a biossegurança nas atividades de saúde pública no Brasil. A CBS foi instituída pela Portaria GM/MS nº 1.683, de 28 de agosto de 2003, e é coordenada pela Secretaria de Ciência, Tecnologia e Insumos Estratégicos (SCTIE) do Ministério da Saúde. Dentre as principais atribuições da CBS figura",
+          "alternativas": [
+            "participar e acompanhar, exclusivamente no âmbito naci onal, a elaboração e reformulação de normas de biossegurança.",
+            "proceder ao levantamento e à análise das questões referentes à biossegurança, visando a identificar os seus impactos e as suas correlações com o orçamento do SUS.",
+            "propiciar debates públicos sobre biossegurança, por meio de reuniões e eventos restritos à comunidade científica.",
+            "estimular a separação de ações dos diversos órgãos do Sistema Único de Saúde nas questões de biossegurança em saúde.",
+            "assessorar as atividades re lacionadas à formulação, atualização e implementação da Política Nacional de Biossegurança."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "A NR32 estabelece diretrizes básicas e fundamentais para a prática de implementação de medidas de proteção, segurança e saúde dos trabalhadores que atuam em ambientes que prestam serviços de saúde, tanto em atividades de promoção como de assistência à saúde em geral. Sobre a vacinação dos trabalhadores conforme a NR32, é correto afirmar que",
+          "alternativas": [
+            "o empregador deve assegurar que os trab alhadores sejam informados das vantagens e dos efeitos colaterais, assim como dos riscos a que estarão expostos por falta ou recusa de vacinação, devendo, nestes casos, guardar documento comprobatório e mantê-lo disponível à inspeção do trabalho.",
+            "sempre que houver vacinas eficazes contra outros agentes biológicos a que os trabalhadores estão, ou poderão estar, expostos, o empregador deve fornecê -las mesmo que de forma não gratuita.",
+            "o empregador deve fazer o controle da eficácia da vacinação sempre que for recomendado pelo Ministério da Saúde e seus órgãos, não sendo obrigado a providenciar, se necessário, seu reforço.",
+            "não d eve ser fornecido ao trabalhador comprovante das vacinas recebidas",
+            "a todo trabalhador dos serviços de saúde deve ser forn ecido, gratuitamente, programa de imunização ativa contra HPV, herpes, sarampo e os estabelecidos no PCMSO. Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "assunto": "Gestão em Enfermagem",
+          "enunciado": "Ao compreender as atividades e as funções que o enfermeiro do trabalho pode executar em uma empresa, torna-se possível e mais fácil planejar as ações que vão promover a saúde e a segurança do trabalhador. O enfermeiro do trabalho tem a capacidade de colocar em prática diversas ações para a promoção da saúde dos trabalhadores. Essas ações podem ser de caráter primário, secundário ou terciário. Analise as sentenças a seguir: I. na prevenção primária, o enfermeiro do trabalho pode realizar a consulta de enfermagem, com participação dos demais profissionais para complementação dos exames, e fornecer instruções aos trabalhadores sobre hábitos saudáveis, como alimentação, atividade física, repouso, lazer, entre outros; II. na prevenção secundária, o enfermeiro do trabalho realiza o diagnóstico precoce do trabalhador, bem como um pronto atendimento com limitação de danos. Desse modo, pode realizar adequações nas condições de trabalho, para que este seja adequado ao trabalhador, por meio de visitas no ambiente laboral e educação continuada para uma adaptação sem esforço físico e mental; III. na prevenção terciária, o enfermeiro do trabalho auxilia na reabilitação do trabalhador que sofreu alguma lesão com ou sem sequelas, por meio de assistência contínua na sua reintegração. Está correto o que se afirma em",
+          "alternativas": [
+            "I e II, apenas.",
+            "I, II e III.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "II, apenas."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Enfermagem",
+          "assunto": "Gestão em Enfermagem",
+          "enunciado": "Para que a equipe de enfermagem que compõe o SESMT desenvolva o seu papel na assistência à saúde dos trabalhadores, é preciso conhecer suas competências e atribuições dentro do Serviço. Analise as sentenças sobre as competências e atribuições do técnico de enfermagem do trabalho: I. Atuar juntamente com o enfermeiro no planejamento, na programação e nas orientações das atividades de enfermagem no ambiente de trabalho; II. Auxiliar na execução dos programas de higiene e segurança do trabalho e de prevenção de acidentes e de doen ças profissionais; na execução de todas as atividades de enfermagem do trabalho, exceto as privativas do enfermeiro; e na integração da equipe de saúde do trabalhador; III. Participar do desenvolvimento e da execução de programas de avaliação da saúde dos trabalhadores da empresa, bem como da elaboração e da execução de programas de controle das doenças transmissíveis e não transmissíveis e de vigilância epidemiológica dos trabalhadores da empresa. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I, apenas.",
+            "II e III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Trabalhador de 25 anos, vítima de traumatismo após explosão de caldeira no trabalho, foi encontrado caído ao solo. Conforme a avaliação primária do paciente com suspeita de trauma (BT1), assinale a opção que representa a primeira medida a ser tomada.",
+          "alternativas": [
+            "Garantir a segurança do local.",
+            "Avaliar pupilas.",
+            "Avaliar pulso central e radial.",
+            "Manter as vias aéreas pérvias.",
+            "Avaliar a responsividade (chamar o paciente)."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A relação entre a Saúde do Trabalhador e o controle social é histórica, e nos serviços que compõem a Rede Nacional de Atenção Integral à Saúde do Trabalhador (RENAST), ocorre por meio da participação de organizações de trabalhadores e empregadores, e pelos instrumentos estabelecidos pelas Leis Orgânicas de Saúde (8.080/90 e 8.142/90). A Política Nacional de Saúde do Trabalhador e da Trabalhadora estabelece a participação da comunidade, dos trabalhadores e do controle social, através de: I. Estabelecimento d e rede de centros de pesquisa colaboradores na construção de saberes, normas, protocolos, tecnologias e ferramentas, voltadas à produção de respostas aos problemas e necessidades identificadas pelos serviços, comunidade e controle social; II. Apoio o funcionamento das Comissões Intersetoriais de Saúde do Trabalhador e da Trabalhadora (CISTT) dos Conselhos de Saúde, nas duas esferas (estadual e municipal) de gestão do SUS; III. Busca de articulação com entidades, instituições, organizações não governamentais , associações, cooperativas e demais representações de categorias de trabalhadores, presentes no território, inclusive as inseridas em atividades informais de trabalho e populações em situação de vulnerabilidade. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "II, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I e III, apenas. Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A organização dos serviços de saúde do trabalhador é fundamentada na Política Nacional de Saúde do Trabalhador e da Trabalhadora (PNSTT), que visa desenvolver a atenção integral à saúde do trabalhador. A Rede Nacional de Atenção Integral à Saúde do Trabalhador (RENAST) é uma das principais estruturas dessa política, composta por Centros de Referência (CERESTs) e unidades de saúde que oferecem assistência e vigilância em saúde do trabalhador. Conforme a PNSTT, assinale a opção correta.",
+          "alternativas": [
+            "A Política Nacional de Saúde do Trabalhador e da Trabalhadora não se alinha com o conjunto de políticas de saúde no âmbito do SUS, considerando a transversalidade da s ações de saúde do trabalhador e o trabalho como um dos determinantes do processo saúde-doença.",
+            "Não cabe aos CEREST, no âmbito da RENAST atuar como centro articulador e organizador das ações intra e intersetoriais de saúde do trabalhador, assumindo a retaguarda técnica especializada para o conjunto de ações e serviços da rede SUS e se tornando polo irradiador de ações e experiências de vigilância em saúde, de caráter sanitário e de base epidemiológica.",
+            "Todos os trabalhadores, homens e mulheres, independentemente de sua localização, urbana ou rural, de sua forma de inserção no mercado de trabalho, formal ou informal, de seu vínculo empregatício, público ou privado, assalariado, autônomo, avulso, temporário, cooperativados, aprendiz, estagiário, domé stico, aposentado ou desempregado são sujeitos desta Política.",
+            "As metas e os indicadores para avaliação e monitoramento da Política Nacional de Saúde do Trabalhador e da Trabalhadora devem estar contidos nos instrumentos de gestão definidos pelo sistema de planejamento do Ministério da Fazenda.",
+            "Além dos recursos dos fundos nacionais, estaduais e municipais de saúde, não podem aos gestores de saúde utilizar outras fontes de financiamento, como repasse de recursos advindos de contribuições para a seguridade social."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Os(as) trabalhadores(as) compartilham com o conjunto da população formas de adoecer e morrer em um dado tempo e lugar, determinadas pela sua classe social, pelos modos de vida e consumo, sexo, ciclo de vida, perfil genético e condições de exposição a fatores de risco, refletidos nas situações de vulnerabilidade social e ambiental. Essas formas de adoecimento podem ser causadas, ou serem modificadas em sua frequência, gravidade ou latência, dependendo do trabalho que o indivíduo exerce ou exerceu ao longo da vida. No cotidiano de trabalho, os sujeitos estão expostos a múltiplas situações e fatores de risco para a saúde, que podem atuar sinergicamente ou potencializar seus efeitos. É uma patologia relacionada a posições forçadas e gestos repetitivos no trabalho a",
+          "alternativas": [
+            "depressão.",
+            "síndrome do túnel do carpo.",
+            "leucemia.",
+            "hipertensão arterial.",
+            "pneumoconiose."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "A investigação epidemiológica das doenças e dos agravos relacionados ao trabalho constitui uma atividade obrigatória a ser realizada a partir da suspeita do caso ou da informação sobre outros trabalhadores expostos aos mesmos fatores de risco. Devese avaliar as circunstâncias da ocorrência da doença ou agravo, assim como a relação com o trabalho. O s casos de doenças e de agravos relacionados ao trabalho apresentados anteriormente devem ser notificados no Sistema de Informação de Agravos de Notificação após a confirmação da relação com o trabalho, por meio da investigação epidemiológica. As opções a seguir apresentam condições de notificação compulsória, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Acidente de trabalho",
+            "Perda auditiva induzida por ruído (PAIR)",
+            "Artrite reumatoide",
+            "LER e DORT",
+            "Síndrome de Burnout"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Paciente vítima de acidente de trabalho com amputação na perna D. A primeira medida a ser tomada após a realização do protocolo de avaliação primária (BT1) é",
+          "alternativas": [
+            "monitorizar a oximetria de pulso.",
+            "cobrir ferimento com curativo seco.",
+            "oferecer O2 suplementar por máscara não reinalante 10 a 15 l/min se SatO2 < 94%.",
+            "realizar a mobilização cuidadosa e considerar imobilização adequada da coluna cervical, tronco e membros, em prancha longa com alinhamento anatômico, sem atraso para o transporte.",
+            "controlar hemorragia no segmento afetado."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "EPI (equipamento de proteção individual) é o dispositivo ou produto de uso individual utilizado pelo trabalhador, concebido e fabricado para oferecer proteção contra os riscos ocupacionais existentes no ambiente de trabalho. A organização deve selecionar os EPIs considerando as situações listadas nas opções, à exceção de uma. Assinale-a.",
+          "alternativas": [
+            "Compatibilidade, em casos que exijam a utilização simultânea de vários EPI, de maneira a assegurar as respectivas eficácias para proteção contra os riscos existentes.",
+            "Eficácia necessária para o controle da exposição ao risco.",
+            "Adequação do equipamento ao empregado e o conforto oferecido, segundo avaliação do conjunto de empregadores.",
+            "Atividade exercida.",
+            "Medidas de prevenção em função dos perigos identificados e dos riscos ocupacionais avaliados."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Uma vez identificado ou diagnosticado um agravo – acidente ou doença relacionada ao trabalho –ou uma situação de exposição ocupacional a um fator de risco para a saúde, reconhecidamente perigoso por seu potencial de dano, o cuidado ao(à) trabalhador(a) deve contemplar ações no nível individual e coletivo. Assinale a opção que representa uma ação de nível coletivo.",
+          "alternativas": [
+            "Visita domiciliar aos indivíduos com relato de acidente de trabalho e aos domicílios onde a prática do trabalho informal foi identificada.",
+            "Orientação do(a) trabalhador(a) e/ou familiares sobre os encaminhamentos junto ao empregador e à Previdência Social, como a emissão da CAT, se este for segurado pelo Seguro Acidente de Trabalho (SAT) do INSS.",
+            "Notificação ao Sinan – a notificação dos casos suspeitos ou confirmados de acidente ou de doença relacionada ao trabalho no Sinan é atribuição da eAB/eSF e constitui etapa importante da Visat, pois permitirá traçar o perfil de morbimortalidade da população trabalhadora no território e desencadeará ações de Vigilância.",
+            "Identificação dos recursos institucionais di sponíveis no território e/ou região relacionados ao cuidado à saúde do(a) trabalhador(a).",
+            "Acompanhamento das questões relacionadas à saúde do(a) trabalhador(a) durante o processo de retorno e reinserção no trabalho."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
+          "enunciado": "As atividades educati vas e os atendimentos em grupo são estratégias potentes para a promoção de comportamentos favoráveis à saúde. Entretanto, no cotidiano de trabalho das equipes observam-se práticas muito heterogêneas, predominando a forma clássica de reunir os(as) usuários( as) para a simples transmissão de informações de saúde, que são pouco eficazes. Para que um atendimento em grupo funcione enquanto processo pedagógico, é necessária a interação dialógica, de mão dupla, em que os participantes aprendem sobre o \"mundo da vida\" do outro e utiliza esse aprendizado para transformar a sua própria vida. As ações de educação em saúde a serem desenvolvidas com grupos de trabalhadores(as) podem abordar os seguintes conteúdos: I. Orientações sobre direitos dos(as) trabalhadores(as): à saúde, previdenciários, trabalhistas, entre outros; II. Informações sobre a rede de serviços de saúde e os fluxos de atendimento no âmbito do SUS; III. Informações sobre agravos e doenças relacionados ao trabalho mais comuns em determinadas ocupações e atividades produtivas. Está correto o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I e III, apenas.",
+            "III, apenas.",
+            "II e III, apenas.",
+            "I e II, apenas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Controle Social no SUS",
+          "enunciado": "A Comissão Intersetorial de Saúde do Trabalhador e da Trabalhadora (CISTT) assessora conselheiros e conselheiras de saúde na temática da saúde da população trabalhadora no Brasil. As opções a seguir apresentam afirmações corretas em relação a CISTT, à exceção de uma. Assinale-a:",
+          "alternativas": [
+            "Foi criada em 1990, junto à Lei nº 8.080/1990, que regulamenta o SUS.",
+            "A instalação dessa comissão, em nível municipal e estadual, é dispensável, de acordo com a população do município e/ou PIB do estado.",
+            "Seus membros discutem periodicamente o Plano Anual de Trabalho, seus encaminhamentos e resoluções.",
+            "É papel dessa comissão participar da construção das ações do Centros de Referência em Saúde do Trabalhador (CEREST).",
+            "Todas as pessoas que trabalham no país, em zona urbana ou rural, sejam trabalhador(a) avulso(a), apose ntado(a), desempregado(a), com vínculo público, privado, temporário, dentre outros são sujeitas ao acompanhamento da CISTT."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Vigilância em Saúde",
+          "enunciado": "Centro de Referência em Saúde do Trabalhador (CEREST) é um local de atendimento especializado em Saúde do Trabalhador. Além de atender diretamente o trabalhador, serve como uma fonte geradora de conhecimento, ou seja, tem condição de indicar se as doenças ou os sintomas das pessoas atendidas estão relacionados com as atividades que elas exercem, na região onde se encontram. É uma função do CEREST o",
+          "alternativas": [
+            "exame admissional e demissional.",
+            "atendimento no ambulatório de saúde do trabalhador após diagnóstico de doença ocupacional.",
+            "exame periódico.",
+            "exame de mudança de função.",
+            "atendimento de emergência. Amazônia Azul Tecnologias de Defesa SA (AMAZUL)"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Gestão em Enfermagem",
+          "enunciado": "A enfermagem na assistência ao trabalhador possui uma função importante no planejamento das ações direcionadas à saúde e à segurança no ambiente de trabalho. Sobre a enfermagem e doenças ocupacionais, assinale a opção correta.",
+          "alternativas": [
+            "As doenças ocupacionais estão presentes em muitos ambientes de trabalho. Elas não são provocadas ou têm seu curso modificado, antecipado ou agravado pelas condições de trabalho.",
+            "As influências físicas e psíquicas entre o ambiente de trabalho e o trabalhador causam sempre um impacto negativo em sua saúde",
+            "Uma avaliação precisa para a assistência de enfermagem do trabalho deve considerar apenas as condições laborais, e não as características individuais do trabalhador",
+            "a assistência de enfermagem torna -se fundamental, pois promove programas preventivos para a saúde e satisfaçã o do trabalhador, de forma a minimizar os riscos e transmitir segurança e proteção contra incidentes, acidentes e doenças ocupacionais.",
+            "A minoria das doenças ocupacionais é provocada pela falta de adaptação ao trabalho. O trabalhador começa a apresenta r sintomas resultantes de esforço físico e mental para essa adaptação forçada, podendo apresentar sintomas como dores musculares, lombares, no ombro, punho, região cervical, entre outras"
+          ],
+          "correta": "D"
+        }
+      ]
+    }
+  ]
+}
