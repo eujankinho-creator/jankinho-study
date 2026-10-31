@@ -6,7 +6,8 @@
   "functions": {
     "api/index.ts": {
       "maxDuration": 60,
-      "includeFiles": "frontend/**/*.html"
+      "includeFiles": "frontend/**/*.html",
+      "excludeFiles": "frontend/**/*.{js,mjs,cjs,css,map,glb,pdb,json,webp,png,jpg,jpeg,svg,wasm,ts}"
     }
   },
   "routes": [
