@@ -547,7 +547,7 @@
         },
         {
           "numero": 53,
-          "disciplina": "Saúde Coletiva I",
+          "disciplina": "Enfermagem",
           "assunto": "Prática Baseada em Evidências",
           "enunciado": "Um pesquisador convida um paciente para participar de uma pesquisa sobre um novo tratamento para a doença causada pelo coronavírus. No que se refere ao consentimento livre e esclarecido, é correto afirmar que esse participante:",
           "alternativas": [
@@ -715,7 +715,7 @@
         },
         {
           "numero": 65,
-          "disciplina": "Saúde Coletiva I",
+          "disciplina": "Enfermagem",
           "assunto": "Prática Baseada em Evidências",
           "enunciado": "Em um hospital universitário , um grupo de pesquisa deseja desenvolver um estudo em uma amostra representativa de trabalhadores de Unidade de Terapia Intensiva para determinar a chance de acidentes com materiais perfurocortantes, tendo como exposições de interesse: turno de trabalho, t empo de experiência, ocupação, entre outras variáveis. Considerando os desenhos de estudo em epidemiologia e os determinantes de saúde, o estudo deverá ser:",
           "alternativas": [
@@ -854,7 +854,7 @@
         {
           "numero": 6,
           "disciplina": "Direito Administrativo",
-          "assunto": "Planejamento em Saúde",
+          "assunto": "Controle da Administração Pública",
           "enunciado": "Como orienta o Guia Prático de Análise ex ante das Políticas Públicas disponibilizado pela Controladoria -Geral da União e elaborado pelo Comitê Interministerial de Governança do Governo Federal, é fundamental o uso de evidências, pois assim se permite fundamentar a tomada de decisão, constituindo -se essa prática em insumo que potencializa os resultados do processo de formulação das políticas públicas. Com relação ao levantamento de dados acerca do problema público e para o desenho das políticas, é correto afirmar que:",
           "alternativas": [
             "a fonte de dados deve ter qual idade, recomendando -se ter como referência a proposta pela estrutura de governança e gestão do COBIT;",
@@ -868,7 +868,7 @@
         {
           "numero": 7,
           "disciplina": "Direito Administrativo",
-          "assunto": "Planejamento em Saúde",
+          "assunto": "Controle da Administração Pública",
           "enunciado": "O ciclo das políticas públicas, como concebido classicamente, pode ser mais bem compreendido se considerarmos que as várias etapas se sobrepõem e não se colocam de forma linear na prática das políticas públicas. No que tange à avaliação das políticas públicas, é correto afirmar que:",
           "alternativas": [
             "a avaliação do impacto da política pode ser feita desde o momento da sua formulação;",
@@ -882,7 +882,7 @@
         {
           "numero": 8,
           "disciplina": "Direito Administrativo",
-          "assunto": "Planejamento em Saúde",
+          "assunto": "Controle da Administração Pública",
           "enunciado": "Quando se leva em conta a necessidade de formulação e implementação de políticas públicas voltadas para os grupos sociais em situação de vulnerabilidade, grupos que são discriminados e aos quais, muitas vezes, é negada a própria condição de sujeito de dire ito, a transversalidade se constitui como uma diretriz política a ser seguida. Sobre a transversalidade, é correto afirmar que:",
           "alternativas": [
             "a integração ou a articulação entre políticas dos vários ministérios depende da existência de expressa previsão legal;",
@@ -896,7 +896,7 @@
         {
           "numero": 9,
           "disciplina": "Direito Administrativo",
-          "assunto": "Planejamento em Saúde",
+          "assunto": "Controle da Administração Pública",
           "enunciado": "O Brasil tem obtido posições históricas no ranking do índice de serviços on -line da Organização das Nações Unidas. A transformação digital vem se acelerando, sendo de extrema relevância a publicação, em 29 de março de 2 021, da Lei nº 14.129, que estabeleceu princípios e diretrizes para o governo digital. Esse processo traz evidente repercussão sobre as políticas públicas na sua formulação, implementação e avaliação. Da transformação digital em andamento e considerando os princípios que a norteiam, é correto esperar:",
           "alternativas": [
             "a imediata transformação digital do governo federal, sem gradações;",
@@ -910,7 +910,7 @@
         {
           "numero": 10,
           "disciplina": "Direito Administrativo",
-          "assunto": "Planejamento em Saúde",
+          "assunto": "Controle da Administração Pública",
           "enunciado": "A Política Nacional para a População em Situação de Rua, criada pelo Decreto nº 7.053/2009, contém, entre outras inovações, a criação de um Comitê Intersetorial de Acompanhamento e Monitoramento. Para dar consecução a essa polít ica, o governo federal criou o Plano Ruas Visíveis – Pelo direito ao futuro da população em situação de rua. Com relação ao Comitê Intersetorial, levando em conta o modelo usual encontrado, é correto afirmar que:",
           "alternativas": [
             "o Comitê Intersetorial implementará as políticas para a área;",
@@ -1413,7 +1413,7 @@
         },
         {
           "numero": 46,
-          "disciplina": "Legislação do SUS",
+          "disciplina": "Saúde Coletiva I",
           "assunto": "Promoção da Saúde",
           "enunciado": "Um professor universitário de 52 anos é atendido em um check-up. O profissional de saúde consegue perceber que o professor não quer fazer exames de colesterol, pois não pretende mudar o seu estilo de vida e não quer ter provas documentais do risco que corre. Diante dessa situação, o profissional de saúde deve:",
           "alternativas": [
@@ -1427,7 +1427,7 @@
         },
         {
           "numero": 47,
-          "disciplina": "Legislação do SUS",
+          "disciplina": "Saúde Coletiva I",
           "assunto": "Promoção da Saúde",
           "enunciado": "Durante uma campanha de prevenção, uma pessoa recebe o diagnóstico de diabetes. Começa, então, seu controle na unidade básica de saúde. Nesse acompanhamento, realiza consultas especializadas quando necessário. Sobre esse acompanhamento, é correto afirmar que:",
           "alternativas": [
@@ -1441,7 +1441,7 @@
         },
         {
           "numero": 48,
-          "disciplina": "Legislação do SUS",
+          "disciplina": "Enfermagem",
           "assunto": "Segurança do Paciente",
           "enunciado": "Um senhor de 52 anos, acompanhado por sua esposa, é hospitalizado para uma cirurgia de hérnia umbilical bem cedo, pela manhã. O anestesiologista não passa no quarto ant es da cirurgia, deixando para conhecer o senhor e conversar com ele no próprio centro cirúrgico. Tudo corre bem na cirurgia e no pós-operatório, e o senhor recebe alta hospitalar no meio da tarde, com excelente recuperação. Em relação à segurança do pacie nte nessa situação, é correto afirmar que:",
           "alternativas": [
@@ -1497,7 +1497,7 @@
         },
         {
           "numero": 52,
-          "disciplina": "Legislação do SUS",
+          "disciplina": "Enfermagem",
           "assunto": "Saúde Mental",
           "enunciado": "Em uma discussão sobre a rede de atenção psicossocial (RAPS), uma equipe multiprofissional debateu sobre o papel dos dispositivos e dos pontos de atenção no cuidado a pessoas com transtornos mentais e uso abusivo de substâncias. Acerca dos serviço s que compõem a Rede de Atenção Psicossocial, é correto afirmar que:",
           "alternativas": [
@@ -1511,7 +1511,7 @@
         },
         {
           "numero": 54,
-          "disciplina": "Legislação do SUS",
+          "disciplina": "Enfermagem",
           "assunto": "Epidemiologia e Vigilância em Saúde",
           "enunciado": "Os clássicos estudos de Doll & Hill (1950 -1952) sobre a etiologia do câncer de pulmão foram desenvolvidos com base na seleção de indivíduos entre abril de 1948 e fevereiro de 1952. Dos 3.446 pacientes com câncer nesse período, os autores estudaram 1.357 homens e 108 mulheres com car cinoma de pulmão, em comparação com igual número de controles pareados por sexo, idade e por hospital onde eram tratados. Os autores concluíram pela associação entre hábito de fumar cigarros e desenvolvimento de carcinoma de pulmão entre homens (DOLL, R. & HILL, A. B., 1950). Analisando as informações e considerando os desenhos de estudos epidemiológicos para investigação de doenças e agravos, é correto afirmar que esse estudo foi do tipo:",
           "alternativas": [
@@ -1568,7 +1568,7 @@
         {
           "numero": 58,
           "disciplina": "Saúde Coletiva I",
-          "assunto": "Saúde da Mulher",
+          "assunto": "Determinação Social da Saúde",
           "enunciado": "A respeito das iniquidades raciai s na atenção às puérperas no Brasil, leia o trecho a seguir. “As puérperas de cor preta apresentaram maior risco de terem um pré -natal inadequado, falta de vinculação à maternidade, ausência de acompanhante e peregrinação para o parto, em comparação às puérperas brancas. As pretas também receberam menos orientação durante o pré -natal sobre o início do trabalho de parto e sobre possíveis complicações na gravidez. Apesar de terem menor chance para uma cesariana e de intervenções dolorosas no parto vaginal, em comparação às brancas, as mulheres pretas receberam com menor frequência anestesia local.” (Adaptado de LEAL, Maria, et. al. “A cor da dor: iniquidades raciais na atenção pré -natal e ao parto no Brasil”. Cadernos de Saúde Pública 2017; 33 Sup. 1, p. 5) A situação descrita expõe um caso de desigualdade racial no atendimento a mulheres grávidas no serviço de saúde. Esse tipo de situação ilustra o fenômeno conceituado como:",
           "alternativas": [
             "racismo científico, que se expressa na avaliação negativa da capacidade física d as mulheres afrodescendentes ao classificá-las como mais fracas e débeis;",
