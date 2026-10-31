@@ -28,20 +28,6 @@
           "correta": "C"
         },
         {
-          "numero": 52,
-          "disciplina": "Enfermagem",
-          "assunto": "Saúde da Mulher",
-          "enunciado": "A avaliação do status sorológico para diversas doenças no início da gestação é de sum a importância para a avaliação do risco de transmissão vertical dessas doenças em gestantes previamente infectadas, bem como para a orientação de gestantes suscetíveis quanto à prevenção. Uma gestante, na sua décima semana de gestação, retornou em consulta médica de rotina de pré -natal com os seguintes resultados sorológicos: Quanto aos resultados apresentados e ao risco de transmissão gestacional, assinale a afirmativa correta.",
-          "alternativas": [
-            "O resultado não reagente de HBsAg indica que a paciente é suscetível à hepatite B, sendo indicada a vacinação na gestação.",
-            "A presença de IgG reagente e de IgM não reagente para HSV indica infecção prévia pelo vírus, o que torna o risco de transmissão vertical nulo.",
-            "A presença de IgG reagente para rubéola e sarampo indica, necessariamente, a ocorrência de doença prévia, o que torna o risco de transmissão vertical nulo.",
-            "A presença de IgG reagente para toxoplasmose, mesmo na presença de IgM reagente, é indicativa de infecção prévia, o que torna o risco de transmissão vertical nulo.",
-            "O resultado sorológico não reagente de IgG e IgM para CMV indica que a paciente é suscetível para CMV, com risco de transmissão vertical em caso de primo-infecção."
-          ],
-          "correta": "E"
-        },
-        {
           "numero": 53,
           "disciplina": "Enfermagem",
           "assunto": "Saúde do Adulto",
@@ -446,20 +432,6 @@
           "correta": "B"
         },
         {
-          "numero": 55,
-          "disciplina": "Enfermagem",
-          "assunto": "Saúde do Adulto",
-          "enunciado": "O manejo terapêutico de pacientes com Estenose Aórtica (EA) significativa envolve uma abordagem multifatorial, com diversas particularidades. Em relação a esse tema, as opções a seguir estão corretas, à exceção de uma. Assinale-a.",
-          "alternativas": [
-            "A hipertensão arterial sistêmica é comum em pacientes com EA.",
-            "Até 1/3 dos pacientes com EA desenvolvem fibrilação ou flutter atrial.",
-            "Em pacientes com EA e insuficiência cardíaca, diuréticos podem reduzir os sintomas associados à congestão.",
-            "Quando pacientes com EA desenvolvem sintomas relacionados à valvulopatia, a única opção terapêutica eficaz com benefício prognóstico é a substituição valvar.",
-            "Ensaios clínicos randomizados demonstraram que estatinas de alta potência podem mudar o curso da doença em pacientes com EA leve, reduzindo a progressão da valvulopatia. Atenção: o caso apresentado a seguir, refere-se às duas próximas questões. Paciente masculino, 16 anos, sem comorbidades conhecidas ou uso de medicamentos apresentou episódio de síncope enquanto jogava basquete. Após recuperar a consciência, ainda apresentava queixa de palpitação e desconforto torácico, sendo levado pelos pais à emergência mais próxima. A família relatou que o paciente era filho único e tinha apresentado 2 episódios semelhantes durante atividades esportivas nos últimos 3 meses, que atribuíram à desidratação. Ao exame: Lúcido, orientado, mantendo desconforto torácico, sudoreico e taquidispneico em ar ambiente, acianótico, FC: 170 bpm (regular), PA: 84x54 mmHg, FR 28 irpm, SatO2: 94%. Ausculta respiratória com crepitação fina nas bases. O eletrocardiograma de admissão encontra-se abaixo."
-          ],
-          "correta": "E"
-        },
-        {
           "numero": 58,
           "disciplina": "Enfermagem",
           "assunto": "Saúde do Adulto",
@@ -570,20 +542,6 @@
             "I, II e III."
           ],
           "correta": "D"
-        },
-        {
-          "numero": 71,
-          "disciplina": "Enfermagem",
-          "assunto": "Saúde do Idoso",
-          "enunciado": "Em geral, as Doenças Cardiovasculares (DCV) em idosos são mais complexas do que em pacientes jovens, especialmente devido à associação de comorbidades e limitações de aplicabilidade das principais diretrizes clínicas. Sobre as particularidades das DCV nesse grupo de pacientes, assinale a afirmativa incorreta.",
-          "alternativas": [
-            "Em pacientes hipertensos com mais de 70 anos, a hipertensão diastólica isolada é forma de apresentação predominante.",
-            "Exercício regular, alimentação com horários definidos e engajamento social podem reduzir o ritmo do envelhecimento e a maior vulnerabilidade às DCV.",
-            "Idosos com menor expectativa de vida, alta carga medicamentosa e múltiplas comorbidades podem se beneficiar especialmente da desprescrição.",
-            "O escore de cálcio coronariano elevado tem menos valor prognóstico em idosos do que em indivíduos mais jovens, embora um escore de zero indique um risco relativo mais baixo em todas as idades.",
-            "Diversos ensaios clínicos mostraram ausência de benefício ou até aumento da mortalidade em idosos submetidos a controle glicêmico intensivo, resultando na recomendação de metas menos rigorosas de HbA1c nessa população. Atenção: o caso apresentado a seguir, refere-se às duas próximas questões. Homem de 64 anos, hipertenso e dislipidêmico, sedentário, apresenta dor retroesternal súbita de forte intensidade, iniciada há cerca de 1 hora durante situação de estresse, com irradiação para o ombro esquerdo, associada a sudorese e palidez. Ao exame, encontra -se lúcido, hemodinamicamente estável, com frequência cardíaca de 64 bpm, pressão arterial de 110x80 mmHg e sem alterações significativas na ausculta cardíaca e pulmonar. Após a realização de eletrocardiograma, o paciente foi medicado e rapidamente encaminhado para a coronariografia, cuja única alteração está demonstrada na figura A. A figura B representa o resultado final após a realização de angioplastia coronariana com implante de stent farmacológico."
-          ],
-          "correta": "A"
         },
         {
           "numero": 74,
