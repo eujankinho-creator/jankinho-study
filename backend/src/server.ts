@@ -208,6 +208,19 @@ function redirect(
 async function lerJson(
   request: IncomingMessage
 ) {
+  // O runtime Node do Vercel pode disponibilizar o corpo já analisado.
+  // Preserva o leitor de stream original para execução contínua no Railway/local.
+  if (process.env.VERCEL === "1") {
+    const body = (request as IncomingMessage & { body?: unknown }).body;
+    if (body !== undefined) {
+      if (typeof body === "string") return body ? JSON.parse(body) : {};
+      if (Buffer.isBuffer(body)) {
+        const texto = body.toString("utf8");
+        return texto ? JSON.parse(texto) : {};
+      }
+      if (body !== null && typeof body === "object") return body;
+    }
+  }
   return new Promise<any>(
     function (resolve, reject) {
       let corpo = "";
@@ -4106,7 +4119,7 @@ async function servirArquivo(
    SERVER
 ========================================================= */
 
-const server =
+export const server =
   createServer(
     async function (
       request,
@@ -6078,6 +6091,9 @@ const server =
   );
 
 
+// No ambiente serverless, o handler do Vercel reutiliza o roteador
+// sem abrir uma porta HTTP nem iniciar importações no cold start.
+if (process.env.VERCEL !== "1") {
 server.on(
   "error",
   function (error: any) {
@@ -6286,3 +6302,4 @@ server.listen(
     console.log("");
   }
 );
+}
