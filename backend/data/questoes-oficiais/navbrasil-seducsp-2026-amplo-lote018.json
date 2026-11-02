@@ -1,0 +1,2043 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "navbrasil-seducsp-2026-amplo-lote018",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "nav2026-analista-gestao-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "NAV Brasil",
+      "cargo": "Analista de Gestão",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cns304-analista-de-gestao-cns304-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-retificado-nav-brasil-2026.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "No edital deste concurso, há uma indicação das atribuições de cada cargo indicado. O texto a seguir fala das incumbências do advogado. “Emitir opiniões legais, redigir pareceres técnico-jurídicos, elaborar e revisar contratos, representar legalmente a organização, proteger seus interesses em processos judiciais ou administrativos, mediar conflitos, participar de negociações, bem como promover a segurança jurídica das atividades e operações da empresa”. Sobre a organização ou significação dos segmentos desse pequeno texto, assinale a afirmação correta.",
+          "alternativas": [
+            "O termo “bem como”, ao final do texto, possui o valor semântico de comparação.",
+            "O texto mostra o uso do paralelismo, pois todas as atribuições indicadas são iniciadas por infinitivo.",
+            "O texto exemplifica o modo discursivo da narração, pois organiza ações em sequência cronológica.",
+            "O pronome possessivo “seus” mostra ambiguidade, referindo- se tanto à organização quanto ao advogado.",
+            "Os termos “legais”, “conflitos”, “negociações”, “organização” e “empresa” mostram vocábulos do campo semântico do Direito."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Sintaxe da Oração e do Período",
+          "enunciado": "No Edital deste concurso, nas atribuições do pedagogo, o edital informa o seguinte: “Avaliar necessidades de aprendizagem, criar materiais didáticos, conduzir atividades educativas que promovam o crescimento profissional, desenvolver e implementar programas educacionais e de treinamento, focado na capacitação e desenvolvimento contínuo dos colaboradores.” Sobre a organização ou significação dos segmentos desse pequeno texto, avalie as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Rigorosamente falando, os segmentos textuais mostram preocupação com o paralelismo sintático. ( ) O primeiro segmento do texto funciona como introdução, resumindo todas as demais atribuições. ( ) Os adjetivos “didáticos” e “educativas” mostram valor subjetivo, expressando a opinião do autor do texto. As afirmativas são, respectivamente,",
+          "alternativas": [
+            "V – V – V.",
+            "F – V – F.",
+            "V – V – F.",
+            "F – F – V.",
+            "F – F – F."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Flexão Nominal e Verbal",
+          "enunciado": "No texto a seguir, referente às atribuições do pedagogo, há uma série de infinitivos que poderiam ser substituídos por substantivos, sem modificação no sentido da frase. Avaliar necessidades de aprendizagem, criar materiais didáticos, conduzir atividades educativas que promovam o crescimento profissional, desenvolver e implementar programas educacionais e de treinamento, focado na capacitação e desenvolvimento contínuo dos colaboradores. Assinale a substituição que seria inadequada.",
+          "alternativas": [
+            "“Avaliar necessidades de aprendizagem” / avaliação de necessidades de aprendizagem.",
+            "“criar materiais didáticos” / criatividade de materiais didáticos.",
+            "“conduzir atividades educativas” / condução de atividades educativas.",
+            "“desenvolver programas educacionais” / desenvolvimento de programas educacionais.",
+            "“implementar programas educacionais” / implementação de programas educacionais. Atenção! O texto a seguir refere-se às duas próximas questões. Um controlador de voo redigiu o seguinte comunicado ao chefe: Ontem à noite, às 20h30, a pista estava desocupada; um avião particular desceu em operação de emergência, aterrissou no início da pista e chocou -se com a parede lateral. Os bombeiros foram acionados, mas não houve feridos. A pista foi limpa e, em poucos minutos, estava totalmente desimpedida."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Esse texto mostra o seguinte modo de organização discursiva:",
+          "alternativas": [
+            "narração + descrição.",
+            "narração + dissertação expositiva.",
+            "dissertação expositiva + dissertação argumentativa.",
+            "exclusivamente descrição.",
+            "exclusivamente narração."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coordenação e Subordinação",
+          "enunciado": "Assinale a oração a seguir que recebe uma classificação diferente das demais.",
+          "alternativas": [
+            "“que permitem conduzir uma aeronave de um ponto a outro com segurança e eficiência”.",
+            "“que garantem”.",
+            "“que a trajetória seja cumprida da melhor forma”.",
+            "“que são centrais em cursos de formação de pilotos e comissários”.",
+            "“que se voltam para a ANAC”."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Manter a segurança de milhares de passageiros nos céus do Brasil é a principal missão do controlador de tráfego aéreo. Este profissional é responsável por orientar, coordenar e monitorar as aeronaves para prevenir colisões e garantir um fluxo ordenado e eficiente. Com o recente lançamento do edital do concurso da NAV Brasil (publicado em 24 de abril de 2026), o interesse pela carreira cresceu significativamente. A NAV Brasil é a empresa pública responsável pela navegação aérea no país, criada em 2021 a partir de uma cisão da Infraero. Esse é um pequeno texto publicado pelo jornal Estado de Minas no mês de maio de 2026. Assinale a afirmativa correta quanto à sua significação ou estruturação.",
+          "alternativas": [
+            "O primeiro período do texto resume antecipadamente todos os demais períodos.",
+            "O texto pode ser caracterizado como publicitário, já que valoriza uma empresa nacional.",
+            "O texto cita todas as missões dos controladores de tráfego aéreo.",
+            "O texto destaca a segurança dos aviões e dos passageiros como a missão mais importante do controlador de voo.",
+            "O texto incentiva a procura pela carreira de controlador de voo, mostrando vantagens da profissão."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Observe o pequeno texto a seguir: “Navegação aérea é o conjunto de técnicas e procedimentos que permitem conduzir uma aeronave de um ponto a outro com segurança e precisão.” Sobre esse fragmento textual, assinale a afirmação correta.",
+          "alternativas": [
+            "Trata-se de uma definição do termo “navegação aérea”.",
+            "Mostra uma explicação sobre a atividade do controlador de voo.",
+            "Apresenta um esclarecimento sobre a finalidade da navegação aérea.",
+            "Indica uma qualidade da navegação aérea que destaca o seu lado científico.",
+            "Exemplifica um texto argumentativo que defende um ponto de vista positivo sobre a navegação aérea."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "Navegação aérea é o conjunto de técnicas e procedimentos que permitem conduzir uma aeronave de um ponto a outro com segurança e precisão. Sobre os termos desse texto, é correto afirmar que",
+          "alternativas": [
+            "“técnicas e procedimentos” são sinônimos e, por isso, mostram uma redundância.",
+            "o pronome relativo “que” tem por antecedente o termo “navegação aérea”.",
+            "a forma verbal “permitem” mostra um erro de concordância, devendo ser substituída por “permite”.",
+            "os dois termos da expressão “de um ponto a outro” indicam, respectivamente, o destino e a origem do voo.",
+            "“com segurança e precisão” poderia ser substituído por “segura e precisamente”."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Assinale a frase a seguir que é construída a partir de outro texto amplamente conhecido.",
+          "alternativas": [
+            "A moda é uma tirana a quem os sábios ridicularizam e obedecem.",
+            "Um homem belo é um homem insignificante.",
+            "Quem vê cara não vê que horas são.",
+            "Beleza sem expressão cansa.",
+            "Para o sábio basta apenas uma palavra."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Sintaxe da Oração e do Período",
+          "enunciado": "Assinale a frase em que uma oração foi adequadamente substituída por um só termo.",
+          "alternativas": [
+            "Uma ideia que não é perigosa não é de todo uma ideia. / Uma ideia inofensiva não é de todo uma ideia.",
+            "Odeio os movimentos que ultrapassam as linhas. / Odeio os movimentos lineares.",
+            "Livros de frases são ótimos para pessoas que não possuem instrução. / Livros de frases são ótimos para pessoas instruídas.",
+            "Cem máximas que resumissem a sabedoria universal tornariam dispensáveis os livros. / Cem máximas conscientes tornariam dispensáveis os livros.",
+            "Um livro que nada ensina não é um livro, é um brinquedo. / Um livro ignorante não é um livro, é um brinquedo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tempos, Modos e Vozes Verbais",
+          "enunciado": "Assinale a frase em que o verbo fazer tem a função de substituir toda uma oração anterior.",
+          "alternativas": [
+            "Um livro pode constituir uma obra, vinte podem não fazê-lo.",
+            "Perdoai-os, Senhor: eles não sabem o que fazem.",
+            "Todos fazemos o que está a nosso alcance: essa é a lei da solidariedade humana.",
+            "Todos os professores procuram ensinar enquanto outros fazem brinquedos.",
+            "Procurei fazer o bem sem olhar a quem."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Concordância Verbal e Nominal",
+          "enunciado": "Assinale a frase em que ocorre uma falha de construção, por não obedecer às próprias promessas do texto.",
+          "alternativas": [
+            "Todos os livros podem ser divididos em duas classes: os do momento e os de todos os tempos.",
+            "Vi três pessoas pela janela: de longe, meu pai e, além dele, os meus vizinhos.",
+            "Aqui estão minhas quatro medalhas: a da verdade, a da amizade e, além delas, a da solidariedade.",
+            "Aqui está minha idade: 89 anos bem vividos.",
+            "Aqui digo uma frase de gênio: Para saber falar é preciso saber escutar."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Sintaxe da Oração e do Período",
+          "enunciado": "Assinale a frase que não apresenta nenhum termo em elipse ou zeugma.",
+          "alternativas": [
+            "Citação é a ação de repetir de maneira errada as palavras do outro.",
+            "Para meias palavras, o dobro do cuidado.",
+            "Você pode provar qualquer coisa com estatísticas, exceto a verdade.",
+            "Que o Universo se cale e me escute falar.",
+            "Quando necessito ler um livro, eu mesmo escrevo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Proposições e Conectivos",
+          "enunciado": "X, Y e Z são pessoas suspeitas de terem cometido um ilícito. Ao serem questionados sobre o sinistro, eles fizeram as seguintes declarações: • X disse: “Y é o culpado.” • Y disse: “Z é o culpado.” • Z disse: “Y mentiu em sua declaração.” Sabe-se que apenas um deles é o culpado e que o culpado foi o único que mentiu. Com base nessas informações, é correto concluir que",
+          "alternativas": [
+            "X disse a verdade e Y é o culpado.",
+            "X disse a verdade e Z é o culpado.",
+            "Y disse a verdade e Z é o culpado.",
+            "Y disse a verdade e X é o culpado.",
+            "Z disse a verdade e X é o culpado."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equivalências e Negações",
+          "enunciado": "João tem, em sua residência, um único liquidificador e uma única batedeira. Ele faz a seguinte declaração a respeito desses dois eletrodomésticos: “O meu liquidificador e a minha batedeira são pretos.” Considerando a lógica proposicional, se essa sentença tem valor lógico falso, é correto concluir que",
+          "alternativas": [
+            "nenhum dos eletrodomésticos é preto.",
+            "o liquidificador é preto.",
+            "a batedeira é preta.",
+            "se a batedeira é preta, então o liquidificador não é preto.",
+            "se o liquidificador não é preto, então a batedeira é preta."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Um número é composto exclusivamente por 2 algarismos. Se for colocado o algarismo 0 entre eles, mantendo -se a ordem dos algarismos originais, obtém -se um novo número que é formado por 3 algarismos. A diferença entre o novo número e o original é 270. Com base nessas informações, é correto afirmar que o número original é",
+          "alternativas": [
+            "maior que 69 e menor que 80.",
+            "maior que 59 e menor que 70.",
+            "maior que 49 e menor que 60.",
+            "maior que 39 e menor que 50.",
+            "maior que 29 e menor que 40."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações e Sistemas",
+          "enunciado": "Um pai propõe à sua filha o seguinte desafio: • há 8 anos, a minha idade era exatamente o triplo da idade que você tinha; • daqui a 12 anos, a minha idade será exatamente o dobro da idade que você terá. Sabendo que ambos fazem aniversário no mesmo dia, é correto concluir que, no dia em que a filha fizer 35 anos, seu pai vai fazer",
+          "alternativas": [
+            "72 anos.",
+            "74 anos.",
+            "75 anos.",
+            "76 anos.",
+            "78 anos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Uma equipe multidisciplinar da NAV Brasil está desenvolvendo um novo projeto para implementação de um sistema destinado ao aprimoramento do monitoramento de voos comerciais. Para facilitar a comunicação, o compartilhamento de informações e a elaboração colaborativa de documentos, a equipe decidiu utilizar o Microsoft Teams como ambiente de trabalho. Considerando as funcionalidades dessa ferramenta, avalie se os recursos apresentados a seguir estão disponíveis no Microsoft Teams. I. Realização de reuniões virtuais com recursos de áudio e vídeo. II. Compartilhamento e coedição de documentos por usuários autorizados. III. Organização de equipes e canais para centralização das atividades de um projeto. IV. Troca de mensagens instantâneas e compartilhamento de arquivos entre usuários e grupos de trabalho. Estão corretos os recursos",
+          "alternativas": [
+            "I e II, apenas.",
+            "I, II e III, apenas.",
+            "I, II e IV, apenas.",
+            "II, III e IV, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Atos Administrativos",
+          "enunciado": "Após o Congresso Nacional editar e a Presidência da República sancionar determinada legislação com forte impacto econômico no âmbito do Estado Alfa, determinada parte legítima ingressou, em observância às formalidades constitucionais e legais, com ação direta de inconstitucionalidade junto ao Supremo Tribunal Federal. Nesse cenário, considerando as disposições da Constituição Federal, é correto afirmar que a ação direta de inconstitucionalidade foi proposta",
+          "alternativas": [
+            "por partido político com representação na Assembleia Legislativa do Estado Alfa.",
+            "pelo Presidente do Tribunal de Justiça do Estado Alfa.",
+            "pelo Procurador-Geral de Justiça do Estado Alfa.",
+            "pelo Defensor Público-Geral do Estado Alfa.",
+            "pelo Governador do Estado Alfa."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A empresa pública Alfa, em observância às formalidades legais, publicou edital de licitação visando, futuramente, à celebração de contrato administrativo que envolverá obras de engenharia de natureza predominantemente intelectual e de inovação tecnológica do objeto licitado. Nesse cenário, considerando as disposições da Lei nº 13.303/2016, é correto afirmar que o contrato administrativo estará sujeito ao regime de",
+          "alternativas": [
+            "empreitada por preço unitário.",
+            "empreitada por preço global.",
+            "contratação semi-integrada.",
+            "contratação por tarefa.",
+            "contratação integrada."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "Lucas, empregado público na NAV Brasil, participou, na qualidade de ouvinte, de um curso de capacitação que envolvia, entre outras temáticas, os recursos a que a referida empresa pública faz jus. Nesse cenário, considerando as disposições da Lei nº 13.903/2019, as opções a seguir apresentam recursos da NAV Brasil, exceto uma. Assinale-a.",
+          "alternativas": [
+            "Produtos de operações de crédito e rendas patrimoniais, salvo a venda de bens ou de materiais inservíveis.",
+            "Recursos provenientes de desenvolvimento de suas atividades e de convênios, ajustes ou contratos.",
+            "Receitas decorrentes da exploração de direitos autorais e intelectuais.",
+            "Doações, legados e receitas eventuais.",
+            "Tarifas de navegação aérea."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Matheus, estudante de Direito, resolveu analisar, em suas diversas nuances, as disposições constitucionais vinculadas aos direitos sociais, em especial o direito de greve constitucionalmente assegurado. De acordo com a narrativa e considerando as disposições da Constituição Federal, avalie as afirmativas a seguir: I. A lei não poderá exigir autorização do Estado para a fundação de sindicato, ressalvado o registro no órgão competente, vedadas ao Poder Público a interferência e a intervenção na organização sindical. II. É vedada a criação de mais de uma organização sindical, em qualquer grau, representativa de categoria profissional ou econômica, na mesma base territorial, que será definida pelos trabalhadores ou empregadores interessados, não podendo ser inferior à área de um Estado. III. A assembleia geral fixará a contribuição que, em se tratando de categoria profissional, será descontada em folha, para custeio do sistema confederativo da representação sindical respectiva, independentemente da contribuição prevista em lei. Nesse cenário, considerando as disposições da Constituição Federal, é livre a associação profissional ou sindical, observado o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "III, apenas.",
+            "I e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "Ao consultar a regulamentação legal, Matheus, empregado público no âmbito da NAV Brasil, deparou com os princípios e valores éticos adotados na referida estatal, sendo certo que a seguinte conceituação despertou a sua atenção: desenvolvimento do senso de responsabilidade mútua e consciência da importância individual e coletiva, atuando com sinergia em torno dos propósitos e das tarefas, tendo em vista a realização dos interesses da organização e o bem comum. Nesse cenário, entre os princípios e valores éticos previstos no Código de Ética, Conduta e Integridade da NAV Brasil, se está diante do conceito de",
+          "alternativas": [
+            "probidade administrativa.",
+            "sustentabilidade.",
+            "profissionalismo.",
+            "colaboração.",
+            "integridade."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Em discurso realizado na sede da NAV Brasil, determinada autoridade pública federal fez referência a três diferentes temáticas, quais sejam: I. A relevância dos valores sociais do trabalho e da livre Iniciativa; II. A importância de se garantir o desenvolvimento nacional; III. A busca pela solução pacífica dos conflitos. Nesse cenário, considerando as disposições da Constituição Federal, é correto afirmar que os",
+          "alternativas": [
+            "valores sociais do trabalho e da livre iniciativa são fundamentos da República Federativa do Brasil. Por sua vez, garantir o desenvolvimento nacional é um objetivo fundamental do país. Por fim, a solução pacífica dos conflitos é um princípio que rege o Bra sil nas suas relações internacionais.",
+            "valores sociais do trabalho e da livre iniciativa e garantir o desenvolvimento nacional são objetivos fundamentais da República Federativa do Brasil. Por sua vez, a solução pacífica dos conflitos é um princípio que rege o Brasil nas suas relações internacionais.",
+            "valores sociais do trabalho e da livre iniciativa, garantir o desenvolvimento nacional e a solução pacífica dos conflitos são princípios que regem a República Federativa do Brasil nas suas relações internacionais.",
+            "valores sociais do trabalho e da livre iniciativa, garantir o desenvolvimento nacional e a solução pacífica dos conflitos são objetivos fundamentais da República Federativa do Brasil.",
+            "valores sociais do trabalho e da livre iniciativa, garantir o desenvolvimento nacional e a solução pacífica dos conflitos são fundamentos da República Federativa do Brasil."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A diretora de uma empresa pública federal, ao assumir o cargo, decidiu estruturar sua atuação a partir do processo administrativo clássico. Em uma reunião com sua equipe, ela explicou que iria iniciar suas atividades visualizando o futuro da organização, traçando programas de ação e transformando as decisões institucionais em planos a serem aplicados nos próximos anos. Em seguida, distribuiria autoridade, responsabilidades, atividades e recursos entre as unidades; conduziria e orientaria as pessoas em direção aos objetivos propostos; e, ao final do ciclo, verificaria se o que foi previamente definido e estruturado foi, de fato, executado, avaliando a compatibilidade entre objetivos e resultados alcançados. As quatro etapas mencionadas pela diretora correspondem, respectivamente, às funções administrativas de",
+          "alternativas": [
+            "organização, planejamento, controle e direção.",
+            "direção, organização, planejamento e controle.",
+            "controle, direção, organização e planejamento.",
+            "planejamento, direção, organização e controle.",
+            "planejamento, organização, direção e controle."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A evolução do pensamento administrativo contempla um conjunto de influências históricas que contribuíram para a formação da teoria administrativa. Entre essas influências antecedentes, destaca-se a contribuição da organização militar, que legou princípios fundamentais como hierarquia, unidade de comando, disciplina e planejamento estratégico, posteriormente incorporados pelos teóricos clássicos da Administração. No contexto da evolução do pensamento administrativo e dos antecedentes da abordagem clássica, são considerados expoentes históricos, cujas contribuições caracterizam a influência da organização militar, os seguintes pensadores:",
+          "alternativas": [
+            "Adam Smith, Karl Marx e Friedrich Engels.",
+            "René Descartes, Sir Isaac Newton e Galileu Galilei.",
+            "John Rockefeller, Westinghouse e General Electric.",
+            "Sun Tzu, Napoleão Bonaparte e Karl von Clausewitz.",
+            "Henri Fayol, Frederick Taylor e Max Weber."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A diretoria de uma empresa pública elaborou seu mapa estratégico e estabeleceu, como objetivo de base, “assegurar treinamento e capacitação para as pessoas”, do qual derivariam, em uma cadeia lógica de causa e efeito, os objetivos de “implantar novos processos” e “melhorar os processos internos”, que por sua vez sustentariam a “implantação de sistemas de relacionamento com clientes” e a “melhoria do atendimento aos clientes”, levando, ao final, ao “aumento da receita” e à “melhoria do desempenho financeiro”. No mapa estratégico descrito, o objetivo \"assegurar treinamento e capacitação para as pessoas\" está posicionado na perspectiva",
+          "alternativas": [
+            "financeira.",
+            "dos clientes.",
+            "dos processos internos.",
+            "de inovação e aprendizado.",
+            "da responsabilidade socioambiental."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A Nova Lei de Licitações e Contratos Administrativos, Lei nº 14.133/2021, ampliou o rol de princípios aplicáveis às contratações públicas em relação ao regime anterior, incorporando expressamente novos vetores axiológicos alinhados às exigências contemporâneas de governança e integridade. Segundo o Art. 5º da Lei nº 14.133/2021, é princípio expressamente previsto para reger as licitações e os contratos administrativos",
+          "alternativas": [
+            "a supremacia contratual.",
+            "a segregação de funções.",
+            "a discricionariedade ilimitada.",
+            "o sigilo permanente do julgamento.",
+            "a pessoalidade na escolha do contratado."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A Lei nº 14.133/2021 estabelece as modalidades de licitação aplicáveis às contratações da Administração Pública, definindo os procedimentos específicos para cada uma delas. A nova lei extinguiu modalidades tradicionais do regime anterior e instituiu novas modalidades, alinhando o sistema licitatório brasileiro às práticas contemporâneas de contratação pública. Conforme o Art. 28 da Lei nº 14.133/2021, são modalidades de licitação:",
+          "alternativas": [
+            "concorrência, tomada de preços, convite, concurso e leilão.",
+            "pregão, concorrência, convite, tomada de preços e diálogo competitivo.",
+            "pregão, concorrência, concurso, leilão e diálogo competitivo.",
+            "concorrência, tomada de preços, convite, leilão, pregão e concurso.",
+            "pregão eletrônico, pregão presencial, concorrência, leilão e tomada de preços."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A Lei nº 14.133/2021 disciplina o Regime Jurídico dos contratos administrativos, prevendo, entre as prerrogativas da Administração, a possibilidade de promover alterações unilaterais nos contratos celebrados. Conforme o Art. 124 da Lei nº 14.133/2021, é hipótese de alteração unilateral do contrato administrativo pela Administração",
+          "alternativas": [
+            "a substituição da garantia de execução, mediante acordo entre as partes.",
+            "o reequilíbrio econômico -financeiro solicitado pelo contratado.",
+            "a alteração da forma de pagamento por iniciativa do contratado.",
+            "a modificação do projeto ou das especificações, para melhor adequação técnica.",
+            "a prorrogação do prazo contratual por conveniência do contratado."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "O Sistema de Registro de Preços (SRP) é um conjunto de procedimentos previsto na Lei nº 14.133/2021, que permite à Administração Pública, após a realização de licitação, registrar formalmente preços para futuras e eventuais contratações de bens, serviços ou obras, sem a obrigação imediata de aquisição. Conforme o Art. 82 da Lei nº 14.133/2021, uma característica do SRP é",
+          "alternativas": [
+            "a possibilidade de contratações futuras e eventuais, sem obrigatoriedade de aquisição pela Administração.",
+            "a vinculação imediata da Administração à aquisição total do quantitativo registrado.",
+            "a vedação à adesão por outros órgãos ou entidades da Administração Pública.",
+            "o prazo de validade da ata de registro de preços fixado em cinco anos, prorrogável por igual período, conforme conveniência da Administração.",
+            "a dispensa de prévio procedimento licitatório para o registro dos preços, em razão da natureza eventual das contratações posteriores."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "A governança pública é um conjunto de mecanismos de liderança, estratégia e controle adotados para avaliar, direcionar e monitorar a gestão das organizações públicas, com vistas à condução de políticas e à prestação de serviços de interesse da sociedade. No Brasil, o Decreto nº 9.203/2017 disciplina a política de governança da Administração Pública federal direta, autárquica e fundacional, estabelecendo princípios e diretrizes para sua implementação. Conforme o Art. 3º do Decreto nº 9.203/2017, são princípios da governança pública:",
+          "alternativas": [
+            "capacidade de resposta, integridade, confiabilidade, melhoria regulatória, prestação de contas e responsabilidade, e transparência.",
+            "hierarquia, sigilo, formalismo, padronização, supremacia administrativa e centralização.",
+            "eficiência, oralidade, pessoalidade, discricionariedade, autotutela e supremacia contratual.",
+            "economicidade, sigilo das ações governamentais, vinculação política, autonomia gerencial e flexibilidade normativa.",
+            "celeridade, livre conveniência administrativa, hierarquia funcional, segregação de poderes e indisponibilidade da informação pública."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "A Lei nº 12.846/2013 (Lei Anticorrupção) define um conjunto de condutas consideradas atos lesivos à Administração Pública, nacional ou estrangeira, que atentem contra o patrimônio público, contra os princípios da Administração Pública ou contra os compromissos internacionais assumidos pelo Brasil. Conforme o Art. 5º da Lei nº 12.846/2013, constitui ato lesivo à Administração Pública, no tocante a licitações e contratos:",
+          "alternativas": [
+            "propor, em processo licitatório, preço inferior ao praticado pelos concorrentes.",
+            "solicitar, formalmente, reequilíbrio econômico -financeiro do contrato administrativo.",
+            "interpor recurso administrativo contra decisão da comissão de licitação.",
+            "fraudar licitação pública ou contrato dela decorrente.",
+            "declinar da participação em licitação por inviabilidade operacional."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "A norma ISO 31000:2018 estabelece um conjunto de princípios que orientam a gestão de riscos eficaz nas organizações, todos voltados ao propósito central de criação e proteção de valor. Esses princípios fornecem as diretrizes fundamentais para o desenho e a operação do processo de gestão de riscos. Conforme a ISO 31000:2018, um princípio da gestão de riscos eficaz é a",
+          "alternativas": [
+            "padronização rígida, segundo a qual a estrutura e o processo de gestão de riscos devem ser aplicados de forma idêntica em todas as organizações, independentemente de seus contextos.",
+            "estática, segundo a qual os riscos identificados na fase inicial do processo devem ser mantidos sem reavaliação durante todo o ciclo de gestão.",
+            "personalizada, segundo a qual a estrutura e o processo de gestão de riscos devem ser proporcionais aos contextos externo e interno da organização e relacionados aos seus objetivos.",
+            "restritiva, segundo a qual a gestão de riscos deve ser conduzida exclusivamente pela alta administração, sem participação das demais partes interessadas.",
+            "retrospectiva, segundo a qual as entradas para a gestão de riscos devem se basear exclusivamente em informações históricas, desconsiderando expectativas futuras."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Cidadania e Direitos",
+          "enunciado": "Um cidadão, ao consultar o portal de transparência de um órgão público federal, encontrou disponibilizadas, independentemente de qualquer solicitação prévia, informações relativas a contratos firmados, despesas executadas, salários de servidores e relatórios de gestão. Conforme o art. 3º da Lei nº 12.527/2011, a prática descrita corresponde à observância da diretriz de",
+          "alternativas": [
+            "sigilo das informações como regra geral da Administração.",
+            "restrição do acesso às informações a pesquisadores credenciados.",
+            "centralização da divulgação de dados em órgão único de imprensa governamental.",
+            "classificação automática de todas as informações orçamentárias como reservadas.",
+            "divulgação de informações de interesse público, independentemente de solicitações."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "No relacionamento com stakeholders, as empresas estabelecem diferentes tipos de interação com outros atores do mercado, conforme sua posição relativa dentro do setor e a necessidade de recursos externos. Entre essas interações, destaca-se aquela em que duas empresas, simultaneamente, cooperam e competem, com o objetivo de criar e capturar valor para os seus clientes, trabalhando em conjunto com concorrentes para beneficiar -se de capacidades e características distintas em domínios como investigação, desenvolvimento, produção e distribuição, sem desconsiderar a competição no momento do lançamento dos produtos no mercado. Conforme a literatura especializada, a interação descrita corresponde ao conceito de",
+          "alternativas": [
+            "coexistência.",
+            "cooperação.",
+            "competição.",
+            "coopetição.",
+            "concorrência."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Em matemática financeira, a forma adequada de expressar e calcular taxas de juros é fundamental para a correta análise de operações financeiras. Existem diferentes conceitos de taxas que se diferenciam conforme o regime de capitalização aplicado, sendo ess encial distinguir as taxas que produzem o mesmo crescimento do dinheiro em cada regime. Conforme a literatura especializada em matemática financeira, denominam-se taxas equivalentes aquelas que proporcionam o mesmo crescimento do dinheiro no regime de juros",
+          "alternativas": [
+            "simples.",
+            "compostos.",
+            "reais.",
+            "nominais.",
+            "brutos."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A cultura organizacional, conforme analisada por Edgar Schein , é construída a partir de processos pelos quais determinados valores e crenças são consolidados no grupo. Em um desses processos, certos valores são confirmados apenas pela experiência social compartilhada dos membros, reforçando -se mutuamente as crenças e valores uns dos outros, ainda que não seja possível demonstrá-los objetivamente. Os membros que não aceitam tais crenças correm o risco de exclusão do grupo, e o critério para verificar se essas crenças “funcionam” é o conforto e a redução da ansiedade que proporcionam aos participantes em áreas críticas do funcionamento coletivo. Conforme a teoria de Edgar Schein sobre cultura organizacional, o processo descrito denomina-se",
+          "alternativas": [
+            "validação social.",
+            "artefato visível.",
+            "ritual de iniciação.",
+            "socialização secundária.",
+            "institucionalização normativa."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Em uma empresa pública de infraestrutura crítica, o gestor de comunicação interna estruturou um plano que incluía a disseminação de peças visuais digitalizadas em desktops e monitores corporativos, publicações em redes sociais com frases motivacionais e imagens de capacitações da equipe, manutenção de blog corporativo com conteúdos institucionais, prática de empregados-destaque e uso de murais corporativos, com monitoramento contínuo do retorno dessas ações. Conforme a literatura especializada em comunicação organizacional, o conjunto de práticas descrito tem como finalidade principal",
+          "alternativas": [
+            "substituir os canais formais de comunicação hierárquica da organização.",
+            "tornar prescindíveis as reuniões presenciais entre lideranças e equipes.",
+            "reduzir os custos operacionais da área de gestão de pessoas da empresa.",
+            "padronizar o conteúdo das comunicações externas com clientes e fornecedores.",
+            "valorizar e disseminar a cultura organizacional, gerando engajamento e proximidade com os colaboradores."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 64,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Em uma empresa pública, a área de gestão de pessoas implementou uma política específica voltada à eliminação de barreiras hierárquicas marcantes, à promoção da franqueza interpessoal e ao combate ao preconceito no ambiente de trabalho. Conforme o modelo de Walton sobre Qualidade de Vida no Trabalho, as práticas descritas correspondem ao fator denominado",
+          "alternativas": [
+            "constitucionalismo.",
+            "integração social na organização.",
+            "compensação justa e adequada.",
+            "relevância social da vida no trabalho.",
+            "condições de segurança e saúde no trabalho."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Em um comitê de investimentos de uma empresa pública de infraestrutura, a equipe técnica responsável pela seleção de projetos para implantação enfrentou um cenário em que diversos critérios precisavam ser considerados simultaneamente. Entre os critérios id entificados, constavam a taxa interna de retorno, o número de empregos gerados na construção, o montante de investimentos atraídos para a região, os impactos sociais nas comunidades próximas, os impactos ambientais nos arredores e a percepção da reputação da empresa após a implantação. A diretora financeira ponderou que a escolha do método de análise deveria contemplar tanto critérios quantitativos quanto qualitativos, em razão da complexidade dos fatores envolvidos na decisão. Conforme a literatura especializada em avaliação de projetos e investimentos, o método mais adequado ao cenário descrito é",
+          "alternativas": [
+            "a relação benefício-custo monetizada.",
+            "o retorno total ajustado por risco.",
+            "o período de repagamento descontado.",
+            "o modelo de otimização de programação mista.",
+            "o modelo de tomada de decisão multicriterial."
+          ],
+          "correta": "E"
+        }
+      ]
+    },
+    {
+      "codigo": "nav2026-advogado-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "NAV Brasil",
+      "cargo": "Advogado",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cns302-advogado-cns302-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-retificado-nav-brasil-2026.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 41,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Com vistas a distinguir os contratos de direito privado da Administração dos contratos administrativos formalizados com fulcro na Lei nº 14.133/2021, Lucélia passou a indicar as características desses últimos. Uma característica dos contratos administrativos mencionada por Lucélia é",
+          "alternativas": [
+            "a inviabilidade de manutenção do equilíbrio econômico financeiro do contrato.",
+            "o cabimento da extinção unilateral pelo contratado, nos casos especificados na lei.",
+            "a presença de cláusulas exorbitantes, dentre as quais a fiscalização da execução do contrato.",
+            "a impossibilidade de alteração unilateral das chamadas cláusulas regulamentares pelo contratante.",
+            "a predominância do direito privado, aplicando-se a teoria geral dos contratos, que afasta os preceitos de direito público."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "Erasmo é servidor público da União que, no exercício de suas atribuições, praticou conduta gravíssima, que a um só tempo caracteriza crime, ato de improbidade administrativa, ilícito civil e falta funcional passível de responsabilização administrativa. Considerando a delimitação e a finalidade do processo administrativo disciplinar, com relação à situação descrita, assinale a afirmativa correta.",
+          "alternativas": [
+            "O processo administrativo disciplinar destina -se precipuamente à aplicação das penalidades atinentes ao cometimento de infrações funcionais, no âmbito da responsabilização administrativa de Erasmo.",
+            "A aplicação das penalidades a Erasmo previstas em todas as mencionadas esferas de responsabilização pode resultar do processo administrativo disciplinar, que é o principal instrumento de sancionamento dos agentes públicos.",
+            "As sanções penais são as únicas aplicáveis a Erasmo que não podem resultar do processo administrativo disciplinar, dentre as referidas esferas de responsabilização, na medida em que apenas podem decorrer de pronunciamento jurisdicional.",
+            "A responsabilização de Erasmo por improbidade administrativa, bem como por crime, deve resultar de processo administrativo disciplinar, cabendo à autoridade administrativa competente a aplicação das respectivas penalidades.",
+            "O dever de indenizar em decorrência de ilícito civil somente pode ser determinado após o processo administrativo disciplinar que aplique a Erasmo as sanções elencadas na esfera administrativa, bem como aquelas previstas na lei de improbidade administrativa."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Princípios da Administração Pública",
+          "enunciado": "No exercício de sua atividade funcional, o agente público Melquiades, foi questionado sobre os princípios de direito público expressamente consagrados no Art. 37, caput, da CRFB/88 e aqueles que estão implícitos na Lei Maior, bem como instado a indicar exemplos de cada um deles, respectivamente. Assinale a opção que elenca corretamente os exemplos dados por Melquiades.",
+          "alternativas": [
+            "Legalidade e moralidade.",
+            "Eficiência e segurança jurídica.",
+            "Publicidade e impessoalidade.",
+            "Supremacia do interesse público e efetividade.",
+            "Autotutela e indisponibilidade do interesse público."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "Determinado ente federativo visa formalizar uma parceria público- privada para a prestação de serviços públicos, que envolverá a cobrança de tarifas e a contraprestação pelo Poder Público, sendo certo que mais de 70% (setenta por cento) da remuneração do parceiro privado será paga pela Administração Pública. Em razão disso, as autoridades que delinearam o mencionado projeto questionaram a respectiva assessoria jurídica acerca das peculiaridades da avença pretendida, à luz do disposto na Lei nº 11.079/2004, vindo os profissionais do direito a afirmar o seguinte: I. A modalidade de parceria pertinente na hipótese é a concessão administrativa, diante da intenção de cobrança de tarifas. II. A parceria em comento dependerá de autorização legislativa específica, considerando que mais de 70% (setenta por cento) da remuneração do parceiro privado será paga pela Administração Pública. III. É vedada a celebração do contrato em questão que tenha como objeto único o fornecimento de mão de obra, o fornecimento e instalação de equipamentos ou a execução de obra pública. Está em consonância com o mencionado Diploma Legal (Lei nº 11.079/2004) o que se afirma em",
+          "alternativas": [
+            "I, II e III.",
+            "I, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I e III, apenas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Quanto ao regime jurídico dos empregados públicos, regularmente admitidos em empresas públicas federais, à luz das disposições constitucionais e da orientação do Supremo Tribunal Federal, assinale a afirmativa correta.",
+          "alternativas": [
+            "Submetem-se ao regime estatutário, na medida em que ocupam cargos públicos designados de efetivos.",
+            "Veda-se a demissão de empregado público sem amparo em sentença judicial transitada em julgado para tal finalidade.",
+            "Revela-se prescindível a realização de concurso público de provas ou de provas e títulos para a respectiva admissão de pessoal.",
+            "Admite-se a demissão sem justa causa, mas é necessária a motivação que apresente fundamento razoável, por ato formal.",
+            "Tem-se que é assegurada a garantia da estabilidade, a que os empregados fazem jus após 3 (três) anos de efetivo exercício e avaliação de desempenho."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Caso uma entidade administrativa submetida aos ditames da Lei nº 14.133/2021 almeje realizar a aquisição de bens e serviços comuns, mediante a utilização de critério de julgamento que poderá ser o de menor preço ou o de maior desconto, é correto afirmar que a modalidade de licitação pertinente é",
+          "alternativas": [
+            "o leilão.",
+            "o pregão.",
+            "o concurso.",
+            "a concorrência.",
+            "o diálogo competitivo."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 67,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "No âmbito das empresas públicas e das sociedades de economia mista, há um determinado órgão ao qual compete monitorar a qualidade e a integridade dos mecanismos de controle interno, das demonstrações financeiras e das informações e medições divulgadas pelas respectivas estatais. Nesse cenário, considerando as disposições da Lei nº 13.303/2016, é correto afirmar que a referida competência pertence ao",
+          "alternativas": [
+            "Comitê de Auditoria Estatutário, como órgão auxiliar do Conselho de Administração.",
+            "Conselho de Administração, como órgão auxiliar do Comitê de Auditoria Estatutário.",
+            "Comitê de Auditoria Estatutário, como órgão auxiliar do Conselho Fiscal.",
+            "Conselho Fiscal, como órgão auxiliar do Conselho de Administração.",
+            "Conselho de Administração, como órgão auxiliar do Conselho Fiscal."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "O procedimento licitatório se destina a selecionar a proposta mais vantajosa para a NAV Brasil, inclusive no que se refere ao ciclo de vida do objeto, e a evitar operações em que se caracterize sobrepreço ou superfaturamento. Considerando as disposições do Regulamento Interno de Licitação de Contratos da NAV Brasil, avalie as afirmativas a seguir. I. As licitações na modalidade de pregão, na forma eletrônica, deverão ser realizadas exclusivamente em portais de compras de acesso público na internet, e acompanharão os regramentos estabelecidos na legislação específica. II. O termo de referência, projeto básico ou projeto executivo poderão prever requisitos de sustentabilidade ambiental além dos previstos na legislação aplicável. III. Nas hipóteses cabíveis, o ato convocatório ou contrato poderá prever a responsabilidade do contratado pela obtenção do licenciamento ambiental. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "III, apenas.",
+            "I e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "E"
+        }
+      ]
+    },
+    {
+      "codigo": "nav2026-analista-tecnologia-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "NAV Brasil",
+      "cargo": "Analista de Tecnologia",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cns308-analista-de-tecnologia-cns308-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-retificado-nav-brasil-2026.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 52,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Um Analista de Tecnologia precisa integrar o sistema de folha de pagamento de uma Secretaria com o sistema corporativo de cadastro de CPFs mantido pela Receita Federal. Para realizar essa integração lógica em tempo real pela web, sem expor o código -fonte interno de nenhum dos órgãos ou permitir acesso direto às tabelas físicas dos bancos de dados, os engenheiros utilizam um conjunto de pontos de extremidade (endpoints) HTTP padronizados regidos por um contrato claro de payloads JSON. Assinale a opção que apresenta a tecnologia e o acrônimo em inglês que definem essa interface de programação estruturada por meio de contratos de software claros para permitir a comunicação segura e padronizada entre diferentes sistemas computacionais.",
+          "alternativas": [
+            "MVC (Model-View-Controller).",
+            "SLA (Service Level Agreement).",
+            "DDD (Domain-Driven Design).",
+            "BCP (Business Continuity Plan).",
+            "API (Application Programming Interface)."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "A equipe de Engenharia de Confiabilidade de Sites (SRE) de um portal de serviços previdenciários está definindo os acordos de qualidade operacional para a API de emissão de contracheques. Eles definiram um Indicador de Nível de Serviço (SLI) baseado na latência das requisições HTTP síncronas. Com base nisso, estabeleceram o Objetivo de Nível de Serviço (SLO) de que 99,9% das requisições válidas nas últimas 4 semanas devem retornar um código HTTP 200 em menos de 200 milissegundos. A definição desse SLO gera matematicamente um Orçamento de Erro (Error Budget) de 0,1%. No âmbito das práticas de SRE, a utilidade essencial desse Error Budget para a governança compartilhada entre o time de operações e o time de desenvolvimento consiste em",
+          "alternativas": [
+            "estipular a penalidade financeira exata a ser descontada do fornecedor terceirizado de nuvem pública.",
+            "definir o limite de chamados de suporte que a Central de Serviços pode rejeitar automaticamente por semana.",
+            "atuar como uma métrica de controle para equilibrar a velocidade de lançamento de novos recursos com a estabilidade do sistema.",
+            "monitorar o volume máximo de logs verbosos que o pipeline de observabilidade pode indexar sem estourar o disco.",
+            "calcular a taxa de compressão que o algoritmo de backup deve aplicar aos arquivos de dump transacionais."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "No desenvolvimento da API RESTful de um sistema de Ouvidoria, o programador precisa criar o endpoint que receberá os dados de uma nova manifestação enviada pelo cidadão. De acordo com os padrões arquiteturais hipermídia do ecossistema REST, o método deve aceitar o payload dos dados em formato JSON, processar a requisição e gravar um novo registro com ID exclusivo no banco de dados, gerando um recurso inédito no servidor a cada chamada executada. Para cumprir rigorosamente as boas práticas de design e as restrições semânticas de protocolo da arquitetura REST, o método HTTP que deve ser utilizado para expor esse endpoint e a sua classificação quanto à propriedade de idempotência, são, respectivamente,",
+          "alternativas": [
+            "POST e método não idempotente.",
+            "PUT e método idempotente.",
+            "GET e método idempotente.",
+            "PATCH e método não idempotente.",
+            "POST e método idempotente."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 65,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Um Analista de Tecnologia está configurando o storage físico local de um servidor de banco de dados corporativo. Ele dispõe de quatro discos rígidos idênticos de 2 TB cada. Buscando otimizar o desempenho de gravação e leitura por meio da divisão de blocos de dados entre todos os discos simultaneamente ( Striping), mas sem investir em nenhuma tolerância a falhas ou redundância física de espelhamento, ele decidiu implementar a arquitetura RAID 0. Caso um único disco físico, dentre os quatro integrantes desse arranjo RAID 0, sofra uma queima total e pare de funcionar, a consequência direta para a integridade dos dados lógicos armazenados no volume unificado será:",
+          "alternativas": [
+            "o sistema continuará operando normalmente em modo de degradação sem perdas.",
+            "a perda total e irreversível de todos os dados contidos no volume composto pelos quatro discos.",
+            "o espelhamento do RAID 0 assumirá o processamento copiando os dados do disco reserva.",
+            "apenas os dados do disco queimado serão perdidos, permanecendo os demais 6 TB intactos.",
+            "a paridade distribuída recalculará os bits perdidos restaurando as informações em tempo real."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "nav2026-assistente-social-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "NAV Brasil",
+      "cargo": "Assistente Social",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cns301-assistente-social-cns301-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-retificado-nav-brasil-2026.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 60,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Considere a seguinte situação. Em uma região do Brasil, casos de intoxicação de trabalhadores do campo por agrotóxicos passam a ser identificados, investigados e acompanhados por um serviço do SUS. Esse serviço desenvolve ações de vigilância, concede apoio técnico à rede de saúde e realiza articulação intersetorial. O serviço descrito corresponde a um",
+          "alternativas": [
+            "Centro de Referência de Assistência Social.",
+            "Unidade da Previdência Social responsável pela concessão de benefícios.",
+            "Centro de Referência em Saúde do Trabalhador.",
+            "Serviço Especializado em Engenharia de Segurança e em Medicina do Trabalho.",
+            "Órgão de fiscalização das relações de trabalho."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "nav2026-contador-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "NAV Brasil",
+      "cargo": "Contador",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cns305-contador-cns305-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-retificado-nav-brasil-2026.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 60,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Uma entidade mantém aplicações de renda fixa em uma instituição financeira. Para calcular o seu ganho, a entidade desconta a inflação da taxa de juros obtida na aplicação e obtém a taxa de juros",
+          "alternativas": [
+            "real.",
+            "eficiente.",
+            "nominal.",
+            "racional.",
+            "equivalente."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Em 01/01/2026, uma entidade realizou uma aplicação de R$ 100.000. A taxa de juros era de 6% ao mês e estes eram acrescidos mensalmente ao principal. Após dois meses, a entidade retirou, do saldo, R$ 30.000. Considerando que o rendimento da aplicação era por juros compostos, no mês seguinte à retirada, a receita de juros foi de",
+          "alternativas": [
+            "R$ 4.200,00.",
+            "R$ 4.920,00.",
+            "R$ 4.941.60.",
+            "R$ 6.741,60.",
+            "R$ 6.920,00."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 62,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Em 31/12/2025, uma entidade apresentava, em seu passivo, uma obrigação de R$ 80.000, com vencimento previsto para 31/12/2026. Considerando taxa de juros prefixada de 10% ao ano incluída no passivo, o valor presente da obrigação em 31/12/2025 era de",
+          "alternativas": [
+            "R$ 72.000.",
+            "R$ 72.727.",
+            "R$ 80.000.",
+            "R$ 87.273.",
+            "R$ 88.889."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 69,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Uma entidade do setor público realizou uma licitação na modalidade de diálogo competitivo para a contratação de um serviço. Com esse fim, a Administração Pública realizou diálogos com licitantes previamente selecionados mediante critérios objetivos, que apresentaram as suas propostas finais no primeiro contato, com o intuito de desenvolver uma alternativa capaz de atender às necessidades da entidade. De acordo com a Lei nº 14.133/2021, o procedimento adotado está incorreto, uma vez que",
+          "alternativas": [
+            "os licitantes devem ser previamente selecionados, mediante critérios subjetivos.",
+            "esta modalidade somente pode ser utilizada para a contratação de obras.",
+            "os licitantes devem apresentar a proposta final após o encerramento dos diálogos.",
+            "devem ser realizados diálogos com todos os licitantes disponíveis, sem seleção prévia.",
+            "o intuito deve ser o desenvolvimento de alternativa capaz de atender às necessidades de qualquer entidade."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 70,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Uma entidade do setor público celebrou contrato de fornecimento contínuo com prazo de cinco anos, por representar, no momento, maior vantagem econômica. De acordo com a Lei nº 14.133/2021, quando não dispuser de créditos orçamentários para sua continuidade, a Administração terá a opção de",
+          "alternativas": [
+            "utilizar créditos extraordinários.",
+            "modificar as condições do contrato.",
+            "solicitar ressarcimento do valor pago.",
+            "extinguir o contrato sem ônus.",
+            "extinguir o contrato mediante pagamento de multa."
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "nav2026-engenheiro-software-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "NAV Brasil",
+      "cargo": "Engenheiro de Software",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cns311-engenheiro-de-software-cns311-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-retificado-nav-brasil-2026.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 52,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "No desenvolvimento de um novo painel web para visualização de boletins meteorológicos, a equipe técnica optou por uma arquitetura em camadas padrão de mercado. A meta é garantir a separação de conceitos e facilitar manutenções futuras no código do sistema de navegação aérea. A arquitetura em camadas organiza o sistema de forma que cada camada forneça serviços para a camada imediatamente superior e utilize os serviços da camada imediatamente inferior. Assinale a afirmativa correta sobre as regras de acoplamento e dependência nesse padrão arquitetural clássico.",
+          "alternativas": [
+            "A camada de apresentação deve se comunicar diretamente com o driver de banco de dados, ignorando a lógica de negócio.",
+            "As alterações realizadas na camada de persistência de dados devem obrigatoriamente forçar a reescrita de toda a interface gráfica.",
+            "A camada de lógica de negócio deve idealmente ser independente dos detalhes de implementação da interface de usuário instalada.",
+            "Cada camada criada no sistema possui permissão irrestrita para acessar qualquer outra camada, sem respeitar a hierarquia.",
+            "O isolamento entre as camadas impede que o sistema funcione em servidores distintos, exigindo uma implantação monolítica."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Uma equipe ágil está trabalhando na construção de um novo módulo para o Sistema de Tarifação de Navegação Aérea utilizando o Framework Scrum. No início de uma iteração de duas semanas, o time precisa definir quais itens do catálogo geral de requisitos serão desenvolvidos imediatamente. O Scrum estabelece eventos formais específicos para inspeção e adaptação ao longo do ciclo de desenvolvimento. O evento do Scrum cujo objetivo principal é inspecionar o Product Backlog e criar o plano de trabalho e a meta para a iteração que se inicia é o",
+          "alternativas": [
+            "Daily Scrum.",
+            "Sprint Retrospective.",
+            "Sprint Review.",
+            "Sprint Planning.",
+            "Product Backlog Refinement."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 60,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Durante o processamento de uma transferência de plano de voo entre dois servidores regionais de controle de tráfego, ocorre uma falha catastrófica de energia elétrica exatamente após a exclusão do registro no Servidor A, mas antes da inserção correspondent e no Servidor B. Para evitar inconsistências graves e corrupção de dados em cenários de falha, os Sistemas de Gerenciamento de Banco de Dados (SGBD) devem suportar rigorosamente as propriedades ACID para suas transações. A propriedade ACID, responsável por garantir que uma operação seja executada em sua totalidade, ou seja, completamente desfeita, sem estados intermediários inválidos, é a(o)",
+          "alternativas": [
+            "Atomicidade.",
+            "Consistência.",
+            "Isolamento.",
+            "Durabilidade.",
+            "Disponibilidade."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 61,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Um ataque cibernético do tipo negação de serviço distribuída (DDoS) inundou os servidores web públicos do Serviço de Navegação Aérea, impedindo que pilotos civis conseguissem acessar o sistema externo para enviar ou consultar as notificações de planos de voo por mais de quatro horas. A segurança da informação assenta -se sobre três pilares fundamentais clássicos conhecidos como a Tríade CID. O princípio básico de segurança da informação que foi diretamente violado no incidente operacional descrito foi a(o)",
+          "alternativas": [
+            "Confidencialidade, pois os dados sigilosos dos planos de voo foram visualizados por pessoas não autorizadas na internet.",
+            "Integridade, uma vez que as tabelas de dados de coordenadas de voo foram corrompidas e apagadas definitivamente do storage.",
+            "Disponibilidade, dado que o sistema e seus recursos associados ficaram inacessíveis para os usuários legítimos quando necessários.",
+            "Autenticidade, posto que crackers utilizaram identidades falsas e fraudadas de pilotos para assinar digitalmente os relatórios.",
+            "Não repúdio, visto que o sistema perdeu a capacidade de auditar e comprovar legalmente a autoria das requisições web externas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 63,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Ao desenvolver o novo portal corporativo para consulta de escalas dos técnicos em meteorologia aeronáutica, o designer do Serviço de Navegação Aérea incluiu o atributo HTML alt em todas as imagens de gráficos meteorológicos estáticos disponibilizados na tela. As diretrizes do WCAG ( Web Content Accessibility Guidelines ) estabelecem padrões internacionais essenciais para assegurar a acessibilidade web para pessoas com deficiências. A justificativa técnica para o uso correto do atributo descritivo alt em imagens significativas é",
+          "alternativas": [
+            "ocultar a imagem de robôs de busca do Google para evitar que o site sofra penalidades de ranqueamento de SEO na internet.",
+            "permitir que softwares leitores de tela leiam em voz alta a descrição textual do conteúdo da imagem para usuários com deficiência visual.",
+            "aumentar a velocidade de download de redes de dados móveis compactando dinamicamente os pixels do formato PNG ou JPEG.",
+            "forçar o navegador a renderizar uma animação tridimensional interativa caso o servidor central de arquivos fique indisponível.",
+            "garantir a compatibilidade do código-fonte do portal web com impressoras matriciais industriais antigas de relatórios."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "nav2026-operador-torre-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "NAV Brasil",
+      "cargo": "Operador de Torre de Controle",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/cnm101-profissional-tecnico-de-navegacao-aerea-operador-de-torre-de-controle-cnm101-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-retificado-nav-brasil-2026.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Leia a notícia a seguir: Agenda Viva SP destaca aniversário do Museu da Imigração, Projeto Guri na BSP e exposição “Brasil em Todas” no MIS Experience Eventos gratuitos e acessíveis em diferentes regiões do estado celebram a história do futebol, a música e marcos históricos do Estado 23/06/2026 Da capital ao interior, a Agenda Viva SP desta semana apresenta uma seleção de experiências culturais que agitam a programação dos espaços da Secretaria da Cultura, Economia e Indústria Criativas do Estado de São Paulo. A agenda contempla iniciativas que valorizam o acesso à cultura para todos os públicos. (...) (https://www.cultura.sp.gov.br/sec_cultura/Institucional) No trecho “A agenda contempla iniciativas que valorizam o acesso à cultura para todos os públicos”, o verbo contemplar foi empregado com o sentido de",
+          "alternativas": [
+            "admirar atentamente as manifestações culturais promovidas.",
+            "incluir ações e atividades em sua programação.",
+            "financiar projetos culturais de artistas independentes.",
+            "avaliar a qualidade das atrações oferecidas ao público.",
+            "divulgar eventos gratuitos realizados na capital paulista."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o excerto a seguir: “Além do mais, o incidente da noite de núpcias serviu para deixá - lo mais alto, fazendo com que precisasse baixar a cabeça ao se dirigir à esposa. Lá de baixo, Eurídice aceitava. Ela sempre achou que não valia muito. Ninguém vale muito quando diz ao moço do censo que no campo de profissão ele deve escrever as palavras ‘Do lar’.” BATALHA, Martha. A vida invisível de Eurídice Gusmão. São Paulo: Cia das Letras, 2016. p. 7 (versão digital). A construção das imagens de “alto” e “baixo”, no trecho em questão, contribui para",
+          "alternativas": [
+            "enfatizar a diferença entre marido e esposa, apresentada como consequência natural do casamento.",
+            "sugerir, de forma implícita, uma relação de hierarquia e desvalorização social associada à personagem feminina.",
+            "demonstrar que a personagem interpretava sua posição no casamento como resultado de características pessoais.",
+            "apresentar as mudanças o corridas após o casamento como responsáveis pela aproximação emocional do casal.",
+            "criticar o modo como os formulários do censo classificam as ocupações exercidas pelas mulheres."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Leia o texto a seguir: “A alegação de empobrecimento lexical nas línguas de sinais surgiu a partir de uma situação sociolinguística marcada pela proibição e intolerância em relação aos sinais na sociedade e, em especial, na educação. Entretanto, sabe -se que tais línguas desenvolvem itens lexicais apropriados a situações em que são usados. À medida em que as línguas de sinais garantem maior aceitação, especialmente em círculos escolares, registra -se aumento no vocabulário denotando referentes técnicos.” QUADROS, Ronice Müller de. Língua de sinais brasileira: estudos linguísticos. Porto Alegre: Artmed, 2004. p. 35. Assinale a opção em que se reescreve o último período do texto acima, substituindo o conectivo em destaque por outro que não altere o sentido da frase.",
+          "alternativas": [
+            "Embora as líng uas de sinais garantam maior aceitação, especialmente em círculos escolares, registra -se aumento no vocabulário denotando referentes técnicos.",
+            "Como as línguas de sinais garantem maior aceitação, especialmente em círculos escolares, registra -se aumento no vocabulário denotando referentes técnicos.",
+            "Quanto mais as línguas de sinais garantem maior aceitação, especialmente em círculos escolares, mais se registra aumento no vocabulário denotando referentes técnicos.",
+            "Ainda que as línguas de sinais gara ntam maior aceitação, especialmente em círculos escolares, registra -se aumento no vocabulário denotando referentes técnicos.",
+            "Quando as línguas de sinais garantirem maior aceitação, especialmente em círculos escolares, registrar -se-á aumento no vocabulário denotando referentes técnicos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o trecho abaixo, da peça teatral “Auto da Compadecida” do escritor pernambucano Ariano Suassuna: JOÃO GRILO — Sei não, Chicó, acho q ue a bala pegou de raspão. Fiquei com a vista escura e quando acordei estava na rede e vocês iam me enterrar. Mas tenho uma notícia horrível para você. CHICÓ — João, você tendo escapado, é o que basta. O que é que há? JOÃO GRILO — Perdi o dinheiro. CHICÓ — Que dinheiro, rapaz? JOÃO GRILO — O testamento do cachorro. Quando acordei, meti a mão no bolso e não achei nada. CHICÓ — Pode ficar descansado, João, o dinheiro da sociedade está aqui. Eu tirei de seu bolso, antes de você se enterrar. JOÃO GRILO — Ah, cabra safado, com pena de mim, mas não se esqueceu do dinheiro, hem! SUASSUNA, Ariano. Auto da Compadecida. Rio de Janeiro: Nova Fronteira, 2002. p. 151-152 Assinale a opção em que se interpreta corretamente o uso do termo “cabra” na última fala de João Grilo.",
+          "alternativas": [
+            "Trata-se de um regionalismo nordestino.",
+            "Refere-se literalmente ao animal homônimo.",
+            "Indica relação de parentesco entre os personagens.",
+            "Revela profissão típica do sertão brasileiro.",
+            "Expressa desprezo de um personagem pelo outro."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Princípios da Administração Pública",
+          "enunciado": "João e Caio, empregados públicos da NAV Brasil, empresa pública, debateram a aplicabilidade ou não dos princípios da moralidade e da publicidade às entidades integrantes da Administração Pública Indireta. Considerando as disposições da Constituição Federal, é correto afirmar que os princípios da",
+          "alternativas": [
+            "moralidade e da publicidade, que gozam de assento implícito na Constituição Federal, se aplicam à Administração Pública Direta, mas n ão às entidades integrantes da Administração Pública Indireta.",
+            "moralidade e da publicidade, que gozam de assento expresso na Constituição Federal, se aplicam à Administração Pública Direta, mas não às entidades integrantes da Administração Pública Indireta.",
+            "moralidade, com assento expresso no texto constitucional, e da publicidade, que goza de assento implícito na Constituição Federal, se aplicam à Administração Pública Direta e Indireta.",
+            "moralidade e da publicidade, que gozam de assento expresso na Constituição Federal, se aplicam à Administração Pública Direta e Indireta.",
+            "moralidade e da publicidade, que gozam de assento implícito na Constituição Federal, se aplicam à Administração Pública Direta e Indireta."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "O Pres idente da República avalia o nome de três diferentes pessoas para ocupar o cargo de Presidente da empresa pública Alfa: I. André, detentor de experiência profissional de 12 anos, no setor privado, na área de atuação da empresa pública Alfa; II. Rafael, que já ocupou, por 4 anos, cargo de direção superior em empresa de porte e objeto social semelhante ao da empresa pública Alfa; III. Matheus, que já ocupou, por 5 anos, cargo em comissão equivalente a DAS-4 no setor público. Registre-se que os três candidato s são cidadãos brasileiros, de reputação ilibada e notório conhecimento, além de possuírem formação acadêmica compatível com o cargo e não estarem enquadrados em hipóteses de inelegibilidade. Nesse cenário, considerando as disposições da Lei nº 13.303/2016, é correto afirmar que a indicação para a Presidência da empresa pública Alfa poderá recair sobre",
+          "alternativas": [
+            "André, Rafael ou Matheus.",
+            "Matheus, mas não sobre André ou Rafael.",
+            "Matheus ou Rafael, mas não sobre André.",
+            "André ou Matheus, mas não sobre Rafael.",
+            "André ou Rafael, mas não sobre Matheus."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "O Código de Ética, Conduta e Integridade da NAV Brasil estabelece os princípios, valores e compromissos éticos que devem nortear os relacionamentos internos e com os segmentos da sociedade, fixando padrões de conduta que proporcionem lisura e transparência dos atos praticados na prestação de serviços da empresa. Nesse cenário, as seguintes condutas são esperadas por parte dos agentes públicos sujeitos ao Código de Ética, Conduta e Integridade da NAV Brasil, exceto uma. Assinale-a.",
+          "alternativas": [
+            "Realizar as tarefas de seu cargo ou função com diligência, zelo, rendimento, disciplina e economicidade, observando os dispositivos normativos, sejam eles legais ou infralegais.",
+            "Abster-se de se ap resentar embriagado no ambiente de trabalho ou, fora dele, limitado à cidade onde as atribuições são exercidas pelo agente público.",
+            "Agir com urbanidade nas relações de trabalho, inclusive com os usuários e consumidores dos produtos e serviços da NAV Brasil, bem como com o público em geral.",
+            "Resistir às pressões de superiores hierárquicos, de contratantes, interessados e outros que visem obter quaisquer favores, benesses ou vantagens ilícitas, em decorrência de ações ilegais ou imorais, denunciando su a ocorrência.",
+            "Comunicar ou representar, junto aos órgãos competentes da NAV Brasil, todo e qualquer ato ou fato que possa comprometer a ordem e a segurança nas operações das unidades organizacionais, ou que seja contrário ao interesse público, para as providências cabíveis."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "Interessado em assuntos relacionados à n avegação aérea, João buscou mais informações sobre a NAV Brasil, constatando que se trata de empresa pública sob a forma de sociedade anônima, com personalidade jurídica de direito privado e patrimônio próprio. Nesse cenário, considerando as disposições da Lei nº 13.903/2019, é correto afirmar que a NAV Brasil está vinculada ao Ministério",
+          "alternativas": [
+            "dos Transportes.",
+            "da Fazenda.",
+            "da Defesa.",
+            "da Integração e do Desenvolvimento Regional.",
+            "do Desenvolvimento, da Indústria, do Comércio e dos Serviços."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "Em março de 2026, Caio, agente público, agindo de forma imprudente, permitiu que determinada pessoa jurídica utilizasse bens públicos transferidos pela administração pública a entidade privada, mediante celebração de parceria, sem a obse rvância das formalidades legais e regulamentares aplicáveis à espécie. Por sua vez, Matheus, servidor público, em abril de 2026, ao agir de maneira negligente, liberou recursos de parceria firmada pela administração pública com entidade privada sem a estri ta observância das normas pertinentes. Nesse cenário, considerando as disposições da Lei nº 8.429/1992, é correto afirmar que Caio e Matheus",
+          "alternativas": [
+            "não praticaram atos de improbidade administrativa, pois, embora as condutas sejam formalmente típicas, não houv e a demonstração de que elas geraram lesividade relevante aos bens jurídicos tutelados.",
+            "praticaram atos de improbidade administrativa que atentaram contra os princípios da Administração Pública.",
+            "praticaram atos de improbidade administrativa que importaram enriquecimento ilícito.",
+            "praticaram atos de improbidade administrativa que causaram prejuízo ao erário.",
+            "não praticaram atos de improbidade administrativa, por ausência de dolo."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Atos Administrativos",
+          "enunciado": "Após a observância das formalidades legais aplicáveis à espécie, a Administração Pública, em processo administrativo de responsabilização deflagrado em detrimento da sociedade empresária Alfa, proferiu decreto condenatório, com a aplicabilidade de determinada sanção à referida e ntidade privada. Nesse cenário, considerando as disposições da Lei nº 12.846/2013, a Administração Pública aplicou, em detrimento da sociedade empresária Alfa, a sanção de",
+          "alternativas": [
+            "multa.",
+            "interdição temporária de direitos.",
+            "cassação do alvará de funcionamento.",
+            "proibição de contratar com o poder público pelo prazo de quatro anos.",
+            "proibição de receber benefícios ou incentivos fiscais ou creditícios pelo prazo de quatro anos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "À luz das disposições da Consolidação das Leis do Trabal ho (CLT), avalie as afirmativas a seguir. I. Não se distingue entre o trabalho realizado no estabelecimento do empregador, o executado no domicílio do empregado e o realizado à distância, desde que estejam caracterizados os pressupostos da relação de emprego. II. Os meios telemáticos e informatizados de comando, controle e supervisão se equiparam, para fins de subordinação jurídica, aos meios pessoais e diretos de comando, controle e supervisão do trabalho alheio. III. Qualquer alteração na estru tura jurídica da empresa não afetará os direitos adquiridos por seus empregados. Nesse cenário, considerando as disposições da Consolidação das Leis do Trabalho (CLT), está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "III, apenas.",
+            "I e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sequências e Padrões",
+          "enunciado": "Em uma operação de sequenciamento de tráfego aéreo, era esperado que as aeronaves A, B e C tivessem decolado na seguinte ordem: A (1º), B (2º) e C (3º). Apesar de as três aeronaves terem decolado em sequência, a ordem das decolagens foi outra, ou seja,",
+          "alternativas": [
+            "a aeronave A decolou depois da aeronave B, ou a aeronave B decolou depois da aeronave C.",
+            "a aeronave A decolou depois da aeronave B, e a aeronave B decolou depois da aeronave C.",
+            "a aeronave A decolou depois da aeronave B, ou depois da aeronave C.",
+            "a aeronave C decolou antes da aeronave A, ou antes da aeronave B.",
+            "a aeronave B não foi a segunda aeronave a decolar."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Uma empresa aeroviária segue um rígido protocolo de segurança para abastecer as suas aeronaves. Cada aeronave recebe a quantidade de combustível que a permita voar por um tempo seguro, dado pela soma: “o tempo previsto de viagem” + “10% do tempo previsto de viagem” + “45 minutos”. Se uma aeronave desta empresa recebeu combustível para o tempo seguro de 3h30min, então o tempo previsto de viagem da aeronave é de",
+          "alternativas": [
+            "2h20min.",
+            "2h28min.",
+            "2h30min.",
+            "2h40min.",
+            "2h45min."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "Um passageiro fará uma viagem com conexão, pegando dois voos. Uma análise de dados meteorológicos apontou que a probabilidade do primeiro voo atrasar é de 20% e que a probabilidade de o segundo voo atrasar é de 10%. Para todos os fins, considere os dois voos como eventos independentes. A probabilidade de ambos os voos deste passageiro atrasarem é de",
+          "alternativas": [
+            "30%.",
+            "20%.",
+            "10%.",
+            "3%.",
+            "2%."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Analítica",
+          "enunciado": "Os pontos A( -4,1) e B( -1,4) estão representados no plano cartesiano xy. Deseja -se encontrar um ponto M(x,y), tal que o ângulo 𝐴𝑀̂𝐵 meça 90 graus. Um ponto que satisfaz tal condição é",
+          "alternativas": [
+            "M(-4,4).",
+            "M(-3,4).",
+            "M(-2,3).",
+            "M(-2,1).",
+            "M(0,1)."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Uma aeronave realiza uma rota específica entre duas cidades em exatos 120 minutos, com uma velocidade média de cruzeiro de 750 km/h. Em um determinado voo, o controle de tráfego aéreo solicitou ao piloto seguir pela mesma rota, mas encurtando o tempo de vi agem para 100 minutos, por conta da aproximação de uma área de forte instabilidade no aeroporto de destino. O piloto conseguirá reduzir o tempo de viagem conforme solicitado, se a velocidade média de cruzeiro passar a ser de",
+          "alternativas": [
+            "625 km/h.",
+            "730 km/h.",
+            "770 km/h.",
+            "875 km/h.",
+            "900 km/h."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Proposições e Conectivos",
+          "enunciado": "Um aeroporto informou que todos os voos de ontem sofreram atrasos ou foram cancelados. Mais tarde, no entanto, verificou-se que tal informação era incorreta. Ou seja, no dia de ontem,",
+          "alternativas": [
+            "todos os voos estiveram livres de atrasos e cancelamentos.",
+            "pelo menos um voo não sofreu atraso e não foi cancelado.",
+            "mais de um voo não sofreu atraso, nem cancelamento.",
+            "nenhum voo sofreu atraso ou foi cancelado.",
+            "algum voo sofreu atraso e foi cancelado."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "Sabe-se que 2 3 da massa de uma aeronave de treinamento correspondem a 714 kg. Portanto, 1 7 da massa de tal aeronave corresponde a",
+          "alternativas": [
+            "68 kg.",
+            "89 kg.",
+            "102 kg.",
+            "153 kg.",
+            "306 kg."
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "seducsp2026-professor-matematica-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "SEDUC-SP",
+      "cargo": "Professor de Matemática",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-de-ensino-fundamental-e-ensino-medio-matematica-cns106-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-defintivo-seduc-sp-educacao-basica.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 11,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações e Sistemas",
+          "enunciado": "No início do Ensino Médio, pode ser necessária a retomada de habilidades essenciais de Álgebra, identificando dificuldades na transição da aritmética para a linguagem algébrica. Durante uma aula de revisão, um professor apresentou aos alunos a seguinte expressão: 𝑎 + 𝑏2 2 Ao solicitar que simplificassem a expressão, um estudante apresentou como resultado 𝑎 + 𝑏, justificando que havia \"cancelado o expoente 2 de 𝑏2 com o denominador 2\". Considerando possíveis ações para o desenvolvimento do pensamento algébrico, assinale a opção que apresenta a intervenção pedagógica mais adequada para a judar o aluno a perceber a incorreção de sua generalização.",
+          "alternativas": [
+            "Propor a memorização da regra de que ex poentes e denominadores pertencem a conjuntos numéricos distintos e, portanto, nunca podem interagir operacionalmente.",
+            "Sugerir o refazimento da simplificação utilizando a propriedade distributiva da radiciação, aplicando a raiz quadrada em ambos os termos para eliminar o expoente.",
+            "Propor a substituição de 𝑎 por 8 e 𝑏 por 4 tanto na expressão original quanto na simplificada pelo estudante, para verificar, com base nos resultados, que as expressões se equivalem e, portanto, a simplificação foi correta.",
+            "Propor a substituição de 𝑎 e 𝑏 por valores idênticos, tanto na expressão original quanto na simplificada pelo estudante, utilizando os resultados obtidos como justificativa para confirmar ou rejeitar a equivalência entre as expressões.",
+            "Propor a substituição de 𝑎 por 4 e 𝑏 por 8, tanto na expressão original quanto na simplificada pelo estudante, para verificar, com base nos resultados, se as expressões se equivalem."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Razão, Proporção e Porcentagem",
+          "enunciado": "Durante uma atividade prática, um professor apresentou a situação a seguir aos estudantes: Uma loja reduziu o preço de um artigo em 20%. Passado o período promocional, o gerente deseja retornar esse artigo ao seu preço original de venda. De quanto deve ser o aumento percentual aplicado sobre o preço promocional para que o artigo volte a custar o que custava antes? Um dos alunos respondeu prontamente que o aumento deveria ser de 20%, justificando que, se o preço caiu 20%, basta aumentar os mesmos 20% para anular o desconto e restabelecer o valor inicial. A argumentação do aluno está",
+          "alternativas": [
+            "errada, porque, como o preço promocional é menor que o preço original, deve -se aplicar sobre o promocional um aumento percentual também menor que 20%.",
+            "errada, porque o aumento percentual dependerá da diferença entre os preços original e promocional, nessa ordem.",
+            "errada, porque o percentual de aumento incidirá sobre valor menor do que o preço original, exigindo percentual maior do que 20% para recuperar o valor original.",
+            "errada, porque o aumento percentual correto depende da razão entre o preço original e o preço pr omocional, devendo ser calculado como a diferença entre esses preços dividida pelo preço original.",
+            "correta, porque um desconto de x% sempre é compensado por um acréscimo de x%."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "No e studo das Ciências e da Física no Ensino Médio, a notação científica é uma ferramenta essencial para a representação e a manipulação de medidas de grandezas físicas muito pequenas ou muito grandes. Durante uma aula de revisão de matemática instrumental, um professor solicitou que os alunos efetuassem a seguinte soma, apresentando o resultado final em notação científica: 2,8 × 104 + 4,2 × 103 Um estudante apresentou a seguinte resolução: Etapa 1: Como as partes decimais são 2,8 e 4,2, eu somo esses valores diretamente, obtendo 7,0. Etapa 2: Como os expoentes das potências de dez são 4 e 3, eu mantenho o maior expoente para preservar a ordem de grandeza, que é 4. Etapa 3: O resultado final da soma é 7,0 × 104. Ao analisar a resolução apresentada pelo estudante, o professor identifica corretamente que",
+          "alternativas": [
+            "as etapas apresentadas são corretas, mas o resultado obtido está errado devido a um erro de cálculo na soma decimal da Etapa 1.",
+            "as etapas apresentadas são corretas, mas o resultado obtido está errado porque o expoente final na Etapa 2 deveria ser a soma dos expoentes originais, ou seja, 7.",
+            "o resultado está errado porque, na Etapa 2, o correto seria multiplicar os expoentes das potências de dez, o que resultaria no expoente 12.",
+            "o resultado es tá errado porque, na Etapa 1, realizou -se a adição de parcelas que estão em ordens de grandeza diferentes, sendo necessário igualar os expoentes antes de somar as bases decimais.",
+            "as etapas apresentadas estão corretas e o resultado obtido também."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Sistemas Lineares",
+          "enunciado": "No estudo da resolução de Sistemas Lineares no Ensino Médio, a capacidade de associar a resolução algébrica de um sistema de equações lineares à sua representação geométrica no plano cartesiano é fundamental para a correta classificação das soluções. Durante uma aula de revisão, um professor apresentou o seguinte sistema aos seus alunos: {2𝑥 + 3𝑦 = 4𝑥 + 1,5𝑦 = 1 Um estudante tentou resolver o sistema utilizando o método da substituição e apresentou a seguinte análise: Etapa 1: Isolar 𝑥 na segunda equação, obtendo 𝑥 = 1 − 1,5𝑦. Etapa 2: Substituir essa expressão na primeira equação, obtendo 2(1 − 1,5𝑦) + 3𝑦 = 4, o que resulta em 2 −3𝑦 + 3𝑦 = 4 e, simplificando, encontra-se a igualdade 0 = 2. Etapa 3: Como a igualdade 0 = 2 é impossível de se verificar, conclui-se que, graficamente, as duas equações representam retas que se cruzam em um ponto cujas coordenadas não pertencem aos números reais. Ao analisar a resolução apresentada pelo estudante, considerando a relação entre a representação algébrica e a interpretaçã o geométrica de sistemas lineares, o professor identifica que",
+          "alternativas": [
+            "o resultado está errado porque, na Etapa 2, ocorreu um erro na aplicação da propriedade distributiva, invalidando a simplificação que levou à eliminação da variável 𝑦.",
+            "o resultado está errado porque, na Etapa 3, a obtenção de uma contradição numérica (0 = 2) indica algebricamente que o sistema é impossível; geometricamente, isso corresponde a duas retas paralelas distintas, sem ponto de interseção.",
+            "as etapas apresentadas são corretas, mas o resultado obtido está errado porque a igualdade 0 = 2 ind ica que o sistema possui infinitas soluções e as retas são coincidentes.",
+            "as etapas apresentadas são corretas, mas o resultado obtido está errado porque o correto seria aplicar o método da adição, o qual demonstraria que o sistema é possível e determinado.",
+            "as etapas apresentadas estão corretas e o resultado obtido também."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Regra de Três e Problemas Aritméticos",
+          "enunciado": "Para realizar a manutenção da rede elétrica de um município, uma empresa contratou uma equipe de técnicos que trabalha mantendo um ritmo de produção constante e diretamente proporcional ao tempo trabalhado. No planejamento inicial, estimou-se que a equipe seria capaz de instalar um total de 120 novos postes de iluminação ao longo de uma jornada contínua de exatas 8 horas de trabalho. Contudo, após as primeiras 3 horas de trabalho no ritmo previsto, ocorreu uma falha mecânica em um d os caminhões de suporte. Devido a esse imprevisto, a produtividade da equipe foi imediatamente reduzida pela metade e se manteve nesse nível nas horas restantes necessárias para a conclusão do serviço. Ainda assim, a tarefa foi totalmente cumprida. Considerando todo o período de trabalho, a equipe teve de trabalhar por, exatamente,",
+          "alternativas": [
+            "8 horas.",
+            "10 horas.",
+            "11 horas e 30 minutos.",
+            "13 horas.",
+            "16 horas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 20,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Conjuntos Numéricos",
+          "enunciado": "Durante uma aula de revisão sobre propriedades dos radica is, o professor apresentou a seguinte expressão numérica para a turma: √62 + 82 Um estudante resolveu a expressão aplicando o seguinte raciocínio: “ Como a raiz quadrada é a operação inversa da potenciação, eu posso cancelar o expoente 2 de cada número com a raiz. Assim, a expressão simplificada resulta em 6 + 8, que é igual a 14”. Considerando as propriedades operatórias da radiciação, o procedimento do estudante está",
+          "alternativas": [
+            "correto, pois a radiciação possui propriedade distributiva em relação à adição de termos sob o mesmo radical.",
+            "correto, pois a ordem em que as operações de potenciação e radiciação são realizadas não altera o valor numérico final do resultado.",
+            "errado, porque tal cancelamento só poderia ser realizado se os expoentes das duas parcelas fossem números ímpares.",
+            "errado, porque o resultado correto deveria ser obtido multiplicando as bases 6 x 8 = 48 e extraindo a raiz quadrada desse produto.",
+            "errado, porque tal cancelamento do expoente com o índice da raiz, como foi feito, só é válido se a operação principal entre as potências for a multiplicação ou a divisão, e não a adição."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Um professor apresentou aos estudantes uma caixa no formato de um paralelepípedo retângulo com dimensões de 20 cm de comprimento, 10 cm de largura e 10 cm de altura. O professor informou que o volume dessa caixa é de exatamente 2 000 cm³ (ou 2 litros). Em seguida, o professor propôs o seguinte desafio: “ Se fabricarmos uma nova caixa aumentando a largura em 50% do seu valor original e com o comprimento reduzido à metade, mas mantendo a altura, o que acontecerá com o volume original?”. Um estudante respondeu imediatamente: “ O volume permanecerá igual a 2 litros.”. A declaração do aluno está",
+          "alternativas": [
+            "certa, porque o aumento na largura compensa a redução no comprimento.",
+            "errada, porque o volume da nova caixa será 1 000 cm3 menor.",
+            "errada, porque o volume da nova caixa será 500 cm3 menor.",
+            "errada, porque o volume da nova caixa será 500 cm3 maior.",
+            "errada, porque o volume da nova caixa será 1 000 cm3 maior."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Durante uma aula de Geometria Espacial sobre volumes de sólidos de revolução, o professor apresentou o desenho de um reservatório em formato de cone reto. Ele informou à turma que o raio da base desse cone mede 6 metros e que a sua geratriz (a distância do vértice até qualquer ponto da circunferência da base) mede 10 metros. Em seguida, solicitou que os estudantes calculassem o volume máximo de água que esse reservatório poderia conter. Um estudante apresentou rapidamente a seguinte resolução: Como o volume do cone é dado por um terço da área da base multiplicada pelo seu comprimento lateral, o cálculo de sua capacidade máxima, em m3, será: 𝑉 = 13 ∙ π ∙ 𝑟2 ∙ 𝑔 𝑉 = 13 ∙ π ∙ 62 ∙ 10 𝑉 = 120 ∙ π As opções apresentam possibilidades de intervenção docente. Considerando as relações métricas e a fórmula do volume do cone reto, assinale aquela que indica a intervenção pedagogicamente mais adequada para que o estudante perceba e corrija o erro apresentado, sem abrir mão da correção matemática.",
+          "alternativas": [
+            "Validar o resultado de 120𝜋 m3, posto que o estudante identificou corretamente que a geratriz e a altura são segmentos equivalentes em qualquer sólido que possua uma base circular regular.",
+            "Orientar o estudante a representar a seção meridiana do cone, para que identifique que o raio, a altura e a geratriz formam um triângulo retângulo. Em seguida, estimulá -lo a aplicar o Teorema de Pitágoras para determinar a altura do cone (8 m) e utilizá-la na fórmula do volume, concluindo que a capacidade máxima do reservatório é 96𝜋 m3.",
+            "Mostrar ao estudante que há um erro devido ao não uso da aproximação de pi por 3.",
+            "Indicar ao estudante que a fórmula do volume do cone utiliza a altura, e não a geratriz, orientando -o apenas a substituir corretamente essa grandeza na expressão do volume.",
+            "Alertar o estudante de que o volume de um cone depende exclusivamente da área de sua superfície lateral, sugerindo que ele calcule primeiro a planificação do setor circular para encontrar o volume por meio do perímetro da base."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Argumentação Lógica",
+          "enunciado": "Um professor de Matemática da 3ª série do Ensino Médio propôs o seguinte desafio de raciocínio lógico para a sua turma, antes d e introduzir qualquer fórmula matemática: \"Uma mãe tem dois filhos (sendo a chance de nascer menino ou menina de 50% para cada um). Se eu disser a vocês que um dos filhos dessa mãe é um menino, qual é a probabilidade de o outro filho também ser um menino?\" Ao abrir a discussão, o professor coletou as justificativas de três estudantes: Estudante 1: A chance é de 50%, pois o nascimento de um filho não influencia o do outro. São eventos independentes. Estudante 2: A chance é de 1/3, porque o espaço amostral de dois filhos tem 4 possibilidades. Sabendo que um é menino, eliminamos a chance de serem duas meninas, restando 3 possibilidades, onde apenas 1 é favorável (dois meninos). Estudante 3: Se o enunciado disser, por exemplo, que “o filho mais velho é um menino”, aí a resposta do Estudante 1 estaria certa. Portanto, a forma como a informação é apresentada influencia a probabilidade calculada. O professor pretende aproveitar as diferentes justificativas para promover uma discussão conceitual, valorizando os raciocínios apresentados e corrigindo eventuais equívocos, sem encerrar prematuramente o debate. Considerando esse objetivo, assinale a opç ão que apresenta a intervenção pedagógica mais adequada.",
+          "alternativas": [
+            "Validar apenas a resposta do Estudante 1, afirmando que a independência entre os nascimentos garante que a informação sobre um dos filhos não altera o espaço amostral, tornando sempre correta a probabilidade de 50%.",
+            "Validar apenas a resposta do Estudante 2, por ter apresentado corretamente o cálculo da probabilidade para o problema proposto, desconsiderando a observação do Estudante 3 por tratar de uma situação diferente da apresentada no enunciado.",
+            "Validar o cálculo apresentado pelo Estudante 2 e, concomitantemente, valorizar a observação do Estudante 3, aproveitando-a para discutir como diferentes formas de fornecer a informação podem alterar a condição do problema e, consequentemente, a probabilidade calculada.",
+            "Orientar os alunos a desconsiderar o raciocínio combinatório e resolver o problema por frequência relativa, simulando nascimentos aleatórios em experimentos repetidos, sem utilização de modelos teóricos de probabilidade.",
+            "Esclarecer que o problema não possui solução, pois seria indispensável informar qual dos filhos é o menino para que a probabilidade pudesse ser determinada."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Durante uma aula de Geometria Espacial, um professor apresentou a seguinte situação: \"Uma caixa no formato de paralelepípedo reto -retângulo tem comprimento de 8 cm, largura de 6 cm e altura de 24 cm. Qual é a medida da diagonal espacial dessa caixa?\" Um estudante apresentou a seguinte resolução: Etapa 1: \"Vou usar o Teorema de Pitágoras na face frontal da caixa, que tem lados 8 cm e 24 cm. A diagonal dessa face é √82 + 242 = √64 + 576 = √640 .\" Etapa 2: \"Essa diagonal já liga dois vértices opostos da caixa, então esse é o valor da diagonal espacial.\" Considerando as relações métricas em paralelepípedos, assinale a opção que apresenta a melhor intervenção pedagógica para fazer o aluno perceber e corrigir o erro de sua resolução.",
+          "alternativas": [
+            "Mostrar ao estudante que o erro está na Etapa 1, pois a diagonal da face frontal deveria ser calculada com os lados 6 cm e 24 cm, e não 8 cm e 24 cm.",
+            "Orientar o estudante a identificar que a diagonal espacial liga dois vértices opostos que não pertencem à mesma face, e que sua determinação exige a aplicação do Teorema de Pitágoras em duas etapas.",
+            "Orientar o estudante a somar as três dimensões da caixa e extrair a raiz quadrada do resultado, obtendo √8 + 6 + 24 = √38 cm como medida da diagonal espacial.",
+            "Validar a resolução do estudante, esclarecendo que a diagonal de qualquer face retangular do paralelepípedo é equivalente à diagonal espacial quando a face escolhida contém o maior par de dimensões da caixa.",
+            "Informar ao estudante que, em um paralelepípedo reto - retângulo, a diagonal espacial sempre coincide com a maior aresta do sólido, e que, portanto, a diagonal da caixa mede 24 cm."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Funções do 1º e 2º Grau",
+          "enunciado": "Durante uma aula sobre funções polinomiais do 2º grau, um professor apresentou a seguinte função à turma: f(x) = x² − 6x + 9 O professor perguntou: \" Quantas raízes reais essa função possui?\". Um estudante respondeu: \" Nenhuma, porque o discriminante é igual a zero e, quando Δ = 0, a função não possui raízes reais.\". Considerando a relação entre o discriminante e a natureza das raízes de uma função quadrática, a afirmação do estudante está",
+          "alternativas": [
+            "correta, pois Δ = 0 indica que a parábola não intercepta o eixo x em nenhum ponto, confirmando a ausência de raízes reais.",
+            "errada, pois Δ = 0 indica que a função possui duas raízes reais distintas, que neste caso, são x = 3 e x = −3.",
+            "errada, pois Δ = 0 indica que a função possui infinitas raízes reais, uma vez que a parábola coincide inteiramente com o eixo x nessa condição.",
+            "errada, pois o discriminante desta função é negativo (Δ = −9), o que confirma que ela não possui raízes reais, e não Δ = 0 como afirmou o estudante.",
+            "errada, pois Δ = 0 indica que a função possui exatamente uma raiz real, chamada raiz dupla, que neste caso, é x = 3, ponto em que a parábola é tangente ao eixo x."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Função Exponencial e Logarítmica",
+          "enunciado": "Durante uma aula sobre funções exponenciais, um professor apresentou a seguinte função à turma: f(x) = (1/2)ˣ O professor perguntou: \"Como é o comportamento desta função? Ela é crescente ou decrescente?\" Um estudante respondeu: \" É decrescente porque a base é ½. Sempre que a base for menor que 1, a função será decrescente.\". Considerando as propriedades das funções exponenciais, a afirmação do estudante está errada, pois",
+          "alternativas": [
+            "embora a função seja de fato decrescente, a justificativa apresentada está incompleta: a condição correta para que uma função exponencial seja decrescente é que a base seja um número positivo menor que 1 (0 < b < 1), e não simplesmente menor que 1, pois bases negativas não são admitidas na definição de função exponencial real.",
+            "a regra enunciada pelo estudante só é válida para bases fracionárias cujo numerador seja 1, não se aplicando a bases decimais menores que 1, como 0,3 ou 0,7.",
+            "funções exponenciais são sempre crescentes, independentemente da base, uma vez que o crescimento é uma propriedade definidora das funções desse tipo.",
+            "a afir mação do estudante só seria válida se a base fosse negativa. Quando a base é positiva e menor que 1, a função é decrescente apenas para valores negativos de x.",
+            "a condição correta para que uma função exponencial seja decrescente é que a base seja maior que 1, e não menor. O estudante inverteu a regra."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "O estudo das funções trigonométricas no Ensino Médio envolve não apenas o reconhecimento de seus gráficos, mas também a capacidade de analisar propriedades algébricas sem necessariamente recorrer à representação visual. Considere a função real de variável real definida por: 𝑓(𝑥) = 2 ∙ 𝑠𝑒𝑛(𝑥) + 1 Sobre essa função, é correto afirmar que",
+          "alternativas": [
+            "existe um número real 𝑎, maior que 𝜋 e menor que 2𝜋, tal que 𝑓(𝑎) < 0.",
+            "existe um número real 𝑎, maior que 2 𝜋 e menor que 3 𝜋, tal que 𝑓(𝑎) < 0.",
+            "se 𝑓(𝑎) = 1, então 𝑎 = 0.",
+            "se 𝑓(𝑎) = 𝑓(𝑏), então 𝑎 − 𝑏 é um múltiplo inteiro de 2𝜋.",
+            "𝑓(−𝑎) = −𝑓(𝑎)."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Durante uma aula de Geometria Espacial sobre troncos de sólidos, um professor apresentou o seguinte problema à turma: \"Uma pirâmide regular reta de altura 𝐻 e volume 𝑉 é seccionada por um plano paralelo à sua base, cortando a pirâmide exatamente na metade de sua altura (ou seja, a uma distância 𝐻 2 do vértice). Esse corte divide o sólido original em duas partes: uma pirâmide menor no topo e um tronco de pirâmide na base. Qual é o volume do tronco de pirâmide resultante?\" Um estudante respondeu imediatamente: “Se o corte foi feito exatamente na metade da altura, a pirâmide do topo ficou com metade do volume original ( 𝑉 2). Portanto, o volume do tronco de pirâmide na base também é igual à outra metade, ou seja, 𝑉 2.” Considerando as propriedades de semelhança de sólidos geométricos, a justificativa apresentada pelo estudante está",
+          "alternativas": [
+            "correta, pois a altura e o volume de pirâmides semelhantes variam de forma diretamente proporcional, o que garante que a redução da altura pela metade resulte na redução do volume também pela metade.",
+            "errada, pois quando a altura de um a pirâmide é reduzida à metade, a área da sua base é reduzida a um quarto ( 1 4); como o volume depende apenas da área da base, o volume do tronco será de 3 4 𝑉.",
+            "errada, pois a razão entre os volumes de dois sólidos semelhantes é igual ao quadrado da razã o de semelhança; assim, o volume da pirâmide menor é 𝑉 4 e o do tronco é 3 4 𝑉.",
+            "errada, pois a razão entre os volumes de dois sólidos semelhantes é igual ao cubo da razão de semelhança; assim, o volume da pirâmide menor é 𝑉 8 e o do tronco de pirâmide é 7 8 𝑉.",
+            "errada, pois o volume de um tronco de pirâmide regular reta depende exclusivamente do formato poligonal de suas bases, sendo impossível determinar uma relação de volume sem conhecer o número de lados da base da pirâmide original."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Geometria Plana",
+          "enunciado": "Durante uma aula de Trigonometria, o professor desenhou no quadro um triângulo ret ângulo 𝐴𝐵𝐶, cuja hipotenusa é o segmento 𝐴𝐵. O professor definiu o ângulo interno no vértice 𝐴 como 𝛼 e o ângulo interno no vértice 𝐵 como 𝛽. Em seguida, pediu para a turma determinar a expressão correspondente ao seno de 𝛽. Um estudante apresentou a seguinte resposta: “Como o seno de um ângulo é sempre a razão entre o cateto oposto e a hipotenusa, o seno de 𝛽 será dado pelo comprimento do cateto 𝐴𝐶 dividido pelo comprimento de 𝐴𝐵.” Considerando as definições das razões trigonométricas no triângulo retângulo, a afirmação do estudante está",
+          "alternativas": [
+            "correta, pois o seno de um ângulo agudo é formalmente definido como a razão entre o comprimento do cateto oposto a esse ângulo e o comprimento da hipotenusa, e o segmento 𝐴𝐶 representa o cateto oposto ao ângulo 𝛽.",
+            "correta, pois em qualquer triângulo retângulo o seno de um ângulo agudo é obtido dividindo-se o comprimento do menor cateto pelo comprimento da hipotenusa, sendo 𝐴𝐶 o menor lado do triângulo.",
+            "errada, pois o cateto oposto ao ângulo 𝛽 é o segmento 𝐵𝐶, o que torna a expressão correta para o seno de 𝛽 igual a 𝐵𝐶 𝐴𝐵.",
+            "errada, pois a razão apresentada pelo estudante corresponde, na verdade, à definição do cosseno do ângulo 𝛽, e não ao seu seno.",
+            "errada, porque a hipotenusa de um triângulo retângulo com ângulo reto no vértice 𝐶 é dada pelo segmento 𝐴𝐶, invalidando o denominador da razão construída pelo estudante."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Equações de 1º e 2º Grau",
+          "enunciado": "Ao corrigir uma atividade de álgebra elementar, uma professora de Matemática constatou que diversos alunos registraram a seguinte igualdade: (𝑎 + 𝑏)2 = 𝑎2 + 𝑏2 Sabendo que essa igualdade não é válida para a maioria dos números reais, o equívoco cometido pelos estudantes decorre da extensão indevida da seguinte propriedade algébrica válida:",
+          "alternativas": [
+            "distributividade da potenciação em relação ao produto.",
+            "distributividade da potenciação em relação à adição.",
+            "associatividade da adição no conjunto dos números reais.",
+            "comutatividade da operação de potenciação.",
+            "existência do elemento neutro da multiplicação."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Em uma aula de Estatística Descritiva, um professor de Matemática pediu a uma aluna q ue calculasse a média e o desvio padrão de um conjunto de dados. A aluna obteve média igual a 6,0 e desvio padrão igual a 1,50. Em seguida, o professor propôs aumentar em 2 unidades cada um dos valores desse conjunto de dados e pediu para que a média e o desvio padrão fossem recalculados. Considerando que a aluna efetuou corretamente os cálculos, os valores encontrados para a média e para o desvio padrão foram, respectivamente,",
+          "alternativas": [
+            "6,0 e 1,50.",
+            "8,0 e 1,50.",
+            "8,0 e 2,25.",
+            "8,0 e 3,50.",
+            "12,0 e 3,00."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Progressão Aritmética (PA) e Progressão Geométrica (PG)",
+          "enunciado": "Três estudantes apresentaram diferentes procedimentos para calcular a soma dos dezoito primeiros termos de uma Progressão Geométrica de razão 7. Estudante 1: Calcule a diferença entre o décimo nono termo e o primeiro termo. Divida essa diferença por 6. Estudante 2: Calcule a diferença entre o décimo oitavo termo e o primeiro termo. Divida essa diferença por 6. Estudante 3: Calcule a diferença entre o décimo nono termo e o primeiro termo. Divida essa diferença por 7. Considerando as propriedades das progressões geométricas, é correto afirmar que",
+          "alternativas": [
+            "apenas o estudante 1 está certo.",
+            "apenas o estudante 2 está certo.",
+            "apenas os estudantes 1 e 2 estão certos.",
+            "apenas os estudantes 1 e 3 estão certos.",
+            "todos os estudantes estão certos."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "seducsp2026-professor-portugues-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "SEDUC-SP",
+      "cargo": "Professor de Língua Portuguesa",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/professor-de-ensino-fundamental-e-ensino-medio-lingua-portuguesa-cns105-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-defintivo-seduc-sp-educacao-basica.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 11,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Educação de SP está com vagas abertas em processos seletivos para professores dos Ensinos Fundamental, Médio e Médio Técnico Podem participar profissionais com formação em cursos normal superior, licenciatura, bacharelado e tecnólogos, além de especialistas com notório saber e experiência comprovada A Secretaria da Educação do Estado de São Paulo (Seduc -SP) está com dois processos seletivos abertos para professores do Ensino Fundamental (anos iniciais e finais) e Ensino Médio. O cadastro deve ser realizado on -line no site da Fundação Getúlio Vargas e a taxa de inscrição é de R$ 60 para cada concurso. Há vagas nas 91 unidades regionais de ensino para atuação no ano letivo de 2027. https://www.educacao.sp.gov.br Na notícia, são apresentadas informações relativas à seleção de professores pela Seduc-SP. No contexto do subtítulo, a expressão “além de” introduz uma informação com valor semântico de",
+          "alternativas": [
+            "ênfase.",
+            "adição.",
+            "ressalva.",
+            "retificação.",
+            "restrição."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Alguns animais até desenvolveram certas expressões que parecem quase uma oração: são palavras especiais de agradecimento pela luz do sol, e outras em louvor aos ventos que sopram, às chuvas, à terra, à vegetação, à luz, ao calor, ao alimento, aos aromas e à água. E há, inclusive, palavras de saudade. Mas em nenhum idioma dos animais existem palavras cuja intenção seja rebaixar ou debochar. Isso, não. OZ, Amós. De repente nas profundezas do bosque. São Paulo: Cia das Letras, 2017. p. 107 O emprego da palavra \"até\" na expressão \"Alguns animais até desenvolveram certas expressões\" contribui para a construção de sentido do trecho porque",
+          "alternativas": [
+            "reforça a ideia de que o d esenvolvimento de formas de expressão pelos animais constitui a consequência natural de sua convivência com os seres humanos.",
+            "leva o leitor a inferir que apenas algumas espécies alcançaram um estágio completo de desenvolvimento da linguagem, em oposição às demais.",
+            "sugere que o fato mencionado é inesperado ou surpreendente, contrariando uma expectativa normalmente atribuída aos animais.",
+            "pressupõe que a comunicação dos animais se organiza de maneira equivalente à linguagem humana, diferenciando-se apenas pelo vocabulário empregado.",
+            "indica que a capacidade de elaborar expressões semelhantes a uma oração representa a etapa final de um processo evolutivo da linguagem animal."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Os gêneros do discurso organizam a nossa fala da mesma maneira que a organizam as formas gramaticais (sintáticas). Aprendemos a moldar nossa fala às formas do gênero e, ao ouvir a fala do outro, sabemos de imediato, bem nas primeiras palavras, pressentir-lhe o gênero, adivinhar -lhe o volume (a ex tensão aproximada do todo discursivo), a dada estrutura composicional, prever -lhe o fim, ou seja, desde o início, somos sensíveis ao todo discursivo que, em seguida, no processo da fala, evidenciará suas diferenciações. BAKHTIN, M. e VOLOCHINOV, V. N. Marxismo e filosofia da linguagem. São Paulo: Hucitec, 2004. De acordo com a passagem, a organização da linguagem por meio de gêneros do discurso contribui para um pensamento linguístico",
+          "alternativas": [
+            "previsível.",
+            "normativo.",
+            "individual.",
+            "espontâneo.",
+            "subjetivo."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Nos Anos Finais do Ensino Fundamental, o adolescente/jovem participa com maior criticidade de situações comunicativas diversificadas, interagindo com um número de interlocutores cada vez mais amplo, inclusive no contexto escolar, no qual se amplia o número de professores responsáveis por cada um dos componentes curriculares. Essa mudança em relação aos Anos Iniciais favorece não só o aprofundamento de conhecimentos relativos às áreas, como também o su rgimento do desafio de aproximar esses múltiplos conhecimentos. A continuidade da formação para a autonomia se fortalece nessa etapa, na qual os jovens assumem maior protagonismo em práticas de linguagem realizadas dentro e fora da escola. https://basenacionalcomum.mec.gov.br/abase/#fundamental/lingua -portuguesa- no-ensino-fundamental-anos-finais-praticas-de-linguagem-objetos-de- conhecimento-e-habilidades No trecho, funcionam como elementos de coesão textual os substantivos:",
+          "alternativas": [
+            "adolescente e interlocutores.",
+            "situações e contexto.",
+            "professores e componentes.",
+            "mudança e etapa.",
+            "continuidade e protagonismo."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Ler é um movimento externamente passivo - mas um movimento, porque mexe com as imagens interiores, guardadas, reprimidas, acrescentando-lhes outras e transformando as que o leitor já traz consigo. Escrever, por sua vez, é um movimento externamente ativo, fazendo imagens, trazendo algumas do fundo e dando -lhes forma, trazendo outras do mundo e modificando-lhes a forma - na direção de um estilo pessoal. BERNARDO, Gustavo. Redação inquieta. São Paulo: Rocco, 2010. p. 258 Na dicotomia entre ler e escrever, o autor estabelece uma relação aparentemente paradoxal entre leitura e movimento no início do texto. Assinale a opção em que essa relação é interpretada adequadamente.",
+          "alternativas": [
+            "O autor associa a leitura a um movimento interio r, em contraste com a escrita como ação de materialização das ideias.",
+            "A ideia de movimento é utilizada para aproximar leitura e escrita, sugerindo que ambas mobilizam os mesmos processos de construção de sentidos.",
+            "O paradoxo decorre da oposição ent re a imobilidade física do ato de ler e as transformações subjetivas produzidas pela interação do leitor com o texto.",
+            "O aparente contraste entre passividade e movimento busca destacar a dependência da leitura em relação às experiências previamente vividas pelo leitor.",
+            "A caracterização da leitura como movimento permite ao autor enfatizar a dimensão criativa do leitor, equiparando sua atuação à do escritor na produção do texto."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Copa 2026: SP tem alunos na rede estadual de 43 países classificados Rede pública estadual tem mais de 5 mil alunos que nasceram em países classificados para a Copa Em clima de Copa do Mundo, a rede pública estadual de São Paulo concentra alunos nascidos em 43 dos 48 países convocados para o campeonato mundial, segundo informações reunidas pela Secretaria Estadual de Educação (Seduc). Dentre os 48 países convocados, o estado de São Paulo tem 5.366 estudantes nascidos em 43 deles, incluindo o Brasil. Só não há estudantes nascidos em Curaçao, Noruega, Uzbequistão, República Tcheca e Suécia. https://www.metropoles.com/sao-paulo/copa-do-mundo-sp-alunos-estadual O conectivo segundo poderia ser substituído, sem prejuízo de sentido, no contexto do 1o parágrafo por",
+          "alternativas": [
+            "assim como.",
+            "por meio de.",
+            "a partir de.",
+            "como.",
+            "consoante."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "Leia o início de um conto da autora Lygia Fagundes Telles. A disciplina do amor Foi na França, durante a segunda grande guerra: um jovem tinha um cachorro que, todos os dias, pontualmente, ia esperá -lo voltar do trabalho. Postava-se na esquina, um pouco antes das seis da tarde. Assim que via o dono, ia correndo ao seu encontro e, na maior alegria, acompanhava -o com seu passinho saltitante de volta à casa. A vila inteira já conhecia o cachorro e as pessoas que passavam faziam-lhe festinhas e ele correspondia, chegava até a correr todo animado atrás dos mais íntimos para logo voltar atento ao seu posto e ali ficar sentado até o momento em que seu dono apontava lá longe. TELLES, Lygia Fagundes. A disciplina do amor. Rio de Jane iro, Nova Fronteira, 1980.p. 99-100. Considerando o procedimento organizacional dos textos em introdução, desenvolvimento e conclusão, é correto afirmar que a escolha da autora pela construção, que inicia o primeiro período do texto, deve-se à sua função de",
+          "alternativas": [
+            "destacar o enquadramento espaço-temporal da narrativa.",
+            "expressar um julgamento do narrador.",
+            "indicar a causa dos acontecimentos narrados.",
+            "retomar uma informação já mencionada.",
+            "reproduzir uma marca típica da oralidade."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Funções da Linguagem",
+          "enunciado": "Leia o fragmento da canção “Carnavália”, dos Tribalistas. Vem pra minha ala que hoje a nossa escola vai desfilar Vem fazer história que hoje é dia de glória nesse lugar Vem comemorar, escandalizar ninguém Vem me namorar, vou te namorar também Vamos pra avenida desfilar a vida, carnavalizar Repique tocou O surdo escutou E o meu corasamborim Cuíca gemeu, será que era meu, quando ela passou por mim? https://www.letras.mus.br/tribalistas/64153 Um dos mecanismos de produtividade linguística, especi almente nos textos literários, é a criação estilística de neologismos, ou seja, de novas palavras por meio de processos já previstos na Língua. Nesse sentido, ao criar “corasamborim”, os autores da canção promovem",
+          "alternativas": [
+            "a fusão entre palavras dos principais campos semânticos do texto: o amoroso e o carnavalesco.",
+            "a substituição de um vocábulo ligado ao universo afetivo por outro pertencente ao campo musical.",
+            "a formação de uma palavra composta que reproduz a organização sintática de uma expressão metafórica.",
+            "a associação entre elementos do carnaval e do samba, priorizando a caracterização dos instrumentos musicais.",
+            "a criação de um vocábulo cuja principal função é ampliar a sonoridade do texto por meio da repetição fonética."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Tipos de Discurso",
+          "enunciado": "ー Final, final mesmo, Samuel, é só quando eu baixar teu caixão na cova. Ainda dá tempo. ーTu sonha muito, Chico. ー Foi a morte que me ensinou. O tempo de sonhar é em cima da terra. ACIOLI, Socorro. A cabeça de santo. São Paulo: Cia das Letras, 2014. p. 148. Nesse trecho literário, a oposição metafórica construída entre “cova” e “em cima da terra” pode ser traduzida pela seguinte oposição:",
+          "alternativas": [
+            "passado x futuro.",
+            "permanência x mudança.",
+            "morte x vida.",
+            "realidade x imaginação.",
+            "despedida x esperança."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Febre das canetas emagrecedoras e até crimes colocam medicamentos no alvo da Anvisa A diretoria colegiada da Agência Nacional de Vigilância Sanitária (Anvisa) se prepara para deliberar, no próximo dia 29, sobre uma nova instrução normativa que estabelece requisitos técnicos rigorosos para a manipulação das chamadas “canetas emagrecedoras”. Esta nova norma é peça -chave do plano de ação anunciado pela autarquia no início deste mês, desenhado para fortalecer as estratégias de fiscalização e o controle sanitário sobre esses compostos, que têm dominado o debate sobre saúde e estética no país. Adaptado de https://www.nsctotal.com.br/noticias/ Nos dois parágrafos da notícia, o pronome relativo que introduz orações adjetivas com funções distintas. Considerando a relação entre essas orações e seus antecedentes, assinale a opção que explica adequadamente o emprego da vírgula apenas na segunda ocorrência do pronome.",
+          "alternativas": [
+            "No primeiro parágrafo, a oração restringe o sentido de “uma nova instrução normativa”; no segundo, apenas acrescenta uma informação sobre “esses compostos”.",
+            "No primeiro parágrafo, a oração apresenta uma informação nova; no segundo, a vírgula destaca uma informação já conhecida pelo leitor.",
+            "No primeiro parágrafo, o pronome retoma um antecedente específico; no segundo, um antecedente de natureza mais abrangente.",
+            "No primeiro p arágrafo, a oração particulariza o antecedente; no segundo, amplia seu sentido por meio de uma informação de caráter exemplificativo.",
+            "No primeiro parágrafo, a oração especifica um aspecto da norma citada; no segundo, a vírgula indica ênfase para a informação introduzida pelo pronome."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "A língua não é uma nomenclatura, que se opõe a uma realidade pré-categorizada, ela é que classifica a realidade. No léxico, percebe-se, de maneira mais imediata, o fato de que a língua condensa as experiências de um dado povo. FIORIN, J. L. Língua, modernidade e tradição. Diversitas, n. 2, 2014. O trecho enfatiza uma concepção de ensino de Língua Portuguesa segundo a qual o professor, em suas aulas e avaliações, deve valorizar, prioritariamente,",
+          "alternativas": [
+            "a análise da língua como código neutro de representação da realidade.",
+            "a relação entre língua, sociedade e construção de sentidos.",
+            "a estrutura interna da língua como sistema autônomo de regras.",
+            "a descrição formal em perspectiva classificatória da realidade.",
+            "a centralidade da norma-padrão como referência de correção linguística."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Observe o seguinte trecho da música “Estudo errado”, de Gabriel, o Pensador: Eu tô aqui pra quê? Será que é pra aprender? Ou será que é pra sentar, me acomodar e obedecer? Tô tentando passar de ano pro meu pai não me bater (...) Manhê! Tirei um dez na prova Me dei bem, tirei um cem e eu quero ver quem me reprova Decorei toda lição Não errei nenhuma questão Não aprendi nada de bom Mas tirei dez (boa filhão!) Quase tudo que aprendi, amanhã eu já esqueci Decorei, copiei, memorizei, mas não entendi https://www.letras.mus.br/gabriel-pensador/66375/ Ao trabalhar esse trecho com alunos do 9 o ano do Ensino Fundamental, um professor pretende verificar se a turma compreendeu a função argumentativa desempenhada pelo conectivo \"mas\" nas duas ocorrências destacadas. Assinale a proposta de atividade mais adequada para avaliar essa aprendizagem.",
+          "alternativas": [
+            "Solicitar que os alunos identifiquem as informações que estão sendo contrapostas pela presença do conectivo adversativo, discutindo os sentidos produzidos em cada ocorrência.",
+            "Pedir que os alunos localizem os conectivos presentes no trecho e os classifiquem segundo a nomenclatura gramatical, justificando suas escolhas com exemplos do texto.",
+            "Demandar que os alunos substituam o conectivo “mas” por outros elementos de ligação, comparando os efeitos produzidos nas diferentes versões elaboradas.",
+            "Propor que os alunos identifiquem marcas de oralidade presentes na canção, analisando seus efeitos na construção da linguagem utilizada pelo eu lírico.",
+            "Pedir que os alunos expliquem a crítica ao modelo de ensino apresentada na canção, relacionando -a às ideias defendidas pelo eu lírico."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Mas nenhum artista, agora percebo, pode sentir -se satisfeito apenas com a arte. Há um desejo natural de reconhecimento e atenção pública, um anseio que, de tão ardente, é irrefutável. CHRISTIE, Agatha. E não sobrou nenhum. São Paulo: Globo, 2014. p. 321. Ao trabalhar esse trecho de narrativa policial com alunos do 8o ano do Ensino Fundamental, um professor pretende verificar se a turma compreendeu os efeitos de sentido produzidos pela combinação entre o advérbio “agora” e a forma verbal “percebo”, considerando que se trata de conteúdos aperfeiçoados ao longo do Ensino Fundamental - anos finais. A fim de verificar a compreensão dos estudantes em relação à construção do posicionamento do enunciador, o professor deve propor que os alunos",
+          "alternativas": [
+            "expliquem o significado do advérbio “agora” no trecho, identificando a circunstância temporal expressa por essa palavra.",
+            "classifiquem a forma verbal “percebo” quanto ao tempo e ao modo, relacionando essas características à organiz ação gramatical do período.",
+            "identifiquem indícios de que o enunciador reformula uma compreensão anterior, explicando como a expressão “agora percebo” contribui para esse efeito de sentido.",
+            "reescrevam o trecho substituindo o verbo “perceber” por verbos de significado semelhante, comparando as versões produzidas.",
+            "revelem a opinião do enunciador sobre os artistas, interpretando e resumindo adequadamente as ideias defendidas no fragmento."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "Considera-se que uma era geológica seja definida por um conjunto de evidências climáticas, estratigráficas, biológicas, químicas e físicas. As principais dessas evidências seriam o aumento das temperaturas médias globais, as mudanças nos padrões de erosão e sedimentação, a acidificação dos oceanos e os crescentes índices de extinção de espécies de forma acidental ou deliberada, causando danos irreparáveis à biodiversidade. OLIC, N. B. Antropoceno - um novo nome para o presente geológico? Revista Pangea, 24 set. 2008. Ao trabalhar características da linguagem científica com uma turma do Ensino Médio, um professor pretende explorar o efeito de sentido produzido pela construção “Considera -se que”, utilizada no início do texto. Considerando a proposta do professor e a compreensão do efeito de sentido produzido por esse recurso linguístico, assinale a opção que apresenta a resposta de um aluno que demonstraria maior domínio do conteúdo.",
+          "alternativas": [
+            "“A expressão aproxima o autor do leitor, favorecendo a construção de um diálogo sobre o tema apresentado.”",
+            "“A expressão destaca o ponto de vista individual do pesquisador na formulação do conhecimento científico.”",
+            "“A expressão reduz a força argumentativa do texto ao evitar uma posição explícita do autor.”",
+            "“A expressão contribui para apresentar informações de modo impessoal, enfatizando seu reconhecimento científico.”",
+            "“A expressão indica critérios normativos que orientam a definição das diferentes eras geológicas.”"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "Leia os textos a seguir. 1. Canção do Exílio (Gonçalves Dias) Minha terra tem palmeiras, Onde canta o sabiá; As aves que aqui gorjeiam, Não gorjeiam como lá. 2. Canto de regresso à Pátria (Oswald de Andrade) Minha terra tem palmares Onde gorjeia o mar Os passarinhos daqui Não cantam como os de lá. Ao planejar uma atividade de leitura comparada desses textos para uma turma do Ensino Médio, um professor de Língua Portuguesa pretende desenvolver a compreensão das relações intertextuais estabelecidas entre diferentes produções literárias. Considerando esse objetivo de aprendizagem, analise as afirmativas a seguir. I. Solicitar aos estudantes que identifiquem os elementos retomados por Oswald de Andrade e discutam as transformações realizadas em relação ao poema de Gonçalves Dias constitui uma estratégia adequada, pois favorece a compreensão dos efeitos de sentido produzidos pela intertextualidade. II. Propor que os estudantes localizem informações explícitas sobre a representação da paisagem brasileira nos dois poemas é uma estratégia suficiente para desenvolver a compreensão da relação intertextual entre os textos, pois a identificação do tema nacional permite reconhecer as influências entre as obras. III. Orientar os estudantes a listar as características do Romantismo e do Modernismo, para depois identificá -las nos poemas, é uma es tratégia adequada para que compreendam como um texto pode dialogar com outro. Está correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Porsche que matou motorista de aplicativo em SP custa R$ 1 milhão e atinge 100 km/h em apenas quatro segundos Fernando Sastre de Andrade Filho, de 24 anos, bateu na traseira de um Renault Sandero na madrugada de domingo (31) e matou o condutor do veículo, na Zona Leste de São Paulo Um jovem de 24 anos, identificado como Fernando Sastre de Andrade Filho, bateu na traseira de um Renault Sandero na madrugada de domingo (31) e m atou o condutor do veículo, na Zona Leste de São Paulo. Fernando dirigia um Porsche 911 Carrera. Avaliado em cerca de R$ 1 milhão, o carro de luxo consegue atingir 100 km/h em apenas quatro segundos e sua velocidade máxima chega a quase 300 km/h. https://oglobo.globo.com Com o objetivo de verificar se os estudantes dos anos finais do Ensino Fundamental reconhecem recursos linguísticos empregados em textos jornalísticos e analisam os efeitos de sentido produzidos por essas escolhas, um professor de Língua Portuguesa propõe uma atividade de leitura do texto apresentado. Nessa perspectiva, seria mais adequado solicitar que os estudantes investigassem",
+          "alternativas": [
+            "a imparcialidade da notícia, verificando se o jornalista apresenta os fatos sem emitir opiniões ou juízos de valor sobre os envolvidos no acidente.",
+            "a personificação do Porsche no título da notícia e a intencionalidade de destacar aspectos sociais e simbólicos envolvidos no acontecimento.",
+            "o uso inusitado da função poética no texto jor nalístico, evidenciada pela preocupação do autor em produzir efeitos estéticos por meio variadas de figuras de linguagem.",
+            "a adequação da notícia às normas da variedade padrão da língua portuguesa, observando possíveis desvios gramaticais e ortográficos no texto.",
+            "a presença de linguagem conotativa na notícia, analisando como as metáforas e comparações empregadas no corpo do texto intensificam o impacto emocional da narrativa."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Variação Linguística",
+          "enunciado": "Leia o excerto a seguir. Ele se aproximou e com a voz cantante de nordestino que a emocionou, perguntou-lhe: – E se me desculpe, senhorinha, posso convidar a passear? – Sim, respondeu atabalhoadamente com pressa, antes que ele mudasse de ideia. – E se me permite, qual é mesmo a sua graça? – Macabéa. – Maca – o quê? – Béa, foi obrigada a completar. – Me desculpe mas até parece doença, doença de pele. LISPECTOR, Clarice. A hora da estrela. Rio de Janeiro: José Olympio, 1979, p. 53. Ao trabalhar esse trecho com estudantes do Ensino Médio, um professor de Língua Portuguesa pretende explorar como as escolhas linguísticas contribuem para a construção das personagens. Dentre as opções a seguir, assinale aquela que atende melhor a esse objetivo.",
+          "alternativas": [
+            "Identificar marcas de regionalismo presentes nas falas das personagens.",
+            "Explicar o uso dos sinais de pontuação empregados nesse trecho.",
+            "Reconhecer o empre go do discurso direto na organização do diálogo.",
+            "Analisar como as falas das personagens revelam aspectos de sua personalidade.",
+            "Comparar a linguagem do texto com a variedade padrão da língua portuguesa."
+          ],
+          "correta": "D"
+        }
+      ]
+    },
+    {
+      "codigo": "seducsp2026-eixo-ambiente-saude-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "SEDUC-SP",
+      "cargo": "Docente - Eixo Ambiente e Saúde",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/eixo-ii-ambiente-e-saude-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-seduc-tecnico.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 11,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "As manifestações clássicas da inflamação aguda incluem vermelhidão, aumento da temperatura local, edema e dor. Com base nos mecanismos envolvidos nesse processo, é correto afirmar que",
+          "alternativas": [
+            "a dor no processo inflamatório decorre da destruição mecânica das terminações nervosas pelo agente agressor.",
+            "o edema inflamatório resulta da diminuição da permeabilidade vascular e da redução do fluxo sanguíneo local.",
+            "a vasodilatação e o aumento da permeabilidade vascular favorecem a chegada de células e mediadores inflamatórios ao local da lesão.",
+            "a inflamação é prejudicial ao organismo, pois promove danos teciduais.",
+            "os sinais cardinais da inflamação resul tam da ativação da resposta imunológica adaptativa."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Paciente SMA, 55 anos, está internado na clínica médica, encontra- se consciente, orientado, apresentando náuseas intensas e episódios frequentes de vômito. Foi prescrita a administração de um medicamento que necessita atingir rapidamente a corrente sanguínea para produzir efeito imediato. Nesse caso, a via de administração de medicamentos mais indicada é a via",
+          "alternativas": [
+            "oral, pois apresenta absorção rápida e não sofre influência das condições gastrointestinais do paciente.",
+            "intradérmica, pois obtém-se efeito sistêmico imediato devido à elevada vascularização da derme.",
+            "intramuscular, pois o medicamento é absorvido diretamente pelos capilares musculares.",
+            "subcutânea, pois promove absorção rápida e contínua do medicamento por meio da rica vascularização do tecido adiposo.",
+            "intravenosa, pois permite biodisponibilidade de 100% e proporciona efeito farmacológico mais rápido quando comparada às demais vias."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 13,
+          "disciplina": "Enfermagem",
+          "assunto": "Diabetes Mellitus",
+          "enunciado": "MJK, paciente do sexo feminino, 69 anos, é portadora de diabetes mellitus, hipertensão arterial, obesidade e insuficiência renal crônica. Ao procurar atendimento na rede pública de saúde, MJK recebeu apenas consulta médica, cujo objetivo foi o controle da pressão arte rial COM ajuste dos medicamentos. Ao analisar a situação, a equipe de gestão apontou que seria necessário também encaminhar a paciente para avaliação nutricional, acompanhamento de enfermagem, assistência farmacêutica ou consulta com especialista. Tais açõ es devem ser realizadas para garantir qual princípio doutrinário do SUS?",
+          "alternativas": [
+            "Universalidade.",
+            "Integralidade.",
+            "Regionalização.",
+            "Descentralização.",
+            "Participação social."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 14,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Uma paciente recebeu prescrição médica e foi orientada a procurar uma farmácia de manipulação para obtenção do medicamento prescrito. Considerando as características e atribuições das farmácias de manipulação, assinale a alternativa correta.",
+          "alternativas": [
+            "Os medicamentos manipulados são produzidos em larga escala e distribuídos para comercialização em todo o território nacional.",
+            "A manipulação de medicamentos é permitida apenas para produtos fitoterápicos e homeopáticos.",
+            "Medicamentos manipulados dispensam controle de qualidade, pois são produzidos em pequenas quantidades.",
+            "A farmácia de manipulação pode preparar medicamentos individualizados, de acordo com a prescrição das necessidades específicas do paciente.",
+            "Medicamentos manipulados apresentam composição padronizada e idêntica para todos os pacientes."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 15,
+          "disciplina": "Enfermagem",
+          "assunto": "Atenção Primária à Saúde",
+          "enunciado": "Uma equipe da Estratégia Saúde da Família identificou que, em determinada região, a população residente em áreas periféricas apresenta maiores taxas de mortalidade infantil, menor acesso aos serviços de saúde e piores indicadores socioeconômicos em comparação às demais áreas do município. Diante desse cenário, a gestão municipal decidiu ampliar a oferta de consultas, ações educativas e visitas domiciliares especificamente para essa população, visando reduzir as desigualdades em saúde. Considerando os pr incípios do Sistema Único de Saúde (SUS), a ação descrita exemplifica o princípio da",
+          "alternativas": [
+            "Universalidade.",
+            "Integralidade.",
+            "Hierarquização.",
+            "Equidade.",
+            "Regionalização."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Um homem obeso de 58 anos apresenta incapacidade de falar, tossir ou respirar após ingerir um pedaço de carne em um restaurante. A vítima permanece consciente. Considerando as recomendações atuais de primeiros socorros para obstrução grave das vias aéreas por corpo estranho em adultos conscientes, a atitude correta nesse caso é",
+          "alternativas": [
+            "incentivar a vítima a ingerir água ou a realizar movimentos vigorosos de tosse, mesmo na ausência de tosse efetiva, pois essas medidas aumentam a chance de expu lsão espontânea do corpo estranho.",
+            "realizar compressões torácicas, pois a aplicação de compressões abdominais em indivíduos obesos ou gestantes é difícil e apresenta riscos associados.",
+            "realizar varredura digital às cegas na cavidade oral antes de qualquer tentativa de desobstrução, buscando aumentar a eficácia do procedimento.",
+            "verificar se houve melhora da coloração da pele após os primeiros tapas interescapulares, o que indica resolução da obstrução e dispensa a continuidade da avaliação da permeabilidade das vias aéreas.",
+            "aguardar a perda de consciência antes de iniciar qualquer manobra de desobstrução, pois as intervenções em vítimas conscientes apresentam baixa efetividade e maior risco de complicações."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 18,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Idoso",
+          "enunciado": "FBG, 75 anos, portadora de hipertensão arterial, diabetes mellitus tipo 2, insuficiência cardíaca e osteoartrite, compareceu à Unidade Básica de Saúde para consulta com a farmacêutica. Durante o atendimento, foi identificado que a paciente fazia uso contínuo de sete medicamento s e apresentava episódios frequentes de tontura, esquecimento das doses e dificuldade para compreender as orientações fornecidas por diferentes profissionais. Diante dessa situação, a farmacêutica identificou problemas relacionados aos medicamentos, realiz ou a conciliação medicamentosa, elaborou um plano de cuidado compartilhado com a equipe multiprofissional e programou retornos periódicos para monitoramento dos resultados clínicos. Considerando os princípios e objetivos da Atenção Farmacêutica, assinale a alternativa que justifica corretamente a conduta adotada pela profissional.",
+          "alternativas": [
+            "A Atenção Farmacêutica tem como principal finalidade garantir a dispensação correta dos medicamentos prescritos, sendo a avaliação clínica do paciente uma atribuição exclusiva do médico.",
+            "A identificação de problemas relacionados aos medicamentos constitui atividade secundária da Atenção Farmacêutica, uma vez que a principal responsabilidade do farmacêutico é a gestão logística da assistência farmacêutica.",
+            "A Atenção Farmacêutica é uma prática centrada no paciente que busca prevenir, identificar e resolver problemas relacionados à farmacoterapia, promovendo resultados clínicos positivos, segurança e melhoria da qualidade de vida.",
+            "A Atenção Farmacêutica cons iste em um conjunto de ações centradas no medicamento, priorizando o controle de estoque, aquisição e distribuição de insumos para garantir a continuidade do tratamento.",
+            "A Atenção Farmacêutica prioriza a orientação quanto ao uso correto dos medicamento s prescritos, não abrangendo o monitoramento clínico contínuo, a identificação de problemas relacionados aos medicamentos ou a participação no planejamento terapêutico multiprofissional."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "Um paciente de 65 anos, com diagnóstico de hipertensão arterial sistêmica, recebeu prescrição de um medicamento anti - hipertensivo para uso contínuo. Durante a orientação de enfermagem, o profissional explicou que a administração correta e regular do medicamento é fundamental para manter sua concentração adequ ada no organismo e garantir o efeito terapêutico esperado. Considerando os princípios básicos da farmacologia, assinale a alternativa correta.",
+          "alternativas": [
+            "A farmacologia estuda as características dos medicamentos, sem abranger aspectos relacionados ao uso clínico.",
+            "A farmacocinética refere -se aos mecanismos pelos quais os medicamentos produzem seus efeitos no organismo.",
+            "A farmacodinâmica estuda os efeitos e os mecanismos de ação dos medicamentos no organismo.",
+            "A via de administração não influencia a absor ção e a eficácia do medicamento.",
+            "Todos os medicamentos apresentam o mesmo tempo de ação, independentemente de suas características químicas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Enfermagem",
+          "assunto": "Eletrocardiograma (ECG)",
+          "enunciado": "Um paciente de 72 anos encontra -se no segundo dia pós - operatório de uma cirurgia de troca valvar aórtica. Durante a avaliação de enfermagem, o paciente apresenta -se consciente, orientado, porém menciona dispneia aos pequenos esforços. Ao exame físico, observam -se estertores bibasais, frequência respiratória de 28 irpm, saturação de oxigênio de 90% em cateter nasal a 2 L/min, além de redução da expansibilidade torácica. O balanço hídrico d as últimas 24 horas é positivo em 1.800 mL. Considerando os achados clínicos e as principais complicações do pós-operatório cardíaco, qual deve ser a prioridade da assistência de enfermagem?",
+          "alternativas": [
+            "Estimular a ingesta hídrica para melhorar o débito urinário e prevenir lesão renal aguda.",
+            "Monitorar sinais de congestão pulmonar, incentivar exercícios respiratórios e comunicar alterações clínicas à equipe multiprofissional.",
+            "Suspender a oxigenoterapia para avaliar a capacidade respiratória espontânea do paciente.",
+            "Priorizar o repouso absoluto, evitando qualquer mobilização até a alta hospitalar.",
+            "Manter apenas a observação clínica, pois dispneia leve e estertores bibasais são achados esperados no segundo dia de pós-operatório cardíaco."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Durante a investigação de um surto de sarampo em uma comunidade com cobertura vacinal inferior à meta preconizada pelo Programa Nacional de Imunizações (PNI), observou -se que alguns indivíduos não vacinados permaneceram protegidos devido à elevada proporção de pessoas imunizadas na população. Considerando os princípios imunológicos relacionados às estratégias de vacinação e ao controle das doenças imunopreveníveis, assinale a alternativa correta.",
+          "alternativas": [
+            "A proteção observada nos indivíduos não vacinados é explicada pela imunidade passiva artificial adquirida por meio do contato indireto com indivíduos imunizados.",
+            "A proteção dos indivíduos suscetíveis decorre da imunidade coletiva, que reduz a circulação do agente infeccioso na população.",
+            "A imunidade colet iva ocorre exclusivamente em doenças transmitidas por vetores, sendo irrelevante para doenças de transmissão respiratória.",
+            "A vacinação promove proteção individual, mas não interfere na dinâmica de transmissão dos agentes infecciosos na comunidade.",
+            "A imunidade coletiva elimina a necessidade de vacinação dos grupos populacionais mais vulneráveis, desde que parte da população esteja imunizada."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Um paciente que pesa 80 kg e está internado na Unidade de Terapia Intensiva recebeu prescrição médica de Dobutamina 7,5 mcg/kg/min, em infusão contínua. A farmácia disponibilizou uma solução contendo 250 mg de Dobutamina diluídos em 250 mL de soro glicosado 5%. Considerando que a bomba de infusão deve ser programada em mL/h, qual deve ser a velocidade de infusão mais próxima da prescrita?",
+          "alternativas": [
+            "9 mL/h",
+            "36 mL/h",
+            "18 mL/h",
+            "54 mL/h",
+            "72 mL/h"
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "seducsp2026-eixo-gestao-negocios-tipo1",
+      "banca": "FGV",
+      "ano": 2026,
+      "orgao": "SEDUC-SP",
+      "cargo": "Docente - Eixo Gestão e Negócios",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/eixo-i-gestao-e-negocios-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/gabarito-definitivo-seduc-tecnico.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 12,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Conhecendo a importância da estatística como ferramenta para tomada de decisões na gestão, um professor apresentou a seguinte situação-problema a sua turma de ensino técnico: A pedido de seu gestor, um ass istente administrativo de uma pequena empresa de manutenção e montagem de microcomputadores precisa apresentar um relatório sobre a folha de pagamento da empresa, a qual deve incluir a média e a mediana dos salários. A lista a seguir apresenta os salários dos cinco funcionários da empresa. Pessoa A – auxiliar – salário R$ 2.000,00 Pessoa B – assistente – salário R$ 2.500,00 Pessoa C – analista – salário R$ 3.500,00 Pessoa D – analista sênior – salário R$ 5.000,00 Pessoa E – diretor – salário R$ 30.000,00 Após os estudantes fazerem os cálculos solicitados pela situação - problema, a turma fez algumas conclusões sobre a situação - problema. Analise-as e avalie-as em verdadeiras (V) ou falsas (F). ( ) A média salarial da empresa é de R$ 8.600,00, e esse valor é o que mais fielmente representa o salário típico da organização, podendo ser usado como indicativo de que as pessoas daquela organização ganham em torno de R$ 8.600,00. ( ) A mediana salarial da empresa é de R$ 3.500,00, e esse valor nos indica qual é o ponto central de um conjunto de dados que estão organizados do menor para o maior, trazendo uma ideia do salário típico da organização. ( ) O mais indicado é usar a mediana para representar esse conjunto de dados, uma vez que há valores discrepantes de salários. As afirmativas são, respectivamente:",
+          "alternativas": [
+            "V – F – V",
+            "V – V – F",
+            "V – F – F",
+            "F – V – V",
+            "F – F – F"
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Uma organização percebeu que os índices de reclamações sobre a qualidade de seus produtos estavam aumentando. Preocupada em identificar as causas, a área de produção adotou algumas ferramentas da qualidade para identificar falhas e aprimorar os processos. Uma das ferramentas da qualidade adotadas consiste em identificar possíveis causas-raízes que geraram alguma falha no processo produtivo, considerando categorias como: máquina, material, método, mão de obra, medida e meio ambiente. Essa ferramenta da qualidade é denominada",
+          "alternativas": [
+            "lista de verificação.",
+            "fluxograma.",
+            "diagrama de causa e efeito.",
+            "gráfico de dispersão.",
+            "histograma."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A Dell, empresa de computadores pessoais, é conhecida por focar na qualidade e no controle de seu process o produtivo, tomando muito cuidado com os custos dos componentes de seus produtos. No século XX, observando o cenário que se apresentava cada vez mais competitivo em seu ramo de atuação, a empresa decidiu eliminar uma camada da sua rede, e passou a vender diretamente os computadores pessoais que fabricava para seus consumidores, dispensando a intermediação de distribuidores. No início, a ideia era cortar custos, mas essa mudança trouxe para a Dell outros benefícios; dentre eles, o contato direto com o consumidor, que permitiu à empresa conhecer suas necessidades, antes da concorrência. Para potencializar esse benefício, a empresa criou sistemas de informação com o registro de todas as interações (consultas, comentários, sugestões de melhoria) do cliente com a Dell, desde a compra até qualquer pedido de manutenção. Com isso, passava com rapidez e precisão à sua equipe de criação as demandas e os desejos de seus clientes. Resultado: produtos aprimorados e focados no que os consumidores queriam. SLACK, Nigel; BRANDON-JONES, Alistair; JOHNSTON, Robert. Administração da Produção. 8 ed. São Paulo: Editora Atlas S.A., 2018. Qual o nome dado a esse processo que foi objeto de reformulação por parte da Dell e lhe trouxe os benefícios descritos no texto?",
+          "alternativas": [
+            "Gestão de custos.",
+            "Gestão de fornecedores.",
+            "Gestão de preços.",
+            "Gestão de materiais.",
+            "Gestão da cadeia de suprimentos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 19,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Matemática Financeira",
+          "enunciado": "Em uma aula sobre educação financeira, uma professora discutiu com sua turma uma reportagem sobre a situação de endividamento das famílias brasileiras e suas consequências em várias áreas da vi da do cidadão, como a saúde física e mental, destacando que o problema afeta as finanças e a dignidade das pessoas. A turma discutiu também as atuais iniciativas para enfrentar o problema, como o projeto de lei nº 2.944/2022, que propõe redefinir a porcent agem do salário que não pode ser comprometida na negociação de dívidas ou obtenção de créditos. OLIVEIRA, Maria Fernanda. Dívidas em recorde assombram as famílias brasileiras. Agência Senado, 29 maio.2026. Disponível em: www12senado.leg.br/noticias/infomaterias/2026/05/dividas-em-recorde- assombram-as-familias-brasileiras. Acesso em: 05 jun.2026. Adaptado. Para aprofundar a discussão, a professora propôs que os estudantes destacassem os pontos de conexão entre o enfrentamento e prevenção do superendividame nto e os direitos do consumidor. Os pontos que os estudantes apontaram corretamente são:",
+          "alternativas": [
+            "a garantia de um mínimo existencial, a prevenção e o combate ao assédio de consumo e a educação financeira como um direito básico.",
+            "a ampliação dos limites de juros e de cobrança das organizações, o combate às ligações telefônicas abusivas e a educação financeira como um direito acessório.",
+            "o direito de ter o preço de um produto visível, a garantia de um mínimo existencial e a proteção para as orga nizações garantirem um mínimo de retorno de crédito.",
+            "a garantia de um mínimo existencial tomando por base o salário mínimo, a educação financeira no ensino superior e a limitação da concessão de crédito a negativados.",
+            "o combate ao assédio ao consum o, a proteção das microempresas contra o calote de terceiros e a implantação de multas para as empresas inadimplentes."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Quando for fazer seu plano de negócios, não o faça simplesmente por fazê -lo. Faça -o com capricho, faça -o bem, lembrando que as pessoas que o analisarão não conhecem você, julgarão acerca do que estiver escrito no plano. Procure apresentar sua ideia com clareza, com correção gramatical, com uma boa qualidade visual e seja direto, evite “encher linguiça” e “sustente suas afirmações”, fazendo a diferença com persuasão. NAKAGAWA, Marcelo. Empreendedorismo: elabore o seu plano de negócio e faça a diferença! São Paulo: Editora Senac São Paulo, 2013. Seguindo essas orientações de Nakagawa, Maria elaborou uma proposta para conseguir recursos e levar adiante sua ideia de vender doces veganos. Procurou redigir a proposta com atenção e esmero: criou uma logomarca própria, contou sua inspiração e história de vida de forma objetiva e convincente, trazendo elementos que evidenciam sua capacidade para produzir os doces. Verificou sua redação e anexou diversas fo tos com as ideias dos docinhos que deseja fazer, de modo que o plano ficou com 40 páginas, das quais 50% foram dedicadas à ilustração dos produtos, com fotografias do conjunto de doces em diversos ângulos. Ao apresentar sua estratégia, escreveu: “a estratégia da Vegan Dulce é produzir produtos com qualidade para atender aos desejos e às expectativas dos nossos clientes.” No que se refere ao plano de negócios e considerando os elementos importantes para sua confecção, analise as afirmações a seguir: I. A descrição da estratégia, que é parte fundamental do plano de negócios, foi assertiva, permitindo ao leitor compreender qual é o caminho que a empreendedora adotará para se diferenciar de outros concorrentes. II. O plano de negócios da Vegan Dulce atende de forma plena ao critério de objetividade e de persuasão do leitor, por meio da apresentação de evidências ilustrativas dos tipos de doces que serão desenvolvidos. III. A empreendedora trouxe uma introdução que é importante para situar o leitor do plano de negócios acerca do contexto e da motivação para a abertura do empreendimento. Considerando essas afirmações a respeito do plano de negócios elaborado para a Vegan Dulce, está correto apenas o apresentado em:",
+          "alternativas": [
+            "I.",
+            "II.",
+            "III.",
+            "I e II.",
+            "I e III."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "O Tribunal de Contas do RN (TCE/RN) desenvolveu um plano estratégico de comunicação para ampliar a participação de seus servidores na construção dos rumos da organização e para aproximar o órgão da sociedade, atendendo também aos preceitos de transparência e publicidade das ações. Para tanto, definiu direcionadores estratégicos, alinhou projetos e processos, e adotou canais (internet e intranet) e eventos para divulgar suas ações. O plano também estabeleceu critérios de difusão por níveis hierárquicos (estr atégico, tático e operacional), além de prever custos e um plano de ação contínuo. Utilizando esse modelo, um professor propôs que seus alunos elaborem um plano semelhante para a escola em que estudam. TRIBUNAL de Contas do Estado do Rio Grande do Norte. Assessoria de Planejamento e Gestão. Plano de Comunicação Estratégica TCE/RN [S/L.]. [S/D.]. Disponível em: tce.m.gov/br/as/PlanoEstrategico/PLANODECOMUNICACAOESTRATEGICADOTCERN. pdf. Acesso em: 24 maio.2026. Sobre o plano estratégico de comunicação que os estudantes deverão elaborar e os elementos apresentados pelo TCE/RN avalie se as afirmativas a seguir são verdadeiras (V) ou falsas (F): ( ) No campo dos direcionadores estratégicos, os estudantes deverão apresentar a visão, a missão e os valores que norteiam as atividades da escola, de modo a alinhar seu planejamento estratégico da comunicação ao que é a visão de futuro, o propósito e o modo como se atua. ( ) No que se refere a aprimorar a comunicação da estratégia, os estudantes de verão definir objetivos que reforcem os direcionadores estratégicos e que sejam pertinentes ao diagnóstico que fizerem sobre o que deve ser melhorado na escola, para que tudo caminhe em harmonia. ( ) O modelo de comunicação estratégia do TCE/RN é específ ico de órgãos públicos que precisam evidenciar à sociedade o que fazem de relevante para melhorar sua reputação e, portanto, é inadequado para a transposição para um modelo focado na escola. As afirmativas são, respectivamente:",
+          "alternativas": [
+            "V – V – V",
+            "V – V – F",
+            "V – F – F",
+            "F – V – V",
+            "F – F – F"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "João trabalha em uma indústria metalúrgica operando uma máquina que exige alta concentração e atenção constantes. A empresa, após negociação coletiva, decidiu reduzir o intervalo intrajornada dos funcionários de 1 hora para 30 minutos, alegando que isso aumentaria a produtividade. Após algumas semanas, João estava tão cansado que dormiu em certo momento e quase bateu a máquina contra a parede durante seu turno. Preocupado, foi até o departamento de recursos humanos e relatou o ocorrido. O profissional do de partamento informou que a empresa atua em conformidade com a Lei nº 13.467/2017 (conhecida como a lei da reforma trabalhista), que permite a alteração do intervalo intrajornada por negociação coletiva, desde que se mantenha assegurado um mínimo de descanso intrajornada em jornadas de trabalho superiores a seis horas. SANTOS, Viviane Lopes Gschwenter dos; LAZZARIN, Helena Kugel. Legislação trabalhista e saúde ocupacional: um estudo sobre acidentes de trabalho. Revista do Tribunal Superior do Trabalho, v. 91, n. 4, p. 246–261, 2025. Disponível em: https://revista.tst.jus.br/rtst/article/view/231. Acesso em: 24 maio. 2026. Considerando essa abordagem sobre o intervalo intrajornada, é correto afirmar que",
+          "alternativas": [
+            "a redução do intervalo intrajornada é um benefício ao trabalhador, porque permite que a negociação coletiva leve em conta a peculiaridade da atividade e lhe garanta mais horas de trabalho.",
+            "a negociação coletiva, no que se refere à flexibilização do tempo de intervalo de descanso, representa u ma modernidade nas relações de trabalho, fortalecendo o poder do Estado no que se refere às relações trabalhistas.",
+            "a flexibilização do intervalo intrajornada é reconhecida como uma evolução nas relações trabalhistas entre empresas e seus funcionários, servindo de base para o fortalecimento das normas de saúde e segurança de trabalho.",
+            "as normas de saúde e segurança do trabalho ficaram revigoradas com a Lei nº 13.467/2017, que propiciou a adequação do intervalo intrajornada por negociação coletiva levando em conta as peculiaridades de cada setor.",
+            "a redução do intervalo intrajornada por negociação coletiva pode gerar um aumento na vulnerabilidade do trabalhador, visto que há uma relação entre fadiga e probabilidade de ocorrer um acidente."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Uma professora do Ensino Médio preparou uma aula para estimular os estudantes a desenvolverem propostas de solução para a questão do transporte na comunidade em que fica a escola. Inicialmente, os estudantes fizeram um aquecimento e entrevistaram uns aos outros para levantar necessidades ou demandas que tinha m com relação aos próprios serviços oferecidos pela escola. O desafio inicial foi respeitar a seguinte regra: livrar -se de todo e qualquer preconceito a respeito das pessoas que irá entrevistar, observando, questionando e ouvindo suas histórias. Após esse aquecimento, os estudantes seguiram, em pequenos grupos, as seguintes ações: (1) entrevista com as pessoas da comunidade para compreender suas necessidades registrando os dados e as informações coletadas e respeitando a regra do “aquecimento”; (2) organização dos dados e informações coletadas; (3) discussão livre para gerar ideias, estimulando a participação de todos da equipe; (4) criação de um modelo materializado da ideia a ser desenvolvida como solução para a necessidade levantada; (5) apresentação desse modelo para realização de testes e recebimento de feedbacks das pessoas da comunidade para, por fim, realizar aprimoramentos e ajustes. As etapas numeradas de 1 a 5 são chamadas, respectivamente, de",
+          "alternativas": [
+            "(1) ideação, (2) definição, (3) prototipação, (4) empatia, (5) validação.",
+            "(1) definição, (2) empatia, (3) ideação, (4) prototipação, (5) validação.",
+            "(1) empatia, (2) pro totipação, (3) ideação, (4) definição, (5) validação.",
+            "(1) empatia, (2) validação (3) prototipação, (4) definição, (5) ideação.",
+            "(1) empatia, (2) definição, (3) ideação, (4) prototipação, (5) validação."
+          ],
+          "correta": "E"
+        }
+      ]
+    }
+  ]
+}
