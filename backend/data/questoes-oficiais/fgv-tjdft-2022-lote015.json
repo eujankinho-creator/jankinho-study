@@ -1,0 +1,1345 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "fgv-tjdft2022-complemento-lote015",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "tjdft2022-tecnico-enfermagem-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Tribunal de Justiça do Distrito Federal e dos Territórios",
+      "cargo": "Técnico Judiciário - Enfermagem",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tecnico_judiciario_-_enfermagemnm-enf_tipo_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjdft2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "O ex -presidente americano Theodore Roosevelt disse certa vez que “ A justiça não consiste em ser neutro entre o certo e o errado, mas em descobrir o certo e sustentá -lo, onde quer que ele se encontre, contra o errado”. Sobre a significação e a estruturação dessa frase, a afirmação correta é:",
+          "alternativas": [
+            "defende o que deve ser a verdadeira justiça, com argumentos;",
+            "critica a neutralidade como posição inútil diante dos fatos;",
+            "afirma que a indiferença é o pior de todos os males;",
+            "informa que não tomar posição é pior que defender o erro;",
+            "mostra que há dificuldades na defesa do certo contra o errado."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 2,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "O filósofo francês Pascal afirmou que: “ A imaginação tem todos os poderes: ela faz a beleza, a justiça e a felicidade, que são os maiores poderes do mundo”. O pensamento acima é dividido em duas partes, separadas pelo emprego dos dois pontos. A segunda parte mostra:",
+          "alternativas": [
+            "o esclarecimento sobre como atua a imaginação;",
+            "uma enumeração dos poderes da imaginação;",
+            "uma explicação dos termos da parte anterior;",
+            "a consequência da oração anterior;",
+            "uma definição do que é a imaginação."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Pontuação",
+          "enunciado": "“À medida que meus sofrimentos aumentavam logo percebi que havia duas maneiras pelas quais eu poderia responder à minha situação reagir com amargura ou procurar transformar o sofrimento em uma força criativa eu decidi seguir o último curso.” (Martin Luther King Jr.) Esse pensamento se encontra sem os sinais de pontuação adequados. Uma das maneiras correta e adequada de pontuá-lo é:",
+          "alternativas": [
+            "À medida que meus sofrimentos aumentavam, logo percebi que havia duas maneir as pelas quais eu poderia responder à minha situação – reagir com amargura ou procurar transformar o sofrimento em uma força criativa. Eu decidi seguir o último curso.",
+            "À medida que meus sofrimentos aumentavam logo percebi que havia duas maneiras pelas quais eu poderia responder à minha situação : reagir com amargura , ou procurar transformar o sofrimento em uma força criativa. Eu decidi seguir o último curso.",
+            "À medida que meus sofrimentos aumentavam, logo percebi que havia duas maneiras pelas quais eu poderia responder à minha situação – reagir com amargura ou procurar transformar o sofrimento em uma força criativa , eu decidi seguir o último curso.",
+            "À medida que meus sofrimentos aumentavam logo percebi que havia duas maneiras pelas quais eu poderia responder à minha situação – reagir com amargura , ou procurar transformar o sofrimento em uma força criativa : eu decidi seguir o último curso.",
+            "À medida que , meus sofrimentos aumentavam, logo percebi que havia duas maneiras pelas quais eu poderia respon der à minha situação , reagir com amargura ou procurar transformar o sofrimento em uma força criativa. Eu decidi seguir o último curso."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "“Lógica: a arte de pensar de acordo com as limitações e as incapacidades da falta de compreensão humana.” A frase abaixo que respeita as regras lógicas do conhecimento é:",
+          "alternativas": [
+            "Você tem de prestar muita atenção se não souber para onde está indo, porque você pode não chegar lá;",
+            "É melhor chegar três horas mais cedo do que atrasado um minuto;",
+            "Não tenho preconceito. Odeio todo mundo igualmente;",
+            "Aborrecemo-nos porque nos divertimos em demasia;",
+            "Consenso é quando nós temos uma discussão e eu decido."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "“Os homens prudentes, pelos casos passados e pelos presentes, julgam os que estão por vir.” Essa frase pode apresentar ambiguidade, já que o segmento “os que estão por vir” pode referir-se a “homens” ou a “casos”. A frase abaixo em que há uma ambiguidade possível é:",
+          "alternativas": [
+            "Para quem é pouca coisa, basta-lhe pouca coisa;",
+            "Convicções são mais perigosas para a verdade do que as mentiras;",
+            "A ironia é uma tristeza que não pode chorar e rir;",
+            "O covarde e o corajoso mostram o seu medo;",
+            "Eu achei que estava errado uma vez, e estava mesmo errado."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "“É melhor ser pouco inteligente com temor do que rico em prudência, mas transgressor da lei.” Nessa frase, a conjunção MAS indica oposição; a frase abaixo em que essa mesma conjunção indica adição é:",
+          "alternativas": [
+            "Os covardes duram mais, mas vivem menos;",
+            "As coisas não mudam, mas nós mudamos;",
+            "Os tabus são feitos para serem quebrados, mas nem todos fazem isso;",
+            "Mudam de corpo, mas não de alma;",
+            "O universo é a mudança, mas a vida é o que o pensamento faz dessa mudança."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "“Você tem o teu caminho, eu tenho o meu. Quanto ao caminho certo, o correto, o único caminho, não existe.” Com esse pensamento, o filósofo Nietzsche quer dizer que:",
+          "alternativas": [
+            "Nem sempre os homens seguem o caminho certo;",
+            "O único caminho correto é o que leva a Deus;",
+            "Cada um tem seu próprio caminho e todos estão errados;",
+            "Caminhos diferentes podem levar à verdade;",
+            "O mundo é um espaço de caminhos errados."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "“Comece fazendo o que é necessário, depois o que é possível e de repente você estará fazendo o impossível.” Essa frase de São Francisco de Assis nos recomenda que:",
+          "alternativas": [
+            "desconfiemos daqueles que nos desestimulam;",
+            "tentemos sempre o impossível;",
+            "procuremos avançar com persistência;",
+            "sigamos sempre em direção à verdade;",
+            "façamos sempre o que estiver a nosso alcance."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 10,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "“Aquele que não sabe aproveitar a sorte quando ela vem não deve se queixar quando ela passa.” Essa frase de Cervantes significa que:",
+          "alternativas": [
+            "nem todos têm a mesma sorte na vida;",
+            "algumas pessoas vivem queixando-se da sorte;",
+            "a felicidade bate à porta de todos;",
+            "a sorte passa para os que não a merecem;",
+            "a sorte sempre passa para os que perdem oportunidades."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 11,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Ética no Serviço Público",
+          "enunciado": "José, servidor público, praticou insubordinação grave em serviço . De acordo com o regime jurídico da Lei nº 8.112/1990 que lhe é aplicável, após regular processo administrativo disciplinar, José está sujeito à penalidade administrativa da:",
+          "alternativas": [
+            "advertência, e a ação disciplinar prescreve em cento e oitenta dias;",
+            "advertência, e a ação disciplinar prescreve em dois anos;",
+            "suspensão por até trinta dias, e a ação disciplinar prescreve em dois anos;",
+            "suspensão por até noventa dias, e a ação disciplinar prescreve em cinco anos;",
+            "demissão, e a ação disciplinar prescreve em cinco anos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 12,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "Durante o ano de 2022, João, técnico judiciário do Tribunal de Justiça do Distrito Federal e dos Territórios, dolosamente, utilizou, em serviço particular de entrega de refeições consistentes em marmitas fitness produzidas e vendidas por sua esposa, o trabalho de terceiros contratados pelo TJDFT. João pedia aos estagiários lotados na Vara onde trabalha que fizessem as entregas das marmitas, no hor ário de expediente, em troca de eventuais gorjetas que recebessem dos consumidores. De acordo com a legislação de regência, em tese, João praticou:",
+          "alternativas": [
+            "ato de improbidade administrativa que importou enriquecimento ilícito;",
+            "infração ética, mas não come teu at o de improbidade administrativa, pois não houve efetivo dano ao erário;",
+            "ato de improbidade administrativa que causou prejuízo ao erário, ainda que sua conduta tivesse sido culposa;",
+            "infração disciplinar, mas não cometeu at o de improbidade administrativa, pois não houve efetivo dano ao erário;",
+            "infrações ética e disciplinar, mas não cometeu at o de improbidade administrativa, pela falta de tipicidade, diante das alterações promovidas na Lei de Improbidade."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "Considerando a fisiologia dos mecanismos de controle da pressão arterial, analise as afirmativas a seguir, indicando V para a (s) afirmativa(s) verdadeira(s) e F para a(s) falsa(s). ( ) Após qualquer queda aguda de pressão , uma das ações dos mecanismos de controle é o aumento da frequência cardíaca e da contratilidade do coração para fornecer maior capacidade de bombeamento. ( ) Entre os mecanismos de controle de pressão que começam a agir em poucos segundos e são muito potentes está o mecanismo isquêmico do sistema nervoso central. ( ) O sistema vasoconstritor da renina -angiotensina faz com que o líquido capilar seja reabsorvido pelas membranas capilares dos tecidos para a circulação, elevando o volume sanguíneo e a pressão arterial sistêmica. A sequência correta é:",
+          "alternativas": [
+            "F – V – V;",
+            "V – V – F;",
+            "F – F – F;",
+            "V – V – V;",
+            "F – F – V."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Uma das causas principais desse tipo de choque é a perda súbita do tônus vasomotor por todo o corpo, resultando de modo especial na dilatação maciça das veias. Ocasionalmente , ocorre sem ter havido qualquer redução do volume sanguíneo. Trata-se do choque:",
+          "alternativas": [
+            "séptico;",
+            "cardiogênico;",
+            "neurogênico;",
+            "anafilático;",
+            "hemorrágico."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Os vírus são dos menores e mais simples microrganismos existentes e podem ser formados por moléculas de DNA ou RNA. Entre os vírus formados por DNA, estão os:",
+          "alternativas": [
+            "flavivírus;",
+            "enterovírus;",
+            "rubivírus;",
+            "coronavírus;",
+            "herpesvírus."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Enfermagem",
+          "assunto": "Fundamentos e Semiotécnica",
+          "enunciado": "O sistema nervoso periférico é responsável pela transmissão dos estímulos do corpo ao cérebro e vice-versa. Fazem parte desse sistema:",
+          "alternativas": [
+            "diencéfalo e cerebelo;",
+            "nervos espinhais e cranianos;",
+            "tronco encefálico e medula espinhal;",
+            "cerebelo e ventrículos cerebrais;",
+            "nervos cranianos e tronco encefálico."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Algumas doenças requerem medidas de precaução específicas que são baseadas na forma de transmissão do microrganismo. As doenças cuja precaução está relacionada ao contágio por gotículas e aerossóis, respectivamente, são:",
+          "alternativas": [
+            "rubéola e sarampo;",
+            "influenza e difteria;",
+            "varicela e tuberculose;",
+            "impetigo e hanseníase;",
+            "meningite bacteriana e caxumba."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Enfermagem",
+          "assunto": "Centro de Material e Esterilização (CME)",
+          "enunciado": "Sobre o processamento dos artigos utilizados nos serviços de saúde, analise as afirmativas a seguir. I. Produtos para saúde semicríticos utilizados na assistência ventilatória, anestesia e inaloterapia devem ser submetidos à limpeza e, no mínimo, à desinfecção de nível interm ediário, com produtos saneantes. II. O sistema de climatização da sala de preparo e esterilização do CME Classe II deve manter temperatura ambiente entre 20 e 24 C. III. Os indicad ores Classe 3 são multiparamétricos, designados para reagir com dois ou mais parâmetros críticos do ciclo de esterilização. Está correto o que se afirma em:",
+          "alternativas": [
+            "I;",
+            "II;",
+            "III;",
+            "I e II;",
+            "II e III."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Sobre a disseminação de Microrganismos Multir resistentes (MDR) no cotidiano das unidades de saúde , analise as afirmativas a seguir, considerando V para a (s) afirmativa(s) verdadeira(s) e F para a(s) falsa(s). ( ) A transmissão por contato é a principal via de disseminação de MDR, e ela se dá principalmente por meio das mãos dos profissionais de saúde e pela contaminação de superfícies e equipamentos. ( ) O paciente infectado/colonizado por MDR deve preferencialmente ser alocado e m um quarto individual. Na ausência dessa possibilidade, é indicado o sistema de coorte. ( ) Na coleta de Vigilância Ativa em infecções por MRSA é obrigatório coletar swab da orofaringe, da região perianal e das feridas. A sequência correta é:",
+          "alternativas": [
+            "V – F – F;",
+            "F – F – F;",
+            "V – V – V;",
+            "F – V – V;",
+            "V – V – F."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Paciente submetida à cesariana apresentou , no 27º dia subsequente ao ato cirúrgico, deiscência parcial da parede abdominal e temperatura axilar = 38,5° C. Nesse caso, esse evento é classificado como infecção:",
+          "alternativas": [
+            "puerperal superficial comunitária;",
+            "puerperal profunda comunitária;",
+            "de sítio cirúrgico de órgão/cavidade;",
+            "de sítio cirúrgico incisional superficial;",
+            "de sítio cirúrgico incisional profunda."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "Como forma de medidas de prevenção de infecção, a Anvisa recomenda a troca do sistema fechado de aspiração a cada:",
+          "alternativas": [
+            "24 horas;",
+            "36 horas;",
+            "48 horas;",
+            "72 horas;",
+            "96 horas."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Durante uma situação de emergência foi necessário administrar sulfato de atropina ao paciente. A respeito das especificidades desse medicamento , é correto afirmar que:",
+          "alternativas": [
+            "deve ser aplicado de forma rápida, em bolus;",
+            "pode ser usado sem restrições em gestantes e lactantes;",
+            "a administração pela via subcutânea é contraindicada;",
+            "o início da ação ocorre em 6 0 minutos após sua administração, podendo seu efeito manter -se por até 12 horas;",
+            "a infusão endovenosa rápida pode causar tonturas e desmaios."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Ao administrar medicamentos pela via endovenosa, o profissional de enfermagem deve estar atento à ocorrência de extravasamentos, especialmente dos medicamentos vesicantes. Entre esses medicamentos estão:",
+          "alternativas": [
+            "dipirona e aminofilina;",
+            "fenitoína e norepinefrina;",
+            "vancomicina e propranolol;",
+            "azitromicina e hidralazina;",
+            "cefalotina e metoclopramida."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Uma criança de 3 anos de idade foi levada à unidade de saúde para completar os esquemas vacinais pendentes. Na ocasião , foi comprovado que ela havia tomado apenas uma dose da vacina meningocócica C (conjugada). Nesse caso, a recomendação para completar o esquema é a administração de:",
+          "alternativas": [
+            "1 dose da vacina;",
+            "1 dose da vacina e 1 dose de reforço 90 dias depois;",
+            "2 doses da vacina com intervalo mínimo de 30 dias entre elas;",
+            "2 doses da vacina com intervalo mínimo de 60 dias entre elas;",
+            "2 doses da vacina com intervalo mínimo de 30 dias entre elas e uma dose de reforço 60 dias após a segunda dose."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Entre as contraindicações para o uso de betabloqueadores está:",
+          "alternativas": [
+            "intervalo PR < 0,24 segundos;",
+            "pressão sistólica < 110 mmHg;",
+            "frequência cardíaca < 70 bpm;",
+            "bloqueio atrioventricular de 1º grau;",
+            "doença vascular periférica grave."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Enfermagem",
+          "assunto": "Hipertensão Arterial",
+          "enunciado": "Paciente de 30 anos foi diagnosticado com hipertensão arterial estágio 3. Esse estágio é compatível com o seguinte valor:",
+          "alternativas": [
+            "PAS = 157 mmHg;",
+            "PAD = 108 mmHg;",
+            "PAS = 178 mmHg;",
+            "PAD = 110 mmHg;",
+            "PAS = 160 mmHg."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Considerando as orientações para a coleta de exames da gestante e do recém -nascido em caso de suspeita de infecção pelo Zika vírus, analise as afirmativas a seguir, considerando V para a(s) verdadeira(s) e F para a(s) falsa(s): ( ) Deve ser coletado de 2 a 5 ml de sangue (sem anticoagulante) do cordão umbilical do RN no momento do nascimento. ( ) Não é mais recomendado coletar fragmentos da placenta nem amostra de líquor do recém-nascido após o parto. ( ) Orienta-se coletar cerca de 10 ml de sangue, sem anticoagulante, da mãe, até 3 a 5 dias após o início dos sintomas. A sequência correta é:",
+          "alternativas": [
+            "F – F – V;",
+            "V – F – V;",
+            "F – V – F;",
+            "V – V – V;",
+            "F – F – F."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Considerando o XABCDE do trauma no atendimento a um paciente politraumatizado, as ações relacionadas às duas primeiras letras do mnemônico devem ser voltadas para:",
+          "alternativas": [
+            "estado neurológico e circulação;",
+            "avaliação da circulação e da frequência respiratória;",
+            "prevenção de hipotermia e estabilização da coluna vertebral;",
+            "estabilização da coluna vertebral e permeabilidade das vias aéreas;",
+            "contenção de hemorragia externa grave e avaliação das vias aéreas com proteção da coluna vertebral."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Um recém -nascido do sexo masculino, a termo, apresentou perímetro cefálico = 33 cm. Essa medida é considerada:",
+          "alternativas": [
+            "adequada para a idade gestacional;",
+            "acima do normal para a idade gestacional;",
+            "abaixo do normal para a idade gestacional;",
+            "sugestiva de microcefalia;",
+            "sugestiva de macrocefalia."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Entre os medicamentos indicados para administração por hipodermóclise estão:",
+          "alternativas": [
+            "diazepam e diclofenaco;",
+            "potássio > 20 mmol/l e NPT;",
+            "dipirona e ampicilina;",
+            "soluções coloidais e fenitoína;",
+            "glicose > 5% e eletrólitos não diluídos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Mulher",
+          "enunciado": "Na assistência ao paciente, as ações de orientação sobre os fatores de risco para a hipertensão e rastreamento do câncer de mama correspondem, respectivamente, aos seguintes níveis de prevenção:",
+          "alternativas": [
+            "primário e terciário;",
+            "secundário e primário;",
+            "terciário e quaternário;",
+            "primário e secundário;",
+            "secundário e terciário."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Direitos dos Usuários do SUS",
+          "enunciado": "Com base n as disposições legais acerca dos direitos dos usuários do SUS, anali se as afirmativas a seguir, cons iderando V para a(s) verdadeira(s) e F para(s) a(s) falsa(s). ( ) T oda pessoa tem o direito de decidir se seus familiares e acompanhantes deverão ser informados sobre seu estado de saúde. ( ) Deve ser garantida ao usuário a identificação dos profissionais, por crachás visíveis, legíveis e/ou por outras formas de identificação de fácil percepção. ( ) O usuário tem direito à escolha de alternativa de tratamento, quando houver, e à consideração da recusa de tratamento proposto. A sequência correta é:",
+          "alternativas": [
+            "F – V – F;",
+            "V – V – V;",
+            "F – V – V;",
+            "V – V – F;",
+            "F – F – V."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Princípios e Diretrizes do SUS",
+          "enunciado": "Quando um serviço de saúde gerido pela esfera estadual passa a ser responsabilidade da gestão municipal, está se colocando em prática o seguinte princípio do Sistema Único de Saúde (SUS):",
+          "alternativas": [
+            "igualdade;",
+            "universalidade;",
+            "regionalização;",
+            "descentralização;",
+            "hierarquização."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Legislação do SUS",
+          "assunto": "Lei 8.080/1990 - Organização e Competências",
+          "enunciado": "A assistência às pessoas por intermédio de ações de promoção, proteção e recuperação da saúde, com a realização integrada das ações assistencia is e das atividades preventivas, corresponde a um(a):",
+          "alternativas": [
+            "preceito do SUS;",
+            "atribuição do SUS;",
+            "diretriz do SUS;",
+            "princípio do SUS;",
+            "objetivo do SUS."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Legislação do COFEN",
+          "assunto": "Código de Ética dos Profissionais de Enfermagem",
+          "enunciado": "O profissional de enfermagem que agir de modo a sobrepor o interesse da ciência ao interesse e segurança da pesso a, família e coletividade, está sujeito às penalidades de:",
+          "alternativas": [
+            "multa e suspensão;",
+            "cassação e censura;",
+            "multa e cassação;",
+            "advertência e multa;",
+            "censura e advertência."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Enfermagem",
+          "assunto": "Segurança do Paciente",
+          "enunciado": "De acordo com a norma de segurança para serviços de saúde, a Cabine de Segurança Biológica da sala de preparo d os quimioterápicos antineoplásicos deve estar em funcionamento , antes do início do trabalho de manipulação, no mínimo por:",
+          "alternativas": [
+            "15 minutos;",
+            "20 minutos;",
+            "30 minutos;",
+            "40 minutos;",
+            "60 minutos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Enfermagem",
+          "assunto": "Epidemiologia e Vigilância em Saúde",
+          "enunciado": "Com base nas regras de notificação compulsória de doenças, eventos e agravos de saúde pública, as doenças que devem ser notificadas pelo profissional de saúde em até 24 horas são:",
+          "alternativas": [
+            "dengue e leishmaniose;",
+            "tétano e hepatites virais;",
+            "raiva humana e cólera;",
+            "hanseníase e esquistossomose;",
+            "doença de Chagas e tuberculose."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Enfermagem",
+          "assunto": "Segurança do Paciente",
+          "enunciado": "A sexta Meta Internacional de Segurança do Paciente tem como objetivo ações voltadas para:",
+          "alternativas": [
+            "identificação correta do paciente;",
+            "redução do risco de lesões e quedas;",
+            "higienização correta das mãos;",
+            "melhoria da comunicação entre os profissionais de saúde;",
+            "melhoria da segurança na prescrição e uso de medicamentos."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Enfermagem",
+          "assunto": "Imunização",
+          "enunciado": "Sobre a administração de vacinas, é correto afirmar que:",
+          "alternativas": [
+            "a vacina contra sarampo, caxumba e rubéola é contraindicada para idosos;",
+            "a tríplice viral é indicada para grávidas a partir do segundo trimestre de gestação, devendo ser evitada no primeiro trimestre;",
+            "o esquema básico da vacina contra o HPV para meninas é de 3 doses, na faixa etária entre 11 e 14 anos;",
+            "a vacina dT adulto deve ser administrada em gestantes na dose de 0,5 ml e com intervalo mínimo de 30 dias entre a s doses;",
+            "idosos de 60 anos ou mais devem receber 2 doses da vacina pneumocócica 23 -valente, com intervalo mínimo de 60 dias entre as doses."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Enfermagem",
+          "assunto": "Fundamentos e Semiotécnica",
+          "enunciado": "Durante a assistência a um paciente, foi necessário coletar sangue para a realização de exames de hematologia clínica. Nesse caso, a coleta deve ser realizada em tubos:",
+          "alternativas": [
+            "sem aditivo;",
+            "com coagulante;",
+            "com citrato de sódio;",
+            "com fluoreto de sódio;",
+            "com EDTA."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Enfermagem",
+          "assunto": "Controle de Infecção e Biossegurança",
+          "enunciado": "O profissional de enfermagem precisou se paramentar para realizar aspiração de secreção em um paciente com suspeita de Covid-19. Nesse caso, a sequência correta de colocação dos EPIs antes da realização do procedimento é:",
+          "alternativas": [
+            "avental ou capote, m áscara de proteção respiratória , ó culos ou protetor facial, gorro e luvas;",
+            "máscara de proteção respiratória, avental ou capote , luvas e óculos ou protetor facial;",
+            "luvas, avental ou capote, máscara cirúrgica, óculos ou protetor facial e gorro;",
+            "avental ou capote, óculos ou protetor facial, gorro , luvas e máscara de proteção respiratória;",
+            "máscara cirúrgica, avental ou capote , óculos ou protetor facial, gorro e luvas."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Enfermagem",
+          "assunto": "Administração de Medicamentos e Cálculos",
+          "enunciado": "Determinado medicamento deve ser administrado pela via endovenosa em até 15 minutos. Essa infusão é classificada como:",
+          "alternativas": [
+            "push;",
+            "lenta;",
+            "bolus;",
+            "rápida;",
+            "contínua."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Enfermagem",
+          "assunto": "Fundamentos e Semiotécnica",
+          "enunciado": "Antes de realizar um curativo, o profissional de enfermagem escolheu uma cobertura com ação bactericida e bacteriostática, capaz de p rovocar dissociação das moléculas de proteína, resultando em desbridamento químico. Nesse caso, as características descritas são compatíveis com a ação de:",
+          "alternativas": [
+            "hidrogel;",
+            "papaína;",
+            "hidrofibra;",
+            "alginato de cálcio;",
+            "ácidos graxos essenciais."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Enfermagem",
+          "assunto": "Fundamentos e Semiotécnica",
+          "enunciado": "Ao realizar um curativo em uma lesão por pressão (LPP) na região glútea, o profissional de enfermagem registrou “perda de pele em sua espessura total e perda tissular com exposição direta da fáscia e músculo”. Nesse caso, trata-se de uma LPP:",
+          "alternativas": [
+            "estágio 1;",
+            "estágio 2;",
+            "estágio 3;",
+            "estágio 4;",
+            "não classificável."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Enfermagem",
+          "assunto": "Fundamentos e Semiotécnica",
+          "enunciado": "Sobre as características das ostomias e os cuidados de enfermagem aos pacientes submetidos a esses procedimentos, analise as afirmativas a seguir, considerando V para a(s) verdadeira(s) e F para(s) a(s) falsa(s). ( ) A colostomia úmida em alça é realizada para permitir a saída de urina e de fezes pelo mesmo estoma. ( ) Na colostomia sigmoide, as fezes são líquidas ou semilíquidas e com frequência irregular. ( ) A área ao redor do estoma deve ser limpa com solução antisséptica ou clorexidina degermante para evitar infecções. A sequência correta é:",
+          "alternativas": [
+            "V – V – F;",
+            "F – F – F;",
+            "V – V – V;",
+            "F – V – V;",
+            "V – F – F."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Enfermagem",
+          "assunto": "Eletrocardiograma (ECG)",
+          "enunciado": "Na realização de um eletrocardiograma, as derivações precordiais V2 e V4 devem ser posicionadas, respectivamente:",
+          "alternativas": [
+            "no 2º espaço intercostal direito junto ao esterno e no 5º espaço intercostal na linha axilar anterior esquerda;",
+            "no 3º espaço intercostal esquerdo junto ao esterno e no 5º espaço intercostal na linha axilar média esquerda;",
+            "no 4º espaço intercostal esquerdo junto ao esterno e no 5º espaço intercostal na linha hemiclavicular esquerda;",
+            "no 3º espaço intercostal esqu erdo junto ao estern o e no 6 º espaço intercostal na linha axilar média esquerda;",
+            "no 4º espaço intercostal esquerdo junto ao esterno e no 5º espaço intercostal na linha axilar anterior esquerda. Caso 1 Paciente adulto , vítima de queimadura, foi encaminhado à unidade de saúde com lesões na epiderme e derme, dolorosas, hiperemiadas, úmidas e bolhosas que atingiram toda a extensão das costas e do membro superior direito."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde do Adulto",
+          "enunciado": "Corresponde a uma doença parasitária com curso clínico bifásico (fase aguda e crônica):",
+          "alternativas": [
+            "toxoplasmose;",
+            "hantavirose;",
+            "doença de Chagas;",
+            "leishmaniose visceral;",
+            "esquistossomose mansônica."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 58,
+          "disciplina": "Enfermagem",
+          "assunto": "Saúde da Criança e do Adolescente",
+          "enunciado": "Sobre os cuidados de enfermagem a um recém -nascido com icterícia que necessita de fototerapia, analise as afirmativas a seguir, considerando V para a (s) verdadeira(s) e F para (s) a(s) falsa(s). ( ) A proximidade excessiva da fonte pode causar queimaduras no RN . Por isso, é importante respeitar a distância mínima recomendada. ( ) Recomenda -se verificar o peso do RN diariamente e a temperatura corporal a cada três horas para detectar hipotermia ou hipertermia. ( ) Deve -se aumentar a o ferta hídrica, pois a fototerapia com lâmpada fluorescente ou halógena resulta em maior perda insensível de água. A sequência correta é:",
+          "alternativas": [
+            "V – V – V;",
+            "F – V – F;",
+            "V – F – V;",
+            "F – F – F;",
+            "V – F – F."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Enfermagem",
+          "assunto": "Urgência e Emergência",
+          "enunciado": "Conforme recomendações do Ministério da Saúde acerca da Suplementação de Oxigênio e Estratégias para Corrigir a Hipoxemia em paciente com Covid -19, o fluxo de O ₂ deve ser reduzido caso a SpO2 ultrapasse:",
+          "alternativas": [
+            "90%;",
+            "92%;",
+            "94%;",
+            "96%;",
+            "98%."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "tjdft2022-tecnico-administrativa-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Tribunal de Justiça do Distrito Federal e dos Territórios",
+      "cargo": "Técnico Judiciário - Área Administrativa",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tecnico_judiciario_-_area_administrativanm-aa_tipo_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjdft2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 21,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Uma organização implantou recentemente mudança significativa em seus processos internos e atualização tecnológica em seus sistemas de informação. Essas mudanças implicaram demissões e realocação de pessoal para outras áreas e funções. Após os cortes e realocações de pessoal, a alta direção comu nicou aos funcionários que “a transformação está apenas começando, vamos todos construir uma nova organização”. Poucas semanas após essa comunicação, uma pesquisa de clima realizada pela área de RH revelou insatisfação e falta de confiança em relação às mudanças em andamento, além de medo e ansiedade generalizada entre os funcionários. Para superar o que considerou “uma resistência natural à mudança”, a alta direção encarregou a área de RH de realizar um programa de aconselhamento aos funcionários, associad o a terapias voltadas ao bem-estar. A estratégia utilizada para reduzir a resistência à mudança e uma de suas desvantagens são, respectivamente:",
+          "alternativas": [
+            "educação e comunicação; consome muito tempo;",
+            "facilitação e apoio; custo alto;",
+            "negociação; não há garantia de sucesso;",
+            "participação; consome muito tempo;",
+            "manipulação e cooptação; põe em risco a credibilidade dos gestores."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 22,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Segundo a conceituação mais difundida no campo da gestão de pessoas, o processo de treinamento é composto por quatro etapas a que correspondem diferentes objetivos, decisões e ações. As decisões acerca dos conteúdos, das metodologias de treinamento a serem empregadas e do público -alvo do treinamento são tomadas na:",
+          "alternativas": [
+            "segunda etapa, de desenho do treinamento;",
+            "primeira etapa, de planejamento do treinamento;",
+            "terceira etapa, de modelagem do treinamento;",
+            "primeira etapa, de avaliação das necessidades de treinamento;",
+            "segunda etapa, de implementação do programa de treinamento."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A organização XYZ é composta por equipes de trabalho pequenas. Na XYZ, o método de avaliação do desempenho humano consiste na comparação de cada funcionário com cada um dos demais membros de sua equipe, ordenando -se, ao final, os funcionários de acordo com as classificações obtidas. Esse método tradicional de avaliação de desempenho é conhecido como:",
+          "alternativas": [
+            "escalas gráficas;",
+            "ordenação simples;",
+            "comparação por pares;",
+            "distribuição forçada;",
+            "classificação de incidentes críticos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Em uma organização, um gerente acaba de ser comunicado sobre as novas metas estabelecidas pela diretoria para a sua área, para o ano de 2023. As metas são bastante ambiciosas e o gerente teve a sua equipe de oito pessoas reduzida para apenas cinco, depois que os três membros mais experientes e de melhor desempenho se aposentaram. O gerente avalia que “as metas não poderão ser alcançadas com a equipe reduzida” e não se sente motivado a se empenhar, em suas palavras, “inutilmente”. Segundo a Teoria da Expect ativa de Victor Vroom, a situação ilustra uma percepção, por parte do gerente, de(a):",
+          "alternativas": [
+            "injustiça distributiva nos recursos organizacionais;",
+            "injustiça processual na definição das metas;",
+            "relação desempenho-recompensa como fraca;",
+            "relação esforço-desempenho como fraca;",
+            "relação esforço-metas pessoais como fraca."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Poderes Administrativos",
+          "enunciado": "Em razão do iminente risco de uma enchente no Município Alfa, o prefeito determinou que os pacientes internados no hospital municipal fossem levados para um imóvel particular que estava desocupado, situado em local mais elevado, o que se deu sem prévia autorização do proprietário. À luz da sistemática constitucional, a ação do prefeito municipal foi:",
+          "alternativas": [
+            "correta, pois a função social da propriedade permite o seu uso, pelas autoridades constituídas, sempre que entenderem ser útil para o interesse público;",
+            "correta, considerando a existência de iminente perigo público, devend o ser assegurado ao proprietário o direito a posterior indenização, se houver dano;",
+            "errada, pois a propriedade privada, ressalvada a hipótese de desapropriação, não pode ser utilizada sem prévia autorização do proprietário;",
+            "errada, pois o direito à propriedade é absoluto, salvo se inexistisse qualquer outro imóvel público passível de ser utilizado, o que deveria ser objeto de prova;",
+            "errada, pois o uso de imóvel privado exige prévia justificativa, declinada em processo administrativo, sendo asse gurado ao proprietário o direito à indenização em valor idêntico ao aluguel do imóvel."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Princípios da Administração Pública",
+          "enunciado": "A Lei nº XX, do Estado Beta, com o objetivo de uniformizar procedimentos, dispôs que os documentos públicos produzidos por outros entes federativos deveriam ser objeto de ratificação perante as repartições públicas competentes de Beta. Com isso, ainda de acordo com a lei, esses documentos passariam a ter uma presunção de veracidade. A Lei nº XX é:",
+          "alternativas": [
+            "inconstitucional, pois é vedado ao Estado Beta recusar fé a esses documentos;",
+            "constitucional, pois os documentos públicos somente têm fé perante os órgãos do ente federativo que os produziu;",
+            "constitucional, pois compete ao Estado Beta definir a forma como os documentos públicos devem ser utilizados em seu território;",
+            "constitucional, pois a aquisição da presunção de veracidade é pré-requisito para que o documento público tenha sua fé reconhecida por um ente federativo;",
+            "inconstitucional, pois compete privativamente à União indicar os documentos públicos, produzidos por um ente federativo, que devem ter a fé reconhecida por outro."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "João, após regular processo administrativo disciplinar, foi demitido do serviço público. Irresignado com o teor dessa decisão, ajuizou ação, perante o Poder Judiciário, requerendo o reconhecimento de vício no processo administrativo, com a consequente declaração da nulidade da decisão que culminou com a referida sanção. À luz dessa narrativa, João deve ser:",
+          "alternativas": [
+            "aproveitado;",
+            "reconduzido;",
+            "reintegrado;",
+            "readaptado;",
+            "posto em disponibilidade."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Princípios da Administração Pública",
+          "enunciado": "Carla, estudiosa do Direito Administrativo, constatou que em determinado processo administrativo, instaurado no âmbito da Administração Pública federal, seria necessária a prolação de decisões administrativas por três órgãos distintos. Percebeu, ainda, que, com a finalidade de simplificar o processo administrativo, observados os demais requisitos exigidos, seria possível a participação concomitante de todas as autoridades e agentes decisórios e dos responsáveis pela instrução técnico - jurídica. Essa atuação de forma compartilhada é denominada decisão:",
+          "alternativas": [
+            "coordenada, sendo aplicável a todos os processos administrativos;",
+            "coordenada, não podendo ser aplicada a certos processos administrativos;",
+            "centralizada, sendo aplicável a todos os processos administrativos;",
+            "centralizada, que exclui a responsabilidade originária de cada órgão ou autoridade envolvida;",
+            "escalonada fictícia, de modo que cada órgão ou autoridade preserva a sua responsabilidade em uma manifestação única."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Joana e Regina, que atuavam no setor de licitações da Secretaria de Administração do Município Beta, travaram intenso debate a respeito da legislação que deveria reger a escolha das modalidades de licitação no período de 2 de abril de 2021 a 1º de abril de 2023. Joana defendia que poderiam continuar a ser aplicadas a Lei nº 8.666/1993 ou a Lei nº 10.520/2002, conforme o caso, sendo admitida a aplicação combinada das normas de um desses diplomas normativos com aquelas veiculadas pela Lei nº 14.133/2021. Regina, por sua vez, entendia que somente os processos de licitação já iniciados em 2 de abril de 2021 continuariam a ser regidos pela Lei nº 8.666/1993 ou pela Lei nº 10.520/2002, enquanto os demais, instaurados a partir de então, seriam integralmente disciplinados pela Lei nº 14.133/2021. À luz da sistemática vigente, no período indicado, é correto afirmar que:",
+          "alternativas": [
+            "apenas Joana está errada, pois é vedada a combinação da Lei nº 14.133/2021 com outros diplomas normativos, estando Regina cer ta ao afirmar que esse diploma normativo deve reger todas as licitações;",
+            "apenas Regina está errada, pois deve ser aplicada a Lei nº 14.133/2021 mesmo às licitações em curso, ainda que de modo combinado com a Lei nº 8.666/1993 ou a Lei nº 10.520/2002, conforme o caso;",
+            "apenas Regina está errada, pois não deve ser aplicada a Lei nº 14.133/2021 de modo exclusivo, sendo possível a sua aplicação de modo combinado com a Lei nº 8.666/1993 ou a Lei nº 10.520/2002, conforme o caso;",
+            "Joana e Regina estão e rradas, pois a Administração Pública pode optar, em uma licitação, pela aplicação, de um lado, da Lei nº 8.666/1993 ou da Lei nº 10.520/2002, ou, do outro, da Lei nº 14.133/2021, sendo vedada a combinação;",
+            "Joana e Regina estão parcialmente certas, pois a Lei nº 8.666/1993 ou a Lei nº 10.520/2002 podem continuar a ser aplicadas, mas apenas em relação às licitações já iniciadas, sendo ainda admitida a combinação com a Lei nº 14.133/2021."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Responsabilidade Civil do Estado",
+          "enunciado": "Joana, servidora pública estadual, no exercício regular de suas funções, estava operando uma empilhadeira em um galpão da Secretaria Municipal de Obras do Município Beta. Nesse contexto, causou danos ao veículo automotor que se encontrava estacionado, de Tiago, o qual comparecera ao prédio anexo, da mesma repartição, para solicitar uma licença de construção. Nesse caso, a responsabilidade civil pelos danos causados ao bem de Tiago é:",
+          "alternativas": [
+            "do Município Beta ou de Joana, m as apenas se for demonstrada a culpa desta última;",
+            "do Município Beta, apenas se for demonstrada a culpa de Joana;",
+            "do Município Beta, sendo demonstrada, ou não, a culpa de Joana;",
+            "do Município Beta, ainda que haja culpa exclusiva de Tiago;",
+            "apenas de Joana, sendo demonstrada, ou não, a sua culpa."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "tjdft2022-analista-suporte-ti-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Tribunal de Justiça do Distrito Federal e dos Territórios",
+      "cargo": "Analista Judiciário - Suporte em Tecnologia da Informação",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/analista_judiciario_-_suporte_em_tecnologia_da_informacaons-sti_tipo_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjdft2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 1,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "“Justiça é consciência, não uma consciência pessoal, mas a consciência de toda a humanidade. Aqueles que reconhecem claramente a voz de suas próprias consciências normalmente reconhecem também a voz da justiça.” (Alexander Solzhenitsyn) A afirmação que está de acordo com a estruturação e a significação desse pensamento é:",
+          "alternativas": [
+            "a conjunção “mas” mostra uma oposição entre “consciência” e “consciência de toda a humanidade”;",
+            "ao dizer que justiça é a consciência de toda a humanidade, o autor mostra uma marca da justiça: a imparcialidade;",
+            "o segmento “não uma consciência pessoal” corrige o erro do emprego do termo “consciência” no trecho anterior;",
+            "o segundo período amplia a informação do texto, uma espécie de consequência da afirmação anterior;",
+            "o termo “normalmente” indica que o processo de reconhecimento ocorre de forma particular em cada cidadão."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 3,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "“Todos aqueles que devem deliberar sobre quaisquer questões devem manter -se imunes ao ódio e à simpatia, à ira e ao sentimentalismo.” Tratando-se de um pensamento dirigido àqueles que julgam, o seu autor recomenda que eles:",
+          "alternativas": [
+            "pratiquem a caridade em relação ao próximo;",
+            "deixem de lado, no julgamento, questões pessoais;",
+            "não abandonem o sentimento ao julgarem;",
+            "considerem sempre a realidade do próximo;",
+            "privilegiem sempre a verdade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 4,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Coesão e Coerência",
+          "enunciado": "Chegaram todos atrasados; além disso, não trouxeram as encomendas. Nessa frase, aparece o conector “além disso” com valor de adição; a frase abaixo em que NÃO há um conector do mesmo valor aditivo é:",
+          "alternativas": [
+            "Além de usar máscara, os passageiros dos ônibus deviam estar mais separados uns dos outros;",
+            "Ainda por cima, as pessoas parecem considerar que a pandemia já acabou;",
+            "Corria o risco de contrair a doença e mesmo assim não se importava;",
+            "Nem a máscara nem o álcool protegem integralmente contra a Covid;",
+            "Não só a pandemia não terminou, como também novas cepas são esperadas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 5,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "“A arte de interrogar não é tão fácil como se pensa. É mais uma arte de mestres do que discípulos; é preciso já ter aprendido muitas coisas para saber perguntar o que não se sabe.” A frase abaixo que mostra uma interrogação, ainda que indireta, é:",
+          "alternativas": [
+            "Sei o porquê de ele ter chegado atrasado;",
+            "Vi quando o táxi capotou;",
+            "Desconheço onde ele mora;",
+            "Vi como ela fez isso;",
+            "Queria conhecer todas as respostas."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 6,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Estrutura e Formação de Palavras",
+          "enunciado": "“E da minha fidelidade não se deveria duvidar; pois, tendo -a sempre observado, não devo aprender a rompê -la agora; e quem foi fiel e bom por quarenta e três anos, como eu, não deve poder mudar de natureza: da minha fidelidade e da minha bondade é testemunha a minha pobreza.” Nesse pensamento, o autor utiliza os adjetivos “fiel e bom” e, em seguida, os substantivos correspondentes “fid elidade” e “bondade”. A opção abaixo em que os dois adjetivos citados mostram substantivos adequados é:",
+          "alternativas": [
+            "sensato e esperto / sensatez e espertez;",
+            "claro e escuro / clareza e escureza;",
+            "alto e gordo / altura e magrura;",
+            "fundo e profundo / fundeza e profundeza;",
+            "liso e áspero / lisibilidade e asperidade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 7,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Semântica e Significação",
+          "enunciado": "“Não há nada que demonstre tão bem a grandeza e a potência da inteligência humana, nem a superioridade e a nobreza do homem, como o fato de ele poder conhecer, compreender por completo e sentir fortemente a sua pequenez.” Os termos desse pensamento mostram paralelismo perfeito nos seguintes segmentos:",
+          "alternativas": [
+            "“Não há nada” / “como o fato”;",
+            "“que demonstre” / “de ele poder conhecer”;",
+            "“a grandeza e a potência da inteligência humana” / “a superioridade e a nobreza do homem”;",
+            "“poder conhecer” / “compreender por completo”;",
+            "“como o fato de ele poder conhecer” / “compreender por completo e sentir fortemente”."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 8,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
+          "enunciado": "“A liberdade, como a vida, só a merece quem deve conquistá -la a cada dia!” Essa frase exemplifica um caso de linguagem figurada que é um(a):",
+          "alternativas": [
+            "pleonasmo, com a repetição da palavra “liberdade” por meio do pronome pessoal em “a merece”;",
+            "hipérbole, com a expressão “deve conquistá -la a cada dia”, já que indica um exagero;",
+            "elipse do termo “liberdade” no segmento “só a merece quem deve conquistá-la”;",
+            "ironia na comparação “como a vida”, igualando duas realidades muito diferentes: a liberdade e a vida;",
+            "anacoluto com o termo inicial “liberdade”, já que ele não mostra continuidade sintática na frase."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 9,
+          "disciplina": "Língua Portuguesa",
+          "assunto": "Interpretação de Textos",
+          "enunciado": "“Os regimes que reprimem a liberdade da palavra, por se incomodarem com a liberdade que ela difunde, fazem como as crianças que fecham os olhos para não serem vistas.” Sobre esse pensamento, é correto afirmar que:",
+          "alternativas": [
+            "o segmento “que reprimem a liberdade da palavra” explica o termo anterior;",
+            "o termo “da palavra” marca o paciente de “liberdade”;",
+            "“por se incomodarem com a liberdade que ela difunde” indica a consequência da repressão da liberdade da palavra;",
+            "a comparação com as crianças marca uma atitude infantil dos regimes citados;",
+            "“que fecham os olhos para não serem vistas” mostra uma ação claramente irracional."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 16,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Organização Administrativa",
+          "enunciado": "O prefeito do Município Alfa decidiu promover uma ampla reestruturação da Administração pública indireta. Para tanto, decidiu que fosse elaborado um estudo preliminar, de modo a delinear os contornos gerais de: (1) duas entidades com personalidade jurídica própria, para a execução dos serviços públicos de limpeza urbana e de administração de cemitérios públicos; e (2) de órgãos específicos, a serem criados no âmbito da Secretaria de Saúde e d a Secretaria de Ordem Pública, de modo a aumentar a especialização e, consequentemente, o nível de eficiência estatal. É correto afirmar que:",
+          "alternativas": [
+            "em (1) são mencionados exemplos de descentralização administrativa por especificação e em (2) de descentralização administrativa por serviços;",
+            "em (1) são mencionados exemplos de desconcentração administrativa por especificação e em (2) de desconcentração administrativa por serviços;",
+            "em (1) são mencionados exemplos de descentralização administrativa por serviços e em (2) de desconcentração administrativa;",
+            "em (1) são mencionados exemplos de desestatização por serviços e em (2) de descentralização administrativa por eficiência;",
+            "em (1) são mencionados exemplos de desestatização por serviços e em (2) de estatização por padrão de eficiência."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 17,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Maria, servidora pública federal, foi aposentada por incapacidade permanente. Após algum tempo, junta médica oficial declarou insubsistentes os motivos da aposentadoria. Como Maria estava plenamente ap ta ao exercício das funções que sempre desempenhou, deve ocorrer o(a) seu/sua:",
+          "alternativas": [
+            "aproveitamento;",
+            "reintegração;",
+            "readaptação;",
+            "recondução;",
+            "reversão."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 21,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "João, servidor público federal ocupante de cargo efetivo, no exercício das funções, opôs resistência injustificada ao andamento de documento e processo. De acordo com o regime jurídico disciplinar da Lei nº 8.112/1990, que lhe é aplicável, observadas as cautelas procedimentais legais, em tese, João, que até então nunca havia praticado qualquer infração funcional, está sujeito à sanção de:",
+          "alternativas": [
+            "advertência, que terá seu registro cancelado, após o decurso de três anos de efetivo exercício, se João não houver, nesse período, praticado nova infração disciplinar;",
+            "suspensão, que terá seu registro cancelado, após o decurso de três anos de efetivo exercício, se João não houver, nesse período, praticado nova infração disciplinar;",
+            "suspensão, que terá seu registro cancelado, após o decurso de cinco anos de efetivo exercício, se João não houver, nesse período, praticado nova infração disciplinar;",
+            "demissão, que terá seu registro cancelado, após o decurso de três anos de efetivo exercício, se João não houv er, nesse período, praticado nova infração disciplinar;",
+            "demissão, que terá seu registro cancelado, após o decurso de cinco anos de efetivo exercício, se João não houver, nesse período, praticado nova infração disciplinar."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Lucas é um trader profissional que trabalha em uma corretora de valores. Ele efetua muitas operações durante o período em que a bolsa negocia seus ativos. Após fazer uma revisão em suas operações do dia, não validou, como sendo efetuadas por ele, algumas das operações que obtiveram prejuízo. Lucas, então, entrou em contato com a corretora e esta demonstrou, a partir de registros de auditoria e garantia de identidade, que as operações em questão realmente foram executadas por ele. Para que a corretora prove que foi Lucas qu em realmente executou as operações, ela deve fazer uso do conceito de segurança chamado:",
+          "alternativas": [
+            "confidencialidade;",
+            "autenticidade;",
+            "integridade;",
+            "disponibilidade;",
+            "irretratabilidade."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Caio recebeu a tarefa de melhorar a segurança da rede lo cal do Tribunal de Justiça. A demanda solicitada foi a implementação de um sistema de criptografia que atenda aos requisitos a seguir. 1. receber como entrada um bloco de texto sem formatação; 2. trabalhar com tamanhos de chaves diferentes; 3. movimentar o bloco para uma matriz quadrada onde são executadas suas operações; 4. relacionar o número de rodadas do algoritmo com o tamanho da chave. Para cifrar as mensagens e atender aos critérios determinados, Caio deve utilizar o algoritmo criptográfico:",
+          "alternativas": [
+            "RSA;",
+            "AES;",
+            "DES;",
+            "3DES;",
+            "ELGAMAL."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Anderson quer enviar uma mensagem para sua esposa que está em outra cidade sem que ninguém saiba da existência da mensagem. Então, Anderson inseriu a mensagem em uma foto em que ambos estavam, de forma que fez uma pequena redução na qualidade da imagem e i nseriu a mensagem nesses bits sobressalentes. Para ocultar a mensagem em uma foto, Anderson utilizou a técnica de:",
+          "alternativas": [
+            "transposição;",
+            "substituição;",
+            "criptoanálise;",
+            "esteganografia;",
+            "cifração polialfabética."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A arquitetura TCP/IP é um conjun to de protocolos de comunicação entre computadores, e seu modelo de referência se divide em algumas camadas. Os protocolos e técnicas pertencentes à camada de rede são:",
+          "alternativas": [
+            "TCP e UDP;",
+            "TCP e IP;",
+            "IP, ICMP e NAT;",
+            "IP, IPSec, ICMP e SSH;",
+            "UDP, HTTP e NAT."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "João trabalha na área de Tecnologia da Informação de um Tribunal de Justiça e ficou responsável por atribuir as faixas de endereçamento IP de 4 novas varas cíveis, que necessitarão de 126 endereços de hosts cada. Sabe -se que a rede 10.112.0. 0/20 está disponível. Para realizar a distribuição com o mínimo de desperdício de endereços, João deve dividir a rede da seguinte forma:",
+          "alternativas": [
+            "nas sub -redes 10.112.0.0 com máscara 255.255.128.0, 10.112.0.128 com máscara 255.255.128.0, 10.112.1.0 com máscara 255.255.128.0 e 10.112.1.128 com máscara 255.255.128.0;",
+            "nas sub -redes 10.112.0.0 com máscara 255.255.255.0, 10.112.1.0 com máscara 255.255.255.0, 10.112.2.0 com máscara 255.255.255.0 e 10.112.3.0 com máscara 255.255.255.0;",
+            "nas sub -redes 10.112.0.0 com máscara 255.255.255.128, 10.112.0.128 com máscara 255.255.255.128, 10.112.1.0 com máscara 255.255.255.128 e 10.112.1.128 com máscara 255.255.255.128;",
+            "nas sub-redes 10.112.0.0/26, 10.112.0.128/26, 10.112.1.0/26 e 10.112.1.128/26;",
+            "a re de disponível não atende a demanda de endereços necessária."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A equipe de redes de um órgão público precisa segmentar sua rede local para hospedar seus ambientes produtivos e não produtivos, de forma que o tráfego de uma rede não impacte o outro, devido aos seus distintos comportamentos. Para assegurar a comunicação segura e estável entre ambos os ambientes, a equipe decidiu segmentar a rede por meio de VLANs. A implementação das VLANs assegura:",
+          "alternativas": [
+            "o roteamento entre diferentes comutadores;",
+            "que os hosts estejam fisicamente separados;",
+            "a segmentação de redes com, no mínimo, dois comutadores;",
+            "a restrição do tráfego do segmento a um único comutador;",
+            "que hosts conectados em portas com VID diferentes em um comutador estejam em domínios de broadcast diferentes."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Um órgão público possui algumas unidades distantes geograficamente umas das outras e está pesquisando soluções que sejam confiáveis e que suportem criptografia para conectar as unidades entre si. Sobre as tecnologias MPLS ( Multi-Protocol Label Switching) e SD - WAN (Software-Defined Wide Area Network), é correto afirmar que:",
+          "alternativas": [
+            "as duas tecnologias podem coexistir numa mesma rede;",
+            "o desempenho da aplicação é sempre previsível na tecnologia SD-WAN;",
+            "a tecnologia MPLS opera na cam ada de transporte da arquitetura TCP/IP;",
+            "a tecnologia SD -WAN consegue usar criptografia ponta a ponta, mas o MPLS não suporta;",
+            "em relação ao tráfego de dados, o MPLS distribui os dados por diversos caminhos, e a SD -WAN utiliza sempre o mesmo caminho."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A equipe de Tecnologia da Informação pretende implementar uma rede sem fio para cobrir as áreas de visitantes em um edifício comercial. De acordo com a norma ABNT NBR 14565, o cabeamento horizontal usado para atender às áreas de cobertura sem fio deve ser configurado em uma topologia:",
+          "alternativas": [
+            "estrela;",
+            "anel;",
+            "de árvore;",
+            "de barramento;",
+            "ponto a ponto."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Uma instituição pretende instalar uma rede Wi -Fi nas suas dependências e está analisando os padrões disponíveis no mercado. O responsável pela análise descobriu que cada geração de redes sem fio Wi -Fi possui características intrínsecas da tecnologia adotada. Em função das características dos novos celulares que foram distribuídos para os colaboradores, a instituição decidiu instalar a rede Wi-Fi baseada no padrão 802.11ax que:",
+          "alternativas": [
+            "opera somente na faixa de 5 GHz;",
+            "também é conhecido como Wi-Fi de 5ª geração;",
+            "é incompatível com os outros padrões de Wi-Fi;",
+            "pode operar por meio de um canal de 320 MHz;",
+            "pode operar usando modulação de amplitude de quadratura QAM-1024."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Andréa administra o DNS ( Domain Name System ) do órgão onde trabalha e precis a gerenciar vários registros de domínio para um endereço único de domínio. De forma a permitir esse tipo de apontamento, Andréa configurou um registro CNAME, apontando-o para o:",
+          "alternativas": [
+            "nome real do hospedeiro;",
+            "endereço IP do hospedeiro;",
+            "endereço IP do servidor DNS autoritativo daquele registro;",
+            "nome do cliente DNS utilizado na consulta;",
+            "nome do servidor DNS autoritativo daquele registro."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A equipe de Tecnologia da Informação de um Tribunal deseja melhorar a disponibilidade de sua rede interna, por isso está pesquisando soluções de redundância para os seus dispositivos de conectividade. Uma das soluções pesquisadas adota o VRRP (Virtual Router Redundancy Protocol) para eliminar o ponto único de falha inerente ao ambiente estático roteado por padrão. Uma característica que também é inerente à solução pesquisada é que:",
+          "alternativas": [
+            "todas as mensagens são executadas usando datagrama multicast IPv4 ou IPv6;",
+            "um roteador VR RP não pode associar um roteador virtual ao seu endereço real em uma interface;",
+            "existe uma restrição contra a reutilização de um mesmo VRID com um mapeamento de endereço diferente em LANs diferentes;",
+            "para que sua operação seja possível, deve haver no mínimo um roteador Master e dois roteadores Backup;",
+            "se o roteador Master ficar indisponível, o roteador Backup de menor prioridade será eleito Master e fará o escoamento do tráfego."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Um órgão que lida com muitos documentos sigilosos sinalizou para sua equipe de Tecnologia da Informação (TI) sua preocupação quanto a uma invasão cibernética e roubo desses documentos. Para incrementar a segurança da rede desse órgão, a equipe de TI instalou um equipamento capaz de verificar as conexões TCP em andame nto antes de permitir a passagem de um determinado pacote. O equipamento instalado pela equipe de TI utiliza recursos de:",
+          "alternativas": [
+            "IDS (Intrusion Detection System);",
+            "gateway VPN;",
+            "gateway de aplicação;",
+            "filtro de pacotes tradicionais;",
+            "filtro de estado."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "As interfaces dos equipamentos de uma rede local podem atuar com diferentes velocidades de transmissão. Contudo, se o emissor transmitir em velocidade muito superior à do receptor poderá sobrecarregar o buffer do receptor. Para controle de flu xo, no padrão Ethernet é implementado o mecanismo de quadros:",
+          "alternativas": [
+            "STOP;",
+            "REDUCING;",
+            "PAUSE;",
+            "JUMBO;",
+            "RUNT."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Os analistas de Tecnologia da Informação de uma instituição estão planejando modernizar o Centro de Dados da organização. Para isso, estão avaliando os indicadores de disponibilidade de sistemas e componentes, pois os indicadores são importantes para cálcu los de desempenho e planejamento da manutenção. Um dos componentes em avaliação possui o tempo médio de operação sem falhas de 500 horas e o tempo médio de reparo é de 5 horas. Com base nessas informações, é correto afirmar que:",
+          "alternativas": [
+            "o MTTF é de 5 horas;",
+            "o MTBF é de 100 horas;",
+            "o MTBF é de 500 horas;",
+            "a disponibilidade do componente é de 90%;",
+            "a disponibilidade do componente é de 95%."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "O órgão XPTO do Poder Judiciário está implementando tecnologia em nuvem para prover serviços para outros ó rgãos. Os serviços ofertados consistirão em um ambiente no qual os clientes receberão máquinas virtuais, com suas áreas de armazenamento definidas ( storage) e as interfaces de rede de acordo com os ambientes (produtivos ou não produtivos), nas quais poderã o instalar os sistemas operacionais e suas aplicações para disponibilizarem serviços para seus clientes. De acordo com a NIST SP 800-145, o modelo de serviço de nuvem implementado pelo órgão XPTO é o:",
+          "alternativas": [
+            "infrastructure as a service;",
+            "on-demand self-service;",
+            "software as a service;",
+            "platform as a service;",
+            "measured service."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "O Centro de Dados (CD) de um órgão público passou por algumas reformas e recebeu o acréscimo de alguns itens à sua infraestrutura para aumentar sua resiliência. Atualmente o CD possui geradores com tanques de combustível externos para reabastecimento, nobr eaks e aparelhos de refrigeração redundantes. Apesar dessas redundâncias, os serviços do CD ficam indisponíveis quando há interrupções não planejadas ou falhas graves em seu único sistema de distribuição elétrica. De acordo com os níveis de classificação Tier do Uptime Institute, o CD do órgão público está classificado no tier:",
+          "alternativas": [
+            "0;",
+            "I;",
+            "II;",
+            "III;",
+            "IV."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "A equipe de virtualização de um órgão público administra um cluster VMware composto por 6 hosts esx. Nesse cluster há um sistema de missão crítica que requer alto índice de disponibilidade. Para assegurar a disponibilidade desse sistema, a equipe de virtualização criou 2 máquinas virtuais idênticas e configurou-as para estarem sempre hospedadas em hosts esx diferentes. O recurso que assegur a a configuração aplicada nas máquinas virtuais é o:",
+          "alternativas": [
+            "vCenter high availability;",
+            "fault tolerance;",
+            "cluster DRS;",
+            "distributed power management;",
+            "vMotion."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "A equipe de banco de dados (BD) necessita implementar em sua infraestrutura própria um cluster de BD com 3 nós (3 servidores físicos), os quais irão compartilhar os mesmos discos, que deverão ser apresentados para os 3 nós como raw devices para criação da base de dados. O protocolo utilizado deverá ser o Fibre Channel (FC) e será utilizado um switch com suporte ao FC para permitir que os nós acessem os discos a eles apresentados. A arquitetura de armazenamento que deve ser utilizada para atender os requisitos de armazenamento para o cluster de BD é o:",
+          "alternativas": [
+            "RAID 1;",
+            "DAS;",
+            "NAS;",
+            "RAID 6;",
+            "SAN."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 53,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "O analista José gerencia o servidor LServer que executa RHEL (Red Hat Enterprise Linux). O servidor LServer possui o sistema de controle de acesso nativo do RHEL, o SELinux ( Security-Enhanced Linux), habilitado no modo Enforcing. José precisa mapear o usuário local user10 do LServer para um dos usuários SELinux nativos do RHEL de forma que o SELinux restrinja os direitos de acesso do user10 ao mínimo necessário. O user10 presc inde de qualquer acesso como superusuário, mas necessita efetuar login no ambiente gráfico. O acesso à rede do user10 se dá apenas com o uso de navegadores web. Portanto, José deve mapear user10 para o usuário SELinux:",
+          "alternativas": [
+            "user_u;",
+            "staff_u;",
+            "sysadm_u;",
+            "system_u;",
+            "xguest_u."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 54,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "A analista Ana precisa implantar o pod LogPod no cluster de Kubernetes KCluster do TJDFT de forma que todos os nós elegíveis do KCluster executem uma cópia do LogPod. Para que o KCluster apresente uma cópia do Log Pod em cada nó elegível, de forma automática, Ana deve implantar o LogPod utilizando o recurso do Kubernetes:",
+          "alternativas": [
+            "ReplicationController;",
+            "ReplicaSet;",
+            "StatefulSet;",
+            "DaemonSet;",
+            "EndpointSlice."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "O analista João administra o domínio Active Directory ad.tj.dft e precisa atribuir novas permissões ao usuário administrador RaizSD_u. O usuário RaizSD_u é membro de um grupo protegido do Active Directory. Sendo assim, para que esta alteração de permissões persista ao longo do tempo, João deve adic ionar as novas permissões no objeto de ad.tj.dft:",
+          "alternativas": [
+            "AdminSDHolder;",
+            "IIS_IUSRS;",
+            "rootDSE;",
+            "Krbtgt;",
+            "Replicator."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "A analista Sara modificou alguns arquivos do container Docker TJSiteContainer que se encontra em execução. Para criar uma imagem Docker a partir do estado atual de TJSiteContainer, a fim de persistirem as modificações efetuadas em seus arquivos, Sara deve utilizar o comando:",
+          "alternativas": [
+            "docker create",
+            "docker diff",
+            "docker export",
+            "docker image save",
+            "docker commit"
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "O analista Pedro definiu no Logstash do TJDFT um novo pipeline de processamento de dados de nome SPipeline. A saída definida em SPipeline exige que os dados sejam estruturados. No entanto, a entrada definida em SPipeline consiste em um arquivo de texto arbitrário e não estruturado. A fim de estruturar a entrada do SPipeline com o uso de expressões regulares, Pedro deve adicionar ao SPipeline o filtro do Logstash:",
+          "alternativas": [
+            "drop;",
+            "mutate;",
+            "grok;",
+            "clone;",
+            "aggregate."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "A Estratégia Nacional de Segurança da Informação e Cibernética do Poder Judiciário (ENSEC -PJ) foi instituída com o objetivo de incrementar a segurança cibernética nos órgãos do Poder Judiciário, abrangendo aspectos essenciais da segurança da in formação e definindo objetivos para fortalecer o espaço cibernético do Poder Judiciário, assim como divulgar ações para os órgãos em seu âmbito de atuação. Um dos objetivos da ENSEC -PJ, instituída pela Resolução CNJ nº 396/2021, é:",
+          "alternativas": [
+            "estabelecer modelo centralizado de governança cibernética nacional;",
+            "permitir a manutenção e a continuidade dos serviços, ou o seu restabelecimento em menor tempo possível;",
+            "fortalecer as ações de governança cibernética;",
+            "realizar prática em gestão de incidentes e e fetivar o aprimoramento contínuo do processo;",
+            "estabelecer rede de cooperação do Judiciário para a segurança cibernética."
+          ],
+          "correta": "B"
+        }
+      ]
+    }
+  ]
+}
