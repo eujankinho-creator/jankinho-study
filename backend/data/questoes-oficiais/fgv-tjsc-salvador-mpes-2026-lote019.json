@@ -168,174 +168,6 @@
           "correta": "D"
         },
         {
-          "numero": 31,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A Teoria Geral da Administração (TGA) estuda a Administração das organizações e empresas a partir da interação e da interdependência entre seis variáveis principais, cujo comportamento é sistêmico e complexo: cada uma influencia e é influenciada pelas demais, de modo que modificações em uma delas provocam alterações em todas as outras. As seis variáveis principais que, segundo o estado atual da TGA, constituem os componentes e ssenciais do estudo da Administração das organizações e empresas, são:",
-          "alternativas": [
-            "tarefas, estrutura, pessoas, tecnologia, ambiente e competitividade.",
-            "tarefas, estrutura, pessoas, tecnologia, ambiente e cultura organizacional.",
-            "tarefas, processos, pessoas, tecnologia, ambiente e competitividade.",
-            "tarefas, estrutura, liderança, tecnologia, ambiente e competitividade.",
-            "tarefas, estrutura, pessoas, inovação, ambiente e competitividade."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 32,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Henry Mintzberg, em estudo clássico sobre as atividades gerenciais, sistematizou as funções do administrador em dez papéis específicos, agrupados em três categorias: interpessoal, informacional e decisorial. Relacione os papéis específicos do administrador às respectivas categorias propostas por Mintzberg. Categoria Papel específico 1. Interpessoal ( ) Disseminação 2. Informacional ( ) Liderança 3. Decisorial ( ) Alocação de recursos ( ) Representação Assinale a opção que indica a relação correta, na ordem apresentada.",
-          "alternativas": [
-            "1 – 2 – 3 – 1.",
-            "2 – 1 – 3 – 1.",
-            "2 – 3 – 1 – 2.",
-            "3 – 1 – 2 – 3.",
-            "1 – 3 – 2 – 1."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 33,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A Administração tradicionalmente persegue dois objetivos centrais que se complementam: a eficiência e a eficácia. Na empresa ABC, a equipe de produção utiliza integralmente os recursos disponíveis, segue rigorosamente os procedimentos operacionais padronizados e minimiza desperdícios, embora os objetivos estratégicos definidos para o trimestre não tenham sido atingidos. A situação descrita evidencia que a empresa ABC operou com",
-          "alternativas": [
-            "eficácia e eficiência simultaneamente.",
-            "ausência de eficiência e de eficácia.",
-            "excelência operacional plena.",
-            "eficiência, sem eficácia.",
-            "eficácia, sem eficiência."
-          ],
-          "correta": "D"
-        },
-        {
-          "numero": 34,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Na empresa ABC, antes de iniciar a expansão para um novo mercado, a Diretoria define antecipadamente os objetivos a serem alcançados, os recursos necessários, o cronograma de atividades e os indicadores de acompanhamento, situando a organização entre a posição em que se encontra atualmente e o estado almejado em horizonte de três anos. A função administrativa descrita corresponde",
-          "alternativas": [
-            "à direção.",
-            "ao controle.",
-            "à coordenação.",
-            "à organização.",
-            "ao planejamento."
-          ],
-          "correta": "E"
-        },
-        {
-          "numero": 35,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Na empresa ABC, fo ram implementadas três rotinas de controle em diferentes momentos do processo produtivo. Relacione cada rotina ao tipo de controle correspondente. Tipo de controle Rotina implementada 1. Preliminar ( ) Auditoria final dos lotes produzidos para verificar se os resultados atingiram os padrões de qualidade estabelecidos. 2. Concorrente ( ) Inspeção das matérias -primas no recebimento, antes de sua liberação para a linha de produção. 3. Posterior ( ) Monitoramento, em tempo real, das operações da linha de montagem, para identificar e corrigir desvios durante o trabalho. Assinale a opção que indica a relação correta, na ordem apresentada.",
-          "alternativas": [
-            "3 – 1 – 2.",
-            "1 – 2 – 3.",
-            "3 – 2 – 1.",
-            "2 – 3 – 1.",
-            "1 – 3 – 2."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 36,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A empresa ABC opera sem instalações físicas centralizadas e estrutura hierárquica convencional. Suas atividades são desenvolvidas por meio de módulos e grupos interconectados eletronicamente, articulados por alianças e redes de cooperação que transcendem fro nteiras geográficas, tendo a Tecnologia da Informação como principal facilitadora dessa configuração. A estrutura organizacional descrita corresponde à organização",
-          "alternativas": [
-            "virtual.",
-            "divisional.",
-            "matricial.",
-            "funcional.",
-            "linha-staff."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 37,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A empresa ABC atua na construção naval, dedicando -se à concepção e à execução de navios de grande porte. Cada empreendimento possui orçamento, cronograma e equipe próprios; exige a convergência de competências diversas - engenharia naval, metalurgia, si stemas elétricos e eletrônicos -; demanda elevado aporte de recursos; e estende -se por tempo prolongado, sendo tratado pela Diretoria como um produto único, exclusivo e individualizado. O critério de departamentalização adotado pela empresa ABC corresponde à departamentalização por",
-          "alternativas": [
-            "função.",
-            "projetos.",
-            "processos.",
-            "clientes.",
-            "área geográfica."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 38,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A Diretoria da empresa ABC adota uma ferramenta visual que dispõe, em colunas verticais, a variável tempo subdividida em frações regulares (originalmente, cada mês representado por quatro subcolunas correspondentes às semanas) e, em linhas horizontais, as atividades a serem executadas, permitindo o acompanhamento do cronograma sem necessidade de consulta ao calendário convencional. A ferramenta foi originalmente concebida por um engenheiro colaborador de Taylor, voltada ao planejamento e ao controle da produção semanal. A ferramenta de planejamento e controle descrita corresponde ao",
-          "alternativas": [
-            "cronograma.",
-            "fluxograma.",
-            "diagrama de blocos.",
-            "gráfico de Gantt.",
-            "análise de Pareto."
-          ],
-          "correta": "D"
-        },
-        {
-          "numero": 39,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Embora se apresente como momento final do ciclo administrativo, o controle desempenha funções que extrapolam a mera verificação de resultados, sendo dotado de objetivos múltiplos que orientam sua aplicação na rotina das organizações. A respeito dos objetivos principais do controle como função administrativa, analise os itens a seguir. I. A regulação das atividades, voltada a mantê -las dentro dos padrões estabelecidos, assegurando que os re sultados se mantenham na amplitude de variação compreendida entre os limites máximo e mínimo previamente definidos. II. A substituição integral das funções de planejamento, organização e direção sempre que se identificarem desvios entre os resultados obtidos e os padrões estabelecidos. III. A prevenção de novas falhas ou erros, na medida em que, ao corrigir os problemas detectados, o controle aponta os meios de evitar sua recorrência futura, contribuindo para o aprimoramento gradativo do processo administrativo. Está correto o que se apresenta em",
-          "alternativas": [
-            "I, II e III.",
-            "I e II, apenas.",
-            "I e III, apenas.",
-            "II e III, apenas.",
-            "III, apenas."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 40,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A Gestão da Qualidade, ao analisar percepções equivocadas ou parciais sobre o tema observadas no cotidiano organizacional, costuma reconvertê -las em ações estratégicas, transformando cada limitação em ponto de partida para uma intervenção orientada à produção da qualidade. Relacione as posições consagradas sobre qualidade às respectivas ações estratégicas que a Gestão da Qualidade pode desenvolver a partir delas. Posição sobre qualidade Ação estratégica 1. A qualidade é um aspecto subjetivo. ( ) Priorizar processos produtivos mais confiáveis. 2. A qualidade identifica-se com capacidade de fabricação. ( ) Ampliar o número de clientes, cujas preferências passariam a ser atendidas por essas novas alternativas de produtos ou de itens que os compõem. 3. A qualidade envolve a diversidade de opções que um produto ou serviço pode oferecer a seus clientes. ( ) Investir em melhorias do processo produtivo que evitem o aparecimento de quaisquer defeitos e falhas. 4. A qualidade é considerada como a falta de defeitos no produto ou no serviço prestado. ( ) Desenvolver processos em que o cliente interfira na produção de bens ou serviços da empresa, tornando-os mais adequados às suas necessidades, preferências ou conveniências. Assinale a opção que indica a relação correta, na ordem apresentada.",
-          "alternativas": [
-            "1 – 3 – 4 – 2.",
-            "2 – 3 – 4 – 1.",
-            "2 – 4 – 3 – 1.",
-            "4 – 1 – 2 – 3.",
-            "3 – 2 – 1 – 4."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 41,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Na empresa ABC, a equipe responsável pela implantação de um novo sistema de gestão documental encontra -se em momento crítico do projeto: o plano-base já foi estruturado e aprovado, e a equipe executa as atividades de trabalho voltadas à produção das entregas. Nessa etapa, o gerente de projeto monitora continuamente o progresso para assegurar que o trabalho permaneça dentro da programação e do orçamento, que o escopo seja integral mente atendido conforme as especificações e que eventuais mudanças sejam documentadas, aprovadas e incorporadas a um plano-base atualizado. Considerando o ciclo de vida genérico do projeto, a fase descrita corresponde à de",
-          "alternativas": [
-            "iniciação.",
-            "planejamento.",
-            "realização.",
-            "encerramento.",
-            "avaliação."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 42,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A modelagem de processos pode ser realizada por meio de diferentes formatos, cada qual mais adequado a uma finalidade específica. A escolha do formato depende da situação organizacional, do público-alvo e do grau de formalidade exigido. Considere as situações a seguir, vivenciadas por gestores em uma organização. I. \"Tenho 15 minutos para explicar o processo a quem nunca o viu.\" II. \"Preciso mapear gargalos com o time de operação.\" III. \"Preciso compreender oportunidades de melhorias, realizar automação, implantar IA ou conduzir projeto de transformação digital ou organizacional.\" Os formatos de modelagem mais adequados a cada uma dessas situações são, respectivamente,",
-          "alternativas": [
-            "BPMN simplificado, fluxograma tradicional e desenho lúdico.",
-            "fluxograma tradicional, desenho lúdico e BPMN simplificado.",
-            "desenho lúdico, BPMN simplificado e fluxograma tradicional.",
-            "desenho lúdico, fluxograma tradicional e BPMN simplificado.",
-            "BPMN simplificado, desenho lúdico e fluxograma tradicional. Gestão de Pessoas e Comportamento Organizacional"
-          ],
-          "correta": "D"
-        },
-        {
           "numero": 43,
           "disciplina": "Direito Administrativo",
           "assunto": "Gestão de Pessoas",
@@ -476,37 +308,9 @@
           "correta": "A"
         },
         {
-          "numero": 59,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A literatura especializada destaca a diversidade que envolve o conceito de política pública, abrangendo distintas áreas de atuação, diferentes níveis de governança e múltiplos atores protagonistas, sendo o problema público o ponto de partida da análise. Relacione os problemas públicos às políticas públicas formuladas para enfrentá-los. Problema público Política pública 1. Aquecimento global ( ) Diversificação das opções de tratamento cadavérico. 2. Exaustão da malha rodoviária nacional ( ) Redução das emissões de gases de efeito estufa. 3. Crescimento do consumo e dependência de crack na população do estado ( ) Reativação da malha ferroviária e dos serviços de transporte ferroviário. 4. Superlotação do cemitério municipal ( ) Conscientização dos efeitos nocivos da dependência química para a população. Assinale a opção que indica a relação correta, na ordem apresentada.",
-          "alternativas": [
-            "1 – 4 – 3 – 2.",
-            "4 – 1 – 2 – 3.",
-            "4 – 2 – 1 – 3.",
-            "2 – 1 – 4 – 3.",
-            "3 – 1 – 2 – 4."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 60,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "No Brasil, o planejamento governamental estrutura -se em instrumentos articulados que operam em diferentes horizontes temporais e níveis de detalhamento, tradu zindo as estratégias de médio prazo em metas anuais e em programas finalísticos voltados à entrega de resultados à sociedade. O instrumento de planejamento de médio prazo, com vigência de quatro anos, no qual são definidos os eixos, os objetivos estratégicos e os programas finalísticos da Administração Pública para o período, servindo de referência para a elaboração dos orçamentos anuais subsequentes, denomina-se",
-          "alternativas": [
-            "Orçamento Anual.",
-            "Diretrizes Orçamentárias.",
-            "Plano Plurianual.",
-            "Plano de Contingência Orçamentária.",
-            "Plano de Aplicação Financeira."
-          ],
-          "correta": "C"
-        },
-        {
           "numero": 61,
           "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
+          "assunto": "Controle da Administração Pública",
           "enunciado": "Em determinado órgão público, no âmbito da política de governança pública instituída pelo Decreto nº 9.203/2017, foram implementados processos estruturados destinados a mitigar riscos, com vistas ao alcance dos objetivos institucionais e a garantir a execução ordenada, ética, econômica, eficiente e eficaz das atividades da organização, com preservação da legalidade e da economicidade no dispêndio de recursos públicos. A iniciativa descr ita corresponde ao mecanismo de governança pública denominado",
           "alternativas": [
             "liderança.",
@@ -520,7 +324,7 @@
         {
           "numero": 62,
           "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
+          "assunto": "Controle da Administração Pública",
           "enunciado": "No campo da gestão pública, os conceitos de governabilidade e accountability constituem categorias distintas, embora complementares. A respeito dos conceitos de governabilidade e accountability, é correto afirmar que",
           "alternativas": [
             "governabilidade refere-se à capacid ade política do Estado de governar e decidir, originada de sua legitimidade democrática perante a sociedade, ao passo que accountability designa o dever de os agentes de governança prestarem contas de sua atuação e assumirem as consequências de seus atos e omissões.",
@@ -544,48 +348,6 @@
             "I, apenas."
           ],
           "correta": "B"
-        },
-        {
-          "numero": 64,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Na Administração Pública federal direta, autárquica e fundacional, a terceirização é disciplinada pelo Decreto nº 9.507/2018, que enumera, em seu art. 3º, hipóteses em que se veda a execução indireta de serviços, em razão da natureza nuclear ou indelegável das atividades envolvidas. Dentre as hip óteses em que o Decreto nº 9.507/2018 veda a execução indireta de serviços na Administração Pública federal direta, autárquica e fundacional, encontra -se a contratação de serviços de",
-          "alternativas": [
-            "conservação, limpeza e copeiragem.",
-            "recepção e telecomunicações.",
-            "manutenção predial e de equipamentos.",
-            "regulação e outorga de serviços públicos.",
-            "transporte de cargas e de passageiros."
-          ],
-          "correta": "D"
-        },
-        {
-          "numero": 65,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A Lei nº 13.019/2014, denominada Marco Regulatório das Organizações da Sociedade Civil (MROSC), estabelece o regime jurídico das parcerias entre a Administração Pública e as organizações da sociedade civil, instituindo três instrumentos jurídicos distintos para a formalização dessas parcerias. Relacione os instrumentos jurídicos previstos no MROSC às respectivas características. Instrumento Característica 1. Termo de colaboração ( ) Adotado em parcerias que envolvem transferência de recursos financeiros e cujo plano de trabalho é proposto pela Administração Pública 2. Termo de fomento ( ) Adotado em parcerias que não envolvem transferência de recursos financeiros entre os parceiros 3. Acordo de cooperação ( ) Adotado em parcerias que envolvem transferência de recursos financeiros e cujo plano de trabalho é proposto pela organização da sociedade civil Assinale a opção que indica a relação correta, na ordem apresentada.",
-          "alternativas": [
-            "1 – 2 – 3.",
-            "2 – 3 – 1.",
-            "1 – 3 – 2.",
-            "3 – 1 – 2.",
-            "2 – 1 – 3."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 66,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "O neoweberianismo é um paradigma de reforma da Administração Pública que surge no início dos anos 2000, no contexto continental europeu, como alternativa ao gerencialismo. Ao longo das primeiras décadas do século XXI, evoluiu de tipo ideal a modelo normativo, consolidando -se como referência paradigmática voltada a mitigar problemas deco rrentes do neoliberalismo e das reformas gerenciais, notadamente o esvaziamento do Estado e sua incapacidade para enfrentar problemas sociais complexos e crises econômicas. Sobre a caracterização do Estado Neoweberiano como modelo de reforma administrativa, é correto afirmar que",
-          "alternativas": [
-            "constitui aprofundamento da New Public Management (NPM), promovendo o esvaziamento do Estado, a redução de seus papéis centrais e a generalização da lógica de mercado como mecanismo predominante de coordenação.",
-            "consiste em a tualização do modelo burocrático weberiano clássico, mediante incorporação de tecnologias digitais aos procedimentos internos, mantendo a orientação processual centrada no cumprimento de normas.",
-            "corresponde a paradigma puramente gerencial, fundado na substituição da burocracia estatal por arranjos contratuais flexíveis e por mecanismos de mercado, em ruptura com a tradição weberiana.",
-            "adota a lógica reticular da Nova Governança Pública (NPG) como mecanismo predominante de coordenação institucional, deslocando a hierarquia estatal para função subsidiária na articulação entre atores públicos e privados.",
-            "caracteriza-se como modelo híbrido, que articula legados burocráticos clássicos com aprendizados da NPM e da NPG, traduzindo-se em um arranjo instit ucional que preserva a coordenação estatal e simultaneamente incorpora lógicas de resultados e de participação cidadã. Administração Financeira e Orçamentária"
-          ],
-          "correta": "E"
         }
       ]
     },
@@ -600,20 +362,6 @@
       "gabaritoDefinitivo": true,
       "questoes": [
         {
-          "numero": 37,
-          "disciplina": "Informática",
-          "assunto": "Internet e Navegadores",
-          "enunciado": "Durante o planejamento da integração entre os sistemas de um órgão público, a equipe discutiu o uso d e serviços baseados em SOAP (Simple Object Access Protocol) e em REST (Representational State Transfer). Na ocasião, foram apresentadas as seguintes afirmações: I. Em arquiteturas REST, a restrição de ausência de estado na comunicação entre cliente e serv idor tende a favorecer a escalabilidade, pois cada requisição deve conter as informações necessárias ao seu processamento. II. Em SOAP, a adoção do HTTP ( Hypertext Transfer Protocol ) implica que todas as operações sejam idempotentes, independentemente do método utilizado. III. Em soluções baseadas em SOAP, o uso de WSDL (Web Services Description Language ) pode contribuir para uma descrição formal do serviço, o que favorece a interoperabilidade contratual entre aplicações. Está correto o que se afirma em",
-          "alternativas": [
-            "I, apenas.",
-            "II, apenas.",
-            "I e II, apenas.",
-            "I e III, apenas.",
-            "I, II e III."
-          ],
-          "correta": "D"
-        },
-        {
           "numero": 41,
           "disciplina": "Informática",
           "assunto": "Internet e Navegadores",
@@ -626,62 +374,6 @@
             "arquitetura cliente-servidor."
           ],
           "correta": "E"
-        },
-        {
-          "numero": 44,
-          "disciplina": "Informática",
-          "assunto": "Internet e Navegadores",
-          "enunciado": "Em um projeto de integração entre sistemas de um tribunal, uma equipe técnica decidiu disponibilizar funcionalidades de consulta e atualização de in formações por meio de uma API RESTful, utilizando o formato JSON para a troca de dados entre aplicações Nesse contexto, assinale a opção que apresenta corretamente uma característica de uma API RESTful e uma característica do formato JSON.",
-          "alternativas": [
-            "A API RESTfu l organiza a comunicação em torno de recursos identificados por URI; o JSON representa dados em formato textual, com estruturas como objetos, arrays e pares chave - valor.",
-            "A API RESTful organiza a comunicação em torno de recursos identificados por URI; o JSON é um protocolo de transporte responsável pelo envio das requisições entre cliente e servidor.",
-            "A API RESTful exige, obrigatoriamente, a manutenção de estado da sessão no servidor; o JSON representa dados em formato textual, com estruturas como objetos, arrays e pares chave-valor.",
-            "A API RESTful utiliza métodos HTTP, como GET, POST, PUT e DELETE, para manipular recursos; o JSON é um formato binário utilizado exclusivamente para compactação de arquivos.",
-            "A API RESTful depende necessariamente de WSDL para descrever suas operações; o JSON é independente de linguagem de programação e pode ser interp retado por diferentes plataformas."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 48,
-          "disciplina": "Informática",
-          "assunto": "Internet e Navegadores",
-          "enunciado": "A mensageria é fundamental para garantir a comunicação assíncrona e escalável entre sistemas distribuídos, permitindo que aplicações proc essem tarefas de forma desacoplada e eficiente. Uma das ferramentas mais empregadas no mercado para implementar mensageria é a RabbitMQ. Sobre essa ferramenta, assinale (V) para afirmativa verdadeira e (F) para falsa. ( ) Aplicações podem referenciar filas por meio de seus nomes. ( ) A propriedade Exclusive determina que a fila sobreviverá à reinicialização do broker. ( ) Caso a segurança de dados seja prioridade, é mais recomendável usar filas clássicas do que filas do tipo quorum e streams. As afirmativas são, respectivamente,",
-          "alternativas": [
-            "F – F – F.",
-            "F – V – V.",
-            "V – F – F.",
-            "V – V – F.",
-            "V – F – V."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 49,
-          "disciplina": "Informática",
-          "assunto": "Internet e Navegadores",
-          "enunciado": "O setor de tecnologia de um tribunal desenvolveu uma aplicação web composta por três serviços: cadastro de usuários, consulta processual e geração de relatórios. Cada serviço possui dependências próprias e deve ser implantado de forma padronizada nos ambientes de desenvolvimento, homologação e produção. Além disso, a equipe precisa distribuir réplicas desses serviços em diferentes nós de um cluster, reiniciar automaticamente instâncias com falha, ampliar a quantidade de réplicas em períodos de maior demanda e administrar, por uma interface centralizada, mais de um cluster Kubernetes utilizado pela instituição. Nesse contexto, é correto afirmar que",
-          "alternativas": [
-            "o Docker permite empacotar aplicações e dependências em containers, o Kubernetes orquestra a implantação e o escalonamento desses containers, e o Rancher auxilia na gestão centralizada de clusters Kubernetes.",
-            "o Docker per mite empacotar aplicações e dependências em containers, o Kubernetes orquestra a implantação e o escalonamento desses containers, e o Rancher é um formato de imagem utilizado para distribuir containers.",
-            "o Docker permite empacotar aplicações e dependênc ias em containers, o Kubernetes é utilizado principalmente para criar imagens de containers, e o Rancher auxilia na gestão centralizada de clusters Kubernetes.",
-            "o Docker é utilizado principalmente para empacotar aplicações e dependências em máquinas vir tuais completas, o Kubernetes orquestra a implantação e o escalonamento de containers, e o Rancher auxilia na gestão centralizada de clusters Kubernetes.",
-            "o Docker permite empacotar aplicações e dependências em containers, o Kubernetes orquestra a impla ntação e o escalonamento desses containers, e o Rancher substitui a necessidade de clusters Kubernetes por execução local isolada."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 50,
-          "disciplina": "Informática",
-          "assunto": "Internet e Navegadores",
-          "enunciado": "Em arquiteturas de microsserviços voltadas para tribunais, a comunicação baseada em mensageria (como o uso de Message Brokers) é frequentemente adotada para aumentar a resiliência do ecossistema. Ao utilizar um modelo de comunicação assíncrona para o processamento de petições e atos processuais, o sistema busca mitigar o risco de falhas em cascata e lidar com picos de demanda. Uma característica fundamental e intrínseca a esse modelo de interação é o",
-          "alternativas": [
-            "Acoplamento Temporal, que exige que o serviço de destino esteja em estado operacional e pronto para processamento no exato momento em que o produtor realiza o envio da mensagem.",
-            "Bloqueio da Thread de Execução, em que o serviço emissor suspende suas atividades e aguarda a confirmação de recebimento e o processamento final da tarefa pelo consumidor para retomar sua lógica.",
-            "Desacoplamento espacial e tempor al, permitindo que o produtor envie a mensagem e prossiga com seu fluxo de execução, sem a necessidade de que o serviço consumidor esteja disponível ou que sua localização seja conhecida no momento da emissão.",
-            "Protocolo de RPC ( Remote Procedure Call ), que visa garantir que a chamada entre serviços distribuídos ocorra de forma transparente, mimetizando uma chamada de função local e síncrona.",
-            "Mecanismo de Idempotência Nativa, característica garantida obrigatoriamente pela camada de tr ansporte que impede, de forma automática e sem necessidade de lógica no consumidor, o processamento de mensagens duplicadas. Banco de Dados e Engenharia de Dados"
-          ],
-          "correta": "C"
         },
         {
           "numero": 59,
@@ -752,34 +444,6 @@
             "V – V – F."
           ],
           "correta": "E"
-        },
-        {
-          "numero": 66,
-          "disciplina": "Informática",
-          "assunto": "Windows",
-          "enunciado": "Sobre o processo de virtualização de computadores, é correto afirmar que",
-          "alternativas": [
-            "para realizar a virtualização, utiliza -se um software chamado hypervisor, responsável por gerenciar máquinas virtuais e abstrair os recursos de hardware para os sistemas operacionais convidados.",
-            "o processo de virtualização traz benefícios no tempo de processamento, pois a latência de resposta dos processos virtualizados é menor do que nos sistemas não virtualizados.",
-            "a virtualização traz ganhos econômicos, pois é possível virtualizar diversas c ópias de sistemas proprietários, como o Windows ou iOS em máquinas Linux com apenas acesso a uma licença.",
-            "um dos benefícios da virtualização é a escalabilidade, pois ela permite que processadores de diversos servidores distintos sejam usados em um único sistema virtual.",
-            "os containers são sistemas operacionais generalistas virtualizados, que permitem flexibilidade na utilização dos recursos de hardware e facilitam o deployment de soluções. Segurança da Informação e Governança de TI"
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 69,
-          "disciplina": "Informática",
-          "assunto": "Internet e Navegadores",
-          "enunciado": "No complexo e conectado ambiente de serviços disponíveis na rede mundial, garantir a autenticidade de um usuário para que possa acessar apenas os conteúdos a ele disponíveis é um processo fundamental. Com a proliferação da necessidade de se autenticar a cada interação, surgiu a tecnologia de Single-Sign on (SSO). Assim sendo, o SSO é",
-          "alternativas": [
-            "uma solução integradora, que permite que um servidor autentique diversos usuários para acessá-lo simultaneamente.",
-            "uma instanciação do Keycloak, protocolo de autenticação remota padronizada pela RFC 6749.",
-            "um serviço que reduz o número de autenticações em múltiplos sistemas.",
-            "um processo que garante autenticação segura com apenas um fator.",
-            "uma tecnologia que deve ser instalada em um servidor singular da rede, para acesso remoto de vários sistemas a esse servidor."
-          ],
-          "correta": "C"
         },
         {
           "numero": 73,
@@ -862,20 +526,6 @@
             "I, II e III."
           ],
           "correta": "E"
-        },
-        {
-          "numero": 46,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Serviços Públicos",
-          "enunciado": "O Estado de Santa Catarina pretende desapropriar o imóvel de titularidade de João, com o objetivo de construir, no local, um hospital púbico. Em assim sendo, o Poder Público, em observância às formalidades legais, notificou o proprietário e apresentou -lhe oferta de indenização. Nesse cenário, considerando as disposições do Decreto -Lei nº 3.36 5/1941, é correto afirmar que a referida notificação conterá a",
-          "alternativas": [
-            "cópia do ato de declaração de utilidade pública; a planta ou descrição do bem e suas confrontações; o valor da oferta; e a informação de que o prazo para aceitá -la ou rejeitá -la é de quinze dias e de que o silêncio será considerado aceitação.",
-            "cópia do ato de declaração de utilidade pública; a planta ou descrição do bem e suas confrontações; o valor da oferta; e a informação de que o prazo para aceitá -la ou rejeitá -la é de quinze dias e de que o silêncio será considerado rejeição.",
-            "cópia do ato de declaração de utilidade pública; a planta ou descrição do bem e suas confrontações; o valor da oferta; e a informação de que o prazo para aceitá -la ou rejeitá -la é de trinta dias e de que o silêncio será considerado rejeição.",
-            "a planta ou descrição do bem e suas confrontações; o valor da oferta; e a informação de que o prazo para aceitá-la ou rejeitá- la é de trinta dias e de que o silêncio será considerado aceitação.",
-            "o valor da oferta; e a informação de que o prazo para aceitá-la ou rejeitá -la é de quinze dias e de que o silêncio será considerado aceitação."
-          ],
-          "correta": "B"
         }
       ]
     },
@@ -1059,8 +709,8 @@
         },
         {
           "numero": 43,
-          "disciplina": "Enfermagem",
-          "assunto": "Política Nacional de Humanização",
+          "disciplina": "Saúde Coletiva I",
+          "assunto": "Promoção da Saúde",
           "enunciado": "Durante uma programação voltada para a promoção da saúde, a equipe de saúde organizou ações voltadas para a prevenção do câncer de mama. Com base nas recomendações atualizadas acerca do diagnóstico precoce e rastreamento desse tipo de câncer, analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa. ( ) Entre os sinais e sintomas suspeitos de câncer de mama, que devem ser referenciados co m urgência para a confirmação diagnóstica, está o nódulo mamário fixo e de consistência endurecida, em mulheres adultas de qualquer idade. ( ) A faixa etária prioritária para o rastreamento do câncer de mama foi modificada para 50 a 74 anos, sendo contraindicado que mulheres entre 40 e 49 anos e acima de 74 anos realizem o exame de forma rotineira. ( ) A mamografia continua sendo o único exame cuja aplicação em programas de rastreamento apresenta eficácia comprovada na redução da mortalidade por câncer de mama. As afirmativas são, respectivamente,",
           "alternativas": [
             "F – F – F.",
@@ -1070,34 +720,6 @@
             "F – V – V."
           ],
           "correta": "B"
-        },
-        {
-          "numero": 44,
-          "disciplina": "Enfermagem",
-          "assunto": "Prática Baseada em Evidências",
-          "enunciado": "Um determinado órgão público implementou, como parte das atividades voltadas para a saúde dos servidores, um programa com foco na prevenção de complicações de doenças crônicas como Diabetes Mellitus e hipertensão arterial. Esse programa corresponde às ações de",
-          "alternativas": [
-            "promoção da saúde.",
-            "prevenção primária.",
-            "prevenção secundária.",
-            "prevenção terciária.",
-            "prevenção quaternária."
-          ],
-          "correta": "D"
-        },
-        {
-          "numero": 45,
-          "disciplina": "Enfermagem",
-          "assunto": "Atenção Primária à Saúde",
-          "enunciado": "As Políticas de Promoção da Equidade em Saúde são formadas por um conjunto de programas e ações governamentais de saúde, no âmbito do SUS. Acerca dessas políticas, assinale a afirmativa correta.",
-          "alternativas": [
-            "Visam à inserção de novas práticas integrativas nas unidades da Atenção Básica.",
-            "Concentram-se na ampliação das Equipes de Saúde da Família e nos territórios com baixa cobertura.",
-            "São direcionadas exclusivamente para as populações cadastradas em programas federais de transferência de renda.",
-            "Têm como foco expandir o alcance do Sistema Único de Saúde para toda a população.",
-            "Visam garantir o atendimento integral às populações em situação de vulnerabilidade e desigualdade social."
-          ],
-          "correta": "E"
         },
         {
           "numero": 46,
@@ -1186,7 +808,7 @@
         {
           "numero": 52,
           "disciplina": "Enfermagem",
-          "assunto": "Teorias de Enfermagem",
+          "assunto": "Processo de Enfermagem e SAE",
           "enunciado": "Durante uma oficina de educação permanente, a Enfermeira explicou à equipe que a construção de diagnósticos, intervenções e resultados na CIPE® ocorre por meio da combinação de termos organizados em diferentes eixos da classificação. Nesse sentido, ao elaborar o diagnóstico dor aguda em membro inferior, os termos dor e aguda correspondem, respectivamente, aos eixos",
           "alternativas": [
             "meios e tempo.",
@@ -2326,20 +1948,6 @@
           "correta": "A"
         },
         {
-          "numero": 43,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Variação Linguística",
-          "enunciado": "O século XIX é uma boa base para refletirmos questões identitárias no Brasil, pois é o período histórico que faz uma ponte entre o antigo e o moderno na formação brasileira, século síntese que marca o projeto de modernização deste país. Podemos partir da história da literatura no Brasil como mote de apreensão da coformação do pensamento social brasileiro, e entender as determinações que impugnou, em vários momentos, a compreensão efetiva da vida nacional. De fo rma específica, a história da literatura nacional é compreendida, ora pela imitação dos ditames europeus, ora por um nacionalismo incongruente. Consolidação dos estados nações e o nacionalismo, bem como o livre comércio, são pautas na agenda europeia desse período, e são assimiladas, não ao acaso, pela intelectualidade brasileira e expressas na literatura nacional ao longo de sua história. FARIAS, M. Educação no Museu AfroBrasil e identidade. p. 4. Disponível em: https://www.museudalinguaportuguesa.org.br/ Ao considerar a literatura uma forma de apreensão da constituição do pensamento social brasileiro, o texto apresenta a produção literária do século XIX como",
-          "alternativas": [
-            "registro documental capaz de reproduzir objetivamente as transformações políticas e econômicas experimentadas pelo país.",
-            "expressão de uma identidade nacional já consolidada, cuja autonomia teria sido assegurada pelo processo de modernização do país.",
-            "instrumento de rejeição dos valores estrangeiros, empregado pela intelectualidade brasileira para preservar as tradições nacionais.",
-            "espaço em que se manifestam as tensões entre a busca de uma identidade nacional e a assimilação de modelos europeus.",
-            "manifestação artística independente dos processos históricos, embora ocasionalmen te influenciada pelas discussões políticas de seu tempo."
-          ],
-          "correta": "D"
-        },
-        {
           "numero": 44,
           "disciplina": "Língua Portuguesa",
           "assunto": "Sintaxe da Oração e do Período",
@@ -2408,20 +2016,6 @@
             "caracteriza enunciados cujo conteúdo explicita, diretamente ao interlocutor, as intenções comunicativas que determinaram sua produção naquela situação de interação."
           ],
           "correta": "C"
-        },
-        {
-          "numero": 49,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Tipos de Discurso",
-          "enunciado": "Texto 1: MANDA BUSCAR Ravi Lobo / Cronista do Morro Minhas palavras me fazem uma profecia Nessa guerra vencendo as espetaculares Vivendo a vida e burlando as regras Depois da minha morte cê vai gritar Depois da minha vida contada em filme Salvador liberdade, é só encostar Paredão no morrinho, na humilde Nova era, mudança de vida Tipo contenção de pistola nos beco Cantando o futuro, chamando na mente Sonhando com isso, obrigado (música) Salvador tá barril, corda no pescoço No pico do morro, sonhando com a paz Menino do gueto, cheio de informação Mais um Malcolm X, mais um bom rapaz Eles tratam meu povo como lixo Eles tratam meu povo como bicho https://genius.com/Ravi-lobo-manda-buscar-lyrics Texto 2: A demanda cognitiva das atividades de leitura deve aumentar progressivamente. Essa complexidade envolve, entre outros aspectos, considerar a diversidade cultural e abranger diferentes produções e formas de expressão, como a literatura infantil e juvenil, o cânone, o culto, o popular, a cultura de massa, a cultura das mídias e as c ulturas juvenis, de modo a ampliar o repertório dos estudantes e promover a interação com o diferente. Adaptado de BRASIL. Ministério da Educação. Base Nacional Comum Curricular. Brasília, DF: Ministério da Educação, 2018. p. 75. Considerando as orientações do Texto 2, uma atividade de leitura do Texto 1 que articule a ampliação de repertório à progressão da demanda cognitiva deve levar os estudantes a",
-          "alternativas": [
-            "localizar as marcas de oralidade, substituí -las por formas da norma-padrão e avaliar a quali dade do rap com base na correção alcançada pela reescrita.",
-            "reconhecer as referências à cidade de Salvador, pesquisar a biografia dos compositores e utilizar essas informações para determinar o significado pretendido em cada verso.",
-            "comparar o rap com um poema canônico sobre Salvador, catalogar suas diferenças e hierarquizar as produções conforme a complexidade vocabular e a regularidade formal.",
-            "identificar referências a Salvador, analisar como as escolhas linguísticas constroem sujeito e territ ório, inferir tensões sociais e comparar diferentes representações da cidade.",
-            "sintetizar as informações do rap e tomar a voz do eu lírico como representação geral das experiências compartilhadas por toda a juventude da cidade."
-          ],
-          "correta": "D"
         },
         {
           "numero": 50,
@@ -2494,23 +2088,9 @@
           "correta": "E"
         },
         {
-          "numero": 55,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Figuras de Linguagem e Vícios de Linguagem",
-          "enunciado": "Leia o trecho da canção “Tempo Rei”, de Gilberto Gil: Não me iludo Tudo permanecerá do jeito Que tem sido Transcorrendo Transformando Tempo e espaço navegando todos os sentidos (...) Pensamento Mesmo o fundamento singular do ser humano De um momento para o outro Poderá não mais fundar nem gregos, nem baianos Mães zelosas Pais corujas Vejam como as águas de repente ficam sujas Não se iludam Não me iludo Tudo agora mesmo pode estar por um segundo Tempo rei, ó, tempo rei, ó, tempo rei Transformai as velhas formas do viver Ensinai-me, ó, Pai, o que eu ainda não sei Mãe Senhora do Perpétuo, socorrei https://www.letras.mus.br/gilberto-gil/46247/ acesso em 14.8.26 A articulação entre as ideias de permanência e transformação, ao longo da canção, sugere que",
-          "alternativas": [
-            "o temp o preserva as formas de viver, embora modifique a organização do espaço.",
-            "a permanência da existência reside na transformação contínua do tempo e do espaço.",
-            "as mudanças se repetem ciclicamente, sem produzir experiências realmente diferentes.",
-            "permanência e transformação pertencem a momentos históricos que não coexistem.",
-            "a instabilidade temporal impede a compreensão humana das mudanças experimentadas."
-          ],
-          "correta": "B"
-        },
-        {
           "numero": 56,
           "disciplina": "Língua Portuguesa",
-          "assunto": "Variação Linguística",
+          "assunto": "Estrutura e Formação de Palavras",
           "enunciado": "POR QUE O GENTÍLICO DE SALVADOR É SOTEROPOLITANO E NÃO ALGO COMO “SALVADORENSE”? Entenda a origem do gentílico cunhado no século 19 Soteros significa “salvador” em grego. O sufixo “politano” deriva de polis, que é “cidade”. Não se sabe por que optou -se pelo gentílico helênico em vez do intuitivo “salvadorense”. Segundo Deonísio da Silva, autor do livro De Onde Vêm as Palavras, não há outra explicação que não seja “esnobação erudita”. “Soteropolitano” foi cunhado em 1817, pelo padre e geógrafo português Manuel Aires de Casal. A palavra apareceu pela primeira vez no livro Corografia Brasílica. Também é comum que algumas cidades tenham dois gentílicos: um formado naturalmente, pelo uso diário, e outro artificialmente, com palavras derivadas do grego ou do latim. É o caso do “ludovicense”, que designa quem nasceu em São Luís, no Maranhão. O termo deriva do latim Ludovicus, que posteriormente deu origem ao aportuguesado “Luís”. No entanto, o gentílico “são-luisense” também é aceito. Em alguns casos, a forma erudita é a mais usual. Você nunca ouviu falar de nenhum “rio -de-janeirense”. “Fluminense”, o gentílico para quem nasceu no estado do Rio de Janeiro, é latim puro. Flumen significa “rio” em latim – uma referência geograficamente imprecisa para a Baía da Guanabara. Vale lembrar que o termo “salvadorense” é o gentílico de qu em nasceu em Salvador das Missões, no Rio Grande do Sul. E “são - luizense”, o de São Luiz Gonzaga, no mesmo estado. https://super.abril.com.br/coluna/oraculo/por -que-o-gentilico-de-salvador-e- soteropolitano-e-nao-algo-como-salvadorense/ Ao comparar gentíli cos como “soteropolitano”, “salvadorense”, “ludovicense” e “são-luisense”, o texto evidencia que a formação do léxico da língua portuguesa",
           "alternativas": [
             "resulta de processos históricos diversos, nos quais criações eruditas podem coexistir com formas constituídas seg undo padrões produtivos no uso da língua.",
@@ -2520,34 +2100,6 @@
             "conserva os significados e as estruturas das línguas de origem, impedindo que os vocábulos eruditos sejam adaptados ao português."
           ],
           "correta": "A"
-        },
-        {
-          "numero": 57,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Variação Linguística",
-          "enunciado": "A alfabetização midiática e informacional é a capacidade mais específica de entender a linguagem e as convenções das notícias como um gênero e reconhecer como esses recursos podem ser explorados por alguém mal -intencionado. (...) Por isso, a AMI também precisa prestar atenção para conscientizar as pessoas sobre como elas respondem a conteúdos de notícias, e suas predisposições para darem credibilidade ou não à informa ção, independente de parecerem notícias ou não. Portanto, a AMI deve, em sua essência, dar aos indivíduos uma visão de sua própria identidade – quem são e quem estão se tornando, e como isso afeta seu engajamento com notícias e outros tipos de comunicação. https://www.unesco.org/pt/articles/jornalismo -fake-news-desinformacao A concepção de alfabetização midiática e informacional (AMI) apresentada no texto compreende que o enfrentamento da desinformação requer",
-          "alternativas": [
-            "associar o reconhecimento das convenções do gênero notícia à percepção dos fatores identitários que influenciam a credibilidade atribuída às informações.",
-            "examinar os recursos empregados na produção das notícias para estabelecer diferenças formais entre conteúdos informativos e manifestações identitárias.",
-            "conscientizar os leitores sobre suas predisposições para que atribuam credibilidade às informações compatíveis com seu processo de formação identitária.",
-            "identificar os conteúdos que reproduzem as convenções jornalísticas, tomando essa ade quação como indício da confiabilidade das informações divulgadas.",
-            "favorecer o autoconhecimento dos leitores para reduzir a influência exercida pelas características composicionais do gênero notícia em suas avaliações."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 58,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Variação Linguística",
-          "enunciado": "Construir sociedades mais pacíficas, justas e sustentáveis começa pela educação. Ela influencia todos os aspectos da vida cotidiana e nossas perspectivas futuras, ao mesmo tempo em que é impactada pela saúde e pelo meio ambiente. No cenário global de agravamento da mudança climática, retrocessos democráticos, desigualdades persistentes, aumento da discriminação, discurso de ódio, violência e conflitos, a educação pode ser uma ferramenta para enfrentar e prevenir esses problemas. E pode também constituir um investimento a lon go prazo com rendimentos crescentes, se for concebido e implementado de forma eficaz. https://www.unesco.org/pt/global-citizenship-peace-education/ Na construção argumentativa do texto, o emprego de “pode” e da oração “se for concebido e implementado de forma eficaz” contribui para apresentar a educação como",
-          "alternativas": [
-            "possibilidade cujos resultados decorrem principalmente da ampliação dos investimentos destinados ao atendimento das demandas sociais.",
-            "prática cuja atuação é reduzida pelo agrav amento dos problemas contemporâneos que afetam as relações íntimas e sociais.",
-            "recurso de transformação cujos efeitos potenciais dependem da qualidade das ações adotadas em sua elaboração e execução.",
-            "investimento voltado à produção de retornos econô micos, condicionado por fatores relacionados à saúde e ao meio ambiente.",
-            "instrumento orientado à abordagem de problemas globais por meio da transmissão de conhecimentos sobre sustentabilidade."
-          ],
-          "correta": "C"
         },
         {
           "numero": 61,
@@ -2578,48 +2130,6 @@
           "correta": "B"
         },
         {
-          "numero": 65,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Variação Linguística",
-          "enunciado": "As mulheres já estão na linha de frente dos efeitos da crise climática. Mas não apenas como vítimas. Em muitos territórios, são elas que percebem primeir o os sinais de risco, reorganizam a rotina da casa e da comunidade, mobilizam redes de cuidado, orientam saídas em situações de emergência e sustentam a reconstrução quando o evento passa. Tratá -las apenas como as mais afetadas por enchentes, secas, deslizamentos, ondas de calor e insegurança alimentar é reduzir uma realidade muito mais complexa e desperdiçar experiências que deveriam orientar políticas públicas. https://diplomatique.org.br/mulheres-como-agentes-da-resiliencia-climatica-que- deveriam-estar-no-centro-das-decisoes/ Em uma atividade avaliativa, para verificar a habilidade de compreender como recursos sintáticos e coesivos participam da construção argumentativa, um professor de Língua Portuguesa dos Anos Finais poderia, com base no texto,",
-          "alternativas": [
-            "solicitar a substituição de “Mas” por “Portanto” e demonstrar que ambas as conjunções introduzem uma conclusão decorrente da informação anterior.",
-            "orientar a reconstrução do conteúdo elíptico em “Mas não apenas como vítimas” e analisar como a adversativ a corrige uma compreensão restritiva da atuação feminina.",
-            "propor a classificação de “como vítimas” como oração comparativa e relacionar essa estrutura à equiparação entre as mulheres e outros grupos afetados.",
-            "pedir a transformação do período iniciado por “Mas” em uma oração concessiva e concluir que as duas construções expressam uma ressalva de sentido equivalente.",
-            "examinar o valor focalizador de “apenas” e concluir que o advérbio restringe a participação das mulheres à condição de vítimas da crise climática."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 66,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Variação Linguística",
-          "enunciado": "No fim da tarde de 7 de junho de 1926, um senhor com cabelo e barba longos foi atropelado por um bonde em Barcelona. Ele usava roupas remendadas e estava coberto de sangue. Quem presenciou o acidente pensou se tratar de uma pessoa em situação de rua. O socorro levou horas; e o reconhecimento, um dia inteiro. Três dias depois, o homem morreu no hospital, aos 73 anos. Era Antoni Gaudí, o arquiteto que idealizou uma das obras mais ambiciosas e reconhecidas do mundo. Quando foi atropelado, Gaudí fazia o seu trajeto rotineiro para assistir a uma missa após o trabalho, a oito quarteirões de sua obra-prima inacabada: a Sagrada Família, à qual ele havia dedicado suas últimas quatro décadas. https://super.abril.com.br/historia/enfim-a-mais-alta-a-historia-e-os-simbolismos- da-basilica-da-sagrada-familia/ Em uma aula sobre recursos linguísticos e discursivos, o professor destaca as expressões “um senhor”, “ele”, “uma pessoa em situação de rua” e “o homem”. Ao relacioná-las à revelação “Era Antoni Gaudí”, espera-se que os estudantes reconheçam que essa sequência foi empregada para",
-          "alternativas": [
-            "criar ambiguidade sobre a quantidade e a identidade das pessoas envolvidas no acidente narrado em Barcelona.",
-            "ocultar a posição social do arquiteto e denunciar a ausência de informações biográficas sobre ele.",
-            "adiar a identificação da personagem, mantendo o suspense até uma revelação que ressignifica as descrições anteriores.",
-            "evitar a repetição do nome próprio e garantir a coesão, sem interferir na progressão da narrativa.",
-            "contrastar diferentes momentos da vida de Gaudí, separando sua trajetória profissional das circunstâncias de sua morte."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 67,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Variação Linguística",
-          "enunciado": "A exposição \"Carybé e o povo da Bahia\" tem o mérito de apresentar publicamente, pela primeira vez, 227 desenhos originais em nanquim sobre papel de Carybé, que ilustraram seis, dos dez cadernos da Coleção Recôncavo. Carybé (Hector Julio Páride Bernabó, 1911-1997) veio à Bahia, pela quarta vez, em 1950 para fixar residência e sua atuação foi decisiva para a consolidação da linguagem plástica moderna na arte da Bahia. Os desenhos de Carybé apresentam sínteses formais dos tipos sociais, dos costumes e da paisagem citadina de Sal vador (lida como Bahia), onde buscava captar um frescor por meio da criação de imagens singulares. Os originais da Coleção Recôncavo foram reunidos em seis seções, dentre as nove que compõem a mostra, e a esse conjunto acresceram-se pinturas inéditas de ve stes processionais (08), de desenhos de torços (12) e xilogravuras do álbum Sete Lendas Africanas da Bahia, de 1979 (07). Adaptado de https://www.guiademuseus.com.br/detalheponto.aspx?fk_ponto=2177 Na abordagem contextualizada da pontuação, o professor de Língua Portuguesa poderia utilizar as ocorrências de parênteses no texto para levar os estudantes a reconhecer que elas",
-          "alternativas": [
-            "desempenham a mesma função em todos os casos, isolando dados técnicos que não se integram sintaticamente aos períodos.",
-            "introduzem informações sempre acessórias, cuja retirada preservaria integralmente o conteúdo factual e a orientação interpretativa do texto.",
-            "apresentam comentários do produtor do texto, por meio dos quais ele manifesta sua avaliação sobre as informações expostas.",
-            "delimitam citações indiretas atribuídas ao curador, diferenciando suas avaliações das informações objetivas apresentadas sobre a exposição.",
-            "assumem funções distintas ao identificar o artista, inserir um comentário sobre a representação de Salvador e quantificar as obras expostas."
-          ],
-          "correta": "E"
-        },
-        {
           "numero": 68,
           "disciplina": "Língua Portuguesa",
           "assunto": "Interpretação de Textos",
@@ -2632,20 +2142,6 @@
             "propor a reescrita em registro informal e avaliar sua adequação ao gênero pela proximidade linguística estabelecida entre a instituição e os leitores."
           ],
           "correta": "A"
-        },
-        {
-          "numero": 69,
-          "disciplina": "Língua Portuguesa",
-          "assunto": "Interpretação de Textos",
-          "enunciado": "Leia o início da crônica Enxaquekcakzxa da escritora Tati Bernardi. Levem a criança, espero pegá-la amanhã. Ela ainda não fez a lição e seu cabelo está cheio de nós. Cada vez que ela entra no quarto com sua energia invejável de 105 coelhos nenês brincando na primavera, eu preciso de três sublinguais contra enjoo . A última crise de enxaqueca me deixou cinco dias imprestável (foi semana passada), mas não é possível que duas seringas de cortisona não me coloquem de pé. A médica do pronto -socorro ainda me deu anti -inflamatório, analgésico, relaxante muscular e mais r emédio pra enjoo. Nada aconteceu. Até agora nenhuma melhora. Nada. Menti que estava boa, porque eu precisava voltar pra casa e insistir por três horas para que a menina comesse tudo do prato antes de pegar o sorvete de pistache. Durante uma crise de enxaqu eca, não faz nenhum sentido ser mãe, não faz sentido a frase \"todo o frango, depois o pistache\", mas existe algo em nós, mães, que opera a maternidade a despeito do que faz sentido. Então ela comeu tudo, fez a lição e ainda tiramos os nós do seu cabelo. https://www1.folha.uol.com.br/colunas/tatibernardi Ao planejar a abordagem dessa crônica em uma turma dos Anos Finais do Ensino Fundamental, o professor contribuirá de maneira mais efetiva para a formação do leitor literário se propuser aos estudantes que",
-          "alternativas": [
-            "identifiquem a situação inicial, o conflito e o desfecho do fragmento, a fim de verificar se sua organização corresponde integralmente à estrutura convencional da narrativa.",
-            "relacionem a situação vivida pela narradora às próprias experiências familia res, tomando essa identificação como principal critério para atribuir valor à crônica.",
-            "examinem como o exagero, a repetição e a quebra de expectativas constroem uma perspectiva simultaneamente humorística e crítica sobre a experiência narrada.",
-            "comparem as marcas de informalidade do fragmento com as construções previstas pela norma -padrão, avaliando a adequação linguística da crônica ao seu meio de circulação.",
-            "discutam os desafios da maternidade representados no texto, priorizando a formulação de argumentos sobre o tema social abordado pela autora."
-          ],
-          "correta": "C"
         }
       ]
     },
@@ -2796,48 +2292,6 @@
       "gabaritoDefinitivo": true,
       "questoes": [
         {
-          "numero": 31,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A liderança de uma sociedade empresária do setor de telecomunicações, que vinha apresentando queda de desempenho, após anos de estabilidade, decidiu reformular a estratégia organizacional. O novo CEO argumentou que a sociedade empresária precisava aprender coletivamente com seus erros e acertos, incorporando mudanças incrementais que fortalecessem suas competências essenciais ao longo do tempo, em vez de adotar um plano estratégico rígido e documentado. A abordagem estratégica defendida pelo CEO corresponde à escola do(a)",
-          "alternativas": [
-            "planejamento, pois propõe o desdobramento formalizado da estratégia em planos táticos e operacionais.",
-            "design, pois busca compatibilizar as forças e fraquezas internas com as ameaças e oportunidades do ambiente externo.",
-            "poder, pois envolve negociação e barganha entre os principais atores internos para buscar equilíbrio e definir a direção estratégica.",
-            "configuração, pois pressupõe ciclos de estabilidade seguidos de crise e transformação para atingir novos patamares de desempenho.",
-            "aprendizado, pois concebe a estratégia como emergente de um processo coletivo de aprendizagem e construção incremental de competências."
-          ],
-          "correta": "E"
-        },
-        {
-          "numero": 32,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Uma consultoria realizou o diagnóstico estratégico de uma sociedade empresária de logística. Os resultados revelaram tecnologia obsoleta, métodos e processos antigos, além de moral baixo entre os colaboradores. Ao mesmo tempo, o ambiente externo apresentava concorrência pesada, concorrência desleal e entrada de novos produtos no mercado. Considerando a análise SWOT, a sociedade empresária encontra- se na combinação mais crítica da matriz, pois",
-          "alternativas": [
-            "possui pontos fortes relevantes, mas o ambiente externo hostil impõe ameaças que neutralizam suas vantagens competitivas.",
-            "apesar das fragilidades internas, o ambiente externo oferece oportunidades que podem ser exploradas com reorientação estratégica.",
-            "acumula pontos fracos internos simultaneamente a ameaças externas, configurando a situação estrategicamente mais desfavorável.",
-            "apresenta pontos fortes internos sólidos diante de um ambiente externo repleto de oportunidades ainda não exploradas.",
-            "combina pontos fortes com oportunidades externas, configurando a posição mais favorável para estratégias ofensivas de crescimento."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 36,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Uma autarquia federal iniciou um processo de revisão estratégica, porque a alta direção identificou que a instituição tem capacidade singular de articular parcerias interinstitucionais de forma mais eficaz do que os órgãos congêneres, o que geraria resultados superiores para a sociedade. A partir dessa constatação, a direção determinou que esse diferencial deveria orientar todo o processo de desenvolvimento de pessoas da instituição. A lógica de partir do diferencial competitivo da organização para, progressivamente, chegar às competências individuais é coerente com a tipologia de competências , que estabelece a seguinte ordem:",
-          "alternativas": [
-            "competências pessoais → competências organizacionais → competências de gestão → competências essenciais.",
-            "competências de gestão → competências essenciais → competências organizacionais → competências pessoais.",
-            "competências essenciais → competências de gestão → competências organizacionais → competências pessoais.",
-            "competências organizacionais → competências de gestão → competências essenciais → competências pessoais.",
-            "competências pessoais → competências de gestão → competências essenciais → competências organizacionais."
-          ],
-          "correta": "C"
-        },
-        {
           "numero": 37,
           "disciplina": "Direito Administrativo",
           "assunto": "Gestão de Pessoas",
@@ -2878,20 +2332,6 @@
             "Influência de novas informações sobre o objeto preexistente, pois o servidor reviu sua atitude com base em dados externos sem que o objeto em si tivesse se alterado."
           ],
           "correta": "D"
-        },
-        {
-          "numero": 40,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A diretoria de uma empresa pública de abastecimento reuniu os gerentes de compras, de produção, de vendas e financeiro, para discutir a política de estoques da instituição. Durante a reunião, o gerente de compras argumentou que os altos estoques de matéria-prima permitem negociar descontos por volume; o de produção alegou que os estoques elevados eliminam o risco de paralisação da linha e viabilizam grandes lotes de fabricação; e o de vendas sustentou que produtos acabados em quantidade garantem entregas rápidas e melhor imagem junto aos clientes. Assinale a opção que apresenta, corretamente, as objeções feitas pelo gerente financeiro aos argumentos dos gerentes de compras, de produção e de vendas, respectivamente.",
-          "alternativas": [
-            "Aumento do custo de armazenagem; capital investido e juros perdidos; e maior risco de perdas e obsolescência.",
-            "Capital investido e juros perdidos; maior risco de perdas, obsolescência e aumento do custo de armazenagem; e capital investido e maior custo de armazenagem.",
-            "Maior risco de perdas e obsolescência; capital investido e juros perdidos; e aumento do custo de armazenagem.",
-            "Capital investido e maior custo de armazenagem; maior risco de perdas e obsolescência; e capital investido e juros perdidos.",
-            "Juros perdidos e maior risco de obsolescência; aumento do custo de armazenagem; e capital investido e entregas comprometidas."
-          ],
-          "correta": "B"
         },
         {
           "numero": 41,
@@ -2992,34 +2432,6 @@
           "correta": "C"
         },
         {
-          "numero": 51,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "A alta administração de uma autarquia federal promoveu um conjunto de mudanças institucionais com o objetivo de aprimorar sua governança. Entre as medidas adotadas, destacaram-se: a criação de instâncias de supervisão independentes do corpo executivo; a definição clara de papéis e responsabilidades entre dirigentes e gestores; a adoção de mecanismos de prestação de contas perante a sociedade e os órgãos de controle; e o estabelecimento de canais para que partes interessadas pudessem influenciar decisões estratégicas da organização. Cada uma dessas medidas corresponde, respectivamente, a um dos mecanismos de governança pública. De acordo com o Referencial Básico de Governança Organizacional do TCU, assinale a opção que apresenta a sequência correta de mecanismos.",
-          "alternativas": [
-            "Liderança, estratégia, controle e transparência.",
-            "Transparência, integridade, accountability e controle.",
-            "Controle, transparência, accountability e participação e engajamento de partes interessadas.",
-            "Liderança, controle, accountability e participação e engajamento de partes interessadas.",
-            "Accountability, liderança, transparência e participação e engajamento de partes interessadas."
-          ],
-          "correta": "D"
-        },
-        {
-          "numero": 52,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
-          "enunciado": "Um Município apresenta indicadores sociais persistentemente baixos: altas taxas de pobreza, desigualdade regional acentuada e serviços públicos precários, a despeito de dispor de receitas orçamentárias compatíveis com suas necessidades. Investigações do Ministério Público revelaram um sistema estruturado de desvio de recursos públicos que comprometia sistematicamente a execução das políticas de saúde, educação e assistência social. Diante dos resultados, um gestor público argumentou que a corrupção seria um problema exclusivamente jurídico-criminal, sem relação direta com o desenvolvimento econômico e social do município. Segundo a literatura sobre corrupção e políticas públicas, a posição do gestor é inconsistente, porque",
-          "alternativas": [
-            "a corrupção afeta a dimensão financeira da Administração Pública, sem impacto direto sobre os objetivos constitucionais de desenvolvimento nacional e redução das desigualdades, que dependem exclusivamente de fatores macroeconômicos externos ao controle do gestor local.",
-            "os fundamentos e os objetivos constitucionais da República integram o conceito atual de desenvolvimento econômico, e as práticas de corrupção comprometem substancialmente o sistema de Administração Pública responsável pelo alcance desses objetivos.",
-            "a corrupção é um fenômeno administrativo, cujo enfrentamento depende da eficiência burocrática dos órgãos de controle interno, sendo dispensável a criação de legislação específica de combate ou a realização de investimentos institucionais para sua prevenção e punição.",
-            "as administrações públicas burocratizadas são naturalmente imunes à corrupção, de modo que a solução para o problema identificado no Município seria o fortalecimento dos controles formais e procedimentais, independentemente de reformas orientadas à eficiência.",
-            "a sistematização da disciplina jurídica de combate à corrupção é suficiente por si mesma para erradicar as práticas corruptivas, prescindindo de adaptações no funcionamento do Estado e dispensando qualquer análise sobre as relações entre corrupção e desenvolvimento econômico."
-          ],
-          "correta": "B"
-        },
-        {
           "numero": 53,
           "disciplina": "Direito Administrativo",
           "assunto": "Controle da Administração Pública",
@@ -3064,7 +2476,7 @@
         {
           "numero": 56,
           "disciplina": "Direito Administrativo",
-          "assunto": "Gestão de Pessoas",
+          "assunto": "Serviços Públicos",
           "enunciado": "A Secretaria de Gestão do Estado Alfa elaborou um diagnóstico sobre a prestação de serviços públicos digitais. O relatório identificou que, embora o governo tivesse investido em plataformas tecnológicas, a simples digitalização dos serviços não havia produzido os ganhos esperados em eficiência e qualidade. Técnicos concluíram que faltava um componente essencial à estratégia adotada. Com base na literatura sobre governo eletrônico, o componente identificado como ausente na estratégia do Estado corresponde ao fato de que o governo eletrônico",
           "alternativas": [
             "digitaliza os serviços previamente existentes, sendo dispensável qualquer alteração nas estruturas organizacionais, desde que a plataforma tecnológica adotada seja suficientemente robusta e acessível aos cidadãos.",
@@ -3118,7 +2530,7 @@
         {
           "numero": 31,
           "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
+          "assunto": "Probabilidade",
           "enunciado": "Sabe-se que uma distribuição de Poisson é dependente do parâmetro , onde a variável aleatória X, de média , reflete o número de eventos em um determinado período de tempo. Tem- se que: P(X = x) = (e- . x) / x! Um vendedor recebe uma taxa média de 1 pedido por dia. Considerando os pedidos independentes entre si e que um dia com pelo menos 4 pedidos seja considerado espetacular, a probabilidade de um dia aleatório ser espetacular é",
           "alternativas": [
             "1 − ଼ ଷ௘",
@@ -3146,7 +2558,7 @@
         {
           "numero": 33,
           "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
+          "assunto": "Probabilidade",
           "enunciado": "Uma moeda viciada foi arremessada 100 vezes, oferecendo como estatística: O parâmetro p de uma distribuição binomial que modela a probabilidade de se tirar uma cara foi estimado da tabela acima. Assumindo que p foi uma boa estimativa, a probabilidade de tirar 2 caras e 1 coroa em 3 arremessos independentes é de",
           "alternativas": [
             "3/8.",
@@ -3186,20 +2598,6 @@
           "correta": "C"
         },
         {
-          "numero": 37,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "Considere duas variáveis aleatórias contínuas 𝑋 e 𝑌, cuja função densidade de probabilidade conjunta é dada por 𝑓௑,௒(𝑥, 𝑦) = ൜𝑥 + 𝑦, se 0 ≤ 𝑥 ≤ 1, 0 ≤𝑦 ≤ 10, caso contrário. A esperança da variável 𝑌, 𝔼(𝑌), é de",
-          "alternativas": [
-            "1/4.",
-            "3/4.",
-            "5/11.",
-            "1/2.",
-            "7/12."
-          ],
-          "correta": "E"
-        },
-        {
           "numero": 38,
           "disciplina": "Raciocínio Lógico e Matemática",
           "assunto": "Estatística Descritiva",
@@ -3214,149 +2612,9 @@
           "correta": "E"
         },
         {
-          "numero": 39,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "Considere 𝑋ଵ, 𝑋ଶ, … ,𝑋௡ variáveis aleatórias independentes e identicamente distribuídas (I.I.D.). A respeito da distribuição da soma: 𝑆௡ = 𝑋ଵ + 𝑋ଶ + ⋯ +𝑋௡, analise os itens a seguir. I. Se 𝑋௜ ∼ Poisson(𝜇), a variância de 𝑆௡ é 𝑛𝜇. II. Se 𝑋௜ ∼ Bernoulli(𝑝), então 𝑆௡ ∼ Binomial(𝑛, 𝑝). III. Se 𝑋௜ tem distribuição geométrica com parâmetro 𝑝, então 𝑆௡ tem distribuição normal com média 𝑛𝑝. Está correto o que se apresenta em",
-          "alternativas": [
-            "II, apenas",
-            "I e II, apenas.",
-            "I e III, apenas.",
-            "II e III, apenas.",
-            "I, II e III."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 40,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "Com relação ao método dos momentos na estimação de parâmetros, assinale a afirmativa correta.",
-          "alternativas": [
-            "O método dos momentos incorpora, necessariamente, informação prévia na estimação dos parâmetros.",
-            "Os estimadores obtidos pelo método dos momentos são sempre não viesados.",
-            "Na estimação da média populacional, o método dos momentos conduz ao mesmo estimador obtido pelo método dos mínimos quadrados.",
-            "Para tamanho amostral fixado, o método dos momentos produz estimadores de variância mínima.",
-            "O método dos momentos é especialmente eficaz quando o tamanho da amostra é pequeno."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 41,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "Com relação aos métodos de estimação e aos modelos de regressão, assinale a afirmativa correta.",
-          "alternativas": [
-            "No modelo linear generalizado, a variável resposta deve, necessariamente, possuir distribuição normal.",
-            "O estimador de máxima verossimilhança somente pode ser utilizado em modelos com variável resposta contínua.",
-            "Na regressão linear, o método dos mínimos quadrados estima os parâmetros pela minimização da soma dos quadrados dos resíduos.",
-            "No modelo de regressão linear, o coeficiente de correlação de Pearson entre a variável resposta observada e seu preditor linear ajustado é, idealmente, nulo.",
-            "Os estimadores de Mínimos Quadrados Ordinários, no modelo de regressão linear, estimam apenas o coeficiente angular, não permitindo estimar o intercepto do modelo."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 42,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "Teste de hipóteses é uma ferramenta estatística usada para avaliar, com base em dados amostrais, se uma afirmação sobre uma população pode ser aceita ou rejeitada. Esse procedimento é amplamente utilizado em pesquisas científicas, estudos de mercado e controle de qualidade, contribuindo para a tomada de decisões fundamentadas em evidências. Com relação aos testes de hipóteses , analise as afirmativas a seguir. I. Em testes com hipóteses compostas são avaliadas três ou mais hipóteses simultaneamente. II. O aumento da potência do teste implica maior probabilidade de obtenção de p-valores elevados. III. O nível de significância é um limiar previamente definido usado para decidir pela rejeição ou não da hipótese nula (𝐻଴). Está correto o que se afirma em",
-          "alternativas": [
-            "I, apenas.",
-            "II, apenas.",
-            "III, apenas.",
-            "I e III, apenas.",
-            "II e III, apenas."
-          ],
-          "correta": "C"
-        },
-        {
-          "numero": 43,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "No âmbito de uma auditoria interna do Ministério Público para avaliar a eficiência processual, um analista estatístico precisou comparar o tempo de tramitação (em dias) de inquéritos civis entre três promotorias independentes: a Promotoria de Defesa do Patrimônio Público, a de Defesa do Consumidor e a de Defesa do Meio Ambiente. Após realizar os testes de aderência, constatou-se que os dados de todas as unidades não seguem uma distribuição normal e apresentam forte assimetria à direita. Para testar se existe diferença significativa entre as distribuições do tempo de tramitação dessas três promotorias, o teste não paramétrico mais adequado é o",
-          "alternativas": [
-            "Teste de Friedman.",
-            "Teste de Kruskal-Wallis.",
-            "Teste de Mann-Whitney.",
-            "Teste de postos sinalizados de Wilcoxon.",
-            "Teste t de Student para amostras independentes."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 45,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "Um analista de dados da Secretaria Estadual de Saúde deseja verificar se o tempo de espera (em minutos) para o atendimento em uma unidade de pronto atendimento segue uma distribuição normal, a fim de decidir entre o uso de testes paramétricos ou não paramétricos. O analista possui uma amostra de n = 45 registros. Sobre os testes de normalidade, assinale a afirmativa correta.",
-          "alternativas": [
-            "Se o resultado de um teste de normalidade apresentar um p- valor menor que 0,05, o analista deve concluir que os dados seguem uma distribuição normal com 95% de confiança.",
-            "O teste de Kolmogorov-Smirnov com a correção de Lilliefors é restrito apenas a amostras onde a média e o desvio padrão da população são previamente conhecidos.",
-            "De acordo com o Teorema do Limite Central, se a amostra for maior que 30, os testes de normalidade tornam-se desnecessários, pois a distribuição dos dados brutos automaticamente assume o formato de sino.",
-            "O teste de Shapiro-Wilk é amplamente preferido para amostras de pequeno a moderado porte devido ao seu maior poder estatístico em comparação ao teste de Kolmogorov- Smirnov.",
-            "O gráfico de probabilidade normal, também conhecido como Q-Q Plot, é uma ferramenta puramente ilustrativa que não deve ser utilizada para auxiliar na decisão sobre a normalidade, devendo o analista confiar exclusivamente no p- valor dos testes de hipóteses."
-          ],
-          "correta": "D"
-        },
-        {
-          "numero": 46,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "O Conselho Nacional de Justiça (CNJ) solicitou um levantamento em uma vara criminal para investigar se o Tipo de Defesa (Defensoria Pública ou advogado particular) possui uma associação significativa com o resultado do julgamento (condenação ou absolvição). Os dados coletados de 100 processos aleatórios estão dispostos na tabela de contingência a seguir. De posse dos dados, um analista do CNJ procedeu um teste Qui- Quadrado para verificar a associação entre o Tipo de Defesa e o Resultado do Julgamento. Considere que o nível crítico da tabela Qui-Quadrado para 1%, 5% e 10%, são respectivamente, 6,64, 3,84 e 2,71. Sobre a conclusão do teste aplicado, assinale a afirmativa correta.",
-          "alternativas": [
-            "O analista pode afirmar que existe uma associação significativa entre o tipo de defesa e o resultado do julgamento nesta vara criminal específica aos níveis de 1% e 5% de significância.",
-            "O analista pode afirmar que existe uma associação significativa entre o tipo de defesa e o resultado do julgamento nesta vara criminal específica aos níveis de 5% e 10% de significância.",
-            "O analista pode afirmar que existe uma associação significativa entre o tipo de defesa e o resultado do julgamento nesta vara criminal específica somente para o nível de 10% de significância.",
-            "O analista pode afirmar que existe uma associação significativa entre o tipo de defesa e o resultado do julgamento nesta vara criminal específica para quaisquer níveis de significância.",
-            "O analista, independentemente do nível de significância, não pode afirmar que existe uma associação significativa entre o tipo de defesa e o resultado do julgamento nesta vara criminal específica."
-          ],
-          "correta": "B"
-        },
-        {
-          "numero": 47,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "No desenho de pesquisas de avaliação de impacto de políticas públicas, a escolha do método de amostragem é fundamental para garantir a validade externa e a representatividade dos dados coletados. Suponha que um gestor público deseje realizar uma pesquisa de satisfação sobre um novo programa de habitação popular. Para garantir que a amostra reflita fielmente a diversidade da população beneficiária, ele decide dividir a população total em subgrupos homogêneos por faixa de renda e, em seguida, realizar um sorteio aleatório dentro de cada um desses subgrupos. O método de amostragem descrito acima é classificado como",
-          "alternativas": [
-            "Amostragem Estratificada.",
-            "Amostragem Aleatória Simples.",
-            "Amostragem por Conveniência.",
-            "Amostragem por Conglomerados.",
-            "Amostragem por Bola de Neve."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 48,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "O Ministério Público, no exercício de sua função fiscalizadora, decide realizar uma auditoria em uma Prefeitura para verificar a regularidade de 5.000 contratos de prestação de serviços firmados no último biênio. Diante da impossibilidade de analisar todos os processos, a equipe técnica opta por uma Amostragem Aleatória Simples (AAS) para estimar a proporção de contratos com indícios de superfaturamento. Sobre os parâmetros que influenciam o cálculo do tamanho da amostra nesse cenário, assinale a afirmativa correta.",
-          "alternativas": [
-            "O cálculo do tamanho da amostra para variáveis qualitativas na AAS dispensa a utilização do escore Z (distribuição normal), baseando-se apenas na média aritmética da população.",
-            "Para reduzir custos, o Ministério Público pode aumentar o Nível de Confiança de 95% para 99%, o que resultará em uma redução proporcional no tamanho da amostra necessária.",
-            "O tamanho da amostra é diretamente proporcional à margem de erro (erro amostral) admitida: quanto maior o erro tolerado pelos peritos, maior deverá ser o número de contratos analisados.",
-            "Caso a população de contratos fosse considerada infinita ou muito grande, o tamanho da amostra passaria a depender primordialmente do nível de confiança e do erro tolerável, tornando-se virtualmente independente do tamanho total da população.",
-            "Na ausência de informações prévias sobre a variabilidade do fenômeno (a proporção real de contratos irregulares), o estatístico deve adotar p = 0,1 (10%) no cálculo, pois esse valor minimiza a variância e gera uma amostra mais econômica."
-          ],
-          "correta": "D"
-        },
-        {
-          "numero": 49,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "No contexto de auditoria de demonstrações financeiras, o auditor muitas vezes utiliza variáveis auxiliares, como por exemplo, o valor contábil para projetar o valor total auditado de uma população. Sobre a distinção técnica e a aplicabilidade do estimador de razão em comparação ao estimador de regressão, assinale a afirmativa correta.",
-          "alternativas": [
-            "O estimador de razão é considerado um caso mais geral e complexo, do qual o estimador de regressão deriva quando o intercepto da amostra é nulo.",
-            "O uso do estimador de regressão é recomendado apenas quando a correlação entre a variável auxiliar e a variável de interesse é baixa ou inexistente.",
-            "Diferente do estimador de regressão, o estimador de razão é classificado como um estimador não enviesado para qualquer tamanho de amostra selecionado pelo auditor.",
-            "O estimador de razão é a escolha técnica ideal quando a relação linear entre os valores auditados e os valores contábeis apresenta um intercepto significativamente diferente de zero.",
-            "O estimador de regressão tende a ser mais preciso e eficiente que o de razão quando a relação entre as variáveis é linear, mas não é estritamente proporcional (não passa pela origem)."
-          ],
-          "correta": "E"
-        },
-        {
           "numero": 50,
           "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
+          "assunto": "Probabilidade",
           "enunciado": "No âmbito de um Tribunal de Justiça, a distribuição automatizada de processos deve observar o princípio constitucional do Juiz Natural, exigindo que o sorteio seja equitativo entre todos os magistrados de mesma competência. Para garantir que, estatisticamente, nenhum Juiz seja sobrecarregado ou subutilizado em relação aos seus pares devido a falhas no sistema de sorteio, a propriedade do gerador de números aleatórios (RNG) que deve ser priorizada é a",
           "alternativas": [
             "Uniformidade.",
@@ -3366,34 +2624,6 @@
             "Reprodutibilidade por Semente."
           ],
           "correta": "A"
-        },
-        {
-          "numero": 53,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "O setor de inteligência de um Tribunal de Justiça deseja analisar o perfil de produtividade das Comarcas do Estado. O banco de dados contém múltiplas variáveis correlacionadas, como o número de novos processos, o tempo médio de tramitação, a taxa de congestionamento e o número de magistrados. O objetivo inicial é simplificar o conjunto de dados, transformando essas variáveis originais em um número menor de índices sintéticos que retenham a maior parte da variação original, facilitando a criação de um ranking de eficiência sem a redundância das informações correlacionadas. Assinale a opção que apresenta o método de Estatística Multivariada mais apropriado para o objetivo especificado.",
-          "alternativas": [
-            "Análise Discriminante.",
-            "Análise de Agrupamentos.",
-            "Análise de Regressão Múltipla.",
-            "Análise de Variância Multivariada.",
-            "Análise de Componentes Principais."
-          ],
-          "correta": "E"
-        },
-        {
-          "numero": 54,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Estatística Descritiva",
-          "enunciado": "O Ministério Público está investigando uma denúncia de discriminação de gênero em uma autarquia municipal. A suspeita é a de que os servidores do sexo masculino recebam salários significativamente maiores que as servidoras do sexo feminino em cargos de mesma hierarquia. Para comprovar a suspeita, um analista do Ministério Público decidiu realizar um Teste t de Student para amostras independentes com base em uma amostra de 20 servidores, sendo 10 homens e 10 mulheres, para verificar se a média salarial dos homens é estatisticamente superior à das mulheres, com um nível de significância de 5%. Para a realização do teste, o analista escolheu utilizar o R como software de análise estatística. Assinale a opção que indica a linha de código que está mais adequada ao software escolhido pelo analista.",
-          "alternativas": [
-            "T-TEST /GROUPS=genero(0 1) /VARIABLES=salario /CRITERIA=CI(.95)",
-            "t.test(salario ~ genero, data = dados, alternative = \"greater\", var.equal = FALSE)",
-            "T-TEST GROUPS=genero(1 0) /MISSING=ANALYSIS /VARIABLES=salario /ES DISPLAY(TRUE) /CRITERIA=CI(.95)",
-            "t_stat, p_val = stats.ttest_ind(homens, mulheres, equal_var=(p_lev > 0.05))",
-            "test.t(dados$salario[dados$genero == 1], dados$salario[dados$genero == 0], conf.level = 0.95)"
-          ],
-          "correta": "B"
         }
       ]
     }
