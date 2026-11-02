@@ -266,20 +266,6 @@
           "correta": "E"
         },
         {
-          "numero": 34,
-          "disciplina": "Direito Administrativo",
-          "assunto": "Atos Administrativos",
-          "enunciado": "Após o Congresso Nacional editar e a Presidência da República sancionar determinada legislação com forte impacto econômico no âmbito do Estado Alfa, determinada parte legítima ingressou, em observância às formalidades constitucionais e legais, com ação direta de inconstitucionalidade junto ao Supremo Tribunal Federal. Nesse cenário, considerando as disposições da Constituição Federal, é correto afirmar que a ação direta de inconstitucionalidade foi proposta",
-          "alternativas": [
-            "por partido político com representação na Assembleia Legislativa do Estado Alfa.",
-            "pelo Presidente do Tribunal de Justiça do Estado Alfa.",
-            "pelo Procurador-Geral de Justiça do Estado Alfa.",
-            "pelo Defensor Público-Geral do Estado Alfa.",
-            "pelo Governador do Estado Alfa."
-          ],
-          "correta": "E"
-        },
-        {
           "numero": 35,
           "disciplina": "Direito Administrativo",
           "assunto": "Licitações e Contratos",
@@ -1316,20 +1302,6 @@
           "correta": "D"
         },
         {
-          "numero": 20,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Conjuntos Numéricos",
-          "enunciado": "Durante uma aula de revisão sobre propriedades dos radica is, o professor apresentou a seguinte expressão numérica para a turma: √62 + 82 Um estudante resolveu a expressão aplicando o seguinte raciocínio: “ Como a raiz quadrada é a operação inversa da potenciação, eu posso cancelar o expoente 2 de cada número com a raiz. Assim, a expressão simplificada resulta em 6 + 8, que é igual a 14”. Considerando as propriedades operatórias da radiciação, o procedimento do estudante está",
-          "alternativas": [
-            "correto, pois a radiciação possui propriedade distributiva em relação à adição de termos sob o mesmo radical.",
-            "correto, pois a ordem em que as operações de potenciação e radiciação são realizadas não altera o valor numérico final do resultado.",
-            "errado, porque tal cancelamento só poderia ser realizado se os expoentes das duas parcelas fossem números ímpares.",
-            "errado, porque o resultado correto deveria ser obtido multiplicando as bases 6 x 8 = 48 e extraindo a raiz quadrada desse produto.",
-            "errado, porque tal cancelamento do expoente com o índice da raiz, como foi feito, só é válido se a operação principal entre as potências for a multiplicação ou a divisão, e não a adição."
-          ],
-          "correta": "E"
-        },
-        {
           "numero": 22,
           "disciplina": "Raciocínio Lógico e Matemática",
           "assunto": "Geometria Plana",
@@ -1344,20 +1316,6 @@
           "correta": "C"
         },
         {
-          "numero": 24,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Geometria Plana",
-          "enunciado": "Durante uma aula de Geometria Espacial sobre volumes de sólidos de revolução, o professor apresentou o desenho de um reservatório em formato de cone reto. Ele informou à turma que o raio da base desse cone mede 6 metros e que a sua geratriz (a distância do vértice até qualquer ponto da circunferência da base) mede 10 metros. Em seguida, solicitou que os estudantes calculassem o volume máximo de água que esse reservatório poderia conter. Um estudante apresentou rapidamente a seguinte resolução: Como o volume do cone é dado por um terço da área da base multiplicada pelo seu comprimento lateral, o cálculo de sua capacidade máxima, em m3, será: 𝑉 = 13 ∙ π ∙ 𝑟2 ∙ 𝑔 𝑉 = 13 ∙ π ∙ 62 ∙ 10 𝑉 = 120 ∙ π As opções apresentam possibilidades de intervenção docente. Considerando as relações métricas e a fórmula do volume do cone reto, assinale aquela que indica a intervenção pedagogicamente mais adequada para que o estudante perceba e corrija o erro apresentado, sem abrir mão da correção matemática.",
-          "alternativas": [
-            "Validar o resultado de 120𝜋 m3, posto que o estudante identificou corretamente que a geratriz e a altura são segmentos equivalentes em qualquer sólido que possua uma base circular regular.",
-            "Orientar o estudante a representar a seção meridiana do cone, para que identifique que o raio, a altura e a geratriz formam um triângulo retângulo. Em seguida, estimulá -lo a aplicar o Teorema de Pitágoras para determinar a altura do cone (8 m) e utilizá-la na fórmula do volume, concluindo que a capacidade máxima do reservatório é 96𝜋 m3.",
-            "Mostrar ao estudante que há um erro devido ao não uso da aproximação de pi por 3.",
-            "Indicar ao estudante que a fórmula do volume do cone utiliza a altura, e não a geratriz, orientando -o apenas a substituir corretamente essa grandeza na expressão do volume.",
-            "Alertar o estudante de que o volume de um cone depende exclusivamente da área de sua superfície lateral, sugerindo que ele calcule primeiro a planificação do setor circular para encontrar o volume por meio do perímetro da base."
-          ],
-          "correta": "B"
-        },
-        {
           "numero": 26,
           "disciplina": "Raciocínio Lógico e Matemática",
           "assunto": "Argumentação Lógica",
@@ -1370,20 +1328,6 @@
             "Esclarecer que o problema não possui solução, pois seria indispensável informar qual dos filhos é o menino para que a probabilidade pudesse ser determinada."
           ],
           "correta": "C"
-        },
-        {
-          "numero": 28,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Geometria Plana",
-          "enunciado": "Durante uma aula de Geometria Espacial, um professor apresentou a seguinte situação: \"Uma caixa no formato de paralelepípedo reto -retângulo tem comprimento de 8 cm, largura de 6 cm e altura de 24 cm. Qual é a medida da diagonal espacial dessa caixa?\" Um estudante apresentou a seguinte resolução: Etapa 1: \"Vou usar o Teorema de Pitágoras na face frontal da caixa, que tem lados 8 cm e 24 cm. A diagonal dessa face é √82 + 242 = √64 + 576 = √640 .\" Etapa 2: \"Essa diagonal já liga dois vértices opostos da caixa, então esse é o valor da diagonal espacial.\" Considerando as relações métricas em paralelepípedos, assinale a opção que apresenta a melhor intervenção pedagógica para fazer o aluno perceber e corrigir o erro de sua resolução.",
-          "alternativas": [
-            "Mostrar ao estudante que o erro está na Etapa 1, pois a diagonal da face frontal deveria ser calculada com os lados 6 cm e 24 cm, e não 8 cm e 24 cm.",
-            "Orientar o estudante a identificar que a diagonal espacial liga dois vértices opostos que não pertencem à mesma face, e que sua determinação exige a aplicação do Teorema de Pitágoras em duas etapas.",
-            "Orientar o estudante a somar as três dimensões da caixa e extrair a raiz quadrada do resultado, obtendo √8 + 6 + 24 = √38 cm como medida da diagonal espacial.",
-            "Validar a resolução do estudante, esclarecendo que a diagonal de qualquer face retangular do paralelepípedo é equivalente à diagonal espacial quando a face escolhida contém o maior par de dimensões da caixa.",
-            "Informar ao estudante que, em um paralelepípedo reto - retângulo, a diagonal espacial sempre coincide com a maior aresta do sólido, e que, portanto, a diagonal da caixa mede 24 cm."
-          ],
-          "correta": "B"
         },
         {
           "numero": 29,
@@ -1428,20 +1372,6 @@
           "correta": "A"
         },
         {
-          "numero": 35,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Geometria Plana",
-          "enunciado": "Durante uma aula de Geometria Espacial sobre troncos de sólidos, um professor apresentou o seguinte problema à turma: \"Uma pirâmide regular reta de altura 𝐻 e volume 𝑉 é seccionada por um plano paralelo à sua base, cortando a pirâmide exatamente na metade de sua altura (ou seja, a uma distância 𝐻 2 do vértice). Esse corte divide o sólido original em duas partes: uma pirâmide menor no topo e um tronco de pirâmide na base. Qual é o volume do tronco de pirâmide resultante?\" Um estudante respondeu imediatamente: “Se o corte foi feito exatamente na metade da altura, a pirâmide do topo ficou com metade do volume original ( 𝑉 2). Portanto, o volume do tronco de pirâmide na base também é igual à outra metade, ou seja, 𝑉 2.” Considerando as propriedades de semelhança de sólidos geométricos, a justificativa apresentada pelo estudante está",
-          "alternativas": [
-            "correta, pois a altura e o volume de pirâmides semelhantes variam de forma diretamente proporcional, o que garante que a redução da altura pela metade resulte na redução do volume também pela metade.",
-            "errada, pois quando a altura de um a pirâmide é reduzida à metade, a área da sua base é reduzida a um quarto ( 1 4); como o volume depende apenas da área da base, o volume do tronco será de 3 4 𝑉.",
-            "errada, pois a razão entre os volumes de dois sólidos semelhantes é igual ao quadrado da razã o de semelhança; assim, o volume da pirâmide menor é 𝑉 4 e o do tronco é 3 4 𝑉.",
-            "errada, pois a razão entre os volumes de dois sólidos semelhantes é igual ao cubo da razão de semelhança; assim, o volume da pirâmide menor é 𝑉 8 e o do tronco de pirâmide é 7 8 𝑉.",
-            "errada, pois o volume de um tronco de pirâmide regular reta depende exclusivamente do formato poligonal de suas bases, sendo impossível determinar uma relação de volume sem conhecer o número de lados da base da pirâmide original."
-          ],
-          "correta": "D"
-        },
-        {
           "numero": 36,
           "disciplina": "Raciocínio Lógico e Matemática",
           "assunto": "Geometria Plana",
@@ -1452,20 +1382,6 @@
             "errada, pois o cateto oposto ao ângulo 𝛽 é o segmento 𝐵𝐶, o que torna a expressão correta para o seno de 𝛽 igual a 𝐵𝐶 𝐴𝐵.",
             "errada, pois a razão apresentada pelo estudante corresponde, na verdade, à definição do cosseno do ângulo 𝛽, e não ao seu seno.",
             "errada, porque a hipotenusa de um triângulo retângulo com ângulo reto no vértice 𝐶 é dada pelo segmento 𝐴𝐶, invalidando o denominador da razão construída pelo estudante."
-          ],
-          "correta": "A"
-        },
-        {
-          "numero": 38,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Equações de 1º e 2º Grau",
-          "enunciado": "Ao corrigir uma atividade de álgebra elementar, uma professora de Matemática constatou que diversos alunos registraram a seguinte igualdade: (𝑎 + 𝑏)2 = 𝑎2 + 𝑏2 Sabendo que essa igualdade não é válida para a maioria dos números reais, o equívoco cometido pelos estudantes decorre da extensão indevida da seguinte propriedade algébrica válida:",
-          "alternativas": [
-            "distributividade da potenciação em relação ao produto.",
-            "distributividade da potenciação em relação à adição.",
-            "associatividade da adição no conjunto dos números reais.",
-            "comutatividade da operação de potenciação.",
-            "existência do elemento neutro da multiplicação."
           ],
           "correta": "A"
         },
