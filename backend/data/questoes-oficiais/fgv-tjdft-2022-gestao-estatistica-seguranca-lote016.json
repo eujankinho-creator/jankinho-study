@@ -1,0 +1,895 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "fgv-tjdft2022-gestao-estatistica-seguranca-lote016",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "tjdft2022-analista-administracao-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Tribunal de Justiça do Distrito Federal e dos Territórios",
+      "cargo": "Analista Judiciário - Administração",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/analista_judiciario_-_administracaons-adm_tipo_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjdft2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 21,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Um gerente de RH precisa definir o salário inicial para um cargo novo de nível superior em sua organização: o de analista em sustentabilidade ambiental. O gerente não tem ideia de um valor adequado. Assim, usou a média dos salários iniciais dos cargos de nível superior da organização e, a partir desse valor, estabeleceu um salário inicial 30% maior – considerando a urgência na contratação desses profissionais. Em seu processo de tomada de decisão, o gerente incorreu no viés conhecido como:",
+          "alternativas": [
+            "ancoragem;",
+            "disponibilidade;",
+            "representatividade;",
+            "framing;",
+            "evidência confirmadora."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 23,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Uma equipe de seis pessoas está reunida para decidir sobre o encaminhamento mais ap ropriado para um projeto de melhoria dos serviços prestados pela organização em que trabalham. José, o menos experiente do grupo, tem dúvidas sobre a proposta apresentada por Maria e Pedro, os mais experientes, pois acredita que seria uma proposta “conserv adora em relação às tendências atuais de mercado”. No entanto, José manteve silêncio sobre seu ponto de vista, pois percebeu que o grupo, incluindo o gerente, apoia a proposta de Maria e Pedro, e preferiu “não criar conflito na equipe, especialmente sobre um projeto tão importante”. A situação ilustra um sintoma de um fenômeno comum à tomada de decisão em grupo, conhecido como:",
+          "alternativas": [
+            "viés da posição de status;",
+            "baixa coesividade;",
+            "viés de ajustamento;",
+            "pressão por regressão à média;",
+            "pensamento de grupo (groupthink)."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Serviços Públicos",
+          "enunciado": "Certa agência de um órgão público vem recebendo um número significativo de reclamações dos cidadãos atendidos em relação à qualidade dos serviços prestados. A gerente da agência quer identificar se há correlação entre o tempo de atendimento ao público e o tempo de experiência dos funcionários no cargo, com vistas a planejar possíveis ações para melhoria da qualidade. Para identificar essa possível correlação, uma ferramenta de gestão da qualidade adequada seria:",
+          "alternativas": [
+            "gráfico de Pareto;",
+            "diagrama espinha de peixe;",
+            "gráfico de Gantt;",
+            "gráfico de dispersão;",
+            "carta de controle."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A área de RH da organização XYZ realizou a avaliação do perfil de liderança de cinco gerentes utilizando -se da grade gerencial, como proposta por Blake e Mouton . As posições dos gerentes na grade foram: Ana - posição (1,9); Bruno - posição (9,9); Carla - posição (1,1); Daniel - posição (9,1); Edgar - posição (5,5). Sobre esses perfis de liderança, de acordo com o modelo de Blake e Mouton, é correto afirmar que:",
+          "alternativas": [
+            "Edgar é um “líder meio -termo”, considerado o estilo de liderança menos eficaz pelo modelo;",
+            "Bruno e Daniel têm os estilos de liderança considerados mais eficazes pelo modelo;",
+            "Ana é uma “líder negligente”, orientada para as necessidades dos funci onários e para a promoção de um ambiente amigável;",
+            "Carla é uma “líder clube de campo”, orientada para a promoção de um ritmo de trabalho confortável e das relações de confiança;",
+            "Daniel é um “líder de tarefas”, orientado para o atingimento de objetivos e eficiência das operações."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A Teoria da Expectativa, teoria de motivação proposta por Victor Vroom, sustenta que as recompensas organizacionais devem estar vinculadas às metas individuais dos funcionários. Trata-se de uma prática de gestão de pessoas diretamente alinhada ao que postula a Teoria da Expectativa:",
+          "alternativas": [
+            "benefícios flexíveis;",
+            "avaliação 360 graus;",
+            "programas de integração de funcionários;",
+            "remuneração das horas extras de trabalho;",
+            "programas de desenvolvimento organizacional (DO)."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Uma equipe de trabalho de cinco pessoas tem sua rede de comunicação estruturada de acordo com a hierarquia, no tipo cadeia. A gerente reconhece que esse tipo de rede de comunicação tem certas limitações, como , por exemplo, um impacto moderado na satisfação dos membros da equipe. No entanto, a rede de comunicação do tipo cadeia é mais eficaz do que os demais tipos de rede de comunicação quando o foco está na:",
+          "alternativas": [
+            "minimização da sobrecarga de informações;",
+            "precisão da comunicação;",
+            "minimização de conflitos na equipe;",
+            "qualidade do feedback;",
+            "velocidade da comunicação."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A cultura organizacional é um fenômeno complexo, que pode ser definido como “um sistema de valores compartilhado pelos membros que diferencia uma organização das demais” (Robbins, 2006, p. 375). A cultura influencia os comportamentos e a forma como os memb ros percebem a organização e respondem aos desafios enfrentados. Embora complexa, a cultura organizacional pode ser apreendida por algumas características básicas que permitem capturar sua essência. Entre essas características, podem-se destacar:",
+          "alternativas": [
+            "inovação e assunção de riscos; atenção aos gatekeepers;",
+            "orientação para a qualidade; flexibilidade;",
+            "orientação para custos; estabilidade;",
+            "orientação para resultados; abertura para o mercado;",
+            "atenção aos detalhes; agressividade."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Um gerente de TI precisa selecionar um candidato para uma vaga na sua equipe. Devido à urgência para o preenchimento da vaga, pediu a quatro subordinados experientes que indicassem candidatos qualificados . Em uma semana, recebeu cinco currículos com nível de formação adequado e experiência compatível com o cargo. Como está interessado nos aspectos comportamentais dos candidatos, o gerente pediu ao RH que providencie um teste de personalidade com os candidatos junto a um especialista. O recrutamento por indicação e os testes de personalidade, como instrumento de seleção, têm como desvantagens, respectivamente:",
+          "alternativas": [
+            "alto custo por admissão; técnica altamente subjetiva;",
+            "exige muitas etapas no processo; apo nta apenas traços superficiais da personalidade;",
+            "pode dificultar a integração do candidato; exige conhecimento profundo das competências para o cargo;",
+            "pode inibir a diversidade da força de trabalho; custo alto;",
+            "aumenta a incerteza quanto ao po tencial do candidato; gera conflitos entre os candidatos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Uma organização quer aprimorar o controle e a avaliação do desempenho dos processos das suas diversas áreas, por meio da adoção de indicadores de desempenho. São indicadores adequados para avaliar o desempenho operacional dos processos da área de recursos humanos:",
+          "alternativas": [
+            "absenteísmo total; número total da força de trabalho;",
+            "salário médio por empregado; proporção de terceirizados sobre o efetivo de empregados;",
+            "índice de empregados de alta performance; tempo médio de preenchimento de vagas;",
+            "lucro líquido por empregado; turnover por substituição;",
+            "passivo trabalhista total; índice de desligamentos."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "Um sistema de governança reflete a maneira como os diversos atores se organizam, interagem e procedem . Esse sistema é composto por diferentes instâncias, segundo o Tribunal de Contas da União (TCU). Nesse sistema, o Congresso Nacional pode ser entendido como vinculado à instância:",
+          "alternativas": [
+            "autônoma de administração tática;",
+            "externa de apoio à governança;",
+            "externa de governança;",
+            "interna de apoio à governança;",
+            "interna de governança."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Controle da Administração Pública",
+          "enunciado": "As boas práticas de governança definidas pelo IFAC ( International Federation of Accountants ) estão estruturadas em quatro dimensões, dentre as quais destaca -se que “o órgão de governança das agências públicas deve estabelecer e publicar indicadores relevantes para aferir a eficiência, eficácia, efetividade e sustentabilidade das operações e resultados”. Essa prática está associada à dimensão de:",
+          "alternativas": [
+            "código de conduta – objetividade, integridade e honestidade;",
+            "controle – comitê de auditoria;",
+            "estruturas e processos – responsabilidade estatutária;",
+            "relatório externo – aferição de desempenho;",
+            "relatório interno – gestão de riscos."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "Antônia, estudiosa da improbidade administrativa, recebeu a incumbência, em um grupo de estudos, de realizar a análise da estrutura tipológica adotada pela Lei nº 8.429/1992 e do elemento subjetivo exigido para o enquadramento de uma conduta em seus termos. Ao final, Antônia concluiu, corretamente, que a referida estrutura é:",
+          "alternativas": [
+            "aberta, sendo as condutas ilícitas mencionadas de maneira exemplificativa, enquanto o elemento subjetivo está lastreado apenas no dolo;",
+            "fechada, sendo as condutas ilícitas men cionadas de maneira taxativa, isto apesar do emprego de conceitos jurídicos indeterminados, enquanto o elemento subjetivo está lastreado apenas no dolo;",
+            "aberta, sendo as condutas ilícitas mencionadas de maneira exemplificativa, enquanto o elemento subj etivo está lastreado no dolo ou na culpa, sendo esta última aplicável exclusivamente aos atos que causam prejuízo ao erário;",
+            "aberta, em relação aos atos que gerem enriquecimento ilícito ou prejuízo ao erário, mas taxativa quanto aos atos que atentem contra os princípios administrativos, sendo o elemento subjetivo o dolo, exigindo -se ainda um especial fim de agir;",
+            "aberta, quanto aos atos que atent em contra os princípios administrativos, mas taxativa em relação aos atos que gerem enriquecimento ilícit o ou prejuízo ao erário, sendo o elemento subjetivo o dolo, exigindo -se ainda um especial fim de agir."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Atos Administrativos",
+          "enunciado": "Joana e Henriqueta travaram intenso debate a respeito dos atributos dos atos administrativos, mais especificamente em relação à possibilidade de a Administração Pública fazer com que produzam efeitos na esfera jurídica alheia, constituindo obrigações mesmo contra a vontade dos seus destinatários. Ao final, concluíram, corretamente, que os referidos atos:",
+          "alternativas": [
+            "sempre apresentam esse efeito, o que decorre da presunção de juridicidade;",
+            "podem apresentar esse efeito, o que decor re do atributo da imperatividade;",
+            "podem apresentar esse efeito, o que decorre do atributo da autoexecutoriedade;",
+            "sempre apresentam esse efeito, o que decorre do que alguns denominam poder extroverso;",
+            "jamais apresentam esse efeito, que se mostra incompatível com o Estado Democrático de Direito."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A sociedade empresária XX celebrou contrato administrativo com o Estado Beta, tendo sido expressamente comunicada da existência de cláusulas exorbitantes. O dirigente dessa sociedade solicitou que o seu departamento jurídico o esclarecesse no que consistiriam essas cláusulas. Após alentada explicação a respeito da natureza dessas cláusulas, o dirigente concluiu que elas seriam exemplificadas no fato de o contrato: (1) ser de adesão; (2) ser celebrado intuitu personae ; (3) ser suscetível de alteração unilateral; e (4) admitir a aplicação de penalidades. O departamento jurídico, ao analisar os exemplos apresentados, concluiu, acertadamente, que estão corretos:",
+          "alternativas": [
+            "somente o exemplo 1;",
+            "somente o exemplo 4;",
+            "somente os exemplos 2 e 3;",
+            "somente os exemplos 3 e 4;",
+            "os exemplos 1, 2 , 3 e 4."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "A sociedade empresária YY celebrou contrato administrativo para o fornecimento de determinados bens móveis para a Secretaria de Educação do Município Alfa. Como os móveis eram transportados desmontados, era necessária a sua montagem, o que se estendeu por três meses. Dias antes da conclusão da montagem, foi divulgado, na imprensa, que a referida sociedade empresária estava em débito com as suas obrigações trabalhistas e previdenciárias, o que vinha gerando grande insatisfação junto aos empregados. À luz de ssa narrativa e levando -se em conta a sistemática inaugurada pela Lei nº 14.133/2021, é correto afirmar que o Município Alfa:",
+          "alternativas": [
+            "não é responsável pelos encargos trabalhistas e previdenciários resultantes da execução do contrato, os quais configuram obrigação do contratado;",
+            "responde solidariamente pelos encargos previdenciários e subsidiariamente pelos encargos trabalhistas, se comprovada a falha na fiscalização do cumprimento das obrigações do contratado;",
+            "responde solidariamente pelos encargos pre videnciários e subsidiariamente pelos encargos trabalhistas, ainda que não comprovada a falha na fiscalização do cumprimento das obrigações do contratado;",
+            "não é responsável pelos encargos trabalhistas e previdenciários resultantes da execução do contra to, desde que tenha previsto no edital ou no contrato a outorga de garantias para o cumprimento dessas obrigações;",
+            "responde solidariamente pelos encargos trabalhistas e subsidiariamente pelos encargos previdenciários, se comprovada a falha na fiscaliza ção do cumprimento das obrigações do contratado ou a não exigência de garantias."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Pouco tempo após celebrar contrato administrativo com o Município Beta, a sociedade empresária ZZ foi surpreendida com uma ordem escrita da Administração suspendendo o referido contrato. Após consultarem um advogado, foi corretamente informado aos dirigentes da sociedade empresária ZZ que, consoante a Lei nº 14.133/2021, a Administração:",
+          "alternativas": [
+            "agira de modo ilícito ao suspender unilateralmente o contrato administrativo;",
+            "tem a faculdade de suspender unilateralmente o contrato administrativo, pelo prazo que entender conveniente, não podendo ser oposto qualquer óbice por ZZ;",
+            "tem a faculdade de suspender unilateralmente o contrato administrativo, mas ZZ tem direito à sua extinção se a suspensão se estender por prazo superior a três meses;",
+            "tem a faculdade de suspender unilateralmente o contrato administrativo, mas ZZ tem direito à sua revisão se a suspensão se estender por prazo superior a quatro meses;",
+            "tem a faculdade de suspender unilateralmente o contrato administrativo, com suspensão de pagamentos, por até trinta dias, reiniciando-se os pagamentos após esse período."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Responsabilidade Civil do Estado",
+          "enunciado": "Armando, tinha interesse em compreender as teorias que dispõem sobre a responsabilidade civil extracontratual da Administração Pública. Após ampla pesquisa, identificou a teoria adotada no direito brasileiro para justificar a responsabilização objetiva da Administração Pública por a tos praticados por seus servidores, constatando, ainda, que essa responsabilização pode ser afastada se houver culpa exclusiva da vítima. Trata-se da teoria:",
+          "alternativas": [
+            "dos atos de império, sendo a responsabilização afastada, na hipótese indicada, porque o dano decorreu de ato de outrem, não de ato de império;",
+            "da culpa administrativa, sendo a responsabilização afastada, na hipótese indicada, porque o dano não pode ser atribuído ao mau funcionamento do serviço;",
+            "do risco integral, sendo a responsabilização a fastada, na hipótese indicada, em razão da presença do elemento subjetivo culposo no agir da vítima;",
+            "do risco administrativo, sendo a responsabilização afastada, na hipótese indicada, em razão da ausência do nexo de causalidade entre o atuar estatal e o dano causado;",
+            "da culpa do serviço público, sendo a responsabilização afastada, na hipótese indicada, porque o mau funcionamento do serviço, ainda que tenha ocorrido, não foi preponderante."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "O prefeito do Município Alfa solicitou que sua assessoria iniciasse o planejamento das licitações a serem realizadas no período de janeiro a dezembro do exercício financeiro de 2023, o que iria subsidiar a proposta orçamentária a ser apresentada ao Poder Legislativo. Ressaltou, ainda, que entendia ser conveniente, sempre que possível, a utilização de uma modalidade de licitação em que lhe fosse permitido convidar os interessados do ramo pertinente ao objeto licitado, para que apresente m as suas propostas. Ao tomar conhecimento do objetivo do prefeito, sua assessoria lhe respondeu, corretamente, que a referida modalidade de licitação:",
+          "alternativas": [
+            "não poderá ser utilizada a partir do momento em que for cogente a utilização da Lei nº 14.133/2021, mas as licitações iniciadas em momento anterior continuarão a observar a Lei nº 8.666/1993;",
+            "não poderá ser utilizada a partir do momento em que for cogente a utilização da Lei nº 14.133/2021, sendo que as licitações não concluídas, iniciadas em momento anterior, sob a égide da Lei nº 8.666/1993, serão refeitas;",
+            "poderá ser utilizada, desde que, a partir do momento em que for cogente a utilização da Lei nº 14.133/2021, sejam observadas as normas que veiculou a respeito dessa modalidade, incluindo as l icitações iniciadas em momento anterior;",
+            "poderá ser utilizada, desde que, a partir do momento em que for cogente a utilização da Lei nº 14.133/2021, sejam observadas as normas que veiculou, passando a ser convidados, no mínimo, quatro interessados, exc luídas as licitações iniciadas em momento anterior;",
+            "poderá ser utilizada, desde que, a partir do momento em que for cogente a utilização da Lei nº 14.133/2021, sejam observadas as normas que veiculou, exigindo -se a apresentação de, no mínimo, quatro pr opostas, excluídas as licitações iniciadas em momento anterior."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Débora, prefeita do Município Beta e grande entusiasta das inovações introduzidas pela Lei nº 14.133/2021 no sistema de licitações, questionou sua assessoria a respeito da possibilidade de ser realizado um diálogo entre licitantes previamente selecionados, com o objetivo de desenvolver uma ou mais alternativas que possam atender às necessidades da Administração. Após alentada análise, a assessoria concluiu, corretamente, que, preenchidos os demais requisitos exigidos:",
+          "alternativas": [
+            "nenhuma modalidade de licitação se ajusta a esse padrão, já que o pretendido diálogo daria azo a subjetivismos e a tratamentos diferenciados, comprometendo a isonomia;",
+            "é possível a adoção dessa modalidade, para a contratação de obras, serviços e compras, sendo os licitantes selecionado s conforme critérios objetivos, os quais apresentarão proposta final após o encerramento dos diálogos;",
+            "é possível a adoção dessa modalidade apenas para a realização de contratações integradas, sendo os licitantes selecionados conforme critérios objetiv os, os quais apresentarão proposta final após o encerramento dos diálogos;",
+            "é possível a adoção dessa modalidade apenas para a contratação de obras, serviços e compras de caráter não comum, sendo o diálogo aberto a qualquer interessado, cabendo à Admini stração apresentar o projeto final após o encerramento dos diálogos;",
+            "é possível a adoção dessa modalidade apenas para contratações que exijam inovação de procedimentos, sendo os licitantes selecionados conforme critérios objetivos, cabendo à Administra ção apresentar o projeto final após o encerramento dos diálogos."
+          ],
+          "correta": "B"
+        }
+      ]
+    },
+    {
+      "codigo": "tjdft2022-analista-area-judiciaria-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Tribunal de Justiça do Distrito Federal e dos Territórios",
+      "cargo": "Analista Judiciário - Área Judiciária",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/analista_judiciario_-_area_judiciarians-aju_tipo_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjdft2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 26,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Maria é servidora pública federal estável ocupante de cargo efetivo e, após processo administrativo disciplinar, foi demitida. Inconformada, Maria afo rou medida judicial e obteve sentença, já transitada em julgado, que determinou sua reintegração. Após o retorno a seu cargo, Maria recebeu apenas o pagamento retroativo dos vencimentos, férias indenizadas e auxílio - alimentação, referentes ao período em qu e esteve afastada por força da demissão, ora já declarada nula. Insatisfeita com os valores recebidos, mesmo ciente de que não ocorreu, no período reivindicado, qualquer situação de ambiente insalubre nem necessitou se deslocar no trajeto residência - trabalho-residência, Maria ajuizou nova medida judicial, agora pleiteando o pagamento retroativo das verbas a título de auxílio- transporte e adicional de insalubridade , em relação ao período em que ficou ilegalmente afastada. Levando em consideração a atual ju risprudência do Superior Tribunal de Justiça sobre o tema, a pretensão de Maria:",
+          "alternativas": [
+            "merece prosperar, pois todas as verbas, sejam de natureza salarial, sejam de natureza indenizatória, devem ser pagas retroativamente em relação ao período em que Maria fic ou ilegalmente afastada de suas funções;",
+            "merece prosperar, pois, além de receber retroativamente todas as verbas, sejam de natureza salarial, sejam de natureza indenizatória, Maria tem direito à reparação pelos danos morais sofridos pela demissão declarada nula;",
+            "não merece prosperar, pois a servidora somente tem direito ao pagamento retroativo de seus vencimentos, razão pela qual deve devolver os valores recebidos de boa -fé a título de férias indenizadas e auxílio-alimentação;",
+            "não merece prosper ar, pois os pagamentos do auxílio - transporte e do adicional de insalubridade têm natureza indenizatória, assim como também não lhe seria devido o auxílio-alimentação que lhe fora indevidamente pago;",
+            "não merece prosperar, pois os pagamentos do auxílio - transporte e do adicional de insalubridade não se mostram devidos à servidora pelo tão só exercício ficto no cargo público, haja vista que ditas rubricas reclamam a existência de requisitos legais específicos, não preenchidos."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Atos Administrativos",
+          "enunciado": "A Lei de Introdução às Normas do Direito Brasileiro (LINDB) , com as alterações introduzidas pela Lei nº 13.655/ 2018, trouxe o chamado consequencialismo, visando à maior previsibilidade, segurança jurídica e eficiência na criação e na aplicação do Direito Público. Nesse contexto, de acordo com a atual redação da LINDB:",
+          "alternativas": [
+            "a interpretação de normas sobre gestão pública deve privilegiar a efetividade das políticas públicas e os direitos dos administrados, desconsiderando os obstáculos e as dificuldades reais do gestor;",
+            "nas esferas administrativa e controladora, não se decidirá, em qualquer hipótese, com base em valores jurídicos abstratos, e a motivação demonstrará a necessidade e a adequação da medida imposta ou da invalidação de at o, contrato, ajuste, processo ou norma administrativa, sem mencionar possíveis alternativas que foram descartadas;",
+            "a decisão que, nas esferas controladora ou judicial, decretar a invalidação de ato, contrato, ajuste, processo ou norma administrativa de verá indicar de modo expresso suas consequências jurídicas, sem referências às consequências administrativas, em razão do princípio da separação dos poderes;",
+            "a revisão, nas esferas administrativa, controladora ou judicial, quanto à validade de ato, con trato, ajuste, processo ou norma administrativa cuja produção já se houver completado, levará em conta as orientações gerais vigentes no momento da decisão de revisão, de maneira que é permitido que, com base em mudança posterior de orientação geral, se de clarem inválidas situações plenamente constituídas;",
+            "a decisão administrativa, controladora ou judicial que estabelecer interpretação ou orientação nova sobre norma de conteúdo indeterminado, impondo novo dever ou novo condicionamento de direito, deverá prever regime de transição quando indispensável para que o novo dever ou condicionamento de direito seja cumprido de modo proporcional, equânime e eficiente e sem prejuízo aos interesses gerais."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Licitações e Contratos",
+          "enunciado": "Em abril de 2022, o Tribunal de Justiça Alfa deseja contratar aquisição de determinados equipamentos que só po dem ser fornecidos por empresa exclusiva. De acordo com o regime jurídico da Lei nº 14.133/2021, tal contratação pelo Tribunal de Justiça Alfa deve ser feita mediante:",
+          "alternativas": [
+            "inexigibilidade de licitação, mas o Tribunal deverá demonstrar a inviabilidade de competição mediante atestado de exclusividade, contrato de exclusividade, declaração do fabricante ou outro documento idôneo capaz de comprovar que o objeto é fornecido por empresa exclusiv a, vedada a preferência por marca específica;",
+            "inexigibilidade de licitação, mas o Tribunal deverá demonstrar a inviabilidade de competição mediante atestado de exclusividade, contra to de exclusividade, declaração do fabricante ou outro documento idôneo capaz de comprovar que o objeto é fornecido por empresa exclusiv a, permitida a preferência por marca específica;",
+            "dispensa de licitação, mas o Tribunal deverá demonstrar a inviabilidade de competição mediante atestado de exclusividade, contrato de exclusividade, declaração do fabricante ou outro documento idôneo capaz de comprovar que o objeto é fornecido por empresa exclusiv a, vedada a preferência por marca específica;",
+            "dispensa de licitação, mas o Tribunal deverá demonstrar a inviabilidade de competição mediante atestado de exclusividade, contrato de exclusividade, declaração do fabricante ou outro documento idôneo capaz de comprovar que o objeto é fornecido por empresa exclusiv a, permitida a preferência por marca específica;",
+            "prévia licitação, na modalidade diálogo competitivo, para contratação de compra em que a Administração Pública realiza diálogos com licitantes previamente selecionados mediante critérios subjetivos, com o intuito de desenvolver uma ou mais alternativas capazes de atender às suas necessidades, devendo os licitantes apresentar proposta final após o encerramento dos diálogos."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Improbidade Administrativa",
+          "enunciado": "Em março de 2022, José, analista judiciário do Tribunal de Justiça do Distrito Federal e dos Territórios, de forma dolosa, no exercício da função, revelou fato de que t inha ciência em razão das atribuições e que devia permanecer em segredo, propiciando beneficiamento por informação privilegiada e, ainda, colocando em risco a segurança da sociedade e do Estado. De acordo com a atual redação da Lei nº 8.429/ 1992, José praticou ato de improbidade administrativa e, após o devido processo legal, está sujeito às seguintes cominações, que podem ser aplicadas isolada ou cumulativamente, de acordo com a gravidade do fato:",
+          "alternativas": [
+            "pagamento de multa civil de até 24 vezes o valor da remuneração percebida pelo agente e proibição de co ntratar com o poder público ou de receber benefícios ou incentivos fiscais ou creditícios, direta ou indiretamente, ainda que por intermédio de pessoa jurídica da qual seja sócio majoritário, pelo prazo não superior a quatro anos;",
+            "perda da função públ ica, suspensão dos direitos políticos de três a cinco anos, pagamento de multa civil de até cem vezes o valor da remuneração percebida pelo agente e proibição de contratar com o poder público ou receber benefícios ou incentivos fiscais ou creditícios, dire ta ou indiretamente, ainda que por intermédio de pessoa jurídica da qual seja sócio majoritário, pelo prazo de cinco anos;",
+            "perda da função pública, pagamento de multa civil de até 24 vezes o valor da remuneração percebida pelo agente e proibição de contratar com o poder público ou de receber benefícios ou incentivos fiscais ou creditícios, direta ou indiretamente, ainda que por intermédio de pessoa jurídica da qual seja sócio majoritário, pelo prazo não superior a quatro anos;",
+            "perda dos bens ou v alores acrescidos ilicitamente ao patrimônio, se concorrer esta circunstância, perda da função pública, suspensão dos direitos políticos até doze anos, pagamento de multa civil equivalente ao valor do dano e proibição de contratar com o poder público ou de receber benefícios ou incentivos fiscais ou creditícios, direta ou indiretamente, ainda que por intermédio de pessoa jurídica da qual seja sócio majoritário, pelo prazo não superior a doze anos;",
+            "perda dos bens ou valores acrescidos ilicitamente ao patrimônio, se concorrer esta circunstância , perda da função pública, suspensão dos direitos políticos até catorze anos, pagamento de multa civil equivalente ao valor do acréscimo patrimonial e proibição de contratar com o poder público ou de receber benefíc ios ou incentivos fiscais ou creditícios, direta ou indiretamente, ainda que por intermédio de pessoa jurídica da qual seja sócio majoritário, pelo prazo não superior a catorze anos."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "tjdft2022-analista-estatistica-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Tribunal de Justiça do Distrito Federal e dos Territórios",
+      "cargo": "Analista Judiciário - Estatística",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/analista_judiciario_-_estatisticans-est_tipo_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjdft2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 22,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "A média de um conjunto de dados com 1.600 registros é 4. Entretanto, constatou -se que as “não respostas” foram imputadas indevidamente como zero. Assim, os registros foram corrigidos a partir da substituição desses valores por “NR ”, ou seja, retirando as “não respostas” do cálculo da média. A nova média obtida foi 5. Com base nas informações acima, conclui -se que a proporção de “não respostas” era de:",
+          "alternativas": [
+            "5%;",
+            "10%;",
+            "15%;",
+            "20%;",
+            "25%."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 24,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Análise Combinatória",
+          "enunciado": "Um analista realiza três plantões noturnos por semana durante um mês. O sorteio dos dias da semana é aleatório. Assim, os plantões são selecionados aleatoriamente em quaisquer dias da semana: domingo, segund a-feira, terça -feira, quarta -feira, quinta-feira, sexta-feira, sábado. Considere sábado e domingo como dias consecutivos. A probabilidade de que o analista não seja escalado para dias consecutivos é:",
+          "alternativas": [
+            "3/5;",
+            "3/7;",
+            "1/3;",
+            "1/5;",
+            "1/7."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "A probabilidade de um determinado time ser classificado entre os 4 primeiros colocados na primeira fase de um campeonato é de 40%. É sabido que, se for classificado entre os 4 primeiros na primeira fase, o time tem 50% de chance de vencer o campeonato. O time não venceu o campeonato, seja esse evento representado por Y = 0. Seja também X uma variável aleatória que assume valor 0, se o time não se classificou entre os 4 primeiros na primeira fase, e que assume valor 1, caso tenha se classificado entr e os 4 primeiros. A função de probabilidade da variável aleatória X|Y = 0 é:",
+          "alternativas": [
+            "( | ) {",
+            "( | ) {",
+            "( | ) {",
+            "( | ) {",
+            "( | ) {"
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "A Vara Cível de determinada comarca realiza 200 audiências por mês. No mês passado, em 120 audiências o autor era assistido pela Defensoria Pública e, nas outras 80 audiências restantes, o demandante esteve representado por advogado particular. Sorteiam-se, aleatoriamente e sem reposição, 80 audiências desse último mês. O número mais provável de audiências em que atuam os defensores públicos é de:",
+          "alternativas": [
+            "48;",
+            "49;",
+            "50;",
+            "51;",
+            "52."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Probabilidade",
+          "enunciado": "A ocorrência de ajuizamento de ação de guarda pela Defensoria Pública de uma comarca é modelada como um processo de Poisson de taxa 0,4 por dia. A Defensoria Pública funciona 7 dias por semana. Em uma semana, o número médio de dias em que ocorre a propositura de ação de guarda por esse órgão da Defensoria é, aproximadamente:",
+          "alternativas": [
+            "( );",
+            "( ( ));",
+            "( );",
+            "( );",
+            "( ( ))."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Raciocínio Lógico e Matemática",
+          "assunto": "Estatística Descritiva",
+          "enunciado": "Um estatístico deseja selecionar uma amostra aleatória simples, com reposição, de uma populaçã o em que a variância é conhecida e igual a 40.000. A amostra precisa atender ao seguinte critério: A amplitude máxima do intervalo bilateral de 95% de confiança para a média populacional deve ser de 200. O menor tamanho de amostra que atende à condição de scrita acima é:",
+          "alternativas": [
+            "16;",
+            "15;",
+            "5;",
+            "4;",
+            "3."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "tjdft2022-analista-seguranca-informacao-tipo1",
+      "banca": "FGV",
+      "ano": 2022,
+      "orgao": "Tribunal de Justiça do Distrito Federal e dos Territórios",
+      "cargo": "Analista Judiciário - Segurança da Informação",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/analista_judiciario_-_seguranca_da_informacaons-sin_tipo_1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjdft2022_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 26,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "O Tribunal de Justiça contratou a empresa Rede X para efetuar a troca dos cabos coaxiais antigos usados no tráfego de rede. A Rede X informou que conseguiria entregar a velocidade de 1 Gigabit por segundo (Gbps) com menor custo utilizando cabos que transmitem a partir da diferença de potencial elétrico e possuem boa imunidade a ruído com um bom desempenho. Para entregar o serviço, a empresa fará uso de cabo:",
+          "alternativas": [
+            "de condução pela rede elétrica;",
+            "de fibra óptica monomodo;",
+            "de fibra óptica multimodo;",
+            "coaxial categoria 3;",
+            "par trançado categoria 5."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 27,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A divisão de conectividade está implementando um novo segmento de rede local para um novo departamento que está sendo criado no Tribunal de Justiça. Durante esse processo foi alocado o endereço 10.9.80.0/20 para a rede do novo departamento. Para que a div isão de conectividade termine sua tarefa, os endereços do último host válido e seu endereço de broadcast são, respectivamente:",
+          "alternativas": [
+            "10.9.93.254 - 10.9.93.255;",
+            "10.9.94.254 - 10.9.94.255;",
+            "10.9.95.254 - 10.9.95.255;",
+            "10.9.96.254 - 10.9.96.255;",
+            "10.9.97.254 - 10.9.97.255;"
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Renan trabalha na infraestrutura d e um posto avançado do Tribunal de Justiça do Distrito Federal e precisa efetuar a conexão com a rede local do tribunal. Ao buscar informações sobre as redes, Renan identificou que a arquitetura utilizada é o modelo OSI em ambos os lados, porém os protocolos, endereçamentos e tamanhos de pacotes que trafegam nas redes são diferentes. Para permitir que essas redes heterogêneas sejam interconectadas, Renan deve tratar essa conexão na camada de:",
+          "alternativas": [
+            "redes;",
+            "enlace;",
+            "física;",
+            "apresentação;",
+            "aplicação."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "O administrador de rede local do Tribunal de Justiça (TJ) está executando um processo licitatório de forma a obter uma consultoria sobre a arquitetura da sua rede. O objetivo do certame é identificar os problemas existentes na arquitetura em uso e o modelo utilizado. A consultoria n otou que o modelo da arquitetura não consegue descrever outra pilha de protocolo senão a existente, não faz distinção entre as camadas físicas e de enlace de d ados, e não diferencia claramente os conceitos de serviço, interface e protocolo. A consultoria identificou que o modelo de rede do TJ é o:",
+          "alternativas": [
+            "TCP/IP;",
+            "OSI;",
+            "bluetooh;",
+            "X.25;",
+            "UDP/IP."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A empresa Velote X foi contratada para mensurar o tráfego e identificar a rede local do Tribunal de Justiça . Na verificação das informações, a contratada identificou um serviço de dados de longo alcance de alta velocidade oferecido por operadoras de longa distância, o qual é projetado para dados . Ela também identificou uma interface de hardware especial usada para conectar computadores à rede, que a rede opera a velocidades superiores a 1 Mbit/s e restringe cada pacote para conter até 9.188 bytes de dados. A conclusão chegada pela contratada é a de que a rede é uma wan do tipo:",
+          "alternativas": [
+            "ATM (Assynchronous Transfer Mode);",
+            "frame relay;",
+            "SMDS (Switched Multimegabit Data Service);",
+            "X.25;",
+            "ISDN (Integrated Services Digital Network)."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 31,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Kátia é uma web designer contratada para fazer uma página web para o Tribunal de Justiça. Ela fará uso do protocolo HTTP, pois este é um protocolo da camada de aplicação, o qual executa sob o TCP e associado à web. As operações nesse protocolo são chamadas de métodos. Kátia, então , testa o envio da página pelo servidor, cria uma coleção de páginas web em um servidor remoto e instrui o servidor a enviar de volta a solicitação. Para implementar a página web , Kátia deve usar, respectivamente, os métodos:",
+          "alternativas": [
+            "POST, HEAD, DELETE;",
+            "GET, CONNECT, TRACE;",
+            "PUT, CONNECT, OPTIONS;",
+            "POST, HEAD, OPTIONS;",
+            "GET, PUT, TRACE."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 32,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "O site do Tribunal de Justiça está na fase de pré-produção, ou seja, falta m apenas pequenos ajustes para disponibilizá-lo. Durante os últimos testes foi verificado que não estava conseguindo cadastrar o serviço de DNS para o site , pois o tráfego do protocolo UDP estava com alguns problemas. Para que o protocolo funcione corretamente, a equipe de rede deve implementar a funcionalidade de:",
+          "alternativas": [
+            "envio de uma quantidade de mensagens maior que o TCP;",
+            "checksum do cabeçalho, dos dados e de um pseudocabeçalho conceituais do IP;",
+            "controle de congestionamento a partir do protocolo de janela deslizante;",
+            "controle de retransmissão utilizando o jitter em sua verificação;",
+            "controle de fluxo para que não haja a perda de pacotes e que, caso ocorra, solicite a retransmissão."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 33,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "Após ser aceita em uma licitação do Tribunal de Justiça, a empresa Seg X foi contratada para implementar a segurança na rede sem fio existente. A empresa identificou que a rede sem fio utilizava o padrão 802.11 com o protocolo WPA2 (wi -fi Protected Access 2) e forneceu , como solução, a utilização do protocolo de segurança CCMP (Counter Mode with Cipher Block Chaining Message Authentication Code Protocol). A partir do uso do protocolo CCMP, a rede do Tribunal de Justiça obterá:",
+          "alternativas": [
+            "criptografia com AES com bloco e chave de 128 bits e garantia de integridade com o modo de encadeamento de blocos de cifras;",
+            "codificação de dados por confidencialidade , realizando um XOR com a saída de um fluxo de cifras;",
+            "verificação de integridade das mensagens basead a em um CRC de 32 bits;",
+            "criptografia com 3DES com chave de 128 bits e autenticação a partir do código de autenticação de mensagens;",
+            "criptografia com o DES com chave de 56 bits no modo de operação ECB (Eletronic Code Book)."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 34,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "O Tribunal de Justiça está mudando a sua sede para um novo endereço. Nesse processo, a equipe de redes está distribuindo os endereços IPs de forma que fiquem com a mesma quantidade por departamento. Foi fornecido o endereço 10.210.114.0/20 para a nova sede. Para cumprir seu objetivo e atender aos 16 departamentos, a equipe de redes necessita da máscara:",
+          "alternativas": [
+            "255.255.254.0;",
+            "255.255.255.128;",
+            "255.255.252.0;",
+            "255.255.255.192;",
+            "255.255.255.0."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Informática",
+          "assunto": "Redes de Computadores",
+          "enunciado": "A empresa World Coorp está com problemas de alocação de endereços IPs em sua rede local. A intenção é reduzir o número de IPs sendo utilizado e a técnica selecionada foi o NAT (Network Address Translation). Isso permite que uma máquina da rede local tenha um endereço privado, também conhecido como não roteável que, ao sair para a Internet, deve ser convertido para um endereço roteável. Para que a empresa possa utilizar o NAT, a faixa de endereços da rede interna deve ser:",
+          "alternativas": [
+            "127.0.0.1/16;",
+            "169.254.0.0/16;",
+            "186.45.123.69/24;",
+            "192.168.0.0/16;",
+            "198.133.219.25/24."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 36,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Marina recebeu uma ligação de um suposto funcionário que dizia estar fazendo uma pesquisa sanitária sobre uma pandemia. Marina passou suas informações pessoais e profissionais , que permitiram ao falso funcionário acessar um sistema com suas credenciais. A técnica empregada pelo falso funcionário para conseguir as informações de Marina é:",
+          "alternativas": [
+            "poisoning;",
+            "flooding;",
+            "engenharia social;",
+            "suborno;",
+            "sniffer."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 37,
+          "disciplina": "Informática",
+          "assunto": "Correio Eletrônico",
+          "enunciado": "Carlos recebeu um e -mail que parecia pertencer ao seu banco e , sem perceber , baixou e instalou um software malicioso no seu computador. A partir desse software, um criminoso cibernético passou a ter o controle do computador de Carlos. O software malicioso instalado no computador de Carlos é:",
+          "alternativas": [
+            "phishing;",
+            "DoS;",
+            "ransomware;",
+            "rootkit;",
+            "sandbox."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 38,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Os analistas de segurança da informação estão pesquisando como mitigar riscos e monitorar ameaças que podem surgir no futuro. No modelo de ameaças STRIDE, a ameaça que tenta violar o princípio da confidencialidade é:",
+          "alternativas": [
+            "spoofing;",
+            "tampering;",
+            "repudiation;",
+            "information disclosure;",
+            "elevation of privilege."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 39,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Marcelo está elaborando a política de segurança em seu órgão e incluiu orientações sobre criação de senhas fortes para acesso aos sistemas, principalmente aqueles acessados pela internet. A orientação do Marcelo visa proteger seus usuários contra ataques d e hackers que utilizam software automático para descobrir senhas fracas. A técnica para obtenção de senhas da qual Marcelo está tentando proteger seus usuários é:",
+          "alternativas": [
+            "man-in-the-middle;",
+            "brute force;",
+            "backdoors;",
+            "session hijacking;",
+            "XSS."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 40,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Um novo sistema operacional foi instalado nos servidores de um Centro de Dados, e a equipe de segurança recebeu a informação de que o novo sistema pode ter uma vulnerabilidade dia -zero. As vulnerabilidades dia -zero são perigosas porque são desconhecidas e suas correções ainda não foram produzidas. Durante o período de espera pela correção, os usuários ficam sujeitos às tentativas d e explorações dessas vulnerabilidades pelos hackers. Uma das formas utilizadas pelos hackers para a descoberta das vulnerabilidades dia -zero é o fuzzing, cujo processo de funcionamento consiste em:",
+          "alternativas": [
+            "inserir muitos dados em intervalos diferentes e verificar como um programa responde;",
+            "adaptar vulnerabilidades anteriores a novos programas;",
+            "roubar a identidade de um desenvolvedor para ter acesso ao código-fonte do programa;",
+            "confundir um roteador a fim de se passar por um ativo da rede;",
+            "enviar um código malicioso através de uma porta aberta na aplicação."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Ameaças persistentes avançadas (APT) utilizam múltiplos vetores de ataque em explorações personalizadas e complexas. A principal característica desse tipo de ameaça é a persistência de forma oculta por um longo período de tempo, com o objetivo de exfiltrar dados ou conduzir interrupção sustentada das operações de negócios de um alvo. Pode ser considerada uma técnica de persistência:",
+          "alternativas": [
+            "Criar uma conta;",
+            "Alternate Data Streams (ADS);",
+            "Exploit;",
+            "Program packing;",
+            "Codificação de dados."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "A equipe de segurança de um órgão público detectou em seus sistemas de monitoramento a seguinte requisição em direção a um site do órgão: http://www.site.gov.br/index.php?username=1'%20or%20'1'%20 =%20'1'))/*&amp;password=t&$t3. O tipo e a técnica de ataque detectados são, respectivamente:",
+          "alternativas": [
+            "HTML injection, com o objetivo de alterar a página de login;",
+            "SQL injection, com o objetivo de bypassar a página de login;",
+            "SQL injection, com o objetivo de forçar o banco de dados a gerar um erro;",
+            "Command injection, com o objetivo de realizar a execução de código na página de login;",
+            "Command injection, com o objetivo de forçar o banco de dados a gerar um erro."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Uma equipe de segurança de um órgão público foi designada para realizar testes de penetração no âmbito do Tribunal de Justiça do Distrito Federal e dos Territórios. Como parte da etapa de coleta de informações, a seguint e busca foi realizada em fontes abertas https://www.google.com/search?q=site:tjdft.jus.br. A requisição retornará páginas:",
+          "alternativas": [
+            "que contêm o link tjdft.jus.br;",
+            "com a url tjdft.jus.br;",
+            "que contêm endereços de e-mail tjdft.jus.br;",
+            "que contêm o título tjdft.jus.br;",
+            "dentro do domínio tjdft.jus.br."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Uma equipe de segurança de um órgão público designada para realizar testes de penetração conseguiu obter um arquivo de senhas pré-computadas em seus hashes correspondentes de um servidor de banco de dados. O tipo de ataque mais efetivo para descobrir as senhas a partir desses hashes é o:",
+          "alternativas": [
+            "Pass the hash;",
+            "Rainbow Table;",
+            "Ataque de força bruta;",
+            "Hashcat;",
+            "Password Spraying."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "A equipe de T ecnologia da Informação (TI) de um órgão público recebeu uma solicitação para implementar um backup de uma máquina virtual hospedada em seu cluster de virtualização. O cliente solicitou que fossem realizadas cópias diárias dos dados alterados em relação ao último backup completo da pasta /importante. O tipo de backup a ser implementado pela e quipe de TI para atender a solicitação do cliente é:",
+          "alternativas": [
+            "imagem da máquina virtual;",
+            "diferencial;",
+            "completo;",
+            "incremental;",
+            "offline."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Um órgão do Poder Judiciário está realizando a análise de impacto em seu negócio, identificando os efeitos de uma interrupção das suas atividades, a fim de subsidiar o seu processo de gestão de continuidade de negócios. Uma das atividades a ser executada pelo órgão durante o seu processo de análise de impacto de negócio é:",
+          "alternativas": [
+            "identificar as atividades internas de seus colaboradores, desconsiderando os relacionamentos com os fornecedores;",
+            "identificar os requisitos para contin uar e recuperar as atividades priorizadas dentro do prazo e na capacidade aceitável;",
+            "implementar e manter uma estrutura de resposta s que permita aviso e comunicação oportuna às partes do órgão atingido pela disrupção;",
+            "identificar o período máximo tolerável de disrupção para as atividades do órgão;",
+            "estabelecer prazo padrão para recuperação das atividades identificadas na análise."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Um órgão público que possui instalações em vários estados do Brasil instituiu a sua Equipe de Tratamento e Resposta a Incidentes (ETIR) , de acordo com Norma Complementar nº 05/IN01/DSIC/GSIPR, para gerenciar e tratar seus incidentes de segurança da informação. O órgão implementou a sua estrutura da seguinte forma: estabeleceu uma ETIR central que funciona na sede do órgão em Brasília e várias ETIRs secundárias distribuídas nas outras instalaçõe s dos órgãos nos outros estados. A ETIR principal define as estratégias, gerencia os serviços ofertados , centraliza os incidentes ocorridos e é responsável pela comunicação com o CTIR Gov, enquanto as secundárias implementam as estratégias e atuam dentro d o escopo de seus estados, notificando seus incidentes sempre à ETIR principal. O modelo de ETIR implementado pelo órgão é:",
+          "alternativas": [
+            "1 – utilizando a equipe de tecnologia da informação;",
+            "2 – centralizado;",
+            "3 – descentralizado;",
+            "4 – combinado ou misto;",
+            "5 – distribuído."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "O Comitê de Segurança Cibernética do Poder Judiciário instituiu o Protocolo de Prevenção a Incidentes Cibernéticos do Poder Judiciário (PPINC-PJ) com diretrizes para a prevenção a incidentes cibernéticos em seu mais alto nível. O PPINC -PJ baseia-se em um conjunto de boas práticas de segurança cibernéticas para melhor detectar, conter e eliminar ataques cibernético s, minimizando eventuais impactos na operação das atividades dos órgãos. De acordo com o Anexo I, da Portaria CNJ nº 162/2021 , o princípio crítico da PPINC -PJ que tem foco na formação, na revisão de controles/acessos, nos processos e na disseminação da cultura de segurança cibernética é:",
+          "alternativas": [
+            "priorização;",
+            "diagnóstico contínuo;",
+            "formação, capacitação e conscientização;",
+            "automação;",
+            "resiliência."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 49,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "O administrador de redes de um órgão público implementou uma ferramenta para registrar os eventos (logs) críticos de seus sistemas e ativos, coletando -os e gerenciando -os de forma centralizada. A ferramenta é baseada no padrão Syslog, em conformidade com a RFC 5424 (The Syslog Protocol). Considerando as especificações técnicas da RFC 5424 para o protocolo Syslog, a ferramenta para registro de logs atende o requisito:",
+          "alternativas": [
+            "arquitetura em 2 camadas: conteúdo e aplicação;",
+            "entrega confiáv el de mensagens baseada no protocolo de transporte TCP;",
+            "envio de mensagens Syslog dos dispositivos ( originator) para mais de um coletor;",
+            "originator, relay e collector não pode ndo operar no mesmo servidor por questão de segurança;",
+            "as mensagens Syslog são informativas, não possuindo níveis diferentes de severidade."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 50,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "Empresas privadas e órgãos públicos vêm adequando seus processos de coleta, armazenamento e manipulação dos dados pessoais a fim de operarem em conformidade com os requisitos legais da Lei Geral de Proteção de Dados (LGPD). A LGPD define vários agentes com distintas responsabilidades para o tratamento dos dados pessoais. O titular do dado pessoal tem assegurado direitos diante desses agentes para garantir que seus dados sejam tratados corretamente enqua nto se mantiver a necessidade de seu tratamento. De acordo com a LGPD e os “Guias operacionais para adequação à LGPD da Secretaria de Governo Digital”, o titular de dados pode solicitar alguns direitos sobre seus dados pessoais à administração pública. Um dos direitos do titular dos dados r elacionado no Art. 18 da Lei, cujas instruções encontram -se no Guia de Boas Práticas relacionado à Lei Geral de Proteção de Dados é:",
+          "alternativas": [
+            "tratamento de seus dados para fins exclusivos de segurança do Estado;",
+            "transferência da titularidade de seus dados de saúde para seu médico;",
+            "dessensibilização de seus dados pessoais sensíveis para igualar o tratamento de seus dados pessoais;",
+            "anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade com o disposto na LGPD;",
+            "transferência de dados pessoais para país estrangeiro ou organismo internacional do qual o país seja membro por transferência de sede organizacional."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 51,
+          "disciplina": "Informática",
+          "assunto": "Software e Sistemas Operacionais",
+          "enunciado": "Em relação às ações de hardening de ambiente Linux, analise as afirmativas a seguir. I. AppArmor é um conjunto de patches no kernel do Linux para aprimorar a sua segurança, e não faz uso do framework Linux Security Module (LSM). II. O uso de SELinux aumenta consideravelmente a segurança de um ambiente Linux, mas o ambiente final continua sendo baseado em um sistema de controle discricionário. III. A habilitação do Kernel Page -Table Isolation (KPTI) para hardening do Linux permite a mitigação da exploração das vulnerabilidades conhecidas como Meltdown e Spectre. Está correto somente o que se afirma em:",
+          "alternativas": [
+            "I;",
+            "II;",
+            "III;",
+            "I e II;",
+            "I e III."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 52,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Um ataque perigoso para aplicaçõe s web é o clickjacking, uma técnica maliciosa que induz o usuário a clicar em algo diferente do que ele enxerga, potencialmente podendo causar ações indesejadas ou revelar informações confidenciais. Uma forma de a aplicação web tentar evitar que esse ataque ocorra é pelo uso do(a):",
+          "alternativas": [
+            "extensão Expect-CT;",
+            "cabeçalho X-Frame-Options;",
+            "protocolo Strict-Transport-Security;",
+            "atributo Secure em cookies;",
+            "cabeçalho X-Xss-Protection."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 55,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "João administra uma rede de computadores com muitos sistemas de informação cujas operações são de acesso restrito , pois contém informações confidenciais. Nos últimos meses, João recebeu diversos relatos de ataques de keylogger e screenlog. Diante desse cenário, João deve proteger a sua rede de ataques do tipo:",
+          "alternativas": [
+            "worm;",
+            "spyware;",
+            "botnet;",
+            "zumbi;",
+            "remote access trojan."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 56,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "De acordo com a composição da ANPD (Autoridade Nacional de Proteção de Dados ) prevista na LGPD ( Lei Geral de Proteção de Dados Pessoais), disseminar o conhecimento sobre a proteção de dados pessoais e da privacidade à população é uma atribuição do(a):",
+          "alternativas": [
+            "Conselho Diretor;",
+            "Unidades especializadas;",
+            "Unidades administrativas;",
+            "Coordenação-Geral de Administração;",
+            "Conselho Nacional de Proteção de Dados Pessoais e da Privacidade."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 57,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "De acordo com o Art. 37 da LGPD (Lei Geral de Proteção de Dados Pessoais), as operações de tratamento realizadas nos dados pessoais devem ser registradas. Para isso, o controlador e o operador devem manter registro das operações de tratamento de dados pessoais que realizarem. O registro das operações é realizado por meio do:",
+          "alternativas": [
+            "inventário de dados pessoais;",
+            "catálogo de base de dados;",
+            "relatório de impacto à proteção de dados pessoais;",
+            "serviços notariais e de registro;",
+            "termo de consentimento."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Informática",
+          "assunto": "Segurança da Informação",
+          "enunciado": "O Poder Judiciário criou a Plataforma Digital do Poder Judiciário Brasileiro (PDPJ -Br) para disponibilizar soluções para uso por todos os sistemas de processo judicial eletrônico do Poder Judiciário nacional. A PDPJ -Br é disponibilizada na forma de um marketplace que pode ser hospedada em nuvem. O requisito a ser observado para permitir a hospedagem da PDPJ- Br em um provedor de serviços de nuvem é que a nuvem:",
+          "alternativas": [
+            "seja híbrida e exclusiva para o Poder Judiciário;",
+            "seja híbrida, podendo ser compartilhada somente outro órgão público;",
+            "armazene os dados em um datacenter em território nacional;",
+            "transmita os dados por equipamentos em território nacional;",
+            "realize o backup dos dados em equipamentos do Poder Judiciário."
+          ],
+          "correta": "C"
+        }
+      ]
+    }
+  ]
+}
