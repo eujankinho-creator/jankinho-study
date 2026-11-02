@@ -388,20 +388,6 @@
           "correta": "D"
         },
         {
-          "numero": 27,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Probabilidade",
-          "enunciado": "A probabilidade de um determinado time ser classificado entre os 4 primeiros colocados na primeira fase de um campeonato é de 40%. É sabido que, se for classificado entre os 4 primeiros na primeira fase, o time tem 50% de chance de vencer o campeonato. O time não venceu o campeonato, seja esse evento representado por Y = 0. Seja também X uma variável aleatória que assume valor 0, se o time não se classificou entre os 4 primeiros na primeira fase, e que assume valor 1, caso tenha se classificado entr e os 4 primeiros. A função de probabilidade da variável aleatória X|Y = 0 é:",
-          "alternativas": [
-            "( | ) {",
-            "( | ) {",
-            "( | ) {",
-            "( | ) {",
-            "( | ) {"
-          ],
-          "correta": "B"
-        },
-        {
           "numero": 28,
           "disciplina": "Raciocínio Lógico e Matemática",
           "assunto": "Probabilidade",
@@ -414,20 +400,6 @@
             "52."
           ],
           "correta": "A"
-        },
-        {
-          "numero": 30,
-          "disciplina": "Raciocínio Lógico e Matemática",
-          "assunto": "Probabilidade",
-          "enunciado": "A ocorrência de ajuizamento de ação de guarda pela Defensoria Pública de uma comarca é modelada como um processo de Poisson de taxa 0,4 por dia. A Defensoria Pública funciona 7 dias por semana. Em uma semana, o número médio de dias em que ocorre a propositura de ação de guarda por esse órgão da Defensoria é, aproximadamente:",
-          "alternativas": [
-            "( );",
-            "( ( ));",
-            "( );",
-            "( );",
-            "( ( ))."
-          ],
-          "correta": "C"
         },
         {
           "numero": 43,
