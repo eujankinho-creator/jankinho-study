@@ -1,0 +1,391 @@
+{
+  "formato": "cortex-questoes-oficiais-v1",
+  "lote": "fgv-tjms2024-administracao-ti-lote017",
+  "limitarA30": true,
+  "provas": [
+    {
+      "codigo": "tjms2024-analista-area-meio-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Tribunal de Justiça do Estado de Mato Grosso do Sul",
+      "cargo": "Analista Judiciário - Área Meio",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/analista-judiciario-area-meiocr-02-am-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjms2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 24,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Atos Administrativos",
+          "enunciado": "Em decorrência de razões de interesse público, certa autoridade administrativa, no regular exercício de suas atribuições, promoveu a remoção do servidor Aurélio, calcada em critérios objetivos, válidos e idôneos à realiza ção do ato, considerando, ainda, a premente necessidade de servidores na lotação de destino, mas não formalizou, prontamente, a devida motivação de tal ato. Aurélio tem conhecimento de que não houve favoritismos ou perseguições, pois, de acordo com as regr as estabelecidas, ele era, realmente, o servidor que poderia ser removido na aludida situação, mas está inconformado com o mencionado ato, pois estava satisfeito no local em que trabalhava, de modo que pretende suscitar que a ausência de justificativa cara cteriza defeito insanável do ato administrativo. Nesse contexto, a ausência de motivação na aludida remoção corresponde a vício no elemento:",
+          "alternativas": [
+            "forma;",
+            "motivo;",
+            "objeto;",
+            "competência;",
+            "finalidade."
+          ],
+          "correta": "A"
+        },
+        {
+          "numero": 25,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Poderes Administrativos",
+          "enunciado": "O Supremo Tribunal Federal tem relevante paradigma reconhecendo a possibilidade de delegação da fase sancionatória do poder de polícia para sociedades de economia mista e empresas públicas que realizem serviço público em regime de monopólio e não distribuam lucro entre seus acionistas. Tal precedente foi objeto de estudo por Maria Rosa, que verificou que determinadas peculiaridades do regime jurídico dos agentes públicos que atuam em tais entidades foram determinantes para a solução alcançada. Dentre elas, é correto indicar:",
+          "alternativas": [
+            "a admissão independentemente da realização de concurso público, bastando que seja realizado procedimento seletivo simplificado para a respectiva contratação temporária;",
+            "a garantia da estabilidade assegurada a tais agentes, apó s três anos de efetivo exercício, mediante aprovação em avaliação de desempenho;",
+            "a aplicação do regime estatuário, considerando que tais agentes não estão submetidos à legislação trabalhista;",
+            "a necessidade de decisão judicial com trânsito em julgad o para realizar a demissão dos agentes públicos, em decorrência da garantia que lhes é assegurada pela Constituição;",
+            "o reconhecimento de que as entidades administrativas em questão devem motivar a dispensa dos agentes, assegurando- se, assim, que os pri ncípios observados no momento da admissão sejam também respeitados por ocasião do desligamento."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 28,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Princípios da Administração Pública",
+          "enunciado": "Após ser investida em determinado cargo de provimento efetivo no Estado de Mato Grosso do Sul, Fernanda foi alertada acerca dos princípios administrativos e da importância das normas sobre a interpretação e aplicação do direito público, introduzidas pela Lei nº 13.655/2018 no D ecreto-Lei nº 4.657/42, notadamente com relação às atribuições que por ela serão desempenhadas. Por essa razão, ela passou a aprofundar os seus estudos sobre a mencionada temática. Face a essa situação hipotética, Fernanda concluiu corretamente que diante do princípio da(de):",
+          "alternativas": [
+            "supremacia do interesse público, as decisões na esfera administrativa podem ser pautadas em valores jurídicos abstratos, sem que sejam consideradas as consequências práticas da decisão;",
+            "eficiência, é possível a formalização de compromisso com os interessados para dirimir situação contenciosa, que deve buscar solução jurídica proporcional, equânime e compatível com os interesses gerais;",
+            "segurança jurídica, não podem ser considerados os obstáculos e as dificuldades reais do g estor na interpretação de normas sobre gestão pública;",
+            "legalidade, constatado vício insanável em ato administrativo, deve ser declarada a sua nulidade, hipótese em que não é necessária a motivação;",
+            "indisponibilidade do interesse público, a verifica ção de irregularidade apenas pode importar na aplicação de sanção, a despeito das consequências práticas, jurídicas e administrativas que indiquem outra solução."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Em certa organização, a diretora de recursos humanos está avaliando os candidatos ao cargo de gerente de uma equipe. A equipe é composta por membros recentemente admitidos na organização e ainda sem as competências técnicas necessárias ao bom desempenho da s funções. No entanto, os membros da equipe se mostram bastante interessados e motivados para a realização das tarefas. Apoiando -se na teoria da liderança situacional de Hersey e Blanchard, a diretora avalia que a equipe se encontra no nível de prontidão “2”. Considerando que a avaliação da diretora está correta, a teoria da liderança situacional de Hersey e Blanchard aponta que, nessas condições, o estilo mais eficaz de liderança é o:",
+          "alternativas": [
+            "delegador;",
+            "realizador;",
+            "persuasivo;",
+            "participativo;",
+            "diretivo."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "A resistência é um fenômeno esp erado nas mudanças organizacionais. Para superá -la, os agentes da mudança podem usar táticas diversas, de acordo com os desafios encontrados. Uma situação relativamente comum é a resistência a ser originada da falta de informações adequadas sobre o process o de mudança por parte dos funcionários. Nessa situação, a tática adequada para reduzir a resistência e uma de suas potenciais desvantagens são, respectivamente:",
+          "alternativas": [
+            "facilitação e apoio; custo alto;",
+            "participação; pode pôr em risco a credibilidade dos agentes de mudança;",
+            "negociação; abre espaço para pressão de diversos indivíduos e grupos;",
+            "educação e comunicação; depende de confiança mútua entre a administração e os funcionários para ter sucesso;",
+            "cooptação; pode ter impacto negativo na motiv ação dos funcionários."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 46,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Bruno, gerente de recursos humanos em uma fundação, precisa avaliar os resultados dos programas de treinamento realizados para os funcionários em 2023. O objetivo principal dos treinamentos foi a melhoria do desempenho no nível organizacional. Bruno poderia utilizar como indicadores para avaliar os impactos dos programas de treinamento, no nível organizacional:",
+          "alternativas": [
+            "melhora da qualidade de vida no trabalho (QVT); redução da rotatividade;",
+            "melhora do clima organizacional; melhora da imagem da organização;",
+            "aumento da produtividade; retorno dos investimentos em treinamento;",
+            "redução do absenteísmo; melhora da cooperação;",
+            "redução do índice de acidentes de trabalho; melhoria da qualidade."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Gestão de Pessoas",
+          "enunciado": "Em certa organização, uma equipe recebeu a incumbência de desenvolver e implantar um novo e importante projeto. Carlos e Daniel, membros da equipe, têm visões conflitantes sobre a melhor forma de distribuir e realizar as diversas atribuições, o que gerou um impasse que tem dificultado o seguimento do projeto. Uma reunião da equipe foi marcada pelo gerente, para se tentar chegar a alguma solução. Na reunião, Carlos e Daniel reconheceram que haviam sido intransigentes e concordaram com uma proposta que levasse em conta, parcialmente, os pontos de vista de cada um. O conflito descrito e a abordagem de administração do conflito apresentada são, respectivamente:",
+          "alternativas": [
+            "conflito de processo; acomodação;",
+            "conflito de processo; compromisso (concessão);",
+            "conflito de tarefa; compromisso (concessão);",
+            "conflito de relacionamento; acomodação;",
+            "conflito de relacionamento; colaboração."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 59,
+          "disciplina": "Direito Administrativo",
+          "assunto": "Agentes Públicos",
+          "enunciado": "Os princípios fundamentais da governança corporativa estão intimamente ligados à identidade da empresa, orientando as deliberações éticas, influenciando diretamente a conduta dos agentes de governança e regulando o funcionamento do sistema de compliance. Esse sistema é constituído por uma série de elementos que visam a atender a três objetivos primordiais: prevenir, detectar e responder. Uma atividade da primeira linha de defesa é (são) o(a) (as):",
+          "alternativas": [
+            "inspeção;",
+            "conformidade.",
+            "auditoria interna;",
+            "controle financeiro;",
+            "medidas de controle interno."
+          ],
+          "correta": "E"
+        }
+      ]
+    },
+    {
+      "codigo": "tjms2024-analista-seguranca-ti-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Tribunal de Justiça do Estado de Mato Grosso do Sul",
+      "cargo": "Analista de Segurança de TI",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tecnico-de-nivel-superior-analista-de-sistemas-computacionais-analista-de-seguranca-de-ticr-06-ti-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjms2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 24,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Ao analisar como o HTTP define como os clientes requisitam páginas aos servidores e como eles as transferem aos clientes, é correto afirmar que:",
+          "alternativas": [
+            "o cliente HTTP primeiro inicia uma conexão HTTP com o servidor. Uma vez estabelecida, os processos do navegador e do servidor acessam o HTTP por meio de suas interfaces de socket;",
+            "TCP oferece ao HTTP um serviço confiável de transferência de dados, o que implica que toda mensagem de requisição TCP emitida por um processo cliente chegará intacta ao servidor;",
+            "toda mensagem de resposta TCP emitida pelo processo servidor chegará intacta ao cliente. O TCP não precisa se preocupar com dados perdidos ou com detalhes de como o HTTP se recupera da perda de dados ou os reordena dentro da rede;",
+            "o servidor envia ao cliente os arquivos solicitados e armazena qualquer informação de estado sobre o cliente. Se determinado cliente solicita o mesmo objeto duas vezes em um período de poucos segundos, o servidor não responde dizendo que acabou de enviá-lo;",
+            "o cliente envia mensagens de requisição HTTP para sua interface socket e recebe mensagens de resposta HTTP de sua interface socket. Já o servidor HTTP recebe men sagens de requisição de sua interface socket e envia mensagens de resposta para sua interface socket."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 26,
+          "disciplina": "Informática",
+          "assunto": "Correio Eletrônico",
+          "enunciado": "Ao examinar o funcionamento do servidor de correio eletrônico e os protocolos empregados na transmissão de mensagens, é correto afirmar que o SMTP:",
+          "alternativas": [
+            "é um protocolo de recuperação de informações;",
+            "utiliza conexões não persistentes ao transferir arquivos;",
+            "restringe o corpo, e não apenas o cabeçalho, de todas as mensagens de correio ao simples formato ASCII de 8 bits;",
+            "permite, em geral, o diálogo direto entre o agente de usuário do remetente e o servidor do correio do destinatário;",
+            "é utilizado, també m, para transferir correspondência do agente de usuário remetente para o servidor de correio remetente."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 43,
+          "disciplina": "Informática",
+          "assunto": "Correio Eletrônico",
+          "enunciado": "Ana foi contratada para fazer o marketing digital da empresa Z. Para que sua campanha alcance o maior número de pessoas, os e-mails a serem disparados para os prováveis clientes não devem ser reconhecidos como spam. Para isso, Ana deverá:",
+          "alternativas": [
+            "usar listas de divulgação de terceiros, ou comprá -las de fornecedores de mala direta;",
+            "ignorar as opções do cliente no preenchimento de formulários de cadastramento em listas de divulgação, por escrito ou on-line;",
+            "iniciar o primeiro contato com o cliente por e-mail;",
+            "reutilizar listas de divulgação, ou seja, enviar informações de determinado serviço aos c lientes cadastrados na lista de divulgação de outro serviço;",
+            "respeitar as solicitações de descadastramento de suas listas."
+          ],
+          "correta": "E"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Em uma reunião de governança da empresa K, o setor estratégico decidiu migrar alguns serviços para nuvem. A empresa buscou uma prestadora de serviço de nuvem que atenda à arquitetura de referência proposta pelo NIST (National Institute of Standards and Tec hnology), a qual define cinco atores principais (consumidor, provedor, agente, auditor e operador). Em virtude da complexidade do serviço, houve um foco maior no agente da nuvem, que oferece tipos de suporte diferentes. A empresa K identificou que precisará de suporte na arbitragem de serviço. A arbitragem de serviço caracteriza-se pelo fato de que:",
+          "alternativas": [
+            "apresenta serviço de valor agregado, tal como gerenciamento de identidade, relatórios de desempenho e segurança reforçada;",
+            "os serviços fornecidos podem ser avaliados por um provedor em termos de controles de segurança, impacto de privacidade, desempenho, dentre outros;",
+            "um agente tem a flexibilidade de escolher dentre serviços de várias agências;",
+            "vários serviços na nuvem podem ser combinados a fim de atender às necessidades dos consumidores que não sejam especificamente atendidas por um único provedor;",
+            "podem ser fornecidos conectividade e transporte de serviços de nuvem entre os consumidores da nuvem e os provedores de serviços."
+          ],
+          "correta": "C"
+        }
+      ]
+    },
+    {
+      "codigo": "tjms2024-analista-suporte-ti-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Tribunal de Justiça do Estado de Mato Grosso do Sul",
+      "cargo": "Analista de Suporte de TI",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tecnico-de-nivel-superior-analista-de-sistemas-computacionais-analista-de-suporte-de-ticr-08-sup-ti-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjms2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 28,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Um sistema possui uma política de backup que estabelece cópias incrementais executadas diariamente às 6 horas e às 18 horas, de segunda-feira a sábado. Aos domingos é realizada uma cópia completa semanal às 5 horas e uma cópia incremental às 18 horas. O tempo disponível para a equipe de Tecnolog ia da Informação (TI) recuperar o backup é de 4 horas. Supondo que o sistema tenha sofrido uma avaria às 3 horas de uma quarta -feira e considerando o backup disponível para recuperação de acordo com a política de backup estabelecida, é correto afirmar que:",
+          "alternativas": [
+            "o RTO (Recovery Time Objective) do sistema é de 3 horas;",
+            "o RPO (Recovery Point Object) do sistema é de 6 horas;",
+            "o backup disponível para recuperação atenderá ao RPO do sistema;",
+            "haverá perda de dados além do RPO do sistema;",
+            "o MTBF (Mean Time Between Failures) é de 7 dias."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 29,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Um órgão contratou um serviço de nuvem pública para divulgar videoaulas para seus colaboradores. As aulas podem ser assistidas em horários diversos, de acordo com a necessidade do colaborador. A nuvem será usada também para realização de cursos para turmas fechadas do órgão, momento em que serão contratados mais recursos temporariamente. De acordo com o NIST SP 800-145, o modelo de serviço de nuvem contratado pelo órgão é:",
+          "alternativas": [
+            "on-demand self-service;",
+            "software as a service;",
+            "rapid elasticity;",
+            "platform as a service;",
+            "resource pooling."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 30,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Um novo datacenter está sendo construído para hospedar os sistemas de um órgão, cujos requisitos de operação se baseiam na classificação Tier do Uptime Institute . O novo datacenter contará com redundâncias de refrigeração, UPS, gerador, tanque de reabastecimento dos geradores, equipamentos de conectividade, entrada de energia elétrica e servidores com fontes redundantes, para assegurar uma manutenção simultânea e sem risco de parada. As redundâncias não serão suficientes para tornar o datacenter tolerante a falhas. A classificação Tier estabelecida para o novo datacenter é:",
+          "alternativas": [
+            "I;",
+            "II;",
+            "III;",
+            "IV;",
+            "V."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 41,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "O Tribunal de Justiça do Mato Grosso do Sul (TJMS) decidiu por adquirir servidores com maior capacidade, de forma que pudessem ser virtualizados para um melhor gerenciamento. A implementação de máquinas virtuais envolve vários componentes. Um desses compon entes, o gerenciador de máquinas virtuais (VMM), conhecido também como hipervisor, cria e executa máquinas virtuais fornecendo uma interface que é idêntica ao hospedeiro. A gerência optou por usar o hipervisor tipo 2, pois trata-se de:",
+          "alternativas": [
+            "soluções basead as em hardware que fornecem suporte à criação e ao gerenciamento de máquinas virtuais via firmware;",
+            "softwares semelhantes a sistemas operacionais construídos para fornecer virtualização, incluindo o VMware ESX;",
+            "aplicações que são executadas sobre s istemas operacionais padrão, mas fornecem recursos de VMM a sistemas operacionais convidados;",
+            "sistemas operacionais de uso geral que fornecem funções padrão, assim como funções de VMM;",
+            "um hipervisor que permite que aplicações escritas para um ambiente de hardware sejam executadas em um ambiente de hardware diferente."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 44,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Lara está migrando os servidores físicos do centro de dados onde trabalha para um projeto de hiperconvergência onde vários servidores são instalados em cluster e são fornecid as máquinas virtuais aos clientes. A solução vem com o software de virtualização VMware. Lara precisa se conectar a um componente do vSphere que possa executar as máquinas virtuais, instalar sistemas operacionais, executar aplicativos e configurar as máquinas virtuais. Conclui-se assim que Lara deverá se conectar ao:",
+          "alternativas": [
+            "vCenter Server;",
+            "serviço de diretório;",
+            "vCenter Lookup Service;",
+            "ESXi;",
+            "servidor de administração."
+          ],
+          "correta": "D"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Caio César, que trabalha no Departamento de Virtualização do Tribunal de Justiça do Mato Grosso do Sul (TJMS), recebeu uma demanda de migração de algumas máquinas virtuais para uma instância de vCenter diferente. Ele entrou em contato com a VMware, que orientou a migração com Storage vMotion. Para executar esse processo, Caio César poderá migrar:",
+          "alternativas": [
+            "as máquinas virtuais se colocar os hosts offline para manutenção, pois, a partir desse processo, poderá movê -las para outro host;",
+            "as máquinas virtuais e s eus arquivos de disco de um repositório de dados para outro enquanto elas estão em execução;",
+            "as máquinas virtuais desligadas ou suspensas entre hosts em clusters, centros de dados e instâncias do vCenter Server;",
+            "de um switch padrão para um padrão o u distribuído com as máquinas virtuais desligadas;",
+            "as máquinas virtuais para outro recurso de processamento, como um host, cluster etc. usando a migração a frio ou a quente."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 47,
+          "disciplina": "Informática",
+          "assunto": "Hardware e Periféricos",
+          "enunciado": "Marisa, chefe do centro de dados (CD) da empresa X, recebeu uma ligação na madrugada informando que tinha havido queda de luz e que nenhum dos geradores disponíveis assumira a geração de energia. Ela então foi ao CD e, após o restabelecimento da luz, solicitou aos presentes que verificassem seus sistemas. Contudo, foram identificadas falhas de discos e, com isso, não haveria acessos aos arquivos de log. Marisa chamou seus funcionários e orientou, corretamente, que eles recuperassem os bancos de dados a partir do(a):",
+          "alternativas": [
+            "backup do banco de dados em fita;",
+            "algoritmo de recuperação de áries;",
+            "sistema de paginação sombra;",
+            "técnica de atualização imediata;",
+            "técnica de atualização adiada."
+          ],
+          "correta": "A"
+        }
+      ]
+    },
+    {
+      "codigo": "tjms2024-web-designer-tipo1",
+      "banca": "FGV",
+      "ano": 2024,
+      "orgao": "Tribunal de Justiça do Estado de Mato Grosso do Sul",
+      "cargo": "Web Designer",
+      "cadernoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tecnico-de-nivel-superior-analista-de-sistemas-computacionais-web-designercr-09-wd-tipo-1.pdf",
+      "gabaritoUrl": "https://conhecimento.fgv.br/sites/default/files/concursos/tjms2024_gabarito_definitivo.pdf",
+      "gabaritoDefinitivo": true,
+      "questoes": [
+        {
+          "numero": 24,
+          "disciplina": "Informática",
+          "assunto": "Computação em Nuvem e Backup",
+          "enunciado": "Juliana está implementando um aplicativo web. Para não ter que se preocupar com questões de servidores como virtualização e sistema operacional, ela quer utilizar um serviço de computação em nuvem que ofereça ferramentas de desenvolvimento e um gerenciador de banco de dados. Para isso, Juliana deve contratar o serviço de computação em nuvem:",
+          "alternativas": [
+            "IaaS;",
+            "PaaS;",
+            "SaaS;",
+            "BDaaS;",
+            "STaaS."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 35,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Considere o seguinte trecho de um documento em HyperText Markup Language: <nav id=\"layout1\" class=\"layout1\"> <a href=\"/tribunal/\">Tribunal</a> | <a href=\"/downloads/\">Downloads</a> </nav> Considere também o respectivo código de Cascading Style Sheets: #layout1 { display: flex; flex-direction: row-reverse; } a { flex-shrink: initial; } Ao ser renderizado por um navegador web padrão, o código HTML com a folha de estilo CSS acima exibe:",
+          "alternativas": [
+            "uma mensagem de erro no console;",
+            "‘Tribunal|Downloads’ alinhado à direita;",
+            "‘Downloads|Tribunal’ alinhado à direita;",
+            "‘Tribunal|Downloads’ alinhado à esquerda;",
+            "‘Downloads|Tribunal’ alinhado à esquerda."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 42,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "O analista Bruno está buscando aprimor ar a performance do servidor web Apache. Bruno habilitou no Apache o módulo que implementa o gerenciador de armazenamento de cache baseado em disco, a fim de efetuar o cache de mensagens do Hypertext Transfer Protocol. Bruno habilitou o módulo do Apache:",
+          "alternativas": [
+            "mod_cache;",
+            "mod_file_cache;",
+            "mod_cache_disk;",
+            "mod_socache_dbm;",
+            "mod_cache_socache."
+          ],
+          "correta": "C"
+        },
+        {
+          "numero": 45,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "Para implementar o upload de um arquivo a partir de uma página web, Carlos utili zou a Application Programming Interface XMLHttpRequest. Para monitorar o progresso parcial durante o envio do arquivo, ele precisou acessar um atributo específico do objeto XMLHttpRequest e registrar um listener para determinado evento. O atributo e o evento do XMLHttpRequest manipulados por Carlos são, respectivamente:",
+          "alternativas": [
+            "request e load;",
+            "upload e progress;",
+            "upload e loadstart;",
+            "request e progress;",
+            "request e loadstart."
+          ],
+          "correta": "B"
+        },
+        {
+          "numero": 48,
+          "disciplina": "Informática",
+          "assunto": "Internet e Navegadores",
+          "enunciado": "O analista Rogério configurou um novo servidor de File Transfer Protocol (FTP) no TJMS, que opera no modo passivo padrão. Rogério solicitou à equipe de segurança do TJMS as liberações necessárias no firewall do tribunal para a comunicação em rede do novo servidor FTP. A fim de assessorar a equipe de segurança, Rogério detalhou que, em função do FTP no novo servidor:",
+          "alternativas": [
+            "as portas 20/TCP e 21/TCP apenas recebem conexões;",
+            "as portas 20/TCP e 21/TCP tanto originam quanto recebem conexões;",
+            "a porta 21/TC P e outras portas TCP aleatórias apenas recebem conexões;",
+            "a porta 21/TCP apenas recebe conexões e a porta 20/TCP apenas origina conexões;",
+            "a porta 21/TCP apenas recebe conexões e outras portas TCP aleatórias apenas originam conexões."
+          ],
+          "correta": "C"
+        }
+      ]
+    }
+  ]
+}
